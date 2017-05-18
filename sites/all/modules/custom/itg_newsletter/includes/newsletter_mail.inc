@@ -89,10 +89,11 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $data_email['fromEmail'] = 'care@intoday.in';
     $data_email['content'] = $mail_content;
     $create_campaign = itg_netcore_mail_create_campaign($data_email);
+    
     $campaign = array();
     $campaign['messageId'] = $create_campaign['OUTPUT']['MID'] ;
     $campaign['listId'] = NETCORE_LIST_ID;
-    $mail_scehdule = itg_netcore_mail_scehdule_campaign($data);
+    $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
   }
   /*$params = array(
     'body' => $mail_content,

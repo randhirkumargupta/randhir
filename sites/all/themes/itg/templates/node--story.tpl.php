@@ -404,7 +404,7 @@ if (!empty($content)):
                       print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
                     }
                   }
-                  // print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
+                 
                   ?>
                   <?php
                 }
@@ -413,7 +413,7 @@ if (!empty($content)):
 
                   <div class="stryimg"><?php
                     
-                    //print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                    
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     $file_uri = file_create_url($story_image);
@@ -811,7 +811,7 @@ if (!empty($content)):
               else {
                 print 0;
               }
-              ?></span> SHARES</li>
+              ?></span><?php print t('SHARES'); ?></li>
               <?php if(!empty($node_author['fname'])) { ?>
               <li class="mhide"><span class="posted-by"><?php print t('Posted by'); ?></span><span class="posted-name"><?php print $node_author['fname'].' '.$node_author['lname']; ?></span></li>
               <?php } ?>   

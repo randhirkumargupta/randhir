@@ -27,11 +27,10 @@ if (isset($row->field_field_story_template_factoids) && !empty($row->field_field
   $short_url = shorten_url($actual_link, 'goo.gl');
   $title = 'Factoids';
   $share_desc = $row->field_field_story_template_factoids[0]['raw']['value'];
-  //print '';
   ?>
 
 <div class="factoids-page">
-  <div class="fun-facts"><h2>Funfacts</h2> </div>
+  <div class="fun-facts"><h2><?php print t('Funfacts');?></h2> </div>
   <div class="social-share">
   <ul>
       <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>

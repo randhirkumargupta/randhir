@@ -27,8 +27,7 @@
             name = jQuery('#tagname').val();
             tagurl = jQuery('#tagurl').val();
 
-            if (tagurl != "")
-            {
+            if (tagurl != "") {
                 if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
                     jQuery('.web-error').hide();
                     showloader();
@@ -38,12 +37,9 @@
                         data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
                         success: function(data) {
                             var objdata = jQuery.parseJSON(data);
-                            if (objdata.status == 1)
-                            {
-
+                            if (objdata.status == 1) {
                                 jQuery('#tagit').remove();
                                 viewtag(image_fiedlid);
-
                             }
 
                         },
@@ -89,11 +85,9 @@
                 data: {'tagid': tagid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
                 success: function(data) {
                     var objdata = jQuery.parseJSON(data);
-                    if (objdata.status == 1)
-                    {
+                    if (objdata.status == 1) {
                         jQuery('#tagit').remove();
                         viewtag(image_fiedlid);
-
                     }
 
                 },
@@ -154,7 +148,7 @@
         });
     });
     
-    function isValidDate(str) {
+ function isValidDate(str) {
   var d = moment(str,'D/M/YYYY');
   if(d == null || !d.isValid()) return false;
 
@@ -177,18 +171,23 @@ jQuery('.image_keyword').on('keyup',function() {
 jQuery('.image_tags').on('keyup',function() {
   jQuery('.image_tags_img').val(jQuery(this).val());
 });
+
 jQuery('.image_place').on('keyup',function() {
   jQuery('.image_place_img').val(jQuery(this).val());
 });
+
 jQuery('.image_photo_grapher').on('keyup',function() {
   jQuery('.image_photo_grapher_img').val(jQuery(this).val());
 });
+
 jQuery('.image_date').on('keyup',function() {
   jQuery('.image_date_img').val(jQuery(this).val());
 });
+
 jQuery('.image_description').on('keyup',function() {
   jQuery('.image_description_img').val(jQuery(this).val());
 });
+
 jQuery('.is_synd_all').click(function() {
   if(jQuery(this).is(':checked')) {
     
@@ -247,11 +246,9 @@ jQuery('.image_title').on('keyup',function() {
         });
     });
 
-
     viewtag(image_fiedlid); // view all tags available on page load
 //
-    function viewtag(pic_id)
-    {
+    function viewtag(pic_id) {
 
         jQuery.ajax({
             url: Drupal.settings.basePath + 'gettaglist',
@@ -326,8 +323,7 @@ jQuery('.image_title').on('keyup',function() {
             }
           }
           parent.jQuery('#')
-          if (jQuery('#ckeditor_yes').val() == 1)
-          {
+          if (jQuery('#ckeditor_yes').val() == 1) {
             if (jQuery('.is_synd').is(':checked')) {
               var synd_class = "data-syndication='yes'";
             } else {
@@ -336,20 +332,15 @@ jQuery('.image_title').on('keyup',function() {
             var imagename = jQuery('#imcurl').val();
             var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
             parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
-//
-//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
-//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
-//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
+
             parent.jQuery.colorbox.close();
           } else {
-
             jQuery('.imagefid').each(function() {
               var getvalue = jQuery(this).val();
               getvalue = getvalue.split('#');
               var newbname = getbame;
 
-              if (getbame.indexOf("field_gallery_image") >= 0)
-              {
+              if (getbame.indexOf("field_gallery_image") >= 0) {
                 if (getbame.indexOf(getvalue[1]) < 0) {
                   var replaced = getbame.replace(/field_images/g, getvalue[1]);
                 } else {
@@ -375,14 +366,12 @@ jQuery('.image_title').on('keyup',function() {
               parent.jQuery(document).ajaxComplete(function(event, request, settings) {
 
                 if (settings.url.indexOf(field_name) >= 0) {
-                  if (image_alttext == "")
-                  {
+                  if (image_alttext == "") {
                     var imagealt = jQuery('#imgtag img').attr('src');
                     var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
                     image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
                   }
-                  if (image_title == "")
-                  {
+                  if (image_title == "") {
                     var imagetitle = jQuery('#imgtag img').attr('src');
                     var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
@@ -390,13 +379,11 @@ jQuery('.image_title').on('keyup',function() {
                   var image_alttext = jQuery('#alt_text_image').val();
                   var image_title = jQuery('#image_title_exta').val();
                   setTimeout(function() {
-                    if (image_alttext != "")
-                    {
+                    if (image_alttext != "") {
                       // parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                       // parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
                     }
-                    if (image_title != "")
-                    {
+                    if (image_title != "") {
                       //parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                       // parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
                     }
@@ -408,7 +395,7 @@ jQuery('.image_title').on('keyup',function() {
                     captionid1 = captionid1.replace('[field_images][und][0]', "");
                     var syndi = getbame + '[field_image_syndication][und][yes]';
                     syndi = syndi.replace('[field_images][und][0]', "");
-                    //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                    
                     if (jQuery('.is_synd').is(':checked')) {
                       parent.jQuery('[name="' + syndi + '"]').prop('checked', true);
                     }
@@ -434,12 +421,12 @@ jQuery('.image_title').on('keyup',function() {
 
 
 })(jQuery, Drupal, this, this.document);
-function showloader()
-{
-    jQuery('#loader-data').show();
+
+function showloader() {
+  jQuery('#loader-data').show();
 }
-function hideloader()
-{
-    jQuery('#loader-data').hide();
+
+function hideloader() {
+  jQuery('#loader-data').hide();
 }
 

@@ -9,6 +9,6 @@
 $nid = $row->nid.'-'.$row->itg_widget_order_cat_id.'-'.$row->itg_widget_order_state;
 
 ?>
-<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lead" <?php echo ($row->itg_widget_order_extra=='Lead')?'checked':'';?>> <label>Leading</label></div>
-<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Win" <?php echo ($row->itg_widget_order_extra=='Win')?'checked':'';?>> <label>Won</label></div>
-<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lost" <?php echo ($row->itg_widget_order_extra=='Lost')?'checked':'';?>> <label>Lost</label></div>
+<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lead" <?php echo ($row->itg_widget_order_extra=='Lead')?'checked':'';?>> <label><?php print t('Leading'); ?></label></div>
+<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Win" <?php echo ($row->itg_widget_order_extra=='Win')?'checked':'';?>> <label><?php print t('Won'); ?></label></div>
+<div class="key-radio-field"><input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lost" <?php echo ($row->itg_widget_order_extra=='Lost')?'checked':'';?>> <label><?php print t('Lost'); ?></label></div>

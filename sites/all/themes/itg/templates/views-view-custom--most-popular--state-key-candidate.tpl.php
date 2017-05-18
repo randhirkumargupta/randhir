@@ -2,7 +2,6 @@
 <?php
 foreach ($rows as $index => $row) {
 
-
     $consti[] = $row['state'];
 }
 
@@ -10,16 +9,17 @@ $resultdata = array_unique($consti);
 ?>
 <div class="key-candidate">
 
-    <div class="list-state">   <?php
-foreach ($resultdata as $key => $mainids) {
-    $firstactive = "";
-    if ($key == 0) {
-        $firstactive = "active";
-    }
-    $term_data = taxonomy_term_load($mainids);
-    print '<span class="' . $firstactive . '" data-tag="kc-' . $term_data->tid . '">' . ucfirst($term_data->name) . '</span>';
-}
-?>
+    <div class="list-state">   
+        <?php
+        foreach ($resultdata as $key => $mainids) {
+          $firstactive = "";
+          if ($key == 0) {
+            $firstactive = "active";
+          }
+          $term_data = taxonomy_term_load($mainids);
+          print '<span class="' . $firstactive . '" data-tag="kc-' . $term_data->tid . '">' . ucfirst($term_data->name) . '</span>';
+        }
+        ?>
     </div> 
         <?php
         // p($rows);

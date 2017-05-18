@@ -8345,7 +8345,8 @@ div.node{
         }
       }
       &#Configuration{
-        overflow: hidden;
+        float: left;
+        width: 100%;
         .form-field-name-field-photogallery-configuration{
           @extend .dib;
           @extend .full;
@@ -11797,6 +11798,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .tag-box-input-date{
+  display: inline-block;
+  vertical-align: top;
   span.error{
     font-size: 12px;
     margin-top: -10px;
@@ -11813,4 +11816,24 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 }
 fieldset#edit-xmlsitemap{
   display: none !important;
+}
+#page{
+  form{
+    .itg-sidebar-form{
+      div.description{
+        left: auto;
+        right: 102%;
+        &:before{
+          left: auto;
+          right: -21px;
+          border-color: transparent transparent transparent #d9d9d9;
+        }
+        &:after{
+          left: auto;
+          right: -19px;
+          border-color: transparent transparent transparent #fff;
+        }
+      }
+    }
+  }
 }

@@ -46,7 +46,7 @@
   <?php endif; ?>
 
    <div class="attachment">
-    <?php print l('Post new Blog', 'node/add/blog', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
+    <?php print l(t('Post new Blog'), 'node/add/blog', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
   </div>
   
   <?php if ($attachment_before): ?>
