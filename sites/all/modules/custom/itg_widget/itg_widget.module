@@ -615,7 +615,7 @@ function itg_widget_block_view($delta = '') {
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end" , array("data" => $data));
       if ($user->uid) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
       }
       break;
     case 'home_page_poll_widget_block':
