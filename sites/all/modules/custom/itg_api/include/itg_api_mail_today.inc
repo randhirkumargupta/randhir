@@ -15,7 +15,6 @@ function itg_api_mail_today_content() {
     $op[$val->tid] = $val->name;
   }
 
-  //$direc = get_dir_content($file_path . '/feeds/mailtoday/');
   $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/mailtoday/';
   $direc = get_dir_content($final_dir);
 

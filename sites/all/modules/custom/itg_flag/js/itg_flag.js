@@ -8,8 +8,6 @@
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
-
-
         }
 
     };
@@ -156,8 +154,7 @@ jQuery(document).ready(function () {
             beforeSend: function () {
 
             },
-            'success': function (result)
-            {
+            'success': function (result) {
                 var obj = jQuery.parseJSON(result);
                 // case for follow story
                 if (obj.success == 1 && obj.activity == 'follow_story') {
