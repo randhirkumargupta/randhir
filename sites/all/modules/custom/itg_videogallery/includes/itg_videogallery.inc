@@ -31,8 +31,10 @@ function itg_videogallery_ftp_video_form($form) {
   return system_settings_form($form);
 }
 
-
-
+/**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
 function itg_videogallery_s3_video_form($form) {
   $form['aws_access_key'] = array(
     '#type' => 'textfield',

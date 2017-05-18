@@ -4,6 +4,11 @@ use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 use Aws\Common\Credentials\Credentials;
 
+
+/**
+ * 
+ * @return $data_video array
+ */
 function itg_video_get_s3_video() {
 
 

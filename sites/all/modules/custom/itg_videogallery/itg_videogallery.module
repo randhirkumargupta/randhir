@@ -2085,18 +2085,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-//    $result = db_select('node', 'n')
-//            ->fields('n', array('nid'))
-//            ->condition('type', 'itg_solr_video', '=')
-//            ->execute();
-//
-//    $deleted_count = 0;
-//    foreach ($result as $record) {
-//        node_delete($record->nid);
-//        $deleted_count++;
-//    }
-//    pr($deleted_count);
-//    exit();
+
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $result = $query->execute()->fetchAll();
@@ -2158,7 +2147,7 @@ function itg_videogallery_thumb_url() {
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
-    p($video_exist_innode);
+   
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
     }
