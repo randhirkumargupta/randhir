@@ -418,7 +418,7 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     $section_selection = isset($node->field_ads_section_selection[LANGUAGE_NONE][0]['tid']) ? $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'] : NULL;
     $template_variants = isset($node->field_ads_template_variants[LANGUAGE_NONE][0]['tid']) ? $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'] : NULL;
 
-//check on date values
+    //check on date values
     if (isset($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']) && !empty($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value'])) {
       $start_date = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
     }

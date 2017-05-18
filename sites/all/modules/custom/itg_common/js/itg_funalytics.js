@@ -6,8 +6,7 @@
 (function ($) {
   Drupal.behaviors.itg_common_funalytics = {
     attach: function (context, settings) {
-      //var fid = settings.itg_common.settings.formid;
-      //
+        
        $(".funalytic-popup").attr("href", "javascript:void(0)");
        $('.funalytic-popup').click(function() {
            

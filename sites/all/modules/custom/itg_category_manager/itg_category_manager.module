@@ -15,7 +15,6 @@ function itg_category_manager_init() {
   variable_set('taxonomy_terms_per_page_admin' , 20);
   global $base_url;
   $settings['baseUrl'] = $base_url;
-
   drupal_add_js(array('baseUrl' => $settings) , 'setting');
 }
 
@@ -50,12 +49,12 @@ function itg_category_manager_menu() {
     'page arguments' => array('itg_category_manager_form') ,
     'access arguments' => array('administer taxonomy') ,
   );
-// Menu for associated content counting
+  // Menu for associated content counting
   $items['content-associated'] = array(
     'page callback' => 'itg_category_manager_nodecount' ,
     'access callback' => TRUE ,
   );
-// SEF Url log menu
+  // SEF Url log menu
   $items['sef-log/%'] = array(
     'title' => 'SEF URL Log' ,
     'page callback' => 'itg_category_manager_seflogpage' ,
@@ -64,7 +63,7 @@ function itg_category_manager_menu() {
     'access arguments' => array('administer taxonomy') ,
     'type' => MENU_CALLBACK ,
   );
-// Autocomplete callback for category name
+  // Autocomplete callback for category name
   $items['itg_category_manager_autocomplete'] = array(
     'page callback' => 'itg_category_manager_autocomplete_name' ,
     'access arguments' => array('administer taxonomy') ,
@@ -82,7 +81,7 @@ function itg_category_manager_menu() {
     'access arguments' => array('administer taxonomy') ,
     'type' => MENU_CALLBACK
   );
-// Category disable menus
+  // Category disable menus
   $items['category-management/disable-forcefully'] = array(
     'page callback' => 'itg_category_manager_disable_forcefully' ,
     'access callback' => TRUE ,
@@ -105,6 +104,10 @@ function itg_category_manager_menu() {
   return $items;
 }
 
+/**
+ * Implementation of hook_form
+ * {@inheritdoc}
+ */
 function itg_category_manager_import_tag_form($form , $form_state) {
   $form['notes'] = array(
     '#type' => 'markup' ,
@@ -127,6 +130,10 @@ function itg_category_manager_import_tag_form($form , $form_state) {
   return $form;
 }
 
+/**
+ * Custom submit callback for itg_category_manager_import_tag_form_submit.
+ * {@inheritdoc}
+ */
 function itg_category_manager_import_tag_form_submit($form , $form_state) {
   // Check to make sure that the file was uploaded to the server properly
   $uri = db_query("SELECT uri FROM {file_managed} WHERE fid = :fid" , array(
@@ -261,7 +268,7 @@ function itg_category_manager_taxonomy_view_page($term) {
       $build['content']['sponsored_category']['#markup'] = t('<b>Sponsored Category:</b> &nbsp; !sponsored_category' , array('!sponsored_category' => @$term->field_cm_sponsored_category[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No')) . '<br/>';
       return $build;
 
-// If the term page is for an other vocabulary then use Drupal's default taxonomy page
+    // If the term page is for an other vocabulary then use Drupal's default taxonomy page
     default:
       module_load_include('inc' , 'taxonomy' , 'taxonomy.pages');
       $build = taxonomy_term_page($term);
@@ -400,7 +407,6 @@ function itg_category_manager_term_get_content($key) {
  * @param array $javascript
  */
 function itg_category_manager_js_alter(&$javascript) {
-
   global $base_url;
   $javascript['//cdn.ckeditor.com/4.5.4/full-all/ckeditor.js']['data'] = $base_url . '/sites/all/modules/custom/itg_category_manager/js/ckeditor.js';
 }
@@ -415,8 +421,7 @@ function itg_category_manager_js_alter(&$javascript) {
  * @param string $form_id
  */
 function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_state , $form_id) {
-  global $user;
-  global $base_url;
+  global $user, $base_url;
 
   if ($form['#vocabulary']->machine_name == 'state_manager') {
     $form['#attributes']['class'][] = 'node-form node-category-form';
@@ -424,11 +429,11 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
       drupal_get_path('module' , 'itg_category_manager') . '/js/itg_category_manager.js' ,
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
-    //$form['relations']['parent']['#config']['module'] = 'itg_category_manager';
+    
     $form['relations']['parent']['#weight'] = -1;
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
-// Add js to category management form
+  // Add js to category management form
   if ($form['#vocabulary']->machine_name == 'category_management') {
     global $theme;
     if ($theme == 'itgadmin') {
@@ -440,19 +445,13 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
       drupal_get_path('module' , 'itg_category_manager') . '/js/itg_category_manager.js' ,
     );
     $form['field_user_city'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('HH:MM');
-    //$form['relations']['parent']['#config']['module'] = 'itg_category_manager';
-    // $form['relations']['parent']['#weight'] = -1;
+    
     $form['term_state']['#access'] = false;
-    drupal_add_js('jQuery(document).ready(function() {
-             //code to check unchek checkbox when all search engine checkbox is checked
-            // jQuery(".form-item-term-state").hide();
-           
-              
-           });' , array('type' => 'inline' , 'scope' => 'footer'));
+    
     $form['#submit'][] = 'itg_category_manager_custom_submit';
   }
   if ($form_id == 'taxonomy_form_term') {
-// code for facebook image field hide and show
+  // code for facebook image field hide and show
     $form['field_cm_no_follow']['#states'] = array(
       'visible' => array(
         ':input[name="field_cm_hide_cat_from_search[und][1]"]' => array('checked' => TRUE) ,
@@ -664,10 +663,6 @@ function itg_category_manager_term_validate($form , &$form_state) {
       form_set_error('field_user_city' , t('Invalid Program Timing.'));
     }
   }
-
-
-
-
 
 // Code end for publish time
   $term = $form_state['values']['name'];
@@ -1037,12 +1032,6 @@ function itg_category_manager_taxonomy_term_insert($term) {
       'uid' => $user->uid ,
       'changed' => time() ,
     );
-    
-//    if (!empty($term->path['alias'])) {
-//      $term->path['alias'] = rtrim($term->path['alias'], '/');
-//      $data['sef_url'] = $term->path['alias'];
-//      $pathdata = $data['sef_url'];
-//    }
 
     $get_parents = taxonomy_get_parents($term->tid);
     $parents = reset($get_parents);
@@ -1333,7 +1322,6 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
 // code use for append field for primary category and category list by contant type
   $code_append_array = array('story_node_form' , 'photogallery_node_form' , 'podcast_node_form' , 'astro_node_form' , 'videogallery_node_form' , 'blog_node_form' , 'recipe_node_form' , 'cooking_tips_node_form' , 'food_news_node_form' , 'print_team_integration_node_form');
   if (in_array($form_id , $code_append_array)) {
-
     $form['#after_build'][] = 'itg_categor_form_edit_category_radio';
   }
 }
@@ -1368,19 +1356,17 @@ function itg_categor_form_edit_category_radio($form , &$form_state) {
 
   if (!in_array($type , $content_types_lists)) {
     drupal_add_js('jQuery(document).ready(function() {
-    jQuery("#prim_' . $editid . '").attr("checked", true);
-        jQuery( "form" ).submit(function( event ) {
-         jQuery("#edit-field-primary-category-und-0-value").val("");
-         jQuery(".primary_category_radio").each(function(){
-    if(jQuery(this).is(":checked"))
-    {
-        var getval = jQuery(this).val();
-        jQuery("#edit-field-primary-category-und-0-value").val(getval);
+      jQuery("#prim_' . $editid . '").attr("checked", true);
+          jQuery( "form" ).submit(function( event ) {
+           jQuery("#edit-field-primary-category-und-0-value").val("");
+           jQuery(".primary_category_radio").each(function(){
+      if(jQuery(this).is(":checked")) {
+          var getval = jQuery(this).val();
+          jQuery("#edit-field-primary-category-und-0-value").val(getval);
+      }
 
-    }
-    
+    });
   });
-});
      });' , array('type' => 'inline' , 'scope' => 'footer'));
   }
   drupal_add_js(drupal_get_path('module' , 'itg_category_manager') . '/js/primary_category.js' , array('type' => 'file' , 'scope' => 'footer'));
@@ -1410,7 +1396,7 @@ function itg_category_manager_block_view($delta = '') {
   $block = array();
   $data = '';
 
-//$data = itg_category_manager_sefurl_log($tid);
+
   switch ($delta) {
     case 'sef_url_log':
       $arg = arg();
@@ -1588,15 +1574,12 @@ function itg_category_manager_disable_forcefully() {
   $is_child = taxonomy_get_tree(CATEGORY_MANAGMENT , $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.') , 'error');
-  }
-  else {
-
+  } else {
     $all_parent = taxonomy_get_parents_all($current_term);
     $nodes_used_by_current_tid = taxonomy_select_nodes($current_term);
     if (count($all_parent) > 1) {
       $updated_term = $all_parent[1]->tid;
       if (count($nodes_used_by_current_tid) > 0) {
-
         foreach ($nodes_used_by_current_tid as $key => $value) {
           $node = node_load($value);
           $node->field_story_category['und'][0]['tid'] = $updated_term;
@@ -1608,10 +1591,8 @@ function itg_category_manager_disable_forcefully() {
             ->condition('tid' , $current_term)
             ->execute();
 
-
         // Inactive category for category shift , sinking terms data for mongo
         if (function_exists('itg_category_sink_active_inactive_category')) {
-
           itg_category_sink_active_inactive_category($current_term , 0);
         }
 
@@ -1628,7 +1609,6 @@ function itg_category_manager_disable_forcefully() {
 
         // Inactive category for category shift , sinking terms data for mongo
         if (function_exists('itg_category_sink_active_inactive_category')) {
-
           itg_category_sink_active_inactive_category($current_term , 0);
         }
 
@@ -1655,7 +1635,6 @@ function itg_category_manager_disable_forcefully() {
             ->execute();
 
         if (function_exists('itg_category_sink_active_inactive_category')) {
-
           itg_category_sink_active_inactive_category($current_term , 0);
         }
         drupal_set_message(t('Section has been disabled succesfully.') , 'status');
@@ -1853,7 +1832,6 @@ function itg_category_manager_views_query_alter(&$view , &$query) {
       unset($query->where[1]['conditions'][2]);
     }
 
-    //p($query);
     // Alter term name filter.
     if (!empty($_GET['name'])) {
       $str = $query->where[1]['conditions'][0]['value'];

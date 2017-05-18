@@ -114,10 +114,6 @@ if ($theme != 'itgadmin') {
       </div>
 
 
-
-
-
-
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
            <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
@@ -301,23 +297,6 @@ if ($theme != 'itgadmin') {
 
 </div>
 
-  <?php //print render($page['content']); ?>
-  <!--Start third party widgets -->
-  <div>
-    <!--
-    <div class="vukkul-comment">
-    <div id="vuukle_div"></div>
-      <?php
-       if(function_exists('vukkul_view')) {
-         vukkul_view();
-       }
-       ?>
-    </div>
-  </div>
-  -->
-  <!--End third party widgets -->
-
-</div>
 <!--------------------------------Code for Front tpl---------------------------------------->
         <?php if ($theme != 'itgadmin') {?>
         <?php //print $feed_icons;  ?>
@@ -355,8 +334,7 @@ if ($theme != 'itgadmin') {
 
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-          <?php //print $sidebar_first; ?>
-          <?php //print $sidebar_second; ?>
+         
         </aside>
       <?php endif; ?>
     </main>

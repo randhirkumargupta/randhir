@@ -187,11 +187,9 @@ function itg_fields_remove_button_submit_handler($form, &$form_state) {
         }
     }
 
-
     if ($field_state['items_count'] > 0) {
         $field_state['items_count'] --;
     }
-
 
     $input = drupal_array_get_nested_value($form_state[$inpt], $address);
 
