@@ -55,7 +55,7 @@ function itg_loyalty_reward_menu() {
     );
     // Cart page.
     $items['cart'] = array(
-        'title' => 'SHOPPING CART',
+        'title' => 'Checkout Page',
         'page callback' => 'itg_loyalty_reward_cart',
         'access arguments' => array('view product page'),
         'type' => MENU_NORMAL_ITEM,
@@ -93,7 +93,7 @@ function itg_loyalty_reward_menu() {
         'file' => 'includes/itg_loyalty_reward.checkout.inc',
     );
     $items['order'] = array(
-        'title' => 'REDEMPTION HISTORY',
+        'title' => 'Loyalty Redemption History',
         'page callback' => 'itg_loyalty_reward_order',
         'access arguments' => array('view product page'),
         'type' => MENU_NORMAL_ITEM,
