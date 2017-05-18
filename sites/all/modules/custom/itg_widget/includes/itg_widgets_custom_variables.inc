@@ -204,5 +204,12 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter no of days')),
     '#default_value' => variable_get('read_later_days_config'),
   );
+  
+  $form['editor_pic_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Editor Pic Tid configuration'),
+    '#attributes' => array('placeholder' => t('Enter Editor Pic Tid')),
+    '#default_value' => variable_get('editor_pic_tid'),
+  );
   return system_settings_form($form);
 }

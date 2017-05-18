@@ -18,9 +18,7 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['layout_type'] = $arg1;
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
-  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1, 'scope' => 'footer'));  
-  
-  //$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1, 'scope' => 'footer'));
   
   if ($arg1 == 'section' || $arg1 == 'special') {
     $op = get_section_of_associate_tpl($arg1);
@@ -84,12 +82,7 @@ function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
  */
 function itg_layout_manager_filter_form($form, &$form_state) {
   $form = array();
-  //$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);  
   
-  
-//  foreach ($tax as $key => $val) {
-//    $op[$val->tid] = $val->name;
-//  } 
   if(!empty(arg(1))) {
     $op = get_all_section_of_tpl(arg(1));
   }
@@ -98,8 +91,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
   $form['section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
-    '#options' => $op,
-    //'#required' => TRUE,
+    '#options' => $op,    
     '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
   
@@ -183,8 +175,6 @@ function layout_section_widgets_search_form($form, &$form_state) {
     '#autocomplete_path' => $custom_url,
     '#maxlength' => 128,
   );
-  
-  
   
   $form['section_save'] = array(
     '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',

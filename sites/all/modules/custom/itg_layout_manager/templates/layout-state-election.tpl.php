@@ -12,11 +12,8 @@
     <div id="container_0"></div>
     <div class="divider"></div>                                
   </div>
-  <div class="graph-table-wrapper">
-    
-    <table cellpadding="10" cellspacing="1" id="tRow">
-
-    </table>
+  <div class="graph-table-wrapper">    
+    <table cellpadding="10" cellspacing="1" id="tRow"></table>
   </div>
 </div>
   

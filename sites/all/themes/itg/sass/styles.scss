@@ -11467,7 +11467,138 @@ span.close_btt {
 }
 .page-podcast #page-title {display:none}
 .nested-taxonomy-tree a:hover {color: #a00606 !important}
-
+.page-state-election{
+  section.sidebar{
+    border: none;
+    .block{
+      margin-bottom: 50px;
+    }
+    .block-title {
+      color: #09619f;
+      font-weight: 700;
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+  .key-candidate{
+        font-family: $itg-roboto;
+        max-height: 282px;
+        overflow: auto;
+        .most_popular{
+             border: none;
+        }
+        ul{
+             @extend .list-none;
+        }         
+        .list-state{
+            margin:0 0px 20px 0px;            
+            span{
+                cursor: pointer;
+                display: inline-block;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 2px 6px;
+                text-transform: uppercase;
+                vertical-align: top;
+                &:hover, &.active{
+                    background: #1b60a3;
+                    color:#fff;
+                }
+            }
+        }
+        .key-candidate-detail{
+            font-family: $itg-roboto;
+            display:none;            
+            ul{
+                @include clearfix;
+                 border-bottom: 1px solid $border-color;
+                 padding-bottom: 10px;
+                 margin-bottom:10px;
+                li{
+                    @include float(left);                                       
+                    &:nth-child(1){
+                        width: 25%;
+                    }
+                    &:nth-child(2){
+                        width: 56%;
+                        padding-top: 5px;
+                    }
+                    &:nth-child(3){
+                        width: 18%;
+                        text-align: center;
+                    }
+                    .candidate-name{
+                        @include font(14px,null,700);                        
+                    }
+                    .constituancy{
+                        @include font(13px);
+                        color:#8f8f8f;
+                    }
+                    img{
+                        background: #fff;
+                        border-radius: 100%;
+                        box-shadow: 0 0 5px #ccc;
+                        display: inline-block;
+                        height: 63px;
+                        margin-left: 2px;
+                        padding: 5px;
+                        width: 63px;
+                    }
+                    .status{
+                        font-size: 15px;
+                        font-weight: 700;
+                        i{                        
+                            width: 35px;
+                            height: 35px;                        
+                            border-radius: 3px;
+                            text-align: center;
+                            line-height: 35px;
+                            color: #fff;
+                            font-size: 28px;
+                            background: #ccc;
+                            margin-top: 12px;
+                        }
+                        span{
+                            display: block;
+                        }
+                        &.green{
+                            i{
+                                background: #418b32;
+                            }
+                            color:#418b32;
+                        }
+                        &.red{
+                            i{
+                                background: #d80a02;
+                            }
+                            color:#d80a02;
+                        }
+                        &.yellow{
+                            i{
+                                background: #efc107;
+                            }
+                            color:#418b32;
+                        }
+                        &.orange{
+                            i{
+                                background: #ff8300;
+                            }
+                            color:#ff8300;
+                        }
+                    }
+                }
+            }
+            &.key-candidate-detail-first{
+                display: block;
+            }
+        }
+    }
+}
 
 
 

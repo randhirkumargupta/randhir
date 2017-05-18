@@ -58,8 +58,8 @@
         });
     })
 })(jQuery);
-function showimagerepopopu(iframeurl)
-{
+
+function showimagerepopopu(iframeurl) {
     jQuery.colorbox({href: iframeurl, iframe: true, width: "90%", height: "95%", fixed: true});
 
 }

@@ -1691,6 +1691,11 @@
     line-height: 24px;
     margin-bottom: 10px;
   }
+
+  .state-election-map-wrapper .left-chart .graph-design,
+  .state-election-map-wrapper .left-chart .graph-table-wrapper {
+    width: 100%;
+  }
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/

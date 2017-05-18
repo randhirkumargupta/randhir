@@ -47,14 +47,14 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
       <div class="container">
           <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php
                   if (!empty($src) && isset($uri)) {
                     print l("<img src='" . $src . "' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
                   }
                   ?>
               </div>
-              <div class="col-md-9 col-sm-9 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php if (!empty($data)) : ?>
                     <div class="select-menu"><?php echo t("Section") ?></div>
                     <ul class="third-level-menu">
