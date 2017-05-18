@@ -11,7 +11,6 @@ list($width, $height) = getimagesize($url);
     $counter = 1;
     foreach ($data->fid as $key => $fids) {
 
-
       $image_dim = mageimagedimesion();
 
       $explodedata = explode('#', $fids);
@@ -23,7 +22,7 @@ list($width, $height) = getimagesize($url);
       $imagename = str_replace('field_story_', '', $explodedata[1]);
    if($content_name == 'category_management') {
      $content_type = 'taxonomy_term';
-   }else {
+   } else {
       $content_type = 'node';
    }
       $info = field_info_instance($content_type, $explodedata[1], $content_name);
@@ -31,7 +30,6 @@ list($width, $height) = getimagesize($url);
       if($label=="") {
         $label = 'Image';
       }
-
 
       $imagename = str_replace('_', ' ', $imagename);
       $url = file_create_url($file->uri);
@@ -56,15 +54,12 @@ list($width, $height) = getimagesize($url);
         }
         print' <div class="image_info">' . $counter . ' ' . ucwords($label) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
       }
-     if($key == 0) {
-                 print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-
+      if($key == 0) {
+        print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
         print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title"  value=""></br>';
-
         } else {
-                print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all_for" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-
-               print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title_exta"  value=""></br>';
+            print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all_for" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
+            print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title_exta"  value=""></br>';
 
      }
 if($key == 0) {

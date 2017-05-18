@@ -8,8 +8,6 @@
         attach: function(context) {
          
         }
-        
-        
 
     };
 })(jQuery, Drupal, this, this.document);

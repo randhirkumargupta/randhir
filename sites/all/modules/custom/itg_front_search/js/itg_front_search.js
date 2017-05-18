@@ -18,8 +18,7 @@
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
                     $(".caln").show();                   
-                } else
-                {
+                } else {
                     $(".caln").hide();
                     $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
@@ -96,8 +95,7 @@
                                         }
                                       ]
                     });
-                }
-                
+                }                
 
                 jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
                     dateFormat: 'yy-mm-dd',

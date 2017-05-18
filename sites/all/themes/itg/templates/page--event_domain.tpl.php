@@ -18,18 +18,6 @@ if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     
   }
 }
-
-/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-if (empty($host_detail) && $arg[0] == 'event') {
-  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
-  $host_node = menu_get_object("node", 1, $path);
-} elseif(empty($host_detail) && is_numeric($arg[1])){
-  $host_node = node_load($arg[1]);
-} else {
-  $host_node_arr = explode('/', $host_detail['source']);
-  $host_node = node_load($host_node_arr[1]);
-}*/
-//$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = file_create_url($host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
@@ -39,11 +27,11 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
     <header class="header" id="header" role="banner">
             <section class="header-top">
                 <div class="event-header-banner" style="background: url(<?php echo $banner_image; ?>) no-repeat center top">
-<!--                <img src="<?php //echo $banner_image; ?>" alt="" />-->
+
               <div class="event-add-header">
                 
               <?php 
-                //print itg_event_backend_header_add_block();
+             
                $block = block_load('itg_ads', ADS_HEADER);
                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                print render($render_array);
@@ -143,7 +131,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
       <aside class="sidebars col-md-4">
         <?php print $sidebar_first; ?>
          <?php 
-                //print itg_event_backend_header_add_block();
+               
                $block = block_load('itg_ads', ADS_RHS1);
                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                print render($render_array);
@@ -151,7 +139,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
               ?>
         <?php print $sidebar_second; ?>
          <?php 
-                //print itg_event_backend_header_add_block();
+              
                $block = block_load('itg_ads', ADS_RHS2);
                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                print render($render_array);
