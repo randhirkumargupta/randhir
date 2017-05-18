@@ -30,21 +30,21 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
     $data_val['title'] = array();
 
     if ($node->title == 'Quiz Completion') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
     if ($node->title == 'My Following') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
     
     if ($node->title == 'Redeem Points') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
@@ -72,21 +72,21 @@ function itg_mail_templates_node_validate($node, $form, &$form_state) {
     }
 
     if ($node->title == 'Follow Story') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
     if ($node->title == 'Sign up') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
     }
 
     if ($node->title == 'Loyalty Points Expiration') {
-      $result = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+      $result = itg_mail_templates_get_node($node);
       if (!empty($result)) {
         form_set_error('title', t("Mail Template for @title already Exists, you can only update this mail template", array('@title' => $title)));
       }
@@ -497,4 +497,15 @@ function itg_mail_templates_insert_val($pathdata) {
     $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
   }
   return $pathdata;
+}
+
+/**
+ * Implementing 'itg_mail_templates_get_node'.
+ * @param $node to get node title
+ */
+
+function itg_mail_templates_get_node($node) {
+  $title = isset($node->title) ? $node->title : '';
+  $get_node_title = db_query("SELECT title from {node} n WHERE n.title = :title AND n.type = :type", array(":title" => $title, ":type" => "mail_templates"))->fetchField();
+  return $get_node_title;
 }
