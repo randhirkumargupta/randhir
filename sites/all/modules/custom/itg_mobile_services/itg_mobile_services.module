@@ -1128,7 +1128,7 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
       $form['expire_type'] = array(
           '#type' => 'select',
-          '#title' => t('Expire Type'),
+          '#title' => t('Service Status'),
           '#options' => array('live' => t('Live'), 'expired' => t('Expired')),
           '#prefix' => '<div id="custom-expire-type">',
           '#suffix' => '</div>'
