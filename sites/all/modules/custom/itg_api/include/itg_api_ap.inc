@@ -14,7 +14,6 @@ function itg_ap_content() {
     $op[$val->tid] = $val->name;
   }
 
-
   //$direc = get_dir_content($file_path . '/feeds/ap/');
   $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/ap/';
   $direc = get_dir_content($final_dir);

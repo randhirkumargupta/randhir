@@ -42,10 +42,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         unset($errors[$field]);
       }
     }
-//
-//    $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">' . $form['field_associate_event_photo'][LANGUAGE_NONE]['#description'] . '</div>';
-//    $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">' . $form['field_associate_event_video'][LANGUAGE_NONE]['#description'] . '</div>';
-//    $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">' . $form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'] . '</div>';
+
     $form['#after_build'][] = 'itg_event_backend_after_build';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
@@ -185,8 +182,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_event_backend_save_as_draft_submit_callback($form, &$form_state) {
   $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
-  $_GET['destination'] = $redirect_path;
-  //$form_state['redirect'] = 'manage-event-backend-draft';
+  $_GET['destination'] = $redirect_path;  
 }
 /**
  * Implements alter message function().
@@ -541,30 +537,7 @@ function itg_event_backend_after_build($form, &$form_state) {
   }
 
   $form['title']['#title'] = 'Event Title';
-//  $form['field_group_registration_fee_5']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
-//  $form['field_group_registration_fee_10']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
-//  $form['field_individual_registration_fe']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
+
   $form['field_ticket_group_type']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
@@ -584,11 +557,12 @@ function itg_event_backend_after_build($form, &$form_state) {
     ),
   );
 
-      $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
-      //Hide add more button, if ticket are not available
-        if (isset($max_delta_config) && $max_delta_config >= 4) {
-          unset($form['field_ticket_group_type']['und']['add_more']);
-        }
+  $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
+  
+  //Hide add more button, if ticket are not available
+  if (isset($max_delta_config) && $max_delta_config >= 4) {
+    unset($form['field_ticket_group_type']['und']['add_more']);
+  }
     
   return $form;
 }
@@ -828,8 +802,7 @@ function itg_event_backend_block_view($delta = '') {
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
-      $data = '';
-      //$data['itg_ad'] = get_ad_script($page_name);
+      $data = '';      
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':
@@ -997,7 +970,7 @@ function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
       event_url_save($node);    
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
-      //itg_event_backend_insert_into_redirect($node); me
+      //itg_event_backend_insert_into_redirect($node);
     }
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
@@ -1404,17 +1377,11 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
 function itg_event_backend_get_event_node($whole_node = NULL) {
   global $base_url;
   $arg = arg();
-  $node = ''; //shravan
-  if (module_exists('redirect')) {
-    /* $query = db_select('redirect', 'red'); me
-      $query->fields('red', array('source'));
-      $query->condition('redirect', $base_url, '=');
-      $result = $query->execute()->fetchField();
-      $event_id = explode('node/', $result); */
+  $node = '';
+  if (module_exists('redirect')) {   
 
     if (!empty($whole_node)) {
-      if ($arg[0] == 'event') {
-        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+      if ($arg[0] == 'event') {        
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
@@ -1422,29 +1389,19 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         $node = node_load($arg[1]);
       }
-      /* else { me
-        if (!empty($event_id[1])) {//shravan
-        $node = node_load($event_id[1]);
-        }
-        } */
+      
       return $node;
     }
     else {
-      if ($arg[0] == 'event') {
-        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+      if ($arg[0] == 'event') {        
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
         return $node->nid;
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {//shravan
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         return $arg[1];
-      }
-      /* else { me
-        if (!empty($event_id[1])) {//shravan
-        return $event_id[1];
-        }
-        } */
+      }      
     }
   }
 }
@@ -1456,22 +1413,13 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
 function itg_event_get_host_name() {
   global $base_url;
   $arg = arg();
-  if ($arg[0] == 'event') {
-    //$host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+  if ($arg[0] == 'event') {    
     $host = $base_url . '/' . $arg[1] . '/' . $arg[2];
   }
   elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
   }
-  /* else { me
-    if (module_exists('domain')) {
-    $query = db_select('domain', 'd');
-    $query->fields('d', array('subdomain', 'scheme'));
-    $query->condition('domain_id', 1, '=');
-    $result = $query->execute()->fetchAssoc();
-    $host = $result['scheme'] . '://' . $result['subdomain'];
-    }
-    } */
+  
   return $host;
 }
 
@@ -1494,24 +1442,6 @@ function itg_event_get_host_name_for_all_events($nid = NULL) {
   return $host;
 }
 
-/**
- * Get domain using domain id
- * @return boolean
- */
-//function itg_event_backend_get_domain($domain_id) {
-//  if (module_exists('domain') && !empty($domain_id)) {
-//    $query = db_select('domain', 'd');
-//    $query->fields('d', array('subdomain'));
-//    $query->condition('d.domain_id', $domain_id, '=');
-//    $result = $query->execute()->fetchField();
-//    if ($result) {
-//      return $result;
-//    }
-//    else {
-//      return FALSE;
-//    }
-//  }
-//}
 
 /**
  * Get redirect table value
@@ -1520,7 +1450,7 @@ function itg_event_get_host_name_for_all_events($nid = NULL) {
  * @return array
  */
 function itg_event_backend_get_redirect_record($c_name, $c_val) {
-  $records = ''; //shravan
+  $records = '';
   $query = db_select('redirect', 'r')
       ->fields('r');
   $query->condition('r.' . $c_name, $c_val, '=');
@@ -1596,38 +1526,6 @@ function itg_event_backend_vukkul_content($nid) {
  */
 function itg_event_backend_insert_into_redirect($node) {
 
-//  global $user;
-//  $domain = itg_event_backend_get_domain($node->domains);
-//
-//  if ($domain) {
-//    $path = 'http://' . $domain;
-//
-//    // Prepare for redirect table
-//    $redirect = new stdClass();
-//    redirect_object_prepare($redirect);
-//    $redirect->source = 'node/' . $node->nid;
-//    $redirect->redirect = $path;
-//    $redirect->language = 'und';
-//    $hash = redirect_hash($redirect);
-//    $redirect->hash = $hash;
-//    $redirect->uid = $user->uid;
-//    $redirect->type = 'redirect';
-//    $redirect->access = time();
-//    $redirect->count = 1;
-//    $redirect->status = 1;
-//
-//    // Prepare for domain source table
-//    $domain_source = new stdClass();
-//    redirect_object_prepare($domain_source);
-//    $domain_source->nid = $node->nid;
-//    $domain_source->domain_id = '-' . $node->domains;
-//
-//    $existing = itg_event_backend_check_old_rec($node->nid);
-//    if (!$existing) {
-//      drupal_write_record('redirect', $redirect);
-//      //drupal_write_record('domain_source', $domain_source);
-//    }
-//  }
 }
 
 /**
@@ -1793,16 +1691,8 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_ty
   $flash_back_link = '';
   foreach ($result as $value) {
     $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
-//    $val[] = 'node/' . $value->nid;
-//    $detail['node/' . $value->nid] = array(
-//      'key' => 'node/' . $value->nid,
-//      'title' => $value->title
-//    );
   }
-//  $redirect_event = itg_event_backend_redirect_flashback($val, $detail);
-//  foreach ($redirect_event as $final_event) {
-//    $flash_back_link .= '<li>' . l(t($final_event['title']), $final_event['redirect'], array('attributes' => array("style" => "color:$menu_font_color", 'target' => '_blank'))) . '</li>';
-//  }
+
   $output = '';
   if (!empty($flash_back_link)) {
     $output = '<ul>' . $flash_back_link . '</ul>';
@@ -2162,7 +2052,7 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $weightcount + $value['weight'];
   }
-  //p($cat_id);
+  
   // If made change is order then save otherwise skip to save.
   if ($weightcount) {
     db_delete('itg_widget_order')
@@ -2219,26 +2109,6 @@ function itg_event_backend_node_status($nid) {
   $result = $query->execute()->fetchField();
   return $result;
 }
-
-
-/**
- * {@inheritdoc}
- * Implement for url structure in event
- */
-//function itg_event_backend_node_presave($node) {
-//  if ($node->type == 'event_backend') {
-//    //code by shravan alias
-//    
-//    if ($_GET['step'] == 'step_configuration') {
-//      $alias_title_new = explode('event/', $node->path['alias']);    
-//      if (empty($alias_title_new[1])) {
-//        $node->path['alias'] = 'event/'.$node->path['alias'];
-//      }
-//    }
-//    
-//    
-//  }
-//}
 
 /**
  * Implements function for alias save in event according custom menu (working on node update).

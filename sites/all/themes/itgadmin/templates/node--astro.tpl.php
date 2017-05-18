@@ -37,16 +37,14 @@
 
             <?php if (!empty($content)): ?>
                 <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-                    <?php //print render($content) ?>
                     <?php if ($view_mode == 'full'): ?>
                         <?php global $base_url; ?>
                         <div class="content-node-view">            
-                            <?php //print render($content); ?>
                             <div class="content-node-view">               
                                 <h2>Basic Details</h2>
                                 <div class="content-view">
                                     <div class="field">
-                                        <div class="field-label">Astro Title: </div>
+                                        <div class="field-label"><?php print t('Astro Title'); ?>: </div>
                                         <div class="field-items"><?php print $title; ?></div>
                                     </div>
                                     <div class="field">
@@ -63,7 +61,7 @@
                                 <h2>Channel</h2>
                                 <div class="content-view">
                                     <div class="field">
-                                        <?php print '<div class="field-label">Program: </div>'; ?>
+                                        <?php print '<div class="field-label">'.t('Program').': </div>'; ?>
                                         <div class="field-items">
                                             <?php
                                             $termdata = "";
@@ -75,7 +73,7 @@
                                             ?>
 
                                         </div>
-                                        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+                                        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category'); ?>:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
                                     </div>
                                 </div>

@@ -185,25 +185,23 @@ function coupons_apply_form($form, &$form_state) {
       '#title' => t('total Amount'),
   );
     
-      $form['coupon_holder']['gateway_type'] = array(
+  $form['coupon_holder']['gateway_type'] = array(
       '#type' => 'radios',
       '#title' => t('Gateway Type'),
       '#options' => array('Amex','Paytm','ICICI','BillDEsk'),
   );
   
-       $form['coupon_holder']['coupon_code'] = array(
+  $form['coupon_holder']['coupon_code'] = array(
       '#type' => 'textfield',
       '#title' => t('Coupons code'),
       '#description' => t('Please enter valid coupon code')
-  );
-  
+  );  
 
   $form['coupon_holder']['submit_button'] = array(
       '#type' => 'submit',
       '#value' => t('Apply'),
       '#attributes' => array('class' => array('use-ajax-submit')),
-
-      );
+   );
 
   return $form;
 }
