@@ -11599,6 +11599,13 @@ span.close_btt {
         }
     }
 }
+.top-n-most-popular-stories .widget-wrapper{
+  .data-holder{
+    height: calc(100% - 22px);
+    .mCSB_inside>.mCSB_container{margin-right: 0;}
+    .mCSB_scrollTools{width: 3px;}
+  }
+}
 
 
 

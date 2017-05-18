@@ -290,18 +290,18 @@ var is_mobile = mobilecheck() ? true : false;
 
 jQuery(document).ready(function () {
 
-  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
-    var h = jQuery(this).height() + 13;
-    var offset = jQuery(this).offset();
-    var position = (e.pageY - offset.top) / jQuery(this).height();
-    if (position < 0.20) {
-      jQuery(this).stop().animate({scrollTop: 0}, 1000);
-    } else if (position > 0.70) {
-      jQuery(this).stop().animate({scrollTop: h}, 1000);
-    }
-  });
+//  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
+//    var h = jQuery(this).height() + 13;
+//    var offset = jQuery(this).offset();
+//    var position = (e.pageY - offset.top) / jQuery(this).height();
+//    if (position < 0.20) {
+//      jQuery(this).stop().animate({scrollTop: 0}, 1000);
+//    } else if (position > 0.70) {
+//      jQuery(this).stop().animate({scrollTop: h}, 1000);
+//    }
+//  });
 
-//jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
+jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
 
 //header menu add icon for mobile
   jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
