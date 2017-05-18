@@ -615,7 +615,7 @@ function itg_widget_block_view($delta = '') {
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end" , array("data" => $data));
       if ($user->uid) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
       }
       break;
     case 'home_page_poll_widget_block':
@@ -847,7 +847,7 @@ function itg_widget_block_view($delta = '') {
           $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
           $podcast_banner_array[$key] = array("audio" => $audio_file_object , "desc" => $description , "image" => $podcast_image);
         }
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/podcast_header.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/podcast_header.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
         $block['content'] = theme("podcast_banner" , array("podcast_banner_array" => $podcast_banner_array , "podcast_title" => $podcast_title));
       }
       break;
