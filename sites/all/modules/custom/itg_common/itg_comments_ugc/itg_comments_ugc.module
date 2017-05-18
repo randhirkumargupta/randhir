@@ -218,8 +218,7 @@ function itg_comments_ugc_views_pre_render(&$view) {
 
     foreach ($view->result as $commentvalue) {
       // get node type by comment nid
-      //$node_title = node_load($commentvalue->comment_nid);
-      //$commentvalue->node_comment_title = $commentvalue->node_comment_title.' ('.$node_title->type.')';
+      
       $register_user_id = $commentvalue->comment_uid;
       $user = user_load($register_user_id);
       $user_message_raw_value = strip_tags($commentvalue->field_comment_body[0]['raw']['value']);

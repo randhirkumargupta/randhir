@@ -6,7 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-//$preview = $widget_data['preview'];
+
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
 $fb_share_title = htmlentities($search_title, ENT_QUOTES);
@@ -589,11 +589,11 @@ if (count($graphdata) > 2) {
                                 <div class="itg-widget">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">
-<?php
-$block = block_load('itg_ads', ADS_RHS2);
-$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-print render($render_array);
-?>
+                                  <?php
+                                  $block = block_load('itg_ads', ADS_RHS2);
+                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                  print render($render_array);
+                                  ?>
                                         </div>
                                     </div>
                                 </div>
@@ -602,7 +602,7 @@ print render($render_array);
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
                                         <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name']; ?>">
-<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
+                                           <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
                                                 <h4 class="heading"><?php print $widget_data['itg-block-12']['block_title']; ?></h4>
                                             <?php } ?>
                                             <!-- for admin  -->
@@ -616,7 +616,7 @@ print render($render_array);
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+                                            <?php } ?>  
 
                                             <div class="data-holder" id="itg-block-12">
                                               <?php
@@ -636,10 +636,6 @@ print render($render_array);
                 </div>
                 <!--End of Common add more section--> 
             </div>
-
-
-
-
 
             <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>

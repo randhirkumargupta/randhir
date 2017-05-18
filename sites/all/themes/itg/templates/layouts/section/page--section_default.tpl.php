@@ -6,8 +6,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-//$preview = $widget_data['preview'];
-//p($widget_data);
 ?>
 
 <?php
@@ -882,33 +880,21 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <!--End of Common section-->
                 <div class="no-more-card" style="display:none">No More Result Found.</div>
 
-                <!--Load More Loader
-                <div class="load-more">
-                  <img src="<?php //echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
-                </div>
-                <!--End of Loader-->
-
-<?php //print render($page['content']);  ?>
                 <!--Start third party widgets -->
                 <div>
-                    <!--
-                    <div class="vukkul-comment">
-                    <div id="vuukle_div"></div>            
+                            
                     <?php
                     if (function_exists('vukkul_view')) {
                         vukkul_view();
                     }
                     ?>     
-                    </div>
-                  </div>
-                    -->  
+                   
                     <!--End third party widgets -->
 
 
                 </div>
                 <!--------------------------------Code for Front tpl---------------------------------------->
         <?php if ($theme != 'itgadmin') { ?>
-    <?php //print $feed_icons;   ?>
             </section>
 
                     <?php if (false) { ?> 
@@ -943,9 +929,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
             <?php if ($sidebar_first || $sidebar_second): ?>
                 <aside class="sidebars">
-        <?php //print $sidebar_first;  ?>
-            <?php //print $sidebar_second;  ?>
-                </aside>
+                       </aside>
     <?php endif; ?>
         </main>      
 
@@ -1008,6 +992,6 @@ if ($theme != 'itgadmin') {
 <div class="activate-message" style="display:none">
     <div class="message-body">
         <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
-        <p>Your Account Activated Successfully!</p>
+        <?php print t('Your Account Activated Successfully!'); ?>
     </div>
 </div>

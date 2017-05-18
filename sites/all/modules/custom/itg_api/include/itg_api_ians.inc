@@ -14,7 +14,6 @@ function itg_ians_content() {
     $op[$val->tid] = $val->name;
   }
 
-  //$direc = get_dir_content($file_path . '/feeds/ians/');
   $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/ians/';
   $direc = get_dir_content($final_dir);
 

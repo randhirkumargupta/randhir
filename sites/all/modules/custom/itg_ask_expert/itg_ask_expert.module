@@ -54,8 +54,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
             $form['field_user_name'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
             $form['field_user_email'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
             $form['field_user_city'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
-            $form['field_user_state'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
-            //$form['field_disclose_your_identity'][LANGUAGE_NONE]['1']['#attributes']['disabled'] = TRUE;
+            $form['field_user_state'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;            
             $form['field_disclose_your_identity']['#disabled'] = TRUE;
         }
 
@@ -409,16 +408,14 @@ function itg_ask_expert_block_view($delta = '') {
             if ($arg[0] == 'node' && is_numeric($arg[1])) {
                 $node = node_load($arg[1]);
                 if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-                    $tid = $node->field_primary_category['und'][0]['value'];
-                    // if (isset($tid) && !empty($tid)) {
+                    $tid = $node->field_primary_category['und'][0]['value'];                    
                     $user_details_section = user_details_for_section($arg, $tid);
                     if (!empty($user_details_section)) {
                       $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';                    
                       $block['content'] = drupal_render($user_details_section);
                       $custom_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
                       $block['content'] .= drupal_render($custom_expert_form);
-                    }
-                    // }
+                    }                   
                 }
             }
             elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
@@ -441,8 +438,7 @@ function itg_ask_expert_block_view($delta = '') {
             elseif (isset($_GET['section']) && !empty($_GET['section'])) {
                 $cat_id = check_plain($_GET['section']);                
                 $user_detail = user_details_for_section($arg, $cat_id);
-                if (!empty($user_detail)) {
-                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                if (!empty($user_detail)) {                  
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
                 } else {
@@ -452,8 +448,7 @@ function itg_ask_expert_block_view($delta = '') {
             elseif (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
                 $cat_id = check_plain($_GET['section_name']);
                 $user_detail = user_details_for_section($arg, $cat_id);
-                if (!empty($user_detail)) {                  
-                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                if (!empty($user_detail)) {
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
                 } else {

@@ -10,20 +10,6 @@ if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
   $host_node = node_load($arg[1]);
 }
 
-/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me
-$arg1 = arg(1);
-if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
-}
-else {
-  if (!empty($host_detail['source'])) {
-    $host_node_arr = explode('/', $host_detail['source']);
-  }
-  if (!empty($host_node_arr[1])) {
-    $host_node = node_load($host_node_arr[1]);
-  }
-}*/
-
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
@@ -35,7 +21,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-//}
+
   if (!empty($data)) {
     ksort($data);
     $count = 0;
@@ -76,8 +62,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
             if (!empty($detail['uri'])) {
               $story_img = theme('image_style', array(
                 'style_name' => 'event_post_364x205',
-                'path' => $detail['uri'],
-                  // 'attributes' => array('style' => 'border:1px solid #aaa;')
+                'path' => $detail['uri'],                 
                   )
               );
             }
@@ -90,26 +75,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               $output_story_kicker = $detail['kicker'];
             }
           }
-          /* old code
-          $output_photo = '';
-          foreach ($session_result['photo'] as $session) {
-            if (!empty($session)) {
-              $output_photo = l('<i class="fa fa-camera"></i> ' . t('Session Photo'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
-            }
-          }
-          $output_video = '';
-          foreach ($session_result['video'] as $session) {
-            if (!empty($session)) {
-              $output_video = l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
-            }
-          }
-          $output_audio = '';
-          foreach ($session_result['audio'] as $session) {
-            if (!empty($session)) {
-              $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
-            }
-          }*/
-          $output_media = '';
+          
+      $output_media = '';
       $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
       for($i = 0; $i < $max; $i++) {
         if (!empty($session_result['photo'][$i])) {
@@ -140,5 +107,5 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       }
     }
   }
-  // Post event;
+  
   ?>
