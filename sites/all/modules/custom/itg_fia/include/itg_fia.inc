@@ -104,20 +104,22 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($audio_url)) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
-                '<figure>
-                   <audio muted title="audio title">
-                     <source src="' . $audio_url . '">
-                  </audio>
-                 </figure>';
+                '<figure>\n
+                   <img src="' . $img_path . '">\n
+                   <audio title="audio title">\n
+                     <source src="' . $audio_url . '">\n
+                  </audio>\n\n
+                 </figure>\n\n';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>
-                  <audio muted title="audio title">
-                    <source src="' . $audio_url . '">
-                  </audio>
-                </figure>';
+               '<figure>\n
+                   <img src="' . $img_path . '">\n
+                   <audio title="audio title">\n
+                    <source src="' . $audio_url . '">\n
+                  </audio>\n\n
+                </figure>\n\n';
       }
     }
     
@@ -125,16 +127,16 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($img_path)) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] . 
-               '<figure>
-                  <img src="'.$img_path.'" />
-                </figure>';
+               '<figure>\n
+                  <img src="' . $img_path . '" />\n
+                </figure>\n\n';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>
-                  <img src="'.$img_path.'" />
-                </figure>';
+               '<figure>\n
+                  <img src="' . $img_path . '" />\n
+                </figure>\n\n';
       }
     }
     
@@ -142,48 +144,48 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($get_place_name)) {
       if (in_array($map_pos, $bk)) {
         $body_vals[$map_pos] = $body_vals[$map_pos] . 
-                '<figure class="op-map">
-                  <script type="application/json" class="op-geotag">
+                '<figure class="op-map">\n
+                  <script type="application/json" class="op-geotag">\n
                     {
                       "type": "Feature",
                       "geometry":
                         {
                           "type": "Point",
-                          "coordinates": ['.$lat.', '.$lng.']
+                          "coordinates": [' . $lat . ', ' . $lng . ']
                         },
                       "properties":
                         {
-                          "title": "'.$get_place_name.'",
+                          "title": "' . $get_place_name . '",
                           "radius": 10000,
                           "pivot": true,   
                           "style": "satellite",
                         }
                      }
-                  </script>
-                </figure>';
+                  </script>\n\n
+                </figure>\n\n';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-                '<figure class="op-map">
-                  <script type="application/json" class="op-geotag">
+                '<figure class="op-map">\n
+                  <script type="application/json" class="op-geotag">\n
                     {
                       "type": "Feature",
                       "geometry":
                         {
                           "type": "Point",
-                          "coordinates": ['.$lat.', '.$lng.']
+                          "coordinates": [' . $lat . ', ' . $lng . ']
                         },
                       "properties":
                         {
-                          "title": "'.$get_place_name.'",
+                          "title": "' . $get_place_name . '",
                           "radius": 10000,
                           "pivot": true,   
                           "style": "satellite",
                         }
                      }
-                  </script>
-                </figure>';
+                  </script>\n\n
+                </figure>\n\n';
 
       }
     }
@@ -197,20 +199,20 @@ function itg_fia_xml_node_feed($query) {
           $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
           if (in_array($pos, $bk)) {
             $body_vals[$pos] = $body_vals[$pos] . 
-              '<figure class="op-slideshow">
-                <figure>
-                  <img src="'.$imgs_path.'" />
-                </figure>
-              </figure>';
+              '<figure class="op-slideshow">\n
+                <figure>\n
+                  <img src="' . $imgs_path . '" />\n
+                </figure>\n\n
+              </figure>\n\n';
           }
           else {
             $last_postion = end($bk);
             $body_vals[$last_postion] = $body_vals[$last_postion] . 
-              '<figure class="op-slideshow">
-                <figure>
-                  <img src="'.$imgs_path.'" />
-                </figure>
-              </figure>';
+              '<figure class="op-slideshow">\n
+                <figure>\n
+                  <img src="' . $imgs_path . '" />\n
+                </figure>\n\n
+              </figure>\n\n';
           }
           
         }
@@ -221,12 +223,12 @@ function itg_fia_xml_node_feed($query) {
     if(!empty($embed_code_data)) {
       if (in_array($embed_code_pos, $bk)) {
         $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
-                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+                '<figure class="op-interactive">\n' . $embed_code_data . '</figure>\n\n';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+               '<figure class="op-interactive">\n' . $embed_code_data . '</figure>\n\n';
       }
     }
     $node_body = implode("<p>", $body_vals);
