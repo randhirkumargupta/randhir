@@ -41,35 +41,35 @@
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
         <div class="field">
-          <div class="field-label">Survey Title:</div>
+          <div class="field-label"><?php print t('Survey Title:');  ?></div>
           <div class="field-items"><?php echo $title; ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Survey Instruction:</div>
+          <div class="field-label"><?php print t('Survey Instruction:');  ?></div>
           <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Survey Questions Format:</div>
+          <div class="field-label"><?php print t('Survey Questions Format:');  ?></div>
           <div class="field-items"><?php echo $node->field_survey_questions_format[LANGUAGE_NONE][0]['value']; ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Publish:</div>
+          <div class="field-label"><?php print t('Publish:');  ?></div>
           <div class="field-items"><?php echo $node->status ? 'Yes' : 'No'; ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Survey Question Display:</div>
+          <div class="field-label"><?php print t('Survey Question Display:');  ?></div>
           <div class="field-items"><?php echo ucwords($node->field_survey_question_display[LANGUAGE_NONE][0]['value']); ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Category:</div>
+          <div class="field-label"><?php print t('Category:');  ?></div>
           <div class="field-items"><?php echo $node->field_survey_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
         </div>
         <div class="field">
-          <div class="field-label">Start Date:</div>
+          <div class="field-label"><?php print t('Start Date:');  ?></div>
           <div class="field-items"><?php echo date('Y/m/d', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
         </div>
         <div class="field">
-          <div class="field-label">End Date:</div>
+          <div class="field-label"><?php print t('End Date:');  ?></div>
           <div class="field-items"><?php echo date('Y/m/d', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
         </div>
       
@@ -87,23 +87,23 @@
           echo '<h2>Question ' . ($prev_num + 1) . ' Details:</h2>';
           ?>
            <div class="field">
-              <div class="field-label">Question:</div>
+              <div class="field-label"><?php print t('Question:');  ?></div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_question'][LANGUAGE_NONE][0]['value']) . '?'; ?></div>
             </div>
             <div class="field">
-              <div class="field-label">Skip Question:</div>
+              <div class="field-label"><?php print t('Skip Question:');  ?></div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_skip'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             <?php 
             if(!empty($media_type)){
             if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php print t('Add Media:');  ?></div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
             <?php }  else { ?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php print t('Add Media:');  ?></div>
                 <div class="field-items">
                   <video width="140" height="145" controls="controls">
                     <source src="<?php echo $media ?>" type="video/mp4"> 
@@ -115,11 +115,11 @@
               </div>
             <?php } }?>
            <div class="field">
-              <div class="field-label">Answer Type:</div>
+              <div class="field-label"><?php print t('Answer Type:');  ?></div>
               <div class="field-items"><?php echo ucwords($question_arr['field_survey_answer_type'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             <div class="field">
-              <div class="field-label">Answer Option 1:</div>
+              <div class="field-label"><?php print t('Answer Option 1:');  ?></div>
               <div class="field-items"><?php echo itg_survey_get_answer_type_name($question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
            <?php
@@ -127,7 +127,7 @@
               foreach($question_arr['field_survey_answer_option_2'][LANGUAGE_NONE] as $more_ans_arr){
               if(!empty($more_ans_arr['value'])){
                 echo '<div class="field">';
-                echo '<div class="field-label">Answer Option '.$more_ans_num.':</div>';
+                echo '<div class="field-label">'.t('Answer Option').' '.$more_ans_num.':</div>';
                 echo '<div class="field-items">'.$more_ans_arr['value'].'</div></div>';
               }
                 $more_ans_num++;
@@ -148,23 +148,23 @@
           ?>
       
           <div class="field">
-            <div class="field-label">Question:</div>
+            <div class="field-label"><?php print t('Question:'); ?></div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value']) . '?'; ?></div>
           </div>
           <div class="field">
-            <div class="field-label">Skip Question:</div>
+            <div class="field-label"><?php print t('Skip Question:'); ?></div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_skip[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <?php 
           if(!empty($media_type)){
           if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php print t('Add Media:'); ?></div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
           <?php }  else { ?>
                 <div class="field">
-                  <div class="field-label">Add Media:</div>
+                  <div class="field-label"><?php print t('Add Media:'); ?></div>
                   <div class="field-items">
                     <video width="140" height="145" controls="controls">
                       <source src="<?php echo $media ?>" type="video/mp4"> 
@@ -176,11 +176,11 @@
                 </div>
           <?php } }?>
           <div class="field">
-            <div class="field-label">Answer Type:</div>
+            <div class="field-label"><?php print t('Answer Type:'); ?></div>
             <div class="field-items"><?php echo itg_survey_get_answer_type_name($question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
           <div class="field">
-            <div class="field-label">Answer Option 1:</div>
+            <div class="field-label"><?php print t('Answer Option 1:'); ?></div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             <?php
@@ -188,7 +188,7 @@
               $more_ans_num = 2;
               foreach($question_detail[$question_arr['value']]->field_survey_answer_option_2[LANGUAGE_NONE] as $more_ans_arr){
                 echo '<div class="field">';
-                echo '<div class="field-label">Answer Option '.$more_ans_num.':</div>';
+                echo '<div class="field-label">'.t('Answer Option').' '.$more_ans_num.':</div>';
                 echo '<div class="field-items">'.$more_ans_arr['value'].'</div></div>';
                 $more_ans_num++;
               }
