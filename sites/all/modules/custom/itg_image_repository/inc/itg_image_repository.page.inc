@@ -9,7 +9,6 @@
  * q = itg_image_repository.
  */
 function itg_image_repository($scheme = NULL) {
-
     module_invoke('admin_menu', 'suppress'); //suppress admin_menu
     $jsop = isset($_GET['jsop']) ? $_GET['jsop'] : NULL;
     drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
@@ -45,8 +44,7 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
     if (!$itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
         return '';
     }
-   //p($itg_image_repository);
-    //p($itg_image_repository)
+   
     //itg_image_repository_process_profile($itg_image_repository); //get active directory content
     //Before creating the content let's add main files required for itg_image_repository to function properly.
     $path = drupal_get_path('module', 'itg_image_repository');
@@ -103,8 +101,7 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
     $response = array();
     //data
     if ($itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
-       // itg_image_repository_process_profile($itg_image_repository);
-       // if (!$itg_image_repository['error']) {
+       
             module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js');
             if (function_exists($func = 'itg_image_repository_js_' . $jsop)) {
                 $response['data'] = $func($itg_image_repository);
@@ -115,7 +112,7 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
                     $func($jsop, $response, $itg_image_repository, $user);
                 }
             }
-      //  }
+      
     }
     //messages
     $response['messages'] = drupal_get_messages();
@@ -132,7 +129,6 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
  * Upload form.
  */
 function itg_image_repository_upload_form($form, &$form_state, $ref) {
-
 
     $itg_image_repository = & $ref['itg_image_repository'];
 
@@ -168,9 +164,7 @@ function itg_image_repository_upload_submit($form, &$form_state) {
     $validators['itg_image_repository_validate_all'] = array(&$itg_image_repository);
     $diruri = itg_image_repository_dir_uri($itg_image_repository);
 
-
-    $replace = variable_get('imce_settings_replace', FILE_EXISTS_RENAME);
-   // $file = file_save_upload('imce', $validators, $diruri, $replace);
+    $replace = variable_get('imce_settings_replace', FILE_EXISTS_RENAME);   
 
     if ($file = file_save_upload('imce', $validators, $diruri, $replace)) {
 
@@ -365,8 +359,7 @@ if (variable_get('imce_image_get_info', 0)) {
         return FALSE;
     }
 
-}
-else {
+} else {
 
     function itg_image_repository_image_info($file) {
         if (is_file($file) && ($dot = strrpos($file, '.')) && in_array(strtolower(substr($file, $dot + 1)), array('jpg', 'jpeg', 'gif', 'png')) && ($info = @getimagesize($file)) && in_array($info[2], array(IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG))) {
@@ -402,6 +395,7 @@ function itg_image_repository_initiate_profile($user, $scheme = NULL) {
             }
         }
         itg_image_repository_process_directories($itg_image_repository, $user);
+        
         if (!empty($itg_image_repository['directories'])) {
             $itg_image_repository['uid'] = (int) $user->uid;
             $itg_image_repository['url'] = url($_GET['q']);
@@ -770,8 +764,7 @@ function itg_image_repository_dir_uri($itg_image_repository, $dir = NULL) {
 /**
  * Returns the text for the root directory in a directory tree.
  */
-function theme_itg_image_repository_root_text($variables) {
-    //$itg_image_repository = &$variables['itg_image_repository_ref']['itg_image_repository'];
+function theme_itg_image_repository_root_text($variables) {    
     return '&lt;' . t('root') . '&gt;';
 }
 

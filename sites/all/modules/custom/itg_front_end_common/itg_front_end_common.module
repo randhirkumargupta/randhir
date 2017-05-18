@@ -391,7 +391,7 @@ function _related_video_block_content() {
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {
         $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-        //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+        
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
@@ -405,7 +405,6 @@ function _related_video_block_content() {
         }
       }
     }
-
 
     $related_video.= "</ul></div>";
     return $related_video;
@@ -440,7 +439,7 @@ function _related_photo_block_content() {
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {
         $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-        //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+        
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
@@ -454,7 +453,6 @@ function _related_photo_block_content() {
         }
       }
     }
-
 
     $related_photo.= "</ul></div>";
     return $related_photo;
@@ -580,7 +578,7 @@ function _related_story_left_block_content() {
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+      
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
 
@@ -621,7 +619,7 @@ function _related_story_bottom_block_content() {
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
       $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      //$related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+      
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="' . $related_image_url . '">';
       if (empty($related_image_url)) {
@@ -736,7 +734,7 @@ function _latest_from_aajtak() {
         } else {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
-        //$related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        
         $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
         $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
@@ -772,9 +770,9 @@ function _latest_from_businesstoday() {
         if(url_exists($value->thumb_image)) {
           $img_url = $value->thumb_image;
         } else {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
+            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
-        //$related_dt.= "<li class='third-party-list'><a class='pic' href='$path' target='_blank' title='$related_title'><img src='$img_url' alt='$related_title' /></a>";
+        
         $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
         $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
@@ -809,8 +807,7 @@ function itg_third_party_section_card_content($type, $limit) {
  * Helper funcion to check url exist or not
  */
 function url_exists($url) {
-  $hdrs = @get_headers($url);
-  // echo @$hdrs[1]."\n";
+  $hdrs = @get_headers($url);  
   return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/', $hdrs[0]) : false;
 }
 
