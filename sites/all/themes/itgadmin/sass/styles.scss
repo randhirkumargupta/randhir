@@ -11797,6 +11797,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   }
 }
 .tag-box-input-date{
+  display: inline-block;
+  vertical-align: top;
   span.error{
     font-size: 12px;
     margin-top: -10px;

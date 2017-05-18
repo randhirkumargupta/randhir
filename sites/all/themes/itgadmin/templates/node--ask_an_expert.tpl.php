@@ -36,8 +36,7 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-      <?php //print render($content) ?>
-      
+     
        <div class="field">
             <div class="field-label"><?php print t('Name :'); ?></div>
             <div class="field-items"><?php print $node->field_user_name[LANGUAGE_NONE][0]['value']; ?></div>
@@ -64,7 +63,7 @@
        
         <div class="field">
             <div class="field-label"><?php print t('Disclose Your Identity :'); ?></div>
-            <div class="field-items"><?php print "Yes"; ?></div>
+            <div class="field-items"><?php print t("Yes"); ?></div>
           </div>
         <?php
         }

@@ -14,24 +14,24 @@
   ?>
   <div class="field-group">
       <div class="field">
-          <div class="field-label">  Highlights Text :    </div>
+          <div class="field-label">  <?php print t('Highlights Text : ');  ?>   </div>
           <div class="field-items"> <?php echo $field_highlights_text ?></div>
       </div>
       <div class="field">
-          <div class="field-label">  URL :   </div>
+          <div class="field-label">  <?php print t('URL : ');  ?>    </div>
           <div class="field-items"> <?php echo $field_highlights_url; ?> </div>
       </div>
       
       <?php if ($field_emoji_condition == 0) : ?>
         <div class="field">
-            <div class="field-label"> Display Condition :   </div>
+            <div class="field-label"> <?php print t('Display Condition :');  ?> </div>
             <div class="field-items"> <?php echo t("Thumb") ?></div>
         </div>
       <?php endif; ?>
         
       <?php if ($field_emoji_condition == "none") : ?>
         <div class="field">
-            <div class="field-label"> Display Condition :   </div>
+            <div class="field-label"> <?php print t('Display Condition :');  ?>   </div>
             <div class="field-items"> <?php echo t("None") ?></div>
         </div>
       <?php endif; ?>
@@ -50,7 +50,7 @@
           </div>
           <div class="field">
               <div class="field-label"> field_emoji_highlights_1 :   </div>
-              <div class="field-items"> <?php echo ($field_field_emoji_highlights_1) ?   "Yes" : "No" ; ?></div>
+              <div class="field-items"> <?php echo ($field_field_emoji_highlights_1) ?   t("Yes") : t("No") ; ?></div>
           </div>
         <?php endif; ?>
 
@@ -62,18 +62,18 @@
           </div>
           <div class="field">
               <div class="field-label"> field_emoji_highlights_2 :   </div>
-              <div class="field-items"> <?php echo ($field_field_emoji_highlights_2) ?   "Yes" : "No" ; ?></div>
+              <div class="field-items"> <?php echo ($field_field_emoji_highlights_2) ?   t("Yes") : t("No") ; ?></div>
           </div>
         <?php endif; ?>
 
         <?php if ($field_field_emoji_highlights_3 > 0) : ?>
 
           <div class="field">
-              <div class="field-label"> field_emoji_title_3 :   </div>
+              <div class="field-label"> <?php print t('field_emoji_title_3 :');  ?>   </div>
               <div class="field-items"><?php echo $field_field_emoji3_title; ?></div>
           </div>
           <div class="field">
-              <div class="field-label"> field_emoji_highlights_3 :   </div>
+              <div class="field-label"> <?php print t('field_emoji_highlights_3 :');  ?>   </div>
               <div class="field-items"> <?php echo ($field_field_emoji_highlights_3) ?   "Yes" : "No" ; ?></div>
           </div>
         <?php endif; ?>
