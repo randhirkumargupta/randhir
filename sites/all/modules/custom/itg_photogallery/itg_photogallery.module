@@ -32,17 +32,11 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['upload'] = array(
         '#type' => 'plupload',
         '#weight' => 21,
-//      '#imgfilevalidate' => array(
-//        'file_validate_extensions' => array("png gif jpg jpeg"),
-//      ),
+
         '#upload_validators' => array(
             'file_validate_extensions' => array("png gif jpg jpeg"),
         ),
-//      '#states' => array(
-//        'visible' => array(
-//          ':input[name="field_bulk_media_upload[und][1]"]' => array('checked' => TRUE),
-//        ),
-//      ),
+
         '#description' => t('88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
@@ -69,11 +63,6 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       $destination_array = explode('?', $_REQUEST['destination']);
       $destination = $destination_array[0];
     }
-
-//      $form['actions']['cancel'] = array(
-//        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-//        '#weight' => 20,
-//      );
 
 
     $form['actions']['submit']['#submit'][] = 'itg_photogallery_form_custom_callback';
@@ -456,17 +445,11 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     if (!isset($filed_collection->field_images['und'])) {
       $filename = $file_ids[$i]['filename'];
       $newFileName = substr($filename, 0, (strrpos($filename, ".")));
-      //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
-      //$form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $newFileName;
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
-      // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $newFileName;
-      // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $newFileName;
-      // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
+    
       if ($file_ids[$i]['filename'] != "") {
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_credit['und'][0]['value'] = $_POST['field_credit_name']['und'][0]['value'];
-      // p($_POST['field_photo_by'][LANGUAGE_NONE]); 
-        $photo_by = end(explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE]));
-       
+        $photo_by = end(explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE])); 
         $photo_byline = explode(')', $photo_by);
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_byline['und'][0]['target_id'] = $photo_byline[0];
         if (!empty($_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'])) {
@@ -600,10 +583,6 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', array('scope' => 'footer'));
     drupal_add_css(".form-item-field-featured-value {display:none !important}", "inline");
   }
-}
-
-function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_state, $form_id) {
-  //pr($form);
 }
 
 /**

@@ -95,14 +95,14 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
     case 'videogallery_node_form':
-      
+
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
-      
+
       if ($user->uid != 1) {
-       unset($form['field_video_configurations']['und']['#options']['comment']);
+        unset($form['field_video_configurations']['und']['#options']['comment']);
       }
       unset($form['actions']['preview_changes']);
       $form['field_story_expert_name']['#access'] = FALSE;
@@ -1164,6 +1164,15 @@ function itg_videogallery_menu() {
       'access arguments' => array('authorized user ftp credin'),
       'file' => 'includes/itg_videogallery.inc',
   );
+
+  $items['dailymotion/s3/config'] = array(
+      'title' => 'AWS S3 For Dailymotion Configuration',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_videogallery_s3_video_form'),
+      'access arguments' => array('authorized user ftp credin'),
+      'file' => 'includes/itg_videogallery.inc',
+  );
+
   $items['dailymotion-ftp-videos-post'] = array(
       'page callback' => 'itg_videogallery_ajax_ftp_video',
       'access arguments' => array('access content'),
@@ -1206,6 +1215,13 @@ function itg_videogallery_menu() {
   );
   $items['dailymotion-bitrate'] = array(
       'page callback' => 'itg_videogallery_video_bitrate',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+  );
+
+
+  $items['check-s3'] = array(
+      'page callback' => 'itg_videogallery_s3_file_to_dm',
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
   );
@@ -1467,19 +1483,17 @@ function itg_videogallery_remove_video_with_child() {
  * This function use for get video bitrate url
  * 
  */
-function itg_videogallery_get_video_bitrate($nid)
-{
-      $query = db_select('itg_video_transcoding', 'ivt');
-      $query->fields('ivt');
-      $query->condition('nid', $nid, '=');
-      $query->orderby('bitrate_ordering','ASC');
-      $video_data1 = $query->execute()->fetchAll();
-      foreach($video_data1 as $key=>$vid) {
-        $bitrate[] = $vid->bitrate;
-      }
-     
-      $hls= $vid->hls_domain;
-  
+function itg_videogallery_get_video_bitrate($nid) {
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt');
+  $query->condition('nid', $nid, '=');
+  $query->orderby('bitrate_ordering', 'ASC');
+  $video_data1 = $query->execute()->fetchAll();
+  foreach ($video_data1 as $key => $vid) {
+    $bitrate[] = $vid->bitrate;
+  }
+
+  $hls = $vid->hls_domain;
 }
 
 /**
@@ -2043,6 +2057,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
       'description' => 'This is the callback for uploading FTP video to Daily motion server in unpublished mode',
       'callback' => 'itg_videogallery_ftp_file_insert_cron',
   );
+  $items['itg-videogallery-s3-file-to-dm'] = array(
+      'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
+      'callback' => 'itg_videogallery_s3_file_to_dm',
+  );
   $items['save-video-bitrates'] = array(
       'description' => 'This is use for store video birates urls',
       'callback' => 'itg_videogallery_video_bitrate',
@@ -2082,6 +2100,7 @@ function itg_videogallery_thumb_url() {
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $result = $query->execute()->fetchAll();
+
   $api = itg_videogallery_dailymotion_api();
   foreach ($result as $val) {
     try {
@@ -2089,7 +2108,7 @@ function itg_videogallery_thumb_url() {
         $thumb_url = $api->get(
                 '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
         );
-
+   
         $duration = '';
         if ($thumb_url['duration'] < 3600) {
           $duration = gmdate("i:s", $thumb_url['duration']);
@@ -2106,9 +2125,10 @@ function itg_videogallery_thumb_url() {
                     'publishing_progress' => $thumb_url['publishing_progress'],
                     'video_duration' => $duration
                 ))
-                ->condition('fid', $val->fid, '=')
+               // ->condition('fid', $val->fid, '=')
                 ->condition('eid', $val->eid, '=')
                 ->execute();
+      
       }
     } catch (Exception $e) {
       
@@ -2138,6 +2158,7 @@ function itg_videogallery_thumb_url() {
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
+    p($video_exist_innode);
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
     }
@@ -3280,6 +3301,144 @@ function file_validate_name(stdClass $file) {
 function itg_video_file_managed_file_process($element) {
   $element['upload']['#attributes']['accept'] = '.mp4';
   return $element;
+}
+
+function itg_videogallery_dailymotion_check_alredy_send($id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('title', $id, '=');
+  $query->condition('type', 'S3', '=');
+  $result_new = $query->execute()->fetchAll();
+  return $result_new;
+}
+
+/**
+ * This method is used to add the video for daily motion from FTP
+ * @return array
+ */
+function itg_videogallery_dailymotion_send_video($real_path) {
+
+  $api = itg_videogallery_dailymotion_api();
+
+  $url = $real_path;
+  $file_name = basename($real_path);
+  $chek_alredy_insert = itg_videogallery_dailymotion_check_alredy_send($file_name);
+  if (empty($chek_alredy_insert)) {
+   
+    try {
+
+      $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
+      $uri = 'public://dailymotion-ftp/' . $realfilename;
+      $url = $real_path;
+
+      $result = $api->post(
+              '/me/videos', array(
+          'url' => $url,
+          'title' => $file_name,
+          'channel' => 'tv',
+          'published' => TRUE,
+              )
+      );
+
+      $dur = $api->get(
+              '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
+      );
+      $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
+      $result['duration'] = $dur['duration'];
+      $result['name'] = $file_name;
+
+      $result['encoding_progress'] = $dur['encoding_progress'];
+      $result['publishing_progress'] = $dur['publishing_progress'];
+
+      $a = new Dailymotion();
+      $a->logout();
+    } catch (Exception $e) { //die($e->getMessage());
+      if ($e->getMessage() == "This `client_id' doesn't exist.") {
+        if (isset($_GET['destination'])) {
+          unset($_GET['destination']);
+        }
+        drupal_set_message(t('API Key is wrong.'), 'error');
+//drupal_goto('dailymotion/config');
+      }
+      elseif ($e->getMessage() == "Invalid `client_secret'") {
+        if (isset($_GET['destination'])) {
+          unset($_GET['destination']);
+        }
+        drupal_set_message(t('Secret Key is wrong.'), 'error');
+//drupal_goto('dailymotion/config');
+      }
+      elseif ($e->getCode() == 6) {
+        if (isset($_GET['destination'])) {
+          unset($_GET['destination']);
+        }
+        drupal_set_message(t('There is some issue with internet connection.'), 'error');
+//drupal_goto('node/' . $node_id . '/edit', array('query' => array('destination' => 'manage-videogallery')));
+      }
+      elseif ($e->getCode() == 400) {
+        if (isset($_GET['destination'])) {
+          unset($_GET['destination']);
+        }
+        drupal_get_messages();
+        drupal_set_message(t('Do not use space in FTP filename. Please remove and again upload file without space in file name.'), 'error');
+//drupal_goto('node/' . $node_id . '/edit', array('query' => array('destination' => 'manage-videogallery')));
+      }
+      else {
+        drupal_set_message($e->getMessage(), 'error');
+      }
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Implements function for get options for Local FTP file list and used
+ * @return array
+ */
+function itg_videogallery_s3_file_to_dm() {
+  global $user;
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
+  $data_video = itg_video_get_s3_video();
+
+  foreach ($data_video['video'] as $key => $s3_video_url) {
+
+
+    $response = itg_videogallery_dailymotion_send_video($s3_video_url);
+
+// Perform playlist and tags when new video create.
+    if (!empty($response)) {
+      $response_result['video_id'] = $response['id'];
+      $response_result['fid'] = 0;
+
+      try {
+
+        $nid = db_insert('dailymotion_response_details')
+                ->fields(array(
+                    'title' => $response['title'],
+                    'channel' => $response['channel'],
+                    'fid' => $response['fid'],
+                    'tags' => ' ',
+                    'video_id' => $response['id'],
+                    'nid' => 0,
+                    'video_size' => $data_video['size'][$key],
+                    'encoding_progress' => $response['encoding_progress'],
+                    'publishing_progress' => $response['publishing_progress'],
+                    'upload_time' => REQUEST_TIME,
+                    'video_duration' => $response['duration'],
+                    'dailymotion_published' => 0,
+                    'type' => 'S3',
+                    'name' => $response['name'],
+                ))
+                ->execute();
+
+// data insert into node
+      } catch (Exception $e) {
+        die($e->getMessage());
+      }
+// Code start for Adding  video in daily motion 
+    }
+  }
+  // Use the high-level iterators (returns ALL of your objects).
 }
 
 /**
