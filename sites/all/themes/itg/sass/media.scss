@@ -452,6 +452,11 @@
 }   
 
 
+@media only screen and (min-width:991px) and (max-width: 1024px){
+  .sport-home-layout-page .itg-layout-615 .droppable,
+  .sport-home-layout-page .itg-layout-615 .auto-block-1, 
+  .sport-home-layout-page .itg-layout-615 .auto-block-2{height: 510px;}
+}
 @media only screen and (max-width:991px){
   /*CSS start education page special*/
   .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1{
@@ -605,9 +610,7 @@
 
 @media only screen and (max-width:768px){
   .block-itg-ads{overflow: hidden;}
-  .widget-wrapper {
-    overflow: initial;
-  }
+  
   header {
     margin-bottom: 15px;
   }

@@ -6,20 +6,20 @@
  */
 function itg_term_menu() {
   $items['texonomy/confirm/ajax/%'] = array(
-    'title' => 'Texonomy Term' ,
-    'page callback' => 'drupal_get_form' ,
-    'page arguments' => array(
-      'texonomy_term_ajax_confirm'
-    ) ,
-    'access arguments' => array(
-      'administer itg_term settings'
-    ) ,
-    'type' => MENU_NORMAL_ITEM
+      'title' => 'Texonomy Term',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array(
+          'texonomy_term_ajax_confirm'
+      ),
+      'access arguments' => array(
+          'administer itg_term settings'
+      ),
+      'type' => MENU_NORMAL_ITEM
   );
   $items['texonomy/%/autocomplete'] = array(
-    'page callback' => 'itg_term_get_term_title' ,
-    'access arguments' => array('access itg story') ,
-    'type' => MENU_CALLBACK ,
+      'page callback' => 'itg_term_get_term_title',
+      'access arguments' => array('access itg story'),
+      'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -36,7 +36,7 @@ function itg_term_menu_alter(&$items) {
  * Custom taxonomy callback, which also accepts an empty string search.
  * @return json
  */
-function itg_term_autocomplete_deluxe_taxonomy_callback($field_name , $tags_typed = '' , $limit = 10) {
+function itg_term_autocomplete_deluxe_taxonomy_callback($field_name, $tags_typed = '', $limit = 10) {
   $field = field_info_field($field_name);
   $use_synonyms = !empty($_GET['synonyms']);
 
@@ -57,54 +57,54 @@ function itg_term_autocomplete_deluxe_taxonomy_callback($field_name , $tags_type
     }
   }
 
-  $query = db_select('taxonomy_term_data' , 't');
+  $query = db_select('taxonomy_term_data', 't');
   $query->addTag('translatable');
   $query->addTag('term_access');
 
   if (module_exists('synonyms') && !empty($use_synonyms)) {
-    $query->leftJoin('field_data_synonyms_synonym' , 'fdss' , 'fdss.entity_id = t.tid');
+    $query->leftJoin('field_data_synonyms_synonym', 'fdss', 'fdss.entity_id = t.tid');
   }
 
   if ($tag_last != '') {
     // Do not select already entered terms.
     if (!empty($tags_typed)) {
-      $query->condition('t.name' , $tags_typed , 'NOT IN');
+      $query->condition('t.name', $tags_typed, 'NOT IN');
     }
     // Select rows that match by term name.
     $query
-        ->fields('t' , array('tid' , 'name'))
-        ->condition('t.vid' , $vids);
+            ->fields('t', array('tid', 'name'))
+            ->condition('t.vid', $vids);
 
     if (module_exists('synonyms') && !empty($use_synonyms)) {
       $or = db_or();
-      $or->condition('fdss.synonyms_synonym_value' , '%' . db_like($tag_last) . '%' , 'LIKE');
-      $or->condition('t.name' , '%' . db_like($tag_last) . '%' , 'LIKE');
+      $or->condition('fdss.synonyms_synonym_value', '%' . db_like($tag_last) . '%', 'LIKE');
+      $or->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE');
       $query->condition($or);
     }
     else {
-      $query->leftJoin('field_data_field_tags_status' , 'tg' , 'tg.entity_id = t.tid');
-      $query->condition('tg.field_tags_status_value' , 'Published' , '=');
-      $query->condition('t.name' , '%' . db_like($tag_last) . '%' , 'LIKE');
+      $query->leftJoin('field_data_field_tags_status', 'tg', 'tg.entity_id = t.tid');
+      $query->condition('tg.field_tags_status_value', 'Published', '=');
+      $query->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE');
     }
 
     if (isset($limit) && $limit > 0) {
-      $query->range(0 , $limit);
+      $query->range(0, $limit);
     }
 
     $tags_return = $query->execute()
-        ->fetchAllKeyed();
+            ->fetchAllKeyed();
   }
   else {
     $query
-        ->fields('t' , array('tid' , 'name'))
-        ->condition('t.vid' , $vids);
+            ->fields('t', array('tid', 'name'))
+            ->condition('t.vid', $vids);
 
     if (isset($limit) && $limit > 0) {
-      $query->range(0 , $limit);
+      $query->range(0, $limit);
     }
 
     $tags_return = $query->execute()
-        ->fetchAllKeyed();
+            ->fetchAllKeyed();
   }
 
   $prefix = count($tags_typed) ? drupal_implode_tags($tags_typed) . ', ' : '';
@@ -113,8 +113,8 @@ function itg_term_autocomplete_deluxe_taxonomy_callback($field_name , $tags_type
   foreach ($tags_return as $tid => $name) {
     $n = $name;
     // Term names containing commas or quotes must be wrapped in quotes.
-    if (strpos($name , ',') !== FALSE || strpos($name , '"') !== FALSE) {
-      $n = '"' . str_replace('"' , '""' , $name) . '"';
+    if (strpos($name, ',') !== FALSE || strpos($name, '"') !== FALSE) {
+      $n = '"' . str_replace('"', '""', $name) . '"';
     }
     $term_matches[$prefix . $n] = check_plain($name);
   }
@@ -128,20 +128,20 @@ function itg_term_autocomplete_deluxe_taxonomy_callback($field_name , $tags_type
  * @param array reference $form_state
  * @return array $confirm_form
  */
-function texonomy_term_ajax_confirm($form , &$form_state) {
+function texonomy_term_ajax_confirm($form, &$form_state) {
   $tid = arg(3);
   $term = taxonomy_term_load($tid);
   $form['tid'] = array(
-    '#type' => 'value' ,
-    '#value' => $tid
+      '#type' => 'value',
+      '#value' => $tid
   );
   $form['name'] = array(
-    '#type' => 'value' ,
-    '#value' => $term->name
+      '#type' => 'value',
+      '#value' => $term->name
   );
-  $confirm_form = confirm_form($form , t('delete' , array(
-    '%title' => $term->name
-      )) , "tags-listing" , t("Are you sure, you want to delete this tag $term->name?") , t('Delete') , t('Cancel'));
+  $confirm_form = confirm_form($form, t('delete', array(
+      '%title' => $term->name
+          )), "tags-listing", t("Are you sure, you want to delete this tag $term->name?"), t('Delete'), t('Cancel'));
   return $confirm_form;
 }
 
@@ -150,7 +150,7 @@ function texonomy_term_ajax_confirm($form , &$form_state) {
  * @param array $form
  * @param array reference $form_state
  */
-function texonomy_term_ajax_confirm_submit($form , &$form_state) {
+function texonomy_term_ajax_confirm_submit($form, &$form_state) {
   $form_values = $form_state['values'];
   if (isset($form_state['values']['confirm'])) {
     $tid = $form_state['values']['tid'];
@@ -158,11 +158,11 @@ function texonomy_term_ajax_confirm_submit($form , &$form_state) {
     taxonomy_term_delete($tid);
 
     db_delete('itg_category_manager')
-        ->condition('tid' , $tid)
-        ->execute();
+            ->condition('tid', $tid)
+            ->execute();
 
-    drupal_set_message(t('Delete %title.' , array(
-      '%title' => $term->name
+    drupal_set_message(t('Delete %title.', array(
+        '%title' => $term->name
     )));
   }
 
@@ -175,10 +175,10 @@ function texonomy_term_ajax_confirm_submit($form , &$form_state) {
  */
 function itg_term_permission() {
   return array(
-    'administer itg_term settings' => array(
-      'title' => t('Administer ITG Term Settings') ,
-      'description' => t('Perform administration tasks for ITG Term.') ,
-    ) ,
+      'administer itg_term settings' => array(
+          'title' => t('Administer ITG Term Settings'),
+          'description' => t('Perform administration tasks for ITG Term.'),
+      ),
   );
 }
 
@@ -186,12 +186,12 @@ function itg_term_permission() {
  * Implementation of hook_form_alter().
  * {@inheritdoc}
  */
-function itg_term_form_alter(&$form , &$form_state , $form_id) {
+function itg_term_form_alter(&$form, &$form_state, $form_id) {
   // Load the currently logged in user.
   global $user;
   switch ($form_id) {
     case 'taxonomy_form_term':
-      drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });" , 'inline');
+      drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
       $form['#after_build'][] = 'itg_term_after_build';
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-listing') {
         unset($form['actions']['delete']);
@@ -203,20 +203,20 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
-      if (!in_array('administrator' , $user->roles)) {
+      if (!in_array('administrator', $user->roles)) {
 
         //drupal_add_js("jQuery(document).ready(function(){ jQuery('.page-admin-structure-taxonomy-csv-import .region.region-help').hide(); jQuery('.page-admin-structure-taxonomy-csv-import .form-type-item').hide(); });", 'inline');
 
 
         if (arg(3) == 'csv_import') {
           $form['csv_import_example'] = array(
-            '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example') , 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
+              '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
           );
         }
 
         $form['tab']['import_format']['#options']['#access'] = FALSE;
         $form['tab']['import_format']['#options'] = array(
-          'fields' => 'Fields'
+            'fields' => 'Fields'
         );
         //p($form);
         $form['tab']['format']['#access'] = FALSE;
@@ -225,7 +225,7 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
         $form['tab']['advanced_options']['#access'] = FALSE;
         $form['tab']['import_format']['#options']['#access'] = FALSE;
         $form['tab']['import_format']['#options'] = array(
-          'fields' => 'Fields'
+            'fields' => 'Fields'
         );
         $form['tab']['import']['#title'] = FALSE;
         // $form['tab']['import']['source_choice']['#options']['#access'] = FALSE;
@@ -233,7 +233,7 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
         $form['tab']['import']['source_choice']['#access'] = FALSE;
 
         $form['tab']['import']['source_choice']['#options'] = array(
-          'file' => 'In a local file'
+            'file' => 'In a local file'
         );
         $form['tab']['import']['source_choice']['#default_value'] = 'file';
         $form['tab']['import']['source_choice']['#validated'] = TRUE;
@@ -241,11 +241,11 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
         $form['tab']['import']['url']['#access'] = FALSE;
         $form['tab']['destination']['vocabulary_target']['#options']['#access'] = FALSE;
         $form['tab']['destination']['vocabulary_target']['#options'] = array(
-          'existing' => 'Import in an existing vocabulary'
+            'existing' => 'Import in an existing vocabulary'
         );
         $form['tab']['destination']['vocabulary_id']['#options']['#access'] = FALSE;
         $form['tab']['destination']['vocabulary_id']['#options'] = array(
-          1 => 'Tags'
+            1 => 'Tags'
         );
         $form['tab']['destination']['#type'] = FALSE;
         $form['tab']['destination']['import_fields_custom']['#access'] = FALSE;
@@ -263,13 +263,13 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
         if (arg(3) == 'csv_import') {
           $destination = 'tags-listing';
           $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel') , $destination , array(
-              'attributes' => array(
-                'class' => 'button'
-              )
-            )) ,
-            '#weight' => 21 ,
-            '#value' => t('Cancel')
+              '#markup' => l(t('Cancel'), $destination, array(
+                  'attributes' => array(
+                      'class' => 'button'
+                  )
+              )),
+              '#weight' => 21,
+              '#value' => t('Cancel')
           );
         }
       }
@@ -283,8 +283,8 @@ function itg_term_form_alter(&$form , &$form_state , $form_id) {
  * @param array $form
  * @param array $form_state
  */
-function itg_term_after_build($form , &$form_state) {
-  drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });" , 'inline');
+function itg_term_after_build($form, &$form_state) {
+  drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
   return $form;
 }
 
@@ -294,7 +294,7 @@ function itg_term_after_build($form , &$form_state) {
  * @param array $form_state
  * @return array $form
  */
-function itg_term_status_message(&$form , &$form_state) {
+function itg_term_status_message(&$form, &$form_state) {
   if ($form['#term']['vocabulary_machine_name'] == 'tags') {
     if (isset($_SESSION['messages']['status'])) {
       unset($_SESSION['messages']['status']);
@@ -308,7 +308,7 @@ function itg_term_status_message(&$form , &$form_state) {
     }
     $term = $form_state['values']['name'];
 
-    drupal_set_message(t('Tag @tag_title has been @op.' , array('@tag_title' => $term , '@op' => $op)) , 'status');
+    drupal_set_message(t('Tag @tag_title has been @op.', array('@tag_title' => $term, '@op' => $op)), 'status');
     $form_state['redirect'] = 'tags-listing';
     return $form;
   }
@@ -322,7 +322,7 @@ function itg_term_batch_alter(&$batch) {
   if (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_export_process') {
 
     // set message
-    variable_set('term_export_message' , 'Terms are exported from Tags');
+    variable_set('term_export_message', 'Terms are exported from Tags');
     drupal_set_message(t(variable_get('term_export_message')));
 
     // redirect path
@@ -330,7 +330,7 @@ function itg_term_batch_alter(&$batch) {
   }
   elseif (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
     // set message
-    variable_set('term_import_message' , 'Terms are imported.');
+    variable_set('term_import_message', 'Terms are imported.');
     drupal_set_message(t(variable_get('term_import_message')));
 
     // redirect path
@@ -343,7 +343,7 @@ function itg_term_batch_alter(&$batch) {
  * @param type $form
  * @param array reference $form_state
  */
-function term_redirect_handler($form , &$form_state) {
+function term_redirect_handler($form, &$form_state) {
   if (!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
     $form_state['redirect'] = 'tags-listing';
   }
@@ -362,7 +362,7 @@ function itg_term_views_pre_render(&$view) {
     if (arg(0) == 'tags-listing') {
       global $user;
       $user_roles = array_values($user->roles);
-      if (!in_array('Editor' , $user_roles) && !in_array('Site Admin' , $user_roles) && !in_array('administrator' , $user_roles)) {
+      if (!in_array('Editor', $user_roles) && !in_array('Site Admin', $user_roles) && !in_array('administrator', $user_roles)) {
         if (is_object($view->field['nothing']) && count($view->field['nothing']) > 0) {
           if (is_array($view->field['nothing']->options['alter']) && count($view->field['nothing']->options['alter']) > 0) {
             if (isset($view->field['nothing']->options['alter']['text'])) {
@@ -390,14 +390,14 @@ function itg_term_views_pre_render(&$view) {
       }
       elseif (isset($message_arr['status']) && $message_arr['status'][0] == variable_get('term_export_message')) {
         $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
-        if (preg_match_all("/$regexp/siU" , $message_arr['status'][2] , $matches , PREG_SET_ORDER)) {
+        if (preg_match_all("/$regexp/siU", $message_arr['status'][2], $matches, PREG_SET_ORDER)) {
 
           // To unset message
           unset($_SESSION['messages']['status']);
           unset($_SESSION['messages']['warning']);
           $filepath = $matches[0][2];
           $filename = $matches[0][3];
-          $download_link = l(t($filename) , $filepath);
+          $download_link = l(t($filename), $filepath);
 
           // To override message
           drupal_set_message(check_plain(t('Click csv file to download')) . ' ' . $download_link);
@@ -419,20 +419,20 @@ function itg_term_views_pre_render(&$view) {
     }
     // Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content_term .= l(t('Create Tag') , 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV') , 'admin/structure/taxonomy/csv_import');
+    $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
 
 
-    drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});" , 'inline');
+    drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});", 'inline');
     $view->attachment_before = $header_content_term;
   }
 
   if (isset($view->name) && $view->name == "tags_listing") {
-    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/jquery.tabletoCSV.js' , array('type' => 'file' , 'scope' => 'header'));
-    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/js/FileSaver.js' , array('type' => 'file' , 'scope' => 'header' , 'weight' => -99));
-    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/js/tableexport-2.1.js' , array('type' => 'file' , 'scope' => 'header' , 'weight' => -98));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/jquery.tabletoCSV.js', array('type' => 'file', 'scope' => 'header'));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/FileSaver.js', array('type' => 'file', 'scope' => 'header', 'weight' => -99));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/tableexport-2.1.js', array('type' => 'file', 'scope' => 'header', 'weight' => -98));
     // Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content_term .= l(t('Create Tag') , 'admin/structure/taxonomy/tags/add');
+    $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add');
     //$header_content_term .=  '<a class="btn" id="export-csv">Export CSV</a>' ;//l(t('Export CSV'), '#', array('attributes' => array("id" => 'export-csv')));
     $view->attachment_before = $header_content_term;
   }
@@ -443,14 +443,14 @@ function itg_term_views_pre_render(&$view) {
  * @param array $form
  * @param array $form_state
  */
-function itg_term_validate($form , &$form_state) {
+function itg_term_validate($form, &$form_state) {
   $term = trim($form_state['values']['name']);
   $vid = trim($form_state['values']['vid']);
   $tid = trim($form_state['values']['tid']);
-  if (itg_category_manager_is_dupe_term($term , $vid , $tid)) {
-    $tid_existing_term = itg_category_manager_get_term_from_name($term , $vid);
+  if (itg_category_manager_is_dupe_term($term, $vid, $tid)) {
+    $tid_existing_term = itg_category_manager_get_term_from_name($term, $vid);
     if ($tid_existing_term) {
-      form_set_error('name' , t('Tag name already exists.'));
+      form_set_error('name', t('Tag name already exists.'));
     }
   }
 }
@@ -462,7 +462,7 @@ function itg_term_validate($form , &$form_state) {
  * Hiding taxonomy term description field
  */
 
-function itg_term_form_taxonomy_form_term_alter(&$form , &$form_state) {
+function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (is_array($form['#term']) && count($form['#term']) > 0) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
       $destination = 'tags-listing';
@@ -475,25 +475,25 @@ function itg_term_form_taxonomy_form_term_alter(&$form , &$form_state) {
       if (arg(4) != 'add') {
         $form['#submit'][] = 'term_redirect_handler';
         $form['actions']['delete'] = array(
-          '#markup' => l(t('Delete') , $delete_destination , array(
-            'attributes' => array(
-              'class' => 'button'
-            )
-          )) ,
-          '#weight' => 21 ,
-          '#value' => t('Delete')
+            '#markup' => l(t('Delete'), $delete_destination, array(
+                'attributes' => array(
+                    'class' => 'button'
+                )
+            )),
+            '#weight' => 21,
+            '#value' => t('Delete')
         );
       }
 
 
       $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel') , $destination , array(
-          'attributes' => array(
-            'class' => 'button'
-          )
-        )) ,
-        '#weight' => 21 ,
-        '#value' => t('Cancel')
+          '#markup' => l(t('Cancel'), $destination, array(
+              'attributes' => array(
+                  'class' => 'button'
+              )
+          )),
+          '#weight' => 21,
+          '#value' => t('Cancel')
       );
       unset($form['tags']);
       unset($form['#metatags']);
@@ -509,7 +509,7 @@ function itg_term_form_taxonomy_form_term_alter(&$form , &$form_state) {
  * @param array $form
  * @param array reference $form_state
  */
-function itg_term_form_views_exposed_form_alter(&$form , &$form_state) {
+function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
   global $base_url;
   if ($form['#id'] == 'views-exposed-form-tags-listing-page') {
     $form['name']['#attributes']['placeholder'] = t('Enter tag name');
@@ -517,36 +517,36 @@ function itg_term_form_views_exposed_form_alter(&$form , &$form_state) {
   }
 
   if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-tags-management-page') {
-    drupal_add_js(drupal_get_path('module' , 'itg_term') . '/itg_term_date_popup.js' , array('weight' => 13, 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/itg_term_date_popup.js', array('weight' => 13, 'scope' => 'footer'));
     $settings = array();
     $settings['base_url'] = $base_url;
 
-    drupal_add_js(array('itg_term' => array('settings' => $settings)) , array('type' => 'setting'));
+    drupal_add_js(array('itg_term' => array('settings' => $settings)), array('type' => 'setting'));
 
     $form['#info']['filter-created']['label'] = FALSE;
     $form['name']['#autocomplete_path'] = 'texonomy/1/autocomplete';
     $form['name']['#attributes'] = array(
-      'placeholder' => t('Name')
+        'placeholder' => t('Name')
     );
     unset($form['filter-created']['label']);
 
     $form['created']['min'] = array(
-      '#type' => 'date_popup' ,
-      '#title' => t('Created From') ,
-      '#date_format' => 'd/m/Y' ,
-      '#date_year_range' => '-1:+1' ,
-      '#attributes' => array(
-        'readonly' => 'readonly'
-      ) ,
+        '#type' => 'date_popup',
+        '#title' => t('Created From'),
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-1:+1',
+        '#attributes' => array(
+            'readonly' => 'readonly'
+        ),
     );
     $form['created']['max'] = array(
-      '#type' => 'date_popup' ,
-      '#title' => t('To') ,
-      '#date_format' => 'd/m/Y' ,
-      '#date_year_range' => '-1:+1' ,
-      '#attributes' => array(
-        'readonly' => 'readonly'
-      ) ,
+        '#type' => 'date_popup',
+        '#title' => t('To'),
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-1:+1',
+        '#attributes' => array(
+            'readonly' => 'readonly'
+        ),
     );
   }
 }
@@ -556,55 +556,62 @@ function itg_term_form_views_exposed_form_alter(&$form , &$form_state) {
  * @param object reference $view
  * @param object reference $query
  */
-function itg_term_views_query_alter(&$view , &$query) {
+function itg_term_views_query_alter(&$view, &$query) {
 
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
 
-      $mx_date = str_replace('/' , '-' , $_GET['created']['max']['date']);
+      $mx_date = str_replace('/', '-', $_GET['created']['max']['date']);
       $mx_date = strtotime($mx_date . ' +1 days');
       $max_conditions_array = array();
-      $max_date = strtotime(date('d-m-Y' , $mx_date));
+      $max_date = strtotime(date('d-m-Y', $mx_date));
       $max_date_condition = " AND " . $max_date;
 
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
           if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
-            $max_conditions_array = explode('AND' , $view->query->where[1]['conditions'][$idx]['field']);
+            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
             $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
           }
         }
       }
     }
   }
-   if (isset($view->name) && $view->name === 'task') {
+  if (isset($view->name) && $view->name === 'task') {
     if (isset($_GET['field_task_team_member_target_id']) && !empty($_GET['field_task_team_member_target_id'])) {
-    
-        foreach ($query->where[1]['conditions'] as $idx => $condition) {
-          if ($condition['field'] == 'field_data_field_task_team_member.field_task_team_member_target_id') {
-     
-          $user_info = user_load_by_mail($_GET['field_task_team_member_target_id']);
-     
-            $view->query->where[1]['conditions'][$idx]['value'] = $user_info->uid;
-          
+
+      foreach ($query->where[1]['conditions'] as $idx => $condition) {
+        if ($condition['field'] == 'field_data_field_task_team_member.field_task_team_member_target_id') {
+          $queries = db_select('users', 'u');
+          $queries->fields('u', array('uid'));
+          $queries->Join('users_roles', 'ur', 'ur.uid = u.uid');
+          $queries->condition('u.mail', $_GET['field_task_team_member_target_id'], '=');
+          $queries->condition('ur.rid', 25, '!=');
+
+          $result = $queries->execute();
+          while ($record = $result->fetchAssoc()) {
+            $user_info = $record['uid'];
+          }
+         
+         // $user_info = user_load_by_mail($_GET['field_task_team_member_target_id']);
+
+          $view->query->where[1]['conditions'][$idx]['value'] = $user_info;
         }
       }
     }
   }
-  
-   if (isset($view->name) && $view->name == 'movies_master') {
-    
-    if (isset($_GET['date_filter']['value']['year']) && !empty($_GET['date_filter']['value']['year'])) {
-    
-        foreach ($query->where[1]['conditions'] as $idx => $condition) {
-         
-          if (!empty($condition['value'][':taxonomy_term_data_date_filter'])) {
 
-            $view->query->where[1]['conditions'][$idx]['value'][':taxonomy_term_data_date_filter'] = $_GET['date_filter']['value']['year']-1;
-          
+  if (isset($view->name) && $view->name == 'movies_master') {
+
+    if (isset($_GET['date_filter']['value']['year']) && !empty($_GET['date_filter']['value']['year'])) {
+
+      foreach ($query->where[1]['conditions'] as $idx => $condition) {
+
+        if (!empty($condition['value'][':taxonomy_term_data_date_filter'])) {
+
+          $view->query->where[1]['conditions'][$idx]['value'][':taxonomy_term_data_date_filter'] = $_GET['date_filter']['value']['year'] - 1;
         }
       }
-  
     }
   }
 }
@@ -638,11 +645,11 @@ function itg_term_get_term_title($title) {
     $vid = arg(1);
     $options = '';
     $title = strtolower(trim($title));
-    $query = db_select('taxonomy_term_data' , 'n');
-    $query->fields('n' , array('name'));
-    $query->condition('name' , '%' . $title . '%' , 'LIKE');
-    $query->condition('n.vid' , $vid , '=');
-    $query->range(0 , 20);
+    $query = db_select('taxonomy_term_data', 'n');
+    $query->fields('n', array('name'));
+    $query->condition('name', '%' . $title . '%', 'LIKE');
+    $query->condition('n.vid', $vid, '=');
+    $query->range(0, 20);
 
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {

@@ -289,19 +289,42 @@ var is_mobile = mobilecheck() ? true : false;
 
 
 jQuery(document).ready(function () {
-
-  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
-    var h = jQuery(this).height() + 13;
-    var offset = jQuery(this).offset();
-    var position = (e.pageY - offset.top) / jQuery(this).height();
-    if (position < 0.20) {
-      jQuery(this).stop().animate({scrollTop: 0}, 1000);
-    } else if (position > 0.70) {
-      jQuery(this).stop().animate({scrollTop: h}, 1000);
+  
+  var numLatestVideo = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+  var winWidth = window.innerWidth;
+  if (winWidth > 680) {
+    var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+    jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", getLength * 190 + "px");
+    jQuery(".defalt-bar").mCustomScrollbar({
+      axis: "x",
+    });
+  } else {
+    if (numLatestVideo > 4) {
+      jQuery("#block-views-video-landing-header-block-1 ul.photo-list").slick({
+        vertical: true,
+        infinite: false,
+        slidesToShow: 4,
+        dots: false,
+        nextArrow: "<i class='fa fa-chevron-down'></i>",
+        prevArrow: "<i class='fa fa-chevron-up'></i>"
+      });
+    } else {
+      return false;
     }
-  });
+  }
 
-//jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
+//  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
+//    var h = jQuery(this).height() + 13;
+//    var offset = jQuery(this).offset();
+//    var position = (e.pageY - offset.top) / jQuery(this).height();
+//    if (position < 0.20) {
+//      jQuery(this).stop().animate({scrollTop: 0}, 1000);
+//    } else if (position > 0.70) {
+//      jQuery(this).stop().animate({scrollTop: h}, 1000);
+//    }
+//  });
+
+jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
 
 //header menu add icon for mobile
   jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
@@ -339,6 +362,60 @@ jQuery(document).ready(function () {
   jQuery('body').on('click', '.personal-share', function () {
     jQuery('.personal-social-share-links').slideToggle();
   });
+});
+
+jQuery(document).ready(function(){ 
+  var getLength = 0;
+  var defaultWidth  = jQuery(".anchor-detail-menu").outerWidth(true);
+  jQuery(".anchor-detail-menu .tab-buttons span").each(function(){
+      getLength += jQuery(this).outerWidth(true);                
+  });                
+  if(getLength > defaultWidth){
+      jQuery(".anchor-detail-menu .tab-buttons").css("width", getLength +"px"); 
+      jQuery(".anchor-detail-menu").mCustomScrollbar({
+          axis:"x",                    
+      });
+  }
+});
+
+jQuery(document).ready(function () {
+  var programData = ".view-live-tv-programs .program_data";
+  var iconMinus = ".toggle-icon .minus";
+  var iconPluse = ".toggle-icon .plus";
+  if (jQuery(programData).is(":visible")) {
+    jQuery(iconMinus).show();
+  } else {
+    jQuery(iconPluse).show();
+  }
+  jQuery(".toggle-icon").click(function () {
+    var programRow = jQuery(this).parents(".program-row").next();
+    if (programRow.is(":visible")) {
+      programRow.slideUp();
+      jQuery(this).find(".minus").hide();
+      jQuery(this).find(".plus").show();
+    } else {
+      programRow.slideDown();
+      jQuery(this).find(".minus").show();
+      jQuery(this).find(".plus").hide();
+    }
+  });
+
+  var winWidth = window.innerWidth;
+  if (winWidth > 680) {
+    var getLength = jQuery(".view-programme-content-live-tv .defalt-bar .photo-list li").length;
+    jQuery(".view-programme-content-live-tv .defalt-bar .photo-list").css("width", getLength * 190 + "px");
+    jQuery(".view-programme-content-live-tv .defalt-bar").mCustomScrollbar({
+      axis: "x",
+    });
+  } else {
+    jQuery(".view-programme-content-live-tv .defalt-bar .photo-list").slick({
+      vertical: true,
+      slidesToShow: 2,
+      dots: false,
+      nextArrow: "<i class=\'fa fa-chevron-down\'></i>",
+      prevArrow: "<i class=\'fa fa-chevron-up\'></i>"
+    });
+  }
 });
 
 
