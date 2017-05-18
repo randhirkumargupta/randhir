@@ -46,8 +46,8 @@
                $active2='active';$active1="";
                
            }?>
-            <li><a class="<?php echo $active1;?>"  href="<?php echo $base_url.'/special-key-candidate-widget-contents';?>">Step1</a></li>
-             <li><a class="<?php echo $active2;?>">Step2</a></li>
+            <li><a class="<?php echo $active1;?>"  href="<?php echo $base_url.'/special-key-candidate-widget-contents';?>"><?php print t('Step1'); ?></a></li>
+             <li><a class="<?php echo $active2;?>"><?php print t('Step2'); ?></a></li>
         </ul>
     </div>
 <?php if(!empty($_GET['state_val']) && !empty($_GET['cat_id']))

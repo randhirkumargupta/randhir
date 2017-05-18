@@ -44,10 +44,8 @@
                      itg_videogallery_update_embedcode_url($video_data1);
                     $video_data = itg_videogallery_get_videoid_new_private($video_fid);
                  }else {
-                  //$video_data = itg_videogallery_get_videoid($video_fid);
                   $video_data = itg_videogallery_get_videoid_new($video_fid);
                  }
-                    // $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
                     $video_data = itg_videogallery_get_videoid_new($video_fid_data[0]->field_videogallery_video_upload_fid);
                   }
                   $ads_flag = 1;
@@ -60,11 +58,11 @@
                   }
 
                   if (isset($video_fid_data) && !empty($video_fid_data[0]->field_videogallery_description_value)) {
-                    $output .= '<p><strong>Description: </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
+                    $output .= '<p><strong>'.t('Description').': </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
                   }
 
                   if (isset($video_fid_data) && !empty($video_fid_data[0]->field_include_ads_valu)) {
-                    $output .= '<p><strong>Exclude Ads : </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
+                    $output .= '<p><strong>'.t('Exclude Ads').' : </strong><strong>' . $video_fid_data[0]->field_videogallery_description_value . '</strong></p>';
                   }
                   $output .= "</li>";
                 }
@@ -75,7 +73,6 @@
               $short_des = render($content['field_video_kicker']);
               if (!empty($short_des)):
                 ?>
-                <?php //print render($content['field_story_expert_name']); ?>
                 <?php print render($content['field_video_kicker']); ?>
                 <?php
               endif;
@@ -105,7 +102,6 @@
                    itg_videogallery_update_embedcode_url($video_data1);
                     $video_data = itg_videogallery_get_videoid_new_private($video_fid);
                  }else {
-                  //$video_data = itg_videogallery_get_videoid($video_fid);
                   $video_data = itg_videogallery_get_videoid_new($video_fid);
                  }
                 }
@@ -135,13 +131,13 @@
                                             height: 350,
                                            
                                         });
-                                    </script> <div id="podcast-' . $key . '">Loading the player...</div>';
+                                    </script> <div id="podcast-' . $key . '">'.t('Loading the player...').'</div>';
                 }
                 if (isset($imagecollection['field_videogallery_description'][LANGUAGE_NONE]) && !empty($imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'])) {
-                  $output .= '<p><strong>Description: </strong><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
+                  $output .= '<p><strong>'.t('Description').': </strong><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
                 }
                 if (isset($imagecollection['field_include_ads'][LANGUAGE_NONE]) && !empty($imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'])) {
-                  $output .= '<p><strong>Exclude Ads: </strong><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
+                  $output .= '<p><strong>'.t('Exclude Ads').': </strong><strong>' . $imagecollection['field_include_ads'][LANGUAGE_NONE][0]['value'] . '</strong></p>';
                 }
                 $output .= "</li>";
               endforeach;
@@ -241,7 +237,7 @@
           ?>
           <?php print render($content['field_story_category']); ?>
         <?php endif; ?>
-        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
         <div class="Story-details">
           <div class="content-details">
@@ -275,21 +271,12 @@
       else {
         ?>
         <div class="promote-sidebar">
-          <div class="promote-lock">Someone  is already working on this</div>
+          <div class="promote-lock"><?php print t('Someone  is already working on this'); ?></div>
         </div> 
       <?php }
       ?>
     <?php endif; ?>
   </div>
   <?php
-//            $comment_checkbox = $node->field_video_configurations[LANGUAGE_NONE];
-//            if(isset($comment_checkbox)){
-//              foreach ($node->field_video_configurations[LANGUAGE_NONE] as $key => $val) {
-//              if($val['value'] == 'comment'){
-//                  print render($content['comment_form']);
-//                  print render($content['comments']);
-//              }
-//             }
-//            }
   ?>
 <?php endif; ?>
