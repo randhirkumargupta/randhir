@@ -98,14 +98,6 @@ jQuery(document).ready(function () {
         });
     });
 
-//    /* Comma Separated Values (.csv) */
-//    jQuery.fn.tableExport.csv = {
-//        defaultClass: "csv",
-//        buttonContent: "Export to csv",
-//        separator: ",",
-//        mimeType: "application/csv",
-//        fileExtension: ".csv",
-//    };
     jQuery("#export-csv").click(function () {
         jQuery(".views-table").tableToCSV();
     });

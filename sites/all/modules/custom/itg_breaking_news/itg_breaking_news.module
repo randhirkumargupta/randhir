@@ -239,10 +239,10 @@ function itg_breaking_news_after_build($form, &$form_state) {
       $node_id = 0;
     }
 
-    //$form['field_breaking_content_details']['#prefix'] = '<div id="custom_another_item"><a href="javascript:void(0)" id="custom_add_another_item">Add another item</a></div>';
+    
     for ($i = 0; $i <= $form['field_breaking_content_details'][LANGUAGE_NONE]['#max_delta']; $i++) {
-        $count = $i + 1;
-        $form['field_breaking_content_details'][LANGUAGE_NONE][$i]['#title'] = 'Content details - ' . $count;
+      $count = $i + 1;
+      $form['field_breaking_content_details'][LANGUAGE_NONE][$i]['#title'] = 'Content details - ' . $count;
     }
 
     $settings = array();
@@ -276,12 +276,6 @@ function itg_breaking_news_node_validate($node, $form, &$form_state) {
         $type = $node->field_type[LANGUAGE_NONE][0]['value'];
         $display_on = $node->field_breaking_display_on[LANGUAGE_NONE][0]['value'];
 
-//        if ($type == 'Live Blog') {
-//            // filter empty array if type is live blog
-//            if (empty($section[0]['tid'])) {
-//                form_set_error('field_section', t("Section Field is required"));
-//            }
-//        }
         // check if section is selected and category not select
         if ($type == 'Breaking News' && $display_on == 'section') {
             if (empty($section[0]['tid'])) {

@@ -293,9 +293,17 @@ function itg_loyalty_reward_dedicated_point($type) {
       'label' => 'Online Registration for Any Events',
       'point' => variable_get('lrp_online_registration_for_any_events'),
     ),
-    'participate' => array(
-      'label' => 'Participation in Poll/Campaign/Survey',
-      'point' => variable_get('lrp_participation_in_poll_campaign_survey'),
+    'poll' => array(
+      'label' => 'Participation in Poll',
+      'point' => variable_get('lrp_participation_in_poll'),
+    ),
+    'campaign' => array(
+      'label' => 'Participation in Campaign',
+      'point' => variable_get('lrp_participation_in_campaign'),
+    ),
+    'survey' => array(
+      'label' => 'Participation in Survey',
+      'point' => variable_get('lrp_participation_in_survey'),
     ),
     'raf' => array(
       'label' => 'Refer a Friend',
@@ -317,7 +325,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     $itg_query->join('itg_loyalty_reward_point_history', 'ph', 'pk.pointer_key=ph.pointer_key');
     $itg_query->fields('u', array('mail', 'name'));
     $itg_query->fields('ph', array('remaining_point'));
-    $itg_query->fields('pk', array('expiry_date'));
+    $itg_query->fields('pk', array('expiry_date'));    
     $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
     $itg_query->havingCondition('date_diff_real', 1);
     $itg_result = $itg_query->execute()->fetchAll();
@@ -330,7 +338,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     foreach ($itg_result as $value) {
       $data['remaining_point'] = $value->remaining_point;
       $data['name'] = $value->name;
-      $data['expiry_date'] = $value->expiry_date;
+      $data['expiry_date'] = $value->expiry_date;      
       // for mail code
       itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }

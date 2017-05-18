@@ -37,8 +37,9 @@
                 var widget_name = '';
 
                 $(".templates-widgets li").draggable({
-                    appendTo: "body",
-                    helper: "clone",
+                    helper: 'clone',
+                    scroll: 'true',
+                    refreshPositions: true,
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');                        
                         widget_info = $(this).attr('data-widget-info');                        
@@ -66,7 +67,7 @@
                         var wid_name = widget_name;
                         var splitewidgitname = widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
-                            var widget_style = $(this).find('.data-holder').attr('widget-style');
+                            var widget_style = $(this).find('.data-holder').attr('data-widget-style');
                             if(widget_style != "" && widget_style != "undefined") {
                                widget_info ='custom|'+widget_style;
                             }

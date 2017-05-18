@@ -357,6 +357,103 @@ function get_layout_details($section_name, $template_name, $status) {
   
 }
 
+
+/**
+ * Get layout details by section_name and template_name for front and admin
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array $data
+ */
+function get_layout_details_block($section_name, $template_name, $status) {
+ 
+  if ($status == 'admin') {
+    //Get last layout setting
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name);
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
+  //Get layout setting details info
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'widget_info', 'filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_name);    
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+   $itg_query->condition('layout_manager.block_name','itg-block-10');
+  
+  
+  //condition for front
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } //condition for admin
+  elseif ($status == 'admin') {
+     $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  $data = array();
+  foreach ($itg_result as $itg_val) {
+   
+    $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      
+      if(!empty($widget_info_array[1]) &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else{
+          $result['widget_display_name'] = "";  
+      }
+    }
+    
+    $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title; //for default widgets
+    }
+    
+    // for photo section and video section
+    if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
+      $result['cat_id'] = $filter_url; // category id
+      
+      if (isset($_GET['category'])) {
+        $filter_url = $_GET['category'];
+      }
+      else {
+        // Temp code
+       $filter_url =  get_first_category_of_media_widget(arg(2), $template_name, $itg_val->widget_name);
+      }
+      
+      
+    }
+    
+    if (isset($itg_val->widget_name)) {
+      // get widget block     
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+    } 
+    else {
+      $widget = '<p>Drag template widgets here !</p>';
+    }
+    
+    $result['widget'] = $widget;
+    
+    $data[$itg_val->block_name] = $result;
+  }
+  
+  return $data; 
+  
+}
+
 /**
  * Display section widgets list
  * @param string $section_name

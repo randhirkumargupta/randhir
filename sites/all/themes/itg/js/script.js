@@ -292,7 +292,6 @@ jQuery(document).ready(function () {
 
   jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
     var h = jQuery(this).height() + 13;
-//        alert(h);
     var offset = jQuery(this).offset();
     var position = (e.pageY - offset.top) / jQuery(this).height();
     if (position < 0.20) {
@@ -302,22 +301,11 @@ jQuery(document).ready(function () {
     }
   });
 
+//jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
+
 //header menu add icon for mobile
   jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
-//    var navValue = jQuery('.navigation .menu li').length;
-//    if (navValue > 13) {
-//        jQuery('.navigation .menu li').eq(12).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-ellipsis-h"></i></li>');
-//        var count_li = 0;
-//        var i = 1;
-//        jQuery('.navigation .menu li').each(function () {
-//            count_li++;            
-//            if (count_li > 14 && i == 1) {
-//                jQuery('.navigation .container').append('<ul id="newlist"></ul>');
-//                jQuery('#newlist').append(jQuery(this).nextUntil(jQuery(this).last()).andSelf());
-//                i++;
-//            }
-//        });
-//    }
+
 
 
 //ITG footer
@@ -598,6 +586,7 @@ jQuery(document).ready(function () {
 
   jQuery(document).on('click', '.all-menu', function () {
     jQuery('#newlist').slideToggle();
+    jQuery('.third-level-menu #overflow').hide();
   });
 
   jQuery(document).on('click', function () {
@@ -990,8 +979,12 @@ jQuery(window).load(function () {
     navigationResize();
   }
 
-  jQuery('.third-level-menu li.more span').click(function () {
-    jQuery(this).next().slideToggle();
+  jQuery('.third-level-menu li.more span').click(function (e) {
+    jQuery(this).next().stop().slideToggle();
+    e.stopPropagation();
+  });
+  jQuery(document).on('click', function () {
+    jQuery('.third-level-menu #overflow').hide();
   });
 
 });

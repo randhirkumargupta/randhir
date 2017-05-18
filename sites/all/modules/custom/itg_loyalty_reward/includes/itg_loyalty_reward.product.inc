@@ -403,7 +403,67 @@ function itg_loyalty_reward_order_confirmation() {
   if (!isset($_SESSION['placed-item'])) {
     drupal_goto($base_url . '/product');
   }
+  itg_loyalty_reward_redeem_points_send_mail('Redeem Points', $_SESSION['placed-item']);
   $data = array();
-  
   return theme('cart_order_confirmation', array('data' => $data));
+}
+
+/*
+ * Helper function for itg_loyalty_reward_redeem_points_send_mail
+ */
+function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
+  
+  global $user;
+  if (function_exists('itg_mail_templates_get_mailcontent')) {
+    $get_mail_content = itg_mail_templates_get_mailcontent($key, $task_event = NULL, $ugc_status = NULL);
+    $mail_subject = $get_mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
+    foreach ($value as $prd_key => $prd_val) {
+      $prd_name[] = $prd_val['product']['title'];
+    }
+    if (is_array($prd_name)) {
+      $productname = implode(', ', $prd_name);
+    }
+    
+    $body1 = str_replace('[itg_mail_token:itg_loyalty_user]', $user->name, $get_mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
+    $mail_content = str_replace('[itg_mail_token:itg_product_name]', $productname, $body1);
+  }
+  $params = array(
+    'body' => $mail_content,
+    'subject' => $mail_subject,
+  );
+  // $to = $user->mail;
+  $to = 'gourav.walia@kelltontech.com';
+  $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
+}
+
+/**
+ * Implements hook_mail
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
+function itg_loyalty_reward_redeem_points_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'itg_redeem_points_mail':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
 }

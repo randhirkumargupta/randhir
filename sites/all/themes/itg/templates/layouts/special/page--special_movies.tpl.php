@@ -173,7 +173,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="standpoint" id="itg-block-3">
+                            <div class="data-holder" data-widget-style="standpoint" id="itg-block-3">
                               <?php
                                 if (isset($widget_data['itg-block-3']['widget'])) {
                                   print $widget_data['itg-block-3']['widget']; 
@@ -556,7 +556,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13" widget-style="movies-celebrities" >
+                    <div class="data-holder" id="itg-block-13" data-widget-style="movies-celebrities" >
                       <?php
                         if (isset($widget_data['itg-block-13']['widget'])) {
                           print $widget_data['itg-block-13']['widget']; 
@@ -627,7 +627,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-15" widget-style="movies-lifestyle">
+                    <div class="data-holder" id="itg-block-15" data-widget-style="movies-lifestyle">
                       <?php
                         if (isset($widget_data['itg-block-15']['widget'])) {
                           print $widget_data['itg-block-15']['widget']; 
@@ -659,7 +659,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16" widget-style="movies-latest">
+                    <div class="data-holder" id="itg-block-16" data-widget-style="movies-latest">
                       <?php
                         if (isset($widget_data['itg-block-16']['widget'])) {
                           print $widget_data['itg-block-16']['widget']; 

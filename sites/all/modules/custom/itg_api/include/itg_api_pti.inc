@@ -15,7 +15,6 @@ function itg_pti_content() {
     $op[$val->tid] = strtolower($val->name);
   }
 
-  //$direc = get_dir_content($file_path . '/feeds/pti/');
   $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/pti/';
   $direc = get_dir_content($final_dir);
 

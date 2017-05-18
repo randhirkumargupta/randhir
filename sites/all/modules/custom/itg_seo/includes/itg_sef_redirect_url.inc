@@ -293,3 +293,126 @@ function get_path_from_category($tid) {
   }
   return implode('/' , $section);
 }
+
+
+/**
+ * @param string $entity_type
+ *  Type of entity.
+ * @param int $entity_id
+ *  Entity id.
+ * @param int $pathauto_state
+ *  Pathauto state 0 or 1.
+ */
+function itg_custom_pathauto_state_save($entity_type , $entity_id , $pathauto_state) {
+  try {
+    db_merge('itg_pathauto_state')
+        ->key(array(
+          'entity_type' => $entity_type ,
+          'entity_id' => $entity_id ,
+        ))
+        ->fields(array(
+          'pathauto' => $pathauto_state ? 1 : 0 ,
+        ))
+        ->execute();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+}
+
+/**
+ * This function is called via ajax when sef checkbox is unchecked.
+ * @param int $node_id
+ * @param string $node_type
+ * @param blooean $pathauto_state
+ */
+function itg_custom_pathauto_state_unset($node_id , $node_type , $pathauto_state) {
+  itg_custom_pathauto_state_save($node_type , $node_id , $pathauto_state);
+}
+
+/**
+ * Give status of pathauto.
+ * @param int $entity_id
+ * @param string $entity_type
+ * @return int
+ */
+function itg_custom_pathauto_get_sef_url_state($entity_id , $entity_type) {
+  $query = db_select('itg_pathauto_state' , 'ips');
+  $query->addField('ips' , 'pathauto');
+  $query->condition('entity_id' , $entity_id);
+  $query->condition('entity_type' , $entity_type);
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Function which saves Pathauto status value in custom table after form submit.
+ */
+function itg_custom_pathauto_save_sef_status($form , &$form_state) {
+  $pathauto_state = 0;
+  $pathauto = $form_state['values']['path']['pathauto'];
+  $node_id = $form_state['values']['nid'];
+  $node_type = $form_state['values']['type'];
+  if ($pathauto) {
+    $pathauto_state = 1;
+  }
+  itg_custom_pathauto_state_save($node_type , $node_id , $pathauto_state);
+}
+
+/**
+ * Return SEF Url
+ */
+function itg_get_sef_url($sef_path , $nodeid) {
+  if (isset($sef_path) && !empty($sef_path)) {
+    $node_object = node_load($nodeid);
+    // Handel edit case for issue baised story.
+    $is_issue_magazine = is_issue_baised_magazine($node_object);
+    $is_photo_story = is_photo_story($node_object);
+    $is_reporter = is_reporter($node_object);
+    $is_itg_funalytics = is_itg_funalytics($node_object);
+    $is_mega_review_critic = is_mega_review_critic($node_object);
+    $is_basic_page = is_basic_page($node_object);
+    $is_podcast = is_podcast($node_object);
+    if ($is_issue_magazine) {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/" , $path_alias_set);
+      $edit_path_data = end($path_data);
+      $new_url_array = explode('-' , $edit_path_data);
+      $array_size = count($new_url_array);
+      unset($new_url_array[0]);
+      unset($new_url_array[$array_size - 4]);
+      unset($new_url_array[$array_size - 3]);
+      unset($new_url_array[$array_size - 2]);
+      unset($new_url_array[$array_size - 1]);
+      $edited_sef_url = implode('-' , $new_url_array);
+    }
+    elseif ($is_photo_story || $is_mega_review_critic || $is_podcast) {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/" , $path_alias_set);
+      $edit_path_data = end($path_data);
+      $new_url_array = explode('-' , $edit_path_data);
+      $array_size = count($new_url_array);
+      unset($new_url_array[$array_size - 4]);
+      unset($new_url_array[$array_size - 3]);
+      unset($new_url_array[$array_size - 2]);
+      unset($new_url_array[$array_size - 1]);
+      $edited_sef_url = implode('-' , $new_url_array);
+    }
+    elseif ($is_reporter || $is_itg_funalytics) {
+      $path_data = explode("/" , $sef_path);
+      $edited_sef_url = rtrim($path_data[1]);
+    }
+    elseif ($is_basic_page) {
+      $path_data = explode("/" , $sef_path);
+      $edited_sef_url = rtrim($path_data[0]);
+    }
+    else {
+      $path_alias_set = $sef_path;
+      $path_data = explode("/" , $path_alias_set);
+      $set_hierarchy = array_reverse($path_data);
+      $seftitle = $set_hierarchy[0];
+      $sef_url = explode($nodeid , $seftitle);
+      $edited_sef_url = rtrim($sef_url[0] , '-');
+    }
+    return $edited_sef_url;
+  }
+}

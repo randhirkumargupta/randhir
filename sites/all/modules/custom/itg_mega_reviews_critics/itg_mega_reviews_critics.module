@@ -52,18 +52,15 @@ function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form
  */
 function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
 
-  if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-mega-review-review-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-
   for ($i = 0; $i <= $form['field_mega_review_review']['und']['#max_delta']; $i++) {
     $count = $i + 1;
     $form['field_mega_review_review']['und'][$i]['#title'] = t('Review ') . $count;
   }
-
+  
+  $settings['storyid'] = isset($form['#node']->nid) ? $form['#node']->nid : 0;
+  
+  drupal_add_js(array('itg_mega_reviews_critics' => array('settings' => $settings)) , array('type' => 'setting'));
+  
   drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1, 'scope' => 'footer'));
 
   return $form;
@@ -130,9 +127,10 @@ function itg_mega_reviews_critics_form_draft_callback($form, &$form_state) {
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
+  
   $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];   
   $_GET['destination'] = $redirect_path;
-  //$form_state['redirect'] = 'movie-review-draft-list';
+  
 }
 
 /**
@@ -180,20 +178,3 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
-
-/**
- * Implements hook_node_insert()
- * {@inheritdoc}
- */
-//function itg_mega_reviews_critics_node_insert($node) {
-//  if ($node->type == 'mega_review_critic') {
-//    if ($node->status == 0) {
-//     drupal_goto('movie-review-draft-list');
-//    }
-//    else if ($node->status == 1) {
-//      drupal_goto('movie-review-list');
-//    }
-//  }
-//}
-//
-//

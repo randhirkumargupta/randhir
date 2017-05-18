@@ -14,8 +14,7 @@
         $('.term-spinner').hide();
       }
 
-      if (jQuery('#edit-parent-hierarchical-select-selects-0').val() != '0')
-      {
+      if (jQuery('#edit-parent-hierarchical-select-selects-0').val() != '0') {
         jQuery('#edit-field-set-as-featured-cate').hide();
       }
 
@@ -139,10 +138,7 @@
       jQuery('#edit-field-user-name').remove();
       jQuery('.text-format-wrapper').remove();
       jQuery("#edit-field-user-city").after(getsechedulehtml);
-
-      // jQuery('.setting-div').prepend(getsechedulehtml);
-
-      //jQuery('.setting-div').prepend(getsechedulehtml);
+      
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var d = new Date();

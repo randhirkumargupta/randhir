@@ -139,7 +139,6 @@ function itg_common_get_node_type($nid) {
  * @return int
  */
 function itg_get_all_node($content_type , $uid) {
-
   $query = "SELECT COUNT(*) amount FROM {node} n " .
       "WHERE n.type = :type AND n.uid = :uid";
   $result = db_query($query , array(':type' => $content_type , ':uid' => $uid))->fetch();

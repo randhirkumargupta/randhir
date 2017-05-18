@@ -3062,6 +3062,7 @@
     width: 15.5%;
     padding: 0;
     border-bottom: none;
+    border-right: 1px solid #181818;
     margin-bottom: 0;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul {
@@ -3145,7 +3146,7 @@
     overflow: hidden;
   }
 
-  body.page-taxonomy-term .row {
+  body.page-taxonomy-term #main .row {
     overflow: hidden;
   }
 }

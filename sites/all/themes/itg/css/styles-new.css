@@ -564,13 +564,22 @@ input[type="file"], input[type="submit"], input[type="text"] {
   display: none;
 }
 
-/*$test : .carousel .slides .slideItem;
-$debug: "width:645px"; // TODO: move to _settings.scss
+.carousel .slides .slideItem.active-slide span {
+  opacity: 1;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
+.carousel .slides .slideItem.active-slide span.overlay {
+  opacity: 0;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
-    @if ($debug) { // visualizing layout internals
-        display: block;
-    }*/
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper {
   background-color: #eaebed;

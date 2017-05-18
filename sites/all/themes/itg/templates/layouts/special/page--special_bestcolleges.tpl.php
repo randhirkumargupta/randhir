@@ -220,7 +220,7 @@ if ($theme != 'itgadmin') {
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
-                    <div class="data-holder" id="itg-block-4" widget-style="oscar-news best-news">
+                    <div class="data-holder" id="itg-block-4" data-widget-style="oscar-news best-news">
 
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">

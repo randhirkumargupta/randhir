@@ -750,3 +750,39 @@ function itg_following_details_callback() {
     } //close connection
   }
 }
+
+
+/**
+ * Implements hook_user_login().
+ */
+function itg_personalization_user_login(&$edit, $account) {
+  global $user;
+  $user_mail = $user->mail;
+  $uids = itg_personalization_refer_friend_existence($user_mail);
+  if (!empty($uids)) {
+    foreach ($uids as $key => $value) {
+      if (function_exists('itg_loyalty_reward_earnpoint') && !empty($value)) {
+        itg_loyalty_reward_earnpoint(0, 'raf', $value);
+        $itg_query = db_update('itg_lrp_refer_friend')
+            ->fields(array('status' => 1))
+            ->condition('mail', $user_mail)
+            ->condition('status', 0);
+        $itg_result = $itg_query->execute();
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to check refer a friend existence().
+ * @param string $mail
+ */
+function itg_personalization_refer_friend_existence($mail) {
+  $query = db_select('itg_lrp_refer_friend', 'ref');
+  $query->fields('ref', array('uid'))
+      ->condition('ref.mail', $mail)
+      ->condition('ref.status', 0);
+  $result = $query->execute();
+  return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+}
+

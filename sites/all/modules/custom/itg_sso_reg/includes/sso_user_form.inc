@@ -70,10 +70,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => 'First Name',
         '#description' => '',
         '#type' => 'textfield',
-        '#required' => TRUE,
+        //'#required' => TRUE,
         '#attributes' => array('placeholder' => t('*First Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row"><div id="ufname" class="col-xs-6">',
-        '#suffix' => '</div>',
+        '#suffix' => '<span class="fname-msg error"></span></div>',
       );
 
       $form['lname'] = array(
@@ -82,7 +82,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Last Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="ulname" class="col-xs-6">',
-        '#suffix' => '</div></div>',
+        '#suffix' => '<span class="lname-msg error"></span></div></div>',
       );
 
       $form['mail'] = array(
@@ -110,9 +110,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#id' => 'password',
         '#type' => 'password',
         '#attributes' => array('placeholder' => t('*Password'), 'autocomplete' => 'off'),
-        '#required' => TRUE,
+        //'#required' => TRUE,
         '#prefix' => '<div class="form-row""><div id="upass" class="col-xs-6">',
-        '#suffix' => '</div>',
+        '#suffix' => '<span class="pass-msg error"></span></div>',
       );
 
       $form['password_again'] = array(
@@ -121,7 +121,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#id' => 'password_again',
         '#type' => 'password',
         '#attributes' => array('placeholder' => t('*Re type Password'), 'autocomplete' => 'off'),
-        '#required' => TRUE,
+        //'#required' => TRUE,
         '#prefix' => '<div id="unpass" class="col-xs-6">',
         '#suffix' => '</div></div>',
       );
@@ -360,53 +360,73 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
       }
 
-      if (!empty($get_user_check_email)) {
-        $error['mail'] = t("Email id Already Exist!");
+      
+      $first_name = trim($form_state['values']['fname']);
+      if(empty($first_name)) {
+        $error['fname'] = t('Please enter first name.');
+      } else {
+        $error['fname'] = t('');
+      }
+      
+      if ($first_name) {
+        if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
+          $error['fname'] = t('First name accept only letters, dot and white space.');
+          form_set_error('fname', t(''));
+        } else {
+          $error['fname'] = t('');
+        }
+      }
+      
+      $last_name = trim($form_state['values']['lname']);
+      if ($last_name) {
+        if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
+          $error['lname'] = t('Last name accept only letters, dot and white space.');
+          form_set_error('lname', t(''));
+        } else {
+          $error['lname'] = t('');
+        }
+      }
+      
+      if (empty($mail) && empty($form_state['values']['mobile'])) {
+        $error['mail'] = t("Please Enter Email/Mobile !");
         form_set_error('mail', t(""));
       }
       else {
-        $error['mail'] = t('');
+        $error['mail'] = t("");
       }
 
-      if (!empty($get_user_check_mobile) && !empty($form_state['values']['mobile'])) {
-        $error['mobile'] = t("Mobile Number Already Exist!");
-        form_set_error('mobile', t(""));
-      }
-      else {
-        $error['mobile'] = t('');
+      if (!empty($form_state['values']['mail'])) {
+        if (!filter_var($form_state['values']['mail'], FILTER_VALIDATE_EMAIL)) {
+          $error['mail'] = t("Please enter valid email address.");
+          form_set_error('mail', t(''));
+        }
+        else if (!empty($get_user_check_email)) {
+          $error['mail'] = t("Email id Already Exist!");
+          form_set_error('mail', t(""));
+        } 
+        else {
+          $error['mail'] = t("");
+        }
       }
 
       $u_mobile = $form_state['values']['mobile'];
       if (!empty($u_mobile)) {
         if (!preg_match('/^\d{10}$/', $u_mobile)) {
-          form_set_error('mobile', t("Enter valid Mobile Number!"));
+          $error['mobile'] = t("Enter valid Mobile Number!");
+          form_set_error('mobile', t(""));
+        }
+        else if (!empty($get_user_check_mobile)) {
+          $error['mobile'] = t("Mobile Number Already Exist!");
+          form_set_error('mobile', t(""));
+        }
+        else {
+          $error['mobile'] = t('');
         }
       }
-
-      if (empty($mail) && empty($form_state['values']['mobile'])) {
-
-        form_set_error('mail', t("Please Enter Email/Mobile !"));
+      else {
+        $error['mobile'] = t('');
       }
 
-      $first_name = trim($form_state['values']['fname']);
-      if ($first_name) {
-        if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
-          form_set_error('fname', t('First name accept only letters, dot and white space.'));
-        }
-      }
-      $last_name = trim($form_state['values']['lname']);
-      if ($last_name) {
-        if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
-          form_set_error('lname', t('Last name accept only letters, dot and white space.'));
-        }
-      }
-
-      if (!empty($form_state['values']['mail'])) {
-
-        if (!filter_var($form_state['values']['mail'], FILTER_VALIDATE_EMAIL)) {
-          form_set_error('mail', t('Please enter valid email address.'));
-        }
-      }
 
       $pass = $form_state['values']['password'];
       $cpass = $form_state['values']['password_again'];
@@ -414,17 +434,29 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       $min_length = 3;
       $max_length = 10;
       
-      if (!empty($pass)) {
-        if (strlen($pass) < $min_length) {
-          form_set_error('pass', t('password is too short, minimum is ' . $min_length . ' characters '));
-        }
-        elseif (strlen($pass) > $max_length) {
-          form_set_error('pass', t('password is too long, maximum is ' . $max_length . ' characters '));
-        }
+      if (empty($pass)) {
+        $error['password'] = t('please enter password');
+        form_set_error('password', t(""));
+        form_set_error('password_again', t(""));
       }
-      if ($pass != $cpass) {
-        form_set_error('pass', t('Password do not match.'));
+      else if (strlen($pass) < $min_length) {
+       $error['password'] = t('password is too short, minimum is ' . $min_length . ' characters ');
+       form_set_error('password', t(''));
+       form_set_error('password_again', t(""));
       }
+      else if (strlen($pass) > $max_length) {
+       $error['password'] = t('password is too long, maximum is ' . $max_length . ' characters ');
+       form_set_error('password', t(''));
+       form_set_error('password_again', t(""));
+      } else if ($pass != $cpass) {
+       $error['password'] = t('Password do not match.');
+       form_set_error('password', t(''));
+       form_set_error('password_again', t(""));
+      }
+      else {
+        $error['password'] = t('');
+      }
+
       $error_settings = array();
       $error_settings['custom_error'] = $error;
       drupal_add_js(array('itg_sso_reg' => array('settings' => $error_settings)), array('type' => 'setting'));
@@ -525,10 +557,10 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
 
         $account = user_save(NULL, $edit);
 
-        if(function_exists('itg_personalization_reddem_referfriend')) {
-          itg_personalization_reddem_referfriend($_SESSION['referral_key']);
-          unset($_SESSION['referral_key']);
-        }
+//        if(function_exists('itg_personalization_reddem_referfriend')) {
+//          itg_personalization_reddem_referfriend($_SESSION['referral_key']);
+//          unset($_SESSION['referral_key']);
+//        }
         // Set operation.
         $op = 'register_no_approval_required';
         // Send an email.

@@ -170,7 +170,7 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['field_story_medium_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_medium_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_medium_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_medium_image']['empty'] = '<img  class="no-result-image" src="../sites/all/themes/itg/images/itg_image370x208.jpg">';
+  $handler->display->display_options['fields']['field_story_medium_image']['empty'] = '<img alt="" class="no-result-image" src="../sites/all/themes/itg/images/itg_image370x208.jpg" title="" />';
   $handler->display->display_options['fields']['field_story_medium_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_medium_image']['settings'] = array(
     'image_style' => 'anchors_landing',

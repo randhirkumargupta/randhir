@@ -544,7 +544,6 @@ function itg_astro_node_presave($node) {
 
       case '227':
         // Zodiac Content
-
         unset($node->field_buzz_description['und']);
         unset($node->field_astro_video_thumbnail['und']);
         unset($node->field_astro_video['und']);
