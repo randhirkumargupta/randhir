@@ -14,8 +14,7 @@ function itg_reuters_content() {
   foreach ($tax as $key => $val) {
     $op[$val->tid] = strtolower($val->name);
   }
-
-  //$direc = get_dir_content($file_path . '/feeds/reuters/');
+  
   $final_dir = getcwd() . '/sites/all/modules/custom/itg_api/feeds/reuters/';
   $direc = get_dir_content($final_dir);
 

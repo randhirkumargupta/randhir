@@ -20,8 +20,7 @@
       
       var type = $('#edit-field-type-und').val();
       
-       $('#custom_add_another_item').click(function() {         
-         //edit-field-breaking-content-details
+       $('#custom_add_another_item').click(function() {
          //ajax-new-content
          $('input[name="field_breaking_content_details_add_more"]').mousedown();
        })
@@ -119,16 +118,6 @@
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
     }
   });
-  //$('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
-  
-  
-//  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
-//    var offSet = 200;
-//    var dataOffset = $(this).offset().top;
-//    var targetOffset = dataOffset - offSet;
-//    $("body, html").animate({scrollTop: targetOffset}, 300);
-//  });
-
 
     }
 

@@ -20,14 +20,12 @@ function itg_event_registration_fields_configuration_form($form, &$form_state) {
     $display_array[$rel->name] = $rel->description;
   }
   $form["display"] = array(
-    '#type' => 'checkboxes',
-    //'#title' => 'Display',
+    '#type' => 'checkboxes',    
     '#options' => $display_array,
     '#default_value' => itg_event_registration_default_value($arg[1], 'display')
   );
   $form["requied_field"] = array(
-    '#type' => 'checkboxes',
-    //'#title' => 'Required', 
+    '#type' => 'checkboxes',     
     '#options' => $value,
     '#default_value' => itg_event_registration_default_value($arg[1], 'require')
   );

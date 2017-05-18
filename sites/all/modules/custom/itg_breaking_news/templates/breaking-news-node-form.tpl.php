@@ -49,19 +49,11 @@
 </div>
 
   <div id="AkamaiSettings" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
-                <div class="itg-form-section">
-                    <?php print drupal_render($form['akamai_timeout']); ?>
-                </div>
-          </div>
-
-<!--<div id="Relatedcontent">
-  <h2 class="story-title">Related content</h2>
-  <?php //print drupal_render($form['field_common_related_content']); ?>
-</div>-->
-
-
-<!--<h2 id="title-metatags" class="story-title"><?php //echo t('SEO Meta Tags'); ?></h2>-->
+    <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+    <div class="itg-form-section">
+        <?php print drupal_render($form['akamai_timeout']); ?>
+    </div>
+  </div>
 
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
