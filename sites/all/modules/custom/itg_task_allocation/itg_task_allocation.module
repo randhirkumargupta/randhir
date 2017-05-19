@@ -375,7 +375,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     'body' => $content,
     'subject' => $task_subject,
   );
-  $to = 'gourav.walia@kelltontech.com';
+//  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -596,7 +596,8 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $content,
       'subject' => $subject,
     );
-    $to_assignee = 'gourav.walia@kelltontech.com';
+//    $to_assignee = 'gourav.walia@kelltontech.com';
+    $to_assignee = $var->ur_mail;
 //    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
@@ -627,7 +628,8 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $content,
       'subject' => $subject,
     );
-    $to_assigner = 'gourav.walia@kelltontech.com';
+//    $to_assigner = 'gourav.walia@kelltontech.com';
+    $to_assigner = $var->mail;
 //    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
