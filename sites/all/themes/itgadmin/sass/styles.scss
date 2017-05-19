@@ -7345,6 +7345,13 @@ div.node{
       line-height: 26px;
       text-align: center;
       width: 134px;
+      & + div.description{
+        @extend .desc-popup;
+        left: 375px;
+      }
+      &:hover + div.description{
+        display: block;
+      }
     }
   }
   #edit-field-upload-video{
@@ -9598,7 +9605,6 @@ div.node{
 .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail, {
   width: 220px;
 }
-.browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
 #videoupload #loader-data{
   position: fixed;
   top: 0;
