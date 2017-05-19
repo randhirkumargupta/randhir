@@ -1225,6 +1225,11 @@ function itg_videogallery_menu() {
       'access arguments' => array('access content'),
       'type' => MENU_CALLBACK,
   );
+  $items['dm-to-s3'] = array(
+      'page callback' => 'itg_videogallery_dm_to_s3',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+  );
 
   $items['video-delete-parent'] = array(
       'page callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
@@ -2061,6 +2066,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
       'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
       'callback' => 'itg_videogallery_s3_file_to_dm',
   );
+  $items['itg-videogallery-dm-to-s3'] = array(
+      'description' => 'This is the callback for store dm file to s3',
+      'callback' => 'itg_videogallery_dm_to_s3',
+  );
   $items['save-video-bitrates'] = array(
       'description' => 'This is use for store video birates urls',
       'callback' => 'itg_videogallery_video_bitrate',
@@ -2097,7 +2106,7 @@ function itg_videogallery_thumb_url() {
         $thumb_url = $api->get(
                 '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
         );
-   
+
         $duration = '';
         if ($thumb_url['duration'] < 3600) {
           $duration = gmdate("i:s", $thumb_url['duration']);
@@ -2114,10 +2123,9 @@ function itg_videogallery_thumb_url() {
                     'publishing_progress' => $thumb_url['publishing_progress'],
                     'video_duration' => $duration
                 ))
-               // ->condition('fid', $val->fid, '=')
+                // ->condition('fid', $val->fid, '=')
                 ->condition('eid', $val->eid, '=')
                 ->execute();
-      
       }
     } catch (Exception $e) {
       
@@ -2147,7 +2155,7 @@ function itg_videogallery_thumb_url() {
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
-   
+
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
     }
@@ -2426,29 +2434,53 @@ function get_video_filed_collection_by_its_id($entity_fid) {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $query = db_select('itg_solr_video_info', 'drd');
-  $query->fields('drd', array('solr_video_id'));
-//$query->condition('is_delete', '1', '!=');
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd', array('video_id', 'encoding_progress'));
+  $query->leftJoin('itg_video_bitrates_data', 'ivbd', 'ivbd.video_id = drd.video_id');
+  $query->condition('encoding_progress', '100', '=');
+  $query->isNull('is_download');
   $result = $query->execute()->fetchall();
 
-  foreach ($result as $vid) {
-    itg_videogallery_update_embedcode_url($vid->solr_video_id);
+  foreach ($result as $ke=> $vid) {
+    pr($ke);
+    //itg_videogallery_update_embedcode_url($vid->video_id);
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->solr_video_id . "?fields=stream_h264_hd1080_url,stream_h264_hd_url,stream_h264_hq_url,stream_h264_ld_url,stream_h264_url");
+    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_hd1080_url,stream_h264_hd_url,stream_h264_hq_url,stream_h264_ld_url,stream_h264_url");
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
     curl_close($ch);
-    p($content);
-    db_merge('itg_video_bitrates_data')
-            ->key(array('video_id' => $vid->solr_video_id))
-            ->fields(array(
-                'video_id' => $vid->solr_video_id,
-                'responce' => $content
-            ))
-            ->execute();
+    if (!empty($content)) {
+      $is_deleted = "NULL";
+      $query = db_select('itg_video_bitrates_data', 'ivbd');
+      $query->fields('ivbd');
+      $query->condition('video_id', $vid->video_id);
+      $result = $query->execute()->fetchall();
+ 
+      if (!empty($result)) {
+        if ($result[0]->is_download != 1) {
+          db_update('itg_video_bitrates_data')
+                  ->fields(array(
+                      'video_id' => $vid->video_id,
+                      'responce' => $content,
+                  ))->condition('video_id', $vid->video_id)
+                  ->execute();
+        }
+      }
+      else {
+       
+        db_insert('itg_video_bitrates_data')
+                ->fields(array(
+                    'video_id' => $vid->video_id,
+                    'responce' => $content,
+                ))
+                ->execute();
+      }
+     
+    }
   }
+  
 }
 
 /**
@@ -3282,7 +3314,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
   $file_name = basename($real_path);
   $chek_alredy_insert = itg_videogallery_dailymotion_check_alredy_send($file_name);
   if (empty($chek_alredy_insert)) {
-   
+
     try {
 
       $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
@@ -3347,6 +3379,54 @@ function itg_videogallery_dailymotion_send_video($real_path) {
   }
 
   return $result;
+}
+
+/**
+ * Implements function for get options for Local FTP file list and used
+ * @return array
+ */
+function itg_videogallery_dm_to_s3() {
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
+  global $user;
+  $dataarray = array('stream_h264_hd1080_url' => '1920x1080',
+      'stream_h264_hd_url' => '1280x720',
+      'stream_h264_hq_url' => '848x480',
+      'stream_h264_ld_url' => '320x240',
+      'stream_h264_url' => '512x384',
+  );
+  $query = db_select('itg_video_bitrates_data', 'ivbd');
+  $query->fields('ivbd');
+  $query->isNull('is_download');
+  $result = $query->execute()->fetchall();
+  foreach ($result as $key => $value) {
+    $data_responce = $value->responce;
+    $data_responce = json_decode($data_responce);
+    foreach ($data_responce as $index_url => $biturl) {
+      if (!empty($biturl)) {
+        $video_urlsdata = $value->video_id . '_' . $dataarray[$index_url] . '.mp4';
+        $senddata = itg_video_send_dm_to_s3($biturl, $video_urlsdata);
+        if (!empty($senddata)) {
+          $node = new stdClass();
+          $node->title = $video_urlsdata;
+          $node->type = "itg_bitrates_video";
+          node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+          $node->language = LANGUAGE_NONE;
+          $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
+          $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
+          $node->uid = $user->uid;
+          $node->status = 1; //(1 or 0): Published or not
+          $node->promote = 0; //(1 or 0): Promoted to front page
+          node_save($node);
+          $query = db_update('itg_video_bitrates_data');
+          $query->fields(array('is_download' => 1));
+          $query->condition('video_id', $value->video_id, '=');
+          $query->execute();
+        }
+      }
+    }
+  }
+
+  // Use the high-level iterators (returns ALL of your objects).
 }
 
 /**

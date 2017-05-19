@@ -40,5 +40,25 @@ $data_video = array();
 }
 // Instantiate the client.
 
+function itg_video_send_dm_to_s3($bitrate_url,$video_name) {
+  
+ $bucket = variable_get('aws_bucket');
+$aws_access_key = variable_get('aws_access_key');
+$aws_secret_key = variable_get('aws_secret_key');
+$aws_region = variable_get('aws_region');
+$aws_video_dir = variable_get('aws_video_dir');
+
+$s3 = S3Client::factory(array('key'=>$aws_access_key, 'secret'=>$aws_secret_key, 'signature' => 'v4', 'region'=>$aws_region));
+$result = $s3->putObject(array(
+        'Bucket' => $bucket,
+        'Key'    => $aws_video_dir.$video_name,
+        'Body'   => file_get_contents($bitrate_url),
+        'ACL'    => 'public-read'
+    ));
+
+return  $result['ObjectURL'];
+
+}
+
 
 ?>
