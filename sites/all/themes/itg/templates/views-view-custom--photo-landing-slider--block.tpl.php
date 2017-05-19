@@ -51,12 +51,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 
           if (empty($opt['status']) || $opt['status'] == 0) {
             ?> 
-                                                      <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+          <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
             <?php
           }
           else {
             ?>
-                                                      <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
+          <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
             <?php
           }
         }
@@ -108,11 +108,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <div class="photo-by-slider">
       <?php foreach ($rows as $index => $row): ?>
         <?php if (!empty($row['field_photo_byline'])) { ?>
-                        <p class="photo-by">PHOTO: <?php print $row['field_photo_byline']; ?></p>
+                        <p class="photo-by"><?php print t('PHOTO:');?> <?php print $row['field_photo_byline']; ?></p>
         <?php }
         elseif (!empty($row['field_photo_by'])) {
           ?>
-                        <p class="photo-by">PHOTO: <?php print $row['field_photo_by']; ?></p>
+                        <p class="photo-by"><?php print t('PHOTO:');?> <?php print $row['field_photo_by']; ?></p>
         <?php } ?>
     <?php endforeach; ?>
         </div>
@@ -186,12 +186,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 
             if (empty($opt['status']) || $opt['status'] == 0) {
               ?> 
-                                                      <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+              <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
               <?php
             }
             else {
               ?>
-                                                      <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
+              <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
               <?php
             }
           }

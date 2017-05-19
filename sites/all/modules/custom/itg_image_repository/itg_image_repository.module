@@ -67,8 +67,7 @@ function itg_image_repository_filefield_sources_info() {
         'description' => t('Select a file to use from a file browser.'),
         'process' => 'filefield_source_itg_image_repository_process',
         'value' => 'filefield_source_itg_image_repository_value',
-        'weight' => -1,
-            //'file' => 'sources/itg_image_repository.inc',
+        'weight' => -1,        
     );
     
     $source['itg_image_video'] = array(
@@ -76,8 +75,7 @@ function itg_image_repository_filefield_sources_info() {
         'label' => t('ITG Video Repository'),
         'description' => t('Select a Video to daily motion.'),
         'process' => 'filefield_source_itg_image_video_process',
-        'weight' => -1,
-            //'file' => 'sources/itg_image_repository.inc',
+        'weight' => -1,        
     );
 
     return $source;
@@ -157,20 +155,13 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode(')', @$getimageoptions[1]);
     $getimagehightwidth = explode('x', @$getimageoptions[0]);
 
-//if($element['#field_name']=='field_story_facebook_video' || $element['#field_name']=='field_story_twitter_video' || $element['#field_name']=='field_videogallery_video_upload' )
-//    {
-//            $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
-// 
-//    } else {
-             $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
-
-   // }   
+    $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
+      
     $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
     );
-
 
     $element['filefield_itg_image_repository']['select'] = array(
         '#name' => implode('_', $element['#array_parents']) . '_itg_image_repository_select',
@@ -213,22 +204,18 @@ function filefield_source_itg_image_video_process($element, &$form_state, $form)
     $filepath_id = $element['#id'] . '-itg_image_repository-path';
     $display_id = $element['#id'] . '-itg_image_repository-display';
     $select_id = $element['#id'] . '-itg_image_repository-select';
-   
-   
 
     $getimageoptions = explode('(', @$element['#description']);
     $getimageoptions = explode(')', @$getimageoptions[1]);
     $getimagehightwidth = explode('x', @$getimageoptions[0]);
 
-
-            $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
+    $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
  
-     $itg_image_repository_function="showimagerepopopu('".$url."')";
+    $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_video']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
     );
-
 
     $element['filefield_itg_image_video']['select'] = array(
         '#name' => implode('_', $element['#array_parents']) . '_itg_image_repository_select',
@@ -310,21 +297,7 @@ function theme_filefield_source_itg_image_repository_element($variables) {
 function filefield_source_itg_image_repository_page($entity_type, $bundle_name, $field_name) {
     global $conf;
 
-    // Check access.
-//    if (!module_exists('itg_image_repository') || !itg_image_repository_access() || !$instance = field_info_instance($entity_type, $field_name, $bundle_name)) {
-//        return drupal_access_denied();
-//    }
     $field = field_info_field($field_name);
-
-//    // Full mode
-//    if (!empty($instance['widget']['settings']['filefield_sources']['source_itg_image_repository']['itg_image_repository_mode'])) {
-//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_full';
-//    }
-//    // Restricted mode
-//    else {
-//        $conf['itg_image_repository_custom_scan'] = 'filefield_source_itg_image_repository_custom_scan_restricted';
-//        $conf['itg_image_repository_custom_field'] = $field + array('_uri' => file_field_widget_uri($field, $instance));
-//    }
 
     // Disable absolute URLs.
     $conf['itg_image_repository_settings_absurls'] = 0;
@@ -445,7 +418,6 @@ function filefield_source_itg_image_repository_disable_perms(&$itg_image_reposit
  * {@inheritdoc}
  */
 function itg_image_repository_permission() {
-
     return array(
         'administer itg_image_repository' => array(
             'title' => t('Administer itg_image_repository'),

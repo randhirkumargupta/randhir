@@ -6,7 +6,7 @@
  */
 ?>
 
-ITG Comparative Reports
+<?php print t('ITG Comparative Reports'); ?>
 
 <?php print $header ?>
 <?php print $body ?>

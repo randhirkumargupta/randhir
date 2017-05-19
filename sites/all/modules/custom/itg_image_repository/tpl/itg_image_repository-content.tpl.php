@@ -31,39 +31,31 @@ global $base_url;
 
     <div id="message-box"></div>
     <div class="list-head image_repository">
-        <div class="div-upload-img active" >Upload</div>
-        <div class="div-search-img" disabled="disabled">Search</div>
-
+        <div class="div-upload-img active" ><?php print t('Upload'); ?></div>
+        <div class="div-search-img" disabled="disabled"><?php print t('Search'); ?></div>
     </div>
 
-    <!-- 
-    <div id="ops-wrapper">
-      <div id="op-items"><ul id="ops-list"><li></li></ul></div>
-      <div id="op-contents"></div>
-    </div> -->
 
     <div id="resizable-content">
 
         <div id="browse-wrapper">
-
-            <!-- <div id="navigation-wrapper">
-               <div class="navigation-text" id="navigation-header"><span><?php //print t('Navigation');   ?></span></div>
-               <ul id="navigation-tree"><li class="expanded root"><?php //print $tree;   ?></li></ul>
-             </div>
-            -->
 
             <div id="navigation-resizer" class="x-resizer"></div>
 
             <div id="sub-browse-wrapper">
 
                 <div id="file-header-wrapper">
-                    <table id="file-header" class="files"><tbody><tr>
-                                <td class="name"><?php print t('File name'); ?></td>
-                                <td class="size"><?php print t('Size'); ?></td>
-                                <td class="width"><?php print t('Width'); ?></td>
-                                <td class="height"><?php print t('Height'); ?></td>
-                                <td class="date"><?php print t('Date'); ?></td>
-                            </tr></tbody></table>
+                    <table id="file-header" class="files">
+                      <tbody>
+                        <tr>
+                          <td class="name"><?php print t('File name'); ?></td>
+                          <td class="size"><?php print t('Size'); ?></td>
+                          <td class="width"><?php print t('Width'); ?></td>
+                          <td class="height"><?php print t('Height'); ?></td>
+                          <td class="date"><?php print t('Date'); ?></td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
 
                 <div id="file-list-wrapper">

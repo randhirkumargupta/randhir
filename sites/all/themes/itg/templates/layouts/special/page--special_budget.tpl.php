@@ -6,7 +6,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-//$preview = $widget_data['preview'];
 // configuration for social sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-2']['block_title']);
@@ -65,9 +64,9 @@ if (!empty($device[0])) {
                     <?php endif; ?>
                 </div>
               <?php endif; ?>
-              <!--  
+              
               <?php if ($secondary_menu): ?>
-                            <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
+                            
                 <?php
                 print theme('links__system_secondary_menu', array(
                   'links' => $secondary_menu,
@@ -81,9 +80,9 @@ if (!empty($device[0])) {
                   ),
                 ));
                 ?>
-                            </nav>
+                           
               <?php endif; ?>
-              -->
+             
               <?php print render($page['header']); ?>
 
           </section>
@@ -122,7 +121,7 @@ if (!empty($device[0])) {
 
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-            <?php //print render($page['content']);   ?>
+           
             <?php
             $itg_class = 'itg-admin';
             if ($theme != 'itgadmin') {

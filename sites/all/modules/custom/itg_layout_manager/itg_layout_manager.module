@@ -131,9 +131,7 @@ function itg_state_election() {
   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
 
   foreach ($terms as $values) {
-
     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
-
       $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
       $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
       $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
@@ -266,12 +264,9 @@ function make_graph() {
             name: "Seats",
 			data: combined
         }]
-    });           
-
-
-
+    });
                 
-        });', array('type' => 'inline', 'scope' => 'footer'));
+    });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
 
@@ -715,7 +710,6 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
   global $theme;
 
   if ($sectinno >= '25') {
-
     $sectinno = $sectinno + 1;
   }
 
@@ -752,7 +746,6 @@ function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
   global $theme;
 
   if ($sectinno >= '25') {
-
     $sectinno = $sectinno + 1;
   }
 
@@ -797,15 +790,11 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['big_story'] = get_itg_widget('big_story_format');
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
-    $vars['widget_data'] = $data;
-    //$vars['itg_ad'] = get_ad_script('Home');
+    $vars['widget_data'] = $data;    
   }
 
   //section template display on front
   if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) && $theme == FRONT_THEME_NAME) {
-    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
-    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
     $query = db_select('taxonomy_term_hierarchy', 'tth');
     $query->fields('tth', array('parent'));
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
@@ -816,18 +805,13 @@ function itg_layout_manager_preprocess_page(&$vars) {
       $tpl_name = get_template_name_by_section_name($arg[2]);
 
       $tid_val = $arg[2]; //section id
-      /* if (!isset($tpl_name)) {
-        $tid_val = '';
-        $tpl_name = '';
-        }
-       */
+     
       if (!empty($tpl_name)) {
         drupal_set_title('');
         $data = get_layout_details($tid_val, $tpl_name, 'front');
         $vars['widget_data'] = $data;
         $tpl_name = str_replace('--', '__', $tpl_name);
-        $vars['theme_hook_suggestions'][] = $tpl_name;
-        //$vars['itg_ad'] = get_ad_script($tid_val);
+        $vars['theme_hook_suggestions'][] = $tpl_name;        
       }
       else {
         $vars['theme_hook_suggestions'][] = 'page__taxonomy_term';

@@ -168,7 +168,8 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
          unset($form['field_story_configurations']['und']['#options']['comment']);
       }
       if ($user->uid) {
-        $form['body']['und'][0]['#format'] = 'icon_format';
+//        $form['body']['und'][0]['#format'] = 'icon_format';
+                $form['body']['und'][0]['#format'] = 'full_html';
       }
       // $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
       // code for multiple byline

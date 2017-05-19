@@ -1181,6 +1181,7 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
+  
 
   global $user;
 //  if($view->name = 'programme_content' && $view->current_display == 'block') {
@@ -1251,7 +1252,11 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'anchor_landing_page') {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
   }
-
+  
+  if ($view->name == 'ediror_pick') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('editor_pic_tid');
+  }
+  
   if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
     $anchor_tid = variable_get('reporter_tid');
     foreach ($query->where[1]['conditions'] as $keys => $conditions) {

@@ -584,8 +584,8 @@ function itg_users_user_update(&$edit, $account, $category) {
         'body' => $mail_content,
         'subject' => $mail_subject,
       );
-//      $to = $account->mail;
-      $to = 'gourav.walia@kelltontech.com';
+      $to = $account->mail;
+//      $to = 'gourav.walia@kelltontech.com';
 
       $mail = drupal_mail('itg_users', 'send_password_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
@@ -619,8 +619,8 @@ function itg_users_user_update(&$edit, $account, $category) {
         'subject' => 'India Today | Role Updated!',
       );
 
-//      $to = $account->mail;
-      $to = 'gourav.walia@kelltontech.com';
+      $to = $account->mail;
+//      $to = 'gourav.walia@kelltontech.com';
       $mail = drupal_mail('itg_users', 'send_role_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
         return TRUE;
@@ -649,8 +649,8 @@ function itg_users_user_update(&$edit, $account, $category) {
       'subject' => 'India Today | Newsletter Subscription!',
     );
 
-//    $to = $account->mail;
-    $to = 'gourav.walia@kelltontech.com';
+    $to = $account->mail;
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -670,12 +670,29 @@ function itg_users_user_update(&$edit, $account, $category) {
 }
 
 /**
- * Implements hook_node_insert
+ * Implements hook_user_insert
  * @param type $edit
  * @param type $account
  * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) {
+  // code to insert new user in sso db
+  /*global $base_url;
+  $mail = $account->mail;
+  $uid = $account->uid;
+
+  db_set_active('sso_db');
+  $id = db_insert('itg_sso_email_history')
+      ->fields(array(
+        'email' => $mail,
+        'uid' => $uid,
+        'domain' => $base_url,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+  db_set_active();*/
+
+  // code end here
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
     if (function_exists('itg_netcore_mail_add_user')) {
       // code for subscribe for newsletter
@@ -690,8 +707,8 @@ function itg_users_user_insert(&$edit, $account, $category) {
       'subject' => 'India Today | Newsletter Subscription!',
     );
 
-//    $to = $account->mail;
-    $to = 'gourav.walia@kelltontech.com';
+    $to = $account->mail;
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;

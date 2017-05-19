@@ -78,9 +78,9 @@ function itg_loyalty_reward_share_point($user, $type, $nid = NULL) {
       $itg_query->condition('loyalty_type', $dedicated_point['label']);
   $itg_result = $itg_query->execute()->fetchField();
   
-    if (!empty($itg_result)) {
-      return TRUE;
-    }
+  if (!empty($itg_result)) {
+    return TRUE;
+  }
   
 }
 
@@ -146,7 +146,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
         
     }
   } else {
-    $user_id = $user->uid;
+      $user_id = $user->uid;
   }
   // Check user unique expiration key.
   $unique_exp_key = itg_loyalty_reward_unique_expiration($user_id);

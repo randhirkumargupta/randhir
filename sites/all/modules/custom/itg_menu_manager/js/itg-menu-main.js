@@ -52,11 +52,9 @@ jQuery(document).ready(function () {
         jQuery('#edit-category-icon-ajax-wrapper').css("display", "block");
     }
 
-    if (menu_level_val == 'vertical') {
-        //jQuery("input[name=title]").removeAttr("disabled");
+    if (menu_level_val == 'vertical') {        
         jQuery(".form-item-sections").css("display", "none");
         jQuery(".form-item-display-icon").css("display", "none");
     }
-
-    //console.log(menu_level_val);
+    
 });

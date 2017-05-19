@@ -452,6 +452,11 @@
 }   
 
 
+@media only screen and (min-width:991px) and (max-width: 1024px){
+  .sport-home-layout-page .itg-layout-615 .droppable,
+  .sport-home-layout-page .itg-layout-615 .auto-block-1, 
+  .sport-home-layout-page .itg-layout-615 .auto-block-2{height: 510px;}
+}
 @media only screen and (max-width:991px){
   /*CSS start education page special*/
   .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1{
@@ -605,9 +610,7 @@
 
 @media only screen and (max-width:768px){
   .block-itg-ads{overflow: hidden;}
-  .widget-wrapper {
-    overflow: initial;
-  }
+  
   header {
     margin-bottom: 15px;
   }
@@ -1198,6 +1201,20 @@
         max-width: 145px;
         margin-right: 8px;
       }
+      .relative-with-img, .related-story.relative-active{
+        float: none;
+        width: 100% !important;
+      }
+      .related-story.relative-active{
+        padding: 25px 0 0;
+        border: none;
+        border-top: 1px solid #dfdfdf;
+        margin-top: 25px;
+      }
+    }
+    .poll-replace-id .form-submit{
+      margin: 10px auto 0;
+      display: block;
     }
     .active-poll-title h2{
       @include font(17px,20px);
@@ -1247,7 +1264,9 @@
     }
   }
   .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer{
-    margin-right: 10px;
+    margin-right: 0;
+    padding: 0px 8px 10px 0;
+    width: 33.33%;
   }
 
   /*css end poll page*/  
@@ -1764,7 +1783,8 @@
     margin-bottom: 10px;
   }
 
-
+.state-election-map-wrapper .left-chart .graph-design, 
+.state-election-map-wrapper .left-chart .graph-table-wrapper{width: 100%;}
 }
 
 

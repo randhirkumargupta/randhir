@@ -83,10 +83,8 @@ jQuery(document).ready(function () {
             beforeSend: function () {
                 jQuery('#widget-ajex-loader').show();
             },
-            'success': function (result)
-            {
+            'success': function (result) {
                 var obj = jQuery.parseJSON(result);
-
 
                 if (obj.success) {
                     jQuery('#widget-ajex-loader').hide();
@@ -264,11 +262,12 @@ jQuery(document).ready(function () {
     var ugc_value = url.substring(url.lastIndexOf('/') + 1);
     var ugc_value_id = ugc_value.toLowerCase();
     ugc_arr = ['story', 'videogallery', 'photogallery'];
+    
     if(jQuery.inArray(ugc_value_id, ugc_arr) != -1) {
         jQuery('#'+ugc_value_id).trigger('click');
     }
     
     jQuery('#edit-zip-code').keyup(function() {
-                this.value = this.value.replace(/[^\d\.\-]/g,'');
-            });
+        this.value = this.value.replace(/[^\d\.\-]/g,'');
+    });
 });

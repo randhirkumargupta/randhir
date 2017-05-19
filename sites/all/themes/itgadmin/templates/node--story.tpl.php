@@ -45,7 +45,7 @@
             ?>
             <?php print render($content['field_stroy_city']); ?>
             <?php print render($content['field_story_category']); ?>
-            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+            <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
             <?php
             $extra_large = $content['field_story_extra_large_image'];
             if (!empty($extra_large)):
@@ -56,7 +56,7 @@
             <?php print render($content['field_story_courtesy']); ?>
             <?php print render($content['field_story_reporter']); ?>
             <div class="field field-name-field-story-body">
-              <div class="field-label">Story Body:&nbsp;</div>
+              <div class="field-label"><?php print t('Story Body:'); ?>&nbsp;</div>
               <div class="field-items">
                 <?php 
                 $res_body= render($content['body']);
@@ -118,7 +118,6 @@
                     print render($content['field_facebook_animated_image']);
                     print render($content['field_facebook_map_position']);
                     print render($content['field_map_embed_code']);
-                    //print render($content['field_facebook_gallery_associate']);                        
                     print render($content['field_social_embed_code_position']);
                     print render($content['field_social_embed_code']);
                 }
@@ -135,7 +134,6 @@
           <div class="configuration content-box">
             <h2><?php print t('Configuration'); ?></h2>
             <div class="content-details"><?php print render($content['field_story_configurations']); ?>
-              <?php //print render($content['field_story_client_title']);  ?>
               <?php print render($content['field_story_media_files_syndicat']); ?>
             </div>
           </div>
@@ -319,7 +317,7 @@
       else {
         ?>
         <div class="promote-sidebar">
-          <div class="promote-lock">Someone  is already working on this</div>
+          <div class="promote-lock"><?php print t('Someone  is already working on this');  ?></div>
         </div> 
     <?php }
     ?>

@@ -91,7 +91,7 @@ h4.heading a {
 
 .list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snap-post ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul, #block-itg-front-end-common-latest-from-aajtak ul,
 #block-itg-front-end-common-latest-from-pti ul,
-#block-itg-front-end-common-latest-from-businesstoday ul {
+#block-itg-front-end-common-latest-from-businesstoday ul, .page-state-election .key-candidate ul {
   list-style-type: none;
 }
 
@@ -5002,12 +5002,11 @@ h1.category-heading {
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
   padding: 0px 0px 10px 0;
-  display: inline-block;
+  display: block;
 }
 .poll-wrapper .poll-data .poll-replace-id .form-radios .poll-ans-caption {
   padding: 10px 15px;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
 }
 .poll-wrapper .poll-data .relative-with-img {
   width: 56%;
@@ -5066,6 +5065,9 @@ h1.category-heading {
 }
 .poll-wrapper .social-share ul li {
   padding-right: 4px;
+}
+.poll-wrapper .active-poll-title {
+  overflow: hidden;
 }
 .poll-wrapper .active-poll-title h2 {
   font-size: 20px;
@@ -5140,6 +5142,7 @@ h1.category-heading {
   position: relative;
   padding-left: 10px;
   padding-bottom: 25px;
+  word-wrap: break-word;
 }
 .poll-wrapper .related-story .related-stories li:before {
   position: absolute;
@@ -14020,6 +14023,156 @@ span.close_btt {
 
 .nested-taxonomy-tree a:hover {
   color: #a00606 !important;
+}
+
+.page-state-election section.sidebar {
+  border: none;
+}
+.page-state-election section.sidebar .block {
+  margin-bottom: 50px;
+}
+.page-state-election section.sidebar .block-title {
+  color: #09619f;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  font-size: 16px;
+  line-height: 18px;
+}
+.page-state-election .key-candidate {
+  font-family: "Roboto", sans-serif;
+  max-height: 282px;
+  overflow: auto;
+}
+.page-state-election .key-candidate .most_popular {
+  border: none;
+}
+.page-state-election .key-candidate .list-state {
+  margin: 0 0px 20px 0px;
+}
+.page-state-election .key-candidate .list-state span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+.page-state-election .key-candidate .list-state span:hover, .page-state-election .key-candidate .list-state span.active {
+  background: #1b60a3;
+  color: #fff;
+}
+.page-state-election .key-candidate .key-candidate-detail {
+  font-family: "Roboto", sans-serif;
+  display: none;
+}
+.page-state-election .key-candidate .key-candidate-detail ul {
+  zoom: 1;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul:before, .page-state-election .key-candidate .key-candidate-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.page-state-election .key-candidate .key-candidate-detail ul:after {
+  clear: both;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li {
+  float: left;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(1) {
+  width: 25%;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(2) {
+  width: 56%;
+  padding-top: 5px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(3) {
+  width: 18%;
+  text-align: center;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .candidate-name {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .constituancy {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #8f8f8f;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li img {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  height: 63px;
+  margin-left: 2px;
+  padding: 5px;
+  width: 63px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status {
+  font-size: 15px;
+  font-weight: 700;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status i {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 35px;
+  color: #fff;
+  font-size: 28px;
+  background: #ccc;
+  margin-top: 12px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status span {
+  display: block;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.green {
+  color: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.green i {
+  background: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.red {
+  color: #d80a02;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.red i {
+  background: #d80a02;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.yellow {
+  color: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.yellow i {
+  background: #efc107;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.orange {
+  color: #ff8300;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.orange i {
+  background: #ff8300;
+}
+.page-state-election .key-candidate .key-candidate-detail.key-candidate-detail-first {
+  display: block;
+}
+
+.top-n-most-popular-stories .widget-wrapper .data-holder {
+  height: calc(100% - 22px);
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_scrollTools {
+  width: 3px;
 }
 
 @media (min-width: 768px) {

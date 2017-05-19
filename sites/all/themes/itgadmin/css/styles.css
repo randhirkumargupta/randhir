@@ -8852,7 +8852,8 @@ div.node #comments h2 {
 .node-story-form .itg-sidebar-form .itg-sidebar-form-section#Configuration,
 .node-videogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration,
 .node-photogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration {
-  overflow: hidden;
+  float: left;
+  width: 100%;
 }
 .node-story-form .itg-sidebar-form .itg-form-section,
 .node-videogallery-form .itg-sidebar-form .itg-form-section,
@@ -12478,6 +12479,10 @@ div#edit-byline-names-wrapper {
   padding: 0 !important;
 }
 
+.tag-box-input-date {
+  display: inline-block;
+  vertical-align: top;
+}
 .tag-box-input-date span.error {
   font-size: 12px;
   margin-top: -10px;
@@ -12489,4 +12494,22 @@ div#edit-byline-names-wrapper {
 
 fieldset#edit-xmlsitemap {
   display: none !important;
+}
+
+#page form .itg-sidebar-form div.description {
+  left: auto;
+  right: 102%;
+}
+#page form .itg-sidebar-form div.description:before {
+  left: auto;
+  right: -21px;
+  border-color: transparent transparent transparent #d9d9d9;
+}
+#page form .itg-sidebar-form div.description:after {
+  left: auto;
+  right: -19px;
+  border-color: transparent transparent transparent #fff;
+}
+#page form .itg-sidebar-form .form-item-path-pathauto div.description {
+  right: 108%;
 }
