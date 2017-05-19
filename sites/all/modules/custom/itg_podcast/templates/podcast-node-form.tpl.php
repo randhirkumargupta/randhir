@@ -9,9 +9,9 @@
 
 <div id="SectionCategory">
  <h2 class="story-title"><?php print t('Section'); ?></h2>
-            <div class="itg-form-section">
-                    <?php print drupal_render($form['category_holder']); ?>
-                </div>
+ <div class="itg-form-section">
+  <?php print drupal_render($form['category_holder']); ?>
+ </div>
 </div>
 <div id="audioupload">
   <h2 class="story-title"><?php print t('Audio Upload'); ?></h2>
@@ -36,11 +36,11 @@
     
 </div>
  <div id="AkamaiSettings" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
-                <div class="itg-form-section">
-                    <?php print drupal_render($form['akamai_timeout']); ?>
-                </div>
-          </div>
+    <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+    <div class="itg-form-section">
+        <?php print drupal_render($form['akamai_timeout']); ?>
+    </div>
+</div>
 
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>

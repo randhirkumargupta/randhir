@@ -135,7 +135,6 @@
                     $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
                 }
 
-
             });
             // Display loader onclick of add to cart link.
             $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function (event) {
@@ -157,6 +156,7 @@
             function test_loader_show() {
                 $('#widget-ajex-loader').show();
             }
+            
             function test_loader_hide() {
                 $('#widget-ajex-loader').hide();
             }

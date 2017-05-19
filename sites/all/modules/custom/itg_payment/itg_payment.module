@@ -189,7 +189,6 @@ function itg_payment_initial_info_update($data) {
  * @param array $data
  */
 function itg_payment_response_info_update($data) {
-
   try {
     db_merge('itg_payment_order_details')
         ->key(array("order_id" => $data['order_id']))
@@ -359,10 +358,6 @@ function update_event_registration_after_success($order_id) {
   $query->condition('pay.order_id' , $order_id);
   $registration_id = $query->execute()->fetchField();
 
-  /* $node = node_load($registration_id);
-    $node->status = 1;
-    field_attach_update('node', $node);
-    p($node); */
   foreach (array('node' , 'node_revision') as $table) {
     db_update($table)
         ->fields(array('status' => 1))

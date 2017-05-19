@@ -48,15 +48,15 @@
                 ?>
                 <div class="btn-redeem-points no-loader">
                 <?php
-                // Print points.
-                echo $data['item_after']['points'] . ' POINTS REDEEMED';
+                  // Print points.
+                  echo $data['item_after']['points'] . ' POINTS REDEEMED';
                 ?>
                 </div>
               </div>
               <div class="cart-dropdown-view-cart">
                 <?php
-                // Print link to cart page.
-                print l(t('VIEW CART'), 'cart'); 
+                  // Print link to cart page.
+                  print l(t('VIEW CART'), 'cart'); 
                 ?>
               </div>  
                 <?php

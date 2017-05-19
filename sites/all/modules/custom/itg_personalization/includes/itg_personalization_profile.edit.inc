@@ -432,5 +432,3 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
       array('query' => array('profile' => $success))
     );
 }
-
-?>

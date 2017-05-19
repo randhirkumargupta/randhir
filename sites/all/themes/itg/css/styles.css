@@ -5002,12 +5002,11 @@ h1.category-heading {
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
   padding: 0px 0px 10px 0;
-  display: inline-block;
+  display: block;
 }
 .poll-wrapper .poll-data .poll-replace-id .form-radios .poll-ans-caption {
   padding: 10px 15px;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
 }
 .poll-wrapper .poll-data .relative-with-img {
   width: 56%;
@@ -5066,6 +5065,9 @@ h1.category-heading {
 }
 .poll-wrapper .social-share ul li {
   padding-right: 4px;
+}
+.poll-wrapper .active-poll-title {
+  overflow: hidden;
 }
 .poll-wrapper .active-poll-title h2 {
   font-size: 20px;
@@ -5140,6 +5142,7 @@ h1.category-heading {
   position: relative;
   padding-left: 10px;
   padding-bottom: 25px;
+  word-wrap: break-word;
 }
 .poll-wrapper .related-story .related-stories li:before {
   position: absolute;
@@ -14160,6 +14163,16 @@ span.close_btt {
 }
 .page-state-election .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
+}
+
+.top-n-most-popular-stories .widget-wrapper .data-holder {
+  height: calc(100% - 22px);
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_scrollTools {
+  width: 3px;
 }
 
 @media (min-width: 768px) {

@@ -253,7 +253,6 @@ function itg_podcast_form_views_exposed_form_alter(&$form, &$form_state, $form_i
  * {@inheritdoc}
  */
 function itg_podcast_views_pre_render(&$view) {
-
   if ($view->name == "manage_podcast" || $view->name == "podcast_management") {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content_audio = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -416,10 +415,6 @@ function itg_podcast_node_presave($node) {
       $fid = $audio_files_data['field_podcast_upload_audio_file']['und'][0]['fid'];
       $file_data = file_load($fid);
       $file_url = file_create_url($file_data->uri);
-//      $getID3 = new getID3;
-//      //$head = array_change_key_case(get_headers($file_url, TRUE));
-//      $meta = $getID3->analyze($file_url);
-//      $duration = $meta['playtime_string'];
       // Handel field collection.
       // Add value in entity fieldcollection too.
       $node->field_podcast_audio_upload['und'][$audio_key]['field_podcast_audio_length']['und'][0]['value'] = $file_url;
@@ -431,7 +426,10 @@ function itg_podcast_node_presave($node) {
   }
 }
 
-
+/**
+ * Implements _get_audio_file_url()
+ * {@inheritdoc}
+ */
 function _get_audio_file_url($nid) {
   $node_data = node_load($nid);
   $filed_collection_value = $node_data->field_podcast_audio_upload['und'][0]['value'];

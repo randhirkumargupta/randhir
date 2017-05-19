@@ -40,39 +40,39 @@
             <h2><?php echo t('Basic Details'); ?></h2>
             <div class="content-details">
               <div class="field">
-                <div class="field-label">Title:</div>
+                <div class="field-label"><?php echo t('Title:'); ?></div>
                 <div class="field-items"><?php echo $title; ?></div>
               </div>
               <div class="field">
-                <div class="field-label">Quiz Instructions:</div>
+                <div class="field-label"><?php echo t('Quiz Instructions:'); ?></div>
                 <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
               </div>
               <div class="field">
-                <div class="field-label">Quiz Type:</div>
+                <div class="field-label"><?php echo t('Quiz Type:'); ?></div>
                 <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_quiz_type[LANGUAGE_NONE][0]['value'])); ?></div>
               </div>
               
               <?php if($node->field_quiz_type[LANGUAGE_NONE][0]['value'] == 'immediate') { ?>
               <div class="field">
-                <div class="field-label">Immediate Result:</div>
+                <div class="field-label"><?php echo t('Immediate Result:'); ?></div>
                 <div class="field-items">
                   <?php 
                   if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr') { 
-                    echo 'Question Wise Result';
+                    echo t('Question Wise Result');
                   } 
                   else {
-                    echo 'At the End';
+                    echo t('At the End');
                   } 
                   ?>
                 </div>
               </div>
               <?php } else { ?>
               <div class="field">
-                <div class="field-label">Winners:</div>
+                <div class="field-label"><?php print t('Winners:'); ?></div>
                 <div class="field-items">
                   <?php
                   if (empty($node->field_quiz_winners[LANGUAGE_NONE][0]['value'])) {
-                    echo 'None';
+                    echo t('None');
                   }
                   else {
                     echo $node->field_quiz_winners[LANGUAGE_NONE][0]['value'];
@@ -83,15 +83,15 @@
               
               <?php } ?>
               <div class="field">
-                <div class="field-label">Quiz Scoring Type:</div>
+                <div class="field-label"><?php echo t('Quiz Scoring Type:'); ?></div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_scoring_type[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <div class="field">
-                <div class="field-label">Questions Display Sequence:</div>
+                <div class="field-label"><?php echo t('Questions Display Sequence:'); ?></div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <div class="field">
-                <div class="field-label">Quiz Questions Format:</div>
+                <div class="field-label"><?php echo t('Quiz Questions Format:'); ?></div>
                 <div class="field-items"><?php echo ucfirst($node->field_survey_questions_format[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
             </div>
@@ -102,7 +102,7 @@
             <h2><?php echo t('Categorization'); ?></h2>
             <div class="content-details">
               <div class="field">
-                <div class="field-label">Section & categories:</div>
+                <div class="field-label"><?php echo t('Section & categories:'); ?></div>
                 <div class="field-items">
                   <?php
                   $total_cat = count($all_categories);
@@ -134,19 +134,19 @@
           echo '<div style="margin-top:10px"><strong>Question ' . ($ques_num + 1).':</strong></div>';
           ?>
               <div class="field">
-                 <div class="field-label">Question:</div>
+                 <div class="field-label"><?php print t('Question:'); ?></div>
                  <div class="field-items"><?php echo ucwords($question_arr['field_survey_question'][LANGUAGE_NONE][0]['value']) . '?'; ?></div>
                </div>
             <?php 
             if(!empty($media_type)){
             if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php print t('Add Media:'); ?></div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
             <?php }  else { ?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php print t('Add Media:'); ?></div>
                 <div class="field-items">
                   <video width="140" height="145" controls="controls">
                     <source src="<?php echo $media ?>" type="video/mp4"> 
@@ -158,17 +158,17 @@
               </div>
             <?php } }?>
            <div class="field">
-              <div class="field-label">Answer Type:</div>
+              <div class="field-label"><?php print t('Answer Type:'); ?></div>
               <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $question_arr['field_quiz_answer_type'][LANGUAGE_NONE][0]['value'])); ?></div>
             </div>
           <?php if($node->field_quiz_scoring_type[LANGUAGE_NONE][0]['value'] == 'weight') {?>    
           <div class="field">
-            <div class="field-label">Weightage:</div>
+            <div class="field-label"><?php print t('Weightage:'); ?></div>
             <div class="field-items"><?php echo $question_arr['field_quiz_weightage'][LANGUAGE_NONE][0]['value']; ?></div>
           </div>
           <?php } ?>   
             <div class="field">
-              <div class="field-label">Answer Option:</div>
+              <div class="field-label"><?php print t('Answer Option:'); ?></div>
               <div class="field-items"><?php echo ucwords($question_arr['field_quiz_option'][LANGUAGE_NONE][0]['value']); ?></div>
             </div>
           <?php
@@ -180,12 +180,12 @@
             if($answer_options_arr['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'] != 'A') {
             ?>
               <div class="field">
-                 <div class="field-label">Answer <?php echo $ans_num; ?>:</div>
+                 <div class="field-label"><?php print t('Answer'); ?> <?php echo $ans_num; ?>:</div>
                  <div class="field-items"><?php echo ucwords($answer_options_arr['field_quiz_answer_text'][LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <div class="field">
-                 <div class="field-label">Correct Answer:</div>
-                 <div class="field-items"><?php echo $answer_options_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'] ? ucwords($answer_options_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value']) : 'No'; ?></div>
+                 <div class="field-label"><?php print t('Correct Answer:'); ?></div>
+                 <div class="field-items"><?php echo $answer_options_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'] ? ucwords($answer_options_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value']) : t('No'); ?></div>
               </div>
            <?php 
             }
@@ -211,11 +211,11 @@
           $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
           $media_type = strtolower(substr(strrchr($media, '.'), 1));
           $media_path = $base_url . str_replace('public://', '/sites/default/files/', $media);
-          echo '<div style="margin-top:10px"><strong>Question ' . ($ques_num + 1).':</strong></div>';
+          echo '<div style="margin-top:10px"><strong>'.t('Question').' ' . ($ques_num + 1).':</strong></div>';
           ?>
       
           <div class="field">
-            <div class="field-label">Question:</div>
+            <div class="field-label"><?php echo t('Question:'); ?></div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value']) . '?'; ?></div>
           </div>
 
@@ -223,12 +223,12 @@
           if(!empty($media_type)){
           if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){ ?>
               <div class="field">
-                <div class="field-label">Add Media:</div>
+                <div class="field-label"><?php echo t('Add Media:'); ?></div>
                 <div class="field-items"><img src="<?php echo $media_path; ?>" height="100" width="130"/></div>
               </div>
           <?php }  else { ?>
                 <div class="field">
-                  <div class="field-label">Add Media:</div>
+                  <div class="field-label"><?php echo t('Add Media:'); ?></div>
                   <div class="field-items">
                     <video width="140" height="145" controls="controls">
                       <source src="<?php echo $media ?>" type="video/mp4"> 
@@ -240,17 +240,17 @@
                 </div>
           <?php } }?>
           <div class="field">
-            <div class="field-label">Answer Type:</div>
+            <div class="field-label"><?php echo t('Answer Type:'); ?></div>
             <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'])); ?></div>
           </div>
           <?php if($node->field_quiz_scoring_type[LANGUAGE_NONE][0]['value'] == 'weight') { ?>    
           <div class="field">
-            <div class="field-label">Weightage:</div>
+            <div class="field-label"><?php echo t('Weightage:'); ?></div>
             <div class="field-items"><?php echo $question_detail[$question_arr['value']]->field_quiz_weightage[LANGUAGE_NONE][0]['value']; ?></div>
           </div>
           <?php } ?>    
           <div class="field">
-            <div class="field-label">Answer Option:</div>
+            <div class="field-label"><?php echo t('Answer Option:'); ?></div>
             <div class="field-items"><?php echo ucwords($question_detail[$question_arr['value']]->field_quiz_option[LANGUAGE_NONE][0]['value']); ?></div>
           </div>
               
@@ -261,12 +261,12 @@
           foreach ($answer_options as $answer_options_arr) {
               $answer_detail = entity_load('field_collection_item', array($answer_options_arr['value'])); ?>
               <div class="field">
-                 <div class="field-label">Answer <?php echo $ans_num; ?>:</div>
+                 <div class="field-label"><?php echo t('Answer'); ?><?php echo $ans_num; ?>:</div>
                  <div class="field-items"><?php echo ucwords($answer_detail[$answer_options_arr['value']]->field_quiz_answer_text[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
               <div class="field">
-                 <div class="field-label">Correct Answer:</div>
-                 <div class="field-items"><?php echo $answer_detail[$answer_options_arr['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'] ? ucwords($answer_detail[$answer_options_arr['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value']) : 'No'; ?></div>
+                 <div class="field-label"><?php echo t('Correct Answer:'); ?></div>
+                 <div class="field-items"><?php echo $answer_detail[$answer_options_arr['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value'] ? ucwords($answer_detail[$answer_options_arr['value']]->field_quiz_correct_answer[LANGUAGE_NONE][0]['value']) : t('No'); ?></div>
               </div>
            <?php 
            $ans_num++;
@@ -284,7 +284,7 @@
         <div class="content-details">
           <div class="field">
             <div class="field-label">Published:</div>
-            <div class="field-items"><?php echo $node->status ? 'Yes':'No'; ?></div>
+            <div class="field-items"><?php echo $node->status ? t('Yes'):t('No'); ?></div>
           </div>
         </div>
       </div>
