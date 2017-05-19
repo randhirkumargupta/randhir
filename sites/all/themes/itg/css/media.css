@@ -1152,6 +1152,20 @@
     max-width: 145px;
     margin-right: 8px;
   }
+  .poll-wrapper .poll-data .relative-with-img, .poll-wrapper .poll-data .related-story.relative-active {
+    float: none;
+    width: 100% !important;
+  }
+  .poll-wrapper .poll-data .related-story.relative-active {
+    padding: 25px 0 0;
+    border: none;
+    border-top: 1px solid #dfdfdf;
+    margin-top: 25px;
+  }
+  .poll-wrapper .poll-replace-id .form-submit {
+    margin: 10px auto 0;
+    display: block;
+  }
   .poll-wrapper .active-poll-title h2 {
     font-size: 17px;
     font-size: 1.0625rem;
@@ -1232,7 +1246,9 @@
   }
 
   .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer {
-    margin-right: 10px;
+    margin-right: 0;
+    padding: 0px 8px 10px 0;
+    width: 33.33%;
   }
 
   /*css end poll page*/

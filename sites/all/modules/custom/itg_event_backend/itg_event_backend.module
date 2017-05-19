@@ -1780,13 +1780,15 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id) {
-  
+  $arg = arg();
   if (function_exists('itg_flag_get_count')) {
     $like = itg_flag_get_count($unique_id, 'like_count');
     $dislike = itg_flag_get_count($unique_id, 'dislike_count');
   }
   // get migrated count 
-  if(function_exists('itg_get_migrated_like_count')) {
+  //node type check for migrated content
+  $type = itg_event_backend_get_node_type($arg[1]);
+  if(function_exists('itg_get_migrated_like_count') && $type != 'photogallery') {
       $migrated_count = itg_get_migrated_like_count($unique_id);
   }
   
