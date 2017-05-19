@@ -517,7 +517,10 @@ function itg_akamai_node_delete($node) {
   if (user_access("purge itg akamai cache")) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $url = drupal_get_path_alias('node/' . $node->nid);
-      itg_akamai_clear_url($url, array(), $node);
+      $action = array(
+        'action' => 'remove',
+      );
+      itg_akamai_clear_url($url, $overrides);
     }
   }
 }
@@ -830,10 +833,10 @@ function itg_akamai_init() {
   if ($theme == FRONT_THEME_NAME) {
     // Akamai Setting for Home Page
     $is_front_page = drupal_is_front_page();
-    if (!empty($is_front_page)) {   // Checking if page is front page
+    if ($is_front_page) {   // Checking if page is front page
       $homepage_ttl = variable_get('itg_akamai_other_hpage');
       if (isset($homepage_ttl) && !empty($homepage_ttl)) {
-        akamai_max_age($max_age);
+        akamai_max_age($homepage_ttl);
       }
     }
     else { // For custom and other pages
