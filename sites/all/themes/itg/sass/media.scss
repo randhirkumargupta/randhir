@@ -1201,6 +1201,20 @@
         max-width: 145px;
         margin-right: 8px;
       }
+      .relative-with-img, .related-story.relative-active{
+        float: none;
+        width: 100% !important;
+      }
+      .related-story.relative-active{
+        padding: 25px 0 0;
+        border: none;
+        border-top: 1px solid #dfdfdf;
+        margin-top: 25px;
+      }
+    }
+    .poll-replace-id .form-submit{
+      margin: 10px auto 0;
+      display: block;
     }
     .active-poll-title h2{
       @include font(17px,20px);
@@ -1250,7 +1264,9 @@
     }
   }
   .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer{
-    margin-right: 10px;
+    margin-right: 0;
+    padding: 0px 8px 10px 0;
+    width: 33.33%;
   }
 
   /*css end poll page*/  
