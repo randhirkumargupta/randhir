@@ -39,9 +39,6 @@ if (isset($data['poll_image_exist_class']) && !empty($data['poll_image_exist_cla
   $poll_image_exist_class = $data['poll_image_exist_class'];
 }
 
-
-
-
 // Banner Image
 
 if (isset($data['poll_banner_image']) && !empty($data['poll_banner_image'])) {
@@ -72,7 +69,6 @@ if ($current_index < $poll_count && $current_index != $poll_count - 1) {
 }
 
 print '<div class="poll-wrapper"><h3><span>CURRENT POLL</span></h3>';
-//print '<div class="poll-wrapper-pre-navigator">' . $pre . '</div>';
 
 $isCookies = itg_poll_isCookies($nid);
 $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
@@ -85,7 +81,6 @@ else {
   print  '<div class="poll-data"><div class="poll-data'.$related_stories_class. $no_image_class.'">' . $poll_banner_image.$title . '<div class="poll-replace-id '.$poll_image_exist_class.'">' . itg_poll_get_past_data($nid) . '</div></div>' . $related_stories.'</div>';
 }
 
-//print '<div class="poll-wrapper-next-navigator">' . $next . '</div>';
 print '</div>';
 
 // Printing past polls
@@ -96,8 +91,6 @@ print '</div>';
        <?php  for($pc=0;$pc<$poll_count;$pc++){ ?> 
         <li><a class="<?php if(isset($_GET['poll_index']) && $_GET['poll_index']!='' && $_GET['poll_index']==$pc) print 'active';  ?>" href="<?php echo $base_url.'/itg_active_polls?poll_index='.$pc ?>"></a></li>
        <?php }  ?>
-    
-    
     </ul>
 </div>
 

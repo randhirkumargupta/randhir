@@ -96,7 +96,6 @@ function itg_live_tv_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'live_tv_integration_node_form') {
 
     if (isset($form['#node']->nid)) {
-
       $default_tv_value = $form['title']['#default_value'];
       $form['title']['#attributes'] = array('disabled' => TRUE);
     }
@@ -104,10 +103,10 @@ function itg_live_tv_form_alter(&$form, &$form_state, $form_id) {
     $itg_vid = taxonomy_vocabulary_machine_name_load('live_tv');
     $tax = taxonomy_get_tree($itg_vid->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     $op['_none'] = t(' - Select - ');
+    
     foreach ($tax as $key => $val) {
       $op[$val->name] = $val->name;
     }
-
 
     if (empty($form['#node']->nid)) {
       $form['title'] = array(
@@ -119,6 +118,7 @@ function itg_live_tv_form_alter(&$form, &$form_state, $form_id) {
         '#options' => $op,
       );
     }
+    
     $form['#after_build'][] = 'itg_live_tv_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_live_tv_form_custom_callback';
 
@@ -228,6 +228,7 @@ function itg_live_tv_views_pre_render(&$view) {
     $header_content_breaking .= l('Create Live tv integration', 'node/add/live-tv-integration', array('query' => array('destination' => 'live-tv-integration')));
     $view->attachment_before = $header_content_breaking;
   }
+  
   if (isset($view->result) && !empty($view->result)) {
     foreach ($view->result as $live_result) {
       if (!empty($live_result->field_field_live_tv_device)) {
@@ -250,15 +251,12 @@ function itg_live_tv_details() {
   if (!empty($n_id) && !empty($device)) {
     $exist_val = itg_live_tv_company($device);
     $errors = array_filter($exist_val);
-    // $node = node_load($n_id);
-    //p($node->field_live_tv_device);
+    
     if (!empty($errors)) {
       foreach ($exist_val as $val) {
         $node = node_load($val);
-        foreach ($node->field_live_tv_device[LANGUAGE_NONE] as $key => $value) {
-          // print $key.'upper';
-          if ($value['value'] == $device) {
-            // print $value['value'].'yes';
+        foreach ($node->field_live_tv_device[LANGUAGE_NONE] as $key => $value) {          
+          if ($value['value'] == $device) {            
             unset($node->field_live_tv_device[LANGUAGE_NONE][$key]);
             field_attach_presave('node', $node);
             field_attach_update('node', $node);
@@ -297,20 +295,17 @@ function itg_live_tv_company($device) {
  * @param int $nid
  */
 function itg_get_live_tv_code($nid) {
-  if (!empty($nid))
-  {
+  if (!empty($nid)) {
     $query = db_select('field_data_field_ads_ad_code', 's');
     $query->fields('s', array('field_ads_ad_code_value'))
         ->condition('s.entity_id', $nid, '=');
     $query->range(0, 1);
     $result = $query->execute();
     $tv_code = $result->fetchField();
-    if ($tv_code)
-    {
+    if ($tv_code) {
       return $tv_code;
     }
-    else
-    {
+    else {
       return FALSE;
     }
   }
@@ -350,15 +345,14 @@ function itg_live_tv_page_video() {
       $current_device = 'Web';
     }
     $device = itg_live_tv_company($current_device);
+    
     if (!empty($device[0])) {
       $live_tv_get_details = node_load($device[0]);
       $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
       if (filter_var($live_url, FILTER_VALIDATE_URL)) {
-
         $output = '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_url . '"></iframe>';
       }
       else {
-
         $output = $live_url;
       }
     }

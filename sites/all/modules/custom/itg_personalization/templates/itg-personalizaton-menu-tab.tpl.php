@@ -22,32 +22,32 @@
       ?>  
     </li>
     <li class="my-content">      
-<?php echo l(t('My Content'), 'personalization/my-content'); ?>
+      <?php echo l(t('My Content'), 'personalization/my-content'); ?>
     </li>
     <li class="my-preferences">      
-<?php echo l(t('My Preferences'), 'personalization/my-preferences'); ?>    
+      <?php echo l(t('My Preferences'), 'personalization/my-preferences'); ?>    
     </li>
     <li class="following">
-<?php echo l(t('Following'), 'personalization/my-following'); ?>
+      <?php echo l(t('Following'), 'personalization/my-following'); ?>
     </li>    
     <li class="my-credits">
-<?php echo l(t('My Credits'), 'personalization/my-credits'); ?>      
+      <?php echo l(t('My Credits'), 'personalization/my-credits'); ?>      
     </li>
     <li class="edit-profile">
-<?php echo l(t('Edit Profile'), 'personalization/edit-profile/general-settings'); ?>      
+      <?php echo l(t('Edit Profile'), 'personalization/edit-profile/general-settings'); ?>      
     </li>
   </ul>
 </div>
 <?php
-if (!empty($_GET['ugc']) && $_GET['ugc'] == 'success') {
-  print '<div class="ugc_success">' . t('UGC content has been submitted successfully for further review and approval.') . '</div>';
-}
-$success = base64_decode($_GET['profile']);
-if (!empty($_GET['profile']) && $success == 'success') {
-  print '<div class="ugc_success">' . t('Your profile has been updated successfully.') . '</div>';
-}
-$refer = base64_decode($_GET['refer']);
-if (!empty($_GET['refer']) && $refer == 'success') {
-  print '<div class="ugc_success">' . t('Thank you!') . '</div>';
-}
+  if (!empty($_GET['ugc']) && $_GET['ugc'] == 'success') {
+    print '<div class="ugc_success">' . t('UGC content has been submitted successfully for further review and approval.') . '</div>';
+  }
+  $success = base64_decode($_GET['profile']);
+  if (!empty($_GET['profile']) && $success == 'success') {
+    print '<div class="ugc_success">' . t('Your profile has been updated successfully.') . '</div>';
+  }
+  $refer = base64_decode($_GET['refer']);
+  if (!empty($_GET['refer']) && $refer == 'success') {
+    print '<div class="ugc_success">' . t('Thank you!') . '</div>';
+  }
 ?>

@@ -20,6 +20,7 @@
             
             var options = JSON.parse(settings.itg_newsletter.options);
             $("#edit-field-story-category-und").replaceOptions(options);
+            
             if(options.length>2) {
                 jQuery("#edit-field-story-category").css("display","block");
             }else {

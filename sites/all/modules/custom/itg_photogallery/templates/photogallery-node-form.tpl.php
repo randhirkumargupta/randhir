@@ -4,24 +4,23 @@
  * Theme implementation for story form in tab display.
  * 
  */
-//p($page);
+
 ?>
-<!--<div class=""><?php //print drupal_render($form['actions']);    ?></div>-->
+
 <div class="row">
   <div class="col-md-8 itg-form-main">
     <div id="Element" class="itg-form-section-wrapper">
-      <h2 class="story-title active">Gallery Basic details</h2>
+      <h2 class="story-title active"><?php print t('Gallery Basic details'); ?></h2>
       <div class="itg-form-section">
         <?php print drupal_render($form['title']); ?>
         <?php print drupal_render($form['field_story_category']); ?>
         <?php print drupal_render($form['field_primary_cat_data']); ?>
         <?php print drupal_render($form['field_gallery_kicer']); ?>
-        <?php print drupal_render($form['field_story_itg_tags']); ?>
-        <!--<div class="description">This title shows on the section page</div> -->
+        <?php print drupal_render($form['field_story_itg_tags']); ?>        
       </div>
     </div>
     <div id="BrowseMedia" class="itg-form-section-wrapper browse-media-file">
-      <h2 class="story-title">Gallery Cover Image</h2>
+      <h2 class="story-title"><?php print t('Gallery Cover Image'); ?></h2>
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_extra_large_image']); ?>
         <p class="pre-desc">This image will be resized by the system into pre-defined dimensions</p>
@@ -33,7 +32,7 @@
       </div>
     </div>
     <div id="GalleryIndividualImages" class="itg-form-section-wrapper">
-      <h2 class="story-title">Gallery Images Upload</h2>
+      <h2 class="story-title">><?php print t('Gallery Images Upload'); ?></h2>
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_photo_by']); ?>
         <?php print drupal_render($form['field_credit_to_all']); ?>
@@ -45,8 +44,6 @@
         <?php print drupal_render($form['field_gallery_image']); ?>
       </div>
     </div>
-
-
 
     <div class="itg-form-action"><?php print drupal_render($form['actions']); ?></div>
 
@@ -62,7 +59,7 @@
       </div>
 
       <div id="Configuration" class="itg-sidebar-form-section">
-        <h2 class="story-title">Configuration</h2>
+        <h2 class="story-title"><?php print t('Configuration'); ?></h2>
         <div class="itg-form-section hide">
           <?php print drupal_render($form['field_featured']); ?>
 
@@ -72,11 +69,7 @@
           <?php print drupal_render($form['field_story_comment_question']); ?>    
         </div>
       </div>
-      <!--<div id="Categorization" class="itg-sidebar-form-section">
-        <h2 class="story-title">Categorization</h2>
-      <?php //print drupal_render($form['field_story_category']); ?>
-      <?php //print drupal_render($form['field_primary_cat_data']); ?>
-      </div>-->
+      
       <div id="SocialMedia" class="itg-sidebar-form-section image-repo-browse">
         <h2 class="story-title"><?php print t('Social Media'); ?></h2>
         <div class="itg-form-section hide">
@@ -93,12 +86,12 @@
         </div>
       </div>
 
-        <div id="AkamaiSettings" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
-                <div class="itg-form-section hide">
-                    <?php print drupal_render($form['akamai_timeout']); ?>
-                </div>
+      <div id="AkamaiSettings" class="itg-sidebar-form-section">
+          <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+          <div class="itg-form-section hide">
+              <?php print drupal_render($form['akamai_timeout']); ?>
           </div>
+      </div>
       
       <div class="metatags-and-remarks">
         <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
