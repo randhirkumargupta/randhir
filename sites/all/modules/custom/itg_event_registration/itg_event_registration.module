@@ -151,8 +151,20 @@ function itg_event_registration_theme() {
  * {@inheritdoc}
  */
 function itg_event_registration_form_alter(&$form , &$form_state , $form_id) {
-
+  global $user;
   if ($form_id == 'event_registration_node_form') {
+    if ($user->uid) {
+      $user_load = user_load($user->uid);
+      $user_name = $user_load->field_first_name['und'][0]['value'] . ' ' . $user_load->field_last_name['und'][0]['value'];
+      $mobile_number = $user_load->field_mobile_number['und'][0]['value'];
+      $email = $user_load->mail;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_name']['und'][0]['value']['#default_value'] = $user_name;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_name']['und'][0]['value']['#value'] = $user_name;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_mobile']['und'][0]['value']['#default_value'] = $mobile_number;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_mobile']['und'][0]['value']['#value'] = $mobile_number;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_email']['und'][0]['value']['#default_value'] = $email;
+      $form['field_erf_registration_fee']['und'][0]['field_erf_email']['und'][0]['value']['#value'] = $email;
+    }
     $current_event_nid_old = itg_event_registration_get_event_nid();
 
     if (!empty($current_event_nid_old)) {
