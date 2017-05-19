@@ -12510,3 +12510,6 @@ fieldset#edit-xmlsitemap {
   right: -19px;
   border-color: transparent transparent transparent #fff;
 }
+#page form .itg-sidebar-form .form-item-path-pathauto div.description {
+  right: 108%;
+}

@@ -11,8 +11,8 @@ function itg_quiz_winners_mail_list() {
     $user_email_arr[] = $value['user_email'];
   }
   $user_email_arr_unique = array_unique($user_email_arr);
-//  $user_email_str = implode(',',$user_email_arr_unique);
-  $user_email_str = 'gourav.walia@kelltontech.com';
+  $user_email_str = implode(',',$user_email_arr_unique);
+//  $user_email_str = 'gourav.walia@kelltontech.com';
   
   if (function_exists('itg_mail_templates_get_mailcontent')) {
     $mail_data = itg_mail_templates_get_mailcontent('Quiz');

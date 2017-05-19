@@ -432,8 +432,8 @@ function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
     'body' => $mail_content,
     'subject' => $mail_subject,
   );
-  // $to = $user->mail;
-  $to = 'gourav.walia@kelltontech.com';
+   $to = $user->mail;
+//  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

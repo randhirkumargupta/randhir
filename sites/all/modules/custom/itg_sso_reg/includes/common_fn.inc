@@ -13,6 +13,18 @@ function itg_sso_user_email_check($email) {
 }
 
 /**
+ * Helper function to check email for other domain
+ */
+function itg_sso_user_email_domain($email) {
+  
+  $sso_user_check_email = db_select('itg_sso_email_history', 'itso')->fields('itso', array('id'));
+  $sso_user_check_email->condition('itso.email', $email, '=');
+  $result = $sso_user_check_email->execute()->fetchfield();
+  return $result;
+  
+}
+
+/**
  * Get Duplicate mobile.
  * @param int $mobile
  */

@@ -3746,14 +3746,14 @@ h1.category-heading{
                     }
                     .poll-ans-caption{
                         padding: 0px 0px 10px 0;
-                        display: inline-block;
+                        display: block;
                     }
                 }
             }
             .form-radios{
                 .poll-ans-caption{
                     padding: 10px 15px;
-                    @include display-inline;
+                    display: block;
                 }
             }
         }
@@ -3781,6 +3781,7 @@ h1.category-heading{
         @extend .list-none;
     }
     .active-poll-title{
+      overflow: hidden;
         h2{
             @include font(20px, 26px, null);
             margin-bottom: 10px;
@@ -3838,6 +3839,7 @@ h1.category-heading{
                 @include before-icon-list(5px,5px,5px,0,#959595,50%);
                 padding-left: 10px;
                 padding-bottom: 25px;
+                word-wrap: break-word;
             }            
         }
         &.relative-active{
