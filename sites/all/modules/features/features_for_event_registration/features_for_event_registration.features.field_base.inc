@@ -292,6 +292,7 @@ function features_for_event_registration_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
+        'free' => ' None',
         'icici' => ' ICICI',
         'paytm' => ' Paytm',
         'billdesk' => 'Billdesk',

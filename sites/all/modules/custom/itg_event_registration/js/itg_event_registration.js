@@ -146,8 +146,7 @@ jQuery(document).ready(function() {
         data: itg_coupons_vals,
         dataType: "text",
         success: function(resultData) {
-          console.log(resultData);
-          var obj_success = jQuery.parseJSON(resultData);
+        var obj_success = jQuery.parseJSON(resultData);
           if (obj_success['success'] == 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">' + obj_success['success_message'] + '</span>');
           }
@@ -156,6 +155,10 @@ jQuery(document).ready(function() {
             jQuery('[name="discounted_value"]').val(obj_success['discounted_value']);
             jQuery('.coupon_code_message').html('<span class="success" style="display: block;">' + obj_success['success_message'] + '</span>');
             jQuery('[name="coupon_code"]').attr('readonly', true);
+            if(obj_success['discounted_value'] == 0) {
+                jQuery('.form-field-name-field-erf-payment-gateway').hide();
+                jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
+            }
           }
         }
       });
@@ -181,6 +184,8 @@ jQuery(document).ready(function() {
       jQuery('.event-fees-amount').html('Rs ' + jQuery('input[name="total_value"]').val());
       jQuery('[name="coupon_code"]').attr('readonly', false);
       jQuery('.coupon_code_message').html('');
+      jQuery('.form-field-name-field-erf-payment-gateway').show();
+      jQuery("#edit-field-erf-payment-gateway-und").show();
     }
 
   });
