@@ -43,12 +43,6 @@
                 $('#edit-reset').trigger('click');
             });
             
-            //ON CLICK SHOW FILTER TYPES
-            $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-            $("body, html").on("click", ".searh-all-filters label", function(){
-            $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-                $(this).next('div').show();    
-            });
 
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
@@ -137,5 +131,9 @@ function getParameterByName(name, url) {
 
 jQuery(document).ready(function(){
      //ON CLICK SHOW FILTER TYPES
-    jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    $("body, html").on("click", ".searh-all-filters label", function(){
+    $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+        $(this).next('div').show();    
+    });
 });
