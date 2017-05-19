@@ -62,15 +62,6 @@ function editorpick_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'editors_pick';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Field: Byline */
-  $handler->display->display_options['fields']['field_story_reporter']['id'] = 'field_story_reporter';
-  $handler->display->display_options['fields']['field_story_reporter']['table'] = 'field_data_field_story_reporter';
-  $handler->display->display_options['fields']['field_story_reporter']['field'] = 'field_story_reporter';
-  $handler->display->display_options['fields']['field_story_reporter']['label'] = 'author';
-  $handler->display->display_options['fields']['field_story_reporter']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_reporter']['settings'] = array(
-    'link' => 0,
-  );
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -104,8 +95,8 @@ function editorpick_feature_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'ediror-pick';
 
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  /* Display: Editor Pick View */
+  $handler = $view->new_display('views_data_export', 'Editor Pick View', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
   $handler->display->display_options['style_options']['provide_file'] = 0;
@@ -115,6 +106,9 @@ function editorpick_feature_views_default_views() {
   $handler->display->display_options['style_options']['item_node'] = 'item';
   $handler->display->display_options['style_options']['cdata_wrapper'] = array(
     'title' => 'title',
+    'body' => 'body',
+    'path' => 'path',
+    'created' => 'created',
   );
   $handler->display->display_options['path'] = 'rss/indiatoday_editors_pic.xml';
   $export['ediror_pick'] = $view;

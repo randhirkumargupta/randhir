@@ -832,8 +832,20 @@ function itg_apache_solr_get_site_hash() {
 function itg_common_mail_alter(&$message) {
   
   global $user, $base_url;
-  $message['send'] = FALSE;
+  //$message['send'] = FALSE;
+  $to_mail = $message['to'];
+  $to_mails = explode(',', $to_mail);
 
+  $sendto = array();
+  foreach ($to_mails as $mail_to) {
+
+    if(!preg_match('/intoday/',$mail_to)) {
+      $sendto[] = $mail_to;
+    }
+  }
+  $sendmails = implode(',', $sendto);
+  
+  $message['to'] = $sendmails;
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     //$message['send'] = FALSE;
   }

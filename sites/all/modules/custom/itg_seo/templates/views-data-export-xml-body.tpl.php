@@ -31,7 +31,16 @@
 <?php foreach ($row as $field => $content): ?>
     <<?php print $xml_tag[$field]; ?>><?php print $content; ?></<?php print $xml_tag[$field]; ?>>
 <?php endforeach; ?>
-  </<?php print $item_node; ?>>
+<?php 
+  $getpath = explode("/", $row['path']);
+  $rev_path1 = array_reverse($getpath);
+  $split_path = explode("-", $rev_path1[0]);
+  $rev_path2 = array_reverse($split_path);
+  $get_author_id = db_query("SELECT byline_id from {itg_multi_byline_info} mbi WHERE mbi.nid = :nid AND mbi.publish_status = :status", array(":nid" => $rev_path2[3], ":status" => 1))->fetchField();
+  $auth_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
+?>
+<<?php print "author"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "author"; ?>>
+</<?php print $item_node; ?>>
 <?php endforeach; ?>
 </<?php print "channel"; ?>>
 

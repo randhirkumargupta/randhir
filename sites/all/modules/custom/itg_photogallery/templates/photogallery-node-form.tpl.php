@@ -32,7 +32,7 @@
       </div>
     </div>
     <div id="GalleryIndividualImages" class="itg-form-section-wrapper">
-      <h2 class="story-title">><?php print t('Gallery Images Upload'); ?></h2>
+      <h2 class="story-title"><?php print t('Gallery Images Upload'); ?></h2>
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_photo_by']); ?>
         <?php print drupal_render($form['field_credit_to_all']); ?>
