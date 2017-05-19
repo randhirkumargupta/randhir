@@ -1,4 +1,5 @@
 <?php
+
 module_load_include('inc', 'itg_mail_templates', 'itg_mail_templates_tokens');
 module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_templates');
 

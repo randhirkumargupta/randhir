@@ -10,8 +10,7 @@
             var base_url = settings.itg_live_tv.settings.base_url;            
 
             $('.live-tv-button', context).click(function (event) {
-                if (jQuery(this).is(':checked'))
-                {
+                if (jQuery(this).is(':checked')) {
                     var device = jQuery(this).val();
                     var company = jQuery(this).attr('rel');
                     var post = "&device=" + device + "&company=" + company;
@@ -19,25 +18,17 @@
                     $.ajax({
                         'url': base_url + '/live-tv-details-ajax',
                         'data': post,
-                        'type': 'POST',
-                        // dataType: 'json',
-                        beforeSend: function () {
-                           
+                        'type': 'POST',                        
+                        beforeSend: function () {                           
                             $('#widget-ajex-loader').show();
-
-
                         },
-                        'success': function (data)
-                        {
-
-                            $('#widget-ajex-loader').hide();
-                            //$("#successMessage").html("Saved Sucessfully");
+                        'success': function (data) {
+                            $('#widget-ajex-loader').hide();                            
                             window.location.reload('true');
                         }
                     });
                 }
             });
-
 
         }
 

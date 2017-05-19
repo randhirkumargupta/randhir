@@ -420,6 +420,7 @@ function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
     foreach ($value as $prd_key => $prd_val) {
       $prd_name[] = $prd_val['product']['title'];
     }
+    
     if (is_array($prd_name)) {
       $productname = implode(', ', $prd_name);
     }

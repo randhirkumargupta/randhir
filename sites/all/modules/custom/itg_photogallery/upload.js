@@ -39,18 +39,15 @@
                     .click();
             setTimeout(function() {
                 var uploader = jQuery(".plupload-element").pluploadQueue();
-                //  var uploader = $('.plupload-element').plupload('getUploader');
-                //uploader.destroy();
-
+                
                 uploader.splice();
-                //uploader.clearQueue();
-                //uploader.init();
-
+                
                 uploader.refresh();
                 
                 $('#edit-field-gallery-image-add-more-number').val(1);
 
             }, 500);
+            
             $('.plupload_filelist_footer .plupload_buttons').show();
             $('.plupload_file_name span.plupload_upload_status').hide();
         }
