@@ -93,6 +93,9 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $campaign['messageId'] = $create_campaign['OUTPUT']['MID'] ;
     $campaign['listId'] = NETCORE_LIST_ID;
     $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
+    
+    watchdog("netcore campaign", '<pre>' . print_r($data_email, TRUE) . '</pre>');
+    watchdog("netcore mail", '<pre>' . print_r($campaign, TRUE) . '</pre>');
   }
   /*$params = array(
     'body' => $mail_content,
@@ -262,7 +265,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       </td>
     </tr>';
 
-  $content .= '</table><p>&nbsp;</p><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
+  $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
   return $content;
 }
 
