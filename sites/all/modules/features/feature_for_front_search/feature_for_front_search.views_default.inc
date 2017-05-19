@@ -94,6 +94,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
   $handler->display->display_options['fields']['label']['label'] = '';
+  $handler->display->display_options['fields']['label']['exclude'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['text'] = '<a href="[url] " target="_blank">[label]</a>';
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['label']['element_wrapper_type'] = 'div';
@@ -103,6 +104,7 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_common_kicker_text']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_common_kicker_text']['field'] = 'sm_common_kicker_text';
   $handler->display->display_options['fields']['sm_common_kicker_text']['label'] = '';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['exclude'] = TRUE;
   $handler->display->display_options['fields']['sm_common_kicker_text']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['sm_common_kicker_text']['alter']['text'] = '[sm_common_kicker_text]';
   $handler->display->display_options['fields']['sm_common_kicker_text']['element_label_colon'] = FALSE;
@@ -128,6 +130,8 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
+<h2 class="search-label">[label]</h2>
+<div class="search-kicker">[sm_common_kicker_text]</div>
 <div class="other-info">Updated : [ds_changed]</div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';
