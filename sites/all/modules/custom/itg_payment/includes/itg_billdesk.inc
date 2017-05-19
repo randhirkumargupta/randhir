@@ -1,4 +1,5 @@
 <?php
+
 define('BILLDESK_ORDER_PAYMENT_PENDING_STATUS' , 0);
 define('BILLDESK_TRANSACTION_PENDING_STATUS' , 0);
 define('BILLDESK_TRANSACTION_HISTORY' , "");
@@ -15,7 +16,9 @@ define('BILLDESK_LABELS' , 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo
     'SecurityID|SecurityPassword|TxnDate|AuthStatus|SettlementType|' .
     'ErrorStatus|ErrorDescription|CheckSum');
 
-
+/**
+ * function for payment success.
+ */
 function itg_billdesk_payment_success_page() {
   
   if (empty($_POST)) {

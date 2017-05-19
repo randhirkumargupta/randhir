@@ -81,18 +81,30 @@ function itg_payment_amex_payment_page() {
   drupal_goto($goto_url);
 }
 
+/**
+ * function for amex payment success.
+ */
 function itg_payment_amex_payment_success() {
   return drupal_set_message("Your payment is complete");
 }
 
+/**
+ * function for amex payment cancle.
+ */
 function itg_payment_amex_payment_cancle() {
   return drupal_set_message("Your payment is cancle");
 }
 
+/**
+ * function for amex payment fail.
+ */
 function itg_payment_amex_payment_fail() {
   return drupal_set_message("Your payment is fail");
 }
 
+/**
+ * function for itg_payment_amex_order_form_action_response.
+ */
 function itg_payment_amex_order_form_action_response() {
   $param_list = $_POST;
   $paytm_check_sum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : "";

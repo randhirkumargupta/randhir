@@ -21,8 +21,8 @@
                     ?>
                 </div>
                 <div class="product-details">
-                    <div><span>Title:</span><strong><?php print $cart_detail['product']['title']; ?></strong></div>
-                    <div><span>Magzine ID:</span><strong><?php print $cart_detail['product']['nid']; ?></strong></div>              
+                    <div><span><?php print t('Title'); ?>:</span><strong><?php print $cart_detail['product']['title']; ?></strong></div>
+                    <div><span><?php print t('Magzine ID');?>:</span><strong><?php print $cart_detail['product']['nid']; ?></strong></div>              
                 </div>
                 <div class="cart-action">
                     <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
@@ -60,9 +60,9 @@
   <?php endforeach; ?>
       <div class="cart-total-block">
           <div class="cart-total-inner">
-              <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
+              <div class="grand-total"><strong><?php print t('GRAND TOTAL');?></strong><strong><?php print $cart_total; ?> <?php print t('Points'); ?></strong></div>
               <div class="checkout"><?php print l(t('REDEEM POINTS'), 'order-summary'); ?></div>
-              <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+              <div class="points-balance"><span><?php print t('Balance after redemption'); ?></span><span><?php print number_format($remain_point); ?> <?php print t('Points'); ?></span></div>
               <div class="continue-shopping"><?php print l('Continue Shopping', 'product'); ?></div>
           </div>
       </div>

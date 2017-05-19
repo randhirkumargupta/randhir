@@ -218,10 +218,7 @@ function itg_newslatter_section_content_type_validate($form , &$form_state) {
   $field_newsl_newsletter_content = $form_state['values']['field_newsl_newsletter_content']['und'][0]['value'];
   $field_cm_select_type = $form_state['values']['field_cm_select_type']['und'][0]['value'];
   if($field_newsl_newsletter_content == 'select_section') {
-    if(empty($field_cm_select_type)) {
-      /*drupal_add_js('jQuery(document).ready(function(){
-        jQuery("#edit-field-story-category").css("display","none");
-      });' , 'inline');*/
+    if(empty($field_cm_select_type)) {      
       form_set_error("field_cm_select_type" , t('Content type can\'t be empty'));
     }
   }
@@ -601,12 +598,7 @@ function itg_newsletter_node_validate($node , $form , &$form_state) {
   if ($node->type == 'newsletter') {
     if ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') {
       $frequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
-      $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-      // $check_existence = itg_newsletter_check_existence_frequency($frequency, $newsletter_content);
-      // If record already exist for this frequency through an error
-//      if (isset($check_existence) && arg(1) != $check_existence) {
-//        form_set_error('field_newsl_newsletter_content', t('Newsletter content <strong>@newslettercontent</strong> is already assigned for the frequency <strong>@frequency</strong> ' . l(t('Click here'), 'node/' . $check_existence . '/edit', array('attributes' => array('target' => '_blank'))) . ' to see existing newsletter.', array('@newslettercontent' => ucfirst(str_replace('_', ' ', $newsletter_content)) . ' news', '@frequency' => $frequency)));
-//      }
+      $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];    
     }
     else {
       if ($node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'later') {

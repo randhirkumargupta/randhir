@@ -153,6 +153,7 @@ function loyality_reward_points_configuration_form() {
         '#maxlength' => 6,
         '#default_value' => variable_get('lrp_gold_star_three'),
     );
+    
     $form['lrp_gold_star_three_icon_fieldset'] = array(
         '#type' => 'fieldset',
         '#collapsible' => TRUE, // Added
@@ -163,6 +164,7 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'markup',
         '#markup' => '<div class="poll-form div_lrp_gold_star_three_icon"><a href="javascript:void(0)" onclick="' . $link_three_image . '">Browse Image</a></div>',
     );
+    
     $form['lrp_gold_star_three_icon_fieldset']['lrp_gold_star_three_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
@@ -191,6 +193,7 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'markup',
         '#markup' => '<div class="poll-form div_lrp_gold_star_four_icon"><a href="javascript:void(0)" onclick="' . $link_four_image . '">Browse Image</a></div>',
     );
+    
     $form['lrp_gold_star_four_icon_fieldset']['lrp_gold_star_four_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
@@ -283,15 +286,15 @@ function itg_loyalty_reward_badge_icon_submit($form, &$form_state) {
  * @param int $fid
  */
 function _save_file_managed_image($fid) {
-    global $user;
-    // Load the file via file.fid.
-    $file = file_load($fid);
-    // Change status to permanent.
-    $file->status = FILE_STATUS_PERMANENT;
-    // Save.
-    file_save($file);
-    // Record that the module (in this example, user module) is using the file. 
-    file_usage_add($file, 'user', 'user', $user->uid);
+  global $user;
+  // Load the file via file.fid.
+  $file = file_load($fid);
+  // Change status to permanent.
+  $file->status = FILE_STATUS_PERMANENT;
+  // Save.
+  file_save($file);
+  // Record that the module (in this example, user module) is using the file. 
+  file_usage_add($file, 'user', 'user', $user->uid);
 }
 
 /**

@@ -11,8 +11,6 @@ module_load_include('inc' , 'itg_payment' , 'includes/itg_billdesk');
 module_load_include('inc' , 'itg_payment' , 'includes/itg_amex');
 module_load_include('inc' , 'itg_payment' , 'includes/itg_paytm');
 
-
-
 function itg_payment_menu() {
   $items = array();
   
@@ -192,8 +190,7 @@ function itg_payment_initial_info_update($data) {
  * Function which process to insert data in first step.
  * @param array $data
  */
-function itg_payment_response_info_update($data) {
-  
+function itg_payment_response_info_update($data) {  
   try {
     db_merge('itg_payment_order_details')
         ->key(array("order_id" => $data['order_id']))
@@ -319,12 +316,8 @@ function update_event_registration_after_success($order_id) {
   $query = db_select('itg_payment_order_details', 'pay');
   $query->fields('pay', array('registration_id'));  
   $query->condition('pay.order_id', $order_id);
-  $registration_id = $query->execute()->fetchField();
+  $registration_id = $query->execute()->fetchField();  
   
-  /*$node = node_load($registration_id);
-  $node->status = 1;  
-  field_attach_update('node', $node);
-  p($node);*/
   foreach (array('node', 'node_revision') as $table) {
     db_update($table)
       ->fields(array('status' => 1))
