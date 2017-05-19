@@ -23,7 +23,6 @@ function itg_fia_xml_node_feed($query) {
   global $base_url;
   $xml_base = $base_url . '/' . current_path();
   $nodes = node_load_multiple($query);
-  $getautor = 
   $items = '';
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
@@ -37,9 +36,8 @@ function itg_fia_xml_node_feed($query) {
     $guid = $node->nid . " at " . $base_url;
     $op_modified = date('F j, h:i a', $node->changed);
     $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
-    $auth_name = get_author_name($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
+    $auth_name = get_author_name($node->nid);
     $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
-
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
     $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
@@ -105,7 +103,8 @@ function itg_fia_xml_node_feed($query) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
                 '<figure>
-                   <audio muted title="audio title">
+                   <img src="' . $img_path . '">
+                   <audio title="audio title">
                      <source src="' . $audio_url . '">
                   </audio>
                  </figure>';
@@ -114,7 +113,8 @@ function itg_fia_xml_node_feed($query) {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                '<figure>
-                  <audio muted title="audio title">
+                   <img src="' . $img_path . '">
+                   <audio title="audio title">
                     <source src="' . $audio_url . '">
                   </audio>
                 </figure>';
@@ -126,14 +126,14 @@ function itg_fia_xml_node_feed($query) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] . 
                '<figure>
-                  <img src="'.$img_path.'" />
+                  <img src="' . $img_path . '" />
                 </figure>';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
                '<figure>
-                  <img src="'.$img_path.'" />
+                  <img src="' . $img_path . '" />
                 </figure>';
       }
     }
@@ -149,11 +149,11 @@ function itg_fia_xml_node_feed($query) {
                       "geometry":
                         {
                           "type": "Point",
-                          "coordinates": ['.$lat.', '.$lng.']
+                          "coordinates": [' . $lat . ', ' . $lng . ']
                         },
                       "properties":
                         {
-                          "title": "'.$get_place_name.'",
+                          "title": "' . $get_place_name . '",
                           "radius": 10000,
                           "pivot": true,   
                           "style": "satellite",
@@ -172,11 +172,11 @@ function itg_fia_xml_node_feed($query) {
                       "geometry":
                         {
                           "type": "Point",
-                          "coordinates": ['.$lat.', '.$lng.']
+                          "coordinates": [' . $lat . ', ' . $lng . ']
                         },
                       "properties":
                         {
-                          "title": "'.$get_place_name.'",
+                          "title": "' . $get_place_name . '",
                           "radius": 10000,
                           "pivot": true,   
                           "style": "satellite",
@@ -199,7 +199,7 @@ function itg_fia_xml_node_feed($query) {
             $body_vals[$pos] = $body_vals[$pos] . 
               '<figure class="op-slideshow">
                 <figure>
-                  <img src="'.$imgs_path.'" />
+                  <img src="' . $imgs_path . '" />
                 </figure>
               </figure>';
           }
@@ -208,7 +208,7 @@ function itg_fia_xml_node_feed($query) {
             $body_vals[$last_postion] = $body_vals[$last_postion] . 
               '<figure class="op-slideshow">
                 <figure>
-                  <img src="'.$imgs_path.'" />
+                  <img src="' . $imgs_path . '" />
                 </figure>
               </figure>';
           }
@@ -325,6 +325,7 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
  * Return Author Name
  */
 function get_author_name($auid) {
-  $author_name = db_query("SELECT title from {node} WHERE nid = :nid ", array(":nid" => $auid))->fetchField();
+  $get_author_id = db_query("SELECT byline_id from {itg_multi_byline_info} mbi WHERE mbi.nid = :nid AND mbi.publish_status = :status", array(":nid" => $auid, ":status" => 1))->fetchField();
+  $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
   return $author_name;
 }
