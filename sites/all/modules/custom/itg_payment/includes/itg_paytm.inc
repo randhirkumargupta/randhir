@@ -1,4 +1,5 @@
 <?php
+
 global $base_url;
 
 define('PAYTM_ENVIRONMENT' , 'TEST'); // PROD
@@ -217,7 +218,13 @@ function itg_payment_order_form_response_url() {
 
   // Update order after response.
   itg_payment_response_info_update($data);
-  drupal_goto('itg_payment_success');
+  
+  if ($transaction_status == 0) {
+    drupal_goto('itg-payment-cancel'); 
+  }
+  else {
+    drupal_goto('itg-payment-success');
+  }
 }
 
 /**
