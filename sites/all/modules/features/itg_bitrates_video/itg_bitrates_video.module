@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ITG Bitrates Video feature.
+ */
+
+include_once 'itg_bitrates_video.features.inc';
