@@ -245,8 +245,8 @@ function itg_ask_expert_node_insert($node) {
             'body' => $content,
             'subject' => $mail_subject,
         );
-//        $to = implode(',', $expert_arr);
-        $to = 'gourav.walia@kelltontech.com';
+        $to = implode(',', $expert_arr);
+//        $to = 'gourav.walia@kelltontech.com';
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
         if ($mail['result']) {
             return TRUE;
@@ -269,8 +269,8 @@ function itg_ask_expert_node_update($node) {
     if ($node->type == 'ask_an_expert') {
         module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
         // get term id to fetch all role related to term id
-//        $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
-        $to = 'gourav.walia@kelltontech.com';
+        $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+//        $to = 'gourav.walia@kelltontech.com';
         $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
         $node_url = l($node->title, $base_url . '/node/' . $node->nid);
         

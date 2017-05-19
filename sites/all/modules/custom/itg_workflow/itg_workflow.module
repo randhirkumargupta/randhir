@@ -1102,8 +1102,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   
   
   if ($event == 'update' && $vbo_state == 'pub-unpub') {
-//    $to_mail = $to;
-    $to_mail = 'gourav.walia@kelltontech.com';
+    $to_mail = $to;
+//    $to_mail = 'gourav.walia@kelltontech.com';
     $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
     $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
@@ -1131,8 +1131,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   
   if ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-//    $to_mail = $author_mail[0];
-    $to_mail = 'gourav.walia@kelltontech.com';
+    $to_mail = $author_mail[0];
+//    $to_mail = 'gourav.walia@kelltontech.com';
     
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       $mail_data = itg_mail_templates_get_mailcontent($content_type, 'create');
@@ -1182,11 +1182,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
     if (!empty($author_mail)) {
       $get_mails = array_merge($author_mail, $to);
-//      $to_mail = implode(',', $get_mails);
-      $to_mail = 'gourav.walia@kelltontech.com';
+      $to_mail = implode(',', $get_mails);
+//      $to_mail = 'gourav.walia@kelltontech.com';
     } else {
-//      $to_mail = $to;
-      $to_mail = 'gourav.walia@kelltontech.com';
+      $to_mail = $to;
+//      $to_mail = 'gourav.walia@kelltontech.com';
     }
 
     if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1236,11 +1236,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
       if (!empty($author_mail)) {
         $get_mails = array_merge($author_mail, $to);
-//        $to_mail = implode(',', $get_mails);
-        $to_mail = 'gourav.walia@kelltontech.com';
+        $to_mail = implode(',', $get_mails);
+//        $to_mail = 'gourav.walia@kelltontech.com';
       } else {
-//        $to_mail = $to;
-        $to_mail = 'gourav.walia@kelltontech.com';
+        $to_mail = $to;
+//        $to_mail = 'gourav.walia@kelltontech.com';
       }
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1289,8 +1289,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'rejected') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-//      $to_mail = $author_mail[0];
-      $to_mail = 'gourav.walia@kelltontech.com';
+      $to_mail = $author_mail[0];
+//      $to_mail = 'gourav.walia@kelltontech.com';
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1337,8 +1337,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'needs_modification') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-//      $to_mail = $author_mail[0];
-      $to_mail = 'gourav.walia@kelltontech.com';
+      $to_mail = $author_mail[0];
+//      $to_mail = 'gourav.walia@kelltontech.com';
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1384,8 +1384,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
     else if ($review == 'published') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
-//      $to_mail = $author_mail[0];
-      $to_mail = 'gourav.walia@kelltontech.com';
+      $to_mail = $author_mail[0];
+//      $to_mail = 'gourav.walia@kelltontech.com';
       
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
