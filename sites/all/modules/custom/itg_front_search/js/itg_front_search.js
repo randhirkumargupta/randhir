@@ -131,9 +131,9 @@ function getParameterByName(name, url) {
 
 jQuery(document).ready(function(){
      //ON CLICK SHOW FILTER TYPES
-    $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-    $("body, html").on("click", ".searh-all-filters label", function(){
-    $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-        $(this).next('div').show();    
+    jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    jQuery("body, html").on("click", ".searh-all-filters label", function(){
+      jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+      jQuery(this).next('div').show();    
     });
 });
