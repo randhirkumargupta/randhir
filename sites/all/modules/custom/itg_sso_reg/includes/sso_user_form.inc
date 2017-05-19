@@ -359,6 +359,9 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       if (function_exists('itg_sso_user_mobile_check')) {
         $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
       }
+      if (function_exists('itg_sso_user_email_domain')) {
+        $get_user_check_domain = itg_sso_user_email_domain($mail);
+      }
 
       
       $first_name = trim($form_state['values']['fname']);
@@ -401,6 +404,10 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
           form_set_error('mail', t(''));
         }
         else if (!empty($get_user_check_email)) {
+          $error['mail'] = t("Email id Already Exist!");
+          form_set_error('mail', t(""));
+        } 
+        else if (!empty($get_user_check_domain)) {
           $error['mail'] = t("Email id Already Exist!");
           form_set_error('mail', t(""));
         } 
