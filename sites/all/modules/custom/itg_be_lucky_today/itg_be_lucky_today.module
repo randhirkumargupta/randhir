@@ -1,0 +1,130 @@
+<?php
+
+define('COUNTRY_INDIA_TID', 3383);
+/**
+ * @file
+ * The ITG Be Lucky Today
+ *
+ * Contains functionality for Be Lucky Today
+ *
+ */
+
+/**
+ * {@inheritdoc}
+ * hook_menu()
+ * */
+function itg_be_lucky_today_menu() {
+    $items = array();
+    $items['be-lucky-today'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('be_lucky_today_form'),
+      'access callback' => TRUE,
+      'file' => 'inc/itg_be_lucky_today.inc',
+    );
+    $items['be-lucky-today/terms/%ctools_js'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page arguments' => array(1),
+      'page callback' => 'termscondition_callback',
+      'access callback' => TRUE
+    );
+    $items['be-lucky-today/thankyoupaymentfailed'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('thank_you_payment_failed_form'),
+      'access callback' => TRUE,
+      'file' => 'inc/itg_be_lucky_today.inc',
+    );
+    $items['be-lucky-today/thankyoupaymentsuccess'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('thankyoupaymentsuccess'),
+      'access callback' => TRUE
+    );
+    $items['be-lucky-today/aftersubscribe'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'after_subscirbe_callback',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+    $items['be-lucky-today/email-confirmation-reference-list'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'email_confirmation_reference_list_callback',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+    $items['be-lucky-today/be-lucky-form'] = array(
+      'title' => 'Be Lucky Today', //page title
+      'description' => 'Be Lucky Today',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('be_lucky_form'),
+      'access callback' => TRUE,
+      'file' => 'inc/itg_be_lucky_today.inc',
+    );
+    return $items;
+}
+
+function itg_be_lucky_today_theme() {
+    return array(
+      'after_subcribe_theme' => array(
+        'template' => 'templates/after_subcribe_template',
+      ),
+      'email_confirmation_reference_list_theme' => array(
+        'template' => 'templates/email_confirmation_reference_list_template',
+      ),
+    );
+}
+
+function after_subscirbe_callback() {
+    if (!isset($_SESSION['be_lucky_today'])) {
+        drupal_goto('/be-lucky-today');
+    }
+    $data = json_decode($_SESSION['be_lucky_today']);
+    print theme('after_subcribe_theme', array('data' => $data));
+    return NULL;
+}
+
+function email_confirmation_reference_list_callback() {
+    return theme('email_confirmation_reference_list_theme');
+    return NULL;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function termscondition_callback($js = NULL) {
+//    var_dump($js);die;
+    if ($js) {
+        ctools_include('modal');
+        ctools_include('ajax');
+        $title = t('Be lucky today');
+        $build = array(
+          '#prefix' => '<strong>',
+          '#suffix' => '<strong>',
+          '#markup' => t('Terms and condition'),
+        );
+        return ctools_modal_render($title, $build);
+    }
+    else {
+        $output = 'Terms and Condiction content1';
+        return $output;
+    }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function thankyoupaymentsuccess() {
+    unset($_SESSION['be_lucky_today']);
+    echo '<pre>';
+    print_r($_POST);
+    print_r($_GET);
+    die('done');
+    return $form;
+}
