@@ -45,8 +45,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
       $cat_array[] = $values['tid'];
     }
-  }
-  
+  }  
   
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
   $education_tid = !empty(variable_get('itg_newsletter_education_id'))? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
@@ -287,7 +286,6 @@ function itg_update_newsletter_cron_tbl($nid) {
         ->execute();
   }
   else {
-
     switch ($records['frequency']) {
       case 'daily':
         $scheduled_time = strtotime('+1 day', $records['scheduled_time']);

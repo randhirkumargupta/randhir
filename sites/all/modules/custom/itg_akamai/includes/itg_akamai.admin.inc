@@ -124,7 +124,6 @@ function itg_akamai_cache_control_submit($form, &$form_state) {
   $action = $form_state['values']['refresh'];
   $overrides = array(
     'action' => $form_state['values']['refresh'],
-    'domain' => $form_state['values']['domain_override']
   );
 
   if ($result = itg_akamai_clear_url($paths, $overrides)) {

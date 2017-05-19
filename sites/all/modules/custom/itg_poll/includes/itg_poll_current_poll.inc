@@ -132,11 +132,6 @@ function itg_poll_form_new($form, &$form_state, $nid) {
     }
   }
 
-//  $form["poll_updated"] = array(
-//    "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
-//  );
-
-
   $form['pole_answer'] = array(
     '#type' => 'radios',
     '#options' => $poll_answer,
@@ -159,11 +154,6 @@ function itg_poll_form_new($form, &$form_state, $nid) {
     '#value' => $display_result,
   );
 
-//  $form['captcha'] = array(
-//    '#type' => 'captcha',
-//    '#captcha_type' => 'recaptcha/reCAPTCHA',
-//    '#prefix' => '<span class="poll-ajax-error"></span>',
-//  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',

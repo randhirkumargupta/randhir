@@ -12,10 +12,8 @@
           <input size="50" type="hidden" name="mode" value="<?php print $param_list['mode']; ?>"  />
           <input size="50" type="hidden" name="storename" value="<?php print $param_list['storename']; ?>"  />
           <input size="50" type="hidden" name="chargetotal" value="<?php print $param_list['chargetotal']; ?>"  />
-          <input size="50" type="hidden" name="sharedsecret" value="<?php print $param_list['sharedsecret']; ?>"  />
-          
-          <input size="50" type="hidden" name="order_id" value="<?php print $param_list['order_id']; ?>"  />
-          
+          <input size="50" type="hidden" name="sharedsecret" value="<?php print $param_list['sharedsecret']; ?>"  />          
+          <input size="50" type="hidden" name="order_id" value="<?php print $param_list['order_id']; ?>"  />          
           <input type="text" name="responseSuccessURL" value="<?php print $param_list['responseSuccessURL']; ?>"  />
           <input type="text" name="responseFailURL" value="<?php print $param_list['responseFailURL']; ?>"  />
           <input type="text" name="hash_algorithm" value="<?php print $param_list['hash_algorithm']; ?>"/>

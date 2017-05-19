@@ -94,7 +94,6 @@ function itg_notification_form_after_build($form, &$form_state) {
   // Add JS for itg_notification
   drupal_add_js(drupal_get_path('module', 'itg_notification') . '/js/itg_notification.js', array('weight' => 1, array('scope' => 'footer')));
 
-
   return $form;
 }
 
@@ -103,7 +102,6 @@ function itg_notification_form_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_notification_views_pre_render(&$view) {
-
   // "Add Notification" button on listing page of items
   if ($view->name == "manage_notifications") {
     $header_content_notification = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -117,9 +115,7 @@ function itg_notification_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_notification_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-manage-notifications-page') {
-
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/notification/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Message Title'));
@@ -159,7 +155,6 @@ function itg_notification_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_notification_node_update($node) {
-
   switch ($node->type) {
     case 'notification':
       itg_notification_details($node, 'update');
@@ -197,7 +192,6 @@ function itg_notification_node_presave($node) {
  * @param string $op
  */
 function itg_notification_details($node, $op) {
-
   $scheduled = strtotime($node->field_ntf_schedule[LANGUAGE_NONE][0]['value']);
   if ($op == 'insert') {
     db_insert('itg_notification')
@@ -235,7 +229,6 @@ function itg_notification_cronapi($op, $job = NULL) {
  * Custom callback to fetch node for send notification
  */
 function itg_notification_send_callback() {
-
   $current_date = time();
   $query = db_select('itg_notification', 'ntf');
   $query->fields('ntf')
@@ -256,6 +249,5 @@ function itg_notification_send_callback() {
  * @param int $nid
  */
 function itg_notification_send_notification($nid) {
-
-//TO DO : Load node and fetch mobile numbers on the basis of device and send SMS 
+  //TO DO : Load node and fetch mobile numbers on the basis of device and send SMS 
 }
