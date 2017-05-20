@@ -196,20 +196,22 @@ function get_personlization_front_block_data($flag = TRUE) {
   //$persionalization = get_personalization_front_data();
   //pr($persionalization);
   $front_end_data = array();
-  foreach ($persionalization as $persionalization_key => $persionalization_data) {
-    // tid saved in nid colom in itg_widget_order table
-    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE, $query_flag);
-    foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
-      $nid = $nid_array['nid'];
-      $tid = $persionalization_data;
-      $temp_node_data = get_personlization_node_data_for_front($nid, $query_flag);
-      // Create term details object.
-      $temp_term = new stdClass();
-      $temp_term->name = $nid_array['name'];
-      $temp_term->tid = $nid_array['tid'];
-      $texonomy_data = $temp_term;
-      unset($temp_term);
-      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data);
+  if (isset($persionalization)) {
+    foreach ($persionalization as $persionalization_key => $persionalization_data) {
+      // tid saved in nid colom in itg_widget_order table
+      $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE, $query_flag);
+      foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
+        $nid = $nid_array['nid'];
+        $tid = $persionalization_data;
+        $temp_node_data = get_personlization_node_data_for_front($nid, $query_flag);
+        // Create term details object.
+        $temp_term = new stdClass();
+        $temp_term->name = $nid_array['name'];
+        $temp_term->tid = $nid_array['tid'];
+        $texonomy_data = $temp_term;
+        unset($temp_term);
+        $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data);
+      }
     }
   }
   return $front_end_data;

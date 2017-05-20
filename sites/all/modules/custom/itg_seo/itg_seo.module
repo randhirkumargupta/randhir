@@ -94,8 +94,14 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     }
   }
 
-  if ($form_id == 'syndication_client_node_form' || $form_id == 'syndication_rule_node_form' || $form_id == 'syndication_feed_from_pattern_node_form' || $form_id == 'ads_management_node_form' || $form_id == 'task_idea_allocation_tracking_node_form' || $form_id == 'ugc_node_form' || $form_id == 'notification_node_form' || $form_id == 'coupon_node_form') {
-    //$form['additional_settings']['#access'] = FALSE;
+  if ($form_id == 'syndication_client_node_form' 
+          || $form_id == 'syndication_rule_node_form' 
+          || $form_id == 'syndication_feed_from_pattern_node_form' 
+          || $form_id == 'ads_management_node_form' 
+          || $form_id == 'task_idea_allocation_tracking_node_form' 
+          || $form_id == 'ugc_node_form' 
+          || $form_id == 'notification_node_form' 
+          || $form_id == 'coupon_node_form') {    
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
   
@@ -132,13 +138,16 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
 function itg_custom_meta_tags_alias_set($form , &$form_state) {
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
-    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
-    //pr($edited_sef_url);
-    $form['path']['alias']['#value'] = $edited_sef_url; // itg_common_custompath_insert_val($form['path']['alias']['#value']);
+    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);    
+    $form['path']['alias']['#value'] = $edited_sef_url; 
   }
   return $form;
 }
 
+/**
+ * itg_custom_pathauto_sef_checkbox_status().
+ *{@inheritdoc}.
+ */
 function itg_custom_pathauto_sef_checkbox_status($form , &$form_state) {
   if (!empty($form['#node']->nid)) {
     $entity_type = $form['#node']->type;
@@ -180,6 +189,7 @@ function itg_meta_tags_extra_element_hide($form , &$form_state) {
     unset($form['metatags']['#title']);
     unset($form['metatags']['#title']);
   }
+  
   drupal_add_js(drupal_get_path('module' , 'itg_common') . '/js/itg_metatags.js' , array('scope' => 'footer'));
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
@@ -240,13 +250,8 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
   $title_val = '';
   if(isset($entity_object->title)) {
-  $title_val = substr(check_plain($entity_object->title) , 0 , 50);
+    $title_val = substr(check_plain($entity_object->title) , 0 , 50);
   }
-//  if($entity_object->type == 'story' || $entity_object->type == 'photogallery' || $entity_object->type == 'videogallery') {
-//  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
-//  } else {
-//  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
-//  }
 
   $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
@@ -406,6 +411,9 @@ function itg_seo_node_update($node) {
   }
 }
 
+/**
+ * content_types_for_sef_url().
+ */
 function content_types_for_sef_url() {
   return array(
     'photogallery' ,
@@ -445,6 +453,7 @@ function itg_seo_theme_registry_alter(&$theme_registry) {
 
 
 /**
+ * itg_seo_pathauto_alias_alter().
  * {@inheritdoc}
  */
 function itg_seo_pathauto_alias_alter(&$alias , array &$context) {

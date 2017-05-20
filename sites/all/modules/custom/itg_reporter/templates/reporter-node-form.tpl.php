@@ -12,10 +12,8 @@
     <?php print drupal_render($form['field_reporter_movie_name']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
     <?php print drupal_render($form['field_story_extra_large_image']); ?>
-    <?php print drupal_render($form['body']); ?>
-    
+    <?php print drupal_render($form['body']); ?>    
 </div>
 
-<!--<h2 id="title-metatags" class="story-title"><?php // echo t('SEO Meta Tags'); ?></h2>-->
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

@@ -858,8 +858,8 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   if ($supplement != '_none') {
     $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
   }
+  
   field_attach_update('node', $node);
-
 
   // Varibles for story node
   $issue_title = itg_common_get_node_title($issue);
