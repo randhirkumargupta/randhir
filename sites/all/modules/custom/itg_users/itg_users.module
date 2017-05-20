@@ -884,3 +884,16 @@ function itg_users_backend_validate(&$form, &$form_state) {
   }
  
 }
+
+/**
+ * Implements hook_user_delete().
+ */
+/*function itg_users_user_delete($account) {
+  if (!empty($account->uid)) {
+    db_set_active('sso_db');
+    db_delete('itg_sso_email_history')
+        ->condition('uid', $account->uid)
+        ->execute();
+    db_set_active();
+  }
+}*/

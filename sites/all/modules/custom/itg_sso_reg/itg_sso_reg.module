@@ -115,7 +115,24 @@ function itg_sso_reg_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+   
+  $items['admin/config/people/sso-email-history'] = array(
+    'title' => 'SSo email history',
+    'description' => 'SSo email history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('sso_email_history_form'),
+    'access arguments' => array('access SSo email history'),
+    'file' => 'includes/sso_email_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
 
+  $items['sso-email-history-del/%'] = array(
+    'title' => 'Delete Form',
+    'page callback' => 'itg_sso_email_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -129,7 +146,11 @@ function itg_sso_reg_permission() {
     'administer itg_sso_logout settings' => array(
       'title' => t('Edit sso signout setting'),
       'description' => t('Using this permission user can edit signout setting.'),
-    )
+    ),
+    'access SSo email history' => array(
+      'title' => t('SSo email history'),
+      'description' => t('SSo email history'),
+    ),
   );
 }
 
@@ -297,5 +318,21 @@ function itg_sso_reg_password_success() {
     );
 
     return $form;
+  }
+}
+
+/**
+ * Implements itg_sso_email_history_callback
+ */
+function itg_sso_email_history_callback() {
+  $arg = arg();
+  $id = $arg[1];
+  $redirect_url = 'admin/config/people/sso-email-history';
+  if (isset($id)) {
+    db_delete('itg_sso_email_history')
+      ->condition('id', $id)
+      ->execute();
+    drupal_set_message(t('User has been deleted sucessfully from history table'));
+    drupal_goto($redirect_url);
   }
 }
