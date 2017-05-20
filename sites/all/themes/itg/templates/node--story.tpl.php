@@ -6,12 +6,15 @@ if (!empty($content)):
   // get related content associated with story
   $related_content = $content['related_content'];
   // condition for buzz
+  $class_buzz = '';
   if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
     $class_buzz = 'buzz-feedback';
   }
+  $class_related = '';
   if (!empty($related_content)) {
     $class_related = ' buzz-related';
   }
+  $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
     $class_listicle = ' buzz-feedback listicle-feedback';
   }
@@ -57,7 +60,7 @@ if (!empty($content)):
     $opt = $content["front_activity_info"];
   }*/
   $opt = $content["front_activity_info"];
-  
+  $photo_story_section_class = '';
   if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
     $photo_story_section_class = ' photo-story-section';
   }
@@ -127,11 +130,11 @@ if (!empty($content)):
       $associate_type = '';
       $associate_id = '';
 
-      if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+      if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
         $associate_type = 'gallery';
         $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
       }
-      else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+      else if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
         $associate_type = 'video';
         $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
       }
@@ -167,6 +170,7 @@ if (!empty($content)):
                 <ul>
                   <li class="title"><?php print t($reporter_node->title); ?></li>
                   <?php
+                    $twitter_handle = '';
                     $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                     $twitter_handle = str_replace('@', '', $twitter_handle);
                     if (!empty($twitter_handle)) {
@@ -280,7 +284,10 @@ if (!empty($content)):
                 <ul>
                   <li class="title"><?php print $reporter_node->title; ?></li>
                   <?php
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                    $twitter_handle = '';
+                    if(isset($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
+                      $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                    }
                     $twitter_handle = str_replace('@', '', $twitter_handle);
                     if (!empty($twitter_handle)) {
                     ?>
@@ -346,7 +353,7 @@ if (!empty($content)):
              $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
              $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
              $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-
+             $class = '';
              if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
                $class = 'story-associate-content';
              }
