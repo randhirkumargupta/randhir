@@ -301,16 +301,44 @@ function itg_akamai_cache_akamai_ccpurge() {
 
   $allnodes = node_type_get_types();
   $sn = 1;
+  // This is the restricted_cc
+  $restricted_cc = array(
+    'ugc_node_form',
+    'mail_templates',
+    'event_backend',
+    'ads_management',
+    'coupon',
+    'itg_template_widgets',
+    'loyalty_and_rewards',
+    'newsletter',
+    'newsletter_templates',
+    'notification',
+    'print_team_integration',
+    'issue',
+    'magazine',
+    'supplement',
+    'ask_an_expert',
+    'ugc',
+    'itg_delete_solr_video',
+    'itg_funalytics',
+    'syndication_client',
+    'syndication_feed_from_pattern',
+    'syndication_rule',
+    'task_idea_allocation_tracking',
+    'article',
+    'live_tv_integration'
+  );
 
   foreach ($allnodes as $key => $value) {
-    $rows[] = array(
-      $sn++,
-      $value->name,
-      l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal button'))),
-      l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => 'button'))),
-    );
+    if (!in_array($value->type, $restricted_cc)) {
+      $rows[] = array(
+        $sn++,
+        $value->name . ' - ' . $value->type,
+        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal button'))),
+        l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => 'button'))),
+      );
+    }
   }
-
   $output = theme('table', array('header' => $header, 'rows' => $rows));
 
   $form['itg_akamai_cc_holder']['options'] = array(
@@ -705,7 +733,6 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   return $form;
-  
 }
 
 /**
