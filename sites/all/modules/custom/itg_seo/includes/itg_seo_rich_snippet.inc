@@ -69,7 +69,10 @@ function itg_seo_node_data($node) {
       $auth_name = '';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
+    if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    }
+    $largimage = '';
     if(isset($imgarray[1])) {
     $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
     }

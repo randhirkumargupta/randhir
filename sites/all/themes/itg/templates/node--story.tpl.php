@@ -23,7 +23,10 @@ if (!empty($content)):
   $short_url = shorten_url($actual_link, 'goo.gl');
   $fb_title = addslashes($node->title);
   $share_desc = '';
+  $image = '';
+  if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  }
 
   // get total share count
   $tot_count = $content['total_share_count'];
@@ -50,6 +53,7 @@ if (!empty($content)):
   $byline_id = $content["byline_id"];
 
   //get byline detail
+  $reporter_node = '';
   if (!empty($byline_id)) {
     $reporter_node = node_load($byline_id);
   }
@@ -156,9 +160,9 @@ if (!empty($content)):
             <div class="byline">              
               <div class="profile-pic">
                 <?php
+                if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                   $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                  if (!empty($file)) {
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                   }
                   else {
                     $file = 'default_images/user-default.png';
@@ -168,11 +172,13 @@ if (!empty($content)):
               </div>
               <div class="profile-detail">                  
                 <ul>
-                  <li class="title"><?php print t($reporter_node->title); ?></li>
+                  <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
                   <?php
                     $twitter_handle = '';
+                    if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
                     $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                     $twitter_handle = str_replace('@', '', $twitter_handle);
+                    }
                     if (!empty($twitter_handle)) {
                     ?>
                     <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
@@ -181,8 +187,10 @@ if (!empty($content)):
                 <ul class="date-update">
                   <li class="mailto mhide">
                     <i class="fa fa-envelope-o"></i> &nbsp;<?php
+                    if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
                     $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                     print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
+                    }
                     ?>
                   </li>
                   <li class="mhide">
@@ -370,7 +378,10 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" ><?php
                   if (empty($widget_data)) {
+                    $story_image = '';
+                    if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                    }
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                     }
@@ -607,7 +618,7 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
+                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                   print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                 }
 
@@ -704,6 +715,7 @@ if (!empty($content)):
         <!-- condition for buzz  -->
 
         <?php
+        $buzz_output = '';
         if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
           $buzz_output.= '';
           $buzz = 1;
@@ -711,9 +723,16 @@ if (!empty($content)):
             $buzz_output.= '<div class="buzz-section">';
             $field_collection_id = $buzz_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
+            $buzz_imguri = '';
+            if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            }
+            $share_uri = '';
+            if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $share_uri = $file->uri;
+            }
+            
             $share_image = file_create_url($share_uri);
             $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
@@ -863,6 +882,7 @@ if (!empty($content)):
             <ul>
               <li><i class="fa fa-tags"></i> <?php print t('Tags :'); ?></li>        
               <?php
+              if(isset($node->field_story_itg_tags['und'])) {
               foreach ($node->field_story_itg_tags['und'] as $tags) {
                 $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
                 if ($published_tag == 'Published') {
@@ -871,6 +891,7 @@ if (!empty($content)):
                   $comma_sep_tag[] = $t_name;
                   print '<li><a target="_blank" href="' . $base_url . '/topic?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
                 }
+              }
               }
               ?>
             </ul>
@@ -887,7 +908,8 @@ if (!empty($content)):
             <!-- For buzzfeed section end --> 
             <?php
           }
-
+          
+          $config = array();
           if (!empty($node->field_story_configurations['und'])) {
             foreach ($node->field_story_configurations['und'] as $value) {
               $config[] = $value['value'];
@@ -923,7 +945,7 @@ if (!empty($content)):
           </div>
           <?php
         }
-        if ($config_name == 'other' && in_array('commentbox', $config)) {
+        if (is_array($config) && $config_name == 'other' && in_array('commentbox', $config)) {
           ?>
           <div id="other-comment">
             <?php
