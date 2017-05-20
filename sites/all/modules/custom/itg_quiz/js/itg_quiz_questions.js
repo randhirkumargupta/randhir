@@ -5,7 +5,6 @@
 (function($) {
   Drupal.behaviors.itg_quiz_questions = {
     attach: function(context, settings) {
-
       // If one question at a time
       $('#itg-quiz-quiz-form .quiz-submit').mousedown(function() {
         var quizTaken = $('body').find('input[name="quiz_taken"]').val();

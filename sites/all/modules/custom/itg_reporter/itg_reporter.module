@@ -236,7 +236,6 @@ function itg_reporter_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-byline-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Name'));
@@ -252,7 +251,6 @@ function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_
  * @param $email
  */
 function itg_reporter_get_content_email($email) {
-
   if (strlen(trim($email)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -278,7 +276,6 @@ function itg_reporter_get_content_email($email) {
  * @param $twitter
  */
 function itg_reporter_get_twitter_handle($twitter) {
-
   if (strlen(trim($twitter)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -387,6 +384,7 @@ function itg_autocomplete_byline($id) {
   $record = $result->fetchAssoc();
   $r_title = ucfirst($record['title']);
   $r_nid = strtolower($record['nid']);
+  
   if (!empty($record['field_reporter_email_id_value'])) {
     $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
   }

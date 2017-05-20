@@ -130,23 +130,7 @@ function itg_social_media_views_data() {
             'handler' => 'views_handler_argument_string',
         ),
     );
-//    $data['itg_social_media_logs']['nid'] = array(
-//        'title' => t('nid'),
-//        'help' => t('nid of the content posted to social media'),
-//        'field' => array(
-//            'handler' => 'views_handler_field',
-//            'click sortable' => TRUE,
-//        ),
-//        'sort' => array(
-//            'handler' => 'views_handler_sort',
-//        ),
-//        'filter' => array(
-//            'handler' => 'views_handler_filter_string',
-//        ),
-//        'argument' => array(
-//            'handler' => 'views_handler_argument_string',
-//        ),
-//    );
+
     $data['itg_social_media_logs']['username'] = array(
         'title' => t('Username'),
         'help' => t('Name of the user who has posted the content to social media'),

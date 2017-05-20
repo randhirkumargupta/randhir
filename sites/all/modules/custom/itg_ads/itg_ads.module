@@ -29,6 +29,10 @@
  */
 module_load_include('inc', 'itg_ads', 'includes/custom_ads_handler');
 
+/**
+ * Implements hook_block_info().
+ * {@inheritdoc}
+ */
 function itg_ads_block_info() {
 
 // Start code for ads block configuration 
@@ -213,7 +217,6 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     '#weight' => 20,
   );
 
-
   $form['actions']['preview_ads'] = array(
     '#markup' => l(t('Preview Ads'), 'itg-ads-preview-ads', array('attributes' => array('class' => 'form-submit itg-ads-preview-ads'))),
     '#weight' => 19,
@@ -231,7 +234,6 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     'Home' => 'Home Page',
     'Rest' => 'Rest of the Site',
   );
-
 
   $combined_final_array = $option_array + get_all_list_of_section_page();
 
@@ -483,7 +485,6 @@ function get_all_list_of_section_page() {
  * Implements hook_form_FORM_ID_alter().
  */
 function itg_ads_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-
   if (isset($form['field_ad_master_template_section'][LANGUAGE_NONE])) {
     $option_array = array(
       '_none' => t('- Select a value -'),
@@ -938,23 +939,29 @@ function get_header_body_start_end_code() {
     // Code start for internal script 
 
     if ($device_information == 'website') {
-      foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
-        $adsheaderbody['header'][] = $header['value'];
+      if (isset($ads_object->field_ads_headerscript[$ads_object->language])) {
+        foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
+          $adsheaderbody['header'][] = $header['value'];
+        }
       }
     }
 
     if ($device_information == 'mobile') {
-      foreach ($ads_object->field_ads_headerscript_mob[$ads_object->language] as $header) {
-        $adsheaderbody['header'][] = $header['value'];
+      if (isset($ads_object->field_ads_headerscript_mob[$ads_object->language])) {
+        foreach ($ads_object->field_ads_headerscript_mob[$ads_object->language] as $header) {
+          $adsheaderbody['header'][] = $header['value'];
+        }
       }
     }
-
-    foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
-      $adsheaderbody['body_start'][] = $bodystart['value'];
+    if (isset($ads_object->field_ads_body_start[$ads_object->language])) {
+      foreach ($ads_object->field_ads_body_start[$ads_object->language] as $bodystart) {
+        $adsheaderbody['body_start'][] = $bodystart['value'];
+      }
     }
-
-    foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
-      $adsheaderbody['body_close'][] = $body_close['value'];
+    if (isset($ads_object->field_ads_body_close[$ads_object->language])) {
+      foreach ($ads_object->field_ads_body_close[$ads_object->language] as $body_close) {
+        $adsheaderbody['body_close'][] = $body_close['value'];
+      }
     }
 
     // Code ends for internal script 
@@ -962,21 +969,25 @@ function get_header_body_start_end_code() {
     // Checking $show_external_flag and rendering data on the basis of its value
 
     if ($show_external_flag == 1) {
-
-      foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
-        $ads_viaibility['ads_viaibility_flag_external'] = $ads_viaibility['value'];
+      if (isset($ads_object->field_code_visibility_flag[$ads_object->language])) {
+        foreach ($ads_object->field_code_visibility_flag[$ads_object->language] as $ads_viaibility) {
+          $ads_viaibility['ads_viaibility_flag_external'] = $ads_viaibility['value'];
+        }
       }
-
-      foreach ($ads_object->field_ads_ex_headerscript[$ads_object->language] as $header) {
-        $adsheaderbody['ex_header'][] = $header['value'];
+      if (isset($ads_object->field_ads_ex_headerscript[$ads_object->language])) {
+        foreach ($ads_object->field_ads_ex_headerscript[$ads_object->language] as $header) {
+          $adsheaderbody['ex_header'][] = $header['value'];
+        }
       }
-
-      foreach ($ads_object->field_ads_ex_body_start[$ads_object->language] as $bodystart) {
-        $adsheaderbody['ex_body_start'][] = $bodystart['value'];
+      if (isset($ads_object->field_ads_ex_body_start[$ads_object->language])) {
+        foreach ($ads_object->field_ads_ex_body_start[$ads_object->language] as $bodystart) {
+          $adsheaderbody['ex_body_start'][] = $bodystart['value'];
+        }
       }
-
-      foreach ($ads_object->field_ads_ex_body_close[$ads_object->language] as $body_close) {
-        $adsheaderbody['ex_body_close'][] = $body_close['value'];
+      if (isset($ads_object->field_ads_ex_body_close[$ads_object->language])) {
+        foreach ($ads_object->field_ads_ex_body_close[$ads_object->language] as $body_close) {
+          $adsheaderbody['ex_body_close'][] = $body_close['value'];
+        }
       }
     }
 

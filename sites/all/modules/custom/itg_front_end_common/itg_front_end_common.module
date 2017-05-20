@@ -231,7 +231,7 @@ function _vukkul_block_content() {
 
   $page_id = arg(1);
   $node = node_load($page_id);
-  $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+  $byline_id = isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']) ? $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] : '';
   if (function_exists('itg_common_get_node_title')) {
     $reporter_node = itg_common_get_node_title($byline_id);
   }
@@ -243,8 +243,9 @@ function _vukkul_block_content() {
       $comma_sep_tag[] = $t_name;
     }
   }
+  $tag = '';
   if(!empty($comma_sep_tag)) {
-  $tag = implode(',', $comma_sep_tag);
+    $tag = implode(',', $comma_sep_tag);
   }
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($reporter_node);

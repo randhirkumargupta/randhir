@@ -22,10 +22,7 @@
         <div class="gray-bg"><?php print t('Career Graph'); ?></div>
         <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
         <?php print $actor_pic;  ?>
-    </div>  <?php
-    
-    ?>
-
+    </div>  
     <div id="container_<?php echo $key; ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <?php endforeach; ?>

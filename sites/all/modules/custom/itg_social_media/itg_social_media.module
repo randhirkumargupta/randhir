@@ -787,7 +787,6 @@ function itg_social_media_activity($nid) {
   $result = $query->execute()->fetchall();
 
   foreach ($result as $result_d) {
-
     $like = $like + $result_d->fb_likes;
     $comment = $comment + $result_d->fb_comment;
     $share = $share + $result_d->fb_shares;

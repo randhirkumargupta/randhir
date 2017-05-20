@@ -40,7 +40,7 @@ function itg_story_xml_submit($form, &$form_state) {
       mkdir($feed_dir, 0777, TRUE);
     }
     $xml = "<root>";
-    //p($views_bulk_operations);
+    
     foreach ($views_bulk_operations as $nid) {
       if (!empty($nid) && $nid>0) {
         $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');

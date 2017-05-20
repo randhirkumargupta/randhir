@@ -111,13 +111,13 @@ function itg_quiz_get_mail_content($nid, $get_mail_data) {
   $get_mail_content = $get_mail_data->field_mail_body_quiz_completion[LANGUAGE_NONE][0]['value'];
   $content_link = '<a href="'.$result_link.'">here</a>';
   $content = str_replace('[itg_mail_token:itg_quiz_winner_list]', $content_link, $get_mail_content);
-//  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
   $i = 1;
+  
   foreach ($winner_records as $key => $value) {
     $winners .= '<p>' . $i . '. ' . $value['user_name'] . '(' . $value['quiz_score'] . ')' . '</p>';
     $i++;
   }
-//  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+
   $final_output = $content . $winners .  $content_end;
   return $final_output;
 }
