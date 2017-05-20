@@ -83,7 +83,7 @@ function itg_flag_get_count($nid, $type) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->itg_custom_flag_count;
-    $cond = array('nid' => $nid);
+    $cond = array('nid' => (int)$nid);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $data[$type] = $document[$type];
