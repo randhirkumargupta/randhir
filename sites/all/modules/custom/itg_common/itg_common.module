@@ -842,8 +842,7 @@ function itg_common_mail_alter(&$message) {
 
   $sendto = array();
   foreach ($to_mails as $mail_to) {
-
-    if(!preg_match('/intoday/',$mail_to)) {
+     if(!preg_match('/aajtak|intoday|indiatoday/',$mail_to)) {
       $sendto[] = $mail_to;
     }
   }
