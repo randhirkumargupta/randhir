@@ -21,6 +21,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'podcast_node_form': // Podcast
 
       $content_type = '';
+      $itg_category_multiple_prev_data = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
         $content_type = $form['#node']->type;
       }

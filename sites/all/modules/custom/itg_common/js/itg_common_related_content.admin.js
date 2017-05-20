@@ -107,7 +107,11 @@ jQuery(document).ready(function () {
         jQuery(this).find('.my-saved-search').slideUp();
     });
 
+    try {
     jQuery('body').find(".checked-list").sortable();
+            } catch(e) {
+
+    }
     jQuery('body').find(".checked-list").disableSelection();
 
     // jQuery code to remove checked list item
