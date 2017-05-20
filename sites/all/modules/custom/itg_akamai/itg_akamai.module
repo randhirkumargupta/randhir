@@ -650,8 +650,9 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       $akamai_config_cctype_flag = NULL;
 
       // Checking whether the Akamai content level configration have been saved or not 
-      $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
-
+      if (isset($form['#node']->nid)) {
+        $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
+      }
       $form['akamai_timeout'] = array(
         '#type' => 'textfield',
         '#title' => t("Enter TTL"),
