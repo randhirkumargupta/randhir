@@ -254,6 +254,7 @@ function itg_ugc_comment_block_view($delta = '') {
         $page_id = arg(1);
 
         $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"))->sort(array('comment_date_time' => -1));
+        $contect = '';
         foreach ($data as $my_data) {
           $contect .= getmycomments($my_data);
         }

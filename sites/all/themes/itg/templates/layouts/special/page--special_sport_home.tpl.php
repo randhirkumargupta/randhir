@@ -12,7 +12,7 @@ $preview = NULL;
 if (arg(2) == 'preview') {
     $preview = 'preview';
 }
-
+$gray_bg_layout = '';
 if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
 }

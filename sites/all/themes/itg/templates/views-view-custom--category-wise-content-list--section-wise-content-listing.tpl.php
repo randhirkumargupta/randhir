@@ -49,7 +49,7 @@ global $base_url;
       } ?></p>
       <?php
       elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php print strip_tags($row['field_gallery_kicer']); ?></p>
+        <p><?php if(!empty($row['field_gallery_kicer'])) { print strip_tags($row['field_gallery_kicer']); }?></p>
       <?php elseif ($row['type'] == 'photogallery'): ?>
         <p><?php print strip_tags($row['field_story_expert_description']); ?></p>
       <?php endif; ?>
