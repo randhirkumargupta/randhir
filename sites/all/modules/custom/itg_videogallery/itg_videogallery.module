@@ -1001,7 +1001,7 @@ function itg_videogallery_after_build($form, &$form_state) {
   }
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
-    '#value' => $form_state['input']['original_image_fids'],
+    '#value' => isset($form_state['input']['original_image_fids'])? $form_state['input']['original_image_fids']:'',
     '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
   );
   if (!isset($form['#node']->nid)) {
