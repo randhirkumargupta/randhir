@@ -666,7 +666,7 @@ function itg_custom_ask_an_expert_form_submit(&$form, &$form_state) {
  *   array with block details
  */
 function user_details_for_section($url, $tid) {
-
+    global $base_url;
     $block = array();
     $ourExpert = '';
     if (isset($tid) && !empty($tid)) {
@@ -689,13 +689,20 @@ function user_details_for_section($url, $tid) {
             if ($url[0] == 'ask-an-expert-question-answer-details' && is_numeric($url[2])) {
                 $ourExpert = '<h4>Our Expert</h4>';
             }
-            
+            $ask_fname = '';
+            if(!empty($userDetails->field_first_name['und'][0]['value'])) {
+              $ask_fname = $userDetails->field_first_name['und'][0]['value'];
+            }
+            $ask_lname = '';
+            if(!empty($userDetails->field_last_name['und'][0]['value'])) {
+              $ask_lname = $userDetails->field_last_name['und'][0]['value'];
+            }
             if ($url[0] != 'ask-an-expert-question-answer-details') {
                 $block[] = array(
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                     '#suffix' => '</div>',
                 ),
             );
@@ -704,7 +711,7 @@ function user_details_for_section($url, $tid) {
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                 ),
             );
             }
