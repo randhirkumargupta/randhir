@@ -8,7 +8,9 @@ function itg_seo_node_data($node) {
   
   // Adding noindex, nofollow for making content search engin friendly
   if($node->type == 'story') {
+    if(isset($node->field_story_configurations[LANGUAGE_NONE])) {
     $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
+    }
     if(isset($configurableopt) && is_array($configurableopt) && !empty($configurableopt)){
       foreach ($configurableopt as $key => $value){
         $opt_value[] = $value['value'];
@@ -67,8 +69,13 @@ function itg_seo_node_data($node) {
       $auth_name = '';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
+    if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    }
+    $largimage = '';
+    if(isset($imgarray[1])) {
     $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    }
 
     $markup = array(
         '#type' => 'markup',

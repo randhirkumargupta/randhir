@@ -445,7 +445,7 @@ function itg_seo_theme_registry_alter(&$theme_registry) {
  * {@inheritdoc}
  */
 function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
-  if (function_exists('is_valid_content_type_for_sef_url') && is_valid_content_type_for_sef_url($context['data']['node']->type)) {
+  if (function_exists('is_valid_content_type_for_sef_url') && isset($context['data']['node']) && is_valid_content_type_for_sef_url($context['data']['node']->type)) {
     // Handel case if user selected  Generate automatic Sef URL
     // $alias is overridden
     // If you don't want to overridden then use conatinate.
