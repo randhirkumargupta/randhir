@@ -293,3 +293,197 @@ function generatePhotoDetailList($galleryimg){
   }
   return $photo_list_array;
 }
+
+// sprint2 function start
+
+
+/**
+ * main function for generate photoStoryDetailPage array
+ *
+ * @return array
+ */
+
+function photoStoryDetailPageRerourceValue($id){   
+    
+    // variable decalartion
+    //349693 , 349625-> photo story nid
+   // echo "<pre>"; print_r(node_load($id));  echo "</pre>";exit();
+    $output_array = array();
+    $data_array = array();
+    $photo_list_array = array();
+       
+    
+    // list array building
+    $data = generatePhotoStoryDeatilList($id); 
+    if($data['data']['photo_count'] > 0){
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";  
+    }
+    else{
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";  
+    }
+    
+    $output_array['data'] = $data['data'];
+    
+    return $output_array;
+}
+
+/**
+ * function for generate generatePhotoStoryDeatilList JSON
+ *
+ * @return array
+ */
+
+function generatePhotoStoryDeatilList($id){
+    // variable declaration    
+    global $base_url; 
+    $data = array();
+    $nid = $id;
+    $photo_list_array = array();
+    $data_array = array();
+    $node = node_load($nid);
+    // variable for feed
+    $title = $node->title;
+    $tid = $node->field_primary_category['und'][0]['value'];
+    $term = taxonomy_term_load($tid);
+    $term_name = $term->name;
+    //$comment_cont = $node->comment;
+    $alias = drupal_get_path_alias('node/'.$nid.'');
+    $weburl = $base_url ."/". $alias;
+    //$galleryimg = $node->field_gallery_image['und'];
+    
+    $changed = $node->changed;
+    $changed_datetime = date("Y-m-d H:i:s", $changed);
+    $comment_cont = getCommentsCount($nid);
+    $published_datetime = getNodePublishedDate($id);
+    // list array building
+    $photo_list_array = generatePhotoStoryDetailList($nid);  
+    $toptlapics = $photo_list_array['listcont'];
+    //data array building
+    $firebase_url = get_node_firebase_weburl($nid);
+    $data_array['id'] = "$nid";
+    $data_array['title'] = "$title";
+    $data_array['photo_count'] = "$toptlapics";
+    $data_array['comment_count'] = "$comment_cont";
+    $data_array['share_link'] = "$firebase_url";
+    $data_array['updated_datetime'] = "$changed_datetime";
+    $data_array['published_datetime'] = "$published_datetime";
+    $data_array['is_sponsored'] = "";
+    $data_array['sponsored_icon'] = "";
+    $data_array['sponsored_url'] = "";
+    $data_array['subcategory_id'] = "$tid";
+    $data_array['subcategory_title'] = "$term_name"; 
+      
+    $data_array['photo'] = $photo_list_array['data'];
+    $data_array['author'] = generateAuthorTag($nid);
+    
+    
+    $data['data'] = $data_array;
+    return $data;
+}
+
+/**
+ * function for generate photo list array
+ *
+ * @return array
+ */
+
+function generatePhotoStoryDetailList($nid){
+    $photo_list_array_data = array();
+    $photo_list_array = array();
+    $listcont = 0;
+   
+    
+  // generate the html for photo story top slider
+  if (!empty($nid)) {
+    $node = node_load($nid);
+   
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $photo_story_html = photoSotryHtml($nid); // function from
+    //$photo_story_html = node_view($node, $view_mode = 'full', $langcode = NULL);
+    //echo "<pre>"; print_r($photo_story_html);  echo "</pre>";exit();
+    foreach ($photo_story as $key => $val) {
+      
+      $entity_obj = entity_load('field_collection_item' , array($val['value']));
+      //echo "<pre>"; print_r($entity_obj);  echo "</pre>";exit();
+      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+      $photo_story_img_fid = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid'];
+      $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      $photo_story_img = completeFilePath($photo_story_img_fid);
+      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      
+        $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
+        $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
+        $photo_list_array[$listcont]['p_credit'] = "";
+        $photo_list_array[$listcont]['p_caption'] = "";
+        $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
+        $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_html";
+        $listcont++;
+    }
+    
+  }
+  $photo_list_array_data['data'] = $photo_list_array;
+  $photo_list_array_data['listcont'] = $listcont;
+  return $photo_list_array_data;
+}
+
+/**
+ * function for photoSotryHtml
+ * @param type $node_id
+ * @return string
+ */
+function photoSotryHtml($node_id) {
+  // generate the html for photo story top slider
+  if (!empty($node_id)) {
+    $node = node_load($node_id);
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $next = itg_story_photo_story_redirect($node_id , 'next');
+    $previous = itg_story_photo_story_redirect($node_id , 'prev');
+    $next_link_count = count($photo_story) - 1;
+    $html = '';
+    $html .= '<div class="photo-story-img multiple-photo-disc">';
+    foreach ($photo_story as $key => $val) {
+      if ($key == 0 && !empty($previous)) {
+        $previous_link = "<a class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
+      }
+      else {
+        $previous_link = "";
+      }
+      if ($key == $next_link_count && !empty($next)) {
+        $next_link = "<a class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
+      }
+      else {
+        $next_link = "";
+      }
+      $entity_obj = entity_load('field_collection_item' , array($val['value']));
+      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+      $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      $photo_story_img = image_style_url('photo_story_771x432' , $photo_story_img_path);
+      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $html .= '<div class="photo-slider">';
+      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story_img" />' . $previous_link;
+      $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
+      $html .= '</div>';
+    }
+    $html .= '</div>';
+    return $html;
+  }
+}
+
+
+/**
+ * function for generate photo list array
+ *
+ * @return array
+ */
+
+function generateAuthorTag($nid){
+    $output = array();
+    $output['a_id'] = "id";
+    $output['a_title'] = "author_name";
+    $output['a_image'] = "image_url";
+    $output['a_twitter_handler'] = "twitter_handler";
+    return $output;
+}
+

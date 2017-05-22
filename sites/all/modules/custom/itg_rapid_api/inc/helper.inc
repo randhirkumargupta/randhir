@@ -67,3 +67,4 @@ function get_node_firebase_weburl($nid){
     return $firebase_url;
     
 }
+

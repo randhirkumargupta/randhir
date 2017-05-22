@@ -390,3 +390,83 @@ function generateProgramCategoryList($tid, $pageno) {
 }
 
 
+/**
+ * function for  programCategoryListlPageRerourceValue 
+ *
+ * @return array
+ */
+
+function programCategoryListlPageRerourceValue($token) {
+    
+     
+     // variable decalartion
+    
+    $output_array = array();
+    $data_array = array();
+    $program_list_array = array();      
+    $updated_datetime = "";
+    $conf_array = tidConfig(); 
+    $Program_section_list = $conf_array['program_sec_tid'];
+    
+    // list array building
+    $data = generateProgramSectionList($Program_section_list);
+    if($data['lcount'] > 0){
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";  
+    }
+    else {
+           $output_array['status_code'] = "0";
+           $output_array['status_message'] = "customised_message";  
+    }
+    
+    $datacount = $data['lcount'];
+    $data_up_time = $data['updated_datetime'];
+    $changed_datetime = date("Y-m-d H:i:s", $data_up_time);
+    
+    //data array building
+    $output_array['data']['updated_datetime'] = $changed_datetime;
+    $output_array['data']['program'] = $data['data'];
+    
+    return $output_array;
+   
+}
+
+/**
+ * function for  generateProgramSectionList 
+ *
+ * @return array
+ */
+
+
+function generateProgramSectionList($Program_section_list){
+    $data = array();
+    $output_ar = array();
+    $listcount = 0;
+    foreach ($Program_section_list as $key => $value){
+        $term = taxonomy_term_load($value);
+        //echo "<pre>"; print_r($term); echo "</pre>";exit();
+        $term_name = $term->name;
+        $term_url = nodeCategoryFrontUrl($value, 'term');
+        $child_term_url = nodeCategoryFrontUrl($value, 'term');
+        $p_short_description = $term->description;
+        $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
+
+        $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
+        $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
+        $cat_icon_img = sectionCategoryIconImg($value);
+        
+        $data[$listcount]['p_id'] = "$value";
+        $data[$listcount]['p_title'] = "$term->name";
+        $data[$listcount]['p_image'] = "$cat_icon_img";
+        $data[$listcount]['p_type'] = "programlist";
+        $data[$listcount]['p_short_description'] = "$p_short_description";
+        $data[$listcount]['p_schedule'] = "$p_schedule";
+        $listcount++; 
+    }
+    
+    $output_ar['data'] = $data;
+    $output_ar['lcount'] = $listcount;
+    $output_ar['updated_datetime'] = time();
+    
+    return $output_ar;
+}

@@ -246,3 +246,21 @@ function getCommentsCount($nid){
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return count($result);
 }
+
+/**
+ * comman function for return node published date
+ * @arg $nid 
+ * @return published date
+ */
+
+function getNodePublishedDate($nid){
+    $query = db_select('workbench_moderation_node_history', 'nh');
+    $query->fields('nh', array('stamp'));
+    $query->condition('nh.nid', $nid);
+    $query->condition('nh.from_state', 'draft');
+    $query->condition('nh.state', 'published');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $published_statp = $result[0]['stamp'];
+    $published_datetime = date("Y-m-d H:i:s", $published_statp);
+    return $published_datetime;
+}

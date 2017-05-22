@@ -418,6 +418,77 @@ function itg_rapid_api_resource() {
       	),
 	),
         
+        // sprint 2 api start
+        
+        // photostorydetail custom resource declaration.....
+	'photostorydetail' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves photostorydetail schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_photostorydetail',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+                   'name' => 'id',
+                    'type' => 'string',
+                    'description' => 'Function to perform',
+                     //'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+                    'optional' => TRUE,
+                    'default' => '*',
+                    ),         
+                array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 1), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // program_category_list custom resource declaration.....
+	'program_category_list' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves program_category_list schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_program_category_list',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	        
+                array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
   );
 
   return $api;
@@ -798,4 +869,68 @@ function checkValidResource(){
   return;
 }
 
+
+// sprint2 function start
+
+/**
+ * [itg_rapid_api_photostorydetail] definition.
+ * Returns the information about a itg_rapid_api_photostorydetail.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_photostorydetail($id, $token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+         //valid id 
+        if(!is_numeric($id)){
+          $id = 0;
+        }
+        
+       // call function for return data..
+       $jsondata = photoStoryDetailPageRerourceValue($id);
+       //print_r($jsondata);exit();
+       
+
+     return $jsondata;
+   }
+}
+
+
+/**
+ * [itg_rapid_api_program_category_list] definition.
+ * Returns the information about a itg_rapid_api_program_category_list.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_program_category_list($token) {
+    $get_token = variable_get('mobile_service_token');
+    
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+         //valid id 
+        if(!is_numeric($id)){
+          $id = 0;
+        }
+        
+       // call function for return data..
+       $jsondata = programCategoryListlPageRerourceValue();
+       //print_r($jsondata);exit();
+       
+
+     return $jsondata;
+   }
+}
 
