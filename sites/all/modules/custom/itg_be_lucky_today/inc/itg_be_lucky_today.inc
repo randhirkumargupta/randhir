@@ -242,7 +242,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#title' => t('Mobile'),
       '#size' => 60,
       '#maxlength' => 128,
-      '#required' => TRUE,
+      //~ '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
       '#ajax' => array(
         'callback' => 'mobile_validation_ajax_callback',
