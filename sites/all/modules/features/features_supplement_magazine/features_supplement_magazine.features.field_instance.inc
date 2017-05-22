@@ -442,6 +442,48 @@ Image Size (210 x 145).',
     ),
   );
 
+  // Exported field_instance: 'node-issue-field_story_source_type'.
+  $field_instances['node-issue-field_story_source_type'] = array(
+    'bundle' => 'issue',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_type',
+    'label' => 'Source type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'node-magazine-field_magazine_cover_photo'.
   $field_instances['node-magazine-field_magazine_cover_photo'] = array(
     'bundle' => 'magazine',
@@ -773,6 +815,48 @@ Image Size (210 x 145).',
     ),
   );
 
+  // Exported field_instance: 'node-supplement-field_story_source_type'.
+  $field_instances['node-supplement-field_story_source_type'] = array(
+    'bundle' => 'supplement',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_type',
+    'label' => 'Source type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-supplement-field_supp_import_xml'.
   $field_instances['node-supplement-field_supp_import_xml'] = array(
     'bundle' => 'supplement',
@@ -1007,6 +1091,7 @@ Image Size (210 x 145).');
   t('Publish');
   t('Select Magazine');
   t('Small Cover Image');
+  t('Source type');
   t('Supplement');
   t('Title');
   t('Upload Cover Photo');
