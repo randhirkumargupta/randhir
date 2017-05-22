@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Mobile Services module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_image_search_schema() {
+  $schema = array();
+
+
+  $schema['itg_astro_last_image'] = array(
+      'description' => t('Astro last images!'),
+      'fields' => array(
+          'id' => array(
+              'description' => t('id'),
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'image_fid' => array(
+              'description' => t('Image Fid'),
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'default' => NULL,
+          ),
+          'key_index' => array(
+              'description' => t('Key Index'),
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'default' => NULL,
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+  return $schema;
+}
+/**
+ * Implements hook_uninstall().
+ */
+function itg_image_search_uninstall() {
+  drupal_uninstall_schema('itg_astro_last_image');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_image_search_update_7001() {
+  cache_clear_all(NULL, 'cache_menu');
+}

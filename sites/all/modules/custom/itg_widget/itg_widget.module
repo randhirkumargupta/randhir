@@ -185,8 +185,13 @@ function itg_widget_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('administer nodequeue') ,
   );
+  
+  
   return $items;
 }
+
+
+
 
 /**
  * This function use for update key candidate election status
@@ -326,6 +331,9 @@ function itg_widget_block_info() {
   );
   $blocks['live_score'] = array(
     'info' => t('Live Score')
+  );
+  $blocks['state_election_sosorry'] = array(
+    'info' => t('State Elction SoSorry')
   );
   $blocks['cheaper_dearer'] = array(
     'info' => t('Widget : Cheaper Dearer from custom table')
@@ -513,20 +521,7 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
-
+      
       $info['widget'] = 'photo_carousel_list_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
@@ -587,19 +582,6 @@ function itg_widget_block_view($delta = '') {
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
 
-      drupal_add_css('.flex-caption {
-              width: 96%;
-              padding: 2%;
-              left: 0;
-              bottom: 0;
-              background: rgba(0,0,0,.5);
-              color: #fff;
-              text-shadow: 0 -1px 0 rgba(0,0,0,.3);
-              font-size: 14px;
-              line-height: 18px;
-            }' , 'inline');
-
-
       module_load_include('inc' , 'itg_widget' , 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
       $info['order'] = 'ASC';
@@ -611,30 +593,9 @@ function itg_widget_block_view($delta = '') {
 
     case 'featured_video_carousel_r':
       global $base_url;
-
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js' , array('type' => 'external' , 'scope' => 'footer' , 'weight' => 5));
       drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js' , array('type' => 'external' , 'scope' => 'header' , 'weight' => 5));
-      drupal_add_js("jQuery(document).ready(function () {
-            var winWidth = jQuery(window).width();            
-            console.log(winWidth);
-            if(winWidth > 1024){
-            jQuery('.carousel').carousel({
-                frontWidth: 645,
-                frontHeight: 365,
-                carouselWidth: 1170,
-                carouselHeight: 450,
-                buttonNav: 'none'
-              });
-            }else{
-                jQuery('.carousel .slides').slick({                    
-                    infinite: true,    
-                    autoplay:true,
-                    dots: true,
-                    prevArrow: false,
-                    nextArrow: false
-                });
-            }
-          });" , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/featured_video_carousel.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
       module_load_include('inc' , 'itg_widget' , 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
@@ -646,55 +607,15 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top takes videos ordering reordering widget case
     case 'anchor_langing_page_menu':
-      drupal_add_css(drupal_get_path('theme' , 'itg') . '/css/jquery.mCustomScrollbar.min.css' , array('scope' => 'footer'));
-      drupal_add_js(drupal_get_path('theme' , 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js' , array('scope' => 'footer'));
-      drupal_add_js('             
-        jQuery(document).ready(function(){ 
-            var getLength = 0;
-            var defaultWidth  = jQuery(".anchor-detail-menu").outerWidth(true);
-            jQuery(".anchor-detail-menu .tab-buttons span").each(function(){
-                getLength += jQuery(this).outerWidth(true);                
-            });                
-            if(getLength > defaultWidth){
-                jQuery(".anchor-detail-menu .tab-buttons").css("width", getLength +"px"); 
-                jQuery(".anchor-detail-menu").mCustomScrollbar({
-                    axis:"x",                    
-                });
-            }
-       });' , array('type' => 'inline' , 'scope' => 'footer'));
-
       $block['content'] = theme("anchor_langing_page_menu" , array("data" => $data));
       break;
     case 'personlization':
+      global $base_url;
       module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_personalization');
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end" , array("data" => $data));
       if ($user->uid) {
-        drupal_add_js('jQuery(document).ready(function() {
-    jQuery(".recommended-slider").slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      centerPadding: "40px",
-      prevArrow: "<button class = \'slick-prev\'><i class = \'fa fa-angle-left\'></i></button>",
-      nextArrow: "<button class = \'slick-next\'><i class = \'fa fa-angle-right\'></i></button>",
-      responsive: [    
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        },
-         {
-          breakpoint: 680,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }       
-      ]
-    });
-  });' , array("type" => "inline"));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
       }
       break;
     case 'home_page_poll_widget_block':
@@ -896,6 +817,15 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("live_score_data" , array("data" => $data));
       break;
+    
+    case 'state_election_sosorry':
+      module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_state_election');
+
+      $block['subject'] = '';
+      $data = state_election_sosorry_data();
+
+      $block['content'] = theme("state_election_sosorry_data" , array("data" => $data));
+      break;
     case 'cheaper_dearer':
       module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_budget_predictor');
       $data = itg_budget_predictor_cheaper_dearer_data();
@@ -903,6 +833,7 @@ function itg_widget_block_view($delta = '') {
       break;
 
     case 'podcast_header':
+      global $base_url;
       $menu_get_object = menu_get_object();
       if ($menu_get_object->type == 'podcast') {
         $entity_id = $menu_get_object->field_podcast_audio_upload['und'];
@@ -916,24 +847,7 @@ function itg_widget_block_view($delta = '') {
           $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
           $podcast_banner_array[$key] = array("audio" => $audio_file_object , "desc" => $description , "image" => $podcast_image);
         }
-        drupal_add_js("jQuery(document).ready(function(){    
-          jQuery('.slider-header').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '.other-list'
-          });
-          jQuery('.other-list').slick({
-            slidesToShow: 7,
-            slidesToScroll: 1,
-            arrows: true, 
-            prevArrow: '<i class=\"fa fa-chevron-left slick-prev\" aria-hidden=\"true\"></i>',
-            nextArrow: '<i class=\"fa fa-chevron-right slick-next\" aria-hidden=\"true\"></i>',
-            asNavFor: '.slider-header',
-            focusOnSelect: true
-          });   
-});" , array("type" => "inline" , "scope" => "footer"));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/podcast_header.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
         $block['content'] = theme("podcast_banner" , array("podcast_banner_array" => $podcast_banner_array , "podcast_title" => $podcast_title));
       }
       break;
@@ -948,6 +862,7 @@ function itg_widget_block_view($delta = '') {
 
   return $block;
 }
+
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -957,8 +872,7 @@ function itg_widget_block_view($delta = '') {
  * @return array
  */
 function itg_widget_get_graph_data() {
-  //p($cat_id);
-  // Fetch fdata from db.
+ 
   global $theme;
   $cat_id = $_GET['section'];
   if ($theme == FRONT_THEME_NAME) {
@@ -966,21 +880,52 @@ function itg_widget_get_graph_data() {
   }
   $itg_query = db_select('node' , 'n');
   $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
-
-  $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
-  $itg_query->fields('n', array('nid'));
-  $itg_query->fields('frq', array('field_election_constituency_tall_value'))
-      ->condition('type', 'election_graph_xml')
-      ->condition('ast.field_section_tid', $cat_id, '=')
-      ->condition('status', 1);
-     // ->range(0, 5);
-
-
+  $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
+  $itg_query->fields('n' , array('nid'));
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
+   $itg_query->fields('astw' , array('field_election_state_tid'))
+      ->condition('type' , 'election_graph_xml')
+      //->condition('ast.field_section_tid' , $cat_id , '=')
+      ->condition('status' , 1);
+  // ->range(0, 5);
   //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
   $itg_result = $itg_query->execute()->fetchAll();
 
   return $itg_result;
 }
+
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function itg_widget_get_graph_data_by_state($section,$state) {
+ 
+  global $theme;
+  
+  $itg_query = db_select('node' , 'n');
+  $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
+  $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
+  $itg_query->fields('n' , array('nid'));
+  $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
+   $itg_query->fields('astw' , array('field_election_state_tid'))
+      ->condition('type' , 'election_graph_xml')
+      ->condition('ast.field_section_tid' , $section , '=')
+            ->condition('astw.field_election_state_tid' , $state , '=')
+      ->condition('status' , 1);
+  // ->range(0, 5);
+  //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  return $itg_result;
+}
+
 
 /**
  * File provide get highlights widget data.
@@ -1096,11 +1041,11 @@ function itg_widget_dailymotion_get_videogallery_slider($nid , $type = 'gallery'
                       src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                       allowfullscreen></iframe>
           </div>
-      <?php
-      if ($type != 'video') {
-        print ucfirst($video_value->field_videogallery_description_value);
-      }
-      ?>
+          <?php
+          if ($type != 'video') {
+            print ucfirst($video_value->field_videogallery_description_value);
+          }
+          ?>
       </div>
 
       <?php
@@ -1348,7 +1293,7 @@ function itg_widget_delete_data_from_widget($widget_name , $nid = 0 , $stateid =
  */
 function itg_widget_insert_widget_data($node , $widget_name , $category_tid , $extra = NULL , $state = NULL) {
   try {
-    $max_weight = get_min_weight_for_special($widget_name);
+    $max_weight = get_min_weight_for_special($widget_name , $category_tid);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     db_insert('itg_widget_order')
         ->fields(array(
@@ -1486,10 +1431,10 @@ function itg_widget_insert_widget_data_by_min_weight($node , $widget_name , $cat
     $max_weight = get_min_weight_for_special($widget_name);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     // Handel case if node already exist.
-    db_delete('itg_widget_order')
-        ->condition('nid' , $node)
-        ->condition('widget' , $widget_name)
-        ->execute();
+//    db_delete('itg_widget_order')
+//        ->condition('nid' , $node)
+//        ->condition('widget' , $widget_name)
+//        ->execute();
     //  Then delete old entry add newsone.
     db_insert('itg_widget_order')
         ->fields(array(
@@ -1691,12 +1636,6 @@ function itg_widget_get_widget_data_data($info) {
     if (isset($widget_name) && isset($max_limit) && isset($min_limit) && isset($order)) {
       $result = get_view_nodes_form_custom_table_for_widgets($widget_name , $max_limit , $min_limit , $order);
     }
-    if (!empty($result)) {
-      foreach ($result as $entity_data_node) {
-        $entity_data[] = $entity_data_node;
-      }
-      return $entity_data;
-    }
     return $result;
   }
 }
@@ -1756,21 +1695,21 @@ function _widget_batch_urls() {
     'special-key-candidate-widget-contents' ,
     'saction-staticpage-list' ,
     'budget-predictor-image' ,
-    'we-may-suggest-draggable-content-order',
-    'story-list-widget',
-    'trending-video-widget-list',
-    'top-takes-videos-list',
-    'watch-right-now-videos-list',
-    'poll-format-conent',
-    'manage-highlights',
-    'home-page-feature-widget-listing',
-    'photo-list-widget',
-    'video-list-widget',
-    'anchor-list',
-    'so-sorry-video-widget-list',
-    'issue-magazin-primary-cat-widget',
-    'issue-base-magazin-widget',
-    'issue-magazin-primary-cat-widget',
+    'we-may-suggest-draggable-content-order' ,
+    'story-list-widget' ,
+    'trending-video-widget-list' ,
+    'top-takes-videos-list' ,
+    'watch-right-now-videos-list' ,
+    'poll-format-conent' ,
+    'manage-highlights' ,
+    'home-page-feature-widget-listing' ,
+    'photo-list-widget' ,
+    'video-list-widget' ,
+    'anchor-list' ,
+    'so-sorry-video-widget-list' ,
+    'issue-magazin-primary-cat-widget' ,
+    'issue-base-magazin-widget' ,
+    'issue-magazin-primary-cat-widget' ,
     'supplement-base-magazin-widget'
   );
 }

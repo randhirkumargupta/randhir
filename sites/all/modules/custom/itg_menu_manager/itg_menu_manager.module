@@ -73,12 +73,6 @@ function itg_menu_manager_menu() {
   return $items;
 }
 
-/**
- * Script to add new column in itg_menu_manager
- */
-//function create_new_column() {
-//  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
-//}
 
 /**
  * {@inheritdoc}
@@ -143,8 +137,7 @@ function itg_menu_manager_form($form , &$form_state) {
     $menu_level = 'third';
   }
 
-  if ($menu_level == 'third') {
-    //drupal_add_css('#decided-section {display:inline-block !important;}', array('type' => 'inline'));
+  if ($menu_level == 'third') {    
     $options = itg_menu_manager_get_taxonomy_term_options('category_management');
   }
   else {
@@ -275,7 +268,6 @@ function itg_menu_manager_form($form , &$form_state) {
     '#suffix' => (arg(1) == 'vertical') ? '</div>' : '' ,
   );
 
-
   $form['category_icon'] = array(
     '#title' => t('Upload the icon') ,
     '#type' => 'managed_file' ,
@@ -314,28 +306,29 @@ function itg_menu_manager_form($form , &$form_state) {
   $form['#suffix'] = '</div>';
 
   if (!$edit_id) {
-    drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/itg_menu_manager.js' , 'file');
+    drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/itg_menu_manager.js' , array('scope' => 'footer'));
   }
 
   if ((isset($form_state['values']['url_type']) && $form_state['values']['url_type'] == 'external') || (isset($default_values['url_type']) && $default_values['url_type'] == 'external')) {
     unset($form['title']['#ajax']);
   }
 
-  //drupal_add_css('#autocomplete { height: 300px; max-height: 400px; overflow: auto; overflow-y: auto; overflow-x: hidden;}' , 'inline');
+
 ##############################################################################
 ########### Condtion removed fornow for file title in case of second #########
 ##############################################################################
-//  if (isset($default_values['menu_level']) && ($default_values['menu_level'] == 'second')) {
-//    unset($form['title']['#autocomplete_path']);
-//  }
+
   $form['#after_build'][] = 'itg_menu_manager_after_build';
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_after_build($form , &$form_state) {
   drupal_add_css("input[name=bk_color] {display:none}" , "inline");
-  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/itg-menu-main.js' , 'file');
-  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/jscolor.min.js' , 'file');
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/itg-menu-main.js' , array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/jscolor.min.js' , array('scope' => 'footer'));
   return $form;
 }
 
@@ -425,8 +418,8 @@ function itg_menu_manager_form_validate($form , &$form_state) {
     }
 
     if ($values['display_icon'] == 1 && $values['url_type'] == 'external' && $values['menu_level'] == 'vertical' && !$values['category_icon']) {
-      $errors[] = t("For external vertical menu category icon is required.");
-      drupal_add_css(".form-item-sections {display:none !important}" , "inline");
+      //$errors[] = t("For external vertical menu category icon is required.");
+      //drupal_add_css(".form-item-sections {display:none !important}" , "inline");
     }
 
     if ($values['menu_level'] == '') {
@@ -581,8 +574,7 @@ function get_section_update($form , &$form_state) {
   unset($form_state['input']['title'] , $form_state['values']['title']);
   $section = $form_state['values']['sections'];
   // In case of internal category pool search is reaquired but not in external case.
-  if ($form_state['values']['url_type'] == 'internal') {
-    //p($form_state['values']['url_type']);
+  if ($form_state['values']['url_type'] == 'internal') {    
     $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
   }
   else {
@@ -637,8 +629,6 @@ function decide_section($form , &$form_state) {
   if ($url_type == 'external') {
     unset($form['title']['#ajax']);
     unset($form['title']['#autocomplete_path']);
-//    $form['sections']['#prefix'] = '<div style="display:none">';
-//    $form['sections']['#sufix'] = '</div>';
   }
 
   if ($sections == 0 && $menu_level == 'third' && $url_type == 'internal') {
@@ -647,7 +637,7 @@ function decide_section($form , &$form_state) {
     );
   }
   return $form;
-//  return form_builder($form['#id'], $form['sections'], $form_state);
+
 }
 
 /**
@@ -844,8 +834,7 @@ function itg_menu_manager_block_view($delta = '') {
     case 'third_level_menu':
       $data = array();
       $third_level_menu = get_third_level_menu();
-      //pr($third_level_menu);
-      //exit;
+      
       $node_data = array();
 
       // handling for ip pages
@@ -978,10 +967,6 @@ function get_third_level_menu() {
     }
   }
 
-//  if (in_array(arg(1), $links_array)) {
-//    return;
-//  }
-
   if ($section_id) {
     $query = db_select('itg_menu_manager' , 'imm')
         ->fields('imm')
@@ -1014,8 +999,6 @@ function itg_menu_manager_views_data() {
     'title' => t('Menu Manager') ,
     'help' => t('ITG Menu Manager Data') ,
   );
-
-
 
   $data['itg_menu_manager']['tid'] = array(
     'title' => t('Category Manager Table') ,
@@ -1201,12 +1184,7 @@ function itg_menu_manager_form_alter(&$form , &$form_state , $form_id) {
       if (arg(1) == 'third') {
         drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/itg_menu_manager.js' , 'file');
         $options = itg_menu_manager_get_taxonomy_term_options('category_management');
-//        $form['section_child'] = array(
-//          '#title' => 'Section',
-//          '#type' => 'select',
-//          '#options' => $options,
-//          '#weight' => -99,
-//        );
+
         $new_select = '<div class="third-label-menu-section"><label for="edit-section-child">Section </label><select id="edit-section-child" name="section_child" class="form-select valid">';
         foreach ($options as $key => $value) {
           if (isset($_GET['section_child']) && $_GET['section_child'] == $key) {
@@ -1326,8 +1304,6 @@ function itg_menu_manager_custom_submit($form , &$form_state) {
           db_merge('itg_menu_manager')
               ->key(array(
                 'tid' => trim($menu_data['id']) ,
-//                'menu_level' => trim($menu_level),
-//                'section_id' => trim($section_id),
               ))
               ->fields(array(
                 'weight' => $menu_data['weight'] ,
@@ -1348,10 +1324,7 @@ function itg_menu_manager_custom_submit($form , &$form_state) {
  */
 function itg_menu_manager_views_pre_render(&$view) {
   if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
-    drupal_add_js('jQuery(document).ready(function(){jQuery("#edit-section-child").on(\'change\', function() {
-                var section_chlid = jQuery(this).val();
-                jQuery("#edit-section-id").val(section_chlid);
-            });});' , array('type' => 'inline' , 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/menu-manager-pre-render.js' , array('type' => 'file' , 'scope' => 'footer'));
     $arg = arg();
     $view->build_info['title'] = ucfirst(arg(1)) . t(" level menu ordering");
     $count = 0;
@@ -1361,7 +1334,6 @@ function itg_menu_manager_views_pre_render(&$view) {
     else {
       $count = $view->total_rows;
     }
-
 
     // Handel case for inactive category.
     // Here altered result of $views->result i.e. skip rowa which have inactive tid.
@@ -1519,6 +1491,9 @@ function itg_menu_manager_taxonomy_term_delete($term) {
   _delete_term_from_menu_manager($tid);
 }
 
+/**
+ * {@inheritdoc}
+ */
 function _delete_term_from_menu_manager($tid) {
   try {
     db_delete('itg_menu_manager')

@@ -55,7 +55,7 @@ function itg_loyalty_reward_menu() {
     );
     // Cart page.
     $items['cart'] = array(
-        'title' => 'SHOPPING CART',
+        'title' => 'Checkout Page',
         'page callback' => 'itg_loyalty_reward_cart',
         'access arguments' => array('view product page'),
         'type' => MENU_NORMAL_ITEM,
@@ -93,7 +93,7 @@ function itg_loyalty_reward_menu() {
         'file' => 'includes/itg_loyalty_reward.checkout.inc',
     );
     $items['order'] = array(
-        'title' => 'REDEMPTION HISTORY',
+        'title' => 'Loyalty Redemption History',
         'page callback' => 'itg_loyalty_reward_order',
         'access arguments' => array('view product page'),
         'type' => MENU_NORMAL_ITEM,
@@ -264,7 +264,7 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
     drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), array('type' => 'setting'));
     //Add JS for itg_loyalty_reward
     drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward')
-            . '/js/itg_loyalty_reward.js', array('weight' => 1));
+            . '/js/itg_loyalty_reward.js', array('weight' => 1, 'scope' => 'footer'));
 
     //Unset SEF URL field
     $form['path']['#access'] = FALSE;

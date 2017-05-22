@@ -5,9 +5,7 @@
 
 (function ($) {
   Drupal.behaviors.itg_common = {
-    attach: function (context, settings) {     
-
-      
+    attach: function (context, settings) {
         jQuery('.reject-ugc').click(function() {                 
         var reject_status = 'reject';
         if (reject_status == 'reject') {                   
@@ -20,7 +18,7 @@
         return true;                     
     });           
 
-    }
+  }
 
-  };
+ };
 })(jQuery, Drupal, this, this.document);

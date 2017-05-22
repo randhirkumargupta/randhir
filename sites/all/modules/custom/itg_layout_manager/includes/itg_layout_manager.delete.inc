@@ -22,6 +22,6 @@ function itg_layout_delete() {
     }
 
     drupal_set_message('deleted');
-    //drupal_goto('itg-admin-layout-list');
+   
   }
 }

@@ -35675,11 +35675,6 @@ funalytics-draft-list',
   'type' => 'mega_review_critic',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_front_end_common',
-  'delta' => 'may_be_recommend_block',
-  'type' => 'mega_review_critic',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_mega_reviews_critics',
   'delta' => 'mega_reviews_tab_form_block',
   'type' => 'mega_review_critic',
@@ -35842,11 +35837,6 @@ funalytics-draft-list',
   $export['block_node_type'][] = array(
   'module' => 'itg_ads',
   'delta' => 'ads_medium_rectangl_rhs1_300x250',
-  'type' => 'story',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_front_end_common',
-  'delta' => 'may_be_recommend_block',
   'type' => 'story',
 );
   $export['block_node_type'][] = array(

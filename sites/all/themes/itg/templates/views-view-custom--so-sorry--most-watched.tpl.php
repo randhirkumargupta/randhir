@@ -1,7 +1,7 @@
 <?php
 global $base_url;
 ?>
-<h2>Most <span>Watched</span></h2>
+<h2><?php print t('Most');?> <span><?php print t('Watched'); ?></span></h2>
 <ul class="photo-list">
 <?php foreach ($rows as $key => $value) : ?>
     <li class="col-md-3">
@@ -19,7 +19,7 @@ global $base_url;
       <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>
 </figure>
           <span class="posted-on"><?php print date ('D, d M, Y',  strtotime($value['created'])) ?></span>
-          <p  title="<?php print $value['title'] ; ?>"> 
+          <p  title="<?php print strip_tags($value['title']) ; ?>"> 
             <?php print l($value['title'], $base_url . '/' . "sosorry/" . $value['nid'] . "") ?>
           </p>
         </div>

@@ -8,8 +8,6 @@
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
-
-
         }
 
     };
@@ -85,7 +83,7 @@ function scrollToAnchor(aid) {
 jQuery(document).ready(function () {
     jQuery('#like_count,#dislike_count').click(function (event) {
         jQuery('#like_count,#dislike_count').prop('disabled', true);
-        var nd_id = jQuery(this).attr('rel');
+        var nd_id = jQuery(this).attr('data-rel');
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
         var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
@@ -139,7 +137,7 @@ jQuery(document).ready(function () {
 
     // jquery for front user activity
     jQuery('#user-activity, .user-activity').click(function (event) {
-        var nd_id = jQuery(this).attr('rel');
+        var nd_id = jQuery(this).attr('data-rel');
         var dtag = jQuery(this).attr('data-tag');
         var nodeId = jQuery(this).attr('data-nodeid');
         var dstatus = jQuery(this).attr('data-status');
@@ -156,8 +154,7 @@ jQuery(document).ready(function () {
             beforeSend: function () {
 
             },
-            'success': function (result)
-            {
+            'success': function (result) {
                 var obj = jQuery.parseJSON(result);
                 // case for follow story
                 if (obj.success == 1 && obj.activity == 'follow_story') {
@@ -209,7 +206,7 @@ jQuery(document).ready(function () {
     });
     
      jQuery('.user-activity-highlight').click(function (event) {
-        var nd_id = jQuery(this).attr('rel');
+        var nd_id = jQuery(this).attr('data-rel');
         var dtag = jQuery(this).attr('data-tag');
         var nodeId = jQuery(this).attr('data-nodeid');
         var dstatus = jQuery(this).attr('data-status');

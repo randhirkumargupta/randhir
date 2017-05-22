@@ -109,10 +109,10 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['field_service_title']['#prefix'] = '<div id="service_xml_replace_wrapper">';
       $form['field_service_title']['#suffix'] = '</div>';
 
-      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('scope' => 'footer'));
 
       /* JS library  added to beutify xml pattern */
-      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('scope' => 'footer'));
       /* check for default value */
 
       $form['field_service_delivery_mode'][LANGUAGE_NONE]['#ajax'] = array(
@@ -1073,6 +1073,24 @@ function itg_mobile_services_menu() {
 }
 
 /**
+ * This function get the Latest feed url:
+ */
+function itg_mobile_get_latest_feed_byurl($url)
+{
+  //p($url);
+  $query = db_select('itg_syndication_feed_url', 'feed');
+  # get the desired fields from the database
+  $query->condition('feed.client_feed_url', $url)
+      ->condition('feed.status', 1, '=');
+  $query->fields('feed', array('id', 'xml_name', 'created_date'))
+      ->orderBy('id', 'DESC');
+    
+   $results = $query->execute()->fetchAll();
+   return $results;
+}
+
+
+/**
  * Implements ajax callback function for itg_countchar_validation
  * @param int $nid
  * @return array
@@ -1110,7 +1128,7 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
       $form['expire_type'] = array(
           '#type' => 'select',
-          '#title' => t('Expire Type'),
+          '#title' => t('Service Status'),
           '#options' => array('live' => t('Live'), 'expired' => t('Expired')),
           '#prefix' => '<div id="custom-expire-type">',
           '#suffix' => '</div>'

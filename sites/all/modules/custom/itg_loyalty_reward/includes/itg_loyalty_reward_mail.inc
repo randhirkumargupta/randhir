@@ -10,8 +10,10 @@
  * @param int $nid
  */
 function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $product_count) {
+
   $mail_content = '';
   $node = node_load($nid);
+  $productcount = $node->field_lrp_product_count[LANGUAGE_NONE][0]['value'];
   $product_name = $node->title;
   $exp_data = explode(" ",$node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
   if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -19,22 +21,25 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $pro
     $mail_subject = $mail_content_data->field_mail_subject_product_expir[LANGUAGE_NONE][0]['value'];
     if ($product_count == 'inventory_status') { 
       $body = str_replace("[itg_mail_token:itg_product_name]", $product_name, $mail_content_data->field_mail_body_product_expirati[LANGUAGE_NONE][0]['value']);
-      $mail_body = str_replace("[itg_mail_token:itg_node_nid]", $nid, $body);
+      $product_count = str_replace("[itg_mail_token:itg_product_count]", $productcount, $body);
+      $mail_body = str_replace("[itg_mail_token:itg_product_code]", $nid, $product_count);
     } else {
       $body = str_replace("[itg_mail_token:itg_product_name]", $product_name, $mail_content_data->field_mail_body_product_expirati[LANGUAGE_NONE][0]['value']);
-      $mail_body = str_replace("[itg_mail_token:itg_loyalty_expiry]", $exp_data[0], $body);
+      $product_code = str_replace("[itg_mail_token:itg_product_code]", $nid, $body);
+      $mail_body = str_replace("[itg_mail_token:itg_loyalty_expiry]", $exp_data[0], $product_code);
     }
   }
   
   $mail_content .= $mail_body;
-  $mail_content .= "<div><p>Thanks,</p><p>India Today Group</p></div>";
 //  $mail_content = itg_loyalty_reward_product_expiration_mail_content($mail_content_data);
   if ($product_count == 'inventory_status') {
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
     $user_email_ids = implode(", ", $user_emails[0]);
+//    $user_email_ids = 'gourav.walia@kelltontech.com';
   } else { 
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
     $user_email_ids = implode(", ", $user_emails);
+//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   // Array of email subject and body 
   $params = array(
@@ -94,10 +99,9 @@ function itg_loyalty_reward_product_expiration_mail_content($node) {
  */
 function itg_loyalty_reward_product_expiration_user_emails($user_type,$node_user) {
   $user_list = array();
-if(!empty($node_user))
-{
+  if(!empty($node_user)) {
     $user_list[] = $node_user;
-}
+  }
   $roles = array('Site Admin', 'Editor');
 
   // Fetch name, mail and uid of all users having role Site Admin & Editor

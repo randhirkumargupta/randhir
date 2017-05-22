@@ -154,7 +154,6 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
     }
 
     if ($form_state['node']->type == 'issue') {
-
         $title = date('d/m/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
     }
     else {
@@ -200,7 +199,7 @@ function itg_msi_form_after_build($form, &$form_state) {
     drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
 
     //Add JS for magazine, supplement and issue
-    drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1, 'scope' => 'footer'));
 
     //Unset metatag description
     unset($form['metatags']['intro_text']['#markup']);
@@ -279,7 +278,7 @@ function itg_msi_views_pre_render(&$view) {
 
     //Add "Create Issue" button on listing page of issue
     if ($view->name == "manage_issues") {
-        drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js');
+        drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js', array('scope' => 'footer'));
         $header_content_issue = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
         $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
         $view->attachment_before = $header_content_issue;
@@ -329,8 +328,8 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
     //Add aotocomplete on issue title
     if ($form['#id'] == 'views-exposed-form-manage-issues-page') {
         drupal_add_js('jQuery(document).ready(function() {                  
-        jQuery("#edit-field-issue-title-value-value-datepicker-popup-0").prop("readonly", true);
-    });', array('type' => 'inline', 'scope' => 'footer'));
+          jQuery("#edit-field-issue-title-value-value-datepicker-popup-0").prop("readonly", true);
+        });', array('type' => 'inline', 'scope' => 'footer'));
 
         if ($form_state['view']->name == 'manage_issues') {
             $type = 'issue';
@@ -369,9 +368,9 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  * @param string $langcode
  */
 function itg_msi_node_view($node, $view_mode, $langcode) {
-    if ($node->type == 'issue') {
-        drupal_set_title(date('d/m/Y', strtotime($node->title)));
-    }
+  if ($node->type == 'issue') {
+      drupal_set_title(date('d/m/Y', strtotime($node->title)));
+  }
 }
 
 /**
@@ -596,42 +595,25 @@ function itg_msi_node_validate($node, $form, &$form_state) {
                 $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
 
                 //Add check for required fields
-                //$existing_xml = itg_msi_get_associated_fid_node($node, $xml_uid);
-//        if (count($existing_xml) > 0) {
-//          form_set_error($field . '1' . $result['fid'], t('Sorry! <strong>@xmlfilename</strong> is a duplicate xml file. Please upload another one.', array('@xmlfilename' => $xml_file->filename)));
-//        }
+
                 if (empty($xml_supplement) && ($node->type != 'issue')) { // empty supplement in file
                     form_set_error($field . '10' . $result['fid'], t('No Supplement found in the file <strong>@xmlfilename</strong>. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 elseif ((!empty($xml_supplement) && itg_msi_exist_supplement($xml_supplement) == 0) && ($node_supplement_name != $xml_supplement) && (($node->type != 'issue'))) {
                     form_set_error($field . '10' . $result['fid'], t('Supplement in the file <strong>@xmlfilename</strong> is not exists in system. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
-                }
-                /*elseif (!empty($xml_supplement) && !in_array($xml_supplement , $node_supplement_name_for_issue)) { //xml supplement is not equal to node supple
-                    form_set_error($field . '10' . $result['fid'], t('Node supplement and  <strong>@xmlfilename</strong> file supplement do not match. Please upload file with correct Supplement and try again.', array('@xmlfilename' => $xml_file->filename)));
-                }*/
+                }                
 
                 if ($node_issue_date != $xm_issue_date_timestamp) { // Xml file issue date is not equal to node issue date.
                     form_set_error($field . '9' . $result['fid'], t('No Date found in the file <strong>@xmlfilename</strong>. Please upload file with correct IssueDate and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
-
-                /*if (empty($city)) {
-                    form_set_error($field . '2' . $result['fid'], t('No city found in the file <strong>@xmlfilename</strong>. Please upload file with city name and try again.', array('@xmlfilename' => $xml_file->filename)));
-                }
-                if (empty($city_tid) && !empty($city)) {
-                    form_set_error($field . '3' . $result['fid'], t('City <strong>@cityname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another city and try again.', array('@cityname' => $city, '@xmlfilename' => $xml_file->filename)));
-                }*/
+                
                 if (empty($section)) {
                     form_set_error($field . '4' . $result['fid'], t('No section found in the file <strong>@xmlfilename</strong>. Please upload file with section and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }
                 if (empty($section_tid) && !empty($section)) {
                     form_set_error($field . '5' . $result['fid'], t('Section <strong>@sectionname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another section and try again.', array('@sectionname' => $section, '@xmlfilename' => $xml_file->filename)));
                 }
-                /*if (empty($byline)) {
-                    form_set_error($field . '6' . $result['fid'], t('No Author found in the file <strong>@xmlfilename</strong>. Please upload file with author name and try again.', array('@xmlfilename' => $xml_file->filename)));
-                }
-                if (empty($byline_id) && !empty($byline)) {
-                    form_set_error($field . '7' . $result['fid'], t('Author <strong>@byline</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another Author and try again.', array('@byline' => $byline, '@xmlfilename' => $xml_file->filename)));
-                }*/
+                
                 if (empty($headline) || $headline == 'NA') {
                     form_set_error($field . '8' . $result['fid'], t('No story headline found in the file <strong>@xmlfilename</strong>. Please upload file with story headline and try again.', array('@xmlfilename' => $xml_file->filename)));
                 }

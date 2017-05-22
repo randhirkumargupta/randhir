@@ -53,6 +53,45 @@ function feature_for_election_graph_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-election_graph_xml-field_election_state'.
+  $field_instances['node-election_graph_xml-field_election_state'] = array(
+    'bundle' => 'election_graph_xml',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_election_state',
+    'label' => 'Election State',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'node-election_graph_xml-field_section'.
   $field_instances['node-election_graph_xml-field_section'] = array(
     'bundle' => 'election_graph_xml',
@@ -95,6 +134,7 @@ function feature_for_election_graph_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Election Graph JSON URL');
+  t('Election State');
   t('Section');
 
   return $field_instances;

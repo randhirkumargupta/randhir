@@ -31,6 +31,7 @@ function itg_sso_get_mail_content($account, $to, $url_info) {
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

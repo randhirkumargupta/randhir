@@ -40,7 +40,7 @@
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
   <div class="field">
-    <div class="field-label">Title: </div>
+    <div class="field-label"><?php print t('Title') ?>: </div>
     <div class="field-items">
       <?php print $title; ?>
     </div>

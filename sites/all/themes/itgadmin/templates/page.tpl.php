@@ -56,19 +56,7 @@ if (!in_array('administrator', $user->roles)) {
                     <?php
                       $menu = menu_navigation_links('user-menu');                    
                       print theme('links__user_menu', array('links' => $menu));
-                    
-                       /* print theme('links__system_secondary_menu', array(
-                          'links' => $secondary_menu,
-                          'attributes' => array(
-                              'class' => array('links', 'inline', 'clearfix'),
-                          ),
-                          'heading' => array(
-                              'text' => $secondary_menu_heading,
-                              'level' => 'h2',
-                              'class' => array('element-invisible'),
-                          ),
-                        ));*/
-                     
+                                                      
                     ?>
                 </nav>
 <?php //endif; ?>
@@ -89,13 +77,14 @@ if (!in_array('administrator', $user->roles)) {
   <?php
     // get role array
     $role_display = $user->roles;
+    $myaccount = l(t('My account'), 'users/'.$user->uid, array('attributes' => array('class' => 'user-profile', 'title' => t('My account'))));
     // skip key for authenticated user
     
     unset($role_display[2]);
     // get value in comma seprated
     $role_display = implode(',', $role_display);
-    
-    print 'User role - '.$role_display;
+    print '<i class="fa fa-user" aria-hidden="true"></i>';
+    print '  Username - '. $user->name.' | Role - '.$role_display.' | '.$myaccount;
    ?>
 </span>                                                  
 <div class="bell-notice"></div>

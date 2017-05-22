@@ -47,8 +47,7 @@ function itg_common_tv_time($id = '') {
     $cond = array('program date' => $date);
     $cursor = $people->find($cond);
     // Fetch query for supplements
-    //$select = t('- None -');
-    //$data = array('_none' => $select);
+    
     foreach ($cursor as $document) {
       $data[$document['time']] = $document['time'];
     }
@@ -65,7 +64,7 @@ function itg_get_follow_story_user($nid, $status) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'status' => $status);
+    $cond = array('nid' => (string)$nid, 'status' => (string)$status);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $options[] = $document['uid'];
@@ -274,5 +273,23 @@ function itg_personalization_get_followed_status($tid) {
     $cond = array('tid' => $tid);
     $cursor = $people->count($cond);
     return $cursor;
+  }
+}
+
+/**
+ * Helper function to get nid of ugc content.
+ * @param int $nid
+ */
+function itg_personalization_get_uid($nid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->ugc_details;
+    $cond = array('unid' => (int)$nid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $key => $document) {
+      $data['uid'] = $document['uid'];
+    }
+    return $data;
   }
 }

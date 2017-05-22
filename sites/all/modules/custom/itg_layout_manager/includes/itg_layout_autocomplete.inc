@@ -266,11 +266,9 @@ function custom_content_widgets() {
         $query->fields('icw', array('widget'));
         $query->condition('widget', $_GET['content_title']);
   $itg_result = $query->execute()->fetchAll();
-  $val = $itg_result[0];
-  //foreach ($itg_result as $key => $val) {
-    $content .= '<li id="'.$val->widget.'" data-widget="custom_content_widgets#'.$val->widget.'" data-widget-info="">
-    <span>'.$val->widget.'</span></li>';
-  //}
+  $val = $itg_result[0]; 
+  $content .= '<li id="'.$val->widget.'" data-widget="custom_content_widgets#'.$val->widget.'" data-widget-info="">
+    <span>'.$val->widget.'</span></li>';  
   
   echo $content;
   exit;

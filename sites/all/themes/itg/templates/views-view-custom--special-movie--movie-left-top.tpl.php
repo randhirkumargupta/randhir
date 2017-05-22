@@ -18,8 +18,8 @@
             ?>
             <div class="featured-post featured-post-first <?php echo $video_class; ?>">
             <?php print $row['field_story_extra_large_image_1']; ?>    
-                <h2  title="<?php print $row['title'] ; ?>">
-                  <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+                <h2  title="<?php print strip_tags($row['title']) ; ?>">
+                 
                   <?php
                   if (function_exists('itg_common_get_smiley_title')) {
                     echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
@@ -35,7 +35,7 @@
 
     <?php } else if ($index > 0 && $index <= 2) { ?>
             <div class="featured-post <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?>
-                <h3  title="<?php print $row['title'] ; ?>">
+                <h3  title="<?php print strip_tags($row['title']) ; ?>">
                   <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
                   <?php
                   if (function_exists('itg_common_get_smiley_title')) {
@@ -71,8 +71,8 @@ foreach ($rows as $index => $row) {
     if ($index > 2) {
     
         ?>
-    <li  title="<?php print $row['title'] ; ?>">
-      <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+    <li  title="<?php print strip_tags($row['title']) ; ?>">
+      
     <?php
         if (function_exists('itg_common_get_smiley_title')) {
           echo l(itg_common_get_smiley_title($row['nid'], 0, 130), "node/" . $row['nid'], array("html" => TRUE));

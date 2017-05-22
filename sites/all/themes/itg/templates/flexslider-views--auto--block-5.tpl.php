@@ -1,5 +1,4 @@
 <?php foreach($rows as $index => $row){
-//p($items);
    ?>
 
 <div><?php print $row['field_story_extra_large_image'];?></div>

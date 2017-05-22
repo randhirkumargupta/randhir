@@ -26,17 +26,21 @@ else {
 $activate_link = $activate_url_info.'/user-activate/'.$user_id;
 
 if ($act_type != 'password_changed') {
-  $activelink = l('here', $activate_link, array('attributes' => array('target' => '_blank')));
-  $get_body = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
+  $activelink = l('here', $activate_link, array('html' => TRUE, 'external' => TRUE, 'attributes' => array('target' => '_blank')));
+  $get_body_fname = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
+  $get_body = str_replace("[itg_mail_token:itg_account_user_lname]", $lname, $get_body_fname);
   $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $get_body);
-  $get_body_vals = explode(",",$get_body_val);
+  print $get_body_val;
+//  $get_body_vals = explode(",",$get_body_val);
 } else {
-  $get_body = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
-  $get_body_vals = explode(',', $get_body);
+  $get_body_fname = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
+  $get_body = str_replace("[itg_mail_token:itg_account_user_lname]", $lname, $get_body_fname);
+  print $get_body;
+//  $get_body_vals = explode(',', $get_body);
 }
 ?> 
 
-<!DOCTYPE html> 
+<!--<!DOCTYPE html> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
   <head>
     <title>India Today Account Activation Mail</title>
@@ -46,9 +50,9 @@ if ($act_type != 'password_changed') {
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <?php 
-      foreach ($get_body_vals as $bk => $bv) {
-        print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
-      } 
+//      foreach ($get_body_vals as $bk => $bv) {
+//        print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
+//      } 
       ?>
       <tr>
         <td style="padding: 10px 20px;">Thanks,</td>
@@ -58,4 +62,4 @@ if ($act_type != 'password_changed') {
       </tr>
     </table>
   </body>
-</html>
+</html>-->

@@ -255,9 +255,9 @@ function itg_custom_widget_categories_wise_node_group_submit($form , &$form_stat
       drupal_set_message($ex->getMessage() , 'error');
     }
   }
-    unset($_SESSION['widget_name']);
+  unset($_SESSION['widget_name']);
   // Unset widget name session. As it is done to add content in widget.
-  //unset($_SESSION['widget_name']);
+  
   // Return form_value to prevent bulk operation fail.
   return array(
     'form_values' => $form_state['values'] ,
@@ -288,8 +288,7 @@ function itg_custom_widget_form_alter(&$form , &$form_state , $form_id) {
     }
   }
   if ( $form_id == "views_form_itg_custom_widget_page_1" ) {
-    $form['actions']['submit']['#submit'][] = "itg_custom_widget_update_order_reorder_data";
-    //pr($form);
+    $form['actions']['submit']['#submit'][] = "itg_custom_widget_update_order_reorder_data";   
   }
 }
 

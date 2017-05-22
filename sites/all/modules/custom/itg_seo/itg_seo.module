@@ -98,18 +98,30 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     //$form['additional_settings']['#access'] = FALSE;
     $form['#after_build'][] = 'itg_additional_settings_element_hide';
   }
-
-  $node_form_array = array('photogallery_node_form' ,
+  
+  // code for pathauto
+  $node_form_array = array(
+    'photogallery_node_form' ,
     'story_node_form' ,
     'videogallery_node_form' ,
     'podcast_node_form' ,
     'food_news_node_form' ,
     'cooking_tips_node_form' ,
-    'recipe_node_form');
+    'recipe_node_form' ,
+    'blog_node_form' ,
+    'reporter_node_form' ,
+    'itg_funalytics_node_form' ,
+    'mega_review_critic_node_form' ,
+    'page_node_form' ,
+  );
   if (in_array($form['#form_id'] , $node_form_array)) {
-    //$form['#after_build'][] = 'itg_meta_tags_alias_set';
+    $form['#after_build'][] = 'itg_custom_meta_tags_alias_set';
+    // Handel case when pathauto checkbox status.
+    $form['actions']['submit']['#submit'][] = 'itg_custom_pathauto_save_sef_status';
+    $form['#after_build'][] = 'itg_custom_pathauto_sef_checkbox_status';
   }
 }
+
 
 /**
  * Extra meta tags element hide from form
@@ -117,52 +129,38 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
  * @param array $form_state
  * @return array
  */
-function itg_meta_tags_alias_set($form , &$form_state) {
-  $form['#node']->path['alias'] = 'qwert';
+function itg_custom_meta_tags_alias_set($form , &$form_state) {
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
     $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'] , $nodeid);
-    $form['path']['alias']['#value'] = 'qwert';
+    //pr($edited_sef_url);
+    $form['path']['alias']['#value'] = $edited_sef_url; // itg_common_custompath_insert_val($form['path']['alias']['#value']);
   }
   return $form;
 }
 
-/**
- * Return SEF Url
- */
-function itg_get_sef_url($sef_path , $nodeid) {
-  if (isset($sef_path) && !empty($sef_path)) {
-    $node_object = node_load($nodeid);
-    // Handel edit case for issue baised story.
-    $is_issue_magazine = is_issue_baised_magazine($node_object);
-    $is_photo_story = is_photo_story($node_object);
-    if ($is_issue_magazine) {
-      $path_alias_set = $sef_path;
-      $path_data = explode("/" , $path_alias_set);
-      $edit_path_data = end($path_data);
-      $new_url_array = explode('-' , $edit_path_data);
-      $array_size = count($new_url_array);
-      unset($new_url_array[0]);
-      unset($new_url_array[$array_size - 4]);
-      unset($new_url_array[$array_size - 3]);
-      unset($new_url_array[$array_size - 2]);
-      unset($new_url_array[$array_size - 1]);
-      $edited_sef_url = implode('-' , $new_url_array);
-    }
-    elseif ($is_photo_story) {
-      $path_data = explode("/" , $sef_path);
-      $edited_sef_url = rtrim($path_data[2]);
+function itg_custom_pathauto_sef_checkbox_status($form , &$form_state) {
+  if (!empty($form['#node']->nid)) {
+    $entity_type = $form['#node']->type;
+    $entity_id = $form['#node']->nid;
+    $state = itg_custom_pathauto_get_sef_url_state($entity_id , $entity_type);
+    if (isset($state)) {
+      $pathauto_state = $state;
     }
     else {
-      $path_alias_set = $sef_path;
-      $path_data = explode("/" , $path_alias_set);
-      $set_hierarchy = array_reverse($path_data);
-      $seftitle = $set_hierarchy[0];
-      $sef_url = explode($nodeid , $seftitle);
-      $edited_sef_url = rtrim($sef_url[0] , '-');
+      $pathauto_state = 0;
     }
-    return $edited_sef_url;
   }
+  else {
+    //Give default sef checked while node/add form.
+    $pathauto_state = 1;
+  }
+  // Handel checked unchecked of sef url;
+  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+  $form['path']['pathauto']['#default_value'] = $pathauto_state;
+  $form['path']['pathauto']['#value'] = $pathauto_state;
+  $form['path']['pathauto']['#checked'] = $pathauto_state;
+  return $form;
 }
 
 function itg_seo_mb_substr($str , $start , $end) {
@@ -182,15 +180,13 @@ function itg_meta_tags_extra_element_hide($form , &$form_state) {
     unset($form['metatags']['#title']);
     unset($form['metatags']['#title']);
   }
-  drupal_add_js(drupal_get_path('module' , 'itg_common') . '/js/itg_metatags.js');
+  drupal_add_js(drupal_get_path('module' , 'itg_common') . '/js/itg_metatags.js' , array('scope' => 'footer'));
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
 
   // Add code after metatag updation
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
-
-  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
 
   $arr_seo_heading_not_req = array('event_backend_node_form' , 'issue_node_form' , 'supplement_node_form' , 'magazine_node_form' , 'survey_node_form' , 'quiz_node_form');
   if (!in_array($form['#form_id'] , $arr_seo_heading_not_req)) {
@@ -228,12 +224,7 @@ function itg_seo_latest_headlines() {
 function itg_additional_settings_element_hide($form , &$form_state , $form_id) {
   global $user;
   if ($user->uid != '1') {
-    drupal_add_js('jQuery(document).ready(function() {              
-              jQuery(".vertical-tabs-list").hide();
-              jQuery(".form-item-menu-enabled").hide();
-              jQuery(".form-item-path-alias").hide();              
-              jQuery(".form-item-path-pathauto").hide();  
-            });' , array('type' => 'inline' , 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module' , 'itg_seo') . '/js/itg_additional_settings_element_hide.js' , array('type' => 'file' , 'scope' => 'footer'));
   }
   return $form;
 }
@@ -247,15 +238,14 @@ function itg_additional_settings_element_hide($form , &$form_state , $form_id) {
  */
 function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $single_url = NULL) {
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
-  $title_val = substr(check_plain($entity_object->title) , 0 , 100);
-
+  $title_val = substr(check_plain($entity_object->title) , 0 , 50);
 //  if($entity_object->type == 'story' || $entity_object->type == 'photogallery' || $entity_object->type == 'videogallery') {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val)  . '</span>';  
 //  } else {
 //  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo">' . l('<span itemprop="title">' . t($title_val) , 'node/' . $entity_object->nid , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</span>';
 //  }
-  
-  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span>';
+
+  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>' , '<front>' , array('html' => TRUE , 'attributes' => array('itemprop' => 'url'))) . '</div>';
 
@@ -282,19 +272,19 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
     $section_link .= ' / Gallery / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
-    $section_link .= ' / ' . l("Podcast" , "podcasts-listing") . ' / ' . $node_title;
+    $section_link .= ' / ' . l("Podcast" , "podcast") . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
     $section_link .= ' / Poll';
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
-    $section_link .= ' / ' . l('Blog' , 'blog-listing') . ' / ' . $node_title;
+    $section_link .= ' / ' . l('Blog' , 'blog') . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
     $section_link .= ' / ' . l("Anchors" , "anchors-list") . ' / ' . $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'];
+    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'] . '/' . $node_title;
   }
   elseif (!empty($entity_object->type)) {
     $section_link .= ' / ' . $node_title;
@@ -311,7 +301,6 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
 
 function itg_seo_node_view($node , $view_mode , $langcode) {
   itg_seo_node_data($node);
-  //pathauto_create_alias();
 }
 
 /**
@@ -321,35 +310,49 @@ function itg_seo_node_view($node , $view_mode , $langcode) {
  * @return array
  */
 function event_registration_extra_element_hide($form , &$form_state) {
-  drupal_add_js('jQuery(document).ready(function() {              
-              jQuery(".vertical-tabs").hide();                
-            });' , array('type' => 'inline' , 'scope' => 'footer'));
-
+  drupal_add_js(drupal_get_path('module' , 'itg_seo') . '/js/event_registration_extra_element_hide.js' , array('type' => 'file' , 'scope' => 'footer'));
   return $form;
 }
-
 
 /**
  * Implementation of hook_node_insert().
  * @param object $node
  */
 function itg_seo_node_insert($node) {
-  //set custom path alias
-  
-  $ctype_array = array('photogallery' , 
-      'story', 
-      'videogallery',
-      'podcast',
-      'food_news',
-      'cooking_tips',
-      'recipe');
-  
-  if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $newpath = itg_common_custompath_insert_load($node);    
-    $node->path['alias'] = $newpath;    
-  } // custom alias conditions for migration
-  elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
-    itg_common_custompath_migrated_load($node);
+  if (is_valid_content_type_for_sef_url($node->type)) {
+    //set custom path alias
+
+    $ctype_array = content_types_for_sef_url();
+
+    if (in_array($node->type , $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+    }
+    if ($node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+    }
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
+      itg_common_custompath_migrated_load($node);
+    }
+  }
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_seo_node_presave($node) {
+  if (is_valid_content_type_for_sef_url($node->type)) {
+    //Handel case for fresh created node.
+    if (empty($node->nid)) {
+      // As if alise is not set from textfield the assign title of node to alise.
+      if (empty($node->path['alias'])) {
+        $node->path['alias'] = $node->title;
+      }
+    }
+    if ($node->path['pathauto'] == 1) {
+      $node->path['alias'] = $node->title;
+    }
   }
 }
 
@@ -357,20 +360,100 @@ function itg_seo_node_insert($node) {
  * Implementation of hook_node_insert().
  * @param object $node
  */
-
-function itg_seo_node_update($node) { 
+function itg_seo_node_update($node) {
   //set custom path alias  
-  if(itg_workflow_stop_node_update_batch_for_widgets()) {
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
 
-  $ctype_array = array('photogallery' , 'story' , 'videogallery' , 'podcast' , 'food_news' , 'cooking_tips' , 'recipe');
-  if (in_array($node->type , $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $newpath = itg_common_custompath_insert_load($node);
-    $node->path['alias'] = $newpath;   
+  if (isset($node->op) && is_valid_content_type_for_sef_url($node->type)) {
+    $ctype_array = content_types_for_sef_url();
+    if (in_array($node->type , $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}" ,
+        'alias' => $newpath , // Any alias that you want to set.
+      );
+      path_save($path);
+    }
+    if ($node->type == 'reporter' || $node->type == 'podcast') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}" ,
+        'alias' => $newpath , // Any alias that you want to set.
+      );
+      path_save($path);
+    }
+
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog') {
+      $newpath = itg_common_custompath_insert_load($node);
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}" ,
+        'alias' => $newpath , // Any alias that you want to set.
+      );
+      path_save($path);
+    }
   }
   // custom alias conditions for migration
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type , $ctype_array)) {
     itg_common_custompath_migrated_load($node , 'update_migrated');
+  }
+}
+
+function content_types_for_sef_url() {
+  return array(
+    'photogallery' ,
+    'story' ,
+    'videogallery' ,
+    'podcast' ,
+    'food_news' ,
+    'cooking_tips' ,
+    'recipe' ,
+    'blog' ,
+    'reporter' ,
+    'itg_funalytics' ,
+    'page' ,
+    'mega_review_critic'
+  );
+}
+
+/**
+ * function which gives boolean value which is handling for sef url.
+ */
+function is_valid_content_type_for_sef_url($type) {
+  if (in_array($type , content_types_for_sef_url())) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function itg_seo_theme_registry_alter(&$theme_registry) {
+  $theme_registry['views_data_export_xml_body']['theme paths'] = array(0 => drupal_get_path('module' , 'itg_seo') . '/templates');
+  $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module' , 'itg_seo') . '/templates';
+  $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
+}
+
+
+/**
+ * {@inheritdoc}
+ */
+function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
+  if (function_exists('is_valid_content_type_for_sef_url') && is_valid_content_type_for_sef_url($context['data']['node']->type)) {
+    // Handel case if user selected  Generate automatic Sef URL
+    // $alias is overridden
+    // If you don't want to overridden then use conatinate.
+    // Example : $alias .= '.html';
+    $alias = $context['data']['node']->path['alias'];
+    $node_id = $context['data']['node']->nid;
+    $node_type = $context['data']['node']->type;
+    $pathauto_state = 1;
+    itg_custom_pathauto_state_save($node_type , $node_id , $pathauto_state);
   }
 }

@@ -1,0 +1,391 @@
+<?php
+
+/**
+ * @file
+ * The ITG USER Comment module.
+ *
+ * Contains functionality related to User Comment.
+ *
+ */
+/**
+ * Implements hook_menu().
+ */
+function itg_comments_ugc_menu() {  
+  $items['comment_view/%'] = array(
+    'title' => 'Comment View',
+    'page callback' => 'itg_comments_ugc_comment_view',
+    'page arguments' => array(1),
+    'access arguments' => array('access ugc comment view'),
+    'type' => MENU_CALLBACK,
+    );
+  
+  $items['comment_edit/%'] = array(
+    'title' => 'Edit Comment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_comments_ugc_edit_comment_form', 1),
+    'access arguments' => array('access edit ugc comment'),
+    'type' => MENU_CALLBACK,
+    );
+  
+  $items['comment_approve/%'] = array(
+    'page callback' => 'itg_comments_ugc_comment_approve',
+    'page arguments' => array(1),
+    'access arguments' => array('access ugc comment approve link'),
+    'type' => MENU_CALLBACK,
+    );
+  
+  $items['comment-global-config'] = array( //this creates a URL that will call this form at "examples/form-example"
+    'title' => 'Configuration Form', //page title
+    'description' => '',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('comment_global_config'), //put the name of the form here
+    'access arguments' => array('access global comment configuration'),
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_permission.
+ */
+function itg_comments_ugc_permission() {
+  return array(
+    'access ugc comment view' => array(
+      'title' => t('Ugc custom comment view permission'),
+      'description' => t('Ugc custom comment view permission'),
+    ),
+    'access edit ugc comment' => array(
+      'title' => t('Ugc custom comment edit permission'),
+      'description' => t('Ugc custom comment edit permission'),
+    ),
+    'access ugc comment approve link' => array(
+      'title' => t('Ugc custom comment approve permission'),
+      'description' => t('Ugc custom comment approve permission'),
+    ),
+    'access global comment configuration' => array(
+      'title' => t('global comment configuration'),
+      'description' => t('global comment configuration'),
+    )
+  );
+}
+
+/**
+ * Implement itg_comments_ugc_edit_comment_form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_comments_ugc_edit_comment_form($form, &$form_state, $cid) {
+
+  global $user, $base_url;
+  
+  $comment = comment_load($cid);
+  $u_name = $comment->name;
+  $u_email = $comment->mail;
+  $comment_des = $comment->comment_body[LANGUAGE_NONE][0]['value'];
+   
+  if ($comment->status != '1') {
+    
+  $form['fname'] = array(
+    '#type' => 'hidden', //you can find a list of available types in the form api
+    '#title' => t('Name'),
+    '#size' => 20,
+    '#default_value' => $u_name,
+    '#disabled' => TRUE,
+    '#prefix' => '<div id="user-name">',
+    '#suffix' => '</div>',
+    );
+  
+  
+  $form['femail'] = array(
+    '#type' => 'hidden', //you can find a list of available types in the form api
+    '#title' => t('Email'),
+    '#size' => 20,
+    '#default_value' => $u_email,
+    '#disabled' => TRUE,
+    '#prefix' => '<div id="user-email">',
+    '#suffix' => '</div>',
+    );
+  
+  
+  $form['fmessage'] = array(
+    '#type' => 'textarea', //you can find a list of available types in the form api
+    '#title' => t('Comment'),
+    '#size' => 10,
+    '#default_value' => $comment_des,
+    '#prefix' => '<div id="user-message">',
+    '#suffix' => '</div>',
+  );
+
+  $form['cid'] = array(
+    '#type' => 'hidden', //you can find a list of available types in the form api
+    '#title' => t('comment id'),
+    '#value' => $cid,
+    '#maxlength' => 20,
+  );
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Publish'),
+  );
+
+  $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), 'in-queue-ugc-comments', array('attributes' => array('class' => 'cancel-link button'))),
+          '#weight' => '1000',
+          '#id' => 'cancel',
+          );
+  
+  
+  return $form;
+  }
+    else {
+      drupal_access_denied();
+    }
+}
+
+
+/**
+ * Implement itg_comments_ugc_edit_comment_form_submit
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_comments_ugc_edit_comment_form_submit($form, &$form_state) {
+ 
+  
+  $fname = $form_state['values']['fname'];
+  $femail = $form_state['values']['femail'];
+  $fmessage = $form_state['values']['fmessage'];
+  $cid = $form_state['values']['cid'];
+  $comment = comment_load($cid);
+  $comment->status = 1;
+  $comment->changed = REQUEST_TIME;
+  $comment->comment_body[LANGUAGE_NONE][0]['value'] = $fmessage;
+  comment_save($comment);
+  drupal_set_message(t('Comment Published Sucessfully'));
+  $_GET['destination'] = 'in-queue-ugc-comments';
+}
+
+/**
+ * Implements hook_form_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_comments_ugc_form_alter(&$form, &$form_state, $form_id) {
+ global $user;
+ switch ($form_id)  {
+    case 'comment_node_story_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
+      break;
+    
+    case 'comment_node_page_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      break;
+    
+    case 'comment_node_blog_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
+      break;
+    
+    case 'comment_node_photogallery_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
+      break;
+    
+    case 'comment_node_videogallery_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
+      break;
+    
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_comments_ugc_views_pre_render(&$view) {
+
+  if ($view->name == "ugc_comments") {
+
+    foreach ($view->result as $commentvalue) {
+      // get node type by comment nid
+      
+      $register_user_id = $commentvalue->comment_uid;
+      $user = user_load($register_user_id);
+      $user_message_raw_value = strip_tags($commentvalue->field_comment_body[0]['raw']['value']);
+      $user_message_lenth = strlen($user_message_raw_value);
+      if ($user_message_lenth > 100) {
+        $user_message_raw_value = substr($user_message_raw_value, 0, 99) . "...";
+        $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
+      }
+      else {
+        $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
+        $user_message_raw_value = $user_message_raw_value;
+      }
+      $commentvalue->field_comment_body[0]['rendered']['#markup'] = $user_message_raw_value;
+      if ($register_user_id != 0) {
+        $commentvalue->comment_mail = $user->mail;
+      }
+    }
+  }
+
+  if ($view->name == "ugc_comments") {
+    $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $view->attachment_before = $header_content_ugc;
+  }
+}
+
+/**
+ * Implement itg_comments_ugc_comment_view
+ * @param int $cid
+ */
+function itg_comments_ugc_comment_view($cid) {
+
+  $comment = comment_load($cid);
+  $node_title = node_load($comment->nid);
+  $user = user_load($comment->uid);
+  $comment_des = itg_ugc_bad_words($comment->comment_body[LANGUAGE_NONE][0]['value']);
+  
+  // condition for status
+  if ($comment->status == '0') {
+    $comment_status = 'Submitted for approval';
+  }
+  else {
+    $comment_status = 'Published';
+  }
+  
+  // condition for redirection 
+  if ($comment->status == '0') {
+    $redirect_url = 'in-queue-ugc-comments';
+  }
+  else {
+    $redirect_url = 'publish-ugc-comments';
+  }
+  
+  // condition for mail
+  
+  if (!empty($comment->mail)) {
+    $u_mail = $comment->mail;
+  }
+  else {
+    $u_mail = $user->mail;
+  }
+  
+  $output = '';
+  $output .= '<div class="comment-view">';
+  $output .= '<div class="u_nm">Name : ' . $comment->name . '</div>';
+  $output .= '<div class="u_email">Email : ' . $u_mail . '</div>';
+  $output .= '<div class="u_posted">Posted in : ' . $node_title->title .' ('.$node_title->type.')'. '</div>';
+  $output .= '<div class="u_comment">Comment : ' . $comment_des . '</div>';
+  $output .= '<div class="u_status">Status : ' . $comment_status . '</div>';
+  $output .= '<div class="u_pdate">Post date : ' . date('d/m/Y', $comment->created) . '</div>';
+  if ($comment->status != '0') {
+    $output .= '<div class="u_update">Updated date : ' . date('d/m/Y', $comment->changed) . '</div>';
+  }
+
+  $output .='Action : ' . l(t('Cancel'), $redirect_url, array('attributes' => array('class' => $redirect_url, 'id' => $redirect_url)));
+
+  $output .= '</div>';
+
+  return $output;
+}
+
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id  
+ */
+function itg_comments_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) { 
+   if ($form['#id'] == 'views-exposed-form-ugc-comments-page' || $form['#id'] == 'views-exposed-form-ugc-comments-page-1') {     
+     $form['#info']['filter-created']['label'] = '';
+     $form['created']['min'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('From'),
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+     
+    $form['created']['max'] = array(
+      '#type' => 'date_popup',
+      '#title' => t('To'),
+      '#date_format' => 'd/m/Y',
+      '#date_year_range' => '-1:+1',
+      '#attributes' => array(
+        'readonly' => 'readonly'
+      ),
+    );
+   }
+  
+   // alert for approve link 
+   if ($form['#id'] == 'views-exposed-form-ugc-comments-page') {
+    drupal_add_js('jQuery(".approve-comment").click(function() {                 
+        var approve_status = "publish";
+        if (approve_status == "publish") {                   
+           var msg = confirm("Are you sure you want to publish this comment?");
+                  if (msg == true) {
+                      return true;
+                  }
+                  return false; 
+               }
+               return true;                     
+                         
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+}
+
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param array reference $view
+ * @param array reference $query
+ */
+function itg_comments_ugc_views_query_alter(&$view, &$query) {
+  if (isset($view->name) && $view->name == 'ugc_comments') {
+    if (isset($_GET['created']['max']['date'])) {
+      $mx_date = str_replace('/', '-', $_GET['created']['max']['date']);
+      $mx_date = strtotime($mx_date . ' +1 days');
+      $max_conditions_array = array();
+      // $_GET['created']['min']['date'] = date("d/m/Y", strtotime($_GET['created']['min']['date']));
+
+      $max_date = strtotime(date('d-m-Y', $mx_date));
+      $max_date_condition = " AND " . $max_date;
+
+      if (isset($view->query->where[1]['conditions'][1]['field'])) {
+        foreach ($query->where[1]['conditions'] as $idx => $condition) {
+          if (!is_object($condition['field']) && $condition['operator'] == 'formula') {
+            $max_conditions_array = explode('AND', $view->query->where[1]['conditions'][$idx]['field']);
+            $view->query->where[1]['conditions'][$idx]['field'] = $max_conditions_array[0] . $max_date_condition;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implement itg_test_comment_approve
+ * @param int $cid
+ */
+function itg_comments_ugc_comment_approve($cid) {
+
+  $comment = comment_load($cid);
+  $comment->status = 1;
+  $comment->changed = REQUEST_TIME;
+  comment_save($comment);
+  drupal_set_message(t('Comment Published Sucessfully'));
+  drupal_goto('in-queue-ugc-comments');
+}

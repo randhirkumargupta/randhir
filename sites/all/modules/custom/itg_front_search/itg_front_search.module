@@ -43,18 +43,17 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search') {
 
     $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
-    //$form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title / Kicker / Tag name')));
+    
     $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
     $form['bundle_name']['#multiple'] = TRUE;
 
-    if (function_exists('itg_apache_solr_get_site_hash'))
-    {
+    if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
-    //'iibckc' => 'Dev', bw8w8n => 'Ankush-localhost'
+    
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -106,11 +105,10 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle_name']['#size'] = 5;
     $form['bundle_name']['#multiple'] = TRUE;
 
-
-    if (function_exists('itg_apache_solr_get_site_hash'))
-    {
+    if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
+    
     $form['hash']['#type'] = 'select';
     $form['hash']['#title'] = 'Property';
     $form['hash']['#options'] = $hash;
@@ -123,13 +121,11 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     
     $form['sm_field_video_used'] = array(
     '#type' => 'select',
-    '#options' => $video_publish_un_option,
-   
-  );
+    '#options' => $video_publish_un_option,   
+    );
  
   }
-  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
-    
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {    
     $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
     //$hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $hash = array('9m4hke' => 'UAT');
@@ -176,8 +172,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
  * Implement hook_views_pre_render
  * @param Array $view
  */
-function itg_front_search_views_pre_render(&$view) {
- 
+function itg_front_search_views_pre_render(&$view) { 
   
   // Add "Create Breaking news" on listing page of Breaking news
   if (isset($view->name) && ($view->name == "front_end_global_search" || $view->name == "archive_story")) {
@@ -209,45 +204,35 @@ function itg_front_search_views_pre_render(&$view) {
     }
 
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
     foreach ($view->result as $related_result) {
        if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
-      }
+       }
 
       $words = $_GET['keyword'];
       $description_raw_value = strip_tags($related_result->content);
       $description_message_lenth = strlen($description_raw_value);
       if ($description_message_lenth > 100) {
-        $description_raw_value = substr($description_raw_value, 0, 99) . "...";
-        //$description_raw_value = highlight($description_raw_value, $words);
+        $description_raw_value = substr($description_raw_value, 0, 99) . "...";        
       }
-      else {
-        //$description_raw_value = highlight($description_raw_value, $words);
+      else {        
         $description_raw_value = $description_raw_value;
       }
 
-      $related_result->content = $description_raw_value;
-      //$related_result->label = highlight($related_result->label, $words);
-
-
+      $related_result->content = $description_raw_value;     
       $splittedsite = explode("/", $related_result->site);
       $related_result->site = strtoupper($splittedsite[3]);
     }
 
-
-
     if ($view->name == "archive_story") {
       $bundle_name = array('Story' => 'STORIES', 'photogallery' => 'PHOTO', 'Videogallery' => 'VIDEO');
       $search_url = 'online-archive-story';
-    }
-    else {
-
+    } else {
       if (!empty($_GET['keyword'])) {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
-      }
-      else {
+      } else {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
       }
 
@@ -269,15 +254,14 @@ function itg_front_search_views_pre_render(&$view) {
     foreach ($bundle_name as $key => $val) {
       if ($view->name == "archive_story") {
         $_GET['bundle_name'] = $key;
-      }
-      else {
+      } else {
         $_GET['bundle_name'][''] = $key;
       }
       
       $lnk_class = '';
 
       if($key == 'All' && empty($all_bundle)) {
-       $lnk_class = "active"; 
+        $lnk_class = "active"; 
       }
       if (in_array($key, $all_bundle)) {
         $lnk_class = "active";
@@ -303,7 +287,7 @@ function itg_front_search_views_pre_render(&$view) {
           $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
           $_GET['ds_changed']['date'] = $dat_1_day_ago;
         }
-       // pr($_GET);
+       
         $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
       else {        
@@ -333,13 +317,11 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
 
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-front-end-global-search-page') {
-
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
     $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
     $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
   }
   if ($form["#id"] == 'views-exposed-form-searchimage-page') {
-
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
     $form['tm_vid_14_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
   }
@@ -351,7 +333,6 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
  * @param array reference $query
  */
 function itg_front_search_views_query_alter(&$view, &$query) {
-
   if (isset($view->name) && $view->name == 'front_end_global_search') {
     foreach ($view->exposed_raw_input['hash'] as $k => $v) {
       if ($v == 0) {
@@ -388,8 +369,7 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
  * {@inheritdoc}
  */
 function itg_front_search_node_presave($node) {
-
-  //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
+  
   if ($node->type == 'videogallery' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {
@@ -469,9 +449,7 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
  * Implement itg_get_reporter_list
  * @param string $name
  */
-function itg_get_reporter_list($name) {
-  //$term_array = taxonomy_get_term_by_name('reporter');
-  //$term = reset($term_array); # get the first element of the array which is our term object
+function itg_get_reporter_list($name) { 
 
   $reporter_name = db_select('node', 'n');
   $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');

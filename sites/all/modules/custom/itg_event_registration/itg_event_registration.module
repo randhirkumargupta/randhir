@@ -66,8 +66,7 @@ function itg_event_registration_menu() {
     'file' => 'includes/itg_event_registration.inc',
   );
   $items['event-registration-config'] = array(
-    'title' => 'Registration Fields Configuration',
-    //'page callback' => 'itg_event_registration_fields_configuration',
+    'title' => 'Registration Fields Configuration',    
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_event_registration_fields_configuration_form'),
     'access arguments' => array('access content'),
@@ -155,16 +154,8 @@ function itg_event_registration_theme() {
  */
 function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
-  if ($form_id == 'event_registration_node_form') {
-    /*    $form['field_no_of_members']= array(
-      '#prefix' => '<div class= "event-member-container">',
-      '#title' => 'No. Of Memebers',
-      '#type' => 'item',
-      '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input readonly value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
-      '#suffix'=> '</div>'
-      ); */
+  if ($form_id == 'event_registration_node_form') {    
     $current_event_nid_old = itg_event_registration_get_event_nid();
-
 
     if (!empty($current_event_nid_old)) {
       $_SESSION['current_event_id'] = $current_event_nid_old;
@@ -176,7 +167,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
     $tickets_available = $no_of_tickets - $total_registered_users;
-    //$group_tickets_available = $tickets_available - 1;
+    
     $group_tickets_available = $tickets_available;
     if ($group_tickets_available > 0) {
       $_SESSION['total_ava_ticket'] = $group_tickets_available;
@@ -209,8 +200,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     $form['field_erf_total_fee']['#access'] = FALSE;
 
     // Rename submit button from "Save" to "Submit"
-    $form['actions']['submit']['#value'] = 'Submit';
-    //$form['actions']['submit']['#attributes'] = array("onclick" => "javascript: this.value='Please Wait...'; this.disabled = true;");
+    $form['actions']['submit']['#value'] = 'Submit';    
 
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
@@ -268,7 +258,6 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     // After build and validate function 
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
-
 
     // Call custom summit callback
     $form['#validate'][] = 'itg_event_registration_form_event_validate';
@@ -369,7 +358,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // Tab wise permission
-  if ($form_id == 'event_backend_node_form') {
+  if ($form_id == '1event_backend_node_form') {
     $event_tabs = array('step_first' => 'Basic Details', 'step_second' => 'Registration Fees', 'step_program_schedule' => 'Program Schedule', 'step_sponsor' => 'Sponsor', 'step_highlights' => 'Highlights', 'step_media' => 'Media', 'step_configuration' => 'Configuration');
     global $user;
     foreach ($user->roles as $key => $role) {
@@ -404,15 +393,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
       $msg = 'You are not authorised to access this step. Your allowed steps are <strong>' . rtrim($msg_step, ', ') . '.</strong>';
     }
-//    foreach($form['#steps'] as $step){
-//      if(!in_array($step->step_name, $step_array)){
-//        $msg = 'You are not authorised to access this step.';
-//        foreach($step->children as $field_name) {
-//          $form[$field_name]['#access'] = FALSE;
-//          
-//        }
-//      }
-//    }
+
     if (!empty($msg)) {
       drupal_set_message($msg, 'error');
     }
@@ -505,10 +486,10 @@ function itg_event_registration_form_event_validate($form, &$form_state) { // co
       if (!preg_match("/^[0-9]{10}$/", $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'])) {
         form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_mobile', t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value for Member @member.', array('@mobile' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
       }
+      
       if (substr($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'])) {
         form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key . '][field_erf_mobile', t('Mobile number <strong>@mobile</strong> is not a valid mobile number for Member @member.', array('@mobile' => $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $key + 1)));
       }
-
 
       // Validate Email field
       if (!valid_email_address($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A' && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_erf_email'][LANGUAGE_NONE][0]['value'])) {
@@ -540,7 +521,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
 
   // Add JS for Event Registration
-  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1, 'scope' => 'footer'));
 
   $form['event_registration_title'] = array(
     '#type' => 'item',
@@ -558,13 +539,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#suffix'] = '</div>';
   }
-
-  // If limited tickets are available
-//  $event_node = node_load($current_event_nid);
-//  $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
-//
-//  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
-//  $tickets_available = $no_of_tickets - $total_registered_users;
+ 
   return $form;
 }
 
@@ -597,10 +572,8 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   }
 
   $current_event_nid = itg_event_registration_get_event_nid();
-
-  //$form_state['redirect'] = $baseurl . '/registration';
-  $event_name = itg_common_get_node_title($current_event_nid);
-  //drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
+  
+  $event_name = itg_common_get_node_title($current_event_nid);  
   
   $type = isset($form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value'])?$form_state['values']['field_erf_payment_gateway'][LANGUAGE_NONE][0]['value']:'';
   $form_state['redirect'] = 'itg-payment/'.$type;
@@ -792,11 +765,7 @@ function itg_event_registration_get_event_nid() {
   }
   elseif (is_numeric($arg[1]) && $arg[0] == "node") {
     return $arg[1];
-  } /* else {
-    $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-    $host_node_arr = explode('/', $host_detail['source']);
-    return $host_node_arr[1];
-    } */
+  }
 }
 
 /**
@@ -818,10 +787,7 @@ function itg_event_registration_get_form() {
 
   module_load_include('inc', 'node', 'node.pages');
   $form = node_add('event_registration');
-
-  /* $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-    $host_node_arr = explode('/', $host_detail['source']);
-    $host_node = node_load($host_node_arr[1]); */
+  
   $event_node = itg_event_backend_get_event_node();
   $host_node = node_load($event_node);
   $form['#cache'] = TRUE;
@@ -872,6 +838,9 @@ function itg_event_registration_fields_configuration_form_submit($form, &$form_s
   drupal_set_message(t('Configuration settings has been saved.'), 'status');
 }
 
+/**
+ * Implement itg_event_registration_config_field
+ */
 function itg_event_registration_config_field($event_nid) {
   $query = db_select('itg_event_registration_field_config', 'itg_event_config');
   $query->fields('itg_event_config', array('visiblity', 'required', 'field_label', 'field_machine_name'));
@@ -938,8 +907,7 @@ function itg_event_registration_node_insert($node) {
         'created' => REQUEST_TIME,
         'changed' => REQUEST_TIME,
       );
-
-      //$_SESSION['coupon_values_json']['data'] = $coupon_values_json;
+      
       $_SESSION['event_registration_payment']['event_key'] = itg_payment_encode_data($coupon_values);
       $qry = db_insert('coupons_activity_details')
           ->fields(array('coupon_code', 'event_id', 'reg_id', 'total_payment', 'redeemed_payment', 'status', 'created', 'changed'))

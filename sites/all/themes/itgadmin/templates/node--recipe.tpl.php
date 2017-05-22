@@ -31,7 +31,6 @@
                 }
                 ?>
                 <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?> <?php echo $promote_class; ?>'>
-                        <?php //print render($content)   ?>            
                         <?php if ($view_mode == 'full'): ?>
                         <div class="content-node-view">                                      
                             <?php
@@ -267,8 +266,8 @@
             <?php if (!empty($syndication)): ?>
                                             <div class="breaking-content-details">
                                                 <div class="field">
-                                                    <div class="field-label">Syndication: </div>
-                                                    <div class="field-items"><?php print ('yes'); ?></div>
+                                                    <div class="field-label"><?php print t('Syndication:'); ?> </div>
+                                                    <div class="field-items"><?php print t('yes'); ?></div>
                                                 </div>
                                             </div>
                             <?php endif; ?>
@@ -290,7 +289,7 @@
                                     ?>    
             <?php print render($content['field_story_category']); ?>
         <?php endif; ?>
-                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+                                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php print t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
                             </div>
                         </div>
@@ -317,7 +316,7 @@
                     else {
                         ?>
                         <div class="promote-sidebar">
-                            <div class="promote-lock">Someone  is already working on this</div>
+                            <div class="promote-lock"><?php print t('Someone  is already working on this');  ?></div>
                         </div> 
                     <?php }
                     ?>

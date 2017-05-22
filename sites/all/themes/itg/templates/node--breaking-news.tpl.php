@@ -21,13 +21,12 @@ $share_image = '';
 if (!empty($content)):
     $type = $node->field_type['und']['0']['value'];
     if ($type == 'Live Blog' || $type == 'Breaking News') {
-      if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) {
-        $title = '<h1><span>'.$node->field_story_snap_post[LANGUAGE_NONE][0]['value'].'</span>: '.$node->title.'</h1>';
+      if(!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+        $title = '<h1><span>'.$node->field_constituancy[LANGUAGE_NONE][0]['value'].'</span>: '.$node->title.'</h1>';
       } else {
         $title = '<h1><span>'.$type.'</span>: '.$node->title.'</h1>';
       }
-        //$title = $node->title;
-        //$share_title = $type.':'.$title;
+      
         $share_title = $node->title;
         ?>
     <!--<h1><?php if($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
@@ -86,12 +85,11 @@ if (!empty($content)):
       }
           }
       ?>
-      
-    <!--<iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>-->
+     
     
     <div class="live-hightlight">
               <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                <h3>Highlights</h3>
+                <h3><?php print t('Highlights'); ?></h3>
               <?php } ?>
               <ul>
                   <?php
@@ -106,15 +104,7 @@ if (!empty($content)):
           </div>
     <?php } ?>
     <div class="timeline">
-    <h3>Timeline</h3>
-<!--    <div id="time-range">
-      <p>Time Range: <span class="slider-time">00:00 AM</span></p>
-      <div class="sliders_step1">
-        <div id="slider-range">
-          <div id="custom-handle" class="ui-slider-handle"><span></span></div>
-        </div>
-      </div>
-    </div>-->
+    <h3><?php print t('Timeline'); ?></h3>
     <input id="slider-range" class="irs-hidden-input" readonly="">
     <?php
         if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {

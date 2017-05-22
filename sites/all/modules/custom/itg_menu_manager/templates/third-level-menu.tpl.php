@@ -8,13 +8,7 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
 }
 else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
   $cat_id = variable_get('ipl_for_widget');
-  drupal_add_js('jQuery(document).ready(function() {                  
-                           jQuery(".live-tv").click(function(){
-
-                   window.location.href=jQuery("#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3)").find("a").attr("href");
-                      });
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
-
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/third-level-menu-live-button.js' , array('type' => 'file' , 'scope' => 'footer'));
   $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
   $cat_flag = TRUE;
 }
@@ -27,12 +21,7 @@ else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
 if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
-  drupal_add_js('jQuery(document).ready(function() {                  
-                        jQuery("body").addClass("section-sport-ipl-bg");
-                        
-                        jQuery("#block-itg-ads-ad-right-sidebar-1").hide();
-                       
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/menu-manager-ipl-for-widget.js' , array('type' => 'file' , 'scope' => 'footer'));
 }
 
 if ($cat_id == "") {
@@ -58,14 +47,14 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
       <div class="container">
           <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php
                   if (!empty($src) && isset($uri)) {
                     print l("<img src='" . $src . "' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
                   }
                   ?>
               </div>
-              <div class="col-md-9 col-sm-9 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php if (!empty($data)) : ?>
                     <div class="select-menu"><?php echo t("Section") ?></div>
                     <ul class="third-level-menu">

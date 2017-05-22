@@ -36,12 +36,12 @@
  */
 ?>
 <?php if (isset($node->op)): ?>
-<h3 class="show">Preview full version</h3>
+<h3 class="show"><?php print t('Preview full version'); ?></h3>
 <?php endif; ?>
 <a class="close-preview" href="javascript:;"> </a>
 <div class="node node-preview">
-  <div class="field"><div class="field-label">Election Graph JSON URL: </div><div class="field-items"><?php print $node->field_election_constituency_tall[LANGUAGE_NONE][0]['value']; ?></div></div>
-  <div class="field"><div class="field-label">Section: </div><div class="field-items"><?php print $node->field_section[LANGUAGE_NONE][0]['taxonomy_term']->name ?></div></div>
+  <div class="field"><div class="field-label"><?php print t('Election Graph JSON URL:'); ?> </div><div class="field-items"><?php print $node->field_election_constituency_tall[LANGUAGE_NONE][0]['value']; ?></div></div>
+  <div class="field"><div class="field-label"><?php print t('Section: ');  ?></div><div class="field-items"><?php print $node->field_section[LANGUAGE_NONE][0]['taxonomy_term']->name ?></div></div>
   
 
     </div>

@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Create table survey table on back end.
+ * 
+ * Implements hook_schema().
+ * {@inheritdoc}.
+ */
+function itg_be_lucky_today_schema() {
+    $schema['survey'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+        'id' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'survey_id' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'int',
+          'not null' => FALSE,
+        ),
+        'name' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+        'address' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'city' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'state' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'email' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+        'gender' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'phone' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'mobile' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'age' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'income' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'household_income' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'designation' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'occupation' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'studled' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'record_date' => array(
+          'description' => 'TODO: please describe this field!',
+          'mysql_type' => 'timestamp',
+          'not null' => TRUE,
+        ),
+        'facebookid' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'ipaddress' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'comment' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'fb_username' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+        'NewIndex1' => array('survey_id'),
+      ),
+    );
+
+    return $schema;
+}
+
+/**
+ * hook_enable()
+ */
+function itg_be_lucky_today_enable() {
+  db_query('
+    ALTER TABLE {survey} 
+    MODIFY record_date TIMESTAMP NOT NULL 
+    DEFAULT CURRENT_TIMESTAMP 
+    ON UPDATE CURRENT_TIMESTAMP'
+  );
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_be_lucky_today_uninstall() {
+    drupal_uninstall_schema('survey');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_be_lucky_today_update_7001() {
+    cache_clear_all(NULL, 'cache_menu');
+}

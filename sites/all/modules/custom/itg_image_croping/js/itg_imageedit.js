@@ -39,11 +39,9 @@ jQuery(document).ready(function() {
                     data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
                     success: function(data) {
                         var objdata = jQuery.parseJSON(data);
-                        if (objdata.status == 1)
-                        {
+                        if (objdata.status == 1) {
                             jQuery('#tagit').fadeOut();
                             viewtag(image_fiedlid);
-
                         }
 
                     },
@@ -90,7 +88,6 @@ jQuery(document).ready(function() {
         tagurl = jQuery('#tagurl').val();
         tagid = jQuery('#tagid').val();
 
-
         var img = jQuery('#imgtag').find('img');
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
             jQuery('.web-error').hide();
@@ -101,11 +98,9 @@ jQuery(document).ready(function() {
                 data: {'tagid': tagid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
                 success: function(data) {
                     var objdata = jQuery.parseJSON(data);
-                    if (objdata.status == 1)
-                    {
+                    if (objdata.status == 1) {
                         jQuery('#tagit').fadeOut();
                         viewtag(image_fiedlid);
-
                     }
 
                 },
@@ -118,7 +113,6 @@ jQuery(document).ready(function() {
             jQuery('.web-error').show();
             return false;
         }
-
 
     });
 
@@ -140,11 +134,10 @@ jQuery(document).ready(function() {
                 //get tags if present
                 jQuery('#tagit').fadeOut();
                 viewtag(image_fiedlid);
-
-
             }
         });
     });
+    
     jQuery('.edit').live('click', function() {
         id = jQuery(this).parent().attr("id");
         id = id.split('_');
@@ -162,7 +155,6 @@ jQuery(document).ready(function() {
                 jQuery('#tagit').remove( ); // remove any tagit div first
                 jQuery('#imgtag').append('<div id="tagit"  style="top: ' + ycord + 'px; left: ' + xcord + 'px;"><div class="box"></div><div class="name"><div class="text">Tag</div><input type="text" name="tagname" id="tagname" placeholder="Title" value="' + tags + '"/><input type="hidden" name="tagid" id="tagid" value="' + id + '"/><input type="text" value="' + url + '" name="tagurl" class="error" id="tagurl" placeholder="Tag Url" /><span style="display:none" class="error web-error" for="edit-title" generated="true">Enter currect url .</span><input type="button" name="btnsave" value="Save" id="btnsavetagedit" /><input type="button" name="btncancel" value="Cancel" id="btncancel" /></div></div>');
                 jQuery('#tagname').focus();
-
             }
         });
     });
@@ -182,8 +174,6 @@ jQuery(document).ready(function() {
                 //get tags if present
                 jQuery('#tagit').fadeOut();
                 viewtag(image_fiedlid);
-
-
             }
         });
     });
@@ -192,8 +182,7 @@ jQuery(document).ready(function() {
 });
 
 //
-function viewtag(pic_id)
-{
+function viewtag(pic_id) {
 
     jQuery.ajax({
         url: Drupal.settings.basePath + 'gettaglist',
@@ -214,12 +203,11 @@ function viewtag(pic_id)
 
 }
 
-function showloader()
-{
-    jQuery('#loader-data').show();
+function showloader() {
+  jQuery('#loader-data').show();
 }
-function hideloader()
-{
-    jQuery('#loader-data').hide();
+
+function hideloader() {
+  jQuery('#loader-data').hide();
 }
  

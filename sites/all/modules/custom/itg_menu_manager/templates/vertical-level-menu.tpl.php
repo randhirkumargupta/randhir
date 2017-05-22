@@ -33,9 +33,7 @@
             $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
             $icon = "<img src='" . $image_url . "' alt='' />";
           }
-//          if ($display_icon == 1) {
-//            $link_title_display = $icon;
-//          }
+
           $style_tag = '';
           $color_value = '';
           if(!empty($sponsored_class)) {
@@ -50,10 +48,10 @@
   </div>
   <div class="vertical-more">    
     <a class="more" href="javascript:void(0)">
-      <span><i class="fa fa-chevron-down" aria-hidden="true"></i>MORE</span>
+      <span><i class="fa fa-chevron-down" aria-hidden="true"></i><?php echo t('MORE') ?></span>
     </a>    
     <a class="less" href="javascript:void(0)" style="display: none">
-      <span><i class="fa fa-chevron-up" aria-hidden="true"></i>LESS</span>
+      <span><i class="fa fa-chevron-up" aria-hidden="true"></i><?php echo t('LESS') ?></span>
     </a>    
   </div>
 <?php endif; ?>

@@ -10,18 +10,6 @@ if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
   $host_node = node_load($arg[1]);
 }
 
-/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me
-if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
-} else {
-    if (!empty($host_detail['source'])) {
-      $host_node_arr = explode('/', $host_detail['source']);
-    }
-    if (!empty($host_node_arr[1])) {
-      $host_node = node_load($host_node_arr[1]);
-    }
-}*/
-
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
@@ -35,13 +23,10 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 
 $actual_host_name = itg_event_get_host_name();
+
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
 }
-/*else { me
-  $baseurl = $base_url.'/';
-}*/
-
 
 if($current_date < $event_close_date) {
 if (!empty($data)) {
@@ -57,9 +42,9 @@ if ($current_date > $event_start_date && $current_date < $event_close_date) {
 }
 elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
   $output = '<h2 class="block-title">'.$host_node->title.'</h2>';
-  $output .= '<div style="margin-bottom: 20px;">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
+  $output .= '<div class="mb-20">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
 }
-//$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
+
 print $output;
 ?>
 <h2 class="block-title"><?php print t('Session wise coverage'); ?></h2>
@@ -117,14 +102,14 @@ foreach ($data as $key => $value) {
               $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
               if(!empty($spk_detail)){
               print '<div class="profile-loop"><label style="color:'.$font_color.'">Speaker:</label>';
-              //$spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
+              
               $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), $baseurl.'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
               if(!empty($spk_detail[0]->uri)){
                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
               }else{
                 $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' alt='' />";
               }
-              //print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
+              
               print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';
               print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->field_story_new_title_value) . '</div></div>';
               }

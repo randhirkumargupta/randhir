@@ -169,6 +169,12 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
   
+  $progarm_cat_id = variable_get('program_category_id_for_programmes');
+  
+  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && $arg[2] == $progarm_cat_id) {
+    $variables['theme_hook_suggestions'][] = 'page__taxonomy_term_program';
+  }
+  
 }
 
 /**

@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+  - source: scripts/setup/local.settings.php
+    destination: /var/www/html/sites/default/
+  - source: scripts/setup/settings.php
+    destination: /var/www/html/sites/default/

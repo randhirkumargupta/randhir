@@ -7,6 +7,7 @@
   Drupal.behaviors.task_allocation = {
     attach: function (context) {
       //$('.tabledrag-toggle-weight-wrapper').hide();
+      jQuery("#edit-field-task-task-idea-und-0-remove-button").hide();
       jQuery ('input[name="field_task_finish_date_and_time[und][0][value][date]"]').keydown (false);
 
       $ ('#edit-created-min-datepicker-popup-0').one ('focus', function () {

@@ -418,7 +418,7 @@ function itg_ads_node_validate($node, $form, &$form_state) {
     $section_selection = isset($node->field_ads_section_selection[LANGUAGE_NONE][0]['tid']) ? $node->field_ads_section_selection[LANGUAGE_NONE][0]['tid'] : NULL;
     $template_variants = isset($node->field_ads_template_variants[LANGUAGE_NONE][0]['tid']) ? $node->field_ads_template_variants[LANGUAGE_NONE][0]['tid'] : NULL;
 
-//check on date values
+    //check on date values
     if (isset($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']) && !empty($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value'])) {
       $start_date = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
     }
@@ -567,7 +567,6 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
   $syndication_mode = 'field_ads_placeholder';
   $syndication_rule_title = 'field_ads_template_selection';
 
-
   $lang = isset($form_state['values']['language']) ? $form_state['values']['language'] : LANGUAGE_NONE;
   foreach ($form_state['values']['field_adds_code_holder'][$lang] as $k => $item) {
     if ($k === 'add_more')
@@ -576,7 +575,6 @@ function itg_ads_rule_after_build_validate($form, &$form_state) {
     $maindata[] = array();
 
     if (isset($item['field_ads_placeholder'][$lang][0]['value']) && !empty($item['field_ads_placeholder'][$lang][0]['value'])) {
-
       $placeholder_data[] = $item['field_ads_placeholder'][$lang][0]['value'];
     }
 
@@ -686,7 +684,6 @@ function check_add_template_final($placeholder, $page_name) {
       foreach ($res as $key => $placeholder_data) {
         $data[$placeholder_data->field_ads_placeholder_value][] = array('device' => $placeholder_data->field_ads_device_selection_value, 'code' => $placeholder_data->field_ads_ad_code_value);
       }
-
 
       return $data;
     }
@@ -811,10 +808,8 @@ function get_ad_of_placeholder($placeholder_name, $page_name) {
 
   if (isset($template_id) && !empty($template_id)) {
     $node = node_load($template_id);
-
     foreach ($node->field_adds_code_holder[$node->language] as $chunks_data) {
       $entity = entity_load('field_collection_item', array($chunks_data['value']))[$chunks_data['value']];
-
       if ($entity->field_ads_placeholder['und'][0]['value'] == $placeholder_name && ($entity->field_ads_device_selection['und'][0]['value'] == 'both' || $entity->field_ads_device_selection['und'][0]['value'] == $device)) {
         return $entity->field_ads_ad_code['und'][0]['value'];
       }
@@ -835,6 +830,7 @@ function itg_ads_node_update($node) {
       $entity = entity_load('field_collection_item', array($chunks_data['value']))[$chunks_data['value']];
       $default_ros_value[$entity->field_ads_placeholder['und'][0]['value']][] = array('device' => $entity->field_ads_device_selection['und'][0]['value'], 'code' => $entity->field_ads_ad_code['und'][0]['value']);
     }
+    
     $default_ros_value['ros_date_range_filter']['field_ads_start_date'] = $node->field_ads_start_date[$node->language][0]['value'];
     $default_ros_value['ros_date_range_filter']['field_ads_end_date'] = $node->field_ads_end_date[$node->language][0]['value'];
     $default_ros_value_json = drupal_json_encode($default_ros_value);
@@ -855,6 +851,7 @@ function itg_ads_node_insert($node) {
       $entity = entity_load('field_collection_item', array($chunks_data['value']))[$chunks_data['value']];
       $default_ros_value[$entity->field_ads_placeholder['und'][0]['value']][] = array('device' => $entity->field_ads_device_selection['und'][0]['value'], 'code' => $entity->field_ads_ad_code['und'][0]['value']);
     }
+    
     $default_ros_value['ros_date_range_filter']['field_ads_start_date'] = $node->field_ads_start_date[$node->language][0]['value'];
     $default_ros_value['ros_date_range_filter']['field_ads_end_date'] = $node->field_ads_end_date[$node->language][0]['value'];
     $default_ros_value_json = drupal_json_encode($default_ros_value);

@@ -48,10 +48,10 @@ function itg_widget_tech_most_read_ordering_data($info) {
     }
 
     $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name , $cat_id , 3 , 0);
-    $entity_data = array();
-    foreach ($result as $entity_data_node) {
-      $entity_data[] = $entity_data_node;
-    }
-    return $entity_data;
+//    $entity_data = array();
+//    foreach ($result as $entity_data_node) {
+//      $entity_data[] = $entity_data_node;
+//    }
+    return $result;
   }
 }

@@ -61,7 +61,7 @@
                 var roleSelected = $('#user-register-form, #user-profile-form').find('select[name="selected"]').val();
                 var expertCheck = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
                 if (roleSelected == EXPERT) {
-                  $('#edit-field-user-section > .form-type-select > label').html('Section');
+                  $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
                   $('.user-configurations').show();
                   if(!expertCheck){
                     $('.field-name-field-mark-as-expert').hide();
@@ -81,6 +81,7 @@
                     if (value == EXPERT) {
                       
                       $('#edit-field-user-section > .form-type-select > label').html('Section');
+                      $('.field-name-field-user-section').show();
                       $('.user-configurations').show().find('.field-name-field-user-section').show().prev().hide();
                       $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
                         
@@ -93,6 +94,7 @@
                     } else {
                       
                       $('.field-name-field-user-section').find('select').val("_none");
+                      $('.field-name-field-user-section').hide();
                       $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
                       $('.user-configurations').hide();
                       

@@ -8,8 +8,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       // code for clone story start here
-      if (!empty($_GET['clone_id']))
-      {
+      if (!empty($_GET['clone_id'])) {
         $clone_arr = itg_story_clone_data($_GET['clone_id'], 'story');
         $clone_arr_response = $clone_arr->response->docs[0];
         $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
@@ -73,16 +72,14 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
       }
   }
-  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone')
-  {
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone') {
 
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Ex: Title')));
 
     $form['bundle_name']['#value'] = 'Story';
     $form['bundle_name']['#attributes']['class'][] = 'element-hidden';
-    //'iibckc' => 'Dev'
-    if (function_exists('itg_apache_solr_get_site_hash'))
-    {
+    
+    if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
     $form['hash']['#type'] = 'select';
@@ -100,15 +97,13 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
 function itg_story_clone_data($keyword, $type) {
 
   // apachesolr_site_hash();
-  if (!empty($keyword))
-  {
+  if (!empty($keyword)) {
     $solr = apachesolr_get_solr();
     $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$keyword"));
     $query->addParam('rows', '10'); // How many rows of result to display default it is 10.
     $query->addParam('qf', 'entity_id'); // Only search in title
     //The bundle which you want to search
-    if (!empty($type))
-    {
+    if (!empty($type)) {
       $query->addFilter("bundle", "story");
     }
     $query->setSolrsort('sort_label', 'asc');

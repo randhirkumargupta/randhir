@@ -116,7 +116,7 @@ if ($theme != 'itgadmin') {
         
         <div class="top-block">
 <div class="col-md-8">
-  <div class="widget-help-text">Special widgets ( <strong>Automated Top Story</strong> )</div>
+  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
             <div class="">
               <div class="itg-widget">
                   <div class="droppable itg-layout-605 <?php print $gray_bg_layout; ?>">
@@ -148,7 +148,7 @@ if ($theme != 'itgadmin') {
 
 </div>
             <div class="col-md-4">
-              <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
+              <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
             <div class="auto-block-3">
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
@@ -157,14 +157,14 @@ if ($theme != 'itgadmin') {
                         <?php
                           $block = block_load('itg_ads', ADS_RHS1);   
                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                          //print render($render_array);
+                          
                          ?>
                       </div>
                     </div>
                   </div>
                 </div>
                     <div class="itg-widget trending-list">
-                        <div class="widget-help-text">Section card</div>
+                        <div class="widget-help-text"><?php print t('Section card'); ?></div>
                       <div class="itg-widget-child">
                         <div class="droppable <?php print $gray_bg_layout; ?>">
                           <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>">
@@ -179,7 +179,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3">
+                            <div class="data-holder" data-widget-style="auto-road-trip" id="itg-block-3">
                               <?php
                                 if (isset($widget_data['itg-block-3']['widget'])) {
                                   print $widget_data['itg-block-3']['widget']; 
@@ -236,7 +236,7 @@ if ($theme != 'itgadmin') {
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-          <div class="widget-help-text">Section card</div>
+          <div class="widget-help-text"><?php print t('Section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
@@ -269,7 +269,7 @@ if ($theme != 'itgadmin') {
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-          <div class="widget-help-text">Section card</div>
+          <div class="widget-help-text"><?php print t('Section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'].$widget_data['itg-block-6']['widget_display_name']; ?>">
@@ -342,7 +342,7 @@ if ($theme != 'itgadmin') {
             </div>  
         </div>
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
-           <div class="widget-help-text">Non Draggable ( <strong>Ad Widget</strong> )</div>
+           <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad Widget'); ?></strong> )</div>
             <div class="itg-widget">
               <div class="ad-widget">
                       <div class="sidebar-ad">                        
@@ -395,7 +395,7 @@ if ($theme != 'itgadmin') {
             </div>  
         </div>        
         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
-           <div class="widget-help-text">Section card</div>
+           <div class="widget-help-text"><?php print t('Section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php  print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'].$widget_data['itg-block-9']['widget_display_name']; ?>">
@@ -413,7 +413,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-9" widget-style="auto-tips-and-tricks">
+                    <div class="data-holder" id="itg-block-9" data-widget-style="auto-tips-and-tricks">
                       <?php
                         if (isset($widget_data['itg-block-9']['widget'])) {
                           print $widget_data['itg-block-9']['widget']; 
@@ -431,26 +431,9 @@ if ($theme != 'itgadmin') {
   <!--Photo slider and Watch now section starts here--> 
 </div>
 
-  <?php //print render($page['content']); ?>
-  <!--Start third party widgets -->
-  <div>
-    <!--
-    <div class="vukkul-comment">
-    <div id="vuukle_div"></div>            
-      <?php 
-       if(function_exists('vukkul_view')) {
-         vukkul_view();
-       }
-       ?>     
-    </div>
-  </div>
-  -->  
-  <!--End third party widgets -->
- 
-</div>
 <!--------------------------------Code for Front tpl---------------------------------------->
         <?php if ($theme != 'itgadmin') {?>
-        <?php //print $feed_icons;  ?>
+        
       </section>
 
       <?php if (false) { ?> 
@@ -485,8 +468,6 @@ if ($theme != 'itgadmin') {
 
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-          <?php //print $sidebar_first; ?>
-          <?php //print $sidebar_second; ?>
         </aside>
       <?php endif; ?>
     </main>

@@ -61,10 +61,10 @@
   <?php print drupal_render($form['field_story_twitter_video_desc']); ?>
   <?php print drupal_render($form['field_story_twitter_video']); ?>
 </div>
-<div id="RecipeSyndication">
+<!--<div id="RecipeSyndication">
   <h2 class="story-title"><?php print t('Syndication'); ?></h2>
   <?php print drupal_render($form['field_story_syndication']); ?>
-</div>
+</div>-->
 
 <div id="RecipeCategory">
   <h2 class="story-title"><?php print t('Recipe Category'); ?></h2>

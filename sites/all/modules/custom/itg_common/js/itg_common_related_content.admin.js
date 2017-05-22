@@ -19,12 +19,10 @@ jQuery(document).ready(function () {
     relatedContent();
     function relatedContent() {
         var solr = Drupal.settings.itg_common.settings.solr;
-        //console.log(solr);
+        
         if (solr != null && solr != undefined) {
             var solr_explict = solr.split(',');
-
             var slr = [];
-
             for (i = 0; i < solr_explict.length; i++) {
                 var c = solr_explict[i].split('|');
                 slr[c[0]] = c[1];
@@ -65,8 +63,9 @@ jQuery(document).ready(function () {
         //console.log(index_arr);
         //console.log(new_arr);
         var detailString = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
+        
         if (detailString) {
-            detail = detailString.split(",");
+          detail = detailString.split(",");
         }
         for (var i = 0, l = item.length; i < l; i++) {
             var site = item[i].split('_');
@@ -90,7 +89,7 @@ jQuery(document).ready(function () {
 
     jQuery('.checked-list').html(checkedlist);
     if (checkedlist) {
-        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
     }
     else {
         jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
@@ -138,8 +137,6 @@ jQuery(document).ready(function () {
 
 
 // open save search in popup
-function showrelatedpopup(iframeurl)
-{
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
-
+function showrelatedpopup(iframeurl) {
+  jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
 }

@@ -300,4 +300,4 @@ feature_smi
 feature_tag_management
 custom_html_widgets
 astro_feature
-
+auto_deploy

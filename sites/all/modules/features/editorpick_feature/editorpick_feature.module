@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Editorpick Feature feature.
+ */
+
+include_once 'editorpick_feature.features.inc';
