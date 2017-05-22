@@ -1,0 +1,207 @@
+/*--------------------------Top----------------------------*/
+#itgd_links
+{float:left; text-align:center; width:1003px; font:bold 11px arial; color:#000; line-height:20px; border:0px solid #000;}
+#itgd_links a
+{border:0px solid #000; font:bold 11px arial; color:#204fa4; text-decoration:none; margin:0 10px;}
+#itgd_links a:hover
+{color:#D81921; }
+body{margin:0;padding:0;}
+
+/*----------------Top nav--------*/
+.cfnavbar{
+margin:0;
+padding: 0;
+width:1003px;
+padding-top:0px;
+font:bold 12px arial;
+height:20px;
+$height:20px;
+}
+
+.cfnavbar ul{
+font: bold 12px arial;
+color:#ffffff;
+margin:0px;
+
+}
+
+.cfnavbar ul li{
+display: inline;
+font:bold 12px arial;
+margin:0px;
+
+
+}
+
+
+.cfnavbar ul li a{
+
+color: #ffffff;
+font: bold 12px arial;
+padding:0px;
+$padding:0px;
+text-decoration: none;
+outline:none;
+
+
+}
+
+.cfnavbar ul li a:hover{
+text-decoration: underline;
+color:#ffffff;
+font:bold 12px arial;
+outline:none; 
+
+}
+
+.dropmenudiv_a
+{position:absolute;top: 0;border-top:0px solid #D1D1D1;font:normal 11px georgia;line-height:18px;z-index:100;background-color: white;width:auto;visibility: hidden; margin:3px 0 0 0;}
+.dropmenudiv_a a img
+{margin:0 5px 3px 0; }
+.dropmenudiv_a a,
+#dropmenu3.dropmenudiv_a span
+{width:130px;display:block;border: 1px solid #fff; border-width:0 0 1px 1px; padding:3px 5px 0 5px;text-decoration: none;background-color:#55a1b3; clear:both; color:#fff; }
+#dropmenu3.dropmenudiv_a span
+{ display:block; width:138px; font:bold 9px verdana; color:#000; padding:3px 0 3px 10px;}
+#dropmenu3.dropmenudiv_a a.sub_sub
+{padding-left:20px; }
+.dropmenudiv_a a:hover
+{color:#fff; text-decoration:none; background-color:#3f6a79;}
+
+
+/*-----------------------------Footer------------------------*/
+#footerdiv{ border-top: #000 0px solid; float: center; margin: -10px 0 5px 2px; width: 1003px; _margin: 0px 0 5px 20px;$margin: 10px 0 5px 20px;  background-color: #fff; }
+#footerdiv #google_ad_footer { margin:20px auto;  border:0px solid #000; text-align:center;}
+#footerdiv #footer_menu {  width:70%;  border:1px solid #BDD9E5; border-width:1px 0px 1px 0px; margin:0 auto; padding:0;height:18px; color:#4C4C4C; font-size:11px; font-family:Tahoma; text-align:center; font-weight:bold;}
+#footerdiv #footer_menu a:link,
+#footerdiv #footer_menu a:visited,
+#footerdiv #footer_menu a:hover { color:#4C4C4C; text-decoration:none; line-height:16px; }
+#footerdiv #footer_menu span { line-height:16px; margin:0 15px;}
+#footerdiv #copyrights
+{float:left; padding:10px 0;  font:normal 11px arial; color:#4B4B4B; text-align:center; width:100%; border:0px solid #000;}
+#footerdiv #copyrights a
+{text-decoration:none; color:#204fa4; }
+
+#footerdiv #copyrights a:hover
+{text-decoration:underline; }
+
+#footerdiv #itgd_group_links
+{border:0px solid #000; margin:0 auto 15px auto; width:99%; font:normal 11px arial; color:#6277A4; line-height:18px; text-align:center; }
+
+#footerdiv #itgd_group_links b
+{width:auto; font:bold 11px Arial; color:#E31D36; border:0px solid #000; margin:0; line-height:18px; }
+#footerdiv #itgd_group_links strong
+{color:#494949; margin:0 0 0 5px;}
+#footerdiv #itgd_group_links a
+{text-decoration:none; color:#6277A4; margin:0 5px;}
+#footerdiv #itgd_group_links a:hover
+{text-decoration:underline; }
+
+/*----------------------------------Story-----------------------*/
+.headertitle {color:#204fa4;font:normal 22px georgia;text-align:left;padding:0px;}
+
+.contentbyline{color:#969696;font-size:11px;font-weight:normal;text-align:left;font-family:arial;line-height:18px;}
+
+.normal{ font:normal 12px arial; color:#000000; line-height:18px;}
+.normaltxt{ font:bold 11px arial; color:#000000; line-height:18px;}
+.moscaption{color:#7A7879; font:normal 9px tahoma; }
+
+.bredcrum{font:normal 11px arial ; color:#969696; text-align:left; padding:0; margin:0}
+.bredcrum a{font:normal 11px arial ; color:#969696; text-align:left; padding:0; margin:0; text-decoration:none;}
+.bredcrum a:hover{font:normal 11px arial ; color:#969696; text-align:left; padding:0; margin:0;text-decoration:none;}
+h1{ font:normal 22px georgia; color:#000000; margin:0 0 5px 0; padding:0;}
+h1 a{ color:#204fa4; text-decoration:none;}
+h1 a:hover{ color:#204fa4; text-decoration:underline;}
+h2{ font:normal 12px arial; color:#000; margin:0 0 0 10px; padding:0; line-height:16px;}
+h3{ font:bold 15px tahoma; color:#c5271e; margin:0 0 5px 0; padding:0;}
+h3 a{ color:#204fa4; text-decoration:none;}
+h2 a{ color:#204fa4; text-decoration:none;}
+h2 a:hover{ color:#204fa4; text-decoration:underline;}
+.prog{ font:normal 15px tahoma; color:#C5271e;}
+.progblue{ font:normal 13px tahoma; color:#204fa4;}
+.progblue a{ font:normal 13px tahoma; color:#204fa4; text-decoration:none;}
+.progblue a:hover{ font:normal 13px tahoma; color:#204fa4; text-decoration:underline;}
+
+
+.year{ color:#fff; font:bold 12px arial; padding:0 25px 0 24px;}
+.year a{ color:#fff; text-decoration:none;}
+.year a:hover{ color:#fff; text-decoration:underline;}
+
+
+.heading1{font-family:Tahoma; font-size:24px; color:#CC3300;  font-weight:normal; text-decoration:none;}
+.heading{ font-family:arial; font-size:12px; color:#CC3300; line-height:16px;text-decoration:none;}
+.heading a{ color:#204fa4; font-weight:bold; text-decoration:none;}
+.heading a:hover{ color:#204fa4; text-decoration:underline;}
+
+
+/*---------------- Program------------------*/
+
+ul.black_bullet
+
+{margin:0 0 0 0px; padding:0; }
+
+ul.black_bullet li
+
+{margin:0; padding:0 0 0 10px; list-style-type:none; background:url(../images/black_bullet.jpg) no-repeat left 8px; }
+
+a {outline-color: -moz-use-text-color;outline-style: none;outline-width: medium;color: #002f5e;text-decoration: none;}
+
+.pagenate_link {font-size: 10px;font-weight: bold;color: #002f5e;text-decoration: none;}
+
+a:hover {text-decoration: underline;}
+.path_way
+{float:left; border:0px solid #000; width:714PX; margin:0px 0 0 0;  font:normal 11px Georgia; color:#969696; line-height:16px; text-align:left; padding:0px;}
+.path_way span
+{padding:0px 0 0 0; margin:0px; border:0px solid #000; float:left; line-height:16px; text-align:left;}
+.path_way a
+{font:bold 11px Georgia; color:#969696; text-align:left;}
+.path_way a:hover
+{ text-decoration:underline; color:#969696; }
+.secitons_days{ width:714PX; float:left; }
+h1.section_title
+{margin:-2px 0px 0px 0px; padding:0;  font: bold 14px Georgia; color:#FFF; line-height:21px; vertical-align:middle; }
+h1.section_title
+{border:0px solid #000; line-height:24px; width:100%; }
+
+.secitons_days .section_title{text-transform:capitalize; color:#FFFFFF; font: bold 14px Georgia; padding:0px 0px 0px 0px; text-align:center; width:728px}
+.secitons_days .letters
+{border:0px solid #000; width:auto; float:left; margin:5px 0 0 80px; color:#000000; }
+.secitons_days .letters a
+{font:bold 12px arial; margin:0 20px; letter-spacing:2px; color:#FFFFFF;}
+.secitons_days .letters a b
+{color:#FFF;  }
+.secitons_days .letters a:hover,
+.secitons_days .letters a.active
+{text-decoration:none; color:#FCB0CA; }
+.session_chair_persons
+{float:left; width:714PX; font:bold 12px Georgia; color:#002F5E; text-align:right; padding:15px 0;  }
+
+.speakers_names_list
+{ width:714PX; border:0px dotted #000; float:left; margin:0 0 40px 0; }
+.speakers_names_list ul
+{width:714PX; margin:0; padding:0; }
+.speakers_names_list ul li
+{width:31%; float:left; font:bold 14px georgia; color:#002F5E; background:url(/womansummit/2009/images/speakers_names_bullet.jpg) no-repeat left 11px; list-style-type:none; padding:0 0 0 10px; border:0px solid #000; }
+.speakers_names_list ul li a
+{ color:#002F5E; font:bold 14px georgia; line-height:25px; text-decoration:none}
+.speakers_speak
+{border:0px solid #000; float:left; width:100%; margin:0 0 45px 0; }
+.speakers_speak h2,
+.speakers_speak h2 a
+{margin:0; padding:0; width:100%; font:bold 16px georgia; color:#830C35;  }
+.speakers_speak .strap
+{font:bold 12px Georgia; color:#969696; margin:3px 0; line-height:18px;}
+.speakers_speak .session
+{ font:bold 12px Georgia; margin:3px 0; line-height:18px;}
+.speakers_speak .introtext
+{font:bold 11px Georgia; color:#000; margin:0px 10px 0px 0px; }
+.speakers_speak .fulltext 
+{float:left; font:normal 12px Georgia; color:#000; margin:10px 10px 0 0; line-height:18px; }
+.speakers_speak .fulltext img
+{margin:0 20px 10px 0; float:left; border:1px solid #CFCFCF; }
+.speakers_speak .fulltext p
+{margin:0 0 10px 0; }
+ul.black_bullet
+{margin:0 0 0 0px; padding:0; }
+ul.black_bullet li
+{margin:0; padding:0 0 0 10px; list-style-type:none; background:url(/womansummit/2009/images/black_bullet.jpg) no-repeat left 8px; }

@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+	<head>
+    <script type="text/javascript">
+    
+	function cemail(val){
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val.value)){
+		return (true)
+		}
+		return false;
+		}
+	
+    function ajaxFunction(){
+		var frm=document.feedback;
+		if(frm.FNAME.value=="")
+		{
+		  alert("Please enter First Name");
+		  frm.FNAME.focus();
+		  return false;
+		}
+
+		if (frm.FNAME.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.FNAME.value.length;i++){
+							temp=frm.FNAME.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("First name should accept only alphabets[a-z,A-Z]");
+								frm.FNAME.focus();
+								return false;
+							}
+						}
+		    	}
+		
+
+		if(frm.EMAIL.value=="")
+		{
+		  alert("Please enter Email Id");
+		  frm.EMAIL.focus();
+		  return false;
+		}
+		if(cemail(frm.EMAIL)==false)
+			{
+					alert( "Please enter valid email ID" );
+					frm.EMAIL.focus();
+					return false;
+			}
+
+	 
+		if(frm.Location.value=="")
+		{
+		  alert("Please enter city");
+		  frm.Location.focus();
+		  return false;
+		}
+		if (frm.Location.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.Location.value.length;i++){
+							temp=frm.Location.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("City should accept only alphabets[a-z,A-Z]");
+								frm.Location.focus();
+								return false;
+							}
+						}
+		}
+		
+		 if(frm.number.value=="")
+			{
+				alert( "Please Enter the  Code" );	
+				frm.number.focus();
+				return false;
+			} 
+		frm.submit();
+}
+    
+    </script>
+  	<meta http-equiv="X-UA-Compatible" content="IE=9" /> 
+    <title>India Today Youth Summit 2011 - Mind Rocks</title>
+    <meta name="description" content="India Today Youth Summit 2011 will be held on Saturday, September 17 at New Delhi. Kumar Mangalam Birla, Abhinav Bindra, Chetan Bhagat, Kiran Rao, Ranbir Kapoor, Kalikesh Deo, Subodh Gupta, Divya Narendra, Zarina Mehta, Kiran Bedi, among other Indian youth idols to discuss issues that matter to you" />
+    <meta name="keywords" content="India Today Youth Summit 2011, Mind Rocks, Youth summit of India Today, Youth Summit, conference for youth in India, Kumar Mangalam Birla, Abhinav Bindra, Chetan Bhagat, Kiran Rao, Ranbir Kapoor, Kalikesh Deo, Subodh Gupta, Divya Narendra, Zarina Mehta, Kiran Bedi, Videos, Images, Live, youth India" />
+    <link type="text/css" rel="stylesheet" href="/specials/youthsummit/css/session.css">
+    <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+    <!--[if IE]>
+      <script src="/js/html5.js"></script>
+    <![endif]-->
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    </head>
+<body>
+	<div id="maindiv">
+        <header>
+		
+
+<!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+    <!--[if IE]>
+      <script src="/js/html5.js"></script>
+    <![endif]-->
+<link rel="shortcut icon" href="/specials/youthsummit/chennai/images/MR_favicon1.ico" />
+<link type="text/css" rel="stylesheet" href="/specials/youthsummit/chennai/css/session.css">
+<link type="text/css" rel="stylesheet" href="/specials/youthsummit/chennai/css/youthsummit2011.css">
+<script src="/js/sitejs.js" type="text/javascript"></script>
+        <div id="itgd_links">
+            <a href="http://www.indiatodaygroup.com/" target="_blank">INDIA TODAY GROUP:</a>
+            <a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><a href="http://www.indiatoday.in/" target="_blank">India Today</a><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a>
+        </div>
+	<div>
+        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg"  border="0"/></a><br />-->
+            <img src="/youthsummit2012/images/ita.jpg" height="83" border="0"/>
+        </div>	
+        <div id="banner">
+            <a href="/specials/youthsummit/chennai/"><img src="/specials/youthsummit/chennai/images/logo.jpg" alt="Youth Smmit" width="155" height="130" border="0" align="left" title="India Today Youth Summit 2011 - Mind Rocks"/></a>
+            <img src="/specials/youthsummit/chennai/images/top-banner-trans-black.gif" alt="Youth Smmit" width="600" height="110" border="0" align="absmiddle" title="India Today Youth Summit 2011 - Mind Rocks" class="topbanner"/>
+        
+        </div>
+		<ul id="navigation">
+        	 <?php include('navigation.php');?>
+        </ul>
+
+		<!-- Begin comScore Tag -->
+
+<script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1" />
+</noscript>
+<!-- End comScore Tag -->
+
+<!-- Begin Google Analytics Tag -->
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-795349-17");
+	pageTracker._trackPageview();
+	pageTracker._trackPageLoadTime();
+	} catch(err) {}</script>
+
+<!-- End Google Analytics Tag -->
+
+        </header>
+        <section>
+            <div id="main_content">
+                <div id="main_content_left">
+                	<div style=" font:bold 18px arial; color:#ffffff; padding-left:5px; height:32px; line-height:32px; background-image:url(http://media2.intoday.in/indiatoday/youthsummit/question.gif); background-repeat:no-repeat; background-position:top-left">Ask Your Question</div>
+                    <section id="left">
+                    <form name="feedback" action="save_comment.jsp" method="post" onsubmit="javascript:return ajaxFunction()">
+                        <table width="500" border="0"  align="center" cellpadding="0" cellspacing="10" id="ask_your_quation" style="font:bold 11px arial; color:#5A5A5A;">
+                         <tr>
+                                <td align="right" valign="top" colspan="2" style="font:bold 14px arial; color:#FF0000;">Keynote Session - The Need For Speed: Narain Karthikeyan</td>
+                               
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                
+                                <td  align="left" valign="middle" class="td" colspan="2"><input type="hidden" name="Session" value="Keynote Session - The Need For Speed: Narain Karthikeyan" />
+                                <input type="hidden" name="id" value="1" />
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">Ask Your Question Here:</td>
+                                <td  align="left" valign="middle" class="td"><textarea name="message"></textarea></td>
+                            </tr>
+                            <tr>			
+                                <td width="444" align="right" valign="middle">Name:</td>
+                                <td width="531"  align="left" valign="middle"><input type="text" name="FNAME" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">Email:</td>
+                                <td align="left" valign="middle"><input type="text" name="EMAIL" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">City:</td>
+                                <td align="left" valign="middle" ><input type="text" name="Location" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top" ><i style="color:#FF0000">*</i>&nbsp;Enter The Code Shown:</td>
+                                <td  align="left" valign="middle" class="td"><input type="text" name="number" /> </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td"><img src="img.jsp" /></td>
+                            </tr>
+                            
+                             <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td" style="font:bold 12px arial; color:#FF0000;"></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">&nbsp;</td>
+                                <td align="left" valign="middle"><input name="submit" type="submit" value="Submit" class="send_button"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                    </section>
+				</div>
+                <div id="sidebar">
+	<?php include('sidebar.php');?>
+</body>
+</html>
+
