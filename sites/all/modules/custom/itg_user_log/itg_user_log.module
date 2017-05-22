@@ -224,8 +224,7 @@ function itg_user_log_api_form($form , &$form_state) {
   $form['edit-min-datepicker-popup-1']['min'] = array(
     '#type' => 'date_popup' ,
     '#title' => t('From') ,
-    '#date_format' => 'd/m/Y' ,
-    //'#date_year_range' => '-10 + 10',
+    '#date_format' => 'd/m/Y' ,    
     '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
     '#attributes' => array(
       'readonly' => 'readonly'
@@ -382,8 +381,7 @@ function itg_user_log_api_form_section_breakup($form , &$form_state) {
   $form['edit-min-datepicker-popup-1']['min'] = array(
     '#type' => 'date_popup' ,
     '#title' => t('Date Range (Current Week)  (From - to)') ,
-    '#date_format' => 'd/m/Y' ,
-    //'#date_year_range' => '-10 + 10',
+    '#date_format' => 'd/m/Y' ,    
     '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
     '#attributes' => array(
       'readonly' => 'readonly'
@@ -393,8 +391,7 @@ function itg_user_log_api_form_section_breakup($form , &$form_state) {
   $form['edit-max-datepicker-popup-1']['max'] = array(
     '#type' => 'date_popup' ,
     '#title' => t('To') ,
-    '#date_format' => 'd/m/Y' ,
-    //'#date_year_range' => '-10:+10',
+    '#date_format' => 'd/m/Y' ,    
     '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10 ,
     '#attributes' => array(
       'readonly' => 'readonly'
@@ -404,8 +401,7 @@ function itg_user_log_api_form_section_breakup($form , &$form_state) {
   $form['edit-min-datepicker-popup-1']['lwmin'] = array(
     '#type' => 'date_popup' ,
     '#title' => t('Date Range (Last Week)  (From - to)') ,
-    '#date_format' => 'd/m/Y' ,
-    //'#date_year_range' => '-10 + 10',
+    '#date_format' => 'd/m/Y' ,    
     '#default_value' => ($_GET['From']) ? $_GET['From'] : 10 ,
     '#attributes' => array(
       'readonly' => 'readonly'
@@ -415,8 +411,7 @@ function itg_user_log_api_form_section_breakup($form , &$form_state) {
   $form['edit-max-datepicker-popup-1']['lwmax'] = array(
     '#type' => 'date_popup' ,
     '#title' => t('To') ,
-    '#date_format' => 'd/m/Y' ,
-    //'#date_year_range' => '-10:+10',
+    '#date_format' => 'd/m/Y' ,    
     '#default_value' => isset($_GET['To']) ? $_GET['To'] : 10 ,
     '#attributes' => array(
       'readonly' => 'readonly'
@@ -516,10 +511,10 @@ function itg_get_recommended_data($section) {
       $cursor = $people->count($cond);
       $data[$tid] = $cursor;
     }
-    //pr($data);
+    
     arsort($data);
     $three = array_slice($data , 0 , 4 , true);
-    //p($three);
+    
     foreach ($three as $key => $value) {
       $people = $con->pagedetails;
       $cursor = $con->command(

@@ -269,7 +269,7 @@ function get_syndication_feed_byurl() {
     foreach ($itg_result as $itg_val) {    
       $realpath = file_create_url($itg_val->xml_name);    
       $xml_date = date('d/m/Y',$itg_val->created_date);
-      // $file_url = $itg_val->xml_name;
+      
       echo 'Click to Download. <a href="'.$realpath.'" download>'.$xml_date.'</a>';
       echo '</br>';    
     }
@@ -297,7 +297,6 @@ function itg_magazine_custom_callback($mag_id = NULL) {
   $itg_query->condition('n.type', 'issue');
 
   $itg_result = $itg_query->execute()->fetchAll();
-
 
   if (empty($_POST['magazine'])) {
     $select = t('- None -');

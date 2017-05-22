@@ -17,7 +17,7 @@ print $variables['total_comments'].' Comment(s)';
 }
 else
 {
-  print 'Leave a comment';
+  print t('Leave a comment');
 }
 
 $comment_existance = itg_get_comment_question(arg(1));

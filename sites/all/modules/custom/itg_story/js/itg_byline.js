@@ -18,8 +18,7 @@
             $('.multi-byline').click(function (event) {
                 var repo_id = [];
                 var nd_id = jQuery('#edit-field-story-reporter-und-0-target-id').val();
-                //var someText="don't extract(value_a) but extract(value_b)";
-                //var insval = nd_id.match(/\(([^)]*)\)[^(]*$/)[1];
+                
                 var insval = nd_id.match(/\{(.*)\}/)[1];
                 var cur_val = jQuery('#edit-field-reporter-publish-id-und-0-value').val();
                 if (cur_val) {
@@ -52,8 +51,7 @@
                             if (listLength > 0) {
                                 jQuery('.save-byline').show();
                             }
-                            else
-                            {
+                            else {
                                 jQuery('.save-byline').hide();
                             }
                         }
@@ -91,8 +89,7 @@
                     beforeSend: function () {
 
                     },
-                    'success': function (result)
-                    {
+                    'success': function (result) {
                         var obj = jQuery.parseJSON(result);
                         if (obj.msg == 'success') {
 
@@ -123,8 +120,7 @@
                     beforeSend: function () {
                         jQuery('#widget-ajex-loader').show();
                     },
-                    'success': function (result)
-                    {
+                    'success': function (result) {
                         var obj = jQuery.parseJSON(result);
                         if (obj.msg == 'delete') {
                             jQuery('#' + obj.byline).remove();
@@ -134,8 +130,7 @@
                         if (listLength > 0) {
                             jQuery('.save-byline').show();
                         }
-                        else
-                        {
+                        else {
                             jQuery('.save-byline').hide();
                         }
                         byline_id.splice($.inArray(byline_nid, byline_id), 1);
@@ -145,7 +140,6 @@
                 });
 
             });
-
 
             // end here
         }

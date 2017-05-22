@@ -17,15 +17,7 @@
                     $('#edit-field-story-media-files-syndicat-und-yes').attr('checked', false);
                 }
             });
-
-            // Code for client Title field value set Null
-//            $('#edit-field-story-configurations-und-comment').click(function() {
-//                if ($("#edit-field-story-configurations-und-comment").is(":not(:checked)")) {
-//                    $("#edit-field-story-comment-question-und-0-value").val('');
-//                }
-//            });
-
-            // Code for facebook field value set Null
+ 
             $('#edit-field-story-social-media-integ-und-facebook').click(function() {
                 if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {
                     $("#edit-field-story-facebook-narrative-und-0-value").val('');
@@ -53,11 +45,6 @@
                 }
             });
 
-            // code to copy story longheadline to story title
-//            $('#edit-title').blur(function() {
-//                $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
-//            });
-
             $('#edit-title').blur(function() {
                 $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             });
@@ -66,17 +53,7 @@
             // FTP browse js
             $('document').ready(function() {
                 var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
-//                if (old_vid == 0) {
-//                    $("#edit-field-upload-video-und-0-upload").hide();
-//                    $("#edit-field-upload-video-und-0-upload-button").hide();
-//                    $('#edit-field-upload-video label').hide();
-//                } else {
-//                    $(".browse-ftp-click").hide();
-//                    $('.browse-video-form label').hide();
-//                    $('#edit-field-upload-video label:first').show();
-//                }
             });
-
 
             $('.browse-ftp').hide();
 
@@ -93,34 +70,6 @@
                     }, 1000);
                 }
             });
-            // popup show hide
-//            $(".video-local").click(function() {
-//                $(".local_browse").show();
-//                $(".ftp-server").hide();
-//                $(".video_filters").hide();
-//                $('.video-ftp').removeClass('active');
-//                $(this).addClass('active');
-//            });
-//            $(".video-ftp").click(function() {
-//                $(".local_browse").hide();
-//                $(".ftp-server").show();
-//                $(".video_filters").show();
-//                $(this).addClass('active');
-//                $('.video-local').removeClass('active');
-//                $('.used-unused-select').val('unused');
-//                $('.used-unused-select').trigger('change');
-//
-//            });
-//            $(".browse-local").click(function() {
-//                $("#edit-field-upload-video-und-0-upload").show();
-//                $("#edit-field-upload-video-und-0-upload-button").show();
-//                $("#edit-field-upload-video-und-0-upload").trigger('click');
-//                $("#edit-field-upload-video-und-0-upload").change(function() {
-//                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
-//                    $.colorbox.close();
-//                });
-//            });
-            // check ajax upload button
 
             $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
                 if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
@@ -157,13 +106,11 @@
 
             }
 
-
-
-
         }
 
     };
 })(jQuery, Drupal, this, this.document);
+
 jQuery('document').ready(function() {
     var first_fid = jQuery("input[name='field_video_upload[und][0][field_videogallery_video_upload][und][0][fid]").val();
     if (first_fid != "" && first_fid != 0)

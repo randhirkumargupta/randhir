@@ -32,16 +32,14 @@ function itg_syndication_get_mode($client_name) {
       $ftp_name = $field_collection_item[$val['value']]->field_syndication_ftp_name[LANGUAGE_NONE][0]['value'];
       $data['FTP: '.$ftp_name] = $ftp_name;
    } 
-  }
-  
+  }  
   
   //Code for Email id
   if (!empty($node->field_email_address[LANGUAGE_NONE])) {
     foreach ($node->field_email_address[LANGUAGE_NONE] as $key => $val) {
       $data['Email: '.$val['value']] = $val['value'];
     }
-  }
-  
+  }  
   
   //Code for Weburl
   if (!empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
@@ -212,7 +210,7 @@ function save_cron_details_of_syndication($node) {
       $section_id[] = $section_val['tid'];
     }
     //end
-    //$section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+    
     $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
     $syndication_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
     $content_type = $field_collection_item[$val['value']]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
@@ -256,7 +254,6 @@ function save_cron_details_of_syndication($node) {
   }
   
 }
-
 
 
 /**

@@ -44,16 +44,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
      );
       return $form;
-    }
-    
-   // If survey has been expired. 
-//   if(time() > $survey_expiry_date) {
-//      $form['survey_expiry_status'] = array(
-//        '#type' => 'markup',
-//        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
-//     );
-//      return $form;
-//    }
+    } 
     
     $survey_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     
@@ -112,12 +103,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
       //Answer Info
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
-      
-      
-      //Media info
-//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-//      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
+
        if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
 
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
@@ -134,7 +120,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
                    $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
 
         $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
-        }
+      }
 
       //Submit button text
       if(($total_num_of_ques-1) === $num){
@@ -255,15 +241,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
         );
-      }
-      
+      }      
     
-         $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div>',
-              '#markup' => $question_media,
-              '#suffix' => '</div>',
-          );
+      $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div>',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       

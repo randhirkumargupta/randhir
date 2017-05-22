@@ -161,17 +161,15 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
       if (!isset($form['#node']->nid)) {
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
       }
-      if ($user->uid != 1) {
-        //unset($form['field_story_short_headline']);
+      if ($user->uid != 1) {        
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
-         unset($form['field_story_configurations']['und']['#options']['comment']);
+        unset($form['field_story_configurations']['und']['#options']['comment']);
       }
       if ($user->uid) {
-//        $form['body']['und'][0]['#format'] = 'icon_format';
-                $form['body']['und'][0]['#format'] = 'full_html';
+        $form['body']['und'][0]['#format'] = 'full_html';
       }
-      // $form['field_story_big_image']['#attributes']['class'][] = 'element-hidden';
+      
       // code for multiple byline
       if (empty($form['#node']->nid)) {
         if (!empty($_SESSION['unique'])) {
@@ -194,14 +192,17 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
       if (!empty($form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'])) {
         $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
       }
+      
       if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
         $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
       }
 
       $breaking_check = '';
+      
       if (empty($source_id) && empty($source_type)) {
         $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
       }
+      
       $form['title']['#suffix'] = '<div class="breaking_class">' . $breaking_check . '</div>';
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
@@ -249,9 +250,11 @@ function itg_story_form_custom_callback($form , &$form_state) {
         itg_photogallery_insert_image_data($image_ids , $node_id);
     }
   }
+  
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
 
@@ -529,8 +532,7 @@ function itg_story_form_story_node_form_alter(&$form , &$form_state , $form_id) 
 
   if (function_exists('itg_common_tv_time')) {
     $form[$tv_time_field][LANGUAGE_NONE]['#options'] = itg_common_tv_time($date_val);
-    $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = !empty($form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value']) ? $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'] : '';
-    // $form[$tv_time_field]['#validated'] = TRUE;
+    $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = !empty($form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value']) ? $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'] : '';    
   }
 
   // code for story expiry date field show and hide
@@ -717,21 +719,6 @@ function itg_get_video_display($nid) {
   return $content;
 }
 
-/**
- * {@inheritdoc}
- */
-/* function itg_story_views_query_alter(&$view, &$query) {
-  if ($view->name == 'strory_menegment') {
-  if (!empty($_GET['field_story_source_type_value']) && $_GET['field_story_source_type_value'] == "story") {
-  foreach ($query->where[1]['conditions'] as $keys => $field) {
-  if ($field['field'] == 'field_data_field_story_source_type.field_story_source_type_value') {
-  $query->where[1]['conditions'][$keys]['value'] = "";
-  $query->where[1]['conditions'][$keys]['operator'] = "IS NULL";
-  }
-  }
-  }
-  }
-  } */
 
 /**
  * {@inheritdoc}
@@ -815,6 +802,7 @@ function itg_story_node_view($node , $view_mode , $langcode) {
     if (function_exists('itg_common_get_latest_byline')) {
       $node->content['byline_id'] = itg_common_get_latest_byline($node->nid , '1');
     }
+    
     if (isset($node->field_story_type[LANGUAGE_NONE][0]['value']) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
       $next = itg_story_photo_story_redirect($node->nid , 'next');
       $previous = itg_story_photo_story_redirect($node->nid , 'prev');
@@ -855,7 +843,7 @@ function itg_story_movie_image_plugin_data($node_id = '') {
     $dty = date("D j M Y" , $node_obj->changed);
     //store entity id of multi value field collection field
     if(isset($node_obj->field_story_technology[LANGUAGE_NONE])) {
-    $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
+      $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
     }
 
     $html = '';
@@ -913,7 +901,7 @@ function itg_story_photo_story_redirect($node_id , $type = 'prev') {
   $or = db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>=');
   $query->condition($or);
   $result = $query->execute()->fetchAll();
-  //print strtr((string) $query, $query->arguments());
+  
   if ($result[0]->entity_id) {
     $required_node_id = 'node/' . $result[0]->entity_id;
     $href = $base_url . '/' . $required_node_id;
@@ -952,9 +940,10 @@ function itg_story_photo_story_html($node_id) {
       else {
         $next_link = "";
       }
+      
       $entity_obj = entity_load('field_collection_item' , array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-      //$photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
+      
       $photo_story_img = image_style_url('photo_story_771x432' , $photo_story_img_path);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
@@ -983,7 +972,7 @@ function itg_story_photo_story_bottom_html($node_id) {
     $count = sizeof($photo_story);
     $html = '';
     $html .= '<div class="photo-story-img multiple-photo common-photo">';
-//      foreach ($photo_story as $key => $val) {
+
     for ($i = 0; $i < $count; $i++) {
       $entity_obj = entity_load('field_collection_item' , array($photo_story[$i]['value']));
       $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
