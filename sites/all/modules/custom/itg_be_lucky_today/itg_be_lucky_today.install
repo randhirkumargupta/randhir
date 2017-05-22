@@ -105,12 +105,12 @@ function itg_be_lucky_today_schema() {
           'length' => '10',
           'not null' => FALSE,
         ),
-         'record_date' => array(
-		  'description' => 'TODO: please describe this field!',
-		  'type' => 'timestamp',
-		  'not null' => TRUE,
-		  'default' => 'CURRENT_TIMESTAMP',
-		),
+        'record_date' => array(
+          'description' => 'TODO: please describe this field!',
+          'mysql_type' => 'timestamp',
+          'not null' => TRUE,
+          'default' => NULL
+        ),
         'facebookid' => array(
           'description' => 'TODO: please describe this field!',
           'type' => 'varchar',
@@ -147,14 +147,14 @@ function itg_be_lucky_today_schema() {
 /**
  * hook_enable()
  */
-function itg_be_lucky_today_enable() {
-  db_query('
-    ALTER TABLE {survey} 
-    MODIFY record_date TIMESTAMP NOT NULL 
-    DEFAULT CURRENT_TIMESTAMP 
-    ON UPDATE CURRENT_TIMESTAMP'
-  );
-}
+//~ function itg_be_lucky_today_enable() {
+  //~ db_query('
+    //~ ALTER TABLE {survey} 
+    //~ MODIFY record_date TIMESTAMP NOT NULL 
+    //~ DEFAULT CURRENT_TIMESTAMP 
+    //~ ON UPDATE CURRENT_TIMESTAMP'
+  //~ );
+//~ }
 
 /**
  * Implements hook_uninstall().
