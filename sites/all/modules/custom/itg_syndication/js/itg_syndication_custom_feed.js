@@ -41,6 +41,6 @@ jQuery(document).ready(function () {
         jQuery(".variables-tabs div").css("display", "none");
         jQuery(".variables-tabs div#tab-" + selected).css("display", "block");
     });
-    //jQuery(".vertical-tabs").css("display","none");
+    
     jQuery("#edit-body-und-0-value").css({"min-width": "900px", "height": "400px"});
 });

@@ -14,9 +14,9 @@ function ugc_comment_listing() {
   $reply_comment = $db->itgcms_comment;
   $reply_comment_data = $reply_comment->find();
   
-    $output = '';
-    $output = "<table class='views-table'><thead>
-    <tr><th>" . t('S. No') . "</th><th>" . t('Name') . "</th><th>" . t('Email') . "</th><th>" . t('Comment') . "</th><th>" . t('Post date') . "</th><th>" . t('Status') . "</th><th>" . t('Action') . "</th></tr></thead><tbody>";
+  $output = '';
+  $output = "<table class='views-table'><thead>
+  <tr><th>" . t('S. No') . "</th><th>" . t('Name') . "</th><th>" . t('Email') . "</th><th>" . t('Comment') . "</th><th>" . t('Post date') . "</th><th>" . t('Status') . "</th><th>" . t('Action') . "</th></tr></thead><tbody>";
 
   $comment_counter = 1;
   foreach ($reply_comment_data as $final_comment_data) {
@@ -35,9 +35,9 @@ function ugc_comment_listing() {
 
     $comment_counter = $comment_counter + 1;
   }
-    $output .= "</tbody></table>";
+  $output .= "</tbody></table>";
 
-    return $output;
+  return $output;
 }
 
 /**
@@ -50,11 +50,10 @@ function ugc_comment_view($id) {
   $comment_view = $db->itgcms_comment;
   
   $pid = new MongoId($id); 
-  $comment_view_data = $comment_view->find(array("_id" => $pid));
-  
+  $comment_view_data = $comment_view->find(array("_id" => $pid));  
     
-    $output = '';
-    $output.= '<div class="comment-view">';
+  $output = '';
+  $output.= '<div class="comment-view">';
     
   foreach($comment_view_data as $final_view) {
     $user_message = itg_ugc_bad_words($final_view['comment']);
@@ -66,9 +65,9 @@ function ugc_comment_view($id) {
   
   $output.='Action : '. l(  t('Cancel'),  'ugc-comment-listing',  array('attributes' => array('class'=> array('ugc-comment-listing'), 'id'=> array('ugc-comment-listing'))));
   
-    $output.= '</div>';
-  
-    return $output;
+  $output.= '</div>';
+
+  return $output;
 }
 
 

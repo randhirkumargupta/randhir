@@ -6,7 +6,6 @@
 */
 
 function itg_task_allocation_autocomplete($title) {
-
     if (strlen(trim($title)) > 0) {
         $content_type = arg(1);
         $options = '';

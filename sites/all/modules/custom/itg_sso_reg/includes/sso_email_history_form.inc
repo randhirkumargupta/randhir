@@ -23,7 +23,9 @@ function sso_email_history_form($form, &$form_state) {
     '#value' => t('Search'),
     '#submit' => array('sso_email_history_form_submit'),
   );
+  
   $sso_email_history_rows = sso_email_history_rows();
+  
   $form['markup'] = array(
     '#markup' => drupal_render($sso_email_history_rows),
   );
@@ -35,8 +37,8 @@ function sso_email_history_form($form, &$form_state) {
  * Implements sso_email_history_form_submit().
  */
 function sso_email_history_form_submit($form, &$form_state) {
-
   $uid = $form_state['values']['uid'];
+  
   drupal_goto('admin/config/people/sso-email-history', array(
     'query' => array(
       'uid' => $uid,

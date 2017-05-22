@@ -75,7 +75,7 @@ $singalclass= "";
                     <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
             <?php } ?>
             </div>  
-<?php //print drupal_render($form['video_browse_select']);       ?>
+
             <div class="local_browse" style="display: none;">
 
                 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
@@ -102,9 +102,7 @@ $singalclass= "";
             </div>
         </div>
     </div>
-  <!--    <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>
-      <span class="error vid-error"></span>
-    </div>-->
+  
 </div>
 
 <?php

@@ -7,13 +7,7 @@
     Drupal.behaviors.itg_dailymotion = {
         attach: function(context, settings) {
 
-            // GET field id
-//            var video_field_id = settings.itg_dailymotion.settings.video_field_id;
-//            var video_field_file = settings.itg_dailymotion.settings.video_field_file;
-            // FTP browse
-
             var base_url = Drupal.settings.baseUrl.baseUrl;
-
 
             $(".ftp-server .asso-filed_single").click(function(e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
@@ -107,23 +101,17 @@
 
                                 }
 
-
                             });
 
                         }
-                        //var vid = $("#edit-video-browse-select .form-radio:checked").val();
-
 
                     });
                 }
             });
 
-
-
             $(".ftp-server .asso-with-ckeditor").click(function(e) {
 
-                // Getting selected videos from checkboxes        
-
+                // Getting selected videos from checkboxes
 
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
@@ -172,7 +160,6 @@
                 $('.used-unused-select').trigger('change');
 
             });
-
           
             //Reset video form
             $('.reset_video_filters').click(function() {
@@ -191,7 +178,6 @@
         }
         // This code is written for restricting past date access for expiry date in video gallery content type
 
-
     };
 })(jQuery, Drupal, this, this.document);
 
@@ -205,7 +191,7 @@ jQuery('document').ready(function() {
         } else {
             jQuery('.time-filter').hide();
         }
-        //var base_url = Drupal.settings.basePath;
+        
         var base_url = Drupal.settings.baseUrl.baseUrl;
         jQuery.ajax({
             url: base_url + '/dailymotion-ftp-videos-post',
@@ -303,6 +289,7 @@ jQuery('document').ready(function() {
             alert("Select video file and upload");
         }
     });
+    
     jQuery('.apply_video_filters').click(function() {
         var select_val = jQuery('.used-unused-select').val();
         var search_val = jQuery('#video_text_search').val();

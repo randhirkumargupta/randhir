@@ -40,15 +40,6 @@
                 }
             });
 
-            /* $('#edit-path-pathauto').click(function() {
-             if ($("#edit-path-pathauto").is(":checked")) {                
-             $("#edit-path-alias").attr('readonly', 'readonly');
-             } else {                
-             $("#edit-path-alias").removeAttr('readonly');
-             }  
-             });*/
-
-
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
             if (uid != 1) {
@@ -89,43 +80,21 @@
                 }
             });
 
-
             // code for lock story check uncheck based on condition
             $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
-                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
-                    //$(".form-item-field-story-configurations-und-lock-story").show('');
+                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {                    
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
-                } else {
-                    //$(".form-item-field-story-configurations-und-lock-story").hide('');
+                } else {                    
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
                 }
             });
-//
-//
-////            if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
-////                $(".form-item-field-story-configurations-und-lock-story").show('');
-////                $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
-////            }
-////            else {
-////                $(".form-item-field-story-configurations-und-lock-story").hide('');
-////                $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
-////            }
-//          
-//
-//            // Code for client Title field value set Null
+
+            // Code for client Title field value set Null
             $('#edit-field-story-configurations-und-commentbox').click(function() {
                 if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
                     $("#edit-field-story-comment-question-und-0-value").val('');
                 }
             });
-//
-//            // Code for facebook field value set Null
-//            $('#edit-field-story-social-media-integ-und-facebook').click(function() {
-//                if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {
-//                    $("#edit-field-story-facebook-narrative-und-0-value").val('');
-//                }
-//            });
-
 
             // Code for tv field value set Null
             $('#edit-field-story-configurations-und-tv').click(function () {
@@ -135,7 +104,6 @@
                 }
             });
 
-
             // auto fill time when user remove time in expiry date field
             d = new Date();
             datetext = d.getHours() + ":" + d.getMinutes();
@@ -144,7 +112,6 @@
                     $("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val(datetext);
                 }
             });
-
 
             // code for uncheck expiry date
             var newdate = new Date();
@@ -198,8 +165,6 @@
                 }
             });
 
-
-
         }
 
     };
@@ -220,7 +185,6 @@ jQuery(document).ready(function () {
             }
 
             if (msg == true && title.length != 0) {
-
                 var post_data = "&title=" + title;
                 jQuery.ajax({
                     'url': Drupal.settings.baseUrl.baseUrl + '/breaking-news-ajax',
@@ -230,8 +194,7 @@ jQuery(document).ready(function () {
                     beforeSend: function () {
                         jQuery('#widget-ajex-loader').show();
                     },
-                    'success': function (result)
-                    {
+                    'success': function (result) {
                         var obj = jQuery.parseJSON(result);
                         jQuery('#edit-field-story-configurations-und-breaking-news').attr('checked', true);
                         jQuery('#widget-ajex-loader').hide();
