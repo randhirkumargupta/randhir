@@ -197,23 +197,23 @@ function itg_fia_xml_node_feed($query) {
           $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
           if (in_array($pos, $bk)) {
             $body_vals[$pos] = $body_vals[$pos] . 
-              '<figure class="op-slideshow">
-                <figure>
-                  <img src="' . $imgs_path . '" />
-                </figure>
-              </figure>';
+              '<figure>
+                <img src="' . $imgs_path . '" />
+               </figure>';
+            
           }
           else {
             $last_postion = end($bk);
             $body_vals[$last_postion] = $body_vals[$last_postion] . 
-              '<figure class="op-slideshow">
-                <figure>
-                  <img src="' . $imgs_path . '" />
-                </figure>
-              </figure>';
+              '<figure>
+                <img src="' . $imgs_path . '" />
+               </figure>';
           }
-          
         }
+      }
+      foreach ($gall_position as $gal_pos_key => $gal_pos_val) {
+        $gal_data = str_replace('</p>', '</p><figure class="op-slideshow">', $body_vals[$gal_pos_val]);
+        $body_vals[$gal_pos_val] = $gal_data . '</figure>';
       }
     }
     
