@@ -129,9 +129,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   $settings = array();
+  $vocabulary = '';
+  if (isset($form['#vocabulary']->machine_name)) {
+    $vocabulary = $form['#vocabulary']->machine_name;
+  }
   
-  if ($form['#vocabulary']->machine_name != 'category_management') {
-   $settings['formstatus'] = 1; 
+  if ($vocabulary != 'category_management') {
+    $settings['formstatus'] = 1; 
   } else {
       $settings['formstatus'] = 0;
   }
@@ -838,8 +842,7 @@ function itg_common_mail_alter(&$message) {
 
   $sendto = array();
   foreach ($to_mails as $mail_to) {
-
-    if(!preg_match('/intoday/',$mail_to)) {
+     if(!preg_match('/aajtak|intoday|indiatoday/',$mail_to)) {
       $sendto[] = $mail_to;
     }
   }

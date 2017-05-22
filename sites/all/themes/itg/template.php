@@ -309,7 +309,7 @@ function itg_html_head_alter(&$head_elements) {
   else {
     if ($arg[0] == 'node' && is_numeric($arg[1])) {
       $node = node_load($arg[1]);
-      $meta_keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+      $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
             '#type' => 'html_tag',

@@ -73,6 +73,13 @@ function generate_custom_pattern_feed($data) {
   }
 }
 
+/**
+ * get_full_feed_after_replace_items_tags_wtih_dollers().
+ * 
+ * @param string $text
+ * @param string $feed
+ * @return string
+ */
 function get_full_feed_after_replace_items_tags_wtih_dollers($text, $feed) {
   preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
   // Item inside text got here
@@ -118,6 +125,13 @@ function feed_ending_tags($feed_type) {
   return $tags;
 }
 
+/**
+ * sydication_pattren_file_name().
+ * 
+ * @param string $name
+ * @param string $extention
+ * @return string
+ */
 function sydication_pattren_file_name($name, $extention) {
   if ($extention == 'xml' || $extention == 'rss' || $extention == 'mrss') {
     $extention = 'xml';
@@ -127,14 +141,20 @@ function sydication_pattren_file_name($name, $extention) {
   return $filename;
 }
 
+/**
+ * sydication_feed_file_path().
+ * 
+ * @param string $feed
+ * @param string $feed_dir
+ * @param string $filename
+ * @return string
+ */
 function sydication_feed_file_path($feed, $feed_dir, $filename) {
-  $file = file_save_data($feed, "$feed_dir/" . $filename);
-  //$file_server_path = getcwd() . '/' . str_replace('public:/', variable_get('file_public_path', 'sites/default/files'), $file->uri);
+  $file = file_save_data($feed, "$feed_dir/" . $filename);  
   $path = file_create_url($feed_dir);
   $file_path['file_path'] = $path . '/' . $filename;
   $file_path['file_name'] = $filename;
-  $file_path['real_path'] = $feed_dir . "/" . $filename;
-  //$uri = 'public://';
+  $file_path['real_path'] = $feed_dir . "/" . $filename;  
   return $file_path;
 }
 
@@ -335,8 +355,7 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
       //Fix for sydication images repeated value.
       if ($var_array[1][$i] == 'field_gallery_image') {
         $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        //<media:thumbnail url="image url"/>
-        //$return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+        
         // handle case for creting multiple media tag. if there is multiple images
         $tags_start = "";
         $count_synd = count($field_gallery_image['field_gallery_image']) - 1;
@@ -360,8 +379,7 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
       }
       elseif ($var_array[1][$i] == 'field_video_upload') {
         $field_video_upload = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        //<media:thumbnail url="image url"/>
-        //$return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+        
         // handle case for creting multiple media tag. if there is multiple images
         $tags_start = "";
         $count_synd = count($field_video_upload['field_video_upload']) - 1;
@@ -875,13 +893,7 @@ function _pre_define_vars_callback(&$form, &$form_state) {
     '#type' => 'ajax',
     '#commands' => $commands,
   );
-////  return $form;
-//  return array(
-//    '#type' => 'ajax',
-//    '#commands' => array(
-//      ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars'])),
-//    )
-//  );
+
 }
 
 /**

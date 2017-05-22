@@ -14,32 +14,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  */
 
 function itg_sso_reg_init() {
- /* required for future */ 
-/*  global $user, $base_url;
-  if (array_key_exists(FRONT_USER, $user->roles)) {
-    print $user->uid;
-    $settings = array();
-    if ($user->uid > 0) {
-
-      $arg = arg(2);
-    }
-
-    if (!empty($arg)) {
-      $fin = $arg;
-    }
-    else {
-      $fin = arg(2);
-    }
-
-    $settings['uid'] = $user->uid ? $user->uid : 0;
-    $settings['check_sso_url'] = $fin;
-    $settings['base_url'] = $base_url;
-    drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
-  } */
-  
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));
-  
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));  
 }
 
 /**
@@ -115,7 +90,24 @@ function itg_sso_reg_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+   
+  $items['admin/config/people/sso-email-history'] = array(
+    'title' => 'SSo email history',
+    'description' => 'SSo email history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('sso_email_history_form'),
+    'access arguments' => array('access SSo email history'),
+    'file' => 'includes/sso_email_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
 
+  $items['sso-email-history-del/%'] = array(
+    'title' => 'Delete Form',
+    'page callback' => 'itg_sso_email_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -129,7 +121,11 @@ function itg_sso_reg_permission() {
     'administer itg_sso_logout settings' => array(
       'title' => t('Edit sso signout setting'),
       'description' => t('Using this permission user can edit signout setting.'),
-    )
+    ),
+    'access SSo email history' => array(
+      'title' => t('SSo email history'),
+      'description' => t('SSo email history'),
+    ),
   );
 }
 
@@ -189,8 +185,7 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && empty($_GET['ReturnTo'])) {
     drupal_add_js('jQuery(document).ready(function() {                  
                           jQuery("#user-login .form-item-remember-me").hide();
-                          jQuery("#user-login #edit-remember-me").prop("checked", false);
-                          
+                          jQuery("#user-login #edit-remember-me").prop("checked", false);                          
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
@@ -297,5 +292,21 @@ function itg_sso_reg_password_success() {
     );
 
     return $form;
+  }
+}
+
+/**
+ * Implements itg_sso_email_history_callback
+ */
+function itg_sso_email_history_callback() {
+  $arg = arg();
+  $id = $arg[1];
+  $redirect_url = 'admin/config/people/sso-email-history';
+  if (isset($id)) {
+    db_delete('itg_sso_email_history')
+      ->condition('id', $id)
+      ->execute();
+    drupal_set_message(t('User has been deleted sucessfully from history table'));
+    drupal_goto($redirect_url);
   }
 }

@@ -94,9 +94,9 @@ function itg_event_registration_users_list() {
             $data[$i][$j]['state'] = $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i][$j]['rdate'] = $node->created ? $node->created : '-';
             if ($node->status == 0) {
-             $node_status = 'Not complete'; 
+             $node_status = 'Registration cancelled'; 
             } else {
-                $node_status = 'Complete';
+                $node_status = 'Registered';
             }
             $data[$i][$j]['status'] = $node_status;
             $j++;

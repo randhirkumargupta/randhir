@@ -24,23 +24,16 @@
       if (intialcelebrityvalue) {
         var initialhasexist_reporter = intialcelebrityvalue.indexOf(reporter) != -1;
       }
-      if (initialhasexist_poli)
-      {
+      if (initialhasexist_poli) {
         $('#edit-field-constituancy-und-0-value').show();
         $('#edit-field-party-name-und-0-value').show();
         $('.form-item-field-constituancy-und-0-value').show();
         $('#edit-field-party-name').show();
-
-
-
       } else {
         $('#edit-field-constituancy-und-0-value').hide();
-
         $('#edit-field-party-name-und-0-value').hide();
         $('.form-item-field-constituancy-und-0-value').hide();
         $('#edit-field-party-name').hide();
-
-
       }
       if (initialhasexist) {
         $('#edit-field-story-category').show();
@@ -72,13 +65,11 @@
         var initial_repo = celebrityvalue.indexOf(reporter) != -1;
         if (hasexist) {
           $('#edit-field-story-category').show();
-        } else
-        {
+        } else {
           $('#edit-field-story-category').hide();
           $('.dropbox-remove a').trigger('click');
         }
-        if (initial_poli)
-        {
+        if (initial_poli) {
           $('#edit-field-constituancy-und-0-value').show();
           $('#edit-field-party-name-und-0-value').show();
           $('.form-item-field-constituancy-und-0-value').show();

@@ -20,6 +20,7 @@ function itg_users_user_presave(&$edit, $account, $category) {
   if (!empty($edit['field_last_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
+  
 }
 
 /**
@@ -33,14 +34,6 @@ function itg_users_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_users.inc',
   );
-
-//  $items['user-block'] = array(
-//    'title' => 'User Block',
-//    'page callback' => 'itg_users_block_user',
-//    'access callback' => TRUE,
-//    'type' => MENU_CALLBACK,
-//    'file' => 'includes/itg_users.inc',
-//  );
 
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
@@ -104,14 +97,13 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
       $user_intersec = array_intersect($user_role->roles, $user_child_roles);
+      
       if (empty($user_intersec) && (!in_array('administrator', $user->roles))) {
         drupal_access_denied();
         module_invoke_all('exit');
         drupal_exit();
       }
-//      else {
-//        return true;
-//      }
+
     }
     $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
@@ -122,8 +114,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
 
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit') {
       $self_user = arg(1);
-      //$user_role = user_load($self_user);
-
+     
       if ($user->uid == arg(1)) {
         unset($form['account']['status']);
         unset($form['field_story_expiry_date']);
@@ -334,10 +325,6 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
   if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR || $form_state['values']['selected'] == SITE_ADMIN) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
 
-//    if (empty($mark_expert)) {
-//      form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-//    }
-
     if (!empty($mark_expert) && empty($section[0]['tid'])) {
       form_set_error('field_user_section', t("Section Field is required!"));
     }
@@ -384,7 +371,6 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
-
   $_GET['destination'] = 'user';
 }
 
@@ -498,18 +484,14 @@ function itg_users_user_login(&$edit, $account) {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
     }
   }
-//  if (array_key_exists(FRONT_USER, $account->roles)) {
-//    $_GET['destination'] = 'personalization/saved-items';
-//    
-//  }
+
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
         $_GET['destination'] = 'ask-an-expert';
       }
     }
-  }
-  
+  }  
   
   if ($role_count < 3) {
     if (array_key_exists(CORRESPONDENT, $account->roles)) {
@@ -676,23 +658,7 @@ function itg_users_user_update(&$edit, $account, $category) {
  * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) {
-  // code to insert new user in sso db
-  /*global $base_url;
-  $mail = $account->mail;
-  $uid = $account->uid;
-
-  db_set_active('sso_db');
-  $id = db_insert('itg_sso_email_history')
-      ->fields(array(
-        'email' => $mail,
-        'uid' => $uid,
-        'domain' => $base_url,
-        'created' => date('Y-m-d G:i:s'),
-      ))
-      ->execute();
-  db_set_active();*/
-
-  // code end here
+  
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
     if (function_exists('itg_netcore_mail_add_user')) {
       // code for subscribe for newsletter
@@ -884,3 +850,16 @@ function itg_users_backend_validate(&$form, &$form_state) {
   }
  
 }
+
+/**
+ * Implements hook_user_delete().
+ */
+/*function itg_users_user_delete($account) {
+  if (!empty($account->uid)) {
+    db_set_active('sso_db');
+    db_delete('itg_sso_email_history')
+        ->condition('uid', $account->uid)
+        ->execute();
+    db_set_active();
+  }
+}*/

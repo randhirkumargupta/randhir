@@ -64,8 +64,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+      // Create url alise for magazine type story.      
     }
     elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
@@ -81,8 +80,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+      // Create url alise for magazine type story.      
     }
     else {
       $set_hierarchy = get_path_from_category($getsection);
@@ -213,7 +211,6 @@ function is_podcast($node) {
  */
 function itg_common_custompath_migrated_load($node , $type = NULL) {
   if (!empty($node->path['alias'])) {
-
     $node_sef = $node->path['alias'];
   }
   else {
@@ -244,7 +241,7 @@ function itg_common_custompath_migrated_load($node , $type = NULL) {
     $set_hierarchy = array_reverse($section_hierarchy);
     if ($type != 'update_migrated') {
       $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      // $newpath = itg_common_custompath_insert_val($pathdata);
+      
       $newpath = $pathdata;
     }
     else {

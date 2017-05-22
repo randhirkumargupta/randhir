@@ -682,22 +682,29 @@ function itg_photogallery_get_image_info_by_fid($fid) {
  * @return string
  */
 function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
-
-  $item = $element['#value'];
-//  
-  $item['fid'] = $element['fid']['#value'];
+  if (isset($element['#value'])) {
+    $item = $element['#value'];
+  }
+  
+  if (isset($element['fid']['#value'])) {
+    $item['fid'] = $element['fid']['#value'];
+  }  
+  
   if(empty($item['alt']) || empty($item['title'])) {
-    $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+    if (isset($item['fid'])) {
+      $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+    }    
   }
 
   // Add the additional alt and title fields.
   $alt= "";
   $title = "";
-  if($data_result['alt']) {
+  
+  if(isset($data_result['alt'])) {
     $alt = $data_result['alt'];
   }
   
-  if($data_result['title']) {
+  if(isset($data_result['title'])) {
     $title = $data_result['title'];
   }
   

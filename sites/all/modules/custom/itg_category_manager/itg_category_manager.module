@@ -393,10 +393,13 @@ function itg_category_manager_term_get_content($key) {
 
   $itg_query->condition('entity_id' , $key , '=');
   $itg_result = $itg_query->execute()->fetchAll();
-  foreach ($itg_result as $newres) {
-    $resurndata .= $newres->field_cm_select_type_value . ' , ';
+  $resurndata = '';
+  if (isset($itg_result)) {
+    foreach ($itg_result as $newres) {
+      $resurndata .= $newres->field_cm_select_type_value . ' , ';
+    }
+    return rtrim($resurndata , ' ,');
   }
-  return rtrim($resurndata , ' ,');
 }
 
 /**
@@ -1823,7 +1826,7 @@ function itg_category_manager_views_query_alter(&$view , &$query) {
         }
       }
     }
-    if ($_GET['tid_raw'] != "" && $_GET['name'] == "") {
+    if (isset($_GET['tid_raw']) && $_GET['tid_raw'] != "" && $_GET['name'] == "") {
       unset($query->table_queue['taxonomy_term_data_itg_category_manager__taxonomy_term_hierarchy']);
       unset($query->table_queue['taxonomy_term_data_taxonomy_term_hierarchy']);
       unset($query->tables['taxonomy_term_data_itg_category_manager__taxonomy_term_hierarchy']);

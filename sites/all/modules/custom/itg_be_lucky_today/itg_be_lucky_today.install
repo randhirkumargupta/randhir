@@ -105,11 +105,12 @@ function itg_be_lucky_today_schema() {
           'length' => '10',
           'not null' => FALSE,
         ),
-        'record_date' => array(
-          'description' => 'TODO: please describe this field!',
-          'mysql_type' => 'timestamp',
-          'not null' => TRUE,
-        ),
+         'record_date' => array(
+		  'description' => 'TODO: please describe this field!',
+		  'type' => 'timestamp',
+		  'not null' => TRUE,
+		  'default' => 'CURRENT_TIMESTAMP',
+		),
         'facebookid' => array(
           'description' => 'TODO: please describe this field!',
           'type' => 'varchar',

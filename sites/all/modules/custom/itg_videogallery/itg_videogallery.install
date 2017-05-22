@@ -175,6 +175,11 @@ function itg_videogallery_schema() {
               'size' => 'big',
               'null' => TRUE
           ),
+          'is_download' => array(
+              'type' => 'varchar',
+              'length' => '250',
+              ' null' => TRUE,
+          ),
       ),
       'primary key' => array('id'),
   );

@@ -15,8 +15,6 @@
             if (block_email) {
                 var email_result = block_email.split(',');
             }
-            
-            
 
             $(function () {
                 $("a.reply").click(function () {

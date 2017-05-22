@@ -886,7 +886,7 @@ function itg_widget_get_graph_data() {
   $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
    $itg_query->fields('astw' , array('field_election_state_tid'))
       ->condition('type' , 'election_graph_xml')
-      //->condition('ast.field_section_tid' , $cat_id , '=')
+      ->condition('ast.field_section_tid' , $cat_id , '=')
       ->condition('status' , 1);
   // ->range(0, 5);
   //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
