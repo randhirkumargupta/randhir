@@ -144,6 +144,19 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['account']['pass']);
       }
     }
+    /* condition for saml sinking */
+    /*else if (array_key_exists(FRONT_USER, $user->roles)) {
+        $authname = simplesaml_get_authname($user->uid);
+        db_set_active('sso_db');
+        $auth_attr = simplesaml_get_uid_byauth($authname);
+        $form['field_mobile_number'][LANGUAGE_NONE][0]['value']['#value'] = $auth_attr['mobile'];
+        db_set_active();
+    }
+    
+    if($user->uid == '1') {
+      $form['field_mobile_number'][LANGUAGE_NONE][0]['value']['#value'] = $form['#user']->field_mobile_number[LANGUAGE_NONE][0]['value'];
+    }*/
+    /* End for saml sinking */
   }
 
   if ($form_id == 'user_register_form') {
@@ -863,3 +876,40 @@ function itg_users_backend_validate(&$form, &$form_state) {
     db_set_active();
   }
 }*/
+
+/**
+ * Implements simplesaml_get_uid_byauth().
+ * @param string $authname
+ * @return array $user_list
+ */
+function simplesaml_get_uid_byauth($authname) {
+  if (!empty($authname)) {
+    $query = db_select('authmap', 'u');
+    $query->leftjoin('field_data_field_mobile_number', 'f', 'u.uid = f.entity_id');
+    $query->fields('u', array('uid'))
+        ->fields('f', array('field_mobile_number_value'))
+        ->condition('u.authname', $authname);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $user_list['uid'] = $record['uid'];
+      $user_list['mobile'] = $record['field_mobile_number_value'];
+    }
+
+    return $user_list;
+  }
+}
+
+/*
+ * Implements simplesaml_get_authname().
+ * @param int $uid
+ * @return string
+ */
+function simplesaml_get_authname($uid) {
+  if (!empty($uid)) {
+    $query = db_select('authmap', 'u');
+    $query->fields('u', array('authname'))
+        ->condition('u.uid', $uid);
+   return $query->execute()->fetchField();
+  }
+}

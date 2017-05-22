@@ -14,6 +14,9 @@
 # http://www.robotstxt.org/robotstxt.html
 # Mahesh
 
+User-agent: Twitterbot
+Disallow:
+
 User-agent: *
 Crawl-delay: 10
 # Directories

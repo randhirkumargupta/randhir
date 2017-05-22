@@ -253,7 +253,7 @@ function simplesamlphp_auth_init() {
   $_simplesamlphp_auth_as = new SimpleSAML_Auth_Simple($myval);
   //var_dump($_simplesamlphp_auth_as);
   $_simplesamlphp_auth_saml_attributes = $_simplesamlphp_auth_as->getAttributes();
-
+  //pr($_simplesamlphp_auth_saml_attributes);
   if ($user->uid == 0) {
     // User is not logged in to Drupal.
     if ($_simplesamlphp_auth_as->isAuthenticated()) {
@@ -291,6 +291,8 @@ function simplesamlphp_auth_init() {
               }
               $fname = _simplesamlphp_auth_get_fname();
               $lname = _simplesamlphp_auth_get_lname();
+              $twitterimage = _simplesamlphp_auth_get_twitterimage();
+              $fid = simplesaml_twitter_image($twitterimage);
               $userinfo = array('roles' => $roles, 'field_first_name' => array(
                 LANGUAGE_NONE => array(
                   0 => array(
@@ -302,6 +304,13 @@ function simplesamlphp_auth_init() {
                 LANGUAGE_NONE => array(
                   0 => array(
                     'value' => $lname
+                  )
+                )
+              ),
+              'field_user_picture' => array(
+                LANGUAGE_NONE => array(
+                  0 => array(
+                    'fid' => $fid
                   )
                 )
               ));
@@ -356,6 +365,9 @@ function simplesamlphp_auth_init() {
               ));
             }
             else {
+              if(strpos($mail, '@twitter.com') !== false || strpos($mail, '@facebook.com') !== false) {
+              $userinfo = array('name' => $uname, 'mail' => $mail);  
+              } else {
               $mobile = _simplesamlphp_auth_get_mobile();
               $userinfo = array('name' => $uname, 'mail' => $mail, 'field_mobile_number' => array(
                   LANGUAGE_NONE => array(
@@ -364,6 +376,7 @@ function simplesamlphp_auth_init() {
                     )
                   )
               ));
+            }
             }
             $user = user_save($ext_user, $userinfo);
             //end here
@@ -997,7 +1010,7 @@ function _simplesamlphp_auth_get_lname() {
   $lname = '';
   global $seg;
   
-   $seg = $_simplesamlphp_auth_saml_attributes['sn'];
+  $seg = $_simplesamlphp_auth_saml_attributes['sn'];
   
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
@@ -1012,6 +1025,34 @@ function _simplesamlphp_auth_get_lname() {
 
   return $lname;
 }
+
+/**
+ * Gets the last name attribute.
+ *
+ * @return
+ *   The last name attribute.
+ */
+function _simplesamlphp_auth_get_twitterimage() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $twitterimage = '';
+  global $seg;
+  
+   $seg = $_simplesamlphp_auth_saml_attributes['twitter.profile_image_url'];
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $twitterimage = $seg[0];
+    }
+    else {
+      $twitterimage = '';
+    }
+  }
+
+  return $twitterimage;
+}
+
 /**
  * Forces HTTPS connections.
  */
@@ -1246,4 +1287,18 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
 
   // Return whatever we've got.`
   return $result;
+}
+
+/*
+ * Helper function for image upload
+ */
+function simplesaml_twitter_image($url) {
+  $imagedata = file_get_contents($url);
+  $image_url = 'itg' . time() . end(explode('/', $url));
+  $image_extension = end(explode('.', $image_url));
+  $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+  $file = file_load($file_data_temp->fid);
+  file_usage_add($file, 'itg_clone_image', 'file', 3);
+
+  return $file_data_temp->fid;
 }
