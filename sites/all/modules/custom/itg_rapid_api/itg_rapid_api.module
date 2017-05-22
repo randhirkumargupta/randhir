@@ -37,7 +37,7 @@ function itg_rapid_api_menu() {
 
   $items = array();
   // menu for set update webservice token
-  $items['admin/settings/mobile_service_token'] = array(
+  $items['admin/structure/services/mobile_service_token'] = array(
     'title' => 'Mobile web service token',
     'description' => 'Mobile web service token',
     'page callback' => 'drupal_get_form',
@@ -47,7 +47,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update config_update_status json
-  $items['admin/settings/config_update_status_json'] = array(
+  $items['admin/structure/services/static_json/config_update_status_json'] = array(
     'title' => 'Update config_update_status json',
     'description' => 'Update config_update_status json',
     'page callback' => 'drupal_get_form',
@@ -57,7 +57,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update datanotexist_api json
-  $items['admin/settings/datanotexist_api_json'] = array(
+  $items['admin/structure/services/static_json/datanotexist_api_json'] = array(
     'title' => 'update datanotexist_api json',
     'description' => 'update datanotexist_api json',
     'page callback' => 'drupal_get_form',
@@ -67,7 +67,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update hamburger_menu json
-  $items['admin/settings/hamburger_menu_json'] = array(
+  $items['admin/structure/services/static_json/hamburger_menu_json'] = array(
     'title' => 'update hamburger_menu json',
     'description' => 'update hamburger_menu json',
     'page callback' => 'drupal_get_form',
@@ -77,7 +77,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update horizontal_menu json
-  $items['admin/settings/horizontal_menu_json'] = array(
+  $items['admin/structure/services/static_json/horizontal_menu_json'] = array(
     'title' => 'update horizontal_menu json',
     'description' => 'update horizontal_menu json',
     'page callback' => 'drupal_get_form',
@@ -87,7 +87,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update master_config json
-  $items['admin/settings/master_config_json'] = array(
+  $items['admin/structure/services/static_json/master_config_json'] = array(
     'title' => 'update master_config json',
     'description' => 'update master_config json',
     'page callback' => 'drupal_get_form',
@@ -97,11 +97,58 @@ function itg_rapid_api_menu() {
    );
   
    // menu for update server_error_master json
-  $items['admin/settings/server_error_master_json'] = array(
+  $items['admin/structure/services/static_json/server_error_master_json'] = array(
     'title' => 'update server_error_master json',
     'description' => 'update server_error_master json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('server_error_master_json'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  //sprint 2 seting menu,  admin/structure/services
+  
+  $items['admin/structure/services/static_json/ad_config_json'] = array(
+    'title' => 'update ad config json',
+    'description' => 'ad_config_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ad_config_json'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/structure/services/static_json/livetv_channellist_json'] = array(
+    'title' => 'update livetv channellist json',
+    'description' => 'livetv_channellist_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_channellist_json'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/structure/services/static_json/livetv_json'] = array(
+    'title' => 'update livetv json',
+    'description' => 'livetv_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_json'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/structure/services/static_json/otherapps_ios_json'] = array(
+    'title' => 'update otherapps ios json',
+    'description' => 'otherapps_ios_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('otherapps_ios_json'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/structure/services/static_json/otherapps_android_json'] = array(
+    'title' => 'update otherapps android json',
+    'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('otherapps_android_json'),
     'access arguments' => array('administer onthisdate settings'),
     'type' => MENU_NORMAL_ITEM,
    );
@@ -263,4 +310,91 @@ function getNodePublishedDate($nid){
     $published_statp = $result[0]['stamp'];
     $published_datetime = date("Y-m-d H:i:s", $published_statp);
     return $published_datetime;
+}
+
+// sprint2 seting function
+
+// ad_config_json form decalation
+function ad_config_json() {
+  $form = array();
+
+  $form['ad_config_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ad config json'),
+    '#default_value' => variable_get('ad_config_json'),
+    //'#size' => 2,
+    //'#maxlength' => 2,
+    //'#description' => t("Token for web service API."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// livetv_channellist_json form decalation
+function livetv_channellist_json() {
+  $form = array();
+
+  $form['livetv_channellist_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv channellist json'),
+    '#default_value' => variable_get('livetv_channellist_json'),
+    //'#size' => 2,
+    //'#maxlength' => 2,
+    //'#description' => t("Token for web service API."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// livetv_json form decalation
+function livetv_json() {
+  $form = array();
+
+  $form['livetv_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv json'),
+    '#default_value' => variable_get('livetv_json'),
+    //'#size' => 2,
+    //'#maxlength' => 2,
+    //'#description' => t("Token for web service API."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// otherapps_ios_json form decalation
+function otherapps_ios_json() {
+  $form = array();
+
+  $form['otherapps_ios_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('otherapps ios json'),
+    '#default_value' => variable_get('otherapps_ios_json'),
+    //'#size' => 2,
+    //'#maxlength' => 2,
+    //'#description' => t("Token for web service API."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// otherapps_android_json form decalation
+function otherapps_android_json() {
+  $form = array();
+
+  $form['otherapps_android_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('otherapps android json'),
+    '#default_value' => variable_get('otherapps_android_json'),
+    //'#size' => 2,
+    //'#maxlength' => 2,
+    //'#description' => t("Token for web service API."),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }

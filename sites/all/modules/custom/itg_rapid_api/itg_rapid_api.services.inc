@@ -489,6 +489,157 @@ function itg_rapid_api_resource() {
     	),
       	),
 	),
+        
+        // ad_config_json custom resource declaration.....
+	'ad_config_json' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves ad_config_json schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_ad_config_json',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // livetv_channellist_json custom resource declaration.....
+	'livetv_channellist_json' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves livetv_channellist_json schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_livetv_channellist_json',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // livetv_json custom resource declaration.....
+	'livetv_json' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves livetv_json schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_livetv_json',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // otherapps_ios_json custom resource declaration.....
+	'otherapps_ios_json' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves otherapps_ios_json schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_otherapps_ios_json',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+         // otherapps_android_json custom resource declaration.....
+	'otherapps_android_json' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves otherapps_android_json schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_otherapps_android_json',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
   );
 
   return $api;
@@ -934,3 +1085,129 @@ function itg_rapid_api_program_category_list($token) {
    }
 }
 
+
+/**
+ * [itg_rapid_api_ad_config_json] definition.
+ * Returns the information about a horizontal_menu.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_ad_config_json($token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       $jsondata = variable_get('ad_config_json');
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+   }
+}
+
+
+/**
+ * [itg_rapid_api_livetv_channellist_json] definition.
+ * Returns the information about a horizontal_menu.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_livetv_channellist_json($token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       $jsondata = variable_get('livetv_channellist_json');
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+   }
+}
+
+/**
+ * [itg_rapid_api_livetv_json] definition.
+ * Returns the information about a horizontal_menu.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_livetv_json($token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       $jsondata = variable_get('livetv_json');
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+   }
+}
+
+/**
+ * [itg_rapid_api_otherapps_ios_json] definition.
+ * Returns the information about a horizontal_menu.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_otherapps_ios_json($token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       $jsondata = variable_get('otherapps_ios_json');
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+   }
+}
+
+/**
+ * [itg_rapid_api_otherapps_android_json] definition.
+ * Returns the information about a horizontal_menu.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_otherapps_android_json($token) {
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       $jsondata = variable_get('otherapps_android_json');
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+   }
+}
