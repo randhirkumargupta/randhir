@@ -105,12 +105,6 @@ function itg_be_lucky_today_schema() {
           'length' => '10',
           'not null' => FALSE,
         ),
-        'record_date' => array(
-          'description' => 'TODO: please describe this field!',
-          'mysql_type' => 'timestamp',
-          'not null' => TRUE,
-          'default' => NULL
-        ),
         'facebookid' => array(
           'description' => 'TODO: please describe this field!',
           'type' => 'varchar',
@@ -136,9 +130,6 @@ function itg_be_lucky_today_schema() {
         ),
       ),
       'primary key' => array('id'),
-      'indexes' => array(
-        'NewIndex1' => array('survey_id'),
-      ),
     );
 
     return $schema;
