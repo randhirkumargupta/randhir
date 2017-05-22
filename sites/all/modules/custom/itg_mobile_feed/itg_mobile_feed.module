@@ -730,6 +730,8 @@ function getCommentXmlTag($node) {
     $output .= "<comments>";
     $output .= $comment_tag;
     $output .= "</comments>";
+  }else{
+      $output .= emptygetCommentXmlTag();
   }
   return $output;
 }
