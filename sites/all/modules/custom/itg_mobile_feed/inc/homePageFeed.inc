@@ -14,7 +14,7 @@ function homePageFeed() {
    //check into redis
    $redis_key = "itgd_homePageFeed";
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
        //echo "redis get - ". $output; exit();
@@ -35,7 +35,7 @@ function homePageFeed() {
   //call function getMobileFeedXmlHeader
   $output .= getMobileFeedXmlHeader();
   // xml feed static tag...
-  $output .= "\n<idsection>120</idsection>
+  $output .= "<idsection>120</idsection>
                 <section>Home</section>
                 <totalarticle>" . $home_list_count . "</totalarticle>
                 <start_index>0</start_index>
@@ -50,13 +50,13 @@ function homePageFeed() {
     $result_set = setRedis($redis_key, $output, $ttl);
     //echo "redis set - ". $result_set['set_flag']; exit();
    }
-  
+
   //home page feed file writing
   if ($output) {
     $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
     //$feed_file_path = "public://xml_it/stories";
     //file_prepare_directory($feed_file_path, FILE_CREATE_DIRECTORY);
-    
+
     $feed_file_name = "home.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
@@ -89,7 +89,7 @@ function bigStoryWidgetData() {
         $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
       }
     }
-    
+
   }
   // varibale for feed tag
   $title = $big_story_block_data[1]['node_load_data']->title;
@@ -109,7 +109,7 @@ function bigStoryWidgetData() {
   //xml tag writing
   if ($type == "story") {
     $home_list_count++;
-    $output .= "\n<article>
+    $output .= "<article>
                     <type>" . $type . "</type>
                     <title><![CDATA[" . $title . "]]></title>
                     <thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>
@@ -125,7 +125,7 @@ function bigStoryWidgetData() {
                 </article>";
     // generate story detail page
     $fl = generateStoryDetailPageFeed($nid);
-    
+
   }
 
   return $output;
@@ -210,7 +210,7 @@ function homePageFeaturesWidgetData() {
     //xml tag writing
     if ($type == "story") {
       $home_list_count++;
-      $output .= "\n<article>
+      $output .= "<article>
                         <type>" . $type . "</type>
                         <title><![CDATA[" . $title . "]]></title>
                         <thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>
@@ -291,7 +291,7 @@ function topStoriesWidgetData() {
 
   // xml tag wring for features widget..
   foreach ($result as $key => $value) {
-    
+
 
     // varibale for feed tag
     $title = $value['title'];
@@ -311,7 +311,7 @@ function topStoriesWidgetData() {
     //xml tag writing
     if ($type == "story") {
       $home_list_count++;
-      $output .= "\n<article>
+      $output .= "<article>
                         <type>" . $type . "</type>
                         <title><![CDATA[" . $title . "]]></title>
                         <thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>
@@ -332,4 +332,3 @@ function topStoriesWidgetData() {
 
   return $output;
 }
-

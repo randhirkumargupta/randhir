@@ -107,14 +107,14 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/programSectionPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['program-category-page-feed'] = array(
     'page callback' => 'programCategoryPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/programCategoryPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['root-category-content-page-feed'] = array(
     'page callback' => 'rootCategoryContentPageFeed',
     'access arguments' => array('access content'),
@@ -127,9 +127,9 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/intodayMagazine.inc',
     'type' => MENU_CALLBACK,
   );
-  
-  
-  
+
+
+
 
   return $items;
 }
@@ -153,7 +153,7 @@ function itg_mobile_feed_permission() {
  */
 function getMobileFeedXmlHeader() {
   $output = "";
-  $output = "<?xml version='1.0' encoding='utf-8'?>\n<Root>";
+  $output = "<?xml version='1.0' encoding='utf-8'?><Root>";
 
   return $output;
 }
@@ -165,7 +165,7 @@ function getMobileFeedXmlHeader() {
  */
 function getMobileFeedXmlFooter() {
   $output = "";
-  $output = "\n</Root>";
+  $output = "</Root>";
 
   return $output;
 }
@@ -176,7 +176,7 @@ function getMobileFeedXmlFooter() {
  */
 function program_section_page_feed_header() {
   $output = "";
-  $output = "<?xml version='1.0' encoding='utf-8'?>\n<root>";
+  $output = "<?xml version='1.0' encoding='utf-8'?><root>";
   return $output;
 }
 
@@ -184,12 +184,12 @@ function program_section_page_feed_header() {
  *  function for return xml feed file footer only for program section
  *
  * @return string
- * 
+ *
  */
 
 function program_section_page_feed_footer() {
   $output = "";
-  $output = "\n</root>";
+  $output = "</root>";
 
   return $output;
 }
@@ -204,7 +204,7 @@ function relatedContentNodeType($node_list = "", $type) {
   // variable declation
     $file_name=""; $term_feed_path="";
   $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
-  $related_ar = array();  
+  $related_ar = array();
   $count = 0;
   $query = db_select('field_data_field_common_related_content', 'frc');
   $query->fields('frc', array('field_common_related_content_value'));
@@ -222,7 +222,7 @@ function relatedContentNodeType($node_list = "", $type) {
   $query_type->fields('si', array('field_story_small_image_fid'));
   $query_type->condition('n.nid', $nid_list, 'IN');
   $result_type = $query_type->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
+
   foreach ($result_type as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
     if ($resvalue['type'] == "story") {
@@ -316,18 +316,18 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
 function categoryManagerSectionTid($type = "story", $parent = 0) {
   // variable declation
   $tid_list = array();
-  
+
   $vid = 14;
   $mapped_ctype = 0;
 
   $tree = taxonomy_get_tree(14, $parent, $max_depth = NULL, $load_entities = FALSE);
   foreach ($tree as $key => $value) {
     //check parent
-      
-    $parent = $value->parents[0];   
+
+    $parent = $value->parents[0];
     // check map with passed content type
     $mapped_ctype = chectContentTypeMapped($value->tid, $type);
-    
+
     // section tid
     if ($parent == 0 && $mapped_ctype == 1) {
     //if ($parent == 0) {
@@ -344,14 +344,14 @@ function categoryManagerSectionTid($type = "story", $parent = 0) {
  */
 
 function chectContentTypeMapped($tid, $type){
-     // check map with passed content type    
+     // check map with passed content type
     $flag = 0;
-    $query = db_select('field_data_field_cm_select_type', 'fdst');    
+    $query = db_select('field_data_field_cm_select_type', 'fdst');
     $query->fields('fdst', array('field_cm_select_type_value'));
-    $query->condition('fdst.entity_id', $tid);    
+    $query->condition('fdst.entity_id', $tid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
-    foreach ($result as $key => $value) { 
+
+    foreach ($result as $key => $value) {
         if($value['field_cm_select_type_value'] == $type){
             $flag = 1; break;
         }
@@ -500,7 +500,7 @@ function getNidIsFavorite($nid) {
  */
 function getNidIsSyndications($nid) {
   // variable declation
-  $flag = 0;  
+  $flag = 0;
   $result = db_select('field_data_field_story_syndication', 'fss')->fields('fss', array('field_story_syndication_value'))->condition('fss.entity_id', $nid, '=')->execute()->fetchAssoc();
 
   if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
@@ -577,7 +577,7 @@ function getNodeFeedTag($tid, $type, $count) {
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
-    
+
     // varibale for feed tag
     $title = $resvalue['title'];
     $type = $resvalue['type'];
@@ -594,7 +594,7 @@ function getNodeFeedTag($tid, $type, $count) {
     // create date formating
     $create_date = date("F d, Y", $created);
     $create_datetime = date(DATE_ATOM, $created);
-    $output .= "\n<title><![CDATA[" . $title . "]]></title>
+    $output .= "<title><![CDATA[" . $title . "]]></title>
                             <thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
     if ($type == "photogallery") {
       $output .= "<url>photo" . $nid . ".xml</url>";
@@ -706,7 +706,7 @@ function getCommentXmlTag($node) {
   $comment_tag = "";
   $output = "";
   $comments_list = comment_get_thread($node, $mode, $comments_per_page);
-  
+
   // writng comments tag
   foreach ($comments_list as $key => $value) {
     $cid = $value;
@@ -717,7 +717,7 @@ function getCommentXmlTag($node) {
     $create_date = date("F d, Y", $commens_obj->created);
     $create_datetime = date(DATE_ATOM, $commens_obj->created);
     $email = $commens_obj->mail;
-    $comment_tag .= "\n<comment>
+    $comment_tag .= "<comment>
                         <commenttext>" . $commenttext . "</commenttext>
                         <name>" . $name . "</name>
                         <createddate>" . $create_date . "</createddate>
@@ -727,12 +727,43 @@ function getCommentXmlTag($node) {
   }
 
   if ($commentsflag) {
-    $output .= "\n<comments>";
+    $output .= "<comments>";
     $output .= $comment_tag;
-    $output .= "\n</comments>";
+    $output .= "</comments>";
   }
   return $output;
 }
+
+
+/**
+ * function for generate Empty comment xml tag
+ *
+ *
+ */
+function emptygetCommentXmlTag() {
+  // variable declation
+  $commenttext = "";
+  $name = '';
+  $create_date = '';
+  $create_datetime = "";
+  $email = "";
+
+  // writng comments tag
+  $comment_tag .= "<comment>
+                        <commenttext>" . $commenttext . "</commenttext>
+                        <name>" . $name . "</name>
+                        <createddate>" . $create_date . "</createddate>
+                        <createddatetime>" . $create_datetime . "</createddatetime>
+                        <email>" . $email . "</email>
+                      </comment>";
+
+    $output .= "<comments>";
+    $output .= $comment_tag;
+    $output .= "</comments>";
+
+    return $output;
+}
+
 
 /**
  * function for generate getRelatedNodeXmlTag
@@ -756,7 +787,7 @@ function getRelatedNodeXmlTag($nidar) {
 
     if ($value['type'] == "story") {
       $related_flag_story = 1;
-      $story_tag .= "\n<story>
+      $story_tag .= "<story>
                             <title>" . $title . "</title>
                             <url>" . $url . "</url>
                             <thumbimage>" . $img_url . "</thumbimage>
@@ -764,7 +795,7 @@ function getRelatedNodeXmlTag($nidar) {
     }
     elseif ($value['type'] == "photogallery") {
       $related_flag_photo = 1;
-      $photo_tag .= "\n<photo>
+      $photo_tag .= "<photo>
                             <title>" . $title . "</title>
                             <url>" . $url . "</url>
                             <thumbimage>" . $img_url . "</thumbimage>
@@ -772,14 +803,14 @@ function getRelatedNodeXmlTag($nidar) {
     }
     elseif ($value['type'] == "videogallery") {
       $related_flag_video = 1;
-      $video_tag .= "\n<video>
+      $video_tag .= "<video>
                             <title>" . $title . "</title>
                             <url>" . $url . "</url>
                             <thumbimage>" . $img_url . "</thumbimage>
                            </video>";
     }
   }
-  $output .= "\n<related>";
+  $output .= "<related>";
   if ($related_flag_story) {
     $output .= "<stories>
             " . $story_tag . "
@@ -806,4 +837,52 @@ function getRelatedNodeXmlTag($nidar) {
 }
 
 
+/**
+ * function for Blank generate getRelatedNodeXmlTag
+ *
+ * @return array
+ */
+function emptygetRelatedNodeXmlTag() {
+  // variable declation
+  global $base_url;
+  $output = "";
+  $story_tag = "";
+  $photo_tag = "";
+  $video_tag = "";
+  $title = '';
+  $url = '';
+  $img_url = '';
 
+  $story_tag .= "<story>
+                            <title>" . $title . "</title>
+                            <url>" . $url . "</url>
+                            <thumbimage>" . $img_url . "</thumbimage>
+                            </story>";
+
+  $photo_tag .= "<photo>
+                            <title>" . $title . "</title>
+                            <url>" . $url . "</url>
+                            <thumbimage>" . $img_url . "</thumbimage>
+                           </photo>";
+
+  $video_tag .= "<video>
+                            <title>" . $title . "</title>
+                            <url>" . $url . "</url>
+                            <thumbimage>" . $img_url . "</thumbimage>
+                           </video>";
+  $output .= "<related>";
+
+  $output .= "<stories>
+            " . $story_tag . "
+        </stories>";
+
+  $output .= "<photos>
+            " . $photo_tag . "
+        </photos>";
+  $output .= "<videos>
+            " . $video_tag . "
+        </videos>";
+  $output .= "</related>";
+
+  return $output;
+}

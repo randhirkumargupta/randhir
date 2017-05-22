@@ -11,7 +11,7 @@
  */
 function videoDetailPageFeed() {
   $output = "";
-  
+
   if (count(arg()) < 2) {
     $output = "Please pass video node nid in url";
   }
@@ -26,7 +26,7 @@ function videoDetailPageFeed() {
 /**
  * function for generate generateVideoDetailPageFeed xml feed file
  *
- * @return array 
+ * @return array
  */
 function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $type) {
   //echo print_ar(arg());exit();
@@ -34,13 +34,13 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   //$nid = 571;
   //$nid = 461;
   $imgtag = "";
-  
-  
+
+
   if(!$file_name){
       $file_name = "video".$nid.".xml";
   }
   if(!$term_feed_path){
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos"; 
+    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
     //$term_feed_path = "public://xml_it/videos";
     //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
@@ -49,18 +49,18 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
           $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
           //$term_feed_path = "public://xml_it/photos";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
-     
+     }
+
      elseif($type == "story"){
          $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
           //$term_feed_path = "public://xml_it/stories";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
      elseif($type == "videogallery"){
          $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
          //$term_feed_path = "public://xml_it/videos";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
   }
   //field_image_caption
   $output = "";
@@ -70,17 +70,17 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
   else {
     //check into redis
    $redis_key = "itgd_video".$nid;
-   
+
    $result_get = getRedis($redis_key);
-  
-   
+
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
       // echo "redis get - ". $output; exit();
    }
    else{
     //$output = "video detail page";
-       
+
     global $base_url;
     $ttl = 300;
     $node = node_load($nid);
@@ -102,13 +102,13 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $thumbimage = completeFilePath($node->field_story_medium_image['und'][0]['fid']);
     $is_fav = getNidIsFavorite($nid);
     $syndications = getNidIsSyndications($nid);
-    $field_video_upload = $node->field_video_upload['und'][0]['value'];     
+    $field_video_upload = $node->field_video_upload['und'][0]['value'];
     $file_id = file_usage($field_video_upload);
     // get video path
-    $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);  
+    $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
     $metatags_title = $node->metatags;
     $metatags_description = $node->description;
-    
+
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
     $output .= "<item><videoid>" . $nid . "</videoid>
@@ -144,10 +144,14 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     //related node
     if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
       $output .= getRelatedNodeXmlTag($related_node['nid']);
+    }else{
+        $output .= emptygetRelatedNodeXmlTag();
     }
     //function for get comment xml tag
     if ($comment_cont > 0) {
       $output .= getCommentXmlTag($node);
+    }else{
+        $output .= emptygetCommentXmlTag();
     }
     //call function getMobileFeedXmlFooter
     $output .= "</item>" . getMobileFeedXmlFooter();
@@ -156,8 +160,8 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     //echo "redis set - ". $result_set['set_flag']; exit();
   }
 }
-  
-   
+
+
 
   if($output){
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -197,9 +201,9 @@ function getVideoTagDetail($video_path_info,$file_id = NULL) {
     $video_formats = all_video_format($file_id);
 
     if($video_path_info['dailymtion_flag'] == "yes"){
-        
+
         $output .= "<videoparts>
-                        <part></part>
+                        <part>".$videoparts_3gp."</part>
                     </videoparts>
                     <size_364bit>".$filesize."</size_364bit>
                     <videoparts_mp4>
@@ -219,7 +223,7 @@ function getVideoTagDetail($video_path_info,$file_id = NULL) {
         $flv_url = str_replace(".mp4",".flv",$video_path_mp4);
         $videoparts_3gp = str_replace(".mp4",".3gp",$video_path_mp4);
         $output .= "<videoparts>
-                        <part></part>
+                        <part>".$videoparts_3gp."</part>
                     </videoparts>
                     <size_364bit>".$filesize."</size_364bit>
                     <videoparts_mp4>
@@ -251,13 +255,13 @@ function getImgTagDetail($node) {
   // custom function for get img caption
   $caption = getImgCaption($field_story_small_image);
   $imgtag = "";
-  $imgtag = "\n<bodyimages> 
-                    <image>  
+  $imgtag = "<bodyimages>
+                    <image>
                         <lowres><![CDATA[".$highres."]]></lowres>
                         <highres><![CDATA[".$highres."]]></highres>
-                        <caption>".$caption."</caption>  
-                    </image> 
-                </bodyimages>\n";
+                        <caption>".$caption."</caption>
+                    </image>
+                </bodyimages>";
 
 
   return $imgtag;
@@ -272,7 +276,7 @@ function file_usage($id){
   $ids = "";
   $query = db_select('file_usage', 'fu');
   $query->condition('fu.id', $id);
-  $query->fields('fu', array('fid'));  
+  $query->fields('fu', array('fid'));
   $results = $query->execute()->fetchAll();
   $ids = $results[0]->fid;
   //echo $ids; exit();
@@ -299,7 +303,7 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $uri = $results[0]->uri;
   $filename = $results[0]->filename;
   $filesize = $results[0]->filesize;
-  
+
   // for daily motion vedio
   if(strpos($uri,'dailymotion_video_dir') !== false){
       $dailymotion_path = getDailymotionPath($fid, $filename);
@@ -309,22 +313,22 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
         //field_video_upload[und][0][field_migrated_video_url][und][0][value]
         $query = db_select('field_data_field_migrated_video_url', 'fmv');
         $query->condition('fmv.entity_id', $field_video_upload);
-        $query->fields('fmv', array('field_migrated_video_url_value'));        
-        $results = $query->execute()->fetchAll(); 
+        $query->fields('fmv', array('field_migrated_video_url_value'));
+        $results = $query->execute()->fetchAll();
         //print_ar($results); exit();
         $uri = $results[0]->field_migrated_video_url_value;
         $dailymtion_flag = "no";
         $dailymotion_path = $uri;
   }
-  
+
   $video_path_info['dailymtion_flag'] = $dailymtion_flag;
   $video_path_info['video_path_mp4'] = $dailymotion_path;
   $video_path_info['filesize'] = $filesize;
-  
-      
+
+
   return $video_path_info;
 
-  
+
 }
 
 /**
@@ -337,20 +341,19 @@ function getDailymotionPath($fid, $filename){
   //echo "hi".$fid; exit();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->condition('drd.fid', $fid);
-  $query->fields('drd', array('title', 'channel', 'type', 'video_id', 'video_duration', 'dailymotion_thumb_url', 'name', 'upload_time'));  
+  $query->fields('drd', array('title', 'channel', 'type', 'video_id', 'video_duration', 'dailymotion_thumb_url', 'name', 'upload_time'));
   $results = $query->execute()->fetchAll();
   $channel = $results[0]->channel;
   $video_id = $results[0]->video_id;
   $dailymotion_thumb_url = $results[0]->dailymotion_thumb_url;
   $name = $results[0]->name;
-  $ext = pathinfo($name, PATHINFO_EXTENSION);  
-  $type = $results[0]->type;  
+  $ext = pathinfo($name, PATHINFO_EXTENSION);
+  $type = $results[0]->type;
   $filename_ar = explode(".",$filename);
-  $final_filename = $filename_ar[0];  
+  $final_filename = $filename_ar[0];
   $final_filename = str_replace("_","-",$final_filename);
-  
-  
+
+
   $video_path = "https://www.dailymotion.com/video/".$video_id."_public-dailymotion-".$type."-".$final_filename."-".$ext."_".$channel."";
   return $video_path;
 }
-

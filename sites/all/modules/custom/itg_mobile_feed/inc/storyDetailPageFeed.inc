@@ -36,7 +36,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
       $file_name = "story".$nid.".xml";
   }
   if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories"; 
+     $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
      //$term_feed_path = "public://xml_it/stories";
      //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
@@ -45,21 +45,21 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
          $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
          //$term_feed_path = "public://xml_it/photos";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
-     
+     }
+
      elseif($type == "story"){
          $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
          //$term_feed_path = "public://xml_it/stories";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
      elseif($type == "videogallery"){
          $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
          //$term_feed_path = "public://xml_it/videos";
 	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
   }
-  
-  
+
+
   //field_image_caption
   $output = "";
   if (!$nid) {
@@ -69,7 +69,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
      //check into redis
    $redis_key = "itgd_story".$nid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
        //echo "redis get - ". $output; exit();
@@ -100,9 +100,9 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
 
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
-    $output .= "\n<item>
-                    <storyid>" . $nid . "</storyid> 
-                    <idsection>" . $tid . "</idsection> 
+    $output .= "<item>
+                    <storyid>" . $nid . "</storyid>
+                    <idsection>" . $tid . "</idsection>
                     <section><![CDATA[" . $term_name . "]]> </section>
                     <headline ><![CDATA[" . $title . "]]></headline >
                     <credit><![CDATA[" . $reporter_node . "]]> </credit>
@@ -128,10 +128,14 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
     //print_ar($related_node);exit();
     if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
       $output .= getRelatedNodeXmlTag($related_node['nid']);
+    }else{
+        $output .= emptygetRelatedNodeXmlTag();
     }
     //function for get comment xml tag
     if ($comment_cont > 0) {
       $output .= getCommentXmlTag($node);
+    }else{
+        $output .= emptygetCommentXmlTag();
     }
     //call function getMobileFeedXmlFooter
     $output .= "</item>" . getMobileFeedXmlFooter();
@@ -139,7 +143,7 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
     // set into redis
     $result_set = setRedis($redis_key, $output, $ttl);
      //echo "redis set - ". $result_set['set_flag']; exit();
-  } 
+  }
   }
 //header('Content-Type: application/xml; charset=utf-8');
 //echo $output; exit();
@@ -176,7 +180,7 @@ function getVideoTag($node) {
   //$src = $node->attributes->getNamedItem('src')->nodeValue;
 
   if ($src) {
-    $videotag = "\n<video_embed>
+    $videotag = "<video_embed>
                     <videoparts_mp4>
                         <part>" . $src . "</part>
                         <img_url><![CDATA[]]></img_url>
@@ -185,7 +189,7 @@ function getVideoTag($node) {
                         <part>" . $src . "</part>
                         <img_url><![CDATA[]]></img_url>
                     </videoparts_m3u8>
-                </video_embed>\n";
+                </video_embed>";
   }
   return $videotag;
 }
@@ -211,15 +215,14 @@ function getImgTag($node) {
   $node = $nodelist->item(0);
   //$src = $node->attributes->getNamedItem('src')->nodeValue;
   if ($src) {
-    $imgtag = "\n<bodyimages> 
-                    <image>  
+    $imgtag = "<bodyimages>
+                    <image>
                         <lowres><![CDATA[" . $src . "]]></lowres>
                         <highres><![CDATA[" . $src . "]]></highres>
-                        <caption></caption>  
-                    </image> 
-                </bodyimages>\n";
+                        <caption></caption>
+                    </image>
+                </bodyimages>";
   }
 
   return $imgtag;
 }
-

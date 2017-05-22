@@ -32,13 +32,13 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
   //echo print_ar(arg());exit();
  // $nid = 626;
   $imgtag = "";
-  
-  
+
+
   if(!$file_name){
       $file_name = "photo" . $nid . ".xml";
   }
   if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos"; 
+     $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
      //$term_feed_path = "public://xml_it/photos";
      //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   }
@@ -46,16 +46,16 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
      if($type == "photogallery"){
           $term_feed_path = "public://xml_it/photos";
 	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
-     
+     }
+
      elseif($type == "story"){
           $term_feed_path = "public://xml_it/stories";
 	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
      elseif($type == "videogallery"){
           $term_feed_path = "public://xml_it/videos";
 	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+     }
   }
   //field_image_caption
   $output = "";
@@ -63,11 +63,11 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
     $output = "Nid is missing";
   }
   else {
-    
+
     //check into redis
    $redis_key = "itgd_photo".$nid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
        //echo "redis get - ". $output; exit();
@@ -92,7 +92,7 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
     $toptlapics = count($galleryimg);
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
-    $output .= "\n<idgallery>" . $nid . "</idgallery>
+    $output .= "<idgallery>" . $nid . "</idgallery>
                     <gallery><![CDATA[" . $title . "]]></gallery>
                     <idsection>" . $tid . "</idsection>
                     <section>" . $term_name . "</section>
@@ -107,10 +107,14 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
     //print_ar($related_node);exit();
     if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
       $output .= getRelatedNodeXmlTag($related_node['nid']);
+    }else{
+        $output .= emptygetRelatedNodeXmlTag();
     }
     //function for get comment xml tag
     if ($comment_cont > 0) {
       $output .= getCommentXmlTag($node);
+    }else{
+        $output .= emptygetCommentXmlTag();
     }
     //call function getMobileFeedXmlFooter
     $output .= getMobileFeedXmlFooter();
@@ -147,20 +151,24 @@ function getGalleryImgTag($galleryimg) {
       //print_ar($value, "getGalleryImgTag");exit();
       $fid = $value['value'];
       $fid_file = $value['revision_id'];
+      //Load field collection item
+      $load_collection = field_collection_item_load($value['value']);
+      $img_url = completeFilePath($load_collection->field_images['und'][0]['fid']);
+      $small_img_url = completeFilePath($load_collection->field_photo_small_image['und'][0]['fid']);
+      //end
       $img_url = completeFilePath($fid_file);
       // custom function for get img caption
       $caption = getImgCaption($fid);
       // custom function for get img byline
       $byline = getImgByline($fid);
-      $output .= "\n<item> 
-                        <imageid>" . $fid . "</imageid> 
-                        <image><![CDATA[" . $img_url . "]]></image>
+      $output .= "<item>
+                        <imageid>" . $fid . "</imageid>
+                        <image><![CDATA[" . $small_img_url . "]]></image>
                         <largeimage><![CDATA[" . $img_url . "]]></largeimage>
                         <caption><![CDATA[" . $caption . "]]> </caption>
-                        <byline>" . $byline . "</byline> 
+                        <byline>" . $byline . "</byline>
                         </item>";
     }
   }
   return $output;
 }
-

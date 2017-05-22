@@ -32,12 +32,12 @@ function rootCategoryContentPageFeed() {
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-    
+
     // check section is story
     $node_count = customNodeCount('story', $value);
     // loop on category
     if ($node_count > 0 ) {
-      
+
         $cattid = $value;
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
@@ -52,17 +52,17 @@ function rootCategoryContentPageFeed() {
         // generate cat xml file string
         if ($storytag['data'] != "") {
           $output = "";
-          $output .= getMobileFeedXmlHeader();          
-          $output .= "\n<idsection>".$cattid."</idsection>
+          $output .= getMobileFeedXmlHeader();
+          $output .= "<idsection>".$cattid."</idsection>
                         <section>".$term_name."</section>
                         <totalarticle>".$list_count."</totalarticle>
                         <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>\n";
+                        <end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= getMobileFeedXmlFooter();
           // xml file writing..
           if ($output) {
-            
+
             $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
           }
         }
@@ -83,9 +83,9 @@ function generateLeftMainCategoryPage($tid, $term_name) {
   //check into redis
    $redis_key = "itgd_generateLeftMainCategoryPage".$tid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
-       $data_str = $result_get['key_value'];       
+       $data_str = $result_get['key_value'];
         //echo "redis get - ". $output; exit();
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
@@ -177,12 +177,12 @@ function generateLeftMainCategoryPage($tid, $term_name) {
 
       // create date formating
       $create_date = date("F d, Y", $created);
-      $create_datetime = date(DATE_ATOM, $created);      
-      $output .= "<article> 
-                    <title>".$title."</title>                    
+      $create_datetime = date(DATE_ATOM, $created);
+      $output .= "<article>
+                    <title>".$title."</title>
                     <thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage>
-                    <kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage> 
-                    <url>".$loop_file_name." </url> 
+                    <kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage>
+                    <url>".$loop_file_name." </url>
                     <create_date>".$create_date."</create_date>
                     <create_datetime>".$create_datetime."</create_datetime>
                     <relateds>
@@ -204,4 +204,3 @@ function generateLeftMainCategoryPage($tid, $term_name) {
    }
   return $data;
 }
-

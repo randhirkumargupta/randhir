@@ -13,7 +13,7 @@ function intodayMagazine() {
    //check into redis
    $redis_key = "itgd_intodayMagazine";
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
        //echo "redis get - ". $output; exit();
@@ -23,42 +23,42 @@ function intodayMagazine() {
   $output = "";
   $ttl = 300;
   // tid conf function
- 
+
   $storytag = array();
-  // static  tid 
-  
+  // static  tid
+
   $list_count = 0;
   $catFile = "";
-  
+
   $return_flag = "";
   // loop on section
-  
-    
-    
+
+
+
       $tid_magazine_section = tidConfig();
       $magazine_tid = $tid_magazine_section['magazine'];
-        
+
         $cattid = generateIntodayMagazinePage($magazine_tid);
         $term = taxonomy_term_load($cattid);
         $term_name = $term->name;
         $list_count = $storytag['lcount'];
         $catFile = "";
         //xml feed file name
-        
-        
+
+
         // generate cat xml file string
         if ($storytag['data'] != "") {
           $output = "";
-          $output .= getMobileFeedXmlHeader();          
-          $output .= "\n<idsection>".$cattid."</idsection>
+          $output .= getMobileFeedXmlHeader();
+          $output .= "<idsection>".$cattid."</idsection>
                         <section>".$term_name."</section>
                         <totalarticle>".$list_count."</totalarticle>
                         <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>\n";
+                        <end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= getMobileFeedXmlFooter();
           // xml file writing..
-          
+
         }
         // set into redis
     $result_set = setRedis($redis_key, $output, $ttl);
@@ -72,8 +72,8 @@ function intodayMagazine() {
             $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
           }
      // }
-    
-  
+
+
   //return $return_flag;
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;  die();
@@ -97,7 +97,7 @@ function generateIntodayMagazinePage($tid) {
   $range_min = 0;
   $order_by = 'ASC';
   $type = "story";
-  
+
 
 
 {
@@ -124,7 +124,7 @@ function generateIntodayMagazinePage($tid) {
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-    //condition for magazine based story 
+    //condition for magazine based story
     $query->Join('field_data_field_story_source_type', 'fdsst', 'fdsst.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
@@ -169,12 +169,12 @@ function generateIntodayMagazinePage($tid) {
 
       // create date formating
       $create_date = date("F d, Y", $created);
-      $create_datetime = date(DATE_ATOM, $created);      
-      $output .= "<article> 
-                    <title>".$title."</title>                    
+      $create_datetime = date(DATE_ATOM, $created);
+      $output .= "<article>
+                    <title>".$title."</title>
                     <thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage>
-                    <kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage> 
-                    <url>".$loop_file_name." </url> 
+                    <kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage>
+                    <url>".$loop_file_name." </url>
                     <create_date>".$create_date."</create_date>
                     <create_datetime>".$create_datetime."</create_datetime>
                     <relateds>
@@ -189,7 +189,6 @@ function generateIntodayMagazinePage($tid) {
   }
   $data['lcount'] = $listcount;
   $data['data'] = $output;
-  
+
   return $data;
 }
-

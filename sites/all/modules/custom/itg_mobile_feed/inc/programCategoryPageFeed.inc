@@ -14,9 +14,9 @@ function programCategoryPageFeed() {
   $output = "";
   // tid conf function
   $conf_array = tidConfig();
-  
+
   $storytag = array();
-    
+
   // check tid argument
   $tid_arg = arg(1);
   if($tid_arg && is_numeric($tid_arg)){
@@ -34,14 +34,14 @@ function programCategoryPageFeed() {
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-    
+
     // check section is story
     $node_count = customNodeCount('videogallery', $value);
     // loop on category
     if ($node_count > 0 ) {
-      
+
         $cattid = $value;
-        $term = taxonomy_term_load($value);        
+        $term = taxonomy_term_load($value);
         $term_name = $term->name;
         $term_description = $term->description;
         // get story list tag
@@ -55,16 +55,16 @@ function programCategoryPageFeed() {
         // generate cat xml file string
         if ($storytag['data'] != "") {
           $output = "";
-          $output .= program_section_page_feed_header();          
-          $output .= "\n<id>".$cattid."</id>
+          $output .= program_section_page_feed_header();
+          $output .= "<id>".$cattid."</id>
                         <title><![CDATA[".$term_name."]]></title>
                         <description><![CDATA[".$term_description."]]></description>
-                        <itemcount>".$list_count."</itemcount>\n";
+                        <itemcount>".$list_count."</itemcount>";
           $output .= $storytag['data'];
-          $output .= "\n" . program_section_page_feed_footer();
+          $output .= program_section_page_feed_footer();
           // xml file writing..
           if ($output) {
-            
+
             $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
           }
         }
@@ -85,9 +85,9 @@ function generateProgramCategoryPage($tid) {
   //check into redis
    $redis_key = "itgd_generateProgramCategoryPage".$tid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
-       $data_str = $result_get['key_value'];       
+       $data_str = $result_get['key_value'];
         //echo "redis get - ". $output; exit();
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
@@ -181,7 +181,7 @@ function generateProgramCategoryPage($tid) {
       // create date formating
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      
+
       $output .= "<item>
                     <title><![CDATA[".$title."]]></title>
                     <shortdescription><![CDATA[".$field_story_kicker_text_value."]]></shortdescription>
@@ -200,6 +200,6 @@ function generateProgramCategoryPage($tid) {
     $result_set = setRedis($redis_key, $data_fi, $ttl);
     //echo "redis set - ". $result_set['set_flag']; exit();
    }
-  
+
   return $data;
 }

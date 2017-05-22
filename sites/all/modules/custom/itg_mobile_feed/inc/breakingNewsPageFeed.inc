@@ -12,13 +12,13 @@ function breakingNewsPageFeed() {
    //check into redis
    $redis_key = "itgd_breakingNewsPageFeed";
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
        $output = $result_get['key_value'];
        //echo "redis get - ". $output; exit();
    }
    else{
-    // variable declation  
+    // variable declation
     global $base_url;
     $img_base = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public";
     $output = "";
@@ -56,33 +56,51 @@ function breakingNewsPageFeed() {
 
     //print_ar($result, "home page breaking news");exit();
 
-    $output .= "\n<item>
-                  <enable>1</enable>
-                  <id>" . $nid . "</id>
-                  <title>" . $title . "</title>
-                  <credit></credit>
-                  <createddate>" . $create_date . "</createddate>
-                  <createdtime>" . $create_datetime . "</createdtime>
-                  <city>" . $city . "</city>
-                  <courtesy></courtesy>
-                  <thumbimage>" . $file_medium_img_url . "</thumbimage>
-                  <longdescription>" . $body . "</longdescription>
-                  <weburl>" . $web_url . "</weburl>
-                  <url></url>
-                  </item>";
+    if(isset($nid)){
+        $output .= "<item>
+                      <enable>1</enable>
+                      <id>" . $nid . "</id>
+                      <title>" . $title . "</title>
+                      <credit></credit>
+                      <createddate>" . $create_date . "</createddate>
+                      <createdtime>" . $create_datetime . "</createdtime>
+                      <city>" . $city . "</city>
+                      <courtesy></courtesy>
+                      <thumbimage>" . $file_medium_img_url . "</thumbimage>
+                      <longdescription>" . $body . "</longdescription>
+                      <weburl>" . $web_url . "</weburl>
+                      <url></url>
+                      </item>";
+
+    }else{
+            $output .= "<item>
+                      <enable></enable>
+                      <id></id>
+                      <title></title>
+                      <credit></credit>
+                      <createddate></createddate>
+                      <createdtime></createdtime>
+                      <city></city>
+                      <courtesy></courtesy>
+                      <thumbimage></thumbimage>
+                      <longdescription></longdescription>
+                      <weburl></weburl>
+                      <url></url>
+                      </item>";
+    }
     //call function getMobileFeedXmlFooter
     $output .= getMobileFeedXmlFooter();
     // set into redis
     $result_set = setRedis($redis_key, $output, $ttl);
     //echo "redis set - ". $result_set['set_flag']; exit();
    }
-  
+
   //breaking news page feed file writing
   if ($output) {
     $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
     //$feed_file_path = "public://xml_it/stories";
     //file_prepare_directory($feed_file_path, FILE_CREATE_DIRECTORY);
-    
+
     $feed_file_name = "breakingnews.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
@@ -90,4 +108,3 @@ function breakingNewsPageFeed() {
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;  die();
 }
-

@@ -32,12 +32,12 @@ function videoCategoryPageFeed() {
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-    
+
     // check section is videogallery
     $node_count = customNodeCount('videogallery', $value);
     // loop on category
     if ($node_count > 0 ) {
-      
+
         $cattid = $value;
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
@@ -53,13 +53,13 @@ function videoCategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= getMobileFeedXmlHeader();
-          $output .= "\n<idsection>".$cattid."</idsection>
+          $output .= "<idsection>".$cattid."</idsection>
                         <section>".$term_name."</section>
                         <totalvideos>".$list_count."</totalvideos>
                         <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>\n";
+                        <end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= getMobileFeedXmlFooter();
           // xml file writing..
           if ($output) {
             //echo "andyrr here".$output; exit();
@@ -83,9 +83,9 @@ function generateVideoCategoryPage($tid) {
   //check into redis
    $redis_key = "itgd_generateVideoCategoryPages".$tid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
-       $data_str = $result_get['key_value'];       
+       $data_str = $result_get['key_value'];
         //echo "redis get - ". $output; exit();
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
@@ -208,4 +208,3 @@ function generateVideoCategoryPage($tid) {
    }
   return $data;
 }
-

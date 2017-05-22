@@ -10,12 +10,12 @@
  * @return array
  */
 function photocategoryPageFeed() {
-  // variable declation  
+  // variable declation
   $output = "";
   // tid conf function
   $conf_array = tidConfig();
   $storytag = array();
-  $section_list = array();  
+  $section_list = array();
   // check tid argument
   $tid_arg = arg(1);
   if($tid_arg && is_numeric($tid_arg)){
@@ -30,16 +30,16 @@ function photocategoryPageFeed() {
   $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
   //$term_feed_path = "public://xml_it/photos";
   //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-  
+
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-    
+
     // check section is photogallery
     $node_count = customNodeCount('photogallery', $value);
     // loop on category
     if ($node_count > 0 ) {
-     
+
         $cattid = $value;
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
@@ -55,16 +55,16 @@ function photocategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= getMobileFeedXmlHeader();
-          $output .= "\n<idsection>" . $cattid . "</idsection>
+          $output .= "<idsection>" . $cattid . "</idsection>
                                 <section>" . $term_name . "</section>
                                 <totalgalleries>" . $list_count . "</totalgalleries>
                                 <start_index>0</start_index>
-                                <end_index>" . $list_count . "</end_index>\n";
+                                <end_index>" . $list_count . "</end_index>";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= getMobileFeedXmlFooter();
           // xml file writing..
           if ($output) {
-            
+
             $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
           }
         }
@@ -85,9 +85,9 @@ function generatePhotoCategoryPage($tid) {
   //check into redis
    $redis_key = "itgd_generatePhotoCategoryPages".$tid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
-       $data_str = $result_get['key_value'];       
+       $data_str = $result_get['key_value'];
         //echo "redis get - ". $output; exit();
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
@@ -177,8 +177,8 @@ function generatePhotoCategoryPage($tid) {
       // create date formating
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<item> 
-                        <title><![CDATA[" . $title . "]]></title>  
+      $output .= "<item>
+                        <title><![CDATA[" . $title . "]]></title>
                         <thumbimage><![CDATA[" . $file_medium_img_url . "]]></thumbimage>
                         <url>photo" . $nid . ".xml</url>
                         <create_date>" . $create_date . "</create_date>
@@ -203,7 +203,6 @@ function generatePhotoCategoryPage($tid) {
     $result_set = setRedis($redis_key, $data_fi, $ttl);
     //echo "redis set - ". $result_set['set_flag']; exit();
    }
-  
+
   return $data;
 }
-
