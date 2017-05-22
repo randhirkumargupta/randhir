@@ -116,11 +116,15 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
     $videotag = getVideoTag($node);
     if ($videotag) {
       $output .= $videotag;
+    }else{
+      $output .= emptygetVideoTag();
     }
     //get video tag
     $imgtag = getImgTag($node);
     if ($imgtag) {
       $output .= $imgtag;
+    } else {
+        $output .= emptygetImgTag();
     }
     //web url tag
     $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
@@ -193,6 +197,46 @@ function getVideoTag($node) {
   }
   return $videotag;
 }
+
+
+/**
+ * function for generate Empty video xml tag
+ *
+ * @return array
+ */
+function emptygetVideoTag() {
+    $videotag = "";
+
+    $videotag = "<video_embed>
+                    <videoparts_mp4>
+                        <part></part>
+                    </videoparts_mp4>
+                    <videoparts_m3u8>
+                        <part></part>
+                    </videoparts_m3u8>
+                </video_embed>";
+  return $videotag;
+}
+
+/**
+ * function for generate empty image xml tag
+ *
+ * @return array
+ */
+function emptygetImgTag() {
+  $imgtag = "";
+
+  $imgtag = "<bodyimages>
+                    <image>
+                        <lowres><![CDATA[]]></lowres>
+                        <highres><![CDATA[]]></highres>
+                        <caption></caption>
+                    </image>
+                </bodyimages>";
+
+  return $imgtag;
+}
+
 
 /**
  * function for generate image xml tag

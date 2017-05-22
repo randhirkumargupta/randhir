@@ -140,6 +140,8 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $imgtag = getImgTagDetail($node);
     if ($imgtag) {
       $output .= $imgtag;
+    }else{
+       $output .= emptygetImgTagDetail();
     }
     //related node
     if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -196,6 +198,9 @@ function getVideoTagDetail($video_path_info,$file_id = NULL) {
     $output = "";
     $video_path_mp4 = $video_path_info['video_path_mp4'];
     $filesize = $video_path_info['filesize'];
+
+    $flv_url = str_replace(".mp4",".flv",$video_path_mp4);
+    $videoparts_3gp = str_replace(".mp4",".3gp",$video_path_mp4);
 
 //to get the video of all the other formats
     $video_formats = all_video_format($file_id);
@@ -266,6 +271,26 @@ function getImgTagDetail($node) {
 
   return $imgtag;
 }
+
+/**
+ * function for generate Empty image xml tag
+ *
+ *
+ */
+function emptygetImgTagDetail() {
+
+  $imgtag = "";
+  $imgtag = "<bodyimages>
+                    <image>
+                        <lowres><![CDATA[]]></lowres>
+                        <highres><![CDATA[]]></highres>
+                        <caption></caption>
+                    </image>
+                </bodyimages>";
+  return $imgtag;
+}
+
+
 /**
  * Function check file id
 o filename

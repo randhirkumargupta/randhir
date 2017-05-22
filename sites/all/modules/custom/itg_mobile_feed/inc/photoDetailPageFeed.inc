@@ -156,7 +156,7 @@ function getGalleryImgTag($galleryimg) {
       $img_url = completeFilePath($load_collection->field_images['und'][0]['fid']);
       $small_img_url = completeFilePath($load_collection->field_photo_small_image['und'][0]['fid']);
       //end
-      $img_url = completeFilePath($fid_file);
+      //$img_url = completeFilePath($fid_file);
       // custom function for get img caption
       $caption = getImgCaption($fid);
       // custom function for get img byline
