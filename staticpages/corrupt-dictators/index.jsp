@@ -112,7 +112,7 @@ a:hover,a:active {color:#599100;text-decoration:underline;}
 
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -421,12 +421,12 @@ ajaxinclude("/corrupt-dictators/commentbox_ajax.jsp?contentid=271087&slideid=1&c
 
 </div>
 <div id="footer">
-               <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+               <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
             </div>
 
     <div style="display:none;" class="bott-popup" id="videopopup">
   <div class="bott-popup-inn" id="userreg">
-    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="http://media2.intoday.in/microsites/specials/close.png"></a></div>
+    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="/staticpages/main/microsites/specials/close.png"></a></div>
         <div class="bottspecinn"></div>
     <div id="enrollfrm">
 
@@ -437,7 +437,7 @@ ajaxinclude("/corrupt-dictators/commentbox_ajax.jsp?contentid=271087&slideid=1&c
 
 
 
-  <script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+  <script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
    <script type="text/javascript" src="http://indiatoday.intoday.in/js/jquery.tinyscrollbar.min.js"></script>
 
 
@@ -454,7 +454,7 @@ ajaxinclude("/corrupt-dictators/commentbox_ajax.jsp?contentid=271087&slideid=1&c
 
 
 
-<script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+<script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
 
 
 
@@ -564,7 +564,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="leftad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600-1.jpg"> </a></div> -->
+   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600-1.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">
@@ -581,7 +581,7 @@ var zflag_nid="821"; var zflag_cid="1220/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="rightad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600.jpg"> </a></div> -->
+    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">

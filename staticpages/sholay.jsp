@@ -8,14 +8,14 @@
 <meta name="keywords" content="sholay, jai, veeru, thakur, gabbar, dhanno, basanti, ramesh sippy" />
 
 <meta property="og:title" content="15 Sholay characters & their best lines">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/images/stories/2013aug/stargraph-sholey_300x350_081013043742.jpg">
+<meta property="og:image" content="/staticpages/main/images/stargraph-sholey_300x350_081013043742.jpg">
 <meta property="og:url" content="http://indiatoday.intoday.in/sholay.jsp">
 <meta property="og:description" content="Sholay's characters are etched in our memories, thanks to some brilliant acting and incredible dialogues. But some of them were silent and yet played their part in making the movie a classic.">
 
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/images/stories/2013aug/stargraph-sholey_300x350_081013043742.jpg" />
+<link rel="image_src" href="/staticpages/main/images/stargraph-sholey_300x350_081013043742.jpg" />
 
 <script type="text/javascript" language="javascript" src="http://indiatoday.intoday.in/js/ajaxinclude.js"></script>
-<link type="text/css" rel="stylesheet" href="http://media2.intoday.in/microsites/specials/sholay/stylesheet.css">
+<link type="text/css" rel="stylesheet" href="/staticpages/main/microsites/specials/sholay/stylesheet.css">
  <style>
    .image_over_text{font:15px/16px arial; position:absolute; cursor:pointer; z-index:22222;}
    #lightbox {z-index: 55555555!important;}
@@ -203,7 +203,7 @@ if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "h
 			
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -353,7 +353,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=15 Sholay characters & their best lines&URL=http://indiatoday.intoday.in/sholay.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/sholay.jsp&p[title]=15 Sholay characters & their best lines&s=100&p[summary]=Sholay has everything: action, comedy, romance and tragedy. But, what makes the movie an outstanding watch are the iconic dialogues & the multi-layered characterisation. See what makes these characters so special. CLICK on the images to read their most memorable  lines.&p[images][0]=http://media2.intoday.in/indiatoday/images/stories/2013aug/stargraph-sholey_300x350_081013043742.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/sholay.jsp&p[title]=15 Sholay characters & their best lines&s=100&p[summary]=Sholay has everything: action, comedy, romance and tragedy. But, what makes the movie an outstanding watch are the iconic dialogues & the multi-layered characterisation. See what makes these characters so special. CLICK on the images to read their most memorable  lines.&p[images][0]=/staticpages/main/images/stargraph-sholey_300x350_081013043742.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=15 Sholay characters & their best lines%20http://indiatoday.intoday.in/sholay.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -366,7 +366,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 </div>
 <div style="font:bold 16px arial; color:#000; margin-bottom:10px; text-align:left">Sholay has everything: action, comedy, romance and tragedy. But, what makes the movie an outstanding watch are the iconic dialogues & the multi-layered characterisation. See what makes these characters so special. <br /><span style="color:#d71920;">CLICK</span> on the images to read their most memorable  lines.</div>
                 	<div align="center">
-                	<div id="wrapper2" style="width:1000px; margin:0 auto 10px auto; position:relative; overflow:hidden; border-bottom:1px solid #ccc;"> <img src="http://media2.intoday.in/microsites/specials/sholay/StarGraph-Sholay.jpg" border="0" usemap="#Map" class="Map" id="mainimg" />
+                	<div id="wrapper2" style="width:1000px; margin:0 auto 10px auto; position:relative; overflow:hidden; border-bottom:1px solid #ccc;"> <img src="/staticpages/main/microsites/specials/sholay/StarGraph-Sholay.jpg" border="0" usemap="#Map" class="Map" id="mainimg" />
                 	    
                 	    <map name="Map" id="Map">
                 	      <area shape="poly" coords="181,172,158,104,167,99,205,122,205,75,228,60,295,78,297,94,252,109,266,113,279,115,288,131,302,146,310,166,317,174" img="bigb.jpg" head="Jai (Amitabh)" textmovie="Tumhara naam kya hai, Basanti?" href="javascript:void(0);">
@@ -458,12 +458,12 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 <div id="footer">
-               <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+               <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
             </div>
             
     <div style="display:none;" class="bott-popup" id="videopopup">
   <div class="bott-popup-inn" id="userreg">
-    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="http://media2.intoday.in/microsites/specials/close.png"></a></div>
+    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="/staticpages/main/microsites/specials/close.png"></a></div>
         <div class="bottspecinn"></div>  
     <div id="enrollfrm">
         	
@@ -474,7 +474,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         
         
        
-  <script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+  <script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
    <script type="text/javascript" src="http://indiatoday.intoday.in/js/jquery.tinyscrollbar.min.js"></script>
    
 
@@ -491,7 +491,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-<script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+<script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
 
 
  
@@ -601,7 +601,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="leftad">
     
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600-1.jpg"> </a></div> -->
+   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600-1.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
      
 	 <div class="divs">
@@ -618,7 +618,7 @@ var zflag_nid="821"; var zflag_cid="1220/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="rightad">
         
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600.jpg"> </a></div> -->
+    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
      
 	 <div class="divs">	

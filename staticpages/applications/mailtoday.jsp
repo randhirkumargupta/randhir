@@ -200,6 +200,9 @@ $(document).ready(function(e) {
   </div>
 </div>
 
+<!-- include mobile-form file -->
+<?php require("mobile-form.html"); ?>
+<!-- end include mobile-form file -->
 
 <div class="os-icon android"><a href="#">Android</a></div>
 <div class="os-icon apple"><a href="#">iOS</a></div>

@@ -267,7 +267,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 
-    <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+    <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
 </div>
 
 </div>

@@ -27,12 +27,12 @@ nav ul li h2 {font-family: roboto !important;font-size: 14px;font-weight: 500;li
 .nav ul li a{padding:0px 6px!Important;}
 .nav ul li:hover,nav ul li.active{background-color:#fff;color:#d71920;cursor:pointer;}
 #search-saction{background:#bbbbbb;width:98%;padding:10px;display:none;position:relative;z-index:99;}
-.search-inner{width:530px;margin:0 auto;height:34px;background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow:hidden;}
+.search-inner{width:530px;margin:0 auto;height:34px;background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow:hidden;}
 .search-inner .input-box{border:medium none;float:left;padding:3px;height:28px;line-height:32px;margin-left:40px;width:390px;-webkit-border-radius:0px;-webkit-appearance:none;}
 .search-inner .submit-btn{float:right;margin-right:-3px;background:#d80017;color:#fff;line-height:34px;padding:0px 10px;border:none;text-transform:uppercase;height:34px;font:bold 16px/15px roboto;-webkit-border-radius:0px;-webkit-appearance:none;}
 header{margin:0 auto;text-align:left;width:1000px;}
 .header-tag{margin:0 auto;text-align:left;padding:1% 0;width:1000px;}
-.logoit{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px transparent;height:70px;width:329px;text-indent:-9999px;}
+.logoit{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -154px transparent;height:70px;width:329px;text-indent:-9999px;}
 nav h1{padding:0px;margin:0px;font:bold 15px arial;}
 h1,h2,h3,h4,h5,h6,ul,li{margin:0;padding:0;}
 #ad{padding:10px 0;}
@@ -65,10 +65,10 @@ a img{border:0;}
 .last{border-right:0 none !important;margin:0;}
 .topstories{float:left;margin-bottom:3%;width:100%;}
 .footertag, footer{width:1000px;overflow:hidden;margin:0 auto;}
-.footertag .fot-itlogo ,footer .fot-itlogo{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0);height:43px;text-indent:-9999px;width:176px;float:left;}
+.footertag .fot-itlogo ,footer .fot-itlogo{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0);height:43px;text-indent:-9999px;width:176px;float:left;}
 .footertag nav,footer nav{background-color:#333333;color:#FFFFFF;font:bold 16px arial;float:left;width:82.4%;height:43px;}                                                                     
 .footertag nav ul li,footer nav ul li{background-color:#333333;}
-.searc-icon1 .img{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0);cursor:pointer;display:inline-block;float:right;height:41px;text-indent:-9999px;width:41px;}
+.searc-icon1 .img{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0);cursor:pointer;display:inline-block;float:right;height:41px;text-indent:-9999px;width:41px;}
 #footer{clear:both;background:#fff;padding:0 5px;}
 #footer1{clear:both;background:#fff;padding:0 5px;display:none;}
 .boxcont_thisweek{background:url("http://media2.intoday.in/indiatoday/images/frame.png") no-repeat scroll center top #FFFFFF;float:left;font-size:18px;margin:0 0 7%;overflow:hidden;transition:all 1s ease 0s;width:100%;height:336px;}
@@ -154,7 +154,7 @@ a.hero-list-anchor{color:#333333;float:left;font-size:12px;padding:5px 0 8px;wid
 .bx-wrapper .bx-prev{left:2% !important;}
 .share-story{width:98%;}
 .share-story{float:left;padding-top:7px;height:34px;}
-.share-icon{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -135px -10px;width:42px;height:34px;float:left;margin-left:-5px;cursor:pointer;}
+.share-icon{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -135px -10px;width:42px;height:34px;float:left;margin-left:-5px;cursor:pointer;}
 .share-story ul{border-bottom:1px solid #DADADA;margin:0;padding:0;float:left;}
 .share-story li{border:medium none !important;color:#B2A6AA;margin:0 !important;padding:0 0px 0 0;list-style:none;float:left;}
 .imgbox{position:relative;width:88px;height:66px;float:left;margin:0px 10px 0px 0px;}
@@ -287,7 +287,7 @@ footer .wht{color:#fff!Important}
 .pagination a.currentpage{border-color:#ccc #333333 #333333 #ccc;border-style:solid;border-width:1px;cursor:default;font-weight:bold;}
 .pagination a, .pagination a:visited{color:#000 !important;padding:2px 5px;text-decoration:none;}
 .home{padding:0px!Important;margin:0px!Important;float:left}
-.home a{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -311px -95px transparent;display:inline-block;height:43px;width:27px;text-indent:-9999px;}
+.home a{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -311px -95px transparent;display:inline-block;height:43px;width:27px;text-indent:-9999px;}
 #top-web{display:block;}
 #top-web1{display:none;}
 .menues{height:41px;position:relative;top:0px;background:#000}
@@ -297,7 +297,7 @@ footer .wht{color:#fff!Important}
 .app{color:#FFFFFF;font:bold 16px arial;display:none;background-position:-203px -96px !important;width:41px;height:37px;float:left;}
 .app a{display:block;text-indent:-99999px;line-height:41px}
 .app a:hover{color:#fff;text-decoration:none;}
-.searc-icon{float:right;cursor:pointer;background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -174px -42px transparent;width:45px;height:41px;text-indent:-9999px;background-color:#db1620;}
+.searc-icon{float:right;cursor:pointer;background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -174px -42px transparent;width:45px;height:41px;text-indent:-9999px;background-color:#db1620;}
 .searc-reas{display:none}
 nav ul li{float:left;list-style:none outside none;padding:12px 0 11px 2px;text-transform:uppercase;font-size:13px;}
 nav ul li a{padding:8px 6.5px;}
@@ -356,7 +356,7 @@ a.bclose{background-color:#000000;color:#FFFFFF;font:bold 14px/13px arial;height
 .pathway2{float:left;padding-bottom:22px;width:66%;padding-top:20px;}
 .pathway1{float:left;margin-left:0px;padding-bottom:4px;width:66%;border-bottom:1px solid #b0b0b0;margin:1% 0px;}
 .pathway1 a{color:#565656;font:15px/19px Roboto,sans-serif;text-decoration:none;}
-.story_close{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -269px -10px;width:29px;height:29px;float:right;cursor:pointer;}
+.story_close{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -269px -10px;width:29px;height:29px;float:right;cursor:pointer;}
 #wapper-debate{background:none repeat scroll 0 0 rgb(255, 255, 255);margin:0 auto;overflow:hidden;padding:15px 10px;width:980px;}
 .leftnav h1{color:rgb(0, 0, 0);font:700 51px/55px Roboto,sans-serif;margin:0 0 10px;}
 .big_img{width:634px;}
@@ -545,8 +545,8 @@ ul.rel_links li.p_rel{background:url("http://indiatoday.intoday.in/images/black_
 .commenttxt{font:bold 11px arial;color:#565656;text-transform:uppercase;float:left;padding:6px 20px;border-right:1px solid #ccc;}
 .comment-count{font:bold 16px arial;margin-left:5px}
 .last{border-right:none;}
-.pmedia-play-icon{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 transparent;}
-.sp_bg{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 transparent;}
+.pmedia-play-icon{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 transparent;}
+.sp_bg{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 transparent;}
 .pmedia-image-icon{background-position:-334px -56px}
 .pmedia-play-icon, .right-media-play-icon, .large-media-play-icon{background-position:-334px -19px;}
 .pmedia-play-icon, .pmedia-image-icon{bottom:12px;display:block;height:34px;position:absolute;right:3px;width:44px;z-index:100;}

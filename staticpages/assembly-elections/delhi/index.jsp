@@ -55,7 +55,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0">
 <link href="/staticpages/assembly-elections/delhi/css/homepage-new.css" type="text/css" rel="stylesheet" />
-<link rel='shortcut icon' type='image/x-icon' href='http://media2.intoday.in/indiatoday/images/dot-in-fav-icon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='/staticpages/main/images/dot-in-fav-icon.ico' />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -102,7 +102,7 @@ body{ background:#fff!important;}
 </style>
 </head>
 <body >
-<script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/js/ajaxinclude.js"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 
 
 
@@ -177,7 +177,7 @@ $('.searc-icon').click(function(){
 
 <div class="htl-logo" id="top-ad">
 <div class="htl-text">In Association with</div>
-<img src="http://media2.intoday.in/indiatoday/images/ITG-branding.png" width="265" height="35" usemap="#Map" border="0" />
+<img src="/staticpages/main/images/ITG-branding.png" width="265" height="35" usemap="#Map" border="0" />
 <map name="Map" id="Map">
   <area shape="rect" coords="1,1,77,34" href="/" target="_blank" />
   <area shape="rect" coords="87,2,165,34" href="http://headlinestoday.intoday.in/" target="_blank" />
@@ -609,7 +609,7 @@ var zflag_nid="821"; var zflag_cid="1219/1137"; var zflag_sid="2"; var zflag_wid
   
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://media2.intoday.in/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="/staticpages/main/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -732,9 +732,9 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
-<script src="http://media2.intoday.in/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
-<script src="http://media2.intoday.in/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/main/funalytics/jquery.bxslider.min.js"></script> 
+<script src="/staticpages/main/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/main/js/javascript.js" type="text/javascript" charset="utf-8"></script>
 <script type='text/javascript' src='/staticpages/assembly-elections/delhi/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">

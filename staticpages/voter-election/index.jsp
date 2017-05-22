@@ -8,7 +8,7 @@
 <meta name="description" content="News of assembly and general elections" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
 <link href="http://media2.intoday.in/indiatoday/css/jquery.mCustomScrollbar1.css" rel="stylesheet" />
-<link href="http://indiatoday.intoday.in/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
 
 <body>
 
@@ -18,12 +18,12 @@
 
 
 <script src="//pagead2.googlesyndication.com/pagead/js/google_top_exp.js"></script>
-<link rel="stylesheet" href="http://indiatoday.intoday.in/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="/staticpages/main/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
 
-<link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
-<script type="text/javascript" language="javascript" src="http://indiatoday.intoday.in/js/ajaxinclude.js"></script>
+<link rel="shortcut icon" href="/staticpages/main/images/favicon.ico" />
+<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-<link href="http://indiatoday.intoday.in/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>
@@ -51,11 +51,11 @@
 	<script type="text/javascript">ajaxinclude("/voter-election/updatedtime_chunk.jsp")</script>
 
 
-<div id="logo"><a href="http://indiatoday.intoday.in/"><img src="http://indiatoday.intoday.in/images/it.png" alt="India Today" width="262" height="80" title="India Today"></a></div>
+<div id="logo"><a href="/"><img src="/staticpages/main/images/it.png" alt="India Today" width="262" height="80" title="India Today"></a></div>
 
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -87,7 +87,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div id="navigation_nw">
 <div id="topmenu_link">
 	<ul class="dropdown zindex">
-        	<li><a href="http://indiatoday.intoday.in/" >Home</a></li>
+        	<li><a href="/" >Home</a></li>
             <li>
 
 				<a href="http://indiatoday.intoday.in/news.html">News</a>
@@ -210,7 +210,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="http://media2.intoday.in/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
 			<li ><a href="http://indiatoday.intoday.in/section/264/1/news.html" target="_blank">news</a></li>
 			<li><a href="/voter-election/facts.jsp" target="_blank">facts</a></li>
-			<li><a href="/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
+			<li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
 			<!--<li><a href="#">chat</a></li>-->
             </ul>
     </div>
@@ -236,14 +236,14 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-<script src="http://indiatoday.intoday.in/commentbox/js/ajaxinclude.js" type="text/javascript"></script>
+<script src="/staticpages/main/commentbox/js/ajaxinclude.js" type="text/javascript"></script>
 <saction id="left-side">
 	<div class="voter-left lft">
 
 
 
 				<a name="search"></a>
-                <form action="/voter-election/search-results.jsp" method="post" name="searchform1" onsubmit="return validate1();" style="margin:0;padding:0;">
+                <form action="/topic" method="get" name="searchform1" onsubmit="return validate1();" style="margin:0;padding:0;">
 
     	<saction id="search_area">
         	<!--<input name="" type="text" class="input-txt">
@@ -251,7 +251,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-                    <input type="text" style='outline: none;' class="input-txt" name="searchword" id="mod_search_searchword" alt="search" value="Type Your search" onblur="if(this.value=='') this.value='Type Your search';" onfocus="if(this.value=='Type Your search') this.value='';">
+                    <input type="text" style='outline: none;' class="input-txt" name="keyword" id="mod_search_searchword" alt="search" value="Type Your search" onblur="if(this.value=='') this.value='Type Your search';" onfocus="if(this.value=='Type Your search') this.value='';">
                     <button type="submit" class="go_btn">GO</button>
 					<input name="option" value="com_search" type="hidden">
 <input name="Itemid" value="" type="hidden">
@@ -325,8 +325,8 @@ However if an applicant wishes to submit his application in person to the ERO, h
         <div class="loadingad" >
 
 
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.js"></script>
-<script type="text/javascript" src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js?1"></script>
+<script src="/staticpages/main/js/jquery.min.js"></script>
+<script type="text/javascript" src="/staticpages/main/funalytics/jquery.bxslider.min.js?1"></script>
 <link href="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 
 <div style="width:300px;"><ul class="bxslider">
@@ -491,7 +491,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 
-    <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+    <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
 </div>
 
 </div>

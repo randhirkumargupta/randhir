@@ -319,7 +319,7 @@
 	</div>
 <div class="clear"></div>
 
-<div align="center"><iframe src="http://media2.intoday.in/indiatoday/it-footer2015.html" frameborder="0" scrolling="no" width="100%" height="455"></iframe></div>
+<div align="center"><iframe src="/staticpages/main/it-footer2015.html" frameborder="0" scrolling="no" width="100%" height="455"></iframe></div>
 </DIV>
 
 

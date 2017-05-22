@@ -330,7 +330,7 @@ ul.thumblist li a{  width:12px; height:12px; padding:5px; color:transparent}
 	
 	
 .sp_bg {
-	background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 transparent;
+	background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 transparent;
 	background-position: -327px -56px;
 	}
 	

@@ -1,14 +1,1 @@
-var rootdomain="http://"+window.location.hostname
-function ajaxinclude(url){var page_request=false
-if(window.XMLHttpRequest)
-page_request=new XMLHttpRequest()
-else if(window.ActiveXObject){try{page_request=new ActiveXObject("Msxml2.XMLHTTP")}
-catch(e){try{page_request=new ActiveXObject("Microsoft.XMLHTTP")}
-catch(e){}}}
-else
-return false
-page_request.open('GET',url,false)
-page_request.setRequestHeader("If-Modified-Since","Thu, 1 Jan 1970 00:00:00 GMT");page_request.send(null)
-writecontent(page_request)}
-function writecontent(page_request){if(window.location.href.indexOf("http")==-1||page_request.status==200)
-document.write(page_request.responseText)}
+function ajaxinclude(t){var e=!1;if(window.XMLHttpRequest)e=new XMLHttpRequest;else{if(!window.ActiveXObject)return!1;try{e=new ActiveXObject("Msxml2.XMLHTTP")}catch(n){try{e=new ActiveXObject("Microsoft.XMLHTTP")}catch(n){}}}e.open("GET",t,!1),e.setRequestHeader("If-Modified-Since","Thu, 1 Jan 1970 00:00:00 GMT"),e.send(null),writecontent(e)}function writecontent(t){(-1==window.location.href.indexOf("http")||200==t.status)&&document.write(t.responseText)}var rootdomain="http://"+window.location.hostname;

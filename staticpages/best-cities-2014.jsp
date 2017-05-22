@@ -64,7 +64,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <link href="/staticpages/main/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel='shortcut icon' type='image/x-icon' href='http://media2.intoday.in/indiatoday/images/dot-in-fav-icon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='/staticpages/main/images/dot-in-fav-icon.ico' />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -77,7 +77,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <link href="/staticpages/main/css/responsive.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="http://indiatoday.intoday.in/" />
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function(){
 	$('.homeright img').addClass('color-chunk');
@@ -103,8 +103,8 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
   <div class="skinning-top">
 
 <script src="http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap"></script>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/js/ajaxinclude.js"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <style>
@@ -173,7 +173,7 @@ header {
     font: bold 12px/15px roboto;
 }
 .logoit {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
+    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
     height: 70px;
     text-indent: -9999px;
     width: 329px;
@@ -193,7 +193,7 @@ nav {
     width: 1000px;
 }
 .sp_bg {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 .app a {
     display: block;
@@ -293,7 +293,7 @@ background:#ffffff;
 <div class="header-tag">
 <div class="htl-logo">
 <!--<div class="htl-text">In Association with</div>
-<img width="265" height="35" border="0" usemap="#Map" src="http://media2.intoday.in/indiatoday/images/ITG-branding.png">
+<img width="265" height="35" border="0" usemap="#Map" src="/staticpages/main/images/ITG-branding.png">
 <map id="Map" name="Map">
   <area target="_blank" href="http://indiatoday.intoday.in/" coords="1,1,77,34" shape="rect">
   <area target="_blank" href="http://headlinestoday.intoday.in/" coords="87,2,165,34" shape="rect">
@@ -387,7 +387,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://media2.intoday.in/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="/staticpages/main/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -510,9 +510,9 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js"></script>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
-<script src="http://media2.intoday.in/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/main/funalytics/jquery.bxslider.min.js"></script>
+<script src="/staticpages/main/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/main/js/javascript.js" type="text/javascript" charset="utf-8"></script>
 <script type='text/javascript' src='/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
@@ -527,9 +527,9 @@ if (document.body.offsetWidth>=1250) {
 		   $('.leftad, .rightad').remove();
 		}
 </script>
-<!--<script src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js"></script> -->
+<!--<script src="/staticpages/main/funalytics/jquery.bxslider.min.js"></script> -->
 
-<!--<div id="busleft" style=" position:fixed; left:0; top:30%; z-index:99999999999;"><a href="/election-express/"><img src="http://media2.intoday.in/aajtak/static/tez/Bus-right.png" /></a></div>
-<div id="busright" style=" position:absolute; right:0; top:80%; z-index:99999999999;"><a href="/election-express/"><img src="http://media2.intoday.in/aajtak/static/tez/Bus-left.png" /></a></div>-->
+<!--<div id="busleft" style=" position:fixed; left:0; top:30%; z-index:99999999999;"><a href="/election-express/"><img src="/staticpages/main/aajtak/static/tez/Bus-right.png" /></a></div>
+<div id="busright" style=" position:absolute; right:0; top:80%; z-index:99999999999;"><a href="/election-express/"><img src="/staticpages/main/aajtak/static/tez/Bus-left.png" /></a></div>-->
 </body>
 </html>

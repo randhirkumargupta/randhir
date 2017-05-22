@@ -104,13 +104,13 @@ input.submitbtn{background:url(http://media2.intoday.in/microsites/safaigiri-awa
 .footertag nav ul li, footer nav ul li {background-color: #333333;}
 .nav ul li {float: left; list-style: outside none none; padding: 11px 0 !important; text-transform: uppercase;}
 .nav ul li a{color:#fff; font-size:12px; padding:0 6px; text-decoration:none;}
-.searc-icon1 .img {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
+.searc-icon1 .img {background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
 #footer {background: none repeat scroll 0 0 #fff; clear: both; padding: 0 5px;}
 .home {float: left; margin: 0 !important; padding: 0 !important;}
-.footertag .fot-itlogo, footer .fot-itlogo {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0); float: left; height: 43px; text-indent: -9999px; width: 176px;}
+.footertag .fot-itlogo, footer .fot-itlogo {background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0); float: left; height: 43px; text-indent: -9999px; width: 176px;}
 .footertag nav, footer nav {background-color: #333333; color: #ffffff; float: left; font: bold 16px arial; height: 43px; width: 82.4%;}
 .footertag nav ul li, footer nav ul li {background-color: #333333;}
-.searc-icon1 .img {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
+.searc-icon1 .img {background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
 #footer {background: none repeat scroll 0 0 #fff; clear: both; padding: 0 5px;}
 .nav ul li:hover, nav ul li.active {background-color: #eb1c24; color: #fff; cursor: pointer;}
 

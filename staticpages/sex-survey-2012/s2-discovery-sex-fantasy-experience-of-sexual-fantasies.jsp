@@ -705,7 +705,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2012/index.jsp';
                             </tr>
                     <tr>
                         <td align="left" valign="top">
-                        <iframe src="http://indiatoday.intoday.in/sex-survey-2012/sex-chart.jsp?id=114" frameborder="0" width="550" height="415" scrolling="no"></iframe>
+                        <iframe src="/staticpages/sex-survey-2012/sex-chart.jsp?id=114" frameborder="0" width="550" height="415" scrolling="no"></iframe>
                             
                         </td>
                     </tr>
@@ -716,14 +716,14 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2012/index.jsp';
     <td align="left" valign="top">
 <div class="topmarg">
 <div class="headbg"><div class="posrel"><span class="arrowimg"></span><span class="headline">India Today's previous Sex Surveys</span></div></div>
-    <iframe src="scrollsurvey.html" frameborder="0" width="553" height="280" scrolling="no"></iframe>
+    <iframe src="/staticpages/sex-survey-2012/scrollsurvey.html" frameborder="0" width="553" height="280" scrolling="no"></iframe>
     </td>
 	</div>
 </tr>
 <tr><td height="20">&nbsp;</td></tr>
 <tr>
     <td align="left" valign="top">
-        <iframe src="beyond-the-india-today-sex-survey.html" frameborder="0" width="553" height="430" scrolling="no"></iframe>
+        <iframe src="/staticpages/sex-survey-2012/beyond-the-india-today-sex-survey.html" frameborder="0" width="553" height="430" scrolling="no"></iframe>
     </td>
 </tr>
 

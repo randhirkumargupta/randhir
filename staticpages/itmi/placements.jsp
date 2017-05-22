@@ -367,7 +367,7 @@ This kind of association has resulted in a quantum leap in our students’ under
         </ul>  
         
         
-        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"
+        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"
          style="margin-top: 20px;"></iframe>
         
     </div>

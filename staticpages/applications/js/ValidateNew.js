@@ -120,7 +120,7 @@ function validate(){
 	{
 		$.ajax({
 					type:"POST",
-					url:"captchaCheck.jsp",
+					url:"/applications/mobile_msg.jsp",
 					data: {    
 						//capval:captchaval,
 						name:name,
@@ -135,30 +135,12 @@ function validate(){
 						{
 							     
 							//alert(bckk);    
-							if(bckk.match("msgntsent"))
-							{
-								alert("SMS not sent. Please try again later.");	
-								$('#app')[0].reset();
-								loadCaptchaImg();
-								$('.popup-mobile, .trans').hide();
-							}
-							if(bckk.match("msgsent"))
-							{
-								//alert("sent");	
-								alert("You will recieve an SMS on your mobile shortly.");
-								$('#app')[0].reset();
-								loadCaptchaImg();
-								//document.app.reset();
-								$('.popup-mobile, .trans').hide();
-							}
-							//$(".mobile-box").hide();
-							//$(".popup-mobile").hide();
 							
 						} 
 						else 
 						{
-							alert("Incorrect captcha. Please try again.");
-							loadCaptchaImg();
+							alert("Thank You for your interest.");
+							
 						}
 					},
 					error:function(bckk)

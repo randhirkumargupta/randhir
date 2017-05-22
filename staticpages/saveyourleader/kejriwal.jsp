@@ -13,7 +13,7 @@ window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
 <meta name="keywords" content="Delhi Assembly elections, Delhi assembly elections 2015, Assembly elections in Delhi, Delhi elections 2015, BJP, AAP, Congress, kiran bedi, arvind kejriwal, ajay makan." />
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,100,200,700,500,400,900' rel='stylesheet' type='text/css'>
 <link href='http://media2.intoday.in/microsites/saveyourleader/new/style.css' rel='stylesheet' type='text/css'>
-<script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/js/ajaxinclude.js"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
 .likedisdiv {
     font: 500 18px/20px Roboto,sans-serif;
@@ -254,7 +254,7 @@ ajaxinclude("/commentbox/comment_box.jsp?sId=416505&website=indiatoday&content_t
         </nav>       
         <div>
           <div id="footer1" style="display:block !important">
-            <iframe width="98%" height="210" frameborder="0" scrolling="no" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+            <iframe width="98%" height="210" frameborder="0" scrolling="no" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
           </div>
         </div>
       </div>

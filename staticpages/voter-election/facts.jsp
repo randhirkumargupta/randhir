@@ -6,7 +6,7 @@
 <title>Election Fun Facts</title>
 <meta name="description" content="Fun facts about general elections in India since 1952" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
-<link href="http://indiatoday.intoday.in/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
 <link href="jquery.mCustomScrollbar.css" rel="stylesheet" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
@@ -39,7 +39,7 @@
 <body>
 <div id="fun-container" style="display:none;">
 <div class="popup_box">
-    <a class="popupBoxClose"><img src="http://indiatoday.intoday.in/images/close.png" border="0"></a>
+    <a class="popupBoxClose"><img src="/staticpages/main/images/close.png" border="0"></a>
     <div style="width:1003px; margin:0 auto" id="popimg"></div>
 </div>
 </div>
@@ -55,7 +55,7 @@
         	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="http://media2.intoday.in/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
 			<li ><a href="http://indiatoday.intoday.in/section/264/1/news.html" target="_blank">news</a></li>
 			<li><a href="/voter-election/facts.jsp" target="_blank">facts</a></li>
-			<li><a href="/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
+			<li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
 			<!--<li><a href="#">chat</a></li>-->
             </ul>
     </div>
@@ -108,7 +108,7 @@
 #search_area1 .go_btn { padding: 2px 5px;}
 .left { background:url(http://media2.intoday.in/indiatoday/images/facts-left.jpg) left top no-repeat; width:302px; height:1024px; position:relative; float:left}
 .fb, .tw, .email {
-    background-image: url("http://indiatoday.intoday.in/images/India-Today-Sprites1.png");
+    background-image: url("/staticpages/main/images/India-Today-Sprites1.png");
     background-repeat: no-repeat;
     cursor: pointer;
     height: 32px;
@@ -495,7 +495,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 
-    <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+    <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
 </div>
 
 <!-- custom scrollbars plugin -->

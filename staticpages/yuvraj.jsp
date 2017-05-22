@@ -8,14 +8,14 @@
 <meta name="keywords" content="Yuvraj Singh, India, Cricket, Cricket  India, Cricketer, bcci, Yuvraj Singh Statistics" />
 
 <meta property="og:title" content="Yuvraj">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/images/yuvraj/Yuvraj_300x350.jpg">
+<meta property="og:image" content="/staticpages/main/images/yuvraj/Yuvraj_300x350.jpg">
 <meta property="og:url" content="http://indiatoday.intoday.in/yuvraj.jsp">
 <meta property="og:description" content="Yuvraj Singh's Double-w Career - how never to fail in life.">
 
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/images/yuvraj/Yuvraj_300x350.jpg" />
+<link rel="image_src" href="/staticpages/main/images/yuvraj/Yuvraj_300x350.jpg" />
 
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
-<link type="text/css" rel="stylesheet" href="http://media2.intoday.in/microsites/specials/sholay/stylesheet.css">
+<link type="text/css" rel="stylesheet" href="/staticpages/main/microsites/specials/sholay/stylesheet.css">
  <style>
    .image_over_text{font:15px/16px arial; position:absolute; cursor:pointer; z-index:22222;}
    #lightbox {z-index: 55555555!important;}
@@ -36,28 +36,28 @@ $(document).ready(function(e) {
 
 
 <style>
-#yuvraj_bg { background:url(http://media2.intoday.in/indiatoday/images/yuvraj/Yuvraj_BG.jpg); width:1000px; height:668px; overflow:hidden}
+#yuvraj_bg { background:url(/staticpages/main/images/yuvraj/Yuvraj_BG.jpg); width:1000px; height:668px; overflow:hidden}
 .animate_area { margin-top:350px; margin-left:35px}
 .fl { display:none}
-#img1 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj//b_1.png) left top no-repeat; position:relative; width:100px; height:150px; display:block;}
+#img1 { background:url(/staticpages/main/images/yuvraj/b_1.png) left top no-repeat; position:relative; width:100px; height:150px; display:block;}
 #img1 .blink { position:absolute; top:60px; left:0px; cursor:pointer; }
 
-#img2 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj//b_2.png) left top no-repeat; position:relative; width:162px; height:264px;}
+#img2 { background:url(/staticpages/main/images/yuvraj/b_2.png) left top no-repeat; position:relative; width:162px; height:264px;}
 #img2 .blink { position:absolute; top:173px; left:78px; cursor:pointer; }
 
-#img3 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj//b_3.png) left top no-repeat; position:relative; width:221px; height:261px;}
+#img3 { background:url(/staticpages/main/images/yuvraj/b_3.png) left top no-repeat; position:relative; width:221px; height:261px;}
 #img3 .blink { position:absolute; top:56px; left:149px; cursor:pointer; }
 
-#img4 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj/b_4.png) left top no-repeat; position:relative; width:312px; height:276px;}
+#img4 { background:url(/staticpages/main/images/yuvraj/b_4.png) left top no-repeat; position:relative; width:312px; height:276px;}
 #img4 .blink { position:absolute; top:165px; left:220px; cursor:pointer; }
 
-#img5 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj/b_5.png) left top no-repeat; position:relative; width:368px; height:277px;}
+#img5 { background:url(/staticpages/main/images/yuvraj/b_5.png) left top no-repeat; position:relative; width:368px; height:277px;}
 #img5 .blink { position:absolute; top:52px; left:294px; cursor:pointer; }
 
-#img6 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj/b_6.png) left top no-repeat; position:relative; width:421px; height:272px;}
+#img6 { background:url(/staticpages/main/images/yuvraj/b_6.png) left top no-repeat; position:relative; width:421px; height:272px;}
 #img6 .blink { position:absolute; top:173px; left:370px; cursor:pointer; }
 
-#img7 { background:url(http://media2.intoday.in/indiatoday/images/yuvraj/b_7.png) left top no-repeat; position:relative; width:542px; height:272px;}
+#img7 { background:url(/staticpages/main/images/yuvraj/b_7.png) left top no-repeat; position:relative; width:542px; height:272px;}
 #img7 .blink { position:absolute; top:173px; left:370px; cursor:pointer; }
 </style>
 
@@ -156,7 +156,7 @@ if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "h
 
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -306,7 +306,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=Yuvraj&URL=http://indiatoday.intoday.in/yuvraj.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/yuvraj.jsp&p[title]=The never-say-never spirit of Yuvraj Singh&s=100&p[summary]=Yuvraj Singh's Double-w Career - how never to fail in life.&p[images][0]=http://media2.intoday.in/indiatoday/images/yuvraj/Yuvraj_300x350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/yuvraj.jsp&p[title]=The never-say-never spirit of Yuvraj Singh&s=100&p[summary]=Yuvraj Singh's Double-w Career - how never to fail in life.&p[images][0]=/staticpages/main/images/yuvraj/Yuvraj_300x350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=The never-say-never spirit of Yuvraj Singh%20http://indiatoday.intoday.in/yuvraj.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -324,26 +324,26 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
   <div class="animate_area">
 
     <div id="img1" class="fl">
-        	<div class="blink" id="1"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif"  alt="" /></div>
+        	<div class="blink" id="1"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg"  alt="" /></div>
     </div>
 
   <div id="img2" class="fl">
-        	<div class="blink" id="2"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif"  /></div>
+        	<div class="blink" id="2"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg"  /></div>
     </div>
 
    <div id="img3" class="fl">
-        	<div class="blink" id="3"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif" alt="" /></div>
+        	<div class="blink" id="3"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg" alt="" /></div>
     </div>
 
    <div id="img4" class="fl">
-        	<div class="blink" id="4"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif" alt="" /></div>
+        	<div class="blink" id="4"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg" alt="" /></div>
     </div>
   <div id="img5" class="fl">
-        	<div class="blink" id="5"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif" alt="" /></div>
+        	<div class="blink" id="5"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg" alt="" /></div>
     </div>
 
 <div id="img6" class="fl">
-        	<div class="blink" id="6"><img src="http://media2.intoday.in/indiatoday/images/yuvraj/BlinkingDot_main.gif" alt="" /></div>
+        	<div class="blink" id="6"><img src="/staticpages/main/images/yuvraj/BlinkingDot_main.jpg" alt="" /></div>
     </div>
 
     <div id="img7" class="fl">
@@ -421,12 +421,12 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 <div id="footer">
-               <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+               <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
             </div>
 
     <div style="display:none;" class="bott-popup" id="videopopup">
   <div class="bott-popup-inn" id="userreg">
-    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="http://media2.intoday.in/microsites/specials/close.png"></a></div>
+    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="/staticpages/main/microsites/specials/close.png"></a></div>
         <div class="bottspecinn"></div>
     <div id="enrollfrm">
 
@@ -437,7 +437,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-  <script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+  <script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
    <script type="text/javascript" src="/staticpages/main/js/jquery.tinyscrollbar.min.js"></script>
 
 
@@ -454,7 +454,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-<script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+<script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
 
 
 
@@ -564,7 +564,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="leftad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600-1.jpg"> </a></div> -->
+   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600-1.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">
@@ -581,7 +581,7 @@ var zflag_nid="821"; var zflag_cid="1220/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="rightad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600.jpg"> </a></div> -->
+    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">

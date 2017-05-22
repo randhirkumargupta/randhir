@@ -39,7 +39,7 @@
 </head>
 
 <body>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 
 
 <style>
@@ -956,7 +956,7 @@ country.
     </div>
 <div class="clear"></div>
 <div id="footer1" style="display:block !important; margin:0 auto">
-	<iframe width="100%" scrolling="no" height="166" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+	<iframe width="100%" scrolling="no" height="166" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
     </div>
     
 	

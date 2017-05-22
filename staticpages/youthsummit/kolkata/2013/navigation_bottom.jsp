@@ -18,4 +18,4 @@
 </div>
  
  
- <iframe src="http://media2.intoday.in/microsites/common/common_it_footer.html" frameborder="0" scrolling="no" width="1003" height="170"></iframe>
+ <iframe src="/staticpages/main/microsites/common/common_it_footer.html" frameborder="0" scrolling="no" width="1003" height="170"></iframe>

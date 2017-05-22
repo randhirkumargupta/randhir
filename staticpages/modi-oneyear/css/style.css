@@ -34,7 +34,7 @@ img{border:none; width:100%; height:100%;}
 
 .search {display: block;background: url(http://media2.intoday.in/indiatoday/modi_year/sprit.png) -236px -21px no-repeat; width: 28px;height: 30px; margin-top:2px;}
 #search-saction {background: #bbbbbb; width: 98%; padding: 10px; display: none; position: relative; z-index: 99; top: 5px; height: 32px; float: left;}
-.search-inner {width: 530px; margin: 0 auto; height: 34px; background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow: hidden;}
+.search-inner {width: 530px; margin: 0 auto; height: 34px; background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow: hidden;}
 .search-inner .input-box {border: medium none; float: left; padding: 3px; height: 28px; line-height: 32px; margin-left: 40px; width: 390px; -webkit-border-radius: 0px; -webkit-appearance: none;}
 .search-inner .submit-btn {float: right; margin-right: -3px; background: #d80017; color: #fff; line-height: 34px; padding: 0px 10px; border: none; text-transform: uppercase; height: 34px; font: bold 16px/15px roboto; -webkit-border-radius: 0px; -webkit-appearance: none;}
 .wrapper{ width:1000px; margin:30px auto;}
@@ -101,7 +101,7 @@ a.close_btn{background-position:-58px -55px; width:31px; height:31px; position:r
 .bg {  background: url(http://media2.intoday.in/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
 
 .logoit {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px transparent;
+    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -154px transparent;
     height: 70px;
     text-indent: -9999px;
     width: 329px;

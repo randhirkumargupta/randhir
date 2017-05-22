@@ -267,7 +267,7 @@ ul.navbar li a {padding: 8px 17px;}
 
 
 </style>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(e) {
   var allPanels = $('.accordion h3').hide();
@@ -443,7 +443,7 @@ $(document).ready(function(e) {
         </ul>  
         
         
-        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"
+        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"
          style="margin-top: 20px;"></iframe>
         
     </div>

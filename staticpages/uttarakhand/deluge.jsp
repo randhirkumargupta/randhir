@@ -285,7 +285,7 @@ Cloudbursts occur because the warm air current from the ground or below the clou
 
 <div id="footer" class="ft" align="center">
 
-     <div align="center">          <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe></div>
+     <div align="center">          <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe></div>
 </div>
 
  <!-- Begin comScore Tag -->

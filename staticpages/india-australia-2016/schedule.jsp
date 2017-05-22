@@ -51,7 +51,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script src="js/custom.js"></script>
 <script>
 $(document).ready(function(){
@@ -64,7 +64,7 @@ $(document).ready(function(){
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css" href="http://indiatoday.intoday.in/india-australia-2016/css/style.css" />
 <link rel="stylesheet" type="text/css" href="http://indiatoday.intoday.in/india-australia-2016/css/responsive.css" />
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script src="http://indiatoday.intoday.in/india-australia-2016/js/custom.js"></script>
 <script src="http://indiatoday.intoday.in/js/ajaxinclude.js"></script>
 <style>

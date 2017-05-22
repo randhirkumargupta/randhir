@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<base href="/staticpages/applications/" />
+<base href="/staticpages/applications/">
 <meta charset="utf-8">
 <title>India Today Group News Applications – Subscribe and download</title>
 <meta name="description" content="India today group applications - be the first one to know about latest happenings around the world and country from different genres and from different brands like India Today news, Aajtak, Cosmopolitan, Mail Today, News flicks and Business Today direct to your device." />

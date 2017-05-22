@@ -41,7 +41,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'/>
 <link rel="stylesheet" type="text/css" href="/india-australia-2016/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="/india-australia-2016/css/responsive.css"/>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script src="/india-australia-2016/js/custom.js"></script>
 <script src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>

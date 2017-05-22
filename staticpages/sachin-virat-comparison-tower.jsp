@@ -8,11 +8,11 @@
 <meta name="keywords" content="Sachin Tendulkar, Virat Kohli, comparison, ODIs, Tests, bowlers faced, home and away" />
 
 <meta property="og:title" content="Is Virat Sachin 2.0">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/Sachin_Virat_Comparison_Tower_300.jpg">
+<meta property="og:image" content="/staticpages/main/images/Sachin_Virat_Comparison_Tower_300.jpg">
 <meta property="og:url" content="/sachin-virat-comparison-tower.jsp">
 <meta property="og:description" content="Tower graphic examines if Virat Kohli can overtake Sachin Tendulkar's record">
 
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/Sachin_Virat_Comparison_Tower_300.jpg" />
+<link rel="image_src" href="/staticpages/main/images/Sachin_Virat_Comparison_Tower_300.jpg" />
 
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
@@ -85,7 +85,7 @@
 
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -235,7 +235,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=Is Virat Sachin 2.0&URL=http://indiatoday.intoday.in/sachin-virat-comparison-tower.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/sachin-virat-comparison-tower.jsp&p[title]=Is Virat Sachin 2.0&s=100&p[summary]=Tower graphic examines if Virat Kohli can overtake Sachin Tendulkar's record&p[images][0]=http://media2.intoday.in/indiatoday/Sachin_Virat_Comparison_Tower_300.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/sachin-virat-comparison-tower.jsp&p[title]=Is Virat Sachin 2.0&s=100&p[summary]=Tower graphic examines if Virat Kohli can overtake Sachin Tendulkar's record&p[images][0]=/staticpages/main/images/Sachin_Virat_Comparison_Tower_300.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=Is Virat Sachin 2.0%20http://indiatoday.intoday.in/sachin-virat-comparison-tower.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -243,7 +243,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
     </div>
 <section>
 <div style="clear:both"></div>
-<div style="width: 100%; margin: 20px 0px 20px 100px;"><img src="http://media2.intoday.in/indiatoday/Sachin_Virat_Comparison_Tower_new.jpg" border="0" /></div>
+<div style="width: 100%; margin: 20px 0px 20px 100px;"><img src="/staticpages/main/images/Sachin_Virat_Comparison_Tower_new.jpg" border="0" /></div>
 
 
 <div class="clear"></div>
@@ -330,12 +330,12 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 <div id="footer">
-               <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+               <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
             </div>
 
     <div style="display:none;" class="bott-popup" id="videopopup">
   <div class="bott-popup-inn" id="userreg">
-    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="http://media2.intoday.in/microsites/specials/close.png"></a></div>
+    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="/staticpages/main/microsites/specials/close.png"></a></div>
         <div class="bottspecinn"></div>
     <div id="enrollfrm">
 
@@ -346,7 +346,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-  <script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+  <script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
    <script type="text/javascript" src="/staticpages/main/js/jquery.tinyscrollbar.min.js"></script>
 
 
@@ -363,7 +363,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-<script type='text/javascript' src='http://media2.intoday.in/indiatoday/js/jquery.min.js' ></script>
+<script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
 
 
 
@@ -473,7 +473,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="leftad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600-1.jpg"> </a></div> -->
+   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600-1.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">
@@ -490,7 +490,7 @@ var zflag_nid="821"; var zflag_cid="1220/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="rightad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://media2.intoday.in/indiatoday/images/160x600.jpg"> </a></div> -->
+    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">

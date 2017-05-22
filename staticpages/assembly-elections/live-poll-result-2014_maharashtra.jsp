@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE HTML>
 <head>
+ <base href="/staticpages/assembly-elections/" />
 <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
 <!-- Begin comScore Tag -->
 <script type='text/javascript'>
@@ -53,8 +52,8 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <script src="static/js/AC_RunActiveContent.js" type="text/javascript"></script>
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0">
-<link href="http://indiatoday.intoday.in/css/homepage-new.css" type="text/css" rel="stylesheet" />
-<link rel='shortcut icon' type='image/x-icon' href='http://media2.intoday.in/indiatoday/images/dot-in-fav-icon.ico' />
+<link href="delhi/css/homepage-new.css" type="text/css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='/staticpages/main/images/dot-in-fav-icon.ico' />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -63,10 +62,12 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<link href="http://indiatoday.intoday.in/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="delhi/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
-<link href="http://indiatoday.intoday.in/css/responsive.css" type="text/css" rel="stylesheet" />
+<link href="delhi/css/responsive.css" type="text/css" rel="stylesheet" />
+
 <style>
 .skinnin-ad-container {    
     margin:0 auto!important;
@@ -130,7 +131,7 @@ body {
 </noscript>
 <!-- End comScore Tag -->
 <div id="maindiv">
-  <script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/js/ajaxinclude.js"></script>
+  <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 
 
 
@@ -215,7 +216,7 @@ $('.searc-icon').click(function(){
 
 <div class="htl-logo" id="top-ad">
 <div class="htl-text">In Association with</div>
-<img src="http://media2.intoday.in/indiatoday/images/ITG-branding.png" width="265" height="35" usemap="#Map" border="0" />
+<img src="/staticpages/main/images/ITG-branding.png" width="265" height="35" usemap="#Map" border="0" />
 <map name="Map" id="Map">
   <area shape="rect" coords="1,1,77,34" href="http://indiatoday.intoday.in/" target="_blank" />
   <area shape="rect" coords="87,2,165,34" href="http://headlinestoday.intoday.in/" target="_blank" />
@@ -468,20 +469,7 @@ var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_wid
  	</div>
 </div>
 
-<!--
-<div class="colum">
 
-
-
-
-<style> .subhead-poll {     background: none repeat scroll 0 0 #149197;     margin-top: 0px; }  .subhead h2 {     font: 700 12px/16px roboto; }  </style>  <div class="boxcont colum">   <div class="box" style="height:295px;">     <div class="subhead subhead-poll"><h2>POLL OF THE DAY</h2></div>   	<iframe src="http://indiatoday.intoday.in/poll/poll_story_small.php?id=1378" mce_src="http://indiatoday.intoday.in/poll/poll_story_small.php?id=1378" frameborder="0" height="350" width="300"></iframe>   </div> </div>    
-
-
-
-
-
-</div>
--->
 
 <div class="colum">
 <script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/chunk_todaysheadline_mustread.jsp")</script>
@@ -550,7 +538,7 @@ var zflag_nid="821"; var zflag_cid="1219/1137"; var zflag_sid="2"; var zflag_wid
   
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://media2.intoday.in/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="/staticpages/main/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -673,10 +661,10 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://media2.intoday.in/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
-<script src="http://media2.intoday.in/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
-<script src="http://media2.intoday.in/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script src="/staticpages/main/funalytics/jquery.bxslider.min.js"></script> 
+<script src="/staticpages/main/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/main/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='/staticpages/assembly-elections/delhi/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>

@@ -248,7 +248,7 @@ ul#tab li{ list-style:none; float:left; margin-left:25px; font-size:18px; font-w
 	line-height: 20px;
 	}
 
-form{padding: 50px 170px;}	
+/*form{padding: 50px 170px;}	*/
 .name {margin-bottom:15px;}	
 .name label {width: 85px;font-size: 15px;float: left;}
 .name input[type="text"] {width: 249px;height:22px;}
@@ -282,9 +282,11 @@ ul li{list-style:none;}
 .view-btn{ color:transparent; display:block; margin-left:28px;}
 
 /*mobile number popup starts*/
-.popup-mobile{width:470px; height:128px; background:white; position:fixed; z-index:99999; top:0; left:0; right:0; bottom:0; margin:auto;  display:none; overflow:hidden; border-radius:10px;-webkit-box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);-moz-box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);}
+.popup-mobile{width:470px; 
+	height:360px; 
+	background:white; position:fixed; z-index:99999; top:0; left:0; right:0; bottom:0; margin:auto;  display:none; overflow:hidden; border-radius:10px;-webkit-box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);-moz-box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);box-shadow: -1px 2px 20px 1px rgba(0,0,0,0.71);}
 .mobile-close{width:22px; height:22px; position:absolute; top:0; right:0; color:#7e7e7e; font-size:18px; font-weight:bold; cursor:pointer;}
-.mobile-box{padding:50px; width:258px; margin:auto;}
+.mobile-box{padding:50px; /*width:258px;*/ margin:auto;}
 .mobile-box input[type="text"]{width:250px; height:25px; border:1px solid #b9b9b9;}
 .popup-mobile p{ font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; color:#575757; margin-bottom:0; margin-top:0;}
 

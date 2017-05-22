@@ -28,7 +28,7 @@ header h1{margin-left:10px;}
 .app a:hover{color:#fff;text-decoration:none;}
 .search-reas{display:block;background:#fff;overflow:hidden;background:#fff url(http://media2.intoday.in/indiatoday/images/search-icon.jpg) 5px center no-repeat;padding-left:30px;width:333px;margin:4px;float:right;height:28px;}
 .search-reas .inputbox{width:390px;height:25px;padding:3px;line-height:25px;margin:2px;float:left;border:none;-webkit-border-radius:0px;-webkit-appearance:none;}
-.search-reas .btn{background:url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -235px -54px rgba(0, 0, 0, 0);display:block;float:right;height:28px;text-indent:-9999px;width:84px;cursor:pointer;border:0;-webkit-border-radius:0px;-webkit-appearance:none;margin-right:-3px;}
+.search-reas .btn{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -235px -54px rgba(0, 0, 0, 0);display:block;float:right;height:28px;text-indent:-9999px;width:84px;cursor:pointer;border:0;-webkit-border-radius:0px;-webkit-appearance:none;margin-right:-3px;}
 .centerdiv{width:100%;padding:0px; height:130px;}
 .topbox_lft{display:none;}
 #ad{float:none!Important;padding:21px 0;width:100%;}
