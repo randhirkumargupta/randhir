@@ -211,5 +211,13 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter Editor Pic Tid')),
     '#default_value' => variable_get('editor_pic_tid'),
   );
+  
+  $form['section_widget_keep_row_count'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Rows You want to keep in section wise widget order'),
+    '#attributes' => array('placeholder' => t('Enter Number')),
+    '#default_value' => variable_get('section_widget_keep_row_count' , 50),
+  );
+  
   return system_settings_form($form);
 }
