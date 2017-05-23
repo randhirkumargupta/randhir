@@ -979,6 +979,9 @@ function _simplesamlphp_auth_get_fname() {
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.name']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['twitter.name'];
   }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.name'];
+  }
   else {
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
   }
