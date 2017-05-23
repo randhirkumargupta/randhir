@@ -962,12 +962,18 @@ function itg_rapid_api_horizontal_menu($token) {
     }
     else{
        
-         $json_string = 'http://localhost/decode/sprint1/horizontal_menu.json';
+        $redis_key = "itgd_rapid_horizontal_menu_json";
+        $result_get = getRedis($redis_key);
 
-
-       //$jsondata = file_get_contents($json_string);
-       $jsondata = variable_get('horizontal_menu_json');
-       //echo $jsondata;exit;
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('horizontal_menu_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+        
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
 
