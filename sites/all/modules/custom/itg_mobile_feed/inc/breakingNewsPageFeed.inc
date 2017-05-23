@@ -57,36 +57,10 @@ function breakingNewsPageFeed() {
     //print_ar($result, "home page breaking news");exit();
 
     if(isset($nid)){
-        $output .= "<item>
-                      <enable>1</enable>
-                      <id>" . $nid . "</id>
-                      <title>" . $title . "</title>
-                      <credit></credit>
-                      <createddate>" . $create_date . "</createddate>
-                      <createdtime>" . $create_datetime . "</createdtime>
-                      <city>" . $city . "</city>
-                      <courtesy></courtesy>
-                      <thumbimage>" . $file_medium_img_url . "</thumbimage>
-                      <longdescription>" . $body . "</longdescription>
-                      <weburl>" . $web_url . "</weburl>
-                      <url></url>
-                      </item>";
+        $output .= "<item><enable>1</enable><id>" . $nid . "</id><title>" . $title . "</title><credit></credit><createddate>" . $create_date . "</createddate><createdtime>" . $create_datetime . "</createdtime><city>" . $city . "</city><courtesy></courtesy><thumbimage>" . $file_medium_img_url . "</thumbimage><longdescription>" . $body . "</longdescription><weburl>" . $web_url . "</weburl><url></url></item>";
 
     }else{
-            $output .= "<item>
-                      <enable></enable>
-                      <id></id>
-                      <title></title>
-                      <credit></credit>
-                      <createddate></createddate>
-                      <createdtime></createdtime>
-                      <city></city>
-                      <courtesy></courtesy>
-                      <thumbimage></thumbimage>
-                      <longdescription></longdescription>
-                      <weburl></weburl>
-                      <url></url>
-                      </item>";
+            $output .= "<item><enable></enable><id></id><title></title><credit></credit><createddate></createddate><createdtime></createdtime><city></city><courtesy></courtesy><thumbimage></thumbimage><longdescription></longdescription><weburl></weburl><url></url></item>";
     }
     //call function getMobileFeedXmlFooter
     $output .= getMobileFeedXmlFooter();

@@ -100,18 +100,9 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
 
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
-    $output .= "<item>
-                    <storyid>" . $nid . "</storyid>
-                    <idsection>" . $tid . "</idsection>
-                    <section><![CDATA[" . $term_name . "]]> </section>
-                    <headline ><![CDATA[" . $title . "]]></headline >
-                    <credit><![CDATA[" . $reporter_node . "]]> </credit>
-                    <date>$create_date</date>
-                    <datetime>" . $create_datetime . "</datetime>
-                    <city><![CDATA[" . $city . "]]></city>
-                    <courtesy><![CDATA[]]></courtesy>";
-                    $output .= "<body><![CDATA[" . $full_body . "]]></body>";
-                    $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
+    $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
+    $output .= "<body><![CDATA[" . $full_body . "]]></body>";
+    $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
     //get video tag
     $videotag = getVideoTag($node);
     if ($videotag) {
@@ -184,16 +175,7 @@ function getVideoTag($node) {
   //$src = $node->attributes->getNamedItem('src')->nodeValue;
 
   if ($src) {
-    $videotag = "<video_embed>
-                    <videoparts_mp4>
-                        <part>" . $src . "</part>
-                        <img_url><![CDATA[]]></img_url>
-                    </videoparts_mp4>
-                    <videoparts_m3u8>
-                        <part>" . $src . "</part>
-                        <img_url><![CDATA[]]></img_url>
-                    </videoparts_m3u8>
-                </video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
@@ -206,16 +188,8 @@ function getVideoTag($node) {
  */
 function emptygetVideoTag() {
     $videotag = "";
-
-    $videotag = "<video_embed>
-                    <videoparts_mp4>
-                        <part></part>
-                    </videoparts_mp4>
-                    <videoparts_m3u8>
-                        <part></part>
-                    </videoparts_m3u8>
-                </video_embed>";
-  return $videotag;
+    $videotag = "<video_embed><videoparts_mp4><part></part></videoparts_mp4><videoparts_m3u8><part></part></videoparts_m3u8></video_embed>";
+    return $videotag;
 }
 
 /**
@@ -225,15 +199,7 @@ function emptygetVideoTag() {
  */
 function emptygetImgTag() {
   $imgtag = "";
-
-  $imgtag = "<bodyimages>
-                    <image>
-                        <lowres><![CDATA[]]></lowres>
-                        <highres><![CDATA[]]></highres>
-                        <caption></caption>
-                    </image>
-                </bodyimages>";
-
+  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
   return $imgtag;
 }
 
@@ -259,13 +225,7 @@ function getImgTag($node) {
   $node = $nodelist->item(0);
   //$src = $node->attributes->getNamedItem('src')->nodeValue;
   if ($src) {
-    $imgtag = "<bodyimages>
-                    <image>
-                        <lowres><![CDATA[" . $src . "]]></lowres>
-                        <highres><![CDATA[" . $src . "]]></highres>
-                        <caption></caption>
-                    </image>
-                </bodyimages>";
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption></caption></image></bodyimages>";
   }
 
   return $imgtag;

@@ -111,16 +111,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
 
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
-    $output .= "<item><videoid>" . $nid . "</videoid>
-                    <idsection>" . $tid . "</idsection>
-                    <section><![CDATA[" . $term_name . "]]></section>
-                    <credit><![CDATA[" . $reporter_node . "]]></credit>
-                    <date><![CDATA[" . $create_date . "]]></date>
-                    <datetime><![CDATA[" . $create_datetime . "]]></datetime>
-                    <title><![CDATA[" . $title . "]]></title>
-                    <thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage>
-                    <mediaid></mediaid>
-                    <uurl></uurl>";
+    $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
 
     //get video tag
     $videotag = getVideoTagDetail($video_path_info,$file_id);
@@ -128,13 +119,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
       $output .= $videotag;
     }
 
-    $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date>
-                    <create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime>
-                    <syndications>" . $syndications . "</syndications>
-                    <is_favorite>" . $is_fav . "</is_favorite>
-                    <metakeyword><![CDATA[".$metatags_title."]]></metakeyword>
-                    <metadescription><![CDATA[".$metatags_description."]]></metadescription>
-                    <weburl>" . $weburl . "</weburl>";
+    $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[".$metatags_title."]]></metakeyword><metadescription><![CDATA[".$metatags_description."]]></metadescription><weburl>" . $weburl . "</weburl>";
 
     //get body img tag
     $imgtag = getImgTagDetail($node);
@@ -207,42 +192,12 @@ function getVideoTagDetail($video_path_info,$file_id = NULL) {
 
     if($video_path_info['dailymtion_flag'] == "yes"){
 
-        $output .= "<videoparts>
-                        <part>".$videoparts_3gp."</part>
-                    </videoparts>
-                    <size_364bit>".$filesize."</size_364bit>
-                    <videoparts_mp4>
-                        <part>".$video_path_mp4."</part>
-                    </videoparts_mp4>
-                    <videoparts_m3u8>
-                        <part>".$video_formats['stream_h264_hd_url']."</part>
-                    </videoparts_m3u8>
-                    <flvvideoparts>
-                        <part>".$video_formats['stream_h264_hq_url']."</part>
-                    </flvvideoparts>
-                    <videoparts_3gp>
-                        <part>".$video_formats['stream_h264_ld_url']."</part>
-                    </videoparts_3gp>";
+        $output .= "<videoparts><part>".$videoparts_3gp."</part></videoparts><size_364bit>".$filesize."</size_364bit><videoparts_mp4><part>".$video_path_mp4."</part></videoparts_mp4><videoparts_m3u8><part>".$video_formats['stream_h264_hd_url']."</part></videoparts_m3u8><flvvideoparts><part>".$video_formats['stream_h264_hq_url']."</part></flvvideoparts><videoparts_3gp><part>".$video_formats['stream_h264_ld_url']."</part></videoparts_3gp>";
     }
     else{
         $flv_url = str_replace(".mp4",".flv",$video_path_mp4);
         $videoparts_3gp = str_replace(".mp4",".3gp",$video_path_mp4);
-        $output .= "<videoparts>
-                        <part>".$videoparts_3gp."</part>
-                    </videoparts>
-                    <size_364bit>".$filesize."</size_364bit>
-                    <videoparts_mp4>
-                        <part>".$video_path_mp4."</part>
-                    </videoparts_mp4>
-                    <videoparts_m3u8>
-                        <part>".$videoparts_3gp."</part>
-                    </videoparts_m3u8>
-                    <flvvideoparts>
-                        <part>".$flv_url."</part>
-                    </flvvideoparts>
-                    <videoparts_3gp>
-                        <part>".$videoparts_3gp."</part>
-                    </videoparts_3gp>";
+        $output .= "<videoparts><part>".$videoparts_3gp."</part></videoparts><size_364bit>".$filesize."</size_364bit><videoparts_mp4><part>".$video_path_mp4."</part></videoparts_mp4><videoparts_m3u8><part>".$videoparts_3gp."</part></videoparts_m3u8><flvvideoparts><part>".$flv_url."</part></flvvideoparts><videoparts_3gp><part>".$videoparts_3gp."</part></videoparts_3gp>";
     }
     return $output;
 }
@@ -260,13 +215,7 @@ function getImgTagDetail($node) {
   // custom function for get img caption
   $caption = getImgCaption($field_story_small_image);
   $imgtag = "";
-  $imgtag = "<bodyimages>
-                    <image>
-                        <lowres><![CDATA[".$highres."]]></lowres>
-                        <highres><![CDATA[".$highres."]]></highres>
-                        <caption>".$caption."</caption>
-                    </image>
-                </bodyimages>";
+  $imgtag = "<bodyimages><image><lowres><![CDATA[".$highres."]]></lowres><highres><![CDATA[".$highres."]]></highres><caption>".$caption."</caption></image></bodyimages>";
 
 
   return $imgtag;
@@ -280,13 +229,7 @@ function getImgTagDetail($node) {
 function emptygetImgTagDetail() {
 
   $imgtag = "";
-  $imgtag = "<bodyimages>
-                    <image>
-                        <lowres><![CDATA[]]></lowres>
-                        <highres><![CDATA[]]></highres>
-                        <caption></caption>
-                    </image>
-                </bodyimages>";
+  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
   return $imgtag;
 }
 

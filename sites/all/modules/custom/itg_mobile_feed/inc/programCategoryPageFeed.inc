@@ -56,10 +56,7 @@ function programCategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= program_section_page_feed_header();
-          $output .= "<id>".$cattid."</id>
-                        <title><![CDATA[".$term_name."]]></title>
-                        <description><![CDATA[".$term_description."]]></description>
-                        <itemcount>".$list_count."</itemcount>";
+          $output .= "<id>".$cattid."</id><title><![CDATA[".$term_name."]]></title><description><![CDATA[".$term_description."]]></description><itemcount>".$list_count."</itemcount>";
           $output .= $storytag['data'];
           $output .= program_section_page_feed_footer();
           // xml file writing..
@@ -182,13 +179,7 @@ function generateProgramCategoryPage($tid) {
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
 
-      $output .= "<item>
-                    <title><![CDATA[".$title."]]></title>
-                    <shortdescription><![CDATA[".$field_story_kicker_text_value."]]></shortdescription>
-                    <thumbimage><![CDATA[".$file_medium_img_url."]]></thumbimage>
-                    <url>video".$nid.".xml</url>
-                    <createddate>".$create_date."</createddate>
-                </item>";
+      $output .= "<item><title><![CDATA[".$title."]]></title><shortdescription><![CDATA[".$field_story_kicker_text_value."]]></shortdescription><thumbimage><![CDATA[".$file_medium_img_url."]]></thumbimage><url>video".$nid.".xml</url><createddate>".$create_date."</createddate></item>";
       // generate video detail page
     $fl = generateVideoDetailPageFeed($nid);
     }

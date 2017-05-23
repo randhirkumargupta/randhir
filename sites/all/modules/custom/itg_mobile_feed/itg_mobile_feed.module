@@ -594,8 +594,7 @@ function getNodeFeedTag($tid, $type, $count) {
     // create date formating
     $create_date = date("F d, Y", $created);
     $create_datetime = date(DATE_ATOM, $created);
-    $output .= "<title><![CDATA[" . $title . "]]></title>
-                            <thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
+    $output .= "<title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
     if ($type == "photogallery") {
       $output .= "<url>photo" . $nid . ".xml</url>";
       // generate photo detail page
@@ -614,9 +613,7 @@ function getNodeFeedTag($tid, $type, $count) {
     $fl = generateStoryDetailPageFeed($nid);
     }
 
-    $output .= "<create_date>" . $create_date . "</create_date>
-                            <create_datetime>" . $create_datetime . "</create_datetime>
-                            <is_favorite>" . $is_fav . "</is_favorite>";
+    $output .= "<create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite>";
   }
   return $output;
   //echo $output; exit();
@@ -717,13 +714,7 @@ function getCommentXmlTag($node) {
     $create_date = date("F d, Y", $commens_obj->created);
     $create_datetime = date(DATE_ATOM, $commens_obj->created);
     $email = $commens_obj->mail;
-    $comment_tag .= "<comment>
-                        <commenttext>" . $commenttext . "</commenttext>
-                        <name>" . $name . "</name>
-                        <createddate>" . $create_date . "</createddate>
-                        <createddatetime>" . $create_datetime . "</createddatetime>
-                        <email>" . $email . "</email>
-                      </comment>";
+    $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
   }
 
   if ($commentsflag) {
@@ -751,13 +742,7 @@ function emptygetCommentXmlTag() {
   $email = "";
 
   // writng comments tag
-  $comment_tag .= "<comment>
-                        <commenttext>" . $commenttext . "</commenttext>
-                        <name>" . $name . "</name>
-                        <createddate>" . $create_date . "</createddate>
-                        <createddatetime>" . $create_datetime . "</createddatetime>
-                        <email>" . $email . "</email>
-                      </comment>";
+  $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
 
     $output .= "<comments>";
     $output .= $comment_tag;
@@ -789,44 +774,26 @@ function getRelatedNodeXmlTag($nidar) {
 
     if ($value['type'] == "story") {
       $related_flag_story = 1;
-      $story_tag .= "<story>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                          </story>";
+      $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
     }
     elseif ($value['type'] == "photogallery") {
       $related_flag_photo = 1;
-      $photo_tag .= "<photo>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                           </photo>";
+      $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
     }
     elseif ($value['type'] == "videogallery") {
       $related_flag_video = 1;
-      $video_tag .= "<video>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                           </video>";
+      $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
     }
   }
   $output .= "<related>";
   if ($related_flag_story) {
-    $output .= "<stories>
-            " . $story_tag . "
-        </stories>";
+    $output .= "<stories>" . $story_tag . "</stories>";
   }
   if ($related_flag_photo) {
-    $output .= "<photos>
-            " . $photo_tag . "
-        </photos>";
+    $output .= "<photos>" . $photo_tag . "</photos>";
   }
   if ($related_flag_video) {
-    $output .= "<videos>
-            " . $video_tag . "
-        </videos>";
+    $output .= "<videos>" . $video_tag . "</videos>";
   }
   $output .= "</related>";
 
@@ -855,35 +822,17 @@ function emptygetRelatedNodeXmlTag() {
   $url = '';
   $img_url = '';
 
-  $story_tag .= "<story>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                            </story>";
+  $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
 
-  $photo_tag .= "<photo>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                           </photo>";
+  $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
 
-  $video_tag .= "<video>
-                            <title>" . $title . "</title>
-                            <url>" . $url . "</url>
-                            <thumbimage>" . $img_url . "</thumbimage>
-                           </video>";
+  $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
   $output .= "<related>";
 
-  $output .= "<stories>
-            " . $story_tag . "
-        </stories>";
+  $output .= "<stories>" . $story_tag . "</stories>";
 
-  $output .= "<photos>
-            " . $photo_tag . "
-        </photos>";
-  $output .= "<videos>
-            " . $video_tag . "
-        </videos>";
+  $output .= "<photos>" . $photo_tag . "</photos>";
+  $output .= "<videos>" . $video_tag . "</videos>";
   $output .= "</related>";
 
   return $output;
