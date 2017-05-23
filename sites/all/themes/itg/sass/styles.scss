@@ -11617,6 +11617,11 @@ span.close_btt {
     .mCSB_scrollTools{width: 3px;}
   }
 }
+.story-section .story-right .description{
+  .social-share.social-share-embed{
+    @include social-share;
+  }
+}
 
 
 
