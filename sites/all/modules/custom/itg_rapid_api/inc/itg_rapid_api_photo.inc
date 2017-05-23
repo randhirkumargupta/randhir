@@ -22,6 +22,9 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;   
+    if(!$tid){
+        $term_name = "Latest";
+    }
     
     // list array building
     $data = generatePhotoCategoryList($tid, $pageno);
@@ -41,7 +44,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
-    $data_array['layout_id'] = "1";
+    $data_array['layout_id'] = "0";
     $data_array['photo_count'] = "$datacount";
     $data_array['photo_display_count'] = "10";
     $data_array['photo_pagination_cap'] = "7";
@@ -159,6 +162,20 @@ function generatePhotoCategoryList($tid, $pageno) {
       $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("Y-m-d H:i:s", $created);
       $changed_datetime = date("Y-m-d H:i:s", $changed);
+      if($created){
+        $create_date = date("Y-m-d H:i:s", $created);
+        
+      }
+      else{
+          
+          $create_date = "";
+      }
+      if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
       // photo detail for listing
        $photo_list_array[$loop_count]['p_id'] = "$nid";
        $photo_list_array[$loop_count]['p_title'] = "$title";
@@ -236,7 +253,13 @@ function generatePhotoDeatilList($id){
     $galleryimg = $node->field_gallery_image['und'];
     $toptlapics = count($galleryimg);
     $changed = $node->changed;
-    $changed_datetime = date("Y-m-d H:i:s", $changed);
+    //$changed_datetime = date("Y-m-d H:i:s", $changed);
+    if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
     $comment_cont = getCommentsCount($nid);
     
     //data array building
@@ -354,7 +377,13 @@ function generatePhotoStoryDeatilList($id){
     //$galleryimg = $node->field_gallery_image['und'];
     
     $changed = $node->changed;
-    $changed_datetime = date("Y-m-d H:i:s", $changed);
+    //$changed_datetime = date("Y-m-d H:i:s", $changed);
+    if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
     $comment_cont = getCommentsCount($nid);
     $published_datetime = getNodePublishedDate($id);
     // list array building
