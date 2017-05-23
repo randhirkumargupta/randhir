@@ -33,7 +33,7 @@ if (array_key_exists(EDITOR, $user->roles)) {
   }else if (array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
     $user_array = array(AUTHOR_GUEST=>'Author/Guest',INTERN=>'Intern' );
   }else if(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles)) {
-    $user_array = array(AUTHOR_GUEST=>'Author/Guest', COPY_EDITOR=>'Copy Editor', CORRESPONDENT=>'Correspondent', CO_ORDINATOR=>'Co-ordinator', COPY_DESK=>'Copy Desk', DESIGN_HEAD=>'Design Head', DESIGNER=>'Designer', EDITOR=>'Editor', EXPERT=>'Expert', INTERN=>'Intern', PHOTO_COORDINATOR=>'Photo Coordinator', PHOTOGRAPHER=>'Photographer', PHOTO_HEAD=>'Photo Head', SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', SEO=>'SEO', UGC_MODERATOR=>'UGC Moderator', FRONT_USER => 'Front User', MARKETING_MANAGER => 'Marketing Manager', SOCIAL_MEDIA => 'Social Media', KNOWLEDGE_CENTRE => 'Knowledge Centre');
+    $user_array = array(AUTHOR_GUEST=>'Author/Guest', COPY_EDITOR=>'Copy Editor', CORRESPONDENT=>'Correspondent', CO_ORDINATOR=>'Co-ordinator', COPY_DESK=>'Copy Desk', DESIGN_HEAD=>'Design Head', DESIGNER=>'Designer', EDITOR=>'Editor', EXPERT=>'Expert', INTERN=>'Intern', PHOTO_COORDINATOR=>'Photo Coordinator', PHOTOGRAPHER=>'Photographer', PHOTO_HEAD=>'Photo Head', SECTION_EDITOR_ANCHOR=>'Section Editor/Anchor', SUBEDITOR_SR_SUB=>'Subeditor/Sr.Sub', SEO=>'SEO', UGC_MODERATOR=>'UGC Moderator', FRONT_USER => 'Front User', MARKETING_MANAGER => 'Marketing Manager', SOCIAL_MEDIA => 'Social Media', KNOWLEDGE_CENTRE => 'Knowledge Centre', ADS_MANAGER => 'Ads Manager', SYNDICATION => 'Syndication', MOBILE_VAS => 'Mobile VAS');
   }
 
 

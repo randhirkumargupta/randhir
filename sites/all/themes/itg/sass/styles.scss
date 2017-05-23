@@ -10113,16 +10113,25 @@ h1.about-us-heading{
         }
     }
     #sortable1, #sortable2, #sortable3, #sortable4{
-        text-align: center;
-        li{
-            width: 65px;
-            height: 65px;
-            padding-right: 0;
-            border: 1px solid #515567;
-            border-radius: 50%;
-            margin: 10px;
-            overflow: hidden;
+      text-align: center;
+      li{
+        width: 65px;
+        height: 65px;
+        padding-right: 0;
+        border: 1px solid #515567;
+        border-radius: 50%;
+        margin: 10px;
+        overflow: hidden;
+        position: relative;
+        img {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: auto;
         }
+      }
     }
     .budget-predictor-social-share{
         .share-msg{
