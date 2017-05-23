@@ -58,9 +58,7 @@ function photoSectionPageFeed() {
         $listcount++;
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
-        $child_node .= "<item>
-                            <sectionname><![CDATA[" . $term_name . "]]></sectionname>
-                            <sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
+        $child_node .= "<item><sectionname><![CDATA[" . $term_name . "]]></sectionname><sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
 
         // get photogallery node tag
         $child_node .= getNodeFeedTag($value, 'photogallery', 2);
@@ -73,11 +71,7 @@ function photoSectionPageFeed() {
   if ($child_node) {
         // xml feed header
         $output .= getMobileFeedXmlHeader();
-        $output .= "<idsection>11111</idsection>
-                            <section>photos</section>
-                            <totalsections>" . $listcount . "</totalsections>
-                            <start_index>0</start_index>
-                            <end_index>" . $listcount . "</end_index>";
+        $output .= "<idsection>11111</idsection><section>photos</section><totalsections>" . $listcount . "</totalsections><start_index>0</start_index><end_index>" . $listcount . "</end_index>";
         // child node
         $output .= $child_node;
         // xml feed footer

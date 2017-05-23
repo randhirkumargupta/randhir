@@ -42,11 +42,7 @@ function storyCategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= getMobileFeedXmlHeader();
-          $output .= "<idsection>".$cattid."</idsection>
-                        <section>".$term_name."</section>
-                        <totalarticle>".$list_count."</totalarticle>
-                        <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>";
+          $output .= "<idsection>".$cattid."</idsection><section>".$term_name."</section><totalarticle>".$list_count."</totalarticle><start_index>0</start_index><end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
           $output .= getMobileFeedXmlFooter();
           // xml file writing..
@@ -164,19 +160,7 @@ function generateStoryCategoryPage($tid) {
       // create date formating
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<article>
-                    <title>".$title."</title>
-                    <thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage>
-                    <kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage>
-                    <url>story".$nid.".xml </url>
-                    <create_date>".$create_date."</create_date>
-                    <create_datetime>".$create_datetime."</create_datetime>
-                    <relateds>
-                        <photos>" . $related['photos'] . "</photos>
-                        <videos>" . $related['videos'] . "</videos>
-                        <stories>" . $related['stories'] . "</stories>
-                    </relateds>
-                </article>";
+      $output .= "<article><title>".$title."</title><thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage><kickerimage><![CDATA[".$file_medium_img_url."]]></kickerimage><url>story".$nid.".xml </url><create_date>".$create_date."</create_date><create_datetime>".$create_datetime."</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
       // generate story detail page
     $fl = generateStoryDetailPageFeed($nid);
     }

@@ -53,11 +53,7 @@ function videoCategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= getMobileFeedXmlHeader();
-          $output .= "<idsection>".$cattid."</idsection>
-                        <section>".$term_name."</section>
-                        <totalvideos>".$list_count."</totalvideos>
-                        <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>";
+          $output .= "<idsection>".$cattid."</idsection><section>".$term_name."</section><totalvideos>".$list_count."</totalvideos><start_index>0</start_index><end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
           $output .= getMobileFeedXmlFooter();
           // xml file writing..
@@ -178,21 +174,7 @@ function generateVideoCategoryPage($tid) {
       // create date formating
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<item>
-                    <title>".$title."</title>
-                    <mediumimage><![CDATA[".$file_medium_img_url."]]></mediumimage>
-                    <thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage>
-                    <url>video".$nid.".xml</url>
-                    <create_date>".$create_date."</create_date>
-                    <create_datetime>".$create_datetime."</create_datetime>
-                    <syndications>".$is_syndications."</syndications>
-                    <is_favorite>".$is_fav."</is_favorite>
-                    <relateds>
-                        <photos>".$related['photos']."</photos>
-                        <videos>" . $related['videos'] . "</videos>
-                        <stories>" . $related['stories'] . "</stories>
-                    </relateds>
-                </item>";
+      $output .= "<item><title>".$title."</title><mediumimage><![CDATA[".$file_medium_img_url."]]></mediumimage><thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage><url>video".$nid.".xml</url><create_date>".$create_date."</create_date><create_datetime>".$create_datetime."</create_datetime><syndications>".$is_syndications."</syndications><is_favorite>".$is_fav."</is_favorite><relateds><photos>".$related['photos']."</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
       // generate video detail page
     $fl = generateVideoDetailPageFeed($nid);
     }

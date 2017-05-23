@@ -92,12 +92,7 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
     $toptlapics = count($galleryimg);
     //call function getMobileFeedXmlHeader
     $output .= getMobileFeedXmlHeader();
-    $output .= "<idgallery>" . $nid . "</idgallery>
-                    <gallery><![CDATA[" . $title . "]]></gallery>
-                    <idsection>" . $tid . "</idsection>
-                    <section>" . $term_name . "</section>
-                    <totalpics>" . $toptlapics . "</totalpics>
-                    <weburl><![CDATA[" . $weburl . "]]></weburl>";
+    $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
     //get gallery img tag
     $imgtag = getGalleryImgTag($galleryimg);
     if ($imgtag) {
@@ -161,13 +156,7 @@ function getGalleryImgTag($galleryimg) {
       $caption = getImgCaption($fid);
       // custom function for get img byline
       $byline = getImgByline($fid);
-      $output .= "<item>
-                        <imageid>" . $fid . "</imageid>
-                        <image><![CDATA[" . $small_img_url . "]]></image>
-                        <largeimage><![CDATA[" . $img_url . "]]></largeimage>
-                        <caption><![CDATA[" . $caption . "]]> </caption>
-                        <byline>" . $byline . "</byline>
-                        </item>";
+      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $small_img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
   }
   return $output;

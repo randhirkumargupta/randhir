@@ -60,12 +60,7 @@ function programSectionPageFeed() {
         $listcount++;
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
-        $child_node .= "<item>
-                            <title><![CDATA[" . $term_name . "]]></title>
-                            <url>" . $term_file_name . "</url>
-                            <weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl>
-                            <sectionimage>" . $cat_icon_img . "</sectionimage>
-                          </item>";
+        $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
 
     }
   }
@@ -73,9 +68,7 @@ function programSectionPageFeed() {
   if ($child_node) {
         // xml feed header
         $output .= program_section_page_feed_header();
-        $output .= "<id>1</id>
-                            <title><![CDATA[programmes]]></title>
-                            <itemcount>" . $listcount . "</itemcount>";
+        $output .= "<id>1</id><title><![CDATA[programmes]]></title><itemcount>" . $listcount . "</itemcount>";
         // child node
         $output .= $child_node;
         // xml feed footer
