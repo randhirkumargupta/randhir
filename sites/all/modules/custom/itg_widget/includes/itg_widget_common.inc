@@ -2874,6 +2874,12 @@ function itg_widget_node_insert($node) {
   }
 }
 
+/**
+ * Function responsible to delete old data.
+ * @param string $table
+ * @param int $cat_id
+ * @param string $content_type
+ */
 function _delete_old_data_from_section_widget($table , $cat_id , $content_type) {
   $keep_row = (int) variable_get('section_widget_keep_row_count');
   try {
@@ -3018,6 +3024,12 @@ function itg_widget_node_update($node) {
   }
 }
 
+/**
+ * Function which manage data acording to categories.
+ * @param int $nid
+ * @param int $category_tid
+ * @param string $node_type
+ */
 function manage_widget_order_during_node_update($nid , $category_tid , $node_type) {
   $max_result = get_max_weight($category_tid , $node_type);
   $table = 'itg_widget_order';

@@ -216,7 +216,7 @@ function itg_widgets_custom_variables() {
     '#type' => 'textfield',
     '#title' => t('Rows You want to keep in section wise widget order'),
     '#attributes' => array('placeholder' => t('Enter Number')),
-    '#default_value' => variable_get('section_widget_keep_row_count' , 50),
+    '#default_value' => variable_get('section_widget_keep_row_count' , 100),
   );
   
   return system_settings_form($form);
