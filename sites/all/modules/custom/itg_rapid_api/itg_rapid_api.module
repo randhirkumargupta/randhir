@@ -308,7 +308,12 @@ function getNodePublishedDate($nid){
     $query->condition('nh.state', 'published');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $published_statp = $result[0]['stamp'];
-    $published_datetime = date("Y-m-d H:i:s", $published_statp);
+    if($published_statp){
+        $published_datetime = date("Y-m-d H:i:s", $published_statp);
+    }
+    else{
+        $published_datetime = "";
+    }
     return $published_datetime;
 }
 

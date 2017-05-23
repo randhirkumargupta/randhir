@@ -22,6 +22,9 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;   
+    if(!$tid){
+        $term_name = "Latest";
+    }
     
     // list array building
     $data = generateNewsCategoryList($tid, $pageno);
@@ -40,7 +43,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
-    $data_array['layout_id'] = "template_1";
+    $data_array['layout_id'] = "0";
     $data_array['news_count'] = "$datacount";
     $data_array['news_display_count'] = "$term_name";
     $data_array['news_pagination_cap'] = "$datacount";
@@ -159,9 +162,21 @@ function generateNewsCategoryList($tid, $pageno) {
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      $create_date = date("F d, Y", $created);
-      $create_datetime = date("Y-m-d H:i:s", $created);
-      $changed_datetime = date("Y-m-d H:i:s", $changed);
+      
+      if($created){
+        $create_datetime = date("Y-m-d H:i:s", $created);
+        $create_date = date("Y-m-d H:i:s", $created);
+      }
+      else{
+          $create_datetime = "";
+          $create_date = "";
+      }
+      if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
       
             $news_list_array[$listcount]['n_id'] = "$nid";
             $news_list_array[$listcount]['n_type'] = "$type";
@@ -175,6 +190,8 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
             $news_list_array[$listcount]['n_large_image'] = "$file_medium_img_url";
             $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            
+      
             // photo list array
             
             if($type == "photogallery"){
@@ -272,6 +289,8 @@ function getVideolist($nid){
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -287,6 +306,8 @@ function getVideolist($nid){
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
     $query->fields('fss', array('field_story_syndication_value'));
+    $query->fields('fsr', array('field_story_reporter_target_id'));
+    $query->fields('fvu', array('field_video_upload_value'));
     $query->condition('n.nid', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
@@ -310,23 +331,47 @@ function getVideolist($nid){
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      $field_story_reporter_target_id = $resvalue['field_story_reporter_target_id'];
+      $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
+      //video url start
+      $field_video_upload = $resvalue['field_video_upload_value'];
+      $file_id = file_usage($field_video_upload);
+      //to get the video of all the other formats
+      $video_formats = all_video_format($file_id);
+      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
+      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $filesize = $video_path_info['filesize'];
+      $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
+      //video url end
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      $create_date = date("F d, Y", $created);
-      $create_datetime = date("Y-m-d H:i:s", $created);
-      $changed_datetime = date("Y-m-d H:i:s", $changed);
+      
+      if($created){
+        $create_datetime = date("Y-m-d H:i:s", $created);
+        $create_date = date("F d, Y", $created);
+      }
+      else{
+          $create_datetime = "";
+          $create_date = "";
+      }
+      if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
         
         $videolist['nv_id'] = "$nid";
         $videolist['nv_title'] = "$title";
-        $videolist['nv_credit'] = "";
-        $videolist['nv_byline'] = "";
+        $videolist['nv_credit'] = "$reporter_node";
+        $videolist['nv_byline'] = "$reporter_node";
         $videolist['nv_short_desc'] = "$field_story_kicker_text_value";
         $videolist['nv_small_image'] = "$file_small_img_url";
         $videolist['nv_large_image'] = "$file_medium_img_url";
-        $videolist['nv_is_jwplayer'] = "1";
-        $videolist['nv_url'] = "$weburl";
-        $videolist['nv_download_url'] = "MP4 URL";
+        $videolist['nv_is_jwplayer'] = "0";
+        $videolist['nv_url'] = "$stream_h264_hd_url";
+        $videolist['nv_download_url'] = "$video_path_mp4";
         $videolist['nv_view_count'] = "";
         $videolist['nv_comment_count'] = "";
         $videolist['nv_share_url'] = "$firebase_url";

@@ -21,7 +21,10 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $updated_datetime = "";
     
     $term = taxonomy_term_load($tid);
-    $term_name = $term->name;   
+    $term_name = $term->name;  
+    if(!$tid){
+        $term_name = "Latest";
+    }
     
     // list array building
     $data = generateVideoCategoryList($tid, $pageno);
@@ -40,9 +43,9 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
-    $data_array['layout_id'] = "template_1";
-    $data_array['subcategory_id'] = "$tid";
-    $data_array['subcategory_title'] = "$term_name";
+    $data_array['layout_id'] = "0";
+    //$data_array['subcategory_id'] = "$tid";
+    //$data_array['subcategory_title'] = "$term_name";
     $data_array['video_count'] = "$datacount";
     $data_array['video_display_count'] = "10";
     $data_array['video_pagination_cap'] = "7";
@@ -107,6 +110,8 @@ function generateVideoCategoryList($tid, $pageno) {
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -122,6 +127,8 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
     $query->fields('fss', array('field_story_syndication_value'));
+    $query->fields('fsr', array('field_story_reporter_target_id'));
+    $query->fields('fvu', array('field_video_upload_value'));
 
 
     //end
@@ -154,23 +161,50 @@ function generateVideoCategoryList($tid, $pageno) {
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      
+      $field_story_reporter_target_id = $resvalue['field_story_reporter_target_id'];
+      $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
+      //video url start
+      $field_video_upload = $resvalue['field_video_upload_value'];
+      $file_id = file_usage($field_video_upload);
+      //to get the video of all the other formats
+      $video_formats = all_video_format($file_id);
+      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
+      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $filesize = $video_path_info['filesize'];
+      $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
+      //video url end
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      $create_date = date("F d, Y", $created);
-      $create_datetime = date("Y-m-d H:i:s", $created);
-      $changed_datetime = date("Y-m-d H:i:s", $changed);
+      //$create_date = date("F d, Y", $created);
+      //$create_datetime = date("Y-m-d H:i:s", $created);
+      //$changed_datetime = date("Y-m-d H:i:s", $changed);
+      if($created){
+        $create_datetime = date("Y-m-d H:i:s", $created);
+        $create_date = date("Y-m-d H:i:s", $created);
+      }
+      else{
+          $create_datetime = "";
+          $create_date = "";
+      }
+      if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
       
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
-        $photo_list_array[$listcount]['v_credit'] = "";
-        $photo_list_array[$listcount]['v_byline'] = "";
+        $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
+        $photo_list_array[$listcount]['v_byline'] = "$reporter_node";
         $photo_list_array[$listcount]['v_short_desc'] = "$field_story_kicker_text_value";
         $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['v_large_image'] = "$file_medium_img_url";
-        $photo_list_array[$listcount]['v_is_default_player'] = "1";
-        $photo_list_array[$listcount]['v_url'] = "$weburl";
-        $photo_list_array[$listcount]['v_download_url'] = "MP4 URL";
+        $photo_list_array[$listcount]['v_is_default_player'] = "0";
+        $photo_list_array[$listcount]['v_url'] = "$stream_h264_hd_url";
+        $photo_list_array[$listcount]['v_download_url'] = "$video_path_mp4";
         $photo_list_array[$listcount]['v_view_count'] = "0";
         $photo_list_array[$listcount]['v_comment_count'] = "10";
         $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
@@ -213,6 +247,9 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;   
+    if(!$tid){
+        $term_name = "Latest";
+    }
     
     // list array building
     $data = generateProgramCategoryList($tid, $pageno);
@@ -231,7 +268,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
-    $data_array['layout_id'] = "template_1";
+    $data_array['layout_id'] = "0";
     $data_array['subcategory_id'] = "$tid";
     $data_array['subcategory_title'] = "$term_name";
     $data_array['program_count'] = "$datacount";
@@ -297,9 +334,11 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+    $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -315,6 +354,8 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
     $query->fields('fss', array('field_story_syndication_value'));
+    $query->fields('fsr', array('field_story_reporter_target_id'));
+    $query->fields('fvu', array('field_video_upload_value'));
 
 
     //end
@@ -347,23 +388,50 @@ function generateProgramCategoryList($tid, $pageno) {
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      $field_story_reporter_target_id = $resvalue['field_story_reporter_target_id'];
+      $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
+      //video url start
+      $field_video_upload = $resvalue['field_video_upload_value'];
+      $file_id = file_usage($field_video_upload);
+      //to get the video of all the other formats
+      $video_formats = all_video_format($file_id);
+      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
+      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $filesize = $video_path_info['filesize'];
+      $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
+      //video url end
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      $create_date = date("Y-m-d H:i:s", $created);
-      $create_datetime = date("Y-m-d H:i:s", $created);
-      $changed_datetime = date("Y-m-d H:i:s", $changed);
+      //$create_date = date("Y-m-d H:i:s", $created);
+      //$create_datetime = date("Y-m-d H:i:s", $created);
+      //$changed_datetime = date("Y-m-d H:i:s", $changed);
+      
+      if($created){
+        $create_datetime = date("Y-m-d H:i:s", $created);
+        $create_date = date("Y-m-d H:i:s", $created);
+      }
+      else{
+          $create_datetime = "";
+          $create_date = "";
+      }
+      if($changed){
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else{
+          $changed_datetime = "";
+      }
       
         $photo_list_array[$listcount]['p_id'] = "$nid";
         $photo_list_array[$listcount]['p_title'] = "$title";
-        $photo_list_array[$listcount]['p_credit'] = "";
-        $photo_list_array[$listcount]['p_byline'] = "";
+        $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
+        $photo_list_array[$listcount]['p_byline'] = "$reporter_node";
         $photo_list_array[$listcount]['p_short_desc'] = "$field_story_kicker_text_value";
         $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['p_large_image'] = "$file_medium_img_url";
         $photo_list_array[$listcount]['p_is_default_player'] = "1";
-        $photo_list_array[$listcount]['p_url'] = "$weburl";
-        $photo_list_array[$listcount]['p_download_url'] = "MP4 URL";
+        $photo_list_array[$listcount]['p_url'] = "$stream_h264_hd_url";
+        $photo_list_array[$listcount]['p_download_url'] = "$video_path_mp4";
         $photo_list_array[$listcount]['p_view_count'] = "0";
         $photo_list_array[$listcount]['p_comment_count'] = "10";
         $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
@@ -372,7 +440,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['p_show_ad'] = "0";
         $photo_list_array[$listcount]['p_subcategory_id'] = "$tid";
         $photo_list_array[$listcount]['p_subcategory_title'] = "$term_name";
-        $photo_list_array[$listcount]['p_program_size'] = "3000";
+        $photo_list_array[$listcount]['p_program_size'] = "$filesize";
         $photo_list_array[$listcount]['p_anchor_id'] = "1";
         
         $listcount++;
@@ -421,7 +489,13 @@ function programCategoryListlPageRerourceValue($token) {
     
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-    $changed_datetime = date("Y-m-d H:i:s", $data_up_time);
+    //$changed_datetime = date("Y-m-d H:i:s", $data_up_time);
+    if($data_up_time){
+        $changed_datetime = date("Y-m-d H:i:s", $data_up_time);
+      }
+      else{
+          $changed_datetime = "";
+      }
     
     //data array building
     $output_array['data']['updated_datetime'] = $changed_datetime;
@@ -466,7 +540,7 @@ function generateProgramSectionList($Program_section_list){
     
     $output_ar['data'] = $data;
     $output_ar['lcount'] = $listcount;
-    $output_ar['updated_datetime'] = time();
+    $output_ar['updated_datetime'] = "";
     
     return $output_ar;
 }
