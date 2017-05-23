@@ -146,17 +146,12 @@ function getGalleryImgTag($galleryimg) {
       //print_ar($value, "getGalleryImgTag");exit();
       $fid = $value['value'];
       $fid_file = $value['revision_id'];
-      //Load field collection item
-      $load_collection = field_collection_item_load($value['value']);
-      $img_url = completeFilePath($load_collection->field_images['und'][0]['fid']);
-      $small_img_url = completeFilePath($load_collection->field_photo_small_image['und'][0]['fid']);
-      //end
-      //$img_url = completeFilePath($fid_file);
+      $img_url = completeFilePath($fid_file);
       // custom function for get img caption
       $caption = getImgCaption($fid);
       // custom function for get img byline
       $byline = getImgByline($fid);
-      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $small_img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
+      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
   }
   return $output;
