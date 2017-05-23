@@ -665,11 +665,19 @@ function itg_rapid_api_datanotexist_api($token) {
     }
     else{
        
-         $json_string = 'http://localhost/decode/sprint1/datanotexist_api.json';
+        $redis_key = "itgd_rapid_datanotexist_api_json";
+        $result_get = getRedis($redis_key);
 
-
-       //$jsondata = file_get_contents($json_string);
-       $jsondata = variable_get('datanotexist_api_json');
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('datanotexist_api_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+               
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -700,9 +708,24 @@ function itg_rapid_api_newslist($id, $cpageno, $token) {
         if(!is_numeric($cpageno)){
           $cpageno = 0;
         }
-       // call function from return data..
-       $jsondata = newscategoryPageRerourceValue($id, $cpageno);
-       //print_r($jsondata);exit();
+        
+        $redis_key = "itgd_rapid_api_newslist";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = newscategoryPageRerourceValue($id, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+        
+       $jsondata = json_decode($jsondata, true);
+       
        
 
      return $jsondata;
@@ -731,11 +754,25 @@ function itg_rapid_api_programlist($id, $cpageno, $token) {
         if(!is_numeric($cpageno)){
           $cpageno = 0;
         }
-       // call function from return data..
-       $jsondata = programcategoryPageRerourceValue($id, $cpageno);
+        
+        $redis_key = "itgd_rapid_api_programlist";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = programcategoryPageRerourceValue($id, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //print_r($jsondata);exit();
        
-
+        $jsondata = json_decode($jsondata, true);
      return $jsondata;
    }
 }
@@ -762,10 +799,24 @@ function itg_rapid_api_videolist($id, $cpageno, $token) {
         if(!is_numeric($cpageno)){
           $cpageno = 0;
         }
-       // call function from return data..
-       $jsondata = videocategoryPageRerourceValue($id, $cpageno);
-       //print_r($jsondata);exit();
+        
+        $redis_key = "itgd_rapid_api_videolist";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = videocategoryPageRerourceValue($id, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
        
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
    }
@@ -792,10 +843,23 @@ function itg_rapid_api_photodetail($id, $token) {
           $id = 0;
         }
         
-       // call function for return data..
-       $jsondata = photoDetailPageRerourceValue($id);
+        $redis_key = "itgd_rapid_api_photodetail";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = photoDetailPageRerourceValue($id);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+        
        //print_r($jsondata);exit();
-       
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
    }
@@ -825,10 +889,24 @@ function itg_rapid_api_photolist($id, $cpageno, $token) {
         if(!is_numeric($cpageno)){
           $cpageno = 0;
         }
-       // call function from return data..
-       $jsondata = photocategoryPageRerourceValue($id, $cpageno);
-       //print_r($jsondata);exit();
+        
+        $redis_key = "itgd_rapid_api_photolist";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = photocategoryPageRerourceValue($id, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
        
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
    }
@@ -849,12 +927,19 @@ function itg_rapid_api_server_error_master($token) {
         return services_error(t('Please enter valid token'), 406);
     }
     else{
+        
+        $redis_key = "itgd_rapid_server_error_master_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('server_error_master_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
        
-         $json_string = 'http://localhost/decode/sprint1/server_error_master.json';
-
-
-       //$jsondata = file_get_contents($json_string);
-       $jsondata = variable_get('server_error_master_json');
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -879,11 +964,18 @@ $get_token = variable_get('mobile_service_token');
     }
     else{
        
-         $json_string = 'http://localhost/decode/sprint1/master_config.json';
+        $redis_key = "itgd_rapid_master_config_json";
+        $result_get = getRedis($redis_key);
 
-
-       //$jsondata = file_get_contents($json_string);
-       $jsondata = variable_get('master_config_json');
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('master_config_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+        
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -907,9 +999,19 @@ function itg_rapid_api_config_update_status($token) {
         return services_error(t('Please enter valid token'), 406);
     }
     else{
+        
+        $redis_key = "itgd_rapid_config_update_status_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('config_update_status_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
       
-       $jsondata = variable_get('config_update_status_json');
-       //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
 
@@ -932,13 +1034,19 @@ function itg_rapid_api_hamburger_menu($token) {
         return services_error(t('Please enter valid token'), 406);
     }
     else{
+        
+        $redis_key = "itgd_rapid_hamburger_menu_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('hamburger_menu_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
        
-         $json_string = 'http://localhost/decode/sprint1/hamburger_menu.json';
-
-
-       //$jsondata = file_get_contents($json_string);
-       $jsondata = variable_get('hamburger_menu_json');
-       //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
 
