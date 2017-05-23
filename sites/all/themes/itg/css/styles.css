@@ -12267,6 +12267,15 @@ h1.about-us-heading + div p {
   border-radius: 50%;
   margin: 10px;
   overflow: hidden;
+  position: relative;
+}
+#main-container-budget #sortable1 li img, #main-container-budget #sortable2 li img, #main-container-budget #sortable3 li img, #main-container-budget #sortable4 li img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
 }
 #main-container-budget .budget-predictor-social-share .share-msg {
   font-weight: 700;
