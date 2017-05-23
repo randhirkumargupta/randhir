@@ -154,5 +154,5 @@ function getGalleryImgTag($galleryimg) {
       $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
   }
-  return $output;
+  return $output ;
 }
