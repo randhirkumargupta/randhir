@@ -68,6 +68,9 @@ define('SOCIAL_MEDIA', $role_array['Social Media']);
 define('MARKETING_MANAGER', $role_array['Marketing Manager']);
 define('FRONT_USER', $role_array['Front User']);
 define('KNOWLEDGE_CENTRE', $role_array['Knowledge Centre']);
+define('ADS_MANAGER', $role_array['Ads Manager']);
+define('SYNDICATION', $role_array['Syndication']);
+define('MOBILE_VAS', $role_array['Mobile VAS']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
 define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
 
