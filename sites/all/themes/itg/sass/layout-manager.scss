@@ -293,7 +293,6 @@ img{
 .trending-videos{
     @extend .list-none;
     border: 1px solid $border-color;
-    padding-top: 10px;    
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
     li{
         &+li{
@@ -403,6 +402,7 @@ img{
         }
         .top-colum-3{
             .itg-widget-parent{
+              margin-bottom: 26px;
                 .droppable {
                     height: 320px;
                 }
@@ -410,9 +410,6 @@ img{
             .droppable{
                 height: 272px;
                 overflow: hidden;
-            }
-            .itg-widget:first-child{
-                margin-bottom: 40px;
             }
         }
         &.itg-admin{
@@ -556,6 +553,20 @@ img{
     }
     @include sidebar-heading;
 }
+
+.trending-list{
+  .top-takes-video-container, .watch-right-now-video{
+    border: 1px solid $border-color;
+    h3{
+      display: none !important;
+    }
+    ul li{
+      padding: 10px 24px !important;
+      &:last-child{border-bottom: none !important;}
+    }
+  }
+}
+
 .sidebar-second .top-takes-video-container h3{
     display: block;
 }

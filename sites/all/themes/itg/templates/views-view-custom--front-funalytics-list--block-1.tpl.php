@@ -18,7 +18,7 @@ $short_url = shorten_url($row->url, 'goo.gl');
               $src = $split[1]; // X between quotes
               ?>
                     <div>
-                      <div class="title"><?php print $row['title']; ?></div>
+                      <div class="title" title="<?php echo $row['title'];?>"><?php print $row['title']; ?></div>
                       <div class="pic">
                         <?php print $row['field_itg_funalytics_image']; ?>
                         <div class="funalytics-socials">

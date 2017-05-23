@@ -1,7 +1,6 @@
 name = ITG db migrate
 description = Itg db migrate module.
 core = 7.x
-
 package = ITG
 
 dependencies[] = migrate

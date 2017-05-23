@@ -387,6 +387,7 @@ header{
 /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        white-space: nowrap;
                         @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
@@ -457,12 +458,19 @@ header{
                 display:none;
                 margin-left:0;
                 margin-right:0;
+                right: 0 !important;
+                width: 172px;
                 li{                    
                     float: none;
                     border: none;
                     border-bottom: 1px solid #000;
                     a{
                         display: block;
+                        line-height: normal;
+                        height: auto;
+                        padding: 7px 10px;
+                        white-space: normal;
+                        word-wrap: break-word;
                     }
                 }
             }
@@ -1093,24 +1101,27 @@ footer{
             margin-right: 50px;
         }
         .footer-social-link{
-            @include font(24px,null,null);
+          @include font(24px,null,null);
+          vertical-align: middle;
+          @include float(right);
+          padding-right: 50px;
+          .globle-search{
+            @include pos(absolute,3px,45px,null,null);
+            @include transition(all 0.5s ease-in-out );
+            width:0px;
+            overflow:hidden;
+            height:30px;
+            .search-text{
+              @include calculate-width(1);
+            } 
+            &.active{
+              width: 225px;
+            }
+          }
+          .fa{
+            @include font(24px);
             vertical-align: middle;
-            @include float(right);
-            padding-right: 50px;
-            .globle-search{
-                    @include pos(absolute,6px,110px,null,null);
-                    @include transition(all 0.5s ease-in-out );
-                    width:0px;
-                    overflow:hidden;
-                    height:30px;
-                    .search-text{
-                        @include calculate-width(1);
-                    }                    
-                }
-                .fa{
-                    @include font(24px);
-                    vertical-align: middle;
-                }
+          }
         }
         ul{
             li{
@@ -1531,6 +1542,11 @@ footer{
         }
     }
 }
+.trending-list{
+  .top-takes-video-container{
+    border: 1px solid $border-color;
+  }
+}
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
@@ -1819,7 +1835,7 @@ footer{
     }
     .description{
       iframe{
-        min-height: 480px;
+        min-height: 495px;
       }
     }
     ul{
@@ -2081,7 +2097,7 @@ footer{
               padding-left: 18px;
             }
             a{
-              color: #1a3c8d;
+              color: #026bc5;
               &:hover{text-decoration: underline;}
             }
         }
@@ -3177,6 +3193,7 @@ h1.category-heading{
 /*Start anchors listing css*/
 .view-widget-anchors-listing{    
     @include listing-with-image(anchor-listing,left,22px,pic,detail);
+    @include pager;
     .anchor-listing{
         padding:20px 0;
         border-bottom:1px solid $border-color;
@@ -3357,36 +3374,7 @@ h1.category-heading{
         }
     }
     #slider-range{
-        border:none;
-        margin: 20px 0 10px 0;
-        @include calculate-width(1);
-        font-family: $itg-roboto;
-        &.ui-slider-horizontal{            
-            height: 30px;
-            .ui-slider-handle{
-                width: 80px;
-                height: 38px;
-                background: #e6e5e3;
-                border: 1px solid #c1c1c1;
-                top: -20px;
-                margin-left: 0;
-                line-height: 38px;
-                text-align: center;
-                font-size: 15px;
-                color: #323232;
-                cursor: move;
-                background-image: linear-gradient(#f5f3f2,#e7e5e4);
-            }
-        }
-        &.ui-widget-content{
-            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
-        }
-        .ui-widget-header{
-            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
-            + a + a{
-                display: none;
-            }
-        }   
+      display: none;
     }
     .live-hightlight{
         h3{
@@ -3409,7 +3397,37 @@ h1.category-heading{
             text-transform: uppercase;
             @include font(16px,null,700);
             margin-top: 30px;
-            padding-bottom: 10px;
+            padding-bottom: 35px;
+        }
+        .irs{
+          .irs-line{
+            height: 30px;
+            top: 0;
+            background: $white-color url(../images/live-block-slider-icon.jpg) repeat-x;
+            span{
+              opacity: 0;
+            }
+          }
+          .irs-min, .irs-max, .irs-from, .irs-to{
+            display: none !important;
+          }
+          .irs-bar, .irs-bar-edge{
+            opacity: 0;
+          }
+          .irs-slider.single{
+            width: 80px;
+            height: 38px;
+            background: #e6e5e3;
+            border: 1px solid #c1c1c1;
+            top: -20px;
+            margin-left: 0;
+            line-height: 38px;
+            text-align: center;
+            font-size: 15px;
+            color: #323232;
+            cursor: move;
+            background-image: linear-gradient(#f5f3f2,#e7e5e4);
+          }
         }
     }
 }
@@ -6426,7 +6444,7 @@ section.sidebar{
             @include display-inline;
             position: relative;            
             background: #d1d1d1;
-            width: 190px;
+            width: 195px;
             height: 54px;
             line-height:54px;
             padding-right:10px;
@@ -6576,7 +6594,7 @@ section.sidebar{
 #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
-        font-size: 50px;
+        font-size: 40px;
         margin-bottom: 40px;
     }
 }
@@ -8792,19 +8810,27 @@ section.sidebar{
     }
     .program-livetv{
         background: #000;
-        padding: 15px 0px 75px 15px;
+        padding: 25px 0px 73px 20px;
         @include clearfix;       
         .live_tv_video{
-            @include float(left);
-            width: 82%;
+          float: left;
+          width: 100%;
+          max-width: 642px;
+          height: 0;
+          padding-bottom: 48.3%;
+          position: relative;
             iframe{
-                width: 100%;
-                height: 50vh;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
             }
         }
         .social-icon{
-            @include float(right);   
-            width: 18%;
+            width: 108px;
+            overflow: hidden;
+            padding-top: 65px;
             a{
                 color: #aaa9a9;
                 font-size: 13px;
@@ -10579,7 +10605,7 @@ span.smilies-title {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb{
   position: relative;
-  z-index: 9999;  
+  z-index: 9998;  
   color: #a1a1a1;
   font-family: roboto;
   padding-top:15px;
@@ -10847,17 +10873,14 @@ span.smilies-title {
     li{
       a.pic{
         @extend .zoom-image;
-        max-height: 55px;
+        width: 88px;
+        height: 66px;
       }
     }
     li + li{border-top: 1px solid #dddddd;}
   }
 }
-#block-itg-front-end-common-latest-from-businesstoday{
-  a.pic{
-    img{max-width: 56px;}
-  }
-}
+
 .agbutton .error-msg{color: red;}
 .jw-sharing-dock-btn {
   display: none;
@@ -11193,7 +11216,7 @@ span.close_btt {
 
 
 
-
+.no-tv-program{padding-bottom: 15px; color: red;}
 .search-icon-parent{
   position: relative;
   .search-icon-search{

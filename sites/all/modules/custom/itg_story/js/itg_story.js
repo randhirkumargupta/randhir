@@ -80,39 +80,39 @@
             // code for lock story check uncheck based on condition
             $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
                 if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
-                    $(".form-item-field-story-configurations-und-lock-story").show('');
+                    //$(".form-item-field-story-configurations-und-lock-story").show('');
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
                 }
                 else {
-                    $(".form-item-field-story-configurations-und-lock-story").hide('');
+                    //$(".form-item-field-story-configurations-und-lock-story").hide('');
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
                 }
             });
-
-
-            if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
-                $(".form-item-field-story-configurations-und-lock-story").show('');
-                $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
-            }
-            else {
-                $(".form-item-field-story-configurations-und-lock-story").hide('');
-                $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
-            }
-          
-
-            // Code for client Title field value set Null
-            $('#edit-field-story-configurations-und-commentbox').click(function() {
-                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
-                    $("#edit-field-story-comment-question-und-0-value").val('');
-                }
-            });
-
-            // Code for facebook field value set Null
-            $('#edit-field-story-social-media-integ-und-facebook').click(function() {
-                if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {
-                    $("#edit-field-story-facebook-narrative-und-0-value").val('');
-                }
-            });
+//
+//
+////            if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
+////                $(".form-item-field-story-configurations-und-lock-story").show('');
+////                $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
+////            }
+////            else {
+////                $(".form-item-field-story-configurations-und-lock-story").hide('');
+////                $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
+////            }
+//          
+//
+//            // Code for client Title field value set Null
+//            $('#edit-field-story-configurations-und-commentbox').click(function() {
+//                if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
+//                    $("#edit-field-story-comment-question-und-0-value").val('');
+//                }
+//            });
+//
+//            // Code for facebook field value set Null
+//            $('#edit-field-story-social-media-integ-und-facebook').click(function() {
+//                if ($("#edit-field-story-social-media-integ-und-facebook").is(":not(:checked)")) {
+//                    $("#edit-field-story-facebook-narrative-und-0-value").val('');
+//                }
+//            });
             
             
             // Code for tv field value set Null

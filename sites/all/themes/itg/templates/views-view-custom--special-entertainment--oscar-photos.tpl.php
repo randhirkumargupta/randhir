@@ -12,7 +12,7 @@ foreach($rows as $index => $row){
             } else {
                 print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
             }?>
-        <div class="title"><h3>
+        <div class="title"><h3  title="<?php print $row['title'] ; ?>">
           <?php 
             if (function_exists('itg_common_get_smiley_title')) {
               echo l(itg_common_get_smiley_title($row['nid'], 0, 65), "node/" . $row['nid'], array("html" => TRUE ));

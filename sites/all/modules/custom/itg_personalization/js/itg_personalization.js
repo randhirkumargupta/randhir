@@ -67,6 +67,37 @@ jQuery(document).ready(function () {
        var getid=jQuery(this).attr('id');
        jQuery('#edit-field-ugc-ctype-und').val(getid).trigger('change');
     })
+    
+    // code for follwing 
+    jQuery('.tobe-follow').click(function (event) {
+        var tid = jQuery(this).attr('data-value');
+        var dtag = jQuery(this).attr('data-tag');
+        var post_data = "&tid=" + tid + "&dtag=" + dtag;
+
+        jQuery.ajax({
+            'url': Drupal.settings.baseUrl.baseUrl + '/following-details-ajax',
+            'data': post_data,
+            'cache': false,
+            'type': 'POST',
+            // dataType: 'json',
+            beforeSend: function () {
+                jQuery('#widget-ajex-loader').show();
+            },
+            'success': function (result)
+            {
+                var obj = jQuery.parseJSON(result);
+
+
+                if (obj.success) {
+                    jQuery('#widget-ajex-loader').hide();
+                    window.location.reload('true');
+                }
+
+            }
+        });
+
+    });
+    
     // Change text of select option.
     jQuery("#edit-field-ugc-ctype-und option[value='photogallery']").text('Photogallery');
     jQuery("#edit-field-ugc-ctype-und option[value='videogallery']").text('Videogallery');

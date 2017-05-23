@@ -161,6 +161,7 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
         unset($form['field_story_short_headline']);
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
+         unset($form['field_story_configurations']['und']['#options']['comment']);
       }
       if ($user->uid) {
         $form['body']['und'][0]['#format'] = 'icon_format';
@@ -802,6 +803,7 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node , $view_mode , $langcode) {
+  
   if ($node->type == 'story') {
     global $user , $theme;
     // for lock story

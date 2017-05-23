@@ -2230,7 +2230,8 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category']['label'] = '';
+  $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
@@ -2239,7 +2240,8 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
   $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category_1']['label'] = 'Sections';
+  $handler->display->display_options['fields']['field_story_category_1']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_story_category_1']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
   /* Field: Content: Set As Featured */
   $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
@@ -4689,7 +4691,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4801,7 +4803,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4815,6 +4817,16 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['item_id']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['item_id']['exclude'] = TRUE;
   $handler->display->display_options['fields']['item_id']['separator'] = '';
+  /* Field: Field collection item: Thumb Image */
+  $handler->display->display_options['fields']['field_photo_small_image']['id'] = 'field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['table'] = 'field_data_field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['field'] = 'field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_photo_small_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_photo_small_image']['settings'] = array(
+    'image_style' => 'photo_landing_slider_thumb_88_86',
+    'image_link' => '',
+  );
 
   /* Display: photogallery story block */
   $handler = $view->new_display('block', 'photogallery story block', 'block_1');
@@ -4892,7 +4904,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
