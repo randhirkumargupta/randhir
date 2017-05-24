@@ -162,7 +162,7 @@ function be_lucky_today_registration3($form, $form_state) {
     $states = array();
     $states = get_states_from_country();
     $default_state = '';
-    foreach($states as $key => $value){
+    foreach ($states as $key => $value) {
         $default_state = $key;
         break;
     }
@@ -172,7 +172,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#prefix' => '<strong>',
       '#suffix' => '</strong>',
     );
-  
+
     $form['email'] = array(
       '#type' => 'textfield',
       '#title' => t('Email'),
@@ -213,7 +213,8 @@ function be_lucky_today_registration3($form, $form_state) {
     $city_arr = array('' => 'Select');
     if (isset($form_state['values']['state'])) {
         $city_arr = get_city_from_state($form_state['values']['state']);
-    }else{
+    }
+    else {
         $city_arr = get_city_from_state($default_state);
     }
     $form['city'] = array(
@@ -242,7 +243,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#title' => t('Mobile'),
       '#size' => 60,
       '#maxlength' => 128,
-      //~ '#required' => TRUE,
+      '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
       '#ajax' => array(
         'callback' => 'mobile_validation_ajax_callback',
@@ -259,20 +260,20 @@ function be_lucky_today_registration3($form, $form_state) {
     return $form;
 }
 
-function email_validation_ajax_callback($form, &$form_state){
+function email_validation_ajax_callback($form, &$form_state) {
     $email = $form_state['values']['email'];
     $result = get_survey_detail_by_field('email', $email);
-    if(count($result) > 0){
+    if (count($result) > 0) {
         form_set_error('email', t('Email has already used. Please enter another email.'));
         $form['email']['#prefix'] .= theme('status_messages');
     }
     return $form['email'];
 }
 
-function mobile_validation_ajax_callback($form, &$form_state){
+function mobile_validation_ajax_callback($form, &$form_state) {
     $mobile = $form_state['values']['mobile'];
     $result = get_survey_detail_by_field('mobile', $mobile);
-    if(count($result) > 0){
+    if (count($result) > 0) {
         form_set_error('mobile', t('Mobile number has already used. Please enter another mobile number'));
         $form['mobile']['#prefix'] .= theme('status_messages');
     }
@@ -300,21 +301,25 @@ function be_lucky_today_subscribe($form, $form_state) {
     return $form;
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
 function be_lucky_today_form_validate($form, &$form_state) {
-    switch($form_state['stage']){
+    switch ($form_state['stage']) {
         case 'registration3':
             $email = $form_state['values']['email'];
             $mobile = $form_state['values']['mobile'];
             $result = get_survey_detail_by_field('email', $email);
-            if(count($result) > 0){
+            if (count($result) > 0) {
                 form_set_error('email', t('Email has already used. Please enter another email.'));
             }
             $result = get_survey_detail_by_field('mobile', $mobile);
-            if(count($result) > 0){
+            if (count($result) > 0) {
                 form_set_error('mobile', t('Mobile number has already used. Please enter another mobile number.'));
-            }            
+            }
     }
-    
 }
 
 /**
@@ -402,6 +407,11 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     );
 }
 
+/**
+ * This function is used to get term name.
+ * @param int $tid
+ * @return array
+ */
 function get_term_name_by_tid($tid) {
     return db_select('taxonomy_term_data', 't')
             ->fields('t', array('name'))
@@ -630,6 +640,11 @@ meter;
     return $form;
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
 function be_lucky_form_submit($form, &$form_state) {
     $email = $_GET['email'];
     $fb_username = '';
@@ -696,6 +711,12 @@ function be_lucky_form_submit($form, &$form_state) {
     );
 }
 
+/**
+ * 
+ * @param String $field
+ * @param String $value
+ * @return Array
+ */
 function get_survey_detail_by_field($field = 'email', $value = '') {
     $survey = db_select('survey', 's');
     $survey->fields('s');
@@ -711,17 +732,6 @@ function get_survey_detail_by_field($field = 'email', $value = '') {
  */
 function get_city_from_state_ajax_callback($form, &$form_state) {
     return $form['city'];
-//    $state = $form_state['values']['state'];
-//    $cities = get_city_from_state($state);
-//    //$form['city']['#options'] = $cities;
-//    $form['city']['state_args'] = $state;
-//    $form['city']['#pre_render'] = array('itg_mobile_services_add_option_1');
-//    return array(
-//      '#type' => 'ajax',
-//      '#commands' => array(
-//        ajax_command_replace("#city_wrapper", render($form['city']))
-//      )
-//    );
 }
 
 /**
@@ -797,6 +807,58 @@ share;
     return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
+function thank_you_payment_success_form($form, &$form_state) {
+    unset($_SESSION['be_lucky_today']);
+    global $base_url;
+    $module_path = $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today');
+    $html = <<<share
+<ul class="social" style="width:156px;">
+<li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="$module_path/images/fb.png" alt="facebook"></a></li>
+<li><a href="https://twitter.com/intent/tweet?original_referer=http://indiatoday.intoday.in/be-lucky-today&amp;source=tweetbutton&amp;text=Grab the chance before it??s gone! Enter the India Today Survey %26 stand a chance to win an iPhone6: bit.ly/Social_sharing %23YourLuckToday" target="_blank" title="twitter"><img src="$module_path/images/twitter.png" alt="twitter"></a></li>
+<li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus"></a></li>
+</ul>
+share;
+    $form['message'] = array(
+      '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
+    );
+    $form['tsnmessage'] = array(
+      '#markup' => 'Payment process success.',
+    );
+    $form['socialshare'] = array(
+      '#markup' => $html,
+    );
+    $form['next'] = array(
+      '#type' => 'submit',
+      '#value' => t('Increase your Chances'),
+    );
+    return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ */
+function thank_you_payment_success_form_submit($form, &$form_state) {
+    $email = $_GET['email'];
+    $form_state['redirect'] = array(
+      'be-lucky-today/be-lucky-form',
+      array(
+        'query' => array(
+          'email' => $email,
+        )
+      ),
+    );
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ */
 function thank_you_payment_failed_form_submit($form, &$form_state) {
     $email = $_GET['email'];
     $form_state['redirect'] = array(

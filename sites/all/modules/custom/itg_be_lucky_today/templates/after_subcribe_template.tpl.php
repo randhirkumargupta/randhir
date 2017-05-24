@@ -2,7 +2,7 @@
     function callNow()
     {
         document.frm.method = "POST";
-        document.frm.action = "http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/testbelucky.jsp";
+        document.frm.action = "http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/testbelucky_kelton.jsp";
         document.frm.submit();
     }
     setTimeout(function () {

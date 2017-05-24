@@ -42,7 +42,7 @@ function itg_be_lucky_today_menu() {
       'title' => 'Be Lucky Today', //page title
       'description' => 'Be Lucky Today',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('thankyoupaymentsuccess'),
+      'page arguments' => array('thank_you_payment_success_form'),
       'access callback' => TRUE
     );
     $items['be-lucky-today/aftersubscribe'] = array(
@@ -70,6 +70,10 @@ function itg_be_lucky_today_menu() {
     return $items;
 }
 
+/**
+ * 
+ * @return array
+ */
 function itg_be_lucky_today_theme() {
     return array(
       'after_subcribe_theme' => array(
@@ -81,6 +85,10 @@ function itg_be_lucky_today_theme() {
     );
 }
 
+/**
+ * 
+ * @return NULL
+ */
 function after_subscirbe_callback() {
     if (!isset($_SESSION['be_lucky_today'])) {
         drupal_goto('/be-lucky-today');
@@ -90,17 +98,20 @@ function after_subscirbe_callback() {
     return NULL;
 }
 
+/**
+ * 
+ * @return array
+ */
 function email_confirmation_reference_list_callback() {
     return theme('email_confirmation_reference_list_theme');
-    return NULL;
 }
 
 /**
  * {@inheritdoc}
  */
 function termscondition_callback($js = NULL) {
-$html = "<h3>Terms & Conditions</h3>";
-	$html.= <<<terms
+    $html = "<h3>Terms & Conditions</h3>";
+    $html .= <<<terms
 	<p>Please read the terms and conditions carefully before accepting: The following Terms & Conditions are applicable to all the participants of "Your-Luck-Today" campaign, promoted / organized by Living Media India Ltd., (hereinafter referred to as LMIL). The rules can be amended or varied from time to time by LMIL. The duration of the campaign is till 31st March 2018. By participating you agree that you are not assured of any prize but you shall have a fair chance of winning a free Prize by draw conducted at the end of every 3 months . All residents of India who have completed 18 years of age on the date of entry/participation are eligible to participate in the Offer. By entering the Contest, you hereby warrant that all information submitted by you in your Entry is true, accurate and complete in every respect. LMIL reserves the right to verify any information contained in your Entry and/or your eligibility to enter the Contest. LMIL reserves the right to disqualify any and all entries that do not meet the rules and regulations of the Contest. These include entries submitted with invalid or incorrect information.
 </p>
 <p>
@@ -269,16 +280,4 @@ terms;
         $output = $html;
         return $output;
     }
-}
-
-/**
- * {@inheritdoc}
- */
-function thankyoupaymentsuccess() {
-    unset($_SESSION['be_lucky_today']);
-    echo '<pre>';
-    print_r($_POST);
-    print_r($_GET);
-    die('done');
-    return $form;
 }
