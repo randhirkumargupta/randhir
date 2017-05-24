@@ -104,6 +104,7 @@ function after_subscirbe_callback() {
  * @return array
  */
 function email_confirmation_reference_list_callback() {
+    drupal_add_js(drupal_get_path('module', 'itg_be_lucky_today') . '/js/itg_be_lucky_today.js');
     return theme('email_confirmation_reference_list_theme');
 }
 

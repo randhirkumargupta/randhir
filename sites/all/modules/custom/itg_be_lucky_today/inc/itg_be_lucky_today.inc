@@ -791,6 +791,12 @@ function thank_you_payment_failed_form($form, &$form_state) {
 <li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus"></a></li>
 </ul>
 share;
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_be_lucky_today') . '/js/itg_be_lucky_today.js',
+    );
+    $form['#attached']['css'] = array(
+      drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
+    );
     $form['message'] = array(
       '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
     );
@@ -821,6 +827,12 @@ function thank_you_payment_success_form($form, &$form_state) {
 <li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus"></a></li>
 </ul>
 share;
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_be_lucky_today') . '/js/itg_be_lucky_today.js',
+    );
+    $form['#attached']['css'] = array(
+      drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
+    );
     $form['message'] = array(
       '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
     );
