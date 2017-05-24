@@ -200,3 +200,11 @@ var insert_magazine = function (response) {
 //    jQuery('#magazine_wrapper').html(response);
 }
 
+function fbs_click()
+{
+    u = "bit.ly/Social_sharing";
+    t = "test title";
+    window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436');
+    console.log('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t));
+    return false;
+}
