@@ -1547,12 +1547,10 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
  */
 
 function delete_daily_motion_video_callback() {
-  $fid = arg(1);
-  $video_id = arg(2);
+  $video_id = arg(1);
 
   $query = db_delete('dailymotion_response_details');
   $query->condition('video_id', $video_id);
-  $query->condition('fid', $fid);
   if ($query->execute()) {
     $video_info = itg_videogallery_get_video_solrcontent($video_id);
     if (!empty($video_exist_innode[0]->nid)) {
@@ -1760,14 +1758,14 @@ function daily_motion_video_dashboard_rows() {
       if ($record->encoding_progress == '100') {
         $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
 
         $status_flag = '<span class="under-precess">Publishing Processing (' . $record->publishing_progress . ')%</span>';
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress == '100') {
@@ -1775,7 +1773,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Ready to Use</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/"  . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
@@ -1783,7 +1781,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Completed</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->fid . '/' . $record->video_id . "' > Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
     }
