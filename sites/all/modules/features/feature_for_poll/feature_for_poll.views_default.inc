@@ -895,12 +895,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field collection item: Master Title */
-  $handler->display->display_options['fields']['field_poll_question_text']['id'] = 'field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['table'] = 'field_data_field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['field'] = 'field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['label'] = 'Question';
-  $handler->display->display_options['fields']['field_poll_question_text']['hide_empty'] = TRUE;
   /* Field: Content: Poll Question Image */
   $handler->display->display_options['fields']['field_poll_question_image']['id'] = 'field_poll_question_image';
   $handler->display->display_options['fields']['field_poll_question_image']['table'] = 'field_data_field_poll_question_image';
