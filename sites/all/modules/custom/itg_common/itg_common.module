@@ -1035,10 +1035,9 @@ function _occupation_from_tid_for_sef_url($tid) {
 }
 
 /**
- * 
- * @param type $nid
- * @return boolean
  * Check whether sponsor story or not.
+ * @param int $nid
+ * @return boolean
  */
 function _is_sponsor_story_article($nid){
   $is_sponsor = FALSE;
@@ -1063,11 +1062,10 @@ function _is_sponsor_story_article($nid){
 }
 
 /**
- * 
- * @global type $base_path
- * @param type $url
- * @return type
  * Returns internal path from external URL.
+ * @global string $base_path
+ * @param string $url
+ * @return string
  */
 function _get_int_path_from_url($url) {
   global $base_path;

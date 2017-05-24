@@ -374,8 +374,8 @@ function itg_html_head_alter(&$head_elements) {
 }
 
 /**
- * @param type $variables
- * @return type
+ * @param array $variables
+ * @return string
  */
 function itg_link($variables) {
   $url_path = $variables['path'];
