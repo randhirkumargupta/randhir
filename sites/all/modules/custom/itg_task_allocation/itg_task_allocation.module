@@ -369,9 +369,9 @@ function task_get_mail_content($node, $event, $to, $user_name) {
   $content .= $mail_content;
   $content .= '</body>';
   $content .= '</html>';
-  
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
   $params = array(
-    'body' => $content,
+    'body' => $mail_content,
     'subject' => $task_subject,
   );
 //  $to = 'gourav.walia@kelltontech.com';
@@ -590,8 +590,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $content .= $body_data;
     $content .= '</body>';
     $content .= '</html>';
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
     $params = array(
-      'body' => $content,
+      'body' => $mail_content,
       'subject' => $subject,
     );
 //    $to_assignee = 'gourav.walia@kelltontech.com';
@@ -622,8 +623,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $content .= $body_data;
     $content .= '</body>';
     $content .= '</html>';
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
     $params = array(
-      'body' => $content,
+      'body' => $mail_content,
       'subject' => $subject,
     );
 //    $to_assigner = 'gourav.walia@kelltontech.com';

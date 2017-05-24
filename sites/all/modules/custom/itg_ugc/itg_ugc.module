@@ -107,8 +107,8 @@ function itg_ugc_send_follow_story_content_mail($node) {
           $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
         }
 
-        $mail_content = itg_follow_story_get_mail_content($node);
-
+        $mail_contents = itg_follow_story_get_mail_content($node);
+        $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
         $params = array(
           'body' => $mail_content,
           'subject' => $mail_subject,
