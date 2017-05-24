@@ -74,7 +74,6 @@ function import_auto_csv_validate($form, &$form_state) {
   );
 
   if ($file = file_save_upload('csvfile', $validators, "public://", FILE_EXISTS_REPLACE)) {
-	  watchdog("itg_auto", print_r($file, true)); 
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
