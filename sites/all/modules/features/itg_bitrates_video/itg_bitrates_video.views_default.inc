@@ -41,6 +41,7 @@ function itg_bitrates_video_views_default_views() {
   $handler->display->display_options['fields']['field_bitrate_video_id']['id'] = 'field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['table'] = 'field_data_field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['field'] = 'field_bitrate_video_id';
+  $handler->display->display_options['fields']['field_bitrate_video_id']['label'] = 'Video Id ';
   /* Field: Content: Video Url */
   $handler->display->display_options['fields']['field_video_url']['id'] = 'field_video_url';
   $handler->display->display_options['fields']['field_video_url']['table'] = 'field_data_field_video_url';

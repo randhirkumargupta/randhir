@@ -46,7 +46,7 @@ function itg_users_menu() {
 /**
  * Implements hook_form_alter().
  */
-function itg_users_form_alter(&$form, &$form_state, $form_id) {  
+function itg_users_form_alter(&$form, &$form_state, $form_id) { 
   global $user, $base_url;
   //code for multidomain
   if ($form_id == 'user_login') {
@@ -122,7 +122,17 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_subscribe_for_newsletter']);
       }
     }
-
+    // show extra user fields for siteadmin
+    if ($user->uid != 1) {
+      if (!array_key_exists(SITE_ADMIN, $user->roles)) {
+        $form['field_story_issue_date']['#attributes']['class'][] = 'element-hidden';
+        $form['field_short_description']['#attributes']['class'][] = 'element-hidden';
+        $form['field_user_counrty']['#attributes']['class'][] = 'element-hidden';
+        $form['field_personalization_state']['#attributes']['class'][] = 'element-hidden';
+        $form['field_personalization_city']['#attributes']['class'][] = 'element-hidden';
+      }
+    }
+    
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
       $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
       $user_id_log = $user->uid;
