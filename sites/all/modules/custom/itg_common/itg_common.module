@@ -87,6 +87,13 @@ function itg_common_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+  $items['get-mongo-detail/%/%'] = array(
+      'page callback' => 'itg_get_mongo_detail',
+      'access callback' => TRUE,
+      'file' => 'includes/itg_mongo.helper.inc',
+      'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 

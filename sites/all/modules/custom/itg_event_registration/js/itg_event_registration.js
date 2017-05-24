@@ -52,7 +52,7 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
-    jQuery(".page-event-node-add-event").on("mousemove", function () {
+    jQuery(".page-event").on("mousemove", function () {
         var total_value_event = jQuery('input[name="total_value"]').val();
         if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
             total_value_event = 0;
@@ -217,4 +217,13 @@ jQuery(document).ready(function () {
     // End code for Coupon Code
 
 
+});
+
+
+jQuery(document).ajaxSuccess(function () {
+    var error_message_length = jQuery(".messages--error").length;
+    console.log(error_message_length);
+    if(error_message_length>1) {
+        jQuery("body").find("#page-title").next(".messages--error").remove();
+    }
 });
