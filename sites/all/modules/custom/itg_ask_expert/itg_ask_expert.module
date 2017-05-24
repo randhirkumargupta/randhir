@@ -241,8 +241,9 @@ function itg_ask_expert_node_insert($node) {
         $content .= '</body>';
         $content .= '</html>';
 //        $mail_content = itg_ask_expert_get_mail_content($node);
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $to = implode(',', $expert_arr);
@@ -289,8 +290,9 @@ function itg_ask_expert_node_update($node) {
         $content .= $mail_content;
         $content .= '</body>';
         $content .= '</html>';
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);

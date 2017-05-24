@@ -174,6 +174,10 @@ function itg_logged_in_user_visited_node() {
     array('data' => t('Node Id')) ,    
     array('data' => t('Type')) ,
     array('data' => t('No Of Users Visited')) ,
+    array('data' => t('Comment')) ,
+    array('data' => t('Like')) ,
+    array('data' => t('Dislike')) ,
+    array('data' => t('Share')) ,
   );
   if (function_exists('mongodb')) {
     $connection = mongodb();
@@ -245,6 +249,20 @@ function itg_logged_in_user_visited_node() {
       $pageNumbers = $pagination->links();
       $cou = 1;
       foreach ($user_details_pages as $row) {
+        if(function_exists('itg_get_mongo_detail')) {
+        $comment = itg_get_mongo_detail('comment', $row['nid']);
+        if($row['name'] == 'story') {
+          $id = '0'.$row['nid'];
+        } else {
+          $id = $row['nid'];
+        }
+        $like = itg_get_mongo_detail('like', $id);
+        $dislike = itg_get_mongo_detail('dislike', $id);
+        $twitter_share = itg_get_mongo_detail('t_share', $row['nid']);
+        $google_share = itg_get_mongo_detail('g_share', $row['nid']);
+        $fb_share = itg_get_mongo_detail('f_share', $row['nid']);
+        $tot_share = $twitter_share.'<br/>'.$google_share.'<br/>'.$fb_share;
+        }
         $rows[] = array(
           array('data' => $cou) ,
           array('data' => l($row['title'] , 'node/' . $row['nid'] , array("attributes" => array("target" => '_blank')))) ,
@@ -252,6 +270,10 @@ function itg_logged_in_user_visited_node() {
           //array('data' => $row['url']) ,
           array('data' => $row['name']) ,
           array('data' => $row['count']) ,
+          array('data' => $comment) ,
+          array('data' => $like['like_count']) ,
+          array('data' => $dislike['dislike_count']) ,
+          array('data' => $tot_share) ,
         );
         $cou++;
       }

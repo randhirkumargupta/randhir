@@ -650,7 +650,7 @@ function itg_photogallery_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_photogallery_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'photogallery' && $_GET['category'] != '') {
+  if (isset($node->type) && $node->type == 'photogallery' && $_GET['category'] != '') {
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').live('click', function(){
                var section_id = jQuery(this).val();

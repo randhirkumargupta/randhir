@@ -216,7 +216,7 @@ function itg_event_registration_form_alter(&$form , &$form_state , $form_id) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
 
-      if ($registration_type == 'free') {
+      if ($registration_type == 'free' || $registration_type == 'invite') {
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
         $form['add_form_scroll_container'] = array(
@@ -423,6 +423,7 @@ function custom_function() {
  */
 function itg_event_registration_form_event_validate($form , &$form_state) { // config
   $data = itg_event_registration_config_field($_SESSION['current_event_id']);
+  drupal_get_messages('error');
   foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
     if (is_numeric($key)) {
       // Validate by configuration
@@ -753,17 +754,26 @@ function itg_event_registration_registered_user_detail($nid) {
  * @return int $total_registration_users
  */
 function itg_event_registration_get_total_registration($nid) {
-
-  // Count group users registration for an event
-  $main_user_nid_arr = itg_common_select_field_value('entity_id' , 'field_data_field_story_source_id' , 'field_story_source_id_value' , $nid);
-  $registration_group_users = 0;
-
-  foreach ($main_user_nid_arr as $main_user_nid) {
-    $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid , 'field_data_field_erf_registration_fee' , 'entity_id');
+  $node_data = node_load($nid);
+  if ($node_data->field_event_type[LANGUAGE_NONE][0]['value'] == 'paid') {
+    $db_query = db_select('itg_payment_order_details' , 'od');
+    $db_query->addExpression('SUM(number_of_person)' , 'sum');
+    $db_query->condition('od.event_id' , $nid);
+    $data = $db_query->execute()->fetchCol()[0];
+    return $data;
   }
-  // Total count for an event
-  $total_registration_users = $registration_group_users;
-  return (int) $total_registration_users;
+  else {
+    // Count group users registration for an event
+    $main_user_nid_arr = itg_common_select_field_value('entity_id' , 'field_data_field_story_source_id' , 'field_story_source_id_value' , $nid);
+    $registration_group_users = 0;
+
+    foreach ($main_user_nid_arr as $main_user_nid) {
+      $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid , 'field_data_field_erf_registration_fee' , 'entity_id');
+    }
+    // Total count for an event
+    $total_registration_users = $registration_group_users;
+    return (int) $total_registration_users;
+  }
 }
 
 /**
@@ -927,6 +937,7 @@ function itg_event_registration_node_insert($node) {
       );
 
       $_SESSION['event_registration_payment']['event_key'] = itg_payment_encode_data($coupon_values);
+      $_SESSION['event_registration_payment']['number_of_person'] = count($node->field_erf_registration_fee['und']);
       $_SESSION['event_registration_payment']['event_full_url'] = $base_url . '/' . arg(1) . '/' . arg(2) . '/registration';
       $qry = db_insert('coupons_activity_details')
           ->fields(array('coupon_code' , 'event_id' , 'reg_id' , 'total_payment' , 'redeemed_payment' , 'status' , 'created' , 'changed'))

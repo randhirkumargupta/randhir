@@ -979,6 +979,9 @@ function _simplesamlphp_auth_get_fname() {
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.name']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['twitter.name'];
   }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.name'];
+  }
   else {
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
   }
@@ -1038,7 +1041,15 @@ function _simplesamlphp_auth_get_twitterimage() {
   $twitterimage = '';
   global $seg;
   
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.profile_image_url']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['twitter.profile_image_url'];
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook_photo']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook_photo'];
+  }
+  else {
+   $seg = '';
+  }
   
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
@@ -1298,7 +1309,7 @@ function simplesaml_twitter_image($url) {
   $image_extension = end(explode('.', $image_url));
   $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
   $file = file_load($file_data_temp->fid);
-  file_usage_add($file, 'itg_clone_image', 'file', 3);
+  file_usage_add($file, 'itg_sso_image', 'file', 4);
 
   return $file_data_temp->fid;
 }

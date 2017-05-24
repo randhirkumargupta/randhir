@@ -52,7 +52,7 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
-    jQuery(".page-event-node-add-event").on("mousemove", function () {
+    jQuery(".page-event").on("mousemove", function () {
         var total_value_event = jQuery('input[name="total_value"]').val();
         if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
             total_value_event = 0;
@@ -165,6 +165,8 @@ jQuery(document).ready(function () {
                         jQuery('[name="coupon_code"]').attr('readonly', true);
                         if (obj_success['discounted_value'] == 0) {
                             jQuery('.form-field-name-field-erf-payment-gateway').hide();
+                            jQuery('.event-total-fees-text').hide();                            
+                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");                            
                             jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
                         }
                     }
@@ -194,6 +196,8 @@ jQuery(document).ready(function () {
             jQuery('.coupon_code_message').html('');
             jQuery('.form-field-name-field-erf-payment-gateway').show();
             jQuery("#edit-field-erf-payment-gateway-und").show();
+            jQuery(".free-class").remove();
+            jQuery(".event-total-fees-text").show();
         }
     });
 
@@ -217,4 +221,13 @@ jQuery(document).ready(function () {
     // End code for Coupon Code
 
 
+});
+
+
+jQuery(document).ajaxSuccess(function () {
+    var error_message_length = jQuery(".messages--error").length;
+    console.log(error_message_length);
+    if(error_message_length>1) {
+        jQuery("body").find("#page-title").next(".messages--error").remove();
+    }
 });
