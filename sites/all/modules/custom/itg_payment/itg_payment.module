@@ -44,14 +44,14 @@ function itg_payment_menu() {
 
   $items['itg-payment/icici-payment-success'] = array(
     'title' => 'Payment success' ,
-    'page callback' => 'itg_icici_payment_success_page' ,
+    'page callback' => 'itg_payment_success_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
-    'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_response_fail' ,
+    'title' => 'Payment cancel' ,
+    'page callback' => 'itg_payment_cancel_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );

@@ -9,6 +9,9 @@
  * @return string|bool
  */
 function itg_event_registration_form($form, &$form_state) {
+  if(isset($_SESSION['recent_event_payment_url'])) {
+    unset($_SESSION['recent_event_payment_url']);
+  }
   $arg = arg();
   $event_id = itg_event_registration_get_event_nid();
   if ($arg[0] == 'event') {
