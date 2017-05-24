@@ -44,10 +44,15 @@ function itg_common_custompath_insert_load($node) {
   }
 
   $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection) && $node->type != 'reporter'|| ($node->type == 'podcast')) {
+  if (!empty($getsection) && $node->type != 'reporter' || ($node->type == 'podcast')) {
     if ($node->type == 'story' && is_issue_baised_magazine($node)) {
-      $pathdata = 'magazine';
-      $pathdata .= '/' . get_path_from_category($getsection);
+      if (!empty($node->field_story_select_supplement['und'][0]['target_id'])) {
+        $pathdata = 'magazine/supplement';
+      }
+      else {
+        $pathdata = 'magazine';
+        $pathdata .= '/' . get_path_from_category($getsection);
+      }
       //Get node type.
       $pathdata .= '/' . $node->type;
       // Get issue date.
@@ -241,7 +246,7 @@ function itg_common_custompath_migrated_load($node , $type = NULL) {
     $set_hierarchy = array_reverse($section_hierarchy);
     if ($type != 'update_migrated') {
       $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      
+
       $newpath = $pathdata;
     }
     else {
@@ -290,7 +295,6 @@ function get_path_from_category($tid) {
   }
   return implode('/' , $section);
 }
-
 
 /**
  * @param string $entity_type
