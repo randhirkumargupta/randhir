@@ -43,7 +43,8 @@ function itg_be_lucky_today_menu() {
       'description' => 'Be Lucky Today',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('thank_you_payment_success_form'),
-      'access callback' => TRUE
+      'access callback' => TRUE,
+      'file' => 'inc/itg_be_lucky_today.inc',
     );
     $items['be-lucky-today/aftersubscribe'] = array(
       'title' => 'Be Lucky Today', //page title
