@@ -14226,6 +14226,17 @@ span.close_btt {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 
+@media (min-width: 320px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: auto;
+    padding-left: 154px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 154px;
+  }
+}
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
@@ -14242,6 +14253,16 @@ span.close_btt {
   }
 }
 @media (min-width: 992px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: auto;
+    padding-left: 180px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 180px;
+  }
+
   .modal-lg {
     width: 900px;
   }
