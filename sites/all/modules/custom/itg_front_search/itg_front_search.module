@@ -236,7 +236,7 @@ function itg_front_search_views_pre_render(&$view) {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
       }
 
-      $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Videogallery' => 'Videos', 'photogallery' => 'Photo gallery', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast', );
+      $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Videogallery' => 'Videos', 'photogallery' => 'Photo gallery', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
       $search_url = 'topic';
     }
 
