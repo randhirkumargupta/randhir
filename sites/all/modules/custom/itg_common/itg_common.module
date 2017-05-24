@@ -1034,3 +1034,57 @@ function _occupation_from_tid_for_sef_url($tid) {
   return $term_data->name;
 }
 
+/**
+ * Check whether sponsor story or not.
+ * @param int $nid
+ * @return boolean
+ */
+function _is_sponsor_story_article($nid){
+  $is_sponsor = FALSE;
+  if(isset($nid)){
+    $query = db_select('node', 'n');
+    $query->join('field_data_field_story_configurations', 'fc', 'fc.entity_id = n.nid');
+    $query->fields('fc', array('field_story_configurations_value'));
+    $query->condition('n.nid', $nid, '=');
+    $query->condition('n.type', 'story', '=');
+    $query->condition('fc.bundle', 'story', '=');
+    $query_result = $query->execute()->fetchAll();
+    if(!empty($query_result)){
+      foreach ($query_result as $config_val){
+        if($config_val->field_story_configurations_value == 'sponsor'){
+          $is_sponsor = TRUE;
+          break;
+        }
+      }
+    }    
+  }
+  return $is_sponsor;
+}
+
+/**
+ * Returns internal path from external URL.
+ * @global string $base_path
+ * @param string $url
+ * @return string
+ */
+function _get_int_path_from_url($url) {
+  global $base_path;
+  $int_path = '';
+  // Get hostname
+  preg_match("/^(https?:\/\/)?([^\/]+)/i", $url, $domain);
+  // Format localhost + base_path (http://hostname/drupalbase)
+  $base = (isset($domain[0]) ? $domain[0] : '') . $base_path;
+  // If $url contains $base, remove the $base part
+  if (strpos($url, $base) === 0) {
+    $path = str_replace($base, '', $url);
+  }
+  // $url is presumed to be without $base part (internal path?)
+  else {
+    $path = $url;
+  }
+  // Parse the path (without $base)
+  $result = drupal_parse_url($path);
+  $int_path = drupal_get_normal_path($result['path']);
+  return $int_path;
+}
+
