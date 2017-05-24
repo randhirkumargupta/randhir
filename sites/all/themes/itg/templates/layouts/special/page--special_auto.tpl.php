@@ -115,6 +115,52 @@ if ($theme != 'itgadmin') {
     <div class="row itg-top-section">
         
         <div class="top-block">
+			<div class="col-md-12"> 
+            <div class="widget-help-text">Auto Form Header</div> 
+			 <div class="itg-widget"> 
+			  <div class="droppable <?php  print $gray_bg_layout; ?>"> 
+			   <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'].$widget_data['itg-block-10']['widget_display_name']; ?>"> 
+				 <?php if (($theme != 'itgadmin' || isset($preview)) && (!empty($widget_data['itg-block-10']['block_title']))) { ?> 
+					 <span class="widget-title"><?php print $widget_data['itg-block-10']['block_title']; ?></span> 
+				  <?php } ?> 
+					 <!-- for admin  --> 
+				  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?> 
+					<div class="widget-settings"> 
+					  <div class="widget-title-wrapper"> 
+						<span class="widget-title" data-id="itg-block-10"><?php print $widget_data['itg-block-10']['block_title']; ?></span> 
+						<input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-10']['block_title']; ?>" name="itg-block-10" class="block_title_id" placeholder="Enter Title" /> 
+					  </div> 
+					  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span> 
+					</div> 
+				   <?php } ?>   
+				   
+					<div class="data-holder" id="itg-block-10" widget-style="auto_master_form"> 
+					  <?php 
+						if (isset($widget_data['itg-block-10']['widget'])) { 
+						  print $widget_data['itg-block-10']['widget']; 
+						} else{ 
+						  print '<div class="widget-placeholder"><span>'.t('Auto Master Form').'</span></div>'; 
+						} 
+					  ?> 
+					</div> 
+				  </div>              
+				</div>                
+			</div>   
+        </div> 
+	<div class="col-md-8"> 
+		<div class="widget-help-text"></div> 
+            <div class=""> 
+              <div class="itg-widget"> 
+               <?php 
+				   if (module_exists('itg_auto_search')) { 
+						$block_auto_search = block_load('itg_auto_search', 'auto_master_compare_widget'); 
+						$render_array = _block_get_renderable_array(_block_render_blocks(array($block_auto_search))); 
+						print render($render_array); 
+					} 
+				?> 
+            </div> 
+            </div> 
+	</div>
 <div class="col-md-8">
   <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
             <div class="">
