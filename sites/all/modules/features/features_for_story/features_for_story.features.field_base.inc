@@ -1231,6 +1231,7 @@ function features_for_story_field_default_field_bases() {
         'nofollow' => 'No follow',
         'lock_story' => 'Lock Story',
         'developing_story' => 'Developing Story',
+        'sponsor' => 'Sponsor Story',
       ),
       'allowed_values_function' => '',
     ),
