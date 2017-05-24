@@ -8,7 +8,8 @@
 
 function itg_sso_otp_mail_content($rand_otp, $to) {
 
-  $mail_content = itg_sso_notification_otp_content($rand_otp);
+  $mail_contents = itg_sso_notification_otp_content($rand_otp);
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
   $params = array(
     'body' => $mail_content,
     'subject' => $mail_subject,

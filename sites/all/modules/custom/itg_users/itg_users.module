@@ -572,9 +572,10 @@ function itg_users_user_update(&$edit, $account, $category) {
         $mail_body = $mail_content->field_mail_body_password_changed[LANGUAGE_NONE][0]['value'];
         $mail_fname = str_replace('[itg_mail_token:itg_account_user_fname]', $fname, $mail_body);
         $mail_lname = str_replace('[itg_mail_token:itg_account_user_lname]', $lname, $mail_fname);
-        $mail_content = $mail_lname;
+        $mail_contents = $mail_lname;
       }
 //      $mail_content = itg_users_get_mail_content($role, 'Password Changed');
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
       $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
