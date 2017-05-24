@@ -73,8 +73,7 @@ function import_auto_csv_validate($form, &$form_state) {
     'file_validate_extensions' => array('csv'),
   );
 
-  if ($file = file_save_upload('csvfile', $validators, "public://", FILE_EXISTS_REPLACE)) {
-	  watchdog("itg_auto", print_r($file, true)); 
+  if ($file = file_save_upload('csvfile', $validators, FALSE, FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
@@ -90,7 +89,6 @@ function import_auto_csv_validate($form, &$form_state) {
  */
 function import_auto_form_submit($form, &$form_state) {
   $handle = fopen(drupal_realpath($form_state['values']['csvupload']), 'r');
-  watchdog("itg_auto", print_r(drupal_realpath($form_state['values']['csvupload']), true)); 
   $values = array();
   $already_exist = array();
   while ($line = fgetcsv($handle)) {
