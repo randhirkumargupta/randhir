@@ -396,6 +396,7 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
 function itg_common_cancel_button($form, &$form_state) {
 
   $query_array = array();
+  $query_str = '';
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
   }
