@@ -140,7 +140,6 @@ function event_backend_user_default_permissions() {
   $permissions['event registered users'] = array(
     'name' => 'event registered users',
     'roles' => array(
-      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
