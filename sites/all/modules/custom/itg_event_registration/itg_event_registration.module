@@ -423,6 +423,7 @@ function custom_function() {
  */
 function itg_event_registration_form_event_validate($form , &$form_state) { // config
   $data = itg_event_registration_config_field($_SESSION['current_event_id']);
+  drupal_get_messages('error');
   foreach ($form['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $field_collection_reg) {
     if (is_numeric($key)) {
       // Validate by configuration

@@ -215,7 +215,7 @@ function ugc_comment_form_submit($form, &$form_state) {
     $con = mongodb();
     $people = $con->itgcms_comment;
     $comment_user = $con->itgcms_comment_user;
-    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "activity" => "comment", "status" => 1, "uid" => $user->uid , "timestamp" => time());
+    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "activity" => "comment", "status" => 1, "uid" => $user->uid , "timestamp" => time(), "ip" => $_SERVER['REMOTE_ADDR']);
     $result = $people->insert($qry);
     $check_user_existance = ugc_comment_user_status($femail);
     if(empty($check_user_existance['email'])) {

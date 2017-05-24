@@ -38,6 +38,19 @@ function itg_sso_user_mobile_check($mobile) {
 }
 
 /**
+ * Get Duplicate mobile.
+ * @param int $mobile
+ */
+function itg_social_user_mobile_check($mobile) {
+  
+  $sso_user_check_mobile = db_select('field_data_field_mobile_number', 'fm')->fields('fm', array('entity_id'));
+  $sso_user_check_mobile->condition('fm.field_mobile_number_value', $mobile, '=');
+  $result = $sso_user_check_mobile->execute()->fetchfield();
+  return $result;
+  
+}
+
+/**
  * Get otp value by mobile or email.
  * @param int $mobile
  * @param string $email

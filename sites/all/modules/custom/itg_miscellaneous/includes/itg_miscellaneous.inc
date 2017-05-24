@@ -200,60 +200,6 @@ function get_content_type_list_for_this_term($tid) {
   return '';
 }
 
-/**
- * Helper function to show mongo detail
- */
-function itg_get_mongo_detail() {
-  $type = arg(1);
-  $id = arg(2);
-  $data = '';
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    if ($type == 'likedislike') {
-      $people = $con->itg_custom_flag_count;
-      $cond = array('nid' => $id);
-      $cursor = $people->find($cond);
-      foreach ($cursor as $document) {
-        print 'Like : ' . $document['like_count'];
-        print '<br/>';
-        print 'DisLike : ' . $document['dislike_count'];
-      }
-    }
-    if ($type == 't_share') {
-      $people = $con->front_user_activity;
-      $cond = array('nid' => $id, 'activity' => 'twitter_share');
-      $cursor = $people->count($cond);
-      print 'Twitter share : ' . $cursor;
-    }
-
-    if ($type == 'g_share') {
-      $people = $con->front_user_activity;
-      $cond = array('nid' => $id, 'activity' => 'google_share');
-      $cursor = $people->count($cond);
-      print 'Google share : ' . $cursor;
-    }
-    
-    if ($type == 'comment') {
-      $people = $con->itgcms_comment;
-      $cond = array('page_id' => $id);
-      $cursor = $people->count($cond);
-      print 'Comment : ' . $cursor;
-    }
-    if ($type == 'view') {
-      $people = $con->pagedetails;
-      $cond = array('nid' => $id);
-      $cursor = $people->count($cond);
-      print 'Number of View : ' . $cursor;
-    }
-  }
-  if ($type == 'f_share') {
-    $fb_share = itg_get_fb_share($id, 'Facebook Share');
-    print 'Facebook Share : '.$fb_share;
-  }
-  
-}
-
-
 /*
  * Utility to change the max length of a text field
  */
