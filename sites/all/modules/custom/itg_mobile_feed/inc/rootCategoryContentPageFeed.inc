@@ -163,7 +163,11 @@ function generateLeftMainCategoryPage($tid, $term_name) {
       //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
-      $loop_file_name = $term_name.$nid.".xml";
+      if($tid == '1206689' || $tid == '1206688'){ // auto 
+        $loop_file_name = 'story'.$nid.".xml";
+      }else{
+          $loop_file_name = $term_name.$nid.".xml";
+      }
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
