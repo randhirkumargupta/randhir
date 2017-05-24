@@ -69,6 +69,9 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
 
     //Set destination for supplement form
     if ($form_id == 'supplement_node_form') {
+      if($user->uid != 1) {
+      $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+      }
         $destination = 'manage-supplements';
         $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
@@ -76,6 +79,9 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
 
     //Set destination for issue form
     if ($form_id == 'issue_node_form') {
+      if($user->uid != 1) {
+      $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+      }
         unset($form['title']);
         $destination = 'manage-issues';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
