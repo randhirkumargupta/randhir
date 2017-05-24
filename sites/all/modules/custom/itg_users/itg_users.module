@@ -673,7 +673,7 @@ function itg_users_user_update(&$edit, $account, $category) {
 function itg_users_user_insert(&$edit, $account, $category) {
   
   /** do not delete code */
-  global $base_url;
+  /*global $base_url;
   $mail = $account->mail;
   $uid = $account->uid;
 
@@ -686,7 +686,7 @@ function itg_users_user_insert(&$edit, $account, $category) {
         'created' => date('Y-m-d G:i:s'),
       ))
       ->execute();
-  db_set_active();
+  db_set_active();*/
 
   /* End here */
   
