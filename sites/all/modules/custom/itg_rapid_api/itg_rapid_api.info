@@ -1,0 +1,6 @@
+name = ITG Rapid Services
+description = Rest WebService APIs for ITG Rapid.
+core = 7.x
+dependencies[] = services
+dependencies[] = rest_server
+dependencies[] = itg_mobile_feed
