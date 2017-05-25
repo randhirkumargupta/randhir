@@ -537,10 +537,12 @@ function itg_front_end_common_views_pre_render(&$view) {
  */
 
 function itg_vukkul_comment_count($nid) {
+  if(!empty($nid)) {
   $run_url = "http://vuukle.com/api.asmx/getCommentCountListJSON?id=dc34b5cc-453d-468a-96ae-075a66cd9eb7&list=".$nid;
   $content = file_get_contents($run_url);
   $vukkul_share = json_decode($content);
   return $vukkul_share->$nid;
+  }
 }
 
 /**
@@ -549,14 +551,15 @@ function itg_vukkul_comment_count($nid) {
  */
 
 function itg_facebook_share_count($url) {
-  $run_url = "http://graph.facebook.com/?id=".$url;
-  $content = file_get_contents($run_url);
-  $share_count = json_decode($content);
-  if(isset($share_count->share->share_count)) {
-    return $share_count->share->share_count;
+  if (!empty($url)) {
+    $run_url = "http://graph.facebook.com/?id=" . $url;
+    $content = file_get_contents($run_url);
+    $share_count = json_decode($content);
+    if (isset($share_count->share->share_count)) {
+      return $share_count->share->share_count;
+    }
   }
 }
-
 
 /**
  * Implements itg_google_share_count
@@ -564,12 +567,14 @@ function itg_facebook_share_count($url) {
  */
 
 function itg_google_share_count($url) {
-    $html =  file_get_contents( "https://plusone.google.com/_/+1/fastbutton?url=".urlencode($url));
+  if (!empty($url)) {
+    $html = file_get_contents("https://plusone.google.com/_/+1/fastbutton?url=" . urlencode($url));
     $doc = new DOMDocument();
     libxml_use_internal_errors(true);
     $doc->loadHTML($html);
-    $counter=$doc->getElementById('aggregateCount');
+    $counter = $doc->getElementById('aggregateCount');
     return $counter->nodeValue;
+  }
 }
 
 /**
