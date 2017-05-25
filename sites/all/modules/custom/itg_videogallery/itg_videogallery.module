@@ -7,7 +7,7 @@
  * Provides customizations and functions for Video Gallery.
  *
  */
-define('FTP_URL_VIDEO', 'http://test.kelltontech.net/ftptest1/qa_videos/');
+define('FTP_URL_VIDEO', variable_get('dailymotion_ftp_url'));
 
 /**
  * Implements hook_block_info()
@@ -1117,6 +1117,13 @@ function itg_videogallery_configuration_form($form) {
     '#required' => TRUE,
   );
 
+  $form['video_property'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Property'),
+    '#default_value' => variable_get('video_property'),
+    '#required' => TRUE,
+  );
+
   return system_settings_form($form);
 }
 
@@ -1200,8 +1207,14 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  $items['move-ftp'] = array(
+    'page callback' => 'itg_videogallery_move_ftp_videos',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
   $items['dm-to-s3'] = array(
-    'page callback' => 'itg_videogallery_dm_to_s3',
+    'page callback' => 'itg_videogallery_dm_to_s3_node_delete',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -1238,6 +1251,24 @@ function itg_videogallery_menu() {
 
 
   return $items;
+}
+
+/**
+ * Temp function 
+ */
+function itg_videogallery_dm_to_s3_node_delete() {
+
+  $result = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', 'itg_bitrates_video', '=')
+      ->execute();
+  $deleted_count = 0;
+  foreach ($result as $record) {
+    node_delete($record->nid);
+    $deleted_count++;
+  }
+  pr($deleted_count);
+  exit();
 }
 
 /**
@@ -1773,7 +1804,7 @@ function daily_motion_video_dashboard_rows() {
         $status_flag = '<span class="under-precess">Ready to Use</span>';
 
         if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/"  . $record->video_id . "' > Delete </a>";
+          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
@@ -2055,6 +2086,11 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is the callback for store dm file to s3',
     'callback' => 'itg_videogallery_dm_to_s3',
   );
+  $items['itg-videogallery-move-ftp-videos'] = array(
+    'description' => 'This is the callback for move DM used video',
+    'callback' => 'itg_videogallery_move_ftp_videos',
+  );
+
   $items['save-video-bitrates'] = array(
     'description' => 'This is use for store video birates urls',
     'callback' => 'itg_videogallery_video_bitrate',
@@ -2417,17 +2453,57 @@ function get_video_filed_collection_by_its_id($entity_fid) {
 }
 
 /**
+ * This is temp function use for move Dailymotion send video to ftv Archive
+ */
+function itg_videogallery_move_ftp_videos() {
+  global $user;
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
+  $api = itg_videogallery_dailymotion_api();
+  $totime = strtotime('-7 days', time());
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('upload_time', $totime, '>=');
+  $result = $query->execute()->fetchall();
+
+  $connection_id = itg_videogallery_ftp_video_list();
+  ftp_pasv($connection_id, true);
+
+  foreach ($result as $ke => $vid) {
+
+    if ($vid->type == 'ftp') {
+      $datefolder = date('Y-m', $vid->upload_time);
+      $file_name = '/public_html/videos/' . $vid->name;
+      $file_name_to_folder = '/public_html/videos/used_video/' . $datefolder . '/';
+      $file_name_to_folder_file = '/public_html/videos/used_video/' . $datefolder . '/' . $vid->name;
+      $ftp_exist = ftp_chdir($connection_id, $file_name_to_folder);
+
+      if (!$ftp_exist) {
+        ftp_mkdir($connection_id, $file_name_to_folder);
+      }
+      if (ftp_rename($connection_id, $file_name, $file_name_to_folder_file)) {
+        //ftp_delete($connection_id, $file_name);
+      }
+    }
+    if ($vid->type == 'S3') {
+      $datefolder = date('Y-m', $vid->upload_time);
+
+      $pav = itg_video_copy_onfile_to_anoter($vid->name, $datefolder);
+
+    }
+  }
+}
+
+/**
  * This is temp function use for test dailymotion video resploce no we will 
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
+  $totime = strtotime('-7 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress'));
-  $query->leftJoin('itg_video_bitrates_data', 'ivbd', 'ivbd.video_id = drd.video_id');
   $query->condition('encoding_progress', '100', '=');
-  $query->isNull('is_download');
+  $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
-
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
     $ch = curl_init();
@@ -2436,30 +2512,39 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
+    $decode_json = json_decode($content);
     curl_close($ch);
     if (!empty($content)) {
-      $is_deleted = "NULL";
-      $query = db_select('itg_video_bitrates_data', 'ivbd');
-      $query->fields('ivbd');
-      $query->condition('video_id', $vid->video_id);
-      $result = $query->execute()->fetchall();
-      if (!empty($result)) {
-        if ($result[0]->is_download != 1) {
-          db_update('itg_video_bitrates_data')
-              ->fields(array(
-                'video_id' => $vid->video_id,
-                'responce' => $content,
-              ))->condition('video_id', $vid->video_id)
-              ->execute();
+      foreach ($decode_json as $keys => $json_url) {
+        if ($json_url != "") {
+          $query = db_select('itg_video_bitrates_data', 'ivbd');
+          $query->fields('ivbd');
+          $query->condition('video_id', $vid->video_id);
+          $query->condition('bitates_field', $keys);
+          $result = $query->execute()->fetchall();
+          if (!empty($result)) {
+            if ($result[0]->is_download != 1) {
+              db_update('itg_video_bitrates_data')
+                  ->fields(array(
+                    'video_id' => $vid->video_id,
+                    'bitate_url' => $json_url,
+                    'bitates_field' => $keys,
+                    'is_download' => 0,
+                  ))->condition('id', $result[0]->id)
+                  ->execute();
+            }
+          }
+          else {
+            db_insert('itg_video_bitrates_data')
+                ->fields(array(
+                  'video_id' => $vid->video_id,
+                  'bitate_url' => $json_url,
+                  'bitates_field' => $keys,
+                  'is_download' => 0,
+                ))
+                ->execute();
+          }
         }
-      }
-      else {
-        db_insert('itg_video_bitrates_data')
-            ->fields(array(
-              'video_id' => $vid->video_id,
-              'responce' => $content,
-            ))
-            ->execute();
       }
     }
   }
@@ -3302,7 +3387,6 @@ function itg_videogallery_dailymotion_send_video($real_path) {
         'published' => TRUE,
           )
       );
-
       $dur = $api->get(
           '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
       );
@@ -3366,32 +3450,28 @@ function itg_videogallery_dm_to_s3() {
   );
   $query = db_select('itg_video_bitrates_data', 'ivbd');
   $query->fields('ivbd');
-  $query->isNull('is_download');
+  $query->condition('is_download', '0', '=');
   $result = $query->execute()->fetchall();
   foreach ($result as $key => $value) {
-    $data_responce = $value->responce;
-    $data_responce = json_decode($data_responce);
-    foreach ($data_responce as $index_url => $biturl) {
-      if (!empty($biturl)) {
-        $video_urlsdata = $value->video_id . '_' . $dataarray[$index_url] . '.mp4';
-        $senddata = itg_video_send_dm_to_s3($biturl, $video_urlsdata);
-        if (!empty($senddata)) {
-          $node = new stdClass();
-          $node->title = $video_urlsdata;
-          $node->type = "itg_bitrates_video";
-          node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-          $node->language = LANGUAGE_NONE;
-          $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
-          $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
-          $node->uid = $user->uid;
-          $node->status = 1; //(1 or 0): Published or not
-          $node->promote = 0; //(1 or 0): Promoted to front page
-          node_save($node);
-          $query = db_update('itg_video_bitrates_data');
-          $query->fields(array('is_download' => 1));
-          $query->condition('video_id', $value->video_id, '=');
-          $query->execute();
-        }
+    if (!empty($value->bitate_url)) {
+      $video_urlsdata = $value->video_id . '_' . $dataarray[$value->bitates_field] . '.mp4';
+      $senddata = itg_video_send_dm_to_s3($value->bitate_url, $video_urlsdata);
+      if (!empty($senddata)) {
+        $node = new stdClass();
+        $node->title = $video_urlsdata;
+        $node->type = "itg_bitrates_video";
+        node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+        $node->language = LANGUAGE_NONE;
+        $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
+        $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
+        $node->uid = $user->uid;
+        $node->status = 1; //(1 or 0): Published or not
+        $node->promote = 0; //(1 or 0): Promoted to front page
+        node_save($node);
+        $query = db_update('itg_video_bitrates_data');
+        $query->fields(array('is_download' => 1));
+        $query->condition('id', $value->id, '=');
+        $query->execute();
       }
     }
   }
@@ -3407,7 +3487,6 @@ function itg_videogallery_s3_file_to_dm() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $data_video = itg_video_get_s3_video();
-
   foreach ($data_video['video'] as $key => $s3_video_url) {
 
 
@@ -3446,6 +3525,7 @@ function itg_videogallery_s3_file_to_dm() {
       }
 // Code start for Adding  video in daily motion 
     }
+    die;
   }
   // Use the high-level iterators (returns ALL of your objects).
 }
@@ -3460,10 +3540,10 @@ function itg_videogallery_ftp_file_insert_cron() {
   $file_path = drupal_realpath('public://');
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
+  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
   foreach ($ftp_filess as $files_n) {
 
-    $file_data_array = explode('/public_html/videos/qa_videos/', $files_n);
+    $file_data_array = explode('/public_html/videos/', $files_n);
 
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
@@ -3471,13 +3551,13 @@ function itg_videogallery_ftp_file_insert_cron() {
     $exist_space = preg_match('/\s/', $filename);
     if ($exist_space) {
       $newfile = str_replace(' ', '_', $filename);
-      ftp_rename($connection_id, $files_n, '/public_html/videos/qa_videos/' . $newfile . '.' . $extension);
+      ftp_rename($connection_id, $files_n, '/public_html/videos/' . $newfile . '.' . $extension);
     }
   }
 
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/qa_videos/");
+  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/videos/qa_videos/', $files);
+    $file_array = explode('/public_html/videos/', $files);
 
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
