@@ -203,7 +203,9 @@ function itg_payment_order_form_response_url() {
   $transaction_id = $_POST['TXNID'];
   $transaction_status = 0;
   $data['order_status'] = 0;
+  $goto_url = "itg-payment-cancel";
   if ($_POST["STATUS"] == "TXN_SUCCESS") {
+    $goto_url = "itg-payment-success";
     //update_event_registration_after_success
     update_event_registration_after_success($_POST['ORDERID']);
 
@@ -217,14 +219,8 @@ function itg_payment_order_form_response_url() {
   $data['transaction_history'] = serialize($_POST);
 
   // Update order after response.
-  itg_payment_response_info_update($data);
-  
-  if ($transaction_status == 0) {
-    drupal_goto('itg-payment-cancel'); 
-  }
-  else {
-    drupal_goto('itg-payment-success');
-  }
+  itg_payment_response_info_update($data);  
+  drupal_goto($goto_url); 
 }
 
 /**
