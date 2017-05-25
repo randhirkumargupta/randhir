@@ -4,6 +4,7 @@
 .flr {float: right;}
 .txtcenter{ text-align: center; }
 .itg_auto_search_form span.widget-title{display:none}
+.page-auto #page-title{text-align: center}
 .itg_auto_search_form {background:#dedcdd;width:100%;overflow:hidden;margin-bottom:20px}
 .itg_auto_search_form .master-logo{float:left;margin-right:50px}
 .itg_auto_search_form .left-master-section,.itg_auto_search_form .right-master-section{padding-top:5px}
