@@ -100,17 +100,19 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_alttext', $node->field_story_medium_image['und']['0']['alt']);
         $document->addField('sm_image_title', $node->field_story_medium_image['und']['0']['title']);
     }
-
+    
+    if (!empty($node->field_gallery_image['und']) && $node->type == 'photogallery') {
     foreach ($node->field_gallery_image['und'] as $key => $fieldval) {
-        $fieldata = entity_load('field_collection_item', array($fieldval['value']));
+      $fieldata = entity_load('field_collection_item', array($fieldval['value']));
 
-        if (isset($fieldata[$fieldval['value']]->field_images['und'][0]['alt'])) {
-            $document->addField('sm_alttext', $fieldata[$fieldval['value']]->field_images['und'][0]['alt']);
-        }
-        if (isset($fieldata[$fieldval['value']]->field_image_caption['und'][0]['value'])) {
-            $document->addField('sm_image_title', $fieldata[$fieldval['value']]->field_image_caption['und'][0]['value']);
-        }
+      if (isset($fieldata[$fieldval['value']]->field_images['und'][0]['alt'])) {
+        $document->addField('sm_alttext', $fieldata[$fieldval['value']]->field_images['und'][0]['alt']);
+      }
+      if (isset($fieldata[$fieldval['value']]->field_image_caption['und'][0]['value'])) {
+        $document->addField('sm_image_title', $fieldata[$fieldval['value']]->field_image_caption['und'][0]['value']);
+      }
     }
+  }
 
     $common_byline = $node->field_itg_common_by_line_name['und']['0']['value'];
     $common_twitter = $node->field_itg_common_by_line_twitter['und']['0']['value'];
