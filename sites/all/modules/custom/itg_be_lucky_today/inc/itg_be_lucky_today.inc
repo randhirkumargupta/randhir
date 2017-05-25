@@ -180,12 +180,12 @@ function be_lucky_today_registration3($form, $form_state) {
       '#maxlength' => 128,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
-      '#ajax' => array(
-        'callback' => 'email_validation_ajax_callback',
-        'wrapper' => 'email_validation_error',
-      ),
-      '#prefix' => '<div id="email_validation_error">',
-      '#suffix' => '</div>',
+//      '#ajax' => array(
+//        'callback' => 'email_validation_ajax_callback',
+//        'wrapper' => 'email_validation_error',
+//      ),
+//      '#prefix' => '<div id="email_validation_error">',
+//      '#suffix' => '</div>',
     );
     $form['address_markup'] = array(
       '#markup' => 'Q5. Where should we deliver your gift?',
@@ -245,13 +245,14 @@ function be_lucky_today_registration3($form, $form_state) {
       '#maxlength' => 128,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
-      '#ajax' => array(
-        'callback' => 'mobile_validation_ajax_callback',
-        'wrapper' => 'mobile_validation_error',
-      ),
-      '#prefix' => '<div id="mobile_validation_error">',
-      '#suffix' => '</div>',
+//      '#ajax' => array(
+//        'callback' => 'mobile_validation_ajax_callback',
+//        'wrapper' => 'mobile_validation_error',
+//      ),
+//      '#prefix' => '<div id="mobile_validation_error">',
+//      '#suffix' => '</div>',
     );
+
     $form['next'] = array(
       '#type' => 'submit',
       '#value' => t('Next'),
@@ -450,15 +451,15 @@ function be_lucky_today_get_header($form, &$form_state) {
       2 => array('data' => "Let's Start With Your Name"),
       3 => array('data' => 'Age Is Just A Number Luck Has Nothing To Do With Age.'),
       4 => array('data' => 'Help us deliver your Prize on time'),
-      5 => array('data' => 'Yor are just a step away from submitting your entry for Lucky Draw. Select your preferred digital magazine @just INR 49 and be ready...e'),
+      5 => array('data' => 'Yor are just a step away from submitting your entry for Lucky Draw. Select your preferred digital magazine @just INR 49 and be ready...'),
     );
 
     $stages[$current_step]['class'] = array('active');
 
     $stages_list = theme('item_list', array('items' => $stages));
-    $form['header'] = array(
-      '#markup' => '<h1>Be Lucky Today</h1>'
-    );
+//    $form['header'] = array(
+//      '#markup' => '<h1>Be Lucky Today</h1>'
+//    );
     $form['header2'] = array(
       '#type' => 'fieldset',
       '#title' => '',

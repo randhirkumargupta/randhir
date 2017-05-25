@@ -24,3 +24,5 @@ and open the template in the editor.
 .black_strip{ background:url(../images/arrow.png) no-repeat 0 0; display:block; height:8px; width:55px; position:absolute; left:-6px; bottom:0%;}
 .black_strip{
     transition: all 1s ease;}
+.itg_be_lucky_today fieldset ul li{display:none;}
+.itg_be_lucky_today fieldset ul li.active{display:block;}
