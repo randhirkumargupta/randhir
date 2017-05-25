@@ -74,6 +74,7 @@
                 <?php print drupal_render($form['field_story_associate_lead']); ?>
                 <?php print drupal_render($form['field_associate_photo_gallery']); ?>
                 <?php print drupal_render($form['field_story_associate_video']); ?>
+                <?php print drupal_render($form['field_story_external_url']); ?>
             </div>
         </div>
         <div id="ExpertChunk" class="itg-form-section-wrapper">

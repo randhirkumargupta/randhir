@@ -136,6 +136,16 @@ function event_backend_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'event registered users'.
+  $permissions['event registered users'] = array(
+    'name' => 'event registered users',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_event_registration',
+  );
+
   // Exported permission: 'schedule publishing of nodes'.
   $permissions['schedule publishing of nodes'] = array(
     'name' => 'schedule publishing of nodes',

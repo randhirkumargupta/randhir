@@ -44,14 +44,14 @@ function itg_payment_menu() {
 
   $items['itg-payment/icici-payment-success'] = array(
     'title' => 'Payment success' ,
-    'page callback' => 'itg_icici_payment_success_page' ,
+    'page callback' => 'itg_payment_success_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
-    'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_response_fail' ,
+    'title' => 'Payment cancel' ,
+    'page callback' => 'itg_payment_cancel_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
@@ -207,10 +207,11 @@ function itg_payment_initial_info_update($data) {
           'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0" ,
           'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0" ,
           'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0" ,
-          'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
+          'order_status' => isset($data['ORDER_STATUS']) ? $data['ORDER_STATUS'] : PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
           'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0" ,
           'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "0" ,
           'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "0" ,
+          'number_of_person' => isset($_SESSION['event_registration_payment']['number_of_person']) ? $_SESSION['event_registration_payment']['number_of_person'] : 0 ,
           'order_created_on' => REQUEST_TIME ,
         ))->execute();
   }

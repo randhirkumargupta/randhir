@@ -165,6 +165,8 @@ jQuery(document).ready(function () {
                         jQuery('[name="coupon_code"]').attr('readonly', true);
                         if (obj_success['discounted_value'] == 0) {
                             jQuery('.form-field-name-field-erf-payment-gateway').hide();
+                            jQuery('.event-total-fees-text').hide();                            
+                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");                            
                             jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
                         }
                     }
@@ -194,6 +196,8 @@ jQuery(document).ready(function () {
             jQuery('.coupon_code_message').html('');
             jQuery('.form-field-name-field-erf-payment-gateway').show();
             jQuery("#edit-field-erf-payment-gateway-und").show();
+            jQuery(".free-class").remove();
+            jQuery(".event-total-fees-text").show();
         }
     });
 
