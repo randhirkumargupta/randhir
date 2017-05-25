@@ -159,8 +159,8 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
  */
 function getVideoTag($node) {
   $videotag = "";
-
   $src = "";
+  $img_url = '';
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -174,12 +174,70 @@ function getVideoTag($node) {
   $node = $nodelist->item(0);
   //$src = $node->attributes->getNamedItem('src')->nodeValue;
 
+  $add_video = getStringBetween($html,'<div class="itgvideo">','</div>');
+  if($node->attributes->length > 0){
+    //It has Youtube video
+    $src = $node->attributes->getNamedItem('src')->nodeValue;
+
+   }elseif ($add_video != '') {
+    //It has uploaded video
+      if(strpos($add_video,"dailymotion_video_dir") > 0){
+          // It has Daily Motion Video
+          $video_name = substr(strstr($add_video,'dir/'), 4);
+          $video_node = dailymotion_video_name_to_nid($video_name);
+          $video_field = node_load($video_node);
+          $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+          $src = $add_video;
+          //$video_coll = $video_field->field_video_upload['und'][0]['value'];
+          //$aa = entity_load('field_collection_item', array($video_coll));
+      }else{
+          //It has uploaded video
+
+          $video_nid = uploaded_video_to_nid($add_video);
+          $video_field = node_load($video_nid);
+          $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+          $src = $add_video;
+
+      }
+} else {}
+
   if ($src) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+     $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[".$img_url."]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[".$img_url."]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
 
+/*
+* Function for getting dailymotion videoname to nid
+*/
+
+function dailymotion_video_name_to_nid($video_name){
+    $qry = db_select('dailymotion_response_details','vd')
+            ->fields('vd',array('nid'))
+            ->condition('vd.title',$video_name)
+            ->execute()->fetchField();
+    return $qry;
+}
+
+function uploaded_video_to_nid($video_uri){
+
+    $query = db_select('file_managed', 'f');
+	  $query->innerJoin('field_data_field_videogallery_video_upload','vp','vp.field_videogallery_video_upload_fid = f.fid');
+	  $query->innerJoin('field_data_field_video_upload','vo','vo.field_video_upload_value = vp.entity_id');
+    $query->fields('vo',array('entity_id'));
+	  $query->condition('f.uri',$video_uri);
+	  return $all_result = $query->execute()->fetchField();
+}
+
+/*
+ * Get string betwee tags
+ */
+
+function getStringBetween($str,$from,$to){
+
+    $sub = substr($str, strpos($str,$from)+strlen($from),strlen($str));
+    return substr($sub,0,strpos($sub,$to));
+}
 
 /**
  * function for generate Empty video xml tag
@@ -188,7 +246,7 @@ function getVideoTag($node) {
  */
 function emptygetVideoTag() {
     $videotag = "";
-    $videotag = "<video_embed><videoparts_mp4><part></part></videoparts_mp4><videoparts_m3u8><part></part></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
     return $videotag;
 }
 
