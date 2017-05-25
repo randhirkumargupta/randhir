@@ -1236,7 +1236,7 @@ function itg_videogallery_menu() {
   );
 
 
-  $items['delete_daily_motion_video/%/%'] = array(
+  $items['delete_daily_motion_video/%'] = array(
     'title' => 'Daily Motion Video Dashboard Video Delete',
     'description' => 'Daily Motion Video Dashboard Video Delete',
     'page callback' => 'delete_daily_motion_video_callback',
