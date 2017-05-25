@@ -1119,7 +1119,7 @@ function itg_print_team_ideas_csv() {
   foreach ($result as $row) {
     $node = node_load($row->nid);
     $title = $node->title;
-    $brief_body = strip_tags($node->body[LANGUAGE_NONE][0]['value']);
+    $brief_body = strip_tags(trim(preg_replace('/\s\s+/', ' ', $node->body[LANGUAGE_NONE][0]['value'])));
     $brief = $brief_body;
     $kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
     $section_tid = itg_print_tem_get_section($node->field_story_category[LANGUAGE_NONE][0]['tid']);

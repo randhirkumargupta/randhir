@@ -190,24 +190,29 @@ function itg_fia_xml_node_feed($query) {
 
     // Creating Slideshow for facebook instant article data
     if(!empty($target_nids)) {
-      $gall_nodes = node_load_multiple($target_nids);
       foreach ($gall_position as $pos) {
         $gall_nodes = node_load_multiple($target_nids);
         foreach ($gall_nodes as $gl_k => $gl_v) {
-          $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-          if (in_array($pos, $bk)) {
-            $body_vals[$pos] = $body_vals[$pos] . 
-              '<figure>
-                <img src="' . $imgs_path . '" />
-               </figure>';
-            
-          }
-          else {
-            $last_postion = end($bk);
-            $body_vals[$last_postion] = $body_vals[$last_postion] . 
-              '<figure>
-                <img src="' . $imgs_path . '" />
-               </figure>';
+          $get_fc = $gl_v->field_gallery_image[LANGUAGE_NONE];
+          foreach($get_fc as $get_fck => $get_fcv){
+             $get_fc_ids = $get_fc[$get_fck]['value'];
+             $load_fc_data = field_collection_item_load($get_fc_ids);
+             $imgs_path = file_create_url($load_fc_data->field_images[LANGUAGE_NONE][0]['uri']);
+//          $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+            if (in_array($pos, $bk)) {
+              $body_vals[$pos] = $body_vals[$pos] . 
+                '<figure>
+                  <img src="' . $imgs_path . '" />
+                 </figure>';
+
+            }
+            else {
+              $last_postion = end($bk);
+              $body_vals[$last_postion] = $body_vals[$last_postion] . 
+                '<figure>
+                  <img src="' . $imgs_path . '" />
+                 </figure>';
+            }
           }
         }
       }
