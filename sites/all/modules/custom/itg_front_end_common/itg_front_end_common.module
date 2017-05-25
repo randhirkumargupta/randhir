@@ -587,7 +587,7 @@ function _related_story_left_block_content() {
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
-  
+  if(!empty($related_result)) {
   $related_story = '<h3>Related</h3>';
   $related_story.= "<div class='row'><ul>";
   $i = 0;
@@ -617,6 +617,7 @@ function _related_story_left_block_content() {
   
   $related_story.= "</ul></div>";
   return $related_story;
+  }
 }
 
 /**
@@ -629,33 +630,35 @@ function _related_story_bottom_block_content() {
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
-  $related_story = '<h3><span>Related</span></h3>';
-  $related_story.= "<div class='row'><ul>";
-  $i = 0;
-  foreach ($related_result as $site_hash_key) {
-    $current_entity_id = $site_hash_key;
-    $related_data = itg_get_related_story_content($current_entity_id);
-    if (!empty($related_data)) {
-      $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      
-      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
-      $related_image = '<img src="' . $related_image_url . '">';
-      if (empty($related_image_url)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
-        $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+  if (!empty($related_result)) {
+    $related_story = '<h3><span>Related</span></h3>';
+    $related_story.= "<div class='row'><ul>";
+    $i = 0;
+    foreach ($related_result as $site_hash_key) {
+      $current_entity_id = $site_hash_key;
+      $related_data = itg_get_related_story_content($current_entity_id);
+      if (!empty($related_data)) {
+        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+        $related_image = '<img src="' . $related_image_url . '">';
+        if (empty($related_image_url)) {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
+          $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+        }
+        else {
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
+          $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+        }
       }
-      else {
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
-        $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
-      }
+      $i++;
+      if ($i == 4)
+        break;
     }
-    $i++;
-    if ($i == 4)
-      break;
+    $related_story.= "</ul></div>";
+    return $related_story;
   }
-  $related_story.= "</ul></div>";
-  return $related_story;
 }
 /**
  * Implements Related story bottom block content
