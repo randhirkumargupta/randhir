@@ -386,6 +386,7 @@ function itg_link($variables) {
     if(_is_sponsor_story_article($nid)){
       $variables['options']['attributes']['rel'] = 'nofollow';
       $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'it-sponsored';
     }    
   }
   // If url alias is used.

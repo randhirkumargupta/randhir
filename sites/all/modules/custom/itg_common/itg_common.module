@@ -1039,24 +1039,61 @@ function _occupation_from_tid_for_sef_url($tid) {
  * @param int $nid
  * @return boolean
  */
-function _is_sponsor_story_article($nid){
+function _is_sponsor_story_article($nid) {
   $is_sponsor = FALSE;
-  if(isset($nid)){
-    $query = db_select('node', 'n');
-    $query->join('field_data_field_story_configurations', 'fc', 'fc.entity_id = n.nid');
-    $query->fields('fc', array('field_story_configurations_value'));
-    $query->condition('n.nid', $nid, '=');
-    $query->condition('n.type', 'story', '=');
-    $query->condition('fc.bundle', 'story', '=');
-    $query_result = $query->execute()->fetchAll();
-    if(!empty($query_result)){
-      foreach ($query_result as $config_val){
-        if($config_val->field_story_configurations_value == 'sponsor'){
-          $is_sponsor = TRUE;
-          break;
+  if (isset($nid)) {
+    $type_query = db_select('node', 'n');
+    $type_query->fields('n', array('type'));
+    $type_query->condition('n.nid', $nid, '=');
+    $node_type = $type_query->execute()->fetchField();
+    if ($node_type == 'story') {
+      $query = db_select('field_data_field_story_configurations', 'fc');
+      $query->fields('fc', array('field_story_configurations_value'));
+      $query->condition('fc.entity_id', $nid, '=');
+      $query->condition('fc.bundle', 'story', '=');
+      $query->condition('fc.entity_type', 'node', '=');
+      $query_result = $query->execute()->fetchAll();
+      if (!empty($query_result)) {
+        foreach ($query_result as $config_val) {
+          if ($config_val->field_story_configurations_value == 'sponsor') {
+            $is_sponsor = TRUE;
+            break;
+          }
         }
       }
-    }    
+    }
+    else if ($node_type == 'videogallery') {
+      $query = db_select('field_data_field_video_configurations', 'fc');
+      $query->fields('fc', array('field_video_configurations_value'));
+      $query->condition('fc.entity_id', $nid, '=');
+      $query->condition('fc.bundle', 'videogallery', '=');
+      $query->condition('fc.entity_type', 'node', '=');
+      $query_result = $query->execute()->fetchAll();
+      if (!empty($query_result)) {
+        foreach ($query_result as $config_val) {
+          if ($config_val->field_video_configurations_value == 'sponsor_video') {
+            $is_sponsor = TRUE;
+            break;
+          }
+        }
+      }
+    }
+    else if ($node_type == 'photogallery') {
+      $query = db_select('field_data_field_photogallery_configuration', 'fc');
+      $query->fields('fc', array('field_photogallery_configuration_value'));
+      $query->condition('fc.entity_id', $nid, '=');
+      $query->condition('fc.bundle', 'photogallery', '=');
+      $query->condition('fc.entity_type', 'node', '=');
+      $query_result = $query->execute()->fetchAll();
+      if (!empty($query_result)) {
+        foreach ($query_result as $config_val) {
+          if ($config_val->field_photogallery_configuration_value == 'sponsor_photo') {
+            $is_sponsor = TRUE;
+            break;
+          }
+        }
+      }
+    }
   }
   return $is_sponsor;
 }
