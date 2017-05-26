@@ -275,7 +275,7 @@ $databases = array (
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
 if (drupal_is_cli() || basename($_SERVER['PHP_SELF']) == 'update.php') {
-  //$databases['default']['default'] = $databases['default']['master'];
+  $databases['default']['default'] = $databases['default']['master'];
 }
 
 /**
