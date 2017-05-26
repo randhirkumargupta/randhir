@@ -226,18 +226,19 @@ function itg_icici_payment_success_page() {
       $data['order_id'] = $_POST['order_id'];
       $data['transaction_id'] = $_POST['endpointTransactionId'];
       $data['transaction_status'] = 1;
-    
+      $goto_url = 'itg-payment-cancel';
       if ($_POST['status'] == 'APPROVED') {
         $data['order_status'] = 1;
         // Update order after response.
         update_event_registration_after_success($_POST['order_id']);
+        $goto_url = 'itg-payment-success';
       }
 
       $data['transaction_history'] = serialize($_POST);
 
       itg_payment_response_info_update($data);
       
-      return drupal_set_message("Your payment is complete");
+      drupal_goto($goto_url);
   }
 }
 
@@ -256,7 +257,8 @@ function itg_icici_payment_fail_page() {
     $data['transaction_history'] = serialize($_POST);
     
     itg_payment_response_info_update($data);
-    watchdog("icici_fail", '<pre>' . print_r($_POST, TRUE) . '</pre>');
-    return drupal_set_message("Your payment failed");
+    _get_registration_id_of_event($_POST['order_id']);
+    $goto_url = "itg-payment/response-fail";
+    drupal_goto($goto_url);
   }
 }

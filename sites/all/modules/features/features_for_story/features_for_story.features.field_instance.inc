@@ -2580,6 +2580,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_external_url'.
+  $field_instances['node-story-field_story_external_url'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Story External url',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 130,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_external_url',
+    'label' => 'External url',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 111,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_extra_data'.
   $field_instances['node-story-field_story_extra_data'] = array(
     'bundle' => 'story',
@@ -5734,6 +5776,7 @@ function features_for_story_field_default_field_instances() {
   t('Expert image');
   t('Expert name');
   t('Expertise');
+  t('External url');
   t('Extra large image');
   t('Extra small image');
   t('Facebook Narrative');
@@ -5802,6 +5845,7 @@ function features_for_story_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
+  t('Story External url');
   t('Story Extra Data');
   t('Story Kicker');
   t('Story Technology');
