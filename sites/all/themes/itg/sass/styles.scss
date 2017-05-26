@@ -11626,7 +11626,7 @@ span.close_btt {
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share{
-    overflow: auto;
+    overflow: initial;
     padding-left: 154px;
   }
   .view-front-end-global-search .view-content .itg-search-list > .views-field{
@@ -11650,7 +11650,7 @@ span.close_btt {
 @media (min-width: 992px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share{
-    overflow: auto;
+    overflow: initial;
     padding-left: 180px;
   }
   .view-front-end-global-search .view-content .itg-search-list > .views-field{
