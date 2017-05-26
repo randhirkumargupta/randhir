@@ -437,27 +437,30 @@ function itg_akamai_page_cache_control_form() {
   $form = array();
   $nid = arg(1);
 
-  if (arg(0) == 'node' && is_numeric($nid)) {
-    $node = node_load($nid);
-    $url = drupal_get_path_alias('node/' . $nid);
-    $current_url = NULL;
-    if (function_exists('itg_common_custompath_insert_load')) {
-      $path = itg_common_custompath_insert_load($node);
-    }
-    else {
-      $path = $node->path['alias'];
-    }
+
+  $is_front_page = drupal_is_front_page();
+
+  if ($is_front_page) {
+    $path[] = drupal_get_path_alias($_GET['q']);
+    $path[] = $_GET['q'];
   }
   else {
-    $path = drupal_get_path_alias($_GET['q']);
-    $form['#node'] = NULL;
+    if (arg(0) == 'node' && is_numeric($nid)) {
+      $node = node_load($nid);
+      $url = drupal_get_path_alias('node/' . $nid);
+      $current_url = NULL;
+      if (function_exists('itg_common_custompath_insert_load')) {
+        $path = itg_common_custompath_insert_load($node);
+      }
+      else {
+        $path = $node->path['alias'];
+      }
+    }
+    else {
+      $path = drupal_get_path_alias($_GET['q']);
+      $form['#node'] = NULL;
+    }
   }
-
-  $path_label = $path;
-  if ($path == variable_get('site_frontpage', 'node')) {
-    $path_label = t("[frontpage]");
-  }
-
 
 
   $form['path'] = array(
