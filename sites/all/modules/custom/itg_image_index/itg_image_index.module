@@ -48,7 +48,8 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
     }
 
     if (isset($node->type) && $node->type == 'story') {
-        $document->addField('sm_field_custom_story_description_text', $node->body[$node->language][0]['value']);
+        $itg_body = apachesolr_clean_text($node->body[$node->language][0]['value']);
+        $document->addField('sm_field_custom_story_description_text', $itg_body);
         $document->addField('sm_field_custom_emoji', $node->field_emoji['und']['0']['value']);
         $document->addField('sm_field_custom_emoji_2', $node->field_emoji_2['und']['0']['value']);
         
