@@ -98,14 +98,16 @@ function itg_event_registration_users_list() {
           $data[$i][$j]['designation'] = $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] : '-';
           $data[$i][$j]['city'] = $entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_city[LANGUAGE_NONE][0]['value'] : '-';
           $data[$i][$j]['state'] = $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] : '-';
+          $data[$i][$j]['country'] = $entity[$field_collection_id]->field_event_country[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] : '-';
           $data[$i][$j]['rdate'] = $node->created ? $node->created : '-';
           if ($node->status == 0) {
-            $node_status = 'Registration cancelled';
+            $node_status = t('Registration cancelled');
           }
           else {
-            $node_status = 'Registered';
+            $node_status = t('Registered');
           }
           $data[$i][$j]['status'] = $node_status;
+          $data[$i][$j]['payment'] = $node->field_erf_payment_gateway['und'][0]['value'];
           $j++;
         }
       }
@@ -124,7 +126,9 @@ function itg_event_registration_users_list() {
         <th>Designation</th>
         <th>City</th>
         <th>State</th>
+        <th>Country</th>
         <th>Registration Date</th>
+        <th>Payment Mode</th>
         <th>Status</th>
       </tr></thead><tbody>';
 
@@ -139,7 +143,9 @@ function itg_event_registration_users_list() {
             <td>' . $user_list[$k]['designation'] . '</td>
             <td>' . $user_list[$k]['city'] . '</td>
             <td>' . $user_list[$k]['state'] . '</td>            
+            <td>' . $user_list[$k]['country'] . '</td>            
             <td>' . format_date($user_list[$k]['rdate'] , $type = 'custom_date_d_m_y_' , $format = '' , $timezone = NULL , $langcode = NULL) . '</td>
+            <td>' . $user_list[$k]['payment'] . '</td>            
             <td>' . $user_list[$k]['status'] . '</td>
           </tr>';
       }
@@ -254,6 +260,10 @@ function itg_event_registration_group_users_list() {
     return $output;
   }
   else {
-    return 'Event is not valid! Please check your url.';
+    return t('Event is not valid! Please check your url.');
   }
+}
+
+function _get_payment_gateway_name($nid) {
+  return $nid;
 }
