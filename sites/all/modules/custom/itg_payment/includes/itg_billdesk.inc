@@ -54,7 +54,7 @@ function itg_billdesk_payment_success_page() {
         $data['order_status'] = 0;
         $cancelled = 'Error at BillDesk ';
       }
-      drupal_set_message(t('Transaction denied due to @error' , array('@error' => $cancelled)) , 'error');
+      //drupal_set_message(t('Transaction denied due to @error' , array('@error' => $cancelled)) , 'error');
     }
     // Payment Success transactions for BillDesk.
     elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {

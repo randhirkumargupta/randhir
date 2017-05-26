@@ -30,7 +30,15 @@ jQuery(document).ready(function () {
     jQuery('.form-field-name-field-emoji , #cke_edit-field-emoji-und-0-value iframe').bind('contextmenu', function (e) {
         return false;
     });
-
+  jQuery("#views-exposed-form-manage-issues-page #edit-title").attr('readonly','readonly');
+    
+    jQuery("#views-exposed-form-manage-issues-page #edit-title").datepicker({
+        maxDate: new Date(),
+        yearRange: '1970:' + new Date().getFullYear(),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+    })
 //    // Alias Handling.
 //    var alise_value_selector = jQuery('input[name="path[alias]"]').val();
 //    var title_value_selector = jQuery("input[name=title]").val();
@@ -62,6 +70,8 @@ jQuery(document).ready(function () {
 //            jQuery('#edit-path-alias').attr("readonly", "readonly");
 //        }
 //    });
+
+
 });
 
 (function ($) {

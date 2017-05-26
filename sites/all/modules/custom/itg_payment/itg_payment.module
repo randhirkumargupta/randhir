@@ -37,21 +37,21 @@ function itg_payment_menu() {
 
   $items['itg-payment/billdesk-payment-success'] = array(
     'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_success_page' ,
+    'page callback' => 'itg_billdesk_payment_success_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-success'] = array(
     'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_success_page' ,
+    'page callback' => 'itg_icici_payment_success_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
     'title' => 'Payment cancel' ,
-    'page callback' => 'itg_payment_cancel_page' ,
+    'page callback' => 'itg_icici_payment_fail_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
@@ -391,8 +391,23 @@ function itg_payment_response_fail() {
  */
 function update_event_registration_after_success($order_id) {
   module_load_include('inc' , 'itg_loyalty_reward' , 'includes/itg_loyalty_reward_earn.point');
-  global $base_url;
   global $user;
+  $registration_data = _get_registration_id_of_event($order_id);
+  $registration_id =  $registration_data['reg'];
+  $event_id =  $registration_data['event_id'];
+  foreach (array('node' , 'node_revision') as $table) {
+    db_update($table)
+        ->fields(array('status' => 1))
+        ->condition('nid' , $registration_id)
+        ->execute();
+  }
+  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid > 0) {
+    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
+  }
+}
+
+function _get_registration_id_of_event($order_id) {
+  global $base_url;
   $query = db_select('itg_payment_order_details' , 'pay');
   $query->fields('pay' , array('registration_id' , 'event_id'));
   $query->condition('pay.order_id' , $order_id);
@@ -401,13 +416,5 @@ function update_event_registration_after_success($order_id) {
   $event_id = $data[0]['event_id'];
   $event_alias = $base_url . '/' . drupal_get_path_alias("node/$event_id") . '/registration';
   $_SESSION['recent_event_payment_url'] = $event_alias;
-  foreach (array('node' , 'node_revision') as $table) {
-    db_update($table)
-        ->fields(array('status' => 1))
-        ->condition('nid' , $registration_id)
-        ->execute();
-  }
-  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid >0) {
-    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
-  }
+  return array("reg" => $registration_id , "event_id" => $event_id);
 }

@@ -177,7 +177,6 @@ function itg_event_registration_form_alter(&$form , &$form_state , $form_id) {
 
     $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
     $tickets_available = $no_of_tickets - $total_registered_users;
-
     $group_tickets_available = $tickets_available;
     if ($group_tickets_available > 0) {
       $_SESSION['total_ava_ticket'] = $group_tickets_available;
@@ -371,7 +370,7 @@ function itg_event_registration_form_alter(&$form , &$form_state , $form_id) {
   }
 
   // Tab wise permission
-  if ($form_id == '1event_backend_node_form') {
+  if ($form_id == 'event_backend_node_form') {
     $event_tabs = array('step_first' => 'Basic Details' , 'step_second' => 'Registration Fees' , 'step_program_schedule' => 'Program Schedule' , 'step_sponsor' => 'Sponsor' , 'step_highlights' => 'Highlights' , 'step_media' => 'Media' , 'step_configuration' => 'Configuration');
     global $user;
     foreach ($user->roles as $key => $role) {
@@ -759,6 +758,7 @@ function itg_event_registration_get_total_registration($nid) {
     $db_query = db_select('itg_payment_order_details' , 'od');
     $db_query->addExpression('SUM(number_of_person)' , 'sum');
     $db_query->condition('od.event_id' , $nid);
+    $db_query->condition('od.order_status' , 1);
     $data = $db_query->execute()->fetchCol()[0];
     return $data;
   }

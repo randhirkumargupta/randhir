@@ -859,16 +859,29 @@ function itg_akamai_taxonomy_term_insert($term) {
 function itg_akamai_init() {
 // Adding TTL for some specified pages
   global $theme;
+  
+  watchdog('tt1','tt1');
   if ($theme == FRONT_THEME_NAME) {
     // Akamai Setting for Home Page
+      watchdog('tt2','tt2');
+
     $is_front_page = drupal_is_front_page();
+    
+          watchdog('tt3',$_GET['q']);
+
     if ($is_front_page) {   // Checking if page is front page
       $homepage_ttl = variable_get('itg_akamai_other_hpage');
+                watchdog('tt4',variable_get('itg_akamai_other_hpage'));
+
       if (isset($homepage_ttl) && !empty($homepage_ttl)) {
         akamai_max_age($homepage_ttl);
+                        watchdog('tt5',variable_get('itg_akamai_other_hpage'));
+
       }
     }
     else { // For custom and other pages
+     watchdog('tt6',variable_get('itg_akamai_other_hpage'));
+
       $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
       switch ($_GET['q']) {
         // Checking if page is Taxonomy page

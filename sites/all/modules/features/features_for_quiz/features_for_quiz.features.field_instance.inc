@@ -161,6 +161,69 @@ function features_for_quiz_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_quiz_add_questions-field_survey_add_media'.
+  $field_instances['field_collection_item-field_quiz_add_questions-field_survey_add_media'] = array(
+    'bundle' => 'field_quiz_add_questions',
+    'deleted' => 0,
+    'description' => 'Image width should be more than 740px for proper view.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_add_media',
+    'label' => 'Add Media',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'jpg jpeg gif png mp3 mp4 mov mpg wmv smf svi 3gp flv avi mkv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 'imce',
+            'itg_image_repository' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_quiz_add_questions-field_survey_question'.
   $field_instances['field_collection_item-field_quiz_add_questions-field_survey_question'] = array(
     'bundle' => 'field_quiz_add_questions',
@@ -1161,6 +1224,7 @@ function features_for_quiz_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add Media');
   t('Add Quiz Question');
   t('Add Token');
   t('Answer Details');
@@ -1172,6 +1236,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Byline');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
+  t('Image width should be more than 740px for proper view.');
   t('Immediate Result');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
   t('It will define the maximum number of options available for each question.');
