@@ -45,7 +45,7 @@
         <input name="form_token" value="<?php echo $form['form_token']['#value'] ?>" type="hidden">
         <input name="form_id" value="<?php echo $form['form_id']['#value']; ?>" type="hidden">
         <br/>
-        <input id="edit-submit" name="op" value="save" class="form-submit" type="submit" disabled="disabled">
+        <input id="edit-submit" name="op" value="save" class="form-submit" type="submit">
     </div>
     <?php echo drupal_render($form['content_type_hint']); ?>
     <?php echo drupal_render($form['pagger']); ?>

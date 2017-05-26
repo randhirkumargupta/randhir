@@ -252,6 +252,8 @@ $databases['sso_db']['default'] = array(
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
+//$conf['cache_default_class'] = 'AutoslaveCache';
+//$conf['autoslave_cache_default_class'] = 'ConsistentCache';
 /*
 $databases = array (
   'default' => 
@@ -656,3 +658,5 @@ if (file_exists($local_settings)) {
 }
 
 $conf['image_allow_insecure_derivatives'] = TRUE;
+//$conf['cache_default_class'] = 'ConsistentCache';
+//$conf['consistent_cache_default_safe'] = FALSE;
