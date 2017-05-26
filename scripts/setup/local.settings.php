@@ -41,7 +41,7 @@ $conf['cache_default_class'] = 'MemcacheStorage';
 $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
 
-$conf['memcache_storage_debug'] = FALSE;
+#$conf['memcache_storage_debug'] = TRUE;
 $conf['memcache_extension'] = 'Memcache';
 
 $conf['memcache_storage_key_prefix'] = 'itgmem';
