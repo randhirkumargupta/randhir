@@ -33,6 +33,7 @@ function itg_video_get_s3_video() {
   catch (S3Exception $e) {
     echo $e->getMessage() . "\n";
   }
+  
   return $data_video;
 }
 
