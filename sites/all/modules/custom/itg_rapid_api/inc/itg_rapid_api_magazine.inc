@@ -209,7 +209,11 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
             else{
                 $changed_datetime = "";
             }
-            
+            $conf = getStoryConfigVal($nid);
+            $is_lock = 0;
+            if (in_array("lock_story", $conf)){            
+                $is_lock = 1;
+            }
 
           $story_list_array[$listcount]['s_id'] = "$nid";
           $story_list_array[$listcount]['s_title'] = "$title";
@@ -219,7 +223,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
           $story_list_array[$listcount]['s_small_image'] = "$file_small_img_url";
           $story_list_array[$listcount]['s_large_image'] = "$file_medium_img_url";
           $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
-          $story_list_array[$listcount]['s_is_locked'] = "0";
+          $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
           $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
           $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
           $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
@@ -458,6 +462,11 @@ function getCoverstoriesList(){
             else{
                 $changed_datetime = "";
             }
+            $conf = getStoryConfigVal($nid);
+            $is_lock = 0;
+            if (in_array("lock_story", $conf)){            
+                $is_lock = 1;
+            }
     
         $cover_story_list_array[$loop_count]['s_id'] = "$nid";
         $cover_story_list_array[$loop_count]['s_title'] = "$title";
@@ -467,7 +476,7 @@ function getCoverstoriesList(){
         $cover_story_list_array[$loop_count]['s_small_image'] = "$file_small_img_url";
         $cover_story_list_array[$loop_count]['s_large_image'] = "$file_medium_img_url";
         $cover_story_list_array[$loop_count]['s_updated_datetime'] = "$changed_datetime";
-        $cover_story_list_array[$loop_count]['s_is_locked'] = "0";
+        $cover_story_list_array[$loop_count]['s_is_locked'] = "$is_lock";
         $cover_story_list_array[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
         $cover_story_list_array[$loop_count]['s_author_title'] = "$field_itg_common_by_line_name_value";
         $cover_story_list_array[$loop_count]['s_pcategory_id'] = "$field_primary_category_value";
@@ -618,4 +627,23 @@ function getIssueStoryCount($issue_date){
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   $count = count($result_issue);
   return $count;
+}
+
+/**
+ * function for get congiguration of story
+ * @pram $nid
+ *
+ * @return array
+ */
+
+function getStoryConfigVal($nid){
+    $conf = array();
+    $query_issue = db_select('field_data_field_story_configurations', 'sc');
+    $query_issue->fields('sc', array('field_story_configurations_value'));
+    $query_issue->condition('sc.entity_id', $nid);
+    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result_issue as $reskey => $resvalue){
+        $conf[] = $resvalue;
+    }
+    return $conf;
 }
