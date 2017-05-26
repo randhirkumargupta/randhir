@@ -66,6 +66,24 @@ function itg_akamai_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
+  $items['admin/config/system/itg_akamai/akamai_not_implemented'] = array(
+    'title' => 'Akamai Pages Akamai TTL(node) not implemented',
+    'description' => 'Admin interface',
+    'page callback' => 'itg_akamai_akamai_not_implemented_rows',
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/itg_akamai/akamais_not_implemented'] = array(
+    'title' => 'Akamai Pages Akamai TTL(section) not implemented',
+    'description' => 'Admin interface',
+    'page callback' => 'itg_akamai_akamais_not_implemented_rows',
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['admin/config/system/itg_akamai/akamai_ccpurge'] = array(
     'title' => 'Akamai Purge Content type Node',
     'description' => 'Admin interface to clear Akamai Purge Content type Node',
@@ -117,7 +135,6 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_CALLBACK,
   );
-
 
   return $items;
 }
@@ -668,35 +685,9 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       $akamai_config_cctype_flag = NULL;
 
       // Checking whether the Akamai content level configration have been saved or not 
+      $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
-      $restricted_cc = array(
-        'ugc_node_form',
-        'mail_templates',
-        'event_backend',
-        'ads_management',
-        'coupon',
-        'itg_template_widgets',
-        'loyalty_and_rewards',
-        'newsletter',
-        'newsletter_templates',
-        'notification',
-        'print_team_integration',
-        'issue',
-        'magazine',
-        'supplement',
-        'ask_an_expert',
-        'ugc',
-        'itg_delete_solr_video',
-        'itg_funalytics',
-        'syndication_client',
-        'syndication_feed_from_pattern',
-        'syndication_rule',
-        'task_idea_allocation_tracking',
-        'article',
-        'live_tv_integration'
-      );
-
-      if (isset($form['#node']->nid) && !in_array($form['#node']->type, $restricted_cc)) {
+      if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
         $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
       }
       $form['akamai_timeout'] = array(
