@@ -147,6 +147,12 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $settings['formstatus'] = 0;
   }
   
+  if (arg(1) == 'add') {
+    drupal_add_js('jQuery(document).ready(function() {
+                jQuery("#edit-metatags-und-title-value").val("");              
+              });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
   $settings['formid'] = $form_id;
   $settings['arg_url'] = $arg[0];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
