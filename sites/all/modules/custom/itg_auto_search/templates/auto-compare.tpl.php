@@ -1,4 +1,4 @@
-<div id="compare-section" class="auto-compare-section">
+<div id="compare-section" class="auto-compare-section <?php echo $data['column'];?>">
     <?php
     global $base_url;
     $class = 'col-md-5';
