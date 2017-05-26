@@ -57,7 +57,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
 //    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      return TRUE;
+      watchdog('Loyalty Point Expiration', '<pre>'.print_r($params, true).'</pre>');
     }
     else {
       $error_msg = 'Failed to send the email!';
