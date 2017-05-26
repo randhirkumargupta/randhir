@@ -130,6 +130,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         $form['field_user_counrty']['#attributes']['class'][] = 'element-hidden';
         $form['field_personalization_state']['#attributes']['class'][] = 'element-hidden';
         $form['field_personalization_city']['#attributes']['class'][] = 'element-hidden';
+        $form['field_user_alternate_email']['#attributes']['class'][] = 'element-hidden';
       }
     }
     
