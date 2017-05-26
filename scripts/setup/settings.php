@@ -656,5 +656,5 @@ if (file_exists($local_settings)) {
 }
 
 $conf['image_allow_insecure_derivatives'] = TRUE;
-$conf['cache_default_class'] = 'ConsistentCache';
+//$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
