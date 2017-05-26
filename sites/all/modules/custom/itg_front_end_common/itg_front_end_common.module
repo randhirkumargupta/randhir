@@ -309,43 +309,57 @@ function vukkul_view() {
  * {@inheritdoc}
  */
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
-    drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
-    //drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external', 'scope' => 'footer'));
-    //'drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external', 'scope' => 'footer'));
-    //drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', array('type' => 'external', 'scope' => 'footer'));
-  }
-  if ($node->type == 'story') {
-    $twitter_arr = array('card', 'site', 'creator', 'title', 'description', 'image');
-    foreach($twitter_arr as $key => $value) {
-      if($value == 'card') {
-        $description = 'summary_large_image';
+  if ($view_mode != 'search_index') {
+    if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
+      drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
+      //drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external', 'scope' => 'footer'));
+      //'drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external', 'scope' => 'footer'));
+      //drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', array('type' => 'external', 'scope' => 'footer'));
+    }
+    if ($node->type == 'story' || $node->type == 'photogallery') {
+      if (!empty($node->field_gallery_image['und'][0]['value']) && $node->type == 'photogallery') {
+        $entity = entity_load('field_collection_item', array($node->field_gallery_image['und'][0]['value']));
+        $photo_image = $entity[$node->field_gallery_image['und'][0]['value']]->field_images['und'][0]['uri'];
       }
-      if($value == 'site') {
-        $description = '@itg';
+
+      $twitter_arr = array('card', 'site', 'creator', 'title', 'description', 'image');
+      foreach ($twitter_arr as $key => $value) {
+        if ($value == 'card') {
+          $description = 'summary_large_image';
+        }
+        if ($value == 'site') {
+          $description = '@itg';
+        }
+        if ($value == 'creator') {
+          $description = '@ankushgautam76';
+        }
+        if ($value == 'title') {
+          $description = $node->title;
+        }
+        if ($value == 'description' && $node->type == 'story') {
+          //$description = mb_strimwidth(strip_tags($node->body[LANGUAGE_NONE][0]['value']), 1, 140, "..");
+          $description = mb_strimwidth(strip_tags($node->title), 1, 140, "..");
+        }
+        if ($value == 'description' && $node->type == 'photogallery') {
+          $description = mb_strimwidth(strip_tags($node->title), 1, 140, "..");
+        }
+        if ($value == 'image' && $node->type == 'story') {
+          $description = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        }
+        if ($value == 'image' && $node->type == 'photogallery') {
+          $description = file_create_url($photo_image);
+        }
+
+        $twitter_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'twitter:' . $value,
+            'content' => $description,
+          )
+        );
+        drupal_add_html_head($twitter_tag, 'twitter_tag' . $key);
       }
-      if($value == 'creator') {
-        $description = '@ankushgautam76';
-      }
-      if($value == 'title') {
-        $description = $node->title;
-      }
-      if($value == 'description') {
-        $description = mb_strimwidth(check_plain($node->body[LANGUAGE_NONE][0]['value']), 1, 140, "..");
-      }
-      if($value == 'image') {
-        $description = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-      }
-      
-      $twitter_tag = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => 'twitter:'.$value,
-          'content' => $description,
-        )
-      );
-      drupal_add_html_head($twitter_tag, 'twitter_tag'.$key);
     }
   }
 }
@@ -525,10 +539,12 @@ function itg_front_end_common_views_pre_render(&$view) {
  */
 
 function itg_vukkul_comment_count($nid) {
+  if(!empty($nid)) {
   $run_url = "http://vuukle.com/api.asmx/getCommentCountListJSON?id=dc34b5cc-453d-468a-96ae-075a66cd9eb7&list=".$nid;
   $content = file_get_contents($run_url);
   $vukkul_share = json_decode($content);
   return $vukkul_share->$nid;
+  }
 }
 
 /**
@@ -537,14 +553,15 @@ function itg_vukkul_comment_count($nid) {
  */
 
 function itg_facebook_share_count($url) {
-  $run_url = "http://graph.facebook.com/?id=".$url;
-  $content = file_get_contents($run_url);
-  $share_count = json_decode($content);
-  if(isset($share_count->share->share_count)) {
-    return $share_count->share->share_count;
+  if (!empty($url)) {
+    $run_url = "http://graph.facebook.com/?id=" . $url;
+    $content = file_get_contents($run_url);
+    $share_count = json_decode($content);
+    if (isset($share_count->share->share_count)) {
+      return $share_count->share->share_count;
+    }
   }
 }
-
 
 /**
  * Implements itg_google_share_count
@@ -552,12 +569,14 @@ function itg_facebook_share_count($url) {
  */
 
 function itg_google_share_count($url) {
-    $html =  file_get_contents( "https://plusone.google.com/_/+1/fastbutton?url=".urlencode($url));
+  if (!empty($url)) {
+    $html = file_get_contents("https://plusone.google.com/_/+1/fastbutton?url=" . urlencode($url));
     $doc = new DOMDocument();
     libxml_use_internal_errors(true);
     $doc->loadHTML($html);
-    $counter=$doc->getElementById('aggregateCount');
+    $counter = $doc->getElementById('aggregateCount');
     return $counter->nodeValue;
+  }
 }
 
 /**
@@ -570,7 +589,7 @@ function _related_story_left_block_content() {
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
-  
+  if(!empty($related_result)) {
   $related_story = '<h3>Related</h3>';
   $related_story.= "<div class='row'><ul>";
   $i = 0;
@@ -600,6 +619,7 @@ function _related_story_left_block_content() {
   
   $related_story.= "</ul></div>";
   return $related_story;
+  }
 }
 
 /**
@@ -612,33 +632,35 @@ function _related_story_bottom_block_content() {
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
-  $related_story = '<h3><span>Related</span></h3>';
-  $related_story.= "<div class='row'><ul>";
-  $i = 0;
-  foreach ($related_result as $site_hash_key) {
-    $current_entity_id = $site_hash_key;
-    $related_data = itg_get_related_story_content($current_entity_id);
-    if (!empty($related_data)) {
-      $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-      
-      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
-      $related_image = '<img src="' . $related_image_url . '">';
-      if (empty($related_image_url)) {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
-        $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+  if (!empty($related_result)) {
+    $related_story = '<h3><span>Related</span></h3>';
+    $related_story.= "<div class='row'><ul>";
+    $i = 0;
+    foreach ($related_result as $site_hash_key) {
+      $current_entity_id = $site_hash_key;
+      $related_data = itg_get_related_story_content($current_entity_id);
+      if (!empty($related_data)) {
+        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+        $related_image = '<img src="' . $related_image_url . '">';
+        if (empty($related_image_url)) {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
+          $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+        }
+        else {
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
+          $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
+        }
       }
-      else {
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
-        $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
-      }
+      $i++;
+      if ($i == 4)
+        break;
     }
-    $i++;
-    if ($i == 4)
-      break;
+    $related_story.= "</ul></div>";
+    return $related_story;
   }
-  $related_story.= "</ul></div>";
-  return $related_story;
 }
 /**
  * Implements Related story bottom block content

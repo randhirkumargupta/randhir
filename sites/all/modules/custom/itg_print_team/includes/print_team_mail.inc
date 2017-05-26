@@ -40,8 +40,9 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   }
 
   // Array of email subject and body 
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-    'body' => $mail_content,
+    'body' => $mail_contents,
     'subject' => $mail_subject,
   );
   // Send mail function
@@ -68,8 +69,9 @@ function itg_print_team_send_mail_for_notification($nid){
   $user_email_ids = $user->mail;
 
   // Array of email subject and body 
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-      'body' => $mail_content,
+      'body' => $mail_contents,
       'subject' => 'India Today | ' . $node->title . ' status!',
   );
 

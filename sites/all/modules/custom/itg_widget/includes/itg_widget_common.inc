@@ -2817,7 +2817,7 @@ function itg_widget_node_insert($node) {
             $single_max_result = get_max_weight_for_node_insert($category['tid'] , $node->type);
             $max_result = $single_max_result['content_type'];
             $max_result_all = $single_max_result['All'];
-            $single_insert_query = db_insert('itg_widget_order')->fields(
+            $single_insert_query = db_insert('itg_widget_order_section')->fields(
                 array(
                   'nid' ,
                   'widget' ,
@@ -2841,8 +2841,8 @@ function itg_widget_node_insert($node) {
             $single_insert_query->execute();
             //Delete Logic
             // As we do not want to keep more data in table.
-            _delete_old_data_from_section_widget('itg_widget_order' , $category['tid'] , $node->type);
-            $single_insert_query_all = db_insert('itg_widget_order_section')->fields(
+            _delete_old_data_from_section_widget('itg_widget_order_section' , $category['tid'] , "all");
+            $single_insert_query_all = db_insert('itg_widget_order')->fields(
                 array(
                   'nid' ,
                   'widget' ,
@@ -2866,7 +2866,7 @@ function itg_widget_node_insert($node) {
             $single_insert_query_all->execute();
             //Delete Logic
             // As we do not want to keep more data in table.
-            _delete_old_data_from_section_widget('itg_widget_order_section' , $category['tid'] , 'All');
+            _delete_old_data_from_section_widget('itg_widget_order' , $category['tid'] , $node->type);
           }
         }
       }
@@ -2874,6 +2874,12 @@ function itg_widget_node_insert($node) {
   }
 }
 
+/**
+ * Function responsible to delete old data.
+ * @param string $table
+ * @param int $cat_id
+ * @param string $content_type
+ */
 function _delete_old_data_from_section_widget($table , $cat_id , $content_type) {
   $keep_row = (int) variable_get('section_widget_keep_row_count');
   try {
@@ -2889,13 +2895,17 @@ function _delete_old_data_from_section_widget($table , $cat_id , $content_type) 
     drupal_set_message($ex->getMessage() , 'error');
   }
 
-  try {
-    db_delete($table)
-        ->condition("id" , $data , "IN")
-        ->execute();
-  }
-  catch (Exception $ex) {
-    drupal_set_message($ex->getMessage() , 'error');
+  if (!empty($data)) {
+    try {
+      $delete_query = db_delete($table);
+      foreach ($data as $tid) {
+        $delete_query->condition("id" , $tid);
+      }
+      $delete_query->execute();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage() , 'error');
+    }
   }
 }
 
@@ -3018,6 +3028,12 @@ function itg_widget_node_update($node) {
   }
 }
 
+/**
+ * Function which manage data acording to categories.
+ * @param int $nid
+ * @param int $category_tid
+ * @param string $node_type
+ */
 function manage_widget_order_during_node_update($nid , $category_tid , $node_type) {
   $max_result = get_max_weight($category_tid , $node_type);
   $table = 'itg_widget_order';

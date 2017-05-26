@@ -30,7 +30,7 @@ ini_set('session.cookie_lifetime', 2000000);
 // $conf['cache_session'] = 'DrupalMongoDBCache';
 
 # Field Storage
-$conf['field_storage_default'] = 'mongodb_field_storage';
+//$conf['field_storage_default'] = 'mongodb_field_storage';
 
 # Message Queue
 #$conf['queue_default_class'] = 'MongoDBQueue';

@@ -14184,6 +14184,59 @@ span.close_btt {
   width: 3px;
 }
 
+.story-section .story-right .description .social-share.social-share-embed ul {
+  list-style-type: none;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a, .story-section .story-right .description .social-share.social-share-embed ul li span {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .story-section .story-right .description .social-share.social-share-embed ul li a, .story-section .story-right .description .social-share.social-share-embed ul li span {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.share, .story-section .story-right .description .social-share.social-share-embed ul li span.share {
+  color: #d0d0d0;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.share, .story-section .story-right .description .social-share.social-share-embed ul li a.google, .story-section .story-right .description .social-share.social-share-embed ul li span.share, .story-section .story-right .description .social-share.social-share-embed ul li span.google {
+  background: transparent;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.facebook, .story-section .story-right .description .social-share.social-share-embed ul li span.facebook {
+  background: #0b4887;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.twitter, .story-section .story-right .description .social-share.social-share-embed ul li span.twitter {
+  background: #05a3d2;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.google, .story-section .story-right .description .social-share.social-share-embed ul li span.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+
+@media (min-width: 320px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: auto;
+    padding-left: 154px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 154px;
+  }
+}
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
@@ -14200,6 +14253,16 @@ span.close_btt {
   }
 }
 @media (min-width: 992px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: auto;
+    padding-left: 180px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 180px;
+  }
+
   .modal-lg {
     width: 900px;
   }

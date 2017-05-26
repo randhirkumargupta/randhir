@@ -645,7 +645,7 @@ function itg_reports_user_login(&$edit , $account) {
   $user_required_data['created'] = (int) $account->created;
   $user_required_data['access'] = (int) $account->access;
   $user_required_data['login'] = (int) $account->login;
-  $user_required_data['mobile'] = $account->field_mobile_number['und'][0]['value'];
+  $user_required_data['mobile'] = !empty($account->field_mobile_number['und'][0]['value']) ? $account->field_mobile_number['und'][0]['value'] : '';
   $user_required_data['role'] = 'authenticated user';
   if (in_array('Front User' , $account->roles)) {
     $user_required_data['role'] = 'Front User';
