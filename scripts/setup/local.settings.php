@@ -49,6 +49,5 @@ $conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/sess
 
 $conf['memcache_servers'] = array(
   'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-  'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'sessions_instance',
 );
 
