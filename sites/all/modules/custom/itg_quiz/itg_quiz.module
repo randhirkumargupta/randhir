@@ -766,8 +766,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
   if ($user->uid) {
     $user_type = 'authenticated';
     $user_name = $user->name;
-    $user_mail = $user->mail;
-  } else {
+    $user_alt_mail = itg_get_user_alt_email($user->uid);
+    watchdog('quiz', $user_alt_mail);
+    if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false) && !empty($user_alt_mail)) {
+      $user_mail = $user_alt_mail;
+    }
+    else {
+      $user_mail = $user->mail;
+    }
+  }
+  else {
     $user_type = 'anonymous';
     $user_name = 'Anonymous User';
     $user_mail = 'anonymous.user@indiatoday.com';
@@ -1020,6 +1028,17 @@ function get_answer_response_msg($choice) {
   return $result[0]->name.'-'.$choice;
 }
     
-    
-    
-    
+/**
+ * Helper function to get user alternate email
+ * @param int $uid 
+ */
+function itg_get_user_alt_email($uid) {
+  if (!empty($uid)) {
+    $query = db_select('field_data_field_user_alternate_email', 'alt');
+    $query->fields('alt', array('field_user_alternate_email_value'))
+          ->condition('bundle', 'user')
+          ->condition('alt.entity_id', $uid);
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}
