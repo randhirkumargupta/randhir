@@ -296,6 +296,7 @@ function feature_for_video_field_default_field_bases() {
         'google_standout' => 'Google Standout',
         'comment' => 'Comment',
         'comment_box' => ' Comment',
+        'sponsor_video' => 'Sponsor Video',
       ),
       'allowed_values_function' => '',
     ),
