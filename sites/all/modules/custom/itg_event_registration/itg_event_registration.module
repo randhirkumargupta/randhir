@@ -370,7 +370,7 @@ function itg_event_registration_form_alter(&$form , &$form_state , $form_id) {
   }
 
   // Tab wise permission
-  if ($form_id == '1event_backend_node_form') {
+  if ($form_id == 'event_backend_node_form') {
     $event_tabs = array('step_first' => 'Basic Details' , 'step_second' => 'Registration Fees' , 'step_program_schedule' => 'Program Schedule' , 'step_sponsor' => 'Sponsor' , 'step_highlights' => 'Highlights' , 'step_media' => 'Media' , 'step_configuration' => 'Configuration');
     global $user;
     foreach ($user->roles as $key => $role) {
