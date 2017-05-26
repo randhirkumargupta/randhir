@@ -2728,7 +2728,7 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'videogallery') {
+  if ($node->type == 'videogallery' && $view_mode != 'search_index') {
 // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').live('click', function(){
 var section_id = jQuery(this).val();
