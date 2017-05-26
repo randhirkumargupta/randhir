@@ -131,6 +131,12 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
     //field_data_field_story_magazine_story_issue
     $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
+    //field_data_field_itg_common_by_line_name
+    $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
+    //field_data_field_reporter_unique_id
+    $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
+    //field_data_field_primary_category
+    $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -145,13 +151,16 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
+    $query->fields('fsri', array('field_reporter_unique_id_value'));
+    $query->fields('fci', array('field_primary_category_value'));
 
 
     //end
     
     //->condition('fsid.field_story_issue_date_value', $issue_date)
     //->condition('fssm.field_story_select_magazine_target_id', $field_issue_magazine)
-    $query->condition('n.status', 1)->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     //echo $query; exit();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
@@ -160,8 +169,14 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
 
 
             $title = $resvalue['title'];
+            $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
+            $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
+            $field_reporter_unique_id_value = str_replace("byline_","",$field_reporter_unique_id_value);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
+            $field_primary_category_value = $resvalue['field_primary_category_value'];
+            $term = taxonomy_term_load($field_primary_category_value);
+            $term_name = $term->name; 
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
@@ -194,20 +209,21 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
             else{
                 $changed_datetime = "";
             }
+            
 
           $story_list_array[$listcount]['s_id'] = "$nid";
           $story_list_array[$listcount]['s_title'] = "$title";
-          $story_list_array[$listcount]['s_share_link'] = "Universal_link";
+          $story_list_array[$listcount]['s_share_link'] = "$firebase_url";
           $story_list_array[$listcount]['s_short_desc'] = "$field_story_kicker_text_value";
           $story_list_array[$listcount]['s_comment_count'] = "$comment_cont";
           $story_list_array[$listcount]['s_small_image'] = "$file_small_img_url";
           $story_list_array[$listcount]['s_large_image'] = "$file_medium_img_url";
           $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
           $story_list_array[$listcount]['s_is_locked'] = "0";
-          $story_list_array[$listcount]['s_author_id'] = "id";
-          $story_list_array[$listcount]['s_author_title'] = "author_name";
-          $story_list_array[$listcount]['s_pcategory_id'] = "1";
-          $story_list_array[$listcount]['s_pcategory_title'] = "Cover Story";
+          $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
+          $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
+          $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
+          $story_list_array[$listcount]['s_pcategory_title'] = "$term_name";
 
           
   
@@ -366,6 +382,12 @@ function getCoverstoriesList(){
     $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
     //field_data_field_story_magazine_story_issue
     $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
+    //field_data_field_itg_common_by_line_name
+    $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
+    //field_data_field_reporter_unique_id
+    $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
+    //field_data_field_primary_category
+    $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -380,20 +402,30 @@ function getCoverstoriesList(){
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    
+    $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
+    $query->fields('fsri', array('field_reporter_unique_id_value'));
+    $query->fields('fci', array('field_primary_category_value'));
 
 
     //end
     
     //->condition('fsid.field_story_issue_date_value', $issue_date)
     //->condition('fssm.field_story_select_magazine_target_id', $field_issue_magazine)
-    $query->condition('n.status', 1)->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
     //echo $query; exit();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue){
-        
+            $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
+            $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
+            $field_reporter_unique_id_value = str_replace("byline_","",$field_reporter_unique_id_value);
             $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
+            $field_primary_category_value = $resvalue['field_primary_category_value'];
+            $term = taxonomy_term_load($field_primary_category_value);
+            $term_name = $term->name;  
+            //echo "<pre>"; print_r(node_load($nid)); echo "</pre>";exit();
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
@@ -429,17 +461,17 @@ function getCoverstoriesList(){
     
         $cover_story_list_array[$loop_count]['s_id'] = "$nid";
         $cover_story_list_array[$loop_count]['s_title'] = "$title";
-        $cover_story_list_array[$loop_count]['s_share_link'] = "Universal_link";
+        $cover_story_list_array[$loop_count]['s_share_link'] = "$firebase_url";
         $cover_story_list_array[$loop_count]['s_short_desc'] = "$field_story_kicker_text_value";
         $cover_story_list_array[$loop_count]['s_comment_count'] = "$comment_cont";
         $cover_story_list_array[$loop_count]['s_small_image'] = "$file_small_img_url";
         $cover_story_list_array[$loop_count]['s_large_image'] = "$file_medium_img_url";
         $cover_story_list_array[$loop_count]['s_updated_datetime'] = "$changed_datetime";
         $cover_story_list_array[$loop_count]['s_is_locked'] = "0";
-        $cover_story_list_array[$loop_count]['s_author_id'] = "id";
-        $cover_story_list_array[$loop_count]['s_author_title'] = "author_name";
-        $cover_story_list_array[$loop_count]['s_pcategory_id'] = "1";
-        $cover_story_list_array[$loop_count]['s_pcategory_title'] = "Cover Story";
+        $cover_story_list_array[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
+        $cover_story_list_array[$loop_count]['s_author_title'] = "$field_itg_common_by_line_name_value";
+        $cover_story_list_array[$loop_count]['s_pcategory_id'] = "$field_primary_category_value";
+        $cover_story_list_array[$loop_count]['s_pcategory_title'] = "$term_name";
 
         $loop_count++;
   
@@ -582,7 +614,7 @@ function getIssueStoryCount($issue_date){
   $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');   
   $query_issue->fields('n', array('nid'));
   
-  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', $issue_date);
+  $query_issue->condition('n.status', 1)->condition('n.type', 'story')->condition('fsit.field_issue_title_value', $issue_date);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   $count = count($result_issue);
   return $count;
