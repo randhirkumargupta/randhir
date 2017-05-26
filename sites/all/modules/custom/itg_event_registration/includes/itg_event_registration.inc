@@ -49,6 +49,9 @@ function itg_event_registration_form($form , &$form_state) {
           if ((1 >= $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
             return itg_event_registration_get_status_message($node , 'tickets_not_available');
           }
+          elseif($current_date > $event_reg_close_date) {
+            return itg_event_registration_get_status_message($node , 'closed');
+          }
           else {
             return itg_event_registration_get_form();
           }
