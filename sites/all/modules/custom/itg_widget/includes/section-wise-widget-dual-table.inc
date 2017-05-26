@@ -23,9 +23,9 @@ function section_wise_widget_form($form , &$form_state) {
   $type = !empty($_GET['type']) ? $_GET['type'] : "All";
   $cat_id = !empty($_GET['category_tid']) ? $_GET['category_tid'] : 0;
   $item_per_page = !empty($_GET['items_per_page']) ? $_GET['items_per_page'] : 10;
-  $table = 'itg_widget_order';
+  $table = 'itg_widget_order_section';
   if (strtolower($type) == 'all') {
-    $table = 'itg_widget_order_section';
+    $table = 'itg_widget_order';
   }
   $db_query = db_select($table , 'iwo')->extend('PagerDefault')->limit($item_per_page);
   $db_query->fields('iwo' , array('nid' , 'weight' , 'content_type' , 'cat_id'));
@@ -121,7 +121,7 @@ function _get_sections_name_related_to_nid($nid) {
 function section_wise_widget_form_submit($form , &$form_state) {
   $content_type_hint = $form_state['input']['content_type_hint'];
   $db_table = 'itg_widget_order_section';
-  if (strtolower($content_type_hint) != 'all') {
+  if (strtolower($content_type_hint) == 'all') {
     $db_table = 'itg_widget_order';
   }
   $widget_data = $form_state['input']['widget_data'];

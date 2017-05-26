@@ -346,7 +346,7 @@ function itg_widget_block_info() {
     'info' => t('Accord') ,
     'cache' => DRUPAL_CACHE_GLOBAL ,
   );
-  
+
   $blocks['section_wise_order_reorder_form'] = array(
     'info' => t('Section Order Reorder Form') ,
   );
