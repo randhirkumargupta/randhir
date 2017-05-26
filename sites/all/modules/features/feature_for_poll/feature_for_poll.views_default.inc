@@ -928,6 +928,12 @@ function feature_for_poll_views_default_views() {
     'view_mode' => 'full',
   );
   $handler->display->display_options['fields']['field_poll_answer']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Associate poll (field_associate_poll) */
   $handler->display->display_options['arguments']['field_associate_poll_target_id']['id'] = 'field_associate_poll_target_id';
@@ -990,14 +996,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field collection item: Master Title */
-  $handler->display->display_options['fields']['field_poll_question_text']['id'] = 'field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['table'] = 'field_data_field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['field'] = 'field_poll_question_text';
-  $handler->display->display_options['fields']['field_poll_question_text']['label'] = 'Question';
-  $handler->display->display_options['fields']['field_poll_question_text']['alter']['text'] = '[field_poll_question_text] jhjhjhjh';
-  $handler->display->display_options['fields']['field_poll_question_text']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_poll_question_text']['hide_alter_empty'] = FALSE;
   /* Field: Content: Poll Question Video */
   $handler->display->display_options['fields']['field_poll_question_video']['id'] = 'field_poll_question_video';
   $handler->display->display_options['fields']['field_poll_question_video']['table'] = 'field_data_field_poll_question_video';
@@ -1030,6 +1028,12 @@ function feature_for_poll_views_default_views() {
     'view_mode' => 'full',
   );
   $handler->display->display_options['fields']['field_poll_answer']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Associate poll (field_associate_poll) */
   $handler->display->display_options['arguments']['field_associate_poll_target_id']['id'] = 'field_associate_poll_target_id';
