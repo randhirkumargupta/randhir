@@ -640,6 +640,147 @@ function itg_rapid_api_resource() {
       	),
 	),
         
+        // magazine section start
+        
+         // magazine_edition custom resource declaration.....
+	'magazine_edition' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves magazine_edition schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_magazine_edition',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+            
+                        array(
+                            'name' => 'id',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 0), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+                        array(
+                            'name' => 'cpageno',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 1), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 2), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // magazine_coverstories custom resource declaration.....
+	'magazine_coverstories' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves magazine_coverstories schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_magazine_coverstories',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // magazine_editionlist custom resource declaration.....
+	'magazine_editionlist' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves magazine_editionlist schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_magazine_editionlist',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+            
+                        array(
+                            'name' => 'sdate',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 0), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+                        array(
+                            'name' => 'tdate',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 1), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+                        array(
+                            'name' => 'cpageno',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 2), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                                'source' => array('path' => 3), 
+                            'optional' => TRUE,
+                            'default' => '*',
+                            ),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // magazine section end
+        
   );
 
   return $api;
@@ -1326,3 +1467,101 @@ function itg_rapid_api_otherapps_android_json($token) {
      return $return_obj;
    }
 }
+
+// magazine section start
+
+/**
+ * [itg_rapid_api_magazine_edition] definition.
+ * Returns the information about a itg_rapid_api_magazine_edition.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_magazine_edition($id, $cpageno, $token) {
+    
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       //valid tid & pageno
+        if(!is_numeric($id)){
+          $id = 0;
+        }
+        if(!is_numeric($cpageno)){
+          $cpageno = 0;
+        }
+       // call function from return data..
+       $jsondata = magazineEditionPageRerourceValue($id, $cpageno);
+       //print_r($jsondata);exit();
+       
+
+     return $jsondata;
+   }
+}
+
+
+/**
+ * [itg_rapid_api_magazine_coverstories] definition.
+ * Returns the information about a itg_rapid_api_magazine_edition.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_magazine_coverstories($token) {
+    
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       
+       // call function from return data..
+       $jsondata = magazineCoverstoriesPageRerourceValue();
+       //print_r($jsondata);exit();
+       
+
+     return $jsondata;
+   }
+}
+
+/**
+ * [itg_rapid_api_magazine_editionlist] definition.
+ * Returns the information about a itg_rapid_api_magazine_editionlist.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+
+function itg_rapid_api_magazine_editionlist($sdate, $tdate, $cpageno, $token) {
+    
+    $get_token = variable_get('mobile_service_token');
+    if($get_token != $token){
+        return services_error(t('Please enter valid token'), 406);
+    }
+    else{
+       //valid tid & pageno
+        if(!is_numeric($sdate)){
+          $sdate = 0;
+        }
+        if(!is_numeric($tdate)){
+          $tdate = 0;
+        }
+        if(!is_numeric($cpageno)){
+          $cpageno = 0;
+        }
+       // call function from return data..
+       $jsondata = magazineEditionListPageRerourceValue($sdate, $tdate, $cpageno);
+       //print_r($jsondata);exit();
+       
+
+     return $jsondata;
+   }
+}
+
+// magazine section end
