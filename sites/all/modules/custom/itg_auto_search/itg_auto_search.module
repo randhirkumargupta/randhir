@@ -199,6 +199,7 @@ function itg_auto_search_block_view($delta = '') {
     // Auto Master Compare widget case
     case 'auto_master_compare_widget':
       $page_title = 'Auto';
+      $columnNo = 'single-table';
       $info['widget'] = 'auto_master_compare_widget';
       $arg = arg();
       $query_string = $arg[3];
@@ -219,9 +220,22 @@ function itg_auto_search_block_view($delta = '') {
             $auto1[0]->$key = "&nbsp;";
           }
         }
+        if(isset($auto1)){
+            $page_title = $auto1[0]->vehicle;
+            $columnNo = 'single-table';
+        }
+        if(isset($auto2)){
+            $page_title = $auto2[0]->vehicle;
+            $columnNo = 'single-table';
+        }
+        if(isset($auto1) && isset($auto2)){
+            $page_title = $auto1[0]->vehicle.' vs. '.$auto2[0]->vehicle;
+            $columnNo = 'double-table';
+        }
         $data = array(
           'first' => $auto1,
-          'second' => $auto2
+          'second' => $auto2,
+          'column' => $columnNo
         );
 
         $block['content'] = theme("auto_compare_theme", array("data" => $data));
@@ -231,15 +245,7 @@ function itg_auto_search_block_view($delta = '') {
       }
       break;
   }
-  if(isset($auto1)){
-      $page_title = $auto1[0]->vehicle;
-  }
-  if(isset($auto2)){
-      $page_title = $auto2[0]->vehicle;
-  }
-  if(isset($auto1) && isset($auto2)){
-      $page_title = $auto1[0]->vehicle.' vs. '.$auto2[0]->vehicle;
-  }
+  
   drupal_set_title($page_title);
   return $block;
 }
