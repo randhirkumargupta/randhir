@@ -767,7 +767,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
     $user_type = 'authenticated';
     $user_name = $user->name;
     $user_alt_mail = itg_get_user_alt_email($user->uid);
-    watchdog('quiz', $user_alt_mail);
+    watchdog('quiz_user_alt_email', $user_alt_mail);
     if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false) && !empty($user_alt_mail)) {
       $user_mail = $user_alt_mail;
     }
