@@ -5425,6 +5425,10 @@ div.node #comments h2 {
   cursor: pointer;
   color: red;
 }
+.block-itg-related .checked-list li .rc-bottom {
+  font-size: 13px;
+  padding: 5px 0 0;
+}
 .block-itg-related .checked-list .ui-state-default span.item-value {
   cursor: default;
 }
