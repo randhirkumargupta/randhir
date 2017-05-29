@@ -12167,8 +12167,10 @@ h1.about-us-heading + div p {
 .itg-layout-container.default-section .auto-block-2 .special-top-news .widget-title {
   position: absolute;
 }
-.itg-layout-container.default-section .auto-block-2 .special-top-news ul {
-  padding-top: 20px !important;
+.itg-layout-container.default-section .auto-block-2 .special-top-news .itg-listing-wrapper {
+  margin-top: 22px !important;
+  overflow: auto;
+  height: 100%;
 }
 .itg-layout-container.default-section .itg-listing, .itg-layout-container.default-section .featured-news {
   border: none;

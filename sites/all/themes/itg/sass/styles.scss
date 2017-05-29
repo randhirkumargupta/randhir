@@ -10016,8 +10016,10 @@ h1.about-us-heading{
             .widget-title{
                 position: absolute;
             }
-            ul{
-                padding-top: 20px !important;
+            .itg-listing-wrapper{
+              margin-top: 22px !important;
+              overflow: auto;
+              height: 100%;
             }
         }
     }
