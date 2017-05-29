@@ -14226,6 +14226,44 @@ span.close_btt {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 
+.payment-messages-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Roboto Slab';
+  color: #000;
+}
+.payment-messages-wrapper h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 50px;
+  margin: 40px 0;
+}
+.payment-messages-wrapper .payment-message {
+  background: #ef3c24;
+  color: #fff;
+  font-size: 30px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  margin: 30px 0;
+}
+.payment-messages-wrapper .payment-message .fa {
+  font-size: 34px;
+}
+.payment-messages-wrapper .payment-message-text {
+  margin: 0 10px;
+}
+.payment-messages-wrapper .payment-other-text {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.payment-messages-wrapper .payment-other-text a {
+  color: #ef3c24;
+  text-decoration: none;
+}
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share {
