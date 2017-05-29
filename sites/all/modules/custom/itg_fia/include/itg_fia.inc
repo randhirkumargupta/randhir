@@ -100,7 +100,7 @@ function itg_fia_xml_node_feed($query) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] .
                 '<figure>
                    <img src="' . $img_path . '">
-                   <audio title="audio title">
+                   <audio title="audio title" autoplay="autoplay" muted="muted">
                      <source src="' . $audio_url . '">
                   </audio>
                  </figure>';
@@ -109,7 +109,7 @@ function itg_fia_xml_node_feed($query) {
         $body_vals[$last_postion] = $body_vals[$last_postion] .
                 '<figure>
                    <img src="' . $img_path . '">
-                   <audio title="audio title">
+                   <audio title="audio title" autoplay="autoplay" muted="muted">
                     <source src="' . $audio_url . '">
                   </audio>
                 </figure>';
