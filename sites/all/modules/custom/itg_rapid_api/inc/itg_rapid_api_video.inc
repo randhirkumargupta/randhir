@@ -112,6 +112,8 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
     $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
+    //field_data_field_primary_category
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -129,6 +131,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->fields('fss', array('field_story_syndication_value'));
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fvu', array('field_video_upload_value'));
+    $query->fields('fpc', array('field_primary_category_value'));
 
 
     //end
@@ -151,6 +154,9 @@ function generateVideoCategoryList($tid, $pageno) {
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+      $field_primary_category_value = $resvalue['field_primary_category_value'];
+      $term = taxonomy_term_load($tid);
+      $term_name = $term->name;
       //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
@@ -212,6 +218,8 @@ function generateVideoCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
         $photo_list_array[$listcount]['v_show_ad'] = "0";
         $photo_list_array[$listcount]['v_video_size'] = "300";
+        $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
+        $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name";
         
         $listcount++;
     }
