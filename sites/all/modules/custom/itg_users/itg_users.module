@@ -196,7 +196,15 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       $form['field_user_section']['und']['#options'] = $op;
 
       $user_role = itg_users_role_delegation($form['account']['roles']['#options']);
-
+      // not allow any user to change front user role.
+      if (array_key_exists(SITE_ADMIN, $user->roles)) {
+        if (in_array(FRONT_USER, $form['account']['roles']['#default_value'])) {
+          $user_role = array(FRONT_USER => 'Front User');
+        } else {
+          $user_role = $user_role;
+        }
+      }
+      // code end here
       if (isset($user_role)) {
         if ($form['#user']->uid != $user->uid) {
           $form['selected'] = array(
