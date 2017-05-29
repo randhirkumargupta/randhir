@@ -12172,6 +12172,9 @@ h1.about-us-heading + div p {
   overflow: auto;
   height: 100%;
 }
+.itg-layout-container.default-section .auto-block-2 .special-top-news .itg-listing-wrapper ul {
+  padding: 0 !important;
+}
 .itg-layout-container.default-section .itg-listing, .itg-layout-container.default-section .featured-news {
   border: none;
 }

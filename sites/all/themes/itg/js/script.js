@@ -325,6 +325,7 @@ jQuery(document).ready(function () {
 //  });
 
 jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
+jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
 
 //header menu add icon for mobile
   jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');

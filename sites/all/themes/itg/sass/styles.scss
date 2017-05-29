@@ -10020,6 +10020,9 @@ h1.about-us-heading{
               margin-top: 22px !important;
               overflow: auto;
               height: 100%;
+              ul{
+                padding: 0 !important;
+              }
             }
         }
     }
