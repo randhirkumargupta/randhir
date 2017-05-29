@@ -28,8 +28,7 @@ function itg_fia_xml_node_feed($query) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
       $pubdate = date('Y-m-d\Th:i:s\Z', $node->workbench_moderation['current']->timestamp);
-    }
-    else {
+    } else {
       $op_pub = date('F j, h:i a', $node->created);
       $pubdate = date('Y-m-d\Th:i:s\Z', $node->created);
     }
@@ -42,7 +41,7 @@ function itg_fia_xml_node_feed($query) {
     $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
-    $img_position =  $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
+    $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
     $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
@@ -60,8 +59,7 @@ function itg_fia_xml_node_feed($query) {
         $get_iframe_place = $get_map_data[18];
         $get_iframe_places = explode('2s', $get_map_data[18]);
         $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
-      } 
-      else {
+      } else {
         // getting map data from map url
         $get_map = explode("place", $map_data);
         $get_map_coordinate = explode("@", $get_map[1]);
@@ -72,47 +70,44 @@ function itg_fia_xml_node_feed($query) {
         $lng = $coordinate_map[1];
       }
     }
-    
+
     // getting gallery data
     $target_nids = NULL;
     $gall_position = NULL;
-    if(is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
+    if (is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
       $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
-      foreach($associate_gallery as $fc_k => $fc_v){
-        $fc_ids = $associate_gallery[$fc_k]['value'];
+      foreach ($associate_gallery as $fc_k => $fc_v) {
+        $fc_ids = $fc_v['value'];
         $load_fc = field_collection_item_load($fc_ids);
-        $gall_position[] = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
-        $fc_target_id = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
-        foreach($fc_target_id as $fct_k => $fct_v){
-          $target_nids[] = $fct_v['target_id'];
-        }
+        $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
+        $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
       }
     }
-    
+
     // facebook instant article body placement
     $node_body = $node->body[LANGUAGE_NONE][0]['value'];
-    $numLine = explode("<p>",$node_body);
+    $numLine = explode("<p>", $node_body);
+
     unset($numLine[0]);
-    foreach ($numLine as $body_key =>  $body_val) {
+    foreach ($numLine as $body_key => $body_val) {
       $bk[$body_key] = $body_key;
       $body_vals[$body_key] = $numLine[$body_key];
     }
-    
+
     // facebook instant article audio placement
     if (!empty($audio_url)) {
       if (in_array($audio_pos, $bk)) {
-        $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
+        $body_vals[$audio_pos] = $body_vals[$audio_pos] .
                 '<figure>
                    <img src="' . $img_path . '">
                    <audio title="audio title">
                      <source src="' . $audio_url . '">
                   </audio>
                  </figure>';
-      }
-      else {
+      } else {
         $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>
+        $body_vals[$last_postion] = $body_vals[$last_postion] .
+                '<figure>
                    <img src="' . $img_path . '">
                    <audio title="audio title">
                     <source src="' . $audio_url . '">
@@ -120,28 +115,27 @@ function itg_fia_xml_node_feed($query) {
                 </figure>';
       }
     }
-    
+
     // facebook instant article animated image placement
     if (!empty($img_path)) {
       if (in_array($img_position, $bk)) {
-        $body_vals[$img_position] = $body_vals[$img_position] . 
-               '<figure>
+        $body_vals[$img_position] = $body_vals[$img_position] .
+                '<figure>
                   <img src="' . $img_path . '" />
                 </figure>';
-      }
-      else {
+      } else {
         $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>
+        $body_vals[$last_postion] = $body_vals[$last_postion] .
+                '<figure>
                   <img src="' . $img_path . '" />
                 </figure>';
       }
     }
-    
+
     // facebook instant article map placement
     if (!empty($get_place_name)) {
       if (in_array($map_pos, $bk)) {
-        $body_vals[$map_pos] = $body_vals[$map_pos] . 
+        $body_vals[$map_pos] = $body_vals[$map_pos] .
                 '<figure class="op-map">
                   <script type="application/json" class="op-geotag">
                     {
@@ -161,10 +155,9 @@ function itg_fia_xml_node_feed($query) {
                      }
                   </script>
                 </figure>';
-      }
-      else {
+      } else {
         $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] . 
+        $body_vals[$last_postion] = $body_vals[$last_postion] .
                 '<figure class="op-map">
                   <script type="application/json" class="op-geotag">
                     {
@@ -184,69 +177,62 @@ function itg_fia_xml_node_feed($query) {
                      }
                   </script>
                 </figure>';
-
       }
     }
 
     // Creating Slideshow for facebook instant article data
-    if(!empty($target_nids)) {
-      foreach ($gall_position as $pos) {
-        $gall_nodes = node_load_multiple($target_nids);
-        foreach ($gall_nodes as $gl_k => $gl_v) {
-          $get_fc = $gl_v->field_gallery_image[LANGUAGE_NONE];
-          foreach($get_fc as $get_fck => $get_fcv){
-             $get_fc_ids = $get_fc[$get_fck]['value'];
-             $load_fc_data = field_collection_item_load($get_fc_ids);
-             $imgs_path = file_create_url($load_fc_data->field_images[LANGUAGE_NONE][0]['uri']);
-//          $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-            if (in_array($pos, $bk)) {
-              $body_vals[$pos] = $body_vals[$pos] . 
-                '<figure>
-                  <img src="' . $imgs_path . '" />
-                 </figure>';
-
-            }
-            else {
-              $last_postion = end($bk);
-              $body_vals[$last_postion] = $body_vals[$last_postion] . 
-                '<figure>
-                  <img src="' . $imgs_path . '" />
-                 </figure>';
-            }
+    if (!empty($target_nids)) {
+      foreach ($target_nids as $tn_k => $tn_v) {
+        foreach ($tn_v as $tn_vk => $tn_vv) {
+          $node = node_load($tn_vv[0]['target_id']);
+          $get_fc = $node->field_gallery_image[LANGUAGE_NONE];
+          foreach ($get_fc as $get_fck => $get_fcv) {
+            $get_fc_ids = $get_fcv['value'];
+            $load_fc_data = field_collection_item_load($get_fc_ids);
+            $imgs_path[$tn_k][] = file_create_url($load_fc_data->field_images[LANGUAGE_NONE][0]['uri']);
           }
         }
       }
-      foreach ($gall_position as $gal_pos_key => $gal_pos_val) {
-        $gal_data = str_replace('</p>', '</p><figure class="op-slideshow">', $body_vals[$gal_pos_val]);
-        $body_vals[$gal_pos_val] = $gal_data . '</figure>';
+      foreach ($imgs_path as $img_k => $img_v) {
+        $get_script = "";
+        foreach ($img_v as $img_vk => $imgs_path) {
+          $get_script .= '<figure>
+                 <img src="' . $imgs_path . '" />
+                </figure>';
+        }
+        $full_script_slider[$img_k] = '<figure class="op-slideshow">' . $get_script . '</figure>';
+      }
+      $slider_keys = array_keys($full_script_slider);
+      foreach ($slider_keys as $xx => $sliderkey) {
+        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey];
       }
     }
-    
+
     // Creating Social Embed Code for facebook instant article data
-    if(!empty($embed_code_data)) {
+    if (!empty($embed_code_data)) {
       if (in_array($embed_code_pos, $bk)) {
-        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
+        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] .
+                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      } else {
+        $last_postion = end($bk);
+        $body_vals[$last_postion] = $body_vals[$last_postion] .
                 '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       }
-      else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure class="op-interactive">' . $embed_code_data . '</figure>';
-      }
     }
+
     $node_body = implode("<p>", $body_vals);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
-  
+
   global $base_url;
   $channel_defaults = array(
-    'title' => variable_get('site_name', 'Drupal'),
-    'link' => $base_url . '/' . current_path(),
+      'title' => variable_get('site_name', 'Drupal'),
+      'link' => $base_url . '/' . current_path(),
   );
-  
+
   $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
   $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
@@ -277,7 +263,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
  */
 function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
-  
+
   $output .= '      <title>' . $title . "</title>\n";
   $output .= '      <link>' . check_url($link) . "</link>\n";
   $output .= '      <guid>' . $guid . "</guid>\n";
@@ -310,7 +296,7 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
   $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
   $output .= "    </header>\n\n";
-  $output .= "    <div property='content:encoded'>". $node_body_content . "</div>\n";
+  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n";
   $output .= "    <footer>\n";
   // <!-- Credits for your article -->
   $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
@@ -329,6 +315,7 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
 /*
  * Return Author Name
  */
+
 function get_author_name($auid) {
   $get_author_id = db_query("SELECT byline_id from {itg_multi_byline_info} mbi WHERE mbi.nid = :nid AND mbi.publish_status = :status", array(":nid" => $auid, ":status" => 1))->fetchField();
   $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
