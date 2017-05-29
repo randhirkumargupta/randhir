@@ -116,7 +116,7 @@ jQuery(document).ready(function () {
 
     // jQuery code to remove checked list item
     jQuery('.checked-list').on('click', '.fa-times', function () {
-        jQuery(this).parent().remove();
+        jQuery(this).parent().parent().remove();
     });
     // end of code
 
