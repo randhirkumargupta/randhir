@@ -14189,6 +14189,13 @@ span.close_btt {
   width: 3px;
 }
 
+.special-top-news .itg-listing-wrapper .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.special-top-news .itg-listing-wrapper .mCSB_scrollTools {
+  width: 3px;
+}
+
 .story-section .story-right .description .social-share.social-share-embed ul {
   list-style-type: none;
 }
