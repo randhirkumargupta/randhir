@@ -125,7 +125,7 @@ function generateVideoCategoryList($tid, $pageno) {
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'type'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fss', array('field_story_syndication_value'));
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fvu', array('field_video_upload_value'));
@@ -352,7 +352,7 @@ function generateProgramCategoryList($tid, $pageno) {
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'type'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fss', array('field_story_syndication_value'));
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fvu', array('field_video_upload_value'));
