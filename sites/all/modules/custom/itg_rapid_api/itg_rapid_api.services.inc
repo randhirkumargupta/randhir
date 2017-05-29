@@ -843,6 +843,7 @@ function itg_rapid_api_newslist($id, $cpageno, $token) {
     }
     else{
        //valid tid & pageno
+        $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
         }
@@ -850,7 +851,7 @@ function itg_rapid_api_newslist($id, $cpageno, $token) {
           $cpageno = 0;
         }
         
-        $redis_key = "itgd_rapid_api_newslist";
+        $redis_key = "itgd_rapid_api_newslist_".$suffix;
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -889,6 +890,7 @@ function itg_rapid_api_programlist($id, $cpageno, $token) {
     }
     else{
        //valid tid & pageno
+        $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
         }
@@ -896,7 +898,7 @@ function itg_rapid_api_programlist($id, $cpageno, $token) {
           $cpageno = 0;
         }
         
-        $redis_key = "itgd_rapid_api_programlist";
+        $redis_key = "itgd_rapid_api_programlist_".$suffix;
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -935,6 +937,7 @@ function itg_rapid_api_videolist($id, $cpageno, $token) {
     }
     else{
        //valid tid & pageno
+        $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
         }
@@ -942,7 +945,7 @@ function itg_rapid_api_videolist($id, $cpageno, $token) {
           $cpageno = 0;
         }
         
-        $redis_key = "itgd_rapid_api_videolist";
+        $redis_key = "itgd_rapid_api_videolist_".$suffix;
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -981,11 +984,12 @@ function itg_rapid_api_photodetail($id, $token) {
     else{
        
          //valid id 
+        $suffix = $id;
         if(!is_numeric($id)){
           $id = 0;
         }
         
-        $redis_key = "itgd_rapid_api_photodetail";
+        $redis_key = "itgd_rapid_api_photodetail_".$suffix;
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1025,6 +1029,7 @@ function itg_rapid_api_photolist($id, $cpageno, $token) {
     }
     else{
        //valid tid & pageno
+        $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
         }
@@ -1032,7 +1037,7 @@ function itg_rapid_api_photolist($id, $cpageno, $token) {
           $cpageno = 0;
         }
         
-        $redis_key = "itgd_rapid_api_photolist";
+        $redis_key = "itgd_rapid_api_photolist_".$suffix;
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
