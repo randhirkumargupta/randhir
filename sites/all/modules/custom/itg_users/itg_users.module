@@ -78,18 +78,9 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == "user_pass") {
-    drupal_add_js("jQuery('#edit-name').blur(function(){
-      jQuery('#user-pass .login-wrapper span.error').text('');
-      jQuery('#user-pass .login-wrapper span.error').text('Please enter Email Address.');
-      });", array('type' => 'inline', 'scope' => 'footer'));
-
-    drupal_add_js("jQuery('#edit-submit').on('click', function(){
-      setInterval(function() {
-      jQuery('#user-pass .login-wrapper span.error').text('');
-      jQuery('#user-pass .login-wrapper span.error').text('Please enter Email Address.');
-        }, 0.1);
-      });", array('type' => 'inline', 'scope' => 'footer'));
+   drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users_form.js', array('weight' => 1, 'scope' => 'footer'));
   }
+  
   if ($form_id == 'user_profile_form') {
     // access denied code for direct hit 
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit' && arg(1) != $user->uid) {
