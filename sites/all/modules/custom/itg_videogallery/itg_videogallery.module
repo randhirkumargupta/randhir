@@ -1625,7 +1625,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL','S3' => 'S3'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -3524,7 +3524,6 @@ function itg_videogallery_s3_file_to_dm() {
       }
 // Code start for Adding  video in daily motion 
     }
-    die;
   }
   // Use the high-level iterators (returns ALL of your objects).
 }
