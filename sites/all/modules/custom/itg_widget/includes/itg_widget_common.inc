@@ -1019,6 +1019,8 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
     case 'views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget':
     case 'views-exposed-form-story-widget-most-popular-widget':
     case 'views-exposed-form-story-widget-page-2':
+    case 'views-exposed-form-so-sorry-so-sorry-videos-widget':
+    case 'views-exposed-form-special-how-i-made-it-special-how-made-widget-list':
     case 'views-exposed-form-story-widget-top-takes-video-widget':
     case 'views-exposed-form-story-widget-watch-right-now-widget':
     case 'views-exposed-form-home-page-feature-widget-page-2':
