@@ -44,10 +44,15 @@ function itg_common_custompath_insert_load($node) {
   }
 
   $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection) && $node->type != 'reporter'|| ($node->type == 'podcast')) {
+  if (!empty($getsection) && $node->type != 'reporter' || ($node->type == 'podcast')) {
     if ($node->type == 'story' && is_issue_baised_magazine($node)) {
-      $pathdata = 'magazine';
-      $pathdata .= '/' . get_path_from_category($getsection);
+      if (!empty($node->field_story_select_supplement['und'][0]['target_id'])) {
+        $pathdata = 'magazine/supplement';
+      }
+      else {
+        $pathdata = 'magazine';
+        $pathdata .= '/' . get_path_from_category($getsection);
+      }
       //Get node type.
       $pathdata .= '/' . $node->type;
       // Get issue date.
@@ -64,8 +69,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+      // Create url alise for magazine type story.      
     }
     elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
@@ -81,8 +85,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.
-      //$node->path = array('alias' => $newpath , 'pathauto' => FALSE);
+      // Create url alise for magazine type story.      
     }
     else {
       $set_hierarchy = get_path_from_category($getsection);
@@ -213,7 +216,6 @@ function is_podcast($node) {
  */
 function itg_common_custompath_migrated_load($node , $type = NULL) {
   if (!empty($node->path['alias'])) {
-
     $node_sef = $node->path['alias'];
   }
   else {
@@ -244,7 +246,7 @@ function itg_common_custompath_migrated_load($node , $type = NULL) {
     $set_hierarchy = array_reverse($section_hierarchy);
     if ($type != 'update_migrated') {
       $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      // $newpath = itg_common_custompath_insert_val($pathdata);
+
       $newpath = $pathdata;
     }
     else {
@@ -293,7 +295,6 @@ function get_path_from_category($tid) {
   }
   return implode('/' , $section);
 }
-
 
 /**
  * @param string $entity_type
@@ -416,3 +417,56 @@ function itg_get_sef_url($sef_path , $nodeid) {
     return $edited_sef_url;
   }
 }
+
+
+//Get custompath of migrate.
+
+function itg_migrate_custompath($node, $published_date, $node_sef) { 
+
+  //$published_date = 'date';//2014-02-31
+
+  $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+  if (!empty($getsection)) {
+    if ($node->type == 'story' && is_issue_baised_magazine($node)) {
+      if (!empty($node->field_story_select_supplement['und'][0]['target_id'])) {
+        $pathdata = 'magazine/supplement';
+      }
+      else {
+        $pathdata = 'magazine';
+        $pathdata .= '/' . get_path_from_category($getsection);
+      }
+     
+      //Get node type.
+      $pathdata .= '/' . $node->type;
+      // Get issue date.
+      $issue_date = $node->field_story_issue_date['und'][0]['value'];
+      $issue_date_sef_format = date('Ymd' , strtotime($issue_date));
+      // preapreurl with issue date.
+      $pathdata .= '/' . $issue_date_sef_format;
+      // Add node title.
+      $pathdata .= '-' . trim($node_sef);
+      // Add node id.
+      $pathdata .= '-' . $node->nid;
+      // Add workbanch date.
+      $pathdata .= '-' . $published_date;
+      // Prepare SEO friendly node url
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      return $newpath;
+      // Create url alise for magazine type story.      
+    } else {
+      $set_hierarchy = get_path_from_category($getsection);
+      $node_CT = $node->type;
+      if ($node_CT == 'story') {
+        $node_CT = 'story';
+      } elseif ($node_CT == 'photogallery') {
+        $node_CT = 'photo';
+      } elseif ($node_CT == 'videogallery') {
+        $node_CT = 'videos';
+      }
+      $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+      $newpath = itg_common_custompath_insert_val($pathdata);
+      return $newpath;
+    }
+  }
+}
+

@@ -31,35 +31,9 @@ if ($act_type != 'password_changed') {
   $get_body = str_replace("[itg_mail_token:itg_account_user_lname]", $lname, $get_body_fname);
   $get_body_val = str_replace('[itg_mail_token:itg_account_activation_link]', $activelink, $get_body);
   print $get_body_val;
-//  $get_body_vals = explode(",",$get_body_val);
 } else {
   $get_body_fname = str_replace("[itg_mail_token:itg_account_user_fname]", $fname, $mail_body);
   $get_body = str_replace("[itg_mail_token:itg_account_user_lname]", $lname, $get_body_fname);
   print $get_body;
-//  $get_body_vals = explode(',', $get_body);
 }
-?> 
-
-<!--<!DOCTYPE html> 
-<html xmlns:v="urn:schemas-microsoft-com:vml">
-  <head>
-    <title>India Today Account Activation Mail</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
-      <?php 
-//      foreach ($get_body_vals as $bk => $bv) {
-//        print '<tr> <td style="padding: 10px 20px;">' . $bv . '</td></tr>';
-//      } 
-      ?>
-      <tr>
-        <td style="padding: 10px 20px;">Thanks,</td>
-      </tr>
-      <tr>
-        <td style="padding: 0px 20px;">India Today Group</td>
-      </tr>
-    </table>
-  </body>
-</html>-->
+?>

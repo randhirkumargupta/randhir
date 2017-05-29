@@ -19,4 +19,22 @@ jQuery(document).ready(function () {
         jQuery('#edit-field-mail-templates-category-und').val(select_option);
         jQuery('#edit-title').val(select_option_title);
     });
+    
+     jQuery('#edit-field-mail-templates-category-und').change(function(){
+         changeHeading();
+     });
+     changeHeading();
 });
+
+function changeHeading(){
+    var select_option = jQuery('#edit-field-mail-templates-category-und option:selected').val();
+    if(select_option == 'my_following'){
+        jQuery('.node-mail_templates-form').find('.mail-template-category.my_following').find('h2').html('<span>My Following</span>');
+    }
+    if(select_option == 'loyalty_points_expiration'){
+        jQuery('.node-mail_templates-form').find('.mail-template-category.my_following').find('h2').html('<span>Loyalty Points</span>');
+    }
+    if(select_option == 'redeem_points'){
+        jQuery('.node-mail_templates-form').find('.mail-template-category.my_following').find('h2').html('<span>Redeem Points</span>');
+    }
+}

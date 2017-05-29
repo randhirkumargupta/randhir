@@ -145,6 +145,14 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Search Akamai Log'),
   );
+  
+  $form['fieldset']['markup1'] = array(
+    '#markup' => '<p>'.l('Click here for node report where TTL is not set(But globally set)','admin/config/system/itg_akamai/akamai_not_implemented').'</p>',
+  );
+  
+  $form['fieldset']['markup2'] = array(
+    '#markup' => '<p>'.l('Click here for section report where TTL is not set(But globally set)','admin/config/system/itg_akamai/akamais_not_implemented').'</p>',
+  );
 
   $form['fieldset']['purge_id'] = array(
     '#type' => 'textfield',
@@ -301,16 +309,18 @@ function itg_akamai_cache_akamai_ccpurge() {
 
   $allnodes = node_type_get_types();
   $sn = 1;
-
+  // This is the restricted_cc
+   $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   foreach ($allnodes as $key => $value) {
-    $rows[] = array(
-      $sn++,
-      $value->name,
-      l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal button'))),
-      l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => 'button'))),
-    );
+    if (in_array($value->type, $mapping)) {
+      $rows[] = array(
+        $sn++,
+        $value->name . ' - ' . $value->type,
+        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal button'))),
+        l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => 'button'))),
+      );
+    }
   }
-
   $output = theme('table', array('header' => $header, 'rows' => $rows));
 
   $form['itg_akamai_cc_holder']['options'] = array(
@@ -705,7 +715,6 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   return $form;
-  
 }
 
 /**
@@ -843,4 +852,131 @@ function itg_akamai_custom_utl_from_data_count($field_container) {
     }
   }
   return $inserted_count;
+}
+
+/**
+ * Implements itg_akamai_akamai_not_implemented_rows()
+ */
+function itg_akamai_akamai_not_implemented_rows() {
+
+  $rows = array();
+
+  $header = array(
+    t('Sn no.'),
+    t('NID'),
+    t('Title'),
+  );
+
+  // Getting the list of nids for content types
+
+  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  $query = db_select('itg_akamai_content_setting', 'a');
+  $query->fields('a', array('entity_id'));
+  $query->condition('a.entity_type', $mapping, 'IN');
+  $result = $query->execute();
+  $data_nids = array();
+  while ($record = $result->fetchObject()) {
+    $data_nids[] = $record->entity_id;
+  }
+
+  $query_node = db_select('node', 'n');
+  $query_node->fields('n', array('nid', 'title'));
+
+  if (!empty($data_nids)) {
+    $query_node->condition('n.nid', $data_nids, 'NOT IN');
+  }
+
+  $query->condition('n.entity_type', $mapping, 'IN');
+  $query->orderBy('n.nid', 'DESC');
+
+  $query_node = $query_node->extend('PagerDefault')->limit(50);
+
+  $results_final = $query_node->execute();
+  $sn = 0;
+  while ($record = $results_final->fetchObject()) {
+
+    $rows[] = array(
+      ++$sn,
+      $record->nid,
+      $record->title,
+    );
+  }
+
+  $render_array['akamai_cache_logs_n_nid'] = array(
+    array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('No Record found!'),
+    ),
+    array(
+      '#theme' => 'pager',
+    ),
+  );
+
+  return $render_array;
+}
+
+
+/**
+ * Implements itg_akamai_akamai_not_implemented_rows()
+ */
+function itg_akamai_akamais_not_implemented_rows() {
+
+  $rows = array();
+
+  $header = array(
+    t('Sn no.'),
+    t('Tid'),
+    t('Name'),
+  );
+
+  // Getting the list of nids for content types
+
+  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  $query = db_select('itg_akamai_content_setting', 'a');
+  $query->fields('a', array('entity_id'));
+  $query->condition('a.entity_type', 'taxonomy');
+  $result = $query->execute();
+  $data_nids = array();
+  while ($record = $result->fetchObject()) {
+    $data_nids[] = $record->entity_id;
+  }
+
+  $query_node = db_select('taxonomy_term_data', 'n');
+  $query_node->fields('n', array('tid', 'name'));
+
+  if (!empty($data_nids)) {
+    $query_node->condition('n.tid', $data_nids, 'NOT IN');
+  }
+
+  $query->condition('n.vid', CATEGORY_MANAGMENT);
+  $query->orderBy('n.tid', 'DESC');
+
+  $query_node = $query_node->extend('PagerDefault')->limit(50);
+
+  $results_final = $query_node->execute();
+  $sn = 0;
+  while ($record = $results_final->fetchObject()) {
+
+    $rows[] = array(
+      ++$sn,
+      $record->tid,
+      $record->name,
+    );
+  }
+
+  $render_array['akamai_cache_logs_s_nid'] = array(
+    array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('No Record found!'),
+    ),
+    array(
+      '#theme' => 'pager',
+    ),
+  );
+
+  return $render_array;
 }

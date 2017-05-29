@@ -73,39 +73,32 @@ function itg_ugc_inqueue_content() {
     array('data' => t('Posted Date')),
     array('data' => t('Actions')),
   );
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con)
-    {
+    if ($con) {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;
       
-      if (!empty($_GET['items_per_page']))
-      {
+      if (!empty($_GET['items_per_page'])) {
         $limit = $_GET['items_per_page'];
       }
 
-      if (!empty($_GET['content_type']))
-      {
+      if (!empty($_GET['content_type'])) {
         $query['content_type'] = trim($_GET['content_type']);
         $query['status'] = 1;
         $query['publish_status'] = array('$ne' => 1);
       }
-      if (!empty($_GET['title']))
-      {
+      if (!empty($_GET['title'])) {
         $query['title'] = trim($_GET['title']);
         $query['status'] = 1;
         $query['publish_status'] = array('$ne' => 1);
       }
 
-      if (is_array($query) && empty($query))
-      {
+      if (is_array($query) && empty($query)) {
         $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('_id' => -1));
       }
-      else
-      {
+      else {
         $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
@@ -115,8 +108,7 @@ function itg_ugc_inqueue_content() {
       foreach ($userData as $row) {
         $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'?width=500&height=300">'.t('view').'</a></span> | <span class="edit-link"><a href="'.$base_url.'/node/add/'.$row['content_type'].'/'.$row['_id'].'?destination=ugc-inqueue-content">'.t('Approve').'</a></span> | <a href="ugc-title/'.$row['_id'].'/reject" class="ugc-reject">'.t('Reject').'</a>';
         
-        if ($row['status'] == 1)
-        {
+        if ($row['status'] == 1) {
           $status = 'Active';
         }
         

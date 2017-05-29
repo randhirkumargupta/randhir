@@ -644,11 +644,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  /* Sort criterion: Content: Updated date */
-  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['table'] = 'node';
-  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
@@ -4740,7 +4740,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4852,7 +4852,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4953,7 +4953,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';

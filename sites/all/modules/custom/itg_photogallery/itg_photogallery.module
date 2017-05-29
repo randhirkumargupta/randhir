@@ -17,7 +17,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['field_featured']['und']['#title'] = NULL;
     $form['field_story_syndication']['und']['#title'] = NULL;
     $form['field_photogallery_configuration']['und']['#title'] = NULL;
-    
+
     // checked comment box by default
     if (!isset($form['#node']->nid)) {
       $form['field_photogallery_configuration'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
@@ -30,30 +30,28 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
             });', array('type' => 'inline', 'scope' => 'footer'));
 
     $form['upload'] = array(
-        '#type' => 'plupload',
-        '#weight' => 21,
-
-        '#upload_validators' => array(
-            'file_validate_extensions' => array("png gif jpg jpeg"),
-        ),
-
-        '#description' => t('88x66 smallest size of image.'),
+      '#type' => 'plupload',
+      '#weight' => 21,
+      '#upload_validators' => array(
+        'file_validate_extensions' => array("png gif jpg jpeg"),
+      ),
+      '#description' => t('88x66 smallest size of image.'),
     );
     $form['field_common_audio_file']['#states'] = array(
-        'visible' => array(
-            ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
-        ),
+      'visible' => array(
+        ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
+      ),
     );
     $form['field_credit_name']['#states'] = array(
-        'visible' => array(
-            ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
-        ),
+      'visible' => array(
+        ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
+      ),
     );
 
     $form['field_story_comment_question']['#states'] = array(
-        'visible' => array(
-            ':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
-        )
+      'visible' => array(
+        ':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
+      )
     );
 
     if (!isset($_REQUEST['destination'])) {
@@ -68,8 +66,8 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#submit'][] = 'itg_photogallery_form_custom_callback';
 
     $form['field_story_extra_large_image']['#ajax'] = array(
-        'callback' => 'ajax_example_simplest_callback',
-        'wrapper' => 'replace_textfield_div',
+      'callback' => 'ajax_example_simplest_callback',
+      'wrapper' => 'replace_textfield_div',
     );
     $form['#validate'][] = 'itg_photogallery_custom_validate';
     $form['#after_build'][] = 'itg_photogallery_after_build';
@@ -91,11 +89,12 @@ function itg_photogallery_insert_image_data(array $image_ids, $node_id) {
         if (empty($result_exist)) {
           try {
             $inserted_data = db_insert('itg_original_image')->fields(array(
-                        'fid' => $filedata->fid,
-                        'nid' => $node_id,
-                        'image_url' => $fileurl,
-                    ))->execute();
-          } catch (Exception $e) {
+                  'fid' => $filedata->fid,
+                  'nid' => $node_id,
+                  'image_url' => $fileurl,
+                ))->execute();
+          }
+          catch (Exception $e) {
             
           }
         }
@@ -177,20 +176,20 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
           $response_result['video_id'] = $response['id'];
           $response_result['fid'] = $response['fid'];
           $nid = db_insert('dailymotion_response_details')
-                  ->fields(array(
-                      'title' => $response['title'],
-                      'channel' => $response['channel'],
-                      'fid' => $response['fid'],
-                      'tags' => $response['tags'],
-                      'video_id' => $response['id'],
-                      'nid' => $node_id,
-                      'upload_time' => REQUEST_TIME,
-                      'video_duration' => $response['duration'],
-                      'dailymotion_published' => 1,
-                      'type' => 'local',
-                      'name' => $file_details->filename,
-                  ))
-                  ->execute();
+              ->fields(array(
+                'title' => $response['title'],
+                'channel' => $response['channel'],
+                'fid' => $response['fid'],
+                'tags' => $response['tags'],
+                'video_id' => $response['id'],
+                'nid' => $node_id,
+                'upload_time' => REQUEST_TIME,
+                'video_duration' => $response['duration'],
+                'dailymotion_published' => 1,
+                'type' => 'local',
+                'name' => $file_details->filename,
+              ))
+              ->execute();
           itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
           itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
         }
@@ -202,12 +201,13 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
 
           try {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
-                    ->fields(array(
-                        'dailymotion_published' => 1,
-                    ))
-                    ->condition('fid', $dailymotion_video_result['fid'], '=')
-                    ->execute();
-          } catch (Exception $e) {
+                ->fields(array(
+                  'dailymotion_published' => 1,
+                ))
+                ->condition('fid', $dailymotion_video_result['fid'], '=')
+                ->execute();
+          }
+          catch (Exception $e) {
             
           }
 
@@ -247,9 +247,9 @@ function itg_photogallery_after_build($form, &$form_state) {
     $orignal_img_id = $form_state['input']['original_image_fids'];
   }
   $form['original_image_fids'] = array(
-      '#type' => 'hidden',
-      '#value' => $orignal_img_id,
-      '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
+    '#type' => 'hidden',
+    '#value' => $orignal_img_id,
+    '#attributes' => array('id' => 'original_image_fids', 'name' => 'original_image_fids'),
   );
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
@@ -263,8 +263,8 @@ function itg_photogallery_after_build($form, &$form_state) {
   }
 
   $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
-      '#weight' => 20,
+    '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
+    '#weight' => 20,
   );
   global $user, $base_url;
 
@@ -337,9 +337,9 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
   $options = array('language' => field_valid_language($langcode));
   // Merge default options.
   $default_options = array(
-      'default' => FALSE,
-      'deleted' => FALSE,
-      'language' => NULL,
+    'default' => FALSE,
+    'deleted' => FALSE,
+    'language' => NULL,
   );
   $options += $default_options;
   list(,, $bundle) = entity_extract_ids($entity_type, $entity);
@@ -360,11 +360,11 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
         if (isset($form[$field['field_name']]['und']['add_more'])) {
           // add a simple select list, this defaults to numb 3
           $form[$field['field_name']]['add_more_number'] = array(
-              '#type' => 'select',
-              '#title' => t('Add more no.'),
-              '#options' => drupal_map_assoc(range(0, 100)),
-              '#default_value' => isset($personalization) ? $personalization - 1 : 1,
-              '#attributes' => array('style' => 'display:none;'),
+            '#type' => 'select',
+            '#title' => t('Add more no.'),
+            '#options' => drupal_map_assoc(range(0, 100)),
+            '#default_value' => isset($personalization) ? $personalization - 1 : 1,
+            '#attributes' => array('style' => 'display:none;'),
           );
           if (isset($personalization)) {
             $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_personalization_field_add_more_submit';
@@ -444,10 +444,15 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
       $filename = $file_ids[$i]['filename'];
       $newFileName = substr($filename, 0, (strrpos($filename, ".")));
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
-    
+      $imge_thumb_id = itg_photogallery_crop_thumb($file_ids[$i]['fid']);
+
+
+      if ($imge_thumb_id) {
+        $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_small_image['und'][0]['fid'] = $imge_thumb_id;
+      }
       if ($file_ids[$i]['filename'] != "") {
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_credit['und'][0]['value'] = $_POST['field_credit_name']['und'][0]['value'];
-        $photo_by = end(explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE])); 
+        $photo_by = end(explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE]));
         $photo_byline = explode(')', $photo_by);
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_byline['und'][0]['target_id'] = $photo_byline[0];
         if (!empty($_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'])) {
@@ -460,17 +465,56 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 }
 
 /**
+ * 
+ * @global object $user
+ * @param type $fid
+ * @return type string 
+ */
+
+function itg_photogallery_crop_thumb($fid) {
+  global $user;
+  $file_image = file_load($fid);
+  $image = image_load($file_image->uri);
+  $image_extension = end(explode('.', $file_image->uri));
+  $filepath = file_default_scheme() . '://crop_image';
+  if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
+    $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
+  }
+  else {
+    $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
+  }
+  $image_name = $image_name . time();
+  $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
+  $uri = $filepath . '/' . $image_name . '.' . $image_extension;
+  $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+  $file = new StdClass;
+  $file->uid = $user->uid;
+  $file->filename = basename($uri);
+  $file->uri = $uri;
+  $file->filemime = file_get_mimetype($uri);
+  $file->filesize = @filesize($uri);
+  $file->timestamp = REQUEST_TIME;
+  $file->is_new = TRUE;
+  $file->status = FILE_STATUS_PERMANENT;
+  $file = file_save($file);
+  $urils = file_create_url($file->uri);
+
+  file_usage_add($file, 'itg_photogallery', 'file', $file->fid);
+  return $file->fid;
+}
+
+/**
  * Implements hook_block_info().
  * {@inheritdoc}
  */
 function itg_photogallery_block_info() {
   $blocks['photogallery_tab_form_block'] = array(
-      'info' => t('Photogallery Form Tab Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Photogallery Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['photo_menu_landing_block'] = array(
-      'info' => t('Photo landing page menu'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Photo landing page menu'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   return $blocks;
@@ -502,23 +546,23 @@ function itg_photogallery_block_view($delta = '') {
  */
 function itg_photogallery_theme($existing, $type, $theme, $path) {
   $themes = array(
-      'photogallery_tab_form_display_block' => array(
-          'template' => 'photogallery-form-tab-template',
-          'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
-          'variables' => array('data' => NULL),
-      ),
-      'photogallery_node_form' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'photogallery-node-form',
-          'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
-          'render element' => 'form',
-      ),
-      'Photo_landing_menu_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'Photo-landing-menu-block',
-          'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
-          'render element' => 'form',
-      ),
+    'photogallery_tab_form_display_block' => array(
+      'template' => 'photogallery-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'photogallery_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'photogallery-node-form',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'render element' => 'form',
+    ),
+    'Photo_landing_menu_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'Photo-landing-menu-block',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'render element' => 'form',
+    ),
   );
 
   return $themes;
@@ -573,9 +617,9 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
   if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7') {
     unset($form['field_featured_value_op']['#options']);
     $new_options = array(
-        'or' => '- Any -',
-        'and' => 'Yes',
-        'empty' => 'No',
+      'or' => '- Any -',
+      'and' => 'Yes',
+      'empty' => 'No',
     );
     $form['field_featured_value_op']['#options'] = $new_options;
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', array('scope' => 'footer'));
@@ -606,16 +650,17 @@ function itg_photogallery_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_photogallery_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'photogallery' && $_GET['category'] != '') {
-    // Category view on landing page
-    drupal_add_js("jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').live('click', function(){
+  if ($view_mode != 'search_index') {
+    if (isset($node->type) && $node->type == 'photogallery' && $_GET['category'] != '') {
+      // Category view on landing page
+      drupal_add_js("jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').live('click', function(){
                var section_id = jQuery(this).val();
                jQuery('#block-itg-photogallery-photo-menu-landing-block ul li a').removeClass('active');
                jQuery('#edit-field-story-category-tid').val(section_id); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery(this).find('a').addClass('active');
            });", array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js("jQuery(document).ready(function(){
+      drupal_add_js("jQuery(document).ready(function(){
                jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . "); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').each(function() {
@@ -624,26 +669,27 @@ function itg_photogallery_node_view($node, $view_mode, $langcode) {
                     }
               });
            });", array('type' => 'inline', 'scope' => 'footer'));
-  }
-
-  if ($node->type == "photogallery") {
-    // Views render on video template
-    if (!empty($_GET['category']) && !empty($_GET['sid'])) {
-      $view_output = views_embed_view('photo_list_of_category', 'block_1');
     }
-    else {
-      if (!empty($node->field_primary_category[LANGUAGE_NONE]) && isset($node->field_primary_category[LANGUAGE_NONE])) {
-        $sec = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+
+    if ($node->type == "photogallery") {
+      // Views render on video template
+      if (!empty($_GET['category']) && !empty($_GET['sid'])) {
+        $view_output = views_embed_view('photo_list_of_category', 'block_1');
       }
       else {
-        foreach ($node->field_story_category[LANGUAGE_NONE] as $sections) {
-          $section .= $sections['tid'] . '+';
+        if (!empty($node->field_primary_category[LANGUAGE_NONE]) && isset($node->field_primary_category[LANGUAGE_NONE])) {
+          $sec = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
         }
-        $sec = rtrim($section, '+');
+        else {
+          foreach ($node->field_story_category[LANGUAGE_NONE] as $sections) {
+            $section .= $sections['tid'] . '+';
+          }
+          $sec = rtrim($section, '+');
+        }
+        $view_output = views_embed_view('photo_list_of_category', 'block_3', $sec);
       }
-      $view_output = views_embed_view('photo_list_of_category', 'block_3', $sec);
+      $node->view_output = $view_output;
     }
-    $node->view_output = $view_output;
   }
 }
 
@@ -682,27 +728,33 @@ function itg_photogallery_get_image_info_by_fid($fid) {
  * @return string
  */
 function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
+  if (isset($element['#value'])) {
+    $item = $element['#value'];
+  }
 
-  $item = $element['#value'];
-//  
-  $item['fid'] = $element['fid']['#value'];
-  if(empty($item['alt']) || empty($item['title'])) {
-    $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+  if (isset($element['fid']['#value'])) {
+    $item['fid'] = $element['fid']['#value'];
+  }
+
+  if (empty($item['alt']) || empty($item['title'])) {
+    if (isset($item['fid'])) {
+      $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+    }
   }
 
   // Add the additional alt and title fields.
-  $alt= "";
+  $alt = "";
   $title = "";
-  if($data_result['alt']) {
+
+  if (isset($data_result['alt'])) {
     $alt = $data_result['alt'];
   }
-  
-  if($data_result['title']) {
+
+  if (isset($data_result['title'])) {
     $title = $data_result['title'];
   }
-  
+
   $element['alt']['#default_value'] = isset($item['alt']) ? $item['alt'] : $alt;
   $element['title']['#default_value'] = isset($item['title']) ? $item['title'] : $title;
   return $element;
-
 }

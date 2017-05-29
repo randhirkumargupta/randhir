@@ -44,7 +44,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
 
     $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
     
-    $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
+    $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photo gallery', 'Videogallery' => 'Videos', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
@@ -116,7 +116,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#multiple'] = TRUE;
   } 
 
-  if($form_state['view']->current_display == 'search_unpublish_video' || ($form_state['view']->name == 'searchimage' && $form_state['view']->current_display == 'page_1')) {
+  if((isset($form_state['view']->current_display) && $form_state['view']->current_display == 'search_unpublish_video') || (isset($form_state['view']->name) && $form_state['view']->name == 'searchimage' && isset($form_state['view']->current_display) && $form_state['view']->current_display == 'page_1')) {
     $video_publish_un_option = array(""=>"",'0' => 'Unpublish','1' => 'Publish' );
     
     $form['sm_field_video_used'] = array(
@@ -236,7 +236,7 @@ function itg_front_search_views_pre_render(&$view) {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
       }
 
-      $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
+      $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Videogallery' => 'Videos', 'photogallery' => 'Photo gallery', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
       $search_url = 'topic';
     }
 
@@ -292,7 +292,7 @@ function itg_front_search_views_pre_render(&$view) {
       }
       else {        
         unset($_GET['page']); //remove page no.
-        $url .= l($key, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
+        $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
     }
     

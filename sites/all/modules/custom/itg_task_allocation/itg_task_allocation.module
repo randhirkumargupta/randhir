@@ -39,13 +39,12 @@ function itg_task_allocation_menu() {
   return $items;
 }
 
-//$val= user_is_logged_in();
+
 /**
  * Expire task acc to date and send mail to the author of node.   
  */
 function itg_task_allocation_expirestatus_enddatemail() {
-  $current_time = date('Y-m-d H:i:s');
-  
+    $current_time = date('Y-m-d H:i:s');  
   
     $query = db_select('node', 'n');
     $query->leftjoin('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');
@@ -63,12 +62,12 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->condition('s.field_task_comment_change_status_value', 'open', '=');
     $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
-  foreach ($result as $value) {   
-    $node = node_load($value->nid);
-    $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
-    field_attach_update('node', $node);
-    expiredtask_authormail_content($value, 'task_expiry', 'task_idea_allocation_tracking');
-  }
+    foreach ($result as $value) {   
+      $node = node_load($value->nid);
+      $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
+      field_attach_update('node', $node);
+      expiredtask_authormail_content($value, 'task_expiry', 'task_idea_allocation_tracking');
+    }
 }
 
 /**
@@ -113,7 +112,7 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
   if ($form['#node']->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
     $form['#access'] = FALSE;
   }
-  //hide($form['author']);
+  
   $form['author']['_author']['#markup'] = $form['author']['name']['#value'];
   $_GET['destination'] = 'assigned-task-list';
   
@@ -370,9 +369,9 @@ function task_get_mail_content($node, $event, $to, $user_name) {
   $content .= $mail_content;
   $content .= '</body>';
   $content .= '</html>';
-  
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
   $params = array(
-    'body' => $content,
+    'body' => $mail_content,
     'subject' => $task_subject,
   );
 //  $to = 'gourav.walia@kelltontech.com';
@@ -433,7 +432,6 @@ function itg_task_allocation_mail($key, &$message, $params) {
  * @param type $form   
  */
 function itg_task_allocation_node_validate($node, $form, &$form_state) {
-
   if ($node->type == 'task_idea_allocation_tracking') {
     // code for check expiry date is greater then schedule date
     $schedule_date = $node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value'];
@@ -540,7 +538,7 @@ function expiredmail_mail_content($to) {
   global $base_url;
   $task_subject = t('A task has been expired that was created by you');
   $subject = t('Task Expired');
-  //$node_url = $base_url . '/node/' . $node->nid;
+  
   $node_url = l('URL', 'node/'.$node->nid);
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -581,7 +579,7 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   
   global $base_url;
   if (!empty($var->ur_mail) || !empty($var->mail)) {
-    $node_url = l('URL', 'node/'.$var->nid);
+    $node_url = l('URL', $base_url . '/node/'.$var->nid);
     $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
     $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
 
@@ -592,8 +590,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $content .= $body_data;
     $content .= '</body>';
     $content .= '</html>';
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
     $params = array(
-      'body' => $content,
+      'body' => $mail_content,
       'subject' => $subject,
     );
 //    $to_assignee = 'gourav.walia@kelltontech.com';
@@ -624,8 +623,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $content .= $body_data;
     $content .= '</body>';
     $content .= '</html>';
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
     $params = array(
-      'body' => $content,
+      'body' => $mail_content,
       'subject' => $subject,
     );
 //    $to_assigner = 'gourav.walia@kelltontech.com';
@@ -653,11 +653,7 @@ function itg_task_allocation_cronapi($op, $job = NULL) {
     'weight' => 5,
     'callback' => 'itg_task_allocation_expirestatus_enddatemail',
   );
-  /*$items['task_ending_mail'] = array(
-    'description' => 'Mail shoot after task ending date.',
-    'weight' => 5,
-    'callback' => 'itg_task_allocation_expiredmail_enddate',
-  );*/
+  
   return $items;
 }
 

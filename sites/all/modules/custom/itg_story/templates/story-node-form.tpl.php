@@ -64,8 +64,7 @@
             <h2 class="story-title"><?php print t('More Details'); ?></h2>
             <div class="itg-form-section hide">
                 <?php print drupal_render($form['field_story_short_headline']); ?>
-                <?php print drupal_render($form['field_story_long_head_line']); ?>
-              <!--<div class="pre-desc"><?php //print t('This title shows on the section page');       ?></div> -->
+                <?php print drupal_render($form['field_story_long_head_line']); ?>              
 
                 <?php print drupal_render($form['field_story_new_title']); ?>
                 <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
@@ -75,6 +74,7 @@
                 <?php print drupal_render($form['field_story_associate_lead']); ?>
                 <?php print drupal_render($form['field_associate_photo_gallery']); ?>
                 <?php print drupal_render($form['field_story_associate_video']); ?>
+                <?php print drupal_render($form['field_story_external_url']); ?>
             </div>
         </div>
         <div id="ExpertChunk" class="itg-form-section-wrapper">
@@ -83,10 +83,7 @@
                 <?php print drupal_render($form['field_story_expert_name']); ?>
                 <?php print drupal_render($form['field_story_expert_image']); ?>
                 <?php print drupal_render($form['field_story_expertise']); ?>
-                <?php print drupal_render($form['field_story_expert_description']); ?>
-                <?php // print drupal_render($form['revision_information']['workbench_moderation_state_new']); ?>
-                <?php // print drupal_render($form['revision_information']['log']); ?>
-                <?php //unset($form['revision_information']); ?>
+                <?php print drupal_render($form['field_story_expert_description']); ?>                
             </div>
         </div>
 

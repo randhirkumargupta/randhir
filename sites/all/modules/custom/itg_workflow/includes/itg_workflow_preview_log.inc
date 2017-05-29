@@ -8,10 +8,9 @@
 
 function _get_unique_id_for_node_field() {
   $arg = arg();
-if (!empty($_SESSION['node_preview_unique'])) {
+  if (!empty($_SESSION['node_preview_unique'])) {
       $reporter_id = $_SESSION['node_preview_unique'];
-    }
-    else {
+  } else {
       // format uniqueid time node add
       // format uniqueid time nodeid edit
       // So in future we can track from which opration this entry is made.
@@ -20,5 +19,6 @@ if (!empty($_SESSION['node_preview_unique'])) {
       $_SESSION['node_preview_unique'] = $unique;
       $reporter_id = $_SESSION['node_preview_unique'];
     }
-    return $reporter_id;
+    
+  return $reporter_id;
 }

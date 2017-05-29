@@ -75,7 +75,7 @@ $singalclass= "";
                     <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
             <?php } ?>
             </div>  
-<?php //print drupal_render($form['video_browse_select']);       ?>
+
             <div class="local_browse" style="display: none;">
 
                 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
@@ -102,20 +102,7 @@ $singalclass= "";
             </div>
         </div>
     </div>
-  <!--    <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>
-      <span class="error vid-error"></span>
-    </div>-->
+  
 </div>
 
-<?php
-$field_id = $_GET['input_filed'];
-$file_field_name = $_GET['file_filed_name'];
 
-$settings = array();
-$settings['base_url'] = $base_url;
-$settings['video_field_id'] = $field_id;
-$settings['video_field_file'] = $file_field_name;
-drupal_add_js(array('itg_dailymotion' => array('settings' => $settings)), array('type' => 'setting'));
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_dailymotion.js', array('weight' => 1));
-?>
-<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.easyPaginate.js"></script>

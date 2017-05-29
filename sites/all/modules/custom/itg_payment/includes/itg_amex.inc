@@ -11,8 +11,6 @@ define('VPC_RETURN_URL' , $base_url . '/itg-payment-amex-pay-form-page');
 define('AMEX_MERCHANT_ACCESS_CODE' , '0EA9FF0B');
 define('AMEX_MERCHANT_ID' , 'TEST9820008712');
 define('AMXEX_GATEWAY_NAME' , 'amex');
-define('AMXEX_TRANSACTION_PENDING_STATUS' , 'pending');
-define('AMXEX_TRANSACTION_PENDING_STATUS' , 0);
 define('AMXEX_TRANSACTION_PENDING_STATUS' , 0);
 define('AMXEX_GATEWAY_HISTORY' , "");
 define('AMEX_SUCCESS_STATUS' , 1);

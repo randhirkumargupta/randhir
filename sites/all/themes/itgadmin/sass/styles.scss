@@ -4996,6 +4996,10 @@ div.node{
         margin: 0 5px;
       }
       .fa-times{cursor: pointer; color: red;}
+      .rc-bottom{
+        font-size: 13px;
+        padding: 5px 0 0;
+      }
     }
     .ui-state-default{
       span.item-value{cursor: default;}
@@ -7345,6 +7349,13 @@ div.node{
       line-height: 26px;
       text-align: center;
       width: 134px;
+      & + div.description{
+        @extend .desc-popup;
+        left: 375px;
+      }
+      &:hover + div.description{
+        display: block;
+      }
     }
   }
   #edit-field-upload-video{
@@ -9598,7 +9609,6 @@ div.node{
 .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail, {
   width: 220px;
 }
-.browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
 #videoupload #loader-data{
   position: fixed;
   top: 0;
@@ -11842,3 +11852,8 @@ fieldset#edit-xmlsitemap{
     }
   }
 }
+.view-id-section_wise_content_ordering_list.view-display-id-page{
+  .view-content, .item-list{
+    @extend .hide;
+  }
+} 

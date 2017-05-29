@@ -68,8 +68,7 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 20,
       );
       $form['#after_build'][] = 'itg_recipe_after_build';
-      $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';
-      //$form['#validate'][] = 'itg_recipe_fields_validate';
+      $form['actions']['submit']['#submit'][] = 'itg_recipe_form_custom_callback';      
 
       break;
 
@@ -233,7 +232,7 @@ function itg_cooking_tips_form_custom_callback($form, &$form_state) {
   }
   $cooking_tips_title = $form_state['node']->title;
   drupal_set_message(t('Cooking Tips <b>' . $cooking_tips_title . '</b> has been ' . $op . '.'));
-    //$_GET['destination'] = $_REQUEST['destination'];
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
   
@@ -260,7 +259,7 @@ function itg_cooking_tips_after_build($form, &$form_state) {
             });', array('type' => 'inline', 'scope' => 'footer'));
   }  
  
-  //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -288,7 +287,7 @@ function itg_food_news_form_custom_callback($form, &$form_state) {
   }
   $food_title = $form_state['node']->title;
   drupal_set_message(t('Food News <b>' . $food_title . '</b> has been ' . $op . '.'));
-      //$_GET['destination'] = $_REQUEST['destination'];
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
   
@@ -313,9 +312,8 @@ function itg_food_news_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }  
- 
-  //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
+  }
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -365,9 +363,8 @@ function itg_recipe_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }  
+  }
   
-  //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

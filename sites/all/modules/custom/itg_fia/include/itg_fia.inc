@@ -102,22 +102,22 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($audio_url)) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] . 
-                '<figure>\n
-                   <img src="' . $img_path . '">\n
-                   <audio title="audio title">\n
-                     <source src="' . $audio_url . '">\n
-                  </audio>\n\n
-                 </figure>\n\n';
+                '<figure>
+                   <img src="' . $img_path . '">
+                   <audio title="audio title">
+                     <source src="' . $audio_url . '">
+                  </audio>
+                 </figure>';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>\n
-                   <img src="' . $img_path . '">\n
-                   <audio title="audio title">\n
-                    <source src="' . $audio_url . '">\n
-                  </audio>\n\n
-                </figure>\n\n';
+               '<figure>
+                   <img src="' . $img_path . '">
+                   <audio title="audio title">
+                    <source src="' . $audio_url . '">
+                  </audio>
+                </figure>';
       }
     }
     
@@ -125,16 +125,16 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($img_path)) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] . 
-               '<figure>\n
-                  <img src="' . $img_path . '" />\n
-                </figure>\n\n';
+               '<figure>
+                  <img src="' . $img_path . '" />
+                </figure>';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure>\n
-                  <img src="' . $img_path . '" />\n
-                </figure>\n\n';
+               '<figure>
+                  <img src="' . $img_path . '" />
+                </figure>';
       }
     }
     
@@ -142,8 +142,8 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($get_place_name)) {
       if (in_array($map_pos, $bk)) {
         $body_vals[$map_pos] = $body_vals[$map_pos] . 
-                '<figure class="op-map">\n
-                  <script type="application/json" class="op-geotag">\n
+                '<figure class="op-map">
+                  <script type="application/json" class="op-geotag">
                     {
                       "type": "Feature",
                       "geometry":
@@ -159,14 +159,14 @@ function itg_fia_xml_node_feed($query) {
                           "style": "satellite",
                         }
                      }
-                  </script>\n\n
-                </figure>\n\n';
+                  </script>
+                </figure>';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-                '<figure class="op-map">\n
-                  <script type="application/json" class="op-geotag">\n
+                '<figure class="op-map">
+                  <script type="application/json" class="op-geotag">
                     {
                       "type": "Feature",
                       "geometry":
@@ -182,38 +182,43 @@ function itg_fia_xml_node_feed($query) {
                           "style": "satellite",
                         }
                      }
-                  </script>\n\n
-                </figure>\n\n';
+                  </script>
+                </figure>';
 
       }
     }
 
     // Creating Slideshow for facebook instant article data
     if(!empty($target_nids)) {
-      $gall_nodes = node_load_multiple($target_nids);
       foreach ($gall_position as $pos) {
         $gall_nodes = node_load_multiple($target_nids);
         foreach ($gall_nodes as $gl_k => $gl_v) {
-          $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-          if (in_array($pos, $bk)) {
-            $body_vals[$pos] = $body_vals[$pos] . 
-              '<figure class="op-slideshow">\n
-                <figure>\n
-                  <img src="' . $imgs_path . '" />\n
-                </figure>\n\n
-              </figure>\n\n';
+          $get_fc = $gl_v->field_gallery_image[LANGUAGE_NONE];
+          foreach($get_fc as $get_fck => $get_fcv){
+             $get_fc_ids = $get_fc[$get_fck]['value'];
+             $load_fc_data = field_collection_item_load($get_fc_ids);
+             $imgs_path = file_create_url($load_fc_data->field_images[LANGUAGE_NONE][0]['uri']);
+//          $imgs_path = file_create_url($gl_v->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+            if (in_array($pos, $bk)) {
+              $body_vals[$pos] = $body_vals[$pos] . 
+                '<figure>
+                  <img src="' . $imgs_path . '" />
+                 </figure>';
+
+            }
+            else {
+              $last_postion = end($bk);
+              $body_vals[$last_postion] = $body_vals[$last_postion] . 
+                '<figure>
+                  <img src="' . $imgs_path . '" />
+                 </figure>';
+            }
           }
-          else {
-            $last_postion = end($bk);
-            $body_vals[$last_postion] = $body_vals[$last_postion] . 
-              '<figure class="op-slideshow">\n
-                <figure>\n
-                  <img src="' . $imgs_path . '" />\n
-                </figure>\n\n
-              </figure>\n\n';
-          }
-          
         }
+      }
+      foreach ($gall_position as $gal_pos_key => $gal_pos_val) {
+        $gal_data = str_replace('</p>', '</p><figure class="op-slideshow">', $body_vals[$gal_pos_val]);
+        $body_vals[$gal_pos_val] = $gal_data . '</figure>';
       }
     }
     
@@ -221,12 +226,12 @@ function itg_fia_xml_node_feed($query) {
     if(!empty($embed_code_data)) {
       if (in_array($embed_code_pos, $bk)) {
         $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . 
-                '<figure class="op-interactive">\n' . $embed_code_data . '</figure>\n\n';
+                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       }
       else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] . 
-               '<figure class="op-interactive">\n' . $embed_code_data . '</figure>\n\n';
+               '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       }
     }
     $node_body = implode("<p>", $body_vals);

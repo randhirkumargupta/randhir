@@ -17,8 +17,7 @@
                 if($.isNumeric(get_param))
                 {
                   var mobile = get_param;  
-                  var post = "&mobile=" + mobile+ "&otp=" + otp+ "&source=reset";
-                  
+                  var post = "&mobile=" + mobile+ "&otp=" + otp+ "&source=reset";                  
                 }
                 else
                 {

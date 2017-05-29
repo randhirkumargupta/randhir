@@ -18,16 +18,16 @@ global $base_url;
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear User,</td>
+        <td style="padding: 10px 20px;"><?php print t('Dear User'); ?>,</td>
       </tr>
      <tr>
-        <td style="padding: 10px 20px;">Your otp is <?php print $rand_otp; ?></td>
+        <td style="padding: 10px 20px;"><?php print t('Your otp is'); ?> <?php print $rand_otp; ?></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Thanks,</td>
+        <td style="padding: 10px 20px;"><?php print t('Thanks'); ?>,</td>
       </tr>
       <tr>
-        <td style="padding: 0px 20px;">India Today Group</td>
+        <td style="padding: 0px 20px;"><?php print t('India Today Group'); ?></td>
       </tr>
     </table>
   </body>

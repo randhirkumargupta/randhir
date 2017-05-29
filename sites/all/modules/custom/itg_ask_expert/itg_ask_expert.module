@@ -241,8 +241,9 @@ function itg_ask_expert_node_insert($node) {
         $content .= '</body>';
         $content .= '</html>';
 //        $mail_content = itg_ask_expert_get_mail_content($node);
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $to = implode(',', $expert_arr);
@@ -289,8 +290,9 @@ function itg_ask_expert_node_update($node) {
         $content .= $mail_content;
         $content .= '</body>';
         $content .= '</html>';
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -666,7 +668,7 @@ function itg_custom_ask_an_expert_form_submit(&$form, &$form_state) {
  *   array with block details
  */
 function user_details_for_section($url, $tid) {
-
+    global $base_url;
     $block = array();
     $ourExpert = '';
     if (isset($tid) && !empty($tid)) {
@@ -689,13 +691,20 @@ function user_details_for_section($url, $tid) {
             if ($url[0] == 'ask-an-expert-question-answer-details' && is_numeric($url[2])) {
                 $ourExpert = '<h4>Our Expert</h4>';
             }
-            
+            $ask_fname = '';
+            if(!empty($userDetails->field_first_name['und'][0]['value'])) {
+              $ask_fname = $userDetails->field_first_name['und'][0]['value'];
+            }
+            $ask_lname = '';
+            if(!empty($userDetails->field_last_name['und'][0]['value'])) {
+              $ask_lname = $userDetails->field_last_name['und'][0]['value'];
+            }
             if ($url[0] != 'ask-an-expert-question-answer-details') {
                 $block[] = array(
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                     '#suffix' => '</div>',
                 ),
             );
@@ -704,7 +713,7 @@ function user_details_for_section($url, $tid) {
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                 ),
             );
             }

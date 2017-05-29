@@ -140,7 +140,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1221,7 +1221,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Type',
     'display' => array(
       'default' => array(
         'label' => 'above',

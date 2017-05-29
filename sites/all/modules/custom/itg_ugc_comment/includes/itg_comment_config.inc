@@ -11,8 +11,7 @@ function comment_global_config($form, &$form_state) {
   
    // get last selected comment value
   if (function_exists(global_comment_last_record)) {
-    $last_record = global_comment_last_record();
-    
+    $last_record = global_comment_last_record();    
   }
 
   if($last_record[0]->config_name == 'other') {
@@ -35,10 +34,6 @@ function comment_global_config($form, &$form_state) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
-//    '#ajax' => array(
-//      'wrapper' => 'comment_global_config',
-//      'callback' => 'comment_form_ajax_handler',
-//    ),
   );
  
   $form['pre-record'] = array(

@@ -78,10 +78,8 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     $form['fb_wrap']['itg_fb_img'] = array(
         '#title' => t('Image') . '<span class="form-required"> *</span>',
         '#type' => 'managed_file',
-        '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
-       // '#upload_location' => file_default_scheme() . '://itg_fb_img/',
-        '#default_value' => $fb_image_id,
-       
+        '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),       
+        '#default_value' => $fb_image_id,       
         '#description' => 'Files must be less than<strong>5 MB</strong>.<br>Allowed file types:<strong>gif jpeg </strong>',
         '#preview' => TRUE,
         "#upload_validators" => array(
@@ -215,7 +213,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
             ),
         ),
     );
-$url_second = url('file/itg_image_repository/node/story/field_story_extra_large_image', array('query' => array('app' => 'lrp_gold_star_two_icon' . '|url@' . $filepath_id, 'field_name' => 'itg_twitter_img', 'height' => 363, 'width' => 647, 'custom_form' => 1, 'btn_name' => 'itg_twitter_img_upload_button')));
+    $url_second = url('file/itg_image_repository/node/story/field_story_extra_large_image', array('query' => array('app' => 'lrp_gold_star_two_icon' . '|url@' . $filepath_id, 'field_name' => 'itg_twitter_img', 'height' => 363, 'width' => 647, 'custom_form' => 1, 'btn_name' => 'itg_twitter_img_upload_button')));
     $twitter_image_pop = "showimagerepopopu('" . $url_second . "')";
     $form['twit_wrap']['itg_twitter_img']['und']['#prefix'] = '<div class="poll-form div_itg_twitter_img"><a href="javascript:void(0)" onclick="' . $twitter_image_pop . '">Browse Image</a></div>';
     // Twitter image schdule time.

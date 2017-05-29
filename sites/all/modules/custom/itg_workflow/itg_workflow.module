@@ -79,6 +79,7 @@ function itg_workflow_content_nid($nid) {
   $itg_query->isNull('iwf.nid');
   $itg_query->range(0, 50);
   $return = $itg_query->execute();
+  
   foreach ($return as $row) {
     $matches[$row->nid] = check_plain($row->nid);
   }
@@ -252,6 +253,10 @@ function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
   );
 }
 
+/**
+ * Implements itg_workflow_logs_detailis().
+ * {@inheritdoc}
+ */
 function itg_workflow_logs_detailis() {
   // configure the table header columns
   $header = array(
@@ -265,7 +270,7 @@ function itg_workflow_logs_detailis() {
       array('data' => t('Modified Date')),
       array('data' => t('Action')),
   );
-  //if (!empty($_GET['items_per_page']) && (!empty($_GET['username']) || !empty($_GET['email']))) {
+  
   if (isset($_GET['items_per_page'])) {
     $items_per_page = $_GET['items_per_page'];
   }
@@ -342,20 +347,6 @@ function itg_workflow_logs_detailis() {
 
   // add the pager
   $output .= theme('pager');
-//    }
-//    else {
-//        $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
-//        $output .= render($filter_form);
-//        $output .= '<div class="view-content">
-//      <table class="">
-//      <tbody>
-//        <tr>
-//          <td>' . t("Please select Username or Email filter first.") . '</td>
-//        </tr>
-//      </tbody>
-//      </table>
-//      </div>';
-//    }
 
   return $output;
 }
@@ -419,15 +410,13 @@ function _is_preview_log_submit_true($user) {
  */
 function itg_workflow_preview_log_submit($form, $form_state) {
   global $user;
-//  watchdog("preview_log", $form_state['values']['op']);
+
   // validation for preview button only.
   if ($form_state['values']['op'] == 'Preview') {
     $preview_unique_id = $form_state['values']['field_preview_unique_id']['und'][0]['value'];
-    $user_id = $user->uid;
-    //if ($arg[0] == 'node' && $arg[1] == 'add') {
+    $user_id = $user->uid;    
     // Give nid default value 0.
-    itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);
-    //}
+    itg_workflow_preview_db_merge($preview_unique_id, $user_id, 0);    
   }
 }
 
@@ -466,13 +455,13 @@ function itg_workflow_after_build($form, &$form_state) {
   // code for sequence change of modration field
   $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
   $log = $form['revision_information']['log'];
-  $state = $form['revision_information']['workbench_moderation_state_new'];
+  $state = !empty($form['revision_information']['workbench_moderation_state_new']) ? $form['revision_information']['workbench_moderation_state_new'] : '';
 
   unset($form['revision_information']['log']);
   unset($form['revision_information']['workbench_moderation_state_new']);
 
   $form['revision_information']['workbench_moderation_state_new'] = $state;
-
+  $term_name = '';
   // Code for rejection master message
   if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
     $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
@@ -633,7 +622,6 @@ function itg_workflow_node_presave($node) {
           }
         }
         else {
-
           if ($imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid']) {
             $fids = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
             $priv_status = $imagecollection['field_video_private'][LANGUAGE_NONE][0]['value'];
@@ -660,15 +648,12 @@ function itg_workflow_node_presave($node) {
                 $is_draft = 1;
 
                 if ($node_id) {
-
                   // use for upload local video to DM
                   itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                 }
               }
             }
             else {
-              
-             
               $video_image = itg_videogallery_get_video_all($fids);
 
               if ($video_image) {
@@ -679,15 +664,12 @@ function itg_workflow_node_presave($node) {
         }
          $file_video = itg_videogallery_get_video_info_by_fid($fids);
         
-            //  itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status);
       }
 
 // Need to chenge this for redirect
       if ($is_draft == 1) {
-
         if ($node->workbench_moderation['current']->state == 'published') {
-          $node->status = 0;
-          //$node->workbench_moderation['published']->published = 0;
+          $node->status = 0;          
         }
         else {
           $node->workbench_moderation_state_new = 'draft';
@@ -773,8 +755,11 @@ function itg_workflow_views_query_alter(&$view, &$query) {
   }
 }
 
+/**
+ * Implementation of hook_views_pre_render
+ * {@inheritdoc} 
+ */
 function itg_workflow_views_pre_render(&$view) {
-
   if ($view->name == "preview_content_report" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $view->attachment_before = $header_content;
@@ -821,7 +806,7 @@ function itg_workflow_node_access($node, $op, $account) {
 
     $current_time = time();
 
-    if ($node->status == 0 && (($node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) {
+    if ($node->status == 0 && ((isset($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || (isset($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'rejected'))) {
       return NODE_ACCESS_DENY;
     }
     elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
@@ -855,7 +840,7 @@ function itg_workflow_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
-  //itg_get_redirect_url($node);
+  
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
   }
@@ -985,12 +970,10 @@ function itg_workflow_node_update($node) {
         $user_email = get_email_by_roll($rid);
         workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub');
       }
-    }
+    }   
     
     
-    
-    if ($node->workbench_moderation_state_new != 'draft') {
-      
+    if ($node->workbench_moderation_state_new != 'draft') {      
 
       $itguser = user_load($node->uid);
       //getting mail id's of high level users
@@ -1433,7 +1416,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 //    $submitted_by = 'Updated By: ' . $current_user_name;
 //    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
   }
-  
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_node_author);
 //  $node_url = $base_url . '/node/' . $node->nid;
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -1446,7 +1429,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       'body' => $content,
       'subject' => $subject,
   );
-  
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

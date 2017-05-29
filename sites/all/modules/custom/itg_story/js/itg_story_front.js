@@ -34,6 +34,7 @@
                 asNavFor: '.multiple-photo',
                 initialSlide: slickSliderValue, // Default slide when query string present in url.
             });
+            
             $('.multiple-photo').slick({
                 infinite: false,
                 slidesToShow: 5,

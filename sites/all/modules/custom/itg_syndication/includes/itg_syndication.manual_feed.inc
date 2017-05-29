@@ -244,9 +244,7 @@ function itg_syndication_selector_custom_submit($form , &$form_state) {
   }
 
   // for feed download
-  if ($form_state['values']['feed_download_value'] == 'yes') {
-    // $link_val = 'Click to Download. <a href="'.$realpath.'" download>Import Feed</a>';
-    // drupal_set_message($link_val, 'status');
+  if ($form_state['values']['feed_download_value'] == 'yes') {    
     // send file to browser as a download dialog
     // no content can be output prior to these header() calls
     header('Content-type: application/octet-stream');

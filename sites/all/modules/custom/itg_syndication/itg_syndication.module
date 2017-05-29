@@ -64,6 +64,10 @@ function itg_syndication_form_syndication_client_node_form_alter(&$form, &$form_
   $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message';
 }
 
+/**
+ * Implements hook_form_validate().
+ * {@inheritdoc} 
+ */
 function itg_syndication_client_node_form_custom_validate($form, &$form_state) {
   $field_syndication_ftp_name = array();
   $is_error = FALSE;
@@ -279,14 +283,7 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
-  );
-  
-  if (arg(0) == 'node' && arg(1) == 'add') {    
-//    drupal_add_js('jQuery(document).ready(function() {              
-//              jQuery("#edit-field-syndication-rule-details-und-0-remove-button").hide();
-//            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
+  );  
 
   return $form;
 }
@@ -507,8 +504,7 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
     else {
       $syndication_frequency = $item['field_syndication_frequency']['und'][0]['value'];
       $syndication_day = $item['field_syndication_set_day']['und'][0]['value'];
-      $syndication_monthly = $item['field_syndication_set_day_month']['und'][0]['value'];
-      //$syndication_frequency = $item['field_syndication_frequency'][$lang][0]['value'];
+      $syndication_monthly = $item['field_syndication_set_day_month']['und'][0]['value'];      
       if ($syndication_frequency == 'Weekly') {
         if (empty($syndication_day)) {
           form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day', t('Set Day field is required for row[' . ($k + 1) . ']'));

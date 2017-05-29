@@ -107,8 +107,8 @@ function itg_ugc_send_follow_story_content_mail($node) {
           $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
         }
 
-        $mail_content = itg_follow_story_get_mail_content($node);
-
+        $mail_contents = itg_follow_story_get_mail_content($node);
+        $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
         $params = array(
           'body' => $mail_content,
           'subject' => $mail_subject,
@@ -175,7 +175,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in blog form
     if ($form_id == 'blog_node_form' && !empty($url_nid)) {
       // get node values
-     // $node = node_load($url_nid);
+     ;
       $mongo_details = itg_ugc_content_details($url_nid);
 
       $form['title']['#default_value'] = $mongo_details['title'];
@@ -219,8 +219,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
       if($user->uid != 1) {
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
-      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
+        $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+        $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       }
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
@@ -257,29 +257,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    // prefill input value in recipe form
-//    if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
-//      // get node values
-//      $mongo_details = itg_ugc_content_details($url_nid);
-//      $ugc_user_name = $mongo_details['name'];
-//      $form['title']['#default_value'] = $mongo_details['title'];
-//
-//      if (!empty($mongo_details['video'])) {
-//        $form['field_recipe_content_type'][LANGUAGE_NONE]['#default_value'] = 'Video';
-//        $form['field_recipe_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
-//      }
-//
-//      $form['field_recipe_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
-//      $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['image'];
-//      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
-//      $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
-//      $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
-//      if (!empty($ugc_user_name)) {
-//        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-//        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
-//      }
-//    }
-
     // prefill input value in photogallery form
     if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
       // get node values
@@ -306,8 +283,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
   
   // alter the section for election xml 
-  if ($form_id == 'election_graph_xml_node_form') {
-    
+  if ($form_id == 'election_graph_xml_node_form') {    
    
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
     foreach ($tax as $key => $term) {
@@ -503,32 +479,30 @@ function ugc_form_submit_handler($form, &$form_state) {
   $content_type = $form_state['values']['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
   $title = $form_state['values']['title'];
   $description = $form_state['values']['field_user_message'][LANGUAGE_NONE][0]['value'];
-  //$image = $form_state['values']['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid'];
+  
   $video = $form_state['values']['field_astro_video'][LANGUAGE_NONE][0]['fid'];
   $audio = $form_state['values']['field_recipe_audio'][LANGUAGE_NONE][0]['fid'];
   $publish_date = date('d/m/Y');
   $publish_date_time = date('d-m-Y H:i:s');
   
   // check for city and byline
-    $cat_check = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
-    if (!empty($cat_check)) {
-      $city = $city;
-    }
-    else {
-      $term = new stdClass();
-      $term->name = $city;
-      $term->vid = CITY_MANAGMENT;
-      taxonomy_term_save($term);
-      $new_cat = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
-      $city = $city;
-    }
+  $cat_check = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
+  if (!empty($cat_check)) {
+    $city = $city;
+  }
+  else {
+    $term = new stdClass();
+    $term->name = $city;
+    $term->vid = CITY_MANAGMENT;
+    taxonomy_term_save($term);
+    $new_cat = itg_category_manager_get_term_from_name($city, CITY_MANAGMENT);
+    $city = $city;
+  }
     
     // multi photo condition
-  if (!empty($form['field_ugc_personalization_photo']['und']))
-  {
+  if (!empty($form['field_ugc_personalization_photo']['und'])) {
     foreach ($form['field_ugc_personalization_photo']['und'] as $delta => $field) {
-      if (is_numeric($delta))
-      {
+      if (is_numeric($delta)) {
         // assign value in first field collection item
         $photo_array[] = $form['field_ugc_personalization_photo'][LANGUAGE_NONE][$delta]['field_ugc_upload_photo'][LANGUAGE_NONE][0]['fid']['#value'];
         $photo_caption[] = $form['field_ugc_personalization_photo'][LANGUAGE_NONE][$delta]['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'];
@@ -562,40 +536,31 @@ function ugc_form_submit_handler($form, &$form_state) {
    $ins_image = $anony_multiple_image; 
   }
   
-  if (!empty($anony_multiple_image))
-  {
-//    $file = file_load($image);
-//    file_usage_add($file, 'itg_custom_mongo', 'file', 1);
-//    ugc_form_file_status($image);
+  if (!empty($anony_multiple_image)) {
     ugc_form_file_status($anony_multiple_image, 'yes');
   }
-  if (!empty($video))
-  {
+  if (!empty($video)) {
     $file = file_load($video);
     file_usage_add($file, 'itg_custom_mongo', 'file', 2);
     ugc_form_file_status($video);
   }
-  if (!empty($audio))
-  {
+  if (!empty($audio)) {
     $file = file_load($audio);
     file_usage_add($file, 'itg_custom_mongo', 'file', 3);
     ugc_form_file_status($audio);
   }
-  if (!empty($multiple_image))
-  {
+  if (!empty($multiple_image)) {
     ugc_form_file_status($multiple_image, 'yes');
   }
 
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->ugc_details;
     $qry = array("unid" => $unique_id,"name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $ins_image, "image_caption" => $multiple_caption);
     $result = $people->insert($qry);
   }
   
-  if (isset($_SESSION['messages']['status']))
-  {
+  if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
   // Set redirection after submit.
@@ -606,8 +571,7 @@ function ugc_form_submit_handler($form, &$form_state) {
       array('query' => array('ugc' => 'success'))
     );
   }
-  else
-  {
+  else {
     $_REQUEST['destination'] = 'ugc-thank-you';
     $form_state['redirect'] = 'ugc-thank-you';
   }
@@ -621,16 +585,14 @@ function ugc_form_submit_handler($form, &$form_state) {
  * @param string $multiple
  */
 function ugc_form_file_status($fid, $multiple = NULL) {
-  if (!empty($fid) && empty($multiple))
-  {
+  if (!empty($fid) && empty($multiple)) {
     db_update('file_managed') // Table name no longer needs {}
         ->fields(array('status' => 1))
         ->condition('fid', $fid)
         ->execute();
   }
 
-  if (!empty($fid) && !empty($multiple))
-  {
+  if (!empty($fid) && !empty($multiple)) {
     $fid_exp = explode(',', $fid);
     foreach($fid_exp as $value) {
       if($value != 0) {
@@ -772,17 +734,14 @@ function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_ugc_node_status_update($nid, $title) {
   global $user;
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')){
     $con = mongodb();
-    if ($con)
-    {
-      if (function_exists('itg_ugc_content_details'))
-      {
+    if ($con) {
+      if (function_exists('itg_ugc_content_details')) {
         if(!empty($title)) {
-        $ugc_content_details = itg_ugc_content_details($nid, 1);
+          $ugc_content_details = itg_ugc_content_details($nid, 1);
         } else {
-        $ugc_content_details = itg_ugc_content_details($nid);
+          $ugc_content_details = itg_ugc_content_details($nid);
         }
         
         $to = trim($ugc_content_details['email']);
@@ -796,8 +755,7 @@ function itg_ugc_node_status_update($nid, $title) {
   $node_author = user_load($user->uid);
   $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
 
-  if (!empty($title))
-  {
+  if (!empty($title)) {
     $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
     $people->update(array("unid" => (int)$nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
@@ -805,8 +763,7 @@ function itg_ugc_node_status_update($nid, $title) {
     drupal_set_message(t($ugc_content_details['title'] . ' has been Published successfully.'));
     drupal_goto('ugc-inqueue-content');
   }
-  else
-  {
+  else {
     $pid = new MongoId($nid);
     $rejected_date = date('d/m/Y');
     $newdata = array('$set' => array('status' => 0, 'updated_by' => trim($rejected_by), 'rejected_date' => $rejected_date));
@@ -894,25 +851,20 @@ function itg_ugc_node_insert($node) {
   {
     $title = $node->title;
     $source_type = '';
-    if (!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))
-    {
+    if (!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])){
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     }
-    if (!empty($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']))
-    {
-      if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast')
-      {
+    if (!empty($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'])) {
+      if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast'){
         $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
       }
     }
-    else
-    {
+    else {
       if(!empty($node->field_story_source_id[LANGUAGE_NONE])){
-      $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+        $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
       }
     }
-    if ($source_type == 'UGC' && !empty($source_id))
-    {
+    if ($source_type == 'UGC' && !empty($source_id)) {
       itg_ugc_node_status_update($source_id, $title);
     }
   }
@@ -951,7 +903,7 @@ function itg_ugc_views_pre_render(&$view) {
  * Implements itg_ugc_thank_you
  */
 function itg_ugc_thank_you() {
- print '<div class="ugc-success" style="height:100%; background-color:#fff;"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
+  print '<div class="ugc-success" style="height:100%; background-color:#fff;"><h2>Thank you !</h2><p>UGC content has been submitted successfully for further review and approval.</p></div>';
 }
 
 /**
@@ -981,36 +933,36 @@ function itg_ugc_view_content($unique_id) {
           $output.= '<li>'.t('<strong>Name :</strong> <span>') . $final_view['name'] . '</span></li>';
           $output.= '<li>'.t('<strong>Email :</strong><span>') . $final_view['email'] . '</span></li>';
           if(!empty($user_message)) {
-          $output.= '<li>'.t('<strong>Description :</strong> <span>') . $user_message .'</span></li>';
+            $output.= '<li>'.t('<strong>Description :</strong> <span>') . $user_message .'</span></li>';
           }
           if(!empty($final_view['city'])) {
-          $output.= '<li>'.t('<strong>City :</strong> <span>') . $final_view['city'] . '</span></li>';
+            $output.= '<li>'.t('<strong>City :</strong> <span>') . $final_view['city'] . '</span></li>';
           }
           if(!empty($final_view['image'])) {
-          $file = file_load($final_view['image']);
-          $output.= '<li>'.'<strong>Image :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span></li>';
+            $file = file_load($final_view['image']);
+            $output.= '<li>'.'<strong>Image :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span></li>';
           }
           if(!empty($final_view['multiple_image'])) {
-          $myimgArray = explode(',', $final_view['multiple_image']);
-          $myimgcaption = explode(',', $final_view['image_caption']);
-          $img_no = 1;
-          foreach($myimgArray as $key => $value) {
-          $file = file_load($value);
-          $caption = 'caption : ' .$myimgcaption[$key];
-          $output.= '<li>'.'<strong>Image'.$img_no.' :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span><span>'.$caption.'</span></li>';
-          $img_no++;
-          }
+            $myimgArray = explode(',', $final_view['multiple_image']);
+            $myimgcaption = explode(',', $final_view['image_caption']);
+            $img_no = 1;
+            foreach($myimgArray as $key => $value) {
+              $file = file_load($value);
+              $caption = 'caption : ' .$myimgcaption[$key];
+              $output.= '<li>'.'<strong>Image'.$img_no.' :</strong><span> <img src="'.file_create_url($file->uri).'" alt="'.  file_create_url($file->uri).'"/></span><span>'.$caption.'</span></li>';
+              $img_no++;
+            }
           }
           if(!empty($final_view['video'])) {
-          $file = file_load($final_view['video']);
-          $output.= '<li>'.'<strong>Video :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
+            $file = file_load($final_view['video']);
+            $output.= '<li>'.'<strong>Video :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
           }
           if(!empty($final_view['audio'])) {
-          $file = file_load($final_view['audio']);
-          $output.= '<li>'.'<strong>Audio :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
+            $file = file_load($final_view['audio']);
+            $output.= '<li>'.'<strong>Audio :</strong><span> <a target="_blank" href="'.file_create_url($file->uri).'">'.file_create_url($file->uri).'</a></span></li>';
           }
           $output.= '<li>'.'<strong>Post date :</strong><span> ' . $final_view['publish_date'] . '</span></li>';
-          //$output.= '<a href="'.$path.'">'.t('Back').'</a>';
+          
         }
 
         $output.= '</ul></div>';
@@ -1032,7 +984,7 @@ function itg_ugc_content_details($nid, $un = NULL) {
     $con = mongodb();
     $people = $con->ugc_details;
     if(!empty($un)) {
-    $cond = array('unid' => (int)$nid);  
+      $cond = array('unid' => (int)$nid);  
     } else {
    try {
         $pid = new MongoId($nid);
