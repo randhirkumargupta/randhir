@@ -1187,9 +1187,6 @@ function itg_widget_views_query_alter(&$view , &$query) {
 
 
   global $user;
-//  if($view->name = 'programme_content' && $view->current_display == 'block') {
-//    //pr($query->where[1]['conditions']);
-//  }
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
@@ -2819,7 +2816,7 @@ function itg_widget_node_insert($node) {
             $single_max_result = get_max_weight_for_node_insert($category['tid'] , $node->type);
             $max_result = $single_max_result['content_type'];
             $max_result_all = $single_max_result['All'];
-            $single_insert_query = db_insert('itg_widget_order_section')->fields(
+            $single_insert_query = db_insert('itg_widget_order')->fields(
                 array(
                   'nid' ,
                   'widget' ,
@@ -2833,7 +2830,7 @@ function itg_widget_node_insert($node) {
             $single_insert_query->values(array(
               'nid' => $nid ,
               'widget' => 'section_wise_widget' ,
-              'content_type' => $node->type ,
+              'content_type' => 'All' ,
               'cat_id' => $category['tid'] ,
               'weight' => ++$max_result ,
               'extra' => '' ,
@@ -2843,8 +2840,8 @@ function itg_widget_node_insert($node) {
             $single_insert_query->execute();
             //Delete Logic
             // As we do not want to keep more data in table.
-            _delete_old_data_from_section_widget('itg_widget_order_section' , $category['tid'] , "all");
-            $single_insert_query_all = db_insert('itg_widget_order')->fields(
+            _delete_old_data_from_section_widget('itg_widget_order' , $category['tid'] , "all");
+            $single_insert_query_all = db_insert('itg_widget_order_section')->fields(
                 array(
                   'nid' ,
                   'widget' ,
@@ -2858,7 +2855,7 @@ function itg_widget_node_insert($node) {
             $single_insert_query_all->values(array(
               'nid' => $nid ,
               'widget' => 'section_wise_widget' ,
-              'content_type' => 'All' ,
+              'content_type' => $node->type ,
               'cat_id' => $category['tid'] ,
               'weight' => ++$max_result_all ,
               'extra' => '' ,
@@ -2868,10 +2865,13 @@ function itg_widget_node_insert($node) {
             $single_insert_query_all->execute();
             //Delete Logic
             // As we do not want to keep more data in table.
-            _delete_old_data_from_section_widget('itg_widget_order' , $category['tid'] , $node->type);
+            _delete_old_data_from_section_widget('itg_widget_order_section' , $category['tid'] , $node->type);
           }
         }
       }
+    }
+    if ($node->status == 0) {
+      itg_widget_handle_unpublished_node($node->nid);
     }
   }
 }
@@ -2918,7 +2918,7 @@ function _delete_old_data_from_section_widget($table , $cat_id , $content_type) 
  * @return int
  */
 function get_max_weight_for_node_insert($tid , $type) {
-  $max_query = db_select('itg_widget_order');
+  $max_query = db_select('itg_widget_order_section');
   $max_query->addExpression('MAX(weight)' , 'weight');
   $max_query->condition('cat_id' , $tid);
   $max_query->condition('content_type' , array($type) , 'IN');
@@ -2926,7 +2926,7 @@ function get_max_weight_for_node_insert($tid , $type) {
   $max_query->groupBy('content_type');
   $max_result = $max_query->execute()->fetchCol();
 
-  $max_query_all = db_select('itg_widget_order_section');
+  $max_query_all = db_select('itg_widget_order');
   $max_query_all->addExpression('MAX(weight)' , 'weight');
   $max_query_all->condition('cat_id' , $tid);
   $max_query_all->condition('content_type' , 'All');
@@ -2948,9 +2948,9 @@ function get_max_weight_for_node_insert($tid , $type) {
  * @return int
  */
 function get_max_weight($tid , $type) {
-  $table = 'itg_widget_order';
+  $table = 'itg_widget_order_section';
   if (strtolower($type) == 'all') {
-    $table = 'itg_widget_order_section';
+    $table = 'itg_widget_order';
   }
   $max_query = db_select($table);
   $max_query->addExpression('MAX(weight)');
@@ -2958,7 +2958,8 @@ function get_max_weight($tid , $type) {
   $max_query->condition('content_type' , $type);
   $max_query->condition('widget' , 'section_wise_widget');
   $max_result = $max_query->execute()->fetchField();
-  return $max_result;
+  return !empty($max_result) ? $max_result : 1;
+  ;
 }
 
 /**
@@ -2986,47 +2987,29 @@ function itg_widget_node_update($node) {
     }
 
     if (isset($arg[1]) && $arg[1] != 'add') {
+      watchdog("node_update" , "<pre>" . print_r($node , true) . "</pre>");
       $nid = $node->nid;
       $cat_id = $node->field_story_category['und'];
-      $order = $node->created;
-      $updated_categories = array();
-      $node_type = $node->type;
-      $query = db_select('itg_widget_order' , 'iwo')
-          ->fields('iwo' , array('cat_id' , 'weight'))
-          ->condition('iwo.widget' , 'section_wise_widget')
-          ->condition('iwo.nid' , $nid)
-          ->groupBy('iwo.cat_id');
 
-      $result = $query->execute()->fetchAll();
+      db_delete('itg_widget_order')
+          ->condition('widget' , 'section_wise_order')
+          ->condition('content_type' , 'All')
+          ->condition('nid' , $nid)->execute();
+
+      db_delete('itg_widget_order_section')
+          ->condition('content_type' , $node->type)
+          ->condition('widget' , 'section_wise_order')
+          ->condition('nid' , $nid)->execute();
 
       foreach ($cat_id as $category) {
-        $updated_categories[] = $category['tid'];
-      }
-
-      // Delete unused category from table.
-      $strg = implode(',' , $updated_categories);
-      db_query("DELETE from {itg_widget_order} where widget= :widget and nid = :nid and cat_id not in (:str)" , array(":widget" => 'section_wise_widget' , ':nid' => $nid , ':str' => $strg));
-      $new_weight_to_be_inserted = array();
-
-      foreach ($updated_categories as $category) {
-        //$new_weight_to_be_inserted[$category] = -1 * $order;
-        foreach ($result as $db_values) {
-          if ($db_values->cat_id == $category) {
-            $new_weight_to_be_inserted[$category] = $db_values->weight;
-          }
-        }
-      }
-
-
-      foreach ($updated_categories as $category_tid => $cat_id) {
-        manage_widget_order_during_node_update($nid , $cat_id , $node_type);
-        manage_widget_order_during_node_update($nid , $cat_id , "All");
+        manage_widget_order_during_node_update($node->nid , $category['tid'] , $node->type);
+        manage_widget_order_during_node_update($node->nid , $category['tid'] , "All");
       }
     }
   }
 
   if ($node->status == 0) {
-    itg_widget_handle_unpublished_node($node->nid);
+    //itg_widget_handle_unpublished_node($node->nid);
   }
 }
 
@@ -3038,35 +3021,26 @@ function itg_widget_node_update($node) {
  */
 function manage_widget_order_during_node_update($nid , $category_tid , $node_type) {
   $max_result = get_max_weight($category_tid , $node_type);
-  $table = 'itg_widget_order';
+  $table = 'itg_widget_order_section';
   if (strtolower($node_type) == 'all') {
-    $table = 'itg_widget_order_section';
+    $table = 'itg_widget_order';
   }
-  $check_existing_query = db_select($table , 'iwo')
-          ->fields('iwo' , array('nid'))
-          ->condition('iwo.content_type' , $node_type)
-          ->condition('iwo.nid' , $nid)
-          ->condition('iwo.widget' , 'section_wise_widget')
-          ->condition('iwo.cat_id' , $category_tid)->execute();
-
-  $db_count = $check_existing_query->rowCount();
-
-  if ($db_count == 0) {
-    try {
-      $query = db_insert($table)
-          ->fields(array(
-            'nid' => $nid ,
-            'widget' => 'section_wise_widget' ,
-            'content_type' => $node_type ,
-            'cat_id' => $category_tid ,
-            'weight' => ++$max_result ,
-            'extra' => "" ,
-          ))
-          ->execute();
-    }
-    catch (Exception $ex) {
-      drupal_set_message($ex->getMessage());
-    }
+  try {
+    $value = db_insert($table)
+        ->fields(array(
+          'nid' => trim($nid) ,
+          'widget' => 'section_wise_widget' ,
+          'content_type' => $node_type ,
+          'cat_id' => $category_tid ,
+          'weight' => ++$max_result ,
+          'extra' => "" ,
+          'constituency' => "" ,
+          'state' => 0 ,
+        ))
+        ->execute();
+  }
+  catch (Exception $ex) {
+    watchdog("video_test" , $nid . '--' . $category_tid . '--' . $node_type . '----' . $max_result);
   }
 }
 
