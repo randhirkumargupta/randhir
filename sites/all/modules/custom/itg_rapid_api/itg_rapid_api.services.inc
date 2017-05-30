@@ -1605,9 +1605,15 @@ function itg_rapid_api_magazine_editionlist($sdate, $tdate, $cpageno, $token) {
 function itg_rapid_api_testing($count) {
     //echo "hi andy-".$count;    exit();
     $get_token = variable_get('mobile_service_token');
+    
+    $str = '{
+	"status_code": "0",
+	"status_message": "Customised Message",
+	"data": {}
+}';
 
 
-       $jsondata = file_get_contents($json_string);
+       $jsondata = $str;
        
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
