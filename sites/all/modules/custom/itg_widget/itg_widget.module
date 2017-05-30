@@ -350,6 +350,10 @@ function itg_widget_block_info() {
   $blocks['section_wise_order_reorder_form'] = array(
     'info' => t('Section Order Reorder Form') ,
   );
+  
+  $blocks['auto_master_form_widget'] = array( 
+    'info' => t('Widget: Auto Master Form'), 
+  );
   return $blocks;
 }
 
@@ -861,6 +865,13 @@ function itg_widget_block_view($delta = '') {
     case 'section_wise_order_reorder_form':
       $block['content'] = drupal_get_form('section_wise_widget_form');
       break;
+      
+    case 'auto_master_form_widget': 
+	  $info['widget'] = 'auto_master_form_widget'; 
+	  if (module_exists('itg_auto_search')) { 
+		$block['content'] = drupal_get_form('auto_master_form'); 
+	  }		   
+	  break;
   }
 
 
