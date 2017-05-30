@@ -1,0 +1,6 @@
+name = ITG Devices Notifications
+description = "ITG Device Notification send to Android, Iphone etc"
+core = 7.x
+package = ITG
+
+
