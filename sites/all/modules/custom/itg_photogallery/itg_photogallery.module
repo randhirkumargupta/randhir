@@ -483,7 +483,7 @@ function itg_photogallery_crop_thumb($fid) {
   else {
     $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
   }
-  $image_name = $image_name . time();
+  $image_name = $image_name . time().rand(1111,9999);
   $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
   $uri = $filepath . '/' . $image_name . '.' . $image_extension;
   $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
