@@ -20,18 +20,18 @@ function itg_rapid_api_resource() {
       	'access callback' => 'user_access',
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
-        'args' => array(
-        	array(
-          'name' => 'count', 
-          'type' => 'int', 
-          'description' => t('Number of comments to load.'), 
-          'source' => array('param' => 'count'),           
-          //'source' => array('path' => 0),
-          //'source' =>'data',
-          'optional' => TRUE,
-          'default value' => 0,
-        ),
-      	),
+//        'args' => array(
+//        	array(
+//          'name' => 'count', 
+//          'type' => 'int', 
+//          'description' => t('Number of comments to load.'), 
+//          'source' => array('param' => 'count'),           
+//          //'source' => array('path' => 0),
+//          //'source' =>'data',
+//          'optional' => TRUE,
+//          'default value' => 0,
+//        ),
+//      	),
       	
     	),
       	),
