@@ -48,15 +48,16 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
     $body = str_replace("[itg_mail_token:itg_loyalty_user]", $data['name'], $mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
     $body1 = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
     $body2 = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $body1);
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $body2);
     $params = array(
-      'body' => $body2,
+      'body' => $mail_content,
       'subject' => $mail_subject,
     );
     //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 //    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      return TRUE;
+      watchdog('Loyalty Point Expiration', '<pre>'.print_r($params, true).'</pre>');
     }
     else {
       $error_msg = 'Failed to send the email!';

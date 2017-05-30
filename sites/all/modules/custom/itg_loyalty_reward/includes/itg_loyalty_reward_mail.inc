@@ -42,8 +42,9 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $pro
 //    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   // Array of email subject and body 
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-    'body' => $mail_content,
+    'body' => $mail_contents,
     'subject' => $mail_subject,
   );
   // for code email

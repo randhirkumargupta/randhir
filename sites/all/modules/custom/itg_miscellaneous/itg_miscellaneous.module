@@ -70,12 +70,7 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story_clean.inc',
   );
-  $items['get-mongo-detail/%/%'] = array(
-      'page callback' => 'itg_get_mongo_detail',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_miscellaneous.inc',
-  );
+ 
   $items['create-video-xml-clean'] = array(
       'page callback' => 'create_video_xml_clean',
       'access arguments' => array('access administrator'),

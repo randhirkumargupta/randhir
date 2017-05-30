@@ -10113,16 +10113,25 @@ h1.about-us-heading{
         }
     }
     #sortable1, #sortable2, #sortable3, #sortable4{
-        text-align: center;
-        li{
-            width: 65px;
-            height: 65px;
-            padding-right: 0;
-            border: 1px solid #515567;
-            border-radius: 50%;
-            margin: 10px;
-            overflow: hidden;
+      text-align: center;
+      li{
+        width: 65px;
+        height: 65px;
+        padding-right: 0;
+        border: 1px solid #515567;
+        border-radius: 50%;
+        margin: 10px;
+        overflow: hidden;
+        position: relative;
+        img {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: auto;
         }
+      }
     }
     .budget-predictor-social-share{
         .share-msg{
@@ -11608,8 +11617,22 @@ span.close_btt {
     .mCSB_scrollTools{width: 3px;}
   }
 }
+.story-section .story-right .description{
+  .social-share.social-share-embed{
+    @include social-share;
+  }
+}
 
-
+@media (min-width: 320px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share{
+    overflow: initial;
+    padding-left: 154px;
+  }
+  .view-front-end-global-search .view-content .itg-search-list > .views-field{
+    padding-left: 154px;
+  }
+}
 
 @media (min-width: 768px) {
   .modal-dialog {
@@ -11625,6 +11648,14 @@ span.close_btt {
   }
 }
 @media (min-width: 992px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share{
+    overflow: initial;
+    padding-left: 180px;
+  }
+  .view-front-end-global-search .view-content .itg-search-list > .views-field{
+    padding-left: 180px;
+  }
   .modal-lg {
     width: 900px;
   }

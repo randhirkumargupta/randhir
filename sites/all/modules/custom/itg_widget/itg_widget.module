@@ -865,8 +865,7 @@ function itg_widget_block_view($delta = '') {
 
     case 'section_wise_order_reorder_form':
       $block['content'] = drupal_get_form('section_wise_widget_form');
-      break;
-      
+      break;      
     case 'auto_master_form_widget': 
 	  $info['widget'] = 'auto_master_form_widget'; 
 	  if (module_exists('itg_auto_search')) { 

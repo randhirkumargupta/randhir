@@ -428,8 +428,9 @@ function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
     $body1 = str_replace('[itg_mail_token:itg_loyalty_user]', $user->name, $get_mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
     $mail_content = str_replace('[itg_mail_token:itg_product_name]', $productname, $body1);
   }
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-    'body' => $mail_content,
+    'body' => $mail_contents,
     'subject' => $mail_subject,
   );
    $to = $user->mail;

@@ -22,9 +22,9 @@ function itg_ugc_get_mail_content($uname, $type, $status, $to) {
               <html xmlns:v="urn:schemas-microsoft-com:vml"><head><title></title></head><body style="margin:0; padding:0;"><table cellpadding="0" cellspacing="0" width="760" align="center">';
   $content .= $mail_content;
   $content .= '</table></body></html>';
-
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
   $params = array(
-      'body' => $content,
+      'body' => $mail_content,
       'subject' => $mail_subject,
   );
 //  $to = 'gourav.walia@kelltontech.com';

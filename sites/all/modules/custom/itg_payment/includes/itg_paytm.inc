@@ -203,12 +203,19 @@ function itg_payment_order_form_response_url() {
   $transaction_id = $_POST['TXNID'];
   $transaction_status = 0;
   $data['order_status'] = 0;
-  if ($_POST["STATUS"] == "TXN_SUCCESS") {
+  if ($_POST["STATUS"] == "TXN_SUCCESS" && $_POST['RESPCODE'] == '01') {
+    $goto_url = "itg-payment-success";
     //update_event_registration_after_success
     update_event_registration_after_success($_POST['ORDERID']);
 
     $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
     $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
+  }
+  elseif ($_POST["STATUS"] == "TXN_FAILURE" && $_POST['RESPCODE'] == '14112') {
+    $goto_url = "itg-payment-cancel";
+  }
+  else {
+    $goto_url = "itg-payment/response-fail";
   }
 
   $data['order_id'] = $_POST['ORDERID'];
@@ -218,13 +225,7 @@ function itg_payment_order_form_response_url() {
 
   // Update order after response.
   itg_payment_response_info_update($data);
-  
-  if ($transaction_status == 0) {
-    drupal_goto('itg-payment-cancel'); 
-  }
-  else {
-    drupal_goto('itg-payment-success');
-  }
+  drupal_goto($goto_url);
 }
 
 /**
