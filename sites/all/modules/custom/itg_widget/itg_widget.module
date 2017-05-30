@@ -347,9 +347,6 @@ function itg_widget_block_info() {
     'info' => t('Accord') ,
     'cache' => DRUPAL_CACHE_GLOBAL ,
   );
-  $blocks['auto_master_form_widget'] = array( 
-    'info' => t('Widget: Auto Master Form'), 
-  );
   return $blocks;
 }
 
@@ -858,13 +855,7 @@ function itg_widget_block_view($delta = '') {
     case 'accord':
       $block['content'] = '<iframe src="' . ACCORD_URL . '" marginwidth="0" scrolling="no" align="left" frameborder="0" height="91" width="670"></iframe>';
       break;
-	// Auto Master Form widget case 
-    case 'auto_master_form_widget': 
-	  $info['widget'] = 'auto_master_form_widget'; 
-	  if (module_exists('itg_auto_search')) { 
-		$block['content'] = drupal_get_form('auto_master_form'); 
-	  }		   
-	  break;
+
   }
 
 

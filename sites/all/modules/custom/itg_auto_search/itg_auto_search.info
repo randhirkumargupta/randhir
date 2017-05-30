@@ -1,4 +1,0 @@
-name = ITG Auto Search
-description = "ITG Auto Search Module"
-core = 7.x
-package = ITG
