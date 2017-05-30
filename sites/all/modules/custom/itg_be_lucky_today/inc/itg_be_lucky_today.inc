@@ -140,9 +140,11 @@ function be_lucky_today_registration2($form, $form_state) {
     );
     $form['age'] = array(
       '#type' => 'radios',
-      '#title' => t('Age'),
+      '#title' => '',//t('Ags'),
       '#options' => $age,
-      '#default_value' => '18-24'
+      '#default_value' => '18-24',
+      '#prefix' => '<div class="hidden">',
+      '#suffix' => '</div>'
     );
     $form['next'] = array(
       '#type' => 'submit',
