@@ -1604,7 +1604,7 @@ function itg_rapid_api_magazine_editionlist($sdate, $tdate, $cpageno, $token) {
 
 function itg_rapid_api_testing($count) {
     //echo "hi andy-".$count;    exit();
-    $json_string = 'http://localhost/decode/sprint1/master_config.json';
+    $get_token = variable_get('mobile_service_token');
 
 
        $jsondata = file_get_contents($json_string);
