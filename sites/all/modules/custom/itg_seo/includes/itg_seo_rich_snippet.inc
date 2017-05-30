@@ -1,11 +1,27 @@
 <?php
 
 /*
+ * add_nofollow_in_body
+ */
+function add_nofollow_in_body($bodytext) {
+ 
+  $body_html_dom = filter_dom_load($bodytext);
+  $body_links = $body_html_dom->getElementsByTagName('a');
+  foreach ($body_links as $body_link) {
+    $body_url = parse_url($body_link->getAttribute('href'));
+    $body_link->setAttribute('rel', 'nofollow');
+  }
+  $new_body_text = filter_dom_serialize($body_html_dom);
+
+  return $new_body_text;
+}
+
+/*
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
 function itg_seo_node_data($node) {
-  global $base_url, $theme_key;
-  
+  global $base_url, $theme_key; 
+
   // Adding noindex, nofollow for making content search engin friendly
   if($node->type == 'story') {
     if(isset($node->field_story_configurations[LANGUAGE_NONE])) {

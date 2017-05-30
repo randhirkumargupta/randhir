@@ -2,7 +2,6 @@
 //p($entity_data_node);
 global $base_url;
 
-//drupal_add_css('', array('type' => 'inline', 'scope' => 'footer'));
 
 if (!empty($data)) {
   ?>
