@@ -25,7 +25,7 @@ function itg_rapid_api_resource() {
           	'name' => 'token',
           	'type' => 'string',
           	'description' => 'Function to perform',
-          	'source' => array('param' => 'token'),
+          	'source' => array('data' => 'token'),
                 //'source' => array('path' => 0), 
           	'optional' => TRUE,
           	'default' => '*', 
