@@ -522,113 +522,154 @@ meter;
     );
     $form['#prefix'] = '<div class="itg_be_lucky_today_2">';
     $form['#suffix'] = '</div>';
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
     $form['header'] = array(
-      '#markup' => '<h1>Be Lucky Today</h1>'
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
     );
     $form['message'] = array(
       '#markup' => '<p>Your happiness will be inclimlete without your friends.Let them be a part of it!!</p>',
-      '#prefix' => '<div class="form-wrappe-left">',
+      '#prefix' => '<div class="form-main-container"><div class="form-wrappe-left">',
     );
 
+    $form['number_1'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">1</span> </div>',
+      '#prefix' => '<div class="left_part_box"><div class="row"><div class="col_left">',
+    );
     $form['name'] = array(
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email'] = array(
       '#type' => 'textfield',
       '#title' => t('Email Id'),
       '#size' => 25,
       '#maxlength' => 128,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile'] = array(
       '#type' => 'textfield',
       '#title' => t('Mobile No'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_2'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">2</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', // t('Name'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
       '#maxlength' => 128,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_3'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">3</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
       '#maxlength' => 128,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#suffix' => '</div></div></div>',
+    );
+
+    $form['number_4'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">4</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
       '#maxlength' => 128,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_5'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">5</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
       '#maxlength' => 128,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '',
       '#size' => 25,
       '#maxlength' => 128,
-      '#prefix' => '</div></div>',
+      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#suffix' => '</div></div></div></div>',
     );
     $form['luck_meter'] = array(
       '#markup' => $html,
@@ -637,6 +678,7 @@ meter;
       '#type' => 'submit',
       '#attributes' => array('class' => array('be_lucky_today_submit')),
       '#value' => t('Submit your Entry'),
+      '#suffix' => '</div></div>',
     );
     return $form;
 }
@@ -798,11 +840,21 @@ share;
     $form['#attached']['css'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
+    $form['header'] = array(
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
+    );
     $form['message'] = array(
-      '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
+      '#markup' => '<h2>Thank You<br />for your Participation.</h2>',
+      '#prefix' => '<div class="thank_you_text">',
     );
     $form['tsnmessage'] = array(
-      '#markup' => 'Payment process cancelled.',
+      '#markup' => '<p>Payment process cancelled.</p>',
+      '#suffix' => '</div>',
     );
     $form['socialshare'] = array(
       '#markup' => $html,
@@ -834,11 +886,21 @@ share;
     $form['#attached']['css'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
+    $form['header'] = array(
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
+    );
     $form['message'] = array(
-      '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
+      '#markup' => '<h2>Thank You<br />for your Participation.</h2>',
+      '#prefix' => '<div class="thank_you_text">',
     );
     $form['tsnmessage'] = array(
-      '#markup' => 'Payment process success.',
+      '#markup' => '<p>Payment process success.</p>',
+      '#suffix' => '</div>',
     );
     $form['socialshare'] = array(
       '#markup' => $html,
