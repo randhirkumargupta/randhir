@@ -219,5 +219,12 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('section_widget_keep_row_count' , 100),
   );
   
+  $form['itg_nofollow_fields'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fileds Value that you want to add in nofollow list (add comma separated values like in placeholder)'),
+    '#attributes' => array('placeholder' => t('field_blog_long_description, field_blog_short_description')),
+    '#default_value' => variable_get('itg_nofollow_fields'),
+  );
+  
   return system_settings_form($form);
 }

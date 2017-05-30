@@ -352,9 +352,19 @@ if (!empty($device[0])) {
                                         </div>
                                       <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-6"><?php $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
-                                    print render($block['content']);
-                                      ?></div>
+                                      <div class="data-holder" id="itg-block-6">
+                                        <?php 
+                                        //$block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
+                                    //print render($block['content']);
+                                      ?>
+                                      <?php
+                                                if (isset($widget_data['itg-block-6']['widget'])) {
+                                                  print $widget_data['itg-block-6']['widget']; 
+                                                } else{
+                                                  print '<div class="widget-placeholder"><span>'.t('View on twitter').'</span></div>';
+                                                } 
+                                              ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
