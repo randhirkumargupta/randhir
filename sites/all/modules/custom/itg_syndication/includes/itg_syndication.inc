@@ -78,20 +78,20 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $delivery_mode,
-    'from' => 'noreply@indiatoday.com',
-    'subject' => 'Test email',
+    //'from' => 'noreply@indiatoday.com',
+    'subject' => 'Syndication feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: '.$delivery_mode . "\r\n",
-      'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      //'From: India Today <noreply@indiatoday.com>' . "\r\n",
     ),
   );
   $language = language_default();
 
-  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
 }
 
 /**
