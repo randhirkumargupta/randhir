@@ -1058,10 +1058,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $author_mail = array();
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
+  $front_url = 'http://uat-it.indiatodayonline.in/';
   if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
     $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
   } else {
-    $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+    $node_url = l($node->title, $front_url . '/node/' . $node->nid);
   }
   
   

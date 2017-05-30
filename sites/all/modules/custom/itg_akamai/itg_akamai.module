@@ -66,6 +66,24 @@ function itg_akamai_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
+  $items['admin/config/system/itg_akamai/akamai_not_implemented'] = array(
+    'title' => 'Akamai Pages Akamai TTL(node) not implemented',
+    'description' => 'Admin interface',
+    'page callback' => 'itg_akamai_akamai_not_implemented_rows',
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/itg_akamai/akamais_not_implemented'] = array(
+    'title' => 'Akamai Pages Akamai TTL(section) not implemented',
+    'description' => 'Admin interface',
+    'page callback' => 'itg_akamai_akamais_not_implemented_rows',
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['admin/config/system/itg_akamai/akamai_ccpurge'] = array(
     'title' => 'Akamai Purge Content type Node',
     'description' => 'Admin interface to clear Akamai Purge Content type Node',
@@ -117,7 +135,6 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_CALLBACK,
   );
-
 
   return $items;
 }
@@ -420,19 +437,31 @@ function itg_akamai_page_cache_control_form() {
   $form = array();
   $nid = arg(1);
 
-  if (arg(0) == 'node' && is_numeric($nid) && arg(2) == NULL) {
-    $path = arg(0) . '/' . $nid;
-    $form['#node'] = node_load($nid);
+
+  $is_front_page = drupal_is_front_page();
+
+  if ($is_front_page) {
+    $path[] = drupal_get_path_alias($_GET['q']);
+    $path[] = $_GET['q'];
   }
   else {
-    $path = check_plain($_GET['q']);
-    $form['#node'] = NULL;
+    if (arg(0) == 'node' && is_numeric($nid)) {
+      $node = node_load($nid);
+      $url = drupal_get_path_alias('node/' . $nid);
+      $current_url = NULL;
+      if (function_exists('itg_common_custompath_insert_load')) {
+        $path = itg_common_custompath_insert_load($node);
+      }
+      else {
+        $path = $node->path['alias'];
+      }
+    }
+    else {
+      $path = drupal_get_path_alias($_GET['q']);
+      $form['#node'] = NULL;
+    }
   }
 
-  $path_label = $path;
-  if ($path == variable_get('site_frontpage', 'node')) {
-    $path_label = t("[frontpage]");
-  }
 
   $form['path'] = array(
     '#type' => 'hidden',
@@ -472,6 +501,15 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_update($node) {
+
+
+  // Skipping batch for widget only
+  if (function_exists('itg_workflow_stop_node_update_batch_for_widgets')) {
+    if (itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
+    }
+  }
+
   if (user_access("purge itg akamai cache")) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $url = drupal_get_path_alias('node/' . $node->nid);
@@ -650,35 +688,9 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       $akamai_config_cctype_flag = NULL;
 
       // Checking whether the Akamai content level configration have been saved or not 
+      $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
-      $restricted_cc = array(
-        'ugc_node_form',
-        'mail_templates',
-        'event_backend',
-        'ads_management',
-        'coupon',
-        'itg_template_widgets',
-        'loyalty_and_rewards',
-        'newsletter',
-        'newsletter_templates',
-        'notification',
-        'print_team_integration',
-        'issue',
-        'magazine',
-        'supplement',
-        'ask_an_expert',
-        'ugc',
-        'itg_delete_solr_video',
-        'itg_funalytics',
-        'syndication_client',
-        'syndication_feed_from_pattern',
-        'syndication_rule',
-        'task_idea_allocation_tracking',
-        'article',
-        'live_tv_integration'
-      );
-
-      if (isset($form['#node']->nid) && !in_array($form['#node']->type, $restricted_cc)) {
+      if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
         $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
       }
       $form['akamai_timeout'] = array(
@@ -868,7 +880,7 @@ function itg_akamai_init() {
         akamai_max_age($homepage_ttl);
       }
     }
-    else { // For custom and other pages
+    if (isset($_GET['q']) && !empty($_GET['q'])) { // For custom and other pages
       $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
       switch ($_GET['q']) {
         // Checking if page is Taxonomy page
@@ -880,12 +892,20 @@ function itg_akamai_init() {
           }
 
           break;
+
+        case 'node/2':
+          $homepage_ttl = variable_get('itg_akamai_other_hpage');
+          if (isset($homepage_ttl) && !empty($homepage_ttl)) {
+            akamai_max_age($homepage_ttl);
+          }
+
+          break;
       }
       // Code started for TTL setting for the custom/other URLs
 
       if (isset($parm) && !empty($parm)) {
         $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
-        if (isset($ttl_for_custom_url)) {
+        if (isset($ttl_for_custom_url) && !empty($ttl_for_custom_url)) {
           akamai_max_age($ttl_for_custom_url);
         }
       }

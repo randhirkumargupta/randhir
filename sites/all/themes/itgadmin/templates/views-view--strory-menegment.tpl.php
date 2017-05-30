@@ -49,7 +49,7 @@
     <div class="attachment">
           
       <span class="count"><?php print t('Count').' ('.$view->total_rows.')'; ?></span>
-      <a href="clone-story?width=1000&height=700&iframe=true" class="clone-story-link colorbox-load" title ="Clone Story"><?php print t('Clone Story'); ?></a> 
+      <a href="clone-story" class="clone-story-link" title ="Clone Story" target="_blank"><?php print t('Clone Story'); ?></a>
       <?php print l(t('Create Story'), 'node/add/story', array('attributes' => array('class' => '', 'title' => t('Create Story')), 'query' => array('destination' => arg(0)))); ?>
     </div>
   <?php endif; ?>

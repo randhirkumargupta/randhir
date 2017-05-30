@@ -83,20 +83,25 @@ function itg_personalization_menu() {
  *   Html output for this page.
  */
 function itg_personalization_home_page() {
-  global $user;
+  global $user, $base_url;
   $data = array();
   drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
   // Load user fields
   $user_fields = user_load($user->uid);
 
   // Render user picture.
+  if(!empty($user_fields->field_user_picture['und'][0]['uri'])) {
   $data['profile_pic'] = theme(
       'image_style', array(
     'style_name' => 'user_picture',
     'path' => $user_fields->field_user_picture['und'][0]['uri'],
       )
   );
-
+  } else {
+    $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
+    $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+    $data['profile_pic'] = $user_pic;
+  }
   // Load user name    
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];

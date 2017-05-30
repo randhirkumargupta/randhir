@@ -27,6 +27,12 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_story.inc' ,
   );
+  $items['content-workbench-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_story_get_workbench_title' ,
+    'access arguments' => array('access itg story') ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_story.inc' ,
+  );
   $items['content-nid-list/%/autocomplete'] = array(
     'page callback' => 'itg_story_get_content_nid' ,
     'access arguments' => array('access itg story') ,
@@ -290,7 +296,6 @@ function itg_story_form_custom_callback($form , &$form_state) {
  * {@inheritdoc}
  */
 function itg_story_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
-
   $soruce_type_filter_display_views = array(
     'views-exposed-form-strory-menegment-page' ,
     'views-exposed-form-strory-menegment-page-1' ,
@@ -308,10 +313,16 @@ function itg_story_form_views_exposed_form_alter(&$form , &$form_state , $form_i
     'views-exposed-form-photo-gallery-management-page-5'
   );
 
-
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
+  
+  
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
   ) {
-    $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+    if(arg(0) != 'ugc-published-story') {
+      $form['title']['#autocomplete_path'] = 'content-workbench-title-list/story/'.arg(0).'/autocomplete';
+    } else {
+      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+    }
+    
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
@@ -337,7 +348,11 @@ function itg_story_form_views_exposed_form_alter(&$form , &$form_state , $form_i
         ->fields('st' , array('field_story_source_type_value'));
     $result = $query->execute()->fetchAll();
     foreach ($result as $option_values) {
+      if($option_values->field_story_source_type_value == 'videogallery') {
+      $option[$option_values->field_story_source_type_value] = 'Video';
+      }else {
       $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
+      }
     }
 
     $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
@@ -766,7 +781,7 @@ function itg_story_node_view($node , $view_mode , $langcode) {
   if ($node->type == 'story') {
     global $user , $theme;
     // for lock story
-    if ($theme == FRONT_THEME_NAME && (in_array(FRONT_USER , $user->roles) || $user->uid == 0)) {
+    if ($view_mode != 'search_index' && $theme == FRONT_THEME_NAME && (in_array(FRONT_USER , $user->roles) || $user->uid == 0)) {
       $config = array();
       if (!empty($node->field_story_configurations['und'][0]['value'])) {
         foreach ($node->field_story_configurations['und'] as $value) {

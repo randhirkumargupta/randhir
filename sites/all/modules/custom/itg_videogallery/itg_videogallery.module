@@ -1625,7 +1625,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL','S3' => 'S3'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -2488,7 +2488,6 @@ function itg_videogallery_move_ftp_videos() {
       $datefolder = date('Y-m', $vid->upload_time);
 
       $pav = itg_video_copy_onfile_to_anoter($vid->name, $datefolder);
-
     }
   }
 }
@@ -2813,7 +2812,7 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'videogallery') {
+  if ($node->type == 'videogallery' && $view_mode != 'search_index') {
 // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').live('click', function(){
 var section_id = jQuery(this).val();
@@ -3525,7 +3524,6 @@ function itg_videogallery_s3_file_to_dm() {
       }
 // Code start for Adding  video in daily motion 
     }
-    die;
   }
   // Use the high-level iterators (returns ALL of your objects).
 }
@@ -3541,10 +3539,10 @@ function itg_videogallery_ftp_file_insert_cron() {
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
   $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
+
   foreach ($ftp_filess as $files_n) {
 
     $file_data_array = explode('/public_html/videos/', $files_n);
-
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
     $extension = $path_info_data['extension'];
@@ -3564,68 +3562,74 @@ function itg_videogallery_ftp_file_insert_cron() {
     $filename = $path_info['filename'];
     if (isset($extension) && $extension == 'mp4') {
       $file_size = ftp_size($connection_id, $files);
-      $existfile = check_file_already_exist_or_not_by_ftp($file_array[1]);
-      if (empty($existfile)) {
+      $url_to_check = FTP_URL_VIDEO . $file_array[1];
+      $fileresize = ftp_size($connection_id, $files);
 
-        $realfilename = check_file_already_exist_or_not($file_array[1]);
+
+      if ($fileresize == $file_size) {
+        $existfile = check_file_already_exist_or_not_by_ftp($file_array[1]);
+        if (empty($existfile)) {
+
+          $realfilename = check_file_already_exist_or_not($file_array[1]);
 
 // Adding managed file
-        $uri = 'public://dailymotion_video_dir/' . $realfilename;
-        try {
-
-          $fid = db_insert('file_managed')
-              ->fields(array(
-                'uid' => $user->uid,
-                'filename' => $realfilename,
-                'uri' => $uri,
-                'filemime' => file_get_mimetype($uri),
-                'filesize' => $file_size,
-                'status' => 1,
-                'timestamp' => REQUEST_TIME,
-              ))
-              ->execute();
-          $file = file_load($fid);
-          file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-        }
-        catch (Exception $e) {
-//die($e->getMessage());
-        }
-
-        $file_details = file_load($fid);
-        $real_path = drupal_realpath($file_details->uri);
-        $response = itg_videogallery_dailymotion_add_video($real_path, $file_array[1], $realfilename, $fid);
-// Perform playlist and tags when new video create.
-
-        if (!empty($response)) {
-          $response_result['video_id'] = $response['id'];
-          $response_result['fid'] = $response['fid'];
+          $uri = 'public://dailymotion_video_dir/' . $realfilename;
           try {
 
-            $nid = db_insert('dailymotion_response_details')
+            $fid = db_insert('file_managed')
                 ->fields(array(
-                  'title' => $response['title'],
-                  'channel' => $response['channel'],
-                  'fid' => $response['fid'],
-                  'tags' => ' ',
-                  'video_id' => $response['id'],
-                  'nid' => 0,
-                  'video_size' => $file_size,
-                  'encoding_progress' => $response['encoding_progress'],
-                  'publishing_progress' => $response['publishing_progress'],
-                  'upload_time' => REQUEST_TIME,
-                  'video_duration' => $response['duration'],
-                  'dailymotion_published' => 0,
-                  'type' => 'ftp',
-                  'name' => $file_array[1],
+                  'uid' => $user->uid,
+                  'filename' => $realfilename,
+                  'uri' => $uri,
+                  'filemime' => file_get_mimetype($uri),
+                  'filesize' => $file_size,
+                  'status' => 1,
+                  'timestamp' => REQUEST_TIME,
                 ))
                 ->execute();
-            $title = $_POST['title'];
-// data insert into node
+            $file = file_load($fid);
+            file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
           }
           catch (Exception $e) {
-            die($e->getMessage());
+//die($e->getMessage());
           }
+
+          $file_details = file_load($fid);
+          $real_path = drupal_realpath($file_details->uri);
+          $response = itg_videogallery_dailymotion_add_video($real_path, $file_array[1], $realfilename, $fid);
+// Perform playlist and tags when new video create.
+
+          if (!empty($response)) {
+            $response_result['video_id'] = $response['id'];
+            $response_result['fid'] = $response['fid'];
+            try {
+
+              $nid = db_insert('dailymotion_response_details')
+                  ->fields(array(
+                    'title' => $response['title'],
+                    'channel' => $response['channel'],
+                    'fid' => $response['fid'],
+                    'tags' => ' ',
+                    'video_id' => $response['id'],
+                    'nid' => 0,
+                    'video_size' => $file_size,
+                    'encoding_progress' => $response['encoding_progress'],
+                    'publishing_progress' => $response['publishing_progress'],
+                    'upload_time' => REQUEST_TIME,
+                    'video_duration' => $response['duration'],
+                    'dailymotion_published' => 0,
+                    'type' => 'ftp',
+                    'name' => $file_array[1],
+                  ))
+                  ->execute();
+              $title = $_POST['title'];
+// data insert into node
+            }
+            catch (Exception $e) {
+              die($e->getMessage());
+            }
 // Code start for Adding  video in daily motion 
+          }
         }
       }
     }

@@ -121,6 +121,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         $form['field_user_counrty']['#attributes']['class'][] = 'element-hidden';
         $form['field_personalization_state']['#attributes']['class'][] = 'element-hidden';
         $form['field_personalization_city']['#attributes']['class'][] = 'element-hidden';
+        $form['field_user_alternate_email']['#attributes']['class'][] = 'element-hidden';
       }
     }
     
@@ -146,7 +147,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       }
     }
     /* condition for saml sinking */
-    /*else if (array_key_exists(FRONT_USER, $user->roles)) {
+    else if (array_key_exists(FRONT_USER, $user->roles)) {
         $authname = simplesaml_get_authname($user->uid);
         db_set_active('sso_db');
         $auth_attr = simplesaml_get_uid_byauth($authname);
@@ -156,7 +157,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
     
     if($user->uid == '1') {
       $form['field_mobile_number'][LANGUAGE_NONE][0]['value']['#value'] = $form['#user']->field_mobile_number[LANGUAGE_NONE][0]['value'];
-    }*/
+    }
     /* End for saml sinking */
   }
 
@@ -186,7 +187,15 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       $form['field_user_section']['und']['#options'] = $op;
 
       $user_role = itg_users_role_delegation($form['account']['roles']['#options']);
-
+      // not allow any user to change front user role.
+      if (array_key_exists(SITE_ADMIN, $user->roles)) {
+        if (in_array(FRONT_USER, $form['account']['roles']['#default_value'])) {
+          $user_role = array(FRONT_USER => 'Front User');
+        } else {
+          $user_role = $user_role;
+        }
+      }
+      // code end here
       if (isset($user_role)) {
         if ($form['#user']->uid != $user->uid) {
           $form['selected'] = array(
@@ -675,7 +684,7 @@ function itg_users_user_update(&$edit, $account, $category) {
 function itg_users_user_insert(&$edit, $account, $category) {
   
   /** do not delete code */
-  /*global $base_url;
+  global $base_url;
   $mail = $account->mail;
   $uid = $account->uid;
 
@@ -688,7 +697,7 @@ function itg_users_user_insert(&$edit, $account, $category) {
         'created' => date('Y-m-d G:i:s'),
       ))
       ->execute();
-  db_set_active();*/
+  db_set_active();
 
   /* End here */
   
@@ -887,7 +896,7 @@ function itg_users_backend_validate(&$form, &$form_state) {
 /**
  * Implements hook_user_delete().
  */
-/*function itg_users_user_delete($account) {
+function itg_users_user_delete($account) {
   if (!empty($account->uid)) {
     db_set_active('sso_db');
     db_delete('itg_sso_email_history')
@@ -895,7 +904,7 @@ function itg_users_backend_validate(&$form, &$form_state) {
         ->execute();
     db_set_active();
   }
-}*/
+}
 
 /**
  * Implements simplesaml_get_uid_byauth().

@@ -64,7 +64,8 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
         $destination = 'manage-magazines';
         $form['title']['#description'] = '<p>' . t('Please enter magazine title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit';
-        $form['field_print_magazine_issue_date']['#access'] = false;
+        //$form['field_print_magazine_issue_date']['#access'] = false;
+        unset($form['field_print_magazine_issue_date']);
     }
 
     //Set destination for supplement form
@@ -322,7 +323,8 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
     }
 
-    
+
+    //Add aotocomplete on issue title
     if ($form['#id'] == 'views-exposed-form-manage-issues-page') {        
 
         if ($form_state['view']->name == 'manage_issues') {
@@ -363,7 +365,7 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  * @param string $langcode
  */
 function itg_msi_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'issue') {
+  if ($node->type == 'issue' && $view_mode != 'search_index') {
       drupal_set_title(date('d/m/Y', strtotime($node->title)));
   }
 }

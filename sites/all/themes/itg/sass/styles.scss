@@ -10016,8 +10016,13 @@ h1.about-us-heading{
             .widget-title{
                 position: absolute;
             }
-            ul{
-                padding-top: 20px !important;
+            .itg-listing-wrapper{
+              margin-top: 22px !important;
+              overflow: auto;
+              height: 100%;
+              ul{
+                padding: 0 !important;
+              }
             }
         }
     }
@@ -11617,16 +11622,63 @@ span.close_btt {
     .mCSB_scrollTools{width: 3px;}
   }
 }
+.special-top-news{
+  .itg-listing-wrapper{
+    .mCSB_inside>.mCSB_container{margin-right: 0;}
+    .mCSB_scrollTools{width: 3px;}
+  }
+}
 .story-section .story-right .description{
   .social-share.social-share-embed{
     @include social-share;
   }
 }
 
+.payment-messages-wrapper{
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Roboto Slab';
+  color: #000;
+  h1{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 50px;
+    margin: 40px 0;
+  }
+  .payment-message{
+    background: #ef3c24;
+    color: #fff;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    margin: 30px 0;
+    .fa{
+      font-size: 34px;
+    }
+  }
+  .payment-message-text{
+    margin: 0 10px;
+  }
+  .payment-other-text{
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    a{
+      color: #ef3c24;
+      text-decoration: none;
+    }
+  }
+}
+
+
+
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share{
-    overflow: auto;
+    overflow: initial;
     padding-left: 154px;
   }
   .view-front-end-global-search .view-content .itg-search-list > .views-field{
@@ -11650,7 +11702,7 @@ span.close_btt {
 @media (min-width: 992px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share{
-    overflow: auto;
+    overflow: initial;
     padding-left: 180px;
   }
   .view-front-end-global-search .view-content .itg-search-list > .views-field{
