@@ -28,7 +28,7 @@ function itg_rapid_api_resource() {
           	'source' => array('param' => 'token'),
                 //'source' => array('path' => 0), 
           	'optional' => TRUE,
-          	'default' => '*',
+          	'default' => '*', 
         	),
       	),
       	
