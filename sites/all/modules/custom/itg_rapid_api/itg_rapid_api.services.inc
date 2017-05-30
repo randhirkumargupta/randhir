@@ -6,6 +6,37 @@ function itg_rapid_api_resource() {
         * custom resource for sprit1
         */
         
+        // testing custom resource declaration.....
+	'testing' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves testing schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_testing',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	array(
+          'name' => 'count', 
+          'type' => 'int', 
+          'description' => t('Number of comments to load.'), 
+          'source' => array('param' => 'count'),           
+          //'source' => array('path' => 0),
+          //'source' =>'data',
+          'optional' => TRUE,
+          'default value' => 0,
+        ),
+      	),
+      	
+    	),
+      	),
+	),
+        
          // hamburger_menu custom resource declaration.....
 	'hamburger_menu' => array(
   	'operations' => array(
@@ -1570,3 +1601,16 @@ function itg_rapid_api_magazine_editionlist($sdate, $tdate, $cpageno, $token) {
 }
 
 // magazine section end
+
+function itg_rapid_api_testing($count) {
+    //echo "hi andy-".$count;    exit();
+    $json_string = 'http://localhost/decode/sprint1/master_config.json';
+
+
+       $jsondata = file_get_contents($json_string);
+       
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
+}
