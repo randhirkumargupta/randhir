@@ -9,6 +9,8 @@
 module_load_include('inc' , 'nodequeue_generate' , 'nodequeue.actions');
 // All views pre render funtion.
 module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_view_pre_render');
+
+module_load_include('inc' , 'itg_widget' , 'includes/section-wise-widget-dual-table');
 // All Order reoder function on widget page.
 module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_order_re_order');
 // All Code for action (Bulk Operation).
@@ -185,13 +187,10 @@ function itg_widget_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('administer nodequeue') ,
   );
-  
-  
+
+
   return $items;
 }
-
-
-
 
 /**
  * This function use for update key candidate election status
@@ -346,6 +345,14 @@ function itg_widget_block_info() {
   $blocks['accord'] = array(
     'info' => t('Accord') ,
     'cache' => DRUPAL_CACHE_GLOBAL ,
+  );
+
+  $blocks['section_wise_order_reorder_form'] = array(
+    'info' => t('Section Order Reorder Form') ,
+  );
+  
+  $blocks['auto_master_form_widget'] = array( 
+    'info' => t('Widget: Auto Master Form'), 
   );
   return $blocks;
 }
@@ -521,7 +528,7 @@ function itg_widget_block_view($delta = '') {
             });
             });' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
       );
-      
+
       $info['widget'] = 'photo_carousel_list_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
@@ -595,7 +602,7 @@ function itg_widget_block_view($delta = '') {
       global $base_url;
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js' , array('type' => 'external' , 'scope' => 'footer' , 'weight' => 5));
       drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js' , array('type' => 'external' , 'scope' => 'header' , 'weight' => 5));
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/featured_video_carousel.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5)
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/featured_video_carousel.js' , array('type' => 'external' , 'scope' => 'footer' , 'weight' => 5)
       );
       module_load_include('inc' , 'itg_widget' , 'includes/featured_video_carousel');
       $info['widget'] = 'video_carousel_list_widget';
@@ -615,7 +622,7 @@ function itg_widget_block_view($delta = '') {
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end" , array("data" => $data));
       if ($user->uid) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js' , array('type' => 'external' , 'scope' => 'footer' , 'weight' => 5));
       }
       break;
     case 'home_page_poll_widget_block':
@@ -817,7 +824,7 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("live_score_data" , array("data" => $data));
       break;
-    
+
     case 'state_election_sosorry':
       module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_state_election');
 
@@ -847,7 +854,7 @@ function itg_widget_block_view($delta = '') {
           $podcast_image = $entity[$id]->field_podcast_audio_image_upload['und'][0];
           $podcast_banner_array[$key] = array("audio" => $audio_file_object , "desc" => $description , "image" => $podcast_image);
         }
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/podcast_header.js' , array('type' => 'inline' , 'scope' => 'footer' , 'weight' => 5));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/podcast_header.js' , array('type' => 'external' , 'scope' => 'footer' , 'weight' => 5));
         $block['content'] = theme("podcast_banner" , array("podcast_banner_array" => $podcast_banner_array , "podcast_title" => $podcast_title));
       }
       break;
@@ -855,6 +862,17 @@ function itg_widget_block_view($delta = '') {
     case 'accord':
       $block['content'] = '<iframe src="' . ACCORD_URL . '" marginwidth="0" scrolling="no" align="left" frameborder="0" height="91" width="670"></iframe>';
       break;
+
+    case 'section_wise_order_reorder_form':
+      $block['content'] = drupal_get_form('section_wise_widget_form');
+      break;
+      
+    case 'auto_master_form_widget': 
+	  $info['widget'] = 'auto_master_form_widget'; 
+	  if (module_exists('itg_auto_search')) { 
+		$block['content'] = drupal_get_form('auto_master_form'); 
+	  }		   
+	  break;
 
   }
 
@@ -873,7 +891,7 @@ function itg_widget_block_view($delta = '') {
  * @return array
  */
 function itg_widget_get_graph_data() {
- 
+
   global $theme;
   $cat_id = $_GET['section'];
   if ($theme == FRONT_THEME_NAME) {
@@ -885,7 +903,7 @@ function itg_widget_get_graph_data() {
   $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
   $itg_query->fields('n' , array('nid'));
   $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
-   $itg_query->fields('astw' , array('field_election_state_tid'))
+  $itg_query->fields('astw' , array('field_election_state_tid'))
       ->condition('type' , 'election_graph_xml')
       ->condition('ast.field_section_tid' , $cat_id , '=')
       ->condition('status' , 1);
@@ -896,7 +914,6 @@ function itg_widget_get_graph_data() {
   return $itg_result;
 }
 
-
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -905,20 +922,20 @@ function itg_widget_get_graph_data() {
  * @param int $range_min
  * @return array
  */
-function itg_widget_get_graph_data_by_state($section,$state) {
- 
+function itg_widget_get_graph_data_by_state($section , $state) {
+
   global $theme;
-  
+
   $itg_query = db_select('node' , 'n');
   $itg_query->join('field_data_field_election_constituency_tall' , 'frq' , 'n.nid = frq.entity_id');
   $itg_query->join('field_data_field_section' , 'ast' , 'n.nid = ast.entity_id');
   $itg_query->leftJoin('field_data_field_election_state' , 'astw' , 'n.nid = astw.entity_id');
   $itg_query->fields('n' , array('nid'));
   $itg_query->fields('frq' , array('field_election_constituency_tall_value'));
-   $itg_query->fields('astw' , array('field_election_state_tid'))
+  $itg_query->fields('astw' , array('field_election_state_tid'))
       ->condition('type' , 'election_graph_xml')
       ->condition('ast.field_section_tid' , $section , '=')
-            ->condition('astw.field_election_state_tid' , $state , '=')
+      ->condition('astw.field_election_state_tid' , $state , '=')
       ->condition('status' , 1);
   // ->range(0, 5);
   //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
@@ -926,7 +943,6 @@ function itg_widget_get_graph_data_by_state($section,$state) {
 
   return $itg_result;
 }
-
 
 /**
  * File provide get highlights widget data.
@@ -1377,6 +1393,15 @@ function itg_widget_handle_unpublished_node($nid , $magazin_widget_condition = T
     catch (Exception $ex) {
       drupal_set_message($ex->getMessage() , 'error');
     }
+
+    try {
+      $query = db_delete('itg_widget_order_section');
+      $query->condition('nid' , $nid);
+      $query->execute();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage() , 'error');
+    }
   }
 }
 
@@ -1713,4 +1738,44 @@ function _widget_batch_urls() {
     'issue-magazin-primary-cat-widget' ,
     'supplement-base-magazin-widget'
   );
+}
+
+function _get_custom_weight_from_table() {
+  $type_in_url = $_GET['type'];
+  $actual_weight_type = 'All';
+  $types = array("story" , "videogallery" , "photogallery");
+  if (in_array($type_in_url , $types)) {
+    $actual_weight_type = $type_in_url;
+  }
+  $view = views_get_current_view();
+  foreach ($view->result as $view_result_data) {
+    $required_node[] = $view_result_data->node_itg_widget_order_nid;
+  }
+  $itg_widget_order_data = db_select('itg_widget_order' , 'iwo')
+      ->fields('iwo' , array('nid' , 'weight'))
+      ->condition('iwo.cat_id' , $_GET['category_tid'])
+      ->condition('iwo.nid' , $required_node , 'IN');
+  $itg_widget_order_data->condition('iwo.content_type' , $actual_weight_type)
+      ->condition('iwo.widget' , 'section_wise_widget');
+  $actual_view_data = $itg_widget_order_data->execute()->fetchAllKeyed(0);
+  return $actual_view_data;
+}
+
+function itg_widget_views_pre_execute(&$view) {
+  //dpq($view->build_info['query']);
+}
+
+function update_something(&$item , $key) {
+  if ($key == 'itg_widget_order') {
+    $item = 'itg_widget_order_section';
+  }
+  if ($item == 'itg_widget_order') {
+    $item = 'itg_widget_order_section';
+  }
+  if ($item == 'node_itg_widget_order') {
+    $item = 'node_itg_widget_order_section';
+  }
+  if ($item == 'itg_widget_order_weight') {
+    $item = 'node_itg_widget_order_weight';
+  }
 }
