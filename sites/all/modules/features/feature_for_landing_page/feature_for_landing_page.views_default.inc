@@ -181,6 +181,9 @@ function feature_for_landing_page_views_default_views() {
 
   /* Display: Programmes videos */
   $handler = $view->new_display('block', 'Programmes videos', 'block');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -191,6 +194,11 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['relationships']['nid_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid_1']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -235,19 +243,25 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Section wise ordering content: Category */
-  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
-  /* Field: Section wise ordering content: weight */
-  $handler->display->display_options['fields']['weight']['id'] = 'weight';
-  $handler->display->display_options['fields']['weight']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['weight']['field'] = 'weight';
-  $handler->display->display_options['fields']['weight']['separator'] = '';
+  /* Field: Section widget relationship: Category */
+  $handler->display->display_options['fields']['cat_id_1']['id'] = 'cat_id_1';
+  $handler->display->display_options['fields']['cat_id_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['fields']['cat_id_1']['field'] = 'cat_id';
+  /* Field: Section widget relationship: weight */
+  $handler->display->display_options['fields']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['fields']['weight_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['fields']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['fields']['weight_1']['separator'] = '';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Section wise ordering content: Category */
+  /* Contextual filter: Section widget relationship: Category */
   $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['arguments']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['arguments']['cat_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['cat_id']['default_argument_type'] = 'taxonomy_tid';
@@ -255,6 +269,18 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['arguments']['cat_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['cat_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['cat_id']['limit'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type_1']['id'] = 'content_type_1';
+  $handler->display->display_options['filters']['content_type_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type_1']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type_1']['value'] = 'videogallery';
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget_1']['id'] = 'widget_1';
+  $handler->display->display_options['filters']['widget_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget_1']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget_1']['value'] = 'section_wise_widget';
   $export['programme_content'] = $view;
 
   $view = new view();
@@ -279,7 +305,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
-  /* Field: Field: Category Icon */
+  /* Field: Field: Sponser Logo */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -339,7 +365,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Field: Field: Category Icon */
+  /* Field: Field: Sponser Logo */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -444,7 +470,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
-  /* Field: Field: Category Icon */
+  /* Field: Field: Sponser Logo */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
