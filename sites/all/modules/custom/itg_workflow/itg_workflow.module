@@ -495,33 +495,10 @@ function itg_workflow_after_build($form, &$form_state) {
         $submit_name = 'Publish';
         $form['actions']['submit']['#value'] = t('Save as Draft');
       }
-      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {
-        
+      elseif ($form['#node']->workbench_moderation['current']->state == 'needs_review') {        
         $submit_name = '';
         $state_class = ' published';
         $form['actions']['submit']['#attributes']['class'][] = 'edit-submit-class';
-
-        drupal_add_js('jQuery(document).ready(function() {              
-                    jQuery(".form-item-workbench-moderation-state-new").show();
-                    jQuery(".reasons-form").hide();              
-                    jQuery("#edit-log").val("");
-
-                     jQuery("#edit-workbench-moderation-state-new").change(function() {
-                      jQuery("#edit-log").val("");
-                      if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {                  
-                        jQuery(".form-item-log").hide();
-                        jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
-                        jQuery(".reasons-form").show();
-
-                        jQuery(".reasons-form-msg").change(function() {
-                          jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
-                        });
-                      } else {
-                        jQuery(".form-item-log").show();
-                        jQuery(".reasons-form").hide();
-                      }
-                    });
-                });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 2));
       }
     }
   }
@@ -539,10 +516,6 @@ function itg_workflow_after_build($form, &$form_state) {
         $submit_name = 'Submit for Review';
         $state_class = ' needs_review';
         $form['actions']['submit']['#value'] = t('Save as Draft');
-
-        drupal_add_js('jQuery(document).ready(function() {
-                      jQuery("#edit-workbench-moderation-state-new").val("needs_modification");              
-                });', array('type' => 'inline', 'scope' => 'footer'));
       }
       elseif ($form['#node']->workbench_moderation['current']->state == 'published') {
         $submit_name = '';
@@ -565,6 +538,7 @@ function itg_workflow_after_build($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   $settings['ntype'] = $form['type']['#value'];
+  $settings['mstate'] = isset($form['#node']->workbench_moderation['current']->state) ? $form['#node']->workbench_moderation['current']->state : '';
 
   drupal_add_js(array('itg_workflow' => array('settings' => $settings)), array('type' => 'setting'));
 
@@ -796,6 +770,13 @@ function itg_workflow_node_access($node, $op, $account) {
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     if (function_exists('itg_get_node_redirect_url')) {
       itg_get_node_redirect_url($node, $op);
+    }
+  }
+  
+    
+  if (isset($node->workbench_moderation['current']->from_state) && $node->workbench_moderation['current']->from_state == 'draft' && $node->workbench_moderation['current']->state == 'draft') {
+    if ($node->uid != $user->uid) {
+      return NODE_ACCESS_DENY;
     }
   }
   

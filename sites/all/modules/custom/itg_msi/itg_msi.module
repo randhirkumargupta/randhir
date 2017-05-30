@@ -311,15 +311,6 @@ function itg_msi_views_pre_render(&$view) {
  */
 function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-    // Space should not be accepted in title search for all content listing
-    drupal_add_js('jQuery(document).ready(function() {          
-        jQuery("#edit-title, #edit-field-story-category-tid, #edit-name, #edit-uid").on("keypress", function(e) {
-          if (e.which === 32 && !this.value.length)
-          e.preventDefault();
-        });
-    });', array('type' => 'inline', 'scope' => 'footer'));
-
-
     if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
         if ($form_state['view']->name == 'manage_magazines') {
             $type = 'magazine';
@@ -332,8 +323,15 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
     }
 
+
     //Add aotocomplete on issue title
-    if ($form['#id'] == 'views-exposed-form-manage-issues-page') {
+    if ($form['#id'] == 'views-exposed-form-manage-issues-page') {        
+
+        if ($form_state['view']->name == 'manage_issues') {
+            $type = 'issue';
+        }
+        
+        $form['title']['#autocomplete_path'] = 'content/' . $type . '/autocomplete';
         $form['field_issue_title_value']['value']['#attributes'] = array('placeholder' => t('Title'));
     }
     if ($form['#id'] == 'views-exposed-form-issue-listing-page-1') {
