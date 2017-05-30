@@ -230,6 +230,7 @@ function mail_templates_listing_views_default_views() {
   $handler->display->display_options['fields']['field_mail_subject_loyalty']['table'] = 'field_data_field_mail_subject_loyalty';
   $handler->display->display_options['fields']['field_mail_subject_loyalty']['field'] = 'field_mail_subject_loyalty';
   $handler->display->display_options['fields']['field_mail_subject_loyalty']['label'] = '';
+  $handler->display->display_options['fields']['field_mail_subject_loyalty']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_mail_subject_loyalty']['element_label_colon'] = FALSE;
   /* Field: Content: Mail Subject */
   $handler->display->display_options['fields']['field_mail_subject_photo_gallery']['id'] = 'field_mail_subject_photo_gallery';
