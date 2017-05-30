@@ -50,9 +50,7 @@
                 var width = parent.jQuery('#image_width').val();
                 var ctype = parent.jQuery('#content_type').val();
 
-                if (imageId != "")
-                {
-
+                if (imageId != "") {
                     var imageName = jQuery(this).siblings('.dz-image').children('img').attr('imgname');
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
@@ -93,8 +91,7 @@
         var altdata = jQuery(this).attr('alt');
         var titledata = jQuery(this).attr('title');
         var fieldname = parent.jQuery('#field_name').val();
-//        parent.jQuery('#img_alttext').val(altdata);
-//        parent.jQuery('#img_title').val(titledata);
+
         timeout = setTimeout(function() {
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'get_dimension',
@@ -128,9 +125,8 @@
 
 
     jQuery('.imgtags img').live('click', function(e) {
-        var fid = jQuery(this).parent('.imgtags').attr('img-fid');
-        if (fid != "" && fid != 'undefined')
-        {
+        var fid = jQuery(this).parent('.imgtags').attr('data-img-fid');
+        if (fid != "" && fid != 'undefined') {
 
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'front_imagetag',

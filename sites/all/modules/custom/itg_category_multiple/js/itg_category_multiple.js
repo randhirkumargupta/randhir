@@ -11,12 +11,8 @@ $(document).ready(function() {
     var currentsubsubCategoryRequest = null;
     var currentsubsubsubCategoryRequest = null;
 
-
-    //$('.form-item-field-story-extra-data-und-0-value').hide();
-
     // Hiding category
     $('.form-field-name-field-story-category').hide();
-
 
     if (!$('#edit-itg-category').val()) {
         $('.form-item-itg-category').hide();
@@ -90,14 +86,10 @@ $(document).ready(function() {
         }
     });
 
-
-
     $('#edit-itg-category').on('change', function() {
-
 
         var categoryies = $(this).val();
         var actual_dom_name = $(this).attr('name');
-
 
         // Saving the extra data for the category 
         var category_extra_data = {};
@@ -105,10 +97,7 @@ $(document).ready(function() {
         category_extra_data.category = jQuery('#edit-itg-category').val(); // Setting for category 
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
-
-
         if (categoryies) {
-
             jQuery('#edit-field-story-category-und').val('');
             jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()));
 
@@ -161,12 +150,10 @@ $(document).ready(function() {
         category_extra_data.sub_category = jQuery('#edit-itg-sub-category').val(); // Setting for sub category
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
-
         var categoryies = $(this).val();
         var actual_dom_name = $(this).attr('name');
 
         if (categoryies) {
-
             jQuery('#edit-field-story-category-und').val('');
             jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat($(this).val()));
 
@@ -203,18 +190,13 @@ $(document).ready(function() {
             });
         } else {
 
-
         }
     });
 
 
     $('#edit-itg-sub-sub-category').on('change', function() {
-
-
-
         var categoryies = $(this).val();
         var actual_dom_name = $(this).attr('name');
-
 
         // Saving the extra data for the sub sub category 
         var category_extra_data = {};
@@ -224,14 +206,10 @@ $(document).ready(function() {
         category_extra_data.sub_sub_category = jQuery('#edit-itg-sub-sub-category').val(); // Setting for sub sub category
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
-
-
         jQuery('#edit-field-story-category-und').val('');
         jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat(jQuery('#edit-itg-sub-category').val()).concat($(this).val()));
 
-
         if (categoryies) {
-
             currentsubsubCategoryRequest = $.ajax({
                 type: 'POST',
                 url: Drupal.settings.basePath + 'itg-category-multiple-find',
@@ -266,7 +244,6 @@ $(document).ready(function() {
             });
         } else {
 
-
         }
     });
 
@@ -274,7 +251,6 @@ $(document).ready(function() {
     $('#edit-itg-sub-sub-sub-category').on('change', function() {
         var categoryies = $(this).val();
         var actual_dom_name = $(this).attr('name');
-
 
         // Saving the extra data for the sub sub sub category 
         var category_extra_data = {};
@@ -285,14 +261,10 @@ $(document).ready(function() {
         category_extra_data.sub_sub_sub_category = jQuery('#edit-itg-sub-sub-sub-category').val(); // Setting for sub sub sub category
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
-
         jQuery('#edit-field-story-category-und').val('');
         jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat(jQuery('#edit-itg-sub-category').val()).concat(jQuery('#edit-itg-sub-sub-category').val()).concat($(this).val()));
 
-
-
         if (categoryies) {
-
             currentsubsubsubCategoryRequest = $.ajax({
                 type: 'POST',
                 url: Drupal.settings.basePath + 'itg-category-multiple-find',
@@ -318,6 +290,7 @@ $(document).ready(function() {
                 }
             });
         } else {
+            
         }
     });
 
@@ -338,24 +311,11 @@ $(document).ready(function() {
         category_extra_data.primary_category = jQuery('#edit-itg-primary-category').val(); // Setting for primary category
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
-
-
         if (categoryies) {
-            jQuery('#edit-field-primary-category-und-0-value').attr('value', categoryies);
-
+          jQuery('#edit-field-primary-category-und-0-value').attr('value', categoryies);
         } else {
 
         }
     });
 
-
-
 });
-
-
-
-
-// }
-
-// };
-//})(jQuery, Drupal, this, this.document);

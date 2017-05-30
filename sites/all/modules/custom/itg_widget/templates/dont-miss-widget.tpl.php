@@ -2,10 +2,10 @@
   <div class="dont-miss">
     <ul>
       <?php foreach ($data as $key => $node_data) { ?>
-        <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
+        <li class="dont-miss-listing">
           <?php if (!empty($node_data['si_file_uri']) && file_exists($node_data['si_file_uri'])) { ?>
             <div class="dm-pic">
-              <a title="<?php echo $node_data['title'] ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
+              <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
                 <?php $file_uri = image_style_url("image170x127", $node_data['si_file_uri']);
                 ?>
                   <img src="<?php print $file_uri; ?>" alt="<?php echo $node_data['field_story_small_image_alt'] ?>" title="<?php echo $node_data['field_story_small_image_title'] ?>" />
@@ -29,7 +29,7 @@
             <?php endif; ?>
 
             <?php if (!empty($node_data['title'])) : ?>    
-              <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
+              <p title="<?php echo $node_data['title'] ?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                 <?php 
                 if(function_exists('itg_common_get_smiley_title')) {
                   echo l(itg_common_get_smiley_title($node_data['nid'], 0, 60), "node/" . $node_data['nid'] , array('html' => TRUE , "attributes" => array("title" =>$node_data['title'])));

@@ -19,9 +19,7 @@
   <?php print drupal_render($form['field_story_courtesy']); ?>
   <?php print drupal_render($form['field_recipe_ingredients']); ?>
   <?php print drupal_render($form['field_recipe_garnishing']); ?>
-  <?php print drupal_render($form['field_associate_photo_gallery']); ?>
-
-  
+  <?php print drupal_render($form['field_associate_photo_gallery']); ?>  
 </div>
 
 <div id="RecipeDetails">
@@ -38,6 +36,7 @@
   <?php print drupal_render($form['field_story_kicker_text']); ?>
   <?php print drupal_render($form['field_recipe_description']); ?>
 </div>
+
 <div id="RecipeImages">
   <h2 class="story-title"><?php print t('Recipe Images'); ?></h2>
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
@@ -46,6 +45,7 @@
   <?php print drupal_render($form['field_story_small_image']); ?>
      <?php print drupal_render($form['field_recipe_writer_image']); ?>
 </div>
+
 <div id="SocialMedia">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
@@ -61,16 +61,11 @@
   <?php print drupal_render($form['field_story_twitter_video_desc']); ?>
   <?php print drupal_render($form['field_story_twitter_video']); ?>
 </div>
-<div id="RecipeSyndication">
-  <h2 class="story-title"><?php print t('Syndication'); ?></h2>
-  <?php print drupal_render($form['field_story_syndication']); ?>
-</div>
 
 <div id="RecipeCategory">
   <h2 class="story-title"><?php print t('Recipe Category'); ?></h2>
   <?php print drupal_render($form['field_story_category']); ?>
-   <?php print drupal_render($form['field_primary_cat_data']); ?>
-  
+  <?php print drupal_render($form['field_primary_cat_data']); ?>  
 </div>
 
 <?php print drupal_render_children($form); ?>

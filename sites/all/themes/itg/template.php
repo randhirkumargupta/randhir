@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-login',
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-pass',
   );
   return $items;
 }
@@ -133,6 +133,12 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'photogallery-embed' || $arg[0] == 'videogallery-embed') {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
+  
+    
+  // For single column page
+  if ($arg[0] == 'be-lucky-today') {
+    $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+  }
 
   // Access domain
   if (function_exists('domain_select_format')) {
@@ -161,14 +167,19 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'blog-listing') {
     drupal_add_css('#page-title  {display: none !important}', 'inline');
   }
-  
-  if($arg[0] == 'blog') {
-    drupal_add_css('#page-title , .feed-icon  {display: none !important}' ,'inline');
+
+  if ($arg[0] == 'blog') {
+    drupal_add_css('#page-title , .feed-icon  {display: none !important}', 'inline');
     unset($variables['page']['content']);
     //pr($variables['theme_hook_suggestions']);
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
-  
+
+  $progarm_cat_id = variable_get('program_category_id_for_programmes');
+
+  if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && $arg[2] == $progarm_cat_id) {
+    $variables['theme_hook_suggestions'][] = 'page__taxonomy_term_program';
+  }
 }
 
 /**
@@ -212,8 +223,8 @@ function itg_preprocess_html(&$vars) {
     foreach ($ads_code as $ads_key => $ads_chunk) {
       $code = implode(' ', $ads_chunk);
       $script_code = array(
-          '#type' => 'markup',
-          '#markup' => $code,
+        '#type' => 'markup',
+        '#markup' => $code,
       );
       drupal_add_html_head($script_code, $ads_key);
     }
@@ -239,9 +250,9 @@ function itg_html_head_alter(&$head_elements) {
         if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
           );
         }
       }
@@ -255,9 +266,9 @@ function itg_html_head_alter(&$head_elements) {
         if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
           );
         }
       }
@@ -271,9 +282,9 @@ function itg_html_head_alter(&$head_elements) {
         if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
           );
         }
       }
@@ -287,9 +298,9 @@ function itg_html_head_alter(&$head_elements) {
         if (in_array("google_standout", $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
           );
         }
       }
@@ -303,15 +314,15 @@ function itg_html_head_alter(&$head_elements) {
   else {
     if ($arg[0] == 'node' && is_numeric($arg[1])) {
       $node = node_load($arg[1]);
-      $meta_keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+      $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'meta',
-            '#attributes' => array(
-                'name' => 'news_keyword',
-                'content' => $meta_keywords
-            ),
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'news_keyword',
+            'content' => $meta_keywords
+          ),
         );
       }
     }
@@ -320,46 +331,46 @@ function itg_html_head_alter(&$head_elements) {
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'meta',
-            '#attributes' => array(
-                'name' => 'news_keyword',
-                'content' => $meta_keywords
-            ),
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'news_keyword',
+            'content' => $meta_keywords
+          ),
         );
       }
 
       if ($term->vid == CATEGORY_MANAGMENT) {
-       
+
         if (!empty($term->field_cm_hide_cat_from_search[LANGUAGE_NONE]) && $term->field_cm_hide_cat_from_search[LANGUAGE_NONE][0]['value'] == 1) {
           if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 1) {
             $head_elements['nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'nofollow'
-                )
+              '#tag' => 'meta',
+              '#type' => 'html_tag',
+              '#attributes' => array(
+                'name' => 'robots',
+                'content' => 'nofollow'
+              )
             );
           }
           if ($term->field_cm_no_follow[LANGUAGE_NONE][1]['value'] == 2) {
             $head_elements['noindex_nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'noindex'
-                )
+              '#tag' => 'meta',
+              '#type' => 'html_tag',
+              '#attributes' => array(
+                'name' => 'robots',
+                'content' => 'noindex'
+              )
             );
           }
           if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 2) {
             $head_elements['noindex_nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'noindex'
-                )
+              '#tag' => 'meta',
+              '#type' => 'html_tag',
+              '#attributes' => array(
+                'name' => 'robots',
+                'content' => 'noindex'
+              )
             );
           }
         }
@@ -367,3 +378,43 @@ function itg_html_head_alter(&$head_elements) {
     }
   }
 }
+
+/**
+ * @param array $variables
+ * @return string
+ */
+function itg_link($variables) {
+  $url_path = $variables['path'];
+  // If internal url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];
+    if(_is_sponsor_story_article($nid)){
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'it-sponsored';
+    }    
+  }
+  // If url alias is used.
+  elseif((isset($url_path)) && (strpos(drupal_get_normal_path($url_path), 'node/' ) !== FALSE)){
+    $normal_path = drupal_get_normal_path($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if(_is_sponsor_story_article($nid)){
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+    }
+  }
+  // If url is used with base url.
+  elseif((isset($url_path)) && (strpos(_get_int_path_from_url($url_path), 'node/' ) !== FALSE)){
+    $normal_path = _get_int_path_from_url($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if(_is_sponsor_story_article($nid)){
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+    }
+  }
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+}
+  

@@ -18,8 +18,7 @@
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
                     $(".caln").show();                   
-                } else
-                {
+                } else {
                     $(".caln").hide();
                     $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
@@ -44,12 +43,6 @@
                 $('#edit-reset').trigger('click');
             });
             
-            //ON CLICK SHOW FILTER TYPES
-            $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-            $("body, html").on("click", ".searh-all-filters label", function(){
-            $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-                $(this).next('div').show();    
-            });
 
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
@@ -96,8 +89,7 @@
                                         }
                                       ]
                     });
-                }
-                
+                }                
 
                 jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
                     dateFormat: 'yy-mm-dd',
@@ -140,4 +132,8 @@ function getParameterByName(name, url) {
 jQuery(document).ready(function(){
      //ON CLICK SHOW FILTER TYPES
     jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    jQuery("body, html").on("click", ".searh-all-filters label", function(){
+      jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+      jQuery(this).next('div').show();    
+    });
 });

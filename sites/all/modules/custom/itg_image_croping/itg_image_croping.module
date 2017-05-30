@@ -108,7 +108,6 @@ function itg_image_croping_menu() {
  */
 function itg_image_croping_change_image_aspect_ratio() {
 
-
   $image_id = $_POST['imageId'];
   $field_name = $_POST['field_id'];
   if ($_POST['original_height'] && $_POST['origninal_width']) {
@@ -118,6 +117,7 @@ function itg_image_croping_change_image_aspect_ratio() {
   $aspect_ratio = trim($_POST['aspect_ratio']);
 
   $file = file_load($image_id);
+  
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
@@ -152,7 +152,6 @@ function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $imag
  * This function use for load the croper according to size!
  */
 function itg_image_croping_ajax_make_ajax() {
-
 
   $image_id = $_POST['imageId'];
   $field_name = $_POST['field_id'];
@@ -383,16 +382,12 @@ function itg_image_croping_edit_tags() {
   $fid = $_POST['tagid'];
   $tag = $_POST['name'];
   $tag_url = $_POST['url'];
-//    $x_coordinate = $_POST['pic_x'];
-//    $y_coordinate = $_POST['pic_y'];
-  $type = $_POST['type'];
 
+  $type = $_POST['type'];
 
   $inserted_data = db_update('image_tags')->fields(array(
               'tag_title' => $tag,
               'tag_url' => $tag_url,
-//                'x_coordinate' => $x_coordinate,
-//                'y_coordinate' => $y_coordinate,
           ))->condition('id', $fid, '=')
           ->execute();
   if ($inserted_data) {
@@ -478,8 +473,7 @@ function itg_image_croping_crop_image() {
       if (!file_exists(file_default_scheme() . '://crop_image')) {
         mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
       }
-
-      // echo is_writable(file_default_scheme() . '://crop_image');
+      
       $filepath = file_default_scheme() . '://crop_image';
 
       $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
@@ -529,7 +523,7 @@ function itg_image_saveimage_info() {
         $image_date = "";
       if ($output_info['image_date'][$i] != "") {
         $imagedate = explode('/', $output_info['image_date'][$i]);
-        $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+        $image_date = $imagedate[2] . '-' . $imagedate[0] . '-' . $imagedate[1];
       }
       if ($image_date == "") {
         $image_date = date('Y-m-d');
@@ -573,7 +567,6 @@ function itg_image_croping_crop_image_orignal() {
   $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
   $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
 
-
   if ($image_width == "" && $image_height == "") {
     $image_width = $_POST['resize_image_width'];
     $image_height = $_POST['resize_image_height'];
@@ -612,14 +605,12 @@ function itg_image_croping_crop_image_orignal() {
   file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
   $fileids['fid'][] = $file->fid . '#' . $fields_name;
 
-
   if (!empty($image_fields) && !empty($image)) {
     foreach ($image_fields as $fields_name) {
 
       $filepath = file_default_scheme() . '://crop_image';
 
       if ($orig_width < $img_dim[$content_type][$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
-
         $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
       }
       else {
@@ -783,7 +774,11 @@ function mageimagedimesion() {
   $image_dim['supplement']['field_issue_supp_large_image']['height'] = ISSUE_LARGE_IMAGE_HEIGHT;
   $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
   $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
-
+  
+  $image_dim['category_management']['field_sponser_logo']['width'] = 40;
+  $image_dim['category_management']['field_sponser_logo']['height'] = 35;
+  $image_dim['category_management']['field_cm_category_banner']['width'] = 650;
+  $image_dim['category_management']['field_cm_category_banner']['height'] = 45;
 
   return $image_dim;
 }
@@ -794,17 +789,6 @@ function mageimagedimesion() {
  */
 function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata, $image_height, $image_width, $aspectratio = null, $content_name = null, $is_solr = null) {
 
-  //$orignal_ratio = number_format($image_width / $image_height, 2);
-  // $orignal_ratio = $orignal_ratio . ':1';
-//    $form['aspect ratio'] = array(
-//        '#title' => t('Aspect ratio'),
-//        '#type' => 'select',
-//        '#description' => 'Select aspect ratio.',
-//        '#default_value' => $aspectratio,
-//        '#options' => array($orignal_ratio => $orignal_ratio, '1:1' => '1:1', '2:1' => '2:1', '4:3' => '4:3', '16:9' => '16:9'),
-//        '#attributes' => array('id' => 'select-aspect-ratio'),
-//    );
-
   $imgdim = mageimagedimesion();
   $form['cropit_image_zoom_input'] = array(
       '#type' => 'markup',
@@ -814,6 +798,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
   );
+  
   if ($field_name == 'field_images') {
 
     $gallerythumb = '(' . $imgdim[$content_name]['field_photo_small_image']['width'] . 'X' . $imgdim[$content_name]['field_photo_small_image']['height'] . ')';
@@ -822,7 +807,6 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
           'field_photo_small_image' => t("Thumb Image  $gallerythumb"),
       );
     }
-
 
     $prefix = '<div class="image-fiels-style" >';
     $suffix = '</div>';
@@ -836,7 +820,6 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         '#suffix' => $suffix,
     );
   }
-
 
   if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
 
@@ -954,7 +937,6 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
       '#value' => 'data:image/png;base64,' . $imagedata,
       '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
   );
-
 
   return $form;
 }

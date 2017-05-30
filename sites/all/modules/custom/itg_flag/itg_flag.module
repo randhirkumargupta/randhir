@@ -22,7 +22,7 @@ function itg_flag_init() {
   }
   
   drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
 }
 
 /**
@@ -128,19 +128,17 @@ function itg_user_activity_front() {
   $activity_date = date('d-m-Y');
   $activity_date_time = date('d-m-Y h:i:s');
 
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')) {
     $con = mongodb();
     // check connection
-    if ($con)
-    {
-      if($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
-       if($user->uid) { 
-       $people = $con->front_user_activity;
-       $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
-       $result = $people->insert($qry);
-       $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
-       itg_loyalty_reward_earnpoint($nd_id, $user_activity, $user->uid);
+    if ($con) {
+      if ($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
+       if ($user->uid) { 
+          $people = $con->front_user_activity;
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
+          $result = $people->insert($qry);
+          $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
+          itg_loyalty_reward_earnpoint($nd_id, $user_activity, $user->uid);
        print json_encode($response);
        } else {
          $response = array('success' => 'anonymous', 'activity' => $user_activity, 'type' => $dtag);
@@ -150,8 +148,7 @@ function itg_user_activity_front() {
       else {
         $people = $con->front_user_activity;
         $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status = '');
-        if (empty($get_previous_info['nid']))
-        {
+        if (empty($get_previous_info['nid'])) {
           $actual_data = node_load($nd_id);
           $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
           $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
@@ -162,8 +159,7 @@ function itg_user_activity_front() {
           $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
         }
-        else
-        {
+        else {
           try {
             $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time , "timestamp" =>time()));
             $people->update(array("nid" => $nd_id, "activity" => $user_activity, "uid" => $user->uid), $newdata);

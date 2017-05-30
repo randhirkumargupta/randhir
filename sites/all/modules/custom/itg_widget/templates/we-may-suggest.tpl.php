@@ -5,7 +5,7 @@
       ?><h3><span><?php print t("May We Suggest") ?></span></h3><?php } ?>
     <ul>
         <?php foreach ($data as $key => $entity_info) { ?>
-        <li class="may-we-suggest" id="may-be-suggest-<?php print $key ?>">
+        <li class="may-we-suggest">
             <?php if (!empty($entity_info['esi_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity_info['nid']); ?>" class="pic">
       <?php $file_uri = file_create_url($entity_info['esi_file_uri']); ?>
@@ -20,7 +20,7 @@
             </a>
           <?php } ?>
             <?php if (!empty($entity_info['title'])) : ?>
-            <p class="title may-be-suggest-<?php echo $entity_info['nid'] ?>">
+            <p title="<?php echo $entity_info['title'] ?>" class="title may-be-suggest-<?php echo $entity_info['nid'] ?>">
             <?php 
             if(function_exists('itg_common_get_smiley_title')) {
               echo l(itg_common_get_smiley_title($entity_info['nid'], 0, 90, ".."), "node/" . $entity_info['nid'] , array('html' => TRUE , "attributes" => array("title" => $entity_info['title']))); 

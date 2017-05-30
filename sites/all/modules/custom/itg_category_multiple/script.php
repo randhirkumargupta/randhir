@@ -1,13 +1,7 @@
 <?php
 
-set_time_limit(0);
-ini_set('memory_limit', '-1');
 $args = drush_get_arguments(); // Get the arguments.
-//delete_itg_widget_table();
-//update_itg_widget_table();
-//update_meta_description_in_photo();
-//print_name_story();
-//print_name_photo();
+
 print_name_video();
 /**
  * shift marking for story
@@ -86,7 +80,7 @@ function updating_term_for_migration($nid, $tids) {
  */
 function print_name_video() {
   $xml_path = 'sites/default/files/video/indiatoday_video_2016-06.xml';
-  //$xml_path = 'sites/default/files/video/indiatoday_video_2016-07.xml';
+  
   $xml = simplexml_load_file($xml_path, 'SimpleXMLElement');
   $str = '';
 

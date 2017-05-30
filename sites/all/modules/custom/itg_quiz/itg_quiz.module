@@ -160,19 +160,11 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel'),
       );
-      /*$form['actions']['itg_custom_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save as Draft'),
-        '#submit' => array(
-            'node_form_submit',
-            'itg_quiz_form_save_as_draft_submit_callback'
-        ),
-      );*/
+      
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
       $form['field_quiz_answer_type']['#access'] = FALSE;
       $form['field_quiz_options']['#access'] = FALSE;
-      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);
-      
+      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);      
       
       // After build and custom summit callback
       $form['#after_build'][] = 'itg_quiz_form_after_build';
@@ -275,8 +267,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
     
     // Unset weightage "-None-" item from drop down list
     unset($form['field_quiz_add_questions'][LANGUAGE_NONE][$news]['field_quiz_weightage'][LANGUAGE_NONE]['#options']['_none']);
-  }
-  
+  }  
 
   // Array used in itg_quiz.js.
   $settings = array();
@@ -288,7 +279,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
   
   // Add JS for quiz.
-   drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1));
+   drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1, 'scope' => 'footer'));
     
   // Unset metatag description.
   unset($form['metatags']['intro_text']['#markup']);
@@ -304,8 +295,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
  * Implement hook_views_pre_render
  * {@inheritdoc}
  */
-function itg_quiz_views_pre_render(&$view) {
-  
+function itg_quiz_views_pre_render(&$view) {  
   // Add "Create Quiz" button on listing page of quiz.
   if ($view->name == "manage_quiz") {
     $header_content_quiz = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -318,10 +308,8 @@ function itg_quiz_views_pre_render(&$view) {
  * Implement hook_form_views_exposed_form_alter.
  * {@inheritdoc}
  */
-function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
-     
+function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1') {     
      // Call function autocomplete to show matching titles.
      $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
@@ -428,8 +416,6 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
             $video_is_missing_itself = TRUE;
           }
         }
-        
-       
         
         // Validation for correct answer
         $correct_ans_available = FALSE;
@@ -780,8 +766,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
   if ($user->uid) {
     $user_type = 'authenticated';
     $user_name = $user->name;
-    $user_mail = $user->mail;
-  } else {
+    $user_alt_mail = itg_get_user_alt_email($user->uid);
+    watchdog('quiz_user_alt_email', $user_alt_mail);
+    if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false) && !empty($user_alt_mail)) {
+      $user_mail = $user_alt_mail;
+    }
+    else {
+      $user_mail = $user->mail;
+    }
+  }
+  else {
     $user_type = 'anonymous';
     $user_name = 'Anonymous User';
     $user_mail = 'anonymous.user@indiatoday.com';
@@ -887,8 +881,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
 
   // At the end, after finishing quiz
   if ($form_state['clicked_button']['#value'] == 'Submit') {
-    $output = '';
-    //if ($quiz_result_type == 'ate') {
+    $output = '';    
     if ($quiz_type == 'immediate') { 
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
@@ -950,7 +943,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       // Call loyalty & rewards function to save points for a user
       if(function_exists('itg_loyalty_reward_earnpoint')) {
         if($user->uid) {
-          //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+          itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'campaign', $user->uid);
         }
       }
   }
@@ -1035,6 +1028,17 @@ function get_answer_response_msg($choice) {
   return $result[0]->name.'-'.$choice;
 }
     
-    
-    
-    
+/**
+ * Helper function to get user alternate email
+ * @param int $uid 
+ */
+function itg_get_user_alt_email($uid) {
+  if (!empty($uid)) {
+    $query = db_select('field_data_field_user_alternate_email', 'alt');
+    $query->fields('alt', array('field_user_alternate_email_value'))
+          ->condition('bundle', 'user')
+          ->condition('alt.entity_id', $uid);
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}

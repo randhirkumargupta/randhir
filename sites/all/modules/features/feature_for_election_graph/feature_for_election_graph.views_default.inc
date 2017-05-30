@@ -95,7 +95,7 @@ function feature_for_election_graph_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Section */
+  /* Field: Field: Category */
   $handler->display->display_options['fields']['field_section']['id'] = 'field_section';
   $handler->display->display_options['fields']['field_section']['table'] = 'field_data_field_section';
   $handler->display->display_options['fields']['field_section']['field'] = 'field_section';
@@ -160,7 +160,7 @@ function feature_for_election_graph_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Section */
+  /* Field: Field: Category */
   $handler->display->display_options['fields']['field_section']['id'] = 'field_section';
   $handler->display->display_options['fields']['field_section']['table'] = 'field_data_field_section';
   $handler->display->display_options['fields']['field_section']['field'] = 'field_section';

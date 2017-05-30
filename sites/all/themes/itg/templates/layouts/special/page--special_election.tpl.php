@@ -6,7 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-//$preview = $widget_data['preview'];
+
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
 $fb_share_title = htmlentities($search_title, ENT_QUOTES);
@@ -249,6 +249,19 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <div class="row itg-map">
                             <div class="col-md-6 col-sm-6 mt-50">
                                 <div class="itg-widget">
+                                  <?php if ($theme != 'seven') {
+                                                if ($theme == FRONT_THEME_NAME) {
+                                                    $section = arg(2);
+                                                }
+                                                else {
+                                                     $section = $_GET['section'];
+                                                }
+                                            }
+                                            $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+                                            $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+                                            if(!empty($terms)) { ?>
+                                  
+                                  
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
                                         <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name']; ?>">
                                             <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
@@ -267,16 +280,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
                                                 <?php
                                             }
-                                            if ($theme != 'seven') {
-                                                if ($theme == FRONT_THEME_NAME) {
-                                                    $section = arg(2);
-                                                }
-                                                else {
-                                                     $section = $_GET['section'];
-                                                }
-                                            }
-                                            $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-                                            $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+                                            
                                            
                                             ?>  
                                             <select id="map-state" name="map_state">
@@ -310,6 +314,38 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             </div>
                                         </div>             
                                     </div>
+                                            <?php } else { ?>
+                                  <div class="droppable <?php print $gray_bg_layout; ?>">
+                                        <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name']; ?>">
+<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
+                                                <h4 class="heading"><?php print $widget_data['itg-block-5']['block_title']; ?></h4>
+                                            <?php } ?>
+                                            <!-- for admin  -->
+                                            <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                                <div class="widget-settings">
+                                                    <div class="widget-title-wrapper">
+                                                <?php if (isset($widget_data['itg-block-5']['block_title'])) { ?>
+                                                            <span class="widget-title" data-id="itg-block-5"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
+                                                        <?php } ?>
+                                                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
+                                                    </div>
+                                                    <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                </div>
+<?php } ?>  
+
+                                            <div class="data-holder" data-widget-style="election-other-story" id="itg-block-5">
+                                              <?php
+                                                if (isset($widget_data['itg-block-5']['widget'])) {
+                                                  print $widget_data['itg-block-5']['widget']; 
+                                                } else{
+                                                  print '<div class="widget-placeholder"><span>'.t('Election Map').'</span></div>';
+                                                } 
+                                              ?>
+                                            </div>
+                                        </div>             
+                                    </div>
+                                              
+                                           <?php  } ?>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mt-50">
@@ -332,7 +368,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
 <?php } ?>  
 
-                                            <div class="data-holder" widget-style="election-other-story" id="itg-block-6">
+                                            <div class="data-holder" data-widget-style="election-other-story" id="itg-block-6">
                                               <?php
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
                                                   print $widget_data['itg-block-6']['widget']; 
@@ -499,7 +535,7 @@ if (count($graphdata) > 2) {
                                                 </div>
 <?php } ?>  
 
-                                            <div class="data-holder" id="itg-block-10" widget-style="election-so-sorry">
+                                            <div class="data-holder" id="itg-block-10" data-widget-style="election-so-sorry">
                                               <?php
                                                 if (isset($widget_data['itg-block-10']['widget'])) {
                                                   print $widget_data['itg-block-10']['widget']; 
@@ -553,11 +589,11 @@ if (count($graphdata) > 2) {
                                 <div class="itg-widget">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">
-<?php
-$block = block_load('itg_ads', ADS_RHS2);
-$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-print render($render_array);
-?>
+                                  <?php
+                                  $block = block_load('itg_ads', ADS_RHS2);
+                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                  print render($render_array);
+                                  ?>
                                         </div>
                                     </div>
                                 </div>
@@ -566,7 +602,7 @@ print render($render_array);
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
                                         <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name']; ?>">
-<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
+                                           <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
                                                 <h4 class="heading"><?php print $widget_data['itg-block-12']['block_title']; ?></h4>
                                             <?php } ?>
                                             <!-- for admin  -->
@@ -580,7 +616,7 @@ print render($render_array);
                                                     </div>
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
-<?php } ?>  
+                                            <?php } ?>  
 
                                             <div class="data-holder" id="itg-block-12">
                                               <?php
@@ -600,10 +636,6 @@ print render($render_array);
                 </div>
                 <!--End of Common add more section--> 
             </div>
-
-
-
-
 
             <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>

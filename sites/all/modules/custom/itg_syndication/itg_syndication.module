@@ -64,6 +64,10 @@ function itg_syndication_form_syndication_client_node_form_alter(&$form, &$form_
   $form['actions']['submit']['#submit'][] = 'itg_syndication_change_message';
 }
 
+/**
+ * Implements hook_form_validate().
+ * {@inheritdoc} 
+ */
 function itg_syndication_client_node_form_custom_validate($form, &$form_state) {
   $field_syndication_ftp_name = array();
   $is_error = FALSE;
@@ -100,19 +104,13 @@ function itg_syndication_after_build($form, &$form_state) {
 
     // for checkbox
     if ($check_rule['mode_type']['FTP'] == 'FTP') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-ftp").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-ftp.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     if ($check_rule['mode_type']['Email'] == 'Email') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-email").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-email.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     if ($check_rule['mode_type']['web_url'] == 'web_url') {
-      drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-syndication-delivery-mode-und-web-url").on("click", false);              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-mode-web-url.js' , array('type' => 'file' , 'scope' => 'footer'));
     }
     // for email id
     foreach ($form['field_email_address'][LANGUAGE_NONE] as $key1 => $val1) {
@@ -155,11 +153,7 @@ function itg_syndication_after_build($form, &$form_state) {
   );
 
   // hide Web URL 
-  drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-service-fetch-link").hide();
-              jQuery("#edit-field-syndication-ftp-details-und-0-remove-button").hide();
-              jQuery(".date-clear").keydown(false);
-            });', array('type' => 'inline', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_syndication') . '/js/itg-syndication-after-build.js' , array('type' => 'file' , 'scope' => 'footer'));
 
 
   $form['field_syndication_ftp_details']['#states'] = array(
@@ -260,7 +254,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
   $form['#after_build'][] = 'itg_syndication_rule_after_build';
   $form['actions']['submit']['#submit'][] = 'itg_syndication_rule_change_message';
   $form['#validate'][] = 'itg_syndication_rule_after_build_validate';
-  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js','file');
+  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', array('type' => 'file', 'scope' => 'footer'));
 }
 
 /**
@@ -271,7 +265,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
  */
 function itg_syndication_rule_after_build($form, &$form_state) {
 
-  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1, 'scope' => 'footer'));
 
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   $op = array();
@@ -289,14 +283,7 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
-  );
-  
-  if (arg(0) == 'node' && arg(1) == 'add') {    
-//    drupal_add_js('jQuery(document).ready(function() {              
-//              jQuery("#edit-field-syndication-rule-details-und-0-remove-button").hide();
-//            });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
+  );  
 
   return $form;
 }
@@ -517,8 +504,7 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
     else {
       $syndication_frequency = $item['field_syndication_frequency']['und'][0]['value'];
       $syndication_day = $item['field_syndication_set_day']['und'][0]['value'];
-      $syndication_monthly = $item['field_syndication_set_day_month']['und'][0]['value'];
-      //$syndication_frequency = $item['field_syndication_frequency'][$lang][0]['value'];
+      $syndication_monthly = $item['field_syndication_set_day_month']['und'][0]['value'];      
       if ($syndication_frequency == 'Weekly') {
         if (empty($syndication_day)) {
           form_set_error('field_syndication_rule_details][' . $lang . '][' . $k . '][field_syndication_set_day', t('Set Day field is required for row[' . ($k + 1) . ']'));

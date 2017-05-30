@@ -11,8 +11,8 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
   global $user;
   
-  if($user->uid) {
-  $cookie = $_COOKIE['Drupal_visitor_itgcms_quiz_'.arg(1).'_'.$user->uid];
+  if ($user->uid) {
+    $cookie = $_COOKIE['Drupal_visitor_itgcms_quiz_'.arg(1).'_'.$user->uid];
   } else {
    $cookie = $_COOKIE['Drupal_visitor_itgcms_quiz_'.arg(1)];  
   }
@@ -31,7 +31,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'quiz') {
 
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js', array('scope' => 'footer'));
 
     // If quiz is not published
     if (!$node->status) {
@@ -52,13 +52,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       );
       return $form;
     }
-//    if(time() > $quiz_expiry_date) {
-//       $form['quiz_expiry_status'] = array(
-//         '#type' => 'markup',
-//         '#markup' => '<div style="margin-top:10px"><h2>Quiz "'.$node->title.'" has been expired!</h2></div>',
-//      );
-//       return $form;
-//     }
+
     // Creation of quiz form 
     $num = 0;
     $form = array();
@@ -88,7 +82,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     // Add JS for one question at a time
     $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     if ($quiz_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js', array('scope' => 'footer'));
     }
 
     // If question display type is "random", shuffle the array
@@ -171,13 +165,9 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       }
 $question_media = "";
       //Media information
-//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-//      $media_path = $base_url . str_replace('public://', '/sites/default/files/', $media);
+
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
-
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
-
          if (function_exists('itg_videogallery_get_videoid_new')) {
           $video_ids = itg_videogallery_get_videoid_new($videid);
            $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
@@ -185,13 +175,13 @@ $question_media = "";
                                                 allowfullscreen></iframe>';
         }
       }
+      
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
-         $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
+          $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
                    $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
 
-        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
-        }
-
+          $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
+      }
 
       // Submit button text
       if (($total_num_of_ques - 1) === $num) {
@@ -229,29 +219,13 @@ $question_media = "";
       );
 
       // Question Media Section
-   //   if (!empty($media_type)) {
-        //if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
-          $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div>',
-              '#markup' => $question_media,
-              '#suffix' => '</div>',
-          );
-//        }
-//        else {
-//          $form['media' . $num] = array(
-//              '#type' => 'markup',
-//              '#prefix' => '<div>',
-//              '#markup' => '<video width="730" height="500" controls="controls">
-//               <source src="' . $media . '" type="video/mp4"> 
-//                <object> 
-//                  <embed  src="' . $media . '"> 
-//                </object> 
-//               </video>',
-//              '#suffix' => '</div>',
-//          );
-//        }
-     // }
+   
+      $form['media' . $num] = array(
+          '#type' => 'markup',
+          '#prefix' => '<div>',
+          '#markup' => $question_media,
+          '#suffix' => '</div>',
+      );
 
       $items = field_get_items('node', $node, 'field_quiz_add_questions');
 
@@ -262,7 +236,7 @@ $question_media = "";
       }
 
       // Answer Section
-      //if($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $fc->field_quiz_answer_type[LANGUAGE_NONE][0]['value'] == 'multiple_correct') {
+      
       if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $quiz_type == 'immediate') {
         $form['answer' . $num] = array(
             '#type' => 'markup',
@@ -292,13 +266,9 @@ $question_media = "";
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-            '#suffix' => '<span class="sss"></span></div>',
-                //'#suffix' => '</div><div id=answer_option' . $num.'><a href="javascript:void(0)" class="associate-content-block" data-widget="echo $associate_type;-echo $associate_id;">click here</a></div>',
+            '#suffix' => '<span class="sss"></span></div>',            
         );
       }
-
-
-
 
       $form['correct_answer' . $num] = array(
           '#type' => 'hidden',
@@ -349,18 +319,17 @@ $question_media = "";
               '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
           );
         } elseif(isset($cookie)){
-        $form['quiz_has_been_already_taken' . $num] = array(
-            '#type' => 'markup',
-            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
-        );
+            $form['quiz_has_been_already_taken' . $num] = array(
+                '#type' => 'markup',
+                '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
+            );
         }
         else {
           $form['quiz_submit_' . $num] = array(
               '#type' => 'submit',
               '#value' => $button_text,
               '#prefix' => '<div class="quiz-submit-btn-wrapper">',
-              '#name' => 'quizsubmit_' . $num,
-              //'#suffix' => '</div>',
+              '#name' => 'quizsubmit_' . $num,              
               '#ajax' => array(
                   'callback' => 'quiz_form_ajax_handler',
                   'effect' => 'fade',
@@ -438,17 +407,16 @@ $question_media = "";
 
     // Single submit button, if all questions are showing at once
     if ($quiz_question_format == 'All questions at a time') {
-
       if (time() > $quiz_expiry_date) {
         $form['quiz_has_been_expired' . $num] = array(
             '#type' => 'markup',
             '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
         );
-      } elseif(isset($cookie)){
-        $form['quiz_has_been_already_taken' . $num] = array(
-            '#type' => 'markup',
-            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
-        );
+      } elseif (isset($cookie)) {
+          $form['quiz_has_been_already_taken' . $num] = array(
+              '#type' => 'markup',
+              '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
+          );
       }
       else {
         $form['quiz_submit_' . $num] = array(

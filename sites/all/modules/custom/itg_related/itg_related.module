@@ -66,8 +66,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'related_content_new') {
     
-   if (function_exists('itg_apache_solr_get_site_hash'))
-    {
+   if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
     
@@ -84,7 +83,6 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
 
-
     $related_status = array('1' => 'Published', 'Unpublished' => 'Unpublished');
     $form['bs_status']['#type'] = 'select';
     $form['bs_status']['#options'] = $related_status;
@@ -99,7 +97,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 function my_custom_ajax_callback() {
 
   $combined_data = array('label' => $_POST['title'], 'bundle_name' => trim($_POST['bundle_name']), 'im_vid_4' => $_POST['section_id'], 'hash' => $_POST['hash']);
-  //$output = serialize($combined_data);
+  
   $check_title = check_search_title(trim($_POST['search_name']));
 
   if ($check_title) {
@@ -114,7 +112,6 @@ function my_custom_ajax_callback() {
     $final_with_title = $final_link . '&sname=' . $_POST['search_name'];
     $related_res = '<li><a class= "def-cur-pointer" onclick="showrelatedpopup(' . "'" . $final_with_title . "'" . ')">' . $_POST['search_name'] . '</a></li>';
   }
-
 
   if ($result !== FALSE) {
     $response = array('msg' => 'success', 'lnk' => $related_res);
@@ -136,16 +133,15 @@ function itg_related_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_related' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1));
+    drupal_add_js(drupal_get_path('module', 'itg_related') . '/js/itg_related.js', array('weight' => 1, 'scope' => 'footer'));
     $titlename = '';
     if(!empty($_GET['sname'])) {
-    $titlename = t('Search Name : ');
-    $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
-    $view->attachment_before = $sname;
+      $titlename = t('Search Name : ');
+      $sname = '<span class="sname">'.$titlename. $_GET['sname'] . '&nbsp;</span>';
+      $view->attachment_before = $sname;
     }
     // get solr site hash
-    if (function_exists('itg_apache_solr_get_site_hash'))
-    {
+    if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
     
@@ -169,7 +165,6 @@ function itg_related_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   //Get the Form Id
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
@@ -225,6 +220,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if ($i > 1) {
         $and = ' AND ';
       }
+      
       $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'topic', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
       if (!empty($val) && $val != 'related-content' && $val != 'topic' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
@@ -232,8 +228,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         if (is_array($val)) {
 
           // condition if array is not empty and date field selected
-          if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {
-            // && array_filter($_GET['ds_changed'])
+          if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {            
             // all values are empty (where "empty" means == false)
             if ($_GET['custom_drp'] == 'calender') {
               $min_date = implode(" ", $_GET['ds_changed']);
@@ -256,7 +251,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
               /* condition for online archive story calender */
               $online_archive_story_min_date = implode(" ", $_GET['ds_changed']);
               if (!empty($online_archive_story_min_date)) {
-
                 $val_str = '[' . $online_archive_story_min_date . 'T00:00:00Z/DAY TO ' . $online_archive_story_min_date . 'T00:00:00Z/DAY+1DAY]';
               }
               else {
@@ -335,13 +329,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       }
     }
 
-
-
     if ($_GET['q'] == 'topic') {
       $str = ltrim(trim($str), "AND");
     }
-
-
 
     if ($_GET['q'] == 'searchimage') {
       $search_array = $query->getSolrParams();
@@ -359,7 +349,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         $query->replaceParam("fq", '(' . $str . ')');
       }
     }
-     //pr($query->getSolrParams());
+    
   }
 }
 
@@ -369,7 +359,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
  * @param array reference $query
  */
 function itg_related_views_query_alter(&$view, &$query) {
-
   if (isset($view->name) && $view->name == 'related_content_new') {
     foreach ($view->exposed_raw_input['hash'] as $k => $v) {
       if ($v == 0) {
@@ -394,10 +383,8 @@ function itg_related_save_search() {
   $related_html = '';
   $related_html.= '<ul class="search-list">';
   while ($save_search_result_info = $save_search_result->fetchAssoc()) {
-
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
-    $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&sname='.$save_search_result_info['search_title'].'&width=1000&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
-    
+    $related_html.= '<li><a oncontextmenu="return false;" href="' . $final_link . '&sname='.$save_search_result_info['search_title'].'&width=1000&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';    
   }
 
   $related_html.= '</ul>';
@@ -474,8 +461,7 @@ function itg_get_tag($title) {
 
     $result = $query->execute();
     $prefix = count($prefill_tag) ? implode(', ', $prefill_tag) . ', ' : '';
-    while ($record = $result->fetchAssoc()) {
-      //$options[$prefix . $record['name'] . ':' . $record['tid']] = $record['name'];
+    while ($record = $result->fetchAssoc()) {      
       $options[$prefix . $record['name']] = $record['name'];
     }
     drupal_json_output($options);

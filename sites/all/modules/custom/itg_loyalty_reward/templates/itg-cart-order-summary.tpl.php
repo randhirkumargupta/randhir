@@ -6,8 +6,7 @@
 ?>
 
 <div class="row">
-  <div class="col-md-8">
-    
+<div class="col-md-8">    
   
 <div class="cart-detail order-summary">
     <?php if (count($data['product_detail']) > 0): ?>

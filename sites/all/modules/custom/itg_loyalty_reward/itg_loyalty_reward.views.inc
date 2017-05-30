@@ -16,7 +16,9 @@ function itg_loyalty_reward_views_data() {
       'handler' => 'itg_loyalty_reward_views_handler_field_current_path',
     ),
   );
+  
   $data['itg_loyalty_reward_order']['table']['group'] = t('ITG Order');
+  
   $data['itg_loyalty_reward_order']['table']['base'] = array(
     'field' => 'order_id',
     'title' => t('ITG Order'),
@@ -36,6 +38,7 @@ function itg_loyalty_reward_views_data() {
       'handler' => 'views_handler_filter_string',
     ),
   );
+  
   $data['itg_loyalty_reward_order']['nids'] = array(
     'title' => t('Node ids'),
     'help' => t('Product ids available on current order.'),

@@ -38,15 +38,12 @@
     })
 
 
-
-
     // This code use for image search and crop
 
     jQuery('.searched-image').live('click', function() {
         var imageId = jQuery(this).attr('imageid');
         jQuery('#file-preview').html('');
-        if (imageId != "")
-        {
+        if (imageId != "") {
             showloader();
             var imageName = jQuery(this).siblings('.dz-image').children('img').attr('imgname');
             jQuery.ajax({
@@ -122,11 +119,10 @@
     });
 
 })(jQuery, Drupal, this, this.document);
-function showloader()
-{
-    jQuery('#loader-data').show();
+
+function showloader() {
+  jQuery('#loader-data').show();
 }
-function hideloader()
-{
-    jQuery('#loader-data').hide();
+function hideloader() {
+  jQuery('#loader-data').hide();
 }

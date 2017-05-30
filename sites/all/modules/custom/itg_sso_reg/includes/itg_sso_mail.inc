@@ -25,12 +25,13 @@ function itg_sso_get_mail_content($account, $to, $url_info) {
         $mail_body = $mail_data->field_mail_body_sign_up[LANGUAGE_NONE][0]['value'];
       }
     }
-    $mail_content = itg_sso_notification_mail_content($account, $url_info, $mail_body, $name);
-
+    $mail_contents = itg_sso_notification_mail_content($account, $url_info, $mail_body, $name);
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
     $params = array(
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;

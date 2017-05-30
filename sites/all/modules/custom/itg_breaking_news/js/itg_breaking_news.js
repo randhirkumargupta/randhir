@@ -11,10 +11,16 @@
   Drupal.behaviors.itg_breaking_news = {
     attach: function (context, settings) {
       var uid = settings.itg_breaking_news.settings.uid;
+      var nid = settings.itg_breaking_news.settings.no_id;
+      
+      if(nid == 0) {
+        jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+        jQuery("#edit-field-breaking-content-details-und-0-remove-button").hide();
+      }
+      
       var type = $('#edit-field-type-und').val();
       
-       $('#custom_add_another_item').click(function() {         
-         //edit-field-breaking-content-details
+       $('#custom_add_another_item').click(function() {
          //ajax-new-content
          $('input[name="field_breaking_content_details_add_more"]').mousedown();
        })
@@ -29,6 +35,8 @@
           $(".form-item-field-section-und").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
+          $('#edit-field-section-und').prop('selectedIndex',0);
+          $('#edit-field-breaking-display-on-und').prop('selectedIndex',0);
           $('#edit-field-section > .form-type-select > label').html('Section');
         }
         else {
@@ -110,16 +118,6 @@
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false});
     }
   });
-  //$('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
-  
-  
-//  $( 'input[name="field_breaking_content_details_add_more"]' ).ajaxComplete(function() {
-//    var offSet = 200;
-//    var dataOffset = $(this).offset().top;
-//    var targetOffset = dataOffset - offSet;
-//    $("body, html").animate({scrollTop: targetOffset}, 300);
-//  });
-
 
     }
 

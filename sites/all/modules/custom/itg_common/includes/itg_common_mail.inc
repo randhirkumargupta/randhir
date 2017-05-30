@@ -20,24 +20,50 @@
  *   Modified mail content.
  */
 function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
-  $mail_content = itg_common_notification_mail_content($data, $key);
-  $mail_subject = $mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
-  $body = str_replace("[itg_mail_token:itg_loyalty_user]", $data['name'], $mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
-  $body1 = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
-  $body2 = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $body1);
-  $params = array(
-    'body' => $body2,
-    'subject' => $mail_subject,
-  );
-  //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if ($mail['result']) {
-    return TRUE;
+  
+  // refer a friend code end here
+  if ($key == 'refer_friend') {
+    $mail_content = itg_common_notification_mail_content($data, $key);
+    $params = array(
+        'body' => $mail_content,
+        'subject' => 'India Today | Refer a friend',
+      );
+      watchdog('Refer_a_friend_mail', '<pre>'.print_r($params, true).'</pre>');
+      $mail = drupal_mail('itg_common', $key, $email, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  } elseif ($key == 'personalization_mail') {
+    
+    $params = array(
+      'body' => $data,  
+      'subject' => $subject,
+    );
+//    $to = 'gourav.walia@kelltontech.com';
+    watchdog('Personalization Mail', '<pre>'.print_r($params, true).'</pre>');
+    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
+  
   else {
-    $error_msg = 'Failed to send the email!';
-    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-    return FALSE;
+    // refer a friend code end here
+    $mail_content = itg_common_notification_mail_content($data, $key);
+    $mail_subject = $mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
+    $body = str_replace("[itg_mail_token:itg_loyalty_user]", $data['name'], $mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
+    $body1 = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
+    $body2 = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $body1);
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $body2);
+    $params = array(
+      'body' => $mail_content,
+      'subject' => $mail_subject,
+    );
+    //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+//    $to = 'gourav.walia@kelltontech.com';
+    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+      watchdog('Loyalty Point Expiration', '<pre>'.print_r($params, true).'</pre>');
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
   }
 }
 
@@ -62,10 +88,10 @@ function itg_common_notification_mail_content($data , $key) {
         $mail_content_data = itg_mail_templates_get_mailcontent('lrp_point');
         return $mail_content_data;
       }
-//      return theme('itg_loyalty_point_notification', array('data' => $data));    
+    //return theme('itg_loyalty_point_notification', array('data' => $data));    
       break;
     case 'personalization_mail':
-      return theme('itg_personalization_personalization_mail', array('data' => $data));
+    //return theme('itg_personalization_personalization_mail', array('data' => $data));
       break;
   }
   

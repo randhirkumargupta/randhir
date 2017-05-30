@@ -28,9 +28,9 @@ function itg_users_cms_user_dashboard() {
   $menu_link = array_diff($menu_link, $remove_menu_link);
   
    $listed_menu_link_site_admin = array(
-      'mydraft-story' => 'Story',
-      'mydraft-photogallery' => 'Photogallery',
-      'mydraft-video' => 'Videos',
+      'published-story?field_story_syndication_value_op=all' => 'Story',
+      'published-photogallery?field_story_syndication_value_op=all' => 'Photogallery',
+      'published-video?field_story_syndication_value_op=all' => 'Videos',
       'breaking-news' => 'Breaking News',
       'category-manager-listing' => 'Category Management',
       'manage-users' => 'User Management',

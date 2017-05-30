@@ -11,11 +11,9 @@ module_load_include('inc' , 'itg_payment' , 'includes/itg_billdesk');
 module_load_include('inc' , 'itg_payment' , 'includes/itg_amex');
 module_load_include('inc' , 'itg_payment' , 'includes/itg_paytm');
 
-
-
 function itg_payment_menu() {
   $items = array();
-  
+
   $items['itg-payment/%'] = array(
     'title' => t('Payment Checkout') ,
     'description' => t('Payment Checkout') ,
@@ -23,9 +21,16 @@ function itg_payment_menu() {
     'access callback' => TRUE ,
   );
 
-  $items['itg_payment_success'] = array(
+  $items['itg-payment-success'] = array(
     'title' => 'Payment success' ,
     'page callback' => 'itg_payment_success_page' ,
+    'access callback' => TRUE ,
+    'type' => MENU_CALLBACK ,
+  );
+
+  $items['itg-payment-cancel'] = array(
+    'title' => 'Payment Cancel' ,
+    'page callback' => 'itg_payment_cancel_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
@@ -45,7 +50,7 @@ function itg_payment_menu() {
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
-    'title' => 'Payment success' ,
+    'title' => 'Payment cancel' ,
     'page callback' => 'itg_icici_payment_fail_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
@@ -83,21 +88,21 @@ function itg_payment_menu() {
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
-  
+
   $items['itg-payment-amex-payment-success'] = array(
-    'page callback' => 'itg_payment_amex_payment_success' ,
+    'page callback' => 'itg_payment_success_page' ,
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
-  
+
   $items['itg-payment-amex-payment-cancle'] = array(
-    'page callback' => 'itg_payment_amex_payment_cancle' ,
+    'page callback' => 'itg_payment_cancel_page' ,
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
-  
+
   $items['itg-payment-amex-payment-fail'] = array(
-    'page callback' => 'itg_payment_amex_payment_fail' ,
+    'page callback' => 'itg_payment_payment_fail' ,
     'type' => MENU_CALLBACK ,
     'access arguments' => array('access content') ,
   );
@@ -111,8 +116,6 @@ function itg_payment_menu() {
 
   return $items;
 }
-
-
 
 /**
  * {@inheritdoc}
@@ -130,6 +133,14 @@ function itg_payment_theme() {
     'itg_payment_success_page' => array(
       'render element' => 'form' ,
       'template' => 'templates/itg-paytm-success-page' ,
+    ) ,
+    'itg_payment_cancel_page' => array(
+      'render element' => 'form' ,
+      'template' => 'templates/itg-paytm-cancle-page' ,
+    ) ,
+    'itg_payment_fail_page' => array(
+      'render element' => 'form' ,
+      'template' => 'templates/itg-paytm-fail-page' ,
     ) ,
     'itg_payment_response_fail' => array(
       'render element' => 'form' ,
@@ -150,8 +161,28 @@ function itg_payment_theme() {
   );
 }
 
+/**
+ * Function to return success page.
+ * @return array.
+ */
 function itg_payment_success_page() {
   return theme("itg_payment_success_page");
+}
+
+/**
+ * Function to return cancel page.
+ * @return array
+ */
+function itg_payment_cancel_page() {
+  return theme("itg_payment_cancel_page");
+}
+
+/**
+ * Function to return fail page.
+ * @return array
+ */
+function itg_payment_payment_fail() {
+  return theme("itg_payment_fail_page");
 }
 
 /**
@@ -159,7 +190,7 @@ function itg_payment_success_page() {
  * @param array $data
  */
 function itg_payment_initial_info_update($data) {
-  watchdog($data['PAYMENT_GATEWAY']."_insert", '<pre>' . print_r($data, TRUE) . '</pre>');
+  watchdog($data['PAYMENT_GATEWAY'] . "_insert" , '<pre>' . print_r($data , TRUE) . '</pre>');
   try {
     db_insert('itg_payment_order_details')
         ->fields(array(
@@ -176,10 +207,11 @@ function itg_payment_initial_info_update($data) {
           'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0" ,
           'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0" ,
           'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0" ,
-          'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
+          'order_status' => isset($data['ORDER_STATUS']) ? $data['ORDER_STATUS'] : PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
           'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0" ,
           'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "0" ,
           'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "0" ,
+          'number_of_person' => isset($_SESSION['event_registration_payment']['number_of_person']) ? $_SESSION['event_registration_payment']['number_of_person'] : 0 ,
           'order_created_on' => REQUEST_TIME ,
         ))->execute();
   }
@@ -193,7 +225,6 @@ function itg_payment_initial_info_update($data) {
  * @param array $data
  */
 function itg_payment_response_info_update($data) {
-  
   try {
     db_merge('itg_payment_order_details')
         ->key(array("order_id" => $data['order_id']))
@@ -290,10 +321,54 @@ function itg_payment_checkout() {
       drupal_goto('<front>');
 
       break;
+
+    case 'free':
+      if (isset($_SESSION['event_registration_payment'])) {
+        $_SESSION['event_registration_payment']['free_reg'] = "ODR-" . time() . rand(0 , 1000);
+        $args = itg_payment_decode_data($_SESSION['event_registration_payment']['event_key']);
+        $event_id = $args['event_id'];
+        $db_data["COUPON_AMOUNT"] = 0;
+        $db_data["COUPON_ID"] = "";
+        $coupon_code = !empty($args['coupon_code']) ? $args['coupon_code'] : NULL;
+        $total_amount = $args['total_payment'];
+        $final_amount = $args['redeemed_payment'];
+        $registration_id = $args['reg_id'];
+        // handel coupon details for database.
+        if (!empty($coupon_code)) {
+          $db_data["COUPON_ID"] = $coupon_code;
+          $db_data["COUPON_AMOUNT"] = floatval($total_amount - $final_amount);
+          $db_data["COUPON_DETAIL"] = itg_payment_get_coupon_details_json($coupon_code);
+        }
+
+        $db_data['CUST_ID'] = "CUS-" . time() . rand(0 , 1000);
+        $db_data['ORDER_ID'] = $_SESSION['event_registration_payment']['free_reg'];
+        $db_data["USER_TYPE"] = ($user->uid) ? "authenticated" : "guest";
+        $db_data["REGISTRATION_ID"] = $registration_id;
+        $db_data["PAYMENT_GATEWAY"] = 'free';
+        $db_data["PAYMENT_GATEWAY_STATUS"] = '1';
+        $db_data["TRANSACTION_ID"] = 'free-' . time() . rand(0 , 1000);
+        $db_data["ORDER_STATUS"] = 1;
+        $db_data["TRANSACTION_HISTORY"] = 'free';
+        $db_data["PAYMENT_GATEWAY_HISTORY"] = 'free';
+        $db_data["TOTAL_AMOUNT"] = floatval($total_amount);
+        $db_data["DESCOUNTED_AMOUNT"] = !empty($db_data["COUPON_AMOUNT"]) ? floatval($db_data["COUPON_AMOUNT"]) : 0;
+        $db_data["EVENT_ID"] = $event_id;
+        $db_data["TXN_AMOUNT"] = floatval($final_amount);
+
+        itg_payment_initial_info_update($db_data);
+        update_event_registration_after_success($db_data['ORDER_ID']);
+        $event_full_url = $_SESSION['event_registration_payment']['event_full_url'];
+        drupal_set_message("Event registration successful");
+        unset($_SESSION['event_registration_payment']);
+        drupal_goto($event_full_url);
+      }
+      else {
+        drupal_set_message(t("Something went wrong") , 'error');
+        drupal_goto('<front>');
+      }
+      break;
   }
 }
-
-
 
 /**
  * Function returns json of coupon details.
@@ -307,7 +382,6 @@ function itg_payment_get_coupon_details_json($coupon_code) {
   }
 }
 
-
 function itg_payment_response_fail() {
   return theme("itg_payment_response_fail");
 }
@@ -316,20 +390,31 @@ function itg_payment_response_fail() {
  * update event registration after success
  */
 function update_event_registration_after_success($order_id) {
-  $query = db_select('itg_payment_order_details', 'pay');
-  $query->fields('pay', array('registration_id'));  
-  $query->condition('pay.order_id', $order_id);
-  $registration_id = $query->execute()->fetchField();
-  
-  /*$node = node_load($registration_id);
-  $node->status = 1;  
-  field_attach_update('node', $node);
-  p($node);*/
-  foreach (array('node', 'node_revision') as $table) {
+  module_load_include('inc' , 'itg_loyalty_reward' , 'includes/itg_loyalty_reward_earn.point');
+  global $user;
+  $registration_data = _get_registration_id_of_event($order_id);
+  $registration_id =  $registration_data['reg'];
+  $event_id =  $registration_data['event_id'];
+  foreach (array('node' , 'node_revision') as $table) {
     db_update($table)
-      ->fields(array('status' => 1))
-      ->condition('nid', $registration_id)
-      ->execute();
+        ->fields(array('status' => 1))
+        ->condition('nid' , $registration_id)
+        ->execute();
   }
+  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid > 0) {
+    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
+  }
+}
 
+function _get_registration_id_of_event($order_id) {
+  global $base_url;
+  $query = db_select('itg_payment_order_details' , 'pay');
+  $query->fields('pay' , array('registration_id' , 'event_id'));
+  $query->condition('pay.order_id' , $order_id);
+  $data = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $registration_id = $data[0]['registration_id'];
+  $event_id = $data[0]['event_id'];
+  $event_alias = $base_url . '/' . drupal_get_path_alias("node/$event_id") . '/registration';
+  $_SESSION['recent_event_payment_url'] = $event_alias;
+  return array("reg" => $registration_id , "event_id" => $event_id);
 }

@@ -62,7 +62,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Company',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -101,7 +101,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Department',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -140,7 +140,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Occupation',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -179,7 +179,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Constituancy',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -221,7 +221,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Party Name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -258,12 +258,90 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_reporter_company'.
+  $field_instances['node-reporter-field_reporter_company'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_company',
+    'label' => 'company',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_reporter_department'.
+  $field_instances['node-reporter-field_reporter_department'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_department',
+    'label' => 'Department',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_reporter_email_id'.
   $field_instances['node-reporter-field_reporter_email_id'] = array(
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Email id',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -347,7 +425,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Movie name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -389,7 +467,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Profile type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -428,7 +506,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Twitter Handle',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -470,7 +548,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Section',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -487,14 +565,16 @@ function feature_for_reporter_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_category',
     'label' => 'Section',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
@@ -507,7 +587,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Facebook page',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -625,7 +705,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Designation',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -777,6 +857,7 @@ function feature_for_reporter_field_default_field_instances() {
   t('Profile type');
   t('Section');
   t('Twitter Handle');
+  t('company');
 
   return $field_instances;
 }

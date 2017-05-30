@@ -12,18 +12,18 @@ function itg_quiz_winners_mail_list() {
   }
   $user_email_arr_unique = array_unique($user_email_arr);
   $user_email_str = implode(',',$user_email_arr_unique);
+//  $user_email_str = 'gourav.walia@kelltontech.com';
   
   if (function_exists('itg_mail_templates_get_mailcontent')) {
     $mail_data = itg_mail_templates_get_mailcontent('Quiz');
     $mail_subject = $mail_data->field_mail_subject_quiz_completi[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_quiz_get_mail_content($nid, $mail_data);
   }
-  
+    $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
     $params = array(
-      'body' => $mail_content,
+      'body' => $mail_contents,
       'subject' => $mail_subject,
     );
-
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       drupal_set_message(t('Mail has been sent successfully.'));
@@ -79,7 +79,7 @@ function itg_quiz_winners_list_mail($key, &$message, $params) {
     case 'send_mail_to_winners':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -111,13 +111,13 @@ function itg_quiz_get_mail_content($nid, $get_mail_data) {
   $get_mail_content = $get_mail_data->field_mail_body_quiz_completion[LANGUAGE_NONE][0]['value'];
   $content_link = '<a href="'.$result_link.'">here</a>';
   $content = str_replace('[itg_mail_token:itg_quiz_winner_list]', $content_link, $get_mail_content);
-//  $content = '<p>Dear user, </p><p>Thanks for taking our quiz. Winners list is given below:</p>';
   $i = 1;
+  
   foreach ($winner_records as $key => $value) {
     $winners .= '<p>' . $i . '. ' . $value['user_name'] . '(' . $value['quiz_score'] . ')' . '</p>';
     $i++;
   }
-  $content_end ='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+
   $final_output = $content . $winners .  $content_end;
   return $final_output;
 }

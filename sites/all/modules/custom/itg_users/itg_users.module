@@ -20,6 +20,7 @@ function itg_users_user_presave(&$edit, $account, $category) {
   if (!empty($edit['field_last_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
+  
 }
 
 /**
@@ -34,14 +35,6 @@ function itg_users_menu() {
     'file' => 'includes/itg_users.inc',
   );
 
-//  $items['user-block'] = array(
-//    'title' => 'User Block',
-//    'page callback' => 'itg_users_block_user',
-//    'access callback' => TRUE,
-//    'type' => MENU_CALLBACK,
-//    'file' => 'includes/itg_users.inc',
-//  );
-
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
     'access callback' => TRUE,
@@ -53,14 +46,21 @@ function itg_users_menu() {
 /**
  * Implements hook_form_alter().
  */
-function itg_users_form_alter(&$form, &$form_state, $form_id) {  
+function itg_users_form_alter(&$form, &$form_state, $form_id) { 
   global $user, $base_url;
   //code for multidomain
-  if ($form_id == 'user_login') {    
+  if ($form_id == 'user_login') {
     $form['#validate'][] = 'itg_users_backend_validate';
+    if (empty($form['pass']['#attributes'])) {
+      $form['pass']['#attributes'] = array();
+    }
+    $form['pass']['#attributes']['autocomplete'] = 'off';
   }
-  
+
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+    $form['#attributes']['autocomplete'] = 'off';
+    $form['account']['mail']['#attributes']['autocomplete'] = 'off';
+    $form['account']['pass']['#prefix'] = '<input type="password" name="custompass" style="display:none">';
     // hide subscribe checkbox from user page
      if(!in_array(FRONT_USER, $user->roles)) {
        $form['field_subscribe_for_newsletter']['#attributes']['class'][] = 'element-hidden';
@@ -97,14 +97,13 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
       $user_intersec = array_intersect($user_role->roles, $user_child_roles);
+      
       if (empty($user_intersec) && (!in_array('administrator', $user->roles))) {
         drupal_access_denied();
         module_invoke_all('exit');
         drupal_exit();
       }
-//      else {
-//        return true;
-//      }
+
     }
     $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
@@ -115,8 +114,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
 
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit') {
       $self_user = arg(1);
-      //$user_role = user_load($self_user);
-
+     
       if ($user->uid == arg(1)) {
         unset($form['account']['status']);
         unset($form['field_story_expiry_date']);
@@ -124,7 +122,18 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_subscribe_for_newsletter']);
       }
     }
-
+    // show extra user fields for siteadmin
+    if ($user->uid != 1) {
+      if (!array_key_exists(SITE_ADMIN, $user->roles)) {
+        $form['field_story_issue_date']['#attributes']['class'][] = 'element-hidden';
+        $form['field_short_description']['#attributes']['class'][] = 'element-hidden';
+        $form['field_user_counrty']['#attributes']['class'][] = 'element-hidden';
+        $form['field_personalization_state']['#attributes']['class'][] = 'element-hidden';
+        $form['field_personalization_city']['#attributes']['class'][] = 'element-hidden';
+        $form['field_user_alternate_email']['#attributes']['class'][] = 'element-hidden';
+      }
+    }
+    
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
       $user_array = array(COPY_EDITOR => COPY_EDITOR, SUBEDITOR_SR_SUB => SUBEDITOR_SR_SUB, INTERN => INTERN, AUTHOR_GUEST => AUTHOR_GUEST);
       $user_id_log = $user->uid;
@@ -146,6 +155,19 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['account']['pass']);
       }
     }
+    /* condition for saml sinking */
+    else if (array_key_exists(FRONT_USER, $user->roles)) {
+        $authname = simplesaml_get_authname($user->uid);
+        db_set_active('sso_db');
+        $auth_attr = simplesaml_get_uid_byauth($authname);
+        $form['field_mobile_number'][LANGUAGE_NONE][0]['value']['#value'] = $auth_attr['mobile'];
+        db_set_active();
+    }
+    
+    if($user->uid == '1') {
+      $form['field_mobile_number'][LANGUAGE_NONE][0]['value']['#value'] = $form['#user']->field_mobile_number[LANGUAGE_NONE][0]['value'];
+    }
+    /* End for saml sinking */
   }
 
   if ($form_id == 'user_register_form') {
@@ -186,7 +208,21 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
           );
         }
       }
-
+      
+      $form['field_mark_as_expert']['#states'] = array(
+        'visible' => array(
+          array(
+            array(':input[name="selected"]' => array('value' => SITE_ADMIN)),
+            'or',
+            array(':input[name="selected"]' => array('value' => COPY_EDITOR)),
+            'or',
+            array(':input[name="selected"]' => array('value' => SECTION_EDITOR_ANCHOR)),
+            'or',
+            array(':input[name="selected"]' => array('value' => EDITOR)),
+          ),
+        ),
+      );
+      
       //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
       $form['account']['notify']['#default_value'] = TRUE;
 
@@ -247,11 +283,6 @@ function itg_users_validate_user_register_validate(&$form, &$form_state) {
 
   if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
-
-//    if (empty($mark_expert)) {
-//      form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-//    }
-
     if (!empty($mark_expert) && empty($section[0]['tid'])) {
       form_set_error('field_user_section', t("Section Field is required!"));
     }
@@ -318,10 +349,6 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
   if ($form_state['values']['selected'] == COPY_EDITOR || $form_state['values']['selected'] == SECTION_EDITOR_ANCHOR || $form_state['values']['selected'] == EDITOR || $form_state['values']['selected'] == SITE_ADMIN) {
     $mark_expert = $form_state['values']['field_mark_as_expert'][LANGUAGE_NONE][0]['value'];
 
-//    if (empty($mark_expert)) {
-//      form_set_error('field_mark_as_expert', t("Mark as Expert Field is required!"));
-//    }
-
     if (!empty($mark_expert) && empty($section[0]['tid'])) {
       form_set_error('field_user_section', t("Section Field is required!"));
     }
@@ -368,7 +395,6 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
-
   $_GET['destination'] = 'user';
 }
 
@@ -430,7 +456,7 @@ function itg_users_role_delegation_uid() {
  */
 
 function itg_user_after_build($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1, 'scope' => 'footer'));
   return $form;
 }
 
@@ -482,18 +508,14 @@ function itg_users_user_login(&$edit, $account) {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
     }
   }
-//  if (array_key_exists(FRONT_USER, $account->roles)) {
-//    $_GET['destination'] = 'personalization/saved-items';
-//    
-//  }
+
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
         $_GET['destination'] = 'ask-an-expert';
       }
     }
-  }
-  
+  }  
   
   if ($role_count < 3) {
     if (array_key_exists(CORRESPONDENT, $account->roles)) {
@@ -548,18 +570,29 @@ function itg_users_tokens($type, $tokens, array $data = array(), array $options 
  * @param type $category
  */
 function itg_users_user_update(&$edit, $account, $category) {
-
+  
+  $fname = $account->field_first_name[LANGUAGE_NONE][0]['value'];
+  $lname = $account->field_last_name[LANGUAGE_NONE][0]['value'];
   // send mail when password is changed
   if (!empty($account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value']) && $account->field_notify_user_of_update_acco[LANGUAGE_NONE][0]['value'] == '1') {
     if (!empty($edit['pass'])) {
       $role = 'Your Password has been updated';
-      $mail_content = itg_users_get_mail_content($role);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_content = itg_mail_templates_get_mailcontent('Password Changed');
+        $mail_subject = $mail_content->field_mail_subject_password_chan[LANGUAGE_NONE][0]['value'];
+        $mail_body = $mail_content->field_mail_body_password_changed[LANGUAGE_NONE][0]['value'];
+        $mail_fname = str_replace('[itg_mail_token:itg_account_user_fname]', $fname, $mail_body);
+        $mail_lname = str_replace('[itg_mail_token:itg_account_user_lname]', $lname, $mail_fname);
+        $mail_contents = $mail_lname;
+      }
+//      $mail_content = itg_users_get_mail_content($role, 'Password Changed');
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
       $params = array(
         'body' => $mail_content,
-        'subject' => 'India Today | Password Updated!',
+        'subject' => $mail_subject,
       );
-
       $to = $account->mail;
+//      $to = 'gourav.walia@kelltontech.com';
 
       $mail = drupal_mail('itg_users', 'send_password_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
@@ -594,7 +627,7 @@ function itg_users_user_update(&$edit, $account, $category) {
       );
 
       $to = $account->mail;
-
+//      $to = 'gourav.walia@kelltontech.com';
       $mail = drupal_mail('itg_users', 'send_role_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
         return TRUE;
@@ -608,8 +641,14 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail when user select notification chekbox
-  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
-
+  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
+    if (function_exists('itg_netcore_mail_add_user')) {
+      // code for subscribe for newsletter
+      $data['email'] = $account->mail;
+      $data['listId'] = NETCORE_LIST_ID;
+      itg_netcore_mail_add_user($data);
+    }
+    
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
     $params = array(
@@ -618,7 +657,7 @@ function itg_users_user_update(&$edit, $account, $category) {
     );
 
     $to = $account->mail;
-
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -628,17 +667,48 @@ function itg_users_user_update(&$edit, $account, $category) {
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
+  } else {
+      // code for unsubscribe for newsletter
+      if (function_exists('itg_netcore_mail_unsubscribe_user')) {
+        $data['email'] = $account->mail;
+        itg_netcore_mail_unsubscribe_user($data);
+      }
   }
 }
 
 /**
- * Implements hook_node_insert
+ * Implements hook_user_insert
  * @param type $edit
  * @param type $account
  * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) {
-  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
+  
+  /** do not delete code */
+  global $base_url;
+  $mail = $account->mail;
+  $uid = $account->uid;
+
+  db_set_active('sso_db');
+  $id = db_insert('itg_sso_email_history')
+      ->fields(array(
+        'email' => $mail,
+        'uid' => $uid,
+        'domain' => $base_url,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+  db_set_active();
+
+  /* End here */
+  
+  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == 'India Today') {
+    if (function_exists('itg_netcore_mail_add_user')) {
+      // code for subscribe for newsletter
+      $data['email'] = $account->mail;
+      $data['listId'] = NETCORE_LIST_ID;
+      itg_netcore_mail_add_user($data);
+    }
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
     $params = array(
@@ -647,7 +717,7 @@ function itg_users_user_insert(&$edit, $account, $category) {
     );
 
     $to = $account->mail;
-
+//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -657,6 +727,12 @@ function itg_users_user_insert(&$edit, $account, $category) {
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
       return FALSE;
     }
+  } else {
+      // code for unsubscribe for newsletter
+      if (function_exists('itg_netcore_mail_unsubscribe_user')) {
+        $data['email'] = $account->mail;
+        itg_netcore_mail_unsubscribe_user($data);
+      }
   }
 }
 
@@ -672,7 +748,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_role_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -686,7 +762,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_subscribe_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -700,7 +776,7 @@ function itg_users_mail($key, &$message, $params) {
     case 'send_password_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -720,7 +796,6 @@ function itg_users_mail($key, &$message, $params) {
  * @return string
  */
 function itg_users_get_mail_content($role) {
-
   global $base_url;
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -817,4 +892,54 @@ function itg_users_backend_validate(&$form, &$form_state) {
       form_set_error('name', t('User does not exist!'));
   }
  
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function itg_users_user_delete($account) {
+  if (!empty($account->uid)) {
+    db_set_active('sso_db');
+    db_delete('itg_sso_email_history')
+        ->condition('uid', $account->uid)
+        ->execute();
+    db_set_active();
+  }
+}
+
+/**
+ * Implements simplesaml_get_uid_byauth().
+ * @param string $authname
+ * @return array $user_list
+ */
+function simplesaml_get_uid_byauth($authname) {
+  if (!empty($authname)) {
+    $query = db_select('authmap', 'u');
+    $query->leftjoin('field_data_field_mobile_number', 'f', 'u.uid = f.entity_id');
+    $query->fields('u', array('uid'))
+        ->fields('f', array('field_mobile_number_value'))
+        ->condition('u.authname', $authname);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $user_list['uid'] = $record['uid'];
+      $user_list['mobile'] = $record['field_mobile_number_value'];
+    }
+
+    return $user_list;
+  }
+}
+
+/*
+ * Implements simplesaml_get_authname().
+ * @param int $uid
+ * @return string
+ */
+function simplesaml_get_authname($uid) {
+  if (!empty($uid)) {
+    $query = db_select('authmap', 'u');
+    $query->fields('u', array('authname'))
+        ->condition('u.uid', $uid);
+   return $query->execute()->fetchField();
+  }
 }

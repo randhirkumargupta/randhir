@@ -3,7 +3,6 @@
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));
-//pr($video_node);
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
@@ -28,7 +27,6 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
 ?>
 <?php foreach ($rows as $row): ?>
     <div class="container">
-        <div class="ad-blocker"></div>
         <div class ="video-landing-header">
             <div class="row">
                 <div class="col-md-12">
@@ -135,7 +133,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 }
                                 $usebitrates = implode(',', $allbitrates);
                                 $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-                                
+                                //$getfile_its_url = itg_videogallery_get_video_bitrate($nid);
                                 ?>
                                     <div class="iframe-video">
 
@@ -147,9 +145,10 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                                         title: "<?php print $row['title']; ?>",
                                                         image: "<?php echo $image_url; ?>",
                                                         sources: [
+//                                                            {
+//                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
+//                                                            },
                                                             {
-                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
-                                                            }, {
                                                                 file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                                                             }]
                                                     }],
@@ -226,7 +225,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
-                                    <textarea readonly="true"><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                    <textarea readonly><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                                     </div>
                                 </div>
                             </li>
@@ -246,7 +245,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
-    <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+    
                         </ul>
                     </div>
                     <div class="clearfix"></div>
@@ -302,7 +301,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
-                                        <textarea readonly="true"><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                        <textarea readonly><iframe src=<?php print $base_url.'/embed/videogallery-embed?gid='.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                                         </div>
                                     </div>
                                 </li>
@@ -322,7 +321,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <?php else: ?>
                                     <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                                 <?php endif; ?>
-    <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+    
                             </ul>
                         </div>
                         <?php print $description_slider; ?>

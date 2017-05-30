@@ -487,7 +487,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       );
       break;
     case 'views-exposed-form-browse-content-page':
-      $form['field_itg_content_publish_date_value']['min'] = array(
+     
+      $form['field_itg_content_publish_date_value']['value'] = array(
           '#type' => 'date_popup',
           '#title' => 'From',
           '#date_format' => 'Y-m-d',
@@ -495,11 +496,11 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
           '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
 
-      $form['field_itg_content_publish_date_value']['max'] = array(
+      $form['field_itg_content_publish_date_value_3']['value'] = array(
           '#type' => 'date_popup',
           '#title' => 'To',
           '#date_format' => 'Y-m-d',
-          '#default_value' => date('Y-m-d'),
+          //'#default_value' => date('Y-m-d'),
           '#date_year_range' => '-3:+3',
           '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
@@ -786,7 +787,6 @@ function itg_social_media_activity($nid) {
   $result = $query->execute()->fetchall();
 
   foreach ($result as $result_d) {
-
     $like = $like + $result_d->fb_likes;
     $comment = $comment + $result_d->fb_comment;
     $share = $share + $result_d->fb_shares;

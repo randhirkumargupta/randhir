@@ -140,7 +140,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'field_breaking_content_details',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -327,6 +327,45 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-breaking_news-field_breaking_display_on'.
+  $field_instances['node-breaking_news-field_breaking_display_on'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Display on',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 34,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_display_on',
+    'label' => 'Display on',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 39,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-breaking_news-field_cm_related_content_detail'.
   $field_instances['node-breaking_news-field_cm_related_content_detail'] = array(
@@ -455,6 +494,48 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-breaking_news-field_constituancy'.
+  $field_instances['node-breaking_news-field_constituancy'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Display title (Landing page)',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_constituancy',
+    'label' => 'Display title (Landing page)',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 38,
+    ),
+  );
+
   // Exported field_instance: 'node-breaking_news-field_content_type'.
   $field_instances['node-breaking_news-field_content_type'] = array(
     'bundle' => 'breaking_news',
@@ -495,49 +576,6 @@ function feature_for_breaking_news_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_display_on'.
-  $field_instances['node-breaking_news-field_display_on'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Home Page',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Display on',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_display_on',
-    'label' => 'Display on',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 6,
     ),
   );
 
@@ -821,7 +859,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Highlights',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1137,7 +1175,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Display title',
+    'description' => 'Display title (Home page)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1156,7 +1194,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_snap_post',
-    'label' => 'Display title',
+    'label' => 'Display title (Home page)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1183,7 +1221,7 @@ function feature_for_breaking_news_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1225,7 +1263,8 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Type');
   t('Content details');
   t('Display on');
-  t('Display title');
+  t('Display title (Home page)');
+  t('Display title (Landing page)');
   t('EX: www.yourdomainname.com');
   t('Extra large image');
   t('Extra small image');

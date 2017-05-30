@@ -1,9 +1,16 @@
 <?php
-
+/**
+ * Implement itg_newsletter_content_preview_data_before_download
+ * {@inheritdoc}
+ */
 function itg_newsletter_content_preview_data_before_download() {
   echo itg_newsletter_content_preview_data(FALSE);
 }
 
+/**
+ * Implement itg_newsletter_content_preview_data
+ * {@inheritdoc}
+ */
 function itg_newsletter_content_preview_data($download_action = TRUE) {
   global $base_url;
   if ($download_action) {

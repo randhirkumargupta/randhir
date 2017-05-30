@@ -603,6 +603,7 @@ function photogallery_field_default_field_bases() {
       'allowed_values' => array(
         'google_standout' => 'Google Standout',
         'commentbox' => 'Comment Box',
+        'sponsor_photo' => 'Sponsor Photo',
       ),
       'allowed_values_function' => '',
     ),

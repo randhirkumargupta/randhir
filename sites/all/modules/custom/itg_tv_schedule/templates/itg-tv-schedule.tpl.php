@@ -23,8 +23,7 @@ $sun = $base_url . "/tv-show/SUN";
 $class = 'class="active"';
 $day = strtoupper(date("D"));
 $clicked_day = arg(1);
-if($clicked_day == "" && empty($_GET['date_zone']))
-{
+if($clicked_day == "" && empty($_GET['date_zone'])) {
    $clicked_day= $day;
 }
 
@@ -56,11 +55,9 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     <!-- Shows time in slider upper part -->
     <div class="tv-schedule tv-schedule-time slider" style="margin-bottom: 30px;">
         <?php foreach ($output as $val): ?>
-
             <div>
                 <span><?php print $val['time']; ?></span>   
-            </div>    
-
+            </div>
         <?php endforeach; ?>
     </div>
     <!-- Shows program name in slider middle part -->
@@ -68,15 +65,14 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
         <?php foreach ($output as $val): ?>
             <div class="tv-schedule-task"> 
                 <span><?php
-                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
-                        echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
-                        //print $val['program'];
+                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {                        
+                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';                       
                     }
                     else {
                         print ucfirst($val['program']);
                         print '<br/>';
                         if(!empty($val['story_attach'])) {
-                        print ucfirst($val['story_attach']);
+                          print ucfirst($val['story_attach']);
                         }
                     } $counter++;
                     ?></span>   

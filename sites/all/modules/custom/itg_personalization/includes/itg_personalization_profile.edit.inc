@@ -17,9 +17,10 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
     $edit_email_url = 'http://' . PARENT_SSO . '/sso-user/email/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
     $edit_email_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_email_url . "'" . ');">Edit</a>';
-    $edit_mobile_url = 'http://' . PARENT_SSO . '/sso-user/mobile/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
-    $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_mobile_url . "'" . ');">Edit</a>';
   }
+  // edit mobile link of user
+  $edit_mobile_url = 'http://' . PARENT_SSO . '/sso-user/mobile/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
+  $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_mobile_url . "'" . ');">Edit</a>';
   
   $user_detail = user_load($user->uid);
   if (is_numeric($user_detail->name)) {
@@ -65,6 +66,21 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#default_value' => $email,
     '#suffix' => $edit_email_link . '</div>',
   );
+  if (strpos($email, '@twitter.com') !== false || strpos($email, '@facebook.com') !== false) {
+    $form['alt_email'] = array(
+      '#title' => t('Alternate Email'),
+      '#type' => 'textfield',
+      '#maxlength' => 255,
+      '#required' => TRUE,
+      '#attributes' => array(
+        'placeholder' => 'E.g., xyz@example.com',
+      ),
+      '#prefix' => '<div class="al-email">',
+      '#suffix' => '</div>',
+      '#default_value' => $user_detail->field_user_alternate_email[LANGUAGE_NONE][0]['value'],
+    );
+  }
+  
   $form['mobile'] = array(
     '#title' => t('Mobile'),
     '#type' => 'textfield',
@@ -158,11 +174,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     'method' => 'replace',
   ),
   );
-  
+
   if(!empty($form_state['values']['country'])) {
     $state = get_state_by_country($form_state['values']['country']);
   } else {
-    $state = get_state_by_country();
+    $state = get_state_by_country($user_detail->field_user_counrty['und'][0]['tid']);
   }
   
   $default_state = '';
@@ -190,7 +206,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   if(!empty($form_state['values']['user_state'])) {
     $city = get_city_by_state($form_state['values']['user_state']);
   } else {
-    $city = get_city_by_state();
+    $city = get_city_by_state($user_detail->field_personalization_state['und'][0]['tid']);
   }
   $default_city = '';
   if (!empty($user_detail->field_personalization_city['und'][0]['tid'])) {
@@ -333,7 +349,20 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
     if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
       form_set_error('lname', t('Please enter only letters, dot and white space allowed.'));
     }
-  }  
+  }
+  
+  // validate alternate email
+  if (function_exists('itg_sso_user_email_check')) {
+    $get_user_check_email = itg_sso_user_email_check($form_state['values']['alt_email']);
+  }
+  if (!empty($form_state['values']['alt_email'])) {
+    if (!filter_var($form_state['values']['alt_email'], FILTER_VALIDATE_EMAIL)) {
+      form_set_error('mail', t('Please enter valid email address.'));
+    }
+    else if (!empty($get_user_check_email)) {
+      form_set_error('mail', t("Email id Already Exist!"));
+    }
+  }
 }
 
 /**
@@ -356,6 +385,11 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     $user_detail->field_last_name['und'][0]['value'] = check_plain($inputs['lname']);
   }
 
+  // Update Last Name.
+  if (!empty($inputs['alt_email'])) {
+    $user_detail->field_user_alternate_email['und'][0]['value'] = check_plain($inputs['alt_email']);
+  }
+  
   // Update dob field.
   if (!empty($inputs['dob'])) {
     $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($inputs['dob']);
@@ -374,6 +408,8 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Update Qualification field.
   if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {
     $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
+  }else {
+    unset($user_detail->field_user_qualification['und']);
   }
 
   // Update address field.
@@ -387,18 +423,24 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   }
   
   //update country
-  if (!empty($inputs['country'])) {
+  if (!empty($inputs['country'])  && $inputs['country'] !== '_none') {
     $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($inputs['country']);
+  }else {
+    unset($user_detail->field_user_counrty['und']);
   }
   
   //update state
-  if (!empty($inputs['user_state'])) {
+  if (!empty($inputs['user_state']) && $inputs['user_state'] !== '_none') {
     $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($inputs['user_state']);
+  }else {
+    unset($user_detail->field_personalization_state['und']);
   }
   
   //update city
-  if (!empty($inputs['user_city'])) {
+  if (!empty($inputs['user_city']) && $inputs['user_city'] !== '_none') {
     $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($inputs['user_city']);
+  }else {
+    unset($user_detail->field_personalization_city['und']);
   }
 
   //Update News Letters field.  
@@ -416,6 +458,11 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
 
   // Save user object.
   user_save($user_detail);
+  
+  $_REQUEST['destination'] = 'personalization/edit-profile/general-settings';
+  $success = base64_encode('success');
+    $form_state['redirect'] = array(
+      'personalization/edit-profile/general-settings',
+      array('query' => array('profile' => $success))
+    );
 }
-
-?>

@@ -15,38 +15,38 @@
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear Team,</td>
+        <td style="padding: 10px 20px;"><?php print t('Dear Team');?>,</td>
       </tr>
       <?php if ($op_type == 'idea_update') { ?>
       <tr>
-        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been update.</td>
+        <td style="padding: 10px 20px;"><?php print t('An idea'); ?> "<strong><?php echo $node->title; ?></strong>" <?php print t('has been update.'); ?></td>
       </tr>
       <?php } else { ?>
       <tr>
-        <td style="padding: 10px 20px;">An idea "<strong><?php echo $node->title; ?></strong>" has been converted to story.</td>
+        <td style="padding: 10px 20px;"><?php print t('An idea');?> "<strong><?php echo $node->title; ?></strong>" <?php print t('has been converted to story.'); ?></td>
       </tr>
       <?php } ?>
 
       <tr>
-        <td style="padding: 10px 20px;">Associated Issue, Magazine and Supplement:</td>
+        <td style="padding: 10px 20px;"><?php print t('Associated Issue, Magazine and Supplement'); ?>:</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Issue: <strong><?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></strong></td>
+        <td style="padding: 10px 20px;"><?php print t('Issue'); ?>: <strong><?php echo date('d/m/Y', strtotime(itg_common_get_node_title($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']))); ?></strong></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Magazine: <strong><?php echo itg_common_get_node_title($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
+        <td style="padding: 10px 20px;"><?php print t('Magazine'); ?>: <strong><?php echo itg_common_get_node_title($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Supplement: <strong><?php echo itg_common_get_node_title($node->field_pti_supplement[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
+        <td style="padding: 10px 20px;"><?php print t('Supplement'); ?>: <strong><?php echo itg_common_get_node_title($node->field_pti_supplement[LANGUAGE_NONE][0]['target_id']); ?></strong></td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">&nbsp;</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Thanks,</td>
+        <td style="padding: 10px 20px;"><?php print t('Thanks'); ?>,</td>
       </tr>
       <tr>
-        <td style="padding: 0px 20px;">India Today Group</td>
+        <td style="padding: 0px 20px;"><?php print t('India Today Group'); ?></td>
       </tr>
     </table>
   </body>

@@ -564,13 +564,22 @@ input[type="file"], input[type="submit"], input[type="text"] {
   display: none;
 }
 
-/*$test : .carousel .slides .slideItem;
-$debug: "width:645px"; // TODO: move to _settings.scss
+.carousel .slides .slideItem.active-slide span {
+  opacity: 1;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
+.carousel .slides .slideItem.active-slide span.overlay {
+  opacity: 0;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
-    @if ($debug) { // visualizing layout internals
-        display: block;
-    }*/
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper {
   background-color: #eaebed;
@@ -1858,6 +1867,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   background-color: #000;
   float: left;
   width: 100%;
+  height: 74px;
   overflow: hidden;
 }
 .home_page_poll_widget_block .poll-data .active-poll-title h2 {
@@ -1920,6 +1930,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px 0 0;
   max-height: 115px;
   overflow-y: auto;
+  margin-top: 0;
 }
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li {

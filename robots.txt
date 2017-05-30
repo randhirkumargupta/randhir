@@ -12,6 +12,10 @@
 #
 # For more information about the robots.txt standard, see:
 # http://www.robotstxt.org/robotstxt.html
+# Mahesh
+
+User-agent: Twitterbot
+Disallow:
 
 User-agent: *
 Crawl-delay: 10

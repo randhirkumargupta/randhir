@@ -13,7 +13,7 @@ if (!empty($data['node_data'])) :
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
     $data_nid = "data-nid='" . $data['node_data']->nid . "'";
-    $has_ajax = "class='has-ajax-big-story'";
+    $has_ajax = " class='has-ajax-big-story'";
     $href = "#";
     $video_icon = "<i class='fa fa-play-circle'></i>";
   }
@@ -36,7 +36,7 @@ if (!empty($data['node_data'])) :
         <?php else : ?>
           <!-- EXTRA LARGE IMAGE IS PUT -->
           <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
-          <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
+          <a  href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
                 <img alt="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['alt'] ?>" title="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['title'] ?>" src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>"/>
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
@@ -85,8 +85,8 @@ if (!empty($data['node_data'])) :
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
-          <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
-            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $node_title))); ?>
+        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
+            <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $share_title))); ?>
           </h1>
         <?php endif; ?>
         <p>
@@ -117,7 +117,7 @@ if (!empty($data['node_data'])) :
           <div class="share-new">
             <ul>
               <li><a title="share on facebook" onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>')"><i class="fa fa-facebook"></i></a></li>
-              <li><a title="share on twitter" class="user-activity def-cur-pointer" rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
 
               <?php
               if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') :
@@ -127,9 +127,9 @@ if (!empty($data['node_data'])) :
                 if ($user->uid > 0):
                   if (!empty($follow_status['nid']) && $follow_status['status'] == '1'):
                     ?>  
-                    <li class="follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer"><?php print t('Unfollow Story'); ?></a></li>
+                    <li class="follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" data-rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer"><?php print t('Unfollow Story'); ?></a></li>
                   <?php else: ?>
-                    <li class="follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer"><?php print t('Follow the Story'); ?></a></li>
+                    <li class="follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" data-rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer"><?php print t('Follow the Story'); ?></a></li>
                   <?php endif;
                 else: ?>
                   <li class="mhide"><?php if (function_exists('itg_sso_url')) {

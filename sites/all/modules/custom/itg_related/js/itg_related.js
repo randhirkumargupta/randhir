@@ -153,11 +153,11 @@ jQuery(document).ready(function(){
                     display_type = final_tit[1];
                 }
                 var solr_uri = slr[site[0]]+'/node/'+site[1];
-                checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="'+display_tit+'">' + item[i] + '</span> | '+ display_type +' | <a href="'+solr_uri+'" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+                checkedlist += '<li class="ui-state-default"><div class="rc-top"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="'+display_tit+'">' + item[i] + '</span> | '+ display_type +' | <a href="'+solr_uri+'" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></div><div class="rc-bottom">' + display_tit + '</div></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
             if(item.length){
-                parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+                parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
             }
             else{
                 parent.jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');

@@ -6,7 +6,8 @@
 (function ($) {
   Drupal.behaviors.task_allocation = {
     attach: function (context) {
-      //$('.tabledrag-toggle-weight-wrapper').hide();
+      
+      jQuery("#edit-field-task-task-idea-und-0-remove-button").hide();
       jQuery ('input[name="field_task_finish_date_and_time[und][0][value][date]"]').keydown (false);
 
       $ ('#edit-created-min-datepicker-popup-0').one ('focus', function () {
@@ -44,37 +45,37 @@ jQuery (document).ajaxSuccess (function () {
 jQuery (document).ready (function () {
   
   jQuery(".form-radio").live("click" , function(){
-  var get_id = jQuery(this).attr("id");
-  var n = get_id.indexOf("emoji-condition-und");
-  if(n>0) {
-    var radioButtonValue = jQuery(this).filter(":checked").val();
-      if(radioButtonValue == 1) {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").show();
-      }
-      if(radioButtonValue == 0) {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
-      }
-      if(radioButtonValue == "none") {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
-      }
-  }
+    var get_id = jQuery(this).attr("id");
+    var n = get_id.indexOf("emoji-condition-und");
+    if(n > 0) {
+      var radioButtonValue = jQuery(this).filter(":checked").val();
+        if(radioButtonValue == 1) {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").show();
+        }
+        if(radioButtonValue == 0) {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+        }
+        if(radioButtonValue == "none") {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+        }
+    }
   });
   
   jQuery(".form-radio").each( function(){
-  var get_id = jQuery(this).attr("id");
-  var n = get_id.indexOf("emoji-condition-und");
-  if(n>0) {
-      var radioButtonValue = jQuery(this).filter(":checked").val();
-      if(radioButtonValue == 1) {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").show();
-      }
-      if(radioButtonValue == 0) {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
-      }
-      if(radioButtonValue == "none") {
-        jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
-      }
-  }
+    var get_id = jQuery(this).attr("id");
+    var n = get_id.indexOf("emoji-condition-und");
+    if(n > 0) {
+        var radioButtonValue = jQuery(this).filter(":checked").val();
+        if(radioButtonValue == 1) {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").show();
+        }
+        if(radioButtonValue == 0) {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+        }
+        if(radioButtonValue == "none") {
+          jQuery(this).parent().parent().parent().parent().nextAll("div").hide();
+        }
+    }
   });
       
 });

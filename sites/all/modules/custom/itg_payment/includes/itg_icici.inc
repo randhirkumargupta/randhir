@@ -16,6 +16,9 @@ define('ICICI_FORM_ID' , 'frm1');
 date_default_timezone_set('Asia/Kolkata');
 $_SESSION['dateTime'] = date('Y:m:d-H:i:s');
 
+/**
+ * function for itg_payment_icici.
+ */
 function itg_payment_icici($db_data) {
   
 }
@@ -41,35 +44,30 @@ function itg_icici_order_form($form , &$form_state , $args) {
     "#title" => t("Final Amount to pay.") ,
     "#value" => $args['redeemed_payment'] ,
     "#default_value" => $args['redeemed_payment'] ,
-//    "#default_value" => 1.00 ,
   );
   $form['EVENT_ID'] = array(
     "#type" => "hidden" ,
     "#title" => t("event id.") ,
     "#value" => !empty($args['event_id']) ? $args['event_id'] : NULL ,
     "#default_value" => $args['event_id'] ,
-//    "#default_value" => 123 ,
   );
   $form['AMOUNT'] = array(
     "#type" => "hidden" ,
     "#title" => t("Amount") ,
     "#value" => $args['total_payment'] ,
     "#default_value" => $args['total_payment'] ,
-//    "#default_value" => 1.00 ,
   );
   $form['REGISTRATION_ID'] = array(
     "#type" => "hidden" ,
     "#title" => t("Registration id.") ,
     "#value" => $args['reg_id'] ,
     "#default_value" => $args['reg_id'] ,
-//    "#default_value" => 'abc' ,
   );
   $form['COUPON_ID'] = array(
     "#type" => "hidden" ,
     "#title" => t("Coupon id") ,
     "#value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
     "#default_value" => !empty($args['coupon_code']) ? $args['coupon_code'] : NULL ,
-//    "#default_value" => 'abb' ,
   );
 
   $form['SUBMIT'] = array(
@@ -78,14 +76,8 @@ function itg_icici_order_form($form , &$form_state , $args) {
     '#attributes' => array("class" => array("hide")) ,
   );
   
-//  drupal_add_js('myFunction();
-//      function myFunction() {
-//          document.getElementById("itg-icici-order-form").submit();
-//      }','inline');
-
-  
-    drupal_add_js('jQuery(document).ready(function () { jQuery("#itg-icici-order-form").submit(); });',
-    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  drupal_add_js('jQuery(document).ready(function () { jQuery("#itg-icici-order-form").submit(); });',
+  array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
   );
   return $form;
 }
@@ -123,11 +115,18 @@ function itg_icici_order_form_validate($form , &$form_state) {
   }
 }
 
-function getDateTime() { // Here we are returning the current date time that will be further used to generate the salted hashed.
-  
+/**
+ * Here we are returning the current date time that will be further used to generate the salted hashed.
+ * @return date
+ */
+function getDateTime() {  
   return $_SESSION['dateTime'];
 }
 
+/**
+ * Implementation createHash
+ * {@inheritdoc}
+ */
 function createHash($chargetotal , $Currency , $storeId , $sharedSecret) {
   // Please change the store Id to your individual Store ID
   // NOTE: Please DO NOT hardcode the secret in that script. For example read it from a database.
@@ -147,16 +146,10 @@ function createHash($chargetotal , $Currency , $storeId , $sharedSecret) {
  * @param array $args
  */
 function itg_icici_order_form_submit($form , &$form_state , $args) {
-  global $user;
-  global $base_url;
-  //module_load_include('php', 'itg_payment', 'lib/icici/ipg-util');
-
+  global $user, $base_url;
   
-  //$responseSuccessURL = "http://127.0.0.1/itgcms/itg-payment/icici-payment-success";
-  //$responseFailURL = "http://127.0.0.1/itgcms/itg-payment/icici-payment-fail";
-
-   $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
-   $responseFailURL = $base_url."/itg-payment/icici-payment-fail";
+  $responseSuccessURL = $base_url."/itg-payment/icici-payment-success";
+  $responseFailURL = $base_url."/itg-payment/icici-payment-fail";
   
   $db_data = array();
 
@@ -222,31 +215,38 @@ function itg_icici_order_form_submit($form , &$form_state , $args) {
   drupal_exit();
 }
 
+/**
+ * function for icici payment success.
+ */
 function itg_icici_payment_success_page() {
   
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   } else {  
-    $data['order_id'] = $_POST['order_id'];
-    $data['transaction_id'] = $_POST['endpointTransactionId'];
-    $data['transaction_status'] = 1;
-    
-    if ($_POST['status'] == 'APPROVED') {
-      $data['order_status'] = 1;
-      // Update order after response.
-      update_event_registration_after_success($_POST['order_id']);
-    }
+      $data['order_id'] = $_POST['order_id'];
+      $data['transaction_id'] = $_POST['endpointTransactionId'];
+      $data['transaction_status'] = 1;
+      $goto_url = 'itg-payment-cancel';
+      if ($_POST['status'] == 'APPROVED') {
+        $data['order_status'] = 1;
+        // Update order after response.
+        update_event_registration_after_success($_POST['order_id']);
+        $goto_url = 'itg-payment-success';
+      }
+
+      $data['transaction_history'] = serialize($_POST);
+
+      itg_payment_response_info_update($data);
       
-    $data['transaction_history'] = serialize($_POST);
-    
-    itg_payment_response_info_update($data);
-    //watchdog("icici", '<pre>' . print_r($_POST, TRUE) . '</pre>');
-    return drupal_set_message("Your payment is complete");
+      drupal_goto($goto_url);
   }
 }
 
+/**
+ * function for icici payment fail.
+ */
 function itg_icici_payment_fail_page() {
-  //p($_POST);
+  
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   } else {  
@@ -257,7 +257,8 @@ function itg_icici_payment_fail_page() {
     $data['transaction_history'] = serialize($_POST);
     
     itg_payment_response_info_update($data);
-    watchdog("icici_fail", '<pre>' . print_r($_POST, TRUE) . '</pre>');
-    return drupal_set_message("Your payment failed");
+    _get_registration_id_of_event($_POST['order_id']);
+    $goto_url = "itg-payment/response-fail";
+    drupal_goto($goto_url);
   }
 }

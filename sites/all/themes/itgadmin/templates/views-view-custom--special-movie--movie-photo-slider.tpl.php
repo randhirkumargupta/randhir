@@ -35,7 +35,7 @@
      
      
       <div class="detail">
-        <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta'];?> Images</p>
+        <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta'];?> <?php print t('Images'); ?></p>
         <p class="flex-caption"><?php print ucfirst($row['title']);?></p>
       </div>
   

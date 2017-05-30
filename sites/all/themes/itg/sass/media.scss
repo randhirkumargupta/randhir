@@ -452,6 +452,11 @@
 }   
 
 
+@media only screen and (min-width:991px) and (max-width: 1024px){
+  .sport-home-layout-page .itg-layout-615 .droppable,
+  .sport-home-layout-page .itg-layout-615 .auto-block-1, 
+  .sport-home-layout-page .itg-layout-615 .auto-block-2{height: 510px;}
+}
 @media only screen and (max-width:991px){
   /*CSS start education page special*/
   .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1{
@@ -604,10 +609,8 @@
 }
 
 @media only screen and (max-width:768px){
-
-  .widget-wrapper {
-    overflow: initial;
-  }
+  .block-itg-ads{overflow: hidden;}
+  
   header {
     margin-bottom: 15px;
   }
@@ -1198,6 +1201,20 @@
         max-width: 145px;
         margin-right: 8px;
       }
+      .relative-with-img, .related-story.relative-active{
+        float: none;
+        width: 100% !important;
+      }
+      .related-story.relative-active{
+        padding: 25px 0 0;
+        border: none;
+        border-top: 1px solid #dfdfdf;
+        margin-top: 25px;
+      }
+    }
+    .poll-replace-id .form-submit{
+      margin: 10px auto 0;
+      display: block;
     }
     .active-poll-title h2{
       @include font(17px,20px);
@@ -1247,7 +1264,9 @@
     }
   }
   .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer{
-    margin-right: 10px;
+    margin-right: 0;
+    padding: 0px 8px 10px 0;
+    width: 33.33%;
   }
 
   /*css end poll page*/  
@@ -1624,6 +1643,11 @@
     width: 245px;
   }
   /*election page css end*/
+  
+  #block-itg-menu-manager-third-level-menu{
+    z-index: 999999;
+    position: relative;
+  }
 
 }
 
@@ -1759,7 +1783,8 @@
     margin-bottom: 10px;
   }
 
-
+.state-election-map-wrapper .left-chart .graph-design, 
+.state-election-map-wrapper .left-chart .graph-table-wrapper{width: 100%;}
 }
 
 
@@ -2504,6 +2529,9 @@
     font-size: 18px;
     line-height: 37px;
   }
+  .story-section .story-right.photo-story .multiple-photo{
+    padding: 0;
+  }
 
 }
 @media only screen and (max-width:340px){
@@ -2858,7 +2886,10 @@
   h1.category-heading{
     @include font(32px,46px,400);                
   } 
-  .view-category-wise-content-list, .view-blog-listing, .page-podcasts-listing .view-podcasts-listing{           
+  .view-category-wise-content-list, 
+  .view-blog-listing, 
+  .page-podcast .view-podcasts-listing,           
+  .page-podcasts-listing .view-podcasts-listing{           
     .catagory-listing{        
       .pic{
         width: 170px; 
@@ -3088,6 +3119,7 @@
         width: 15.5%; 
         padding: 0;
         border-bottom: none;
+        border-right: 1px solid #181818;
         margin-bottom: 0;
         ul{
           display: inherit;
@@ -3180,11 +3212,18 @@
   .second-level-menu.before-load{
     height: 37px; overflow: hidden;
   }
+  body.page-taxonomy-term{
+    #main .row{
+      overflow: hidden;
+    }
+  }
+  
 }
 /*End CSS Desktop version*/
 
 
-@media only screen and (min-width:768px) and (max-width:1200px){       
+@media only screen and (min-width:768px) and (max-width:1200px){   
+  .story-section .snap-post .agbutton, .story-section .snap-post .discription{text-align: center;}
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
     overflow: scroll;
     max-height: 663px;
@@ -3215,5 +3254,15 @@
       }
     }
   }
-
+  #block-views-photo-landing-slider-block .social-icon ul{
+    display: table;
+    li{
+      display: table-cell;
+      text-align: center;
+      float: none;
+      a{
+        padding: 0 5px;
+      }
+    }
+  }
 }

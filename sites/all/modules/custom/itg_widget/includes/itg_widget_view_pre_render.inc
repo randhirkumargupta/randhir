@@ -103,6 +103,7 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'page') {
+    drupal_add_css("#views-form-section-wise-content-ordering-list-page {display:none}" ,"inline");
     //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     //$header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
@@ -226,11 +227,11 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
-  if(isset($_POST['views_bulk_operations']) && empty($_GET['tid']) ) {
+  if(isset($_POST['views_bulk_operations']) && empty($_GET['shs_term_node_tid_depth']) ) {
       drupal_set_message(t("Please select Section and filter first.") , 'error');
       drupal_goto('yearend-left-widget-contents');
     }
-    if($_GET['tid']=='All') {
+    if($_GET['shs_term_node_tid_depth']=='All') {
        drupal_set_message(t("Please select Section and filter first.") , 'error');
       drupal_goto('yearend-left-widget-contents');
     }

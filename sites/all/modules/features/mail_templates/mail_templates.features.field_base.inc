@@ -802,19 +802,21 @@ function mail_templates_field_default_field_bases() {
       'allowed_values' => array(
         'ask_an_expert' => 'Ask an Expert',
         'blog' => 'Blog',
-        'photogallery' => 'Photo Gallery',
-        'podcast' => 'Podcast',
-        'story' => 'Story',
-        'videogallery' => 'Video',
         'follow_story' => 'Follow Story',
         'loyalty_points_expiration' => 'Loyalty Points Expiration',
+        'my_following' => 'My Following',
         'password_changed' => 'Password Changed',
+        'photogallery' => 'Photo Gallery',
+        'podcast' => 'Podcast',
         'print_team' => 'Print Team',
         'product_expiration' => 'Product Expiration',
+        'quiz_completion' => 'Quiz Completion',
+        'redeem_points' => 'Redeem Points',
+        'story' => 'Story',
         'sign_up' => 'Sign up',
         'task_idea' => 'Task/Idea',
         'ugc' => 'UGC',
-        'quiz_completion' => 'Quiz Completion',
+        'videogallery' => 'Video',
       ),
       'allowed_values_function' => '',
     ),
@@ -971,54 +973,6 @@ function mail_templates_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_to_assignee'.
-  $field_bases['field_to_assignee'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_to_assignee',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_to_assigner'.
-  $field_bases['field_to_assigner'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_to_assigner',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
   );
 
   // Exported field_base: 'field_ugc_comments_status'.

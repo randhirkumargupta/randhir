@@ -47,8 +47,7 @@ function itg_common_tv_time($id = '') {
     $cond = array('program date' => $date);
     $cursor = $people->find($cond);
     // Fetch query for supplements
-    //$select = t('- None -');
-    //$data = array('_none' => $select);
+    
     foreach ($cursor as $document) {
       $data[$document['time']] = $document['time'];
     }
@@ -65,7 +64,7 @@ function itg_get_follow_story_user($nid, $status) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'status' => $status);
+    $cond = array('nid' => (string)$nid, 'status' => (string)$status);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $options[] = $document['uid'];
@@ -84,7 +83,7 @@ function itg_flag_get_count($nid, $type) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->itg_custom_flag_count;
-    $cond = array('nid' => $nid);
+    $cond = array('nid' => (int)$nid);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $data[$type] = $document[$type];
@@ -104,7 +103,7 @@ function itg_flag_insert_count($nid, $type, $val) {
     $con = mongodb();
     if ($con) {
       $people = $con->itg_custom_flag_count;
-      $qry = array("nid" => $nid, $type => $val, "created" => date('Y-m-d G:i:s') , "timestamp" => time());
+      $qry = array("nid" => (int)$nid, $type => $val, "created" => date('Y-m-d G:i:s') , "timestamp" => time());
       $result = $people->insert($qry);
       $expire = time() + 86400;
       setcookie("likeDislike" . "_" . $nid, "likeDislike" . "_" . $nid, $expire);
@@ -124,7 +123,7 @@ function itg_flag_upd_count($nid, $type, $val) {
     if ($con) {
       $people = $con->itg_custom_flag_count;
       $newdata = array('$set' => array($type => $val, "created" => date('Y-m-d G:i:s') , "timestamp" => time()));
-      $people->update(array("nid" => $nid), $newdata);
+      $people->update(array("nid" => (int)$nid), $newdata);
       $expire = time() + 86400;
       setcookie("likeDislike" . "_" . $nid, "likeDislike" . "_" . $nid, $expire);
     }
@@ -141,7 +140,7 @@ function itg_flag_get_nid($nid) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->itg_custom_flag_count;
-    $cond = array('nid' => $nid);
+    $cond = array('nid' => (int)$nid);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
       $data['nid'] = $document['nid'];
@@ -275,4 +274,82 @@ function itg_personalization_get_followed_status($tid) {
     $cursor = $people->count($cond);
     return $cursor;
   }
+}
+
+/**
+ * Helper function to get nid of ugc content.
+ * @param int $nid
+ */
+function itg_personalization_get_uid($nid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->ugc_details;
+    $cond = array('unid' => (int)$nid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $key => $document) {
+      $data['uid'] = $document['uid'];
+    }
+    return $data;
+  }
+}
+
+/**
+ * Helper function to show mongo detail
+ */
+function itg_get_mongo_detail($type, $id) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($type == 'like') {
+      $people = $con->itg_custom_flag_count;
+      $cond = array('nid' => (int)$id);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+       $data['like_count'] =  $document['like_count'];
+      }
+      return $data;
+    }
+    
+    if ($type == 'dislike') {
+      $people = $con->itg_custom_flag_count;
+      $cond = array('nid' => (int)$id);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+       $data['dislike_count'] = $document['dislike_count'];
+      }
+      return $data;
+    }
+    if ($type == 't_share') {
+      $people = $con->front_user_activity;
+      $cond = array('nid' => $id, 'activity' => 'twitter_share');
+      $cursor = $people->count($cond);
+      return 'Twitter share : ' . $cursor;
+    }
+
+    if ($type == 'g_share') {
+      $people = $con->front_user_activity;
+      $cond = array('nid' => $id, 'activity' => 'google_share');
+      $cursor = $people->count($cond);
+      return 'Google share : ' . $cursor;
+    }
+    
+    if ($type == 'comment') {
+      $people = $con->itgcms_comment;
+      $cond = array('page_id' => $id);
+      $cursor = $people->count($cond);
+      return $cursor;
+    }
+    if ($type == 'view') {
+      $people = $con->pagedetails;
+      $cond = array('nid' => $id);
+      $cursor = $people->count($cond);
+      return 'Number of View : ' . $cursor;
+    }
+  }
+  if ($type == 'f_share') {
+    $fb_share = itg_get_fb_share($id, 'Facebook Share');
+    return 'Facebook Share : '.$fb_share;
+  }
+  
 }

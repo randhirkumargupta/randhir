@@ -47,35 +47,35 @@
        ?>
 
       <div class="field">
-        <div class="field-label">Template Name:</div>
+        <div class="field-label"><?php print t('Template Name:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->title); ?></div>
       </div>
       <div class="field">
-        <div class="field-label">Subject Line:</div>
+        <div class="field-label"><?php print t('Subject Line:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
       </div>
        <div class="field">
-        <div class="field-label">Header Headline:</div>
+        <div class="field-label"><?php print t('Header Headline:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->field_newst_header_headline[LANGUAGE_NONE][0]['value']); ?></div>
       </div>
       <?php if(!empty($node->field_newst_main_headline[LANGUAGE_NONE][0]['value'])) { ?>
        <div class="field">
-        <div class="field-label">Main Headline:</div>
+        <div class="field-label"><?php print t('Main Headline:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->field_newst_main_headline[LANGUAGE_NONE][0]['value']); ?></div>
       </div>
       <?php } if($node->field_newst_logo[LANGUAGE_NONE][0]['uri']) { ?>
        <div class="field">
-        <div class="field-label">Logo:</div>
+        <div class="field-label"><?php print t('Logo:'); ?></div>
         <div class="field-items"><img src="<?php echo $logo; ?>"></div>
       </div>
       <?php } ?>
        <div class="field">
-        <div class="field-label">Banner:</div>
+        <div class="field-label"><?php print t('Banner:'); ?></div>
         <div class="field-items"><img src="<?php echo str_replace('public://', $base_url.'/sites/default/files/', $banner ); ?>" alt="" width="100" height="100"/></div>
       </div>
       <?php if($node->body[LANGUAGE_NONE][0]['value']) { ?>
       <div class="field">
-        <div class="field-label">Footer:</div>
+        <div class="field-label"><?php print t('Footer:'); ?></div>
         <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
       </div>
       <?php } ?>

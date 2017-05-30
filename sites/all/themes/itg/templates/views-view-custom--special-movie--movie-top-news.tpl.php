@@ -11,8 +11,7 @@
   
    
     ?>
-<li  title="<?php print $row['title'] ; ?>">
-  <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+<li  title="<?php print strip_tags($row['title']) ; ?>">
 <?php
   if (function_exists('itg_common_get_smiley_title')) {
     echo l(itg_common_get_smiley_title($row['nid'], 0, 140), "node/" . $row['nid'], array("html" => TRUE));

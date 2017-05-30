@@ -878,7 +878,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: iOS */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -942,7 +942,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: iOS */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -1445,11 +1445,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
-  /* Sort criterion: Content: Updated date */
-  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['table'] = 'node';
-  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
-  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -3166,6 +3161,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '50';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
