@@ -2463,8 +2463,10 @@ function itg_videogallery_move_ftp_videos() {
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
+  $query->condition('type', 'S3', '=');
+  
+  
   $result = $query->execute()->fetchall();
-
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
 
