@@ -521,12 +521,14 @@ function programCategoryListlPageRerourceValue($token) {
 
 
 function generateProgramSectionList($Program_section_list){
+    //echo "<pre>"; print_r($Program_section_list);echo "</pre>";exit();
     $data = array();
     $output_ar = array();
     $listcount = 0;
     foreach ($Program_section_list as $key => $value){
         $term = taxonomy_term_load($value);
         //echo "<pre>"; print_r($term); echo "</pre>";exit();
+        $update_time = getLatestNodeTime($term->tid);
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
         $child_term_url = nodeCategoryFrontUrl($value, 'term');
@@ -548,7 +550,19 @@ function generateProgramSectionList($Program_section_list){
     
     $output_ar['data'] = $data;
     $output_ar['lcount'] = $listcount;
-    $output_ar['updated_datetime'] = "";
+    $output_ar['updated_datetime'] = $update_time;
     
     return $output_ar;
+}
+
+function getLatestNodeTime($tid){
+    
+    $query = db_select('taxonomy_index', 'txi');
+    $query->fields('txi', array('created'));
+    $query->condition('txi.tid', $tid);   
+    $query->orderBy('txi.created', 'DESC');
+    $query->range(0, 1);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $published_statp = $result[0]['created'];
+    return $published_statp;
 }
