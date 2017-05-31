@@ -6,7 +6,7 @@ function itg_rapid_api_resource() {
         * custom resource for sprit1
         */
         
-        // testing custom resource declaration.....
+       // testing custom resource declaration.....
 	'testing' => array(
   	'operations' => array(
     	'retrieve' => array(
@@ -20,18 +20,7 @@ function itg_rapid_api_resource() {
       	'access callback' => 'user_access',
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
-        'args' => array(
-        	array(
-          'name' => 'count', 
-          'type' => 'int', 
-          'description' => t('Number of comments to load.'), 
-          //'source' => array('param' => 'count'),           
-          'source' => array('path' => 0),
-          //'source' =>'data',
-          'optional' => TRUE,
-          'default value' => 0,
-        ),
-      	),
+      
       	
     	),
       	),
@@ -56,7 +45,7 @@ function itg_rapid_api_resource() {
           	'name' => 'token',
           	'type' => 'string',
           	'description' => 'Function to perform',
-          	//'source' => array('param' => 'token'),
+          	//'source' => array('param' => 'token'),                
                 'source' => array('path' => 0), 
           	'optional' => TRUE,
           	'default' => '*',
@@ -203,30 +192,13 @@ function itg_rapid_api_resource() {
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
         'args' => array(            
-                        array(
-                            'name' => 'id',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 0), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
-                        array(
-                            'name' => 'cpageno',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 1), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
+                        
                         array(
                             'name' => 'token',
                             'type' => 'string',
                             'description' => 'Function to perform',
                             //'source' => array('param' => 'token'),
-                                'source' => array('path' => 2), 
+                                'source' => array('path' => 0), 
                             'optional' => TRUE,
                             'default' => '*',
                             ),
@@ -251,21 +223,13 @@ function itg_rapid_api_resource() {
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
         'args' => array(
-        	array(
-                   'name' => 'id',
-                    'type' => 'string',
-                    'description' => 'Function to perform',
-                     //'source' => array('param' => 'token'),
-                    'source' => array('path' => 0), 
-                    'optional' => TRUE,
-                    'default' => '*',
-                    ),         
+        	       
                 array(
           	'name' => 'token',
           	'type' => 'string',
           	'description' => 'Function to perform',
           	//'source' => array('param' => 'token'),
-                    'source' => array('path' => 1), 
+                    'source' => array('path' => 0), 
           	'optional' => TRUE,
           	'default' => '*',
         	),
@@ -290,30 +254,13 @@ function itg_rapid_api_resource() {
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
         'args' => array(
-                        array(
-                            'name' => 'id',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 0), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
-                        array(
-                            'name' => 'cpageno',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 1), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
+                        
                         array(
                             'name' => 'token',
                             'type' => 'string',
                             'description' => 'Function to perform',
                             //'source' => array('param' => 'token'),
-                                'source' => array('path' => 2), 
+                                'source' => array('path' => 0), 
                             'optional' => TRUE,
                             'default' => '*',
                             ),
@@ -338,30 +285,13 @@ function itg_rapid_api_resource() {
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
         'args' => array(
-        	        array(
-                            'name' => 'id',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 0), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
-                        array(
-                            'name' => 'cpageno',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 1), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
+        	       
                         array(
                             'name' => 'token',
                             'type' => 'string',
                             'description' => 'Function to perform',
                             //'source' => array('param' => 'token'),
-                                'source' => array('path' => 2), 
+                                'source' => array('path' => 0), 
                             'optional' => TRUE,
                             'default' => '*',
                             ),
@@ -386,30 +316,13 @@ function itg_rapid_api_resource() {
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
         'args' => array(
-        	        array(
-                            'name' => 'id',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 0), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
-                        array(
-                            'name' => 'cpageno',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            //'source' => array('param' => 'token'),
-                                'source' => array('path' => 1), 
-                            'optional' => TRUE,
-                            'default' => '*',
-                            ),
+        	        
                         array(
                             'name' => 'token',
                             'type' => 'string',
                             'description' => 'Function to perform',
                             //'source' => array('param' => 'token'),
-                                'source' => array('path' => 2), 
+                                'source' => array('path' => 0), 
                             'optional' => TRUE,
                             'default' => '*',
                             ),
@@ -867,13 +780,10 @@ function itg_rapid_api_datanotexist_api($token) {
  *	The node processed information array.
  */
 
-function itg_rapid_api_newslist($id, $cpageno, $token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       //valid tid & pageno
+function itg_rapid_api_newslist($token) {
+    //valid tid & pageno
+    $id = $_GET['id'];
+    $cpageno = $_GET['cpageno'];
         $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
@@ -902,7 +812,6 @@ function itg_rapid_api_newslist($id, $cpageno, $token) {
        
 
      return $jsondata;
-   }
 }
 
 /**
@@ -914,13 +823,10 @@ function itg_rapid_api_newslist($id, $cpageno, $token) {
  *	The node processed information array.
  */
 
-function itg_rapid_api_programlist($id, $cpageno, $token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       //valid tid & pageno
+function itg_rapid_api_programlist($token) {
+    //valid tid & pageno
+    $id = $_GET['id'];
+    $cpageno = $_GET['cpageno'];
         $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
@@ -948,7 +854,6 @@ function itg_rapid_api_programlist($id, $cpageno, $token) {
        
         $jsondata = json_decode($jsondata, true);
      return $jsondata;
-   }
 }
 
 
@@ -961,13 +866,10 @@ function itg_rapid_api_programlist($id, $cpageno, $token) {
  *	The node processed information array.
  */
 
-function itg_rapid_api_videolist($id, $cpageno, $token) {    
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       //valid tid & pageno
+function itg_rapid_api_videolist($token) {    
+    //valid tid & pageno
+    $id = $_GET['id'];
+    $cpageno = $_GET['cpageno'];
         $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
@@ -995,7 +897,6 @@ function itg_rapid_api_videolist($id, $cpageno, $token) {
        $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
-   }
 }
 
 /**
@@ -1007,14 +908,10 @@ function itg_rapid_api_videolist($id, $cpageno, $token) {
  *	The node processed information array.
  */
 
-function itg_rapid_api_photodetail($id, $token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       
-         //valid id 
+function itg_rapid_api_photodetail($token) {
+    //valid id 
+    $id = $_GET['id'];
+    //$cpageno = $_GET['cpageno'];
         $suffix = $id;
         if(!is_numeric($id)){
           $id = 0;
@@ -1039,7 +936,6 @@ function itg_rapid_api_photodetail($id, $token) {
        $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
-   }
 }
 
 
@@ -1052,14 +948,10 @@ function itg_rapid_api_photodetail($id, $token) {
  *	The node processed information array.
  */
 
-function itg_rapid_api_photolist($id, $cpageno, $token) {
-    
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       //valid tid & pageno
+function itg_rapid_api_photolist($token) {
+    $id = $_GET['id'];
+    $cpageno = $_GET['cpageno'];
+    //valid tid & pageno
         $suffix = $id."_".$cpageno;
         if(!is_numeric($id)){
           $id = 0;
@@ -1087,7 +979,6 @@ function itg_rapid_api_photolist($id, $cpageno, $token) {
        $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
-   }
 }
 
 /**
@@ -1100,13 +991,7 @@ function itg_rapid_api_photolist($id, $cpageno, $token) {
  */
 
 function itg_rapid_api_server_error_master($token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-        
-        $redis_key = "itgd_rapid_server_error_master_json";
+    $redis_key = "itgd_rapid_server_error_master_json";
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1123,7 +1008,6 @@ function itg_rapid_api_server_error_master($token) {
        $return_obj = $obj;
 
      return $return_obj;
-   }
 }
 
 /**
@@ -1136,13 +1020,7 @@ function itg_rapid_api_server_error_master($token) {
  */
 
 function itg_rapid_api_master_config($token) {
-$get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       
-        $redis_key = "itgd_rapid_master_config_json";
+$redis_key = "itgd_rapid_master_config_json";
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1159,7 +1037,6 @@ $get_token = variable_get('mobile_service_token');
        $return_obj = $obj;
 
      return $return_obj;
-   }
 }
 
 /**
@@ -1172,13 +1049,7 @@ $get_token = variable_get('mobile_service_token');
  */
 
 function itg_rapid_api_config_update_status($token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-        
-        $redis_key = "itgd_rapid_config_update_status_json";
+    $redis_key = "itgd_rapid_config_update_status_json";
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1194,7 +1065,6 @@ function itg_rapid_api_config_update_status($token) {
        $return_obj = $obj;
 
      return $return_obj;
-   }
 }
 
 /**
@@ -1207,13 +1077,7 @@ function itg_rapid_api_config_update_status($token) {
  */
 
 function itg_rapid_api_hamburger_menu($token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-        
-        $redis_key = "itgd_rapid_hamburger_menu_json";
+    $redis_key = "itgd_rapid_hamburger_menu_json";
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1229,7 +1093,6 @@ function itg_rapid_api_hamburger_menu($token) {
        $return_obj = $obj;
 
      return $return_obj;
-   }
 }
 
 /**
@@ -1242,13 +1105,7 @@ function itg_rapid_api_hamburger_menu($token) {
  */
 
 function itg_rapid_api_horizontal_menu($token) {
-    $get_token = variable_get('mobile_service_token');
-    if($get_token != $token){
-        return services_error(t('Please enter valid token'), 406);
-    }
-    else{
-       
-        $redis_key = "itgd_rapid_horizontal_menu_json";
+    $redis_key = "itgd_rapid_horizontal_menu_json";
         $result_get = getRedis($redis_key);
 
         if($result_get['key_value'] !=""){
@@ -1264,7 +1121,6 @@ function itg_rapid_api_horizontal_menu($token) {
        $return_obj = $obj;
 
      return $return_obj;
-   }
 }
 
 /**
