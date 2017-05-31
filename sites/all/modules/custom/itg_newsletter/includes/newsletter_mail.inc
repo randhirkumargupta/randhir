@@ -167,7 +167,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
 
     // Set link for newsletter title
     if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {
-      $link = 'node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+      $link = $base_url . '/node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
     }
     else {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
