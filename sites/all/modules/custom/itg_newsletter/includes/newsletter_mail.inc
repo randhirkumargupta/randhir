@@ -143,13 +143,12 @@ function itg_get_newsletter_mail_content($node, $template_node) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-  
+  $news_content = '';
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
     $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
-
     if ($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
     }
@@ -173,7 +172,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
     }
 
-    $news_content = '';
+//    $news_content = '';
     if ($flag) {
       $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
@@ -190,7 +189,6 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
-
   $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
   return $content;
 }
