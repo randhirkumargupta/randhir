@@ -344,7 +344,7 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-    if ($node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
+    if ($node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
@@ -373,7 +373,7 @@ function itg_seo_node_presave($node) {
 }
 
 /**
- * Implementation of hook_node_insert().
+ * Implementation of hook_node_update().
  * @param object $node
  */
 function itg_seo_node_update($node) {
@@ -393,7 +393,7 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-    if ($node->type == 'reporter' || $node->type == 'podcast') {
+    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -435,7 +435,8 @@ function content_types_for_sef_url() {
     'reporter' ,
     'itg_funalytics' ,
     'page' ,
-    'mega_review_critic'
+    'mega_review_critic',
+    'survey',
   );
 }
 

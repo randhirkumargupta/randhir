@@ -123,6 +123,11 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
+  elseif ($node->type == 'survey') {
+    $pathdata = 'survey/' . $edited_sef_url;
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
 }
 
 /**
