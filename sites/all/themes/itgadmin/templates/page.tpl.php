@@ -67,8 +67,11 @@ if (!in_array('administrator', $user->roles)) {
     <i class="fa fa-bell-o"></i>
     <dfn>
       <?php 
-        if (function_exists('get_task_count_of_user')) {
-          print get_task_count_of_user();
+        if (function_exists('get_task_count_of_user') || function_exists('get_idea_count_of_user')) {
+          $idea = get_idea_count_of_user();
+          $task = get_task_count_of_user();
+          $total_notifications = $idea + $task;
+          print $total_notifications;
         } 
       ?>
     </dfn>
