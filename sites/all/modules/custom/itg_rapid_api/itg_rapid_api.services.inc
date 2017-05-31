@@ -1169,9 +1169,25 @@ function itg_rapid_api_photostorydetail($token) {
         }
         
        // call function for return data..
-       $jsondata = photoStoryDetailPageRerourceValue($id);
-       //print_r($jsondata);exit();
        
+     $suffix = $id;
+     $redis_key = "itg_rapid_api_photostorydetail_".$suffix;
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = photoStoryDetailPageRerourceValue($id);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
 }
@@ -1187,13 +1203,26 @@ function itg_rapid_api_photostorydetail($token) {
  */
 
 function itg_rapid_api_program_category_list($token) {
-     //valid id 
-       // call function for return data..
-       $jsondata = programCategoryListlPageRerourceValue();
-       //print_r($jsondata);exit();
-       
+     
+     
+     $redis_key = "itg_rapid_api_program_category_list";
+        $result_get = getRedis($redis_key);
 
-     return $jsondata;
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = programCategoryListlPageRerourceValue();
+            $jsondata = json_encode($jsondata);
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
 }
 
 
@@ -1207,7 +1236,19 @@ function itg_rapid_api_program_category_list($token) {
  */
 
 function itg_rapid_api_ad_config_json($token) {
-    $jsondata = variable_get('ad_config_json');
+    
+     $redis_key = "itg_rapid_api_ad_config_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('ad_config_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -1226,7 +1267,20 @@ function itg_rapid_api_ad_config_json($token) {
  */
 
 function itg_rapid_api_livetv_channellist_json($token) {
-    $jsondata = variable_get('livetv_channellist_json');
+    
+     
+     $redis_key = "itg_rapid_api_livetv_channellist_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('livetv_channellist_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -1244,7 +1298,20 @@ function itg_rapid_api_livetv_channellist_json($token) {
  */
 
 function itg_rapid_api_livetv_json($token) {
-    $jsondata = variable_get('livetv_json');
+    
+     
+     $redis_key = "itg_rapid_api_livetv_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('livetv_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -1262,7 +1329,20 @@ function itg_rapid_api_livetv_json($token) {
  */
 
 function itg_rapid_api_otherapps_ios_json($token) {
-    $jsondata = variable_get('otherapps_ios_json');
+    
+     
+     $redis_key = "itg_rapid_api_otherapps_ios_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('otherapps_ios_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -1280,7 +1360,20 @@ function itg_rapid_api_otherapps_ios_json($token) {
  */
 
 function itg_rapid_api_otherapps_android_json($token) {
-    $jsondata = variable_get('otherapps_android_json');
+    
+     
+     $redis_key = "itg_rapid_api_otherapps_android_json";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = variable_get('otherapps_android_json');
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
        //echo $jsondata;exit;
        $obj = json_decode($jsondata, true);
        $return_obj = $obj;
@@ -1309,10 +1402,26 @@ function itg_rapid_api_magazine_edition($token) {
         if(!is_numeric($cpageno)){
           $cpageno = 0;
         }
-       // call function from return data..
-       $jsondata = magazineEditionPageRerourceValue($id, $cpageno);
-       //print_r($jsondata);exit();
        
+     
+     $suffix = $id."_".$cpageno;
+     $redis_key = "itg_rapid_api_magazine_edition_".$suffix;
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = magazineEditionPageRerourceValue($id, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
 }
@@ -1320,7 +1429,7 @@ function itg_rapid_api_magazine_edition($token) {
 
 /**
  * [itg_rapid_api_magazine_coverstories] definition.
- * Returns the information about a itg_rapid_api_magazine_edition.
+ * Returns the information about a itg_rapid_api_magazine_coverstories.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
@@ -1330,11 +1439,25 @@ function itg_rapid_api_magazine_edition($token) {
 function itg_rapid_api_magazine_coverstories($token) {
     
     // call function from return data..
-       $jsondata = magazineCoverstoriesPageRerourceValue();
-       //print_r($jsondata);exit();
-       
+      
+     $redis_key = "itg_rapid_api_magazine_coverstories";
+        $result_get = getRedis($redis_key);
 
-     return $jsondata;
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            $jsondata = magazineCoverstoriesPageRerourceValue();
+            $jsondata = json_encode($jsondata);
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //echo $jsondata;exit;
+       $obj = json_decode($jsondata, true);
+       $return_obj = $obj;
+
+     return $return_obj;
 }
 
 /**
@@ -1361,9 +1484,26 @@ function itg_rapid_api_magazine_editionlist($token) {
           $cpageno = 0;
         }
        // call function from return data..
-       $jsondata = magazineEditionListPageRerourceValue($sdate, $tdate, $cpageno);
-       //print_r($jsondata);exit();
        
+     
+     $suffix = $sdate."_".$tdate."_".$cpageno;
+     $redis_key = "itg_rapid_api_magazine_editionlist_".$suffix;
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = magazineEditionListPageRerourceValue($sdate, $tdate, $cpageno);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
 }
@@ -1386,9 +1526,26 @@ function itg_rapid_api_storydetail($token) {
         }
         
        // call function for return data..
-       $jsondata = StoryDetailPageRerourceValue($id);
-       //print_r($jsondata);exit();
        
+     
+     $suffix = $id;
+     $redis_key = "itg_rapid_api_storydetail".$suffix;
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = StoryDetailPageRerourceValue($id);
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 300;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
 
      return $jsondata;
 }
