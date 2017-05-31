@@ -414,7 +414,7 @@ function generatePhotoStoryDeatilList($id){
     $data_array['subcategory_title'] = "$term_name"; 
       
     $data_array['photo'] = $photo_list_array['data'];
-    $data_array['author'] = generateAuthorTag($nid);
+    $data_array['author'] = generateAuthorTag($node);
     
     
     $data['data'] = $data_array;
@@ -516,12 +516,16 @@ function photoSotryHtml($node_id) {
  * @return array
  */
 
-function generateAuthorTag($nid){
+function generateAuthorTag($node){
+    //echo "<pre>"; print_r($node);echo "</pre>";exit();
+    $field_itg_common_by_line_name = $node->field_itg_common_by_line_name['und'][0]['value'];
+    $field_itg_common_by_line_twitter = $node->field_itg_common_by_line_twitter['und'][0]['value'];
+    $field_reporter_unique_id = $node->field_reporter_unique_id['und'][0]['value'];
     $output = array();
-    $output['a_id'] = "id";
-    $output['a_title'] = "author_name";
-    $output['a_image'] = "image_url";
-    $output['a_twitter_handler'] = "twitter_handler";
+    $output['a_id'] = "$field_reporter_unique_id";
+    $output['a_title'] = "$field_itg_common_by_line_name";
+    $output['a_image'] = "";
+    $output['a_twitter_handler'] = "$field_itg_common_by_line_twitter";
     return $output;
 }
 
