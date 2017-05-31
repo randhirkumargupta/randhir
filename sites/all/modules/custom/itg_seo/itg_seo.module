@@ -119,6 +119,8 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     'itg_funalytics_node_form' ,
     'mega_review_critic_node_form' ,
     'page_node_form' ,
+    'survey_node_form' ,
+    'quiz_node_form' ,
   );
   if (in_array($form['#form_id'] , $node_form_array)) {
     $form['#after_build'][] = 'itg_custom_meta_tags_alias_set';
@@ -344,7 +346,7 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-    if ($node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
+    if ($node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
@@ -393,7 +395,7 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey') {
+    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -437,6 +439,7 @@ function content_types_for_sef_url() {
     'page' ,
     'mega_review_critic',
     'survey',
+    'quiz',
   );
 }
 

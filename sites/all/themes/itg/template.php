@@ -64,6 +64,13 @@ function itg_preprocess_node(&$variables) {
     $itg_survey_survey_form = drupal_get_form('itg_survey_survey_form');
     $variables['content'] = $itg_survey_survey_form;
   }
+
+  if ($variables['type'] == 'quiz') {
+    module_load_include('inc' , 'itg_quiz' , 'includes/itg_quiz_form');
+    $itg_survey_survey_form = drupal_get_form('itg_quiz_quiz_form');
+    $variables['theme_hook_suggestions'][] = 'node__survey';
+    $variables['content'] = $itg_survey_survey_form;
+  }
 }
 
 /**
