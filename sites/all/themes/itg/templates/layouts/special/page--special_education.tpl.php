@@ -527,8 +527,9 @@ if ($theme != 'itgadmin') {
         </div>
 
     </div>
+      </div>
   <?php } ?>
-    </div>
+    
   
    <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section itg-345-layout">    
