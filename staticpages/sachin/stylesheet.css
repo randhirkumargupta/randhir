@@ -1,0 +1,123 @@
+.top-text {font-size:16px; font-family:arial,verdana;color:#ffffff;padding:2px 4px 0px 25px;line-height:17px;}
+.top-text a{color:#ffffff; text-decoration:none; font-weight:bold;}
+.top-text a:hover {color:#ffffff; text-decoration:underline; font-weight:bold;}
+
+.p-text {font-size:16px; font-family:arial,verdana;color:#ffffff;padding:0px 10px 0px 10px;line-height:17px;}
+.p-text a{color:#ffffff; text-decoration:none;}
+.p-text a:hover {color:#D8EFB0; text-decoration:underline;}
+
+.more-p{font-size:15px; font-family:arial,verdana;color:#D8EFB0;padding:0px 10px 0px 10px;letter-spacing:-1px;}
+.more-p a{color:#D8EFB0; text-decoration:none;}
+.more-p a:hover {color:#ffffff; text-decoration:underline;}
+
+.head-link {font-size:16px;font-family:arial,verdana; color:#395000;font-weight:bold;padding:0px 0px 0px 6px;text-transform:uppercase;}
+.head-link a{color:#395000; text-decoration:none;}
+.head-link a:hover {color:#A21E00; text-decoration:underline;}
+
+.key-text-new {font-size:15px;font-family:arial,verdana; color:#6c6c6c;letter-spacing:-1px;line-height:17px;padding:7px 4px 7px 6px;}
+.key-text-new a{color:#6c6c6c; text-decoration:none;}
+.key-text-new a:hover {color:#A21E00; text-decoration:underline;}
+
+.t-link-new {font-size:13px;font-family:arial,verdana; color:#454545;padding:4px 4px 4px 6px;letter-spacing:-1px;line-height:16px;}
+.t-link-new a{color:#454545; text-decoration:none;}
+.t-link-new a:hover {color:A21E00; text-decoration:underline;}
+
+.t-link {font-size:15px;font-family:arial,verdana; color:#454545;padding:0px 0px 0px 6px;letter-spacing:-1px;}
+.t-link a{color:#454545; text-decoration:none;}
+.t-link a:hover {color:A21E00; text-decoration:underline;}
+
+.more-link {font-size:12px;font-family:arial,verdana; color:#032F67;padding:0px 0px 4px 6px;}
+.more-link a{color:#A21E00; text-decoration:none;}
+.more-link a:hover {color:#032F67; text-decoration:underline;}
+
+.t-date {font-size:11px;font-family:arial,verdana; color:#000000;padding:0px 0px 4px 6px;}
+.t-date a{color:#0025B1; text-decoration:none;}
+.t-date a:hover {color:#A21E00; text-decoration:underline;}
+
+
+.poll-text1{font-size:13px; font-family:arial,verdana;color:#6c6c6c;line-height:17px;padding:2px 0px 2px 0px;}
+
+
+.sk-text3 {font-size:11px; font-family:arial,verdana;color:#6c6c6c;padding:0px 10px 0px 10px;line-height:17px;}
+.sk-text3 a{color:#6c6c6c; text-decoration:none;}
+.sk-text3 a:hover {color:#A21E00; text-decoration:underline;}
+
+.m-head1 {font-size:30px; font-family:Georgia,arial,verdana;color:#A21E00;letter-spacing:-1px;padding:0px 0px 7px 0px;}
+.m-head1 a{color:#000000; text-decoration:none;}
+.m-head1 a:hover {color:#A21E00; text-decoration:underline;}
+
+.m-head {font-size:20px; font-family:Georgia,arial,verdana;color:#000000;letter-spacing:-1px;padding:7px 6px 7px 6px;}
+.m-head a{color:#000000; text-decoration:none;}
+.m-head a:hover {color:#A21E00; text-decoration:underline;}
+
+.key-text111 {font-size:20px;font-family:Georgia,verdana; color:#000000;letter-spacing:-1px;line-height:18px;padding:4px 6px 4px 6px;}
+
+.m-text {font-size:16px; font-family:arial,verdana;color:#4f4f4f;line-height:17px;}
+
+.m-text1 {font-size:16px; font-family:arial,verdana;color:#000000;line-height:17px;}
+.m-text1 a{color:#000000; text-decoration:none;}
+.m-text1 a:hover {color:#A21E00; text-decoration:underline;}
+
+
+
+.key-link {font-size:13px;font-family:arial,verdana; color:#000000;padding:2px 4px 2px 6px;}
+.key-link a{color:#000000; text-decoration:none;}
+.key-link a:hover {color:#A21E00; text-decoration:underline;}
+
+.key-text {font-size:15px;font-family:arial,verdana; color:#6c6c6c;letter-spacing:-1px;line-height:17px;padding:0px 4px 0px 6px;}
+.key-text a{color:#6c6c6c; text-decoration:none;}
+.key-text a:hover {color:#000000; text-decoration:underline;}
+
+.key-text11 {font-size:15px;font-family:arial,verdana; color:#6c6c6c;letter-spacing:-1px;line-height:18px;padding:4px 6px 4px 6px;}
+
+.key-text1 {font-size:15px;font-family:arial,verdana; color:#6c6c6c;letter-spacing:-1px;line-height:17px;padding:7px 4px 7px 6px;}
+.key-text1 a{color:#6c6c6c; text-decoration:none;}
+.key-text1 a:hover {color:#A21E00; text-decoration:underline;}
+
+
+.cam-dt {font-size:15px;font-family:arial,verdana; color:#ffffff;letter-spacing:-1px;line-height:19px;padding:0px 0px 0px 20px;}
+.cam-text {font-size:15px;font-family:arial,verdana; color:#454545;letter-spacing:-1px;line-height:19px;padding:7px 6px 7px 6px;}
+
+
+.cam-dt1 {font-size:15px;font-family:arial,verdana; color:#ffffff;letter-spacing:-1px;line-height:19px;padding:0px 0px 0px 10px;}
+.cam-text1 {font-size:15px;font-family:arial,verdana; color:#454545;letter-spacing:-1px;line-height:19px;padding:7px 6px 7px 6px;}
+
+
+#footerdiv { width:1003px !important; float:left;  margin:0px 0 20px 0; _margin:0px 0 20px 0; $margin:0px 0 20px 0; border-top:1px solid #95999A; }
+#footerdiv #google_ad_footer { margin:20px auto;  border:0px solid #000; text-align:center;}
+#footerdiv #footer_menu {  width:75%; border:1px solid #BDD9E5; border-width:1px 0px; margin:0 auto; padding:0;height:18px; color:#4C4C4C; font:bold 11px Tahoma; text-align:center;}
+#footerdiv #footer_menu a:link,
+#footerdiv #footer_menu a:visited,
+#footerdiv #footer_menu a:hover { font:bold 11px Tahoma; text-align:center; color:#4C4C4C; text-decoration:none; line-height:16px; }
+#footerdiv #footer_menu span { line-height:16px; margin:0 15px;}
+#footerdiv #copyrights
+{float:left; padding:10px 0;  font:normal 11px arial; color:#4B4B4B; text-align:center; width:100%; border:0px solid #000;}
+#footerdiv #copyrights a
+{text-decoration:none; color:#204fa4; }
+
+#footerdiv #copyrights a:hover
+{text-decoration:underline; }
+
+#footerdiv #itgd_group_links
+{border:0px solid #000; margin:0 auto 15px auto; width:99%; font:normal 11px arial; color:#6277A4; line-height:18px; text-align:center; }
+#footerdiv #itgd_group_links b
+{width:auto; font:bold 11px Arial; color:#E31D36; border:0px solid #000; margin:0; line-height:18px; }
+#footerdiv #itgd_group_links strong
+{color:#494949; margin:0 0 0 5px;}
+#footerdiv #itgd_group_links a
+{text-decoration:none; color:#6277A4; margin:0 5px;}
+#footerdiv #itgd_group_links a:hover
+{text-decoration:underline; }
+
+.recent_gallery .row .caption {
+    color: #FF3D37;
+    float: left;
+    font: bold 14px Arial,Helvetica,sans-serif;
+    margin: 5px 0 0;
+    text-align: center;
+    width: 210px;
+}
+.recent_gallery .row .caption a {
+    color: #FF3D37;
+    text-decoration: none;
+}

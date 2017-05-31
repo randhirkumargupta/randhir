@@ -1,0 +1,330 @@
+@font-face {
+    font-family: 'Arial-Black';
+    src: url('ab.eot');
+    src: url('ab.eot?#iefix') format('embedded-opentype'),
+         url('ab.woff') format('woff'),
+         url('ab.ttf') format('truetype'),
+         url('ab.svg#"Arial-Black"') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+body { margin:0; padding:0;}
+#wholecontent {padding-top:0;}
+.maincontainer {
+    background-image: none !important;
+    background-repeat: repeat-x;
+    width: 100%;
+}
+#wrapper { margin-top:0px;}
+img{ border:none;}
+.event-headline {font:normal 20px/24px 'Arial-Black'; color:#F57921;}
+
+.event-contdel {font:normal 18px/24px Arial-Black; color:#f57921; border-bottom:1px solid #b2b2b2;}
+.Boldblack {font:normal 16px/22px arial; color:#000000;}
+.delegate {color:#000000; background-color:#f6f9f8; font:bold 14px/18px arial; padding:10px; margin:auto; border-bottom:1px solid #b2b2b2}
+.red { color:#ff0000}
+.Normalblack {font:normal 14px/20px arial; color:#000000;}
+.Normalblack a {color:#000000; text-decoration:none}
+.Normalblack a:hover {color:#f57921; text-decoration:none}
+.Normalblack input, .Normalblack textarea { border:1px solid #b2b2b2; padding:5px;}
+.Normalblack select {border:1px solid #b2b2b2; padding:2px;}
+.submit {
+    background-color: #f47820;
+    border: 0 none;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font: bold 25px Arial;
+    padding: 3px 16px;
+    text-transform: uppercase; cursor:pointer;
+}
+.submit:hover {
+    background-color: #a6a6a6;
+    border: 0 none;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font: bold 25px Arial;
+    padding: 3px 16px;
+    text-transform: uppercase; cursor:pointer;
+}
+.nonbor { border:none}
+.main-headcont {background-color:#f47820; border-bottom:1px solid #fff; width:100%;}
+.menudiv {background-color:#cecece;width:100%; float:left;}
+.cont-area {width:1000px; margin:0 auto;}
+.reg-txt {float:left; font:normal 20px Arial-Black; margin:8px 0; color:#000000; text-transform:uppercase}
+.arch-txt {float:right; padding:8px 16px 8px 8px; font:normal 20px Arial-Black; color:#ffffff; text-transform:uppercase; background:url("http://indiatoday.intoday.in/womansummit/delhi/2014/images/ar-right.gif") no-repeat top right #818181;}
+.arch-txt a {color:#ffffff; text-decoration:none;}
+.arch-txt a:hover {text-decoration:underline;}
+
+.margtop {margin-top:20px;}
+.clr { clear:both}
+.topbgstar {width:100%; background:url("http://media2.intoday.in/indiatoday/womansummit/2013/images/top-bg.gif") repeat-x center center;}
+.topnavigation {width:100%; background:#000;}
+.womanarch {
+    background: url("http://indiatoday.intoday.in/womansummit/delhi/2014/images/ar-left.gif") no-repeat scroll left top transparent;
+    float: right;
+    padding-left: 9px;
+}
+.navigation_right{max-width: 300px;margin-top: 28px;}
+.venue{background-color:#F57921; padding: 10px;}
+.venueaddredd {color:#000;}
+.venueaddredd h1{font: bold 14px/18px Arial;color:#000;margin:0;}
+.venueaddredd a span{color: #f47820;}
+.venueaddredd span {font:13px/18px arial;color:#fff}
+.venueaddredd a {color:#C90A12; }
+.venueaddredd a:hover{ text-decoration:none; }
+
+.group-link {font-size:12px; font-family:arial,verdana;color:#D5D5D5;padding:0px 1px 0px 0px;font-weight:bold;}
+.group-link a{color:#D5D5D5; text-decoration:none;padding:0px 4px 0px 4px;}
+.group-link a:hover {color:#FFFFFF; text-decoration:underline;}
+.logo {  height:230px; width:249px; float:left;}
+.woman-logo {
+    background: url("http://media2.intoday.in/indiatoday/womansummit/2013/images/title.png") no-repeat scroll left top transparent;
+    height: 130px;
+    margin-left: 60px;
+    margin-top: 25px;
+    width: 660px;
+}
+.spon { background:url("http://media2.intoday.in/indiatoday/womansummit/2013/images/event.jpg") no-repeat center center; float:left; width:86px; height:57px; background-color:#fff301;}
+
+.spondiv {
+    background-color: #FFFFFF;
+    float: left;
+    height: 57px;
+    margin-left: 60px;
+    overflow: hidden;
+    width: 660px;
+}
+.margspc { margin:0 10px;}
+.sponsor-header {
+    color: #eb1752;
+    font: bold 18px/22px Arial;
+}
+
+.sponsor-type {
+    color: #000;
+    font: bold 14px/32px Arial;
+}
+.subsponsor-type{font: bold 14px/32px Arial;olor: #000000;}
+.subsponsor-type2 {font: bold 14px/32px Arial;olor: #000000;}
+.subsponsor-type21 {font: bold 12px/32px Arial;olor: #000000;}
+#left {width:685px; margin-right:15px; float:left;}
+#right {width:300px; float:right}
+.navigarion{width:1000px; margin:0 auto;}
+.navigarion ul{margin:0; padding: 0px; list-style-type: none;}
+.navigarion li{float: left;}
+.navigarion li a{color: #f57921; float: left; font: 16px Arial-Black; padding: 8px 4px; text-transform: uppercase; text-decoration: none;}
+.navigarion li a:hover{color: #000; background-color:#fff200;padding: 8px 4px;}
+.active{color: #000 !important; background-color:#fff200;padding: 8px 4px;}
+.navigarion li div.seprator{  background-color: #000000; height: 22px; margin: 8px 10px; width: 1px;}
+
+.speakercont{width:670px;}
+.speakerbox {width:125px; float:left; margin-bottom:15px;}
+.speakermarg {margin-right:10px; }
+
+.past-coverage {
+    background-color: #878787;
+    float: left;
+    margin-top: 20px;
+    padding: 10px;
+    width: 280px;
+}
+.past-coverage .coverage{ padding-bottom: 20px;}
+.past-coverage .coverage a{display: inline-block; position: relative;font: bold 12px/14px arial; color: #fff; text-decoration: none;}
+.past-coverage .coverage a img{}
+.past-coverage .coverage > a span.video-icon, .past-coverage .coverage > a span.photo-icon{
+	position: absolute; height: 32px; width: 32px; display: block; background-repeat: no-repeat; top: 10px; right: 10px;
+					-webkit-transition: 1s;
+                -moz-transition: 1s;
+                -o-transition: 1s;
+                -ms-transition: 1s;
+                transition: 1s;
+}
+
+.past-coverage .coverage >a  span.video-icon{background-image:url("http://indiatoday.intoday.in/womansummit/delhi/2014/images/play.png");}
+.past-coverage .coverage >a span.photo-icon{background-image:url("http://indiatoday.intoday.in/womansummit/delhi/2014/images/photo.png");}
+/*.past-coverage .coverage > a:hover .video-icon, .past-coverage .coverage > a:hover .photo-icon{
+				right: 50px; 
+
+				}*/
+
+.past-coverage .coverage >a.ciker{font: bold 12px/18px arial; color: #fff; text-decoration: none;}
+.past-coverage .coverage >a.ciker:hover{color: #f57921;}
+.past-coverage{}
+
+
+
+/* PROGRAMME PAGE CSS */
+#main_content_left {
+    float: left;
+    width: 683px;
+}
+.prjtitle {
+    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
+    height: 30px;
+}
+.prjtitlename {
+    color: #F57921;
+    float: left;
+    font: 20px/24px 'Arial-Black';
+    text-align: left;
+    width: 300px;
+}
+.prjdate {
+    color: #181818;
+    float: right;
+    font: bold 14px/26px Arial;
+    text-align: right;
+    width: 300px;
+}
+.ptimeln {
+    color: #343434;
+    float: left;
+    font: bold 13px Arial;
+    padding-top: 8px;
+    width: 95px;
+}
+ .psessiontitle {
+    font-family: 'Arial-Black' !important;
+}
+.pritepart.pborder {
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 10px;
+}
+.pritepart {
+    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/kolkata/dot_2.gif") repeat-y scroll 0 0 transparent;
+    float: right;
+    padding-left: 10px;
+    padding-top: 8px;
+    width: 575px;
+}
+.pleft {
+    float: left;
+    width: 400px;
+}
+
+.psession {
+    color: #000000;
+    font: 12px Arial;
+    margin-bottom: 15px;
+}
+.psessiontitle {
+    color: #000000;
+    font-family: Arial-Black;
+    font-size: 16px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    word-spacing: 1px;
+}
+
+.clear {
+    clear: both;
+}
+
+.pritepart.pborder {
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 10px;
+}
+.prj_profilebyline {
+    color: #343434;
+    font: 12px/18px Arial;
+}
+.prj_profilebyline  strong{
+    color: #343434;
+    font:bold 12px/18px Arial;
+}
+
+.prjtomebg {
+    background: #cccccc;
+    color: #343434;
+	font:14px/16px Arial;
+    font-weight: bold;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 10px;
+}
+
+.ptext {
+    color: #000000;
+    font: 12px/17px arial;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.prj_name{ color:#f47920; font: bold 12px/18px Arial;}
+.star_confirm{ float:right; color: #000000; font: 12px/17px arial;}
+.phead {
+    color: #21509E;
+    font: bold 13px Arial;
+    margin-bottom: 5px;
+}
+#main_content_left {
+    float: left;
+    width: 683px;
+}
+.homebanner {
+    margin-bottom: 20px;
+}
+.live_title {
+    border-bottom: 1px dotted #000000;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.leftlivetitle {
+    color: #C90C1D;
+    float: left;
+    font: bold 24px Arial;
+    width: 450px;
+}
+.liveupdatedate {
+    float: right;
+    font: 12px/30px Arial;
+    text-align: right;
+}
+
+.datemh {
+    border: 0 solid red;
+    color: #666666;
+    display: inline;
+    float: left;
+    font-family: Tahoma;
+    font-size: 12px;
+    margin: 2px 0 0 10px;
+    padding: 0;
+    text-align: right;
+    width: 214px;
+}
+.clear {
+    clear: both;
+}
+.livepage {
+    float: left;
+    width: 470px;
+}
+
+.highlight {
+    float: right;
+    width: 200px;
+}
+
+.highlight_head {
+    border-bottom: 1px dotted #000000;
+}
+
+.highlighttitle {
+    color: #C90C1D;
+    float: left;
+    font: bold 18px/18px Arial;
+    width: 150px;
+}
+.highlight_more {
+    float: right;
+    font-family: arial;
+    font-size: 12px;
+    width: 50px;
+}
+
+.highlight_more a {
+    color: #000000;
+    text-decoration: none;
+}

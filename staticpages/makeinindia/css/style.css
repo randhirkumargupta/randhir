@@ -1,0 +1,136 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0; outline:0;}
+body{font-family:"Roboto" ,sans-serif; background:#fdf1e3;}
+h2{font-size:20px; line-height:24px; color:#095ba0; font-weight:bold; display:block; text-transform:uppercase; padding:15px 0;}
+
+.clear:after {clear: both;}
+.outer_wrapper{float:left; width:100%; background:url(http://media2.intoday.in/indiatoday/makeinindia/top-bg.jpg) repeat-x center 125px; padding-bottom:30px;}
+.wrapper{ width:960px; margin:0 auto;}
+.outer_header{float:left; width:100%; background-color:#fff;}
+.add{width:728px; margin:15px auto 15px}
+
+.nav{ background:#FFFFFF; padding:15px 15px 15px 20px; float:left;-webkit-border-bottom-right-radius: 10px;-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-bottomright: 10px;-moz-border-radius-bottomleft: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px; position:absolute; left:0; top:0;}
+.nav ul{margin:0; padding:0;}
+.nav ul li{ list-style:none; margin-right:18px; border-right:1px solid #000; float:left;}
+.nav ul li a{ font-family:roboto;  font-size:18px; color:#095ba0; padding-right:15px; text-decoration:none; text-transform:uppercase;}
+.nav ul li a:hover,.nav ul li a.active{ color:#dd2429; text-decoration:none;}
+.nav ul li:last-child{ border-right:none; margin-right:0}
+
+
+.sponsors-list{ list-style:none;}
+.sponsors-list li {float: left;border:1px solid #E8E8E8;margin: 5px;}
+.sponsors-list li img{ width:175px; height:auto;margin:15px 5px !important;}
+
+.share{ position:fixed; right:0px; top:40%;}
+.share h2{ float:left; margin-right:20px; font-family:roboto; font-size:18px; font-weight:normal; line-height:29px; padding:0;}
+.share ul{ float:left;}
+.share ul li{ list-style:none; text-align:center; padding:10px;}
+.share ul li.fb{ background-color:#3b5998;} .share ul li.tw{ background-color:#55acee;} .share ul li.gplus{ background-color:#DD4B38;}
+
+.left-panel{ width:640px; float:left; position:relative;}
+.logo{ width:642px; height:401px; margin:0  0 0 0;}
+.content{ width:574px; padding:20px 30px; background:#095ba0; border:3px solid #FFFFFF; margin-top:10px;}
+.content p{ font-size:18px; line-height:25px; color:#FFFFFF; font-family:roboto; font-weight:400}
+
+.content p span img{top:3px; left:5px; position:relative;}
+
+.content p span a{ color:#FFFFFF; text-transform:uppercase; text-decoration:none; font-weight:500; font-size:13px; display:block; margin-top:10px; text-align:right;}
+
+.live-video{margin-top:20px; min-height:418px;}
+.live-video h3{ color:#ed212a; font-size:18px; font-family:roboto; text-transform:uppercase; text-align:center; margin-top:20px;}
+.live-video h3 a{ text-decoration:none; color:#ed212a;}
+
+.outer_footer{float:left; width:100%; background:url(http://media2.intoday.in/indiatoday/makeinindia/footer-bg.jpg) repeat-x 0 0;}
+.footer-nav{ background:#FFFFFF; padding:15px 15px 15px 20px; float:left; border-radius:10px; margin:38px 0 30px 50px;}
+.footer-nav ul{margin:0; padding:0;}
+.footer-nav ul li{ list-style:none; margin-right:18px; border-right:1px solid #000; float:left;}
+.footer-nav ul li a{ font-family:roboto;  font-size:18px; color:#095ba0; padding-right:15px; text-decoration:none; text-transform:uppercase;}
+.footer-nav ul li a:hover{ color:#dd2429; text-decoration:none;}
+.footer-nav ul li:last-child{ border-right:none; margin-right:0}
+
+.right-pannel{ float:right; width:300px;}
+.right-add{margin-top:20px;}
+.right-add h4{ text-align:center; text-transform:uppercase; margin-bottom:8px; font-size:12px; font-weight:normal; width:300px; font-family:roboto}
+.twitter{margin-top:20px;}
+
+.aboutus{width:94%; background-color:#fff; min-height:560px; display:block; padding:0 3%; margin-top:0px;}
+.aboutus p{font-size:17px; line-height:24px; color:#303031; display:block; text-align:justify; font-weight:300; padding-bottom:10px} 
+.aboutus p a{text-decoration:none; color:#095ba0;}
+
+.innter_video_thumb{float:left; width:100%; margin-top:34px;}
+.innter_video_thumb ul{list-style:none;}
+.innter_video_thumb ul li{width:300px; min-height:168px; float:left; margin-right:40px; font-size:16px; line-height:20px; color:#033481;}
+.innter_video_thumb ul li a{color:#033481; text-decoration:none;}
+.innter_video_thumb ul li:last-child{margin-right:0;}
+
+.success{float:left; width:100%; margin-top:0px;}
+.success .box{background-color: #ffffff; box-shadow: 1px 2px 4px -2px #024a86; -webkit-box-shadow: 1px 2px 4px -2px #024a86; float: left; margin-bottom: 7px;min-height: 212px;padding: 0 3%; width: 94%;}
+.success .hgh{min-height:50px;}
+.success .box h2{padding:10px 0;}
+.success .box h3{font-size:18px; font-weight:bold; color:#474748; line-height:24px; display:block; text-transform:uppercase; padding:10px 0;}
+.success .box img{float:left; border:1px solid #dfdfe1; margin-right:15px;}
+.success .box p{display:block; font-size:15px; line-height:21px; color:#303031; font-weight:400; padding-bottom:12px;}
+
+.regis_outer{margin:5px auto 0; width:158px;}
+.regis_outer a.register{width:158px; height:36px; border-radius:5px; margin:0 auto; display:inline-block; background-color:#0b5a9c; font-size:18px; text-align:center; line-height:35px; text-decoration:none; color:#fff; font-weight:bold;}
+.buzz{float:left; width:100%; height:48px;}
+.twitter iframe{ float:left;}
+
+
+.b-heading{color:#043480; float:left; margin-top:-15px;}
+.visual-area { width:590px; margin:40px auto;  clear:both; height:260px; position:relative;}
+.visual-area #controls { float:right; margin-right:-19px; position:absolute; top:-23px; right:0px;}
+.visual-area #controls .v_left { font-size:30px; color:#999999; height:30px; float:left; cursor:pointer; background:#f2f2f2; border-radius:5px;line-height: 30px;  padding-left: 7px;  width: 23px; margin-right:5px; background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -149px -225px;}
+.visual-area #controls .v_right { font-size:30px; color:#999999; height:30px; float:right; cursor:pointer; background:#f2f2f2; border-radius:5px; line-height: 30px;
+    padding-left: 7px;  width: 23px; background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -179px -227px;}
+.visual-area .belt { width:590px; overflow:hidden; height:230px; }
+.visual-area .belt ul { position:relative;}
+.visual-area .belt ul li { float:left; margin-right:30px; list-style:none; width:280px;}
+.visual-area .belt ul li a { color:#043480; font-size:16px; text-decoration:none;}
+.visual-area .belt ul li a img { margin-bottom:10px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+body {
+    font-family: Arial;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+	background:#000000;
+}
+#wrapper {
+    margin: 0 auto;
+	width: 1002px;
+	background:#FFFFFF;
+	padding-top:5px;
+}
+.header{padding:0 5px;width: auto;}
+
+.itframes{background:url(http://media2.intoday.in/microsites/iframes/IT-Frames-red-bg.jpg) repeat-y; padding-bottom:40px;}
+.mastleft{float:left; width:862px;}
+.mastright{float:left; width:140px;}
+.masttext{background:url(http://media2.intoday.in/microsites/iframes/IT-Frames-intro-bg.gif) no-repeat; width:822px; height:126px; padding:10px 20px; color:#dbd9d9; font:20px arial;}
+.masttext a{color:#efa3a4; text-decoration:none;}
+.masttext a:hover{text-decoration:underline;}
+.margins{margin:0 10px 20px;}
+.framestorebg{background:url(http://media2.intoday.in/microsites/iframes/IT-Frames-band-bg.gif) repeat-x; height:37px;margin:0 10px; font:bold 16px/39px arial; color:#FFFFFF; padding:0 10px;}
+.framestorebg span{color:#A4090D;}
+.framestorebg img{margin-top:4px;}
+.framesinstore{background:url(http://media2.intoday.in/microsites/iframes/IT-Frames-black-bg.gif) repeat-x; height:303px; padding:10px;}
+.framelist {float: left;margin-right: 23px; width: 174px;}
+.framelist.last{margin-right:0;}
+.framelist .framedetail { border: 6px solid #760308; text-align: center; position: relative;}
+.framelist .pbuttom { bottom: -20px; left: 34px; position: absolute;}
+.framelist .framelisttitle{font:bold 16px arial; color:#FFFFFF;  text-align:center; margin-top:15px;}
+.framelist .framelisttitle a{text-decoration:none; color:#FFFFFF;}
+.framelist .framelisttitle a:hover{text-decoration:underline;}
+
+
+
+
+.downloadnow{color:#FFFFFF; font:14px arial;}
+.moreframes{background:url(http://media2.intoday.in/microsites/iframes/IT-Frames-bottom-black-bg.gif) repeat-x; height:138px; padding:10px;}
+.moreframesleft{float:left; width:285px; border-right:2px solid #4A4645;}
+.moretitle{font:bold 16px arial; color:#A4090D;}
+.moreframesleft ul{margin:10px 0; padding:0 0 0 20px;}
+.moreframesleft ul li{font:16px arial; color:#d5d5d5;}
+.moreframesleft ul li a{color:#d5d5d5;text-decoration:none;}
+.moreframesleft ul li a:hover{text-decoration:underline;}
+.moreframesright{float:right; width:660px; font:15px/19px arial;color:#a6a2a3; text-align:justify;}
+
+.feedback{background:#413F3F url(http://media2.intoday.in/microsites/iframes/grey_bg.gif) repeat-x; padding:10px;}
+.feedtitle{color: #FFFFFF; font: bold 16px/20px arial; margin-bottom:10px;}
+.feedtitle span{ color: #A4090D;}
+.feedleft{width:50%; float:left; border-right:2px solid #4A4645;}
+.feedright{width:49%; float:left;}
+.sendmsg{font:15px arial; color:#A6A2A3; margin-bottom:10px;}
+.fields{margin:4px;}
+.fields label{float:left; width:100px; line-height:15px; color:#FFFFFF; font:12 arial;}
+.fields input{width:200px; height:15px; text-align:left;}
+.fields .submitbutton{width:50px; padding:0 5px; margin:0; height:auto; cursor:pointer;}
+.disclaimer{font:12 arial; color:#FFFFFF; margin-top:10px;}
+
+.footerframes{width: 1002px; background:#000; margin:0 auto; padding-top:10px;}
+#footer{margin:0 auto; float:none; background:#FFF; padding:10px;}
+.addtitle{margin:0;}
