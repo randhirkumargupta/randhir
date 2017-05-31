@@ -1647,7 +1647,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'UGC Status',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1744,7 +1744,6 @@ function mail_templates_field_default_field_instances() {
   t('Task Status');
   t('Templates Category');
   t('UGC Comments Status');
-  t('UGC Status');
   t('Video Status');
 
   return $field_instances;
