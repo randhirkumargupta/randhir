@@ -167,7 +167,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
 
     // Set link for newsletter title
     if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {
-      $link = 'http://uat-it.indiatodayonline.in/node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+      $link = FRONT_URL . '/node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
     }
     else {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
@@ -247,7 +247,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       $thumbnail = $base_url . '/' . drupal_get_path('module', 'itg_newsletter') . '/image/no-image.png';
     }
 
-    $link = 'http://uat-it.indiatodayonline.in/node/' . $news_detail->nid;
+    $link = FRONT_URL . '/node/' . $news_detail->nid;
     
     $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
