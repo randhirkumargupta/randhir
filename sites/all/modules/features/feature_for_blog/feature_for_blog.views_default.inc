@@ -3725,6 +3725,13 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'itg-live-blog-row col-lg-12 col-md-12 col-sm-12 col-xs-12';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
   /* Field: Field: Small image */
   $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
@@ -3732,6 +3739,7 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['element_wrapper_class'] = 'itg-live-blog-image col-lg-3 col-md-3 col-sm-3 col-xs-3';
+  $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<a href="[path]" class="GoogleAnalyticsET-processed"><img width="170" height="127" src="/sites/all/themes/itg/images/itg_image170x127.jpg" alt=""></a>';
   $handler->display->display_options['fields']['field_story_small_image']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
