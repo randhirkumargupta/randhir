@@ -955,30 +955,58 @@ function itg_msi_calendar_data() {
 }
 
 /**
+ * Implement function for get last issue of year in calander
+ */
+function itg_msi_last_issue_calendar($current_year) {
+  $present_date = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('ft.field_issue_title_value', '%' . db_like($current_year) . '%', 'LIKE');
+  $query->condition('ft.field_issue_title_value', $present_date, '<');
+  $query->orderBy('ft.field_issue_title_value', 'DESC');
+  $query->range(0, 1);
+  $output = $query->execute()->fetchField();
+  $result = strtotime($output);
+  return date('d-m-Y', $result);
+}
+
+/**
  * Implements function for get current or running issue date in view
  * @return string
  */
 function itg_msi_last_week_issue() {
-    $current_issue = itg_msi_get_current_time_issue();
-    $cur_year = date('Y');
-    if (is_numeric(arg(2)) && arg(2) == $cur_year && arg(1) == 0 && arg(0) == 'calendar') {
-        $output = itg_msi_get_current_issue();
+    if(arg(0) == 'magazine' && empty(arg(1))){
+      $output = itg_msi_get_current_issue();
     }
-    elseif (arg(1) == 0 && is_numeric(arg(2)) && arg(2) != $cur_year && arg(0) == 'calendar') {
-        $current_year = arg(2);
-        $query = db_select('field_data_field_issue_title', 'ft');
-        $query->fields('ft', array('field_issue_title_value'));
-        $query->condition('ft.field_issue_title_value', '%' . db_like($current_year) . '%', 'LIKE');
-        $query->orderBy('ft.field_issue_title_value', 'DESC');
-        $query->range(0, 1);
-        $output = $query->execute()->fetchField();
-    }
-    elseif (arg(1) != 0 && is_numeric(arg(2)) && arg(0) == 'calendar') {
-        $node = node_load(arg(1));
-        $output = $node->title;
+    elseif (arg(0) == 'magazine' && !empty(arg(1))) {
+        if(itg_msi_validate_date(arg(1), 'd-m-Y')) {
+          $issue_date_time = strtotime(arg(1));
+          $issue_date = date('Y-m-d', $issue_date_time);
+        }else{
+          $issue_date = date('Y-m-d', time());
+        }
+        $output = $issue_date.' 00:00:00';
+//        $query = db_select('field_data_field_issue_title', 'ft');
+//        $query->fields('ft', array('field_issue_title_value'));
+//        $query->condition('ft.field_issue_title_value', '%' . db_like($issue_date) . '%', 'LIKE');
+//        $query->orderBy('ft.field_issue_title_value', 'DESC');
+//        //$query->range(0, 1);
+//        $output = $query->execute()->fetchField();
     }
     $result = explode(' 00:', $output);
     return $result[0];
+}
+
+/**
+ * Implement function for check date
+ * @param str $date
+ * @param str $format
+ * @return bool
+ */
+function itg_msi_validate_date($date, $format = 'Y-m-d H:i:s')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
 
 /**

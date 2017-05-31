@@ -21,7 +21,6 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-
 global $base_url;
 $arg = arg();
 
@@ -34,7 +33,7 @@ if ($field->view->name == 'speaker_option_for_event'
   print $output;
   
 } elseif (
-    (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'event_backend' || $row->_field_data['nid']['entity']->type == 'itg_funalytics'
+    (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'itg_funalytics'
     ) || $arg[0] == 'menu-manager'
  ) {
   print $output;
@@ -45,6 +44,7 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
     $row->_field_data['nid']['entity']->type == 'mega_review_critic' ||
     $row->_field_data['nid']['entity']->type == 'podcast' ||
     $row->_field_data['nid']['entity']->type == 'story' ||
+    $row->_field_data['nid']['entity']->type == 'event_backend' ||
     $row->_field_data['nid']['entity']->type == 'breaking_news') ) {
 
   if ( isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0 ) {
@@ -52,8 +52,14 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
   }
   else {
     if ( BACKEND_URL == $base_url ) {
-      $node_url = FRONT_URL . '/node/' . $row->nid;
-      print '<a href="' . $node_url . '" target="_blank">' . strip_tags($output) . '</a>';
+      if($row->_field_data['nid']['entity']->type == 'event_backend') {
+        $event_url_alias = drupal_get_path_alias($path = 'node/'.$row->nid, $path_language = NULL);
+        $event_register_url = FRONT_URL.'/'.$event_url_alias.'/'.'registration';
+        print '<a href="' . $event_register_url . '" target="_blank">' . strip_tags($output) . '</a>';
+      }else{
+        $node_url = FRONT_URL . '/node/' . $row->nid;
+        print '<a href="' . $node_url . '" target="_blank">' . strip_tags($output) . '</a>';
+      }
     }
     else {
       print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
