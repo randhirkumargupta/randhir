@@ -14,12 +14,13 @@
  * */
 function itg_auto_search_menu() {
     $items = array();
-    $items['admin/import-auto'] = array(
+    $items['admin/config/content/import-auto'] = array(
       'title' => 'Import Auto', 
       'description' => 'Import Auto',
       'page callback' => 'drupal_get_form', 
       'page arguments' => array('import_auto_form'), 
-      'access callback' => TRUE
+      'access callback' => 'user_access',
+      'access arguments' => array('administer users'),
     );
     $items['auto/compare/%/%'] = array(
       'title' => 'Auto', 
