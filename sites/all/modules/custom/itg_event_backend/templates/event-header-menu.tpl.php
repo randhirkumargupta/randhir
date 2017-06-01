@@ -15,6 +15,7 @@ if($arg[0] == 'event') {
 $node = itg_event_backend_get_event_node('node');
 if (!empty($node) && ($node->type == 'event_backend')) {
   $event_start_date = date('F d, Y', strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']));
+  $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $event_location = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   $event_config_home = $node->field_config_home[LANGUAGE_NONE][0]['value'];
   $event_config_programme = $node->field_config_programme[LANGUAGE_NONE][0]['value'];
@@ -57,9 +58,9 @@ if (!empty($node) && ($node->type == 'event_backend')) {
             if ($event_config_speakers) {
               print '<li>'.l('Speakers', $baseurl.'/speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
-
-            print '<li>'.l('Registration', $baseurl.'/registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-
+            if($registration_close >= time()) {
+              print '<li>'.l('Registration', $baseurl.'/registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+            }
             if ($event_config_sponsors) {
               print '<li>'.l('Sponsors', $baseurl.'/sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }

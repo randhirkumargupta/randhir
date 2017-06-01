@@ -8,6 +8,11 @@ if (!empty($arg1) && is_numeric($arg1)) {
   $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
   $host_node = menu_get_object("node", 1, $path);
 }
+$actual_host_name = itg_event_get_host_name();
+
+if($actual_host_name) {
+  $baseurl = $actual_host_name.'/';
+}
 // Css variables
 $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
@@ -36,7 +41,8 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
      }
     
      if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
-         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>Powered By</span><img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div></div>';
+         $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
+         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details',  array('attributes' => array('target' => '_blank'),'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)).'</div></div>';
      }
      
      $row_count = count($rows);

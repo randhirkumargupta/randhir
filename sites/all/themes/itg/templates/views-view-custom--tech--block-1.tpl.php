@@ -57,7 +57,7 @@
   <div class="col-md-4">
     <div class="auto-block-2">
       <div class="special-top-news">
-
+        <div class="itg-listing-wrapper">
         <ul class="itg-listing">   
           <?php
           foreach ($rows as $index => $row) {
@@ -74,7 +74,7 @@
 <?php } ?>
 
         </ul>
-
+        </div>
       </div>
     </div>
   </div>

@@ -3146,3 +3146,29 @@ img{
     font-size: 16px;
     /* background: #ddd; */
 }
+.itg-layout-container.default-section{
+    .auto-block-2{
+        position: relative;
+        .special-top-news {
+            overflow: hidden;            
+            height: 100%;
+            .widget-title{
+                position: absolute;
+            }
+            .itg-listing-wrapper{
+              margin-top: 22px !important;
+              overflow: auto;
+              height: 100%;
+              ul{
+                padding: 0 !important;
+              }
+            }
+        }
+    }
+    .itg-listing, .featured-news{
+        border: none;
+    }    
+    .itg-top-section .top-colum-2 .droppable{
+        margin-bottom: 0;
+    }
+}

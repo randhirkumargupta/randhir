@@ -12,7 +12,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $clone_arr = itg_story_clone_data($_GET['clone_id'], 'story');
         $clone_arr_response = $clone_arr->response->docs[0];
         $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
-        $kicker = html_entity_decode($clone_arr_response->sm_field_story_kicker_text[0], ENT_QUOTES);
+        $kicker = html_entity_decode($clone_arr_response->sm_common_kicker_text[0], ENT_QUOTES);
 
         // code to assign image on clone story
         $image_array = array('sm_field_custom_story_extra_large_url',

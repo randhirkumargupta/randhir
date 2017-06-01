@@ -1516,10 +1516,6 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['status']['label'] = 'Status';
   $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Content statistics: Total views */
-  $handler->display->display_options['fields']['totalcount']['id'] = 'totalcount';
-  $handler->display->display_options['fields']['totalcount']['table'] = 'node_counter';
-  $handler->display->display_options['fields']['totalcount']['field'] = 'totalcount';
   /* Field: Workbench Moderation: State */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';

@@ -128,5 +128,12 @@ function feature_for_searchimage_strongarm() {
   $strongarm->value = 1;
   $export['node_submitted_itg_solr_video'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_itg_solr_video_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_itg_solr_video_pattern'] = $strongarm;
+
   return $export;
 }

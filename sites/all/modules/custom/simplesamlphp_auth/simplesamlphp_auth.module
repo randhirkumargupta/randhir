@@ -292,6 +292,7 @@ function simplesamlphp_auth_init() {
               $fname = _simplesamlphp_auth_get_fname();
               $lname = _simplesamlphp_auth_get_lname();
               $twitterimage = _simplesamlphp_auth_get_twitterimage();
+              $dob = _simplesamlphp_auth_get_dob();
               $fid = simplesaml_twitter_image($twitterimage);
               $userinfo = array('roles' => $roles, 'field_first_name' => array(
                 LANGUAGE_NONE => array(
@@ -314,6 +315,18 @@ function simplesamlphp_auth_init() {
                   )
                 )
               ));
+              
+              if (!empty($dob)) {
+                $fb_dob = strtotime($dob);
+                $fb_dob = date('Y-m-d 00:00:00', $fb_dob);
+                $userinfo['field_story_issue_date'] = array(
+                  LANGUAGE_NONE => array(
+                    0 => array(
+                      'value' => $fb_dob
+                    )
+                  )
+                );
+              }
               //$userinfo = array('roles' => $roles);
               $user = user_save($user, $userinfo); // @todo - Fjernet rolle-delen her da den gav en bra feilmelding når roller ikke finnes ;)
             }
@@ -1030,10 +1043,10 @@ function _simplesamlphp_auth_get_lname() {
 }
 
 /**
- * Gets the last name attribute.
+ * Gets the twitter image attribute.
  *
  * @return
- *   The last name attribute.
+ *   The twitter image attribute.
  */
 function _simplesamlphp_auth_get_twitterimage() {
   global $_simplesamlphp_auth_as;
@@ -1062,6 +1075,38 @@ function _simplesamlphp_auth_get_twitterimage() {
   }
 
   return $twitterimage;
+}
+
+/**
+ * Gets the dob attribute.
+ *
+ * @return
+ *   The dob attribute.
+ */
+function _simplesamlphp_auth_get_dob() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $dob = '';
+  global $seg;
+  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.birthday']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['facebook.birthday'];
+  }
+  else {
+   $seg = '';
+  }
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $dob = $seg[0];
+    }
+    else {
+      $dob = '';
+    }
+  }
+
+  return $dob;
 }
 
 /**
@@ -1304,12 +1349,14 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  * Helper function for image upload
  */
 function simplesaml_twitter_image($url) {
-  $imagedata = file_get_contents($url);
-  $image_url = 'itg' . time() . end(explode('/', $url));
-  $image_extension = end(explode('.', $image_url));
-  $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-  $file = file_load($file_data_temp->fid);
-  file_usage_add($file, 'itg_sso_image', 'file', 4);
+  if (!empty($url)) {
+    $imagedata = file_get_contents($url);
+    $image_url = 'itg' . time() . end(explode('/', $url));
+    $image_extension = end(explode('.', $image_url));
+    $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+    $file = file_load($file_data_temp->fid);
+    file_usage_add($file, 'itg_sso_image', 'file', 4);
 
-  return $file_data_temp->fid;
+    return $file_data_temp->fid;
+  }
 }

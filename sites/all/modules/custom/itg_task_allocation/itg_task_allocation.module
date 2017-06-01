@@ -352,13 +352,13 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     }
   }
   if ($event != 'comment') {
-    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, 'node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
+    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, $base_url . '/node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
     $assigned_by = str_replace('[itg_mail_token:itg_loggedin_user]', $user_name, $body);
     $idea = str_replace('[itg_mail_token:itg_node_body]', $your_idea, $assigned_by);
     $idea_last_date = str_replace('[itg_mail_token:itg_task_date_time]', $finish_date, $idea);
     $mail_content = $idea_last_date;
   } else {
-    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, 'node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
+    $body = str_replace('[itg_mail_token:itg_node_title]', l($node->title, $base_url . '/node/'.$node->nid), $mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value']);
     $assigned_by = str_replace('[itg_mail_token:itg_task_comment]', $node->comment_value, $body);
     $mail_content = $assigned_by;
   }
@@ -449,7 +449,7 @@ function itg_task_allocation_node_validate($node, $form, &$form_state) {
  */
 function get_task_count_of_user() {
   global $user;
-
+  
   $start = date('Y-m-d H:i:s');
   $end = date('Y-m-d H:i:s', strtotime('+1 day'));
 
@@ -472,6 +472,12 @@ function get_task_count_of_user() {
 function get_task_notification_of_user() {
   global $user;
   $string = '';
+  if (function_exists('get_idea_notification_of_user')) {
+    $idea_data = get_idea_notification_of_user();
+  }
+  if (!empty($idea_data)) {
+    $string.=$idea_data;
+  }
   $string.="<ul>";
   $start = date('Y-m-d H:i');
   $end = date('Y-m-d H:i', strtotime('+1 day'));

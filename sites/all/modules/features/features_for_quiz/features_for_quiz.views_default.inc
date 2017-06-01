@@ -166,12 +166,10 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Quiz Title';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'itg-quiz/[nid_3]';
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_2']['id'] = 'nid_2';
   $handler->display->display_options['fields']['nid_2']['table'] = 'node';
@@ -185,7 +183,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -198,7 +196,7 @@ function features_for_quiz_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -277,7 +275,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Survey Expiry Date */
+  /* Field: Content: Quiz Expiry Date */
   $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
