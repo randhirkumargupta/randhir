@@ -226,5 +226,12 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('itg_nofollow_fields'),
   );
   
+  $form['current_site_hash'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Current site Hash configuration For online archive story'),
+    '#attributes' => array('placeholder' => t('Enter Current site hash')),
+    '#default_value' => variable_get('current_site_hash'),
+  );
+  
   return system_settings_form($form);
 }
