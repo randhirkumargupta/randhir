@@ -5,6 +5,7 @@
  */
 function itg_akamai_settings() {
   $form = array();
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['itg_akamai_host_map'] = array(
     '#type' => 'fieldset',
@@ -87,6 +88,7 @@ function itg_akamai_settings() {
  */
 function itg_akamai_cache_control() {
   $form = array();
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['paths'] = array(
     '#type' => 'textarea',
@@ -141,17 +143,19 @@ function itg_akamai_cache_control_submit($form, &$form_state) {
  * Implements hook_form().
  */
 function itg_akamai_cache_akamai_log($form, &$form_state) {
+  $form['#attributes']['class'][] = 'node-form';
+
   $form['fieldset'] = array(
     '#type' => 'fieldset',
     '#title' => t('Search Akamai Log'),
   );
-  
+
   $form['fieldset']['markup1'] = array(
-    '#markup' => '<p>'.l('Click here for node report where TTL is not set(But globally set)','admin/config/system/itg_akamai/akamai_not_implemented').'</p>',
+    '#markup' => '<p>' . l('Click here for node report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamai_not_implemented') . '</p>',
   );
-  
+
   $form['fieldset']['markup2'] = array(
-    '#markup' => '<p>'.l('Click here for section report where TTL is not set(But globally set)','admin/config/system/itg_akamai/akamais_not_implemented').'</p>',
+    '#markup' => '<p>' . l('Click here for section report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamais_not_implemented') . '</p>',
   );
 
   $form['fieldset']['purge_id'] = array(
@@ -281,6 +285,9 @@ function itg_akamai_all_logs_rows() {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
     ),
     array(
       '#theme' => 'pager',
@@ -310,21 +317,38 @@ function itg_akamai_cache_akamai_ccpurge() {
   $allnodes = node_type_get_types();
   $sn = 1;
   // This is the restricted_cc
-   $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   foreach ($allnodes as $key => $value) {
     if (in_array($value->type, $mapping)) {
       $rows[] = array(
         $sn++,
         $value->name . ' - ' . $value->type,
-        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal button'))),
-        l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => 'button'))),
+        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal'))),
+        l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => ''))),
       );
     }
   }
-  $output = theme('table', array('header' => $header, 'rows' => $rows));
+  
 
+    
+   $render_array['akamai_cache_logs_s_nid'] = array(
+    array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
+    ),
+    array(
+      '#theme' => 'pager',
+    ),
+  );
+
+  
   $form['itg_akamai_cc_holder']['options'] = array(
-    '#markup' => $output,
+    '#markup' => render($render_array),
   );
   return $form;
 }
@@ -369,6 +393,7 @@ function itg_akamai_cache_akamai_ccpurge_settings($ajax, $type) {
 function akamai_cc_frm_form($form, $form_state) {
   $form = array();
   $type = arg(6);
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['itg_akamai_setting'] = array(
     '#type' => 'fieldset',
@@ -449,6 +474,7 @@ function itg_akamai_cache_akamai_ccpurge_clear() {
 function akamai_cc_clear_frm_form($form, $form_state) {
   $form = array();
   $type = arg(5);
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['itg_akamai_setting'] = array(
     '#type' => 'fieldset',
@@ -561,6 +587,7 @@ function akamai_cc_clear_ct_op_batch_finished($success, $results, $operations) {
  */
 function itg_akamai_cache_akamai_section() {
   $form = array();
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['itg_akamai_section'] = array(
     '#type' => 'fieldset',
@@ -600,6 +627,7 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
 
 
   $form = array();
+  $form['#attributes']['class'][] = 'node-form';
 
   $form['itg_akamai_homepage'] = array(
     '#type' => 'fieldset',
@@ -908,6 +936,9 @@ function itg_akamai_akamai_not_implemented_rows() {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
     ),
     array(
       '#theme' => 'pager',
@@ -916,7 +947,6 @@ function itg_akamai_akamai_not_implemented_rows() {
 
   return $render_array;
 }
-
 
 /**
  * Implements itg_akamai_akamai_not_implemented_rows()
@@ -972,6 +1002,9 @@ function itg_akamai_akamais_not_implemented_rows() {
       '#header' => $header,
       '#rows' => $rows,
       '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
     ),
     array(
       '#theme' => 'pager',
