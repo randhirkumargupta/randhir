@@ -3,7 +3,7 @@
 
 /**
  * Implements hook_schema().
- */
+ */ 
 function itg_device_notification_schema() {
 
 $schema = array();
