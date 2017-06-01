@@ -230,7 +230,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if(!empty($current_hash)) {
       $hash = $current_hash;
     } else {
-      $hash = '9m4hke';
+      watchdog('Solr_hash_message', 'Please enter hash value of current site solr configuration in custom variable setting');
     }
     // case for empty argument
     if (empty($arg[1])) {

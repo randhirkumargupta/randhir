@@ -149,7 +149,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     if(!empty($current_hash)) {
       $hash = $current_hash;
     } else {
-      $hash = '9m4hke';
+      watchdog('Solr_hash_message', 'Please enter hash value of current site solr configuration in custom variable setting');
     }
     
     if (empty($arg[1])) {
@@ -272,7 +272,7 @@ function itg_front_search_views_pre_render(&$view) {
         $lnk_class = "active";
       }
       unset($_GET['page']); //remove page no.
-      $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
+      $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => array($lnk_class)))) . ' ';
     }
 
     $form['suggest_links'] = array(
@@ -317,7 +317,7 @@ function itg_front_search_views_pre_render(&$view) {
         $lnk_class = "active";
       }
       unset($_GET['page']); //remove page no.
-      $url .= l($val, $search_url . '/' . $arg[1] . '/' . $key, array('attributes' => array('class' => $lnk_class))) . ' ';
+      $url .= l($val, $search_url . '/' . $arg[1] . '/' . $key, array('attributes' => array('class' => array($lnk_class)))) . ' ';
     }
 
     $form['suggest_links'] = array(
@@ -348,16 +348,18 @@ function itg_front_search_views_pre_render(&$view) {
     $bundle_name = array('Story' => 'STORIES', 'photogallery' => 'PHOTO', 'Videogallery' => 'VIDEO');
     $search_url = 'archives';
     $archive_search = '';
+    $archive_url = '';
+    $arch_class = '';
     foreach ($bundle_name as $key => $val) {
       $arch_class = '';
-      if (in_array($key, $arg[1])) {
+      if (count($arg) == 1 && $key == 'Story') {
         $arch_class = "active";
-      } else if($key == 'Story' && empty($arg[1])){
+      }else if (count($arg) && in_array($key, $arg)) {
         $arch_class = "active";
-      } 
+      }
       unset($_GET['page']); //remove page no.
       $curr_date = date('d-m-Y');
-      $archive_url .= l($val, $search_url . '/' . $key.'/'.$curr_date, array('attributes' => array('class' => $arch_class))) . ' ';
+      $archive_url .= l($val, $search_url . '/' . $key.'/'.$curr_date, array('attributes' => array('class' => array($arch_class)))) . ' ';
     }
 
     $form['suggest_links'] = array(
