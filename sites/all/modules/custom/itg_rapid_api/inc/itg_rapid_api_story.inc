@@ -215,7 +215,8 @@ $caption = getImgCaption($large_image_fid);
 $getHighlight_ar = getHighlight($node);
 $getHighlight_str = "";
 foreach ($getHighlight_ar as $key => $value) {
-    $getHighlight_str .="<li>".$value."</li>";
+    $text = $value['h_title'];
+    $getHighlight_str .="<li>".$text."</li>";
 }
 $output = '';
 $output .='<div class="story-section">
