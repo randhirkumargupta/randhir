@@ -418,10 +418,7 @@ function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_
 /**
  * Function is responsible to updating analytics data into table.
  */
-function itg_update_analytics_node_count_data($newsletter_content) {
-  if (!empty($newsletter_content) && $newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
-    $most_popular_nodes = _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content);
-  }
+function itg_update_analytics_node_count_data() {
   
   $most_popular_nodes = _get_most_popular_nodes_based_on_analytics();
   // Frist delete all the data from table.

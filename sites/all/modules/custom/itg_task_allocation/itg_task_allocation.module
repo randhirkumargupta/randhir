@@ -449,7 +449,7 @@ function itg_task_allocation_node_validate($node, $form, &$form_state) {
  */
 function get_task_count_of_user() {
   global $user;
-
+  
   $start = date('Y-m-d H:i:s');
   $end = date('Y-m-d H:i:s', strtotime('+1 day'));
 
@@ -472,6 +472,12 @@ function get_task_count_of_user() {
 function get_task_notification_of_user() {
   global $user;
   $string = '';
+  if (function_exists('get_idea_notification_of_user')) {
+    $idea_data = get_idea_notification_of_user();
+  }
+  if (!empty($idea_data)) {
+    $string.=$idea_data;
+  }
   $string.="<ul>";
   $start = date('Y-m-d H:i');
   $end = date('Y-m-d H:i', strtotime('+1 day'));

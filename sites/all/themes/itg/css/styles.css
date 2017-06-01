@@ -14276,6 +14276,12 @@ span.close_btt {
   text-decoration: none;
 }
 
+.blog-description p {
+  font-size: 15px;
+  line-height: 27px;
+  padding: 10px 0;
+}
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share {
