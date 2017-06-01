@@ -12,6 +12,7 @@
  * @return bool
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
+
 // Mail Content Frequency
    $current_date = time();
    $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
@@ -234,10 +235,9 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   }
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
-
-    $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+    
+    $title = $news_detail->title;
     $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-
     if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
