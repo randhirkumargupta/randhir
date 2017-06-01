@@ -15,7 +15,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Expert Case',
+    'description' => 'Expert Cases',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -54,7 +54,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'CMS Status',
+    'description' => 'CMS Status ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -729,7 +729,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'UGC Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -771,7 +771,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'CMS Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -855,7 +855,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Expert Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -898,7 +898,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Follow Story Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -940,7 +940,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Loyalty Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -983,7 +983,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Password Chnaged Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1026,7 +1026,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'CMS Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1068,7 +1068,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'CMS Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1110,7 +1110,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Print Team Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1153,7 +1153,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Product Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1196,7 +1196,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Quiz Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1238,7 +1238,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Signup Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1280,7 +1280,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'CMS Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1323,7 +1323,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'Task/Idea Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1365,7 +1365,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mail Subject',
+    'description' => 'CMS Mail Subject',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1412,7 +1412,7 @@ function mail_templates_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Templates Category',
+    'description' => 'Mail Templates Category',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1451,7 +1451,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Task Status',
+    'description' => 'Task/Idea Status',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1490,7 +1490,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'CMS Status',
+    'description' => 'CMS Status ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1529,7 +1529,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'CMS Status',
+    'description' => 'CMS Status ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1569,7 +1569,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Product Status',
+    'description' => 'Products Status',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1608,7 +1608,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'CMS Status',
+    'description' => 'CMS Status ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1647,7 +1647,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'UGC Status',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1686,7 +1686,7 @@ function mail_templates_field_default_field_instances() {
     'bundle' => 'mail_templates',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'CMS Status',
+    'description' => 'CMS Status ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1724,8 +1724,12 @@ function mail_templates_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Ask an Expert Case');
   t('Blog Status');
-  t('CMS Status');
-  t('Expert Case');
+  t('CMS Mail Subject');
+  t('CMS Status ');
+  t('Expert Cases');
+  t('Expert Mail Subject');
+  t('Follow Story Mail Subject');
+  t('Loyalty Mail Subject');
   t('Mail Body');
   t('Mail Body Expert');
   t('Mail Body Follow Story');
@@ -1736,14 +1740,21 @@ function mail_templates_field_default_field_instances() {
   t('Mail Subject Task/Idea');
   t('Mail Templates Category');
   t('New Task Status');
+  t('Password Chnaged Mail Subject');
   t('Photo Gallery Status');
   t('Podcast Status');
+  t('Print Team Mail Subject');
   t('Product Expiration Status');
-  t('Product Status');
+  t('Product Mail Subject');
+  t('Products Status');
+  t('Quiz Mail Subject');
+  t('Signup Mail Subject');
   t('Story Status');
-  t('Task Status');
-  t('Templates Category');
+  t('Task/Idea Mail Subject');
+  t('Task/Idea Status');
   t('UGC Comments Status');
+  t('UGC Mail Subject');
+  t('UGC Status');
   t('Video Status');
 
   return $field_instances;
