@@ -1054,17 +1054,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: Search */
-  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['group'] = 1;
-  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
-  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
+  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['label']['group'] = 1;
+  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
+  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -1090,6 +1091,9 @@ function feature_for_searchimage_views_default_views() {
     24 => 0,
     25 => 0,
     26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
@@ -1126,46 +1130,6 @@ function feature_for_searchimage_views_default_views() {
     23 => 0,
     22 => 0,
     24 => 0,
-  );
-  /* Filter criterion: Apache Solr: label */
-  $handler->display->display_options['filters']['label']['id'] = 'label';
-  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['label']['field'] = 'label';
-  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
-  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
-  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
-  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
-  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-    22 => 0,
-    24 => 0,
-    25 => 0,
-    26 => 0,
-    27 => 0,
-    29 => 0,
-    28 => 0,
   );
   $handler->display->display_options['path'] = 'search-publish-video-radio';
   $export['searchimage'] = $view;
