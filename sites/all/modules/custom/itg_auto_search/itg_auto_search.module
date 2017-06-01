@@ -14,18 +14,18 @@
  * */
 function itg_auto_search_menu() {
     $items = array();
-    $items['admin/import-auto'] = array(//this creates a URL that will call this form at "examples/form-example"
-      'title' => 'Import Auto', //page title
+    $items['admin/import-auto'] = array(
+      'title' => 'Import Auto', 
       'description' => 'Import Auto',
-      'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
-      'page arguments' => array('import_auto_form'), //put the name of the form here
+      'page callback' => 'drupal_get_form', 
+      'page arguments' => array('import_auto_form'), 
       'access callback' => TRUE
     );
-    $items['auto/compare/%/%'] = array(//this creates a URL that will call this form at "examples/form-example"
-      'title' => 'Auto', //page title
+    $items['auto/compare/%/%'] = array(
+      'title' => 'Auto', 
       'description' => 'Auto compare',
-      'page callback' => 'auto_compare_result', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
-      'page arguments' => array('import_auto_form'), //put the name of the form here
+      'page callback' => 'auto_compare_result', 
+      'page arguments' => array('import_auto_form'),
       'access callback' => TRUE
     );
     return $items;
@@ -176,7 +176,7 @@ function import_auto_form_submit($form, &$form_state) {
 }
 
 /**
- * {@inheritdoc}
+ * 
  * hook_block_info()
  * @return array
  */
@@ -251,7 +251,7 @@ function itg_auto_search_block_view($delta = '') {
 }
 
 /**
- * {@inheritdoc}
+ * 
  * hook_theme()
  * @return array
  */
@@ -268,7 +268,6 @@ function itg_auto_search_theme() {
 /**
  * This function display auto compare form
  * Implements hook_form().
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  */
@@ -431,7 +430,6 @@ function auto_master_form($form, $form_state) {
 
 /**
  * This function use as ajax callback for Auto range
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  * @return array
@@ -455,7 +453,6 @@ function get_auto_price_range_dropdown($form, &$form_state) {
 
 /**
  * This function use as ajax callback for Model
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  * @return array
@@ -480,7 +477,6 @@ function get_auto_model_dropdown($form, &$form_state) {
 
 /**
  * This function use as ajax callback for Auto range (Right side form)
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  * @return array
@@ -504,7 +500,6 @@ function get_auto_price_range_2_dropdown($form, &$form_state) {
 
 /**
  * This function use as ajax callback for Model (Right side form)
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  * @return array
@@ -529,7 +524,6 @@ function get_auto_model_2_dropdown($form, &$form_state) {
 
 /**
  * This function used to get data from itg_autotoday table
- * {@inheritdoc}
  * @param array $condition_data
  * @param array $fields
  * @return array
@@ -559,7 +553,6 @@ function get_data_from_autoindia($condition_data = array(), $fields = array(), $
 
 /**
  * This function use to generate compare slug and redirect to generated url.
- * {@inheritdoc}
  * @param array $form
  * @param array $form_state
  * 
@@ -603,7 +596,6 @@ function auto_master_form_submit($form, &$form_state) {
 
 /**
  * This function use to generate slug from string.
- * {@inheritdoc}
  * @param string $str
  * @param string $delimiter
  * @return string generated slug
