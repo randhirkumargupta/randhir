@@ -429,9 +429,14 @@ function itg_videogallery_custom_submit($form, &$form_state) {
               ->condition('video_id', $file_video[0]->solr_video_id, '=')
               ->execute();
 // update nid in video
+          $is_node_draft = 0;
+          if ($form_state['node']->status == 0) {
+            $is_node_draft = 1;
+          }
           $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
               ->fields(array(
                 'nid' => $node_id,
+                'is_node_draft' => $is_node_draft,
               ))
               ->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=')
               ->execute();
@@ -544,9 +549,14 @@ function itg_videogallery_node_insert($node) {
                   ->condition('video_id', $file_video[0]->solr_video_id, '=')
                   ->execute();
 // update nid in video
+              $is_node_draft = 0;
+              if ($node->status == 0) {
+                $is_node_draft = 1;
+              }
               $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
                   ->fields(array(
                     'nid' => $node_id,
+                    'is_node_draft' => $is_node_draft,
                   ))
                   ->condition('fid', $fids, '=')
                   ->execute();
@@ -554,10 +564,10 @@ function itg_videogallery_node_insert($node) {
           }
         }
         if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
-          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid']);
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'], $is_node_draft);
         }
         if ($node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'] != 0) {
-          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid']);
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'], $is_node_draft);
         }
         break;
     }
@@ -567,75 +577,14 @@ function itg_videogallery_node_insert($node) {
 /**
  * This function use for upadet node id in itg_solr_video_info table after by fid when node is update and insert
  */
-function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
+function itg_videogallery_update_node_id_for_video_fid($node_id, $fids, $is_node_draft) {
   $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
       ->fields(array(
         'nid' => $node_id,
+        'is_node_draft' => $is_node_draft,
       ))
       ->condition('fid', $fids, '=')
       ->execute();
-}
-
-function itg_videogallery_entity_insert($entity, $type) {
-
-  if ($type == 'node') {
-    if ($entity->type == 'itg_solr_video' || $entity->type == 'itg_delete_solr_video') {
-
-      _custom_helper_apachesolr_index_immediately($entity, $type);
-    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
-  }
-}
-
-function itg_videogallery_entity_update($entity, $type) {
-
-  if ($type == 'node') {
-    if ($entity->type == 'itg_solr_video' || $entity->type == 'itg_delete_solr_video') {
-
-      _custom_helper_apachesolr_index_immediately($entity, $type);
-    }// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet
-  }
-}
-
-/**
- * Helper function to send entities to apachesolr for immediate index.
- */
-function _custom_helper_apachesolr_index_immediately($entity, $type) {
-  // Don't index unpublished entities
-
-
-  $env_id = apachesolr_default_environment();
-  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
-
-  // Check if entity should be indexed
-  $info = entity_get_info($type);
-  if (!empty($info['entity keys']['bundle'])) {
-    $bundle = $entity->{$info['entity keys']['bundle']};
-  }
-  else {
-    $bundle = $type;
-  }
-
-  if (!in_array($bundle, $bundles_to_index)) {
-    return;
-  }
-
-  // Entity should be indexed, so send it to solr
-  $ids = entity_extract_ids($type, $entity);
-  $id = $ids[0];
-
-  // If this entity is unpublished, remove from index
-  if ($entity->status != 1) {
-    apachesolr_remove_entity($env_id, $type, $id);
-    return;
-  }
-
-  $item = new stdClass();
-  $item->entity_type = $type;
-  $item->entity_id = $id;
-
-  module_load_include('inc', 'apachesolr', 'apachesolr.index');
-  $doc = apachesolr_index_entity_to_documents($item, $env_id);
-  apachesolr_index_send_to_solr($env_id, $doc);
 }
 
 /**
@@ -1139,6 +1088,13 @@ function itg_videogallery_menu() {
     'access arguments' => array('authorized user dailymotion credin'),
     'type' => MENU_CALLBACK,
   );
+  $items['solrindex-entity'] = array(
+    'title' => 'Solr Index Entity  Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_solr_index_entity_form'),
+    'access arguments' => array('authorized user dailymotion credin'),
+    'file' => 'includes/itg_videogallery.inc',
+  );
   $items['dailymotion/ftp/config'] = array(
     'title' => 'Ftp Configuration',
     'page callback' => 'drupal_get_form',
@@ -1625,7 +1581,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL','S3' => 'S3'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -2108,6 +2064,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_video_update_embeded_url',
   );
+  $items['video-draft-video-check'] = array(
+    'description' => 'This crone use for Update video id embeded.',
+    'callback' => 'itg_videogallery_video_draft_node_check',
+  );
   return $items;
 }
 
@@ -2118,12 +2078,15 @@ function itg_videogallery_thumb_url() {
 
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
+  $db_or = db_or();
+  $db_or->condition('encoding_progress', '100', '!=');
+  $db_or->condition('drd.publishing_progress', '100', '!=');
+  $query->condition($db_or);
   $result = $query->execute()->fetchAll();
-
   $api = itg_videogallery_dailymotion_api();
   foreach ($result as $val) {
     try {
-      if ($val->encoding_progress != "100") {
+      if ($val->encoding_progress != "100" || $val->publishing_progress != "100") {
         $thumb_url = $api->get(
             '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
         );
@@ -2463,20 +2426,18 @@ function itg_videogallery_move_ftp_videos() {
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
-  $query->condition('type', 'S3', '=');
-  
-  
   $result = $query->execute()->fetchall();
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-
+  $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
+  $ftp_move_archive = variable_get('ftp_move_archive', '');
   foreach ($result as $ke => $vid) {
 
     if ($vid->type == 'ftp') {
       $datefolder = date('Y-m', $vid->upload_time);
-      $file_name = '/public_html/videos/' . $vid->name;
-      $file_name_to_folder = '/public_html/videos/used_video/' . $datefolder . '/';
-      $file_name_to_folder_file = '/public_html/videos/used_video/' . $datefolder . '/' . $vid->name;
+      $file_name = '/public_html/' . $ftp_video_folder . '/' . $vid->name;
+      $file_name_to_folder = '/public_html/' . $ftp_move_archive . '/' . $datefolder . '/';
+      $file_name_to_folder_file = '/public_html/' . $ftp_move_archive . '/' . $datefolder . '/' . $vid->name;
       $ftp_exist = ftp_chdir($connection_id, $file_name_to_folder);
 
       if (!$ftp_exist) {
@@ -2565,6 +2526,40 @@ function itg_videogallery_video_update_embeded_url() {
       itg_videogallery_update_embedcode_url($vid->solr_video_id);
     }
   }
+}
+
+/**
+ * This is temp function use for test dailymotion video resploce no we will 
+ */
+function itg_videogallery_video_draft_node_check() {
+  $api = itg_videogallery_dailymotion_api();
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('id', 'nid'));
+  $query->condition('is_node_draft', 1);
+  $query->groupBy('nid');
+  $result = $query->execute()->fetchall();
+  foreach ($result as $vid) {
+    $check_node_status = itg_videogallery_get_node_status($vid->nid);
+    if ($check_node_status == 1) {
+      $query = db_update('itg_solr_video_info')
+          ->fields(array('is_node_draft' => 0));
+      $query->condition('nid', $vid->nid);
+      $query->execute();
+    }
+  }
+}
+
+/**
+ * This function use for get node status
+ */
+function itg_videogallery_get_node_status($nid) {
+  $query = db_select('node', 'n')
+      ->fields('n', array('status'))
+      ->condition('n.nid', $nid)
+      ->execute();
+  $result = $query->fetchObject();
+  $is_published = $result ? $result->status : FALSE;
+  return $is_published;
 }
 
 /**
@@ -2664,12 +2659,12 @@ function itg_videogallery_ftp_file_insert() {
   $file_path = drupal_realpath('public://');
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
+  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
 
   ftp_close($connection_id);
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/videos/', $files);
+    $file_array = explode('/public_html/' . $ftp_video_folder . '/', $files);
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
     if (isset($extension) && $extension == 'mp4') {
@@ -2711,11 +2706,12 @@ function itg_videogallery_dir_content($dir, &$results = array()) {
 function itg_video_check_exist_file_browse($filename) {
   global $user;
   $connection_id = itg_videogallery_ftp_video_list();
+  $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
   ftp_pasv($connection_id, true);
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
   $results = itg_videogallery_getfile_details($filename);
   if ($results == '' && empty($results)) {
-    $file_size = ftp_size($connection_id, '/public_html/videos/' . $filename);
+    $file_size = ftp_size($connection_id, '/public_html/' . $ftp_video_folder . '/' . $filename);
     if ($res != -1) {
       $path_info = pathinfo($filename);
       $extension = $path_info['extension'];
@@ -3385,12 +3381,14 @@ function itg_videogallery_dailymotion_send_video($real_path) {
         'url' => $url,
         'title' => $file_name,
         'channel' => 'tv',
+        'private' => 'true',
         'published' => TRUE,
           )
       );
       $dur = $api->get(
           '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
       );
+      $result['id'] = end(explode('/', $dur['embed_url']));
       $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
       $result['duration'] = $dur['duration'];
       $result['name'] = $file_name;
@@ -3540,24 +3538,25 @@ function itg_videogallery_ftp_file_insert_cron() {
   $file_path = drupal_realpath('public://');
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
-  $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
+  $ftp_filess = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
 
   foreach ($ftp_filess as $files_n) {
 
-    $file_data_array = explode('/public_html/videos/', $files_n);
+    $file_data_array = explode('/public_html/' . $ftp_video_folder . '/', $files_n);
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
     $extension = $path_info_data['extension'];
     $exist_space = preg_match('/\s/', $filename);
     if ($exist_space) {
       $newfile = str_replace(' ', '_', $filename);
-      ftp_rename($connection_id, $files_n, '/public_html/videos/' . $newfile . '.' . $extension);
+      ftp_rename($connection_id, $files_n, '/public_html/' . $ftp_video_folder . '/' . $newfile . '.' . $extension);
     }
   }
 
-  $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
+  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/videos/', $files);
+    $file_array = explode('/public_html/' . $ftp_video_folder . '/', $files);
 
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
@@ -3658,13 +3657,15 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
       'url' => $url,
       'title' => $realfilename,
       'channel' => 'tv',
+      'private' => 'true',
       'published' => TRUE,
         )
     );
 
     $dur = $api->get(
-        '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
+        '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
     );
+    $result['id'] = end(explode('/', $dur['embed_url']));
     $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
     $result['encoding_progress'] = $dur['encoding_progress'];
@@ -3779,6 +3780,23 @@ function itg_videogallery_get_all_publish_video_of_video_content() {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('solr_video_id'));
   $query->isNotNull('nid')->condition('content_type', 'video_gallery', '=');
+  $video_data = $query->execute()->fetchAll();
+  foreach ($video_data as $vid_data) {
+    $all_video_id[] = $vid_data->solr_video_id;
+  }
+  return $all_video_id;
+}
+
+/**
+ * Function use for get all draft video 
+ */
+function itg_videogallery_get_all_draft_video_of_video_content() {
+  $video_data = "";
+  $all_video_id = array();
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('solr_video_id'));
+  $query->isNotNull('nid')->condition('content_type', 'video_gallery', '=');
+  $query->condition('is_node_draft', '1', '=');
   $video_data = $query->execute()->fetchAll();
   foreach ($video_data as $vid_data) {
     $all_video_id[] = $vid_data->solr_video_id;
