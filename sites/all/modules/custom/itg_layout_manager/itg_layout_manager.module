@@ -554,7 +554,9 @@ function itg_layout_manager_block_view($delta = '') {
               'online-archive-story' => 'Online Story Archive',
               'photo-list' => 'IPl Photo',
               'video-list' => 'IPl Video',
-              'calendar/0/0/magazine.html' => 'Magazine',);
+              'calendar/0/0/magazine.html' => 'Magazine',
+              'live-blogs' => 'Live Cricket Blog',
+          );
           if (function_exists('frontend_breadcrumb_display')) {
             if (arg(0) == 'calendar') {
               $arg0 = 'calendar/0/0/magazine.html';
