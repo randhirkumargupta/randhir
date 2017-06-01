@@ -14,8 +14,9 @@ function itg_comments_migrate_step2() {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->itgcms_comment;
-    $cond = array('migrated_data' => 1);
+    $cond = array('source_type' => 'migrated','comment_level'=>array('$gt' =>0), 'parent_comment_id'=>'0');
     $cursor = $people->find($cond);
+    $cursor->timeout(-1);
     $count = 0;
     foreach ($cursor as $document) {
       if (isset($document['parent_id']) && !empty($document['parent_id'])) {
@@ -32,6 +33,8 @@ function itg_comments_migrate_step2() {
 
 
 
+
+
   echo "\nMigration step2 finished...\n";
 }
 
@@ -39,17 +42,18 @@ function itg_comments_migrate_step2_get_mapping($parent_id) {
   $id = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $people = $con->itgcms_comment;
-    $cond = array('id' => (string) $parent_id);
+    $people = $con->itgcms_comment_mapping;
+    $cond = array('old_id' => (string) $parent_id);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
-      $id = $document['_id']->{'$id'};
+      $id = $document['new_id'];
       if (isset($id) && !empty($id)) {
         return $id;
       }
     }
   }
 }
+
 
 function itg_comments_migrate_step2_update_parent($id, $parent_id) {
   if (function_exists('mongodb')) {

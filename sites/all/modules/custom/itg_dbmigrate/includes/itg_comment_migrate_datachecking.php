@@ -11,9 +11,9 @@ function itg_comments_migrate_step111() {
    $xml_path = 'sites/default/files/comments_data/final/comment_1.xml';
   //$xml_path = 'sites/default/files/comments_data/final/comment_2.xml';
   $xml = simplexml_load_file($xml_path, 'SimpleXMLElement');
-
-  echo "Start migrating comments...\n";
-      $success_count = 0;
+      
+    echo "Start migrating comments...\n";
+    $success_count = 0;
     $failed_count = 0;
     $row = '';
     $output = '';
@@ -23,8 +23,17 @@ function itg_comments_migrate_step111() {
     
     print "#######################################\n";
     // Getting the mapped Node Id on the basis of content ID 
+    
+    if($xm->id == 9270464){
     $success_count++;
-     pr($xm);
+    pr($xm);
+    }
+     
+     
+     if($success_count==2)
+       
+     
+       
     // print $xm->created_date.'\n';
     // print date('d-m-Y h:i:s', (int)$xm->created_date);
     // die;
