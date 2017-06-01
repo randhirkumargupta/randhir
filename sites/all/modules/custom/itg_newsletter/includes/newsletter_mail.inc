@@ -222,8 +222,8 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   
   if (!empty($newsletter_content)) {
     if ($newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
-      if (function_exists(itg_update_analytics_node_count_data)) {
-        $story_nodes = itg_update_analytics_node_count_data($newsletter_content);
+      if (function_exists('_get_most_popular_nodes_based_on_trending_shared_analytics')) {
+        $story_nodes = _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content);
       } 
     }
   }
