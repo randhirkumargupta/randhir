@@ -716,8 +716,7 @@ function itg_users_user_insert(&$edit, $account, $category) {
     );
 
     $to = $account->mail;
-//    $to = 'gourav.walia@kelltontech.com';
-    $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+   // $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     }
