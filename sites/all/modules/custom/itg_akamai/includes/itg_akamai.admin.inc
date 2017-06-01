@@ -323,7 +323,7 @@ function itg_akamai_cache_akamai_ccpurge() {
       $rows[] = array(
         $sn++,
         $value->name . ' - ' . $value->type,
-        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => ''))),
+        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal'))),
         l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => ''))),
       );
     }
