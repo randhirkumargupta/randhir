@@ -45,8 +45,8 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
     $data_array['news_count'] = "$datacount";
-    $data_array['news_display_count'] = "$term_name";
-    $data_array['news_pagination_cap'] = "$datacount";
+    $data_array['news_display_count'] = "10";
+    $data_array['news_pagination_cap'] = "7";
     $data_array['updated_datetime'] = "$data_up_time";
     
     
