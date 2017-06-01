@@ -429,9 +429,14 @@ function itg_videogallery_custom_submit($form, &$form_state) {
               ->condition('video_id', $file_video[0]->solr_video_id, '=')
               ->execute();
 // update nid in video
+          $is_node_draft = 0;
+          if ($form_state['node']->status == 0) {
+            $is_node_draft = 1;
+          }
           $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
               ->fields(array(
                 'nid' => $node_id,
+                'is_node_draft' => $is_node_draft,
               ))
               ->condition('fid', $videofields['field_videogallery_video_upload']['und'][0]['fid'], '=')
               ->execute();
@@ -559,10 +564,10 @@ function itg_videogallery_node_insert($node) {
           }
         }
         if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
-          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid']);
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'], $is_node_draft);
         }
         if ($node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'] != 0) {
-          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid']);
+          itg_videogallery_update_node_id_for_video_fid($node_id, $node->field_story_twitter_video[LANGUAGE_NONE][0]['fid'], $is_node_draft);
         }
         break;
     }
@@ -572,10 +577,11 @@ function itg_videogallery_node_insert($node) {
 /**
  * This function use for upadet node id in itg_solr_video_info table after by fid when node is update and insert
  */
-function itg_videogallery_update_node_id_for_video_fid($node_id, $fids) {
+function itg_videogallery_update_node_id_for_video_fid($node_id, $fids, $is_node_draft) {
   $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
       ->fields(array(
         'nid' => $node_id,
+        'is_node_draft' => $is_node_draft,
       ))
       ->condition('fid', $fids, '=')
       ->execute();
@@ -2058,6 +2064,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_video_update_embeded_url',
   );
+  $items['video-draft-video-check'] = array(
+    'description' => 'This crone use for Update video id embeded.',
+    'callback' => 'itg_videogallery_video_draft_node_check',
+  );
   return $items;
 }
 
@@ -2516,6 +2526,40 @@ function itg_videogallery_video_update_embeded_url() {
       itg_videogallery_update_embedcode_url($vid->solr_video_id);
     }
   }
+}
+
+/**
+ * This is temp function use for test dailymotion video resploce no we will 
+ */
+function itg_videogallery_video_draft_node_check() {
+  $api = itg_videogallery_dailymotion_api();
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('id', 'nid'));
+  $query->condition('is_node_draft', 1);
+  $query->groupBy('nid');
+  $result = $query->execute()->fetchall();
+  foreach ($result as $vid) {
+    $check_node_status = itg_videogallery_get_node_status($vid->nid);
+    if ($check_node_status == 1) {
+      $query = db_update('itg_solr_video_info')
+          ->fields(array('is_node_draft' => 0));
+      $query->condition('nid', $vid->nid);
+      $query->execute();
+    }
+  }
+}
+
+/**
+ * This function use for get node status
+ */
+function itg_videogallery_get_node_status($nid) {
+  $query = db_select('node', 'n')
+      ->fields('n', array('status'))
+      ->condition('n.nid', $nid)
+      ->execute();
+  $result = $query->fetchObject();
+  $is_published = $result ? $result->status : FALSE;
+  return $is_published;
 }
 
 /**
