@@ -889,7 +889,6 @@ function itg_draft_form_custom_callback($form, &$form_state) {
  * Helper function to get photogallery.
  */
 function itg_photogallery_embed() {
-p('ff');
   if (!empty($_GET['gid'])) {
     $data = node_load($_GET['gid']);
     return theme('itg_photogallery_embed', array('data' => $data));
