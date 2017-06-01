@@ -225,8 +225,54 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $query->replaceParam("fq", '(' . $str . ')');
     }
   }
+  else if ($arg[0] == 'archives') {
+    $current_hash = variable_get('current_site_hash');
+    if(!empty($current_hash)) {
+      $hash = $current_hash;
+    } else {
+      $hash = '9m4hke';
+    }
+    // case for empty argument
+    if (empty($arg[1])) {
+      $val_str1 = 'Story';
+      $dat_1_day_ago = date('Y-m-d');
+      $date_val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
+      $str = 'bundle_name:(' . $val_str1 . ') AND ';
+      $str .= 'hash:(' . $hash . ') AND ';
+      $str .= 'ds_created:(' . $date_val_str . ')';
+    }
+
+    $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+
+    // case if arg(1) contain either type or date
+    if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
+      $str = 'bundle_name:(' . $arg[1] . ') AND ';
+      $str .= 'hash:(' . $hash . ')';
+    }
+
+    if (!empty($arg[1]) && !in_array($arg[1], $ctype_tab)) {
+      $bundle_name = array('Story', 'photogallery', 'Videogallery');
+      $bun_arr = implode(' OR ', $bundle_name);
+      $dat_1_day_ago = date('Y-m-d', strtotime($arg[1]));
+      $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
+      $str .= 'bundle_name:(' . $bun_arr . ') AND ';
+      $str .= 'ds_created:(' . $val_str_date . ')';
+    }
+
+    // case if both argument is not empty
+    if (!empty($arg[1]) && !empty($arg[2])) {
+      $str = 'bundle_name:(' . $arg[1] . ') AND ';
+      $str .= 'hash:(' . $hash . ') AND ';
+      $dat_1_day_ago = date('Y-m-d', strtotime($arg[2]));
+      $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
+      $str .= 'ds_created:(' . $val_str_date . ')';
+    }
+
+    $query->replaceParam("fq", '(' . $str . ')');
+    //pr($query->getSolrParams());
+  }
   else {
-    $page_condition = array('related-content', 'advance_search', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+    $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
     if (in_array(arg(0), $page_condition)) {
       $i = 1;
@@ -236,9 +282,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $and = ' AND ';
         }
 
-        $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+        $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
-        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
+        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
           if (is_array($val)) {
 
@@ -317,30 +363,6 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           }
 
           $i++;
-        }
-        elseif (empty($_GET['bundle_name']) && $_GET['q'] == 'online-archive-story') {
-          $search_array = $query->getSolrParams();
-          $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
-          $val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
-          $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
-          if (is_array($request_url_array) && count($request_url_array) > 0) {
-            if (in_array('dev', $request_url_array)) {
-              $hash = '5fyeg7';
-            }
-            elseif (in_array('qa', $request_url_array)) {
-              $hash = '2e1u4m';
-            }
-            elseif (in_array('stage', $request_url_array)) {
-              $hash = 'e49it8';
-            }
-            else {
-              $hash = '2e1u4m';
-            }
-          }
-          $str = 'bundle_name:(Story) AND ';
-          $str .= 'hash:(' . $hash . ') AND ';
-          $str .= 'ds_changed:(' . $val_str . ')';
-          $query->replaceParam("fq", '(' . $str . ')');
         }
       }
 
