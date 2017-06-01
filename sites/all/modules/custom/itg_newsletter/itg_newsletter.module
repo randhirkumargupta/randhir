@@ -755,9 +755,11 @@ function itg_newsletter_send_automatic_newsletter() {
   }
   // Send automatic mail
   if (!empty($automatic_nids)) {
+    watchdog('Automaitic', '<pre>'.print_r($automatic_nids, true).'</pre>');
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
       if (!empty($node_auto)) {
+        watchdog('Not empty Nid', '<pre>'.print_r($node_auto->nid, true).'</pre>');
         itg_send_mail_newsletter($node_auto , 'automatically' , 'stories');
       }
     }
