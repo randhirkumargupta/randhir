@@ -7,8 +7,11 @@
     Drupal.behaviors.itg_live_tv = {
         attach: function (context, settings) {
             var uid = settings.itg_live_tv.settings.uid;
-            var base_url = settings.itg_live_tv.settings.base_url;            
-
+            var base_url = settings.itg_live_tv.settings.base_url;
+            // hide device field on add form
+            if (uid != 1) {
+                jQuery("#edit-field-live-tv-device").hide();   
+            }
             $('.live-tv-button', context).click(function (event) {
                 if (jQuery(this).is(':checked')) {
                     var device = jQuery(this).val();

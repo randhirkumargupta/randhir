@@ -9,9 +9,11 @@ module_load_include('inc', 'itg_mail_templates', 'includes/views_handler_mail_te
 function itg_mail_templates_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'mail_templates_node_form') {
     $table_data = itg_mail_templates_tokenstable();
-    $form['#prefix'] = '<div class="get-tokens">Click 
+    $form_prefix = !empty($form['#prefix']) ? $form['#prefix'] : '';
+    
+    $form['#prefix'] = $form_prefix.'<div class="get-tokens">Click 
       <a href="javascript:;" data-id="mail-templates-token">here</a> to get tokens</div>'.$table_data;
-    $form['actions']['submit']['#suffix'] = '</div>';
+    
     unset($form['field_mail_templates_category']['und']['#options']['_none']);
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;

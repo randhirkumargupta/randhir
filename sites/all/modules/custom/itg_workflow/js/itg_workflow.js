@@ -6,6 +6,31 @@
 (function($) {
     Drupal.behaviors.itg_workflow = {
          attach: function(context, settings) {
+             var workflowState = settings.itg_workflow.settings.mstate;
+             if (workflowState == 'needs_review') {
+                jQuery(".form-item-workbench-moderation-state-new").show();
+                jQuery(".reasons-form").hide();              
+                jQuery("#edit-log").val("");
+
+                 jQuery("#edit-workbench-moderation-state-new").change(function() {
+                  jQuery("#edit-log").val("");
+                  if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {                  
+                    jQuery(".form-item-log").hide();
+                    jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+                    jQuery(".reasons-form").show();
+
+                    jQuery(".reasons-form-msg").change(function() {
+                      jQuery("#edit-log").val(jQuery(".reasons-form-msg").val());
+                    });
+                  } else {
+                    jQuery(".form-item-log").show();
+                    jQuery(".reasons-form").hide();
+                  }
+                });
+             }
+             if (workflowState == 'needs_modification') {
+                jQuery("#edit-workbench-moderation-state-new").val("needs_modification");
+             }
              /*var uid = settings.itg_story.settings.uid;
              // code for moderation value change on click of dropdown and save story            
              $('#story_submit_link').click(function() {

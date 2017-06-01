@@ -861,7 +861,7 @@ Image Size (210 x 145).',
   $field_instances['node-supplement-field_supp_import_xml'] = array(
     'bundle' => 'supplement',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Import XML',
     'display' => array(
       'default' => array(
         'label' => 'above',

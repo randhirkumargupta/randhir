@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form' ,
+    'path' => drupal_get_path('theme' , 'itg') . '/templates' ,
+    'template' => 'user-login' ,
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form' ,
+    'path' => drupal_get_path('theme' , 'itg') . '/templates' ,
+    'template' => 'user-pass' ,
   );
   return $items;
 }
@@ -36,17 +36,17 @@ function itg_preprocess_node(&$variables) {
   $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
   // Inclue pathauto module
-  module_load_all_includes('inc', 'pathauto', 'pathauto');
+  module_load_all_includes('inc' , 'pathauto' , 'pathauto');
   if (function_exists('pathauto_cleanstring')) {
     // This assumes that you are using Pathauto for generating clean URLs.
     // Get the "clean" title.
     $title = pathauto_cleanstring($variables['node']->title);
     // Replace all dashes with underscores. This is necessary for recognizing the
     // template filenames.
-    $title = str_replace('-', '_', $title);
+    $title = str_replace('-' , '_' , $title);
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
-    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+    $variables['static_page_menu'] = itg_block_render('menu' , 'menu-about-us-page-menu');
     if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
@@ -56,6 +56,27 @@ function itg_preprocess_node(&$variables) {
     unset($variables['submitted']);
     //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
   }
+
+
+  if ($variables['type'] == 'survey') {
+    module_load_include('inc' , 'itg_survey' , 'includes/itg_survey_form');
+    $variables['theme_hook_suggestions'][] = 'node__survey';
+    $itg_survey_survey_form = drupal_get_form('itg_survey_survey_form');
+    $variables['content'] = $itg_survey_survey_form;
+  }
+
+  if ($variables['type'] == 'quiz') {
+    module_load_include('inc' , 'itg_quiz' , 'includes/itg_quiz_form');
+    $itg_survey_survey_form = drupal_get_form('itg_quiz_quiz_form');
+    $variables['theme_hook_suggestions'][] = 'node__survey';
+    $variables['content'] = $itg_survey_survey_form;
+  }
+  
+  if ($variables['type'] == 'poll') {
+    module_load_include('inc' , 'itg_poll' , 'includes/itg_poll_current_poll');
+    $variables['theme_hook_suggestions'][] = 'node__poll';
+    $variables['poll_form'] = itg_poll_get_all_current_poll();
+  }
 }
 
 /**
@@ -64,8 +85,8 @@ function itg_preprocess_node(&$variables) {
  * @param string $block_id
  * @return array
  */
-function itg_block_render($module, $block_id) {
-  $block = block_load($module, $block_id);
+function itg_block_render($module , $block_id) {
+  $block = block_load($module , $block_id);
   $block_content = _block_render_blocks(array($block));
   unset($block_content['menu_menu-about-us-page-menu']->subject);
   $build = _block_get_renderable_array($block_content);
@@ -81,8 +102,8 @@ function itg_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
   $node = $variables['elements']['#node'];
   if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-    $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
-    $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+    $variables['created'] = format_date($comment->created , 'custom' , 'D, d/m/Y h:i');
+    $variables['changed'] = format_date($comment->changed , 'custom' , 'D, d/m/Y h:i');
     if ($comment->uid != 0) {
       $user = user_load($comment->uid);
       if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
@@ -95,7 +116,7 @@ function itg_preprocess_comment(&$variables) {
     else {
       $submit_name = $variables['author'];
     }
-    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
+    $variables['submitted'] = t('Submitted by !username on !datetime' , array('!username' => $submit_name , '!datetime' => $variables['created']));
   }
 }
 
@@ -147,7 +168,7 @@ function itg_preprocess_page(&$variables) {
     $parse = parse_url($base_url);
 
     // Call Event Parent TPL
-    if (in_array($parse['host'], $options)) {
+    if (in_array($parse['host'] , $options)) {
       $variables['theme_hook_suggestions'][] = 'page__event_domain';
     }
   }
@@ -159,22 +180,21 @@ function itg_preprocess_page(&$variables) {
   }
 
   if ($arg[0] == 'blog-listing') {
-    drupal_add_css('#page-title  {display: none !important}', 'inline');
+    drupal_add_css('#page-title  {display: none !important}' , 'inline');
   }
-  
-  if($arg[0] == 'blog') {
-    drupal_add_css('#page-title , .feed-icon  {display: none !important}' ,'inline');
+
+  if ($arg[0] == 'blog') {
+    drupal_add_css('#page-title , .feed-icon  {display: none !important}' , 'inline');
     unset($variables['page']['content']);
     //pr($variables['theme_hook_suggestions']);
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
-  
+
   $progarm_cat_id = variable_get('program_category_id_for_programmes');
-  
-  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && $arg[2] == $progarm_cat_id) {
+
+  if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && $arg[2] == $progarm_cat_id) {
     $variables['theme_hook_suggestions'][] = 'page__taxonomy_term_program';
   }
-  
 }
 
 /**
@@ -207,7 +227,7 @@ function itg_breadcrumb($variables) {
  * {@inheritdoc}
  */
 function itg_preprocess_html(&$vars) {
-  global $base_url, $user;
+  global $base_url , $user;
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
@@ -216,12 +236,12 @@ function itg_preprocess_html(&$vars) {
   if (function_exists('get_header_body_start_end_code')) {
     $ads_code = get_header_body_start_end_code();
     foreach ($ads_code as $ads_key => $ads_chunk) {
-      $code = implode(' ', $ads_chunk);
+      $code = implode(' ' , $ads_chunk);
       $script_code = array(
-          '#type' => 'markup',
-          '#markup' => $code,
+        '#type' => 'markup' ,
+        '#markup' => $code ,
       );
-      drupal_add_html_head($script_code, $ads_key);
+      drupal_add_html_head($script_code , $ads_key);
     }
   }
 
@@ -242,12 +262,12 @@ function itg_html_head_alter(&$head_elements) {
         foreach ($configurableopt as $key => $value) {
           $opt_value[] = $value['value'];
         }
-        if (in_array("google_standout", $opt_value)) {
+        if (in_array("google_standout" , $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag' ,
+            '#tag' => 'link' ,
+            '#attributes' => array('rel' => 'standout' , 'href' => $standout_path) ,
           );
         }
       }
@@ -258,12 +278,12 @@ function itg_html_head_alter(&$head_elements) {
         foreach ($configurableopt as $key => $value) {
           $opt_value[] = $value['value'];
         }
-        if (in_array("google_standout", $opt_value)) {
+        if (in_array("google_standout" , $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag' ,
+            '#tag' => 'link' ,
+            '#attributes' => array('rel' => 'standout' , 'href' => $standout_path) ,
           );
         }
       }
@@ -274,12 +294,12 @@ function itg_html_head_alter(&$head_elements) {
         foreach ($configurableopt as $key => $value) {
           $opt_value[] = $value['value'];
         }
-        if (in_array("google_standout", $opt_value)) {
+        if (in_array("google_standout" , $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag' ,
+            '#tag' => 'link' ,
+            '#attributes' => array('rel' => 'standout' , 'href' => $standout_path) ,
           );
         }
       }
@@ -290,12 +310,12 @@ function itg_html_head_alter(&$head_elements) {
         foreach ($configurableopt as $key => $value) {
           $opt_value[] = $value['value'];
         }
-        if (in_array("google_standout", $opt_value)) {
+        if (in_array("google_standout" , $opt_value)) {
           $standout_path = $base_url . '/' . $arg_data->path['alias'];
           $head_elements['google_standout'] = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+            '#type' => 'html_tag' ,
+            '#tag' => 'link' ,
+            '#attributes' => array('rel' => 'standout' , 'href' => $standout_path) ,
           );
         }
       }
@@ -303,7 +323,7 @@ function itg_html_head_alter(&$head_elements) {
   }
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
-  if (in_array('metatag_keywords_0', $meta_name_keyword)) {
+  if (in_array('metatag_keywords_0' , $meta_name_keyword)) {
     $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
   }
   else {
@@ -312,12 +332,12 @@ function itg_html_head_alter(&$head_elements) {
       $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'meta',
-            '#attributes' => array(
-                'name' => 'news_keyword',
-                'content' => $meta_keywords
-            ),
+          '#type' => 'html_tag' ,
+          '#tag' => 'meta' ,
+          '#attributes' => array(
+            'name' => 'news_keyword' ,
+            'content' => $meta_keywords
+          ) ,
         );
       }
     }
@@ -326,46 +346,46 @@ function itg_html_head_alter(&$head_elements) {
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'meta',
-            '#attributes' => array(
-                'name' => 'news_keyword',
-                'content' => $meta_keywords
-            ),
+          '#type' => 'html_tag' ,
+          '#tag' => 'meta' ,
+          '#attributes' => array(
+            'name' => 'news_keyword' ,
+            'content' => $meta_keywords
+          ) ,
         );
       }
 
       if ($term->vid == CATEGORY_MANAGMENT) {
-       
+
         if (!empty($term->field_cm_hide_cat_from_search[LANGUAGE_NONE]) && $term->field_cm_hide_cat_from_search[LANGUAGE_NONE][0]['value'] == 1) {
           if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 1) {
             $head_elements['nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'nofollow'
-                )
+              '#tag' => 'meta' ,
+              '#type' => 'html_tag' ,
+              '#attributes' => array(
+                'name' => 'robots' ,
+                'content' => 'nofollow'
+              )
             );
           }
           if ($term->field_cm_no_follow[LANGUAGE_NONE][1]['value'] == 2) {
             $head_elements['noindex_nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'noindex'
-                )
+              '#tag' => 'meta' ,
+              '#type' => 'html_tag' ,
+              '#attributes' => array(
+                'name' => 'robots' ,
+                'content' => 'noindex'
+              )
             );
           }
           if ($term->field_cm_no_follow[LANGUAGE_NONE][0]['value'] == 2) {
             $head_elements['noindex_nofollow'] = array(
-                '#tag' => 'meta',
-                '#type' => 'html_tag',
-                '#attributes' => array(
-                    'name' => 'robots',
-                    'content' => 'noindex'
-                )
+              '#tag' => 'meta' ,
+              '#type' => 'html_tag' ,
+              '#attributes' => array(
+                'name' => 'robots' ,
+                'content' => 'noindex'
+              )
             );
           }
         }

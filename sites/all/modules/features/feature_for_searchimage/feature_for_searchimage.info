@@ -1,7 +1,7 @@
 name = feature_for_searchimage
 core = 7.x
 package = Features
-version = 7.x-1.0-beta10
+version = 7.x-1.0-beta12
 dependencies[] = apachesolr_multisitesearch
 dependencies[] = date
 dependencies[] = feature_for_video
@@ -37,6 +37,7 @@ features[variable][] = menu_parent_itg_solr_video
 features[variable][] = node_options_itg_solr_video
 features[variable][] = node_preview_itg_solr_video
 features[variable][] = node_submitted_itg_solr_video
+features[variable][] = pathauto_node_itg_solr_video_pattern
 features[views_view][] = searchimage
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][features] = features

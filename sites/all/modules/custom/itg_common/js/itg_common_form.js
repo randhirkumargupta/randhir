@@ -8,12 +8,17 @@
         attach: function (context, settings) {
 
             var fid = settings.itg_common.settings.formid;
-
+            
+            //Add aotocomplete on issue title
+            if (fid == 'views-exposed-form-manage-issues-page') {
+                jQuery("#edit-field-issue-title-value-value-datepicker-popup-0").prop("readonly", true);
+            }
+            
+            // remove space from title search field.
             if (fid == 'views-exposed-form-photo-gallery-management-page-1'
                     || fid == 'views-exposed-form-movie-review-list-page'
                     || fid == 'views-exposed-form-blogs-management-page-1'
-                    || fid == 'views-exposed-form-manage-quiz-page') {
-                // remove space from title search field.
+                    || fid == 'views-exposed-form-manage-quiz-page') {                
                 jQuery(".tabledrag-toggle-weight-wrapper").hide();
             }
 
@@ -112,4 +117,13 @@ jQuery(document).ready(function () {
             ignoreCols: [0, 2, 5],
         });
     }
+});
+
+// Space should not be accepted in title search for all content listing
+
+jQuery(document).ready(function() {          
+    jQuery("#edit-title, #edit-field-story-category-tid, #edit-name, #edit-uid").on("keypress", function(e) {
+      if (e.which === 32 && !this.value.length)
+      e.preventDefault();
+    });
 });

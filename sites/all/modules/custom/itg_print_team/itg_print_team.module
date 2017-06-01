@@ -1215,3 +1215,51 @@ function get_issue_by_magazine($id = '') {
 
   return $options;
 }
+
+/**
+ * Get idea count of user.
+ * @return idea count    
+ */
+function get_idea_count_of_user() {
+  global $user;
+  $start = date('Y-m-d H:i:s');
+  $end = date('Y-m-d H:i:s', strtotime('+1 day'));
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->join('field_data_field_survey_end_date', 'f', 'n.nid = f.entity_id');
+  $query->join('field_data_field_pti_idea_status', 'tm', 'n.nid = tm.entity_id');
+  $query->condition('f.field_survey_end_date_value', $start, '>');
+  $query->condition('f.field_survey_end_date_value', $end, '<=');
+  $query->condition('n.uid', $user->uid, '=');
+  $query->condition('tm.field_pti_idea_status_value', 'Approved', '=');
+  $query->condition('n.type', 'print_team_integration', '=');
+  $result = $query->execute();
+  return $result->rowCount();
+}
+
+/**
+ * Display task notification of user.    
+ */
+function get_idea_notification_of_user() {
+  global $user;
+  $string = '';
+  $string.="<ul>";
+  $start = date('Y-m-d H:i');
+  $end = date('Y-m-d H:i', strtotime('+1 day'));
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->fields('n', array('nid'));
+  $query->join('field_data_field_survey_end_date', 'f', 'n.nid = f.entity_id');
+  $query->join('field_data_field_pti_idea_status', 'tm', 'n.nid = tm.entity_id');
+  $query->condition('f.field_survey_end_date_value', $start, '>');
+  $query->condition('f.field_survey_end_date_value', $end, '<=');
+  $query->condition('n.uid', $user->uid, '=');
+  $query->condition('tm.field_pti_idea_status_value', 'Approved', '=');
+  $query->condition('n.type', 'print_team_integration', '=');
+  $result = $query->execute();
+  foreach ($result as $value) {
+    $string .= '<li>' . l("your idea " . $value->title . " is going to expire", 'node/' . $value->nid) . '</li>';
+  }
+  $string .= "</ul>";
+  return $string;
+}

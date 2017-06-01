@@ -240,7 +240,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Validity Start Date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -253,7 +253,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Validity End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -472,13 +472,11 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Survey Title';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'itg-survey/[nid]';
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '30';
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Section */
   $handler->display->display_options['fields']['field_survey_category']['id'] = 'field_survey_category';
   $handler->display->display_options['fields']['field_survey_category']['table'] = 'field_data_field_survey_category';
@@ -490,7 +488,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted by';
-  /* Field: Content: Validity Start Date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -503,7 +501,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Validity End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -732,7 +730,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['field_supp_publish_value']['table'] = 'field_data_field_supp_publish';
   $handler->display->display_options['filters']['field_supp_publish_value']['field'] = 'field_supp_publish_value';
   $handler->display->display_options['filters']['field_supp_publish_value']['value'] = array(
-    0 => '0',
+    1 => '1',
   );
   $handler->display->display_options['filters']['field_supp_publish_value']['group'] = 1;
   /* Filter criterion: Content: Title */
@@ -827,7 +825,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['field_supp_publish_value']['table'] = 'field_data_field_supp_publish';
   $handler->display->display_options['filters']['field_supp_publish_value']['field'] = 'field_supp_publish_value';
   $handler->display->display_options['filters']['field_supp_publish_value']['value'] = array(
-    2 => '2',
+    1 => '1',
   );
   $handler->display->display_options['filters']['field_supp_publish_value']['group'] = 1;
   /* Filter criterion: User: Current */

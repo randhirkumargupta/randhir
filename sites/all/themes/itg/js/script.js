@@ -325,6 +325,7 @@ jQuery(document).ready(function () {
 //  });
 
 jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
+jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
 
 //header menu add icon for mobile
   jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
@@ -438,7 +439,8 @@ jQuery(document).ready(function () {
     var code = e.keyCode || e.which;
     if (code == 13 && value.length != 0) { //Enter keycode
       //Do something
-      var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
+      //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
+      var urldata = Drupal.settings.basePath + 'topic/' + jQuery(this).val();
       window.location.href = urldata;
     }
     if (value.length != 0) {
@@ -451,7 +453,8 @@ jQuery(document).ready(function () {
   jQuery('.search-icon-search').click(function () {
     search_value = jQuery(this).parent().find('.search-text').val();
     if (search_value.length != 0) {
-      var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
+      //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
+      var urldata = Drupal.settings.basePath + 'topic/' + search_value;
       window.location.href = urldata;
     }
   });
