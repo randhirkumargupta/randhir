@@ -116,7 +116,7 @@ if ($theme != 'itgadmin') {
         
         <div class="top-block">
 			<div class="col-md-12"> 
-            <div class="widget-help-text">Auto Form Header</div> 
+            <div class="widget-help-text"><?php print t('Auto Form Header'); ?></div> 
 			 <div class="itg-widget"> 
 			  <div class="droppable <?php  print $gray_bg_layout; ?>"> 
 			   <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'].$widget_data['itg-block-10']['widget_display_name']; ?>"> 
