@@ -71,6 +71,12 @@ function itg_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__survey';
     $variables['content'] = $itg_survey_survey_form;
   }
+  
+  if ($variables['type'] == 'poll') {
+    module_load_include('inc' , 'itg_poll' , 'includes/itg_poll_current_poll');
+    $variables['theme_hook_suggestions'][] = 'node__poll';
+    $variables['poll_form'] = itg_poll_get_all_current_poll();
+  }
 }
 
 /**

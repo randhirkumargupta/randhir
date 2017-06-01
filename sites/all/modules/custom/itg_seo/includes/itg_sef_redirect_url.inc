@@ -123,7 +123,7 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
-  elseif ($node->type == 'survey' || $node->type == 'quiz') {
+  elseif ($node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
     $pathdata = strtolower($node->type) . '/' . $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
@@ -185,6 +185,18 @@ function is_survey($node) {
 function is_quiz($node) {
   $flag = FALSE;
   if ($node->type == 'quiz') {
+    $flag = TRUE;
+  }
+  return $flag;
+}
+
+/**
+ * @param array $node
+ * @return boolean
+ */
+function is_poll($node) {
+  $flag = FALSE;
+  if ($node->type == 'poll') {
     $flag = TRUE;
   }
   return $flag;
@@ -404,6 +416,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
     $is_podcast = is_podcast($node_object);
     $is_survey = is_survey($node_object);
     $is_quiz = is_quiz($node_object);
+    $is_poll = is_poll($node_object);
     if ($is_issue_magazine) {
       $path_alias_set = $sef_path;
       $path_data = explode("/" , $path_alias_set);
@@ -429,7 +442,7 @@ function itg_get_sef_url($sef_path , $nodeid) {
       unset($new_url_array[$array_size - 1]);
       $edited_sef_url = implode('-' , $new_url_array);
     }
-    elseif ($is_reporter || $is_itg_funalytics || $is_survey || $is_quiz) {
+    elseif ($is_reporter || $is_itg_funalytics || $is_survey || $is_quiz || $is_poll) {
       $path_data = explode("/" , $sef_path);
       $edited_sef_url = rtrim($path_data[1]);
     }
