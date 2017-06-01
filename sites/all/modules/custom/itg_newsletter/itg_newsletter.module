@@ -747,7 +747,7 @@ function itg_newsletter_send_automatic_newsletter() {
   $query_auto->fields('cn')
       ->condition('cn.status' , 0 , '=')
       ->condition('cn.type' , 'automatic' , '=')
-      ->condition('cn.scheduled_time' , time() , '>=');
+      ->condition('cn.scheduled_time' , time() , '<=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
@@ -755,9 +755,11 @@ function itg_newsletter_send_automatic_newsletter() {
   }
   // Send automatic mail
   if (!empty($automatic_nids)) {
+    watchdog('Automaitic', '<pre>'.print_r($automatic_nids, true).'</pre>');
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
       if (!empty($node_auto)) {
+        watchdog('Not empty Nid', '<pre>'.print_r($node_auto->nid, true).'</pre>');
         itg_send_mail_newsletter($node_auto , 'automatically' , 'stories');
       }
     }
@@ -947,14 +949,14 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * @return array
  */
 function itg_newsletter_get_section_stories($section , $crontime , $previoustime) {
-
+  
   $query = db_select('node' , 'n');
   $query->join('field_data_field_story_category' , 'fsc' , 'n.nid = fsc.entity_id');
   $query->condition('n.status' , 1 , '=');
   $query->fields('n');
   $query->condition('n.type' , 'story' , '=');
   $query->condition('fsc.field_story_category_tid' , $section , 'IN');
-  $query->condition('changed' , $previoustime , '>=');
+  $query->condition('n.changed' , $previoustime , '<=');
   $query->orderBy('n.nid' , 'DESC');
   $query->range(0 , 20);
   $result = $query->execute();
