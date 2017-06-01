@@ -32,7 +32,7 @@ function itg_auto_search_menu() {
 }
 
 /**
- * 
+ * This function is used in auto compare callback.
  */
 function auto_compare_result(){
   return '';
