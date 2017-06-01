@@ -277,6 +277,8 @@ function itg_videogallery_uninstall() {
   variable_del('dailymotion_password');
   variable_del('dailymotion_apikey');
   variable_del('dailymotion_secretkey');
+  variable_del('content_type_for_solr_index');
+
   drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
 }
 
