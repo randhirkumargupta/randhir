@@ -252,7 +252,7 @@ function get_custom_feeds_files($nid = NULL , $text = NULL , $feed_type = NULL) 
               $field_story_highlights = get_required_data_field_get_items('node' , $node , $var_array[1][$i]);
               $return_value_for_sydiation[0] = $field_story_highlights[0];
             }
-            elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city') {
+            elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city' || $var_array[1][$i] == 'field_story_listicle') {
               $field_story_itg_tags = get_required_data_field_get_items('node' , $node , $var_array[1][$i]);
               $return_value_for_sydiation[0] = implode("," , $field_story_itg_tags);
             }
@@ -614,6 +614,16 @@ function get_required_data_field_get_items($entity_type , $entity , $field_name)
               }
             }
             $required_value['field_gallery_image'] = $temp_requred_value;
+          }
+          if ($field_name == 'field_story_listicle') {
+            $temp_requred_value = array();
+            foreach ($entity->field_story_listicle['und'] as $key => $fid) {
+              $value = $entity->field_story_listicle['und'][$key]['value'];
+              $field_collection_item = entity_load('field_collection_item' , array($value));
+              $field_story_listicle_description = $field_collection_item[$value]->field_story_listicle_description[LANGUAGE_NONE][0]['value'];
+              $temp_requred_value[] = $field_story_listicle_description;
+            }
+            $required_value['field_story_listicle_description'] = implode(",", $temp_requred_value);
           }
           // Handel case to videogallery.
           elseif ($field_name == 'field_video_upload') {
