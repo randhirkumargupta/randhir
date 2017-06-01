@@ -210,146 +210,161 @@ function update_search_title($title, $combined_data, $uid, $type) {
  * {@inheritdoc}
  */
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
-
-  $page_condition = array('related-content', 'topic', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
-
-  if (in_array(arg(0), $page_condition)) {
-    $i = 1;
-    foreach ($_GET as $key => $val) {
-
-      if ($i > 1) {
-        $and = ' AND ';
+  $arg = arg();
+  if ($arg[0] == 'topic') {
+    $query->replaceParam("q", $arg[1]);
+    if (!empty($arg[2])) {
+      if ($arg[2] == 'All') {
+        $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+        $val_str1 = implode(' OR ', $bundle_name);
       }
-      
-      $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'topic', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+      else {
+        $val_str1 = $arg[2];
+      }
+      $str = 'bundle_name:(' . $val_str1 . ')';
+      $query->replaceParam("fq", '(' . $str . ')');
+    }
+  }
+  else {
+    $page_condition = array('related-content', 'advance_search', 'searchimage', 'online-archive-story', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
-      if (!empty($val) && $val != 'related-content' && $val != 'topic' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
+    if (in_array(arg(0), $page_condition)) {
+      $i = 1;
+      foreach ($_GET as $key => $val) {
 
-        if (is_array($val)) {
+        if ($i > 1) {
+          $and = ' AND ';
+        }
 
-          // condition if array is not empty and date field selected
-          if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {            
-            // all values are empty (where "empty" means == false)
-            if ($_GET['custom_drp'] == 'calender') {
-              $min_date = implode(" ", $_GET['ds_changed']);
-              $max_date = implode(" ", $_GET['ds_changed_max']);
+        $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
 
-              // if min date is blank
-              if (empty($min_date)) {
-                $min_date = date('Y-m-d');
-              }
+        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'online-archive-story' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
-              //condition if user not select max date
-              if (!empty($max_date)) {
-                $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $max_date . 'T00:00:00Z/DAY+1DAY]';
+          if (is_array($val)) {
+
+            // condition if array is not empty and date field selected
+            if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {
+              // all values are empty (where "empty" means == false)
+              if ($_GET['custom_drp'] == 'calender') {
+                $min_date = implode(" ", $_GET['ds_changed']);
+                $max_date = implode(" ", $_GET['ds_changed_max']);
+
+                // if min date is blank
+                if (empty($min_date)) {
+                  $min_date = date('Y-m-d');
+                }
+
+                //condition if user not select max date
+                if (!empty($max_date)) {
+                  $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $max_date . 'T00:00:00Z/DAY+1DAY]';
+                }
+                else {
+                  $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $min_date . 'T00:00:00Z/DAY+1DAY]';
+                }
               }
-              else {
-                $val_str = '[' . $min_date . 'T00:00:00Z/DAY TO ' . $min_date . 'T00:00:00Z/DAY+1DAY]';
+              else if ($_GET['custom_drp'] != 'calender' && $_GET['custom_drp'] != '_none') {
+                /* condition for online archive story calender */
+                $online_archive_story_min_date = implode(" ", $_GET['ds_changed']);
+                if (!empty($online_archive_story_min_date)) {
+                  $val_str = '[' . $online_archive_story_min_date . 'T00:00:00Z/DAY TO ' . $online_archive_story_min_date . 'T00:00:00Z/DAY+1DAY]';
+                }
+                else {
+                  $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
+                }
               }
-            }
-            else if ($_GET['custom_drp'] != 'calender' && $_GET['custom_drp'] != '_none') {
-              /* condition for online archive story calender */
-              $online_archive_story_min_date = implode(" ", $_GET['ds_changed']);
-              if (!empty($online_archive_story_min_date)) {
-                $val_str = '[' . $online_archive_story_min_date . 'T00:00:00Z/DAY TO ' . $online_archive_story_min_date . 'T00:00:00Z/DAY+1DAY]';
-              }
-              else {
-                $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
-              }
-            }
-          }
-          else {
-            $val_str = implode(' OR ', $val);
-            if ($val_str == 'All') {
-              $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
-              $val_str = implode(' OR ', $bundle_name);
             }
             else {
               $val_str = implode(' OR ', $val);
+              if ($val_str == 'All') {
+                $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+                $val_str = implode(' OR ', $bundle_name);
+              }
+              else {
+                $val_str = implode(' OR ', $val);
+              }
             }
           }
-        }
-        else {
-          if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
-            $val_str = trim($val) . '*';
-            $val_str = str_replace(" ", "* OR ", $val_str);
-          }
-          else if ($key == 'sm_vid_Tags') {
-            $get_value = preg_split('/[\s,]/', $val);
-            $get_value = array_filter($get_value);
-            $get_comma_value = implode(',', $get_value);
-            $val_str = str_replace(",", "* OR ", $get_comma_value);
-
-            $val_str = $val_str . '*';
-          }
-          else if ($key == 'tm_vid_4_names' && $_GET['q'] != 'searchimage') {
-            $get_value = preg_split('/[\s,]/', $val);
-            $get_value = array_filter($get_value);
-            $get_comma_value = implode(',', $get_value);
-            $val_str = str_replace(",", " OR ", $get_comma_value);
-          }
-          else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title' || $key == 'sm_field_itg_common_by_line_twit') {
-            $quotes_string = '"' . $val . '"';
-            $val_str = $quotes_string;
-          }
           else {
-            $val_str = $val;
+            if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
+              $val_str = trim($val) . '*';
+              $val_str = str_replace(" ", "* OR ", $val_str);
+            }
+            else if ($key == 'sm_vid_Tags') {
+              $get_value = preg_split('/[\s,]/', $val);
+              $get_value = array_filter($get_value);
+              $get_comma_value = implode(',', $get_value);
+              $val_str = str_replace(",", "* OR ", $get_comma_value);
+
+              $val_str = $val_str . '*';
+            }
+            else if ($key == 'tm_vid_4_names' && $_GET['q'] != 'searchimage') {
+              $get_value = preg_split('/[\s,]/', $val);
+              $get_value = array_filter($get_value);
+              $get_comma_value = implode(',', $get_value);
+              $val_str = str_replace(",", " OR ", $get_comma_value);
+            }
+            else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title' || $key == 'sm_field_itg_common_by_line_twit') {
+              $quotes_string = '"' . $val . '"';
+              $val_str = $quotes_string;
+            }
+            else {
+              $val_str = $val;
+            }
           }
-        }
 
-        if (!empty($val_str)) {
-          $str .= $and . $key . ':(' . $val_str . ')';
-        }
+          if (!empty($val_str)) {
+            $str .= $and . $key . ':(' . $val_str . ')';
+          }
 
-        $i++;
+          $i++;
+        }
+        elseif (empty($_GET['bundle_name']) && $_GET['q'] == 'online-archive-story') {
+          $search_array = $query->getSolrParams();
+          $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
+          $val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
+          $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
+          if (is_array($request_url_array) && count($request_url_array) > 0) {
+            if (in_array('dev', $request_url_array)) {
+              $hash = '5fyeg7';
+            }
+            elseif (in_array('qa', $request_url_array)) {
+              $hash = '2e1u4m';
+            }
+            elseif (in_array('stage', $request_url_array)) {
+              $hash = 'e49it8';
+            }
+            else {
+              $hash = '2e1u4m';
+            }
+          }
+          $str = 'bundle_name:(Story) AND ';
+          $str .= 'hash:(' . $hash . ') AND ';
+          $str .= 'ds_changed:(' . $val_str . ')';
+          $query->replaceParam("fq", '(' . $str . ')');
+        }
       }
-      elseif (empty($_GET['bundle_name']) && $_GET['q'] == 'online-archive-story') {
+
+      if ($_GET['q'] == 'advance_search') {
+        $str = ltrim(trim($str), "AND");
+      }
+
+      if ($_GET['q'] == 'searchimage') {
         $search_array = $query->getSolrParams();
-        $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
-        $val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
-        $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
-        if (is_array($request_url_array) && count($request_url_array) > 0) {
-          if (in_array('dev', $request_url_array)) {
-            $hash = '5fyeg7';
-          }
-          elseif (in_array('qa', $request_url_array)) {
-            $hash = '2e1u4m';
-          }
-          elseif (in_array('stage', $request_url_array)) {
-            $hash = 'e49it8';
-          }
-          else {
-            $hash = '2e1u4m';
-          }
+        if (empty($str) && $_GET['keyword'] != '') {
+          $hash = array('bw8w8n', '5fyeg7', '2e1u4m', 'e49it8');
+          $hash_value = implode(' OR ', $hash);
+          $str = 'hash:(' . $hash_value . ')';
         }
-        $str = 'bundle_name:(Story) AND ';
-        $str .= 'hash:(' . $hash . ') AND ';
-        $str .= 'ds_changed:(' . $val_str . ')';
         $query->replaceParam("fq", '(' . $str . ')');
       }
-    }
+      else {
 
-    if ($_GET['q'] == 'topic') {
-      $str = ltrim(trim($str), "AND");
-    }
-
-    if ($_GET['q'] == 'searchimage') {
-      $search_array = $query->getSolrParams();
-      if (empty($str) && $_GET['keyword'] != '') {
-        $hash = array('bw8w8n', '5fyeg7', '2e1u4m', 'e49it8');
-        $hash_value = implode(' OR ', $hash);
-        $str = 'hash:(' . $hash_value . ')';
-      }
-      $query->replaceParam("fq", '(' . $str . ')');
-    }
-    else {
-
-      if (!empty($str)) {
-        $search_array = $query->getSolrParams();
-        $query->replaceParam("fq", '(' . $str . ')');
+        if (!empty($str)) {
+          $search_array = $query->getSolrParams();
+          $query->replaceParam("fq", '(' . $str . ')');
+        }
       }
     }
-    
   }
 }
 
