@@ -1,6 +1,7 @@
 <?php
-if (function_exists('itg_common_get_node_title') && !empty($_GET['gid'])) {
-  $nid = base64_decode($_GET['gid']);
+$arg = arg(2);
+if (function_exists('itg_common_get_node_title') && !empty($arg)) {
+  $nid = base64_decode($arg);
    global $base_url;
    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
