@@ -3,7 +3,7 @@
  * Inc file contains the tid config array
  */
 
- define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notification');
+ define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
 
 function tidConfig(){
     $tid_config = array();
