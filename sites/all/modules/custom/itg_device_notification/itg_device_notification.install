@@ -1,0 +1,237 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function itg_device_notification_schema() {
+
+$schema = array();
+$schema['message'] = array(
+  'description' => 'TODO: please describe this table!',
+  'fields' => array(
+    'id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'message' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => TRUE,
+    ),
+    'message_url' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => TRUE,
+    ),
+    'app_id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'small',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'devices' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '30',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'pw_success_id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '100',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'assign_content' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'content_type_tag' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '20',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'website' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '20',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'content_type' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '10',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'content_id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'android_message_expiry_time' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'android_led' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '100',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'android_header' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => TRUE,
+    ),
+    'android_sound' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'android_banner' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'android_custom_icon' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'android_vibration' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'scheduled' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '10',
+      'not null' => TRUE,
+      'default' => 'now',
+    ),
+    'schedule_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '30',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'created_by' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'small',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'created_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'null' => TRUE,
+    ),
+    'modified_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'null' => TRUE,
+    ),
+    'published' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'published_by' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'small',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'published_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'null' => TRUE,
+    ),
+    'status' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => 1,
+    ),
+    'checked_out_by' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'small',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'custom_data' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => FALSE,
+    ),
+    'category' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'geolocation' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '500',
+      'not null' => FALSE,
+    ),
+    'chrome_message_expiry_time' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'ios_message_expiry_time' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'filter' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+  ),
+  'primary key' => array('id'),
+  );
+ return $schema;
+}
+
