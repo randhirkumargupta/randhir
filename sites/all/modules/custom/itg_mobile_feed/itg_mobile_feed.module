@@ -128,8 +128,15 @@ function itg_mobile_feed_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  // Notification for devices
+  $items['notification'] = array(
+        'page callback' => 'notification_page',
+        'access arguments' => array('access content'),
+        'file' => 'inc/notification.inc',
+        'type' => MENU_CALLBACK,
+  );
 
-
+ 
 
   return $items;
 }
