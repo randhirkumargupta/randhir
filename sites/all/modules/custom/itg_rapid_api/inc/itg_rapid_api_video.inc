@@ -208,9 +208,16 @@ function generateVideoCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['v_short_desc'] = "$field_story_kicker_text_value";
         $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['v_large_image'] = "$file_medium_img_url";
-        $photo_list_array[$listcount]['v_is_default_player'] = "0";
-        $photo_list_array[$listcount]['v_url'] = "$stream_h264_hd_url";
-        $photo_list_array[$listcount]['v_download_url'] = "$video_path_mp4";
+        if($video_path_mp4){
+            $photo_list_array[$listcount]['v_is_default_player'] = "1";
+            $photo_list_array[$listcount]['v_url'] = "$video_path_mp4";
+            $photo_list_array[$listcount]['v_download_url'] = "$stream_h264_hd_url";
+        }
+        else{
+            $photo_list_array[$listcount]['v_is_default_player'] = "0";
+            $photo_list_array[$listcount]['v_url'] = "$stream_h264_hd_url";
+            $photo_list_array[$listcount]['v_download_url'] = "$video_path_mp4";
+        }
         $photo_list_array[$listcount]['v_view_count'] = "0";
         $photo_list_array[$listcount]['v_comment_count'] = "10";
         $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
@@ -437,9 +444,17 @@ function generateProgramCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['p_short_desc'] = "$field_story_kicker_text_value";
         $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['p_large_image'] = "$file_medium_img_url";
-        $photo_list_array[$listcount]['p_is_default_player'] = "1";
-        $photo_list_array[$listcount]['p_url'] = "$stream_h264_hd_url";
-        $photo_list_array[$listcount]['p_download_url'] = "$video_path_mp4";
+        
+        if($video_path_mp4){
+            $photo_list_array[$listcount]['p_is_default_player'] = "1";
+            $photo_list_array[$listcount]['p_url'] = "$video_path_mp4";
+            $photo_list_array[$listcount]['p_download_url'] = "$stream_h264_hd_url";
+        }
+        else{
+            $photo_list_array[$listcount]['p_is_default_player'] = "0";
+            $photo_list_array[$listcount]['p_url'] = "$stream_h264_hd_url";
+            $photo_list_array[$listcount]['p_download_url'] = "$video_path_mp4";
+        }
         $photo_list_array[$listcount]['p_view_count'] = "0";
         $photo_list_array[$listcount]['p_comment_count'] = "10";
         $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
