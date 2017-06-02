@@ -2740,6 +2740,12 @@
   /*End css ITG globle search result page*/
   /*Archive story page*/
   /*Archive story page End*/
+  .view-archive-story .view-content li.itg-search-list > div {
+    padding-left: 180px;
+  }
+  .view-archive-story .view-content li.itg-search-list > div.views-field-sm-field-custom-story-small-large-url {
+    padding-left: 0;
+  }
   .view-archive-story .view-content .search-pic {
     width: 170px;
     height: 127px;
