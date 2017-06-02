@@ -230,7 +230,7 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
               "machine_name" => array('$in' => $itg_category_vocabs),
               "content_type" => array('$regex' => $content_type)
             )
-        );
+        )->sort(array("name" => 1));
         foreach ($category_data as $chunk_data) {
           $data[$chunk_data['tid']] = $chunk_data['name'];
         }
