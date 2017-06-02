@@ -290,17 +290,17 @@ var is_mobile = mobilecheck() ? true : false;
 
 jQuery(document).ready(function () {
   
-  var numLatestVideo = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+  var numLatestVideo = jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list li").length;
   var winWidth = window.innerWidth;
   if (winWidth > 680) {
-    var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
-    jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", getLength * 190 + "px");
+    //~ var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+    //~ jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
     jQuery(".defalt-bar").mCustomScrollbar({
-      axis: "x",
+      axis: "y",
     });
   } else {
     if (numLatestVideo > 4) {
-      jQuery("#block-views-video-landing-header-block-1 ul.photo-list").slick({
+      jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list").slick({
         vertical: true,
         infinite: false,
         slidesToShow: 4,
