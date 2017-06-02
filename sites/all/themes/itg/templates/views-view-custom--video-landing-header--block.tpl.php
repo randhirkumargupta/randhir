@@ -254,9 +254,6 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                         print $newimageds;
                     }
                     ?>
-                </div>
-                <?php //$row['field_story_expert_description'];  ?>
-                <div class="col-md-4 video-header-right">
                     <div class="top-section">
                         <div class="social-likes desktop-hide">
                             <ul>
@@ -323,9 +320,9 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <?php endif; ?>
     
                             </ul>
-                        </div>
-                        <?php print $description_slider; ?>
+                        </div>                        
                         <p class="upload-date"><?php print $row['timestamp']; ?></p>
+                        <?php print $description_slider; ?>
                         <div class="section-like-dislike">
                             <div id="btn-div">
                                 <?php
@@ -338,6 +335,10 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
 
                         </div>
                     </div>
+                </div>
+                <?php //$row['field_story_expert_description'];  ?>
+                <div class="col-md-4 video-header-right">
+                    
 
                     <div class="ads">
                         <?php
@@ -345,6 +346,9 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                         print render($render_array);
                         ?>
+                    </div>
+                    <div class="latest_video">
+                    <?php echo views_embed_view('video_landing_header', 'block_1');?>
                     </div>
                 </div>
             </div>
