@@ -1,4 +1,5 @@
 <div class="special-top-news">
+  <div class="itg-listing-wrapper">
     <ul class="itg-listing">
 <?php foreach($rows as $index => $row){?>
   <?php  $desc=$row['title'];
@@ -24,4 +25,5 @@
   
 <?php }; ?>
     </ul>
+  </div>
 </div>

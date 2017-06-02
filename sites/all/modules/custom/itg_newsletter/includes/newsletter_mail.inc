@@ -12,6 +12,7 @@
  * @return bool
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
+
 // Mail Content Frequency
    $current_date = time();
    $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
@@ -143,13 +144,12 @@ function itg_get_newsletter_mail_content($node, $template_node) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-  
+  $news_content = '';
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
     $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
-
     if ($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
     }
@@ -167,18 +167,18 @@ function itg_get_newsletter_mail_content($node, $template_node) {
 
     // Set link for newsletter title
     if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {
-      $link = 'node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+      $link = FRONT_URL . '/node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
     }
     else {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
     }
 
-    $news_content = '';
+//    $news_content = '';
     if ($flag) {
       $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
-                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
     }
@@ -190,7 +190,6 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
-
   $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
   return $content;
 }
@@ -223,8 +222,8 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   
   if (!empty($newsletter_content)) {
     if ($newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
-      if (function_exists(itg_update_analytics_node_count_data)) {
-        $story_nodes = itg_update_analytics_node_count_data($newsletter_content);
+      if (function_exists('_get_most_popular_nodes_based_on_trending_shared_analytics')) {
+        $story_nodes = _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content);
       } 
     }
   }
@@ -236,10 +235,9 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   }
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
-
-    $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+    
+    $title = $news_detail->title;
     $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-
     if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
@@ -247,12 +245,12 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       $thumbnail = $base_url . '/' . drupal_get_path('module', 'itg_newsletter') . '/image/no-image.png';
     }
 
-    $link = $base_url . '/node/' . $news_detail->nid;
-
+    $link = FRONT_URL . '/node/' . $news_detail->nid;
+    
     $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
-                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
   }

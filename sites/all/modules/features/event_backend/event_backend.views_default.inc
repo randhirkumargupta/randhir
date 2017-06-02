@@ -195,7 +195,7 @@ function event_backend_views_default_views() {
     'php' => 'php',
     'nothing_1' => 'nothing_1',
     'status' => 'status',
-    'view_node' => 'nothing',
+    'view_node' => 'view_node',
     'edit_node' => 'nothing',
     'delete_node' => 'delete_node',
     'nothing' => 'nothing',
@@ -488,6 +488,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
@@ -982,7 +983,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'php' => 'php',
     'nothing_1' => 'nothing_1',
     'status' => 'status',
-    'view_node' => 'nothing',
+    'view_node' => 'view_node',
     'edit_node' => 'nothing',
     'delete_node' => 'delete_node',
     'nothing' => 'nothing',
@@ -1271,6 +1272,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
@@ -1397,7 +1399,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'php' => 'php',
     'nothing_1' => 'nothing_1',
     'status' => 'status',
-    'view_node' => 'nothing',
+    'view_node' => 'view_node',
     'edit_node' => 'nothing',
     'delete_node' => 'delete_node',
     'nothing' => 'nothing',
@@ -1690,6 +1692,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node] </span>';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
@@ -3284,7 +3287,7 @@ echo  $baseurl;
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3355,7 +3358,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3816,7 +3819,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['relationships']['field_associate_sponsors_value']['id'] = 'field_associate_sponsors_value';
   $handler->display->display_options['relationships']['field_associate_sponsors_value']['table'] = 'field_data_field_associate_sponsors';
   $handler->display->display_options['relationships']['field_associate_sponsors_value']['field'] = 'field_associate_sponsors_value';
-  $handler->display->display_options['relationships']['field_associate_sponsors_value']['delta'] = '-1';
+  $handler->display->display_options['relationships']['field_associate_sponsors_value']['delta'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Field collection item: Start Time */
   $handler->display->display_options['fields']['field_start_time']['id'] = 'field_start_time';
@@ -3872,7 +3875,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3952,7 +3955,7 @@ return itg_event_backend_get_event_node();
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4085,6 +4088,14 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['view']['view'] = 'program_schedule';
   $handler->display->display_options['fields']['view']['display'] = 'block_5';
   $handler->display->display_options['fields']['view']['arguments'] = '[%field_choose_sponsor]';
+  /* Field: Field collection item: Sponsor Type */
+  $handler->display->display_options['fields']['field_sponsor_type']['id'] = 'field_sponsor_type';
+  $handler->display->display_options['fields']['field_sponsor_type']['table'] = 'field_data_field_sponsor_type';
+  $handler->display->display_options['fields']['field_sponsor_type']['field'] = 'field_sponsor_type';
+  $handler->display->display_options['fields']['field_sponsor_type']['relationship'] = 'field_associate_sponsors_value';
+  $handler->display->display_options['fields']['field_sponsor_type']['label'] = '';
+  $handler->display->display_options['fields']['field_sponsor_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_sponsor_type']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -4240,12 +4251,20 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['path'] = '[php]/speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
+  $handler->display->display_options['fields']['field_story_new_title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
+  /* Field: Content: Occupation */
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['id'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['table'] = 'field_data_field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['field'] = 'field_celebrity_pro_occupation';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_celebrity_pro_occupation']['separator'] = ' / ';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -4361,7 +4380,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['table'] = 'field_data_field_celebrity_pro_occupation';
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['field'] = 'field_celebrity_pro_occupation_tid';
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['value'] = array(
-    404 => '404',
+    1208814 => '1208814',
   );
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['vocabulary'] = 'itg_occupation';

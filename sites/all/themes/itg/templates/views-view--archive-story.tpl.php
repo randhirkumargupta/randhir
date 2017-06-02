@@ -41,9 +41,11 @@
     <?php if ($exposed): ?>
       <!--start-->
       <?php
+      global $base_url;
       $month = date("m");
       $day = date("d");
       $year = date("Y");
+      $arg = arg();
       ?>
       <div class="archive-header">
           <div id="archive-story-date-slider">
@@ -51,12 +53,18 @@
                   <?php for ($i = 30; $i >= 1; $i--) { ?>
                     <?php
                       $li_active_class = '';
-                      $current_filter_date = date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year));
+                      $current_filter_date = date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
                       if ($current_filter_date == $_GET['ds_changed']['date']) {
                         $li_active_class = 'active';                        
                       }
+                      
+                      if(empty($arg[1])) {
+                        $uri =  $base_url.'/archives'.'/'.date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
+                      } else {
+                        $uri = $base_url.'/archives/'.$arg[1].'/'. date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
+                      }
                     ?>
-                    <li class="atleta <?php print $li_active_class;?>"> <a href="<?php print date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>">
+                    <li class="atleta <?php print $li_active_class;?>"> <a href="<?php print $uri; ?>">
 
                             <span><?php print date('d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?></span>
                             <?php print date('M', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>

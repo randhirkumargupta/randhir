@@ -37,7 +37,7 @@
 </div>
  <div id="AkamaiSettings" class="itg-sidebar-form-section">
     <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
-    <div class="itg-form-section">
+                <div class="itg-form-class-akamai">
         <?php print drupal_render($form['akamai_timeout']); ?>
     </div>
 </div>

@@ -90,7 +90,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No Image Found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Apache Solr: sm_original_image_url */
   $handler->display->display_options['fields']['sm_original_image_url']['id'] = 'sm_original_image_url';
   $handler->display->display_options['fields']['sm_original_image_url']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_original_image_url']['field'] = 'sm_original_image_url';
@@ -135,7 +135,7 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Apache Solr: sm_image_title */
   $handler->display->display_options['filters']['sm_image_title']['id'] = 'sm_image_title';
   $handler->display->display_options['filters']['sm_image_title']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_image_title']['field'] = 'sm_image_title';
@@ -173,7 +173,7 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Apache Solr: sm_alttext */
   $handler->display->display_options['filters']['sm_alttext']['id'] = 'sm_alttext';
   $handler->display->display_options['filters']['sm_alttext']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_alttext']['field'] = 'sm_alttext';
@@ -209,7 +209,7 @@ function feature_for_searchimage_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Apache Solr: tm_vid_14_names */
   $handler->display->display_options['filters']['tm_vid_14_names']['id'] = 'tm_vid_14_names';
   $handler->display->display_options['filters']['tm_vid_14_names']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['tm_vid_14_names']['field'] = 'tm_vid_14_names';
@@ -404,17 +404,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_used_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: Search */
-  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['group'] = 1;
-  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
-  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
+  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['label']['group'] = 1;
+  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
+  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -440,6 +441,9 @@ function feature_for_searchimage_views_default_views() {
     24 => 0,
     25 => 0,
     26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
@@ -481,6 +485,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['filters']['sm_field_video_used']['id'] = 'sm_field_video_used';
   $handler->display->display_options['filters']['sm_field_video_used']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_field_video_used']['field'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['group'] = 1;
   $handler->display->display_options['filters']['sm_field_video_used']['exposed'] = TRUE;
   $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator_id'] = 'sm_field_video_used_op';
   $handler->display->display_options['filters']['sm_field_video_used']['expose']['label'] = 'Publish/Unpublish';
@@ -628,17 +633,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: Search */
-  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['group'] = 1;
-  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
-  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
+  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['label']['group'] = 1;
+  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
+  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -664,6 +670,9 @@ function feature_for_searchimage_views_default_views() {
     24 => 0,
     25 => 0,
     26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
@@ -705,6 +714,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['filters']['sm_field_video_used']['id'] = 'sm_field_video_used';
   $handler->display->display_options['filters']['sm_field_video_used']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_field_video_used']['field'] = 'sm_field_video_used';
+  $handler->display->display_options['filters']['sm_field_video_used']['group'] = 1;
   $handler->display->display_options['filters']['sm_field_video_used']['exposed'] = TRUE;
   $handler->display->display_options['filters']['sm_field_video_used']['expose']['operator_id'] = 'sm_field_video_used_op';
   $handler->display->display_options['filters']['sm_field_video_used']['expose']['label'] = 'Publish/Unpublish';
@@ -852,17 +862,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: Search */
-  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['group'] = 1;
-  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
-  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
+  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['label']['group'] = 1;
+  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
+  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -888,6 +899,9 @@ function feature_for_searchimage_views_default_views() {
     24 => 0,
     25 => 0,
     26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
@@ -1040,17 +1054,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Apache Solr: Search */
-  $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['keyword']['field'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['group'] = 1;
-  $handler->display->display_options['filters']['keyword']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keyword']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['keyword']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keyword']['expose']['operator'] = 'keyword_op';
-  $handler->display->display_options['filters']['keyword']['expose']['identifier'] = 'keyword';
-  $handler->display->display_options['filters']['keyword']['expose']['remember_roles'] = array(
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
+  $handler->display->display_options['filters']['label']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['label']['group'] = 1;
+  $handler->display->display_options['filters']['label']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['label']['expose']['operator_id'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['label']['expose']['operator'] = 'label_op';
+  $handler->display->display_options['filters']['label']['expose']['identifier'] = 'label';
+  $handler->display->display_options['filters']['label']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -1076,6 +1091,9 @@ function feature_for_searchimage_views_default_views() {
     24 => 0,
     25 => 0,
     26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   /* Filter criterion: Apache Solr: bundle_name */
   $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';

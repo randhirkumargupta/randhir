@@ -77,7 +77,7 @@
         <h4 class="heading desktop-hide"><?php print t('OTHER NEWS'); ?></h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
-
+              <div class="itg-listing-wrapper">
                 <ul class="itg-listing">   
                     <?php
                     foreach ($rows as $index => $row) {
@@ -97,13 +97,11 @@
                               }
                             ?>
                             </li>
-
-
-    <?php } ?>
-
-<?php } ?>
-
+                    <?php } ?>
+                  <?php } ?>
                 </ul>
+              </div>
+                
 
             </div>
         </div>

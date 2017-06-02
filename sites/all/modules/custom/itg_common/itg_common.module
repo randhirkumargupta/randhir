@@ -65,7 +65,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['embed/videogallery-embed'] = array(
+  $items['embed/%'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -899,8 +899,10 @@ function itg_photogallery_embed() {
  * Helper function to get videogallery.
  */
 function itg_videogallery_embed() {
-  if (!empty($_GET['gid'])) {
-    $gid = base64_decode($_GET['gid']);
+
+  $arg = arg(2);
+  if (!empty($arg)) {
+    $gid = base64_decode($arg);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
       $videoids = get_video_in_fieldcollection_by_nid($gid);
     }
