@@ -2677,7 +2677,6 @@ function itg_videogallery_ftp_file_insert() {
  */
 function itg_videogallery_dir_content($dir, &$results = array()) {
   $files = scandir($dir);
-
   foreach ($files as $key => $value) {
     $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
     if (!is_dir($path)) {

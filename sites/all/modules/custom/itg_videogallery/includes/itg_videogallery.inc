@@ -23,7 +23,18 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('dailymotion_ftp_host', ''),
     '#required' => TRUE,
   );
-  
+  $form['ftp_upload_video_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Video Folder'),
+    '#default_value' => variable_get('ftp_upload_video_folder', ''),
+    '#required' => TRUE,
+  );
+  $form['ftp_move_archive'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Video Moved In '),
+    '#default_value' => variable_get('ftp_move_archive', ''),
+    '#required' => TRUE,
+  );
   $form['dailymotion_ftp_username'] = array(
     '#type' => 'textfield',
     '#title' => t('Ftp Username'),
