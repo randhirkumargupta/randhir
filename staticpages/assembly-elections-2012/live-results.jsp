@@ -339,19 +339,19 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morebg">
 <div class="morheadline">More</div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/akhilesh-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/akhilesh-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank">Akhilesh Yadav thanks people of UP</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/rahul-gandhi1-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/rahul-gandhi1-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank">Rahul takes onus for UP debacle</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-in-cartoons/1/6704.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/sush-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-in-cartoons/1/6704.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/sush-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank">Results disappointing, says Sushma</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/workers88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/workers88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank">SP workers celebrates win</a></div>
 </div>
 <div class="clear"></div>
@@ -449,19 +449,19 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morebg">
 <div class="morheadline">More</div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/parkash_singh_badal_2-88_030612063005.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/parkash_singh_badal_2-88_030612063005.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank">Akali Dal-BJP secure majority in Punjab</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/sukhbir_88_030612072138.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/sukhbir_88_030612072138.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank">Won due to our performance: Sukhbir</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-2-88_030612075245.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/punjab-2-88_030612075245.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank">Parkash Singh Badal on historic win</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-1-88_030612081745.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/punjab-1-88_030612081745.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank">SAD-BJP celebrate Punjab success</a></div>
 </div>
 <div class="clear"></div>
@@ -559,22 +559,22 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morheadline">More</div>
 <div class="innerbox">
 <div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-assembly-polls-father-bismarque-dias-campaigns/1/173017.html
-" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/goa_88_030512071431.jpg" border="1" width="88" height="66"></a></div>
+" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/goa_88_030512071431.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/story/goa-assembly-polls-father-bismarque-dias-campaigns/1/173017.html
 " target="_blank">Heal the nation</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/kamat_88_030512071431.jpg
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/kamat_88_030512071431.jpg
 " border="1" width="88" height="66"></a></div>
 <div class="Digambar Kamat"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank">"It's not my sole responsibility to check illegal mining"</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/1_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/1_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank">Goa@50: Beaches, babes and bikinis</a></div>
 </div>
 <div class="innerbox">
 <div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-mine-of-challenges/1/6687.html
-" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/2_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
+" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/2_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/goa-mine-of-challenges/1/6687.html
 " target="_blank">Goa: Mine of challenges</a></div>
 </div>
@@ -827,10 +827,10 @@ GA_googleFillSlot("B2_2nd_Mrec_Temp");
 <div class="sidebartitle">Videos</div>
 <div class="sidebarlist">
 <div id="photorightchunk">
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/akhilesh144_030612060643.jpg" title="Akhilesh Yadav" alt="Akhilesh Yadav" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/akhilesh144_030612060643.jpg" title="Akhilesh Yadav" alt="Akhilesh Yadav" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank">I thank the people of UP: Akhilesh Yadav</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/rahul-144_030612060643.jpg" title="Rahul Gandhi" alt="Amarinder Singh  " style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/rahul-144_030612060643.jpg" title="Rahul Gandhi" alt="Amarinder Singh  " style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank">I take responsibility for UP loss: Rahul </a></div>
 </div>
 <div class="clear"></div>
@@ -847,18 +847,18 @@ GA_googleFillSlot("B2_2nd_Mrec_Temp");
 <div class="sidebartitle">Photos</div>
 <div class="sidebarlist">
 <div id="photorightchunk">
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/up-assembly-elections_030612053213.jpg" title="SP supporters" alt="SP supporters" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/up-assembly-elections_030612053213.jpg" title="SP supporters" alt="SP supporters" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank">SP workers celebrate party's victory in UP</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-5-144_030612083344.jpg" title="Polls 2012" alt="Polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/punjab-5-144_030612083344.jpg" title="Polls 2012" alt="Polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
   <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank">Akali Dal celebrates Punjab result
 </a></div>
 </div>
 <div class="clear"></div>
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/why-uttar-pradesh-polls-matter/1/6667.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/manipur-3-144_030612083244.jpg" title="UP polls 2012" alt="UP polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/why-uttar-pradesh-polls-matter/1/6667.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/manipur-3-144_030612083244.jpg" title="UP polls 2012" alt="UP polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
   <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank">Cong sweeps Manipur polls</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/priyanka_030512050800.gif" title="Powerful women politicians" alt="Powerful women politicians" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012March/priyanka_030512050800.gif" title="Powerful women politicians" alt="Powerful women politicians" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank">Powerful women politicians
 </a></div>
 </div>

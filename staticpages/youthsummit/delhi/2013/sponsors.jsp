@@ -600,7 +600,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!--  RFID Content Start -->
         <div id="RFID">
         <h2>Social RFID Partner</h2><br>
-         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/tagglabs_090313123221.gif
 "></div> 
         Tagglabs is world's leading RFID and digital Innovation company, with more than 100+ campaigns for 40 leading brands like Google, Adidas, Volkswagen, CocaCola, JWT under our belt.
          <br>
@@ -613,7 +613,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!--  Singchana Content Start -->
         <div id="Singchana">
         <h2>Online KARAOKE Partner</h2><br>
-         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif"></div>Singchana.com is a pioneering idea established in the year 2012 with a vision to make every voice of all music lovers heard and visible. It is an online social karaoke activity, essentially a <a href="/youthsummit/delhi/2013/singchana.jsp
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/singchana_090313123221.gif"></div>Singchana.com is a pioneering idea established in the year 2012 with a vision to make every voice of all music lovers heard and visible. It is an online social karaoke activity, essentially a <a href="/youthsummit/delhi/2013/singchana.jsp
 " target="_blank"><strong>Sing-Along</strong></a> game which enables users to stir up a song (in karaoke style), score points and share songs with the online community to <em><strong>become a star</strong></em> amongst their peers.<br>
 <br>The singing activity matches the pitch and tone of the singers' on real time basis vis-à-vis the original song. The participants are then given a score thereby enabling singers to record their performance and share it across social platforms.
 <div class="clr">&nbsp;</div>
@@ -663,8 +663,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
              <div class="title">
              	<p>Online KARAOKE Partner</p>
             	<div class="Singchana" onMouseOver="showHide('Singchana1','Singchana2')" onMouseOut="showHide('Singchana2','Singchana1')">
-                 <div id="Singchana1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif" onClick="SingchanaShow()"></div>
-                <div id="Singchana2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana-selected_090313123221.gif" onClick="SingchanaShow()"></div>
+                 <div id="Singchana1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/singchana_090313123221.gif" onClick="SingchanaShow()"></div>
+                <div id="Singchana2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/singchana-selected_090313123221.gif" onClick="SingchanaShow()"></div>
                 
             </div>
              </div>
@@ -725,8 +725,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
  <div class="title">
              	<p>Social RFID Partners</p>
             	<div class="RFID" onMouseOver="showHide('RFID1','RFID2')" onMouseOut="showHide('RFID2','RFID1')">
-                 <div id="RFID1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif" onClick="RFIDShow()"></div>
-                <div id="RFID2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs-selected_090313123221.gif" onClick="RFIDShow()"></div>
+                 <div id="RFID1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/tagglabs_090313123221.gif" onClick="RFIDShow()"></div>
+                <div id="RFID2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/tagglabs-selected_090313123221.gif" onClick="RFIDShow()"></div>
                 
             </div>
              </div>

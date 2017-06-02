@@ -735,20 +735,20 @@ country.
 
 <ul class="short_vidoes">
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html
-" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/1_98_101814093659.jpg" /></a></li>
+" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/1_98_101814093659.jpg" /></a></li>
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/2_98_101814093659.jpg" /></a></li>
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/2_98_101814093659.jpg" /></a></li>
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/3_98_101814093659.jpg" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/3_98_101814093659.jpg" />
     </a></li>
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/4_98_101814093659.jpg" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/4_98_101814093659.jpg" />
     </a></li>
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-all-the-best-india/1/13171.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/5_98_101814093659.jpg" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/5_98_101814093659.jpg" />
     </a></li>
 	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-winning-the-world-cup---start-of-a-revolution/1/13172.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2004October/6_98_101814093659.jpg" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/6_98_101814093659.jpg" />
     </a></li>
 </ul>
 
@@ -758,11 +758,11 @@ country.
 <h2 style="color:#de1e2b; margin-bottom:15px;">Short & Crisp Videos</h2>
 
 <ul class="short_vidoes">
-	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
+	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
 	<li><a href="http://indiatoday.intoday.in/video/aamer-sohail-salaam-cricket-pakistan-cricket-team-world-cup-india-today-conclave/1/396479.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014October/aamir-snippets_98_101814080844.jpg" /></a></li>
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/aamir-snippets_98_101814080844.jpg" /></a></li>
 	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-sourav-ganguly-aaj-tak/1/396490.html" target="_blank">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014October/saurabv_98_101814080844.jpg" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/saurabv_98_101814080844.jpg" />
     </a></li>
 </ul>
 

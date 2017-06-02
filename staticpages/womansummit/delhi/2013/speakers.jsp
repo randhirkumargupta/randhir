@@ -85,7 +85,7 @@
 <div style="margin-bottom: 20px; float:left; width:100%;">
 <div style="font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase">Backstage action
 </div>
-<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
+<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
 <div class="clr"></div>
 </div>
 

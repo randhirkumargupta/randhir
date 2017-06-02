@@ -4,7 +4,7 @@
 <base href="/staticpages/pdf-web/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Operation Bluestar</title>
-<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg">
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
 body { background: none !important}
@@ -337,7 +337,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div class="socialdiv">
 <div style="color: #000;font: bold 14px/18px Arial; text-align: right;">SHARE</div>
 	<a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status=Operation Bluestar%20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
-	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
+	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
 	<a rel="nofollow" title="Share" onclick="javascript: document.getElementById('customShare').style.display='block';" href="javascript:void('0');"><span class="imgs shr lft"></span></a>
 </div>
 
@@ -369,7 +369,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf">After the attack </a></div>
 			<div  class="sub_heading">The India Today report after Operation Bluestar. Shekhar Gupta, who wrote the story, is now the Editor-in-Chief, Indian Express.</div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014January/6_30_1984-crackdown-in-punjab-_-operation-bluestar-army-commanders-_-we-had-no-other-choice-the-president-_-dignified-demeanour-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6_30_1984-crackdown-in-punjab-_-operation-bluestar-army-commanders-_-we-had-no-other-choice-the-president-_-dignified-demeanour-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -382,7 +382,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014January/7_31_1984-punjab-_-a-scarred-state-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/7_31_1984-punjab-_-a-scarred-state-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -394,7 +394,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/8_15_1984-Punjab_The_Nihang.pdf">Government man </a></div>
 	  <div  class="sub_heading">Another of Shekhar's stories on the government ploy to use a Nihang leader to destroy the remnants of the Akali Dal leadership.
 </div>
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/8_15_1984-Punjab_The_Nihang.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014January/8_15_1984-punjab-_-the-elusive-solution-the-nihangs-_-storm-troopers-operation-bluestar-_-night-of-blood-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/8_15_1984-Punjab_The_Nihang.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/8_15_1984-punjab-_-the-elusive-solution-the-nihangs-_-storm-troopers-operation-bluestar-_-night-of-blood-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 

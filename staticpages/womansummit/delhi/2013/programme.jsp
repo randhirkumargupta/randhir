@@ -78,7 +78,7 @@
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Jayanthi-Natarajan" alt="Jayanthi-Natarajan" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/jayanthi-natarajan_041513061938.jpg"></td>
+                                            <img border="0" align="middle" title="Jayanthi-Natarajan" alt="Jayanthi-Natarajan" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/jayanthi-natarajan_041513061938.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Jayanthi Natarajan</strong><br>
@@ -93,7 +93,7 @@
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Smriti-Irani" alt="Smriti-Irani" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/smriti-irani_041513061938.jpg"></td>
+                                            <img border="0" align="middle" title="Smriti-Irani" alt="Smriti-Irani" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/smriti-irani_041513061938.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Smriti Irani</strong><br>
@@ -480,7 +480,7 @@
                                <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Shashi-Tharoor" alt="Shashi-Tharoor" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/shashi-tharoor_041513061938.jpg"></td>
+                                            <img border="0" align="middle" title="Shashi-Tharoor" alt="Shashi-Tharoor" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/shashi-tharoor_041513061938.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Shashi Tharoor<span class="star"></span></strong><br>
@@ -541,7 +541,7 @@
 <div style="margin-bottom: 20px; float:left; width:100%;">
 <div style="font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase">Backstage action
 </div>
-<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
+<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
 <div class="clr"></div>
 </div>
 

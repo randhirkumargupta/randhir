@@ -218,11 +218,11 @@
 
     <div>
 	<div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html">Awards function 2010</a> </div>
         </div>
         <div class="photovidbox rightsp">
-          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011October/awards-function-2009_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2011October/awards-function-2009_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html">Awards function 2009</a> </div>
         </div>
 
@@ -236,11 +236,11 @@
     <div class="snapsheader">Videos</div>
     <div>
         <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html">IT honours fastest-mover states</a> </div>
         </div>
 <div class="photovidbox rightsp">
-  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
+  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
   <div class="stcaption"><a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html">'Punjab, Delhi are best states'</a> </div>
 </div>
       <div class="clear"></div>
