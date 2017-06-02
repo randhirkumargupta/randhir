@@ -2822,7 +2822,7 @@ ul#footer_menu {
         background: url("../images/spt_bgnd_share_312x232_2.png") no-repeat scroll 0 0 transparent;
     }*/
 	.sharer_div, .sharer_div .pointer {
-    background: url("/staticpages/mediaintoday/indiatoday/images/spt_bgnd_share.png") no-repeat scroll 0 0 transparent;
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/spt_bgnd_share.png") no-repeat scroll 0 0 transparent;
 }
 
         .sharer_div .pointer {

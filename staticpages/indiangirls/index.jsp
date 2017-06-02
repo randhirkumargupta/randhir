@@ -9,11 +9,11 @@
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 
 <meta property="og:title" content="5 lines Indian girls hear all the time....and wished they ended like this">
-<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/images/indiangirls/300_350.jpg">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/300_350.jpg">
 <meta property="og:url" content="/staticpages/main/indiangirls/">
 <meta property="og:description" content="In the aftermath of the December 16 Delhi gangrape, the campaign against sexual violence has picked up traction like never before. Breaking prejudiced, gender-based stereotypes is probably the first step in that direction.">
 
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/images/indiangirls/300_350.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/300_350.jpg" />
 <style>
 #surfercommt {
     float: left;
@@ -260,7 +260,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=indiangirls Advice for Startups&URL=http://indiatoday.intoday.in/indiangirls/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/indiangirls/&p[title]=5 lines Indian girls hear all the time....and wished they ended like this&s=100&p[summary]=In the aftermath of the December 16 Delhi gangrape, the campaign against sexual violence has picked up traction like never before. Breaking prejudiced, gender-based stereotypes is probably the first step in that direction.&p[images][0]=/staticpages/mediaintoday/indiatoday/images/indiangirls/300_350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/indiangirls/&p[title]=5 lines Indian girls hear all the time....and wished they ended like this&s=100&p[summary]=In the aftermath of the December 16 Delhi gangrape, the campaign against sexual violence has picked up traction like never before. Breaking prejudiced, gender-based stereotypes is probably the first step in that direction.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/300_350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=5 lines Indian girls hear all the time...and wished they ended differently%20http://indiatoday.intoday.in/indiangirls/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -270,56 +270,56 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
     </div>
 <?php if(isset($_GET['slide']) && $_GET['slide'] == 2) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide2.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide2.jpg" alt="" title="" />
     <a href="/indiangirls/index.jsp?slide=1" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/indiangirls/index.jsp?slide=3" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 3) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide3.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide3.jpg" alt="" title="" />
     <a href="/indiangirls/index.jsp?slide=2" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/indiangirls/index.jsp?slide=4" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 4) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide4.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide4.jpg" alt="" title="" />
     <a href="/indiangirls/index.jsp?slide=3" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/indiangirls/index.jsp?slide=5" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 5) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide5.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide5.jpg" alt="" title="" />
     <a href="/indiangirls/index.jsp?slide=4" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/indiangirls/index.jsp?slide=6" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 6) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide6.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide6.jpg" alt="" title="" />
     <a href="/indiangirls/index.jsp?slide=5" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
 
     <?php  } else { ?>
 
-       <img src="/staticpages/mediaintoday/indiatoday/images/indiangirls/Slide1.jpg" alt="" title="" />
-       <a href="/indiangirls/index.jsp?slide=2" class='next'><img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'></a>
+       <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/indiangirls/Slide1.jpg" alt="" title="" />
+       <a href="/indiangirls/index.jsp?slide=2" class='next'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'></a>
 
 
     <?php } ?>

@@ -71,10 +71,10 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
 </head>
 <body>
-<link href="/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
-		<script type="text/javascript" src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
 
 <div id="toppanel" class="clearfix">
   <div class="container">
@@ -149,8 +149,8 @@ var zflag_nid="821"; var zflag_cid="1198/1137"; var zflag_sid="2"; var zflag_wid
   <!-- Main Navigation -->
   <div id="main-navigation" class="container-fluid">
     <style>
-li.livetv{ background:url(/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
-li.livetv:hover,li.livetv.navactive{ background:url(/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
+li.livetv{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
+li.livetv:hover,li.livetv.navactive{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
 </style>
 <script>
 var siteurl="http://indiatoday.intoday.in/";
@@ -251,8 +251,8 @@ var siteurl="http://indiatoday.intoday.in/";
               <li class="livetv ">
                 <div style="display:none;" class="close"></div>
             <a href="http://indiatoday.intoday.in/livetv.jsp" title="Live Tv">
-            <!--<img class="navliveicon redicon" src="/staticpages/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
-            <img class="navliveicon whiteicon" src="/staticpages/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
+            <!--<img class="navliveicon redicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
+            <img class="navliveicon whiteicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
               
               </li>
               <li class="magazine   ">
@@ -394,11 +394,11 @@ zzp.src="http://m4.zedo.com/log/p.gif?a=2650544;c=821003559;x=23040;n=821;e=i;i=
 
 </style>
 <!--<div class="container_bestcol">
-<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="/staticpages/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
+<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
 </div>-->                  
 
 <!--<div class="clearfix"></div>
- <div id="conclaceamt"><iframe src="/staticpages/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
+ <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
  <div class="clearfix"></div>-->              
   </div>
 </div>
@@ -734,7 +734,7 @@ $(document).ready(function() {
 </div>  
  
      			<div class="rt-colum"> 
-     				 <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS">PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817052831.jpg" alt="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><span class="photo-icon spritbg"></span>Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817020217.jpg" alt="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><span class="photo-icon spritbg"></span>5 pictures that prove TV actress Mouni Roy is the most stylish of them all</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817112802.jpg" alt="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><span class="photo-icon spritbg"></span>Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042717062159.jpg" alt="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><span class="photo-icon spritbg"></span>PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-stunning-pictures-of-tv-star-shweta-tiwari-that-prove-age-is-just-a-number-for-the-actress-bigg-boss-ekta-kapoor-lifetv/1/19369.html" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_042717024102.jpg" alt="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-stunning-pictures-of-tv-star-shweta-tiwari-that-prove-age-is-just-a-number-for-the-actress-bigg-boss-ekta-kapoor-lifetv/1/19369.html" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress"><span class="photo-icon spritbg"></span>5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-baywatch-promotion-ranbir-kapoor-anushka-sharma-parineeti-chopra/1/19366.html" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/collage-thumb_300_042617062809.jpg" alt="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-baywatch-promotion-ranbir-kapoor-anushka-sharma-parineeti-chopra/1/19366.html" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport"><span class="photo-icon spritbg"></span>PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/mcd-election-2017-east-delhi-sanitation-workers/1/19341.html" title="MCD Election 2017: What sanitation workers in East Delhi went through"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/mcd-demonstartion-for-press-thumb_300x350_042217113344.jpg" alt="MCD Election 2017: What sanitation workers in East Delhi went through" title="MCD Election 2017: What sanitation workers in East Delhi went through" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/mcd-election-2017-east-delhi-sanitation-workers/1/19341.html" title="MCD Election 2017: What sanitation workers in East Delhi went through"><span class="photo-icon spritbg"></span>MCD Election 2017: What sanitation workers in East Delhi went through</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/ipl-2017-rps-vs-kkr-gautam-gambhir-robin-uthappa-kkr-rps/1/19367.html" title="IPL 2017: Kolkata thrash Pune to go on top of the table"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042617114901.jpg" alt="IPL 2017: Kolkata thrash Pune to go on top of the table" title="IPL 2017: Kolkata thrash Pune to go on top of the table" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/ipl-2017-rps-vs-kkr-gautam-gambhir-robin-uthappa-kkr-rps/1/19367.html" title="IPL 2017: Kolkata thrash Pune to go on top of the table"><span class="photo-icon spritbg"></span>IPL 2017: Kolkata thrash Pune to go on top of the table</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
+     				 <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS">PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817052831.jpg" alt="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><span class="photo-icon spritbg"></span>Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817020217.jpg" alt="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><span class="photo-icon spritbg"></span>5 pictures that prove TV actress Mouni Roy is the most stylish of them all</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817112802.jpg" alt="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><span class="photo-icon spritbg"></span>Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042717062159.jpg" alt="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><span class="photo-icon spritbg"></span>PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-stunning-pictures-of-tv-star-shweta-tiwari-that-prove-age-is-just-a-number-for-the-actress-bigg-boss-ekta-kapoor-lifetv/1/19369.html" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_042717024102.jpg" alt="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-stunning-pictures-of-tv-star-shweta-tiwari-that-prove-age-is-just-a-number-for-the-actress-bigg-boss-ekta-kapoor-lifetv/1/19369.html" title="5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress"><span class="photo-icon spritbg"></span>5 stunning pictures of TV star Shweta Tiwari that prove age is just a number for the actress</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-baywatch-promotion-ranbir-kapoor-anushka-sharma-parineeti-chopra/1/19366.html" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage-thumb_300_042617062809.jpg" alt="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-baywatch-promotion-ranbir-kapoor-anushka-sharma-parineeti-chopra/1/19366.html" title="PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport"><span class="photo-icon spritbg"></span>PHOTOS: Priyanka promotes Baywatch, Ranbir-Neetu at airport</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/mcd-election-2017-east-delhi-sanitation-workers/1/19341.html" title="MCD Election 2017: What sanitation workers in East Delhi went through"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/mcd-demonstartion-for-press-thumb_300x350_042217113344.jpg" alt="MCD Election 2017: What sanitation workers in East Delhi went through" title="MCD Election 2017: What sanitation workers in East Delhi went through" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/mcd-election-2017-east-delhi-sanitation-workers/1/19341.html" title="MCD Election 2017: What sanitation workers in East Delhi went through"><span class="photo-icon spritbg"></span>MCD Election 2017: What sanitation workers in East Delhi went through</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/ipl-2017-rps-vs-kkr-gautam-gambhir-robin-uthappa-kkr-rps/1/19367.html" title="IPL 2017: Kolkata thrash Pune to go on top of the table"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042617114901.jpg" alt="IPL 2017: Kolkata thrash Pune to go on top of the table" title="IPL 2017: Kolkata thrash Pune to go on top of the table" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/ipl-2017-rps-vs-kkr-gautam-gambhir-robin-uthappa-kkr-rps/1/19367.html" title="IPL 2017: Kolkata thrash Pune to go on top of the table"><span class="photo-icon spritbg"></span>IPL 2017: Kolkata thrash Pune to go on top of the table</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
   
  				</div>
  
@@ -746,7 +746,7 @@ $(document).ready(function() {
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/aap-leader-sanjay-singh-kumar-vishwas-comments-evm-issue/1/941002.html" title="AAP leader Sanjay Singh slams Kumar Vishwas over his comments"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/sanjay-video_88_042817090649.jpg" title="X" alt="X" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sanjay-video_88_042817090649.jpg" title="X" alt="X" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -758,7 +758,7 @@ AAP leader Sanjay Singh slams Kumar Vishwas over his comments
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/vinod-khanna-dead-remembering-legacy-video/1/940656.html" title="WATCH: Remembering the legacy of Vinod Khanna, the reluctant superstar"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/vinod-khanna-story-88_042817034948.jpg" title="Vinod Khanna" alt="Vinod Khanna" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/vinod-khanna-story-88_042817034948.jpg" title="Vinod Khanna" alt="Vinod Khanna" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -770,7 +770,7 @@ WATCH: Remembering the legacy of Vinod Khanna, the reluctant superstar
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/gautam-gambhir-sukma-attack-crpf-men-martyrs-children-expenses/1/940452.html" title="Gautam Gambhir to fund education of children of 25 CRPF men martyred in Sukma attack"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/gautam-gambhir-video_88_042817120622.jpg" title="Gautam Gambhir" alt="Gautam Gambhir" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gautam-gambhir-video_88_042817120622.jpg" title="Gautam Gambhir" alt="Gautam Gambhir" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -782,7 +782,7 @@ Gautam Gambhir to fund education of children of 25 CRPF men martyred in Sukma at
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/aiadmk-symbol-row-ec-bribery-ttv-dinakaran-delhi-police/1/940431.html" title="AIADMK symbol row: Delhi Police team arrests hawala operator who paid Dinakaran's aide"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/aiadmk-video_88_042817113512.jpg" title="AIADMK symbol row" alt="AIADMK symbol row" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/aiadmk-video_88_042817113512.jpg" title="AIADMK symbol row" alt="AIADMK symbol row" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -797,7 +797,7 @@ AIADMK symbol row: Delhi Police team arrests hawala operator who paid Dinakaran'
       	<div class="rt-colum">   
 
 				 	<h2><a href="/sosorry">So sorry</a></h2>     <div class="showing">
-      <div class="list-showing"> <a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><img width="313" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/so-sorry-evm_305_042617015051.jpg" alt="So sorry" title="So sorry" /></a>
+      <div class="list-showing"> <a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-evm_305_042617015051.jpg" alt="So sorry" title="So sorry" /></a>
        <div class="captionWicon"><a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><span class="video-icon spritbg"></span>EVM mantra for netas: Fix it even if it ain't broken</a></div>
        </div>       </div>  
    
@@ -817,7 +817,7 @@ AIADMK symbol row: Delhi Police team arrests hawala operator who paid Dinakaran'
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/watch-helicopter-carrying-cobra-commandos-crash-land-in-chhattisgarhs-sukma-leaving-5-injured/1/941232.html" title="WATCH: Helicopter carrying CoBRA commandos crash-land in Chhattisgarh's Sukma leaving 5 injured"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/helicopter-video_88_042917121425.jpg" title="Chopper Crash" alt="Chopper Crash" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/helicopter-video_88_042917121425.jpg" title="Chopper Crash" alt="Chopper Crash" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -829,7 +829,7 @@ WATCH: Helicopter carrying CoBRA commandos crash-land in Chhattisgarh's Sukma le
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/aiadmk-symbol-row-cbi-chennai-delhi-police-ttv-dinakaran/1/940858.html" title="While Delhi Police grills Dinakaran, CBI conducts multiple raids in Chennai"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/aiadmk-row-video_88_042817061245.jpg" title="AIADMK symbol row" alt="AIADMK symbol row" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/aiadmk-row-video_88_042817061245.jpg" title="AIADMK symbol row" alt="AIADMK symbol row" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -841,7 +841,7 @@ While Delhi Police grills Dinakaran, CBI conducts multiple raids in Chennai
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/tamil-nadu-government-farmers-suicide-supreme-court/1/940596.html" title="Tamil Nadu government files counter-case on farmers' suicide in Supreme Court"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/farmers-protest-video_88_042817024144.jpg" title="EPS govt files counter-case on farmers' suicide" alt="EPS govt files counter-case on farmers' suicide" />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/farmers-protest-video_88_042817024144.jpg" title="EPS govt files counter-case on farmers' suicide" alt="EPS govt files counter-case on farmers' suicide" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -853,7 +853,7 @@ Tamil Nadu government files counter-case on farmers' suicide in Supreme Court
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/dcw-rape-survivor-student-barred-from-attending-school-delhi-commission-for-women/1/940550.html" title="DCW issues notice to school that barred rape-survivor student from attending classes"> 
 <div class="watch_chunk_left">
-<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/dcw-video_88_042817022118.jpg" title="Picture for representational purpose only." alt="Picture for representational purpose only." />
+<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dcw-video_88_042817022118.jpg" title="Picture for representational purpose only." alt="Picture for representational purpose only." />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1062,7 +1062,7 @@ var zflag_nid="821"; var zflag_cid="1199/1137"; var zflag_sid="2"; var zflag_wid
   <h3>Distribution</h3>
   <ul>
     <li> <a href="http://aajtak.intoday.in/distribution/index.php" target="_blank">Rate Card</a></li>
-     <li> <a href="/staticpages/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
+     <li> <a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
       <li> <a href="http://aajtak.intoday.in/distribution/das_phase_three.php" target="_blank">Contact persons for DAS phase III</a></li>
   </ul>
 </div>
@@ -1159,11 +1159,11 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
     })();
 </script>
 
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}}); 
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}}); 

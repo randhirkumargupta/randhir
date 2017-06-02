@@ -358,7 +358,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2012/index.jsp';
 <table cellapacing="0" cellpadding="0" bgcolor="#ffffff">
 <tr>
 	<td>
-<iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
+<iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
 
 
 

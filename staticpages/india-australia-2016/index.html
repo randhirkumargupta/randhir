@@ -66,7 +66,7 @@
          .dark_hd{font-weight:700;color:#000;font-size:30px}
          .dark_hd a{font-weight:700;color:#000;font-size:30px; text-decoration:none}
          .wht_hd{margin-left:10px;top:-2px;position:relative}
-         .indtodaylogo1{display:block;background: url(/staticpages/mediaintoday/indiatoday/india-australia-2016/indiatoday-logo.png) 0 0 no-repeat;width:260px;height:58px}
+         .indtodaylogo1{display:block;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/indiatoday-logo.png) 0 0 no-repeat;width:260px;height:58px}
          .logo_cont_m{width:267px;height:58px;float:left}
          .container_crc .cont_crc{width:100%;float:left;margin:10px 0}
          .container_crc .add_c{width:728px;height:90px;float:right}
@@ -124,7 +124,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="green_hdr">
-            <img src="/staticpages/mediaintoday/indiatoday/india-australia-2016/header-bg.png" alt="img" title="BK" class="bk_green"/>
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/header-bg.png" alt="img" title="BK" class="bk_green"/>
             <div class="bk_grd_txt"><span class="dark_hd"><a href="/india-australia-2016/index.jsp" title="India in Australia 2016">India in Australia 2016</a></span><span class="wht_hd">Dhoni's Devils seek to conquer world champions</span></div>
          </div>
       </div>
@@ -193,10 +193,10 @@
             <div id='slider-area'>
                <div class='img-border'>
                   <ul>
-                     <li><a href="http://indiatoday.intoday.in/story/australia-women-post-101-run-win-over-india-women-in-first-odi/1/585745.html" title="Australia women post 101-run win over India women in first ODI"><img src="/staticpages/mediaintoday/indiatoday/images/stories/indiawomenfb-story_647_020216064446.jpg" alt="Australia women post 101-run win over India women in first ODI" title="Australia women post 101-run win over India women in first ODI" width='650' border=0></a></li>
-                     <li><a href="http://indiatoday.intoday.in/story/yuvraj-singh-will-feel-less-pressure-as-he-plays-more-games-ms-dhoni/1/584394.html" title="MS Dhoni backs Yuvraj Singh to rediscover golden touch"><img src="/staticpages/mediaintoday/indiatoday/images/stories/yuvrajdhonifb-story_647_020116104603.jpg" alt="MS Dhoni backs Yuvraj Singh to rediscover golden touch" title="MS Dhoni backs Yuvraj Singh to rediscover golden touch" width='650' border=0></a></li>
-                     <li><a href="http://indiatoday.intoday.in/story/3rd-t20i-raina-takes-india-home-to-whitewash-australia-3-0/1/584118.html" title="3rd T20I: Raina takes India home to whitewash Australia 3-0"><img src="/staticpages/mediaintoday/indiatoday/images/stories/vict20-story_647_013116060957.jpg" alt="3rd T20I: Raina takes India home to whitewash Australia 3-0" title="3rd T20I: Raina takes India home to whitewash Australia 3-0" width='650' border=0></a></li>
-                     <li><a href="http://indiatoday.intoday.in/story/india-climbs-to-no-1-spot-in-icc-t20i-rankings/1/584122.html" title="India climb to No. 1 spot in ICC T20I rankings"><img src="/staticpages/mediaintoday/indiatoday/images/stories/dhoniyuvrajfb-story_647_013116061053.jpg" alt="India climb to No. 1 spot in ICC T20I rankings" title="India climb to No. 1 spot in ICC T20I rankings" width='650' border=0></a></li>
+                     <li><a href="http://indiatoday.intoday.in/story/australia-women-post-101-run-win-over-india-women-in-first-odi/1/585745.html" title="Australia women post 101-run win over India women in first ODI"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/indiawomenfb-story_647_020216064446.jpg" alt="Australia women post 101-run win over India women in first ODI" title="Australia women post 101-run win over India women in first ODI" width='650' border=0></a></li>
+                     <li><a href="http://indiatoday.intoday.in/story/yuvraj-singh-will-feel-less-pressure-as-he-plays-more-games-ms-dhoni/1/584394.html" title="MS Dhoni backs Yuvraj Singh to rediscover golden touch"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/yuvrajdhonifb-story_647_020116104603.jpg" alt="MS Dhoni backs Yuvraj Singh to rediscover golden touch" title="MS Dhoni backs Yuvraj Singh to rediscover golden touch" width='650' border=0></a></li>
+                     <li><a href="http://indiatoday.intoday.in/story/3rd-t20i-raina-takes-india-home-to-whitewash-australia-3-0/1/584118.html" title="3rd T20I: Raina takes India home to whitewash Australia 3-0"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/vict20-story_647_013116060957.jpg" alt="3rd T20I: Raina takes India home to whitewash Australia 3-0" title="3rd T20I: Raina takes India home to whitewash Australia 3-0" width='650' border=0></a></li>
+                     <li><a href="http://indiatoday.intoday.in/story/india-climbs-to-no-1-spot-in-icc-t20i-rankings/1/584122.html" title="India climb to No. 1 spot in ICC T20I rankings"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dhoniyuvrajfb-story_647_013116061053.jpg" alt="India climb to No. 1 spot in ICC T20I rankings" title="India climb to No. 1 spot in ICC T20I rankings" width='650' border=0></a></li>
                   </ul>
                </div>
                <div class='cap-area'>
@@ -227,7 +227,7 @@
                      <li id='4'></li>
                   </ul>
                </div>
-               <div class='shed'><img src='/staticpages/mediaintoday/indiatoday/images/ipl-images/Top_chunk.png' width='618' height='30' alt=""></div>
+               <div class='shed'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/Top_chunk.png' width='618' height='30' alt=""></div>
             </div>
             <div class='news-chunk'>
                <div class='news-chunk-heading'>
@@ -237,49 +237,49 @@
                <div class='news-content'>
                   <ul class='cf'>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/michael-clarke-eyes-t20-format-after-confirming-return-to-cricket/1/583876.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/clarke-story_88_013116112503.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/michael-clarke-eyes-t20-format-after-confirming-return-to-cricket/1/583876.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/clarke-story_88_013116112503.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/michael-clarke-eyes-t20-format-after-confirming-return-to-cricket/1/583876.html" title="Michael Clarke eyes T20 format after confirming return to cricket">Michael Clarke eyes T20 format after confirming return to cricket</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/glenn-maxwell-credits-stephen-fleming-for-career-turnaround/1/581954.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/glenn-story_88_012816064458.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/glenn-maxwell-credits-stephen-fleming-for-career-turnaround/1/581954.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/glenn-story_88_012816064458.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/glenn-maxwell-credits-stephen-fleming-for-career-turnaround/1/581954.html" title="Glenn Maxwell credits Stephen Fleming for career turnaround">Glenn Maxwell credits Stephen Fleming for career turnaround</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/india-return-to-no-1-spot-in-test-rankings/1/580328.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/indtest-story_88_012616093907.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/india-return-to-no-1-spot-in-test-rankings/1/580328.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/indtest-story_88_012616093907.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/india-return-to-no-1-spot-in-test-rankings/1/580328.html" title="India return to No.1 spot in Test rankings">India return to No.1 spot in Test rankings</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/batting-at-no-4-is-my-forte-says-manish-pandey/1/578686.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/pandey-story_88_012416065129.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/batting-at-no-4-is-my-forte-says-manish-pandey/1/578686.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pandey-story_88_012416065129.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/batting-at-no-4-is-my-forte-says-manish-pandey/1/578686.html" title="Batting at No 4 is my forte, says Manish Pandey">Batting at No 4 is my forte, says Manish Pandey</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/dhoni-smith-warn-against-spidercam-interference/1/578471.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/spidercam-story_88_012416032019.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/dhoni-smith-warn-against-spidercam-interference/1/578471.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/spidercam-story_88_012416032019.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/dhoni-smith-warn-against-spidercam-interference/1/578471.html" title="Dhoni, Smith warn against Spidercam interference">Dhoni, Smith warn against Spidercam interference</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/australia-coach-darren-lehmann-suffering-deep-vein-thrombosis/1/578347.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/darren-story_88_012416125824.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/australia-coach-darren-lehmann-suffering-deep-vein-thrombosis/1/578347.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/darren-story_88_012416125824.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/australia-coach-darren-lehmann-suffering-deep-vein-thrombosis/1/578347.html" title="Australia coach Lehmann suffering deep vein thrombosis">Australia coach Lehmann suffering deep vein thrombosis</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/feel-privileged-to-get-a-national-call-up-shaun-tait/1/574862.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/taitfb-story_88_012016110044.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/feel-privileged-to-get-a-national-call-up-shaun-tait/1/574862.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/taitfb-story_88_012016110044.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/feel-privileged-to-get-a-national-call-up-shaun-tait/1/574862.html" title="Feel privileged to get a national call-up: Shaun Tait">Feel privileged to get a national call-up: Shaun Tait</a></p>
                         </div>
                      </li>
                      <li>
-                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/ipl-helped-me-grow-as-a-cricketer-hardik-pandya/1/571987.html"><img src="/staticpages/mediaintoday/indiatoday/images/stories/pandya-story_88_011616041850.jpg" alt="" title="" width="88" height="66"></a></div>
+                        <div class='news-thumb'><a href="http://indiatoday.intoday.in/story/ipl-helped-me-grow-as-a-cricketer-hardik-pandya/1/571987.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pandya-story_88_011616041850.jpg" alt="" title="" width="88" height="66"></a></div>
                         <div class='news-desc'>
                            <p><a href="http://indiatoday.intoday.in/story/ipl-helped-me-grow-as-a-cricketer-hardik-pandya/1/571987.html" title="IPL helped me grow as a cricketer, says Hardik Pandya">IPL helped me grow as a cricketer, says Hardik Pandya</a></p>
                         </div>
@@ -299,27 +299,27 @@
                   <div class='belts'>
                      <ul class='cf'>
                         <li>
-                           <a href="/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/win-thumb_305_013116074035.jpg" alt="India vs Australia: 3rd T20I in Sydney" title="India vs Australia: 3rd T20I in Sydney"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/win-thumb_305_013116074035.jpg" alt="India vs Australia: 3rd T20I in Sydney" title="India vs Australia: 3rd T20I in Sydney"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney">India vs Australia: 3rd T20I in Sydney</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_012916053024.jpg" alt="India vs Australia: 2nd T20 in Melbourne" title="India vs Australia: 2nd T20 in Melbourne"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_012916053024.jpg" alt="India vs Australia: 2nd T20 in Melbourne" title="India vs Australia: 2nd T20 in Melbourne"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne">India vs Australia: 2nd T20 in Melbourne</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/kohli-thumb_305_012616043354.jpg" alt="India vs Australia: 1st T20 in Adelaide" title="India vs Australia: 1st T20 in Adelaide"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kohli-thumb_305_012616043354.jpg" alt="India vs Australia: 1st T20 in Adelaide" title="India vs Australia: 1st T20 in Adelaide"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide">India vs Australia: 1st T20 in Adelaide</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012416044314.jpg" alt="Sydney ODI: Manish Pandey helps India to consolation win" title="Sydney ODI: Manish Pandey helps India to consolation win"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012416044314.jpg" alt="Sydney ODI: Manish Pandey helps India to consolation win" title="Sydney ODI: Manish Pandey helps India to consolation win"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win">Sydney ODI: Manish Pandey helps India to consolation win</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012016073843.jpg" alt="4th ODI: Kohli, Dhawan centuries in vain as India lose again" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012016073843.jpg" alt="4th ODI: Kohli, Dhawan centuries in vain as India lose again" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again">4th ODI: Kohli, Dhawan centuries in vain as India lose again</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets"><img align="left" class="imgs" width="210" height="155" src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_011616043939.jpg" alt="Brisbane ODI: Australia crush India by 7 wickets" title="Brisbane ODI: Australia crush India by 7 wickets"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <a href="/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_011616043939.jpg" alt="Brisbane ODI: Australia crush India by 7 wickets" title="Brisbane ODI: Australia crush India by 7 wickets"><span class="pmedia-image-icon sp_bg"></span></a>
                            <div class='caption'><a href="/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets">Brisbane ODI: Australia crush India by 7 wickets</a></div>
                         </li>
                      </ul>
@@ -341,13 +341,13 @@
                      <ul class='cf'>
                         <li>
                            <div class='video-slider-content'>
-                              <a href="/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html"><img width="323" height="180" src="/staticpages/mediaintoday/indiatoday/images/stories/thumb_305_010816010009.jpg"></a>
+                              <a href="/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/thumb_305_010816010009.jpg"></a>
                               <a href="/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html">
                                  <p>Team India to play two warm-up matches against WA XI</p>
                               </a>
                            </div>
                            <div class='video-slider-content vrtl'>
-                              <a href="/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html"><img width="323" height="180" src="/staticpages/mediaintoday/indiatoday/images/stories/kohli-video_305_010516094657.jpg"></a>
+                              <a href="/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kohli-video_305_010516094657.jpg"></a>
                               <a href="/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html">
                                  <p>BCCI honours Virat Kohli, Syed Kirmani in glittering award ceremony</p>
                               </a>
@@ -355,7 +355,7 @@
                         </li>
                         <li>
                            <div class='video-slider-content'>
-                              <a href="/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html"><img width="323" height="180" src="/staticpages/mediaintoday/indiatoday/images/stories/dhoni-video_305_010516094600.jpg"></a>
+                              <a href="/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dhoni-video_305_010516094600.jpg"></a>
                               <a href="/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html">
                                  <p>Mahendra Singh Dhoni ready for batting pressure</p>
                               </a>
@@ -373,7 +373,7 @@
                      var zflag_nid="821"; var zflag_cid="1176/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; var zflag_ct="criteo:"+crtg_content+"^viz300x250:" + vizPAM.isVizInterested("300x250")['int'];
                   </script><script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
                </div>
-               <div class="ipl-schedule"><a href="/india-australia-2016/schedule.jsp"><img src="/staticpages/mediaintoday/microsites/india-aus-schedule-band.png"></a></div>
+               <div class="ipl-schedule"><a href="/india-australia-2016/schedule.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/india-aus-schedule-band.png"></a></div>
                <div style="margin-top: 20px;" class="scorecard">
                   <div class="chunk-heading">
                      <h2>SCORECARD</h2>

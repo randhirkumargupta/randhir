@@ -116,13 +116,13 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
 	  </style>
       <div class="top_chunk">
       <div class="chunk_one">Results 2013</div>
-      <div class="chunk_two"><a href="/sex-survey-2013/ranking.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/Img_1.jpg" border="0" /></a></div>
-      <div class="chunk_two"><a href="/sex-survey-2013/map.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/Img_2.jpg" border="0" /></a></div>
+      <div class="chunk_two"><a href="/sex-survey-2013/ranking.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Img_1.jpg" border="0" /></a></div>
+      <div class="chunk_two"><a href="/sex-survey-2013/map.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Img_2.jpg" border="0" /></a></div>
       <div class="clear"></div>
-      <div class="chunk_two"><a href="/sex-survey-2013/details.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/Img_3.jpg" border="0" /></a></div>
-      <div class="chunk_two"><a href="/sex-survey-2013/compare.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/Img_4.jpg" border="0" /></a></div>
+      <div class="chunk_two"><a href="/sex-survey-2013/details.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Img_3.jpg" border="0" /></a></div>
+      <div class="chunk_two"><a href="/sex-survey-2013/compare.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Img_4.jpg" border="0" /></a></div>
       <div class="chunk_two"><a href="/sex-survey-2013/chord.jsp">
-      <img src="/staticpages/mediaintoday/indiatoday/images/Img_5.jpg" border="0" /></a>
+      <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Img_5.jpg" border="0" /></a>
       </div>
       <div class="clear"></div>
        </div>
@@ -158,7 +158,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
   <tr>
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">India Today Sex Survey Cover 2013</div>
-            <div align="center"  style="margin-top:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/it-cover.jpg" border="0"></div>
+            <div align="center"  style="margin-top:10px;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/it-cover.jpg" border="0"></div>
             <!--<div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>-->
       </td>
   </tr>
@@ -199,7 +199,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
                                                 <td align="left" valign="top" class="leadtxt14">
                                                 <div style="margin:0 8px;">
 
-                                                	<img src="/staticpages/mediaintoday/indiatoday//images/stories/2013december/ss-lead-pic-533_120613121233.jpg" border="1" align="left" class="leadimg" style="border:1px solid #000000;" />
+                                                	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013december/ss-lead-pic-533_120613121233.jpg" border="1" align="left" class="leadimg" style="border:1px solid #000000;" />
                                                     <br clear="all" />
 
                                                	 <p> The India Today Group-MDRA Sex Survey, the only study of its sort, is entering its eleventh edition. After a hiatus of 10 years, it has once again probed shades of female sexual experience. And the response of over 4,000 women and men, from across 19 cities, calls for a re-examination of all that we thought we knew about female libido. <br />
@@ -367,7 +367,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
 <table cellapacing="0" cellpadding="0" bgcolor="#ffffff">
 <tr>
 	<td>
-<iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
+<iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
 
 
 

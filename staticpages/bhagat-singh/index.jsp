@@ -9,10 +9,10 @@
 <link href="/staticpages/main/css/homepage.css" type="text/css" rel="stylesheet">
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 <meta property="og:title" content="Exclusive: Bhagat Singh's prison diary">
-<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide1.jpg">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide1.jpg">
 <meta property="og:url" content="/bhagat-singh/">
 <meta property="og:description" content="As dawn arrives on the 67th Independence Day, India Today presents a rare glimpse into the world of Bhagat Singh; pages from his prison diary during his incarceration in 1929.">
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" />
 
 <style>
 #surfercommt {
@@ -261,7 +261,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("/content_Email.jsp?email=0&title=Exclusive: Bhagat Singhs prison diary&URL=/bhagat-singh/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=/bhagat-singh/&p[title]=Exclusive: Bhagat Singh's prison diary&s=100&p[summary]=Exclusive: Bhagat Singh's prison diary&p[images][0]=/staticpages/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=/bhagat-singh/&p[title]=Exclusive: Bhagat Singh's prison diary&s=100&p[summary]=Exclusive: Bhagat Singh's prison diary&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=Exclusive: Bhagat Singh's prison diary%20http://indiatoday.intoday.in/bhagat-singh/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -272,60 +272,60 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
       <?php if(isset($_GET['slide']) && $_GET['slide'] == 2) { ?>
 
-        <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide2.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide2.jpg" alt="" title="" />
 
         <a href="/bhagat-singh/index.jsp?slide=1" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
         </a>
         <a href="/bhagat-singh/index.jsp?slide=3" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
         </a>
 
       <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 3) { ?>
-        <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide3.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide3.jpg" alt="" title="" />
 
         <a href="/bhagat-singh/index.jsp?slide=2" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
         </a>
         <a href="/bhagat-singh/index.jsp?slide=4" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
         </a>
 
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 4) { ?>
-        <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide4.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide4.jpg" alt="" title="" />
 
         <a href="/bhagat-singh/index.jsp?slide=3" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
         </a>
         <a href="/bhagat-singh/index.jsp?slide=5" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
         </a>
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 5) { ?>
-        <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide5.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide5.jpg" alt="" title="" />
 
         <a href="/bhagat-singh/index.jsp?slide=4" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
         </a>
         <a href="/bhagat-singh/index.jsp?slide=6" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
         </a>
 
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 6) { ?>
 
-        <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide6.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide6.jpg" alt="" title="" />
 
         <a href="/bhagat-singh/index.jsp?slide=5" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
         </a>
         <a href="/bhagat-singh/index.jsp?slide=7" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
         </a>
 
       <?php  } else { ?>
-      <img src="/staticpages/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" alt="" title="" />
+      <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/bhagat/slide1.jpg" alt="" title="" />
 
       <a href="/bhagat-singh/index.jsp?slide=2" class='next'>
-        <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
+        <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
       </a>
 
     <?php } ?>

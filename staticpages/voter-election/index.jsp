@@ -7,7 +7,7 @@
 <title>Election News</title>
 <meta name="description" content="News of assembly and general elections" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
-<link href="/staticpages/mediaintoday/indiatoday/css/jquery.mCustomScrollbar1.css" rel="stylesheet" />
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/jquery.mCustomScrollbar1.css" rel="stylesheet" />
 <link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
 
 <body>
@@ -200,14 +200,14 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 </header>
-<link href="/staticpages/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
 
 <div class="voter-helpline-container" >
 <div class="vote-header">
     <div class="vote-ques">Questions and Answers</div>
     <div class="vote-nav">
     	<ul>
-        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
+        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
 			<li ><a href="http://indiatoday.intoday.in/section/264/1/news.html" target="_blank">news</a></li>
 			<li><a href="/voter-election/facts.jsp" target="_blank">facts</a></li>
 			<li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
@@ -297,7 +297,7 @@ However if an applicant wishes to submit his application in person to the ERO, h
     <div class="voter-middlie lft">
     	<div class="vote-item chat-personbox">
 
-<div class="lft"><img src="/staticpages/mediaintoday/indiatoday/images/Dr-pic.png" border="0"></div>
+<div class="lft"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Dr-pic.png" border="0"></div>
 			<a href="http://indiatoday.intoday.in/story/s.y.-quraishi-a-chief-election-commissioner-and-an-ambassador-of-democracy/1/321703.html" target="_blank">
             <div class="chatright-box">
             	<div class="vote-sensetxt">Making Sense of the Elections with</div>
@@ -327,19 +327,19 @@ However if an applicant wishes to submit his application in person to the ERO, h
 
 <script src="/staticpages/main/js/jquery.min.js"></script>
 <script type="text/javascript" src="/staticpages/main/funalytics/jquery.bxslider.min.js?1"></script>
-<link href="/staticpages/mediaintoday/indiatoday/funalytics/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 
 <div style="width:300px;"><ul class="bxslider">
 
-  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042817080527.jpg" title="" height="350" /></a></li>
+  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042817080527.jpg" title="" height="350" /></a></li>
 
-  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=2" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/images/stories/visual_edit_300_042617080732.jpg" title="" height="350" /></a></li>
+  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=2" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visual_edit_300_042617080732.jpg" title="" height="350" /></a></li>
 
-  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=3" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042517124939.jpg" title="" height="350" /></a></li>
+  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=3" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042517124939.jpg" title="" height="350" /></a></li>
 
-  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=4" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042417025516.jpg" title="" height="350" /></a></li>
+  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=4" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042417025516.jpg" title="" height="350" /></a></li>
 
-  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=5" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042117105644.jpg" title="" height="350" /></a></li>
+  <li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=5" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visual-edit_300x350_042117105644.jpg" title="" height="350" /></a></li>
 
 </ul>
 </div>
@@ -395,7 +395,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
         <div class="clear"></div>-->
         <a href="facts.jsp" target="_blank">
         <div class="vote-item">
-        <img src="/staticpages/mediaintoday/indiatoday/images/Untitled-1.gif" border="0">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Untitled-1.gif" border="0">
         </div>
 		</a>
         <div class="clear"></div>
@@ -496,8 +496,8 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 
-<script src="/staticpages/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min1.js"></script>
- <script src="/staticpages/mediaintoday/indiatoday/js/voter-helpline.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min1.js"></script>
+ <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/voter-helpline.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 </html>

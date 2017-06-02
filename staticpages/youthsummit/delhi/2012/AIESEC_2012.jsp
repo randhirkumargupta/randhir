@@ -40,7 +40,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -51,23 +51,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -259,7 +259,7 @@
 
 		<div class="sponcer-text-wrapper">
 
-		<img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponcers/aiesec.gif" align="left" style="margin-right:10px ; margin-bottom:3px">
+		<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/sponcers/aiesec.gif" align="left" style="margin-right:10px ; margin-bottom:3px">
         <p>AIESEC is the world's largest youth-run organization present in over 110 countries and territories and with over 60,000 members. Established in year 1948 in Stockholm Sweden, AIESEC is a unique Global youth network of young people which aims at developing youth around issues like entrepreneurship, social responsibility and cultural sensitivity. Our international platform enables young people to explore and develop their potential to provide leadership for a positive impact on society.</p>
         <p>AIESEC offers young people the opportunity to participate in international internships, experience leadership and participate in a global learning environment. Annually AIESEC facilitates over 16,000 international internships and enables more than 20,000 leadership opportunities. </p>
       <p>What makes AIESEC unique is the youth driven impactful experience that it offers to its members. AIESEC is run by young people for young people, enabling a strong experience to all its stakeholders. </p>

@@ -85,7 +85,7 @@ h2{font-size:16px;} #venudrop li a:hover, #venudrop li a{ height:25px;}
 .dark_hd{font-weight:700;color:#000;font-size:30px}
 .dark_hd a{font-weight:700;color:#000;font-size:30px; text-decoration:none}
 .wht_hd{margin-left:10px;top:-2px;position:relative}
-.indtodaylogo1{display:block;background: url(/staticpages/mediaintoday/indiatoday/india-australia-2016/indiatoday-logo.png) 0 0 no-repeat;width:260px;height:58px}
+.indtodaylogo1{display:block;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/indiatoday-logo.png) 0 0 no-repeat;width:260px;height:58px}
 .logo_cont_m{width:267px;height:58px;float:left}
 .container_crc .cont_crc{width:100%;float:left;margin:10px 0}
 .container_crc .add_c{width:728px;height:90px;float:right}
@@ -144,7 +144,7 @@ h2{font-size:16px;} #venudrop li a:hover, #venudrop li a{ height:25px;}
          </div>
          <div class="clearfix"></div>
          <div class="green_hdr">
-            <img src="/staticpages/mediaintoday/indiatoday/india-australia-2016/header-bg.png" alt="img" title="BK" class="bk_green" />
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/header-bg.png" alt="img" title="BK" class="bk_green" />
             <div class="bk_grd_txt"> <span class="dark_hd"><a href="/india-australia-2016/index.jsp" title="India in Australia 2016">India in Australia 2016</a></span> <span class="wht_hd">Dhoni's Devils seek to conquer world champions</span> </div>
          </div>
       </div>

@@ -45,14 +45,14 @@
 </div>
 <!--top-->
 
-<link href="/staticpages/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
 
 <div class="voter-helpline-container" >
 <div class="vote-header">
     <div class="vote-ques">Questions and Answers</div>
     <div class="vote-nav">
     	<ul>
-        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
+        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
 			<li ><a href="http://indiatoday.intoday.in/section/264/1/news.html" target="_blank">news</a></li>
 			<li><a href="/voter-election/facts.jsp" target="_blank">facts</a></li>
 			<li><a href="http://indiatoday.intoday.in/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
@@ -106,7 +106,7 @@
 .vote-ques { display:none;}
 #search_area1 .input-txt {padding: 4px 8px; width:260px;}
 #search_area1 .go_btn { padding: 2px 5px;}
-.left { background:url(/staticpages/mediaintoday/indiatoday/images/facts-left.jpg) left top no-repeat; width:302px; height:1024px; position:relative; float:left}
+.left { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/facts-left.jpg) left top no-repeat; width:302px; height:1024px; position:relative; float:left}
 .fb, .tw, .email {
     background-image: url("/staticpages/main/images/India-Today-Sprites1.png");
     background-repeat: no-repeat;
@@ -207,7 +207,7 @@ width: 100px;
 .imges4 {   left: 80px; position: absolute; top: 809px;}
 
 .img1 img, .img2 img, .img3 img, .img4 img, .imges1 img, .imges2 img, .imges3 img, .imges4 img {border:1px solid #000;}
-.right1 { background:url(/staticpages/mediaintoday/indiatoday/images/facts-right.jpg) left top no-repeat; width:302px; height:1024px; position:relative; float:right }
+.right1 { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/facts-right.jpg) left top no-repeat; width:302px; height:1024px; position:relative; float:right }
 </style>
 
 <div class="left-side lft">
@@ -228,27 +228,27 @@ width: 100px;
 
 
  			<div class="orr-numb a" style='display:block'>1</div>
-			<div class="img1" style='display:block'><a href="javascript:void(0);" id="imgL_0" onclick="showImgL(0, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-12-to-16_thumb_103113011005.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact-12-to-16_103113011005.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img1" style='display:block'><a href="javascript:void(0);" id="imgL_0" onclick="showImgL(0, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-12-to-16_thumb_103113011005.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-12-to-16_103113011005.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
  			<div class="orr-numb b" style='display:block'>2</div>
-			<div class="img2" style='display:block'><a href="javascript:void(0);" id="imgL_1" onclick="showImgL(1, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-2-thumb_103113011211.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact-2_103113011211.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img2" style='display:block'><a href="javascript:void(0);" id="imgL_1" onclick="showImgL(1, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-2-thumb_103113011211.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-2_103113011211.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
  			<div class="orr-numb c" style='display:block'>3</div>
-			<div class="img3" style='display:block'><a href="javascript:void(0);" id="imgL_2" onclick="showImgL(2, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact_23_thumbright_103113063944.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact_23right_103113063944.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img3" style='display:block'><a href="javascript:void(0);" id="imgL_2" onclick="showImgL(2, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact_23_thumbright_103113063944.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact_23right_103113063944.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
  			<div class="orr-numb d" style='display:block'>4</div>
-			<div class="img4" style='display:block'><a href="javascript:void(0);" id="imgL_3" onclick="showImgL(3, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-9-thumbleft_103113064405.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact-9left_103113064405.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img4" style='display:block'><a href="javascript:void(0);" id="imgL_3" onclick="showImgL(3, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-9-thumbleft_103113064405.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-9left_103113064405.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
  			<div class="orr-numb d" style='display:none'>5</div>
-			<div class="img5" style='display:none'><a href="javascript:void(0);" id="imgL_4" onclick="showImgL(4, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-27-thumb_110813112721.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact-27_110813112721.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img5" style='display:none'><a href="javascript:void(0);" id="imgL_4" onclick="showImgL(4, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-27-thumb_110813112721.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-27_110813112721.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
  			<div class="orr-numb d" style='display:none'>6</div>
-			<div class="img6" style='display:none'><a href="javascript:void(0);" id="imgL_5" onclick="showImgL(5, 0, 6);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-26-thumb_110813112829.jpg" bigsrc="/staticpages/mediaintoday/indiatoday/images/stories/fact-26_110813112829.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+			<div class="img6" style='display:none'><a href="javascript:void(0);" id="imgL_5" onclick="showImgL(5, 0, 6);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-26-thumb_110813112829.jpg" bigsrc="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-26_110813112829.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
       </div>
@@ -292,27 +292,27 @@ function showImgL(counter, startNo, endNo) {
 
 
             <div class="gr-numb a" style='display:block'>1</div>
-            <div class="imges1" style='display:block'><a href="javascript:void(0);" id="imgR_0" onclick="showImgR(0, 0, 5);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-18-thumb_103113125713.jpg" big_src="/staticpages/mediaintoday/indiatoday/images/stories/fact-18_103113125713.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+            <div class="imges1" style='display:block'><a href="javascript:void(0);" id="imgR_0" onclick="showImgR(0, 0, 5);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-18-thumb_103113125713.jpg" big_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-18_103113125713.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
 
             <div class="gr-numb b" style='display:block'>2</div>
-            <div class="imges2" style='display:block'><a href="javascript:void(0);" id="imgR_1" onclick="showImgR(1, 0, 5);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-20_thumb_103113125940.jpg" big_src="/staticpages/mediaintoday/indiatoday/images/stories/fact-20_103113125940.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+            <div class="imges2" style='display:block'><a href="javascript:void(0);" id="imgR_1" onclick="showImgR(1, 0, 5);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-20_thumb_103113125940.jpg" big_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-20_103113125940.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
 
             <div class="gr-numb c" style='display:block'>3</div>
-            <div class="imges3" style='display:block'><a href="javascript:void(0);" id="imgR_2" onclick="showImgR(2, 0, 5);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-21-thumb_103113010219.jpg" big_src="/staticpages/mediaintoday/indiatoday/images/stories/fact-21_103113010219.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+            <div class="imges3" style='display:block'><a href="javascript:void(0);" id="imgR_2" onclick="showImgR(2, 0, 5);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-21-thumb_103113010219.jpg" big_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-21_103113010219.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
 
             <div class="gr-numb d" style='display:block'>4</div>
-            <div class="imges4" style='display:block'><a href="javascript:void(0);" id="imgR_3" onclick="showImgR(3, 0, 5);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact-4-thumbleft_103113063738.jpg" big_src="/staticpages/mediaintoday/indiatoday/images/stories/fact-4left_103113063738.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+            <div class="imges4" style='display:block'><a href="javascript:void(0);" id="imgR_3" onclick="showImgR(3, 0, 5);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-4-thumbleft_103113063738.jpg" big_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact-4left_103113063738.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
 
             <div class="gr-numb d" style='display:none'>5</div>
-            <div class="imges5" style='display:none'><a href="javascript:void(0);" id="imgR_4" onclick="showImgR(4, 0, 5);"><img src="/staticpages/mediaintoday/indiatoday/images/stories/fact_22_thumb_103113064218.jpg" big_src="/staticpages/mediaintoday/indiatoday/images/stories/fact_22_103113064218.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
+            <div class="imges5" style='display:none'><a href="javascript:void(0);" id="imgR_4" onclick="showImgR(4, 0, 5);"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact_22_thumb_103113064218.jpg" big_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fact_22_103113064218.jpg" title="" width="205" height="201" border="0" class="img" /></a></div>
 
 
 
@@ -399,7 +399,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
         <div class="clear"></div>-->
         <a href="facts.jsp" target="_blank">
         <div class="vote-item">
-        <img src="/staticpages/mediaintoday/indiatoday/images/Untitled-1.gif" border="0">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Untitled-1.gif" border="0">
         </div>
 		</a>
         <div class="clear"></div>

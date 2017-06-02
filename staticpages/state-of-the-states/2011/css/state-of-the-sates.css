@@ -63,7 +63,7 @@ header {float:none;}
 .prjdate {text-align:right; line-height:30px; font: bold 14px/26px Arial; color:#181818; width:300px; float:right;}
 .ptabbox { margin-bottom: 12px;}
 .ptimeln {color: #343434; float: left; font:12px Arial Black;  width: 95px; padding-top:8px;}
-.pritepart {background: url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif) repeat-y; float: right; width: 575px; padding-left:10px; padding-top:8px;}
+.pritepart {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif) repeat-y; float: right; width: 575px; padding-left:10px; padding-top:8px;}
 .pritepart.pborder {border-bottom:1px solid #CCCCCC;padding-bottom: 10px;}
 .psession{color:#000000; font: 12px Arial; margin-bottom:15px;}
 .psessiontitle{color:#000000; font-size:16px; font-family:Arial Black; text-transform:uppercase;}

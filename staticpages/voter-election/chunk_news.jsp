@@ -1,7 +1,7 @@
 		<div class="main_heading"> <a href="http://indiatoday.intoday.in/story/congress-delhi-municipal-corporation-polls/1/899001.html" class="lead" target="_blank">Congress eyes Delhi, Rahul Gandhi to launch campaign for municipal election</a></div>
 			 <div class="st_imag">
 
-			  <img src="/staticpages/mediaintoday/indiatoday/images/stories/congress-mcd-story_305_030717073755.jpg" width="302" height="194" alt="Congress gearing up for the MCD polls" title="Congress gearing up for the MCD polls" >
+			  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/congress-mcd-story_305_030717073755.jpg" width="302" height="194" alt="Congress gearing up for the MCD polls" title="Congress gearing up for the MCD polls" >
 
         <p>The Congress does not want to leave any stone unturned and has asked its top leaders to campaign ahead of the MCD election.</p> </div>
 

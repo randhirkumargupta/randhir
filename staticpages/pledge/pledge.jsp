@@ -123,7 +123,7 @@ function ajaxFunction(){
 body {
 	margin: 0;
 	padding: 0;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
 	font-family:roboto;
 }
 ul {
@@ -150,7 +150,7 @@ a {
 .counter {
 	width: 180px;
 	height: 56px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/counter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/counter.png);
 	position: absolute;
 	bottom: 0;
 	left: 212px;
@@ -163,7 +163,7 @@ a {
 	width: 966px;
 	height: 76px;
 	margin-bottom: 25px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
 }
 .people-who-pledged ul {
 	margin-left: 25px;
@@ -179,7 +179,7 @@ a {
 	height: 450px;
 	padding-top: 65px;
 	float: left;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/twiter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/twiter.png);
 	background-repeat: no-repeat
 }
 .facebook-box {
@@ -188,7 +188,7 @@ a {
 	float: right;
 	padding-top: 75px;
 	padding-left: 5px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/facebook.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/facebook.png);
 	background-repeat: no-repeat;
 }
 
@@ -225,7 +225,7 @@ a {
 	padding-bottom: 50px;
 }
 #pledgetop {
-	background-image: url(/staticpages/mediaintoday/indiatoday/images/pledge/Mast.png);
+	background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Mast.png);
 	background-repeat: no-repeat;
 	background-position: top left;
 	height: 283px;
@@ -333,40 +333,40 @@ height: 200px;
     </div>
     <div style="float:right; width:205px; margin:48px 0 0 0; text-align:center;">
       <div style='font:bold 12px arial; color:#ffec00; text-align:left; margin-bottom:5px; padding-left:50px;'>Stay Connected</div>
-      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
+      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
     </div>
   </div>
   <div class="txtcenet">
     <div style="float:left; width:224px; margin-left:20px; text-align:left">
       <div>
-        <div style="background-image:url(/staticpages/mediaintoday/indiatoday/images/pledge/Corner_Top.gif); background-repeat:no-repeat; background-position:top left; font:bold 12px arial; color:#ffec00; text-align:center; line-height:23px;">People who have pledged so far</div>
+        <div style="background-image:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Corner_Top.gif); background-repeat:no-repeat; background-position:top left; font:bold 12px arial; color:#ffec00; text-align:center; line-height:23px;">People who have pledged so far</div>
         <div style="clear:both;"></div>
         <div style="width:206px; padding:8px; border-left:1px solid #d1060c; border-right:1px solid #d1060c; background-color:#d1060c;">
           <iframe scrolling="no" height="365" frameborder="0" width="210" src="/pledge/nameticker_chunk.jsp" allowtransparency="true"></iframe>
         </div>
         <div style="clear:both;"></div>
-        <div><img src="/staticpages/mediaintoday/indiatoday/images/pledge/Corner_Bottom.gif" border="0" align="left" /></div>
+        <div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Corner_Bottom.gif" border="0" align="left" /></div>
       </div>
       
       <!--<div style="margin-bottom:20px;">
-<div><img src="/staticpages/mediaintoday/indiatoday/images/pledge/Corner_Top.gif" width="224" height="23"  border="0" align="left" /></div>
+<div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Corner_Top.gif" width="224" height="23"  border="0" align="left" /></div>
 <div style="clear:both;"></div>
 <div style="width:206px; padding:8px; border-left:1px solid #d1060c; border-right:1px solid #d1060c; background-color:#d1060c;">
 dfsdfsdf
 </div>
 <div style="clear:both;"></div>
-<div><img src="/staticpages/mediaintoday/indiatoday/images/pledge/Corner_Bottom.gif" border="0" align="left" /></div>
+<div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Corner_Bottom.gif" border="0" align="left" /></div>
 </div>--> 
       
     </div>
-    <div style="float: left;width: 254px;margin: 1px 23px;font-family: arial;font-size: 15px;background: url(/staticpages/mediaintoday/microsites/iamshakti/images/bg-pledge-small.png) no-repeat;padding: 46px 38px 0px;line-height: 21px;font-weight: bold;color: white;height: 367px;border-radius: 10px; margin-left:60px;">I do solemnly declare that as a citizen of India I will do everything in my power to uphold -- through thought, words and action-- the honour and dignity of womanhood. 
+    <div style="float: left;width: 254px;margin: 1px 23px;font-family: arial;font-size: 15px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/bg-pledge-small.png) no-repeat;padding: 46px 38px 0px;line-height: 21px;font-weight: bold;color: white;height: 367px;border-radius: 10px; margin-left:60px;">I do solemnly declare that as a citizen of India I will do everything in my power to uphold -- through thought, words and action-- the honour and dignity of womanhood. 
       That I understand that accepting women as equal and respected partners in all spheres of life is not only a moral imperative, but a means of transforming our society. 
       
       That it is the duty of every Indian to spread the message of the need to accord women their rightful place in all spheres of life. 
       I hereby pledge myself to remain true to my oath in all time to come.</div>
     <div style="float:right; width:314px; text-align:left; background-color:#d30a12;">
       <form name="feedback" action="savepledge.jsp" method="post" onsubmit="javascript:return ajaxFunction()">
-        <div style="float:left;"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/Top.gif" border="0" align="left" /></div>
+        <div style="float:left;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Top.gif" border="0" align="left" /></div>
         <div style="float:left;">
           <table width="314" border="0"  align="center" cellpadding="0" cellspacing="9" id="ask_your_quation" class="normaltext">
             <input type="hidden" name="site" value="indiatoday" />
@@ -437,9 +437,9 @@ dfsdfsdf
           </table>
         </div>
         <div class="txtcenet" style="$margin-top:-15px;">
-          <input type="image" src="/staticpages/mediaintoday/indiatoday/images/pledge/Pledge_Now.gif" style=" cursor:pointer;height:44px; width:155px;" />
+          <input type="image" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Pledge_Now.gif" style=" cursor:pointer;height:44px; width:155px;" />
         </div>
-        <div style="float:left;"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/bottom.gif" border="0" align="left" /></div>
+        <div style="float:left;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/bottom.gif" border="0" align="left" /></div>
       </form>
     </div>
   </div>
@@ -472,7 +472,7 @@ dfsdfsdf
   <div class="container"> </div>
 </div>
 <div class="footer">
-  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+  <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
 </div>
 
 </body>

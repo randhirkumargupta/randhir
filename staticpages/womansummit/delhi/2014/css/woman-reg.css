@@ -57,7 +57,7 @@ img{ border:none;}
 
 .margtop {margin-top:20px;}
 .clr { clear:both}
-.topbgstar {width:100%; background:url("/staticpages/mediaintoday/indiatoday/womansummit/2014/images/top-bg.gif") repeat-x center center;}
+.topbgstar {width:100%; background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/images/top-bg.gif") repeat-x center center;}
 .topnavigation {width:100%; background:#000;}
 .womanarch {
     background: url("../images/ar-left.gif") no-repeat scroll left top transparent;
@@ -78,13 +78,13 @@ img{ border:none;}
 .group-link a:hover {color:#FFFFFF; text-decoration:underline;}
 .logo {  height:230px; width:249px; float:left;}
 .woman-logo {
-    background: url("/staticpages/mediaintoday/indiatoday/womansummit/2013/images/title.png") no-repeat scroll left top transparent;
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/title.png") no-repeat scroll left top transparent;
     height: 130px;
     margin-left: 60px;
     margin-top: 25px;
     width: 660px;
 }
-.spon { background:url("/staticpages/mediaintoday/indiatoday/womansummit/2013/images/event.jpg") no-repeat center center; float:left; width:86px; height:57px; background-color:#fff301;}
+.spon { background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/event.jpg") no-repeat center center; float:left; width:86px; height:57px; background-color:#fff301;}
 
 .spondiv {
     background-color: #FFFFFF;
@@ -159,7 +159,7 @@ img{ border:none;}
     width: 683px;
 }
 .prjtitle {
-    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
     height: 30px;
 }
 .prjtitlename {
@@ -191,7 +191,7 @@ img{ border:none;}
     padding-bottom: 10px;
 }
 .pritepart {
-    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif") repeat-y scroll 0 0 transparent;
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif") repeat-y scroll 0 0 transparent;
     float: right;
     padding-left: 10px;
     padding-top: 8px;

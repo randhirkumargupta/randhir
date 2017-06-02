@@ -72,7 +72,7 @@
         </div>
         
         <!--<div style="height:180 px;">
-        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
+        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
 <map name="Map122" id="Map122"><area shape="rect" coords="716,114,956,157" href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" /></map></a>        </div>-->
 <!--<div  style="height: 180px;">
 		
@@ -82,24 +82,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -199,7 +199,7 @@
             <div class="clear"></div>
         </div>
           <div style="height:180 px;">
-       <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
+       <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
         </div>-->
         
 <div  style="height: 180px;">
@@ -210,24 +210,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
+            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -282,28 +282,28 @@
 		<div id="main_content_left">
 			<div class="sponcer-text-wrapper" style="background-color: #fef200; margin-top: -20px; min-height: 795px;">
 			 <div style="height: 30px; clear: both;"></div>
-			  <div style="width: 683px; height: 206px; background-image: url('/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-01.jpg'); position: relative;">
+			  <div style="width: 683px; height: 206px; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-01.jpg'); position: relative;">
 					<div class="caption sp1"><div><a href="speakers-bios/Baichung-Bhutia.jsp">BHAICHUNG BHUTIA</a></div><span>FOOTBALL PLAYER</span></div>
 					<div class="caption sp2"><div><a href="speakers-bios/Chetan-Bhagat.jsp">CHETAN BHAGAT</a></div><span>AUTHOR</span></div>
 					<div class="caption sp3"><div><a href="speakers-bios/Ranveer-Singh.jsp">RANVEER SINGH</a></div><span>ACTOR</span></div>
 					<div class="caption sp4"><div><a href="speakers-bios/Kunaal-Roy-Kapur.jsp">KUNAAL ROY KAPUR</a></div><span>ACTOR</span></div> 
 			  </div>
 			  <div style="height: 30px; clear: both;"></div>
-			  <div style="width: 683px; height: 205px; background-image: url('/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-02.jpg'); position: relative;">
+			  <div style="width: 683px; height: 205px; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-02.jpg'); position: relative;">
 					<div class="caption sp5"><div><a href="speakers-bios/Soha-Ali-Khan.jsp">SOHA ALI KHAN</a> </div><span>ACTOR</span></div>
 					<div class="caption sp6"><div><a href="speakers-bios/Prasenjit-Bose.jsp">PRASENJIT BOSE</a></div><span>LEFT ACTIVIST</span></div>
 					<div class="caption sp7"><div><a href="speakers-bios/Prosenjit-Chatterjee.jsp">PROSENJIT CHATTERJEE</a> </div><span>ACTOR</span></div>
 					<div class="caption sp8"><div><a href="speakers-bios/Om-Prakash-Mishra.jsp">OM PRAKASH MISHRA</a></div><span>Congress General Secretary</span></div>
 			  </div>
 			   <div style="height: 30px; clear: both;"></div>
-			  <div style="width: 683px; height: 205px; background-image: url('/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-03.jpg'); position: relative;">
+			  <div style="width: 683px; height: 205px; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/speaker-03.jpg'); position: relative;">
 					<div class="caption sp9"><div><a href="speakers-bios/Rupam-Islam.jsp">RUPAM ISLAM</a></div><span>MUSICIAN</span></div>
 					<div class="caption sp10"><div><a href="speakers-bios/Irrfan-Khan.jsp">IRRFAN KHAN</a></div><span>ACTOR</span></div>
 					<div class="caption sp11"><div><a href="speakers-bios/Lou-Majaw.jsp">LOU MAJAW</a></div><span>MUSICIAN</span></div>
 					<div class="caption sp12"><div><a href="speakers-bios/Zubeen-Garg.jsp">ZUBEEN GARG</a></div><span>MUSICIAN </span></div>
 			  </div>
               <div style="height: 30px; clear: both;"></div>
-			  <div style="width: 683px; height: 300px; background-repeat:no-repeat; background-image: url('/staticpages/mediaintoday//indiatoday/youthsummit/speaker-thumb/speaker-04.jpg'); position: relative;">
+			  <div style="width: 683px; height: 300px; background-repeat:no-repeat; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/youthsummit/speaker-thumb/speaker-04.jpg'); position: relative;">
 					<div class="caption sp13"><div>Brett Lee</div>
 				<span> CRICKET PLAYER</span></div>
 					<div class="caption sp14" style="text-transform:uppercase"><div ><a href="speakers-bios/Pradyot-Bikram.jsp">Pradyot Bikram Manikya Deb Barma</a></div><span>General Secretary, Tripura Congress and Editor, The Northeast Today</span></div>

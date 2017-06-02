@@ -57,7 +57,7 @@ GA_googleFetchAds();
         	<section class="left">
             	<div id="lead2012">
                 	<div class="leadleft">
-                    	<a href="http://indiatoday.intoday.in/story/india-today-universities-ranking-2012-delhi-university-tops/1/189290.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-top5du-1-420x270_051812123324.jpg" width="420" height="270" border="0" alt="" title="">
+                    	<a href="http://indiatoday.intoday.in/story/india-today-universities-ranking-2012-delhi-university-tops/1/189290.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-top5du-1-420x270_051812123324.jpg" width="420" height="270" border="0" alt="" title="">
                         <span class="yearimg"></span>
                         </a>
                         <div class="title">
@@ -66,7 +66,7 @@ GA_googleFetchAds();
                         </div>
                     </div>
                     <div class="leadright">
-                    	<a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank"><img class="lead2img" src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-5-210_051812123406.jpg" width="210" height="100" border="0" alt="" title=""></a>                    	
+                    	<a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank"><img class="lead2img" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-5-210_051812123406.jpg" width="210" height="100" border="0" alt="" title=""></a>                    	
                         <div class="desc">
                         	In its third edition, the INDIA TODAY Universities survey ranks 160 varsities.</div>
                         <ul>
@@ -85,21 +85,21 @@ GA_googleFetchAds();
                         	<img src="images/photos.png" width="192" height="32" alt="" border="0">
                         </div>
                         <div class="photoyear">
-                        	<a href="http://indiatoday.intoday.in/gallery/indias-top-50-universities-of-2012/1/7154.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-6-200_051812123133.jpg" width="200" height="200" alt="" border="0"></a>             
+                        	<a href="http://indiatoday.intoday.in/gallery/indias-top-50-universities-of-2012/1/7154.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-6-200_051812123133.jpg" width="200" height="200" alt="" border="0"></a>             
                             <div class="photoueartitle">
                             	<img src="images/photo-2012.png" width="81" height="39" alt="" border="0" align="left">
                                 <p><a href="http://indiatoday.intoday.in/gallery/indias-top-50-universities-of-2012/1/7154.html" target="_blank">The Best Universities of 2012</a></p>
                             </div>           	
                         </div>
                         <div class="photoyear">
-                        	<a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-3-5200x200_051812123047.jpg" width="200" height="200" alt="" border="0"></a>             
+                        	<a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-3-5200x200_051812123047.jpg" width="200" height="200" alt="" border="0"></a>             
                             <div class="photoueartitle">
                             	<img src="images/photo-2011.png" width="81" height="39" alt="" border="0" align="left">
                                 <p><a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank">The Best Universities of 2011</a></p>
                             </div>           	
                         </div>
                         <div class="photoyear">
-                        	<a href="http://indiatoday.intoday.in/site/Photo/3229/3/India%27s+top+50+Universities.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-2-200_051812122917.jpg" width="200" height="200" alt="" border="0"></a>             
+                        	<a href="http://indiatoday.intoday.in/site/Photo/3229/3/India%27s+top+50+Universities.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-essay-may28-2-200_051812122917.jpg" width="200" height="200" alt="" border="0"></a>             
                             <div class="photoueartitle">
                             	<img src="images/photo-2010.png" width="81" height="39" alt="" border="0" align="left">
                                 <p><a href="http://indiatoday.intoday.in/site/Photo/3229/3/India%27s+top+50+Universities.html" target="_blank">The Best Universities of 2010</a></p>
@@ -110,7 +110,7 @@ GA_googleFetchAds();
                     	<div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/indias-best-universities/1/147184.html" target="_blank"><span>2011</span> Ranking</a></div>
-                            <a href="http://indiatoday.intoday.in/story/indias-best-universities/1/147184.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-top5calcutta-1-395_051812123250.jpg" width="395" height="210" alt="" border="0"></a>
+                            <a href="http://indiatoday.intoday.in/story/indias-best-universities/1/147184.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-top5calcutta-1-395_051812123250.jpg" width="395" height="210" alt="" border="0"></a>
                             <div class="title">
                         	  <a href="http://indiatoday.intoday.in/story/indias-best-universities/1/147184.html" target="_blank">India's best universities: On higher ground </a><br>
                        	    The top five universities from 2010 continued to be the top five in 2011.</div>
@@ -124,7 +124,7 @@ GA_googleFetchAds();
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/Hubs+of+excellence/1/98292.html" target="_blank"><span>2010</span> Ranking</a>
                             </div>
-                            <a href="http://indiatoday.intoday.in/story/Hubs+of+excellence/1/98292.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012May/univ-top5banaras-1-395_051812123212.jpg" width="395" height="210" alt="" border="0"></a>
+                            <a href="http://indiatoday.intoday.in/story/Hubs+of+excellence/1/98292.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012May/univ-top5banaras-1-395_051812123212.jpg" width="395" height="210" alt="" border="0"></a>
                             <div class="title">
                         	  <a href="http://indiatoday.intoday.in/story/Hubs+of+excellence/1/98292.html" target="_blank">Hubs of excellence</a><br>
                               The first INDIA TODAY-Nielsen Survey on the country's leading higher educational institutions.
@@ -166,19 +166,19 @@ GA_googleFillSlot("IT_Special_MRec");
 <DIV id=mostpopular>
 <DIV class=mostpopulartext>MOST POPULAR</DIV>
 <DIV class=odd><A href="http://indiatoday.intoday.in/story/i-can-get-you-any-drug-give-me-24-hours-says-brad-pitt/1/224872.html">
-<DIV class=mostpopularbox><IMG alt=" " align=right src="/staticpages/mediaintoday/indiatoday/images/stories/brad-167_101512053249.jpg" width=167 height=125 mce_src="/staticpages/mediaintoday/indiatoday/images/stories/brad-167_101512053249.jpg"></DIV>
+<DIV class=mostpopularbox><IMG alt=" " align=right src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/brad-167_101512053249.jpg" width=167 height=125 mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/brad-167_101512053249.jpg"></DIV>
 <DIV class=mptext>Brad Pitt is not into drugs anymore, but says he can still get his hands on anything he wants.</DIV></A>
 <DIV class=clear></DIV></DIV>
 <DIV class=even><A href="http://indiatoday.intoday.in/gallery/curvy-kim-keeps-her-fans-happy/1/6491.html">
-<DIV class=mostpopularbox><IMG alt=" " align=right src="/staticpages/mediaintoday/indiatoday//images/stories/2012october/kim-167_101512050110.jpg" width=167 height=125 mce_src="/staticpages/mediaintoday/indiatoday//images/stories/2012october/kim-167_101512050110.jpg"></DIV>
+<DIV class=mostpopularbox><IMG alt=" " align=right src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012october/kim-167_101512050110.jpg" width=167 height=125 mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012october/kim-167_101512050110.jpg"></DIV>
 <DIV class=mptext>US reality TV star Kim Kardashian makes the most of Halloween. Check out her latest tweet pics!</DIV></A>
 <DIV class=clear></DIV></DIV>
 <DIV class=odd><A href="http://indiatoday.intoday.in/story/kristen-stewart-sex-fears-robert-robert-pattinson/1/224848.html">
-<DIV class=mostpopularbox><IMG alt=" " align=right src="/staticpages/mediaintoday/indiatoday/images/stories/kristen-167_101512030837.jpg" width=167 height=125 mce_src="/staticpages/mediaintoday/indiatoday/images/stories/kristen-167_101512030837.jpg"></DIV>
+<DIV class=mostpopularbox><IMG alt=" " align=right src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kristen-167_101512030837.jpg" width=167 height=125 mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kristen-167_101512030837.jpg"></DIV>
 <DIV class=mptext>Actor Kristen Stewart is scared that her fame might lead to someone killing her one day.</DIV></A>
 <DIV class=clear></DIV></DIV>
 <DIV class=even><A href="http://indiatoday.intoday.in/story/i-am-not-married-to-filmmaker-aditya-chopra-says-rani-mukerji/1/224853.html">
-<DIV class=mostpopularbox><IMG alt=" " align=right src="/staticpages/mediaintoday/indiatoday//images/stories/rani-mukerji_167_101512032945.jpg" width=167 height=125 mce_src="/staticpages/mediaintoday/indiatoday//images/stories/rani-mukerji_167_101512032945.jpg"></DIV>
+<DIV class=mostpopularbox><IMG alt=" " align=right src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/rani-mukerji_167_101512032945.jpg" width=167 height=125 mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/rani-mukerji_167_101512032945.jpg"></DIV>
 <DIV class=mptext>Rani Mukerji has rubbished rumours that she is married to filmmaker Aditya Chopra... Read on to know more!</DIV></A>
 <DIV class=clear></DIV></DIV></DIV>
 
@@ -186,7 +186,7 @@ GA_googleFillSlot("IT_Special_MRec");
                  </div>
                  <div class="righttopmag">
                  	<p class="blueheader" style="color:#005588; margin-left:5px;">TOP PICKS</p>
-                    	<iframe width="300" scrolling="no" height="177" frameborder="0" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" src="/staticpages/mediaintoday/indiatoday/toppic/take5.htm" id="frame11"></iframe></div>
+                    	<iframe width="300" scrolling="no" height="177" frameborder="0" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/toppic/take5.htm" id="frame11"></iframe></div>
                  </div>    
             </section>
             <div class="clr"></div>

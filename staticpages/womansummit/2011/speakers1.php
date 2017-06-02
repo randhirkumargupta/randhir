@@ -148,7 +148,7 @@ cssdropdown.startchrome("chromemenu")
 		<div style="float: left;">
        
                    <!-- <div id="google_add_middle">
-        			<img src="/staticpages/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
+        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
         			</div>-->
           
                   						
@@ -197,7 +197,7 @@ cssdropdown.startchrome("chromemenu")
 	 <a href="speakers.php">1</a> 2<a href="speakers2.php"> 3</a><a linkindex="58" href="speakers2.php" class="pagenate_link"> </a><a linkindex="60" href="speakers2.php" class="pagenate_link">Next </a><img src="images/pagenate_bullet.jpg" width="6" height="5" hspace="2" border="0"> <a linkindex="61" href="speakers2.php" class="pagenate_link">Last</a><img src="images/pagenate_bullet.jpg" hspace="3" border="0"> 	 </div>
 
 		                    <!-- <div id="google_add_middle">
-        			<img src="/staticpages/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
+        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
         			</div>-->
           
                   
@@ -215,7 +215,7 @@ cssdropdown.startchrome("chromemenu")
     <tr>
       <td colspan="4" valign="top">
       <div align="center" style="margin-bottom:5px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Presented by</div>
-      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.amwayindia.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/amway-new09.gif" alt="AMWAY" border="0" align="middle" title="AMWAY" style="margin-left:30px;" /></a></div>
+      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.amwayindia.com/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/womansummit/amway-new09.gif" alt="AMWAY" border="0" align="middle" title="AMWAY" style="margin-left:30px;" /></a></div>
       </div></td>
     </tr>
    <tr> <td colspan="4" height="10"></td></tr>
@@ -228,13 +228,13 @@ cssdropdown.startchrome("chromemenu")
     
     <tr><td valign="top">
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="70%">
-    <tr><td width="35%" valign="top"><div style="margin: 0pt 0pt 15px 10px; font: bold 11px arial;" align="center">Hospitality Partner</div><div style="margin-bottom: 5px;" align="center"><a href="http://www.tajhotels.com/" target="_blank"><img src="/staticpages/mediaintoday/wonderwoman/images/stories/feb2010/101129045934_Vivanta.jpg" alt="Taj" title="Taj" border="0"></a></div>
+    <tr><td width="35%" valign="top"><div style="margin: 0pt 0pt 15px 10px; font: bold 11px arial;" align="center">Hospitality Partner</div><div style="margin-bottom: 5px;" align="center"><a href="http://www.tajhotels.com/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/wonderwoman/images/stories/feb2010/101129045934_Vivanta.jpg" alt="Taj" title="Taj" border="0"></a></div>
 <div align="center"></div></td>
-<td width="35%" valign="top"><div style="margin: 0pt 0pt 15px 10px; font: bold 11px arial;" align="center">Beverage Partner</div><div style="margin-bottom: 5px;" align="center"><a href="http://www.pinkyvodka.com/wordpress/wp-content/themes/pinky/Pinky.php?redirect=/index.php"><img src="/staticpages/mediaintoday/microsites/womansummit/pinky-new09.gif" alt="Pinky" title="Pinky" border="0" /></a></div>
+<td width="35%" valign="top"><div style="margin: 0pt 0pt 15px 10px; font: bold 11px arial;" align="center">Beverage Partner</div><div style="margin-bottom: 5px;" align="center"><a href="http://www.pinkyvodka.com/wordpress/wp-content/themes/pinky/Pinky.php?redirect=/index.php"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/womansummit/pinky-new09.gif" alt="Pinky" title="Pinky" border="0" /></a></div>
 <div align="center"></div></td>
 <td width="35%"><div style="margin: 0pt 0pt 15px 10px; font: bold 11px arial;" align="center">
           <div align="center">Delegate Partner</div>
-      </div>        <div align="center"><a href="http://www.ficciflo.com/"><img src="/staticpages/mediaintoday/wonderwoman/images/stories/feb2010/101130011602_ficci.jpg" alt="Ficci" title="Ficci" border="0"></a></div></td></tr>
+      </div>        <div align="center"><a href="http://www.ficciflo.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/wonderwoman/images/stories/feb2010/101130011602_ficci.jpg" alt="Ficci" title="Ficci" border="0"></a></div></td></tr>
     </table>
     </td>
     </tr>
@@ -242,14 +242,14 @@ cssdropdown.startchrome("chromemenu")
     <tr><td colspan="7"><div align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
  <tr><td width="261" valign="top"><div align="center">
   <div align="center" style="margin: 0pt 0pt 0px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Powered by</div>
- <div align="center" style="margin-bottom: 5px"><a href="/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/indiatoday.gif" alt="Indiatoday.in" width="122" height="35" border="0" title="Indiatoday.in" style="margin-top:10px;" /></a></div>
+ <div align="center" style="margin-bottom: 5px"><a href="/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/womansummit/indiatoday.gif" alt="Indiatoday.in" width="122" height="35" border="0" title="Indiatoday.in" style="margin-top:10px;" /></a></div>
  </div>
         </td><td valign="top" width="261"><div align="center">
 
   <div style="margin: 0pt 0pt 15px 80px; font: bold 11px arial; text-align:left;" align="center">Media Partners</div>
-  <div style="margin-bottom: 5px; margin-left:20px;" align="center"><a href="http://www.mailtoday.in" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/mailtoday_2011.jpg" alt="Mail Today" hspace="5" border="0" align="absmiddle" style="margin-right: 20px;" title="Mail Today"></a><!-- <a href="http://oyefm.in/" target="_blank"><img src="/staticpages/mediaintoday/wonderwoman/images/stories/feb2010/101126023516_oye.jpg" alt="MEOW" border="0" align="absmiddle"  title="MEOW" /></a>--></div>
+  <div style="margin-bottom: 5px; margin-left:20px;" align="center"><a href="http://www.mailtoday.in" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/womansummit/mailtoday_2011.jpg" alt="Mail Today" hspace="5" border="0" align="absmiddle" style="margin-right: 20px;" title="Mail Today"></a><!-- <a href="http://oyefm.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/wonderwoman/images/stories/feb2010/101126023516_oye.jpg" alt="MEOW" border="0" align="absmiddle"  title="MEOW" /></a>--></div>
         </div></td><td width="252" valign="top"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">TV Partner</div>
-          <div align="center" style="margin-bottom: 5px"><a href="http://www.headlinestoday.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/HLT-new09.gif" alt="Headlines Today" border="0" title="Headlines Today" /></a></div>
+          <div align="center" style="margin-bottom: 5px"><a href="http://www.headlinestoday.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/womansummit/HLT-new09.gif" alt="Headlines Today" border="0" title="Headlines Today" /></a></div>
 <div align="center"></div></td>
       <td width="12" valign="top">&nbsp;</td>
     </tr>
@@ -270,20 +270,20 @@ cssdropdown.startchrome("chromemenu")
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS 
 
 
 2011, now in its third year, will be an all day journey into the lives of some of the nation&rsquo;s most successful cadres. Women, who have strived to challenge the conventional roles assigned to them by forming identities that are independent of their home space. Whether it is being a jet setting CEO or an aggressive entrepreneur, they have made it acceptable for the coming generation to break away and follow their heart. The summit will not only acknowledge the contribution of these women but will also allow the newer generation of women, to learn, share and experience what it takes to be the best.</div>
 	          </strong></div></div>
-             <div align="right"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    
@@ -307,7 +307,7 @@ cssdropdown.startchrome("chromemenu")
     
   <div id="footerdiv"> <hr color="#d7d7d7" size="1px" align="center" />
     
-    <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+    <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
 
 </td>
   </tr>

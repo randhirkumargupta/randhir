@@ -5,7 +5,7 @@
 <title>Gravity</title>
 <meta name="description" content="Gravity" />
 <meta name="keywords" content="Gravity" />
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg" />
 <script src="/staticpages/main/js/jquery.min.js" type="text/javascript"></script>
 
 <style>
@@ -28,8 +28,8 @@
 
 .slider-head {font:normal 48px/50px Arial Black; color:#f16e24; background-color:#fff; padding:10px;}
 
-.slider-prev {position: absolute; left: 0px; top: 215px; background:url(/staticpages/mediaintoday/indiatoday/specials/images/arrows_lft.png) no-repeat top left; width:45px; height:45px; text-indent:-9999px; cursor:pointer}
-.slider-next {position: absolute; right: 3px; top: 215px;background:url(/staticpages/mediaintoday/indiatoday/specials/images/arrows_rt.png) no-repeat top left; width:45px; height:45px; text-indent:-9999px; cursor:pointer}
+.slider-prev {position: absolute; left: 0px; top: 215px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/images/arrows_lft.png) no-repeat top left; width:45px; height:45px; text-indent:-9999px; cursor:pointer}
+.slider-next {position: absolute; right: 3px; top: 215px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/images/arrows_rt.png) no-repeat top left; width:45px; height:45px; text-indent:-9999px; cursor:pointer}
 .pagination {position:absolute; bottom:15px; left:325px; font:bold 23px arial; color:#aeab96}
 .pagination ul { margin:0; padding:0;}
 .pagination ul li, .pagination ul li a { list-style:none; color:#333; padding:0 5px; float:left; margin-right:0px; text-decoration:none }
@@ -130,9 +130,9 @@
 			.clr { clear:both}
 
 
-            .story_slide .left { position:absolute; background:url(/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png) 5px 38px no-repeat; color:#fff; padding:10px; left:0px; top:150px; cursor:pointer; z-index:1; width:124px; height:74px  }
+            .story_slide .left { position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png) 5px 38px no-repeat; color:#fff; padding:10px; left:0px; top:150px; cursor:pointer; z-index:1; width:124px; height:74px  }
 
-            .story_slide .right { position:absolute; background:url(/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png) 122px 38px no-repeat; color:#fff; padding:10px; right:0px; top:150px; cursor:pointer; z-index:1;  width:165px; height:74px  }
+            .story_slide .right { position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png) 122px 38px no-repeat; color:#fff; padding:10px; right:0px; top:150px; cursor:pointer; z-index:1;  width:165px; height:74px  }
 
 </style>
 <style>
@@ -343,7 +343,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                  <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title= Gravity&URL=http://indiatoday.intoday.in/gravity/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=468,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/gravity/&amp;p[title]=Gravity&amp;s=100&amp;p[summary]=Gravity&amp;p[images][0]=/staticpages/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg"><span class="imgs fb lft"></span></a>
+                <a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/gravity/&amp;p[title]=Gravity&amp;s=100&amp;p[summary]=Gravity&amp;p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg"><span class="imgs fb lft"></span></a>
                 <a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status= Gravity%20http://indiatoday.intoday.in/gravity/%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -384,7 +384,7 @@ Movie: In a scene Bullock takes off her space suit and is shown wearing a sports
 
 Reality: In reality, astronauts have to wear one-piece long johns, cooling tubing and a diaper.
 <p style="margin-bottom:50px;"></p></div>
-<div class="slider-right"><img src="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg" border="0" >
+<div class="slider-right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-1_100913080948.jpg" border="0" >
 </div>
 </li>
 
@@ -402,7 +402,7 @@ Reality: There are two visors involved - one that seals up the air inside the su
 
 
 <p style="margin-bottom:50px;"></p></div>
-<div class="slider-right"><img src="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-2_100913080948.jpg" border="0" >
+<div class="slider-right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-2_100913080948.jpg" border="0" >
 </div>
 </li>
 <li>
@@ -417,7 +417,7 @@ Experts: It cannot be so close, the distance is much more than shown.
 
 
 <p style="margin-bottom:50px;"></p></div>
-<div class="slider-right"><img src="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-3_100913080948.jpg" border="0" >
+<div class="slider-right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-3_100913080948.jpg" border="0" >
 </div>
 </li>
 
@@ -436,7 +436,7 @@ Reality: An astronaut's ethical code demands that such issue be addressed immedi
 
 
 <p style="margin-bottom:50px;"></p></div>
-<div class="slider-right"><img src="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-4_100913081302.jpg" border="0" >
+<div class="slider-right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-4_100913081302.jpg" border="0" >
 </div>
 </li>
 
@@ -454,7 +454,7 @@ Bullock's character goes through space sickness in 'Gravity', which reportedly i
 
 
 <p style="margin-bottom:50px;"></p></div>
-<div class="slider-right"><img src="/staticpages/mediaintoday/indiatoday//images/slideshow/collage-5_100913081302.jpg" border="0" >
+<div class="slider-right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/slideshow/collage-5_100913081302.jpg" border="0" >
 </div>
 </li>
 
@@ -649,10 +649,10 @@ $(function () {
 
 <div id="leftrightads">
 	<div class="leftad">
-	<a href="http://election.intoday.in" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/160X600-IT.GIF" border="0"></a>
+	<a href="http://election.intoday.in" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/160X600-IT.GIF" border="0"></a>
 	</div>
 	<div class="rightad">
-	<a href="http://election.intoday.in" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/160X600-IT.GIF" border="0"></a>
+	<a href="http://election.intoday.in" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/160X600-IT.GIF" border="0"></a>
 	</div>
 </div>
 

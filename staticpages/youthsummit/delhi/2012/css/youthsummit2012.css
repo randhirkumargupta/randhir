@@ -103,7 +103,7 @@ header {
     font: bold 14px/18px arial;
 }
 .mindr-headline ul {margin:20px 0 0 0; padding:0;}
-.mindr-headline ul li{margin:3px 0 5px 0; list-style:none;color:#000;font: bold 14px/18px arial;background: url("/staticpages/mediaintoday/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
+.mindr-headline ul li{margin:3px 0 5px 0; list-style:none;color:#000;font: bold 14px/18px arial;background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
 .mindr-headline ul li.photo{margin:3px 0 5px 0; list-style:none;color:#000;font: bold 14px/18px arial;background: url("/staticpages/main/images/hindi-news-photo-icon.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
 .mindr-headline ul li.video{margin:3px 0 5px 0; list-style:none;color:#000;font: bold 14px/18px arial;background: url("/staticpages/main/images/video_icon.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
 .mindr-headline ul li a {color:#21509E; text-decoration:none}
@@ -115,7 +115,7 @@ header {
 	margin:10px 0 3px 0;
 }
 .mindr-subheadline ul {margin:10px 0 3px 0; padding:0;}
-.mindr-subheadline ul li{margin:3px 0; list-style:none;color:#000;font: bold 12px/18px arial;background: url("/staticpages/mediaintoday/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
+.mindr-subheadline ul li{margin:3px 0; list-style:none;color:#000;font: bold 12px/18px arial;background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;padding: 1px 0 1px 15px;}
 .mindr-subheadline ul li a {color:#000; text-decoration:none}
 .mindr-subheadline ul li a:hover {text-decoration:underline}
 
@@ -124,7 +124,7 @@ header {
 .mindr-headline a:hover, .mindr-subheadline a:hover,.mindr-consubhead a:hover {text-decoration:underline}
 
 .mindr-consubrtbox {
-    background: url("/staticpages/mediaintoday/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;
     color: #343434;
     float: left;
     font: 12px/18px arial;
@@ -258,7 +258,7 @@ header {
 }
 
 .pritepart {
-    background: url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif) repeat-y;
+    background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif) repeat-y;
     float: right;
     width: 575px;
     padding-left: 10px;

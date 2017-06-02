@@ -9,31 +9,31 @@ var slideshowSpeed = 4000;
 // which also includes some text and url's.
 var photos = [ {
 		"title" : "Stairs",
-		"image" : "/staticpages/mediaintoday/indiatoday/specials/sachin/img2.jpg",
+		"image" : "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sachin/img2.jpg",
 		"url" : "http://www.sxc.hu/photo/1271909",
 		"firstline" : "Going on",
 		"secondline" : "vacation?"
 	}, {
 		"title" : "Office Appartments",
-		"image" : "/staticpages/mediaintoday/indiatoday/specials/sachin/img1.jpg",
+		"image" : "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sachin/img1.jpg",
 		"url" : "http://www.sxc.hu/photo/1265695",
 		"firstline" : "Or still busy at",
 		"secondline" : "work?"
 	}, {
 		"title" : "Mountainbiking",
-		"image" : "/staticpages/mediaintoday/indiatoday/specials/sachin/img2.jpg",
+		"image" : "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sachin/img2.jpg",
 		"url" : "http://www.sxc.hu/photo/1221065",
 		"firstline" : "Get out and be",
 		"secondline" : "active"
 	}, {
 		"title" : "Mountains Landscape",
-		"image" : "/staticpages/mediaintoday/indiatoday/specials/sachin/img3.jpg",
+		"image" : "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sachin/img3.jpg",
 		"url" : "http://www.sxc.hu/photo/1271915",
 		"firstline" : "Take a fresh breath of",
 		"secondline" : "nature"
 	}, {
 		"title" : "Italian pizza",
-		"image" : "/staticpages/mediaintoday/indiatoday/specials/sachin/img1.jpg",
+		"image" : "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sachin/img1.jpg",
 		"url" : "http://www.sxc.hu/photo/1042413",
 		"firstline" : "Enjoy some delicious",
 		"secondline" : "food"

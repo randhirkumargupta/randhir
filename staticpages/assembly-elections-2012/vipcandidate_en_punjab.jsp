@@ -19,42 +19,42 @@ jQuery(document).ready(function() {
 <body>
 <div id="wrap"><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Parkash Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Parkash Singh Badal</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Parkash Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Parkash Singh Badal</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(SAD) Lambi</span>
     </li>
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Sukhbir Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Sukhbir Singh Badal</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Sukhbir Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Sukhbir Singh Badal</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(SAD) Jalalabad</span>
     </li>
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Captain Amarinder Singh.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Captain Amarinder Singh</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Captain Amarinder Singh.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Captain Amarinder Singh</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(INC) Patiala</span>
     </li>
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Rajinder Kaur Bhattal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Rajinder Kaur Bhattal</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Rajinder Kaur Bhattal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Rajinder Kaur Bhattal</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(INC) Lehra</span>
     </li>
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Raninder Singh.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Raninder Singh</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Raninder Singh.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Raninder Singh</span><span class="resulttxt wontxt">
 <span class='resulttxt losstxt'>LOST</span>
 
 	</span></div>
     <span class="party-txt">(INC) Samana</span>
     </li>
 
-    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Manpreet Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Manpreet Singh Badal</span><span class="resulttxt wontxt">
+    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Manpreet Singh Badal.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Manpreet Singh Badal</span><span class="resulttxt wontxt">
 <span class='resulttxt losstxt'>LOST</span>
 
 	</span></div>

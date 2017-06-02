@@ -105,7 +105,7 @@
 		}
 		$('.lb-container .movie_name').html(head);
 		$('.lb-container .movie_text').html('"'+textmovie+'"');
-		$('.lb-container .movie_img').html('<img src="/staticpages/mediaintoday/microsites/specials/sholay/'+img+'" />');
+		$('.lb-container .movie_img').html('<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/sholay/'+img+'" />');
 	}
 </script>
 

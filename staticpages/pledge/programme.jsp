@@ -126,7 +126,7 @@ function ajaxFunction(){
 body {
 	margin: 0;
 	padding: 0;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
 	font-family:roboto;
 }
 
@@ -154,7 +154,7 @@ a {
 .counter {
 	width: 180px;
 	height: 56px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/counter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/counter.png);
 	position: absolute;
 	bottom: 0;
 	left: 212px;
@@ -167,7 +167,7 @@ a {
 	width: 966px;
 	height: 76px;
 	margin-bottom: 25px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
 }
 .people-who-pledged ul {
 	margin-left: 25px;
@@ -183,7 +183,7 @@ a {
 	height: 450px;
 	padding-top: 65px;
 	float: left;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/twiter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/twiter.png);
 	background-repeat: no-repeat
 }
 .facebook-box {
@@ -192,7 +192,7 @@ a {
 	float: right;
 	padding-top: 75px;
 	padding-left: 5px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/facebook.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/facebook.png);
 	background-repeat: no-repeat;
 }
 
@@ -229,7 +229,7 @@ a {
 	padding-bottom: 50px;
 }
 #pledgetop {
-	background-image: url(/staticpages/mediaintoday/indiatoday/images/pledge/Mast.png);
+	background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Mast.png);
 	background-repeat: no-repeat;
 	background-position: top left;
 	height: 284px;
@@ -370,7 +370,7 @@ height: 200px;
     </div>
     <div style="float:right; width:205px; margin:48px 0 0 0; text-align:center;">
       <div style='font:bold 12px arial; color:#ffec00; text-align:left; margin-bottom:5px; padding-left:50px;'>Stay Connected</div>
-      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
+      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
     </div>
   </div>
   <div style="clear:both;"></div>
@@ -417,7 +417,7 @@ height: 200px;
   <tbody>
     <tr>
       <td style="font: bold 22px/24px roboto; color: #ff000a; text-transform: uppercase; text-align: left; background-color:#000; padding: 10px;"><div style="position:relative;">
-          <div style="position:absolute; top:-20px; right:0"><img border="0" src="/staticpages/mediaintoday/conclave/2013/blurb.png" style="display:none;"></div>
+          <div style="position:absolute; top:-20px; right:0"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/blurb.png" style="display:none;"></div>
         </div>
         CONFIRMED SPEAKERS
         <div style="color: #fff; font: normal 22px/26px roboto;">OCTOBER 17, 2014, New DELHI</div></td>
@@ -448,7 +448,7 @@ height: 200px;
                                   NDA Government's Initiatives to Safeguard and Empower Women </div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Maneka Gandhi
                                   <div class="normalblackitalictext">Union Minister for Women & Child Development</div>
                                 </div></td>
@@ -462,7 +462,7 @@ height: 200px;
                                   Role Media Plays in Sensitizing Public on Crimes against Women </div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Poonam Mahajan
                                   <div class="normalblackitalictext">Member of Parliament, LokSabha</div>
                                 </div>
@@ -470,7 +470,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=15"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Tajendra Luthra
                                   <div class="normalblackitalictext">Joint Commissioner, Delhi Police</div>
                                 </div>
@@ -478,7 +478,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=15"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Barkha Singh
                                   <div class="normalblackitalictext">Chairperson, Delhi Commission for Women</div>
                                 </div>
@@ -494,7 +494,7 @@ height: 200px;
                                   Today's mantra for women safety, the role / scope of sports as part of the Female Upbringing</div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Shagun Chowdhary
                                   <div class="normalblackitalictext">Shooter and Asiad Medallist</div>
                                 </div>
@@ -502,7 +502,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=16"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Kiran Bedi
                                   <div class="normalblackitalictext">Social Activist </div>
                                 </div>
@@ -510,7 +510,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=16"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Vinesh Phogat
                                   <div class="normalblackitalictext">Wrestler & multiple international medallist (CWG Gold)</div>
                                 </div>
@@ -518,7 +518,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=16"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Babita Kumari
                                   <div class="normalblackitalictext">Wrestler & multiple international medallist(CWG Gold)</div>
                                 </div>
@@ -526,7 +526,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=16"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Trisha Deb
                                   <div class="normalblackitalictext">Archer,Asiad medallist</div>
                                 </div>
@@ -542,13 +542,13 @@ height: 200px;
                                   The case of North-East Indians </div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/indiatoday/conclave/2014/80x80/ANIUL.jpg" alt="Anil Agarwal" mce_src="/staticpages/mediaintoday/indiatoday/conclave/2014/80x80/ANIUL.jpg"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/conclave/2014/80x80/ANIUL.jpg" alt="Anil Agarwal" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/conclave/2014/80x80/ANIUL.jpg"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">PurnoSangma
                                   <div class="normalblackitalictext">LokSabha Speaker</div>
                                 </div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Robin Hibu
                                   <div class="normalblackitalictext">Joint Commissioner of Police, Crime Against Women</div>
                                 </div></td>
@@ -581,7 +581,7 @@ height: 200px;
                               <td align="left" colspan="2"><div class="sessiontitle"><span class="personname">10.15 - 10.30: </span><span class="grey">Welcome address</span></div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Sandeep Bamzai
                                   <div class="normalblackitalictext">Editor, Mail Today</div>
                                 </div>
@@ -597,7 +597,7 @@ height: 200px;
                                   Experiences of Women in Public Service </div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Kanwaljeet Deol
                                   <div class="normalblackitalictext">DG, NHRC</div>
                                 </div>
@@ -605,7 +605,7 @@ height: 200px;
                                 <!-- <a href="http://conclave.intoday.in/conclave/askquestion.php?id=15"><div class="askqs"></div></a>--></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-_B&amp;W.jpg" alt="Ram Yadav" width="80" height="80" style="display:none"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Sundari Nanda
                                   <div class="normalblackitalictext">Special Commissioner, Vigilance & Operations, Delhi Police</div>
                                 </div>
@@ -637,7 +637,7 @@ height: 200px;
                                   Social & Sexual Abuses</span></div></td>
                             </tr>
                             <tr>
-                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/SUNIL-BHARTI-MITTAL,-GROUP-CHAIRMAN-AND-MD,-BHARTI-ENTERPRISES,-VM,-290404_B&amp;W.jpg" alt="Sunil Bharti" width="80" height="80"></div></td>
+                              <td width="20%" valign="top" align="left"><div class="timetext"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/speakers/SUNIL-BHARTI-MITTAL,-GROUP-CHAIRMAN-AND-MD,-BHARTI-ENTERPRISES,-VM,-290404_B&amp;W.jpg" alt="Sunil Bharti" width="80" height="80"></div></td>
                               <td width="72%" valign="top" align="left"><div class="personname">Smriti Irani
                                   <div class="normalblackitalictext">Union HRD Minister</div>
                                 </div></td>
@@ -701,7 +701,7 @@ height: 200px;
   <div class="container"> </div>
 </div>
 <div class="footer">
-  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+  <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
 </div>
 
 </body>

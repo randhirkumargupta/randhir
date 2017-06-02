@@ -13,17 +13,17 @@ body {
 }
 .header{padding:0 5px;width: auto;}
 
-.itframes{background:url(/staticpages/mediaintoday/microsites/iframes/IT-Frames-red-bg.jpg) repeat-y; padding-bottom:40px;}
+.itframes{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/IT-Frames-red-bg.jpg) repeat-y; padding-bottom:40px;}
 .mastleft{float:left; width:862px;}
 .mastright{float:left; width:140px;}
-.masttext{background:url(/staticpages/mediaintoday/microsites/iframes/IT-Frames-intro-bg.gif) no-repeat; width:822px; height:126px; padding:10px 20px; color:#dbd9d9; font:20px arial;}
+.masttext{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/IT-Frames-intro-bg.gif) no-repeat; width:822px; height:126px; padding:10px 20px; color:#dbd9d9; font:20px arial;}
 .masttext a{color:#efa3a4; text-decoration:none;}
 .masttext a:hover{text-decoration:underline;}
 .margins{margin:0 10px 20px;}
-.framestorebg{background:url(/staticpages/mediaintoday/microsites/iframes/IT-Frames-band-bg.gif) repeat-x; height:37px;margin:0 10px; font:bold 16px/39px arial; color:#FFFFFF; padding:0 10px;}
+.framestorebg{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/IT-Frames-band-bg.gif) repeat-x; height:37px;margin:0 10px; font:bold 16px/39px arial; color:#FFFFFF; padding:0 10px;}
 .framestorebg span{color:#A4090D;}
 .framestorebg img{margin-top:4px;}
-.framesinstore{background:url(/staticpages/mediaintoday/microsites/iframes/IT-Frames-black-bg.gif) repeat-x; height:303px; padding:10px;}
+.framesinstore{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/IT-Frames-black-bg.gif) repeat-x; height:303px; padding:10px;}
 .framelist {float: left;margin-right: 23px; width: 174px;}
 .framelist.last{margin-right:0;}
 .framelist .framedetail { border: 6px solid #760308; text-align: center; position: relative;}
@@ -36,7 +36,7 @@ body {
 
 
 .downloadnow{color:#FFFFFF; font:14px arial;}
-.moreframes{background:url(/staticpages/mediaintoday/microsites/iframes/IT-Frames-bottom-black-bg.gif) repeat-x; height:138px; padding:10px;}
+.moreframes{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/IT-Frames-bottom-black-bg.gif) repeat-x; height:138px; padding:10px;}
 .moreframesleft{float:left; width:285px; border-right:2px solid #4A4645;}
 .moretitle{font:bold 16px arial; color:#A4090D;}
 .moreframesleft ul{margin:10px 0; padding:0 0 0 20px;}
@@ -45,7 +45,7 @@ body {
 .moreframesleft ul li a:hover{text-decoration:underline;}
 .moreframesright{float:right; width:660px; font:15px/19px arial;color:#a6a2a3; text-align:justify;}
 
-.feedback{background:#413F3F url(/staticpages/mediaintoday/microsites/iframes/grey_bg.gif) repeat-x; padding:10px;}
+.feedback{background:#413F3F url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iframes/grey_bg.gif) repeat-x; padding:10px;}
 .feedtitle{color: #FFFFFF; font: bold 16px/20px arial; margin-bottom:10px;}
 .feedtitle span{ color: #A4090D;}
 .feedleft{width:50%; float:left; border-right:2px solid #4A4645;}

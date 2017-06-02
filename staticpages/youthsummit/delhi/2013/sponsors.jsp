@@ -13,7 +13,7 @@
 <title>Sponsors</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"  href="/youthsummit/delhi/2013/css/common.css" />
-<link rel="Stylesheet" type="text/css" href="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
+<link rel="Stylesheet" type="text/css" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
 <style>
 #jeeypee{display:none;}
 #bindas {display:none;}
@@ -380,7 +380,7 @@ The Group's hospitality business owns and operates properties spread across New 
     	<!-- aiesec Content Start -->
         <!--<div id="aiesec">
         <h2>Youth Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec.gif"></div>     AIESEC is the world's largest youth-run organization present in over 110 countries and territories and with over 60,000 members. Established in year 1948 in Stockholm Sweden, AIESEC is a unique Global youth network of young people which aims at developing youth around issues like entrepreneurship, social responsibility and cultural sensitivity. Our international platform enables young people to explore and develop their potential to provide leadership for a positive impact on society.
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec.gif"></div>     AIESEC is the world's largest youth-run organization present in over 110 countries and territories and with over 60,000 members. Established in year 1948 in Stockholm Sweden, AIESEC is a unique Global youth network of young people which aims at developing youth around issues like entrepreneurship, social responsibility and cultural sensitivity. Our international platform enables young people to explore and develop their potential to provide leadership for a positive impact on society.
          <br>
 <br>
         AIESEC offers young people the opportunity to participate in international internships, experience leadership and participate in a global learning environment. Annually AIESEC facilitates over 16,000 international internships and enables more than 20,000 leadership opportunities.
@@ -404,7 +404,7 @@ Youtube <a href="http://www.youtube.com/AIESECIndia" target="_blank">www.youtube
         <!-- eclectic Content Start -->
         <div id="eclectic">
         <h2>Youth Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic.gif"></div>Eclectic Northeast, a monthly print magazine in English, is the flagship product of Eclectic Publications - the leading publication house from Northeast India with headquarters in Guwahati and corporate offices in Bangalore. The Managing Editor is Tanushree Hazarika, a Business Management graduate from Boston University; she is also the Managing Director of the publication House.
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic.gif"></div>Eclectic Northeast, a monthly print magazine in English, is the flagship product of Eclectic Publications - the leading publication house from Northeast India with headquarters in Guwahati and corporate offices in Bangalore. The Managing Editor is Tanushree Hazarika, a Business Management graduate from Boston University; she is also the Managing Director of the publication House.
          <br>
 <br>
          Young, vibrant, and new-age, Eclectic Northeast has informed, engaged, and entertained its readers for the seven years that it has been in existence. It has an eclectic palette of stories: politics, economy, society, culture, travel and lifestyle, and features hard-hitting and investigative stories as well as champions Changemakers, thought leaders, and youth icons from the region. Its tagline, We Speak for Our Region, is representative of the collective ethos of the publication group.
@@ -434,7 +434,7 @@ Youtube <a href="http://www.youtube.com/AIESECIndia" target="_blank">www.youtube
         <!-- coolage Content Start -->
         <div class="coolage" id="coolage">
         <h2>Youth Online Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage.gif"></div>www.coolage.in, owned by AOL Huffington Post Media Group, is proud to collaborate with India Today Mind Rocks Youth Summit 2013.
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage.gif"></div>www.coolage.in, owned by AOL Huffington Post Media Group, is proud to collaborate with India Today Mind Rocks Youth Summit 2013.
          <br>
 <br>
          CoolAge (pronounced Cool-Age and not koolidge or collage or anything else) is a bloggers' platform with an ever-growing community of college, amateur and professional bloggers from all parts of India.
@@ -454,7 +454,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
         <!-- oohmedia Content Start -->
         <div id="oohmedia">
         <h2>Digital OOH TV Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif"></div>Out-of-Home Media (India) Pvt. Ltd., established in 2007, is a leading media company specialising in out-of-home television. We leverage our network of screens to display audio-visual advertisements and engage consumers while they are out-of-home.
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif"></div>Out-of-Home Media (India) Pvt. Ltd., established in 2007, is a leading media company specialising in out-of-home television. We leverage our network of screens to display audio-visual advertisements and engage consumers while they are out-of-home.
          <br>
 <br>
          The Out-of-Home medium is a premium and true convergence medium which reaches out to the 'difficult-to-reach' and SEC-A consumers, with whom advertisers find it difficult to communicate on a sustained basis. The consumer connect that this medium offers is great as it follows the consumer wherever they are, making it a medium present in 'A day in the life of an urban SEC-A consumer'. This new medium is about creating a new primetime - all day primetime. The idea is to attract and communicate with the consumers at different times of the day while he is involved in different activities; be it at work, shopping or at leisure.
@@ -474,7 +474,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
         <!-- headlinestoday Content Start -->
         <div id="headlinestoday">
         <h2>TV Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ht.gif"></div>
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ht.gif"></div>
         Headlines Today, India's first exclusive 24-Hour English News Channel launched by the TV Today Network Ltd in 2003, stands apart in the clutter of channels to be true to its vision of making sense to 'You' the viewer. The channel gives a different perspective from the viewer's context and gives meaning to the madness of news by giving it the relevance from the viewer's point of view.  The channel has attained thought leadership by breaking new ground, by going beyond the ordinary when it comes to news coverage. <br>
 <br>In keeping the viewer at the centre while covering News, Headlines Today has content that is pioneered to have an impact. Headlines Today raised the bar in news reporting by taking up people's causes with a series of  news breakers like Inside Lanka, CST expose on Honour Killings, Punjab Drugs Scandal, Telangana crisis to name a few.    
 <br>
@@ -488,7 +488,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
         <!-- oyefm Content Start -->
         <div id="oyefm">
         <h2>Radio Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/oye.gif"></div><strong>Oye! 104.8 FM Sabse Filmi</strong> <br>
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/oye.gif"></div><strong>Oye! 104.8 FM Sabse Filmi</strong> <br>
 <br> Oye! 104.8 FM is the TV Today Network's foray into the FM Radio business in India and has stations across the 7 cities of Delhi, Mumbai, Kolkata, Jodhpur, Patiala and Amritsar. With the positioning of 'Sabse Filmi', the station focuses on churning film based content that is reflected not just in the music but across all levels from programming, contests, interviews, RJ links and marketing. <div class="clr">&nbsp;</div>
         </div>
         <!-- oyefm Content End -->
@@ -496,7 +496,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
         <!-- indiatoday Content Start -->
         <div id="indiatoday">
         <h2>Online Partner</h2><br>
-        <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/it.gif"></div>
+        <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/it.gif"></div>
         <strong>INDIA TODAY GROUP DIGITAL (ITGD)</strong> is the digital arm of the India Today Group and is an entity that digitally processes, uploads, markets and distributes contents of the entire group. The objective of the division is to ensure that the premium content of the India Today Group is available in several digital formats viz Internet, SMS (52424), Voice (5052424), mobile applications or digital subscriptions. It also ensures accurate information dissemination of the group across a variety of social media platforms.
          <br>
 <br>ITGD is a pioneer in enhanced and interactive content distribution through a variety of news applications that reach out to millions of app users around the globe, compatible with a variety of platforms – Android, iOS, Symbian, Blackberry, Windows Phone, SmartTVs and many more. ITGD is also responsible for the maintenance and promotion of 18 digital magazines, which can be read on tablets, smart phones and PCs in a variety of user-friendly formats. ITGD websites are among the Top 5 websites in India under News & Information category as per the July, 2013 comScore report.      
@@ -508,7 +508,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
         <!-- bindas start-->
        <div id="bindas">
         <h2>TV Partner</h2><br>
-       <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas.jpg"></div>
+       <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas.jpg"></div>
 			bindass: Launched in September 2007, bindass&#174; is the first 360 degree entertainment brand for Indian youth that spans TV, on- ground events and digital. Synonymous with grit, style and success, bindass&#174; is a brand of purpose and relevance. Reaching over 64% of Indian youth, bindass&#174; offers a unique blend of content across genres that appeal to the youth across platforms that they access. The channel is home to the best known home grown youth oriented cult shows and franchises such as Emotional Atyachaar, Superdude, Beg Borrow Steal and Big Switch. <div class="clr">&nbsp;</div>	</div>
         
         <!--bindas end-->
@@ -517,7 +517,7 @@ Inspirational achievers and youth icons, like ad guru and lyricist Prasoon Joshi
          <!-- bindas start-->
        <div id="mailtoday">
         <h2>Newspaper Partner</h2><br>
-       <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mt.gif"></div>Mail Today is a morning daily with a difference, launched by the India Today Group in a joint venture with the Daily Mail of UK in an exciting new format and style. It is bold, insightful and relevant from a truly national perspective. An irreverent paper, it is unsparing in its opinion and news coverage, no matter who or what the subject. Mail Today is an intelligent person's newspaper that provides the full story behind the news through bold and vigorous reportage, cutting-edge analysis, high production values and stylish visual content..<br>
+       <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/mt.gif"></div>Mail Today is a morning daily with a difference, launched by the India Today Group in a joint venture with the Daily Mail of UK in an exciting new format and style. It is bold, insightful and relevant from a truly national perspective. An irreverent paper, it is unsparing in its opinion and news coverage, no matter who or what the subject. Mail Today is an intelligent person's newspaper that provides the full story behind the news through bold and vigorous reportage, cutting-edge analysis, high production values and stylish visual content..<br>
 <br>Mail Today goes well beyond the lukewarm bite-sized news items that fail to adequately address the issues and events of the day. Clean, lucid and straight-taking, Mail Today marries the credibility and authenticity of the India Today Group with the Daily Mail's international standards. With a circulation of more than 2 lakh copies, Mail Today has become an integral part of the daily diet of Delhi.
 <br>
 <br>Mail Today- An engaging read that makes good mornings great.<br>
@@ -541,7 +541,7 @@ Website:<a href="http://www.mailtoday.in/" target="_blank">www.mailtoday.in</a>
         <!-- buzztown Content Start -->
         <div id="buzztown">
         <h2>Online Ticketing Partner</h2><br>
-       <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town.gif"></div> Be it food & nightlife options, sports & movies news, weekend getaways, artiste profiles and other stakeholders of entertainment industry, it's all there. With a thriving Facebook presence and highly optimized ticketing solutions, it remains, in essence, a one-stop for entertainment.
+       <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town.gif"></div> Be it food & nightlife options, sports & movies news, weekend getaways, artiste profiles and other stakeholders of entertainment industry, it's all there. With a thriving Facebook presence and highly optimized ticketing solutions, it remains, in essence, a one-stop for entertainment.
          
 <br>
 <br>
@@ -562,7 +562,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!-- learntoday Content Start -->
         <div id="learntoday">
         <h2>Learning Partner</h2><br>
-         <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today.gif"></div> 
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today.gif"></div> 
          <strong>Discover a New Way of Learning, Anytime and On-The-Go</strong> <br>
 <br>Learntoday.in is India Today Group's online learning initiative which was unveiled by the reigning diva of Bollywood, Priyanka Chopra at the India Today Mind Rocks Youth Summit 2012.          
 <br>
@@ -600,7 +600,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!--  RFID Content Start -->
         <div id="RFID">
         <h2>Social RFID Partner</h2><br>
-         <div class="current"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif
 "></div> 
         Tagglabs is world's leading RFID and digital Innovation company, with more than 100+ campaigns for 40 leading brands like Google, Adidas, Volkswagen, CocaCola, JWT under our belt.
          <br>
@@ -613,7 +613,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!--  Singchana Content Start -->
         <div id="Singchana">
         <h2>Online KARAOKE Partner</h2><br>
-         <div class="current"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif"></div>Singchana.com is a pioneering idea established in the year 2012 with a vision to make every voice of all music lovers heard and visible. It is an online social karaoke activity, essentially a <a href="/youthsummit/delhi/2013/singchana.jsp
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif"></div>Singchana.com is a pioneering idea established in the year 2012 with a vision to make every voice of all music lovers heard and visible. It is an online social karaoke activity, essentially a <a href="/youthsummit/delhi/2013/singchana.jsp
 " target="_blank"><strong>Sing-Along</strong></a> game which enables users to stir up a song (in karaoke style), score points and share songs with the online community to <em><strong>become a star</strong></em> amongst their peers.<br>
 <br>The singing activity matches the pitch and tone of the singers' on real time basis vis-à-vis the original song. The participants are then given a score thereby enabling singers to record their performance and share it across social platforms.
 <div class="clr">&nbsp;</div>
@@ -624,7 +624,7 @@ Why hanker for the big star alone, when you could have the option of enjoying a 
         <!--  Singchana Content Start -->
         <div id="Memento">
         <h2>Memento Partner</h2><br>
-         <div class="current"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano1.gif"></div>The year 1986 saw the Italian fashion brand, Da Milano entering Indian market, with its first flagship store located at Connaught Place, New Delhi. The collections introduced by the brand exude character, originality, style and flair, in sync with global fashion trends that are incomparable to any other brand.<br>
+         <div class="current"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano1.gif"></div>The year 1986 saw the Italian fashion brand, Da Milano entering Indian market, with its first flagship store located at Connaught Place, New Delhi. The collections introduced by the brand exude character, originality, style and flair, in sync with global fashion trends that are incomparable to any other brand.<br>
 <br> 
 The finest leather is exclusively processed and imported from Italy, and the most premium Italian fitting says volumes about the Da Milano quality. The rich experience of Da Milano in the Indian Leather Industry results high finished leather, possessing sublime stylistic appeal and character. Supported with state-of-art technology and creativity, one can witness Da Milano's legacy in each and every creation.<br>
 <br>The craftsmanship, in the two of its main seasons, is employed to ladies' handbags and clutches, men's bags, wallets and accessories and also the luggage travel bags and trolleys. Above all, the collection also pampers the corporate needs with an air of snobbery, with its business gifts collection.<br>
@@ -640,12 +640,12 @@ The finest leather is exclusively processed and imported from Italy, and the mos
             <div class="title">
             	<p>Youth Partner</p>
           	<!--<div class="aiesec" onMouseOver="showHide('aiesec1','aiesec2')" onMouseOut="showHide('aiesec2','aiesec1')">
-                <div id="aiesec1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec.gif" onClick="aiesecShow()"></div>
-                <div id="aiesec2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec1.gif" onClick="aiesecShow()"></div>
+                <div id="aiesec1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec.gif" onClick="aiesecShow()"></div>
+                <div id="aiesec2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec1.gif" onClick="aiesecShow()"></div>
                </div>-->
             <div class="eclectic" onMouseOver="showHide('eclectic1','eclectic2')" onMouseOut="showHide('eclectic2','eclectic1')">
-                <div id="eclectic1" class="cursor"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic.gif" onClick="eclecticShow()"></div>
-                <div id="eclectic2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic1.gif" onClick="eclecticShow()"></div>
+                <div id="eclectic1" class="cursor"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic.gif" onClick="eclecticShow()"></div>
+                <div id="eclectic2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic1.gif" onClick="eclecticShow()"></div>
                 </div>
              </div>
              
@@ -654,8 +654,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
              <div class="title">
             	<p>Youth Online Partner</p>
             	<div class="coolage" onMouseOver="showHide('coolage1','coolage2')" onMouseOut="showHide('coolage2','coolage1')">
-                <div id="coolage1" class="cursor"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage.gif" onClick="coolageShow()"></div>
-                <div id="coolage2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage1.gif" onClick="coolageShow()"></div>
+                <div id="coolage1" class="cursor"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage.gif" onClick="coolageShow()"></div>
+                <div id="coolage2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage1.gif" onClick="coolageShow()"></div>
             </div>
              </div>
              
@@ -663,8 +663,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
              <div class="title">
              	<p>Online KARAOKE Partner</p>
             	<div class="Singchana" onMouseOver="showHide('Singchana1','Singchana2')" onMouseOut="showHide('Singchana2','Singchana1')">
-                 <div id="Singchana1"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif" onClick="SingchanaShow()"></div>
-                <div id="Singchana2"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/singchana-selected_090313123221.gif" onClick="SingchanaShow()"></div>
+                 <div id="Singchana1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana_090313123221.gif" onClick="SingchanaShow()"></div>
+                <div id="Singchana2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/singchana-selected_090313123221.gif" onClick="SingchanaShow()"></div>
                 
             </div>
              </div>
@@ -673,8 +673,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
               <div class="title">
              	<p>Digital OOH TV Partner</p>
             	<div class="ooh" onMouseOver="showHide('ooh1','ooh2')" onMouseOut="showHide('ooh2','ooh1')">
-                 <div id="ooh1" class="cursor"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif" onClick="oohmediaShow()"></div>
-                <div id="ooh2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh1.gif" onClick="oohmediaShow()"></div>
+                 <div id="ooh1" class="cursor"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif" onClick="oohmediaShow()"></div>
+                <div id="ooh2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh1.gif" onClick="oohmediaShow()"></div>
                 </div>
              </div>
              
@@ -683,8 +683,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
              <!-- <div class="title">
              	<p>Youth Partner Pakistan</p>
             	<div class="blink" onMouseOver="showHide('blink1','blink2')" onMouseOut="showHide('blink2','blink1')">
-                <div id="blink1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck.gif" onClick="blinckShow()"></div>
-                <div id="blink2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck1.gif" onClick="blinckShow()"></div>
+                <div id="blink1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck.gif" onClick="blinckShow()"></div>
+                <div id="blink2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck1.gif" onClick="blinckShow()"></div>
                                 
                 </div>
              </div>-->
@@ -697,8 +697,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
           <!-- <div class="title">
              	<p>Digital OOH Media Partner</p>
             	<div class="ooh" onMouseOver="showHide('ooh1','ooh2')" onMouseOut="showHide('ooh2','ooh1')">
-                 <div id="ooh1" class="cursor"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif" onClick="oohmediaShow()"></div>
-                <div id="ooh2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh1.gif" onClick="oohmediaShow()"></div>
+                 <div id="ooh1" class="cursor"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif" onClick="oohmediaShow()"></div>
+                <div id="ooh2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh1.gif" onClick="oohmediaShow()"></div>
                 </div>
              </div>-->
              
@@ -706,8 +706,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
  <div class="title">
              	<p>TV Partner </p>
             	<div class="bindas" onMouseOver="showHide('bindas1','bindas2')" onMouseOut="showHide('bindas2','bindas1')">
-                 <div id="bindas1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas.jpg" onClick="bindasShow()"></div>
-                <div id="bindas2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-1.jpg" onClick="bindasShow()"></div>
+                 <div id="bindas1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas.jpg" onClick="bindasShow()"></div>
+                <div id="bindas2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-1.jpg" onClick="bindasShow()"></div>
                 
             </div>
              </div>
@@ -716,8 +716,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
  <div class="title">
              	<p>Online Ticketing Partner</p>
             	<div class="buzz" onMouseOver="showHide('buzz1','buzz2')" onMouseOut="showHide('buzz2','buzz1')">
-                 <div id="buzz1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town.gif" onClick="buzztownShow()"></div>
-                <div id="buzz2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town1.gif" onClick="buzztownShow()"></div>
+                 <div id="buzz1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town.gif" onClick="buzztownShow()"></div>
+                <div id="buzz2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town1.gif" onClick="buzztownShow()"></div>
                 
             </div>
              </div>
@@ -725,8 +725,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
  <div class="title">
              	<p>Social RFID Partners</p>
             	<div class="RFID" onMouseOver="showHide('RFID1','RFID2')" onMouseOut="showHide('RFID2','RFID1')">
-                 <div id="RFID1"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif" onClick="RFIDShow()"></div>
-                <div id="RFID2"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013september/tagglabs-selected_090313123221.gif" onClick="RFIDShow()"></div>
+                 <div id="RFID1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs_090313123221.gif" onClick="RFIDShow()"></div>
+                <div id="RFID2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013september/tagglabs-selected_090313123221.gif" onClick="RFIDShow()"></div>
                 
             </div>
              </div>
@@ -734,8 +734,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
 <div class="title">
              	<p>Memento Partner</p>
             	<div class="Memento" onMouseOver="showHide('Memento1','Memento2')" onMouseOut="showHide('Memento2','Memento1')">
-                 <div id="Memento1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano1.gif" onClick="MementoShow()"></div>
-                <div id="Memento2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano.gif" onClick="MementoShow()"></div>
+                 <div id="Memento1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano1.gif" onClick="MementoShow()"></div>
+                <div id="Memento2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano.gif" onClick="MementoShow()"></div>
                 
             </div>
              </div>
@@ -748,29 +748,29 @@ The finest leather is exclusively processed and imported from Italy, and the mos
      <div class="title">
              	<p>TV Partner</p>
             	<div class="ht" onMouseOver="showHide('ht1','ht2')" onMouseOut="showHide('ht2','ht1')">
-                 <div id="ht1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ht.gif" onClick="headlinestodayShow()"></div>
-                <div id="ht2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/ht1.gif" onClick="headlinestodayShow()"></div>
+                 <div id="ht1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ht.gif" onClick="headlinestodayShow()"></div>
+                <div id="ht2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ht1.gif" onClick="headlinestodayShow()"></div>
                </div>
              </div>
              <div class="title">
              	<p>Radio Partner</p>
             	<div class="oye" onMouseOver="showHide('oye1','oye2')" onMouseOut="showHide('oye2','oye1')">
-                  <div id="oye1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/oye.gif" onClick="oyefmShow()"></div>
-                <div id="oye2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/oye1.gif" onClick="oyefmShow()"></div>
+                  <div id="oye1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/oye.gif" onClick="oyefmShow()"></div>
+                <div id="oye2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/oye1.gif" onClick="oyefmShow()"></div>
 </div>
              </div>
              <div class="title">
              	<p>Online Partner</p>
             	<div class="india-today" onMouseOver="showHide('india-today1','india-today2')" onMouseOut="showHide('india-today2','india-today1')">
-                  <div id="india-today1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/it.gif" onClick="indiatodayShow()"></div>
-                <div id="india-today2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/it1.gif" onClick="indiatodayShow()"></div>
+                  <div id="india-today1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/it.gif" onClick="indiatodayShow()"></div>
+                <div id="india-today2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/it1.gif" onClick="indiatodayShow()"></div>
                </div>
              </div>
              <div class="title">
              	<p>Learning Partner</p>
             	<div class="learn-today" onMouseOver="showHide('learn-today1','learn-today2')" onMouseOut="showHide('learn-today2','learn-today1')">
-                 <div id="learn-today1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today.gif" onClick="learntodayShow()"></div>
-                <div id="learn-today2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today1.gif" onClick="learntodayShow()"></div>
+                 <div id="learn-today1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today.gif" onClick="learntodayShow()"></div>
+                <div id="learn-today2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today1.gif" onClick="learntodayShow()"></div>
                </div>
              </div>    
              
@@ -781,8 +781,8 @@ The finest leather is exclusively processed and imported from Italy, and the mos
              <div class="title">
              	<p>Newspaper Partner </p>
             	<div class="mailtoday" onMouseOver="showHide('mailtoday1','mailtoday2')" onMouseOut="showHide('mailtoday2','mailtoday1')">
-                 <div id="mailtoday1"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mt.gif" onClick="mailtodayShow()"></div>
-                <div id="mailtoday2"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mt1.gif" onClick="mailtodayShow()"></div>
+                 <div id="mailtoday1"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/mt.gif" onClick="mailtodayShow()"></div>
+                <div id="mailtoday2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/mt1.gif" onClick="mailtodayShow()"></div>
             </div>
              </div>
              
@@ -844,21 +844,21 @@ The finest leather is exclusively processed and imported from Italy, and the mos
       <div class="list_carousel">
 				<ul id="foo0">
 	
-					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
-					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
-                <!--    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
+					<li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
+					<li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
+                <!--    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
                      
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
-                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
-                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
+                      <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
+                      <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -866,7 +866,7 @@ The finest leather is exclusively processed and imported from Italy, and the mos
         
         
         </div>
-        <div class="social_icon"> <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
+        <div class="social_icon"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
         <map name="Map">
           <area shape="rect" coords="2,2,34,31" href="https://www.facebook.com/MindRocks" target="_blank">
           <area shape="rect" coords="49,2,81,31" href="https://twitter.com/mindrocks/" target="_blank">
@@ -875,7 +875,7 @@ The finest leather is exclusively processed and imported from Italy, and the mos
         </div>
     </div>
  </div>
- <script language="Javascript" type="text/javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
+ <script language="Javascript" type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
 		<script language="javascript" type="text/javascript">
 			jQuery(document).ready(function() {
 				$('.countdown1').countDown({
@@ -891,7 +891,7 @@ The finest leather is exclusively processed and imported from Italy, and the mos
 			});
 		</script>
 
-<script type="text/javascript" language="javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
 		<script type="text/javascript" language="javascript">
 			$(function() {
 				$('#foo0').carouFredSel();

@@ -36,7 +36,7 @@
 <meta name="description" content="Delhi Assembly election 2015 - Choose  your favorite Chief Ministerial Candidate and save your favorite candidate." />
 <meta name="keywords" content="Delhi Assembly elections, Delhi assembly elections 2015, Assembly elections in Delhi, Delhi elections 2015, BJP, AAP, Congress, kiran bedi, arvind kejriwal, ajay makan." />
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,100,200,700,500,400,900' rel='stylesheet' type='text/css'>
-<link href='/staticpages/mediaintoday/microsites/saveyourleader/new/style.css' rel='stylesheet' type='text/css'>
+<link href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/style.css' rel='stylesheet' type='text/css'>
 <style>
 	.agree-text {width: 295px;}
 	.footertag nav, footer nav { width: 79.4%;}
@@ -74,11 +74,11 @@
     <div class="wrapper">
        <div class="socialmedia-icon">
           <ul>
-           <li><a href="index.jsp" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/new/Home.png" border="0" /></a></li>
-            <li><a href="https://www.facebook.com/IndiaToday" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/facebook.png" border="0" /></a></li>
-             <li><a href="https://twitter.com/indiatoday" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/twitter.png" border="0" /></a></li>
-<!--             <li><a href="#"><img src="/staticpages/mediaintoday/microsites/saveyourleader/googleplus.png" border="0" /></a></li>
-             <li><a href="#"><img src="/staticpages/mediaintoday/microsites/saveyourleader/4-icon.png" border="0" /></a></li>
+           <li><a href="index.jsp" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/Home.png" border="0" /></a></li>
+            <li><a href="https://www.facebook.com/IndiaToday" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/facebook.png" border="0" /></a></li>
+             <li><a href="https://twitter.com/indiatoday" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/twitter.png" border="0" /></a></li>
+<!--             <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/googleplus.png" border="0" /></a></li>
+             <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/4-icon.png" border="0" /></a></li>
 -->          </ul>
        
        </div>
@@ -99,7 +99,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
         <div class="body-content clearfix">
           <div id="leader-result" class="clearfix">
                <ul>
-                 <li><img src="/staticpages/mediaintoday/microsites/saveyourleader/Arvind.png" border="0" height="410" />
+                 <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/Arvind.png" border="0" height="410" />
                  <span class="caption">ARVIND KEJRIWAL</span>
                   
                    <div class="yesno clearfix">
@@ -124,7 +124,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
                    
                  
                  </li>
-                 <li><img src="/staticpages/mediaintoday/microsites/saveyourleader/Kiran.png" border="0"  />
+                 <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/Kiran.png" border="0"  />
                  <span class="caption icon-top">KIRAN BEDI</span>
                  
               
@@ -150,7 +150,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
                    </div>
                    
                  </li>
-                 <li><img src="/staticpages/mediaintoday/microsites/saveyourleader/Ajay.png" border="0"/>
+                 <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/Ajay.png" border="0"/>
                  <span class="caption icon-top">AJAY MAKEN</span>
                  
                    
@@ -184,7 +184,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
              <span class="sostext">SEND THEM AN SOS MESSAGE</span>
                <span class="share-sos clearfix">
                  <ul>
-                       <li><a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=&description=&link=http://indiatoday.intoday.in/saveyourleader/&redirect_uri=http://indiatoday.intoday.in/saveyourleader/&picture=/staticpages/mediaintoday/microsites/saveyourleader/new/save_your_leader-fb-share.jpg" target="_blank" id="facebukshare">
+                       <li><a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=&description=&link=http://indiatoday.intoday.in/saveyourleader/&redirect_uri=http://indiatoday.intoday.in/saveyourleader/&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/save_your_leader-fb-share.jpg" target="_blank" id="facebukshare">
                      
                         
                      <span class="facebook scbg">facebook</span></a></li>
@@ -219,10 +219,10 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
     <div class="lftfbg"> </div>
     <div class="rtlfbg"></div>
     <div class="wrapper">
-      <div class="footertag"> <img height="43" border="0" src="/staticpages/mediaintoday/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
+      <div class="footertag"> <img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
         <nav class="nav">
           <ul>
-            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="/staticpages/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
+            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/news.html">News</a></li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/114/1/india.html">India</a> </li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/113/1/world.html">World</a> </li>

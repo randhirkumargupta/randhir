@@ -159,7 +159,7 @@ function changeColor(colo) {
   <!-- Backstage action Start -->
   <div style="margin-bottom: 20px; float:left; width:100%;">
     <div style="font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase">Backstage action </div>
-    <div><a href="#"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2014August/imran-khan_300x300_080914064335.jpg" border="0" /></a></div>
+    <div><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014August/imran-khan_300x300_080914064335.jpg" border="0" /></a></div>
     <div class="clr"></div>
   </div>
   <!-- Backstage action End -->
@@ -167,32 +167,32 @@ function changeColor(colo) {
   <div class="side_chunk">
     <div class="side_chunk_title" style="height:52px; font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase; margin-top:10px"> Six-second video snapshots </div>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-jwala-gutta-manisha-koirala-what-a-racket-the-string-quintet/1/376333.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/jwallagutta-vine_100x85_080914062943.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-dipika-pallikal-squash/1/376337.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/dipika-vine_100x85_080914062943.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/tabu-poses-at-india-today-woman-summit-2014/1/376341.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2014August/tabu-vine-100x85_080914070234.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-jwala-gutta-manisha-koirala-what-a-racket-the-string-quintet/1/376333.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/jwallagutta-vine_100x85_080914062943.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-dipika-pallikal-squash/1/376337.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/dipika-vine_100x85_080914062943.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/tabu-poses-at-india-today-woman-summit-2014/1/376341.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014August/tabu-vine-100x85_080914070234.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
     <div style="clear:both"></div>
   </div>
   <!--<div class="side_chunk">
     <div class="side_chunk_title" style="height:30px; font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase; margin-top:10px">Vine videos</div>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>-->
+    <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>-->
     <!--<div class="side_chunk">
     <div class="side_chunk_title" style="height:30px; font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase; margin-top:10px">
         Short & Crisp Videos
     </div>
      <div style="clear:both"></div>
-	   <a href="http://indiatoday.intoday.in/video/shashi-tharoor-unveils-woman-magazine-cover/1/266669.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-1.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
-		<a href="http://indiatoday.intoday.in/video/sridevi-and-boney-kapoors-love-story/1/266632.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-3.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+	   <a href="http://indiatoday.intoday.in/video/shashi-tharoor-unveils-woman-magazine-cover/1/266669.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/CRISP-1.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/sridevi-and-boney-kapoors-love-story/1/266632.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/CRISP-3.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
    
-		<a href="http://indiatoday.intoday.in/video/smriti-irani-jayanthi-natarajan-unveil-india-todays--high-and-mighty-cover/1/266579.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-2.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/smriti-irani-jayanthi-natarajan-unveil-india-todays--high-and-mighty-cover/1/266579.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/CRISP-2.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
  <div style="clear:both"></div>
  
- <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
-		<a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+ <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
    
-		<a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
  <div style="clear:both"></div>
  </div>-->
     <div style="clear:both"></div>
@@ -201,12 +201,12 @@ function changeColor(colo) {
   <div class="past-coverage">
     <div style="font: bold 20px/24px Arial-Black; color: #fef200;">PAST COVERAGE</div>
     <div class="coverage">
-      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html"> <img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/images/post1.jpg" alt="Mariane Pearl at the Dinner Keynote Address" title="Mariane Pearl at the Dinner Keynote Address" /> </a></div>
+      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/post1.jpg" alt="Mariane Pearl at the Dinner Keynote Address" title="Mariane Pearl at the Dinner Keynote Address" /> </a></div>
       <div style="float:left; width:175px;margin-top: 3px;"> <a class="ciker" href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html">Mariane Pearl at the Dinner Keynote Address</a> </div>
     </div>
     <div class="clr"></div>
     <div class="coverage">
-      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html"> <img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/images/psot2.jpg" alt="Padma on career, relationship and more" title="Padma on career, relationship and more" /></a></div>
+      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/psot2.jpg" alt="Padma on career, relationship and more" title="Padma on career, relationship and more" /></a></div>
       <div style="float:left; width:175px;margin-top: 3px;"> <a class="ciker" href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html">Padma on career, relationship and more</a> </div>
     </div>
   </div>
@@ -266,18 +266,18 @@ function changeColor(colo) {
 <tr> 
   <td width="100%" valign="top" align="center" style="border:solid 1px #cccccc; border-width: 1px 0px 0px 0;" colspan="3">
   <span class="sponsor-type">PRESENTING SPONSOR</span><br>
-  <a target="_blank" href="http://www.pcjeweller.com/"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/PCJ_logo1.gif" alt="PcJeweller" border="0" usemap="#Map" title="PcJeweller"></a>  </td>
+  <a target="_blank" href="http://www.pcjeweller.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/images/PCJ_logo1.gif" alt="PcJeweller" border="0" usemap="#Map" title="PcJeweller"></a>  </td>
 </tr>
 <tr>
   <td valign="top" align="center" style="border:solid 1px #cccccc; padding:0; border-width: 1px 0px 1px 0; width:1000px">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td align="center"><span class="sponsor-type">ASSOCIATE SPONSOR</span><br>
-          <a target="_blank" href="http://www.e2necc.com/"><img border="0" title="e2necc" alt="e2necc" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/NECC_logo.jpg"></a> </td>
+          <a target="_blank" href="http://www.e2necc.com/"><img border="0" title="e2necc" alt="e2necc" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/images/NECC_logo.jpg"></a> </td>
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">TIME PARTNER</span><br>
-          <a href="#"><img border="0" title="Omega" alt="Time Patner" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/omega_logo.jpg"></a> </td>
+          <a href="#"><img border="0" title="Omega" alt="Time Patner" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/speakers/omega_logo.jpg"></a> </td>
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">BESPOKE PARTNER</span><br><br/>
-          <a href="#"><img border="0" title="Bespoke Patner" alt="Bespoke Patner" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/miilano-logo.jpg"></a> </td>
+          <a href="#"><img border="0" title="Bespoke Patner" alt="Bespoke Patner" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/images/miilano-logo.jpg"></a> </td>
         </tr>
       </table>
     
@@ -291,7 +291,7 @@ function changeColor(colo) {
     </tr>
     <tr>
       <td align="center" style="border:solid 1px #cccccc; border-width: 1px 1px 1px 0; border-right:none;border-left:none;border-top:none">
-      <img src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Sponsor_strip.jpg">
+      <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2014/speakers/Sponsor_strip.jpg">
         </td>
         
     </tr>

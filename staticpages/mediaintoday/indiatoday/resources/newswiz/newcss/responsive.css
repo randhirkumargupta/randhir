@@ -8,7 +8,7 @@
 .header_win { font-size:24px;}
 .over_area p { font-size:15px; line-height:24px;}
 .video_info p { font-size:14px; padding-top:9px; padding-bottom:8px;}
-.top_area {  background:url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/bg-new-hd.jpg) repeat left top !important;}
+.top_area {  background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/bg-new-hd.jpg) repeat left top !important;}
 .foot_addvertis { margin:0px auto; float:none !important; margin-bottom:10px; text-align:center}
 .foot_partner { margin:0px auto; float:none}
 .top_banner_ad { text-align:center}

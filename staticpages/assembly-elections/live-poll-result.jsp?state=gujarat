@@ -52,7 +52,7 @@
 <table width="1003" border="0" cellspacing="0" cellpadding="0">
 <tr><td valign="top" colspan="2"><table width="1003" border="0" cellpadding="0" cellspacing="0"><tr><td height="18" bgcolor="#ffffff" colspan="2"><div id="itgd_links"><a href="http://www.indiatodaygroup.com/" target="_blank">INDIA TODAY GROUP:</a><a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><span class="active"><a href="http://www.indiatoday.in/" target="_blank">India Today</a></span><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a></div></td></tr></table></td></tr>
   <tr>
-    <td width="270" align="left" valign="top" bgcolor="#000000"><h1 style="margin-top:25px;"><a href="http://indiatoday.intoday.in/assembly-elections/index.jsp" ><img src="/staticpages/mediaintoday/indiatoday/top_n.jpg" width="268"  border="0" alt="Assembly Elections 2012" title="Assembly Elections 2012" /></a></h1></td>
+    <td width="270" align="left" valign="top" bgcolor="#000000"><h1 style="margin-top:25px;"><a href="http://indiatoday.intoday.in/assembly-elections/index.jsp" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/top_n.jpg" width="268"  border="0" alt="Assembly Elections 2012" title="Assembly Elections 2012" /></a></h1></td>
     <td width="733" align="left" valign="middle" bgcolor="#000000" class="ad-bg">
     <div class="mastadsp" style="margin-top:10px;">
     <div >Advertisement</div>
@@ -109,9 +109,9 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <div class="electiontitle"><div style="width:250px; float:left; "><h1>Gujarat</h1></div><div style="float:left; width:420px; margin-top:10px; text-align:right;" class="elenortxet"><strong>Other States :</strong> <a href='http://indiatoday.intoday.in/assembly-elections/live-poll-result.jsp?state=himachalpradesh'>Himachal Pradesh</a></div></div>
 <div align="center"><div align="center" class="clicktext">Click on the Map to see constituency wise results</div>
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="650" height="650">
-<param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/gujarat/Gujarat_election_english.swf" />
+<param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/gujarat/Gujarat_election_english.swf" />
 <param name="quality" value="high" />
-<embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/gujarat/Gujarat_election_english.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="650" height="650"></embed>
+<embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/gujarat/Gujarat_election_english.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="650" height="650"></embed>
 </object></div>
             
 <!--<div class="state"><div class="statedetails"><div class="stateleft">
@@ -172,7 +172,7 @@ var zflag_nid="821"; var zflag_cid="1146/1137"; var zflag_sid="2"; var zflag_wid
         <div class="clear"></div>
 		</div>
 		<DIV ID="footerdiv">
-<iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="150"></iframe> 
+<iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="150"></iframe> 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

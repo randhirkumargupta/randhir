@@ -4,9 +4,9 @@
 body{ font-family: 'Roboto', sans-serif; font-size:100%; }
 a{text-decoration:none; outline:none;}
 img{border:none; width:100%; height:100%;}
-.bg{background: url(/staticpages/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
+.bg{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
 
-/*/staticpages/mediaintoday/indiatoday/modi_year/sprit.png,mastt.jpg*/
+/*http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png,mastt.jpg*/
 
 #top_nav{width:100%; height:24px; background:#f8f8f8;}
 .top_nav{ width:1000px; margin:0 auto;}
@@ -20,10 +20,10 @@ img{border:none; width:100%; height:100%;}
 .logo{ float:left;margin-top:20px;}
 .ad{ float:right; margin-top:23px;}
 
-#header_section{background: url(/staticpages/mediaintoday/indiatoday/modi_year/header_sec_bg.jpg)repeat-x; clear:both; float:left; width:100%; padding:13px 0 37px; text-align:center;}
+#header_section{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/header_sec_bg.jpg)repeat-x; clear:both; float:left; width:100%; padding:13px 0 37px; text-align:center;}
 #header_section img{width:100%; height:113px;}
 
-.header_section{background: url(/staticpages/mediaintoday/indiatoday/modi_year/mastt.jpg) no-repeat center center;height:134px;}
+.header_section{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/mastt.jpg) no-repeat center center;height:134px;}
 
 .nav{ width:1000px; margin:0 auto; display:block;}
 .nav ul { list-style:none; margin:0; padding:0;}
@@ -32,7 +32,7 @@ img{border:none; width:100%; height:100%;}
 .nav ul li a:hover{ text-decoration:none; color:#000000;}
 .nav ul li:last-child{margin-right:0;}
 
-.search {display: block;background: url(/staticpages/mediaintoday/indiatoday/modi_year/sprit.png) -236px -21px no-repeat; width: 28px;height: 30px; margin-top:2px;}
+.search {display: block;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) -236px -21px no-repeat; width: 28px;height: 30px; margin-top:2px;}
 #search-saction {background: #bbbbbb; width: 98%; padding: 10px; display: none; position: relative; z-index: 99; top: 5px; height: 32px; float: left;}
 .search-inner {width: 530px; margin: 0 auto; height: 34px; background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow: hidden;}
 .search-inner .input-box {border: medium none; float: left; padding: 3px; height: 28px; line-height: 32px; margin-left: 40px; width: 390px; -webkit-border-radius: 0px; -webkit-appearance: none;}
@@ -49,7 +49,7 @@ img{border:none; width:100%; height:100%;}
 .box_caption{ position:absolute; bottom:10px; font:700 20px/24px "Roboto"; color:#161616; background-color:rgba(241,241,241,0.8); padding:10px;}
 .box_caption a{color:#161616;}
 
-.hits_misses{float:left; width:100%; margin-top:20px; background:url(/staticpages/mediaintoday/indiatoday/modi_year/shad.jpg) no-repeat 0 bottom; padding-bottom:13px;}
+.hits_misses{float:left; width:100%; margin-top:20px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/shad.jpg) no-repeat 0 bottom; padding-bottom:13px;}
 .hits_box{ width:665px; padding:10px; border:1px solid #e5e5e5; float:left; min-height:213px;}
 .hits_box ul{list-style:none;}
 .hits_box ul li{width:208px; float:left; margin-right:20px;}
@@ -98,7 +98,7 @@ a.close_btn{background-position:-58px -55px; width:31px; height:31px; position:r
 .map_pop h2{font:bold 27px/35px "Roboto"; color:#141414; display:block;}  
 .map_pop ul{list-style:disc; padding-left:22px;}
 .map_pop ul li{width:100%; float:left; font:300 20px/24px "Roboto"; color:#141414; margin-top:10px;}
-.bg {  background: url(/staticpages/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
+.bg {  background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
 
 .logoit {
     background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -154px transparent;
@@ -233,15 +233,15 @@ a.mobnav{display:none;}
 .socials_footer_links_h ul{ list-style-type:none;padding:0;margin:0;}
 .socials_footer_links_h ul li{  float:left; margin-right:10px;}
 
-.socials_footer_links_h ul li .fb_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-226px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .fb_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-226px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .gp_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-320px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .gp_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-320px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .tw_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-265px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .tw_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-265px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .rss_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-375px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .rss_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-375px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .mbl_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-428px -184px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .mbl_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-428px -184px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in; margin-top:-5px;}
 	
 .socials_footer_links_h ul li .fb_h:hover{background-position:-226px -238px;}
@@ -373,7 +373,7 @@ a.close_btn {
 .quotes,.quotes .quotes_main{width:100%;}
 
 .poll,.poll .poll_main{width:100%;}
-a.mobnav{background:url(/staticpages/mediaintoday/indiatoday/modi_year/mob_nav.png) no-repeat 0 0; width:17px; height:13px; float:left; position:relative; top:-31px; left:13px; display:block;}
+a.mobnav{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/mob_nav.png) no-repeat 0 0; width:17px; height:13px; float:left; position:relative; top:-31px; left:13px; display:block;}
 .nav{position:absolute; top:53px; left:0; background-color:#fff; z-index:9999; padding-bottom:15px; display:none;}
 .nav ul li:first-child{margin:0;}
 .nav ul li:last-child{display:none; border:none;}

@@ -9,11 +9,11 @@
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 
 <meta property="og:title" content="Five Most Corrupt Dictators">
-<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg">
 <meta property="og:url" content="/corrupt-dictators/">
 <meta property="og:description" content="Five Most Corrupt Dictators">
 
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg" />
 
 <style>
 #surfercommt {
@@ -262,7 +262,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=Five%20Most%20Corrupt%20Dictators&URL=http://indiatoday.intoday.in/corrupt-dictators/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/corrupt-dictators/&p[title]=Corrupt Dictators&s=100&p[summary]=Five Most Corrupt Dictators&p[images][0]=/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/corrupt-dictators/&p[title]=Corrupt Dictators&s=100&p[summary]=Five Most Corrupt Dictators&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/DontMIss_300x350new.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=Five Most Corrupt Dictators%20http://indiatoday.intoday.in/corrupt-dictators/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -272,63 +272,63 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
     </div>
     <?php if(isset($_GET['slide']) && $_GET['slide'] == 2) { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-2.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-2.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=1" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/corrupt-dictators/index.jsp?slide=3" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 3) { ?>
 
-     <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-3.jpg" alt="" title="" />
+     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-3.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=3" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/corrupt-dictators/index.jsp?slide=4" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 4) { ?>
 
-     <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-4.jpg" alt="" title="" />
+     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-4.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=3" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/corrupt-dictators/index.jsp?slide=5" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 5) { ?>
 
-     <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-5.jpg" alt="" title="" />
+     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-5.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=4" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
     <a href="/corrupt-dictators/index.jsp?slide=6" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 6) { ?>
 
-     <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-6.jpg" alt="" title="" />
+     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-6.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=5" class='prev'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
     </a>
 
     <?php  } else { ?>
 
-    <img src="/staticpages/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-1.jpg" alt="" title="" />
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/corrupt-dictators/cd-slide-1.jpg" alt="" title="" />
 
     <a href="/corrupt-dictators/index.jsp?slide=2" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
 
     <?php } ?>

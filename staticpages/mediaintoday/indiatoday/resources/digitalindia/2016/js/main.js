@@ -72,7 +72,7 @@ $('.nav > ul > li.dropbot').mouseover(function() {
 	});
 
 
-/*<script type="text/javascript" language="javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2014/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>*/
+/*<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2014/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>*/
 
 /*	$(function() {
 		$('#foo0').carouFredSel();

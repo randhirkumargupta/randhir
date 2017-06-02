@@ -189,18 +189,18 @@ The India Today Conclave provides increased speaker talktime and interaction wit
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS has been initiated to serve a dual purpose: it acknowledges the contribution of the modern Indian woman to the nation's top management cadres & provides day-long interaction between highly qualified and successful women with those who are ambitious but still striving for the vision, strategies and skills needed to make their mark in today's complex world.<br /> 
  In its second year, the Summit, we believe, is well set to power women to deal with challenges and take charge of their professional and personal lives.</div>
 	          </strong></div></div>
-             <div align="right"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    

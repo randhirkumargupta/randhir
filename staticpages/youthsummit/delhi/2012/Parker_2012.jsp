@@ -40,7 +40,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -51,23 +51,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -259,7 +259,7 @@
 
 		<div class="sponcer-text-wrapper">
 		
-		 <p><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponcers/parker.gif" align="left" style="margin-right:10px ; margin-bottom:3px">Founded in 1888, PARKER has been an inspiration to people around the globe. A brand dedicated to passion for perfection and driven by bold innovation, PARKER's philosophy is to put consumers and craftsmanship first and this is what makes PARKER the most recognized fine writing brand globally.</p>
+		 <p><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/sponcers/parker.gif" align="left" style="margin-right:10px ; margin-bottom:3px">Founded in 1888, PARKER has been an inspiration to people around the globe. A brand dedicated to passion for perfection and driven by bold innovation, PARKER's philosophy is to put consumers and craftsmanship first and this is what makes PARKER the most recognized fine writing brand globally.</p>
 		<p>Launched in India 1996 by LUXOR WRITING INSTRUMENTS PVT LTD, a pioneer in the writing instruments market in India, PARKER offers an exclusive range of fine writing instruments, legends in their own right, and lifestyle statements relevant to every generation. PARKER has made a mark on the nation so much that it has been awarded ' The Most Trusted Brand' for five years in a row.</p>
 		<p> Available PAN India, PARKER has served professionals impeccably with writing solutions that are a perfect combination of elegance, reliability, durability and timeless style. The very reason that PARKER has been writing thousands of success stories over the years. Even today it is an inspirational and a prized possession for Indian populace, as it was long ago- A True Timeless Appeal.<br>
           </p>

@@ -1,7 +1,7 @@
 body { margin:0; padding:0;}
 .lft { float:left}
 .right { float:right}
-.voter-helpline-container {width:100%; margin:0 auto; background:url(/staticpages/mediaintoday/indiatoday/images/mast-v.jpg) no-repeat top center;}
+.voter-helpline-container {width:100%; margin:0 auto; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mast-v.jpg) no-repeat top center;}
 #votewapper {width:990px; margin:0 auto;}
 .vote-header {height:436px; width:990px; margin:0 auto}
 .clear { clear:both}
@@ -27,7 +27,7 @@ body { margin:0; padding:0;}
 .voter-right {width:300px;}
 .vote-item { margin-bottom:20px;}
 .voter-help { background-color:#fef200; padding:10px; border-radius:10px;}
-.vote-mob {width:74px; height:69px; background:url(/staticpages/mediaintoday/indiatoday/images/Helpline-icon.png) no-repeat top left; text-indent:-9999px;}
+.vote-mob {width:74px; height:69px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Helpline-icon.png) no-repeat top left; text-indent:-9999px;}
 
 
 .vote-help-txt {
@@ -91,7 +91,7 @@ body { margin:0; padding:0;}
 .newses ul { padding:0px; margin:0px;}
 .newses ul li { border-bottom:2px dotted #828282; padding:15px 0px; margin-bottom:0px; list-style:none;  }
 .newses ul li a { color:#494949; font-size:16px; font-weight:bold; font-family:"Arial Black", Gadget, sans-serif; text-decoration:none;  }
-.chat { background: url("/staticpages/mediaintoday/indiatoday/images/chat_icon.jpg") no-repeat scroll 20px 2px rgb(35, 31, 32);
+.chat { background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/chat_icon.jpg") no-repeat scroll 20px 2px rgb(35, 31, 32);
     color: rgb(255, 255, 255);
     float: left;
     font-family: Arial,Helvetica,sans-serif;
@@ -120,7 +120,7 @@ body { margin:0; padding:0;}
 }
 
 .contents ul { padding:0px; margin:0px; width:300px; }
-.contents ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; border-bottom:2px dotted #777777; padding:0px 0px 20px 30px; background:url(/staticpages/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; background-size: 8px; margin-bottom:20px; font-size:14px;  }
+.contents ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; border-bottom:2px dotted #777777; padding:0px 0px 20px 30px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; background-size: 8px; margin-bottom:20px; font-size:14px;  }
 .contents ul li a { font-weight:bold; color:#323232; text-decoration:none; display:block; font-size:20px; }
 .contents ul li a:hover { color:#999; text-decoration:none; }
 .contents ul li strong { padding-bottom:10px;}
@@ -139,7 +139,7 @@ body { margin:0; padding:0;}
 	margin-top:20px;
 }
 .search-rel ul { padding:0px; margin:0px; }
-.search-rel ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; padding:0px 0px 20px 30px; background:url(/staticpages/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; background-size: 8px; margin-bottom:20px; font-size:16px;  }
+.search-rel ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; padding:0px 0px 20px 30px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; background-size: 8px; margin-bottom:20px; font-size:16px;  }
 .search-rel ul li a { font-weight:bold; color:#323232; text-decoration:none; font-size:20px; display:block }
 .search-rel ul li a:hover { color:#999; text-decoration:none; }
 
@@ -151,7 +151,7 @@ body { margin:0; padding:0;}
 	margin-top:20px;
 }
 .faq-s ul { padding:0px; margin:0px; width:300px; float:left; margin-right:55px;}
-.faq-s ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; padding:0px 0px 20px 30px; background:url(/staticpages/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; margin-bottom:20px; font-size:16px; border-bottom:2px dotted #828282;  }
+.faq-s ul li { list-style:none;  font-family:Arial, Helvetica, sans-serif; padding:0px 0px 20px 30px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bullets.gif) left 5px no-repeat; margin-bottom:20px; font-size:16px; border-bottom:2px dotted #828282;  }
 .faq-s ul li a { font-weight:bold; color:#323232; text-decoration:none; font-size:20px; display:block }
 .faq-s ul li a:hover { color:#999; text-decoration:none; }
 

@@ -53,7 +53,7 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -64,23 +64,23 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -201,7 +201,7 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
                         
                         <div style="width:683px; float:left;">
                         
-                        <img src="/staticpages/mediaintoday/indiatoday/youthsummit/collage_new.jpg" width="683" height="635" border="0" usemap="#Map">
+                        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/collage_new.jpg" width="683" height="635" border="0" usemap="#Map">
 <map name="Map">
   <area shape="rect" coords="222,3,378,184" href="http://indiatoday.intoday.in/story/akhilesh-yadav-betaji-to-netaji-my-journey-india-today-youth-summit-2012/1/216331.html" alt="Akhilesh" title="Akhilesh" target="_blank">
 <area shape="rect" coords="4,5,223,633" href="http://indiatoday.intoday.in/story/india-today-mind-rocks-youth-summit-2012-priyanka-chopra/1/216487.html" alt="Priyanka" title="Priyanka" target="_blank"><area shape="rect" coords="381,5,530,184" href="http://indiatoday.intoday.in/story/india-today-mind-rocks-youth-summit-2012-arvind-kejriwal/1/216442.html" target="_blank" alt="Arvind Kejrival" title="Arvind Kejrival">
@@ -251,7 +251,7 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
                        
                         <div class="mindr-consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/ap.jpg" alt="Aroon Purie" width="75" height="64" class="imgs" title="Aroon Purie" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/ap.jpg" alt="Aroon Purie" width="75" height="64" class="imgs" title="Aroon Purie" align="left" border="0"> 
                             <div class="mindr-consubhead">Aroon Purie</div>
                             <div>Chairman &amp; Editor in Chief, <br>India Today Group </div>
                         </div>
@@ -283,7 +283,7 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
                         </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speaker:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Akhilesh-Yadav.jpg" alt="Akhilesh Yadav" width="75" height="64" class="imgs" title="Akhilesh Yadav" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Akhilesh-Yadav.jpg" alt="Akhilesh Yadav" width="75" height="64" class="imgs" title="Akhilesh Yadav" align="left" border="0"> 
                             <div class="mindr-consubhead"> Akhilesh Yadav
                             </div>
                             <div>Chief Minister, UP</div>
@@ -293,7 +293,7 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
                         
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Rahul Kanwal
                             </div>
@@ -360,21 +360,21 @@ var zflag_nid="821"; var zflag_cid="1073"; var zflag_sid="0"; var zflag_width="1
                       </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speakers:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/anu-malik.jpg" alt="Anu Malik" width="75" height="64" class="imgs" title="Anu Malik" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/anu-malik.jpg" alt="Anu Malik" width="75" height="64" class="imgs" title="Anu Malik" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Anu Malik
                             </div>
                             <div>Music Director </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Ali-zafar.jpg" alt="Ali Zafar" width="75" height="64" class="imgs" title="Ali Zafar" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Ali-zafar.jpg" alt="Ali Zafar" width="75" height="64" class="imgs" title="Ali Zafar" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Ali Zafar
                             </div>
                             <div>Actor & Singer, Pakistan  </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Masaba-Gupta.jpg" alt="Masaba Gupta" width="75" height="64" class="imgs" title="Masaba Gupta" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Masaba-Gupta.jpg" alt="Masaba Gupta" width="75" height="64" class="imgs" title="Masaba Gupta" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	 	
 Masaba Gupta
@@ -382,14 +382,14 @@ Masaba Gupta
                             <div>Fashion Designer </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Imtiaz-Ali.jpg" alt="Imtiaz Ali" width="75" height="64" class="imgs" title="Imtiaz Ali" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Imtiaz-Ali.jpg" alt="Imtiaz Ali" width="75" height="64" class="imgs" title="Imtiaz Ali" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Imtiaz Ali
                             </div>
                             <div>Film Director & Writer </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Ayushmann-Khurrana.jpg" alt="Ayushmann Khurrana" width="75" height="64" class="imgs" title="Ayushmann Khurrana" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Ayushmann-Khurrana.jpg" alt="Ayushmann Khurrana" width="75" height="64" class="imgs" title="Ayushmann Khurrana" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	 	
 Ayushmann Khurrana
@@ -397,7 +397,7 @@ Ayushmann Khurrana
                             <div>Actor  </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Sanjeev-Bikhchandani-s.jpg" alt="Sanjeev Bikhchandani" width="75" height="64" class="imgs" title="Sanjeev Bikhchandani" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Sanjeev-Bikhchandani-s.jpg" alt="Sanjeev Bikhchandani" width="75" height="64" class="imgs" title="Sanjeev Bikhchandani" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Sanjeev Bikhchandani
                             </div>
@@ -405,14 +405,14 @@ Ayushmann Khurrana
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderators:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/shiv_aroor.gif" alt="Shiv Aroor" width="75" height="64" class="imgs" title="Shiv Aroor" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/shiv_aroor.gif" alt="Shiv Aroor" width="75" height="64" class="imgs" title="Shiv Aroor" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Shiv Aroor
                             </div>
                             <div>Deputy Editor, Headlines Today</div>
                     	</div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/preeti_choudhry.jpg" alt="Preeti Choudhry" width="75" height="64" class="imgs" title="Preeti Choudhry" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/preeti_choudhry.jpg" alt="Preeti Choudhry" width="75" height="64" class="imgs" title="Preeti Choudhry" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Preeti Choudhry
                             </div>
@@ -442,35 +442,35 @@ Ayushmann Khurrana
                       </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speakers:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Gagan-Narang.jpg" alt="Gagan Narang" width="75" height="64" class="imgs" title="Gagan Narang" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Gagan-Narang.jpg" alt="Gagan Narang" width="75" height="64" class="imgs" title="Gagan Narang" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Gagan Narang
                             </div>
                             <div>Olympic Bronze Medallist, Shooting </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Mary-Kom.jpg" alt="Mary Kom" width="75" height="64" class="imgs" title="Mary Kom" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Mary-Kom.jpg" alt="Mary Kom" width="75" height="64" class="imgs" title="Mary Kom" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Mary Kom
                             </div>
                             <div>Olympic Bronze Medallist, Boxing </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Sushil-Kumar.jpg" alt="Sushil Kumar" width="75" height="64" class="imgs" title="Sushil Kumar" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Sushil-Kumar.jpg" alt="Sushil Kumar" width="75" height="64" class="imgs" title="Sushil Kumar" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Sushil Kumar
                             </div>
                             <div>Olympic Silver Medallist, Wrestling </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Yogeshwar-Dutt.jpg" alt="Yogeshwar Dutt" width="75" height="64" class="imgs" title="Yogeshwar Dutt" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Yogeshwar-Dutt.jpg" alt="Yogeshwar Dutt" width="75" height="64" class="imgs" title="Yogeshwar Dutt" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Yogeshwar Dutt
                             </div>
                             <div>Olympic Bronze Medallist, Wrestling </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/vijay-kumar.jpg" alt="Vijay Kumar" width="75" height="64" class="imgs" title="Vijay Kumar" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/vijay-kumar.jpg" alt="Vijay Kumar" width="75" height="64" class="imgs" title="Vijay Kumar" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Vijay Kumar
                             </div>
@@ -478,7 +478,7 @@ Ayushmann Khurrana
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/poonam_sharma.jpg" alt="Poonam Sharma" width="75" height="64" class="imgs" title="Poonam Sharma" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/poonam_sharma.jpg" alt="Poonam Sharma" width="75" height="64" class="imgs" title="Poonam Sharma" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                Poonam Sharma
                             </div>
@@ -511,7 +511,7 @@ Ayushmann Khurrana
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speaker:</div>
                             <div class="prjdetail">
-                              <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Ajay-Devgn.jpg" alt="Ajay Devgn" width="75" height="64" class="imgs" title="Ajay Devgn" align="left" border="0"> 
+                              <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Ajay-Devgn.jpg" alt="Ajay Devgn" width="75" height="64" class="imgs" title="Ajay Devgn" align="left" border="0"> 
                                 <div class="mindr-consubhead"> Ajay Devgn
                                 </div>
                                 <div>Actor </div>
@@ -521,7 +521,7 @@ Ayushmann Khurrana
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif" alt="Koel Purie Rinchet" width="75" height="64" class="imgs" title="Koel Purie Rinchet" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif" alt="Koel Purie Rinchet" width="75" height="64" class="imgs" title="Koel Purie Rinchet" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Koel Purie Rinchet
                             </div>
@@ -566,7 +566,7 @@ Ayushmann Khurrana
                 		
                         <div class="mindr-consubrtbox">
                         <div class="prj_name">Speakers:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Sonam-Kapoor.jpg" alt="Sonam Kapoor" width="75" height="64" class="imgs" title="Sonam Kapoor" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Sonam-Kapoor.jpg" alt="Sonam Kapoor" width="75" height="64" class="imgs" title="Sonam Kapoor" align="left" border="0"> 
                             <div class="mindr-consubhead">
                             	Sonam Kapoor
                             </div>
@@ -574,13 +574,13 @@ Ayushmann Khurrana
                         </div>
                         <div class="mindr-consubrtbox">
                         	
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Huma-Qureshi.jpg" alt="Huma Qureshi" width="75" height="64" class="imgs" title="Huma Qureshi" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Huma-Qureshi.jpg" alt="Huma Qureshi" width="75" height="64" class="imgs" title="Huma Qureshi" align="left" border="0"> 
                             <div class="mindr-consubhead"> Huma Qureshi
                             </div>
                             <div>Actor </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Vir-Das.jpg" alt="Vir Das" width="75" height="64" class="imgs" title="Vir Das" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Vir-Das.jpg" alt="Vir Das" width="75" height="64" class="imgs" title="Vir Das" align="left" border="0"> 
                             <div class="mindr-consubhead"> Vir Das
                             </div>
                             <div>Stand-Up Comedian </div>
@@ -588,7 +588,7 @@ Ayushmann Khurrana
                         
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif" alt="Koel Purie Rinchet" width="75" height="64" class="imgs" title="Koel Purie Rinchet" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif" alt="Koel Purie Rinchet" width="75" height="64" class="imgs" title="Koel Purie Rinchet" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                Koel Purie Rinchet
                             </div>
@@ -621,14 +621,14 @@ Ayushmann Khurrana
                 </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speaker:</div>
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Ekta-Kapoor.jpg" alt="Ekta Kapoor" width="75" height="64" class="imgs" title="Ekta Kapoor" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Ekta-Kapoor.jpg" alt="Ekta Kapoor" width="75" height="64" class="imgs" title="Ekta Kapoor" align="left" border="0"> 
                             <div class="mindr-consubhead"> Ekta Kapoor
                             </div>
                             <div>TV & Film Producer </div>
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Kaveree.gif" alt="Kaveree Bamzai" width="75" height="64" class="imgs" title="Kaveree Bamzai" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Kaveree.gif" alt="Kaveree Bamzai" width="75" height="64" class="imgs" title="Kaveree Bamzai" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                Kaveree Bamzai
                             </div>
@@ -666,20 +666,20 @@ Ayushmann Khurrana
                       </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speakers:</div>
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Arvind-Kejriwal.jpg" alt="Arvind Kejriwal" width="75" height="64" class="imgs" title="Arvind Kejriwal" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Arvind-Kejriwal.jpg" alt="Arvind Kejriwal" width="75" height="64" class="imgs" title="Arvind Kejriwal" align="left" border="0"> 
                             <div class="mindr-consubhead"> Arvind Kejriwal
                             </div>
                             <div>Social Activist </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Sandeep-Dikshit.jpg" alt="Sandeep Dikshit" width="75" height="64" class="imgs" title="Sandeep Dikshit" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Sandeep-Dikshit.jpg" alt="Sandeep Dikshit" width="75" height="64" class="imgs" title="Sandeep Dikshit" align="left" border="0"> 
                             <div class="mindr-consubhead"> Sandeep Dikshit
                             </div>
                             <div>Member of Lok Sabha & Indian National Congress </div>
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Rahul Kanwal
                             </div>
@@ -727,26 +727,26 @@ Ayushmann Khurrana
                       </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speakers:</div>
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/mohammad-azharuddin-s.jpg" alt="Mohammad Azharuddin" width="75" height="64" class="imgs" title="Mohammad Azharuddin" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/mohammad-azharuddin-s.jpg" alt="Mohammad Azharuddin" width="75" height="64" class="imgs" title="Mohammad Azharuddin" align="left" border="0"> 
                             <div class="mindr-consubhead"> Mohammad Azharuddin
                             </div>
                             <div>Former Cricket Captain, India </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/kapil-dev.jpg" alt="Kapil Dev" width="75" height="64" class="imgs" title="Kapil Dev" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/kapil-dev.jpg" alt="Kapil Dev" width="75" height="64" class="imgs" title="Kapil Dev" align="left" border="0"> 
                             <div class="mindr-consubhead">Kapil Dev
                             </div>
                             <div>Former Cricket Captain, India  </div>
                         </div>
                         <div class="mindr-consubrtbox">
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Unmukt.jpg" alt="Unmukt Chand" width="75" height="64" class="imgs" title="Unmukt Chand" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Unmukt.jpg" alt="Unmukt Chand" width="75" height="64" class="imgs" title="Unmukt Chand" align="left" border="0"> 
                             <div class="mindr-consubhead"> Unmukt Chand
                             </div>
                             <div>U 19 Indian Cricket Team </div>
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" width="75" height="64" class="imgs" title="Rahul Kanwal" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 Rahul Kanwal
                             </div>
@@ -777,7 +777,7 @@ Ayushmann Khurrana
                       </div>
                 		<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speaker:</div>
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Vineet-Nayar.jpg" alt="Vineet Nayar" width="75" height="64" class="imgs" title="Vineet Nayar" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Vineet-Nayar.jpg" alt="Vineet Nayar" width="75" height="64" class="imgs" title="Vineet Nayar" align="left" border="0"> 
                             <div class="mindr-consubhead">Vineet Nayar
                             </div>
                             <div>Vice Chairman & CEO,
@@ -786,7 +786,7 @@ HCL Technologies  </div>
                         
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Dhiraj-nayyar.gif" alt="Dhiraj Nayyar" width="75" height="64" class="imgs" title="Dhiraj Nayyar" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/Dhiraj-nayyar.gif" alt="Dhiraj Nayyar" width="75" height="64" class="imgs" title="Dhiraj Nayyar" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                Dhiraj Nayyar
                             </div>
@@ -820,14 +820,14 @@ India Today </div>
                       </div>
 						<div class="mindr-consubrtbox">
                         	<div class="prj_name">Speaker:</div>
-                          <img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Priyanka-Chopra-s.jpg" alt="Priyanka Chopra" width="75" height="64" class="imgs" title="Priyanka Chopra" align="left" border="0"> 
+                          <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Priyanka-Chopra-s.jpg" alt="Priyanka Chopra" width="75" height="64" class="imgs" title="Priyanka Chopra" align="left" border="0"> 
                             <div class="mindr-consubhead"> Priyanka Chopra
                             </div>
                             <div>Actor</div>
                         </div>
                         <div class="mindr-consubrtbox">
                         	<div class="prj_name">Moderator:</div>
-                            <img src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/kp.jpg" alt="Kalli Purie" width="75" height="64" class="imgs" title="Kalli Purie" align="left" border="0"> 
+                            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/moderators/kp.jpg" alt="Kalli Purie" width="75" height="64" class="imgs" title="Kalli Purie" align="left" border="0"> 
                             <div class="mindr-consubhead">
                                 	
 Kalli Purie
@@ -933,25 +933,25 @@ India Today Group </div>
         </div>
     	<div class="userbytes">
      <div class="userbytesrow">
-        <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/ayushmann-147x120.jpg) no-repeat;">
+        <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/ayushmann-147x120.jpg) no-repeat;">
             <a href="http://indiatoday.intoday.in/video/ayushmann-khurana-at-mind-rocks-youth-summit-2012/1/216356.html" target="_blank"><img src="/specials/youthsummit/images/Bigpic.png" width="147" height="120" alt="" title="" border="0" align="middle"></a>
         </div>
         <div class="userbytesrowright">
             <div class="userbytesrowrighttop">
-                <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/aroon-purie_71x58.jpg) no-repeat;">
+                <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/aroon-purie_71x58.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/aroon-purie-welcome-address-at-mind-rocks-youth-summit-2012/1/216327.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 
-                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/imtiyaz-ali-71x58.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/imtiyaz-ali-71x58.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/Imtiaz-Ali-at-Mind-Rocks-Youth-Summit-2012/1/216381.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>	
             </div>
             <div class="userbytesrowrighttop">
-            	<div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/anu_71x58.jpg) no-repeat;">
+            	<div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/anu_71x58.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/anu-malik-at-india-today-mind-rocks-youth-summit-2012/1/216333.html"  target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
-                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/Masaba-G-Ramesh-Sharma_71x58.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/Masaba-G-Ramesh-Sharma_71x58.jpg) no-repeat;">
                 	<a href="http://origin-indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2012-masaba-gupta/1/216375.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>
@@ -962,12 +962,12 @@ India Today Group </div>
 
     <div class="userbytesrow">
         <div class="userbytesrowleft">
-            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/yogeshwar_88.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/yogeshwar_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/london-olympics-medallist-yogeshwar-dutt-mind-rocks-2012/1/216484.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
 
 
-            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/mary-kom_88.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/mary-kom_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/mary-kom-india-today-mind-rocks-youth-summit/1/216478.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
 
@@ -976,10 +976,10 @@ India Today Group </div>
         </div>
         <div class="userbytesrowright">
 
-            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/ekta3_88.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/ekta3_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/ekta-kapoor-at-mind-rocks-summit-2012/1/216486.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/SONAM_88.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/SONAM_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/sonam-kapoor-at-india-today-youth-summit/1/216472.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>
@@ -988,12 +988,12 @@ India Today Group </div>
     
      <div class="userbytesrow">
         <div class="userbytesrowleft">
-            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/VIRDAAS_71.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/VIRDAAS_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/vir-das-at-india-today-mind-rocks-youth-summit-2012/1/216492.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
 
 
-            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/huma1_71.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/huma1_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/huma-querashi-at-india-today-mind-rocks-youth-summit-2012/1/216491.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
 
@@ -1002,10 +1002,10 @@ India Today Group </div>
         </div>
         <!--<div class="userbytesrowright">
 
-            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/ekta3_88.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/ekta3_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/ekta-kapoor-at-mind-rocks-summit-2012/1/216486.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/SONAM_88.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/SONAM_88.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/sonam-kapoor-at-india-today-youth-summit/1/216472.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>
@@ -1026,31 +1026,31 @@ India Today Group </div>
 <div id="PHOTOS">
      <div>	
         <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/buzz-from-mr/Ajay-Devgn-New_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ajay-devgn-at-india-today-mind-rocks/1/216390.html"><img border="0" title="Ajay Devgn shows his tattoo at India Today Mind Rocks Youth Summit 2012" alt="Ajay Devgn shows his tattoo at India Today Mind Rocks Youth Summit 2012" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/buzz-from-mr/Ajay-Devgn-New_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ajay-devgn-at-india-today-mind-rocks/1/216390.html"><img border="0" title="Ajay Devgn shows his tattoo at India Today Mind Rocks Youth Summit 2012" alt="Ajay Devgn shows his tattoo at India Today Mind Rocks Youth Summit 2012" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/ajay-devgn-at-india-today-mind-rocks/1/216390.html">Ajay Devgn shows off his tattoo at Youth Summit</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/buzz-from-mr/anthem_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/national-anthem-at-india-today-mind-rocks/1/216419.html"><img border="0" title="Delegates sing National Anthem at Mind Rocks" alt="Delegates sing National Anthem at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/buzz-from-mr/anthem_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/national-anthem-at-india-today-mind-rocks/1/216419.html"><img border="0" title="Delegates sing National Anthem at Mind Rocks" alt="Delegates sing National Anthem at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/national-anthem-at-india-today-mind-rocks/1/216419.html">Delegates sing National Anthem at Mind Rocks</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/buzz-from-mr/ayushman1_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ayushmann-khurrana-sings-at-mind-rocks/1/216365.html"><img border="0" title="Ayushmann sings Paani Da Rang at India Today Youth Summit 2012" alt="Ayushmann sings Paani Da Rang at India Today Youth Summit 2012" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/buzz-from-mr/ayushman1_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ayushmann-khurrana-sings-at-mind-rocks/1/216365.html"><img border="0" title="Ayushmann sings Paani Da Rang at India Today Youth Summit 2012" alt="Ayushmann sings Paani Da Rang at India Today Youth Summit 2012" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/ayushmann-khurrana-sings-at-mind-rocks/1/216365.html">Ayushmann sings Paani Da Rang for delegates</a></div>
         </div>
     </div>      	            
     <div>	
         <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/buzz-from-mr/ali-zafar_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ali-zafar-sings-at-mind-rocks-summit/1/216361.html"><img border="0" title="Ali Zafar sings at Mind Rocks Summit" alt="Ali Zafar sings at Mind Rocks Summit" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/buzz-from-mr/ali-zafar_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/ali-zafar-sings-at-mind-rocks-summit/1/216361.html"><img border="0" title="Ali Zafar sings at Mind Rocks Summit" alt="Ali Zafar sings at Mind Rocks Summit" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
       
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/ali-zafar-sings-at-mind-rocks-summit/1/216361.html">Ali Zafar sings at Mind Rocks Summit</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/buzz-from-mr/anumalik2_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/anu-malik-at-india-today-mind-rocks-summit/1/216448.html"><img border="0" title="Anu Malik sings his favourite songs at Mind Rocks" alt="Anu Malik sings his favourite songs at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/buzz-from-mr/anumalik2_88x66.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/anu-malik-at-india-today-mind-rocks-summit/1/216448.html"><img border="0" title="Anu Malik sings his favourite songs at Mind Rocks" alt="Anu Malik sings his favourite songs at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/anu-malik-at-india-today-mind-rocks-summit/1/216448.html">Anu Malik hums his favourite songs</a></div>
         </div>
 
 		 <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
-            <div class="imgrepeat" style="background: url(/staticpages/mediaintoday/indiatoday/youthsummit/video-bite/Priyanka-88.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/priyanka-chopra-at-india-today-mind-rocks/1/216483.html"><img border="0" title="Band Agrath at Mind Rocks" alt="Priyanka Chopra gives a sneak peek of her singing talent" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/video-bite/Priyanka-88.jpg) no-repeat;"><a href="http://indiatoday.intoday.in/video/priyanka-chopra-at-india-today-mind-rocks/1/216483.html"><img border="0" title="Band Agrath at Mind Rocks" alt="Priyanka Chopra gives a sneak peek of her singing talent" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/priyanka-chopra-at-india-today-mind-rocks/1/216483.html">Priyanka gives a sneak peek of her singing talent</a></div>
         </div> 
 
@@ -1071,7 +1071,7 @@ India Today Group </div>
         Rockstar Speakers           
     </div>
     <div class="profile gray">
-        <a href="/youthsummit/delhi/2012/speakers%20bios/Priyanka%20Chopra.jsp"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Priyanka-Chopra-s.jpg"  alt="Priyanka Chopra" title="Priyanka Chopra" border="0" align="middle"></a>
+        <a href="/youthsummit/delhi/2012/speakers%20bios/Priyanka%20Chopra.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Priyanka-Chopra-s.jpg"  alt="Priyanka Chopra" title="Priyanka Chopra" border="0" align="middle"></a>
         <div class="proright">
             <div class="name"> <a href="/youthsummit/delhi/2012/speakers%20bios/Priyanka%20Chopra.jsp">Actor</a></a></div>
             <div class="profilebyline">Priyanka Chopra</div>
@@ -1082,7 +1082,7 @@ India Today Group </div>
         <div class="clear profilediv"></div>                        
   </div>
     <div class="profile">
-        <a href="/youthsummit/delhi/2012/speakers%20bios/Akhilesh%20Yadav.jsp"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Akhilesh-Yadav.jpg"  alt="Akhilesh Yadav" title="Akhilesh Yadav" border="0" align="middle"></a>
+        <a href="/youthsummit/delhi/2012/speakers%20bios/Akhilesh%20Yadav.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Akhilesh-Yadav.jpg"  alt="Akhilesh Yadav" title="Akhilesh Yadav" border="0" align="middle"></a>
         <div class="proright">
             <div class="name"><a href="/youthsummit/delhi/2012/speakers%20bios/Akhilesh%20Yadav.jsp">Politician</a></div>
             <div class="profilebyline"> 	
@@ -1095,7 +1095,7 @@ Akhilesh Yadav<span class="star"></span></div>
   </div>
     
     <div class="profile">
-        <a href="/youthsummit/delhi/2012/speakers%20bios/Sushil%20Kumar.jsp"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Sushil-Kumar.jpg"  alt="Kiran Rao" title="Kiran Rao" border="0" align="middle"></a>
+        <a href="/youthsummit/delhi/2012/speakers%20bios/Sushil%20Kumar.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/speakers/Sushil-Kumar.jpg"  alt="Kiran Rao" title="Kiran Rao" border="0" align="middle"></a>
         <div class="proright">
             <div class="name"><a target="_blank" href="/youthsummit/delhi/2012/speakers%20bios/Sushil%20Kumar.jsp">Wrestler</a></div>
             <div class="profilebyline">Sushil Kumar</div>
@@ -1177,14 +1177,14 @@ Akhilesh Yadav<span class="star"></span></div>
             <ul class="media-report">
                 <li>
                     <a href="http://indiatoday.intoday.in/story/akhilesh-yadav-uttar-pradesh-development-mind-rocks-youth-summit/1/216037.html" target="_blank">
-                        <img src="/staticpages/mediaintoday/indiatoday/images/stories/akhilesh--1_167_090512091036.jpg" border="0" alt="" />
+                        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/akhilesh--1_167_090512091036.jpg" border="0" alt="" />
                         <strong>Akhilesh Yadav becomes symbol of change in UP</strong>
                         <span>The Uttar Pradesh chief minister will address the India Today Mind Rocks Youth Summit</span>
                     </a>
                 </li>
                 <li>
                     <a href="http://indiatoday.intoday.in/story/philosophy-of-life-to-rock-india-today-mind-rocks-youth-summit-2012/1/216039.html" target="_blank">
-                        <img src="/staticpages/mediaintoday/indiatoday/images/stories/philosophy--4_167_090512090958.jpg" border="0" alt="" />
+                        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/philosophy--4_167_090512090958.jpg" border="0" alt="" />
                         <strong>Philosophy of Life to rock India Today Mind Rocks Youth Summit 2012</strong>
                         <span>The band, which draws inspiration from rock bands such as Alter Bridge, Foo Fighters and Coldplay, will perform live at the youth summit at Siri Fort Auditorium</span>
                     </a>
@@ -1259,7 +1259,7 @@ Akhilesh Yadav<span class="star"></span></div>
     <div class="venue">
        <div style="color: #21509E; font: bold 12px/22px Arial" class="shtitle">By Iconic Band Indian Ocean</div>
         <div class="venueaddredd">
-		<img src="/staticpages/mediaintoday/indiatoday/youthsummit/indian-ocean.jpg" alt="" />
+		<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/indian-ocean.jpg" alt="" />
         </div>
     </div>
 </div>
@@ -1274,14 +1274,14 @@ Akhilesh Yadav<span class="star"></span></div>
                 <div class="shtitle" style="color: #21509E;">Best moments of Youth Summit 2011 - Delhi</div>
                 <div style="text-align: center; margin: 5px auto;">
                     <a href=" http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2012-celebrates-spirit-of-young-indians.html/1/151785.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-delhi1.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-delhi1.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
 
                     <a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-delhi2.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-delhi2.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
                     <a href="http://indiatoday.intoday.in/video/chetan-bhagat-india-today-mind-rocks-youth-summit-2011/1/151699.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-delhi3.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-delhi3.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
                 </div>
                 <div class="text" style="line-height: 18px;">Watch the best speakers, sessions and highlights from the India Today Mind Rocks Youth Summit 2011 in this special package.</div>
@@ -1297,14 +1297,14 @@ Akhilesh Yadav<span class="star"></span></div>
                 <div class="shtitle" style="color: #21509E;">Best moments of Youth Summit 2011 - Chennai</div>
                 <div style="text-align: center; margin: 5px auto;">
                     <a href=" http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-kolaveri-di-dhanush/1/163735.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-Chennai1.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-Chennai1.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
                     
                     <a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-abhishek-bachchan/1/163701.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-Chennai2.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-Chennai2.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
                      <a href="http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit/1/163982.html">
-                        <img border="0" src="/staticpages/mediaintoday/indiatoday/youthsummit/ps-Chennai3.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
+                        <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/ps-Chennai3.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle">
                     </a>
                 </div>
                 <div class="text" style="line-height: 18px;">Watch the highlights and catch a live rendition of Kolaveri Di by Dhanush.</div>

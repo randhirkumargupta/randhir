@@ -42,7 +42,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -53,23 +53,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -199,17 +199,17 @@
             	<div>
                         	<table width="100%" cellspacing="0" cellpadding="0" border="0">
                               <tbody><tr>
-                                <td width="225" valign="top"><a target="_blank" href="http://indiatoday.intoday.in/story/anna-youth-force-made-lokpal-movement-successful-kiran-bedi/1/151708.html"><img width="226" height="450" border="0" align="middle" title="kiran-bedi at India Today Youth Summit 2011" alt="kiran-bedi at India Today Youth Summit 2011" src="/staticpages/mediaintoday/indiatoday/images/collage1.jpg"></a></td>
+                                <td width="225" valign="top"><a target="_blank" href="http://indiatoday.intoday.in/story/anna-youth-force-made-lokpal-movement-successful-kiran-bedi/1/151708.html"><img width="226" height="450" border="0" align="middle" title="kiran-bedi at India Today Youth Summit 2011" alt="kiran-bedi at India Today Youth Summit 2011" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/collage1.jpg"></a></td>
                                 <td>
                                 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
                                       <tbody><tr>
-                                        <td><a target="_blank" href="http://indiatoday.intoday.in/story/ranbir-kapoor-india-today-mind-rocks-youth-summit-2011-session-cinema/1/151703.html"><img width="457" height="185" border="0" align="middle" title="" usemap="#Map" alt="" src="/staticpages/mediaintoday/indiatoday/images/collage2.jpg"></a></td>
+                                        <td><a target="_blank" href="http://indiatoday.intoday.in/story/ranbir-kapoor-india-today-mind-rocks-youth-summit-2011-session-cinema/1/151703.html"><img width="457" height="185" border="0" align="middle" title="" usemap="#Map" alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/collage2.jpg"></a></td>
                                       </tr>
                                       <tr>
-                                        <td><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-mind-rocks-youth-summit-2011-session-careers-the-road-less-travelled/1/151691.html"><img width="457" height="118" border="0" align="middle" title="Kiran Rao at India Today Youth Summit 2011" alt="Kiran Rao at India Today Youth Summit 2011" src="/staticpages/mediaintoday/indiatoday/images/collage3.jpg"></a></td>
+                                        <td><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-mind-rocks-youth-summit-2011-session-careers-the-road-less-travelled/1/151691.html"><img width="457" height="118" border="0" align="middle" title="Kiran Rao at India Today Youth Summit 2011" alt="Kiran Rao at India Today Youth Summit 2011" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/collage3.jpg"></a></td>
                                       </tr>
                                       <tr>
-                                        <td><img width="457" height="147" border="0" align="middle" title="" usemap="#Map3" alt="" src="/staticpages/mediaintoday/indiatoday/images/collage4.jpg"></td>
+                                        <td><img width="457" height="147" border="0" align="middle" title="" usemap="#Map3" alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/collage4.jpg"></td>
                                       </tr>
                                     </tbody></table>
                                 </td>

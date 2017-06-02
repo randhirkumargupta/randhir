@@ -124,7 +124,7 @@ function ajaxFunction(){
 body {
 	margin: 0;
 	padding: 0;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
 	font-family:roboto;
 }
 
@@ -152,7 +152,7 @@ a {
 .counter {
 	width: 180px;
 	height: 56px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/counter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/counter.png);
 	position: absolute;
 	bottom: 0;
 	left: 212px;
@@ -165,7 +165,7 @@ a {
 	width: 966px;
 	height: 76px;
 	margin-bottom: 25px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
 }
 .people-who-pledged ul {
 	margin-left: 25px;
@@ -181,7 +181,7 @@ a {
 	height: 450px;
 	padding-top: 65px;
 	float: left;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/twiter.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/twiter.png);
 	background-repeat: no-repeat
 }
 .facebook-box {
@@ -190,7 +190,7 @@ a {
 	float: right;
 	padding-top: 75px;
 	padding-left: 5px;
-	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/facebook.png);
+	background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/facebook.png);
 	background-repeat: no-repeat;
 }
 
@@ -227,7 +227,7 @@ a {
 	padding-bottom: 50px;
 }
 #pledgetop {
-	background-image: url(/staticpages/mediaintoday/indiatoday/images/pledge/Mast.png);
+	background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/Mast.png);
 	background-repeat: no-repeat;
 	background-position: top left;
 	height: 284px;
@@ -368,7 +368,7 @@ height: 200px;
     </div>
     <div style="float:right; width:205px; margin:48px 0 0 0; text-align:center;">
       <div style='font:bold 12px arial; color:#ffec00; text-align:left; margin-bottom:5px; padding-left:50px;'>Stay Connected</div>
-      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
+      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
     </div>
   </div>
   <div style="clear:both;"></div>
@@ -437,7 +437,7 @@ height: 200px;
   <div class="container"> </div>
 </div>
 <div class="footer">
-  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+  <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
 </div>
 
 </body>

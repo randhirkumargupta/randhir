@@ -17,7 +17,7 @@
 .arrow_box:after,.arrow_box:before {	top: 100%;	left: 50%;	border: solid transparent;	content: " ";	height: 0;	width: 0;	position: absolute;	pointer-events: none; }
 .arrow_box:after {	border-color: rgba(255, 255, 255, 0);	border-top-color: #fff;	border-width: 5px;	margin-left: -5px; }
 .arrow_box:before {	border-color: rgba(166, 179, 188, 0);	border-top-color: #a6b3bc;	border-width: 7px;	margin-left: -7px; }
-.vote-btn {	background:	url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0;	width: 125px;	height: 33px;	display: block;	margin: 0 auto;	margin-top: 5px; }
+.vote-btn {	background:	url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0;	width: 125px;	height: 33px;	display: block;	margin: 0 auto;	margin-top: 5px; }
 .vote-done-msg {background-color: #fff;	width: 470px;	position: absolute;	top: 50%;	left: 50%;	margin-left: -235px;	z-index: 2;	padding: 15px 0;	display: none; }
 .vote-done-msg p {font: 15px/20px 'Roboto', sans-serif;	color: #000;	text-align: center;	display: block;	padding: 0 0 0 25%;	box-sizing: border-box;	min-height: auto; }
 .overlay {position: fixed;	background-color: rgba(0, 0, 0, 0.7);	width: 100%;	height: 100%;	z-index: 1;	display: none; }
@@ -25,9 +25,9 @@
 .sup_like_all.sup_like_all1{position:fixed; top: 40%; background: rgba(0,0,0,0.9); padding:10px 1%; width:300px; height:126px;  border-radius:10px; margin:0 auto; left:28%; margin-left:-150px; display:none; z-index:5;} .sup_like_all h4{ font-size: 17px; color: #fff;line-height: 21px;font-family: roboto; text-align: center;}
 .sup_like_all .share_like ul li{ width:auto; display:inline-block} .sup_like_all .share_like ul li:nth-child(1){ color:#fff;} .sup_like_all .share_like ul li a{ display:inline-block; padding:5px 15px;}
 .suplike-close{float: right; color: #fff; position: relative; right: -10px; top: -7px;}
-.suport_btn{background:url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/support_rbn.png) no-repeat !important; width:160px !important; height:60px !important}
+.suport_btn{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/support_rbn.png) no-repeat !important; width:160px !important; height:60px !important}
 .team_sch_info p iframe {width: 100%;height: 482px;} 
-.team_sch_area .team_sch_info h3.team_hdn { margin: 30px 0 30px 0;  padding: 0px;    background: url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/team_border.png) no-repeat center center; text-align: center; font-size: 25px;  text-transform: uppercase; font-weight: 600;}
+.team_sch_area .team_sch_info h3.team_hdn { margin: 30px 0 30px 0;  padding: 0px;    background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/team_border.png) no-repeat center center; text-align: center; font-size: 25px;  text-transform: uppercase; font-weight: 600;}
 .box_dn{ margin-bottom:30px}   
 .sup_like_all.sup_like_all1{left:36%}
 @media screen and (max-width:900px){ 
@@ -51,7 +51,7 @@
 </style>
 <div class="team_sch_area">
 	<div class="team_sch_logo">
-		<img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cambridge-jaipur-all-logo.gif" alt="Cambridge Court High School">
+		<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cambridge-jaipur-all-logo.gif" alt="Cambridge Court High School">
 		<div class="all_vote_area">
 			<div class="arrow_box" id="upcount1">
 			
@@ -70,8 +70,8 @@
             <div class="share_like">
             	<ul>
                 	<li>SHARE ON</li>
-                   	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cambridge-Court-High-School"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                   	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cambridge-Court-High-School&text=I support Cambridge Court High School&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>
+                   	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cambridge-Court-High-School"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                   	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cambridge-Court-High-School&text=I support Cambridge Court High School&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>
                 </ul>
 			</div>
 		</div>
@@ -101,14 +101,14 @@
 	                        <div class="row box_dn">
 								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 	                            	<div class="team_box">
-	                                	<div class="team_pic"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/aditi-singh.png" alt="ADITI SINGH"></div>
+	                                	<div class="team_pic"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/aditi-singh.png" alt="ADITI SINGH"></div>
 	                                  	<div class="plyer_name">ADITI SINGH</div>
 	                                  	
 	                                </div>
 	                            </div>
 	                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 	                            	<div class="team_box">
-	                                	<div class="team_pic"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/madhav-mittal.png" alt="MADHAV  MITTAL"></div>
+	                                	<div class="team_pic"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/madhav-mittal.png" alt="MADHAV  MITTAL"></div>
 	                                  	<div class="plyer_name">MADHAV  MITTAL</div>
 	                                  	
 	                                </div>	                                

@@ -41,7 +41,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -52,23 +52,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -141,25 +141,25 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Akhilesh Yadav.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Akhilesh.jpg" alt="AKhilesh Yadav" title="Akhilesh Yadav" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Akhilesh.jpg" alt="AKhilesh Yadav" title="Akhilesh Yadav" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Akhilesh Yadav.jsp">Akhilesh Yadav </a></div>
                         </div>
 
                         <div class="spsubox">
                             <a href="speakers bios/Arvind Kejriwal.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/kejriwal1.jpg" alt="Arvind Kejriwal" title="Arvind Kejriwal" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/kejriwal1.jpg" alt="Arvind Kejriwal" title="Arvind Kejriwal" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Arvind Kejriwal.jsp">Arvind Kejriwal</a></div>
                         </div>
 
                         <div class="spsubox">
                             <a href="speakers bios/Sushil Kumar.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/sushil-kumar.jpg" alt="Sushil Kumar" title="Sushil Kumar" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/sushil-kumar.jpg" alt="Sushil Kumar" title="Sushil Kumar" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Sushil Kumar.jsp">Sushil Kumar </a></div>
                         </div>
 
                         <div class="spsubox last">
                             <a href="speakers bios/Priyanka Chopra.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/priyanka-chopra.jpg" alt="Priyanka Chopra" title="Priyanka Chopra" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/priyanka-chopra.jpg" alt="Priyanka Chopra" title="Priyanka Chopra" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Priyanka Chopra.jsp">Priyanka Chopra</a></div>
                         </div>
 
@@ -169,23 +169,23 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Unmukt Chand.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Unmukt-Chand.jpg" alt="Unmukt Chand" title="Unmukt Chand" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Unmukt-Chand.jpg" alt="Unmukt Chand" title="Unmukt Chand" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Unmukt Chand.jsp">Unmukt Chand</a></div>
                         </div>
 
                         <div class="spsubox">
                             <a href="speakers bios/Vijay Kumar.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Vijay-Kumar.jpg" alt="Vijay Kumar" title="Vijay Kumar" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Vijay-Kumar.jpg" alt="Vijay Kumar" title="Vijay Kumar" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Vijay Kumar.jsp">Vijay Kumar</a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Mary Kom.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Mary-Kom.jpg" alt="Mary Kom" title="Mary Kom" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Mary-Kom.jpg" alt="Mary Kom" title="Mary Kom" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Mary Kom.jsp">Mary Kom </a></div>
                         </div>
                         <div class="spsubox last">
                             <a href="speakers bios/Gagan Narang.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/GAGAN-NARANG_121006_QS.jpg" alt="Gagan Narang" title="Gagan Narang" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/GAGAN-NARANG_121006_QS.jpg" alt="Gagan Narang" title="Gagan Narang" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Gagan Narang.jsp">Gagan Narang </a></div>
                         </div>
 
@@ -195,22 +195,22 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Yogeshwar dutt.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/yogeshwar-dutt.jpg" alt="Yogeshwar Dutt" title="Yogeshwar Dutt" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/yogeshwar-dutt.jpg" alt="Yogeshwar Dutt" title="Yogeshwar Dutt" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Yogeshwar dutt.jsp">Yogeshwar Dutt </a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Kapil Dev.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Kapil-Dev-073109-YN-12.jpg" alt="Kapil Dev" title="Kapil Dev" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Kapil-Dev-073109-YN-12.jpg" alt="Kapil Dev" title="Kapil Dev" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Kapil Dev.jsp">Kapil Dev </a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Mohd Azharuddin.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/mohammad-azharuddin.jpg" alt="mohammad-azharuddin" title="mohammad azharuddin" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/mohammad-azharuddin.jpg" alt="mohammad-azharuddin" title="mohammad azharuddin" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Mohd Azharuddin.jsp">Mohammad Azharuddin </a></div>
                         </div>
                         <div class="spsubox last">
                             <a href="speakers bios/Sandeep Dikshit.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Sandeep-Dikshit-022609-Sipr.jpg" alt="Sandeep Dikshit" title="Sandeep Dikshit" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Sandeep-Dikshit-022609-Sipr.jpg" alt="Sandeep Dikshit" title="Sandeep Dikshit" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Sandeep Dikshit.jsp">Sandeep Dikshit </a></div>
                         </div>
                         <div class="clear"></div>
@@ -219,22 +219,22 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Sanjeev Bikchandani.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Sanjeev-Bikhchandani.jpg" alt="Sanjeev-Bikhchandani" title="Sanjeev-Bikhchandani" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Sanjeev-Bikhchandani.jpg" alt="Sanjeev-Bikhchandani" title="Sanjeev-Bikhchandani" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Sanjeev Bikchandani.jsp">Sanjeev Bikhchandani</a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Vineet Nayar.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/vineet-nayar.jpg" alt="Vineet Nayar" title="Vineet Nayar" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/vineet-nayar.jpg" alt="Vineet Nayar" title="Vineet Nayar" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Vineet Nayar.jsp">Vineet Nayar</a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Ajay Devgn.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/ajay-devgn.jpg" alt="Ajay Devgn" title="Ajay Devgn" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/ajay-devgn.jpg" alt="Ajay Devgn" title="Ajay Devgn" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Ajay Devgn.jsp">Ajay Devgn</a></div>
                         </div>
                         <div class="spsubox last">
                             <a href="speakers bios/Vir Das.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/VirDas.jpg" alt="Vir Das" title="Vir Das" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/VirDas.jpg" alt="Vir Das" title="Vir Das" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Vir Das.jsp">Vir Das</a></div>
                         </div>
 
@@ -244,23 +244,23 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Masaba Gupta.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Masaba-gupta.jpg" alt="Masaba Gupta" title="Masaba Gupta" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Masaba-gupta.jpg" alt="Masaba Gupta" title="Masaba Gupta" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Masaba Gupta.jsp">Masaba Gupta </a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Ali Zafar.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Ali-Zafar.jpg" alt="Ali Zafar" title="Ali Zafar" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Ali-Zafar.jpg" alt="Ali Zafar" title="Ali Zafar" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Ali Zafar.jsp">Ali Zafar</a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Ekta Kapoor.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/ekta.jpg" alt="Ekta Kapoor" title="Ekta Kapoor" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/ekta.jpg" alt="Ekta Kapoor" title="Ekta Kapoor" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Ekta Kapoor.jsp">Ekta Kapoor </a></div>
                         </div>
 
                         <div class="spsubox last">
                             <a href="speakers bios/Imtiaz Ali.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/imtiaz-ali.jpg" alt="Imtiaz Ali" title="Imtiaz Ali" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/imtiaz-ali.jpg" alt="Imtiaz Ali" title="Imtiaz Ali" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Imtiaz Ali.jsp">Imtiaz Ali </a></div>
                         </div>
 
@@ -271,28 +271,28 @@
                     <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Sonam Kapoor.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/sonam.jpg" alt="Sonam Kapoor" title="Sonam Kapoor" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/sonam.jpg" alt="Sonam Kapoor" title="Sonam Kapoor" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Sonam Kapoor.jsp">Sonam Kapoor </a></div>
                         </div>
                         <div class="spsubox">
                             <a href="speakers bios/Ayushmann Khurrana.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Ayushmann-Khurrana-060412-M.jpg" alt="Ayushmann Khurrana" title="Arvind Kejriwal" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Ayushmann-Khurrana-060412-M.jpg" alt="Ayushmann Khurrana" title="Arvind Kejriwal" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Ayushmann Khurrana.jsp">Ayushmann Khurrana </a></div>
                         </div>
                       <!--  <div class="spsubox">
                             <a href="speakers bios/Emraan Hashmi.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Emraan-Hashmi.jpg" alt="Emraan Hashmi" title="Emraan Hashmi" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Emraan-Hashmi.jpg" alt="Emraan Hashmi" title="Emraan Hashmi" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Emraan Hashmi.jsp">Emraan Hashmi </a></div>
                         </div> -->
 						 <div class="spsubox">
                             <a href="speakers bios/Huma Qureshi.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Huma-Qureshi.jpg" alt="Huma Qureshi" title="Huma Qureshi" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Huma-Qureshi.jpg" alt="Huma Qureshi" title="Huma Qureshi" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Huma Qureshi.jsp">Huma Qureshi </a></div>
                         </div>
 
                         <div class="spsubox last">
                             <a href="speakers bios/Anu Malik.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/anu-malik.jpg" alt="Anu Malik" title="Anu Malik" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/anu-malik.jpg" alt="Anu Malik" title="Anu Malik" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Anu Malik.jsp">Anu Malik </a></div>
                         </div>
                         <div class="clear"></div>
@@ -301,7 +301,7 @@
 					<!-- <div class="speakerbox">
                         <div class="spsubox">
                             <a href="speakers bios/Huma Qureshi.jsp">
-                                <img src="/staticpages/mediaintoday/indiatoday/youthsummit/150/Huma-Qureshi.jpg" alt="Huma Qureshi" title="Huma Qureshi" height="123" align="middle" border="0" width="150" /></a>
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/150/Huma-Qureshi.jpg" alt="Huma Qureshi" title="Huma Qureshi" height="123" align="middle" border="0" width="150" /></a>
                             <div class="hcaption"><a href="speakers bios/Huma Qureshi.jsp">Huma Qureshi </a></div>
                         </div>
                         <div class="clear"></div>

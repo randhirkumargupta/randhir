@@ -354,7 +354,7 @@ element.style {
 }
 .bottom_part{ float:left; width:1000px; float:left; margin-top: 0px; position:relative}
 .mapped_image_bottom{position:absolute; z-index:7777; display:none; top:125px;}
-.bottom_arrow{width: 25px;height: 9px;background:url('/staticpages/mediaintoday/microsites/specials/pak_election/images/up_small.png') no-repeat scroll 0 -10px transparent;}
+.bottom_arrow{width: 25px;height: 9px;background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/pak_election/images/up_small.png') no-repeat scroll 0 -10px transparent;}
 
 
 

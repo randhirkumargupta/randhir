@@ -217,7 +217,7 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div id="topstories">
 
 
-<span class="top_img_position"><a href="http://indiatoday.intoday.in/story/uttar-pradesh-akhilesh-yadav-sworn-in-as-chief-minister/1/177844.html"><img width="350" height="225" border="0" title="Akhilesh Yadav" alt="Akhilesh Yadav" src="/staticpages/mediaintoday/indiatoday/images/stories/akhilesh_350_031512120527.jpg"></a></span>
+<span class="top_img_position"><a href="http://indiatoday.intoday.in/story/uttar-pradesh-akhilesh-yadav-sworn-in-as-chief-minister/1/177844.html"><img width="350" height="225" border="0" title="Akhilesh Yadav" alt="Akhilesh Yadav" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/akhilesh_350_031512120527.jpg"></a></span>
 
 
 <p class="caption">The event was attended by many industrialists and Bollywood stars. <A href="http://indiatoday.intoday.in/gallery/akhilesh-yadav-swearing-in-uttar-pradesh-cm/1/6748.html" target=_blank mce_href="http://indiatoday.intoday.in/gallery/akhilesh-yadav-swearing-in-uttar-pradesh-cm/1/6748.html"><B>Pics</B></A>  </p>
@@ -225,9 +225,9 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="otherstory">
 
 
-<div class="othstrleft"><div class="subtitle"><a href="http://indiatoday.intoday.in/story/akhilesh-rolls-out-the-red-carpet-for-up-industrialists/1/177801.html">Akhilesh rolls out red carpet for industries</a></div><span><a href="http://indiatoday.intoday.in/story/akhilesh-rolls-out-the-red-carpet-for-up-industrialists/1/177801.html"><img width="167" height="125" border="0" title="Akhilesh Yadav" align="left" alt="Akhilesh Yadav" src="/staticpages/mediaintoday/indiatoday/images/stories/akhilesh-167_031512085646.jpg"></a></span></div>
+<div class="othstrleft"><div class="subtitle"><a href="http://indiatoday.intoday.in/story/akhilesh-rolls-out-the-red-carpet-for-up-industrialists/1/177801.html">Akhilesh rolls out red carpet for industries</a></div><span><a href="http://indiatoday.intoday.in/story/akhilesh-rolls-out-the-red-carpet-for-up-industrialists/1/177801.html"><img width="167" height="125" border="0" title="Akhilesh Yadav" align="left" alt="Akhilesh Yadav" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/akhilesh-167_031512085646.jpg"></a></span></div>
 
-<div class="othstrright"><div class="subtitle"><a href="http://indiatoday.intoday.in/story/parkash-singh-badal-takes-oath-as-punjab-cm/1/177683.html">Parkash Badal sworn in Punjab CM</a></div><span><a href="http://indiatoday.intoday.in/story/parkash-singh-badal-takes-oath-as-punjab-cm/1/177683.html"><img width="167" height="125" align="left" border="0" title="Parkash Singh Badal (R) greets people after the poll victory" alt="Parkash Singh Badal (R) greets people after the poll victory" src="/staticpages/mediaintoday/indiatoday/images/stories/parkash_167_031412114056.jpg"></a></span></div>
+<div class="othstrright"><div class="subtitle"><a href="http://indiatoday.intoday.in/story/parkash-singh-badal-takes-oath-as-punjab-cm/1/177683.html">Parkash Badal sworn in Punjab CM</a></div><span><a href="http://indiatoday.intoday.in/story/parkash-singh-badal-takes-oath-as-punjab-cm/1/177683.html"><img width="167" height="125" align="left" border="0" title="Parkash Singh Badal (R) greets people after the poll victory" alt="Parkash Singh Badal (R) greets people after the poll victory" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/parkash_167_031412114056.jpg"></a></span></div>
 
 		
 </div></div>
@@ -243,7 +243,7 @@ GA_googleFillSlot("IT_Special_Top_LB");
 
 <div style="float:left;margin-top:20px;" >
 
-<IMG src="/staticpages/mediaintoday/microsites/banners/editors-verdict04-300.jpg" border=0 usemap="#Map" >
+<IMG src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/editors-verdict04-300.jpg" border=0 usemap="#Map" >
 <map name="Map" id="Map"><area shape="rect" coords="25,51,136,108" href="http://indiatoday.intoday.in/story/assembly-election-results-india-today-editor-verdict-m.j.-akbar/1/176689.html" target="_blank" />
 <area shape="rect" coords="169,49,285,109" href="http://indiatoday.intoday.in/story/a-helicopter-view-of-the-gangetic-plain/1/176837.html" target="_blank" />
 <area shape="rect" coords="25,125,136,183" href="http://indiatoday.intoday.in/story/assembly-elections-2012-sandeep-bamzai-editor-verdict/1/176695.html" target="_blank" />
@@ -308,10 +308,10 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<div style="width:100%; float:left;"><h3 style="float:left;">Party Position</h3><span style="float:right; margin-top:3px; margin-right:8px;" class="maplink"><a href="live-poll-result.jsp?state=uttarpradesh#Uttar Pradesh">Full List</a></span></div>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-									  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_tally_graph_4p_small.swf" />
+									  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_tally_graph_4p_small.swf" />
 									  <param name="allowScriptAccess" value="always"/>
 									  <param name="quality" value="high" />
-									  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
+									  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
 									</object>
                                 </div>
                             </div>
@@ -321,11 +321,11 @@ GA_googleFillSlot("IT_Special_Top_LB");
 					<div style="width:100%; float:left"><h3 style="float:left;">Constituency Map</h3><span style="float:right; margin-top:3px;" class="maplink"><a href="live-poll-result.jsp?state=uttarpradesh">Enlarge</a></span></div>
 					<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="214">
-					  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_election_small.swf" />
+					  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_election_small.swf" />
 					  	<param name="AllowScriptAccess" value="always" />
 
 					  <param name="quality" value="high" />
-					  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
+					  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarpradesh/Uttar_Pradesh_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
 					</object>
 					</div>
 					</div>
@@ -339,19 +339,19 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morebg">
 <div class="morheadline">More</div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/akhilesh-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/akhilesh-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav.html/1/176699.html" target="_blank">Akhilesh Yadav thanks people of UP</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/rahul-gandhi1-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/rahul-gandhi1-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank">Rahul takes onus for UP debacle</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-in-cartoons/1/6704.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/sush-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-in-cartoons/1/6704.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/sush-88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/assembly-polls-2011-results-bjp-sushma-swaraj-congress/1/176664.html" target="_blank">Results disappointing, says Sushma</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/workers88_030612075933.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/workers88_030612075933.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank">SP workers celebrates win</a></div>
 </div>
 <div class="clear"></div>
@@ -418,10 +418,10 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<div style="width:100%; float:left;"><h3 style="float:left;">Party Position</h3><span style="float:right; margin-top:3px; margin-right:8px;" class="maplink"><a href="live-poll-result.jsp?state=punjab#Punjab">Full List</a></span></div>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-									  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_tally_graph_4p_small.swf" />
+									  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_tally_graph_4p_small.swf" />
 									  <param name="allowScriptAccess" value="always"/>
 									  <param name="quality" value="high" />
-									  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
+									  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
 									</object>
                                 </div>
                             </div>
@@ -431,11 +431,11 @@ GA_googleFillSlot("IT_Special_Top_LB");
 					<div style="width:100%; float:left"><h3 style="float:left;">Constituency Map</h3><span style="float:right; margin-top:3px;" class="maplink"><a href="live-poll-result.jsp?state=punjab">Enlarge</a></span></div>
 					<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="214">
-					  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_election_small.swf" />
+					  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_election_small.swf" />
 					  	<param name="AllowScriptAccess" value="always" />
 
 					  <param name="quality" value="high" />
-					  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
+					  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/punjab/Punjab_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
 					</object>
 					</div>
 					</div>
@@ -449,19 +449,19 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morebg">
 <div class="morheadline">More</div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/parkash_singh_badal_2-88_030612063005.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/parkash_singh_badal_2-88_030612063005.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results/1/176684.html" target="_blank">Akali Dal-BJP secure majority in Punjab</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/sukhbir_88_030612072138.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/sukhbir_88_030612072138.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank">Won due to our performance: Sukhbir</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/punjab-2-88_030612075245.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-2-88_030612075245.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/video/akali-dail-bjp-set-to-retain-punjab-assembly-poll-results.html/1/176684.html" target="_blank">Parkash Singh Badal on historic win</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/punjab-1-88_030612081745.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-1-88_030612081745.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank">SAD-BJP celebrate Punjab success</a></div>
 </div>
 <div class="clear"></div>
@@ -527,10 +527,10 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<div style="width:100%; float:left;"><h3 style="float:left;">Party Position</h3><span style="float:right; margin-top:3px; margin-right:8px;" class="maplink"><a href="live-poll-result.jsp?state=goa#Goa">Full List</a></span></div>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-									  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_tally_graph_4p_small.swf" />
+									  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_tally_graph_4p_small.swf" />
 									  <param name="allowScriptAccess" value="always"/>
 									  <param name="quality" value="high" />
-									  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
+									  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
 									</object>
                                 </div>
                             </div>
@@ -540,11 +540,11 @@ GA_googleFillSlot("IT_Special_Top_LB");
 					<div style="width:100%; float:left"><h3 style="float:left;">Constituency Map</h3><span style="float:right; margin-top:3px;" class="maplink"><a href="live-poll-result.jsp?state=goa">Enlarge</a></span></div>
 					<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="214">
-					  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_election_small.swf" />
+					  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_election_small.swf" />
 					  	<param name="AllowScriptAccess" value="always" />
 
 					  <param name="quality" value="high" />
-					  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
+					  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/goa/Goa_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
 					</object>
 					</div>
 					</div>
@@ -559,22 +559,22 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <div class="morheadline">More</div>
 <div class="innerbox">
 <div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-assembly-polls-father-bismarque-dias-campaigns/1/173017.html
-" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/goa_88_030512071431.jpg" border="1" width="88" height="66"></a></div>
+" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/goa_88_030512071431.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/story/goa-assembly-polls-father-bismarque-dias-campaigns/1/173017.html
 " target="_blank">Heal the nation</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/kamat_88_030512071431.jpg
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/kamat_88_030512071431.jpg
 " border="1" width="88" height="66"></a></div>
 <div class="Digambar Kamat"><a href="http://indiatoday.intoday.in/story/goa-chief-minister-digambar-kamat-interview-excerpts/1/154085.html" target="_blank">"It's not my sole responsibility to check illegal mining"</a></div>
 </div>
 <div class="innerbox">
-<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/1_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
+<div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/1_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/goa-at-50-beaches-babes-and-bikinis/1/6113.html" target="_blank">Goa@50: Beaches, babes and bikinis</a></div>
 </div>
 <div class="innerbox">
 <div align="center" class="img"><a href="http://indiatoday.intoday.in/gallery/goa-mine-of-challenges/1/6687.html
-" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/2_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
+" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/2_88_030512072026.jpg" border="1" width="88" height="66"></a></div>
 <div class="mrgtop"><a href="http://indiatoday.intoday.in/gallery/goa-mine-of-challenges/1/6687.html
 " target="_blank">Goa: Mine of challenges</a></div>
 </div>
@@ -642,10 +642,10 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<div style="width:100%; float:left;"><h3 style="float:left;">Party Position</h3><span style="float:right; margin-top:3px; margin-right:8px;" class="maplink"><a href="live-poll-result.jsp?state=uttarakhand#Uttarakhand">Full List</a></span></div>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-									  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" />
+									  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" />
 									  <param name="allowScriptAccess" value="always"/>
 									  <param name="quality" value="high" />
-									  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
+									  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
 									</object>
                                 </div>
                             </div>
@@ -655,11 +655,11 @@ GA_googleFillSlot("IT_Special_Top_LB");
 					<div style="width:100%; float:left"><h3 style="float:left;">Constituency Map</h3><span style="float:right; margin-top:3px;" class="maplink"><a href="live-poll-result.jsp?state=uttarakhand">Enlarge</a></span></div>
 					<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="214">
-					  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_small.swf" />
+					  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_small.swf" />
 					  	<param name="AllowScriptAccess" value="always" />
 
 					  <param name="quality" value="high" />
-					  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
+					  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
 					</object>
 					</div>
 					</div>
@@ -725,10 +725,10 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<div style="width:100%; float:left;"><h3 style="float:left;">Party Position</h3><span style="float:right; margin-top:3px; margin-right:8px;" class="maplink"><a href="live-poll-result.jsp?state=manipur#Manipur">Full List</a></span></div>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-									  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_tally_graph_4p_small.swf" />
+									  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_tally_graph_4p_small.swf" />
 									  <param name="allowScriptAccess" value="always"/>
 									  <param name="quality" value="high" />
-									  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
+									  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" allowScriptAccess="always" type="application/x-shockwave-flash" width="214" height="203"></embed>
 									</object>
                                 </div>
                             </div>
@@ -738,11 +738,11 @@ GA_googleFillSlot("IT_Special_Top_LB");
 					<div style="width:100%; float:left"><h3 style="float:left;">Constituency Map</h3><span style="float:right; margin-top:3px;" class="maplink"><a href="live-poll-result.jsp?state=manipur">Enlarge</a></span></div>
 					<div>
 					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="214">
-					  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_election_small.swf" />
+					  <param name="movie" value="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_election_small.swf" />
 					  	<param name="AllowScriptAccess" value="always" />
 
 					  <param name="quality" value="high" />
-					  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
+					  <embed src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/election-poll/flash/indiatoday/manipur/Manipur_election_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="214"></embed>
 					</object>
 					</div>
 					</div>
@@ -827,10 +827,10 @@ GA_googleFillSlot("B2_2nd_Mrec_Temp");
 <div class="sidebartitle">Videos</div>
 <div class="sidebarlist">
 <div id="photorightchunk">
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/akhilesh144_030612060643.jpg" title="Akhilesh Yadav" alt="Akhilesh Yadav" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/akhilesh144_030612060643.jpg" title="Akhilesh Yadav" alt="Akhilesh Yadav" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html" target="_blank">I thank the people of UP: Akhilesh Yadav</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/rahul-144_030612060643.jpg" title="Rahul Gandhi" alt="Amarinder Singh  " style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/rahul-144_030612060643.jpg" title="Rahul Gandhi" alt="Amarinder Singh  " style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/video/uttar-pradesh-poll-results-rahul-gandhi/1/176696.html" target="_blank">I take responsibility for UP loss: Rahul </a></div>
 </div>
 <div class="clear"></div>
@@ -847,18 +847,18 @@ GA_googleFillSlot("B2_2nd_Mrec_Temp");
 <div class="sidebartitle">Photos</div>
 <div class="sidebarlist">
 <div id="photorightchunk">
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/up-assembly-elections_030612053213.jpg" title="SP supporters" alt="SP supporters" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/up-assembly-elections_030612053213.jpg" title="SP supporters" alt="SP supporters" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/assembly-elections-2012-results-uttar-pradesh/1/6708.html" target="_blank">SP workers celebrate party's victory in UP</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/punjab-5-144_030612083344.jpg" title="Polls 2012" alt="Polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/punjab-5-144_030612083344.jpg" title="Polls 2012" alt="Polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
   <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/punjab-assembly-elections-2012/1/6714.html" target="_blank">Akali Dal celebrates Punjab result
 </a></div>
 </div>
 <div class="clear"></div>
-<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/why-uttar-pradesh-polls-matter/1/6667.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/manipur-3-144_030612083244.jpg" title="UP polls 2012" alt="UP polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
+<div class="sizeleft"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank"><a href="http://indiatoday.intoday.in/gallery/why-uttar-pradesh-polls-matter/1/6667.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/manipur-3-144_030612083244.jpg" title="UP polls 2012" alt="UP polls 2012" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130" /></a>
   <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/assembly-polls-congress-sweeps-manipur/1/6715.html" target="_blank">Cong sweeps Manipur polls</a></div>
 </div>
-<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2012March/priyanka_030512050800.gif" title="Powerful women politicians" alt="Powerful women politicians" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
+<div class=" sizeright"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2012March/priyanka_030512050800.gif" title="Powerful women politicians" alt="Powerful women politicians" style="border:1px solid rgb(153,153,153); margin-bottom:2px" border="1" width="144" height="130"></a>
 <div class="pkkiker"><a href="http://indiatoday.intoday.in/gallery/powerful-indian-women-politicians/1/6278.html" target="_blank">Powerful women politicians
 </a></div>
 </div>
@@ -994,7 +994,7 @@ new TWTR.Widget({
         </div>
 		<div class="clear"></div>
 		<DIV ID="footerdiv">
-  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="135"></iframe> 
+  <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="135"></iframe> 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

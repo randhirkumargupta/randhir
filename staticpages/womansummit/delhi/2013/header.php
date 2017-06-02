@@ -49,7 +49,7 @@
 	<a href="http://indiatoday.in/womansummit"><div class="logo"></div></a>
     
     <div style="float:left">
-      <div class="woman-logo" style="background:url(/staticpages/mediaintoday/indiatoday/womansummit/2013/images/title.png) no-repeat 0 0 !important;"></div>
+      <div class="woman-logo" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/title.png) no-repeat 0 0 !important;"></div>
     <div class="clr"></div>
     <div class="spondiv">
 		<span class="spon"></span>

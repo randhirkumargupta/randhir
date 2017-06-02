@@ -7,7 +7,7 @@
     <meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
     <meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
     <link href="css/style.css" rel="stylesheet" />
-    <script src="/staticpages/mediaintoday/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
+    <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
             $('.search').click(function(){
@@ -36,26 +36,26 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="topheader">
   <div class="wrapper"> 
-    <!--<img border="0" alt="" src="/staticpages/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
+    <!--<img border="0" alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
     <ul>
-      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
+      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
+<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
+      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
+      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
+      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
+      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
+      <li><a href="http://oyefm.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
 <div class="bottomheader">    
   <div class="wrapper">
-    <div class="logo"> <a href="index.jsp"><img src=" /staticpages/mediaintoday/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
-      <!--<a href="index.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
+    <div class="logo"> <a href="index.jsp"><img src=" http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
+      <!--<a href="index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
     </div>
     <div class="bottomleft"> 
-      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
+      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
                     <p>28 top companies go on campus recritment drive this fall</p>--> 
       
       	
@@ -65,8 +65,8 @@ ul.navbar li a {padding: 8px 17px;}
         
         </div>
         
-      <!--<img src="/staticpages/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
+      <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
+    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
   </div>
   <div class="searchBoxs">
     <div class="search-engin">
@@ -151,19 +151,19 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="bannerBox">
 <div id="social-area">
-	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
-    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
+	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
+    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
+    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
 </div>
           <div class="belt">
                 <ul>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
                 </ul>
                 <div class="text-banner"><h1>INDIA TODAY MEDIA INSTITUTE</h1></div>
             </div>
@@ -184,7 +184,7 @@ ul.navbar li a {padding: 8px 17px;}
               <h3></h3>
               
               <div align="justify" class="normaltxt">
-      <img src="/staticpages/mediaintoday/indiatoday/itmi/devesh-kishore.jpg" width="200" style="float: left;margin-right: 10px;margin-bottom: 3px;">
+      <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/devesh-kishore.jpg" width="200" style="float: left;margin-right: 10px;margin-bottom: 3px;">
           <p></p>
             <p>Prof. (Dr.) Devesh Kishore has more than 45 years of experience of training, research & production in the field of Mass Communication & Journalism. He possess Ph.D with specialisation in Development Broadcasting & Master in Development Communication.</p>
             <p>He has worked as a teacher, researcher and broadcaster. Worked with the Indian Institute of Mass Communication (IIMC). Prof. Kishore has even worked as Communications Head with NAARM. His years of experience and expertise include working as Director & Prof. Communications at Indira Gandhi National Open Univ. (IGNOU) followed by working as a Dean at IMS, NOIDA. He became Prof. Emeritus at M C National Univ. of Journalism & Communication, Bhopal in 2010.</p>
@@ -201,7 +201,7 @@ ul.navbar li a {padding: 8px 17px;}
 
               
             <iframe src="http://subscriptions.intoday.in/subscriptions/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
-            <img src="/staticpages/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
                 
 </div>
         </div>
@@ -236,7 +236,7 @@ ul.navbar li a {padding: 8px 17px;}
 <!--
 
 <div id="footer-add">
-	<img src="/staticpages/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
+	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
 </div>
 
 <div class="copyright">

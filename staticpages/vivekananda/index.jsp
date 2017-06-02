@@ -10,11 +10,11 @@
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 
 <meta property="og:title" content="Swami Vivekananda's advice for start-ups">
-<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg">
 <meta property="og:url" content="/vivekananda/">
 <meta property="og:description" content="Swami Vivekananda died 111 years ago on this day. He didnât address any business topic in specific. But his philosophy is more useful for current and aspiring startups than some of the best B-school degrees. Here are five key lessons from his philosophy.">
 
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg" />
 <style>
 #surfercommt {
     float: left;
@@ -261,7 +261,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=Vivekananda Advice for Startups&URL=http://indiatoday.intoday.in/vivekananda/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/vivekananda/&p[title]=Swami Vivekananda's advice for start-ups&s=100&p[summary]=Swami Vivekananda died 111 years ago. He didn't address any business topic in specific. But his philosophy is more useful for current and aspiring startups than some of the best B-school degrees. Here are five key lessons from his philosophy&p[images][0]=/staticpages/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/vivekananda/&p[title]=Swami Vivekananda's advice for start-ups&s=100&p[summary]=Swami Vivekananda died 111 years ago. He didn't address any business topic in specific. But his philosophy is more useful for current and aspiring startups than some of the best B-school degrees. Here are five key lessons from his philosophy&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/Vivekanand_300_350.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=Swami Vivekananda's advice for start-ups%20http://indiatoday.intoday.in/vivekananda/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -275,57 +275,57 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
       if(isset($_GET['slide']) && $_GET['slide'] == 2) {
       ?>
 
-        <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-2.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-2.jpg" alt="" title="" />
 
         <a href="/vivekananda/index.jsp?slide=1" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
         </a>
         <a href="/vivekananda/index.jsp?slide=3" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
         </a>
 
       <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 3) { ?>
-       <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-3.jpg" alt="" title="" />
+       <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-3.jpg" alt="" title="" />
 
         <a href="/vivekananda/index.jsp?slide=2" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
         </a>
         <a href="/vivekananda/index.jsp?slide=4" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
         </a>
 
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 4) { ?>
-        <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-4.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-4.jpg" alt="" title="" />
 
         <a href="/vivekananda/index.jsp?slide=3" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
         </a>
         <a href="/vivekananda/index.jsp?slide=5" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
         </a>
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 5) { ?>
-        <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-5.jpg" alt="" title="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-5.jpg" alt="" title="" />
 
         <a href="/vivekananda/index.jsp?slide=4" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
         </a>
         <a href="/vivekananda/index.jsp?slide=6" class='next'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
         </a>
 
       <?php } elseif (isset($_GET['slide']) && $_GET['slide'] == 6) { ?>
 
-        <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-6.jpg" alt="" />
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-6.jpg" alt="" />
 
         <a href="/vivekananda/index.jsp?slide=5" class='prev'>
-          <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
+          <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieleft.png' alt='Prev'>
         </a>
 
       <?php  } else { ?>
-     <img src="/staticpages/mediaintoday/indiatoday/images/vivekananda/cd-slide-1.jpg" alt="" title="" />
+     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/vivekananda/cd-slide-1.jpg" alt="" title="" />
 
     <a href="/vivekananda/index.jsp?slide=2" class='next'>
-      <img src='/staticpages/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
+      <img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/lie_gallery/lieright.png' alt='Next'>
     </a>
     <?php } ?>
 

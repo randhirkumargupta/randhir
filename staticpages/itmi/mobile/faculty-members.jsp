@@ -167,7 +167,7 @@ if (!mobile) {
 </div>
 <div class="body_section">
   <div class="outer_box_cont"> <span class="black_hdn">Faculty</span>
-    <div class="back_hdn_img"> <img src="/staticpages/mediaintoday/indiatoday/itmi/wap/faculty.jpg" alt="img"> </div>
+    <div class="back_hdn_img"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/faculty.jpg" alt="img"> </div>
   </div>
   <div class="outer_box_cont">
     <div class="faculty_cont_active">

@@ -22,7 +22,7 @@
             <a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><a href="http://www.indiatoday.in/" target="_blank">India Today</a><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a>
         </div>
         <div>
-        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
+        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
             <img src="/staticpages/main/images/ita.jpg" height="83" border="0"/>
         </div>
         <div id="banner">

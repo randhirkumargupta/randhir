@@ -80,7 +80,7 @@ GA_googleFillSlot("IT_Special_Top_LB");
 <table cellpadding="0" bgcolor="#ffffff" cellapacing="0">
 <tbody><tr>
 	<td>
-<iframe width="1000" scrolling="no" height="150" frameborder="0" src="/staticpages/mediaintoday/microsites/common/comm_footer.html"></iframe>
+<iframe width="1000" scrolling="no" height="150" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/comm_footer.html"></iframe>
 
 
 

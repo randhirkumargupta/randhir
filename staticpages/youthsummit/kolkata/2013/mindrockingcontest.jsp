@@ -56,7 +56,7 @@
         </div>
         
         <!--<div style="height:180 px;">
-        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
+        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
 <map name="Map122" id="Map122"><area shape="rect" coords="716,114,956,157" href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" /></map></a>        </div>-->
 <!--<div  style="height: 180px;">
 		
@@ -66,24 +66,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -183,7 +183,7 @@
             <div class="clear"></div>
         </div>
           <div style="height:180 px;">
-       <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
+       <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
         </div>-->
         
 <div  style="height: 180px;">
@@ -194,24 +194,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
+            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>

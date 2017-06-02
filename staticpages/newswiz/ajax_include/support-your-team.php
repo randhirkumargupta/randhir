@@ -2,10 +2,10 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
-<link href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/reset.css" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/style.css" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/swiper.min.css" type="text/css">
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/reset.css" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/style.css" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/swiper.min.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 
 
@@ -87,7 +87,7 @@ function changeRating1(contentId,content_type,action,part_id, upc, dwnc,lastc)
               
               <style type="text/css">
 .support-team{display:block; margin:10px 0 22px;}
-.support-team h2{margin: 0px 0 10px 0; padding: 12px 0 7px 12px; background: url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/support-bg.png) no-repeat;
+.support-team h2{margin: 0px 0 10px 0; padding: 12px 0 7px 12px; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/support-bg.png) no-repeat;
 font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .support-team .support-slider{float:left; width:100%; background-color:#fff; padding:12px 0 0 0; overflow:hidden; position:relative; margin-bottom:30px;}
 .support-team .support-slider ul{list-style:none; margin:0; padding:0; position:relative; overflow:hidden} 
@@ -108,7 +108,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .arrow_box:after, .arrow_box:before {top: 100%;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;}
 .arrow_box:after {border-color: rgba(255, 255, 255, 0);border-top-color: #fff;border-width: 5px;margin-left: -5px;}
 .arrow_box:before {border-color: rgba(166, 179, 188, 0);border-top-color: #a6b3bc;border-width: 7px;margin-left: -7px;}
-.vote-btn{background:url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0; width:125px; height:33px; display:block; margin:0 auto; margin-top:25px;}
+.vote-btn{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0; width:125px; height:33px; display:block; margin:0 auto; margin-top:25px;}
 .vote-done-msg{background-color:#fff; width:470px; position:absolute; top:50%; left:50%; margin-left:-235px; z-index:2; padding:15px 0; display:none;}
 .vote-done-msg p{ font:15px/20px 'Roboto',sans-serif; color:#000; text-align:center; display:block; padding:0 0 0 25%; box-sizing:border-box; min-height:auto;}
 .overlay{position:fixed; background-color:rgba(0,0,0,0.7); width:100%; height:100%; z-index:1; display:none;}
@@ -125,7 +125,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
               <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="position:relative;">
     <div class="prev-next-area">
-      <div class="prenext-cent"> <a href="javascript:void(0);" id="presupport"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/prearrow.png" alt=""></a> <span class="counter-no"> <span class="first_t">1</span> to <span class="second_t">4</span>/<span class="tot_t"></span> </span> <a href="javascript:void(0);" id="nextsupport"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/nextarrow.png" alt=""></a> </div>
+      <div class="prenext-cent"> <a href="javascript:void(0);" id="presupport"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/prearrow.png" alt=""></a> <span class="counter-no"> <span class="first_t">1</span> to <span class="second_t">4</span>/<span class="tot_t"></span> </span> <a href="javascript:void(0);" id="nextsupport"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/nextarrow.png" alt=""></a> </div>
     </div>
     
     <div class="support-team">
@@ -136,7 +136,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                       
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/bhartiya-vidya-jaipur-all-logo.gif" alt="Bhartiya Vidya Bhawan"></div>
+            	<a href="/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/bhartiya-vidya-jaipur-all-logo.gif" alt="Bhartiya Vidya Bhawan"></div>
               		<p class="fullname">Bhartiya Vidya Bhawan</p>
               	</a>
              
@@ -169,8 +169,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan&text=I support Bhartiya Vidya Bhawan&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan&text=I support Bhartiya Vidya Bhawan&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Cambridge-Court-High-School" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cambridge-jaipur-all-logo.gif" alt="Cambridge Court High School"></div>
+            	<a href="/newswiz/team.jsp?teamname=Cambridge-Court-High-School" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cambridge-jaipur-all-logo.gif" alt="Cambridge Court High School"></div>
               		<p class="fullname">Cambridge Court High School</p>
               	</a>
              
@@ -211,8 +211,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cambridge-Court-High-School"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cambridge-Court-High-School&text=I support Cambridge Court High School&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cambridge-Court-High-School"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cambridge-Court-High-School&text=I support Cambridge Court High School&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -220,7 +220,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cathedral_and_john_connon_school_mumbai.gif" alt="Cathedral And John Connon School"></div>
+            	<a href="/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/cathedral_and_john_connon_school_mumbai.gif" alt="Cathedral And John Connon School"></div>
               		<p class="fullname">Cathedral And John Connon School</p>
               	</a>
              
@@ -253,8 +253,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School&text=I support Cathedral And John Connon School&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Cathedral-And-John-Connon-School&text=I support Cathedral And John Connon School&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Chettinad-Vidyashram" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/chettinad_vidyashram_chennai.gif" alt="Chettinad Vidyashram"></div>
+            	<a href="/newswiz/team.jsp?teamname=Chettinad-Vidyashram" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/chettinad_vidyashram_chennai.gif" alt="Chettinad Vidyashram"></div>
               		<p class="fullname">Chettinad Vidyashram</p>
               	</a>
              
@@ -295,8 +295,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Chettinad-Vidyashram"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Chettinad-Vidyashram&text=I support Chettinad Vidyashram&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Chettinad-Vidyashram"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Chettinad-Vidyashram&text=I support Chettinad Vidyashram&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -304,7 +304,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/dps_nacharam_hyderabad_logo.gif" alt="Delhi Public School Nacharam"></div>
+            	<a href="/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/dps_nacharam_hyderabad_logo.gif" alt="Delhi Public School Nacharam"></div>
               		<p class="fullname">Delhi Public School Nacharam</p>
               	</a>
              
@@ -337,8 +337,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam&text=I support Delhi Public School Nacharam&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Delhi-Public-School-Nacharam&text=I support Delhi Public School Nacharam&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -346,7 +346,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/dps_rohini_new delhi.gif" alt="Delhi Public School Rohini"></div>
+            	<a href="/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/dps_rohini_new delhi.gif" alt="Delhi Public School Rohini"></div>
               		<p class="fullname">Delhi Public School Rohini</p>
               	</a>
              
@@ -379,8 +379,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini&text=I support Delhi Public School Rohini&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Delhi-Public-School-Rohini&text=I support Delhi Public School Rohini&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -388,7 +388,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/indus_valley_kolkata_all.gif" alt="Indus Valley World School Kolkata"></div>
+            	<a href="/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/indus_valley_kolkata_all.gif" alt="Indus Valley World School Kolkata"></div>
               		<p class="fullname">Indus Valley World School Kolkata</p>
               	</a>
              
@@ -421,8 +421,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata&text=I support Indus Valley World School Kolkata&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Indus-Valley-World-School-Kolkata&text=I support Indus Valley World School Kolkata&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -430,7 +430,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/modern-high-school-for-girls-kolkata.gif" alt="Modern High School For Girls Kolkata"></div>
+            	<a href="/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/modern-high-school-for-girls-kolkata.gif" alt="Modern High School For Girls Kolkata"></div>
               		<p class="fullname">Modern High School For Girls Kolkata</p>
               	</a>
              
@@ -463,8 +463,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata&text=I support Modern High School For Girls Kolkata&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Modern-High-School-For-Girls-Kolkata&text=I support Modern High School For Girls Kolkata&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -472,7 +472,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Modern-School-Barakhamba" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/modern-school-barakhmabha-delhi.gif" alt="Modern School Barakhamba"></div>
+            	<a href="/newswiz/team.jsp?teamname=Modern-School-Barakhamba" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/modern-school-barakhmabha-delhi.gif" alt="Modern School Barakhamba"></div>
               		<p class="fullname">Modern School Barakhamba</p>
               	</a>
              
@@ -505,8 +505,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Modern-School-Barakhamba"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Modern-School-Barakhamba&text=I support Modern School Barakhamba&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Modern-School-Barakhamba"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Modern-School-Barakhamba&text=I support Modern School Barakhamba&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -514,7 +514,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/national-gems-higher-secondary-kolkata.gif" alt="National Gems Higher Secondary Kolkata"></div>
+            	<a href="/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/national-gems-higher-secondary-kolkata.gif" alt="National Gems Higher Secondary Kolkata"></div>
               		<p class="fullname">National Gems Higher Secondary Kolkata</p>
               	</a>
              
@@ -547,8 +547,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata&text=I support National Gems Higher Secondary Kolkata&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=National-Gems-Higher-Secondary-Kolkata&text=I support National Gems Higher Secondary Kolkata&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -556,7 +556,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/rn-podar-mumbai.gif" alt="RN Podar School Mumbai"></div>
+            	<a href="/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/rn-podar-mumbai.gif" alt="RN Podar School Mumbai"></div>
               		<p class="fullname">RN Podar School Mumbai</p>
               	</a>
              
@@ -589,8 +589,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai&text=I support RN Podar School Mumbai&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=RN-Podar-School-Mumbai&text=I support RN Podar School Mumbai&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -598,7 +598,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/rajendra-vidyalaya-jamshedpur.gif" alt="Rajendra Vidyalaya Jamshedpur"></div>
+            	<a href="/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/rajendra-vidyalaya-jamshedpur.gif" alt="Rajendra Vidyalaya Jamshedpur"></div>
               		<p class="fullname">Rajendra Vidyalaya Jamshedpur</p>
               	</a>
              
@@ -631,8 +631,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur&text=I support Rajendra Vidyalaya Jamshedpur&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Rajendra-Vidyalaya-Jamshedpur&text=I support Rajendra Vidyalaya Jamshedpur&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -640,7 +640,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/sai-international-bhubaneswar.gif" alt="Sai International School Bhubaneshwar"></div>
+            	<a href="/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/sai-international-bhubaneswar.gif" alt="Sai International School Bhubaneshwar"></div>
               		<p class="fullname">Sai International School Bhubaneshwar</p>
               	</a>
              
@@ -673,8 +673,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar&text=I support Sai International School Bhubaneshwar&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Sai-International-School-Bhubaneshwar&text=I support Sai International School Bhubaneshwar&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -682,7 +682,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/springdales-dhaula-kuan-delhi.gif" alt="Springdales School Dhaula Kuan"></div>
+            	<a href="/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/springdales-dhaula-kuan-delhi.gif" alt="Springdales School Dhaula Kuan"></div>
               		<p class="fullname">Springdales School Dhaula Kuan</p>
               	</a>
              
@@ -715,8 +715,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan&text=I support Springdales School Dhaula Kuan&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Springdales-School-Dhaula-Kuan&text=I support Springdales School Dhaula Kuan&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -724,7 +724,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/springdales-pusa-road-delhi.gif" alt="Springdales School Pusa Road"></div>
+            	<a href="/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/springdales-pusa-road-delhi.gif" alt="Springdales School Pusa Road"></div>
               		<p class="fullname">Springdales School Pusa Road</p>
               	</a>
              
@@ -757,8 +757,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road&text=I support Springdales School Pusa Road&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Springdales-School-Pusa-Road&text=I support Springdales School Pusa Road&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -766,7 +766,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-joseph-boys-high-school-bangalore.gif" alt="St. Joseph's Boys High School  Bangalore"></div>
+            	<a href="/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-joseph-boys-high-school-bangalore.gif" alt="St. Joseph's Boys High School  Bangalore"></div>
               		<p class="fullname">St. Joseph's Boys High School  Bangalore</p>
               	</a>
              
@@ -799,8 +799,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore&text=I support St. Joseph's Boys High School  Bangalore&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St.-Joseph's-Boys-High-School--Bangalore&text=I support St. Joseph's Boys High School  Bangalore&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -808,7 +808,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-joseph-boys-high-school-darjeeling.gif" alt="St. Joseph's School, North Point Darjeeling"></div>
+            	<a href="/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-joseph-boys-high-school-darjeeling.gif" alt="St. Joseph's School, North Point Darjeeling"></div>
               		<p class="fullname">St. Joseph's School, North Point Darjeeling</p>
               	</a>
              
@@ -841,8 +841,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling&text=I support St. Joseph's School, North Point Darjeeling&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St.-Joseph's-School,-North-Point-Darjeeling&text=I support St. Joseph's School, North Point Darjeeling&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -850,7 +850,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=St-Marys-School-Pune" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-mary-pune-logo.gif" alt="St Marys School Pune"></div>
+            	<a href="/newswiz/team.jsp?teamname=St-Marys-School-Pune" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-mary-pune-logo.gif" alt="St Marys School Pune"></div>
               		<p class="fullname">St Marys School Pune</p>
               	</a>
              
@@ -883,8 +883,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St-Marys-School-Pune"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St-Marys-School-Pune&text=I support St Marys School Pune&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St-Marys-School-Pune"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St-Marys-School-Pune&text=I support St Marys School Pune&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -892,7 +892,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-patrick-matriculation-hss-puducherry.gif" alt="St Patrick Matric School Puducherry"></div>
+            	<a href="/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/st-patrick-matriculation-hss-puducherry.gif" alt="St Patrick Matric School Puducherry"></div>
               		<p class="fullname">St Patrick Matric School Puducherry</p>
               	</a>
              
@@ -925,8 +925,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry&text=I support St Patrick Matric School Puducherry&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=St-Patrick-Matric-School-Puducherry&text=I support St Patrick Matric School Puducherry&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -934,7 +934,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/sunbeam-school-lahartara-varanasi.gif" alt="Sunbeam School Lahartara Varanasi"></div>
+            	<a href="/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/sunbeam-school-lahartara-varanasi.gif" alt="Sunbeam School Lahartara Varanasi"></div>
               		<p class="fullname">Sunbeam School Lahartara Varanasi</p>
               	</a>
              
@@ -967,8 +967,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi&text=I support Sunbeam School Lahartara Varanasi&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Sunbeam-School-Lahartara-Varanasi&text=I support Sunbeam School Lahartara Varanasi&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -976,7 +976,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/tagore-international-school-vasant-vihar-delhi.gif" alt="Tagore International School Vasant Vihar"></div>
+            	<a href="/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/tagore-international-school-vasant-vihar-delhi.gif" alt="Tagore International School Vasant Vihar"></div>
               		<p class="fullname">Tagore International School Vasant Vihar</p>
               	</a>
              
@@ -1009,8 +1009,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar&text=I support Tagore International School Vasant Vihar&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Tagore-International-School-Vasant-Vihar&text=I support Tagore International School Vasant Vihar&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1018,7 +1018,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=The-Choice-School-Kochi" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/Choice-School-Logo.png" alt="The Choice School Kochi"></div>
+            	<a href="/newswiz/team.jsp?teamname=The-Choice-School-Kochi" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/Choice-School-Logo.png" alt="The Choice School Kochi"></div>
               		<p class="fullname">The Choice School Kochi</p>
               	</a>
              
@@ -1051,8 +1051,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Choice-School-Kochi"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Choice-School-Kochi&text=I support The Choice School Kochi&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Choice-School-Kochi"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Choice-School-Kochi&text=I support The Choice School Kochi&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1060,7 +1060,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Daly-College-Indore" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/daly-college-indore.gif" alt="Daly College Indore"></div>
+            	<a href="/newswiz/team.jsp?teamname=Daly-College-Indore" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/daly-college-indore.gif" alt="Daly College Indore"></div>
               		<p class="fullname">Daly College Indore</p>
               	</a>
              
@@ -1093,8 +1093,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Daly-College-Indore"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Daly-College-Indore&text=I support Daly College Indore&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Daly-College-Indore"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Daly-College-Indore&text=I support Daly College Indore&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1102,7 +1102,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/the-heritage-school-kolkata.gif" alt="The Heritage School Kolkata"></div>
+            	<a href="/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/the-heritage-school-kolkata.gif" alt="The Heritage School Kolkata"></div>
               		<p class="fullname">The Heritage School Kolkata</p>
               	</a>
              
@@ -1135,8 +1135,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata&text=I support The Heritage School Kolkata&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Heritage-School-Kolkata&text=I support The Heritage School Kolkata&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1144,7 +1144,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/hps-school-logo.png" alt="The Hyderabad Public School Hyderabad"></div>
+            	<a href="/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/hps-school-logo.png" alt="The Hyderabad Public School Hyderabad"></div>
               		<p class="fullname">The Hyderabad Public School Hyderabad</p>
               	</a>
              
@@ -1177,8 +1177,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad&text=I support The Hyderabad Public School Hyderabad&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=The-Hyderabad-Public-School-Hyderabad&text=I support The Hyderabad Public School Hyderabad&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1186,7 +1186,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/vasant-valley-new-delhi.gif" alt="Vasant Valley School New Delhi"></div>
+            	<a href="/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/vasant-valley-new-delhi.gif" alt="Vasant Valley School New Delhi"></div>
               		<p class="fullname">Vasant Valley School New Delhi</p>
               	</a>
              
@@ -1219,8 +1219,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi&text=I support Vasant Valley School New Delhi&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Vasant-Valley-School-New-Delhi&text=I support Vasant Valley School New Delhi&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1228,7 +1228,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
              
           <li>
             <div class="support_cont">
-            	<a href="/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai" ><div class="img-box"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/team/school-logo/vidya-mandir-secondary-school-mylapore-chennai.gif" alt="Vidya Mandir Senior Mylapore Chennai"></div>
+            	<a href="/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai" ><div class="img-box"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/team/school-logo/vidya-mandir-secondary-school-mylapore-chennai.gif" alt="Vidya Mandir Senior Mylapore Chennai"></div>
               		<p class="fullname">Vidya Mandir Senior Mylapore Chennai</p>
               	</a>
              
@@ -1261,8 +1261,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                                             <div class="share_like">
                                             	<ul>
                                                 	<li>SHARE ON</li>
-                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
-                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai&text=I support Vidya Mandir Senior Mylapore Chennai&via=indiatoday"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
+                                                	<li class="fb_icon"><a target="_blank" href="https://facebook.com/sharer.php?u=/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/fb-icon-sup.png" alt=""></a></li>
+                                                	<li class="tw_icon"><a target="_blank" href="https://twitter.com/intent/tweet?url=/newswiz/team.jsp?teamname=Vidya-Mandir-Senior-Mylapore-Chennai&text=I support Vidya Mandir Senior Mylapore Chennai&via=indiatoday"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twi-icon-sup.png" alt=""></a></li>							
                                                 </ul>
                                             </div>
                                         </div>
@@ -1276,11 +1276,11 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 </div>
 
 
-<script src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 
 <!-- Swiper JS --> 
-<script src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
-<script type="text/javascript" src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
+<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> 
     <script src="http://dotctor.github.io/jQuery.msgBox/scripts/jquery.msgBox.js" type="text/javascript"></script>
     <link href="http://dotctor.github.io/jQuery.msgBox/styles/msgBoxLight.css" rel="stylesheet" type="text/css" />

@@ -26,12 +26,12 @@ h1,h2,h3,h4,h5,h6{margin:0;padding:0}
 .clearfix{clear:both}
 .topad{padding:15px 0;text-align:center;width:728px;margin:0 auto}
 .nav_bar{border-top:1px solid #E1E1E1;box-shadow:0 6px 5px -3px rgba(0,0,0,0.1);-webkit-box-shadow:0 6px 5px -3px rgba(0,0,0,0.1)}
-.nav_bar ul li.logo{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png) repeat 26px -12px;padding-bottom:0;width:300px;padding-right:22px}
+.nav_bar ul li.logo{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png) repeat 26px -12px;padding-bottom:0;width:300px;padding-right:22px}
 .nav_bar ul li.logo a{line-height:53px;display:block;text-indent:-999999px}
 .nav_bar ul li.news{font-size:30px;font-weight:100;text-decoration:none;cursor:pointer}
 .news.navactive{color:#FFF}
 .nav_bar ul li{padding:0}
-li.livetv{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/live_iconnav2.png) no-repeat 5px 5px}
+li.livetv{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav2.png) no-repeat 5px 5px}
 .nav_bar ul li.news a,.nav_bar ul li.livetv a,.nav_bar ul li.magazine a,.nav_bar ul li.search_togle{padding:0 69px;line-height:53px;font-weight:100}
 .timecapsule-content{overflow:hidden}
 .timecapsule-videosection{width:1008px;float:left}

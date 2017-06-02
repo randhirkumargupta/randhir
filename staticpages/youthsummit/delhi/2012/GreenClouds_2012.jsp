@@ -40,7 +40,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -51,23 +51,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -259,7 +259,7 @@
 
 		<div class="sponcer-text-wrapper">
 		
-		<p><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponcers/green-clouds.gif" width="184" height="126" align="left" style="margin-right:10px ; margin-bottom:3px"><strong> GreenClouds </strong> provides innovative solutions using cloud and social media technologies to address the challenges of the Education and Employment Sectors. The company&rsquo;s vision is &quot; <em>Putting Education on the Clouds and making Employment and Engagement opportunities accessible to all&quot;</em>. </p>
+		<p><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/sponcers/green-clouds.gif" width="184" height="126" align="left" style="margin-right:10px ; margin-bottom:3px"><strong> GreenClouds </strong> provides innovative solutions using cloud and social media technologies to address the challenges of the Education and Employment Sectors. The company&rsquo;s vision is &quot; <em>Putting Education on the Clouds and making Employment and Engagement opportunities accessible to all&quot;</em>. </p>
       <p> GreenClouds Online Application Solution, Formistry, is a class leading solution with embedded CRM and Social Media features. Leading institutions in India including St. Stephens College and Jesus and Mary College in Delhi University deploys it. </p>
       <p> It&rsquo;s Social Media Talent Sourcing App leverage Social Networks to help organisations target talent communities, create Talent pipeline and strengthen employer brand. The App is presently deployed by some of the largest Corporates in India. </p>
       <p> GreenClouds also specializes in large data based analytics and visual presentation of data all geared towards the Education Sector. </p>

@@ -181,7 +181,7 @@ H1,h2 {
 #strwapper { width:92%!important; padding:0 4%;}
 #strwapper p, #strwapper .strtitlealias h2{font-size: 1em!important;}
 .nav_bar ul li.logo {
-    background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
+    background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
     height: 70px;
     padding: 0 22px 5px 20px;
     width: 260px;
@@ -255,7 +255,7 @@ img.navliveicon{ display:none;}
 #strwapper { width:92%!important; padding:0 4%;}
 #strwapper p, #strwapper .strtitlealias h2{font-size: 1em!important;}
 .nav_bar ul li.logo {
-    background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
+    background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
     height: 70px;
     padding: 0 22px 5px 20px;
     width: 260px;
@@ -291,7 +291,7 @@ img.navliveicon{ display:none;} .top-menu{ width:320px; margin:0 auto;}
    .socials_icns{  position:absolute;right:5px; bottom:0; height:20px; width:80px; }
    .socials_icns ul{ list-style-type:none; padding:0; margin:0;}
     .socials_icns ul li{ float:left; width:auto; margin:0; padding:0;}
-	.socials_icns ul li span{ cursor:pointer; display:block; width:24px; height:15px; background:url('/staticpages/mediaintoday/indiatoday/40-aniversery/sprite-image.png') no-repeat;}
+	.socials_icns ul li span{ cursor:pointer; display:block; width:24px; height:15px; background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/40-aniversery/sprite-image.png') no-repeat;}
 	.socials_icns ul li span.fb{ background-position:0 0;} 
 	.socials_icns ul li span.tw{ background-position:-30px 0;} 
 	.socials_icns ul li span.gp{ background-position:-58px 0;} 

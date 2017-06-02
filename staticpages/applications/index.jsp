@@ -82,18 +82,18 @@ $(document).ready(function(e) {
     <div class="belt-outer-popup">
 
       <ul class="belt-popup">
-      <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=in.AajTak.headlines" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
-     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.indiatoday&hl=en" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
-     <!--<li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=in.hlt.headlines" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
-     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.businesstoday" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
-     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.itg.cosmopolitan" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
+      <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=in.AajTak.headlines" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
+     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.indiatoday&hl=en" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
+     <!--<li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=in.hlt.headlines" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
+     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.businesstoday" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
+     <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.itg.cosmopolitan" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
     <li>
     <div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.readwhere.whitelabel.mailtoday" target="_blank">
-      <img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>
+      <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>
       Mail Today
       </div>
     </li>
-             <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.itgd.newsflick" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>NewsFlicks</div></li>
+             <li><div class="box-popup"><a href="https://play.google.com/store/apps/details?id=com.itgd.newsflick" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>NewsFlicks</div></li>
 
 
       </ul>
@@ -111,13 +111,13 @@ $(document).ready(function(e) {
     <div class="belt-outer-popup">
 
       <ul class="belt-popup">
-<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/aaj-tak/id493319791?mt=8" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
-<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/india-today-live/id510733452?mt=8" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
-<!--<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/headlines-today/id493304768?mt=8" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
-<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/business-today-live/id510626540?mt=8" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
-<li><div class="box-popup"><a href="https://itunes.apple.com/us/app/cosmopolitan-in/id733762097?ls=1&mt=8" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>NewsFlicks
+<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/aaj-tak/id493319791?mt=8" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
+<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/india-today-live/id510733452?mt=8" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
+<!--<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/headlines-today/id493304768?mt=8" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
+<li><div class="box-popup"><a href="https://itunes.apple.com/in/app/business-today-live/id510626540?mt=8" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
+<li><div class="box-popup"><a href="https://itunes.apple.com/us/app/cosmopolitan-in/id733762097?ls=1&mt=8" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>NewsFlicks
 </div></li>
 
       </ul>
@@ -134,13 +134,13 @@ $(document).ready(function(e) {
       <div class="next-popup"></div>
     <div class="belt-outer-popup">
       <ul class="belt-popup">
-<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/26085872/?countrycode=IN&countrycode=IN&lang=en" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
-<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/128334/?lang=en" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
-<!--<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/98803/?lang=en" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
-<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/79054/?lang=en" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps//Newsflick-176x176.png" width="144"></a>Newsflicks</div></li>
+<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/26085872/?countrycode=IN&countrycode=IN&lang=en" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
+<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/128334/?lang=en" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
+<!--<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/98803/?lang=en" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
+<li><div class="box-popup"><a href="http://appworld.blackberry.com/webstore/content/79054/?lang=en" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps//Newsflick-176x176.png" width="144"></a>Newsflicks</div></li>
       </ul>
     </div>
   </div>
@@ -156,13 +156,13 @@ $(document).ready(function(e) {
       <div class="next-popup"></div>
     <div class="belt-outer-popup">
       <ul class="belt-popup">
-<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/aajtak/eee0afc3-32ef-454d-8fd4-bb45901348b7" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
-<li><div class="box-popup"><a href="http://www.windowsphone.com/en-us/store/app/indiatoday/ced3e1db-dd84-42db-8bcf-e355ad85cd7b" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
-<!--<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/headlines-today/fd57be7c-d607-4d42-b6cf-1068fea9e9a5" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
-<li><div class="box-popup"><a href="http://www.windowsphone.com/en-us/store/app/businesstoday/89dbf8fc-9b05-4232-acfc-1fb34b8a509f" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
-<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/cosmopolitan/86b13e6a-c18b-48fc-b770-6b06996c95b6" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>News Flicks</div></li>
+<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/aajtak/eee0afc3-32ef-454d-8fd4-bb45901348b7" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
+<li><div class="box-popup"><a href="http://www.windowsphone.com/en-us/store/app/indiatoday/ced3e1db-dd84-42db-8bcf-e355ad85cd7b" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
+<!--<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/headlines-today/fd57be7c-d607-4d42-b6cf-1068fea9e9a5" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
+<li><div class="box-popup"><a href="http://www.windowsphone.com/en-us/store/app/businesstoday/89dbf8fc-9b05-4232-acfc-1fb34b8a509f" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
+<li><div class="box-popup"><a href="http://www.windowsphone.com/en-in/store/app/cosmopolitan/86b13e6a-c18b-48fc-b770-6b06996c95b6" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>News Flicks</div></li>
       </ul>
     </div>
   </div>
@@ -176,13 +176,13 @@ $(document).ready(function(e) {
       <div class="next-popup"></div>
     <div class="belt-outer-popup">
       <ul class="belt-popup">
-<li><div class="box-popup"><a href="http://store.ovi.com/content/50709" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
-<li><div class="box-popup"><a href="http://store.ovi.com/content/6393" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
-<!--<li><div class="box-popup"><a href="http://store.ovi.com/content/214165" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
-<li><div class="box-popup"><a href="http://store.ovi.com/content/129458" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
-<li><div class="box-popup"><a href="#" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>Aaj Tak</div></li>
+<li><div class="box-popup"><a href="http://store.ovi.com/content/50709" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="144"></a>Aaj Tak</div></li>
+<li><div class="box-popup"><a href="http://store.ovi.com/content/6393" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="144"></a>India Today</div></li>
+<!--<li><div class="box-popup"><a href="http://store.ovi.com/content/214165" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="144"></a>Headlines Today</div></li>-->
+<li><div class="box-popup"><a href="http://store.ovi.com/content/129458" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="144"></a>Business Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="144"></a>Cosmopoliton</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="144"></a>Mail Today</div></li>
+<li><div class="box-popup"><a href="#" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="144"></a>Aaj Tak</div></li>
       </ul>
     </div>
   </div>
@@ -221,7 +221,7 @@ $(document).ready(function(e) {
 <div class="container cf">
  <div class="wrapper header cf">
    <div class="logo"><a href="/applications/index.jsp">India Today</a></div>
-   <!--<div class="ad-top"><img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/ad-top.jpg"></div>-->
+   <!--<div class="ad-top"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/ad-top.jpg"></div>-->
   <div class="ad-top">
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT App HP Topnav LB , publisher: India Today App , Ad Dimension: Super Banner - 728 x 90 -->
@@ -289,39 +289,39 @@ var zflag_nid="821"; var zflag_cid="2319"; var zflag_sid="4"; var zflag_width="7
         <div class="apbelt-outer">
         <ul class="apbelt">
             <li>
-            <div class="slider-box">INDIA TODAY<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="140">
+            <div class="slider-box">INDIA TODAY<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/it-app.jpg" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/indiatoday.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>
           </li>
 
            <li>
-            <div class="slider-box">AAJTAK<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="140">
+            <div class="slider-box">AAJTAK<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Aajtak-176x176.png" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/aajtak.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>
           </li>
-            <!--<li><div class="slider-box">HEADLINES TODAY<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="140"><div class="slider-available-on">Available on</div><a href="/applications/headlinestoday.html"  class="view-btn">VIEW</a></div><div class="slider-shadow"></div></li>-->
+            <!--<li><div class="slider-box">HEADLINES TODAY<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/HT-176x176.png" width="140"><div class="slider-available-on">Available on</div><a href="/applications/headlinestoday.html"  class="view-btn">VIEW</a></div><div class="slider-shadow"></div></li>-->
             <li>
-            <div class="slider-box">BUSINESS TODAY<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="140">
+            <div class="slider-box">BUSINESS TODAY<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/BT-176x176.png" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/businesstoday.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>
           </li>
             <li>
-            <div class="slider-box">COSMOPOLITON<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="140">
+            <div class="slider-box">COSMOPOLITON<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Cosmo-176x176.png" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/cosmopoliton.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>
           </li>
             <li>
-            <div class="slider-box">MAIL TODAY<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="140">
+            <div class="slider-box">MAIL TODAY<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Mail-today-176x176.png" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/mailtoday.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>
           </li>
             <li>
-            <div class="slider-box">NEWS FLICKS<img src="/staticpages/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="140">
+            <div class="slider-box">NEWS FLICKS<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/indiatoday-apps/Newsflick-176x176.png" width="140">
                 <div class="slider-available-on">Available on</div>
                 <a href="/applications/newsflicks.jsp"  class="view-btn">VIEW</a></div>
             <div class="slider-shadow"></div>

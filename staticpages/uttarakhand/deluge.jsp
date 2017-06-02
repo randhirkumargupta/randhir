@@ -6,7 +6,7 @@
 <title>India Today interactive on Uttarakhand floods</title>
 <meta name="description" content="An India Today interactive on how the floods devastated Kedarnath and other spots in Uttarakhand after the downpour on June 16-17" />
 <meta name="keywords" content="uttarakhand, cloud burst, cloudburst, flood, lord shiva, shiva, mandakini, alaknanda, ganga, yamuna, kedarnath, tungnath, badrinath, rudraprayag, tehri, garhwal, rishikesh, haridwar, gangotri, rambara, joshimath, gourikund, gaurikund, agastya muni, agastyamuni, uttarkashi, chamoli, harsil, gopeshwar, devprayag, yamunotri, hemkund sahib, janki chatti, how did uttarakhand floods happen, interactive feature, India today" />
-<link rel="image_src" href="/staticpages/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="/uttarakhand/js/tandava_new2.js"></script>
 <link rel="stylesheet" href="/uttarakhand/js/tandava.css">
@@ -68,14 +68,14 @@
 <div id="ittop_fixie" class="bodybg">
 		<div class="inner_fixie clearfix">
 			<div class="ittop_init_branding clearfix">
-            <a href="http://indiatoday.intoday.in/"><img src="/staticpages/mediaintoday/indiatoday/it.png" alt="India Today" title="India Today" border="0"></a>
+            <a href="http://indiatoday.intoday.in/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it.png" alt="India Today" title="India Today" border="0"></a>
 			</div>
             <div class="frm-share rght">
 <div class="socialcont">
                  <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("/content_Email.jsp?email=0&title=The Tandava&URL=/uttarakhand/deluge.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
                 <a href="http://www.facebook.com/sharer/sharer.php?p[url]=/uttarakhand/deluge.jsp&p[title]=The Tandava&s=100&p[summary]=An India Today interactive on how the floods devastated Kedarnath and other spots in Uttarakhand after the downpour on June 16-17
-&p[images][0]=/staticpages/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=The Tandava%20http://indiatoday.intoday.in/uttarakhand/uttarakhand/deluge.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
               </div>
@@ -127,17 +127,17 @@ before they met the lord of the temple, Lord Shiva, others saw it merely as an i
                                     <iframe width="1000" scrolling="yes" height="600" frameborder="0" src="cloudburst-popup.html"></iframe>
                                 </div>
 
-                                    <h1><img src="/staticpages/mediaintoday/indiatoday/uk-flood/01.gif" ></h1>
+                                    <h1><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/uk-flood/01.gif" ></h1>
                                 </div>
                                 </div>
                                 <div class="story_area imgcont">
-                         <a target="_blank" href="http://indiatoday.intoday.in/story/uttarakhand-government-ignored-experts-warning-of-catastrophe-in-2012/1/285715.html"> <img border="0" src="/staticpages/mediaintoday/indiatoday/images/uttarakhand.jpg"></a>
+                         <a target="_blank" href="http://indiatoday.intoday.in/story/uttarakhand-government-ignored-experts-warning-of-catastrophe-in-2012/1/285715.html"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/uttarakhand.jpg"></a>
                             	<div class="photocap"><a target="_blank" href="http://indiatoday.intoday.in/story/uttarakhand-government-ignored-experts-warning-of-catastrophe-in-2012/1/285715.html">Government ignored experts' warning of catastrophe </a></div>
                               </div>
                        </div>
 <div class="left">
                       <h3>The Deluge In Kedar Valley</h3>
-						<div class="shivaimg"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" height="196" width="348" >
+						<div class="shivaimg"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" height="196" width="348" >
                         <br>
                         <div class="caption">The statue of Lord Shiva at Rishikesh ultimately gives in to the power of the Ganga.</div></div>
                         <p class="wd">The first of the cloudbursts--signalled by something that sounded like a sudden explosion that shook most of the houses--at Kedarnath took place around 7.30 pm on June 16. Within minutes, the area was full of people running towards the temple screaming <em>"bhago, bhago (run, run)"</em>. The check dam behind the temple crumbled and water gushed towards the temple. Nearly 250 people found shelter at the temple that night. With the temple almost full, the survivors spent the night standing in the temple's prayer hall. No one knew what was happening outside. All they knew, and that too from the ominous sound of the water hitting the temple walls, was that the township outside was being destroyed. The water kept rising inside the sanctum sanctorum that was already full of people. They hung on to whatever they could find. A man latched on to the bell, another to the chhatri. Some drowned, others floated.</p>
@@ -152,7 +152,7 @@ before they met the lord of the temple, Lord Shiva, others saw it merely as an i
 						<h2 class="vid-heading">How The Flood Destroyed Kedarnath</h2>
 
                     <div style="height:812px;">
-                           <div id="video2" class="secvideocont"><video width="1003"  height="750"  poster="/staticpages/mediaintoday/indiatoday/deluge-img.jpg" controls autoplay><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/June2013/Kedar_Flood.mp4" type="video/mp4"><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/June2013/Kedar_Flood.ogv" type="video/ogv"></video></div>
+                           <div id="video2" class="secvideocont"><video width="1003"  height="750"  poster="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/deluge-img.jpg" controls autoplay><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/June2013/Kedar_Flood.mp4" type="video/mp4"><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/June2013/Kedar_Flood.ogv" type="video/ogv"></video></div>
                            </div>
 
 
@@ -160,7 +160,7 @@ before they met the lord of the temple, Lord Shiva, others saw it merely as an i
                            <!--<div class="instruction" style="margin:-550px 0 300px 0">URL is working for IE9, Firefox and Crome</div>-->
                         <div class="right-section">
                         <div class="story_area tancaption">
-                         <a target="_blank" href="http://indiatoday.intoday.in/story/national-disaster-management-authority-great-man-made-tragedy-india-today/1/285136.html"> <img border="0" src="/staticpages/mediaintoday/indiatoday/images/disaster-1.jpg"></a>
+                         <a target="_blank" href="http://indiatoday.intoday.in/story/national-disaster-management-authority-great-man-made-tragedy-india-today/1/285136.html"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/disaster-1.jpg"></a>
                             	<div class="photocap"><a target="_blank" href="http://indiatoday.intoday.in/story/national-disaster-management-authority-great-man-made-tragedy-india-today/1/285136.html">The great man-made tragedy called NDMA</a></div>
                               </div>
                           <div class="story_area">
@@ -170,9 +170,9 @@ before they met the lord of the temple, Lord Shiva, others saw it merely as an i
 Cloudbursts occur because the warm air current from the ground or below the clouds rushes up and carries the falling raindrops up with it. The rain fails to fall down in a steady shower. This results in excessive condensation in the clouds as new drops form and old drops are pushed back into it by the updraft. Then one of them gives in. The air current slows down or the clouds can't hold. The resulting violent downpour can dump as much as 70,000 tonnes of water over an acre of land. In India, a cloudburst mostly occurs in the mountains of India where the low monsoon clouds are stopped by the high mountains. But it may happen elsewhere. On July 26, 2005, a cloudburst over Mumbai dumped 1,448 mm of rain in 10 hours. </div>
 <div class="right_vd">
 
-		<div><a href="/staticpages/mediaintoday/indiatoday/mosdac-uttarakhand.pdf" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/collage_350.jpg" border="0" style="border:1px solid #000;" width="348"></a></div>
+		<div><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/mosdac-uttarakhand.pdf" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/collage_350.jpg" border="0" style="border:1px solid #000;" width="348"></a></div>
 
-        <div class="photocap"><a href="/staticpages/mediaintoday/indiatoday/mosdac-uttarakhand.pdf" target="_blank">The cloudburst warning Uttarakhand failed to act on</a></div>
+        <div class="photocap"><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/mosdac-uttarakhand.pdf" target="_blank">The cloudburst warning Uttarakhand failed to act on</a></div>
 
 </div>
                       </div>
@@ -211,17 +211,17 @@ Cloudbursts occur because the warm air current from the ground or below the clou
 
 <div class="right-section">
                           <div class="story_area topmarg25px">
-                         <a href="http://indiatoday.intoday.in/story/indiana-jones-&-the-lucky-escape-from-uttarakhand-disaster/1/284249.html" target="_blank"> <img border="0" src="/staticpages/mediaintoday/indiatoday/images/flood2.jpg"></a>
+                         <a href="http://indiatoday.intoday.in/story/indiana-jones-&-the-lucky-escape-from-uttarakhand-disaster/1/284249.html" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/flood2.jpg"></a>
                             	<div class="photocap"><a href="http://indiatoday.intoday.in/story/indiana-jones-&-the-lucky-escape-from-uttarakhand-disaster/1/284249.html" target="_blank">The lucky escape: Our trekking trip turned into a nightmare</a></div>
                               </div>
 
                               <div class="story_area topmarg25px">
-                         <a href="http://indiatoday.intoday.in/story/uttarakhand-floods-aftermath-rescue-operations-stranded-pilgrims/1/285625.html" target="_blank"> <img border="0" src="/staticpages/mediaintoday/indiatoday/images/u1.jpg"></a>
+                         <a href="http://indiatoday.intoday.in/story/uttarakhand-floods-aftermath-rescue-operations-stranded-pilgrims/1/285625.html" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/u1.jpg"></a>
                             	<div class="photocap"><a href="http://indiatoday.intoday.in/story/uttarakhand-floods-aftermath-rescue-operations-stranded-pilgrims/1/285625.html" target="_blank">How calamity brought out the best and the worst in us</a></div>
                               </div>
                               </div>
                     <h3>Rescue Operations</h3>
-   	  <img src="/staticpages/mediaintoday/indiatoday//images/stories/2013june/hotel_348x196_062813063242.jpg" height="196" width="348" class="rescuetxt">
+   	  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/hotel_348x196_062813063242.jpg" height="196" width="348" class="rescuetxt">
 						<p class="wd">Every time a major disaster takes place, the relief experts-the Army and Air Force-are called out. It was no different this time either. The first teams to break through and reach the survivors were the army teams.</p>
 </div>
 
@@ -241,14 +241,14 @@ Cloudbursts occur because the warm air current from the ground or below the clou
 
 <div class="right-section">
 			<div class="story_area topmarg25px">
-                          <a href="http://indiatoday.intoday.in/story/uttarakhand-floods-natural-disaster-more-of-state-government-failure-india-today/1/285328.html" target="_blank"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/kedarnath-2.jpg"></a>
+                          <a href="http://indiatoday.intoday.in/story/uttarakhand-floods-natural-disaster-more-of-state-government-failure-india-today/1/285328.html" target="_blank"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/kedarnath-2.jpg"></a>
                             	<div class="photocap"><a href="http://indiatoday.intoday.in/story/uttarakhand-floods-natural-disaster-more-of-state-government-failure-india-today/1/285328.html" target="_blank">Bodies slit, heads severed. A mass murder in Kedarnath</a></div>
                               </div>
 
                               <div class="story_area topmarg25px">
-                         <a href="http://indiatoday.intoday.in/story/from-ground-zero-uttarakhand-disaster-signals-a-complete-failure-of-the-system/1/285666.html" target="_blank"> <img border="0" src="/staticpages/mediaintoday/indiatoday/images/ground-zero.jpg"></a>
+                         <a href="http://indiatoday.intoday.in/story/from-ground-zero-uttarakhand-disaster-signals-a-complete-failure-of-the-system/1/285666.html" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ground-zero.jpg"></a>
                             	<div class="photocap"><a href="http://indiatoday.intoday.in/story/from-ground-zero-uttarakhand-disaster-signals-a-complete-failure-of-the-system/1/285666.html" target="_blank">Uttarakhand disaster signals a complete failure of the system</a></div>
-                                <div class="story_area topmarg25px"><a href="http://www.caretoday.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/care-today.jpg" border="0"/></a></div>
+                                <div class="story_area topmarg25px"><a href="http://www.caretoday.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/care-today.jpg" border="0"/></a></div>
                                  <div style="height:270px;">
                                  <div id="video3"><video width="355" height="267" controls autoplay><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/July2013/MVI_8254.mp4" type="video/mp4"><source src="http://videodeliverys3.s3.amazonaws.com/indiatoday/video/June2013/MVI_8254.ogv" type="video/ogv"></video></div>
                                  </div>
@@ -275,7 +275,7 @@ Cloudbursts occur because the warm air current from the ground or below the clou
 
                         <h3>The Chardham</h3>
                         <p class="quote">Opens in a new window</p>
-                        <div><a href="http://indiatoday.intoday.in/story/uttarakhand-floods-pilgrims-hindu-and-sikh-char-dham-yatra/1/286301.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/chardham.jpg" border="0" width="600"  /></a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/uttarakhand-floods-pilgrims-hindu-and-sikh-char-dham-yatra/1/286301.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/chardham.jpg" border="0" width="600"  /></a></div>
 
                         <div class="byline right"><em> -Bhavneet Singh Aurora</em></div>
 	</div>

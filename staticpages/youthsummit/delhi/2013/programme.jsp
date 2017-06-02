@@ -13,7 +13,7 @@
 <title>India Today Mind Rocks 2013 - Programme</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"  href="/youthsummit/delhi/2013/css/common.css" />
-<link rel="Stylesheet" type="text/css" href="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
+<link rel="Stylesheet" type="text/css" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
 <link rel="stylesheet" type="text/css" href="/youthsummit/delhi/2013/css/live-coverage.css" />
 
 <script>
@@ -54,12 +54,12 @@ $('.nav > ul > li.drop1').mouseover(function() {
 </script>
 
 <style>
-.programme_bg {background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
+.programme_bg {background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
 .nav ul li a.active,.nav ul li a:hover {background:#b70d0d} .nav ul li:hover { background-color:#b70d0d}
 
 
 
-.main-pro-head {width:960px; height:33px; background:url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/cor1.gif) no-repeat top left #000; float:left;}
+.main-pro-head {width:960px; height:33px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/cor1.gif) no-repeat top left #000; float:left;}
 .main-pro-head h3 {font:normal 18px/33px Arial-Black; text-transform:uppercase; color:#f7ee23; margin:0; padding:0 5px; float:left}
 .date {font:normal 12px/33px arial;color:#fff;}
 
@@ -84,7 +84,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
 .bott-marg { margin-bottom:20px;}
 
 .right {float:right}
-.prog-sch-box {width:100%; float:left; padding-bottom:30px; background:url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.prog-sch-box {width:100%; float:left; padding-bottom:30px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
 .prog-left {width:135px; float:left}
 
 .prog-right {
@@ -94,7 +94,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
     width: 740px;
 }
 .bottom-10marg {margin-bottom:10px;}
-.lucnhbreak { background:url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/lunch-bg.gif) no-repeat top left; width:825px; height:33px; font:normal 16px/33px Arial-Black; text-transform:uppercase; padding-left:10px; color:#fff;}
+.lucnhbreak { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/lunch-bg.gif) no-repeat top left; width:825px; height:33px; font:normal 16px/33px Arial-Black; text-transform:uppercase; padding-left:10px; color:#fff;}
 
 .progboox {margin: 10px 5px; float: left; width: 31%;}
 .progboox-full {margin: 10px 5px; float: left; width:100%;}
@@ -141,7 +141,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
         </div> 
 		<div class="clr">&nbsp;</div>
         <div class="prog-txt bott-marg">Mind Rock is an event designed especially for the youth. The daylong conference is a forum that bright young minds to interact in an open two-way conversation with their icons. A space where inspirational leaders from different spheres of life share their success stories. A festival that celebrates throungh ideas, music and art by recognizing the best in the field and also giving youth a stage to create, perform and engage.</div>
-     <div class="main-pro-head"><h3>Rocking Programme</h3><span class="date">21<sup>st</sup> September 2013</span><div class="right"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/tea.gif" border="0"></div></div>
+     <div class="main-pro-head"><h3>Rocking Programme</h3><span class="date">21<sup>st</sup> September 2013</span><div class="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/tea.gif" border="0"></div></div>
      <div class="clr">&nbsp;</div>
      
      <div style="padding-bottom:75px; float:left">
@@ -178,7 +178,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Leander-Paes-s.jpg" alt="Leander Paes" class="imgs" title="Leander Paes"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Leander-Paes-s.jpg" alt="Leander Paes" class="imgs" title="Leander Paes"> 
                             <div class="mindr-consubhead  marg-top"> Leander Paes
                             </div>
                             <div>Tennis Player</div>
@@ -199,7 +199,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         	<div class="prj_name">Speakers:</div>
                             <div class="yellow-bg">How I sang my first song:</div>
                             <div class="clear"></div>
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/hardk-s.jpg" alt="Hard Kaur" class="imgs" title="Hard Kaur"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/hardk-s.jpg" alt="Hard Kaur" class="imgs" title="Hard Kaur"> 
                             <div class="mindr-consubhead  marg-top"> Hard Kaur
                             </div>
                             <div>Rapper and hip-hop singer</div>
@@ -209,7 +209,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         	<div class="prj_name">&nbsp;</div>
                             <div class="yellow-bg">How to start your own business:</div>
                             <div class="clear"></div>
-              <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Dhruv-Shringi-s.jpg" alt="Dhruv Shringi" class="imgs" title="Dhruv Shringi"> 
+              <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Dhruv-Shringi-s.jpg" alt="Dhruv Shringi" class="imgs" title="Dhruv Shringi"> 
                             <div class="mindr-consubhead  marg-top"> Dhruv Shringi
               </div>
                             <div>Co-Founder & CEO, Yatra.com</div>
@@ -232,7 +232,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speakers:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Kiran-Bedi-s.jpg" alt="Kiran Bedi" class="imgs" title="Kiran Bedi"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Kiran-Bedi-s.jpg" alt="Kiran Bedi" class="imgs" title="Kiran Bedi"> 
                             <div class="mindr-consubhead  marg-top"> Kiran Bedi
                             </div>
                             <div>Former IPS officer and social activist</div>
@@ -242,7 +242,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         <div class="progboox-midd">
                         	<div class="prj_name">&nbsp;</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Gul-Panag-s.jpg" alt="Gul Panag" class="imgs" title="Gul Panag"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Gul-Panag-s.jpg" alt="Gul Panag" class="imgs" title="Gul Panag"> 
                             <div class="mindr-consubhead  marg-top"> Gul Panag
                             </div>
                             <div>Actor, Model</div>
@@ -250,7 +250,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         
                         <div class="progboox-midd">
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Nishtha-Gautam-s.jpg" alt="Nishtha Gautam" class="imgs" title="Nishtha Gautam"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Nishtha-Gautam-s.jpg" alt="Nishtha Gautam" class="imgs" title="Nishtha Gautam"> 
                             <div class="mindr-consubhead  marg-top"> Nishtha Gautam
                             </div>
                             <div>Associate fellow, Observer Research Foundation</div>
@@ -269,7 +269,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/at.jpg" alt="Amish Tripathi" class="imgs" title="Amish Tripathi"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/at.jpg" alt="Amish Tripathi" class="imgs" title="Amish Tripathi"> 
                             <div class="mindr-consubhead  marg-top"> Amish Tripathi</div>
                             <div>Author</div>
                         </div>
@@ -288,7 +288,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speakers:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Hooda-s.jpg" alt="Deepender Hooda" class="imgs" title="Deepender Hooda"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Hooda-s.jpg" alt="Deepender Hooda" class="imgs" title="Deepender Hooda"> 
                             <div class="mindr-consubhead  marg-top">Deepender Hooda</div>
                             <div>Member of Parliament</div>
                         </div>
@@ -297,14 +297,14 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         <div class="progboox-midd">
                         	<div class="prj_name">&nbsp;</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Sanjay-Kaul-s.jpg" alt="Sanjay Kaul" class="imgs" title="Sanjay Kaul"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Sanjay-Kaul-s.jpg" alt="Sanjay Kaul" class="imgs" title="Sanjay Kaul"> 
                             <div class="mindr-consubhead  marg-top">Sanjay Kaul</div>
                             <div>Spokesperson and member of executive committee, Delhi unit of Bharatiya Janata Party </div>
                         </div>
                         
                         <div class="progboox-midd">
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Kejriwal-s.jpg" alt="Arvind Kejriwal" class="imgs" title="Arvind Kejriwal"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Kejriwal-s.jpg" alt="Arvind Kejriwal" class="imgs" title="Arvind Kejriwal"> 
                             <div class="mindr-consubhead  marg-top">Arvind Kejriwal</div>
                             <div>Founder leader, Aam Aadmi Party </div>
                         </div>
@@ -330,7 +330,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speakers:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Salman-Yusuff-Khan-s.jpg" alt="Salman Yusuff Khan" class="imgs" title="Salman Yusuff Khan"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Salman-Yusuff-Khan-s.jpg" alt="Salman Yusuff Khan" class="imgs" title="Salman Yusuff Khan"> 
                             <div class="mindr-consubhead  marg-top">Salman Yusuff Khan</div>
                             <div>Actor, dancer, choreographer</div>
                         </div>
@@ -338,7 +338,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
                         <div class="progboox-midd">
                         	<div class="prj_name">&nbsp;</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Lauren-Gottlieb-s.jpg" alt="Lauren Gottlieb" class="imgs" title="Lauren Gottlieb"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Lauren-Gottlieb-s.jpg" alt="Lauren Gottlieb" class="imgs" title="Lauren Gottlieb"> 
                             <div class="mindr-consubhead  marg-top">Lauren Gottlieb</div>
                             <div>Actor, dancer</div>
                         </div>
@@ -376,7 +376,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/virat-kohli-s.jpg" alt="Virat Kohli" class="imgs" title="Virat Kohli"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/virat-kohli-s.jpg" alt="Virat Kohli" class="imgs" title="Virat Kohli"> 
                             <div class="mindr-consubhead  marg-top">Virat Kohli</div>
                             <div>Vice-Captain, Indian cricket team</div>
                         </div>
@@ -396,7 +396,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/speakers/aditi-rao-hydari-s.jpg" alt="Aditi Rao Hydari" class="imgs" title="Aditi Rao Hydari"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/speakers/aditi-rao-hydari-s.jpg" alt="Aditi Rao Hydari" class="imgs" title="Aditi Rao Hydari"> 
                             <div class="mindr-consubhead  marg-top">Aditi Rao Hydari</div>
                             <div>Actor</div>
                         </div>
@@ -414,7 +414,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Ajay-Bijli-s.jpg" alt="Ajay Bijli" class="imgs" title="Ajay Bijli"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Ajay-Bijli-s.jpg" alt="Ajay Bijli" class="imgs" title="Ajay Bijli"> 
                             <div class="mindr-consubhead  marg-top">Ajay Bijli</div>
                             <div>Chairman & managing director, PVR Limited</div>
                         </div>
@@ -432,7 +432,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
      <div class="progboox-midd">
                         	<div class="prj_name">Speaker:</div>
                             
-                            <img width="72" height="72" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Farhan-Akhtar-s.jpg" alt="Farhan Akhtar" class="imgs" title="Farhan Akhtar"> 
+                            <img width="72" height="72" border="0" align="left" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Farhan-Akhtar-s.jpg" alt="Farhan Akhtar" class="imgs" title="Farhan Akhtar"> 
                             <div class="mindr-consubhead  marg-top">Farhan Akhtar</div>
                             <div>Actor, film producer and director</div>
                         </div>
@@ -511,21 +511,21 @@ $('.nav > ul > li.drop1').mouseover(function() {
       <div class="list_carousel">
 				<ul id="foo0">
 	
-					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
-					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
-                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
-                <!--    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
+					<li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
+					<li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
+                    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
+                <!--    <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
                      
-                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
-                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
-                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
+                     <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
+                      <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
+                      <li><a><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -533,7 +533,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
         
         
         </div>
-        <div class="social_icon"> <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
+        <div class="social_icon"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
         <map name="Map">
           <area shape="rect" coords="2,2,34,31" href="https://www.facebook.com/MindRocks" target="_blank">
           <area shape="rect" coords="49,2,81,31" href="https://twitter.com/mindrocks/" target="_blank">
@@ -542,7 +542,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
         </div>
     </div>
  </div>
- <script language="Javascript" type="text/javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
+ <script language="Javascript" type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
 		<script language="javascript" type="text/javascript">
 			jQuery(document).ready(function() {
 				$('.countdown1').countDown({
@@ -558,7 +558,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
 			});
 		</script>
 
-<script type="text/javascript" language="javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
 		<script type="text/javascript" language="javascript">
 			$(function() {
 				$('#foo0').carouFredSel();

@@ -22,7 +22,7 @@
             <a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><a href="http://www.indiatoday.in/" target="_blank">India Today</a><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a>
         </div>
         <div>
-        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
+        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
             <img src="/staticpages/main/images/ita.jpg" height="83" border="0"/>
         </div>
         <div id="banner">
@@ -82,7 +82,7 @@ At 28, Divya Narendra is the CEO and Co-founder of SumZero, an international por
            
             <div id="sidebar">
     <div class="side_chunk">
-		<a href="/pledge/" target="_blank"><img border="0" src="/staticpages/mediaintoday/microsites/banners/Banner-on-IT.jpg"></a>
+		<a href="/pledge/" target="_blank"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/Banner-on-IT.jpg"></a>
     </div>
     <div class="side_chunk">
 		<div class="side_chunk_title" style="margin-bottom:5px; font-size:22px;">
@@ -91,8 +91,8 @@ At 28, Divya Narendra is the CEO and Co-founder of SumZero, an international por
         <div class="summithighlights">
         	<div class="shtitle" style="color: #21509E;">Best moments of Youth Summit 2011</div>
             	<div style="text-align:center; margin:5px auto;"><a href=" http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2012-celebrates-spirit-of-young-indians.html/1/151785.html
-"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/mindrock-video-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a><a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html
-"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/mindrock-photo-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a></div>
+"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mindrock-video-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a><a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html
+"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mindrock-photo-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a></div>
             	<div class="text" style="line-height:18px;">Watch the best speakers, sessions and highlights from the India Today Mind Rocks Youth Summit 2011 in this special package.</div>
         </div>
     </div>
@@ -189,7 +189,7 @@ At 28, Divya Narendra is the CEO and Co-founder of SumZero, an international por
   <?php include('partnerband.php');?>
     <div class="clear"></div>
 </div>
- <iframe src="/staticpages/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+ <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
     </div>
 </body>
 </html>

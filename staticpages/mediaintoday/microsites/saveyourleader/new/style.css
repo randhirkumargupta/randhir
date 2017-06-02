@@ -13,7 +13,7 @@ body{ font-family:roboto;}
 .socialmedia-icon ul li{ width:60px; float: left; text-align:center; list-style:none;}
 .clearfix:before, .clearfix:after {content: " "; display: block; height: 0; visibility: hidden;}
 .clearfix:after {clear: both;}.clearfix {}
-.big-heading{ background:url(/staticpages/mediaintoday/microsites/saveyourleader/new/masthead-band.png) no-repeat center center; width:990px; height:112px; text-align:center; line-height:112px; font-size:60px; font-weight:100; margin-top:10px; margin-bottom:15px;}
+.big-heading{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/masthead-band.png) no-repeat center center; width:990px; height:112px; text-align:center; line-height:112px; font-size:60px; font-weight:100; margin-top:10px; margin-bottom:15px;}
 .big-heading span{ font-weight:700;}
 .body-content{ padding:0px 0 20px;}
 .small-text { font-family:roboto; font-size:22px;  text-align:center; color:#333333; padding-bottom:10px}
@@ -50,7 +50,7 @@ p{ font-size:21px; line-height:30px; color:#6C6C6C; margin-bottom:25px; font-wei
 .agree-text ul li{ list-style:none; text-align:center; padding:20px 0; margin-bottom:10px;}
 .agree-text ul li a{ margin:0 15px;}
 .share-story{ margin-top:10px;}
-.share-story .share-icon{ background:url(/staticpages/mediaintoday/microsites/saveyourleader/new/share-icon.png) no-repeat 0 0; width:25px; height:25px; display:block; margin-left:25px;}
+.share-story .share-icon{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/share-icon.png) no-repeat 0 0; width:25px; height:25px; display:block; margin-left:25px;}
 .icon-top{ margin-top:-16px!important;}
 
 
@@ -63,14 +63,14 @@ p{ font-size:21px; line-height:30px; color:#6C6C6C; margin-bottom:25px; font-wei
 
 .result-box{ background:#F0F0F0; padding:15px; margin-top:10px;}
 .result-box h6{ font-size:17px; font-weight:300;}
-.result-box .result-meter{ background:url(/staticpages/mediaintoday/microsites/saveyourleader/new/meterbg.png) no-repeat 0 center; height:25px; width:243px; padding:3px 0 5px; position:relative; margin-bottom:5px;}
-.result-box .result-meter span{ background:url(/staticpages/mediaintoday/microsites/saveyourleader/new/slider-arrow.png) no-repeat 0 0; width:8px; height:37px; position:absolute; left:10%; top:2px; -webkit-transition: all 1s ease;
+.result-box .result-meter{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/meterbg.png) no-repeat 0 center; height:25px; width:243px; padding:3px 0 5px; position:relative; margin-bottom:5px;}
+.result-box .result-meter span{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/slider-arrow.png) no-repeat 0 0; width:8px; height:37px; position:absolute; left:10%; top:2px; -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   -ms-transition: all 1s ease;
   transition: all 1s ease;}
 #leader-result .result-box .meter-text li{ font-size:11px; width:49px; float:left; margin:0; font-weight:500;}
-.scbg{ background-image:url(/staticpages/mediaintoday/microsites/saveyourleader/new/sprit.png);}
+.scbg{ background-image:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/sprit.png);}
 #leader-result .social-icon ul li{ width:40px; float:left; margin:0;}
 #leader-result .social-icon ul li span{ text-indent:-9999px; display:block; width:40px; height:40px; float:left;}
 .social-icon{ width:120px; margin:0 auto;}

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<div class="fbtwbox"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/smo.png" usemap="#Map" border="0">
+<div class="fbtwbox"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/smo.png" usemap="#Map" border="0">
   <map name="Map">
     <area shape="rect" coords="6,4,56,139" href="https://www.facebook.com/mailtoday" target="_blank">
     <area shape="rect" coords="7,154,56,297" href="https://twitter.com/IndiaToday" target="_blank">
@@ -41,8 +41,8 @@
 
     <div class="topbg">
         <div class="centerdiv posrel">
-        <div class="posabs"><a href="index.jsp"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/logo.jpg" border="0" /></a></div>
-        <div class="toptxt"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/punch.jpg" border="0"></div>
+        <div class="posabs"><a href="index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/logo.jpg" border="0" /></a></div>
+        <div class="toptxt"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/punch.jpg" border="0"></div>
         </div>
         
     <div class="clear"></div>
@@ -251,13 +251,13 @@ function changeColor(colo) {
     
     <div class="clear"></div>
     <div class="foot-logo-box">
-    <div class="foot-logos"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/mt.jpg" border="0"></div>
-    <div class="foot-logos divhight"><div class="foot-txt">TV Partners</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/ht.jpg" border="0"></div>
-    <div class="foot-logos divhight"><div class="foot-txt">Radio Partner</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/oye.jpg" border="0"></div>
-    <div class="foot-logos divhight flast"><div class="foot-txt">Online learningPartner</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/lt.jpg" border="0"></div>
+    <div class="foot-logos"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/mt.jpg" border="0"></div>
+    <div class="foot-logos divhight"><div class="foot-txt">TV Partners</div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/ht.jpg" border="0"></div>
+    <div class="foot-logos divhight"><div class="foot-txt">Radio Partner</div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/oye.jpg" border="0"></div>
+    <div class="foot-logos divhight flast"><div class="foot-txt">Online learningPartner</div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/educationconclave2013/images/lt.jpg" border="0"></div>
     </div>
     <div class="clear"></div>
-<div id="footer"><iframe width="970" scrolling="no" height="165" frameborder="0" src="/staticpages/mediaintoday/microsites/common/bt_footer.html"></iframe></div>
+<div id="footer"><iframe width="970" scrolling="no" height="165" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/bt_footer.html"></iframe></div>
 
 
 </section>

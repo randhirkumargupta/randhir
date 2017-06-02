@@ -10,11 +10,11 @@
 <meta name="keywords" content="News Wiz participant, news wiz participating schools, news wiz participating Team, Schools in News Wiz, News Wiz India Today Team, News Wiz Schools"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
-<link href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/reset.css" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/style.css" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/swiper.min.css" type="text/css">
-<link rel="stylesheet" href="/staticpages/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
+<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/reset.css" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/style.css" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/swiper.min.css" type="text/css">
+<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
  var zmt_mtag;
@@ -57,7 +57,7 @@ function zd_get_placements(){
   ga('send', 'pageview');
 
 </script>
-<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/sitejs.js" type="text/javascript"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/sitejs.js" type="text/javascript"></script>
 <style type="text/css">
 .top_area { height:auto !important; padding-bottom:0px;}
 .news_date { margin-top:50px; float:left;}
@@ -87,7 +87,7 @@ function zd_get_placements(){
 .top_man_area img { /*width:100%*/}
 .top_dated_area img.pic_mob { display:none}
 .support-team{display:block; margin:10px 0 22px;}
-.support-team h2{margin: 0px 0 10px 0; padding: 12px 0 7px 12px; background: url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/support-bg.png) no-repeat;
+.support-team h2{margin: 0px 0 10px 0; padding: 12px 0 7px 12px; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/support-bg.png) no-repeat;
 font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .support-team .support-slider{float:left; width:100%; background-color:#fff; padding:12px 0 0 0; overflow:hidden; position:relative; margin-bottom:30px;}
 .support-team .support-slider ul{list-style:none; margin:0; padding:0; position:relative; overflow:hidden} 
@@ -107,7 +107,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .arrow_box:after, .arrow_box:before {top: 100%;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;}
 .arrow_box:after {border-color: rgba(255, 255, 255, 0);border-top-color: #fff;border-width: 5px;margin-left: -5px;}
 .arrow_box:before {border-color: rgba(166, 179, 188, 0);border-top-color: #a6b3bc;border-width: 7px;margin-left: -7px;}
-.vote-btn{background:url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0; width:125px; height:33px; display:block; margin:0 auto; margin-top:25px;}
+.vote-btn{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/vote-btn.png) no-repeat 0 0; width:125px; height:33px; display:block; margin:0 auto; margin-top:25px;}
 .vote-done-msg{background-color:#fff; width:470px; position:absolute; top:50%; left:50%; margin-left:-235px; z-index:2; padding:15px 0; display:none;}
 .vote-done-msg p{ font:15px/20px 'Roboto',sans-serif; color:#000; text-align:center; display:block; padding:0 0 0 25%; box-sizing:border-box; min-height:auto;}
 .overlay{position:fixed; background-color:rgba(0,0,0,0.7); width:100%; height:100%; z-index:1; display:none;}
@@ -116,11 +116,11 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .slider-year ul{ position:relative; margin:0; padding:0;}
 .timeline-slider ul li{ list-style:none; display:inline-block; float:left;}
 .timeline-slider ul li{ color:#fff; width:320px; float:left; }
-.right_side h2 {margin: 0px 0 10px 0;padding: 12px 0 7px 12px;background: url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/text-bg.png) no-repeat;font-size: 20px;line-height: 34px;color: #fff;text-transform: uppercase;}
+.right_side h2 {margin: 0px 0 10px 0;padding: 12px 0 7px 12px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/text-bg.png) no-repeat;font-size: 20px;line-height: 34px;color: #fff;text-transform: uppercase;}
 .right_side h2 a{color:#fff;}
 .right_side h2 a span{color:#fff; text-decoration:none;}
-#next{background: rgba(0, 0, 0, 0) url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/like-dislike-sprite.png) no-repeat scroll -19px -90px;height: 19px;text-indent: -99999px;width: 22px;opacity: 1;top: -45px;right: 12px;position:absolute;top:-58px;}
-#pre {background: url(/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/like-dislike-sprite.png) no-repeat scroll 0 -90px;height: 19px;text-indent: -99999px;width: 19px;opacity: 1;top: -45px;right: 43px;left: inherit;position:absolute;top:-58px;}
+#next{background: rgba(0, 0, 0, 0) url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/like-dislike-sprite.png) no-repeat scroll -19px -90px;height: 19px;text-indent: -99999px;width: 22px;opacity: 1;top: -45px;right: 12px;position:absolute;top:-58px;}
+#pre {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/like-dislike-sprite.png) no-repeat scroll 0 -90px;height: 19px;text-indent: -99999px;width: 19px;opacity: 1;top: -45px;right: 43px;left: inherit;position:absolute;top:-58px;}
 .middle_quiz { padding:0px;}
 .top_area { height:auto !important; padding-bottom:0px;}
 .news_date { margin-top:50px; float:left;}
@@ -232,14 +232,14 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2	 col-xs-12">
           <div class="logo_new">
-            <h1><a href="index.html"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
+            <h1><a href="index.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <div class="top_dated_area"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/top-dated.png" alt="" class="pic_destop"> <img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/top-dated-mob.png" alt="" class="pic_mob"></div>
+          <div class="top_dated_area"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/top-dated.png" alt="" class="pic_destop"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/top-dated-mob.png" alt="" class="pic_mob"></div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 hidden-xs">
-          <div class="top_man_area"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/new-top-pic.png" alt=""></div>
+          <div class="top_man_area"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-top-pic.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -273,25 +273,25 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                   <h2><a href="show-question.html" title="Show Question">Show Question</a></h2>
                 </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
+                <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
               </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
+                <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
               </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
+                <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
               </div>
               <!--<div class="swiper-slide comicon">
-                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
+                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
                 </div> -->
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <ul class="social">
-            <li><a href="http://www.facebook.com/indiatoday" title="facebook"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-            <li><a href="http://www.twitter.com/indiatoday" title="twitter"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-            <li><a href="http://www.google.com/+indiatoday" title="gplus"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+            <li><a href="http://www.facebook.com/indiatoday" title="facebook"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+            <li><a href="http://www.twitter.com/indiatoday" title="twitter"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+            <li><a href="http://www.google.com/+indiatoday" title="gplus"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
             <!--<li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss"><img src="newimages/rss.png" alt="rss"></a></li> -->
           </ul>
         </div>
@@ -317,7 +317,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="/staticpages/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
+        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
       </div>
     </div>
   </div>
@@ -348,13 +348,13 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                   <div class="presen_area">
                     <h4>Presented By </h4>
                     <div class="presen_logo">
-                      <!--<img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
+                      <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
                     </div>
                   </div>
                  <div class="middle_quiz" style="box-shadow:none"> 
-                  <div class="banner_sec marginbtm10"> <a href="/newswiz/show-question.html" title=""> <img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
+                  <div class="banner_sec marginbtm10"> <a href="/newswiz/show-question.html" title=""> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
                   
-                  <!--<div class="banner_sec"><a href="/newswiz/show-question.html" title=""> <img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/Mohen-Jo-Daro-banner.gif" alt=""></a></div>-->
+                  <!--<div class="banner_sec"><a href="/newswiz/show-question.html" title=""> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/Mohen-Jo-Daro-banner.gif" alt=""></a></div>-->
                   
                    </div>
                 </div>
@@ -364,24 +364,24 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                   <div class="presen_area">
                     <h4>Presented By </h4>
                     <div class="presen_logo">
-                      <!--<img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
+                      <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
                     </div>
                   </div>
-                                  <!--<div class="middle_quiz"> <a href="question-of-the-day.html"> <img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/rhs-banner2.jpg" alt=""></a> </div>-->
+                                  <!--<div class="middle_quiz"> <a href="question-of-the-day.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rhs-banner2.jpg" alt=""></a> </div>-->
                   <div class="timeline-slider">
                     <div class="timeline-outer"> <a href="javascript:void(0);" id="pre">pre</a> <a href="javascript:void(0);" id="next">next</a>
                       <div class="slider-year">
                         <ul>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
                                 <p>Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra</p>
                                 </a> </div>
                             </div>
                         </li>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="/staticpages/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
                                 <p>Watch this all-rounder genius girl make Rajdeep dance</p>
                                 </a> </div>
                             </div>
@@ -391,7 +391,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g0xp3qm8" title="News Wiz goes to Tagore International School, Delhi">
                               <span class="icon_video_newswiz"></span>
-                                <img src="/staticpages/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz goes to Tagore International School, Delhi</p>
                                 </a> </div>
                             </div>
@@ -400,7 +400,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074osio" title="News Wiz gets its own rap song">
                               <span class="icon_video_newswiz"></span>
-                                <img src="/staticpages/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
+                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz gets its own rap song</p>
                                 </a> </div>
                             </div>
@@ -409,7 +409,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b0q7z4" title="Rapid fire with Jacqueline Fernandez on New Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
-        <img src="/staticpages/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
         <p>Rapid fire with Jacqueline Fernandez on New Wiz</p>
         </a> </div>
     </div>
@@ -418,7 +418,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b1yznk" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
-        <img src="/staticpages/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
         <p>Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz</p>
         </a> </div>
     </div>
@@ -427,7 +427,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ariq9xxc" title="">
         <!--<span class="icon_video_newswiz"></span>-->
-        <img src="/staticpages/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
         <p>India's first News Quiz Show with 'Sultan' Salman Khan</p>
         </a></div>
     </div>
@@ -436,7 +436,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82mib40" title="">
         <!--<span class="icon_video_newswiz"></span>-->
-        <img src="/staticpages/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
         <p>News is knowledge, knowledge is news: Get ready for India Today News Wiz</p>
         </a></div>
     </div>
@@ -445,7 +445,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minnk" title="">
         <!--<span class="icon_video_newswiz"></span>-->
-        <img src="/staticpages/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
         <p>Newswiz, India's biggest news quiz: Anil Kapoor</p>
         </a></div>
     </div>
@@ -454,7 +454,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minog" title="">
         <!--<span class="icon_video_newswiz"></span>-->
-        <img src="/staticpages/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
         <p>Are brains better than brawn? Salman Khan will tell you this Sunday</p>
         </a></div>
     </div>
@@ -463,7 +463,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="video_episode_snippets">
       <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minpc" title="">
         <!--<span class="icon_video_newswiz"></span>-->
-        <img src="/staticpages/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
+        <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
         <p>Losing and Winning with the mind, with Sultan Salman Khan</p>
         </a></div>
     </div>
@@ -494,7 +494,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                   <div class="presen_area">
                     <h4>Presented By </h4>
                     <div class="presen_logo">
-                      <!--<img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
+                      <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
                     </div>
                   </div>
                   <div class="tally_info" > <a class="twitter-timeline"  href="https://twitter.com/hashtag/NewsWiz" data-widget-id="744886705870667776">#NewsWiz Tweets</a>
@@ -513,7 +513,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="auth_newswiz"> <span class="img-stroke"></span>
-          <div class="circular_win"> <img src="/staticpages/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
+          <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
           <div class="header_win">RAJDEEP SARDESAI</div>
           <div class="container_wiz">
             <p> News and Quiz come together in a fantastic battle of brains. Rajdeep Sardesai who has spent his life in news will be at the helm of the first-of-its-kind quiz show - NewsWiz. There is no one better equipped than Rajdeep to host such a show considering that he has spent 26 years reporting, editing and anchoring news. </p>
@@ -522,7 +522,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="auth_newswiz"> <span class="img-stroke"></span>
-          <div class="circular_win"> <img src="/staticpages/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
+          <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
           <div class="header_win">SIDDHARTHA BASU </div>
           <div class="container_wiz">
             <p>Basu is the undisputed quiz man of India. He is the pioneer who hosted and produced the iconic Quiz Time on Doordarshan and also produced the marquee Kaun Banega Crorepati. He has been the mind behind Mastermind India, University Challenge and India's Child Genius. Now for the first time on news television in India, he is bringing a news-based quiz show.</p>
@@ -559,25 +559,25 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                 <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
+                <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
               </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
+                <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
               </div>
               <div class="swiper-slide comicon">
-                <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
+                <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
               </div>
               <!--<div class="swiper-slide comicon">
-                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
+                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
                 </div> -->
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <ul class="social">
-            <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-            <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-            <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+            <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+            <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+            <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
             <!--<li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="newimages/rss.png" alt="rss"></a></li> -->
           </ul>
         </div>
@@ -604,8 +604,8 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
             <div class="foot_partner">
               <h3>Partners</h3>
               <ul>
-                <li class="big_logo"><img alt="" src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
-                <li class="tree_logo"><img alt="" src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
+                <li class="big_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
+                <li class="tree_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
               </ul>
             </div>
             <!--end footer sponser -->
@@ -736,10 +736,10 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   <iframe id="videoplayer" width="700px" height="550px" frameborder="0" allowfullscreen="" src=""></iframe>
 </div>
 <!-- jQuery Bootstrap-->
-<script src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script>
 <!-- Swiper JS -->
-<!--<script src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>-->
-<script type="text/javascript" src="/staticpages/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
+<!--<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>-->
+<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){

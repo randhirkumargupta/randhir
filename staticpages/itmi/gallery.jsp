@@ -31,7 +31,7 @@
     <meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
     <meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
     <link href="css/style.css" rel="stylesheet" />
-    <script src="/staticpages/mediaintoday/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
+    <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
             $('.search').click(function(){
@@ -60,26 +60,26 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="topheader">
   <div class="wrapper"> 
-    <!--<img border="0" alt="" src="/staticpages/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
+    <!--<img border="0" alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
     <ul>
-      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
+      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
+<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
+      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
+      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
+      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
+      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
+      <li><a href="http://oyefm.in/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
 <div class="bottomheader">    
   <div class="wrapper">
-    <div class="logo"> <a href="index.jsp"><img src=" /staticpages/mediaintoday/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
-      <!--<a href="index.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
+    <div class="logo"> <a href="index.jsp"><img src=" http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
+      <!--<a href="index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
     </div>
     <div class="bottomleft"> 
-      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
+      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
                     <p>28 top companies go on campus recritment drive this fall</p>--> 
       
       	
@@ -89,8 +89,8 @@ ul.navbar li a {padding: 8px 17px;}
         
         </div>
         
-      <!--<img src="/staticpages/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
+      <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
+    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
   </div>
   <div class="searchBoxs">
     <div class="search-engin">
@@ -175,19 +175,19 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="bannerBox">
 <div id="social-area">
-	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
-    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
+	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
+    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
+    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
 </div>
           <div class="belt">
                 <ul>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
                 </ul>
                 <div class="text-banner"><h1>INDIA TODAY MEDIA INSTITUTE</h1></div>
             </div>
@@ -285,129 +285,129 @@ $(document).ready(function(e) {
 
 <body>
 <div class="accordion">
-  <h2><a href=""><span>A guest session with our very own Mr Rajdeep Sardesai, Consulting Editor, TV Today Network, on "Media of the future: How long will the nosy, noisy, eyeballs-catchy era last?" </span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+  <h2><a href=""><span>A guest session with our very own Mr Rajdeep Sardesai, Consulting Editor, TV Today Network, on "Media of the future: How long will the nosy, noisy, eyeballs-catchy era last?" </span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/1.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/2.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/3.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/4.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/5.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/1.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/2.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/3.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/4.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/5.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-  <h2><a href=""><span>A learning session on Critical factors for a modern TV reporter by ENBA award holder Mr. Punya Prasun Bajpai, Executive Editor, Aaj Tak channel</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+  <h2><a href=""><span>A learning session on Critical factors for a modern TV reporter by ENBA award holder Mr. Punya Prasun Bajpai, Executive Editor, Aaj Tak channel</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/6.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/7.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/6.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/7.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>A session on Entrepreneurship conducted by Ms. Kiran Bhat, owner, Xebec Communications (ad-PR, online company)</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>A session on Entrepreneurship conducted by Ms. Kiran Bhat, owner, Xebec Communications (ad-PR, online company)</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/8.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/9.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/10.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/11.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/8.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/9.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/10.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/11.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
     <h2><a href=""><span>A session on Scope for Communication students in IT field with Mr Gopalakrishna GSS, Country Head, Tata Consultancy Services (TCS)</span>
-    <img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/12.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/13.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/14.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/12.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/13.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/14.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>A session on the recent Supreme Court verdict on coal block allocations, conducted by Ms. Priyal Guliani Bhattacharya, Associate Editor and Anchor, Bloomberg TV (and expert on coal sector)</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>A session on the recent Supreme Court verdict on coal block allocations, conducted by Ms. Priyal Guliani Bhattacharya, Associate Editor and Anchor, Bloomberg TV (and expert on coal sector)</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/15.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/16.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/17.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/18.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/15.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/16.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/17.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/18.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>A session with Mr Madhukar Upadhyay, renowned BBC journalist who repeated Gandhi's Dandi March on foot for a BBC documentary on Radio as a tool of mass communication</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>A session with Mr Madhukar Upadhyay, renowned BBC journalist who repeated Gandhi's Dandi March on foot for a BBC documentary on Radio as a tool of mass communication</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/19.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/20.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/21.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/19.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/20.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/21.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>A special address for ITMI trainees by Mr. Richard Stengel, Under Secretary of State for Public Affairs and Public Diplomacy</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>A special address for ITMI trainees by Mr. Richard Stengel, Under Secretary of State for Public Affairs and Public Diplomacy</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/22.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/23.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/24.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/25.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/26.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/27.jpg"  /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/28.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/22.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/23.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/24.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/25.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/26.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/27.jpg"  /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/28.jpg"  /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>Another Brainstorming and awakening session by Amnesty International India on the topic- TAKE INJUSTICE PERSONALLY Campaign and Report</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>Another Brainstorming and awakening session by Amnesty International India on the topic- TAKE INJUSTICE PERSONALLY Campaign and Report</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/29.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/30.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/31.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/32.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/33.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/34.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/29.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/30.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/31.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/32.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/33.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/34.jpg" /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>Another interesting session with Ms. Yogita Kaul, Head HR  International Business Partner Asia Pacific, British Broadcasting Corp (BBC)</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>Another interesting session with Ms. Yogita Kaul, Head HR  International Business Partner Asia Pacific, British Broadcasting Corp (BBC)</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/35.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/36.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/37.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/38.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/35.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/36.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/37.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/38.jpg" /></li>
     </ul>
     <div class="clr"></div>
   </h3>
     
-    <h2><a href=""><span>Trainees learning the nuances of Visual Communication through Clay Modeling workshop conducted by Mr. Neerajj Mittra, Senior Visual Artist</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>Trainees learning the nuances of Visual Communication through Clay Modeling workshop conducted by Mr. Neerajj Mittra, Senior Visual Artist</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/46.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/47.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/48.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/46.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/47.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/48.jpg" /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>Workshop on Brand Management conducted by Mr. Manosh Sengupta, Brand Guru</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>Workshop on Brand Management conducted by Mr. Manosh Sengupta, Brand Guru</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/49.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/50.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/51.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/52.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/49.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/50.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/51.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/52.jpg" /></li>
     </ul>
     <div class="clr"></div>
   </h3>
-    <h2><a href=""><span>Campus Gallery</span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
+    <h2><a href=""><span>Campus Gallery</span><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
     <ul class="list-image">
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/39.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/40.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/41.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/42.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/43.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/44.jpg" /></li>
-      <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/gallery/45.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/39.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/40.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/41.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/42.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/43.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/44.jpg" /></li>
+      <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/gallery/45.jpg" /></li>
     </ul>
     <div class="clr"></div>
   </h3>  
@@ -422,7 +422,7 @@ $(document).ready(function(e) {
 
               
             <iframe src="http://subscriptions.intoday.in/subscriptions/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
-            <img src="/staticpages/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
                 
 </div>
     
@@ -458,7 +458,7 @@ $(document).ready(function(e) {
 <!--
 
 <div id="footer-add">
-	<img src="/staticpages/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
+	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
 </div>
 
 <div class="copyright">
