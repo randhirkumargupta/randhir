@@ -1088,13 +1088,7 @@ function itg_videogallery_menu() {
     'access arguments' => array('authorized user dailymotion credin'),
     'type' => MENU_CALLBACK,
   );
-  $items['solrindex-entity'] = array(
-    'title' => 'Solr Index Entity  Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_videogallery_solr_index_entity_form'),
-    'access arguments' => array('authorized user dailymotion credin'),
-    'file' => 'includes/itg_videogallery.inc',
-  );
+  
   $items['dailymotion/ftp/config'] = array(
     'title' => 'Ftp Configuration',
     'page callback' => 'drupal_get_form',
@@ -3383,7 +3377,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
           '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
       );
       $result['id'] = end(explode('/', $dur['embed_url']));
-      $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
+     // $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
       $result['duration'] = $dur['duration'];
       $result['name'] = $file_name;
 
@@ -3660,7 +3654,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
         '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
     );
     $result['id'] = end(explode('/', $dur['embed_url']));
-    $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
+ //   $resp = $api->post('/playlist/x4u3b1/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
     $result['encoding_progress'] = $dur['encoding_progress'];
     $result['publishing_progress'] = $dur['publishing_progress'];

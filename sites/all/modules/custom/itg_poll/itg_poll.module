@@ -402,6 +402,7 @@ function itg_poll_form_ajax_submit($form , &$form_state) {
     'display_result' => $dsp_result ,
     'created' => $created))->execute();
   if ($user->uid > 0 && function_exists('itg_loyalty_reward_earnpoint')) {
+    watchdog('poll_earn_point', $node_id);
     itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
   }
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
@@ -952,6 +953,11 @@ function itg_poll_form_home_page_ajax_submit($form , &$form_state) {
       'uId' => $user->uid ,
       'display_result' => $dsp_result ,
       'created' => $created))->execute();
+  // code for loyality points  
+  if ($user->uid > 0 && function_exists('itg_loyalty_reward_earnpoint')) {
+    watchdog('poll_earn_point', $node_id);
+    itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+  }
   }
   catch (Exception $e) {
     watchdog('Error while entry in itg_polls' , $e->getMessage());
