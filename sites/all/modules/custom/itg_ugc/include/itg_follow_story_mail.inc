@@ -8,7 +8,8 @@ function itg_follow_story_get_mail_content($node) {
   
   global $base_url;
   $uname = user_load($node->uid);
-  $story_url = url('node/' . $node->nid, array('absolute' => TRUE));
+//  $story_url = url('node/' . $node->nid, array('absolute' => TRUE));
+  $story_url = l($node->title, FRONT_URL . '/node/' . $node->nid, array('absolute' => TRUE));
   
   if (function_exists('itg_mail_templates_get_mailcontent')) {
     $mail_data = itg_mail_templates_get_mailcontent($node, 'Follow Story');

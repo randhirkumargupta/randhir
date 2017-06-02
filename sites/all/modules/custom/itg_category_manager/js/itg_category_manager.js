@@ -64,12 +64,17 @@
           $('#edit-field-set-as-featured-cate-und-yes').prop('checked', false);
           $('#edit-field-set-as-featured-cate').hide();
           $('#edit-field-cm-select-type-und').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-special').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-section').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-none').attr('disabled', true);
           $('#edit-field-cm-select-type-und').removeAttr('required');
         } else {
           jQuery('#edit-field-set-as-featured-cate').show();
           $('#edit-field-cm-select-type-und').attr('disabled', false);
           $('#edit-field-cm-select-type-und').attr('required', 'required');
-
+$('#edit-field-cm-select-template-type-und-special').attr('disabled', false);
+          $('#edit-field-cm-select-template-type-und-section').attr('disabled', false);
+          $('#edit-field-cm-select-template-type-und-none').attr('disabled', false);
         }
       })
 
@@ -138,7 +143,7 @@
       jQuery('#edit-field-user-name').remove();
       jQuery('.text-format-wrapper').remove();
       jQuery("#edit-field-user-city").after(getsechedulehtml);
-      
+
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var d = new Date();

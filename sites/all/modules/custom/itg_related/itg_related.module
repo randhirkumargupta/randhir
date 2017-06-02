@@ -246,8 +246,11 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
     // case if arg(1) contain either type or date
     if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
+      $dat_1_day_ago = date('Y-m-d');
+      $date_val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
       $str = 'bundle_name:(' . $arg[1] . ') AND ';
-      $str .= 'hash:(' . $hash . ')';
+      $str .= 'hash:(' . $hash . ') AND ';
+      $str .= 'ds_created:(' . $date_val_str . ')';
     }
 
     if (!empty($arg[1]) && !in_array($arg[1], $ctype_tab)) {
