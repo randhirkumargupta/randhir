@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IndiaToday</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900" rel="stylesheet">
+<style>
+body { padding:0px; margin:0;}
+.spritbg {background-image: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png");}
+.spical-footer{ font-family:roboto;}
+.below-footer_h, .footer-main-wrapper {z-index: 10;}
+.below-footer_h { background: #0d0d0d none repeat scroll 0 0;overflow: hidden;width: 100%;}
+.new_nav {background: #191718 none repeat scroll 0 0;clear: both;width: 100%;}
+.new_nav ul { margin: 0 auto;width: 1003px; padding:0;}
+.new_nav ul li { color: #ffffff; float: left;font-family: roboto;list-style: outside none none; padding: 10px 12px;text-transform: uppercase; font-size:16px;}
+.new_nav ul li a {color: #ffffff;text-decoration: none;}
+.footer-main-wrapper {background: #0d0d0d none repeat scroll 0 0; width: 100%;} .below-footer_h {background: #0d0d0d none repeat scroll 0 0; overflow: hidden; width: 100%;}.footer_cnt_h {width: 100%;} .footer_ads_h, .footer_lnk_m {margin: 0 auto; width: 1003px;}.ft_lnks_h { float: left; padding-left:5px; margin-right: 6px; width: 128px;} .footer_lnk_m h3 { color: #888888; font-size: 14px; margin: 10px 0;text-transform: uppercase;}.footer_lnk_m ul, .middle_center_h .m_cont ul, .nav_bar ul, .nav_bar2 ul {list-style-type: none;margin: 0; padding: 0;}.footer_lnk_m ul li {display: block;line-height: 14px;margin-top: 10px;}.footer_lnk_m ul li a {color: #494949;font-size: 12px;text-decoration: none;z-index: 1;} #copyrights { border-top: 1px solid #000000;color: #333333;float: left;    font-size: 12px;margin-top: 15px;padding: 10px 0; text-align: center; width: 100%;}#copyrights a {color: #333333;font-size: 12px;text-decoration: none;}.below-footer_h.ads_f {background: #000000 none repeat scroll 0 0;padding: 15px 0;}.below-footer_h, .below-footer_h, .footer-main-wrapper {z-index: 10;}.below-footer_h {background: #0d0d0d none repeat scroll 0 0; overflow: hidden; width: 100%;}.ads_f {background: #000000 none repeat scroll 0 0; border: 0 none;}.footer_right_h {float: right; width: 250px;
+}.socials_footer_links_h {margin-top: 20px;}.socials_footer_links_h ul {list-style-type: none; margin: 0; padding: 0;}.socials_footer_links_h ul li {float: left;margin-right: 10px;}
+.socials_footer_links_h ul li .fb_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -226px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .fb_h:hover { background-position: -226px -238px;}
+.socials_footer_links_h ul li .tw_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -265px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .tw_h:hover { background-position: -265px -238px;}
+.socials_footer_links_h ul li .gp_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -320px -188px; height: 45px;transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .gp_h:hover { background-position: -320px -238px;}
+.socials_footer_links_h ul li .rss_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -375px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .rss_h:hover { background-position: -375px -238px;}
+.socials_footer_links_h ul li .mbl_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -428px -184px; height: 45px; margin-top: -5px; transition: background-position 0.2s ease-in 0s;    width: 40px;}.footer_left_h { float: left;width:730px;}.socials_footer_links_h ul li .mbl_h:hover {background-position: -428px -230px;}
+a#footerprev, a#footernext{ display:none;}
+.mob{display:none;}
+.footer_lnk_m ul li a strong{ font-weight:900 !important;}
+
+@media screen and (max-width :800px){
+.new_nav ul li{padding: 10px 0 10px 11px;}
+a#footerprev, a#footernext{ display:block; position:absolute; top:85px;}
+a#mobfooterprev, a#mobfooternext{ display:block; position:absolute; top:85px;}
+.new_nav ul li {font-size:14px;}
+.footer_cnt_h{ position:relative; overflow:hidden; width:720px; margin:0 auto;}
+.footer_lnk_m, .below-footer_h{ position:relative;}
+.below-footer_h a#footernext {background-position: -210px -368px; display: block; height: 58px; right: 1px; text-indent: -999999px; width: 37px;}
+.below-footer_h a#footerprev {background-position: -171px -368px; display: block; height: 58px; left: -2px; text-indent: -999999px; width: 37px;}
+.below-footer_h a#mobfooternext {background-position: -210px -368px; display: block; height: 58px; right: 1px; text-indent: -999999px; width: 37px;}
+.below-footer_h a#mobfooterprev {background-position: -171px -368px; display: block; height: 58px; left: -2px; text-indent: -999999px; width: 37px;}
+
+.mob{display:none;}
+.ipad{display:block;}
+.footer_right_h{margin-left:27%; clear:left; float:left;}
+}
+
+@media screen and (max-width :480px){
+.mob{display:block;}
+.ipad{display:none;}
+.new_nav ul{width:100%;}
+.below-footer_h.ads_f{display:none;}
+.new_nav ul li{padding:2px 0 2px 9px; font-size:12px;}
+#copyrights{text-align:left;}
+#copyrights a{float:left; clear:left; width:100%;}
+
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 640px) and (orientation:landscape){
+
+.below-footer_h.ads_f{display:none !important;}
+.footer_cnt_h{width:100%;}
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 640px) and (orientation:portrait ){
+
+.below-footer_h.ads_f{display:none !important;}
+.footer_cnt_h{width:100%;}
+}
+
+@media (max-width: 640px) and (min-width:320px){
+.new_nav ul li {font-size:11px; padding:5px 0 5px 5px;}
+
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function(){
+if($(window).width() < 801){
+var footerlen  = $('.footer_lnk_m .ft_lnks_h').length;
+var footerwidth = $('.footer_lnk_m .ft_lnks_h').outerWidth();
+var footerwidth = footerlen*(footerwidth+6);
+$('.footer_lnk_m').css('width', footerwidth);
+//alert(footerlen);
+var footercountersipad = 1;
+$('#footernext').click(function(){
+if(footercountersipad < footerlen-4)
+{$('.footer_lnk_m').animate({left : '-=144'});
+footercountersipad +=1;
+$('#footerprev').css('display', 'block');
+}
+else{
+$('#footernext').css('display', 'none');
+}
+});	
+$('#footerprev').click(function(){
+if(footercountersipad == 1)
+{
+//$('#photoprev').css('display', 'none');
+$('#footerprev').css('display', 'none');
+$('#footernext').css('display', 'block');
+}
+else{
+$('.footer_lnk_m').animate({
+left : '+=144'
+});
+footercountersipad -= 1;
+$('#footernext').css('display', 'none');
+//$('#ipadphoto-next').css('display', 'block');
+		}
+	});
+
+	}	 
+	if($(window).width() <= 480){
+		
+var footerlen  = $('.footer_lnk_m .ft_lnks_h').length;
+var footerwidth = $('.footer_lnk_m .ft_lnks_h').width();
+var footerwidth = footerlen*(footerwidth+20);
+$('.footer_lnk_m').css('width', footerwidth);
+//alert(footerlen);
+var footercountersmob = 1;
+$('#mobfooternext').click(function(){
+if(footercountersmob < footerlen)
+{$('.footer_lnk_m').animate({left : '-=138'});
+footercountersmob +=1;
+$('#mobfooterprev').css('display', 'block');
+}
+else{
+//$('#mobfooternext').css('display', 'none');
+}
+});	
+$('#mobfooterprev').click(function(){
+if(footercountersmob == 1)
+{
+//$('#photoprev').css('display', 'none');
+//$('#mobfooterprev').css('display', 'none');
+$('#mobfooternext').css('display', 'block');
+}
+else{
+$('.footer_lnk_m').animate({
+left : '+=138'
+});
+footercountersmob -= 1;
+//$('#mobfooternext').css('display', 'none');
+//$('#ipadphoto-next').css('display', 'block');
+		}
+	});
+
+	} 
+			  
+});
+
+
+
+
+
+</script>
+</head>
+<body>
+
+<div class="spical-footer">
+  <div class="below-footer_h">
+    <div class="new_nav">
+      <ul>
+        <li><a href="http://indiatoday.intoday.in/news.html" target="_blank">NEWS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" target="_blank">INDIA</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/113/1/world.html" target="_blank">WORLD</a></li>
+        <li><a href="http://indiatoday.intoday.in/galleries" target="_blank">PHOTOS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" target="_blank">CRICKET</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/67/1/movies.html" target="_blank">MOVIES</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/230/1/auto.html" target="_blank">AUTO</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/84/1/sports.html" target="_blank">SPORTS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" target="_blank">LIFESTYLE</a></li>
+        <li><a href="http://indiatoday.intoday.in/technology/" target="_blank">TECH</a></li>
+        <li><a href="http://indiatoday.intoday.in/education/" target="_blank">EDUCATION</a></li>
+        <li><a href="http://businesstoday.intoday.in/" target="_blank">BUSINESS</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="below-footer_h ads_f">
+    <div class="footer_ads_h" >
+      <div class="footer_left_h"> 
+        <!-- begin ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+        <script type="text/javascript">
+				var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+				</script> 
+        <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script> 
+        <!-- end ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+      </div>
+      <div class="footer_right_h">
+        <div class="socials_footer_links_h">
+          <ul>
+            <li><a href="http://www.facebook.com/indiatoday" target="_blank">
+              <div class="fb_h"></div>
+              </a></li>
+            <li><a href="http://www.twitter.com/indiatoday" target="_blank">
+              <div class="tw_h"></div>
+              </a></li>
+            <li><a href="http://www.google.com/+indiatoday" target="_blank">
+              <div class="gp_h"></div>
+              </a></li>
+            <li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" target="_blank">
+              <div class="rss_h"></div>
+              </a></li>
+            <li><a href="http://m.indiatoday.in/" target="_blank">
+              <div class="mbl_h"></div>
+              </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="footer-main-wrapper">
+    <div class="below-footer_h">
+      <div class="footer_cnt_h">
+        <div class="footer_lnk_m">
+          <div class="ft_lnks_h">
+            <h3>Publications</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.intoday.in">India Today</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://subscriptions.intoday.in/subscriptions/itoday/ith_offer.jsp?source=website">India Today - Hindi</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://businesstoday.intoday.in">Business Today</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://cosmo.intoday.in/cosmopolitan/index.jsp">Cosmopolitan</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://menshealth.intoday.in">Men's Health</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.wonderwoman.in">Wonder Woman</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://moneytoday.intoday.in">Money Today</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://preventionindia.in/issue.html">Prevention</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.rd-india.com/newsite/home/home.asp">Reader's Digest</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.indiatodaygroup.com/goodhouse/issue.html">Good Housekeeping</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://subscriptions.digitaltoday.in/subscriptions/time/subscription.html">Time</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.hbrsasia.org">Harvard Business Review</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.gadgetsngizmos.in">Gadgets &amp; Gizmos</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Television</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://aajtak.intoday.in">Aaj Tak</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://aajtak.intoday.in/dilliaajtak/">Delhi Aaj Tak</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://aajtak.intoday.in/tez/">Tez</a></li>
+              <li><a href="http://indiatoday.intoday.in/livetv.jsp" target="_blank"  rel="nofollow">India Today TV</a></li> 
+            </ul>
+            <h3>Radio</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://oyefm.in/">ISHQ 104.8FM</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Education</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.vasantvalley.org/vasantvalley/default.shtml">Vasant Valley</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://learntoday.in/">Online Courses</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://ulearntoday.com">U Learn Today</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://education.intoday.in/">India Today Education</a></li>
+            </ul>
+            <h3>Online Shopping</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.bagittoday.com/">Bag It Today</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.indiatodaydiaries.com/">India Today Diaries</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Events</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://aajtak.intoday.in/agenda-aajtak/">Agenda Aajtak</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.indiatodayconclave.com">India Today Conclave</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.in/womansummit/index.php">India Today Woman's Summit</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://www.indiatoday.in/youthsummit">India Today Youth Summit</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.intoday.in/state-of-the-states/">State Of The States Conclave</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.intoday.in/educationsummit/">India Today Education Summit</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Printing</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.thomsonpress.com">Thomson Press</a></li>
+            </ul>
+            <h3> Welfare</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.caretoday.in">Care Today</a></li>
+            </ul>
+            <h3> Music</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.music-today.com">Music Today</a></li>
+            </ul>
+            <h3>Distribution</h3>
+  <ul>
+     <li> <a href="http://indiatoday.intoday.in/distribution/index.jsp" target="_blank"  rel="nofollow">Rate Card</a></li>
+     <li> <a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank"  rel="nofollow">DAS Application form</a></li>
+      <li> <a href="http://indiatoday.intoday.in/distribution/das_phase_three.jsp" target="_blank"  rel="nofollow">Contact persons for DAS phase III</a></li>
+  </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3> Syndications</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.indiatodayimages.com/">India Today Images</a></li>
+            </ul>            
+            <h3> Useful Links</h3>
+            <ul>
+              <li><a target="_blank"  rel="nofollow" href="http://www.dailyo.in/">DailyO</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.intoday.in/site/partners.jsp">Partners</a></li>
+              <li><a target="_blank"  rel="nofollow" href="http://indiatoday.intoday.in/prnewswire/index.jsp"><strong>Press Release</strong></a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="copyrights">Copyright &copy; 2015 Living Media India Limited. For reprint rights: <a target="_blank"  rel="nofollow" href="http://www.syndicationstoday.com/">Syndications Today.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </div>
+      <div class="ipad"><a href="javascript:void(0);" id="footerprev" class="spritbg ipad">Prev</a> <a href="javascript:void(0);" id="footernext" class="spritbg ipad">Next</a> </div>
+      <div class="mob"><a href="javascript:void(0);" id="mobfooterprev" class="spritbg mob">Prev</a> <a href="javascript:void(0);" id="mobfooternext" class="spritbg mob">Next</a> </div>
+      </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+</body>
+</html>

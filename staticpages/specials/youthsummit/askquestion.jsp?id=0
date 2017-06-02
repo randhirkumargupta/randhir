@@ -1,0 +1,407 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+	<head>
+    <script type="text/javascript">
+    
+	function cemail(val){
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val.value)){
+		return (true)
+		}
+		return false;
+		}
+	
+    function ajaxFunction(){
+		var frm=document.feedback;
+		if(frm.FNAME.value=="")
+		{
+		  alert("Please enter First Name");
+		  frm.FNAME.focus();
+		  return false;
+		}
+
+		if (frm.FNAME.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.FNAME.value.length;i++){
+							temp=frm.FNAME.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("First name should accept only alphabets[a-z,A-Z]");
+								frm.FNAME.focus();
+								return false;
+							}
+						}
+		    	}
+		
+
+		if(frm.EMAIL.value=="")
+		{
+		  alert("Please enter Email Id");
+		  frm.EMAIL.focus();
+		  return false;
+		}
+		if(cemail(frm.EMAIL)==false)
+			{
+					alert( "Please enter valid email ID" );
+					frm.EMAIL.focus();
+					return false;
+			}
+
+	 
+		if(frm.Location.value=="")
+		{
+		  alert("Please enter city");
+		  frm.Location.focus();
+		  return false;
+		}
+		if (frm.Location.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.Location.value.length;i++){
+							temp=frm.Location.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("City should accept only alphabets[a-z,A-Z]");
+								frm.Location.focus();
+								return false;
+							}
+						}
+		}
+		
+		 if(frm.number.value=="")
+			{
+				alert( "Please Enter the  Code" );	
+				frm.number.focus();
+				return false;
+			} 
+		frm.submit();
+}
+    
+    </script>
+  	<meta http-equiv="X-UA-Compatible" content="IE=9" /> 
+    <title>India Today Youth Summit 2011 - Mind Rocks</title>
+    <meta name="description" content="India Today Youth Summit 2011 will be held on Saturday, September 17 at New Delhi. Kumar Mangalam Birla, Abhinav Bindra, Chetan Bhagat, Kiran Rao, Ranbir Kapoor, Kalikesh Deo, Subodh Gupta, Divya Narendra, Zarina Mehta, Kiran Bedi, among other Indian youth idols to discuss issues that matter to you" />
+    <meta name="keywords" content="India Today Youth Summit 2011, Mind Rocks, Youth summit of India Today, Youth Summit, conference for youth in India, Kumar Mangalam Birla, Abhinav Bindra, Chetan Bhagat, Kiran Rao, Ranbir Kapoor, Kalikesh Deo, Subodh Gupta, Divya Narendra, Zarina Mehta, Kiran Bedi, Videos, Images, Live, youth India" />
+    <link type="text/css" rel="stylesheet" href="/specials/youthsummit/css/session.css">
+    <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+    <!--[if IE]>
+      <script src="/staticpages/main/js/html5.js"></script>
+    <![endif]-->
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    </head>
+<body>
+	<div id="maindiv">
+        <header>
+		
+<!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
+    <!--[if IE]>
+      <script src="/js/html5.js"></script>
+    <![endif]-->
+<link rel="shortcut icon" href="/specials/youthsummit/images/MR_favicon1.ico" />
+<link type="text/css" rel="stylesheet" href="/specials/youthsummit/css/session.css">
+<link type="text/css" rel="stylesheet" href="/specials/youthsummit/css/youthsummit2011.css">
+<script src="/staticpages/main/js/sitejs.js" type="text/javascript"></script>
+        <div id="itgd_links">
+            <a href="http://www.indiatodaygroup.com/" target="_blank">INDIA TODAY GROUP:</a>
+            <a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><a href="http://www.indiatoday.in/" target="_blank">India Today</a><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a>
+        </div>
+        <div>
+        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"/></a><br />-->
+            <img src="/staticpages/main/images/ita.jpg" height="83" border="0"/>
+        </div>
+        <div id="banner">
+            <a href="/specials/youthsummit/"><img src="/specials/youthsummit/images/logo.jpg" alt="Youth Smmit" width="155" height="130" border="0" align="left" title="India Today Youth Summit 2011 - Mind Rocks"/></a>
+            <img src="/specials/youthsummit/images/top-banner-trans-black.gif" alt="Youth Smmit" width="600" height="110" border="0" align="absmiddle" title="India Today Youth Summit 2011 - Mind Rocks" class="topbanner"/>
+        
+        </div>
+		<ul id="navigation">
+        	<?php include('navigation.php');?>
+        </ul>
+
+		<!-- Begin comScore Tag -->
+<script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1" />
+</noscript>
+<!-- End comScore Tag -->
+
+<!-- Begin Google Analytics Tag -->
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-795349-17");
+	pageTracker._trackPageview();
+	pageTracker._trackPageLoadTime();
+	} catch(err) {}</script>
+
+<!-- End Google Analytics Tag -->
+
+        </header>
+        <section>
+            <div id="main_content">
+                <div id="main_content_left">
+                	<div style=" font:bold 18px arial; color:#ffffff; padding-left:5px; height:32px; line-height:32px; background-image:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/question.gif); background-repeat:no-repeat; background-position:top-left">Ask Your Question</div>
+                    <section id="left">
+                    <form name="feedback" action="save_comment.jsp" method="post" onsubmit="javascript:return ajaxFunction()">
+                        <table width="500" border="0"  align="center" cellpadding="0" cellspacing="10" id="ask_your_quation" style="font:bold 11px arial; color:#5A5A5A;">
+                         <tr>
+                                <td align="right" valign="top" colspan="2" style="font:bold 14px arial; color:#FF0000;">Inaugural Session - Dreamcatchers: Kumar Mangalam Birla</td>
+                               
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                
+                                <td  align="left" valign="middle" class="td" colspan="2"><input type="hidden" name="Session" value="Inaugural Session - Dreamcatchers: Kumar Mangalam Birla" />
+                                <input type="hidden" name="id" value="0" />
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">Ask Your Question Here:</td>
+                                <td  align="left" valign="middle" class="td"><textarea name="message"></textarea></td>
+                            </tr>
+                            <tr>			
+                                <td width="444" align="right" valign="middle">Name:</td>
+                                <td width="531"  align="left" valign="middle"><input type="text" name="FNAME" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">Email:</td>
+                                <td align="left" valign="middle"><input type="text" name="EMAIL" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">City:</td>
+                                <td align="left" valign="middle" ><input type="text" name="Location" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top" ><i style="color:#FF0000">*</i>&nbsp;Enter The Code Shown:</td>
+                                <td  align="left" valign="middle" class="td"><input type="text" name="number" /> </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td"><img src="img.jsp" /></td>
+                            </tr>
+                            
+                             <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td" style="font:bold 12px arial; color:#FF0000;"></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">&nbsp;</td>
+                                <td align="left" valign="middle"><input name="submit" type="submit" value="Submit" class="send_button"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                    </section>
+				</div>
+                <div id="sidebar">
+    <div class="side_chunk">
+		<a href="/pledge/" target="_blank"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/Banner-on-IT.jpg"></a>
+    </div>
+    <div class="side_chunk">
+		<div class="side_chunk_title" style="margin-bottom:5px; font-size:22px;">
+            Summit <span style="font-weight: 100;">Highlights</span> 
+        </div>
+        <div class="summithighlights">
+        	<div class="shtitle" style="color: #21509E;">Best moments of Youth Summit 2011</div>
+            	<div style="text-align:center; margin:5px auto;"><a href=" http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2012-celebrates-spirit-of-young-indians.html/1/151785.html
+"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mindrock-video-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a><a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html
+"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mindrock-photo-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a></div>
+            	<div class="text" style="line-height:18px;">Watch the best speakers, sessions and highlights from the India Today Mind Rocks Youth Summit 2011 in this special package.</div>
+        </div>
+    </div>
+   <!-- <div class="side_chunk">
+    	<img src="/specials/youthsummit/images/tw.jpg" width="300" height="300" alt="" title="" border="0" align="middle">
+		<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+		<script>
+        new TWTR.Widget({
+          version: 2,
+          type: 'search',
+          search: '#mindrocks',
+          interval: 30000,
+          title: '',
+          subject: 'Buzz on Twitter',
+          width: 300,
+          height: 300,
+          theme: {
+            shell: {
+              background: '#f0f0f0',
+              color: '#db1414'
+            },
+            tweets: {
+              background: '#ffffff',
+              color: '#444444',
+              links: '#1985b5'
+            }
+          },
+          features: {
+            scrollbar: true,
+            loop: true,
+            live: true,
+            hashtags: false,
+            timestamp: true,
+            avatars: true,
+            toptweets: false,
+            behavior: 'default'
+          }
+        }).render().start();
+        </script>
+    </div>-->
+    <div class="side_chunk">
+		<div class="side_chunk_title" style="margin-bottom:5px; font-size:22px;">
+            My Mind Rocks because ... 
+        </div>
+    	<div class="userbytes">
+    <div class="userbytesrow">
+        <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ranbir-6_147.jpg) no-repeat;">
+            <a href="http://indiatoday.intoday.in/video/ranbir-kapoor-at-india-today-mind-rocks-youth-summit-2011.html/1/151707.html" target="_blank"><img src="/specials/youthsummit/images/Bigpic.png" width="147" height="120" alt="" title="" border="0" align="middle"></a>
+        </div>
+        <div class="userbytesrowright">
+            <div class="userbytesrowrighttop">
+                <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bindra_71x58.jpg) no-repeat;">
+                	<a href="http://indiatoday.intoday.in/video/abhinav-bindra-mind-rocks-india-today-youth-summit.html/1/151669.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+                </div>
+                
+                <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/birla_71.jpg) no-repeat;">
+                	<a href="http://indiatoday.intoday.in/video/kumar-mangalam-birla-at-mind-rocks-india-today-youth-summit-2011.html/1/151659.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+                </div>
+                <div class="clear"></div>	
+            </div>
+            <div class="userbytesrowrighttop">
+            	<div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/chetan-1_71.jpg) no-repeat;">
+                	<a href="http://indiatoday.intoday.in/video/chetan-bhagat-at-india-today-mind-rocks-youth-summit-2011.html/1/151680.html"  target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+                </div>
+                <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/kiran-rao_71.jpg) no-repeat;">
+                	<a href="http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2011.html/1/151697.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="userbytesrow">
+        <div class="userbytesrowleft">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/cMIND_ALERTS_2_new_71x58.jpg) no-repeat;">
+                <a href="http://indiatoday.intoday.in/video/chetan-bhagat-india-today-mind-rocks-youth-summit.html/1/151694.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+            </div>
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/yuvi-gauti-8_71.jpg) no-repeat;">
+                <a href="http://indiatoday.intoday.in/video/yuvraj-singh-gautam-gambhir-india-today-mind-rocks-youth-summit-2011.html/1/151686.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+            </div>
+            <div class="clear"></div>	
+        </div>
+        <div class="userbytesrowright">
+            <div class="userbytesrowleft" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/kiran_bedi_1_71.jpg) no-repeat;">
+                <a href="http://indiatoday.intoday.in/video/kiran-bedi-india-today-mind-rocks-youth-summit-2011.html/1/151715.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+            </div>
+            <div class="userbytesrowright" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/arun-1_71.jpg) no-repeat;">
+                <a href="http://indiatoday.intoday.in/video/mind-rocks-india-today-youth-summit-2011.html/1/151657.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> 
+    <div class="clear"></div>       	
+</div>
+    </div>  
+    <div class="side_chunk">
+		<div class="side_chunk_title" style="margin-bottom:5px; font-size:22px;">
+            Mind Rocks Auditions
+        </div>
+    	<div id="multibox">
+<div id="PHOTOS">
+
+     <div>	
+        <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/rapkingz_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Band Rapkingz at Mind Rocks" alt="Band Rapkingz at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+      
+            <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/rapkingz-performs-at-mind-rocks-youth-summit-2011.html/1/151590.html">Rapkingz performs at Mind Rocks</a></div>
+        </div>
+        <div class="mediaSbox" style="margin: 1px; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/ameya_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/mind-rocks-youth-summit-2011-ameya.html/1/151592.html">Ameya rocks the show at Mind Rocks</a></div>
+        </div>
+        <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg);"><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg"><img border="0" title="Agrath band performs at Mind Rocks" alt="Agrath band performs at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/jalandhar-band-agrath-wins-india-today-mind-rocks-contest.html/1/151587.html">Jalandhar-based band 'Agrath' performs at Mind Rocks</a></div>
+        </div>
+    </div>      	            
+    <div>	
+        <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/rapkingz_performance_88_091611082036.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Rapkingz rappers" alt="Rapkingz rappers" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+      
+            <div class="mediaSmarg"><a href="india-today-youth-summit-2011-mind-rocks-rapkingz-performance.html
+">Rapkingz's rapper sizzles at Mind Rocks </a></div>
+        </div>
+        <div class="mediaSbox" style="margin: 1px; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/ameya_performance_88_091611081959.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-mind-rocks-band-ameya.html/1/151588.html">Ameya's impromptu performance at Mind Rocks</a></div>
+        </div>
+        <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
+            <div class="imgrepeat" style="background-image: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2011September/agrath_performance_88_091611082018.jpg);"><a href="http://indiatoday.intoday.in/gallery/anita-hassanandani-mini-mathur-rohit-roy-sandhya-mridul-shahwar-ali/1/5496.html"><img border="0" title="Band Agrath at Mind Rocks" alt="Band Agrath at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="mediaSmarg"><a href="india-today-youth-summit-mind-rocks-agrath-performance.html 
+">Band Agrath steals the show at Mind Rocks</a></div>
+        </div>
+    </div>  
+      
+    <div class="clear"></div>
+</div>
+</div>
+    </div>   
+    <div class="side_chunk">
+    <div class="side_chunk_title">
+        Rockstar Speakers           
+    </div>
+    <?php include('rockstar_speakers.php');?>
+</div>
+
+    <div class="side_chunk">
+    <div class="side_chunk_title">Venue Details</div>
+    <div class="venue">
+        <div class="venuetitle">Le Meridien</div>
+        <div class="venueaddredd">
+            Janpath, Connaught Place, New Delhi 110021<br />
+            Tel: +91-11-2611 0202, Fax: +91-1102611 0808<br />
+            Email: info@lemeridien-newdelhi.com<br/>
+            Website: www.starwoodhotels.com/lemeridien
+        </div>
+    </div>
+</div>
+    <div class="side_chunk">
+    <div class="side_chunk_title">
+        Previous Snapshots
+    </div>        
+    <?php include('pre_snapshots.php')?>       
+</div>  
+</div>
+                <div class="clear"></div>
+            </div>
+        </section>        
+        <footer>
+       	<div class="presenting">
+	<div class="presentingbox">
+        <div class="presmar">PRESENTING SPONSOR</div>
+        <a href="http://www.jalindia.com/" target="_blank"><img src="/specials/youthsummit/images/jp.jpg" border="0" /></a>
+    </div>
+</div>
+<div class="partnerband">
+   <?php include('partnerband.php');?>
+    <div class="clear"></div>
+</div>
+ <iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+       	</footer>
+    </div>
+</body>
+</html>
+
