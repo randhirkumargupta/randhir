@@ -61,7 +61,12 @@
                       if(empty($arg[1])) {
                         $uri =  $base_url.'/archives'.'/'.date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
                       } else {
+                        $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+                        if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
                         $uri = $base_url.'/archives/'.$arg[1].'/'. date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
+                        } else {
+                        $uri = $base_url.'/archives/'. date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));  
+                        }
                       }
                     ?>
                     <li class="atleta <?php print $li_active_class;?>"> <a href="<?php print $uri; ?>">
