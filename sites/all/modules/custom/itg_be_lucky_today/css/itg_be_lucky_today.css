@@ -63,10 +63,10 @@ and open the template in the editor.
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender{ display: inline-block; width: 62px; text-align: center;}
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-male, .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-female{ margin-bottom:20px; }
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-male + label{display: block;
-    background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/male.png);margin: 0 auto;width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
+                                                                                                       background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/male.png);margin: 0 auto;width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-female + label{display: block;
-    background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/female.png); margin: 0 auto; width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
-  .page-be-lucky-today .itg_be_lucky_today span.error{ display:block; font:100 11px/15px 'Roboto',sans-serif; padding:5px 0;}
+                                                                                                         background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/female.png); margin: 0 auto; width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
+.page-be-lucky-today .itg_be_lucky_today span.error{ display:block; font:100 11px/15px 'Roboto',sans-serif; padding:5px 0;}
 .page-be-lucky-today .itg_be_lucky_today .form-item-age label{ color:#fff; font-size:18px; }
 .page-be-lucky-today .itg_be_lucky_today .form-item-age label em{border:3px solid #d7040d; border-radius:40px; font:normal 400 18px/20px 'Roboto',sans-serif; color:#000; text-align:center; height:40px; width:40px; background-color:#fff; display:inline-block; padding:7px 0 0; margin:0 5px;}
 .page-be-lucky-today .itg_be_lucky_today #edit-age{ margin-left:105px; }
@@ -179,7 +179,7 @@ and open the template in the editor.
 .form-item.form-type-textfield{width: 100%;  float: left; margin-left: 90px; margin-bottom:30px;} 
 .form-item.form-type-textfield label{    display:block; font: 300 14px/20px 'Roboto',sans-serif;    color: #fff;   margin: 24px 0 5px 0;}
 .form-item.form-type-textfield input[type="text"] { width: 307px;  height: 33px;background-color: #fff; border: 0; padding: 0 0 0 20px;
-font: 400 15px/20px 'Roboto',Arial, Helvetica, sans-serif;}
+                                                    font: 400 15px/20px 'Roboto',Arial, Helvetica, sans-serif;}
 .form-item.form-type-select{ width: 100px;display: inline-block;}
 .form-item.form-type-select label{ display: inline-block; font: 300 14px/20px 'Roboto',sans-serif; color: #fff; margin: 24px 0 5px 0;}
 #city_wrapper{ width: 100px; margin-right: 15px; display: inline-block; margin-left: 20px;}
@@ -197,7 +197,7 @@ select, input[type="password"]{ width:100px;}
 .col_left {width: 100%;  float: left;}
 .col1_l{width: 60px; float: left;}
 .col1_l span.numb_l{display: inline-block;  margin-left: 10px; text-align: center; background: #e30009; border-radius: 100%;  font-weight: bold; color: #fff;
-    padding: 6px 12px 7px 10px;font-style: italic;}
+                    padding: 6px 12px 7px 10px;font-style: italic;}
 .col_left .form-item {width: 174px !important; float: left;margin-right: 5px; margin-left:0; position: relative; margin-bottom:20px;}
 .col_left .form-item input{ border: 0; background: #fff; padding: 8px 10px; width: 150px !important; color: #111;  font-weight: bold;}	
 .left-form-container label{ position: absolute; margin:0 !important; top:-35px; left:33%; margin-left:-15px; font:500 18px/20px 'Roboto',sans-serif !important;}
@@ -205,102 +205,102 @@ select, input[type="password"]{ width:100px;}
 /*thanku page*/
 .body-center { margin: 0 auto 15px;  width: 718px; background-color: rgba(23,22,22,0.4);}
 .body-center h1 {  display: inline-block;  padding: 0;  width: 100%;  margin: 25px 0 0 0;
- background: url(http://media2.intoday.in/indiatoday/images/luck-today2016//be-lucky-today.png) no-repeat 0 0; height: 64px; text-indent: -9999px;}
- .body-center h2{font: 600 42px/48px 'Roboto',sans-serif;  color: #fbc404; display: block; text-align: center;margin: 40px 0;}
- .body-center ul.social { list-style: none; margin: 0 auto 90px; padding: 0;}
- .body-center ul.social li { display: inline;margin-right: 3px;}
- .page-be-lucky-today-email-confirmation-reference-list h1.page__title{ display: none}
+                   background: url(http://media2.intoday.in/indiatoday/images/luck-today2016//be-lucky-today.png) no-repeat 0 0; height: 64px; text-indent: -9999px;}
+.body-center h2{font: 600 42px/48px 'Roboto',sans-serif;  color: #fbc404; display: block; text-align: center;margin: 40px 0;}
+.body-center ul.social { list-style: none; margin: 0 auto 90px; padding: 0;}
+.body-center ul.social li { display: inline;margin-right: 3px;}
+.page-be-lucky-today-email-confirmation-reference-list h1.page__title{ display: none}
 .page-be-lucky-today-thankyoupaymentsuccess h1.page__title{ display: none}
 .page-be-lucky-today-be-lucky-form h1.page__title{ display: none}
 .page-be-lucky-today-thankyoupaymentfailed h1.page__title{ display: none}
 .page-be-lucky-today-thankyoupaymentsuccess h1.page__title{ display: none}
- 
+
 /*Rakesh End*/
 
 @media screen and (max-width: 800px) {
-.wrapper{width:100%;}
-.top-nav ul li{padding-right:8px;}
-.top-nav ul li a{font:500 12px/31px "Roboto",Arial,Helvetica,sans-serif;}
-.lucky_container_meter{width: 676px;}
-.lucky_container_meter .container_l .left_part_box{width:590px;}
-.lucky_container_meter .container_l .left_part_box .row_l .cols_l{ width:168px;}
-.lucky_container_meter .heading_l h2{font-size:30px;}
-.lucky_container_meter .heading_l h3{font-size:22px;}
-.nav ul li:first-child{padding-left:10px;}
-.lucky_container_meter .container_l .left_part_box{margin-left:0;}    
-.rbg{font-size:27px !important;}     
+    .wrapper{width:100%;}
+    .top-nav ul li{padding-right:8px;}
+    .top-nav ul li a{font:500 12px/31px "Roboto",Arial,Helvetica,sans-serif;}
+    .lucky_container_meter{width: 676px;}
+    .lucky_container_meter .container_l .left_part_box{width:590px;}
+    .lucky_container_meter .container_l .left_part_box .row_l .cols_l{ width:168px;}
+    .lucky_container_meter .heading_l h2{font-size:30px;}
+    .lucky_container_meter .heading_l h3{font-size:22px;}
+    .nav ul li:first-child{padding-left:10px;}
+    .lucky_container_meter .container_l .left_part_box{margin-left:0;}    
+    .rbg{font-size:27px !important;}     
 }
 @media screen and (max-width: 640px) {
-.wrapper{width:100%;}
-.top-outer-nav{display:none;}
-.body-center{width:100%;}
-.body-center a.logo{float:left; width:100%; text-align:center;}
-.body-center h1{height:auto; background-size:100% 100%;}
-.body-center h2{font:500 27px/31px "Roboto",sans-serif;}
-.body-center ul.img-container{text-align:center; margin-top:15px;}
-.body-center ul.img-container li{border-bottom:1px solid #3f3f3f; padding:18px 0 !important; border-right:0; float:left; width:100%;}
-.body-center ul.start{margin-left:0;}
-.body-center ul.start li strong{font-size:18px;}
-.body-center ul.start li input[type="text"]{margin-left:2px;}
-.body-center .col{margin-left:0;}
-.body-center .wid{margin-left:0;}
-.body-center .wid{width:78px !important;}
-.body-center h2.subtext{font-size:17px;}
-.body-center ul.thumbnail li{width:100%; text-align:center; margin-left:0}
-.body-center h2.ytext{font-size:30px; line-height:36px;}
-.lucky_container_meter{ width:98%; padding:20px; margin-bottom:20px; box-sizing:border-box; margin-left:1%; margin-right:1%;}
-.lucky_container_meter .heading_l{ border:none; text-align:left}
-.lucky_container_meter .heading_l h2{font-size:24px; color:#42433D;}
-.lucky_container_meter .heading_l h3{font-size:18px;color:#42433D;}
-.col_rgt_l{width:80%; float:left}
-.lucky_container_meter .container_l .left_part_box .row_l .cols_l {float: left;margin-bottom: 10px;width: 100%;}
-.field_input{width:90%;}
-.lucky_container_meter .container_l .left_part_box .row_l .col1_l{width:45px}
-.lucky_container_meter .container_l .left_part_box .row_l .numb_l{ margin-left:0;}
-.lucky_container_meter .container_l .left_part_box{width:100%;}
-.hdmn,.right_part_box{ display:none}
-.bottom_sec_l a{ width:100% }
-.rbg{font-size:19px !important; line-height:26px !important;}
+    .wrapper{width:100%;}
+    .top-outer-nav{display:none;}
+    .body-center{width:100%;}
+    .body-center a.logo{float:left; width:100%; text-align:center;}
+    .body-center h1{height:auto; background-size:100% 100%;}
+    .body-center h2{font:500 27px/31px "Roboto",sans-serif;}
+    .body-center ul.img-container{text-align:center; margin-top:15px;}
+    .body-center ul.img-container li{border-bottom:1px solid #3f3f3f; padding:18px 0 !important; border-right:0; float:left; width:100%;}
+    .body-center ul.start{margin-left:0;}
+    .body-center ul.start li strong{font-size:18px;}
+    .body-center ul.start li input[type="text"]{margin-left:2px;}
+    .body-center .col{margin-left:0;}
+    .body-center .wid{margin-left:0;}
+    .body-center .wid{width:78px !important;}
+    .body-center h2.subtext{font-size:17px;}
+    .body-center ul.thumbnail li{width:100%; text-align:center; margin-left:0}
+    .body-center h2.ytext{font-size:30px; line-height:36px;}
+    .lucky_container_meter{ width:98%; padding:20px; margin-bottom:20px; box-sizing:border-box; margin-left:1%; margin-right:1%;}
+    .lucky_container_meter .heading_l{ border:none; text-align:left}
+    .lucky_container_meter .heading_l h2{font-size:24px; color:#42433D;}
+    .lucky_container_meter .heading_l h3{font-size:18px;color:#42433D;}
+    .col_rgt_l{width:80%; float:left}
+    .lucky_container_meter .container_l .left_part_box .row_l .cols_l {float: left;margin-bottom: 10px;width: 100%;}
+    .field_input{width:90%;}
+    .lucky_container_meter .container_l .left_part_box .row_l .col1_l{width:45px}
+    .lucky_container_meter .container_l .left_part_box .row_l .numb_l{ margin-left:0;}
+    .lucky_container_meter .container_l .left_part_box{width:100%;}
+    .hdmn,.right_part_box{ display:none}
+    .bottom_sec_l a{ width:100% }
+    .rbg{font-size:19px !important; line-height:26px !important;}
 }
 @media screen and (max-width:767px) {
-.body-center{ width:94%; margin:0 2%}
-.body-center a.terms{margin: 0 auto 10px;}
-.body-center ul.img-container{ margin-bottom:30px; float: left; width:100%}
-.body-center ul.start li input[type="text"]{    box-sizing: border-box;}
-.body-center .col{ width:100%; box-sizing:border-box}
-/*rakesh*/
-.page-be-lucky-today h1{background-size: 100%;}
-.page-be-lucky-today .itg_be_lucky_today{ width:100%}
-.itg_be_lucky_today fieldset ul li.active{font: 500 27px/31px "Roboto",sans-serif;}
-.page-be-lucky-today .itg_be_lucky_today strong{ padding-left:0px; font-size: 18px;}
-.page-be-lucky-today .itg_be_lucky_today .form-item-yourname{ padding-left:0; margin-left:0}
-.form-item.form-type-textfield input[type="text"]{ width:290px; box-sizing: border-box}
-.page-be-lucky-today .itg_be_lucky_today #edit-gender{ padding-left:70px}
-.page-be-lucky-today .itg_be_lucky_today #edit-age{ margin-left:40px;}
-.page-be-lucky-today .itg_be_lucky_today #edit-age .form-item-age{ width:100%}
-.form-item.form-type-textfield{ margin-left:0px; margin-bottom:20px;}
-.form-item.form-type-select,.form-item.form-type-select label,select, input[type="password"],.form-item.form-type-textfield.form-item-zip-code,.form-item.form-type-textfield.form-item-zip-code label,.form-item.form-type-textfield.form-item-zip-code input[type="text"]{ width:100%;}
-#city_wrapper{ margin:0px; width:100%}
-.page-be-lucky-today .itg_be_lucky_today strong{ margin:0px;}
-.itg_be_lucky_today fieldset ul li.active.last{font-size: 17px;}
-.page-be-lucky-today h1{margin: 25px 0 15px;}
-.page-be-lucky-today ul.thumbnail li input[type="radio"]{ margin-top:15px;}
-.form-main-container{ width:100%; margin:20px 0 0; float: left;}
-.form-wrappe-left p{font: 400 19px/26px 'Roboto',sans-serif; margin-bottom:40px;}
-.left-form-container label{ display: none !important}
-.col_left .form-item{ width:100% !important}
-.left_part_box .left-form-container{ float: left; width:74%; margin-bottom:20px;}
-.left_part_box .left-form-container input{ width:100% !important}
-.col1_l{ width:50px;}
-.left-form-container .form-item.form-type-textfield{ margin-bottom:10px;}
-.form-wrappe-left .luck_meter{ display: none} 
-.left_part_box{width: 94%;  margin-left: 6%;}
+    .body-center{ width:94%; margin:0 2%}
+    .body-center a.terms{margin: 0 auto 10px;}
+    .body-center ul.img-container{ margin-bottom:30px; float: left; width:100%}
+    .body-center ul.start li input[type="text"]{    box-sizing: border-box;}
+    .body-center .col{ width:100%; box-sizing:border-box}
+    /*rakesh*/
+    .page-be-lucky-today h1{background-size: 100%;}
+    .page-be-lucky-today .itg_be_lucky_today{ width:100%}
+    .itg_be_lucky_today fieldset ul li.active{font: 500 27px/31px "Roboto",sans-serif;}
+    .page-be-lucky-today .itg_be_lucky_today strong{ padding-left:0px; font-size: 18px;}
+    .page-be-lucky-today .itg_be_lucky_today .form-item-yourname{ padding-left:0; margin-left:0}
+    .form-item.form-type-textfield input[type="text"]{ width:290px; box-sizing: border-box}
+    .page-be-lucky-today .itg_be_lucky_today #edit-gender{ padding-left:70px}
+    .page-be-lucky-today .itg_be_lucky_today #edit-age{ margin-left:40px;}
+    .page-be-lucky-today .itg_be_lucky_today #edit-age .form-item-age{ width:100%}
+    .form-item.form-type-textfield{ margin-left:0px; margin-bottom:20px;}
+    .form-item.form-type-select,.form-item.form-type-select label,select, input[type="password"],.form-item.form-type-textfield.form-item-zip-code,.form-item.form-type-textfield.form-item-zip-code label,.form-item.form-type-textfield.form-item-zip-code input[type="text"]{ width:100%;}
+    #city_wrapper{ margin:0px; width:100%}
+    .page-be-lucky-today .itg_be_lucky_today strong{ margin:0px;}
+    .itg_be_lucky_today fieldset ul li.active.last{font-size: 17px;}
+    .page-be-lucky-today h1{margin: 25px 0 15px;}
+    .page-be-lucky-today ul.thumbnail li input[type="radio"]{ margin-top:15px;}
+    .form-main-container{ width:100%; margin:20px 0 0; float: left;}
+    .form-wrappe-left p{font: 400 19px/26px 'Roboto',sans-serif; margin-bottom:40px;}
+    .left-form-container label{ display: none !important}
+    .col_left .form-item{ width:100% !important}
+    .left_part_box .left-form-container{ float: left; width:74%; margin-bottom:20px;}
+    .left_part_box .left-form-container input{ width:100% !important}
+    .col1_l{ width:50px;}
+    .left-form-container .form-item.form-type-textfield{ margin-bottom:10px;}
+    .form-wrappe-left .luck_meter{ display: none} 
+    .left_part_box{width: 94%;  margin-left: 6%;}
 
 
 
 
 }
-#modal-content strong h3{    display: block; font-size: 1.8em; font-weight: bold; }
+#modal-content strong h3{ display: block; font-size: 1.8em; font-weight: bold; }
 #modal-content strong p { display: block;font-weight: normal; color:#000; margin-top:15px; font-size:14px; line-height:24px;}
 #modal-content{width: 100%!important;height: 95%!important;border: 0px;border-radius: 0;}
-/*.page-be-lucky-today .form-item-age label{display:none;}*/
+.page-be-lucky-today .messages{margin: 0 auto 15px;width: 718px;background-color: rgba(23,22,22,0.4);}

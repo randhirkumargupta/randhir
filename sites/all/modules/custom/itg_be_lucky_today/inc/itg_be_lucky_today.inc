@@ -94,7 +94,7 @@ function be_lucky_today_registration1($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#required' => TRUE,
       '#attributes' => array('class' => array('form-control'), 'autocomplete' => 'off')
     );
@@ -140,7 +140,7 @@ function be_lucky_today_registration2($form, $form_state) {
     );
     $form['age'] = array(
       '#type' => 'radios',
-      '#title' => '',//t('Ags'),
+      '#title' => '', //t('Ags'),
       '#options' => $age,
       '#default_value' => '18-24',
       '#prefix' => '<div class="hidden">',
@@ -179,7 +179,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Email'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
 //      '#ajax' => array(
@@ -198,7 +198,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Address'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 50,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
     );
@@ -231,9 +231,9 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Zip code'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 6,
       '#required' => TRUE,
-      '#attributes' => array('autocomplete' => 'off'),
+      '#attributes' => array('autocomplete' => 'off', 'id' => 'number_check'),
     );
     $form['mobile_label'] = array(
       '#markup' => 'Q6. At what number should we contact you?',
@@ -244,9 +244,9 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Mobile'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 10,
       '#required' => TRUE,
-      '#attributes' => array('autocomplete' => 'off'),
+      '#attributes' => array('autocomplete' => 'off', 'id' => 'number_check'),
 //      '#ajax' => array(
 //        'callback' => 'mobile_validation_ajax_callback',
 //        'wrapper' => 'mobile_validation_error',
@@ -263,6 +263,12 @@ function be_lucky_today_registration3($form, $form_state) {
     return $form;
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
 function email_validation_ajax_callback($form, &$form_state) {
     $email = $form_state['values']['email'];
     $result = get_survey_detail_by_field('email', $email);
@@ -273,6 +279,12 @@ function email_validation_ajax_callback($form, &$form_state) {
     return $form['email'];
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
 function mobile_validation_ajax_callback($form, &$form_state) {
     $mobile = $form_state['values']['mobile'];
     $result = get_survey_detail_by_field('mobile', $mobile);
@@ -286,9 +298,9 @@ function mobile_validation_ajax_callback($form, &$form_state) {
 /**
  * 
  * @global String $base_url
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_subscribe($form, $form_state) {
     $form['magazine'] = array(
@@ -327,8 +339,8 @@ function be_lucky_today_form_validate($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function be_lucky_today_form_submit($form, &$form_state) {
     switch ($form_state['stage']) {
@@ -358,8 +370,8 @@ function be_lucky_today_form_submit($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     global $base_url;
@@ -425,9 +437,9 @@ function get_term_name_by_tid($tid) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_get_header($form, &$form_state) {
 
@@ -472,9 +484,9 @@ function be_lucky_today_get_header($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_move_to_next_stage($form, &$form_state) {
     switch ($form_state['stage']) {
@@ -545,7 +557,7 @@ meter;
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Name')),
       '#prefix' => '<div class="left-form-container">',
     );
@@ -553,15 +565,15 @@ meter;
       '#type' => 'textfield',
       '#title' => t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile'] = array(
       '#type' => 'textfield',
       '#title' => t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
       '#suffix' => '</div></div></div>',
     );
     $form['number_2'] = array(
@@ -572,7 +584,7 @@ meter;
       '#type' => 'textfield',
       '#title' => '', // t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Name')),
       '#prefix' => '<div class="left-form-container">',
     );
@@ -580,15 +592,15 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_2'] = array(
       '#type' => 'textfield',
       '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
       '#suffix' => '</div></div></div>',
     );
     $form['number_3'] = array(
@@ -599,7 +611,7 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Name')),
       '#prefix' => '<div class="left-form-container">',
     );
@@ -607,15 +619,15 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_3'] = array(
       '#type' => 'textfield',
       '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
       '#suffix' => '</div></div></div>',
     );
 
@@ -627,7 +639,7 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Name')),
       '#prefix' => '<div class="left-form-container">',
     );
@@ -635,15 +647,15 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_4'] = array(
       '#type' => 'textfield',
       '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
       '#suffix' => '</div></div></div>',
     );
     $form['number_5'] = array(
@@ -654,7 +666,7 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Name')),
       '#prefix' => '<div class="left-form-container">',
     );
@@ -662,15 +674,15 @@ meter;
       '#type' => 'textfield',
       '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_5'] = array(
       '#type' => 'textfield',
       '#title' => '',
       '#size' => 25,
-      '#maxlength' => 128,
-      '#attributes' => array('placeholder' => t('Mobile No')),
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
       '#suffix' => '</div></div></div></div>',
     );
     $form['luck_meter'] = array(
@@ -694,8 +706,14 @@ function be_lucky_form_submit($form, &$form_state) {
     $email = $_GET['email'];
     $fb_username = '';
     $surve_parent = get_survey_detail_by_field('email', $email);
+
     if (count($surve_parent) > 0) {
         $fb_username = $surve_parent[0]->id;
+        $already_done = get_survey_detail_by_field('fb_username', $fb_username);
+        if (count($already_done) > 0) {
+            drupal_set_message(t("You have already Participated!"), 'error');
+            drupal_goto("/be-lucky-today/email-confirmation-reference-list");
+        }
     }
 
     if (!empty($form_state['values']['name'])) {
