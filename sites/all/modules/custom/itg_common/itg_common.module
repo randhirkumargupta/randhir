@@ -19,7 +19,13 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  
+  $arg = arg();
+  // condition for archive story redirect
+  $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+  if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
+    $path = $base_url.'/archives/'.$arg[1].'/'.date('d-m-Y');
+    drupal_goto($path);
+  }
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
