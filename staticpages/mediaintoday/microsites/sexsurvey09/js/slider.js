@@ -4,14 +4,14 @@ var s=0;
 var t=0;
 var h;
 var arrlength = new Array();
-arrlength[0] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202120121_Fantasies1.jpg';
-arrlength[1] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202115322_Faithfullyyours1.jpg';
-arrlength[2] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202120121_Fetishes1.jpg';
-arrlength[3] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202120121_Peoplepleasures.jpg';
-arrlength[4] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202115322_Wanderlust1.jpg';
+arrlength[0] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202120121_Fantasies1.jpg';
+arrlength[1] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202115322_Faithfullyyours1.jpg';
+arrlength[2] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202120121_Fetishes1.jpg';
+arrlength[3] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202120121_Peoplepleasures.jpg';
+arrlength[4] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202115322_Wanderlust1.jpg';
 
-arrlength[5] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202115322_Voyeursatwork1.jpg';
-arrlength[6] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/Sexsurvey09/091202115322_Pornography.jpg';
+arrlength[5] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202115322_Voyeursatwork1.jpg';
+arrlength[6] = 'http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/Sexsurvey09/091202115322_Pornography.jpg';
 
 
 

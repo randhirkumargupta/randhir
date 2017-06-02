@@ -291,7 +291,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
 
 <!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent-nepal/end.jpg" width="640">-->
 
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2015January/globalroundtable-nepal_012815060811.jpg" width="640">
+<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2015January/globalroundtable-nepal_012815060811.jpg" width="640">
 
 
   <div class="homebanner" style="display:none;">

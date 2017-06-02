@@ -6,7 +6,7 @@
 <title>India Today interactive on Uttarakhand floods</title>
 <meta name="description" content="An India Today interactive on how the floods devastated Kedarnath and other spots in Uttarakhand after the downpour on June 16-17" />
 <meta name="keywords" content="uttarakhand, cloud burst, cloudburst, flood, lord shiva, shiva, mandakini, alaknanda, ganga, yamuna, kedarnath, tungnath, badrinath, rudraprayag, tehri, garhwal, rishikesh, haridwar, gangotri, rambara, joshimath, gourikund, gaurikund, agastya muni, agastyamuni, uttarkashi, chamoli, harsil, gopeshwar, devprayag, yamunotri, hemkund sahib, janki chatti, how did uttarakhand floods happen, interactive feature, India today" />
-<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" />
+<link rel="image_src" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/shiva_348_062813063242.jpg" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="/uttarakhand/js/tandava_new2.js"></script>
 <link rel="stylesheet" href="/uttarakhand/js/tandava.css">
@@ -75,7 +75,7 @@
                  <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("/content_Email.jsp?email=0&title=The Tandava&URL=/uttarakhand/deluge.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
                 <a href="http://www.facebook.com/sharer/sharer.php?p[url]=/uttarakhand/deluge.jsp&p[title]=The Tandava&s=100&p[summary]=An India Today interactive on how the floods devastated Kedarnath and other spots in Uttarakhand after the downpour on June 16-17
-&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/shiva_348_062813063242.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=The Tandava%20http://indiatoday.intoday.in/uttarakhand/uttarakhand/deluge.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
               </div>
@@ -137,7 +137,7 @@ before they met the lord of the temple, Lord Shiva, others saw it merely as an i
                        </div>
 <div class="left">
                       <h3>The Deluge In Kedar Valley</h3>
-						<div class="shivaimg"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/shiva_348_062813063242.jpg" height="196" width="348" >
+						<div class="shivaimg"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/shiva_348_062813063242.jpg" height="196" width="348" >
                         <br>
                         <div class="caption">The statue of Lord Shiva at Rishikesh ultimately gives in to the power of the Ganga.</div></div>
                         <p class="wd">The first of the cloudbursts--signalled by something that sounded like a sudden explosion that shook most of the houses--at Kedarnath took place around 7.30 pm on June 16. Within minutes, the area was full of people running towards the temple screaming <em>"bhago, bhago (run, run)"</em>. The check dam behind the temple crumbled and water gushed towards the temple. Nearly 250 people found shelter at the temple that night. With the temple almost full, the survivors spent the night standing in the temple's prayer hall. No one knew what was happening outside. All they knew, and that too from the ominous sound of the water hitting the temple walls, was that the township outside was being destroyed. The water kept rising inside the sanctum sanctorum that was already full of people. They hung on to whatever they could find. A man latched on to the bell, another to the chhatri. Some drowned, others floated.</p>
@@ -221,7 +221,7 @@ Cloudbursts occur because the warm air current from the ground or below the clou
                               </div>
                               </div>
                     <h3>Rescue Operations</h3>
-   	  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013june/hotel_348x196_062813063242.jpg" height="196" width="348" class="rescuetxt">
+   	  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/hotel_348x196_062813063242.jpg" height="196" width="348" class="rescuetxt">
 						<p class="wd">Every time a major disaster takes place, the relief experts-the Army and Air Force-are called out. It was no different this time either. The first teams to break through and reach the survivors were the army teams.</p>
 </div>
 

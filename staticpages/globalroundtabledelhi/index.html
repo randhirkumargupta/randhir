@@ -283,7 +283,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
 
 
 
-<div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2015January/globalroundtable-delhi_012815060811.jpg" /></div>
+<div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2015January/globalroundtable-delhi_012815060811.jpg" /></div>
 
 
 

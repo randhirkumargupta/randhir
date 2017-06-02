@@ -321,7 +321,7 @@ section#left {
                        
 <div class="mindr-consubrtbox">
 <div class="prj_name">Speakers:</div>
-<img border="0" align="left" alt="Jayanthi Natarajan" title="Jayanthi Natarajan" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/jayanthi-natarajan_041513061938.jpg"> 
+<img border="0" align="left" alt="Jayanthi Natarajan" title="Jayanthi Natarajan" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/jayanthi-natarajan_041513061938.jpg"> 
 <div class="mindr-consubhead">Jayanthi Natarajan</div>
 <div>Union Minister of State (Independent charge), Environment and Forests </div></div>
 <div class="clear"></div>
@@ -337,7 +337,7 @@ section#left {
                         </div>
                        
 <div class="mindr-consubrtbox">
-<img   border="0" align="left" alt="Smriti Irani" title="Smriti Irani" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/smriti-irani_041513061938.jpg">
+<img   border="0" align="left" alt="Smriti Irani" title="Smriti Irani" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/smriti-irani_041513061938.jpg">
 <div class="mindr-consubhead">Smriti Irani</div>
 <div>Member of Parliament (Rajya Sabha) & Vice President, BJP </div></div>
 <div class="clear"></div>
@@ -658,7 +658,7 @@ section#left {
                        
 <div class="mindr-consubrtbox">
 <div class="prj_name">Speaker:</div>
-<img border="0" align="left" alt="Shashi Tharoor" title="Shashi Tharoor" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/shashi-tharoor_041513061938.jpg">
+<img border="0" align="left" alt="Shashi Tharoor" title="Shashi Tharoor" class="imgs" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/shashi-tharoor_041513061938.jpg">
 <div class="mindr-consubhead">Shashi Tharoor</div>
 <div>Union Minister of State for Human Resource Development </div></div>
 <div class="clear"></div>
@@ -709,7 +709,7 @@ section#left {
 <div style="margin-bottom: 20px; float:left; width:100%;">
 <div style="font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase">Backstage action
 </div>
-<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
+<div><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2013-backstage/1/9122.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013April/sridevi_300x300_041913053756.jpg" border="0" /></a></div>
 <div class="clr"></div>
 </div>
 

@@ -199,7 +199,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
                                                 <td align="left" valign="top" class="leadtxt14">
                                                 <div style="margin:0 8px;">
 
-                                                	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday//images/stories/2013december/ss-lead-pic-533_120613121233.jpg" border="1" align="left" class="leadimg" style="border:1px solid #000000;" />
+                                                	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013december/ss-lead-pic-533_120613121233.jpg" border="1" align="left" class="leadimg" style="border:1px solid #000000;" />
                                                     <br clear="all" />
 
                                                	 <p> The India Today Group-MDRA Sex Survey, the only study of its sort, is entering its eleventh edition. After a hiatus of 10 years, it has once again probed shades of female sexual experience. And the response of over 4,000 women and men, from across 19 cities, calls for a re-examination of all that we thought we knew about female libido. <br />
