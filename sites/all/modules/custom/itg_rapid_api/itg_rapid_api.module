@@ -407,16 +407,4 @@ function otherapps_android_json() {
 }
 
 
-// function for remove it form service request
-
-function itg_rapid_api_url_inbound_alter(&$result, $path, $path_language) {
-   
-   if(arg(0) == "appapi" && count(arg()) == 2){
-       //echo "<pre>"; print_r($_SERVER); echo "</pre>";exit();
-       $q_str = $_SERVER['QUERY_STRING'];
-       $result = $path."/it";
-       
-   }
-}
-
-function itg_rapid_api_boot() {}
+ 
