@@ -41,7 +41,7 @@ function itg_personalization_send_new_content_mail($node) {
           }
           
         $alias = drupal_get_path_alias('node/' . $node->nid);
-        $here_link = l('here', $base_url . '/' . $alias);
+        $here_link = l('here', FRONT_URL . '/' . $alias);
         if (function_exists('itg_mail_templates_get_mailcontent')) {
           $get_mail_content = itg_mail_templates_get_mailcontent('My Following', $task_event = NULL, $ugc_status = NULL);
           $subject = $get_mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
