@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file
+ * The apache solr entity Just in time index.
+ *
+ * Contains functionality related to Entity Just in Time Index.
+ *
+ */
+/**
+ * Implements hook_menu().
+ * {@inheritdoc}
+ */
+function apachesolr_entity_jit_index_menu() {
+
+  $items['solr-index-content-type'] = array(
+    'title' => 'Solr Index Entity  Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apachesolr_entity_jit_index_entity_form'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function apachesolr_entity_jit_index_entity_form() {
+  // Make array for content type.
+  foreach (node_type_get_names() as $key => $value) {
+    $content_types[$key] = ucwords($value);
+  }
+
+  $form['content_type_for_solr_index'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Select Content type'),
+    '#description' => t('Please select content type to which you want to index on update/insert.'),
+    '#options' => $content_types,
+    '#required' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="solr_entity_use_config[yes]"]' => array('checked' => TRUE),
+      ),
+    ),
+    '#default_value' => variable_get('content_type_for_solr_index', array()),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_entity_insert()
+ * {@inheritdoc}
+ */
+function apachesolr_entity_jit_index_entity_insert($entity, $type) {
+ 
+  if ($type == 'node') {
+    $content_type = array_values(variable_get('content_type_for_solr_index'));
+    $content_type = array_filter($content_type, function($a) {
+      return ($a !== 0);
+    });
+    if (in_array($entity->type, $content_type)) {
+
+      apachesolr_entity_jit_index_immediately($entity, $type);
+
+// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet.
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert()
+ * {@inheritdoc}
+ */
+function apachesolr_entity_jit_index_entity_update($entity, $type) {
+ 
+  if ($type == 'node') {
+    $content_type = array_values(variable_get('content_type_for_solr_index'));
+    $content_type = array_filter($content_type, function($a) {
+      return ($a !== 0);
+    });
+    if (in_array($entity->type, $content_type)) {
+
+      apachesolr_entity_jit_index_immediately($entity, $type);
+
+// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet.
+    }
+  }
+}
+
+/**
+ * Helper function to send entities to apachesolr for immediate index.
+ */
+function apachesolr_entity_jit_index_immediately($entity, $type) {
+  // Don't index unpublished entities.
+
+  $env_id = apachesolr_default_environment();
+  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
+
+  // Check if entity should be indexed.
+
+  $info = entity_get_info($type);
+  if (!empty($info['entity keys']['bundle'])) {
+    $bundle = $entity->{$info['entity keys']['bundle']};
+  }
+  else {
+    $bundle = $type;
+  }
+
+  if (!in_array($bundle, $bundles_to_index)) {
+    return;
+  }
+
+  // Entity should be indexed, so send it to solr.
+  $ids = entity_extract_ids($type, $entity);
+  $id = $ids[0];
+
+  // If this entity is unpublished, remove from index.
+  if ($entity->status != 1) {
+    apachesolr_remove_entity($env_id, $type, $id);
+    return;
+  }
+
+  $item = new stdClass();
+  $item->entity_type = $type;
+  $item->entity_id = $id;
+
+  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  if (function_exists('apachesolr_index_entity_to_documents')) {
+    $doc = apachesolr_index_entity_to_documents($item, $env_id);
+    apachesolr_index_send_to_solr($env_id, $doc);
+  }
+}

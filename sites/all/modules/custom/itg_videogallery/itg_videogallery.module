@@ -1576,6 +1576,9 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['video_title'] = array(
     '#type' => 'textfield',
     '#title' => 'Title',
+    '#attributes' => array(
+      'placeholder' => t('Title'),
+    ),
     '#default_value' => isset($_GET['video_title']) ? $_GET['video_title'] : '',
   );
   $form['fieldset']['channel'] = array(
@@ -1589,7 +1592,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
     '#type' => 'date_popup',
     '#title' => t("From"),
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'From Date'),
     '#default_value' => isset($_GET['from_time']) ? $_GET['from_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
     '#date_timezone' => date_default_timezone(),
   );
@@ -1598,7 +1601,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
     '#type' => 'date_popup',
     '#title' => t("To"),
     '#date_format' => 'd/m/Y H:i',
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'To Date'),
     '#default_value' => isset($_GET['to_time']) ? $_GET['to_time'] : format_date(REQUEST_TIME, 'custom', 'd/m/Y H:i'),
     '#date_timezone' => date_default_timezone(),
   );
@@ -1671,15 +1674,7 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
  */
 function daily_motion_video_dashboard_rows() {
   global $base_url;
-
-  drupal_add_js('jQuery(document).ready(function() {
-    jQuery(".dalymotion-video-delete").on("click",function(e) {
-    if (!confirm("Are you sure you want to delete this video ?")) {
-    e.preventDefault();
-    }
-    });
-    });', array('type' => 'inline', 'scope' => 'footer'));
-
+  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_dashbord.js', array('weight' => 1, 'scope' => 'footer'));
   $filtertype = isset($_GET['filtertype']) ? $_GET['filtertype'] : '';
   $video_id = isset($_GET['video_id']) ? $_GET['video_id'] : '';
   $video_title = isset($_GET['video_title']) ? $_GET['video_title'] : '';
@@ -2682,7 +2677,6 @@ function itg_videogallery_ftp_file_insert() {
  */
 function itg_videogallery_dir_content($dir, &$results = array()) {
   $files = scandir($dir);
-
   foreach ($files as $key => $value) {
     $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
     if (!is_dir($path)) {
