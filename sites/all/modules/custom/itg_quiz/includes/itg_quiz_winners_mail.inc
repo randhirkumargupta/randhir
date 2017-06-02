@@ -105,7 +105,7 @@ function itg_quiz_get_mail_content($nid, $get_mail_data) {
   $no_of_winner = $winner_count['field_quiz_winners_value'];
   $winner_records = itg_quiz_winners_user_list($nid, $no_of_winner);
   
-  $result_link = $base_url.'/quiz-user-list/'.$nid;
+  $result_link = FRONT_URL.'/quiz-user-list/'.$nid;
   $winners = '';
   
   $get_mail_content = $get_mail_data->field_mail_body_quiz_completion[LANGUAGE_NONE][0]['value'];

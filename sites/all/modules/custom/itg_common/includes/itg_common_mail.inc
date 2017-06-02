@@ -29,7 +29,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
         'subject' => 'India Today | Refer a friend',
       );
       watchdog('Refer_a_friend_mail', '<pre>'.print_r($params, true).'</pre>');
-      $mail = drupal_mail('itg_common', $key, $email, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   } elseif ($key == 'personalization_mail') {
     
     $params = array(
