@@ -11,7 +11,7 @@ slidebgcolor="#ffffff"
 //Specify the slider's images
 var leftrightslide=new Array()
 var finalslide=''
-leftrightslide[0]='<IMG SRC="http://media2.intoday.in/indiatoday/womansummit/2015/images/Sponsors.jpg" BORDER="0" WIDTH="1058" HEIGHT="56" HSPACE="2" VSPACE="2" usemap="#Map_link">'
+leftrightslide[0]='<IMG SRC="/staticpages/mediaintoday/indiatoday/womansummit/2015/images/Sponsors.jpg" BORDER="0" WIDTH="1058" HEIGHT="56" HSPACE="2" VSPACE="2" usemap="#Map_link">'
 
 //Specify gap between each image (use HTML):
 var imagegap=""

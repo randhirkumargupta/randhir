@@ -8,11 +8,11 @@
 <meta name="keywords" content="Political dynasties, Dynastic politics, Congress, Sonia Gandhi, Nehru-Gandhis, Chautalas, Mulayam Singh Yadav" />
 
 <meta property="og:title" content="In the grip of dynasty raj">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/images/300x350_Dinasties.jpg">
+<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/images/300x350_Dinasties.jpg">
 <meta property="og:url" content="/dynasty-graphic.jsp">
 <meta property="og:description" content="From Kashmir to Kanyakumari, India has been ruled by political dynasties for generations.">
 
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/images/300x350_Dinasties.jpg" />
+<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/images/300x350_Dinasties.jpg" />
 
 <!--<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">-->
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' ></script>
@@ -239,7 +239,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=In the grip of dynasty raj&URL=http://indiatoday.intoday.in/dynasty-graphic.jsp","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/dynasty-graphic.jsp&p[title]=In the grip of dynasty raj&s=100&p[summary]=From kashmir to kanyakumari, india has been ruled political dynasties for generations&p[images][0]=http://media2.intoday.in/indiatoday/images/300x350_Dinasties.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/dynasty-graphic.jsp&p[title]=In the grip of dynasty raj&s=100&p[summary]=From kashmir to kanyakumari, india has been ruled political dynasties for generations&p[images][0]=/staticpages/mediaintoday/indiatoday/images/300x350_Dinasties.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=In the grip of dynasty raj%20http://indiatoday.intoday.in/dynasty-graphic.jsp%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -247,24 +247,24 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
     </div>
 <section>
  <div id="wrapper" style="width:1000px; margin:0 auto;overflow:hidden">
-            <img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve_top_1.jpg" border="0" usemap="#Map"  />
+            <img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve_top_1.jpg" border="0" usemap="#Map"  />
              </div>
             <div class="posrelv">
-             <div class="mapped_fri"  id="1generations"><img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve.jpg"  /></div>
+             <div class="mapped_fri"  id="1generations"><img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve.jpg"  /></div>
             
             <div  id="2generations" class="mapped_image">
-                <img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve_02_1.jpg" border="0" />
+                <img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve_02_1.jpg" border="0" />
             </div>
             <div   id="3generations" class="mapped_image">
-                <img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve_03_1.jpg" border="0" />
+                <img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve_03_1.jpg" border="0" />
             </div>
             
             <div   id="4generations" class="mapped_image">
-               <img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve_04.jpg" border="0" />
+               <img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve_04.jpg" border="0" />
             </div>
             
             <div  id="showall" class="mapped_image">
-                <img src="http://media2.intoday.in/indiatoday/images/Dyanasty_TextConvertedToCurve_all_1.jpg" border="0"/>
+                <img src="/staticpages/mediaintoday/indiatoday/images/Dyanasty_TextConvertedToCurve_all_1.jpg" border="0"/>
                 <div><a href="http://specials.intoday.in/bribes/" target="_blank">Many more Bofors scams every year</a></div>
             </div>
            

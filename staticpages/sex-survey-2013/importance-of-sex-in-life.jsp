@@ -154,7 +154,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
                 <tr>
                     <td width="86" valign="top" align="left">
                         <a href="http://indiatoday.intoday.in/sex-survey-2013/lock-stalk-and-barrel.jsp">
-                            <img width="79" height="79" border="0" align="left" src="http://media2.intoday.in/indiatoday/images/Kaveree.jpg"></a>
+                            <img width="79" height="79" border="0" align="left" src="/staticpages/mediaintoday/indiatoday/images/Kaveree.jpg"></a>
                     </td>
                     <td valign="TOP" style="line-height: 18px;" class="normalltxt">
                       <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/sex-survey-2013/lock-stalk-and-barrel.jsp">Kaveree Bamzai</a></div>
@@ -170,7 +170,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
   <tr>
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">India Today Sex Survey Cover 2013</div>
-            <div align="center"  style="margin-top:10px;"><img src="http://media2.intoday.in/indiatoday/images/it-cover.jpg" border="0"></div>
+            <div align="center"  style="margin-top:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/it-cover.jpg" border="0"></div>
             <!--<div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>-->
       </td>
   </tr>
@@ -197,7 +197,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
                     <tr>
                         <td align="left" valign="top">
                     						<div class="chart-frame">
-        <img src="http://media2.intoday.in/microsites/sexsurvey/importance-of-sex-in-life.jpg" border="0">
+        <img src="/staticpages/mediaintoday/microsites/sexsurvey/importance-of-sex-in-life.jpg" border="0">
        
     </div>
                             
@@ -352,7 +352,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
 <table cellapacing="0" cellpadding="0" bgcolor="#ffffff">
 <tr>
 	<td>
-<iframe src="http://media2.intoday.in/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
+<iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
 
 
 

@@ -1,6 +1,6 @@
  
     <div class="side_chunk">
-		<a href="/pledge/" target="_blank"><img border="0" src="http://media2.intoday.in/microsites/banners/Banner-on-IT.jpg"></a>
+		<a href="/pledge/" target="_blank"><img border="0" src="/staticpages/mediaintoday/microsites/banners/Banner-on-IT.jpg"></a>
     </div>
     <div class="side_chunk">
 		<div class="side_chunk_title" style="margin-bottom:5px; font-size:22px;">
@@ -9,8 +9,8 @@
         <div class="summithighlights">
         	<div class="shtitle" style="color: #21509E;">Best moments of Youth Summit 2011</div>
             	<div style="text-align:center; margin:5px auto;"><a href=" http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2012-celebrates-spirit-of-young-indians.html/1/151785.html
-"><img border="0" src="http://media2.intoday.in/indiatoday/images/mindrock-video-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a><a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html
-"><img border="0" src="http://media2.intoday.in/indiatoday/images/mindrock-photo-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a></div>
+"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/mindrock-video-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a><a href="http://indiatoday.intoday.in/gallery/best-moments-of-india-today-mind-rocks-youth-summit-2011/1/5528.html
+"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/mindrock-photo-150.jpg" alt="Best moments of Youth Summit 2011" title="Best moments of Youth Summit 2011" align="absmiddle" width="150" height="150"></a></div>
             	<div class="text" style="line-height:18px;">Watch the best speakers, sessions and highlights from the India Today Mind Rocks Youth Summit 2011 in this special package.</div>
         </div>
     </div>
@@ -57,25 +57,25 @@
         </div>
     	<div class="userbytes">
     <div class="userbytesrow">
-        <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/ranbir-6_147.jpg) no-repeat;">
+        <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/ranbir-6_147.jpg) no-repeat;">
             <a href="http://indiatoday.intoday.in/video/ranbir-kapoor-at-india-today-mind-rocks-youth-summit-2011.html/1/151707.html" target="_blank"><img src="/specials/youthsummit/images/Bigpic.png" width="147" height="120" alt="" title="" border="0" align="middle"></a>
         </div>
         <div class="userbytesrowright">
             <div class="userbytesrowrighttop">
-                <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/bindra_71x58.jpg) no-repeat;">
+                <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/bindra_71x58.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/abhinav-bindra-mind-rocks-india-today-youth-summit.html/1/151669.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 
-                <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/birla_71.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/birla_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/kumar-mangalam-birla-at-mind-rocks-india-today-youth-summit-2011.html/1/151659.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>	
             </div>
             <div class="userbytesrowrighttop">
-            	<div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/chetan-1_71.jpg) no-repeat;">
+            	<div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/chetan-1_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/chetan-bhagat-at-india-today-mind-rocks-youth-summit-2011.html/1/151680.html"  target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
-                <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/kiran-rao_71.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/kiran-rao_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2011.html/1/151697.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>
@@ -85,19 +85,19 @@
     </div>
     <div class="userbytesrow">
         <div class="userbytesrowleft">
-            <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/cMIND_ALERTS_2_new_71x58.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/cMIND_ALERTS_2_new_71x58.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/chetan-bhagat-india-today-mind-rocks-youth-summit.html/1/151694.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/yuvi-gauti-8_71.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/yuvi-gauti-8_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/yuvraj-singh-gautam-gambhir-india-today-mind-rocks-youth-summit-2011.html/1/151686.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>	
         </div>
         <div class="userbytesrowright">
-            <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/kiran_bedi_1_71.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/kiran_bedi_1_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/kiran-bedi-india-today-mind-rocks-youth-summit-2011.html/1/151715.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/arun-1_71.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/arun-1_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/mind-rocks-india-today-youth-summit-2011.html/1/151657.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>
@@ -115,32 +115,32 @@
 
      <div>	
         <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/rapkingz_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Band Rapkingz at Mind Rocks" alt="Band Rapkingz at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/rapkingz_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Band Rapkingz at Mind Rocks" alt="Band Rapkingz at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
       
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/rapkingz-performs-at-mind-rocks-youth-summit-2011.html/1/151590.html">Rapkingz performs at Mind Rocks</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/ameya_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/ameya_88_091611082046.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/mind-rocks-youth-summit-2011-ameya.html/1/151592.html">Ameya rocks the show at Mind Rocks</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg);"><a href="http://media2.intoday.in/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg"><img border="0" title="Agrath band performs at Mind Rocks" alt="Agrath band performs at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg);"><a href="/staticpages/mediaintoday/indiatoday//images/stories/2011September/agrath_88_091611082046.jpg"><img border="0" title="Agrath band performs at Mind Rocks" alt="Agrath band performs at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/jalandhar-band-agrath-wins-india-today-mind-rocks-contest.html/1/151587.html">Jalandhar-based band 'Agrath' performs at Mind Rocks</a></div>
         </div>
     </div>      	            
     <div>	
         <div class="mediaSbox" style="margin: 1px 1px 1px 0pt; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/rapkingz_performance_88_091611082036.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Rapkingz rappers" alt="Rapkingz rappers" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/rapkingz_performance_88_091611082036.jpg);"><a href="http://indiatoday.intoday.in/gallery/delhis-tea-destinations/1/5498.html"><img border="0" title="Rapkingz rappers" alt="Rapkingz rappers" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
       
             <div class="mediaSmarg"><a href="india-today-youth-summit-2011-mind-rocks-rapkingz-performance.html
 ">Rapkingz's rapper sizzles at Mind Rocks </a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/ameya_performance_88_091611081959.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/ameya_performance_88_091611081959.jpg);"><a href="http://indiatoday.intoday.in/gallery/salman-and-katrina-spotted-together/1/5497.html"><img border="0" title="Band Ameya at Mind Rocks" alt="Band Ameya at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-mind-rocks-band-ameya.html/1/151588.html">Ameya's impromptu performance at Mind Rocks</a></div>
         </div>
         <div class="mediaSbox" style="margin: 1px 0pt 1px 1px; height: 135px;">  
-            <div class="imgrepeat" style="background-image: url(http://media2.intoday.in/indiatoday//images/stories/2011September/agrath_performance_88_091611082018.jpg);"><a href="http://indiatoday.intoday.in/gallery/anita-hassanandani-mini-mathur-rohit-roy-sandhya-mridul-shahwar-ali/1/5496.html"><img border="0" title="Band Agrath at Mind Rocks" alt="Band Agrath at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
+            <div class="imgrepeat" style="background-image: url(/staticpages/mediaintoday/indiatoday//images/stories/2011September/agrath_performance_88_091611082018.jpg);"><a href="http://indiatoday.intoday.in/gallery/anita-hassanandani-mini-mathur-rohit-roy-sandhya-mridul-shahwar-ali/1/5496.html"><img border="0" title="Band Agrath at Mind Rocks" alt="Band Agrath at Mind Rocks" src="/staticpages/main/images/multimedia-small-thumb-play-icon.png"></a></div>
             <div class="mediaSmarg"><a href="india-today-youth-summit-mind-rocks-agrath-performance.html 
 ">Band Agrath steals the show at Mind Rocks</a></div>
         </div>
@@ -379,6 +379,6 @@
     </div>
     <div class="clear"></div>
 </div>
- <iframe src="http://media2.intoday.in/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+ <iframe src="/staticpages/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
         </footer>
     </div>

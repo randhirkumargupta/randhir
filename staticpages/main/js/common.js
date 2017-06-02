@@ -3,7 +3,7 @@ $(document).ready(function(){
         	setTimeout(function(){$('.loadingad').slideDown();},1000);    
         });
 		$('.popoutwindows').click(function() {
-			window.open('http://media2.intoday.in/indiatoday/high-lowes-large.html','window','status=no,resize=yes,toolbar=no,scrollbars=yes,width=1221,height=597');
+			window.open('/staticpages/mediaintoday/indiatoday/high-lowes-large.html','window','status=no,resize=yes,toolbar=no,scrollbars=yes,width=1221,height=597');
 		});
 	});
 

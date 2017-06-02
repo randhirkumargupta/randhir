@@ -227,27 +227,27 @@ section#left {
 .invited{font-family:Arial, Helvetica, sans-serif; font-size:12px; }
 </style>
   <!--<div class="speakerbox speakermarg">
-<img alt="Anandiben Patel" title="Anandiben Patel" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Anandiben-Patel.jpg" border="0" />
+<img alt="Anandiben Patel" title="Anandiben Patel" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Anandiben-Patel.jpg" border="0" />
 <div class="s-title"><span>Anandiben Patel</span> Chief Minister, Gujarat*</div>
 </div>-->
-  <!--<div class="speakerbox speakermarg"> <img alt="Esha Gupta" title="Esha Gupta" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Esha.jpg" border="0" />
+  <!--<div class="speakerbox speakermarg"> <img alt="Esha Gupta" title="Esha Gupta" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Esha.jpg" border="0" />
     <div class="s-title"><span>Esha Gupta</span>Actor</div>
   </div>-->
-  <div class="speakerbox speakermarg"> <img alt="Aditi Rao Hydari" title="Aditi Rao Hydari" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Aditi_Rao_Hydari.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Aditi Rao Hydari" title="Aditi Rao Hydari" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Aditi_Rao_Hydari.jpg" border="0" />
     <div class="s-title"><span>Aditi Rao Hydari</span>Actor </div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Manabi Bandopadhyay" title="Manabi Bandopadhyay" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Manabi-Bandhopadyay-.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Manabi Bandopadhyay" title="Manabi Bandopadhyay" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Manabi-Bandhopadyay-.jpg" border="0" />
     <div class="s-title"><span>Manabi Bandopadhyay</span>India's First Transgender Principal</div>
   </div>
-  <!--<div class="speakerbox speakermarg"> <img alt="Chaya Momaya" title="Chaya Momaya" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Chhaya-Momaya.jpg" border="0" />
+  <!--<div class="speakerbox speakermarg"> <img alt="Chaya Momaya" title="Chaya Momaya" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Chhaya-Momaya.jpg" border="0" />
     <div class="s-title"><span>Chhaya Momaya</span>Image consultant</div>
   </div>-->
-  <div class="speakerbox speakermarg"> <img alt="Juhi Chaturvedi" title="Juhi Chaturvedi" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Juhi-Chaturvedi.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Juhi Chaturvedi" title="Juhi Chaturvedi" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Juhi-Chaturvedi.jpg" border="0" />
     <div class="s-title"><span>Juhi Chaturvedi</span>Writer, Piku and Vicky Donor</div>
   </div>
   
   
-  <div class="speakerbox speakermarg"> <img alt="Bhumi Pednekar" title="Bhumi Pednekar" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Bhumi-Pednekar-080415-21-photo-Mandar-Deodhar-.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Bhumi Pednekar" title="Bhumi Pednekar" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Bhumi-Pednekar-080415-21-photo-Mandar-Deodhar-.jpg" border="0" />
     <div class="s-title"><span>Bhumi Pednekar</span>Actor</div>
   </div>
   
@@ -255,23 +255,23 @@ section#left {
   
   
   
-  <div class="speakerbox speakermarg"> <img alt="Rujuta Diwekar" title="Rujuta Diwekar" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Rujuta-Diwekar-230315-02-photo-Mandar-Deodhar-grayscale.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Rujuta Diwekar" title="Rujuta Diwekar" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Rujuta-Diwekar-230315-02-photo-Mandar-Deodhar-grayscale.jpg" border="0" />
     <div class="s-title"><span>Rujuta Diwekar</span>Dietician</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Varkha Chulani" title="Varkha Chulani" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Varkha-Chulani1-.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Varkha Chulani" title="Varkha Chulani" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Varkha-Chulani1-.jpg" border="0" />
     <div class="s-title"><span>Varkha Chulani</span>Psychologist</div>
   </div>
-  <!--<div class="speakerbox speakermarg"> <img alt="Jaya Row" title="Jaya Row" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Arti-Dogra.jpg" border="0" />
+  <!--<div class="speakerbox speakermarg"> <img alt="Jaya Row" title="Jaya Row" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Arti-Dogra.jpg" border="0" />
     <div class="s-title"><span>Arti Dogra</span>IAS officer</div>
   </div>-->
   
-  <!--<div class="speakerbox speakermarg"> <img alt="Joshna Chinappa" title="Joshna Chinappa" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/joshna.jpg" border="0" />
+  <!--<div class="speakerbox speakermarg"> <img alt="Joshna Chinappa" title="Joshna Chinappa" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/joshna.jpg" border="0" />
     <div class="s-title"><span>Joshna Chinappa</span>Squash Player</div>
   </div>-->
-  <div class="speakerbox speakermarg"> <img alt="Dilshad Master" title="Dilshad Master" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Dilshad-Master-12-.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Dilshad Master" title="Dilshad Master" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Dilshad-Master-12-.jpg" border="0" />
     <div class="s-title"><span>Dilshad Master</span>Cancer Survivor</div>
   </div>
-    <div class="speakerbox speakermarg"> <img alt="Dr. Firuza Parikh" title="Dr. Firuza Parikh" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Dr-Firuza-Parikh-080108.jpg" border="0" />
+    <div class="speakerbox speakermarg"> <img alt="Dr. Firuza Parikh" title="Dr. Firuza Parikh" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Dr-Firuza-Parikh-080108.jpg" border="0" />
     <div class="s-title"><span>Dr. Firuza Parikh </span>Assisted Reproduction Specialist</div>
   </div>
   
@@ -280,18 +280,18 @@ section#left {
   
   
 
-  <div class="speakerbox speakermarg"> <img alt="Mrunalini Deshmukh" title="Mrunalini Deshmukh" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Mrunalini-Deshmukh-.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Mrunalini Deshmukh" title="Mrunalini Deshmukh" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Mrunalini-Deshmukh-.jpg" border="0" />
     <div class="s-title"><span>Mrunalini Deshmukh</span>Lawyer</div>
   </div>
- <div class="speakerbox speakermarg"> <img alt="Aditi Mittal" title="Aditi Mittal" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/aditi-mittal.jpg" border="0" />
+ <div class="speakerbox speakermarg"> <img alt="Aditi Mittal" title="Aditi Mittal" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/aditi-mittal.jpg" border="0" />
     <div class="s-title"><span>Aditi Mittal</span>Comedian</div>
   </div>
   
-   <div class="speakerbox speakermarg"> <img alt="Lavanya Ashok" title="Lavanya Ashok" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/pxmie0ae.jpg" border="0" />
+   <div class="speakerbox speakermarg"> <img alt="Lavanya Ashok" title="Lavanya Ashok" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/pxmie0ae.jpg" border="0" />
     <div class="s-title"><span>Lavanya Ashok</span>Executive Director- Private Equity, Goldman Sachs</div>
   </div>
   
-  <div class="speakerbox speakermarg"> <img alt="Nirmala Sitharaman" title="Nirmala Sitharaman" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Nirmala.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Nirmala Sitharaman" title="Nirmala Sitharaman" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Nirmala.jpg" border="0" />
     <div class="s-title"><span>Nirmala Sitharaman</span>Union Minister of State</span></div>
   </div>
 
@@ -301,14 +301,14 @@ section#left {
   
   
   
-  <div class="speakerbox speakermarg"> <img alt="Maneka Gandhi" title="Maneka Gandhi" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Maneka.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Maneka Gandhi" title="Maneka Gandhi" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Maneka.jpg" border="0" />
     <div class="s-title"><span>Maneka Gandhi</span>Union Minister</div>
   </div>
 
-  <div class="speakerbox speakermarg"> <img alt="Amy Jackson" title="Amy Jackson" src="http://media2.intoday.in/indiatoday/womansummit/2015/speakers/Amy_Jackson.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Amy Jackson" title="Amy Jackson" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/speakers/Amy_Jackson.jpg" border="0" />
     <div class="s-title"><span>Amy Jackson</span>Actor</div>
   </div>
-    <!--<div class="speakerbox speakermarg"> <img alt="Rashmi Shetty" title="Rashmi Shetty" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Rashmi-Shetty.jpg" border="0" />
+    <!--<div class="speakerbox speakermarg"> <img alt="Rashmi Shetty" title="Rashmi Shetty" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Rashmi-Shetty.jpg" border="0" />
     <div class="s-title"><span>Dr. Rashmi Shetty </span>Cosmetic physician</div>
   </div>-->
   
@@ -316,30 +316,30 @@ section#left {
   
   
     <!--
-  <div class="speakerbox speakermarg"> <img alt="Sara Abdullah Pilot" title="Sara Abdullah Pilot" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Sara-Abdullah-Pilot.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Sara Abdullah Pilot" title="Sara Abdullah Pilot" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Sara-Abdullah-Pilot.jpg" border="0" />
     <div class="s-title"><span>Sara Abdullah Pilot</span>Entrepreneur and Yoga Teacher</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Shilpa Shetty" title="Shilpa Shetty" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/shilpa_shetty.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Shilpa Shetty" title="Shilpa Shetty" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/shilpa_shetty.jpg" border="0" />
     <div class="s-title"><span>Shilpa Shetty</span>Actor</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Shelja Sen" title="Shelja Sen" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Shelja-Sen.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Shelja Sen" title="Shelja Sen" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Shelja-Sen.jpg" border="0" />
     <div class="s-title"><span>Shelja Sen</span>Child and adolescent psychologist & family therapist, Children Firsts</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Smriti Irani" title="Smriti Irani" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Smriti-Irani.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Smriti Irani" title="Smriti Irani" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Smriti-Irani.jpg" border="0" />
     <div class="s-title"><span>Smriti Irani</span>Union Cabinet Minister for Human Resource Development</div>
   </div>
   <div style="clear:both"></div>
   
-  <div class="speakerbox speakermarg"> <img alt="Sushmita Dev" title="Sushmita Dev" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Sushmita-Dev.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Sushmita Dev" title="Sushmita Dev" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Sushmita-Dev.jpg" border="0" />
     <div class="s-title"><span>Sushmita Dev</span>Member of Parliament</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Tabu" title="Tabu" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Tabu.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Tabu" title="Tabu" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Tabu.jpg" border="0" />
     <div class="s-title"><span>Tabu</span>Actor</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Tapasya Mundhra" title="Tapasya Mundhra" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/Tapasya.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Tapasya Mundhra" title="Tapasya Mundhra" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/Tapasya.jpg" border="0" />
     <div class="s-title"><span>Tapasya Mundhra</span>Nutritionist and Health Counsellor</div>
   </div>
-  <div class="speakerbox speakermarg"> <img alt="Upasna Kamineni" title="Upasna Kamineni" src="http://media2.intoday.in/indiatoday/womansummit/2014/speakers/upasana.jpg" border="0" />
+  <div class="speakerbox speakermarg"> <img alt="Upasna Kamineni" title="Upasna Kamineni" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/speakers/upasana.jpg" border="0" />
     <div class="s-title"><span>Upasna Kamineni</span>Vice-chairman, Apollo Charity</div>
   </div>
   <div style="clear:both"></div>-->
@@ -362,53 +362,53 @@ section#left {
   <!-- Backstage action Start -->
   <!--<div style="margin-bottom: 20px; float:left; width:100%;">
     <div style="font: bold 20px/24px Arial-Black; color: #dcaa77; height:28px; text-transform:uppercase">Backstage action </div>
-    <div><img src="http://media2.intoday.in/indiatoday/images/snippet/varkha-300.jpg" border="0"  alt="varkha" title="varkha"/></div>
+    <div><img src="/staticpages/mediaintoday/indiatoday/images/snippet/varkha-300.jpg" border="0"  alt="varkha" title="varkha"/></div>
     <div class="clr"></div>
   </div>-->
   <!-- Backstage action End -->
   <div class="clr"></div>
   <div class="side_chunk">
     <div class="side_chunk_title" style="height:28px; font: bold 20px/24px Arial-Black; color: #dcaa77; text-transform:uppercase; margin-top:10px">Video snippets </div>
-    <a href="http://indiatoday.intoday.in/video/actual-hands-on-violence-is-men-upon-women-says-maneka-gandhi/1/477585.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/maneka_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Maneka Gandhi" title="Maneka Gandhi" /></a><a href="http://indiatoday.intoday.in/video/i-always-wanted-to-be-a-girl-from-the-begining-says-manabi-bandopadhyay/1/477600.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/manabi_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Manabi Bandyopadhyay" title="Manabi Bandyopadhyay" /></a> <a href="http://indiatoday.intoday.in/video/we-are-very-conserative-about-our-way-of-dressing-at-isro-says-nandhini/1/477612.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/nandini_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Nandini Harinath" title="Nandini Harinath" /></a>
+    <a href="http://indiatoday.intoday.in/video/actual-hands-on-violence-is-men-upon-women-says-maneka-gandhi/1/477585.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/maneka_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Maneka Gandhi" title="Maneka Gandhi" /></a><a href="http://indiatoday.intoday.in/video/i-always-wanted-to-be-a-girl-from-the-begining-says-manabi-bandopadhyay/1/477600.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/manabi_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Manabi Bandyopadhyay" title="Manabi Bandyopadhyay" /></a> <a href="http://indiatoday.intoday.in/video/we-are-very-conserative-about-our-way-of-dressing-at-isro-says-nandhini/1/477612.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/nandini_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Nandini Harinath" title="Nandini Harinath" /></a>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/video/growing-up-in-a-bengali-neighbourhood-helped-me-with-characterisation-in-piku-juhi-chaturvedi/1/477630.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/juhi-5_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Juhi Chaturvedi" title="Juhi Chaturvedi"/></a> 
-    <a href="http://indiatoday.intoday.in/video/i-dont-greed-eat-as-much-as-i-used-to-earlier-bhumi-pednekar/1/477722.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/Bhumi-Pednekar_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Bhumi Pednekar" alt="Bhumi Pednekar" /></a> <a href="http://indiatoday.intoday.in/video/we-dont-need-a-stamp-of-marriage-to-have-babies-says-dr.-firuza-parikh/1/477713.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/firuza-1_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Dr. Firuza Parikh" title="Dr. Firuza Parikh" /></a>
-    <div style="clear:both"></div>
-    
-     <a href="http://indiatoday.intoday.in/video/half-of-the-people-are-overeating-for-the-wrong-reasons-psychologist-varkha-chulani/1/477740.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/Varkha-Chulani_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Varkha Chulani" title="Varkha Chulani"/></a> 
-    <a href="http://indiatoday.intoday.in/video/i-have-a-streak-of-a-drama-queen-says-aditi-rao-hydari/1/477842.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/AditiRao_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Aditi Rao Hydari" alt="Aditi Rao Hydari" /></a> 
-    <a href="http://indiatoday.intoday.in/video/female-is-not-a-genre-aditi-mittal/1/477829.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/AditiMittal_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Aditi Mittal" title="Aditi Mittal" /></a>
+    <a href="http://indiatoday.intoday.in/video/growing-up-in-a-bengali-neighbourhood-helped-me-with-characterisation-in-piku-juhi-chaturvedi/1/477630.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/juhi-5_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Juhi Chaturvedi" title="Juhi Chaturvedi"/></a> 
+    <a href="http://indiatoday.intoday.in/video/i-dont-greed-eat-as-much-as-i-used-to-earlier-bhumi-pednekar/1/477722.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/Bhumi-Pednekar_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Bhumi Pednekar" alt="Bhumi Pednekar" /></a> <a href="http://indiatoday.intoday.in/video/we-dont-need-a-stamp-of-marriage-to-have-babies-says-dr.-firuza-parikh/1/477713.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/firuza-1_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Dr. Firuza Parikh" title="Dr. Firuza Parikh" /></a>
     <div style="clear:both"></div>
     
-     <a href="http://indiatoday.intoday.in/video/i-wanted-an-answer-for-1984-massacre-says-sandeep-kaur/1/477844.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/Bibi-Sandeep-kaur_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Bibi Sandeep Kaur" title="Bibi Sandeep Kaur"/></a> 
+     <a href="http://indiatoday.intoday.in/video/half-of-the-people-are-overeating-for-the-wrong-reasons-psychologist-varkha-chulani/1/477740.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/Varkha-Chulani_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Varkha Chulani" title="Varkha Chulani"/></a> 
+    <a href="http://indiatoday.intoday.in/video/i-have-a-streak-of-a-drama-queen-says-aditi-rao-hydari/1/477842.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/AditiRao_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Aditi Rao Hydari" alt="Aditi Rao Hydari" /></a> 
+    <a href="http://indiatoday.intoday.in/video/female-is-not-a-genre-aditi-mittal/1/477829.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/AditiMittal_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Aditi Mittal" title="Aditi Mittal" /></a>
+    <div style="clear:both"></div>
+    
+     <a href="http://indiatoday.intoday.in/video/i-wanted-an-answer-for-1984-massacre-says-sandeep-kaur/1/477844.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/Bibi-Sandeep-kaur_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Bibi Sandeep Kaur" title="Bibi Sandeep Kaur"/></a> 
      
-    <a href="http://indiatoday.intoday.in/video/frequent-mammograms-will-help-tackle-breast-cancer-dilshad-master/1/477803.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/Dilshad-Master_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Dilshad Master" alt="Dilshad Master" /></a> 
+    <a href="http://indiatoday.intoday.in/video/frequent-mammograms-will-help-tackle-breast-cancer-dilshad-master/1/477803.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/Dilshad-Master_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" title="Dilshad Master" alt="Dilshad Master" /></a> 
     
-    <a href="http://indiatoday.intoday.in/video/girls-in-our-country-are-been-restricted-from-acheiving-their-dream-says-singhal/1/477799.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/snippet/Ira-Singhal_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Ira Singhal" title="Ira Singhal" /></a>
+    <a href="http://indiatoday.intoday.in/video/girls-in-our-country-are-been-restricted-from-acheiving-their-dream-says-singhal/1/477799.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/snippet/Ira-Singhal_100.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" alt="Ira Singhal" title="Ira Singhal" /></a>
     <div style="clear:both"></div>
     
   </div>
   <!--<div class="side_chunk">
     <div class="side_chunk_title" style="height:30px; font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase; margin-top:10px">Vine videos</div>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="http://media2.intoday.in/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+    <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-harsimrat-kaur-poses-backstage/1/376314.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/harsimrat-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a><a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-manisha-koirala-takes-the-stage/1/376330.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/images/stories/2014August/manisha--vine_100x85_080914055142.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2014-imran-khan-live-vine/1/376331.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2014August/imran-vine_100x85_080914055143.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
     <div style="clear:both"></div>
-    <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>-->
+    <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a> <a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>-->
     <!--<div class="side_chunk">
     <div class="side_chunk_title" style="height:30px; font: bold 20px/24px Arial-Black; color: #F57921; text-transform:uppercase; margin-top:10px">
         Short & Crisp Videos
     </div>
      <div style="clear:both"></div>
-	   <a href="http://indiatoday.intoday.in/video/shashi-tharoor-unveils-woman-magazine-cover/1/266669.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/CRISP-1.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
-		<a href="http://indiatoday.intoday.in/video/sridevi-and-boney-kapoors-love-story/1/266632.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/CRISP-3.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+	   <a href="http://indiatoday.intoday.in/video/shashi-tharoor-unveils-woman-magazine-cover/1/266669.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-1.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/sridevi-and-boney-kapoors-love-story/1/266632.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-3.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
    
-		<a href="http://indiatoday.intoday.in/video/smriti-irani-jayanthi-natarajan-unveil-india-todays--high-and-mighty-cover/1/266579.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/CRISP-2.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/smriti-irani-jayanthi-natarajan-unveil-india-todays--high-and-mighty-cover/1/266579.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/CRISP-2.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
  <div style="clear:both"></div>
  
- <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
-		<a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+ <a href="http://indiatoday.intoday.in/video/sridevi-revisits-her-famous-dialogue-from-chaalbaaz/1/266677.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_4.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/india-today-cover-a-reflection-of-society-says-kalli-purie/1/266592.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_5.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
    
-		<a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
+		<a href="http://indiatoday.intoday.in/video/models-showcase-exquisite-jewellery-at-india-today-woman-summit-2013/1/266674.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/crisp_6.jpg" border="0" align="left" width="98" style="margin-right:2px; margin-top:2px;" /></a>
  <div style="clear:both"></div>
  </div>-->
     <div style="clear:both"></div>
@@ -417,12 +417,12 @@ section#left {
   <!--<div class="past-coverage">
     <div style="font: bold 20px/24px Arial-Black; color: #fff200;">PAST COVERAGE</div>
     <div class="coverage">
-      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html"> <img src="http://media2.intoday.in/indiatoday/womansummit/2013/images/post1.jpg" alt="Mariane Pearl at the Dinner Keynote Address" title="Mariane Pearl at the Dinner Keynote Address" /> </a></div>
+      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html"> <img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/images/post1.jpg" alt="Mariane Pearl at the Dinner Keynote Address" title="Mariane Pearl at the Dinner Keynote Address" /> </a></div>
       <div style="float:left; width:175px;margin-top: 3px;"> <a class="ciker" href="http://indiatoday.intoday.in/video/marian-pearl-and-her-tale-of-courage/1/126879.html">Mariane Pearl at the Dinner Keynote Address</a> </div>
     </div>
     <div class="clr"></div>
     <div class="coverage">
-      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html"> <img src="http://media2.intoday.in/indiatoday/womansummit/2013/images/psot2.jpg" alt="Padma on career, relationship and more" title="Padma on career, relationship and more" /></a></div>
+      <div style="float:left; margin:4px 10px 0 0;"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html"> <img src="/staticpages/mediaintoday/indiatoday/womansummit/2013/images/psot2.jpg" alt="Padma on career, relationship and more" title="Padma on career, relationship and more" /></a></div>
       <div style="float:left; width:175px;margin-top: 3px;"> <a class="ciker" href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2011/1/4087.html">Padma on career, relationship and more</a> </div>
     </div>
   </div>-->
@@ -481,25 +481,25 @@ section#left {
 <tr> 
   <td width="100%" valign="top" align="center" style="border:solid 1px #cccccc; border-width: 1px 0px 0px 0;" colspan="3">
   <span class="sponsor-type">PRESENTING SPONSOR</span><br>
-  <img src="http://media2.intoday.in/indiatoday/womansummit/2014/images/PCJ_logo1.gif" alt="PcJeweller" border="0" usemap="#Map01" title="PcJeweller">  </td>
+  <img src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/PCJ_logo1.gif" alt="PcJeweller" border="0" usemap="#Map01" title="PcJeweller">  </td>
 </tr>
 <tr>
   <td valign="top" align="center" style="border:solid 1px #cccccc; padding:0; border-width: 1px 0px 1px 0; width:1000px">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td align="center"><span class="sponsor-type">ASSOCIATE SPONSOR</span><br>
-          <a target="_blank" href="http://www.e2necc.com/"><img border="0" title="NECC" alt="NECC" src="http://media2.intoday.in/indiatoday/womansummit/2014/images/NECC_logo.jpg"></a> </td>
+          <a target="_blank" href="http://www.e2necc.com/"><img border="0" title="NECC" alt="NECC" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/NECC_logo.jpg"></a> </td>
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">KNOWLEDGE PARTNER</span><br><br>
-          <a href="http://www.banasthali.org/banasthali/" target="_blank"><img border="0" title="banasthali vidyapith" alt="banasthali vidyapith" src="http://media2.intoday.in/indiatoday/womansummit/2015/images/banasthali-vidyapith-logo.jpg"></a> </td>
+          <a href="http://www.banasthali.org/banasthali/" target="_blank"><img border="0" title="banasthali vidyapith" alt="banasthali vidyapith" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/images/banasthali-vidyapith-logo.jpg"></a> </td>
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">BESPOKE PARTNER</span><br><br/>
-          <a href="http://www.damilano.com/" target="_blank"><img border="0" title="da milano" alt="da milano" src="http://media2.intoday.in/indiatoday/womansummit/2015/images/da-milano.jpg"></a> </td>
+          <a href="http://www.damilano.com/" target="_blank"><img border="0" title="da milano" alt="da milano" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/images/da-milano.jpg"></a> </td>
         
         
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">MEDIA PARTNER</span><br><br/>
-          <a href="http://indiatoday.intoday.in/section/108/1/mail-today.html" target="_blank"><img border="0" title="Mail Today" alt="Mail Today" src="http://media2.intoday.in/indiatoday/womansummit/2015/images/Mailtoday-New-Logo)156.jpg"></a> </td>
+          <a href="http://indiatoday.intoday.in/section/108/1/mail-today.html" target="_blank"><img border="0" title="Mail Today" alt="Mail Today" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/images/Mailtoday-New-Logo)156.jpg"></a> </td>
         
         <td align="center" valign="top" style="border-left:2px solid #cccccc"><span class="sponsor-type">PARTNER</span><br><br/>
-          <a href="http://aromamagic.com/" target="_blank"><img border="0" title="aroma-magic" alt="aroma-magic" src="http://media2.intoday.in/indiatoday/womansummit/2015/images/aroma-magic-logo.jpg"></a> </td>
+          <a href="http://aromamagic.com/" target="_blank"><img border="0" title="aroma-magic" alt="aroma-magic" src="/staticpages/mediaintoday/indiatoday/womansummit/2015/images/aroma-magic-logo.jpg"></a> </td>
         
         </tr>
       </table>

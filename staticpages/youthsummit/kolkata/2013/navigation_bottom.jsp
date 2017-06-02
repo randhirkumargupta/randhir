@@ -1,6 +1,6 @@
  
 <div style="width:1003px; float:left;">
-	<img id="footermapping" src="http://media2.intoday.in/indiatoday/youthsummit/SPONSORS.jpg" usemap="#footermapping" border="0" width="1002" height="216" alt="" />
+	<img id="footermapping" src="/staticpages/mediaintoday/indiatoday/youthsummit/SPONSORS.jpg" usemap="#footermapping" border="0" width="1002" height="216" alt="" />
 <map id="footermapping" name="footermapping">
   <area shape="rect" coords="1,30,227,208" href="http://www.kiit.ac.in/" target="_blank" alt="KIIT" title="KIIT"  />
   <area shape="rect" coords="249,69,484,161" href="http://www.jute.com" target="_blank" />

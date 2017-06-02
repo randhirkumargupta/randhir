@@ -112,7 +112,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
   <tr>
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">India Today Sex Survey Cover 2013</div>
-            <div align="center"  style="margin-top:10px;"><img src="http://media2.intoday.in/indiatoday/images/it-cover.jpg" border="0"></div>
+            <div align="center"  style="margin-top:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/it-cover.jpg" border="0"></div>
             <!--<div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>-->
       </td>
   </tr>
@@ -135,7 +135,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
                     <tr>
                         <td align="left" valign="top">
                         	<div class="chart-frame">
-        <img src="http://media2.intoday.in/microsites/sexsurvey/have-you-ever-asked-a-woman-for-sexual-favour.jpg" border="0">
+        <img src="/staticpages/mediaintoday/microsites/sexsurvey/have-you-ever-asked-a-woman-for-sexual-favour.jpg" border="0">
 
     </div>
 
@@ -290,7 +290,7 @@ tweetmeme_url = 'http://indiatoday.intoday.in/sex-survey-2013/index.jsp';
 <table cellapacing="0" cellpadding="0" bgcolor="#ffffff">
 <tr>
 	<td>
-<iframe src="http://media2.intoday.in/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
+<iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1000" height="150"></iframe>
 
 
 

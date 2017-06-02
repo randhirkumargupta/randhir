@@ -17,11 +17,11 @@ h2.bg4{background-color:#444341;}
 
 
 .top_section{width:100%; background-color:#e00e29; min-height:45px;}
-.mob_nav{background:url(http://media2.intoday.in/indiatoday/itmi/wap/mob_nav.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
+.mob_nav{background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/mob_nav.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
 
 .banner_section{float:left; width:100%; position:relative;}
 .banner_section .caption{position:absolute; bottom:0; left:0; background-color:rgba(0,0,0,0.7); font:20px/35px "Roboto"; color:#fff; text-transform:uppercase; min-height:36px; padding:0 10px;}
-.logo{position:absolute; top:5px; left:15px; background:url(http://media2.intoday.in/indiatoday/itmi/wap/logo.jpg) no-repeat 0 0; width:55px; height:80px;}
+.logo{position:absolute; top:5px; left:15px; background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/logo.jpg) no-repeat 0 0; width:55px; height:80px;}
 
 
 .body_section{float:left; width:98%; padding:0 1%;}
@@ -34,7 +34,7 @@ h2.bg4{background-color:#444341;}
 .box ul li:last-child{border:0;}
 .box ul li a{color:#5d5d5d;}
 
-.box .arrow{float:left; width:100%; background:url(http://media2.intoday.in/indiatoday/itmi/wap/arrow.jpg) no-repeat center 0; height:16px; margin:10px 0; cursor:pointer;}
+.box .arrow{float:left; width:100%; background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/arrow.jpg) no-repeat center 0; height:16px; margin:10px 0; cursor:pointer;}
 
 .common_outer{float:left; width:100%; margin-top:20px;}
 .common_box{width:100%; float:left; border:1px solid #dadada; padding:10px 6px; box-sizing:border-box;}
@@ -53,7 +53,7 @@ h2.bg4{background-color:#444341;}
 .hdn_bk_msg{}
 .txt_data{ width:100%; float:left; font-size:15px; color:#424242}
 .txt_data p{ margin:0;padding:5px 10px}
-.hdn_bk_msg{ background:url(http://media2.intoday.in/indiatoday/itmi/wap/trans_white.png) repeat; color:#000; font-size:16px; position:absolute;bottom:4px; padding:10px;  width:96%;}
+.hdn_bk_msg{ background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/trans_white.png) repeat; color:#000; font-size:16px; position:absolute;bottom:4px; padding:10px;  width:96%;}
 .hdn_bk_msg span{ font-weight:bold;}
 .faculty_cont_active{ background:#FAFAFA; font-size:15px; padding:10px; margin:10px; line-height:26px; color:#424242;}
 .faculty_cont{padding:10px; margin:10px;font-size:15px;  line-height:26px; color:#424242;}
@@ -70,7 +70,7 @@ h2.bg4{background-color:#444341;}
 .whatupp_container .whats_cont{ margin:10px;  float:left;width:97%;}
 .whatupp_container .whats_txt{ width:100%; float:left;}
 .whatupp_container .whats_foot {border-bottom: 5px solid #a4a4a4;float: left;margin-top: 16px;position: relative;width: 96%;}
-.whatupp_container .whats_foot .vdoc{ width:40px; height:30px; background:#fff url(http://media2.intoday.in/indiatoday/itmi/wap/camera_c.png) center center no-repeat;bottom: -17px; position:absolute;-z-index:11; right:20%; display:block;}
+.whatupp_container .whats_foot .vdoc{ width:40px; height:30px; background:#fff url(/staticpages/mediaintoday/indiatoday/itmi/wap/camera_c.png) center center no-repeat;bottom: -17px; position:absolute;-z-index:11; right:20%; display:block;}
 .footer_cont{ background:#000; height:22px; margin-top:40px; width:100%; float:left;}
 
 .navigation { width:100%; background:#fff; box-shadow:0 0 3px #ccc; display:none; position:absolute; z-index:999;}

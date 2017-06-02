@@ -258,7 +258,7 @@ body {margin:0; padding:0;}
 .normalgreytxt {font:14px/20px Arial; color:#999999;width:95%;}
 .nav {width:1003px; margin:0 auto; position:relative}
 .nav ul {margin:0; padding:0;}
-.nav ul li {float:left; list-style:none; background:url(http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/nav-line.png) no-repeat top right; font:bold 18px arial; text-transform:uppercase;color:#fff; padding:5px 10px;}
+.nav ul li {float:left; list-style:none; background:url(/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/nav-line.png) no-repeat top right; font:bold 18px arial; text-transform:uppercase;color:#fff; padding:5px 10px;}
 .nav ul li a {color:#fff; text-decoration:none;}
 .nav ul li a:hover {color:#000;text-decoration:none;}
 .nav ul li.last {background:none;}
@@ -332,7 +332,7 @@ body {margin:0; padding:0;}
     clear: both;
 }
 .prog-sch-box {
-    background: url("http://media2.intoday.in/indiatoday/lines.gif") repeat-y scroll left top rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/lines.gif") repeat-y scroll left top rgba(0, 0, 0, 0);
     float: left;
     padding-bottom: 30px;
     width: 100%;

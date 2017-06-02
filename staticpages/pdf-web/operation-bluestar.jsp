@@ -4,7 +4,7 @@
 <base href="/staticpages/pdf-web/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Operation Bluestar</title>
-<meta property="og:image" content="http://media2.intoday.in/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg">
+<meta property="og:image" content="/staticpages/mediaintoday/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg">
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
 body { background: none !important}
@@ -325,10 +325,10 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 .imgs {margin: 0 2px;}
 
 .fb, .tw, .gp, .shr {background-repeat: no-repeat;cursor: pointer;height: 26px; width: 26px;}
-.fb {background-image: url("http://media2.intoday.in/microsites/event-calender/facebook.jpg");}
-.gp {background-image: url("http://media2.intoday.in/microsites/event-calender/google.jpg");}
-.tw {background-image: url("http://media2.intoday.in/microsites/event-calender/twittr.jpg");}
-.shr {background-image: url("http://media2.intoday.in/microsites/event-calender/share.jpg");}
+.fb {background-image: url("/staticpages/mediaintoday/microsites/event-calender/facebook.jpg");}
+.gp {background-image: url("/staticpages/mediaintoday/microsites/event-calender/google.jpg");}
+.tw {background-image: url("/staticpages/mediaintoday/microsites/event-calender/twittr.jpg");}
+.shr {background-image: url("/staticpages/mediaintoday/microsites/event-calender/share.jpg");}
 
 
 </style>
@@ -337,14 +337,14 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div class="socialdiv">
 <div style="color: #000;font: bold 14px/18px Arial; text-align: right;">SHARE</div>
 	<a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status=Operation Bluestar%20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
-	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=http://media2.intoday.in/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
+	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=/staticpages/mediaintoday/indiatoday//images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
 	<a rel="nofollow" title="Share" onclick="javascript: document.getElementById('customShare').style.display='block';" href="javascript:void('0');"><span class="imgs shr lft"></span></a>
 </div>
 
 <div align="right" class="shareRdiv">
 
 <div style="width: 329px; height: 151px; display: none; margin-left: -320px; ^margin-top: 20px" id="customShare" class="sharer_div">
-<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://media2.intoday.in/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=Operation Bluestar
+<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=Operation Bluestar
 %20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank">
   <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;/content_Email.jsp?email=0&amp;title=Operation Bluestar&amp;URL=/pdf-web/op-bluestar.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
 </map></div></div>
@@ -366,10 +366,10 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf">After the attack </a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf">After the attack </a></div>
 			<div  class="sub_heading">The India Today report after Operation Bluestar. Shekhar Gupta, who wrote the story, is now the Editor-in-Chief, Indian Express.</div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf"><img border="0" src="http://media2.intoday.in/indiatoday//images/stories/2014January/6_30_1984-crackdown-in-punjab-_-operation-bluestar-army-commanders-_-we-had-no-other-choice-the-president-_-dignified-demeanour-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/6_30_1984-Crackdown_In_Punjab.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday//images/stories/2014January/6_30_1984-crackdown-in-punjab-_-operation-bluestar-army-commanders-_-we-had-no-other-choice-the-president-_-dignified-demeanour-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -377,12 +377,12 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf">Hurt, anger, betrayal </a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf">Hurt, anger, betrayal </a></div>
             <div  class="sub_heading">Sunil Sethi's report on the shock Operation Bluestar was for the people of Punjab.
 
 </div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf"><img border="0" src="http://media2.intoday.in/indiatoday//images/stories/2014January/7_31_1984-punjab-_-a-scarred-state-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/7_31_1984-Punjab_A_Scarred_State.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday//images/stories/2014January/7_31_1984-punjab-_-a-scarred-state-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -391,10 +391,10 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column" style="margin-left:315px">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/8_15_1984-Punjab_The_Nihang.pdf">Government man </a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/8_15_1984-Punjab_The_Nihang.pdf">Government man </a></div>
 	  <div  class="sub_heading">Another of Shekhar's stories on the government ploy to use a Nihang leader to destroy the remnants of the Akali Dal leadership.
 </div>
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/8_15_1984-Punjab_The_Nihang.pdf"><img border="0" src="http://media2.intoday.in/indiatoday//images/stories/2014January/8_15_1984-punjab-_-the-elusive-solution-the-nihangs-_-storm-troopers-operation-bluestar-_-night-of-blood-1_335x447_013114034857.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/8_15_1984-Punjab_The_Nihang.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday//images/stories/2014January/8_15_1984-punjab-_-the-elusive-solution-the-nihangs-_-storm-troopers-operation-bluestar-_-night-of-blood-1_335x447_013114034857.jpg" /></a>
       <div class="clear"></div>
 
 
@@ -533,10 +533,10 @@ nav ul {
 </div>
 <footer style="width: 1000px; margin: 15px auto 0 auto;">
 <div class="footertag">
-<img src="http://media2.intoday.in/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
+<img src="/staticpages/mediaintoday/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
 <nav class="nav">
 <ul>
-<div class="home" style="background:none"><a href="/index.jsp"><img src="http://media2.intoday.in/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
+<div class="home" style="background:none"><a href="/index.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
 <li ><a href="/news.html" >News</a></li>
 <li ><a href="/section/114/1/india.html" >India</a>
 <li ><a href="/section/113/1/world.html" >World</a>
@@ -555,7 +555,7 @@ nav ul {
 <div class="clear"></div>
 </nav>
 
-<div class="searc-icon1"><img style="margin-bottom:-5px;" src="http://media2.intoday.in/indiatoday/images/btn-down-arrow.jpg"/>
+<div class="searc-icon1"><img style="margin-bottom:-5px;" src="/staticpages/mediaintoday/indiatoday/images/btn-down-arrow.jpg"/>
 <div id="footer1" style=" background-color:#fff">
 	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
     </div>

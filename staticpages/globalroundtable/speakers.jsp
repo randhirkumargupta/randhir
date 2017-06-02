@@ -67,16 +67,16 @@ box-shadow: 0px 5px 5px -2px rgba(122,121,122,0.5); position:relative}
 .left-area{width:623px; float:left;}
 .right-area{width:300px; float:right;min-height:450px;}
 
-@font-face {font-family: 'Arial-Black';src: url('ab.eot'); src: url('ab.eot?#iefix') format('embedded-opentype'),url('ab.woff') format('woff'), url('ab.ttf') format('truetype'),  url('ab.svg#"Arial-Black"') format('svg');font-weight: bold;  font-style: normal;}
-.programme_bg {background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
+@font-face {font-family: 'Arial-Black';src: url('/staticpages/main/font/ab.eot'); src: url('/staticpages/main/font/ab.eot?#iefix') format('embedded-opentype'),url('/staticpages/main/font/ab.woff') format('woff'), url('/staticpages/main/font/ab.ttf') format('truetype'),  url('/staticpages/main/font/ab.svg#"Arial-Black"') format('svg');font-weight: bold;  font-style: normal;}
+.programme_bg {background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
 .nav ul li a.active,.nav ul li a:hover {background:#b70d0d} .nav ul li:hover { background-color:#b70d0d}
 .nav ul li a {padding:5px 9px;}
 .jcarousel-skin-tango .jcarousel-item-horizontal {margin-right:6px !important;}.help_sec .fr {width:430px !important}
-.nav>ul>li.drop1{margin:0;position:relative}.nav>ul>li>ul.ddchild1{background-color:#5E5E5E;display:none;list-style-type:none;margin:0;padding:0;position:absolute;top:30px;width:175px;z-index:999}ul.ddchild1>li{border-bottom:1px solid #FFF;width:100%}ul.ddchild1>li a{color:#FFF;font:700 14px/30px Arial;padding:0 0 0 10px;text-decoration:none;width:165px}.right{float:right}.yellow-bg{background-color:#F7EE23;float:left;margin:5px 0;padding:5px}.main_content{width:1000px;margin-bottom:100px;float:left}#main_content_left{float:left;width:623px}.homebanner{margin-bottom:20px}.live_title{border-bottom:1px solid #ccc;line-height:30px;margin-bottom:10px}.leftlivetitle{color:#b70d0d;float:left;font:400 20px Arial-Black;width:450px;text-transform:uppercase}.liveupdatedate{float:right;font:12px/30px Arial;text-align:right}.datemh{float:left;padding:0;color:#666;font-size:12px;font-family:Tahoma;margin:2px 0 0 10px;display:inline;border:0 solid red;text-align:right;width:214px}.clear{clear:both}.livepage{float:left;width:470px}.red{color:#B70D0D}.red a{color:#B70D0D;text-decoration:none}.red a:hover{text-decoration:underline}.highlight{float:right;width:200px}.highlight_head{border-bottom:1px dotted #000}.highlighttitle{color:#b70d0d;float:left;font:700 18px/18px Arial;width:150px}.highlight_more{float:right;width:50px;font-family:Arial;font-size:14px;line-height:20px}.highlight_more a{color:#000;text-decoration:none}.contabactive{display:block;float:left}.contabbox{float:left;width:623px}.mindr-contimeln{color:#606060;float:left;font:bold 12px/22px roboto;width:85px}.conritepart{background-image:url(http://conclave.intoday.in/conclave/images/line1.gif);background-position:left top;background-repeat:repeat-y;float:left;width:538px;padding-bottom:15px}.consubrtpart{padding-left:10px}.mindr-sessiontitle{background-color:#EEE;color:#000;font:bold 14px roboto;padding:0px 8px;text-transform:uppercase;word-spacing:1px}.mindr-headline{color:#000;font:700 14px/18px arial}.mindr-headline ul{margin:20px 0 0;padding:0}.mindr-headline ul li{background:url(http://media2.intoday.in/microsites/youthsummit2012/story-arrow.gif) no-repeat scroll left 5px transparent;color:#000;font:700 14px/18px arial;list-style:none;margin:3px 0 5px;padding:1px 0 1px 15px}.consubleftbox{color:#C90A12;float:left;font:700 15px/20px arial;margin:10px 0;width:264px}.consubleftbox img{margin-right:6px}.consubleftbox.links a{font-size:12px}.mindr-consubrtbox{background:url(http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif) repeat-y scroll left top transparent;float:left;margin:10px 0 10px 10px;padding-left:15px;width:238px}.prj_name,.prj_name a{color:#B70D0D;font:700 13px/20px Arial;text-decoration:none}.imgs{margin-right:10px}.mindr-consubhead{color:#000;font:700 13px/20px arial}.mindr-consubrtbox{color:#343434;font:12px/18px arial}.prjtomebg_2{background:url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/lunch-bg1.jpg) no-repeat scroll 0 0 transparent;color:#FFF;height:34px;line-height:34px;padding:0 10px;width:543px;font:15px/30px Arial-Black;text-transform:uppercase}.mindr-headline ul li a{color:#21509E;text-decoration:none}.consubleftbox a{color:#C90A12;font:700 12px arial;text-decoration:none}.bott-marg{margin-bottom:15px}.main-pro-head{width:623px;float:left}.main-pro-head h3{font:400 24px/33px roboto;color:#00000;margin:0;float:left}.mindr-text{font:400 14px/18px arial;color:#6c6c6c}#contabbing,.marg-top{margin-top:10px}#sidebar{float:right;width:300px}.side_chunk{clear:both;margin-bottom:30px}.side_chunk_title{font:normal 24px/20px roboto;height:30px; padding-bottom:10px;}.side_chunk_title-red{color:#d6171e; font-weight:bold}#main_content{margin-top:20px}.jcarousel-skin-tango .jcarousel-item{height:170px;text-align:center;width:117px}.jcarousel-skin-tango .jcarousel-prev-horizontal{left:0!important}.jcarousel-skin-tango .jcarousel-next-horizontal{right:0!important}.jcarousel-skin-tango li{font:400 13px/20px arial;color:#000;text-align:center}.jcarousel-skin-tango .kicker{font:400 12px/15px arial;color:#6c6c6c}.jcarousel-skin-tango .red{font:700 12px/20px arial;color:#b70d0d}.jcarousel-skin-tango .jcarousel-clip-horizontal{height:210px;width:615px}.jcarousel-skin-tango .jcarousel-item-horizontal{margin-right:6px!important}.help_sec .fr{width:430px!important}.nav ul li li a{padding:1px 9px!important}
+.nav>ul>li.drop1{margin:0;position:relative}.nav>ul>li>ul.ddchild1{background-color:#5E5E5E;display:none;list-style-type:none;margin:0;padding:0;position:absolute;top:30px;width:175px;z-index:999}ul.ddchild1>li{border-bottom:1px solid #FFF;width:100%}ul.ddchild1>li a{color:#FFF;font:700 14px/30px Arial;padding:0 0 0 10px;text-decoration:none;width:165px}.right{float:right}.yellow-bg{background-color:#F7EE23;float:left;margin:5px 0;padding:5px}.main_content{width:1000px;margin-bottom:100px;float:left}#main_content_left{float:left;width:623px}.homebanner{margin-bottom:20px}.live_title{border-bottom:1px solid #ccc;line-height:30px;margin-bottom:10px}.leftlivetitle{color:#b70d0d;float:left;font:400 20px Arial-Black;width:450px;text-transform:uppercase}.liveupdatedate{float:right;font:12px/30px Arial;text-align:right}.datemh{float:left;padding:0;color:#666;font-size:12px;font-family:Tahoma;margin:2px 0 0 10px;display:inline;border:0 solid red;text-align:right;width:214px}.clear{clear:both}.livepage{float:left;width:470px}.red{color:#B70D0D}.red a{color:#B70D0D;text-decoration:none}.red a:hover{text-decoration:underline}.highlight{float:right;width:200px}.highlight_head{border-bottom:1px dotted #000}.highlighttitle{color:#b70d0d;float:left;font:700 18px/18px Arial;width:150px}.highlight_more{float:right;width:50px;font-family:Arial;font-size:14px;line-height:20px}.highlight_more a{color:#000;text-decoration:none}.contabactive{display:block;float:left}.contabbox{float:left;width:623px}.mindr-contimeln{color:#606060;float:left;font:bold 12px/22px roboto;width:85px}.conritepart{background-image:url(http://conclave.intoday.in/conclave/images/line1.gif);background-position:left top;background-repeat:repeat-y;float:left;width:538px;padding-bottom:15px}.consubrtpart{padding-left:10px}.mindr-sessiontitle{background-color:#EEE;color:#000;font:bold 14px roboto;padding:0px 8px;text-transform:uppercase;word-spacing:1px}.mindr-headline{color:#000;font:700 14px/18px arial}.mindr-headline ul{margin:20px 0 0;padding:0}.mindr-headline ul li{background:url(/staticpages/mediaintoday/microsites/youthsummit2012/story-arrow.gif) no-repeat scroll left 5px transparent;color:#000;font:700 14px/18px arial;list-style:none;margin:3px 0 5px;padding:1px 0 1px 15px}.consubleftbox{color:#C90A12;float:left;font:700 15px/20px arial;margin:10px 0;width:264px}.consubleftbox img{margin-right:6px}.consubleftbox.links a{font-size:12px}.mindr-consubrtbox{background:url(/staticpages/mediaintoday/microsites/youthsummit2012/arrow-line.gif) repeat-y scroll left top transparent;float:left;margin:10px 0 10px 10px;padding-left:15px;width:238px}.prj_name,.prj_name a{color:#B70D0D;font:700 13px/20px Arial;text-decoration:none}.imgs{margin-right:10px}.mindr-consubhead{color:#000;font:700 13px/20px arial}.mindr-consubrtbox{color:#343434;font:12px/18px arial}.prjtomebg_2{background:url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/lunch-bg1.jpg) no-repeat scroll 0 0 transparent;color:#FFF;height:34px;line-height:34px;padding:0 10px;width:543px;font:15px/30px Arial-Black;text-transform:uppercase}.mindr-headline ul li a{color:#21509E;text-decoration:none}.consubleftbox a{color:#C90A12;font:700 12px arial;text-decoration:none}.bott-marg{margin-bottom:15px}.main-pro-head{width:623px;float:left}.main-pro-head h3{font:400 24px/33px roboto;color:#00000;margin:0;float:left}.mindr-text{font:400 14px/18px arial;color:#6c6c6c}#contabbing,.marg-top{margin-top:10px}#sidebar{float:right;width:300px}.side_chunk{clear:both;margin-bottom:30px}.side_chunk_title{font:normal 24px/20px roboto;height:30px; padding-bottom:10px;}.side_chunk_title-red{color:#d6171e; font-weight:bold}#main_content{margin-top:20px}.jcarousel-skin-tango .jcarousel-item{height:170px;text-align:center;width:117px}.jcarousel-skin-tango .jcarousel-prev-horizontal{left:0!important}.jcarousel-skin-tango .jcarousel-next-horizontal{right:0!important}.jcarousel-skin-tango li{font:400 13px/20px arial;color:#000;text-align:center}.jcarousel-skin-tango .kicker{font:400 12px/15px arial;color:#6c6c6c}.jcarousel-skin-tango .red{font:700 12px/20px arial;color:#b70d0d}.jcarousel-skin-tango .jcarousel-clip-horizontal{height:210px;width:615px}.jcarousel-skin-tango .jcarousel-item-horizontal{margin-right:6px!important}.help_sec .fr{width:430px!important}.nav ul li li a{padding:1px 9px!important}
 
 h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
-.chairman {font:normal 16px/20px roboto; color:#00000; background:url(http://media2.intoday.in/microsites/globalevent/arun-puri.png) right bottom no-repeat  transparent; padding-bottom:70px; }
-.chairmantitle { background:#cfcfcf url(http://media2.intoday.in/microsites/globalevent/chairman-speech-logo.png) 10px center no-repeat; font:normal 16px/20px roboto; color:#00000; padding:10px 10px 10px 60px; margin-top: -16px;}
+.chairman {font:normal 16px/20px roboto; color:#00000; background:url(/staticpages/mediaintoday/microsites/globalevent/arun-puri.png) right bottom no-repeat  transparent; padding-bottom:70px; }
+.chairmantitle { background:#cfcfcf url(/staticpages/mediaintoday/microsites/globalevent/chairman-speech-logo.png) 10px center no-repeat; font:normal 16px/20px roboto; color:#00000; padding:10px 10px 10px 60px; margin-top: -16px;}
 .chairmantitle span { color:red; font-weight:bold; }
 .footers { background:#d81921; padding:10px 10px 0px 0px; }
 .footers span {font:bold 22px/20px roboto; color:#fff; text-transform:uppercase; float:left; padding:18px }
@@ -130,7 +130,7 @@ $(document).ready(function() {
 </script>
 
 <div style="width:100%; margin:auto; text-align:center">
-	<img src="http://media2.intoday.in/microsites/globalevent/global-navigation-bar.jpg" border="0" usemap="#Map">
+	<img src="/staticpages/mediaintoday/microsites/globalevent/global-navigation-bar.jpg" border="0" usemap="#Map">
 <map name="Map">
   <area shape="rect" coords="111,10,198,33" href="http://www.indiatoday.in/" target="_blank">
   <area shape="rect" coords="205,11,255,27" href="http://www.aajtak.in/" target="_blank">
@@ -147,9 +147,9 @@ $(document).ready(function() {
 
 <div class="con bottom-shadow bg-white cf">
  <div class="wrapper cf">
-   <div class="logo"><a href="/globalroundtable/index.jsp"><img src="http://media2.intoday.in/microsites/globalevent/logo.gif" border="0"></a></div>
+   <div class="logo"><a href="/globalroundtable/index.jsp"><img src="/staticpages/mediaintoday/microsites/globalevent/logo.gif" border="0"></a></div>
    <div class="nav-area">
-   <div class="itgd-logo"><a href="http://www.indiatodaygroup.com/"><img src="http://media2.intoday.in/microsites/globalevent/itg-logo.gif"></a></div>
+   <div class="itgd-logo"><a href="http://www.indiatodaygroup.com/"><img src="/staticpages/mediaintoday/microsites/globalevent/itg-logo.gif"></a></div>
    <div class="cf">&nbsp;</div>
 
    <div style="position:relative;">
@@ -161,7 +161,7 @@ $(document).ready(function() {
          <li><a href="/globalroundtable/sponsor.jsp" id="sponsors">Sponsors</a></li>
          <li><a href="/globalroundtable/speakers.jsp" id="speakers">Speakers</a></li>
          <li><a href="/globalroundtable/programme.jsp" id="programme">Programme</a></li>
-         <li class="last"><a href="#" ><span>GLOBAL ROUNDTABLE</span><img src="http://media2.intoday.in/microsites/globalevent/drop-img.jpg"  /></a></li>
+         <li class="last"><a href="#" ><span>GLOBAL ROUNDTABLE</span><img src="/staticpages/mediaintoday/microsites/globalevent/drop-img.jpg"  /></a></li>
      </ul>
    </div>
 
@@ -201,15 +201,15 @@ $(document).ready(function() {
 <div class="main-pro-head bott-marg">
 	  <h3><span class="side_chunk_title-red">session</span> speakers</h3></div>
   <ul class="firstul cf">
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/william.png"><strong>William Cohen</strong><br/>Former US Secretary of Defence and Chairman, The Cohen Group</div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/william.png"><strong>William Cohen</strong><br/>Former US Secretary of Defence and Chairman, The Cohen Group</div></li>
 
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/ram-madhav.png"><strong>Ram Madhav</strong><br/>General Secretary,BJP</div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/ram-madhav.png"><strong>Ram Madhav</strong><br/>General Secretary,BJP</div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/husain.png"><strong>Hussain Haqqani</strong><br/>Former Pakistan
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/husain.png"><strong>Hussain Haqqani</strong><br/>Former Pakistan
 Ambassador to US</div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/nechal.png"><strong>Nehchal Sandhu</strong><br/>Former Director,
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/nechal.png"><strong>Nehchal Sandhu</strong><br/>Former Director,
 Intelligence Bureau</div></li>
 
   </ul>
@@ -217,59 +217,59 @@ Intelligence Bureau</div></li>
 
 
   <ul>
-    <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Ajay-S-Shriram_1.jpg" class="round"><strong>Ajay S Shriram</strong></div></li>
+    <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ajay-S-Shriram_1.jpg" class="round"><strong>Ajay S Shriram</strong></div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Alyssa-Ayres-(1).jpg" class="round"><strong>Alyssa Ayres</strong></div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Alyssa-Ayres-(1).jpg" class="round"><strong>Alyssa Ayres</strong></div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Baba-Kalyani_02.jpg" class="round"><strong>Baba Kalyani </strong> <br>Chairman, Bharat Forge </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Baba-Kalyani_02.jpg" class="round"><strong>Baba Kalyani </strong> <br>Chairman, Bharat Forge </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Chanda-Kochhar-02.jpg" class="round"><strong>Chanda Kochar  </strong> <br>MD & CEO, ICICI Bank </div></li>
-
-  </ul>
-
-
-
-  <ul>
-    <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Chandrajit-Banerjee.jpg" class="round"><strong>Chandrajit Banerjee </strong><br>DG, CII </div></li>
-
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Gururaj-Deshpande-2.jpg" class="round"><strong>Gururaj Deshpande </strong><br>Chairman, Sycamore Networks</div></li>
-
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Jagdish-Bhagwati-.jpg" class="round"><strong>Jagdish Bhagwati  </strong> <br>Professor of Economics & Law, Columbia University </div></li>
-
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Jairam-Ramesh_2.jpg" class="round"><strong>Jairam Ramesh   </strong> <br>Member of Parliament,INC  </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Chanda-Kochhar-02.jpg" class="round"><strong>Chanda Kochar  </strong> <br>MD & CEO, ICICI Bank </div></li>
 
   </ul>
 
 
 
   <ul>
-    <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Jayant-Sinha-01.jpg" class="round"><strong>Jayant Sinha  </strong><br>Member of Parliament, BJP </div></li>
+    <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Chandrajit-Banerjee.jpg" class="round"><strong>Chandrajit Banerjee </strong><br>DG, CII </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Kanwal-Rekhi_01.jpg" class="round"><strong>Kanwal Rekhi  </strong><br>Managing Director, Inventus Capital Partners </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Gururaj-Deshpande-2.jpg" class="round"><strong>Gururaj Deshpande </strong><br>Chairman, Sycamore Networks</div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/NK-Singh2-01.jpg" class="round"><strong>NK Singh  </strong> </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Jagdish-Bhagwati-.jpg" class="round"><strong>Jagdish Bhagwati  </strong> <br>Professor of Economics & Law, Columbia University </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Pawan-Munjal_02.jpg" class="round"><strong>Pawan Kant Munjal  </strong> <br>Joint Managing Director, Hero MotoCorp* (CII) </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Jairam-Ramesh_2.jpg" class="round"><strong>Jairam Ramesh   </strong> <br>Member of Parliament,INC  </div></li>
+
+  </ul>
+
+
+
+  <ul>
+    <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Jayant-Sinha-01.jpg" class="round"><strong>Jayant Sinha  </strong><br>Member of Parliament, BJP </div></li>
+
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Kanwal-Rekhi_01.jpg" class="round"><strong>Kanwal Rekhi  </strong><br>Managing Director, Inventus Capital Partners </div></li>
+
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/NK-Singh2-01.jpg" class="round"><strong>NK Singh  </strong> </div></li>
+
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Pawan-Munjal_02.jpg" class="round"><strong>Pawan Kant Munjal  </strong> <br>Joint Managing Director, Hero MotoCorp* (CII) </div></li>
 
   </ul>
 
 
    <ul>
-    <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Pramath-Raj-Sinha-01.jpg" class="round"><strong>Pramath Raj Sinha   </strong><br>Founder & MD, 9.9 Mediaworx Pvt. Ltd. </div></li>
+    <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Pramath-Raj-Sinha-01.jpg" class="round"><strong>Pramath Raj Sinha   </strong><br>Founder & MD, 9.9 Mediaworx Pvt. Ltd. </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Ram-Madhav-.jpg" class="round"><strong>Ram Madhav   </strong><br>General Secretary, BJP (*) </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Ram-Madhav-.jpg" class="round"><strong>Ram Madhav   </strong><br>General Secretary, BJP (*) </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Sanjaya-Baru-(1).jpg" class="round"><strong>Sanjaya Baru  </strong> </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Sanjaya-Baru-(1).jpg" class="round"><strong>Sanjaya Baru  </strong> </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Shashi-Tharoor-01.jpg" class="round"><strong>Shashi Tharoor   </strong> <br>Member of Parliament, INC & Ex UPA Minister  </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Shashi-Tharoor-01.jpg" class="round"><strong>Shashi Tharoor   </strong> <br>Member of Parliament, INC & Ex UPA Minister  </div></li>
 
   </ul>
 
 
   <ul>
-    <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/SUNIL-BHARTI-MITTAL,-GROUP-CHAIRMAN-AND-MD,-BHARTI-ENTERPRISES,-VM,-290404.jpg" class="round"><strong>Sunil Bharti Mittal    </strong><br>Chairman, Bharti Enterprises*  </div></li>
+    <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/SUNIL-BHARTI-MITTAL,-GROUP-CHAIRMAN-AND-MD,-BHARTI-ENTERPRISES,-VM,-290404.jpg" class="round"><strong>Sunil Bharti Mittal    </strong><br>Chairman, Bharti Enterprises*  </div></li>
 
-     <li><div class="speakers-thumnb"><img src="http://media2.intoday.in/microsites/globalevent/speakers/Vinod-Khosla-02.jpg" class="round"><strong>Vinod Khosla   </strong> </div></li>
+     <li><div class="speakers-thumnb"><img src="/staticpages/mediaintoday/microsites/globalevent/speakers/Vinod-Khosla-02.jpg" class="round"><strong>Vinod Khosla   </strong> </div></li>
 
 
 
@@ -302,7 +302,7 @@ potential of this<br>
 country.
     </div>
     <div class="chairmantitle">
-	    <img src="http://media2.intoday.in/microsites/globalevent/play-button.png" style="float:right; margin-top:-5px">
+	    <img src="/staticpages/mediaintoday/microsites/globalevent/play-button.png" style="float:right; margin-top:-5px">
     	<span>Aroon Purie,</span> Chairman<br>
 		The India Today Group
 
@@ -311,7 +311,7 @@ country.
 
 
 <div class="side_chunk" style="position:relative;" >
-<img src="http://media2.intoday.in/microsites/globalevent/twitter-header.jpg" style="margin-bottom:-3px;position:relative;z-index:999;" >
+<img src="/staticpages/mediaintoday/microsites/globalevent/twitter-header.jpg" style="margin-bottom:-3px;position:relative;z-index:999;" >
 
 <div style="position:absolute;top:10px;">
 
@@ -334,8 +334,8 @@ country.
 </div>
 
 <div class="footers cf">
-    	<span>Sponsors</span>  &nbsp;<!--<img src="http://media2.intoday.in/microsites/globalevent/footer.jpg" >-->
-        <div class="presenting-sponsors"><img src="http://media2.intoday.in/microsites/globalevent/sponsors-strip.gif" usemap="#Map2" border="0" width="844">
+    	<span>Sponsors</span>  &nbsp;<!--<img src="/staticpages/mediaintoday/microsites/globalevent/footer.jpg" >-->
+        <div class="presenting-sponsors"><img src="/staticpages/mediaintoday/microsites/globalevent/sponsors-strip.gif" usemap="#Map2" border="0" width="844">
           <map name="Map2">
             <area shape="rect" coords="7,-1,141,67" href="/globalroundtable/lava.jsp">
             <area shape="rect" coords="277,-3,415,59" href="/globalroundtable/tv_asia.jsp">

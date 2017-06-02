@@ -8,10 +8,10 @@
 <link href="/staticpages/main/css/homepage.css" type="text/css" rel="stylesheet">
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 <meta property="og:title" content="Mood of the Nation Survey">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide1.jpg">
+<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide1.jpg">
 <meta property="og:url" content="/mood-of-the-nation/">
 <meta property="og:description" content="Here's a low down on the parties/alliance gaining and losing public confidence at Centre and State level.">
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide1.jpg" />
+<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide1.jpg" />
 
 <style>
 #surfercommt {
@@ -263,7 +263,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title=Mood of the Nation Survey&URL=http://indiatoday.intoday.in/mood-of-the-nation/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/mood-of-the-nation/&p[title]=Mood of the Nation Survey&s=100&p[summary]=Here's a low down on the parties/alliance gaining and losing public confidence at Centre and State level.&p[images][0]=http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide1.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/mood-of-the-nation/&p[title]=Mood of the Nation Survey&s=100&p[summary]=Here's a low down on the parties/alliance gaining and losing public confidence at Centre and State level.&p[images][0]=/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide1.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status=Mood of the Nation Survey%20http://indiatoday.intoday.in/mood-of-the-nation/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -274,58 +274,58 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
     <?php if(isset($_GET['slide']) && $_GET['slide'] == 2) { ?>
 
-    <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide2.jpg" alt="" title="" />
+    <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide2.jpg" alt="" title="" />
 
     <a href="/mood-of-the-nation/index.jsp?slide=1" class='prev'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Back-button.png' alt='Prev'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
     </a>
     <a href="/mood-of-the-nation/index.jsp?slide=3" class='next'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Forward-button.png' alt='Next'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 3) { ?>
 
-    <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide3.jpg" alt="" title="" />
+    <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide3.jpg" alt="" title="" />
 
     <a href="/mood-of-the-nation/index.jsp?slide=2" class='prev'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Back-button.png' alt='Prev'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
     </a>
     <a href="/mood-of-the-nation/index.jsp?slide=4" class='next'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Forward-button.png' alt='Next'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 4) { ?>
-    <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide4.jpg" alt="" title="" />
+    <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide4.jpg" alt="" title="" />
 
     <a href="/mood-of-the-nation/index.jsp?slide=3" class='prev'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Back-button.png' alt='Prev'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
     </a>
     <a href="/mood-of-the-nation/index.jsp?slide=5" class='next'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Forward-button.png' alt='Next'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
     </a>
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 5) { ?>
-    <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide5.jpg" alt="" title="" />
+    <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide5.jpg" alt="" title="" />
 
     <a href="/mood-of-the-nation/index.jsp?slide=4" class='prev'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Back-button.png' alt='Prev'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
     </a>
     <a href="/mood-of-the-nation/index.jsp?slide=6" class='next'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Forward-button.png' alt='Next'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
     </a>
 
     <?php  } elseif (isset($_GET['slide']) && $_GET['slide'] == 6) { ?>
 
-    <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide6.jpg" alt="" title="" />
+    <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide6.jpg" alt="" title="" />
 
     <a href="/mood-of-the-nation/index.jsp?slide=5" class='prev'>
-      <img src='http://media2.intoday.in/indiatoday/images/friends/Back-button.png' alt='Prev'>
+      <img src='/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'>
     </a>
 
     <?php  } else { ?>
-      <img src="http://media2.intoday.in/indiatoday/specials/mood-of-nation/Slide1.jpg" alt="" title="" />
+      <img src="/staticpages/mediaintoday/indiatoday/specials/mood-of-nation/Slide1.jpg" alt="" title="" />
 
       <a href="/mood-of-the-nation/index.jsp?slide=2" class='next'>
-        <img src='http://media2.intoday.in/indiatoday/images/friends/Forward-button.png' alt='Next'>
+        <img src='/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'>
       </a>
     <?php } ?>
 

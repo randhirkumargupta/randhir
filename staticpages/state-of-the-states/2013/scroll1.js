@@ -11,7 +11,7 @@ slidebgcolor="#ffffff"
 //Specify the slider's images
 var leftrightslide=new Array()
 var finalslide=''
-leftrightslide[0]='<IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/slide.jpg" BORDER="0" WIDTH="722" HEIGHT="52" HSPACE="2" VSPACE="2">'
+leftrightslide[0]='<IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/slide.jpg" BORDER="0" WIDTH="722" HEIGHT="52" HSPACE="2" VSPACE="2">'
 
 //Specify gap between each image (use HTML):
 var imagegap=""

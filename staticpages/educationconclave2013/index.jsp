@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="fbtwbox"><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/smo.png" usemap="#Map" border="0">
+<div class="fbtwbox"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/smo.png" usemap="#Map" border="0">
   <map name="Map">
     <area shape="rect" coords="6,4,56,139" href="https://www.facebook.com/mailtoday" target="_blank">
     <area shape="rect" coords="7,154,56,297" href="https://twitter.com/IndiaToday" target="_blank">
@@ -43,8 +43,8 @@
 
     <div class="topbg">
         <div class="centerdiv posrel">
-        <div class="posabs"><a href="/educationconclave2013/index.jsp"><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/logo.jpg" border="0" /></a></div>
-        <div class="toptxt"><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/punch.jpg" border="0"></div>
+        <div class="posabs"><a href="/educationconclave2013/index.jsp"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/logo.jpg" border="0" /></a></div>
+        <div class="toptxt"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/punch.jpg" border="0"></div>
         </div>
         
     <div class="clear"></div>
@@ -157,7 +157,7 @@ sms <strong>MTM</strong> Mail Today to<strong> 52424</strong></div>
        
        <h1>Event Speakers</h1> 
        <div class="e_speaker toppad0px">
-   	   <img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/sp1.jpg" width="107" height="95" alt=""> 
+   	   <img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/sp1.jpg" width="107" height="95" alt=""> 
        Keynote<br>
 <span>Sheila Dikshit</span><br>
 Chief Minister<br>
@@ -165,7 +165,7 @@ Delhi
        </div>
        
        <div class="e_speaker e_sp toppad0px">
-   	   <img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/sp4.jpg" width="107" height="95" alt=""> 
+   	   <img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/sp4.jpg" width="107" height="95" alt=""> 
        Guest of Honour<br>
 <span>Prof. Dinesh Singh</span><br>
 Vice Chancellor,<br>
@@ -174,14 +174,14 @@ Delhi University
        
        
        <div class="e_speaker" style="border-bottom:none">
-   	   <img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/sp3.jpg" width="107" height="95" alt=""> 
+   	   <img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/sp3.jpg" width="107" height="95" alt=""> 
        Guest of Honour<br>
 <span>Shri. Najeeb Jung</span><br>
 (Honourable Lt. <br>Governor of Delhi)
        </div>
        
        <div class="e_speaker e_sp" style="border-bottom:none">
-   	  <!-- <img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/sp4.jpg" width="107" height="95" alt=""> 
+   	  <!-- <img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/sp4.jpg" width="107" height="95" alt=""> 
        Guest of Honour<br>
 <span>Prof. Dinesh Singh</span><br>
 Vice Chancellor,<br>
@@ -195,13 +195,13 @@ Delhi University-->
     
     <div class="clear"></div>
     <div class="foot-logo-box">
-    <div class="foot-logos"><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/mt.jpg" border="0"></div>
-    <div class="foot-logos divhight"><div class="foot-txt">TV Partners</div><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/ht.jpg" border="0"></div>
-    <div class="foot-logos divhight"><div class="foot-txt">Radio Partner</div><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/oye.jpg" border="0"></div>
-    <div class="foot-logos divhight flast"><div class="foot-txt">Online learningPartner</div><img src="http://media2.intoday.in/indiatoday/educationconclave2013/images/lt.jpg" border="0"></div>
+    <div class="foot-logos"><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/mt.jpg" border="0"></div>
+    <div class="foot-logos divhight"><div class="foot-txt">TV Partners</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/ht.jpg" border="0"></div>
+    <div class="foot-logos divhight"><div class="foot-txt">Radio Partner</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/oye.jpg" border="0"></div>
+    <div class="foot-logos divhight flast"><div class="foot-txt">Online learningPartner</div><img src="/staticpages/mediaintoday/indiatoday/educationconclave2013/images/lt.jpg" border="0"></div>
     </div>
     <div class="clear"></div>
-<div id="footer"><iframe width="970" scrolling="no" height="165" frameborder="0" src="http://media2.intoday.in/microsites/common/bt_footer.html"></iframe></div>
+<div id="footer"><iframe width="970" scrolling="no" height="165" frameborder="0" src="/staticpages/mediaintoday/microsites/common/bt_footer.html"></iframe></div>
 
 
 </section>

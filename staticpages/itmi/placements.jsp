@@ -31,7 +31,7 @@
 	<meta name="description" content="ITMI provide unique opportunity to get Job in Aaj tak ,India Today . As part of curriculum Student get 100% internship and Placement support." />
 	<meta name="keywords" content="Job in Media, Career in Media, Job in aajtak , Career in Aajtak , Job India Today , 100% placement ,,Internship in aajtak." />
 	<link href="css/style.css" rel="stylesheet" />
-	<script src="http://media2.intoday.in/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
+	<script src="/staticpages/mediaintoday/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
 	<script>
         $(document).ready(function() {
             $('.search').click(function(){
@@ -66,26 +66,26 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="topheader">
   <div class="wrapper"> 
-    <!--<img border="0" alt="" src="http://media2.intoday.in/indiatoday/itmi/images/Star.png" class="star">-->
+    <!--<img border="0" alt="" src="/staticpages/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
     <ul>
-      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="http://media2.intoday.in/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
+      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
+<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
+      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
+      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
+      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
+      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
+      <li><a href="http://oyefm.in/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
 <div class="bottomheader">    
   <div class="wrapper">
-    <div class="logo"> <a href="index.jsp"><img src=" http://media2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
-      <!--<a href="index.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
+    <div class="logo"> <a href="index.jsp"><img src=" /staticpages/mediaintoday/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
+      <!--<a href="index.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
     </div>
     <div class="bottomleft"> 
-      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="http://media2.intoday.in/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
+      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="/staticpages/mediaintoday/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
                     <p>28 top companies go on campus recritment drive this fall</p>--> 
       
       	
@@ -95,8 +95,8 @@ ul.navbar li a {padding: 8px 17px;}
         
         </div>
         
-      <!--<img src="http://media2.intoday.in/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
+      <!--<img src="/staticpages/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
+    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="/staticpages/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
   </div>
   <div class="searchBoxs">
     <div class="search-engin">
@@ -181,19 +181,19 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="bannerBox">
 <div id="social-area">
-	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="http://media2.intoday.in/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
-    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="http://media2.intoday.in/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="http://media2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
+	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
+    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
+    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
 </div>
           <div class="belt">
                 <ul>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="gallery.jsp"><img src="/staticpages/mediaintoday/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
                 </ul>
                 <div class="text-banner"><h1>INDIA TODAY MEDIA INSTITUTE</h1></div>
             </div>
@@ -249,66 +249,66 @@ This kind of association has resulted in a quantum leap in our students’ under
             <tr>
                   <td valign="top" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/Aaj_Tak_logo.png" width="140" height="140" alt=""></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/Aaj_Tak_logo.png" width="140" height="140" alt=""></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/ani.jpg" alt="" width="120" height="120"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/ani.jpg" alt="" width="120" height="120"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/delhi-aajtak.gif" alt="" width="140" height="140"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/delhi-aajtak.gif" alt="" width="140" height="140"></td>
                     </tr>
                     <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/download.jpg" alt="" width="120" height="120"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/download.jpg" alt="" width="120" height="120"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/indiatoday_tv.jpg" alt="" width="150" height="120"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/indiatoday_tv.jpg" alt="" width="150" height="120"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/indiatv.png" alt="" width="120" height="120"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/indiatv.png" alt="" width="120" height="120"></td>
                     </tr>
                     <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/logo.png" alt="" width="150" height="50"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/logo.png" alt="" width="150" height="50"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/newsgb.jpg" alt="" width="150" height="75"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/newsgb.jpg" alt="" width="150" height="75"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/photo.jpg" alt="" width="130" height="115"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/photo.jpg" alt="" width="130" height="115"></td>
                     </tr>
                       <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/snapdeal.png" alt="" width="150" height="150"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/snapdeal.png" alt="" width="150" height="150"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/tez.jpg" alt="" width="140" height="115"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/tez.jpg" alt="" width="140" height="115"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200" align="center"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo01.jpg" alt=""></td>
+                      <td width="200" align="center"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo01.jpg" alt=""></td>
                     </tr>
                     
                      <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo02.jpg" alt="" width="150"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo02.jpg" alt="" width="150"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo03.jpg" alt=""></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo03.jpg" alt=""></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo04.jpg" alt="" width="110" height="100"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo04.jpg" alt="" width="110" height="100"></td>
                     </tr>
                     
                       <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo05.jpg" alt="" width="150"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo05.jpg" alt="" width="150"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo06.jpg" alt="" width="100" height="120"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo06.jpg" alt="" width="100" height="120"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo07.jpg" alt="" width="170"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo07.jpg" alt="" width="170"></td>
                     </tr>
                     
                       <tr>
-                      <td width="200" align="center"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo08.jpg" alt=""></td>
+                      <td width="200" align="center"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo08.jpg" alt=""></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo09.jpg" alt="" width="150"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo09.jpg" alt="" width="150"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo10.jpg" alt="" width="170"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo10.jpg" alt="" width="170"></td>
                     </tr>
                      <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo11.jpg" alt="" width="100" height="100"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo11.jpg" alt="" width="100" height="100"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo12.jpg" alt="" width="150"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo12.jpg" alt="" width="150"></td>
                       <td width="20">&nbsp;</td>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo13.jpg" alt="" width="130"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo13.jpg" alt="" width="130"></td>
                     </tr>
                     <tr>
-                      <td width="200"><img src="http://media2.intoday.in/indiatoday/itmi/client-logo/client-logo14.jpg" alt="" width="140"></td>
+                      <td width="200"><img src="/staticpages/mediaintoday/indiatoday/itmi/client-logo/client-logo14.jpg" alt="" width="140"></td>
                       <td width="20">&nbsp;</td>
                       <td width="200">Many More...</td>
                       <td width="20">&nbsp;</td>
@@ -347,7 +347,7 @@ This kind of association has resulted in a quantum leap in our students’ under
 
               
             <iframe src="http://subscriptions.intoday.in/subscriptions/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
-            <img src="http://media2.intoday.in/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
+            <img src="/staticpages/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
                 
 </div>
         </div>
@@ -382,7 +382,7 @@ This kind of association has resulted in a quantum leap in our students’ under
 <!--
 
 <div id="footer-add">
-	<img src="http://media2.intoday.in/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
+	<img src="/staticpages/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
 </div>
 
 <div class="copyright">

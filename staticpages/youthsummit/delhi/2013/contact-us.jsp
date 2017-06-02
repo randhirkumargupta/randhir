@@ -12,11 +12,11 @@
 <meta name="keywords" content="Registration Online , India Today Youth Summit 2013" />
 <title>Registration Online -  India Today Youth Summit 2013</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/js/jquery.jcarousel.min.js"></script>
-<script type='text/javascript' src='http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/js/validation_030613_new.js'></script>
-<link rel="stylesheet" type="text/css"  href="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/css/skin.css" />
+<script type="text/javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.jcarousel.min.js"></script>
+<script type='text/javascript' src='/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/validation_030613_new.js'></script>
+<link rel="stylesheet" type="text/css"  href="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/css/skin.css" />
 <link rel="stylesheet" type="text/css"  href="/youthsummit/delhi/2013/css/common.css" />
-<link rel="Stylesheet" type="text/css" href="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
+<link rel="Stylesheet" type="text/css" href="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/css/countdown.css" />
 <script>
 $(document).ready(function(){
 $("ul.ddchild > li > a").hover(
@@ -49,7 +49,7 @@ $('.nav > ul > li.drop1').mouseover(function() {
 </script>
 <style>
 .contest_pinkbg {
-    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/top.gif") no-repeat scroll center top transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/top.gif") no-repeat scroll center top transparent;
     width: 1200px;
 	margin:0 auto;
 	background-color:#fff;
@@ -159,21 +159,21 @@ Sec-16A, Film City Noida - 201301<br><br>
       <div class="list_carousel">
 				<ul id="foo0">
 	
-					<li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
-					<li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
-                    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
-                    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
-                    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
-                    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
-                    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
-                <!--    <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
-                     <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
-                     <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
-                     <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
+					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo2.jpg" alt=""></a></li>
+					<li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo3.jpg" alt=""></a></li>
+                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo4.jpg" alt=""></a></li>
+                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo5.jpg" alt=""></a></li>
+                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo6.jpg" alt=""></a></li>
+                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo7.jpg" alt=""></a></li>
+                    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo8.jpg" alt=""></a></li>
+                <!--    <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/logo9.jpg" alt=""></a></li>-->
+                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/BuzzInTown.jpg" alt="" height="50"></a></li>
+                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/tag_labs.jpg" alt="" ></a></li>
+                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/sigchana.jpg" alt=""></a></li>
                      
-                     <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
-                      <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
-                      <li><a><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
+                     <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/bindas-logo.jpg" alt=""></a></li>
+                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/Da-Milano-scroll.gif" alt=""></a></li>
+                      <li><a><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/mailtoday.jpg" alt=""></a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>
@@ -181,7 +181,7 @@ Sec-16A, Film City Noida - 201301<br><br>
         
         
         </div>
-        <div class="social_icon"> <img src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
+        <div class="social_icon"> <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/social-media.png" border="0" alt="" width="128" height="34" usemap="#Map">
         <map name="Map">
           <area shape="rect" coords="2,2,34,31" href="https://www.facebook.com/MindRocks" target="_blank">
           <area shape="rect" coords="49,2,81,31" href="https://twitter.com/mindrocks/" target="_blank">
@@ -190,7 +190,7 @@ Sec-16A, Film City Noida - 201301<br><br>
         </div>
     </div>
  </div>
- <script language="Javascript" type="text/javascript" src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
+ <script language="Javascript" type="text/javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.lwtCountdown-1.0.js"></script>
 		<script language="javascript" type="text/javascript">
 			jQuery(document).ready(function() {
 				$('.countdown1').countDown({
@@ -206,7 +206,7 @@ Sec-16A, Film City Noida - 201301<br><br>
 			});
 		</script>
 
-<script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/js/jquery.carouFredSel-6.2.1-packed.js"></script>
 		<script type="text/javascript" language="javascript">
 			$(function() {
 				$('#foo0').carouFredSel();

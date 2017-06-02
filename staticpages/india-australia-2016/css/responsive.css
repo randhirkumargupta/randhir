@@ -16,7 +16,7 @@
 .mobile_navigation .top_section{ display:block;}
 .mobnav{ display:block;}
 .top_section{width:100%; background-color:#000; min-height:45px;}
-.mob_nav{background:url(http://media2.intoday.in/indiatoday/itmi/wap/mob-nav-black.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
+.mob_nav{background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/mob-nav-black.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
 .navigation_h { width:100%; background:#fff; box-shadow:0 0 3px #ccc; display:none; position:absolute; z-index:999;}
 .navigation_h ul { padding:0px; margin:0px; list-style-type:none;}
 .navigation_h ul li { font-family:roboto; font-size:14px; color:#5f5f5f; text-transform:uppercase;  }
@@ -45,12 +45,12 @@
 .img-border ul li{ width:300px;}
 .photos-chunk,.photos-chunk-heading{ width:100%;}
 
-.photos-chunk-border {background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/images/ipl-images/photos-border.jpg") repeat scroll center center;height: 5px;width: 100%;}
+.photos-chunk-border {background: rgba(0, 0, 0, 0) url("/staticpages/mediaintoday/indiatoday/images/ipl-images/photos-border.jpg") repeat scroll center center;height: 5px;width: 100%;}
 .photos-slider{ width:100%;}
 .belts{ width:95%;}
 .key-players{ width:100%; margin-left:0;}
 .key-heading{ width:100%;}
-.key-border{background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/images/ipl-images/key-border.jpg") repeat scroll center center;height: 5px;width: 100% }
+.key-border{background: rgba(0, 0, 0, 0) url("/staticpages/mediaintoday/indiatoday/images/ipl-images/key-border.jpg") repeat scroll center center;height: 5px;width: 100% }
 #right-side {float: none;margin-right: 0; margin: 0 auto;  width: 100%;}
 .vieos-slider {background: #f2f2f2 none repeat scroll 0 0;height: 240px;margin: 7px auto 0; position: relative;width: 300px;}
 .video-border {height: 228px;width: 300px;}
@@ -76,7 +76,7 @@
 .mobile_navigation .top_section{ display:block;}
 .mobnav{ display:block;}
 .top_section{width:100%; background-color:#000; min-height:45px;}
-.mob_nav{background:url(http://media2.intoday.in/indiatoday/itmi/wap/mob-nav-black.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
+.mob_nav{background:url(/staticpages/mediaintoday/indiatoday/itmi/wap/mob-nav-black.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
 .navigation_h { width:100%; background:#fff; box-shadow:0 0 3px #ccc; display:none; position:absolute; z-index:999;}
 .navigation_h ul { padding:0px; margin:0px; list-style-type:none;}
 .navigation_h ul li { font-family:roboto; font-size:14px; color:#5f5f5f; text-transform:uppercase;  }

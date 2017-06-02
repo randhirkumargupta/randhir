@@ -1,13 +1,13 @@
 <!--top-->
 
-<link href="http://media2.intoday.in/indiatoday/css/voter-helpline.css" rel="stylesheet" />
+<link href="/staticpages/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
 
 <div class="voter-helpline-container" >
 <div class="vote-header">
     <div class="vote-ques">Questions and Answers</div>
     <div class="vote-nav">
     	<ul>
-        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="http://media2.intoday.in/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
+        	<li style="padding:2px 0px;"><a href="index.jsp" style="padding:10px;"><img src="/staticpages/mediaintoday/indiatoday/images/home-icon.jpg" width="27" height="21" alt="" /></a></li>
 			<li ><a href="http://indiatoday.intoday.in/section/264/1/news.html" target="_blank">news</a></li>
 			<li><a href="/voter-election/facts.jsp" target="_blank">facts</a></li>
 			<li><a href="/understand/index.jsp?imgId=1" target="_blank">FUNALYTICS</a></li>
@@ -171,7 +171,7 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
         <div class="clear"></div>-->
         <a href="facts.jsp" target="_blank">
         <div class="vote-item">
-        <img src="http://media2.intoday.in/indiatoday/images/Untitled-1.gif" border="0">
+        <img src="/staticpages/mediaintoday/indiatoday/images/Untitled-1.gif" border="0">
         </div>
 		</a>
         <div class="clear"></div> 

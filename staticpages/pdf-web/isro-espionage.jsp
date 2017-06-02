@@ -4,7 +4,7 @@
 <base href="/staticpages/pdf-web/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>The ISRO spy scandal and how it fizzled out</title>
-<meta property="og:image" content="http://media2.intoday.in/microsites/specials/images/isro.jpg">
+<meta property="og:image" content="/staticpages/mediaintoday/microsites/specials/images/isro.jpg">
 </head>
 
 <body>
@@ -225,10 +225,10 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 .imgs {margin: 0 2px;}
 
 .fb, .tw, .gp, .shr {background-repeat: no-repeat;cursor: pointer;height: 26px; width: 26px;}
-.fb {background-image: url("http://media2.intoday.in/microsites/event-calender/facebook.jpg");}
-.gp {background-image: url("http://media2.intoday.in/microsites/event-calender/google.jpg");}
-.tw {background-image: url("http://media2.intoday.in/microsites/event-calender/twittr.jpg");}
-.shr {background-image: url("http://media2.intoday.in/microsites/event-calender/share.jpg");}
+.fb {background-image: url("/staticpages/mediaintoday/microsites/event-calender/facebook.jpg");}
+.gp {background-image: url("/staticpages/mediaintoday/microsites/event-calender/google.jpg");}
+.tw {background-image: url("/staticpages/mediaintoday/microsites/event-calender/twittr.jpg");}
+.shr {background-image: url("/staticpages/mediaintoday/microsites/event-calender/share.jpg");}
 
 
 </style>
@@ -238,14 +238,14 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <div style="color: #000;font: bold 14px/18px Arial; text-align: right;">SHARE</div>
 	<a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status=The ISRO espionage case
 %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
-	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/isro-espionage.jsp&p[title]=The ISRO spy scandal and how it fizzled out &s=100&p[summary]=The ISRO spy scandal and how it fizzled out &p[images][0]=http://media2.intoday.in/microsites/specials/images/isro.jpg"><span class="imgs fb lft"></span></a>
+	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/isro-espionage.jsp&p[title]=The ISRO spy scandal and how it fizzled out &s=100&p[summary]=The ISRO spy scandal and how it fizzled out &p[images][0]=/staticpages/mediaintoday/microsites/specials/images/isro.jpg"><span class="imgs fb lft"></span></a>
 	<a rel="nofollow" title="Share" onclick="javascript: document.getElementById('customShare').style.display='block';" href="javascript:void('0');"><span class="imgs shr lft"></span></a>
 </div>
 
 <div align="right" class="shareRdiv">
 
 <div style="width: 329px; height: 151px; display: none; margin-left: -320px; ^margin-top: 20px" id="customShare" class="sharer_div">
-<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://media2.intoday.in/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=The ISRO spy scandal and how it fizzled out %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank">
+<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=The ISRO spy scandal and how it fizzled out %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank">
   <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;/content_Email.jsp?email=0&amp;title=The ISRO spy scandal and how it fizzled out &amp;URL=/pdf-web/isro-espionage.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
 </map></div></div>
 </div>
@@ -265,9 +265,9 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.pdf">1994: Sinister Plot</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.pdf">1994: Sinister Plot</a></div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.pdf" ><img border="0" src="http://media2.intoday.in/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.pdf" ><img border="0" src="/staticpages/mediaintoday/indiatoday/images/12-15-1994-Espionage-Spies-in-Space.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -276,9 +276,9 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/images/12-31-1994-Spies-In-Space-Too Many-Loose Ends.pdf">1994: Spy Ring</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/images/12-31-1994-Spies-In-Space-Too Many-Loose Ends.pdf">1994: Spy Ring</a></div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/images/12-31-1994-Spies-In-Space-Too Many-Loose Ends.pdf"><img border="0" src="http://media2.intoday.in/indiatoday/images/12-31-1994-Spies-In-Space-Too-Many-Loose-Ends.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/images/12-31-1994-Spies-In-Space-Too Many-Loose Ends.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/12-31-1994-Spies-In-Space-Too-Many-Loose-Ends.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -286,18 +286,18 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <div class="clear"></div>
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/images/Jan-31-1995-The-ISRO-case-The-Great-Espionage.pdf">1995: A Frame-up</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/images/Jan-31-1995-The-ISRO-case-The-Great-Espionage.pdf">1995: A Frame-up</a></div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/images/11-03-03-Assembly-Elections-Opinion Poll.pdf"><img border="0" src="http://media2.intoday.in/indiatoday/images/Jan-31-1995-The-ISRO-case-The-Great-Espionage.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/images/11-03-03-Assembly-Elections-Opinion Poll.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/Jan-31-1995-The-ISRO-case-The-Great-Espionage.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
 </div>
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/images/5-11-1998-Big-Brother-Framing-You.PDF">1998: Sordid Politics</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/images/5-11-1998-Big-Brother-Framing-You.PDF">1998: Sordid Politics</a></div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/images/5-11-1998-Big-Brother-Framing-You.PDF"><img border="0" src="http://media2.intoday.in/indiatoday/images/5-11-1998-Big-Brother-Framing-You.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/images/5-11-1998-Big-Brother-Framing-You.PDF"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/5-11-1998-Big-Brother-Framing-You.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -306,9 +306,9 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <div class="clear"></div>
 <div  align="center">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://media2.intoday.in/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.pdf">2012: A US Role?</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="/staticpages/mediaintoday/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.pdf">2012: A US Role?</a></div>
 
-      <a target="_blank" href="http://media2.intoday.in/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.pdf"><img border="0" src="http://media2.intoday.in/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.jpg" /></a>
+      <a target="_blank" href="/staticpages/mediaintoday/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.pdf"><img border="0" src="/staticpages/mediaintoday/indiatoday/images/9-24-2012-ISRO-Out-of-Suspicion-Orbit.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>

@@ -126,7 +126,7 @@ function ajaxFunction(){
 body {
 	margin: 0;
 	padding: 0;
-	background: url(http://media2.intoday.in/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
+	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center;
 	font-family:roboto;
 }
 
@@ -154,7 +154,7 @@ a {
 .counter {
 	width: 180px;
 	height: 56px;
-	background: url(http://media2.intoday.in/microsites/iamshakti/images/counter.png);
+	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/counter.png);
 	position: absolute;
 	bottom: 0;
 	left: 212px;
@@ -167,7 +167,7 @@ a {
 	width: 966px;
 	height: 76px;
 	margin-bottom: 25px;
-	background: url(http://media2.intoday.in/microsites/iamshakti/images/taken-pledge-bg.png)
+	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)
 }
 .people-who-pledged ul {
 	margin-left: 25px;
@@ -183,7 +183,7 @@ a {
 	height: 450px;
 	padding-top: 65px;
 	float: left;
-	background: url(http://media2.intoday.in/microsites/iamshakti/images/twiter.png);
+	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/twiter.png);
 	background-repeat: no-repeat
 }
 .facebook-box {
@@ -192,7 +192,7 @@ a {
 	float: right;
 	padding-top: 75px;
 	padding-left: 5px;
-	background: url(http://media2.intoday.in/microsites/iamshakti/images/facebook.png);
+	background: url(/staticpages/mediaintoday/microsites/iamshakti/images/facebook.png);
 	background-repeat: no-repeat;
 }
 
@@ -229,7 +229,7 @@ a {
 	padding-bottom: 50px;
 }
 #pledgetop {
-	background-image: url(http://media2.intoday.in/indiatoday/images/pledge/Mast.png);
+	background-image: url(/staticpages/mediaintoday/indiatoday/images/pledge/Mast.png);
 	background-repeat: no-repeat;
 	background-position: top left;
 	height: 284px;
@@ -367,7 +367,7 @@ height: 200px;
     </div>
     <div style="float:right; width:205px; margin:48px 0 0 0; text-align:center;">
       <div style='font:bold 12px arial; color:#ffec00; text-align:left; margin-bottom:5px; padding-left:50px;'>Stay Connected</div>
-      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="http://media2.intoday.in/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="http://media2.intoday.in/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
+      <div align="center"> <a href="https://www.facebook.com/pages/Iamshakti/1465242657067747" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/facebook.png" title="facebook" alt="facebook" border="0" hspace="3"></a><a href="https://twitter.com/hashtag/iamshakti" target="_blank" rel="nofollow"><img src="/staticpages/mediaintoday/indiatoday/images/pledge/twitter.png" alt="Twitter" title="Twitter" border="0" hspace="3"></a></div>
     </div>
   </div>
   <div style="clear:both;"></div>
@@ -386,7 +386,7 @@ height: 200px;
   </tr>
   <tr></tr>
   <tr>
-    <td class="sponText"><a target="_blank" href="https://www.facebook.com/PCJINDIA?fref=ts"><img align="left" border="0" style="margin-right:10px ; margin-bottom:3px" usemap="#Map" src="http://media2.intoday.in/indiatoday/womansummit/2014/images/pcj.gif"></a>      
+    <td class="sponText"><a target="_blank" href="https://www.facebook.com/PCJINDIA?fref=ts"><img align="left" border="0" style="margin-right:10px ; margin-bottom:3px" usemap="#Map" src="/staticpages/mediaintoday/indiatoday/womansummit/2014/images/pcj.gif"></a>      
 
 <p>In a business where it takes the finest to catch the eye, PC Jeweller has won hearts with the Relentless focus on customer satisfaction through unparalleled purity, unmatched designs, complete transparency and the best customer care has made PC Jeweller, North &amp; Central India's reputed jeweller.</p>
 <p>The subtle and the royal look that draws everyone's attention is the magic of PCJ. Since 2005 we have added glitter to India with a wide collections of gold and diamond jewellery. </p>
@@ -494,7 +494,7 @@ The interiors &amp; the exteriors of all PCJ showrooms bear the signature style 
   <div class="container"> </div>
 </div>
 <div class="footer">
-  <iframe src="http://media2.intoday.in/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
 </div>
 
 </body>

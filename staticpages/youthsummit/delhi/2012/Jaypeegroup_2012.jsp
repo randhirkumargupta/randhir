@@ -40,7 +40,7 @@
 		<div>
 		
 	<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
-    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
+    <tr><!--<td valign="top"><a target="_blank" href="http://www.indiatoday.in/youthsummit/registration/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" border="0"></a>
     </td>--></tr>  
       <TR>
         <TD >
@@ -51,23 +51,23 @@
         </div>
         <!--<TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script></TD>
                 
                 <TD VALIGN="TOP">
-				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="http://media2.intoday.in/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
+				<a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md4.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -258,7 +258,7 @@
 </ul>
 
 		<div class="sponcer-text-wrapper">
-		<img src="http://media2.intoday.in/microsites/youthsummit2012/sponcers/jp.gif" width="184" height="126" align="left" style="margin-right:10px ; margin-bottom:3px">
+		<img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponcers/jp.gif" width="184" height="126" align="left" style="margin-right:10px ; margin-bottom:3px">
       <p>  Jaypee Group, an over Rs 18,000 Crore infrastructure conglomerate has business interests in Engineering and Construction, Cement, Power, Real Estate, Expressways, Hospitality, Sports and Education (not-for-profit) . </p>
       <p> The engineering and construction wing of the Group is an acknowledged leader in the construction of multi-purpose river valley and hydropower projects. It is the 3rd largest cement producer in the country and poised to be 36 MnTPA cement producer with 24 Cement Plants Across India. The Group with its operational power plants &mdash; 300 MW Baspa-II (Himachal Pradesh), 400 MW Vishnuprayag (Uttarakhand) and 1000 MW Karcham Wangtoo (Himachal Pradesh) &mdash; is India's largest Private sector Hydropower producer and is on its way to be an integrated power producer with expansion in Thermal, Wind and Power Transmission. The Group is poised to be a 13,420 MW power producer by 2020. </p>
       <p>The Group has constructed concrete paved 165 km long, 6-lane Yamuna Expressway from Noida to Agra. This has reduced the travel time between Delhi and Agra by more than half. </p>

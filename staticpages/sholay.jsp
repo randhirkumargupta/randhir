@@ -105,7 +105,7 @@
 		}
 		$('.lb-container .movie_name').html(head);
 		$('.lb-container .movie_text').html('"'+textmovie+'"');
-		$('.lb-container .movie_img').html('<img src="http://media2.intoday.in/microsites/specials/sholay/'+img+'" />');
+		$('.lb-container .movie_img').html('<img src="/staticpages/mediaintoday/microsites/specials/sholay/'+img+'" />');
 	}
 </script>
 
@@ -395,9 +395,22 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="clear"></div>
 
-      <div class="commentboxdiv">
-      <script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/commentbox/comment_box.jsp?sId=298911&ScfUrl=&StoryTitle=6 iconic non-human, 'characters' from Sholay&message=&website=indiatoday&content_type=poll&storytemplate=site")</script>
-     </div>
+<script src="http://vuukle.com/js/vuukle.js"></script>
+ <div class="vukkul-comment">
+  <div id="vuukle-emote"></div>
+  <div id="vuukle_div"></div>
+          <script type="text/javascript">
+               var UNIQUE_ARTICLE_ID = "static_sholay";
+               var SECTION_TAGS =  "";
+               var ARTICLE_TITLE = "sholay";
+               var GA_CODE = "UA-795349-17";
+               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
+               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
+               var VUUKLE_COL_CODE = "d00b26";
+               var ARTICLE_AUTHORS = "abc";
+               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
+          </script>
+</div>
      
         
 </section>

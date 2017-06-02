@@ -9,7 +9,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/pragati-maidan-new-look-redevelopment/1/958389.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/pragati-maidan---story_305_051917100918.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/pragati-maidan---story_305_051917100918.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -31,7 +31,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/pope-francis-meets-donald-trump-melania-trump-ivanka-vatican-rome-conjuring-memes/1/962681.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/donald-trump---pope-l_052517030917.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/donald-trump---pope-l_052517030917.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -53,7 +53,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/shah-rukh-khan-brad-pitt-mumbai-war-machine-netflix-mami/1/962548.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/shah-rukh-brad-pitt-story_305_052517125418.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/shah-rukh-brad-pitt-story_305_052517125418.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -75,7 +75,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/giant-mystery-dead-body-sea-monster-whale-indonesia-huamual-seram/1/955908.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/huge-sea-monster-dead-body-indonesia-305_051717022624.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/huge-sea-monster-dead-body-indonesia-305_051717022624.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -97,7 +97,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/manchester-attack-predicted-by-unverified-twitter-account/1/961749.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/manchester-305_052417032043.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/manchester-305_052417032043.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -119,7 +119,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/dutch-king-secret-pilot-willem-alexander-klm-royal-airlines/1/957316.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/pilot-305_051817075010.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/pilot-305_051817075010.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -141,7 +141,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/family-vacation-india-travel-advantages-benefits-memories-comfort-lifetr/1/963361.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/family-story_305_052617105402.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/family-story_305_052617105402.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -163,7 +163,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/gaggan-anand-bangkok-indian-restaurant-asias-best-to-shut-by-2020-lifefd/1/963482.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/collag_gaggan_305_052617013632.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/collag_gaggan_305_052617013632.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -185,7 +185,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/uttar-pradesh-furious-over-betrayal-woman-kidnaps-man-from-his-wedding-venue-in-hamirpur/1/955788.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/hamirpur-marriage-story_305_051717122126.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/hamirpur-marriage-story_305_051717122126.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -207,7 +207,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/karan-johar-birthday-wishes-twitter-alia-bhatt-varun-dhawan-anil-kapoor/1/962471.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/karan-alia-story_305_052517113135.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/karan-alia-story_305_052517113135.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -229,7 +229,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/police-target-indonesia-gays-lgbtq/1/961951.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/gay-indonesia-l_052417055305.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/gay-indonesia-l_052417055305.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">
@@ -251,7 +251,7 @@
             <div class="trend_box">
                <div class="trend_box_img"> <a href="http://indiatoday.intoday.in/story/drunk-woman-lizard-bra-bizarre/1/958816.html">
                
-                       <img width="320" height="204" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/woman-bearded-dragon-lizard-bra-305_052017062334.jpg">
+                       <img width="320" height="204" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/woman-bearded-dragon-lizard-bra-305_052017062334.jpg">
                   </a>
                   <div class="transparent_bx">
                      <div class="left_shares">

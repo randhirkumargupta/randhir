@@ -188,7 +188,7 @@
                         </div>
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="http://media2.intoday.in/indiatoday/images/sos2012/ap.jpg" class="imgs" title="Aroon Purie" alt="Aroon Purie" align="left" border="0">
+                            <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/ap.jpg" class="imgs" title="Aroon Purie" alt="Aroon Purie" align="left" border="0">
                             <div class="consubhead">Aroon Purie</div>
                             <div>
                                 Chairman &amp; Editor in Chief,
@@ -219,7 +219,7 @@
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
                             <div class="prjdetail">
-                                <img src="http://media2.intoday.in/indiatoday/images/sos2012/sp.gif" class="imgs" title="Mr Sharad Pawar" alt="Mr Sharad Pawar" align="left" border="0">
+                                <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/sp.gif" class="imgs" title="Mr Sharad Pawar" alt="Mr Sharad Pawar" align="left" border="0">
                                 <div class="consubhead"><strong>Sharad Pawar</strong></div>
                                 <div>Union Minister for Agriculture</div>
                                 <div class="clear"></div>
@@ -255,7 +255,7 @@
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
                             <div class="prjdetail">
-                                <img src="http://media2.intoday.in/indiatoday/images/sos2012/ss.gif" class="imgs" title="Shivraj Singh Chouhan" alt="Shivraj Singh Chouhan" align="left" border="0" />
+                                <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/ss.gif" class="imgs" title="Shivraj Singh Chouhan" alt="Shivraj Singh Chouhan" align="left" border="0" />
                                 <div class="consubhead"><strong>Shivraj Singh Chouhan</strong></div>
                                 <div>Madhya Pradesh Chief Minister</div>
                                 <div class="clear"></div>
@@ -288,7 +288,7 @@
 
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="http://media2.intoday.in/indiatoday/images/sos2012/pc.gif" class="imgs" title="Prithviraj Chavan" alt="Prithviraj Chavan" align="left" border="0" />
+                            <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/pc.gif" class="imgs" title="Prithviraj Chavan" alt="Prithviraj Chavan" align="left" border="0" />
                             <div class="consubhead">Prithviraj Chavan</div>
                             <div>Maharashtra Chief Minister</div>
                         </div>
@@ -314,7 +314,7 @@
 
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="http://media2.intoday.in/indiatoday/images/sos2012/mp.gif" class="imgs" title="Manohar Parrikar" alt="Manohar Parrikar" align="left" border="0" />
+                            <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/mp.gif" class="imgs" title="Manohar Parrikar" alt="Manohar Parrikar" align="left" border="0" />
                             <div class="consubhead">Manohar Parrikar</div>
                             <div>Goa Chief Minister</div>
                         </div>
@@ -340,7 +340,7 @@
 
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="http://media2.intoday.in/indiatoday/images/sos2012/sd.gif" class="imgs" title="Sheila Dikshit" alt="Sheila Dikshit" align="left" border="0" />
+                            <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/sd.gif" class="imgs" title="Sheila Dikshit" alt="Sheila Dikshit" align="left" border="0" />
                             <div class="consubhead">Sheila Dikshit</div>
                             <div>Delhi Chief Minister</div>
                         </div>
@@ -366,7 +366,7 @@
 
                         <div class="consubrtbox">
                             <div class="prj_name">Speaker:</div>
-                            <img src="http://media2.intoday.in/indiatoday/images/sos2012/ud.gif" class="imgs" title="Omar Abdullah" alt="Omar Abdullah" align="left" border="0" />
+                            <img src="/staticpages/mediaintoday/indiatoday/images/sos2012/ud.gif" class="imgs" title="Omar Abdullah" alt="Omar Abdullah" align="left" border="0" />
                             <div class="consubhead">Omar Abdullah</div>
                             <div>Jammu and Kashmir Chief Minister</div>
                         </div>
@@ -427,7 +427,7 @@
         <div class="clear profilediv"></div>
   </div>
     <div class="profile gray">
-        <a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/2010_102111030708.jpg" width="100" height="100" alt="Sheila Dikshit" title="Sheila Dikshit" border="0" align="middle"></a>
+        <a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/2010_102111030708.jpg" width="100" height="100" alt="Sheila Dikshit" title="Sheila Dikshit" border="0" align="middle"></a>
         <div class="proright">
             <div class="name"><a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html" target="_blank">State of States 2010</a></div>
             <div class="profilebyline"><img src="images/listarrow.gif" border="0" align="left" class="imgs" /><a href="http://indiatoday.intoday.in/story/how-good-is-your-cm/1/120522.html" target="_blank">How good is your CM?</a></div>
@@ -453,7 +453,7 @@
                 <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2011/1/5810.html">Awards function 2011</a> </div>
 </div>
         <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html">Awards function 2010</a> </div>
         </div>
 
@@ -463,11 +463,11 @@
     <div class="snapsheader">Videos</div>
     <div>
         <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html">IT honours fastest-mover states</a> </div>
         </div>
 <div class="photovidbox">
-  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
+  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
   <div class="stcaption"><a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html">'Punjab, Delhi are best states'</a> </div>
 </div>
       <div class="clear"></div>
@@ -493,7 +493,7 @@
         <table cellpadding="0" cellspacing="0" align="center">
         <tr><td width="150" align="center" valign="top">
         <div class="partnerbox" style="width:160px">
-        <a href="http://www.srei.com" target="_blank"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/srei_102011043416.gif" border="0" style="margin-top:15px;" /></a></div></td></tr></table>
+        <a href="http://www.srei.com" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/srei_102011043416.gif" border="0" style="margin-top:15px;" /></a></div></td></tr></table>
       <div class="clear"></div>
     </div>
 </div>
@@ -523,7 +523,7 @@
     <div class="partnerbox" style="width:300px;" >
         <div class="partmar5">TV</div>
          <div class="partnerbox" style="float:left; margin-left:50px;">
-        <a href="http://www.aajtak.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/aajtak_102011043416.gif" border="0" /></a></div>
+        <a href="http://www.aajtak.in/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/aajtak_102011043416.gif" border="0" /></a></div>
          <div class="partnerbox" style="float:left;">
         <a href="http://www.headlinestoday.in/" target="_blank"><img src="/specials/youthsummit/images/ht.jpg" border="0" style="margin-top:5px;" /></a></div>
     </div></td><td width="150" align="center" valign="top">

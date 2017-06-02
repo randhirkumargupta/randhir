@@ -10,10 +10,10 @@
 <link href="/staticpages/main/css/homepage.css" type="text/css" rel="stylesheet">
 <link href="/staticpages/main/css/article.css" type="text/css" rel="stylesheet">
 <meta property="og:title" content="5 holy men and their unholy controversies">
-<meta property="og:image" content="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men_300.jpg">
+<meta property="og:image" content="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men_300.jpg">
 <meta property="og:url" content="http://indiatoday.intoday.in/holy-men/">
 <meta property="og:description" content="These five spiritual leaders have redefined their holy status by crimes. Asaram Bapu, who faces a sexual assault charge, is the latest in the list.">
-<link rel="image_src" href="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men_300.jpg" />
+<link rel="image_src" href="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men_300.jpg" />
 <script src="/staticpages/main/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 
 
@@ -31,9 +31,9 @@
       .clr { clear:both}
 
 
-            .story_slide .left { position:absolute; background:url(http://media2.intoday.in/indiatoday/images/friends/Back-button.png) 5px 38px no-repeat; color:#fff; padding:10px; left:0px; top:225px; cursor:pointer; z-index:1; width:124px; height:74px  }
+            .story_slide .left { position:absolute; background:url(/staticpages/mediaintoday/indiatoday/images/friends/Back-button.png) 5px 38px no-repeat; color:#fff; padding:10px; left:0px; top:225px; cursor:pointer; z-index:1; width:124px; height:74px  }
 
-            .story_slide .right { position:absolute; background:url(http://media2.intoday.in/indiatoday/images/friends/Forward-button.png) 122px 38px no-repeat; color:#fff; padding:10px; right:0px; top:225px; cursor:pointer; z-index:1;  width:165px; height:74px  }
+            .story_slide .right { position:absolute; background:url(/staticpages/mediaintoday/indiatoday/images/friends/Forward-button.png) 122px 38px no-repeat; color:#fff; padding:10px; right:0px; top:225px; cursor:pointer; z-index:1;  width:165px; height:74px  }
 
 </style>
 
@@ -366,7 +366,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
         <div class="socialcont">
             <div class="socialdiv">
                 <a href="javascript:void('0');" onclick='javascript:window.open("http://indiatoday.intoday.in/content_Email.jsp?email=0&title= 5 holy men and their unholy controversies&URL=http://indiatoday.intoday.in/holy-men/","window", "status=no,resize=no,toolbar=no,scrollbars=no,width=468,height=390"); event.returnValue=false; return false;' title="Email" target="_new" rel="nofollow"><span class="imgs email lft"></span></a>
-                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/holy-men/&p[title]=5 holy men and their unholy controversies&s=100&p[summary]= These five spiritual leaders have redefined their holy status by crimes. Asaram Bapu, who faces a sexual assault charge, is the latest in the list&p[images][0]=http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men_300.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
+                <a href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/holy-men/&p[title]=5 holy men and their unholy controversies&s=100&p[summary]= These five spiritual leaders have redefined their holy status by crimes. Asaram Bapu, who faces a sexual assault charge, is the latest in the list&p[images][0]=/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men_300.jpg" title="Facebook" target="_new" rel="nofollow"><span class="imgs fb lft"></span></a>
                 <a href="http://twitter.com/?status= 5 holy men and their unholy controversies%20http://indiatoday.intoday.in/holy-men/%20via%20%40indiatoday" title="Twitter" target="_new" rel="nofollow"><span class="imgs tw lft"></span></a>
             </div>
         </div>
@@ -385,27 +385,27 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 <ul>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-1.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-1.jpg" />
 
     </li>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-2.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-2.jpg" />
 
     </li>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-3.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-3.jpg" />
 
     </li>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-4.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-4.jpg" />
 
     </li>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-5.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-5.jpg" />
 
     </li>
 
-        <li><img src="http://media2.intoday.in/indiatoday/specials/holy-men/Holy-Men-Slide-6.jpg" />
+        <li><img src="/staticpages/mediaintoday/indiatoday/specials/holy-men/Holy-Men-Slide-6.jpg" />
 
     </li>
 

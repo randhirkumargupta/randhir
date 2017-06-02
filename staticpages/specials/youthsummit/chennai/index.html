@@ -26,7 +26,7 @@
             <a href="http://www.intoday.in/" target="_blank">InToday</a><span>|</span><a href="http://www.indiatoday.in/" target="_blank">India Today</a><span>|</span><a href="http://www.aajtak.in/" target="_blank">Aaj Tak</a><span>|</span><a href="http://www.headlinestoday.in/" target="_blank">Headlines Today</a><span>|</span><a href="http://www.businesstoday.in/" target="_blank">Business Today</a><span>|</span><a href="http://www.menshealth.intoday.in/" target="_blank">Men's Health</a><span>|</span><a href="http://www.wonderwoman.in" target="_blank">Wonder Woman</a><span>|</span><a href="http://www.cosmopolitan.in/" target="_blank">Cosmopolitan</a><span>|</span><a href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a>
         </div>
 	<div>
-        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg"  border="0"/></a><br />-->
+        	<!--<a href="http://www.indiatoday.in/youthsummit/registration/" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg"  border="0"/></a><br />-->
             <img src="/staticpages/main/images/ita.jpg" height="83" border="0"/>
         </div>	
         <div id="banner">
@@ -535,7 +535,7 @@ T.M. Krishna
 </map>
     </div>
 <div class="side_chunk">
-    	<a href="/pledge/" target="_blank"><img src="http://media2.intoday.in/microsites/banners/Banner-on-IT.jpg" alt="Banner" height="80" width="300" border="0" /></a>
+    	<a href="/pledge/" target="_blank"><img src="/staticpages/mediaintoday/microsites/banners/Banner-on-IT.jpg" alt="Banner" height="80" width="300" border="0" /></a>
   </div>
     <div class="side_chunk">
     	<a href="http://indiatoday.intoday.in/story/india-today-youth-summit-2011-chennai-snippets/1/164910.html" target="_blank"><img src="/specials/youthsummit/chennai/images/MR_snippetlink.gif" align="left" border="0" /></a>
@@ -551,7 +551,7 @@ T.M. Krishna
           <tr>
             <td><a href="/specials/youthsummit/chennai/Kiran-Bedi.jsp">Former IPS officer</a></td>
            <!-- <td width="15" style="text-align:center">|</td>-->
-           <td align="right" style="padding:0 5px 0 0;"><img src="http://media2.intoday.in/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0"><a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-kiran-bedi.html/1/163748.html">&nbsp;Session Video</a></td>
+           <td align="right" style="padding:0 5px 0 0;"><img src="/staticpages/mediaintoday/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0"><a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-kiran-bedi.html/1/163748.html">&nbsp;Session Video</a></td>
           </tr>
         </table>
       </div>
@@ -663,7 +663,7 @@ T.M. Krishna
           <tr>
             <td width="40"><a href="/specials/youthsummit/chennai/Lakshmi-Narayanan.jsp">Businessman</a></td>
            <!-- <td width="30" style="text-align:center">&nbsp;|&nbsp;</td>-->
-            <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="http://media2.intoday.in/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-lakshmi-narayanan.html/1/163674.html">Session Video</a></td>
+            <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="/staticpages/mediaintoday/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai-lakshmi-narayanan.html/1/163674.html">Session Video</a></td>
           </tr>
         </table>
       </div>
@@ -679,7 +679,7 @@ T.M. Krishna
           <tr>
             <td width="40"><a href="/specials/youthsummit/chennai/Shrut-Hassan.jsp">Actor</a></td>
            <!-- <td width="30" style="text-align:center">&nbsp;|&nbsp;</td>-->
-           <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="http://media2.intoday.in/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai.html/1/163729.html">Session Video</a></td>
+           <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="/staticpages/mediaintoday/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai.html/1/163729.html">Session Video</a></td>
           </tr>
         </table>
       </div>
@@ -711,7 +711,7 @@ T.M. Krishna
           <tr>
             <td width="40"><a href="/specials/youthsummit/chennai/e-sarathbabu.jsp">Businessman</a></td>
            <!-- <td width="30" style="text-align:center">&nbsp;|&nbsp;</td>-->
-           <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="http://media2.intoday.in/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai.html/1/163729.html">Session Video</a></td>
+           <td align="right" style="padding:0 5px 0 0;">&nbsp;<img src="/staticpages/mediaintoday/microsites/banners/vidoe_icon-gray.jpg" style="width:16px; height:13px;float:none;"  border="0">&nbsp;<a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai.html/1/163729.html">Session Video</a></td>
           </tr>
         </table>
       </div>
@@ -761,7 +761,7 @@ T.M. Krishna
         </div>
     	<div class="userbytes">
     <div class="userbytesrow">
-        <div style="background:url(http://media2.intoday.in/indiatoday/images/stories/2011December/mindrock_band_147x120_121011010348.jpg) no-repeat center; text-align:center;">
+        <div style="background:url(/staticpages/mediaintoday/indiatoday/images/stories/2011December/mindrock_band_147x120_121011010348.jpg) no-repeat center; text-align:center;">
             <a href="http://indiatoday.intoday.in/video/india-today-youth-summit-2011-chennai.html/1/163663.html
 " target="_blank"><img src="/specials/youthsummit/images/Bigpic.png" width="147" height="120" alt="" title="" border="0" align="middle"></a>
         </div>
@@ -778,25 +778,25 @@ T.M. Krishna
         </div>
     	<div class="userbytes">
     <div class="userbytesrow">
-        <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/ranbir-6_147.jpg) no-repeat;">
+        <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/ranbir-6_147.jpg) no-repeat;">
             <a href="http://indiatoday.intoday.in/video/ranbir-kapoor-at-india-today-mind-rocks-youth-summit-2011.html/1/151707.html" target="_blank"><img src="/specials/youthsummit/images/Bigpic.png" width="147" height="120" alt="" title="" border="0" align="middle"></a>
         </div>
         <div class="userbytesrowright">
             <div class="userbytesrowrighttop">
-                <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/bindra_71x58.jpg) no-repeat;">
+                <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/bindra_71x58.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/abhinav-bindra-mind-rocks-india-today-youth-summit.html/1/151669.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 
-                <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/birla_71.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/birla_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/kumar-mangalam-birla-at-mind-rocks-india-today-youth-summit-2011.html/1/151659.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>	
             </div>
             <div class="userbytesrowrighttop">
-            	<div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/chetan-1_71.jpg) no-repeat;">
+            	<div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/chetan-1_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/chetan-bhagat-at-india-today-mind-rocks-youth-summit-2011.html/1/151680.html"  target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
-                <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/kiran-rao_71.jpg) no-repeat;">
+                <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/kiran-rao_71.jpg) no-repeat;">
                 	<a href="http://indiatoday.intoday.in/video/india-today-mind-rocks-youth-summit-2011.html/1/151697.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
                 </div>
                 <div class="clear"></div>
@@ -806,19 +806,19 @@ T.M. Krishna
     </div>
     <div class="userbytesrow">
         <div class="userbytesrowleft">
-            <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/cMIND_ALERTS_2_new_71x58.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/cMIND_ALERTS_2_new_71x58.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/chetan-bhagat-india-today-mind-rocks-youth-summit.html/1/151694.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/yuvi-gauti-8_71.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/yuvi-gauti-8_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/yuvraj-singh-gautam-gambhir-india-today-mind-rocks-youth-summit-2011.html/1/151686.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>	
         </div>
         <div class="userbytesrowright">
-            <div class="userbytesrowleft" style="background:url(http://media2.intoday.in/indiatoday/images/kiran_bedi_1_71.jpg) no-repeat;">
+            <div class="userbytesrowleft" style="background:url(/staticpages/mediaintoday/indiatoday/images/kiran_bedi_1_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/kiran-bedi-india-today-mind-rocks-youth-summit-2011.html/1/151715.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
-            <div class="userbytesrowright" style="background:url(http://media2.intoday.in/indiatoday/images/arun-1_71.jpg) no-repeat;">
+            <div class="userbytesrowright" style="background:url(/staticpages/mediaintoday/indiatoday/images/arun-1_71.jpg) no-repeat;">
                 <a href="http://indiatoday.intoday.in/video/mind-rocks-india-today-youth-summit-2011.html/1/151657.html" target="_blank"><img src="/specials/youthsummit/images/Smallpic.png" width="71" height="58" alt="" title="" border="0" align="middle"></a>
             </div>
             <div class="clear"></div>
@@ -873,7 +873,7 @@ T.M. Krishna
         <div class="clear"></div>
 	</div>
 </div>
- <iframe src="http://media2.intoday.in/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+ <iframe src="/staticpages/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
  </div>
        	</footer>
     </div>

@@ -106,7 +106,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
 
 
             <div class="top-stories">
-            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-india-teenagers-internet-love/1/412211.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/sex-lead-640x369.jpg" width="640" height="369" alt="" /></a>
+            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-india-teenagers-internet-love/1/412211.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/sex-lead-640x369.jpg" width="640" height="369" alt="" /></a>
                 <h2><a href="http://indiatoday.intoday.in/story/teen-sex-survey-india-teenagers-internet-love/1/412211.html">LoLv We are the new adults</a></h2>
                 <p>Don't give them the birds-and-bees lecture. They are India's first generation born with the internet. It's not virginity they worry about but that obscure object of desire called love.</p>
             </div>
@@ -118,7 +118,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                 	<li>
                     	<div class="boxcont clearfix flt">
                         	<div class="posrel">
-                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-st-stephens-college-teen-confessions/1/412222.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/sexcapades312x203.jpg" width="312" height="203" alt="" /></a>
+                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-st-stephens-college-teen-confessions/1/412222.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/sexcapades312x203.jpg" width="312" height="203" alt="" /></a>
                                 <a href="http://indiatoday.intoday.in/story/teen-sex-survey-st-stephens-college-teen-confessions/1/412222.html"><span>Sexcapades on campus </span></a>
                             </div>
                             <p>When a student of St Stephen College, started an anonymous sex survey, it electrified the campus</p>
@@ -141,7 +141,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                 	<li>
                     	<div class="boxcont clearfix flr">
                         	<div class="posrel">
-                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-internet-primary-site-of-sexual-exploration-for-teens-in-the-smartphone-agegiven-the-parental-reticence-about-talking-sex-the-internet-has-emerged-as-one-ofthe-primary-sites-of-sexual-exploration-teens-smartphone-age/1/412223.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/breasts312x203.jpg" width="312" height="203" alt="" /></a>
+                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-internet-primary-site-of-sexual-exploration-for-teens-in-the-smartphone-agegiven-the-parental-reticence-about-talking-sex-the-internet-has-emerged-as-one-ofthe-primary-sites-of-sexual-exploration-teens-smartphone-age/1/412223.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/breasts312x203.jpg" width="312" height="203" alt="" /></a>
                                 <a href="http://indiatoday.intoday.in/story/teen-sex-survey-internet-primary-site-of-sexual-exploration-for-teens-in-the-smartphone-agegiven-the-parental-reticence-about-talking-sex-the-internet-has-emerged-as-one-ofthe-primary-sites-of-sexual-exploration-teens-smartphone-age/1/412223.html"><span>Hey, Can I see your breasts?</span></a>
                             </div>
                             <p>Internet has emerged as the primary site of sexual exploration for teens in the smartphone age</p>
@@ -166,7 +166,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                     <li>
                     	<div class="boxcont clearfix flt">
                         	<div class="posrel">
-                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-parents-school-gap-generation/1/412226.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/talk-about-sex-312x203.jpg" width="312" height="203" alt="" /></a>
+                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-parents-school-gap-generation/1/412226.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/talk-about-sex-312x203.jpg" width="312" height="203" alt="" /></a>
                                 <a href="http://indiatoday.intoday.in/story/teen-sex-survey-parents-school-gap-generation/1/412226.html"><span>Talk about sex? Yeah, right</span></a>
                             </div>
                             <p>Teens clam up on what's important to them and the choices they want to make</p>
@@ -189,7 +189,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                 	<li>
                     	<div class="boxcont clearfix flr">
                         	<div class="posrel">
-                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-ahmedabad-patna-and-jaipur-most-experimental-to-sex/1/412229.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/three-cities312x203.jpg" width="312" height="203" alt="" /></a>
+                            	<a href="http://indiatoday.intoday.in/story/teen-sex-survey-ahmedabad-patna-and-jaipur-most-experimental-to-sex/1/412229.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/three-cities312x203.jpg" width="312" height="203" alt="" /></a>
                                 <a href="http://indiatoday.intoday.in/story/teen-sex-survey-ahmedabad-patna-and-jaipur-most-experimental-to-sex/1/412229.html"><span>Tale of three cities</span></a>
                             </div>
                             <p>What makes the teenagers of Ahmedabad, Patna and Jaipur the most experimental in sex?</p>
@@ -221,9 +221,9 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
 
                     <div class="sextionary-inner-text">
                        <p>A guide to the new sexually charged language from the under belly of college life</p>
-                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/aunty.png" width="211" height="153" alt="" /></a>
-                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-A-to-Z-Jan19_b.jpg" width="211" height="153" alt="" /></a>
-                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-A-to-Z-Jan19_c.jpg" width="211" height="153" alt="" /></a>
+                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/aunty.png" width="211" height="153" alt="" /></a>
+                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-A-to-Z-Jan19_b.jpg" width="211" height="153" alt="" /></a>
+                       <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-A-to-Z-Jan19_c.jpg" width="211" height="153" alt="" /></a>
                        <a href="http://indiatoday.intoday.in/story/a-guide-to-the-new-sexually-charged-language-from-the-under-belly-of-college-life/1/412265.html" class="more">More</a>
                     </div>
                 </div>
@@ -242,7 +242,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                             <li>
                                    <div class="year-list">
                                        <div class="preyear">2013</div>
-                                       <div class="year-img"><a href="http://indiatoday.intoday.in/sex-survey-2013/index.jsp"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2013-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="http://indiatoday.intoday.in/sex-survey-2013/index.jsp"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2013-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">The Sexual Balance of Power </div>
                                    </div>
                                </li>
@@ -250,35 +250,35 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
                                <li>
                                    <div class="year-list">
                                        <div class="preyear">2012</div>
-                                       <div class="year-img"><a href="/sex-survey-2012"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2012-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="/sex-survey-2012"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2012-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">Sex still a prisoner</div>
                                    </div>
                                </li>
                                <li>
                                    <div class="year-list">
                                        <div class="preyear">2011</div>
-                                       <div class="year-img"><a href="/special/sexsurvey2011/index.shtml"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2011-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="/special/sexsurvey2011/index.shtml"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2011-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">Bold &amp; Bored</div>
                                    </div>
                                </li>
                                <li>
                                    <div class="year-list">
                                        <div class="preyear">2010</div>
-                                       <div class="year-img"><a href="/special/sexsurvey2010/index.shtml"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2010-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="/special/sexsurvey2010/index.shtml"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2010-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">Women want more!</div>
                                    </div>
                                </li>
                                <li>
                                    <div class="year-list">
                                        <div class="preyear">2009</div>
-                                       <div class="year-img"><a href="/special/sexsurvey2009/index.shtml"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2009-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="/special/sexsurvey2009/index.shtml"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2009-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">The Fantasy Report</div>
                                    </div>
                                </li>
                                <li>
                                    <div class="year-list">
                                        <div class="preyear">2008</div>
-                                       <div class="year-img"><a href="http://specials.digitaltoday.in/sexysecrets/index.shtml"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/2008-187x142.jpg" width="187" /></a></div>
+                                       <div class="year-img"><a href="http://specials.digitaltoday.in/sexysecrets/index.shtml"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/2008-187x142.jpg" width="187" /></a></div>
                                        <div class="year-caption">The naked truth</div>
                                    </div>
                                </li>
@@ -294,7 +294,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-                   <!-- <img src="http://media2.intoday.in/indiatoday/specials/sex-survey/slider.jpg" width="633" height="212" alt="" style="margin-left:-10px;" />-->
+                   <!-- <img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/slider.jpg" width="633" height="212" alt="" style="margin-left:-10px;" />-->
 
                 </div>
             </div>
@@ -312,7 +312,7 @@ var zflag_nid="821"; var zflag_cid="1144/1137"; var zflag_sid="2"; var zflag_wid
         <div id="right-panel">
 				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!-- custom scrollbars plugin -->
-<script src="http://media2.intoday.in/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/staticpages/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script>
 		(function($){
 			$(window).load(function(){
@@ -542,7 +542,7 @@ var zflag_nid="821"; var zflag_cid="1146/1137"; var zflag_sid="2"; var zflag_wid
   <h3>COLUMN</h3>
   <div class="list-item-section">
     <ul class="col-list-items">
-      <li> <a href="http://indiatoday.intoday.in/story/teen-sex-survey-freida-pinto-hollywood-growing-up-mumbai/1/412217.html"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/column79x79.jpg" width="79" height="79" /></a> <a href="http://indiatoday.intoday.in/story/teen-sex-survey-freida-pinto-hollywood-growing-up-mumbai/1/412217.html">
+      <li> <a href="http://indiatoday.intoday.in/story/teen-sex-survey-freida-pinto-hollywood-growing-up-mumbai/1/412217.html"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/column79x79.jpg" width="79" height="79" /></a> <a href="http://indiatoday.intoday.in/story/teen-sex-survey-freida-pinto-hollywood-growing-up-mumbai/1/412217.html">
       <span>Freida Pinto</span>
       </a><br />
       <span><strong>Just dare to be real</strong></span>
@@ -552,8 +552,8 @@ var zflag_nid="821"; var zflag_cid="1146/1137"; var zflag_sid="2"; var zflag_wid
   </div>
 </div>
 <div class="subscribe-now clearfix">
-  <div class="inner-card"> <img src="http://media2.intoday.in/indiatoday/specials/sex-survey/maz.jpg" width="230" height="320" alt="" class="maz" />
-    <div class="subscribe"><a href="http://subscriptions.intoday.in/subscriptions/itoday/regionlInt.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/specials/sex-survey/subscribe.png" width="161" height="44" alt="" /></a></div>
+  <div class="inner-card"> <img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/maz.jpg" width="230" height="320" alt="" class="maz" />
+    <div class="subscribe"><a href="http://subscriptions.intoday.in/subscriptions/itoday/regionlInt.html" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/specials/sex-survey/subscribe.png" width="161" height="44" alt="" /></a></div>
     <h3>ON THE STANDS NOW</h3>
   </div>
 </div>

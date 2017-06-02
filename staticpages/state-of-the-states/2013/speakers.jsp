@@ -43,23 +43,23 @@
     <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"
     ALIGN="CENTER">
       <TR>
-        <TD background="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/bg.jpg">
+        <TD background="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/bg.jpg">
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="337"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/logo.jpg" BORDER="0" WIDTH="337" HEIGHT="304"></TD>
+            <TD WIDTH="337"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/logo.jpg" BORDER="0" WIDTH="337" HEIGHT="304"></TD>
             <TD VALIGN="TOP">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/top.jpg" BORDER="0" WIDTH="665" HEIGHT="206"></TD>
+                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/top.jpg" BORDER="0" WIDTH="665" HEIGHT="206"></TD>
               </TR>
               <TR>
-                <TD HEIGHT="14"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/top1.jpg" BORDER="0" WIDTH="665" HEIGHT="14"></TD>
+                <TD HEIGHT="14"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/top1.jpg" BORDER="0" WIDTH="665" HEIGHT="14"></TD>
               </TR>
               <TR>
                 <TD>
                 <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
                   <TR>
-                    <TD WIDTH="119"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/s1.jpg" BORDER="0" WIDTH="119" HEIGHT="52"></TD>
+                    <TD WIDTH="119"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/s1.jpg" BORDER="0" WIDTH="119" HEIGHT="52"></TD>
                     <TD BGCOLOR="#FFFFFF">
 <SCRIPT LANGUAGE="javascript" SRC="scroll1.js"></SCRIPT></TD>
 
@@ -68,7 +68,7 @@
                 </TABLE></TD>
               </TR>
               <TR>
-                <TD VALIGN="TOP"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/top2.jpg" BORDER="0" WIDTH="665" HEIGHT="32"></TD>
+                <TD VALIGN="TOP"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/top2.jpg" BORDER="0" WIDTH="665" HEIGHT="32"></TD>
               </TR>
             </TABLE></TD>
           </TR>
@@ -154,25 +154,25 @@
        <DIV CLASS="side_chunk_title">Speakers 2013</DIV>
         <TABLE WIDTH="95%" BORDER="0" CELLSPACING="0" CELLPADDING="0">
           <TR>
-            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Jairam-Ramesh-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Bhupinder-Singh-Hooda-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="33%" ALIGN="RIGHT"><img src="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Omar-Abdullah-sp.jpg" alt="" width="197" height="195" border="0" /></TD>
+            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Jairam-Ramesh-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Bhupinder-Singh-Hooda-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="33%" ALIGN="RIGHT"><img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Omar-Abdullah-sp.jpg" alt="" width="197" height="195" border="0" /></TD>
           </TR>
 		  <tr><td colspan="3" height="25">&nbsp;</td></tr>
           <TR>
-            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Hemant-Kanoria-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Manohar-Parrikar-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="33%" ALIGN="RIGHT"><img src="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Kiran_reddy.jpg" alt="" width="197" height="195" border="0" /></TD>
+            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Hemant-Kanoria-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Manohar-Parrikar-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="33%" ALIGN="RIGHT"><img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Kiran_reddy.jpg" alt="" width="197" height="195" border="0" /></TD>
           </TR>
 		   <tr><td colspan="3" height="25">&nbsp;</td></tr>
           <TR>
-            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Oommen-Chandy-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Manik_Sarkar.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Vayalar-Ravi.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Oommen-Chandy-sp.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Manik_Sarkar.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="34%" ALIGN="CENTER"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Vayalar-Ravi.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
           </TR>
            <tr><td colspan="3" height="25">&nbsp;</td></tr>
            <TR>
-            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2013/images/Virbhadra-Singh.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2013/images/Virbhadra-Singh.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
             <TD WIDTH="34%" ALIGN="CENTER"></TD>
             <TD WIDTH="34%" ALIGN="CENTER"></TD>
           </TR>
@@ -212,7 +212,7 @@
     <div class="snapsheader">Photos</div>
 
     <div>
-  <div class="photovidbox"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html"><img src="http://media2.intoday.in/indiatoday/images/sos2012/sp.gif" width="140" height="140" alt="Pranab Mukherjee" title="Pranab Mukherjee" border="0"></a>
+  <div class="photovidbox"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html"><img src="/staticpages/mediaintoday/indiatoday/images/sos2012/sp.gif" width="140" height="140" alt="Pranab Mukherjee" title="Pranab Mukherjee" border="0"></a>
                 <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html">Awards function 2012</a> </div>
 </div>
         <div class="photovidbox rightsp">
@@ -227,11 +227,11 @@
 
     <div>
   <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg" width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0"></a>
+          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg" width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0"></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html">Awards function 2010</a> </div>
         </div>
         <div class="photovidbox rightsp">
-          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/awards-function-2009_102111031314.jpg" width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0"></a>
+          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/awards-function-2009_102111031314.jpg" width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0"></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html">Awards function 2009</a> </div>
         </div>
 
@@ -245,11 +245,11 @@
     <div class="snapsheader">Videos</div>
     <div>
         <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg" width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0"></a>
+          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg" width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0"></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html">IT honours fastest-mover states</a> </div>
         </div>
 <div class="photovidbox rightsp">
-  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0"></a>
+  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0"></a>
   <div class="stcaption"><a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html">'Punjab, Delhi are best states'</a> </div>
 </div>
       <div class="clear"></div>
@@ -270,7 +270,7 @@
     <DIV>
     <div class="footerbg">
 		<div class="presenting">
-		<img src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/sp.gif" border="0">
+		<img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/sp.gif" border="0">
 		</div>
 	</div>
 <div class="clear"></div>

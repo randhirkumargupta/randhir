@@ -190,27 +190,27 @@ ul.activities-images li:nth-child(21){border-bottom:10px solid #e6e6e6;}
   </div>
   <div class="act-center">
   <ul class="activities-images">
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/1.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/2.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/3.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/4.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/5.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/6.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/7.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/8.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/9.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/10.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/11.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/12.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/13.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/14.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/15.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/16.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/17.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/18.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/19.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/20.jpg" alt=""></li>
-            <li><img src="http://media2.intoday.in/indiatoday/itmi/images/activities/21.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/1.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/2.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/3.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/4.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/5.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/6.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/7.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/8.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/9.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/10.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/11.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/12.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/13.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/14.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/15.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/16.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/17.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/18.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/19.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/20.jpg" alt=""></li>
+            <li><img src="/staticpages/mediaintoday/indiatoday/itmi/images/activities/21.jpg" alt=""></li>
           </ul>
           </div>
             

@@ -7,13 +7,13 @@
 .flt{float:left}
 .flr{float:right}
 
-body{ font-size:100%; margin:0; padding:0; font-family:roboto; background:#fefefe url(http://media2.intoday.in/indiatoday/specials/sex-survey/sex-survey-bg22016.jpg)top center no-repeat; background-attachment: fixed;}
+body{ font-size:100%; margin:0; padding:0; font-family:roboto; background:#fefefe url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/sex-survey-bg22016.jpg)top center no-repeat; background-attachment: fixed;}
 
 #header{height:171px;}
 .wrapper{ width:960px; margin:0 auto; padding:20px; background:#e4e4e4;}
 .top-add{ float:right; margin:15px 15px;}
 #header .wapper{ width:1000px; margin: 0 auto; background-color:rgba(0,0,0,0.5); height:171px; overflow:hidden;}
-#header .wapper .serverylogo{ background:url(http://media2.intoday.in/indiatoday/specials/sex-survey/logo2016.png) no-repeat 0 0; width:365px; height:112px; text-indent:-999999px; float:left; margin-left:20px; margin-top:30px;}
+#header .wapper .serverylogo{ background:url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/logo2016.png) no-repeat 0 0; width:365px; height:112px; text-indent:-999999px; float:left; margin-left:20px; margin-top:30px;}
 #header .wapper .grouplogo{ width:69px; height:65px; float:right; margin:30px 15px 0 0}
 
 #nav-section{ width:100%; height:44px; background:#323232;}
@@ -26,11 +26,11 @@ body{ font-size:100%; margin:0; padding:0; font-family:roboto; background:#fefef
 
 .social-icon{ float:right;}
 .social-icon ul li{ float:left; list-style:none; margin-left:8px;}
-.twitter-icon {background: url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -11px -4px no-repeat;width: 40px;height: 42px;display: block;}
-.fb-icon {background: url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -53px -4px no-repeat;width: 40px;height: 42px;display: block;}
-.share-icon-one {background: url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.twitter-icon {background: url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -11px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.fb-icon {background: url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -53px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.share-icon-one {background: url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -4px no-repeat;width: 40px;height: 42px;display: block;}
 .icon-home {
-background: url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -56px no-repeat;
+background: url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -56px no-repeat;
 width: 40px;height: 42px;display: block;padding: 0 8px;margin-left: 15px;}
 .yellow{ background:#FD0178;margin-right:10px;}
 
@@ -45,7 +45,7 @@ width: 40px;height: 42px;display: block;padding: 0 8px;margin-left: 15px;}
 .boxcont{ width:312px; margin-bottom:25px; background:#FFF;box-shadow: 2px 2px 10px 2px #CCCCCC;}
 .boxcont p{ padding:5px 10px 10px; font-size:17px;}
 .posrel{ position:relative;}
-.posrel span{ background:url(http://media2.intoday.in/indiatoday/specials/sex-survey/caption.png); width:292px; height:35px; line-height:35px; font-size:18px; font-weight:500; position:absolute; bottom:0px; left:0; color:#FFF; padding:5px 10px;}
+.posrel span{ background:url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/caption.png); width:292px; height:35px; line-height:35px; font-size:18px; font-weight:500; position:absolute; bottom:0px; left:0; color:#FFF; padding:5px 10px;}
 
 .share-story{width:98%; padding-left:5px;}
 .share-story{float:left;padding:2px 0 5px 8px;height:34px;}
@@ -129,8 +129,8 @@ display: inline;padding:0;}
 .previous-inner-section .previous-yearslider ul li .preyear{ width:40px; background:#FD0178; border:1px solid #000; padding:3px; color:#fff;font-weight:700; font-size:17px; line-height:17px;}
 .previous-inner-section .previous-yearslider ul li .year-caption{ font-size:18px; font-weight:700; color:#323232; line-height:20px;}
 .previous-inner-section .previous-yearslider ul li .year-img{ margin:10px 0 0;}
-.previous-inner-section a#pre{ background:url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -20px -65px; text-indent:-99999px; display:block; width:19px; height:26px; position:absolute; top:105px; left:4px; }
-.previous-inner-section a#next{ background:url(http://media2.intoday.in/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -52px -65px; text-indent:-99999px; display:block; width:19px; height:26px;position:absolute; top:105px; right:4px; }
+.previous-inner-section a#pre{ background:url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -20px -65px; text-indent:-99999px; display:block; width:19px; height:26px; position:absolute; top:105px; left:4px; }
+.previous-inner-section a#next{ background:url(/staticpages/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -52px -65px; text-indent:-99999px; display:block; width:19px; height:26px;position:absolute; top:105px; right:4px; }
 
 .list-stories ul{float:left; width:49%;}
 .list-stories ul:last-child{float:right;}
@@ -148,7 +148,7 @@ display: inline;padding:0;}
     width: 1003px !important;
 }
 .gb-lik {
-    background: url("http://media2.intoday.in/indiatoday/images/band-gblink.png") no-repeat scroll 5px center rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/band-gblink.png") no-repeat scroll 5px center rgba(0, 0, 0, 0);
 }
 .itgd_links {
     background-color: #d8d8d8 !important;
@@ -191,7 +191,7 @@ display: inline;padding:0;}
 #top-web1 { display:none;}
 .top-stories{ position:relative;}
 span.video-icon {
-    background-image: url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png");
+    background-image: url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png");
     background-position: -406px -480px;
     display: block;
     height: 38px;

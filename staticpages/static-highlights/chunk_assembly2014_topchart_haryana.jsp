@@ -4,10 +4,10 @@
 
 <meta http-equiv="refresh" content="60; URL=http://indiatoday.intoday.in/highlights/chunk_assembly2014_topchart.jsp?page=1&aname=haryana">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="http://media2.intoday.in/elections/js/highcharts.js"></script>
+<script src="/staticpages/mediaintoday/elections/js/highcharts.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
 <script>
-	var domain = "http://media2.intoday.in/";
+	var domain = "/staticpages/mediaintoday/";
 	var fpath = "feeds/election/assembly_election_2014/json";
 	function loadPieAllianceBigContainer2(a,data)
 	{

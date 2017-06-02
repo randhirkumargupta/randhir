@@ -46,24 +46,24 @@
     <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"
     ALIGN="CENTER">
       <TR>
-        <TD background="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/bg.jpg">
+        <TD background="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/bg.jpg">
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="337"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/logo.jpg" BORDER="0" WIDTH="337" HEIGHT="304"></TD>
+            <TD WIDTH="337"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/logo.jpg" BORDER="0" WIDTH="337" HEIGHT="304"></TD>
             <TD VALIGN="TOP">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/top.jpg" BORDER="0" WIDTH="665" HEIGHT="206"></TD>
+                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/top.jpg" BORDER="0" WIDTH="665" HEIGHT="206"></TD>
               </TR>
               <TR>
-                <TD HEIGHT="14"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/top1.jpg" BORDER="0" WIDTH="665" HEIGHT="14"></TD>
+                <TD HEIGHT="14"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/top1.jpg" BORDER="0" WIDTH="665" HEIGHT="14"></TD>
               </TR>
               <TR>
                 <TD>
                 <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
                   <TR>
-                    <TD WIDTH="119"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/s1.jpg" BORDER="0" WIDTH="119" HEIGHT="52"></TD>
-                    <TD BGCOLOR="#FFFFFF"><img src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/slide.jpg" width="399" height="52" />
+                    <TD WIDTH="119"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/s1.jpg" BORDER="0" WIDTH="119" HEIGHT="52"></TD>
+                    <TD BGCOLOR="#FFFFFF"><img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/slide.jpg" width="399" height="52" />
 <!--<SCRIPT LANGUAGE="javascript" SRC="scroll1.js"></SCRIPT>--></TD>
 
                     <TD WIDTH="17"><IMG SRC="http://indiatoday.intoday.in/state-of-the-states/images/s2.jpg" BORDER="0" WIDTH="17" HEIGHT="52"></TD>
@@ -71,7 +71,7 @@
                 </TABLE></TD>
               </TR>
               <TR>
-                <TD VALIGN="TOP"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/top2.jpg" BORDER="0" WIDTH="665" HEIGHT="32"></TD>
+                <TD VALIGN="TOP"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/top2.jpg" BORDER="0" WIDTH="665" HEIGHT="32"></TD>
               </TR>
             </TABLE></TD>
           </TR>
@@ -151,9 +151,9 @@
      <DIV CLASS="side_chunk_title">Speakers 2014</DIV>-->
       <TABLE WIDTH="95%" BORDER="0" CELLSPACING="0" CELLPADDING="0">
           <TR>
-            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/Ravi-Shankar-Prasad.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
-            <TD WIDTH="34%" ALIGN="CENTER"><img src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/Manohar-Parrikar-sp.jpg" alt="" width="197" height="195" border="0" /></TD>
-            <TD WIDTH="33%" ALIGN="RIGHT"><IMG SRC="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/Harish-Rawat.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="33%" ALIGN="LEFT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/Ravi-Shankar-Prasad.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
+            <TD WIDTH="34%" ALIGN="CENTER"><img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/Manohar-Parrikar-sp.jpg" alt="" width="197" height="195" border="0" /></TD>
+            <TD WIDTH="33%" ALIGN="RIGHT"><IMG SRC="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/Harish-Rawat.jpg" BORDER="0" WIDTH="197" HEIGHT="195"></TD>
           </TR>
 
         </TABLE>
@@ -193,7 +193,7 @@
       <div class="prog-head">Keynote Address<br />Centre-State Relations<br />A Paradigm Shift </div>
       <!--<div class="prog-txt">What my business taught me about the business of life</div>-->
       <div class="prj_name marg-top">Speaker:</div>
-      <div class="progboox-full"> <img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/ravi-shankar-prasad.jpg" alt="Ravi Shankar Prasad" class="imgs" title="Ravi Shankar Prasad">
+      <div class="progboox-full"> <img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/ravi-shankar-prasad.jpg" alt="Ravi Shankar Prasad" class="imgs" title="Ravi Shankar Prasad">
         <div class="mindr-consubhead">Ravi Shankar Prasad</div>
         <div>Union Cabinet Minister of Law and Justice and Communications and Information Technology</div>
       </div>
@@ -229,11 +229,11 @@
         Concurrence in Governance<br />
         Why India is run from state capitals, not Delhi</div>
       <div class="prj_name marg-top">Speakers:</div>
-         <div class="progboox-full"> <img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/manohar-parrikar.jpg" alt="Manohar Parrikar" class="imgs" title="Manohar Parrikar">
+         <div class="progboox-full"> <img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/manohar-parrikar.jpg" alt="Manohar Parrikar" class="imgs" title="Manohar Parrikar">
         <div class="mindr-consubhead">Manohar Parrikar</div>
         <div>Chief Minister, Goa</div>
       </div>
-      <div class="progboox-full"> <img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/harish-rawat.jpg" alt="Harish Rawat" class="imgs" title="Harish Rawat">
+      <div class="progboox-full"> <img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/harish-rawat.jpg" alt="Harish Rawat" class="imgs" title="Harish Rawat">
         <div class="mindr-consubhead">Harish Rawat</div>
         <div>Chief Minister, Uttarakhand</div>
       </div>
@@ -248,17 +248,17 @@
     <div class="prog-right">
       <div class="prog-head">Panel Discussion<br />Challenges for the Winners: How to push the growth engine forward </div>
       <div class="prj_name marg-top">Speakers:</div>
-      <div class="progboox-full"> <img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/omar-abdullah.jpg" alt="Omar Abdullah" class="imgs" title="Omar Abdullah">
+      <div class="progboox-full"> <img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/omar-abdullah.jpg" alt="Omar Abdullah" class="imgs" title="Omar Abdullah">
         <div class="mindr-consubhead">Omar Abdullah</div>
         <div>Chief Minister, J&K* </div>
       </div>
 
-      <div class="progboox-full"> <img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/kc-Joseph.jpg" alt="K C Joseph" class="imgs" title="K C Joseph">
+      <div class="progboox-full"> <img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/kc-Joseph.jpg" alt="K C Joseph" class="imgs" title="K C Joseph">
         <div class="mindr-consubhead">K C Joseph</div>
         <div>Minister for Planning and Economic Affairs, Kerala</div>
       </div>
 
-      <div class="progboox-full"><img  border="0" align="left" src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/TT-rama-Rao7564.jpg" alt="KT Rama Rao" class="imgs" title="KT Rama Rao">
+      <div class="progboox-full"><img  border="0" align="left" src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/TT-rama-Rao7564.jpg" alt="KT Rama Rao" class="imgs" title="KT Rama Rao">
         <div class="mindr-consubhead">KT Rama Rao</div>
         <div>Minister for Information Technology and Panchayat, Telangana</div>
       </div>
@@ -320,7 +320,7 @@
         <div class="clear profilediv"></div>
   </div>
     <div class="profile gray">
-        <a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/2010_102111030708.jpg" width="100" height="100" alt="Sheila Dikshit" title="Sheila Dikshit" border="0" align="middle"></a>
+        <a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/2010_102111030708.jpg" width="100" height="100" alt="Sheila Dikshit" title="Sheila Dikshit" border="0" align="middle"></a>
         <div class="proright">
             <div class="name"><a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html" target="_blank">State of States 2010</a></div>
             <div class="profilebyline"><img src="http://indiatoday.intoday.in/state-of-the-states/images/listarrow.gif" border="0" align="left" class="imgs" /><a href="http://indiatoday.intoday.in/story/how-good-is-your-cm/1/120522.html" target="_blank">How good is your CM?</a></div>
@@ -339,7 +339,7 @@
 
     <div class="side_chunk_title">2014 WINNERS</div>
 	<div class="photovidbox">
-    	<a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-awards-tamil-nadu-goa-win-top-honours/1/13284.html"><img src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/2014_winner.jpg" width="295" height="158" /></a>
+    	<a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-awards-tamil-nadu-goa-win-top-honours/1/13284.html"><img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/2014_winner.jpg" width="295" height="158" /></a>
      </div>
 
      <br>
@@ -353,7 +353,7 @@
     <div class="snapsheader">Photos</div>
 
     <div>
-	<div class="photovidbox"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html"><img src="http://media2.intoday.in/indiatoday/images/sos2012/sp.gif" width="140" height="140" alt="Pranab Mukherjee" title="Pranab Mukherjee" border="0" /></a>
+	<div class="photovidbox"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html"><img src="/staticpages/mediaintoday/indiatoday/images/sos2012/sp.gif" width="140" height="140" alt="Pranab Mukherjee" title="Pranab Mukherjee" border="0" /></a>
                 <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-the-states-conclave-2012/1/8093.html">Awards function 2012</a> </div>
 </div>
         <div class="photovidbox rightsp">
@@ -368,11 +368,11 @@
 
     <div>
 	<div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html">Awards function 2010</a> </div>
         </div>
         <div class="photovidbox rightsp">
-          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/awards-function-2009_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/awards-function-2009_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html">Awards function 2009</a> </div>
         </div>
 
@@ -386,11 +386,11 @@
     <div class="snapsheader">Videos</div>
     <div>
         <div class="photovidbox">
-          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
+          <a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb1_102111031314.jpg"  width="140" height="140" alt="Narendra Modi" title="Narendra Modi" border="0" /></a>
           <div class="stcaption"><a href="http://indiatoday.intoday.in/video/it-honours-fastestmover-states/1/120452.html">IT honours fastest-mover states</a> </div>
         </div>
 <div class="photovidbox rightsp">
-  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="http://media2.intoday.in/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
+  <a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html"><img src="/staticpages/mediaintoday/indiatoday//images/stories/2011October/video-thumb2_102111031314.jpg" width="140" height="140" alt="Sharad Pawar" title="Sharad Pawar" border="0" /></a>
   <div class="stcaption"><a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html">'Punjab, Delhi are best states'</a> </div>
 </div>
       <div class="clear"></div>
@@ -406,7 +406,7 @@
     <DIV>
     <div class="footerbg">
 		<div class="presenting">
-		<img src="http://media2.intoday.in/indiatoday/state-of-the-states/2014/images/sp.gif" border="0">
+		<img src="/staticpages/mediaintoday/indiatoday/state-of-the-states/2014/images/sp.gif" border="0">
 		</div>
 	</div>
 <div class="clear"></div>

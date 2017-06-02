@@ -71,10 +71,10 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
 </head>
 <body>
-<link href="http://media2.intoday.in/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
+<link href="/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
-		<script type="text/javascript" src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
 
 <div id="toppanel" class="clearfix">
   <div class="container">
@@ -149,8 +149,8 @@ var zflag_nid="821"; var zflag_cid="1198/1137"; var zflag_sid="2"; var zflag_wid
   <!-- Main Navigation -->
   <div id="main-navigation" class="container-fluid">
     <style>
-li.livetv{ background:url(http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
-li.livetv:hover,li.livetv.navactive{ background:url(http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
+li.livetv{ background:url(/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
+li.livetv:hover,li.livetv.navactive{ background:url(/staticpages/mediaintoday/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
 </style>
 <script>
 var siteurl="http://indiatoday.intoday.in/";
@@ -251,8 +251,8 @@ var siteurl="http://indiatoday.intoday.in/";
               <li class="livetv ">
                 <div style="display:none;" class="close"></div>
             <a href="http://indiatoday.intoday.in/livetv.jsp" title="Live Tv">
-            <!--<img class="navliveicon redicon" src="http://media2.intoday.in/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
-            <img class="navliveicon whiteicon" src="http://media2.intoday.in/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
+            <!--<img class="navliveicon redicon" src="/staticpages/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
+            <img class="navliveicon whiteicon" src="/staticpages/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
               
               </li>
               <li class="magazine   ">
@@ -394,11 +394,11 @@ zzp.src="http://m4.zedo.com/log/p.gif?a=2650544;c=821003559;x=23040;n=821;e=i;i=
 
 </style>
 <!--<div class="container_bestcol">
-<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="http://media2.intoday.in/aajtak/best-college-sponsor/sponsor.html"></iframe>
+<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="/staticpages/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
 </div>-->                  
 
 <!--<div class="clearfix"></div>
- <div id="conclaceamt"><iframe src="http://media2.intoday.in/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
+ <div id="conclaceamt"><iframe src="/staticpages/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
  <div class="clearfix"></div>-->              
   </div>
 </div>
@@ -718,7 +718,7 @@ $(document).ready(function() {
 </div>  
  
      			<div class="rt-colum"> 
-     				 <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS">PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/mind-rocks-guwahati-2017-katrina-kaif/1/19393.html" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042917071156.jpg" alt="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/mind-rocks-guwahati-2017-katrina-kaif/1/19393.html" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom"><span class="photo-icon spritbg"></span>Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042817052831.jpg" alt="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><span class="photo-icon spritbg"></span>Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042817020217.jpg" alt="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><span class="photo-icon spritbg"></span>5 pictures that prove TV actress Mouni Roy is the most stylish of them all</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042817112802.jpg" alt="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><span class="photo-icon spritbg"></span>Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042717062159.jpg" alt="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><span class="photo-icon spritbg"></span>PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-prabhas-rana-daggubati-face-off-ss-rajamouli/1/19364.html" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/main-88-300-305_300_042617055255.jpg" alt="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-prabhas-rana-daggubati-face-off-ss-rajamouli/1/19364.html" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana"><span class="photo-icon spritbg"></span>2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/deepika-padukone-irrfan-khan-bollywood-reunions-ranbir-katrina-srk-anushka-ranveer-deepika/1/19339.html" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_300_042117060258.jpg" alt="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/deepika-padukone-irrfan-khan-bollywood-reunions-ranbir-katrina-srk-anushka-ranveer-deepika/1/19339.html" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait"><span class="photo-icon spritbg"></span>Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-bizarre-love-stories-that-you-will-only-see-on-indian-tv-pehredaar-piya-ki-shakti-astitva-ke-ehsaas-ki-lifetv/1/19365.html" title="5 bizarre love stories that you will only see on Indian TV"><img src="http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb-300_042617062740.jpg" alt="5 bizarre love stories that you will only see on Indian TV" title="5 bizarre love stories that you will only see on Indian TV" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-bizarre-love-stories-that-you-will-only-see-on-indian-tv-pehredaar-piya-ki-shakti-astitva-ke-ehsaas-ki-lifetv/1/19365.html" title="5 bizarre love stories that you will only see on Indian TV"><span class="photo-icon spritbg"></span>5 bizarre love stories that you will only see on Indian TV</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
+     				 <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS">PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/mind-rocks-guwahati-2017-katrina-kaif/1/19393.html" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042917071156.jpg" alt="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/mind-rocks-guwahati-2017-katrina-kaif/1/19393.html" title="Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom"><span class="photo-icon spritbg"></span>Mind Rocks Guwahati 2017: Katrina Kaif talks about her early days, her Bollywood career and stardom</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817052831.jpg" alt="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/samantha-ruth-prabhu-birthday-naga-chaitanya-best-photos/1/19379.html" title="Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya"><span class="photo-icon spritbg"></span>Samantha Ruth Prabhu turns 30: The birthday girl's best photos with fiance Naga Chaitanya</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817020217.jpg" alt="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-pictures-that-prove-tv-actress-naagin-mouni-roy-is-the-most-stylish-of-them-all-lifetv/1/19378.html" title="5 pictures that prove TV actress Mouni Roy is the most stylish of them all"><span class="photo-icon spritbg"></span>5 pictures that prove TV actress Mouni Roy is the most stylish of them all</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042817112802.jpg" alt="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-screening-karan-johar-rajamouli-alia-bhatt-sidharth-malhotra-raveena/1/19376.html" title="Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening"><span class="photo-icon spritbg"></span>Baahubali 2: Alia-Sidharth join KJo-Rajamouli for a screening</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042717062159.jpg" alt="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/vinod-khanna-funeral-photos-amitabh-bachchan-rishi-kapoor/1/19373.html" title="PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor"><span class="photo-icon spritbg"></span>PICS: Vinod Khanna's funeral attended by Amitabh and Abhishek Bachchan, Rishi Kapoor</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/baahubali-2-prabhas-rana-daggubati-face-off-ss-rajamouli/1/19364.html" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/main-88-300-305_300_042617055255.jpg" alt="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/baahubali-2-prabhas-rana-daggubati-face-off-ss-rajamouli/1/19364.html" title="2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana"><span class="photo-icon spritbg"></span>2 days to go for Baahubali 2: Get set for the ultimate face-off between Prabhas-Rana</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/deepika-padukone-irrfan-khan-bollywood-reunions-ranbir-katrina-srk-anushka-ranveer-deepika/1/19339.html" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_042117060258.jpg" alt="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/deepika-padukone-irrfan-khan-bollywood-reunions-ranbir-katrina-srk-anushka-ranveer-deepika/1/19339.html" title="Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait"><span class="photo-icon spritbg"></span>Deepika-Irrfan to Katrina-Ranbir: On-screen reunions that are worth the wait</a></div></div><div class="photo-list"><a href="http://indiatoday.intoday.in/gallery/5-bizarre-love-stories-that-you-will-only-see-on-indian-tv-pehredaar-piya-ki-shakti-astitva-ke-ehsaas-ki-lifetv/1/19365.html" title="5 bizarre love stories that you will only see on Indian TV"><img src="/staticpages/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_042617062740.jpg" alt="5 bizarre love stories that you will only see on Indian TV" title="5 bizarre love stories that you will only see on Indian TV" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/5-bizarre-love-stories-that-you-will-only-see-on-indian-tv-pehredaar-piya-ki-shakti-astitva-ke-ehsaas-ki-lifetv/1/19365.html" title="5 bizarre love stories that you will only see on Indian TV"><span class="photo-icon spritbg"></span>5 bizarre love stories that you will only see on Indian TV</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
   
  				</div>
  
@@ -730,7 +730,7 @@ $(document).ready(function() {
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/triple-talaq-row-is-the-voice-of-the-progressive-muslim-missing/1/941784.html" title="Triple talaq row: Is the voice of the progressive Muslim missing?"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/8pm_video_88_042917103132.jpg" title="Triple talaq row" alt="Triple talaq row" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/8pm_video_88_042917103132.jpg" title="Triple talaq row" alt="Triple talaq row" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -742,7 +742,7 @@ Triple talaq row: Is the voice of the progressive Muslim missing?
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/congress-sacks-digvijaya-singh-as-in-charge-of-goa-and-karnataka/1/941770.html" title="Congress sacks Digvijaya Singh as in-charge of Goa and Karnataka"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/dig_video_88_042917100508.jpg" title="Digvijaya Singh" alt="Digvijaya Singh" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/dig_video_88_042917100508.jpg" title="Digvijaya Singh" alt="Digvijaya Singh" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -754,7 +754,7 @@ Congress sacks Digvijaya Singh as in-charge of Goa and Karnataka
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/muslim-men-triple-talaq-lust-up-minister-swami-prasad-maurya/1/941599.html" title="Muslim men use triple talaq to satisfy lust, UP minister Swami Prasad Maurya"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/mantri_video_88_042917062900.jpg" title="Swami Prasad Maurya" alt="Swami Prasad Maurya" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/mantri_video_88_042917062900.jpg" title="Swami Prasad Maurya" alt="Swami Prasad Maurya" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -766,7 +766,7 @@ Muslim men use triple talaq to satisfy lust, UP minister Swami Prasad Maurya
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/kodanad-estate-murder-mystery-jayalalithaa-cops-suspect-insider-role-property-documents-loot/1/941578.html" title="Kodanad estate murder mystery: Cops suspect insider role in Amma's property documents' loot"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/jaya-estate_video_88_042917060527.jpg" title="Jayalalithaa estate" alt="Jayalalithaa estate" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/jaya-estate_video_88_042917060527.jpg" title="Jayalalithaa estate" alt="Jayalalithaa estate" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -781,7 +781,7 @@ Kodanad estate murder mystery: Cops suspect insider role in Amma's property docu
       	<div class="rt-colum">   
 
 				 	<h2><a href="/sosorry">So sorry</a></h2>     <div class="showing">
-      <div class="list-showing"> <a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><img width="313" src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/so-sorry-evm_305_042617015051.jpg" alt="So sorry" title="So sorry" /></a>
+      <div class="list-showing"> <a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><img width="313" src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/so-sorry-evm_305_042617015051.jpg" alt="So sorry" title="So sorry" /></a>
        <div class="captionWicon"><a href="/video/evm-election-commission-arvind-kejriwal-so-sorry/1/938392.html" title="EVM mantra for netas: Fix it even if it ain't broken"><span class="video-icon spritbg"></span>EVM mantra for netas: Fix it even if it ain't broken</a></div>
        </div>       </div>  
    
@@ -801,7 +801,7 @@ Kodanad estate murder mystery: Cops suspect insider role in Amma's property docu
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/jammu-and-kashmir-protest-outside-un-office-pakistans-plan-to-make-gilgit-baltistan-its-fifth-province/1/941800.html" title="J-K: Protest outside UN office against Pakistan's plan to make Gilgit-Baltistan its fifth province"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/jammu_video_88_042917110922.jpg" title="Anti-Pakistan protest in Srinagar" alt="Anti-Pakistan protest in Srinagar" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/jammu_video_88_042917110922.jpg" title="Anti-Pakistan protest in Srinagar" alt="Anti-Pakistan protest in Srinagar" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -813,7 +813,7 @@ J-K: Protest outside UN office against Pakistan's plan to make Gilgit-Baltistan 
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/chief-election-commissioner-nasim-zaidi-to-call-party-meet-to-ensure-evms-are-tamper-proof/1/941743.html" title="CEC Nasim Zaidi to call all-party meet soon to assure EVMs are tamper-proof"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/evm_video_88_042917091029.jpg" title="EVM" alt="EVM" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/evm_video_88_042917091029.jpg" title="EVM" alt="EVM" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -825,7 +825,7 @@ CEC Nasim Zaidi to call all-party meet soon to assure EVMs are tamper-proof
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/eman-ahmed-weight-loss-egypt-mumbai-worlds-heaviest-woman-saifee-hospital/1/941693.html" title="Eman Ahmed weighed 378 kgs before treatment, claims doctor treating her"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/eman-video_88_042917080248.jpg" title="Eman Ahmed" alt="Eman Ahmed" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/eman-video_88_042917080248.jpg" title="Eman Ahmed" alt="Eman Ahmed" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -837,7 +837,7 @@ Eman Ahmed weighed 378 kgs before treatment, claims doctor treating her
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/india-today-mind-rocks-guwahati-entrepreneurship-own-boss-gitali-thakur/1/941623.html" title="India Today Mind Rocks: Entrepreneurship gives you opportunity to be your own boss, says Gitali Thakur"> 
 <div class="watch_chunk_left">
-<img  src="http://media2.intoday.in/indiatoday/lazyload-grey.gif" data-original="http://media2.intoday.in/indiatoday/images/stories/thakur-gitali_video_88_042917065233.jpg" title="Gitali Thakur" alt="Gitali Thakur" />
+<img  src="/staticpages/mediaintoday/indiatoday/lazyload-grey.gif" data-original="/staticpages/mediaintoday/indiatoday/images/stories/thakur-gitali_video_88_042917065233.jpg" title="Gitali Thakur" alt="Gitali Thakur" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1046,7 +1046,7 @@ var zflag_nid="821"; var zflag_cid="1199/1137"; var zflag_sid="2"; var zflag_wid
   <h3>Distribution</h3>
   <ul>
     <li> <a href="http://aajtak.intoday.in/distribution/index.php" target="_blank">Rate Card</a></li>
-     <li> <a href="http://media2.intoday.in/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
+     <li> <a href="/staticpages/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
       <li> <a href="http://aajtak.intoday.in/distribution/das_phase_three.php" target="_blank">Contact persons for DAS phase III</a></li>
   </ul>
 </div>
@@ -1143,11 +1143,11 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
     })();
 </script>
 
-<script src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
-<script src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
-<script src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
-<script src="http://media2.intoday.in/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
+<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
+<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
+<script src="/staticpages/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}}); 
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}}); 

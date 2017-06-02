@@ -5,7 +5,7 @@ body{font-family:"Roboto" ,sans-serif; background:#fdf1e3;}
 h2{font-size:20px; line-height:24px; color:#095ba0; font-weight:bold; display:block; text-transform:uppercase; padding:15px 0;}
 
 .clear:after {clear: both;}
-.outer_wrapper{float:left; width:100%; background:url(http://media2.intoday.in/indiatoday/makeinindia/top-bg.jpg) repeat-x center 125px; padding-bottom:30px;}
+.outer_wrapper{float:left; width:100%; background:url(/staticpages/mediaintoday/indiatoday/makeinindia/top-bg.jpg) repeat-x center 125px; padding-bottom:30px;}
 .wrapper{ width:960px; margin:0 auto;}
 .outer_header{float:left; width:100%; background-color:#fff;}
 .add{width:728px; margin:15px auto 15px}
@@ -42,7 +42,7 @@ h2{font-size:20px; line-height:24px; color:#095ba0; font-weight:bold; display:bl
 .live-video h3{ color:#ed212a; font-size:18px; font-family:roboto; text-transform:uppercase; text-align:center; margin-top:20px;}
 .live-video h3 a{ text-decoration:none; color:#ed212a;}
 
-.outer_footer{float:left; width:100%; background:url(http://media2.intoday.in/indiatoday/makeinindia/footer-bg.jpg) repeat-x 0 0;}
+.outer_footer{float:left; width:100%; background:url(/staticpages/mediaintoday/indiatoday/makeinindia/footer-bg.jpg) repeat-x 0 0;}
 .footer-nav{ background:#FFFFFF; padding:15px 15px 15px 20px; float:left; border-radius:10px; margin:38px 0 30px 50px;}
 .footer-nav ul{margin:0; padding:0;}
 .footer-nav ul li{ list-style:none; margin-right:18px; border-right:1px solid #000; float:left;}
@@ -82,9 +82,9 @@ h2{font-size:20px; line-height:24px; color:#095ba0; font-weight:bold; display:bl
 .b-heading{color:#043480; float:left; margin-top:-15px;}
 .visual-area { width:590px; margin:40px auto;  clear:both; height:260px; position:relative;}
 .visual-area #controls { float:right; margin-right:-19px; position:absolute; top:-23px; right:0px;}
-.visual-area #controls .v_left { font-size:30px; color:#999999; height:30px; float:left; cursor:pointer; background:#f2f2f2; border-radius:5px;line-height: 30px;  padding-left: 7px;  width: 23px; margin-right:5px; background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -149px -225px;}
+.visual-area #controls .v_left { font-size:30px; color:#999999; height:30px; float:left; cursor:pointer; background:#f2f2f2; border-radius:5px;line-height: 30px;  padding-left: 7px;  width: 23px; margin-right:5px; background: rgba(0, 0, 0, 0) url("/staticpages/mediaintoday/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -149px -225px;}
 .visual-area #controls .v_right { font-size:30px; color:#999999; height:30px; float:right; cursor:pointer; background:#f2f2f2; border-radius:5px; line-height: 30px;
-    padding-left: 7px;  width: 23px; background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -179px -227px;}
+    padding-left: 7px;  width: 23px; background: rgba(0, 0, 0, 0) url("/staticpages/mediaintoday/microsites/swachh-bharat/Sprit1.png") no-repeat scroll -179px -227px;}
 .visual-area .belt { width:590px; overflow:hidden; height:230px; }
 .visual-area .belt ul { position:relative;}
 .visual-area .belt ul li { float:left; margin-right:30px; list-style:none; width:280px;}

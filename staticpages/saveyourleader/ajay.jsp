@@ -13,7 +13,7 @@ window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
 
 <meta name="keywords" content="Delhi Assembly elections, Delhi assembly elections 2015, Assembly elections in Delhi, Delhi elections 2015, BJP, AAP, Congress, kiran bedi, arvind kejriwal, ajay makan." />
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,100,200,700,500,400,900' rel='stylesheet' type='text/css'>
-<link href='http://media2.intoday.in/microsites/saveyourleader/new/style.css' rel='stylesheet' type='text/css'>
+<link href='/staticpages/mediaintoday/microsites/saveyourleader/new/style.css' rel='stylesheet' type='text/css'>
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
 .likedisdiv {
@@ -22,7 +22,7 @@ window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
     text-transform: uppercase;
 }
 .likeimg {
-    background: url("http://media2.intoday.in/microsites/saveyourleader/new/Yes.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/microsites/saveyourleader/new/Yes.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     cursor: pointer;
     display: inline-block;
     height: 35px;
@@ -35,7 +35,7 @@ window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
     margin: 0 5px;
 }
 .dislikeimg {
-    background: url("http://media2.intoday.in/microsites/saveyourleader/new/No.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/microsites/saveyourleader/new/No.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     cursor: pointer;
     display: inline-block;
     height: 35px;
@@ -107,11 +107,11 @@ window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
     <div class="wrapper">
        <div class="socialmedia-icon">
           <ul>
-           <li><a href="index.jsp" target="_blank"><img src="http://media2.intoday.in/microsites/saveyourleader/new/Home.png" border="0" /></a></li>
-            <li><a href="https://www.facebook.com/IndiaToday" target="_blank"><img src="http://media2.intoday.in/microsites/saveyourleader/facebook.png" border="0" /></a></li>
-             <li><a href="https://twitter.com/indiatoday" target="_blank"><img src="http://media2.intoday.in/microsites/saveyourleader/twitter.png" border="0" /></a></li>
-<!--             <li><a href="#"><img src="http://media2.intoday.in/microsites/saveyourleader/googleplus.png" border="0" /></a></li>
-             <li><a href="#"><img src="http://media2.intoday.in/microsites/saveyourleader/4-icon.png" border="0" /></a></li>
+           <li><a href="index.jsp" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/new/Home.png" border="0" /></a></li>
+            <li><a href="https://www.facebook.com/IndiaToday" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/facebook.png" border="0" /></a></li>
+             <li><a href="https://twitter.com/indiatoday" target="_blank"><img src="/staticpages/mediaintoday/microsites/saveyourleader/twitter.png" border="0" /></a></li>
+<!--             <li><a href="#"><img src="/staticpages/mediaintoday/microsites/saveyourleader/googleplus.png" border="0" /></a></li>
+             <li><a href="#"><img src="/staticpages/mediaintoday/microsites/saveyourleader/4-icon.png" border="0" /></a></li>
 -->          </ul>
        
        </div>
@@ -132,7 +132,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
         <div align="center" class="small-text">This is what they say about this leader:</div>
         <div class="body-content clearfix">        
             <div class="left-panel clearfix">
-            <div class="leader-bigimage"><img src="http://media2.intoday.in/microsites/saveyourleader/Ajay.png"  />
+            <div class="leader-bigimage"><img src="/staticpages/mediaintoday/microsites/saveyourleader/Ajay.png"  />
 			                  
                    
 			
@@ -195,7 +195,7 @@ ajaxinclude("/like-dislike-special.jsp?contentId=4165073&contentType=special&Scf
 </script>            
                  </li>     
                </ul>      
-                <div class="check_btn" style="margin:10px;" align="center"><a href="result.jsp"><img src="http://media2.intoday.in/microsites/saveyourleader/new/Check_Result.png" border="0"></a></div>  
+                <div class="check_btn" style="margin:10px;" align="center"><a href="result.jsp"><img src="/staticpages/mediaintoday/microsites/saveyourleader/new/Check_Result.png" border="0"></a></div>  
                </div>
             </div>
             
@@ -203,10 +203,23 @@ ajaxinclude("/like-dislike-special.jsp?contentId=4165073&contentType=special&Scf
             
          
 <div style="padding:25px 0 15px">Do share your Comments to Save Your Leader</div>
-<script type="text/javascript">
-ajaxinclude("/commentbox/comment_box.jsp?sId=416507&website=indiatoday&content_type=story&ScfUrl=ajay-maken-kiran-bedi-arvind-kejriwal-as-opportunists.html&StoryTitle=Ajay Maken slams Kiran Bedi, Arvind Kejriwal as opportunists&message=&sectionInfo=&storytemplate=special");
-</script>
-            
+<script src="http://vuukle.com/js/vuukle.js"></script>
+ <div class="vukkul-comment">
+  <div id="vuukle-emote"></div>
+  <div id="vuukle_div"></div>
+          <script type="text/javascript">
+               var UNIQUE_ARTICLE_ID = "static_saveyourleader";
+               var SECTION_TAGS =  "";
+               var ARTICLE_TITLE = "saveyourleader";
+               var GA_CODE = "UA-795349-17";
+               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
+               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
+               var VUUKLE_COL_CODE = "d00b26";
+               var ARTICLE_AUTHORS = "abc";
+               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
+          </script>
+</div>
+         
             </div>
             
             
@@ -226,10 +239,10 @@ ajaxinclude("/commentbox/comment_box.jsp?sId=416507&website=indiatoday&content_t
     <div class="lftfbg"> </div>
     <div class="rtlfbg"></div>
     <div class="wrapper">
-      <div class="footertag"> <img height="43" border="0" src="http://media2.intoday.in/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
+      <div class="footertag"> <img height="43" border="0" src="/staticpages/mediaintoday/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
         <nav class="nav">
           <ul>
-            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="http://media2.intoday.in/indiatoday/images/home-cion.jpg"></a></div>
+            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="/staticpages/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/news.html">News</a></li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/114/1/india.html">India</a> </li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/113/1/world.html">World</a> </li>

@@ -540,7 +540,7 @@ section#storyleft {
 .normaltaxt ul{list-style:none;margin:0;padding:0;}
 .normaltaxt ul li{list-style:none;background:url(/staticpages/main/images/listarrow.gif) no-repeat left 10px;color:#333333;font:normal 12px arial;line-height:18px;margin:0;padding:5px 0px 5px 15px;border-bottom:1px dotted #959595;}
 .normaltaxt ul li.story{list-style:none;background:url(http://indiatoday.intoday.in/images/hindi-related-story-icon.jpg) no-repeat left 10px;padding:5px 0px 5px 20px;}
-.normaltaxt ul li.star{background:url(http://media2.intoday.in/indiatoday/images/icon_gallery/112608070822_red-star.gif) no-repeat left 10px;padding:5px 0px 5px 20px;}
+.normaltaxt ul li.star{background:url(/staticpages/mediaintoday/indiatoday/images/icon_gallery/112608070822_red-star.gif) no-repeat left 10px;padding:5px 0px 5px 20px;}
 .normaltaxt ul li.photo{background:url(/staticpages/main/images/hindi-news-photo-icon.gif) no-repeat left 10px;padding:5px 0px 5px 20px;}
 .normaltaxt ul li.video{background:url(/staticpages/main/images/video_icon.gif) no-repeat left 10px;padding:5px 0px 5px 20px;}
 .normaltaxt ul li.comments{background:url(/staticpages/main/images/comment_icon.jpg) no-repeat left 10px;padding:5px 0px 5px 20px;}
@@ -1192,13 +1192,13 @@ ul.careerleft li a,.careerright li a{cursor:pointer;}
     text-decoration: none;
 }
 .likeimg {
-    background: url("http://media2.intoday.in/indiatoday/images/thumbup.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/thumbup.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     display: inline-block;
     height: 22px;
     width: 22px;
 }
 .dislikeimg {
-    background: url("http://media2.intoday.in/indiatoday/images/thumbdown.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/thumbdown.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     display: inline-block;
     height: 22px;
     width: 22px;

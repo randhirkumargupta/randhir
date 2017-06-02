@@ -22,7 +22,7 @@ body {margin: 0px; padding: 0;}
 <div class="presenting">
 	<div class="presentingbox">
         <div class="presmar">PRESENTING SPONSOR</div>
-        <a href="http://www.jalindia.com/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/jp.gif" border="0" /></a>
+        <a href="http://www.jalindia.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/jp.gif" border="0" /></a>
     </div>
 </div>
 <div class="partnerband">
@@ -32,7 +32,7 @@ body {margin: 0px; padding: 0;}
 
 <div class="partnerbox">
         <div class="partmar10">DELEGATE</div>
-        <a href="http://www.aiesec.in/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/aiesec.gif" border="0" /></a>
+        <a href="http://www.aiesec.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/aiesec.gif" border="0" /></a>
 </div>
 
 <div class="partnerbox">
@@ -43,22 +43,22 @@ body {margin: 0px; padding: 0;}
 
 <div class="partnerbox">
         <div class="partmar10">WRITING INSTRUMENT PARTNER</div>
-        <a href="http://www.luxor.in/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/parker.gif" width="73" height="43" border="0" /></a>
+        <a href="http://www.luxor.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/parker.gif" width="73" height="43" border="0" /></a>
 </div>
 
 <div class="partnerbox">
         <div class="partmar10">TECHNOLOGY</div>
-        <a href="http://www.youtube.com" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/you-tube.gif" width="89" height="43" border="0" /></a>
+        <a href="http://www.youtube.com" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/you-tube.gif" width="89" height="43" border="0" /></a>
 </div>
 
 <div class="partnerbox">
         <div class="partmar10">DIGITAL</div>
-        <a href="http://www.greenclouds.in" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/green-clouds-logo.gif" width="73" height="43" border="0" /></a>
+        <a href="http://www.greenclouds.in" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/green-clouds-logo.gif" width="73" height="43" border="0" /></a>
 </div>
 
 <div class="partnerbox">
         <div class="partmar10">SOCIAL</div>
-        <a href="http://tagglabs.in/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/Tagglabs.gif" border="0" /></a>
+        <a href="http://tagglabs.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/Tagglabs.gif" border="0" /></a>
 </div>
 
 <div class="clear"></div>
@@ -75,18 +75,18 @@ body {margin: 0px; padding: 0;}
 
 <div class="partnerbox">
         <div class="partmar10">RADIO</div>
-        <a href="http://oyefm.in/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/oye.gif" border="0"/></a>
+        <a href="http://oyefm.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/oye.gif" border="0"/></a>
 </div>
 
 <div class="partnerbox">
         <div class="partmar10">NEWSPAPER PARTNER</div>
-        <a href="http://www.mailtoday.in/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/mt.gif" border="0" /></a>
-        <a href="http://www.pakistantoday.com.pk/" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/pt.gif" border="0" style="margin-left:10px;" /></a>
+        <a href="http://www.mailtoday.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/mt.gif" border="0" /></a>
+        <a href="http://www.pakistantoday.com.pk/" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/pt.gif" border="0" style="margin-left:10px;" /></a>
 </div>
    
 <div class="partnerbox">
         <div class="partmar10">ONLINE</div>
-        <a href="" target="_blank"><img src="http://media2.intoday.in/microsites/youthsummit2012/sponsorlogo/indiatoday.gif" border="0" /></a>
+        <a href="" target="_blank"><img src="/staticpages/mediaintoday/microsites/youthsummit2012/sponsorlogo/indiatoday.gif" border="0" /></a>
 </div>
 
 
@@ -95,4 +95,4 @@ body {margin: 0px; padding: 0;}
 
 </div>
 </div>
-<iframe src="http://media2.intoday.in/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>
+<iframe src="/staticpages/mediaintoday/microsites/common/it_footer.html" frameborder="0" scrolling="no" width="1003" height="130"></iframe>

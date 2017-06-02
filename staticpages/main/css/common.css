@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Arial-Black';
-    src: url('ab.eot');
-    src: url('ab.eot?#iefix') format('embedded-opentype'),
-         url('ab.woff') format('woff'),
-         url('ab.ttf') format('truetype'),
-         url('ab.svg#"Arial-Black"') format('svg');
+    src: url('/staticpages/main/font/ab.eot');
+    src: url('/staticpages/main/font/ab.eot?#iefix') format('embedded-opentype'),
+         url('/staticpages/main/font/ab.woff') format('woff'),
+         url('/staticpages/main/font/ab.ttf') format('truetype'),
+         url('/staticpages/main/font/ab.svg#"Arial-Black"') format('svg');
     font-weight: bold;
     font-style: normal;
 }
@@ -85,8 +85,8 @@ section#left {
 }
 @font-face {
     font-family: 'WebRupee';
-    src: url('WebRupee.V2.0.eot');
-    src: local('WebRupee'), url('WebRupee.V2.0.ttf') format('truetype'), url('WebRupee.V2.0.woff') format('woff'), url('WebRupee.V2.0.svg') format('svg');
+    src: url('/staticpages/main/font/WebRupee.V2.0.eot');
+    src: local('WebRupee'), url('/staticpages/main/font/WebRupee.V2.0.ttf') format('truetype'), url('/staticpages/main/font/WebRupee.V2.0.woff') format('woff'), url('WebRupee.V2.0.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -2822,7 +2822,7 @@ ul#footer_menu {
         background: url("../images/spt_bgnd_share_312x232_2.png") no-repeat scroll 0 0 transparent;
     }*/
 	.sharer_div, .sharer_div .pointer {
-    background: url("http://media2.intoday.in/indiatoday/images/spt_bgnd_share.png") no-repeat scroll 0 0 transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/images/spt_bgnd_share.png") no-repeat scroll 0 0 transparent;
 }
 
         .sharer_div .pointer {

@@ -55,7 +55,7 @@
         </div>
         
         <!--<div style="height:180 px;">
-        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
+        <a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" target="_blank"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0" usemap="#Map122" hr>
 <map name="Map122" id="Map122"><area shape="rect" coords="716,114,956,157" href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp" /></map></a>        </div>-->
 <!--<div  style="height: 180px;">
 		
@@ -65,24 +65,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
+            <TD WIDTH="368"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="http://media2.intoday.in/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -182,7 +182,7 @@
             <div class="clear"></div>
         </div>
           <div style="height:180 px;">
-       <img src="http://media2.intoday.in/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
+       <img src="/staticpages/mediaintoday/indiatoday/youthsummit/2013/top-banner.jpg" BORDER="0">
         </div>-->
         
 <div  style="height: 180px;">
@@ -193,24 +193,24 @@
         <TD >
         <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" ALIGN="CENTER">
           <TR>
-            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
+            <TD WIDTH="368"><a href="http://indiatodaymindrocks.com/"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md.gif" BORDER="0" WIDTH="235" HEIGHT="180"></a></TD>
             <TD VALIGN="TOP" bgcolor="#fff200">
             <TABLE WIDTH="665" BORDER="0" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
+                <TD><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md2.gif" BORDER="0" WIDTH="768" HEIGHT="104"></TD>
               </TR>
                <TR>
                 <TD bgcolor="#fff200">
                 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" >
                   <TR>
-                    <TD width="109" align="left" valign="top"><IMG SRC="http://media2.intoday.in/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
+                    <TD width="109" align="left" valign="top"><IMG SRC="/staticpages/mediaintoday/indiatoday/youthsummit/250213/md3.gif" BORDER="0" ></TD>
                     <TD BGCOLOR="#FFFFFF" width="380">
 
 		<SCRIPT LANGUAGE="javascript" SRC="http://subscriptions.intoday.in/subscriptions/youthsummit2013/scroll1.js"></SCRIPT><script>fillup()</script>
 		
                </TD> 
                 <TD VALIGN="TOP">
-				<a href="http://indiatodaymindrocks.com/"><img src="http://media2.intoday.in/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
+				<a href="http://indiatodaymindrocks.com/"><img src="/staticpages/mediaintoday/indiatoday/youthsummit/250213/watch-nw.gif" BORDER="0"></a>
 				
              </TR>
                 </TABLE></TD>
@@ -293,7 +293,7 @@
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <!--<td width="85" valign="top">
-                                        <img border="0" align="middle" src="http://media2.intoday.in/microsites/youthsummit2012/speakers/ap.jpg" alt="Ashish Bagga" title="Ashish Bagga"></td>-->
+                                        <img border="0" align="middle" src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/ap.jpg" alt="Ashish Bagga" title="Ashish Bagga"></td>-->
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Ashish Bagga</strong><br>
@@ -341,7 +341,7 @@
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <td width="85" valign="top">
-                                        <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/chetan-B.jpg" alt="Chetan Bhagat" title="Chetan Bhagat"></td>
+                                        <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/chetan-B.jpg" alt="Chetan Bhagat" title="Chetan Bhagat"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Chetan Bhagat</strong><br>
@@ -356,7 +356,7 @@
                                 <tbody><tr>
                                     <td width="85" valign="top">
 
-                                        <img border="0" align="middle" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" title="Rahul Kanwal"></td>
+                                        <img border="0" align="middle" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif" alt="Rahul Kanwal" title="Rahul Kanwal"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Rahul Kanwal</strong><br>
@@ -405,7 +405,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <td width="85" valign="top">
-                                        <img border="0" align="middle" title="Soha Ali Khan" alt="Soha Ali Khan" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/soha-ali.jpg"></td>
+                                        <img border="0" align="middle" title="Soha Ali Khan" alt="Soha Ali Khan" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/soha-ali.jpg"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Soha Ali Khan<span class="star"></span></strong><br>
@@ -422,7 +422,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <td width="85" valign="top">
-                                        <img border="0" align="middle" title="Kunaal Roy Kapur" alt="Kunaal Roy Kapur" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Kunaal.jpg"></td>
+                                        <img border="0" align="middle" title="Kunaal Roy Kapur" alt="Kunaal Roy Kapur" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Kunaal.jpg"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong> Kunaal Roy Kapur<span class="star"></span></strong><br>
@@ -444,7 +444,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <td width="85" valign="top">
-                                        <img border="0" align="middle" title="Shiv Aroor" alt="Shiv Aroor" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/shiv_aroor.gif"></td>
+                                        <img border="0" align="middle" title="Shiv Aroor" alt="Shiv Aroor" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/shiv_aroor.gif"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Shiv Aroor<span class="star"></span></strong><br>
@@ -460,7 +460,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                             <table cellspacing="0" cellpadding="0" border="0">
                                 <tbody><tr>
                                     <td width="85" valign="top">
-                                        <img border="0" align="middle" title="Preeti Choudhry" alt="Preeti Choudhry" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/preeti_choudhry.jpg"></td>
+                                        <img border="0" align="middle" title="Preeti Choudhry" alt="Preeti Choudhry" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/preeti_choudhry.jpg"></td>
                                     <td valign="top">
                                         <div class="prj_profilebyline">
                                             <strong>Preeti Choudhry<span class="star"></span></strong><br>
@@ -505,7 +505,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Ranveer.jpg" alt="Ranveer Singh" title="Ranveer Singh"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Ranveer.jpg" alt="Ranveer Singh" title="Ranveer Singh"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Ranveer Singh</strong><br>
@@ -522,7 +522,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Rupam.jpg" alt="Rupam Islam" title="Rupam Islam"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Rupam.jpg" alt="Rupam Islam" title="Rupam Islam"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Rupam Islam</strong><br>
@@ -541,7 +541,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Pradyoy.jpg" alt="Pradyot Bikram Manikya Deb Barma" title="Pradyot Bikram Manikya Deb Barma"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Pradyoy.jpg" alt="Pradyot Bikram Manikya Deb Barma" title="Pradyot Bikram Manikya Deb Barma"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Pradyot Bikram Manikya Deb Barma</strong><br>
@@ -567,7 +567,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img width="75" height="64" border="0" align="middle" title="Poonam Sharma" alt="Poonam Sharma" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/poonam_sharma.jpg"></td>
+                                            <img width="75" height="64" border="0" align="middle" title="Poonam Sharma" alt="Poonam Sharma" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/poonam_sharma.jpg"></td>
                                         <td valign="top">
                                           <div class="prj_profilebyline">
                                                 <strong>Poonam Sharma </strong><br>
@@ -613,7 +613,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/prosunjit.jpg" alt="Prosenjit Chatterjee" title="Prosenjit Chatterjee"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/prosunjit.jpg" alt="Prosenjit Chatterjee" title="Prosenjit Chatterjee"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Prosenjit Chatterjee<span class="star"></span></strong><br>
@@ -628,7 +628,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <!--<table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Koel Purie Rinchet" alt="Koel Purie Rinchet" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif"></td>
+                                            <img border="0" align="middle" title="Koel Purie Rinchet" alt="Koel Purie Rinchet" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Koel Purie Rinchet<span class="star"></span></strong><br>
@@ -669,7 +669,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/bhaichung.jpg" alt="Baichung Bhutia" title="Baichung Bhutia"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/bhaichung.jpg" alt="Baichung Bhutia" title="Baichung Bhutia"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Bhaichung Bhutia</strong><br>
@@ -684,7 +684,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Brett-lee.jpg" alt="Brett Lee" title="Brett Lee"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Brett-lee.jpg" alt="Brett Lee" title="Brett Lee"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Brett Lee</strong><br>
@@ -700,7 +700,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/microsites/youthsummit2012/speakers/Vir-Das.jpg" alt="Vir Das" title="Vir Das"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/microsites/youthsummit2012/speakers/Vir-Das.jpg" alt="Vir Das" title="Vir Das"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Vir Das</strong><br>
@@ -723,7 +723,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Koel Purie Rinchet" alt="Koel Purie Rinchet" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif"></td>
+                                            <img border="0" align="middle" title="Koel Purie Rinchet" alt="Koel Purie Rinchet" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Koel-Purie-Rinchet.gif"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Koel Purie Rinchet<span class="star"></span></strong><br>
@@ -767,7 +767,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="1" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Irfan.jpg" alt="Irrfan Khan" title="Irrfan Khan"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Irfan.jpg" alt="Irrfan Khan" title="Irrfan Khan"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Irrfan Khan<span class="star"></span></strong><br>
@@ -814,7 +814,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Prasenjit Bose" alt="Prasenjit Bose" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/prasenjit.jpg"></td>
+                                            <img border="0" align="middle" title="Prasenjit Bose" alt="Prasenjit Bose" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/prasenjit.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Prasenjit Bose<span class="star"></span></strong><br>
@@ -829,7 +829,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/OP-mishra.jpg" alt="Om Prakash Mishra" title="Om Prakash Mishra"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/OP-mishra.jpg" alt="Om Prakash Mishra" title="Om Prakash Mishra"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Om Prakash Mishra</strong><br>
@@ -846,7 +846,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Mahua Moitra" alt="Mahua Moitra" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Mahua-Moitra.jpg"></td>
+                                            <img border="0" align="middle" title="Mahua Moitra" alt="Mahua Moitra" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Mahua-Moitra.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Mahua Moitra</strong><br>
@@ -862,7 +862,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <!--<table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/deepa.jpg" alt="Deepa Dasmunshi" title="Deepa Dasmunshi"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/deepa.jpg" alt="Deepa Dasmunshi" title="Deepa Dasmunshi"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Deepa Dasmunshi</strong><br>
@@ -884,7 +884,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Rahul Kanwal" alt="Rahul Kanwal" src="http://media2.intoday.in/microsites/youthsummit2012/moderators/Rahul.gif"></td>
+                                            <img border="0" align="middle" title="Rahul Kanwal" alt="Rahul Kanwal" src="/staticpages/mediaintoday/microsites/youthsummit2012/moderators/Rahul.gif"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Rahul Kanwal<span class="star"></span></strong><br>
@@ -926,7 +926,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                 <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Lou-majaw.jpg" alt="Lou Majaw" title="Lou Majaw"></td>
+                                            <img border="0" align="middle" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Lou-majaw.jpg" alt="Lou Majaw" title="Lou Majaw"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Lou Majaw<span class="star"></span></strong><br>
@@ -941,7 +941,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
                                <table cellspacing="0" cellpadding="0" border="0">
                                     <tbody><tr>
                                         <td width="85" valign="top">
-                                            <img border="0" align="middle" title="Zubeen Garg" alt="Zubeen Garg" src="http://media2.intoday.in/indiatoday/youthsummit/speaker-thumb/Zubeen.jpg"></td>
+                                            <img border="0" align="middle" title="Zubeen Garg" alt="Zubeen Garg" src="/staticpages/mediaintoday/indiatoday/youthsummit/speaker-thumb/Zubeen.jpg"></td>
                                         <td valign="top">
                                             <div class="prj_profilebyline">
                                                 <strong>Zubeen Garg<span class="star"></span></strong><br>

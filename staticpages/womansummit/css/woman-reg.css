@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'Arial-Black';
-    src: url('ab.eot');
-    src: url('ab.eot?#iefix') format('embedded-opentype'),
-         url('ab.woff') format('woff'),
-         url('ab.ttf') format('truetype'),
-         url('ab.svg#"Arial-Black"') format('svg');
+    src: url('/staticpages/main/font/ab.eot');
+    src: url('/staticpages/main/font/ab.eot?#iefix') format('embedded-opentype'),
+         url('/staticpages/main/font/ab.woff') format('woff'),
+         url('/staticpages/main/font/ab.ttf') format('truetype'),
+         url('/staticpages/main/font/ab.svg#"Arial-Black"') format('svg');
     font-weight: bold;
     font-style: normal;
 }
@@ -57,7 +57,7 @@ img{ border:none;}
 
 .margtop {margin-top:20px;}
 .clr { clear:both}
-.topbgstar {width:100%; background:url("http://media2.intoday.in/indiatoday/womansummit/2013/images/top-bg.gif") repeat-x center center;}
+.topbgstar {width:100%; background:url("/staticpages/mediaintoday/indiatoday/womansummit/2013/images/top-bg.gif") repeat-x center center;}
 .topnavigation {width:100%; background:#000;}
 .womanarch {
     background: url("http://indiatoday.intoday.in/womansummit/delhi/2014/images/ar-left.gif") no-repeat scroll left top transparent;
@@ -78,13 +78,13 @@ img{ border:none;}
 .group-link a:hover {color:#FFFFFF; text-decoration:underline;}
 .logo {  height:230px; width:249px; float:left;}
 .woman-logo {
-    background: url("http://media2.intoday.in/indiatoday/womansummit/2013/images/title.png") no-repeat scroll left top transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/womansummit/2013/images/title.png") no-repeat scroll left top transparent;
     height: 130px;
     margin-left: 60px;
     margin-top: 25px;
     width: 660px;
 }
-.spon { background:url("http://media2.intoday.in/indiatoday/womansummit/2013/images/event.jpg") no-repeat center center; float:left; width:86px; height:57px; background-color:#fff301;}
+.spon { background:url("/staticpages/mediaintoday/indiatoday/womansummit/2013/images/event.jpg") no-repeat center center; float:left; width:86px; height:57px; background-color:#fff301;}
 
 .spondiv {
     background-color: #FFFFFF;
@@ -159,7 +159,7 @@ img{ border:none;}
     width: 683px;
 }
 .prjtitle {
-    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
     height: 30px;
 }
 .prjtitlename {
@@ -191,7 +191,7 @@ img{ border:none;}
     padding-bottom: 10px;
 }
 .pritepart {
-    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/kolkata/dot_2.gif") repeat-y scroll 0 0 transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot_2.gif") repeat-y scroll 0 0 transparent;
     float: right;
     padding-left: 10px;
     padding-top: 8px;

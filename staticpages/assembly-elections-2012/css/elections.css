@@ -474,7 +474,7 @@ h3{font-size:18px; color:#6a6a6a;}
 
 
 .sidebar_box {margin:0 auto 20px;width:300px;}
-.chunkheader_300_top {background:url(http://media2.intoday.in/indiatoday/1.0.10/resources/images/t20-cricket-2011/chunk-header_300.gif) no-repeat top;height:46px;}
+.chunkheader_300_top {background:url(/staticpages/mediaintoday/indiatoday/1.0.10/resources/images/t20-cricket-2011/chunk-header_300.gif) no-repeat top;height:46px;}
 .chunkheader_300_bg {background-color:#ffffff;padding:0px;text-align:justify;border-left:1px solid #5E5E5E;border-right:1px solid #5E5E5E;}
 .chunkheader_300_bg_a {	background-color:#ffffff;padding:5px 10px;text-align:justify;border-left:1px solid #5E5E5E;	border-right:1px solid #5E5E5E;}
 .chunkheader_300_bottom {background:url("http://indiatoday.intoday.in/specials/t20-cricket-2011/images/chunk-box-bottom_300.gif") no-repeat;	height:6px;	}

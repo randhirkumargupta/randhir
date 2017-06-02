@@ -19,49 +19,49 @@ jQuery(document).ready(function() {
 <body>
 <div id="wrap"><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Azam Khan.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Azam Khan</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Azam Khan.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Azam Khan</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(SP) Rampur</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Kalraj Mishra.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Kalraj Mishra</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Kalraj Mishra.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Kalraj Mishra</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(BJP) Lucknow East</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Uma Bharti.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Uma Bharti</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Uma Bharti.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Uma Bharti</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(BJP) Charkhari</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Shivpal Singh Yadav.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Shivpal Singh Yadav</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Shivpal Singh Yadav.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Shivpal Singh Yadav</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(SP) Jaswantnagar</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Raja Bhaiyya.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Raja Bhaiyya</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Raja Bhaiyya.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Raja Bhaiyya</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(IND) Kunda</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Surya Pratap Shahi.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Surya Pratap Shahi</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Surya Pratap Shahi.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Surya Pratap Shahi</span><span class="resulttxt wontxt">
 <span class='resulttxt losstxt'>LOST</span>
 
 	</span></div>
     <span class="party-txt">(BJP) Pathardeva</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Jayant Chaudhary.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Jayant Chaudhary</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Jayant Chaudhary.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Jayant Chaudhary</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>

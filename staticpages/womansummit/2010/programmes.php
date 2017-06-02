@@ -183,37 +183,37 @@ cssdropdown.startchrome("chromemenu")
     <tr>
       <td colspan="4" valign="top">
       <div align="center" style="margin-bottom:5px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Presented by</div>
-      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.amwayindia.com/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/amway-new09.gif" alt="AMWAY" border="0" align="middle" title="AMWAY" /></a></div>
+      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.amwayindia.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/amway-new09.gif" alt="AMWAY" border="0" align="middle" title="AMWAY" /></a></div>
       </div></td>
     </tr>
     <tr> <td colspan="4" height="10"></td></tr>
      <tr>
       <td colspan="4" valign="top">
       <div align="center" style="margin-bottom:5px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Associate Sponsor</div>
-      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.gold.org/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/gold-council_Golden-Girl.gif" alt="Indiatoday.in"  border="0" title="Golden Girl" style="margin-top:10px;" /></a></div>
+      <div align="center" style="margin-bottom:15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal"><a href="http://www.gold.org/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/gold-council_Golden-Girl.gif" alt="Indiatoday.in"  border="0" title="Golden Girl" style="margin-top:10px;" /></a></div>
       </div></td>
     </tr>
     
     <tr><td width="169" valign="top">
         <div align="center" style="margin: 0pt 0pt 15px 10px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">
           <div align="center">Beverage Partner</div>
-        </div>        <div align="center"><a href="http://www.pinkyvodka.com/wordpress/wp-content/themes/pinky/Pinky.php?redirect=/index.php" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/pinky-new09.gif" alt="Pinky" border="0" title="Pinky" /></a></div></td><td width="205" valign="top"><div align="center"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Writing Instrument Partner</div><a href=" http://www.luxorpen.com/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/Luxor_100.gif" alt="Luxor" border="0" title="Luxor" /></a></div></td><td width="197" valign="top"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Hospitality Partner</div><div align="center" style="margin-bottom: 5px"><a href="http://www.tajhotels.com/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/TPHMum_100.gif" border="0" alt="Taj" title="Taj" /></a></div>
+        </div>        <div align="center"><a href="http://www.pinkyvodka.com/wordpress/wp-content/themes/pinky/Pinky.php?redirect=/index.php" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/pinky-new09.gif" alt="Pinky" border="0" title="Pinky" /></a></div></td><td width="205" valign="top"><div align="center"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Writing Instrument Partner</div><a href=" http://www.luxorpen.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/Luxor_100.gif" alt="Luxor" border="0" title="Luxor" /></a></div></td><td width="197" valign="top"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Hospitality Partner</div><div align="center" style="margin-bottom: 5px"><a href="http://www.tajhotels.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/TPHMum_100.gif" border="0" alt="Taj" title="Taj" /></a></div>
 <div align="center"></div></td>
       <td width="159" valign="top"><div align="center" style="margin: 0pt 0pt 15px 10px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">
           <div align="center">Airline Partner</div>
-      </div>        <div align="center"><a href="http://www.flykingfisher.com/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/kingfisher-new09.gif" alt="Kingfisher" border="0"  title="Kingfisher" /></a></div>        <div align="center"></div></td>
+      </div>        <div align="center"><a href="http://www.flykingfisher.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/kingfisher-new09.gif" alt="Kingfisher" border="0"  title="Kingfisher" /></a></div>        <div align="center"></div></td>
     </tr>
     <tr > <td colspan="7" height="20"></td></tr>
     <tr><td colspan="7"><div align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
  <tr><td width="261" valign="top"><div align="center">
   <div align="center" style="margin: 0pt 0pt 0px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Powered by</div>
- <div align="center" style="margin-bottom: 5px"><a href="/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/indiatoday.gif" alt="Indiatoday.in" width="122" height="35" border="0" title="Indiatoday.in" style="margin-top:10px;" /></a></div>
+ <div align="center" style="margin-bottom: 5px"><a href="/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/indiatoday.gif" alt="Indiatoday.in" width="122" height="35" border="0" title="Indiatoday.in" style="margin-top:10px;" /></a></div>
  </div>
         </td><td width="261" valign="top"><div align="center">
   <div align="center" style="margin: 0pt 0pt 0px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">Media Partners</div>
-  <a href="http://www.mailtoday.in" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/mailtoday-new09.gif" alt="Mail Today" width="104" height="25" border="0" align="absmiddle" style="margin-right:20px;" title="Mail Today" /></a> <a href="http://meowfm.com/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/meow-new09.gif" alt="MEOW" border="0" align="absmiddle"  title="MEOW" /></a></div>
+  <a href="http://www.mailtoday.in" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/mailtoday-new09.gif" alt="Mail Today" width="104" height="25" border="0" align="absmiddle" style="margin-right:20px;" title="Mail Today" /></a> <a href="http://meowfm.com/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/meow-new09.gif" alt="MEOW" border="0" align="absmiddle"  title="MEOW" /></a></div>
         </td><td width="252" valign="top"><div align="center" style="margin: 0pt 0pt 15px; font: bold 11px arial; font-size-adjust: none; font-stretch: normal">TV Partner</div>
-          <div align="center" style="margin-bottom: 5px"><a href="http://www.headlinestoday.in/" target="_blank"><img src="http://media2.intoday.in/microsites/womansummit/HLT-new09.gif" alt="Headlines Today" border="0" title="Headlines Today" /></a></div>
+          <div align="center" style="margin-bottom: 5px"><a href="http://www.headlinestoday.in/" target="_blank"><img src="/staticpages/mediaintoday/microsites/womansummit/HLT-new09.gif" alt="Headlines Today" border="0" title="Headlines Today" /></a></div>
 <div align="center"></div></td>
       <td width="12" valign="top">&nbsp;</td>
     </tr>
@@ -237,18 +237,18 @@ cssdropdown.startchrome("chromemenu")
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="http://media2.intoday.in/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="http://media2.intoday.in/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS has been initiated to serve a dual purpose: it acknowledges the contribution of the modern Indian woman to the nation's top management cadres & provides day-long interaction between highly qualified and successful women with those who are ambitious but still striving for the vision, strategies and skills needed to make their mark in today's complex world.<br /> 
  In its second year, the Summit, we believe, is well set to power women to deal with challenges and take charge of their professional and personal lives.</div>
 	          </strong></div></div>
-             <div align="right"><img src="http://media2.intoday.in/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="/staticpages/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    

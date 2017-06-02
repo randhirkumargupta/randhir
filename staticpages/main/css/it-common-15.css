@@ -62,29 +62,29 @@ h1.section-heading span:after, h1.section-heading span:before { top: 47.5%; left
 .nav_bar ul,.nav_bar2 ul,.middle_center_h .m_cont ul,.footer_lnk_m ul {list-style-type:none;padding:0;margin:0;}
 .nav_bar2 ul{ width:860px;}
 
-.nav_bar ul li{ border-right:1px solid #E1E1E1; float:left;  padding-bottom:5px;  font-size:30px;  color:#8a8a8a; padding:22px 21px 22px 22px; padding-bottom:5px; min-height:48px;}.nav_bar ul li.logo{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -16px 0; width:260px; height:70px; padding:0; padding-right:22px; padding-bottom:5px; }
+.nav_bar ul li{ border-right:1px solid #E1E1E1; float:left;  padding-bottom:5px;  font-size:30px;  color:#8a8a8a; padding:22px 21px 22px 22px; padding-bottom:5px; min-height:48px;}.nav_bar ul li.logo{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -16px 0; width:260px; height:70px; padding:0; padding-right:22px; padding-bottom:5px; }
 .nav_bar ul li.logo a{ display:block; text-indent:-999999px; line-height:75px;}
 .nav_bar ul li.grouplinks{padding: 10px 39px 8px; border-right: 0px; background:#f7f7f7;}
 .nav_bar ul li.grouplinks.active{background:#f7f7f7;}
 
-.nav_bar ul li.grouplinks a#menu_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -22px -223px; width:56px; height:56px; display:block; text-indent:-999999px;}
+.nav_bar ul li.grouplinks a#menu_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -22px -223px; width:56px; height:56px; display:block; text-indent:-999999px;}
 
-.nav_bar ul li.nav_togle{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -284px 0; width:24px; height:70px;padding:0 22px; padding-bottom:5px;}
+.nav_bar ul li.nav_togle{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -284px 0; width:24px; height:70px;padding:0 22px; padding-bottom:5px;}
 .nav_bar ul li a{ text-decoration:none;color:#8a8a8a; font-weight:100; font-size:30px; font-family:"Roboto", sans-serif; display:block}
 
 .nav_bar ul li.search_togle{ width:44px; }
-.nav_bar ul li.search_togle a{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -352px -19px; width:44px; height:44px; display:inline-block; text-indent:-999999px; position:relative; top:-7px;}
+.nav_bar ul li.search_togle a{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -352px -19px; width:44px; height:44px; display:inline-block; text-indent:-999999px; position:relative; top:-7px;}
 
 .nav_bar2{  border-bottom:1px solid #E1E1E1; }
 .nav_bar2 ul li{  font-size:12px;  color:#8a8a8a;  padding:0 12px 5px 12px; float:left; margin:17px 0 4px;}
 .nav_bar2 ul li a{  text-decoration:none; color:#8a8a8a; font-weight:300; font-size:12px; text-transform:uppercase;}
 .nav_bar2 ul li a:hover{  text-decoration:none; color:#000; }
 .nav_bar2 ul li:first-child{ padding:0 12px 5px 0px;}
-.nav_bar ul li a.nav_togle {background: url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat scroll -299px -17px rgba(0, 0, 0, 0);float: left;height: 45px; width: 45px; margin-top:-5px;}
+.nav_bar ul li a.nav_togle {background: url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat scroll -299px -17px rgba(0, 0, 0, 0);float: left;height: 45px; width: 45px; margin-top:-5px;}
 .sub_topnav{position:absolute; top:75px; left:-280px; width:280px; background-color:#f9f9f9; z-index:999; box-shadow: 11px 8px 5px -6px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 11px 8px 5px -6px rgba(0, 0, 0, 0.2); display:none;}
 .nav_bar ul li.navtog{ position:relative; width:45px;}
 
-.nav_bar ul li.navtog a.navactive{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png)-159px -196px;}
+.nav_bar ul li.navtog a.navactive{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png)-159px -196px;}
 
 .nav_bar ul .sub_topnav ul{list-style:none; float:left; width:100%;}
 .nav_bar ul .sub_topnav ul li{width:276px; border-bottom:1px solid #f0f0f0; padding:0 0 0 18px; min-height:29px; font:400 14px/29px 'Roboto'; border-right:0;}
@@ -93,7 +93,7 @@ h1.section-heading span:after, h1.section-heading span:before { top: 47.5%; left
 .nav_bar ul .sub_topnav ul li a:hover{color:#000;}
 
 .nav_bar ul .sub_topnav .topsocial{padding:23px 0 8px 18px; margin-bottom:8px; height:27px;}
-.nav_bar ul .sub_topnav .topsocial a{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat 0 0; float:left; height:32px; text-indent:-999px;}
+.nav_bar ul .sub_topnav .topsocial a{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat 0 0; float:left; height:32px; text-indent:-999px;}
 .nav_bar ul .sub_topnav .topsocial a.facebook{background-position:-226px -183px; width:13px; margin-right:28px;}
 .nav_bar ul .sub_topnav .topsocial a.twitter{background-position:-266px -183px; width:30px; margin-right:25px;}
 .nav_bar ul .sub_topnav .topsocial a.gplus{background-position:-319px -183px; width:31px; margin-right:27px;}
@@ -123,7 +123,7 @@ h1.section-heading span:after, h1.section-heading span:before { top: 47.5%; left
 .nav_bar.navfixed .top-menu > ul > li.news > ul{ top:50px;}
 
 .nav_bar.navfixed ul li.navtog a.navactive{ background-position:-174px -642px;}
-#scrolltop{ width:60px; height:60px; display:block; background:url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") repeat -343px -591px;  position:fixed; bottom:20px; right:20px; opacity:0; cursor:pointer;}
+#scrolltop{ width:60px; height:60px; display:block; background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat -343px -591px;  position:fixed; bottom:20px; right:20px; opacity:0; cursor:pointer;}
 
 
 
@@ -185,14 +185,14 @@ span.photoicon-nav{  background-color: #ffffff; background-position: -17px -191p
 .topnav-slide a:hover{ color:#8a8a8a!Important;}
 .topnav-slide a#navprev{ display:none;}
 
-.topnav-slide a#navnext{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat scroll -428px -663px rgba(0, 0, 0, 0); text-transform:uppercase;}
-.topnav-slide a#navprev{ background:url(http://media2.intoday.in/indiatoday/images/homenew/bt_arrow.png) no-repeat scroll 0px 0px rgba(0, 0, 0, 0);text-transform:uppercase;}
+.topnav-slide a#navnext{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat scroll -428px -663px rgba(0, 0, 0, 0); text-transform:uppercase;}
+.topnav-slide a#navprev{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/bt_arrow.png) no-repeat scroll 0px 0px rgba(0, 0, 0, 0);text-transform:uppercase;}
 
 /* ================ BREAKING NEWS Section ================== */
 .big_story{width:100%; margin-bottom:15px;}
 .big_story h2, .big_story h2 a{font:bold 48px/48px roboto; color:#333; margin:0;}
 .big_story h2 div.share-story{  display: inline-block;  margin-left:5px; float:none; width:auto;}
-.big_story h2 div.share-story .share-icon{background: url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat scroll -85px -190px rgba(0, 0, 0, 0); height: 27px; width: 34px; margin-top:-4px;}
+.big_story h2 div.share-story .share-icon{background: url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat scroll -85px -190px rgba(0, 0, 0, 0); height: 27px; width: 34px; margin-top:-4px;}
 .big_story h2 div.share-story ul{ margin-top:0px;}
 .big_story h2 div.share-story ul li{ line-height:0px;}
 .big_story h1 em{font-style:normal; background-color:#ff2b37; width:14px; height:14px; border-radius:100%; display:inline-block; position:relative; top:-4px;}
@@ -273,10 +273,10 @@ a#next-bigstory span.downarrow{ background-position:-361px -645px; height:27px; 
 
 
 
-#today_big_story_chunk .btm_left {background:url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat scroll -280px -644px;
+#today_big_story_chunk .btm_left {background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat scroll -280px -644px;
     bottom: 28px; cursor: pointer; display: none; height: 36px; left: 5px; position: absolute; width: 21px; z-index: 99;}
 
-#today_big_story_chunk .btm_right {background:url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat scroll -308px -644px;bottom: 29px;cursor: pointer;height: 36px; position: absolute; right: 8px; width: 21px; z-index: 99;}
+#today_big_story_chunk .btm_right {background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat scroll -308px -644px;bottom: 29px;cursor: pointer;height: 36px; position: absolute; right: 8px; width: 21px; z-index: 99;}
 
 
 
@@ -287,20 +287,20 @@ a#next-bigstory span.downarrow{ background-position:-361px -645px; height:27px; 
 #today_big_story_chunk .bottom-slider .btm_belt ul li { list-style:none; padding:0 0 0; float:left; margin-right:5px; height:93px; font-size:12px; font-family:roboto; color:#000; width:142px; position:relative;}
 #today_big_story_chunk .bottom-slider .btm_belt ul li .list-cont{ padding-top:5px;}
 #today_big_story_chunk .bottom-slider .btm_belt ul li:hover .list-cont, .bottom-slider .btm_belt ul li.active .list-cont{/*background:#212121;*/ color:#fff; height:88px;} 
-#today_big_story_chunk .bottom-slider .btm_belt ul li.active span{ background:url(http://media2.intoday.in/indiatoday/images/homenew/act_arrow.png) no-repeat 0 bottom; height:13px; width:24px; position:absolute; top:-11px; display:block; left:40%;}
+#today_big_story_chunk .bottom-slider .btm_belt ul li.active span{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/act_arrow.png) no-repeat 0 bottom; height:13px; width:24px; position:absolute; top:-11px; display:block; left:40%;}
 
 #today_big_story_chunk h2 span.yellowtext{ color:#ffcc3f;}
 
 h3.home-bigtitile{ display:none;}
-.home_slider .catlist span.video-icon {background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -406px -480px; display: block; height: 38px;width: 47px; position:absolute; bottom:10px; right:10px;}
+.home_slider .catlist span.video-icon {background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -406px -480px; display: block; height: 38px;width: 47px; position:absolute; bottom:10px; right:10px;}
 
-.home_slider .catlist span.photo-icon {background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -305px -386px; display: block; height: 38px;width: 47px; position:absolute; bottom:10px; right:10px;}
+.home_slider .catlist span.photo-icon {background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -305px -386px; display: block; height: 38px;width: 47px; position:absolute; bottom:10px; right:10px;}
 /* === LEFT PANEL > LEFTPART ===*/
 .middle_center_h{ width:434px; padding:3px; position:relative; box-shadow:0 0 4px #afafaf; margin-bottom:27px;}
 .middle_center_h .m_hd { padding:2px 10px; background:#fff; position:absolute; top:10px; color:#9B9B9B; z-index:100; box-shadow:4px 0 2px 1px rgba(0, 0, 0, 0.2); -webkit-box-shadow:4px 0 2px 1px rgba(0, 0, 0, 0.2);}
 .middle_center_h .m_img { position:relative}
 .middle_center_h .m_img img{ width:100%}
-.middle_center_h .m_btm { padding:5px 10px; padding-left:30px; background:#FFCC3F url(http://media2.intoday.in/indiatoday/images/homenew/shares.png) no-repeat 4px 4px; position:absolute; bottom:3px;}
+.middle_center_h .m_btm { padding:5px 10px; padding-left:30px; background:#FFCC3F url(/staticpages/mediaintoday/indiatoday/images/homenew/shares.png) no-repeat 4px 4px; position:absolute; bottom:3px;}
 
 .left_mdiddle_h .m_btm{ display:none;}
 
@@ -312,7 +312,7 @@ h3.home-bigtitile{ display:none;}
 .m_btm .share-story span.sharetext{ width:auto; float:left; margin-left:5px; font-weight:300;}
 
 .middle_center_h .m_cont a{color:#193984; font-weight:500; font-size:26px; text-decoration:none; line-height:28px;}
-.middle_center_h .rightprtscrl ul li{ color:#E8E8E8; border-top:1px solid #e8e8e8; padding:5px 5px 5px 22px; /*text-indent:-1.2em;*/ background:url(http://media2.intoday.in/indiatoday/images/homenew/homelist-dot.png) no-repeat 7px 13px;}
+.middle_center_h .rightprtscrl ul li{ color:#E8E8E8; border-top:1px solid #e8e8e8; padding:5px 5px 5px 22px; /*text-indent:-1.2em;*/ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/homelist-dot.png) no-repeat 7px 13px;}
 /*.middle_center_h .rightprtscrl ul li::before {
     content: "•";    
     text-align: right;
@@ -332,11 +332,11 @@ h3.home-bigtitile{ display:none;}
 
 
 /* ======  Right panel ======= */
-.spritbg{ background-image:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png);}
+.spritbg{ background-image:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png);}
 #right-section{ margin:0 auto; width:313px; float:right}
 #right-section .rt-colum.right-ad{ padding:5px 4px 2px; text-align:center; margin-bottom:20px; border:1px solid #e7e7e7;}
 #right-section .rt-colum{ margin-bottom:25px; position:relative;}
-.captionWicon{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Video_BG.png) repeat-x 0 0; position:absolute; bottom:0px; padding:13px 0 7px; width:100%;}
+.captionWicon{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Video_BG.png) repeat-x 0 0; position:absolute; bottom:0px; padding:13px 0 7px; width:100%;}
 
 
 
@@ -389,7 +389,7 @@ a.rigthnext-arrow span.downarrow,a.rigthnext-arrow-news span.downarrow, a.rigthn
 .bt_arrow { bottom: -6px;color: #c2c2c2;float: left;font-size: 12px;height: 31px; left: 179px; margin: 0 auto; position: absolute;width: 130px;}
 
 .n_box a#topprev01 , #sectionpage.n_box a#sectopprev01 {
-    background: url("http://media2.intoday.in/indiatoday/images/homenew/bt_arrow.png") no-repeat scroll 0 -12px rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/homenew/bt_arrow.png") no-repeat scroll 0 -12px rgba(0, 0, 0, 0);
     color: #c2c2c2;
     height: 11px;    
     padding: 0 0 0 26px;
@@ -397,7 +397,7 @@ a.rigthnext-arrow span.downarrow,a.rigthnext-arrow-news span.downarrow, a.rigthn
     width: 65px;
 }
 .n_box a#topnext01, #sectionpage.n_box a#sectopnext01 {
-    background: url("http://media2.intoday.in/indiatoday/images/homenew/bt_arrow.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/homenew/bt_arrow.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
     color: #c2c2c2;    
     height: 16px;
     left: 7px;
@@ -415,7 +415,7 @@ a.rigthnext-arrow span.downarrow,a.rigthnext-arrow-news span.downarrow, a.rigthn
 
 
 .n_box ul.story-listall li:nth-child(3n){ padding:15px 0 0 15px; border-right:0px;}
-#rightpart .n_box .latest_news_sec h2{ background:url("http://media2.intoday.in/indiatoday/images/homenew/homeheading-bg.png") no-repeat scroll 0 bottom; box-shadow: 0 0 0 0; -webkit-box-shadow: 0 0 0 0; padding-bottom:6px; float:left;}
+#rightpart .n_box .latest_news_sec h2{ background:url("/staticpages/mediaintoday/indiatoday/images/homenew/homeheading-bg.png") no-repeat scroll 0 bottom; box-shadow: 0 0 0 0; -webkit-box-shadow: 0 0 0 0; padding-bottom:6px; float:left;}
 
 .n_box .latest_news_sec{float:left; width:437px; height:20px; background-color:#F2F0F1; margin:1px;}
 .n_box .latest_news_sec strong{float:left; width:95px; height:20px; text-align:center; background-color:#d00b26; font:14px/20px "Roboto"; color:#fff; margin-right:6px;}
@@ -474,15 +474,15 @@ a.rigthnext-arrow span.downarrow,a.rigthnext-arrow-news span.downarrow, a.rigthn
 
 
 
-.socials_footer_links_h ul li .fb_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-226px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .fb_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-226px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .gp_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-320px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .gp_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-320px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .tw_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-265px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .tw_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-265px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .rss_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-375px -188px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .rss_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-375px -188px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
-.socials_footer_links_h ul li .mbl_h{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-428px -184px; -webkit-transition:background-position .2s ease-in;  
+.socials_footer_links_h ul li .mbl_h{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-428px -184px; -webkit-transition:background-position .2s ease-in;  
     -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in; margin-top:-5px;}
 
 
@@ -515,9 +515,9 @@ span.tooltip-captsk { background:#000; border-radius: 3px; color: #fff; font-fam
 span.tooltip-captsk::after{content: '';position: absolute;border-style: solid;border-width: 0 6px 6px;border-color: #000 transparent;display: block;width: 0;z-index: 1;top: -5px;left:16%;}
 
 
-.l_shares .f_lf{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -12px -153px;}
-.l_shares .tw_lf{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -49px -153px;}
-.l_shares .r_lf{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -83px -153px;}
+.l_shares .f_lf{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -12px -153px;}
+.l_shares .tw_lf{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -49px -153px;}
+.l_shares .r_lf{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -83px -153px;}
 .left_plugin_h .l_cnt_t{ margin-top:10px; padding-bottom:10px; overflow:hidden;}
 .left_plugin_h ul{ list-style-type:none;padding:0;margin:0;}
 
@@ -528,7 +528,7 @@ span.tooltip-captsk::after{content: '';position: absolute;border-style: solid;bo
 
 /*.left_plugin_h ul li:hover a{color:#fff;}*/
 .share_pl{background-color:#2bb2e1; clear:both; text-align:right; float:right; width:102%; height:17px; display:none; padding:2px 0; position:absolute; left:-4px; box-shadow:0 4px 3px #ccc;}
-.share_pl em{background:url(http://media2.intoday.in/indiatoday/images/homenew/lft_share_icon.png) 0 0; width:17px; height:17px; display:inline-block; margin-right:10px;}
+.share_pl em{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/lft_share_icon.png) 0 0; width:17px; height:17px; display:inline-block; margin-right:10px;}
 .left_plugin_h ul li.r_lf_c:hover .share_pl{background-color:#fff;}
 
 
@@ -574,9 +574,9 @@ span.tooltip-captsk::after{content: '';position: absolute;border-style: solid;bo
 .left_btm_h .left_btm_cont{text-transform:uppercase; text-align:center; font-size:20px; color:#8a8a8a; margin:10px 0;}
 .left_btm_h .print_lbtm_m{text-align:center; width:62px; float:left; font-size:13px; color:#8a8a8a;font-weight:300; cursor:pointer;}
 .left_btm_h .print_lbtm_m a, .left_btm_h .print_digital_m a{font-size:13px; color:#8a8a8a;font-weight:300;}
-.left_btm_h .print_lbtm{ margin:0px auto;width:50px; height:36px;background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -133px -93px; }
+.left_btm_h .print_lbtm{ margin:0px auto;width:50px; height:36px;background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -133px -93px; }
 .left_btm_h .print_digital_m{text-align:center; width:62px;float:left;font-size:16px; color:#8a8a8a; font-weight:300;cursor:pointer;}
-.left_btm_h .print_digital{margin:0px auto;width:50px; height:36px;background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -170px -93px;}
+.left_btm_h .print_digital{margin:0px auto;width:50px; height:36px;background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -170px -93px;}
 
 
 .left_btm_h .print_lbtm a, .left_btm_h .print_digital_m a{color:#8a8a8a; text-decoration:none;}
@@ -598,8 +598,8 @@ span.tooltip-captsk::after{content: '';position: absolute;border-style: solid;bo
 /* ==== Search page CSS ===== */
 
 .searchtop{float:left; width:100%; min-height:70px; border-top:1px solid #e2e2e2; box-shadow:0 0 10px #e4e4e4; box-sizing:border-box;}
-.searchtop .indiatoday_logo{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat -222px -13px; width:53px; height:53px; float:left; margin-top:7px;}
-.searchtop input.searchbtn{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat -351px -17px; width:47px; height:47px; float:right; border:none; cursor:pointer; text-indent:-999px; margin-top:12px;}
+.searchtop .indiatoday_logo{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat -222px -13px; width:53px; height:53px; float:left; margin-top:7px;}
+.searchtop input.searchbtn{background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) no-repeat -351px -17px; width:47px; height:47px; float:right; border:none; cursor:pointer; text-indent:-999px; margin-top:12px;}
 .searchbot{margin:0 auto 50px; width:500px;}
 .searchbot input{width:500px; border:none; font:200 70px/80px 'Roboto'; color:#b0b0b0; margin:100px 0 0 0;}
 
@@ -697,8 +697,8 @@ span.tooltip-captsk::after{content: '';position: absolute;border-style: solid;bo
     font-size: 14px; font-weight:300;
 }
 
-.prev-storynav .prev-story{ background:url(http://media2.intoday.in/indiatoday/images/homenew/storyprev-button.png) no-repeat 0 center;padding-left:50px; float:left; height:75px; cursor:pointer;}
-.next-storynav .next-story { background:url(http://media2.intoday.in/indiatoday/images/homenew/storynext-button.png) no-repeat right center; padding-right:50px; float:left; height:75px; cursor:pointer;}
+.prev-storynav .prev-story{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/storyprev-button.png) no-repeat 0 center;padding-left:50px; float:left; height:75px; cursor:pointer;}
+.next-storynav .next-story { background:url(/staticpages/mediaintoday/indiatoday/images/homenew/storynext-button.png) no-repeat right center; padding-right:50px; float:left; height:75px; cursor:pointer;}
 
 .story-shotcont{ display:none; transition: opacity 1s ease-out; opacity: 1; }
 .next-storynav .next-story:hover .story-shotcont, .prev-storynav .prev-story:hover .story-shotcont{ display:block; opacity: 1; display: block; }
@@ -756,7 +756,7 @@ background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 ); /* IE6-9 */
 border-radius:5px; box-shadow:0 0 1px 1px #cccccc; -webkit-box-shadow:0 0 1px 1px #cccccc;
 }
-span.arr_down{ width:20px; height:15px; position:absolute;background:url(http://media2.intoday.in/indiatoday/images/homenew/down_arrow.jpg) no-repeat; display:inline-block;  bottom: -15px;  left: 45%;}
+span.arr_down{ width:20px; height:15px; position:absolute;background:url(/staticpages/mediaintoday/indiatoday/images/homenew/down_arrow.jpg) no-repeat; display:inline-block;  bottom: -15px;  left: 45%;}
 .left_tab_top_chunk ul li a{ color:#949494; text-decoration:none;}
 .left_tab_bottom_chunk{ width:100%; float:left; margin-bottom:27px;}
 
@@ -784,11 +784,11 @@ span.rqu-right{ background:#d00b26; width:20px; height:15px; position:absolute; 
 .left_tab_bottom_chunk .left_tab_bottom_left ul.stroy_list11 li { width:187px;}
 
 
-.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .one_star{ float:left; width:16px; height:14px; background:url(http://media2.intoday.in/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
-.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .two_star{ float:left; width:32px; height:14px; background:url(http://media2.intoday.in/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
-.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .three_star{float:left; width:48px; height:14px; background:url(http://media2.intoday.in/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
-.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .four_star{ float:left; width:64px; height:14px; background:url(http://media2.intoday.in/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
-.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .five_star{ float:left; width:80px; height:14px; background:url(http://media2.intoday.in/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
+.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .one_star{ float:left; width:16px; height:14px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
+.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .two_star{ float:left; width:32px; height:14px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
+.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .three_star{float:left; width:48px; height:14px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
+.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .four_star{ float:left; width:64px; height:14px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
+.left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story .red_star .five_star{ float:left; width:80px; height:14px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/red_star.jpg) no-repeat 0 0; }
 
 .left_tab_bottom_chunk .left_tab_bottom_left ul li .box_story p{ margin:0;padding:0;font-size:15px;}
 .left_tab_bottom_chunk .left_tab_bottom_right{ width:164px; float:right; max-height:475px;}
@@ -809,8 +809,8 @@ span.rqu-right{ background:#d00b26; width:20px; height:15px; position:absolute; 
 .india_today_btm .see_more_cont{ background:#F6F4F5;/* border-top:1px solid #999;*/width:162px;float:left; height:31px; position:relative;}
  .bt_arrow { bottom: -9px;  color: #c2c2c2;  float: left;  font-size: 12px;  height: 31px;  left: 44px;  margin: 0 auto;  position: absolute;  width: 130px;}
  
-a#topnext_h01{  background: url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat -429px -648px;  color: #c2c2c2;  height: 16px;  left: 7px;  margin-left: -28px;  opacity: 0.5;  padding: 0;  position: absolute;  text-decoration: none;  top: -2px;  width: 20px;}
-a#topprev_h01 {  background: url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat -426px -663px;  color: #c2c2c2;  height: 11px;  padding: 0 0 0 26px;  text-decoration: none;  width: 65px;}
+a#topnext_h01{  background: url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat -429px -648px;  color: #c2c2c2;  height: 16px;  left: 7px;  margin-left: -28px;  opacity: 0.5;  padding: 0;  position: absolute;  text-decoration: none;  top: -2px;  width: 20px;}
+a#topprev_h01 {  background: url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") no-repeat -426px -663px;  color: #c2c2c2;  height: 11px;  padding: 0 0 0 26px;  text-decoration: none;  width: 65px;}
 
 .left_plugin_h .hd_lf {  font-size: 13px;  color: #717171;  text-transform: uppercase;  color: #fff;  font-weight: 300;padding-bottom: 6px; position:absolute; z-index:999; top:11px; left:9px;}
 .left_plugin_h .hd_lf span {  background: #193984;  font-size: 15px;  padding: 0 6px; font-weight:400;border-left:5px solid #FFCC3F;} .left_plugin_h .hd_lf span a{ color:#fff;}
@@ -820,7 +820,7 @@ a#topprev_h01 {  background: url("http://media2.intoday.in/indiatoday/images/hom
 .opinion_cont .opinion_des{color:#737373; width:100%; float:left; margin-top:10px;}
 .breakingblink-small {  font-style: normal;  background-color: #ff2b37;  width: 9px;  height: 9px;  margin-left: 5px;  border-radius: 100%;  display: inline-block;  /*position: absolute;  top: 3px; left:-17px;*/  -webkit-animation: myfirst 1s infinite;  -moz-animation: myfirst 1s infinite;  -o-animation: myfirst 1s infinite;  animation: myfirst 1s infinite;}
 .l_cnt_t .photo-img{ position:relative; height:117px;}
-.l_cnt_t span.photo-icon{background: url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png") repeat -99px -242px;bottom: 2px;
+.l_cnt_t span.photo-icon{background: url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat -99px -242px;bottom: 2px;
     display: block;height: 38px;left: 3px; position: absolute; width: 25px;}
 	
 /* News Flash Css  */
@@ -842,10 +842,10 @@ a#topprev_h01 {  background: url("http://media2.intoday.in/indiatoday/images/hom
 #photoipad .slider-cover ul{ position:relative;}
 #photoipad .slider-cover ul li{ position:relative; list-style:none; width:437px; float:left;}
 #photoipad .content_sec{ height:276px; overflow:hidden;}
-#photoipad .slider-cover ul li .m_cont{ position:absolute; bottom:0px; background:url("http://media2.intoday.in/indiatoday/images/homenew/Video_BG.png") repeat-x 0 0; padding:15px 10px 10px; width:94.3%;}
+#photoipad .slider-cover ul li .m_cont{ position:absolute; bottom:0px; background:url("/staticpages/mediaintoday/indiatoday/images/homenew/Video_BG.png") repeat-x 0 0; padding:15px 10px 10px; width:94.3%;}
 #photoipad .slider-cover ul li .m_cont a{ color:#fff; font-size:20px; font-weight:400;}
 
-#photoipad .slider-cover a#ipadphoto-prev,#photoipad .slider-cover a#ipadphoto-next{ position:absolute; text-indent:-999999px; width:50px; top:40%; height:70px; display:block; color:#fff; background-image:url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png");}  
+#photoipad .slider-cover a#ipadphoto-prev,#photoipad .slider-cover a#ipadphoto-next{ position:absolute; text-indent:-999999px; width:50px; top:40%; height:70px; display:block; color:#fff; background-image:url("/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png");}  
 
 #photoipad .slider-cover a#ipadphoto-prev{ left:0; background-position:-171px -295px; }
 #photoipad .slider-cover a#ipadphoto-next{ right:0; background-position:-221px -295px;}
@@ -853,10 +853,10 @@ a#topprev_h01 {  background: url("http://media2.intoday.in/indiatoday/images/hom
 
 
 .story_thumb_container ul li a span{  bottom: 12px; height: 20px; left: 62px; position: absolute; width: 26px;}
-.story_thumb_container ul li a span.photo-smallicon{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -99px -251px;}
-.story_thumb_container ul li a span.video-smallicon{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -135px -251px;}
+.story_thumb_container ul li a span.photo-smallicon{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -99px -251px;}
+.story_thumb_container ul li a span.video-smallicon{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) repeat -135px -251px;}
 
-.story_thumb_container ul li a span.yellowframe{ width:88px; height:66px; background:url(http://media2.intoday.in/indiatoday/images/homenew/brkimg-yellfrm.png) no-repeat 0 0; left:5px; top:5px; z-index:10;}
+.story_thumb_container ul li a span.yellowframe{ width:88px; height:66px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/brkimg-yellfrm.png) no-repeat 0 0; left:5px; top:5px; z-index:10;}
 
 /************** Pepole page **********************/
 
@@ -879,7 +879,7 @@ section#left { width:650px; padding:5px; background:#fff; float:left;}
 .pr_txtarea { float:left; padding-left:20px; color:#e5e5e5; width:360px;}
 .pr_text { font:15px roboto;  }
 .pr_head {font:bold 18px roboto;}
-.pr_btm { position:absolute; background:url(http://media2.intoday.in/indiatoday/images/Band_Bg1.png) left top no-repeat; width:100%; height:48px; bottom:0px; left:0px; }
+.pr_btm { position:absolute; background:url(/staticpages/mediaintoday/indiatoday/images/Band_Bg1.png) left top no-repeat; width:100%; height:48px; bottom:0px; left:0px; }
 .profile_img { position:absolute; top:11px; left:11px; z-index:999;}
 .pr_soceil {float:right; margin:10px;}
 .pr_btm SPAN {font:16px roboto; color:#e5e5e5; padding: 15px 0 0 342px; display: inline-block;}
@@ -907,17 +907,17 @@ a#footerprev, a#footernext{ display:none;}
 .watch_chunk_right{ padding:8px 10px; float:right; width:170px;}
 .watch_chunk_right a{ color:#939192; text-decoration:none;}
 .padding-reduce{padding-top:0px;}
-span.ytb_icon_red{width:25px; height:15px; display:block; position:absolute;z-index:111; background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -243px -655px; bottom:5px; left:5px;}
+span.ytb_icon_red{width:25px; height:15px; display:block; position:absolute;z-index:111; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -243px -655px; bottom:5px; left:5px;}
 .left_tab_bottom_chunk .left_tab_bottom_left .story_container{ position:relative;}
-span.fancy-lefttop{ background:url(http://media2.intoday.in/indiatoday/images/homenew/fancy-topleft.png) 0 0; width:15px; height:24px;  position:absolute; top:0; left:0px;}
-span.fancy-rightbottom{ background:url(http://media2.intoday.in/indiatoday/images/homenew/fancy-topright.png) 0 0; width:15px; height:24px;  position:absolute; bottom:0; right:0px;}
+span.fancy-lefttop{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/fancy-topleft.png) 0 0; width:15px; height:24px;  position:absolute; top:0; left:0px;}
+span.fancy-rightbottom{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/fancy-topright.png) 0 0; width:15px; height:24px;  position:absolute; bottom:0; right:0px;}
 #footer1 { padding:0; }
 .footertag, footer { width:100%;}
 
-span.left-framered{ width:30px; height:135px; background:url(http://media2.intoday.in/indiatoday/images/homenew/bigstory-frmleft.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:99;}
-span.right-framered{ width:16px; height:500px; background:url(http://media2.intoday.in/indiatoday/images/homenew/bigstory-frmright.png) no-repeat 0 -5px; position:absolute; top:0; right:0; z-index:99;}
+span.left-framered{ width:30px; height:135px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/bigstory-frmleft.png) no-repeat 0 0; position:absolute; top:0; left:0; z-index:99;}
+span.right-framered{ width:16px; height:500px; background:url(/staticpages/mediaintoday/indiatoday/images/homenew/bigstory-frmright.png) no-repeat 0 -5px; position:absolute; top:0; right:0; z-index:99;}
 
-h1.maitoday span{ background:url(http://media2.intoday.in/indiatoday/images/homenew/mailtoday_Logo.png) no-repeat 0 0; width:337px;height: 89px;text-indent: -99999px;width: 337px; display: block;margin:20px auto 35px;}
+h1.maitoday span{ background:url(/staticpages/mediaintoday/indiatoday/images/homenew/mailtoday_Logo.png) no-repeat 0 0; width:337px;height: 89px;text-indent: -99999px;width: 337px; display: block;margin:20px auto 35px;}
 #newsflash table.breaking td.watchlive img{ position:relative; top:8px;}
 .ad-withborder{ border: 1px solid #e7e7e7; padding-bottom:6px; padding-top:4px; text-align: center;}
 

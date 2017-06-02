@@ -181,7 +181,7 @@ h1.section_title
 .speakers_names_list ul
 {width:714PX; margin:0; padding:0; }
 .speakers_names_list ul li
-{width:31%; float:left; font:bold 14px georgia; color:#002F5E; background:url(/womansummit/2009/images/speakers_names_bullet.jpg) no-repeat left 11px; list-style-type:none; padding:0 0 0 10px; border:0px solid #000; }
+{width:31%; float:left; font:bold 14px georgia; color:#002F5E;  list-style-type:none; padding:0 0 0 10px; border:0px solid #000; }
 .speakers_names_list ul li a
 { color:#002F5E; font:bold 14px georgia; line-height:25px; text-decoration:none}
 .speakers_speak

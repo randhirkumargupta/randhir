@@ -140,9 +140,9 @@ GA_googleFillSlot("IT_Special_Top_LB");
        <div align="center">
        <div align="center" class="clicktext">Click on the Map to see constituency wise results</div>
        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="650" height="650">
-  <param name="movie" value="http://media2.intoday.in/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_english.swf" />
+  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_english.swf" />
   <param name="quality" value="high" />
-  <embed src="http://media2.intoday.in/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_english.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="650" height="650"></embed>
+  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_election_english.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="650" height="650"></embed>
 </object></div>
             
 			<div class="state">
@@ -158,9 +158,9 @@ GA_googleFillSlot("IT_Special_Top_LB");
                             	<h3>Party Position</h3>
                                 <div class="topmarg">
                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="214" height="203">
-  <param name="movie" value="http://media2.intoday.in/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" />
+  <param name="movie" value="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" />
   <param name="quality" value="high" />
-  <embed src="http://media2.intoday.in/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="203"></embed>
+  <embed src="/staticpages/mediaintoday/microsites/election-poll/flash/indiatoday/uttarakhand/Uttarakhand_tally_graph_4p_small.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="214" height="203"></embed>
 </object>
                                 </div>
                             </div>
@@ -253,7 +253,7 @@ GA_googleFillSlot("B2_2nd_Mrec_Temp");
         <div class="clear"></div>
 		</div>
 		<DIV ID="footerdiv">
-  <iframe src="http://media2.intoday.in/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="135"></iframe> 
+  <iframe src="/staticpages/mediaintoday/microsites/common/comm_footer.html" frameborder="0" scrolling="no" width="990" height="135"></iframe> 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

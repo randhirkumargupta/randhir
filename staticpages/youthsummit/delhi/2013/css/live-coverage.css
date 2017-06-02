@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'Arial-Black';
-    src: url('ab.eot');
-    src: url('ab.eot?#iefix') format('embedded-opentype'),
-         url('ab.woff') format('woff'),
-         url('ab.ttf') format('truetype'),
-         url('ab.svg#"Arial-Black"') format('svg');
+    src: url('/staticpages/main/font/ab.eot');
+    src: url('/staticpages/main/font/ab.eot?#iefix') format('embedded-opentype'),
+         url('/staticpages/main/font/ab.woff') format('woff'),
+         url('/staticpages/main/font/ab.ttf') format('truetype'),
+         url('/staticpages/main/font/ab.svg#"Arial-Black"') format('svg');
     font-weight: bold;
     font-style: normal;
 }
-.programme_bg {background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
+.programme_bg {background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
 .nav ul li a.active,.nav ul li a:hover {background:#b70d0d} .nav ul li:hover { background-color:#b70d0d}
 .nav ul li a {padding:5px 9px;}
 .jcarousel-skin-tango .jcarousel-item-horizontal {margin-right:6px !important;}.help_sec .fr {width:430px !important}
@@ -168,7 +168,7 @@ ul.ddchild1 > li a {
     padding: 0;
 }
 .mindr-headline ul li {
-    background: url("http://media2.intoday.in/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;
+    background: url("/staticpages/mediaintoday/microsites/youthsummit2012/story-arrow.gif") no-repeat scroll left 5px transparent;
     color: #000000;
     font: bold 14px/18px arial;
     list-style: none outside none;
@@ -197,7 +197,7 @@ ul.ddchild1 > li a {
     font-size: 12px;
 }
 .mindr-consubrtbox {
-    background: url("http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;
+    background: url("/staticpages/mediaintoday/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;
     color: #343434;
     float: left;
     font: 12px/18px arial;
@@ -226,7 +226,7 @@ ul.ddchild1 > li a {
 }
 
 .prjtomebg_2 {
-    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/lunch-bg1.jpg") no-repeat scroll 0 0 transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/lunch-bg1.jpg") no-repeat scroll 0 0 transparent;
     color: #FFFFFF;
     font-weight: bold;
     height: 34px;
@@ -245,7 +245,7 @@ ul.ddchild1 > li a {
     text-decoration: none;
 }
 .bott-marg { margin-bottom:15px;}
-.main-pro-head {width:683px; height:33px; background:url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/cor1.gif) no-repeat top left #000; float:left;}
+.main-pro-head {width:683px; height:33px; background:url(/staticpages/mediaintoday/indiatoday/youthsummit/2013/delhi/cor1.gif) no-repeat top left #000; float:left;}
 .main-pro-head h3 {font:normal 18px/33px Arial-Black; text-transform:uppercase; color:#f7ee23; margin:0; padding:0 5px; float:left}
 
 .mindr-text { font:normal 14px/18px arial; color:#6c6c6c;}
@@ -263,7 +263,7 @@ ul.ddchild1 > li a {
 }
 
 .side_chunk_title {
-    background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
+    background: url("/staticpages/mediaintoday/indiatoday/youthsummit/2013/kolkata/dot.gif") repeat-x scroll center bottom transparent;
     color: #b70d0d;
     font: bold 24px/24px Arial;
     height: 30px;

@@ -174,7 +174,7 @@ section#left {
     width: 660px !important;
 }
 .woman-logo {
-    background: url(http://media2.intoday.in/indiatoday/womansummit/2014/images/title.png) no-repeat left top!important;
+    background: url(/staticpages/mediaintoday/indiatoday/womansummit/2014/images/title.png) no-repeat left top!important;
     height: 130px;
     margin-left: 60px;
     margin-top: 25px;

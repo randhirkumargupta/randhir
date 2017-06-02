@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>The true global trust barometer: ARMS TRADE</title>
-<link rel="image_src" href="http://media2.intoday.in/indiatoday//images/stories/2013April/fun_300x350_042913103545.jpg" />
+<link rel="image_src" href="/staticpages/mediaintoday/indiatoday//images/stories/2013April/fun_300x350_042913103545.jpg" />
 <link href="/staticpages/main/css/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <style>
@@ -13,8 +13,8 @@ body { background: none !important}
 
 <body>
 <script src="http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap"></script>
-<script src="http://media2.intoday.in/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" language="javascript" src="http://media2.intoday.in/indiatoday/js/ajaxinclude.js"></script>
+<script src="/staticpages/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <style>
@@ -83,7 +83,7 @@ header {
     font: bold 12px/15px roboto;
 }
 .logoit {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
     height: 70px;
     text-indent: -9999px;
     width: 329px;
@@ -103,7 +103,7 @@ nav {
     width: 1000px;
 }
 .sp_bg {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 .app a {
     display: block;
@@ -203,7 +203,7 @@ background:#ffffff;
 <div class="header-tag">
 <div class="htl-logo">
 <!--<div class="htl-text">In Association with</div>
-<img width="265" height="35" border="0" usemap="#Map" src="http://media2.intoday.in/indiatoday/images/ITG-branding.png">
+<img width="265" height="35" border="0" usemap="#Map" src="/staticpages/mediaintoday/indiatoday/images/ITG-branding.png">
 <map id="Map" name="Map">
   <area target="_blank" href="http://indiatoday.intoday.in/" coords="1,1,77,34" shape="rect">
   <area target="_blank" href="http://headlinestoday.intoday.in/" coords="87,2,165,34" shape="rect">
@@ -360,7 +360,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 
 <div style="margin-bottom:15px;">
-<img align="left" src="http://media2.intoday.in/indiatoday/images/1003-size-Arms-deal.jpg" border="0" />
+<img align="left" src="/staticpages/mediaintoday/indiatoday/images/1003-size-Arms-deal.jpg" border="0" />
 
 </div>
 
@@ -413,7 +413,7 @@ nav ul {
     padding: 0 !important;
 }
 .home a {
-    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -311px -95px rgba(0, 0, 0, 0);
+    background: url("/staticpages/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -311px -95px rgba(0, 0, 0, 0);
     display: inline-block;
     height: 43px;
     text-indent: -9999px;
@@ -468,10 +468,10 @@ nav ul {
 </div>
 <footer style="width: 1000px; margin: 15px auto 0 auto;">
 <div class="footertag">
-<img src="http://media2.intoday.in/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
+<img src="/staticpages/mediaintoday/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
 <nav class="nav">
 <ul>
-<div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img src="http://media2.intoday.in/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
+<div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img src="/staticpages/mediaintoday/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
 <li ><a href="http://indiatoday.intoday.in/news.html" >News</a></li>
 <li ><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a>
 <li ><a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a>
@@ -490,9 +490,9 @@ nav ul {
 <div class="clear"></div>
 </nav>
 
-<div class="searc-icon1"><img style="margin-bottom:-5px;" src="http://media2.intoday.in/indiatoday/images/btn-down-arrow.jpg"/>
+<div class="searc-icon1"><img style="margin-bottom:-5px;" src="/staticpages/mediaintoday/indiatoday/images/btn-down-arrow.jpg"/>
 <div id="footer1" style=" background-color:#fff">
-	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="/staticpages/mediaintoday/microsites/common/common_it_footer.html"></iframe>
     </div>
   </div>
   </div>

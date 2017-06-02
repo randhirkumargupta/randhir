@@ -191,7 +191,7 @@ if (!mobile) {
         <div class="normaltxt">
         
         <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/KAPIL-SHARMA.png" />
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/KAPIL-SHARMA.png" />
 <h3>Kapil Sharma(205-06)</h3> 
 <span>- Aajtak</span>
 <p>
@@ -199,14 +199,14 @@ Other colleges and institutes imparts knowledge, but ITMI believes in sharpen th
 </div>
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/SMRITI-SINGH-CHANDEL.png" /><h3>SMRITI SINGH CHANDEL (2015-16)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/SMRITI-SINGH-CHANDEL.png" /><h3>SMRITI SINGH CHANDEL (2015-16)
 </h3> <span>- The Quint</span>
 <p>
 ITMI is the best place to learn and grow in the field of journalism. With the practical approach and internships offered at the nation's best news channels, ITMI provides an unmatched practical insight in the world of journalism. My time at ITMI has been a life changing revelation. ITMI is the secret behind my success.</p>
 </div>
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/BADSHA-RAY.png" /><h3>BADSHA RAY (2015-16)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/BADSHA-RAY.png" /><h3>BADSHA RAY (2015-16)
 </h3> <span>- The Quint</span>
 <p>
 Making a transition from Engineering to Media studies was never easy for me. I was scared and doubted my self. I was warned beforehand that training was going to be robust and rigorous. But, first day into Institute and I was asked to let go of my inhibitions and be crazy. Yes, this place gave me the freedom to express my self, made me push my limits, face my fears and allow me to be 'me'. From mentors to my fellow ITMIANS, everyone helped me grow from strength to strength. Today I look back and cherish every single day I spent here. Thank you ITMI. Miss You!   </p>
@@ -214,7 +214,7 @@ Making a transition from Engineering to Media studies was never easy for me. I w
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/NEHA-UPADHYAY.png" /><h3>NEHA UPADHYAY (2011-13)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/NEHA-UPADHYAY.png" /><h3>NEHA UPADHYAY (2011-13)
 </h3> <span>- Aajtak</span>
 <p>
 चैनल मतलब आजतक और इंस्टीट्यूट मतलब ITMI.. किसी के करियर की इससे अच्छी शुरुआत नहीं हो सकती.. अबतक के अपने छोटे से करियर में मैनें रिर्पोटिंग की.. एंकरिंग की.. वेबसाइट के लिए काम किया.. और इतने बड़े नेटवर्क में अपना हर सपना पूरा किया.. और ये मुमकिन सिर्फ इसलिए हो पाया क्योंकि मैं ITMI की स्टूडेंट थी.. आपको यहां शून्य से शिखर तक पहुंचना सिखाया जाता है, वो भी ठीक वैसे ही जैसे किसी छोटे बच्चे को शिक्षा मिलती है </p>
@@ -222,7 +222,7 @@ Making a transition from Engineering to Media studies was never easy for me. I w
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/SHUBHANG-SURESH-CHAUHAN.png" /><h3>SHUBHANG SURESH CHAUHAN (2015-16)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/SHUBHANG-SURESH-CHAUHAN.png" /><h3>SHUBHANG SURESH CHAUHAN (2015-16)
 </h3> <span>-  Zee Media</span>
 <p>
 ITMI will teach you to follow the right track of journalism which has somewhat become dusty in today's world. Subjects are taught here on experience rather than fat books. The fascinating part is, one gets to meet the top-notch journalists from the industry sharing their own hands on experience and fanning out their views. </p>
@@ -230,7 +230,7 @@ ITMI will teach you to follow the right track of journalism which has somewhat b
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/Harshit-Joshi.png" /><h3>HARSHIT JOSHI (2013-14)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/Harshit-Joshi.png" /><h3>HARSHIT JOSHI (2013-14)
 </h3> <span>- India Today TV</span>
 <p>
 Being someone who had no past educational qualifications in journalism and media never took a toll on my studies in TVTMI, such is the level of training and teaching in the institute. Faculties and facilities provided are exactly what a fresher needs to achieve endeavours in his or her journey in the industry. The way students are sent to newsroom is one of its kind training program. It not only trains us to handle all the domains of a media organisation but also makes us an all rounder media professional, the need of the hour! </p>
@@ -238,7 +238,7 @@ Being someone who had no past educational qualifications in journalism and media
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/Pallavi-Sati.png" /><h3>PALLAVI SATI (2013-14)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/Pallavi-Sati.png" /><h3>PALLAVI SATI (2013-14)
 </h3> <span>- India Today TV</span>
 <p>
 ITMI is not just an institute that imparts knowledge, it is a kindgom of exploration. You not only refine your skills and channelize your inclination; you rediscover and make yourself from the scratch in the industry. Not to forget the mentors, they are simply the best you can get.</p>
@@ -246,7 +246,7 @@ ITMI is not just an institute that imparts knowledge, it is a kindgom of explora
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/Debanjana-Bhattacharya.png" /><h3>DEBANJANA BHATTACHARYA (2014-15)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/Debanjana-Bhattacharya.png" /><h3>DEBANJANA BHATTACHARYA (2014-15)
 </h3> <span>- NDTV</span>
 <p>
 Success comes in a lot of ways and only money and fame. It comes from having a meaning in your life, it comes when you do what you love and being passionate about what you do. ITMI is the exactly the place where dreams can come true, where the faculties are working on shaping you to achieve the dreams and within you feel the capacity of knowing it all.</p>
@@ -254,7 +254,7 @@ Success comes in a lot of ways and only money and fame. It comes from having a m
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/Pankaj-Jain.png" /><h3>PANKAJ JAIN (2012-14)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/Pankaj-Jain.png" /><h3>PANKAJ JAIN (2012-14)
 </h3> <span>- Aajtak</span>
 <p>
 I am immensely thankful to ITMI for providing the training program which helped me in grooming and prepared me for the challenges of news industries. The flexible, innovative and professional environment for learning provides you the opportunity to explore yourself. The Faculty and staff are all dedicated to the student's success and growth. </p>
@@ -262,7 +262,7 @@ I am immensely thankful to ITMI for providing the training program which helped 
 
 
 <div class="testimonial-outer">
-<img src="http://media2.intoday.in/indiatoday/itmi/images/testimonials/Roshni-bhatiwal.png" /><h3>Roshani Thokne Bhatiwal (2010-12)
+<img src="/staticpages/mediaintoday/indiatoday/itmi/images/testimonials/Roshni-bhatiwal.png" /><h3>Roshani Thokne Bhatiwal (2010-12)
 </h3> <span>- Aajtak</span>
 <p>
 A place where you not only learn but you experience a professional life. ITMI is a platform where you get a chance to explore your skills and enhance your capability. Your mentors guide to overcome every challenge which stops you to achieve greater heights. I am proud to be an ITMI student.</p>

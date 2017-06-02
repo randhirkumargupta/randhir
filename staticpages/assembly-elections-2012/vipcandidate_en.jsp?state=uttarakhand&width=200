@@ -19,21 +19,21 @@ jQuery(document).ready(function() {
 <body>
 <div id="wrap"><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Maj. Gen. BC Khanduri.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Maj. Gen. BC Khanduri</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Maj. Gen. BC Khanduri.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Maj. Gen. BC Khanduri</span><span class="resulttxt wontxt">
 <span class='resulttxt losstxt'>LOST</span>
 
 	</span></div>
     <span class="party-txt">(BJP) Kotdwar</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Harak Singh Rawat.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Harak Singh Rawat</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Harak Singh Rawat.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Harak Singh Rawat</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
     <span class="party-txt">(INC) Rudraprayag</span>
     </li>
 
-    <li><img src="http://media2.intoday.in/indiatoday/assemblypoll/Ramesh Pokhriyal Nishank.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Ramesh Pokhriyal Nishank</span><span class="resulttxt wontxt">
+    <li><img src="/staticpages/mediaintoday/indiatoday/assemblypoll/Ramesh Pokhriyal Nishank.jpg" width="37" height="37" style="border:1px solid #a7a7a7" align="left" /><div class="candidate-name"> <span class="">Ramesh Pokhriyal Nishank</span><span class="resulttxt wontxt">
 <span class='resulttxt wontxt'>WON</span>
 
 	</span></div>
