@@ -1122,6 +1122,11 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+   $items['video-test'] = array(
+    'page callback' => 'itg_videogallery_video_test',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   $items['dailymotion-video-search-filter'] = array(
     'page callback' => 'itg_videogallery_ajax_time_search_video',
     'access arguments' => array('access content'),
@@ -1208,6 +1213,16 @@ function itg_videogallery_menu() {
 
 
   return $items;
+}
+
+/**
+ * test function
+ */
+function itg_videogallery_video_test() {
+
+    $api = itg_videogallery_dailymotion_api();
+ $data= $api->post('/video/x5p4sec?next_video=http://www.dailymotion.com/video/x5p4sdq');
+ p($data);
 }
 
 /**
@@ -3384,7 +3399,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
           '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
       );
       $result['id'] = end(explode('/', $dur['embed_url']));
-      $playlist_id = variable_get('video_property');
+      $playlist_id = variable_get('dailymotion_playlist_id');
       //  $resp = $api->post('/playlist/'.$playlist_id.'/videos/' . $result['id']);
       $result['duration'] = $dur['duration'];
       $result['name'] = $file_name;
@@ -3662,8 +3677,8 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
         '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
     );
     $result['id'] = end(explode('/', $dur['embed_url']));
-    $playlist_id = variable_get('video_property');
-    // $resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
+    $playlist_id = variable_get('dailymotion_playlist_id');
+     //$resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
     $result['encoding_progress'] = $dur['encoding_progress'];
     $result['publishing_progress'] = $dur['publishing_progress'];
