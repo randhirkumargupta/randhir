@@ -174,6 +174,12 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'mega_review_critic_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'mega-review-critic-node-form',
+      'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
+      'render element' => 'form',
+    ),
   );
 
   return $themes;
