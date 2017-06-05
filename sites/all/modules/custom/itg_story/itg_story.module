@@ -441,6 +441,10 @@ function itg_story_node_validate($node , $form , &$form_state) {
     if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
       form_set_error('edit-field-story-category-und-hierarchical-select-selects-0' , t("Section field is required."));
     }
+    
+    if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->body[LANGUAGE_NONE][0]['value'])) {
+      form_set_error('body' , t("Description field is required."));
+    }
   }
 }
 
