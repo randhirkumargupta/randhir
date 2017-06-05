@@ -10,7 +10,7 @@
             var StoryId = settings.itg_story.settings.storyid;
             if (StoryId == 0) {
                 // jquery to open question field.
-                jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
+               // jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
                 
                 // hide remove button of first field on add form
                 jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
