@@ -53,7 +53,6 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
    */
   function render($values) {
     global $base_url;
-    
       if (isset($values->_field_data['nid']['entity']->status) && $values->_field_data['nid']['entity']->status == 0 ) {
         $node_url = $base_url . '/node/' . $values->nid;
         $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';
@@ -64,9 +63,15 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
           $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';   
       }
       
-      $c_link = $web_link.' / '.$mob_link;
-      
-      return $c_link;
+    if (!empty(arg(0)) && arg(0) == 'published-story') {
+      $clone_link = '<a class="clone" href="node/add/story?destination=published-story?field_story_syndication_value_op=all&internal_clone_id='.$values->nid.'">Clone</a>'; 
+      $c_link = $web_link . ' / ' . $mob_link. '/'. $clone_link;
+    }
+    else {
+
+      $c_link = $web_link . ' / ' . $mob_link;
+    }
+    return $c_link;
   }
 
 }
