@@ -40,23 +40,6 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   
-  // handler for topic serach
-  if($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search' && $form_state['view']->current_display == 'page_1') {
-    $arg = arg();
-    if(!empty($arg[2])) {
-      $form['bundle_name']['#value'] = $arg[2];
-      }
-      if(!empty($arg[1])) {
-      $form['keyword']['#value'] = $arg[1];
-      }
-      $form['keyword']['#attributes'] = array('readonly' => 'readonly');
-      
-      if(!empty($_REQUEST['keyword'])) {
-      $form['#submit'][0]= 'topic_form_submit_handler';
-      }
-     
-  }
-  // handler close
   
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search') {
     
@@ -113,6 +96,25 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     );
   }
 
+  // handler for topic serach
+  if($form_id == 'views_exposed_form' && $form_state['view']->name == 'front_end_global_search' && $form_state['view']->current_display == 'page_1') {
+    $arg = arg();
+    if(!empty($arg[2])) {
+      $default_value = array($arg[2]);
+      $form['bundle_name']['#value'] = $default_value;
+      }
+      if(!empty($arg[1])) {
+      $form['keyword']['#value'] = $arg[1];
+      }
+      $form['keyword']['#attributes'] = array('readonly' => 'readonly');
+      
+      if(!empty($_REQUEST['keyword'])) {
+      $form['#submit'][0]= 'topic_form_submit_handler';
+      }
+     
+  }
+  // handler close
+  
   // code for search image filter
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'searchimage') {
@@ -541,7 +543,7 @@ function itg_get_reporter_list($name) {
  * {@inheritdoc}
  */
 function topic_form_submit_handler($form, &$form_state) {
-  $bundle = array_values($form_state['values']['bundle_name']);
+  $bundle = array_values($form_state['input']['bundle_name']);
   $hash = array_values($form_state['values']['hash']);
   $search_key['keyword'] = $form_state['values']['keyword'];
   $search_key['bundle_name'] = $bundle;

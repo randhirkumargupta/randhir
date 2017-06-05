@@ -273,7 +273,7 @@ function itg_ask_expert_node_update($node) {
         $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
 //        $to = 'gourav.walia@kelltontech.com';
         $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-        $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+        $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
         
         if (function_exists('itg_mail_templates_get_mailcontent')) {
           $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node, 'When Review');
