@@ -139,7 +139,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_story_description',
-    'label' => 'photo story description',
+    'label' => 'Photo Story Description',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -180,7 +180,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_story_image',
-    'label' => 'photo story image',
+    'label' => 'Photo Story Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -527,7 +527,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_template_buzz',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'HeadLine',
+    'description' => 'Headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -540,7 +540,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_headline',
-    'label' => 'HeadLine',
+    'label' => 'Headline',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -5789,7 +5789,7 @@ function features_for_story_field_default_field_instances() {
   t('Featured Name');
   t('Gallery Associate');
   t('Gallery position');
-  t('HeadLine');
+  t('Headline');
   t('Highlights');
   t('Image');
   t('Image Size (1024 x 1024)');
@@ -5817,6 +5817,8 @@ function features_for_story_field_default_field_instances() {
   t('Mosimage');
   t('Movie Plot');
   t('Node Identity');
+  t('Photo Story Description');
+  t('Photo Story Image');
   t('Photo story');
   t('Please Provide Value like :  #060606');
   t('Preview_unique_id');
@@ -5878,8 +5880,6 @@ function features_for_story_field_default_field_instances() {
   t('Unique id');
   t('common by line reporter id');
   t('common by line twitter');
-  t('photo story description');
-  t('photo story image');
   t('primary category');
   t('short introtext');
 
