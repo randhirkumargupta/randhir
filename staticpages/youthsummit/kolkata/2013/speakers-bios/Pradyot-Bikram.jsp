@@ -247,7 +247,7 @@
         	<div id="main_content_left">
             <h1 class="section_title">Session Speakers</h1>
             <div class="maincontent"> 
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/youthsummit/speaker-thumb/Pradyoy_150.jpg" style="margin: 0pt 10px 0pt 0pt;" align="left" border="1" height="123" width="150">
+<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/speaker-thumb/Pradyoy_150.jpg" style="margin: 0pt 10px 0pt 0pt;" align="left" border="1" height="123" width="150">
 		<h1 style="margin: 0pt; line-height: 30px; font-family: arial black; text-align: left;">Pradyot Bikram Manikya Deb Barma</h1>
 
 		<p class="strap" style="font-family: arial; font-size: 12px; line-height: 15px; font-style: italic; text-align: left;">General Secretary, Tripura Congress and Editor, The Northeast Today </p>

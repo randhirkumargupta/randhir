@@ -303,7 +303,7 @@
 					<div class="caption sp12"><div><a href="speakers-bios/Zubeen-Garg.jsp">ZUBEEN GARG</a></div><span>MUSICIAN </span></div>
 			  </div>
               <div style="height: 30px; clear: both;"></div>
-			  <div style="width: 683px; height: 300px; background-repeat:no-repeat; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/youthsummit/speaker-thumb/speaker-04.jpg'); position: relative;">
+			  <div style="width: 683px; height: 300px; background-repeat:no-repeat; background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/speaker-thumb/speaker-04.jpg'); position: relative;">
 					<div class="caption sp13"><div>Brett Lee</div>
 				<span> CRICKET PLAYER</span></div>
 					<div class="caption sp14" style="text-transform:uppercase"><div ><a href="speakers-bios/Pradyot-Bikram.jsp">Pradyot Bikram Manikya Deb Barma</a></div><span>General Secretary, Tripura Congress and Editor, The Northeast Today</span></div>
