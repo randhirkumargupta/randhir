@@ -165,8 +165,16 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
       global $base_url , $user;
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
-        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+        
+        if (isset($form['field_story_configurations'][LANGUAGE_NONE]['#default_value']) && count($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'])) {
+          $values = array_merge($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'], array('commentbox'));
+        }
+        else {
+          $values = array('commentbox');
+        }
+        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $values;
       }
+      
       if ($user->uid != 1) {        
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
