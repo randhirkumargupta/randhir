@@ -163,6 +163,15 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url , $user;
+      
+      // code for body field config
+      $form['body']['#states'] = array(
+        'required' => array(
+          ':input[name="field_story_type[und]"]' => array('value' => 'other_story'),
+        )
+      );
+      
+      
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
         
