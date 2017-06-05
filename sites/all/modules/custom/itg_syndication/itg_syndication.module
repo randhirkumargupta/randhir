@@ -272,6 +272,8 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   foreach ($tax as $key => $val) {
     $op[$val->tid] = $val->name;
   }
+  
+  asort($op); // Sorting section array or category array by it value
 
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
