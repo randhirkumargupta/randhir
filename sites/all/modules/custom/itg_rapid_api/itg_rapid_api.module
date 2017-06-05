@@ -6,12 +6,14 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_news');
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
-module_load_include('inc', 'itg_rapid_api', 'inc/helper');
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
+function itg_rapid_api_init(){
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_news');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
+    module_load_include('inc', 'itg_rapid_api', 'inc/helper');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
+}
 
 /**
  * Implements hook_services_resources().
@@ -405,3 +407,83 @@ function otherapps_android_json() {
 
   return system_settings_form($form);
 }
+
+
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+
+function itg_rapid_api_url_inbound_alter(&$result, $path, $path_language) {
+   //echo "<pre>"; print_r($_SERVER); echo "</pre>";exit();
+   $u_agent = $_SERVER['HTTP_USER_AGENT']; 
+   $flag = 0;
+
+// user agent for browser
+if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Trident/i',$u_agent)) 
+    { // this condition is for IE11
+        $flag = 1;
+    } 
+    elseif(preg_match('/Firefox/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Chrome/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Safari/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Opera/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Netscape/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    
+    // user agent for mobile device
+    
+    $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+    $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
+    $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
+    $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
+    $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
+
+    if ($iphone || $android || $palmpre || $ipod || $berry == true)
+    {
+        $flag = 1;
+
+    }
+    
+   //if(arg(0) == "appapi" && count(arg()) == 2 && $flag == 1){
+   if(arg(0) == "appapi" && count(arg()) == 2 ){
+       //echo "<pre>"; print_r($_SERVER); echo "</pre>";exit();
+       //$q_str = $_SERVER['QUERY_STRING'];
+       $result = $path."/it";
+       
+   }
+}
+/*
+function itg_rapid_api_url_outbound_alter(&$path, &$options, $original_path) {
+    if(arg(0) == "appapi" && count(arg()) == 2 ){
+       //echo "<pre>"; print_r($_SERVER); echo "</pre>";exit();
+       //$q_str = $_SERVER['QUERY_STRING'];
+       $result = $path."/it";
+       
+   }
+}*/
+
+/**
+ * Implements hook_boot().
+ */
+
+function itg_rapid_api_boot() {}
+
