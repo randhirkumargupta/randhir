@@ -2833,6 +2833,14 @@
   /*Archive story page End*/
   .view-archive-story{
     .view-content{
+      li.itg-search-list{
+          > div{
+            padding-left: 180px;
+            &.views-field-sm-field-custom-story-small-large-url{
+              padding-left: 0;
+            }
+          }
+        }
       .search-pic{
         width: 170px;
         height: 127px;

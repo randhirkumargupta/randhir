@@ -116,6 +116,79 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_facebook_gallery_associate-field_story_big_image'.
+  $field_instances['field_collection_item-field_facebook_gallery_associate-field_story_big_image'] = array(
+    'bundle' => 'field_facebook_gallery_associate',
+    'deleted' => 0,
+    'description' => 'Image Size (1024 x 1024)',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_big_image',
+    'label' => 'Facebook instant image',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '1024x1024',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 0,
+            'itg_image_video' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 'upload',
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
       'weight' => 1,
     ),
   );
@@ -139,7 +212,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_story_description',
-    'label' => 'photo story description',
+    'label' => 'Photo Story Description',
     'required' => 0,
     'settings' => array(
       'display_summary' => 0,
@@ -180,7 +253,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_story_image',
-    'label' => 'photo story image',
+    'label' => 'Photo Story Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
@@ -527,7 +600,7 @@ function features_for_story_field_default_field_instances() {
     'bundle' => 'field_story_template_buzz',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'HeadLine',
+    'description' => 'Headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -540,7 +613,7 @@ function features_for_story_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_buzz_headline',
-    'label' => 'HeadLine',
+    'label' => 'Headline',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -5789,7 +5862,7 @@ function features_for_story_field_default_field_instances() {
   t('Featured Name');
   t('Gallery Associate');
   t('Gallery position');
-  t('HeadLine');
+  t('Headline');
   t('Highlights');
   t('Image');
   t('Image Size (1024 x 1024)');
@@ -5817,6 +5890,8 @@ function features_for_story_field_default_field_instances() {
   t('Mosimage');
   t('Movie Plot');
   t('Node Identity');
+  t('Photo Story Description');
+  t('Photo Story Image');
   t('Photo story');
   t('Please Provide Value like :  #060606');
   t('Preview_unique_id');
@@ -5878,8 +5953,6 @@ function features_for_story_field_default_field_instances() {
   t('Unique id');
   t('common by line reporter id');
   t('common by line twitter');
-  t('photo story description');
-  t('photo story image');
   t('primary category');
   t('short introtext');
 

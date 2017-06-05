@@ -1042,7 +1042,8 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
           ->distinct()
           ->fields('fdr' , array('field_reporter_profile_type_value' , 'field_reporter_profile_type_value'));
       $options = $query_options->execute()->fetchAllKeyed();
-      array_unshift($options , 'Any');
+      //array_unshift($options , 'Any');
+      $options = array_merge(array("" => '- Any -'), $options);
       $form['byline_names'] = array(
         '#type' => 'textfield' ,
         '#title' => 'Byline' ,
@@ -1055,7 +1056,8 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
         '#type' => 'select' ,
         '#title' => 'Profile Type' ,
         '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "" ,
-        '#options' => drupal_map_assoc($options) ,
+        //'#options' => drupal_map_assoc($options) ,
+        '#options' => $options ,
       );
       $form['#info']['filter-byline-names']['value'] = 'byline_names';
       $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
