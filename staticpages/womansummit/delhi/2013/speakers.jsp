@@ -231,27 +231,27 @@
   
     <td width="21%" align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 1px 1px 0;"><span class="sponsor-type">TIME PARTNER</span><br>
       <br><br><br>
-  <a target="_blank" href="http://www.omegawatches.com/"><img border="0" title="Omega" alt="Omega" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/omega.gif"></a></td>
+  <a target="_blank" href="http://www.omegawatches.com/"><img border="0" title="Omega" alt="Omega" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/omega.gif"></a></td>
   
     <td width="17%" align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 0px 1px 0;"><span class="subsponsor-type21">HOSPITALITY</span><br>
       <br><br><br>
-   	  <a href="http://www.delhi.regency.hyatt.com/hyatt/hotels-delhi-regency/index.jsp" target="_blank"> <img border="0" align="middle" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/hyatt.gif" alt="Hyatt" title="Hyatt" /></a></td>
+   	  <a href="http://www.delhi.regency.hyatt.com/hyatt/hotels-delhi-regency/index.jsp" target="_blank"> <img border="0" align="middle" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/hyatt.gif" alt="Hyatt" title="Hyatt" /></a></td>
             
     <td width="19%" align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 0px 1px 0;"><span class="subsponsor-type21">WRITING INSTRUMENT</span><br>
       <br><br><br>
-   	  <a href="http://www.luxor.in/" target="_blank"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/parker.gif" alt="Parker" title="Parker" /></a></td>
+   	  <a href="http://www.luxor.in/" target="_blank"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/parker.gif" alt="Parker" title="Parker" /></a></td>
   </tr>
   <tr>
     <td align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 0px 1px 0;">
     <span class="subsponsor-type21" style="height: 25px;">TV PARTNER</span><br />
-        <a href="http://www.headlinestoday.in/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/ht2.gif" alt="Headlines Today" title="Headlines Today" /></a>
+        <a href="http://www.headlinestoday.in/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/ht2.gif" alt="Headlines Today" title="Headlines Today" /></a>
     </td>
     
       <td width="21%" align="center" valign="top" style="0px;border:solid 1px #cccccc; border-width: 0px 0px 1px 0;"><span class="subsponsor-type21" style="height: 25px;">NEWSPAPER PARTNER</span><br />
-      <a href="http://mailtoday.in/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/mt2.gif" alt="Mail Today" title="Mail Today" /></a></td>
+      <a href="http://mailtoday.in/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/mt2.gif" alt="Mail Today" title="Mail Today" /></a></td>
     
       <td width="17%" align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 0px 1px 0;"><span class="subsponsor-type21" style="height: 25px;">ONLINE PARTNER</span><br />
-      <a href="/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/womansummit/2013/it2.gif" alt="India Today" title="India Today" /></a></td>
+      <a href="/" target="_blank"> <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/it2.gif" alt="India Today" title="India Today" /></a></td>
     <td align="center" valign="top" style="border:solid 1px #cccccc; border-width: 0px 0px 1px 0;">&nbsp;</td>
   </tr>
 </table>
