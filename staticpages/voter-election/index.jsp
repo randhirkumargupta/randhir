@@ -3,7 +3,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<base href="/staticpages/voter-election/" />
 <title>Election News</title>
 <meta name="description" content="News of assembly and general elections" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
