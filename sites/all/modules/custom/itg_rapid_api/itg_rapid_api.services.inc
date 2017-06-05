@@ -783,7 +783,7 @@ function itg_rapid_api_newslist($token) {
             $jsondata = newscategoryPageRerourceValue($id, $cpageno);
             $jsondata = json_encode($jsondata);
             //print_r($jsondata);exit();
-            $ttl = 300;
+            $ttl = 10800;
             $result_set = setRedis($redis_key, $jsondata, $ttl);
         }
         
