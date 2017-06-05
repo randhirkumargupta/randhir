@@ -405,6 +405,3 @@ function otherapps_android_json() {
 
   return system_settings_form($form);
 }
-
-
- 
