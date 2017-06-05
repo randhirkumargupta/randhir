@@ -19,7 +19,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form': // Video Gallery    
     case 'blog_node_form': // Blog
     case 'podcast_node_form': // Podcast
-    case 'reporter_node_form': // reporter
+    case 'reporter_node_form': // reporter OR Byline
 
       $content_type = '';
       $itg_category_multiple_prev_data = '';
