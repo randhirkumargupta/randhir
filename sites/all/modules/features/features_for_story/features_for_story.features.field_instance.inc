@@ -731,7 +731,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Story body',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 1,
       'exclude_cv' => FALSE,
