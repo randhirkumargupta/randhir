@@ -74,9 +74,9 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
       
       /* Code for internal clone story */
       
-      if(!empty($_GET['internal_clone_id'])) {
+      if (!empty($_GET['internal_clone_id'])) {
         $overall_data = node_load($_GET['internal_clone_id']);
-        
+
         /* code for quick file */
         $form['field_story_type'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_type[LANGUAGE_NONE][0]['value'];
         $form['field_story_select_magazine'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
@@ -91,15 +91,15 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_emoji_position'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_emoji_position[LANGUAGE_NONE][0]['value']);
         $form['field_emoji'][LANGUAGE_NONE][0]['#default_value'] = $overall_data->field_emoji[LANGUAGE_NONE][0]['value'];
         $form['field_emoji_2'][LANGUAGE_NONE][0]['#default_value'] = $overall_data->field_emoji_2[LANGUAGE_NONE][0]['value'];
-        
-        /* code for Image upload*/
+
+        /* code for Image upload */
         $form['field_story_extra_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
         $form['field_story_large_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_large_image[LANGUAGE_NONE][0]['fid'];
         $form['field_story_medium_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_medium_image[LANGUAGE_NONE][0]['fid'];
         $form['field_story_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_small_image[LANGUAGE_NONE][0]['fid'];
         $form['field_story_extra_small_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'];
-        
-        /* code for more details*/
+
+        /* code for more details */
         $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $overall_data->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
         $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
         $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -111,42 +111,54 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_associate_lead'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
         $form['field_associate_photo_gallery'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
         $form['field_story_associate_video'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-        
-        /* code for Expert Chunk*/
+
+        /* code for Expert Chunk */
         $form['field_story_expert_name'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_expert_name[LANGUAGE_NONE][0]['value'];
         $form['field_story_expert_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_expert_image[LANGUAGE_NONE][0]['fid'];
         $form['field_story_expertise'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_expertise[LANGUAGE_NONE][0]['value'];
         $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_expert_description[LANGUAGE_NONE][0]['value'];
-        
-        /* code for Story movie*/
-         $form['field_story_rating'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_rating[LANGUAGE_NONE][0]['value'];
-         $form['field_mega_review_cast'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_mega_review_cast[LANGUAGE_NONE][0]['target_id'];
-         $form['field_mega_review_director'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_mega_review_director[LANGUAGE_NONE][0]['value'];
-         $form['field_mega_review_movie_plot'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_mega_review_movie_plot[LANGUAGE_NONE][0]['value'];
-        
-         /* configurations */
-        if(!empty($overall_data->field_story_configurations[LANGUAGE_NONE][0]['value'])) {
-          foreach($overall_data->field_story_configurations[LANGUAGE_NONE] as $key => $value) {
+
+        /* code for Story movie */
+        $form['field_story_rating'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_rating[LANGUAGE_NONE][0]['value'];
+        $form['field_mega_review_cast'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_mega_review_cast[LANGUAGE_NONE][0]['target_id'];
+        $form['field_mega_review_director'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_mega_review_director[LANGUAGE_NONE][0]['value'];
+        $form['field_mega_review_movie_plot'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_mega_review_movie_plot[LANGUAGE_NONE][0]['value'];
+
+        /* configurations */
+        if (!empty($overall_data->field_story_configurations[LANGUAGE_NONE][0]['value'])) {
+          foreach ($overall_data->field_story_configurations[LANGUAGE_NONE] as $key => $value) {
             $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'][] = $value['value'];
           }
         }
         $form['field_story_syndication'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_syndication[LANGUAGE_NONE][0]['value']);
         $form['field_story_syndications_photo'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_syndications_photo[LANGUAGE_NONE][0]['value']);
-        
+
         /* social media */
-        if(!empty($overall_data->field_story_social_media_integ[LANGUAGE_NONE][0]['value'])) {
-          foreach($overall_data->field_story_social_media_integ[LANGUAGE_NONE] as $key => $value) {
+        if (!empty($overall_data->field_story_social_media_integ[LANGUAGE_NONE][0]['value'])) {
+          foreach ($overall_data->field_story_social_media_integ[LANGUAGE_NONE] as $key => $value) {
             $form['field_story_social_media_integ'][LANGUAGE_NONE]['#default_value'][] = $value['value'];
           }
         }
-       $form['field_story_facebook_narrative'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'];
-       $form['field_story_tweet'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_tweet[LANGUAGE_NONE][0]['value'];
-       $form['field_story_facebook_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_facebook_image[LANGUAGE_NONE][0]['fid'];
-       $form['field_story_tweet_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_tweet_image[LANGUAGE_NONE][0]['fid'];
-       $form['field_story_facebook_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_facebook_video[LANGUAGE_NONE][0]['fid'];
-       $form['field_story_twitter_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_twitter_video[LANGUAGE_NONE][0]['fid'];
+        $form['field_story_facebook_narrative'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_facebook_narrative[LANGUAGE_NONE][0]['value'];
+        $form['field_story_tweet'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_tweet[LANGUAGE_NONE][0]['value'];
+        $form['field_story_facebook_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_facebook_image[LANGUAGE_NONE][0]['fid'];
+        $form['field_story_tweet_image'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_tweet_image[LANGUAGE_NONE][0]['fid'];
+        $form['field_story_facebook_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_facebook_video[LANGUAGE_NONE][0]['fid'];
+        $form['field_story_twitter_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $overall_data->field_story_twitter_video[LANGUAGE_NONE][0]['fid'];
+        if (!empty($overall_data->field_story_itg_tags[LANGUAGE_NONE][0]['tid'])) {
+          foreach ($overall_data->field_story_itg_tags[LANGUAGE_NONE] as $key => $value) {
+            if (function_exists('get_term_name_from_tid_for_report')) {
+              $tags[] = get_term_name_from_tid_for_report($value['tid']);
+            }
+          }
+        }
+        $tags_explode = implode(',', $tags);
+        $form['field_story_itg_tags'][LANGUAGE_NONE]['#default_value'] = $tags_explode;
+
+        /* Techonology */
+        $form['field_story_technology_rating'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_technology_rating[LANGUAGE_NONE][0]['value']);
+        $form['field_story_tech_review_chunk'][LANGUAGE_NONE][0]['#default_value'] = $overall_data->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
       }
-      
   }
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone') {
 
