@@ -76,7 +76,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
       
       if (!empty($_GET['internal_clone_id'])) {
         $overall_data = node_load($_GET['internal_clone_id']);
-        $form['values']['field_story_highlights'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_highlights[LANGUAGE_NONE][0]['value'];
+        $form['field_story_highlights'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_highlights[LANGUAGE_NONE][0]['value'];
         
         /* code for quick file */
         $form['field_story_type'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_type[LANGUAGE_NONE][0]['value'];
