@@ -209,8 +209,8 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
     else {
       $url = '';
-      echo 'URL is empty';
-      die;
+      watchdog('ITG Akamai Exception',t('URL is empty'));
+      return;
     }
 
     $urls = explode(',', $url);
