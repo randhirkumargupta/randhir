@@ -3723,7 +3723,7 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['row_class'] = 'itg-live-blog-row col-lg-12 col-md-12 col-sm-12 col-xs-12';
+  $handler->display->display_options['style_options']['row_class'] = 'row';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -3745,7 +3745,7 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['element_wrapper_class'] = 'itg-live-blog-image col-lg-3 col-md-3 col-sm-3 col-xs-3';
+  $handler->display->display_options['fields']['field_story_small_image']['element_wrapper_class'] = 'itg-live-blog-image col-lg-3 col-md-3 col-sm-3 col-xs-6';
   $handler->display->display_options['fields']['field_story_small_image']['empty'] = '<a href="[path]" class="GoogleAnalyticsET-processed"><img width="170" height="127" src="/sites/all/themes/itg/images/itg_image170x127.jpg" alt=""></a>';
   $handler->display->display_options['fields']['field_story_small_image']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
@@ -3763,13 +3763,23 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'itg-live-blog-title col-lg-9 col-md-9 col-sm-9 col-xs-9';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['element_wrapper_class'] = 'itg-live-blog-date col-lg-9 col-md-9 col-sm-9 col-xs-9';
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['label'] = '';
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['php']['element_wrapper_class'] = 'itg-live-blog-title col-lg-9 col-md-9 col-sm-9 col-xs-9';
+  $handler->display->display_options['fields']['php']['element_wrapper_class'] = 'itg-live-blog-title col-lg-9 col-md-9 col-sm-9 col-xs-6';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'if (function_exists(\'itg_common_get_smiley_title\')) {
 	$var = l(itg_common_get_smiley_title($row->nid, 0, 100, TRUE), "node/" . $row->nid, array("html" => TRUE));
@@ -3777,21 +3787,12 @@ function feature_for_blog_views_default_views() {
 else {
 	$var = print l(strip_tags(mb_strimwidth($row->title, 0, 120, "..")), "node/" . $row->nid);
 }
-return $var;';
+return $var."<div class=\'itg-live-blog-date\'>".format_date($row->created, \'itg\')."</div>";';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
 echo $value;
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['element_wrapper_class'] = 'itg-live-blog-date col-lg-9 col-md-9 col-sm-9 col-xs-9';
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
