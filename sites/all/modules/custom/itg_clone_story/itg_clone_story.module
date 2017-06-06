@@ -76,7 +76,8 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
       
       if (!empty($_GET['internal_clone_id'])) {
         $overall_data = node_load($_GET['internal_clone_id']);
-
+        $form_state['values']['field_story_highlights'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_highlights[LANGUAGE_NONE][0]['value'];
+        
         /* code for quick file */
         $form['field_story_type'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_type[LANGUAGE_NONE][0]['value'];
         $form['field_story_select_magazine'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
@@ -130,9 +131,10 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
             $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'][] = $value['value'];
           }
         }
+        $form['field_story_comment_question'][LANGUAGE_NONE][0]['value']['#value'] = $overall_data->field_story_comment_question[LANGUAGE_NONE][0]['value'];
         $form['field_story_syndication'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_syndication[LANGUAGE_NONE][0]['value']);
         $form['field_story_syndications_photo'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_syndications_photo[LANGUAGE_NONE][0]['value']);
-
+        
         /* social media */
         if (!empty($overall_data->field_story_social_media_integ[LANGUAGE_NONE][0]['value'])) {
           foreach ($overall_data->field_story_social_media_integ[LANGUAGE_NONE] as $key => $value) {
