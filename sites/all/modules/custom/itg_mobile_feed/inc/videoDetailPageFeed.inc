@@ -82,7 +82,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     //$output = "video detail page";
 
     global $base_url;
-    $ttl = 10;
+    $ttl = 300;
     $node = node_load($nid);
     //print_ar($node); exit();
     $title = $node->title;
@@ -103,10 +103,6 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $is_fav = getNidIsFavorite($nid);
     $syndications = getNidIsSyndications($nid);
     $field_video_upload = $node->field_video_upload['und'][0]['value'];
-
-    $load_collection = field_collection_item_load($field_video_upload);
-    $video_collection_id = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
-
     $file_id = file_usage($field_video_upload);
     // get video path
     $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
@@ -118,7 +114,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
 
     //get video tag
-    $videotag = getVideoTagDetail($video_path_info,$video_collection_id);
+    $videotag = getVideoTagDetail($video_path_info,$file_id);
     if ($videotag) {
       $output .= $videotag;
     }
