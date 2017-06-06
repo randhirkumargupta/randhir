@@ -1674,6 +1674,10 @@ function itg_widget_query_poll_widget_alter_tag_alter(QueryAlterableInterface $q
   $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value' , $cur_date , '>='));
 }
 
+function itg_widget_query_category_wise_content_list_alter(QueryAlterableInterface $query) {
+  $query->groupBy('node.nid');
+}
+
 /**
  * _get_content_type_for_widget
  * 

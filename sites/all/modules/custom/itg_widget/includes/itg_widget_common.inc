@@ -1587,14 +1587,14 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'category_wise_content_list' && ($view->current_display == 'section_wise_content_listing' || $view->current_display == 'grid_view')) {
-    $term_id = arg(2);
-    if ($term_id) {
-      foreach ($query->where[1]['conditions'] as $key => $condition) {
-        if ($condition['field'] == 'itg_widget_order.cat_id') {
-          $query->where[1]['conditions'][$key]['value'] = $term_id;
-        }
-      }
-    }
+//    $term_id = arg(2);
+//    if ($term_id) {
+//      foreach ($query->where[1]['conditions'] as $key => $condition) {
+//        if ($condition['field'] == 'itg_widget_order.cat_id') {
+//          $query->where[1]['conditions'][$key]['value'] = $term_id;
+//        }
+//      }
+//    }
   }
   // Adding relationship.
   if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
@@ -2998,13 +2998,13 @@ function itg_widget_node_update($node) {
       $cat_id = $node->field_story_category['und'];
 
       db_delete('itg_widget_order')
-          ->condition('widget', 'section_wise_order')
+          ->condition('widget', 'section_wise_widget')
           ->condition('content_type', 'All')
           ->condition('nid', $nid)->execute();
 
       db_delete('itg_widget_order_section')
           ->condition('content_type', $node->type)
-          ->condition('widget', 'section_wise_order')
+          ->condition('widget', 'section_wise_widget')
           ->condition('nid', $nid)->execute();
 
       foreach ($cat_id as $category) {
