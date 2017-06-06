@@ -93,7 +93,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
     case 'videogallery_node_form':
-
+      $form['field_story_expert_description']['und'][0]['#format'] = 'icon_format';
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
@@ -101,9 +101,11 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       foreach ($form['field_video_upload']['und'] as $delta => $field) {
 
         if (is_numeric($delta)) {
-          if (isset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'])) {
-            if ($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'] < 1) {
-              unset($form['field_video_upload']['und'][$delta]);
+          if (arg(2) == 'edit') {
+            if (isset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'])) {
+              if ($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'] < 1) {
+                unset($form['field_video_upload']['und'][$delta]);
+              }
             }
           }
         }
@@ -120,7 +122,6 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       else {
         drupal_set_title('Edit Upload Video');
       }
-
       $form['#after_build'][] = 'itg_videogallery_after_build';
       $form['#validate'][] = 'itg_videogallery_custom_validate';
       $form['actions']['cancel'] = array(
