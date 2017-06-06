@@ -1,11 +1,11 @@
 <?php
-$arg = arg(2);
+$arg = arg(1);
 if (function_exists('itg_common_get_node_title') && !empty($arg)) {
   $nid = base64_decode($arg);
    global $base_url;
    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-  $videocopy_url =  $base_url.'/embed/videogallery-embed?gid='.$_GET['gid'];
+  $videocopy_url =  $base_url.'/embed-video/'.$arg;
   $title = itg_common_get_node_title($nid);
   $videoids = $data;
   $video_node = node_load($nid);

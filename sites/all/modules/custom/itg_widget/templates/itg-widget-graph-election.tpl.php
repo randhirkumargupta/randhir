@@ -1,5 +1,5 @@
 <?php
-if (!empty($data)) : global $base_url; ?>
+if (!empty($data)) : global $base_url,$theme; ?>
 
 
 <?php 

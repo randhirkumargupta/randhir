@@ -2,7 +2,35 @@
 
 $args = drush_get_arguments(); // Get the arguments.
 
-print_name_video();
+
+ itg_widget_order_all_data_move();
+  
+  function itg_widget_order_all_data_move() {
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->fields('iwo');
+    $query->condition('content_type', 'all', '=');
+    $result = $query->execute();
+    foreach($result as $rel) {
+      
+      db_insert('itg_widget_order_all') // Table name no longer needs {}
+      ->fields(array(
+        'nid' => $rel->nid,
+        'cat_id' => $rel->cat_id,
+        'content_type' => $rel->content_type,
+        'widget' => $rel->widget,
+        'weight' => $rel->weight,
+        'extra' => $rel->extra,
+        'constituency' => $rel->constituency,
+        'state' => $rel->state,
+        'id' => $rel->id,
+      ))
+      ->execute();
+      print 'cat_id -> '.$rel->cat_id. ', Node_id -> '.$rel->nid;
+    }
+  }
+
+
+//print_name_video();
 /**
  * shift marking for story
  */

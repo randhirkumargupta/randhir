@@ -98,7 +98,16 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
+      foreach ($form['field_video_upload']['und'] as $delta => $field) {
 
+        if (is_numeric($delta)) {
+          if (isset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'])) {
+            if ($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'] < 1) {
+              unset($form['field_video_upload']['und'][$delta]);
+            }
+          }
+        }
+      }
       if ($user->uid != 1) {
         unset($form['field_video_configurations']['und']['#options']['comment']);
       }
@@ -831,7 +840,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
     );
     itg_videogallery_update_embedcode_url($result['id']);
     $playlist_id = variable_get('video_property');
-  //  $resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
+    //  $resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
     $dur = $api->get(
         '/video/' . $result['id'], array('fields' => array('duration'))
     );
@@ -1122,7 +1131,7 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-   $items['video-test'] = array(
+  $items['video-test'] = array(
     'page callback' => 'itg_videogallery_video_test',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -1220,9 +1229,9 @@ function itg_videogallery_menu() {
  */
 function itg_videogallery_video_test() {
 
-    $api = itg_videogallery_dailymotion_api();
- $data= $api->post('/video/x5p4sec?next_video=http://www.dailymotion.com/video/x5p4sdq');
- p($data);
+  $api = itg_videogallery_dailymotion_api();
+  $data = $api->post('/video/x5p4sec?next_video=http://www.dailymotion.com/video/x5p4sdq');
+  p($data);
 }
 
 /**
@@ -3678,7 +3687,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     );
     $result['id'] = end(explode('/', $dur['embed_url']));
     $playlist_id = variable_get('dailymotion_playlist_id');
-     //$resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
+    //$resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
     $result['encoding_progress'] = $dur['encoding_progress'];
     $result['publishing_progress'] = $dur['publishing_progress'];
