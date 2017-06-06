@@ -82,7 +82,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     //$output = "video detail page";
 
     global $base_url;
-    $ttl = 300;
+    $ttl = 10;
     $node = node_load($nid);
     //print_ar($node); exit();
     $title = $node->title;
