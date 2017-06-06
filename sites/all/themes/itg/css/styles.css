@@ -14203,7 +14203,23 @@ span.close_btt {
   line-height: 23px;
   font-size: 15px;
 }
+
+/*============Live Blog================*/
+.page-live-blogs.section-live-blogs h1#page-title{font:500 30px "Roboto", sans-serif; border-top:1px solid #dddddd;border-bottom:1px solid #dddddd; 
+padding:7px 0; margin-bottom:25px;}
+.page-live-blogs.section-live-blogs .view-live-blogs .view-content .views-row{ margin-bottom:40px;}
+.page-live-blogs.section-live-blogs .view-live-blogs .view-content .field-content{font:500 20px/24px "Roboto", sans-serif; color:#333}
+.page-live-blogs.section-live-blogs .view-live-blogs .view-content .field-content .itg-live-blog-date{font:300 13px/18px "Roboto", sans-serif;
+ color:#a1a1a1;text-transform: uppercase; margin-top:7px}
+.item-list ul.pager{display: table; width: 100%; text-align: center;}
+.item-list ul.pager li{display: inline-block; padding:8px 13px; color:#333;font:500 16px "Roboto", sans-serif; cursor: pointer; border-radius:100%}
+.item-list ul.pager li a{font:500 16px "Roboto", sans-serif; display: block; color:#333}
+.item-list ul.pager li.pager-current{ background:#347ab6; color:#fff}
+.item-list ul.pager li.pager-current a{ color:#fff}
+
+
 @media screen and (min-width: 768px) {
+	.sidebars{ text-align: center}
   .story-section .story-right .description .social-share.social-share-embed ul li a, .story-section .story-right .description .social-share.social-share-embed ul li span {
     width: 23px;
     height: 23px;
@@ -14266,5 +14282,17 @@ span.close_btt {
   .modal-lg {
     width: 900px;
   }
+  
 }
 /* End of CSS For Story Modal Popup and Carousel */
+@media (max-width: 767px) {
+	.page-live-blogs.section-live-blogs .view-live-blogs .view-content .views-row.row{ padding:0; margin:0 0 15px 0;15px; border-bottom: 1px solid #ccc;
+    float: left; padding-bottom: 15px;}
+	.page-live-blogs.section-live-blogs .view-live-blogs .view-content .views-row{ margin-bottom:15px;}
+	.page-live-blogs.section-live-blogs .view-live-blogs .view-content .views-row .itg-live-blog-image{ padding:0 ; margin:0}
+	.page-live-blogs.section-live-blogs .view-live-blogs .view-content .field-content { font: 400 15px/15px "Roboto", sans-serif;  color: #333;}
+	.page-live-blogs.section-live-blogs .view-live-blogs .view-content .field-content .itg-live-blog-date {
+    font: 400 11px/12px "Roboto", sans-serif;}
+	.page-live-blogs.section-live-blogs section.sidebar .block-itg-ads{ padding:0px;}
+	
+}
