@@ -122,7 +122,9 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       $itg_category_vocabs = get_itg_category_vocabs($form_state);
       $sections = itg_category_multiple_get_section($itg_category_vocabs, $content_type);
       $options_category = array('_none' => '--Select-');
-
+              
+      natcasesort($sections);
+      
       $form['category_holder'] = array();
 
       $form['category_holder']['itg_section'] = array(
