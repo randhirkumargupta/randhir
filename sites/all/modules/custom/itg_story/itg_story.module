@@ -163,10 +163,27 @@ function itg_story_form_alter(&$form , &$form_state , $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url , $user;
+      
+      // code for body field config
+      $form['body']['#states'] = array(
+        'required' => array(
+          ':input[name="field_story_type[und]"]' => array('value' => 'other_story'),
+        )
+      );
+      
+      
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
-        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
+        
+        if (isset($form['field_story_configurations'][LANGUAGE_NONE]['#default_value']) && count($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'])) {
+          $values = array_merge($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'], array('commentbox'));
+        }
+        else {
+          $values = array('commentbox');
+        }
+        $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $values;
       }
+      
       if ($user->uid != 1) {        
         unset($form['field_story_long_head_line']);
         unset($form['field_story_select_templates']['und']['#options']['quote']);
@@ -423,6 +440,10 @@ function itg_story_node_validate($node , $form , &$form_state) {
     // Code for category validation.
     if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
       form_set_error('edit-field-story-category-und-hierarchical-select-selects-0' , t("Section field is required."));
+    }
+    
+    if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->body[LANGUAGE_NONE][0]['value'])) {
+      form_set_error('body' , t("Description field is required."));
     }
   }
 }
