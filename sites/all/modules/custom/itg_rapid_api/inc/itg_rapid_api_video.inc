@@ -182,6 +182,9 @@ function generateVideoCategoryList($tid, $pageno) {
       $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
       //echo "<pre>"; print_r($video_formats);exit();
       $video_path_mp4 = $video_formats['video_path_mp4'];
+      if(!$video_path_mp4){
+          $video_path_mp4 = $video_path_info['video_path_mp4'];
+      }
       $filesize = $video_path_info['filesize'];
       $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
       //video url end
@@ -421,6 +424,9 @@ function generateProgramCategoryList($tid, $pageno) {
       $video_formats = all_video_format($daily_motion_fid);
       $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
       $video_path_mp4 = $video_formats['video_path_mp4'];
+      if(!$video_path_mp4){
+          $video_path_mp4 = $video_path_info['video_path_mp4'];
+      }
       $filesize = $video_path_info['filesize'];
       $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
       //video url end
