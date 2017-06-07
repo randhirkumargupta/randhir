@@ -28,7 +28,16 @@
               }
               ?> 
 
-              <h2 title="<?php echo strip_tags($desc); ?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
+              <h2 title="<?php echo strip_tags($desc); ?>">
+                <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($row['nid'], 0, 68), "node/" . $row['nid'], array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                  }
+                ?>
+              </h2>           
             </div>
 
 
@@ -42,7 +51,16 @@
                 print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
               }
               ?>
-              <h3 title="<?php echo strip_tags($desc); ?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
+              <h3 title="<?php echo strip_tags($desc); ?>">
+                <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($row['nid'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                  }
+                ?>
+              </h3>
             </div>
 
           <?php } ?>
@@ -63,7 +81,16 @@
 
               if ($index > 2) {
                 ?>
-                <li title="<?php echo strip_tags($desc); ?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+                <li title="<?php echo strip_tags($desc); ?>">
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($row['nid'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                  }
+                ?>
+                </li>
 
 
               <?php } ?>
