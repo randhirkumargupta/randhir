@@ -1518,6 +1518,13 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
+//      $image_url = $expode_video_info[3];
+//        $imagedata = file_get_contents($image_url);
+//        $image_url = 'itg' . time() . end(explode('/', $image_url));
+//        $image_extension = end(explode('.', $image_url));
+//        $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+      // $image_fid = $file_data_temp->fid;
+      $image_fid = 1302061;
       $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
@@ -1548,7 +1555,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
             'solr_video_thumb' => $expode_video_info[3],
           ))
           ->execute();
-      $return_fid[] = $file->fid;
+      $return_fid[] = $file->fid . '#' . $image_fid;
     }
 //}
   }
@@ -1792,9 +1799,10 @@ function daily_motion_video_dashboard_rows() {
         }
       }
     }
-    if($record->dailymotion_published ==1) {
+    if ($record->dailymotion_published == 1) {
       $video_status = 'Publish';
-    }else {
+    }
+    else {
       $video_status = 'Unpublish';
     }
     $rows[] = array(
@@ -2041,10 +2049,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'Thumbnail image assign to node from dailymotion.',
     'callback' => 'itg_videogallery_thumb_assign',
   );
-  $items['draft-video-publish-after-local-video-readytouse'] = array(
-    'description' => 'Cron use for make publish node after check video status ready to play.',
-    'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
-  );
+//  $items['draft-video-publish-after-local-video-readytouse'] = array(
+//    'description' => 'Cron use for make publish node after check video status ready to play.',
+//    'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
+//  );
   $items['ftp_file_save'] = array(
     'description' => 'Ftp file save in file managed table.',
     'callback' => 'itg_videogallery_ftp_file_insert',
@@ -2081,19 +2089,18 @@ function itg_videogallery_cronapi($op, $job = NULL) {
 //    'description' => 'This crone use for replaced video remove from other content type.',
 //    'callback' => 'itg_videogallery_remove_video_with_child',
 //  );
-
-  $items['remove-video-if-parent-site-delete'] = array(
-    'description' => 'This crone use for remove video if parent site remove this video from video article.',
-    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
-  );
+//  $items['remove-video-if-parent-site-delete'] = array(
+//    'description' => 'This crone use for remove video if parent site remove this video from video article.',
+//    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
+//  );
   $items['video-update-embed-video-id'] = array(
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_video_update_embeded_url',
   );
-  $items['video-draft-video-check'] = array(
-    'description' => 'This crone use for Update video id embeded.',
-    'callback' => 'itg_videogallery_video_draft_node_check',
-  );
+//  $items['video-draft-video-check'] = array(
+//    'description' => 'This crone use for Update video id embeded.',
+//    'callback' => 'itg_videogallery_video_draft_node_check',
+//  );
   return $items;
 }
 
@@ -2173,9 +2180,15 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
-  
+
   // Here deleted video
   itg_videogallery_remove_video_with_child();
+  // This crone use for remove video if parent site remove this video from video article
+  itg_videogallery_remove_video_id_parent_site_delete();
+  // This crone use for if node is publish.
+  itg_videogallery_video_draft_node_check();
+  //Cron use for make publish node after check video status ready to play
+  itg_videogallery_publish_node_after_video_ready_by_dm();
 }
 
 /**
@@ -3296,20 +3309,19 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
     $file_ids[$key_val]['filename'] = $file_id->filename;
     $key_val++;
   }
-
   $i = 0;
-
-
   $videogallery_popup_data_fids_array = array();
   if (isset($file_entity_holder_nums) && !empty($file_entity_holder_nums)) {
     $videogallery_popup_data_fids_array = explode(',', $file_entity_holder_nums);
   }
 
   if (isset($videogallery_popup_data_fids_array) && count($videogallery_popup_data_fids_array) > 0) {
-
+    $exploadid = explode('#', $videogallery_popup_data_fids_array[$i]);
     foreach ($form_state['field']['field_video_upload']['und']['entity'] as $key => $filed_collection) {
       if (!isset($filed_collection->field_videogallery_video_upload['und'])) {
-        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $videogallery_popup_data_fids_array[$i];
+        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $exploadid[0];
+        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_video_thumbnail['und'][0]['fid'] = $exploadid[1];
+
         $i++;
       }
     }
@@ -3562,7 +3574,7 @@ function itg_videogallery_s3_file_to_dm() {
  * Implements function for get options for Local FTP file list and used
  * @return array
  */
-function itg_videogallery_ftp_file_insert_cron() {
+function c() {
 
   global $user;
   $file_path = drupal_realpath('public://');

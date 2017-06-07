@@ -34,8 +34,8 @@
                             for (var x in parsed) {
                                 video_fids.push(parsed[x]);
                             }
-
-                            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
+                          var explode = parsed[0].split('#');
+                            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(explode[0]);
                             parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
 
                             //parent.jQuery("#" + video_field_id + "-button").mousedown();
@@ -65,9 +65,9 @@
             });
 
             $(".ftp-server .asso-filed").click(function(e) {
-
                 // Getting selected videos from checkboxes        
                 var video_fids = [];
+                 var image_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
                 $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function() {
@@ -82,16 +82,18 @@
                         type: 'post',
                         data: {'checkvalue': selected_check_boxes_values},
                         success: function(data) {
-                            var as = JSON.parse(data);
                             var parsed = JSON.parse(data);
-
                             for (var x in parsed) {
+                              var explodedata =parsed[x].split('#');
                                 video_fids.push(parsed[x]);
+                                image_fids.push(explodedata[1]);
                             }
 
                             parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
                             parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
-                            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                           // parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(image_fids.join());
+
+                          jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                             //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                             parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
