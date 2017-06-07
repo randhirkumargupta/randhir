@@ -1518,13 +1518,14 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
-//      $image_url = $expode_video_info[3];
-//        $imagedata = file_get_contents($image_url);
-//        $image_url = 'itg' . time() . end(explode('/', $image_url));
-//        $image_extension = end(explode('.', $image_url));
-//        $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-      // $image_fid = $file_data_temp->fid;
-      $image_fid = 1302061;
+      $image_url = $expode_video_info[3];
+        $imagedata = file_get_contents($image_url);
+        $image_url = 'itg' . time() . end(explode('/', $image_url));
+        $image_extension = end(explode('.', $image_url));
+        $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+       $image_fid = $file_data_temp->fid;
+      
+      //$image_fid = 1302061;
       $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
