@@ -442,6 +442,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
           $is_node_draft = 0;
           if ($form_state['node']->status == 0) {
             $is_node_draft = 1;
+            drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
           }
           $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
               ->fields(array(
@@ -562,6 +563,7 @@ function itg_videogallery_node_insert($node) {
               $is_node_draft = 0;
               if ($node->status == 0) {
                 $is_node_draft = 1;
+                drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
               }
               $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
                   ->fields(array(
