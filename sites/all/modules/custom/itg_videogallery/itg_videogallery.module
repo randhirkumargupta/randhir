@@ -1519,13 +1519,29 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
       $image_url = $expode_video_info[3];
-        $imagedata = file_get_contents($image_url);
-        $image_url = 'itg' . time() . end(explode('/', $image_url));
-        $image_extension = end(explode('.', $image_url));
-        $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-       $image_fid = $file_data_temp->fid;
-      
-      //$image_fid = 1302061;
+      $imagedata = file_get_contents($image_url);
+      $image_name = end(explode('/', $image_url));
+      $image_url = 'itg' . time() . end(explode('/', $image_url));
+      $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+      $file_image = file_load($file_data_temp->fid);
+      $image = image_load($file_image->uri);
+      $filepath = file_default_scheme() . '://crop_image';
+      $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
+      $image_name = time() . $image_name;
+      $sav = image_save($image, $filepath . '/' . $image_name);
+      $uri = $filepath . '/' . $image_name;
+      $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+      $file = new StdClass;
+      $file->uid = $user->uid;
+      $file->filename = basename($uri);
+      $file->uri = $uri;
+      $file->filemime = file_get_mimetype($uri);
+      $file->filesize = @filesize($uri);
+      $file->timestamp = REQUEST_TIME;
+      $file->is_new = TRUE;
+      $file->status = FILE_STATUS_PERMANENT;
+      $file = file_save($file);
+      $image_fid = $file->fid;
       $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
