@@ -11,11 +11,11 @@ if($arg[0] == 'event') {
 } elseif(!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
   $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
 } 
-
 $node = itg_event_backend_get_event_node('node');
 if (!empty($node) && ($node->type == 'event_backend')) {
   $event_start_date = date('F d, Y', strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']));
-  $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
+  $registration_close = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
+  $force_registration_flag = $node->field_force_registration_open[LANGUAGE_NONE][0]['value'];
   $event_location = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   $event_config_home = $node->field_config_home[LANGUAGE_NONE][0]['value'];
   $event_config_programme = $node->field_config_programme[LANGUAGE_NONE][0]['value'];
@@ -58,7 +58,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {
             if ($event_config_speakers) {
               print '<li>'.l('Speakers', $baseurl.'/speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
-            if($registration_close >= time()) {
+            if($registration_close >= time() || $force_registration_flag == 1) {
               print '<li>'.l('Registration', $baseurl.'/registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
             if ($event_config_sponsors) {
@@ -71,7 +71,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {
               if(!empty($flash_old)){
                 $flash_old_event = $flash_old;
               }
-              print '<li>'.l('Flashback', 'javascript:void();', array('fragment' => 'javascript:void();', 'external' => TRUE), array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              print '<li>'.l('Flashback', $baseurl, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }            
 
           ?>

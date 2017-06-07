@@ -36,7 +36,7 @@ function itg_widget_init() {
   $settings = array();
   $settings['base_url'] = $base_url;
   drupal_add_js(array('itg_widget' => array('settings' => $settings)) , array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module' , 'itg_widget') . '/js/itg_widget.js' , array('type' => 'file' , 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module' , 'itg_widget') . '/js/itg_widget.js' , array('type' => 'file' , 'scope' => 'footer'));  
 }
 
 /**
@@ -1769,4 +1769,19 @@ function update_something(&$item , $key) {
   if ($item == 'itg_widget_order_weight') {
     $item = 'node_itg_widget_order_weight';
   }
+}
+
+
+/**
+ * Function gives sosorry feature and remix content data.
+ * @param type string
+ */
+function __get_sosorry_video_nid($type = 'feature') {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin("node", "n", "n.nid=iwo.nid");
+  $query->fields('iwo', array("nid"));
+  $query->condition("iwo.widget", "so_sorry_widget");
+  $query->condition("n.status", 1);
+  $query->condition("iwo.extra", $type);
+  return $query->execute()->fetchField();
 }
