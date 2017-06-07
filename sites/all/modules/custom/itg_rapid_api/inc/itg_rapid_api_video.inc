@@ -174,9 +174,14 @@ function generateVideoCategoryList($tid, $pageno) {
       $field_video_upload = $resvalue['field_video_upload_value'];
       $file_id = file_usage($field_video_upload);
       //to get the video of all the other formats
-      $video_formats = all_video_format($file_id);
-      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
-      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $load_collection = field_collection_item_load($field_video_upload);
+      
+      $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+      $video_formats = all_video_format($video_formats);
+      
+      $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
+      //echo "<pre>"; print_r($video_formats);exit();
+      $video_path_mp4 = $video_formats['video_path_mp4'];
       $filesize = $video_path_info['filesize'];
       $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
       //video url end
@@ -215,6 +220,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_download_url'] = "$stream_h264_hd_url";
         }
         else{
+            $video_path_mp4 = $video_path_info['video_path_mp4'];
             $photo_list_array[$listcount]['v_is_default_player'] = "0";
             $photo_list_array[$listcount]['v_url'] = "$stream_h264_hd_url";
             $photo_list_array[$listcount]['v_download_url'] = "$video_path_mp4";
@@ -410,9 +416,11 @@ function generateProgramCategoryList($tid, $pageno) {
       $field_video_upload = $resvalue['field_video_upload_value'];
       $file_id = file_usage($field_video_upload);
       //to get the video of all the other formats
-      $video_formats = all_video_format($file_id);
-      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
-      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $load_collection = field_collection_item_load($field_video_upload);
+      $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+      $video_formats = all_video_format($daily_motion_fid);
+      $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
+      $video_path_mp4 = $video_formats['video_path_mp4'];
       $filesize = $video_path_info['filesize'];
       $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
       //video url end
@@ -449,10 +457,11 @@ function generateProgramCategoryList($tid, $pageno) {
         //if($video_path_mp4){
         if (strpos($video_path_mp4,'dailymotion') !== false) {
             $photo_list_array[$listcount]['p_is_default_player'] = "1";
-            $photo_list_array[$listcount]['p_url'] = "https://www.dailymotion.com/video/x5kzywu";//"$video_path_mp4";
+            $photo_list_array[$listcount]['p_url'] = "$video_path_mp4";
             $photo_list_array[$listcount]['p_download_url'] = "$stream_h264_hd_url";
         }
         else{
+            $video_path_mp4 = $video_path_info['video_path_mp4'];
             $photo_list_array[$listcount]['p_is_default_player'] = "0";
             $photo_list_array[$listcount]['p_url'] = "$stream_h264_hd_url";
             $photo_list_array[$listcount]['p_download_url'] = "$video_path_mp4";
