@@ -347,11 +347,43 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
           if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
             form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
           }
+        }
+    }
+  }
+ /****Early Bird Offer Fields*******/
+  if($event_type == 'paid'){
+    foreach($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+        if (is_numeric($key)) {
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_individual_regi', t('Early Bird Individual Registration Fee is required.'));
+          }
           
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+          }
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][	field_early_bird_individual_regi', t('Early Bird Individual Registration Fee should be less then Early Bird Group Registration Fee (for 5 member)'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) should be less then Early Bird Group Registration Fee (upto 10 member).'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+          }
           
         }
     }
-  } 
+  }
   
   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second") && (!isset($form['field_no_of_tickets']['#tabwise']))) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
@@ -539,6 +571,11 @@ function itg_event_backend_after_build($form, &$form_state) {
   $form['title']['#title'] = 'Event Title';
 
   $form['field_ticket_group_type']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+    ),
+  );
+  $form['field_early_bird']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
