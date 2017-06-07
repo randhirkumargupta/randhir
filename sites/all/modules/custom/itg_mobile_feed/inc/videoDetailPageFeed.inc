@@ -104,8 +104,12 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $syndications = getNidIsSyndications($nid);
     $field_video_upload = $node->field_video_upload['und'][0]['value'];
     $file_id = file_usage($field_video_upload);
+
+    $load_collection = field_collection_item_load($field_video_upload);
+    $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+
     // get video path
-    $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
+    $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
     $metatags_title = $node->metatags;
     $metatags_description = $node->description;
 
@@ -114,7 +118,7 @@ function generateVideoDetailPageFeed($nid, $file_name='', $term_feed_path='', $t
     $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
 
     //get video tag
-    $videotag = getVideoTagDetail($video_path_info,$file_id);
+    $videotag = getVideoTagDetail($video_path_info,$daily_motion_fid);
     if ($videotag) {
       $output .= $videotag;
     }
@@ -308,7 +312,7 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
 function getDailymotionPath($fid, $filename){
   //echo "hi".$fid; exit();
   $query = db_select('dailymotion_response_details', 'drd');
-  $query->condition('drd.fid', $fid);
+  $query->condition('drd.name', $filename);
   $query->fields('drd', array('title', 'channel', 'type', 'video_id', 'video_duration', 'dailymotion_thumb_url', 'name', 'upload_time'));
   $results = $query->execute()->fetchAll();
   $channel = $results[0]->channel;
