@@ -1716,7 +1716,8 @@ function daily_motion_video_dashboard_rows() {
     t('Channel'),
     t('Uploaded Time'),
     t('Video Id'),
-    t('Status'),
+    t('Video Status'),
+    t('DM Status'),
     t('Action'),
   );
 
@@ -1791,12 +1792,18 @@ function daily_motion_video_dashboard_rows() {
         }
       }
     }
+    if($record->dailymotion_published ==1) {
+      $video_status = 'Publish';
+    }else {
+      $video_status = 'Unpublish';
+    }
     $rows[] = array(
       ++$sn,
       $record->name,
       strtoupper($record->type),
       date('d-M-Y H:i:s', $record->upload_time),
       $record->video_id,
+      $video_status,
       $status_flag,
       $delete_link
     );
@@ -2070,10 +2077,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is use for store video birates urls',
     'callback' => 'itg_videogallery_video_bitrate',
   );
-  $items['content-remove-video-with-child'] = array(
-    'description' => 'This crone use for replaced video remove from other content type.',
-    'callback' => 'itg_videogallery_remove_video_with_child',
-  );
+//  $items['content-remove-video-with-child'] = array(
+//    'description' => 'This crone use for replaced video remove from other content type.',
+//    'callback' => 'itg_videogallery_remove_video_with_child',
+//  );
 
   $items['remove-video-if-parent-site-delete'] = array(
     'description' => 'This crone use for remove video if parent site remove this video from video article.',
@@ -2166,6 +2173,9 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
+  
+  // Here deleted video
+  itg_videogallery_remove_video_with_child();
 }
 
 /**
