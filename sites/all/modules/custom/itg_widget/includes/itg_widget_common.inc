@@ -1042,7 +1042,8 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
           ->distinct()
           ->fields('fdr' , array('field_reporter_profile_type_value' , 'field_reporter_profile_type_value'));
       $options = $query_options->execute()->fetchAllKeyed();
-      array_unshift($options , 'Any');
+      //array_unshift($options , 'Any');
+      $options = array_merge(array("" => '- Any -'), $options);
       $form['byline_names'] = array(
         '#type' => 'textfield' ,
         '#title' => 'Byline' ,
@@ -1055,7 +1056,8 @@ function itg_widget_form_views_exposed_form_alter(&$form , &$form_state , $form_
         '#type' => 'select' ,
         '#title' => 'Profile Type' ,
         '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "" ,
-        '#options' => drupal_map_assoc($options) ,
+        //'#options' => drupal_map_assoc($options) ,
+        '#options' => $options ,
       );
       $form['#info']['filter-byline-names']['value'] = 'byline_names';
       $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
@@ -2748,7 +2750,7 @@ function get_rhs_block_display_condtion($delta = '') {
           return TRUE;
         }
 
-        if ((!empty($arg[1]) && in_array($arg[1] , $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1] , $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2757,7 +2759,7 @@ function get_rhs_block_display_condtion($delta = '') {
         if ($arg[0] == 'gethomecarddata') {
           return TRUE;
         }
-        if ((!empty($arg[1]) && in_array($arg[1] , $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1] , $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2766,7 +2768,7 @@ function get_rhs_block_display_condtion($delta = '') {
         if ($arg[0] == 'gethomecarddata') {
           return TRUE;
         }
-        if ((!empty($arg[1]) && in_array($arg[1] , $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1] , $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'livetv' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;

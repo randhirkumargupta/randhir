@@ -19,6 +19,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form': // Video Gallery    
     case 'blog_node_form': // Blog
     case 'podcast_node_form': // Podcast
+    case 'reporter_node_form': // reporter OR Byline
 
       $content_type = '';
       $itg_category_multiple_prev_data = '';
@@ -106,11 +107,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       // Code started for generating options for the primary category 
 
       $complete_structure = array_merge(
-         isset($itg_category_multiple_prev_data->section)?  (array)$itg_category_multiple_prev_data->section:array(), 
-         isset($itg_category_multiple_prev_data->category)?  (array)$itg_category_multiple_prev_data->category:array(), 
-         isset($itg_category_multiple_prev_data->sub_category)?  (array)$itg_category_multiple_prev_data->sub_category:array(), 
-         isset($itg_category_multiple_prev_data->sub_sub_category)?  (array)$itg_category_multiple_prev_data->sub_sub_category:array(), 
-         isset($itg_category_multiple_prev_data->sub_sub_sub_category)?  (array)$itg_category_multiple_prev_data->sub_sub_sub_category:array()
+          isset($itg_category_multiple_prev_data->section) ? (array) $itg_category_multiple_prev_data->section : array(), isset($itg_category_multiple_prev_data->category) ? (array) $itg_category_multiple_prev_data->category : array(), isset($itg_category_multiple_prev_data->sub_category) ? (array) $itg_category_multiple_prev_data->sub_category : array(), isset($itg_category_multiple_prev_data->sub_sub_category) ? (array) $itg_category_multiple_prev_data->sub_sub_category : array(), isset($itg_category_multiple_prev_data->sub_sub_sub_category) ? (array) $itg_category_multiple_prev_data->sub_sub_sub_category : array()
       );
 
       $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
@@ -125,7 +122,9 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       $itg_category_vocabs = get_itg_category_vocabs($form_state);
       $sections = itg_category_multiple_get_section($itg_category_vocabs, $content_type);
       $options_category = array('_none' => '--Select-');
-
+              
+      natcasesort($sections);
+      
       $form['category_holder'] = array();
 
       $form['category_holder']['itg_section'] = array(
@@ -181,11 +180,21 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         '#size' => 10,
         '#default_value' => $sub_sub_sub_category_default_options,
       );
+      $primary_category_type = NULL;
+      $primary_category_req_flag = NULL;
+      if ($form_id == 'reporter_node_form') {
+        $primary_category_req_flag = FALSE;
+        $primary_category_type = 'hidden';
+      }
+      else {
+        $primary_category_req_flag = TRUE;
+        $primary_category_type = 'select';
+      }
 
       $form['category_holder']['itg_primary_category'] = array(
-        '#type' => 'select',
+        '#type' => $primary_category_type,
         '#size' => '10',
-        '#required' => TRUE,
+        '#required' => $primary_category_req_flag,
         '#title' => t('Primary Category'),
         '#description' => t('Primary Category'),
         '#validated' => TRUE,
@@ -223,7 +232,7 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
               "machine_name" => array('$in' => $itg_category_vocabs),
               "content_type" => array('$regex' => $content_type)
             )
-        );
+        )->sort(array("name" => 1));
         foreach ($category_data as $chunk_data) {
           $data[$chunk_data['tid']] = $chunk_data['name'];
         }

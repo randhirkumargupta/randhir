@@ -584,8 +584,6 @@ function itg_newsletter_node_update($node) {
 
       break;
 
-    default:
-      break;
   }
 }
 
@@ -617,7 +615,8 @@ function itg_newsletter_node_validate($node , $form , &$form_state) {
     foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news) {
       if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
         $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
-        $story_status = itg_common_get_story_status($story_id);
+        // $story_status = itg_common_get_story_status($story_id);
+        $story_status = itg_newsletter_published_nids($story_id);
         if (!empty($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value']) &&
             ($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'manual')) {
           if (empty($story_id) || $story_status != 'published') {
@@ -730,7 +729,6 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
-
   // Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
@@ -740,13 +738,12 @@ function itg_newsletter_send_automatic_newsletter() {
       }
     }
   }
-
   // For Automatic
   $query_auto = db_select('itg_cron_newsletter' , 'cn');
   $query_auto->fields('cn')
       ->condition('cn.status' , 0 , '=')
       ->condition('cn.type' , 'automatic' , '=')
-      ->condition('cn.scheduled_time' , time() , '>=');
+      ->condition('cn.scheduled_time' , time() , '<=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
@@ -754,9 +751,11 @@ function itg_newsletter_send_automatic_newsletter() {
   }
   // Send automatic mail
   if (!empty($automatic_nids)) {
+    watchdog('Automaitic', '<pre>'.print_r($automatic_nids, true).'</pre>');
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
       if (!empty($node_auto)) {
+        watchdog('Not empty Nid', '<pre>'.print_r($node_auto->nid, true).'</pre>');
         itg_send_mail_newsletter($node_auto , 'automatically' , 'stories');
       }
     }
@@ -942,18 +941,18 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
 }
 
 /**
- * Get top 20 stories
+ * get recent updated top 20 stories
  * @return array
  */
 function itg_newsletter_get_section_stories($section , $crontime , $previoustime) {
-
+  
   $query = db_select('node' , 'n');
   $query->join('field_data_field_story_category' , 'fsc' , 'n.nid = fsc.entity_id');
   $query->condition('n.status' , 1 , '=');
   $query->fields('n');
   $query->condition('n.type' , 'story' , '=');
   $query->condition('fsc.field_story_category_tid' , $section , 'IN');
-  $query->condition('changed' , $previoustime , '>=');
+  $query->condition('n.changed' , $previoustime , '<=');
   $query->orderBy('n.nid' , 'DESC');
   $query->range(0 , 20);
   $result = $query->execute();
@@ -961,4 +960,33 @@ function itg_newsletter_get_section_stories($section , $crontime , $previoustime
     $nids[] = $records['nid'];
   }
   return $nids;
+}
+
+/**
+ * Check if node is published node for news content
+ * @return string
+ */
+function itg_newsletter_published_nids($get_nid){
+  
+  $query = db_select('field_data_field_story_expires', 'fse');
+  $query->fields('fse');
+  $query->condition('fse.entity_id', $get_nid, '=');
+  $query->condition('fse.bundle', 'story', '=');
+  $result = $query->execute();
+  $expire_nodes = $result->rowCount();
+  if ($expire_nodes == 0) {
+    $query = db_select('node', 'n');
+    $query->fields('n', array('status'));
+    $query->condition('n.nid', $get_nid, '=');
+    $query->condition('n.status', 1, '=');
+    $result = $query->execute();
+    $story_status = $result->fetchField();
+    if (isset($story_status) && $story_status == 1) {
+      $story_status = "published";
+      return $story_status;
+    }
+    else {
+      return FALSE;
+    }
+  }
 }

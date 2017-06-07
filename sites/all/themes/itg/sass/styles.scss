@@ -4604,8 +4604,14 @@ h1.category-heading{
         }        
         li.itg-search-list{
             padding: 25px 0;
+            > div{
+              padding-left: 150px;
+              &.views-field-sm-field-custom-story-small-large-url{
+                padding-left: 0;
+              }
+            }
         }
-        .search-pic{
+        .search-pic, .views-field-sm-field-custom-story-small-large-url{
             width: 144px;
             height: 107px;            
             overflow: hidden;
@@ -6624,31 +6630,43 @@ section.sidebar{
     border: 1px solid #ddd;
 }
 #block-views-program-schedule-block-4{
-    .views-row{
-        .views-row{
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 10px;
-            height: 85px;
-            margin-bottom: 40px;
-            position: relative;
-                &:nth-child(4n+1){
-                    clear: left;
-                }
-                img{
-                    max-height: 100%;  
-                    max-width: 100%; 
-                    width: auto;
-                    height: auto;
-                    position: absolute;  
-                    top: 0;  
-                    bottom: 0;  
-                    left: 0;  
-                    right: 0;  
-                    margin: auto;
-                }
-            }
+  .view-display-id-block_4{
+    > .view-content{
+      > .views-row{
+        width: 24%;
+        display: inline-block;
+        vertical-align: top;
+        padding: 15px;
+        text-align: center;
+        .views-field-field-sponsor-type{
+          font-size: 16px;
+          text-transform: uppercase;
+          font-weight: 600;
+          letter-spacing: 1px;
+        }
+        .views-field-field-sponser-logo a{
+          display: block;
+          border: 1px solid #ddd;
+          padding: 10px;
+          height: 85px;
+          margin-bottom: 10px;
+          position: relative;
+          img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 0;  
+            bottom: 0;  
+            left: 0;  
+            right: 0;  
+            margin: auto;
+          }
+        }
+      }
     }
+  } 
 }
 .sign-and-win-contest, .event-registration-link{
     background: #ef3c24;
@@ -6710,7 +6728,7 @@ section.sidebar{
         }
     }   
 }
-#block-views-event-subsite-speaker-block{
+#block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block{
     .views-row{
         @include calculate-width(3);
         @include float(left);
@@ -11671,7 +11689,18 @@ span.close_btt {
     }
   }
 }
-
+.blog-description{
+  p{
+    font-size: 15px;
+    line-height: 27px;
+    padding: 10px 0;
+  }
+}
+.page-topic{
+  a#reset_button{
+    display: none;
+  }
+}
 
 
 

@@ -39,17 +39,17 @@ function itg_loyalty_reward_rules_action_info() {
  * @param int $ugc_node
  *   Node id of the old ugc node.
  */
-function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {
-  if(function_exists('itg_personalization_get_uid')) {
-    if($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
-    $user_id = itg_personalization_get_uid($node->field_story_source_id[LANGUAGE_NONE][0]['value']);
-    }
-    if($node->type == 'videogallery' || $node->type == 'story') {
-    $user_id = itg_personalization_get_uid($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']);
-    }
-  }
-  itg_loyalty_reward_earnpoint($node->nid, 'ugc', $user_id['uid']);
-}
+//function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {
+//  if(function_exists('itg_personalization_get_uid')) {
+//    if($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
+//    $user_id = itg_personalization_get_uid($node->field_story_source_id[LANGUAGE_NONE][0]['value']);
+//    }
+//    if($node->type == 'videogallery' || $node->type == 'story') {
+//    $user_id = itg_personalization_get_uid($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']);
+//    }
+//  }
+//  itg_loyalty_reward_earnpoint($node->nid, 'ugc', $user_id['uid']);
+//}
 
 /**
  * Action callback function for 'itg_loyalty_reward_visit_content_points'.

@@ -1,0 +1,5 @@
+name = apache solr entity Just in time index
+description = This module index entity at the time of insert and update
+package = Apache Solr
+core = 7.x
+dependencies[] = apachesolr

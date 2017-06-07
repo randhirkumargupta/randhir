@@ -19,7 +19,13 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  
+  $arg = arg();
+  // condition for archive story redirect
+  $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+  if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
+    $path = $base_url.'/archives/'.$arg[1].'/'.date('d-m-Y');
+    drupal_goto($path);
+  }
   //code for multidomain
   if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
     drupal_goto('user');
@@ -65,7 +71,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['embed/videogallery-embed'] = array(
+  $items['embed/%'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -632,7 +638,7 @@ function itg_common_mail($key, &$message, $params) {
   switch ($key) {
     case 'personalization_mail':
     case 'lrp_point':
-    case 'refer_a_friend':
+    case 'refer_friend':
       $message['headers'] = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
@@ -899,8 +905,10 @@ function itg_photogallery_embed() {
  * Helper function to get videogallery.
  */
 function itg_videogallery_embed() {
-  if (!empty($_GET['gid'])) {
-    $gid = base64_decode($_GET['gid']);
+
+  $arg = arg(2);
+  if (!empty($arg)) {
+    $gid = base64_decode($arg);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
       $videoids = get_video_in_fieldcollection_by_nid($gid);
     }

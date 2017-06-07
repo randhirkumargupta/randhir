@@ -13,65 +13,66 @@
  */
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
 // Mail Content Frequency
-   $current_date = time();
-   $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
-    if(!empty($newsfrequency) && ($newsfrequency == 'daily')){
-        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
-        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
-        $scheduled_time = strtotime($cron_time);
-        $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 day');
-    } else if(!empty($newsfrequency) && ($newsfrequency == 'weekly')){
-        $getweekday = $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
-        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
-        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
-        $currentday = date('l');
-        if($getweekday == $currentday){
-          $scheduled_time = strtotime($cron_time);
-          $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -7 days');
-        }
-    } elseif(!empty($newsfrequency) && ($newsfrequency == 'monthly')){
-        $getmonthdate = $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
-        $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
-        $cron_time = date('m/d/Y', $current_date).' '.$gettime . ':00';
-        $currentdate = date('j');
-        if($getmonthdate == $currentdate){
-          $scheduled_time = strtotime($cron_time);
-          $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00'. ' -1 month');
-        }
+  $current_date = time();
+  $newsfrequency = $node->field_newsl_frequency[LANGUAGE_NONE][0]['value'];
+  if (!empty($newsfrequency) && ($newsfrequency == 'daily')) {
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+    $scheduled_time = strtotime($cron_time);
+    $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 day');
+  }
+  else if (!empty($newsfrequency) && ($newsfrequency == 'weekly')) {
+    $getweekday = $node->field_newsl_day[LANGUAGE_NONE][0]['value'];
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+    $currentday = date('l');
+    if ($getweekday == $currentday) {
+      $scheduled_time = strtotime($cron_time);
+      $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -7 days');
     }
-    
+  }
+  elseif (!empty($newsfrequency) && ($newsfrequency == 'monthly')) {
+    $getmonthdate = $node->field_newsl_date[LANGUAGE_NONE][0]['value'];
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+    $currentdate = date('j');
+    if ($getmonthdate == $currentdate) {
+      $scheduled_time = strtotime($cron_time);
+      $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 month');
+    }
+  }
+
   // Mail Content Section from Select Section
   if (!empty($node->field_story_category[LANGUAGE_NONE])) {
     foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
       $cat_array[] = $values['tid'];
     }
-  }  
-  
+  }
+
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
-  $education_tid = !empty(variable_get('itg_newsletter_education_id'))? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
+  $education_tid = !empty(variable_get('itg_newsletter_education_id')) ? variable_get('itg_newsletter_education_id') : NEWSLETTER_EDUCATION_TID;
   // TODO: Define globally
   if (in_array($education_tid, $cat_array)) {
     $subscriberlist = itg_newslatter_get_subscribe_page_users_email($education_tid);
   }
   $user_email_arr = itg_newslatter_get_subscribe_users_email();
   $user_email_str = implode(',', $user_email_arr);
-  
-  if(isset($subscriberlist) && !empty($subscriberlist)){
-    $users_email_cron = array_merge($user_email_arr,$subscriberlist);
+
+  if (isset($subscriberlist) && !empty($subscriberlist)) {
+    $users_email_cron = array_merge($user_email_arr, $subscriberlist);
     $user_email_str = implode(',', $users_email_cron);
   }
-  
+
   // Get Mail content
   // Mail Content Section from Top 20 Shared/Trending
   $newsletter_content = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
   if ($type == 'stories') {
-    if (isset($newsletter_content) && $newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
+    if (isset($newsletter_content) && $newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending' || $newsletter_content == 'top_20_most_viewed') {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
     }
-
-    if (!empty($cat_array)) {
-      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp);
-    } 
+    elseif ($newsletter_content == 'select_section' && !empty($cat_array)) {
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
+    }
     else {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node);
     }
@@ -79,7 +80,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   else {
     $mail_content = itg_get_newsletter_mail_content($node, $template_node);
   }
-  
+
   // code for netcore
   if (function_exists('itg_netcore_mail_create_campaign')) {
     $data_email = array();
@@ -88,23 +89,23 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $data_email['fromEmail'] = 'care@intoday.in';
     $data_email['content'] = $mail_content;
     $create_campaign = itg_netcore_mail_create_campaign($data_email);
-    
+
     $campaign = array();
-    $campaign['messageId'] = $create_campaign['OUTPUT']['MID'] ;
+    $campaign['messageId'] = $create_campaign['OUTPUT']['MID'];
     $campaign['listId'] = NETCORE_LIST_ID;
     $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
-    
+
     watchdog("netcore campaign", '<pre>' . print_r($data_email, TRUE) . '</pre>');
     watchdog("netcore mail", '<pre>' . print_r($campaign, TRUE) . '</pre>');
   }
-  /*$params = array(
+  /* $params = array(
     'body' => $mail_content,
     'subject' => t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
-  );
+    );
 
-  $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  */
-  
+    $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+   */
+
   if ($mail_scehdule['TYPE'] == 'success') {
     drupal_set_message(t('Newsletter has been sent successfully.'));
     if ($news_eng_type == 'automatically') {
@@ -143,13 +144,12 @@ function itg_get_newsletter_mail_content($node, $template_node) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-  
+  $news_content = '';
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
     $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
-
     if ($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
     }
@@ -167,18 +167,18 @@ function itg_get_newsletter_mail_content($node, $template_node) {
 
     // Set link for newsletter title
     if ($news_detail[$news_arr['value']]->field_news_type[LANGUAGE_NONE][0]['value'] == 'internal') {
-      $link = 'node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+      $link = FRONT_URL . '/node/' . $news_detail[$news_arr['value']]->field_news_cid[LANGUAGE_NONE][0]['target_id'];
     }
     else {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
     }
 
-    $news_content = '';
+//    $news_content = '';
     if ($flag) {
       $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
-                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
     }
@@ -190,8 +190,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
-
-  $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
+  $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
   return $content;
 }
 
@@ -208,7 +207,31 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   $footerData = $template_node->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/", date('Y'), $footerData);
   
-  $content = '<!DOCTYPE html> 
+  if (!empty($newsletter_content)) {
+    if ($newsletter_content == 'top_20_shared') {
+      if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_shared();
+      }
+    }
+    elseif ($newsletter_content == 'top_20_trending') {
+      if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_trending();
+      }
+    }
+    elseif ($newsletter_content == 'top_20_most_viewed') {
+      if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed();
+      }
+    }
+    elseif ($newsletter_content == 'select_section' && $news_content == 'section') {
+      if (function_exists('itg_newsletter_get_section_stories')) {
+        $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
+      }
+    }
+  }
+  
+  if (!empty($story_nodes)) {
+    $content = '<!DOCTYPE html> 
     <html xmlns:v="urn:schemas-microsoft-com:vml">
     <head>
       <title>India Today Newsletter</title>
@@ -217,46 +240,28 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
     </head>
     <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
 
-  $content .= '<tr>
+    $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-  
-  if (!empty($newsletter_content)) {
-    if ($newsletter_content == 'top_20_shared' || $newsletter_content == 'top_20_trending') {
-      if (function_exists(itg_update_analytics_node_count_data)) {
-        $story_nodes = itg_update_analytics_node_count_data($newsletter_content);
-      } 
-    }
-  }
-  if ($news_content == 'section') {
-    $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
-  }
-  else {
-    $story_nodes = itg_newsletter_get_top_stories();
-  }
-  foreach ($story_nodes as $news_array) {
-    $news_detail = node_load($news_array);
-
-    $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
-    $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-
-    if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
-      $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    }
-    else {
-      $thumbnail = $base_url . '/' . drupal_get_path('module', 'itg_newsletter') . '/image/no-image.png';
-    }
-
-    $link = $base_url . '/node/' . $news_detail->nid;
-
-    $content .= '<tr>
+    foreach ($story_nodes as $news_array) {
+      $news_detail = node_load($news_array);
+      $title = $news_detail->title;
+      $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
+        $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      }
+      else {
+        $thumbnail = $base_url . '/' . drupal_get_path('module', 'itg_newsletter') . '/image/no-image.png';
+      }
+      $link = FRONT_URL . '/node/' . $news_detail->nid;
+      $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
-                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title, $link, array('attributes' => array('target' => '_blank'))) . '</h2>
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
-  }
-  $content .= '</table>
+    }
+    $content .= '</table>
     
       </td>
     </tr><tr>
@@ -265,8 +270,12 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       </td>
     </tr>';
 
-  $content .= '</table><p>'.t('Thanks').',</p><p>'.t('India Today Group').'</p></body></html>';
-  return $content;
+    $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
+    p($content);
+    return $content;
+  }
+  watchdog("itg_newslatter" , "data not found newsletter_mail.inc function: itg_get_newsletter_mail_content_stories");
+  return ;
 }
 
 /**

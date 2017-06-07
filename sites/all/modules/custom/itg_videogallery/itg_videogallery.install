@@ -258,6 +258,11 @@ function itg_videogallery_schema() {
         'type' => 'int',
         'null' => TRUE,
       ),
+      'is_node_draft' => array(
+        'description' => 'Node in Draft mode',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
     ),
     'primary key' => array('id'),
   );
@@ -272,6 +277,8 @@ function itg_videogallery_uninstall() {
   variable_del('dailymotion_password');
   variable_del('dailymotion_apikey');
   variable_del('dailymotion_secretkey');
+  variable_del('content_type_for_solr_index');
+
   drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
 }
 

@@ -2266,6 +2266,30 @@
     display: block;
     text-align: left;
   }
+
+  #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] {
+    max-width: 100%;
+  }
+
+  #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div > div,
+  #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label,
+  #content .node-event_registration-form .form-type-textfield > label,
+  #content .node-event_registration-form .form-type-textarea > label,
+  #content .node-event_registration-form .form-type-select > label,
+  #content [id*='event-registration-node-form'] .form-item-field-erf-payment-gateway-und #edit-field-erf-payment-gateway-und,
+  #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label {
+    width: 100%;
+  }
+
+  #content [id*='event-registration-node-form'] .have-a-coupon-code,
+  #content .node-event_registration-form .form-actions,
+  #content [id*='event-registration-node-form'] .captcha {
+    padding-left: 0;
+  }
+
+  #content .node-event_registration-form .form-actions .form-submit {
+    margin: 0;
+  }
 }
 @media only screen and (max-width: 680px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -2740,6 +2764,12 @@
   /*End css ITG globle search result page*/
   /*Archive story page*/
   /*Archive story page End*/
+  .view-archive-story .view-content li.itg-search-list > div {
+    padding-left: 180px;
+  }
+  .view-archive-story .view-content li.itg-search-list > div.views-field-sm-field-custom-story-small-large-url {
+    padding-left: 0;
+  }
   .view-archive-story .view-content .search-pic {
     width: 170px;
     height: 127px;
