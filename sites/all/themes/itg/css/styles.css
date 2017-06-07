@@ -8663,31 +8663,31 @@ section.sidebar .block-itg-ads {
   margin-top: -5px;
 }
 
-#block-views-event-subsite-speaker-block .views-row {
+#block-views-event-subsite-speaker-block .views-row, #block-views-past-speaker-event-block .views-row {
   width: 33.33333%;
   float: left;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content {
+#block-views-event-subsite-speaker-block .views-row .view-content, #block-views-past-speaker-event-block .views-row .view-content {
   zoom: 1;
   width: 100%;
   float: none;
   text-align: center;
   margin-bottom: 30px;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:before, #block-views-past-speaker-event-block .views-row .view-content:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:after {
   clear: both;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content img {
+#block-views-event-subsite-speaker-block .views-row .view-content img, #block-views-past-speaker-event-block .views-row .view-content img {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   font-size: 11px;
   font-weight: 700;
   font-family: roboto;
@@ -8695,11 +8695,11 @@ section.sidebar .block-itg-ads {
   margin-top: 10px;
   text-transform: uppercase;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   color: #ef2a24;
   margin-top: 0;
 }
-#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1) {
+#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1), #block-views-past-speaker-event-block .views-row:nth-child(3n+1) {
   clear: left;
 }
 
