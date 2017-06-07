@@ -6728,7 +6728,7 @@ section.sidebar{
         }
     }   
 }
-#block-views-event-subsite-speaker-block{
+#block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block{
     .views-row{
         @include calculate-width(3);
         @include float(left);
