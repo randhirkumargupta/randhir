@@ -70,6 +70,18 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_associate_lead'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_associate_lead[0];
         $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
         $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
+        
+        //~ if(isset($clone_arr_response->sm_field_technology_photo_title)){
+			//~ foreach($clone_arr_response->sm_field_technology_photo_title as $index => $value){
+				//~ $form['field_story_technology']['und'][$index]['field_technology_photo_title']['und'][0]['value']['#default_value'] = $value;
+			//~ }
+		//~ }
+        //~ echo '<pre>';print_r($form['field_story_technology']['und']);die;
+        // field collection
+        //~ $program_fileds = entity_create('field_collection_item', $program);
+		//~ $program_fileds->setHostEntity('node', $node);
+		//~ $program_fileds->save();
+        // field collection end
       }
   }
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone') {
@@ -86,6 +98,14 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
+  }
+}
+
+function itg_clone_story_field_widget_form_alter(&$element, &$form_state, $context) {
+  if ($element['#field_name'] == 'field_story_technology' && $context['instance']['bundle'] == 'story_node_form') {die('sad');
+    $element['field_technology_photo_title']['und'][0]['value']['#value'] = 'valuess';
+    $element['field_technology_photo_title']['und'][0]['value']['#default_value'] = 'default valuesss';
+
   }
 }
 
