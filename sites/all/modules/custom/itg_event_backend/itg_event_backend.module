@@ -92,8 +92,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
       $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
       $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
+     // $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
+     // $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
     }
 
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
@@ -274,6 +274,15 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
 
+  if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time'])) || empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time'])) {
+    drupal_get_messages();
+    if(empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_story_expiry_date', t('Please enter time in Start date'));
+    }
+     if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_registration_close_date', t('Please enter time in Close date'));
+    }
+  }
   // node insert validation
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
     if ($current_date >= $start_date) {
@@ -282,32 +291,32 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     if ($current_date >= $end_date) {
       form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_start) {
+    if ($current_date >= $registration_start && !empty($registration_start)) {
       form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_close) {
+    if ($current_date >= $registration_close && !empty($registration_close)) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
     }
   }
   elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
     $status = itg_event_backend_node_status(arg(1));
-    if ($status != 1) {
+    //if ($status != 1) {
       if ($current_date >= $start_date) {
         form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
       }
       if ($current_date >= $end_date) {
         form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
       }
-      if ($current_date >= $registration_start) {
+      if ($current_date >= $registration_start && !empty($registration_start)) {
         form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
       }
-      if ($current_date >= $registration_close) {
+      if ($current_date >= $registration_close && !empty($registration_close)) {
         form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
       }
-    }
+    //}
   }
 
-  if ($registration_close <= $registration_start) {
+  if ($registration_close <= $registration_start && (!empty($registration_close) || !empty($registration_start))) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
   if ($end_date <= $start_date) {
