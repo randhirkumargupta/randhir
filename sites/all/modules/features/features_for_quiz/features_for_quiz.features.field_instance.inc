@@ -968,7 +968,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_reporter',
     'label' => 'Byline',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
