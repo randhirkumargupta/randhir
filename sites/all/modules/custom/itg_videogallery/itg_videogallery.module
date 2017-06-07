@@ -1561,7 +1561,6 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
 
 function delete_daily_motion_video_callback() {
   $video_id = arg(1);
-
   $query = db_delete('dailymotion_response_details');
   $query->condition('video_id', $video_id);
   if ($query->execute()) {
@@ -1582,7 +1581,6 @@ function delete_daily_motion_video_callback() {
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     node_save($node);
-
     drupal_set_message('Video has been deleted successfully');
     drupal_goto('daily-motion-video-dashboard');
   }
@@ -2102,6 +2100,8 @@ function itg_videogallery_thumb_url() {
   $db_or = db_or();
   $db_or->condition('encoding_progress', '100', '!=');
   $db_or->condition('drd.publishing_progress', '100', '!=');
+  $db_or->isNull('drd.publishing_progress');
+  $db_or->isNull('drd.encoding_progress');
   $query->condition($db_or);
   $result = $query->execute()->fetchAll();
   $api = itg_videogallery_dailymotion_api();
@@ -2128,7 +2128,6 @@ function itg_videogallery_thumb_url() {
               'publishing_progress' => $thumb_url['publishing_progress'],
               'video_duration' => $duration
             ))
-            // ->condition('fid', $val->fid, '=')
             ->condition('eid', $val->eid, '=')
             ->execute();
       }
