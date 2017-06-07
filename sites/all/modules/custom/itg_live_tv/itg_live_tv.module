@@ -375,7 +375,6 @@ function mobile_user_agent_switch() {
  * Implement function for iframe return for live tv video page
  */
 function itg_live_tv_page_video() {
-  module_load_include('php', 'itg_live_tv', 'user_agent');
   $output = '';
   if (function_exists('itg_live_tv_company')) {
     $flag = mobile_user_agent_switch();
