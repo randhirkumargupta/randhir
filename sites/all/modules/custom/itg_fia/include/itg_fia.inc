@@ -81,15 +81,16 @@ function itg_fia_xml_node_feed($query) {
         $load_fc = field_collection_item_load($fc_ids);
         $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
         $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
+        
         $query = db_select('field_data_field_gallery_image' , 'n');
-        $query->leftJoin('field_data_field_images', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
-        $query->fields('fdfi', array('field_images_fid'));
+        $query->leftJoin('field_data_field_api_image', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
+        $query->fields('fdfi', array('field_api_image_fid'));
         $query->condition('n.entity_id' , $load_fc->field_associate_gallery_id[LANGUAGE_NONE]);
         $result = $query->execute();
         $get_fc = $result->fetchAll();
         $get_script = '';
         foreach ($get_fc as $get_fck => $get_fcv) {
-          $file = file_load($get_fcv->field_images_fid);
+          $file = file_load($get_fcv->field_api_image_fid);
           $imgs_path = file_create_url($file->uri);
           $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
         }
