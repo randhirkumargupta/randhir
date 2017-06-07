@@ -6,7 +6,7 @@
 function itg_fia_data() {
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
-  $query->fields('n', ['nid', 'created']);
+  $query->fields('n', array('nid', 'created'));
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
@@ -81,9 +81,22 @@ function itg_fia_xml_node_feed($query) {
         $load_fc = field_collection_item_load($fc_ids);
         $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
         $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
+        $query = db_select('field_data_field_gallery_image' , 'n');
+        $query->leftJoin('field_data_field_images', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
+        $query->fields('fdfi', array('field_images_fid'));
+        $query->condition('n.entity_id' , $load_fc->field_associate_gallery_id[LANGUAGE_NONE]);
+        $result = $query->execute();
+        $get_fc = $result->fetchAll();
+        $get_script = '';
+        foreach ($get_fc as $get_fck => $get_fcv) {
+          $file = file_load($get_fcv->field_images_fid);
+          $imgs_path = file_create_url($file->uri);
+          $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
+        }
+        $full_script_slider[$gall_position] = '<figure class="op-slideshow">' . $get_script . '</figure>';
       }
     }
-
+    
     // facebook instant article body placement
     $node_body = $node->body[LANGUAGE_NONE][0]['value'];
     $numLine = explode("<p>", $node_body);
@@ -98,21 +111,21 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($audio_url)) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] .
-                '<figure>
-                   <img src="' . $img_path . '">
-                   <audio title="audio title" autoplay="autoplay" muted="muted">
-                     <source src="' . $audio_url . '">
-                  </audio>
-                 </figure>';
+          '<figure>
+             <img src="' . $img_path . '">
+             <audio title="audio title" autoplay="autoplay" muted="muted">
+               <source src="' . $audio_url . '">
+            </audio>
+           </figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-                '<figure>
-                   <img src="' . $img_path . '">
-                   <audio title="audio title" autoplay="autoplay" muted="muted">
-                    <source src="' . $audio_url . '">
-                  </audio>
-                </figure>';
+          '<figure>
+             <img src="' . $img_path . '">
+             <audio title="audio title" autoplay="autoplay" muted="muted">
+              <source src="' . $audio_url . '">
+            </audio>
+          </figure>';
       }
     }
 
@@ -120,15 +133,15 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($img_path)) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] .
-                '<figure>
-                  <img src="' . $img_path . '" />
-                </figure>';
+          '<figure>
+            <img src="' . $img_path . '" />
+          </figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-                '<figure>
-                  <img src="' . $img_path . '" />
-                </figure>';
+          '<figure>
+            <img src="' . $img_path . '" />
+          </figure>';
       }
     }
 
@@ -136,87 +149,67 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($get_place_name)) {
       if (in_array($map_pos, $bk)) {
         $body_vals[$map_pos] = $body_vals[$map_pos] .
-                '<figure class="op-map">
-                  <script type="application/json" class="op-geotag">
-                    {
-                      "type": "Feature",
-                      "geometry":
-                        {
-                          "type": "Point",
-                          "coordinates": [' . $lat . ', ' . $lng . ']
-                        },
-                      "properties":
-                        {
-                          "title": "' . $get_place_name . '",
-                          "radius": 10000,
-                          "pivot": true,   
-                          "style": "satellite",
-                        }
-                     }
-                  </script>
-                </figure>';
+          '<figure class="op-map">
+            <script type="application/json" class="op-geotag">
+              {
+                "type": "Feature",
+                "geometry":
+                  {
+                    "type": "Point",
+                    "coordinates": [' . $lat . ', ' . $lng . ']
+                  },
+                "properties":
+                  {
+                    "title": "' . $get_place_name . '",
+                    "radius": 10000,
+                    "pivot": true,   
+                    "style": "satellite",
+                  }
+               }
+            </script>
+          </figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-                '<figure class="op-map">
-                  <script type="application/json" class="op-geotag">
-                    {
-                      "type": "Feature",
-                      "geometry":
-                        {
-                          "type": "Point",
-                          "coordinates": [' . $lat . ', ' . $lng . ']
-                        },
-                      "properties":
-                        {
-                          "title": "' . $get_place_name . '",
-                          "radius": 10000,
-                          "pivot": true,   
-                          "style": "satellite",
-                        }
-                     }
-                  </script>
-                </figure>';
+          '<figure class="op-map">
+            <script type="application/json" class="op-geotag">
+              {
+                "type": "Feature",
+                "geometry":
+                  {
+                    "type": "Point",
+                    "coordinates": [' . $lat . ', ' . $lng . ']
+                  },
+                "properties":
+                  {
+                    "title": "' . $get_place_name . '",
+                    "radius": 10000,
+                    "pivot": true,   
+                    "style": "satellite",
+                  }
+               }
+            </script>
+          </figure>';
       }
     }
-
+    
     // Creating Slideshow for facebook instant article data
-    if (!empty($target_nids)) {
-      foreach ($target_nids as $tn_k => $tn_v) {
-        foreach ($tn_v as $tn_vk => $tn_vv) {
-          $node = node_load($tn_vv[0]['target_id']);
-          $get_fc = $node->field_gallery_image[LANGUAGE_NONE];
-          foreach ($get_fc as $get_fck => $get_fcv) {
-            $get_fc_ids = $get_fcv['value'];
-            $load_fc_data = field_collection_item_load($get_fc_ids);
-            $imgs_path[$tn_k][] = file_create_url($load_fc_data->field_images[LANGUAGE_NONE][0]['uri']);
-          }
-        }
-      }
-      foreach ($imgs_path as $img_k => $img_v) {
-        $get_script = "";
-        foreach ($img_v as $img_vk => $imgs_path) {
-          $get_script .= '<figure>
-                 <img src="' . $imgs_path . '" />
-                </figure>';
-        }
-        $full_script_slider[$img_k] = '<figure class="op-slideshow">' . $get_script . '</figure>';
-      }
+    if (!empty($imgs_path)) {
       $slider_keys = array_keys($full_script_slider);
       foreach ($slider_keys as $xx => $sliderkey) {
         $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey];
       }
     }
-
+    
     // Creating Social Embed Code for facebook instant article data
     if (!empty($embed_code_data)) {
       if (in_array($embed_code_pos, $bk)) {
         $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] .
-                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-                '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
       }
     }
 
