@@ -253,7 +253,7 @@ function frontend_breadcrumb_display($id = NULL , $entity_object = NULL , $singl
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
   $title_val = '';
   if(isset($entity_object->title)) {
-    $title_val = substr(check_plain($entity_object->title) , 0 , 50);
+    $title_val = substr(check_plain($entity_object->title) , 0 , 100);
   }
 
   $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
