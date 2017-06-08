@@ -215,7 +215,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("q", $arg[1]);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
-        $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Magazine');
         $val_str1 = implode(' OR ', $bundle_name);
       }
       else {
@@ -242,7 +242,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str .= 'ds_created:(' . $date_val_str . ')';
     }
 
-    $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+    $ctype_tab = array('Story', 'photogallery', 'Video');
 
     // case if arg(1) contain either type or date
     if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
@@ -254,7 +254,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
 
     if (!empty($arg[1]) && !in_array($arg[1], $ctype_tab)) {
-      $bundle_name = array('Story', 'photogallery', 'Videogallery');
+      $bundle_name = array('Story', 'photogallery', 'Video');
       $bun_arr = implode(' OR ', $bundle_name);
       $dat_1_day_ago = date('Y-m-d', strtotime($arg[1]));
       $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
@@ -325,7 +325,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             else {
               $val_str = implode(' OR ', $val);
               if ($val_str == 'All') {
-                $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+                $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Magazine');
                 $val_str = implode(' OR ', $bundle_name);
               }
               else {
