@@ -395,6 +395,18 @@ return date(\'Y\');
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image237x133.jpg">\';
+print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -402,6 +414,7 @@ return date(\'Y\');
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
@@ -473,6 +486,18 @@ return date(\'Y\');
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image483x271.jpg">\';
+print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -480,6 +505,7 @@ return date(\'Y\');
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_top_story_483x271',
