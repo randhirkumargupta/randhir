@@ -71,7 +71,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
     }
     elseif ($newsletter_content == 'select_section' && !empty($cat_array)) {
-      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content, $node);
     }
     else {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node);
@@ -202,7 +202,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
  * @param object $template_node
  * @return string
  */
-function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $crontime, $previoustime, $newsletter_content) {
+function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $crontime, $previoustime, $newsletter_content, $node = array()) {
   global $base_url;
 
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
@@ -210,24 +210,25 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   $footer = preg_replace("/[0-9]{4}/", date('Y'), $footerData);
   
   if (!empty($newsletter_content)) {
+    $newsfrequency = $previoustime;
     if ($newsletter_content == 'top_20_shared') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_shared();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'top_20_trending') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_trending();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'top_20_most_viewed') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'select_section' && $news_content == 'section') {
       if (function_exists('itg_newsletter_get_section_stories')) {
-        $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
+        $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime, $node);
       }
     }
   }
