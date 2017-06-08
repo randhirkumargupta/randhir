@@ -1671,7 +1671,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
     '#submit' => array('ge_custom_search_report_search_submit_dis'),
     '#default_value' => isset($_GET['filtertype']) ? $_GET['filtertype'] : '',
   );
-  
+
   $form['fieldset']['display_button'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
@@ -2090,10 +2090,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is the callback for uploading FTP video to Daily motion server in unpublished mode',
     'callback' => 'itg_videogallery_ftp_file_insert_cron',
   );
-//  $items['itg-videogallery-s3-file-to-dm'] = array(
-//    'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
-//    'callback' => 'itg_videogallery_s3_file_to_dm',
-//  );
+  $items['itg-videogallery-s3-file-to-dm'] = array(
+    'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
+    'callback' => 'itg_videogallery_s3_file_to_dm',
+  );
   $items['itg-videogallery-dm-to-s3'] = array(
     'description' => 'This is the callback for store dm file to s3',
     'callback' => 'itg_videogallery_dm_to_s3',
@@ -3338,9 +3338,10 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
   }
 
   if (isset($videogallery_popup_data_fids_array) && count($videogallery_popup_data_fids_array) > 0) {
-    $exploadid = explode('#', $videogallery_popup_data_fids_array[$i]);
+
     foreach ($form_state['field']['field_video_upload']['und']['entity'] as $key => $filed_collection) {
       if (!isset($filed_collection->field_videogallery_video_upload['und'])) {
+        $exploadid = explode('#', $videogallery_popup_data_fids_array[$i]);
         $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $exploadid[0];
         $form_state['field']['field_video_upload']['und']['entity'][$key]->field_video_thumbnail['und'][0]['fid'] = $exploadid[1];
 
@@ -3701,7 +3702,6 @@ function itg_videogallery_ftp_file_insert_cron() {
   }
 
   ftp_close($connection_id);
-  itg_videogallery_s3_file_to_dm();
 }
 
 /**

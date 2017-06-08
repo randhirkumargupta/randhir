@@ -5030,6 +5030,9 @@ div.node{
       .rc-bottom{
         font-size: 13px;
         padding: 5px 0 0;
+        input[type="text"]{
+          width: 100%;
+        }
       }
     }
     .ui-state-default{
