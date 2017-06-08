@@ -655,7 +655,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -698,7 +698,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -741,7 +741,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -784,7 +784,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -827,7 +827,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
@@ -870,7 +870,7 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'max' => '',
+      'max' => 999999999,
       'min' => 1,
       'prefix' => '₹',
       'suffix' => '',
