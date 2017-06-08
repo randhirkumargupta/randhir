@@ -26,7 +26,7 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         }
     }
     
-    if (isset($node->status) && !empty($node->status)) {
+    if (!empty($node->status)) {
         $document->addField('sm_field_node_status', $node->status);
     }
     
