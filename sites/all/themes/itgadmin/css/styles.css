@@ -5455,6 +5455,9 @@ div.node #comments h2 {
   font-size: 13px;
   padding: 5px 0 0;
 }
+.block-itg-related .checked-list li .rc-bottom input[type="text"] {
+  width: 100%;
+}
 .block-itg-related .checked-list .ui-state-default span.item-value {
   cursor: default;
 }
