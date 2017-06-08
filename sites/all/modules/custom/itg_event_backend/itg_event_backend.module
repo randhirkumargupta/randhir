@@ -260,9 +260,13 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if(!isset($form['field_event_highlights']['#tabwise'])){
   foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
     if (is_numeric($key)) {
-      $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
-      if (count(array_unique($event_high_value)) < count($event_high_value)) {
-        form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', 'You have already selected this story');
+      if(!empty($form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'])) {
+        $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
+      }
+      if(!empty($event_high_value) && isset($event_high_value)) {
+        if (count(array_unique($event_high_value)) < count($event_high_value)) {
+          form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', t('You have already selected this story'));
+        }
       }
     }
   }
@@ -587,6 +591,21 @@ function itg_event_backend_after_build($form, &$form_state) {
   $form['field_early_bird']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+    ),
+  );
+  $form['field_story_new_title']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+  $form['field_news_title']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+  $form['field_tab_description']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
     ),
   );
   
