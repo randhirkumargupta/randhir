@@ -87,7 +87,23 @@ function generatePhotoCategoryList($tid, $pageno) {
 {
     $listcount = 0;
 
+// code vid=14  start
+if($tid > 0){
+    $term_tree = taxonomy_get_tree(14, $tid, $max_depth = NULL, $load_entities = FALSE);
+}
+else{
+   $term_tree = taxonomy_get_tree(14, 0, $max_depth = NULL, $load_entities = FALSE); 
+}
+$term_tree_count = count($term_tree);
+//echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
+if($term_tree_count){
+    foreach ($term_tree as $key => $value) {
+        $tid_list[] = $value->tid;
+        
+    }
+}
 
+// code vid=14  end
     // select node belong from current term id or child term id
 
     $query = db_select('taxonomy_index', 'ti');
@@ -128,7 +144,7 @@ function generatePhotoCategoryList($tid, $pageno) {
 
 
     //end
-    if($tid > 0){
+    if(count($tid_list) > 0){
         $query->condition('ti.tid', $tid_list, 'IN');
     }
     $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
