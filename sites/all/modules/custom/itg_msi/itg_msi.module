@@ -1147,9 +1147,32 @@ function itg_msi_issue_category_data($issue_date) {
     $query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
     $query->condition('itg_order.widget', 'issue_primary_category_magazin_widget', '=');
     $query->orderBy('itg_order.weight', ASC);
-    $results = $query->execute();
+    $results = $query->execute();   
     foreach ($results as $value) {
         $result[$value->field_primary_category_value][] = $value;
+    }
+    if(empty($result)) {
+    $query = db_select('node', 'n');
+    $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+    $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+    $query->join('field_data_field_primary_category', 'story_section', 'n.nid = story_section.entity_id');
+    $query->join('taxonomy_term_data', 'term_name', 'story_section.field_primary_category_value = term_name.tid');
+    $query->leftJoin('field_data_field_story_medium_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+    $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_medium_image_fid');
+    $query->fields('n', array('nid', 'title', 'status'));
+    $query->fields('term_name', array('name'));
+    $query->fields('issue_date', array('field_story_issue_date_value'));
+    $query->fields('f_managed', array('fid', 'uri'));
+    $query->fields('story_section', array('field_primary_category_value'));
+    $query->condition(db_or()->isnotNull('issue_date.field_story_issue_date_value'));
+    $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+    $query->condition('story_section.bundle', 'story', '=');
+    $query->condition('n.status', 1, '=');
+    $query->orderBy('n.created', DESC);
+    $results = $query->execute();   
+      foreach ($results as $value) {
+          $result[$value->field_primary_category_value][] = $value;
+      }
     }
     return $result;
 }
@@ -1183,6 +1206,29 @@ function itg_msi_issue_suppliment_data($issue_date) {
     $results = $query->execute();
     foreach ($results as $value) {
         $result[$value->field_story_select_supplement_target_id][] = $value;
+    }
+    if(empty($result)) {
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+      $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+      $query->join('field_data_field_story_select_supplement', 'story_supplement', 'n.nid = story_supplement.entity_id');
+      $query->leftJoin('field_data_field_story_medium_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+      $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_medium_image_fid');
+      $query->fields('n', array('nid', 'title'));
+      $query->fields('issue_date', array('field_story_issue_date_value'));
+      $query->fields('f_managed', array('fid', 'uri'));
+      $query->fields('story_supplement', array('field_story_select_supplement_target_id'));
+     // $query->join('itg_widget_order', 'itg_order', 'story_supplement.field_story_select_supplement_target_id = itg_order.nid');
+      $query->condition('n.status', 1, '=');
+       $query->condition(db_or()->isnotNull('story_supplement.field_story_select_supplement_target_id'));
+      $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+      //$query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
+      //$query->condition('itg_order.widget', 'issue_supplement_magazin_widget', '=');
+      $query->orderBy('n.created', DESC);
+      $results = $query->execute();
+      foreach ($results as $value) {
+          $result[$value->field_story_select_supplement_target_id][] = $value;
+      }
     }
     return $result;
 }
