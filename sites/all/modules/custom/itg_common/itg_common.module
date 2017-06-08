@@ -71,7 +71,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['embed/%'] = array(
+  $items['embed-video/%'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -906,7 +906,7 @@ function itg_photogallery_embed() {
  */
 function itg_videogallery_embed() {
 
-  $arg = arg(2);
+  $arg = arg(1);
   if (!empty($arg)) {
     $gid = base64_decode($arg);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {

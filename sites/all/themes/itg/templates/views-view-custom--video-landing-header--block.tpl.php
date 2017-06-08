@@ -225,7 +225,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
-                                    <textarea readonly><iframe src=<?php print $base_url.'/embed/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                    <textarea readonly><iframe src=<?php print $base_url.'/embed-video/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                                     </div>
                                 </div>
                             </li>
@@ -301,7 +301,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
-                                        <textarea readonly><iframe src=<?php print $base_url.'/embed/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                        <textarea readonly><iframe src=<?php print $base_url.'/embed-video/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                                         </div>
                                     </div>
                                 </li>

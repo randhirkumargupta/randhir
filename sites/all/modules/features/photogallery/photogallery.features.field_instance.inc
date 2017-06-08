@@ -15,7 +15,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['field_collection_item-field_gallery_image-field_api_image'] = array(
     'bundle' => 'field_gallery_image',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (1024x1024)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -31,7 +31,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_api_image',
-    'label' => 'Api Image',
+    'label' => 'Gallery Big Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -3078,7 +3078,6 @@ function photogallery_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Api Image');
   t('Are you sure you want to Archive?');
   t('Audio');
   t('Bulk media upload');
@@ -3099,11 +3098,13 @@ function photogallery_field_default_field_instances() {
   t('Facebook image');
   t('Facebook narrative');
   t('Featured ordering');
+  t('Gallery Big Image');
   t('Gallery Image');
   t('Gallery slug');
   t('Image');
   t('Image Caption');
   t('Image Enable');
+  t('Image Size (1024x1024)');
   t('Image Size (170 x 127)');
   t('Image Size (370 x 208)');
   t('Image Size (483 x 271)');

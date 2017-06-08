@@ -108,7 +108,7 @@ foreach ($data as $key => $value) {
               if(!empty($spk_detail[0]->uri)){
                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
               }else{
-                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' alt='' />";
+                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' />";
               }
               
               print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';

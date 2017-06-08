@@ -139,22 +139,22 @@ function event_backend_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '16',
+          'weight' => '21',
         ),
         'title' => array(
           'weight' => '33',
         ),
         'path' => array(
-          'weight' => '17',
+          'weight' => '22',
         ),
         'additional_settings' => array(
-          'weight' => '18',
+          'weight' => '23',
         ),
         'domain' => array(
           'weight' => '9',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '12',
         ),
       ),
       'display' => array(

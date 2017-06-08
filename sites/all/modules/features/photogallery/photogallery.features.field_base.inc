@@ -18,7 +18,7 @@ function photogallery_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_api_image',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'fid' => array(

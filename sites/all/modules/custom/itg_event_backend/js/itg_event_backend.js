@@ -24,8 +24,8 @@
             // Disable date filed direct enter date
             jQuery('input[name="field_event_start_date[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_event_close_date[und][0][value][date]"]').keydown(false);
-            jQuery('input[name="field_registration_close_date[und][0][value][date]"]').keydown(false);
-            jQuery('input[name="field_story_expiry_date[und][0][value][date]').keydown(false);
+            //jQuery('input[name="field_registration_close_date[und][0][value][date]"]').keydown(false);
+            //jQuery('input[name="field_story_expiry_date[und][0][value][date]').keydown(false);
             jQuery('input[name="publish_on[date]"]').keydown(false);
             jQuery('input[name="unpublish_on[date]"]').keydown(false);
             // end code
