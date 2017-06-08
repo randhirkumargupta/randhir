@@ -29,7 +29,8 @@ if ($field->view->name == 'speaker_option_for_event'
         || $field->view->name == 'autocomplete_event_photo' 
         || $field->view->name == 'podcast_for_event' 
         || $field->view->name == 'manage_survey' 
-        || $field->view->name == 'manage_quiz' ) {
+        || $field->view->name == 'manage_quiz'
+        || $field->view->name == 'bitrates_videos') {
   print $output;
   
 } elseif (

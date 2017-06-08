@@ -64,10 +64,10 @@ if (!empty($data['node_data'])) :
           $red_dot_class = "";
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
           if(function_exists('itg_common_get_smiley_title')) {
-            $node_title = itg_common_get_smiley_title($data['node_data']->nid, 0, 65);
+            $node_title = itg_common_get_smiley_title($data['node_data']->nid, 0, 100);
           }
           else {
-            $node_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
+            $node_title = mb_strimwidth($data['node_data']->title, 0, 100, "..");
           }
           // get developing story status
           if (function_exists('itg_msi_get_lock_story_status') && $data['node_data']->type == 'story') {
@@ -96,7 +96,7 @@ if (!empty($data['node_data'])) :
             // prepare configuration for sharing
             $share_desc = preg_replace("/'/", "\\'", $data['node_data']->field_story_kicker_text['und'][0]['value']);
             $share_desc_fb = htmlentities($share_desc, ENT_QUOTES);
-            print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
+            print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 200, '..');
             ?>
           <?php endif; ?>
           <!-- Live blog -->

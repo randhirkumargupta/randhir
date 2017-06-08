@@ -92,8 +92,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
       $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
       $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
+     // $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
+     // $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
     }
 
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
@@ -274,6 +274,15 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
 
+  if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time'])) || empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time'])) {
+    drupal_get_messages();
+    if(empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_story_expiry_date', t('Please enter time in Start date'));
+    }
+     if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_registration_close_date', t('Please enter time in Close date'));
+    }
+  }
   // node insert validation
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
     if ($current_date >= $start_date) {
@@ -282,32 +291,32 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     if ($current_date >= $end_date) {
       form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_start) {
+    if ($current_date >= $registration_start && !empty($registration_start)) {
       form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_close) {
+    if ($current_date >= $registration_close && !empty($registration_close)) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
     }
   }
   elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
     $status = itg_event_backend_node_status(arg(1));
-    if ($status != 1) {
+    //if ($status != 1) {
       if ($current_date >= $start_date) {
         form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
       }
       if ($current_date >= $end_date) {
         form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
       }
-      if ($current_date >= $registration_start) {
+      if ($current_date >= $registration_start && !empty($registration_start)) {
         form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
       }
-      if ($current_date >= $registration_close) {
+      if ($current_date >= $registration_close && !empty($registration_close)) {
         form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
       }
-    }
+    //}
   }
 
-  if ($registration_close <= $registration_start) {
+  if ($registration_close <= $registration_start && (!empty($registration_close) || !empty($registration_start))) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
   if ($end_date <= $start_date) {
@@ -347,11 +356,43 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
           if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
             form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
           }
+        }
+    }
+  }
+ /****Early Bird Offer Fields*******/
+  if($event_type == 'paid'){
+    foreach($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+        if (is_numeric($key)) {
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_individual_regi', t('Early Bird Individual Registration Fee is required.'));
+          }
           
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+          }
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][	field_early_bird_individual_regi', t('Early Bird Individual Registration Fee should be less then Early Bird Group Registration Fee (for 5 member)'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value']) {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) should be less then Early Bird Group Registration Fee (upto 10 member).'));
+          }
+          
+          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+          }
           
         }
     }
-  } 
+  }
   
   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second") && (!isset($form['field_no_of_tickets']['#tabwise']))) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
@@ -539,6 +580,11 @@ function itg_event_backend_after_build($form, &$form_state) {
   $form['title']['#title'] = 'Event Title';
 
   $form['field_ticket_group_type']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+    ),
+  );
+  $form['field_early_bird']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
