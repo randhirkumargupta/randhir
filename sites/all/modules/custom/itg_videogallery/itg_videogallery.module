@@ -1658,17 +1658,20 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['video_id'] = array(
     '#type' => 'textfield',
     '#title' => 'Daily motion video ID',
+    '#attributes' => array(
+      'placeholder' => t('Video ID'),
+    ),
     '#default_value' => isset($_GET['video_id']) ? $_GET['video_id'] : '',
   );
 
   $form['fieldset']['filtertype'] = array(
     '#type' => 'select',
     '#title' => 'Status',
-    '#options' => array('' => '-Select-', '1' => 'Used', '0' => 'Ready To Use /Under Process'),
+    '#options' => array('' => '-Select-', '1' => 'Publish', '0' => 'Unpublish'),
     '#submit' => array('ge_custom_search_report_search_submit_dis'),
     '#default_value' => isset($_GET['filtertype']) ? $_GET['filtertype'] : '',
   );
-
+  
   $form['fieldset']['display_button'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
@@ -2087,10 +2090,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is the callback for uploading FTP video to Daily motion server in unpublished mode',
     'callback' => 'itg_videogallery_ftp_file_insert_cron',
   );
-  $items['itg-videogallery-s3-file-to-dm'] = array(
-    'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
-    'callback' => 'itg_videogallery_s3_file_to_dm',
-  );
+//  $items['itg-videogallery-s3-file-to-dm'] = array(
+//    'description' => 'This is the callback for uploading S3 video to Daily motion server in unpublished mode',
+//    'callback' => 'itg_videogallery_s3_file_to_dm',
+//  );
   $items['itg-videogallery-dm-to-s3'] = array(
     'description' => 'This is the callback for store dm file to s3',
     'callback' => 'itg_videogallery_dm_to_s3',
@@ -3593,7 +3596,7 @@ function itg_videogallery_s3_file_to_dm() {
  * Implements function for get options for Local FTP file list and used
  * @return array
  */
-function c() {
+function itg_videogallery_ftp_file_insert_cron() {
 
   global $user;
   $file_path = drupal_realpath('public://');
@@ -3698,6 +3701,7 @@ function c() {
   }
 
   ftp_close($connection_id);
+  itg_videogallery_s3_file_to_dm();
 }
 
 /**

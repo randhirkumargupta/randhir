@@ -299,6 +299,20 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
+     if (isset($view->name) && ($view->name == "front_end_global_search"  && $view->current_display == 'page_1')) {
+      $target = $base_url . '/topic/' . $arg[1];
+      $markup = array(
+        '#type' => 'markup',
+        '#markup' => '<script type="application/ld+json"> {'
+        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
+        . '"potentialAction": {      "@type": "SearchAction",      '
+        . '"target": "' . $target . '",      '
+        . '"query-input": "required name=' . $arg[1] . '"    } } '
+        . '</script>',
+      );
+      drupal_add_html_head($markup, 'sd_json');
+    }
+    
     if (!empty($arg[0])) {
       $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $arg[1] . ' "</span></span>';
     }
