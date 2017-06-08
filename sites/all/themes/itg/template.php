@@ -151,7 +151,7 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
-  if ($arg[0] == 'photogallery-embed' || $arg[0] == 'videogallery-embed') {
+  if ($arg[0] == 'photogallery-embed' || $arg[0] == 'embed-video') {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
 

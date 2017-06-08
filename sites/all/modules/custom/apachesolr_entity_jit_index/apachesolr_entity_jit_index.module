@@ -5,20 +5,21 @@
  * The apache solr entity Just in time index.
  *
  * Contains functionality related to Entity Just in Time Index.
- *
  */
+
 /**
  * Implements hook_menu().
+ *
  * {@inheritdoc}
  */
 function apachesolr_entity_jit_index_menu() {
 
-  $items['solr-index-content-type'] = array(
-    'title' => 'Solr Index Entity  Configuration',
+  $items['admin/config/search/apachesolr/solr-index-content-type'] = array(
+    'title' => 'Solr Index Content type Configuration',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('apachesolr_entity_jit_index_entity_form'),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
+    'access arguments'   => array('administer search'),
+    'type' => MENU_LOCAL_TASK,
   );
 
   return $items;
@@ -26,6 +27,7 @@ function apachesolr_entity_jit_index_menu() {
 
 /**
  * Impelements form for configuration.
+ *
  * {@inheritdoc}
  */
 function apachesolr_entity_jit_index_entity_form() {
@@ -34,7 +36,7 @@ function apachesolr_entity_jit_index_entity_form() {
     $content_types[$key] = ucwords($value);
   }
 
-  $form['content_type_for_solr_index'] = array(
+  $form['apachesolr_entity_jit_index_for_solr_index'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Select Content type'),
     '#description' => t('Please select content type to which you want to index on update/insert.'),
@@ -45,48 +47,42 @@ function apachesolr_entity_jit_index_entity_form() {
         ':input[name="solr_entity_use_config[yes]"]' => array('checked' => TRUE),
       ),
     ),
-    '#default_value' => variable_get('content_type_for_solr_index', array()),
+    '#default_value' => variable_get('apachesolr_entity_jit_index_for_solr_index', array()),
   );
 
   return system_settings_form($form);
 }
 
 /**
- * Implements hook_entity_insert()
+ * Implements hook_entity_insert().
+ *
  * {@inheritdoc}
  */
 function apachesolr_entity_jit_index_entity_insert($entity, $type) {
- 
   if ($type == 'node') {
-    $content_type = array_values(variable_get('content_type_for_solr_index'));
-    $content_type = array_filter($content_type, function($a) {
+    $content_type = array_values(variable_get('apachesolr_entity_jit_index_for_solr_index'));
+    $content_type = array_filter($content_type, function ($a) {
       return ($a !== 0);
     });
     if (in_array($entity->type, $content_type)) {
-
       apachesolr_entity_jit_index_immediately($entity, $type);
-
-// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet.
     }
   }
 }
 
 /**
- * Implements hook_entity_insert()
+ * Implements hook_entity_insert().
+ *
  * {@inheritdoc}
  */
 function apachesolr_entity_jit_index_entity_update($entity, $type) {
- 
   if ($type == 'node') {
-    $content_type = array_values(variable_get('content_type_for_solr_index'));
-    $content_type = array_filter($content_type, function($a) {
+    $content_type = array_values(variable_get('apachesolr_entity_jit_index_for_solr_index'));
+    $content_type = array_filter($content_type, function ($a) {
       return ($a !== 0);
     });
     if (in_array($entity->type, $content_type)) {
-
       apachesolr_entity_jit_index_immediately($entity, $type);
-
-// Need to do this in hook_entity_insert, rather than hook_node_insert, because that's what filefield_paths uses, and otherwise image uri is not set yet.
     }
   }
 }
@@ -96,12 +92,10 @@ function apachesolr_entity_jit_index_entity_update($entity, $type) {
  */
 function apachesolr_entity_jit_index_immediately($entity, $type) {
   // Don't index unpublished entities.
-
   $env_id = apachesolr_default_environment();
   $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
 
   // Check if entity should be indexed.
-
   $info = entity_get_info($type);
   if (!empty($info['entity keys']['bundle'])) {
     $bundle = $entity->{$info['entity keys']['bundle']};

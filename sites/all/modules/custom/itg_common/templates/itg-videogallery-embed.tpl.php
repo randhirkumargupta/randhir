@@ -1,15 +1,15 @@
 <?php
-$arg = arg(2);
+$arg = arg(1);
 if (function_exists('itg_common_get_node_title') && !empty($arg)) {
   $nid = base64_decode($arg);
-   global $base_url;
-   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  global $base_url;
+  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-  $videocopy_url =  $base_url.'/embed/videogallery-embed?gid='.$_GET['gid'];
+  $videocopy_url = $base_url . '/embed-video/' . $arg;
   $title = itg_common_get_node_title($nid);
   $videoids = $data;
   $video_node = node_load($nid);
-  $path_aleas =  $base_url.'/'.drupal_get_path_alias('node/'.$nid);
+  $path_aleas = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
 }
 ?>
 <div class="itg-embed-wrapper">
@@ -29,7 +29,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
             }
             if ($video_value->video_embedded_url != "") {
               $vide_dm_id = $video_value->video_embedded_url;
-            } else {
+            }
+            else {
               $vide_dm_id = $video_value->solr_video_id;
             }
             ?> <?php
@@ -38,7 +39,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
             }
             if ($video_value->solr_video_thumb != "") {
               $newimageds .= '<li><img data-tag="video_' . $vide_dm_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
-            } else {
+            }
+            else {
               $newimageds .= '<li><img data-tag="video_' . $vide_dm_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
             }
             $ads_flag = 1;
@@ -63,13 +65,13 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
               </div>
             </li>
 
-          <?php } ?>
+      <?php } ?>
         </ul>
       </div>
-  <?php
-  $newimageds .= '</ul></div>';
-}
-?>
+      <?php
+      $newimageds .= '</ul></div>';
+    }
+    ?>
 
     <?php
     if (!empty($videoids) && count($videoids) > 1) {
@@ -91,7 +93,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         if ($keys != 0) {
           $hide_player = 'hide-player';
           $autoplay = 0;
-        } else {
+        }
+        else {
           $autoplay = 1;
         }
         ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
@@ -102,7 +105,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
 
         if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
           $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
-        } else {
+        }
+        else {
           $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
         }
         $ads_flag = 0;
@@ -115,6 +119,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         }
         $usebitrates = implode(',', $allbitrates);
         $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
+
         ?>
           <div class="iframe-video-embed">
 
@@ -139,12 +144,12 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 androidhls: "true",
                 fallback: "false",
                 hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-            sharing: {
-      code: encodeURI("<iframe src='<?php echo $videocopy_url;?>' width='648' height='396' frameborder='0' scrolling='no' />"),
-      link: "<?php echo $path_aleas;?>",
-      heading: "Share video"
-   },    
-            advertising: {
+                sharing: {
+                  code: encodeURI("<iframe src='<?php echo $videocopy_url; ?>' width='648' height='396' frameborder='0' scrolling='no' />"),
+                  link: "<?php echo $path_aleas; ?>",
+                  heading: "Share video"
+                },
+                advertising: {
                   client: "vast",
                   skipoffset: 5,
                   schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
@@ -155,23 +160,16 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 }
               });
             </script>
-            <div class="social-share social-share-embed">
-              <ul>
-                <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
-                <li><a title="share on facebook" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li>
-                <li><a title="share on twitter" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li>
-                <li><a title="share on google+" class="user-activity google def-cur-pointer"></a></li>
-              </ul>
-            </div>
+           
           </div>
         </div>
 
-    <?php
-    $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
-  }
-  $description_slider .= '</ul></div>';
-  $newimageds .= '</ul></div></div></div>';
-}
-?>
+        <?php
+        $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
+      }
+      $description_slider .= '</ul></div>';
+      $newimageds .= '</ul></div></div></div>';
+    }
+    ?>
   </div>
 </div>

@@ -612,7 +612,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Ex.(Monday To Friday)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -629,6 +629,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -828,7 +833,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => '00:00',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -845,6 +850,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -865,7 +875,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'schedule duration',
+    'description' => '1 Hrs,2Hrs...',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -882,6 +892,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -899,6 +914,8 @@ function feature_category_management_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
+  t('00:00');
+  t('1 Hrs,2Hrs...');
   t('App description');
   t('Category Banner Colour');
   t('Category Banner Icon');
@@ -906,6 +923,7 @@ function feature_category_management_field_default_field_instances() {
   t('Content Type');
   t('Description');
   t('Display Title');
+  t('Ex.(Monday To Friday)');
   t('Hide Category form home');
   t('Hide Category from search');
   t('If you checked this option, "No Follow" link will be embedded in category URL. ');
@@ -931,7 +949,6 @@ function feature_category_management_field_default_field_instances() {
   t('Set As Featured');
   t('Sponsored Category');
   t('Time Period');
-  t('schedule duration');
 
   return $field_instances;
 }

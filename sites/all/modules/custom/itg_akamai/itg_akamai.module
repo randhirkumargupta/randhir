@@ -209,7 +209,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
     else {
       $url = '';
-      watchdog('ITG Akamai Exception',t('URL is empty'));
+      watchdog('ITG Akamai Exception', t('URL is empty'));
       return;
     }
 
@@ -521,37 +521,48 @@ function itg_akamai_node_update($node) {
     }
   }
 
-  if (user_access("purge itg akamai cache")) {
-    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('node/' . $node->nid);
 
-      // Checking if URL alias changed removing Old one.
+  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
-      $current_url = NULL;
-      $previous_url = NULL;
-      if (function_exists('itg_common_custompath_insert_load')) {
-        $current_url = itg_common_custompath_insert_load($node);
+  if (in_array($node->type, $mapping)) {
+    if (user_access("purge itg akamai cache")) {
+      if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        $url = drupal_get_path_alias('node/' . $node->nid);
+
+        // Checking if URL alias changed removing Old one.
+
+        $current_url = NULL;
+        $previous_url = NULL;
+        if (function_exists('itg_common_custompath_insert_load')) {
+          $current_url = itg_common_custompath_insert_load($node);
+        }
+        else {
+          $current_url = $node->path['alias'];
+        }
+        $previous_url = $node->path['old_alias'];
+
+        itg_akamai_clear_url($current_url, array(), $node);
+
+        if ($current_url != $previous_url) {
+          $action = array(
+            'action' => 'remove',
+          );
+
+          itg_akamai_clear_url($previous_url, $overrides);
+        }
       }
-      else {
-        $current_url = $node->path['alias'];
+      //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+      if ($node->type = 'videogallery') {
+        itg_akamai_purge_story_related_to_video($node->nid);
       }
-      $previous_url = $node->path['old_alias'];
-
-      itg_akamai_clear_url($current_url, array(), $node);
-
-      if ($current_url != $previous_url) {
-        $action = array(
-          'action' => 'remove',
-        );
-
-        itg_akamai_clear_url($previous_url, $overrides);
-      }
+      // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
     }
-  }
-  if (user_access("administer itg akamai")) {
-    // Setting metadata for the TTL for each node id 
-    if ($node->status == 1) { // Akamai setting for node content level if node is published 
-      itg_akamai_content_setting($node);
+
+    if (user_access("administer itg akamai")) {
+      // Setting metadata for the TTL for each node id 
+      if ($node->status == 1) { // Akamai setting for node content level if node is published 
+        itg_akamai_content_setting($node);
+      }
     }
   }
 }
@@ -563,13 +574,24 @@ function itg_akamai_node_update($node) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_delete($node) {
-  if (user_access("purge itg akamai cache")) {
-    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('node/' . $node->nid);
-      $action = array(
-        'action' => 'remove',
-      );
-      itg_akamai_clear_url($url, $overrides);
+
+  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+
+  if (in_array($node->type, $mapping)) {
+    if (user_access("purge itg akamai cache")) {
+      if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+        $url = drupal_get_path_alias('node/' . $node->nid);
+        $action = array(
+          'action' => 'remove',
+        );
+        itg_akamai_clear_url($url, $overrides);
+      }
+
+      //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+      if ($node->type = 'videogallery') {
+        itg_akamai_purge_story_related_to_video($node->nid);
+      }
+      // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
     }
   }
 }
@@ -875,7 +897,6 @@ function itg_akamai_taxonomy_term_insert($term) {
  * Implements hook_init()
  */
 function itg_akamai_init() {
-
   if (!drupal_is_cli()) {
 // Adding TTL for some specified pages
     global $theme;
@@ -940,5 +961,61 @@ function itg_akamai_get_ttl_for_custom_url($url_part) {
   // Return only the first single data
   if (isset($actual_data[0]) && !empty($actual_data[0])) {
     return $actual_data[0];
+  }
+}
+
+/**
+ *  Getting Story list associated with video
+ */
+function itg_akamai_get_story_list_assc_video($video_nid = NULL) {
+  $story_ids = array();
+  if (!empty($video_nid)) {
+    $query = db_select('field_data_field_story_associate_video', 'v');
+    $query->join('node', 'n', 'n.nid=v.entity_id');
+    $query->condition('v.field_story_associate_video_target_id', $video_nid);
+    $query->condition('v.bundle', 'story');
+    $query->fields('v', array('entity_id'));
+    //$query->condition('n.status', 1);
+    $result = $query->execute();
+
+    foreach ($result as $row) {
+      $story_ids[] = 'node/' . $row->entity_id;
+    }
+    return $story_ids;
+  }
+  return;
+}
+
+/**
+ * Returns bulk alias by source
+ * @param array $param
+ */
+function itg_akamai_get_story_bulk_alias($source) {
+  $alias = array();
+  $query = db_select('url_alias', 'ul');
+  $query->condition('ul.source', $source, 'IN');
+  $query->addExpression('MAX(pid)', 'max_pid');
+  $query->fields('ul', array('alias'));
+  $query->groupBy('source');
+  $result = $query->execute();
+  foreach ($result as $row) {
+    $alias[] = $row->alias;
+  }
+  return $alias;
+}
+
+/**
+ * Send purge request to akamai for story which is related to video
+ * @param int $video_id
+ */
+function itg_akamai_purge_story_related_to_video($video_id) {
+  if (isset($video_id) && !empty($video_id)) {
+    $stories_ids = itg_akamai_get_story_list_assc_video($video_id);
+    if (!empty($stories_ids)) {
+      $itg_akamai_get_story_alias = itg_akamai_get_story_bulk_alias($stories_ids);
+      if (!empty($itg_akamai_get_story_alias)) {
+        itg_akamai_clear_url($itg_akamai_get_story_alias);
+      }
+    }
   }
 }
