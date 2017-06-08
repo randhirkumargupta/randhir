@@ -440,40 +440,6 @@ function features_for_event_registration_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_erf_ticket_type'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_ticket_type'] = array(
-    'bundle' => 'field_erf_registration_fee',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 25,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_ticket_type',
-    'label' => 'Ticket Type',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_erf_registration_fee-field_event_country'.
   $field_instances['field_collection_item-field_erf_registration_fee-field_event_country'] = array(
     'bundle' => 'field_erf_registration_fee',
@@ -553,7 +519,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => array(
       0 => array(
-        'value' => 'icici',
+        'value' => 'free',
       ),
     ),
     'deleted' => 0,
@@ -587,7 +553,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -639,6 +605,45 @@ function features_for_event_registration_field_default_field_instances() {
         'replace_label' => FALSE,
       ),
       'type' => 'field_collection_embed',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_registration-field_erf_ticket_type'.
+  $field_instances['node-event_registration-field_erf_ticket_type'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Ticket Type',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_erf_ticket_type',
+    'label' => 'Ticket Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 1,
     ),
   );
@@ -685,7 +690,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -727,7 +732,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -775,7 +780,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 

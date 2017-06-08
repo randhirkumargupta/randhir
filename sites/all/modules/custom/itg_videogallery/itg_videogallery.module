@@ -101,7 +101,8 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       foreach ($form['field_video_upload']['und'] as $delta => $field) {
 
         if (is_numeric($delta)) {
-          if (arg(2) == 'edit') {
+          $arg=arg(2);
+          if ( $arg== 'edit') {
             if (isset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'])) {
               if ($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'] < 1) {
                 unset($form['field_video_upload']['und'][$delta]);
@@ -1543,6 +1544,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
       $file->is_new = TRUE;
       $file->status = FILE_STATUS_PERMANENT;
       $file = file_save($file);
+      file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
       $image_fid = $file->fid;
       $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
@@ -3450,7 +3452,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
           )
       );
       $dur = $api->get(
-          '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
+          '/video/' . $result['id'], array('fields' => array('duration','embed_url', 'encoding_progress', 'publishing_progress'))
       );
       $result['id'] = end(explode('/', $dur['embed_url']));
       $playlist_id = variable_get('dailymotion_playlist_id');
