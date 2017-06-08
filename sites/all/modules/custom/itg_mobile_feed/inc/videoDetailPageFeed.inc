@@ -326,6 +326,7 @@ function getDailymotionPath($fid, $filename){
   $final_filename = str_replace("_","-",$final_filename);
 
 
-  $video_path = "https://www.dailymotion.com/video/".$video_id."_public-dailymotion-".$type."-".$final_filename."-".$ext."_".$channel."";
+  //$video_path = "https://www.dailymotion.com/video/".$video_id."_public-dailymotion-".$type."-".$final_filename."-".$ext."_".$channel."";
+  $video_path = "https://www.dailymotion.com/video/".$video_id."";
   return $video_path;
 }
