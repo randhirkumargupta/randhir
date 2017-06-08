@@ -403,7 +403,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $form_state['rebuild'] = TRUE;
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
-
+  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
   $fids = array();
   foreach ($node['upload']['#value'] as $img) {
     // Save media file.
@@ -470,20 +470,20 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
  * @param type $fid
  * @return type string 
  */
-
 function itg_photogallery_crop_thumb($fid) {
   global $user;
+  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
   $file_image = file_load($fid);
   $image = image_load($file_image->uri);
   $image_extension = end(explode('.', $file_image->uri));
-  $filepath = file_default_scheme() . '://crop_image';
+  $filepath = file_default_scheme() . '://'.$filedir;
   if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
     $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
   }
   else {
     $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
   }
-  $image_name = $image_name . time().rand(1111,9999);
+  $image_name = $image_name . time() . rand(1111, 9999);
   $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
   $uri = $filepath . '/' . $image_name . '.' . $image_extension;
   $wrapper = file_stream_wrapper_get_instance_by_uri($uri);

@@ -227,6 +227,7 @@ function itg_video_check_exist_file($filename) {
  */
 function itg_videogallery_custom_submit($form, &$form_state) {
   global $user;
+  $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   foreach ($form_state['values']['field_story_itg_tags'][LANGUAGE_NONE] as $tags) {
     $tag[] = $tags['name'];
   }
@@ -287,7 +288,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, EXTRA_LARGE_IMAGE_WIDTH, EXTRA_LARGE_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -310,7 +311,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -333,7 +334,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -355,7 +356,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -377,7 +378,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -399,7 +400,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       if ($form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
-        $filepath = file_default_scheme() . '://crop_image';
+        $filepath = file_default_scheme() . '://' . $filedir;
         $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
         $image_name = $image_name . time();
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -1531,7 +1532,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   global $user;
   $videos_data = $_POST['checkvalue'];
   $return_fid = array();
-
+  $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
@@ -1542,7 +1543,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
       $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
       $file_image = file_load($file_data_temp->fid);
       $image = image_load($file_image->uri);
-      $filepath = file_default_scheme() . '://crop_image';
+      $filepath = file_default_scheme() . '://' . $filedir;
       $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
       $image_name = time() . $image_name;
       $sav = image_save($image, $filepath . '/' . $image_name);
@@ -2310,6 +2311,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
  * Implement cron function for add video thumb from dailymotion
  */
 function itg_videogallery_thumb_assign() {
+  $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   $mainresult = array();
   $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
   $query->fields('up_video', array('entity_id'));
@@ -2360,7 +2362,7 @@ function itg_videogallery_thumb_assign() {
         if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
-          $filepath = file_default_scheme() . '://crop_image';
+          $filepath = file_default_scheme() . '://' . $filedir;
           $scaled = image_scale_and_crop($image, EXTRA_LARGE_IMAGE_WIDTH, EXTRA_LARGE_IMAGE_HEIGHT);
           $image_name = $image_name . time();
           $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -2384,7 +2386,7 @@ function itg_videogallery_thumb_assign() {
         if ($node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
-          $filepath = file_default_scheme() . '://crop_image';
+          $filepath = file_default_scheme() . '://' . $filedir;
           $scaled = image_scale_and_crop($image, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
           $image_name = $image_name . time();
           $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -2407,7 +2409,7 @@ function itg_videogallery_thumb_assign() {
         if ($node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
-          $filepath = file_default_scheme() . '://crop_image';
+          $filepath = file_default_scheme() . '://' . $filedir;
           $scaled = image_scale_and_crop($image, MEDIUM_IMAGE_WIDTH, MEDIUM_IMAGE_HEIGHT);
           $image_name = $image_name . time();
           $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -2431,7 +2433,7 @@ function itg_videogallery_thumb_assign() {
         if ($node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
-          $filepath = file_default_scheme() . '://crop_image';
+          $filepath = file_default_scheme() . '://' . $filedir;
           $scaled = image_scale_and_crop($image, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
           $image_name = $image_name . time();
           $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
@@ -2454,7 +2456,7 @@ function itg_videogallery_thumb_assign() {
         if ($node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
-          $filepath = file_default_scheme() . '://crop_image';
+          $filepath = file_default_scheme() . '://' . $filedir;
           $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
           $image_name = $image_name . time();
           $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
