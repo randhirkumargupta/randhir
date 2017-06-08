@@ -6379,7 +6379,7 @@ section.sidebar{
         }
     }        
 }
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block{
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block{
     margin-top: 20px;
     ul{
         @extend .list-none;
@@ -6909,6 +6909,33 @@ section.sidebar{
                 span{
                 padding-left: 0;
             }
+        }
+        .ticket-type-message {
+          font-size: 12px;
+          margin-bottom: 30px;
+          color: green;
+          padding-left: 130px;
+        }
+        #edit-field-erf-ticket-type{
+          .form-type-radios{
+            label{width: 130px;}
+            .form-radios{
+              padding-left: 130px;
+              .form-type-radio{
+                padding-right: 20px;
+                .form-radio{
+                  margin: 2px;
+                }
+                label{
+                  b{
+                    display: block;
+                    margin: 5px 0 0 18px;
+                  }
+                }
+              }
+            }
+          }
+          .description{display: none;}
         }
         .form-field-type-field-collection .form-item .form-item{
             margin: 15px 0;
