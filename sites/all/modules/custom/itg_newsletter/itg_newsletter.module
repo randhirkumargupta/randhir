@@ -584,8 +584,6 @@ function itg_newsletter_node_update($node) {
 
       break;
 
-    default:
-      break;
   }
 }
 
@@ -731,7 +729,6 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
-
   // Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
@@ -741,7 +738,6 @@ function itg_newsletter_send_automatic_newsletter() {
       }
     }
   }
-
   // For Automatic
   $query_auto = db_select('itg_cron_newsletter' , 'cn');
   $query_auto->fields('cn')
@@ -945,7 +941,7 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
 }
 
 /**
- * Get top 20 stories
+ * get recent updated top 20 stories
  * @return array
  */
 function itg_newsletter_get_section_stories($section , $crontime , $previoustime) {

@@ -263,6 +263,7 @@ function event_backend_msnf_step_info() {
       0 => 'field_event_type',
       1 => 'field_no_of_tickets',
       2 => 'field_ticket_group_type',
+      3 => 'field_early_bird',
     ),
     'format_type' => 'default',
     'format_settings' => array(

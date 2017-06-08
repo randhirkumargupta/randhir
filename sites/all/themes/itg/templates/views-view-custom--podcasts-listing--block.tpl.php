@@ -4,8 +4,15 @@
     <li class="col-md-3 col-sm-3 col-xs-6">
         <div class="tile">
             <?php if(!empty($row['field_story_extra_large_image'])) : ?>
-            <figure>                
-                <?php print $row['field_story_extra_large_image'] ?>    
+            <figure>
+                <?php if($row['field_story_extra_large_image'] == 'notFound') {
+         print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+       }
+       else  {
+         print $row['field_story_extra_large_image']; 
+       
+       }
+       ?>    
                     <figcaption><i class="fa fa-volume-up" aria-hidden="true" id="demo-<?php echo $row['nid'] ?>"></i></figcaption>
                     <audio class="hide" id="myAudio-<?php echo $row['nid'] ?>" controls>
                       <source src="<?php print _get_audio_file_url($row['nid']); ?>" type="audio/mpeg">
