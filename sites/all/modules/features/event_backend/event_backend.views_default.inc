@@ -3287,7 +3287,7 @@ echo  $baseurl;
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3367,7 +3367,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3959,7 +3959,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4062,7 +4062,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4101,7 +4101,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4206,7 +4206,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4501,7 +4501,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
   $handler->display->display_options['fields']['title']['alter']['path'] = '[php]/speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
