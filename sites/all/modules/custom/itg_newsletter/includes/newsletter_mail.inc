@@ -271,7 +271,6 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
     </tr>';
 
     $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
-    p($content);
     return $content;
   }
   watchdog("itg_newslatter" , "data not found newsletter_mail.inc function: itg_get_newsletter_mail_content_stories");
