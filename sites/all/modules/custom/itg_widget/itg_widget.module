@@ -102,6 +102,10 @@ function itg_widget_menu() {
     'page callback' => 'autocomplete_for_year_end_widgets' ,
     'access arguments' => array('access content') ,
   );
+  $items['node-list-for-year-end-category/%/%/%/autocomplete'] = array(
+    'page callback' => 'autocomplete_for_year_end_widgets_category' ,
+    'access arguments' => array('access content') ,
+  );
   $items['so-sorry-content-title/autocomplete'] = array(
     'page callback' => 'itg_widget_so_sorry_content_title' ,
     'access arguments' => array('access content') ,
