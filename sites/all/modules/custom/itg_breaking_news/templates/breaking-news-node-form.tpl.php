@@ -16,6 +16,8 @@
   <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['category_holder']); ?>
+
            </div>
 
 <div id="ContentDetails">
