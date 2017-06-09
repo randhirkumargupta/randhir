@@ -267,8 +267,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       }
     }
   }
-
-
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
   foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
@@ -1062,6 +1060,7 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
 
   if ($request_destination == 'published-video') {
     $redirect_path .= "?field_story_syndication_value_op=all";
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
   }
 
   if ($form_state['input']['op'] != 'Save as Draft') {
