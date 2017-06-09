@@ -38,6 +38,32 @@
           $('#edit-field-section-und').prop('selectedIndex',0);
           $('#edit-field-breaking-display-on-und').prop('selectedIndex',0);
           $('#edit-field-section > .form-type-select > label').html('Section');
+           // Start code for category shift
+          // If User Selected Live Blog
+            $('.form-item-itg-section').show()
+            $('.form-item-itg-category').show();
+            $('.form-item-itg-sub-category').show();
+            $('.form-item-itg-sub-sub-category').show();
+            $('.form-item-itg-sub-sub-sub-category').show();
+            $('.form-item-itg-primary-category').show();
+
+            if (!$('#edit-itg-category').val()) {
+             $('.form-item-itg-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-category').val()) {
+             $('.form-item-itg-sub-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-sub-category').val()) {
+             $('.form-item-itg-sub-sub-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-sub-sub-category').val()) {
+            $('.form-item-itg-sub-sub-sub-category').hide();
+            }
+           // End code for category shift
+        
         }
         else {
           $(".highlight-title").hide();
@@ -45,6 +71,15 @@
           $(".form-item-field-section-und").show();
           $(".field-name-field-breaking-publish-time").show();
           $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+              // Start code for cateogry shift
+           // If user selected other than live blog
+            $('.form-item-itg-section').hide()
+            $('.form-item-itg-category').hide();
+            $('.form-item-itg-sub-category').hide();
+            $('.form-item-itg-sub-sub-category').hide();
+            $('.form-item-itg-sub-sub-sub-category').hide();
+            $('.form-item-itg-primary-category').hide();
+           // End code for category shift
         }
         
         // hide Live tv checkbox if type is breaking news
@@ -59,12 +94,49 @@
         $(".field-name-field-mark-as-breaking-band").hide();
         $(".field-name-field-breaking-publish-time").hide();
         $(".form-item-field-section-und").hide();
+        
+          // Start code for category shift
+          // User Selected Live Blog
+            $('.form-item-itg-section').show()
+            $('.form-item-itg-category').show();
+            $('.form-item-itg-sub-category').show();
+            $('.form-item-itg-sub-sub-category').show();
+            $('.form-item-itg-sub-sub-sub-category').show();
+            $('.form-item-itg-primary-category').show();
+
+            if (!$('#edit-itg-category').val()) {
+             $('.form-item-itg-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-category').val()) {
+             $('.form-item-itg-sub-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-sub-category').val()) {
+             $('.form-item-itg-sub-sub-category').hide();
+            }
+
+            if (!$('#edit-itg-sub-sub-sub-category').val()) {
+            $('.form-item-itg-sub-sub-sub-category').hide();
+            }
+           // End code for category shift
+        
+        
       }
       
       // type check for edit form
       if (type == 'Breaking News') {
         $(".highlight-title").hide();
         $('#edit-field-section > .form-type-select > label').html('Section<span class="form-required">*</span>');
+        // Start code for cateogry shift
+        // If user selected other than live blog
+            $('.form-item-itg-section').hide()
+            $('.form-item-itg-category').hide();
+            $('.form-item-itg-sub-category').hide();
+            $('.form-item-itg-sub-sub-category').hide();
+            $('.form-item-itg-sub-sub-sub-category').hide();
+            $('.form-item-itg-primary-category').hide();
+        // End code for category shift
       }
 
       $('body').on('change', '.field-name-field-mobile-subscribers .form-checkbox', function () {

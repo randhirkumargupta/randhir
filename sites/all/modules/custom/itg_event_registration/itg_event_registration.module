@@ -1139,3 +1139,23 @@ function itg_event_backend_past_speaker_event_id($event_type_tid, $even_nid) {
   $even_ids = implode(',', $event_ids);
   return $even_ids;
 }
+
+/**
+* Implement function for get speaker id from widget table
+*/
+function itg_event_backend_speaker_ids($event_id) {
+  $extra_data = array();
+  $select_query = db_select('itg_widget_order' , 'iwo')
+          ->fields('iwo' , array('nid'))
+          ->condition('iwo.widget' , 'itg_event_speaker_order_widget')
+          ->condition('iwo.cat_id' , $event_id);
+ $result = $select_query->execute();
+ foreach($result as $rel){
+    $value[] = $rel->nid;
+ }
+ $output = '';
+ if(!empty($value)) {
+ $output = implode(",", $value);
+}
+return $output;
+}
