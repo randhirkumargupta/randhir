@@ -71,7 +71,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
     }
     elseif ($newsletter_content == 'select_section' && !empty($cat_array)) {
-      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content);
+      $mail_content = itg_get_newsletter_mail_content_stories($template_node, 'section', $cat_array, $scheduled_time, $previoustimestamp, $newsletter_content, $node);
     }
     else {
       $mail_content = itg_get_newsletter_mail_content_stories($template_node);
@@ -83,10 +83,11 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
 
   // code for netcore
   if (function_exists('itg_netcore_mail_create_campaign')) {
+    $mail_content = str_replace("&nbsp;", " ", $mail_content);
     $data_email = array();
     $data_email['subject'] = $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
-    $data_email['fromName'] = 'India Today';
-    $data_email['fromEmail'] = 'care@intoday.in';
+    $data_email['fromName'] = ITG_NEWSLETTER_FROMNAME;
+    $data_email['fromEmail'] = ITG_NEWSLETTER_EMAIL;
     $data_email['content'] = $mail_content;
     $create_campaign = itg_netcore_mail_create_campaign($data_email);
 
@@ -95,8 +96,9 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $campaign['listId'] = NETCORE_LIST_ID;
     $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
 
-    watchdog("netcore campaign", '<pre>' . print_r($data_email, TRUE) . '</pre>');
-    watchdog("netcore mail", '<pre>' . print_r($campaign, TRUE) . '</pre>');
+    watchdog("netcore content", '<pre>' . print_r($data_email, TRUE) . '</pre>');
+    watchdog("netcore create campaign", '<pre>' . print_r($create_campaign, TRUE) . '</pre>');
+    watchdog("netcore mail", '<pre>' . print_r($mail_scehdule, TRUE) . '</pre>');
   }
   /* $params = array(
     'body' => $mail_content,
@@ -200,7 +202,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
  * @param object $template_node
  * @return string
  */
-function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $crontime, $previoustime, $newsletter_content) {
+function itg_get_newsletter_mail_content_stories($template_node, $news_content = NULL, $section = array(), $crontime, $previoustime, $newsletter_content, $node = array()) {
   global $base_url;
 
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
@@ -208,24 +210,25 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   $footer = preg_replace("/[0-9]{4}/", date('Y'), $footerData);
   
   if (!empty($newsletter_content)) {
+    $newsfrequency = $previoustime;
     if ($newsletter_content == 'top_20_shared') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_shared();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'top_20_trending') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_trending();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'top_20_most_viewed') {
       if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
-        $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed();
+        $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency);
       }
     }
     elseif ($newsletter_content == 'select_section' && $news_content == 'section') {
       if (function_exists('itg_newsletter_get_section_stories')) {
-        $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime);
+        $story_nodes = itg_newsletter_get_section_stories($section, $crontime, $previoustime, $node);
       }
     }
   }
@@ -271,7 +274,6 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
     </tr>';
 
     $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
-    p($content);
     return $content;
   }
   watchdog("itg_newslatter" , "data not found newsletter_mail.inc function: itg_get_newsletter_mail_content_stories");

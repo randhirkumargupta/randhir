@@ -60,7 +60,6 @@ foreach ($data as $key => $value) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
       $sponsors_data = itg_event_backend_get_session_sponsor($media);
-     
      $sponsor_all_data = "";
      $sponsor_tags = "";
       if(!empty($sponsors_data)) {
@@ -70,7 +69,7 @@ foreach ($data as $key => $value) {
      if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
          $sponsors_data_parent = "sponsors-parent";
          $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
-         $sponsor_tags = '<div class="spncor-tag"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details', array('query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)).'</div>';
+         $sponsor_tags = '<div class="spncor-tag"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)).'</div>';
      }
       $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
       $output_story_title = '';
@@ -108,7 +107,7 @@ foreach ($data as $key => $value) {
               if(!empty($spk_detail[0]->uri)){
                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
               }else{
-                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' alt='' />";
+                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' />";
               }
               
               print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';

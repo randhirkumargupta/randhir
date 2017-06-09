@@ -6,30 +6,30 @@
  * 
  */
 
-
 /**
  * Function for get all role.
  * @return $itg_role_array
  */
 function custom_user_roles() {
   $role_cached = cache_get('itg_all_role', 'cache');
-  
-  if (!empty($role_cached->data)) {    
+
+  if (!empty($role_cached->data)) {
     $itg_role_array = $role_cached->data;
-  } else {    
-    $query = db_select('role', 'r');  
+  }
+  else {
+    $query = db_select('role', 'r');
     $query->fields('r', array('rid', 'name'));
     $query->orderBy('weight');
     $query->orderBy('name');
-    
+
     $result = $query->execute();
 
     $roles = array();
-    
+
     foreach ($result as $role) {
-     $itg_role_array[$role->name] = $role->rid;
+      $itg_role_array[$role->name] = $role->rid;
     }
-    
+
     cache_set('itg_all_role', $itg_role_array, 'cache');
   }
 
@@ -74,6 +74,9 @@ define('MOBILE_VAS', $role_array['Mobile VAS']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
 define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
 define('ITG_IMAGE_FOLDER', 'indiatoday/images/');
+define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
+define('ITG_NEWSLETTER_FROMNAME', 'India Today');
+
 
 
 /**
@@ -115,7 +118,7 @@ define('REPORTER_TID', variable_get('reporter_tid'));
 define('TAG_ID', 1);
 define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
 define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
-define('VIDEO_PROPERTY',variable_get('video_property'));
+define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
 define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
@@ -129,7 +132,6 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 //define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
 //define('FRONT_URL', 'http://localhost/itg-cms');
 //define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
-
 // set comment config in variable
 if (function_exists('global_comment_last_record')) {
   variable_set('COMMENT_CONFIG', global_comment_last_record());
@@ -151,4 +153,3 @@ function pr($arg) {
   print_r($arg);
   print '</pre>';
 }
-

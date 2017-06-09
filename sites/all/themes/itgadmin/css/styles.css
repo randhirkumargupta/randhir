@@ -5455,6 +5455,9 @@ div.node #comments h2 {
   font-size: 13px;
   padding: 5px 0 0;
 }
+.block-itg-related .checked-list li .rc-bottom input[type="text"] {
+  width: 100%;
+}
 .block-itg-related .checked-list .ui-state-default span.item-value {
   cursor: default;
 }
@@ -11655,7 +11658,7 @@ span.file a {
 }
 
 [id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
-  width: 280px;
+  width: 340px;
 }
 [id*="field-ticket-group-type-values"] thead {
   display: none;
