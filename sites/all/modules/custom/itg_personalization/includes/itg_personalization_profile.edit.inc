@@ -344,19 +344,6 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
       form_set_error('mail', t('Please enter valid email address.'));
     }
   }
-//  $first_name = trim($form_state['values']['fname']);
-//  if ($first_name) {
-//    if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
-//      form_set_error('fname', t('Please enter only letters, dot and white space allowed.'));
-//    }
-//  }
-//  $last_name = trim($form_state['values']['lname']);
-//  if ($last_name) {
-//    if (!preg_match("/^[a-zA-Z. ]*$/", $last_name) && !empty($last_name)) {
-//      form_set_error('lname', t('Please enter only letters, dot and white space allowed.'));
-//    }
-//  }
-  
   // validate alternate email
   if (function_exists('itg_sso_user_email_check')) {
     $get_user_check_email = itg_sso_user_email_check($form_state['values']['alt_email']);
