@@ -13,6 +13,7 @@ function itg_rapid_api_init(){
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
     module_load_include('inc', 'itg_rapid_api', 'inc/helper');
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_homePage');
 }
 
 /**
