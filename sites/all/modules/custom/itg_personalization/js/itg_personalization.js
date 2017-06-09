@@ -273,10 +273,7 @@ jQuery(document).ready(function () {
     
     // Custom validator function for social media start
             jQuery("#itg-personalization-edit-profile-form").validate({
-                submitHandler: function(form) {
-                    jQuery('input:submit').attr('disabled', 'disabled');
-                    form.submit();
-                },
+                
                 onfocusout: function(element) {
                     jQuery(element).valid();
                 },
