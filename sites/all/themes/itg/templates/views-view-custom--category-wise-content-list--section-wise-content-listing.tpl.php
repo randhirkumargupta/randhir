@@ -17,14 +17,17 @@ global $base_url;
   if($row['type'] == 'videogallery') {
      $video_class = 'video-icon';
   }
+  // Check if it is sponsor category.
   $is_sponsor = _is_sponsored_category(arg(2));
   ?>
   <div class="catagory-listing">
+    <!-- If sponsor category then show big image of first row. -->
     <?php if(($is_sponsor) && ($id == 0)): ?>
       <div class="big-pic <?php echo $video_class;?> ">
         <?php if ($row['field_story_extra_large_image_1'] != ''): ?>        
           <?php print $row['field_story_extra_large_image_1']; ?>
         <?php else: ?>
+          <!-- If large image not found then show big default image. -->
           <?php $image_link = "<img width='647' height='363'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg' alt='' />"; ?>
             <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
           <?php endif; ?>

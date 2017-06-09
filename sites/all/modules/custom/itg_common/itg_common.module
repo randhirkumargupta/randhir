@@ -1125,6 +1125,11 @@ function _get_int_path_from_url($url) {
   return $int_path;
 }
 
+/**
+ * Check if taxonomy is sponsored or not.
+ * @param int $tid
+ * @return boolean
+ */
 function _is_sponsored_category($tid) {
   $return = FALSE;
   $query = db_select('field_data_field_is_sponsor', 'fs');
@@ -1137,5 +1142,4 @@ function _is_sponsored_category($tid) {
     $return = TRUE;
   }
   return $return;
-  //echo "dd".$query_result;die;
 }
