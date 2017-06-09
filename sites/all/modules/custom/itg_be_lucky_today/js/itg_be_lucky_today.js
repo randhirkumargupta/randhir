@@ -318,6 +318,14 @@ jQuery(document).ready(function () {
             return false
         }
     });
+    
+    jQuery(".itg_be_lucky_today").on('click', '#magazine_wrapper [type="radio"]', function(){
+        var magazine_name = jQuery(this).parent().children('h4').text();
+        if(magazine_name !== undefined){
+            jQuery(".itg_be_lucky_today #selected_magazine_name").val(magazine_name);
+        }
+        console.log(magazine_name, 'asd');
+    });
 
 });
 

@@ -308,6 +308,11 @@ function be_lucky_today_subscribe($form, $form_state) {
       '#prefix' => '<div id="magazine_wrapper">',
       '#suffix' => '</div>',
     );
+    $form['magazine_name'] = array(
+        '#type' => 'hidden',
+        '#value' => 'India Today',
+        '#attributes' => array('id' => array('selected_magazine_name'))
+     );
     $form['next'] = array(
       '#type' => 'submit',
       '#value' => t('Next'),
@@ -383,11 +388,14 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     if (isset($form_state['multistep_values']['registration3']['city'])) {
         $city = get_term_name_by_tid($form_state['multistep_values']['registration3']['city']);
     }
-
+    $selected_magazine_name = $form_state['input']['magazine_name'];
     $magazine1 = $form_state['input']['magazine'];
     $magazineName = explode(":", $magazine1);
     $magazine = $magazineName[0];
     $magazine2 = $magazineName[1];
+    if(!empty($selected_magazine_name)){
+        $magazine = $selected_magazine_name;
+    }
     $data = array(
       'survey_id' => 29072016,
       'name' => $form_state['multistep_values']['registration1']['yourname'],
@@ -399,7 +407,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
       'city' => $city,
       'studled' => $form_state['multistep_values']['registration3']['zip_code'],
       'mobile' => $form_state['multistep_values']['registration3']['mobile'],
-      'income' => 'unconfirm',
+//      'income' => 'unconfirm',
       'ipaddress' => '10.20.30',
       'comment' => $magazine,
     );
@@ -407,7 +415,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     $query = db_insert('survey')->fields($data);
     $key = $query->execute();
 
-    $data['magazine'] = $form_state['input']['magazine'];
+    $data['magazine'] = $magazine;//$form_state['input']['magazine'];
     $data['magazine2'] = $magazine2;
     $data['user_id'] = '';
     $data['product_id'] = 161;
