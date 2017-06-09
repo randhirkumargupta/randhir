@@ -136,9 +136,54 @@ function itg_mobile_feed_menu() {
         'type' => MENU_CALLBACK,
   );
 
- 
+  $items['admin/settings/mobile_service_token/redis_cache'] = array(
+     'title' => 'Redis Cache Manager',
+     'description' => 'Redis Cache Manager',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('redis_cache_manager'),
+     'access arguments' => array('administer onthisdate settings'),
+     'type' => MENU_NORMAL_ITEM,
+   );
 
   return $items;
+}
+
+/*
+ * creage form for redis cache delete by admin
+ */
+function redis_cache_manager() {
+  $form = array();
+
+  $form['redis_cache'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Remove Redis Cache Key'),
+    '#size' => 60,
+    '#description' => t("Please Put Redis Key"),
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+  );
+
+  return $form;
+}
+
+/*
+ * redis cache form submit
+ */
+function redis_cache_manager_submit($form,&$form_state){
+
+  $key = $form_state['values']['redis_cache'];
+  drupal_set_message(print_r(list_redis_key(),TRUE));
+  $responce = redis_key_delete($key);
+  drupal_set_message(print_r(list_redis_key(),TRUE));
+  if($responce != '1'){
+     drupal_set_message('Unable to delete redis Cache','error');
+  }else {
+     drupal_set_message('Redis Key Has been deleted Successfully.');
+  }
+
 }
 
 /**

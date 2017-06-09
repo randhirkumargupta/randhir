@@ -174,3 +174,49 @@ function setRedis($key, $value, $ttl = 300){
     $result['set_flag'] = $set_flag;
     return $result;
 }
+
+
+/*
+ * unique function to return all the redis keys
+ * args - no
+ * reurn - array
+ */
+function list_redis_key(){
+
+      $redis = redis_connection();
+      $all_redis_key = $redis->keys("*");
+      return $all_redis_key;
+ }
+
+ /*
+  * unique function to connect redis server
+  */
+ function redis_connection(){
+
+   $redis = new Redis();
+        $time = 300;
+        $redis_server_read = 'redistmp.itgd.in';//'127.0.0.1';
+        $redis_server_read_port = 6379;
+        $redis_server_read_timeout = 30;
+        $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
+
+        if(!$connection_str){
+            throw new Exception("Can’t connect redis");
+            return;
+        }else{
+            return $redis;
+        }
+
+ }
+
+ /*
+  * delete redis key value
+  */
+
+ function redis_key_delete($key){
+
+   $redis = redis_connection();
+   $result = $redis->del($key);
+
+   return $result;
+ }
