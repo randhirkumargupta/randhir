@@ -330,7 +330,10 @@ function _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequen
     if ($con) {
       //Query to get nodeids which is shared within 24 hour START.
       $front_user_activity = $con->front_user_activity;
-      $front_user_activity_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_condition = array(
+        'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'ntype' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+        );
       $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
 
       foreach ($front_user_activity_result as $front_user_activity_document) {
@@ -382,7 +385,10 @@ function _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequ
     if ($con) {
       // Query to get node views count which is viewed within 24 hour START.
       $pagedetails_collection = $con->pagedetails;
-      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $condition = array(
+        'viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'type' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+      );
       $result = $pagedetails_collection->find($condition);
       foreach ($result as $document) {
         $data_count_node_view[] = $document['nid'];
@@ -443,7 +449,10 @@ function _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequenc
     if ($con) {
       // Query to get node views count which is viewed within 24 hour START.
       $pagedetails_collection = $con->pagedetails;
-      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $condition = array(
+        'viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'type' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+      );
       $result = $pagedetails_collection->find($condition);
       foreach ($result as $document) {
         $data_count_node_view[] = $document['nid'];
