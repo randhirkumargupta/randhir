@@ -1150,11 +1150,7 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  $items['video-test'] = array(
-    'page callback' => 'itg_videogallery_video_test',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
+
   $items['dailymotion-video-search-filter'] = array(
     'page callback' => 'itg_videogallery_ajax_time_search_video',
     'access arguments' => array('access content'),
@@ -1175,11 +1171,7 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  $items['delete-itg-solr'] = array(
-    'page callback' => 'itg_videogallery_delete_itg_solr',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
+
   $items['solr-video-make-fid'] = array(
     'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
     'access arguments' => array('access content'),
@@ -1199,12 +1191,6 @@ function itg_videogallery_menu() {
   );
   $items['move-ftp'] = array(
     'page callback' => 'itg_videogallery_move_ftp_videos',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['dm-to-s3'] = array(
-    'page callback' => 'itg_videogallery_dm_to_s3_node_delete',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -1241,52 +1227,6 @@ function itg_videogallery_menu() {
 
 
   return $items;
-}
-
-/**
- * test function
- */
-function itg_videogallery_video_test() {
-
-  $api = itg_videogallery_dailymotion_api();
-  $data = $api->post('/video/x5p4sec?next_video=http://www.dailymotion.com/video/x5p4sdq');
-  p($data);
-}
-
-/**
- * Temp function 
- */
-function itg_videogallery_dm_to_s3_node_delete() {
-
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'itg_bitrates_video', '=')
-      ->execute();
-  $deleted_count = 0;
-  foreach ($result as $record) {
-    node_delete($record->nid);
-    $deleted_count++;
-  }
-  pr($deleted_count);
-  exit();
-}
-
-/**
- * Temp function to delete itg solr
- */
-function itg_videogallery_delete_itg_solr() {
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'itg_solr_video', '=')
-      ->execute();
-
-  $deleted_count = 0;
-  foreach ($result as $record) {
-    node_delete($record->nid);
-    $deleted_count++;
-  }
-  pr($deleted_count);
-  exit();
 }
 
 /**
@@ -1608,8 +1548,11 @@ function delete_daily_motion_video_callback() {
   $query->condition('video_id', $video_id);
   if ($query->execute()) {
     $video_info = itg_videogallery_get_video_solrcontent($video_id);
-    if (!empty($video_exist_innode[0]->nid)) {
-      node_delete($video_exist_innode[0]->nid);
+    if (!empty($video_info[0]->nid)) {
+
+      itg_videogallery_apachesolr_node_exclude($video_info[0]->nid);
+
+      node_delete($video_info[0]->nid);
     }
     // insert delete video in content type
     global $user;
@@ -1627,6 +1570,24 @@ function delete_daily_motion_video_callback() {
     drupal_set_message('Video has been deleted successfully');
     drupal_goto('daily-motion-video-dashboard');
   }
+}
+
+/**
+ * function use delete delete solr index.
+ * @param type $nid
+ * @return boolean
+ */
+function itg_videogallery_apachesolr_node_exclude($nid) {
+  $node = node_load($nid);
+  // Get field value (respecting the fild language).
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  // Delete node from Index, in case it was indexed before.
+  apachesolr_remove_entity($env_id, 'node', $nid);
+  // Return TRUE to exclude node from indexing.
+  return TRUE;
+
+
+  return FALSE;
 }
 
 /**
