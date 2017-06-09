@@ -917,8 +917,14 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $type = isset($_GET['type']) ? $_GET['type'] : "story";
-      $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
-      $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
+      $type1 = isset($_GET['shs_term_node_tid_depth']) ? $_GET['shs_term_node_tid_depth'] : '';
+      if (!empty($type1)) {
+        $form['title']['#autocomplete_path'] = "node-list-for-year-end-category/title/$type/$type1/autocomplete";
+        $form['nid']['#autocomplete_path'] = "node-list-for-year-end-category/nid/$type/$type1/autocomplete";
+      } else {
+        $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
+        $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
+      }
       break;
     case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
       $form['title']['#attributes']['placeholder'] = t('Anchor name');
@@ -1119,6 +1125,53 @@ function autocomplete_for_widgets($type, $is_condition = FALSE, $custom_type = '
     }
   }
   return $autocomplete;
+}
+
+/**
+ * Data to yearend widget for category.
+ * 
+ * @param string $type
+ * @param boolean $isCondition
+ * @param string $custom_type
+ * @return string
+ */
+function autocomplete_for_year_end_widgets_category() {
+  $title = arg(5);
+  $content_type = arg(2);
+  $flag = arg(1);
+  $catid = arg(3);
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->leftJoin('taxonomy_index', 'tti', 'tti.nid=n.nid');
+    $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
+    $query->fields('n', array('title', 'nid'));
+    //$query->condition('tid', variable_get('year_end_for_widget'));
+    if ($flag == 'title') {
+      $query->condition('n. title', '%' . $title . '%', 'LIKE');
+    }
+    elseif ($flag == 'nid') {
+      $query->condition('n. nid', '%' . $title . '%', 'LIKE');
+    }
+    $query->condition('fsc.field_story_category_tid', $catid);
+    $query->condition('n.type', $content_type);
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    if ($flag == 'title') {
+      while ($record = $result->fetchAssoc()) {
+        $options[$record['title']] = $record['title'];
+      }
+    }
+    elseif ($flag == 'nid') {
+      while ($record = $result->fetchAssoc()) {
+        $options[$record['nid']] = $record['nid'];
+      }
+    }
+    drupal_json_output($options);
+  }
 }
 
 /**

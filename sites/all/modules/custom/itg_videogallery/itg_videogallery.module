@@ -267,8 +267,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       }
     }
   }
-
-
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
   foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
@@ -1062,6 +1060,7 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
 
   if ($request_destination == 'published-video') {
     $redirect_path .= "?field_story_syndication_value_op=all";
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
   }
 
   if ($form_state['input']['op'] != 'Save as Draft') {
@@ -2478,7 +2477,7 @@ function itg_videogallery_move_ftp_videos() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-7 days', time());
+  $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
@@ -2516,7 +2515,7 @@ function itg_videogallery_move_ftp_videos() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-7 days', time());
+  $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress'));
   $query->condition('encoding_progress', '100', '=');
@@ -2576,7 +2575,6 @@ function itg_videogallery_video_update_embeded_url() {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('solr_video_id', 'video_embedded_url'));
   $result = $query->execute()->fetchall();
-
   foreach ($result as $vid) {
     if ($vid->video_embedded_url != "") {
       itg_videogallery_update_embedcode_url($vid->solr_video_id);

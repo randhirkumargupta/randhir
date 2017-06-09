@@ -2800,6 +2800,9 @@
     .view-content{
       li.itg-search-list{
         padding: 25px 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%; 
         + li{
           border-top: none;
         }
@@ -2807,6 +2810,7 @@
       .search-pic{
         width: 170px;
         height: 127px;
+        float: left;
       }
       .search-detail{
         h2{
@@ -2854,42 +2858,25 @@
   .view-archive-story{
     .view-content{
       .itg-search-list{
-            padding: 25px 0;
-            + li{
-                border-top: 1px solid #ddd;
-            }
-            .views-field-sm-field-custom-story-small-large-url{
-              width: 170px;
-              float: left;
-            }
-            > .views-field-label, > .search-detail{
-              padding-left: 180px;
-            }
-            .views-field-label{
-              h2{
-                @include font(22px,28px); 
-                margin-top:-5px;
-                a{
-                  @include font(22px,28px); 
-                }
-              }
-            }
-            
+        padding: 25px 0;
+        + li{
+          border-top: 1px solid #ddd;
         }
-      .search-pic{
-        width: 170px;
-        height: 127px;
-      }
-      .search-detail{
-        h2{
-          @include font(22px,28px); 
-          margin-top:-5px;
-          a{
+        .views-field-sm-field-custom-story-small-large-url{
+          width: 170px;
+          float: left;
+        }
+        > .views-field-label, > .search-detail{
+          padding-left: 180px;
+        }
+        .views-field-label{
+          h2{
             @include font(22px,28px); 
+            margin-top:-5px;
+            a{
+              @include font(22px,28px); 
+            }
           }
-        }
-        p{
-          display: block; 
         }
       }
     }

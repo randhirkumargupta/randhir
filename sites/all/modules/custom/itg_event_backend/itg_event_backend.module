@@ -15,6 +15,9 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
+
+    $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'] = $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'].' <span class="form-required">*</span>';
+     $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'] = $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'].' <span class="form-required">*</span>';
     
     if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
          $form['actions']['itg_custom_button'] = array(
@@ -119,9 +122,11 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
     // Add block of speekar order reorder.
     if (isset($_GET['step']) && $_GET['step'] == 'step_configuration' && is_numeric(arg(1))) {
-      $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
+      $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true" ,"current_event" => arg(1));
       $color_box_class = array("class" => array("colorbox-load anchor-order-reorder"));
       $link_text = l(t('Click here'), "speaker-order-reorder/" . arg(1), array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $link_text .= l(t('Past Speaker'), "itg-event-past-spekars", array('query' => $color_box_query, 'attributes' => $color_box_class));
+
       $link = '<div class="form-item form-type-textfield form-item-field-e-associate-highlights-und">
         <label for="widget-order-reorder">' . t("Speaker Order/Reorder") . ' </label>
         ' . $link_text . '
@@ -146,6 +151,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $form['#steps']['step_second']->children[] = 'registration_config';
       $form['#step_children']['registration_config'] = 'step_second';
     }
+    $form['field_story_expiry_date'][LANGUAGE_NONE]['#title'] = 'ved';
+    $form['field_story_expiry_date']['#title'] = 'tes';
+    //p($form['field_story_expiry_date']);
     
   }
 
@@ -277,7 +285,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $end_date = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
-
+    
   if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time'])) || empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time'])) {
     drupal_get_messages();
     if(empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']))) {
@@ -285,6 +293,16 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
      if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']))) {
       form_set_error('field_registration_close_date', t('Please enter time in Close date'));
+    }
+  }
+  
+  if($form_state['values']['field_registration_date_checkbox'][LANGUAGE_NONE][0]['value'] == 1){
+    if(empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value'])){
+      form_set_error('field_story_expiry_date', t('Registration start date is required.'));
+    }
+    
+    if(empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_registration_close_date', t('Registration close date is required.'));
     }
   }
   // node insert validation
@@ -622,6 +640,18 @@ function itg_event_backend_after_build($form, &$form_state) {
     ),
   );
 
+  $form['field_registration_close_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_registration_date_checkbox[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+  
+  $form['field_story_expiry_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_registration_date_checkbox[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+  
   $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
   
   //Hide add more button, if ticket are not available

@@ -511,7 +511,7 @@ function itg_users_user_login(&$edit, $account) {
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
-        $_GET['destination'] = 'ask-an-expert';
+        $_GET['destination'] = 'ask-an-expert-backend';
       }
     }
   }  

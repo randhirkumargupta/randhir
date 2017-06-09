@@ -121,6 +121,7 @@ function itg_seo_form_alter(&$form , &$form_state , $form_id) {
     'page_node_form' ,
     'survey_node_form' ,
     'quiz_node_form' ,
+    'breaking_news_node_form' ,
     'poll_node_form' ,
   );
   if (in_array($form['#form_id'] , $node_form_array)) {
@@ -347,7 +348,7 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-    if ($node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
+    if (($node->type == 'breaking_news') || $node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
@@ -406,7 +407,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
 
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog') {
+    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -442,6 +443,7 @@ function content_types_for_sef_url() {
     'survey',
     'quiz',
     'poll',
+    'breaking_news',
   );
 }
 
