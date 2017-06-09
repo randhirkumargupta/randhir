@@ -6080,16 +6080,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
-  [id*="itg-personalization-edit-profile-form"]{
-    .form-item-fname, .form-item-lname{
-      label:after{
-        content: '*';
-        color: red;
-      }
-    }
-  }
-  
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child{margin-left: 175px;}
   [id*="views-exposed-form-front-end-global-search-page"]{
     .form-item-sm-field-itg-common-by-line-name, [class*="views-widget-filter-tm_vid_"], .views-widget-filter-tm_vid_4_names, .views-widget-filter-tm_vid_14_names{
