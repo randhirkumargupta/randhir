@@ -2853,13 +2853,28 @@
   /*Archive story page End*/
   .view-archive-story{
     .view-content{
-      li.itg-search-list{
-          > div{
-            padding-left: 180px;
-            &.views-field-sm-field-custom-story-small-large-url{
-              padding-left: 0;
+      .itg-search-list{
+            padding: 25px 0;
+            + li{
+                border-top: 1px solid #ddd;
             }
-          }
+            .views-field-sm-field-custom-story-small-large-url{
+              width: 170px;
+              float: left;
+            }
+            > .views-field-label, > .search-detail{
+              padding-left: 180px;
+            }
+            .views-field-label{
+              h2{
+                @include font(22px,28px); 
+                margin-top:-5px;
+                a{
+                  @include font(22px,28px); 
+                }
+              }
+            }
+            
         }
       .search-pic{
         width: 170px;

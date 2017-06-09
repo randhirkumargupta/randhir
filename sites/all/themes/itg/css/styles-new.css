@@ -6463,6 +6463,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     color: #0db533;
   }
 
+  [id*="itg-personalization-edit-profile-form"] .form-item-fname label:after, [id*="itg-personalization-edit-profile-form"] .form-item-lname label:after {
+    content: '*';
+    color: red;
+  }
+
   .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
     margin-left: 175px;
   }
