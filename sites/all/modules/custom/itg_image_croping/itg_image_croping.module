@@ -573,7 +573,9 @@ function itg_image_croping_crop_image_orignal() {
   $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
   $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
   $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
-
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
   if ($image_width == "" && $image_height == "") {
     $image_width = $_POST['resize_image_width'];
     $image_height = $_POST['resize_image_height'];
