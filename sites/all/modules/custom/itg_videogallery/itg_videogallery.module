@@ -2477,7 +2477,7 @@ function itg_videogallery_move_ftp_videos() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-7 days', time());
+  $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
@@ -2515,7 +2515,7 @@ function itg_videogallery_move_ftp_videos() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-7 days', time());
+  $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress'));
   $query->condition('encoding_progress', '100', '=');
