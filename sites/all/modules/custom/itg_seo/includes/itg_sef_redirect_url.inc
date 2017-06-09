@@ -114,7 +114,7 @@ function itg_common_custompath_insert_load($node) {
     return $newpath;
   }
   elseif ($node->type == 'mega_review_critic') {
-    $pathdata = 'movie/review/story' . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
+    $pathdata = 'movie/mega-review' . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
