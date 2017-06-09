@@ -72,6 +72,45 @@ if (!empty($content)):
   if (function_exists(itg_sso_url)) {
     $itg_sso_url = itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
   }
+  // Check if it is sponsor story.
+  $is_sponsor_story = FALSE;
+  $sponsor_text = '';
+  $flag = FALSE;
+  if(!empty($node->field_story_configurations[LANGUAGE_NONE])){
+    foreach($node->field_story_configurations[LANGUAGE_NONE] as $key => $config_val){
+      if($config_val['value'] == 'sponsor'){
+        $is_sponsor_story = TRUE;
+        break;
+      } 
+    }    
+  }
+  // If sponsored story then check sponsored category.
+  if($is_sponsor_story && !empty($node->field_story_category[LANGUAGE_NONE])){
+    foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $cat_val){      
+      if (_is_sponsored_category($cat_val['tid']) && !empty($node->field_story_show_fields[LANGUAGE_NONE]) && !empty(taxonomy_get_parents($cat_val['tid']))) {
+        $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+        if ($show_field_val == 'story_category_icon'):
+          $sponsor_text = "<div class='container'><span>" . theme('image_style', array('path' => $cat_val['taxonomy_term']->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+        elseif($show_field_val == 'story_powered_text'):
+         $sponsor_text = "<div class='container'><span>".$cat_val['taxonomy_term']->field_powered_by_text[LANGUAGE_NONE][0]['value']."</span></div>";         
+        else:
+          $sponsor_text = "<div class='container'><span>" .$cat_val['taxonomy_term']->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        endif;
+        $flag = TRUE;
+      }
+    }
+    if ($is_sponsor_story && !$flag) {
+      $spon_term = taxonomy_term_load(1208899);
+      $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+      if ($show_field_val == 'story_category_icon'):
+        $sponsor_text = "<div class='container'><span>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+      elseif ($show_field_val == 'story_powered_text'):
+        $sponsor_text = "<div class='container'><span>" . $spon_term->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      else:
+        $sponsor_text = "<div class='container'><span>" . $spon_term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      endif;
+    }
+  }
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
@@ -157,42 +196,50 @@ if (!empty($content)):
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left">
-            <div class="byline">              
-              <div class="profile-pic">
-                <?php
-                if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                  $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                  }
-                  else {
-                    $file = 'default_images/user-default.png';
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                  }
-                ?>
-              </div>
-              <div class="profile-detail">                  
-                <ul>
-                  <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
+            <div class="byline">
+              <?php if($sponsor_text == ''): ?>
+                <div class="profile-pic">
                   <?php
-                    $twitter_handle = '';
-                    if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                    $twitter_handle = str_replace('@', '', $twitter_handle);
+                  if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+                    $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
-                    if (!empty($twitter_handle)) {
-                    ?>
-                    <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
-                  <?php } ?>
-                </ul>
+                    else {
+                      $file = 'default_images/user-default.png';
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                    }
+                  ?>
+                </div>
+              <?php else:
+                print $sponsor_text; ?>
+              <?php endif; ?>
+              <div class="profile-detail">
+                <?php if($sponsor_text == ''): ?>
+                  <ul>
+                    <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
+                    <?php
+                      $twitter_handle = '';
+                      if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
+                      $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                      $twitter_handle = str_replace('@', '', $twitter_handle);
+                      }
+                      if (!empty($twitter_handle)) {
+                      ?>
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
+                    <?php } ?>
+                  </ul>
+                <?php endif; ?>
                 <ul class="date-update">
-                  <li class="mailto mhide">
-                    <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                    if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
-                    $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                    print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
-                    }
-                    ?>
-                  </li>
+                  <?php if($sponsor_text == ''): ?>
+                    <li class="mailto mhide">
+                      <i class="fa fa-envelope-o"></i> &nbsp;<?php
+                      if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
+                      $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
+                      print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
+                      }
+                      ?>
+                    </li>
+                  <?php endif; ?>
                   <li class="mhide">
                     <span class="share-count">
                       <?php
