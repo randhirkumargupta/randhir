@@ -101,6 +101,13 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_event_registration_price_cal_ajax.inc',
   );
+
+  $items['itg-event-past-spekars'] = array(
+    'page callback' => 'itg_event_render_form_block',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg-event-past-spekars.inc',
+  );
   return $items;
 }
 
@@ -244,9 +251,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         $form['total_value'] = array(
           '#type' => 'hidden',
           '#weight' => 11,
-           '#attributes' => array(
+          '#attributes' => array(
             'class' => array(
-                'total_value'
+              'total_value'
             ),
           ),
         );
@@ -271,20 +278,20 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         );
         $form['field_erf_payment_gateway']['#weight'] = 13;
       }
-        if (!empty($event_node->field_story_expert_description[LANGUAGE_NONE])) {
-          $form['term_condition'] = array(
-            '#type' => 'checkbox',
-            '#weight' => 14,
-            '#required' => TRUE,
-            '#title' => t('<b>Terms and Conditions:</b>'),
-          );
+      if (!empty($event_node->field_story_expert_description[LANGUAGE_NONE])) {
+        $form['term_condition'] = array(
+          '#type' => 'checkbox',
+          '#weight' => 14,
+          '#required' => TRUE,
+          '#title' => t('<b>Terms and Conditions:</b>'),
+        );
 
-          $form['cutomtext'] = array(
-            '#type' => 'item',
-            '#markup' => '<div class="event-registration-main-container"><div></div><div class="tc-txt"> <ul>' . $event_node->field_story_expert_description[LANGUAGE_NONE][0]['value'] . '  </ul></div></div>',
-            '#weight' => 15,
-          );
-        }
+        $form['cutomtext'] = array(
+          '#type' => 'item',
+          '#markup' => '<div class="event-registration-main-container"><div></div><div class="tc-txt"> <ul>' . $event_node->field_story_expert_description[LANGUAGE_NONE][0]['value'] . '  </ul></div></div>',
+          '#weight' => 15,
+        );
+      }
     }
 
     // Assign event id into source id field
@@ -369,13 +376,14 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $participate = $types->field_participate_type[LANGUAGE_NONE][0]['tid'];
           $individual = $types->field_individual_registration_fe[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
-          $group_5[$terms->tid] = '<span class="'.$individual .'-'. $terms->tid.' reg_pric"  style="display:none">('.$terms->name . ') 5 members Rs-'.$types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'].'</span>';
-          $group_10[$terms->tid] = '<span class="'.$individual .'-'. $terms->tid.' reg_pric"  style="display:none">('.$terms->name . ') 10 members Rs-'.$types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'].'</span>';
+
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_5_cal[$terms->tid] = $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'];
           $group_10_cal[$terms->tid] = $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
           //$option[$individual . '-' . $count] = $terms->name . ' <b>Rs ' . $individual . '</b>';
-          $option[$individual .'-'. $terms->tid] = $terms->name . ' <b>Rs ' . $individual . '</b>';
+          $option[$individual . '-' . $terms->tid] = $terms->name . ' <b>Rs ' . $individual . '</b>';
           $count++;
         }
       }
@@ -385,13 +393,13 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $participate = $types->field_participate_type[LANGUAGE_NONE][0]['tid'];
           $individual = $types->field_early_bird_individual_regi[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
-          $group_5[$terms->tid]= '<span class="'.$individual .'-'. $terms->tid.' reg_pric"  style="display:none">('.$terms->name . ') 5 members Rs-'.$types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'].'</span>';
-          $group_5_cal[$terms->tid]= $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'];
-          $group_10[$terms->tid] = '<span class="'.$individual .'-'. $terms->tid.' reg_pric"  style="display:none">('.$terms->name . ') 10 members Rs-'.$types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'].'</span>';
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_5_cal[$terms->tid] = $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'];
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_10_cal[$terms->tid] = $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
           //$option[$individual . '-' . $count] = $terms->name . ' <b>Rs ' . $individual . '</b>';
-          $option[$individual .'-'. $terms->tid] = $terms->name . ' <b>Rs ' . $individual . '</b>';
+          $option[$individual . '-' . $terms->tid] = $terms->name . ' <b>Rs ' . $individual . '</b>';
           $count++;
         }
       }
@@ -403,24 +411,23 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         $individual = $types->field_individual_registration_fe[LANGUAGE_NONE][0]['value'];
         $terms = taxonomy_term_load($participate);
         //$option[$individual . '-' . $count] = $terms->name;
-        $option[$individual .'-'. $terms->tid] = $terms->name;
+        $option[$individual . '-' . $terms->tid] = $terms->name;
         $count++;
       }
     }
-    /****Value assign to Ticket type ******/
-    $group_5_member = implode('  ',$group_5);
-    $group_10_member = implode('  ',$group_10);
+    /*     * **Value assign to Ticket type ***** */
+    $group_5_member = implode('  ', $group_5);
+    $group_10_member = implode('  ', $group_10);
     unset($form['field_erf_ticket_type']['#validated']);
     unset($form['field_erf_ticket_type'][LANGUAGE_NONE]['#options']);
     $form['field_erf_ticket_type'][LANGUAGE_NONE]['#options'] = $option;
-    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = '<div class="ticket-type-message">'.$group_5_member.', '.$group_10_member.'</div>';
+    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = '<div class="ticket-type-message">' . $group_5_member . ', ' . $group_10_member . '</div>';
     $form['field_erf_ticket_type']['#validated'] = TRUE;
     $ticket_type_value = $_POST['field_erf_ticket_type']['und'];
     $registration_price = itg_event_registration_price_calculat_group($max_delta, $ticket_type_value, $group_5_cal, $group_10_cal, $single_group);
     $settings = array();
     $settings['registration_price'] = $registration_price;
-    drupal_add_js(array('itg_event_registration' => array('settings' => $settings)) , array('type' => 'setting'));
-
+    drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
   }
 
   // Tab wise permission
@@ -473,51 +480,52 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
  * @return boolean
  */
 function itg_event_registration_price_calculat_group($number, $ticket_type_values, $group_5_cal, $group_10_cal, $single_group) {
- $ticket_type = explode('-', $ticket_type_values); 
- $ticket_type_value = $ticket_type[1];
-$group = '';
-if ($number > 9) {
-  $number_10_remain = $number % 10;
-  $val = $number - $number_10_remain;
-  $group_10 = $val / 10;
-  $group_ten_price = $group_10_cal[$ticket_type_value];
-  $group_10 = $group_10 * $group_ten_price;
-  if (!empty($number_10_remain)) {
-    if ($number_10_remain < 9 && $number_10_remain > 4) {
-      $number_5_remain = $number_10_remain % 5;
-      $val_5 = $number_10_remain - $number_5_remain;
-      $group_5 = $val_5 / 5;
-      $group_five_price = $group_5_cal[$ticket_type_value];
-      $group_5 = $group_5 * $group_five_price;
-    }else{
-      $group_single_10 = $number_10_remain * $group_ten_price;
-    }
-    if ($number_5_remain < 5 && !empty($number_5_remain)) {
-      $single_price = $single_group[$ticket_type_value];
-      $group_single_10 = $number_5_remain * $single_price;
-    }
-  }
-  $group = $group_10 + $group_5 + $group_single_10;
-  
-}elseif ($number <= 9 && $number > 4) {
-  $number_5_remain = $number % 5;
-  $val_5 = $number - $number_5_remain;
-  $group_new_5 = $val_5 / 5;
-  $group_five_price = $group_5_cal[$ticket_type_value];
-  $group_new_5 = $group_new_5 * $group_five_price;
-   if (!empty($number_5_remain)) {
-    if ($number_5_remain < 5) {
+  $ticket_type = explode('-', $ticket_type_values);
+  $ticket_type_value = $ticket_type[1];
+  $group = '';
+  if ($number > 9) {
+    $number_10_remain = $number % 10;
+    $val = $number - $number_10_remain;
+    $group_10 = $val / 10;
+    $group_ten_price = $group_10_cal[$ticket_type_value];
+    $group_10 = $group_10 * $group_ten_price;
+    if (!empty($number_10_remain)) {
+      if ($number_10_remain < 9 && $number_10_remain > 4) {
+        $number_5_remain = $number_10_remain % 5;
+        $val_5 = $number_10_remain - $number_5_remain;
+        $group_5 = $val_5 / 5;
+        $group_five_price = $group_5_cal[$ticket_type_value];
+        $group_5 = $group_5 * $group_five_price;
+      }
+      else {
+        $group_single_10 = $number_10_remain * $group_ten_price;
+      }
+      if ($number_5_remain < 5 && !empty($number_5_remain)) {
         $single_price = $single_group[$ticket_type_value];
-         $group_single_5 = $number_5_remain * $single_price;
+        $group_single_10 = $number_5_remain * $single_price;
+      }
     }
+    $group = $group_10 + $group_5 + $group_single_10;
   }
-  $group = $group_new_5 + $group_single_5;
-}
-elseif ($number < 5) {
-  $single_price = $single_group[$ticket_type_value];
-  $group = $number * $single_price;
-}
-return $group;
+  elseif ($number <= 9 && $number > 4) {
+    $number_5_remain = $number % 5;
+    $val_5 = $number - $number_5_remain;
+    $group_new_5 = $val_5 / 5;
+    $group_five_price = $group_5_cal[$ticket_type_value];
+    $group_new_5 = $group_new_5 * $group_five_price;
+    if (!empty($number_5_remain)) {
+      if ($number_5_remain < 5) {
+        $single_price = $single_group[$ticket_type_value];
+        $group_single_5 = $number_5_remain * $single_price;
+      }
+    }
+    $group = $group_new_5 + $group_single_5;
+  }
+  elseif ($number < 5) {
+    $single_price = $single_group[$ticket_type_value];
+    $group = $number * $single_price;
+  }
+  return $group;
 //watchdog('GROUP', $group);
 }
 
@@ -1084,18 +1092,32 @@ function itg_save_redirect($source, $new_redirect) {
   redirect_save($redirect);
 }
 
-
 /**
  * Implement funciton for get event type by event
  */
 function itg_event_backend_event_type() {
-  if(arg(0) == 'node' && is_numeric(arg(1))) {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
     $query = db_select('field_data_field_event_types', 'fdfe');
     $query->fields('fdfe', array('field_event_types_tid'));
     $query->condition('fdfe.bundle', 'event_backend', '=');
     $query->condition('fdfe.entity_id', arg(1), '=');
     $result = $query->execute()->fetchField();
     return itg_event_backend_past_speaker_event_id($result, arg(1));
+  }
+}
+
+/**
+ * Implement funciton for get event type by event
+ */
+function itg_event_backend_event_type_get_event_ids_for_speakers() {
+  $arg = $_GET['current_event'] ? $_GET['current_event'] : "";
+  if (!empty($arg)) {
+    $query = db_select('field_data_field_event_types', 'fdfe');
+    $query->fields('fdfe', array('field_event_types_tid'));
+    $query->condition('fdfe.bundle', 'event_backend', '=');
+    $query->condition('fdfe.entity_id', $arg, '=');
+    $result = $query->execute()->fetchField();
+    return itg_event_backend_past_speaker_event_id($result, $arg);
   }
 }
 
@@ -1111,7 +1133,7 @@ function itg_event_backend_past_speaker_event_id($event_type_tid, $even_nid) {
   $query->condition('n.nid', $even_nid, '!=');
   $query->condition('n.status', 1, '=');
   $result = $query->execute();
-  foreach($result as $rel) {
+  foreach ($result as $rel) {
     $event_ids[] = $rel->entity_id;
   }
   $even_ids = implode(',', $event_ids);
