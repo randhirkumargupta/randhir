@@ -404,6 +404,10 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
   $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   $fids = array();
   foreach ($node['upload']['#value'] as $img) {
     // Save media file.
@@ -473,10 +477,14 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 function itg_photogallery_crop_thumb($fid) {
   global $user;
   $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   $file_image = file_load($fid);
   $image = image_load($file_image->uri);
   $image_extension = end(explode('.', $file_image->uri));
-  $filepath = file_default_scheme() . '://'.$filedir;
+  $filepath = file_default_scheme() . '://' . $filedir;
   if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
     $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
   }

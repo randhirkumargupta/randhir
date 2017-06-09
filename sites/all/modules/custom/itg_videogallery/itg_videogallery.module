@@ -228,6 +228,10 @@ function itg_video_check_exist_file($filename) {
 function itg_videogallery_custom_submit($form, &$form_state) {
   global $user;
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   foreach ($form_state['values']['field_story_itg_tags'][LANGUAGE_NONE] as $tags) {
     $tag[] = $tags['name'];
   }
@@ -1473,6 +1477,10 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   $videos_data = $_POST['checkvalue'];
   $return_fid = array();
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
@@ -2273,6 +2281,10 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
  */
 function itg_videogallery_thumb_assign() {
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   $mainresult = array();
   $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
   $query->fields('up_video', array('entity_id'));
