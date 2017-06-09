@@ -716,6 +716,37 @@ function itg_rapid_api_resource() {
       	),
 	),
         
+        // homePage custom resource declaration.....
+	'homePage' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves storydetail schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_homePage',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	       
+                array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
   );
 
   return $api;
