@@ -1,9 +1,13 @@
 <?php
-
+/**
+ * Function to display form with dragaable view
+ * @return html
+ */
 function itg_event_render_form_block() {
+  drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg-event-speaker-order.js', array('type' => 'file', 'scope' => 'footer'));
   $table = '<table class="views-table">';
   $table .= '<tr>
-    <th>Speakers</th>
+    <th>Past Speakers List</th>
     <th>Speakers Order</th> 
   </tr>';
   $table .= '<tr>';
@@ -11,13 +15,16 @@ function itg_event_render_form_block() {
   $table .= drupal_render(drupal_get_form('itg_event_past_speakers'));
   $table .= '</td>';
   $table .= '<td>';
-  $table .= views_embed_view('past_speaker_event','order_reorder_widget', $_GET['current_event']);
+  $table .= views_embed_view('past_speaker_event', 'order_reorder_widget', $_GET['current_event']);
   $table .= '</td>';
   $table .= '</tr>';
   $table .= '</table>';
   return $table;
 }
 
+/**
+ *  {@inheritdocs}
+ */
 function itg_event_past_speakers($form, &$form_state) {
   $speakers = array();
   $past_spkr_event_ids = itg_event_backend_event_type_get_event_ids_for_speakers();
@@ -36,11 +43,13 @@ function itg_event_past_speakers($form, &$form_state) {
   if (count($speakers)) {
 
     $form['widget_data'] = array(
-      '#tree' => TRUE
+      '#tree' => TRUE,
+      '#prefix' => '<div class="wrapper-widget">',
+      '#suffix' => '</div>'
     );
 
     $speakers = array_unique($speakers);
-
+    
     foreach ($speakers as $key => $value) {
       $form['widget_data'][$key]['speaker_id'] = array(
         '#type' => 'checkboxes',
@@ -57,12 +66,15 @@ function itg_event_past_speakers($form, &$form_state) {
 
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => 'save',
+      '#value' => 'Add To Widget',
     );
   }
   return $form;
 }
 
+/**
+ * {@inhertidocs}
+ */
 function itg_event_past_speakers_submit($form, &$form_state) {
   $widget_data = $form_state['input']['widget_data'];
   $event_id = $form_state['input']['event_id'];
@@ -71,9 +83,15 @@ function itg_event_past_speakers_submit($form, &$form_state) {
   drupal_set_message("Anchors Has Been Added To Widget");
   foreach ($widget_data as $widget) {
     $target_id = array_values($widget['speaker_id']);
+    // Logic to skip current speaker if already added.
+    $row_count = __skip_already_added_speaker($target_id[0], $event_id);
+    if($row_count) {
+      continue;
+    }
+    
+    $max_weight = __max_weight_for_speker($event_id);
     if ($target_id[0] != 0) {
       try {
-        watchdog("speaker_widget", $target_id  . $widget_name . $event_id);
         db_merge('itg_widget_order')
             ->key(array(
               'nid' => $target_id[0],
@@ -82,7 +100,7 @@ function itg_event_past_speakers_submit($form, &$form_state) {
               'content_type' => "All",
             ))
             ->fields(array(
-              'weight' => $target_id[0],
+              'weight' => ++$max_weight[0],
               'nid' => $target_id,
               'widget' => $widget_name,
               'cat_id' => $event_id,
@@ -97,9 +115,71 @@ function itg_event_past_speakers_submit($form, &$form_state) {
   }
 }
 
+/**
+ * function to get max value of event weight.
+ */
+function __max_weight_for_speker($event_id) {
+  $max_query_all = db_select('itg_widget_order');
+  $max_query_all->addExpression('MAX(weight)', 'weight');
+  $max_query_all->condition('cat_id', $event_id);
+  $max_query_all->condition('widget', 'itg_event_speaker_order_widget');
+  $max_result_all = $max_query_all->execute()->fetchCol();
+  if ($max_result_all != NULL) {
+    return $max_result_all;
+  }
+  else {
+    return 1;
+  }
+}
+
+/**
+ * Function which gives count for event + speaker combination.
+ * 
+ * @param int $speaker_id
+ * @param int $event_id
+ * @return int
+ */
+
+function __skip_already_added_speaker($speaker_id, $event_id) {
+  $count_query = db_select('itg_widget_order' , 'iwo');
+  $count_query->fields('iwo' , array("nid"));
+  $count_query->condition('iwo.cat_id', $event_id);
+  $count_query->condition('iwo.nid', $speaker_id);
+  $count_query->condition('iwo.widget', 'itg_event_speaker_order_widget');
+  return $count_query->execute()->rowCount();
+}
+
+/**
+ * Function gives speaker data.
+ * 
+ * @param int $id
+ * @return string
+ */
 function __get_speaker_data($id) {
   $query = db_select('node', 'n');
   $query->fields("n", array("title"));
   $query->condition('n.nid', $id);
   return $query->execute()->fetchField();
+}
+
+/**
+ * Implement Hook_FORM_FORM_ID_ALTER.
+ */
+function itg_event_registration_form_views_form_past_speaker_event_order_reorder_widget_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "past_speaker_event_order_reorder_submit";
+}
+
+/**
+ * Custom submit handler function.
+ */
+function past_speaker_event_order_reorder_submit($form, &$form_state) {
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  foreach ($draggable_view_data as $key => $value) {
+    db_update('itg_widget_order')
+        ->fields(array('weight' => $value['weight'],))
+        ->condition('widget', 'itg_event_speaker_order_widget')
+        ->condition('nid', $value['id'])
+        ->condition('cat_id', $_GET['current_event'])
+        ->execute();
+  }
 }
