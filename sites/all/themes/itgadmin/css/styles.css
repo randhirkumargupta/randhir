@@ -11658,7 +11658,7 @@ span.file a {
 }
 
 [id*="field-ticket-group-type-values"] .form-type-textfield > label, [id*="field-ticket-group-type-values"] .form-type-select > label {
-  width: 280px;
+  width: 340px;
 }
 [id*="field-ticket-group-type-values"] thead {
   display: none;
