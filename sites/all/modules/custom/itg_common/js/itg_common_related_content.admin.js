@@ -83,11 +83,11 @@ jQuery(document).ready(function () {
             }
             checkedlist += '<li class="ui-state-default"><div class="rc-top"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | <span class="item-type">' + display_type + '</span> | <a href="' + solr_uri + '" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></div><div class="rc-bottom"><input class="rc-title" type="text" value="' + display_tit + '" /></div></li>';
         }
-
+        jQuery('.checked-list').html(checkedlist);
     }
     // end of code
 
-    jQuery('.checked-list').html(checkedlist);
+    
     if (checkedlist) {
         jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
     }
