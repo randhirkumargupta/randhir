@@ -41,16 +41,16 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#title' => t('First Name'),
     '#type' => 'textfield',
     '#maxlength' => 255,
-    '#required' => TRUE,
-    '#attributes' => array('placeholder' => 'E.g., Ram'),
+   // '#required' => TRUE,
+    '#attributes' => array('placeholder' => 'E.g., Ram', 'autocomplete' => 'off'),
     '#default_value' => $user_detail->field_first_name['und'][0]['value'],
   );
   $form['lname'] = array(
     '#title' => t('Last Name'),
     '#type' => 'textfield',
     '#maxlength' => 255,
-    '#required' => TRUE,
-    '#attributes' => array('placeholder' => 'E.g., Patel'),
+    //'#required' => TRUE,
+    '#attributes' => array('placeholder' => 'E.g., Patel', 'autocomplete' => 'off'),
     '#default_value' => $user_detail->field_last_name['und'][0]['value'],
   );
   $form['mail'] = array(
@@ -88,6 +88,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#attributes' => array(
       'placeholder' => 'E.g., +91 9999999999',
       'readonly' => TRUE,
+      'autocomplete' => 'off',
     ),
     '#prefix' => '<div class="change-mobile">',
     '#suffix' => $edit_mobile_link . '</div>',
@@ -254,6 +255,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#value' => t('Save'),
   );
 
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js',
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+  );
+  
   return $form;
 }
 
@@ -338,18 +344,18 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
       form_set_error('mail', t('Please enter valid email address.'));
     }
   }
-  $first_name = trim($form_state['values']['fname']);
-  if ($first_name) {
-    if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
-      form_set_error('fname', t('Please enter only letters, dot and white space allowed.'));
-    }
-  }
-  $last_name = trim($form_state['values']['lname']);
-  if ($last_name) {
-    if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
-      form_set_error('lname', t('Please enter only letters, dot and white space allowed.'));
-    }
-  }
+//  $first_name = trim($form_state['values']['fname']);
+//  if ($first_name) {
+//    if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
+//      form_set_error('fname', t('Please enter only letters, dot and white space allowed.'));
+//    }
+//  }
+//  $last_name = trim($form_state['values']['lname']);
+//  if ($last_name) {
+//    if (!preg_match("/^[a-zA-Z. ]*$/", $last_name) && !empty($last_name)) {
+//      form_set_error('lname', t('Please enter only letters, dot and white space allowed.'));
+//    }
+//  }
   
   // validate alternate email
   if (function_exists('itg_sso_user_email_check')) {

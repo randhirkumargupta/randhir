@@ -270,4 +270,46 @@ jQuery(document).ready(function () {
     jQuery('#edit-zip-code').keyup(function() {
         this.value = this.value.replace(/[^\d\.\-]/g,'');
     });
+    
+    // Custom validator function for social media start
+            jQuery("#itg-personalization-edit-profile-form").validate({
+                submitHandler: function(form) {
+                    jQuery('input:submit').attr('disabled', 'disabled');
+                    form.submit();
+                },
+                onfocusout: function(element) {
+                    jQuery(element).valid();
+                },
+                ignore: '',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    var elementName = element.attr('name');
+                    var errorPlaceHolder = '';
+                    switch (elementName) {
+
+                        default:
+                            errorPlaceHolder = element.parent();
+                    }
+                    error.appendTo(errorPlaceHolder);
+                },
+                rules: {
+                    'fname': {
+                        required: true
+
+                    },
+                    'lname': {
+                        required: true,
+                    },
+                  
+                },
+                messages: {
+                    'fname': {
+                        required: 'First name field is required.'
+                    },
+                    'lname': {
+                        required: 'Last name field is required.'
+
+                    }
+                }
+            });
 });
