@@ -5,7 +5,6 @@
 (function ($) {
     Drupal.behaviors.itg_event_registration = {
         attach: function (context, settings) {
-
             //Hide left side vertical tabs in case of simple users
             var uid = settings.itg_event_registration.settings.uid;
             var nid = settings.itg_event_registration.settings.nid;
@@ -120,6 +119,11 @@ jQuery(document).ready(function () {
     }
 
     jQuery(document).on('change', 'input[type="radio"]', function () {
+        // show hide msg
+        var msg_class = jQuery(this).val();
+        jQuery('.reg_pric').hide();
+        jQuery('.'+msg_class).show();
+        
         var $eventNum = jQuery(".event-form-number");
         var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
         var a = $eventNum.val();
@@ -266,4 +270,8 @@ jQuery(document).on('change', 'input[type="radio"]', function () {
             });
 
 
+    });
+    
+    jQuery(document).ready(function(){
+        if(jQuery('input[type="radio"]').is(':checked')) { jQuery('.'+jQuery('input[type="radio"]:checked').val()).show(); }
     });
