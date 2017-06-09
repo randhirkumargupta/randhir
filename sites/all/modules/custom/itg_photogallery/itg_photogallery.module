@@ -414,7 +414,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $scheme = variable_get('file_default_scheme', 'public') . '://';
     $source = $img['tmppath'];
 
-    $directory = '';
+    $directory = $filedir;
     $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $img['name']);
     $destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
     global $user;

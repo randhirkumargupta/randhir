@@ -2575,7 +2575,6 @@ function itg_videogallery_video_update_embeded_url() {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('solr_video_id', 'video_embedded_url'));
   $result = $query->execute()->fetchall();
-
   foreach ($result as $vid) {
     if ($vid->video_embedded_url != "") {
       itg_videogallery_update_embedcode_url($vid->solr_video_id);
