@@ -41,12 +41,14 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#title' => t('First Name'),
     '#type' => 'textfield',
     '#maxlength' => 255,
+    '#required' => true,
     '#attributes' => array('placeholder' => 'E.g., Ram', 'autocomplete' => 'off'),
     '#default_value' => $user_detail->field_first_name['und'][0]['value'],
   );
   $form['lname'] = array(
     '#title' => t('Last Name'),
     '#type' => 'textfield',
+    '#required' => true,
     '#maxlength' => 255,
     '#attributes' => array('placeholder' => 'E.g., Patel', 'autocomplete' => 'off'),
     '#default_value' => $user_detail->field_last_name['und'][0]['value'],
