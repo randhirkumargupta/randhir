@@ -18,7 +18,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 
     $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'] = $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'].' <span class="form-required">*</span>';
      $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'] = $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'].' <span class="form-required">*</span>';
-
+    
     if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
          $form['actions']['itg_custom_button'] = array(
           '#type' => 'submit',
@@ -295,7 +295,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       form_set_error('field_registration_close_date', t('Please enter time in Close date'));
     }
   }
-  pr($form_state['values']['field_registration_date_checkbox'][LANGUAGE_NONE][0]['value']);
+  
   if($form_state['values']['field_registration_date_checkbox'][LANGUAGE_NONE][0]['value'] == 1){
     if(empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value'])){
       form_set_error('field_story_expiry_date', t('Registration start date is required.'));
