@@ -1643,6 +1643,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-manage-survey-tabs,
 #block-menu-menu-manage-quiz-tabs,
 #block-menu-menu-newsletter-manage-tabs,
+#block-menu-menu-poll-content-admin-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -11033,7 +11034,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-event_backend-form .form-field-name-field-no-of-tickets{margin-bottom: 140px;}
 [id*="field-ticket-group-type-values"]{
   .form-type-textfield > label, .form-type-select > label{
-    width: 280px;
+    width: 340px;
   }
   thead{display: none;}
   tbody{

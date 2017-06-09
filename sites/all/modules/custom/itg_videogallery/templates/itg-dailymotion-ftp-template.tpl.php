@@ -58,14 +58,14 @@ $singalclass= "";
                 ?>
                 <div class="video-options-wrapper"></div>
 <?php if (isset($_GET['input_filed']) && $_GET['input_filed'] == 'ckeditor') { ?>
-                    <a href="javascript:void(0)" class = "button asso-with-ckeditor"><?php print t('Associate Video'); ?></a>
+                    <a href="javascript:void(0)" class = "btn-submit asso-with-ckeditor"><?php print t('Associate Video'); ?></a>
                     <input type="hidden" id="single_add" name="single_add" value="0">
                     <?php
                 }
                 else if ($_GET['no_value'] == 'single') {
                     ?>
                     <input type="hidden" id="single_add" name="single_add" value="1">
-                    <a href="javascript:void(0)" class = "button asso-filed_single" btn_name="<?php echo $_GET['btn_name']; ?>" field_name="<?php echo $_GET['field_name']; ?>"><?php print t('Associate Video'); ?></a>
+                    <a href="javascript:void(0)" class = "btn-submit asso-filed_single" btn_name="<?php echo $_GET['btn_name']; ?>" field_name="<?php echo $_GET['field_name']; ?>"><?php print t('Associate Video'); ?></a>
 
                     <?php
                 }
