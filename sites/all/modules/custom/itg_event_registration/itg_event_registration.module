@@ -376,7 +376,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $participate = $types->field_participate_type[LANGUAGE_NONE][0]['tid'];
           $individual = $types->field_individual_registration_fe[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
-          $group_5[$terms->tid] = '(' . $terms->name . ') 5 members Rs-' . $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'];
+
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_5_cal[$terms->tid] = $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'];
           $group_10_cal[$terms->tid] = $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
@@ -391,9 +393,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $participate = $types->field_participate_type[LANGUAGE_NONE][0]['tid'];
           $individual = $types->field_early_bird_individual_regi[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
-          $group_5[$terms->tid] = '(' . $terms->name . ') 5 members Rs-' . $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'];
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_5_cal[$terms->tid] = $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'];
-          $group_10[$terms->tid] = '(' . $terms->name . ') 10 members Rs-' . $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'];
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_10_cal[$terms->tid] = $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
           //$option[$individual . '-' . $count] = $terms->name . ' <b>Rs ' . $individual . '</b>';
@@ -414,12 +416,12 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       }
     }
     /*     * **Value assign to Ticket type ***** */
-    $group_5_member = implode(', ', $group_5);
-    $group_10_member = implode(', ', $group_10);
+    $group_5_member = implode('  ', $group_5);
+    $group_10_member = implode('  ', $group_10);
     unset($form['field_erf_ticket_type']['#validated']);
     unset($form['field_erf_ticket_type'][LANGUAGE_NONE]['#options']);
     $form['field_erf_ticket_type'][LANGUAGE_NONE]['#options'] = $option;
-    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = $group_5_member . ', ' . $group_10_member;
+    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = '<div class="ticket-type-message">' . $group_5_member . ', ' . $group_10_member . '</div>';
     $form['field_erf_ticket_type']['#validated'] = TRUE;
     $ticket_type_value = $_POST['field_erf_ticket_type']['und'];
     $registration_price = itg_event_registration_price_calculat_group($max_delta, $ticket_type_value, $group_5_cal, $group_10_cal, $single_group);
