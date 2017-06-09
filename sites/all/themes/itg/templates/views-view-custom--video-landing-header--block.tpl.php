@@ -79,7 +79,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=<?php echo $autoplay; ?>&sharing-enable=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
