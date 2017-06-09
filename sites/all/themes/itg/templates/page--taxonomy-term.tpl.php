@@ -44,7 +44,22 @@ window.addEventListener("message", function(ev) {
                 <?php endif; ?>
                 
                 <?php print render($page['header']); ?>
-                    
+                <?php 
+                  $arg = arg(); 
+                  $term = taxonomy_term_load($arg[2]);
+                ?>
+                <!-- Sponsored Category changes --> 
+                <?php
+                  if((_is_sponsored_category($arg[2])) && (!empty($term->field_show_fields))){
+                    $show_field_val = $term->field_show_fields[LANGUAGE_NONE][0]['value'];
+                    if($show_field_val == 'category_icon'):
+                      print "<div class='container'><span>".theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small'))."</span></div>";
+                    else:
+                      print "<div class='container'><span>".$term->field_impact_text[LANGUAGE_NONE][0]['value']."</span></div>";
+                    endif;
+                    //print_r($term);die;
+                  }
+                ?>
             </section>
         </header>
     <?php
@@ -82,8 +97,7 @@ window.addEventListener("message", function(ev) {
       <?php endif; ?>
      
       <a id="main-content"></a>
-      <!-- Page title for specific page -->
-      <?php $arg = arg(); ?>
+      <!-- Page title for specific page -->      
       <?php
           $flag = '';
           switch ($arg[0]) {
@@ -114,15 +128,16 @@ window.addEventListener("message", function(ev) {
       <?php
         global $base_url;
         $taxonomy_url = $base_url."/taxonomy/term/$arg[2]";
-        $term = taxonomy_term_load($arg[2]);
-        $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-        $query = drupal_get_query_parameters();
-        if ($query['view_type'] == 'list')  {
-        $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
-        } elseif ($query['view_type'] == 'grid')   {
-        $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';    
-        } else {
-        $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
+        if(!_is_sponsored_category($arg[2])){          
+          $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+          $query = drupal_get_query_parameters();
+          if ($query['view_type'] == 'list')  {
+          $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
+          } elseif ($query['view_type'] == 'grid')   {
+          $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';    
+          } else {
+          $header_content .= '<div class="list-grid">' .l('<i class="fa fa-list" aria-hidden="true"></i>'.t(' List'),$taxonomy_url, array('attributes' => array('class' => 'active'),'html'=>true,'query'=>array('view_type'=>'list'))).'<span class="pipline"> | </span>'.l('<i class="fa fa-th" aria-hidden="true"></i>'.t(' Grid'),$taxonomy_url ,array('html'=>true,'query'=>array('view_type'=>'grid'))).'</div>';
+          }
         }
         
         

@@ -1125,3 +1125,17 @@ function _get_int_path_from_url($url) {
   return $int_path;
 }
 
+function _is_sponsored_category($tid) {
+  $return = FALSE;
+  $query = db_select('field_data_field_is_sponsor', 'fs');
+  $query->fields('fs', array('field_is_sponsor_value'));
+  $query->condition('fs.entity_id', $tid, '=');
+  $query->condition('fs.bundle', 'category_management', '=');
+  $query->condition('fs.entity_type', 'taxonomy_term', '=');
+  $query_result = $query->execute()->fetchField();
+  if($query_result == 1){
+    $return = TRUE;
+  }
+  return $return;
+  //echo "dd".$query_result;die;
+}
