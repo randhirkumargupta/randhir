@@ -71,11 +71,57 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
         $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
         
+        
+        $items_count = 3;
+      $field_name = 'field_story_technology';
+      $form_theme = $form[$field_name][LANGUAGE_NONE]['#theme'];
+      // Remove delete and add more buttons
+      //~ $form_state['field'][$field_name][LANGUAGE_NONE]['items_count'] = $items_count;
+		$items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+       $form[$field_name]['und'][0]['remove_button']['#access'] = TRUE;
+		$form[$field_name]['und']['add_more']['#access'] = TRUE;
+      // Generate required number of fields collection
+      if ($items_count > 1 and $items['items_count'] != $items_count) {
+		  
+        $items['items_count'] = $items_count;
+        $items['field']['cardinality'] = FIELD_CARDINALITY_UNLIMITED;//$items_count;
+        $form[$field_name][LANGUAGE_NONE] = field_multiple_value_form($items['field'], $items['instance'], LANGUAGE_NONE, array(), $form, $form_state);
+        // Reset theme function, as field_multiple_value_form hijacks it
+        $form[$field_name][LANGUAGE_NONE]['#theme'] = $form_theme;
+        $rebuild_p = TRUE;
+        //~ $form_state['rebuild'] = TRUE;
+      }
+      // Fill generated fields with data
+      for ($delta = 0; $delta < ($items_count-1); $delta++) {
+        $form['field_story_technology'][LANGUAGE_NONE][$delta]['field_technology_photo_title'][LANGUAGE_NONE][0]['value']['#default_value'] = 'new value';
+  
+        
+      }
+      //~ echo '<pre>';print_r($form['category_holder']['itg_primary_category']);die;
+      if ($rebuild_p) {
+		  //~ unset($form['#after_build'][1])
+		   //$form_state['cache'] = FALSE;
+		   //~ $form['#after_build'][] = 'tttttt';
+		  //$form['#after_build'][] = 'tttttt';
+		  //~ $form['#after_build'][2] = 'itg_category_multiple_after_build';
+	  }
+        
+        //~ echo '<pre>';print_r($clone_arr_response);die;
+        //edit-field-story-technology-und-0-field-technology-sample-photo-und-0-upload-itg_image_repository-display
         //~ if(isset($clone_arr_response->sm_field_technology_photo_title)){
 			//~ foreach($clone_arr_response->sm_field_technology_photo_title as $index => $value){
-				//~ $form['field_story_technology']['und'][$index]['field_technology_photo_title']['und'][0]['value']['#default_value'] = $value;
+				$extra_large_fid = itg_clone_image_mapping($image);
+				//~ if($index == 0){
+					//~ $form['field_story_technology']['und'][$index]['field_technology_photo_title']['und'][0]['value']['#default_value'] = $value;
+					//~ $form['field_story_technology']['und'][$index]['#delta'] = $index;
+				//~ }else{
+					$form['field_story_technology']['und'][$index] = $form['field_story_technology']['und'][$index-1];
+					$form['field_story_technology']['und'][$index]['field_technology_photo_title']['und'][0]['value']['#default_value'] = $value;
+					$form['field_story_technology']['und'][$index]['#delta'] = $index;
+				//~ }
 			//~ }
 		//~ }
+		//~ $form_state['rebuild'] = true;
         //~ echo '<pre>';print_r($form['field_story_technology']['und']);die;
         // field collection
         //~ $program_fileds = entity_create('field_collection_item', $program);
@@ -101,13 +147,13 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function itg_clone_story_field_widget_form_alter(&$element, &$form_state, $context) {
-  if ($element['#field_name'] == 'field_story_technology' && $context['instance']['bundle'] == 'story_node_form') {die('sad');
-    $element['field_technology_photo_title']['und'][0]['value']['#value'] = 'valuess';
-    $element['field_technology_photo_title']['und'][0]['value']['#default_value'] = 'default valuesss';
+//~ function itg_clone_story_field_widget_form_alter(&$element, &$form_state, $context) {
+  //~ if ($element['#field_name'] == 'field_story_technology' && $context['instance']['bundle'] == 'story') {
+    //~ $element['field_technology_photo_title']['und'][0]['value']['#value'] = 'valuess';
+    //~ $element['field_technology_photo_title']['und'][0]['value']['#default_value'] = 'default valuesss';
 
-  }
-}
+  //~ }
+//~ }
 
 /**
  * Implement itg_clone_story_data
