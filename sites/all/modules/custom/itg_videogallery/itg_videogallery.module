@@ -2542,10 +2542,11 @@ function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
   $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
-  $query->fields('drd', array('video_id', 'encoding_progress'));
+  $query->fields('drd', array('video_id', 'encoding_progress','name'));
   $query->condition('encoding_progress', '100', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
+
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
     $ch = curl_init();
@@ -2570,6 +2571,7 @@ function itg_videogallery_video_bitrate() {
                   ->fields(array(
                     'video_id' => $vid->video_id,
                     'bitate_url' => $json_url,
+                    'video_name' => $vid->name,
                     'bitates_field' => $keys,
                     'is_download' => 0,
                   ))->condition('id', $result[0]->id)
@@ -2582,6 +2584,7 @@ function itg_videogallery_video_bitrate() {
                   'video_id' => $vid->video_id,
                   'bitate_url' => $json_url,
                   'bitates_field' => $keys,
+                  'video_name' => $vid->name,
                   'is_download' => 0,
                 ))
                 ->execute();
@@ -3536,12 +3539,13 @@ function itg_videogallery_dm_to_s3() {
       $senddata = itg_video_send_dm_to_s3($value->bitate_url, $video_urlsdata);
       if (!empty($senddata)) {
         $node = new stdClass();
-        $node->title = $video_urlsdata;
+        $node->title = $value->video_name;
         $node->type = "itg_bitrates_video";
         node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
         $node->language = LANGUAGE_NONE;
         $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
         $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
+        $node->field_resolution [LANGUAGE_NONE][0]['value'] = $dataarray[$value->bitates_field];
         $node->uid = $user->uid;
         $node->status = 1; //(1 or 0): Published or not
         $node->promote = 0; //(1 or 0): Promoted to front page
