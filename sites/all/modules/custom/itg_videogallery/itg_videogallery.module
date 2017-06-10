@@ -945,9 +945,18 @@ function itg_videogallery_custom_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_videogallery_after_build($form, &$form_state) {
-
-  global $user, $base_url;
   $arg = arg(2);
+  global $user, $base_url;
+  if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
+    foreach ($form['field_video_upload']['und'] as $delta => $field) {
+      if (is_numeric($delta)) {
+        unset($form['field_video_upload']['und'][$delta]['field_migrated_video_url']);
+        unset($form['field_multi_bitrate']);
+        unset($form['field_noindex_nofollow']);
+      }
+    }
+  }
+
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] == 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -970,9 +979,7 @@ function itg_videogallery_after_build($form, &$form_state) {
   }
   else {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
-      unset($form['field_video_upload']['und'][$delta]['field_migrated_video_url']);
-      unset($form['field_multi_bitrate']);
-      unset($form['field_noindex_nofollow']);
+
       if (is_numeric($delta)) {
         if ($arg == 'edit') {
           $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
@@ -981,17 +988,6 @@ function itg_videogallery_after_build($form, &$form_state) {
             unset($form['field_video_upload']['und'][$delta]);
           }
         }
-      }
-    }
-  }
-  foreach ($form['field_video_upload']['und'] as $delta => $field) {
-
-    if (is_numeric($delta)) {
-
-      print $video_url = $form['field_video_upload']['und'][$delta]['field_migrated_video_url']['und'][0]['value']['#default_value'];
-      print $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
-      if ($video_fid == "" && $video_url == "") {
-        unset($form['field_video_upload']['und'][$delta]);
       }
     }
   }
