@@ -293,6 +293,8 @@ function simplesamlphp_auth_init() {
               $lname = _simplesamlphp_auth_get_lname();
               $twitterimage = _simplesamlphp_auth_get_twitterimage();
               $dob = _simplesamlphp_auth_get_dob();
+              $gender = _simplesamlphp_auth_get_gender();
+              $gender_lower_case = strtolower($gender);
               $fid = simplesaml_twitter_image($twitterimage);
               $userinfo = array('roles' => $roles, 'field_first_name' => array(
                 LANGUAGE_NONE => array(
@@ -323,6 +325,16 @@ function simplesamlphp_auth_init() {
                   LANGUAGE_NONE => array(
                     0 => array(
                       'value' => $fb_dob
+                    )
+                  )
+                );
+              }
+              
+              if (!empty($gender)) {
+                $userinfo['field_user_gender'] = array(
+                  LANGUAGE_NONE => array(
+                    0 => array(
+                      'value' => $gender_lower_case
                     )
                   )
                 );
@@ -1107,6 +1119,38 @@ function _simplesamlphp_auth_get_dob() {
   }
 
   return $dob;
+}
+
+/**
+ * Gets the gender attribute.
+ *
+ * @return
+ *   The gender attribute.
+ */
+function _simplesamlphp_auth_get_gender() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $gender = '';
+  global $seg;
+  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.gender']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['facebook.gender'];
+  }
+  else {
+   $seg = '';
+  }
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $gender = $seg[0];
+    }
+    else {
+      $gender = '';
+    }
+  }
+
+  return $gender;
 }
 
 /**

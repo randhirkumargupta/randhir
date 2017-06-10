@@ -1647,38 +1647,34 @@ footer{
             }
         }
     }
-    .view-content{        
-        @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
+    .view-content{
         ul{
             @extend .list-none;
         }        
-        li.itg-search-list{
+        .itg-search-list{
             padding: 15px 0;
             + li{
                 border-top: 1px solid #ddd;
             }
-        }
-        .search-pic{
-            width: 144px;
-            height: 107px;            
-            overflow: hidden;
-            &:empty{
-                display: none;
+            .views-field-sm-field-custom-story-small-large-url{
+              width: 144px;
+              float: left;
             }
-        }
-        .search-detail{
-            h2{
-                @include font(15px,20px);
-                margin-bottom:10px;
+            > .views-field-label, > .search-detail{
+              padding-left: 154px;
+            }
+            .views-field-label{
+              h2{
+                @include font(22px,28px); 
+                margin-top:-5px;
                 a{
-                    @include font(15px,20px,$itg-font-medium);  
-                    &:hover{color: #1a3c8d;}
+                  @include font(22px,28px); 
                 }
+              }
             }
-            p{
-                display: none;
-            }
+            
         }
+        
         .social-share{
             @include display-inline;
             @include social-share;
@@ -4602,35 +4598,27 @@ h1.category-heading{
         ul{
             @extend .list-none;
         }        
-        li.itg-search-list{
-            padding: 25px 0;
-            > div{
-              padding-left: 150px;
-              &.views-field-sm-field-custom-story-small-large-url{
-                padding-left: 0;
+        .itg-search-list{
+          padding: 25px 0;
+          + li{
+            border-top: 1px solid #ddd;
+          }
+          .views-field-sm-field-custom-story-small-large-url{
+            width: 144px;
+            float: left;
+          }
+          > .views-field-label, > .search-detail{
+            padding-left: 154px;
+          }
+          .views-field-label{
+            h2{
+              @include font(22px,28px); 
+              margin-top:-5px;
+              a{
+                @include font(22px,28px); 
               }
             }
-        }
-        .search-pic, .views-field-sm-field-custom-story-small-large-url{
-            width: 144px;
-            height: 107px;            
-            overflow: hidden;
-            &:empty{
-                display: none;
-            }
-        }
-        .search-detail{
-            h2{
-                @include font(15px,20px);
-                margin-bottom:10px;
-                word-wrap: break-word;
-                a{
-                    @include font(15px,20px,$itg-font-medium);   
-                }
-            }
-            p{
-                display: none;
-            }
+          }
         }
         .social-share{
             @include display-inline;
@@ -6379,7 +6367,7 @@ section.sidebar{
         }
     }        
 }
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block{
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block{
     margin-top: 20px;
     ul{
         @extend .list-none;
@@ -6909,6 +6897,33 @@ section.sidebar{
                 span{
                 padding-left: 0;
             }
+        }
+        .ticket-type-message {
+          font-size: 12px;
+          margin-bottom: 30px;
+          color: green;
+          padding-left: 130px;
+        }
+        #edit-field-erf-ticket-type{
+          .form-type-radios{
+            label{width: 130px;}
+            .form-radios{
+              padding-left: 130px;
+              .form-type-radio{
+                padding-right: 20px;
+                .form-radio{
+                  margin: 2px;
+                }
+                label{
+                  b{
+                    display: block;
+                    margin: 5px 0 0 18px;
+                  }
+                }
+              }
+            }
+          }
+          .description{display: none;}
         }
         .form-field-type-field-collection .form-item .form-item{
             margin: 15px 0;

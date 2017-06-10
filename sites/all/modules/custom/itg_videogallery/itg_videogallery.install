@@ -180,6 +180,11 @@ function itg_videogallery_schema() {
         'length' => '250',
         'null' => TRUE,
       ),
+      'video_name' => array(
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
       'is_download' => array(
         'type' => 'int',
         'not null' => TRUE,

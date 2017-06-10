@@ -524,13 +524,11 @@ function itg_akamai_node_update($node) {
 
   $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
-  if (in_array($node->type, $mapping)) {
-    if (user_access("purge itg akamai cache")) {
+  if (in_array($node->type, $mapping)) { //p($node);
+    //if (user_access("purge itg akamai cache")) {
       if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $url = drupal_get_path_alias('node/' . $node->nid);
-
         // Checking if URL alias changed removing Old one.
-
         $current_url = NULL;
         $previous_url = NULL;
         if (function_exists('itg_common_custompath_insert_load')) {
@@ -556,7 +554,7 @@ function itg_akamai_node_update($node) {
         itg_akamai_purge_story_related_to_video($node->nid);
       }
       // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-    }
+    //}
 
     if (user_access("administer itg akamai")) {
       // Setting metadata for the TTL for each node id 

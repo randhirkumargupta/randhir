@@ -65,7 +65,7 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
         $form['actions']['submit']['#value'] = 'Submit';
         $form['#after_build'][] = 'itg_ask_expert_after_build';
         $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
-        $destination = 'ask-an-expert';
+        $destination = 'ask-an-expert-backend';
         if (!empty($form['nid']['#value'])) {
             $form['actions']['cancel'] = array(
                 '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -561,7 +561,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     if (!empty($askquestion->title)) {
         $form['html'] = array(
             '#type' => 'markup',
-            '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',
+            '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert/{$askquestion->field_user_source_term_id_value}")) . '</div>',
             '#tree' => true,
         );
     }
