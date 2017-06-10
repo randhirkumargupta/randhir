@@ -283,7 +283,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'checkbox',
           '#weight' => 14,
           '#required' => TRUE,
-          '#title' => t('<b>Terms and Conditions:</b>'),
+          '#title' => t('Terms and Conditions: '),
         );
 
         $form['cutomtext'] = array(
@@ -498,7 +498,8 @@ function itg_event_registration_price_calculat_group($number, $ticket_type_value
         $group_5 = $group_5 * $group_five_price;
       }
       else {
-        $group_single_10 = $number_10_remain * $group_ten_price;
+        $single_10_price = $single_group[$ticket_type_value];
+        $group_single_10 = $number_10_remain * $single_10_price;
       }
       if ($number_5_remain < 5 && !empty($number_5_remain)) {
         $single_price = $single_group[$ticket_type_value];
