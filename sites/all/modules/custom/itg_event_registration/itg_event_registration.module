@@ -283,7 +283,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'checkbox',
           '#weight' => 14,
           '#required' => TRUE,
-          '#title' => t('<b>Terms and Conditions:</b>'),
+          '#title' => t('Terms and Conditions: '),
         );
 
         $form['cutomtext'] = array(
