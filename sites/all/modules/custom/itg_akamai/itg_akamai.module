@@ -550,7 +550,7 @@ function itg_akamai_node_update($node) {
         }
       }
       //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-      if ($node->type = 'videogallery') {
+      if ($node->type == 'videogallery') {
         itg_akamai_purge_story_related_to_video($node->nid);
       }
       // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
@@ -586,7 +586,7 @@ function itg_akamai_node_delete($node) {
       }
 
       //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-      if ($node->type = 'videogallery') {
+      if ($node->type == 'videogallery') {
         itg_akamai_purge_story_related_to_video($node->nid);
       }
       // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
