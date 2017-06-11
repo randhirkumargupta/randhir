@@ -17,7 +17,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  //p(node_load(20995));
+  
   global $user, $base_url, $theme;
   $arg = arg();
   // condition for archive story redirect

@@ -93,24 +93,14 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
     case 'videogallery_node_form':
+      $arg = arg(2);
       $form['field_story_expert_description']['und'][0]['#format'] = 'icon_format';
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
-      foreach ($form['field_video_upload']['und'] as $delta => $field) {
 
-        if (is_numeric($delta)) {
-          $arg = arg(2);
-          if ($arg == 'edit') {
-            $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
-            $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
-            if (empty($file_exist) || $video_fid < 1) {
-              unset($form['field_video_upload']['und'][$delta]);
-            }
-          }
-        }
-      }
+
       if ($user->uid != 1) {
         unset($form['field_video_configurations']['und']['#options']['comment']);
       }
@@ -946,7 +936,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     form_set_error('field_video_upload', t("Please Remove Migrated Video Url."));
   }
   if ($is_migrate_validate == 0) {
-    $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "";
+    $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "videogallery";
   }
 }
 
@@ -955,7 +945,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_videogallery_after_build($form, &$form_state) {
-
+  $arg = arg(2);
   global $user, $base_url;
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
@@ -963,6 +953,41 @@ function itg_videogallery_after_build($form, &$form_state) {
         unset($form['field_video_upload']['und'][$delta]['field_migrated_video_url']);
         unset($form['field_multi_bitrate']);
         unset($form['field_noindex_nofollow']);
+      }
+    }
+  }
+
+  if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] == 'migrated') {
+    foreach ($form['field_video_upload']['und'] as $delta => $field) {
+      if (is_numeric($delta)) {
+
+        $video_url = $form['field_video_upload']['und'][$delta]['field_migrated_video_url']['und'][0]['value']['#default_value'];
+        $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
+        if (!empty($video_url)) {
+          unset($form['field_video_upload']['und'][$delta]['field_include_ads']);
+          unset($form['field_video_upload']['und'][$delta]['field_video_private']);
+          unset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']);
+        }
+        else if ($video_fid == "" && $video_url == "") {
+          unset($form['field_video_upload']['und'][$delta]);
+        }
+        if ($video_fid != "") {
+          unset($form['field_video_upload']['und'][$delta]['field_migrated_video_url']);
+        }
+      }
+    }
+  }
+  else {
+    foreach ($form['field_video_upload']['und'] as $delta => $field) {
+
+      if (is_numeric($delta)) {
+        if ($arg == 'edit') {
+          $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
+          $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
+          if (empty($file_exist) || $video_fid < 1) {
+            unset($form['field_video_upload']['und'][$delta]);
+          }
+        }
       }
     }
   }
@@ -2517,10 +2542,11 @@ function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
   $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
-  $query->fields('drd', array('video_id', 'encoding_progress'));
+  $query->fields('drd', array('video_id', 'encoding_progress','name'));
   $query->condition('encoding_progress', '100', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
+
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
     $ch = curl_init();
@@ -2545,6 +2571,7 @@ function itg_videogallery_video_bitrate() {
                   ->fields(array(
                     'video_id' => $vid->video_id,
                     'bitate_url' => $json_url,
+                    'video_name' => $vid->name,
                     'bitates_field' => $keys,
                     'is_download' => 0,
                   ))->condition('id', $result[0]->id)
@@ -2557,6 +2584,7 @@ function itg_videogallery_video_bitrate() {
                   'video_id' => $vid->video_id,
                   'bitate_url' => $json_url,
                   'bitates_field' => $keys,
+                  'video_name' => $vid->name,
                   'is_download' => 0,
                 ))
                 ->execute();
@@ -3511,12 +3539,13 @@ function itg_videogallery_dm_to_s3() {
       $senddata = itg_video_send_dm_to_s3($value->bitate_url, $video_urlsdata);
       if (!empty($senddata)) {
         $node = new stdClass();
-        $node->title = $video_urlsdata;
+        $node->title = $value->video_name;
         $node->type = "itg_bitrates_video";
         node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
         $node->language = LANGUAGE_NONE;
         $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
         $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
+        $node->field_resolution [LANGUAGE_NONE][0]['value'] = $dataarray[$value->bitates_field];
         $node->uid = $user->uid;
         $node->status = 1; //(1 or 0): Published or not
         $node->promote = 0; //(1 or 0): Promoted to front page
