@@ -1323,6 +1323,7 @@ function itg_menu_manager_custom_submit($form , &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_views_pre_render(&$view) {
+  
   if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
     drupal_add_js(drupal_get_path('module' , 'itg_menu_manager') . '/js/menu-manager-pre-render.js' , array('type' => 'file' , 'scope' => 'footer'));
     $arg = arg();
