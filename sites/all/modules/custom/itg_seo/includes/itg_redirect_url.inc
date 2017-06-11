@@ -10,6 +10,7 @@ function itg_get_node_redirect_url($node, $op) {
   
   if ($base_url == FRONT_URL) {
     if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
+      
       $story_expiry_date = '';
       $current_time = time();
 
@@ -17,7 +18,7 @@ function itg_get_node_redirect_url($node, $op) {
         $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       }
 
-      if ($op == 'view' && (($node->status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time))) {
+      if ($op == 'full' && (($node->status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time))) {
         if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
           itg_get_redirect_url($node->field_primary_category[LANGUAGE_NONE][0]['value']);
         } else {
@@ -25,7 +26,7 @@ function itg_get_node_redirect_url($node, $op) {
         }       
       }
     } else {
-        if ($op == 'view' && ($node->status == 0)) {
+        if ($op == 'full' && ($node->status == 0)) {
           drupal_goto('<front>');
         }
     }
@@ -41,7 +42,8 @@ function itg_get_node_redirect_url($node, $op) {
 function itg_seo_taxonomy_term_load($terms) {
   
     if (arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2)) && empty(arg(3))) {
-      if (function_exists('itg_category_manager_term_state')) { 
+      if (function_exists('itg_category_manager_term_state') && ($terms[arg(2)]->vid == CATEGORY_MANAGMENT)) {
+        
         if (!itg_category_manager_term_state(arg(2))) {      
           itg_get_taxonomy_redirect_url(arg(2));
         }

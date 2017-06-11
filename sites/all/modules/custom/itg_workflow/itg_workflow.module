@@ -767,11 +767,11 @@ function itg_workflow_node_access($node, $op, $account) {
   $arr_source_type = array('issue', 'supplement');
   
   // code for redirect_url
-  if (arg(0) == 'node' && is_numeric(arg(1))) {
-    if (function_exists('itg_get_node_redirect_url')) {
-      itg_get_node_redirect_url($node, $op);
-    }
-  }
+//  if (arg(0) == 'node' && is_numeric(arg(1))) {
+//    if (function_exists('itg_get_node_redirect_url')) {
+//      itg_get_node_redirect_url($node, $op);
+//    }
+//  }
   
     
   if (isset($node->workbench_moderation['current']->from_state) && $node->workbench_moderation['current']->from_state == 'draft' && $node->workbench_moderation['current']->state == 'draft' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
@@ -821,6 +821,12 @@ function itg_workflow_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
+  // code for redirect_url
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    if (function_exists('itg_get_node_redirect_url')) {
+      itg_get_node_redirect_url($node, $view_mode);
+    }
+  }
   
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
