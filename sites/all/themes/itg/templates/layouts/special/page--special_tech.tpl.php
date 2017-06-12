@@ -668,8 +668,8 @@ if ($theme != 'itgadmin') {
                   
                     <div class="data-holder" id="itg-block-16" data-widget-style="talking-point">
                       <?php
-                        if (isset($widget_data['itg-block-4']['widget'])) {
-                          print $widget_data['itg-block-4']['widget']; 
+                        if (isset($widget_data['itg-block-16']['widget'])) {
+                          print $widget_data['itg-block-16']['widget']; 
                         } else{
                           print '<div class="widget-placeholder"><span>'.t('Talking points').'</span></div>';
                         } 
