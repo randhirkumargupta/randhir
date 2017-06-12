@@ -68,17 +68,23 @@
 
 
 function changePriceValue() {
-     var total_value_event = jQuery('input[name="discounted_value"]').val();
-        if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
-            total_value_event = 0;
-        }
-        //jQuery('.event-fees-amount').html('Rs ' + total_value_event);
-        jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+    var total_value_event = jQuery('input[name="discounted_value"]').val();
+    if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
+        total_value_event = 0;
+    }
+    //jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+    jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+
+    if (jQuery("table .field-multiple-table tbody tr").length <= 0) {
+        var form_open = jQuery("table.field-multiple-table tbody tr").length;
+        jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
+    }
+
 }
 
 jQuery(document).ready(function () {
     jQuery(".page-event").on("mousemove scroll keyup mousewheel DOMMouseScroll", function () {
-       changePriceValue();
+        changePriceValue();
     });
 
     var offset = jQuery('.form-field-name-field-erf-payment-gateway').offset();
