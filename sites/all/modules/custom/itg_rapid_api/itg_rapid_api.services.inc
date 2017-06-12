@@ -20,6 +20,17 @@ function itg_rapid_api_resource() {
       	'access callback' => 'user_access',
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
+            'args' => array(
+        	array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),                
+                'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
       
       	
     	),
@@ -685,6 +696,37 @@ function itg_rapid_api_resource() {
         	'name' => 'itg_rapid_api.services',
       	),
       	'callback' => 'itg_rapid_api_storydetail',
+      	'access callback' => 'user_access',
+      	'access arguments' => array('access content'),
+      	'access arguments append' => FALSE,
+        'args' => array(
+        	       
+                array(
+          	'name' => 'token',
+          	'type' => 'string',
+          	'description' => 'Function to perform',
+          	//'source' => array('param' => 'token'),
+                    'source' => array('path' => 0), 
+          	'optional' => TRUE,
+          	'default' => '*',
+        	),
+      	),
+      	
+    	),
+      	),
+	),
+        
+        // homePage custom resource declaration.....
+	'homePage' => array(
+  	'operations' => array(
+    	'retrieve' => array(
+      	'help' => 'Retrieves storydetail schemes info.',
+      	'file' => array(
+        	'type' => 'inc',
+        	'module' => 'itg_rapid_api',
+        	'name' => 'itg_rapid_api.services',
+      	),
+      	'callback' => 'itg_rapid_api_homePage',
       	'access callback' => 'user_access',
       	'access arguments' => array('access content'),
       	'access arguments append' => FALSE,
@@ -1567,4 +1609,35 @@ function itg_rapid_api_testing($token) {
        $return_obj = $obj;
 
      return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_homePage] definition.
+ * Returns the information about a itg_rapid_api_homePage.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+//return services_error(t('Node type cannot be changed'), 406);
+function itg_rapid_api_homePage($token) {
+        $redis_key = "itg_rapid_api_homePage";
+        $result_get = getRedis($redis_key);
+
+        if($result_get['key_value'] !=""){
+            $jsondata = $result_get['key_value'];
+            //echo "redis get - ". $output; exit();
+        }else{
+            // call function from return data..
+            $jsondata = homePageJson();
+            $jsondata = json_encode($jsondata);
+            //print_r($jsondata);exit();
+            $ttl = 3000;
+            $result_set = setRedis($redis_key, $jsondata, $ttl);
+        }
+       
+       //print_r($jsondata);exit();
+       $jsondata = json_decode($jsondata, true);
+
+     return $jsondata;
 }

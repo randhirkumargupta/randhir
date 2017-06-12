@@ -267,9 +267,9 @@ function redis_cache_manager() {
 function redis_cache_manager_submit($form,&$form_state){
 
   $key = $form_state['values']['redis_cache'];
-  drupal_set_message(print_r(list_redis_key(),TRUE));
+  //drupal_set_message(print_r(list_redis_key(),TRUE));
   $responce = redis_key_delete($key);
-  drupal_set_message(print_r(list_redis_key(),TRUE));
+  //drupal_set_message(print_r(list_redis_key(),TRUE));
   if($responce != '1'){
      drupal_set_message('Unable to delete redis Cache','error');
   }else {
