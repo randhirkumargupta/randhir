@@ -68,11 +68,12 @@
 
 jQuery(document).ready(function () {
     jQuery(".page-event").on("mousemove", function () {
-        var total_value_event = jQuery('input[name="total_value"]').val();
+        var total_value_event = jQuery('input[name="discounted_value"]').val();
         if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
             total_value_event = 0;
         }
         //jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+        jQuery('.event-fees-amount').html('Rs ' + total_value_event);
     });
 
     var offset = jQuery('.form-field-name-field-erf-payment-gateway').offset();
@@ -152,8 +153,7 @@ jQuery(document).ready(function () {
 
 
 
-    // Code start for Coupon code  
-
+    // Code start for Coupon code
     jQuery('#event-registration-node-form .have-a-coupon-code-link').click(function () {
 
         if (jQuery('#edit-coupon-code').val().length <= 0) {
@@ -269,6 +269,7 @@ jQuery(document).on('change', 'input[type="radio"]', function () {
                 success: function (msg) {
                    jQuery('.total_value').val(msg);
                    jQuery('.event-fees-amount').text('Rs '+msg);
+                   jQuery('input[name="discounted_value"]').val(msg);
                    jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
                    jQuery('#event-registration-node-form .event-coupon-reset').trigger('click');
                 }

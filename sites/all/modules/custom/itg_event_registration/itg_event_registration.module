@@ -276,7 +276,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           '#suffix' => '</div>',
           '#weight' => 12
         );
-        $form['field_erf_payment_gateway']['#weight'] = 13;
+        $form['total_value']['#weight'] = 10;
+        $form['field_erf_payment_gateway']['#weight'] = 11;
+        $form['coupon_code']['#weight'] = 12;
       }
       if (!empty($event_node->field_story_expert_description[LANGUAGE_NONE])) {
         $form['term_condition'] = array(
@@ -377,8 +379,8 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $individual = $types->field_individual_registration_fe[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
 
-          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'] . '</span>';
-          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none"> 5 members ₹-' . $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none"> 10 members ₹-' . $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_5_cal[$terms->tid] = $types->field_group_registration_fee_5[LANGUAGE_NONE][0]['value'];
           $group_10_cal[$terms->tid] = $types->field_group_registration_fee_10[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
@@ -393,9 +395,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
           $participate = $types->field_participate_type[LANGUAGE_NONE][0]['tid'];
           $individual = $types->field_early_bird_individual_regi[LANGUAGE_NONE][0]['value'];
           $terms = taxonomy_term_load($participate);
-          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 5 members Rs-' . $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_5[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none"> 5 members ₹-' . $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_5_cal[$terms->tid] = $types->field_early_bird_group_registrat[LANGUAGE_NONE][0]['value'];
-          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none">(' . $terms->name . ') 10 members Rs-' . $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'] . '</span>';
+          $group_10[$terms->tid] = '<span class="' . $individual . '-' . $terms->tid . ' reg_pric"  style="display:none"> 10 members ₹-' . $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'] . '</span>';
           $group_10_cal[$terms->tid] = $types->field_early_bird_group_10_reg[LANGUAGE_NONE][0]['value'];
           $single_group[$terms->tid] = $individual;
           //$option[$individual . '-' . $count] = $terms->name . ' <b>Rs ' . $individual . '</b>';
@@ -421,7 +423,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['field_erf_ticket_type']['#validated']);
     unset($form['field_erf_ticket_type'][LANGUAGE_NONE]['#options']);
     $form['field_erf_ticket_type'][LANGUAGE_NONE]['#options'] = $option;
-    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = '<div class="ticket-type-message">' . $group_5_member . ', ' . $group_10_member . '</div>';
+    $form['field_erf_ticket_type'][LANGUAGE_NONE]['#suffix'] = '<div class="ticket-type-message">' . $group_5_member . '<br />' . $group_10_member . '</div>';
     $form['field_erf_ticket_type']['#validated'] = TRUE;
     $ticket_type_value = $_POST['field_erf_ticket_type']['und'];
     $registration_price = itg_event_registration_price_calculat_group($max_delta, $ticket_type_value, $group_5_cal, $group_10_cal, $single_group);
@@ -1129,9 +1131,11 @@ function itg_event_backend_past_speaker_event_id($event_type_tid, $even_nid) {
   $query = db_select('field_data_field_event_types', 'fdfe');
   $query->fields('fdfe', array('entity_id'));
   $query->join('node', 'n', 'n.nid = fdfe.entity_id');
+  $query->leftJoin('field_data_field_event_start_date' , 'esd' , 'esd.entity_id=n.nid');
   $query->condition('fdfe.bundle', 'event_backend', '=');
   $query->condition('fdfe.field_event_types_tid', $event_type_tid, '=');
   $query->condition('n.nid', $even_nid, '!=');
+  $query->condition('esd.field_event_start_date_value', date('Y-m-d h:m:s') , '<=');
   $query->condition('n.status', 1, '=');
   $result = $query->execute();
   foreach ($result as $rel) {
@@ -1149,7 +1153,8 @@ function itg_event_backend_speaker_ids($event_id) {
   $select_query = db_select('itg_widget_order' , 'iwo')
           ->fields('iwo' , array('nid'))
           ->condition('iwo.widget' , 'itg_event_speaker_order_widget')
-          ->condition('iwo.cat_id' , $event_id);
+          ->condition('iwo.cat_id' , $event_id)
+          ->orderBy('iwo.weight' , 'DESC');
  $result = $select_query->execute();
  foreach($result as $rel){
     $value[] = $rel->nid;
