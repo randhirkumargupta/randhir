@@ -921,7 +921,8 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if (!empty($type1)) {
         $form['title']['#autocomplete_path'] = "node-list-for-year-end-category/title/$type/$type1/autocomplete";
         $form['nid']['#autocomplete_path'] = "node-list-for-year-end-category/nid/$type/$type1/autocomplete";
-      } else {
+      }
+      else {
         $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
         $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
       }
@@ -1242,6 +1243,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   global $user;
+  global $theme;
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
@@ -1377,20 +1379,20 @@ function itg_widget_views_query_alter(&$view, &$query) {
     // Remove feature and remix videos from most watch chunk.
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
-    if(!empty($feature_nid)) {
+    if (!empty($feature_nid)) {
       $query->add_where(0, 'node.nid', $feature_nid, '!=');
     }
-    if(!empty($remix_nid)) {
+    if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
   }
-  
+
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
     $most_viewed = views_get_view_result('so_sorry', 'most_watched');
-    foreach($most_viewed as $nids) {
+    foreach ($most_viewed as $nids) {
       $query->add_where(0, 'node.nid', $nids->nid, '!=');
     }
   }
