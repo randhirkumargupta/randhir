@@ -3323,6 +3323,9 @@ div.node .ugc-action .reject-ugc, div.node .ugc-action .manage-ugc {
   z-index: 10;
   cursor: pointer;
 }
+[id*="itg-survey-survey-form"] .answer-container iframe, [id*="itg-quiz-quiz-form"] .answer-container iframe {
+  display: block;
+}
 
 [id*="itg-social-media-form"] > div {
   padding-bottom: 20px;
