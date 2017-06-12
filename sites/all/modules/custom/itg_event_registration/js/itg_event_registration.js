@@ -9,18 +9,19 @@
             var uid = settings.itg_event_registration.settings.uid;
             var nid = settings.itg_event_registration.settings.nid;
             var registration_price = settings.itg_event_registration.settings.registration_price;
-            jQuery('#event-registration-node-form').ajaxComplete(function (event, request, settings) {
-                if (event.target.id == 'event-registration-node-form') {
+            jQuery('.node-event_registration-form').ajaxComplete(function (event, request, settings) {
+               // if (event.target.id == 'event-registration-node-form') {
                     if (settings.url == Drupal.settings.basePath + 'system/ajax') {
                         if (registration_price != 0) {
                             var form_open = jQuery("table.field-multiple-table tbody tr").length;
                             jQuery('.total_value').val(registration_price);
+                            jQuery('input[name="discounted_value"]').val(registration_price);
                             jQuery('.event-fees-amount').text('Rs ' + registration_price);
                             jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
                             jQuery('#event-registration-node-form .event-coupon-reset').trigger('click');
                         }
                     }
-                }
+                //}
             });
 
 
