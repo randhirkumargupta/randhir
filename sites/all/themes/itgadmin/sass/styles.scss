@@ -2789,6 +2789,7 @@ div.node{
         }
       }
     }
+    iframe{display: block;}
   }
 }
 
@@ -11141,7 +11142,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-[id*="node-itg_funalytics-form"]{
+.node-itg_funalytics-form{
   @extend .image-repo-browse;
 }
 .video-ftp-div{
@@ -11893,3 +11894,7 @@ fieldset#edit-xmlsitemap{
     @extend .hide;
   }
 } 
+.node-videogallery-form .form-field-type-field-collection{
+  @extend .image-repo-browse;
+}
+.page-itg-event-past-spekars table tbody td{vertical-align: top;}

@@ -6158,23 +6158,6 @@ h1.category-heading {
 
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
-  overflow: hidden;
-  padding: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-pic {
-  float: left;
-  margin-right: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-detail {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 19px;
-  color: #323232;
-}
-.view-archive-story .view-content .itg-search-list {
   padding: 25px 0;
 }
 .view-archive-story .view-content .itg-search-list + li {
