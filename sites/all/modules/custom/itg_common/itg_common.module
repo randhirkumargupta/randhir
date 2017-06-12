@@ -482,7 +482,10 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
  * @param object $node
  */
 function itg_common_node_presave($node) {
-
+    //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
   $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
   switch ($node->type) {
     case 'astro':
