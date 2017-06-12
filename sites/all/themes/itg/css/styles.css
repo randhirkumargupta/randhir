@@ -9014,6 +9014,7 @@ section.sidebar .block-itg-ads {
 }
 #content [id*='event-registration-node-form'] .form-text, #content [id*='event-registration-node-form'] .form-textarea {
   width: 75%;
+  max-width: 489px;
 }
 #content [id*='event-registration-node-form'] .form-type-textarea > label + div {
   padding-left: 0 !important;
@@ -9072,7 +9073,6 @@ section.sidebar .block-itg-ads {
   font-family: roboto;
   font-size: 12px;
   color: #707070;
-  padding-top: 25px;
 }
 #block-itg-event-backend-event-registration .tc-txt ul li {
   margin-bottom: 10px;

@@ -59,9 +59,9 @@ if (!empty($node) && ($node->type == 'event_backend')) {
             if ($event_config_speakers) {
               print '<li>'.l('Speakers', $baseurl.'/speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
-            if(($registration_close >= time() && !empty($registration_close)) || ($force_registration_flag == 1) || (empty($registration_close) && $event_close >= time())) {
+            //if(($registration_close >= time() && !empty($registration_close)) || ($force_registration_flag == 1) || (empty($registration_close) && $event_close >= time())) {
               print '<li>'.l('Registration', $baseurl.'/registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-            }
+            //}
             if ($event_config_sponsors) {
               print '<li>'.l('Sponsors', $baseurl.'/sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
