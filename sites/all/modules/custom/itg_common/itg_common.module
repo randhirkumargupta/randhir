@@ -17,7 +17,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
+
   global $user, $base_url, $theme;
   $arg = arg();
   // condition for archive story redirect
@@ -482,7 +482,7 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
  * @param object $node
  */
 function itg_common_node_presave($node) {
-    //set custom path alias  
+  //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
@@ -763,7 +763,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is
   $query->condition('n.nid', $nid);
   $query->condition('n.type', 'story');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if (!empty($result)) {
+  if (!empty($result[0]['field_story_short_headline_value'])) {
     foreach ($result as $positions) {
       if (!empty($positions['field_emoji_position_value'])) {
         $positions_array[] = $positions['field_emoji_position_value'];
@@ -821,7 +821,8 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is
     $query = db_select('node', 'n');
     $query->fields("n", array("title"));
     $query->condition('n.nid', $nid);
-    return $query->execute()->fetchField();
+    $result = $query->execute()->fetchField();
+    return ucfirst(mb_strimwidth($result, $min_limit, $max_limit, ".."));
   }
 }
 
