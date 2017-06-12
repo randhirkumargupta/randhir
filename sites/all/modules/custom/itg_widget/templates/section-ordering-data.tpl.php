@@ -8,6 +8,7 @@ if ($widget_style == 'auto-road-trip') {
       if (!empty($data)) {
        
         foreach ($data as $count => $entity) {
+          
           $video_class = "pic-no-icon";
           if (strtolower($entity['type']) == 'videogallery') {
             $video_class = 'video-icon';
