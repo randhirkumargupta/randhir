@@ -154,7 +154,7 @@ jQuery(document).ready(function () {
 
 
     // Code start for Coupon code
-    jQuery('#event-registration-node-form .have-a-coupon-code-link').click(function () {
+    jQuery('.have-a-coupon-code-link').click(function () {
 
         if (jQuery('#edit-coupon-code').val().length <= 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">Coupon code field is required.</span>');
@@ -205,7 +205,7 @@ jQuery(document).ready(function () {
 
     // Code start for coupon reset
 
-    jQuery('#event-registration-node-form .event-coupon-reset').click(function () {
+    jQuery('.event-coupon-reset').click(function () {
         if (jQuery('#edit-coupon-code').val().length < 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">Coupon code field is required.</span>');
         } else {
