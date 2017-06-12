@@ -290,7 +290,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
         $form['cutomtext'] = array(
           '#type' => 'item',
-          '#markup' => '<div class="event-registration-main-container"><div></div><div class="tc-txt"> <ul>' . $event_node->field_story_expert_description[LANGUAGE_NONE][0]['value'] . '  </ul></div></div>',
+          '#markup' => '<div class="tc-txt">' . $event_node->field_story_expert_description[LANGUAGE_NONE][0]['value'] . '</div>',
           '#weight' => 15,
         );
       }
