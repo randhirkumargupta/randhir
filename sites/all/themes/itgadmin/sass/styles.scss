@@ -11893,3 +11893,6 @@ fieldset#edit-xmlsitemap{
     @extend .hide;
   }
 } 
+.node-videogallery-form .form-field-type-field-collection{
+  @extend .image-repo-browse;
+}
