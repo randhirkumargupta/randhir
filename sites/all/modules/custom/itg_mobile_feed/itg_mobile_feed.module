@@ -6,7 +6,7 @@
  *
  * Contains functionality for mobile app xml feed.
  */
-module_load_include('inc', 'itg_mobile_feed', 'inc/tidConfig');
+module_load_include('inc', 'itg_mobile_feed', 'inc/itg_mobile_feed_helper');
 module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
@@ -127,27 +127,119 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/intodayMagazine.inc',
     'type' => MENU_CALLBACK,
   );
-
-  // Notification for devices
+// Notification for devices
   $items['notification'] = array(
-        'page callback' => 'notification_page',
-        'access arguments' => array('access content'),
-        'file' => 'inc/notification.inc',
-        'type' => MENU_CALLBACK,
+      'page callback' => 'notification_page',
+      'access arguments' => array('access content'),
+      'file' => 'inc/notification.inc',
+      'type' => MENU_CALLBACK,
+    );
+
+  $items['admin/api_configuration/feed_api/redis_cache'] = array(
+    'title' => 'Flush Redis Cache',
+    'description' => 'Flush Redis Cache',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_cache_manager'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
   );
-
-  $items['admin/settings/mobile_service_token/redis_cache'] = array(
-     'title' => 'Redis Cache Manager',
-     'description' => 'Redis Cache Manager',
-     'page callback' => 'drupal_get_form',
-     'page arguments' => array('redis_cache_manager'),
-     'access arguments' => array('administer onthisdate settings'),
-     'type' => MENU_NORMAL_ITEM,
-   );
-
+  
+  $items['admin/api_configuration/feed_api/tid_config'] = array(
+    'title' => 'Feed Taxonomy Configuration',
+    'description' => 'Static Tid Configuration for XML Feeds',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('feed_tid_config'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  $items['admin/api_configuration/feed_api/redis_config'] = array(
+    'title' => 'Redis Server Configuration',
+    'description' => 'Redis Server Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_server_config'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   return $items;
 }
 
+/*
+ * function for define static tid configuration in admin
+ */
+
+function redis_server_config() {
+  $form = array();
+
+  $form['redis_server_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server Hostname'),
+    '#default_value' => variable_get('redis_server_host'),
+    '#description' => t('Enter Redis Server Hostname'),
+    //'#required' => TRUE,
+  );
+  
+   $form['redis_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server Port No'),
+    '#default_value' => variable_get('redis_server_port'),
+    '#description' => t('Enter Redis Server Port Number'),
+    //'#required' => TRUE,
+  );
+   
+    $form['redis_server_timeout'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server timeout Time'),
+    '#default_value' => variable_get('redis_server_timeout'),
+    '#description' => t('Enter Redis Server timeout in second'),
+    //'#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * function for define static tid configuration in admin
+ */
+
+function feed_tid_config() {
+  $form = array();
+
+  $form['photo_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Photo Section"),
+    '#default_value' => variable_get('photo_sec_tid'),
+    '#description' => t("Enter Photo Section Term Id With Comma Seperated"),
+    //'#required' => TRUE,
+  );
+  
+   $form['video_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Video Section"),
+    '#default_value' => variable_get('video_sec_tid'),
+    '#description' => t("Enter Video Section Term Id With Comma Seperated"),
+    //'#required' => TRUE,
+  );
+   
+    $form['program_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Program Section"),
+    '#default_value' => variable_get('photo_sec_tid'),
+    '#description' => t("Enter Program Section Term Id With Comma Seperated"),
+    //'#required' => TRUE,
+  );
+    
+    $form['left_main_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's Left Main Section"),
+    '#default_value' => variable_get('left_main_tid'),
+    '#description' => t("Enter Left Main Section Term Id With Comma Seperated"),
+    //'#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
 /*
  * creage form for redis cache delete by admin
  */
@@ -175,9 +267,9 @@ function redis_cache_manager() {
 function redis_cache_manager_submit($form,&$form_state){
 
   $key = $form_state['values']['redis_cache'];
-  //drupal_set_message(print_r(list_redis_key(),TRUE));
+  drupal_set_message(print_r(list_redis_key(),TRUE));
   $responce = redis_key_delete($key);
-  //drupal_set_message(print_r(list_redis_key(),TRUE));
+  drupal_set_message(print_r(list_redis_key(),TRUE));
   if($responce != '1'){
      drupal_set_message('Unable to delete redis Cache','error');
   }else {

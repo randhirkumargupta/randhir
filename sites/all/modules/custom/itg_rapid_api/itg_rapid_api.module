@@ -13,7 +13,6 @@ function itg_rapid_api_init(){
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
     module_load_include('inc', 'itg_rapid_api', 'inc/helper');
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_homePage');
 }
 
 /**
@@ -41,8 +40,37 @@ function itg_rapid_api_services_resources() {
 function itg_rapid_api_menu() {
 
   $items = array();
+  
+  $items['admin/api_configuration'] = array(
+    'title' => 'API Configuration',
+    'description' => 'API Configuration',
+     'weight' => 80, 	
+    //'page callback' => 'drupal_get_form',
+    //'page arguments' => array('mobile_service_token'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+   $items['admin/api_configuration/feed_api'] = array(
+    'title' => 'Feed API',
+    'description' => 'Feed API Configuration',
+    //'page callback' => 'drupal_get_form',
+    //'page arguments' => array('mobile_service_token'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+   
+   $items['admin/api_configuration/rest_api'] = array(
+    'title' => 'REST API',
+    'description' => 'REST API Configuration',
+    //'page callback' => 'drupal_get_form',
+    //'page arguments' => array('mobile_service_token'),
+    'access arguments' => array('administer onthisdate settings'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
   // menu for set update webservice token
-  $items['admin/structure/services/mobile_service_token'] = array(
+  $items['admin/api_configuration/rest_api/mobile_service_token'] = array(
     'title' => 'Mobile web service token',
     'description' => 'Mobile web service token',
     'page callback' => 'drupal_get_form',
@@ -52,7 +80,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update config_update_status json
-  $items['admin/structure/services/static_json/config_update_status_json'] = array(
+  $items['admin/api_configuration/rest_api/config_update_status_json'] = array(
     'title' => 'Update config_update_status json',
     'description' => 'Update config_update_status json',
     'page callback' => 'drupal_get_form',
@@ -62,7 +90,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update datanotexist_api json
-  $items['admin/structure/services/static_json/datanotexist_api_json'] = array(
+  $items['admin/api_configuration/rest_api/datanotexist_api_json'] = array(
     'title' => 'update datanotexist_api json',
     'description' => 'update datanotexist_api json',
     'page callback' => 'drupal_get_form',
@@ -72,7 +100,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update hamburger_menu json
-  $items['admin/structure/services/static_json/hamburger_menu_json'] = array(
+  $items['admin/api_configuration/rest_api/hamburger_menu_json'] = array(
     'title' => 'update hamburger_menu json',
     'description' => 'update hamburger_menu json',
     'page callback' => 'drupal_get_form',
@@ -82,7 +110,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update horizontal_menu json
-  $items['admin/structure/services/static_json/horizontal_menu_json'] = array(
+  $items['admin/api_configuration/rest_api/horizontal_menu_json'] = array(
     'title' => 'update horizontal_menu json',
     'description' => 'update horizontal_menu json',
     'page callback' => 'drupal_get_form',
@@ -92,7 +120,7 @@ function itg_rapid_api_menu() {
    );
   
   // menu for update master_config json
-  $items['admin/structure/services/static_json/master_config_json'] = array(
+  $items['admin/api_configuration/rest_api/master_config_json'] = array(
     'title' => 'update master_config json',
     'description' => 'update master_config json',
     'page callback' => 'drupal_get_form',
@@ -102,7 +130,7 @@ function itg_rapid_api_menu() {
    );
   
    // menu for update server_error_master json
-  $items['admin/structure/services/static_json/server_error_master_json'] = array(
+  $items['admin/api_configuration/rest_api/server_error_master_json'] = array(
     'title' => 'update server_error_master json',
     'description' => 'update server_error_master json',
     'page callback' => 'drupal_get_form',
@@ -113,7 +141,7 @@ function itg_rapid_api_menu() {
   
   //sprint 2 seting menu,  admin/structure/services
   
-  $items['admin/structure/services/static_json/ad_config_json'] = array(
+  $items['admin/api_configuration/rest_api/ad_config_json'] = array(
     'title' => 'update ad config json',
     'description' => 'ad_config_json',
     'page callback' => 'drupal_get_form',
@@ -122,7 +150,7 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
-  $items['admin/structure/services/static_json/livetv_channellist_json'] = array(
+  $items['admin/api_configuration/rest_api/livetv_channellist_json'] = array(
     'title' => 'update livetv channellist json',
     'description' => 'livetv_channellist_json',
     'page callback' => 'drupal_get_form',
@@ -131,7 +159,7 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
-  $items['admin/structure/services/static_json/livetv_json'] = array(
+  $items['admin/api_configuration/rest_api/livetv_json'] = array(
     'title' => 'update livetv json',
     'description' => 'livetv_json',
     'page callback' => 'drupal_get_form',
@@ -140,7 +168,7 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
-  $items['admin/structure/services/static_json/otherapps_ios_json'] = array(
+  $items['admin/api_configuration/rest_api/otherapps_ios_json'] = array(
     'title' => 'update otherapps ios json',
     'description' => 'otherapps_ios_json',
     'page callback' => 'drupal_get_form',
@@ -149,7 +177,7 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
-  $items['admin/structure/services/static_json/otherapps_android_json'] = array(
+  $items['admin/api_configuration/rest_api/otherapps_android_json'] = array(
     'title' => 'update otherapps android json',
     'description' => 'otherapps_android_json',
     'page callback' => 'drupal_get_form',
