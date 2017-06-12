@@ -12561,3 +12561,7 @@ fieldset#edit-xmlsitemap {
 #page form .itg-sidebar-form .form-item-path-pathauto div.description {
   right: 108%;
 }
+
+.page-itg-event-past-spekars table tbody td {
+  vertical-align: top !important;
+}
