@@ -2,10 +2,11 @@
   global $base_url;
   $arg = arg();
   if($arg[0] == 'event') {
-    $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
+    $baseurl = $base_url . '/' . $arg[1] . '/' . $arg[2];
   } elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
     $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
   }
+ 
 ?>
     <?php foreach ($rows as $index => $row): ?>
 <ul class="profile-detail">
