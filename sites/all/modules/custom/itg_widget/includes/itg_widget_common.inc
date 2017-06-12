@@ -917,8 +917,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $type = isset($_GET['type']) ? $_GET['type'] : "story";
-      $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
-      $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
+      $type1 = isset($_GET['shs_term_node_tid_depth']) ? $_GET['shs_term_node_tid_depth'] : '';
+      if (!empty($type1)) {
+        $form['title']['#autocomplete_path'] = "node-list-for-year-end-category/title/$type/$type1/autocomplete";
+        $form['nid']['#autocomplete_path'] = "node-list-for-year-end-category/nid/$type/$type1/autocomplete";
+      }
+      else {
+        $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
+        $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
+      }
       break;
     case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
       $form['title']['#attributes']['placeholder'] = t('Anchor name');
@@ -1122,6 +1129,53 @@ function autocomplete_for_widgets($type, $is_condition = FALSE, $custom_type = '
 }
 
 /**
+ * Data to yearend widget for category.
+ * 
+ * @param string $type
+ * @param boolean $isCondition
+ * @param string $custom_type
+ * @return string
+ */
+function autocomplete_for_year_end_widgets_category() {
+  $title = arg(5);
+  $content_type = arg(2);
+  $flag = arg(1);
+  $catid = arg(3);
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->leftJoin('taxonomy_index', 'tti', 'tti.nid=n.nid');
+    $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
+    $query->fields('n', array('title', 'nid'));
+    //$query->condition('tid', variable_get('year_end_for_widget'));
+    if ($flag == 'title') {
+      $query->condition('n. title', '%' . $title . '%', 'LIKE');
+    }
+    elseif ($flag == 'nid') {
+      $query->condition('n. nid', '%' . $title . '%', 'LIKE');
+    }
+    $query->condition('fsc.field_story_category_tid', $catid);
+    $query->condition('n.type', $content_type);
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    if ($flag == 'title') {
+      while ($record = $result->fetchAssoc()) {
+        $options[$record['title']] = $record['title'];
+      }
+    }
+    elseif ($flag == 'nid') {
+      while ($record = $result->fetchAssoc()) {
+        $options[$record['nid']] = $record['nid'];
+      }
+    }
+    drupal_json_output($options);
+  }
+}
+
+/**
  * Data to yearend widget.
  * 
  * @param string $type
@@ -1189,6 +1243,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   global $user;
+  global $theme;
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
@@ -1324,20 +1379,20 @@ function itg_widget_views_query_alter(&$view, &$query) {
     // Remove feature and remix videos from most watch chunk.
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
-    if(!empty($feature_nid)) {
+    if (!empty($feature_nid)) {
       $query->add_where(0, 'node.nid', $feature_nid, '!=');
     }
-    if(!empty($remix_nid)) {
+    if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
   }
-  
+
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
     $most_viewed = views_get_view_result('so_sorry', 'most_watched');
-    foreach($most_viewed as $nids) {
+    foreach ($most_viewed as $nids) {
       $query->add_where(0, 'node.nid', $nids->nid, '!=');
     }
   }
@@ -1553,14 +1608,15 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'category_wise_content_list' && ($view->current_display == 'section_wise_content_listing' || $view->current_display == 'grid_view')) {
-//    $term_id = arg(2);
-//    if ($term_id) {
-//      foreach ($query->where[1]['conditions'] as $key => $condition) {
-//        if ($condition['field'] == 'itg_widget_order.cat_id') {
-//          $query->where[1]['conditions'][$key]['value'] = $term_id;
-//        }
-//      }
-//    }
+    $term_id = arg(2);
+    $arg = arg();
+    if ($arg[0] == 'taxonomy' && $arg[1] = 'term' && $term_id) {
+      foreach ($query->where[1]['conditions'] as $key => $condition) {
+        if ($condition['field'] == 'itg_widget_order.cat_id') {
+          $query->where[1]['conditions'][$key]['value'] = $term_id;
+        }
+      }
+    }
   }
   // Adding relationship.
   if (_itg_analytics_relationship_views($view->name, $view->current_display)) {

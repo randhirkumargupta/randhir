@@ -10130,6 +10130,7 @@ div.node{
     #edit-display-button{
       @extend .btn-small;
       margin-top: 33px;
+      float: left;
     }
   }
   #edit-reset{
@@ -10138,7 +10139,7 @@ div.node{
     position: absolute;
     left: 0;
     top: 71px;
-    left: 229px;
+    left: 315px;
   }
   table{
     @extend .views-table;

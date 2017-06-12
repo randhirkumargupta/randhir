@@ -10652,13 +10652,14 @@ div.node #comments h2 {
 }
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
   margin-top: 33px;
+  float: left;
 }
 [id*="daily-motion-video-dashboard"] #edit-reset {
   margin-top: 33px;
   position: absolute;
   left: 0;
   top: 71px;
-  left: 229px;
+  left: 315px;
 }
 
 [id*="podcast-node-form"] .form-managed-file .image-widget-data {

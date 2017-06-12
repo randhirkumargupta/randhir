@@ -1981,7 +1981,6 @@ footer .multiple-items-footer i.slick-next {
 }
 .view-front-end-global-search .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
   float: left;
 }
 .view-front-end-global-search .view-content .itg-search-list > .views-field-label, .view-front-end-global-search .view-content .itg-search-list > .search-detail {
@@ -6175,38 +6174,29 @@ h1.category-heading {
   line-height: 19px;
   color: #323232;
 }
-.view-archive-story .view-content li.itg-search-list {
+.view-archive-story .view-content .itg-search-list {
   padding: 25px 0;
 }
-.view-archive-story .view-content li.itg-search-list > div {
-  padding-left: 150px;
+.view-archive-story .view-content .itg-search-list + li {
+  border-top: 1px solid #ddd;
 }
-.view-archive-story .view-content li.itg-search-list > div.views-field-sm-field-custom-story-small-large-url {
-  padding-left: 0;
-}
-.view-archive-story .view-content .search-pic, .view-archive-story .view-content .views-field-sm-field-custom-story-small-large-url {
+.view-archive-story .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
-  overflow: hidden;
+  float: left;
 }
-.view-archive-story .view-content .search-pic:empty, .view-archive-story .view-content .views-field-sm-field-custom-story-small-large-url:empty {
-  display: none;
+.view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail {
+  padding-left: 154px;
 }
-.view-archive-story .view-content .search-detail h2 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  line-height: 20px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin-top: -5px;
 }
-.view-archive-story .view-content .search-detail h2 a {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 20px;
-}
-.view-archive-story .view-content .search-detail p {
-  display: none;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 a {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
 }
 .view-archive-story .view-content .social-share {
   display: inline-block;

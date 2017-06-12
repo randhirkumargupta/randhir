@@ -51,6 +51,7 @@ features[variable][] = menu_parent_ask_an_expert
 features[variable][] = node_options_ask_an_expert
 features[variable][] = node_preview_ask_an_expert
 features[variable][] = node_submitted_ask_an_expert
+features[variable][] = pathauto_node_ask_an_expert_pattern
 features[views_view][] = ask_an_expert
 features[views_view][] = user_selection
 features_exclude[dependencies][ctools] = ctools

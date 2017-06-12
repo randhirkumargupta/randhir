@@ -20,6 +20,7 @@
 <div id="Bloggers">
   <h2 class="story-title"><?php print t('Bloggers Name'); ?></h2>
   <?php print drupal_render($form['field_blog_bloggers']); ?>
+  <?php print drupal_render($form['field_reporter_twitter_handle']); ?>
 </div>
 <div id="categorySection">
   <h2 class="story-title"><?php print t('Section'); ?></h2>
