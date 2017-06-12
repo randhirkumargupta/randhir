@@ -35,12 +35,6 @@ function feature_for_sport_field_default_field_bases() {
         ),
       ),
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );

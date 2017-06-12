@@ -34,7 +34,7 @@
               <h4><?php print $node_data['extra']; ?></h4>
             <?php endif; ?>
 
-            <?php if (!empty($title)) : ?>    
+            <?php if (!empty($node_data['nid'])) : ?>    
               <p title="<?php echo strip_tags($title);?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                 <?php //echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
               <?php

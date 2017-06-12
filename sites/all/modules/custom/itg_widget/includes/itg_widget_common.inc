@@ -1453,7 +1453,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 // Start alter for tech
   if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest')) {
-    global $theme;
+  
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1480,7 +1480,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display == 'budget_top_news' )) {
-    global $theme;
+    
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1498,7 +1498,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
   //  condition for election most popular
   if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
-    global $theme;
+    
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1515,7 +1515,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'most_popular' && ($view->current_display == 'key_candidate' )) {
-    global $theme;
+  
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1534,7 +1534,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   if ($view->name == 'most_popular' && ($view->current_display == 'state_key_candidate' )) {
-    global $theme;
+
     if ($theme != 'seven') {
       $section = arg(1);
       $state = arg(2);
@@ -1546,7 +1546,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
-    global $theme;
+   
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
@@ -1562,7 +1562,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
-    global $theme;
+  
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
@@ -1579,7 +1579,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video')) {
-    global $theme;
+   
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
