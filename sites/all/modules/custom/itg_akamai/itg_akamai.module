@@ -526,34 +526,34 @@ function itg_akamai_node_update($node) {
 
   if (in_array($node->type, $mapping)) { //p($node);
     //if (user_access("purge itg akamai cache")) {
-      if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-        $url = drupal_get_path_alias('node/' . $node->nid);
-        // Checking if URL alias changed removing Old one.
-        $current_url = NULL;
-        $previous_url = NULL;
-        if (function_exists('itg_common_custompath_insert_load')) {
-          $current_url = itg_common_custompath_insert_load($node);
-        }
-        else {
-          $current_url = $node->path['alias'];
-        }
-        $previous_url = $node->path['old_alias'];
+    //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    $url = drupal_get_path_alias('node/' . $node->nid);
+    // Checking if URL alias changed removing Old one.
+    $current_url = NULL;
+    $previous_url = NULL;
+    if (function_exists('itg_common_custompath_insert_load')) {
+      $current_url = itg_common_custompath_insert_load($node);
+    }
+    else {
+      $current_url = $node->path['alias'];
+    }
+    $previous_url = $node->path['old_alias'];
+//die($current_url);
+    itg_akamai_clear_url($current_url, array(), $node);
 
-        itg_akamai_clear_url($current_url, array(), $node);
+    if ($current_url != $previous_url) {
+      $action = array(
+        'action' => 'remove',
+      );
 
-        if ($current_url != $previous_url) {
-          $action = array(
-            'action' => 'remove',
-          );
-
-          itg_akamai_clear_url($previous_url, $overrides);
-        }
-      }
-      //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-      if ($node->type == 'videogallery') {
-        itg_akamai_purge_story_related_to_video($node->nid);
-      }
-      // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+      itg_akamai_clear_url($previous_url, $overrides);
+    }
+    //}
+    //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+    if ($node->type == 'videogallery') {
+      itg_akamai_purge_story_related_to_video($node->nid);
+    }
+    // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
     //}
 
     if (user_access("administer itg akamai")) {
@@ -577,14 +577,13 @@ function itg_akamai_node_delete($node) {
 
   if (in_array($node->type, $mapping)) {
     if (user_access("purge itg akamai cache")) {
-      if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-        $url = drupal_get_path_alias('node/' . $node->nid);
-        $action = array(
-          'action' => 'remove',
-        );
-        itg_akamai_clear_url($url, $overrides);
-      }
-
+      //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $url = drupal_get_path_alias('node/' . $node->nid);
+      $action = array(
+        'action' => 'remove',
+      );
+      itg_akamai_clear_url($url, $overrides);
+      //}
       //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
       if ($node->type == 'videogallery') {
         itg_akamai_purge_story_related_to_video($node->nid);
@@ -835,17 +834,17 @@ function itg_akamai_translate_time($timestring) {
  *  Implements hook_form_FORM_ID_alter().
  */
 function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-  if ($form['#vocabulary']->machine_name == 'category_management') {
-
-    $akamai_timeout_default = NULL;
-    $akamai_timeout_default = get_itg_akamai_content_setting($form['#term']['tid'], 'taxonomy');
-
-    $form['akamai_timeout'] = array(
-      '#type' => 'textfield',
-      '#title' => t("Enter TTL (For Akamai)"),
-      '#default_value' => $akamai_timeout_default,
-      '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
-    );
+  if (user_access("administer itg akamai")) {
+    if ($form['#vocabulary']->machine_name == 'category_management') {
+      $akamai_timeout_default = NULL;
+      $akamai_timeout_default = get_itg_akamai_content_setting($form['#term']['tid'], 'taxonomy');
+      $form['akamai_timeout'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Enter TTL (For Akamai)"),
+        '#default_value' => $akamai_timeout_default,
+        '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
+      );
+    }
   }
 }
 
