@@ -2040,6 +2040,10 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_presave($node) {
+    //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
   if ($node->type == 'videogallery' && !empty($node->field_dailymotion_playlist[LANGUAGE_NONE])) {
     foreach ($node->field_dailymotion_playlist[LANGUAGE_NONE] as $playlist_val) {
       $playlist[$playlist_val['tid']] = $playlist_val['name'];
