@@ -4593,8 +4593,7 @@ h1.category-heading{
 
 /*css start archive-story */
 .view-archive-story{
-    .view-content{        
-        @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
+    .view-content{
         ul{
             @extend .list-none;
         }        

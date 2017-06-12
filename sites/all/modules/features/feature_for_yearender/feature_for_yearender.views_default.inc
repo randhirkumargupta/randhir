@@ -34,6 +34,11 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['required'] = TRUE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -56,9 +61,9 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Sort criterion: Section wise ordering content: weight */
+  /* Sort criterion: Section widget relationship: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   /* Sort criterion: Content: Post date */
@@ -94,6 +99,12 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
@@ -119,9 +130,9 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
+  /* Filter criterion: Section widget relationship: Content type */
   $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
   $handler->display->display_options['filters']['content_type']['group'] = 1;
@@ -132,15 +143,15 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Widget */
+  /* Filter criterion: Section widget relationship: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
   $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
+  /* Filter criterion: Section widget relationship: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '428';
 
@@ -217,23 +228,24 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
-  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
-  $handler->display->display_options['filters']['content_type']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Widget */
+  /* Filter criterion: Section widget relationship: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
   $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '428';
+  $handler->display->display_options['filters']['cat_id']['value'] = '286531';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
   $export['yearender'] = $view;
 
   return $export;

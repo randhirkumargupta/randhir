@@ -39,7 +39,7 @@ function feature_for_key_candidate_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 45,
+      'weight' => 4,
     ),
   );
 
@@ -76,7 +76,7 @@ function feature_for_key_candidate_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 43,
+      'weight' => 3,
     ),
   );
 
@@ -115,7 +115,7 @@ function feature_for_key_candidate_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 42,
+      'weight' => 2,
     ),
   );
 
@@ -154,7 +154,7 @@ function feature_for_key_candidate_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 41,
+      'weight' => 1,
     ),
   );
 

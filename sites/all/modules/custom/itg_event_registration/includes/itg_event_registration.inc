@@ -32,7 +32,8 @@ function itg_event_registration_form($form , &$form_state) {
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
     if ($event_type == 'invite') {
-      return 'Registration is not required for event <strong>' . ucwords($node->title) . '</strong>. Please contact to India Today Group.';
+      //return 'Registration is not required for event <strong>' . ucwords($node->title) . '</strong>. Please contact to India Today Group.';
+      return itg_event_registration_get_status_message($node , 'invite');
     }
     else {
       // TODO: Fix date format
