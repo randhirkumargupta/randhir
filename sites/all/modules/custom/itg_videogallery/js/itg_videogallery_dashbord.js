@@ -11,17 +11,17 @@ jQuery(document).ready(function() {
       e.preventDefault();
     }
   });
-  jQuery('#edit-from-time-datepicker-popup-2' ).datepicker({  maxDate: new Date(),
-                    minDate: new Date(1970, 01, 01),
-                    changeMonth: true,
-                    changeYear: true,
-             
- });
-  jQuery('#edit-to-time-datepicker-popup-2' ).datepicker({  maxDate: new Date(),
-                    minDate: new Date(1970, 01, 01),
-                    changeMonth: true,
-                    changeYear: true,
-             
- });
+  jQuery('#edit-from-time-datepicker-popup-2').datepicker({maxDate: new Date(),
+    minDate: new Date(1970, 01, 01),
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'dd/mm/yy',
+  });
+  jQuery('#edit-to-time-datepicker-popup-2').datepicker({maxDate: new Date(),
+    minDate: new Date(1970, 01, 01),
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'dd/mm/yy',
+  });
 
 });
