@@ -5,6 +5,8 @@ jQuery(document).ready(function () {
     if (__at__ != 1) {
       setTimeout(openPopup(), 4000);
       console.log('Detected');
+    } else {
+        jQuery('.ad-blocker').hide();
     }
 
 });
@@ -42,7 +44,10 @@ function openPopup() {
         {
            jQuery(".ad-blocker").html(result);
            if(jQuery('body').hasClass('node-type-videogallery')){
-               jQuery('.node-type-videogallery').find('#content').prepend('<div class"ad-blocker">' + result + '</div>');
+               jQuery('.node-type-videogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
+           }
+           if(jQuery('body').hasClass('node-type-photogallery')){
+               jQuery('.node-type-photogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
            }
             if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
                 jQuery('li#ie').addClass('active');

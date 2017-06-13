@@ -101,7 +101,7 @@ function itg_event_past_speakers_submit($form, &$form_state) {
               'content_type' => "All",
             ))
             ->fields(array(
-              'weight' => ++$max_weight[0],
+              'weight' => --$max_weight,
               'nid' => $target_id,
               'widget' => $widget_name,
               'cat_id' => $event_id,
@@ -121,15 +121,15 @@ function itg_event_past_speakers_submit($form, &$form_state) {
  */
 function __max_weight_for_speker($event_id) {
   $max_query_all = db_select('itg_widget_order');
-  $max_query_all->addExpression('MAX(weight)', 'weight');
+  $max_query_all->addExpression('MIN(weight)', 'weight');
   $max_query_all->condition('cat_id', $event_id);
   $max_query_all->condition('widget', 'itg_event_speaker_order_widget');
-  $max_result_all = $max_query_all->execute()->fetchCol();
-  if ($max_result_all != NULL) {
-    return $max_result_all;
+  $max_result = $max_query_all->execute()->fetchField();
+  if($max_result == null || empty($max_result)) {
+    return 0;
   }
   else {
-    return 1;
+    return $max_result;
   }
 }
 
