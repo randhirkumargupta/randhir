@@ -2255,7 +2255,7 @@ function itg_widget_block_view_alter(&$data, $block) {
     $story_category = isset($page_argument[0]->field_story_category['und']) ? $page_argument[0]->field_story_category['und'] : array();
     if (!empty($occupation)) {
       foreach ($occupation as $occupation_taxonomy) {
-        $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+        $flag_occupation[] = strtolower($occupation_taxonomy['taxonomy_term']->name);
       }
     }
     if (!empty($story_category)) {
@@ -2274,7 +2274,7 @@ function itg_widget_block_view_alter(&$data, $block) {
       $data['content'] = array();
     }
     else {
-      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
         return TRUE;
       }
       else {
