@@ -101,11 +101,11 @@
                         url = urlpath.split("/");
                         console.log(url[3]);
                         console.log(url[4]);
-                        var ctype = ["Story", "photogallery", "Videogallery"];
+                        var ctype = ["story", "photogallery", "video"];
                         if(jQuery.inArray(url[4], ctype) != -1) {
                          var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;   
                         } else {
-                          var pathname = base_url + '/' + 'archives/' + dateText;    
+                          var pathname = base_url + '/' + 'archives/story/' + dateText;    
                         }
                         //jQuery('#edit-submit-archive-story').trigger('click');
                         window.location.href = pathname;
