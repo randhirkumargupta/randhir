@@ -18,7 +18,6 @@ function videoCategoryPageFeed() {
   // check tid argument
   $tid_arg = arg(1);
   if($tid_arg && is_numeric($tid_arg)){
-    //$section_list = categoryManagerSectionTid('photogallery');
     $section_list[] = $tid_arg;
   }
   else{
@@ -27,8 +26,6 @@ function videoCategoryPageFeed() {
   $list_count = 0;
   $catFile = "";
   $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
-  //$term_feed_path = "public://xml_it/videos";
-  //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
@@ -82,7 +79,6 @@ function generateVideoCategoryPage($tid) {
 
    if($result_get['key_value'] !=""){
        $data_str = $result_get['key_value'];
-        //echo "redis get - ". $output; exit();
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
        $data['data'] = $data_ar[1];
@@ -91,7 +87,7 @@ function generateVideoCategoryPage($tid) {
   // variable declaration
   global $base_url;
   $node_count = "";
-  $ttl = 300;
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
   $output = "";
   $data = array();
   $tid_list = array();
@@ -160,15 +156,12 @@ function generateVideoCategoryPage($tid) {
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
       $is_fav = getNidIsFavorite($nid);
-      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $is_syndications = $resvalue['field_story_syndication_value'];
-      // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
 
-      //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
       // create date formating
@@ -182,11 +175,9 @@ function generateVideoCategoryPage($tid) {
   $data['lcount'] = $listcount;
   $data['data'] = $output;
   $data_fi = $listcount."##listcount##".$output;
-  //echo "<pre>";print_r (explode("##listcount##",$data_fi));exit();
-
+  
   // set into redis
     $result_set = setRedis($redis_key, $data_fi, $ttl);
-    //echo "redis set - ". $result_set['set_flag']; exit();
-   }
+    }
   return $data;
 }

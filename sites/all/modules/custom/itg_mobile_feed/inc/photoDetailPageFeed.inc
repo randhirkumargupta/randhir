@@ -10,7 +10,6 @@
  * @return array
  */
 function photoDetailPageFeed() {
-  //echo getImgByline();
   $output = "";
   if (count(arg()) < 2) {
     $output = "Please pass photogallery node nid in url";
@@ -18,9 +17,8 @@ function photoDetailPageFeed() {
   else {
     $output = generatePhotoDetailPageFeed(arg(1));
   }
-
-
-  echo $output; die();
+  echo $output;
+  die();
 }
 
 /**
@@ -28,34 +26,28 @@ function photoDetailPageFeed() {
  *
  * @return array
  */
-function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $type) {
-  //echo print_ar(arg());exit();
- // $nid = 626;
+function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
   $imgtag = "";
 
-
-  if(!$file_name){
-      $file_name = "photo" . $nid . ".xml";
+  if (!$file_name) {
+    $file_name = "photo" . $nid . ".xml";
   }
-  if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
-     //$term_feed_path = "public://xml_it/photos";
-     //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+  if (!$term_feed_path) {
+    $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
   }
-   elseif($type){
-     if($type == "photogallery"){
-          $term_feed_path = "public://xml_it/photos";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     }
-
-     elseif($type == "story"){
-          $term_feed_path = "public://xml_it/stories";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     }
-     elseif($type == "videogallery"){
-          $term_feed_path = "public://xml_it/videos";
-	 file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     }
+  elseif ($type) {
+    if ($type == "photogallery") {
+      $term_feed_path = "public://xml_it/photos";
+      file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+    }
+    elseif ($type == "story") {
+      $term_feed_path = "public://xml_it/stories";
+      file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+    }
+    elseif ($type == "videogallery") {
+      $term_feed_path = "public://xml_it/videos";
+      file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+    }
   }
   //field_image_caption
   $output = "";
@@ -65,67 +57,58 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
   else {
 
     //check into redis
-   $redis_key = "itgd_photo".$nid;
-   $result_get = getRedis($redis_key);
+    $redis_key = "itgd_photo" . $nid;
+    $result_get = getRedis($redis_key);
 
-   if($result_get['key_value'] !=""){
-       $output = $result_get['key_value'];
-       //echo "redis get - ". $output; exit();
-   }
-   else{
-    //$output = "photo detail page";
-    global $base_url;
-    $ttl = 300;
-    $node = node_load($nid);
-    //print_ar($node); exit();
-    // variable for feed
-    $title = $node->title;
-    $tid = $node->field_primary_category['und'][0]['value'];
-    $term = taxonomy_term_load($tid);
-    $term_name = $term->name;
-    $comment_cont = $node->comment;
-    $related_node = relatedContentNodeType($nid, "photogallery");
-    //$weburl = $base_url . "/node/" . $nid;
-    $alias = drupal_get_path_alias('node/'.$nid.'');
-    $weburl = $base_url ."/". $alias;
-    $galleryimg = $node->field_gallery_image['und'];
-    $toptlapics = count($galleryimg);
-    //call function getMobileFeedXmlHeader
-    $output .= getMobileFeedXmlHeader();
-    $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
-    //get gallery img tag
-    $imgtag = getGalleryImgTag($galleryimg);
-    if ($imgtag) {
-      $output .= $imgtag;
+    if ($result_get['key_value'] != "") {
+      $output = $result_get['key_value'];
     }
-    //function for get related node xml tag
-    //print_ar($related_node);exit();
-    if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
-      $output .= getRelatedNodeXmlTag($related_node['nid']);
-    }else{
+    else {
+      global $base_url;
+      $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+      $node = node_load($nid);
+      $title = $node->title;
+      $tid = $node->field_primary_category['und'][0]['value'];
+      $term = taxonomy_term_load($tid);
+      $term_name = $term->name;
+      $comment_cont = $node->comment;
+      $related_node = relatedContentNodeType($nid, "photogallery");
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = $base_url . "/" . $alias;
+      $galleryimg = $node->field_gallery_image['und'];
+      $toptlapics = count($galleryimg);
+      $output .= getMobileFeedXmlHeader();
+      $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
+      //get gallery img tag
+      $imgtag = getGalleryImgTag($galleryimg);
+      if ($imgtag) {
+        $output .= $imgtag;
+      }
+      //function for get related node xml tag
+      if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
+        $output .= getRelatedNodeXmlTag($related_node['nid']);
+      }
+      else {
         $output .= emptygetRelatedNodeXmlTag();
-    }
-    //function for get comment xml tag
-    if ($comment_cont > 0) {
-      $output .= getCommentXmlTag($node);
-    }else{
+      }
+      //function for get comment xml tag
+      if ($comment_cont > 0) {
+        $output .= getCommentXmlTag($node);
+      }
+      else {
         $output .= emptygetCommentXmlTag();
+      }
+      $output .= getMobileFeedXmlFooter();
+      // set into redis
+      $result_set = setRedis($redis_key, $output, $ttl);
     }
-    //call function getMobileFeedXmlFooter
-    $output .= getMobileFeedXmlFooter();
-    // set into redis
-    $result_set = setRedis($redis_key, $output, $ttl);
-    //echo "redis set - ". $result_set['set_flag']; exit();
   }
+  if ($output) {
+    $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-//header('Content-Type: application/xml; charset=utf-8');
-//echo $output; exit();
-  if($output){
-        $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
-    }
-    else{
-        $return_flag .="Nid is missing";
-    }
+  else {
+    $return_flag .= "Nid is missing";
+  }
 
   return $return_flag;
 }
@@ -136,14 +119,10 @@ function generatePhotoDetailPageFeed($nid, $file_name="", $term_feed_path="", $t
  * @return array
  */
 function getGalleryImgTag($galleryimg) {
-  //print_ar(file_load(576));exit();
-  // print_ar($galleryimg, "getGalleryImgTag");exit();
   $output = "";
   if (count($galleryimg) > 0) {
-    // loop on gallery img
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      //print_ar($value, "getGalleryImgTag");exit();
       $fid = $value['value'];
       $fid_file = $value['revision_id'];
       $img_url = completeFilePath($fid_file);
@@ -153,7 +132,6 @@ function getGalleryImgTag($galleryimg) {
       $byline = getImgByline($fid);
       $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
-    
   }
-  return $output ;
+  return $output;
 }

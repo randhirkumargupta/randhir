@@ -4,6 +4,12 @@
  * 
  */
 
+define('HOME_PAGE_JSON_NEWS_LIST_INDIA',1206578);
+define('HOME_PAGE_JSON_NEWS_LIST_WORLD',1206577);
+
+
+//CATEGORY_MANAGMENT; 14
+
 function firebase_config(){
     $firebase = array(
         'api-key' => 'AIzaSyDjXq0vdDZaa4HgEsdrlfLWXjevvIw7FFk',

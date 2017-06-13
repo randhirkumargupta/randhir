@@ -11,10 +11,7 @@
 
 
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
-    
-  
     // variable decalartion
-    
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();      
@@ -92,22 +89,19 @@ function generateNewsCategoryList($tid, $pageno) {
     $listcount = 0;
     // code vid=14  start
 if($tid > 0){
-    $term_tree = taxonomy_get_tree(14, $tid, $max_depth = NULL, $load_entities = FALSE);
+    $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
 }
 else{
-   $term_tree = taxonomy_get_tree(14, 0, $max_depth = NULL, $load_entities = FALSE); 
+   $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE); 
 }
 $term_tree_count = count($term_tree);
-//echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
 if($term_tree_count){
     foreach ($term_tree as $key => $value) {
         $tid_list[] = $value->tid;
         
     }
 }
-
 // code vid=14  end
-
 
     // select node belong from current term id or child term id
 
@@ -165,7 +159,6 @@ if($term_tree_count){
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -207,7 +200,6 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
             $news_list_array[$listcount]['n_large_image'] = "$file_medium_img_url";
             $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
-            
       
             // photo list array
             
@@ -219,7 +211,6 @@ if($term_tree_count){
             $photolist = array();
   
             // video list array
-            
             if($type == "videogallery"){
                 $videolist = getVideolist($nid);
             }
@@ -232,13 +223,9 @@ if($term_tree_count){
     
   }
   
-  
-  
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
   $data['updated_datetime'] = $changed_datetime;
-  
-  
   return $data;
 }
 
@@ -338,7 +325,6 @@ function getVideolist($nid){
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];

@@ -18,7 +18,6 @@ function itg_mobile_feed_menu() {
   $items['home-page-feed'] = array(
     'page callback' => 'homePageFeed',
     'access arguments' => array('access content'),
-    //'access arguments' => array('mobile feed permission'),
     'file' => 'inc/homePageFeed.inc',
     'type' => MENU_CALLBACK,
   );
@@ -87,20 +86,12 @@ function itg_mobile_feed_menu() {
     'type' => MENU_CALLBACK,
   );
 
-//  $items['event-page-feed'] = array(
-//    'page callback' => 'eventPageFeed',
-//    'access arguments' => array('mobile feed permission'),
-//    'file' => 'inc/eventPageFeed.inc',
-//    'type' => MENU_CALLBACK,
-//  );
-
   $items['breaking-news-page-feed'] = array(
     'page callback' => 'breakingNewsPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/breakingNewsPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-// new url -- 11
   $items['program-section-page-feed'] = array(
     'page callback' => 'programSectionPageFeed',
     'access arguments' => array('access content'),
@@ -121,13 +112,12 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/rootCategoryContentPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-  $items['intoday-magazine'] = array(
-    'page callback' => 'intodayMagazine',
-    'access arguments' => array('access content'),
-    'file' => 'inc/intodayMagazine.inc',
-    'type' => MENU_CALLBACK,
-  );
-// Notification for devices
+//  $items['intoday-magazine'] = array(
+//    'page callback' => 'intodayMagazine',
+//    'access arguments' => array('access content'),
+//    'file' => 'inc/intodayMagazine.inc',
+//    'type' => MENU_CALLBACK,
+//  );
   $items['notification'] = array(
       'page callback' => 'notification_page',
       'access arguments' => array('access content'),
@@ -135,30 +125,30 @@ function itg_mobile_feed_menu() {
       'type' => MENU_CALLBACK,
     );
 
-  $items['admin/api_configuration/feed_api/redis_cache'] = array(
+  $items['admin/api-configuration/feed-api/redis-cache'] = array(
     'title' => 'Flush Redis Cache',
     'description' => 'Flush Redis Cache',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('redis_cache_manager'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
   
-  $items['admin/api_configuration/feed_api/tid_config'] = array(
+  $items['admin/api-configuration/feed-api/tid-config'] = array(
     'title' => 'Feed Taxonomy Configuration',
     'description' => 'Static Tid Configuration for XML Feeds',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('feed_tid_config'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
   
-  $items['admin/api_configuration/feed_api/redis_config'] = array(
+  $items['admin/api-configuration/feed-api/redis-config'] = array(
     'title' => 'Redis Server Configuration',
     'description' => 'Redis Server Configuration',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('redis_server_config'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
   
@@ -166,7 +156,7 @@ function itg_mobile_feed_menu() {
 }
 
 /*
- * function for define static tid configuration in admin
+ * Implement form callback for redis_server_config
  */
 
 function redis_server_config() {
@@ -177,30 +167,27 @@ function redis_server_config() {
     '#title' => t('Redis Server Hostname'),
     '#default_value' => variable_get('redis_server_host'),
     '#description' => t('Enter Redis Server Hostname'),
-    //'#required' => TRUE,
   );
   
-   $form['redis_server_port'] = array(
+  $form['redis_server_port'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server Port No'),
     '#default_value' => variable_get('redis_server_port'),
     '#description' => t('Enter Redis Server Port Number'),
-    //'#required' => TRUE,
   );
    
-    $form['redis_server_timeout'] = array(
+  $form['redis_server_timeout'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server timeout Time'),
     '#default_value' => variable_get('redis_server_timeout'),
     '#description' => t('Enter Redis Server timeout in second'),
-    //'#required' => TRUE,
   );
 
   return system_settings_form($form);
 }
 
 /*
- * function for define static tid configuration in admin
+ * Implement form callback for defining term id config 
  */
 
 function feed_tid_config() {
@@ -211,32 +198,35 @@ function feed_tid_config() {
     '#title' => t("Term Id's of Photo Section"),
     '#default_value' => variable_get('photo_sec_tid'),
     '#description' => t("Enter Photo Section Term Id With Comma Seperated"),
-    //'#required' => TRUE,
   );
   
-   $form['video_sec_tid'] = array(
+  $form['video_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Video Section"),
     '#default_value' => variable_get('video_sec_tid'),
     '#description' => t("Enter Video Section Term Id With Comma Seperated"),
-    //'#required' => TRUE,
   );
    
-    $form['program_sec_tid'] = array(
+  $form['program_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Program Section"),
     '#default_value' => variable_get('photo_sec_tid'),
     '#description' => t("Enter Program Section Term Id With Comma Seperated"),
-    //'#required' => TRUE,
   );
     
-    $form['left_main_tid'] = array(
+  $form['left_main_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's Left Main Section"),
     '#default_value' => variable_get('left_main_tid'),
     '#description' => t("Enter Left Main Section Term Id With Comma Seperated"),
-    //'#required' => TRUE,
   );
+  
+//  $form['itg_feed_magazine_tid'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Magazine Term id'),
+//    '#default_value' => variable_get('itg_feed_magazine_tid'),
+//    '#description' => t("Enter Magazine Term id"),
+//  );
 
   return system_settings_form($form);
 }
@@ -267,9 +257,7 @@ function redis_cache_manager() {
 function redis_cache_manager_submit($form,&$form_state){
 
   $key = $form_state['values']['redis_cache'];
-  //drupal_set_message(print_r(list_redis_key(),TRUE));
   $responce = redis_key_delete($key);
-  //drupal_set_message(print_r(list_redis_key(),TRUE));
   if($responce != '1'){
      drupal_set_message('Unable to delete redis Cache','error');
   }else {
@@ -345,8 +333,8 @@ function program_section_page_feed_footer() {
  * @pram $type
  */
 function relatedContentNodeType($node_list = "", $type) {
-  // variable declation
-    $file_name=""; $term_feed_path="";
+  
+  $file_name=""; $term_feed_path="";
   $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
   $related_ar = array();
   $count = 0;
@@ -406,8 +394,8 @@ function completeFilePath($fid) {
     $file_obj = file_load($fid);
     $file_url = file_create_url($file_obj->uri);
   }
-  $serch = "http://itgddev.indiatodayonline.in/sites/default/files";
-  $replace = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public";
+  $serch = ITGD_DEV_FILES_PATH;
+  $replace = ITGD_MUM_DEV_FILES_PATH;
   $file_url = str_replace($serch,$replace,$file_url); // need update img base url in variable table
 
   return $file_url;
@@ -458,23 +446,18 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
  * @return array
  */
 function categoryManagerSectionTid($type = "story", $parent = 0) {
-  // variable declation
   $tid_list = array();
-
-  $vid = 14;
+  
+  $vid = CATEGORY_MANAGMENT;
   $mapped_ctype = 0;
 
-  $tree = taxonomy_get_tree(14, $parent, $max_depth = NULL, $load_entities = FALSE);
+  $tree = taxonomy_get_tree($vid, $parent, $max_depth = NULL, $load_entities = FALSE);
   foreach ($tree as $key => $value) {
     //check parent
+  $parent = $value->parents[0];
+  $mapped_ctype = checkContentTypeMapped($value->tid, $type);
 
-    $parent = $value->parents[0];
-    // check map with passed content type
-    $mapped_ctype = chectContentTypeMapped($value->tid, $type);
-
-    // section tid
     if ($parent == 0 && $mapped_ctype == 1) {
-    //if ($parent == 0) {
       $tid_list[] = $value->tid;
     }
   }
@@ -487,19 +470,19 @@ function categoryManagerSectionTid($type = "story", $parent = 0) {
  * @return type
  */
 
-function chectContentTypeMapped($tid, $type){
-     // check map with passed content type
-    $flag = 0;
-    $query = db_select('field_data_field_cm_select_type', 'fdst');
-    $query->fields('fdst', array('field_cm_select_type_value'));
-    $query->condition('fdst.entity_id', $tid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+function checkContentTypeMapped($tid, $type){
+  // check map with passed content type
+  $flag = 0;
+  $query = db_select('field_data_field_cm_select_type', 'fdst');
+  $query->fields('fdst', array('field_cm_select_type_value'));
+  $query->condition('fdst.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($result as $key => $value) {
+  foreach ($result as $key => $value) {
         if($value['field_cm_select_type_value'] == $type){
             $flag = 1; break;
         }
-    }
+  }
     return $flag;
 }
 
@@ -530,7 +513,7 @@ function customNodeCount($type, $tid) {
  * @return $type
  */
 function customNodeCountChild($tid, $type, $child_count = TRUE) {
-  // variable declation
+ 
   $tids = array($tid);
   if ($child_count) {
     $tids = array_merge($tids, term_get_children_ids($tid));
@@ -546,7 +529,6 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
   $query->condition('n.language', $langs, 'IN');
   $count = $query->countQuery()->execute()->fetchField();
   return $count;
-  //echo $count = count($count);exit();
 }
 
 /**
@@ -577,7 +559,7 @@ function term_get_children_ids($tid) {
  * @return $type
  */
 function nodeCategoryFrontUrl($tid, $type) {
-  // variable declation
+  
   $final_url = "";
   if ($type == 'term') {
     $source = "taxonomy/term/" . $tid;
@@ -624,7 +606,7 @@ function sectionCategoryIconImg($tid) {
  * @return type
  */
 function getNidIsFavorite($nid) {
-  // variable declation
+  
   $flag = "";
   $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
   if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
@@ -637,7 +619,7 @@ function getNidIsFavorite($nid) {
 }
 
 /**
- *function get tid is_favorite
+ *function get nid is syndications
  * @pram $tid
  *
  * @return type
@@ -751,7 +733,6 @@ function getNodeFeedTag($tid, $type, $count) {
     $fl = generateVideoDetailPageFeed($nid);
     }
     else {
-      //$output .= "<mediumimage><![CDATA[" . $file_medium_img_url . "]]></mediumimage>";
       $output .= "<url>story" . $nid . ".xml</url>";
       // generate story detail page
     $fl = generateStoryDetailPageFeed($nid);
@@ -760,7 +741,6 @@ function getNodeFeedTag($tid, $type, $count) {
     $output .= "<create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite>";
   }
   return $output;
-  //echo $output; exit();
 }
 
 /**
@@ -878,7 +858,6 @@ function getCommentXmlTag($node) {
  *
  */
 function emptygetCommentXmlTag() {
-  // variable declation
   $commenttext = "";
   $name = '';
   $create_date = '';
@@ -888,11 +867,11 @@ function emptygetCommentXmlTag() {
   // writng comments tag
   $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
 
-    $output .= "<comments>";
-    $output .= $comment_tag;
-    $output .= "</comments>";
+  $output .= "<comments>";
+  $output .= $comment_tag;
+  $output .= "</comments>";
 
-    return $output;
+  return $output;
 }
 
 

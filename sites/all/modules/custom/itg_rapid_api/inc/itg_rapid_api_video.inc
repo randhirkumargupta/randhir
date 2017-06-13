@@ -11,10 +11,7 @@
 
 
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
-
-    // variable decalartion
-
+    
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -44,8 +41,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
-    //$data_array['subcategory_id'] = "$tid";
-    //$data_array['subcategory_title'] = "$term_name";
+    
     $data_array['video_count'] = "$datacount";
     $data_array['video_display_count'] = "10";
     $data_array['video_pagination_cap'] = "7";
@@ -90,13 +86,12 @@ function generateVideoCategoryList($tid, $pageno) {
 
 // code vid=14  start
 if($tid > 0){
-    $term_tree = taxonomy_get_tree(14, $tid, $max_depth = NULL, $load_entities = FALSE);
+    $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
 }
 else{
-   $term_tree = taxonomy_get_tree(14, 0, $max_depth = NULL, $load_entities = FALSE); 
+   $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE); 
 }
 $term_tree_count = count($term_tree);
-//echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
 if($term_tree_count){
     foreach ($term_tree as $key => $value) {
         $tid_list[] = $value->tid;
@@ -163,8 +158,6 @@ if($term_tree_count){
     foreach ($result as $reskey => $resvalue) {
 
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -174,7 +167,7 @@ if($term_tree_count){
       $field_primary_category_value = $resvalue['field_primary_category_value'];
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;
-      //$weburl = $base_url . "/node/" . $nid;
+      
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -197,7 +190,7 @@ if($term_tree_count){
       $video_formats = all_video_format($video_formats);
       
       $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-      //echo "<pre>"; print_r($video_formats);exit();
+      
       $video_path_mp4 = $video_formats['video_path_mp4'];
       if(!$video_path_mp4){
           $video_path_mp4 = $video_path_info['video_path_mp4'];
@@ -208,9 +201,7 @@ if($term_tree_count){
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      //$create_date = date("F d, Y", $created);
-      //$create_datetime = date("Y-m-d H:i:s", $created);
-      //$changed_datetime = date("Y-m-d H:i:s", $changed);
+      
       if($created){
         $create_datetime = date("Y-m-d H:i:s", $created);
         $create_date = date("Y-m-d H:i:s", $created);
@@ -359,13 +350,12 @@ function generateProgramCategoryList($tid, $pageno) {
     
     // code vid=14  start
 if($tid > 0){
-    $term_tree = taxonomy_get_tree(14, $tid, $max_depth = NULL, $load_entities = FALSE);
+    $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
 }
 else{
-   $term_tree = taxonomy_get_tree(14, 0, $max_depth = NULL, $load_entities = FALSE); 
+   $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE); 
 }
 $term_tree_count = count($term_tree);
-//echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
 if($term_tree_count){
     foreach ($term_tree as $key => $value) {
         $tid_list[] = $value->tid;
@@ -373,10 +363,7 @@ if($term_tree_count){
     }
 }
 
-// code vid=14  end
-
-
-    // select node belong from current term id or child term id
+  // select node belong from current term id or child term id
 
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
@@ -438,7 +425,7 @@ if($term_tree_count){
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      //$weburl = $base_url . "/node/" . $nid;
+
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -468,10 +455,7 @@ if($term_tree_count){
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-      //$create_date = date("Y-m-d H:i:s", $created);
-      //$create_datetime = date("Y-m-d H:i:s", $created);
-      //$changed_datetime = date("Y-m-d H:i:s", $changed);
-
+      
       if($created){
         $create_datetime = date("Y-m-d H:i:s", $created);
         $create_date = date("Y-m-d H:i:s", $created);
@@ -564,7 +548,6 @@ function programCategoryListlPageRerourceValue($token) {
 
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-    //$changed_datetime = date("Y-m-d H:i:s", $data_up_time);
     if($data_up_time){
         $changed_datetime = date("Y-m-d H:i:s", $data_up_time);
       }
@@ -588,13 +571,11 @@ function programCategoryListlPageRerourceValue($token) {
 
 
 function generateProgramSectionList($Program_section_list){
-    //echo "<pre>"; print_r($Program_section_list);echo "</pre>";exit();
     $data = array();
     $output_ar = array();
     $listcount = 0;
     foreach ($Program_section_list as $key => $value){
         $term = taxonomy_term_load($value);
-        //echo "<pre>"; print_r($term); echo "</pre>";exit();
         $update_time = getLatestNodeTime($term->tid);
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
