@@ -661,21 +661,21 @@ function homePageJsonMagazine() {
   // news list
 
 
-  $data_newslist[0]['n_id'] = "1";
-  $data_newslist[0]['n_template_id'] = "1";
-  $data_newslist[0]['n_type'] = "story";
-  $data_newslist[0]['n_is_developing'] = "true";
-  $data_newslist[0]['n_is_sponsored'] = "false";
-  $data_newslist[0]['n_share_link'] = "universal_link";
-  $data_newslist[0]['n_title'] = "title";
-  $data_newslist[0]['n_description'] = "description";
-  $data_newslist[0]['n_pcategory_id'] = "1";
-  $data_newslist[0]['n_pcategory_name'] = "tag_name";
-  $data_newslist[0]['n_comment_count'] = "100";
+  $data_newslist[0]['n_id'] = "";
+  $data_newslist[0]['n_template_id'] = "";
+  $data_newslist[0]['n_type'] = "";
+  $data_newslist[0]['n_is_developing'] = "";
+  $data_newslist[0]['n_is_sponsored'] = "";
+  $data_newslist[0]['n_share_link'] = "";
+  $data_newslist[0]['n_title'] = "";
+  $data_newslist[0]['n_description'] = "";
+  $data_newslist[0]['n_pcategory_id'] = "";
+  $data_newslist[0]['n_pcategory_name'] = "";
+  $data_newslist[0]['n_comment_count'] = "";
   $data_newslist[0]['n_small_image'] = "";
   $data_newslist[0]['n_large_image'] = "";
   $data_newslist[0]['n_image_credit'] = "";
-  $data_newslist[0]['n_updated_datetime'] = "2017-03-05 23:42:09";
+  $data_newslist[0]['n_updated_datetime'] = "";
   $data_newslist[0]['n_photo'] = $n_photo;
   $data_newslist[0]['n_video'] = $n_video;
   $data_newslist[0]['n_polls'] = $n_polls;
