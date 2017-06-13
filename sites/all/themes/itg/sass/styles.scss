@@ -7137,6 +7137,7 @@ section.sidebar{
         }
         .form-text, .form-textarea{
            width: 75%;
+           max-width: 489px;
         }
         .form-type-textarea > label + div{
             padding-left: 0 !important;
@@ -7204,8 +7205,7 @@ section.sidebar{
         border: none;
         font-family: roboto;
         font-size: 12px;
-        color: #707070;
-        padding-top: 25px;    
+        color: #707070;  
         ul{
             li{
                 margin-bottom: 10px;

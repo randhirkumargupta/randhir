@@ -2,7 +2,6 @@
 <div style="display:none">
 <?php print render($content); ?>
 </div>
-<div class="ad-blocker"></div>
 <?php print $node->view_output; ?>
 <?php
 // get config value
