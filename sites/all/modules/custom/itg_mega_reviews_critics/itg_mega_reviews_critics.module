@@ -59,9 +59,9 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
   
   $settings['storyid'] = isset($form['#node']->nid) ? $form['#node']->nid : 0;
   
-  drupal_add_js(array('itg_mega_reviews_critics' => array('settings' => $settings)) , array('type' => 'setting'));
   
   drupal_add_js(drupal_get_path('module', 'itg_mega_reviews_critics') . '/js/itg_mega_reviews_critics.js', array('weight' => 1, 'scope' => 'footer'));
+  drupal_add_js(array('itg_mega_reviews_critics' => array('settings' => $settings)) , array('type' => 'setting'));
 
   return $form;
 }
