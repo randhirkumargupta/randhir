@@ -1,6 +1,4 @@
-
-
-.ad-blocker{background:#fbfbfb;border:1px solid #dadada; display: inline-block; vertical-align: top; width: 100%; padding: 15px 30px; margin: 30px 0; font-family: 'Roboto';}
+.ad-blocker{background:#fbfbfb; border:1px solid #dadada; display: inline-block; vertical-align: top; width: 100%; padding: 15px 30px; margin: 30px 0; font-family: 'Roboto';}
 .ad-blocker h2, .ad-blocker p{color: #262626; margin: 0; padding: 12px;}
 .ad-blocker h2{font-size:22px;font-weight:600;}
 .ad-blocker p{font-size:16px;font-weight:400;padding: 26px 0 0;}
@@ -23,7 +21,7 @@
 .ad-blocker .adblock-latestnews ul li .newsimg{width:88px;float:left;margin-right:10px;}
 .clr{clear:both}.tabs{padding:0;margin:10px 0 0;}
 .tabs ul{padding:0;margin:0;height:65px;}
-.tabs ul li{list-style:none;display:inline-block;font-family:roboto;color:#666;font-size:18px;text-transform:uppercase;margin:0 15px;font-weight:700;padding:5px 15px 5px 0;cursor:pointer;background:url(http://media2.intoday.in/intoday/images/hover_img.jpg) left bottom no-repeat;background-size:0 0;transition:all .5s ease;}
+.tabs ul li{list-style:none;display:inline-block;font-family:roboto;color:#666;font-size:18px;text-transform:uppercase;margin:0 10px;font-weight:700;padding:5px 15px 5px 0;cursor:pointer;background:url(http://media2.intoday.in/intoday/images/hover_img.jpg) left bottom no-repeat;background-size:0 0;transition:all .5s ease;}
 .tabs ul li.active,.tabs ul li:hover{transition:all .5s ease;background-size:100% 3px;}
 .tabs ul li a{background:url(chrome-inactive.gif) left top no-repeat;}
 .tabs ul li:first-child{margin-left:0;}
