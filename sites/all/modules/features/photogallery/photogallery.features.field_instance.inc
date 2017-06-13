@@ -580,7 +580,7 @@ function photogallery_field_default_field_instances() {
           ),
         ),
         'imce_filefield_on' => 0,
-        'preview_image_style' => 'photo_landing_slider_thumb_88_86',
+        'preview_image_style' => '170x127',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',

@@ -7,7 +7,6 @@
     Drupal.behaviors.itg_videogallery = {
         attach: function(context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
-
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
             // Code for client Title field value set Null
