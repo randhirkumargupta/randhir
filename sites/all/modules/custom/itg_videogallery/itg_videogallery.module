@@ -1696,6 +1696,12 @@ function daily_motion_video_dashboard($form, &$form_state) {
 
   return $form;
 }
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
 
 function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
   $flag = 0;
