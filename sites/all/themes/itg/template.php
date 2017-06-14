@@ -386,7 +386,7 @@ function itg_link($variables) {
     if(_is_sponsor_story_article($nid)){
       $variables['options']['attributes']['rel'] = 'nofollow';
       $variables['options']['attributes']['target'] = '_blank';
-      $variables['options']['attributes']['class'][] = 'it-sponsored';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }    
   }
   // If url alias is used.
@@ -397,6 +397,7 @@ function itg_link($variables) {
     if(_is_sponsor_story_article($nid)){
       $variables['options']['attributes']['rel'] = 'nofollow';
       $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }
   }
   // If url is used with base url.
@@ -407,6 +408,7 @@ function itg_link($variables) {
     if(_is_sponsor_story_article($nid)){
       $variables['options']['attributes']['rel'] = 'nofollow';
       $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
