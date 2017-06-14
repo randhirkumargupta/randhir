@@ -1329,6 +1329,9 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             </h3>
         <?php endif; ?>
         <?php if ($count != 0) : ?>
+            <?php if(_is_sponsor_story_article($nid)): ?>
+              <span class="itg-sponsor-title">SPONSORED</span>
+            <?php endif; ?>
             <p title="<?php echo $entity['title'];?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
           <?php // echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid); ?>
               <?php 
