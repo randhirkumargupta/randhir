@@ -100,7 +100,7 @@ if (!empty($content)):
       }
     }
     if ($is_sponsor_story && !$flag) {
-      $spon_term = taxonomy_term_load(1208899);
+      $spon_term = taxonomy_term_load(1208902);
       $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
       if ($show_field_val == 'story_category_icon'):
         $sponsor_text = "<div class='container'><span>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
