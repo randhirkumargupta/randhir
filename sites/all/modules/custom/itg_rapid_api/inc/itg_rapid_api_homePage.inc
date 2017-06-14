@@ -16,7 +16,7 @@ function homePageJson() {
   $data_news = array();
   $data_magazine = array();
 
-  $data_packagelist = homePageJsonPackagelist();
+  //$data_packagelist = homePageJsonPackagelist();
   $data_topstories = homePageJsonTopstories();
   $data_news_india = homePageJsonNewslist_india();
   $data_news_world = homePageJsonNewslist_world();
@@ -25,11 +25,11 @@ function homePageJson() {
   $data['status_code'] = "1";
   $data['status_message'] = "customised_message";
 
-  $data['data'][0] = $data_packagelist;
-  $data['data'][1] = $data_topstories;
-  $data['data'][2] = $data_news_india;
-  $data['data'][3] = $data_news_world;
-  $data['data'][4] = $data_magazine;
+  //$data['data'][0] = $data_packagelist;
+  $data['data'][0] = $data_topstories;
+  $data['data'][1] = $data_news_india;
+  $data['data'][2] = $data_news_world;
+  $data['data'][3] = $data_magazine;
 
   return $data;
 }
