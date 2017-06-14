@@ -3704,6 +3704,9 @@ return itg_event_backend_get_event_node();
   $handler = $view->new_display('block', 'Past speaker block', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Past Speakers';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
@@ -3813,6 +3816,11 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '172708';
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'itg_event_speaker_order_widget';
 
   /* Display: Widget_past_speaker */
   $handler = $view->new_display('block', 'Widget_past_speaker', 'order_reorder_widget');

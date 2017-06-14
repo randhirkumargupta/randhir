@@ -155,6 +155,11 @@ function itg_event_registration_theme() {
       'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
       'variables' => array('node' => NULL),
     ),
+    'event_registration_invite' => array(
+      'template' => 'event-registration-invite',
+      'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+      'variables' => array('node' => NULL),
+    ),
   );
   return $theme;
 }
