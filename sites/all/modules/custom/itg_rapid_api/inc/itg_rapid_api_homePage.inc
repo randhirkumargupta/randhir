@@ -191,9 +191,9 @@ function homePageJsonTopstories() {
     //json tag writing
     if ($type == "story") {
       // news list
-      $n_photo = getPhotolist($nid);
-      $n_video = getVideolist($nid);
-      $n_polls = getPolllist($node);
+//      $n_photo = getPhotolist($nid);
+//      $n_video = getVideolist($nid);
+//      $n_polls = getPolllist($node);
       $n_rating = getRating($node);
       $n_magazine = array();
 
