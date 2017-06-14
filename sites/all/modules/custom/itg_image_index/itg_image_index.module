@@ -76,6 +76,12 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $extra_small_image_url = file_create_url($node->field_story_extra_small_image['und']['0']['uri']);
         $document->addField('sm_field_custom_story_extra_small_url', $extra_small_image_url);
      }
+     if (!empty($node->field_story_magazine_story_issue['und']['0']['value'])) {
+        $document->addField('sm_field_custom_issue_based', 'issue_based');
+     } else {
+       $document->addField('sm_field_custom_issue_based', 'non_issue_based');
+     }
+     
     }
     
     if(isset($node->type) && $node->type == 'magazine') {

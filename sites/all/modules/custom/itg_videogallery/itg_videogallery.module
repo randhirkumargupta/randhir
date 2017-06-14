@@ -1696,6 +1696,31 @@ function daily_motion_video_dashboard($form, &$form_state) {
 
   return $form;
 }
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @param type $form_id
+ */
+
+function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
+  $flag = 0;
+  if (!empty($form_state['values']['from_time']['date']) && empty($form_state['values']['from_time']['time'])) {
+
+    $arrayError['from_time[time]'] = t("Please Enter From Time.");
+    $flag = 1;
+  }
+  if (!empty($form_state['values']['to_time']['date']) && empty($form_state['values']['to_time']['time'])) {
+    $arrayError['to_time[time]'] = t("Please Enter To Time.");
+    $flag = 1;
+  }
+  if ($flag == 1) {
+    drupal_get_messages('error');
+    foreach ($arrayError as $key => $msgs) {
+      form_set_error($key, $msgs);
+    }
+  }
+}
 
 /**
  * this function use for reset dailymotion dashboard filter
@@ -1721,7 +1746,7 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
   $channel = $form_state['values']['channel'];
   $totime = $form_state['values']['to_time'];
   $fromtime = $form_state['values']['from_time'];
-
+  p($fromtime);
   drupal_goto('daily-motion-video-dashboard', array('query' => array(
       'video_title' => $video_title,
       'channel' => $channel,
