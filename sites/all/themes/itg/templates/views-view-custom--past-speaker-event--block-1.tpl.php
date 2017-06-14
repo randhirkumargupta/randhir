@@ -21,7 +21,7 @@
 <script>
   jQuery(document).ready(function(){
     jQuery('#past-speaker-slider').slick({
-      infinite: false,
+      infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
       nextArrow: "<i class='fa fa-chevron-right'></i>",
