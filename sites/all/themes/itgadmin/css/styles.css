@@ -12568,3 +12568,7 @@ fieldset#edit-xmlsitemap {
 .page-itg-event-past-spekars table tbody td {
   vertical-align: top;
 }
+
+#views-exposed-form-report-filed-content-page #edit-from-state-wrapper {
+  display: none !important;
+}
