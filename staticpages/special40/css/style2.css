@@ -1,0 +1,300 @@
+#a-banner {
+	width: 1000px;
+	margin: 20px auto 20px;
+}
+
+
+#middlepanel-Ani {
+	width: 1000px;
+	margin: 0 auto;
+}
+.listing-images {
+	float: left;
+	margin-bottom: 15px;
+}
+.listing-images li {
+	list-style: none;
+	float: left;
+	margin: 8px 25px 20px 0px;
+	padding-bottom: 30px;
+	background: #f6f6f6;
+	text-align: left; width:180px; height:205px; overflow:hidden;
+}
+.listing-images li img {
+	padding-bottom: 5px;
+}
+.listing-images li:nth-child(5n){
+	margin-right: 0;
+}
+.listing-images li h3 {
+	color: #323232;
+	font-size: 14px;
+	margin-bottom: 3px;
+	font-family: 'Atlas Grotesk Web'; font-weight:400; padding:0 10px;
+}
+.listing-images li h4 {
+	color: #b9b9b9;
+	font-size: 0.80em;
+	font-family: 'Atlas Grotesk Web'; font-weight:400; padding:0 10px;
+}
+
+#a-banner{ width:1000px; margin:20px auto 20px;}
+
+@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-Regular.eot");
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-Regular.woff") format("woff");
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-RegularItalic.eot");
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-RegularItalic.woff") format("woff");
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-Semibold.eot");
+		font-weight: bold;
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-Semibold.woff") format("woff");
+		font-weight: bold;
+		}	
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-SemiboldItalic.eot");
+		font-weight: bold;
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "tiempos-text";
+		src: url("fonts/TiemposTextWeb-SemiboldItalic.woff") format("woff");
+		font-weight: bold;
+		font-style: italic;
+		}
+		
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-Regular.eot");
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-Regular.woff") format("woff");
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-RegularItalic.eot");
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-RegularItalic.woff") format("woff");
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-Bold.eot");
+		font-weight: bold;
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-Bold.woff") format("woff");
+		font-weight: bold;
+		}	
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-BoldItalic.eot");
+		font-weight: bold;
+		font-style: italic;
+		}
+
+	@font-face {
+		font-family: "calibre";
+		src: url("fonts/CalibreWeb-BoldItalic.woff") format("woff");
+		font-weight: bold;
+		font-style: italic;
+		}
+				
+H1,h2 {
+	background-color: none !important;
+}
+
+.twitterhandle iframe {
+	margin-bottom: -7px !important;
+}
+
+.strleft {
+	padding-left: 0px;
+}
+
+
+#strwapper{margin:5px auto; max-width: 1003px;}
+#strwapper .strleft{ width:100%;}
+#strwapper .strtitlealias h2, #strwapper .right-story-container{font-family: "tiempos-text",Georgia,serif;
+    color:#3c3c3c!important;
+	font-size: 1.1875em!important;
+    font-weight: 300!important;
+    line-height: 1.65;
+    white-space: normal;
+    }
+.fixedsocial ul li.sharenumb {
+    font-family:roboto;
+    font-size: 11px!important;
+    font-weight: 300!important;
+    line-height:normal!important; position: relative;
+    
+}
+
+#strwapper .strleft h1 { font-family: "calibre",Georgia,serif; font-weight: 600; letter-spacing: 0.03em; line-height: 0.95; font-size: 2.72083em;}
+
+.fixedsocial{ position:relative; margin-left:0;} .fixedsocial ul li{ display:inline-block!important; margin-right:10px; float:left;}
+#a-banner{ width:1000px; margin:20px auto 20px;}
+.top-menu {margin: 0 auto;position: relative; width: 681px;}
+.divleft .downloadstoryimg .storyimgclose{ height:auto;} .mediumcontent p{ padding-bottom:20px; padding-top:0px;}
+
+
+
+
+@media screen and (max-width :800px){
+#middlepanel-Ani{ width:768px; margin:0 auto;}
+#strwapper { width:92%!important; padding:0 4%;}
+#strwapper p, #strwapper .strtitlealias h2{font-size: 1em!important;}
+.nav_bar ul li.logo {
+    background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
+    height: 70px;
+    padding: 0 22px 5px 20px;
+    width: 260px;
+}
+.nav_bar.navfixed ul li.logo{background-position: -160px -535px;}
+#a-banner, #a-banner img{ width:100%;}
+.listing-images li, .listing-images li:nth-child(5n){ margin:8px 15px 10px 0;}
+ .listing-images li:nth-child(4n){ margin-right:0px;}
+}
+
+
+@media screen and (max-width :600px){
+#strwapper .strleft h1 { font-family: "calibre",Georgia,serif; font-weight: 600; letter-spacing: 0.03em; line-height: 0.95; font-size: 1.72083em;}
+.nav_bar ul li.logo, .nav_bar.navfixed ul li.logo  {
+    background-position: -328px -535px;
+    margin-left: 5px;
+    width: 36px; padding:5px; height:39px;
+	
+}
+.nav_bar ul li a, .nav_bar ul li.news h1, .nav_bar.navfixed ul li a, .nav_bar.navfixed ul li.news h1 {
+    font-size: 19px; font-weight:500;
+}
+.nav_bar ul li, .nav_bar.navfixed ul li {
+    line-height: 40px;
+    min-height: 40px;
+    padding: 5px 15px;
+}
+img.navliveicon{ display:none;}
+
+
+
+}
+
+
+@media screen and (max-width :480px){
+#middlepanel-Ani{ width:92%; margin:0 auto;}
+.listing-images {
+    float: none;
+    margin-bottom: 15px;
+	}
+	
+.listing-images li img {
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.listing-images li {
+	margin-left: 0;
+	margin-right: 4%;
+	margin-top: 8px;
+	padding-bottom: 30px;
+	text-align: center;
+	width: 48%;	
+	}
+.listing-images li:nth-child(5n), .listing-images li:nth-child(3n), .listing-images li:nth-child(4n){
+	margin-right: 4%;
+}
+.listing-images li:nth-child(2n){ margin-right:0px;}
+.prev-storynav, .next-storynav, .newstory-stripsection .author-section .author-img{ display:none;}
+.newstory-stripsection .font-incer {position: relative; right: -18px; top: -12px;} 
+}
+
+
+
+
+
+/* Story page css */
+
+
+@media screen and (max-width :800px){
+#strwapper { width:92%!important; padding:0 4%;}
+#strwapper p, #strwapper .strtitlealias h2{font-size: 1em!important;}
+.nav_bar ul li.logo {
+    background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat 7px 0;
+    height: 70px;
+    padding: 0 22px 5px 20px;
+    width: 260px;
+}
+.nav_bar.navfixed ul li.logo{background-position: -160px -535px;}
+#a-banner, #a-banner img{ width:100%;}
+.top-menu{ width:768px; margin:0 auto;}
+}
+
+@media screen and (max-width :600px){
+#strwapper .strleft h1 { font-family: "calibre",Georgia,serif; font-weight: 600; letter-spacing: 0.03em; line-height: 0.95; font-size: 1.72083em;}
+.nav_bar ul li.logo, .nav_bar.navfixed ul li.logo  {
+    background-position: -328px -535px;
+    margin-left: 5px;
+    width: 36px; padding:5px; height:39px;
+	
+}
+.nav_bar ul li a, .nav_bar ul li.news h1, .nav_bar.navfixed ul li a, .nav_bar.navfixed ul li.news h1 {
+    font-size: 19px; font-weight:500;
+}
+.nav_bar ul li, .nav_bar.navfixed ul li {
+    line-height: 40px;
+    min-height: 40px;
+    padding: 5px 15px;
+}
+img.navliveicon{ display:none;} .top-menu{ width:320px; margin:0 auto;}
+}
+
+
+
+/***********************Socials Icons********************/
+   .listing-images li { position:relative;}
+   .socials_icns{  position:absolute;right:5px; bottom:0; height:20px; width:80px; }
+   .socials_icns ul{ list-style-type:none; padding:0; margin:0;}
+    .socials_icns ul li{ float:left; width:auto; margin:0; padding:0;}
+	.socials_icns ul li span{ cursor:pointer; display:block; width:24px; height:15px; background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/40-aniversery/sprite-image.png') no-repeat;}
+	.socials_icns ul li span.fb{ background-position:0 0;} 
+	.socials_icns ul li span.tw{ background-position:-30px 0;} 
+	.socials_icns ul li span.gp{ background-position:-58px 0;} 
+	.socials_icns ul li:hover span.fb{ background-position:0 -15px;} 
+	.socials_icns ul li:hover span.tw{ background-position:-30px -15px;}   
+	.socials_icns ul li:hover span.gp{ background-position:-58px -15px;} 

@@ -4,6 +4,7 @@
 .flr {float: right;}
 .txtcenter{ text-align: center; }
 .itg_auto_search_form span.widget-title{display:none}
+.page-auto #page-title{text-align: center}
 .itg_auto_search_form {background:#dedcdd;width:100%;overflow:hidden;margin-bottom:20px}
 .itg_auto_search_form .master-logo{float:left;margin-right:50px}
 .itg_auto_search_form .left-master-section,.itg_auto_search_form .right-master-section{padding-top:5px}
@@ -18,7 +19,7 @@
 
 /* Compare table Css */
 .grybg_background {border-top:15px solid #595758;padding-bottom:0px; padding-right:0px!important; padding-left:0px!important; height: auto;margin-top: 18px;
- float: left; width:100%; float:left}
+ float: left; width:100%; float:left;background: #dedcdd;}
 .left-table, .right-table {background: #dedcdd;width: 46%;padding-left: 4%}
 .right-table {float: right}
 .break-point {height: 100px;}
@@ -68,6 +69,7 @@
    .left-table, .right-table{ width:25%; float: left; }
    .tableCompareHead table th,.tableComparedata table td{ height:65px; }
    .sidebars{ float: left; }
+   section.sidebar .block-itg-ads{ padding:0px!important; }
 
 
  }

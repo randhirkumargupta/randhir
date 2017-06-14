@@ -37,7 +37,7 @@ function itg_payment_menu() {
 
   $items['itg-payment/billdesk-payment-success'] = array(
     'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_success_page' ,
+    'page callback' => 'itg_billdesk_payment_success_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
@@ -50,8 +50,8 @@ function itg_payment_menu() {
   );
 
   $items['itg-payment/icici-payment-fail'] = array(
-    'title' => 'Payment success' ,
-    'page callback' => 'itg_payment_response_fail' ,
+    'title' => 'Payment cancel' ,
+    'page callback' => 'itg_icici_payment_fail_page' ,
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
@@ -207,10 +207,11 @@ function itg_payment_initial_info_update($data) {
           'user_id' => isset($data['CUST_ID']) ? $data['CUST_ID'] : "0" ,
           'payment_gateway' => isset($data['PAYMENT_GATEWAY']) ? $data['PAYMENT_GATEWAY'] : "0" ,
           'transaction_id' => isset($data['TRANSACTION_ID']) ? $data['TRANSACTION_ID'] : "0" ,
-          'order_status' => PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
+          'order_status' => isset($data['ORDER_STATUS']) ? $data['ORDER_STATUS'] : PAYTM_ORDER_PAYMENT_PENDING_STATUS ,
           'transaction_history' => isset($data['TRANSACTION_HISTORY']) ? $data['TRANSACTION_HISTORY'] : "0" ,
           'payment_gateway_status' => isset($data['PAYMENT_GATEWAY_STATUS']) ? $data['PAYMENT_GATEWAY_STATUS'] : "0" ,
           'payment_gateway_history' => isset($data['PAYMENT_GATEWAY_HISTORY']) ? $data['PAYMENT_GATEWAY_HISTORY'] : "0" ,
+          'number_of_person' => isset($_SESSION['event_registration_payment']['number_of_person']) ? $_SESSION['event_registration_payment']['number_of_person'] : 0 ,
           'order_created_on' => REQUEST_TIME ,
         ))->execute();
   }
@@ -390,8 +391,23 @@ function itg_payment_response_fail() {
  */
 function update_event_registration_after_success($order_id) {
   module_load_include('inc' , 'itg_loyalty_reward' , 'includes/itg_loyalty_reward_earn.point');
-  global $base_url;
   global $user;
+  $registration_data = _get_registration_id_of_event($order_id);
+  $registration_id =  $registration_data['reg'];
+  $event_id =  $registration_data['event_id'];
+  foreach (array('node' , 'node_revision') as $table) {
+    db_update($table)
+        ->fields(array('status' => 1))
+        ->condition('nid' , $registration_id)
+        ->execute();
+  }
+  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid > 0) {
+    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
+  }
+}
+
+function _get_registration_id_of_event($order_id) {
+  global $base_url;
   $query = db_select('itg_payment_order_details' , 'pay');
   $query->fields('pay' , array('registration_id' , 'event_id'));
   $query->condition('pay.order_id' , $order_id);
@@ -400,13 +416,5 @@ function update_event_registration_after_success($order_id) {
   $event_id = $data[0]['event_id'];
   $event_alias = $base_url . '/' . drupal_get_path_alias("node/$event_id") . '/registration';
   $_SESSION['recent_event_payment_url'] = $event_alias;
-  foreach (array('node' , 'node_revision') as $table) {
-    db_update($table)
-        ->fields(array('status' => 1))
-        ->condition('nid' , $registration_id)
-        ->execute();
-  }
-  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid >0) {
-    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
-  }
+  return array("reg" => $registration_id , "event_id" => $event_id);
 }

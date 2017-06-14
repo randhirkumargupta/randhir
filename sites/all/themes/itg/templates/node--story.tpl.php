@@ -635,14 +635,15 @@ if (!empty($content)):
                     }
                     $expertDetails .= '</div>';
                   }
-                  if (!empty($node->field_story_expert_image)) {
+                  //if (!empty($node->field_story_expert_image)) {
                     if (!empty($node->field_story_expert_image[LANGUAGE_NONE][0]['uri'])) {
                       $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
                     }
                     else {
                       $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                     }
-                  }
+                    
+                  //}
                   $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
                   if (!empty($node->field_story_expert_description)) {
                     $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';

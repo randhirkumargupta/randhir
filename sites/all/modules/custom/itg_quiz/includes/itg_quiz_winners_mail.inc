@@ -19,9 +19,9 @@ function itg_quiz_winners_mail_list() {
     $mail_subject = $mail_data->field_mail_subject_quiz_completi[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_quiz_get_mail_content($nid, $mail_data);
   }
-  
+    $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
     $params = array(
-      'body' => $mail_content,
+      'body' => $mail_contents,
       'subject' => $mail_subject,
     );
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);

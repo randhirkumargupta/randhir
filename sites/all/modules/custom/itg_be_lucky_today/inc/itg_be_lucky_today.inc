@@ -94,7 +94,7 @@ function be_lucky_today_registration1($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#required' => TRUE,
       '#attributes' => array('class' => array('form-control'), 'autocomplete' => 'off')
     );
@@ -140,9 +140,11 @@ function be_lucky_today_registration2($form, $form_state) {
     );
     $form['age'] = array(
       '#type' => 'radios',
-      '#title' => t('Age'),
+      '#title' => '', //t('Ags'),
       '#options' => $age,
-      '#default_value' => '18-24'
+      '#default_value' => '18-24',
+      '#prefix' => '<div class="hidden">',
+      '#suffix' => '</div>'
     );
     $form['next'] = array(
       '#type' => 'submit',
@@ -177,15 +179,15 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Email'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
-      '#ajax' => array(
-        'callback' => 'email_validation_ajax_callback',
-        'wrapper' => 'email_validation_error',
-      ),
-      '#prefix' => '<div id="email_validation_error">',
-      '#suffix' => '</div>',
+//      '#ajax' => array(
+//        'callback' => 'email_validation_ajax_callback',
+//        'wrapper' => 'email_validation_error',
+//      ),
+//      '#prefix' => '<div id="email_validation_error">',
+//      '#suffix' => '</div>',
     );
     $form['address_markup'] = array(
       '#markup' => 'Q5. Where should we deliver your gift?',
@@ -196,7 +198,7 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Address'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 50,
       '#required' => TRUE,
       '#attributes' => array('autocomplete' => 'off'),
     );
@@ -229,9 +231,9 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Zip code'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 6,
       '#required' => TRUE,
-      '#attributes' => array('autocomplete' => 'off'),
+      '#attributes' => array('autocomplete' => 'off', 'id' => 'number_check'),
     );
     $form['mobile_label'] = array(
       '#markup' => 'Q6. At what number should we contact you?',
@@ -242,16 +244,17 @@ function be_lucky_today_registration3($form, $form_state) {
       '#type' => 'textfield',
       '#title' => t('Mobile'),
       '#size' => 60,
-      '#maxlength' => 128,
+      '#maxlength' => 10,
       '#required' => TRUE,
-      '#attributes' => array('autocomplete' => 'off'),
-      '#ajax' => array(
-        'callback' => 'mobile_validation_ajax_callback',
-        'wrapper' => 'mobile_validation_error',
-      ),
-      '#prefix' => '<div id="mobile_validation_error">',
-      '#suffix' => '</div>',
+      '#attributes' => array('autocomplete' => 'off', 'id' => 'number_check'),
+//      '#ajax' => array(
+//        'callback' => 'mobile_validation_ajax_callback',
+//        'wrapper' => 'mobile_validation_error',
+//      ),
+//      '#prefix' => '<div id="mobile_validation_error">',
+//      '#suffix' => '</div>',
     );
+
     $form['next'] = array(
       '#type' => 'submit',
       '#value' => t('Next'),
@@ -260,6 +263,12 @@ function be_lucky_today_registration3($form, $form_state) {
     return $form;
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
 function email_validation_ajax_callback($form, &$form_state) {
     $email = $form_state['values']['email'];
     $result = get_survey_detail_by_field('email', $email);
@@ -270,6 +279,12 @@ function email_validation_ajax_callback($form, &$form_state) {
     return $form['email'];
 }
 
+/**
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
 function mobile_validation_ajax_callback($form, &$form_state) {
     $mobile = $form_state['values']['mobile'];
     $result = get_survey_detail_by_field('mobile', $mobile);
@@ -283,9 +298,9 @@ function mobile_validation_ajax_callback($form, &$form_state) {
 /**
  * 
  * @global String $base_url
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_subscribe($form, $form_state) {
     $form['magazine'] = array(
@@ -324,8 +339,8 @@ function be_lucky_today_form_validate($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function be_lucky_today_form_submit($form, &$form_state) {
     switch ($form_state['stage']) {
@@ -355,8 +370,8 @@ function be_lucky_today_form_submit($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     global $base_url;
@@ -422,9 +437,9 @@ function get_term_name_by_tid($tid) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_get_header($form, &$form_state) {
 
@@ -450,15 +465,15 @@ function be_lucky_today_get_header($form, &$form_state) {
       2 => array('data' => "Let's Start With Your Name"),
       3 => array('data' => 'Age Is Just A Number Luck Has Nothing To Do With Age.'),
       4 => array('data' => 'Help us deliver your Prize on time'),
-      5 => array('data' => 'Yor are just a step away from submitting your entry for Lucky Draw. Select your preferred digital magazine @just INR 49 and be ready...e'),
+      5 => array('data' => 'Yor are just a step away from submitting your entry for Lucky Draw. Select your preferred digital magazine @just INR 49 and be ready...'),
     );
 
     $stages[$current_step]['class'] = array('active');
 
     $stages_list = theme('item_list', array('items' => $stages));
-    $form['header'] = array(
-      '#markup' => '<h1>Be Lucky Today</h1>'
-    );
+//    $form['header'] = array(
+//      '#markup' => '<h1>Be Lucky Today</h1>'
+//    );
     $form['header2'] = array(
       '#type' => 'fieldset',
       '#title' => '',
@@ -469,9 +484,9 @@ function be_lucky_today_get_header($form, &$form_state) {
 
 /**
  * 
- * @param Array $form
- * @param Array $form_state
- * @return Array
+ * @param array $form
+ * @param array $form_state
+ * @return array
  */
 function be_lucky_today_move_to_next_stage($form, &$form_state) {
     switch ($form_state['stage']) {
@@ -521,113 +536,154 @@ meter;
     );
     $form['#prefix'] = '<div class="itg_be_lucky_today_2">';
     $form['#suffix'] = '</div>';
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
     $form['header'] = array(
-      '#markup' => '<h1>Be Lucky Today</h1>'
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
     );
     $form['message'] = array(
       '#markup' => '<p>Your happiness will be inclimlete without your friends.Let them be a part of it!!</p>',
-      '#prefix' => '<div class="form-wrappe-left">',
+      '#prefix' => '<div class="form-main-container"><div class="form-wrappe-left">',
     );
 
+    $form['number_1'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">1</span> </div>',
+      '#prefix' => '<div class="left_part_box"><div class="row"><div class="col_left">',
+    );
     $form['name'] = array(
       '#type' => 'textfield',
       '#title' => t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email'] = array(
       '#type' => 'textfield',
       '#title' => t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile'] = array(
       '#type' => 'textfield',
       '#title' => t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_2'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">2</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', // t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_2'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_3'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">3</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_3'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
+      '#suffix' => '</div></div></div>',
+    );
+
+    $form['number_4'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">4</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_4'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '', //t('Mobile No'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '</div>',
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
+      '#suffix' => '</div></div></div>',
+    );
+    $form['number_5'] = array(
+      '#markup' => '<div class="col1_l"> <span class="numb_l">5</span> </div>',
+      '#prefix' => '<div class="row"><div class="col_left">',
     );
     $form['name_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Name'),
+      '#title' => '', //t('Name'),
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '<div class="row">',
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Name')),
+      '#prefix' => '<div class="left-form-container">',
     );
     $form['email_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Email Id'),
+      '#title' => '', //t('Email Id'),
       '#size' => 25,
-      '#maxlength' => 128,
+      '#maxlength' => 100,
+      '#attributes' => array('placeholder' => t('Email Id')),
     );
     $form['mobile_5'] = array(
       '#type' => 'textfield',
-      '#title' => t('Mobile No'),
+      '#title' => '',
       '#size' => 25,
-      '#maxlength' => 128,
-      '#prefix' => '</div></div>',
+      '#maxlength' => 10,
+      '#attributes' => array('placeholder' => t('Mobile No'), 'id' => 'number_check'),
+      '#suffix' => '</div></div></div></div>',
     );
     $form['luck_meter'] = array(
       '#markup' => $html,
@@ -636,6 +692,7 @@ meter;
       '#type' => 'submit',
       '#attributes' => array('class' => array('be_lucky_today_submit')),
       '#value' => t('Submit your Entry'),
+      '#suffix' => '</div></div>',
     );
     return $form;
 }
@@ -649,8 +706,14 @@ function be_lucky_form_submit($form, &$form_state) {
     $email = $_GET['email'];
     $fb_username = '';
     $surve_parent = get_survey_detail_by_field('email', $email);
+
     if (count($surve_parent) > 0) {
         $fb_username = $surve_parent[0]->id;
+        $already_done = get_survey_detail_by_field('fb_username', $fb_username);
+        if (count($already_done) > 0) {
+            drupal_set_message(t("You have already Participated!"), 'error');
+            drupal_goto("/be-lucky-today/email-confirmation-reference-list");
+        }
     }
 
     if (!empty($form_state['values']['name'])) {
@@ -797,11 +860,21 @@ share;
     $form['#attached']['css'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
+    $form['header'] = array(
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
+    );
     $form['message'] = array(
-      '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
+      '#markup' => '<h2>Thank You<br />for your Participation.</h2>',
+      '#prefix' => '<div class="thank_you_text">',
     );
     $form['tsnmessage'] = array(
-      '#markup' => 'Payment process cancelled.',
+      '#markup' => '<p>Payment process cancelled.</p>',
+      '#suffix' => '</div>',
     );
     $form['socialshare'] = array(
       '#markup' => $html,
@@ -833,11 +906,21 @@ share;
     $form['#attached']['css'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
+    $form['indiatoday_logo'] = array(
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#prefix' => '<div class="body-center">'
+    );
+    $form['header'] = array(
+      '#markup' => '<h1>Be Lucky Today</h1>',
+      '#suffix' => '</div>'
+    );
     $form['message'] = array(
-      '#markup' => '<h1>Thank You<br />for your Participation.</h1>',
+      '#markup' => '<h2>Thank You<br />for your Participation.</h2>',
+      '#prefix' => '<div class="thank_you_text">',
     );
     $form['tsnmessage'] = array(
-      '#markup' => 'Payment process success.',
+      '#markup' => '<p>Payment process success.</p>',
+      '#suffix' => '</div>',
     );
     $form['socialshare'] = array(
       '#markup' => $html,

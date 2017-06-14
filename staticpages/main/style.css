@@ -1,0 +1,419 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+body{ font-family: 'Roboto', sans-serif; font-size:100%; }
+a{text-decoration:none; outline:none;}
+img{border:none; width:100%; height:100%;}
+.bg{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
+
+/*http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png,mastt.jpg*/
+
+#top_nav{width:100%; height:24px; background:#f8f8f8;}
+.top_nav{ width:1000px; margin:0 auto;}
+.top_nav ul{margin:0; padding:0}
+.top_nav ul li{ list-style:none; float:left;margin-right:15px;}
+.top_nav ul li a{ font-family:Roboto; font-size:12px;text-decoration:none; color:#767676;}
+.top_nav ul li a:hover{ color:#000000; text-decoration:none;}
+.top_nav ul li:last-child{margin-right:0;}
+
+#header{ width:1000px; margin:12px auto;}
+.logo{ float:left;margin-top:20px;}
+.ad{ float:right; margin-top:23px;}
+
+#header_section{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/header_sec_bg.jpg)repeat-x; clear:both; float:left; width:100%; padding:13px 0 37px; text-align:center;}
+#header_section img{width:100%; height:113px;}
+
+.header_section{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/mastt.jpg) no-repeat center center;height:134px;}
+
+.nav{ width:1000px; margin:0 auto; display:block;}
+.nav ul { list-style:none; margin:0; padding:0;}
+.nav ul li{margin-right:36px; float:left;}
+.nav ul li a{ font-family:Roboto; font-size:16px; line-height:28px; font-weight:bold; text-transform:uppercase; color:#6C6B69;}
+.nav ul li a:hover{ text-decoration:none; color:#000000;}
+.nav ul li:last-child{margin-right:0;}
+
+.search {display: block;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) -236px -21px no-repeat; width: 28px;height: 30px; margin-top:2px;}
+#search-saction {background: #bbbbbb; width: 98%; padding: 10px; display: none; position: relative; z-index: 99; top: 5px; height: 32px; float: left;}
+.search-inner {width: 530px; margin: 0 auto; height: 34px; background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF; overflow: hidden;}
+.search-inner .input-box {border: medium none; float: left; padding: 3px; height: 28px; line-height: 32px; margin-left: 40px; width: 390px; -webkit-border-radius: 0px; -webkit-appearance: none;}
+.search-inner .submit-btn {float: right; margin-right: -3px; background: #d80017; color: #fff; line-height: 34px; padding: 0px 10px; border: none; text-transform: uppercase; height: 34px; font: bold 16px/15px roboto; -webkit-border-radius: 0px; -webkit-appearance: none;}
+.wrapper{ width:1000px; margin:30px auto;}
+.left_panel{ width:685px; float:left;}
+.heading a{ font-family:Roboto; font-weight:200; background:#474644; padding:2px 10px; color:#FFFFFF; float:left;display:block; font-size:16px; text-transform:uppercase;}
+.heading a em{background-position:-278px -17px; width:47px; height:47px; float:right; position:absolute; top:-22px; left:90px;}
+
+.stories_box{float:left; width:100%;}
+.box{ width:665px; border:1px solid #e5e5e5; float:left; padding: 10px;}
+.img_box_sec { float: left; position:relative; width:100%; position:relative;}
+/*.img_box_sec img{height:427px !important}*/
+.box_caption{ position:absolute; bottom:10px; font:700 20px/24px "Roboto"; color:#161616; background-color:rgba(241,241,241,0.8); padding:10px;}
+.box_caption a{color:#161616;}
+
+.hits_misses{float:left; width:100%; margin-top:20px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/shad.jpg) no-repeat 0 bottom; padding-bottom:13px;}
+.hits_box{ width:665px; padding:10px; border:1px solid #e5e5e5; float:left; min-height:213px;}
+.hits_box ul{list-style:none;}
+.hits_box ul li{width:208px; float:left; margin-right:20px;}
+.hits_box ul li:last-child{margin-right:0px;}
+.hits_box ul li:nth-child(5){margin-right:0px;}
+.hits_box ul li.last{margin-right:0px;}
+.hits_box ul li a{font:15px/20px "Roboto"; color:#252525;}
+
+.right_panel{ width:300px; float:right;}
+
+.right_add{width:300px; float:right; margin-top:24px;}
+
+.sosorry{float:right; width:300px; margin-top:30px;}
+.sosorry h3.heading{position:relative;}
+.sosorry h3.heading a{padding-right:65px;}
+.sosorry ul{list-style:none; border:1px solid #e5e5e5; float:left; width:100%; box-sizing:border-box; padding:8px 4px 0 8px; height:697px; overflow:hidden;}
+.sosorry ul li{width:auto; float:left; margin-bottom:8px;}  
+.sosorry ul li .img_area{width:111px; float:left; margin-right:10px; position:relative;}
+.sosorry ul li p{display:block; font:15px/20px "Roboto"; color:#575555;}
+.sosorry ul li a{clear:#575555;}
+
+.poll{float:right; width:300px; margin:30px 0;}
+.poll .poll_main{width:100%; float:left; box-sizing:border-box; border:1px solid #e5e5e5;}
+.poll .content_area{width:96%; padding:2%; float:left; box-shadow:0 0 10px #e5e5e5;}
+.poll .content_area p{font:18px/22px "Roboto"; color:#b3b3b3;}
+.poll .vote{float:left; width:100%; margin-top:18px;}
+.poll .vote label{width:100px; border-radius:10px; float:left; height:21px; font:15px/20px "Roboto"; color:#fff; clear:left; margin:0 0 8px 10px; text-transform:uppercase;}
+.poll .vote label input{float:left; margin:2px 5px 0 0;}
+.poll .vote label.yes{background-color:#349c21; padding:5px 0 0 13px;}
+.poll .vote label.no{background-color:#d71a21; padding:5px 0 0 13px;}
+.poll .vote label.but{background-color:#d47314; width:113px; height:26px;}
+.poll .vote label.but input{background:none; border:none; cursor:pointer; color:#fff; width:112px; height:26px; text-align:center; padding:0px 0 0 0; text-transform:uppercase;}
+
+.map_area{float:left; width:100%; margin-top:20px; position:relative;}
+a.close_btn{background-position:-58px -55px; width:31px; height:31px; position:relative; right:-7px; top:-12px; float:right;}
+.map_top_content{position:absolute; top:0; left:0; width:100%; padding:15px 10px; background-color:rgba(142,71,79,0.8); box-sizing:border-box;}
+.map_top_content h2{font:bold 33px/36px "Roboto"; color:#fff; display:block; text-transform:uppercase;}  
+.map_top_content p{font:15px/18px "Roboto"; color:#fff; display:block;}
+
+.map_pop{position:absolute; top:30%; left:17%; width:67%; /*min-height:295p*/x; padding:15px 10px; background-color:rgba(255,255,255,0.8); box-sizing:border-box; border:1px solid #cfcfcf;}
+.map_pop h2{font:bold 27px/35px "Roboto"; color:#141414; display:block;}  
+.map_pop ul{list-style:disc; padding-left:22px;}
+.map_pop ul li{width:100%; float:left; font:300 20px/24px "Roboto"; color:#141414; margin-top:10px;}
+
+.map_pop{position:absolute; top:30%; left:17%; width:67%; /*min-height:295px;*/ padding:15px 10px; background-color:rgba(255,255,255,0.8); box-sizing:border-box; border:1px solid #cfcfcf;}
+.map_pop h2{font:bold 27px/35px "Roboto"; color:#141414; display:block;}  
+.map_pop ul{list-style:disc; padding-left:22px;}
+.map_pop ul li{width:100%; float:left; font:300 20px/24px "Roboto"; color:#141414; margin-top:10px;}
+.bg {  background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/sprit.png) 0 0 no-repeat;}
+
+.logoit {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px transparent;
+    height: 70px;
+    text-indent: -9999px;
+    width: 329px;
+}
+header {
+    text-align: left;
+}
+body {
+    color: rgb(119, 119, 119);
+    font-family: "Lato",Calibri,Arial,sans-serif;
+}
+body, html {
+    font-size: 100%;
+}
+a.close_btn {
+    background-position: -58px -55px;
+    float: right;
+    height: 31px;
+    position: absolute;
+    right: 149px;
+    top: 182px;
+    width: 31px;
+    z-index: 9999;
+}
+.modi_camp_pop1{ width:100%; float:left;}
+.modi_camp_pop1 > ul { list-style-type:none;padding:0;margin:0;}
+.modi_camp_pop1 > ul >li { display:none; }
+.modi_camp_pop1 .divcont{ display:none;}
+.modi_camp_pop_2{ width:1000px; }
+.modi_camp_pop_2 img{}
+
+
+
+.video{float:left; width:100%; margin-top:30px;}
+.video_main{width:100%; float:left; box-sizing:border-box; border:1px solid #e5e5e5; padding:8px; box-sizing:border-box;}
+.video_main .video_left{float:left; width:452px; padding-right:8px; position:relative;}
+
+.video_main .video_right{float:left; width:520px; border:1px solid #e5e5e5; box-shadow:0 0 10px #e5e5e5; box-sizing:border-box;}
+.video_main .video_right ul{list-style:none; padding:8px; box-sizing:border-box; float:left; height:350px; overflow:hidden;}
+.video_main .video_right ul li{width:100%; float:left; font:15px/20px "Roboto"; color:#575555; margin-bottom:10px;}
+.video_main .video_right ul li a{color:#575555;}
+.video_main .video_right ul li .imgbox{float:left; padding-right:10px; width:180px; position:relative;}
+.video_main .video_right ul li .content_box{width:auto; float:left; width:297px;}
+.video_caption{ position:absolute; bottom:-15px; font:700 20px/24px "Roboto"; color:#161616; background-color:#fff; padding:10px; width:406px; box-shadow:0 0 5px #e6e6e6; left:10px;}
+.video_caption em{width:38px; height:39px; float:left; background-position:-102px -7px; margin:3px 20px 0px 10px;}
+.video_caption p{float:left; width:336px;}
+
+.play_btn{width:39px; height:39px; position:absolute; bottom:7px; left:5px; background-position:-102px -7px;}
+
+.photos{float:left; width:100%; margin-top:30px;}
+.photos_main{width:100%; float:left; box-sizing:border-box; border:1px solid #e5e5e5; padding:8px;}
+.photos_main .photo_area{width:100%; position:relative;}
+.bottom_area{float:left; width:100%; margin-top:35px;}
+.bottom_area ul{list-style:none;}
+.bottom_area ul li{width:209px; float:left; margin-right:20px;}
+.bottom_area ul li:last-child{margin-right:0;}
+.photo_caption{position:absolute; bottom:10px; left:10px; font:20px/24px "Roboto"; color:#fff; background-color:rgba(0,0,0,0.8); padding:10px; width:618px;}
+.photo_caption a{color:#fff;}
+
+.quotes{float:right; width:300px; margin-top:30px;}
+.quotes h4{font:700 29px/36px "Roboto"; color:#fd8107; float:left;}
+.quotes h4 em{background-position:-152px -15px; width:65px; height:44px; float:left;}
+.quotes .quotes_main{float:right; width:300px; box-sizing:border-box; border:1px solid #e5e5e5; padding:8px; margin-top:8px;}
+.quotes .quotes_main ul{list-style:none; float:left; height:274px; overflow:hidden;}
+.quotes .quotes_main ul li{width:100%; float:left; margin-bottom:10px;}
+.quotes .quotes_main ul li p{font:500 16px/18px "Roboto"; color:#aaa; display:block;}
+.quotes .quotes_main ul li strong{font:14px/20px "Roboto"; color:#aaa; display:block;}
+
+
+#footer{float:left; width:100%; margin-top:30px; text-align:center; background-color:#000;}
+
+.ipad{display:none;}
+
+a.mobnav{display:none;}
+
+/* ====== Footer Panel Css ======== */
+/***********Footer*****************/
+
+.footer-main-wrapper {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #0d0d0d;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    width: 100%;
+}
+
+.outer_footer{ background:#0d0d0d;}
+#google_ad_footer { margin:20px auto;  border:0px solid #000; text-align:center;}
+#footer_menu { margin:0 auto; padding:0;height:18px; color:#fff; font-size:12px; font-family:roboto; text-align:center; text-transform:uppercase; }
+#footer_menu .moduletable{border:0px solid #000; width:100%; text-align:center }
+#footer_menu a {color:#fff; text-decoration:none;}
+#footer_menu a:visited,
+#footer_menu a:hover { color:#fa9100; text-decoration:none; line-height:16px; }
+#footer_menu span { line-height:16px; margin:0 15px;}
+#copyrights{float:left; padding:10px 0; text-align:center; width:100%; border-top:1px solid #000; margin-top:15px; color:#333; font-size:12px;}
+#copyrights a{text-decoration:none; color:#333; font-size:12px;}
+#copyrights a:hover{text-decoration:underline; }
+#itgd_group_links{border:0px solid #000; text-transform:uppercase; margin:0 auto 15px auto; width:99%; font:normal 12px roboto; color:#b9b9b9; line-height:25px; text-align:center; margin-top:20px; }
+#itgd_group_links b{width:auto; font:bold 11px Arial; font-weight:normal color:#E31D36; border:0px solid #000; margin:0; line-height:18px; }
+#itgd_group_links strong{color:#b9b9b9; margin:0 0 0 1px; font-weight:normal}
+#itgd_group_links a{text-decoration:none; color:#787878; margin:0 5px; font:normal 12px roboto; text-transform:capitalize;}
+#itgd_group_links a:hover{text-decoration:underline; }
+.footer_cnt_h{width:100%;}
+.footer_ads_h,.footer_lnk_m{width: 1003px;margin: 0 auto;}
+.footer_left_h{ width:730px; float:left;}
+.footer_right_h{ width:250px; float:right;}
+.ft_lnks_h{width:128px; float:left; margin-right:6px;}
+.footer_lnk_m ul li{ display:block; margin-top:10px; line-height:14px;}
+.footer_lnk_m ul li a{ color:#494949; font-size:12px; text-decoration:none; z-index: 1;}
+
+.footer_lnk_m ul li a:hover{ color:#f7991c; }
+.footer_lnk_m ul li a:before {content: ""; position: absolute; width: 100%; height: 3px; bottom: 0; left: 0; background: #f7991c; visibility: hidden; border-radius: 5px; transform: scaleX(0); transition: .25s linear;}
+.footer_lnk_m ul li a:hover:before,
+.footer_lnk_m ul li a:focus:before {visibility: visible; transform: scaleX(1);}
+
+.footer_lnk_m h3{ font-size:14px; color:#888; text-transform:uppercase; margin:10px 0 10px;}
+.ads_f{background:#000; border:0;}
+.new_nav {	background: #191718;width: 100%;clear:both;}
+.new_nav ul {width: 1003px;	margin: 0 auto;}	
+.new_nav ul li {font-family: roboto;text-transform: uppercase;color: #fff;padding: 10px 12px;float: left;list-style:none;}
+.new_nav ul li a {color: #fff;text-decoration: none;}		
+.below-footer_h {background: #0d0d0d;overflow: hidden;width: 100%;/*border-top: 1px solid #2f2f2f;*/ float:left;} 	
+.below-footer_h.ads_f{ background:#000; padding:15px 0;}
+.socials_footer_links_h{ margin-top:20px;}
+.socials_footer_links_h ul{ list-style-type:none;padding:0;margin:0;}
+.socials_footer_links_h ul li{  float:left; margin-right:10px;}
+
+.socials_footer_links_h ul li .fb_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-226px -188px; -webkit-transition:background-position .2s ease-in;  
+    -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
+.socials_footer_links_h ul li .gp_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-320px -188px; -webkit-transition:background-position .2s ease-in;  
+    -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
+.socials_footer_links_h ul li .tw_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png); width:40px; height:45px; background-position:-265px -188px; -webkit-transition:background-position .2s ease-in;  
+    -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
+.socials_footer_links_h ul li .rss_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-375px -188px; -webkit-transition:background-position .2s ease-in;  
+    -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in;}
+.socials_footer_links_h ul li .mbl_h{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) ; width:40px; height:45px; background-position:-428px -184px; -webkit-transition:background-position .2s ease-in;  
+    -moz-transition:background-position .2s ease-in;  -o-transition:background-position .2s ease-in; transition:background-position .2s ease-in; margin-top:-5px;}
+	
+.socials_footer_links_h ul li .fb_h:hover{background-position:-226px -238px;}
+.socials_footer_links_h ul li .gp_h:hover{background-position:-320px -238px;}
+.socials_footer_links_h ul li .tw_h:hover{background-position:-265px -238px;}
+.socials_footer_links_h ul li .rss_h:hover{background-position:-375px -238px;}
+.socials_footer_links_h ul li .mbl_h:hover{background-position:-428px -230px;}
+
+
+.mar50{margin-top:15px !important;}
+
+.mobile_mast{ display:none;}
+
+.right-more a{float: right;text-decoration: none;color: #000;font-size: 16px;text-transform:uppercase;}
+
+
+
+
+
+@media (max-width: 800px){
+	
+.wrapper{width:98%; padding:0 1%;}
+.top_nav{width:100%;}
+.top_nav ul li{margin-right:6px;}	
+.top_nav ul li a{font-size:10px;}
+#header{width:100%; display:none;}
+#header_section{background-position:0 bottom; padding-bottom:10px;}
+#header_section img{width:100%; height:82px;}
+.desk{display:none;}
+.ipad{display:block;}
+.nav{width:100%;}
+.nav ul li{margin-right:19px;}
+.nav ul li:first-child{margin-left:19px;}
+.nav ul li a{font-weight:normal; font-size:13px; line-height:36px;}
+.nav ul li a:hover{border-bottom:2px solid #fcbb7b; box-sizing:border-box; padding-bottom:8px;}
+.search{margin-top:5px;}
+.left_panel{width:58%; margin-top:15px;}
+.box{width:100%; box-sizing:border-box;}
+.hits_box ul li{width:30%;}
+.hits_box ul li a{font-size:13px; line-height:16px;}
+.heading a{font-size:13px;}
+.map_top_content{padding-top:5px;}
+.map_top_content h2,.map_pop h2{font-size:26px; line-height:30px;}
+.map_top_content p{font-size:13px;}
+.right_panel{width:40%; float:right;}
+.hits_box{width:100%; box-sizing:border-box;}
+.map_pop{/*min-height:220px;*/}
+.map_pop ul li{font-size:15px; line-height:18px; margin-bottom:0px;}
+
+.video_main .video_left{width:61%; box-sizing:border-box;}
+.video_main .video_right{width:39%;}
+.video_main .video_right ul li .imgbox{width:45%; box-sizing:border-box;}
+.video_main .video_right ul li .content_box{width:51%; box-sizing:border-box; font-size:14px; line-height:16px;}
+
+.photo_caption{width:100%; box-sizing:border-box; left:0;}
+.bottom_area ul li{width:30%;}
+.sosorry ul{height:495px;}
+.heading a em{top:-25px;}
+.ad{margin-top:36px;}
+
+
+
+.new_nav ul, .footer_ads_h{ width:100%;}
+.footer_lnk_m{ width:95%; margin:0 auto;}
+.ft_lnks_h{ width:115px;}
+.new_nav ul li{ padding:10px 7px;}
+.new_nav ul li a{ font-size:13px;}
+.footer_left_h{ float:none; margin:0 auto;}
+
+#contentdiv #content_left{width:94%; padding-left:6%;}
+#breakingnews{ width:100%;}
+.big_story .story_thumb .story_thumb_container{ height:245px;}
+.top4_area ul{ width:100%;}
+.top4_area ul li{ width:173px; font-size:12px;} .top4_area ul li img{ width:64px; height:53px;}
+
+a.close_btn {
+    background-position: -58px -55px;
+    float: right;
+    height: 31px;
+    position: absolute;
+    right: 122px;
+    top: 150px;
+    width: 31px;
+    z-index: 9999;
+}
+.mobile_mast{ display:none;}
+	
+}
+
+@media (max-width: 640px){
+
+.wrapper{width:100%; margin:0; padding:0;}
+#top_nav{display:none;}
+#header_section{padding:0;}
+#header_section img{height:50px;}
+
+.left_panel{width:100%;}
+.box_caption{position:relative; background-color:#fff; font-size:13px; font-weight:normal; line-height:16px; padding-left:0; padding-right:0;}
+.hits_box ul li{margin-right:14px;}
+.right_add{display:none;}
+
+.sosorry{width:100%;}
+.map_top_content{padding-bottom:5px;}
+.map_top_content h2{font-size:13px;}
+/*.map_pop h2{font-size:13px; line-height:18px; position:relative; top:8px;}*/
+
+.map_pop h2 {
+    font-size: 13px;
+    line-height: 35px;
+    position: relative;
+    top: 8px;
+}
+.map_top_content p{display:none;}
+.map_pop{padding-top:0; top:24%; /*min-height:150px;*/}
+.map_pop ul{padding-left:10px;}
+.map_pop ul li{margin-top:0; font-size:12px; line-height:14px;}
+.map_pop ul li:last-child{display:none;}
+
+.right_panel{width:100%;}
+
+.video_main .video_left{width:100%; padding:0;}
+.video_caption{width:100%; box-sizing:border-box; padding-left:0; padding-right:0; left:0;}
+.video_caption{font-size:13px; line-height:16px;}
+.video_caption em{margin-top:0;}
+.video_caption p{float:none; width:auto;}
+.video_main .video_right{width:100%; margin-top:15px; margin-top:23px;}
+.photo_caption{font-size:13px; line-height:16px; position:relative; background-color:#fff; color:#141414;}
+.bottom_area ul li{margin-right:12px;}
+.quotes,.quotes .quotes_main{width:100%;}
+
+.poll,.poll .poll_main{width:100%;}
+a.mobnav{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/modi_year/mob_nav.png) no-repeat 0 0; width:17px; height:13px; float:left; position:relative; top:-31px; left:13px; display:block;}
+.nav{position:absolute; top:53px; left:0; background-color:#fff; z-index:9999; padding-bottom:15px; display:none;}
+.nav ul li:first-child{margin:0;}
+.nav ul li:last-child{display:none; border:none;}
+.nav ul li:nth-child(8){border:none;}
+.nav ul li{width:100%; padding:0 0 0 10px; text-align:left; background-color:#fff; margin:0; border-bottom:1px solid #e5e5e5;}
+
+.nav ul li a:hover{border:none;}
+.bottom_area{margin-top:2px;}
+.ad{float:none;}
+.photo_caption a{color:#000;}
+
+.footer_left_h{display:none;}
+a.close_btn {
+    background-position: -58px -55px;
+    float: right;
+    height: 31px;
+    position: absolute;
+    right: 52px;
+    top: 51px;
+    width: 31px;
+    z-index: 9999;
+}
+.video_caption {
+    box-sizing: border-box;
+    left: 0;
+    margin-left: 6px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 96%;
+}
+.video_right{ margin-top:22px;}
+.footer_right_h {
+    float: right;
+    width: 272px;
+}
+.hd_ft1{ display:none;}
+.below-footer_h:first-child,.footer-main-wrapper{ display:none;}
+.mobile_mast{ display:block;}
+.ipad{ display:none;}
+
+
+}
+
