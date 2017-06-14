@@ -2350,6 +2350,35 @@ function features_for_story_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text',
   );
+  
+  // Exported field_base: 'field_story_show_fields'.
+  $field_bases['field_story_show_fields'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_show_fields',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'story_impact_text' => 'Impact Text',
+        'story_powered_text' => 'Powered Text',
+        'story_category_icon' => 'Category Icon',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
 
   // Exported field_base: 'field_story_small_image'.
   $field_bases['field_story_small_image'] = array(
