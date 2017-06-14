@@ -340,9 +340,17 @@ function getVideolist($nid){
       $field_video_upload = $resvalue['field_video_upload_value'];
       $file_id = file_usage($field_video_upload);
       //to get the video of all the other formats
-      $video_formats = all_video_format($file_id);
-      $video_path_info = videoCheckExistFile($file_id, $nid, $field_video_upload);
-      $video_path_mp4 = $video_path_info['video_path_mp4'];
+      $load_collection = field_collection_item_load($field_video_upload);
+      
+      $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+      $video_formats = all_video_format($video_formats);
+      
+      $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
+      
+      $video_path_mp4 = $video_formats['video_path_mp4'];
+      if(!$video_path_mp4){
+          $video_path_mp4 = $video_path_info['video_path_mp4'];
+      }
       $filesize = $video_path_info['filesize'];
       $stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
       //video url end
@@ -372,9 +380,20 @@ function getVideolist($nid){
         $videolist['nv_short_desc'] = "$field_story_kicker_text_value";
         $videolist['nv_small_image'] = "$file_small_img_url";
         $videolist['nv_large_image'] = "$file_medium_img_url";
-        $videolist['nv_is_jwplayer'] = "0";
+        /*$videolist['nv_is_jwplayer'] = "0";
         $videolist['nv_url'] = "$stream_h264_hd_url";
-        $videolist['nv_download_url'] = "$video_path_mp4";
+        $videolist['nv_download_url'] = "$video_path_mp4";*/
+        if (strpos($video_path_mp4,'dailymotion') !== false) {
+            $videolist['nv_is_jwplayer'] = "1";
+            $videolist['nv_url'] = "$video_path_mp4";
+            $videolist['nv_download_url'] = "$stream_h264_hd_url";
+        }
+        else{
+            $video_path_mp4 = $video_path_info['video_path_mp4'];
+            $videolist['nv_is_jwplayer'] = "0";
+            $videolist['nv_url'] = "$stream_h264_hd_url";
+            $videolist['nv_download_url'] = "$video_path_mp4";
+        }
         $videolist['nv_view_count'] = "";
         $videolist['nv_comment_count'] = "";
         $videolist['nv_share_url'] = "$firebase_url";
