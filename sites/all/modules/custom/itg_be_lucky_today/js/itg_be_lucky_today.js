@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
         }
         return true;
     });
-    
+
     jQuery('.itg_be_lucky_today [name="email"]').blur(function (event) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (jQuery('.itg_be_lucky_today [name="email"]').val().trim().length < 1) {
@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
             return false;
         }
     });
-    
+
     jQuery('.itg_be_lucky_today .next3').click(function (event) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (jQuery('.itg_be_lucky_today [name="email"]').val().trim().length < 1) {
@@ -87,28 +87,34 @@ jQuery(document).ready(function () {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (jQuery('.itg_be_lucky_today_2 [name="name"]').val().trim().length < 1) {
             alert(Drupal.t('Please fill atleast one row completely'));
+            jQuery('.itg_be_lucky_today_2 [name="name"]').focus();
             return false;
         }
 
         if (jQuery('.itg_be_lucky_today_2 [name="name"]').val().trim().length >= 1) {
             if (!str_pattern.test(jQuery('.itg_be_lucky_today_2 [name="name"]').val())) {
                 alert(Drupal.t('Please enter valid name'));
+                jQuery('.itg_be_lucky_today_2 [name="name"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="email"]').val().length < 1) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email"]').focus();
                 return false;
             }
             if (!regex.test(jQuery('.itg_be_lucky_today_2 [name="email"]').val())) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="mobile"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile"]').focus();
                 return false;
             }
             if (!/^\d{10}$/.test(jQuery('.itg_be_lucky_today_2 [name="mobile"]').val())) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile"]').focus();
                 return false;
             }
             name.push(jQuery('.itg_be_lucky_today_2 [name="name"]').val());
@@ -119,78 +125,94 @@ jQuery(document).ready(function () {
         if (jQuery('.itg_be_lucky_today_2 [name="name_2"]').val().trim().length >= 1) {
             if (!str_pattern.test(jQuery('.itg_be_lucky_today_2 [name="name_2"]').val())) {
                 alert(Drupal.t('Please enter valid name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_2"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="email_2"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_2"]').focus();
                 return false;
             }
             if (!regex.test(jQuery('.itg_be_lucky_today_2 [name="email_2"]').val())) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_2"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').focus();
                 return false;
             }
             if (!/^\d{10}$/.test(jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').val())) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').focus();
                 return false;
             }
-            
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_2"]').val(), name) !== -1){
+
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_2"]').val(), name) !== -1) {
                 alert(Drupal.t('Please enter different Name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_2"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_2"]').val(), email) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_2"]').val(), email) !== -1) {
                 alert(Drupal.t('Please enter different Email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_2"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').val(), mobile) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').val(), mobile) !== -1) {
                 alert(Drupal.t('Please enter different Mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').focus();
                 return false;
             }
-            
+
             name.push(jQuery('.itg_be_lucky_today_2 [name="name_2"]').val());
             email.push(jQuery('.itg_be_lucky_today_2 [name="email_2"]').val());
             mobile.push(jQuery('.itg_be_lucky_today_2 [name="mobile_2"]').val());
-            
+
         }
         if (jQuery('.itg_be_lucky_today_2 [name="name_3"]').val().trim().length >= 1) {
             if (!str_pattern.test(jQuery('.itg_be_lucky_today_2 [name="name_3"]').val())) {
                 alert(Drupal.t('Please enter valid name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_3"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="email_3"]').val().length < 1) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_3"]').focus();
                 return false;
             }
             if (!regex.test(jQuery('.itg_be_lucky_today_2 [name="email_3"]').val())) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_3"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').focus();
                 return false;
             }
             if (!/^\d{10}$/.test(jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').val())) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').focus();
                 return false;
             }
-            
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_3"]').val(), name) !== -1){
+
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_3"]').val(), name) !== -1) {
                 alert(Drupal.t('Please enter different Name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_3"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_3"]').val(), email) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_3"]').val(), email) !== -1) {
                 alert(Drupal.t('Please enter different Email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_3"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').val(), mobile) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').val(), mobile) !== -1) {
                 alert(Drupal.t('Please enter different Mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').focus();
                 return false;
             }
-            
+
             name.push(jQuery('.itg_be_lucky_today_2 [name="name_3"]').val());
             email.push(jQuery('.itg_be_lucky_today_2 [name="email_3"]').val());
             mobile.push(jQuery('.itg_be_lucky_today_2 [name="mobile_3"]').val());
@@ -198,78 +220,94 @@ jQuery(document).ready(function () {
         if (jQuery('.itg_be_lucky_today_2 [name="name_4"]').val().trim().length >= 1) {
             if (!str_pattern.test(jQuery('.itg_be_lucky_today_2 [name="name_4"]').val())) {
                 alert(Drupal.t('Please enter valid name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_4"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="email_4"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_4"]').focus();
                 return false;
             }
             if (!regex.test(jQuery('.itg_be_lucky_today_2 [name="email_4"]').val())) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_4"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').focus();
                 return false;
             }
             if (!/^\d{10}$/.test(jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').val())) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').focus();
                 return false;
             }
-            
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_4"]').val(), name) !== -1){
+
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_4"]').val(), name) !== -1) {
                 alert(Drupal.t('Please enter different Name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_4"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_4"]').val(), email) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_4"]').val(), email) !== -1) {
                 alert(Drupal.t('Please enter different Email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_4"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').val(), mobile) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').val(), mobile) !== -1) {
                 alert(Drupal.t('Please enter different Mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').focus();
                 return false;
             }
-            
+
             name.push(jQuery('.itg_be_lucky_today_2 [name="name_4"]').val());
             email.push(jQuery('.itg_be_lucky_today_2 [name="email_4"]').val());
             mobile.push(jQuery('.itg_be_lucky_today_2 [name="mobile_4"]').val());
-            
+
         }
         if (jQuery('.itg_be_lucky_today_2 [name="name_5"]').val().trim().length >= 1) {
             if (!str_pattern.test(jQuery('.itg_be_lucky_today_2 [name="name_5"]').val())) {
                 alert(Drupal.t('Please enter valid name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_5"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="email_5"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_5"]').focus();
                 return false;
             }
             if (!regex.test(jQuery('.itg_be_lucky_today_2 [name="email_5"]').val())) {
                 alert(Drupal.t('Please enter valid email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_5"]').focus();
                 return false;
             }
             if (jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').val().trim().length < 1) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').focus();
                 return false;
             }
             if (!/^\d{10}$/.test(jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').val())) {
                 alert(Drupal.t('Please enter valid mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').focus();
                 return false;
             }
-            
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_5"]').val(), name) !== -1){
+
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="name_5"]').val(), name) !== -1) {
                 alert(Drupal.t('Please enter different Name'));
+                jQuery('.itg_be_lucky_today_2 [name="name_5"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_5"]').val(), email) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="email_5"]').val(), email) !== -1) {
                 alert(Drupal.t('Please enter different Email'));
+                jQuery('.itg_be_lucky_today_2 [name="email_5"]').focus();
                 return false;
             }
-            if(jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').val(), mobile) !== -1){
+            if (jQuery.inArray(jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').val(), mobile) !== -1) {
                 alert(Drupal.t('Please enter different Mobile'));
+                jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').focus();
                 return false;
             }
-            
+
             name.push(jQuery('.itg_be_lucky_today_2 [name="name_5"]').val());
             email.push(jQuery('.itg_be_lucky_today_2 [name="email_5"]').val());
             mobile.push(jQuery('.itg_be_lucky_today_2 [name="mobile_5"]').val());
@@ -311,17 +349,17 @@ jQuery(document).ready(function () {
         jQuery('.luck_meter .black_strip').css('bottom', luck_meter);
     });
     // Luck meter end
-    
-    jQuery(".page-be-lucky-today").on('keydown', '#number_check', function(event){
+
+    jQuery(".page-be-lucky-today").on('keydown', '#number_check', function (event) {
         if (!/[0-9]/g.test(event.key) && event.key != "Delete" && event.key != "Backspace" && event.key != "ArrowLeft" && event.key != "ArrowRight") {
-            event.preventDefault();            
+            event.preventDefault();
             return false
         }
     });
-    
-    jQuery(".itg_be_lucky_today").on('click', '#magazine_wrapper [type="radio"]', function(){
+
+    jQuery(".itg_be_lucky_today").on('click', '#magazine_wrapper [type="radio"]', function () {
         var magazine_name = jQuery(this).parent().children('h4').text();
-        if(magazine_name !== undefined){
+        if (magazine_name !== undefined) {
             jQuery(".itg_be_lucky_today #selected_magazine_name").val(magazine_name);
         }
         console.log(magazine_name, 'asd');
