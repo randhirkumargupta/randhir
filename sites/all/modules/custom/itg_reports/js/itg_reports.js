@@ -60,16 +60,16 @@
             });
 
             $('#edit-node-status').on('change', function () {
-//                var getvalue = $("#edit-node-status option:selected").text();
-//
-//                if (getvalue == 'Archive') {
-//
-//                    $('#edit-field-story-archive-value').val('Yes').change();
-//                    ;
-//                } else {
-//                    $('#edit-field-story-archive-value').val('All').change();
-//                    ;
-//                }
+                var getvalue = $("#edit-node-status option:selected").text();
+
+                if (getvalue == 'Archive') {
+
+                    $('#edit-field-story-archive-value').val('Yes').change();
+                    ;
+                } else {
+                    $('#edit-field-story-archive-value').val('All').change();
+                    ;
+                }
 
             });
 

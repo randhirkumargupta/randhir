@@ -61,14 +61,14 @@ $share_image = '';
                 $live_tv_get_details = node_load($device[0]);
                 $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
                 if (filter_var($live_url, FILTER_VALIDATE_URL)) {
-                  ?>
-
-                      <iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>
-
-                      <?php
+                   if (is_bool(is_youtube_url($live_url))) {
+                        echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_url . '"></iframe>';
+                      }
+                      elseif (is_string(is_youtube_url($live_url))) {
+                        echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="https://www.youtube.com/embed/' . is_youtube_url($live_url) . '"></iframe>';
+                      }
                     }
                     else {
-
                       print $live_url;
                     }
                   }
