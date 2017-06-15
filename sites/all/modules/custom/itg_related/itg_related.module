@@ -72,7 +72,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
 
     $form['keyword']['#attributes'] = array('placeholder' => array(t('Title / Kicker / Tag ')));
 
-    $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'Video' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Live Blog');
+    $bundle_name = array('story' => 'Story', 'blog' => 'Blog', 'photogallery' => 'Photogallery', 'videogallery' => 'Videogallery', 'podcast' => 'Podcast', 'breaking_news' => 'Live Blog');
     $form['bundle']['#type'] = 'select';
     $form['bundle']['#options'] = $bundle_name;
     $form['bundle']['#size'] = 5;
@@ -226,6 +226,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
   }
   else if ($arg[0] == 'archives') {
+    $source_name = 'non_issue_based';
     $current_hash = variable_get('current_site_hash');
     if (!empty($current_hash)) {
       $hash = $current_hash;
@@ -239,17 +240,24 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $dat_1_day_ago = date('Y-m-d');
       $date_val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
       $str = 'bundle_name:(' . $val_str1 . ') AND ';
+      $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $str .= 'hash:(' . $hash . ') AND ';
       $str .= 'ds_created:(' . $date_val_str . ')';
     }
 
-    $ctype_tab = array('Story', 'photogallery', 'Video');
+    $ctype_tab = array('story', 'photogallery', 'video');
 
     // case if arg(1) contain either type or date
     if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
+      if($arg[1] == 'story' || $arg[1] == 'video') {
+        $type = ucwords($arg[1]);
+      } else {
+        $type = $arg[1];
+      }
       $dat_1_day_ago = date('Y-m-d');
       $date_val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
-      $str = 'bundle_name:(' . $arg[1] . ') AND ';
+      $str = 'bundle_name:(' . $type . ') AND ';
+      $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $str .= 'hash:(' . $hash . ') AND ';
       $str .= 'ds_created:(' . $date_val_str . ')';
     }
@@ -260,20 +268,27 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $dat_1_day_ago = date('Y-m-d', strtotime($arg[1]));
       $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
       $str .= 'bundle_name:(' . $bun_arr . ') AND ';
+      $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $str .= 'ds_created:(' . $val_str_date . ')';
     }
 
     // case if both argument is not empty
     if (!empty($arg[1]) && !empty($arg[2])) {
-      $str = 'bundle_name:(' . $arg[1] . ') AND ';
+      if($arg[1] == 'story' || $arg[1] == 'video') {
+        $type = ucwords($arg[1]);
+      } else {
+        $type = $arg[1];
+      }
+      $str = 'bundle_name:(' . $type . ') AND ';
       $str .= 'hash:(' . $hash . ') AND ';
+      $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $dat_1_day_ago = date('Y-m-d', strtotime($arg[2]));
       $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
       $str .= 'ds_created:(' . $val_str_date . ')';
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
-    //pr($query->getSolrParams());
+   // pr($query->getSolrParams());
   }
   else {
     $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
@@ -287,6 +302,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
 
         $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+
         if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
           if (is_array($val)) {
@@ -325,7 +341,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             else {
               $val_str = implode(' OR ', $val);
               if ($val_str == 'All') {
-                $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Magazine');
+                $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
                 $val_str = implode(' OR ', $bundle_name);
               }
               else {
@@ -334,42 +350,38 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             }
           }
           else {
-            $remove_key_for_video = array('search-unpublish-video', 'search-unpublish-video-radio');
-            $page_arg = arg(0);
-            if (!in_array($page_arg, $remove_key_for_video)) {
-              if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
-                $val_str = trim($val) . '*';
-                $val_str = str_replace(" ", "* OR ", $val_str);
-              }
-              else if ($key == 'sm_vid_Tags') {
-                $get_value = preg_split('/[\s,]/', $val);
-                $get_value = array_filter($get_value);
-                $get_comma_value = implode(',', $get_value);
-                $val_str = str_replace(",", "* OR ", $get_comma_value);
-
-                $val_str = $val_str . '*';
-              }
-              else if ($key == 'tm_vid_4_names' && $_GET['q'] != 'searchimage') {
-                $get_value = preg_split('/[\s,]/', $val);
-                $get_value = array_filter($get_value);
-                $get_comma_value = implode(',', $get_value);
-                $val_str = str_replace(",", " OR ", $get_comma_value);
-              }
-              else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title' || $key == 'sm_field_itg_common_by_line_twit') {
-                $quotes_string = '"' . $val . '"';
-                $val_str = $quotes_string;
-              }
-              else {
-                $val_str = $val;
-              }
+            if ($key == 'label' || $key == 'sm_field_story_kicker_text') {
+              $val_str = trim($val) . '*';
+              $val_str = str_replace(" ", "* OR ", $val_str);
             }
+            else if ($key == 'sm_vid_Tags') {
+              $get_value = preg_split('/[\s,]/', $val);
+              $get_value = array_filter($get_value);
+              $get_comma_value = implode(',', $get_value);
+              $val_str = str_replace(",", "* OR ", $get_comma_value);
 
-            if (!empty($val_str)) {
-              $str .= $and . $key . ':(' . $val_str . ')';
+              $val_str = $val_str . '*';
             }
-
-            $i++;
+            else if ($key == 'tm_vid_4_names' && $_GET['q'] != 'searchimage') {
+              $get_value = preg_split('/[\s,]/', $val);
+              $get_value = array_filter($get_value);
+              $get_comma_value = implode(',', $get_value);
+              $val_str = str_replace(",", " OR ", $get_comma_value);
+            }
+            else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title' || $key == 'sm_field_itg_common_by_line_twit') {
+              $quotes_string = '"' . $val . '"';
+              $val_str = $quotes_string;
+            }
+            else {
+              $val_str = $val;
+            }
           }
+
+          if (!empty($val_str)) {
+            $str .= $and . $key . ':(' . $val_str . ')';
+          }
+
+          $i++;
         }
       }
 
@@ -385,48 +397,15 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $str = 'hash:(' . $hash_value . ')';
         }
         $query->replaceParam("fq", '(' . $str . ')');
-      }
-      else if ($_GET['q'] == 'search-unpublish-video' && !isset($_GET['sm_field_video_used'])) {
+      } else if($_GET['q'] == 'search-unpublish-video' && !isset($_GET['sm_field_video_used'])) {
         $video_val = 0;
         $str = 'sm_field_video_used:(' . $video_val . ')';
         $query->addParam("fq", '(' . $str . ')');
       }
-      else if ($_GET['q'] == 'search-unpublish-video-radio' && !isset($_GET['sm_field_video_used'])) {
+      else if($_GET['q'] == 'search-unpublish-video-radio' && !isset($_GET['sm_field_video_used'])) {
         $video_val = 0;
         $str = 'sm_field_video_used:(' . $video_val . ')';
         $query->addParam("fq", '(' . $str . ')');
-      }
-      else if ($_GET['q'] == 'search-unpublish-video' || $_GET['q'] == 'search-unpublish-video-radio') {
-        $hashvalue = $_GET['hash'];
-        $str = "";
-        if (!empty($hashvalue)) {
-          $hashvalue = implode(' OR ', $hashvalue);
-          $str_has = 'hash:(' . $hashvalue . ')';
-        }
-        if (isset($_GET['sm_field_video_used'])) {
-          $video_val = $_GET['sm_field_video_used'];
-        }
-        else {
-          $video_val = 0;
-        }
-        $str_pub = 'sm_field_video_used:(' . $video_val . ')';
-        if (empty($hashvalue)) {
-          $str = $str_pub;
-        }
-        else {
-          $str = $str_has . ' AND ' . $str_pub;
-        }
-        if (isset($_GET['label']) && !empty($_GET['label'])) {
-          $str_label = 'label:(' . $_GET['label'] . '*)';
-          if ($str != "") {
-            $str = $str . ' AND ' . $str_label;
-          }
-          else {
-            $str = $str_label.'';
-          }
-        }
-
-        $query->replaceParam("fq", '(' . $str . ')');
       }
       else {
 
@@ -436,6 +415,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
     }
+    //pr($query->getSolrParams());
   }
 }
 

@@ -36,15 +36,21 @@ if (function_exists(itg_story_clone_data))
   $right_emoji_image = $clone_arr_response->sm_field_custom_emoji[0];
   preg_match_all('/<img[^>]*>/s', $right_emoji_image, $images);
   $right_smilies = implode("", $images[0]);
+  if (strpos($clone_arr_response->url, BACKEND_URL) !== false) {
+    $front_url = str_replace(BACKEND_URL, FRONT_URL, $clone_arr_response->url);
+  }
+  else {
+    $front_url = $clone_arr_response->url;
+  }
   $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
 }
 if(!empty($left_position) && $left_position == 'left' && empty($right_position)) {
   ?>
-<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $left_smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $left_smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
 <?php }elseif ($left_position == 'right' && empty($left_emoji_image)) { ?>
- <div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $right_smilies; ?></span></h2></div> 
+ <div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 65, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $right_smilies; ?></span></h2></div> 
 <?php } elseif (!empty($left_position) && !empty($right_position)) { ?>
- <div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $left_smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $right_smilies; ?></span></h2></div>   
+ <div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $left_smilies; ?></span><?php print l(mb_strimwidth($label, 0, 65, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $right_smilies; ?></span></h2></div>   
  <?php }else { ?>
-<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 65, ".."), $clone_arr_response->url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $smilies; ?></span></h2></div>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 65, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?><span class="smily-im"><?php print $smilies; ?></span></h2></div>
 <?php } ?>
