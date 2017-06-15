@@ -417,7 +417,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
 
     $data['magazine'] = $magazine;//$form_state['input']['magazine'];
     $data['magazine2'] = $magazine2;
-    $data['user_id'] = '';
+    $data['user_id'] = $key;
     $data['product_id'] = 161;
     $data['key'] = $key;
     $data['source'] = '';
