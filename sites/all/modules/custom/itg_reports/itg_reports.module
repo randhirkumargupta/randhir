@@ -236,16 +236,17 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       break;
     case 'views-exposed-form-report-filed-content-page':
+      //drupal_add_css('.view .view-filters .views-exposed-form .views-exposed-widget{display:inline-block !important}' , 'inline');
       // remove archive and unpublish on list
       $option = array();
 
       foreach ($form['state']['#options'] as $key => $option_val) {
 
-        if ($key != 'un_published' && $key != 'archive') {
+        if ($key != 'un_published' && $key != 'archive' && $key !='published') {
           $option[$key] = $option_val;
         }
       }
-      $form['node_status']['#options'] = $form['node_status']['#options'] + array("" => 'Archive');
+      //$form['node_status']['#options'] = $form['node_status']['#options'] + array("" => 'Archive');
       $form['state']['#options'] = $option;
       $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
       $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
@@ -258,7 +259,9 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
         '#options' => array('all' => 'Any' , 'yes' => 'Yes' , 'no' => 'No') ,
         '#default_value' => 'all' ,
       );
-      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
+      $form['field_story_archive_value']['#options']['Yes'] = 'Yes';
+      $form['field_story_archive_value']['#options']['null'] = 'No';
+        $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('Start Date'));
       unset($form['date_filter']['min']['#title']);
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off' , 'readonly' => 'readonly' , 'placeholder' => t('End Date'));
@@ -696,7 +699,19 @@ function itg_reports_views_query_alter(&$view , &$query) {
     }
   }
   if ($view->name == 'report_filed_content' && $view->current_display == 'page') {
-
+    //$query->add_where(1, 'field_data_field_story_archive.field_story_archive_value' , 'NULL' , 'IS');
+    //field_data_field_story_archive.field_story_archive_value
+      
+    if($_GET['field_story_archive_value'] == 'null') {
+        foreach($query->where[1]['conditions'] as $key => $condition) {
+        if($condition['field'] == 'field_data_field_story_archive.field_story_archive_value') {
+          unset($query->where[1]['conditions'][$key]);
+          $query->table_queue['field_data_field_story_archive']['join']->type = "LEFT";
+          $c = db_and()->isNull('field_data_field_story_archive.field_story_archive_value');
+          $query->add_where(1, $c);
+        }
+      }
+    }
   }
 }
 

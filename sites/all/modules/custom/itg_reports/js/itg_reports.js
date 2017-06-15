@@ -60,16 +60,16 @@
             });
 
             $('#edit-node-status').on('change', function () {
-                var getvalue = $("#edit-node-status option:selected").text();
-
-                if (getvalue == 'Archive') {
-
-                    $('#edit-field-story-archive-value').val('Yes').change();
-                    ;
-                } else {
-                    $('#edit-field-story-archive-value').val('All').change();
-                    ;
-                }
+//                var getvalue = $("#edit-node-status option:selected").text();
+//
+//                if (getvalue == 'Archive') {
+//
+//                    $('#edit-field-story-archive-value').val('Yes').change();
+//                    ;
+//                } else {
+//                    $('#edit-field-story-archive-value').val('All').change();
+//                    ;
+//                }
 
             });
 
@@ -96,7 +96,7 @@
 
 jQuery(document).ready(function () {
     //jQuery("#ui-datepicker-div").style('display','none');
-    jQuery('#edit-field-story-archive-value-wrapper').hide();
+    //jQuery('#edit-field-story-archive-value-wrapper').hide();
     if (jQuery('#edit-field-story-archive-value').val() == 'Yes') {
 
         jQuery('.view-id-report_filed_content td.views-field-status').text('Archive');
