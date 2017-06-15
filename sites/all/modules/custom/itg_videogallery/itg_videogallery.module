@@ -780,9 +780,9 @@ function itg_videogallery_edit_dailymotion($vid_res_result, $playlist_name, $nod
 /**
  * This function use for chane video privat or public
  */
-function itg_videogallery_vilde_private_public($videid, $status) {
+function itg_videogallery_video_private_public($videid, $status) {
   $api = itg_videogallery_dailymotion_api();
-  $api->post('/video/' . $videid . '?tags=' . $tags_value . '&private=' . $status);
+  $api->post('/video/' . $videid . '?private=' . $status);
   itg_videogallery_update_embedcode_url($videid);
 }
 
@@ -1358,7 +1358,6 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
     foreach ($keyfor as $nkey => $vide_id) {
       $solr_data = itg_videogallery_getsolr_data($vide_id);
       $clone_arr_response = $solr_data->response->docs[0];
-
       if (empty($clone_arr_response) || !(isset($clone_arr_response->itm_field_video_is_delete[0]))) {
 
         $node_unpublish = 0;
@@ -1444,7 +1443,7 @@ function itg_videogallery_remove_video_with_child() {
         $query->fields(array('dailymotion_published' => 0));
         $query->condition('video_id', $data_delete->solr_video_id, '=');
         $query->execute();
-        itg_videogallery_vilde_private_public($data_delete->solr_video_id, false);
+        itg_videogallery_video_private_public($data_delete->solr_video_id, false);
       }
 
 // delete from itg_solr_video_info table
@@ -1598,6 +1597,11 @@ function delete_daily_motion_video_callback() {
     $node->status = 1; //(1 or 0): Published or not
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+
+    $getnode = itg_videogallery_get_node_by_title($video_id);
+    if (!empty($getnode)) {
+      $node->nid = $getnode[0]->nid;
+    }
     node_save($node);
     drupal_set_message('Video has been deleted successfully');
     drupal_goto('daily-motion-video-dashboard');
@@ -1696,13 +1700,13 @@ function daily_motion_video_dashboard($form, &$form_state) {
 
   return $form;
 }
+
 /**
  * 
  * @param type $form
  * @param type $form_state
  * @param type $form_id
  */
-
 function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
   $flag = 0;
   if (!empty($form_state['values']['from_time']['date']) && empty($form_state['values']['from_time']['time'])) {
@@ -2058,6 +2062,28 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
   $deleted = db_delete('file_managed')
       ->condition('fid', $fid)
       ->execute();
+  global $user;
+  $query = db_select('itg_solr_video_info', 'drd')
+      ->fields('drd', array('solr_video_id', 'property'));
+  $query->condition('fid', $fid);
+  $result = $query->execute()->fetchAll();
+  if ($result[0]->property == VIDEO_PROPERTY) {
+    $node = new stdClass();
+    $node->title = $result[0]->solr_video_id;
+    $node->type = "itg_delete_solr_video";
+    node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+    $node->language = LANGUAGE_NONE;
+    $node->uid = $user->uid;
+    $node->field_video_is_delete[LANGUAGE_NONE][0]['value'] = 1;
+    $node->status = 1; //(1 or 0): Published or not
+    $node->promote = 0; //(1 or 0): Promoted to front page
+    $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+    $getnode = itg_videogallery_get_node_by_title($result[0]->solr_video_id);
+    if (!empty($getnode)) {
+      $node->nid = $getnode[0]->nid;
+    }
+    node_save($node);
+  }
 }
 
 /**
@@ -2261,6 +2287,18 @@ function itg_videogallery_get_video_solrcontent($video_id = null) {
   $query->fields('n', array('nid'));
   $query->Join('field_data_field_video_id', 'fvd', 'n.nid = fvd.entity_id');
   $query->condition('fvd.field_video_id_value', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * This function check video id insert in solr video content
+ */
+function itg_videogallery_get_node_by_title($title = null) {
+
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('title', $title, '=');
   $result = $query->execute()->fetchAll();
   return $result;
 }
@@ -2556,7 +2594,7 @@ function itg_videogallery_move_ftp_videos() {
         //ftp_delete($connection_id, $file_name);
       }
     }
- 
+
     if ($vid->type == 'S3') {
       $datefolder = date('Y-m', $vid->upload_time);
 
