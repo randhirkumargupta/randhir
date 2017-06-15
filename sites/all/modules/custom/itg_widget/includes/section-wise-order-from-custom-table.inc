@@ -120,14 +120,12 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $query->fields('eli_file', array('uri'));
       $query->fields('eli', array('field_story_extra_large_image_alt', 'field_story_extra_large_image_title'));
     }
-
     if ($widget_style == 'undefined' || $widget_style == '' || $widget_style == 'edu-from-the-magazine') {
       $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
       $query->fields('mi_file', array('uri'));
       $query->fields('mi', array('field_story_medium_image_alt', 'field_story_medium_image_title'));
       $query->addExpression("mi_file.uri", 'mi_file_uri');
     }
-
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('sh', array('field_story_short_headline_value'));
     $query->fields('vd', array('field_video_duration_value'));
@@ -136,9 +134,14 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     $query->fields('iwo', array('nid', 'weight'))
         ->condition('iwo.cat_id', $cat_id)
         // fix for getting all content type
-        ->condition('iwo.widget', $widget_name)
-        ->condition('iwo.content_type', 'All')
-        ->condition('n.type', $valid_content_type)
+        ->condition('iwo.widget', $widget_name);
+    if ($widget_style == 'talking-point' || $widget_style == 'home-watch' || $widget_style == 'election-so-sorry' || $widget_style == 'standpoint') {
+      $query->condition('iwo.content_type', $valid_content_type);
+    }
+    else {
+      $query->condition('iwo.content_type', 'All');
+    }
+    $query->condition('n.type', $valid_content_type)
         ->condition('n.status', '1')
         ->orderBy('iwo.weight', 'DESC')
         ->orderBy('n.nid', 'DESC')
@@ -154,7 +157,6 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     return $entity_data;
   }
 }
-
 
 /**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table

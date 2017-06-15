@@ -284,7 +284,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   $end_date = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
-
+  $current_date = time();
   if (empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time'])) || empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time'])) {
     drupal_get_messages();
     if (empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']))) {
@@ -319,7 +319,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
     }
   }
-  elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+  /*elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
     $status = itg_event_backend_node_status(arg(1));
     //if ($status != 1) {
     if ($current_date >= $start_date) {
@@ -335,11 +335,12 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
     }
     //}
-  }
+  }*/
 
   if ($registration_close <= $registration_start && (!empty($registration_close) || !empty($registration_start))) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
+
   if ($end_date <= $start_date) {
     form_set_error('field_event_close_date', t('Event close date must be greater than event start date & time.'));
   }
@@ -348,35 +349,41 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
+  $early_bird_check = $form_state['values']['field_early_bird'][LANGUAGE_NONE][0]['value']; //early_bird_offer
+
   if ($event_type == 'paid') {
     foreach ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
       if (is_numeric($key)) {
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee is required.'));
-        }
+          if($early_bird_check != 'early_bird_offer') {
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Ticket Type is required.'));
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee is required.'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
-        }
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
+            }
+            
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
+            }
+          }
       }
     }
   }
@@ -384,31 +391,34 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if ($event_type == 'paid') {
     foreach ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
       if (is_numeric($key)) {
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_individual_regi', t('Early Bird Individual Registration Fee is required.'));
-        }
+        if($early_bird_check == 'early_bird_offer') {
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Ticket Type is required.'));
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_individual_regi', t('Early Bird Individual Registration Fee is required.'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) is required.'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) is required.'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
-        }
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][	field_early_bird_individual_regi', t('Early Bird Individual Registration Fee should be less then Early Bird Group Registration Fee (for 5 member)'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value']) {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][	field_early_bird_individual_regi', t('Early Bird Individual Registration Fee should be less then Early Bird Group Registration Fee (for 5 member)'));
-        }
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) should be less then Early Bird Group Registration Fee (upto 10 member).'));
+            }
 
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value']) {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) should be less then Early Bird Group Registration Fee (upto 10 member).'));
-        }
-
-        if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
-          form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required.'));
+            }
         }
       }
     }
