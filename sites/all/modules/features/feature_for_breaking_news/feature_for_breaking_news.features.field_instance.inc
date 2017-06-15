@@ -400,19 +400,17 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Cricket Blog FEED',
     'required' => 0,
     'settings' => array(
-      'display_summary' => 0,
       'exclude_cv' => FALSE,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
+        'rows' => 5,
       ),
-      'type' => 'text_textarea_with_summary',
+      'type' => 'text_textarea',
       'weight' => 46,
     ),
   );
