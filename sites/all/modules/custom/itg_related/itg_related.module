@@ -397,15 +397,48 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $str = 'hash:(' . $hash_value . ')';
         }
         $query->replaceParam("fq", '(' . $str . ')');
-      } else if($_GET['q'] == 'search-unpublish-video' && !isset($_GET['sm_field_video_used'])) {
-        $video_val = 0;
-        $str = 'sm_field_video_used:(' . $video_val . ')';
-        $query->addParam("fq", '(' . $str . ')');
-      }
-      else if($_GET['q'] == 'search-unpublish-video-radio' && !isset($_GET['sm_field_video_used'])) {
-        $video_val = 0;
-        $str = 'sm_field_video_used:(' . $video_val . ')';
-        $query->addParam("fq", '(' . $str . ')');
+      } 
+//      else if ($_GET['q'] == 'search-unpublish-video' && !isset($_GET['sm_field_video_used'])) {
+//        $video_val = 0;
+//        $str = 'sm_field_video_used:(' . $video_val . ')';
+//        $query->addParam("fq", '(' . $str . ')');
+//      }
+//      else if ($_GET['q'] == 'search-unpublish-video-radio' && !isset($_GET['sm_field_video_used'])) {
+//        $video_val = 0;
+//        $str = 'sm_field_video_used:(' . $video_val . ')';
+//        $query->addParam("fq", '(' . $str . ')');
+//      }
+      else if ($_GET['q'] == 'search-unpublish-video' || $_GET['q'] == 'search-unpublish-video-radio') {
+        $hashvalue = $_GET['hash'];
+        $str = "";
+        if (!empty($hashvalue)) {
+          $hashvalue = implode(' OR ', $hashvalue);
+          $str_has = 'hash:(' . $hashvalue . ')';
+        }
+        if (isset($_GET['sm_field_video_used'])) {
+          $video_val = $_GET['sm_field_video_used'];
+        }
+        else {
+          $video_val = 0;
+        }
+        $str_pub = 'sm_field_video_used:(' . $video_val . ')';
+        if (empty($hashvalue)) {
+          $str = $str_pub;
+        }
+        else {
+          $str = $str_has . ' AND ' . $str_pub;
+        }
+        if (isset($_GET['label']) && !empty($_GET['label'])) {
+          $str_label = 'label:(' . $_GET['label'] . '*)';
+          if ($str != "") {
+            $str = $str . ' AND ' . $str_label;
+          }
+          else {
+            $str = $str_label.'';
+          }
+        }
+
+        $query->replaceParam("fq", '(' . $str . ')');
       }
       else {
 

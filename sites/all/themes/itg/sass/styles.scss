@@ -6664,6 +6664,9 @@ section.sidebar{
     font-weight: 700;
     margin-bottom: 50px;
 }
+.event-registration-link{
+  line-height: 36px;
+}
 #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
@@ -11748,7 +11751,7 @@ span.close_btt {
   font-family: "Roboto Slab", sans-serif;
   margin-bottom: 15px;
 }
-
+.logged-in .header-top .links.inline.clearfix{display: none;}
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,

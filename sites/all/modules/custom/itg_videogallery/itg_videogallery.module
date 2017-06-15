@@ -2556,6 +2556,7 @@ function itg_videogallery_move_ftp_videos() {
         //ftp_delete($connection_id, $file_name);
       }
     }
+ 
     if ($vid->type == 'S3') {
       $datefolder = date('Y-m', $vid->upload_time);
 
@@ -3598,6 +3599,7 @@ function itg_videogallery_s3_file_to_dm() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $data_video = itg_video_get_s3_video();
+
   foreach ($data_video['video'] as $key => $s3_video_url) {
 
 
