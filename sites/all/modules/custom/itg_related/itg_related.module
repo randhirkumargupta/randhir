@@ -470,8 +470,16 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
         $query->replaceParam("fq", '(' . $str . ')');
       }
+      else {
+
+        if (!empty($str)) {
+          $search_array = $query->getSolrParams();
+          $query->replaceParam("fq", '(' . $str . ')');
+        }
+      }
     }
   }
+
 }
 
 /**
