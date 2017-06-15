@@ -1045,29 +1045,29 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       );
       break;
     case 'views-exposed-form-report-filed-content-page':
-      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
-          ->distinct()
-          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
-      $options = $query_options->execute()->fetchAllKeyed();
-      //array_unshift($options , 'Any');
-      $options = array_merge(array("" => '- Any -'), $options);
-      $form['byline_names'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Byline',
-        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
-        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
-        '#size' => 60,
-        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
-      );
-      $form['byline_profile_type'] = array(
-        '#type' => 'select',
-        '#title' => 'Profile Type',
-        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
-        //'#options' => drupal_map_assoc($options) ,
-        '#options' => $options,
-      );
-      $form['#info']['filter-byline-names']['value'] = 'byline_names';
-      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
+//      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
+//          ->distinct()
+//          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
+//      $options = $query_options->execute()->fetchAllKeyed();
+//      //array_unshift($options , 'Any');
+//      $options = array_merge(array("" => '- Any -'), $options);
+//      $form['byline_names'] = array(
+//        '#type' => 'textfield',
+//        '#title' => 'Byline',
+//        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
+//        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
+//        '#size' => 60,
+//        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
+//      );
+//      $form['byline_profile_type'] = array(
+//        '#type' => 'select',
+//        '#title' => 'Profile Type',
+//        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
+//        //'#options' => drupal_map_assoc($options) ,
+//        '#options' => $options,
+//      );
+//      $form['#info']['filter-byline-names']['value'] = 'byline_names';
+//      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
       break;
   }
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
