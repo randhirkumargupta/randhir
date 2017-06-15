@@ -448,7 +448,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
     }
-    //pr($query->getSolrParams());
+    
+//pr($query->getSolrParams());
   }
 }
 
