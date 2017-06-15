@@ -446,6 +446,11 @@ function itg_videogallery_custom_submit($form, &$form_state) {
               ))
               ->condition('video_id', $file_video[0]->solr_video_id, '=')
               ->execute();
+          // here delete node if exist in delete video
+          $getnode = itg_videogallery_get_node_by_title($file_video[0]->solr_video_idF);
+          if (!empty($getnode)) {
+            node_delete($getnode[0]->nid);
+          }
 // update nid in video
           $is_node_draft = 0;
           if ($form_state['node']->status == 0) {
@@ -567,6 +572,10 @@ function itg_videogallery_node_insert($node) {
                   ))
                   ->condition('video_id', $file_video[0]->solr_video_id, '=')
                   ->execute();
+              $getnode = itg_videogallery_get_node_by_title($file_video[0]->solr_video_idF);
+              if (!empty($getnode)) {
+                node_delete($getnode[0]->nid);
+              }
 // update nid in video
               $is_node_draft = 0;
               if ($node->status == 0) {
@@ -981,14 +990,14 @@ function itg_videogallery_after_build($form, &$form_state) {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
 
       if (is_numeric($delta)) {
-        if ($arg == 'edit') {
-          $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
-          $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
-          if (empty($file_exist) || $video_fid < 1) {
-            unset($form['field_video_upload']['und'][$delta]);
-          }
+        // if ($arg == 'edit') {
+        $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
+        $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
+        if (empty($file_exist) || $video_fid < 1) {
+          unset($form['field_video_upload']['und'][$delta]);
         }
       }
+      //}
     }
   }
   $form['original_image_fids'] = array(
