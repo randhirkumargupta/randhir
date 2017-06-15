@@ -12,6 +12,62 @@ $short_url = shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
 ?>
+ 
+<?php
+// code for schema header script
+if($node->field_type['und']['0']['value'] == 'Live Blog') {
+$embed_path = $base_url.'/'.drupal_get_path_alias('node/'.$node->nid);
+$embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+$embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
+?>
+<div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
+    <meta itemprop="coverageStartTime" content="2017-03-08T7:53:46">
+    <meta itemprop="url" content="http://indiatoday.intoday.in/live-blogs/uttar-pradesh-election-news-live-updates-samajwadi-party-modi-congress/195.html">
+    <meta itemprop="description" content="Uttar Pradesh Assembly election LIVE: Last phase of voting underway across 40 seats,Voting for the final phase of Uttar Pradesh Assembly election has begun amid heightened security following the over 12-hour-long siege in Lucknow in which suspected ISIS terrorist Saiful was killed.">
+    <div class="bolg-content" id="bolgcontent">    
+<?php
+  if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
+      foreach ($node->field_breaking_content_details['und'] as $blog_item) {
+        $collection_ids[] = $blog_item['value'];
+      }
+
+      foreach ($collection_ids as $breaking_embed_item) {
+        $field_collection_embed_id = $breaking_embed_item;
+        $entity = entity_load('field_collection_item', array($field_collection_embed_id));
+        $title = $entity[$field_collection_embed_id]->field_breaking_tile['und'][0]['value'];
+        $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $created_date = date('Y-m-d H:i:s', $node->created);
+        $modify_date = date('Y-m-d H:i:s', $node->changed);
+      
+?>
+
+                
+            
+                    <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
+                        <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+                        <h2 itemprop="articleBody" style="display:none"><strong><?php print $embed_display_time;?> IST: </strong><?php print $title; ?></h2>
+                        <meta itemprop="datePublished" content="<?php print $created_date;?>">
+                        <meta itemprop="author" content="IndiaToday.in">
+                        <meta itemprop="dateModified" content="<?php print $modify_date;?>">
+                        <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                            <meta itemprop="url" content="<?php print $embed_image; ?>">
+                            <meta itemprop="width" content="650">
+                            <meta itemprop="height" content="450">
+                        </span>
+                        <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
+                            <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                                <meta itemprop="url" content="<?php print $embed_logo; ?>">
+                            </span>
+                            <meta itemprop="name" content="India Today">
+                        </span>
+                        <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
+                    </div>
+        
+
+
+<?php } } ?> 
+</div> </div>
+<?php } ?>
 
 <div class="live-block">
 
