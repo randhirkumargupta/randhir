@@ -573,7 +573,7 @@ function itg_workflow_node_presave($node) {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
         $node->workbench_moderation_state_new = 'published';
       }
-      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
       }
     }
@@ -658,7 +658,7 @@ function itg_workflow_node_presave($node) {
         }
       }
 
-      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
       }
     }
