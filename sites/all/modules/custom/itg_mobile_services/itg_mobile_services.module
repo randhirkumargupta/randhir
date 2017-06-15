@@ -1069,15 +1069,21 @@ function itg_mobile_services_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_mobile_services.inc',
   );
+  
+  $items['vas/%/%'] = array(
+      'page callback' => 'itg_mobile_print_feeds',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_mobile_services.inc',
+  );
   return $items;
 }
 
 /**
  * This function get the Latest feed url:
  */
-function itg_mobile_get_latest_feed_byurl($url)
+function itg_mobile_get_latest_feed_byurl_old($url)
 {
-  //p($url);
   $query = db_select('itg_syndication_feed_url', 'feed');
   # get the desired fields from the database
   $query->condition('feed.client_feed_url', $url)
@@ -1085,6 +1091,18 @@ function itg_mobile_get_latest_feed_byurl($url)
   $query->fields('feed', array('id', 'xml_name', 'created_date'))
       ->orderBy('id', 'DESC');
     
+   $results = $query->execute()->fetchAll();
+   return $results;
+}
+
+
+function itg_mobile_get_latest_feed_byurl($client_id)
+{
+  $query = db_select('itg_mobile_vas_url', 'feed');
+  # get the desired fields from the database
+  $query->condition('feed.client_id', $client_id);
+  $query->fields('feed', array('id', 'service_id', 'clients_feed_url', 'created_date'))
+        ->groupBy('feed.service_id')->addExpression('MAX(feed.id)', 'id');  
    $results = $query->execute()->fetchAll();
    return $results;
 }
@@ -1244,20 +1262,6 @@ function itg_mobile_services_views_query_alter(&$view, &$query) {
   }
 }
 
-/**
- * Get check service token by token
- * @param int $cid
- * @param int $association_nid
- *
- * @return int
- */
-function itg_mobile_service_check_token($cid, $association_nid) {
-  return db_select('itg_client_token', 't')
-                  ->fields('t', array('id'))
-                  ->condition('cid', $cid, '=')
-                  ->condition('sid', $association_nid, '=')
-                  ->range(0, 1)->execute()->rowCount();
-}
 
 /**
  * Get all services association for itg_mobile_services_get_assoc_service
@@ -1350,9 +1354,9 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
       // add a simple select list, this defaults to numb 3
       $form[$field['field_name']]['add_more_number'] = array(
           '#type' => 'select',
-          '#options' => drupal_map_assoc(range(0, 100)),
+          '#options' => drupal_map_assoc(range(0, 15)),
           '#default_value' => 1,
-          '#attributes' => array('style' => 'display:none;'),
+          '#attributes' => array('style' => 'display:none1;'),
       );
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#submit'][] = 'itg_mobile_services_field_add_more_submit';
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#value'] = 'Add more rows';

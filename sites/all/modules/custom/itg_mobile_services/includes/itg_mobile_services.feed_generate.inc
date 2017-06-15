@@ -21,7 +21,7 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
   $json = json_encode($xml);
   $xmlarray = json_decode($json, TRUE);
   $root_tag = $xml->getName();
-  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
@@ -60,8 +60,7 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'xml', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your xml has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -127,8 +126,7 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'rss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your RSS has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -150,7 +148,7 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
   $xmlarray = json_decode($json, TRUE);
   $root_tag = $xml->getName();
 
-  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
   $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
@@ -194,8 +192,7 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your MRSS has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -260,8 +257,7 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header =
   $xml .= "</rss>";
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your feed has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -327,8 +323,7 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header 
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'text_feed', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your feed has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -393,8 +388,7 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header 
   $xml .= "</rss>";
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'ussd', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your ussd has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -416,7 +410,7 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
   $xmlarray = json_decode($json, TRUE);
   $root_tag = $xml->getName();
 
-  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
   $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
@@ -459,8 +453,7 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your MRSS has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -482,7 +475,7 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
   $xmlarray = json_decode($json, TRUE);
   $root_tag = $xml->getName();
 
-  $xml = '<?xml version="1.0" encoding="ISO-8859-1" ?>';
+  $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
   $field_collect = node_load($node->nid);
   $tags = array("header", "footer");
   $xml_file = preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $xmlstring);
@@ -523,8 +516,7 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  file_save_data($xml, $feed_dir . $full_file_path);
-  drupal_set_message(t('Your sms has been generated'));
+  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
   return $full_file_path;
 }
 
@@ -543,43 +535,21 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
   $frequency_from_date = $frequency_from_arr[0];
   $frequency_to_date = $frequency_to_arr[0];
   $timestamp = time();
-  switch ($service_frequency) {
-    case '1': // daily 
-      $file_name = '/daily_' . $service_title . '_' . $frequency_from_date . '_' . $timestamp . '.' . $ext;
-      break;
-    case '2': // weekly
-      $frequency_from_date = $frequency_from_arr[0];
-      $frequency_to_date = $frequency_to_arr[0];
-      $file_name = '/weekly_' . $service_title . '_' . $frequency_from_date . '-to-' . $frequency_to_date . '_' . $timestamp . '.' . $ext;
-      break;
-    case '3': // monthly
-      $frequency_from_date = $frequency_from_arr[0];
-      $frequency_to_date = $frequency_to_arr[0];
-      $file_name = '/monthly_' . $service_title . '_' . $frequency_from_date . '-to-' . $frequency_to_date . '_' . $timestamp . '.' . $ext;
-      break;
-  }
-//  $file_path = drupal_realpath('public://');
-//  $feed_dir = "public://mobile/";
-//  if (!file_exists($feed_dir)) {
-//    drupal_mkdir($feed_dir, 0777, TRUE);
-//  }
-//
-//  $full_file_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type . $file_name;
-//  $files_path = $file_path . '/mobile/' . $service_title . '/' . $feeds_type;
-//
-//  if (!file_exists($files_path)) {
-//    drupal_mkdir($files_path, 0777, TRUE);
-//  }
-  $file_path = drupal_realpath('public://');
+
+  $file_name = '/' . $service_title . '.' . $ext;
   $feed_dir = "public://mobile/";
-  drupal_mkdir($feed_dir, 0777, TRUE);
-  $full_file_path =  'public://mobile/' . $service_title . '/' . $feeds_type . $file_name;
+  
+  if (!file_exists($feed_dir)) {
+    drupal_mkdir($feed_dir, 0777, TRUE);
+  }
+  
+  //$full_file_path =  'public://mobile/' . $service_title . '/' . $feeds_type . $file_name;
   $files_path =  'public://mobile/' . $service_title . '/' . $feeds_type;
   if (!file_exists($files_path)) {
     drupal_mkdir($files_path, 0777, TRUE);
   }
-
-  return '/mobile/' . $service_title . '/' . $feeds_type . $file_name;
+  $file_name = str_replace(' ', '', $file_name);
+  return '/mobile/' . $service_title . '/' . $feeds_type . strtolower($file_name);
 }
 
 /**
@@ -697,4 +667,15 @@ function get_vars_from_mobile_feed_pattern($text) {
     preg_match_all('/{(.*?)}/', $text, $matches);
   }
   return $matches;
+}
+
+
+function itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path) {
+ 
+  $frequency_date_array = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
+  $today_date = date('Y-m-d');
+  if ($frequency_date_array[0] <= $today_date) {
+    file_save_data($xml, $feed_dir . $full_file_path, FILE_EXISTS_REPLACE);
+    drupal_set_message(t('Your xml has been generated'));
+  } 
 }
