@@ -99,15 +99,14 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
-      if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
-
+      if ($form['#entity']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         foreach ($form['field_video_upload']['und'] as $delta => $field) {
           if (is_numeric($delta)) {
             // if ($arg == 'edit') {
             $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
             $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
             if (empty($file_exist) || $video_fid < 1) {
-              unset($form['field_video_upload']['und'][$delta]);
+              //unset($form['field_video_upload']['und'][$delta]);
             }
             //}
           }
