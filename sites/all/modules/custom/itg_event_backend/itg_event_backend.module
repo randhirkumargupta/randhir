@@ -1816,13 +1816,19 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_ty
   $query->orderBy('n.created', 'DESC');
   $result = $query->execute();
   $flash_back_link = '';
+  $count = 1;
   foreach ($result as $value) {
+    if($count == 1) {
+    $flash_back_link_top_nid = $value->nid;
+    }
     $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+  $count++;
   }
 
   $output = '';
   if (!empty($flash_back_link)) {
-    $output = '<ul>' . $flash_back_link . '</ul>';
+    $output['menu'] = '<ul>' . $flash_back_link . '</ul>';
+    $output['top'] = $flash_back_link_top_nid;
   }
   return $output;
 }
