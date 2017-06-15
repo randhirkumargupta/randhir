@@ -300,14 +300,14 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Activate Live TV */
+  /* Field: Content: Video expire */
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV ';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
-  /* Field: Content: Display on */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
@@ -577,7 +577,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
   $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
   $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
-  /* Field: Content: Display title (Home page) */
+  /* Field: Content: Snap post */
   $handler->display->display_options['fields']['field_story_snap_post']['id'] = 'field_story_snap_post';
   $handler->display->display_options['fields']['field_story_snap_post']['table'] = 'field_data_field_story_snap_post';
   $handler->display->display_options['fields']['field_story_snap_post']['field'] = 'field_story_snap_post';
@@ -690,7 +690,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['dynamic_band_link']['field'] = 'dynamic_band_link';
   $handler->display->display_options['fields']['dynamic_band_link']['label'] = '';
   $handler->display->display_options['fields']['dynamic_band_link']['element_label_colon'] = FALSE;
-  /* Field: Content: Display title (Home page) */
+  /* Field: Content: Snap post */
   $handler->display->display_options['fields']['field_story_snap_post']['id'] = 'field_story_snap_post';
   $handler->display->display_options['fields']['field_story_snap_post']['table'] = 'field_data_field_story_snap_post';
   $handler->display->display_options['fields']['field_story_snap_post']['field'] = 'field_story_snap_post';
