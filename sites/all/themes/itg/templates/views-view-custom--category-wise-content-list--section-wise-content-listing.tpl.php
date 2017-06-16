@@ -31,6 +31,16 @@ global $base_url;
           <?php $image_link = "<img width='647' height='363'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg' alt='' />"; ?>
             <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
           <?php endif; ?>
+          <div class="cat-heading">
+              <h3 class="cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
+                if (function_exists('itg_common_get_smiley_title')) {
+                  print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
+                }
+                else {
+                  print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
+                }
+                ?></h3>
+          </div>
       </div>
     <?php else: ?>
     <div class="pic <?php echo $video_class;?> ">
@@ -47,8 +57,7 @@ global $base_url;
       <?php if(!empty($row['field_video_duration'])) { ?>
             <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
       <?php } ?>
-    </div>
-    <?php endif; ?>
+    </div>    
     <div class="detail"><h3 title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
@@ -72,5 +81,6 @@ global $base_url;
         print '<p>' . strip_tags($row['field_video_kicker']) . '</p>';
       }
       ?>            </div>
+    <?php endif; ?>
   </div>
 <?php endforeach; ?>
