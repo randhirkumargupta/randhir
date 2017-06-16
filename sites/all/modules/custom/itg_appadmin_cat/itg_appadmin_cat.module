@@ -1,0 +1,234 @@
+<?php
+
+/**
+ * @file
+ * The ITG App Admin Category Management Module.
+ *
+ * Contains functionality for Managing the Category for the App.
+ */
+// Load the hirerical select common file
+module_load_include('inc', 'hierarchical_select', 'includes/common');
+
+/**
+ * Implements hook_menu().
+ */
+function itg_appadmin_cat_menu() {
+  $items['appadmin-cat-management'] = array(
+    'title' => 'Assign Categeory for App',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('app_admin_cat_manage'),
+    'access arguments' => array('App Admin Cat Management'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['appadmin-cat-listing'] = array(
+    'title' => 'App Cat Listing',
+    'page callback' => 'appadmin_cat_listing',
+    //'page arguments' => array('app_admin_cat_manage'),
+    'access arguments' => array('App Admin Cat Management'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['appadmin-cat/%/delete'] = array(
+    'title' => 'Delete Assigned Category',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('app_admin_cat_del',1),
+    'access arguments' => array('App Admin Cat Management'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+/*
+ * delete cat form callback
+ */
+
+function app_admin_cat_del($form, &$form_state){
+  
+  global $base_url;
+  $id = arg(1);
+  
+  
+    $cat_id = db_select('itg_app_admin_cat','ca')
+            ->fields('ca',array('cat_tid'))
+            ->condition('ca.id',$id)
+            ->execute()->fetchField();
+    $cat = taxonomy_term_load($cat_id);
+    $ques = t('Are you sure you want to delete Assigned Category @cat for App',array('@cat' => $cat->name));
+    
+    
+    return confirm_form($form, 
+    $ques,
+    'app_admin_cat_del_submit',
+    t('This Action can not be undone'),
+    t('Confirm'),
+     t('Cancel')
+  );
+  
+}
+
+function app_admin_cat_del_submit($form, &$form_state){
+  $id = arg(1);
+  
+  $del_qry = db_delete('itg_app_admin_cat')
+             ->condition('id',$id)
+             ->execute();
+  
+  if($del_qry){
+      drupal_set_message('App category has been unassigned successfully');
+      $form_state['redirect'] = 'appadmin-cat-listing';
+  }
+}
+
+
+/*
+ * View Listing of Category 
+ */
+
+function appadmin_cat_listing(){
+  
+  $output = '';
+  $header = array('Category Name','Display(in App)','weight','delete');
+  $rows = array();
+
+  $cat_sql1 = db_select('itg_app_admin_cat','ac');
+  $cat_sql1->fields('ac');
+  $cat_sql1 = $cat_sql1->extend('TableSort')->extend('PagerDefault')->limit(10);
+  $cat_sql = $cat_sql1->execute();
+
+    while($data = $cat_sql->fetchObject()){
+             if($data->show_on_app == '1'){
+                   $display = 'Yes';
+             }else {
+                   $display = 'No';
+             }
+             
+             $delete = l('delete','appadmin-cat/'.$data->id.'/delete');
+             $rows[] = array(
+                 taxonomy_name_by_id($data->cat_tid),
+                 $display,
+                 $data->weight,
+                 $delete
+             );
+   }
+    $attributes = array('class' => array('views-table'));
+    $output = ''; 
+    $output .= theme('table', array('header' => $header, 'rows' => $rows,'attributes' => $attributes));
+    $output .= theme('pager');
+    return $output;
+}
+
+/*
+ * Common functin to Get Taxonomy name by term id 
+ * @args: tid
+ * return: string(taxonomy name)
+ */
+
+function taxonomy_name_by_id($tid){
+  $term = taxonomy_term_load($tid);
+  return $term->name;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_appadmin_cat_permission() {
+
+    $perm = array();
+    $perm['App Admin Cat Management'] = array(
+        'title' => t('App Admin Cat Management'),
+    );
+    return $perm;
+}
+
+/*
+ * Create form to map the category for the APP
+ */
+
+function app_admin_cat_manage($form, &$form_state){
+
+  $form = array();
+  
+  $form['app_categories'] =  array(
+    '#title' => t('Choose categories'),
+    '#type'          => 'hierarchical_select',
+    '#config'        => array(
+      'module' => 'hs_taxonomy',
+      'params' => array(
+	  'vid'                        => CATEGORY_MANAGMENT,
+	  'exclude_tid'                => NULL,
+	  'root_term'                  => NULL,
+	  'entity_count_for_node_type' => NULL,
+      ),
+    ),
+    //'#default_value' => $tids,
+  );
+  
+   $show_app = array(0 => t('No'), 1 => t('Yes'));
+   $show_on_app = isset($form_state['values']['show_app']) ? $form_state['values']['show_app'] : '';
+   
+   $form['show_app'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show In App'),
+    '#default_value' => isset($show_on_app) ? $show_on_app : 0,
+    '#options' => $show_app,
+  );
+  
+  $weight = array(0,1,2,3,4,5,6,7,8,9,10); 
+  
+  $form['weight'] = array(
+    '#type' => 'select',
+    '#title' => t('Weight'),
+    //'#default_value' => isset($show_on_app) ? $show_on_app : 0,
+    '#options' => $weight,
+  ); 
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit'
+  );
+  
+  return $form;
+}
+
+/*
+ * common function to get the list of Assigned cat
+ * @args : id
+ * return : one column data as a object 
+ */
+
+function get_all_data($id){
+  
+  $db_qry = db_select('itg_app_admin_cat','ca')
+            ->fields('ca')
+            ->condition('ca.id',$id)
+            ->execute()->fetchObject();
+  return $db_qry;
+}
+
+/*
+ * Implement hook_form_submit()
+ */
+function app_admin_cat_manage_submit($form, &$form_state){
+  global $user;
+  
+  if($form_state['values']['app_categories'] > 0 ){
+    $qry = db_insert('itg_app_admin_cat')
+           ->fields(array(
+             'cat_tid' => $form_state['values']['app_categories'],
+             'show_on_app' => $form_state['values']['show_app'],
+             'weight' => $form_state['values']['weight'],
+             'uid' => $user->uid,
+             'created' => REQUEST_TIME,
+             'changed' => REQUEST_TIME
+           ))
+        ->execute();
+  }
+  
+  if($qry){
+    drupal_set_message('category has been saved.');
+  }
+  
+}
+
