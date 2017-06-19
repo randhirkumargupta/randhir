@@ -6,10 +6,21 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
+if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
+        $returnto = $_GET['ReturnTo'];
+        $explode_returnto_val = explode('/', $returnto);
+        $get_first_arr = end($explode_returnto_val);
+        $pre_decode_val = urldecode(urldecode(urldecode($get_first_arr)));
+        $explode_decode_val = explode('&ReturnTo', $pre_decode_val);
+        $end_part_string = end($explode_decode_val);
+        $exp_end_part_string = explode('/', $end_part_string);
+        $final_redirect = end($exp_end_part_string);
+        $shr = base64_decode($final_redirect);
+}
 ?>
 <div class="sso-header">
     <div class="container">
-        <div class="sso-head-left"><a href="<?php print FRONT_URL; ?>">Back to india the today</a></div>
+        <div class="sso-head-left"><a href="<?php print $shr; ?>">Back to india the today</a></div>
         <div class="sso-head-right">
             <ul>
                 <li><img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="" /></li>

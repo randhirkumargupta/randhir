@@ -1,7 +1,14 @@
 <?php
 if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
-  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-  $shr = $uri;
+        $returnto = $_GET['ReturnTo'];
+        $explode_returnto_val = explode('/', $returnto);
+        $get_first_arr = end($explode_returnto_val);
+        $pre_decode_val = urldecode(urldecode(urldecode($get_first_arr)));
+        $explode_decode_val = explode('&ReturnTo', $pre_decode_val);
+        $end_part_string = end($explode_decode_val);
+        $exp_end_part_string = explode('/', $end_part_string);
+        $final_redirect = end($exp_end_part_string);
+        $shr = $final_redirect;
 }
 
 if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
@@ -30,15 +37,6 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
     ?>
     <div class="form-actions">
       <?php print drupal_render($form['actions']['submit']);
-        $returnto = $_GET['ReturnTo'];
-        $explode_returnto_val = explode('/', $returnto);
-        $get_first_arr = end($explode_returnto_val);
-        $pre_decode_val = urldecode(urldecode(urldecode($get_first_arr)));
-        $explode_decode_val = explode('&ReturnTo', $pre_decode_val);
-        $end_part_string = end($explode_decode_val);
-        $exp_end_part_string = explode('/', $end_part_string);
-        $final_redirect = end($exp_end_part_string);
-       
         if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
           $forgot = 'forgot-password/'.$final_redirect;
           $signup = 'signup/'.$final_redirect;
