@@ -28,6 +28,12 @@ function itg_mobile_services_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
+      'node_id' => array(
+        'description' => t('node nid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
       'client_id' => array(
         'description' => t('client id'),
         'type' => 'int',

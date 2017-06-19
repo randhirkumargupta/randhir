@@ -674,6 +674,7 @@ function itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path
  
   $frequency_date_array = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
   $today_date = date('Y-m-d');
+  
   if ($frequency_date_array[0] <= $today_date) {
     file_save_data($xml, $feed_dir . $full_file_path, FILE_EXISTS_REPLACE);
     drupal_set_message(t('Your xml has been generated'));
