@@ -568,7 +568,7 @@ function itg_videogallery_node_insert($node) {
         $tags_value = trim($tag_value, ",");
         $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
         $draft_msg_flag = 0;
-        $video_desc = strip_tags($node->field_videogallery_description[LANGUAGE_NONE][0]['value']);
+        $video_desc = strip_tags($node->field_story_expert_description[LANGUAGE_NONE][0]['value']);
 
         foreach ($node->field_video_upload['und'] as $keys => $videofields) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
