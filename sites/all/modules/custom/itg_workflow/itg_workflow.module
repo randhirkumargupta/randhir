@@ -905,12 +905,13 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
+  global $user;
   if(itg_workflow_stop_node_update_batch_for_widgets()) {
+    watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
     return;
   }
-  global $user;
-  if (isset($node->op)) {
-  //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //if (isset($node->op)) {
+  watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
@@ -1015,7 +1016,7 @@ function itg_workflow_node_update($node) {
       } 
     }
   }
-}
+//}
   
   
 }
