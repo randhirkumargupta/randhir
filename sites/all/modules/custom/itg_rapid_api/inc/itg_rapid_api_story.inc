@@ -58,6 +58,14 @@ function generateStoryDeatilList($id) {
   $location = $load_city->name;
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
+  
+  $field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
+  if($field_story_select_templates == "buzz"){
+    $buzz_temp_flag = "Yes";
+  }
+ else {
+      $buzz_temp_flag = "No";
+  }
 
   $alias = drupal_get_path_alias('node/' . $nid . '');
   $weburl = $base_url . "/" . $alias;
@@ -71,6 +79,7 @@ function generateStoryDeatilList($id) {
   $author = generateAuthorTag($node);
   $rating = getRating($node);
   $caption = getImgCaption($large_image_fid);
+  $story_tech = getStoryTechs($node);
   // custom function for get img byline
   $byline = getImgByline($large_image_fid);
   $published_stamp = $node->workbench_moderation['published']->stamp;
@@ -89,6 +98,7 @@ function generateStoryDeatilList($id) {
   $data_array['image_caption'] = "$caption";
   $data_array['updated_datetime'] = "$changed_datetime";
   $data_array['published_datetime'] = "$published_date";
+  $data_array['buzz'] = "$buzz_temp_flag";
   $data_array['location'] = "$location";
   $data_array['director'] = "$director";
   $data_array['movie_plot'] = "$movie_plot";
@@ -102,6 +112,7 @@ function generateStoryDeatilList($id) {
   $data_array['desc_withhtml'] = "$body_with_html";
   $data_array['tag'] = $tag;
   $data_array['highlight'] = $heighligth;
+  $data_array['technology'] = $story_tech;
   $data_array['author'] = $author;
   $data_array['rating'] = $rating;
 
@@ -238,4 +249,32 @@ function story_body_with_html($node) {
 </div>';
 
   return $output;
+}
+
+
+/**
+ * function for get tech node
+ * @pram $node
+ *
+ * @return array
+ */
+function getStoryTechs($node) {
+  $storytech = array();
+  $listcont = 0;
+  $tect_img = array();
+  $rating = $node->field_story_technology_rating['und'][0]['value'];
+  $content = $node->field_story_tech_review_chunk['und'][0]['value'];
+  $tect_img = $node->field_story_technology['und'];
+  $storytech['rating'] = $rating;
+  $storytech['content'] = $content;
+  foreach ($tect_img as $key => $value) {
+      $val_fid = $value['value'];      
+      $load_collection = field_collection_item_load($val_fid);
+      $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];      
+      $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);       
+      $storytech['data'][$listcont]['title'] = $photo_ttile;
+      $storytech['data'][$listcont]['img'] = $img_url;
+      $listcont++;
+  }
+  return $storytech;
 }
