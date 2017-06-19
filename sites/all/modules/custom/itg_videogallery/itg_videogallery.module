@@ -440,7 +440,8 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     // for update on DM
     $extralarge_image_fid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
     $main_fids = array();
-    $draft_msg_flag=0;
+    $draft_msg_flag = 0;
+    $video_desc = strip_tags($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']);
     foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
 
       if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -450,7 +451,8 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         if (!empty($video_image)) {
           if ($video_image[0]->property == VIDEO_PROPERTY) {
             $private_status = $videofields['field_video_private']['und'][0]['value'];
-            $video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
+            // $video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
+            //$video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
             $video_title = $videofields['field_video_title']['und'][0]['value'];
             $video_thumb_fid = $videofields['field_video_thumbnail']['und'][0]['fid'];
             if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
@@ -489,7 +491,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         }
       }
     }
-   
+
 //    if ($form_state['node']->status == 0) {
 //      
 //      drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
@@ -564,13 +566,15 @@ function itg_videogallery_node_insert($node) {
         }
         $tag_value = implode(', ', $tag);
         $tags_value = trim($tag_value, ",");
-        $extralarge_image_fid = $nod->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+        $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
         $draft_msg_flag = 0;
+        $video_desc = strip_tags($node->field_videogallery_description[LANGUAGE_NONE][0]['value']);
+
         foreach ($node->field_video_upload['und'] as $keys => $videofields) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
 
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
-          $video_desc = $video_details[$videofields['value']]->field_videogallery_description[LANGUAGE_NONE][0]['value'];
+          //$video_desc = $video_details[$videofields['value']]->field_videogallery_description[LANGUAGE_NONE][0]['value'];
           $video_title = $video_details[$videofields['value']]->field_video_title[LANGUAGE_NONE][0]['value'];
           $video_thumb_fid = $video_details[$videofields['value']]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'];
           if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
