@@ -131,6 +131,9 @@ function insert_layout_setting_ajax() {
     db_update('itg_layout_tpl')
            ->fields(array('status' => $_GET['status_val']))
            ->condition('id', $unpublish_tpl_id)->execute();
+    // for purging
+    $url = drupal_get_path_alias('taxonomy/term/' . $_GET['section_name']);
+    itg_akamai_clear_url($url, array(), array());
     exit;
   }
   elseif ($arg[1] == 'delete') {

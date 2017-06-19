@@ -79,7 +79,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 ?>
                                     <div class="iframe-video">
                                         <iframe frameborder="0" scrolling="no"
-                                                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=<?php echo $autoplay; ?>&player_next_video=x5d9tu3&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                                                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=<?php echo $autoplay; ?>&sharing-enable=0&ui-logo=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
                                 </div>
@@ -225,7 +225,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                             <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                 <div class="show-embed-code-div">
                                     <div class="copy-sample-code">
-                                    <textarea readonly><iframe src=<?php print $base_url.'/embed/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                    <textarea readonly><iframe src=<?php print $base_url.'/embed-video/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                                     </div>
                                 </div>
                             </li>
@@ -301,7 +301,7 @@ $useragent = $_SERVER['HTTP_USER_AGENT'];
                                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                     <div class="show-embed-code-div">
                                         <div class="copy-sample-code">
-                                        <textarea readonly><iframe src=<?php print $base_url.'/embed/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                        <textarea readonly><iframe src=<?php print $base_url.'/embed-video/'.$argum;?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                                         </div>
                                     </div>
                                 </li>

@@ -59,9 +59,9 @@
                       }
                       
                       if(empty($arg[1])) {
-                        $uri =  $base_url.'/archives'.'/'.date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
+                        $uri =  $base_url.'/story/archives'.'/'.date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
                       } else {
-                        $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+                        $ctype_tab = array('story', 'photogallery', 'video');
                         if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
                         $uri = $base_url.'/archives/'.$arg[1].'/'. date('d-m-Y', mktime(0, 0, 0, $month, ($day - $i), $year));
                         } else {

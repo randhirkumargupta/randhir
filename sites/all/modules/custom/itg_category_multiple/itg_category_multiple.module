@@ -19,7 +19,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form': // Video Gallery    
     case 'blog_node_form': // Blog
     case 'podcast_node_form': // Podcast
-    case 'reporter_node_form': // reporter
+    case 'reporter_node_form': // reporter OR Byline
+    case 'breaking_news_node_form': // Breaking News
 
       $content_type = '';
       $itg_category_multiple_prev_data = '';
@@ -122,7 +123,9 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       $itg_category_vocabs = get_itg_category_vocabs($form_state);
       $sections = itg_category_multiple_get_section($itg_category_vocabs, $content_type);
       $options_category = array('_none' => '--Select-');
-
+              
+      natcasesort($sections);
+      
       $form['category_holder'] = array();
 
       $form['category_holder']['itg_section'] = array(

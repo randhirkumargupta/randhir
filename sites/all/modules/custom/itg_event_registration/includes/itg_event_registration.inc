@@ -32,7 +32,8 @@ function itg_event_registration_form($form , &$form_state) {
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
     if ($event_type == 'invite') {
-      return 'Registration is not required for event <strong>' . ucwords($node->title) . '</strong>. Please contact to India Today Group.';
+      //return 'Registration is not required for event <strong>' . ucwords($node->title) . '</strong>. Please contact to India Today Group.';
+      return itg_event_registration_get_status_message($node , 'invite');
     }
     else {
       // TODO: Fix date format
@@ -41,15 +42,16 @@ function itg_event_registration_form($form , &$form_state) {
       $event_reg_start_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
       $event_close_date = strtotime($node->field_event_close_date[LANGUAGE_NONE][0]['value']);
-      if ($current_date < $event_reg_start_date) {
+      $force_registration_flag = $node->field_force_registration_open[LANGUAGE_NONE][0]['value'];
+      if ($current_date < $event_reg_start_date && !empty($event_reg_start_date)) {
         return itg_event_registration_get_status_message($node , 'not_started');
       }
-      elseif ($current_date > $event_reg_close_date) {
+      elseif ($current_date > $event_reg_close_date && !empty($event_reg_close_date)) {
         if ((($node->field_force_registration_open[LANGUAGE_NONE][0]['value']) && ($event_close_date > $current_date)) || (!$node->field_force_registration_open[LANGUAGE_NONE][0]['value']) && ($event_close_date > $current_date) && ($current_date > $event_reg_start_date)) {
           if ((1 >= $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
             return itg_event_registration_get_status_message($node , 'tickets_not_available');
           }
-          elseif($current_date > $event_reg_close_date) {
+          elseif($current_date > $event_reg_close_date && $force_registration_flag == 0 && $current_date > $event_close_date) {
             return itg_event_registration_get_status_message($node , 'closed');
           }
           else {

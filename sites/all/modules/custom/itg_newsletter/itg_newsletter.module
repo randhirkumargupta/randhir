@@ -944,13 +944,16 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * get recent updated top 20 stories
  * @return array
  */
-function itg_newsletter_get_section_stories($section , $crontime , $previoustime) {
+function itg_newsletter_get_section_stories($section , $crontime , $previoustime, $node = array()) {
+  foreach ($node->field_cm_select_type[LANGUAGE_NONE] as $key => $val) {
+    $c_type[] = $val['value'];
+  }
   
   $query = db_select('node' , 'n');
   $query->join('field_data_field_story_category' , 'fsc' , 'n.nid = fsc.entity_id');
   $query->condition('n.status' , 1 , '=');
   $query->fields('n');
-  $query->condition('n.type' , 'story' , '=');
+  $query->condition('n.type' , $c_type , 'IN');
   $query->condition('fsc.field_story_category_tid' , $section , 'IN');
   $query->condition('n.changed' , $previoustime , '<=');
   $query->orderBy('n.nid' , 'DESC');

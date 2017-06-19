@@ -316,7 +316,7 @@ function _get_last_24_hour_visited_node_ids_for_analytics_data() {
  * Function returns nodeids array based on analytics data within 24 hour for 
  * newsletter data for top_20_shared story
  */
-function _get_last_24_hour_visited_node_ids_for_top_20_shared_story() {
+function _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequency = NULL) {
   $current_time_stamp = time();
   $final_nodeid_array = array();
   $data_count_node_share = array(
@@ -324,13 +324,16 @@ function _get_last_24_hour_visited_node_ids_for_top_20_shared_story() {
     'facebook_share' => array(),
     'google_share' => array(),
   );
-  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  $timestamp_24_hour_before = $newsfrequency;
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
       //Query to get nodeids which is shared within 24 hour START.
       $front_user_activity = $con->front_user_activity;
-      $front_user_activity_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_condition = array(
+        'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'ntype' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+        );
       $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
 
       foreach ($front_user_activity_result as $front_user_activity_document) {
@@ -367,7 +370,7 @@ function _get_last_24_hour_visited_node_ids_for_top_20_shared_story() {
  * Function returns nodeids array based on analytics data within 24 hour for 
  * newsletter data for top_20_trending story
  */
-function _get_last_24_hour_visited_node_ids_for_top_20_trending_story() {
+function _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequency = NULL) {
   $current_time_stamp = time();
   $data_count_node_like = array();
   $final_nodeid_array = array();
@@ -376,13 +379,16 @@ function _get_last_24_hour_visited_node_ids_for_top_20_trending_story() {
     'facebook_share' => array(),
     'google_share' => array(),
   );
-  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  $timestamp_24_hour_before = $newsfrequency;
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
       // Query to get node views count which is viewed within 24 hour START.
       $pagedetails_collection = $con->pagedetails;
-      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $condition = array(
+        'viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'type' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+      );
       $result = $pagedetails_collection->find($condition);
       foreach ($result as $document) {
         $data_count_node_view[] = $document['nid'];
@@ -435,15 +441,18 @@ function _get_last_24_hour_visited_node_ids_for_top_20_trending_story() {
  * Function returns node ids array based on analytics data within 24 hour for 
  * newsletter data for top_20_trending story
  */
-function _get_last_24_hour_visited_node_ids_for_top_20_most_viewed() {
+function _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequency = NULL) {
   $current_time_stamp = time();
-  $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+  $timestamp_24_hour_before = $newsfrequency;
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
       // Query to get node views count which is viewed within 24 hour START.
       $pagedetails_collection = $con->pagedetails;
-      $condition = array('viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $condition = array(
+        'viewtime' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp),
+        'type' => array('$in' => array('story' , 'videogallery' , 'photogallery'))
+      );
       $result = $pagedetails_collection->find($condition);
       foreach ($result as $document) {
         $data_count_node_view[] = $document['nid'];
@@ -504,8 +513,8 @@ function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_
  * Hight weight is on top and low weight in on low.
  * @return array
  */
-function _get_most_popular_nodes_based_on_top_20_shared() {
-  $nodes_shared = _get_last_24_hour_visited_node_ids_for_top_20_shared_story();
+function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
+  $nodes_shared = _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequency);
   foreach ($nodes_shared as $sh_node) {
     $data_sh[$sh_node] = itg_analytics_get_node_analytics_data_only_shared_count($sh_node);
   }
@@ -518,9 +527,9 @@ function _get_most_popular_nodes_based_on_top_20_shared() {
  * Hight weight is on top and low weight in on low.
  * @return array
  */
-function _get_most_popular_nodes_based_on_top_20_trending() {
+function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL) {
   //  Top 20 Trending story within 24 hours are returning from here
-  $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_trending_story();
+  $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequency);
   foreach ($nodes_trending as $tr_node) {
     $data_tr[$tr_node] = itg_analytics_get_node_analytics_data($tr_node);
   }
@@ -533,9 +542,9 @@ function _get_most_popular_nodes_based_on_top_20_trending() {
  * Hight weight is on top and low weight in on low.
  * @return array
  */
-function _get_most_popular_nodes_based_on_top_20_most_viewed() {
+function _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency = NULL) {
   //  Top 20 Trending story within 24 hours are returning from here
-  $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_most_viewed();
+  $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequency);
   foreach ($nodes_trending as $tr_node) {
     $data_tr[$tr_node] = itg_analytics_get_node_analytics_data_only_view_count($tr_node);
   }

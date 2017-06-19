@@ -202,7 +202,7 @@ return $output;
  * Implements May be recommend block content
  */
 function _may_be_recommend_block_content() {
-  $output = "<div class='may-be-recommend'><h3><span>".t('May be recommend')."</span></h3>
+  $output = "<div class='may-be-recommend'><h3><span>".t('May we recommend')."</span></h3>
         <script type='text/javascript'>
 window._taboola = window._taboola || [];
 _taboola.push({article:'auto'});
@@ -331,17 +331,17 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           $description = '@ankushgautam76';
         }
         if ($value == 'title') {
-          $description = mb_strimwidth(strip_tags($node->title), 1, 130, "..");
+          $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
         }
         if ($value == 'description' && $node->type == 'story') {
           //$description = mb_strimwidth(strip_tags($node->body[LANGUAGE_NONE][0]['value']), 1, 140, "..");
-          $description = mb_strimwidth(strip_tags($node->title), 1, 130, "..");
+          $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
         }
         if ($value == 'description' && $node->type == 'videogallery') {
-         $description = mb_strimwidth(strip_tags($node->title), 1, 130, "..");
+         $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
         }
         if ($value == 'description' && $node->type == 'photogallery') {
-          $description = mb_strimwidth(strip_tags($node->title), 1, 130, "..");
+          $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
         }
         if ($value == 'image' && $node->type == 'story') {
           $description = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
@@ -385,7 +385,8 @@ function itg_get_related_content($nid) {
  * Implements Related video block content
  */
 function _related_video_block_content() {
-  $related_content = itg_get_related_content(arg(1));
+  $arg = arg();
+  $related_content = itg_get_related_content($arg[1]);
   if (!empty($related_content)) {
     drupal_add_js('jQuery(document).ready(function(){
         jQuery("#related-video .video-list").slick({
@@ -408,7 +409,14 @@ function _related_video_block_content() {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {
-        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+        $display_title = get_related_display_title($arg[1], $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = mb_strimwidth($display_title, 0, 80, "..");
         
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
@@ -433,7 +441,8 @@ function _related_video_block_content() {
  * Implements Related photo block content
  */
 function _related_photo_block_content() {
-  $related_content = itg_get_related_content(arg(1));
+  $arg = arg();
+  $related_content = itg_get_related_content($arg[1]);
   if (!empty($related_content)) {
     drupal_add_js('jQuery(document).ready(function(){
         jQuery("#related-photo .photo-list").slick({
@@ -456,7 +465,14 @@ function _related_photo_block_content() {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {
-        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+        $display_title = get_related_display_title($arg[1], $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = mb_strimwidth($display_title, 0, 80, "..");
         
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
@@ -587,8 +603,8 @@ function itg_google_share_count($url) {
  */
 function _related_story_left_block_content() {
   global $base_url;
-  
-  $related_content = itg_get_related_content(arg(1));
+  $arg = arg();
+  $related_content = itg_get_related_content($arg[1]);
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
@@ -600,7 +616,13 @@ function _related_story_left_block_content() {
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
-      $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+      $display_title = get_related_display_title($arg[1], $current_entity_id);
+      if(!empty($display_title)) {
+        $display_title = $display_title;
+      } else {
+        $display_title = $related_data->label;
+      }
+      $related_title = mb_strimwidth($display_title, 0, 80, "..");
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
@@ -630,8 +652,8 @@ function _related_story_left_block_content() {
  */
 function _related_story_bottom_block_content() {
   global $base_url;
-
-  $related_content = itg_get_related_content(arg(1));
+  $arg = arg();
+  $related_content = itg_get_related_content($arg[1]);
   if (function_exists('itg_get_related_story_id')) {
     $related_result = itg_get_related_story_id($related_content);
   }
@@ -643,7 +665,14 @@ function _related_story_bottom_block_content() {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {
-        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+        $display_title = get_related_display_title($arg[1], $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = mb_strimwidth($display_title, 0, 80, "..");
 
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
@@ -670,8 +699,9 @@ function _related_story_bottom_block_content() {
  */
 function _related_podcast_bottom_block_content() {
   global $base_url;
+  $arg = arg();
   $related_result = array();
-  $related_content = itg_get_related_content(arg(1));
+  $related_content = itg_get_related_content($arg[1]);
   if (function_exists('itg_get_related_story_id') && !empty($related_content)) {
     $related_result = itg_get_related_story_id($related_content);
   }
@@ -687,7 +717,14 @@ function _related_podcast_bottom_block_content() {
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
-      $related_title = mb_strimwidth($related_data->label, 0, 200, "..");
+      $display_title = get_related_display_title($arg[1], $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = mb_strimwidth($display_title, 0, 200, "..");
       $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
       $related_image = '<img src="' . $related_image_url . '" height="127" width= "170">';
       if (empty($related_image_url)) {
@@ -843,4 +880,29 @@ function url_exists($url) {
 function recommended_anonymous_user() {
   $str_data = get_personlization_front_block_data(FALSE);
   return $str_data;
+}
+
+/**
+ * Implements get_related_display_title().
+ */
+function get_related_display_title($nid, $display_id) {
+  if (!empty($nid) && !empty($display_id)) {
+    $query = db_select('field_data_field_cm_related_content_detail', 'ds')
+        ->fields('ds', array('field_cm_related_content_detail_value'))
+        ->condition('ds.entity_id', $nid);
+    $display_data = $query->execute()->fetchField();
+    if (!empty($display_data)) {
+      $explode_string = explode(',', $display_data);
+      $string_match = '_' . $display_id . '@';
+      foreach ($explode_string as $key => $value) {
+        if (strpos($value, $string_match) !== false) {
+          $final_array_string = explode('@', $value);
+          if (isset($final_array_string[2])) {
+            return $final_array_string[2];
+          }
+        }
+      }
+    }
+    return;
+  }
 }

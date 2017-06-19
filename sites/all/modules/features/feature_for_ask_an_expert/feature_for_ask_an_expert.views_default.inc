@@ -438,7 +438,7 @@ else
     15 => 0,
     18 => 0,
   );
-  $handler->display->display_options['path'] = 'ask-an-expert';
+  $handler->display->display_options['path'] = 'ask-an-expert-backend';
 
   /* Display: Ask an expert question answer */
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_1');
@@ -535,7 +535,7 @@ else
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'not empty';
-  $handler->display->display_options['path'] = 'ask-an-expert-question-answer';
+  $handler->display->display_options['path'] = 'ask-an-expert';
 
   /* Display: Ask an expert history */
   $handler = $view->new_display('page', 'Ask an expert history', 'page_2');
@@ -1086,7 +1086,7 @@ else
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';

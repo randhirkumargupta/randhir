@@ -5,10 +5,26 @@
 (function ($) {
     Drupal.behaviors.itg_event_registration = {
         attach: function (context, settings) {
-
             //Hide left side vertical tabs in case of simple users
             var uid = settings.itg_event_registration.settings.uid;
             var nid = settings.itg_event_registration.settings.nid;
+            var registration_price = settings.itg_event_registration.settings.registration_price;
+            jQuery('.node-event_registration-form').ajaxComplete(function (event, request, settings) {
+               // if (event.target.id == 'event-registration-node-form') {
+                    if (settings.url == Drupal.settings.basePath + 'system/ajax') {
+                        if (registration_price != 0) {
+                            var form_open = jQuery("table.field-multiple-table tbody tr").length;
+                            jQuery('.total_value').val(registration_price);
+                            jQuery('input[name="discounted_value"]').val(registration_price);
+                            jQuery('.event-fees-amount').text('Rs ' + registration_price);
+                            jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
+                            jQuery('#event-registration-node-form .event-coupon-reset').trigger('click');
+                        }
+                    }
+                //}
+            });
+
+
             $('#edit-title').val('event-' + nid);
             $('.form-item-title').hide();
 
@@ -51,13 +67,25 @@
     };
 })(jQuery, Drupal, this, this.document);
 
+
+function changePriceValue() {
+    var total_value_event = jQuery('input[name="discounted_value"]').val();
+    if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
+        total_value_event = 0;
+    }
+    //jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+    jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+
+    if (jQuery("table .field-multiple-table tbody tr").length <= 0) {
+        var form_open = jQuery("table.field-multiple-table tbody tr").length;
+        jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
+    }
+
+}
+
 jQuery(document).ready(function () {
-    jQuery(".page-event").on("mousemove", function () {
-        var total_value_event = jQuery('input[name="total_value"]').val();
-        if (jQuery.type(total_value_event) === "undefined" || total_value_event == "") {
-            total_value_event = 0;
-        }
-        jQuery('.event-fees-amount').html('Rs ' + total_value_event);
+    jQuery(".page-event").on("mousemove scroll keyup mousewheel DOMMouseScroll", function () {
+        changePriceValue();
     });
 
     var offset = jQuery('.form-field-name-field-erf-payment-gateway').offset();
@@ -107,6 +135,11 @@ jQuery(document).ready(function () {
     }
 
     jQuery(document).on('change', 'input[type="radio"]', function () {
+        // show hide msg
+        var msg_class = jQuery(this).val();
+        jQuery('.reg_pric').hide();
+        jQuery('.' + msg_class).show();
+
         var $eventNum = jQuery(".event-form-number");
         var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
         var a = $eventNum.val();
@@ -132,9 +165,8 @@ jQuery(document).ready(function () {
 
 
 
-    // Code start for Coupon code  
-
-    jQuery('#event-registration-node-form .have-a-coupon-code-link').click(function () {
+    // Code start for Coupon code
+    jQuery('.have-a-coupon-code-link').click(function () {
 
         if (jQuery('#edit-coupon-code').val().length <= 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">Coupon code field is required.</span>');
@@ -165,8 +197,8 @@ jQuery(document).ready(function () {
                         jQuery('[name="coupon_code"]').attr('readonly', true);
                         if (obj_success['discounted_value'] == 0) {
                             jQuery('.form-field-name-field-erf-payment-gateway').hide();
-                            jQuery('.event-total-fees-text').hide();                            
-                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");                            
+                            jQuery('.event-total-fees-text').hide();
+                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");
                             jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
                         }
                     }
@@ -185,8 +217,8 @@ jQuery(document).ready(function () {
 
     // Code start for coupon reset
 
-    jQuery('#event-registration-node-form .event-coupon-reset').click(function () {
-        if (jQuery('#edit-coupon-code').val().length <= 0) {
+    jQuery('.event-coupon-reset').click(function () {
+        if (jQuery('#edit-coupon-code').val().length < 0) {
             jQuery('.coupon_code_message').html('<span class="error" style="display: block;">Coupon code field is required.</span>');
         } else {
             jQuery('input[name="coupon_code"]').val('');
@@ -225,9 +257,41 @@ jQuery(document).ready(function () {
 
 
 jQuery(document).ajaxSuccess(function () {
-    var error_message_length = jQuery(".messages--error").length;
-    console.log(error_message_length);
-    if(error_message_length>1) {
-        jQuery("body").find("#page-title").next(".messages--error").remove();
+    if (jQuery(".messages--error").length > 1) {
+        var error_message_length = jQuery(".messages--error").length;
+        console.log(error_message_length);
+        if (error_message_length > 1) {
+            jQuery("body").find("#page-title").next(".messages--error").remove();
+        }
+    }
+});
+
+
+// Code for price calculator according group
+
+jQuery(document).on('change', 'input[type="radio"]', function () {
+    var form_open = jQuery("table.field-multiple-table tbody tr").length;
+    var radio_value = jQuery(this).val();
+    var event_id = jQuery('#edit-field-story-source-id-und-0-value').val();
+    var price_calculator = jQuery.ajax({
+        type: 'POST',
+        url: Drupal.settings.basePath + "itg-price-ajax-registration",
+        data: {radio_value: radio_value, total_fee: event_id, form_open: form_open}
+        , dataType: "text",
+        success: function (msg) {
+            jQuery('.total_value').val(msg);
+            jQuery('.event-fees-amount').text('Rs ' + msg);
+            jQuery('input[name="discounted_value"]').val(msg);
+            jQuery('.event-total-fees-text .event-number-of-members').text(form_open);
+            jQuery('#event-registration-node-form .event-coupon-reset').trigger('click');
+        }
+    });
+
+
+});
+
+jQuery(document).ready(function () {
+    if (jQuery('input[type="radio"]').is(':checked')) {
+        jQuery('.' + jQuery('input[type="radio"]:checked').val()).show();
     }
 });

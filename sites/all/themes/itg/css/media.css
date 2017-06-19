@@ -2673,6 +2673,9 @@
   }
   .view-front-end-global-search .view-content li.itg-search-list {
     padding: 25px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
   }
   .view-front-end-global-search .view-content li.itg-search-list + li {
     border-top: none;
@@ -2680,6 +2683,7 @@
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
     height: 127px;
+    float: left;
   }
   .view-front-end-global-search .view-content .search-detail h2 {
     font-size: 22px;
@@ -2764,29 +2768,29 @@
   /*End css ITG globle search result page*/
   /*Archive story page*/
   /*Archive story page End*/
-  .view-archive-story .view-content li.itg-search-list > div {
+  .view-archive-story .view-content .itg-search-list {
+    padding: 25px 0;
+  }
+  .view-archive-story .view-content .itg-search-list + li {
+    border-top: 1px solid #ddd;
+  }
+  .view-archive-story .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
+    width: 170px;
+    float: left;
+  }
+  .view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail {
     padding-left: 180px;
   }
-  .view-archive-story .view-content li.itg-search-list > div.views-field-sm-field-custom-story-small-large-url {
-    padding-left: 0;
-  }
-  .view-archive-story .view-content .search-pic {
-    width: 170px;
-    height: 127px;
-  }
-  .view-archive-story .view-content .search-detail h2 {
+  .view-archive-story .view-content .itg-search-list .views-field-label h2 {
     font-size: 22px;
     font-size: 1.375rem;
     line-height: 28px;
     margin-top: -5px;
   }
-  .view-archive-story .view-content .search-detail h2 a {
+  .view-archive-story .view-content .itg-search-list .views-field-label h2 a {
     font-size: 22px;
     font-size: 1.375rem;
     line-height: 28px;
-  }
-  .view-archive-story .view-content .search-detail p {
-    display: block;
   }
 
   /*Start anchors listing css*/

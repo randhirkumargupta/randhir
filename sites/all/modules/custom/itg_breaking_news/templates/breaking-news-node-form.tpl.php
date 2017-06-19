@@ -16,6 +16,8 @@
   <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['category_holder']); ?>
+
            </div>
 
 <div id="ContentDetails">
@@ -47,6 +49,7 @@
   <h2 class="highlight-title">Highlights</h2>
   <?php print drupal_render($form['field_story_highlights']); ?>
 </div>
+    <?php if(isset($form['akamai_timeout']) && !empty($form['akamai_timeout'])) { ?>
 
   <div id="AkamaiSettings" class="itg-sidebar-form-section">
     <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
@@ -54,6 +57,6 @@
         <?php print drupal_render($form['akamai_timeout']); ?>
     </div>
   </div>
-
+  <?php } ?>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

@@ -1306,11 +1306,19 @@ div.vertical-tabs {
             }
             .image-preview{
               padding: 0;
+              height: 124px;
               @extend .full;
               max-width: none;
+              @extend .pos-rel;
               img{
-                height: 124px;
-                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
               }
               .image-fullname{
                 @extend .desc-popup;
@@ -1643,6 +1651,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-manage-survey-tabs,
 #block-menu-menu-manage-quiz-tabs,
 #block-menu-menu-newsletter-manage-tabs,
+#block-menu-menu-poll-content-admin-menu,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -2788,6 +2797,7 @@ div.node{
         }
       }
     }
+    iframe{display: block;}
   }
 }
 
@@ -5030,6 +5040,9 @@ div.node{
       .rc-bottom{
         font-size: 13px;
         padding: 5px 0 0;
+        input[type="text"]{
+          width: 100%;
+        }
       }
     }
     .ui-state-default{
@@ -10126,6 +10139,7 @@ div.node{
     #edit-display-button{
       @extend .btn-small;
       margin-top: 33px;
+      float: left;
     }
   }
   #edit-reset{
@@ -10134,7 +10148,7 @@ div.node{
     position: absolute;
     left: 0;
     top: 71px;
-    left: 229px;
+    left: 315px;
   }
   table{
     @extend .views-table;
@@ -11030,7 +11044,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-event_backend-form .form-field-name-field-no-of-tickets{margin-bottom: 140px;}
 [id*="field-ticket-group-type-values"]{
   .form-type-textfield > label, .form-type-select > label{
-    width: 280px;
+    width: 340px;
   }
   thead{display: none;}
   tbody{
@@ -11136,7 +11150,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-[id*="node-itg_funalytics-form"]{
+.node-itg_funalytics-form{
   @extend .image-repo-browse;
 }
 .video-ftp-div{
@@ -11888,3 +11902,8 @@ fieldset#edit-xmlsitemap{
     @extend .hide;
   }
 } 
+.node-videogallery-form .form-field-type-field-collection{
+  @extend .image-repo-browse;
+}
+.page-itg-event-past-spekars table tbody td{vertical-align: top;}
+ #views-exposed-form-report-filed-content-page #edit-from-state-wrapper {display:none !important}

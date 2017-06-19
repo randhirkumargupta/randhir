@@ -281,7 +281,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Audio Upload',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -326,7 +326,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Configuration',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -653,7 +653,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Comment question',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -849,7 +849,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tags',
     'display' => array(
       'default' => array(
         'label' => 'above',

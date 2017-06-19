@@ -89,7 +89,7 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snap-post ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul, #block-itg-front-end-common-latest-from-aajtak ul,
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snap-post ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-past-speaker-event-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul, #block-itg-front-end-common-latest-from-aajtak ul,
 #block-itg-front-end-common-latest-from-pti ul,
 #block-itg-front-end-common-latest-from-businesstoday ul, .page-state-election .key-candidate ul {
   list-style-type: none;
@@ -1974,53 +1974,28 @@ footer .multiple-items-footer i.slick-next {
   right: 40px;
 }
 .view-front-end-global-search .view-content .itg-search-list {
-  overflow: hidden;
-  padding: 10px;
-}
-.view-front-end-global-search .view-content .itg-search-list .search-pic {
-  float: left;
-  margin-right: 10px;
-}
-.view-front-end-global-search .view-content .itg-search-list .search-detail {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 19px;
-  color: #323232;
-}
-.view-front-end-global-search .view-content li.itg-search-list {
   padding: 15px 0;
 }
-.view-front-end-global-search .view-content li.itg-search-list + li {
+.view-front-end-global-search .view-content .itg-search-list + li {
   border-top: 1px solid #ddd;
 }
-.view-front-end-global-search .view-content .search-pic {
+.view-front-end-global-search .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
-  overflow: hidden;
+  float: left;
 }
-.view-front-end-global-search .view-content .search-pic:empty {
-  display: none;
+.view-front-end-global-search .view-content .itg-search-list > .views-field-label, .view-front-end-global-search .view-content .itg-search-list > .search-detail {
+  padding-left: 154px;
 }
-.view-front-end-global-search .view-content .search-detail h2 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  line-height: 20px;
-  margin-bottom: 10px;
+.view-front-end-global-search .view-content .itg-search-list .views-field-label h2 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin-top: -5px;
 }
-.view-front-end-global-search .view-content .search-detail h2 a {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 20px;
-}
-.view-front-end-global-search .view-content .search-detail h2 a:hover {
-  color: #1a3c8d;
-}
-.view-front-end-global-search .view-content .search-detail p {
-  display: none;
+.view-front-end-global-search .view-content .itg-search-list .views-field-label h2 a {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
 }
 .view-front-end-global-search .view-content .social-share {
   display: inline-block;
@@ -6183,54 +6158,28 @@ h1.category-heading {
 
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
-  overflow: hidden;
-  padding: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-pic {
-  float: left;
-  margin-right: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-detail {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 19px;
-  color: #323232;
-}
-.view-archive-story .view-content li.itg-search-list {
   padding: 25px 0;
 }
-.view-archive-story .view-content li.itg-search-list > div {
-  padding-left: 150px;
+.view-archive-story .view-content .itg-search-list + li {
+  border-top: 1px solid #ddd;
 }
-.view-archive-story .view-content li.itg-search-list > div.views-field-sm-field-custom-story-small-large-url {
-  padding-left: 0;
-}
-.view-archive-story .view-content .search-pic, .view-archive-story .view-content .views-field-sm-field-custom-story-small-large-url {
+.view-archive-story .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
-  overflow: hidden;
+  float: left;
 }
-.view-archive-story .view-content .search-pic:empty, .view-archive-story .view-content .views-field-sm-field-custom-story-small-large-url:empty {
-  display: none;
+.view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail {
+  padding-left: 154px;
 }
-.view-archive-story .view-content .search-detail h2 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  line-height: 20px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin-top: -5px;
 }
-.view-archive-story .view-content .search-detail h2 a {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 20px;
-}
-.view-archive-story .view-content .search-detail p {
-  display: none;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 a {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
 }
 .view-archive-story .view-content .social-share {
   display: inline-block;
@@ -8291,10 +8240,10 @@ section.sidebar .block-itg-ads {
   margin-bottom: 30px;
 }
 
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block {
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block {
   margin-top: 20px;
 }
-#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2, #block-views-event-subsite-speaker-block h2 {
+#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2, #block-views-event-subsite-speaker-block h2, #block-views-past-speaker-event-block h2 {
   font-size: 24px;
   color: #ef3c24;
   font-family: "Roboto Slab", sans-serif;
@@ -8593,6 +8542,10 @@ section.sidebar .block-itg-ads {
   margin-bottom: 50px;
 }
 
+.event-registration-link {
+  line-height: 36px;
+}
+
 #block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
   font-family: "Roboto Slab", sans-serif;
   font-size: 40px;
@@ -8663,31 +8616,31 @@ section.sidebar .block-itg-ads {
   margin-top: -5px;
 }
 
-#block-views-event-subsite-speaker-block .views-row {
+#block-views-event-subsite-speaker-block .views-row, #block-views-past-speaker-event-block .views-row {
   width: 33.33333%;
   float: left;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content {
+#block-views-event-subsite-speaker-block .views-row .view-content, #block-views-past-speaker-event-block .views-row .view-content {
   zoom: 1;
   width: 100%;
   float: none;
   text-align: center;
   margin-bottom: 30px;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:before, #block-views-past-speaker-event-block .views-row .view-content:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:after {
   clear: both;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content img {
+#block-views-event-subsite-speaker-block .views-row .view-content img, #block-views-past-speaker-event-block .views-row .view-content img {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   font-size: 11px;
   font-weight: 700;
   font-family: roboto;
@@ -8695,11 +8648,11 @@ section.sidebar .block-itg-ads {
   margin-top: 10px;
   text-transform: uppercase;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   color: #ef2a24;
   margin-top: 0;
 }
-#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1) {
+#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1), #block-views-past-speaker-event-block .views-row:nth-child(3n+1) {
   clear: left;
 }
 
@@ -8852,6 +8805,31 @@ section.sidebar .block-itg-ads {
 }
 #content [id*='event-registration-node-form'] .mandatory-message span {
   padding-left: 0;
+}
+#content [id*='event-registration-node-form'] .ticket-type-message {
+  font-size: 12px;
+  margin-bottom: 30px;
+  color: green;
+  padding-left: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios label {
+  width: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios {
+  padding-left: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio {
+  padding-right: 20px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio .form-radio {
+  margin: 2px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio label b {
+  display: block;
+  margin: 5px 0 0 18px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .description {
+  display: none;
 }
 #content [id*='event-registration-node-form'] .form-field-type-field-collection .form-item .form-item {
   margin: 15px 0;
@@ -9040,6 +9018,7 @@ section.sidebar .block-itg-ads {
 }
 #content [id*='event-registration-node-form'] .form-text, #content [id*='event-registration-node-form'] .form-textarea {
   width: 75%;
+  max-width: 489px;
 }
 #content [id*='event-registration-node-form'] .form-type-textarea > label + div {
   padding-left: 0 !important;
@@ -9098,7 +9077,6 @@ section.sidebar .block-itg-ads {
   font-family: roboto;
   font-size: 12px;
   color: #707070;
-  padding-top: 25px;
 }
 #block-itg-event-backend-event-registration .tc-txt ul li {
   margin-bottom: 10px;
@@ -13498,7 +13476,7 @@ span.smilies-title img {
   color: red;
 }
 
-.jw-sharing-dock-btn {
+.node-type-videogallery .jw-sharing-dock-btn {
   display: none;
 }
 
@@ -14299,6 +14277,62 @@ span.close_btt {
 }
 
 .page-topic a#reset_button {
+  display: none;
+}
+
+.past-speaker .views-field-title {
+  text-transform: uppercase;
+  padding: 10px 0 0;
+}
+
+.past-speaker .views-field-field-story-new-title {
+  font-size: 13px;
+  color: #8d8d8d;
+}
+
+.past-speaker .slick-list {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.past-speaker .slick-arrow {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.past-speaker .slick-arrow.fa-chevron-right {
+  right: 0;
+}
+
+.past-speaker-list {
+  text-align: center;
+}
+
+.past-speaker a {
+  display: block;
+}
+
+.past-speaker a img {
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#block-views-past-speaker-event-block-1 .block-title {
+  font-size: 24px;
+  color: #ef3c24;
+  font-family: "Roboto Slab", sans-serif;
+  margin-bottom: 15px;
+}
+
+.logged-in .header-top .links.inline.clearfix {
   display: none;
 }
 

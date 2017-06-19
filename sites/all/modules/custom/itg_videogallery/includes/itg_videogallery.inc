@@ -79,7 +79,15 @@ function itg_videogallery_s3_video_form($form) {
     '#default_value' => variable_get('aws_video_dir', ''),
     '#description'=>'Example : s3fs-public/dailymotion_video/',
     '#required' => TRUE,
+  ); 
+   $form['aws_video_dir_to_move'] = array(
+    '#type' => 'textfield',
+    '#title' => t('AWS S3 Old Video Dir'),
+    '#default_value' => variable_get('aws_video_dir_to_move', ''),
+    '#description'=>'Example : s3fs-public/dailymotion_video/',
+    '#required' => TRUE,
   );
+   
     $form['aws_bucket'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Bucket'),

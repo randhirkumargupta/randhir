@@ -96,7 +96,7 @@
 
 jQuery(document).ready(function () {
     //jQuery("#ui-datepicker-div").style('display','none');
-    jQuery('#edit-field-story-archive-value-wrapper').hide();
+    //jQuery('#edit-field-story-archive-value-wrapper').hide();
     if (jQuery('#edit-field-story-archive-value').val() == 'Yes') {
 
         jQuery('.view-id-report_filed_content td.views-field-status').text('Archive');

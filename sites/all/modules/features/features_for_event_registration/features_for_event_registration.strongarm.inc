@@ -68,13 +68,13 @@ function features_for_event_registration_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '5',
+          'weight' => '6',
         ),
         'additional_settings' => array(
           'weight' => '6',
@@ -83,7 +83,7 @@ function features_for_event_registration_strongarm() {
           'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
       ),
       'display' => array(),
