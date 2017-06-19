@@ -669,7 +669,6 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
   $response_result['video_id'] = $response['id'];
   $response_result['fid'] = $response['fid'];
   if (!empty($response_result['video_id'])) {
-
     $duration = "";
     if ($response['duration'] < 3600) {
       $duration = gmdate("i:s", $response['duration']);
