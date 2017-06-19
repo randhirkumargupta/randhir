@@ -21,12 +21,21 @@ function itg_appadmin_cat_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['appadmin-cat/%/edit'] = array(
+    'title' => 'Edit Categeory for App',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('app_admin_edit_cat',1),
+    'access arguments' => array('App Admin Cat Management'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['appadmin-cat-listing'] = array(
     'title' => 'App Cat Listing',
     'page callback' => 'appadmin_cat_listing',
     //'page arguments' => array('app_admin_cat_manage'),
     'access arguments' => array('App Admin Cat Management'),
-    'type' => MENU_CALLBACK,
+    'menu_name' => 'menu-app-admin',
+    'type' => MENU_NORMAL_ITEM,
   );
   
   $items['appadmin-cat/%/delete'] = array(
@@ -38,6 +47,77 @@ function itg_appadmin_cat_menu() {
   );
   
   return $items;
+}
+
+/*
+ * Create edit form to change weight and visibility
+ */
+
+function app_admin_edit_cat($form, &$form_state){
+
+  $form = array();
+  $id = arg(1);
+  
+  $load_cat = get_all_data($id);
+  $cat_name = taxonomy_name_by_id($load_cat->cat_tid);
+    
+  $form['from'] = array(
+    '#type' => 'item',
+    '#title' => t('Categeory'),
+    '#markup' => $cat_name,
+   );
+
+  
+   $show_app = array(0 => t('No'), 1 => t('Yes'));
+   $show_on_app = $load_cat->show_on_app;
+   
+   $form['show_app'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show In App'),
+    '#default_value' => isset($show_on_app) ? $show_on_app : 0,
+    '#options' => $show_app,
+  );
+  
+  $weight = array(0,1,2,3,4,5,6,7,8,9,10); 
+  
+  $form['weight'] = array(
+    '#type' => 'select',
+    '#title' => t('Weight'),
+    '#default_value' => isset($load_cat->weight) ? $load_cat->weight : 0,
+    '#options' => $weight,
+  ); 
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit'
+  );
+  
+  return $form;
+}
+
+/*
+ * Implement hook_form_submit()
+ */
+function app_admin_edit_cat_submit($form, &$form_state){
+   global $user;
+    $id = arg(1);
+    $qry = db_update('itg_app_admin_cat')
+           ->fields(array(
+             'show_on_app' => $form_state['values']['show_app'],
+             'weight' => $form_state['values']['weight'],
+             'uid' => $user->uid,
+             'changed' => REQUEST_TIME
+           ))
+           ->condition('id',$id)
+           ->execute();
+  
+  if($qry){
+    $load_cat = get_all_data($qry);
+    $cat_name = taxonomy_name_by_id($load_cat->cat_tid);
+    drupal_set_message(t('Category @cat_name has been updated for APP', array('@cat_name' => $cat_name)));
+    $form_state['redirect'] = 'appadmin-cat-listing';
+  }
+  
 }
 
 /*
@@ -60,7 +140,7 @@ function app_admin_cat_del($form, &$form_state){
     
     return confirm_form($form, 
     $ques,
-    'app_admin_cat_del_submit',
+    'appadmin-cat-listing',
     t('This Action can not be undone'),
     t('Confirm'),
      t('Cancel')
@@ -68,17 +148,24 @@ function app_admin_cat_del($form, &$form_state){
   
 }
 
+
+
 function app_admin_cat_del_submit($form, &$form_state){
   $id = arg(1);
   
-  $del_qry = db_delete('itg_app_admin_cat')
-             ->condition('id',$id)
-             ->execute();
-  
-  if($del_qry){
-      drupal_set_message('App category has been unassigned successfully');
-      $form_state['redirect'] = 'appadmin-cat-listing';
-  }
+    if (!isset($form_state['storage']['confirm'])) {
+      $del_qry = db_delete('itg_app_admin_cat')
+                 ->condition('id',$id)
+                 ->execute();
+
+      if($del_qry){
+          drupal_set_message('App category has been unassigned successfully');
+          $form_state['redirect'] = 'appadmin-cat-listing';
+      }
+    }else{
+      drupal_goto('appadmin-cat-listing');
+    }
+      
 }
 
 
@@ -89,7 +176,7 @@ function app_admin_cat_del_submit($form, &$form_state){
 function appadmin_cat_listing(){
   
   $output = '';
-  $header = array('Category Name','Display(in App)','weight','delete');
+  $header = array('Category Name','Display(in App)','weight','Edit','Delete');
   $rows = array();
 
   $cat_sql1 = db_select('itg_app_admin_cat','ac');
@@ -104,16 +191,26 @@ function appadmin_cat_listing(){
                    $display = 'No';
              }
              
+             $all_tid = taxonomy_get_parents_all($data->cat_tid);
+             $cat_list = '';
+             foreach ($all_tid as $tid_key => $tid_value){
+                $cat_list .= taxonomy_name_by_id($tid_value->tid);
+                $cat_list .= " >> ";
+             }
+             
+             $edit = l('edit','appadmin-cat/'.$data->id.'/edit');
              $delete = l('delete','appadmin-cat/'.$data->id.'/delete');
              $rows[] = array(
-                 taxonomy_name_by_id($data->cat_tid),
+                 substr($cat_list,0,-4),
                  $display,
                  $data->weight,
+                 $edit,
                  $delete
              );
    }
     $attributes = array('class' => array('views-table'));
-    $output = ''; 
+    $output = '';
+    $output .= '<a href="appadmin-cat-management" class="GoogleAnalyticsET-processed">Assign Category for App</a>';
     $output .= theme('table', array('header' => $header, 'rows' => $rows,'attributes' => $attributes));
     $output .= theme('pager');
     return $output;
@@ -193,6 +290,24 @@ function app_admin_cat_manage($form, &$form_state){
 }
 
 /*
+ * Implement form_validate
+ */
+function app_admin_cat_manage_validate($form, &$form_state){
+  
+  $cat_id = $form_state['values']['app_categories'];
+  
+  $qry = db_select('itg_app_admin_cat','ca')
+          ->fields('ca',array('id'))
+          ->condition('cat_tid',$cat_id)
+          ->execute()->fetchField();
+      if(isset($qry) && $qry != 0){
+        form_set_error('app_categories',t('This category already assigned, Please choose another'));
+      }
+    
+  
+}
+
+/*
  * common function to get the list of Assigned cat
  * @args : id
  * return : one column data as a object 
@@ -227,7 +342,10 @@ function app_admin_cat_manage_submit($form, &$form_state){
   }
   
   if($qry){
-    drupal_set_message('category has been saved.');
+    $load_cat = get_all_data($qry);
+    $cat_name = taxonomy_name_by_id($load_cat->cat_tid);
+    drupal_set_message(t('Category @cat_name has been assigned for APP', array('@cat_name' => $cat_name)));
+    $form_state['redirect'] = 'appadmin-cat-listing';
   }
   
 }
