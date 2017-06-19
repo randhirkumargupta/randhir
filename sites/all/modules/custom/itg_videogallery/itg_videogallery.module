@@ -106,7 +106,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
             $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
             $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
             if (empty($file_exist) || $video_fid < 1) {
-              //unset($form['field_video_upload']['und'][$delta]);
+              unset($form['field_video_upload']['und'][$delta]);
             }
             //}
           }
@@ -1002,13 +1002,13 @@ function itg_videogallery_after_build($form, &$form_state) {
   else {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
-        // if ($arg == 'edit') {
+         if ($arg == 'edit') {
         $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
         $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
         if (empty($file_exist) || $video_fid < 1) {
           unset($form['field_video_upload']['und'][$delta]);
         }
-        //}
+        }
       }
     }
   }
@@ -1521,39 +1521,10 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   global $user;
   $videos_data = $_POST['checkvalue'];
   $return_fid = array();
-  $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
-  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-  }
-  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
-      $image_url = $expode_video_info[3];
-      $imagedata = file_get_contents($image_url);
-      $image_name = end(explode('/', $image_url));
-      $image_url = 'itg' . time() . end(explode('/', $image_url));
-      $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-      $file_image = file_load($file_data_temp->fid);
-      $image = image_load($file_image->uri);
-      $filepath = file_default_scheme() . '://' . $filedir;
-      $scaled = image_scale_and_crop($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT);
-      $image_name = time() . $image_name;
-      $sav = image_save($image, $filepath . '/' . $image_name);
-      $uri = $filepath . '/' . $image_name;
-      $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-      $file = new StdClass;
-      $file->uid = $user->uid;
-      $file->filename = basename($uri);
-      $file->uri = $uri;
-      $file->filemime = file_get_mimetype($uri);
-      $file->filesize = @filesize($uri);
-      $file->timestamp = REQUEST_TIME;
-      $file->is_new = TRUE;
-      $file->status = FILE_STATUS_PERMANENT;
-      $file = file_save($file);
-      file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-      $image_fid = $file->fid;
       $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
@@ -1584,7 +1555,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
             'solr_video_thumb' => $expode_video_info[3],
           ))
           ->execute();
-      $return_fid[] = $file->fid . '#' . $image_fid;
+      $return_fid[] = $file->fid;
     }
 //}
   }
@@ -3447,11 +3418,11 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
   if (isset($videogallery_popup_data_fids_array) && count($videogallery_popup_data_fids_array) > 0) {
 
     foreach ($form_state['field']['field_video_upload']['und']['entity'] as $key => $filed_collection) {
+     
       if (!isset($filed_collection->field_videogallery_video_upload['und'])) {
-        $exploadid = explode('#', $videogallery_popup_data_fids_array[$i]);
-        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $exploadid[0];
-        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_video_thumbnail['und'][0]['fid'] = $exploadid[1];
-
+      
+        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $videogallery_popup_data_fids_array[$i];
+        
         $i++;
       }
     }
