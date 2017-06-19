@@ -1356,7 +1356,7 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
           '#type' => 'select',
           '#options' => drupal_map_assoc(range(0, 15)),
           '#default_value' => 1,
-          '#attributes' => array('style' => 'display:none1;'),
+          '#attributes' => array('style' => 'display:none;'),
       );
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#submit'][] = 'itg_mobile_services_field_add_more_submit';
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#value'] = 'Add more rows';
