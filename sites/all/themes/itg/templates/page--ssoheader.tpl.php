@@ -20,11 +20,9 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
 ?>
 <div class="sso-header">
     <div class="container">
-        <div class="sso-head-left"><a href="<?php print $shr; ?>">Back to the india today</a></div>
-        <div class="sso-head-right">
-            <ul>
-                <li><img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="" /></li>
-            </ul>        
+        <a class="back-to-itg" href="<?php print $shr; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i> Back to the india today</a>
+        <div class="itg-logo">
+            <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="" />     
         </div>
     </div>
 </div>
@@ -47,14 +45,10 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
 </div>
 
 <div class="sso-footer">
-    <div class="footer-container">
-        <div class="cell">
-            <?php print theme('links', array('links' => menu_navigation_links('menu-sso-footer-menu'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
-        </div>
-        <div class="copy-right-footer">
-         <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
-        </div>
-    </div>
+  <div class="container">
+    <?php print theme('links', array('links' => menu_navigation_links('menu-itg-publications-menu-foote'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
+  </div>
+  <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
 </div>
 
     
