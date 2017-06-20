@@ -77,7 +77,7 @@ function feature_for_video_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -120,7 +120,7 @@ function feature_for_video_field_default_field_instances() {
   $field_instances['field_collection_item-field_video_upload-field_video_thumbnail'] = array(
     'bundle' => 'field_video_upload',
     'deleted' => 0,
-    'description' => 'Image Size (88 x 66)',
+    'description' => 'Image Size (647x363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -184,7 +184,49 @@ function feature_for_video_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_video_upload-field_video_title'.
+  $field_instances['field_collection_item-field_video_upload-field_video_title'] = array(
+    'bundle' => 'field_video_upload',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_video_title',
+    'label' => 'Video Title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
     ),
   );
 
@@ -226,7 +268,7 @@ function feature_for_video_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -345,6 +387,54 @@ function feature_for_video_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 41,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-itg_delete_solr_video-field_video_is_unpublish'.
+  $field_instances['node-itg_delete_solr_video-field_video_is_unpublish'] = array(
+    'bundle' => 'itg_delete_solr_video',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_video_is_unpublish',
+    'label' => 'video is unpublish',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
     ),
   );
 
@@ -2864,6 +2954,7 @@ function feature_for_video_field_default_field_instances() {
   t('Image Size (613 x 460)');
   t('Image Size (613x460)');
   t('Image Size (647 x 363)');
+  t('Image Size (647x363)');
   t('Image Size (88 x 66)');
   t('Kicker');
   t('Large image');
@@ -2900,11 +2991,13 @@ function feature_for_video_field_default_field_instances() {
   t('Video Kicker');
   t('Video Long Description');
   t('Video Thumbnail');
+  t('Video Title');
   t('Video Upload');
   t('Video expire');
   t('common by line reporter id');
   t('common by line twitter');
   t('primary category');
+  t('video is unpublish');
   t('video_duration');
   t('video_is_delete');
 

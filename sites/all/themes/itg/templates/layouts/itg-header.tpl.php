@@ -31,36 +31,19 @@ else {
 <div class="head-live-tv desktop-hide">
   <ul>
     <li> 
-      <?php if ($_GET['q'] != 'user') {
-        ?>
-        <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
+      <?php
+        if ($_GET['q'] != 'user') {
+          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
-            ?>
-
-            <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="mobile-user"><i class="fa fa-user"></i></a>
-
-            <?php
-          }
-          else {
-            ?>
-            <a href="javascript:void(0)" class="mobile-user sso-click"><?php print $user_pic; ?></a>
-            <?php
+          ?>
+          <a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
+       <?php
+          } else {
+       ?>
+        <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>  
+        <?php  
           }
         }
-        else {
-          if ($user->uid == 0) {
-            ?>
-            <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="mobile-user sso-click"><i class="fa fa-user"></i></a>
-
-            <?php
-          }
-          else {
-            ?>
-            <a href="javascript:void(0)" class="mobile-user"><?php print $user_pic; ?></a>
-            <?php
-          }
-        }
-      }
       ?>
       <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
       <?php print render($block['content']); ?> 
@@ -151,34 +134,15 @@ else {
       <div class="user-menu">
         <?php
         if ($_GET['q'] != 'user') {
+          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+          if ($user->uid == 0) {
           ?>
-          <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
-            if ($user->uid == 0) {
-              ?>
-
-              <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon sso-click"><i class="fa fa-user"></i></a>
-              <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
-
-              <?php
-            }
-            else {
-              ?>
-              <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
-              <?php
-            }
-          }
-          else {
-            if ($user->uid == 0) {
-              ?>
-              <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon sso-click"><i class="fa fa-user"></i></a>
-
-              <?php
-            }
-            else {
-              ?>
-              <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
-              <?php
-            }
+          <a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
+       <?php
+          } else {
+       ?>
+        <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>  
+        <?php  
           }
         }
         ?>

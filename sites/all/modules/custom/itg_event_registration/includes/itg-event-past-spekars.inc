@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Function to display form with dragaable view
  * @return html
@@ -49,7 +50,7 @@ function itg_event_past_speakers($form, &$form_state) {
     );
 
     $speakers = array_unique($speakers);
-    
+
     foreach ($speakers as $key => $value) {
       $form['widget_data'][$key]['speaker_id'] = array(
         '#type' => 'checkboxes',
@@ -85,10 +86,10 @@ function itg_event_past_speakers_submit($form, &$form_state) {
     $target_id = array_values($widget['speaker_id']);
     // Logic to skip current speaker if already added.
     $row_count = __skip_already_added_speaker($target_id[0], $event_id);
-    if($row_count) {
+    if ($row_count) {
       continue;
     }
-    
+
     $max_weight = __max_weight_for_speker($event_id);
     if ($target_id[0] != 0) {
       try {
@@ -100,7 +101,7 @@ function itg_event_past_speakers_submit($form, &$form_state) {
               'content_type' => "All",
             ))
             ->fields(array(
-              'weight' => ++$max_weight[0],
+              'weight' => --$max_weight,
               'nid' => $target_id,
               'widget' => $widget_name,
               'cat_id' => $event_id,
@@ -113,6 +114,14 @@ function itg_event_past_speakers_submit($form, &$form_state) {
       }
     }
   }
+  // Start code for sending purge request of event home page for Akamai
+  if (isset($_GET['current_event']) && !empty($_GET['current_event'])) {
+    $url = drupal_get_path_alias('node/' . $_GET['current_event']);
+    if (function_exists('itg_akamai_clear_url')) {
+      itg_akamai_clear_url($url, array());
+    }
+  }
+  // End code for sending purge request of event home page for Akamai
 }
 
 /**
@@ -120,15 +129,15 @@ function itg_event_past_speakers_submit($form, &$form_state) {
  */
 function __max_weight_for_speker($event_id) {
   $max_query_all = db_select('itg_widget_order');
-  $max_query_all->addExpression('MAX(weight)', 'weight');
+  $max_query_all->addExpression('MIN(weight)', 'weight');
   $max_query_all->condition('cat_id', $event_id);
   $max_query_all->condition('widget', 'itg_event_speaker_order_widget');
-  $max_result_all = $max_query_all->execute()->fetchCol();
-  if ($max_result_all != NULL) {
-    return $max_result_all;
+  $max_result = $max_query_all->execute()->fetchField();
+  if ($max_result == null || empty($max_result)) {
+    return 0;
   }
   else {
-    return 1;
+    return $max_result;
   }
 }
 
@@ -139,10 +148,9 @@ function __max_weight_for_speker($event_id) {
  * @param int $event_id
  * @return int
  */
-
 function __skip_already_added_speaker($speaker_id, $event_id) {
-  $count_query = db_select('itg_widget_order' , 'iwo');
-  $count_query->fields('iwo' , array("nid"));
+  $count_query = db_select('itg_widget_order', 'iwo');
+  $count_query->fields('iwo', array("nid"));
   $count_query->condition('iwo.cat_id', $event_id);
   $count_query->condition('iwo.nid', $speaker_id);
   $count_query->condition('iwo.widget', 'itg_event_speaker_order_widget');
@@ -174,12 +182,28 @@ function itg_event_registration_form_views_form_past_speaker_event_order_reorder
  */
 function past_speaker_event_order_reorder_submit($form, &$form_state) {
   $draggable_view_data = $form_state['input']['draggableviews'];
+  $added_weight = 0;
   foreach ($draggable_view_data as $key => $value) {
-    db_update('itg_widget_order')
-        ->fields(array('weight' => $value['weight'],))
-        ->condition('widget', 'itg_event_speaker_order_widget')
-        ->condition('nid', $value['id'])
-        ->condition('cat_id', $_GET['current_event'])
-        ->execute();
+    $added_weight += $value['weight'];
   }
+  
+  if ($added_weight) {
+    foreach ($draggable_view_data as $key => $value) {
+      db_update('itg_widget_order')
+          ->fields(array('weight' => $value['weight'],))
+          ->condition('widget', 'itg_event_speaker_order_widget')
+          ->condition('nid', $value['id'])
+          ->condition('cat_id', $_GET['current_event'])
+          ->execute();
+    }
+  }
+
+  // Start code for sending purge request of event home page for Akamai
+  if (isset($_GET['current_event']) && !empty($_GET['current_event'])) {
+    $url = drupal_get_path_alias('node/' . $_GET['current_event']);
+    if (function_exists('itg_akamai_clear_url')) {
+      itg_akamai_clear_url($url, array());
+    }
+  }
+  // End code for sending purge request of event home page for Akamai
 }

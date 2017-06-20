@@ -458,6 +458,7 @@ function itg_image_croping_crop_image() {
   if ($orignal_file_name != "") {
     $image_name = $orignal_file_name;
   }
+  $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
   $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
   $imagedata = base64_decode($image_data_url);
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
@@ -486,7 +487,7 @@ function itg_image_croping_crop_image() {
         if ($orignal_file_name != "") {
           $image_name = $orignal_file_name . rand(111, 9999) . time();
         }
-
+        $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
         $uri = $filepath . '/' . $image_name . '.' . $extention;
         $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -598,6 +599,7 @@ function itg_image_croping_crop_image_orignal() {
   $image_name_orignal = $file_image->filename;
   $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
   $image_name = $image_name_orignal . rand(111, 999) . time();
+  $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
   $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
   $uri = $filepath . '/' . $image_name . '.' . $image_exten;
   $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -628,6 +630,7 @@ function itg_image_croping_crop_image_orignal() {
 
       if ($scaled) {
         $image_name = $image_name_orignal . rand(111, 999) . time();
+        $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
         $uri = $filepath . '/' . $image_name . '.' . $image_exten;
         $wrapper = file_stream_wrapper_get_instance_by_uri($uri);

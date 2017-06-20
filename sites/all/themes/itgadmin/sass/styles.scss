@@ -1306,11 +1306,19 @@ div.vertical-tabs {
             }
             .image-preview{
               padding: 0;
+              height: 124px;
               @extend .full;
               max-width: none;
+              @extend .pos-rel;
               img{
-                height: 124px;
-                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
               }
               .image-fullname{
                 @extend .desc-popup;
@@ -2789,6 +2797,7 @@ div.node{
         }
       }
     }
+    iframe{display: block;}
   }
 }
 
@@ -11141,7 +11150,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     }
   }
 }
-[id*="node-itg_funalytics-form"]{
+.node-itg_funalytics-form{
   @extend .image-repo-browse;
 }
 .video-ftp-div{
@@ -11893,3 +11902,8 @@ fieldset#edit-xmlsitemap{
     @extend .hide;
   }
 } 
+.node-videogallery-form .form-field-type-field-collection{
+  @extend .image-repo-browse;
+}
+.page-itg-event-past-spekars table tbody td{vertical-align: top;}
+ #views-exposed-form-report-filed-content-page #edit-from-state-wrapper {display:none !important}

@@ -241,7 +241,7 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
 
       foreach ($form['state']['#options'] as $key => $option_val) {
 
-        if ($key != 'un_published' && $key != 'archive') {
+        if ($key != 'un_published' && $key != 'archive' && $key !='published') {
           $option[$key] = $option_val;
         }
       }

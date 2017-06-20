@@ -32,10 +32,13 @@ if (function_exists('itg_live_tv_company')) {
                 <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                         <textarea readonly>
-                            <?php if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL)) { ?>
-                            <iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_tv_get_details; ?>">
-                            </iframe>
-                              <?php
+                            <?php if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL)) { 
+                              if (is_bool(is_youtube_url($live_tv_get_details))) {
+                                  echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_tv_get_details . '"></iframe>';
+                                }
+                                elseif (is_string(is_youtube_url($live_tv_get_details))) {
+                                  echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="https://www.youtube.com/embed/' . is_youtube_url($live_tv_get_details) . '"></iframe>';
+                                }
                             }
                             else {
                               print $live_tv_get_details;

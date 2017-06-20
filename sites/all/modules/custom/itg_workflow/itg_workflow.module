@@ -573,7 +573,7 @@ function itg_workflow_node_presave($node) {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
         $node->workbench_moderation_state_new = 'published';
       }
-      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
       }
     }
@@ -624,7 +624,8 @@ function itg_workflow_node_presave($node) {
                 }
                 $is_draft = 1;
 
-                if ($node_id) {
+                if ($node_id) {  
+                  drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
                   // use for upload local video to DM
                   itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                 }
@@ -658,7 +659,7 @@ function itg_workflow_node_presave($node) {
         }
       }
 
-      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published') {
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
       }
     }
@@ -905,12 +906,13 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
+  global $user;
   if(itg_workflow_stop_node_update_batch_for_widgets()) {
+    watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
     return;
   }
-  global $user;
-  if (isset($node->op)) {
-  //watchdog("email_test", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //if (isset($node->op)) {
+  watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
@@ -1015,7 +1017,7 @@ function itg_workflow_node_update($node) {
       } 
     }
   }
-}
+//}
   
   
 }

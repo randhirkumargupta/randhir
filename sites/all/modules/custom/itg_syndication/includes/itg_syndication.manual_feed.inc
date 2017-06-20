@@ -214,11 +214,17 @@ function itg_syndication_selector_custom_submit($form , &$form_state) {
   $feed_type = check_plain($form_state['values']['feed_type']);
 
   $syndication_node = array_filter($form_state['values']['itg_row_selector']);
-
+  $delivery_mode_flag = TRUE;
+  // Check if user clicked download_button then need to set delivary mode empty.
+  // For preventing entry in itg_syndication_feed_url mysql table.
+  if($form_state['clicked_button']['#name'] == 'download_feed') {
+    $delivery_mode_flag = FALSE;
+  }
+  
   $data = array(
     'web_property' => $web_property ,
     'client_title' => $client_name ,
-    'delivery_mode' => $delivery_mode ,
+    'delivery_mode' => ($delivery_mode_flag) ? $delivery_mode : "",
     'feed_type' => $feed_type ,
     'syndication' => serialize($syndication_node) ,
   );
@@ -254,10 +260,11 @@ function itg_syndication_selector_custom_submit($form , &$form_state) {
     //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
     echo file_get_contents($real_path);
+    drupal_unlink($real_path);
     exit; // terminate script
   }
   else {
-    drupal_set_message('Successfully feed Generated  and Sent to client.' , 'status');
+    drupal_set_message(t('Successfully feed Generated  and Sent to client.') , 'status');
   }
 }
 

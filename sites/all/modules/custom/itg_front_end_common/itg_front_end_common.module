@@ -202,7 +202,7 @@ return $output;
  * Implements May be recommend block content
  */
 function _may_be_recommend_block_content() {
-  $output = "<div class='may-be-recommend'><h3><span>".t('May be recommend')."</span></h3>
+  $output = "<div class='may-be-recommend'><h3><span>".t('May we recommend')."</span></h3>
         <script type='text/javascript'>
 window._taboola = window._taboola || [];
 _taboola.push({article:'auto'});

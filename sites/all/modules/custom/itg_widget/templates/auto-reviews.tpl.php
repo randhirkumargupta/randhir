@@ -6,6 +6,7 @@
         if (strtolower($node_data['type']) == 'videogallery') {
             $video_class = 'video-icon';
         }
+        
         ?>
         <li class="dont-miss-listing">
           <?php if (!empty($node_data['uri'])) { ?>
@@ -31,10 +32,10 @@
               <h4 title="<?php print $node_data['extra']; ?>" ><?php print $node_data['extra']; ?></h4>
             <?php endif; ?>
 
-            <?php if (!empty($node_data['title'])) : ?> 
+            <?php if (!empty($node_data['nid'])) : ?> 
               <a title="<?php print $node_data['title']; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                if(function_exists('itg_common_get_smiley_title')) {
+              <?php  if(function_exists('itg_common_get_smiley_title')) {
                   echo itg_common_get_smiley_title($node_data['nid'], 0, 100);
                 }
                 else {
