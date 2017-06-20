@@ -397,11 +397,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   }
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
-  foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
-    $term_load = taxonomy_term_load($playlist_term['tid']);
-    $playlist_name[] = $term_load->name;
-  }
-
+  
 // assign image in field after resize
   if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
     $image_url = $thumg_to_crop;
@@ -569,6 +565,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     $main_fids = array();
     $draft_msg_flag = 0;
     $video_desc = strip_tags($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']);
+    // start loop of videos field collection
     foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
 
       if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -578,8 +575,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         if (!empty($video_image)) {
           if ($video_image[0]->property == VIDEO_PROPERTY) {
             $private_status = $videofields['field_video_private']['und'][0]['value'];
-            // $video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
-            //$video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
+   
             $video_title = $videofields['field_video_title']['und'][0]['value'];
             $video_thumb_fid = $videofields['field_video_thumbnail']['und'][0]['fid'];
             if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
@@ -599,11 +595,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
                 ->execute();
             itg_videogallery_update_video_info_solr($file_video[0]->solr_video_id);
           }
-          // here delete node if exist in delete video.
-          $getnode = itg_videogallery_get_node_by_title($file_video[0]->solr_video_idF);
-          if (!empty($getnode)) {
-            node_delete($getnode[0]->nid);
-          }
+          
           // update nid in video
           $is_node_draft = 0;
           if ($form_state['node']->status == 0) {
