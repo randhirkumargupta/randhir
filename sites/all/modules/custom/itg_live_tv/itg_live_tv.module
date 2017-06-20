@@ -344,11 +344,11 @@ function itg_live_tv_page_video() {
     $flag = mobile_user_agent_switch();
     if ($flag) {
       $current_device = 'Web Mobile';
-      $field_name = 'field_ads_ad_code';
+      $field_name = 'field_ads_header_script';
     }
     else {
       $current_device = 'Web';
-      $field_name = 'field_ads_header_script';
+      $field_name = 'field_ads_ad_code';
     }
     $device = itg_live_tv_company($current_device);
     if (!empty($device[0])) {
