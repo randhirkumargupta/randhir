@@ -344,14 +344,16 @@ function itg_live_tv_page_video() {
     $flag = mobile_user_agent_switch();
     if ($flag) {
       $current_device = 'Web Mobile';
+      $field_name = 'field_ads_ad_code';
     }
     else {
       $current_device = 'Web';
+      $field_name = 'field_ads_header_script';
     }
     $device = itg_live_tv_company($current_device);
     if (!empty($device[0])) {
       $live_tv_get_details = node_load($device[0]);
-      $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+      $live_url = $live_tv_get_details->{$field_name}[LANGUAGE_NONE][0]['value'];
       if (filter_var($live_url, FILTER_VALIDATE_URL)) {
         if (is_bool(is_youtube_url($live_url))) {
           $output = '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_url . '"></iframe>';
