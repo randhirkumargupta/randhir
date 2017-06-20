@@ -43,7 +43,13 @@ function itg_fia_xml_node_feed($query) {
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
-    $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
+    
+    if (empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
+      $fb_instant_image = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
+    } else {
+      $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
+    }
+    
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
       $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
@@ -81,7 +87,6 @@ function itg_fia_xml_node_feed($query) {
         $load_fc = field_collection_item_load($fc_ids);
         $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
         $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
-        
         $query = db_select('field_data_field_gallery_image' , 'n');
         $query->leftJoin('field_data_field_api_image', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
         $query->fields('fdfi', array('field_api_image_fid'));
@@ -90,9 +95,11 @@ function itg_fia_xml_node_feed($query) {
         $get_fc = $result->fetchAll();
         $get_script = '';
         foreach ($get_fc as $get_fck => $get_fcv) {
-          $file = file_load($get_fcv->field_api_image_fid);
-          $imgs_path = file_create_url($file->uri);
-          $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
+          if (!empty($get_fcv->field_api_image_fid)) {
+            $file = file_load($get_fcv->field_api_image_fid);
+            $imgs_path = file_create_url($file->uri);
+            $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
+          }
         }
         $full_script_slider[$gall_position] = '<figure class="op-slideshow">' . $get_script . '</figure>';
       }

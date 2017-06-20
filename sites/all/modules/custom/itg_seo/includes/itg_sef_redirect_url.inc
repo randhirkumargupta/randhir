@@ -143,9 +143,9 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
-  elseif ($node->type == 'breaking_news') {
+  elseif ($node->type == 'breaking_news' && is_breaking_only($node)) {
     // Add node title.
-    $pathdata .= 'content/' . trim($node_sef);
+    $pathdata .= 'breakingnews/' . trim($node_sef);
     // Prepare SEO friendly node url
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;

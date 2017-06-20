@@ -1807,6 +1807,9 @@ input[type="file"], input[type="submit"], input[type="text"] {
   font: 400 14px/18px Roboto;
   color: #322323;
 }
+.question-container .answer-container iframe {
+  display: block;
+}
 
 .survey-form-wrapper-all .question-container {
   display: block;

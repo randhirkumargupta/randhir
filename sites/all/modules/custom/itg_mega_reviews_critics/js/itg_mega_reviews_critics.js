@@ -5,7 +5,7 @@
 
 (function ($) {
   Drupal.behaviors.mega_reviews_critics = {
-    attach: function (context) {
+    attach: function (context,settings) {
         var storyId = settings.itg_mega_reviews_critics.settings.storyid;
         // hide remove button of first field on add form
         if (storyId == 0) {

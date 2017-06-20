@@ -67,7 +67,7 @@ if (!empty($data['node_data'])) :
             $node_title = itg_common_get_smiley_title($data['node_data']->nid, 0, 100);
           }
           else {
-            $node_title = mb_strimwidth($data['node_data']->title, 0, 100, "..");
+            $node_title = mb_strimwidth($data['node_data']->title, 0, 110, "..");
           }
           // get developing story status
           if (function_exists('itg_msi_get_lock_story_status') && $data['node_data']->type == 'story') {

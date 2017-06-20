@@ -4593,8 +4593,7 @@ h1.category-heading{
 
 /*css start archive-story */
 .view-archive-story{
-    .view-content{        
-        @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
+    .view-content{
         ul{
             @extend .list-none;
         }        
@@ -6665,6 +6664,9 @@ section.sidebar{
     font-weight: 700;
     margin-bottom: 50px;
 }
+.event-registration-link{
+  line-height: 36px;
+}
 #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
@@ -7138,6 +7140,7 @@ section.sidebar{
         }
         .form-text, .form-textarea{
            width: 75%;
+           max-width: 489px;
         }
         .form-type-textarea > label + div{
             padding-left: 0 !important;
@@ -7205,8 +7208,7 @@ section.sidebar{
         border: none;
         font-family: roboto;
         font-size: 12px;
-        color: #707070;
-        padding-top: 25px;    
+        color: #707070;  
         ul{
             li{
                 margin-bottom: 10px;
@@ -11716,8 +11718,40 @@ span.close_btt {
     display: none;
   }
 }
-
-
+.past-speaker .views-field-title{
+  text-transform: uppercase;
+  padding: 10px 0 0;
+}
+.past-speaker .views-field-field-story-new-title{
+  font-size: 13px;
+  color: #8d8d8d;
+}
+.past-speaker .slick-list{
+  max-width: 620px;
+  margin: 0 auto;
+}
+.past-speaker .slick-arrow{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+.past-speaker .slick-arrow.fa-chevron-right{right: 0;}
+.past-speaker-list{ text-align: center;}
+.past-speaker a{display: block;}
+.past-speaker a img{border-radius: 50%; display: inline-block; vertical-align: top;}
+#block-views-past-speaker-event-block-1 .block-title{
+  font-size: 24px;
+  color: #ef3c24;
+  font-family: "Roboto Slab", sans-serif;
+  margin-bottom: 15px;
+}
+.logged-in .header-top .links.inline.clearfix{display: none;}
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,

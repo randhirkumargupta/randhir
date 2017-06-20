@@ -1088,10 +1088,19 @@ function field_collection_remove_submit($form, &$form_state) {
   $parents = $parent_element['#field_parents'];
 
   $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
-
+ 
+  // patch by kellton
+  // Use the actual array of field collection items as the upper limit of this
+  // for loop rather than 'item_count'. This is because it will be creating extra
+  // dummy items here and the two measures go out of sync after the fist delete.
+  
+  $field_collection_item_count = count($field_state['entity']) - 1;
+  
   // Go ahead and renumber everything from our delta to the last
   // item down one. This will overwrite the item being removed.
-  for ($i = $delta; $i <= $field_state['items_count']; $i++) {
+  //for ($i = $delta; $i <= $field_state['items_count']; $i++) {
+  for ($i = $delta; $i <= $field_collection_item_count; $i++) {
+   //end patch   
     $old_element_address = array_merge($address, array($i + 1));
     $new_element_address = array_merge($address, array($i));
 

@@ -327,7 +327,7 @@ function itg_front_search_views_pre_render(&$view) {
 
       $lnk_class = '';
 
-      if ($key == 'All' && empty($all_bundle)) {
+      if ($key == 'All' && !empty($all_bundle) && empty($arg[2])) {
         $lnk_class = "active";
       }
       if (in_array($key, $all_bundle)) {
@@ -362,14 +362,14 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
-    $bundle_name = array('Story' => 'STORIES', 'photogallery' => 'PHOTO', 'Video' => 'VIDEO');
+    $bundle_name = array('story' => 'STORIES', 'photogallery' => 'PHOTO', 'video' => 'VIDEO');
     $search_url = 'archives';
     $archive_search = '';
     $archive_url = '';
     $arch_class = '';
     foreach ($bundle_name as $key => $val) {
       $arch_class = '';
-      if (count($arg) == 1 && $key == 'Story') {
+      if (count($arg) == 1 && $key == 'story') {
         $arch_class = "active";
       }else if (count($arg) && in_array($key, $arg)) {
         $arch_class = "active";
@@ -455,7 +455,10 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
  * {@inheritdoc}
  */
 function itg_front_search_node_presave($node) {
-  
+    //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
   if ($node->type == 'videogallery' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     if (isset($node->field_story_reporter['und'])) {
       foreach ($node->field_story_reporter['und'] as $high) {

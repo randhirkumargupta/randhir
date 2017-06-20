@@ -6,13 +6,14 @@
  */
 function itg_sso_reg_multistep_form($form, &$form_state) {
   $arg = arg();
-  if(!empty($arg[1]) && $arg[1] == 'domain_info') {
+  $parse = parse_url(base64_decode($arg[1]));
+  $activate_link = base64_encode($parse['host']);
+  
+  if(!empty($arg[1])) {
     $appnd_to_lnk = '/'.$arg[1];
     $domain_arg = $arg[1];
   }
-  if(!empty($arg[1]) && $arg[1] != 'domain_info') {
-    $url_arg = $arg[1];
-  }
+  
 // If $form_state['step'] is not set, we set it to 1
   $form_state['step'] = isset($form_state['step']) ? $form_state['step'] : 1;
   global $user, $base_url;
@@ -24,14 +25,22 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js', array('scope' => 'footer'));
   
   $step_ext_div = '';
-  
+ 
   if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
-    $step_ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
-  }
+    $step_ext_div = '<div class="sign-in-link"><div class="left-block"><span>#</span>Either of Email ID or Mobile is mandatory</div><div class="rgt-block">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div></div>';
+    $form['#prefix'] = '<div id="itg_sso_reg_multistep_form"><div class="center-heading"><h2>Create your India Today account</h2></div><div class="social-share">
+    <a href="'.$base_url.'/saml_login/twitter'.$appnd_to_lnk.'" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+    <a href="'.$base_url.'/saml_login/facebook'.$appnd_to_lnk.'" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+    <div class="signup-txt"><span>Or signup using your Email/Mobile</span></div></div>';
+    $form['#suffix'] = $step_ext_div . '</div>';
+    
+  } else {
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
   $form['#suffix'] = $step_ext_div . '</div>';
+  }
+  
   $form['#attributes'] = array('autocomplete' => 'off');
 
   // Depending on which step of the form we are on, we output different form fields
@@ -61,12 +70,33 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => '',
         '#type' => 'hidden',
-        '#value' => $url_arg,
+        '#value' => $activate_link,
         '#attributes' => array('placeholder' => t('')),
         
       );
 
-      $form['fname'] = array(
+     
+
+      $form['mail'] = array(
+        '#title' => 'Email',
+        '#description' => '',
+        '#type' => 'textfield',
+        '#attributes' => array('placeholder' => t('#Email Id'), 'autocomplete' => 'off'),
+        '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
+        '#suffix' => '<div class="email-error"></div></div>',
+      );
+      
+      $form['mobile'] = array(
+        '#title' => 'Mobile',
+        '#description' => '',
+        '#maxlength' => 10,
+        '#type' => 'textfield',
+        '#attributes' => array('placeholder' => t('#Mobile'), 'autocomplete' => 'off'),
+        '#prefix' => '<div id="umobile" class="col-xs-6">',
+        '#suffix' => '<div class="mobile-error"></div></div></div>',
+      );
+      
+       $form['fname'] = array(
         '#title' => 'First Name',
         '#description' => '',
         '#type' => 'textfield',
@@ -83,25 +113,6 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#attributes' => array('placeholder' => t('Last Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="ulname" class="col-xs-6">',
         '#suffix' => '<span class="lname-msg error"></span></div></div>',
-      );
-
-      $form['mail'] = array(
-        '#title' => 'Email',
-        '#description' => '',
-        '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
-        '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
-        '#suffix' => '<div class="email-error"></div></div>',
-      );
-      
-      $form['mobile'] = array(
-        '#title' => 'Mobile',
-        '#description' => '',
-        '#maxlength' => 10,
-        '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('Mobile'), 'autocomplete' => 'off'),
-        '#prefix' => '<div id="umobile" class="col-xs-6">',
-        '#suffix' => '<div class="mobile-error"></div></div></div>',
       );
 
       $form['password'] = array(

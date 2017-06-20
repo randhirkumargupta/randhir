@@ -921,7 +921,8 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if (!empty($type1)) {
         $form['title']['#autocomplete_path'] = "node-list-for-year-end-category/title/$type/$type1/autocomplete";
         $form['nid']['#autocomplete_path'] = "node-list-for-year-end-category/nid/$type/$type1/autocomplete";
-      } else {
+      }
+      else {
         $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
         $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
       }
@@ -1044,29 +1045,29 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       );
       break;
     case 'views-exposed-form-report-filed-content-page':
-      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
-          ->distinct()
-          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
-      $options = $query_options->execute()->fetchAllKeyed();
-      //array_unshift($options , 'Any');
-      $options = array_merge(array("" => '- Any -'), $options);
-      $form['byline_names'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Byline',
-        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
-        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
-        '#size' => 60,
-        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
-      );
-      $form['byline_profile_type'] = array(
-        '#type' => 'select',
-        '#title' => 'Profile Type',
-        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
-        //'#options' => drupal_map_assoc($options) ,
-        '#options' => $options,
-      );
-      $form['#info']['filter-byline-names']['value'] = 'byline_names';
-      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
+//      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
+//          ->distinct()
+//          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
+//      $options = $query_options->execute()->fetchAllKeyed();
+//      //array_unshift($options , 'Any');
+//      $options = array_merge(array("" => '- Any -'), $options);
+//      $form['byline_names'] = array(
+//        '#type' => 'textfield',
+//        '#title' => 'Byline',
+//        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
+//        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
+//        '#size' => 60,
+//        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
+//      );
+//      $form['byline_profile_type'] = array(
+//        '#type' => 'select',
+//        '#title' => 'Profile Type',
+//        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
+//        //'#options' => drupal_map_assoc($options) ,
+//        '#options' => $options,
+//      );
+//      $form['#info']['filter-byline-names']['value'] = 'byline_names';
+//      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
       break;
   }
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
@@ -1242,6 +1243,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   global $user;
+  global $theme;
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
@@ -1377,20 +1379,20 @@ function itg_widget_views_query_alter(&$view, &$query) {
     // Remove feature and remix videos from most watch chunk.
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
-    if(!empty($feature_nid)) {
+    if (!empty($feature_nid)) {
       $query->add_where(0, 'node.nid', $feature_nid, '!=');
     }
-    if(!empty($remix_nid)) {
+    if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
   }
-  
+
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
     $most_viewed = views_get_view_result('so_sorry', 'most_watched');
-    foreach($most_viewed as $nids) {
+    foreach ($most_viewed as $nids) {
       $query->add_where(0, 'node.nid', $nids->nid, '!=');
     }
   }
@@ -1451,7 +1453,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 // Start alter for tech
   if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest')) {
-    global $theme;
+  
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1478,7 +1480,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display == 'budget_top_news' )) {
-    global $theme;
+    
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1496,7 +1498,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
   //  condition for election most popular
   if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
-    global $theme;
+    
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1513,7 +1515,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'most_popular' && ($view->current_display == 'key_candidate' )) {
-    global $theme;
+  
 
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
@@ -1532,7 +1534,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   if ($view->name == 'most_popular' && ($view->current_display == 'state_key_candidate' )) {
-    global $theme;
+
     if ($theme != 'seven') {
       $section = arg(1);
       $state = arg(2);
@@ -1544,7 +1546,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
-    global $theme;
+   
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
@@ -1560,7 +1562,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
-    global $theme;
+  
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
@@ -1577,7 +1579,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video')) {
-    global $theme;
+   
     if ($theme != 'seven') {
       if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
@@ -2253,7 +2255,7 @@ function itg_widget_block_view_alter(&$data, $block) {
     $story_category = isset($page_argument[0]->field_story_category['und']) ? $page_argument[0]->field_story_category['und'] : array();
     if (!empty($occupation)) {
       foreach ($occupation as $occupation_taxonomy) {
-        $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+        $flag_occupation[] = strtolower($occupation_taxonomy['taxonomy_term']->name);
       }
     }
     if (!empty($story_category)) {
@@ -2272,7 +2274,7 @@ function itg_widget_block_view_alter(&$data, $block) {
       $data['content'] = array();
     }
     else {
-      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
         return TRUE;
       }
       else {
