@@ -12,6 +12,12 @@
         <?php print render($form['field_syndication_feed_type']); ?>
     </div>
     <div class="variables-and-field-container">
+        <div class="xml-header-field">
+            <?php print render($form['field_syndication_header']); ?>
+        </div>
+        <div class="xml-footer-field">
+            <?php print render($form['field_syndication_footer']); ?>
+        </div>
         <div class="variables">
             <?php print render($form['pre_define_vars']); ?>
         </div>

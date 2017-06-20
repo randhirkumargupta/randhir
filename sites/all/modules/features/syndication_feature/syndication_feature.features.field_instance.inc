@@ -870,6 +870,92 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-syndication_feed_from_pattern-field_syndication_footer'.
+  $field_instances['node-syndication_feed_from_pattern-field_syndication_footer'] = array(
+    'bundle' => 'syndication_feed_from_pattern',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_footer',
+    'label' => 'Footer',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-syndication_feed_from_pattern-field_syndication_header'.
+  $field_instances['node-syndication_feed_from_pattern-field_syndication_header'] = array(
+    'bundle' => 'syndication_feed_from_pattern',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_syndication_header',
+    'label' => 'Header',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-syndication_feed_from_pattern-field_syndication_xml_formate'.
   $field_instances['node-syndication_feed_from_pattern-field_syndication_xml_formate'] = array(
     'bundle' => 'syndication_feed_from_pattern',
@@ -1010,6 +1096,8 @@ function syndication_feature_field_default_field_instances() {
   t('FTP Password');
   t('FTP URL');
   t('FTP Username');
+  t('Footer');
+  t('Header');
   t('Number of feeds');
   t('Select Client title');
   t('Select Content Type');
