@@ -152,7 +152,7 @@ else {
                 </div>
 
                 <?php
-                $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
+                $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
               }
 
 
@@ -243,7 +243,7 @@ else {
                 </div>
 
                 <?php
-                $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
+                $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
               }
               $description_slider.='</ul></div>';
               $newimageds.='</ul></div></div></div>';
