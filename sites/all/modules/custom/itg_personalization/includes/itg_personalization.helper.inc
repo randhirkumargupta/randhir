@@ -15,7 +15,7 @@
  *   Earned and next badge information.
  */
 function itg_personalization_badge($uid) {
-  $data = itg_loyalty_reward_user_details($uid);    
+  $data = itg_loyalty_reward_user_details($uid); 
   // Prepare array of all badge steps.
   $badge = array(
     variable_get('lrp_gold_star_one'),
@@ -29,7 +29,7 @@ function itg_personalization_badge($uid) {
   $flag = FALSE;  
   if ($data['total_earned_so_far'] > 0) {
     foreach ($badge as $key => $point) {
-      $flag = itg_personalization_badge_stage($badge, $key, $data['total_earned_so_far']);      
+      $flag = itg_personalization_badge_stage($badge, $key, $data['total_earned_so_far']);
       if ($flag && $key < 4) {        
         $earned_badge = $key + 1;
         $points_to_go = $badge[$key + 1] - $data['total_earned_so_far'];
@@ -60,7 +60,7 @@ function itg_personalization_badge($uid) {
     $progress_bar = 100;
   }  
   $data = array(
-    'total' => $data['total_earned_so_far'],
+    'total' => $data['total_earned_for_current_level'],
     'earn' => $earned_badge,
     'next' => $earned_badge != 5 ? $earned_badge + 1 : 0,
     'points_to_go' => $points_to_go,
