@@ -105,17 +105,21 @@ $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
               ?>
               <div class="iframe-video">
               <?php
-              $current_device = 'Web';
               if (function_exists('mobile_user_agent_switch')) {
                 $flag = mobile_user_agent_switch();
-                if ($flag) {
-                  $current_device = 'Web Mobile';
-                }
+              if ($flag) {
+                $current_device = 'Web Mobile';
+                $field_name = 'field_ads_header_script';
               }
+              else {
+                $current_device = 'Web';
+                $field_name = 'field_ads_ad_code';
+              }
+            }
               $device = itg_live_tv_company($current_device);
               if (!empty($device[0])) {
                 $live_tv_get_details = node_load($device[0]);
-                $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+                $live_url = $live_tv_get_details->{$field_name}[LANGUAGE_NONE][0]['value'];
                 if (filter_var($live_url, FILTER_VALIDATE_URL)) {
                    if (is_bool(is_youtube_url($live_url))) {
                         echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_url . '"></iframe>';
