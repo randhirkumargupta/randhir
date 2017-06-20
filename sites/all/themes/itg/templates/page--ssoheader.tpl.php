@@ -20,7 +20,7 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
 ?>
 <div class="sso-header">
     <div class="container">
-        <div class="sso-head-left"><a href="<?php print $shr; ?>">Back to india the today</a></div>
+        <div class="sso-head-left"><a href="<?php print $shr; ?>">Back to the india today</a></div>
         <div class="sso-head-right">
             <ul>
                 <li><img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="" /></li>
