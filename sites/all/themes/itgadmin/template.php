@@ -437,6 +437,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'itg-registered-user-section-wise-breakup'
     , 'embed'
     , 'itg-event-past-spekars'
+    , 'embeded-video'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {

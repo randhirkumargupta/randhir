@@ -10,6 +10,128 @@
 define('FTP_URL_VIDEO', variable_get('dailymotion_ftp_url'));
 
 /**
+ * Implements hook_menu().
+ * {@inheritdoc}
+ */
+function itg_videogallery_menu() {
+  $items['dailymotion/config'] = array(
+    'title' => 'Dailymotion Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_configuration_form'),
+    'access arguments' => array('authorized user dailymotion credin'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['dailymotion/ftp/config'] = array(
+    'title' => 'Ftp Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_ftp_video_form'),
+    'access arguments' => array('authorized user ftp credin'),
+    'file' => 'includes/itg_videogallery.inc',
+  );
+
+  $items['dailymotion/s3/config'] = array(
+    'title' => 'AWS S3 For Dailymotion Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_s3_video_form'),
+    'access arguments' => array('authorized user ftp credin'),
+    'file' => 'includes/itg_videogallery.inc',
+  );
+
+  $items['dailymotion-ftp-videos-post'] = array(
+    'page callback' => 'itg_videogallery_ajax_ftp_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dailymotion-video-time-filter'] = array(
+    'page callback' => 'itg_videogallery_ajax_time_filter_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['dailymotion-video-search-filter'] = array(
+    'page callback' => 'itg_videogallery_ajax_time_search_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dailymotion-ftp-template'] = array(
+    'page callback' => 'itg_videogallery_ftp_template',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dailymotion-img'] = array(
+    'page callback' => 'itg_videogallery_thumb_url',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dailymotion-image'] = array(
+    'page callback' => 'itg_videogallery_thumb_assign',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['embeded-video/%'] = array(
+    'page callback' => 'itg_videogallery_dm_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['solr-video-make-fid'] = array(
+    'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['dailymotion-bitrate'] = array(
+    'page callback' => 'itg_videogallery_video_bitrate',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+
+  $items['check-s3'] = array(
+    'page callback' => 'itg_videogallery_s3_file_to_dm',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['move-ftp'] = array(
+    'page callback' => 'itg_videogallery_move_ftp_videos',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['video-delete-parent'] = array(
+    'page callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+
+  $items['daily-motion-video-dashboard'] = array(
+    'title' => 'Daily Motion Video Dashboard',
+    'description' => 'Daily Motion Video Dashboard',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('daily_motion_video_dashboard'),
+    'access arguments' => array('access content'),
+      //'access arguments' => array('daily motion video dashboard perm')
+  );
+
+
+  $items['delete_daily_motion_video/%'] = array(
+    'title' => 'Daily Motion Video Dashboard Video Delete',
+    'description' => 'Daily Motion Video Dashboard Video Delete',
+    'page callback' => 'delete_daily_motion_video_callback',
+    'access arguments' => array('access content'),
+  );
+
+  $items['get-file-details'] = array(
+    'page callback' => 'itg_videogallery_get_file_details',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+
+  return $items;
+}
+
+/**
  * Implements hook_block_info()
  * {@inheritdoc}
  */
@@ -76,6 +198,11 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
     ),
     'itg_dailymotion_ftp_template' => array(
       'template' => 'itg-dailymotion-ftp-template',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_videogallery_dm_embed' => array(
+      'template' => 'itg-dailymotion-dm-embeded',
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -1209,124 +1336,6 @@ function itg_videogallery_configuration_form($form) {
 }
 
 /**
- * Implements hook_menu().
- * {@inheritdoc}
- */
-function itg_videogallery_menu() {
-  $items['dailymotion/config'] = array(
-    'title' => 'Dailymotion Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_videogallery_configuration_form'),
-    'access arguments' => array('authorized user dailymotion credin'),
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['dailymotion/ftp/config'] = array(
-    'title' => 'Ftp Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_videogallery_ftp_video_form'),
-    'access arguments' => array('authorized user ftp credin'),
-    'file' => 'includes/itg_videogallery.inc',
-  );
-
-  $items['dailymotion/s3/config'] = array(
-    'title' => 'AWS S3 For Dailymotion Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_videogallery_s3_video_form'),
-    'access arguments' => array('authorized user ftp credin'),
-    'file' => 'includes/itg_videogallery.inc',
-  );
-
-  $items['dailymotion-ftp-videos-post'] = array(
-    'page callback' => 'itg_videogallery_ajax_ftp_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['dailymotion-video-time-filter'] = array(
-    'page callback' => 'itg_videogallery_ajax_time_filter_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['dailymotion-video-search-filter'] = array(
-    'page callback' => 'itg_videogallery_ajax_time_search_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['dailymotion-ftp-template'] = array(
-    'page callback' => 'itg_videogallery_ftp_template',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['dailymotion-img'] = array(
-    'page callback' => 'itg_videogallery_thumb_url',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['dailymotion-image'] = array(
-    'page callback' => 'itg_videogallery_thumb_assign',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['solr-video-make-fid'] = array(
-    'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['dailymotion-bitrate'] = array(
-    'page callback' => 'itg_videogallery_video_bitrate',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-
-  $items['check-s3'] = array(
-    'page callback' => 'itg_videogallery_s3_file_to_dm',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  $items['move-ftp'] = array(
-    'page callback' => 'itg_videogallery_move_ftp_videos',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['video-delete-parent'] = array(
-    'page callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-
-  $items['daily-motion-video-dashboard'] = array(
-    'title' => 'Daily Motion Video Dashboard',
-    'description' => 'Daily Motion Video Dashboard',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('daily_motion_video_dashboard'),
-    'access arguments' => array('access content'),
-      //'access arguments' => array('daily motion video dashboard perm')
-  );
-
-
-  $items['delete_daily_motion_video/%'] = array(
-    'title' => 'Daily Motion Video Dashboard Video Delete',
-    'description' => 'Daily Motion Video Dashboard Video Delete',
-    'page callback' => 'delete_daily_motion_video_callback',
-    'access arguments' => array('access content'),
-  );
-
-  $items['get-file-details'] = array(
-    'page callback' => 'itg_videogallery_get_file_details',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-
-  return $items;
-}
-
-/**
  * This function use for remove video iframe form story body
  */
 function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
@@ -1970,7 +1979,7 @@ function itg_videogallery_permission() {
  */
 function itg_videogallery_get_file_details() {
   $getids = $_POST['checkvalue'];
-
+  global $base_url;
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
@@ -1986,9 +1995,18 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_id . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
   }
   exit($responce);
+}
+
+/**
+ * This function use for get file daily motion file details.
+ */
+function itg_videogallery_dm_embed() {
+  $video_id = arg(1);
+
+  return theme('itg_videogallery_dm_embed', array('video_id' => $video_id));
 }
 
 /**
