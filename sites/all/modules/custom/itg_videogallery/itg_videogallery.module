@@ -397,11 +397,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   }
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
-  foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
-    $term_load = taxonomy_term_load($playlist_term['tid']);
-    $playlist_name[] = $term_load->name;
-  }
-
+  
 // assign image in field after resize
   if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
     $image_url = $thumg_to_crop;
@@ -569,6 +565,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     $main_fids = array();
     $draft_msg_flag = 0;
     $video_desc = strip_tags($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']);
+    // start loop of videos field collection
     foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
 
       if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -578,8 +575,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         if (!empty($video_image)) {
           if ($video_image[0]->property == VIDEO_PROPERTY) {
             $private_status = $videofields['field_video_private']['und'][0]['value'];
-            // $video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
-            //$video_desc = $videofields['field_videogallery_description']['und'][0]['value'];
+   
             $video_title = $videofields['field_video_title']['und'][0]['value'];
             $video_thumb_fid = $videofields['field_video_thumbnail']['und'][0]['fid'];
             if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
@@ -599,11 +595,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
                 ->execute();
             itg_videogallery_update_video_info_solr($file_video[0]->solr_video_id);
           }
-          // here delete node if exist in delete video.
-          $getnode = itg_videogallery_get_node_by_title($file_video[0]->solr_video_idF);
-          if (!empty($getnode)) {
-            node_delete($getnode[0]->nid);
-          }
+          
           // update nid in video
           $is_node_draft = 0;
           if ($form_state['node']->status == 0) {
@@ -1348,13 +1340,16 @@ function itg_videogallery_configuration_form($form) {
  * This function use for remove video iframe form story body
  */
 function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
+  global $base_url;
   preg_match_all('/src="([^"]+)"/', $story_body, $match);
   $video_url = $match[1];
   if (!empty($video_url)) {
 
     foreach ($video_url as $video_value) {
 
-      $post_check = strpos($video_value, 'www.dailymotion.com/embed/video/');
+      $post_check = strpos($video_value, $base_url . '/embeded-video/');
+      $post_video_node = strpos($video_value, $base_url . '/embed-video/');
+
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
@@ -1363,6 +1358,19 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
           drupal_add_js('jQuery(document).ready(function() {                  
             jQuery("#video_frame_' . $vid_id[0] . '").remove();
           });', array('type' => 'inline', 'scope' => 'footer'));
+        }
+      }
+      if ($post_video_node !== FALSE) {
+        $vid_id = end(explode('/', $video_value));
+        $node_id = base64_decode($vid_id);
+        $node_data = itg_videogallery_get_node_status($node_id);
+        if ($node_data) {
+          $check_video = itg_videogallery_check_video_url($vid_id[0]);
+          if (!$check_video) {
+            drupal_add_js('jQuery(document).ready(function() {                  
+            jQuery(".video_node_' . $vid_id . '").remove();
+          });', array('type' => 'inline', 'scope' => 'footer'));
+          }
         }
       }
     }
@@ -2006,7 +2014,7 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe frameborder="0" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
   }
   exit($responce);
 }
@@ -2837,12 +2845,13 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
   $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');
   $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
-  $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
+ // $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
+   $query->leftJoin('field_data_field_video_title', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
   $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
   $query->fields('isvi', array('fid', 'solr_video_id', 'solr_video_thumb', 'video_embedded_url'));
   $query->fields('up_video', array('entity_id'));
   $query->fields('ads_inc', array('field_include_ads_value'));
-  $query->fields('desc_inc', array('field_videogallery_description_value'));
+  $query->fields('desc_inc', array('field_video_title_value'));
   $query->condition('up_video.entity_id', $nid);
   $query->orderBy('field_video_upload_value', 'ASC');
   $result = $query->execute()->fetchAll();
