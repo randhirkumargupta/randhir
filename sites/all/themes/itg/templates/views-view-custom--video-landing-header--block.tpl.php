@@ -293,7 +293,7 @@ else {
               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                 <div class="show-embed-code-div">
                   <div class="copy-sample-code">
-                    <textarea readonly><iframe src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                    <textarea readonly><iframe class="video_node_<?php echo $argum;?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                   </div>
                 </div>
               </li>
@@ -367,7 +367,7 @@ else {
                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                      <textarea readonly><iframe src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                      <textarea readonly><iframe class="video_node_<?php echo $argum;?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                     </div>
                   </div>
                 </li>

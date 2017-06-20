@@ -1348,13 +1348,16 @@ function itg_videogallery_configuration_form($form) {
  * This function use for remove video iframe form story body
  */
 function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
+  global $base_url;
   preg_match_all('/src="([^"]+)"/', $story_body, $match);
   $video_url = $match[1];
   if (!empty($video_url)) {
 
     foreach ($video_url as $video_value) {
 
-      $post_check = strpos($video_value, 'www.dailymotion.com/embed/video/');
+      $post_check = strpos($video_value, $base_url . '/embeded-video/');
+      $post_video_node = strpos($video_value, $base_url . '/embed-video/');
+
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
@@ -1363,6 +1366,19 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
           drupal_add_js('jQuery(document).ready(function() {                  
             jQuery("#video_frame_' . $vid_id[0] . '").remove();
           });', array('type' => 'inline', 'scope' => 'footer'));
+        }
+      }
+      if ($post_video_node !== FALSE) {
+        $vid_id = end(explode('/', $video_value));
+        $node_id = base64_decode($vid_id);
+        $node_data = itg_videogallery_get_node_status($node_id);
+        if ($node_data) {
+          $check_video = itg_videogallery_check_video_url($vid_id[0]);
+          if (!$check_video) {
+            drupal_add_js('jQuery(document).ready(function() {                  
+            jQuery(".video_node_' . $vid_id . '").remove();
+          });', array('type' => 'inline', 'scope' => 'footer'));
+          }
         }
       }
     }
@@ -2006,7 +2022,7 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe frameborder="0" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
   }
   exit($responce);
 }

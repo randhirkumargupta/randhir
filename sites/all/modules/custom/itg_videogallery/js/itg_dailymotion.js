@@ -125,7 +125,19 @@
         } else {
           jQuery('#loader-data img').show().parent().addClass('loader_overlay');
           //var base_url = Drupal.settings.basePath;
-          var base_url = Drupal.settings.baseUrl.baseUrl;
+      var base_url = Drupal.settings.baseUrl.baseUrl;
+
+          jQuery.ajax({
+            url: base_url + '/solr-video-make-fid',
+            type: 'post',
+            data: {'checkvalue': selected_check_boxes_values},
+            success: function(data) {
+             
+
+            }
+
+          });
+         
           jQuery.ajax({
             url: base_url + '/get-file-details',
             type: 'post',
