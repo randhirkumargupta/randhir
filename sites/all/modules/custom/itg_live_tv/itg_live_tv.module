@@ -288,10 +288,10 @@ function itg_live_tv_company($device) {
  * Helper function to get live tv code
  * @param int $nid
  */
-function itg_get_live_tv_code($nid) {
+function itg_get_live_tv_code($nid, $field = 'field_ads_ad_code') {
   if (!empty($nid)) {
-    $query = db_select('field_data_field_ads_ad_code', 's');
-    $query->fields('s', array('field_ads_ad_code_value'))
+    $query = db_select('field_data_'.$field, 's');
+    $query->fields('s', array($field.'_value'))
         ->condition('s.entity_id', $nid, '=');
     $query->range(0, 1);
     $result = $query->execute();
