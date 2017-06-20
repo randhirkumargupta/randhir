@@ -624,7 +624,8 @@ function itg_workflow_node_presave($node) {
                 }
                 $is_draft = 1;
 
-                if ($node_id) {
+                if ($node_id) {  
+                  drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
                   // use for upload local video to DM
                   itg_videogallery_send_local_video_to_dailymotion($real_path, $file_details, $video_fid, $tags_value, $node_id, 'is_draft', $priv_status);
                 }
