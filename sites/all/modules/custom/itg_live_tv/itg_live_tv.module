@@ -269,7 +269,7 @@ function itg_live_tv_details() {
 
 /**
  * Implements itg_live_tv_company
- * @param string $device
+ * @param string $$current_device = 'Web';device
  * @return array
  */
 function itg_live_tv_company($device) {
