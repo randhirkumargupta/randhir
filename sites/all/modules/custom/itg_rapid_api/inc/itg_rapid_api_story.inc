@@ -80,6 +80,10 @@ function generateStoryDeatilList($id) {
   $rating = getRating($node);
   $caption = getImgCaption($large_image_fid);
   $story_tech = getStoryTechs($node);
+  $listicle_data = buildListicleNode($node);
+  $factoid_data = buildFactoidNode($node);
+  $buzz_data = buildBuzzNode($node);
+  $expertchunk_data = buildExpertchunkNode($node);
   // custom function for get img byline
   $byline = getImgByline($large_image_fid);
   $published_stamp = $node->workbench_moderation['published']->stamp;
@@ -112,7 +116,11 @@ function generateStoryDeatilList($id) {
   $data_array['desc_withhtml'] = "$body_with_html";
   $data_array['tag'] = $tag;
   $data_array['highlight'] = $heighligth;
+  $data_array['listicle_data'] = $listicle_data;
+  $data_array['factoid_data'] = $factoid_data;
+  $data_array['buzz_data'] = $buzz_data;
   $data_array['technology'] = $story_tech;
+  $data_array['expert_chunk'] = $expertchunk_data;
   $data_array['author'] = $author;
   $data_array['rating'] = $rating;
 
@@ -277,4 +285,120 @@ function getStoryTechs($node) {
       $listcont++;
   }
   return $storytech;
+}
+
+/**
+ * function for get build listicle node
+ * @pram $node
+ *
+ * @return array
+ */
+
+function buildListicleNode($node){
+    $listiclenode = array();
+    $listcont = 0;
+    
+    //get listcle temp
+    $field_story_templates = $node->field_story_templates['und'][0]['value'];
+    // get title
+    $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
+    $listiclenode['templates'] = $field_story_templates;
+    $listiclenode['title'] = $field_story_template_guru;
+    //listicle loop data
+    $field_story_listicle = $node->field_story_listicle['und'];
+    
+    foreach ($field_story_listicle as $key => $value) {
+        $collection_id = $value['value'];
+        $load_collection = field_collection_item_load($collection_id);
+        $color = $load_collection->field_listicle_color['und'][0]['value'];
+        $type = $load_collection->field_story_listicle_type['und'][0]['value'];
+        $description = $load_collection->field_story_listicle_description['und'][0]['value'];
+        // loop data
+        $listiclenode['data'][$listcont]['description'] = $description;
+        $listiclenode['data'][$listcont]['type'] = $type;
+        $listiclenode['data'][$listcont]['color'] = $color;
+        $listcont++;
+    }
+    return $listiclenode;
+}
+
+/**
+ * function for get build factoid node
+ * @pram $node
+ *
+ * @return array
+ */
+
+function buildFactoidNode($node){
+    
+    $factoidnode = array();
+    $listcont = 0;
+    // get title
+    $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
+    $factoidnode['title'] = $field_story_factoids_title;
+    // loop data - field_story_template_factoids
+    $field_story_template_factoids = $node->field_story_template_factoids['und'];
+    foreach ($field_story_template_factoids as $key => $value) {
+        $factoids = $value['value'];
+        $factoidnode['data'][$listcont]['Factoids'] = $factoids;
+        $listcont++;
+    }
+    return $factoidnode;
+}
+
+/**
+ * function for get build buzz node
+ * @pram $node
+ *
+ * @return array
+ */
+
+function buildBuzzNode($node){
+    
+    $buzznode = array();
+    $listcont= 0;
+    // loop data
+    $field_story_template_buzz = $node->field_story_template_buzz['und'];
+    foreach ($field_story_template_buzz as $key => $value) {
+        $collection_id = $value['value'];
+        $load_collection = field_collection_item_load($collection_id); 
+        // collection data
+        $headLine = $load_collection->field_buzz_headline['und'][0]['value'];
+        $img_fid = $load_collection->field_buzz_image['und'][0]['fid'];
+        $img_url = completeFilePath($img_fid);
+        $description = $load_collection->field_buzz_description['und'][0]['value'];
+        
+        $buzznode[$listcont]['headLine'] = $headLine;
+        $buzznode[$listcont]['img'] = $img_url;
+        $buzznode[$listcont]['description'] = $description;
+        $listcont++;
+    }
+    
+    return $buzznode;
+    
+}
+
+/**
+ * function for get build buzz node
+ * @pram $node
+ *
+ * @return array
+ */
+
+function buildExpertchunkNode($node){   
+    $expert_chunk = array();
+    // get data
+    $field_story_expert_description = $node->field_story_expert_description['und'][0]['value'];
+    $field_story_expert_image_fid = $node->field_story_expert_image['und'][0]['fid'];
+    $field_story_expert_name = $node->field_story_expert_name['und'][0]['value'];
+    $field_story_expertise = $node->field_story_expertise['und'][0]['value'];
+    $img_url = completeFilePath($field_story_expert_image_fid);   
+    
+    $expert_chunk['name'] = $field_story_expert_name;
+    $expert_chunk['image'] = $img_url;
+    $expert_chunk['expertise'] = $field_story_expertise;
+    $expert_chunk['description'] = $field_story_expert_description;
+    
+    return $expert_chunk;
+    
 }
