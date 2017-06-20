@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * Inc file contains the functions
  */
 
@@ -60,7 +61,7 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'xml', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -126,7 +127,7 @@ function itg_mobile_services_generate_rss($node, $service_title, $field_header =
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'rss', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -192,7 +193,7 @@ function itg_mobile_services_generate_mrss($node, $service_title, $field_header 
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -257,7 +258,7 @@ function itg_mobile_services_generate_sms($node, $service_title, $field_header =
   $xml .= "</rss>";
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -323,7 +324,7 @@ function itg_mobile_services_generate_feed($node, $service_title, $field_header 
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'text_feed', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -388,7 +389,7 @@ function itg_mobile_services_generate_ussd($node, $service_title, $field_header 
   $xml .= "</rss>";
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'ussd', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -453,7 +454,7 @@ function itg_mobile_services_generate_astro_mrss($node, $service_title, $field_h
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'mrss', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -516,7 +517,7 @@ function itg_mobile_services_generate_astro_sms($node, $service_title, $field_he
 
   $feed_dir = "public://";
   $full_file_path = generate_file_name($node, $service_title, 'sms', 'xml');
-  itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path);
+  itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
   return $full_file_path;
 }
 
@@ -538,13 +539,13 @@ function generate_file_name($node, $service_title, $feeds_type, $ext) {
 
   $file_name = '/' . $service_title . '.' . $ext;
   $feed_dir = "public://mobile/";
-  
+
   if (!file_exists($feed_dir)) {
     drupal_mkdir($feed_dir, 0777, TRUE);
   }
-  
+
   //$full_file_path =  'public://mobile/' . $service_title . '/' . $feeds_type . $file_name;
-  $files_path =  'public://mobile/' . $service_title . '/' . $feeds_type;
+  $files_path = 'public://mobile/' . $service_title . '/' . $feeds_type;
   if (!file_exists($files_path)) {
     drupal_mkdir($files_path, 0777, TRUE);
   }
@@ -605,7 +606,7 @@ function get_required_data_field_get_items_mobile($field_collect, $astro) {
         $service_content_date_arr = explode(' ', $service_content_date);
         $required_value[$key]['field_service_content_date'] = date('r', strtotime($service_content_date_arr[0]));
       }
- 
+
       $required_value[$key]['field_client_short_description'] = isset($field_collection_item[$val['value']]->field_client_short_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_client_short_description[LANGUAGE_NONE][0]['value'] : '';
       $required_value[$key]['field_story_expert_description'] = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $service_content_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
@@ -642,7 +643,7 @@ function get_required_data_field_get_items_mobile($field_collect, $astro) {
         $video_url = file_create_url($video_file->uri);
         $required_value[$key]['field_service_video'] = $video_url;
         $required_value[$key]['field_service_video_description'] = $service_content_video_desc;
-        $required_value[$key]['field_service_video_keyword'] = $service_content_video_keyword;       
+        $required_value[$key]['field_service_video_keyword'] = $service_content_video_keyword;
       }
 
       // astro
@@ -669,14 +670,20 @@ function get_vars_from_mobile_feed_pattern($text) {
   return $matches;
 }
 
+/**
+ * create and replace xml for feeds.
+ * @param object $node
+ * @param string $xml
+ * @param string $feed_dir
+ * @param string $full_file_path
+ */
+function itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path) {
 
-function itg_mobile_services_save_files($node, $xml, $feed_dir , $full_file_path) {
- 
   $frequency_date_array = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
   $today_date = date('Y-m-d');
-  
+
   if ($frequency_date_array[0] <= $today_date) {
     file_save_data($xml, $feed_dir . $full_file_path, FILE_EXISTS_REPLACE);
     drupal_set_message(t('Your xml has been generated'));
-  } 
+  }
 }
