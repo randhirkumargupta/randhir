@@ -5752,6 +5752,22 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   margin-right: 5px;
 }
 
+.page-signup .parent-background, .page-user .parent-background {
+  background: #fbfbfb;
+  margin: 0 auto;
+  max-width: 800px;
+  overflow: hidden;
+  padding: 30px;
+}
+.page-signup .parent-background .signup-txt span, .page-signup .parent-background .sign-border span, .page-user .parent-background .signup-txt span, .page-user .parent-background .sign-border span {
+  background-color: #fbfbfb;
+}
+.page-signup .parent-background .social-share, .page-user .parent-background .social-share {
+  width: auto;
+  margin: 0;
+  text-align: center;
+}
+
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
     display: inline-block !important;

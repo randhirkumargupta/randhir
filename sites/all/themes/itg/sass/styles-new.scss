@@ -5337,7 +5337,25 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
+  .page-signup, .page-user{
+    .parent-background{
+      background: #fbfbfb;
+      margin: 0 auto;
+      max-width: 800px;
+      overflow: hidden;
+      padding: 30px;
+      .signup-txt, .sign-border{
+        span{
+          background-color: #fbfbfb;
+        }
+      }
+      .social-share{
+        width: auto;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
   
 
 
