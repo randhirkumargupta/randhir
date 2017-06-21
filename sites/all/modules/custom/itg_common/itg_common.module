@@ -76,6 +76,7 @@ function itg_common_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
 
   $items['funalytics-popup'] = array(
     'page callback' => 'itg_funalytics_popup',

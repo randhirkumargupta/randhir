@@ -288,10 +288,10 @@ function itg_live_tv_company($device) {
  * Helper function to get live tv code
  * @param int $nid
  */
-function itg_get_live_tv_code($nid) {
+function itg_get_live_tv_code($nid, $field = 'field_ads_ad_code') {
   if (!empty($nid)) {
-    $query = db_select('field_data_field_ads_ad_code', 's');
-    $query->fields('s', array('field_ads_ad_code_value'))
+    $query = db_select('field_data_'.$field, 's');
+    $query->fields('s', array($field.'_value'))
         ->condition('s.entity_id', $nid, '=');
     $query->range(0, 1);
     $result = $query->execute();
@@ -344,14 +344,16 @@ function itg_live_tv_page_video() {
     $flag = mobile_user_agent_switch();
     if ($flag) {
       $current_device = 'Web Mobile';
+      $field_name = 'field_ads_header_script';
     }
     else {
       $current_device = 'Web';
+      $field_name = 'field_ads_ad_code';
     }
     $device = itg_live_tv_company($current_device);
     if (!empty($device[0])) {
       $live_tv_get_details = node_load($device[0]);
-      $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+      $live_url = $live_tv_get_details->{$field_name}[LANGUAGE_NONE][0]['value'];
       if (filter_var($live_url, FILTER_VALIDATE_URL)) {
         if (is_bool(is_youtube_url($live_url))) {
           $output = '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_url . '"></iframe>';

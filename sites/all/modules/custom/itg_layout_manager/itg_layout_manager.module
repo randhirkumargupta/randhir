@@ -543,6 +543,7 @@ function itg_layout_manager_block_view($delta = '') {
       } else {
           $array_url = array(
               'livetv' => 'Live TV',
+              'funalytics' => 'Funalytics',
               'itg_active_polls' => 'Poll',
               'anchors-list' => 'Anchors',
               'blog' => 'Blog',
