@@ -31,11 +31,11 @@ $related_data = itg_get_related_story_content($row->entity_id);
     $front_url = $related_data->url;
   }
 }
-if(!empty($related_data->sm_field_magazine_small_url[0]) && $related_data->bundle == 'magazine') {
+if(!empty($related_data->sm_field_magazine_small_url[0]) && $related_data->bundle == 'magazine' && getimagesize($related_data->sm_field_magazine_small_url[0]) !== false) {
 ?>
 <a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px; height: 127px" src="<?php print $related_data->sm_field_magazine_small_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>
 <?php
-} else if(!empty($related_data->sm_field_custom_story_small_large_url[0])) {
+} else if(!empty($related_data->sm_field_custom_story_small_large_url[0]) && getimagesize($related_data->sm_field_custom_story_small_large_url[0]) !== false) {
  ?> 
   
 <a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px; height: 127px" src="<?php print $related_data->sm_field_custom_story_small_large_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>  
