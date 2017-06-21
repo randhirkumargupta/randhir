@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * Inc file contains the functions
  */
 
@@ -12,6 +13,7 @@
 function itg_mobile_services_feed_generator_of_contents($node) {
   // get service id  
   $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+
   // get astro exist
   $astro = itg_mobile_services_check_astro_service($association_nid);
 
@@ -30,6 +32,23 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   $get_clients_id = get_clients_id($association_nid);
   // client ids
   $client_id_array = $get_clients_id['target_id'];
+
+  foreach ($client_id_array as $client_id) {
+    if ($multi_client_id) {
+      $separator = ",";
+    }
+    $multi_client_id .= $separator . $client_id;
+  }
+
+  $error = FALSE;
+
+  $exists_nid = db_query('SELECT node_id FROM {itg_mobile_vas_url} WHERE client_id IN (:client_id) AND service_id = :service_id', array(':client_id' => array($multi_client_id), ':service_id' => $association_nid))->fetchField();
+  if ($node->nid < $exists_nid) {
+    drupal_set_message(t('Feed has not be generated. You have already created new content for this service.'), 'error');
+    $error = TRUE;
+  }
+
+
   // service association id
   $service_association_id = $get_clients_id['service_association_id'];
   $service_association_info = node_load($service_association_id);
@@ -42,7 +61,6 @@ function itg_mobile_services_feed_generator_of_contents($node) {
 
   // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services.feed_generate');
-  $error = FALSE;
   $validate_content = validate_content_count($node->nid);
 
   if (isset($validate_content)) {
@@ -118,10 +136,10 @@ function itg_mobile_services_feed_generator_of_contents($node) {
           case '1':
             $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
             if ($frequency_date_array[0] <= $today_date) {
-              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 1);
+              itg_mobile_client_with_servives_web_url($node->nid, $association_nid, $client_id, $service_fetch_link, $file_path, 1);
             }
             else {
-              itg_mobile_web_url_mobile($service_fetch_link, $file_path, 0);
+              itg_mobile_client_with_servives_web_url($node->nid, $association_nid, $client_id, $service_fetch_link, $file_path, 0);
             }
 
             break;
@@ -148,10 +166,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
       }
     }
 
-    if ($frequency_date_array[0] <= $today_date) {
-      itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 1);
-    }
-    else {
+    if ($frequency_date_array[0] > $today_date) {
       itg_mobile_cron_after_feed_generate($node, $client_array, $content_count, $file_path, 0);
     }
   }
@@ -169,19 +184,19 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $service_email_address,
-    'from' => 'noreply@indiatoday.com',
-    'subject' => 'Test email',
-    'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    //'from' => 'noreply@indiatoday.com',
+    'subject' => 'VAS feed',
+    'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $service_email_address . "\r\n",
-      'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      //'From: India Today <noreply@indiatoday.com>' . "\r\n",
     ),
   );
   $language = language_default();
-  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
 }
 
 /**
@@ -326,7 +341,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
       $query = db_insert('itg_cron_time_scheduler');
       $query->fields(array(
         'content_id' => $node->nid,
-        'fid' => $node->nid,
+        'fid' => $association_nid,
         'cron_type' => $node->type,
         'last_cron_time' => $scheduler_time,
         'scheduler_time' => $scheduler_time,
@@ -337,6 +352,12 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
     }
   }
   else {
+
+    db_delete('itg_cron_time_scheduler')
+        ->condition('cron_type', 'vas_service_content', '=')
+        ->condition('fid', $association_nid, '=')
+        ->execute();
+
     $details_array = array('service_id' => $association_nid,
       'frequency' => $frequency,
       'feed_type' => $node->type,
@@ -350,7 +371,7 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
     $query = db_insert('itg_cron_time_scheduler');
     $query->fields(array(
       'content_id' => $node->nid,
-      'fid' => $node->nid,
+      'fid' => $association_nid,
       'cron_type' => $node->type,
       'last_cron_time' => $scheduler_time,
       'scheduler_time' => $scheduler_time,
@@ -362,23 +383,42 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
 }
 
 /**
- * function to feed for syndication by ftp.
+ * Manage feeds url.
+ * @param int $nid
+ * @param int $association_nid
+ * @param int $client_id
  * @param string $service_fetch_link
  * @param string $file_path
  * @param int $status
  */
-function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
-  $timestamp = date("Y-m-d H:i:s");
-  $query = db_insert('itg_syndication_feed_url');
-  $query->fields(array(
-    'xml_name' => $file_path,
-    'client_feed_url' => $service_fetch_link,
-    'created_date' => $timestamp,
-    'status' => $status
-  ));
-  $query->execute();
-}
+function itg_mobile_client_with_servives_web_url($nid, $association_nid, $client_id, $service_fetch_link, $file_path, $status) {
 
+  $exists = db_query('SELECT 1 FROM {itg_mobile_vas_url} WHERE client_id = :client_id AND service_id = :service_id', array(':client_id' => $client_id, ':service_id' => $association_nid))->fetchField();
+
+  if ($exists == FALSE) { // returns TRUE is there is a record.
+    $timestamp = date("Y-m-d H:i:s");
+    $query = db_insert('itg_mobile_vas_url');
+    $query->fields(array(
+      'service_id' => $association_nid,
+      'node_id' => $nid,
+      'client_id' => $client_id,
+      'feeds_url' => $service_fetch_link,
+      'clients_feed_url' => $file_path,
+      'status' => $status,
+      'created_date' => $timestamp
+    ));
+    $query->execute();
+  }
+  else {
+    db_update('itg_mobile_vas_url')
+        ->fields(array(
+          'node_id' => $nid,
+          'clients_feed_url' => $file_path
+        ))
+        ->condition('service_id', $association_nid)
+        ->execute();
+  }
+}
 
 /**
  * function for show list of feed by url
@@ -387,9 +427,9 @@ function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
 function itg_mobile_get_feed_byurl() {
   global $base_url;
   $build = array();
-  $request_url = explode('/', $_SERVER['REQUEST_URI']);
+  $request_url = explode('/', request_uri());
   unset($request_url[0]);
-  
+
   $url = $base_url . '/' . $request_url[1] . '/' . $request_url[2] . '/' . $request_url[3];
   $path = file_create_url('public://');
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
@@ -499,7 +539,7 @@ function itg_mobile_services_search_form($form, &$form_state) {
     '#value' => t('Submit'),
   );
 
-  $request_url = explode('/', $_SERVER['REQUEST_URI']);
+  $request_url = explode('/', request_uri());
   unset($request_url[0]);
   unset($request_url[1]);
   $url = $base_url . '/' . $request_url[2] . '/' . $request_url[3] . '/' . $request_url[4];
@@ -513,8 +553,6 @@ function itg_mobile_services_search_form($form, &$form_state) {
     '#weight' => 9,
     '#value' => t('Reset')
   );
-
-
   return $form;
 }
 
@@ -535,7 +573,7 @@ function itg_mobile_services_cron() {
   $query = db_select('itg_cron_time_scheduler', 's');
   $query->fields('s', array('content_id', 'cron_details', 'scheduler_time'));
   $query->condition('s.cron_type', 'vas_service_content', '=');
-  $query->condition('s.status', 0, '=');
+  //$query->condition('s.status', 0, '=');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
@@ -550,9 +588,16 @@ function itg_mobile_services_cron() {
     $client_id_array = $get_clients_id['target_id'];
     $today_date = strtotime("now");
 
+    //////////////////////////////////
     if ($scheduler_time <= $today_date) {
+
+      itg_mobile_services_feed_generator_of_contents($node);
+
       $data = unserialize($cron_details);
       $file_path = $data['file_path'];
+
+      // create files
+      itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path);
 
       db_update('itg_cron_time_scheduler')
           ->fields(array(
@@ -570,12 +615,13 @@ function itg_mobile_services_cron() {
             case '1':
               $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
 
-              db_update('itg_syndication_feed_url')
+              db_update('itg_mobile_vas_url')
                   ->fields(array(
                     'status' => 1
                   ))
-                  ->condition('client_feed_url', $service_fetch_link)
+                  ->condition('clients_feed_url', $service_fetch_link)
                   ->execute();
+
               break;
             case 2: // 2. Via FTP location
               $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';
@@ -594,4 +640,36 @@ function itg_mobile_services_cron() {
     }
   }
   return TRUE;
+}
+
+/**
+ * Render xml at the URL.
+ * @global type $base_url
+ * @return string
+ */
+function itg_mobile_print_feeds() {
+  global $base_url;
+  $arg = arg();
+  $cnt = count($arg) - 2;
+  $last = count($arg) - 1;
+  $service_id = $arg[$cnt];
+  $filext = $arg[$last];
+  $ext = pathinfo($filext, PATHINFO_EXTENSION);
+
+  if ($ext != 'xml' && $ext != 'rss' && $ext != 'mrss') {
+    return "Wrong file Name.";
+  }
+  $query = db_select('itg_mobile_vas_url', 'v');
+  $query->condition('v.service_id', $service_id);
+  $query->fields('v', array('id', 'service_id', 'feeds_url', 'clients_feed_url', 'created_date'))->orderBy('id', 'DESC')->range(0, 1);
+  $results = $query->execute()->fetchAll();
+  if (is_array($results) && count($results) > 0) {
+    //$file_name =  $base_url . '/' .  variable_get('file_public_path', conf_path() . '/files') . $results[0]->clients_feed_url;
+    $file_name = file_create_url(file_build_uri($results[0]->clients_feed_url));
+    drupal_add_http_header('Content-Type', 'text/xml');
+    print file_get_contents($file_name);
+  }
+  else {
+    return "There has no feeds.";
+  }
 }
