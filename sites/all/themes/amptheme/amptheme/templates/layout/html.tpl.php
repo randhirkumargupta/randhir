@@ -52,6 +52,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    
     <?php //if (!empty($ampsubtheme_path_file)): ?>
       <style amp-custom>
         <?php //include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
