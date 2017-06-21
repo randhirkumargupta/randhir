@@ -10565,6 +10565,17 @@ div.node #comments h2 {
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel {
   margin-left: 220px;
 }
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td.field-multiple-drag {
+  display: table-cell !important;
+  text-align: center;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td.field-multiple-drag a.tabledrag-handle {
+  display: inline-block;
+  vertical-align: middle;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .field-type-image .image-widget-data .form-submit[value="Remove"] {
+  left: 290px !important;
+}
 #videoupload .ftp_browse_field {
   margin: 10px 0 0;
 }
