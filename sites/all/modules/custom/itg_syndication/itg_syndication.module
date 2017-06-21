@@ -465,7 +465,7 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     }
     
     if (!empty($node->content['field_service_fetch_link'][0]['#markup'])) {
-       $node->content['field_service_fetch_link'][0]['#markup'] = l($node->content['field_service_fetch_link'][0]['#markup'], $node->content['field_service_fetch_link'][0]['#markup']);
+       $node->content['field_service_fetch_link'][0]['#markup'] = l($node->content['field_service_fetch_link'][0]['#markup'], $node->content['field_service_fetch_link'][0]['#markup'],  array('attributes' => array('target'=>'_blank')));
      }
     
   }
