@@ -36,6 +36,8 @@ global $theme_key;
   <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>" data-widget-info="<?php print $widget[2].'|'.$widget[3].'|'.$widget[4];?>">
     <span><?php print $widget[0];?></span>
   </li>
-  <?php } }?>
+  <?php } 
+  
+     }?>
 
 </ul>

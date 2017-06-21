@@ -617,7 +617,7 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   }
   
   if (!empty($var->mail)) {
-    $node_url = l('URL', 'node/'.$var->nid);
+    $node_url = l('URL', $base_url.'/node/'.$var->nid);
     $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
     
     $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);

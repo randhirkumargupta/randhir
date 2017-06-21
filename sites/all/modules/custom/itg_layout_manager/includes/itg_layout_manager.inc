@@ -67,13 +67,17 @@ function itg_layout_list() {
     $count = 0;
 
     foreach ($itg_result as $row) {
+        
+      $edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)));
+      $delete_link = l(t('Delete'), 'itg-delete-layout/' . $row->section_name, array('query' => array('destination' => arg(1))));
+      $itg_action = $edit_link.' / '.$delete_link;
         $rows[] = array(
             array('data' => $count + 1),
             array('data' => $row->name),
             array('data' => $row->template_name),
             array('data' => $row->layout_type),
             array('data' => date('d/m/Y', $row->created_date)),            
-            array('data' => l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
+            array('data' => $itg_action),
            
         );
         $count++;
