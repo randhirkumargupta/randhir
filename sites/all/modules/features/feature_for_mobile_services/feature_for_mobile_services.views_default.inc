@@ -828,7 +828,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_service_association_title']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Client title */
+  /* Field: Content: Footer */
   $handler->display->display_options['fields']['field_footer']['id'] = 'field_footer';
   $handler->display->display_options['fields']['field_footer']['table'] = 'field_data_field_footer';
   $handler->display->display_options['fields']['field_footer']['field'] = 'field_footer';
