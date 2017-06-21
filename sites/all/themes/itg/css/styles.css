@@ -7930,6 +7930,9 @@ section.sidebar .block-itg-ads {
 .sign-in-link .left-block {
   float: left;
 }
+.sign-in-link .left-block span {
+  color: red;
+}
 .sign-in-link .rgt-block {
   float: right;
 }

@@ -19,7 +19,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
 <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?>
 
 <div class="Main-heading-login"><h2><?php print t('Sign in to the India Today'); ?></h2></div>
-<div class="social-share">
+<div class="parent-background"><div class="social-share">
 <a href="saml_login/twitter/<?php echo $shr; ?>" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
 <a href="saml_login/facebook/<?php echo $shr; ?>" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
 </div>
@@ -52,4 +52,4 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
     </div>
     <?php print drupal_render_children($form) ?>
     
-  </div>
+  </div> <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?> </div> <?php } ?>
