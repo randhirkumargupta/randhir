@@ -169,19 +169,19 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $service_email_address,
-    'from' => 'noreply@indiatoday.com',
-    'subject' => 'Test email',
-    'body' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    //'from' => 'noreply@indiatoday.com',
+    'subject' => 'VAS feed',
+    'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $service_email_address . "\r\n",
-      'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      //'From: India Today <noreply@indiatoday.com>' . "\r\n",
     ),
   );
   $language = language_default();
-  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, $params['from']);
+  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
 }
 
 /**

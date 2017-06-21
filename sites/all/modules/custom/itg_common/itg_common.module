@@ -310,7 +310,11 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
-
+  
+  if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form') {
+    $form['#after_build'][] = 'itg_common_add_preview_button';
+  }
+  
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
@@ -423,18 +427,48 @@ function itg_common_cancel_button($form, &$form_state) {
   if (!empty($form['nid']['#value'])) {
     $form['actions']['cancel'] = array(
       '#markup' => '<a data-dest="' . $destination . '?' . $query_str . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
-      '#weight' => 20,
+      '#weight' => 22,
     );
   }
   else {
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
-      '#weight' => 20,
+      '#weight' => 22,
     );
   }
 
   return $form;
 }
+
+
+
+/**
+ * Add preview button
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_common_add_preview_button($form, &$form_state) {
+  unset($form['actions']['preview']);
+  if (isset($form_state['node']->nid)) {
+    $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;
+    $web_link = '<a href="' . $node_url . '" target="_blank">Web preview</a>';
+    $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
+          
+    $form['actions']['webpreview'] = array(
+      '#markup' => $web_link,
+      '#weight' => 20,
+    );
+    
+    $form['actions']['mpreview'] = array(
+      '#markup' => $mob_link,
+      '#weight' => 21,
+    );
+  } 
+
+  return $form;
+}
+
 
 /**
  * Implements hook_form_FORMID_alter().
