@@ -52,7 +52,6 @@ function itg_users_cms_user_dashboard() {
       'admin/loyalty/lrp-manage-items' => 'Loyalty & Rewards',
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report',
-      'appadmin-cat-management' => 'App Cat Management',
       'appadmin-cat-listing' => 'App Cat Listing'
      );
 
@@ -69,7 +68,6 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
             $listed_menu_link_site_admin['manage-newsletter'],
-            $listed_menu_link_site_admin['appadmin-cat-management'],
             $listed_menu_link_site_admin['appadmin-cat-listing']);
             
      
@@ -84,7 +82,6 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
-            $listed_menu_link_site_admin['appadmin-cat-management'],
             $listed_menu_link_site_admin['appadmin-cat-listing']);
     
      $data['user_link'] = $listed_menu_link_site_admin;
@@ -97,7 +94,6 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
-            $listed_menu_link_site_admin['appadmin-cat-management'],
             $listed_menu_link_site_admin['appadmin-cat-listing']);
      
      $data['user_link'] = $listed_menu_link_site_admin;

@@ -58,13 +58,20 @@ function app_admin_edit_cat($form, &$form_state){
   $form = array();
   $id = arg(1);
   
-  $load_cat = get_all_data($id);
-  $cat_name = taxonomy_name_by_id($load_cat->cat_tid);
+ $load_cat = get_all_data($id);
+ 
+  $cat_list = '';
+  $all_tid = taxonomy_get_parents_all($load_cat->cat_tid);
+             $cat_list = '';
+             foreach ($all_tid as $tid_key => $tid_value){
+                $cat_list .= taxonomy_name_by_id($tid_value->tid);
+                $cat_list .= " >> ";
+             }
     
   $form['from'] = array(
     '#type' => 'item',
     '#title' => t('Categeory'),
-    '#markup' => $cat_name,
+    '#markup' => '<strong>'.substr($cat_list,0,-4).'</strong>',
    );
 
   
@@ -176,7 +183,8 @@ function app_admin_cat_del_submit($form, &$form_state){
 function appadmin_cat_listing(){
   
   $output = '';
-  $header = array('Category Name','Display(in App)','weight','Edit','Delete');
+  $header = array('Category Name','Display(in App)','weight','Actions');
+
   $rows = array();
 
   $cat_sql1 = db_select('itg_app_admin_cat','ac');
@@ -198,23 +206,31 @@ function appadmin_cat_listing(){
                 $cat_list .= " >> ";
              }
              
-             $edit = l('edit','appadmin-cat/'.$data->id.'/edit');
-             $delete = l('delete','appadmin-cat/'.$data->id.'/delete');
+             $actions = '';
+             $actions .= '<a href="appadmin-cat/'.$data->id.'/edit">'
+                      . '<span class="edit-link">edit</span>'
+                      .'</a>  | ';
+             $actions .= '<a href="appadmin-cat/'.$data->id.'/delete">'
+                      . '<span class="delete-link">delete</span>'
+                      . '</a>';
+             
              $rows[] = array(
-                 substr($cat_list,0,-4),
-                 $display,
-                 $data->weight,
-                 $edit,
-                 $delete
-             );
+                    array('data' => substr($cat_list,0,-4), 'class' => 'views-field'),
+                    array('data' => $display, 'class' => 'views-field'),
+                    array('data' => $data->weight, 'class' => 'views-field'),
+                    array('data' => $actions, 'class' => 'views-field views-field-nothing','align' => 'left'),
+                );
+             
    }
     $attributes = array('class' => array('views-table'));
     $output = '';
-    $output .= '<a href="appadmin-cat-management" class="GoogleAnalyticsET-processed">Assign Category for App</a>';
+    $output .= '<div class="view"><div class="attachment attachment-before"><a href="appadmin-cat-management">Assign App Category</a></div>';
     $output .= theme('table', array('header' => $header, 'rows' => $rows,'attributes' => $attributes));
     $output .= theme('pager');
-    return $output;
+    $output .= '</div>';
+   return $output;
 }
+
 
 /*
  * Common functin to Get Taxonomy name by term id 
@@ -350,3 +366,16 @@ function app_admin_cat_manage_submit($form, &$form_state){
   
 }
 
+
+/*
+ * Implement Hook_theme
+ */
+
+function itg_appadmin_cat_theme() {
+  return array(
+    'admin_table_layout' => array(
+      'template' => 'custom-table-format',
+      'arguments' => array(),
+    ),
+  );
+}
