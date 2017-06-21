@@ -196,43 +196,52 @@ function itg_sitemap_chunks_get_files_name() {
  *   Having content links.
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
-
   $content_links = array();
   $excluded_nodes = array();
+  $content_types = array();
   if (!empty(variable_get('itg_sitemap_exclude_nid'))) {
     $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
   }
-  $i = 0;
 
   if (!empty($contents)) {
+    // Prepare array of content type which is saved from setting form.
+    // These content type only will be avaiable for xml sitemap.
     foreach ($contents as $content) {
-      $type = $content->content_type;
-      $limit = variable_get('itg_sitemap_chunks_number', 50000);
-      // Get the all links for given type.
-      $query = db_select('node', 'n')->extend('PagerDefault')->limit($limit);
-      $query->fields('n', array('nid'));
-      $query->condition('type', $type);
-      $query->condition('status', 1);
-      // Exclude node
-      if (!empty($excluded_nodes)) {
-        foreach ($excluded_nodes as $nid) {
-          $query->condition('nid', $nid , "!=");
-        }
-      }
-      $query->orderBy('n.nid', 'DESC');
-      $results = $query->execute();
-      if (!empty($results)) {
-        foreach ($results as $result) {
-          $path = url(drupal_get_path_alias('node/' . $result->nid), array('absolute' => TRUE));
-          $content_links[$i]['link'] = $path;
-          $content_links[$i]['priority'] = $content->priority;
-          $content_links[$i]['changefreq'] = $content->changefreq;
-
-          $i++;
-        }
+      $content_types[] = $content->content_type;
+    }
+    $limit = variable_get('itg_sitemap_chunks_number', 50000);
+    // Get the all links for given type.
+    $query = db_select('node', 'n')->extend('PagerDefault')->limit($limit);
+    $query->fields('n', array('nid', 'type'));
+    $query->condition('type', $content_types, 'IN');
+    $query->condition('status', 1);
+    // Exclude node
+    if (!empty($excluded_nodes)) {
+      foreach ($excluded_nodes as $nid) {
+        $query->condition('nid', $nid, "!=");
       }
     }
+    $query->orderBy('n.nid', 'DESC');
+    $results = $query->execute()->fetchAll();
+    // prepare result for xml with pagination.
+    foreach ($results as $i => $data) {
+      $tag_data = itg_sitemap_chunk_get_tags_data($contents, $data->type);
+      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+      $content_links[$i]['link'] = $path;
+      $content_links[$i]['priority'] = $tag_data->priority;
+      $content_links[$i]['changefreq'] = $tag_data->changefreq;
+    }
   }
-
   return $content_links;
+}
+
+/**
+ * Get required data for xml crossponding to content type.
+ */
+function itg_sitemap_chunk_get_tags_data($contents, $content_type) {
+  foreach ($contents as $key => $data) {
+    if ($data->content_type == $content_type) {
+      return $contents[$key];
+    }
+  }
 }
