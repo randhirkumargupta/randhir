@@ -2254,6 +2254,15 @@ body.has-cart-popup{
     font-size: 14px;
     font-family: Roboto;
   }
+  .center-heading{
+    text-align: center;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      margin: 20px 0;
+    }
+  }
 }
 [id*="itg_user_forgot_password_multistep_form"]{
     margin: 0 -15px;
@@ -2706,7 +2715,7 @@ body.has-cart-popup{
     }
   }
 }
-.page-user{
+.page-user, .page-signup{
     form{
         font-family: Roboto;
         max-width: 580px; 
@@ -2818,7 +2827,7 @@ body.has-cart-popup{
         }
       }
     }
-    .sign-border{
+    .sign-border, .signup-txt{
       text-align: center;
       position: relative;
       margin: 30px 0;
@@ -2864,18 +2873,16 @@ body.has-cart-popup{
         }
     }
 }
+.page-signup form{
+  padding: 20px 0;
+}
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
     margin: 20px;
   }
 }
-.sign-in-link{
-  padding: 20px;
-  .signup-link{
-    float: left;
-  }
-}
+
 #fotp{
   padding: 0 15px;
   .form-item-fotp{
@@ -5330,7 +5337,25 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
+  .page-signup, .page-user{
+    .parent-background{
+      background: #fbfbfb;
+      margin: 0 auto;
+      max-width: 800px;
+      overflow: hidden;
+      padding: 30px;
+      .signup-txt, .sign-border{
+        span{
+          background-color: #fbfbfb;
+        }
+      }
+      .social-share{
+        width: auto;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
   
 
 
