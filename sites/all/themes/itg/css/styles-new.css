@@ -2329,6 +2329,15 @@ body.has-cart-popup {
   font-size: 14px;
   font-family: Roboto;
 }
+[id*="itg_sso_reg_multistep_form"] .center-heading {
+  text-align: center;
+}
+[id*="itg_sso_reg_multistep_form"] .center-heading h2 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 20px 0;
+}
 
 [id*="itg_user_forgot_password_multistep_form"] {
   margin: 0 -15px;
@@ -2768,83 +2777,83 @@ body.has-cart-popup {
   box-shadow: 0 0 10px 0 #1a3c8d;
 }
 
-.page-user form {
+.page-user form, .page-signup form {
   font-family: Roboto;
   max-width: 580px;
   margin: 0 auto;
   padding: 20px;
 }
-.page-user form h2 {
+.page-user form h2, .page-signup form h2 {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
   margin-bottom: 10px;
 }
-.page-user form label {
+.page-user form label, .page-signup form label {
   display: block;
   font-size: 16px;
   padding-bottom: 5px;
 }
-.page-user form .form-type-password, .page-user form .form-actions {
+.page-user form .form-type-password, .page-user form .form-actions, .page-signup form .form-type-password, .page-signup form .form-actions {
   margin-top: 10px;
 }
-.page-user form .forgot-link {
+.page-user form .forgot-link, .page-signup form .forgot-link {
   display: inline-block;
   vertical-align: middle;
   margin: 15px;
   color: #333;
 }
-.page-user form .forgot-link:hover {
+.page-user form .forgot-link:hover, .page-signup form .forgot-link:hover {
   color: #193984;
 }
-.page-user form .form-submit {
+.page-user form .form-submit, .page-signup form .form-submit {
   background-color: #000 !important;
   border: 1px solid #000 !important;
   height: 50px;
   width: 243px;
 }
-.page-user form .bottom-link {
+.page-user form .bottom-link, .page-signup form .bottom-link {
   display: inline-block;
   vertical-align: top;
   width: 100%;
   margin-top: 20px;
   font-size: 12px;
 }
-.page-user form .bottom-link .sso-forgot-link {
+.page-user form .bottom-link .sso-forgot-link, .page-signup form .bottom-link .sso-forgot-link {
   float: left;
   color: #a6a6a6;
 }
-.page-user form .bottom-link .sso-register-link {
+.page-user form .bottom-link .sso-register-link, .page-signup form .bottom-link .sso-register-link {
   float: right;
   color: #a6a6a6;
 }
-.page-user form .bottom-link a:hover {
+.page-user form .bottom-link a:hover, .page-signup form .bottom-link a:hover {
   color: #193984;
 }
-.page-user form .form-text {
+.page-user form .form-text, .page-signup form .form-text {
   width: 100%;
   height: 42px;
   font: 400 14px/normal Roboto;
 }
-.page-user form div.description {
+.page-user form div.description, .page-signup form div.description {
   font-size: 12px;
   color: #8d8d8d;
 }
-.page-user form .form-item-remember-me .form-checkbox {
+.page-user form .form-item-remember-me .form-checkbox, .page-signup form .form-item-remember-me .form-checkbox {
   float: left;
   margin: 2px 5px 0 0;
 }
-.page-user form .form-item-remember-me label {
+.page-user form .form-item-remember-me label, .page-signup form .form-item-remember-me label {
   font-size: 14px;
   margin-top: 10px;
 }
-.page-user .social-share {
+.page-user .social-share, .page-signup .social-share {
   width: 275px;
   margin: 0 auto;
   display: block;
   overflow: hidden;
 }
-.page-user .social-share a {
+.page-user .social-share a, .page-signup .social-share a {
   border-radius: 5px;
   height: 50px;
   color: #fff;
@@ -2854,10 +2863,10 @@ body.has-cart-popup {
   display: inline-block;
   vertical-align: top;
 }
-.page-user .social-share a + a {
+.page-user .social-share a + a, .page-signup .social-share a + a {
   margin-left: 10px;
 }
-.page-user .social-share a .fa {
+.page-user .social-share a .fa, .page-signup .social-share a .fa {
   width: 45px;
   height: 100%;
   position: absolute;
@@ -2866,28 +2875,28 @@ body.has-cart-popup {
   line-height: 48px;
   text-align: center;
 }
-.page-user .social-share a.sso-twitter {
+.page-user .social-share a.sso-twitter, .page-signup .social-share a.sso-twitter {
   background-color: #1daee3;
   position: relative;
 }
-.page-user .social-share a.sso-twitter .fa {
+.page-user .social-share a.sso-twitter .fa, .page-signup .social-share a.sso-twitter .fa {
   background-color: #1ca4d6;
   font-size: 25px;
 }
-.page-user .social-share a.sso-facebook {
+.page-user .social-share a.sso-facebook, .page-signup .social-share a.sso-facebook {
   background-color: #3b5998;
   position: relative;
 }
-.page-user .social-share a.sso-facebook .fa {
+.page-user .social-share a.sso-facebook .fa, .page-signup .social-share a.sso-facebook .fa {
   background-color: #37528c;
   font-size: 25px;
 }
-.page-user .sign-border {
+.page-user .sign-border, .page-user .signup-txt, .page-signup .sign-border, .page-signup .signup-txt {
   text-align: center;
   position: relative;
   margin: 30px 0;
 }
-.page-user .sign-border span {
+.page-user .sign-border span, .page-user .signup-txt span, .page-signup .sign-border span, .page-signup .signup-txt span {
   display: inline-block;
   vertical-align: middle;
   background-color: #fff;
@@ -2897,7 +2906,7 @@ body.has-cart-popup {
   position: relative;
   z-index: 9;
 }
-.page-user .sign-border:before {
+.page-user .sign-border:before, .page-user .signup-txt:before, .page-signup .sign-border:before, .page-signup .signup-txt:before {
   content: '';
   position: absolute;
   left: 0;
@@ -2910,32 +2919,29 @@ body.has-cart-popup {
   background-color: #e9e9e9;
   z-index: 1;
 }
-.page-user .login-wrapper {
+.page-user .login-wrapper, .page-signup .login-wrapper {
   padding: 0;
   border: none;
   background: none;
 }
-.page-user .messages--status, .page-user .messages--error {
+.page-user .messages--status, .page-user .messages--error, .page-signup .messages--status, .page-signup .messages--error {
   background-color: #fefafb;
   border: 1px solid red;
   margin: 20px auto;
   max-width: 540px;
   padding: 10px;
 }
-.page-user .messages--error .messages__list {
+.page-user .messages--error .messages__list, .page-signup .messages--error .messages__list {
   padding-left: 15px;
+}
+
+.page-signup form {
+  padding: 20px 0;
 }
 
 [id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
   color: #009c00;
   margin: 20px;
-}
-
-.sign-in-link {
-  padding: 20px;
-}
-.sign-in-link .signup-link {
-  float: left;
 }
 
 #fotp {
