@@ -257,6 +257,28 @@ function html_widgets_search_form($form, &$form_state) {
 }
 
 /**
+ * Implementation of hook_form for election widgets
+ * {@inheritdoc}
+ */
+function election_widgets_search_form($form, &$form_state) {  
+    
+  $form['election_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/election_graph_xml/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['election_submit'] = array(
+    '#markup' => '<div class="go-btn-div"><a class="fright" href="javascript:void(0)" id="layout-election-submit">Go</a></div>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
  * get all selected section of tpl
  * {@inheritdoc}
  */
