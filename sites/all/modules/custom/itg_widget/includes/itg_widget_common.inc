@@ -760,6 +760,9 @@ function itg_widget_theme() {
     'graph_election' => array(
       'template' => 'templates/itg-widget-graph-election',
     ),
+    'graph_election_section_cart' => array(
+      'template' => 'templates/itg-widget-graph-election-section-cart',
+    ),
     'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
     ),

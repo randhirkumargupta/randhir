@@ -94,6 +94,10 @@ function itg_widget_menu() {
     'page callback' => 'itg_widget_all_content_title',
     'access arguments' => array('access content'),
   );
+  $items['test-graph'] = array(
+    'page callback' => 'itg_widget_election_graph_for_section_card',
+    'access arguments' => array('access content'),
+  );
   $items['node-list-nid/autocomplete'] = array(
     'page callback' => 'itg_widget_all_content_nid',
     'access arguments' => array('access content'),
@@ -149,12 +153,7 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
 
-  $items['test_function_callback'] = array(
-    'page callback' => 'itg_sent_email', // load the croper according to size!.
-    'type' => MENU_CALLBACK,
-    'access callback' => TRUE,
-//    'access arguments' => array('access content'),
-  );
+ 
 
   $items['issue_filter_widget'] = array(
     'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
@@ -675,7 +674,7 @@ function itg_widget_block_view($delta = '') {
       $block['content'] = theme("tech_most_read", array("data" => $data));
       break;
     case 'graph_election':
-      drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+        drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
       $data = itg_widget_get_graph_data($info);
       foreach ($data as $index => $row) {
         $jsondata = file_get_contents($row->field_election_constituency_tall_value);
@@ -914,6 +913,35 @@ function itg_widget_get_graph_data() {
   return $itg_result;
 }
 
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function itg_widget_get_graph_data_by_nid($nid) {
+
+  global $theme;
+
+  $itg_query = db_select('node', 'n');
+  $itg_query->join('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+  $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
+  $itg_query->leftJoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->fields('frq', array('field_election_constituency_tall_value'));
+  $itg_query->fields('astw', array('field_election_state_tid'))
+      ->condition('type', 'election_graph_xml')
+      ->condition('n.nid', $nid, '=')
+      ->condition('status', 1);
+  // ->range(0, 5);
+  //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  return $itg_result;
+}
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -1227,6 +1255,139 @@ function itg_widget_delete_big_story_live_tv() {
     return $ex->getMessage();
   }
 }
+/**
+ * This function use for make home page map.
+ * 
+ */
+
+function itg_widget_election_graph_for_section_card($nid) {
+   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+      $data = itg_widget_get_graph_data_by_nid($nid);
+      
+      foreach ($data as $index => $row) {
+        $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+        drupal_add_js(' jQuery(function() {
+                   
+            var ids = "container_' . $index . '";
+            var data =' . $jsondata . ';
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var ty = 0;
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[ty] = data.election.items[x].pColor;
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    ty++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[ty] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+
+
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var colindex = 0;
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[colindex] = data.election.items[x].pColor;
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    colindex++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[colindex] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+
+           jQuery("#" + ids).highcharts({
+                colors: colorArray,
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
+                title: {
+                    text: aSeatOthers +"/"+ aSeats + "<br>" + aName,
+                    align: "center",
+                    verticalAlign: "middle",
+                    y: 12
+                },
+                tooltip: {
+                    enabled: showtooltip,
+                    pointFormat: "<b>{point.y}</b>"
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: false,
+                            distance: -50,
+                            style: {
+                                fontWeight: "bold",
+                                color: "white",
+                                textShadow: "0px 1px 2px black"
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ["50%", "55%"]
+                    }
+                },
+                series: [{
+                        type: "pie",
+                        name: "",
+                        innerSize: "60%",
+                        data: combined
+                    }]
+            });
+        });', array('type' => 'inline', 'scope' => 'footer'));
+      }
+
+      return  theme("graph_election_section_cart", array("data" => $data));      
+      
+}
+
 
 /**
  * Function give extra filed value that uses for chcek weather its a live tv or not.
