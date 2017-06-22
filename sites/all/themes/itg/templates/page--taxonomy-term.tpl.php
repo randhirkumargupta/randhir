@@ -53,9 +53,9 @@ window.addEventListener("message", function(ev) {
                   if((_is_sponsored_category($arg[2])) && (!empty($term->field_show_fields))){
                     $show_field_val = $term->field_show_fields[LANGUAGE_NONE][0]['value'];
                     if($show_field_val == 'category_icon'):
-                      print "<div class='container'><span>".theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small'))."</span></div>";
+                      print "<div class='container sponsor-header'><span class='sponsor-powerby'>Powered by</span><span class='sponsor-logo'>".theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small'))."</span></div>";
                     else:
-                      print "<div class='container'><span>".$term->field_impact_text[LANGUAGE_NONE][0]['value']."</span></div>";
+                      print "<div class='container sponsor-header'><span class='sponsor-impact-text'>".$term->field_impact_text[LANGUAGE_NONE][0]['value']."</span></div>";
                     endif;
                   }
                 ?>
