@@ -90,6 +90,12 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
     foreach ($sections as $section) {
       $section_tid = array_keys($section['section_tid'])[0];
       if ($section['section_tid'][$section_tid] != 0) {
+        $section_alise_name = $section['section_tid'][$section_tid];
+        $alias = itg_videogallery_get_term_name($section_alise_name) . '-sitemap.xml';
+        if (itg_event_backend_alias_check(pathauto_cleanstring($alias))) {
+          $source = 'sitemap/' . $section['section_tid'][$section_tid];
+          itg_event_backend_save_alias($source, pathauto_cleanstring($alias));
+        }
         $handel_value = array();
         $handel_value['tid'] = array_keys($section['section_tid'])[0];
         $handel_value['frequency'] = $section['section_freq'];
