@@ -235,7 +235,9 @@ if (!empty($content)):
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
             
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"></a>';
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
+                        . '</a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -354,7 +356,7 @@ if (!empty($content)):
                   $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
                 }
                 
-                $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                $movie_html = itg_story_movie_image_plugin_data($node->nid, 'amp');
                 if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                   if (!empty($node->field_story_technology['und'])) {
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
@@ -466,7 +468,8 @@ if (!empty($content)):
             }
             
             $share_image = file_create_url($share_uri);
-            $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+            //$img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"></amp-img>';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {

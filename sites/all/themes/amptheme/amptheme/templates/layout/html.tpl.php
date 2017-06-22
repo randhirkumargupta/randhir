@@ -174,6 +174,83 @@
     margin: 0 12px 0 0;
 }
 .buzz-img-wrapper{position: relative;}
+.story-photo-list-wrapper h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    position: relative;
+}
+.story-photo-list-wrapper h3:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #ddd;
+    top: 0;
+    bottom: 3px;
+    margin: auto;
+
+}
+.story-photo-list-wrapper h3 span {
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    padding: 20px 20px 20px 0;
+    display: inline-block;
+}
+.story-photo-list-wrapper .story-photo-list {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.story-photo-list-wrapper .story-photo-list-item {
+    padding: 0 11px;
+    width: 192px;
+    display: inline-block;
+    vertical-align: top;
+}
+.story-photo-list-wrapper .story-photo-list-item p{
+  line-height: 18px;
+}
+.smp-date {
+    font-size: 12px;
+    color: #b1b1b1;
+    display: block;
+}
+.story-section .story-tech-chunk {
+    background: #f3f3f3;
+    padding: 10px;
+    position: relative;
+}
+.story-section .story-tech-chunk .tech-rating {
+    width: 88px;
+    height: 33px;
+    background: #b00808;
+    color: #fff;
+    font-size: 28px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    line-height: 33px;
+    font-weight: 700;
+}
+.field .field-label {
+    font-weight: bold;
+}
+.story-section .story-right .stryimg .photoby .story-img-rating {
+    background: #b00808;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 20px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 28px;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+}
       </style>
     <?php //endif; ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
