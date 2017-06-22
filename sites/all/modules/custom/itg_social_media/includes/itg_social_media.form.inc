@@ -33,8 +33,8 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
         '#options' => array(
             'facebook' => t('<i title="Facebook" class="fa fa-facebook-square" aria-hidden="true"></i>'),
             'twitter' => t('<i title="Twitter" class="fa fa-twitter-square" aria-hidden="true"></i>'),
-            'instagram' => t('<i title="Instagram" class="fa fa-instagram" aria-hidden="true"></i>'),
-            'facebook_instant_article' => t('<i title="Facebook Instant Article" class="fa fa-facebook-square" aria-hidden="true"></i>'),
+           // 'instagram' => t('<i title="Instagram" class="fa fa-instagram" aria-hidden="true"></i>'),
+            //'facebook_instant_article' => t('<i title="Facebook Instant Article" class="fa fa-facebook-square" aria-hidden="true"></i>'),
         ),
         '#default_value' => $data,
         '#required' => TRUE,

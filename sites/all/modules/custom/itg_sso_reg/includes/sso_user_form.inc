@@ -29,11 +29,11 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
     $step_ext_div = '<div class="sign-in-link"><div class="left-block"><span>#</span>Either of Email ID or Mobile is mandatory</div><div class="rgt-block">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div></div>';
-    $form['#prefix'] = '<div id="itg_sso_reg_multistep_form"><div class="center-heading"><h2>Create your India Today account</h2></div><div class="social-share">
+    $form['#prefix'] = '<div id="itg_sso_reg_multistep_form"><div class="center-heading"><h2>Create your India Today account</h2></div><div class="parent-background"><div class="social-share">
     <a href="'.$base_url.'/saml_login/twitter'.$appnd_to_lnk.'" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
     <a href="'.$base_url.'/saml_login/facebook'.$appnd_to_lnk.'" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
     <div class="signup-txt"><span>Or signup using your Email/Mobile</span></div></div>';
-    $form['#suffix'] = $step_ext_div . '</div>';
+    $form['#suffix'] = $step_ext_div . '</div></div>';
     
   } else {
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
