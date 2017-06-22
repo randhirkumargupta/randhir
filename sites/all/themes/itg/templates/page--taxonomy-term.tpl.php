@@ -47,18 +47,7 @@ window.addEventListener("message", function(ev) {
                 <?php 
                   $arg = arg(); 
                   $term = taxonomy_term_load($arg[2]);
-                ?>
-                <!-- Sponsored Category changes. Show category icon or Impact text. --> 
-                <?php
-                  if((_is_sponsored_category($arg[2])) && (!empty($term->field_show_fields))){
-                    $show_field_val = $term->field_show_fields[LANGUAGE_NONE][0]['value'];
-                    if($show_field_val == 'category_icon'):
-                      print "<div class='container sponsor-header'><span class='sponsor-powerby'>Powered by</span><span class='sponsor-logo'>".theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small'))."</span></div>";
-                    else:
-                      print "<div class='container sponsor-header'><span class='sponsor-impact-text'>".$term->field_impact_text[LANGUAGE_NONE][0]['value']."</span></div>";
-                    endif;
-                  }
-                ?>
+                ?>                
             </section>
         </header>
     <?php
@@ -96,6 +85,17 @@ window.addEventListener("message", function(ev) {
       <?php endif; ?>
      
       <a id="main-content"></a>
+      <!-- Sponsored Category changes. Show category icon or Impact text. --> 
+	<?php
+	  if((_is_sponsored_category($arg[2])) && (!empty($term->field_show_fields))){
+		  $show_field_val = $term->field_show_fields[LANGUAGE_NONE][0]['value'];
+		  if($show_field_val == 'category_icon'):
+		    print "<div class='sponsor-header'><span class='sponsor-powerby'>Powered by</span><span class='sponsor-logo'>".theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small'))."</span></div>";
+		  else:
+		    print "<div class='sponsor-header'><span class='sponsor-impact-text'>".$term->field_impact_text[LANGUAGE_NONE][0]['value']."</span></div>";
+		  endif;
+	    }
+	  ?>
       <!-- Page title for specific page -->      
       <?php
           $flag = '';
