@@ -159,13 +159,12 @@ if (!empty($content)):
           ?>
             <div class="<?php echo $class; ?>">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
-                <div id="videogallery-iframe">
+                <!--<div id="videogallery-iframe">
                   <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
-                </div>
+                </div>-->
               <?php } ?>                      
               <?php
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
                 <div class="stryimg" ><?php
                   if (empty($widget_data) && empty($node->field_story_template_guru[und][0][value])) {
@@ -191,7 +190,9 @@ if (!empty($content)):
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
+                        . '<span class="story-photo-icon">';
                     ?>        
 
                     <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
