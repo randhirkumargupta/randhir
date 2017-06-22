@@ -71,41 +71,27 @@
  */
 ?>
 
-<div id="page-wrapper"><div id="page">
-
-    <header role="banner" id="header"><div class="section clearfix">
-
-      <?php if ($logo && $logo_height && $logo_width): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-            <amp-img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"
-              height="<?php print $logo_height; ?>" width = "<?php print $logo_width; ?>"
-              layout="responsive"></amp-img>
-          </a>
-        <?php endif; ?>
-
-        <?php if ($site_name || $site_slogan): ?>
-          <div id="name-and-slogan">
-            <?php if ($site_name): ?>
-              <?php if ($title): ?>
-                <div id="site-name"><strong>
-                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                  </strong></div>
-              <?php else: /* Use h1 when the content title is empty */ ?>
-                <h1 id="site-name">
-                  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                </h1>
-              <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if ($site_slogan): ?>
-              <div id="site-slogan"><?php print $site_slogan; ?></div>
-            <?php endif; ?>
-          </div> <!-- /#name-and-slogan -->
-        <?php endif; ?>
-
-        <?php print render($page['header']); ?>
-
-      </div></header> <!-- /.section, /#header -->
+<div id="page-wrapper">
+  <div id="page">
+    <header role="banner" id="header">
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+        <amp-img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
+      </a>
+      <nav id="navbar">
+        <button class='nav-button'>
+          <i class="fa fa-bars"></i>
+        </button>
+        <button class='nav-close'>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <ul class='nav-items'>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+        <?php //print render($page['header']); ?>
+    </header>
 
     <?php print $messages; ?>
 
@@ -114,9 +100,11 @@
         <div id="content" class="column"><div class="section">
             <a id="main-content"></a>
             <?php print render($title_prefix); ?>
-            <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
+            <?php //if ($title): ?>
+            <!--<h1 class="title" id="page-title"><?php //print $title; ?></h1>-->
+              <?php //endif; ?>
             <?php print render($title_suffix); ?>
-            <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+            <?php if ($tabs): ?><div class="tabs"><?php //print render($tabs); ?></div><?php endif; ?>
             <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
             <?php print render($page['content']); ?>
           </div></div> <!-- /.section, /#content -->
@@ -124,7 +112,8 @@
       </main></div> <!-- /#main, /#main-wrapper -->
 
     <footer role="contentinfo" id="footer"><div class="section">
-        <?php print render($page['footer']); ?>
+        <?php //print render($page['footer']); ?>
       </div></footer> <!-- /.section, /#footer -->
 
-  </div></div> <!-- /#page, /#page-wrapper -->
+  </div>
+</div> <!-- /#page, /#page-wrapper -->

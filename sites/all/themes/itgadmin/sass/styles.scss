@@ -10035,6 +10035,17 @@ div.node{
         > .form-submit.cancel, .ajax-new-content > .form-submit.cancel{
           margin-left: 220px;
         }
+        &.field-multiple-drag{
+          display: table-cell !important; 
+          text-align: center;
+          a.tabledrag-handle{
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+        .field-type-image .image-widget-data .form-submit[value="Remove"]{
+          left: 290px !important;
+        }
       }
     }
   }

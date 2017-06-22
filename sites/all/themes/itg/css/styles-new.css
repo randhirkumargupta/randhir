@@ -2340,7 +2340,39 @@ body.has-cart-popup {
 }
 
 [id*="itg_user_forgot_password_multistep_form"] {
-  margin: 0 -15px;
+  text-align: center;
+}
+[id*="itg_user_forgot_password_multistep_form"] form {
+  padding-top: 20px;
+  max-width: 550px;
+  margin: 0 auto;
+  font-family: Roboto;
+  color: #666;
+  line-height: 24px;
+}
+[id*="itg_user_forgot_password_multistep_form"] form .form-item-ufname {
+  margin-top: 20px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .center-heading {
+  text-align: center;
+}
+[id*="itg_user_forgot_password_multistep_form"] .center-heading h2 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 20px 0;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signin-link {
+  float: left;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signin-link:hover {
+  color: #026bc5;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signup-link {
+  float: right;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signup-link:hover {
+  color: #026bc5;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-text {
   width: 100%;
@@ -5750,6 +5782,22 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   width: 40px;
   height: 40px;
   margin-right: 5px;
+}
+
+.page-signup .parent-background, .page-user .parent-background, .page-forgot-password .parent-background {
+  background: #fbfbfb;
+  margin: 0 auto;
+  max-width: 800px;
+  overflow: hidden;
+  padding: 30px;
+}
+.page-signup .parent-background .signup-txt span, .page-signup .parent-background .sign-border span, .page-user .parent-background .signup-txt span, .page-user .parent-background .sign-border span, .page-forgot-password .parent-background .signup-txt span, .page-forgot-password .parent-background .sign-border span {
+  background-color: #fbfbfb;
+}
+.page-signup .parent-background .social-share, .page-user .parent-background .social-share, .page-forgot-password .parent-background .social-share {
+  width: auto;
+  margin: 0;
+  text-align: center;
 }
 
 @media all and (min-width: 768px) {
