@@ -1012,7 +1012,6 @@ function itg_story_photo_amp_html($node_id) {
     $previous = itg_story_photo_story_redirect($node_id , 'prev');
     $next_link_count = count($photo_story) - 1;
     $html = '';
-    $html .= '<div class="photo-story-img multiple-photo-disc">';
     $html .='<amp-carousel id="carousel-with-preview"
     width="400"
     height="300"
@@ -1028,16 +1027,15 @@ function itg_story_photo_amp_html($node_id) {
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
-      $html .='<div class="slide"> <amp-img src="'.$photo_story_img.'?image='.$i.'"
+      $html .='<div class="slide"><div class="photo-slide"><amp-img src="'.$photo_story_img.'?image='.$i.'"
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt. '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">'.$photo_story_img_title.'</div>
-      <amp-fit-text>'.$photo_story_desc.'</amp-fit-text>
-      </div>';
+      alt="' . $photo_story_img_alt. '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">'.$photo_story_img_title.'</div></div>
+      <div class="image-alt">' .$photo_story_img_alt. '</div><amp-fit-text>'.$photo_story_desc.'</amp-fit-text></div>';
       $i++;
     }
-    $html .= '</amp-carousel></div>';
+    $html .= '</amp-carousel>';
     return $html;
   }
 }

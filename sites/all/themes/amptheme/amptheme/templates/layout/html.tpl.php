@@ -82,6 +82,98 @@
         .photoby:empty{display: none;}
         .photoby{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
         .description a{color: #0883ed;}
+        .image-alt{color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 10px 0; border-bottom: 1px solid #ddd;}
+        .related-story ul{list-style: none;}
+        .related-story ul li{display: inline-block; vertical-align: top; width: 100%; padding: 10px 0;}
+        .related-story ul li + li{border-top: 1px solid #ddd;}
+        .related-story ul li .tile{float: left; width: 75%; padding-right: 10px;}
+        .related-story ul li .tile a{color: #000; text-decoration: none;}
+        .related-story ul li > a{float: right; width: 25%;}
+        .photo-slide{position: relative;}
+        .photo-slide .caption{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
+        .story-right{padding-bottom: 30px;}
+        .carousel-preview button{margin-right: 10px;}
+        .listicle-feedback .listical_title {
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .story-section .listicle-page .listicle-detail + .listicle-detail {
+            border-top: 1px solid #ccc;
+        }
+        .story-section .listicle-page .listicle-detail > span {
+          width: 34px;
+          height: 34px;
+          background: #a00606;
+          border-radius: 100%;
+          font-size: 24px;
+          display: inline-block;
+          vertical-align: top;
+          text-align: center;
+          line-height: 34px;
+          color: #fff;
+          font-weight: 700;
+          margin-top: 10px;
+      }
+      .story-section .listicle-page .listicle-detail > span.bullet_points {
+          width: 10px;
+          height: 10px;
+          line-height: 10px;
+          margin-top: 22px;
+      }
+      .story-section .listicle-page .listicle-detail .listicle-description {
+          font-size: 16px;
+          color: #282828;
+          display: inline-block;
+          vertical-align: top;
+          width: 95%;
+          padding: 18px 20px;
+      }
+      .story-section .listicle-page .listicle-detail .listicle-description span {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.factoids-slider ul {
+    background: #a00606;
+    padding: 0px;
+    margin-top: 20px;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    list-style: none;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.factoids-slider ul li {
+    padding: 25px; 
+    font-size: 15px;
+    line-height: 24px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    width: 220px;
+}
+.factoids-slider ul li:nth-child(odd) {
+    background: #a00606;
+}
+.factoids-slider ul li:nth-child(even) {
+    background: #000;
+}
+.buzz-feedback .buzz-section{margin-bottom: 20px;}
+.buzz-feedback .buzz-section h1{margin-bottom: 20px;}
+.buzz-feedback .buzz-section h1 span {
+    background: #a00606;
+    color: #fff;
+    width: 32px; 
+    height: 32px; 
+    display: inline-block;
+    vertical-align: top;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 100%;
+    margin: 0 12px 0 0;
+}
+.buzz-img-wrapper{position: relative;}
       </style>
     <?php //endif; ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
