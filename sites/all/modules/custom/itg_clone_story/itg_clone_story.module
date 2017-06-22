@@ -71,31 +71,25 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
         $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
         
-       $items_count = 2;
+        $items_count = 2;
         $field_name = 'field_story_technology';
         $form_theme = $form[$field_name][LANGUAGE_NONE]['#theme'];
         $field_parents = $form[$field_name][LANGUAGE_NONE]['#field_parents'];
         $field_language = $form[$field_name][LANGUAGE_NONE]['#language'];
-        // Remove delete and add more buttons
-        //~ $form_state['field'][$field_name][LANGUAGE_NONE]['items_count'] = $items_count;
-		$items = &$form_state['field'][$field_name][LANGUAGE_NONE];
-        //$form[$field_name]['und'][0]['remove_button']['#access'] = TRUE;
-		//$form[$field_name]['und']['add_more']['#access'] = TRUE;
-        // Generate required number of fields collection
+        $items = &$form_state['field'][$field_name][LANGUAGE_NONE];
         if ($items_count > 1 and $items['items_count'] != $items_count) {
 			$field_state['items_count'] = $items_count;
 			$items['items_count'] = $items_count;
-			$items['field']['cardinality'] = FIELD_CARDINALITY_UNLIMITED;//$items_count;
+			$items['field']['cardinality'] = FIELD_CARDINALITY_UNLIMITED;
 			$form[$field_name][LANGUAGE_NONE] = field_multiple_value_form($items['field'], $items['instance'], LANGUAGE_NONE, array(), $form, $form_state);
 			$form[$field_name][LANGUAGE_NONE]['#theme'] = $form_theme;
-			$form[$field_name][LANGUAGE_NONE]['#field_parents'] = $field_parents; //important!!
-			$form[$field_name][LANGUAGE_NONE]['#language'] = $field_language; //important!!
-			
+			$form[$field_name][LANGUAGE_NONE]['#field_parents'] = $field_parents;
+			$form[$field_name][LANGUAGE_NONE]['#language'] = $field_language; 
         }
         // Fill generated fields with data
-       for ($delta = 0; $delta < ($items_count); $delta++) {
-         $form['field_story_technology'][LANGUAGE_NONE][$delta]['field_technology_photo_title'][LANGUAGE_NONE][0]['value']['#default_value'] = 'new value';
-	   }
+        for ($delta = 0; $delta < ($items_count); $delta++) {
+            $form['field_story_technology'][LANGUAGE_NONE][$delta]['field_technology_photo_title'][LANGUAGE_NONE][0]['value']['#default_value'] = 'new value';
+	    }
 
       }
   }
