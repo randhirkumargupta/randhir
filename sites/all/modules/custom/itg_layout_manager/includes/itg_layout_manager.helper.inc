@@ -685,10 +685,10 @@ function get_ads_page_name() {
  * Get all html_custom widgets list for layout setting page
  * @return array
  */
-function get_html_custom_widget_list() {
+function get_html_custom_widget_list($content_type) {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));  
-  $query->condition('type', 'custom_html_widgets');        
+  $query->condition('type', $content_type);        
   $itg_result = $query->execute()->fetchAll();
   
   $rows = array();

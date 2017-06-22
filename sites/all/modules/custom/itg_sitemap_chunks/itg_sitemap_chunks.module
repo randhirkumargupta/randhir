@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * @file
+ * Multiple siteamp module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function itg_sitemap_chunks_help($path, $args) {
+  if ($path == 'admin/config/search/itg-multiple-sitemap/dashboard') {
+    return t("
+      <p>This module provides a multiple xml sitemap functionality.</p>
+      <p>Create sub files and it will create a main file for all subfiles.</p>
+      <p>Link of main file would be 'sites/default/files/itg_sitemap_chunks/sitemap.xml'.</p>
+    ");
+  }
+}
+
+/**
+ * Implements hook_info().
+ */
+function itg_sitemap_chunks_menu() {
+
+  $items['admin/config/search/itg-multiple-sitemap'] = array(
+    'title' => "ITG Sitemap Chunks",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sitemap_chunks_add_sitemap'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/search/itg-multiple-sitemap/add'] = array(
+    'title' => 'Add',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['admin/config/search/itg-multiple-sitemap/dashboard'] = array(
+    'title' => "Dashboard",
+    'page callback' => 'itg_sitemap_chunks_dashboard',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  $items['admin/config/search/itg-multiple-sitemap/sections'] = array(
+    'title' => "Sections Setting",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sitemap_chunks_section_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/config/search/itg-multiple-sitemap/edit/%'] = array(
+    'title' => "Edit the sitemap",
+    'page callback' => 'itg_sitemap_chunks_edit_sitemap',
+    'page arguments' => array(5),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+  );
+
+  $items['admin/config/search/itg-multiple-sitemap/delete/%'] = array(
+    'title' => "Delete sitemap",
+    'page callback' => 'itg_sitemap_chunks_delete_sitemap',
+    'page arguments' => array(5),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+  );
+
+  $items['admin/config/search/itg-multiple-sitemap/setting'] = array(
+    'title' => "Setting",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sitemap_chunks_setting_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['itg-sitemap.xml'] = array(
+    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['sitemap/%'] = array(
+    'page callback' => 'itg_sitemap_chunks_for_section', // load the croper according to size!.
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}

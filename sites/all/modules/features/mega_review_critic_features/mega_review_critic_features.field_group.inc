@@ -23,18 +23,17 @@ function mega_review_critic_features_field_group_info() {
     'label' => 'Basic Details',
     'weight' => '0',
     'children' => array(
-      0 => 'field_mega_review_director',
-      1 => 'field_mega_review_movie_plot',
-      2 => 'field_mega_review_twitter',
-      3 => 'field_mega_review_youtube_url',
-      4 => 'field_mega_review_type',
-      5 => 'field_mega_review_cast',
-      6 => 'field_associate_photo_gallery',
-      7 => 'field_story_associate_video',
-      8 => 'field_story_movie_description',
-      9 => 'field_mega_review_career_graph',
-      10 => 'domain',
-      11 => 'title',
+      0 => 'field_mega_review_career_graph',
+      1 => 'field_mega_review_cast',
+      2 => 'field_mega_review_director',
+      3 => 'field_mega_review_type',
+      4 => 'field_mega_review_youtube_url',
+      5 => 'field_story_associate_video',
+      6 => 'field_story_movie_description',
+      7 => 'field_associate_photo_gallery',
+      8 => 'field_mega_review_twitter',
+      9 => 'field_mega_review_movie_plot',
+      10 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -102,7 +101,7 @@ function mega_review_critic_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Movie Review',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_mega_review_review',
     ),
