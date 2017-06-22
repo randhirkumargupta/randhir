@@ -90,11 +90,11 @@ if (!empty($content)):
       if (_is_sponsored_category($cat_val['tid']) && !empty($node->field_story_show_fields[LANGUAGE_NONE]) && !empty(taxonomy_get_parents($cat_val['tid']))) {
         $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
         if ($show_field_val == 'story_category_icon'):
-          $sponsor_text = "<div class='container'><span>" . theme('image_style', array('path' => $cat_val['taxonomy_term']->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $cat_val['taxonomy_term']->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
         elseif($show_field_val == 'story_powered_text'):
-         $sponsor_text = "<div class='container'><span>".$cat_val['taxonomy_term']->field_powered_by_text[LANGUAGE_NONE][0]['value']."</span></div>";         
+         $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>".$cat_val['taxonomy_term']->field_powered_by_text[LANGUAGE_NONE][0]['value']."</span></div>";         
         else:
-          $sponsor_text = "<div class='container'><span>" .$cat_val['taxonomy_term']->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" .$cat_val['taxonomy_term']->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
         endif;
         $flag = TRUE;
       }
@@ -103,11 +103,11 @@ if (!empty($content)):
       $spon_term = taxonomy_term_load(1208902);
       $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
       if ($show_field_val == 'story_category_icon'):
-        $sponsor_text = "<div class='container'><span>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
       elseif ($show_field_val == 'story_powered_text'):
-        $sponsor_text = "<div class='container'><span>" . $spon_term->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>" . $spon_term->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
       else:
-        $sponsor_text = "<div class='container'><span>" . $spon_term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" . $spon_term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
       endif;
     }
   }
@@ -192,7 +192,11 @@ if (!empty($content)):
 
       //code end for Associate lead
       ?>
-
+      <?php
+         if ($show_field_val == 'story_powered_text'):
+           print $sponsor_text; 
+         endif;
+      ?>
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left">
@@ -210,6 +214,8 @@ if (!empty($content)):
                     }
                   ?>
                 </div>
+              <?php elseif ($show_field_val == 'story_powered_text'):
+               print ''; ?>              
               <?php else:
                 print $sponsor_text; ?>
               <?php endif; ?>
