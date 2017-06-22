@@ -1423,6 +1423,96 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-breaking_news-field_story_source_id'.
+  $field_instances['node-breaking_news-field_story_source_id'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 41,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_id',
+    'label' => 'Enter Number',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 50,
+    ),
+  );
+
+  // Exported field_instance: 'node-breaking_news-field_story_source_type'.
+  $field_instances['node-breaking_news-field_story_source_type'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 40,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_source_type',
+    'label' => 'Source type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 48,
+    ),
+  );
+
   // Exported field_instance: 'node-breaking_news-field_type'.
   $field_instances['node-breaking_news-field_type'] = array(
     'bundle' => 'breaking_news',
@@ -1479,6 +1569,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Display title (Home page)');
   t('Display title (Landing page)');
   t('EX: www.yourdomainname.com');
+  t('Enter Number');
   t('Extra large image');
   t('Extra small image');
   t('Highlights');
@@ -1501,6 +1592,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Section');
   t('Short description');
   t('Small image');
+  t('Source type');
   t('Tags');
   t('Title');
   t('Type');
