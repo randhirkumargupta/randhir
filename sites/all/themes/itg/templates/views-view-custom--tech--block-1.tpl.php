@@ -65,10 +65,13 @@
             $desc = $row['title'];
 
             if ($index > 2) {
-               if(_is_sponsor_story_article($row['nid'])):?>
-                <span class="itg-sponsor-title">SPONSORED</span>
-              <?php endif; ?>
-              <li title="<?php echo strip_tags($desc); ?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+               ?>
+              <li title="<?php echo strip_tags($desc); ?>">
+                <?php if(_is_sponsor_story_article($row['nid'])):?>
+                  <span class="itg-sponsor-title">SPONSORED</span>
+                <?php endif; ?>
+                <?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+              </li>
 
 
             <?php } ?>

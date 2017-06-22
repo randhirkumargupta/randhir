@@ -1328,12 +1328,11 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             ?>
             </h3>
         <?php endif; ?>
-        <?php if ($count != 0) : ?>
-            <?php if(_is_sponsor_story_article($nid)): ?>
-              <span class="itg-sponsor-title">SPONSORED</span>
-            <?php endif; ?>
+        <?php if ($count != 0) : ?>            
             <p title="<?php echo $entity['title'];?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
-          <?php // echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid); ?>
+              <?php if(_is_sponsor_story_article($nid)): ?>
+                <span class="itg-sponsor-title">SPONSORED</span>
+              <?php endif; ?>
               <?php 
               if (function_exists('itg_common_get_smiley_title')) {
                 echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));

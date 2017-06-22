@@ -4,13 +4,13 @@
     <?php
     foreach ($data as $entity) {
       if (!empty($entity['nid'])) :
-        if(_is_sponsor_story_article($entity['nid'])):?>
-          <span class="itg-sponsor-title">SPONSORED</span>
-        <?php 
-        endif;
         ?>
         <li title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> top-story-<?php print $entity['nid'] ?>">
           <?php
+          if(_is_sponsor_story_article($entity['nid'])):?>
+            <span class="itg-sponsor-title">SPONSORED</span>
+          <?php 
+          endif;
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($entity['nid'], 0, 110), "node/" . $entity['nid'], array("html" => TRUE , 'attributes' => array("title" => $entity['title'])));
           }
