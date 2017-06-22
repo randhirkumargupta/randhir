@@ -875,7 +875,7 @@ function itg_story_node_view($node , $view_mode , $langcode) {
  * Implements itg_story_movie_image_plugin_data()
  * @param type $node_id
  */
-function itg_story_movie_image_plugin_data($node_id = '') {
+function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
   //Store the node id of the story from the argument
   $story_nid = $node_id;
   if (!empty($story_nid)) {
@@ -899,7 +899,11 @@ function itg_story_movie_image_plugin_data($node_id = '') {
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'] , 0 , 35 , "..");
         // generate html 
         $html .= '<div class="story-photo-list-item">';
+        if($source == 'amp') {
+          $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
+        } else {
         $html .= '<img src="' . $sample_img . '"  alt=""/>';
+        }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
         $html .= '</div>';
@@ -992,6 +996,84 @@ function itg_story_photo_story_html($node_id) {
       $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="'.$photo_story_img_alt.'" />' . $previous_link;
       $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
+    }
+    $html .= '</div>';
+    return $html;
+  }
+}
+
+/**
+ * 
+ * @param type $node_id
+ * @return string
+ */
+function itg_story_photo_amp_html($node_id) {
+  // generate the html for photo story top slider
+  if (!empty($node_id)) {
+    $node = node_load($node_id);
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $next = itg_story_photo_story_redirect($node_id , 'next');
+    $previous = itg_story_photo_story_redirect($node_id , 'prev');
+    $next_link_count = count($photo_story) - 1;
+    $html = '';
+    $html .='<amp-carousel id="carousel-with-preview"
+    width="400"
+    height="300"
+    layout="responsive"
+    type="slides">';
+    $i= 1;
+    foreach ($photo_story as $key => $val) {
+      
+      $entity_obj = entity_load('field_collection_item' , array($val['value']));
+      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
+      
+      $photo_story_img = image_style_url('photo_story_771x432' , $photo_story_img_path);
+      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
+      $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
+      $html .='<div class="slide"><div class="photo-slide"><amp-img src="'.$photo_story_img.'?image='.$i.'"
+      width="771"
+      height="432"
+      layout="responsive"
+      alt="' . $photo_story_img_alt. '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">'.$photo_story_img_title.'</div></div>
+      <div class="image-alt">' .$photo_story_img_alt. '</div><amp-fit-text>'.$photo_story_desc.'</amp-fit-text></div>';
+      $i++;
+    }
+    $html .= '</amp-carousel>';
+    return $html;
+  }
+}
+
+/**
+ * 
+ * @param type $node_id
+ * @return string
+ */
+function itg_story_photo_amp_bottom_html($node_id) {
+  // generate the html for photo story top slider
+  if (!empty($node_id)) {
+    $node = node_load($node_id);
+    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
+    $count = sizeof($photo_story);
+    $html = '';
+    //$html = '<div class="photo-story-img multiple-photo common-photo">';
+    $html .= '<div class="carousel-preview">';
+    $index= 0;
+    $slide = 1;
+    for ($i = 0; $i < $count; $i++) {
+      $entity_obj = entity_load('field_collection_item' , array($photo_story[$i]['value']));
+      $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
+      $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
+      $photo_story_img_title = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['title'];
+      $photo_story_img = image_style_url('photo_story_small_88x66' , $photo_story_img_path);
+      $html .= '<button on="tap:carousel-with-preview.goToSlide(index='.$index.')">
+      <amp-img src="'.$photo_story_img.'?image='.$slide.'"
+        width="88"
+        height="66"
+       alt="'.$photo_story_img_title.'"></amp-img>
+    </button>';
+      $index++;
+      $slide++;
     }
     $html .= '</div>';
     return $html;

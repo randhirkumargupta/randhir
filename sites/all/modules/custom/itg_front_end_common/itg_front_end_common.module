@@ -44,6 +44,11 @@ function itg_front_end_common_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['related_story_amp_block'] = array(
+    'info' => t('Related story amp Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['related_podcast_block'] = array(
     'info' => t('Related Podcast block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -106,6 +111,10 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'related_story_bottom_block':
       $block['content'] = _related_story_bottom_block_content();
+      break; 
+    
+    case 'related_story_amp_block':
+      $block['content'] = _related_story_amp_block_content();
       break; 
     
     case 'related_podcast_block':
@@ -904,5 +913,55 @@ function get_related_display_title($nid, $display_id) {
       }
     }
     return;
+  }
+}
+
+/**
+ * Implements Related story amp block content
+ */
+function _related_story_amp_block_content() {
+  global $base_url;
+  $arg = arg();
+  $related_content_amp = itg_get_related_content($arg[1]);
+  if (function_exists('itg_get_related_story_id')) {
+    $related_result_amp = itg_get_related_story_id($related_content_amp);
+  }
+  if(!empty($related_result_amp)) {
+  $related_story = '<h2>RELATED</h2>';
+  $related_story.= "<ul>";
+  $i = 0;
+  foreach ($related_result_amp as $site_hash_key) {
+    $current_entity_id = $site_hash_key;
+    $related_data = itg_get_related_story_content($current_entity_id);
+    if (!empty($related_data)) {
+      $display_title = get_related_display_title($arg[1], $current_entity_id);
+      if(!empty($display_title)) {
+        $display_title = $display_title;
+      } else {
+        $display_title = $related_data->label;
+      }
+      $related_title = mb_strimwidth($display_title, 0, 80, "..");
+      
+      $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+      
+      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"></amp-img>';
+
+      if (empty($related_image_url)) {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+        $related_story.= "<li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$related_data->url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
+      }
+      else {
+        $related_story.= "<li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
+      }
+    }
+    $i++;
+    if ($i == 4)
+      break;
+  }
+  
+  $related_story.= "</ul>";
+  return $related_story;
   }
 }
