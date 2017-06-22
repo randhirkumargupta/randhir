@@ -251,7 +251,8 @@
     bottom: 100%;
     left: 0;
 }
-      </style>
+
+    </style>
     <?php //endif; ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
   </head>

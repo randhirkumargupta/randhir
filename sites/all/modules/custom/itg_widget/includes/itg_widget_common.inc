@@ -2282,6 +2282,13 @@ function itg_widget_block_view_alter(&$data, $block) {
       }
     }
   }
+  
+  
+  if ($block->delta == 'related_photo_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
+    }
+  }
 
   if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {
     $arraynid = array();
