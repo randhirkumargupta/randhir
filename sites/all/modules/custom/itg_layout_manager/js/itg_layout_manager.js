@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_layout = {
         attach: function(context, settings) {
             var layout_type = settings.itg_story.settings.layout_type;
-            
+             
             //section card
             
             $('#edit-section-name-all').hide();
@@ -28,7 +28,7 @@
             if ($('.messages--error').html() != null) {
                 return false;
             }
-
+            
             draggable_widgets();
 
             // code for layout setting save in db
@@ -453,6 +453,7 @@
               jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
             }
             });
+            
             jQuery('.add-more-block').each(function() {
                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
                   jQuery(this).hide();
@@ -520,6 +521,30 @@
                         success: function(data) {
                             // display category list in block
                            $('#templates-highlights-widgets').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
+           
+            // for election widgets
+            $('#layout-election-submit').click(function() {
+                
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var html_title = $('#edit-election-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/election_graph_xml",
+                        method: 'post',
+                        data: {html_title: html_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-election').html(data);
                            draggable_widgets();
                         }
                     });

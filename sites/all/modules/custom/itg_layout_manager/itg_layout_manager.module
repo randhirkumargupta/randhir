@@ -114,7 +114,8 @@ function itg_layout_manager_menu() {
       'page callback' => 'itg_state_election',
       'page arguments' => array(1, 2),
       'access arguments' => array('access content'),
-  );
+  );  
+  
   return $items;
 }
 
@@ -345,6 +346,11 @@ function itg_layout_manager_block_info() {
       'info' => t('Custom content widget block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['layout_election_widget_block'] = array(
+      'info' => t('election widget block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -504,7 +510,7 @@ function itg_layout_manager_block_view($delta = '') {
     case 'layout_custom_widget_list_block':
       $html_widgets_form = drupal_get_form('html_widgets_search_form');
       $widget_array['html_widgets_form'] = drupal_render($html_widgets_form);
-      $widget_array['custom_widget'] = get_html_custom_widget_list();
+      $widget_array['custom_widget'] = get_html_custom_widget_list('custom_html_widgets');
       $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
     break;
 
@@ -574,6 +580,12 @@ function itg_layout_manager_block_view($delta = '') {
       $content_widgets_form = drupal_get_form('content_widgets_search_form');
       $widget_array['content_widgets_form'] = drupal_render($content_widgets_form);      
       $block['content'] = theme('layout_content_custom_widgets_list_block', array('data' => $widget_array));
+    break;
+    
+    case 'layout_election_widget_block':
+      $election_widgets_form = drupal_get_form('election_widgets_search_form');
+      $widget_array['election_widgets_form'] = drupal_render($election_widgets_form);      
+      $block['content'] = theme('layout_election_widgets_block', array('data' => $widget_array));
     break;
   }
 
@@ -685,7 +697,13 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
           'arguments' => array('form' => NULL),
           'template' => 'layout-state-election',
           'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+      ),      
+      'layout_election_widgets_block' => array(
+          'arguments' => array('form' => NULL),
+          'template' => 'layout-election-widgets-block',
+          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
       ),
+      //layout_election_widgets_block
   );
 
   return $themes;
