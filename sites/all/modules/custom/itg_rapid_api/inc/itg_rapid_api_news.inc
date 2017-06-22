@@ -11,7 +11,7 @@
 
 
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
-    // variable decalartion
+    // variable decalartion    
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();      
@@ -324,6 +324,7 @@ function getVideolist($nid){
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
+      $nv_cont = getNodeViewCount($nid);
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
@@ -394,7 +395,7 @@ function getVideolist($nid){
             $videolist['nv_url'] = "$stream_h264_hd_url";
             $videolist['nv_download_url'] = "$video_path_mp4";
         }
-        $videolist['nv_view_count'] = "";
+        $videolist['nv_view_count'] = "$nv_cont";
         $videolist['nv_comment_count'] = "";
         $videolist['nv_share_url'] = "$firebase_url";
         $videolist['nv_updated_datetime'] = "$changed_datetime";
@@ -405,6 +406,25 @@ function getVideolist($nid){
     
     return $videolist;
    
+}
+
+/**
+ * function for generate getViewCount
+ * @pram $nid 
+ * @return $nv_count
+ */
+
+function getNodeViewCount($nid){
+    //$nid = 443; 
+    $nv_count = 0;
+    //SELECT * FROM `itg_lrp_loyalty_points` WHERE `loyalty_type` = 'Content Visit'
+    $query = db_select('itg_lrp_loyalty_points', 'ilp');
+    $query->fields('ilp', array('node_id'));
+    $query->condition('ilp.node_id', $nid);
+    $query->condition('ilp.loyalty_type', 'Content Visit');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $nv_count = count($result);
+    return $nv_count;
 }
 
 

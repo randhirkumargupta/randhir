@@ -167,7 +167,7 @@ if($term_tree_count){
       $field_primary_category_value = $resvalue['field_primary_category_value'];
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;
-      
+      $nv_cont = getNodeViewCount($nid);
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -236,7 +236,7 @@ if($term_tree_count){
             $photo_list_array[$listcount]['v_url'] = "$stream_h264_hd_url";
             $photo_list_array[$listcount]['v_download_url'] = "$video_path_mp4";
         }
-        $photo_list_array[$listcount]['v_view_count'] = "0";
+        $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
         $photo_list_array[$listcount]['v_comment_count'] = "10";
         $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
@@ -425,7 +425,7 @@ if($term_tree_count){
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-
+      $nv_cont = getNodeViewCount($nid);
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -491,7 +491,7 @@ if($term_tree_count){
             $photo_list_array[$listcount]['p_url'] = "$stream_h264_hd_url";
             $photo_list_array[$listcount]['p_download_url'] = "$video_path_mp4";
         }
-        $photo_list_array[$listcount]['p_view_count'] = "0";
+        $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
         $photo_list_array[$listcount]['p_comment_count'] = "10";
         $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
