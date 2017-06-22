@@ -235,7 +235,9 @@ if (!empty($content)):
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
             
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"></a>';
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
+                        . '</a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -343,12 +345,7 @@ if (!empty($content)):
                     $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
                     $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div><div class="social-share"><ul>     
-                                 <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a title = "share on facebook" class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $image . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" class="user-activity twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="user-activity google" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
-                                 </ul></div></div>';
+                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div></div>';
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
@@ -359,7 +356,7 @@ if (!empty($content)):
                   $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
                 }
                 
-                $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                $movie_html = itg_story_movie_image_plugin_data($node->nid, 'amp');
                 if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                   if (!empty($node->field_story_technology['und'])) {
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
@@ -471,20 +468,14 @@ if (!empty($content)):
             }
             
             $share_image = file_create_url($share_uri);
-            $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+            //$img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"></amp-img>';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
                 $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
                 $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
-                $buzz_output.= '<div class="buzz-img"><div class="social-share">
-              <ul>
-              <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $buzz_title_share . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ', ' . "'" . $base_url . "'" . ', ' . "'" . $nid . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
-              </ul>
-          </div>' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
+                $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img">' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div></div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -506,7 +497,7 @@ if (!empty($content)):
         }
         ?>
           <!-- code for related content -->   
-          <?php if (!empty($related_content) && $node->field_story_select_templates[LANGUAGE_NONE][0]['value'] != 'listicle') { ?>
+          <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">
               <?php
               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_amp_block');
