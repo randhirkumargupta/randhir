@@ -115,7 +115,13 @@ function itg_videogallery_schema() {
         'description' => 'node is draft',
         'type' => 'int',
         'null' => TRUE,
+      ), 
+      'is_notify' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
       ),
+      
     ),
     'primary key' => array('eid'),
   );
