@@ -132,6 +132,29 @@ function itg_sitemap_chunks_schema() {
     ),
     'primary key' => array('target_ms_id', 'vocab_type'),
   );
+  
+  $schema['itg_sitemap_chunks_sections'] = array(
+    'description' => 'Table to save custom order of nodes',
+    'fields' => array(
+      'frequency' => array(
+        'description' => 'Frequency number',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'frequency_type' => array(
+        'description' => 'Frequency Type like month , year , day',
+        'type' => 'varchar',
+        'length' => 21,
+        'not null' => FALSE,
+      ),
+      'section_tid' => array(
+        'description' => 'section tid',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('section_tid'),
+  );
 
   return $schema;
 }

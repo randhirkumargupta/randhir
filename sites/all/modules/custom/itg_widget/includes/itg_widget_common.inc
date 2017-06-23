@@ -760,6 +760,9 @@ function itg_widget_theme() {
     'graph_election' => array(
       'template' => 'templates/itg-widget-graph-election',
     ),
+    'graph_election_section_cart' => array(
+      'template' => 'templates/itg-widget-graph-election-section-cart',
+    ),
     'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
     ),
@@ -2280,6 +2283,13 @@ function itg_widget_block_view_alter(&$data, $block) {
       else {
         $data['content'] = array();
       }
+    }
+  }
+  
+  
+  if ($block->delta == 'related_photo_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
     }
   }
 
