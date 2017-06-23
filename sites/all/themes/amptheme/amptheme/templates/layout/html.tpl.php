@@ -49,6 +49,7 @@
     <title><?php print $head_title; ?></title>
     <?php print $head; ?>
     <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
+    <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -56,7 +57,7 @@
     
     <?php //if (!empty($ampsubtheme_path_file)): ?>
       <style amp-custom>
-        <?php //include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
+        
         *{margin: 0; padding: 0; box-sizing: border-box;}
         body{font: 400 14px/18px 'Roboto Slab';}
         h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
@@ -251,6 +252,115 @@
     bottom: 100%;
     left: 0;
 }
+.movie-rating {
+    width: 111px;
+    height: 18px;
+    margin: 20px 0;
+    position: relative;
+}
+.grey-star{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+.red-star{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    overflow: hidden;
+}
+.story-section .story-movie .movie-detail div + div {
+    margin-top: 15px;
+}
+.story-section .story-movie .movie-detail div .title {
+    float: left;
+    padding-right: 7px;
+    width: 60px;
+}
+.story-section .story-movie .movie-detail div .detail {
+    display: block;
+    overflow: hidden;
+}
+
+.node-type-photogallery #header{margin: 0;}
+.node-type-photogallery .i-amphtml-slide-item>*{height: auto;}
+.black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
+.photo-title {
+    font-size: 32px;
+    margin: 20px 0;
+    color: #fff;
+    line-height: 42px;
+}
+.amp-other-gallery h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    position: relative;
+}
+.amp-other-gallery h2:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    top: 0;
+    bottom: 3px;
+    margin: auto;
+
+}
+.amp-other-gallery h2 span {
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    padding: 20px 20px 20px 0;
+    display: inline-block;
+}
+.amp-photo-slider .photo-slide .caption{
+    width: auto;
+}
+.amp-photo-slider p{
+    color: #fff;
+    line-height: 24px;
+}
+.amp-other-gallery ul{
+    list-style: none;
+    overflow: hidden;
+    margin: 0 -6px;
+}
+.amp-other-gallery ul li{
+    float: left;
+    width: 183px;
+    padding: 0 6px;
+    max-width: 50%;
+}
+.other-img{
+    position: relative;
+}
+.other-count{
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+    left: 0;
+    background-color: rgba(0,0,0,.6);
+    color: #aeaeae;
+}
+.other-date{
+    display: block;
+    font-size: 12px;
+    color: #b1b1b1;
+    padding: 8px 0 5px;
+    font-family: "Roboto Slab";
+}
+.other-title a{
+    color: #494949;
+    font-family: "Roboto Slab";
+    line-height: 18px;
+    text-decoration: none;
+}
+.amp-photo-ad{text-align: center;}
 
     </style>
     <?php //endif; ?>
