@@ -556,17 +556,6 @@ function itg_mobile_association_validator(&$form, &$form_state) {
       }
     }
   }
-
-  // field collection validation
-//  foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
-//    $fids[] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-//    $validate_thumb[$key] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-//  }
-//  $newfid = array_filter($fids);
-//  $validate_thumbs = array_filter($validate_thumb);
-//  if (empty($newfid)) {
-//    //form_set_error('field_service_video', t('Upload video is required.'));
-//  }
 }
 
 /**
