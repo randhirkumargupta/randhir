@@ -19,6 +19,18 @@ function itg_sitemap_chunks_help($path, $args) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function itg_sitemap_chunks_permission() {
+  return array(
+    'administer itg sitemap' => array(
+      'title' => t('administer itg sitemap'),
+      'description' => t('How can do setting for itg sitemap'),
+    ),
+  );
+}
+
+/**
  * Implements hook_info().
  */
 function itg_sitemap_chunks_menu() {
@@ -28,7 +40,7 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_chunks_add_sitemap'),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
     'type' => MENU_NORMAL_ITEM,
@@ -37,7 +49,7 @@ function itg_sitemap_chunks_menu() {
   $items['admin/config/search/itg-multiple-sitemap/add'] = array(
     'title' => 'Add',
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
@@ -45,7 +57,7 @@ function itg_sitemap_chunks_menu() {
     'title' => "Dashboard",
     'page callback' => 'itg_sitemap_chunks_dashboard',
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
     'type' => MENU_LOCAL_TASK,
@@ -56,7 +68,7 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_chunks_section_form'),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.sections.inc',
     'type' => MENU_LOCAL_TASK,
@@ -67,7 +79,7 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'itg_sitemap_chunks_edit_sitemap',
     'page arguments' => array(5),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
   );
@@ -77,7 +89,7 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'itg_sitemap_chunks_delete_sitemap',
     'page arguments' => array(5),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
   );
@@ -87,7 +99,7 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_chunks_setting_form'),
     'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
     'type' => MENU_LOCAL_TASK,

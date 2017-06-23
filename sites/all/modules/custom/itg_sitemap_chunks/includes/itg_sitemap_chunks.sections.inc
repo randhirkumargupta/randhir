@@ -92,9 +92,9 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
       if ($section['section_tid'][$section_tid] != 0) {
         $section_alise_name = $section['section_tid'][$section_tid];
         $alias = itg_videogallery_get_term_name($section_alise_name) . '-sitemap.xml';
-        if (itg_event_backend_alias_check(pathauto_cleanstring($alias))) {
+        if (itg_event_backend_alias_check(itg_sitemap_chunks_create_valid_url($alias))) {
           $source = 'sitemap/' . $section['section_tid'][$section_tid];
-          itg_event_backend_save_alias($source, pathauto_cleanstring($alias));
+          itg_event_backend_save_alias($source, itg_sitemap_chunks_create_valid_url($alias));
         }
         $handel_value = array();
         $handel_value['tid'] = array_keys($section['section_tid'])[0];
@@ -105,4 +105,18 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
       }
     }
   }
+}
+
+function itg_sitemap_chunks_create_valid_url($pathdata) {
+
+  if (preg_match("![^a-z0-9]!i", $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+    while (preg_match('/--/', $pathdata)) {
+      $pathdata = preg_replace('/--/', '-', $pathdata);
+    }
+    $pathdata = rtrim($pathdata, "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+  }
+  return $pathdata;
 }

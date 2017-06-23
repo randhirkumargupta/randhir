@@ -1,0 +1,9 @@
+name = Feature for xml sitemap chunks
+description = Feature for xml sitemap chunks
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = features
+dependencies[] = itg_sitemap_chunks
+features[features_api][] = api:2
+features[user_permission][] = administer itg sitemap
