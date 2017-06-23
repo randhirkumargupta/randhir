@@ -492,12 +492,17 @@ if (!empty($content)):
 
         <div class="section-left-bototm">
         </div>
-
-        <?php
-        if (function_exists('taboola_view')) {
-          taboola_view();
-        }
-        ?>
+        <div class="amp-taboola">
+        <amp-embed width=100 height=500
+             type=taboola
+             layout=responsive
+             heights="(min-width:1907px) 39%, (min-width:1200px) 46%, (min-width:780px) 64%, (min-width:480px) 98%, (min-width:460px) 167%, 196%"
+             data-publisher="amp-demo"
+             data-mode="thumbnails-a"
+             data-placement="Ads Example"
+             data-article="auto">
+        </amp-embed>
+        </div>
           <!-- code for related content -->   
           <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">
