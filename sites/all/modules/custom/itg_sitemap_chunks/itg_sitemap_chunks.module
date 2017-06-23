@@ -6,19 +6,6 @@
  */
 
 /**
- * Implements hook_help().
- */
-function itg_sitemap_chunks_help($path, $args) {
-  if ($path == 'admin/config/search/itg-multiple-sitemap/dashboard') {
-    return t("
-      <p>This module provides a multiple xml sitemap functionality.</p>
-      <p>Create sub files and it will create a main file for all subfiles.</p>
-      <p>Link of main file would be 'sites/default/files/itg_sitemap_chunks/sitemap.xml'.</p>
-    ");
-  }
-}
-
-/**
  * Implements hook_permission().
  */
 function itg_sitemap_chunks_permission() {

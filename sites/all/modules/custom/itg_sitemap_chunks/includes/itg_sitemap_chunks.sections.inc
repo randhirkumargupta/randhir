@@ -14,6 +14,7 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     '#suffix' => '</div>',
     '#tree' => TRUE,
     '#theme' => 'table',
+    '#attributes' => array('class' => array("views-table")),
     '#header' => array(t('Section Name'), t('Frequency'), t('Type')),
     '#rows' => array(),
   );
