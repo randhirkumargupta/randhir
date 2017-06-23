@@ -294,8 +294,9 @@ if (!empty($content)):
 
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
-                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">
-
+                  <div class="movie-rating">
+                      <div class="grey-star"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-grey.png'?>" width="111" height="18"></amp-img></div>
+                      <div class="red-star" style="width: <?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 22 . "px"; ?>"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-red.png'?>" width="111" height="18"></amp-img></div>
                   </div>                            
                 <?php endif; ?>
                 <div class="movie-detail">
