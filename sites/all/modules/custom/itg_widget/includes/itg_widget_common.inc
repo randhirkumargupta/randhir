@@ -1017,6 +1017,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+       case 'views-exposed-form-state-manager-page':
+     
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
+      );
+      drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
     case 'views-exposed-form-static-pages-page':
       $form['title']['#attributes']['placeholder'] = t('Page Title');
       $form['title']['#autocomplete_path'] = 'content-title-list/page/autocomplete';

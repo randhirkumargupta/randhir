@@ -1266,10 +1266,7 @@ function itg_widget_election_graph_for_section_card($nid) {
       $rand=rand(1,999999);
       foreach ($data as $index => $row) {
         $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-  
-       
       }
-
       return  theme("graph_election_section_cart", array("data" => $data,'rand_id'=>$rand,'jsondata'=>$jsondata));      
       
 }
