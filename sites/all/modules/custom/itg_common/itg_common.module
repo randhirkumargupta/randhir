@@ -453,8 +453,8 @@ function itg_common_add_preview_button($form, &$form_state) {
   unset($form['actions']['preview']);
   if (isset($form_state['node']->nid)) {
     $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;
-    $web_link = '<a href="' . $node_url . '" target="_blank">Web preview</a>';
-    $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
+    $web_link = '<a  class="btn-submit" href="' . $node_url . '" target="_blank">Web preview</a>';
+    $mob_link = '<a class="colorbox-load btn-submit" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
           
     $form['actions']['webpreview'] = array(
       '#markup' => $web_link,
