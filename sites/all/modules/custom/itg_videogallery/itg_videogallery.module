@@ -2368,6 +2368,7 @@ function itg_videogallery_thumb_url() {
 
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
+      node_save($node);
     }
     node_save($node);
   }
@@ -2393,6 +2394,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
   $query->condition('video_id', $videoid, '=');
   $result_new = $query->execute()->fetchAll();
   foreach ($result_new as $val) {
+    pr($val->dailymotion_published);
     global $user;
     $node = new stdClass();
     $node->title = $val->name;
@@ -2413,7 +2415,9 @@ function itg_videogallery_update_video_info_solr($videoid) {
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
+      node_save($node);
     }
+    // need to chane with solr
     node_save($node);
   }
 }
