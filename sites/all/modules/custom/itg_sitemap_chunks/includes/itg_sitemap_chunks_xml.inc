@@ -195,11 +195,11 @@ function itg_sitemap_get_section_sitemap_required_data($nid) {
   $query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $key => $data) {
-    $final_data['news_title'] = $data['title'];
-    $final_data['news_keywords'] = itg_sitemap_get_metatag_of_node($data['nid']);
+    $final_data['news_title'] = itg_sitemap_get_xml_valid_data($data['title']);
+    $final_data['news_keywords'] = itg_sitemap_get_xml_valid_data(itg_sitemap_get_metatag_of_node($data['nid']));
     $final_data['news_name'] = ITG_INDIATODAY_SITENAME_XML;
     $final_data['news_language'] = $GLOBALS['language']->language;
-    $final_data['url'] = url(drupal_get_path_alias('node/' . $data['nid']), array('absolute' => TRUE));
+    $final_data['url'] = itg_sitemap_get_xml_valid_data(url(drupal_get_path_alias('node/' . $data['nid']), array('absolute' => TRUE)));
     $final_data['news_publication_date'] = date('c', $data['created']);
   }
   return $final_data;
@@ -219,4 +219,11 @@ function itg_sitemap_get_metatag_of_node($nid) {
   $data = $query->execute()->fetchField();
   $unserialzed = unserialize($data);
   return $unserialzed['keywords']['value'];
+}
+
+/**
+ * Function which is used to get xml validated data.
+ */
+function itg_sitemap_get_xml_valid_data($text) {
+  return htmlspecialchars($text, ENT_XML1, 'UTF-8');
 }

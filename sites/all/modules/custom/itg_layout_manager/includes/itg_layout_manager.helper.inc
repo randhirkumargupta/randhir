@@ -92,6 +92,9 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
   }
+  else if (isset($widget_name) && $widget_name == 'election_graph_xml') {
+    return itg_widget_election_graph_for_section_card($filter_url);    
+  }
   else if (isset($widget_name) && $widget_name == 'custom_content_widgets') {
     return itg_custom_widget_ordering_data_from_title($filter_url);    
   }

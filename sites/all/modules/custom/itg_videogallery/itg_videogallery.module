@@ -13,7 +13,6 @@ define('FTP_URL_VIDEO', variable_get('dailymotion_ftp_url'));
  * Implements hook_menu().
  * {@inheritdoc}
  */
-
 function itg_videogallery_menu() {
   $items['dailymotion/config'] = array(
     'title' => 'Dailymotion Configuration',
@@ -2393,7 +2392,6 @@ function itg_videogallery_update_video_info_solr($videoid) {
   $query->fields('drd');
   $query->condition('video_id', $videoid, '=');
   $result_new = $query->execute()->fetchAll();
-  $api = itg_videogallery_dailymotion_api();
   foreach ($result_new as $val) {
     global $user;
     $node = new stdClass();
