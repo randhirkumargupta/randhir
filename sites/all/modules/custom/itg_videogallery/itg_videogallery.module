@@ -2394,7 +2394,6 @@ function itg_videogallery_update_video_info_solr($videoid) {
   $query->condition('video_id', $videoid, '=');
   $result_new = $query->execute()->fetchAll();
   foreach ($result_new as $val) {
-    pr($val->dailymotion_published);
     global $user;
     $node = new stdClass();
     $node->title = $val->name;
@@ -2628,7 +2627,6 @@ function itg_videogallery_thumb_assign() {
       }
 
 // assign image in field after resize
-
       if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == "") {
         $image_url = $thumb_url['thumbnail_720_url'];
         $imagedata = file_get_contents($image_url);
