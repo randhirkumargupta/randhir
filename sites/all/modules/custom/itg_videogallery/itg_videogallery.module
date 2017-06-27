@@ -2816,16 +2816,45 @@ function itg_videogallery_move_ftp_videos() {
 }
 
 /**
+ * This function use for get bitrates info,
+ * 
+ */
+function itg_videogallery_url_with_bitates() {
+  $bitrates = array();
+  $bitrates['framesize']['stream_h264_l1_url'] = '176x144';
+  $bitrates['framesize']['stream_h264_l2_url'] = '176x144';
+  $bitrates['framesize']['stream_h264_ld_url'] = '320x240';
+  $bitrates['framesize']['stream_h264_url'] = '512x384';
+  $bitrates['framesize']['stream_h264_hq_url'] = '848x480';
+  $bitrates['framesize']['stream_h264_hd_url'] = '1280x720';
+  $bitrates['framesize']['stream_h264_hd1080_url'] = '1920x1080';
+  $bitrates['framesize']['stream_h264_qhd_url'] = '2560x1440';
+  $bitrates['framesize']['stream_h264_uhd_url'] = '3840x2160';
+
+  $bitrates['bitrate']['stream_h264_l1_url'] = '60';
+  $bitrates['bitrate']['stream_h264_l2_url'] = '106';
+  $bitrates['bitrate']['stream_h264_ld_url'] = '256';
+  $bitrates['bitrate']['stream_h264_url'] = '460';
+  $bitrates['bitrate']['stream_h264_hq_url'] = '845';
+  $bitrates['bitrate']['stream_h264_hd_url'] = '2100';
+  $bitrates['bitrate']['stream_h264_hd1080_url'] = '6200';
+  $bitrates['bitrate']['stream_h264_qhd_url'] = '10400';
+  $bitrates['bitrate']['stream_h264_uhd_url'] = '16500';
+  return $bitrates;
+}
+
+/**
  * This is temp function use for test dailymotion video resploce no we will 
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-2 days', time());
+  $totime = strtotime('-15 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
-  $query->fields('drd', array('video_id', 'encoding_progress', 'name'));
+  $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
+  $bitrates_info = itg_videogallery_url_with_bitates();
 
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
@@ -2851,6 +2880,9 @@ function itg_videogallery_video_bitrate() {
                   ->fields(array(
                     'video_id' => $vid->video_id,
                     'bitate_url' => $json_url,
+                    'duration' => $vid->video_duration,
+                    'framesize' => $bitrates_info['framesize'][$keys],
+                    'bitrate' => $bitrates_info['bitrate'][$keys],
                     'video_name' => $vid->name,
                     'bitates_field' => $keys,
                     'is_download' => 0,
@@ -2863,7 +2895,10 @@ function itg_videogallery_video_bitrate() {
                 ->fields(array(
                   'video_id' => $vid->video_id,
                   'bitate_url' => $json_url,
+                  'framesize' => $bitrates_info['framesize'][$keys],
+                  'bitrate' => $bitrates_info['bitrate'][$keys],
                   'bitates_field' => $keys,
+                  'duration' => $vid->video_duration,
                   'video_name' => $vid->name,
                   'is_download' => 0,
                 ))
@@ -3806,19 +3841,14 @@ function itg_videogallery_dailymotion_send_video($real_path) {
 function itg_videogallery_dm_to_s3() {
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   global $user;
-  $dataarray = array('stream_h264_hd1080_url' => '1920x1080',
-    'stream_h264_hd_url' => '1280x720',
-    'stream_h264_hq_url' => '848x480',
-    'stream_h264_ld_url' => '320x240',
-    'stream_h264_url' => '512x384',
-  );
+
   $query = db_select('itg_video_bitrates_data', 'ivbd');
   $query->fields('ivbd');
   $query->condition('is_download', '0', '=');
   $result = $query->execute()->fetchall();
   foreach ($result as $key => $value) {
     if (!empty($value->bitate_url)) {
-      $video_urlsdata = $value->video_id . '_' . $dataarray[$value->bitates_field] . '.mp4';
+      $video_urlsdata = $value->video_id . '_' . $value->bitrate . '.mp4';
       $senddata = itg_video_send_dm_to_s3($value->bitate_url, $video_urlsdata);
       if (!empty($senddata)) {
         $node = new stdClass();
@@ -3828,7 +3858,9 @@ function itg_videogallery_dm_to_s3() {
         $node->language = LANGUAGE_NONE;
         $node->field_bitrate_video_id[LANGUAGE_NONE][0]['value'] = $value->video_id;
         $node->field_video_url [LANGUAGE_NONE][0]['value'] = $senddata;
-        $node->field_resolution [LANGUAGE_NONE][0]['value'] = $dataarray[$value->bitates_field];
+        $node->field_video_bitrate [LANGUAGE_NONE][0]['value'] = $value->bitrate;
+        $node->field_resolution [LANGUAGE_NONE][0]['value'] = $value->framesize;
+        $node->field_bitrate_video_duration [LANGUAGE_NONE][0]['value'] = $value->duration;
         $node->uid = $user->uid;
         $node->status = 1; //(1 or 0): Published or not
         $node->promote = 0; //(1 or 0): Promoted to front page
