@@ -46,6 +46,7 @@ else {
   $site_name = array_search($parse_host, $sitehash);
   if (!empty($site_name)) {
     $site_name = $site_name;
+    $shr = base64_decode($arg[1]);
   }
   else {
     $site_name = t('India Today');
