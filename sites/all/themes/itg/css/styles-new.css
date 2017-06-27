@@ -3638,6 +3638,42 @@ span.personal-social-share-links {
   line-height: 30px;
 }
 
+#itg-sso-reg-multistep-form--2 a.sso-sign-in {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 20px;
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+#itg-sso-reg-multistep-form--2 .sign-in-link, #itg-sso-reg-multistep-form--3 .sign-in-link {
+  text-align: center;
+}
+
+.forgot-error {
+  color: red;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
+  text-align: left;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] .messages--status {
+  width: 520PX;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#fotp #forgototpclickme {
+  color: blue;
+}
+
+#itg_user_forgot_password_multistep_form label {
+  float: left;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
