@@ -286,8 +286,9 @@
     overflow: hidden;
 }
 
-.node-type-photogallery #header{margin: 0;}
-.node-type-photogallery .i-amphtml-slide-item>*{height: auto;}
+.node-type-photogallery #header, 
+.node-type-videogallery #header{margin: 0;}
+/*.node-type-photogallery .i-amphtml-slide-item>*{height: auto;}*/
 .black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
 .photo-title {
     font-size: 32px;
