@@ -455,7 +455,11 @@ if (!empty($content)):
                     ?>
                   <?php } ?>
 
-                  <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
+                  <?php
+                   if (function_exists('itg_story_get_image_info')) {
+                    $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                  }
+                  if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                     <div class="photoby">
                       <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                         <div class="story-img-rating">
@@ -466,18 +470,18 @@ if (!empty($content)):
                           ?>
                         </div>
                       <?php } ?>
-                      <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
-                        <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                      <?php } ?>
+                       <?php
+                      if (isset($getImageInfo[0]->image_photo_grapher) && !empty($getImageInfo[0]->image_photo_grapher)) {
+                       print '<div class="photoby-text"> '.$getImageInfo[0]->image_photo_grapher.'</div>';
+                      }
+                      ?>
                     </div>
                   <?php } ?>     
 
-
-
                 </div>
-                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
-                  <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-                <?php } ?>                            
+                 <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
+                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
+              <?php } ?>                            
               </div>
 
               <?php
