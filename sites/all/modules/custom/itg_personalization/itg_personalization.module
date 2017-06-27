@@ -106,8 +106,7 @@ function itg_personalization_home_page() {
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
-  $data['badge_detail'] = itg_personalization_badge($user->uid); 
-  
+  $data['badge_detail'] = itg_personalization_badge($user->uid);
   // Load badge icon.
   if (!empty($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 0) {    
     $file = file_load(variable_get('badge_' . $data['badge_detail']['earn'], ''));

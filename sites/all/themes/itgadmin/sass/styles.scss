@@ -1306,11 +1306,19 @@ div.vertical-tabs {
             }
             .image-preview{
               padding: 0;
+              height: 124px;
               @extend .full;
               max-width: none;
+              @extend .pos-rel;
               img{
-                height: 124px;
-                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
               }
               .image-fullname{
                 @extend .desc-popup;
@@ -10027,6 +10035,17 @@ div.node{
         > .form-submit.cancel, .ajax-new-content > .form-submit.cancel{
           margin-left: 220px;
         }
+        &.field-multiple-drag{
+          display: table-cell !important; 
+          text-align: center;
+          a.tabledrag-handle{
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+        .field-type-image .image-widget-data .form-submit[value="Remove"]{
+          left: 290px !important;
+        }
       }
     }
   }
@@ -11898,3 +11917,4 @@ fieldset#edit-xmlsitemap{
   @extend .image-repo-browse;
 }
 .page-itg-event-past-spekars table tbody td{vertical-align: top;}
+ #views-exposed-form-report-filed-content-page #edit-from-state-wrapper {display:none !important}

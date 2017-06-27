@@ -49,7 +49,7 @@
 
               print '<div class="field-label">'.t('Section').'</div>';
               print '<div class="field-items">';
-              foreach ($node->field_section[LANGUAGE_NONE] as $value) {
+              foreach ($node->field_story_category[LANGUAGE_NONE] as $value) {
                 print '<div>' . t($value[taxonomy_term]->name) . '</div>';
               }
               print '</div>';

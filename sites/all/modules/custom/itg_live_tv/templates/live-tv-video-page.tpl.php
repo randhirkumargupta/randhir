@@ -8,16 +8,20 @@ $share_title = 'India Today Live TV';
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $useragent = $_SERVER['HTTP_USER_AGENT'];
-$current_device = 'Web';
 if (function_exists('mobile_user_agent_switch')) {
   $flag = mobile_user_agent_switch();
   if ($flag) {
     $current_device = 'Web Mobile';
+    $field_name = 'field_ads_header_script';
   }
+  else {
+      $current_device = 'Web';
+      $field_name = 'field_ads_ad_code';
+    }
 }
 if (function_exists('itg_live_tv_company')) {
   $device = itg_live_tv_company($current_device);
-  $live_tv_get_details = itg_get_live_tv_code($device[0]);
+  $live_tv_get_details = itg_get_live_tv_code($device[0] , $field_name);
 }
 ?>
 <div class="program-livetv">
@@ -32,10 +36,13 @@ if (function_exists('itg_live_tv_company')) {
                 <div class="show-embed-code-div">
                     <div class="copy-sample-code">
                         <textarea readonly>
-                            <?php if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL)) { ?>
-                            <iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_tv_get_details; ?>">
-                            </iframe>
-                              <?php
+                            <?php if (filter_var($live_tv_get_details, FILTER_VALIDATE_URL)) { 
+                              if (is_bool(is_youtube_url($live_tv_get_details))) {
+                                  echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="' . $live_tv_get_details . '"></iframe>';
+                                }
+                                elseif (is_string(is_youtube_url($live_tv_get_details))) {
+                                  echo '<iframe frameborder="0" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="https://www.youtube.com/embed/' . is_youtube_url($live_tv_get_details) . '"></iframe>';
+                                }
                             }
                             else {
                               print $live_tv_get_details;

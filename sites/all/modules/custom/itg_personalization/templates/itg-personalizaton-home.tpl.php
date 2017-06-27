@@ -48,7 +48,6 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         <dfn><?php print $follow_ugc_content; ?></dfn>
       </span>
     </div>
-      <?php if ($data['badge_detail']['earn'] > 0): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
@@ -81,7 +80,6 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         </div>
         <?php endif; ?>
       </div>
-      <?php endif; ?>
   </div>
  </div> 
 

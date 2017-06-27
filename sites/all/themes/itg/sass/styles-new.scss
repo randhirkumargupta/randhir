@@ -2254,9 +2254,52 @@ body.has-cart-popup{
     font-size: 14px;
     font-family: Roboto;
   }
+  .center-heading{
+    text-align: center;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      margin: 20px 0;
+    }
+  }
 }
 [id*="itg_user_forgot_password_multistep_form"]{
-    margin: 0 -15px;
+  text-align: center;
+  form{
+    padding-top: 20px;
+    max-width: 550px;
+    margin: 0 auto;
+    font-family: Roboto;
+    color: #666;
+    line-height: 24px;
+    .form-item-ufname{
+      margin-top: 20px;
+    }
+  }
+  .center-heading{
+    text-align: center;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      margin: 20px 0;
+    }
+  }
+  .parent-background{
+    .signin-link{
+      float: left;
+      &:hover{
+        color: #026bc5;
+      }
+    }
+    .signup-link{
+      float: right;
+      &:hover{
+        color: #026bc5;
+      }
+    }
+  }
     .form-text{
         width: 100%;
         height: 36px;
@@ -2706,7 +2749,7 @@ body.has-cart-popup{
     }
   }
 }
-.page-user{
+.page-user, .page-signup{
     form{
         font-family: Roboto;
         max-width: 580px; 
@@ -2818,7 +2861,7 @@ body.has-cart-popup{
         }
       }
     }
-    .sign-border{
+    .sign-border, .signup-txt{
       text-align: center;
       position: relative;
       margin: 30px 0;
@@ -2864,18 +2907,16 @@ body.has-cart-popup{
         }
     }
 }
+.page-signup form{
+  padding: 20px 0;
+}
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
     margin: 20px;
   }
 }
-.sign-in-link{
-  padding: 20px;
-  .signup-link{
-    float: left;
-  }
-}
+
 #fotp{
   padding: 0 15px;
   .form-item-fotp{
@@ -3468,7 +3509,30 @@ span.personal-social-share-links {
       line-height: 30px;
     }
 }
-
+#itg-sso-reg-multistep-form--2 a.sso-sign-in {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 20px;
+    background-color: #000;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+#itg-sso-reg-multistep-form--2 .sign-in-link, #itg-sso-reg-multistep-form--3 .sign-in-link {
+    text-align: center;
+}
+.forgot-error {
+    color: red;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper{text-align: left;}
+[id*="itg_user_forgot_password_multistep_form"] .messages--status{width: 520PX;
+    display: inline-block;
+    vertical-align: top;
+}
+#fotp #forgototpclickme{color: blue;}
+#itg_user_forgot_password_multistep_form label {
+    float: left;
+}
 
 
 
@@ -5330,7 +5394,25 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
+  .page-signup, .page-user, .page-forgot-password{
+    .parent-background{
+      background: #fbfbfb;
+      margin: 0 auto;
+      max-width: 800px;
+      overflow: hidden;
+      padding: 30px;
+      .signup-txt, .sign-border{
+        span{
+          background-color: #fbfbfb;
+        }
+      }
+      .social-share{
+        width: auto;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
   
 
 

@@ -174,13 +174,20 @@ function simplesamlphp_auth_loginpage() {
       $gotourl = $returnto;
     }
     $arg = arg();
-
+    
     if (!empty($arg[2])) {
-      drupal_goto('user/' . $user->uid.'/'.$arg[2]);
+      $redirect = base64_decode($arg[2]);
+      drupal_goto($redirect);
     }
     else {
-      drupal_goto('user/' . $user->uid);
+      drupal_goto(FRONT_URL);
     }
+//    if (!empty($arg[2])) {
+//      drupal_goto('user/' . $user->uid.'/'.$arg[2]);
+//    }
+//    else {
+//      drupal_goto('user/' . $user->uid);
+//    }
     
     // If a ReturnTo has been set.
 //    if ($gotourl) {

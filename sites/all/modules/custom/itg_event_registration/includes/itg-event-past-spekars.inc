@@ -114,6 +114,14 @@ function itg_event_past_speakers_submit($form, &$form_state) {
       }
     }
   }
+  // Start code for sending purge request of event home page for Akamai
+  if (isset($_GET['current_event']) && !empty($_GET['current_event'])) {
+    $url = drupal_get_path_alias('node/' . $_GET['current_event']);
+    if (function_exists('itg_akamai_clear_url')) {
+      itg_akamai_clear_url($url, array());
+    }
+  }
+  // End code for sending purge request of event home page for Akamai
 }
 
 /**
@@ -125,7 +133,7 @@ function __max_weight_for_speker($event_id) {
   $max_query_all->condition('cat_id', $event_id);
   $max_query_all->condition('widget', 'itg_event_speaker_order_widget');
   $max_result = $max_query_all->execute()->fetchField();
-  if($max_result == null || empty($max_result)) {
+  if ($max_result == null || empty($max_result)) {
     return 0;
   }
   else {
@@ -178,6 +186,7 @@ function past_speaker_event_order_reorder_submit($form, &$form_state) {
   foreach ($draggable_view_data as $key => $value) {
     $added_weight += $value['weight'];
   }
+  
   if ($added_weight) {
     foreach ($draggable_view_data as $key => $value) {
       db_update('itg_widget_order')
@@ -188,4 +197,13 @@ function past_speaker_event_order_reorder_submit($form, &$form_state) {
           ->execute();
     }
   }
+
+  // Start code for sending purge request of event home page for Akamai
+  if (isset($_GET['current_event']) && !empty($_GET['current_event'])) {
+    $url = drupal_get_path_alias('node/' . $_GET['current_event']);
+    if (function_exists('itg_akamai_clear_url')) {
+      itg_akamai_clear_url($url, array());
+    }
+  }
+  // End code for sending purge request of event home page for Akamai
 }

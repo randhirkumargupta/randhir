@@ -4873,7 +4873,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_small_image']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['field_photo_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_photo_small_image']['settings'] = array(
-    'image_style' => 'photo_landing_slider_thumb_88_86',
+    'image_style' => 'image88x66scale',
     'image_link' => '',
   );
 

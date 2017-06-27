@@ -34,6 +34,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'list_integer',
   );
@@ -72,6 +78,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       ),
       'target_type' => 'node',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'entityreference',
   );
@@ -95,6 +107,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -125,6 +143,12 @@ function feature_for_mobile_services_field_default_field_bases() {
         ),
       ),
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
@@ -148,6 +172,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -173,6 +203,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -196,6 +232,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -221,6 +263,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -244,6 +292,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -274,6 +328,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'list_integer',
   );
@@ -296,6 +356,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -319,6 +385,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -344,6 +416,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -368,6 +446,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -390,6 +474,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text_long',
   );
@@ -408,6 +498,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'xml_field',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'xml_field_xml',
   );
@@ -446,6 +542,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       ),
       'target_type' => 'node',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'entityreference',
   );
@@ -472,6 +574,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       'display_field' => 0,
       'uri_scheme' => 'public',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'file',
   );
@@ -496,6 +604,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -514,6 +628,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'number',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
@@ -539,6 +659,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       'hide_blank_items' => 1,
       'path' => '',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'field_collection',
   );
@@ -557,6 +683,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'number',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
@@ -589,6 +721,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       'todate' => '',
       'tz_handling' => 'none',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -619,6 +757,12 @@ function feature_for_mobile_services_field_default_field_bases() {
         5 => 'WAP (Image, Text, Video and Audio)',
       ),
       'allowed_values_function' => '',
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'list_integer',
@@ -652,6 +796,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'list_integer',
   );
@@ -676,6 +826,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -699,6 +855,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -728,6 +890,12 @@ function feature_for_mobile_services_field_default_field_bases() {
         3 => 'Monthly',
       ),
       'allowed_values_function' => '',
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'list_integer',
@@ -761,6 +929,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       'todate' => 'optional',
       'tz_handling' => 'none',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'datetime',
   );
@@ -790,6 +964,12 @@ function feature_for_mobile_services_field_default_field_bases() {
         ),
       ),
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
@@ -813,6 +993,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -840,6 +1026,12 @@ function feature_for_mobile_services_field_default_field_bases() {
       'display_field' => 0,
       'uri_scheme' => 'public',
     ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'file',
   );
@@ -860,6 +1052,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+    ),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -883,6 +1081,12 @@ function feature_for_mobile_services_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(),
+    'storage' => array(
+      'active' => 1,
+      'module' => 'field_sql_storage',
+      'settings' => array(),
+      'type' => 'field_sql_storage',
+    ),
     'translatable' => 0,
     'type' => 'text_long',
   );

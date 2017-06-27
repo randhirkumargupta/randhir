@@ -18,10 +18,11 @@ function itg_layout_delete() {
 
     foreach ($itg_result as $row) {
       db_delete('itg_layout_manager')->condition('layout_id', $row->id)->execute();
-      db_delete('itg_layout_tpl')->condition('id', $row->id)->execute();      
+      db_delete('itg_layout_tpl')->condition('id', $row->id)->execute(); 
     }
-
-    drupal_set_message('deleted');
+    
+    drupal_set_message('layout deleted');
+    drupal_goto('itg-layout-list/'.$_GET['destination']);
    
   }
 }

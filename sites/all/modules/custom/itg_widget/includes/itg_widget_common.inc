@@ -760,6 +760,9 @@ function itg_widget_theme() {
     'graph_election' => array(
       'template' => 'templates/itg-widget-graph-election',
     ),
+    'graph_election_section_cart' => array(
+      'template' => 'templates/itg-widget-graph-election-section-cart',
+    ),
     'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
     ),
@@ -1014,6 +1017,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+       case 'views-exposed-form-state-manager-page':
+     
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
+      );
+      drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
     case 'views-exposed-form-static-pages-page':
       $form['title']['#attributes']['placeholder'] = t('Page Title');
       $form['title']['#autocomplete_path'] = 'content-title-list/page/autocomplete';
@@ -1045,29 +1057,29 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       );
       break;
     case 'views-exposed-form-report-filed-content-page':
-      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
-          ->distinct()
-          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
-      $options = $query_options->execute()->fetchAllKeyed();
-      //array_unshift($options , 'Any');
-      $options = array_merge(array("" => '- Any -'), $options);
-      $form['byline_names'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Byline',
-        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
-        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
-        '#size' => 60,
-        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
-      );
-      $form['byline_profile_type'] = array(
-        '#type' => 'select',
-        '#title' => 'Profile Type',
-        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
-        //'#options' => drupal_map_assoc($options) ,
-        '#options' => $options,
-      );
-      $form['#info']['filter-byline-names']['value'] = 'byline_names';
-      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
+//      $query_options = db_select('field_data_field_reporter_profile_type', 'fdr')
+//          ->distinct()
+//          ->fields('fdr', array('field_reporter_profile_type_value', 'field_reporter_profile_type_value'));
+//      $options = $query_options->execute()->fetchAllKeyed();
+//      //array_unshift($options , 'Any');
+//      $options = array_merge(array("" => '- Any -'), $options);
+//      $form['byline_names'] = array(
+//        '#type' => 'textfield',
+//        '#title' => 'Byline',
+//        '#default_value' => ($_GET['byline_names']) ? $_GET['byline_names'] : "",
+//        '#autocomplete_path' => 'cms-report-byline/keywords_autocomplete',
+//        '#size' => 60,
+//        '#attributes' => array("placeholder" => array("Enter comma seperated byline ex: Rajveer , Pavnish"))
+//      );
+//      $form['byline_profile_type'] = array(
+//        '#type' => 'select',
+//        '#title' => 'Profile Type',
+//        '#default_value' => ($_GET['byline_profile_type']) ? $_GET['byline_profile_type'] : "",
+//        //'#options' => drupal_map_assoc($options) ,
+//        '#options' => $options,
+//      );
+//      $form['#info']['filter-byline-names']['value'] = 'byline_names';
+//      $form['#info']['filter-byline-profile-type']['value'] = 'byline_profile_type';
       break;
   }
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
@@ -2255,7 +2267,7 @@ function itg_widget_block_view_alter(&$data, $block) {
     $story_category = isset($page_argument[0]->field_story_category['und']) ? $page_argument[0]->field_story_category['und'] : array();
     if (!empty($occupation)) {
       foreach ($occupation as $occupation_taxonomy) {
-        $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+        $flag_occupation[] = strtolower($occupation_taxonomy['taxonomy_term']->name);
       }
     }
     if (!empty($story_category)) {
@@ -2274,12 +2286,25 @@ function itg_widget_block_view_alter(&$data, $block) {
       $data['content'] = array();
     }
     else {
-      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
         return TRUE;
       }
       else {
         $data['content'] = array();
       }
+    }
+  }
+  
+  
+  if ($block->delta == 'related_photo_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
+    }
+  }
+  
+if ($block->delta == 'videogallery_menu_video_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
     }
   }
 

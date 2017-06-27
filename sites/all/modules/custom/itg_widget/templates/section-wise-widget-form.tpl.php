@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-        <?php $sr = 0; foreach($form['widget_data'] as $key=>$form_data) : ?>
+        <?php $sr = 1; foreach($form['widget_data'] as $key=>$form_data) : ?>
         	<?php if(is_numeric($key)) : ?>
         		<?php $row_data = _get_section_wise_widget_node_data($form_data['nid']['#value']); ?>
         		<tr>

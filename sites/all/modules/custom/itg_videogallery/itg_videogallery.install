@@ -116,6 +116,11 @@ function itg_videogallery_schema() {
         'type' => 'int',
         'null' => TRUE,
       ),
+      'is_notify' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'primary key' => array('eid'),
   );
@@ -176,6 +181,21 @@ function itg_videogallery_schema() {
         'null' => TRUE
       ),
       'bitates_field' => array(
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'framesize' => array(
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'bitrate' => array(
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'duration' => array(
         'type' => 'varchar',
         'length' => '250',
         'null' => TRUE,

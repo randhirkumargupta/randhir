@@ -184,6 +184,12 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
  */
 function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
+    // inline error on login page
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_validate.js', array('scope' => 'footer'));
+    // Add js file to form.
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+    );
     $form['#after_build'][] = 'itg_user_login_after_build';
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
     $form['#attributes'] = array('autocomplete' => 'off');
@@ -244,6 +250,13 @@ function itg_sso_logout_form($form, &$form_state) {
     '#description' => t("Please enter domain with comma seprated list (Ex: http://www.example.com)"),
   );
   
+  $form['sitename-domain'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter domain with site name'),
+    '#default_value' => variable_get('sitename-domain', ''),
+    '#description' => t("Please enter domain with site name comma seprated list (Ex: sitea name|example.com)"),
+  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save!'),
@@ -259,6 +272,7 @@ function itg_sso_logout_form($form, &$form_state) {
  */
 function itg_sso_logout_form_submit(&$form, &$form_state) {
   variable_set('signout-domain', $form_state['values']['signout']);
+  variable_set('sitename-domain', $form_state['values']['sitename-domain']);
   $id_event = variable_get('signout-domain', '');
   drupal_set_message($id_event.' saved successfully!');
 }

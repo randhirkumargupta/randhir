@@ -7,6 +7,15 @@
     Drupal.behaviors.itg_user_forgot_password = {
         attach: function(context,settings) {
             var base_url = settings.itg_user_forgot_password.settings.base_url;
+            var error = settings.itg_user_forgot_password.settings.forgot_error;
+            if (error) {
+                jQuery.each(error, function (index, item) {
+                    if (index == 'ufname') {
+                        jQuery('.forgot-error').html(item);
+                    }
+                    
+                });
+            }
             // ajax for otp
             $('#itg-user-forgot-password-multistep-form--2 #forgototpclickme', context).click(function (event) {
                 

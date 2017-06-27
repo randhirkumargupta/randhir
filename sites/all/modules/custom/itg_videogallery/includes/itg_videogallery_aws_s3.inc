@@ -40,7 +40,6 @@ function itg_video_get_s3_video() {
  * @argument struing $bitrate_url, $video_name
  * @return $result array
  */
-
 function itg_video_send_dm_to_s3($bitrate_url, $video_name) {
   $bucket = variable_get('aws_bucket');
   $aws_access_key = variable_get('aws_access_key');
@@ -61,19 +60,26 @@ function itg_video_send_dm_to_s3($bitrate_url, $video_name) {
  * @argument struing $bitrate_url, $video_name
  * @return $result array
  */
-
-function itg_video_copy_onfile_to_anoter( $video_name,$folder) {
+function itg_video_copy_onfile_to_anoter($video_name, $folder) {
   $bucket = variable_get('aws_bucket');
   $aws_access_key = variable_get('aws_access_key');
   $aws_secret_key = variable_get('aws_secret_key');
   $aws_region = variable_get('aws_region');
   $aws_video_dir = variable_get('aws_video_dir');
+  $aws_video_dir_to_move = variable_get('aws_video_dir_to_move');
   $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
   $result = $s3->copyObject(array(
     'Bucket' => $bucket,
-    'Key' => $aws_video_dir . $folder.'/'.$video_name,
-    'CopySource' => $aws_video_dir.$video_name,
+    'Key' => urldecode($aws_video_dir_to_move . $folder . '/' . $video_name),
+    'CopySource' => urldecode($bucket . '/' . $aws_video_dir . $video_name),
   ));
-  return $result['ObjectURL'];
+  if (!empty($result)) {
+    $keyvalue = urldecode($aws_video_dir . $video_name);
+    $result_delete = $s3->deleteObject(array(
+      'Bucket' => $bucket,
+      'Key' => $keyvalue
+    ));
+  }
 }
+
 ?>
