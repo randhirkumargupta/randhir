@@ -453,8 +453,8 @@ function itg_common_add_preview_button($form, &$form_state) {
   unset($form['actions']['preview']);
   if (isset($form_state['node']->nid)) {
     $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;
-    $web_link = '<a href="' . $node_url . '" target="_blank">Web preview</a>';
-    $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
+    $web_link = '<a  class="btn-submit" href="' . $node_url . '" target="_blank">Web preview</a>';
+    $mob_link = '<a class="colorbox-load btn-submit" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
           
     $form['actions']['webpreview'] = array(
       '#markup' => $web_link,
@@ -1088,4 +1088,47 @@ function itg_common_token_info_alter(&$info) {
 function _occupation_from_tid_for_sef_url($tid) {
   $term_data = taxonomy_term_load($tid);
   return $term_data->name;
+}
+
+/*
+ * get_other_gallery_amp
+ *  @param int $primary_category
+ */
+function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
+   if (!empty($primary_category)) {
+    $query = db_select('field_data_field_primary_category', 'fg');
+    $query->leftjoin('node', 'n', 'n.nid = fg.entity_id');
+    $query->leftjoin('field_data_field_story_small_image', 'sm', 'sm.entity_id = fg.entity_id');
+    $query->fields('fg', array('entity_id'))
+          ->fields('n', array('title', 'created','nid'))
+          ->fields('sm', array('field_story_small_image_fid'))
+          ->condition('fg.entity_id', array($nid), 'NOT IN')
+          ->condition('fg.field_primary_category_value', $primary_category)
+          ->condition('n.status', 1)
+          ->condition('fg.bundle', $bundle);
+    $query->orderBy('n.created', 'DESC'); 
+    $query->range(0, $limit);
+    $result = $query->execute();
+
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
+/*
+ * get_image_count_entity_id
+ * @param int $entity_id
+ * @param string $bundle
+ * @param string $field_collection_name
+ * @param string $field_name
+ */
+function get_image_count_entity_id($entity_id, $bundle, $field_collection_name) {
+   if (!empty($entity_id)) {
+    $result = db_select('field_data_'.$field_collection_name, 'fe')
+            ->fields(fe)
+            ->condition('entity_id', $entity_id)
+            ->condition('bundle', $bundle)
+            ->execute();
+    $num_of_results = $result->rowCount();
+    return $num_of_results;
+  }
 }

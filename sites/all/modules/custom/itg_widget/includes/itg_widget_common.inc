@@ -760,6 +760,9 @@ function itg_widget_theme() {
     'graph_election' => array(
       'template' => 'templates/itg-widget-graph-election',
     ),
+    'graph_election_section_cart' => array(
+      'template' => 'templates/itg-widget-graph-election-section-cart',
+    ),
     'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
     ),
@@ -1010,6 +1013,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['Canlce'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
+      );
+      drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+       case 'views-exposed-form-state-manager-page':
+     
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
       );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
@@ -2280,6 +2292,19 @@ function itg_widget_block_view_alter(&$data, $block) {
       else {
         $data['content'] = array();
       }
+    }
+  }
+  
+  
+  if ($block->delta == 'related_photo_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
+    }
+  }
+  
+if ($block->delta == 'videogallery_menu_video_block') {
+    if(isset($_GET['amp'])) {
+      $data['content'] = array();
     }
   }
 
