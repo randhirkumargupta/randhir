@@ -1,6 +1,6 @@
 <script src="https://api.dmcdn.net/all.js"></script>
 <?php
-// config for sharing
+// config for sharing code
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));

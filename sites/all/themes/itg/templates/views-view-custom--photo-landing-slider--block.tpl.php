@@ -75,7 +75,6 @@ $uri = base64_encode($actual_link);
             </ul>
         </div>
     </div>
-    
     <div class="col-md-8">
         <ul class="slickslide">
 
