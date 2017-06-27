@@ -20,6 +20,7 @@ if (!empty($content)):
   }
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $uri = base64_encode($actual_link);
   $short_url = shorten_url($actual_link, 'goo.gl');
   $fb_title = addslashes($node->title);
   $share_desc = '';
@@ -70,7 +71,7 @@ if (!empty($content)):
   }
   
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url = itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+    $itg_sso_url = '<a href="http://'.PARENT_SSO.'/saml_login/other/'.$uri.'" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
@@ -434,10 +435,17 @@ if (!empty($content)):
                     
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    $file_uri = file_create_url($story_image);
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                                    <i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span></a>';
+                    if (file_exists($story_image)) {
+                      $file_uri = file_create_url($story_image);
+                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    <i class="fa fa-camera"></i></span>';
+                    }
+                    else {
+                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                    }
+                    
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
+                                    '.$icon_detail.'</a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -850,11 +858,9 @@ if (!empty($content)):
                 endif;
               else:
                 ?>
-                <li class="mhide"><?php
-                if (function_exists(itg_sso_url)) {
-                  print itg_sso_url('follow story');
-                }
-                ?></li>
+                      <li class="mhide">
+                  <a title="follow story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>"><?php print t('follow story'); ?></a>
+                  </li>
                 <?php endif; ?>
 
             </ul>
