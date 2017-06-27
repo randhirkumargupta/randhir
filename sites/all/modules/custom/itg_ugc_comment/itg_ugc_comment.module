@@ -88,9 +88,10 @@ function ugc_comment_form($form, &$form_state) {
   global $user, $base_url;
   $user_fields = user_load($user->uid);
   $page_id = arg(1);
+  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   if (function_exists('itg_sso_url'))
   {
-    $social = itg_sso_url('<span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>', 'social-share');
+    $social = '<a href="http://'.PARENT_SSO.'/saml_login/other/'.$uri.'" title="social-share"><span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span></a>';
   }
   $fname = '';
   if (!empty($user_fields->field_first_name['und']['0']['value']))
