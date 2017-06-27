@@ -1,6 +1,6 @@
 <script src="https://api.dmcdn.net/all.js"></script>
 <?php
-// config for sharing
+// config for sharing code
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));
@@ -21,6 +21,7 @@ if (preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|
 else {
   $ads_url = 'https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]';
 }
+$uri = base64_encode($actual_link);
 ?>
 <?php foreach ($rows as $row): ?>
   <div class="container">
@@ -281,11 +282,10 @@ else {
                   <?php
                 }
               }
-              else {
-                if (function_exists(itg_sso_url)) {
-                  print '<li>' . itg_sso_url('<i class="fa fa-clock-o"></i> <span>' . t('Watch Later') . '</span>', t('Save')) . '</li>';
+              else { ?>
+              <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
+              <?php
                 }
-              }
               ?>
               <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span><?php print t('Share'); ?></span></a></li>
               <li><a class="user-activity def-cur-pointer" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
@@ -353,9 +353,9 @@ else {
                   }
                 }
                 else {
-                  if (function_exists(itg_sso_url)) {
-                    print '<li>' . itg_sso_url('<i class="fa fa-clock-o"></i>', t('Save')) . '</li>';
-                  }
+                 ?>
+                <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
+                <?php    
                 }
                 ?>
                 <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
