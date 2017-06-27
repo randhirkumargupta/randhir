@@ -8,6 +8,7 @@ $short_url = shorten_url($actual_link, 'goo.gl');
 $share_title = addslashes($photo_node->title);
 $share_desc = '';
 $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']]->field_images[LANGUAGE_NONE][0]['uri']);
+$uri = base64_encode($actual_link);
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -61,9 +62,9 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
           }
         }
         else {
-          if (function_exists(itg_sso_url)) {
-            print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('') . '</span>', t('Save')) . '</li>';
-          }
+        ?>
+          <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
+        <?php
         }
         ?>
         <?php if ($user->uid > 0): ?>
@@ -196,9 +197,9 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
             }
           }
           else {
-            if (function_exists(itg_sso_url)) {
-              print '<li>' . itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('') . '</span>', t('Save')) . '</li>';
-            }
+          ?>
+          <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
+          <?php
           }
           ?>
             </ul>
