@@ -2368,6 +2368,7 @@ function itg_videogallery_thumb_url() {
 
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
+      node_save($node);
     }
     node_save($node);
   }
@@ -2413,7 +2414,9 @@ function itg_videogallery_update_video_info_solr($videoid) {
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
+      node_save($node);
     }
+    // need to chane with solr
     node_save($node);
   }
 }
@@ -2624,7 +2627,6 @@ function itg_videogallery_thumb_assign() {
       }
 
 // assign image in field after resize
-
       if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == "") {
         $image_url = $thumb_url['thumbnail_720_url'];
         $imagedata = file_get_contents($image_url);

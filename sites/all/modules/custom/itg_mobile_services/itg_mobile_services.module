@@ -264,7 +264,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       }
       $form['actions']['submit']['#attributes'] = array('class' => array('custom-content-submit mobile-content-submit'));
       $form['actions']['submit']['#submit'][] = 'itg_mobile_vas_service_content_submit';
-      $form['actions']['submit']['#submit'][] = 'itg_mobile_service_custom_submit';
+      // $form['actions']['submit']['#submit'][] = 'itg_mobile_service_custom_submit';
 
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-content-listing';
@@ -303,6 +303,7 @@ function itg_mobile_services_add_option($element) {
  * @return array
  */
 function itg_mobile_vas_service_content_submit($form, &$form_state) {
+
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
   $astro_service = itg_mobile_services_check_astro_service($association_nid);
   if (!empty($astro_service)) {
@@ -481,6 +482,16 @@ function itg_mobile_association_validator(&$form, &$form_state) {
     $form_state['input']['field_service_content'][LANGUAGE_NONE][0]['field_story_expert_description'][LANGUAGE_NONE][0]['value'] = '';
   }
 
+  // field collection validation
+  foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
+    $astro_content[] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+  }
+
+  // check astro duplicate content
+  $astro_duplicate = itg_mobile_services_check_astro_duplicate_content($astro_content);
+  foreach ($astro_duplicate as $key => $value) {
+    form_set_error('field_service_content', t('<strong>@contenttitle</strong> is already exist, Noid id is @node', array('@contenttitle' => $value->field_story_expert_description_value, '@node' => $value->entity_id)));
+  }
   $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
 
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
@@ -544,17 +555,6 @@ function itg_mobile_association_validator(&$form, &$form_state) {
         }
       }
     }
-  }
-
-  // field collection validation
-  foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
-    $fids[] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-    $validate_thumb[$key] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-  }
-  $newfid = array_filter($fids);
-  $validate_thumbs = array_filter($validate_thumb);
-  if (empty($newfid)) {
-    //form_set_error('field_service_video', t('Upload video is required.'));
   }
 }
 
@@ -1353,7 +1353,7 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
         '#type' => 'select',
         '#options' => drupal_map_assoc(range(0, 15)),
         '#default_value' => 1,
-        '#attributes' => array('style' => 'display:none1;'),
+        '#attributes' => array('style' => 'display:none;'),
       );
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#submit'][] = 'itg_mobile_services_field_add_more_submit';
       $form[$field['field_name']][LANGUAGE_NONE]['add_more']['#value'] = 'Add more rows';
@@ -1422,17 +1422,22 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
     if (is_numeric($key)) {
 
       $date = date_create($start_date);
+      $astro_tomorrow = date_format($date, "m/d/Y");
       date_add($date, date_interval_create_from_date_string($i . " days"));
       $tomorrow = date_format($date, "m/d/Y");
       $schema_tomorrow = date_format($date, "Y-m-d");
-      $tomorrow_date = isset($service_content_details[$schema_tomorrow]['startdate']) ? $service_content_details[$schema_tomorrow]['startdate'] : $tomorrow;
-      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_content_date[LANGUAGE_NONE][0]['value'] = $tomorrow_date;
+
       if (!empty($_SESSION['field_astro_zodiac']) || !empty($astro_service)) {
+        $tomorrow_date = isset($service_content_details[$schema_tomorrow]['startdate']) ? $service_content_details[$schema_tomorrow]['startdate'] : $astro_tomorrow;
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $zodiac_name[$i]->name . ' - ' . $service_content_details[$schema_tomorrow]['content'];
       }
       else {
+        $tomorrow_date = isset($service_content_details[$schema_tomorrow]['startdate']) ? $service_content_details[$schema_tomorrow]['startdate'] : $tomorrow;
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['content'];
       }
+
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_content_date[LANGUAGE_NONE][0]['value'] = $tomorrow_date;
+
       if ($service_content_details[$schema_tomorrow]['image'] == "") {
         $imagefids = $getlastimages[$key];
       }
@@ -1736,4 +1741,23 @@ function itg_mobile_services_theme($existing, $type, $theme, $path) {
     ),
   );
   return $themes;
+}
+
+/**
+ * check astro duplicate content
+ * @param array $value
+ * @return object
+ */
+function itg_mobile_services_check_astro_duplicate_content($value) {
+  $sdate = date('Y-m-d', strtotime('-30 days')) . " 00:00:00";
+  $query = db_select('field_data_field_story_expert_description', 'se')
+      ->fields('sc', array('entity_id', 'field_service_content_value'))
+      ->fields('se', array('field_story_expert_description_value'));
+  $query->leftJoin('field_data_field_service_content', 'sc', "sc.field_service_content_value = se.entity_id");
+  $query->leftJoin('field_data_field_service_content_date', 'cd', "se.entity_id = cd.entity_id");
+  $query->condition('cd.field_service_content_date_value', $sdate, '>=');
+  $query->condition('se.field_story_expert_description_value', $value, 'IN');
+  $query->isNotNull('se.field_story_expert_description_value');
+  $query->orderBy('cd.field_service_content_date_value', 'DESC');
+  return $results = $query->execute()->fetchAll();
 }

@@ -990,10 +990,10 @@ allowfullscreen></iframe>';
   $handler->display->display_options['header']['php']['php_output'] = '<?php
 if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && !isset($_GET[\'pcat\'])){
 	$t_name = itg_videogallery_get_term_name($_GET[\'category\']);
-	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
+	print "<h3>". t("LATEST FROM $t_name") ."<i class=\\\'fa fa-caret-down\\\' aria-hidden=\\\'true\\\'></i></h3>";
 }elseif(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && isset($_GET[\'pcat\']) && $_GET[\'pcat\'] != 0){
 	$t_name = itg_videogallery_get_term_name($_GET[\'pcat\']);
-	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
+	print "<h3>". t("LATEST FROM $t_name") ."<i class=\\\'fa fa-caret-down\\\' aria-hidden=\\\'true\\\'></i></h3>";
 }
 ?>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;

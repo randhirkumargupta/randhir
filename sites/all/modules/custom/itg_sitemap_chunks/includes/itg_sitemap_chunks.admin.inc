@@ -357,17 +357,18 @@ function itg_sitemap_chunks_create_tabular_checkbox_fields(&$form, $types = arra
     }
   }
 
-  // Form container element.
-  $form['multiple_siteamp_' . $entity_type . '_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('@entity_type type settings', array('@entity_type' => $entity_type)),
-  );
+//  // Form container element.
+//  $form['multiple_siteamp_' . $entity_type . '_container'] = array(
+//    '#type' => 'fieldset',
+//    '#title' => t('@entity_type type settings', array('@entity_type' => $entity_type)),
+//  );
 
   $form['multiple_siteamp_' . $entity_type . '_container'][$entity_type] = array(
     '#prefix' => '<div id="multiple_siteamp_"' . $entity_type . '"_types">',
     '#suffix' => '</div>',
     '#tree' => TRUE,
     '#theme' => 'table',
+    '#attributes' => array('class' => array("views-table")),
     '#header' => array(t('@entity_type Type', array('@entity_type' => $entity_type)), t('Priority'), t('Frequency')),
     '#rows' => array(),
   );

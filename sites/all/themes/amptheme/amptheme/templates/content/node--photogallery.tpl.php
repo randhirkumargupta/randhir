@@ -42,11 +42,12 @@
 <?php
 // get all node id related to current node primary category
 if(function_exists('get_other_gallery_amp')) {
+  global $base_url;
  $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
  $entity_arr = get_other_gallery_amp($primary_category, $node->nid, $node->type, 4);
- $other_galley = '';
- $other_galley .= '<h2><span>OTHER GALLERY</span></h2>';
- $other_galley .= '<ul>';
+ $other_gallery = '';
+ $other_gallery .= '<h2><span>OTHER GALLERY</span></h2>';
+ $other_gallery .= '<ul>';
  foreach($entity_arr as $key => $value) {
    // get image count
   if(function_exists('get_image_count_entity_id')) { 
@@ -60,11 +61,14 @@ if(function_exists('get_other_gallery_amp')) {
   } else {
   $small_image = $base_url .'/'. path_to_theme().'/images/itg_image170x127.jpg';
   }
-  $amp_image = '<amp-img height="127" width="170" layout="responsive"  alt="'.$value['title'].'" title="'.$value['title'].'" src="' . $small_image . '"></amp-img>';
-  $other_galley .= '<li><div class="other-img">'.$amp_image.'<div class="other-count"><i class="fa fa-camera" aria-hidden="true"></i> '.$img_count.' images</div></div><div class="other-date">'.date('D, d M, Y', $value['created']).'</div><div class="other-title">'.$title.'</div></li>';
+  
+  $path_alias = $baseUrl . '/node/' .   $value['nid'];
+  
+  $amp_image = '<a href="'.$path_alias.'?amp"><amp-img height="127" width="170" layout="responsive"  alt="'.$value['title'].'" title="'.$value['title'].'" src="' . $small_image . '"></amp-img></a>';
+  $other_gallery .= '<li><div class="other-img">'.$amp_image.'<div class="other-count"><i class="fa fa-camera" aria-hidden="true"></i> '.$img_count.' images</div></div><div class="other-date">'.date('D, d M, Y', $value['created']).'</div><div class="other-title">'.$title.'</div></li>';
  }
- $other_galley .= '</ul>';
- print $other_galley;
+ $other_gallery .= '</ul>';
+ print $other_gallery;
 }
 ?>  
 </div>
