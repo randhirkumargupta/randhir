@@ -735,7 +735,7 @@ function itg_videogallery_node_insert($node) {
               if ($file_video[0]->property == VIDEO_PROPERTY) {
                 itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status, $video_desc, $video_title, $video_thumb_fid);
               }
-              itg_videogallery_update_embedcode_url($video_id);
+              itg_videogallery_update_embedcode_url($file_video[0]->solr_video_id);
               if ($node->status != 0) {
                 $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
@@ -890,13 +890,10 @@ function itg_videogallery_dailymotion_api() {
  * Implements function for remove video from playlist
  */
 function itg_videogallery_update_tags_video_private($tags_value, $video_id, $private, $video_desc = "", $video_title = "", $video_thumb_fid = "") {
-
   if ($video_thumb_fid) {
     $image_load = file_load($video_thumb_fid);
-
     $image_url = file_create_url($image_load->uri);
   }
-
   if ($private == 'Yes') {
     $private = 'true';
   }
@@ -914,7 +911,9 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   else if (!empty($tags_value) && empty($video_title)) {
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&description=' . $video_desc . '&thumbnail_url=' . $image_url);
   }
-  
+  else {
+    $api->post('/video/' . $video_id . '?private=' . $private);
+  }
 }
 
 /**
@@ -1363,16 +1362,16 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
         }
       }
       if ($post_video_node !== FALSE) {
+       
         $vid_id = end(explode('/', $video_value));
         $node_id = base64_decode($vid_id);
         $node_data = itg_videogallery_get_node_status($node_id);
-        if ($node_data) {
-          $check_video = itg_videogallery_check_video_url($vid_id[0]);
-          if (!$check_video) {
+       
+        if ($node_data ==0) {
             drupal_add_js('jQuery(document).ready(function() {                  
             jQuery(".video_node_' . $vid_id . '").remove();
           });', array('type' => 'inline', 'scope' => 'footer'));
-          }
+          
         }
       }
     }
@@ -2044,8 +2043,15 @@ function itg_videogallery_get_file_details() {
  */
 function itg_videogallery_dm_embed() {
   $video_id = arg(1);
-
-  return theme('itg_videogallery_dm_embed', array('video_id' => $video_id));
+  $api = itg_videogallery_dailymotion_api();
+  $thumb_url = $api->get(
+      '/video/' . $video_id, array('fields' => array('embed_url'))
+  );
+  $embed_id = "";
+  if ($thumb_url['embed_url']) {
+    $embed_id = end(explode('/', $thumb_url['embed_url']));
+  }
+  return theme('itg_videogallery_dm_embed', array('video_id' => $embed_id));
 }
 
 /**
@@ -3807,7 +3813,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
       $dur = $api->get(
           '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
       );
-      $result['id'] = end(explode('/', $dur['embed_url']));
+      //$result['id'] = end(explode('/', $dur['embed_url']));
       $playlist_id = variable_get('dailymotion_playlist_id');
 //  $resp = $api->post('/playlist/'.$playlist_id.'/videos/' . $result['id']);
       $result['duration'] = $dur['duration'];
@@ -4082,9 +4088,9 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     );
 
     $dur = $api->get(
-        '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
+        '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
     );
-    $result['id'] = end(explode('/', $dur['embed_url']));
+    //$result['id'] = end(explode('/', $dur['embed_url']));
     $playlist_id = variable_get('dailymotion_playlist_id');
 //$resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
