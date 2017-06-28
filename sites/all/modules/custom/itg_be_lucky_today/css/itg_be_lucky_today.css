@@ -307,3 +307,4 @@ select, input[type="password"]{ width:100px;}
 .page-be-lucky-today .pmt_mtd{text-align: center;min-height: 100px;}
 .page-be-lucky-today .pmt_mtd  label{    color: #fff;}
 .pmt_mtd select{background: url(http://media2.intoday.in/microsites/digitalmagazines/image/input_bg.gif) left bottom repeat-x;border: 2px solid #dadada;border-radius: 5px;margin: 0 25px;width: 187px;    padding: 4px;}
+.form-item.form-item-select-payment{width: 100%;}

@@ -108,7 +108,6 @@ function be_lucky_today_registration1($form, $form_state) {
       '#title' => t('Gender'),
       '#options' => array('male' => t('Male'), 'female' => t('Female')),
       '#default_value' => 'male',
-      '#description' => t('When a poll is closed, visitors can no longer vote for it.')
     );
     $form['next'] = array(
       '#type' => 'submit',
