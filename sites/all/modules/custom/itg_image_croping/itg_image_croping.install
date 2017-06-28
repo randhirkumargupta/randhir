@@ -12,167 +12,173 @@
  * @return array
  */
 function itg_image_croping_schema() {
-    $schema = array();
-    $schema['image_tags'] = array(
-        'description' => t('Table for image_tags .'),
-        'fields' => array(
-            'id' => array(
-                'description' => t('id'),
-                'type' => 'serial',
-                'not null' => TRUE,
-            ),
-            'image_id' => array(
-                'description' => t('fid of image'),
-                'type' => 'int',
-                'not null' => TRUE,
-            ),
-            'tag_title' => array(
-                'description' => t('image tag'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'tag_url' => array(
-                'description' => t('redirection url of tag'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'x_coordinate' => array(
-                'description' => t('tag x coordinate of on image'),
-                'type' => 'float',
-                'not null' => TRUE,
-            ),
-            'y_coordinate' => array(
-                'description' => t('tag y coordinate of on image'),
-                'type' => 'float',
-                'not null' => TRUE,
-            ),
-        ),
-        'primary key' => array('id'),
-    );
+  $schema = array();
+  $schema['image_tags'] = array(
+    'description' => t('Table for image_tags .'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'image_id' => array(
+        'description' => t('fid of image'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'tag_title' => array(
+        'description' => t('image tag'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'tag_url' => array(
+        'description' => t('redirection url of tag'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'x_coordinate' => array(
+        'description' => t('tag x coordinate of on image'),
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+      'y_coordinate' => array(
+        'description' => t('tag y coordinate of on image'),
+        'type' => 'float',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
-    $schema['image_info'] = array(
-        'description' => t('Table for image_info .'),
-        'fields' => array(
-            'id' => array(
-                'description' => t('id'),
-                'type' => 'serial',
-                'not null' => TRUE,
-            ),
-            'fid' => array(
-                'description' => t('fid of image'),
-                'type' => 'int',
-                'not null' => TRUE,
-            ),
-            'image_courtesy' => array(
-                'description' => t('Image courtesy'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_keyword' => array(
-                'description' => t('Image keyword'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_tags' => array(
-                'description' => t('Image Tags'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_place' => array(
-                'description' => t('Image Place'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_photo_grapher' => array(
-                'description' => t('Image Photo Grapher'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-             'alt' => array(
-                'description' => t('Image Alt'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-             'title' => array(
-                'description' => t('Image Title'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_date' => array(
-                'description' => t('Image Date'),
-                'type' => 'varchar',
-                'mysql_type' => 'datetime',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_desc' => array(
-                'description' => t('Image Description'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'image_syndicate' => array(
-                'description' => t('Image courtesy'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-        ),
-        'primary key' => array('id'),
-    );
+  $schema['image_info'] = array(
+    'description' => t('Table for image_info .'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => t('fid of image'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'image_courtesy' => array(
+        'description' => t('Image courtesy'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_caption' => array(
+        'description' => t('Image Caption'),
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'image_keyword' => array(
+        'description' => t('Image keyword'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_tags' => array(
+        'description' => t('Image Tags'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_place' => array(
+        'description' => t('Image Place'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_photo_grapher' => array(
+        'description' => t('Image Photo Grapher'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'alt' => array(
+        'description' => t('Image Alt'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'title' => array(
+        'description' => t('Image Title'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_date' => array(
+        'description' => t('Image Date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_desc' => array(
+        'description' => t('Image Description'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'image_syndicate' => array(
+        'description' => t('Image courtesy'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
-    $schema['itg_original_image'] = array(
-        'description' => t('Table for orignal image which used in croper .'),
-        'fields' => array(
-            'id' => array(
-                'description' => t('id'),
-                'type' => 'serial',
-                'not null' => TRUE,
-            ),
-            'fid' => array(
-                'description' => t('fid of image'),
-                'type' => 'int',
-                'not null' => TRUE,
-            ),
-            'image_url' => array(
-                'description' => t('Image url'),
-                'type' => 'varchar',
-                'length' => '255',
-                'not null' => FALSE,
-            ),
-            'nid' => array(
-                'description' => t('node id '),
-                'type' => 'int',
-                'not null' => TRUE,
-            ),
-        ),
-        'primary key' => array('id'),
-    );
+  $schema['itg_original_image'] = array(
+    'description' => t('Table for orignal image which used in croper .'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => t('fid of image'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'image_url' => array(
+        'description' => t('Image url'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'nid' => array(
+        'description' => t('node id '),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
-    return $schema;
+  return $schema;
 }
 
 /**
  * Implements hook_uninstall().
  */
 function itg_image_croping_uninstall() {
-    drupal_uninstall_schema('image_tags');
-    drupal_uninstall_schema('image_info');
-    drupal_uninstall_schema('itg_original_image');
+  drupal_uninstall_schema('image_tags');
+  drupal_uninstall_schema('image_info');
+  drupal_uninstall_schema('itg_original_image');
 }
 
 /**
  * Clear menu cache to match new configuration place
  */
 function itg_image_croping_update_7001() {
-    cache_clear_all(NULL, 'cache_menu');
+  cache_clear_all(NULL, 'cache_menu');
 }

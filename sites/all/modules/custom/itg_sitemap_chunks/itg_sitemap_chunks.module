@@ -92,8 +92,24 @@ function itg_sitemap_chunks_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
-  $items['itg-sitemap.xml'] = array(
+  $items['sitemap.xml'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['create-sitemap-files'] = array(
+    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_content_type',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['liveblog-sitemap.xml'] = array(
+    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_live_blog', // load the croper according to size!.
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks_xml.inc',

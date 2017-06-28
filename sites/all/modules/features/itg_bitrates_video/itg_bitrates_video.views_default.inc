@@ -43,6 +43,21 @@ function itg_bitrates_video_views_default_views() {
   $handler->display->display_options['fields']['field_bitrate_video_id']['table'] = 'field_data_field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['field'] = 'field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['label'] = 'Video Id ';
+  /* Field: Content: Resolution */
+  $handler->display->display_options['fields']['field_resolution']['id'] = 'field_resolution';
+  $handler->display->display_options['fields']['field_resolution']['table'] = 'field_data_field_resolution';
+  $handler->display->display_options['fields']['field_resolution']['field'] = 'field_resolution';
+  $handler->display->display_options['fields']['field_resolution']['label'] = 'Framesize';
+  /* Field: Content: video Bitrate */
+  $handler->display->display_options['fields']['field_video_bitrate']['id'] = 'field_video_bitrate';
+  $handler->display->display_options['fields']['field_video_bitrate']['table'] = 'field_data_field_video_bitrate';
+  $handler->display->display_options['fields']['field_video_bitrate']['field'] = 'field_video_bitrate';
+  $handler->display->display_options['fields']['field_video_bitrate']['label'] = 'Bitrate';
+  /* Field: Content: Video Duration */
+  $handler->display->display_options['fields']['field_bitrate_video_duration']['id'] = 'field_bitrate_video_duration';
+  $handler->display->display_options['fields']['field_bitrate_video_duration']['table'] = 'field_data_field_bitrate_video_duration';
+  $handler->display->display_options['fields']['field_bitrate_video_duration']['field'] = 'field_bitrate_video_duration';
+  $handler->display->display_options['fields']['field_bitrate_video_duration']['label'] = 'Duration';
   /* Field: Content: Bitrate Video Url  */
   $handler->display->display_options['fields']['field_video_url']['id'] = 'field_video_url';
   $handler->display->display_options['fields']['field_video_url']['table'] = 'field_data_field_video_url';
