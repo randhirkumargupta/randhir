@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Inc file contains the functions
  */
@@ -26,18 +25,20 @@ function intodayMagazine() {
 
     $tid_magazine_section = tidConfig();
     $magazine_tid = $tid_magazine_section['magazine'];
-    
+
     $cattid = generateIntodayMagazinePage($magazine_tid);
-    $term = taxonomy_term_load($cattid);
+    $term = taxonomy_term_load($magazine_tid);
+
     $term_name = $term->name;
-    $list_count = $storytag['lcount'];
+    $id_section = $term->tid;
+    $list_count = $cattid['lcount'];
     $catFile = "";
 
-    if ($storytag['data'] != "") {
+    if ($cattid['data'] != "") {
       $output = "";
       $output .= getMobileFeedXmlHeader();
-      $output .= "<idsection>" . $cattid . "</idsection><section>" . $term_name . "</section><totalarticle>" . $list_count . "</totalarticle><start_index>0</start_index><end_index>" . $list_count . "</end_index>";
-      $output .= $storytag['data'];
+      $output .= "<idsection>".$id_section."</idsection><section>" . $term_name . "</section><totalarticle>" . $list_count . "</totalarticle><start_index>0</start_index><end_index>" . $list_count . "</end_index>";
+      $output .= $cattid['data'];
       $output .= getMobileFeedXmlFooter();
     }
     $result_set = setRedis($redis_key, $output, $ttl);
@@ -70,11 +71,12 @@ function generateIntodayMagazinePage($tid) {
   $range_min = 0;
   $order_by = 'ASC';
   $type = "story"; {
-    $listcount = 0;
+  $listcount = 0;
 
 
 
     $query = db_select('taxonomy_index', 'ti');
+
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -94,7 +96,7 @@ function generateIntodayMagazinePage($tid) {
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     //condition for magazine based story
     $query->Join('field_data_field_story_source_type', 'fdsst', 'fdsst.entity_id=n.nid');
-
+    //$query->AddExpression('distinct n.nid', 'nid');
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
@@ -110,14 +112,17 @@ function generateIntodayMagazinePage($tid) {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
 
 
-    $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->condition('n.type', $type)->groupBy('n.nid')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
     foreach ($result as $reskey => $resvalue) {
 
       $listcount++;
-      $title = $resvalue['title'];
+      $title = isset($resvalue['title']) ? $resvalue['title'] : '';
+
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
+      $node_load = node_load($resvalue['nid']);
       $created = $resvalue['created'];
       $is_fav = getNidIsFavorite($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -130,8 +135,11 @@ function generateIntodayMagazinePage($tid) {
 
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<article><title>" . $title . "</title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+      $output .= "<article><title>".$title."</title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
       $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
+      //$output .= "<article><title>" . $title . "</title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
+      //$output .= "<article><title></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
+      //$fl = generateStoryDetailPageFeed($nid, $loop_file_name);
     }
   }
   $data['lcount'] = $listcount;

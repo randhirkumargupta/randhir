@@ -112,12 +112,12 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/rootCategoryContentPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-//  $items['intoday-magazine'] = array(
-//    'page callback' => 'intodayMagazine',
-//    'access arguments' => array('access content'),
-//    'file' => 'inc/intodayMagazine.inc',
-//    'type' => MENU_CALLBACK,
-//  );
+  $items['intoday-magazine'] = array(
+    'page callback' => 'intodayMagazine',
+    'access arguments' => array('access content'),
+    'file' => 'inc/intodayMagazine.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['notification'] = array(
       'page callback' => 'notification_page',
       'access arguments' => array('access content'),
@@ -133,7 +133,7 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-  
+
   $items['admin/api-configuration/feed-api/tid-config'] = array(
     'title' => 'Feed Taxonomy Configuration',
     'description' => 'Static Tid Configuration for XML Feeds',
@@ -142,7 +142,7 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-  
+
   $items['admin/api-configuration/feed-api/redis-config'] = array(
     'title' => 'Redis Server Configuration',
     'description' => 'Redis Server Configuration',
@@ -151,7 +151,7 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-  
+
   return $items;
 }
 
@@ -168,14 +168,14 @@ function redis_server_config() {
     '#default_value' => variable_get('redis_server_host'),
     '#description' => t('Enter Redis Server Hostname'),
   );
-  
+
   $form['redis_server_port'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server Port No'),
     '#default_value' => variable_get('redis_server_port'),
     '#description' => t('Enter Redis Server Port Number'),
   );
-   
+
   $form['redis_server_timeout'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server timeout Time'),
@@ -187,7 +187,7 @@ function redis_server_config() {
 }
 
 /*
- * Implement form callback for defining term id config 
+ * Implement form callback for defining term id config
  */
 
 function feed_tid_config() {
@@ -199,34 +199,34 @@ function feed_tid_config() {
     '#default_value' => variable_get('photo_sec_tid'),
     '#description' => t("Enter Photo Section Term Id With Comma Seperated"),
   );
-  
+
   $form['video_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Video Section"),
     '#default_value' => variable_get('video_sec_tid'),
     '#description' => t("Enter Video Section Term Id With Comma Seperated"),
   );
-   
+
   $form['program_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Program Section"),
     '#default_value' => variable_get('photo_sec_tid'),
     '#description' => t("Enter Program Section Term Id With Comma Seperated"),
   );
-    
+
   $form['left_main_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's Left Main Section"),
     '#default_value' => variable_get('left_main_tid'),
     '#description' => t("Enter Left Main Section Term Id With Comma Seperated"),
   );
-  
-//  $form['itg_feed_magazine_tid'] = array(
-//    '#type' => 'textfield',
-//    '#title' => t('Magazine Term id'),
-//    '#default_value' => variable_get('itg_feed_magazine_tid'),
-//    '#description' => t("Enter Magazine Term id"),
-//  );
+
+  $form['itg_feed_magazine_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Magazine Term id'),
+    '#default_value' => variable_get('itg_feed_magazine_tid'),
+    '#description' => t("Enter Magazine Term id"),
+  );
 
   return system_settings_form($form);
 }
@@ -333,7 +333,7 @@ function program_section_page_feed_footer() {
  * @pram $type
  */
 function relatedContentNodeType($node_list = "", $type) {
-  
+
   $file_name=""; $term_feed_path="";
   $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
   $related_ar = array();
@@ -447,7 +447,7 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
  */
 function categoryManagerSectionTid($type = "story", $parent = 0) {
   $tid_list = array();
-  
+
   $vid = CATEGORY_MANAGMENT;
   $mapped_ctype = 0;
 
@@ -513,7 +513,7 @@ function customNodeCount($type, $tid) {
  * @return $type
  */
 function customNodeCountChild($tid, $type, $child_count = TRUE) {
- 
+
   $tids = array($tid);
   if ($child_count) {
     $tids = array_merge($tids, term_get_children_ids($tid));
@@ -559,7 +559,7 @@ function term_get_children_ids($tid) {
  * @return $type
  */
 function nodeCategoryFrontUrl($tid, $type) {
-  
+
   $final_url = "";
   if ($type == 'term') {
     $source = "taxonomy/term/" . $tid;
@@ -606,7 +606,7 @@ function sectionCategoryIconImg($tid) {
  * @return type
  */
 function getNidIsFavorite($nid) {
-  
+
   $flag = "";
   $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
   if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
