@@ -116,18 +116,6 @@ if (!empty($content)):
                   <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
                   <span><?php print date('F j, Y', $node->created); ?>   </span>
               </div>
-            <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-              <div class="briefcase mhide">
-                <h4><?php print t('Highlights'); ?></h4>
-                <ul>
-                  <?php
-                  foreach ($node->field_story_highlights['und'] as $high) {
-                    print '<li>' . $high['value'] . '</li>';
-                  }
-                  ?>
-                </ul>
-              </div>
-            <?php }  ?>
           </div>
         <?php } ?>
         <!-- For buzzfeed section start -->
