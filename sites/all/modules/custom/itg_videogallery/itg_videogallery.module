@@ -583,6 +583,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             }
             itg_videogallery_update_tags_video_private($tag_value, $video_image[0]->solr_video_id, $private_status, $video_desc, $video_title, $video_thumb_fid);
           }
+          itg_videogallery_update_embedcode_url($video_image[0]->solr_video_id);
           $file_video = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 // this function use for delete itg_solr_delete_vide nid
           itg_videogallery_delele_node_reuse_video($file_video[0]->solr_video_id);
@@ -734,6 +735,7 @@ function itg_videogallery_node_insert($node) {
               if ($file_video[0]->property == VIDEO_PROPERTY) {
                 itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status, $video_desc, $video_title, $video_thumb_fid);
               }
+              itg_videogallery_update_embedcode_url($video_id);
               if ($node->status != 0) {
                 $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
@@ -912,7 +914,7 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   else if (!empty($tags_value) && empty($video_title)) {
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&description=' . $video_desc . '&thumbnail_url=' . $image_url);
   }
-  itg_videogallery_update_embedcode_url($video_id);
+  
 }
 
 /**
@@ -2771,7 +2773,7 @@ function get_video_filed_collection_by_its_id($entity_fid) {
   $query->fields('desc_inc', array('field_videogallery_description_value'));
   $query->condition('fvd.entity_id', $entity_fid);
   $result_video = $query->execute()->fetchAll();
-  
+
   return $result_video;
 }
 
@@ -2918,6 +2920,22 @@ function itg_videogallery_video_update_embeded_url() {
   $api = itg_videogallery_dailymotion_api();
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('solr_video_id', 'video_embedded_url'));
+  $result = $query->execute()->fetchall();
+  foreach ($result as $vid) {
+    if ($vid->video_embedded_url != "") {
+      itg_videogallery_update_embedcode_url($vid->solr_video_id);
+    }
+  }
+}
+
+/**
+ * This is temp function use for test dailymotion video resploce no we will 
+ */
+function itg_videogallery_video_update_embeded_url_by_fid($fid) {
+  $api = itg_videogallery_dailymotion_api();
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('solr_video_id', 'video_embedded_url'));
+  $query->condition('fid', $fid);
   $result = $query->execute()->fetchall();
   foreach ($result as $vid) {
     if ($vid->video_embedded_url != "") {
