@@ -362,15 +362,18 @@ jQuery(document).ready(function () {
         if (magazine_name !== undefined) {
             jQuery(".itg_be_lucky_today #selected_magazine_name").val(magazine_name);
         }
-        console.log(magazine_name, 'asd');
     });
+     jQuery('.itg_be_lucky_today .magazine').click(function (event) {
+         if (jQuery('.itg_be_lucky_today #edit-select-payment').val() == 0) {
+                alert(Drupal.t('Please select payment option'));
+                jQuery('.itg_be_lucky_today #edit-select-payment').focus();
+                return false;
+            }
+         return true;
+     });
 
 });
 
-var insert_magazine = function (response) {
-    console.log('response', response);
-//    jQuery('#magazine_wrapper').html(response);
-}
 
 function fbs_click()
 {

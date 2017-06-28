@@ -304,3 +304,6 @@ select, input[type="password"]{ width:100px;}
 #modal-content strong p { display: block;font-weight: normal; color:#000; margin-top:15px; font-size:14px; line-height:24px;}
 #modal-content{width: 100%!important;height: 95%!important;border: 0px;border-radius: 0;}
 .page-be-lucky-today .messages{margin: 0 auto 15px;width: 718px;background-color: rgba(23,22,22,0.4);}
+.page-be-lucky-today .pmt_mtd{text-align: center;min-height: 100px;}
+.page-be-lucky-today .pmt_mtd  label{    color: #fff;}
+.pmt_mtd select{background: url(http://media2.intoday.in/microsites/digitalmagazines/image/input_bg.gif) left bottom repeat-x;border: 2px solid #dadada;border-radius: 5px;margin: 0 25px;width: 187px;    padding: 4px;}

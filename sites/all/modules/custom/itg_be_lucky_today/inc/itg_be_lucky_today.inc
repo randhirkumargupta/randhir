@@ -303,20 +303,39 @@ function mobile_validation_ajax_callback($form, &$form_state) {
  * @return array
  */
 function be_lucky_today_subscribe($form, $form_state) {
+    $payment_opt = array(
+      0 => 'Select Here',
+      'paytm' => 'Payment by Paytm Cash',
+      'BillDesk' => 'Debit Cards/Credit Cards/Net Banking/Cash Card'
+    );
     $form['magazine'] = array(
       '#markup' => '<div>' . file_get_contents("http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/index-fetchdata.jsp") . '</div>',
       '#prefix' => '<div id="magazine_wrapper">',
       '#suffix' => '</div>',
     );
     $form['magazine_name'] = array(
-        '#type' => 'hidden',
-        '#value' => 'India Today',
-        '#attributes' => array('id' => array('selected_magazine_name'))
-     );
+      '#type' => 'hidden',
+      '#value' => 'India Today',
+      '#attributes' => array('id' => array('selected_magazine_name'))
+    );
+    $form['select_payment_label'] = array(
+      '#markup' => 'YOU’RE ALMOST THERE...',
+      '#prefix' => '<h5>',
+      '#suffix' => '</h5>',
+    );
+    $form['select_payment'] = array(
+      '#type' => 'select',
+      '#title' => t('Payment :'),
+      '#options' => $payment_opt,
+      '#default_value' => 0,
+      '#required' => TRUE,
+      '#prefix' => '<div class="pmt_mtd">',
+    );
     $form['next'] = array(
       '#type' => 'submit',
       '#value' => t('Next'),
-      '#attributes' => array('class' => array('magazine'))
+      '#attributes' => array('class' => array('magazine')),
+      '#suffix' => '</div>',
     );
     return $form;
 }
@@ -393,7 +412,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     $magazineName = explode(":", $magazine1);
     $magazine = $magazineName[0];
     $magazine2 = $magazineName[1];
-    if(!empty($selected_magazine_name)){
+    if (!empty($selected_magazine_name)) {
         $magazine = $selected_magazine_name;
     }
     $data = array(
@@ -415,12 +434,17 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     $query = db_insert('survey')->fields($data);
     $key = $query->execute();
 
-    $data['magazine'] = $magazine;//$form_state['input']['magazine'];
+    $data['magazine'] = $magazine; //$form_state['input']['magazine'];
     $data['magazine2'] = $magazine2;
     $data['user_id'] = $key;
     $data['product_id'] = 161;
     $data['key'] = $key;
     $data['source'] = '';
+    $data['payment_method'] = $form_state['values']['select_payment'];
+    $data['payment_url'] = "http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/testbelucky_kelton.jsp";
+    if($form_state['values']['select_payment'] == 'paytm'){
+        $data['payment_url'] = "http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/testbelucky_today_kelton.jsp";
+    }
     if (isset($_GET['source'])) {
         $data['source'] = $_GET['source'];
     }
