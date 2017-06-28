@@ -52,7 +52,7 @@ function videoSectionPageFeed() {
         $listcount++;
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
-        $child_node .= "<item><sectionname><![CDATA[" . $term_name . "]]></sectionname><sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
+        $child_node .= "<item><section><![CDATA[" . $term_name . "]]></section><sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
 
         // get videogallery node tag
         $child_node .= getNodeFeedTag($value, 'videogallery', 2);
