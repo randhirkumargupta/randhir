@@ -14,8 +14,7 @@ function itg_sso_user_email_form($form, &$form_state) {
   $arg = arg();
   if (!isset($form_state['stage']))
     $form_state['stage'] = 'step_1';
-      $form = array();
- 
+    $form = array();
   // get unique id form argument
   $unique_id = base64_decode($arg[2]);
   // make configuration for js file
