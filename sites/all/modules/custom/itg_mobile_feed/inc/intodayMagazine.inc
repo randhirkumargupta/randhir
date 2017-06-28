@@ -135,11 +135,9 @@ function generateIntodayMagazinePage($tid) {
 
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<article><title>".$title."</title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+      $output .= "<article><title><![CDATA[".$title."]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
       $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
-      //$output .= "<article><title>" . $title . "</title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
-      //$output .= "<article><title></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
-      //$fl = generateStoryDetailPageFeed($nid, $loop_file_name);
+      
     }
   }
   $data['lcount'] = $listcount;
