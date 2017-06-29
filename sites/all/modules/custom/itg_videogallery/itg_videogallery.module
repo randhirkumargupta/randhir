@@ -1166,6 +1166,7 @@ function itg_videogallery_after_build($form, &$form_state) {
           unset($form['field_video_upload']['und'][$delta]['field_video_private']);
           unset($form['field_video_upload']['und'][$delta]['field_video_title']);
           unset($form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']);
+          unset($form['field_video_upload']['und'][$delta]['field_video_thumbnail']);
         }
         else if ($video_fid == "" && $video_url == "") {
           unset($form['field_video_upload']['und'][$delta]);
@@ -1362,16 +1363,15 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
         }
       }
       if ($post_video_node !== FALSE) {
-       
+
         $vid_id = end(explode('/', $video_value));
         $node_id = base64_decode($vid_id);
         $node_data = itg_videogallery_get_node_status($node_id);
-       
-        if ($node_data ==0) {
-            drupal_add_js('jQuery(document).ready(function() {                  
+
+        if ($node_data == 0) {
+          drupal_add_js('jQuery(document).ready(function() {                  
             jQuery(".video_node_' . $vid_id . '").remove();
           });', array('type' => 'inline', 'scope' => 'footer'));
-          
         }
       }
     }
@@ -1879,7 +1879,7 @@ function daily_motion_video_dashboard_rows() {
 
   $query = db_select('dailymotion_response_details', 'n');
   $query->fields('n');
-
+  $all_used_video = itg_videogallery_get_all_publish_video_of_video_content();
   if (isset($filtertype) && $filtertype != "") {
     $query->condition('n.dailymotion_published', $filtertype, '=');
   }
@@ -1940,11 +1940,15 @@ function daily_motion_video_dashboard_rows() {
         }
       }
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
-
-        $status_flag = '<span class="under-precess">Completed</span>';
-
-        if (strtoupper($record->type) != 'LOCAL') {
-          $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
+        if (in_array($record->video_id, $all_used_video)) {
+          $status_flag = '<span class="under-precess">Draft</span>';
+          $delete_link = "";
+        }
+        else {
+          $status_flag = '<span class="under-precess">Completed</span>';
+          if (strtoupper($record->type) != 'LOCAL') {
+            $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
+          }
         }
       }
     }
