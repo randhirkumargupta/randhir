@@ -8,7 +8,7 @@
         attach: function (context, settings) {
             var base_url = settings.itg_sso_reg.settings.base_url;
             //var error = settings.itg_sso_reg.settings.custom_error;
-            alert(base_url);
+            alert(base_url);exit();
             
             if (error) {
                 jQuery.each(error, function (index, item) {
