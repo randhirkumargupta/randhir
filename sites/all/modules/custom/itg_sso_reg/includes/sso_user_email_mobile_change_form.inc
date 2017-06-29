@@ -362,7 +362,7 @@ function itg_sso_user_email_form_validate($form, &$form_state) {
  */
 function step_1_validate($form, &$form_state) {
   if (!$form_state['values']['emobile']) {
-    form_set_error('emobile', 'Please Enter Mobile/Email');
+    form_set_error('emobile', 'Please Enter Mobile/Email.');
   }
 
 
@@ -377,10 +377,10 @@ function step_1_validate($form, &$form_state) {
       $get_user_social_mobile = itg_social_user_mobile_check($emobile);
     }
     if (!empty($get_user_check_mobile) || !empty($get_user_social_mobile)) {
-      form_set_error('emobile', t("Mobile No. Already Exist!"));
+      form_set_error('emobile', t("Mobile No. Already Exist."));
     }
     if (!preg_match('/^\d{10}$/', $emobile)) {
-      form_set_error('emobile', t("Enter valid Mobile Number!"));
+      form_set_error('emobile', t("Enter valid Mobile Number."));
     }
   }
   else {
@@ -393,13 +393,13 @@ function step_1_validate($form, &$form_state) {
       if (function_exists(itg_sso_user_email_check)) {
         $get_user_check_email = itg_sso_user_email_check($emobile);
         if (!empty($get_user_check_email)) {
-          form_set_error('emobile', t("Email Already Exist!"));
+          form_set_error('emobile', t("Email Already Exist."));
         }
       }
       if (function_exists(itg_sso_user_email_domain)) {
         $get_user_check_email = itg_sso_user_email_domain($emobile);
         if (!empty($get_user_check_email)) {
-          form_set_error('emobile', t("Email Already Exist!"));
+          form_set_error('emobile', t("Email Already Exist."));
         }
       }
     }
@@ -427,12 +427,12 @@ function step_2_validate($form, &$form_state) {
 
   if (empty($otp)) {
 
-    form_set_error('otp', t("Enter OTP!"));
+    form_set_error('otp', t("Enter OTP."));
   }
 
   if ($otp_match != $otp) {
 
-    form_set_error('otp', t("Enter valid OTP !"));
+    form_set_error('otp', t("Enter valid OTP."));
   }
 }
 

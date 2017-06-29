@@ -59,11 +59,11 @@ if($arg[0] == 'sso' && $arg[1] == 'change-password') {
   // back to site configuration code in case of signup/forgot-password
   $site_name = array_search($parse_host, $sitehash);
   if (!empty($site_name)) {
-    $site_name = $site_name;
+    $site_name = 'Edit Profile';
     $shr = base64_decode($arg[2]);
   }
   else {
-    $site_name = t('India Today');
+    $site_name = t('Edit Profile');
   }
 }
 
@@ -74,11 +74,11 @@ if($arg[0] == 'sso-user') {
   // back to site configuration code in case of signup/forgot-password
   $site_name = array_search($parse_host, $sitehash);
   if (!empty($site_name)) {
-    $site_name = $site_name;
+    $site_name = 'Edit Profile';
     $shr = base64_decode($arg[3]);
   }
   else {
-    $site_name = t('India Today');
+    $site_name = t('Edit Profile');
   }
 }
 
@@ -110,9 +110,9 @@ if($arg[0] == 'sso-user') {
 </div>
 
 <div class="sso-footer">
-  <div class="container">
+<!--  <div class="container">
     <?php print theme('links', array('links' => menu_navigation_links('menu-sso-footer-menu'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
-  </div>
+  </div>-->
   <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
 </div>
 
