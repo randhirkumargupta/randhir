@@ -2,7 +2,7 @@
     function callNow()
     {
         document.frm.method = "POST";
-        document.frm.action = "http://subscriptions.intoday.in/subscriptions/digitalsubscriptions/testbelucky_kelton.jsp";
+        document.frm.action = "<?php print $data->payment_url;?>"
         document.frm.submit();
     }
     setTimeout(function () {
@@ -23,7 +23,7 @@
         <input type="hidden" name="zip" value="<?php echo $data->studled; ?>">
         <input type="hidden" name="mobile" value="<?php echo $data->mobile; ?>">
         <input type="hidden" name="magazine" value="<?php echo $data->magazine2; ?>">
-        <input type="hidden" name="payGStype" value="BillDesk">
+        <input type="hidden" name="payGStype" value="<?php echo $data->payment_method; ?>">
         <input type="hidden" name="key" value="<?php echo $data->key; ?>">
         <INPUT TYPE="hidden" NAME="product_id" value="<?php echo $data->product_id; ?>">
     </form>
