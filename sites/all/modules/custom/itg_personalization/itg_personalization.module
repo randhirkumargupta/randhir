@@ -90,7 +90,7 @@ function itg_personalization_home_page() {
   $user_fields = user_load($user->uid);
 
   // Render user picture.
-  if(!empty($user_fields->field_user_picture['und'][0]['uri'])) {
+  if(!empty($user_fields->field_user_picture['und'][0]['uri']) && getimagesize($user_fields->field_user_picture['und'][0]['uri']) !== false) {
   $data['profile_pic'] = theme(
       'image_style', array(
     'style_name' => 'user_picture',
