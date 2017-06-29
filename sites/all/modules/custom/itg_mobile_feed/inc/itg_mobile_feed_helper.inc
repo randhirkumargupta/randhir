@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains global configurations 
+ * Inc file contains global configurations
  */
 define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
 define('DEFAULT_REDIS_EXPIRE_TIME', 300);
@@ -19,7 +19,7 @@ function tidConfig() {
 
   $photo_sec_tid = explode(',', variable_get('photo_sec_tid'));
   $video_sec_tid = explode(',', variable_get('video_sec_tid'));
-  $program_sec_tid = explode(',', variable_get('photo_sec_tid'));
+  $program_sec_tid = explode(',', variable_get('program_sec_tid'));
   $left_main_tid = explode(',', variable_get('left_main_tid'));
   $magazine_tid = variable_get('itg_feed_magazine_tid');
 
