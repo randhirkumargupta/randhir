@@ -1319,6 +1319,10 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   width: 134px;
 }
 
+[id*="field-video-upload-values"] tr th {
+  display: none;
+}
+
 #GalleryIndividualImages .form-field-name-field-poll-question-video .form-managed-file a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
@@ -10568,16 +10572,21 @@ div.node #comments h2 {
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td.field-multiple-drag {
   display: table-cell !important;
   text-align: center;
+  vertical-align: top;
 }
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td.field-multiple-drag a.tabledrag-handle {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
+  margin: 13px 0 0;
+  padding: 5px;
+  height: 20px;
 }
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .field-type-image .image-widget-data .form-submit[value="Remove"] {
   left: 290px !important;
 }
 #videoupload .ftp_browse_field {
   margin: 10px 0 0;
+  position: relative;
 }
 
 .templates-tab-wrapper {
