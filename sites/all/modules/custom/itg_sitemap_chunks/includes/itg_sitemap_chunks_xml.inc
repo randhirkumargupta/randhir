@@ -27,7 +27,8 @@ function itg_sitemap_chunks_create_xml_sitemap() {
  *   File name.
  */
 function itg_sitemap_chunks_create_sub_file($ms_id, $filesname) {
-
+  // As xml file is very large so setting 0 execution time.
+  drupal_set_time_limit(0);
   $total_links = itg_sitemap_chunks_get_sub_file_links($ms_id);
 
   if (!empty($total_links)) {
@@ -36,6 +37,12 @@ function itg_sitemap_chunks_create_sub_file($ms_id, $filesname) {
   }
 }
 
+/**
+ * Function which gives xml for sitemap for given array.
+ * 
+ * @param array $total_links
+ * @return string
+ */
 function itg_sitemap_print_sitemap($total_links) {
 
   $lastmod = date('Y-m-d');
@@ -44,7 +51,7 @@ function itg_sitemap_print_sitemap($total_links) {
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
     $xml .= '<loc>' . $total_link['link'] . '</loc>';
-    $xml .= '<lastmod>' . $lastmod . '</lastmod>';
+    $xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
     $xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
     $xml .= '</url>';
   }
@@ -291,12 +298,12 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
       // We will delete current year all the sitemap xmls and recreate it.
       if ($year == date('Y')) {
         // get last file number.
-        $last_file_number = (int) ($total_rows / (int) $limit);
+        $first_file_number = 0;
         $feed_dir_for_delete = "public://sitemap/$CT";
         // Last file uri path.
-        $last_file_uri = itg_sitemap_chunk_get_xml_file_name($last_file_number, $feed_dir_for_delete, $CT, $year);
+        $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
         // Delete last file we will create it again.
-        file_unmanaged_delete($last_file_uri);
+        $is_deleted = file_unmanaged_delete($last_file_uri);
       }
       if ($total_rows > 0) {
         // get sitemap details from custom sitemap table i.e. priority frequency etc.
@@ -307,25 +314,36 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
         //create directory
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $x = 0;
-        $file_num = 0;
+        // Decide total files can be.
+        $floor_number = floor($total_rows / $limit);
+        $remaing_num = $total_rows / $limit - $floor_number;
+        if ($remaing_num < 0) {
+          $file_num = $floor_number + 1;
+        }
+        else {
+          $file_num = $floor_number;
+        }
+
         do {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
-          if (!file_exists($file_uri)) {
+          if (!file_exists($file_uri) || $year == 2017) {
             $content_links = array();
             // Query to get node by range of limit.
             $query = db_select('node', 'n');
-            $query->fields('n', array('nid', 'created'));
+            $query->fields('n', array('nid', 'created', 'changed'));
             $query->condition('n.type', $CT);
             $query->condition('n.status', 1);
             $query->condition('created', array($start_year_time_stamp, $end_year_time_stamp), 'BETWEEN');
             $query->range($x, $limit);
-            $query->orderBy('n.nid', "DESC");
-            $results = $query->execute()->fetchAll();
-
+            $query->orderBy('n.nid', "ASC");
+            $results = $query->execute()->fetchAllAssoc('nid');
+            // Sort here in decending mod.
+            krsort($results);
             if (!empty($results)) {
+              $i = 0;
               // prepare result for xml with pagination.
-              foreach ($results as $i => $data) {
+              foreach ($results as $key => $data) {
                 // check if current content type is saved in custom table of siemap.
                 // for priority frequency etc.
                 $tag_data = itg_sitemap_chunk_get_tags_data($contents, $CT);
@@ -334,8 +352,10 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                   $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
                   $content_links[$i]['link'] = $path;
                   $content_links[$i]['priority'] = $tag_data->priority;
+                  $content_links[$i]['last_modified'] = date('Y-d-m', $data->changed);
                   $content_links[$i]['changefreq'] = $tag_data->changefreq;
                 }
+                $i++;
               }
             }
             if (!empty($content_links)) {
@@ -357,7 +377,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
             echo "<br/>";
           }
           $x += $limit;
-          $file_num++;
+          $file_num--;
         } while ($x < $total_rows);
       }
       else {

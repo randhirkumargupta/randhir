@@ -15,7 +15,7 @@ function itg_sitemap_chunks_add_sitemap($form, &$form_state, $arguments = array(
     $sr_numb = itg_sitemap_chunks_count_files();
     $link_goto = $base_url . "/admin/config/search/itg-multiple-sitemap/edit/$sr_numb";
     drupal_set_message(t("You can't add more then 1 sitemap as it workes on pagination. "
-        . " <br/> To Edit Current Sitemap Please <a href='@setting_link'>Edit</a> Current settings. " , array('@setting_link' => $link_goto)) , 'error');
+            . " <br/> To Edit Current Sitemap Please <a href='@setting_link'>Edit</a> Current settings. ", array('@setting_link' => $link_goto)), 'error');
     return $form;
   }
   else {
@@ -465,7 +465,17 @@ function itg_sitemap_chunks_setting_form() {
     '#default_value' => variable_get('itg_sitemap_exclude_nid'),
     '#description' => 'Enter comma seperated nodeis you want to exclude in sitemap',
   );
+  $form['#submit'][] = 'itg_sitemap_chunks_delete_chunks';
   return system_settings_form($form);
+}
+
+/**
+ *  {@inheritdocs}
+ */
+function itg_sitemap_chunks_delete_chunks() {
+  // remove directory if previously created sitemap.
+  file_unmanaged_delete_recursive('public://sitemap/');
+  drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again") , 'warnning');
 }
 
 /**
@@ -481,17 +491,17 @@ function itg_sitemap_chunks_setting_form_validate($form, &$form_state) {
   else if (is_numeric($number_chunks) && $number_chunks < 1) {
     form_set_error('itg_sitemap_chunks_number', t("Field Must Be positive and greather then zero"));
   }
-  
-  if(!empty($node_ids)) {
+
+  if (!empty($node_ids)) {
     $nodes = explode(",", $node_ids);
-    foreach($nodes as $nid) {
-      if((integer)$nid == 0) {
+    foreach ($nodes as $nid) {
+      if ((integer) $nid == 0) {
         $strings[] = $nid;
       }
     }
   }
-  
-  if(!empty($strings)) {
-    form_set_error('itg_sitemap_exclude_nid', t("Node Id Must be integer @strnodes" , array('@strnodes' => implode("," , $strings))));
+
+  if (!empty($strings)) {
+    form_set_error('itg_sitemap_exclude_nid', t("Node Id Must be integer @strnodes", array('@strnodes' => implode(",", $strings))));
   }
 }
