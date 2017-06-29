@@ -40,8 +40,8 @@ function videoSectionPageFeed() {
       $node_count = customNodeCount('videogallery', $value);
 
       if ($node_count > 0) {
-	
-	$value = trim($value);
+
+	      $value = trim($value);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
