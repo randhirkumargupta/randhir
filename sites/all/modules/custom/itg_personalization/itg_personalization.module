@@ -252,7 +252,8 @@ function itg_personalization_block_view($delta = '') {
   // create url for edit profile
   $change_pass_url = '';
   if ($delta == 'personalization_edit_profile') {
-    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . base64_encode($_SERVER['HTTP_HOST']);
+    $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . $uri;
   }
   $block = array();
   $output = '<ul class="profile-edit-tab">';
@@ -260,7 +261,7 @@ function itg_personalization_block_view($delta = '') {
   //$output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
   // check for twitter condition
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
-    $output .= '<li><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, ' . "'" . $change_pass_url . "'" . ');">Change Password</a></li>';
+    $output .= '<li><a href="' . $change_pass_url .'">Change Password</a></li>';
   }
   $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
   $output .= '</ul>';

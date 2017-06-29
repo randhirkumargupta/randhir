@@ -7,7 +7,6 @@
  * @see https://drupal.org/node/1728148
  */
 $arg = arg();
-
 $back_to_link_config = variable_get('sitename-domain');
 if(!empty($back_to_link_config)) {
   $explode_back_link = explode(',', $back_to_link_config);
@@ -52,6 +51,37 @@ else {
     $site_name = t('India Today');
   }
 }
+
+// case for change password page
+if($arg[0] == 'sso' && $arg[1] == 'change-password') {
+  $parse = parse_url(base64_decode($arg[2]));
+  $parse_host = $parse['host'];
+  // back to site configuration code in case of signup/forgot-password
+  $site_name = array_search($parse_host, $sitehash);
+  if (!empty($site_name)) {
+    $site_name = $site_name;
+    $shr = base64_decode($arg[2]);
+  }
+  else {
+    $site_name = t('India Today');
+  }
+}
+
+// case for change password page
+if($arg[0] == 'sso-user') {
+  $parse = parse_url(base64_decode($arg[3]));
+  $parse_host = $parse['host'];
+  // back to site configuration code in case of signup/forgot-password
+  $site_name = array_search($parse_host, $sitehash);
+  if (!empty($site_name)) {
+    $site_name = $site_name;
+    $shr = base64_decode($arg[3]);
+  }
+  else {
+    $site_name = t('India Today');
+  }
+}
+
 ?>
 <div class="sso-header">
     <div class="container">
