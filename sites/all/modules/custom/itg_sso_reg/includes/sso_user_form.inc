@@ -402,7 +402,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
       
       if (empty($mail) && empty($form_state['values']['mobile'])) {
-        $error['mail'] = t("Please Enter Email/Mobile !");
+        $error['mail'] = t("Please Enter Email/Mobile.");
         form_set_error('mail', t(""));
       }
       else {
@@ -415,11 +415,11 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
           form_set_error('mail', t(''));
         }
         else if (!empty($get_user_check_email)) {
-          $error['mail'] = t("Email id Already Exist!");
+          $error['mail'] = t("Email id Already Exist.");
           form_set_error('mail', t(""));
         } 
         else if (!empty($get_user_check_domain)) {
-          $error['mail'] = t("Email id Already Exist!");
+          $error['mail'] = t("Email id Already Exist.");
           form_set_error('mail', t(""));
         } 
         else {
@@ -430,11 +430,11 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       $u_mobile = $form_state['values']['mobile'];
       if (!empty($u_mobile)) {
         if (!preg_match('/^\d{10}$/', $u_mobile)) {
-          $error['mobile'] = t("Enter valid Mobile Number!");
+          $error['mobile'] = t("Enter valid Mobile Number.");
           form_set_error('mobile', t(""));
         }
         else if (!empty($get_user_check_mobile)) {
-          $error['mobile'] = t("Mobile Number Already Exist!");
+          $error['mobile'] = t("Mobile Number Already Exist.");
           form_set_error('mobile', t(""));
         }
         else {
@@ -458,12 +458,12 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         form_set_error('password_again', t(""));
       }
       else if (strlen($pass) < $min_length) {
-       $error['password'] = t('password is too short, minimum is ' . $min_length . ' characters ');
+       $error['password'] = t('password is too short, minimum is ' . $min_length . ' characters. ');
        form_set_error('password', t(''));
        form_set_error('password_again', t(""));
       }
       else if (strlen($pass) > $max_length) {
-       $error['password'] = t('password is too long, maximum is ' . $max_length . ' characters ');
+       $error['password'] = t('password is too long, maximum is ' . $max_length . ' characters. ');
        form_set_error('password', t(''));
        form_set_error('password_again', t(""));
       } else if ($pass != $cpass) {

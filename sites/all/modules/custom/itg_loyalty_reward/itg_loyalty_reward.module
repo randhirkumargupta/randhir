@@ -560,12 +560,20 @@ function itg_loyalty_reward_block_view($delta = '') {
       $data['remaining_point'] = itg_loyalty_reward_remaining_point($user->uid);
       $user_fields = user_load($user->uid);
       // Render user picture.
-      $data['profile_pic'] = theme(
-          'image_style', array(
-        'style_name' => 'user_picture',
-        'path' => $user_fields->field_user_picture['und'][0]['uri'],
-          )
-      );
+      
+      if (!empty($user_fields->field_user_picture['und'][0]['uri']) && getimagesize($user_fields->field_user_picture['und'][0]['uri']) !== false) {
+        $data['profile_pic'] = theme(
+            'image_style', array(
+          'style_name' => 'user_picture',
+          'path' => $user_fields->field_user_picture['und'][0]['uri'],
+            )
+        );
+      }
+      else {
+        $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
+        $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+        $data['profile_pic'] = $user_pic;
+      }
       // Load user name    
       $f_name = $user_fields->field_first_name['und'][0]['value'];
       $l_name = $user_fields->field_last_name['und'][0]['value'];
