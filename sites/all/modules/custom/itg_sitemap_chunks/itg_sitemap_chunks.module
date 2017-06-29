@@ -119,7 +119,8 @@ function itg_sitemap_chunks_menu() {
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
-    'access callback' => TRUE,
+    'access callback' => 'user_access',
+    'access arguments' => array('administer itg sitemap'),
   );
 
   $items['liveblog-sitemap.xml'] = array(
