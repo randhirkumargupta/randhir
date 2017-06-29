@@ -18,6 +18,20 @@ function itg_sitemap_chunks_permission() {
 }
 
 /**
+ * 
+ * @param type $op
+ * @param type $job
+ */
+function itg_sitemap_chunks_cronapi($op, $job = NULL) {
+  $items['itg_sitemap_chunks_create_xml_files'] = array(
+    'description' => 'Cron to create xmls file for xmlsitemap',
+    'callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_content_type',
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+  );
+  return $items;
+}
+
+/**
  * Implements hook_info().
  */
 function itg_sitemap_chunks_menu() {
@@ -49,7 +63,7 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
-  
+
   $items['admin/config/search/itg-multiple-sitemap/sections'] = array(
     'title' => "Sections Setting",
     'page callback' => 'drupal_get_form',
@@ -99,7 +113,7 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
     'access callback' => TRUE,
   );
-  
+
   $items['create-sitemap-files'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_content_type',
     'type' => MENU_CALLBACK,
@@ -107,7 +121,7 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
     'access callback' => TRUE,
   );
-  
+
   $items['liveblog-sitemap.xml'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_live_blog', // load the croper according to size!.
     'type' => MENU_CALLBACK,
@@ -115,7 +129,7 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
     'access callback' => TRUE,
   );
-  
+
   $items['sitemap/%'] = array(
     'page callback' => 'itg_sitemap_chunks_for_section', // load the croper according to size!.
     'page arguments' => array(1),
@@ -126,4 +140,15 @@ function itg_sitemap_chunks_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Get required data for xml crossponding to content type.
+ */
+function itg_sitemap_chunk_get_tags_data($contents, $content_type) {
+  foreach ($contents as $key => $data) {
+    if ($data->content_type == $content_type) {
+      return $contents[$key];
+    }
+  }
 }
