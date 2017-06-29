@@ -153,7 +153,7 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
 
- 
+
 
   $items['issue_filter_widget'] = array(
     'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
@@ -331,6 +331,9 @@ function itg_widget_block_info() {
   $blocks['graph_election'] = array(
     'info' => t('Graph Election')
   );
+  $blocks['home_graph_election'] = array(
+    'info' => t('Home Page Graph Election')
+  );
   $blocks['live_score'] = array(
     'info' => t('Live Score')
   );
@@ -353,9 +356,9 @@ function itg_widget_block_info() {
   $blocks['section_wise_order_reorder_form'] = array(
     'info' => t('Section Order Reorder Form'),
   );
-  
-  $blocks['auto_master_form_widget'] = array( 
-    'info' => t('Widget: Auto Master Form'), 
+
+  $blocks['auto_master_form_widget'] = array(
+    'info' => t('Widget: Auto Master Form'),
   );
   return $blocks;
 }
@@ -674,7 +677,7 @@ function itg_widget_block_view($delta = '') {
       $block['content'] = theme("tech_most_read", array("data" => $data));
       break;
     case 'graph_election':
-        drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
       $data = itg_widget_get_graph_data($info);
       foreach ($data as $index => $row) {
         $jsondata = file_get_contents($row->field_election_constituency_tall_value);
@@ -798,6 +801,13 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("graph_election", array("data" => $data));
       break;
+    case 'home_graph_election':
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+      $data = itg_widget_get_graph_data_for_home();
+      
+      $block['content']= theme("graph_election_section_cart", array("data" => $data, 'rand_id' => $rand, 'jsondata' => $jsondata));
+
+      break;
     case 'movies_reviews':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
       $info['widget_name'] = 'special_auto_review_content';
@@ -867,12 +877,12 @@ function itg_widget_block_view($delta = '') {
     case 'section_wise_order_reorder_form':
       $block['content'] = drupal_get_form('section_wise_widget_form');
       break;
-    case 'auto_master_form_widget': 
-	  $info['widget'] = 'auto_master_form_widget'; 
-	  if (module_exists('itg_auto_search')) { 
-		$block['content'] = drupal_get_form('auto_master_form'); 
-	  }		   
-	  break;
+    case 'auto_master_form_widget':
+      $info['widget'] = 'auto_master_form_widget';
+      if (module_exists('itg_auto_search')) {
+        $block['content'] = drupal_get_form('auto_master_form');
+      }
+      break;
   }
 
 
@@ -913,6 +923,25 @@ function itg_widget_get_graph_data() {
   return $itg_result;
 }
 
+function itg_widget_get_graph_data_for_home() {
+
+  global $theme;
+
+  $itg_query = db_select('node', 'n');
+  $itg_query->join('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+  $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
+  $itg_query->join('itg_widget_order', 'iwo', 'n.nid = iwo.nid');
+  $itg_query->leftJoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->fields('frq', array('field_election_constituency_tall_value'));
+  $itg_query->fields('astw', array('field_election_state_tid'))
+      ->condition('type', 'election_graph_xml')
+      ->condition('iwo.widget', 'election_graph_content', '=')
+      ->condition('status', 1);
+  $itg_result = $itg_query->execute()->fetchAll();
+
+  return $itg_result;
+}
 
 /**
  * Function returns data for cutom tables widgets.
@@ -942,6 +971,7 @@ function itg_widget_get_graph_data_by_nid($nid) {
 
   return $itg_result;
 }
+
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -1255,22 +1285,20 @@ function itg_widget_delete_big_story_live_tv() {
     return $ex->getMessage();
   }
 }
+
 /**
  * This function use for make home page map.
  * 
  */
-
 function itg_widget_election_graph_for_section_card($nid) {
 
-      $data = itg_widget_get_graph_data_by_nid($nid); 
-      $rand=rand(1,999999);
-      foreach ($data as $index => $row) {
-        $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-      }
-      return  theme("graph_election_section_cart", array("data" => $data,'rand_id'=>$rand,'jsondata'=>$jsondata));      
-      
+  $data = itg_widget_get_graph_data_by_nid($nid);
+  $rand = rand(1, 999999);
+  foreach ($data as $index => $row) {
+    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+  }
+  return theme("graph_election_section_cart", array("data" => $data, 'rand_id' => $rand, 'jsondata' => $jsondata));
 }
-
 
 /**
  * Function give extra filed value that uses for chcek weather its a live tv or not.
