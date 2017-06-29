@@ -11926,3 +11926,28 @@ fieldset#edit-xmlsitemap{
 }
 .page-itg-event-past-spekars table tbody td{vertical-align: top;}
  #views-exposed-form-report-filed-content-page #edit-from-state-wrapper {display:none !important}
+ [id*="itg-akamai-settings"], 
+ [id*="itg-akamai-cache-akamai-section"],
+ [id*="itg-akamai-cache-akamai-log"],
+ [id*="itg-akamai-cache-akamai-ccpurge"],
+ [id*="itg-akamai-cache-akamai-other"]{
+   fieldset {
+    border: none;
+    legend {
+      display: block;
+      background-color: #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .fieldset-wrapper{
+      .form-item-itg-akamai-disabled{
+        margin: 10px 0;
+        padding: 0 30px;
+      }
+    }
+  }
+ }
