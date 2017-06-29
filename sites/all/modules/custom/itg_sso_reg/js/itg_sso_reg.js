@@ -7,7 +7,8 @@
     Drupal.behaviors.itg_sso_reg = {
         attach: function (context, settings) {
             var base_url = settings.itg_sso_reg.settings.base_url;
-            var error = settings.itg_sso_reg.settings.custom_error;
+            //var error = settings.itg_sso_reg.settings.custom_error;
+            alert(base_url);
             
             if (error) {
                 jQuery.each(error, function (index, item) {
