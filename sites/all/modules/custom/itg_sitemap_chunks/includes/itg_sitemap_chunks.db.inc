@@ -32,24 +32,6 @@ function itg_sitemap_chunks_save_record($input = array(), $update_ms_id = NULL) 
       drupal_set_message(t('File name already exist'), 'error');
     }
   }
-  else {
-    // Update record.
-    try {
-      $ms_id = db_update('itg_sitemap_chunks')
-          ->fields(array(
-            'file_name' => $input['file_name'],
-            'custom_links' => $input['custom_links'],
-          ))
-          ->condition('ms_id', $update_ms_id, '=')
-          ->execute();
-
-      $ms_id = $update_ms_id;
-    }
-    catch (Exception $e) {
-      drupal_set_message(t('Some thing is wrong here.'), 'error');
-    }
-  }
-
   return $ms_id;
 }
 
@@ -218,5 +200,3 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
   }
   return $content_links;
 }
-
-

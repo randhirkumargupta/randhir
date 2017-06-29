@@ -51,8 +51,8 @@ function itg_sitemap_print_sitemap($total_links) {
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
     $xml .= '<loc>' . $total_link['link'] . '</loc>';
-    $xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
-    $xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
+    //$xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
+    //$xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -260,6 +260,8 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
   $query->leftJoin('field_data_field_type', 'fdft', 'fdft.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('fdft.field_type_value', 'Live Blog');
+  //Condition to get nodes created on previous 2 days.
+  $query->condition('n.created', array(strtotime('-2 day'), REQUEST_TIME), 'BETWEEN');
   $query->condition('n.status', 1);
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, $limit);
@@ -327,7 +329,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
         do {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
-          if (!file_exists($file_uri) || $year == 2017) {
+          if (!file_exists($file_uri)) {
             $content_links = array();
             // Query to get node by range of limit.
             $query = db_select('node', 'n');

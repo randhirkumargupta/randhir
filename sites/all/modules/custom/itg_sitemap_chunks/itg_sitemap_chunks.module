@@ -54,15 +54,15 @@ function itg_sitemap_chunks_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
-  $items['admin/config/search/itg-multiple-sitemap/dashboard'] = array(
-    'title' => "Dashboard",
-    'page callback' => 'itg_sitemap_chunks_dashboard',
-    'access callback' => 'user_access',
-    'access arguments' => array('administer itg sitemap'),
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
+//  $items['admin/config/search/itg-multiple-sitemap/dashboard'] = array(
+//    'title' => "Dashboard",
+//    'page callback' => 'itg_sitemap_chunks_dashboard',
+//    'access callback' => 'user_access',
+//    'access arguments' => array('administer itg sitemap'),
+//    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+//    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+//    'type' => MENU_LOCAL_TASK,
+//  );
 
   $items['admin/config/search/itg-multiple-sitemap/sections'] = array(
     'title' => "Sections Setting",
