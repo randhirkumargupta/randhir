@@ -128,11 +128,11 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_yearender_left');
     save_yearender_left_widget_data($form_state);
   }
-//  elseif ($current_display == 'we_may_suggest_widget') {
-//    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-//    $we_may_suggest_content = $form_state;
-//    save_we_may_suggest_widget_data($we_may_suggest_content);
-//  }
+  elseif ($current_display == 'election_graph_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_home_election_graph');
+    $home_election_content = $form_state;
+    save_home_election_widget_data($home_election_content);
+  }
   elseif ( $current_display == 'so_sorry_videos' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_so_sorry');
     save_so_sorry_widget_data($form_state);

@@ -23,7 +23,7 @@ function itg_sso_reg_password_form($form, &$form_state) {
   $form['domain_info_url'] = array(
     '#type' => 'hidden',
     '#title' => t(''),
-    '#value' => base64_decode(arg(2)),
+    '#value' => arg(2),
   );
 
   $form['current_pass'] = array(

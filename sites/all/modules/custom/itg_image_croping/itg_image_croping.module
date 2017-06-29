@@ -536,6 +536,7 @@ function itg_image_saveimage_info() {
       $inserted_data = db_insert('image_info')->fields(array(
             'fid' => $fid[0],
             'image_courtesy' => $output_info['courtesy'][$i],
+            'image_caption' => $output_info['caption'][$i],
             'image_keyword' => $output_info['keyword'][$i],
             'alt' => $output_info['image_alt'][$i],
             'title' => $output_info['image_title'][$i],

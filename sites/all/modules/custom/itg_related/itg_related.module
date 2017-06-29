@@ -442,12 +442,12 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
         $query->replaceParam("fq", '(' . $str . ')');
       }
-      else if ($_GET['q'] == 'search-publish-video' || $_GET['q'] == 'search-publish-video-radio') {
+      else if ($_GET['q'] == 'search-publish-video' || $_GET['q'] == 'search-publish-video-radio' ) {
         $hashvalue = $_GET['hash'];
         $str = "";
         if (!empty($hashvalue)) {
           $hashvalue = implode(' OR ', $hashvalue);
-          $str_has = 'hash:(' . $hashvalue . ')';
+          $str = 'hash:(' . $hashvalue . ')';
         }
         else {
           if (function_exists('itg_apache_solr_get_site_hash')) {
@@ -469,6 +469,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
 
         $query->replaceParam("fq", '(' . $str . ')');
+      
+        
       }
       else {
 
