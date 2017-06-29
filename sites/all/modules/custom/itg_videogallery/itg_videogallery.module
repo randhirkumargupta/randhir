@@ -1438,7 +1438,6 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
   $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
   $query->condition('property', VIDEO_PROPERTY, '!=');
   $video_data = $query->execute()->fetchAll();
-
   $node_by_video = array();
   foreach ($video_data as $data_delete) {
     $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
@@ -1535,6 +1534,7 @@ function itg_videogallery_remove_video_with_child() {
   foreach ($video_data as $data_delete) {
 
     if ($data_delete->fid != "") {
+      //Getting all fids of this video id
       $query = db_select('itg_solr_video_info', 'drd');
       $query->fields('drd', array('fid'));
       $query->condition('solr_video_id', $data_delete->solr_video_id, '=');
@@ -1560,7 +1560,6 @@ function itg_videogallery_remove_video_with_child() {
         $query->condition('video_id', $data_delete->solr_video_id, '=');
         $query->execute();
         itg_videogallery_update_video_info_solr($data_delete->solr_video_id);
-
         itg_videogallery_video_private_public($data_delete->solr_video_id, false);
       }
 
@@ -1946,7 +1945,7 @@ function daily_motion_video_dashboard_rows() {
         }
         else {
           $status_flag = '<span class="under-precess">Completed</span>';
-          if (strtoupper($record->type) != 'LOCAL') {
+          if ($record->dailymotion_published == 0) {
             $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
           }
         }
@@ -2861,7 +2860,7 @@ function itg_videogallery_url_with_bitates() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-15 days', time());
+  $totime = strtotime('-2 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
