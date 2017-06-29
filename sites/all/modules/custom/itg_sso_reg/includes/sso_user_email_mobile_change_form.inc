@@ -11,17 +11,12 @@
  * @return type 
  */
 function itg_sso_user_email_form($form, &$form_state) {
-
+  $arg = arg();
   if (!isset($form_state['stage']))
     $form_state['stage'] = 'step_1';
-  $form = array();
-  //  if (user_is_anonymous()) {
-//    return drupal_access_denied();
-//  }
-  
-
+    $form = array();
   // get unique id form argument
-  $unique_id = base64_decode(arg(2));
+  $unique_id = base64_decode($arg[2]);
   // make configuration for js file
   global $user, $base_url;
   $settings = array();
@@ -63,7 +58,7 @@ function itg_sso_user_email_form($form, &$form_state) {
  * @return type 
  */
 function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
-
+  $arg = arg();
   $values = isset($form_state['multistep_values']['step_1']) ? $form_state['multistep_values']['step_1'] : array();
   
   $form['heading'] = array(
@@ -91,7 +86,7 @@ function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
   $form['domain_info_url'] = array(
     '#type' => 'hidden',
     '#title' => t(''),
-    '#value' => base64_decode(arg(3)),
+    '#value' => $arg[3],
   );
 
 
@@ -437,23 +432,8 @@ function step_2_validate($form, &$form_state) {
 
   if ($otp_match != $otp) {
 
-    form_set_error('otp', t("Enter valid OTP!"));
+    form_set_error('otp', t("Enter valid OTP !"));
   }
 }
 
-/**
- * Implements itg_sso_user_email_complete().
- */
-function itg_sso_user_email_complete() {
-  if (user_is_anonymous()) {
-    return drupal_access_denied();
-  }
-  else {
-    $form['email_success'] = array(
-      '#prefix' => '<div class="email-success">',
-      '#markup' => 'Your Email/Mobile has been changed successfully!</div>',
-    );
 
-    return $form;
-  }
-}

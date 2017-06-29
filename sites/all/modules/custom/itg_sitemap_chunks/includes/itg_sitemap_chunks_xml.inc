@@ -79,42 +79,51 @@ function itg_sitemap_chunks_get_sub_file_links($ms_id) {
 function itg_sitemap_chunks_for_section($section_tid) {
   $total_links = itg_sitemap_get_xml_data_for_section($section_tid);
   if (!empty($total_links)) {
-    header('Content-type: application/xml');
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
-    foreach ($total_links as $total_link) {
-      $xml .= '<url>';
-      $xml .= '<loc>' . $total_link['url'] . '</loc>';
-      $xml .= '<news:news>';
-      // Publication tag start
-      $xml .= '<news:publication>';
-      // Language Name
-      $xml .= '<news:name>';
-      $xml .= $total_link['news_name'];
-      $xml .= '</news:name>';
-      // Language Tag
-      $xml .= '<news:language>';
-      $xml .= $total_link['news_language'];
-      $xml .= '</news:language>';
-
-      $xml .= '</news:publication>';
-      //Publication tag END
-
-      $xml .= '<news:publication_date>' . $total_link['news_publication_date'] . '</news:publication_date>';
-      $xml .= '<news:title>' . $total_link['news_title'] . '</news:title>';
-      $xml .= '<news:keywords>' . $total_link['news_keywords'] . '</news:keywords>';
-
-
-      $xml .= '</news:news>';
-      $xml .= '</url>';
-    }
-    $xml .= '</urlset>';
-    echo $xml;
+    echo itg_sitemap_get_sitemap($total_links);
   }
 }
 
+/**
+ * 
+ * @param type $total_links
+ * @return string
+ */
+function itg_sitemap_get_sitemap($total_links) {
+  header('Content-type: application/xml');
+  $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+  $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
+  foreach ($total_links as $total_link) {
+    $xml .= '<url>';
+    $xml .= '<loc>' . $total_link['url'] . '</loc>';
+    $xml .= '<news:news>';
+    // Publication tag start
+    $xml .= '<news:publication>';
+    // Language Name
+    $xml .= '<news:name>';
+    $xml .= $total_link['news_name'];
+    $xml .= '</news:name>';
+    // Language Tag
+    $xml .= '<news:language>';
+    $xml .= $total_link['news_language'];
+    $xml .= '</news:language>';
+
+    $xml .= '</news:publication>';
+    //Publication tag END
+
+    $xml .= '<news:publication_date>' . $total_link['news_publication_date'] . '</news:publication_date>';
+    $xml .= '<news:title>' . $total_link['news_title'] . '</news:title>';
+    $xml .= '<news:keywords>' . $total_link['news_keywords'] . '</news:keywords>';
+
+
+    $xml .= '</news:news>';
+    $xml .= '</url>';
+  }
+  $xml .= '</urlset>';
+  return $xml;
+}
+
 function itg_sitemap_get_xml_data_for_section($section_tid) {
-  $nids_array = array();
+  $excluded_nodes = array();
   $xml_data_array = array();
   module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks_section.db');
   // Get all child of section.
@@ -126,7 +135,6 @@ function itg_sitemap_get_xml_data_for_section($section_tid) {
   // Get database data to get frequency and type.
   $section_db_data = itg_sitemap_chunks_section_db_data($section_tid);
   $previous_time = itg_sitemap_get_previous_time($section_db_data);
-  $excluded_nodes = array();
   $content_types = itg_sitemap_get_required_content_type_for_xml();
   if (!empty(variable_get('itg_sitemap_exclude_nid'))) {
     $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
@@ -226,4 +234,39 @@ function itg_sitemap_get_metatag_of_node($nid) {
  */
 function itg_sitemap_get_xml_valid_data($text) {
   return htmlspecialchars($text, ENT_XML1, 'UTF-8');
+}
+
+/**
+ * Main function which gives liveblog sitemap
+ */
+function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
+  $live_blog_nid = array();
+  $sitemap_xml_array = array();
+  $limit = variable_get('itg_sitemap_chunks_number', 50000);
+  // get all liveblog nids.
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_type', 'fdft', 'fdft.entity_id = n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('fdft.field_type_value', 'Live Blog');
+  $query->orderBy('n.nid', 'DESC');
+  $query->range(0, $limit);
+  $live_blog_nids = $query->execute()->fetchCol();
+  if (!empty($live_blog_nids)) {
+    foreach ($live_blog_nids as $live_blog_nid) {
+      // Get news sitemap required array.
+      $sitemap_xml_array[] = itg_sitemap_get_section_sitemap_required_data($live_blog_nid);
+    }
+  }
+  if (!empty($sitemap_xml_array)) {
+    // Print news sitemap for given array.
+    echo itg_sitemap_get_sitemap($sitemap_xml_array);
+  }
+}
+
+function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
+  $limit = variable_get('itg_sitemap_chunks_number', 50000);
+  $content_types = array("story", "videogallery", "photogallery");
+  foreach ($content_types as $CT) {
+    
+  }
 }
