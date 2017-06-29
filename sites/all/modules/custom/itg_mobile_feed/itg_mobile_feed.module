@@ -210,7 +210,7 @@ function feed_tid_config() {
   $form['program_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Program Section"),
-    '#default_value' => variable_get('photo_sec_tid'),
+    '#default_value' => variable_get('program_sec_tid'),
     '#description' => t("Enter Program Section Term Id With Comma Seperated"),
   );
 
