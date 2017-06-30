@@ -38,6 +38,12 @@ function itg_sitemap_chunks_add_sitemap($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Function which gives data of itg_sitemap_chunks_content table which is saved
+ * from setting form of content type.
+ * 
+ * @return array
+ */
 function itg_sitemap_chunks_get_content_data() {
   $query = db_select('itg_sitemap_chunks_content', 'scc');
   $query->fields('scc');
@@ -46,6 +52,11 @@ function itg_sitemap_chunks_get_content_data() {
   return $result;
 }
 
+/**
+ * Function which delete table data of given input table name.
+ * 
+ * @param string $table_name
+ */
 function itg_sitemap_chunks_get_content_data_delete($table_name) {
   if (!empty($table_name)) {
     db_delete($table_name)->execute();

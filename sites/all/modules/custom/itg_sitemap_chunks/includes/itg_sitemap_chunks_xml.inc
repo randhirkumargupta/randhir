@@ -88,6 +88,11 @@ function itg_sitemap_chunks_get_sub_file_links($ms_id) {
   return $outArray;
 }
 
+/**
+ *  Function which print xml sitemap of given section
+ * @param int $section_tid
+ */
+
 function itg_sitemap_chunks_for_section($section_tid) {
   $total_links = itg_sitemap_get_xml_data_for_section($section_tid);
   if (!empty($total_links)) {
@@ -96,6 +101,7 @@ function itg_sitemap_chunks_for_section($section_tid) {
 }
 
 /**
+ * Function which gives xmls tags sting from given string.
  * 
  * @param type $total_links
  * @return string
@@ -134,6 +140,12 @@ function itg_sitemap_get_sitemap($total_links) {
   return $xml;
 }
 
+/**
+ * Function which gives array data for section sitemap.
+ * 
+ * @param int $section_tid
+ * @return array
+ */
 function itg_sitemap_get_xml_data_for_section($section_tid) {
   $excluded_nodes = array();
   $xml_data_array = array();
@@ -278,14 +290,15 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
   }
 }
 
+/**
+ * Function which creats sections sitemap chunks.
+ */
 function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
   // remove directory if previously created sitemap.
-  //file_unmanaged_delete_recursive('public://sitemap/');
-  // exit;
   // get chunk setting from setting form.
   $limit = variable_get('itg_sitemap_chunks_number', 50000);
   // required content type for archive sitemap
-  $content_types = array("photogallery", "videogallery", "story");
+  $content_types = array("story" , "videogallery" , "photogallery");
   // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
   $year_range = range(2006, date('Y'));
   foreach ($year_range as $year) {
@@ -296,17 +309,6 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
     foreach ($content_types as $CT) {
       // get total node count of content type.
       $total_rows = itg_sitemap_get_node_count($CT, $start_year_time_stamp, $end_year_time_stamp);
-      // Logic to delete current year xml sitemap.
-      // We will delete current year all the sitemap xmls and recreate it.
-      if ($year == date('Y')) {
-        // get last file number.
-        $first_file_number = 0;
-        $feed_dir_for_delete = "public://sitemap/$CT";
-        // Last file uri path.
-        $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
-        // Delete last file we will create it again.
-        $is_deleted = file_unmanaged_delete($last_file_uri);
-      }
       if ($total_rows > 0) {
         // get sitemap details from custom sitemap table i.e. priority frequency etc.
         $content_type_saved = itg_sitemap_chunks_get_record();
@@ -318,14 +320,37 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
         $x = 0;
         // Decide total files can be.
         $floor_number = floor($total_rows / $limit);
-        $remaing_num = $total_rows / $limit - $floor_number;
-        if ($remaing_num < 0) {
-          $file_num = $floor_number + 1;
+        $remaing_num = fmod($total_rows, $limit);
+        //$file_num is variable which gives number of file can be created.
+        if ($remaing_num > 0) {
+          $file_num = $posible_xml_files = $floor_number + 1;
         }
         else {
-          $file_num = $floor_number;
+          $file_num = $posible_xml_files = $floor_number;
         }
-
+        if ($year == date('Y')) {
+          // Logic to rename xml file name.
+          $saved_xml_file_of_current_year = itg_sitemap_get_xml_file_count($feed_dir);
+          $actual_file_should_be = $file_num;
+          // If saved xml files count is less then actual file then file should be rename
+          // make space for CTYear.xml file which is new.
+          // Previouse CTYear.xml is renamed to CTyear-1.xml as so on.
+          if ($saved_xml_file_of_current_year < $actual_file_should_be) {
+            for ($i = $saved_xml_file_of_current_year; $i >= 1; $i--) {
+              $old_file_name = itg_sitemap_chunk_get_xml_file_name($i, $feed_dir, $CT, $year);
+              $new_file_name = itg_sitemap_chunk_get_xml_file_name($i + 1, $feed_dir, $CT, $year);
+              rename($old_file_name, $new_file_name);
+            }
+          }
+          // Logic to rename file has end.
+          // get last file number.
+          $first_file_number = 1;
+          $feed_dir_for_delete = "public://sitemap/$CT";
+          // Last file uri path.
+          $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
+          // Delete last file we will create it again.
+          file_unmanaged_delete($last_file_uri);
+        }
         do {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
@@ -390,6 +415,27 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
 }
 
 /**
+ *  Function which gives file count for given url.
+ * 
+ * @param string $feed_dir
+ * @return int
+ */
+function itg_sitemap_get_xml_file_count($feed_dir) {
+  $fileCount = 0;
+  if ($handle = opendir($feed_dir)) {
+    while (false !== ($entry = readdir($handle))) {
+      if ($entry != "." && $entry != "..") {
+        if (!is_dir($entry)) {
+          $fileCount++;
+        }
+      }
+    }
+    closedir($handle);
+  }
+  return $fileCount;
+}
+
+/**
  * Function which gives correct xml file name.
  * 
  * @param int $file_num
@@ -399,10 +445,12 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
  * @return string
  */
 function itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year) {
-  if ($file_num == 0) {
+
+  if ($file_num == 1) {
     $file_name = "$feed_dir/$CT$year.xml";
   }
   else {
+    $file_num--;
     $file_name = "$feed_dir/$CT$year-$file_num.xml";
   }
   return $file_name;
