@@ -1023,11 +1023,16 @@ function itg_akamai_purge_story_related_to_video($video_id) {
  */
 function itg_akamai_setting_ttl_for_section_cart() {
   module_load_include('inc', 'itg_akamai', 'includes/itg_akamai');
-  $ttl = ItgAkamaiMain::itgAkamaiGettingTTLforAkamaiSectionCart();
+  try {
+    $ttl = ItgAkamaiMain::itgAkamaiGettingTTLforAkamaiSectionCart();
+  }
+  catch (Exception $e) {
+    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+  }
   try {
     ItgAkamaiMain::itgAkamaiSettingTtlForSectionCart($ttl);
   }
   catch (Exception $e) {
-    
+    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
   }
 }
