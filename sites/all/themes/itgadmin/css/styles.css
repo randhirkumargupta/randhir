@@ -12629,3 +12629,8 @@ fieldset#edit-xmlsitemap {
   margin: 10px 0;
   padding: 0 30px;
 }
+
+.cpation-wraper textarea {
+  width: 400px;
+  margin-bottom: 10px;
+}
