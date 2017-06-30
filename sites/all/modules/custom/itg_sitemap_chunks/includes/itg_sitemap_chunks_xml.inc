@@ -27,24 +27,36 @@ function itg_sitemap_chunks_create_xml_sitemap() {
  *   File name.
  */
 function itg_sitemap_chunks_create_sub_file($ms_id, $filesname) {
-
+  // As xml file is very large so setting 0 execution time.
+  drupal_set_time_limit(0);
   $total_links = itg_sitemap_chunks_get_sub_file_links($ms_id);
 
   if (!empty($total_links)) {
     header('Content-type: application/xml');
-    $lastmod = date('Y-m-d');
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    foreach ($total_links as $total_link) {
-      $xml .= '<url>';
-      $xml .= '<loc>' . $total_link['link'] . '</loc>';
-      $xml .= '<lastmod>' . $lastmod . '</lastmod>';
-      $xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
-      $xml .= '</url>';
-    }
-    $xml .= '</urlset>';
-    echo $xml;
+    echo itg_sitemap_print_sitemap($total_links);
   }
+}
+
+/**
+ * Function which gives xml for sitemap for given array.
+ * 
+ * @param array $total_links
+ * @return string
+ */
+function itg_sitemap_print_sitemap($total_links) {
+
+  $lastmod = date('Y-m-d');
+  $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+  $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+  foreach ($total_links as $total_link) {
+    $xml .= '<url>';
+    $xml .= '<loc>' . $total_link['link'] . '</loc>';
+    //$xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
+    //$xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
+    $xml .= '</url>';
+  }
+  $xml .= '</urlset>';
+  return $xml;
 }
 
 /**
@@ -248,6 +260,9 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
   $query->leftJoin('field_data_field_type', 'fdft', 'fdft.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('fdft.field_type_value', 'Live Blog');
+  //Condition to get nodes created on previous 2 days.
+  $query->condition('n.created', array(strtotime('-2 day'), REQUEST_TIME), 'BETWEEN');
+  $query->condition('n.status', 1);
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, $limit);
   $live_blog_nids = $query->execute()->fetchCol();
@@ -264,9 +279,148 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
 }
 
 function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
+  // remove directory if previously created sitemap.
+  //file_unmanaged_delete_recursive('public://sitemap/');
+  // exit;
+  // get chunk setting from setting form.
   $limit = variable_get('itg_sitemap_chunks_number', 50000);
-  $content_types = array("story", "videogallery", "photogallery");
-  foreach ($content_types as $CT) {
-    
+  // required content type for archive sitemap
+  $content_types = array("photogallery", "videogallery", "story");
+  // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
+  $year_range = range(2006, date('Y'));
+  foreach ($year_range as $year) {
+    $start_year = date("1/1/$year 00:00:00");
+    $end_year = date("12/31/$year 00:00:00");
+    $start_year_time_stamp = strtotime($start_year);
+    $end_year_time_stamp = strtotime($end_year);
+    foreach ($content_types as $CT) {
+      // get total node count of content type.
+      $total_rows = itg_sitemap_get_node_count($CT, $start_year_time_stamp, $end_year_time_stamp);
+      // Logic to delete current year xml sitemap.
+      // We will delete current year all the sitemap xmls and recreate it.
+      if ($year == date('Y')) {
+        // get last file number.
+        $first_file_number = 0;
+        $feed_dir_for_delete = "public://sitemap/$CT";
+        // Last file uri path.
+        $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
+        // Delete last file we will create it again.
+        $is_deleted = file_unmanaged_delete($last_file_uri);
+      }
+      if ($total_rows > 0) {
+        // get sitemap details from custom sitemap table i.e. priority frequency etc.
+        $content_type_saved = itg_sitemap_chunks_get_record();
+        $contents = !empty($content_type_saved['content']) ? $content_type_saved['content'] : array();
+        //directory public path
+        $feed_dir = "public://sitemap/$CT";
+        //create directory
+        file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
+        $x = 0;
+        // Decide total files can be.
+        $floor_number = floor($total_rows / $limit);
+        $remaing_num = $total_rows / $limit - $floor_number;
+        if ($remaing_num < 0) {
+          $file_num = $floor_number + 1;
+        }
+        else {
+          $file_num = $floor_number;
+        }
+
+        do {
+          $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
+          // Check If xml already exist then skip the loop.
+          if (!file_exists($file_uri)) {
+            $content_links = array();
+            // Query to get node by range of limit.
+            $query = db_select('node', 'n');
+            $query->fields('n', array('nid', 'created', 'changed'));
+            $query->condition('n.type', $CT);
+            $query->condition('n.status', 1);
+            $query->condition('created', array($start_year_time_stamp, $end_year_time_stamp), 'BETWEEN');
+            $query->range($x, $limit);
+            $query->orderBy('n.nid', "ASC");
+            $results = $query->execute()->fetchAllAssoc('nid');
+            // Sort here in decending mod.
+            krsort($results);
+            if (!empty($results)) {
+              $i = 0;
+              // prepare result for xml with pagination.
+              foreach ($results as $key => $data) {
+                // check if current content type is saved in custom table of siemap.
+                // for priority frequency etc.
+                $tag_data = itg_sitemap_chunk_get_tags_data($contents, $CT);
+                // Check if priority frequency etc. is saved then create sitemap.
+                if (!empty($tag_data)) {
+                  $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+                  $content_links[$i]['link'] = $path;
+                  $content_links[$i]['priority'] = $tag_data->priority;
+                  $content_links[$i]['last_modified'] = date('Y-d-m', $data->changed);
+                  $content_links[$i]['changefreq'] = $tag_data->changefreq;
+                }
+                $i++;
+              }
+            }
+            if (!empty($content_links)) {
+              // get xml tags sitemap data.
+              // Note* This is not propery xml its ony string.
+              $xml = itg_sitemap_print_sitemap($content_links);
+            }
+            // Prevent for destoryed xml file.
+            if (!empty($xml)) {
+              $file_name = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
+              // Save xml data into file.
+              $saved_file_path = file_unmanaged_save_data($xml, $file_name, FILE_EXISTS_REPLACE);
+              echo l(file_create_url($saved_file_path), file_create_url($saved_file_path));
+              echo "<br/>";
+            }
+          }
+          else {
+            echo t("<b>@file</b> <span style='color:red'>Skiped.</span>", array("@file" => $file_uri));
+            echo "<br/>";
+          }
+          $x += $limit;
+          $file_num--;
+        } while ($x < $total_rows);
+      }
+      else {
+        echo t("No data found for @year for <b>Content Type : @CT</b><br/>", array("@year" => $year, "@CT" => $CT));
+      }
+    }
   }
+}
+
+/**
+ * Function which gives correct xml file name.
+ * 
+ * @param int $file_num
+ * @param string $feed_dir
+ * @param string $CT
+ * @param int $year
+ * @return string
+ */
+function itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year) {
+  if ($file_num == 0) {
+    $file_name = "$feed_dir/$CT$year.xml";
+  }
+  else {
+    $file_name = "$feed_dir/$CT$year-$file_num.xml";
+  }
+  return $file_name;
+}
+
+/**
+ * Function which gives rowcount of nodes between two dates.
+ * 
+ * @param string $content_type
+ * @param string $start_date
+ * @param string $end_date
+ * @return int
+ */
+function itg_sitemap_get_node_count($content_type, $start_date, $end_date) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', $content_type);
+  $query->condition('created', array($start_date, $end_date), 'BETWEEN');
+  $query->condition('n.status', 1);
+  return $query->execute()->rowCount();
 }
