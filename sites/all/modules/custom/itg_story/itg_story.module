@@ -1155,8 +1155,8 @@ function itg_story_views_api() {
  */
 function itg_get_emoji_amp_html($result, $arr = NULL) {
   if (!empty($result)) {
+    $emoji_html = '<span smilies-title>';
     if (empty($arr)) {
-      $emoji_html = '<span smilies-title>';
       foreach ($result as $key => $value) {
         $html = $value;
         $html = str_ireplace(
@@ -1164,18 +1164,15 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
         );
         $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
       }
-      $emoji_html .= '</span>';
-      return $emoji_html;
     }
     else {
-      $emoji_html = '<span smilies-title>';
       $html = $result;
       $html = str_ireplace(
           ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
       );
       $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
-      $emoji_html .= '</span>';
-      return $emoji_html;
     }
+    $emoji_html .= '</span>';
+    return $emoji_html;
   }
 }
