@@ -17,7 +17,7 @@ Drupal.behaviors.itg_widgets = {
 
                 jQuery.ajax({
                     url: base_url + "/section-card-refresh",
-                    method: 'post',
+                    method: 'get',
                     data: {card_val: card_val, widget_style: widget_style},
                     beforeSend: function() {
                         jQuery('.itg-ajax-loader').show();
