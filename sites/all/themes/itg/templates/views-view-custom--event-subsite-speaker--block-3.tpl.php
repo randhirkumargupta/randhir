@@ -1,10 +1,19 @@
-<?php foreach ($rows as $row): ?>
+<?php
+global $base_url;
+foreach ($rows as $row): ?>
 
-    <div class="image-wrap">  
-    <?php print $row['field_sponser_logo']; ?>
+  <div class="image-wrap">  
+      <?php
+      if (!empty($row['field_sponser_logo'])) {
+        print $row['field_sponser_logo'];
+      }
+      else {
+        print "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
+      }
+      ?>
   </div>
-  
-    <h3 title="<?php echo strip_tags($row['title']);?>"><?php print $row['title']; ?></h3>
-    <div class="body-content"><?php print $row['body']; ?></div>
- 
+
+  <h3 title="<?php echo strip_tags($row['title']); ?>"><?php print $row['title']; ?></h3>
+  <div class="body-content"><?php print $row['body']; ?></div>
+
 <?php endforeach; ?>

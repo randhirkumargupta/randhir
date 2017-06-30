@@ -488,10 +488,13 @@ function itg_mobile_association_validator(&$form, &$form_state) {
   }
 
   // check astro duplicate content
-  $astro_duplicate = itg_mobile_services_check_astro_duplicate_content($astro_content);
-  foreach ($astro_duplicate as $key => $value) {
-    form_set_error('field_service_content', t('<strong>@contenttitle</strong> is already exist, Noid id is @node', array('@contenttitle' => $value->field_story_expert_description_value, '@node' => $value->entity_id)));
+  if(empty($node_nid)) {
+    $astro_duplicate = itg_mobile_services_check_astro_duplicate_content($astro_content);
+    foreach ($astro_duplicate as $key => $value) {
+      form_set_error('field_service_content', t('<strong>@contenttitle</strong> is already exist, Noid id is @node', array('@contenttitle' => $value->field_story_expert_description_value, '@node' => $value->entity_id)));
+    }
   }
+ 
   $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
 
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];

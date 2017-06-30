@@ -82,12 +82,12 @@ function check_template_of_section($section_name, $template_name) {
  * @param string $widget_name 
  * @return array $render_array
  */
-function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL) {
+function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL, $block_id = NULL) {
 
   $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
-    return create_setion_widgets($filter_url, $widget_info[1]);
+    return create_setion_widgets($filter_url, $widget_info[1], $block_id);
   }
   else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
@@ -251,7 +251,7 @@ function get_layout_details_by_block_name($section_name, $template_name, $status
     
     if (isset($itg_val->widget_name)) {
       // get widget block     
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -345,7 +345,7 @@ function get_layout_details($section_name, $template_name, $status) {
     
     if (isset($itg_val->widget_name)) {
       // get widget block     
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -442,7 +442,7 @@ function get_layout_details_block($section_name, $template_name, $status) {
     
     if (isset($itg_val->widget_name)) {
       // get widget block     
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -577,7 +577,7 @@ function get_widgets_poll_list() {
  * @param $section_id
  * @return array
  */
-function create_setion_widgets($section_id, $widget_style = NULL) {
+function create_setion_widgets($section_id, $widget_style = NULL, $block_id = NULL) {
   module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
   // value is hardcoded need to be change for dyanamic functionality
   $info['section'] = $section_id; // tid of section
@@ -588,7 +588,7 @@ function create_setion_widgets($section_id, $widget_style = NULL) {
   
   $data = itg_widget_section_wise_ordering_from_custom_table($info, $widget_style);
   
-  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style));
+  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style, "block_id" => $block_id, 'itg_section_id' => $section_id));
 }
 
 /**

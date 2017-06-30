@@ -77,12 +77,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-      <h1  title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1  title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
       <?php } ?>
       <?php
       //code for Associate lead
