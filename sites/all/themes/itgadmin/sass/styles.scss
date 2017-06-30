@@ -11951,3 +11951,6 @@ fieldset#edit-xmlsitemap{
     }
   }
  }
+ .ticket-type-require:after{
+   @extend .astrick;
+ }
