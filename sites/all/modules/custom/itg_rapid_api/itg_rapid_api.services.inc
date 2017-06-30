@@ -1543,7 +1543,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     //echo "<pre>hi"; print_r($_GET);echo "</pre>"; exit();
     global $user;
     $user_id = $username = $_GET['user_id'];
-    $password = $username = $_GET['password'];
+    $password = $password = $_GET['password'];
 
     if ($user->uid) {
         // user is already logged in
