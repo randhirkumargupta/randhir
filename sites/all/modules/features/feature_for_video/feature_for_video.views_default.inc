@@ -878,7 +878,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -942,7 +942,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Field: Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -990,10 +990,10 @@ allowfullscreen></iframe>';
   $handler->display->display_options['header']['php']['php_output'] = '<?php
 if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && !isset($_GET[\'pcat\'])){
 	$t_name = itg_videogallery_get_term_name($_GET[\'category\']);
-	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
+	print "<h3>". t("LATEST FROM $t_name") ."<i class=\\\'fa fa-caret-down\\\' aria-hidden=\\\'true\\\'></i></h3>";
 }elseif(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && isset($_GET[\'pcat\']) && $_GET[\'pcat\'] != 0){
 	$t_name = itg_videogallery_get_term_name($_GET[\'pcat\']);
-	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
+	print "<h3>". t("LATEST FROM $t_name") ."<i class=\\\'fa fa-caret-down\\\' aria-hidden=\\\'true\\\'></i></h3>";
 }
 ?>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;

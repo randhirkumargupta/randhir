@@ -7,7 +7,6 @@
  * @see https://drupal.org/node/1728148
  */
 $arg = arg();
-
 $back_to_link_config = variable_get('sitename-domain');
 if(!empty($back_to_link_config)) {
   $explode_back_link = explode(',', $back_to_link_config);
@@ -46,11 +45,43 @@ else {
   $site_name = array_search($parse_host, $sitehash);
   if (!empty($site_name)) {
     $site_name = $site_name;
+    $shr = base64_decode($arg[1]);
   }
   else {
     $site_name = t('India Today');
   }
 }
+
+// case for change password page
+if($arg[0] == 'sso' && $arg[1] == 'change-password') {
+  $parse = parse_url(base64_decode($arg[2]));
+  $parse_host = $parse['host'];
+  // back to site configuration code in case of signup/forgot-password
+  $site_name = array_search($parse_host, $sitehash);
+  if (!empty($site_name)) {
+    $site_name = 'Edit Profile';
+    $shr = base64_decode($arg[2]);
+  }
+  else {
+    $site_name = t('Edit Profile');
+  }
+}
+
+// case for change password page
+if($arg[0] == 'sso-user') {
+  $parse = parse_url(base64_decode($arg[3]));
+  $parse_host = $parse['host'];
+  // back to site configuration code in case of signup/forgot-password
+  $site_name = array_search($parse_host, $sitehash);
+  if (!empty($site_name)) {
+    $site_name = 'Edit Profile';
+    $shr = base64_decode($arg[3]);
+  }
+  else {
+    $site_name = t('Edit Profile');
+  }
+}
+
 ?>
 <div class="sso-header">
     <div class="container">
@@ -79,9 +110,9 @@ else {
 </div>
 
 <div class="sso-footer">
-  <div class="container">
+<!--  <div class="container">
     <?php print theme('links', array('links' => menu_navigation_links('menu-sso-footer-menu'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
-  </div>
+  </div>-->
   <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
 </div>
 

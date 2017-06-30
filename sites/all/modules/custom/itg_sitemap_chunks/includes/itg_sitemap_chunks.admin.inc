@@ -9,44 +9,56 @@ module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks.db
 /**
  * Form callback.
  */
-function itg_sitemap_chunks_add_sitemap($form, &$form_state, $arguments = array()) {
-  if (itg_sitemap_chunks_count_files() && arg(4) != 'edit') {
-    global $base_url;
-    $sr_numb = itg_sitemap_chunks_count_files();
-    $link_goto = $base_url . "/admin/config/search/itg-multiple-sitemap/edit/$sr_numb";
-    drupal_set_message(t("You can't add more then 1 sitemap as it workes on pagination. "
-        . " <br/> To Edit Current Sitemap Please <a href='@setting_link'>Edit</a> Current settings. " , array('@setting_link' => $link_goto)) , 'error');
-    return $form;
-  }
-  else {
-    $form['file_name'] = array(
-      '#title' => t('Enter Sitemap Name'),
-      '#type' => 'textfield',
-      '#default_value' => isset($arguments['file_name']) ? $arguments['file_name'] : '',
-      '#description' => t('Enter file name without xml extension.Allowed only "a-z, - and _"'),
-      '#required' => TRUE,
-    );
+function itg_sitemap_chunks_add_sitemap($form, &$form_state) {
+  $arguments = itg_sitemap_chunks_get_content_data();
+  $form['file_name'] = array(
+    '#title' => t('Enter Sitemap Name'),
+    '#type' => 'textfield',
+    '#default_value' => time(),
+    '#description' => t('Enter file name without xml extension.Allowed only "a-z, - and _"'),
+    '#required' => TRUE,
+    '#prefix' => '<div class="hide">',
+    '#suffix' => '</div>',
+  );
 
-    $content_types = itg_sitemap_chunks_get_node_types();
+  $content_types = itg_sitemap_chunks_get_node_types();
 
-    $entities = array(
-      0 => array('entity_type' => 'content', 'types' => $content_types),
-    );
+  $entities = array(
+    0 => array('entity_type' => 'content', 'types' => $content_types),
+  );
 
-    foreach ($entities as $value) {
-      itg_sitemap_chunks_create_tabular_checkbox_fields($form, $value['types'], $value['entity_type'], $arguments);
-    }
-
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Submit'),
-    );
-
-    $form_state['ms_id'] = isset($arguments['ms_id']) ? $arguments['ms_id'] : NULL;
+  foreach ($entities as $value) {
+    itg_sitemap_chunks_create_tabular_checkbox_fields($form, $value['types'], $value['entity_type'], $arguments);
   }
 
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
   return $form;
 }
+
+function itg_sitemap_chunks_get_content_data() {
+  $query = db_select('itg_sitemap_chunks_content', 'scc');
+  $query->fields('scc');
+  $query->orderBy('scc.target_ms_id', 'DESC');
+  $result['content'] = $query->execute()->fetchAll();
+  return $result;
+}
+
+function itg_sitemap_chunks_get_content_data_delete($table_name) {
+  if (!empty($table_name)) {
+    db_delete($table_name)->execute();
+  }
+}
+
+//function itg_sitemap_chunks_get_ms_id() {
+//  $query = db_select('itg_sitemap_chunks', 'scc');
+//  $query->fields('scc', array('ms_id'));
+//  $query->orderBy('scc.ms_id', 'DESC');
+//  $result = $query->execute()->fetchField();
+//  return $result;
+//}
 
 function itg_sitemap_chunks_count_files() {
   $query = db_select('itg_sitemap_chunks', 'isc');
@@ -57,25 +69,28 @@ function itg_sitemap_chunks_count_files() {
 /**
  * Validate handler for form.
  */
-function itg_sitemap_chunks_add_sitemap_validate(&$form, &$form_state) {
-
-  // Validate file name.
-  $file_name = isset($form_state['values']['file_name']) ? $form_state['values']['file_name'] : NULL;
-
-  if (is_null($file_name)) {
-    form_set_error('file_name', t('Please provide sitemap name'));
-  }
-  else {
-    if (preg_match('/[^a-z_\-]/i', $file_name)) {
-      form_set_error('file_name', t('Please provide sitemap name in right format, allowed only a-z,_and -'));
-    }
-  }
-}
+//function itg_sitemap_chunks_add_sitemap_validate(&$form, &$form_state) {
+//
+//  // Validate file name.
+//  $file_name = isset($form_state['values']['file_name']) ? $form_state['values']['file_name'] : NULL;
+//
+//  if (is_null($file_name)) {
+//    form_set_error('file_name', t('Please provide sitemap name'));
+//  }
+//  else {
+//    if (preg_match('/[^a-z_\-]/i', $file_name)) {
+//      form_set_error('file_name', t('Please provide sitemap name in right format, allowed only a-z,_and -'));
+//    }
+//  }
+//}
 
 /**
  * Submit handler for form.
  */
 function itg_sitemap_chunks_add_sitemap_submit(&$form, &$form_state) {
+
+  itg_sitemap_chunks_get_content_data_delete('itg_sitemap_chunks_content');
+  itg_sitemap_chunks_get_content_data_delete('itg_sitemap_chunks');
 
   $file_name = isset($form_state['values']['file_name']) ? $form_state['values']['file_name'] : NULL;
   $selected_ct = array();
@@ -102,9 +117,6 @@ function itg_sitemap_chunks_add_sitemap_submit(&$form, &$form_state) {
     itg_sitemap_chunks_delete_sub_record('content', $ms_id);
     itg_sitemap_chunks_save_sub_record('content', $ms_id, $selected_ct);
   }
-
-  $url = 'admin/config/search/itg-multiple-sitemap/dashboard';
-  drupal_goto($url);
 }
 
 /**
@@ -188,46 +200,46 @@ function itg_sitemap_chunks_get_vocab_types() {
  * @return html
  *   Having details about created sitemaps.
  */
-function itg_sitemap_chunks_dashboard() {
-  $output = t('Your installation of multiple sitemap module  is not correct.');
-  if (db_table_exists('itg_sitemap_chunks')) {
-    $output = t('You have not created any sitemap yet.');
-    $results = db_select('itg_sitemap_chunks', 'ms')
-        ->fields('ms')
-        ->execute()
-        ->fetchAll();
-
-    $header = array(
-      'File Name',
-      'Custom links',
-      'Edit',
-      'Delete',
-    );
-
-    $rows = array();
-    if (!empty($results)) {
-      foreach ($results as $key => $result) {
-        $ms_id = $result->ms_id;
-        // $rows[$key]['msid'] = $result->ms_id.
-        $rows[$key]['fname'] = $result->file_name;
-        $rows[$key]['custom_links'] = $result->custom_links;
-
-        $delete_path = '/admin/config/search/itg-multiple-sitemap/delete/';
-        $edit_path = '/admin/config/search/itg-multiple-sitemap/edit/';
-
-        // Add webform query.
-        $delete_path .= $ms_id;
-        $edit_path .= $ms_id;
-        $rows[$key]['edit'] = l(t('Edit'), $edit_path);
-        $rows[$key]['delete'] = l(t('Delete'), $delete_path);
-      }
-
-      return theme('table', array('header' => $header, 'rows' => $rows));
-    }
-  }
-
-  return $output;
-}
+//function itg_sitemap_chunks_dashboard() {
+//  $output = t('Your installation of multiple sitemap module  is not correct.');
+//  if (db_table_exists('itg_sitemap_chunks')) {
+//    $output = t('You have not created any sitemap yet.');
+//    $results = db_select('itg_sitemap_chunks', 'ms')
+//        ->fields('ms')
+//        ->execute()
+//        ->fetchAll();
+//
+//    $header = array(
+//      'File Name',
+//      'Custom links',
+//      'Edit',
+//      'Delete',
+//    );
+//
+//    $rows = array();
+//    if (!empty($results)) {
+//      foreach ($results as $key => $result) {
+//        $ms_id = $result->ms_id;
+//        // $rows[$key]['msid'] = $result->ms_id.
+//        $rows[$key]['fname'] = $result->file_name;
+//        $rows[$key]['custom_links'] = $result->custom_links;
+//
+//        $delete_path = '/admin/config/search/itg-multiple-sitemap/delete/';
+//        $edit_path = '/admin/config/search/itg-multiple-sitemap/edit/';
+//
+//        // Add webform query.
+//        $delete_path .= $ms_id;
+//        $edit_path .= $ms_id;
+//        $rows[$key]['edit'] = l(t('Edit'), $edit_path);
+//        $rows[$key]['delete'] = l(t('Delete'), $delete_path);
+//      }
+//
+//      return theme('table', array('header' => $header, 'rows' => $rows));
+//    }
+//  }
+//
+//  return $output;
+//}
 
 /**
  * Callback function for edit the sitemap.
@@ -357,18 +369,19 @@ function itg_sitemap_chunks_create_tabular_checkbox_fields(&$form, $types = arra
     }
   }
 
-  // Form container element.
-  $form['multiple_siteamp_' . $entity_type . '_container'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('@entity_type type settings', array('@entity_type' => $entity_type)),
-  );
+//  // Form container element.
+//  $form['multiple_siteamp_' . $entity_type . '_container'] = array(
+//    '#type' => 'fieldset',
+//    '#title' => t('@entity_type type settings', array('@entity_type' => $entity_type)),
+//  );
 
   $form['multiple_siteamp_' . $entity_type . '_container'][$entity_type] = array(
     '#prefix' => '<div id="multiple_siteamp_"' . $entity_type . '"_types">',
     '#suffix' => '</div>',
     '#tree' => TRUE,
     '#theme' => 'table',
-    '#header' => array(t('@entity_type Type', array('@entity_type' => $entity_type)), t('Priority'), t('Frequency')),
+    '#attributes' => array('class' => array("views-table")),
+    '#header' => array(t('@entity_type Type', array('@entity_type' => ucwords($entity_type))), t('Priority'), t('Frequency')),
     '#rows' => array(),
   );
 
@@ -464,7 +477,17 @@ function itg_sitemap_chunks_setting_form() {
     '#default_value' => variable_get('itg_sitemap_exclude_nid'),
     '#description' => 'Enter comma seperated nodeis you want to exclude in sitemap',
   );
+  $form['#submit'][] = 'itg_sitemap_chunks_delete_chunks';
   return system_settings_form($form);
+}
+
+/**
+ *  {@inheritdocs}
+ */
+function itg_sitemap_chunks_delete_chunks() {
+  // remove directory if previously created sitemap.
+  file_unmanaged_delete_recursive('public://sitemap/');
+  // drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again"));
 }
 
 /**
@@ -480,17 +503,17 @@ function itg_sitemap_chunks_setting_form_validate($form, &$form_state) {
   else if (is_numeric($number_chunks) && $number_chunks < 1) {
     form_set_error('itg_sitemap_chunks_number', t("Field Must Be positive and greather then zero"));
   }
-  
-  if(!empty($node_ids)) {
+
+  if (!empty($node_ids)) {
     $nodes = explode(",", $node_ids);
-    foreach($nodes as $nid) {
-      if((integer)$nid == 0) {
+    foreach ($nodes as $nid) {
+      if ((integer) $nid == 0) {
         $strings[] = $nid;
       }
     }
   }
-  
-  if(!empty($strings)) {
-    form_set_error('itg_sitemap_exclude_nid', t("Node Id Must be integer @strnodes" , array('@strnodes' => implode("," , $strings))));
+
+  if (!empty($strings)) {
+    form_set_error('itg_sitemap_exclude_nid', t("Node Id Must be integer @strnodes", array('@strnodes' => implode(",", $strings))));
   }
 }

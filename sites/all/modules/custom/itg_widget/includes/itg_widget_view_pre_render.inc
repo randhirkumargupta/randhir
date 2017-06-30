@@ -253,6 +253,13 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "home_election_widget" && $view->current_display == 'election_graph_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Election Graph Widget'), 'election-graph-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
   elseif ($view->name == "feature_content_by_section_widget" && $view->current_display == 'feature_content_section_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';

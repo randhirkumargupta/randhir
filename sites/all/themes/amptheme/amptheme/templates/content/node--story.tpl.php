@@ -116,18 +116,6 @@ if (!empty($content)):
                   <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
                   <span><?php print date('F j, Y', $node->created); ?>   </span>
               </div>
-            <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-              <div class="briefcase mhide">
-                <h4><?php print t('Highlights'); ?></h4>
-                <ul>
-                  <?php
-                  foreach ($node->field_story_highlights['und'] as $high) {
-                    print '<li>' . $high['value'] . '</li>';
-                  }
-                  ?>
-                </ul>
-              </div>
-            <?php }  ?>
           </div>
         <?php } ?>
         <!-- For buzzfeed section start -->
@@ -294,8 +282,9 @@ if (!empty($content)):
 
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
-                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">
-
+                  <div class="movie-rating">
+                      <div class="grey-star"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-grey.png'?>" width="111" height="18"></amp-img></div>
+                      <div class="red-star" style="width: <?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 22 . "px"; ?>"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-red.png'?>" width="111" height="18"></amp-img></div>
                   </div>                            
                 <?php endif; ?>
                 <div class="movie-detail">
@@ -491,12 +480,17 @@ if (!empty($content)):
 
         <div class="section-left-bototm">
         </div>
-
-        <?php
-        if (function_exists('taboola_view')) {
-          taboola_view();
-        }
-        ?>
+        <div class="amp-taboola">
+        <amp-embed width=100 height=500
+             type=taboola
+             layout=responsive
+             heights="(min-width:1907px) 39%, (min-width:1200px) 46%, (min-width:780px) 64%, (min-width:480px) 98%, (min-width:460px) 167%, 196%"
+             data-publisher="amp-demo"
+             data-mode="thumbnails-a"
+             data-placement="Ads Example"
+             data-article="auto">
+        </amp-embed>
+        </div>
           <!-- code for related content -->   
           <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">

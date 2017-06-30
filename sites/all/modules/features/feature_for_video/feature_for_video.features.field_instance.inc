@@ -194,7 +194,7 @@ function feature_for_video_field_default_field_instances() {
     'bundle' => 'field_video_upload',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Video Title',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1082,7 +1082,7 @@ function feature_for_video_field_default_field_instances() {
     'bundle' => 'videogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Long Description',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',

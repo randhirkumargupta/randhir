@@ -14,7 +14,7 @@
         var loader_html = '<div id="funalytics-ajex-loader"><img class="widget-loader" src="sites/all/themes/itg/images/loader.svg" alt="Loading..." title="" /></div>';
         $("#funalytics_popup_display").html(loader_html);
         var goto = $(this).attr('data-nid');
-       
+
         $.ajax({
           url: base_url + "/funalytics-popup",
           method: 'post',
@@ -28,7 +28,7 @@
               prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
               nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>"
             });
-            $('.funalytics-slider').slick('slickGoTo', goto);
+            jQuery('.funalytics-slider').slick('slickGoTo', goto);
 
           }
         });

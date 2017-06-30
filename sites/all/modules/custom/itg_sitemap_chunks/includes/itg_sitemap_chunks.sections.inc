@@ -6,6 +6,10 @@
  */
 module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks_section.db');
 
+/**
+ * Form for section sitemap setting.
+ *  {@inheritdocs}
+ */
 function itg_sitemap_chunks_section_form($form, &$form_state) {
   $sections = itg_sitemap_get_sections();
 
@@ -14,7 +18,8 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     '#suffix' => '</div>',
     '#tree' => TRUE,
     '#theme' => 'table',
-    '#header' => array(t('Section Name'), t('Frequency'), t('Type')),
+    '#attributes' => array('class' => array("views-table")),
+    '#header' => array(t('Section Name'), t('Day'),  '<div class="hide">' . t('Type') . '</div>', t('Action')),
     '#rows' => array(),
   );
   for ($i = 0; $i < count($sections); $i++) {
@@ -40,24 +45,44 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
       '#id' => 'section-' . $i . '-type',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array("day", "month", "year")),
-      '#default_value' => !empty($db_data->frequency_type) ? $db_data->frequency_type : '',
+      //'#default_value' => !empty($db_data->frequency_type) ? $db_data->frequency_type : '',
+      '#default_value' => 'day',
+      '#prefix' => '<div class="hide">',
+      '#suffix' => '</div>',
+    );
+
+    if (!empty($db_data->section_tid)) {
+      $site_map_link = itg_sitemap_chunks_create_valid_url($sections[$i]->name) . '-sitemap.xml';
+      $action_link = l("View", $site_map_link, array("attributes" => array("target" => "_blank")));
+    }
+    else {
+      $action_link = t("N/A");
+    }
+    // Prepare frequency type
+    $view_makrup = array(
+      '#id' => 'section-' . $i . '-type',
+      '#type' => 'markup',
+      '#markup' => $action_link,
     );
 
     $form['section'][] = array(
       'section_tid' => &$section_checkbox,
       'section_freq' => &$section_frequency,
       'section_freq_type' => &$section_frequency_type,
+      'view_action' => &$view_makrup,
     );
 
     $form['section']['#rows'][] = array(
       array('data' => &$section_checkbox),
       array('data' => &$section_frequency),
       array('data' => &$section_frequency_type),
+      array('data' => &$view_makrup),
     );
 
     unset($section_checkbox);
     unset($section_frequency);
     unset($section_frequency_type);
+    unset($view_makrup);
   }
 
   $form['submit'] = array(
@@ -83,6 +108,9 @@ function itg_sitemap_get_sections() {
   return $query->execute()->fetchAll();
 }
 
+/**
+ *  {@inheritdocs}
+ */
 function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
   itg_sitemap_shunks_section_delete();
   $sections = $form_state['values']['section'];
@@ -92,9 +120,9 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
       if ($section['section_tid'][$section_tid] != 0) {
         $section_alise_name = $section['section_tid'][$section_tid];
         $alias = itg_videogallery_get_term_name($section_alise_name) . '-sitemap.xml';
-        if (itg_event_backend_alias_check(pathauto_cleanstring($alias))) {
+        if (itg_event_backend_alias_check(itg_sitemap_chunks_create_valid_url($alias))) {
           $source = 'sitemap/' . $section['section_tid'][$section_tid];
-          itg_event_backend_save_alias($source, pathauto_cleanstring($alias));
+          itg_event_backend_save_alias($source, itg_sitemap_chunks_create_valid_url($alias));
         }
         $handel_value = array();
         $handel_value['tid'] = array_keys($section['section_tid'])[0];
@@ -105,4 +133,23 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
       }
     }
   }
+}
+
+/**
+ * Function gives right string for sitemap link.
+ * @param string $pathdata
+ * @return string
+ */
+function itg_sitemap_chunks_create_valid_url($pathdata) {
+
+  if (preg_match("![^a-z0-9]!i", $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+    while (preg_match('/--/', $pathdata)) {
+      $pathdata = preg_replace('/--/', '-', $pathdata);
+    }
+    $pathdata = rtrim($pathdata, "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+  }
+  return $pathdata;
 }
