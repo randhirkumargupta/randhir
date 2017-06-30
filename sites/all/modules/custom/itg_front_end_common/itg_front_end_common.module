@@ -978,14 +978,15 @@ function _related_story_amp_block_content() {
         else {
           $front_url = $related_data->url;
         }
+        $image_link_url = $front_url.'?amp';
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$related_data->url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
       }
       else {
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
       }
     }
     $i++;
