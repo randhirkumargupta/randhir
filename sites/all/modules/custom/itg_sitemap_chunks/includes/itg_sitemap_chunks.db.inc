@@ -32,24 +32,6 @@ function itg_sitemap_chunks_save_record($input = array(), $update_ms_id = NULL) 
       drupal_set_message(t('File name already exist'), 'error');
     }
   }
-  else {
-    // Update record.
-    try {
-      $ms_id = db_update('itg_sitemap_chunks')
-          ->fields(array(
-            'file_name' => $input['file_name'],
-            'custom_links' => $input['custom_links'],
-          ))
-          ->condition('ms_id', $update_ms_id, '=')
-          ->execute();
-
-      $ms_id = $update_ms_id;
-    }
-    catch (Exception $e) {
-      drupal_set_message(t('Some thing is wrong here.'), 'error');
-    }
-  }
-
   return $ms_id;
 }
 
@@ -63,33 +45,17 @@ function itg_sitemap_chunks_save_record($input = array(), $update_ms_id = NULL) 
  *   Having existing records for given ms id.
  */
 function itg_sitemap_chunks_get_record($ms_id = NULL) {
-  $records = array();
-  if (!(is_null($ms_id))) {
-    $query = db_select('itg_sitemap_chunks', 'ms');
-    $query->fields('ms');
-    $query->condition('ms_id', $ms_id, '=');
-    $result = $query->execute()->fetchAssoc();
-    if (!empty($result)) {
-      $records = $result;
-    }
-
-    $record_types = array('content', 'menu', 'vocab');
-
-    foreach ($record_types as $record_type) {
-      $subrecords = array();
-      $query = db_select('itg_sitemap_chunks_' . $record_type, 'ms');
-      $query->fields('ms');
-      $query->condition('target_ms_id', $ms_id, '=');
-      $results = $query->execute();
-      if (!empty($results)) {
-        foreach ($results as $result) {
-          $subrecords[] = $result;
-        }
-      }
-
-      $records[$record_type] = $subrecords;
+  $subrecords = array();
+  $query = db_select('itg_sitemap_chunks_content', 'ms');
+  $query->fields('ms');
+  $results = $query->execute();
+  if (!empty($results)) {
+    foreach ($results as $result) {
+      $subrecords[] = $result;
     }
   }
+
+  $records['content'] = $subrecords;
   return $records;
 }
 
@@ -233,15 +199,4 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
     }
   }
   return $content_links;
-}
-
-/**
- * Get required data for xml crossponding to content type.
- */
-function itg_sitemap_chunk_get_tags_data($contents, $content_type) {
-  foreach ($contents as $key => $data) {
-    if ($data->content_type == $content_type) {
-      return $contents[$key];
-    }
-  }
 }
