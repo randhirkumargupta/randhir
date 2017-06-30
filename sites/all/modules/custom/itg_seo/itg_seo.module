@@ -42,11 +42,27 @@ function itg_access_denied() {
  * @return array
  */
 function itg_not_found() {
+  //$video_id = decryptForEmbed("jthgoy4f1c");
+  //p($video_id);
+  //var_dump($video_id);
+
+  
   if (function_exists(itg_seo_latest_headlines)) {
     $latest_headlines = itg_seo_latest_headlines();
   }
   return theme('itg_not_found' , array('data' => $latest_headlines));
 }
+
+/*function decryptForEmbed($string){
+  $decrypter = gmp_strval(gmp_init($string, 36));
+  $decrypter = gmp_shiftr($decrypter, 5);
+  $decrypter = gmp_export($decrypter);
+  return $decrypter;
+}
+
+function gmp_shiftr($x,$n) { // shift right 
+  return(gmp_div($x,gmp_pow(2,$n))); 
+}*/
 
 /**
  * Implements hook_theme().
@@ -488,4 +504,26 @@ function itg_seo_pathauto_alias_alter(&$alias , array &$context) {
     $pathauto_state = 1;
     itg_custom_pathauto_state_save($node_type , $node_id , $pathauto_state);
   }
+}
+
+
+
+function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
+  
+ if (arg(0) == 'embed') {
+    //drupal_goto("movie/story/virender-sehwag-randeep-hooda-accused-of-bullying-kargil-martyr's-daughter-who-spoke-against-abvp-446-2017-02-27");
+  } 
+//    if ($path === $original_path) {
+//        // path is same as url alias - don't do anything
+//        return false;
+//    }
+//
+//    $alias = drupal_get_path_alias($original_path);
+//    if ($alias && $alias === $original_path) {
+//        // alias is same as url alias - don't do anything
+//        return false;
+//    }
+//
+//    drupal_not_found();
+//    drupal_exit();
 }

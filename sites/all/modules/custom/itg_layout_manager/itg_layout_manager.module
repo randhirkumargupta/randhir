@@ -114,7 +114,13 @@ function itg_layout_manager_menu() {
       'page callback' => 'itg_state_election',
       'page arguments' => array(1, 2),
       'access arguments' => array('access content'),
-  );  
+  );
+  
+  $items['section-card-refresh'] = array(
+      'page callback' => 'itg_section_card_refresh',
+      //'page arguments' => array(1, 2),
+      'access arguments' => array('access content'),
+  );
   
   return $items;
 }
@@ -286,6 +292,16 @@ function itg_layout_manager_block_info() {
       'info' => t('Footer Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['amp_header_block'] = array(
+      'info' => t('Header Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $blocks['amp_footer_block'] = array(
+      'info' => t('Footer Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   $blocks['layout_manager_form_block'] = array(
       'info' => t('Layout manager form Block'),
@@ -443,12 +459,21 @@ function itg_layout_manager_block_view($delta = '') {
       
       $block['content'] = theme('footer_block', array('data' => $data));
     break;
+    
+    case 'amp_header_block':
+      $block['content'] = theme('amp_header_block', array('data' => $data));
+    break;
+    
+    case 'amp_footer_block':
+      $block['content'] = theme('amp_footer_block', array('data' => $data));
+    break;
 
     case 'layout_manager_form_block':
       $layout_form = drupal_get_form('itg_layout_manager_page_setting_form');
       $data['layout_form'] = drupal_render($layout_form);
       $block['content'] = theme('layout_manager_block', array('data' => $data));
     break;
+  
     // for admin widgets list in side bar
     case 'layout_widget_list_block':
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
@@ -621,6 +646,16 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
           'variable' => array('data' => NULL),
           'template' => 'itg-header',
           'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+      ),
+      'amp_footer_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-amp-footer',
+          'path' => drupal_get_path('theme', AMP_THEME_NAME) . '/templates',
+      ),
+      'amp_header_block' => array(
+          'variable' => array('data' => NULL),
+          'template' => 'itg-amp-header',
+          'path' => drupal_get_path('theme', AMP_THEME_NAME) . '/templates',
       ),
       'layout_manager_block' => array(
           'arguments' => array('form' => NULL),
@@ -844,4 +879,18 @@ function itg_layout_manager_preprocess_page(&$vars) {
       unset($vars['page']['content']['system_main']);
     }
   }
+}
+
+/**
+ * callback for section card refresh
+ */
+function itg_section_card_refresh() {  
+  $data = explode("_",$_REQUEST['card_val']);
+  $section_id = $data[1];
+  $widget_style = '';
+  $block_id = $data[2];
+  $data = create_setion_widgets($section_id, $widget_style, $block_id);
+  
+  echo $data;
+  exit;
 }
