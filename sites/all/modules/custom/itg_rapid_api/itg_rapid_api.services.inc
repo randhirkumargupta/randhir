@@ -1723,6 +1723,7 @@ $token_id = $_GET['token_id'];
             unset($_SESSION['referral_key']);
         }
         // Set operation.
+        /*
         $op = 'register_no_approval_required';
         // Send an email.
         if (empty($form_state['values']['mobile'])) {
@@ -1743,7 +1744,7 @@ $token_id = $_GET['token_id'];
             if (!empty($form_state['values']['mail'])) {
                 itg_sso_otp_mail_content($rand_otp, $mail);
             }
-        }
+        }*/
 
         
      
