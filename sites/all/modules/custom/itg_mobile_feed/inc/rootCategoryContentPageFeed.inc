@@ -25,9 +25,10 @@ function rootCategoryContentPageFeed() {
   $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
-
+    
     $node_count = customNodeCount('story', $value);
-    if ($node_count > 0) {
+    $term_status = itg_category_manager_term_state(trim($value),CATEGORY_MANAGMENT);
+    if ($node_count > 0 && $term_status == 1) {
 
       $cattid = $value;
       $term = taxonomy_term_load($value);
