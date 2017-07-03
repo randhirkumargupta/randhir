@@ -14262,7 +14262,9 @@ span.story-sponsor-powered-text::last-word { text-transform:uppercase; color:#c0
 .itg-sponsor-section-title{position: absolute; font-size: 9px; color: #447b9a; top: 2px; left: 12px;}
 .data-holder .section-ordering p a{ padding:5px 0}
 .data-holder .section-ordering p:before{ top:22px;}
-
+.featured-news .featured-post a.itg-sponsored{
+  color: #193984;
+}
 
 
 
