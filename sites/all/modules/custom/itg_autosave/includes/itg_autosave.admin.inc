@@ -146,20 +146,21 @@ function itg_autosave_nodeform($nid, $ctype) {
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
   
   // Check if field collection is available.
-  /******************************* Hide field collection code ***************** 
+  /******************************* Hide field collection code *****************/ 
   if (count($f_collection) > 0) {
+	  
     // Find how many field collection are present.
     foreach ($f_collection as $field) {      
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }
-   
-  *********** End of code field collection ***********************************/  
+  // die('assa');
+  /*********** End of code field collection ***********************************/  
   
   // Submit the node before save.        
   $node = node_submit($node); 
-  /****** start here ***/
+  /****** start here **
 	  foreach ($node->field_story_listicle[LANGUAGE_NONE] as $key => $value) {
 		 $field_collection_item_values[] = $value['value'];
 		  unset($node->field_story_listicle[LANGUAGE_NONE][$key]);
@@ -179,7 +180,7 @@ function itg_autosave_nodeform($nid, $ctype) {
 		$listicle_fileds->setHostEntity('node', $node);
 		$listicle_fileds->save();
 	  }
-  /****** end here ***/
+  ***** end here ***/
   
   // Save node to save all values into node.    
   node_save($node);  
