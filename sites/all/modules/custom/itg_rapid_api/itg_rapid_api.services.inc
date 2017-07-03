@@ -716,8 +716,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-        // login_response custom resource declaration.....
-        'login_response' => array(
+        // signup custom resource declaration.....
+        'signup' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves storydetail schemes info.',
@@ -726,7 +726,7 @@ function itg_rapid_api_resource() {
                         'module' => 'itg_rapid_api',
                         'name' => 'itg_rapid_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_login_response',
+                    'callback' => 'itg_rapid_api_signup',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -738,6 +738,54 @@ function itg_rapid_api_resource() {
                             'source' => array('path' => 0),
                             'optional' => TRUE,
                             'default' => '*',
+                        ),
+                        array(
+                            'name' => 'first_name',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'First Name',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'last_name',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'last_name'),
+                            'description' => 'Last Name',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'User email or mobile number',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'password',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'description' => 'Password',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'login_type',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'login_type'),
+                            'description' => '0=for traditional, 1=socail media',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'token_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'token_id'),
+                            'description' => 'Social Media token_id',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1597,4 +1645,112 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     }
     watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
     return services_error(t('Wrong username or password.'), 401);
+}
+
+//itg_rapid_api_signup
+/**
+ * [itg_rapid_api_signup] definition.
+ * Returns the information about a itg_rapid_api_signup.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
+
+
+$first_name = $_GET['first_name'];
+$last_name = $_GET['last_name'];
+$user_id = $_GET['user_id'];
+$password = $_GET['password'];
+$login_type = $_GET['login_type'];
+$token_id = $_GET['token_id'];
+
+    // check user_id is mail or mobile
+    $mail_flag = 1;
+    if (preg_match('/^\d{10}$/', $user_id)) {
+        $mail_flag = 0;
+        $mobile = $user_id;
+        $mail = $first_name . "@nowhereandy.com";
+    } else {
+        $mobile = "";
+        $mail = $user_id;
+    }
+    // prepare array for user
+    $edit = array(
+        'name' => $user_id,
+        'pass' => $password,
+        'mail' => $mail,
+        'init' => $mail,
+        'status' => 1,
+        'access' => REQUEST_TIME,
+        'field_first_name' => array(
+            LANGUAGE_NONE => array(
+                0 => array(
+                    'value' => $first_name
+                )
+            )
+        ),
+        'field_last_name' => array(
+            LANGUAGE_NONE => array(
+                0 => array(
+                    'value' => $last_name
+                )
+            )
+        ),
+        'roles' => array(
+            2 => 'authenticated',
+            FRONT_USER => 'Front User',
+        ),
+    );
+
+    if (is_numeric($mobile)) {
+        $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
+                0 => array(
+                    'value' => $mobile
+                )
+            )
+        );
+    }
+
+
+    try {
+
+        $account = user_save(NULL, $edit);
+
+        if (function_exists('itg_personalization_reddem_referfriend')) {
+            itg_personalization_reddem_referfriend($_SESSION['referral_key']);
+            unset($_SESSION['referral_key']);
+        }
+        // Set operation.
+        $op = 'register_no_approval_required';
+        // Send an email.
+        if (empty($form_state['values']['mobile'])) {
+            // _user_mail_notify($op, $account);
+            if (function_exists('itg_sso_get_mail_content')) {
+                if (!empty($form_state['values']['url_info'])) {
+                    $url_info = $form_state['values']['url_info'];
+                }
+                $mail_content = itg_sso_get_mail_content($account, $mail, $url_info);
+            }
+            itg_user_mapping_activate($account->uid);
+        } else {
+            $rand_otp = rand(0, 9999);
+            if (function_exists('itg_sso_first_time_otp_insert')) {
+                itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
+                itg_sso_sms_send($rand_otp, $mobile);
+            }
+            if (!empty($form_state['values']['mail'])) {
+                itg_sso_otp_mail_content($rand_otp, $mail);
+            }
+        }
+
+        
+     
+    } catch (Exception $e) {
+        watchdog('error on user save', $e->getMessage());
+        drupal_set_message('Error:' . $e->getMessage(), 'error');
+        $account = $e;
+    }
+    return $account;
 }
