@@ -1665,8 +1665,11 @@ $user_id = $_GET['user_id'];
 $password = $_GET['password'];
 $login_type = $_GET['login_type'];
 $token_id = $_GET['token_id'];
+$form_state = array();
+
 
     // check user_id is mail or mobile
+$url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
     $mail_flag = 1;
     if (preg_match('/^\d{10}$/', $user_id)) {
         $mail_flag = 0;
@@ -1675,6 +1678,14 @@ $token_id = $_GET['token_id'];
     } else {
         $mobile = "";
         $mail = $user_id;
+    }
+    $form_state['values']['mobile'] = $mobile;
+    $form_state['values']['url_info'] = $url_info;
+    if($mail_flag){
+        $form_state['values']['mail'] = $mail;
+    }
+    else{
+        $form_state['values']['mail'] = "";
     }
     // prepare array for user
     $edit = array(
@@ -1723,7 +1734,7 @@ $token_id = $_GET['token_id'];
             unset($_SESSION['referral_key']);
         }
         // Set operation.
-        /*
+        
         $op = 'register_no_approval_required';
         // Send an email.
         if (empty($form_state['values']['mobile'])) {
@@ -1744,7 +1755,7 @@ $token_id = $_GET['token_id'];
             if (!empty($form_state['values']['mail'])) {
                 itg_sso_otp_mail_content($rand_otp, $mail);
             }
-        }*/
+        }
 
         
      
