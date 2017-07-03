@@ -372,6 +372,7 @@
         z-index: 9998;
         color: #a1a1a1;
         font-family: roboto;
+        margin-bottom: 20px;
       }
       #block-itg-layout-manager-front-end-breadcrumb div.lft {
         display: inline-block;
