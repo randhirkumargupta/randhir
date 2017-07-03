@@ -257,7 +257,7 @@ if (!empty($content)):
 
 
                 </div>
-                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
+                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
                   <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
                 <?php } ?>                            
               </div>
