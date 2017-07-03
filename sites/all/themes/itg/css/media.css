@@ -3285,17 +3285,17 @@
   border-bottom: 1px solid #3e3e3e;
 }
 
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure {
+#block-views-video-landing-header-block .latest_video .photo-list li .tile figure {
   margin: 0 0px 0 15px;
   float: right;
 }
 
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p {
+#block-views-video-landing-header-block .latest_video .photo-list li .tile p {
   font: 400 14px/20px "Roboto", sans-serif;
   color: #b4b4b4;
 }
 
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p a {
+#block-views-video-landing-header-block .latest_video .photo-list li .tile p a {
   color: #b4b4b4;
 }
 
@@ -3347,7 +3347,7 @@
     margin-bottom: 15px;
   }
 
-  #block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure {
+  #block-views-video-landing-header-block .latest_video .photo-list li .tile figure {
     width: 120px;
   }
 
