@@ -139,26 +139,49 @@ function itg_autosave_nodeform($nid, $ctype) {
     print t('Title is empty');
     exit();
   }
-  
+  //~ die;
   // Assign title to tile field.
   $node->title = $title;
   // Find field type and prepare array for foelds.
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
   
   // Check if field collection is available.
-  /******************************* Hide field collection code ***************** 
+  /******************************* Hide field collection code *****************/ 
   if (count($f_collection) > 0) {
+	  
     // Find how many field collection are present.
     foreach ($f_collection as $field) {      
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }
-   
-  *********** End of code field collection ***********************************/  
+  // die('assa');
+  /*********** End of code field collection ***********************************/  
   
   // Submit the node before save.        
   $node = node_submit($node); 
+  /****** start here **
+	  foreach ($node->field_story_listicle[LANGUAGE_NONE] as $key => $value) {
+		 $field_collection_item_values[] = $value['value'];
+		  unset($node->field_story_listicle[LANGUAGE_NONE][$key]);
+	  }
+	  
+	entity_delete_multiple('field_collection_item', $field_collection_item_values);
+
+    $fc_stroy_listicle = $inputs['field_story_listicle'];
+	  foreach ($fc_stroy_listicle['und'] as $key => $value) {
+		$story_listicle_fc = array();
+		$story_listicle_fc['field_name'] = 'field_story_listicle';
+		$story_listicle_fc['field_story_listicle_description']['und'][0]['value'] = $value['field_story_listicle_description']['und'][0]['value'];
+		$story_listicle_fc['field_story_listicle_type']['und'][0]['value'] = $value['field_story_listicle_type']['und'];
+		$story_listicle_fc['field_listicle_color_new']['und'][0]['jquery_colorpicker'] = $value['field_listicle_color_new']['und'][0]['jquery_colorpicker'];
+		
+		$listicle_fileds = entity_create('field_collection_item', $story_listicle_fc);
+		$listicle_fileds->setHostEntity('node', $node);
+		$listicle_fileds->save();
+	  }
+  ***** end here ***/
+  
   // Save node to save all values into node.    
   node_save($node);  
   // Store unique id associated with node in array.

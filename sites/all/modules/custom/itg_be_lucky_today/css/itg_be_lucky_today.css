@@ -35,11 +35,11 @@ and open the template in the editor.
 .top-nav ul li:last-child{padding-right:0;} 
 .top-nav ul li a{font:500 13px/31px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none;}
 
-.page-be-lucky-today{width:100%; background:#000 url(http://media2.intoday.in/indiatoday/images/luck-today2016//bg.jpg) no-repeat center 210px; display:block; min-height:845px;}
+.page-be-lucky-today{width:100%; background:#000 url(../images/bg.jpg) no-repeat center 210px; display:block; min-height:845px;}
 .page-be-lucky-today .itg_be_lucky_today{margin:0 auto 15px; width:718px; background-color:rgba(23,22,22,0.4);}
 .page-be-lucky-today a.logo{float:right; padding-top:12px;}
 
-.page-be-lucky-today h1{display:inline-block; padding:0; width:100%; margin:25px 0 40px; background:url(http://media2.intoday.in/indiatoday/images/luck-today2016//be-lucky-today.png) no-repeat center 0; height:64px; text-indent:-9999px;}
+.page-be-lucky-today h1{display:inline-block; padding:0; width:100%; margin:25px 0 40px; background:url(../images/be-lucky-today.png) no-repeat center 0; height:64px; text-indent:-9999px;}
 
 .itg_be_lucky_today fieldset ul li.active{font:500 37px/42px 'Roboto',sans-serif; color:#fbc404; display:block; border-top:1px solid #fbc404; border-bottom:1px solid #fbc404; padding:10px 0; text-align:center;}
 .itg_be_lucky_today fieldset.form-wrapper{ border:0px; margin-bottom:40px; }
@@ -63,33 +63,15 @@ and open the template in the editor.
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender{ display: inline-block; width: 62px; text-align: center;}
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-male, .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-female{ margin-bottom:20px; }
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-male + label{display: block;
-                                                                                                       background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/male.png);margin: 0 auto;width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
+                                                                                                       background: url(../images/male.png);margin: 0 auto;width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
 .page-be-lucky-today .itg_be_lucky_today #edit-gender .form-item-gender input#edit-gender-female + label{display: block;
-                                                                                                         background: url(http://media2.intoday.in/indiatoday/images/luck-today2016/female.png); margin: 0 auto; width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
+                                                                                                         background: url(../images/female.png); margin: 0 auto; width: 48px; height: 122px; background-repeat:no-repeat; text-indent: -99999px;}
 .page-be-lucky-today .itg_be_lucky_today span.error{ display:block; font:100 11px/15px 'Roboto',sans-serif; padding:5px 0;}
 .page-be-lucky-today .itg_be_lucky_today .form-item-age label{ color:#fff; font-size:18px; }
 .page-be-lucky-today .itg_be_lucky_today .form-item-age label em{border:3px solid #d7040d; border-radius:40px; font:normal 400 18px/20px 'Roboto',sans-serif; color:#000; text-align:center; height:40px; width:40px; background-color:#fff; display:inline-block; padding:7px 0 0; margin:0 5px;}
 .page-be-lucky-today .itg_be_lucky_today #edit-age{ margin-left:105px; }
 .page-be-lucky-today .itg_be_lucky_today #edit-age .form-item-age{ width:32%; display: inline-block; margin-bottom:30px; }
 .page-be-lucky-today .itg_be_lucky_today #edit-age .form-item-age input.form-radio{ margin-right:20px; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .page-be-lucky-today ul.start li .radiobtn{display:inline-block; width:62px; margin:0 0 0 40px;}
 .page-be-lucky-today ul.start li img{float:left;}
 .page-be-lucky-today ul.start li input[type="radio"]{margin:8px 0 0 12px; width:23px; height:23px;}
@@ -160,7 +142,7 @@ and open the template in the editor.
 .color9{background:#00B232;}
 .color10{background:#008B0C;}
 .luck_meter_text{ font-size:14px; text-transform:uppercase; font-weight:bold; float:left;}
-.black_strip{ background:url(http://media2.intoday.in/indiatoday/images/luck-today2016//arrow.png) no-repeat 0 0; display:block; height:8px; width:55px; position:absolute; left:-6px; bottom:0%;}
+.black_strip{ background:url(../images/arrow.png) no-repeat 0 0; display:block; height:8px; width:55px; position:absolute; left:-6px; bottom:0%;}
 
 .row_l{ width:100%; float:left;}
 .margintop10{ margin-top:10px;}
@@ -205,7 +187,7 @@ select, input[type="password"]{ width:100px;}
 /*thanku page*/
 .body-center { margin: 0 auto 15px;  width: 718px; background-color: rgba(23,22,22,0.4);}
 .body-center h1 {  display: inline-block;  padding: 0;  width: 100%;  margin: 25px 0 0 0;
-                   background: url(http://media2.intoday.in/indiatoday/images/luck-today2016//be-lucky-today.png) no-repeat 0 0; height: 64px; text-indent: -9999px;}
+                   background: url(../images/be-lucky-today.png) no-repeat 0 0; height: 64px; text-indent: -9999px;}
 .body-center h2{font: 600 42px/48px 'Roboto',sans-serif;  color: #fbc404; display: block; text-align: center;margin: 40px 0;}
 .body-center ul.social { list-style: none; margin: 0 auto 90px; padding: 0;}
 .body-center ul.social li { display: inline;margin-right: 3px;}
@@ -295,12 +277,13 @@ select, input[type="password"]{ width:100px;}
     .left-form-container .form-item.form-type-textfield{ margin-bottom:10px;}
     .form-wrappe-left .luck_meter{ display: none} 
     .left_part_box{width: 94%;  margin-left: 6%;}
-
-
-
-
 }
 #modal-content strong h3{ display: block; font-size: 1.8em; font-weight: bold; }
 #modal-content strong p { display: block;font-weight: normal; color:#000; margin-top:15px; font-size:14px; line-height:24px;}
 #modal-content{width: 100%!important;height: 95%!important;border: 0px;border-radius: 0;}
 .page-be-lucky-today .messages{margin: 0 auto 15px;width: 718px;background-color: rgba(23,22,22,0.4);}
+.page-be-lucky-today .pmt_mtd{text-align: center;min-height: 100px;}
+.page-be-lucky-today .pmt_mtd  label{    color: #fff;}
+.pmt_mtd select{background: #fff;border-radius: 5px;margin: 0 25px;width: 187px;    padding: 4px;}
+.form-item.form-item-select-payment{width: auto;}
+.page-be-lucky-today .pmt_mtd .magazine.form-submit{display: inline-block;line-height: 35px;min-height: auto;}
