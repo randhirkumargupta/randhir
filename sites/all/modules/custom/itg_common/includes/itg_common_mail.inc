@@ -30,7 +30,13 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       );
       watchdog('Refer_a_friend_param', '<pre>'.print_r($params, true).'</pre>');
       watchdog('Refer_a_friend_mail', '<pre>'.print_r($to, true).'</pre>');
+      
+      try {
       $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      } catch (Exception $e) {
+      watchdog('Refer Friend Error', $e->getMessage());
+      }
+      
   } elseif ($key == 'personalization_mail') {
     
     $params = array(
