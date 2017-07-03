@@ -895,7 +895,9 @@ function itg_section_card_refresh() {
   $widget_style = '';
   $block_id = $data[2];
   $data = create_setion_widgets($section_id, $widget_style, $block_id);
-  
+  if(function_exists('itg_akamai_setting_ttl_for_section_cart')) {
+    itg_akamai_setting_ttl_for_section_cart();
+  }  
   echo $data;
   exit;
 }
