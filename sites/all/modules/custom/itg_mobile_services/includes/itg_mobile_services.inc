@@ -664,10 +664,10 @@ function itg_mobile_print_feeds() {
   $query->fields('v', array('id', 'service_id', 'feeds_url', 'clients_feed_url', 'created_date'))->orderBy('id', 'DESC')->range(0, 1);
   $results = $query->execute()->fetchAll();
   if (is_array($results) && count($results) > 0) {
-    //$file_name =  $base_url . '/' .  variable_get('file_public_path', conf_path() . '/files') . $results[0]->clients_feed_url;
-    $file_name = file_create_url(file_build_uri($results[0]->clients_feed_url));
-    drupal_add_http_header('Content-Type', 'text/xml');
-    print file_get_contents($file_name);
+    //$filename =  $base_url . '/' .  variable_get('file_public_path', conf_path() . '/files') . $results[0]->clients_feed_url;
+     $file_name = file_create_url(file_build_uri($results[0]->clients_feed_url));
+     drupal_add_http_header('Content-Type', 'text/xml');
+     print file_get_contents($file_name);
   }
   else {
     return "There has no feeds.";
