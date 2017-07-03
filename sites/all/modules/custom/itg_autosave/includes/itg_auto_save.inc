@@ -192,9 +192,6 @@ class itg_auto_save {
   public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {    
     $this->field_collection = array();
     $this->field_collection_data = array();
-    //~ print_r($value);
-    //~ print_r($field_name);
-    //~ print_r($value['und']);die;
     // Unserialize fields collections ids for deletion of field collection.
     $fc_ids = unserialize($fc_ids);    
     if (isset($node->nid)) {
@@ -203,25 +200,23 @@ class itg_auto_save {
       // Delete field collection items.      
       entity_delete_multiple('field_collection_item', $fc_ids[$field_name]);          
     }
+  
     // Create new field collection for node field.
-    foreach ($value['und'] as $key => $fc_value) {   
+    foreach ($value['und'] as $key => $fc_value) {  //print_r($field_name);die; 
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
        
       // Filter empty array from list.
       $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
-      
-      // Validate empty field collection
+       // Validate empty field collection
       $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);      
       // Create entity of type field collection
       if ($this->validation) {
         watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key); 
-                 
+                
         $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));        
-        $this->fc_item->setHostEntity('node', $node);        
+        $this->fc_item->setHostEntity('node', $node);     
         $this->itg_save_field_collection($this->field_collection_data, $fc_value, $this->fc_item);
-        //~ print_r($this->fc_item);
-        //~ print_r('after');die;
         $this->fc_item->save(TRUE);
         $node->{$field_name}[$node->language][$key]['value'] = $this->fc_item->item_id;
       }
@@ -411,8 +406,8 @@ class itg_auto_save {
    * @return bool
    *   Return true if filed is not empty else return false.
    */
-  public function itg_save_validate_field_collection($data, $field_values) {        
-    foreach ($data as $value) {             
+  public function itg_save_validate_field_collection($data, $field_values) {       
+    foreach ($data as $value) {  
       switch ($value['fieldType']) {
         case 'taxonomy_term_reference':          
           if (is_int($field_values[$value['fieldName']]['und'])) {
@@ -421,6 +416,11 @@ class itg_auto_save {
           break;
 
         case 'text_long':
+          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+            return TRUE;
+          }
+          break;
+        case 'text_with_summary':
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
@@ -438,6 +438,10 @@ class itg_auto_save {
           }
           break;
         case 'file':
+          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+            return TRUE;
+          } 
+        case 'images':
           if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
             return TRUE;
           } 
@@ -613,8 +617,7 @@ class itg_auto_save {
    *   Field collection entity object.
    */
   public function itg_save_field_collection($data, $inputs, &$fc_item) {
-	  //~ var_dump($data, $inputs, $fc_item);die;   
-    foreach ($data as $field) {      
+	foreach ($data as $field) {      
       switch ($field['fieldType']) {
         case 'datestamp':
           
@@ -643,7 +646,8 @@ class itg_auto_save {
           break;
 
         case 'text_with_summary':
-          
+			$fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']][LANGUAGE_NONE][0]['value'];                    
+          break;
           break;
 
         case 'list_text':          
@@ -660,6 +664,10 @@ class itg_auto_save {
 			$fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['jquery_colorpicker'] = $inputs[$field['fieldName']]['und'][0]['jquery_colorpicker'];
        break;
         case 'file':
+          $this->value = $inputs[$field['fieldName']]['und'][0];
+          $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+          
+        case 'image':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
       }

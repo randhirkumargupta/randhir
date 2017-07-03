@@ -139,23 +139,21 @@ function itg_autosave_nodeform($nid, $ctype) {
     print t('Title is empty');
     exit();
   }
-  //~ die;
   // Assign title to tile field.
   $node->title = $title;
   // Find field type and prepare array for foelds.
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
-  
   // Check if field collection is available.
   /******************************* Hide field collection code *****************/ 
   if (count($f_collection) > 0) {
 	  
     // Find how many field collection are present.
-    foreach ($f_collection as $field) {      
+    foreach ($f_collection as $field) {     // die('sasssssdasd');
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
     }    
   }
-  // die('assa');
+   
   /*********** End of code field collection ***********************************/  
   
   // Submit the node before save.        
