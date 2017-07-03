@@ -260,26 +260,6 @@ if (!empty($content)):
                   <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
                 <?php } ?>                            
               </div>
-
-              <?php
-              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
-                  ?>
-                  <div class="briefcase desktop-hide">
-                    <h4><?php print t('Briefcase'); ?></h4>
-                    <ul>
-                      <?php
-                      foreach ($node->field_story_highlights['und'] as $high) {
-                        print '<li>' . $high['value'] . '</li>';
-                      }
-                      ?>
-                    </ul>
-                  </div>
-                  <?php
-                }
-              }
-              ?>
-
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating">
@@ -499,7 +479,7 @@ if (!empty($content)):
               print render($block['content']);
               ?>
             </div>
-            <!-- For buzzfeed section end --> 
+            <!-- For buzzlfeed section end --> 
             <?php
           }
           ?>
