@@ -11951,3 +11951,16 @@ fieldset#edit-xmlsitemap{
     }
   }
  }
+ .ticket-type-require:after{
+   @extend .astrick;
+ }
+.cpation-wraper textarea {
+  width: 400px;
+  margin-bottom: 10px;
+}
+.itg-mosimage{
+  img:first-child{
+    float: left;
+    margin-right: 10px;
+  }
+}

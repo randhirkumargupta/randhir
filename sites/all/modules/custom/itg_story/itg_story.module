@@ -880,6 +880,22 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     else {
       $node->content['story_title'] = $node->title;
     }
+    
+    // code for amp page
+    if ($view_mode == 'amp') {
+      // emoji posititon
+      $position = $node->field_emoji_position[LANGUAGE_NONE][0]['value'];
+      // left emoji value
+      $left_emoji = $node->field_emoji_2[LANGUAGE_NONE][0]['value'];
+      preg_match_all('/<img[^>]*>/s', $left_emoji, $leftimages);
+      $left_emoji_html = itg_get_emoji_amp_html($leftimages[0]);
+      // right emoji value
+      $right_emoji = $node->field_emoji[LANGUAGE_NONE][0]['value'];
+      preg_match_all('/<img[^>]*>/s', $right_emoji, $rightimages);
+      $right_emoji_html = itg_get_emoji_amp_html($rightimages[0]);
+
+      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;
+    }
   }
 }
 
@@ -1132,4 +1148,31 @@ function itg_story_views_api() {
   return array(
     'api' => 3,
   );
+}
+
+/**
+ * Implements itg_get_emoji_amp_html().
+ */
+function itg_get_emoji_amp_html($result, $arr = NULL) {
+  if (!empty($result)) {
+    $emoji_html = '<span smilies-title>';
+    if (empty($arr)) {
+      foreach ($result as $key => $value) {
+        $html = $value;
+        $html = str_ireplace(
+            ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
+        );
+        $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
+      }
+    }
+    else {
+      $html = $result;
+      $html = str_ireplace(
+          ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
+      );
+      $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
+    }
+    $emoji_html .= '</span>';
+    return $emoji_html;
+  }
 }

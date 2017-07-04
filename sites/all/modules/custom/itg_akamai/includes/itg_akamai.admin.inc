@@ -328,10 +328,10 @@ function itg_akamai_cache_akamai_ccpurge() {
       );
     }
   }
-  
 
-    
-   $render_array['akamai_cache_logs_s_nid'] = array(
+
+
+  $render_array['akamai_cache_logs_s_nid'] = array(
     array(
       '#theme' => 'table',
       '#header' => $header,
@@ -346,7 +346,7 @@ function itg_akamai_cache_akamai_ccpurge() {
     ),
   );
 
-  
+
   $form['itg_akamai_cc_holder']['options'] = array(
     '#markup' => render($render_array),
   );
@@ -602,6 +602,14 @@ function itg_akamai_cache_akamai_section() {
     '#required' => TRUE,
   );
 
+  $form['itg_akamai_section']['akamai_timeout_section_card'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter TTL for Section Card'),
+    '#default_value' => variable_get('akamai_timeout_section_card', 0),
+    '#description' => t('Enter TTL for Section Card for akamai cache'),
+    '#required' => TRUE,
+  );
+
   return system_settings_form($form);
 }
 
@@ -609,23 +617,6 @@ function itg_akamai_cache_akamai_section() {
  * General Settings for Akamai miscellaneous
  */
 function itg_akamai_cache_akamai_other($form, &$form_state) {
-  drupal_add_css('input.form-submit.button-small {
-  padding: 4px 8px;
-  font-weight: bold;
-}
-
-.container-inline input.form-submit.button-small + .ajax-progress.ajax-progress-throbber .throbber {
-  position: absolute;
-  left: 19px;
-  margin-top: 7px;
-}
-
-.container-inline input.form-submit.button-small + .ajax-progress.ajax-progress-throbber .message {
-  display: none;
-}
-', 'inline');
-
-
   $form = array();
   $form['#attributes']['class'][] = 'node-form';
 

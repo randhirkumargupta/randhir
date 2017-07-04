@@ -367,6 +367,21 @@
       .story-right .description iframe{max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
+      #block-itg-layout-manager-front-end-breadcrumb {
+        position: relative;
+        z-index: 9998;
+        color: #a1a1a1;
+        font-family: roboto;
+        margin-bottom: 20px;
+      }
+      #block-itg-layout-manager-front-end-breadcrumb div.lft {
+        display: inline-block;
+        vertical-align: top;
+      }
+      #block-itg-layout-manager-front-end-breadcrumb a {
+        color: #a1a1a1;
+        font-family: roboto;
+      }
 
     </style>
     <?php //endif;  ?>

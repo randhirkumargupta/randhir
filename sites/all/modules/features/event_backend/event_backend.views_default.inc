@@ -4041,7 +4041,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4144,7 +4144,7 @@ return itg_event_backend_speaker_ids(arg(1));
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4494,6 +4494,19 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['fields']['php']['php_output'] = '<?php echo itg_event_get_host_name();?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Image Path';
+  $handler->display->display_options['fields']['php_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+Global $base_url;
+print  "<img src=\'" . $base_url . \'/\' . drupal_get_path(\'theme\', \'itg\') . "/images/itg_image88x66\' alt=\'\' />";
+?>';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
@@ -4502,6 +4515,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['fields']['field_sponser_logo']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_sponser_logo']['alter']['path'] = '[php]/sponsor-details?sponsor=[nid]';
   $handler->display->display_options['fields']['field_sponser_logo']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_sponser_logo']['empty'] = '<a href="[php]/sponsor-details?sponsor=[nid]">[php_1]</a>';
   $handler->display->display_options['fields']['field_sponser_logo']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_sponser_logo']['settings'] = array(
     'image_style' => 'thumbnail',

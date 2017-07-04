@@ -90,7 +90,7 @@ function itg_personalization_home_page() {
   $user_fields = user_load($user->uid);
 
   // Render user picture.
-  if(!empty($user_fields->field_user_picture['und'][0]['uri'])) {
+  if(!empty($user_fields->field_user_picture['und'][0]['uri']) && getimagesize($user_fields->field_user_picture['und'][0]['uri']) !== false) {
   $data['profile_pic'] = theme(
       'image_style', array(
     'style_name' => 'user_picture',
@@ -571,25 +571,39 @@ function _personalization_show_content() {
     }
     
     $start_date = strtotime(date('d-m-Y', strtotime($expiry_days)));
-    $url_arg = array('articles', 'videos', 'photogalleries');
+    $url_arg = array('articles', 'videos', 'photogalleries', 'all');
     $con = mongodb();
     $people = $con->front_user_activity;
 
     if (in_array($arg[2], $url_arg))
     {
+      $flag = FALSE;
       if ($arg[2] == 'articles')
       {
         $ntype = 'story';
+        $flag = TRUE;
       }
       if ($arg[2] == 'videos')
       {
         $ntype = 'videogallery';
+        $flag = TRUE;
       }
       if ($arg[2] == 'photogalleries')
       {
         $ntype = 'photogallery';
+        $flag = TRUE;
       }
+      if ($arg[2] == 'all')
+      {
+        $ntype = 'photogallery';
+        $flag = FALSE;
+      }
+      
+      if($flag) {
       $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
+      } else {
+      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));  
+      }
     }
     else
     {
@@ -638,7 +652,7 @@ function _personalization_show_content() {
         $output.= '</div></div><a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
     }
     $output.= '</ul>';
-    if(!empty($value['title'])) {
+    if(!empty($value['nid'])) {
       return $output;
     }
     else {

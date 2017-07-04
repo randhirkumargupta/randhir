@@ -60,7 +60,7 @@ if (function_exists('get_other_gallery_amp')) {
         $video_time = get_amp_video_time($value['entity_id'], 'videogallery', 'field_video_duration');
       }
       $entity_id = $value['entity_id'];
-      $title = l($value['title'], $base_url . '/node/' . $value['nid'], array("attributes" => array("title" => $value['title'])));
+      $title = l($value['title'], $base_url . '/node/' . $value['nid'].'?amp', array("attributes" => array("title" => $value['title'])));
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
