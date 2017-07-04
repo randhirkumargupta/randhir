@@ -903,7 +903,13 @@ function itg_akamai_init() {
       if ($is_front_page) {   // Checking if page is front page
         $homepage_ttl = variable_get('itg_akamai_other_hpage');
         if (isset($homepage_ttl) && !empty($homepage_ttl)) {
-          akamai_max_age($homepage_ttl);
+          $itg_max_age = akamai_max_age($homepage_ttl);
+          if (!empty($itg_max_age)) {
+            $formated_expire_date = itg_akamai_set_expiration_date($itg_max_age);
+            drupal_add_http_header('Edge-control', 'cache-maxage=' . $itg_max_age . 's');
+            drupal_add_http_header('Cache-Control', 'public, max-age=' . $itg_max_age);
+            drupal_add_http_header('Expires', $formated_expire_date);
+          }
         }
       }
       if (isset($_GET['q']) && !empty($_GET['q'])) { // For custom and other pages
@@ -919,13 +925,13 @@ function itg_akamai_init() {
 
             break;
 
-          case 'node/2':
+          /*case 'node/2':
             $homepage_ttl = variable_get('itg_akamai_other_hpage');
             if (isset($homepage_ttl) && !empty($homepage_ttl)) {
               akamai_max_age($homepage_ttl);
             }
 
-            break;
+            break;*/
         }
         // Code started for TTL setting for the custom/other URLs
 

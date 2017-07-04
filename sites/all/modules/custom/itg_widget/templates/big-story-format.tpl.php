@@ -25,6 +25,7 @@ if (!empty($data['node_data'])) :
     print '<div id="videogallery-iframe"></div>';
   }
   $fb_image = '';
+  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   ?>
   <!-- Big news Block -->
   <div class="big-news big-news-content-<?php print $data['node_data']->type ?>">
@@ -132,9 +133,9 @@ if (!empty($data['node_data'])) :
                     <li class="follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" data-rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer"><?php print t('Follow the Story'); ?></a></li>
                   <?php endif;
                 else: ?>
-                  <li class="mhide"><?php if (function_exists('itg_sso_url')) {
-            print itg_sso_url('Follow the Story');
-          } ?></li>
+                  <li class="mhide">
+                  <a title="Follow the Story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class=""><?php print t('Follow the Story'); ?></a>
+                  </li>
             <?php endif; ?>
           <?php endif; ?>
 

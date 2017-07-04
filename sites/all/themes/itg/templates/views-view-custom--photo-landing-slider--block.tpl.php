@@ -120,6 +120,7 @@ $uri = base64_encode($actual_link);
     <div class="col-md-4">
         <div class="other-details-main">
         <ul class="counterslide">
+        <?php $like_id = 1000; ?>    ;
         <?php foreach ($rows as $index => $row): ?>
                       <li>
                           <div class="other-details">
@@ -134,8 +135,12 @@ $uri = base64_encode($actual_link);
                                 <div class="btn-div">
                     <?php
                     if (function_exists(itg_event_backend_highlights_like_dislike)) {
-                      $val = $row['item_id'];
-                      print itg_event_backend_highlights_like_dislike($val);
+                      //$val = $row['item_id'];
+                      $val = arg(1).$like_id;
+                      if(function_exists('itg_common_get_node_type')) {
+                        $datatype = itg_common_get_node_type(arg(1));
+                      }
+                      print itg_event_backend_highlights_like_dislike($val, $datatype);
                     }
                     ?>
                                 </div>
@@ -144,7 +149,7 @@ $uri = base64_encode($actual_link);
                             </div>
                           </div>
                       </li>
-      <?php endforeach; ?>
+      <?php $like_id++;  endforeach; ?>
         </ul>
         
         <div class="social-icon mhide">

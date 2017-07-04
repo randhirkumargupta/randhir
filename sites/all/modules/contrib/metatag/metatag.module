@@ -2028,6 +2028,31 @@ function metatag_get_info($type = NULL, $name = NULL) {
 
     if ($cache = metatag_cache_get($cid)) {
       $info = $cache->data;
+      
+      //code add for metage tage cache set :: shravan 4 july
+      
+        if (empty($info['tags'])) {
+            $info = module_invoke_all('metatag_info');
+            $info += array('tags' => array(), 'groups' => array());
+
+            // Merge in default values.
+            foreach ($info['tags'] as $key => $data) {
+              $info['tags'][$key] += array(
+              // Merge in default values.
+              'name' => $key,
+              'class' => 'DrupalTextMetaTag',
+             );
+            }
+
+            // Let other modules alter the entity info using
+            // hook_metatag_info_alter().
+            drupal_alter('metatag_info', $info);
+
+            metatag_cache_set($cid, $info);
+        }
+        
+    //code add for metage tage cache set :: end
+      
     }
     else {
       // Obtain all metatag specs defined in other modules using

@@ -295,12 +295,12 @@ function itg_layout_manager_block_info() {
   );
   
   $blocks['amp_header_block'] = array(
-      'info' => t('Header Block'),
+      'info' => t('AMP Header Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   $blocks['amp_footer_block'] = array(
-      'info' => t('Footer Block'),
+      'info' => t('AMP Footer Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
 

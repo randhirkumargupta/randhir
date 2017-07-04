@@ -780,7 +780,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after, .node-reporter-form .form-field-name-field-reporter-profile-type .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-company .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-department .form-type-select > label:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after, .node-reporter-form .form-field-name-field-reporter-profile-type .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-company .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-department .form-type-select > label:after, .ticket-type-require:after {
   content: '*';
   color: red;
 }
@@ -12628,4 +12628,9 @@ fieldset#edit-xmlsitemap {
 [id*="itg-akamai-cache-akamai-other"] fieldset .fieldset-wrapper .form-item-itg-akamai-disabled {
   margin: 10px 0;
   padding: 0 30px;
+}
+
+.cpation-wraper textarea {
+  width: 400px;
+  margin-bottom: 10px;
 }

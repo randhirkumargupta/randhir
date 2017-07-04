@@ -389,7 +389,10 @@ $uri = base64_encode($actual_link);
                 <?php
                 if (function_exists(itg_event_backend_highlights_like_dislike)) {
                   $val = arg(1);
-                  print itg_event_backend_highlights_like_dislike($val);
+                  if(function_exists('itg_common_get_node_type')) {
+                        $datatype = itg_common_get_node_type(arg(1));
+                  }
+                  print itg_event_backend_highlights_like_dislike($val, $datatype);
                 }
                 ?>
               </div>
@@ -469,91 +472,3 @@ $uri = base64_encode($actual_link);
     });
   });
 </script>
-<style>
-  #block-views-video-landing-header-block .video-header-right {
-    position: relative;
-    height: auto !important;
-    background: #282828;
-    padding: 40px 0 15px;
-  }
-  #block-views-video-landing-header-block .video-header-right .ads {
-    width: 300px;
-    height: 250px;
-    background: #363636;
-    margin: 0px auto 30px;
-    position: relative;
-    bottom: 0;
-  }
-  .view-video-landing-header .defalt-bar {
-    max-width: 100%;
-    position: relative;
-    overflow: auto;
-    height:360px;
-  }
-  .view-video-landing-header .photo-list {
-    max-height: inherit;
-    overflow-y: hidden;
-    margin: 0 -10px !important;
-  }
-  /*=============Vide Right Section*/
-  #block-views-video-landing-header-block .latest_video .photo-list li{ float: left; width:100%; padding:18px 10px; box-sizing: border-box; border-bottom:1px solid #3e3e3e}
-  #block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure{ margin: 0 0px 0 15px;float: right}
-  #block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p{ font:400 14px/20px "Roboto", sans-serif; color:#b4b4b4}
-  #block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p a{ color:#b4b4b4}
-  #block-views-video-landing-header-block .latest_video .view-header h3{font:500 14px/35px "Roboto", sans-serif; margin-bottom:10px; background:#131313; height:35px; color:#fff; position: relative; border-bottom:1px solid #3b3b3b;padding: 0 10px;}
-  #block-views-video-landing-header-block .latest_video .view-header h3 .fa-caret-down{position: absolute;   right: 10px; top: 11px; font-size: 14px;}
-  #block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_draggerRail{ background-color:#100e0f; width:16px;}
-  #block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ width:12px; background-color:#b8b8b8}
-  #block-views-video-landing-header-block .view-content .photo-list li .tile figure figcaption{ padding:1px 5px;}
-  #block-views-video-landing-header-block .latest_video{padding: 0 4px 0 30px;}
-
-  @media (max-width: 1024px) {
-    .view-video-landing-header .defalt-bar{ float: left; height: 225px !important;}
-    .latest_video { float: left;  width: 500px; margin-bottom:15px;}
-    #block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure{ width:120px;}
-    #block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_draggerRail{width:7px;}
-    #block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ width:3px;}
-    #block-views-video-landing-header-block .video-header-right{ padding:15px 15px 0; margin-top:30px;}
-    #block-views-video-landing-header-block .latest_video{ padding:0}
-    #block-views-video-landing-header-block .video-header-left .social-likes ul li a{padding: 32.4px 5px 20.2px 10px !important;}
-  }
-
-  @media (max-width: 800px) {
-    .latest_video { float: left; width: 400px;}
-    #block-views-video-landing-header-block .video-header-left .social-likes ul li a { padding:10px!important;}
-  }
-
-  @media (max-width: 767px) {
-    #block-views-video-landing-header-block .latest_video{padding: 30px 0 0;float: left; width:100%;} 
-    .view-video-landing-header .defalt-bar{ overflow: inherit; height: auto !important}
-    #block-views-video-landing-header-block .latest_video .photo-list{ position: relative; padding:40px 0}  
-    #block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-up{ position: absolute; top:5px; left:49%; font-size: 25px; font-weight: normal;}
-    #block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-down{ position: absolute; bottom:5px; left:49%;font-size: 25px; font-weight: normal;}
-    #block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-up.slick-disabled{ opacity:0.3}
-    #block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-down.slick-disabled{opacity:0.3}
-    #block-views-video-landing-header-block .latest_video .photo-list li{ width:100% !important}
-    #block-views-video-landing-header-block .video-header-left .social-likes ul li a { padding:10px!important;}
-  }
-
-  @media screen and (min-width: 768px) {
-    #block-views-video-landing-header-block .video-header-right{ margin-top:25px;}
-  }
-
-  @media (min-width: 320px) {
-    #block-views-video-landing-header-block .video-header-right{ height: auto; background:#282828}
-  }
-
-  @media (max-width: 767px) {
-    #block-views-video-landing-header-block .latest_video{padding: 30px 0;} 
-  }
-
-  @media only screen and (min-width: 769px){
-    #block-views-video-landing-header-block .video-header-right {
-      height: 100% !important; 
-      background:#282828;
-      padding-top:40px;
-      margin-top:0px;
-      padding-bottom:15px !important
-    }
-  }
-</style>
