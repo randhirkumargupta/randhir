@@ -19,6 +19,7 @@ else {
   $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
   $user_pic = "<img src=$file width='30' height='30' alt='user-image' />";
 }
+$uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 ?>
 <div class="header-ads">
   <?php
@@ -44,7 +45,8 @@ else {
         <?php  
           }
         }
-      ?>
+        ?>
+
       <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
       <?php print render($block['content']); ?> 
     </li>

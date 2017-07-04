@@ -106,10 +106,27 @@ function itg_sso_reg_menu() {
     'file' => 'includes/sso_email_history_form.inc',
     'type' => MENU_NORMAL_ITEM,
   );
+  
+  $items['admin/config/people/refer-friend-history'] = array(
+    'title' => 'Refer friend history',
+    'description' => 'Refer friend history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('refer_friend_history_form'),
+    'access arguments' => array('access SSo email history'),
+    'file' => 'includes/sso_refer_friend_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   $items['sso-email-history-del/%'] = array(
     'title' => 'Delete Form',
     'page callback' => 'itg_sso_email_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso-refer-history-del/%'] = array(
+    'title' => 'Delete refer a friend',
+    'page callback' => 'itg_refer_friend_history_callback',
     'access arguments' => array('access SSo email history'),
     'type' => MENU_CALLBACK,
   );
@@ -350,6 +367,22 @@ function itg_sso_email_history_callback() {
       ->condition('id', $id)
       ->execute();
     drupal_set_message(t('User has been deleted sucessfully from history table'));
+    drupal_goto($redirect_url);
+  }
+}
+
+/**
+ * Implements itg_refer_friend_history_callback
+ */
+function itg_refer_friend_history_callback() {
+  $arg = arg();
+  $id = $arg[1];
+  $redirect_url = 'admin/config/people/refer-friend-history';
+  if (isset($id)) {
+    db_delete('itg_lrp_refer_friend')
+      ->condition('id', $id)
+      ->execute();
+    drupal_set_message(t('User has been deleted sucessfully from refer friend table'));
     drupal_goto($redirect_url);
   }
 }
