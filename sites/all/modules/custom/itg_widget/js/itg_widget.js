@@ -20,7 +20,7 @@ Drupal.behaviors.itg_widgets = {
                     method: 'post',
                     data: {card_val: card_val, widget_style: widget_style},
                     beforeSend: function() {
-                        jQuery('.itg-ajax-loader').show();
+                        //jQuery('.itg-ajax-loader').show();
                     },
                     success: function(data) {
                         jQuery('#'+block_id[2]).html(data);
