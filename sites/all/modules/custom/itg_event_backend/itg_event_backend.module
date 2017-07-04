@@ -2325,3 +2325,35 @@ function itg_event_backend_save_alias($source, $alias) {
   $path = array('source' => $source, 'alias' => $alias);
   path_save($path);
 }
+
+/**
+ * {@inheritdocs}.
+ */
+function itg_event_backend_token_info() {
+  $info['tokens']['node']['event_title'] = array(
+    'name' => t('Event Content type'),
+    'description' => t('Node title for event'), // this is so you see it in the big list
+  );
+  return $info;
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_event_backend_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+    $sanitize = !empty($options['sanitize']);
+    if ($type == 'node' && !empty($data['node'])) {
+        $node = $data['node'];
+  
+        foreach ($tokens as $name => $original) {
+            switch ($name) {
+                    case 'event_title':
+                    $toreplace = $node->title;
+                    $replacements[$original] = $toreplace;
+                    break;
+            }
+        }
+    }
+    return $replacements;
+}
