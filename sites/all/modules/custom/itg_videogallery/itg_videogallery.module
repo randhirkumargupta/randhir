@@ -84,8 +84,6 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-
-
   $items['check-s3'] = array(
     'page callback' => 'itg_videogallery_s3_file_to_dm',
     'access arguments' => array('access content'),
@@ -221,7 +219,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'videogallery_node_form':
       $arg = arg(2);
-      $form['field_story_expert_description']['und'][0]['#format'] = 'icon_format';
+      $form['field_story_expert_description']['und'][0]['#format'] = 'full_html';
 // checked comment box by default
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
@@ -700,7 +698,6 @@ function itg_videogallery_node_insert($node) {
 
         foreach ($node->field_video_upload['und'] as $keys => $videofields) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
-
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
 //$video_desc = $video_details[$videofields['value']]->field_videogallery_description[LANGUAGE_NONE][0]['value'];
           $video_title = $video_details[$videofields['value']]->field_video_title[LANGUAGE_NONE][0]['value'];
