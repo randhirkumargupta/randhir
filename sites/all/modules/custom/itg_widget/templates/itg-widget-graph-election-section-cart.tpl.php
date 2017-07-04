@@ -1,6 +1,7 @@
-<?php 
+<?php
 ob_clean();
-if (!empty($data)) : global $base_url, $theme; ?>
+if (!empty($data)) : global $base_url, $theme;
+  ?>
 
 
   <?php
@@ -21,18 +22,19 @@ if (!empty($data)) : global $base_url, $theme; ?>
   }
 
   foreach ($data as $index => $row):
-    // p($jsondata);
+    $rand = rand(1, 999999);
+    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
     ?>
     <script>
       jQuery(function() {
 
-        var ids = "container_<?php echo $rand_id; ?>";
-        var data = '<?php echo $jsondata; ?>'; 
+        var ids = "container_<?php echo $rand; ?>";
+        var data = '<?php echo $jsondata; ?>';
         data = JSON.parse(data);
         var combined = [];
         var colorArray = [];
         var aName = data.election.aName;
-        
+
         var aSeats = data.election.aSeats;
         var aSeatOthers = data.election.aSeatOthers;
         var aappos = 0;
@@ -40,7 +42,7 @@ if (!empty($data)) : global $base_url, $theme; ?>
         var aapname = "";
         var aapseats = "";
         var ty = 0;
-        if (data != "")  {
+        if (data != "") {
           for (var x = 0; x < data.election.items.length; x++)
           {
             if (data.election.items[x].pName.toLowerCase() != "bjp+") {
@@ -54,95 +56,95 @@ if (!empty($data)) : global $base_url, $theme; ?>
               aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
             }
           }
-        var showtooltip = true;
-        if (aSeatOthers == 0) {
-          jQuery("#resultawaited").show();
-          colorArray[ty] = "#A2A9AD";
-          combined.push(["Result Awaited", "1"]);
-          showtooltip = false;
-        } else {
-
-          colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-          combined.push([aapname, aapseats]);
-        }
-
-
-        var combined = [];
-        var colorArray = [];
-        var aName = data.election.aName;
-        var aSeats = data.election.aSeats;
-        var aSeatOthers = data.election.aSeatOthers;
-        var aappos = 0;
-        var aapcolor = "";
-        var aapname = "";
-        var aapseats = "";
-        var colindex = 0;
-        for (var x = 0; x < data.election.items.length; x++)
-        {
-          if (data.election.items[x].pName.toLowerCase() != "bjp+") {
-            colorArray[colindex] = data.election.items[x].pColor;
-            combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
-            colindex++;
+          var showtooltip = true;
+          if (aSeatOthers == 0) {
+            jQuery("#resultawaited").show();
+            colorArray[ty] = "#A2A9AD";
+            combined.push(["Result Awaited", "1"]);
+            showtooltip = false;
           } else {
-            aapcolor = data.election.items[x].pColor;
-            aappos = data.election.items[x].pColor;
-            aapname = data.election.items[x].pName;
-            aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+
+            colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+            combined.push([aapname, aapseats]);
           }
-        }
-        var showtooltip = true;
-        if (aSeatOthers == 0) {
-          jQuery("#resultawaited").show();
-          colorArray[colindex] = "#A2A9AD";
-          combined.push(["Result Awaited", "1"]);
-          showtooltip = false;
-        } else {
 
-          colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-          combined.push([aapname, aapseats]);
-        }
 
-        jQuery("#" + ids).highcharts({
-          colors: colorArray,
-          chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-          },
-          title: {
-            text: aSeatOthers + "/" + aSeats + "<br>" + aName,
-            align: "center",
-            verticalAlign: "middle",
-            y: 12
-          },
-          tooltip: {
-            enabled: showtooltip,
-            pointFormat: "<b>{point.y}</b>"
-          },
-          plotOptions: {
-            pie: {
-              dataLabels: {
-                enabled: false,
-                distance: -50,
-                style: {
-                  fontWeight: "bold",
-                  color: "white",
-                  textShadow: "0px 1px 2px black"
-                }
-              },
-              startAngle: -90,
-              endAngle: 90,
-              center: ["50%", "55%"]
+          var combined = [];
+          var colorArray = [];
+          var aName = data.election.aName;
+          var aSeats = data.election.aSeats;
+          var aSeatOthers = data.election.aSeatOthers;
+          var aappos = 0;
+          var aapcolor = "";
+          var aapname = "";
+          var aapseats = "";
+          var colindex = 0;
+          for (var x = 0; x < data.election.items.length; x++)
+          {
+            if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+              colorArray[colindex] = data.election.items[x].pColor;
+              combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+              colindex++;
+            } else {
+              aapcolor = data.election.items[x].pColor;
+              aappos = data.election.items[x].pColor;
+              aapname = data.election.items[x].pName;
+              aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
             }
-          },
-          series: [{
-              type: "pie",
-              name: "",
-              innerSize: "60%",
-              data: combined
-            }]
-        });
-      }
+          }
+          var showtooltip = true;
+          if (aSeatOthers == 0) {
+            jQuery("#resultawaited").show();
+            colorArray[colindex] = "#A2A9AD";
+            combined.push(["Result Awaited", "1"]);
+            showtooltip = false;
+          } else {
+
+            colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+            combined.push([aapname, aapseats]);
+          }
+
+          jQuery("#" + ids).highcharts({
+            colors: colorArray,
+            chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: 0,
+              plotShadow: false
+            },
+            title: {
+              text: aSeatOthers + "/" + aSeats + "<br>" + aName,
+              align: "center",
+              verticalAlign: "middle",
+              y: 12
+            },
+            tooltip: {
+              enabled: showtooltip,
+              pointFormat: "<b>{point.y}</b>"
+            },
+            plotOptions: {
+              pie: {
+                dataLabels: {
+                  enabled: false,
+                  distance: -50,
+                  style: {
+                    fontWeight: "bold",
+                    color: "white",
+                    textShadow: "0px 1px 2px black"
+                  }
+                },
+                startAngle: -90,
+                endAngle: 90,
+                center: ["50%", "55%"]
+              }
+            },
+            series: [{
+                type: "pie",
+                name: "",
+                innerSize: "60%",
+                data: combined
+              }]
+          });
+        }
       });</script>
     <div class="<?php echo $classrow; ?> mt-50">
       <div class="itg-widget">
@@ -151,29 +153,29 @@ if (!empty($data)) : global $base_url, $theme; ?>
 
             <div class="data-holder"> 
               <div class="graph-design">
-                <div id="container_<?php echo $rand_id; ?>"></div>
+                <div id="container_<?php echo $rand; ?>"></div>
                 <div class="divider"></div>                                
               </div>
- <?php
-    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-    $jsondata = json_decode($jsondata);
+              <?php
+              $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+              $jsondata = json_decode($jsondata);
 
-    if (!empty($jsondata)) {
-      print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
+              if (!empty($jsondata)) {
+                print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
 <tr><th></th><th>PARTIES</th><th>LEADS</th><th>WON</th><th>TOTAL</th></tr>
 ';
-    }
+              }
 
 
-    foreach ($jsondata->election->items as $elction_telly_data) {
-      $total_result = (int) $elction_telly_data->pWon + (int) $elction_telly_data->pLead;
-      print '<tr><td class="party-color" style="background:' . $elction_telly_data->pColor . '"></td><td class="padtext">' . ucfirst($elction_telly_data->pName) . '</td>
+              foreach ($jsondata->election->items as $elction_telly_data) {
+                $total_result = (int) $elction_telly_data->pWon + (int) $elction_telly_data->pLead;
+                print '<tr><td class="party-color" style="background:' . $elction_telly_data->pColor . '"></td><td class="padtext">' . ucfirst($elction_telly_data->pName) . '</td>
 <td>' . $elction_telly_data->pLead . '</td>
 <td>' . $elction_telly_data->pWon . '</td>
 <td>' . $total_result . '</td></tr>';
-    }
+              }
 
-    print '
+              print '
 </tbody>
 
 
@@ -185,7 +187,7 @@ if (!empty($data)) : global $base_url, $theme; ?>
                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
                     </ul>
                 </div>';
-    ?>  
+              ?>  
 
             </div>
 
