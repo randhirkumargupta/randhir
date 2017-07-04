@@ -450,7 +450,6 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
       $imge_thumb_id = itg_photogallery_crop_thumb($file_ids[$i]['fid']);
 
-
       if ($imge_thumb_id) {
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_small_image['und'][0]['fid'] = $imge_thumb_id;
       }
@@ -743,12 +742,16 @@ function itg_photogallery_get_image_info_by_fid($fid) {
  * @return string
  */
 function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
+  global $base_url;
   if (isset($element['#value'])) {
     $item = $element['#value'];
   }
-
   if (isset($element['fid']['#value'])) {
-    $item['fid'] = $element['fid']['#value'];
+    if ($element['filemime']['#value'] == 'image/jpeg') {
+      $item['fid'] = $element['fid']['#value'];
+      $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['fid']['#value'] . "?width=800&height=700&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
+</a>";
+    }
   }
 
   if (empty($item['alt']) || empty($item['title'])) {
@@ -769,8 +772,11 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
     $title = $data_result['title'];
   }
 
+
   $element['alt']['#default_value'] = isset($item['alt']) ? $item['alt'] : $alt;
   $element['title']['#default_value'] = isset($item['title']) ? $item['title'] : $title;
- 
+
+
+
   return $element;
 }

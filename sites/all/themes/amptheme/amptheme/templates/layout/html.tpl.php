@@ -75,10 +75,10 @@
       .nav-button:focus{opacity: 0;}
       .nav-button:focus ~ .nav-close {z-index: 10; visibility: visible;}
       .nav-button .fa, .nav-close .fa{font-size: 18px;}
-      .nav-items{position: absolute; left: 100px; top: 28px; list-style: none; width: 200px; display: none; background-color: #a41615; z-index: 10;}
-      .nav-items li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
-      .nav-items li:first-child a{border-top: none;}
-      .nav-button:focus ~ .nav-items{display: block;}
+      .header-menu{position: absolute; left: 100px; top: 28px; list-style: none; width: 200px; display: none; background-color: #a41615; z-index: 10;}
+      .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
+      .header-menu li:first-child a{border-top: none;}
+      .nav-button:focus ~ .header-menu{display: block;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
       .stryimg{position: relative;}
       .photoby:empty{display: none;}
@@ -382,7 +382,70 @@
         color: #a1a1a1;
         font-family: roboto;
       }
-
+      #footer{
+        background-color: #000;
+        color: #fff;
+        margin-top: 30px;
+        font-family: roboto;
+        position: relative;
+      }
+      #footer ul{
+        list-style: none;
+      }
+      #footer a{
+        color: #a6a6a6;
+        font-family: "Roboto", sans-serif;
+        text-decoration: none;
+      }
+      #footer a:hover{
+        color: #ffc106;
+      }
+      .footer-top-link, .footer-bottom-menu{
+        white-space: nowrap;
+        overflow-x: auto;
+        border-bottom: 1px solid #111111;
+      }
+      .footer-top-link ul li{
+        display: inline-block;
+        vertical-align: top;
+        margin: 6px 12px;
+      }
+      .footer-top-link ul li a{
+        display: block;
+        height: 37px;
+        line-height: 37px;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+      .footer-bottom-menu{
+        display: none;
+      }
+      .footer-show, .footer-hide{border: none; background-color: #000; position: absolute; right: 0; top: 0; color: #fff; height: 48px; width: 45px; line-height: 50px; text-align: center; cursor: pointer;}
+      .footer-show{z-index: 10;}
+      .footer-hide{z-index: 9; visibility: hidden;}
+      .footer-show:focus{opacity: 0;}
+      .footer-show:focus ~ .footer-hide {z-index: 10; visibility: visible;}
+      .footer-show .fa, .footer-hide .fa{font-size: 24px;}
+      .footer-show:focus ~ .footer-bottom-menu {display: block;}
+      .footer-bottom-menu .menu-col{
+        display: inline-block;
+        vertical-align: top;
+        margin: 6px 12px;
+        width: 170px;
+      }
+      .footer-bottom-menu h4{
+        text-transform: uppercase;
+        margin: 20px 0 5px;
+      }
+      .footer-bottom-menu ul li{
+        padding: 3px 0;
+      }
+      .copyright{
+        color: #a6a6a6;
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 12px;
+      }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

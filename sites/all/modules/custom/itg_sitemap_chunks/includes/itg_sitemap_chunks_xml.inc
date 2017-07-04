@@ -92,7 +92,6 @@ function itg_sitemap_chunks_get_sub_file_links($ms_id) {
  *  Function which print xml sitemap of given section
  * @param int $section_tid
  */
-
 function itg_sitemap_chunks_for_section($section_tid) {
   $total_links = itg_sitemap_get_xml_data_for_section($section_tid);
   if (!empty($total_links)) {
@@ -294,13 +293,14 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
  * Function which creats sections sitemap chunks.
  */
 function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   // remove directory if previously created sitemap.
   // get chunk setting from setting form.
   $limit = variable_get('itg_sitemap_chunks_number', 50000);
   // required content type for archive sitemap
-  $content_types = array("story" , "videogallery" , "photogallery");
+  $content_types = array("photogallery" , "videogallery" , "story");
   // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
-  $year_range = range(2006, date('Y'));
+  $year_range = range(2006 , date('Y'));
   foreach ($year_range as $year) {
     $start_year = date("1/1/$year 00:00:00");
     $end_year = date("12/31/$year 00:00:00");
@@ -349,12 +349,18 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           // Last file uri path.
           $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
           // Delete last file we will create it again.
-          file_unmanaged_delete($last_file_uri);
+          $file_delete = file_unmanaged_delete($last_file_uri);
+          $aws_file_path = 's3fs-public/' . explode("public://", $last_file_uri)[1];
+          itg_video_check_delete_sitemap_xml($aws_file_path);
+          if ($file_delete) {
+            echo file_create_url($last_file_uri) . " will recreated again. <br/>";
+          }
         }
         do {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
-          if (!file_exists($file_uri)) {
+          $aws_file_path = 's3fs-public/' . explode("public://", $file_uri)[1];
+          if (empty(file_get_contents(file_create_url($file_uri)))) {
             $content_links = array();
             // Query to get node by range of limit.
             $query = db_select('node', 'n');
@@ -447,11 +453,11 @@ function itg_sitemap_get_xml_file_count($feed_dir) {
 function itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year) {
 
   if ($file_num == 1) {
-    $file_name = "$feed_dir/$CT$year.xml";
+    $file_name = "$feed_dir/sitemap-$CT$year.xml";
   }
   else {
     $file_num--;
-    $file_name = "$feed_dir/$CT$year-$file_num.xml";
+    $file_name = "$feed_dir/sitemap-$CT$year-$file_num.xml";
   }
   return $file_name;
 }
