@@ -13,6 +13,12 @@
             var check_user_arg = Drupal.settings.itg_sso_login.settings.user_arg;
             var check_change_arg = Drupal.settings.itg_sso_login.settings.change_arg;
             
+            alert(base_url);
+            alert(uid);
+            alert(check_sso_link);
+            alert(check_user_arg);
+            alert(check_change_arg);
+            
             if (uid) {                
                 if (check_sso_link == 'domain_info' && opener) {
                     opener.location.reload(true);
