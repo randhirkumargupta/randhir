@@ -73,25 +73,7 @@
 
 <div id="page-wrapper">
   <div id="page">
-    <header role="banner" id="header">
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-        <amp-img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
-      </a>
-      <nav id="navbar">
-        <button class='nav-button'>
-          <i class="fa fa-bars"></i>
-        </button>
-        <button class='nav-close'>
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-        <ul class='nav-items'>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-        <?php //print render($page['header']); ?>
-    </header>
+    <?php print render($page['header']); ?>
 
     <?php print $messages; ?>
 
@@ -113,9 +95,7 @@
 
       </main></div> <!-- /#main, /#main-wrapper -->
 
-    <footer role="contentinfo" id="footer"><div class="section">
-        <?php //print render($page['footer']); ?>
-      </div></footer> <!-- /.section, /#footer -->
+    <?php print render($page['footer']); ?>
 
   </div>
 </div> <!-- /#page, /#page-wrapper -->
