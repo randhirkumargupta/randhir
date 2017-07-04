@@ -44,8 +44,10 @@
                     <?php print render($content['field_mega_review_youtube_url']); ?>
                     <?php print render($content['field_mega_review_photo_gallery']); ?>
                     <?php print render($content['field_mega_review_twitter']); ?>
-                    <?php print render($content['field_story_extra_large_image']); ?>
-
+                    <div class="field">
+                        <div class="field-label"><?php print t('Image:'); ?></div>
+                        <div class="field-items"><?php print render($content['field_story_extra_large_image']); ?></div>
+                    </div>
                     <?php print render($content['field_mega_review_video']); ?>
                     <?php
                     $mega_output = '';
@@ -65,16 +67,7 @@
                         $mega_output.= '<hr/><br/>';
                       endforeach;
                       ?>
-                      <?php if (!empty($mega_item['field_buzz_headline']['und'][0]['value'])): ?>
-                        <div class="Templates-buzz">
-                            <h2><?php print t('Movie Review'); ?></h2>
-
-                            <div class="content-details">
-                                <?php print $mega_output; ?>
-                            </div>
-                        </div>
-                      <?php endif; ?>
-
+                      
                     <?php
                     }
                     else {
