@@ -37,6 +37,35 @@ function itg_video_get_s3_video() {
 }
 
 /**
+ * 
+ * @return $data_video array
+ */
+function itg_video_get_s3_video_del($path) {
+  $bucket = variable_get('aws_bucket');
+  $aws_access_key = variable_get('aws_access_key');
+  $aws_secret_key = variable_get('aws_secret_key');
+  $aws_region = variable_get('aws_region');
+  $aws_video_dir = variable_get('aws_video_dir');
+  $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+  $data_video = array();
+  try {
+    $objects = $s3->getIterator('ListObjects', array(
+      'Bucket' => $bucket, "Prefix" => $path
+    ));
+    foreach ($objects as $object) {
+      $result_delete = $s3->deleteObject(array(
+        'Bucket' => $bucket,
+        'Key' => $object['Key']
+      ));
+    }
+  }
+  catch (S3Exception $e) {
+    echo $e->getMessage() . "\n";
+  }
+ 
+}
+
+/**
  * @argument struing $bitrate_url, $video_name
  * @return $result array
  */
@@ -80,6 +109,29 @@ function itg_video_copy_onfile_to_anoter($video_name, $folder) {
       'Key' => $keyvalue
     ));
   }
+}
+
+function itg_video_check_file_existance($filename) {
+  $bucket = variable_get('aws_bucket');
+  $aws_access_key = variable_get('aws_access_key');
+  $aws_secret_key = variable_get('aws_secret_key');
+  $aws_region = variable_get('aws_region');
+  $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+  return $s3->doesObjectExist($bucket, 's3fs-public/' . $filename);
+}
+
+function itg_video_check_delete_sitemap_xml($filename) {
+  $bucket = variable_get('aws_bucket');
+  $aws_access_key = variable_get('aws_access_key');
+  $aws_secret_key = variable_get('aws_secret_key');
+  $aws_region = variable_get('aws_region');
+  $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+
+  $result_delete = $s3->deleteObject(array(
+    'Bucket' => $bucket,
+    'Key' => urldecode($filename)
+  ));
+  return $result_delete;
 }
 
 ?>

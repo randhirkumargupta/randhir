@@ -382,16 +382,13 @@ function itg_image_croping_edit_tags() {
   $fid = $_POST['tagid'];
   $tag = $_POST['name'];
   $tag_url = $_POST['url'];
-
   $type = $_POST['type'];
-
   $inserted_data = db_update('image_tags')->fields(array(
         'tag_title' => $tag,
         'tag_url' => $tag_url,
       ))->condition('id', $fid, '=')
       ->execute();
   if ($inserted_data) {
-
     $return = array('status' => '1', 'id' => $inserted_data);
     print json_encode($return);
   }
