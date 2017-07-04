@@ -58,6 +58,8 @@ function itg_flag_details() {
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
   $dtag = $_POST['dtag'];
+  $datatype = $_POST['datatype'];
+  
   if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
     $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
@@ -94,7 +96,7 @@ function itg_flag_details() {
     }
   }
   if (empty($nid)) {
-    itg_flag_insert_count($nd_id, $typ, $pre_count);
+    itg_flag_insert_count($nd_id, $typ, $pre_count, $datatype);
     if (in_array('Front User', $user->roles) && $typ == 'like_count') {
       itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
     }

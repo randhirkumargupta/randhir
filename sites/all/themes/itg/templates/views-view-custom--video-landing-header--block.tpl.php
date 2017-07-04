@@ -389,7 +389,10 @@ $uri = base64_encode($actual_link);
                 <?php
                 if (function_exists(itg_event_backend_highlights_like_dislike)) {
                   $val = arg(1);
-                  print itg_event_backend_highlights_like_dislike($val);
+                  if(function_exists('itg_common_get_node_type')) {
+                        $datatype = itg_common_get_node_type(arg(1));
+                  }
+                  print itg_event_backend_highlights_like_dislike($val, $datatype);
                 }
                 ?>
               </div>
