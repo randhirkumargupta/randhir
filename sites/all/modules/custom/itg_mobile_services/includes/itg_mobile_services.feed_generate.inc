@@ -680,10 +680,12 @@ function get_vars_from_mobile_feed_pattern($text) {
 function itg_mobile_services_save_files($node, $xml, $feed_dir, $full_file_path) {
 
   $frequency_date_array = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
+  $path_array = explode('/', $full_file_path);
   $today_date = date('Y-m-d');
-
-  if ($frequency_date_array[0] <= $today_date) {
-    file_save_data($xml, $feed_dir . $full_file_path, FILE_EXISTS_REPLACE);
+  $directory = $feed_dir . $path_array[1] . "/" . $path_array[2] . "/" . $path_array[3] . "/";
+  if (strtotime($frequency_date_array[0]) <= strtotime($today_date)) {
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
+    file_save_data($xml, $directory . end($path_array), FILE_EXISTS_REPLACE);
     drupal_set_message(t('Your xml has been generated'));
   }
 }

@@ -77,12 +77,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-      <h1  title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1  title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 title="<?php echo strip_tags($content['story_title']);?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
       <?php } ?>
       <?php
       //code for Associate lead
@@ -116,18 +116,6 @@ if (!empty($content)):
                   <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
                   <span><?php print date('F j, Y', $node->created); ?>   </span>
               </div>
-            <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-              <div class="briefcase mhide">
-                <h4><?php print t('Highlights'); ?></h4>
-                <ul>
-                  <?php
-                  foreach ($node->field_story_highlights['und'] as $high) {
-                    print '<li>' . $high['value'] . '</li>';
-                  }
-                  ?>
-                </ul>
-              </div>
-            <?php }  ?>
           </div>
         <?php } ?>
         <!-- For buzzfeed section start -->
@@ -249,7 +237,8 @@ if (!empty($content)):
                   <?php } ?>
 
                   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
-                    <div class="photoby">
+                    <?php if(empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+                      <div class="photoby">
                       <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
                         <div class="story-img-rating">
                           <?php
@@ -263,35 +252,15 @@ if (!empty($content)):
                         <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
                       <?php } ?>
                     </div>
-                  <?php } ?>     
+                  <?php } }?>     
 
 
 
                 </div>
-                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
+                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
                   <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
                 <?php } ?>                            
               </div>
-
-              <?php
-              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
-                  ?>
-                  <div class="briefcase desktop-hide">
-                    <h4><?php print t('Briefcase'); ?></h4>
-                    <ul>
-                      <?php
-                      foreach ($node->field_story_highlights['und'] as $high) {
-                        print '<li>' . $high['value'] . '</li>';
-                      }
-                      ?>
-                    </ul>
-                  </div>
-                  <?php
-                }
-              }
-              ?>
-
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating">
@@ -511,7 +480,7 @@ if (!empty($content)):
               print render($block['content']);
               ?>
             </div>
-            <!-- For buzzfeed section end --> 
+            <!-- For buzzlfeed section end --> 
             <?php
           }
           ?>

@@ -5,6 +5,31 @@
 Drupal.behaviors.itg_widgets = {
     attach: function (context, settings) {
         var base_url = settings.itg_widget.settings.base_url;
+        
+        //code for section-card-refresh
+        
+        var setttl = settings.itg_widget.settings.setttl;
+        if (setttl != 0) {
+            setInterval(function () {
+                var card_val = jQuery(".section-ordering").attr('id');
+                var block_id = card_val.split('_');
+                var widget_style = jQuery(this).attr('data-id');
+
+                jQuery.ajax({
+                    url: base_url + "/section-card-refresh",
+                    method: 'get',
+                    data: {card_val: card_val, widget_style: widget_style},
+                    beforeSend: function() {
+                        //jQuery('.itg-ajax-loader').show();
+                    },
+                    success: function(data) {
+                        jQuery('#'+block_id[2]).html(data);
+                    }
+                });
+            }, setttl * 1000);
+       }
+        
+        
         jQuery("div.big-news-content-videogallery a.has-ajax-big-story").click(function () {
             jQuery('.big-story-col-1 .loading-popup').show();
             var nid = jQuery(this).attr("data-nid");

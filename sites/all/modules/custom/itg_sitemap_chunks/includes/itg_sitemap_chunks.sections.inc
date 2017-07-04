@@ -19,7 +19,7 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     '#tree' => TRUE,
     '#theme' => 'table',
     '#attributes' => array('class' => array("views-table")),
-    '#header' => array(t('Section Name'), t('Frequency'), t('Type'), t('Action')),
+    '#header' => array(t('Section Name'), t('Day'),  '<div class="hide">' . t('Type') . '</div>', t('Action')),
     '#rows' => array(),
   );
   for ($i = 0; $i < count($sections); $i++) {
@@ -45,13 +45,17 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
       '#id' => 'section-' . $i . '-type',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array("day", "month", "year")),
-      '#default_value' => !empty($db_data->frequency_type) ? $db_data->frequency_type : '',
+      //'#default_value' => !empty($db_data->frequency_type) ? $db_data->frequency_type : '',
+      '#default_value' => 'day',
+      '#prefix' => '<div class="hide">',
+      '#suffix' => '</div>',
     );
-    
-    if(!empty($db_data->section_tid)) {
+
+    if (!empty($db_data->section_tid)) {
       $site_map_link = itg_sitemap_chunks_create_valid_url($sections[$i]->name) . '-sitemap.xml';
-      $action_link = l("View" ,$site_map_link , array("attributes" => array("target" => "_blank")));
-    } else {
+      $action_link = l("View", $site_map_link, array("attributes" => array("target" => "_blank")));
+    }
+    else {
       $action_link = t("N/A");
     }
     // Prepare frequency type

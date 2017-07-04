@@ -43,9 +43,8 @@ $uri = base64_encode($actual_link);
             if (!empty($videoids) && $video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] != "migrated") {
               $hide_player = "";
               $description_slider = "";
-              $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
+              $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images pointer-event-none"><ul>';
               $description_slider = '<div class="video-slider-description"><ul>';
-
               foreach ($videoids as $keys => $video_value) {
                 if ($keys != 0) {
                   $hide_player = 'hide-player';
@@ -79,6 +78,10 @@ $uri = base64_encode($actual_link);
                   </div>
                   <?php if ($keys == 0) { ?>
                     <script>
+                      
+                      jQuery(window).load(function() {
+                        jQuery('.video-slider-images').removeClass('pointer-event-none');
+                      });
                       setTimeout(function() {
                         var player_<?php echo $keys; ?> = DM.player(
                                 document.querySelector('#video_<?php echo $keys; ?>'),
@@ -101,20 +104,17 @@ $uri = base64_encode($actual_link);
                           player_<?php echo $keys + 1; ?>.play();
                         });
                         jQuery('.thumb-video').click(function() {
-
                           var getvideoindex = jQuery(this).attr('data-image-index');
                           //if (getvideoindex == 0) {
-                            var playerId = 'player_' + getvideoindex;
-                            jQuery('.thumb-video').each(function() {
-                              var getindex = jQuery(this).attr('data-image-index');
-                             
+                          var playerId = 'player_' + getvideoindex;
+                          jQuery('.thumb-video').each(function() {
+                            var getindex = jQuery(this).attr('data-image-index');
+                            var playerStopId = 'player_' + getindex;
+                            (eval(playerStopId)).pause();
 
-                                var playerStopId = 'player_' + getindex;
-                                (eval(playerStopId)).pause();
-                              
-                            });
-                            (eval(playerId)).play();
-                         // }
+                          });
+                          (eval(playerId)).play();
+                          // }
                         });
                       }, 500);
                     </script>
@@ -141,12 +141,6 @@ $uri = base64_encode($actual_link);
                               }
                       );
 
-                      player_<?php echo $keys; ?>.addEventListener('video_end', function(event) {
-                        jQuery('.video-header-left .video').slick('slickGoTo', <?php echo $keys + 1; ?>);
-                        player_<?php echo $keys + 1; ?>.play();
-                      });
-                      
-
                     </script>
 
                   <?php } ?>
@@ -171,7 +165,7 @@ $uri = base64_encode($actual_link);
               drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
               $hide_player = "";
               $description_slider = "";
-              $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
+              $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images "><ul >';
               $description_slider = '<div class="video-slider-description"><ul>';
               foreach ($videoids as $keys => $video_value) {
                 if ($keys != 0) {
@@ -215,9 +209,9 @@ $uri = base64_encode($actual_link);
                             title: "<?php print $row['title']; ?>",
                             image: "<?php echo $image_url; ?>",
                             sources: [
-      //                                                            {
-      //                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
-      //                                                            },
+                              //                                                            {
+                              //                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
+                              //                                                            },
                               {
                                 file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                               }]
@@ -273,7 +267,7 @@ $uri = base64_encode($actual_link);
 
                 if (empty($opt['status']) || $opt['status'] == 0) {
                   ?> 
-                  <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
+                  <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i><span><?php print t('Watch Later'); ?></span></a></li>
                   <?php
                 }
                 else {
@@ -282,18 +276,19 @@ $uri = base64_encode($actual_link);
                   <?php
                 }
               }
-              else { ?>
-              <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
-              <?php
-                }
+              else {
+                ?>
+                <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
+                <?php
+              }
               ?>
               <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span><?php print t('Share'); ?></span></a></li>
-              <li><a class="user-activity def-cur-pointer" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
+              <li><a class="user-activity def-cur-pointer" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
               <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span><?php print t('Email'); ?></span></a></li>
               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                 <div class="show-embed-code-div">
                   <div class="copy-sample-code">
-                    <textarea readonly><iframe class="video_node_<?php echo $argum;?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                    <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                   </div>
                 </div>
               </li>
@@ -312,7 +307,7 @@ $uri = base64_encode($actual_link);
                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
               <?php else: ?>
                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-              <?php endif; ?>
+  <?php endif; ?>
 
             </ul>
           </div>
@@ -343,7 +338,7 @@ $uri = base64_encode($actual_link);
 
                   if (empty($opt['status']) || $opt['status'] == 0) {
                     ?> 
-                    <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i></a></li>
+                    <li class="later"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-clock-o"></i></a></li>
                     <?php
                   }
                   else {
@@ -353,18 +348,18 @@ $uri = base64_encode($actual_link);
                   }
                 }
                 else {
-                 ?>
-                <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
-                <?php    
+                  ?>
+                  <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span><?php print t('Watch Later'); ?></span> </a></li>
+                  <?php
                 }
                 ?>
                 <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
-                <li><a class="user-activity def-cur-pointer" rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
+                <li><a class="user-activity def-cur-pointer" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
                 <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                      <textarea readonly><iframe class="video_node_<?php echo $argum;?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                      <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                     </div>
                   </div>
                 </li>
@@ -383,11 +378,11 @@ $uri = base64_encode($actual_link);
                   <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                 <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-                <?php endif; ?>
+  <?php endif; ?>
 
               </ul>
             </div>
-            <?php print $description_slider; ?>
+  <?php print $description_slider; ?>
             <p class="upload-date"><?php print $row['timestamp']; ?></p>
             <div class="section-like-dislike">
               <div id="btn-div">
@@ -402,7 +397,7 @@ $uri = base64_encode($actual_link);
             </div>
           </div>
         </div>
-        <?php //$row['field_story_expert_description'];      ?>
+  <?php //$row['field_story_expert_description'];       ?>
         <div class="col-md-4 video-header-right">
           <div class="ads">
             <?php
@@ -412,8 +407,8 @@ $uri = base64_encode($actual_link);
             ?>
           </div>
           <div class="latest_video">
-			<?php echo views_embed_view('video_landing_header', 'block_1');?>
-		  </div>
+  <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
+          </div>
         </div>
       </div>
     </div>
@@ -474,91 +469,3 @@ $uri = base64_encode($actual_link);
     });
   });
 </script>
-<style>
-	#block-views-video-landing-header-block .video-header-right {
-	  position: relative;
-		height: auto !important;
-		background: #282828;
-		padding: 40px 0 15px;
-	}
-	#block-views-video-landing-header-block .video-header-right .ads {
-	  width: 300px;
-	  height: 250px;
-	  background: #363636;
-	  margin: 0px auto 30px;
-	  position: relative;
-	  bottom: 0;
-	}
-	.view-video-landing-header .defalt-bar {
-  max-width: 100%;
-  position: relative;
-  overflow: auto;
-  height:360px;
-}
-.view-video-landing-header .photo-list {
-  max-height: inherit;
-  overflow-y: hidden;
-  margin: 0 -10px !important;
-}
-/*=============Vide Right Section*/
-#block-views-video-landing-header-block .latest_video .photo-list li{ float: left; width:100%; padding:18px 10px; box-sizing: border-box; border-bottom:1px solid #3e3e3e}
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure{ margin: 0 0px 0 15px;float: right}
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p{ font:400 14px/20px "Roboto", sans-serif; color:#b4b4b4}
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed p a{ color:#b4b4b4}
-#block-views-video-landing-header-block .latest_video .view-header h3{font:500 14px/35px "Roboto", sans-serif; margin-bottom:10px; background:#131313; height:35px; color:#fff; position: relative; border-bottom:1px solid #3b3b3b;padding: 0 10px;}
-#block-views-video-landing-header-block .latest_video .view-header h3 .fa-caret-down{position: absolute;   right: 10px; top: 11px; font-size: 14px;}
-#block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_draggerRail{ background-color:#100e0f; width:16px;}
-#block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ width:12px; background-color:#b8b8b8}
-#block-views-video-landing-header-block .view-content .photo-list li .tile figure figcaption{ padding:1px 5px;}
-#block-views-video-landing-header-block .latest_video{padding: 0 4px 0 30px;}
-
-@media (max-width: 1024px) {
-.view-video-landing-header .defalt-bar{ float: left; height: 225px !important;}
-.latest_video { float: left;  width: 500px; margin-bottom:15px;}
-#block-views-video-landing-header-block .latest_video .photo-list li .tile.GoogleAnalyticsET-processed figure{ width:120px;}
-#block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_draggerRail{width:7px;}
-#block-views-video-landing-header-block .latest_video .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ width:3px;}
-#block-views-video-landing-header-block .video-header-right{ padding:15px 15px 0; margin-top:30px;}
-#block-views-video-landing-header-block .latest_video{ padding:0}
-#block-views-video-landing-header-block .video-header-left .social-likes ul li a{padding: 32.4px 5px 20.2px 10px !important;}
-}
-
-@media (max-width: 800px) {
-.latest_video { float: left; width: 400px;}
-#block-views-video-landing-header-block .video-header-left .social-likes ul li a { padding:10px!important;}
-}
-
-@media (max-width: 767px) {
-	#block-views-video-landing-header-block .latest_video{padding: 30px 0 0;float: left; width:100%;} 
-	.view-video-landing-header .defalt-bar{ overflow: inherit; height: auto !important}
-	#block-views-video-landing-header-block .latest_video .photo-list{ position: relative; padding:40px 0}  
-	#block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-up{ position: absolute; top:5px; left:49%; font-size: 25px; font-weight: normal;}
-	#block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-down{ position: absolute; bottom:5px; left:49%;font-size: 25px; font-weight: normal;}
-	#block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-up.slick-disabled{ opacity:0.3}
-	#block-views-video-landing-header-block .latest_video .photo-list .fa-chevron-down.slick-disabled{opacity:0.3}
-	#block-views-video-landing-header-block .latest_video .photo-list li{ width:100% !important}
-	#block-views-video-landing-header-block .video-header-left .social-likes ul li a { padding:10px!important;}
-}
-
-@media screen and (min-width: 768px) {
-	#block-views-video-landing-header-block .video-header-right{ margin-top:25px;}
-}
-
-@media (min-width: 320px) {
- #block-views-video-landing-header-block .video-header-right{ height: auto; background:#282828}
-}
-
-@media (max-width: 767px) {
-	#block-views-video-landing-header-block .latest_video{padding: 30px 0;} 
-}
-
-@media only screen and (min-width: 769px){
-#block-views-video-landing-header-block .video-header-right {
-    height: 100% !important; 
-	 background:#282828;
-    padding-top:40px;
-    margin-top:0px;
-	padding-bottom:15px !important
-}
-}
-</style>

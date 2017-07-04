@@ -1289,8 +1289,11 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
   <?php } else {
     ?>
     <?php if (!empty($data)) : global $base_url; ?>
-    <div class="section-ordering">
-      <?php
+    <div class="section-ordering" data-id="<?php print $widget_style;?>" id="card_<?php print $itg_section_id;?>_<?php print $block_id;?>">
+<!--      <div class="itg-ajax-loader">
+    loader...
+  </div>-->
+      <?php      
       if (!empty($data)) {
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {

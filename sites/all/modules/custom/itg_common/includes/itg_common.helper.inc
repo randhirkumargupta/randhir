@@ -108,6 +108,7 @@ define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 define('ITGDATE', 'd/m/Y');
 define('ITG_INDIATODAY_SITENAME_XML', 'India Today');
 define('FRONT_THEME_NAME', 'itg');
+define('AMP_THEME_NAME', 'amptheme');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 //define('CATEGORY_MANAGMENT', 4);
