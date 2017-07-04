@@ -1,0 +1,8 @@
+name = ITG Funalytics Import
+description = "ITG Funalytics Import"
+core = 7.x
+package = ITG
+
+dependencies[] = migrate
+dependencies[] = itg_dbmigrate
+files[] = inc/itg_migrate.funanlytics.inc
