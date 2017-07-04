@@ -50,7 +50,7 @@ function be_lucky_today_form($form, &$form_state) {
 }
 
 /**
- * 
+ * This function is used to open Ctool Popup
  * @param Array $form
  * @param Array $form_state
  * @return Array
@@ -78,7 +78,7 @@ function be_lucky_today_home($form, $form_state) {
 }
 
 /**
- * 
+ * Be Lucky Today step 1
  * @param Array $form
  * @param Array $form_state
  * @return Array
@@ -118,7 +118,7 @@ function be_lucky_today_registration1($form, $form_state) {
 }
 
 /**
- * 
+ * Be Lucky Today step 2
  * @param Array $form
  * @param Array $form_state
  * @return Array
@@ -154,7 +154,7 @@ function be_lucky_today_registration2($form, $form_state) {
 }
 
 /**
- * 
+ * Be Lucky Today step 3
  * @param Array $form
  * @param Array $form_state
  * @return Array
@@ -295,7 +295,7 @@ function mobile_validation_ajax_callback($form, &$form_state) {
 }
 
 /**
- * 
+ * This function is used to subscribe magazine
  * @global String $base_url
  * @param array $form
  * @param array $form_state
@@ -303,7 +303,7 @@ function mobile_validation_ajax_callback($form, &$form_state) {
  */
 function be_lucky_today_subscribe($form, $form_state) {
     $payment_opt = array(
-      0 => 'Select Here',
+      0 => t('Select Here'),
       'paytm' => t('Payment by Paytm Cash'),
       'BillDesk' => t('Debit Cards/Credit Cards/Net Banking/Cash Card')
     );
@@ -392,7 +392,7 @@ function be_lucky_today_form_submit($form, &$form_state) {
 }
 
 /**
- * 
+ * This form call after magazine subscribe
  * @param array $form
  * @param array $form_state
  */
@@ -408,9 +408,9 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     }
     $selected_magazine_name = $form_state['input']['magazine_name'];
     $magazine1 = $form_state['input']['magazine'];
-    $magazineName = explode(":", $magazine1);
-    $magazine = $magazineName[0];
-    $magazine2 = $magazineName[1];
+    $magazine_name = explode(":", $magazine1);
+    $magazine = $magazine_name[0];
+    $magazine2 = $magazine_name[1];
     if (!empty($selected_magazine_name)) {
         $magazine = $selected_magazine_name;
     }
@@ -433,7 +433,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     $query = db_insert('survey')->fields($data);
     $key = $query->execute();
 
-    $data['magazine'] = $magazine; //$form_state['input']['magazine'];
+    $data['magazine'] = $magazine; 
     $data['magazine2'] = $magazine2;
     $data['user_id'] = $key;
     $data['product_id'] = 161;
@@ -502,9 +502,6 @@ function be_lucky_today_get_header($form, &$form_state) {
     $stages[$current_step]['class'] = array('active');
 
     $stages_list = theme('item_list', array('items' => $stages));
-//    $form['header'] = array(
-//      '#markup' => '<h1>Be Lucky Today</h1>'
-//    );
     $form['header2'] = array(
       '#type' => 'fieldset',
       '#title' => '',
@@ -536,7 +533,7 @@ function be_lucky_today_move_to_next_stage($form, &$form_state) {
     }
 }
 
-/**
+/** This form is used for Increase your chance
  * {@inheritdoc}
  */
 function be_lucky_form($form, &$form_state) {
