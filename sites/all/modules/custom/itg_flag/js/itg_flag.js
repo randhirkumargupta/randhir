@@ -86,7 +86,8 @@ jQuery(document).ready(function () {
         var nd_id = jQuery(this).attr('data-rel');
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
-        var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
+        var datatype = jQuery(this).attr('data-type');
+        var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag + "&datatype=" + datatype;
 
         jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/flag-details-ajax',
