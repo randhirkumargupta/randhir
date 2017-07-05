@@ -857,7 +857,7 @@ function get_states_from_country($country = COUNTRY_INDIA_TID) {
     $result->fields('tt', array('tid', 'name'));
     $result->leftJoin('taxonomy_vocabulary', 'tv', 'tt.vid = tv.vid');
     $result->leftJoin('field_data_field_state_county', 'fsc', "fsc.entity_id = tt.tid AND fsc.entity_type = 'taxonomy_term'");
-    $result->condition('fsc.field_state_county_tid', 3383, '=');
+    $result->condition('fsc.field_state_county_tid', COUNTRY_INDIA_TID, '=');
     $result->condition('tv.machine_name', 'state', 'LIKE');
     $data = $result->execute()->fetchAll();
     $state = array();
