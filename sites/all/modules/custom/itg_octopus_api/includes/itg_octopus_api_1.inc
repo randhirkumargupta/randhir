@@ -12,7 +12,6 @@
  * Implement itg_pti_content
  */
 function itg_octopus_api_rundown() {
-  watchdog('octopus rundown', 'started ......');
   $file_path = 'sites/default/files';
   global $base_url, $user;
   header('Content-Type: text/html; charset=UTF-8');
@@ -20,25 +19,44 @@ function itg_octopus_api_rundown() {
   //$direc = get_dir_content($file_path . '/octopus/testrundown/');
 
   $direc = array();
-  $direc['current'] = variable_get('itg_octopus_url_current');
-  $direc['next1'] = variable_get('itg_octopus_url_next1');
-  $direc['next2'] = variable_get('itg_octopus_url_next2');
+  $direc[] = variable_get('itg_octopus_url_current');
+  $direc[] = variable_get('itg_octopus_url_next1');
+  $direc[] = variable_get('itg_octopus_url_next2');
 
 //p($direc);
   if (empty($direc)) {
     watchdog('ITG otopus error', t('OOPS, Octopus rundown URLs are missing'));
   }
 
-  foreach ($direc as $key => $xm_file) {
+  foreach ($direc as $xm_file) {
     $xml_file_path = $xm_file;
+    //p($xml_file_path);
+    //$xml_filename = basename($xml_file_path);
+    //$rundown_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+
     $rundown_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-    $rundown_id = (int) $rundown_xml->rundown->rundownId;
+    //p($rundown_xml);
+
+    $rundown_id = (string) $rundown_xml->rundown->rundownId;
     $rundown_title = (string) $rundown_xml->rundown->rundownTitle;
     $rundown_start = (string) $rundown_xml->rundown->rundownStart;
     $rundown_type = (string) $rundown_xml->rundown->rundownType;
     $exported = strtotime((string) $rundown_xml->exported);
     $exported_by = (string) $rundown_xml->exportedBy;
     $exist_rundown = itg_octopus_api_check_rundown($rundown_id);
+
+
+    $mnmnm = array(
+      'exported' => $exported,
+      'exported_by' => $exported_by,
+      'rundown_type' => $rundown_type,
+      'rundown_id' => $rundown_id,
+      'rundown_title' => $rundown_title,
+      'rundown_start' => $rundown_start,
+      'rundown_start_timestamp' => strtotime($rundown_start),
+    );
+
+    //if (empty($exist_rundown)) {
     $qry = db_merge('itg_rundown') // Table name no longer needs {}
         ->key(array('rundown_id' => $rundown_id))
         ->fields(array(
@@ -49,15 +67,16 @@ function itg_octopus_api_rundown() {
           'rundown_title' => $rundown_title,
           'rundown_start' => $rundown_start,
           'rundown_start_timestamp' => strtotime($rundown_start),
-          'type' => $key,
         ))
         ->execute();
-    
+    //}
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
       foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
         $element_type = $slug->script->main->body->element->elementType;
-        if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
+        //pr(variable_get('itg_octopus_rundown_element_type_name', 'pkg'));
+        if (/* $slug->action == 'INSERT' && */ $element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
+          //p($slug);
           $story_id = (int) $slug->storyId;
           $action = (string) $slug->action;
           $story_title = (string) $slug->storyTitle;
@@ -79,6 +98,12 @@ function itg_octopus_api_rundown() {
           $commands = (string) $slug->script->main->body->element->clip->commands;
           $text = htmlentities($slug->script->main->body->element->text);
           $story_custom = json_encode($slug->storyCustom); // Storing the complete story
+//        foreach ($slug->storyCustom as $key => $value) {
+//          $arr[$value->attributes()->label] = $value;
+//          $arr['rundown_id'] = $rundown_id;
+////          $arr['storyid'] = $story_id;
+//        }
+          //$storycustom_details = serialize($arr);
           $slug_exist = itg_octopus_api_check_slug($story_id, $rundown_id);
           if (empty($slug_exist)) {
             db_insert('itg_octopus_slug')
@@ -95,8 +120,6 @@ function itg_octopus_api_rundown() {
                   'story_modified_timestamp' => strtotime($story_modified),
                   'story_modified_by' => $story_modified_by,
                   'story_custom' => $story_custom,
-                  'category' => $slug->storyCustom[1],
-                  'location' => $slug->storyCustom[0],
                 ))->execute();
 
             db_insert('itg_element_clip')
@@ -117,7 +140,12 @@ function itg_octopus_api_rundown() {
                   'new_element_id' => 12,
                   'commands' => $commands,
                 ))->execute();
-
+//          db_insert('itg_octopus_slug_storycustom')
+//              ->fields(array(
+//                'rundown_id' => $rundown_id,
+//                'storyid' => $story_id,
+//                'story_custom_data' => $storycustom_details,
+//              ))->execute();
           }
           elseif ($slug_exist[0]->story_modified != $story_modified) {
             db_update('itg_octopus_slug')
@@ -132,8 +160,6 @@ function itg_octopus_api_rundown() {
                   'story_modified_timestamp' => strtotime($story_modified),
                   'story_modified_by' => $story_modified_by,
                   'story_custom' => $story_custom,
-                  'category' => $slug->storyCustom[1],
-                  'location' => $slug->storyCustom[0],
                 ))
                 ->condition('storyid', $story_id)
                 ->condition('rundown_id', $rundown_id)
@@ -175,6 +201,7 @@ function itg_octopus_api_rundown() {
   }
 }
 
+//die('done');
 
 /**
  * Implements function for check existing rundown table
@@ -246,12 +273,13 @@ function itg_octopus_api_rundown_listing() {
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
+//p($result);
   # configure the table header columns
   $header = array(
-    array('data' => t('Sn.')),
-    array('data' => t('Video ID')),
-    array('data' => t('Video Title')),
-    array('data' => t('Modified Date')),
+    array('data' => t('ID'), 'field' => 'ios.id', 'sort' => 'ASC'),
+    array('data' => t('Story ID'), 'field' => 'ios.storyid', 'sort' => 'ASC'),
+    array('data' => t('Story Title'), 'field' => 'ios.story_title', 'sort' => 'ASC'),
+    array('data' => t('Modified Date'), 'field' => 'ios.story_modified', 'sort' => 'ASC'),
     array('data' => t('Actions')),
   );
 
@@ -262,68 +290,32 @@ function itg_octopus_api_rundown_listing() {
     $items_per_page = 20;
   }
 
-
-
-  $pagination = '';
-  $current_rundown = '';
-
-  if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
-    $pagination.= '<li class="pager-current">'.t(' Current ', array('attributes' => array('class' => 'disabled'))).'</li>';
-    $current_rundown = 'current';
+  if (isset($_GET['title']) && !empty($_GET['title'])) {
+    $query = db_select('itg_octopus_slug', 'ios')
+            ->fields('ios')
+            ->condition('story_title', $_GET['title'], '=')
+            ->extend('TableSort')
+            ->orderByHeader($header)
+            ->extend('PagerDefault')->limit($items_per_page);
   }
   else {
-    $pagination.= '<li class="pager-item">'.l(' Current ', 'rundown/listing', array('query' => array('rundowntype' => 'current'))).'</li>';
+    $query = db_select('itg_octopus_slug', 'ios')
+            ->fields('ios')
+            ->extend('TableSort')
+            ->orderByHeader($header)
+            ->extend('PagerDefault')->limit($items_per_page);
   }
-
-  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
-    $pagination.= '<li class="pager-current">'.t(' Next1 ', array('attributes' => array('class' => 'disabled'))).'</li>';
-    $current_rundown = 'next1';
-  }
-  else {
-    $pagination.= '<li class="pager-item">'.l(' Next1 ', 'rundown/listing', array('query' => array('rundowntype' => 'next1'))).'</li>';
-  }
-
-  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
-    $pagination.= '<li class="pager-current">'.t(' Next2 ', array('attributes' => array('class' => 'disabled'))).'</li>';
-    $current_rundown = 'next2';
-  }
-  else {
-    $pagination.= '<li class="pager-item">'.l(' Next2 ', 'rundown/listing', array('query' => array('rundowntype' => 'next2'))).'</li>';
-  }
-
-  if (empty($current_rundown))
-    $current_rundown = 'current';
-
-  $query = db_select('itg_rundown', 'rund');
-  $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
-  $query->fields('ios');
-  if (isset($_GET['title']) && !empty($_GET['title'])) { // Title
-    $query->condition('ios.story_title', $_GET['title'], '=');
-  }
-  
-  if (isset($_GET['video_id']) && !empty($_GET['video_id'])) { // For Video ID
-    $query->condition('ios.storyid', $_GET['video_id'], '=');
-  }
-  
-  if (isset($_GET['category']) && !empty($_GET['category'])) { // For category
-    $query->condition('ios.category', $_GET['category'], '=');
-  }
-      
-  if (isset($current_rundown) && !empty($current_rundown)) {
-    $query->condition('rund.type', $current_rundown, '=');
-  }
-  $query->extend('TableSort')
-      ->orderByHeader($header)
-      ->extend('PagerDefault')->limit($items_per_page);
-
   $result = $query->execute();
   $rows = array();
-  $sn = 1;
   foreach ($result as $row) {
+    //$elementtype = db_query("SELECT element_type from {itg_element_clip} WHERE storyid = :storyid", array(":storyid" => $row->storyid))->fetchField();
+    //if ($elementtype == 'pkg') {
     $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown/listing');
+    //}
+    //$link = '<a class="colorbox-load" href="' . $base_url . '/slug-details/' . $row->storyid . '?width=300&height=120">' . t('Video Details') . '</a>' . ' | <a href="#">' . $ctype_text . '</a>';
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('Video Details') . '</a>' . ' | <a href="#">' . $ctype_text . '</a></div>';
     $rows[] = array(
-      array('data' => $sn++),
+      array('data' => $row->id),
       array('data' => $row->storyid),
       array('data' => $row->story_title),
       array('data' => format_date(strtotime($row->story_modified), $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
@@ -332,8 +324,76 @@ function itg_octopus_api_rundown_listing() {
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_form');
 
+  $adjacents = 5;
+
+  $query = db_select('itg_rundown', 'r')
+      ->fields('r', array('rundown_id'));
+  $result = $query->execute()->rowCount();
+
+  $total_pages = $result;
+
+  $limit = 1;                                //how many items to show per page
+  $page = $_GET['page'];
+
+  if ($page)
+    $start = ($page - 1) * $limit;          //first item to display on this page
+  else
+    $start = 0;                             //if no page var is given, set start to 
+    /* Get data. */
+
+  $query = db_select('itg_rundown', 'r')
+      ->fields('r', array('rundown_id'));
+  $query->range($start, $limit);
+
+  $result = $query->execute();
+
+  // $result = $mysqli->query("select * from posts order by id  desc LIMIT $start, $limit");
+
+  /* Setup page vars for display. */
+  if ($page == 0)
+    $page = 1;                  //if no page var is given, default to 1.
+  $prev = $page - 1;                          //previous page is page - 1
+  $next = $page + 1;                          //next page is page + 1
+  $lastpage = ceil($total_pages / $limit);      //lastpage is = total pages / items per page, rounded up.
+  //p($lastpage);
+  $lpm1 = $lastpage - 1;                      //last page minus 1
+
+  $pagination = "";
+  if ($lastpage > 1) {
+    $pagination .= "<div class=\"pagination\">";
+    //previous button
+    if ($page > 1)
+      $pagination.= l('« previous ', 'rundown/listing', array('query' => array('page' => $prev)));
+    else
+      $pagination.= t('« previous ', array('attributes' => array('class' => 'disabled')));
+
+    //next button
+    if ($page < $lastpage)
+      $pagination.= l('next » ', 'rundown/listing', array('query' => array('page' => $next)));
+    else
+      $pagination.= t('next » ', array('attributes' => array('class' => 'disabled')));
+    $pagination.= "</div>\n";
+  }
+//p($pagination);
+  $q = db_select('itg_rundown', 'r')
+      ->fields('r', array('rundown_id'));
+  $query->range($start, $limit);
+
+  $result = $query->execute();
+
+  while ($row = $result->fetchAll()) {
+
+
+// LOOP Code
+  };
+
+
+
+
+  $custom_run_down_paginaton = l('Previous', 'sds') . ' ' . l('Current', 'sds') . ' ' . l('Next', 'sds');
+
   $output = render($itg_octopus_api_form);
-  $output .= '<div class="octopus-pagination"><ul class="pager">'.$pagination.'</ul></div>';
+  $output .= $pagination;
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
   # add the pager
   $output .= theme('pager');
@@ -389,7 +449,6 @@ function slug_details() {
       ->condition('id', $sid, '=');
   $result = $query->execute()->fetchAll();
   $slug_data = reset($result);
-  $slug_data->clip_data = itg_octopus_slug_clip($slug_data);
   print theme('oct_slug_detail', array('result' => $slug_data));
   drupal_exit();
 }
@@ -501,18 +560,4 @@ function itg_octopus_api_rundown_complete_detail($id) {
   unset($result['story_custom_data']['rundown_id']);
   $output = theme('rundown_slug_detail', array('result' => $result));
   return $output;
-}
-
-/**
- * Returns Slug object for clip
- * @param object $slug
- * @return array
- */
-function itg_octopus_slug_clip($slug) {
-  $query = db_select('itg_element_clip', 'ios')
-      ->fields('ios', array('clipobj_id'))
-      ->condition('rundown_id', $slug->rundown_id, '=')
-      ->condition('storyid', $slug->storyid, '=');
-  $result = $query->execute()->fetchAll();
-  return $result;
 }

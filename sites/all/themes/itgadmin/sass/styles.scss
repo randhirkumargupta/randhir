@@ -6150,8 +6150,13 @@ div.node{
 }
 
 [id*="itg-octopus-api-form"]{
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
   .form-type-textfield, .form-type-select{
+    width: 200px;
     padding-left: 0;
+    padding-right: 10px;
     @extend .fleft;
     > label{
       display: block;
@@ -6165,8 +6170,19 @@ div.node{
     .octopus-apply{
       margin-right: 10px;
     }
-    .octopus-reset{
+  }
+  .container-inline-date {
+    clear: none;
+    float: left;
+    width: 120px;
+    .form-type-textfield{
+      width: 100%;
     }
+    > label {
+      display: block;
+    }
+    .date-padding .form-item > label{display: none;}
+    .date-padding input[type="text"]{width: 100%;}
   }
 }
 .node-print_team_integration-form{
@@ -11963,4 +11979,7 @@ fieldset#edit-xmlsitemap{
     float: left;
     margin-right: 10px;
   }
+}
+.edit-image-info{
+  color: #008eb1;
 }

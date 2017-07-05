@@ -85,7 +85,10 @@ function itg_personalization_menu() {
 function itg_personalization_home_page() {
   global $user, $base_url;
   $data = array();
+  $arg = arg();
+  if($arg[1] != 'saved-items') {
   drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
+  }
   // Load user fields
   $user_fields = user_load($user->uid);
 
@@ -599,14 +602,14 @@ function _personalization_show_content() {
         $flag = FALSE;
       }
       
-      if($flag) {
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
-      } else {
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));  
+      if ($flag) {
+        $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
+      }
+      else {
+        $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
       }
     }
-    else
-    {
+    else {
       $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
     }
 
@@ -640,7 +643,7 @@ function _personalization_show_content() {
 
       if (($opt['status'] == '1'))
       {
-        $output.= '<a title = "Unflag" href="javascript:" class="user-activity" rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
+        $output.= '<a title = "Unflag" href="javascript:" class="user-activity" data-rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
       }
 
       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
