@@ -178,8 +178,9 @@ function itg_mobile_services_feed_generator_of_contents($node) {
  * @param string $file_path
  */
 function itg_mobile_services_mail($service_email_address, $file_path) {
+  $file_paths = file_create_url(file_build_uri($file_path));
   $attachment = array(
-    'filepath' => $file_path,
+    'filepath' => $file_paths,
   );
   $params = array(
     'key' => 'itg_syndication',
@@ -196,7 +197,13 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
     ),
   );
   $language = language_default();
-  drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
+  $test = drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
+  if($test) {
+    print "yes";
+  } else {
+    print "no";
+  }
+  exit;
 }
 
 /**
@@ -649,6 +656,22 @@ function itg_mobile_services_cron() {
  */
 function itg_mobile_print_feeds() {
   global $base_url;
+  $to      = 'arunmishra.coder@gmail.com';
+$subject = 'Fake sendmail test';
+$message = 'If we can read this, it means that our fake Sendmail setup works!';
+$headers = 'From: myemail@egmail.com' . "\r\n" .
+           'Reply-To: myemail@gmail.com' . "\r\n" .
+           'X-Mailer: PHP/' . phpversion();
+
+if(mail($to, $subject, $message, $headers)) {
+    echo 'Email sent successfully!';
+} else {
+    die('Failure: Email was not sent!');
+}
+
+  $test = itg_mobile_services_mail('arunmishra.coder@gmail.com', '/mobile/test/xml/test.xml');
+  print "arun";
+  die();
   $arg = arg();
   $cnt = count($arg) - 2;
   $last = count($arg) - 1;
