@@ -1,6 +1,4 @@
 <?php
-
-define('COUNTRY_INDIA_TID', 3383);
 /**
  * @file
  * The ITG Be Lucky Today

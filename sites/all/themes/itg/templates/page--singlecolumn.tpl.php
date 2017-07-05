@@ -8,17 +8,6 @@
  */
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
-<script>
-window.addEventListener("message", function(ev) {
-    if (ev.data.message === "requestResult") {
-        // ev.source is the opener
-        ev.source.postMessage({ message: "deliverResult", result: true }, "*");
-    }   
-});
-
-</script>
-<?php } ?> 
 <div id="page">
     <header class="header" id="header" role="banner">
             <section class="header-top">
