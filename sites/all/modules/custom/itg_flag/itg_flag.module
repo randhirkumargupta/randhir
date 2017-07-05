@@ -50,7 +50,7 @@ function itg_flag_menu() {
 }
 
 /**
- * Implements itg_flag_details
+ * Implements itg_flag_details().
  */
 function itg_flag_details() {
   global $user;
@@ -117,7 +117,7 @@ function itg_flag_details() {
 }
 
 /**
- * Implements itg_user_activity_front
+ * Implements itg_user_activity_front().
  */
 function itg_user_activity_front() {
   global $user;
