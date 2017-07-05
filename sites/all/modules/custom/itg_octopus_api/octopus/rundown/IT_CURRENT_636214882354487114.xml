@@ -1,0 +1,190 @@
+<octopusExport>
+  <exported>2017-01-31T19:37:14.760</exported>
+  <exportedBy>Octopus-API</exportedBy>
+  <rundown>
+    <rundownType>slugs</rundownType>
+    <rundownId>869341729</rundownId>
+    <rundownTitle>HT 1/31/2017 19:30</rundownTitle>
+    <rundownStart>2017-01-31T19:30:00</rundownStart>
+    <slugs>
+      <slug>
+        <action>INSERT</action>
+        <storyId>870573354</storyId>
+        <storyTitle>TTP STING</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>363</storyDur>
+        <storyCreated>2017-01-30T18:04:42</storyCreated>
+        <storyCreatedBy>Monika Sharma-T03443</storyCreatedBy>
+        <storyModified>2017-01-31T15:01:41</storyModified>
+        <storyModifiedBy>Monika Sharma-T03443</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186298607</elementId>
+                <elementType>jingle</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>IT TO THE POINT SHOWOPEN 24JAN</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>cc170125_0051</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>UPDATE</action>
+        <storyId>872025422</storyId>
+        <storyTitle>SEG TTP 2</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:34:48</storyCreated>
+        <storyCreatedBy>Shivendra Singh -T03266</storyCreatedBy>
+        <storyModified>2017-01-31T19:35:58</storyModified>
+        <storyModifiedBy>Shivendra Singh -T03266</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186298608</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872025425</storyId>
+        <storyTitle>ttp live</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:35:03</storyCreated>
+        <storyCreatedBy>Kunal Malhotra-T01340</storyCreatedBy>
+        <storyModified>2017-01-31T19:35:08</storyModified>
+        <storyModifiedBy>Kunal Malhotra-T01340</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186298609</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>870573354</storyId>
+        <storyTitle>TTP STING</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>363</storyDur>
+        <storyCreated>2017-01-30T18:04:42</storyCreated>
+        <storyCreatedBy>Monika Sharma-T03443</storyCreatedBy>
+        <storyModified>2017-01-31T15:01:41</storyModified>
+        <storyModifiedBy>Monika Sharma-T03443</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186298607</elementId>
+                <elementType>jingle</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>IT TO THE POINT SHOWOPEN 24JAN</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>cc170125_0051</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>869424667</storyId>
+        <storyTitle>Sixth Break at 57 Min</storyTitle>
+        <storySkip>1</storySkip>
+        <storyDur>2250</storyDur>
+        <storyCreated>2017-01-29T19:30:54</storyCreated>
+        <storyCreatedBy>Server</storyCreatedBy>
+        <storyModified>2017-01-29T19:30:54</storyModified>
+        <storyModifiedBy>Server</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186298611</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[[INSERT]
+
+
+]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+    </slugs>
+  </rundown>
+</octopusExport>
