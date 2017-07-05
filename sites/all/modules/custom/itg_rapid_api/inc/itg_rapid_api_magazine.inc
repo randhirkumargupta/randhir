@@ -133,6 +133,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
   $query->fields('esi_file', array('uri'));
 
   $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
 
@@ -168,6 +169,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     // file url
     $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
     //related content
     $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -202,7 +204,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $story_list_array[$listcount]['s_short_desc'] = "$field_story_kicker_text_value";
     $story_list_array[$listcount]['s_comment_count'] = "$comment_cont";
     $story_list_array[$listcount]['s_small_image'] = "$file_small_img_url";
-    $story_list_array[$listcount]['s_large_image'] = "$file_medium_img_url";
+    $story_list_array[$listcount]['s_large_image'] = "$file_large_img_url";
     $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
     $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
     $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
@@ -370,6 +372,7 @@ function getCoverstoriesList() {
   $query->fields('esi_file', array('uri'));
 
   $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
 
@@ -405,6 +408,7 @@ function getCoverstoriesList() {
     // file url
     $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
     //related content
     $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -439,7 +443,7 @@ function getCoverstoriesList() {
     $cover_story_list_array[$loop_count]['s_short_desc'] = "$field_story_kicker_text_value";
     $cover_story_list_array[$loop_count]['s_comment_count'] = "$comment_cont";
     $cover_story_list_array[$loop_count]['s_small_image'] = "$file_small_img_url";
-    $cover_story_list_array[$loop_count]['s_large_image'] = "$file_medium_img_url";
+    $cover_story_list_array[$loop_count]['s_large_image'] = "$file_large_img_url";
     $cover_story_list_array[$loop_count]['s_updated_datetime'] = "$changed_datetime";
     $cover_story_list_array[$loop_count]['s_is_locked'] = "$is_lock";
     $cover_story_list_array[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";

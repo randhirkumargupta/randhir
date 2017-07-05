@@ -38,6 +38,10 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     
     //data array building
     
+    if($datacount > 10){
+        $datacount =10;
+    }
+    
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
@@ -131,6 +135,7 @@ if($term_tree_count){
     $query->fields('esi_file', array('uri'));
 
     $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
@@ -165,6 +170,7 @@ if($term_tree_count){
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -198,7 +204,7 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_rating'] = "";
             $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
             $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
-            $news_list_array[$listcount]['n_large_image'] = "$file_medium_img_url";
+            $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
             $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
       
             // photo list array
@@ -257,7 +263,7 @@ function getPhotolist($nid){
         $photolist_loop[$lcont]['np_credit'] = "$byline";
         $photolist_loop[$lcont]['np_caption'] = "$caption";       
         $lcont++;
-    }    
+    } 
     $photolist['photos'] = $photolist_loop;
     return $photolist;
 }
@@ -303,6 +309,7 @@ function getVideolist($nid){
     $query->fields('esi_file', array('uri'));
 
     $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
@@ -332,6 +339,7 @@ function getVideolist($nid){
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -380,13 +388,15 @@ function getVideolist($nid){
         $videolist['nv_byline'] = "$reporter_node";
         $videolist['nv_short_desc'] = "$field_story_kicker_text_value";
         $videolist['nv_small_image'] = "$file_small_img_url";
-        $videolist['nv_large_image'] = "$file_medium_img_url";
+        $videolist['nv_large_image'] = "$file_large_img_url";
         /*$videolist['nv_is_jwplayer'] = "0";
         $videolist['nv_url'] = "$stream_h264_hd_url";
         $videolist['nv_download_url'] = "$video_path_mp4";*/
         if (strpos($video_path_mp4,'dailymotion') !== false) {
             $videolist['nv_is_jwplayer'] = "1";
-            $videolist['nv_url'] = "$video_path_mp4";
+            $video_path_mp4_ar = explode("video/",$video_path_mp4);
+            $video_path_mp4_val = $video_path_mp4_ar[1];
+            $videolist['nv_url'] = "$video_path_mp4_val";
             $videolist['nv_download_url'] = "$stream_h264_hd_url";
         }
         else{

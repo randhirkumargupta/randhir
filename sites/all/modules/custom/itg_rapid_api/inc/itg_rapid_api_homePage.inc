@@ -132,6 +132,7 @@ function homePageJsonTopstories() {
   $query->fields('esi_file', array('uri'));
 
   $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
 
@@ -169,6 +170,7 @@ function homePageJsonTopstories() {
     // file url
     $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
     $comment_cont = getCommentsCount($nid);
 
     // create date formating
@@ -214,7 +216,7 @@ function homePageJsonTopstories() {
       $data_newslist[$home_list_count]['n_pcategory_name'] = "$term_name";
       $data_newslist[$home_list_count]['n_comment_count'] = "$comment_cont";
       $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$home_list_count]['n_large_image'] = "$file_medium_img_url";
+      $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
       $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
       $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
       $data_newslist[$home_list_count]['n_photo'] = $n_photo;
@@ -318,6 +320,7 @@ function homePageJsonNewslist_india() {
     $query->fields('esi_file', array('uri'));
 
     $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
@@ -353,6 +356,7 @@ function homePageJsonNewslist_india() {
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -393,7 +397,7 @@ function homePageJsonNewslist_india() {
       $data_newslist[$listcount]['n_pcategory_name'] = "India";
       $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
       $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
+      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
 
@@ -522,6 +526,7 @@ function homePageJsonNewslist_world() {
     $query->fields('esi_file', array('uri'));
 
     $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
@@ -557,6 +562,7 @@ function homePageJsonNewslist_world() {
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -597,7 +603,7 @@ function homePageJsonNewslist_world() {
       $data_newslist[$listcount]['n_pcategory_name'] = "World";
       $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
       $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
+      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
 
@@ -803,6 +809,7 @@ function getMagazineStory($issue_date) {
   $query->fields('esi_file', array('uri'));
 
   $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
 
@@ -833,6 +840,7 @@ function getMagazineStory($issue_date) {
     // file url
     $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
     //related content
     $comment_cont = getCommentsCount($nid);
@@ -874,7 +882,7 @@ function getMagazineStory($issue_date) {
     $story[$loop_count]['s_short_desc'] = "$field_story_kicker_text_value";
     $story[$loop_count]['s_comment_count'] = "$comment_cont";
     $story[$loop_count]['s_small_image'] = "$file_small_img_url";
-    $story[$loop_count]['s_large_image'] = "$file_medium_img_url";
+    $story[$loop_count]['s_large_image'] = "$file_large_img_url";
     $story[$loop_count]['s_updated_datetime'] = "$changed_datetime";
     $story[$loop_count]['s_is_locked'] = "$is_lock";
     $story[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
