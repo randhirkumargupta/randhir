@@ -1,6 +1,5 @@
 <?php
-
-define('COUNTRY_INDIA_TID', 3383);
+define('COUNTRY_INDIA_TID', variable_get("country_india_tid", 3383));
 /**
  * @file
  * The ITG Be Lucky Today
@@ -68,7 +67,31 @@ function itg_be_lucky_today_menu() {
       'access callback' => TRUE,
       'file' => 'inc/itg_be_lucky_today.inc',
     );
+    $items['admin/config/administration/be_lucky_today'] = array(
+    'title' => 'Be Lucky Today Setting',
+    'description' => 'Be Lucky Today Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('be_lucky_today_setting'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'type' => MENU_NORMAL_ITEM,
+   );
     return $items;
+}
+
+function be_lucky_today_setting() {
+  $form = array();
+  $form['country_india_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Country India TID'),
+    '#default_value' => variable_get('country_india_tid', 3383),
+    '#size' => 10,
+    '#maxlength' => 10,
+    '#description' => t("Enter TID of Country: India"),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }
 
 /**
