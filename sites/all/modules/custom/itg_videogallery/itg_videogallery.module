@@ -111,7 +111,6 @@ function itg_videogallery_menu() {
       //'access arguments' => array('daily motion video dashboard perm')
   );
 
-
   $items['delete_daily_motion_video/%'] = array(
     'title' => 'Daily Motion Video Dashboard Video Delete',
     'description' => 'Daily Motion Video Dashboard Video Delete',
@@ -124,8 +123,6 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-
-
   return $items;
 }
 
@@ -2035,7 +2032,18 @@ function itg_videogallery_get_file_details() {
     $thumb_url = $api->get(
         '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
-
+    db_insert('itg_solr_video_info')
+        ->fields(array(
+          'fid' => 0,
+          'solr_video_id' => $video_id[0],
+          'solr_video_duration' => $video_id[4],
+          'solr_video_size' => $video_id[1],
+          'property' => $video_id[5],
+          'content_type' => $video_id[6],
+          'is_alredy_used' => 1,
+          'solr_video_thumb' => $video_id[3],
+        ))
+        ->execute();
     if ($thumb_url['embed_url']) {
       $video_id = end(explode('/', $thumb_url['embed_url']));
       $query = db_update('itg_solr_video_info')

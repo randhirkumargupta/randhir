@@ -184,12 +184,12 @@ if (!empty($content)):
                     ?>        
 
                     <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
-                      <i class="fa fa-play-circle"></i>
+                      <!--<i class="fa fa-play-circle"></i>-->
                       <?php
                     }
                     else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
                       ?>                    
-                      <i class="fa fa-camera"></i>
+                      <!--<i class="fa fa-camera"></i>-->
                       <?php
                     }
                     print '</span></a>';
@@ -300,7 +300,6 @@ if (!empty($content)):
                   <?php endif; ?>
                 </div>                            
               </div>
-              <div class="ad-blocker"></div>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];

@@ -19,6 +19,7 @@ global $base_url, $user;
         // Contion to check fucntion isset.
         $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
         if (!empty($menu_manager)) {
+          $emoji_html = '';
           foreach ($menu_manager as $key => $menu_data) :         
             if (function_exists('itg_menu_manager_get_menu')) {
               // Logic to exclude inactive category.
@@ -30,7 +31,7 @@ global $base_url, $user;
                 }
               }
 
-              $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
+              $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent, 'amp');
               $image_class = $menu_link_data['image_class'];
               $link_text = $menu_link_data['link_text'];
               $link_url = $menu_link_data['link_url'];
@@ -45,9 +46,21 @@ global $base_url, $user;
               if(!empty($sponsored_class)) {
                 $color_value = $menu_data['db_data']['bk_color'];
               }
+              preg_match_all('/<img[^>]*>/s', $link_text, $img_tag);
+              if(!empty($img_tag[0][0])) {
+              $html = $img_tag[0][0];
+              $html = str_ireplace(
+                          ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
+                      );
+              $emoji_html = preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
+              $link_text =  $emoji_html;
+              } else {
+              $link_text = $link_text;
+              }
               ?>
               <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
-                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
+                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); 
+                  ?>
               </li>
               <?php
             }
