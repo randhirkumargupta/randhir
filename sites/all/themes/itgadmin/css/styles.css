@@ -6456,8 +6456,15 @@ div.node #comments h2 {
   margin-top: 40px !important;
 }
 
+[id*="itg-octopus-api-form"] {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
 [id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select {
+  width: 200px;
   padding-left: 0;
+  padding-right: 10px;
 }
 [id*="itg-octopus-api-form"] .form-type-textfield > label, [id*="itg-octopus-api-form"] .form-type-select > label {
   display: block;
@@ -6469,6 +6476,20 @@ div.node #comments h2 {
 }
 [id*="itg-octopus-api-form"] .octopus-filter-btn .octopus-apply {
   margin-right: 10px;
+}
+[id*="itg-octopus-api-form"] .container-inline-date {
+  clear: none;
+  float: left;
+  width: 120px;
+}
+[id*="itg-octopus-api-form"] .container-inline-date > label {
+  display: block;
+}
+[id*="itg-octopus-api-form"] .container-inline-date .date-padding > label {
+  display: none;
+}
+[id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"] {
+  width: 100%;
 }
 
 /*.category-manager-selection-details{
