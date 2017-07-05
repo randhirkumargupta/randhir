@@ -32,7 +32,7 @@ function itg_octopus_api_rundown() {
   foreach ($direc as $key => $xm_file) {
     $xml_file_path = $xm_file;
     $rundown_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-    $rundown_id = (string) $rundown_xml->rundown->rundownId;
+    $rundown_id = (int) $rundown_xml->rundown->rundownId;
     $rundown_title = (string) $rundown_xml->rundown->rundownTitle;
     $rundown_start = (string) $rundown_xml->rundown->rundownStart;
     $rundown_type = (string) $rundown_xml->rundown->rundownType;
