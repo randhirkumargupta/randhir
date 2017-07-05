@@ -8,7 +8,7 @@
  */
 
 /**
- * Tmplements hook_init()
+ * Implements hook_init()
  */
 function itg_flag_init() {
   global $user, $base_url;  
