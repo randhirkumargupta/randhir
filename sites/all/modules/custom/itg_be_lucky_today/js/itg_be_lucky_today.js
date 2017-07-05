@@ -10,7 +10,7 @@
  */
 jQuery(document).ready(function () {
     var str_pattern = /^[a-zA-Z]+$/;
-    var address_pattern = /^[-\/a-zA-Z]+$/;
+    var address_pattern = /^[-\/a-zA-Z\s]+$/;
     jQuery('.itg_be_lucky_today .next').click(function (event) {
         if (jQuery('.itg_be_lucky_today [name="yourname"]').val().trim().length < 2) {
             alert(Drupal.t('Please enter your name'));
