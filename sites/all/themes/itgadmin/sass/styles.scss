@@ -6175,10 +6175,13 @@ div.node{
     clear: none;
     float: left;
     width: 120px;
+    .form-type-textfield{
+      width: 100%;
+    }
     > label {
       display: block;
     }
-    .date-padding > label{display: none;}
+    .date-padding .form-item > label{display: none;}
     .date-padding input[type="text"]{width: 100%;}
   }
 }

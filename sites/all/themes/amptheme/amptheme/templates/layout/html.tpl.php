@@ -55,6 +55,7 @@
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
@@ -69,16 +70,17 @@
       #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
-      .nav-button, .nav-close{border: none; background-color: transparent; position: absolute; left: 100px; top: 0; color: #fff; padding: 6px 5px 4px; cursor: pointer;}
-      .nav-button{z-index: 10;}
-      .nav-close{z-index: 9; visibility: hidden;}
-      .nav-button:focus{opacity: 0;}
-      .nav-button:focus ~ .nav-close {z-index: 10; visibility: visible;}
-      .nav-button .fa, .nav-close .fa{font-size: 18px;}
-      .header-menu{position: absolute; left: 100px; top: 28px; list-style: none; width: 200px; display: none; background-color: #a41615; z-index: 10;}
+      #navbar h2{
+        width: 20px;
+        text-align: center;
+        background: transparent;
+        border: none;
+        padding: 3px 0;
+        color: #fff;
+      }
+      .header-menu{position: absolute !important; left: 0; top: 28px; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
-      .nav-button:focus ~ .header-menu{display: block;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
       .stryimg{position: relative;}
       .photoby:empty{display: none;}
