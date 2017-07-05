@@ -1537,6 +1537,34 @@ function itg_rapid_api_storydetail($token) {
     return $jsondata;
 }
 
+/**
+ * [itg_rapid_api_homePage] definition.
+ * Returns the information about a itg_rapid_api_homePage.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ *	The node processed information array.
+ */
+//return services_error(t('Node type cannot be changed'), 406);
+function itg_rapid_api_homePage($token) {    
+    
+     $redis_key = "itg_rapid_api_homePage";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = homePageJson();
+        $jsondata = json_encode($jsondata);
+        $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
 function itg_rapid_api_testing($token) {
     $get_token = variable_get('mobile_service_token');
 
