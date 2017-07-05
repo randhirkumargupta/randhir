@@ -6482,10 +6482,13 @@ div.node #comments h2 {
   float: left;
   width: 120px;
 }
+[id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield {
+  width: 100%;
+}
 [id*="itg-octopus-api-form"] .container-inline-date > label {
   display: block;
 }
-[id*="itg-octopus-api-form"] .container-inline-date .date-padding > label {
+[id*="itg-octopus-api-form"] .container-inline-date .date-padding .form-item > label {
   display: none;
 }
 [id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"] {
