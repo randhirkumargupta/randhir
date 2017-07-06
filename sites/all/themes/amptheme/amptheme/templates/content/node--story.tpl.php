@@ -452,25 +452,14 @@ if (!empty($content)):
                 if (function_exists('itg_story_get_image_info')) {
                     $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                 }
+                $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$buzz_title_share.'&picture='.$share_image;
+                $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']).'&url='.$short_url.'&via=IndiaToday';
+                $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
                 $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img"><div class="social-share">
               <ul>
-              <li><i class="fa fa-share-alt"></i></li>
-              
-              <li><amp-social-share type="twitter" width="25" height="25"
-              data-param-text="' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '"
-              data-param-url="' . $short_url . '">
-              </amp-social-share>
-              </li>
-              
-              <li><amp-social-share type="facebook" width="25" height="25"
-              data-param-app_id="254325784911610" data-param-quote="' . $buzz_title_share . '"
-              data-param-url="' . $actual_link . '"></amp-social-share>
-              </li>
-                
-              <li><amp-social-share type="gplus" width="25" height="25"
-              data-param-url="'.$actual_link.'">
-              </amp-social-share>
-              </li>
+              <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+              <li><a href="'.$google_url.'" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
               
               </ul>
           </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
