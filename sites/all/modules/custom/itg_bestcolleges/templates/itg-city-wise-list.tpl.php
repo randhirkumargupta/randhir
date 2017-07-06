@@ -33,7 +33,7 @@
                               $table = "<table><tr>";
                               foreach($data['city'] as $key => $value) {
                                 foreach($value as $a => $v) {
-                                  $url = "/bestcolleges/2016/citycolleges-".strtolower($key)."-cochin";
+                                  $url = "/bestcolleges/". arg(1) ."/citycolleges-".strtolower($key)."-cochin";
                                     $table .= "<td><a href='".$url."'>".$v."</a></td>";
                                     if(($a+1) % 4 == 0)
                                         $table .= "</tr><tr>";
@@ -53,7 +53,7 @@
 
 <!-- Grid View-->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . arg(1);; ?></div>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . arg(1); ?></div>
 
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
