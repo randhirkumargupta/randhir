@@ -27,6 +27,23 @@ function itg_sitemap_chunks_create_xml_sitemap() {
   }
 }
 
+function itg_sitemap_chunks_create_xml_sitemap_index() {
+  $xml_files_info = itg_video_get_sitemap_xmls();
+  if (!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
+    header('Content-type: application/xml');
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($xml_files_info['file_url'] as $key => $data) {
+      $xml .= '<sitemap>';
+      $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>';
+      $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>';
+      $xml .= '</sitemap>';
+    }
+    $xml .= '</sitemapindex>';
+  }
+  echo $xml;
+}
+
 /**
  * Create sub files.
  *
