@@ -143,7 +143,7 @@
         background: #a00606;
         padding: 0px;
         margin-top: 20px;
-        display: inline-block;
+        display: table-cell;
         vertical-align: top;
         width: 100%;
         list-style: none;

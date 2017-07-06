@@ -3547,7 +3547,13 @@ span.personal-social-share-links {
 #itg_user_forgot_password_multistep_form label {
     float: left;
 }
-
+div#forgot-field-heading {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    color: #aaa;
+    margin-bottom: 15px;
+}
 
 
 
@@ -4229,12 +4235,17 @@ span.personal-social-share-links {
     right: 0;
     top: 25px;
     margin: 0 auto;
-    width: 20px;
+    width: 25px;
+    height: 25px;
+    background-color: #e5e5e5;
+    border-radius: 50%;
     text-align: center;
     font-size: 12px;
     color: #666;
     font-family: Roboto;
     font-weight: 500;
+    box-sizing: border-box;
+    padding-top: 4px;
   }
 }
 .page-cart, .page-order{
@@ -6508,10 +6519,64 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       padding: 40px 0;
     }
     .parent-background{
-      padding: 30px;
+      padding: 30px 20px;
     }
     .social-share{
       a{width: 50px; padding: 0; .fa{width: 50px;}}
+    }
+  }
+  .page-signup{
+    [id*="itg_sso_reg_multistep_form"]{
+      .parent-background{
+        padding-left: 10px; 
+        padding-right: 10px;
+        .sign-in-link{
+          padding: 0 10px;
+          .left-block{
+            width: 50%;
+            padding-right: 5px;
+          }
+          .rgt-block{
+            width: 50%;
+            padding-left: 5px;
+          }
+        }
+      }
+      .form-row{
+        padding: 0;
+        .form-item{
+          margin: 0;
+        }
+        &.email-or-mobile{
+          padding-bottom: 40px;
+          &:after{
+            top: auto;
+            bottom: 12px;
+          }
+        }
+      }
+      .col-xs-6{
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  #itg_user_forgot_password_multistep_form{
+    .parent-background{
+      padding-left: 20px;
+      padding-right: 20px;
+      .sign-in-link{
+        .signin-link{
+          width: 50%;
+          padding-right: 5px;
+          text-align: left;
+        }
+        .signup-link{
+          width: 50%;
+          padding-left: 5px;
+          text-align: right;
+        }
+      }
     }
   }
 }
