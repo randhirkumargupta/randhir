@@ -2341,10 +2341,12 @@ body.has-cart-popup {
 
 [id*="itg_user_forgot_password_multistep_form"] {
   text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
 }
 [id*="itg_user_forgot_password_multistep_form"] form {
   padding-top: 20px;
-  max-width: 550px;
+  max-width: 540px;
   margin: 0 auto;
   font-family: Roboto;
   color: #666;
@@ -2360,7 +2362,7 @@ body.has-cart-popup {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
-  margin: 20px 0;
+  margin: 50px 0 20px;
 }
 [id*="itg_user_forgot_password_multistep_form"] .parent-background .signin-link {
   float: left;
@@ -2811,9 +2813,9 @@ body.has-cart-popup {
 
 .page-user form, .page-signup form {
   font-family: Roboto;
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 50px 20px;
 }
 .page-user form h2, .page-signup form h2 {
   font-size: 28px;
@@ -2839,10 +2841,9 @@ body.has-cart-popup {
   color: #193984;
 }
 .page-user form .form-submit, .page-signup form .form-submit {
-  background-color: #000 !important;
-  border: 1px solid #000 !important;
-  height: 50px;
-  width: 243px;
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
 }
 .page-user form .bottom-link, .page-signup form .bottom-link {
   display: inline-block;
@@ -5823,9 +5824,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .page-signup .parent-background, .page-user .parent-background, .page-forgot-password .parent-background {
   background: #fbfbfb;
   margin: 0 auto;
-  max-width: 800px;
+  width: 100%;
   overflow: hidden;
-  padding: 30px;
+  padding: 30px 100px;
 }
 .page-signup .parent-background .signup-txt span, .page-signup .parent-background .sign-border span, .page-user .parent-background .signup-txt span, .page-user .parent-background .sign-border span, .page-forgot-password .parent-background .signup-txt span, .page-forgot-password .parent-background .sign-border span {
   background-color: #fbfbfb;
@@ -6937,6 +6938,26 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
     position: static;
+  }
+
+  .page-user #page, .page-signup #page, .page-forgot-password #page {
+    height: auto;
+  }
+  .page-user #main .container, .page-signup #main .container, .page-forgot-password #main .container {
+    padding: 0;
+  }
+  .page-user form, .page-signup form, .page-forgot-password form {
+    padding: 40px 0;
+  }
+  .page-user .parent-background, .page-signup .parent-background, .page-forgot-password .parent-background {
+    padding: 30px;
+  }
+  .page-user .social-share a, .page-signup .social-share a, .page-forgot-password .social-share a {
+    width: 50px;
+    padding: 0;
+  }
+  .page-user .social-share a .fa, .page-signup .social-share a .fa, .page-forgot-password .social-share a .fa {
+    width: 50px;
   }
 }
 @media all and (max-width: 480px) {

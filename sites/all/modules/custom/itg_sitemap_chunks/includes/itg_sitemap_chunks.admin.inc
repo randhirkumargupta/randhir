@@ -266,8 +266,7 @@ function itg_sitemap_chunks_edit_sitemap($ms_id) {
   if (!(is_numeric($ms_id) && $ms_id > 0)) {
 
     return drupal_set_message(t('sitemap id is not exist'), 'error');
-  }
-  else {
+  } else {
 
     $records = itg_sitemap_chunks_get_record($ms_id);
 
@@ -329,8 +328,8 @@ function itg_sitemap_chunks_callback_for_delete_button($form, &$form_state) {
   $ms_id = $form_state['storage']['ms_id'];
 
   $deleted = db_delete('itg_sitemap_chunks')
-      ->condition('ms_id', $ms_id)
-      ->execute();
+    ->condition('ms_id', $ms_id)
+    ->execute();
 
   $record_types = array('content', 'menu', 'vocab');
 
@@ -341,8 +340,7 @@ function itg_sitemap_chunks_callback_for_delete_button($form, &$form_state) {
   $url = 'admin/config/search/itg-multiple-sitemap/dashboard';
   if ($deleted) {
     drupal_set_message(t('Successfully deleted'), 'status');
-  }
-  else {
+  } else {
     drupal_set_message(t('Not  deleted'), 'error');
   }
   drupal_goto($url);
@@ -493,6 +491,45 @@ function itg_sitemap_chunks_setting_form() {
 }
 
 /**
+ *  General setting form for rss
+ */
+function itg_sitemap_chunks_gereral_setting_form() {
+  $form = array();
+  
+  $form['itg_rss_chunks_number'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RSS: Items Chunks'),
+    '#default_value' => variable_get('itg_rss_chunks_number'),
+    '#description' => 'Number of items should appear in RSS',
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#required' => TRUE,
+  );
+  
+  $form['video_category_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RSS: Video Section Tid'),
+    '#default_value' => variable_get('video_category_tid'),
+    '#description' => 'This Video Section Tid will be used to filter content for rss for <b> Videogallery </b> content type',
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#required' => TRUE,
+  );
+
+  $form['photo_category_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RSS: Photo Section Tid'),
+    '#default_value' => variable_get('photo_category_tid'),
+    '#description' => 'This Photo Section Tid will be used to filter content for rss for <b> Photogallery </b> content type',
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#required' => TRUE,
+  );
+  
+  return system_settings_form($form);
+}
+
+/**
  *  {@inheritdocs}
  */
 function itg_sitemap_chunks_delete_chunks() {
@@ -511,8 +548,7 @@ function itg_sitemap_chunks_setting_form_validate($form, &$form_state) {
   $strings = array();
   if (!is_numeric($number_chunks)) {
     form_set_error('itg_sitemap_chunks_number', t("Field Must Be Numaric"));
-  }
-  else if (is_numeric($number_chunks) && $number_chunks < 1) {
+  } else if (is_numeric($number_chunks) && $number_chunks < 1) {
     form_set_error('itg_sitemap_chunks_number', t("Field Must Be positive and greather then zero"));
   }
 

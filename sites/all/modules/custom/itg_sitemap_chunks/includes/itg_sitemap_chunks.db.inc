@@ -22,13 +22,12 @@ function itg_sitemap_chunks_save_record($input = array(), $update_ms_id = NULL) 
     // Insert new record.
     try {
       $ms_id = db_insert('itg_sitemap_chunks')
-          ->fields(array(
-            'file_name' => $input['file_name'],
-            'custom_links' => $input['custom_links'],
-          ))
-          ->execute();
-    }
-    catch (Exception $e) {
+        ->fields(array(
+          'file_name' => $input['file_name'],
+          'custom_links' => $input['custom_links'],
+        ))
+        ->execute();
+    } catch (Exception $e) {
       drupal_set_message(t('File name already exist'), 'error');
     }
   }
@@ -83,20 +82,18 @@ function itg_sitemap_chunks_save_sub_record($record_type = NULL, $ms_target_id =
         // Insert each record.
         try {
           db_insert('itg_sitemap_chunks_' . $record_type)
-              ->fields(array(
-                'target_ms_id' => $ms_target_id,
-                $record_type . '_type' => $subrecord['name'],
-                'priority' => $subrecord['priority'],
-                'changefreq' => $subrecord['changefreq'],
-              ))
-              ->execute();
-        }
-        catch (Exception $e) {
+            ->fields(array(
+              'target_ms_id' => $ms_target_id,
+              $record_type . '_type' => $subrecord['name'],
+              'priority' => $subrecord['priority'],
+              'changefreq' => $subrecord['changefreq'],
+            ))
+            ->execute();
+        } catch (Exception $e) {
           drupal_set_message(t('Record already exist'), 'error');
         }
       }
-    }
-    else {
+    } else {
       drupal_set_message(t('Recors type does not exist'), 'error');
     }
   }
@@ -122,10 +119,9 @@ function itg_sitemap_chunks_delete_sub_record($record_type = NULL, $ms_target_id
       try {
 
         db_delete('itg_sitemap_chunks_' . $record_type)
-            ->condition('target_ms_id', $ms_target_id, '=')
-            ->execute();
-      }
-      catch (Exception $e) {
+          ->condition('target_ms_id', $ms_target_id, '=')
+          ->execute();
+      } catch (Exception $e) {
         drupal_set_message(t('Record is not deleted'), 'error');
       }
     }
@@ -164,7 +160,7 @@ function itg_sitemap_chunks_get_files_name() {
 function itg_sitemap_chunks_get_content_links($contents = array()) {
   $content_links = array();
   $excluded_nodes = array();
-  $content_types = array();
+  //$content_types = array();
   if (!empty(variable_get('itg_sitemap_exclude_nid'))) {
     $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
   }
@@ -172,15 +168,16 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
   if (!empty($contents)) {
     // Prepare array of content type which is saved from setting form.
     // These content type only will be avaiable for xml sitemap.
-    foreach ($contents as $content) {
+    foreach ($contents['content'] as $content) {
       $content_types[] = $content->content_type;
+      
     }
     $limit = variable_get('itg_sitemap_chunks_number', 50000);
     // Get the all links for given type.
-    $query = db_select('node', 'n')->extend('PagerDefault')->limit($limit);
+    $query = db_select('node', 'n'); //->extend('PagerDefault')->limit($limit);
     $query->fields('n', array('nid', 'type'));
     $query->condition('type', $content_types, 'IN');
-    $query->condition('status', 1);
+    //$query->condition('status', 1);
     // Exclude node
     if (!empty($excluded_nodes)) {
       foreach ($excluded_nodes as $nid) {
@@ -188,14 +185,13 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
       }
     }
     $query->orderBy('n.nid', 'DESC');
+    $query->range(0, $limit);
+    $query->groupBy('n.nid');
     $results = $query->execute()->fetchAll();
     // prepare result for xml with pagination.
     foreach ($results as $i => $data) {
-      $tag_data = itg_sitemap_chunk_get_tags_data($contents, $data->type);
       $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
       $content_links[$i]['link'] = $path;
-      $content_links[$i]['priority'] = $tag_data->priority;
-      $content_links[$i]['changefreq'] = $tag_data->changefreq;
     }
   }
   return $content_links;

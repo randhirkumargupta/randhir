@@ -111,7 +111,6 @@ function itg_videogallery_menu() {
       //'access arguments' => array('daily motion video dashboard perm')
   );
 
-
   $items['delete_daily_motion_video/%'] = array(
     'title' => 'Daily Motion Video Dashboard Video Delete',
     'description' => 'Daily Motion Video Dashboard Video Delete',
@@ -124,8 +123,6 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-
-
   return $items;
 }
 
@@ -371,13 +368,11 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   $node_id = $form_state['node']->nid;
   if ($form_state['input']['original_image_fids'] != "") {
     $image_ids = explode('#', $form_state['input']['original_image_fids']);
-
     if (!empty($image_ids)) {
       if (function_exists('itg_photogallery_insert_image_data'))
         itg_photogallery_insert_image_data($image_ids, $node_id);
     }
   }
-
   $fids = array();
   $thumg_to_crop = "";
   foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
@@ -395,11 +390,9 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   }
   $tag_value = implode(', ', $tag);
   $tags_value = trim($tag_value, ",");
-
 // assign image in field after resize
   if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_large_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_medium_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_small_image'][LANGUAGE_NONE][0]['fid'] == 0 || $form_state['values']['field_story_extra_small_image'][LANGUAGE_NONE][0]['fid'] == 0) {
     $image_url = $thumg_to_crop;
-
     if (!empty($image_url)) {
 
       $imagedata = file_get_contents($image_url);
@@ -695,7 +688,6 @@ function itg_videogallery_node_insert($node) {
         $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
         $draft_msg_flag = 0;
         $video_desc = strip_tags($node->field_story_expert_description[LANGUAGE_NONE][0]['value']);
-
         foreach ($node->field_video_upload['und'] as $keys => $videofields) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
@@ -711,9 +703,7 @@ function itg_videogallery_node_insert($node) {
           }
 
           if ((int) $fids != 0) {
-
             $video_image = itg_videogallery_get_video_info_by_fid($fids);
-
             if (empty($video_image)) {
               $video_fid = $fids;
               $file_details = file_load($fids);
@@ -763,7 +753,6 @@ function itg_videogallery_node_insert($node) {
           }
         }
         if ($node->status == 0 && $draft_msg_flag == 1) {
-
           drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
         }
         if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
@@ -911,6 +900,18 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   else {
     $api->post('/video/' . $video_id . '?private=' . $private);
   }
+
+  $thumb_url = $api->get(
+      '/video/' . $video_id, array('fields' => array('thumbnail_720_url'))
+  );
+
+  $image_url = $thumb_url['thumbnail_720_url'];
+  $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+      ->fields(array(
+        'solr_video_thumb' => $image_url
+      ))
+      ->condition('solr_video_id', $video_id, '=')
+      ->execute();
 }
 
 /**
@@ -1383,9 +1384,6 @@ function itg_videogallery_check_video_url($vid) {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
   $query->condition('solr_video_id', $vid, '=');
-  $db_or = db_or();
-  $db_or->condition('video_embedded_url', $vid, '=');
-  $query->condition($db_or);
   $video_data = $query->execute()->fetchAll();
   if (empty($video_data)) {
     return true;
@@ -1447,15 +1445,12 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
   $query->condition('property', VIDEO_PROPERTY, '!=');
   $query->condition('solr_video_id', $solr_data, 'IN');
   $video_data = $query->execute()->fetchAll();
-
   $node_by_video = array();
   foreach ($video_data as $data_delete) {
     $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
-
     $node_by_videop['video_id'][$data_delete->nid][] = $data_delete->solr_video_id;
     if ($data_delete->content_type == 'video_gallery') {
       $node_by_videop['nid'][$data_delete->nid][] = $data_delete->nid;
-
       $node_by_videop['content_type'][$data_delete->nid] = $data_delete->content_type;
     }
   }
@@ -1592,7 +1587,6 @@ function itg_videogallery_get_video_bitrate($nid) {
   foreach ($video_data1 as $key => $vid) {
     $bitrate[] = $vid->bitrate;
   }
-
   $hls = $vid->hls_domain;
 }
 
@@ -1692,7 +1686,6 @@ function delete_daily_motion_video_callback() {
     $node->status = 1; //(1 or 0): Published or not
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-
     $getnode = itg_videogallery_get_node_by_title($video_id);
     if (!empty($getnode)) {
       $node->nid = $getnode[0]->nid;
@@ -2035,7 +2028,18 @@ function itg_videogallery_get_file_details() {
     $thumb_url = $api->get(
         '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
-
+    db_insert('itg_solr_video_info')
+        ->fields(array(
+          'fid' => 0,
+          'solr_video_id' => $video_id[0],
+          'solr_video_duration' => $video_id[4],
+          'solr_video_size' => $video_id[1],
+          'property' => $video_id[5],
+          'content_type' => 'CK_Editor',
+          'is_alredy_used' => 1,
+          'solr_video_thumb' => $video_id[3],
+        ))
+        ->execute();
     if ($thumb_url['embed_url']) {
       $video_id = end(explode('/', $thumb_url['embed_url']));
       $query = db_update('itg_solr_video_info')
@@ -2493,10 +2497,8 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     $node_flag = 0;
     $exception_flag = 0;
     $all_vid = explode(',', $video_id->video_ids);
-
     foreach ($all_vid as $keyof => $dmvid_id) {
       $api = itg_videogallery_dailymotion_api();
-
       try {
         if ($dmvid_id) {
           $dm_data = $api->get(
@@ -2507,6 +2509,14 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
             $query->fields(array('is_draft' => 0));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
+           
+            $image_url = $thumb_url['thumbnail_720_url'];
+            $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                ->fields(array(
+                  'solr_video_thumb' => $image_url
+                ))
+                ->condition('solr_video_id', $dmvid_id, '=')
+                ->execute();
           }
           else {
             $node_flag = 1;

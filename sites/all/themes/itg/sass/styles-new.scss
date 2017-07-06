@@ -2266,9 +2266,11 @@ body.has-cart-popup{
 }
 [id*="itg_user_forgot_password_multistep_form"]{
   text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
   form{
     padding-top: 20px;
-    max-width: 550px;
+    max-width: 540px;
     margin: 0 auto;
     font-family: Roboto;
     color: #666;
@@ -2283,7 +2285,7 @@ body.has-cart-popup{
       font-size: 28px;
       font-weight: 400;
       line-height: 36px;
-      margin: 20px 0;
+      margin: 50px 0 20px;
     }
   }
   .parent-background{
@@ -2752,9 +2754,9 @@ body.has-cart-popup{
 .page-user, .page-signup{
     form{
         font-family: Roboto;
-        max-width: 580px; 
+        max-width: 780px; 
         margin: 0 auto; 
-        padding: 20px;
+        padding: 50px 20px;
         h2{
             font-size: 28px;
             font-weight: 400;
@@ -2779,10 +2781,9 @@ body.has-cart-popup{
             }
         }
         .form-submit{
-          background-color: #000 !important;
-          border: 1px solid #000 !important;
-          height: 50px;
-          width: 243px;
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          width: 170px;
         }
         .bottom-link{
           display: inline-block;
@@ -5398,9 +5399,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .parent-background{
       background: #fbfbfb;
       margin: 0 auto;
-      max-width: 800px;
+      width: 100%;
       overflow: hidden;
-      padding: 30px;
+      padding: 30px 100px;
       .signup-txt, .sign-border{
         span{
           background-color: #fbfbfb;
@@ -6482,6 +6483,23 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic{
     height: auto;
     img{position: static;}
+  }
+  .page-user, .page-signup, .page-forgot-password{
+    #page{
+      height: auto;
+    }
+    #main .container{
+      padding: 0;
+    }
+    form{
+      padding: 40px 0;
+    }
+    .parent-background{
+      padding: 30px;
+    }
+    .social-share{
+      a{width: 50px; padding: 0; .fa{width: 50px;}}
+    }
   }
 }
 @media all and (max-width: 480px){

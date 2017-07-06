@@ -65,7 +65,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
               </div>
             </li>
 
-      <?php } ?>
+          <?php } ?>
         </ul>
       </div>
       <?php
@@ -119,7 +119,6 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         }
         $usebitrates = implode(',', $allbitrates);
         $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-
         ?>
           <div class="iframe-video-embed">
 
@@ -131,9 +130,10 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                     title: "<?php print $row['title']; ?>",
                     image: "<?php echo $image_url; ?>",
                     sources: [
+//                      {
+    //                        file: "<?php echo $getvideo_bitrate_url; ?>"
+    //                      },
                       {
-                        file: "<?php echo $getvideo_bitrate_url; ?>"
-                      }, {
                         file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                       }]
                   }],
@@ -160,7 +160,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 }
               });
             </script>
-           
+
           </div>
         </div>
 

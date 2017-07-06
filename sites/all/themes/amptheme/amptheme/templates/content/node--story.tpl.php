@@ -155,7 +155,7 @@ if (!empty($content)):
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
                 <div class="stryimg" ><?php
-                  if (empty($widget_data) && empty($node->field_story_template_guru[und][0][value])) {
+                  if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -169,7 +169,7 @@ if (!empty($content)):
                     print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>';
                   }
                   else {
-                    if(empty($node->field_story_template_guru[und][0][value])) {
+                    if(empty($node->field_story_template_guru['und'][0]['value'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
@@ -184,12 +184,12 @@ if (!empty($content)):
                     ?>        
 
                     <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
-                      <i class="fa fa-play-circle"></i>
+                      <!--<i class="fa fa-play-circle"></i>-->
                       <?php
                     }
                     else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
                       ?>                    
-                      <i class="fa fa-camera"></i>
+                      <!--<i class="fa fa-camera"></i>-->
                       <?php
                     }
                     print '</span></a>';
@@ -216,17 +216,18 @@ if (!empty($content)):
                     
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    
-                    if (!empty($getimagetags)) {
+                    if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
+                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    <i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-            
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
-                        . '</a>';
+                    
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>        
+                                    '.$icon_detail.'</a>';
+                    
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -234,8 +235,11 @@ if (!empty($content)):
                       }
                     }
                     ?>
-                  <?php } ?>
-
+                  <?php } 
+                  if (function_exists('itg_story_get_image_info')) {
+                    $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                  } ?>
+                      
                   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                     <?php if(empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
                       <div class="photoby">
@@ -248,8 +252,8 @@ if (!empty($content)):
                           ?>
                         </div>
                       <?php } ?>
-                      <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
-                        <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
+                      <?php if (isset($getImageInfo[0]->image_photo_grapher) && !empty($getImageInfo[0]->image_photo_grapher)) { ?>
+                        <div class="photoby-text"><?php print $getImageInfo[0]->image_photo_grapher; ?></div>
                       <?php } ?>
                     </div>
                   <?php } }?>     
@@ -257,8 +261,8 @@ if (!empty($content)):
 
 
                 </div>
-                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
-                  <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
+                <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
+                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
                 <?php } ?>                            
               </div>
               <div class="story-movie">
@@ -300,7 +304,6 @@ if (!empty($content)):
                   <?php endif; ?>
                 </div>                            
               </div>
-              <div class="ad-blocker"></div>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
@@ -446,7 +449,31 @@ if (!empty($content)):
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
                 $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
                 $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
-                $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img">' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div></div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
+                if (function_exists('itg_story_get_image_info')) {
+                    $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+                }
+                $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img"><div class="social-share">
+              <ul>
+              <li><i class="fa fa-share-alt"></i></li>
+              
+              <li><amp-social-share type="twitter" width="25" height="25"
+              data-param-text="' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '"
+              data-param-url="' . $short_url . '">
+              </amp-social-share>
+              </li>
+              
+              <li><amp-social-share type="facebook" width="25" height="25"
+              data-param-app_id="254325784911610" data-param-quote="' . $buzz_title_share . '"
+              data-param-url="' . $actual_link . '"></amp-social-share>
+              </li>
+                
+              <li><amp-social-share type="gplus" width="25" height="25"
+              data-param-url="'.$actual_link.'">
+              </amp-social-share>
+              </li>
+              
+              </ul>
+          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -473,7 +500,7 @@ if (!empty($content)):
         </amp-embed>
         </div>
           <!-- code for related content -->   
-          <?php if (!empty($related_content)) { ?>
+          <?php if (!empty($related_content) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
             <div class="related-story related-story-bottom">
               <?php
               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_amp_block');

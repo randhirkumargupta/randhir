@@ -3490,3 +3490,14 @@ img {
 .itg-layout-container.default-section .itg-top-section .top-colum-2 .droppable {
   margin-bottom: 0;
 }
+
+.page-itg-layout-manager-home .home-election {
+  margin-bottom: 30px;
+}
+.page-itg-layout-manager-home .home-election .droppable {
+  min-height: 400px;
+}
+.page-itg-layout-manager-home .home-election .social-share li {
+  float: left;
+  margin-right: 10px;
+}
