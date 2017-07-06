@@ -56,7 +56,7 @@ class ItgFunanlyticsMigration extends XMLMigration {
         $image_file_path =  'itg_funalytics/' . $current_date;
         $image_upload_path = $file_path . '/' . $image_file_path;
         if (!file_exists($image_upload_path)) {
-            drupal_mkdir($image_upload_path, 0777, true);
+            drupal_mkdir('public://' . $image_upload_path, 0777, true);
         }
         
         $this->addFieldMapping('title', 'title')->xpath('title');
