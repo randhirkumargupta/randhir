@@ -1572,6 +1572,8 @@ function itg_rapid_api_homePage($token) {
 }
 
 function itg_rapid_api_testing($token) {
+    $user = user_load(1989);
+    echo "<pre>"; print_r($user); echo "<pre>"; exit();
     $get_token = variable_get('mobile_service_token');
 
     $str = '{
