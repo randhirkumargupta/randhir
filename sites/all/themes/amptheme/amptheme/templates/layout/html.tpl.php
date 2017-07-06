@@ -68,6 +68,7 @@
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
       #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px; z-index: 9999;}
@@ -291,8 +292,6 @@
         overflow: hidden;
       }
 
-      .node-type-photogallery #header, 
-      .node-type-videogallery #header{margin: 0;}
       .black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
       .photo-title {
         font-size: 32px;
@@ -370,6 +369,14 @@
       .amp-photo-ad{text-align: center;}
       .node-story h1 a{color: #0883ed; text-decoration: none;}
       .node-story h1 a:hover{color: #0883ed; text-decoration: underline;}
+      .story-section h1 i {
+        font-size: 13px;
+        color: #f40000;
+        -webkit-animation-name: blinker;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        -webkit-animation-duration: 1s;
+      }
       .story-right .description iframe{max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
@@ -456,6 +463,7 @@
         padding: 10px 12px;
         text-align: center;
         font-size: 12px;
+        border-top: 1px solid #111111;
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
@@ -469,6 +477,8 @@
       #navbar .social-share .share-link{padding: 5px 10px; background-color: #a00606; margin-top: 5px;}
       #navbar .social-share .share-link a{ display: inline-block; vertical-align: middle; color: #fff; font-size: 20px; }
       #navbar .social-share .share-link a + a{margin-left: 10px;}
+      .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
+      .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
