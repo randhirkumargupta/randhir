@@ -106,7 +106,24 @@ if ($theme != 'itgadmin') {
             </div>            
           </div>
         <?php endif; ?>
-
+        <div class="home-election">
+          <div class="widget-help-text">Template widgets ( <strong>Home Page Election</strong> )</div>
+          <div class="itg-widget">
+            <div class="droppable <?php print $gray_bg_layout; ?>">
+              <div class="widget-wrapper <?php print $widget_data['itg-block-0']['widget_name']; ?>">
+                <div class="data-holder" id="itg-block-0">
+                  <?php
+                  if (isset($widget_data['itg-block-0']['widget'])) {
+                    print $widget_data['itg-block-0']['widget'];
+                  } else {
+                    print '<div class="widget-placeholder"><span>Home Election</span></div>';
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row itg-top-section">
 
           <div class="top-block">
