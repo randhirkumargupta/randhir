@@ -85,12 +85,23 @@ global $base_url, $user;
       </section>
     </amp-accordion>
     <div class="nav-right">
-      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
-      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>
-      <div class="share"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
-      <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-      <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-      <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+<!--      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
+      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>-->
+      <div class="social-share">
+      <amp-accordion disable-session-states>
+        <section>
+          <h2>
+            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+          </h2>
+          <div class="share-link">
+            <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+          </div>
+        </section>
+      </amp-accordion>
+      </div>
     </div>
   </nav>
 
