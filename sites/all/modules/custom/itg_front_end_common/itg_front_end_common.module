@@ -362,7 +362,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         if ($value == 'image' && $node->type == 'photogallery') {
           $description = file_create_url($photo_image);
         }
-
+        
         $twitter_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -371,8 +371,20 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
             'content' => $description,
           )
         );
+        
         drupal_add_html_head($twitter_tag, 'twitter_tag' . $key);
+        
       }
+      $fb_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      $fb_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $fb_image,
+          )
+        );
+      drupal_add_html_head($fb_tag, 'fb_tag' . $key);
     }
   }
 }
