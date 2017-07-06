@@ -40,8 +40,10 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
       $xml .= '</sitemap>';
     }
     $xml .= '</sitemapindex>';
+    echo $xml;
+  } else {
+    return drupal_not_found();
   }
-  echo $xml;
 }
 
 /**
