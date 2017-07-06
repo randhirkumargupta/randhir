@@ -155,7 +155,7 @@ if (!empty($content)):
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
                 <div class="stryimg" ><?php
-                  if (empty($widget_data) && empty($node->field_story_template_guru[und][0][value])) {
+                  if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -169,7 +169,7 @@ if (!empty($content)):
                     print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>';
                   }
                   else {
-                    if(empty($node->field_story_template_guru[und][0][value])) {
+                    if(empty($node->field_story_template_guru['und'][0]['value'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
@@ -216,17 +216,18 @@ if (!empty($content)):
                     
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    
-                    if (!empty($getimagetags)) {
+                    if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
+                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    <i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-            
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
-                        . '</a>';
+                    
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>        
+                                    '.$icon_detail.'</a>';
+                    
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
