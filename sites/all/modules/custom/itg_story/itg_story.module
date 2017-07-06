@@ -1155,7 +1155,7 @@ function itg_story_views_api() {
  */
 function itg_get_emoji_amp_html($result, $arr = NULL) {
   if (!empty($result)) {
-    $emoji_html = '<span smilies-title>';
+    $emoji_html = '<span class="smilies-title">';
     if (empty($arr)) {
       foreach ($result as $key => $value) {
         $html = $value;
