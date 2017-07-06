@@ -77,8 +77,9 @@
         border: none;
         padding: 3px 0;
         color: #fff;
+        height: 28px;
       }
-      .header-menu{position: absolute !important; left: 0; top: 28px; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
+      .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
@@ -96,6 +97,7 @@
       .photo-slide{position: relative;}
       .photo-slide .caption{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .story-right{padding-bottom: 30px;}
+      .carousel-preview{white-space: nowrap; overflow: auto;}
       .carousel-preview button{margin-right: 10px;}
       .listicle-feedback .listical_title {
         text-transform: uppercase;
@@ -288,7 +290,6 @@
 
       .node-type-photogallery #header, 
       .node-type-videogallery #header{margin: 0;}
-      /*.node-type-photogallery .i-amphtml-slide-item>*{height: auto;}*/
       .black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
       .photo-title {
         font-size: 32px;
@@ -406,6 +407,8 @@
         white-space: nowrap;
         overflow-x: auto;
         border-bottom: 1px solid #111111;
+        position: relative;
+        z-index: 9;
       }
       .footer-top-link ul li{
         display: inline-block;
@@ -420,15 +423,8 @@
         text-transform: uppercase;
       }
       .footer-bottom-menu{
-        display: none;
+        padding-bottom: 10px;
       }
-      .footer-show, .footer-hide{border: none; background-color: #000; position: absolute; right: 0; top: 0; color: #fff; height: 48px; width: 45px; line-height: 50px; text-align: center; cursor: pointer;}
-      .footer-show{z-index: 10;}
-      .footer-hide{z-index: 9; visibility: hidden;}
-      .footer-show:focus{opacity: 0;}
-      .footer-show:focus ~ .footer-hide {z-index: 10; visibility: visible;}
-      .footer-show .fa, .footer-hide .fa{font-size: 24px;}
-      .footer-show:focus ~ .footer-bottom-menu {display: block;}
       .footer-bottom-menu .menu-col{
         display: inline-block;
         vertical-align: top;
@@ -442,12 +438,31 @@
       .footer-bottom-menu ul li{
         padding: 3px 0;
       }
+      #footer amp-accordion h2{
+        width: 40px;
+        height: 49px;
+        text-align: center;
+        padding: 0;
+        border: none;
+        background: #000;
+        margin-top: -50px;
+        z-index: 99;
+      }
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
         text-align: center;
         font-size: 12px;
       }
+      .photo-story .amp-carousel-button {top: 100px;}
+      .photo-story amp-carousel {
+        height: 400px;
+      }
+      .nav-right{position: absolute; top: 0; right: 0;}
+      .nav-right > div{width: 28px; height: 28px; display: inline-block; vertical-align: top; color: #fff; text-align: center; margin: 0 5px;}
+      .nav-right .phone .fa{width: 20px; height: 20px; border: 1px solid; border-radius: 50%; text-align: center; line-height: 18px; margin-top:  3px;}
+      .nav-right .comment .fa{margin-top:  3px; font-size: 20px;}
+      .nav-right .share .fa{margin-top:  5px; font-size: 18px;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

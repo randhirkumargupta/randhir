@@ -67,17 +67,14 @@ global $base_url, $user;
             endforeach;
           }
           ?>
-                <li>
-                  <a href="#">
-                    <amp-img src="http://localhost/itgcms/sites/all/themes/itg/images/default_for_all_152_37.png"  width="152" height="37" layout="responsive" alt="AMP"></amp-img>
-                  </a>
-                </li>      
-                
         </ul>
       </section>
     </amp-accordion>
-
-    <?php //print drupal_render($data['itg_top_manu_header']); ?>
+    <div class="nav-right">
+      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
+      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>
+      <div class="share"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
+    </div>
   </nav>
 
 </header>
