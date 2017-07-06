@@ -2339,6 +2339,16 @@ body.has-cart-popup {
   margin: 20px 0;
 }
 
+.page-signup [id*="itg_sso_reg_multistep_form"] .parent-background {
+  max-width: 780px;
+}
+.page-signup [id*="itg_sso_reg_multistep_form"] .form-wrapper .form-submit {
+  background-color: transparent;
+  width: 170px;
+  height: 40px;
+  border: none;
+}
+
 [id*="itg_user_forgot_password_multistep_form"] {
   text-align: center;
   max-width: 780px;
@@ -2381,26 +2391,25 @@ body.has-cart-popup {
   height: 36px;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
-  padding: 15px;
+  padding: 15px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
   position: relative;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .form-submit, [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .btn-skip {
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: 3px;
+  background: url(../images/btn-blue.png) no-repeat;
   color: #fff;
   font-size: 16px;
-  height: 38px;
-  width: 200px;
+  height: 41px;
+  width: 170px;
   text-align: center;
-  line-height: 35px;
+  line-height: 38px;
   margin-right: 20px;
   text-transform: capitalize;
   display: inline-block;
   vertical-align: top;
+  border: none;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress {
   left: 217px;

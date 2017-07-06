@@ -2249,6 +2249,7 @@ body.has-cart-popup{
 /* CSS for forgot password */
 
 [id*="itg_sso_reg_multistep_form"]{
+  
   ul.messages__list{
     padding-left: 18px;
     font-size: 14px;
@@ -2261,6 +2262,19 @@ body.has-cart-popup{
       font-weight: 400;
       line-height: 36px;
       margin: 20px 0;
+    }
+  }
+}
+.page-signup{
+  [id*="itg_sso_reg_multistep_form"]{
+    .parent-background{
+      max-width: 780px;
+    }
+    .form-wrapper .form-submit{
+      background-color: transparent;
+      width: 170px;
+      height: 40px;
+      border: none;
     }
   }
 }
@@ -2308,25 +2322,24 @@ body.has-cart-popup{
     }
     
     .form-wrapper{
-        padding: 15px;
+        padding: 15px 0;
         display: inline-block;
         vertical-align: top;
         width: 100%;
         position: relative;
         .form-submit, .btn-skip{
-            background-color: #000;
-            border: 1px solid #000;
-            border-radius: 3px;
+            background: url(../images/btn-blue.png) no-repeat;
             color: #fff;
             font-size: 16px;
-            height: 38px;
-            width: 200px;
+            height: 41px;
+            width: 170px;
             text-align: center;
-            line-height: 35px;
+            line-height: 38px;
             margin-right: 20px;
             text-transform: capitalize;
             display: inline-block;
             vertical-align: top;
+            border: none;
         }
         .ajax-progress{
             left: 217px;
