@@ -11829,6 +11829,14 @@ span.close_btt {
     text-align: center;
   }
 }
+.home-election{
+  margin-bottom: 40px;
+  .social-share{
+    li{
+      margin-right: 7px;
+    }
+  }
+}
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
