@@ -350,6 +350,7 @@ function itg_video_check_exist_file($filename) {
  */
 function itg_videogallery_custom_submit($form, &$form_state) {
   global $user;
+  p($form_state);
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
@@ -1938,8 +1939,9 @@ function daily_motion_video_dashboard_rows() {
           $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
+      
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
-        if (in_array($record->video_id, $all_used_video)) {
+        if (in_array($record->video_id, $all_used_video) ) {
           $status_flag = '<span class="under-precess">Draft</span>';
           $delete_link = "";
         }
@@ -2509,7 +2511,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
             $query->fields(array('is_draft' => 0));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
-           
+
             $image_url = $thumb_url['thumbnail_720_url'];
             $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
                 ->fields(array(

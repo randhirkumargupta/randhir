@@ -132,31 +132,31 @@ function itg_image_croping_image_info_form($form, $form_state) {
     '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
   );
 
-    $form['image_caption'] = array(
-      '#type' => 'textarea',
-      '#title' => 'Caption',
-      '#attributes' => array(
-        'placeholder' => t('Caption'),
-      ),
-      '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
-    );
-  
-  $form['image_alt'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Alt Text',
+  $form['image_caption'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Caption',
     '#attributes' => array(
-      'placeholder' => t('Alt Text'),
+      'placeholder' => t('Caption'),
     ),
-    '#default_value' => ($info[0]->alt) ? $info[0]->alt : '',
+    '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
   );
-  $form['image_title'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Title',
-    '#attributes' => array(
-      'placeholder' => t('Title'),
-    ),
-    '#default_value' => ($info[0]->title) ? $info[0]->title : '',
-  );
+
+//  $form['image_alt'] = array(
+//    '#type' => 'textfield',
+//    '#title' => 'Alt Text',
+//    '#attributes' => array(
+//      'placeholder' => t('Alt Text'),
+//    ),
+//    '#default_value' => ($info[0]->alt) ? $info[0]->alt : '',
+//  );
+//  $form['image_title'] = array(
+//    '#type' => 'textfield',
+//    '#title' => 'Title',
+//    '#attributes' => array(
+//      'placeholder' => t('Title'),
+//    ),
+//    '#default_value' => ($info[0]->title) ? $info[0]->title : '',
+//  );
   $form['courtesy'] = array(
     '#type' => 'textfield',
     '#title' => 'Courtesy',
@@ -263,8 +263,6 @@ function itg_image_croping_save_info($form, &$form_state) {
     'image_courtesy' => $form_state['values']['courtesy'],
     'image_caption' => $form_state['values']['image_caption'],
     'image_keyword' => $form_state['values']['image_keyword'],
-    'alt' => $form_state['values']['image_alt'],
-    'title' => $form_state['values']['image_title'],
     'image_tags' => $form_state['values']['image_tags'],
     'image_place' => $form_state['values']['image_place'],
     'image_photo_grapher' => $form_state['values']['photo_grapher'],
@@ -273,6 +271,7 @@ function itg_image_croping_save_info($form, &$form_state) {
     'image_syndicate' => $form_state['values']['syndicate'],
   );
   $inserted_data = db_insert('image_info')->fields($data_array)->execute();
+  drupal_set_message('Image Information Save ! Please save node for changed info.');
   // First, we initialize our $commands array. This array will
   // contain each of the commands we want to fire for our
   // #AJAX callback:
