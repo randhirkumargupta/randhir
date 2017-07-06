@@ -25,12 +25,10 @@ class ItgFunanlyticsMigration extends XMLMigration {
         // This can also be an URL instead of a local file path.
         $file_path = drupal_realpath('public://');
 
-        //$xml_folder = $file_path . '/' . 'migrate/xml_file/';
-        $xml_folder = '/migrate/xml_file/';
+        $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        //$items_url = $xml_folder . 'itg_funalytics.xml';
-        $items_url = file_create_url(file_build_uri($xml_folder . 'itg_funalytics.xml'));
-        //var_dump($items_url);die;
+        $items_url = $xml_folder . 'itg_funalytics.xml';
+        
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
         $item_xpath = '/data/funalytics';
