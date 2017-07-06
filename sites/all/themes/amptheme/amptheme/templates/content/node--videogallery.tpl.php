@@ -18,13 +18,15 @@
       foreach ($videoids as $keys => $video_value) {
     ?>
 
-            <amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
+            <div class="slide"> <div class="photo-slide"><amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
                              layout="responsive"
                              data-ui-logo="false"
                              data-info="false"
                              width="300"
                              height="300">
             </amp-dailymotion>
+                    <div class="caption"><?php print $video_value;?><br/><?php print $video_value;?></div></div>
+            </div>        
 
     <?php
       }
