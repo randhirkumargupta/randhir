@@ -72,7 +72,7 @@ function generateNewsCategoryList($tid, $pageno) {
   $tid_list = array();
   $tid_list[] = $tid;
   $listcount = 0;
-  $range_max = 20;
+  $range_max = 10;
   //$photolist = array();
   if(!$pageno == 0){
       $range_min = $pageno * $range_max;
@@ -212,6 +212,9 @@ if($term_tree_count){
             if($type == "photogallery"){
                 $photolist = getPhotolist($nid);
             }
+            if(count($photolist) == 0){
+                $photolist = (object) $photolist;
+            }
             $news_list_array[$listcount]['n_photo'] = $photolist;
             // re-insalize photolist
             $photolist = array();
@@ -219,6 +222,9 @@ if($term_tree_count){
             // video list array
             if($type == "videogallery"){
                 $videolist = getVideolist($nid);
+            }
+            if(count($videolist) == 0){
+                $videolist = (object) $videolist;
             }
             $news_list_array[$listcount]['n_video'] = $videolist;
             // re-insalize vediolist

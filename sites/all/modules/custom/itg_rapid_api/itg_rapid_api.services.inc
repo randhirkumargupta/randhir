@@ -844,6 +844,7 @@ function itg_rapid_api_datanotexist_api($token) {
  */
 function itg_rapid_api_newslist($token) {
     //valid tid & pageno
+    $realtime = 0;
     $id = $_GET['id'];
     $cpageno = $_GET['cpageno'];
     $suffix = $id . "_" . $cpageno;
@@ -861,14 +862,19 @@ function itg_rapid_api_newslist($token) {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = newscategoryPageRerourceValue($id, $cpageno);
+        $realtime = 1;
+        $jsondata_realtime = $jsondata =  newscategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
-
-    $jsondata = json_decode($jsondata, true);
-    return $jsondata;
+    if($realtime){    
+        return $jsondata_realtime;
+    }
+    else{
+        $jsondata = json_decode($jsondata);
+        return $jsondata;
+    }
 }
 
 /**
