@@ -28,7 +28,7 @@ class ItgFunanlyticsMigration extends XMLMigration {
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
         $items_url = $xml_folder . 'itg_funalytics.xml';
-
+        var_dump($items_url);die;
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
         $item_xpath = '/data/funalytics';
