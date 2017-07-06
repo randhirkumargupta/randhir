@@ -131,7 +131,7 @@ function itg_image_croping_image_info_form($form, $form_state) {
     '#title' => t('Syndicate'),
     '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
   );
-  if ($_GET['node_type'] == 'story') {
+
     $form['image_caption'] = array(
       '#type' => 'textarea',
       '#title' => 'Caption',
@@ -140,7 +140,7 @@ function itg_image_croping_image_info_form($form, $form_state) {
       ),
       '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
     );
-  }
+  
   $form['image_alt'] = array(
     '#type' => 'textfield',
     '#title' => 'Alt Text',
@@ -224,7 +224,7 @@ function itg_image_croping_image_info_form($form, $form_state) {
   $form['submit_button'] = array
     (
     '#type' => 'submit',
-    '#value' => t('Do something'),
+    '#value' => t('Save'),
     '#ajax' => array(
       'callback' => 'itg_image_croping_save_info',
       'wrapper' => 'checkboxes-div',
