@@ -34,7 +34,7 @@ $print_image = $row->field_field_itg_funalytics_image[0]['rendered']['#item']['u
 $changed = date("D j M Y", $row->node_changed);
 ?>
 <div class="funalytics-tile">
-  <div class="pic"><a class="funalytic-popup" href="javascript:;"><?php print theme('image_style', array('style_name' => 'anchors_landing', 'path' => $print_image)); ?></a></div>
+  <div class="pic"><a class="funalytic-popup" href="javascript:;"><?php print theme('image_style', array('style_name' => 'funalytics_thump_wide', 'path' => $print_image)); ?></a></div>
   <div class="funalytics-text">
       <div class="updated-date"><?php print $changed; ?></div>
       <div class="title"><?php print $row->node_title; ?></div>

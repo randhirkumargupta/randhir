@@ -52,34 +52,48 @@ class ItgFunanlyticsMigration extends XMLMigration {
           )
             ), MigrateDestinationNode::getKeySchema()
         );
+        $current_date = date('d-m-y');
+        $image_file_path =  'itg_funalytics/' . $current_date;
+        $image_upload_path = $file_path . '/' . $image_file_path;
+        if (!file_exists($image_upload_path)) {
+            mkdir($image_upload_path, 0777, true);
+        }
+        
         $this->addFieldMapping('title', 'title')->xpath('title');
         $this->addFieldMapping('field_itg_funalytics_image', 'image')->xpath('image');
+        $this->addFieldMapping('field_itg_funalytics_image:preserve_files')
+            ->defaultValue(TRUE);
+        $this->addFieldMapping('field_itg_funalytics_image:destination_dir')
+            ->defaultValue('public://' . $image_file_path);
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('status', 'state')->xpath('state');
         $this->addFieldMapping('pathauto')->defaultValue(0);
         $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
-        $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-        $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
-        $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+        $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('pagetitle');
+        $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metadescription');
+        $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('keywords');
+        
     }
 
     public function prepareRow($row) {
+        
         // manage created user
         if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
             $created_uid = (string) $row->xml->createdby;
             $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
-            if(empty($orignal_crated_uid) || !isset($orignal_crated_uid)){
+            if (empty($orignal_crated_uid) || !isset($orignal_crated_uid)) {
                 $row->xml->createdby = 1;
-            }else{
+            }
+            else {
                 $row->xml->createdby = $orignal_crated_uid;
-            }            
+            }
         }
         else {
             $row->xml->createdby = 1;
         }
         return TRUE;
     }
-    
+
     public function prepare($node, stdClass $row) {
         $node->uid = $row->xml->createdby;
     }
