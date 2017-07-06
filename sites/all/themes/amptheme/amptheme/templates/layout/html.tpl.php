@@ -70,7 +70,7 @@
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px;}
+      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
       #navbar h2{
@@ -461,11 +461,14 @@
       .photo-story amp-carousel {
         height: 400px;
       }
-      .nav-right{position: absolute; top: 0; right: 0;}
-      .nav-right > div{width: 28px; height: 28px; display: inline-block; vertical-align: top; color: #fff; text-align: center; margin: 0 5px;}
+      .nav-right{position: absolute; top: 0; right: 0; width: 100px;}
       .nav-right .phone .fa{width: 20px; height: 20px; border: 1px solid; border-radius: 50%; text-align: center; line-height: 18px; margin-top:  3px;}
       .nav-right .comment .fa{margin-top:  3px; font-size: 20px;}
       .nav-right .share .fa{margin-top:  5px; font-size: 18px;}
+      #navbar .social-share h2{height: 24px; margin: 0; left: 70px;}
+      #navbar .social-share .share-link{padding: 5px 10px; background-color: #a00606; margin-top: 5px;}
+      #navbar .social-share .share-link a{ display: inline-block; vertical-align: middle; color: #fff; font-size: 20px; }
+      #navbar .social-share .share-link a + a{margin-left: 10px;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
