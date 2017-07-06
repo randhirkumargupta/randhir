@@ -66,6 +66,14 @@ global $base_url, $user;
               }
             endforeach;
           }
+          
+          // code for sharing
+          $arg = arg();
+          if(function_exists('itg_common_get_node_title')) {
+          $title = itg_common_get_node_title($arg[1]);
+          }
+          $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+          $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
         </ul>
       </section>
@@ -74,6 +82,16 @@ global $base_url, $user;
       <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
       <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>
       <div class="share"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
+      <amp-social-share type="twitter" width="25" height="25"
+      data-param-text="<?php print $title; ?>"
+      data-param-url="<?php print $short_url; ?>">
+      </amp-social-share>
+      <amp-social-share type="facebook" width="25" height="25"
+      data-param-app_id="254325784911610" data-param-quote="<?php print $title; ?>"
+      data-param-url="<?php print $actual_link; ?>"></amp-social-share>
+      <amp-social-share type="gplus" width="25" height="25"
+      data-param-url="<?php print $actual_link; ?>">
+      </amp-social-share>
     </div>
   </nav>
 

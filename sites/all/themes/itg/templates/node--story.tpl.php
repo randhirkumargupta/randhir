@@ -753,6 +753,11 @@ if (!empty($content)):
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
                 $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
                 $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+                
+                if (function_exists('itg_story_get_image_info')) {
+                    $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+                }
+                
                 $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
@@ -760,7 +765,7 @@ if (!empty($content)):
               <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
-          </div>' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
+          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
