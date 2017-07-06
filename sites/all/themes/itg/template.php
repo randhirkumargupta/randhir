@@ -159,6 +159,11 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
 
+  // For single column page
+  if ($arg[0] == 'be-lucky-today') {
+    $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+  }
+
   // Access domain
   if (function_exists('domain_select_format')) {
     $format = domain_select_format();
