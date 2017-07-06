@@ -105,8 +105,8 @@ if ($theme != 'itgadmin') {
       <div class="col-md-12 col-sm-12 col-xs-12">
       <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
       <!-- sponsor for static -->
-        <?php
-          if($url_get[2] == '2016') {
+        <?php 
+          if($url_get[2] == '2016' || $url_get[2] == '2017') { 
             print bestcollege_get_sponser_data('Best college Sponser');
           }
         ?>
