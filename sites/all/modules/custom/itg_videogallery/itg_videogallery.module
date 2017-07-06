@@ -2497,10 +2497,8 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     $node_flag = 0;
     $exception_flag = 0;
     $all_vid = explode(',', $video_id->video_ids);
-
     foreach ($all_vid as $keyof => $dmvid_id) {
       $api = itg_videogallery_dailymotion_api();
-
       try {
         if ($dmvid_id) {
           $dm_data = $api->get(
