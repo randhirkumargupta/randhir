@@ -69,11 +69,17 @@ global $base_url, $user;
           
           // code for sharing
           $arg = arg();
-          if(function_exists('itg_common_get_node_title')) {
-          $title = itg_common_get_node_title($arg[1]);
+          if(function_exists('itg_get_node_details')) {
+          $title = itg_get_node_details($arg[1]);
+          $share_title = $title[0]['title'];
+          $image = file_load($title[0]['field_story_extra_large_image_fid']);
+          $share_image = file_create_url($image->uri);
           }
           $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
           $short_url = shorten_url($actual_link, 'goo.gl');
+          $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$share_title.'&picture='.$share_image;
+          $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($share_title).'&url='.$short_url.'&via=IndiaToday';
+          $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
           ?>
         </ul>
       </section>
@@ -82,16 +88,9 @@ global $base_url, $user;
       <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
       <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>
       <div class="share"><i class="fa fa-share-alt" aria-hidden="true"></i></div>
-      <amp-social-share type="twitter" width="25" height="25" aria-label="share on twitter"
-      data-param-text="<?php print $title; ?>"
-      data-param-url="<?php print $short_url; ?>">
-      </amp-social-share>
-      <amp-social-share type="facebook" width="25" height="25" aria-label="share on facebook"
-      data-param-app_id="254325784911610" data-param-quote="<?php print $title; ?>"
-      data-param-url="<?php print $actual_link; ?>"></amp-social-share>
-      <amp-social-share type="gplus" width="25" height="25" aria-label="share on google+"
-      data-param-url="<?php print $actual_link; ?>">
-      </amp-social-share>
+      <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+      <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
     </div>
   </nav>
 
