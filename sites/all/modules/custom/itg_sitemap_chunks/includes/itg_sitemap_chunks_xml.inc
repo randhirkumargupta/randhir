@@ -15,11 +15,15 @@ function itg_sitemap_chunks_create_xml_sitemap() {
   $content_links = itg_sitemap_chunks_get_content_links($contents);
   if (!empty($content_links)) {
     $xml_file_content = itg_sitemap_print_sitemap($content_links);
+    //Create gz file.
     $gzfile = "public://sitemap/xmlsitemap.xml.gz";
     $gzdata = gzencode($xml_file_content, 9);
     $fp = fopen($gzfile, "w");
     fwrite($fp, $gzdata);
     fclose($fp);
+    // Print Xml here
+    header('Content-type: application/xml');
+    echo $xml_file_content;
   }
 }
 
