@@ -350,7 +350,6 @@ function itg_video_check_exist_file($filename) {
  */
 function itg_videogallery_custom_submit($form, &$form_state) {
   global $user;
-  
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
@@ -579,7 +578,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
           $file_video = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
 // this function use for delete itg_solr_delete_vide nid
           itg_videogallery_delele_node_reuse_video($file_video[0]->solr_video_id);
-          if ($form_state['node']->status == 1) {
+          if ($form_state['values']['workbench_moderation_state_new'] == 'published') {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                 ->fields(array(
                   'dailymotion_published' => 1,
@@ -890,18 +889,20 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   $api = itg_videogallery_dailymotion_api();
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
-    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc . '&thumbnail_url=' . $image_url);
+    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc);
   }
   else if (empty($tags_value) && !empty($video_title)) {
-    $api->post('/video/' . $video_id . '?private=' . $private . '&title=' . $video_title . '&description=' . $video_desc . '&thumbnail_url=' . $image_url);
+    $api->post('/video/' . $video_id . '?private=' . $private . '&title=' . $video_title . '&description=' . $video_desc);
   }
   else if (!empty($tags_value) && empty($video_title)) {
-    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&description=' . $video_desc . '&thumbnail_url=' . $image_url);
+    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&description=' . $video_desc);
   }
   else {
     $api->post('/video/' . $video_id . '?private=' . $private);
   }
-
+  if ($image_url != "") {
+    $api->post('/video/' . $video_id . '?thumbnail_url=' . $image_url);
+  }
   $thumb_url = $api->get(
       '/video/' . $video_id, array('fields' => array('thumbnail_720_url'))
   );
@@ -1939,9 +1940,9 @@ function daily_motion_video_dashboard_rows() {
           $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
       }
-      
+
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
-        if (in_array($record->video_id, $all_used_video) ) {
+        if (in_array($record->video_id, $all_used_video)) {
           $status_flag = '<span class="under-precess">Draft</span>';
           $delete_link = "";
         }
