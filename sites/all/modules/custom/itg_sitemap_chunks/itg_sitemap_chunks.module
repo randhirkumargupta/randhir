@@ -105,6 +105,17 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
+  
+  $items['admin/config/search/itg-multiple-sitemap/general-setting'] = array(
+    'title' => "Rss Setting Form",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sitemap_chunks_gereral_setting_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer itg sitemap'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
 
   $items['sitemap.xml'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap', // load the croper according to size!.
@@ -141,7 +152,49 @@ function itg_sitemap_chunks_menu() {
   );
   
   $items['rss/%'] = array(
-    'page callback' => 'itg_sitemap_chunks_get_rss_of_cat_with_order', // load the croper according to size!.
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_cat_with_order',
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss/home'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_home',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-video'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_video_with_order',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-video/%'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_video_with_order_category',
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-gallery'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_photo_with_order', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-gallery/%'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_photo_with_order_category',
     'page arguments' => array(1),
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
