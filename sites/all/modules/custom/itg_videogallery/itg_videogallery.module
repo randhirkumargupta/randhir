@@ -350,7 +350,7 @@ function itg_video_check_exist_file($filename) {
  */
 function itg_videogallery_custom_submit($form, &$form_state) {
   global $user;
-  p($form_state);
+  
   $filedir = ITG_IMAGE_FOLDER . 'video/' . date('Ym');
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
