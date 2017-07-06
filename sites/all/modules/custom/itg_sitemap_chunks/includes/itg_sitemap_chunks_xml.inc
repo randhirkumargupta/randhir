@@ -40,8 +40,10 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
       $xml .= '</sitemap>';
     }
     $xml .= '</sitemapindex>';
+    echo $xml;
+  } else {
+    return drupal_not_found();
   }
-  echo $xml;
 }
 
 /**
@@ -324,7 +326,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
   // required content type for archive sitemap
   $content_types = array("photogallery", "videogallery", "story");
   // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
-  $year_range = array(2006, date('Y'));
+  $year_range = range(2006, date('Y'));
   foreach ($year_range as $year) {
     $isRecreate = FALSE;
     $start_year = date("1/1/$year 00:00:00");

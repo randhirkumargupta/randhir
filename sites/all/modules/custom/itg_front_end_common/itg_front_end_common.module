@@ -1010,3 +1010,25 @@ function _related_story_amp_block_content() {
   return $related_story;
   }
 }
+
+/**
+ * Implements itg_get_node_details().
+ * @global type $base_url
+ * @param type $nid
+ * @return array
+ */
+function itg_get_node_details($nid) {
+  global $base_url;
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+    $query->fields('n', array('title', 'created','nid'))
+          ->fields('sm', array('field_story_extra_large_image_fid'))
+          ->condition('n.nid', $nid)
+          ->condition('n.status', 1);
+    $query->orderBy('n.created', 'DESC'); 
+    $result = $query->execute();
+
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
