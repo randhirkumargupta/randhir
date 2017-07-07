@@ -416,7 +416,6 @@ function itg_layout_manager_block_view($delta = '') {
 
         if (!empty($change_pass_msg)) {
           $sso_msg = $change_pass_msg;
-         // print $pop_output;
         }
       }
 
