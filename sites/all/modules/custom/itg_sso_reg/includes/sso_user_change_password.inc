@@ -12,13 +12,10 @@ function itg_sso_reg_password_form($form, &$form_state) {
   }  
   
   $form['#account'] = $GLOBALS['user'];
-  $form['#prefix'] = '<div id="sso_password_form">';
+  $form['#prefix'] = '<div id="sso_password_form"><h3>'.drupal_set_title('Change Password').'</h3>';
   $form['#suffix'] = '</div>';
   $form['#attributes'] = array('autocomplete' => 'off');  
   
-  $form['heading'] = array(
-    '#markup' => '<h3>'.drupal_set_title('Change Password').'</h3>',
-  );  
   
   $form['domain_info_url'] = array(
     '#type' => 'hidden',
