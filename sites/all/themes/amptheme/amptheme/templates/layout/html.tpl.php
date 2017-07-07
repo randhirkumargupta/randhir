@@ -143,16 +143,16 @@
         font-weight: 600;
         text-transform: capitalize;
       }
+      .scroll-x{
+        overflow-x: auto;
+      }
       .factoids-slider ul {
         background: #a00606;
         padding: 0px;
         margin-top: 20px;
-        display: table-cell;
+        display: table;
         vertical-align: top;
-        width: 100%;
         list-style: none;
-        overflow-x: auto;
-        white-space: nowrap;
       }
       .factoids-slider ul li {
         padding: 25px; 
