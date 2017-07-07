@@ -494,6 +494,7 @@
       .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
+      .amp-photo-slider #carousel-with-preview{height: 700px;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
