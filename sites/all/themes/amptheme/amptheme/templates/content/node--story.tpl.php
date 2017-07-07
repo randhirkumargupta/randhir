@@ -324,11 +324,21 @@ if (!empty($content)):
 
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
-                                  <div class="social-share"><ul>     
-                                 <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                  <div class="social-share">
+                                  <amp-accordion disable-session-states>
+        <section>
+          <h2>
+            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+          </h2>
+                                  <ul>     
+                                 <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
                                  <li><a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
                                  <li><a href="'.$google_url.'" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
-                                 </ul></div>
+                                 </ul>
+                                 </section>
+                                 </amp-accordion>
+                                 </div>
                                  </div>';
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
@@ -466,12 +476,20 @@ if (!empty($content)):
                 $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']).'&url='.$short_url.'&via=IndiaToday';
                 $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
                 $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img"><div class="social-share">
+                  <amp-accordion disable-session-states>
+        <section>
+          <h2>
+            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+          </h2>
               <ul>
-              <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
               <li><a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
               <li><a href="'.$google_url.'" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
               
               </ul>
+              </section>
+              </amp-accordion>
           </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
