@@ -159,7 +159,6 @@ function itg_sitemap_chunks_get_files_name() {
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
   $content_links = array();
-  $arg = arg();
   if (!empty($contents)) {
 
     $limit = variable_get('itg_sitemap_chunks_number_for_sitemap', 2000);
