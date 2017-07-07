@@ -1,6 +1,5 @@
 <?php
 global $base_url;
-
 ?>
 <section class="footer-top">
     <div class="container">
@@ -109,5 +108,14 @@ global $base_url;
     <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
   </div>
 <!--animation emoji for hightlight end-->
+<?php
+if(!empty($sso_msg)) {
+  print '<div class = "activate-message">
+         <div class = "message-body">
+         <p>' . $sso_msg . '</p>
+         <a href = "javascript:void(0)" class = "close-pass-popup">ok</a>
+         </div></div>';
+}
+?>        
 
 
