@@ -791,6 +791,140 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        // fblogin custom resource declaration.....
+        'fblogin' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves fblogin schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_fblogin',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'app_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'application master id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'uname',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'description' => 'username (in socail login)',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'login_type'),
+                            'description' => 'uid (in socail login)',
+                            'type' => 'int',
+                        ),
+                        array(
+                            'name' => 'issued_at',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'token_id'),
+                            'description' => 'in timestamp',
+                            'type' => 'int',
+                        ),
+                        array(
+                            'name' => 'expires_at',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'token_id'),
+                            'description' => 'in timestamp',
+                            'type' => 'int',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // twtlogin custom resource declaration.....
+        'twtlogin' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves twtlogin schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_twtlogin',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'app_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'application master id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'uname',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'description' => 'username (in socail login)',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'login_type'),
+                            'description' => 'uid (in socail login)',
+                            'type' => 'int',
+                        ),
+                        array(
+                            'name' => 'issued_at',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'token_id'),
+                            'description' => 'in timestamp',
+                            'type' => 'int',
+                        ),
+                        array(
+                            'name' => 'expires_at',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'token_id'),
+                            'description' => 'in timestamp',
+                            'type' => 'int',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -1801,4 +1935,30 @@ $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2R
         $account = $e;
     }
     return $account;
+}
+
+//itg_rapid_api_fblogin
+/**
+ * [itg_rapid_api_fblogin] definition.
+ * Returns the information about a itg_rapid_api_fblogin.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
+    fblogin($_GET);
+}
+
+//itg_rapid_api_twtlogin
+/**
+ * [itg_rapid_api_twtlogin] definition.
+ * Returns the information about a itg_rapid_api_twtlogin.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
+    twtlogin($_GET);
 }
