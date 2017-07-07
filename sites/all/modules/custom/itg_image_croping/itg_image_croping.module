@@ -620,6 +620,7 @@ function itg_image_croping_crop_image() {
   if ($content_type == 'videogallery') {
     $content_type = 'video';
   }
+  $content_type_new = $_POST['content_name'];
   $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
   $fileids = array();
   $img_dim = mageimagedimesion();
@@ -657,7 +658,6 @@ function itg_image_croping_crop_image() {
   if (!empty($image_fields) && !empty($image)) {
 
     foreach ($image_fields as $fields_name) {
-
       $file = array();
       if (!file_exists(file_default_scheme() . '://' . $filedir)) {
         mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
@@ -665,7 +665,7 @@ function itg_image_croping_crop_image() {
 
       $filepath = file_default_scheme() . '://' . $filedir;
 
-      $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
+      $scaled = image_resize($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height']);
       if ($scaled) {
         $image_name = $fields_name . time();
         if ($orignal_file_name != "") {
@@ -691,7 +691,6 @@ function itg_image_croping_crop_image() {
       }
     }
   }
-
   print json_encode($fileids);
   exit();
 }
@@ -754,12 +753,13 @@ function itg_image_croping_crop_image_orignal() {
   if ($content_type == 'videogallery') {
     $content_type = 'video';
   }
+  $content_type_new = $_POST['content_name'];
   $image_fields = $_POST['image_fields'];
   $fileids = array();
   $img_dim = mageimagedimesion();
   $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
-  $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
-  $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
+  $image_width = $img_dim[$content_type_new][$_POST['field_name']]['width'];
+  $image_height = $img_dim[$content_type_new][$_POST['field_name']]['height'];
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   }
@@ -808,11 +808,11 @@ function itg_image_croping_crop_image_orignal() {
 
       $filepath = file_default_scheme() . '://' . $filedir;
 
-      if ($orig_width < $img_dim[$content_type] [$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
-        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
+      if ($orig_width < $img_dim[$content_type_new] [$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type_new][$fields_name]['height']) {
+        $scaled = image_scale($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height'], true);
       }
       else {
-        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], false);
+        $scaled = image_scale($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height'], false);
       }
 
       if ($scaled) {
