@@ -11995,3 +11995,15 @@ fieldset#edit-xmlsitemap{
     margin-left: 250px;
   }
 }
+[id*="itg-sitemap-chunks-setting-form"]{
+  @extend .node-form;
+}
+[id*="itg-sitemap-chunks-add-sitemap"], [id*="itg-sitemap-chunks-section-form"], [id*="itg-sitemap-chunks-add-sitemap"]{
+  table{
+    margin-bottom: 10px;
+    .form-item {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
