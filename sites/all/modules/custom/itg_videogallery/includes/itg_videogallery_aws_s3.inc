@@ -104,7 +104,7 @@ function itg_video_send_dm_to_s3($bitrate_url, $video_name) {
   $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
   $result = $s3->putObject(array(
     'Bucket' => $bucket,
-    'Key' => $aws_video_dir . $video_name,
+    'Key' => $aws_video_dir . date('Ym') . '/' . $video_name,
     'Body' => file_get_contents($bitrate_url),
     'ACL' => 'public-read'
   ));
