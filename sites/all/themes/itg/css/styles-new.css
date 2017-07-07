@@ -2339,6 +2339,16 @@ body.has-cart-popup {
   margin: 20px 0;
 }
 
+.page-signup [id*="itg_sso_reg_multistep_form"] .parent-background {
+  max-width: 780px;
+}
+.page-signup [id*="itg_sso_reg_multistep_form"] .form-wrapper .form-submit {
+  background-color: transparent;
+  width: 170px;
+  height: 40px;
+  border: none;
+}
+
 [id*="itg_user_forgot_password_multistep_form"] {
   text-align: center;
   max-width: 780px;
@@ -2381,26 +2391,25 @@ body.has-cart-popup {
   height: 36px;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
-  padding: 15px;
+  padding: 15px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
   position: relative;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .form-submit, [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .btn-skip {
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: 3px;
+  background: url(../images/btn-blue.png) no-repeat;
   color: #fff;
   font-size: 16px;
-  height: 38px;
-  width: 200px;
+  height: 41px;
+  width: 170px;
   text-align: center;
-  line-height: 35px;
+  line-height: 38px;
   margin-right: 20px;
   text-transform: capitalize;
   display: inline-block;
   vertical-align: top;
+  border: none;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress {
   left: 217px;
@@ -3675,6 +3684,18 @@ span.personal-social-share-links {
   float: left;
 }
 
+div#forgot-field-heading {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+.page-user .sso-header + #page .login-wrapper .form-type-textfield label, .page-user .sso-header + #page .login-wrapper .form-type-password label {
+  display: none;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -4408,12 +4429,17 @@ span.personal-social-share-links {
   right: 0;
   top: 25px;
   margin: 0 auto;
-  width: 20px;
+  width: 25px;
+  height: 25px;
+  background-color: #e5e5e5;
+  border-radius: 50%;
   text-align: center;
   font-size: 12px;
   color: #666;
   font-family: Roboto;
   font-weight: 500;
+  box-sizing: border-box;
+  padding-top: 4px;
 }
 
 .page-cart section.sidebar .block-itg-ads, .page-order section.sidebar .block-itg-ads {
@@ -6950,7 +6976,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding: 40px 0;
   }
   .page-user .parent-background, .page-signup .parent-background, .page-forgot-password .parent-background {
-    padding: 30px;
+    padding: 30px 20px;
   }
   .page-user .social-share a, .page-signup .social-share a, .page-forgot-password .social-share a {
     width: 50px;
@@ -6958,6 +6984,54 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   .page-user .social-share a .fa, .page-signup .social-share a .fa, .page-forgot-password .social-share a .fa {
     width: 50px;
+  }
+
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link {
+    padding: 0 10px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link .left-block {
+    width: 50%;
+    padding-right: 5px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link .rgt-block {
+    width: 50%;
+    padding-left: 5px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row {
+    padding: 0;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row .form-item {
+    margin: 0;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile {
+    padding-bottom: 40px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile:after {
+    top: auto;
+    bottom: 12px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .col-xs-6 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #itg_user_forgot_password_multistep_form .parent-background {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #itg_user_forgot_password_multistep_form .parent-background .sign-in-link .signin-link {
+    width: 50%;
+    padding-right: 5px;
+    text-align: left;
+  }
+  #itg_user_forgot_password_multistep_form .parent-background .sign-in-link .signup-link {
+    width: 50%;
+    padding-left: 5px;
+    text-align: right;
   }
 }
 @media all and (max-width: 480px) {

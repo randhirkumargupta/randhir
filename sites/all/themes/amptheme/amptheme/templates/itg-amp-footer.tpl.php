@@ -49,8 +49,9 @@ global $base_url;
           <h4><?php print t('Useful Links :'); ?></h4>
           <?php print drupal_render($data['useful_footer']); ?>
         </div>
+          <div class="copyright"><?php print t('Copyright &copy;'); ?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></div>
       </div>
     </section>
   </amp-accordion>
-  <div class="copyright"><?php print t('Copyright &copy;'); ?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></div>
+  
 </footer>
