@@ -29,7 +29,7 @@ class ItgFunanlyticsMigration extends XMLMigration {
         $file_path1 = drupal_realpath($file_path);
         $xml_folder = $file_path1 . '/' . 'migrate/xml_file/';
        
-        $items_url = $xml_folder . 'itg_funalytics-old.xml';
+        $items_url = $xml_folder . 'itg_funalytics.xml';
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
         $item_xpath = '/data/funalytics';
