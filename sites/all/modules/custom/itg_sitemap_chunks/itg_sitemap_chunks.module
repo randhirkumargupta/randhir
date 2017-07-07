@@ -28,6 +28,11 @@ function itg_sitemap_chunks_cronapi($op, $job = NULL) {
     'callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_content_type',
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
   );
+  $items['itg_sitemap_chunks_create_sitemap_xml'] = array(
+    'description' => 'Cron to create xml sitemap.xml',
+    'callback' => 'itg_sitemap_chunks_create_xml_sitemap_cron',
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+  );
   return $items;
 }
 
@@ -170,6 +175,14 @@ function itg_sitemap_chunks_menu() {
   
   $items['rss/home'] = array(
     'page callback' => 'itg_sitemap_chunks_get_rss_of_home',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss/magazine'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_magazine',
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',

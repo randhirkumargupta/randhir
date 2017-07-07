@@ -159,40 +159,32 @@ function itg_sitemap_chunks_get_files_name() {
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
   $content_links = array();
-  $excluded_nodes = array();
-  //$content_types = array();
-  if (!empty(variable_get('itg_sitemap_exclude_nid'))) {
-    $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
-  }
-
+  
   if (!empty($contents)) {
-    // Prepare array of content type which is saved from setting form.
-    // These content type only will be avaiable for xml sitemap.
-    foreach ($contents['content'] as $content) {
-      $content_types[] = $content->content_type;
-      
-    }
+
     $limit = variable_get('itg_sitemap_chunks_number', 50000);
     // Get the all links for given type.
     $query = db_select('node', 'n'); //->extend('PagerDefault')->limit($limit);
-    $query->fields('n', array('nid', 'type'));
-    $query->condition('type', $content_types, 'IN');
-    //$query->condition('status', 1);
-    // Exclude node
-    if (!empty($excluded_nodes)) {
-      foreach ($excluded_nodes as $nid) {
-        $query->condition('nid', $nid, "!=");
-      }
-    }
+    $query->fields('n', array('nid'));
+    $query->condition('type', $contents, 'IN');
+    $query->condition('status', 1);
+   
     $query->orderBy('n.nid', 'DESC');
-    $query->range(0, $limit);
-    $query->groupBy('n.nid');
-    $results = $query->execute()->fetchAll();
+    $query->range(0, $limit);    
+    $results = $query->execute();
     // prepare result for xml with pagination.
+    
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    
     foreach ($results as $i => $data) {
-      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
-      $content_links[$i]['link'] = $path;
+      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));      
+      $xml .= '<url>';
+      $xml .= '<loc>' . $path . '</loc>';      
+      $xml .= '</url>';
     }
+    
+    $xml .= '</urlset>';
   }
-  return $content_links;
+  return $xml;
 }
