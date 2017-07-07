@@ -1947,7 +1947,7 @@ $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2R
  * 	The node processed information array.
  */
 function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
-    fblogin($_GET);
+    return fblogin($_GET);
 }
 
 //itg_rapid_api_twtlogin
@@ -1960,5 +1960,5 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
  * 	The node processed information array.
  */
 function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
-    twtlogin($_GET);
+    return twtlogin($_GET);
 }

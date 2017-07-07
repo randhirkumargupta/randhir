@@ -22,10 +22,11 @@ function fblogin($data){
     $issued_at_social = $data['issued_at'];
     $expires_at_social = $data['expires_at'];
     //check user name is exist in db..
-    $user_load = user_load_by_name($uname_social);
+    $user_load = user_load_by_name($uname_social); 
+    //echo "<pre>"; print_r($user_load->uid);echo "</pre>";exit();
     if($user_load->uid){
         // user exist, next is step for login
-        return userloginFB($uname, $user_load->uid);
+        return userloginFB($uname_social, $user_load->uid);
     }
     else{
         // user not exist, next is step for signup
@@ -40,7 +41,8 @@ function fblogin($data){
  */
 function userloginFB($uname, $uidget){
     global $user;
-    $username =  $uname;
+    $username =  $uname; 
+    
     if ($user->uid) {
         // user is already logged in
         return services_error(t('Already logged in as @user.', array('@user' => $user->name)), 406);
@@ -72,7 +74,7 @@ function userloginFB($uname, $uidget){
     }
     
     if ($uid) {
-        $user = user_load($uid);
+        $user = user_load($uid);        
         if ($user->uid) {
             user_login_finalize();
 
@@ -86,7 +88,7 @@ function userloginFB($uname, $uidget){
             services_remove_user_data($account);
 
             $return->user = $account;
-
+            //print_r($return);exit();
             return $return;
         }
     }
@@ -195,6 +197,8 @@ function userSignupFB($uname_social, $uid_social){
     return $account;
     
 }
+
+
 
 
 

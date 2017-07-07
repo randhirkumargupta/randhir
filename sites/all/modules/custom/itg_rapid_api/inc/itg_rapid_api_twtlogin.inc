@@ -24,7 +24,7 @@ function twtlogin($data){
     $user_load = user_load_by_name($uname_social);
     if($user_load->uid){
         // user exist, next is step for login
-        return userloginTWT($uname, $user_load->uid);
+        return userloginTWT($uname_social, $user_load->uid);
     }
     else{
         // user not exist, next is step for signup
@@ -39,7 +39,8 @@ function twtlogin($data){
  */
 function userloginTWT($uname, $uidget){
     global $user;
-    $username =  $uname;
+    $username =  $uname; 
+    
     if ($user->uid) {
         // user is already logged in
         return services_error(t('Already logged in as @user.', array('@user' => $user->name)), 406);
@@ -71,7 +72,7 @@ function userloginTWT($uname, $uidget){
     }
     
     if ($uid) {
-        $user = user_load($uid);
+        $user = user_load($uid);        
         if ($user->uid) {
             user_login_finalize();
 
@@ -85,7 +86,7 @@ function userloginTWT($uname, $uidget){
             services_remove_user_data($account);
 
             $return->user = $account;
-
+            //print_r($return);exit();
             return $return;
         }
     }
