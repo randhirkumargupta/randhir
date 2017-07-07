@@ -5863,6 +5863,49 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   text-align: center;
 }
 
+.page-sso-change-password h3 {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form {
+  background: #fbfbfb;
+  margin: 0 auto;
+  max-width: 780px;
+  padding: 20px 100px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form .password-confirm span.error {
+  display: inline-block;
+}
+
+#sso_email_mobile_form {
+  max-width: 780px;
+}
+#sso_email_mobile_form h3 {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+#sso_email_mobile_form form {
+  background: #fbfbfb;
+  margin: 0 auto;
+  padding: 20px 100px;
+}
+#sso_email_mobile_form form label {
+  display: block;
+}
+#sso_email_mobile_form form input[type="text"] {
+  width: 100%;
+}
+#sso_email_mobile_form form .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
+}
+
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
     display: inline-block !important;
