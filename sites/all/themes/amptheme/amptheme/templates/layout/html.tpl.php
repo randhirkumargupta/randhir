@@ -506,6 +506,39 @@
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
       .amp-photo-slider #carousel-with-preview{height: 700px;}
+      .quotes {
+          margin: 5px 0 5px 15px;
+      }
+      blockquote {
+          color: #000;
+          font: 600 20px/28px "Roboto Slab",sans-serif;
+          position: relative;
+          text-align: justify;
+          text-indent: 40px;
+      }
+      .quotes .author {
+          font-size: 12px;
+          color: #828282;
+          text-align: right;
+      }
+      blockquote:before {
+        content: "\201C";
+        display: inline-block;
+        font: bold 60px/28px Georgia, serif;
+        vertical-align: baseline;
+        position: absolute;
+        left: 0;
+        top: 12px;
+        text-indent: 0;
+      }
+     blockquote:after {
+        content: "\201D";
+        display: inline-block;
+        font: bold 60px/0px Georgia, serif;
+        vertical-align: top;
+        text-indent: 10px;
+        margin-top: 32px;
+      }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
