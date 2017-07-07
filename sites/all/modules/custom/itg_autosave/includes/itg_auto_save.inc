@@ -202,16 +202,21 @@ class itg_auto_save {
     }
   
     // Create new field collection for node field.
-    foreach ($value['und'] as $key => $fc_value) {  //print_r($field_name);die; 
+    foreach ($value['und'] as $key => $fc_value) {  
+		
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
        
       // Filter empty array from list.
       $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
+      //~ if($field_name == 'field_facebook_gallery_associate'){
+		  //~ print_r($this->field_collection_data);die;
+      //~ }
        // Validate empty field collection
       $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);      
       // Create entity of type field collection
       if ($this->validation) {
+		
         watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key); 
                 
         $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));        
@@ -445,6 +450,10 @@ class itg_auto_save {
           if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
             return TRUE;
           } 
+        case 'list_integer':
+          if ($field_values[$value['fieldName']]['und'] > 0) {
+            return TRUE;
+          } 
       }
     }
     
@@ -666,10 +675,26 @@ class itg_auto_save {
         case 'file':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
-          
+       break;
         case 'image':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+       break;
+		case 'list_integer':	
+			$fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
+	   break;
+		case 'entityreference':			
+			$this->value = $inputs[$field['fieldName']]['und'][0]['target_id'];          
+			$this->value = explode(')', end(explode("(", $this->value)));    
+			if(count($this->value) > 0){
+				$this->value = (int)$this->value[0];
+			}else{
+				$this->value = 0;
+			}
+			if ($this->value > 0) {
+				$fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['target_id'] = $this->value;
+			}
+	   
       }
     }    
   }

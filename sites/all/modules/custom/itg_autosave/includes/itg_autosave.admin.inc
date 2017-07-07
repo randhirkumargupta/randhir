@@ -97,8 +97,9 @@ function itg_autosave_form_delete($form_id) {
  * @param string $ctype
  *   Name of the content type.
  */
-function itg_autosave_nodeform($nid, $ctype) {    
+function itg_autosave_nodeform($nid, $ctype) { 
   global $user;
+  ignore_user_abort(true);
   // Store submitted values into variable.
   $inputs = $_POST;    
   // Create object for itg_auto_save class.
@@ -146,12 +147,13 @@ function itg_autosave_nodeform($nid, $ctype) {
   // Check if field collection is available.
   /******************************* Hide field collection code *****************/ 
   if (count($f_collection) > 0) {
-	  
+	 
     // Find how many field collection are present.
-    foreach ($f_collection as $field) {     // die('sasssssdasd');
+    foreach ($f_collection as $field) {     
       // Delete old field collection fields and create fresh collections.
       $itg_auto_save->itg_save_field_field_collection($inputs[$field], $node, $field, $itg_nid->field_collection);      
-    }    
+    }
+     
   }
    
   /*********** End of code field collection ***********************************/  
