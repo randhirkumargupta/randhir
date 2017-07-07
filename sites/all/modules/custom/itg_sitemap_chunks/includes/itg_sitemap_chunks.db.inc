@@ -159,34 +159,18 @@ function itg_sitemap_chunks_get_files_name() {
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
   $content_links = array();
-  //$excluded_nodes = array();
-  //$content_types = array();
-//  if (!empty(variable_get('itg_sitemap_exclude_nid'))) {
-//    $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
-//  }
-
+  
   if (!empty($contents)) {
-    // Prepare array of content type which is saved from setting form.
-    // These content type only will be avaiable for xml sitemap.
-//    foreach ($contents['content'] as $content) {
-//      $content_types[] = $content->content_type;
-//      
-//    }
+
     $limit = variable_get('itg_sitemap_chunks_number', 50000);
     // Get the all links for given type.
     $query = db_select('node', 'n'); //->extend('PagerDefault')->limit($limit);
     $query->fields('n', array('nid'));
     $query->condition('type', $contents, 'IN');
     $query->condition('status', 1);
-    // Exclude node
-//    if (!empty($excluded_nodes)) {
-//      foreach ($excluded_nodes as $nid) {
-//        $query->condition('nid', $nid, "!=");
-//      }
-//    }
+   
     $query->orderBy('n.nid', 'DESC');
-    $query->range(0, $limit);
-    //$query->groupBy('n.nid');
+    $query->range(0, $limit);    
     $results = $query->execute();
     // prepare result for xml with pagination.
     
