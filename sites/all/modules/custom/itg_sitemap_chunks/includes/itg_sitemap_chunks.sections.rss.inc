@@ -49,6 +49,28 @@ function itg_sitemap_chunks_get_rss_of_photo_with_order_category($section_tid) {
   }
 }
 
+function itg_sitemap_chunks_get_rss_of_magazine() {
+  if (function_exists('itg_msi_get_current_issue')) {
+    $current_issue = itg_msi_get_current_issue();
+    $query = db_select('node', 'n')->distinct();
+    $query->join('field_data_field_story_issue_date', 'sid', 'sid.entity_id=n.nid');
+    $query->join('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('sid.field_story_issue_date_value', $current_issue);
+    $query->orderBy('iwo.weight', 'DESC');
+    //$query->groupBy('n.nid');
+    $rss_nids = $query->execute()->fetchCol();
+    p($rss_nids);
+    $xml = itg_sitemap_chunks_common_rss_for_home_page($rss_nids);
+    if (!is_null($xml)) {
+      header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+      echo $xml;
+    } else {
+      return drupal_not_found();
+    }
+  }
+}
+
 function itg_sitemap_chunks_get_rss_of_home() {
   $big_story = db_select('itg_widget_order', 'iwo');
   $big_story->fields('iwo', array('nid'));
@@ -156,7 +178,7 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
   $query->condition('n.nid', $rss_nids, 'IN');
   $query->range(0, $limit);
   $result_data = $query->execute()->fetchAllAssoc('nid');
-  // Create same order as per given in nodeids.
+// Create same order as per given in nodeids.
   foreach ($rss_nids as $order_nids) {
     $result[] = (array) $result_data[$order_nids];
   }
@@ -195,9 +217,9 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   global $base_url;
   $xml = NULL;
   $limit = variable_get('itg_rss_chunks_number', 50000);
-  // Get all child of section.
+// Get all child of section.
   $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
-  // Include section too in childern and combine into single array.
+// Include section too in childern and combine into single array.
   $childrens[] = $section_tid;
   sort($childrens);
   $query = db_select('itg_widget_order_section', 'wos');
@@ -255,7 +277,7 @@ function itg_sitemap_print_section_rss($result) {
   foreach ($result as $data) {
     $xml .= '<item>';
     $node_title = $data['title']; // Long Headline
-    $node_link = $base_url . '/' . drupal_get_path_alias("node/" . $data['nid']);
+    $node_link = $base_url . '/' . drupal_get_path_alias("node/" . $data ['nid']);
     if (!empty($data['uri'])) {
       $node_extra_large_image_url = file_create_url($data['uri']);
     } else {
