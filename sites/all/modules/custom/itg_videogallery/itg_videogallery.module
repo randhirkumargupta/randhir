@@ -2394,7 +2394,7 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
-
+  itg_videogallery_publish_node_after_video_ready_by_dm();
 // Here deleted video
   itg_videogallery_remove_video_with_child();
 // This crone use for remove video if parent site remove this video from video article
@@ -2402,7 +2402,6 @@ function itg_videogallery_thumb_url() {
 // This crone use for if node is publish.
   itg_videogallery_video_draft_node_check();
 //Cron use for make publish node after check video status ready to play
-  itg_videogallery_publish_node_after_video_ready_by_dm();
 }
 
 /* * solr action on node updaet and insert
