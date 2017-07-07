@@ -1554,10 +1554,7 @@ function itg_videogallery_remove_video_with_child() {
           watchdog_exception('file manage delete', $e);
         }
       }
-
-
       if ($data_delete->property == VIDEO_PROPERTY) {
-
 // $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
         $query = db_update('dailymotion_response_details');
         $query->fields(array('dailymotion_published' => 0));
@@ -2397,7 +2394,7 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
-
+  itg_videogallery_publish_node_after_video_ready_by_dm();
 // Here deleted video
   itg_videogallery_remove_video_with_child();
 // This crone use for remove video if parent site remove this video from video article
@@ -2405,7 +2402,6 @@ function itg_videogallery_thumb_url() {
 // This crone use for if node is publish.
   itg_videogallery_video_draft_node_check();
 //Cron use for make publish node after check video status ready to play
-  itg_videogallery_publish_node_after_video_ready_by_dm();
 }
 
 /* * solr action on node updaet and insert
@@ -2818,7 +2814,7 @@ function itg_videogallery_move_ftp_videos() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-2 days', time());
+  $totime = strtotime('-1 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
@@ -2885,7 +2881,7 @@ function itg_videogallery_url_with_bitates() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-2 days', time());
+  $totime = strtotime('-1 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
@@ -2945,8 +2941,8 @@ function itg_videogallery_video_bitrate() {
         }
       }
     }
-    
-    
+
+
     curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_l1_url,stream_h264_l2_url,stream_h264_qhd_url,stream_h264_uhd_url");
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);

@@ -385,7 +385,8 @@ $uri = base64_encode($actual_link);
               </ul>
             </div>
             <?php print $description_slider; ?>
-            <p class="upload-date"><?php print $row['timestamp']; ?></p>
+            
+            <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
             <div class="section-like-dislike">
               <div id="btn-div">
                 <?php
