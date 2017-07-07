@@ -3464,9 +3464,9 @@
   height: 100%;
 }
 
-#block-views-video-landing-header-block .video-header-left .video.slick-slider .slick-slide {
+#block-views-video-landing-header-block .video-header-left .video.slick-slider .slick-slide div.video-iframe-wrapper {
   height: 0;
-  padding-bottom: 18.05%;
+  padding-bottom: 72.2%;
 }
 
 .sso-header + #page {
