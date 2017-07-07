@@ -10,7 +10,7 @@
     $video_id = array();
     ?>
     <amp-carousel width="300"
-                  height="450"
+                  height="400"
                   layout="responsive"
                   type="slides">
     <?php
