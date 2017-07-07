@@ -326,11 +326,11 @@ if (!empty($content)):
                                  <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
                                   <div class="social-share">
                                   <amp-accordion disable-session-states>
-        <section>
-          <h2>
-            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-          </h2>
+                                  <section>
+                                  <h2>
+                                    <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                                    <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                                  </h2>
                                   <ul>     
                                  <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
                                  <li><a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
@@ -477,11 +477,11 @@ if (!empty($content)):
                 $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
                 $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img"><div class="social-share">
                   <amp-accordion disable-session-states>
-        <section>
-          <h2>
-            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-          </h2>
+                <section>
+                  <h2>
+                    <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                    <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
+                  </h2>
               <ul>
               <li><a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
               <li><a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
@@ -490,7 +490,7 @@ if (!empty($content)):
               </ul>
               </section>
               </amp-accordion>
-          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+              </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
