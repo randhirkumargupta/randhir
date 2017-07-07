@@ -63,14 +63,15 @@
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
-      *{margin: 0; padding: 0; box-sizing: border-box;}
+      *{margin: 0; padding: 0; box-sizing: border-box; outline: none; border: none;}
       body{font: 400 14px/18px 'Roboto Slab';}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px;}
+      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
       #navbar h2{
@@ -82,6 +83,9 @@
         color: #fff;
         height: 28px;
       }
+      #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
+      #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
+      #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
       .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
@@ -143,7 +147,7 @@
         background: #a00606;
         padding: 0px;
         margin-top: 20px;
-        display: inline-block;
+        display: table-cell;
         vertical-align: top;
         width: 100%;
         list-style: none;
@@ -291,8 +295,6 @@
         overflow: hidden;
       }
 
-      .node-type-photogallery #header, 
-      .node-type-videogallery #header{margin: 0;}
       .black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
       .photo-title {
         font-size: 32px;
@@ -370,6 +372,14 @@
       .amp-photo-ad{text-align: center;}
       .node-story h1 a{color: #0883ed; text-decoration: none;}
       .node-story h1 a:hover{color: #0883ed; text-decoration: underline;}
+      .story-section h1 i {
+        font-size: 13px;
+        color: #f40000;
+        -webkit-animation-name: blinker;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        -webkit-animation-duration: 1s;
+      }
       .story-right .description iframe{max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
@@ -456,16 +466,34 @@
         padding: 10px 12px;
         text-align: center;
         font-size: 12px;
+        border-top: 1px solid #111111;
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
-        height: 400px;
+        height: 500px;
       }
-      .nav-right{position: absolute; top: 0; right: 0;}
-      .nav-right > div{width: 28px; height: 28px; display: inline-block; vertical-align: top; color: #fff; text-align: center; margin: 0 5px;}
+      .nav-right{position: absolute; top: 0; right: 0; width: 100px;}
       .nav-right .phone .fa{width: 20px; height: 20px; border: 1px solid; border-radius: 50%; text-align: center; line-height: 18px; margin-top:  3px;}
       .nav-right .comment .fa{margin-top:  3px; font-size: 20px;}
       .nav-right .share .fa{margin-top:  5px; font-size: 18px;}
+      #navbar .social-share h2{height: 24px; margin: 0; left: 70px;}
+      #navbar .social-share .share-link{padding: 5px 10px; background-color: #a00606; margin-top: 5px;}
+      #navbar .social-share .share-link a{ display: inline-block; vertical-align: middle; color: #fff; font-size: 20px; }
+      #navbar .social-share .share-link a + a{margin-left: 10px;}
+      .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
+      .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
+      .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
+      .buzz-img .social-share ul li{float: left;}
+      .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
+      .factoids-page{display: inline-block; vertical-align: top; width: 100%; margin-bottom: 20px;}
+      .fun-facts{float: left;}
+      .factoids-page .social-share{height: 22px;}
+      .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: center;left: 5px;}
+      .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share ul li{float: left;}
+      .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

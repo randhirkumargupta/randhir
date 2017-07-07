@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * home_page_eclection.views_default.inc

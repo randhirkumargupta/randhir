@@ -1021,9 +1021,12 @@ function itg_story_photo_story_html($node_id) {
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
+      if (function_exists('itg_story_get_image_info')) {
+      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+      }
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" />' . $previous_link;
-      $html .= '<div class="description"><p>' . $photo_story_desc . '</p></div>';
+      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">'.$getImageInfo[0]->image_photo_grapher.'</span></div>' . $previous_link;
+      $html .= '<div class="photo-description">'.$getImageInfo[0]->image_caption.'</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }
     $html .= '</div>';
@@ -1060,12 +1063,15 @@ function itg_story_photo_amp_html($node_id) {
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
+      if (function_exists('itg_story_get_image_info')) {
+      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+      }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">' . $photo_story_img_title . '</div></div>
-      <div class="image-alt">' . $photo_story_img_alt . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
     $html .= '</amp-carousel>';
