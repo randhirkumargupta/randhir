@@ -28,7 +28,7 @@
                              width="300"
                              height="200">
             </amp-dailymotion>
-             <div class="video-caption"><?php print date('F d, Y, H:i A', $node->created);?><br/><?php print $video_value->field_video_title_value;?></div>
+                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
                 </div>
             </div>        
 
