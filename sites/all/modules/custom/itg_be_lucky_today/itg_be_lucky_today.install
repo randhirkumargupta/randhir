@@ -90,7 +90,8 @@ function itg_be_lucky_today_schema() {
           'not null' => FALSE,
         ),
         'record_date' => array(
-          'mysql_type' => 'timestamp',
+          'type' => 'varchar',
+          'length' => '100',
           'not null' => TRUE,
         ),
         'facebookid' => array(
@@ -120,18 +121,6 @@ function itg_be_lucky_today_schema() {
     );
 
     return $schema;
-}
-
-/**
- * hook_enable()
- */
-function itg_be_lucky_today_enable() {
-    db_query('
-    ALTER TABLE {survey} 
-    MODIFY record_date TIMESTAMP NOT NULL 
-    DEFAULT CURRENT_TIMESTAMP 
-    ON UPDATE CURRENT_TIMESTAMP'
-    );
 }
 
 /**
