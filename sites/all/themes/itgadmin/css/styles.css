@@ -780,7 +780,7 @@ a.ckeditor_links:hover {
   text-decoration: underline;
 }
 
-.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after, .node-reporter-form .form-field-name-field-reporter-profile-type .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-company .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-department .form-type-select > label:after, .ticket-type-require:after {
+.astrick, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-1 .form-type-textfield > label:after, [id*="field-newsl-add-news-values"] tbody tr:first-child td .field-name-field-news-cid .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-pti-words-limit .form-type-textfield > label:after, .node-print_team_integration-form .form-field-name-field-survey-end-date fieldset > legend:after, .edit-field-pti-magazine-kicker .form-type-textfield > label:after, .node-story-form .form-field-name-field-story-category .form-type-hierarchical-select > label:after, .node-story-form .form-field-name-field-story-issue-date .fieldset-legend:after, .node-reporter-form .form-field-name-field-reporter-profile-type .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-company .form-type-select > label:after, .node-reporter-form .form-field-name-field-byline-department .form-type-select > label:after {
   content: '*';
   color: red;
 }
@@ -12685,4 +12685,30 @@ fieldset#edit-xmlsitemap {
 [id*="itg-sitemap-chunks-add-sitemap"] table .form-item, [id*="itg-sitemap-chunks-section-form"] table .form-item, [id*="itg-sitemap-chunks-add-sitemap"] table .form-item {
   margin: 0;
   padding: 0;
+}
+
+.ticket-type-require label:after {
+  content: '*';
+  color: red;
+}
+
+.form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video {
+  position: relative;
+}
+.form-field-name-field-associate-event-photo [id*="field-associate-event-photo-values"] thead, .form-field-name-field-associate-event-photo [id*="field-associate-event-video-values"] thead, .form-field-name-field-associate-event-video [id*="field-associate-event-photo-values"] thead, .form-field-name-field-associate-event-video [id*="field-associate-event-video-values"] thead {
+  float: left;
+  padding: 15px 30px;
+  width: 220px;
+  font-weight: 400;
+}
+.form-field-name-field-associate-event-photo [id*="field-associate-event-photo-values"] thead th, .form-field-name-field-associate-event-photo [id*="field-associate-event-video-values"] thead th, .form-field-name-field-associate-event-video [id*="field-associate-event-photo-values"] thead th, .form-field-name-field-associate-event-video [id*="field-associate-event-video-values"] thead th {
+  font-weight: 400;
+}
+.form-field-name-field-associate-event-photo [id*="field-associate-event-photo-values"] tbody, .form-field-name-field-associate-event-photo [id*="field-associate-event-video-values"] tbody, .form-field-name-field-associate-event-video [id*="field-associate-event-photo-values"] tbody, .form-field-name-field-associate-event-video [id*="field-associate-event-video-values"] tbody {
+  display: block;
+}
+.form-field-name-field-associate-event-photo div.clearfix, .form-field-name-field-associate-event-video div.clearfix {
+  position: absolute;
+  left: 610px;
+  bottom: 3px;
 }

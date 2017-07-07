@@ -3558,7 +3558,9 @@ div#forgot-field-heading {
   .sso-header{
     & + #page{
       .login-wrapper{
-        label{display: none;}
+        .form-type-textfield, .form-type-password{
+          label{display: none;}
+        }
       }
     }
   }
