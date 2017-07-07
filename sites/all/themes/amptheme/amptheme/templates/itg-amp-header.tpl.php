@@ -95,7 +95,7 @@ global $base_url, $user;
             <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
           </h2>
           <div class="share-link">
-            <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
             <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
             <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
           </div>
