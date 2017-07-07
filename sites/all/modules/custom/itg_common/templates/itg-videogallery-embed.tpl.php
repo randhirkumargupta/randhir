@@ -55,14 +55,14 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 </div>
               </div>  
               <div class="embed-desc"><?php print ucfirst($video_value->field_videogallery_description_value); ?></div>
-              <div class="social-share social-share-embed">
+<!--              <div class="social-share social-share-embed">
                 <ul>
                   <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
                   <li><a title="share on facebook" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li>
                   <li><a title="share on twitter" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" class="user-activity google def-cur-pointer"></a></li>
                 </ul>
-              </div>
+              </div>-->
             </li>
 
           <?php } ?>
