@@ -2257,6 +2257,30 @@ footer{
                     }
                 }
             }
+            .photo-slider{
+              .image-caption{
+                position: relative;
+                .photo-caption{
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  width: 100%;
+                  padding: 5px 10px;
+                  background-color: #222;
+                  color: #a1a1a1;
+                  font-size: 13px;
+                  font-family: Roboto;
+                }
+              }
+              .photo-description {
+                padding: 10px 0;
+                border-bottom: 1px solid #ddd;
+                font-family: Roboto;
+                font-size: 13px;
+                color: #8d8d8d;
+                font-weight: 300;
+              }
+            }
         }
     }
     .snap-post{        

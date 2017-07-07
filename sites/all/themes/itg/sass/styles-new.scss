@@ -3554,6 +3554,15 @@ div#forgot-field-heading {
     color: #aaa;
     margin-bottom: 15px;
 }
+.page-user{
+  .sso-header{
+    & + #page{
+      .login-wrapper{
+        label{display: none;}
+      }
+    }
+  }
+}
 
 
 

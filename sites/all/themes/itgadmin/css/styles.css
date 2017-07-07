@@ -12666,4 +12666,15 @@ fieldset#edit-xmlsitemap {
 
 .edit-image-info {
   color: #008eb1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+[id*="itg-image-croping-image-info-form"] .form-item-syndicate {
+  margin: 0 30px;
+}
+[id*="itg-image-croping-image-info-form"] [id*="edit-submit-button"] {
+  margin-left: 250px;
 }
