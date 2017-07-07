@@ -414,13 +414,9 @@ function itg_layout_manager_block_view($delta = '') {
           $change_pass_msg = 'Your profile has been updated successfully!';
         }
 
-        $pop_output = '<div class = "activate-message">';
-        $pop_output.= '<div class = "message-body">';
-        $pop_output.= '<p>' . $change_pass_msg . '</p>';
-        $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
-        $pop_output.= '</div></div>';
         if (!empty($change_pass_msg)) {
-          print $pop_output;
+          $sso_msg = $change_pass_msg;
+         // print $pop_output;
         }
       }
 
@@ -458,7 +454,7 @@ function itg_layout_manager_block_view($delta = '') {
 
       $data = get_itg_footer_menu();
 
-      $block['content'] = theme('footer_block', array('data' => $data));
+      $block['content'] = theme('footer_block', array('data' => $data, 'sso_msg' => $sso_msg));
 
     break;
     
