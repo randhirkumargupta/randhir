@@ -2901,6 +2901,58 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
+    pr($content);
+    $decode_json = json_decode($content);
+    curl_close($ch);
+    if (!empty($content)) {
+      foreach ($decode_json as $keys => $json_url) {
+        if ($json_url != "") {
+          $query = db_select('itg_video_bitrates_data', 'ivbd');
+          $query->fields('ivbd');
+          $query->condition('video_id', $vid->video_id);
+          $query->condition('bitates_field', $keys);
+          $result = $query->execute()->fetchall();
+          if (!empty($result)) {
+            if ($result[0]->is_download != 1) {
+              db_update('itg_video_bitrates_data')
+                  ->fields(array(
+                    'video_id' => $vid->video_id,
+                    'bitate_url' => $json_url,
+                    'duration' => $vid->video_duration,
+                    'framesize' => $bitrates_info['framesize'][$keys],
+                    'bitrate' => $bitrates_info['bitrate'][$keys],
+                    'video_name' => $vid->name,
+                    'bitates_field' => $keys,
+                    'is_download' => 0,
+                  ))->condition('id', $result[0]->id)
+                  ->execute();
+            }
+          }
+          else {
+            db_insert('itg_video_bitrates_data')
+                ->fields(array(
+                  'video_id' => $vid->video_id,
+                  'bitate_url' => $json_url,
+                  'framesize' => $bitrates_info['framesize'][$keys],
+                  'bitrate' => $bitrates_info['bitrate'][$keys],
+                  'bitates_field' => $keys,
+                  'duration' => $vid->video_duration,
+                  'video_name' => $vid->name,
+                  'is_download' => 0,
+                ))
+                ->execute();
+          }
+        }
+      }
+    }
+    
+    
+    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_l1_url,stream_h264_l2_url,stream_h264_qhd_url,stream_h264_uhd_url");
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $content = curl_exec($ch);
+
     $decode_json = json_decode($content);
     curl_close($ch);
     if (!empty($content)) {
