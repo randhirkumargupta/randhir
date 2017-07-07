@@ -340,11 +340,11 @@ if (!empty($content)):
                                  </amp-accordion>
                                  </div>
                                  </div>';
-                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
                     }
-                    $factoidsSocialShare['slider'] .= '</ul></div>';
+                    $factoidsSocialShare['slider'] .= '</ul></div></div>';
                     $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
                   }
                   $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
