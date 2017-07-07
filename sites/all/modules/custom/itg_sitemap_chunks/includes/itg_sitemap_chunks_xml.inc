@@ -11,14 +11,15 @@ module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3
  * Create xml sitemap.
  */
 function itg_sitemap_chunks_create_xml_sitemap() {
-  set_time_limit(0);
-  $contents = itg_sitemap_chunks_get_record();
+  //set_time_limit(0);
+ // $contents = itg_sitemap_chunks_get_record();
+  $contents = array('story', 'videogallery', 'photogallery');
   $content_links = itg_sitemap_chunks_get_content_links($contents);
-  if (!empty($content_links)) {
-    $xml_file_content = itg_sitemap_print_sitemap($content_links);
+  //if (!empty($content_links)) {
+   // $xml_file_content = itg_sitemap_print_sitemap($content_links);
     header('Content-type: application/xml');
-    echo $xml_file_content;
-  }
+    echo $content_links;
+  //}
 }
 
 /**
