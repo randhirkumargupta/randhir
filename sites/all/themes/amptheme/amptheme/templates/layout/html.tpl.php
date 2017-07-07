@@ -63,7 +63,7 @@
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
-      *{margin: 0; padding: 0; box-sizing: border-box;}
+      *{margin: 0; padding: 0; box-sizing: border-box; outline: none; border: none;}
       body{font: 400 14px/18px 'Roboto Slab';}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
@@ -83,6 +83,9 @@
         color: #fff;
         height: 28px;
       }
+      #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
+      #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
+      #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
       .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
@@ -156,9 +159,9 @@
         font-size: 15px;
         line-height: 24px;
         color: #fff;
-        display: inline-block;
+        display: table-cell;
         vertical-align: top;
-        width: 220px;
+        min-width: 220px;
         white-space: normal;
       }
       .factoids-slider ul li:nth-child(odd) {
@@ -327,9 +330,17 @@
       .amp-photo-slider .photo-slide .caption{
         width: auto;
       }
+      .amp-photo-slider .amp-carousel-button{
+        top: 25%;
+      }
       .amp-photo-slider p{
-        color: #fff;
+        color: #a1a1a1;
         line-height: 24px;
+      }
+      .video-caption span {
+        display: block;
+        padding-top: 20px;
+        color: #fff;
       }
       .amp-other-gallery ul{
         list-style: none;
@@ -420,6 +431,9 @@
         position: relative;
         z-index: 9;
       }
+      .footer-top-link{
+        padding-left: 40px;
+      }
       .footer-top-link ul li{
         display: inline-block;
         vertical-align: top;
@@ -467,7 +481,7 @@
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
-        height: 400px;
+        height: 500px;
       }
       .nav-right{position: absolute; top: 0; right: 0; width: 100px;}
       .nav-right .phone .fa{width: 20px; height: 20px; border: 1px solid; border-radius: 50%; text-align: center; line-height: 18px; margin-top:  3px;}
@@ -479,6 +493,52 @@
       #navbar .social-share .share-link a + a{margin-left: 10px;}
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
+      .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
+      .buzz-img .social-share ul li{float: left;}
+      .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
+      .factoids-page{display: inline-block; vertical-align: top; width: 100%; margin-bottom: 20px;}
+      .fun-facts{float: left;}
+      .factoids-page .social-share{height: 22px;}
+      .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: center;left: 5px;}
+      .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share ul li{float: left;}
+      .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
+      .amp-photo-slider #carousel-with-preview{height: 700px;}
+      .quotes {
+          margin: 5px 0 5px 15px;
+      }
+      blockquote {
+          color: #000;
+          font: 600 20px/28px "Roboto Slab",sans-serif;
+          position: relative;
+          text-align: justify;
+          text-indent: 40px;
+      }
+      .quotes .author {
+          font-size: 12px;
+          color: #828282;
+          text-align: right;
+      }
+      blockquote:before {
+        content: "\201C";
+        display: inline-block;
+        font: bold 60px/28px Georgia, serif;
+        vertical-align: baseline;
+        position: absolute;
+        left: 0;
+        top: 12px;
+        text-indent: 0;
+      }
+     blockquote:after {
+        content: "\201D";
+        display: inline-block;
+        font: bold 60px/0px Georgia, serif;
+        vertical-align: top;
+        text-indent: 10px;
+        margin-top: 32px;
+      }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

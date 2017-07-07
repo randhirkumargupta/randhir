@@ -3554,6 +3554,17 @@ div#forgot-field-heading {
     color: #aaa;
     margin-bottom: 15px;
 }
+.page-user{
+  .sso-header{
+    & + #page{
+      .login-wrapper{
+        .form-type-textfield, .form-type-password{
+          label{display: none;}
+        }
+      }
+    }
+  }
+}
 
 
 

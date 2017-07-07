@@ -26,11 +26,22 @@ function itg_users_cms_user_dashboard() {
   }
   // Loyalty & Rewards not found
   $menu_link = array_diff($menu_link, $remove_menu_link);
+   
+  
+  if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
+    $story_link = 'my-published-story';
+    $video_link = 'my-published-photogallery';
+    $photo_link = 'my-published-video';
+  } else {
+      $story_link = 'published-story?field_story_syndication_value_op=all';
+      $video_link = 'published-video?field_story_syndication_value_op=all';
+      $photo_link = 'published-photogallery?field_story_syndication_value_op=all';
+  }
   
    $listed_menu_link_site_admin = array(
-      'published-story?field_story_syndication_value_op=all' => 'Story',
-      'published-photogallery?field_story_syndication_value_op=all' => 'Photogallery',
-      'published-video?field_story_syndication_value_op=all' => 'Videos',
+      $story_link => 'Story',
+      $video_link => 'Photogallery',
+      $photo_link => 'Videos',
       'breaking-news' => 'Breaking News',
       'category-manager-listing' => 'Category Management',
       'manage-users' => 'User Management',
@@ -66,8 +77,8 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
             $listed_menu_link_site_admin['manage-newsletter']);
-     
-     $data['user_link'] = $listed_menu_link_site_admin;
+      
+      $data['user_link'] = $listed_menu_link_site_admin;
      
    } else if(in_array("Copy Editor", $user->roles)) {
 

@@ -3692,6 +3692,10 @@ div#forgot-field-heading {
   margin-bottom: 15px;
 }
 
+.page-user .sso-header + #page .login-wrapper .form-type-textfield label, .page-user .sso-header + #page .login-wrapper .form-type-password label {
+  display: none;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
