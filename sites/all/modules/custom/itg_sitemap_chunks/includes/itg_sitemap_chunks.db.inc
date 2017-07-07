@@ -159,31 +159,31 @@ function itg_sitemap_chunks_get_files_name() {
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
   $content_links = array();
-  
+  $arg = arg();
   if (!empty($contents)) {
 
-    $limit = variable_get('itg_sitemap_chunks_number', 50000);
+    $limit = variable_get('itg_sitemap_chunks_number_for_sitemap', 2000);
     // Get the all links for given type.
     $query = db_select('node', 'n'); //->extend('PagerDefault')->limit($limit);
     $query->fields('n', array('nid'));
     $query->condition('type', $contents, 'IN');
     $query->condition('status', 1);
-   
+
     $query->orderBy('n.nid', 'DESC');
-    $query->range(0, $limit);    
+    $query->range(0, $limit);
     $results = $query->execute();
     // prepare result for xml with pagination.
-    
+
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
     $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    
+
     foreach ($results as $i => $data) {
-      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));      
+      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
       $xml .= '<url>';
-      $xml .= '<loc>' . $path . '</loc>';      
+      $xml .= '<loc>' . $path . '</loc>';
       $xml .= '</url>';
     }
-    
+
     $xml .= '</urlset>';
   }
   return $xml;

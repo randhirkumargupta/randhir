@@ -469,9 +469,10 @@ function itg_sitemap_chunks_create_tabular_checkbox_fields(&$form, $types = arra
 }
 
 /**
- *  Setting form which define number of chunks you want for sitemap pagination
+ *  Setting form for chunks i.e. .gd files.
  */
 function itg_sitemap_chunks_setting_form() {
+  drupal_set_message(t('If you will submit this form , all the sitemap chunk will be deleted.'));
   $form = array();
   $form['itg_sitemap_chunks_number'] = array(
     '#type' => 'textfield',
@@ -491,11 +492,26 @@ function itg_sitemap_chunks_setting_form() {
 }
 
 /**
+ *  Setting from for sitemap.xml
+ */
+function itg_sitemap_mixedcontent_setting_form() {
+  $form = array();
+  $form['itg_sitemap_chunks_number_for_sitemap'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Limit For Sitemap.xml'),
+    '#default_value' => variable_get('itg_sitemap_chunks_number_for_sitemap', 2000),
+    '#size' => 20,
+    '#maxlength' => 20,
+  );
+  return system_settings_form($form);
+}
+
+/**
  *  General setting form for rss
  */
 function itg_sitemap_chunks_gereral_setting_form() {
   $form = array();
-  
+
   $form['itg_rss_chunks_number'] = array(
     '#type' => 'textfield',
     '#title' => t('RSS: Items Chunks'),
@@ -505,7 +521,7 @@ function itg_sitemap_chunks_gereral_setting_form() {
     '#maxlength' => 20,
     '#required' => TRUE,
   );
-  
+
   $form['video_category_tid'] = array(
     '#type' => 'textfield',
     '#title' => t('RSS: Video Section Tid'),
@@ -525,7 +541,7 @@ function itg_sitemap_chunks_gereral_setting_form() {
     '#maxlength' => 20,
     '#required' => TRUE,
   );
-  
+
   return system_settings_form($form);
 }
 
@@ -536,7 +552,7 @@ function itg_sitemap_chunks_delete_chunks() {
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   itg_video_get_s3_video_del('s3fs-public/sitemap');
   // remove directory if previously created sitemap.
-  // drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again"));
+  drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again"));
 }
 
 /**
