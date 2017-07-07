@@ -3692,7 +3692,7 @@ div#forgot-field-heading {
   margin-bottom: 15px;
 }
 
-.page-user .sso-header + #page .login-wrapper label {
+.page-user .sso-header + #page .login-wrapper .form-type-textfield label, .page-user .sso-header + #page .login-wrapper .form-type-password label {
   display: none;
 }
 

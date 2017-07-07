@@ -11967,9 +11967,7 @@ fieldset#edit-xmlsitemap{
     }
   }
  }
- .ticket-type-require:after{
-   @extend .astrick;
- }
+ 
 .cpation-wraper textarea {
   width: 400px;
   margin-bottom: 10px;
@@ -12005,5 +12003,31 @@ fieldset#edit-xmlsitemap{
       margin: 0;
       padding: 0;
     }
+  }
+}
+.ticket-type-require label:after {
+  content: '*';
+  color: red;
+}
+.form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video{
+  position: relative;
+  [id*="field-associate-event-photo-values"], [id*="field-associate-event-video-values"]{
+    thead{
+      float: left;
+      padding: 15px 30px;
+      width: 220px;
+      font-weight: 400;
+      th{
+        font-weight: 400;
+      }
+    }
+    tbody{
+      display: block;
+    }
+  }
+  div.clearfix{
+    position: absolute;
+    left: 610px;
+    bottom: 3px;
   }
 }
