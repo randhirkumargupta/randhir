@@ -752,7 +752,7 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
   if (isset($element['fid']['#value'])) {
     if ($item['filemime'] == 'image/jpeg' || $item['filemime'] == 'image/png' || $item['filemime']['#value'] == 'image/jpg'|| $item['filemime']['#value'] == 'image/gif'  ) {
       $item['fid'] = $element['fid']['#value'];
-      $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['fid']['#value'] . "?width=800&height=700&node_type=".$form['type']['#value']."&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
+      $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['fid']['#value'] . "?width=600&height=500&node_type=".$form['type']['#value']."&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
 </a>";
     }
   }
