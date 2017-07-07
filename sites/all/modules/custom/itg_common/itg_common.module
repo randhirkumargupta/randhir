@@ -457,7 +457,7 @@ function itg_common_add_preview_button($form, &$form_state) {
     global $base_url;
     
     if (isset($form_state['node']->status) && $form_state['node']->status == 0 ) {
-        $node_url = $base_url . '/node/' . $values->nid;        
+        $node_url = $base_url . '/node/' . $form_state['node']->nid;        
     } else {          
         $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;         
     }
