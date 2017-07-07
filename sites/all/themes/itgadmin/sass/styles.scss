@@ -11982,4 +11982,28 @@ fieldset#edit-xmlsitemap{
 }
 .edit-image-info{
   color: #008eb1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+[id*="itg-image-croping-image-info-form"]{
+  .form-item-syndicate{
+    margin: 0 30px;
+  }
+  [id*="edit-submit-button"]{
+    margin-left: 250px;
+  }
+}
+[id*="itg-sitemap-chunks-setting-form"]{
+  @extend .node-form;
+}
+[id*="itg-sitemap-chunks-add-sitemap"], [id*="itg-sitemap-chunks-section-form"], [id*="itg-sitemap-chunks-add-sitemap"]{
+  table{
+    margin-bottom: 10px;
+    .form-item {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
