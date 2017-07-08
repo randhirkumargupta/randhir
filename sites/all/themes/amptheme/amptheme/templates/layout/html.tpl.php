@@ -94,6 +94,7 @@
       .photoby:empty{display: none;}
       .photoby{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .description a{color: #0883ed;}
+      .description ul, .description ol{padding-left: 18px;}
       .image-alt{color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 10px 0; border-bottom: 1px solid #ddd;}
       .related-story ul{list-style: none;}
       .related-story ul li{display: inline-block; vertical-align: top; width: 100%; padding: 10px 0;}
@@ -432,7 +433,7 @@
         z-index: 9;
       }
       .footer-top-link{
-        padding-left: 40px;
+        padding-right: 40px;
       }
       .footer-top-link ul li{
         display: inline-block;
@@ -471,6 +472,9 @@
         background: #000;
         margin-top: -50px;
         z-index: 99;
+        position: absolute !important;
+        right: 0;
+        top: 0;
       }
       .copyright{
         color: #a6a6a6;
@@ -505,7 +509,6 @@
       .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
-      .amp-photo-slider #carousel-with-preview{height: 700px;}
       .quotes {
           margin: 5px 0 5px 15px;
       }
