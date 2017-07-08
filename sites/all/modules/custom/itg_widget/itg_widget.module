@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * itg_widget.module
@@ -937,12 +938,16 @@ function itg_widget_get_graph_data_for_home() {
   $itg_query->fields('astw', array('field_election_state_tid'))
       ->condition('type', 'election_graph_xml')
       ->condition('iwo.widget', 'election_graph_content', '=')
+      ->orderBy('iwo.weight' , 'ASC')
       ->condition('status', 1);
   $itg_result = $itg_query->execute()->fetchAll();
 
   return $itg_result;
 }
 
+function is_valid_json($string){
+   return is_string($string) && is_array(json_decode($string, true)) && (json_last_error() == JSON_ERROR_NONE) ? true : false;
+}
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -1111,17 +1116,17 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         $vide_dm_id = $video_value->solr_video_id;
       }
       ?>
-        <div class="iframe-video">
-          <iframe class='iframe-video-dailymotion' frameborder="0"
-                  src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
-                  allowfullscreen></iframe>
-        </div>
+    <div class="iframe-video">
+        <iframe class='iframe-video-dailymotion' frameborder="0"
+                src="https://www.dailymotion.com/embed/video/<?php print $vide_dm_id; ?>?autoplay=1&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
+                allowfullscreen></iframe>
+    </div>
         <?php
         if ($type != 'video') {
           print ucfirst($video_value->field_videogallery_description_value);
         }
         ?>
-      </div>
+</div>
 
       <?php
     }
@@ -1169,22 +1174,22 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
       $usebitrates = implode(',', $allbitrates);
       $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
       ?>
-        <div class="iframe-video">
+    <div class="iframe-video">
 
-          <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
-          <script type="text/javascript">
+        <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
+        <script type="text/javascript">
 
-            jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+          jwplayer('videoplayer_<?php echo $keys; ?>').setup({
               playlist: [{
-                  title: "<?php print $row['title']; ?>",
-                  image: "<?php echo $image_url; ?>",
-                  sources: [
-                    {
-                      file: "<?php echo $getvideo_bitrate_url; ?>"
-                    }, {
-                      file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                    }]
-                }],
+                      title: "<?php print $row['title']; ?>",
+                      image: "<?php echo $image_url; ?>",
+                      sources: [
+                          {
+                              file: "<?php echo $getvideo_bitrate_url; ?>"
+                          }, {
+                              file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+                          }]
+                  }],
               primary: "flash",
               width: "622",
               height: "360",
@@ -1194,18 +1199,18 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
               fallback: "false",
               hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
               advertising: {
-                client: "vast",
-                skipoffset: 5,
-                schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
+                  client: "vast",
+                  skipoffset: 5,
+                  schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
 
               },
               ga: {
-                idstring: "<?php print $row['title']; ?>",
+                  idstring: "<?php print $row['title']; ?>",
               }
-            });
-          </script></div>
+          });
+        </script></div>
 
-      </div>
+</div>
 
       <?php
       $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
