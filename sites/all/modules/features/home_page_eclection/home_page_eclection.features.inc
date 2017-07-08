@@ -3,6 +3,7 @@
  * @file
  * home_page_eclection.features.inc
  */
+
 /**
  * Implements hook_views_api().
  */

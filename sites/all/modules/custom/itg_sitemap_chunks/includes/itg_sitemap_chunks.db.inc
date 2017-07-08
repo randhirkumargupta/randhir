@@ -158,7 +158,6 @@ function itg_sitemap_chunks_get_files_name() {
  *   Having content links.
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
-  $content_links = array();
   if (!empty($contents)) {
 
     $limit = variable_get('itg_sitemap_chunks_number_for_sitemap', 2000);
@@ -179,7 +178,7 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
     foreach ($results as $i => $data) {
       $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
       $xml .= '<url>';
-      $xml .= '<loc>' . $path . '</loc>';
+      $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($path) . '</loc>';
       $xml .= '</url>';
     }
 
