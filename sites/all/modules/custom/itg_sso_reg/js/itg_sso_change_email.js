@@ -45,3 +45,42 @@
 
     };
 })(jQuery, Drupal, this, this.document);
+
+jQuery(document).ready(function () {
+// Custom validator function for social media start
+    jQuery("#itg-sso-user-email-form").validate({
+        onfocusout: function (element) {
+            jQuery(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            var elementName = element.attr('name');
+            var errorPlaceHolder = '';
+            switch (elementName) {
+
+                default:
+                    errorPlaceHolder = element.parent();
+            }
+            error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+            'emobile': {
+                required: true
+
+            },
+            'fotp': {
+                required: true
+
+            }
+        },
+        messages: {
+            'emobile': {
+                required: 'Email/Mobile field is required.'
+            },
+            'fotp': {
+                required: 'Please Enter OTP.'
+            }
+        }
+    });
+});
