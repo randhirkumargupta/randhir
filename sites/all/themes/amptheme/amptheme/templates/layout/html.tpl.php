@@ -348,11 +348,12 @@
         overflow: hidden;
         margin: 0 -6px;
       }
-      .amp-other-gallery ul li{
-        float: left;
-        width: 183px;
-        padding: 0 6px;
-        max-width: 50%;
+      .amp-other-gallery ul li {
+          display: inline-block;
+          width: 180px;
+          padding: 0 5px 10px;
+          max-width: 49.5%;
+          vertical-align: top;
       }
       .other-img{
         position: relative;
@@ -541,6 +542,17 @@
         vertical-align: top;
         text-indent: 10px;
         margin-top: 32px;
+      }
+      .description table{border: 1px solid #ddd; border-collapse: collapse; width: 100%;}
+      .description table td{border: 1px solid #ddd; padding: 5px;}
+      .rtejustify {
+          text-align: justify;
+      }
+      .rtecenter {
+          text-align: center;
+      }
+      .rteright {
+          text-align: right;
       }
     </style>
     <?php //endif;  ?>
