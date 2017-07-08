@@ -91,7 +91,7 @@ function itg_sitemap_print_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['link']) . '</loc>';
+    $xml .= '<loc>' . $total_link['link'] . '</loc>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -150,7 +150,7 @@ function itg_sitemap_get_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['url']) . '</loc>';
+    $xml .= '<loc>' . $total_link['url'] . '</loc>';
     $xml .= '<news:news>';
     // Publication tag start
     $xml .= '<news:publication>';
@@ -269,7 +269,7 @@ function itg_sitemap_get_section_sitemap_required_data($nid) {
     $final_data['news_keywords'] = itg_sitemap_get_xml_valid_data(itg_sitemap_get_metatag_of_node($data['nid']));
     $final_data['news_name'] = ITG_INDIATODAY_SITENAME_XML;
     $final_data['news_language'] = $GLOBALS['language']->language;
-    $final_data['url'] = itg_sitemap_get_xml_valid_data(url(drupal_get_path_alias('node/' . $data['nid']), array('absolute' => TRUE)));
+    $final_data['url'] = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data['nid']);
     $final_data['news_publication_date'] = date('c', $data['created']);
   }
   return $final_data;

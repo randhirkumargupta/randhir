@@ -251,14 +251,14 @@ function itg_sitemap_chunk_get_tags_data($contents, $content_type) {
 /**
  * function used to replace backend url to front url;
  */
-//function itg_sitemap_replace_backend_url_to_front_url($url) {
-//  if(!empty($url)) {
-//    $front_url = $url;
-//    if (strpos($url, BACKEND_URL) !== false) {
-//      $front_url = str_replace(BACKEND_URL, FRONT_URL, $url);
-//    }
-//    return $front_url;
-//  } else {
-//    return '';
-//  }
-//}
+function itg_sitemap_replace_backend_url_to_front_url($url) {
+  if(!empty($url)) {
+    $front_url = $url;
+    if (strpos($url, BACKEND_URL) !== false) {
+      $front_url = str_replace(BACKEND_URL, FRONT_URL, $url);
+    }
+    return $front_url;
+  } else {
+    return '';
+  }
+}
