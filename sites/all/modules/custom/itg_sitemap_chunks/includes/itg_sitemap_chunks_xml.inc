@@ -422,9 +422,9 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                 // check if current content type is saved in custom table of siemap.
                 // for priority frequency etc.
                 // Check if priority frequency etc. is saved then create sitemap.
-                $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+                $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
                 $xml .= '<url>';
-                $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($path) . '</loc>';
+                $xml .= '<loc>' . $path . '</loc>';
                 $xml .= '</url>';
               }
               $xml .= '</urlset>';
