@@ -225,9 +225,19 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
 function itg_user_login_after_build($form, &$form_state) {
  $form['name']['#attributes']['autocomplete'] = 'off';
  $form['pass']['#attributes']['autocomplete'] = 'off';
- $form['name']['#title'] = t('Enter your email/mobile number'); 
- $form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.'); 
- return $form; 
+ //$form['name']['#title'] = t('Enter your email/mobile number'); 
+ $form['name']['#title'] = t('');
+ $form['pass']['#title'] = t('');
+ $form['name']['#attributes'] = array(
+    'placeholder' => t('Enter Your Email/Mobile'),
+ );
+  //$form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.');
+ $form['name']['#description'] = t('');
+ $form['pass']['#description'] = t('');
+ $form['pass']['#attributes'] = array(
+    'placeholder' => t('Enter Your Password'),
+ );
+  return $form; 
 }
 
 /**

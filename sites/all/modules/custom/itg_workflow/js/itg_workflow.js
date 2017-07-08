@@ -2,11 +2,21 @@
  * @file itg_story.js
  * Contains all functionality related to itg workflow
  */
+// hide workbench dropdown
+//jQuery(document).ready(function() {
+//    alert('@@@@');
+//                  
+//});
 
 (function($) {
     Drupal.behaviors.itg_workflow = {
          attach: function(context, settings) {
              var workflowState = settings.itg_workflow.settings.mstate;
+             
+             jQuery("#edit-revision-information").show();
+             jQuery(".form-item-workbench-moderation-state-new").hide();
+             jQuery("#edit-field-story-archive").hide();
+             
              if (workflowState == 'needs_review') {
                 jQuery(".form-item-workbench-moderation-state-new").show();
                 jQuery(".reasons-form").hide();              
@@ -104,11 +114,6 @@ jQuery(document).ready(function() {
     });                  
 });
 
-// hide workbench dropdown
-jQuery(document).ready(function() {
-    jQuery("#edit-revision-information").show();
-    jQuery(".form-item-workbench-moderation-state-new").hide();
-    jQuery("#edit-field-story-archive").hide();              
-});
+
 
             

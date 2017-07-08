@@ -318,7 +318,7 @@ function vukkul_view() {
  * {@inheritdoc}
  */
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
-  $os = array("search_index", "amp");
+  $os = array("search_index");
   if (!in_array($view_mode, $os)) {
     if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
       drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
@@ -362,7 +362,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         if ($value == 'image' && $node->type == 'photogallery') {
           $description = file_create_url($photo_image);
         }
-
+        
         $twitter_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -371,8 +371,20 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
             'content' => $description,
           )
         );
+        
         drupal_add_html_head($twitter_tag, 'twitter_tag' . $key);
+        
       }
+      $fb_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      $fb_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $fb_image,
+          )
+        );
+      drupal_add_html_head($fb_tag, 'fb_tag' . $key);
     }
   }
 }
@@ -996,5 +1008,27 @@ function _related_story_amp_block_content() {
   
   $related_story.= "</ul>";
   return $related_story;
+  }
+}
+
+/**
+ * Implements itg_get_node_details().
+ * @global type $base_url
+ * @param type $nid
+ * @return array
+ */
+function itg_get_node_details($nid) {
+  global $base_url;
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+    $query->fields('n', array('title', 'created','nid'))
+          ->fields('sm', array('field_story_extra_large_image_fid'))
+          ->condition('n.nid', $nid)
+          ->condition('n.status', 1);
+    $query->orderBy('n.created', 'DESC'); 
+    $result = $query->execute();
+
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }

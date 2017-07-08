@@ -53,7 +53,7 @@ $uri = base64_encode($actual_link);
                 else {
                   $autoplay = 1;
                 }
-                ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"><?php
+                ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"> <div class = "video-iframe-wrapper"><?php
                 if (module_exists('itg_videogallery')) {
                   $vid = itg_videogallery_get_videoid($row['fid']);
                 }
@@ -74,15 +74,57 @@ $uri = base64_encode($actual_link);
                   $vide_dm_id = $video_value->solr_video_id;
                 }
                 ?>
-                  <div class="iframe-video1" id="video_<?php echo $keys; ?>">
-                  </div>
-                  <?php if ($keys == 0) { ?>
-                    <script>
-                      
-                      jQuery(window).load(function() {
-                        jQuery('.video-slider-images').removeClass('pointer-event-none');
-                      });
-                      setTimeout(function() {
+
+                    <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
+                    </div>
+                    <?php if ($keys == 0) { ?>
+                      <script>
+
+                        jQuery(window).load(function() {
+                          jQuery('.video-slider-images').removeClass('pointer-event-none');
+                        });
+                        setTimeout(function() {
+                          var player_<?php echo $keys; ?> = DM.player(
+                                  document.querySelector('#video_<?php echo $keys; ?>'),
+                                  {
+                                    video: '<?php print $vide_dm_id; ?>',
+                                    width: '600px',
+                                    height: '450px',
+                                    params: {
+                                      autoplay: <?php echo $autoplay; ?>,
+                                      controls: 1,
+                                      'sharing-enable': 0,
+                                      'ui-start-screen-info': 0,
+                                      'endscreen-enable':<?php echo $ads_flag; ?>,
+                                      'ui-logo': 0,
+                                    }
+                                  }
+                          );
+                          player_<?php echo $keys; ?>.addEventListener('video_end', function(event) {
+                            jQuery('.video-header-left .video').slick('slickGoTo', <?php echo $keys + 1; ?>);
+                            player_<?php echo $keys + 1; ?>.play();
+                          });
+                          jQuery('.thumb-video').click(function() {
+                            var getvideoindex = jQuery(this).attr('data-image-index');
+                            //if (getvideoindex == 0) {
+                            var playerId = 'player_' + getvideoindex;
+                            jQuery('.thumb-video').each(function() {
+                              var getindex = jQuery(this).attr('data-image-index');
+                              var playerStopId = 'player_' + getindex;
+                              (eval(playerStopId)).pause();
+
+                            });
+                            (eval(playerId)).play();
+                            // }
+                          });
+                        }, 500);
+                      </script>
+                      <?php
+                    }
+                    else {
+                      ?>
+                      <script>
+
                         var player_<?php echo $keys; ?> = DM.player(
                                 document.querySelector('#video_<?php echo $keys; ?>'),
                                 {
@@ -99,51 +141,11 @@ $uri = base64_encode($actual_link);
                                   }
                                 }
                         );
-                        player_<?php echo $keys; ?>.addEventListener('video_end', function(event) {
-                          jQuery('.video-header-left .video').slick('slickGoTo', <?php echo $keys + 1; ?>);
-                          player_<?php echo $keys + 1; ?>.play();
-                        });
-                        jQuery('.thumb-video').click(function() {
-                          var getvideoindex = jQuery(this).attr('data-image-index');
-                          //if (getvideoindex == 0) {
-                          var playerId = 'player_' + getvideoindex;
-                          jQuery('.thumb-video').each(function() {
-                            var getindex = jQuery(this).attr('data-image-index');
-                            var playerStopId = 'player_' + getindex;
-                            (eval(playerStopId)).pause();
 
-                          });
-                          (eval(playerId)).play();
-                          // }
-                        });
-                      }, 500);
-                    </script>
-                    <?php
-                  }
-                  else {
-                    ?>
-                    <script>
+                      </script>
 
-                      var player_<?php echo $keys; ?> = DM.player(
-                              document.querySelector('#video_<?php echo $keys; ?>'),
-                              {
-                                video: '<?php print $vide_dm_id; ?>',
-                                width: '600px',
-                                height: '450px',
-                                params: {
-                                  autoplay: <?php echo $autoplay; ?>,
-                                  controls: 1,
-                                  'sharing-enable': 0,
-                                  'ui-start-screen-info': 0,
-                                  'endscreen-enable':<?php echo $ads_flag; ?>,
-                                  'ui-logo': 0,
-                                }
-                              }
-                      );
-
-                    </script>
-
-                  <?php } ?>
+                    <?php } ?>
+                  </div>
                 </div>
 
                 <?php
@@ -250,16 +252,16 @@ $uri = base64_encode($actual_link);
           <div class="social-likes mhide">
             <ul>
               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                    if (function_exists(itg_flag_get_count)) {
-                      $like_count = itg_flag_get_count(arg(1), 'like_count');
-                    }
-                    // get migrated count 
-                    if (function_exists('itg_get_migrated_like_count')) {
-                      $migrated_count = itg_get_migrated_like_count(arg(1));
-                    }
-                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                    ?></span></a></li>
-              <?php
+          if (function_exists(itg_flag_get_count)) {
+            $like_count = itg_flag_get_count(arg(1), 'like_count');
+          }
+          // get migrated count 
+          if (function_exists('itg_get_migrated_like_count')) {
+            $migrated_count = itg_get_migrated_like_count(arg(1));
+          }
+          print $like_count['like_count'] + $migrated_count[0]['like_count'];
+            ?></span></a></li>
+                    <?php
               if ($user->uid > 0) {
                 if (function_exists(itg_get_front_activity_info)) {
                   $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -307,7 +309,7 @@ $uri = base64_encode($actual_link);
                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
               <?php else: ?>
                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-  <?php endif; ?>
+              <?php endif; ?>
 
             </ul>
           </div>
@@ -321,16 +323,16 @@ $uri = base64_encode($actual_link);
             <div class="social-likes desktop-hide">
               <ul>
                 <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                      if (function_exists(itg_flag_get_count)) {
-                        $like_count = itg_flag_get_count(arg(1), 'like_count');
-                      }
-                      // get migrated count 
-                      if (function_exists('itg_get_migrated_like_count')) {
-                        $migrated_count = itg_get_migrated_like_count(arg(1));
-                      }
-                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                      ?></span></a></li>
-                <?php
+        if (function_exists(itg_flag_get_count)) {
+          $like_count = itg_flag_get_count(arg(1), 'like_count');
+        }
+        // get migrated count 
+        if (function_exists('itg_get_migrated_like_count')) {
+          $migrated_count = itg_get_migrated_like_count(arg(1));
+        }
+        print $like_count['like_count'] + $migrated_count[0]['like_count'];
+          ?></span></a></li>
+                      <?php
                 if ($user->uid > 0) {
                   if (function_exists(itg_get_front_activity_info)) {
                     $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -378,19 +380,20 @@ $uri = base64_encode($actual_link);
                   <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                 <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-  <?php endif; ?>
+                <?php endif; ?>
 
               </ul>
             </div>
-  <?php print $description_slider; ?>
-            <p class="upload-date"><?php print $row['timestamp']; ?></p>
+            <?php print $description_slider; ?>
+            
+            <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
             <div class="section-like-dislike">
               <div id="btn-div">
                 <?php
                 if (function_exists(itg_event_backend_highlights_like_dislike)) {
                   $val = arg(1);
-                  if(function_exists('itg_common_get_node_type')) {
-                        $datatype = itg_common_get_node_type(arg(1));
+                  if (function_exists('itg_common_get_node_type')) {
+                    $datatype = itg_common_get_node_type(arg(1));
                   }
                   print itg_event_backend_highlights_like_dislike($val, $datatype);
                 }
@@ -400,7 +403,7 @@ $uri = base64_encode($actual_link);
             </div>
           </div>
         </div>
-  <?php //$row['field_story_expert_description'];       ?>
+        <?php //$row['field_story_expert_description'];        ?>
         <div class="col-md-4 video-header-right">
           <div class="ads">
             <?php
@@ -410,7 +413,7 @@ $uri = base64_encode($actual_link);
             ?>
           </div>
           <div class="latest_video">
-  <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
+            <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
           </div>
         </div>
       </div>

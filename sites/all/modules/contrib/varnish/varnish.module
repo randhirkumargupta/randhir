@@ -309,8 +309,10 @@ function theme_varnish_status($variables) {
  * Helper function to parse the host from the global $base_url.
  */
 function _varnish_get_host() {
-  global $base_url;
-  $parts = parse_url($base_url);
+  //global $base_url;
+  $base_url_uat = FRONT_URL;
+  //$parts = parse_url($base_url);
+  $parts = parse_url($base_url_uat);
   return $parts['host'];
 }
 

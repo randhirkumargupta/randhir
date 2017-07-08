@@ -414,13 +414,8 @@ function itg_layout_manager_block_view($delta = '') {
           $change_pass_msg = 'Your profile has been updated successfully!';
         }
 
-        $pop_output = '<div class = "activate-message">';
-        $pop_output.= '<div class = "message-body">';
-        $pop_output.= '<p>' . $change_pass_msg . '</p>';
-        $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
-        $pop_output.= '</div></div>';
         if (!empty($change_pass_msg)) {
-          print $pop_output;
+          $sso_msg = $change_pass_msg;
         }
       }
 
@@ -458,15 +453,29 @@ function itg_layout_manager_block_view($delta = '') {
 
       $data = get_itg_footer_menu();
 
-      $block['content'] = theme('footer_block', array('data' => $data));
+      $block['content'] = theme('footer_block', array('data' => $data, 'sso_msg' => $sso_msg));
 
     break;
     
     case 'amp_header_block':
+      $arg = arg();
+      $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
+      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+
+      if (function_exists('get_second_level_menu')) {
+        $second_level_menu = get_second_level_menu();
+        foreach ($second_level_menu as $db_data) {
+          $temp_data = array();
+          $temp_data['db_data'] = $db_data;
+          $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+          $data['menu_manager'][] = $temp_data;
+        }
+      }
       $block['content'] = theme('amp_header_block', array('data' => $data));
     break;
     
     case 'amp_footer_block':
+      $data = get_itg_footer_menu();
       $block['content'] = theme('amp_footer_block', array('data' => $data));
     break;      
 

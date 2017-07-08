@@ -5,16 +5,58 @@
  * Contains the function for  multiple sitemap xml files.
  */
 module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks.db');
+module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
 
 /**
  * Create xml sitemap.
  */
 function itg_sitemap_chunks_create_xml_sitemap() {
-  // Create main sitemap xml file.First we have to get all files name.
-  $filesnames = itg_sitemap_chunks_get_files_name();
-  // Create all sub files.
-  foreach ($filesnames as $ms_id => $filesname) {
-    itg_sitemap_chunks_create_sub_file($ms_id, $filesname);
+  header('Content-type: application/xml');
+  set_time_limit(0);
+  $contents = array('story', 'videogallery', 'photogallery');
+  $content_links = itg_sitemap_chunks_get_content_links($contents);
+  //if (!empty($content_links)) {
+  // $xml_file_content = itg_sitemap_print_sitemap($content_links);
+  echo $content_links;
+}
+
+/**
+ * Create xml sitemap.
+ */
+function itg_sitemap_chunks_create_xml_sitemap_cron() {
+  set_time_limit(0);
+  $contents = array('story', 'videogallery', 'photogallery');
+  $xml_file_content = itg_sitemap_chunks_get_content_links($contents);
+  //gz file
+  $gzfile = "public://sitemap/xmlsitemap.xml.gz";
+  $gzdata = gzencode($xml_file_content, 9);
+  $fp = fopen($gzfile, "w");
+  fwrite($fp, $gzdata);
+  fclose($fp);
+  // Create xml
+  //Create gz file.
+  $xmlfile = "public://sitemap/xmlsitemap.xml";
+  $fp = fopen($xmlfile, "w");
+  fwrite($fp, $xml_file_content);
+  fclose($fp);
+}
+
+function itg_sitemap_chunks_create_xml_sitemap_index() {
+  $xml_files_info = itg_video_get_sitemap_xmls();
+  if (!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
+    header('Content-type: application/xml');
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($xml_files_info['file_url'] as $key => $data) {
+      $xml .= '<sitemap>';
+      $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>';
+      $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>';
+      $xml .= '</sitemap>';
+    }
+    $xml .= '</sitemapindex>';
+    echo $xml;
+  } else {
+    return drupal_not_found();
   }
 }
 
@@ -45,14 +87,11 @@ function itg_sitemap_chunks_create_sub_file($ms_id, $filesname) {
  */
 function itg_sitemap_print_sitemap($total_links) {
 
-  $lastmod = date('Y-m-d');
   $xml = '<?xml version="1.0" encoding="UTF-8"?>';
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['link'] . '</loc>';
-    //$xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
-    //$xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
+    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['link']) . '</loc>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -111,7 +150,7 @@ function itg_sitemap_get_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['url'] . '</loc>';
+    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['url']) . '</loc>';
     $xml .= '<news:news>';
     // Publication tag start
     $xml .= '<news:publication>';
@@ -293,15 +332,16 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
  * Function which creats sections sitemap chunks.
  */
 function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
-  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
+  set_time_limit(0);
   // remove directory if previously created sitemap.
   // get chunk setting from setting form.
   $limit = variable_get('itg_sitemap_chunks_number', 50000);
   // required content type for archive sitemap
-  $content_types = array("photogallery" , "videogallery" , "story");
+  $content_types = array("photogallery", "videogallery", "story");
   // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
-  $year_range = range(2006 , date('Y'));
+  $year_range = range(2006, date('Y'));
   foreach ($year_range as $year) {
+    $isRecreate = FALSE;
     $start_year = date("1/1/$year 00:00:00");
     $end_year = date("12/31/$year 00:00:00");
     $start_year_time_stamp = strtotime($start_year);
@@ -311,8 +351,6 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
       $total_rows = itg_sitemap_get_node_count($CT, $start_year_time_stamp, $end_year_time_stamp);
       if ($total_rows > 0) {
         // get sitemap details from custom sitemap table i.e. priority frequency etc.
-        $content_type_saved = itg_sitemap_chunks_get_record();
-        $contents = !empty($content_type_saved['content']) ? $content_type_saved['content'] : array();
         //directory public path
         $feed_dir = "public://sitemap/$CT";
         //create directory
@@ -324,8 +362,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
         //$file_num is variable which gives number of file can be created.
         if ($remaing_num > 0) {
           $file_num = $posible_xml_files = $floor_number + 1;
-        }
-        else {
+        } else {
           $file_num = $posible_xml_files = $floor_number;
         }
         if ($year == date('Y')) {
@@ -351,7 +388,11 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           // Delete last file we will create it again.
           $file_delete = file_unmanaged_delete($last_file_uri);
           $aws_file_path = 's3fs-public/' . explode("public://", $last_file_uri)[1];
-          itg_video_check_delete_sitemap_xml($aws_file_path);
+          $postition = strpos($aws_file_path, date('Y'));
+          if ($postition) {
+            $isRecreate = TRUE;
+          }
+          //itg_video_check_delete_sitemap_xml($aws_file_path);
           if ($file_delete) {
             echo file_create_url($last_file_uri) . " will recreated again. <br/>";
           }
@@ -360,8 +401,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
           $aws_file_path = 's3fs-public/' . explode("public://", $file_uri)[1];
-          if (empty(file_get_contents(file_create_url($file_uri)))) {
-            $content_links = array();
+          if (empty(file_get_contents(file_create_url($file_uri))) || $isRecreate) {
             // Query to get node by range of limit.
             $query = db_select('node', 'n');
             $query->fields('n', array('nid', 'created', 'changed'));
@@ -373,51 +413,52 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
             $results = $query->execute()->fetchAllAssoc('nid');
             // Sort here in decending mod.
             krsort($results);
+            $xml = '';
             if (!empty($results)) {
-              $i = 0;
+              $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+              $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
               // prepare result for xml with pagination.
               foreach ($results as $key => $data) {
                 // check if current content type is saved in custom table of siemap.
                 // for priority frequency etc.
-                $tag_data = itg_sitemap_chunk_get_tags_data($contents, $CT);
                 // Check if priority frequency etc. is saved then create sitemap.
-                if (!empty($tag_data)) {
-                  $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
-                  $content_links[$i]['link'] = $path;
-                  $content_links[$i]['priority'] = $tag_data->priority;
-                  $content_links[$i]['last_modified'] = date('Y-d-m', $data->changed);
-                  $content_links[$i]['changefreq'] = $tag_data->changefreq;
-                }
-                $i++;
+                $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+                $xml .= '<url>';
+                $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($path) . '</loc>';
+                $xml .= '</url>';
+              }
+              $xml .= '</urlset>';
+              // Prevent for destoryed xml file.
+              if (!empty($xml)) {
+                $file_name = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
+                $gzfile = "$file_name";
+                $gzdata = gzencode($xml, 9);
+                $fp = fopen($gzfile, "w");
+                fwrite($fp, $gzdata);
+                fclose($fp);
+                // Save xml data into file.
+                //$saved_file_path = file_unmanaged_save_data($xml, $file_name, FILE_EXISTS_REPLACE);
+                //echo l(file_create_url($saved_file_path), file_create_url($saved_file_path));
+                echo "<br/>";
               }
             }
-            if (!empty($content_links)) {
-              // get xml tags sitemap data.
-              // Note* This is not propery xml its ony string.
-              $xml = itg_sitemap_print_sitemap($content_links);
-            }
-            // Prevent for destoryed xml file.
-            if (!empty($xml)) {
-              $file_name = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
-              // Save xml data into file.
-              $saved_file_path = file_unmanaged_save_data($xml, $file_name, FILE_EXISTS_REPLACE);
-              echo l(file_create_url($saved_file_path), file_create_url($saved_file_path));
-              echo "<br/>";
-            }
-          }
-          else {
-            echo t("<b>@file</b> <span style='color:red'>Skiped.</span>", array("@file" => $file_uri));
+          } else {
+            //   echo t("<b>@file</b> <span style='color:red'>Skiped.</span>", array("@file" => $file_uri));
             echo "<br/>";
           }
           $x += $limit;
           $file_num--;
         } while ($x < $total_rows);
-      }
-      else {
-        echo t("No data found for @year for <b>Content Type : @CT</b><br/>", array("@year" => $year, "@CT" => $CT));
+      } else {
+        // echo t("No data found for @year for <b>Content Type : @CT</b><br/>", array("@year" => $year, "@CT" => $CT));
       }
     }
   }
+}
+
+function __get_s3_path_from_strem_wrapper_uri($file_uri) {
+  $file_name_chunk = explode("public://", $file_uri);
+  return 's3fs-public/' . $file_name_chunk[1];
 }
 
 /**
@@ -453,11 +494,10 @@ function itg_sitemap_get_xml_file_count($feed_dir) {
 function itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year) {
 
   if ($file_num == 1) {
-    $file_name = "$feed_dir/sitemap-$CT$year.xml";
-  }
-  else {
+    $file_name = "$feed_dir/sitemap-$CT$year.xml.gz";
+  } else {
     $file_num--;
-    $file_name = "$feed_dir/sitemap-$CT$year-$file_num.xml";
+    $file_name = "$feed_dir/sitemap-$CT$year-$file_num.xml.gz";
   }
   return $file_name;
 }

@@ -111,7 +111,7 @@ if($arg[0] == 'sso-user') {
 
 <div class="sso-footer">
 <!--  <div class="container">
-    <?php print theme('links', array('links' => menu_navigation_links('menu-sso-footer-menu'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
+    <?php //print theme('links', array('links' => menu_navigation_links('menu-sso-footer-menu'), 'attributes' => array('class'=> array('links', 'site-menu')) ));?>
   </div>-->
   <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
 </div>

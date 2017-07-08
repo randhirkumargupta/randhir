@@ -10,21 +10,27 @@
     $video_id = array();
     ?>
     <amp-carousel width="300"
-                  height="300"
+                  height="350"
                   layout="responsive"
                   type="slides">
     <?php
     if (!empty($videoids)) {
       foreach ($videoids as $keys => $video_value) {
+        if (function_exists('get_amp_video_time')) {
+        $video_time = get_amp_video_time($node->nid, 'videogallery', 'field_video_duration');
+        } 
     ?>
 
-            <amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
+            <div class="slide"> <div class="photo-slide"><amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
                              layout="responsive"
                              data-ui-logo="false"
                              data-info="false"
                              width="300"
-                             height="300">
+                             height="200">
             </amp-dailymotion>
+                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                </div>
+            </div>        
 
     <?php
       }

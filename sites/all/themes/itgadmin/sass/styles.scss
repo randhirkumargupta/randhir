@@ -6150,8 +6150,13 @@ div.node{
 }
 
 [id*="itg-octopus-api-form"]{
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
   .form-type-textfield, .form-type-select{
+    width: 200px;
     padding-left: 0;
+    padding-right: 10px;
     @extend .fleft;
     > label{
       display: block;
@@ -6165,8 +6170,19 @@ div.node{
     .octopus-apply{
       margin-right: 10px;
     }
-    .octopus-reset{
+  }
+  .container-inline-date {
+    clear: none;
+    float: left;
+    width: 120px;
+    .form-type-textfield{
+      width: 100%;
     }
+    > label {
+      display: block;
+    }
+    .date-padding .form-item > label{display: none;}
+    .date-padding input[type="text"]{width: 100%;}
   }
 }
 .node-print_team_integration-form{
@@ -11951,9 +11967,7 @@ fieldset#edit-xmlsitemap{
     }
   }
  }
- .ticket-type-require:after{
-   @extend .astrick;
- }
+ 
 .cpation-wraper textarea {
   width: 400px;
   margin-bottom: 10px;
@@ -11962,5 +11976,58 @@ fieldset#edit-xmlsitemap{
   img:first-child{
     float: left;
     margin-right: 10px;
+  }
+}
+.edit-image-info{
+  color: #008eb1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+[id*="itg-image-croping-image-info-form"]{
+  .form-item-syndicate{
+    margin: 0 30px;
+  }
+  [id*="edit-submit-button"]{
+    margin-left: 250px;
+  }
+}
+[id*="itg-sitemap-chunks-setting-form"]{
+  @extend .node-form;
+}
+[id*="itg-sitemap-chunks-add-sitemap"], [id*="itg-sitemap-chunks-section-form"], [id*="itg-sitemap-chunks-add-sitemap"]{
+  table{
+    margin-bottom: 10px;
+    .form-item {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.ticket-type-require label:after {
+  content: '*';
+  color: red;
+}
+.form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video{
+  position: relative;
+  [id*="field-associate-event-photo-values"], [id*="field-associate-event-video-values"]{
+    thead{
+      float: left;
+      padding: 15px 30px;
+      width: 220px;
+      font-weight: 400;
+      th{
+        font-weight: 400;
+      }
+    }
+    tbody{
+      display: block;
+    }
+  }
+  div.clearfix{
+    position: absolute;
+    left: 610px;
+    bottom: 3px;
   }
 }

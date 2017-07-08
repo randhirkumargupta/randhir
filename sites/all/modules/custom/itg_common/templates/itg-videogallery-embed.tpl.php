@@ -55,17 +55,17 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 </div>
               </div>  
               <div class="embed-desc"><?php print ucfirst($video_value->field_videogallery_description_value); ?></div>
-              <div class="social-share social-share-embed">
+<!--              <div class="social-share social-share-embed">
                 <ul>
                   <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
                   <li><a title="share on facebook" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li>
                   <li><a title="share on twitter" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" class="user-activity google def-cur-pointer"></a></li>
                 </ul>
-              </div>
+              </div>-->
             </li>
 
-      <?php } ?>
+          <?php } ?>
         </ul>
       </div>
       <?php
@@ -119,7 +119,6 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         }
         $usebitrates = implode(',', $allbitrates);
         $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-
         ?>
           <div class="iframe-video-embed">
 
@@ -131,9 +130,10 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                     title: "<?php print $row['title']; ?>",
                     image: "<?php echo $image_url; ?>",
                     sources: [
+//                      {
+    //                        file: "<?php echo $getvideo_bitrate_url; ?>"
+    //                      },
                       {
-                        file: "<?php echo $getvideo_bitrate_url; ?>"
-                      }, {
                         file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                       }]
                   }],
@@ -160,7 +160,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 }
               });
             </script>
-           
+
           </div>
         </div>
 
