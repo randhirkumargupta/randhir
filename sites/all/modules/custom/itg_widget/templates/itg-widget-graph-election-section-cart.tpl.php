@@ -155,8 +155,7 @@ if (!empty($data)) : global $base_url, $theme;
                     $terms = array_reverse($terms);
                     $section = $terms[0]->tid;
                   ?>
-                  <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
-                      <div class="graph-design">
+                    <div class="graph-design">
                           <div id="container_<?php echo $rand; ?>"></div>
                           <div class="divider"></div>                                
                       </div>
@@ -192,7 +191,6 @@ if (!empty($data)) : global $base_url, $theme;
                     </ul>
                 </div>';
                       ?>  
-                  </a>
 
               </div>
 
