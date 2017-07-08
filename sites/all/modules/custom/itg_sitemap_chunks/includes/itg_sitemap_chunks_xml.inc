@@ -91,9 +91,7 @@ function itg_sitemap_print_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['link'] . '</loc>';
-    //$xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
-    //$xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
+    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['link']) . '</loc>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -152,7 +150,7 @@ function itg_sitemap_get_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['url'] . '</loc>';
+    $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($total_link['url']) . '</loc>';
     $xml .= '<news:news>';
     // Publication tag start
     $xml .= '<news:publication>';
@@ -426,7 +424,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                 // Check if priority frequency etc. is saved then create sitemap.
                 $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
                 $xml .= '<url>';
-                $xml .= '<loc>' . $path . '</loc>';
+                $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($path) . '</loc>';
                 $xml .= '</url>';
               }
               $xml .= '</urlset>';
