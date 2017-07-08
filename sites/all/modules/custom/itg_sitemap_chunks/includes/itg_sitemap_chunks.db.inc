@@ -176,9 +176,9 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
     $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     foreach ($results as $i => $data) {
-      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+      $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
       $xml .= '<url>';
-      $xml .= '<loc>' . itg_sitemap_replace_backend_url_to_front_url($path) . '</loc>';
+      $xml .= '<loc>' . $path . '</loc>';
       $xml .= '</url>';
     }
 
