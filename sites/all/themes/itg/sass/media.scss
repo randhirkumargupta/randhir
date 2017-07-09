@@ -3458,6 +3458,9 @@
                 border-right: 1px solid #ddd;
                 top: 6px;
               }
+              .form-text{
+                padding-left: 50px;
+              }
             }
             .form-item-pass:before{
               content: '';
@@ -3495,6 +3498,30 @@
           }
         }
       }
+    }
+    .close-pass-popup{
+      padding: 5px 10px;
+      text-transform: uppercase;
+      font-size: 16px;
+      background-color: #0066ff;
+      border-radius: 3px;
+      color: #fff;
+      text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 10px;
+    }
+    .page-sso-user-email .messages--status, .page-sso-user-mobile .messages--status {
+      text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 20px;
+      padding: 5px 10px;
+      border: 1px solid;
+    }
+    .page-sso-user-mobile .messages--error, .page-sso-user-email .messages--error{
+      text-align: center;
+      margin-top:20px;
     }
     
     @media all and (max-width: 767px){
