@@ -3635,9 +3635,8 @@
 
 .page-sso-user-email .messages--status, .page-sso-user-mobile .messages--status {
   text-align: center;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 20px;
+  max-width: 300px;
+  margin: 20px auto 0;
   padding: 5px 10px;
   border: 1px solid;
 }
