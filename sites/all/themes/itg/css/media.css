@@ -3574,6 +3574,49 @@
   margin: 0 auto;
 }
 
+.page-user .sso-header + #page .login-wrapper .form-item-name, .page-user .sso-header + #page .login-wrapper .form-item-pass {
+  position: relative;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-name:before, .page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '\f0e0';
+  position: absolute;
+  font-family: fontawesome;
+  color: #d1d1d1;
+  font-size: 18px;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  top: 6px;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '';
+  background: url(../images/key.png) center center no-repeat;
+}
+
+.page-signup .sso-header + #page .parent-background .form-type-textfield, .page-signup .sso-header + #page .parent-background .form-type-password {
+  position: relative;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield:before, .page-signup .sso-header + #page .parent-background .form-type-password:before {
+  position: absolute;
+  left: 6px;
+  top: 13px;
+  color: red;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield .form-text, .page-signup .sso-header + #page .parent-background .form-type-password .form-text {
+  padding-left: 20px;
+}
+.page-signup .sso-header + #page .parent-background .form-item-mail:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-mobile:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-fname:before, .page-signup .sso-header + #page .parent-background .form-item-lname:before, .page-signup .sso-header + #page .parent-background .form-item-password-again:before, .page-signup .sso-header + #page .parent-background .form-item-password:before {
+  content: '*';
+}
+
 @media all and (max-width: 767px) {
   #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2 {
     padding: 20px;
