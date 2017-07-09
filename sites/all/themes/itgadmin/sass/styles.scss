@@ -3652,7 +3652,7 @@ fieldset#edit-select{
   .anchor-order-reorder{
     @extend .btn-submit;
     @extend .btn-small;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 }
 .form-select[name="field_ugc_ctype[und]"]{
@@ -11985,6 +11985,13 @@ fieldset#edit-xmlsitemap{
   top: 0;
   z-index: 9999;
 }
+.browse-media-file .edit-image-info{
+  color: #008eb1;
+  position: absolute;
+  left: 115px;
+  top: 148px;
+  z-index: 9999;
+}
 [id*="itg-image-croping-image-info-form"]{
   .form-item-syndicate{
     margin: 0 30px;
@@ -11992,6 +11999,14 @@ fieldset#edit-xmlsitemap{
   [id*="edit-submit-button"]{
     margin-left: 250px;
   }
+  .form-type-textarea > label{
+    width: 100%;
+    padding-bottom: 5px;
+  }
+  .form-type-textarea > label + div{
+    padding-left: 0;
+  }
+  input[type="text"], textarea{width: 100%;}
 }
 [id*="itg-sitemap-chunks-setting-form"]{
   @extend .node-form;
@@ -12025,9 +12040,16 @@ fieldset#edit-xmlsitemap{
       display: block;
     }
   }
+  div.description{
+    display: none;
+  }
   div.clearfix{
     position: absolute;
     left: 610px;
-    bottom: 3px;
+    bottom: 10px;
+    .form-submit{
+      @extend .icon-add-more;
+      box-shadow: none !important;
+    }
   }
 }

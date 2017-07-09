@@ -728,7 +728,7 @@ div.filefield-sources-list a.active {
 .node-videogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit,
 .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] + div.clearfix .form-submit, [id*="field-ads-ex-body-start-values"] + div.clearfix .form-submit,
 [id*="field-ads-ex-body-close-values"] + div.clearfix .form-submit,
-[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit, [id*="field-ticket-group-type-values"] + div.clearfix .form-submit {
+[id*="field-ads-ex-headerscript-values"] + div.clearfix .form-submit, [id*="field-ticket-group-type-values"] + div.clearfix .form-submit, .form-field-name-field-associate-event-photo div.clearfix .form-submit, .form-field-name-field-associate-event-video div.clearfix .form-submit {
   background: url("../images/add-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -4314,7 +4314,7 @@ fieldset#edit-select .form-submit {
   width: 220px;
 }
 .node-event_backend-form .anchor-order-reorder {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .form-select[name="field_ugc_ctype[und]"] {
@@ -12672,11 +12672,29 @@ fieldset#edit-xmlsitemap {
   z-index: 9999;
 }
 
+.browse-media-file .edit-image-info {
+  color: #008eb1;
+  position: absolute;
+  left: 115px;
+  top: 148px;
+  z-index: 9999;
+}
+
 [id*="itg-image-croping-image-info-form"] .form-item-syndicate {
   margin: 0 30px;
 }
 [id*="itg-image-croping-image-info-form"] [id*="edit-submit-button"] {
   margin-left: 250px;
+}
+[id*="itg-image-croping-image-info-form"] .form-type-textarea > label {
+  width: 100%;
+  padding-bottom: 5px;
+}
+[id*="itg-image-croping-image-info-form"] .form-type-textarea > label + div {
+  padding-left: 0;
+}
+[id*="itg-image-croping-image-info-form"] input[type="text"], [id*="itg-image-croping-image-info-form"] textarea {
+  width: 100%;
 }
 
 [id*="itg-sitemap-chunks-add-sitemap"] table, [id*="itg-sitemap-chunks-section-form"] table, [id*="itg-sitemap-chunks-add-sitemap"] table {
@@ -12707,8 +12725,14 @@ fieldset#edit-xmlsitemap {
 .form-field-name-field-associate-event-photo [id*="field-associate-event-photo-values"] tbody, .form-field-name-field-associate-event-photo [id*="field-associate-event-video-values"] tbody, .form-field-name-field-associate-event-video [id*="field-associate-event-photo-values"] tbody, .form-field-name-field-associate-event-video [id*="field-associate-event-video-values"] tbody {
   display: block;
 }
+.form-field-name-field-associate-event-photo div.description, .form-field-name-field-associate-event-video div.description {
+  display: none;
+}
 .form-field-name-field-associate-event-photo div.clearfix, .form-field-name-field-associate-event-video div.clearfix {
   position: absolute;
   left: 610px;
-  bottom: 3px;
+  bottom: 10px;
+}
+.form-field-name-field-associate-event-photo div.clearfix .form-submit, .form-field-name-field-associate-event-video div.clearfix .form-submit {
+  box-shadow: none !important;
 }
