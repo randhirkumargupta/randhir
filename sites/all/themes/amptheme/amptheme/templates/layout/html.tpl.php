@@ -390,7 +390,7 @@
         -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
         -webkit-animation-duration: 1s;
       }
-      .story-right .description iframe{max-width: 100%;}
+      .story-right .description iframe{width: 100%; max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
       #block-itg-layout-manager-front-end-breadcrumb {
@@ -499,7 +499,7 @@
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
-      .buzz-img .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
       .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
       .buzz-img .social-share ul li{float: left;}
       .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
@@ -554,6 +554,8 @@
       .rteright {
           text-align: right;
       }
+      .photo-story .carousel-preview button{position: relative;}
+      .photo-story .carousel-preview button .counter{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.3); color: #fff; padding-top: 28px; cursor: pointer;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
