@@ -81,7 +81,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => 'Email',
         '#description' => '',
         '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('#Email Id'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Email Id'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '<div class="email-error"></div></div>',
       );
@@ -91,7 +91,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#maxlength' => 10,
         '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('#Mobile'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Mobile'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="umobile" class="col-xs-6">',
         '#suffix' => '<div class="mobile-error"></div></div></div>',
       );
@@ -101,7 +101,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         //'#required' => TRUE,
-        '#attributes' => array('placeholder' => t('*First Name'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('First Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row"><div id="ufname" class="col-xs-6">',
         '#suffix' => '<span class="fname-msg error"></span></div>',
       );
@@ -110,7 +110,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => 'Last Name',
         '#description' => '',
         '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('*Last Name'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Last Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="ulname" class="col-xs-6">',
         '#suffix' => '<span class="lname-msg error"></span></div></div>',
       );
@@ -120,7 +120,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('*Password'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Password'), 'autocomplete' => 'off'),
         //'#required' => TRUE,
         '#prefix' => '<div class="form-row""><div id="upass" class="col-xs-6">',
         '#suffix' => '<span class="pass-msg error"></span></div>',
@@ -131,7 +131,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password_again',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('*Re type Password'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Re type Password'), 'autocomplete' => 'off'),
         //'#required' => TRUE,
         '#prefix' => '<div id="unpass" class="col-xs-6">',
         '#suffix' => '</div></div>',
