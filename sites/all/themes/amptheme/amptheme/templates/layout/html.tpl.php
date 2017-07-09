@@ -556,11 +556,14 @@
       }
       .photo-story .carousel-preview button{position: relative;}
       .photo-story .carousel-preview button .counter{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.3); color: #fff; padding-top: 28px; cursor: pointer;}
-      .amp-carousel-button{width: 30px; background: none;}
+      .amp-carousel-button{width: 30px; background: none; cursor: pointer;}
       .amp-carousel-button-prev{left: 0;}
       .amp-carousel-button-next{right: 0;}
       .amp-carousel-button-next:before{padding-left: 3px; box-sizing: border-box;content: '\f054'; position: absolute; text-align: center; font-size: 20px; right: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 3px 0 0 3px;}
       .amp-carousel-button-prev:before{padding-right: 3px; box-sizing: border-box;content: '\f053'; position: absolute; text-align: center; font-size: 20px; left: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 0 3px 3px 0;}
+      .amp-photo-slider .amp-carousel-button{height: 60px;}
+      .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
