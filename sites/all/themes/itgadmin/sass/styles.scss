@@ -12053,3 +12053,6 @@ fieldset#edit-xmlsitemap{
     }
   }
 }
+[id*="views-form-home-election-widget-election-graph-widget-contents"]{
+  @extend .confirmation;
+}
