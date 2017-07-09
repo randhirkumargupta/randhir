@@ -3439,6 +3439,63 @@
         display: block;
         margin: 0 auto;
     }
+    .page-user{
+      .sso-header{
+        & + #page{
+          .login-wrapper{
+            .form-item-name, .form-item-pass{
+              position: relative;
+              &:before {
+                content: '\f0e0';
+                position: absolute;
+                font-family: fontawesome;
+                color: #d1d1d1;
+                font-size: 18px;
+                width: 40px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border-right: 1px solid #ddd;
+                top: 6px;
+              }
+            }
+            .form-item-pass:before{
+              content: '';
+              background: url(../images/key.png) center center no-repeat;
+            }
+          }
+        }
+      }
+    }
+    .page-signup{
+      .sso-header{
+        & + #page{
+          .parent-background{
+            .form-type-textfield, .form-type-password{
+              position: relative;
+              &:before {
+                position: absolute;
+                left: 6px;
+                top: 13px;
+                color: red;
+              }
+              .form-text{
+                padding-left: 20px;
+              }
+            }
+            .form-item-mail:before{
+              content: '#';
+            }
+            .form-item-mobile:before{
+              content: '#';
+            }
+            .form-item-fname:before, .form-item-lname:before, .form-item-password-again:before, .form-item-password:before{
+              content: '*';
+            }
+          }
+        }
+      }
+    }
     
     @media all and (max-width: 767px){
         #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2{

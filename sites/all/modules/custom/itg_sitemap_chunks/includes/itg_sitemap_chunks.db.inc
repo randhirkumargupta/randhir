@@ -158,7 +158,6 @@ function itg_sitemap_chunks_get_files_name() {
  *   Having content links.
  */
 function itg_sitemap_chunks_get_content_links($contents = array()) {
-  $content_links = array();
   if (!empty($contents)) {
 
     $limit = variable_get('itg_sitemap_chunks_number_for_sitemap', 2000);
@@ -177,7 +176,7 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
     $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     foreach ($results as $i => $data) {
-      $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+      $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
       $xml .= '<url>';
       $xml .= '<loc>' . $path . '</loc>';
       $xml .= '</url>';

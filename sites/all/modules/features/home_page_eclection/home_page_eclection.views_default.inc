@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * home_page_eclection.views_default.inc
@@ -382,6 +381,8 @@ function home_page_eclection_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Content Title';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Content: Nid */
@@ -418,8 +419,8 @@ function home_page_eclection_views_default_views() {
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '| <?php
-print \'<a href="move-dont-miss-widget-node/most_read_content/0/0/\'.$row->nid.\'"> <span class="move-link">Remove</spa></a>\';
+  $handler->display->display_options['fields']['php']['php_output'] = '<a href=\'node/<?php echo $row->nid; ?>\' target=\'_blank\'><span class="view-link">view </span></a> | <?php
+print \'<a href="move-dont-miss-widget-node/election_graph_content/0/0/\'.$row->nid.\'"> <span class="move-link">Remove</spa></a>\';
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
