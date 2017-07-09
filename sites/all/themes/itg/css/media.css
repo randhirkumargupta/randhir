@@ -3590,6 +3590,9 @@
   border-right: 1px solid #ddd;
   top: 6px;
 }
+.page-user .sso-header + #page .login-wrapper .form-item-name .form-text, .page-user .sso-header + #page .login-wrapper .form-item-pass .form-text {
+  padding-left: 50px;
+}
 .page-user .sso-header + #page .login-wrapper .form-item-pass:before {
   content: '';
   background: url(../images/key.png) center center no-repeat;
@@ -3615,6 +3618,33 @@
 }
 .page-signup .sso-header + #page .parent-background .form-item-fname:before, .page-signup .sso-header + #page .parent-background .form-item-lname:before, .page-signup .sso-header + #page .parent-background .form-item-password-again:before, .page-signup .sso-header + #page .parent-background .form-item-password:before {
   content: '*';
+}
+
+.close-pass-popup {
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 16px;
+  background-color: #0066ff;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.page-sso-user-email .messages--status, .page-sso-user-mobile .messages--status {
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  padding: 5px 10px;
+  border: 1px solid;
+}
+
+.page-sso-user-mobile .messages--error, .page-sso-user-email .messages--error {
+  text-align: center;
+  margin-top: 20px;
 }
 
 @media all and (max-width: 767px) {
