@@ -710,6 +710,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -757,6 +764,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Animated Image Position',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 101,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -796,6 +810,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Associate Photo Gallery',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 80,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -841,6 +864,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 126,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -883,6 +913,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 79,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -925,6 +962,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 68,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -967,6 +1011,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Right Emoji',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 109,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1009,6 +1060,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Left Emoji',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 125,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1051,6 +1109,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Emoji position',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 110,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1089,6 +1154,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 102,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -1168,6 +1243,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Audio Position',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 100,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1207,6 +1289,19 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 107,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -1252,6 +1347,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Audio URL',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 99,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1294,6 +1396,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Map Position',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 103,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1333,6 +1442,12 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 69,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1374,6 +1489,12 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 70,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1414,6 +1535,20 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 123,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -1473,6 +1608,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Map Embed Code',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 104,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1515,6 +1657,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Cast',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 111,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -1560,6 +1711,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Director',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 113,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1602,6 +1760,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Movie Plot',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 112,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1644,6 +1809,19 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 120,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -1688,6 +1866,20 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Date',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 74,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -1698,7 +1890,6 @@ function features_for_story_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 74,
@@ -1748,6 +1939,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 121,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1790,6 +1988,12 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 72,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1831,6 +2035,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 117,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1873,6 +2084,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 118,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1915,6 +2133,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Social embed code',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 105,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1957,6 +2182,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Social embed code position',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 106,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1996,6 +2228,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2035,6 +2274,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Associate lead gallery/video',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 82,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2074,6 +2320,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Associate Video',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 81,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -2118,6 +2373,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (1024 x 1024)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 124,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2197,6 +2462,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 43,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -2236,6 +2508,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Comment Question',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2278,6 +2557,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Configurations',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 22,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2317,6 +2603,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Courtesy',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2359,6 +2652,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Expert description',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 41,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2400,6 +2700,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 40,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2478,6 +2788,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Expert Name',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 39,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2520,6 +2837,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Expertise',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 97,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2562,6 +2886,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story expires',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2600,6 +2931,20 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story expiry date',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -2610,7 +2955,6 @@ function features_for_story_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 46,
@@ -2660,6 +3004,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story External url',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 130,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2702,6 +3053,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 129,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2743,6 +3101,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (647 x 363)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 13,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2821,6 +3189,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (88 x 66)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 17,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2897,6 +3275,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'medium',
+        ),
+        'type' => 'image',
+        'weight' => 26,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2974,6 +3362,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Facebook Narrative',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 25,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3015,6 +3410,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 64,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -3051,7 +3453,9 @@ function features_for_story_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3069,7 +3473,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
@@ -3084,6 +3488,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Factoids title',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 90,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3126,6 +3537,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Featured Name',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 68,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -3168,6 +3586,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3209,6 +3634,20 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Issue date',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 55,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -3219,7 +3658,6 @@ function features_for_story_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 55,
@@ -3269,6 +3707,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Tags',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 56,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -3315,6 +3760,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 83,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3357,6 +3809,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story Kicker',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 127,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3398,6 +3857,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (483x271)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 14,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -3475,6 +3944,19 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 87,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -3520,6 +4002,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story title',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3562,6 +4051,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Magazine headline',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3604,6 +4100,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Magazine Kicker Text',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 28,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3646,6 +4149,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Issue based story',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -3684,6 +4194,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (370 x 208)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 15,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -3761,6 +4281,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 122,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3803,6 +4330,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'This title will append after the main Story headline on the homepage',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3845,6 +4379,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3886,6 +4427,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 89,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -3965,6 +4516,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Quote title',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 88,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4007,6 +4565,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story rating',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4046,6 +4611,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4088,6 +4660,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Byline',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 33,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -4132,6 +4713,20 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Schedule date & time',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 45,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -4142,7 +4737,6 @@ function features_for_story_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 45,
@@ -4192,6 +4786,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select magazine',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 30,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -4233,6 +4836,15 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select supplement',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 31,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -4278,6 +4890,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select templates',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 108,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4317,6 +4936,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'This headline shows on the homepage',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4359,6 +4985,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 84,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4400,6 +5033,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (170 x 127)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 16,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -4477,6 +5120,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Snap Post',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 44,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4519,6 +5169,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Social media integration',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 24,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4558,6 +5215,18 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'number',
@@ -4606,6 +5275,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4648,6 +5324,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 85,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4690,6 +5373,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Syndication',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 65,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4729,6 +5419,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Syndications photo',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 86,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4767,6 +5464,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 96,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -4845,6 +5552,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 93,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -4924,6 +5641,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 128,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4963,6 +5687,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 91,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5005,6 +5736,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Tech Review Widget',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 116,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5049,6 +5787,19 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 114,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -5094,6 +5845,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 95,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5136,6 +5894,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 94,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5178,6 +5943,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Technology rating',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 115,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -5217,6 +5989,19 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 38,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -5262,6 +6047,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Templates Factoids',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 37,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5304,6 +6096,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Listicle title',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 35,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5346,6 +6145,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Quotes',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 36,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5392,6 +6198,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select listicle templates',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 34,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -5431,6 +6244,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Time',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 76,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -5470,6 +6290,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Twitter narrative',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 27,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5511,6 +6338,16 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'medium',
+        ),
+        'type' => 'image',
+        'weight' => 57,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -5587,6 +6424,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 66,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -5623,7 +6467,9 @@ function features_for_story_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -5641,7 +6487,7 @@ function features_for_story_field_default_field_instances() {
             'search_all_fields' => 1,
           ),
         ),
-        'imce_filefield_on' => 1,
+        'imce_filefield_on' => 0,
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
@@ -5660,6 +6506,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Story type',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 119,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -5699,6 +6552,18 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 78,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'number',
@@ -5745,6 +6610,13 @@ function features_for_story_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'City',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 21,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',

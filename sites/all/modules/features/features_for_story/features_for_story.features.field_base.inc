@@ -1579,7 +1579,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1632,7 +1632,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2061,7 +2061,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2320,7 +2320,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2842,7 +2842,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2866,7 +2866,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 3000,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2890,7 +2890,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
