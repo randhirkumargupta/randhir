@@ -41,11 +41,12 @@
  *
  * @ingroup themeable
  */
+global $base_url;
 ?><!doctype html>
 <html amp lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
   <head>
     <meta charset="utf-8">
-    <title><?php print $head_title; global $base_url;?></title>
+    <title><?php print $head_title;?></title>
     <?php print $head; ?>
     <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
     <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
