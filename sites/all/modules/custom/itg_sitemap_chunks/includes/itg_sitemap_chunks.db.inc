@@ -178,7 +178,7 @@ function itg_sitemap_chunks_get_content_links($contents = array()) {
     foreach ($results as $i => $data) {
       $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
       $xml .= '<url>';
-      $xml .= '<loc>' . $path . '</loc>';
+      $xml .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
       $xml .= '</url>';
     }
 
