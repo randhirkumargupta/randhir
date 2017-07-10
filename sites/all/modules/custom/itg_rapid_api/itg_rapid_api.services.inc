@@ -1915,14 +1915,15 @@ function itg_rapid_api_magazine_coverstories($token) {
 function itg_rapid_api_magazine_editionlist($token) {
     $sdate = $_GET['sdate'];
     $tdate = $_GET['tdate'];
-    $cpageno = $_GET['cpageno'];
+    $cpageno = $_GET['cpageno'];  
+    //echo $sdate; echo "<br>"; echo $tdate; exit();
     //valid tid & pageno
-    if (!is_numeric($sdate)) {
-        $sdate = 0;
-    }
-    if (!is_numeric($tdate)) {
-        $tdate = 0;
-    }
+//    if (!is_numeric($sdate)) {
+//        $sdate = 0;
+//    }
+//    if (!is_numeric($tdate)) {
+//        $tdate = 0;
+//    }
     if (!is_numeric($cpageno)) {
         $cpageno = 0;
     }

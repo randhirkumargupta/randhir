@@ -518,6 +518,9 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $issue_list_array = array();
   $listcount = 0;
   $range_max = 10;
+  $sdate_fi = strtotime($sdate);
+  $tdate_fi = strtotime($tdate);
+  
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
@@ -539,7 +542,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $query_issue->fields('fsit', array('field_issue_title_value'));
   $query_issue->fields('n', array('nid'));
 
-  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+  $query_issue->condition('n.created', $sdate_fi, '>=')->condition('n.created', $tdate_fi, '<=')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result_issue as $reskey => $resvalue) {
 
