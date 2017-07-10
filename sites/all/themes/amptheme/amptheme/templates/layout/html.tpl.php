@@ -55,35 +55,46 @@
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+    <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
-      *{margin: 0; padding: 0; box-sizing: border-box;}
+      *{margin: 0; padding: 0; box-sizing: border-box; outline: none; border: none;}
       body{font: 400 14px/18px 'Roboto Slab';}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px;}
+      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
-      .nav-button, .nav-close{border: none; background-color: transparent; position: absolute; left: 100px; top: 0; color: #fff; padding: 6px 5px 4px; cursor: pointer;}
-      .nav-button{z-index: 10;}
-      .nav-close{z-index: 9; visibility: hidden;}
-      .nav-button:focus{opacity: 0;}
-      .nav-button:focus ~ .nav-close {z-index: 10; visibility: visible;}
-      .nav-button .fa, .nav-close .fa{font-size: 18px;}
-      .header-menu{position: absolute; left: 100px; top: 28px; list-style: none; width: 200px; display: none; background-color: #a41615; z-index: 10;}
+      #navbar h2{
+        width: 20px;
+        text-align: center;
+        background: transparent;
+        border: none;
+        padding: 3px 0;
+        color: #fff;
+        height: 28px;
+      }
+      #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
+      #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
+      #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
+      .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
-      .nav-button:focus ~ .header-menu{display: block;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
       .stryimg{position: relative;}
       .photoby:empty{display: none;}
       .photoby{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .description a{color: #0883ed;}
+      .description ul, .description ol{padding-left: 18px;}
       .image-alt{color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 10px 0; border-bottom: 1px solid #ddd;}
       .related-story ul{list-style: none;}
       .related-story ul li{display: inline-block; vertical-align: top; width: 100%; padding: 10px 0;}
@@ -94,6 +105,7 @@
       .photo-slide{position: relative;}
       .photo-slide .caption{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .story-right{padding-bottom: 30px;}
+      .carousel-preview{white-space: nowrap; overflow: auto;}
       .carousel-preview button{margin-right: 10px;}
       .listicle-feedback .listical_title {
         text-transform: uppercase;
@@ -132,25 +144,25 @@
         font-weight: 600;
         text-transform: capitalize;
       }
+      .scroll-x{
+        overflow-x: auto;
+      }
       .factoids-slider ul {
         background: #a00606;
         padding: 0px;
         margin-top: 20px;
-        display: inline-block;
+        display: table;
         vertical-align: top;
-        width: 100%;
         list-style: none;
-        overflow-x: auto;
-        white-space: nowrap;
       }
       .factoids-slider ul li {
         padding: 25px; 
         font-size: 15px;
         line-height: 24px;
         color: #fff;
-        display: inline-block;
+        display: table-cell;
         vertical-align: top;
-        width: 220px;
+        min-width: 220px;
         white-space: normal;
       }
       .factoids-slider ul li:nth-child(odd) {
@@ -284,9 +296,6 @@
         overflow: hidden;
       }
 
-      .node-type-photogallery #header, 
-      .node-type-videogallery #header{margin: 0;}
-      /*.node-type-photogallery .i-amphtml-slide-item>*{height: auto;}*/
       .black-box{margin: 0 -12px 20px; padding: 10px; background-color: #171717;}
       .photo-title {
         font-size: 32px;
@@ -322,20 +331,29 @@
       .amp-photo-slider .photo-slide .caption{
         width: auto;
       }
+      .amp-photo-slider .amp-carousel-button{
+        top: 25%;
+      }
       .amp-photo-slider p{
-        color: #fff;
+        color: #a1a1a1;
         line-height: 24px;
+      }
+      .video-caption span {
+        display: block;
+        padding-top: 20px;
+        color: #fff;
       }
       .amp-other-gallery ul{
         list-style: none;
         overflow: hidden;
         margin: 0 -6px;
       }
-      .amp-other-gallery ul li{
-        float: left;
-        width: 183px;
-        padding: 0 6px;
-        max-width: 50%;
+      .amp-other-gallery ul li {
+          display: inline-block;
+          width: 180px;
+          padding: 0 5px 10px;
+          max-width: 49.5%;
+          vertical-align: top;
       }
       .other-img{
         position: relative;
@@ -364,7 +382,15 @@
       .amp-photo-ad{text-align: center;}
       .node-story h1 a{color: #0883ed; text-decoration: none;}
       .node-story h1 a:hover{color: #0883ed; text-decoration: underline;}
-      .story-right .description iframe{max-width: 100%;}
+      .story-section h1 i {
+        font-size: 13px;
+        color: #f40000;
+        -webkit-animation-name: blinker;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        -webkit-animation-duration: 1s;
+      }
+      .story-right .description iframe{width: 100%; max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
       #block-itg-layout-manager-front-end-breadcrumb {
@@ -404,6 +430,11 @@
         white-space: nowrap;
         overflow-x: auto;
         border-bottom: 1px solid #111111;
+        position: relative;
+        z-index: 9;
+      }
+      .footer-top-link{
+        padding-right: 40px;
       }
       .footer-top-link ul li{
         display: inline-block;
@@ -418,15 +449,8 @@
         text-transform: uppercase;
       }
       .footer-bottom-menu{
-        display: none;
+        padding-bottom: 10px;
       }
-      .footer-show, .footer-hide{border: none; background-color: #000; position: absolute; right: 0; top: 0; color: #fff; height: 48px; width: 45px; line-height: 50px; text-align: center; cursor: pointer;}
-      .footer-show{z-index: 10;}
-      .footer-hide{z-index: 9; visibility: hidden;}
-      .footer-show:focus{opacity: 0;}
-      .footer-show:focus ~ .footer-hide {z-index: 10; visibility: visible;}
-      .footer-show .fa, .footer-hide .fa{font-size: 24px;}
-      .footer-show:focus ~ .footer-bottom-menu {display: block;}
       .footer-bottom-menu .menu-col{
         display: inline-block;
         vertical-align: top;
@@ -440,12 +464,106 @@
       .footer-bottom-menu ul li{
         padding: 3px 0;
       }
+      #footer amp-accordion h2{
+        width: 40px;
+        height: 49px;
+        text-align: center;
+        padding: 0;
+        border: none;
+        background: #000;
+        margin-top: -50px;
+        z-index: 99;
+        position: absolute !important;
+        right: 0;
+        top: 0;
+      }
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
         text-align: center;
         font-size: 12px;
+        border-top: 1px solid #111111;
       }
+      .photo-story .amp-carousel-button {top: 100px;}
+      .photo-story amp-carousel {
+        height: 500px;
+      }
+      .nav-right{position: absolute; top: 0; right: 0; width: 100px;}
+      .nav-right .phone .fa{width: 20px; height: 20px; border: 1px solid; border-radius: 50%; text-align: center; line-height: 18px; margin-top:  3px;}
+      .nav-right .comment .fa{margin-top:  3px; font-size: 20px;}
+      .nav-right .share .fa{margin-top:  5px; font-size: 18px;}
+      #navbar .social-share h2{height: 24px; margin: 0; left: 70px;}
+      #navbar .social-share .share-link{padding: 5px 10px; background-color: #a00606; margin-top: 5px;}
+      #navbar .social-share .share-link a{ display: inline-block; vertical-align: middle; color: #fff; font-size: 20px; }
+      #navbar .social-share .share-link a + a{margin-left: 10px;}
+      .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
+      .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
+      .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
+      .buzz-img .social-share ul li{float: left;}
+      .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
+      .factoids-page{display: inline-block; vertical-align: top; width: 100%; margin-bottom: 20px;}
+      .fun-facts{float: left;}
+      .factoids-page .social-share{height: 22px;}
+      .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: center;left: 5px;}
+      .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share ul li{float: left;}
+      .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
+      .quotes {
+          margin: 5px 0 5px 15px;
+      }
+      blockquote {
+          color: #000;
+          font: 600 20px/28px "Roboto Slab",sans-serif;
+          position: relative;
+          text-align: justify;
+          text-indent: 40px;
+      }
+      .quotes .author {
+          font-size: 12px;
+          color: #828282;
+          text-align: right;
+      }
+      blockquote:before {
+        content: "\201C";
+        display: inline-block;
+        font: bold 60px/28px Georgia, serif;
+        vertical-align: baseline;
+        position: absolute;
+        left: 0;
+        top: 12px;
+        text-indent: 0;
+      }
+     blockquote:after {
+        content: "\201D";
+        display: inline-block;
+        font: bold 60px/0px Georgia, serif;
+        vertical-align: top;
+        text-indent: 10px;
+        margin-top: 32px;
+      }
+      .description table{border: 1px solid #ddd; border-collapse: collapse; width: 100%;}
+      .description table td{border: 1px solid #ddd; padding: 5px;}
+      .rtejustify {
+          text-align: justify;
+      }
+      .rtecenter {
+          text-align: center;
+      }
+      .rteright {
+          text-align: right;
+      }
+      .photo-story .carousel-preview button{position: relative;}
+      .photo-story .carousel-preview button .counter{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.3); color: #fff; padding-top: 28px; cursor: pointer;}
+      .amp-carousel-button{width: 30px; background: none; cursor: pointer;}
+      .amp-carousel-button-prev{left: 0;}
+      .amp-carousel-button-next{right: 0;}
+      .amp-carousel-button-next:before{padding-left: 3px; box-sizing: border-box;content: '\f054'; position: absolute; text-align: center; font-size: 20px; right: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 3px 0 0 3px;}
+      .amp-carousel-button-prev:before{padding-right: 3px; box-sizing: border-box;content: '\f053'; position: absolute; text-align: center; font-size: 20px; left: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 0 3px 3px 0;}
+      .amp-photo-slider .amp-carousel-button{height: 60px;}
+      .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; text-align: left; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; text-align: right; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

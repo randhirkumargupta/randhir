@@ -1,0 +1,1090 @@
+<octopusExport>
+  <exported>2017-01-31T19:37:55.560</exported>
+  <exportedBy>Octopus-API</exportedBy>
+  <rundown>
+    <rundownType>slugs</rundownType>
+    <rundownId>869341737</rundownId>
+    <rundownTitle>HT 1/31/2017 20:30</rundownTitle>
+    <rundownStart>2017-01-31T20:30:00</rundownStart>
+    <slugs>
+      <slug>
+        <action>INSERT</action>
+        <storyId>865098840</storyId>
+        <storyTitle>STING WAR FOR THRONES GENERIC </storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>148</storyDur>
+        <storyCreated>2017-01-25T17:48:57</storyCreated>
+        <storyCreatedBy>Sanjukta Kar - T03503</storyCreatedBy>
+        <storyModified>2017-01-31T17:37:40</storyModified>
+        <storyModifiedBy>Sanjukta Kar - T03503</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299371</elementId>
+                <elementType>jingle</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>STING WAR FOR THRONES GENERIC  - 2401 -jingle</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>ht170124_00fp</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872010145</storyId>
+        <storyTitle>GFX </storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:26:20</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:26:23</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299372</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>UPDATE</action>
+        <storyId>872010148</storyId>
+        <storyTitle>GFX UTTARAKHAND VOTE SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>35</storyDur>
+        <storyCreated>2017-01-31T19:26:26</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:36:06</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299373</elementId>
+                <elementType>std</elementType>
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[
+UTTARAKHAND VOTE SHARE]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872010150</storyId>
+        <storyTitle>GFX UTTARAKHAND SEAT SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:26:35</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:26:41</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299374</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>UPDATE</action>
+        <storyId>872010155</storyId>
+        <storyTitle>GFX GOA VOTE SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>63</storyDur>
+        <storyCreated>2017-01-31T19:26:43</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:37:07</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299375</elementId>
+                <elementType>std</elementType>
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[
+BJP  43% 
+CONG 35% 
+AAP 8% 
+MGP/SS/SV :8%
+OTH : 6%]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872010158</storyId>
+        <storyTitle>GFX GOA SEAT SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:26:55</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:27:02</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299376</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872019345</storyId>
+        <storyTitle>GFX MAIN ISSUES UTTARAKHAND</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:28:27</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:28:44</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299377</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872020417</storyId>
+        <storyTitle>GFX MAIN ISSUES GOA</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:28:44</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:28:48</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299378</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896637</storyId>
+        <storyTitle>HEADERS  8:30- 9 PM</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:36:58</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T19:28:55</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299379</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>UPDATE</action>
+        <storyId>871857197</storyId>
+        <storyTitle>GUESTS--8PM-9PM</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>697</storyDur>
+        <storyCreated>2017-01-31T17:22:03</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:34:33</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299380</elementId>
+                <elementType>std</elementType>
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[
+Raj Chengappa - Group Editorial Director (Publishing), The India Today Group ((Noida Studio))
+
+Prof. Vivek Kumar - Socio-Political Analyst ((Noida Studio))
+
+Surjit S Bhalla - Political Economist ((Noida Studio))
+
+Ashok Malik - Senior Journalist ((Noida Studio))
+
+Manisha Priyam - Political Analyst(( Bangalore Studio))
+
+Pradeep Gupta, MD, Axis APM / Psephologist (( Mumbai Studio)) ((8:00-10:00 pm))
+
+Vineet Joshi - State Secretary Punjab, BJP ((Jallandhar LIVE U))
+ 
+Harcharan Singh Bains - Advisor to CM, Punjab and SAD General Secretary &amp; Spokesperson ((On Skype from Bhatinda))
+ 
+Jaiveer Shergill - Spokesperson, Congress ((Delhi small OB))
+
+Chander Suta Dogra  - Spokesperson,  AAP ((Chandigarh Studio))
+ 
+((((Valmiki Naik - AAP Panaji Candidate from Goa ((Panaji, Goa on LIVE U))]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299381</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER RAJ CHENGAPPA</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863752</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299382</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER PROF VIVEK KUMAR</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863756</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299383</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER SURJIT S BHALLA</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863758</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299384</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER ASHOK MALIK</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863762</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299385</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER MANISHA PRIYAM</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863764</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299386</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER VINEET JOSHI</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863765</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299387</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUEPR HARCHARAN SINGH BAINS</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863768</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299388</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPER JAIVEER SHERGILL,</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863797</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299389</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUEPR CHANDER SUTA DOGRA</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863798</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299390</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUEPR PRADEEP GUPTA</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863799</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+              <element>
+                <elementId>186299391</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>SUPERVALMIKI NAIK</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863800</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896638</storyId>
+        <storyTitle>HEADERS UTTARAKHAND GENERIC</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:00</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T17:44:35</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299392</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADER UTTARAKHAND GENERIC</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863677</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896640</storyId>
+        <storyTitle>HEADERS U'KHAND VOTE SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:04</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T18:42:43</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299393</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADERS U'KHAND VOTE SHARE</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863750</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896670</storyId>
+        <storyTitle>HEADERS U'KHAND SEAT SHARE </storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:55</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T18:44:29</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299394</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADERS U'KHAND SEAT SHARE</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863755</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896641</storyId>
+        <storyTitle>HEADERS U'KHAND ISSUES</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:05</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T18:46:05</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299395</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADERS U'KHAND CM+ PERFORMANCE</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863759</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896643</storyId>
+        <storyTitle>HEADERS  UKHAND DEMONETISATION</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:06</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T19:12:52</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299396</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADERS U'KHAND DEMONETISATION</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863760</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896644</storyId>
+        <storyTitle>HEADERS GOA VOTE SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:07</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T18:48:42</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299397</elementId>
+                <elementType>gfx</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>HEADER GOA GENRIC</clipName>
+                  <clipMosId>PILOT</clipMosId>
+                  <clipObjId>1863761</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896656</storyId>
+        <storyTitle>HEADERS GOA SEAT SHARE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:27</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T17:38:49</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299398</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896657</storyId>
+        <storyTitle>HEADERS GOA FAVOURED CM</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:27</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T17:39:00</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299399</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896660</storyId>
+        <storyTitle>HEADERS GOA PARRIKAR EFFECT</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:28</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T17:39:05</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299400</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871896663</storyId>
+        <storyTitle>HEADERS GOA DeMo EFFECT</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:37:29</storyCreated>
+        <storyCreatedBy>Archana Solanki</storyCreatedBy>
+        <storyModified>2017-01-31T17:39:15</storyModified>
+        <storyModifiedBy>Archana Solanki</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299401</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872021117</storyId>
+        <storyTitle>VOS</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:28:55</storyCreated>
+        <storyCreatedBy>Rabea Khan</storyCreatedBy>
+        <storyModified>2017-01-31T19:28:57</storyModified>
+        <storyModifiedBy>Rabea Khan</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299402</elementId>
+                <elementType />
+                <elementDur />
+                <clip>
+                  <clipName />
+                  <clipMosId />
+                  <clipObjId />
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872010132</storyId>
+        <storyTitle>VO RAHUL UTTARAKHAND RALLY FILE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:24:03</storyCreated>
+        <storyCreatedBy>Khayali Chakraborty-T03986</storyCreatedBy>
+        <storyModified>2017-01-31T19:29:16</storyModified>
+        <storyModifiedBy>Khayali Chakraborty-T03986</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299403</elementId>
+                <elementType>vo</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>VO RAHUL UTTARAKHAND RALLY FILE - 3101 -vo</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>ht170131_00hf</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>872010160</storyId>
+        <storyTitle>VO UTTARAKHAND CRISIS FILE</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T19:27:27</storyCreated>
+        <storyCreatedBy>Khayali Chakraborty-T03986</storyCreatedBy>
+        <storyModified>2017-01-31T19:29:03</storyModified>
+        <storyModifiedBy>Khayali Chakraborty-T03986</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299404</elementId>
+                <elementType>vo</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>VO UTTARAKHAND CRISIS FILE - 3101 -vo</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>ht170131_00hh</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>871900922</storyId>
+        <storyTitle>VO TREATED MODI CAMPAIGNING IN GOA</storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>0</storyDur>
+        <storyCreated>2017-01-31T17:40:55</storyCreated>
+        <storyCreatedBy>Pallavi Sati-T03673</storyCreatedBy>
+        <storyModified>2017-01-31T19:29:25</storyModified>
+        <storyModifiedBy>Pallavi Sati-T03673</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299405</elementId>
+                <elementType>vo</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>VO TREATED MODI CAMPAIGNING IN GOA - 3101 -vo</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>ht170131_00fd</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+      <slug>
+        <action>INSERT</action>
+        <storyId>865098840</storyId>
+        <storyTitle>STING WAR FOR THRONES GENERIC </storyTitle>
+        <storySkip>0</storySkip>
+        <storyDur>148</storyDur>
+        <storyCreated>2017-01-25T17:48:57</storyCreated>
+        <storyCreatedBy>Sanjukta Kar - T03503</storyCreatedBy>
+        <storyModified>2017-01-31T17:37:40</storyModified>
+        <storyModifiedBy>Sanjukta Kar - T03503</storyModifiedBy>
+        <storyCustom name="col1" label="Location">DESK</storyCustom>
+        <storyCustom name="col7" label="Category">Miscellaneous</storyCustom>
+        <script>
+          <main>
+            <body>
+              <element>
+                <elementId>186299371</elementId>
+                <elementType>jingle</elementType>
+                <elementDur />
+                <clip>
+                  <clipName>STING WAR FOR THRONES GENERIC  - 2401 -jingle</clipName>
+                  <clipMosId>Astra-BO</clipMosId>
+                  <clipObjId>ht170124_00fp</clipObjId>
+                  <clipJobId />
+                  <clipFilePath>http://10.10.12.21/Proxy/Lowres/</clipFilePath>
+                  <clipIn />
+                  <clipOut />
+                </clip>
+                <text>&lt;1&gt;&lt;![CDATA[]]&gt;&lt;/1&gt;</text>
+                <commands />
+              </element>
+            </body>
+          </main>
+        </script>
+      </slug>
+    </slugs>
+  </rundown>
+</octopusExport>

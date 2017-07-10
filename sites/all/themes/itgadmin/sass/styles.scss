@@ -3652,7 +3652,7 @@ fieldset#edit-select{
   .anchor-order-reorder{
     @extend .btn-submit;
     @extend .btn-small;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 }
 .form-select[name="field_ugc_ctype[und]"]{
@@ -6150,8 +6150,13 @@ div.node{
 }
 
 [id*="itg-octopus-api-form"]{
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
   .form-type-textfield, .form-type-select{
+    width: 200px;
     padding-left: 0;
+    padding-right: 10px;
     @extend .fleft;
     > label{
       display: block;
@@ -6165,8 +6170,19 @@ div.node{
     .octopus-apply{
       margin-right: 10px;
     }
-    .octopus-reset{
+  }
+  .container-inline-date {
+    clear: none;
+    float: left;
+    width: 120px;
+    .form-type-textfield{
+      width: 100%;
     }
+    > label {
+      display: block;
+    }
+    .date-padding .form-item > label{display: none;}
+    .date-padding input[type="text"]{width: 100%;}
   }
 }
 .node-print_team_integration-form{
@@ -11951,9 +11967,7 @@ fieldset#edit-xmlsitemap{
     }
   }
  }
- .ticket-type-require:after{
-   @extend .astrick;
- }
+ 
 .cpation-wraper textarea {
   width: 400px;
   margin-bottom: 10px;
@@ -11966,4 +11980,79 @@ fieldset#edit-xmlsitemap{
 }
 .edit-image-info{
   color: #008eb1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+.browse-media-file .edit-image-info{
+  color: #008eb1;
+  position: absolute;
+  left: 115px;
+  top: 148px;
+  z-index: 9999;
+}
+[id*="itg-image-croping-image-info-form"]{
+  .form-item-syndicate{
+    margin: 0 30px;
+  }
+  [id*="edit-submit-button"]{
+    margin-left: 250px;
+  }
+  .form-type-textarea > label{
+    width: 100%;
+    padding-bottom: 5px;
+  }
+  .form-type-textarea > label + div{
+    padding-left: 0;
+  }
+  input[type="text"], textarea{width: 100%;}
+}
+[id*="itg-sitemap-chunks-setting-form"]{
+  @extend .node-form;
+}
+[id*="itg-sitemap-chunks-add-sitemap"], [id*="itg-sitemap-chunks-section-form"], [id*="itg-sitemap-chunks-add-sitemap"]{
+  table{
+    margin-bottom: 10px;
+    .form-item {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.ticket-type-require label:after {
+  content: '*';
+  color: red;
+}
+.form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video{
+  position: relative;
+  [id*="field-associate-event-photo-values"], [id*="field-associate-event-video-values"]{
+    thead{
+      float: left;
+      padding: 15px 30px;
+      width: 220px;
+      font-weight: 400;
+      th{
+        font-weight: 400;
+      }
+    }
+    tbody{
+      display: block;
+    }
+  }
+  div.description{
+    display: none;
+  }
+  div.clearfix{
+    position: absolute;
+    left: 610px;
+    bottom: 10px;
+    .form-submit{
+      @extend .icon-add-more;
+      box-shadow: none !important;
+    }
+  }
+}
+[id*="views-form-home-election-widget-election-graph-widget-contents"]{
+  @extend .confirmation;
 }

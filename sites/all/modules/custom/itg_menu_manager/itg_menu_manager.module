@@ -1393,7 +1393,7 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form , &$form_state , 
  * @param array $load_parent
  * @return array
  */
-function itg_menu_manager_get_menu($menu_data , $argument , $load_parent = array()) {
+function itg_menu_manager_get_menu($menu_data , $argument , $load_parent = array(), $amp = NULL) {
   global $base_url;
   $menu_link_data_array = array();
   $parent_key_of_third_level = !empty($load_parent) ? array_keys($load_parent)[0] : 0;
@@ -1417,7 +1417,11 @@ function itg_menu_manager_get_menu($menu_data , $argument , $load_parent = array
     if ($int_value) {
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
+      if(!empty($amp)) {
+      $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      } else {
       $link_text = $vertical_menu_icon = "<img title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      }
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
       }
@@ -1425,13 +1429,23 @@ function itg_menu_manager_get_menu($menu_data , $argument , $load_parent = array
   }
   // Handle case for default image
   if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
+    if(!empty($amp)) {
+    $link_text = $vertical_menu_icon = "<img width='110' height='37' title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme' , 'itg') . "/images/default_for_all_152_37.png' alt='amp-image' />";  
+    } else {
     $link_text = $vertical_menu_icon = "<img  title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme' , 'itg') . "/images/default_for_all_110_37.jpeg' alt='' />";
+    }
   }
 
   if ($url_type == 'internal' && $display_icon) {
     if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
-      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
-      $image_class = "has-image";
+      if (!empty($amp)) {
+      $link_text = $vertical_menu_icon = "<img width='152'  height= '85' src='" . file_create_url($sponser_logo_uri) . "' alt='amp-image' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+      $image_class = "has-image";  
+      }
+      else {
+        $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' alt='' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+        $image_class = "has-image";
+      }
     }
   }
 

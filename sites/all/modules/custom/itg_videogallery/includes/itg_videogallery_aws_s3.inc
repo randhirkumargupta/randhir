@@ -29,11 +29,39 @@ function itg_video_get_s3_video() {
         $data_video['size'][] = $object['Size'];
       }
     }
-  }
-  catch (S3Exception $e) {
+  } catch (S3Exception $e) {
     echo $e->getMessage() . "\n";
   }
   return $data_video;
+}
+
+/**
+ * 
+ * @return $data_video array
+ */
+function itg_video_get_sitemap_xmls() {
+  $xml_dot_gz_files = array();
+  $bucket = variable_get('aws_bucket');
+  $aws_access_key = variable_get('aws_access_key');
+  $aws_secret_key = variable_get('aws_secret_key');
+  $aws_region = variable_get('aws_region');
+
+  $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+  try {
+    $objects = $s3->getIterator('ListObjects', array(
+      'Bucket' => $bucket,
+      "Prefix" => 's3fs-public/sitemap/'
+    ));
+    foreach ($objects as $object) {
+      if (end(explode('.', $object['Key'])) == 'gz') {
+        $xml_dot_gz_files['file_url'][] = $s3->getObjectUrl($bucket, $object['Key']);
+        $xml_dot_gz_files['last_mod'][] = date('c', strtotime($object['LastModified']));
+      }
+    }
+  } catch (S3Exception $e) {
+    echo $e->getMessage() . "\n";
+  }
+  return $xml_dot_gz_files;
 }
 
 /**
@@ -58,8 +86,7 @@ function itg_video_get_s3_video_del($path) {
         'Key' => $object['Key']
       ));
     }
-  }
-  catch (S3Exception $e) {
+  } catch (S3Exception $e) {
     echo $e->getMessage() . "\n";
   }
 }

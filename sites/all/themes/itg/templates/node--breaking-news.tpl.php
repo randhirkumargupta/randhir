@@ -18,12 +18,18 @@ $share_image = '';
 if($node->field_type['und']['0']['value'] == 'Live Blog') {
 $embed_path = $base_url.'/'.drupal_get_path_alias('node/'.$node->nid);
 $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+  $embed_image = $embed_image;
+} else {
+  $embed_image = '';
+}
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
+$blog_created_date = date('Y-m-d H:i:s', $node->created);
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
-    <meta itemprop="coverageStartTime" content="2017-03-08T7:53:46">
-    <meta itemprop="url" content="http://indiatoday.intoday.in/live-blogs/uttar-pradesh-election-news-live-updates-samajwadi-party-modi-congress/195.html">
-    <meta itemprop="description" content="Uttar Pradesh Assembly election LIVE: Last phase of voting underway across 40 seats,Voting for the final phase of Uttar Pradesh Assembly election has begun amid heightened security following the over 12-hour-long siege in Lucknow in which suspected ISIS terrorist Saiful was killed.">
+    <meta itemprop="coverageStartTime" content="<?php print $blog_created_date; ?>">
+    <meta itemprop="url" content="<?php print $embed_path; ?>">
+    <meta itemprop="description" content="<?php print $node->field_common_short_description[LANGUAGE_NONE][0]['value']; ?>">
     <div class="bolg-content" id="bolgcontent">    
 <?php
   if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {

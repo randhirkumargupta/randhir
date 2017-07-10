@@ -28,7 +28,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
  
   if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
-    $step_ext_div = '<div class="sign-in-link"><div class="left-block"><span>#</span>Either of Email ID or Mobile is mandatory</div><div class="rgt-block">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div></div>';
+    $step_ext_div = '<div class="sign-in-link"><div class="left-block"><span>#</span> Either of Email ID or Mobile is mandatory</div><div class="rgt-block">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div></div>';
     $form['#prefix'] = '<div id="itg_sso_reg_multistep_form"><div class="center-heading"><h2>Create your India Today account</h2></div><div class="parent-background"><div class="social-share">
     <a href="'.$base_url.'/saml_login/twitter'.$appnd_to_lnk.'" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
     <a href="'.$base_url.'/saml_login/facebook'.$appnd_to_lnk.'" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
@@ -81,7 +81,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => 'Email',
         '#description' => '',
         '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('#Email Id'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Email Id'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '<div class="email-error"></div></div>',
       );
@@ -91,7 +91,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#maxlength' => 10,
         '#type' => 'textfield',
-        '#attributes' => array('placeholder' => t('#Mobile'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Mobile'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="umobile" class="col-xs-6">',
         '#suffix' => '<div class="mobile-error"></div></div></div>',
       );
@@ -101,7 +101,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         //'#required' => TRUE,
-        '#attributes' => array('placeholder' => t('*First Name'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('First Name'), 'autocomplete' => 'off'),
         '#prefix' => '<div class="form-row"><div id="ufname" class="col-xs-6">',
         '#suffix' => '<span class="fname-msg error"></span></div>',
       );
@@ -120,7 +120,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('*Password'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Password'), 'autocomplete' => 'off'),
         //'#required' => TRUE,
         '#prefix' => '<div class="form-row""><div id="upass" class="col-xs-6">',
         '#suffix' => '<span class="pass-msg error"></span></div>',
@@ -131,7 +131,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password_again',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('*Re type Password'), 'autocomplete' => 'off'),
+        '#attributes' => array('placeholder' => t('Re type Password'), 'autocomplete' => 'off'),
         //'#required' => TRUE,
         '#prefix' => '<div id="unpass" class="col-xs-6">',
         '#suffix' => '</div></div>',
@@ -392,6 +392,12 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
       
       $last_name = trim($form_state['values']['lname']);
+      if(empty($last_name)) {
+        $error['lname'] = t('Please enter last name.');
+      } else {
+        $error['lname'] = t('');
+      }
+      
       if ($last_name) {
         if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
           $error['lname'] = t('Last name accept only letters, dot and white space.');

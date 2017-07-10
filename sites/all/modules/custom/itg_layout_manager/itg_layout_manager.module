@@ -137,7 +137,6 @@ function itg_state_election() {
   drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
   $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-
   foreach ($terms as $values) {
     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
       $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
@@ -159,6 +158,7 @@ function make_graph() {
   $section = arg(1);
   $state = arg(2);
   $data = itg_widget_get_graph_data_by_state($section, $state);
+  p($data);
   foreach ($data as $index => $row) {
     $jsondata = file_get_contents($row->field_election_constituency_tall_value);
 
@@ -414,13 +414,8 @@ function itg_layout_manager_block_view($delta = '') {
           $change_pass_msg = 'Your profile has been updated successfully!';
         }
 
-        $pop_output = '<div class = "activate-message">';
-        $pop_output.= '<div class = "message-body">';
-        $pop_output.= '<p>' . $change_pass_msg . '</p>';
-        $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
-        $pop_output.= '</div></div>';
         if (!empty($change_pass_msg)) {
-          print $pop_output;
+          $sso_msg = $change_pass_msg;
         }
       }
 
@@ -458,7 +453,7 @@ function itg_layout_manager_block_view($delta = '') {
 
       $data = get_itg_footer_menu();
 
-      $block['content'] = theme('footer_block', array('data' => $data));
+      $block['content'] = theme('footer_block', array('data' => $data, 'sso_msg' => $sso_msg));
 
     break;
     

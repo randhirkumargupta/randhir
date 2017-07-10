@@ -848,6 +848,12 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
       $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
       break;
+    case 'views-exposed-form-home-election-widget-election-graph-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/election_graph_xml/autocomplete';
+      $form['title']['#autocomplete_path'] = 'content-title-list/election_graph_xml/autocomplete';
+      break;
     case 'views-exposed-form-so-sorry-so-sorry-videos':
       $cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
       if (strlen($cat_setting) <= 0) {

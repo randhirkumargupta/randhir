@@ -2096,6 +2096,7 @@ function itg_videogallery_get_file_details() {
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
+    $videoid = $video_id[0];
     $api = itg_videogallery_dailymotion_api();
     $thumb_url = $api->get(
         '/video/' . $video_id[0], array('fields' => array('embed_url'))
@@ -2119,7 +2120,7 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $video_id[0] . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id[0] . '" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
   }
   exit($responce);
 }

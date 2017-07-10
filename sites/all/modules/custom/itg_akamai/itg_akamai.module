@@ -724,6 +724,11 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
         $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
       }
+      
+      if (!isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
+        $akamai_timeout_default =  variable_get('akamai_timeout_' . $form['#node']->type, '');
+      }
+      
       if (in_array($form['#node']->type, $mapping)) {
         $form['akamai_timeout'] = array(
           '#type' => 'textfield',
@@ -766,6 +771,12 @@ function itg_akamai_content_setting($node) {
       if (isset($node->akamai_timeout) && !empty($node->akamai_timeout)) {
         try {
           $url = 'node/' . $node->nid;
+
+          // Returning program control whene default TTL and node form set TTL are same.And this time we will set default TTL
+          $default_ttl = variable_get('akamai_timeout_' . $node->type);
+          if ($node->akamai_timeout == $default_ttl) {
+            return;
+          }
 
           db_merge('itg_akamai_content_setting')
               ->key(array('entity_id' => $node->nid, 'entity_type' => $node->type))
@@ -854,10 +865,16 @@ function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id
  */
 function itg_akamai_taxonomy_setting($term) {
   if (isset($term->akamai_timeout) && !empty($term->akamai_timeout)) {
+    // returning control when default TTL and section form TTL is same.
+    $default_ttl = variable_get('akamai_timeout_taxonomy');
+    if ($term->akamai_timeout == $default_ttl) {
+      return;
+    }
+
+    // Else seprate entry for taxonomy
+
     try {
-
       $url = 'taxonomy/term/' . $term->tid;
-
       db_merge('itg_akamai_content_setting')
           ->key(array('entity_id' => $term->tid, 'entity_type' => 'taxonomy'))
           ->fields(array(
@@ -925,13 +942,13 @@ function itg_akamai_init() {
 
             break;
 
-          /*case 'node/2':
+          /* case 'node/2':
             $homepage_ttl = variable_get('itg_akamai_other_hpage');
             if (isset($homepage_ttl) && !empty($homepage_ttl)) {
-              akamai_max_age($homepage_ttl);
+            akamai_max_age($homepage_ttl);
             }
 
-            break;*/
+            break; */
         }
         // Code started for TTL setting for the custom/other URLs
 
@@ -958,8 +975,10 @@ function itg_akamai_get_ttl_for_custom_url($url_part) {
 
   // Getting all the data 
   $actual_data = array();
-  foreach ($result->fetchObject() as $data) {
-    $actual_data[] = $data;
+  if (isset($result)) {
+    foreach ($result->fetchObject() as $data) {
+      $actual_data[] = $data;
+    }
   }
   // Return only the first single data
   if (isset($actual_data[0]) && !empty($actual_data[0])) {
