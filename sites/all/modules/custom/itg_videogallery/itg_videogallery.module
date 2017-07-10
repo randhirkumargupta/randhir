@@ -2120,7 +2120,7 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . FRONT_URL . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
   }
   exit($responce);
 }
@@ -2622,9 +2622,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
       $node->status = 1;
       $node->status_cron = 1;
       $node->workbench_moderation_state_new = workbench_moderation_state_published();
-      $node->revision = 1;
       node_save($node);
-      workbench_moderation_moderate($node, 'published');
     }
   }
 }
