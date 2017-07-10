@@ -49,7 +49,7 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
     $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     foreach ($xml_files_info['file_url'] as $key => $data) {
       $xml .= '<sitemap>';
-      $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>';
+      $xml .= '<loc> <![CDATA[ ' . $xml_files_info['file_url'][$key] . ' ]]> </loc>';
       $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>';
       $xml .= '</sitemap>';
     }
@@ -91,7 +91,7 @@ function itg_sitemap_print_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['link'] . '</loc>';
+    $xml .= '<loc> <![CDATA[ ' . $total_link['link'] . ']]> </loc>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -150,7 +150,7 @@ function itg_sitemap_get_sitemap($total_links) {
   $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
-    $xml .= '<loc>' . $total_link['url'] . '</loc>';
+    $xml .= '<loc> <![CDATA[' . $total_link['url'] . ' ]]> </loc>';
     $xml .= '<news:news>';
     // Publication tag start
     $xml .= '<news:publication>';
@@ -167,8 +167,8 @@ function itg_sitemap_get_sitemap($total_links) {
     //Publication tag END
 
     $xml .= '<news:publication_date>' . $total_link['news_publication_date'] . '</news:publication_date>';
-    $xml .= '<news:title>' . $total_link['news_title'] . '</news:title>';
-    $xml .= '<news:keywords>' . $total_link['news_keywords'] . '</news:keywords>';
+    $xml .= '<news:title> <![CDATA[' . $total_link['news_title'] . ' ]]> </news:title>';
+    $xml .= '<news:keywords> <![CDATA[ ' . $total_link['news_keywords'] . '  ]]> </news:keywords>';
 
 
     $xml .= '</news:news>';
@@ -339,13 +339,13 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
   // required content type for archive sitemap
   $content_types = array("photogallery", "videogallery", "story");
   // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
-  $year_range = range(2006, date('Y'));
+  $year_range = range(1980, date('Y'));
   foreach ($year_range as $year) {
     $isRecreate = FALSE;
-    $start_year = date("1/1/$year 00:00:00");
-    $end_year = date("12/31/$year 00:00:00");
-    $start_year_time_stamp = strtotime($start_year);
-    $end_year_time_stamp = strtotime($end_year);
+//    $start_year = date("1/1/$year 00:00:00");
+//    $end_year = date("12/31/$year 00:00:00");
+    $start_year_time_stamp = mktime(0, 0, 0, 1, 1, $year);
+    $end_year_time_stamp = mktime(23, 59, 59, 12, 31, $year);
     foreach ($content_types as $CT) {
       // get total node count of content type.
       $total_rows = itg_sitemap_get_node_count($CT, $start_year_time_stamp, $end_year_time_stamp);
@@ -424,7 +424,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                 // Check if priority frequency etc. is saved then create sitemap.
                 $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
                 $xml .= '<url>';
-                $xml .= '<loc>' . $path . '</loc>';
+                $xml .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
                 $xml .= '</url>';
               }
               $xml .= '</urlset>';
