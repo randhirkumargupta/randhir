@@ -187,15 +187,15 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
     $xml .= '<rss version="2.0">';
     $xml .= '<channel>';
-    $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . '</title>';
+    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . ' ]]> </title>';
     $xml .= '<description>' . t('India Today') . '</description>';
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>';
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>';
-    $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . '</title>';
-    $xml .= '<link>' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . '</link>';
+    $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . ' ]]> </title>';
+    $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . ' ]]> </link>';
     $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>';
     $xml .= '</image>';
     $xml .= itg_sitemap_print_section_rss($result);

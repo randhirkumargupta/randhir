@@ -139,6 +139,7 @@ function itg_state_election() {
   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
   foreach ($terms as $values) {
     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+      
       $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
       $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
       $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
@@ -154,11 +155,9 @@ function itg_state_election() {
 
 function make_graph() {
   drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
-
-  $section = arg(1);
+   $section = arg(1);
   $state = arg(2);
   $data = itg_widget_get_graph_data_by_state($section, $state);
-  p($data);
   foreach ($data as $index => $row) {
     $jsondata = file_get_contents($row->field_election_constituency_tall_value);
 
