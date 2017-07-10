@@ -16,6 +16,8 @@ function itg_rapid_api_init(){
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_homePage');
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_fblogin');
     module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_twtlogin');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_author_story');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_polls');
 }
 
 /**

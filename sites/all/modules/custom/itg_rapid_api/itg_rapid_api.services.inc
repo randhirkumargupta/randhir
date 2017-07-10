@@ -925,6 +925,316 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        // forgot_password custom resource declaration.....
+        'forgot_password' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves forgot_password schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_forgot_password',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'user mobile or email',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // otp_verification custom resource declaration.....
+        'otp_verification' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves otp_verification schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_otp_verification',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'user mobile or email',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'otp_code',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'otp_code',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // resend_otp custom resource declaration.....
+        'resend_otp' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves resend_otp schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_resend_otp',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'user mobile or email',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // change_password custom resource declaration.....
+        'change_password' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves change_password schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_change_password',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'user mobile or email',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'pass',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'password',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'pass2',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'description' => 'confirm password',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // sprint 3 : Author latest story list @ dhmendra
+      'author_story_list' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves latest story list of a particular author.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'author_latest_story',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      // sprint 3 open poll
+      'polls_open' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves All the open poll in the system.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'polls_open',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      //Sprint 3 close poll
+      'polls_close' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves All the close/expire poll in the system.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'polls_close',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      
+      //Sprint 3 close poll
+      'poll_detail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves poll data based on poll id in the system.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'poll_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'poll_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Poll id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      
+      //Sprint 3 close poll
+      'poll_cast' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves poll based on poll id in the system.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'poll_cast',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -997,15 +1307,14 @@ function itg_rapid_api_newslist($token) {
     } else {
         // call function from return data..
         $realtime = 1;
-        $jsondata_realtime = $jsondata =  newscategoryPageRerourceValue($id, $cpageno);
+        $jsondata_realtime = $jsondata = newscategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
-    if($realtime){    
+    if ($realtime) {
         return $jsondata_realtime;
-    }
-    else{
+    } else {
         $jsondata = json_decode($jsondata);
         return $jsondata;
     }
@@ -1683,12 +1992,12 @@ function itg_rapid_api_storydetail($token) {
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
- *	The node processed information array.
+ * 	The node processed information array.
  */
 //return services_error(t('Node type cannot be changed'), 406);
-function itg_rapid_api_homePage($token) {    
-    
-     $redis_key = "itg_rapid_api_homePage";
+function itg_rapid_api_homePage($token) {
+
+    $redis_key = "itg_rapid_api_homePage";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1829,17 +2138,17 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
 function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
 
 
-$first_name = $_GET['first_name'];
-$last_name = $_GET['last_name'];
-$user_id = $_GET['user_id'];
-$password = $_GET['password'];
-$login_type = $_GET['login_type'];
-$token_id = $_GET['token_id'];
-$form_state = array();
+    $first_name = $_GET['first_name'];
+    $last_name = $_GET['last_name'];
+    $user_id = $_GET['user_id'];
+    $password = $_GET['password'];
+    $login_type = $_GET['login_type'];
+    $token_id = $_GET['token_id'];
+    $form_state = array();
 
 
     // check user_id is mail or mobile
-$url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
+    $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
     $mail_flag = 1;
     if (preg_match('/^\d{10}$/', $user_id)) {
         $mail_flag = 0;
@@ -1851,10 +2160,9 @@ $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2R
     }
     $form_state['values']['mobile'] = $mobile;
     $form_state['values']['url_info'] = $url_info;
-    if($mail_flag){
+    if ($mail_flag) {
         $form_state['values']['mail'] = $mail;
-    }
-    else{
+    } else {
         $form_state['values']['mail'] = "";
     }
     // prepare array for user
@@ -1904,7 +2212,7 @@ $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2R
             unset($_SESSION['referral_key']);
         }
         // Set operation.
-        
+
         $op = 'register_no_approval_required';
         // Send an email.
         if (empty($form_state['values']['mobile'])) {
@@ -1961,4 +2269,316 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
  */
 function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
     return twtlogin($_GET);
+}
+
+/**
+ * [itg_rapid_api_forgot_password] definition.
+ * Returns the information about a itg_rapid_api_forgot_password.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_forgot_password($token, $user_id) {
+
+    $ufname = $user_id = $_GET['user_id'];
+    $msg = "";
+    $data = array();
+
+
+    if (is_numeric($ufname)) {
+        $rand_otp = rand(0, 9999);
+        if (function_exists(itg_sso_first_time_otp_insert)) {
+            itg_sso_first_time_otp_insert($ufname, $email = '', $rand_otp, 'reset');
+            itg_sso_sms_send($rand_otp, $ufname);
+        }
+        //drupal_set_message('Please check your mobile for otp');
+        $msg = "Please check your mobile for otp";
+        // to do mobile script for sending sms
+    } else {
+        $rand_otp = rand(0, 9999);
+        if (function_exists(itg_sso_first_time_otp_insert)) {
+            itg_sso_first_time_otp_insert($mobile = '', $ufname, $rand_otp, 'reset');
+        }
+        if (function_exists(itg_forgot_otp_content)) {
+            $mail_content = itg_forgot_otp_content($rand_otp, $ufname);
+        }
+        //drupal_set_message('Please check your mail for otp');
+        $msg = "Please check your mobile for otp";
+    }
+
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
+
+    return $data;
+}
+
+/**
+ * [itg_rapid_api_otp_verification] definition.
+ * Returns the information about a itg_rapid_api_otp_verification.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
+
+    $ufname = $user_id = $_GET['user_id'];
+    $uotp = $_GET['otp_code'];
+    $msg = "";
+    $data = array();
+
+    if (is_numeric($ufname)) {
+        if (function_exists(itg_sso_user_mobile_check)) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($ufname);
+        }
+        if (function_exists(itg_sso_otp_delete)) {
+            itg_sso_otp_delete($mail = '', $ufname, 'reset');
+        }
+    } else {
+        if (function_exists(itg_sso_user_email_check)) {
+            $get_user_check_email = itg_sso_user_email_check($ufname);
+        }
+        // $account = user_load($get_user_check_email);
+        // $mail_content = itg_forgot_email_get_mail_content($account, $ufname);
+        if (function_exists(itg_sso_otp_delete)) {
+            itg_sso_otp_delete($ufname, $mobile = '', 'reset');
+        }
+    }
+
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
+    $data['data']['user_id'] = "$ufname";
+    $data['data']['is_authenticated'] = "1";
+    $data['data']['auth_token'] = "authToken";
+
+    return $data;
+}
+
+/**
+ * [itg_rapid_api_resend_otp] definition.
+ * Returns the information about a itg_rapid_api_resend_otp.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_resend_otp($token, $user_id) {
+    $ufname = $user_id = $_GET['user_id'];
+    $msg = "";
+    $data = array();
+
+
+    if (is_numeric($ufname)) {
+        $rand_otp = rand(0, 9999);
+        if (function_exists(itg_sso_first_time_otp_insert)) {
+            itg_sso_first_time_otp_insert($ufname, $email = '', $rand_otp, 'reset');
+            itg_sso_sms_send($rand_otp, $ufname);
+        }
+        //drupal_set_message('Please check your mobile for otp');
+        $msg = "Please check your mobile for otp";
+        // to do mobile script for sending sms
+    } else {
+        $rand_otp = rand(0, 9999);
+        if (function_exists(itg_sso_first_time_otp_insert)) {
+            itg_sso_first_time_otp_insert($mobile = '', $ufname, $rand_otp, 'reset');
+        }
+        if (function_exists(itg_forgot_otp_content)) {
+            $mail_content = itg_forgot_otp_content($rand_otp, $ufname);
+        }
+        //drupal_set_message('Please check your mail for otp');
+        $msg = "Please check your mobile for otp";
+    }
+
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
+
+    return $data;
+}
+
+/**
+ * [itg_rapid_api_change_password] definition.
+ * Returns the information about a itg_rapid_api_change_password.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_change_password($token, $user_id) {
+    $ufname = $user_id = $_GET['user_id'];
+    $pass  = $_GET['pass'];
+    $pass2 = $_GET['pass2'];
+    $msg = "";
+    $data = array();
+    if (is_numeric($uname)) {
+      if (function_exists(itg_sso_user_mobile_check)) {
+        $get_user_check_mobile = itg_sso_user_mobile_check($uname);
+      }
+      if (!empty($get_user_check_mobile)) {
+        $account = user_load($get_user_check_mobile);
+      }
+    }
+    else {
+      if (function_exists(itg_sso_user_email_check)) {
+        $get_user_check_email = itg_sso_user_email_check($uname);
+      }
+      if (!empty($get_user_check_email)) {
+        $account = user_load($get_user_check_email);
+      }
+    }
+
+
+    $edit = array('pass' => $pass);
+
+    // Save the account with the new password.
+    user_save($account, $edit);
+    
+    $data['status_code'] = "1";
+    $data['status_message'] = "Your password has been Changed";
+
+    return $data;
+}
+
+
+/**
+ * [author_latest_story_list] definition.
+ * Returns all the stories which is filled by particular author.
+ * @param $nid
+ *   The Author id
+ *   Type [0/1 where 0 can be for Latest and 1 for Popular] 
+ * @return array
+ * 	array of stories.
+ */
+function author_latest_story($token) {
+    //valid id 
+    $author_id = $_GET['author_id'];
+    $story_type = $_GET['type'];
+    if (!is_numeric($author_id)) {
+        $id = 0;
+    }
+
+    // call function for return data..
+    if($_GET['type'] == '0') {
+      $type = 'latest';
+    }elseif ($_GET['type'] == '1') {
+      $type = 'popular';
+  }
+    $suffix = $author_id;
+    $redis_key = "itg_rapid_api_author_".$type."_storylist" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = author_story_list($author_id,$story_type);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns all the open poll in the system 
+ * @param 
+ * @return array
+ * 	array of open polls.
+ */
+function polls_open($token) {
+    
+    $redis_key = "itg_rapid_api_open_polls";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = polls_open_list();
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns all the open poll in the system 
+ * @param 
+ * @return array
+ * 	array of open polls.
+ */
+function polls_close($token) {
+    
+    $redis_key = "itg_rapid_api_close_polls";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = polls_close_list();
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns all the open poll in the system 
+ * @param 
+ * @return array
+ * 	array of open polls.
+ */
+function poll_cast($token) {
+    
+//    $redis_key = "itg_rapid_api_cast_poll";
+//    $result_get = getRedis($redis_key);
+
+//    if ($result_get['key_value'] != ""){
+//        $jsondata = $result_get['key_value'];
+//    } else {
+        // call function from return data..
+        $jsondata = poll_cast_list();
+        $jsondata = json_encode($jsondata);
+//        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+//        $result_set = setRedis($redis_key, $jsondata, $ttl);
+//    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+
+/**
+ * Returns poll detail in an array based on poll id args
+ * @param poll_id
+ * @return array
+ * 	array of open polls.
+ */
+function poll_detail($token,$poll_id) {
+    
+      $poll_id = $_GET['poll_id'];
+//    $redis_key = "itg_rapid_api_cast_poll";
+//    $result_get = getRedis($redis_key);
+
+//    if ($result_get['key_value'] != ""){
+//        $jsondata = $result_get['key_value'];
+//    } else {
+        // call function from return data..
+        $jsondata = poll_detail_data($poll_id);
+        $jsondata = json_encode($jsondata);
+//        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+//        $result_set = setRedis($redis_key, $jsondata, $ttl);
+//    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
 }
