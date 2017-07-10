@@ -3,8 +3,6 @@ ob_clean();
 global $base_url;
 if (!empty($data)) : global $base_url, $theme;
   ?>
-
-
   <?php
   global $base_url;
   $classrow = 6;
