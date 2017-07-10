@@ -12705,11 +12705,6 @@ fieldset#edit-xmlsitemap {
   padding: 0;
 }
 
-.ticket-type-require label:after {
-  content: '*';
-  color: red;
-}
-
 .form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video {
   position: relative;
 }
