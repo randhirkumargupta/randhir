@@ -12755,3 +12755,14 @@ fieldset#edit-xmlsitemap {
   left: 600px;
   top: 30px;
 }
+
+[id*="itg-akamai-cache-akamai-log"] div.submit {
+  padding-left: 250px;
+}
+[id*="itg-akamai-cache-akamai-log"] .fieldset-wrapper > p {
+  padding-left: 250px;
+  margin: 10px 0;
+}
+[id*="itg-akamai-cache-akamai-log"] .fieldset-wrapper > p a {
+  color: #008eb1;
+}
