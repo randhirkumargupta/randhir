@@ -10830,10 +10830,10 @@ section.sidebar .block-itg-ads {
   color: #515151;
 }
 .election-page .col-el-4 .graph-design .highcharts-title tspan:nth-child(1) {
-  font-size: 32px;
+  font-size: 24px;
 }
 .election-page .col-el-5 .graph-design .highcharts-title tspan:nth-child(1) {
-  font-size: 22px;
+  font-size: 16px;
 }
 
 /* CSS For Election Page End */

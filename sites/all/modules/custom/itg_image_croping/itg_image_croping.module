@@ -277,7 +277,6 @@ function itg_image_croping_save_info($form, &$form_state) {
     'image_syndicate' => $form_state['values']['syndicate'],
   );
   $inserted_data = db_insert('image_info')->fields($data_array)->execute();
-  drupal_set_message('Image Information Save');
   // First, we initialize our $commands array. This array will
   // contain each of the commands we want to fire for our
   // #AJAX callback:

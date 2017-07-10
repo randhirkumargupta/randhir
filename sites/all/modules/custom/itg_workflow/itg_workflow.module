@@ -648,10 +648,7 @@ function itg_workflow_node_presave($node) {
         if (!isset($node->status_cron)) {
           if ($node->workbench_moderation['current']->state == 'published') {
             $node->status = 0;
-            $node->workbench_moderation['current']->state = 'draft';
-            $node->workbench_moderation['current']->from_state = 'draft';
-            $node->workbench_moderation['published']->state = 'draft';
-            $node->workbench_moderation['published']->from_state = 'draft';
+         
           }
           else {
 

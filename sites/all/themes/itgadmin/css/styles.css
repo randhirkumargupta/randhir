@@ -10037,7 +10037,6 @@ div.node #comments h2 {
   text-decoration: none;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-podcast-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data {
-  height: 100px;
   float: none  !important;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-breaking_news-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse, .node-podcast-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse {
