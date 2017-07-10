@@ -12056,3 +12056,36 @@ fieldset#edit-xmlsitemap{
 [id*="views-form-home-election-widget-election-graph-widget-contents"]{
   @extend .confirmation;
 }
+
+[id*="itg-akamai-cache-control"]{
+  .form-submit{
+    margin-left: 250px;
+  }
+}
+[id*="itg-akamai-cache-akamai-other"]{
+  fieldset{
+    .container-inline.form-wrapper{
+      background: #fbfbfb;
+      position: relative;
+      padding: 20px 0;
+      margin-bottom: 10px;
+      div, label{display: block;}
+      .form-submit{
+        @extend .icon-remove-item;
+        position: absolute;
+        left: 600px;
+        top: 30px;
+      }
+    }
+  }
+}
+[id*="itg-akamai-cache-akamai-log"]{
+  div.submit{padding-left: 250px;}
+  .fieldset-wrapper{
+    > p{
+      padding-left: 250px;
+      margin: 10px 0;
+      a{color: #008eb1;}
+    }
+  }
+}

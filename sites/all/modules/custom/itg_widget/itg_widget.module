@@ -935,7 +935,8 @@ function itg_widget_get_graph_data_for_home() {
   $itg_query->leftJoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
   $itg_query->fields('n', array('nid'));
   $itg_query->fields('frq', array('field_election_constituency_tall_value'));
-  $itg_query->fields('astw', array('field_election_state_tid'))
+  $itg_query->fields('astw', array('field_election_state_tid'));
+    $itg_query->fields('ast', array('field_section_tid'))
       ->condition('type', 'election_graph_xml')
       ->condition('iwo.widget', 'election_graph_content', '=')
       ->orderBy('iwo.weight' , 'ASC')
