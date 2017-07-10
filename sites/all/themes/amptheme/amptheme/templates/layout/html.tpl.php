@@ -385,10 +385,10 @@
       .story-section h1 i {
         font-size: 13px;
         color: #f40000;
-        -webkit-animation-name: blinker;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
-        -webkit-animation-duration: 1s;
+        animation-name: blinker;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        animation-duration: 1s;
       }
       .story-right .description iframe{width: 100%; max-width: 100%;}
       pre{white-space: inherit;}
@@ -564,6 +564,7 @@
       .amp-photo-slider .amp-carousel-button{height: 60px;}
       .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; text-align: left; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
       .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; text-align: right; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      @keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
