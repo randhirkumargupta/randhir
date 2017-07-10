@@ -756,7 +756,7 @@ div.filefield-sources-list a.active {
 [id*="field-ads-ex-body-close-values"] tbody tr td > .form-submit,
 [id*="field-ads-ex-body-close-values"] tbody tr td .ajax-new-content > .form-submit,
 [id*="field-ads-ex-headerscript-values"] tbody tr td > .form-submit,
-[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit, [id*="field-ticket-group-type-values"] tbody tr td > .form-submit[value="Remove"], [id*="field-ticket-group-type-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+[id*="field-ads-ex-headerscript-values"] tbody tr td .ajax-new-content > .form-submit, [id*="field-ticket-group-type-values"] tbody tr td > .form-submit[value="Remove"], [id*="field-ticket-group-type-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="itg-akamai-cache-akamai-other"] fieldset .container-inline.form-wrapper .form-submit {
   background: url("../images/remove-item.png") no-repeat center center;
   border: none;
   /*bottom: 10px;*/
@@ -12735,4 +12735,23 @@ fieldset#edit-xmlsitemap {
 }
 .form-field-name-field-associate-event-photo div.clearfix .form-submit, .form-field-name-field-associate-event-video div.clearfix .form-submit {
   box-shadow: none !important;
+}
+
+[id*="itg-akamai-cache-control"] .form-submit {
+  margin-left: 250px;
+}
+
+[id*="itg-akamai-cache-akamai-other"] fieldset .container-inline.form-wrapper {
+  background: #fbfbfb;
+  position: relative;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+[id*="itg-akamai-cache-akamai-other"] fieldset .container-inline.form-wrapper div, [id*="itg-akamai-cache-akamai-other"] fieldset .container-inline.form-wrapper label {
+  display: block;
+}
+[id*="itg-akamai-cache-akamai-other"] fieldset .container-inline.form-wrapper .form-submit {
+  position: absolute;
+  left: 600px;
+  top: 30px;
 }
