@@ -182,9 +182,10 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
 
   $form['fieldset']['display_button'] = array(
     '#prefix' => '<div class="submit">',
-    '#suffix' => l(t('Reset'), 'admin/config/system/itg_akamai/akamai_log', array('attributes' => array('class' => array('reset')))) . '</div">',
+    '#suffix' => l(t('Reset'), 'admin/config/system/itg_akamai/akamai_log', array('attributes' => array('class' => array('btn-reset btn-small')))) . '</div">',
     '#type' => 'submit',
     '#value' => t('Search'),
+    '#attributes'=>array('class'=>array('btn-small')),
     '#submit' => array('itg_akamai_cache_akamai_log_submit'),
   );
 
