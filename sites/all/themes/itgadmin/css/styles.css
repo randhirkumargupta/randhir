@@ -704,7 +704,7 @@ div.filefield-sources-list a.active {
 [id*="itg-registred-user-report-form"] #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions a,
 #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a,
 [id*="itg-registred-user-report-form"] #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions a,
-#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link {
+#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link, [id*="views-exposed-form-state-manager-page"] .views-submit-button a {
   height: 28px;
   line-height: 26px;
   padding: 0 10px;
@@ -12760,4 +12760,13 @@ fieldset#edit-xmlsitemap {
 }
 [id*="itg-akamai-cache-akamai-log"] .fieldset-wrapper > p a {
   color: #008eb1;
+}
+
+[id*="views-exposed-form-state-manager-page"] .views-submit-button .form-submit {
+  margin-top: 10px;
+}
+[id*="views-exposed-form-state-manager-page"] .views-submit-button a {
+  margin-top: 10px;
+  height: 29px;
+  margin-left: 10px;
 }
