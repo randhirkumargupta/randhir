@@ -3522,6 +3522,12 @@
       text-align: center;
       margin-top:20px;
     }
+    .front{
+      .election-page .election-graph table, .election-page .election-graph .social-share{
+        max-width: 420px;
+        margin: 0 auto;
+      }
+    }
     
     @media all and (max-width: 767px){
         #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2{
