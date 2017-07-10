@@ -6,6 +6,7 @@ global $base_url, $user;
   <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
     <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
   </a>
+<!--  <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>-->
   <nav id="navbar">
     <amp-accordion disable-session-states>
       <section>

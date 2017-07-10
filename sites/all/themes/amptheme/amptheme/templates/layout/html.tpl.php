@@ -574,6 +574,13 @@
         color: #8d8d8d;
         font-family: Roboto;
       }
+      a.search {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #fff;
+        font-size: 20px;
+      }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
