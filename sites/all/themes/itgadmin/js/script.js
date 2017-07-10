@@ -70,7 +70,6 @@ jQuery(document).ready(function () {
 //            jQuery('#edit-path-alias').attr("readonly", "readonly");
 //        }
 //    });
-$('#views-form-home-election-widget-election-graph-widget-contents').addClass('confirmation');
 
 });
 
