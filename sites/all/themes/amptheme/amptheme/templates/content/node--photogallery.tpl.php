@@ -7,7 +7,7 @@
       $html = '';
       $html .='<amp-carousel id="carousel-with-preview"
       width="753"
-      height="600"
+      height="630"
       layout="responsive"
       type="slides">';
       $i= 1;

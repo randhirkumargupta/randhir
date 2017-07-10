@@ -17,14 +17,6 @@ function itg_sso_user_email_form($form, &$form_state) {
     $form = array();
   // get unique id form argument
   $unique_id = base64_decode($arg[2]);
-  // make configuration for js file
-  global $user, $base_url;
-  $settings = array();
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
-  drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_change_email.js', array('scope' => 'footer'));
-
   // check form stage
   switch ($form_state['stage']) {
 
@@ -60,11 +52,7 @@ function itg_sso_user_email_form($form, &$form_state) {
 function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
   $arg = arg();
   $values = isset($form_state['multistep_values']['step_1']) ? $form_state['multistep_values']['step_1'] : array();
-  
-//  $form['heading'] = array(
-//    '#markup' => '<h3>' . drupal_set_title('Change Email/Mobile') . '</h3>',
-//  );
-  
+ 
   $form['#prefix'] = '<div id="sso_email_mobile_form"><h3>'.drupal_set_title('Change Email/Mobile').'</h3>';
   $form['#suffix'] = '</div>';
   $form['#attributes'] = array('autocomplete' => 'off');
@@ -431,7 +419,7 @@ function step_2_validate($form, &$form_state) {
 
   if (empty($otp)) {
 
-    form_set_error('otp', t("Enter OTP."));
+    form_set_error('otp', t("Please Enter OTP."));
   }
 
   if ($otp_match != $otp) {

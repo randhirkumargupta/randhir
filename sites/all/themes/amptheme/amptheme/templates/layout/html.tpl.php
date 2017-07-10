@@ -348,11 +348,12 @@
         overflow: hidden;
         margin: 0 -6px;
       }
-      .amp-other-gallery ul li{
-        float: left;
-        width: 183px;
-        padding: 0 6px;
-        max-width: 50%;
+      .amp-other-gallery ul li {
+          display: inline-block;
+          width: 180px;
+          padding: 0 5px 10px;
+          max-width: 49.5%;
+          vertical-align: top;
       }
       .other-img{
         position: relative;
@@ -384,12 +385,12 @@
       .story-section h1 i {
         font-size: 13px;
         color: #f40000;
-        -webkit-animation-name: blinker;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
-        -webkit-animation-duration: 1s;
+        animation-name: blinker;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        animation-duration: 1s;
       }
-      .story-right .description iframe{max-width: 100%;}
+      .story-right .description iframe{width: 100%; max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
       #block-itg-layout-manager-front-end-breadcrumb {
@@ -498,7 +499,7 @@
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
-      .buzz-img .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
       .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
       .buzz-img .social-share ul li{float: left;}
       .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
@@ -542,6 +543,28 @@
         text-indent: 10px;
         margin-top: 32px;
       }
+      .description table{border: 1px solid #ddd; border-collapse: collapse; width: 100%;}
+      .description table td{border: 1px solid #ddd; padding: 5px;}
+      .rtejustify {
+          text-align: justify;
+      }
+      .rtecenter {
+          text-align: center;
+      }
+      .rteright {
+          text-align: right;
+      }
+      .photo-story .carousel-preview button{position: relative;}
+      .photo-story .carousel-preview button .counter{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.3); color: #fff; padding-top: 28px; cursor: pointer;}
+      .amp-carousel-button{width: 30px; background: none; cursor: pointer;}
+      .amp-carousel-button-prev{left: 0;}
+      .amp-carousel-button-next{right: 0;}
+      .amp-carousel-button-next:before{padding-left: 3px; box-sizing: border-box;content: '\f054'; position: absolute; text-align: center; font-size: 20px; right: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 3px 0 0 3px;}
+      .amp-carousel-button-prev:before{padding-right: 3px; box-sizing: border-box;content: '\f053'; position: absolute; text-align: center; font-size: 20px; left: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 0 3px 3px 0;}
+      .amp-photo-slider .amp-carousel-button{height: 60px;}
+      .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; text-align: left; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; text-align: right; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      @keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

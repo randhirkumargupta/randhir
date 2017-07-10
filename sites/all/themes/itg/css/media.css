@@ -3574,6 +3574,83 @@
   margin: 0 auto;
 }
 
+.page-user .sso-header + #page .login-wrapper .form-item-name, .page-user .sso-header + #page .login-wrapper .form-item-pass {
+  position: relative;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-name:before, .page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '\f0e0';
+  position: absolute;
+  font-family: fontawesome;
+  color: #d1d1d1;
+  font-size: 18px;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  top: 6px;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-name .form-text, .page-user .sso-header + #page .login-wrapper .form-item-pass .form-text {
+  padding-left: 50px;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '';
+  background: url(../images/key.png) center center no-repeat;
+}
+
+.page-signup .sso-header + #page .parent-background .form-type-textfield, .page-signup .sso-header + #page .parent-background .form-type-password {
+  position: relative;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield:before, .page-signup .sso-header + #page .parent-background .form-type-password:before {
+  position: absolute;
+  left: 6px;
+  top: 13px;
+  color: red;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield .form-text, .page-signup .sso-header + #page .parent-background .form-type-password .form-text {
+  padding-left: 20px;
+}
+.page-signup .sso-header + #page .parent-background .form-item-mail:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-mobile:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-fname:before, .page-signup .sso-header + #page .parent-background .form-item-lname:before, .page-signup .sso-header + #page .parent-background .form-item-password-again:before, .page-signup .sso-header + #page .parent-background .form-item-password:before {
+  content: '*';
+}
+
+.close-pass-popup {
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 16px;
+  background-color: #0066ff;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.page-sso-user-email .messages--status, .page-sso-user-mobile .messages--status {
+  text-align: center;
+  max-width: 300px;
+  margin: 20px auto 0;
+  padding: 5px 10px;
+  border: 1px solid;
+}
+
+.page-sso-user-mobile .messages--error, .page-sso-user-email .messages--error {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.front .election-page .election-graph table, .front .election-page .election-graph .social-share {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
 @media all and (max-width: 767px) {
   #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2 {
     padding: 20px;
