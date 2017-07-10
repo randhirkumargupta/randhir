@@ -4239,12 +4239,11 @@ div#forgot-field-heading {
 }
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile{
   position: relative;
-  &:after{
+  #umail:after{
     content: 'OR';
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 25px;
+    left: 278px;
+    top: 10px;
     margin: 0 auto;
     width: 25px;
     height: 25px;
@@ -6593,11 +6592,16 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           margin: 0;
         }
         &.email-or-mobile{
-          padding-bottom: 40px;
-          &:after{
-            top: auto;
-            bottom: 12px;
+          #umail{
+            padding-bottom: 35px;
+            &:after{
+              top: auto;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
           }
+          
         }
       }
       .col-xs-6{
