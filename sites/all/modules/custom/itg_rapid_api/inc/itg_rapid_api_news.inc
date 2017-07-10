@@ -443,5 +443,25 @@ function getNodeViewCount($nid){
     return $nv_count;
 }
 
+/*
+ * function to count the share of a node
+ * @param $nid
+ * @return $share_count
+ */
+
+function getNodeShareCount($nid){
+  
+    $ns_count = 0;
+    
+    $query = db_select('itg_lrp_loyalty_points', 'ilp');
+    $query->fields('ilp', array('node_id'));
+    $query->condition('ilp.node_id', $nid);
+    $query->condition('ilp.loyalty_type', 'Content Share');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $ns_count = count($result);
+    return $ns_count;
+  
+}
+
 
 
