@@ -3537,7 +3537,10 @@
       color: #8d8d8d;
       font-family: Roboto;
     }
-    
+    .ticket-type-require label:after {
+      content: '*';
+      color: red;
+    }
     @media all and (max-width: 767px){
         #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2{
             padding: 20px;
