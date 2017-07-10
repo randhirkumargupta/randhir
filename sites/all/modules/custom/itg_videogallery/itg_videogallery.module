@@ -101,7 +101,6 @@ function itg_videogallery_menu() {
     'type' => MENU_CALLBACK,
   );
 
-
   $items['daily-motion-video-dashboard'] = array(
     'title' => 'Daily Motion Video Dashboard',
     'description' => 'Daily Motion Video Dashboard',
@@ -1348,12 +1347,9 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
   preg_match_all('/src="([^"]+)"/', $story_body, $match);
   $video_url = $match[1];
   if (!empty($video_url)) {
-
     foreach ($video_url as $video_value) {
-
       $post_check = strpos($video_value, $base_url . '/embeded-video/');
       $post_video_node = strpos($video_value, $base_url . '/embed-video/');
-
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
@@ -1365,11 +1361,9 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
         }
       }
       if ($post_video_node !== FALSE) {
-
         $vid_id = end(explode('/', $video_value));
         $node_id = base64_decode($vid_id);
         $node_data = itg_videogallery_get_node_status($node_id);
-
         if ($node_data == 0) {
           drupal_add_js('jQuery(document).ready(function() {                  
             jQuery(".video_node_' . $vid_id . '").remove();
@@ -1575,7 +1569,6 @@ function itg_videogallery_delele_node() {
       ->execute()
       ->fetchAll();
   foreach ($result as $key => $val) {
-
     if (!empty($val->nid)) {
       node_delete($val->nid);
     }
