@@ -2393,7 +2393,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-itg_videogallery_publish_node_after_video_ready_by_dm();
+  itg_videogallery_publish_node_after_video_ready_by_dm();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
@@ -2468,13 +2468,13 @@ itg_videogallery_publish_node_after_video_ready_by_dm();
   }
   itg_videogallery_publish_node_after_video_ready_by_dm();
 // Here deleted video
-  //itg_videogallery_remove_video_with_child();
+  itg_videogallery_remove_video_with_child();
 // This crone use for remove video if parent site remove this video from video article
-//  itg_videogallery_remove_video_id_parent_site_delete();
- // itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
+  itg_videogallery_remove_video_id_parent_site_delete();
+  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
 // This crone use for if node is publish.
- // itg_videogallery_video_draft_node_check();
-//Cron use for make publish node after check video status ready to play
+  itg_videogallery_video_draft_node_check();
+//on use for make publish node after check video status ready to play
 }
 
 /* * solr action on node updaet and insert
@@ -2579,19 +2579,19 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
           if ($dm_data['encoding_progress'] == 100 && $dm_data['publishing_progress'] == 100) {
 
-//            $query = db_update('dailymotion_response_details');
-//            $query->fields(array('is_draft' => 0));
-//            $query->fields(array('dailymotion_published' => 1));
-//            $query->condition('video_id', $dmvid_id, '=');
-//            $query->execute();
+            $query = db_update('dailymotion_response_details');
+            $query->fields(array('is_draft' => 0));
+            $query->fields(array('dailymotion_published' => 1));
+            $query->condition('video_id', $dmvid_id, '=');
+            $query->execute();
 
             $image_url = $thumb_url['thumbnail_720_url'];
-//            $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
-//                ->fields(array(
-//                  'solr_video_thumb' => $image_url
-//                ))
-//                ->condition('solr_video_id', $dmvid_id, '=')
-//                ->execute();
+            $num_updated = db_update('itg_solr_video_info') // Table name no longer needs {}
+                ->fields(array(
+                  'solr_video_thumb' => $image_url
+                ))
+                ->condition('solr_video_id', $dmvid_id, '=')
+                ->execute();
           }
           else {
             $node_flag = 1;
@@ -2622,6 +2622,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
       $node->status = 1;
       $node->status_cron = 1;
       $node->workbench_moderation_state_new = workbench_moderation_state_published();
+      $node->revision = 1;
       node_save($node);
       workbench_moderation_moderate($node, 'published');
     }
