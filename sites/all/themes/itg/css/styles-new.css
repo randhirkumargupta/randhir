@@ -4422,12 +4422,11 @@ div#forgot-field-heading {
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile {
   position: relative;
 }
-[id*="itg-sso-reg-multistep-form"] .email-or-mobile:after {
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile #umail:after {
   content: 'OR';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 25px;
+  left: 278px;
+  top: 10px;
   margin: 0 auto;
   width: 25px;
   height: 25px;
@@ -7050,12 +7049,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-signup [id*="itg_sso_reg_multistep_form"] .form-row .form-item {
     margin: 0;
   }
-  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile {
-    padding-bottom: 40px;
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile #umail {
+    padding-bottom: 35px;
   }
-  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile:after {
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile #umail:after {
     top: auto;
-    bottom: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
   .page-signup [id*="itg_sso_reg_multistep_form"] .col-xs-6 {
     width: 100%;
