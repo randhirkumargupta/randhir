@@ -3528,6 +3528,15 @@
         margin: 0 auto;
       }
     }
+    .blurb {
+      padding: 0 10px;
+      border-left: 2px solid #d1d1d1;
+      margin: 10px 0;
+      text-align: justify;
+      font-style: italic;
+      color: #8d8d8d;
+      font-family: Roboto;
+    }
     
     @media all and (max-width: 767px){
         #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2{

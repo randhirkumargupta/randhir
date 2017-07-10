@@ -565,6 +565,15 @@
       .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; text-align: left; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
       .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; text-align: right; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
       @keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
+      .blurb {
+        padding: 0 10px;
+        border-left: 2px solid #d1d1d1;
+        margin: 10px 0;
+        text-align: justify;
+        font-style: italic;
+        color: #8d8d8d;
+        font-family: Roboto;
+      }
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
