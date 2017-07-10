@@ -9,7 +9,8 @@
     // as we could use ajax_command_alert() to do it without having to define a custom
     // ajax command, but for the purpose of demonstration, we will use an alert() function
     // here:
-    window.parent.location.reload(true);
+    parent.jQuery.fn.colorbox.close()
+  //  window.parent.location.reload(true);
 
   };
 }(jQuery, Drupal));
