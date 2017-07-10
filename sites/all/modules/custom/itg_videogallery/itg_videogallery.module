@@ -984,6 +984,8 @@ function itg_videogallery_video_private_public($videid, $status) {
   itg_videogallery_update_embedcode_url($videid);
 }
 
+
+
 /**
  * This function use for update embed url
  */
@@ -1573,7 +1575,6 @@ function itg_videogallery_delele_node() {
       ->execute()
       ->fetchAll();
   foreach ($result as $key => $val) {
-    pr($key);
 
     if (!empty($val->nid)) {
       node_delete($val->nid);
@@ -2966,7 +2967,6 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
-    pr($content);
     $decode_json = json_decode($content);
     curl_close($ch);
     if (!empty($content)) {
