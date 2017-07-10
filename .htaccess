@@ -38,7 +38,7 @@ DirectoryIndex index.php index.html index.htm
 <IfModule mod_expires.c>
   # Enable expirations.
   ExpiresActive On
-
+ 
   # Cache all files for 2 weeks after access (A).
   ExpiresDefault A1209600
 
@@ -55,7 +55,7 @@ DirectoryIndex index.php index.html index.htm
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
   RewriteEngine on
-
+  RewriteRule ^amp/(.*)$ http://uat-it.indiatodayonline.in//$1?amp [P]
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
   # you don't bounce between http and https.
