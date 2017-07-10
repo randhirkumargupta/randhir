@@ -13,13 +13,17 @@ if (!empty($data)) : global $base_url, $theme;
     $classrow = "col-md-$rowcounter";
   }
   else if (count($data) > 2) {
-    if (count($data) > 5) { = 180;
-    $datacount = 5;
+    if (count($data) > 5) {
+
+      $datacount = 5;
+    }
+    else {
+      $datacount = count($data);
+    }
+    $classrow = "col-el-5";
   }
-  else {
-    $datacount = count($data);
-  }
-  $classrow = "col-el-5";
+  if (count($data) >= 5) {
+    $height = "180px";
   }
   ?>
   <div class="election-page">
@@ -159,7 +163,7 @@ if (!empty($data)) : global $base_url, $theme;
             <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
 
               <div class="graph-design">
-                <div id="container_<?php echo $rand; ?>"  style="<?php echo 'height:'.$height;?>"></div>
+                <div id="container_<?php echo $rand; ?>"  style="<?php echo 'height:' . $height; ?>"></div>
                 <div class="divider"></div>                                
               </div>
               <?php
@@ -202,7 +206,7 @@ if (!empty($data)) : global $base_url, $theme;
 
         <?php } ?>
         </a>
-      <?php endforeach; ?>
+  <?php endforeach; ?>
     </div>
   </div>
 <?php else : ?>
