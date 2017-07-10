@@ -818,7 +818,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'story') {
     global $user, $theme;
     // for lock story
-    if ($view_mode != 'search_index' && $theme == FRONT_THEME_NAME && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
+    if ($view_mode != 'search_index' && ($theme == FRONT_THEME_NAME || $theme == 'amptheme') && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
       $config = array();
       if (!empty($node->field_story_configurations['und'][0]['value'])) {
         foreach ($node->field_story_configurations['und'] as $value) {
@@ -1105,7 +1105,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"></amp-img>
+       alt="' . $photo_story_img_title . '"></amp-img><span class="counter">'.$slide.'</span>
     </button>';
       $index++;
       $slide++;

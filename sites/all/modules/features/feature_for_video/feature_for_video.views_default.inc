@@ -928,10 +928,6 @@ allowfullscreen></iframe>';
   $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
   $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
   $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
-  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
-  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -951,17 +947,21 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_story_expert_description']['alter']['max_length'] = '120';
   $handler->display->display_options['fields']['field_story_expert_description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: File: Upload date */
-  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'file_managed';
-  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['relationship'] = 'node_to_file';
-  $handler->display->display_options['fields']['timestamp']['label'] = '';
-  $handler->display->display_options['fields']['timestamp']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['timestamp']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'M d, Y,  h:i a';
-  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Field: Content: Content Publish date */
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['id'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['table'] = 'field_data_field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['field'] = 'field_itg_content_publish_date';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['label'] = '';
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_itg_content_publish_date']['settings'] = array(
+    'format_type' => 'itg_publish_content',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
 
   /* Display: video landing page header scroll */
   $handler = $view->new_display('block', 'video landing page header scroll', 'block_1');

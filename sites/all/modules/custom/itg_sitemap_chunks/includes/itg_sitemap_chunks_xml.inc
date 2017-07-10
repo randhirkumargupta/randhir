@@ -11,14 +11,13 @@ module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3
  * Create xml sitemap.
  */
 function itg_sitemap_chunks_create_xml_sitemap() {
+  header('Content-type: application/xml');
   set_time_limit(0);
-  $contents = itg_sitemap_chunks_get_record();
+  $contents = array('story', 'videogallery', 'photogallery');
   $content_links = itg_sitemap_chunks_get_content_links($contents);
-  if (!empty($content_links)) {
-    $xml_file_content = itg_sitemap_print_sitemap($content_links);
-    header('Content-type: application/xml');
-    echo $xml_file_content;
-  }
+  //if (!empty($content_links)) {
+  // $xml_file_content = itg_sitemap_print_sitemap($content_links);
+  echo $content_links;
 }
 
 /**
@@ -26,20 +25,21 @@ function itg_sitemap_chunks_create_xml_sitemap() {
  */
 function itg_sitemap_chunks_create_xml_sitemap_cron() {
   set_time_limit(0);
-  $contents = itg_sitemap_chunks_get_record();
-  $content_links = itg_sitemap_chunks_get_content_links($contents);
-  if (!empty($content_links)) {
-    $xml_file_content = itg_sitemap_print_sitemap($content_links);
-    //Create gz file.
-    $gzfile = "public://sitemap/xmlsitemap.xml.gz";
-    $gzdata = gzencode($xml_file_content, 9);
-    $fp = fopen($gzfile, "w");
-    fwrite($fp, $gzdata);
-    fclose($fp);    
-  }
+  $contents = array('story', 'videogallery', 'photogallery');
+  $xml_file_content = itg_sitemap_chunks_get_content_links($contents);
+  //gz file
+  $gzfile = "public://sitemap/xmlsitemap.xml.gz";
+  $gzdata = gzencode($xml_file_content, 9);
+  $fp = fopen($gzfile, "w");
+  fwrite($fp, $gzdata);
+  fclose($fp);
+  // Create xml
+  //Create gz file.
+  $xmlfile = "public://sitemap/xmlsitemap.xml";
+  $fp = fopen($xmlfile, "w");
+  fwrite($fp, $xml_file_content);
+  fclose($fp);
 }
-
-
 
 function itg_sitemap_chunks_create_xml_sitemap_index() {
   $xml_files_info = itg_video_get_sitemap_xmls();
@@ -92,8 +92,6 @@ function itg_sitemap_print_sitemap($total_links) {
   foreach ($total_links as $total_link) {
     $xml .= '<url>';
     $xml .= '<loc>' . $total_link['link'] . '</loc>';
-    //$xml .= '<lastmod>' . $total_link['last_modified'] . '</lastmod>';
-    //$xml .= '<priority>' . $total_link['changefreq'] . '</priority>';
     $xml .= '</url>';
   }
   $xml .= '</urlset>';
@@ -271,7 +269,7 @@ function itg_sitemap_get_section_sitemap_required_data($nid) {
     $final_data['news_keywords'] = itg_sitemap_get_xml_valid_data(itg_sitemap_get_metatag_of_node($data['nid']));
     $final_data['news_name'] = ITG_INDIATODAY_SITENAME_XML;
     $final_data['news_language'] = $GLOBALS['language']->language;
-    $final_data['url'] = itg_sitemap_get_xml_valid_data(url(drupal_get_path_alias('node/' . $data['nid']), array('absolute' => TRUE)));
+    $final_data['url'] = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data['nid']);
     $final_data['news_publication_date'] = date('c', $data['created']);
   }
   return $final_data;
@@ -424,7 +422,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                 // check if current content type is saved in custom table of siemap.
                 // for priority frequency etc.
                 // Check if priority frequency etc. is saved then create sitemap.
-                $path = url(drupal_get_path_alias('node/' . $data->nid), array('absolute' => TRUE));
+                $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
                 $xml .= '<url>';
                 $xml .= '<loc>' . $path . '</loc>';
                 $xml .= '</url>';

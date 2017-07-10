@@ -126,11 +126,6 @@ function itg_image_croping_image_info_form($form, $form_state) {
   $fid = arg(1);
 
   $info = itg_image_croping_get_image_info($fid);
-  $form['syndicate'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Syndicate'),
-    '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
-  );
 
   $form['image_caption'] = array(
     '#type' => 'textarea',
@@ -221,6 +216,11 @@ function itg_image_croping_image_info_form($form, $form_state) {
     ),
     '#default_value' => ($info[0]->image_desc) ? $info[0]->image_desc : '',
   );
+  $form['syndicate'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Syndicate'),
+    '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
+  );
   $form['submit_button'] = array
     (
     '#type' => 'submit',
@@ -240,6 +240,11 @@ function itg_image_croping_image_info_form($form, $form_state) {
       'type' => 'file',
       'data' => drupal_get_path('module', 'itg_image_croping') . '/js/after_ajax.js',
     ),
+  );
+  $form['syndicate'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Syndicate'),
+    '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
   );
   return $form;
 }

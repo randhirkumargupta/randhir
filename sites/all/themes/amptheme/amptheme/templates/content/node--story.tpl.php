@@ -340,14 +340,38 @@ if (!empty($content)):
                                  </amp-accordion>
                                  </div>
                                  </div>';
-                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
                     }
-                    $factoidsSocialShare['slider'] .= '</ul></div>';
+                    $factoidsSocialShare['slider'] .= '</ul></div></div>';
                     $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
                   }
                   $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
+                }
+                
+                // remove poll from body
+                if (preg_match('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)) {
+                    $poll_nid = $matches_poll[1];
+                }
+                if (strpos($node->body['und'][0]['value'], '[ITG:POLL:'.$poll_nid.']')) {
+                  $story_body = str_replace('[ITG:POLL:'.$poll_nid.']', '', $story_body);
+                }
+                
+                // remove quiz from body
+                if (preg_match('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
+                    $quiz_nid = $matches_quiz[1];
+                }
+                if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:'.$quiz_nid.']')) {
+                  $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
+                }
+                
+                // remove survey from body
+                if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
+                    $survey_nid = $matches_survey[1];
+                }
+                if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:'.$survey_nid.']')) {
+                  $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
                 }
                 
                 $movie_html = itg_story_movie_image_plugin_data($node->nid, 'amp');

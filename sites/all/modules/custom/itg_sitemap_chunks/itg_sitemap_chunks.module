@@ -105,6 +105,17 @@ function itg_sitemap_chunks_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_chunks_setting_form'),
     'access callback' => 'user_access',
+    'access arguments' => array('administrator access'),
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  $items['admin/config/search/itg-multiple-sitemap/mixedsitemap-setting'] = array(
+    'title' => "Setting",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sitemap_mixedcontent_setting_form'),
+    'access callback' => 'user_access',
     'access arguments' => array('administer itg sitemap'),
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.admin.inc',
@@ -122,13 +133,13 @@ function itg_sitemap_chunks_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
-  $items['sitemap.xml'] = array(
-    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap', // load the croper according to size!.
-    'type' => MENU_CALLBACK,
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks_xml.inc',
-    'access callback' => TRUE,
-  );
+//  $items['sitemap.xml'] = array(
+//    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap', // load the croper according to size!.
+//    'type' => MENU_CALLBACK,
+//    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+//    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+//    'access callback' => TRUE,
+//  );
   
   $items['sitemapindex.xml'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_index', // load the croper according to size!.
@@ -234,5 +245,20 @@ function itg_sitemap_chunk_get_tags_data($contents, $content_type) {
     if ($data->content_type == $content_type) {
       return $contents[$key];
     }
+  }
+}
+
+/**
+ * function used to replace backend url to front url;
+ */
+function itg_sitemap_replace_backend_url_to_front_url($url) {
+  if(!empty($url)) {
+    $front_url = $url;
+    if (strpos($url, BACKEND_URL) !== false) {
+      $front_url = str_replace(BACKEND_URL, FRONT_URL, $url);
+    }
+    return $front_url;
+  } else {
+    return '';
   }
 }

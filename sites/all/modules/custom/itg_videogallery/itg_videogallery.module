@@ -1554,10 +1554,7 @@ function itg_videogallery_remove_video_with_child() {
           watchdog_exception('file manage delete', $e);
         }
       }
-
-
       if ($data_delete->property == VIDEO_PROPERTY) {
-
 // $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
         $query = db_update('dailymotion_response_details');
         $query->fields(array('dailymotion_published' => 0));
@@ -2027,6 +2024,7 @@ function itg_videogallery_get_file_details() {
   $responce = "";
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
+    $videoid = $video_id[0];
     $api = itg_videogallery_dailymotion_api();
     $thumb_url = $api->get(
         '/video/' . $video_id[0], array('fields' => array('embed_url'))
@@ -2050,7 +2048,7 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $video_id . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $video_id . '" allowfullscreen></iframe>';
+    $responce.=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . $base_url . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
   }
   exit($responce);
 }
@@ -2397,7 +2395,7 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
-
+  itg_videogallery_publish_node_after_video_ready_by_dm();
 // Here deleted video
   itg_videogallery_remove_video_with_child();
 // This crone use for remove video if parent site remove this video from video article
@@ -2405,7 +2403,6 @@ function itg_videogallery_thumb_url() {
 // This crone use for if node is publish.
   itg_videogallery_video_draft_node_check();
 //Cron use for make publish node after check video status ready to play
-  itg_videogallery_publish_node_after_video_ready_by_dm();
 }
 
 /* * solr action on node updaet and insert
@@ -2507,9 +2504,12 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
           $dm_data = $api->get(
               '/video/' . $dmvid_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
           );
+
           if ($dm_data['encoding_progress'] == 100 && $dm_data['publishing_progress'] == 100) {
+
             $query = db_update('dailymotion_response_details');
             $query->fields(array('is_draft' => 0));
+            $query->fields(array('dailymotion_published' => 1));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
 
@@ -2546,13 +2546,15 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
       }
     }
 
-
     if ($node_flag == 0) {
-      $node = node_load($node_ids);
-      $node->workbench_moderation_state_new = 'published';
+      $node = node_load($video_id->nid);
       $node->status = 1;
+      $node->status_cron = 1;
+      $node->workbench_moderation_state_new = workbench_moderation_state_published();
+      $node->revision = 1;
 
       node_save($node);
+      workbench_moderation_moderate($node, 'published');
     }
   }
 }
@@ -2813,7 +2815,7 @@ function itg_videogallery_move_ftp_videos() {
   global $user;
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-2 days', time());
+  $totime = strtotime('-1 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('upload_time', $totime, '>=');
@@ -2880,7 +2882,7 @@ function itg_videogallery_url_with_bitates() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-2 days', time());
+  $totime = strtotime('-1 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
@@ -2896,6 +2898,58 @@ function itg_videogallery_video_bitrate() {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $content = curl_exec($ch);
+    pr($content);
+    $decode_json = json_decode($content);
+    curl_close($ch);
+    if (!empty($content)) {
+      foreach ($decode_json as $keys => $json_url) {
+        if ($json_url != "") {
+          $query = db_select('itg_video_bitrates_data', 'ivbd');
+          $query->fields('ivbd');
+          $query->condition('video_id', $vid->video_id);
+          $query->condition('bitates_field', $keys);
+          $result = $query->execute()->fetchall();
+          if (!empty($result)) {
+            if ($result[0]->is_download != 1) {
+              db_update('itg_video_bitrates_data')
+                  ->fields(array(
+                    'video_id' => $vid->video_id,
+                    'bitate_url' => $json_url,
+                    'duration' => $vid->video_duration,
+                    'framesize' => $bitrates_info['framesize'][$keys],
+                    'bitrate' => $bitrates_info['bitrate'][$keys],
+                    'video_name' => $vid->name,
+                    'bitates_field' => $keys,
+                    'is_download' => 0,
+                  ))->condition('id', $result[0]->id)
+                  ->execute();
+            }
+          }
+          else {
+            db_insert('itg_video_bitrates_data')
+                ->fields(array(
+                  'video_id' => $vid->video_id,
+                  'bitate_url' => $json_url,
+                  'framesize' => $bitrates_info['framesize'][$keys],
+                  'bitrate' => $bitrates_info['bitrate'][$keys],
+                  'bitates_field' => $keys,
+                  'duration' => $vid->video_duration,
+                  'video_name' => $vid->name,
+                  'is_download' => 0,
+                ))
+                ->execute();
+          }
+        }
+      }
+    }
+
+
+    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_l1_url,stream_h264_l2_url,stream_h264_qhd_url,stream_h264_uhd_url");
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $content = curl_exec($ch);
+
     $decode_json = json_decode($content);
     curl_close($ch);
     if (!empty($content)) {

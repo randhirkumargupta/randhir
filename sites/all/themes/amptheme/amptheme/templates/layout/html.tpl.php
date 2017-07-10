@@ -94,6 +94,7 @@
       .photoby:empty{display: none;}
       .photoby{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .description a{color: #0883ed;}
+      .description ul, .description ol{padding-left: 18px;}
       .image-alt{color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 10px 0; border-bottom: 1px solid #ddd;}
       .related-story ul{list-style: none;}
       .related-story ul li{display: inline-block; vertical-align: top; width: 100%; padding: 10px 0;}
@@ -143,16 +144,16 @@
         font-weight: 600;
         text-transform: capitalize;
       }
+      .scroll-x{
+        overflow-x: auto;
+      }
       .factoids-slider ul {
         background: #a00606;
         padding: 0px;
         margin-top: 20px;
-        display: table-cell;
+        display: table;
         vertical-align: top;
-        width: 100%;
         list-style: none;
-        overflow-x: auto;
-        white-space: nowrap;
       }
       .factoids-slider ul li {
         padding: 25px; 
@@ -347,11 +348,12 @@
         overflow: hidden;
         margin: 0 -6px;
       }
-      .amp-other-gallery ul li{
-        float: left;
-        width: 183px;
-        padding: 0 6px;
-        max-width: 50%;
+      .amp-other-gallery ul li {
+          display: inline-block;
+          width: 180px;
+          padding: 0 5px 10px;
+          max-width: 49.5%;
+          vertical-align: top;
       }
       .other-img{
         position: relative;
@@ -388,7 +390,7 @@
         -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
         -webkit-animation-duration: 1s;
       }
-      .story-right .description iframe{max-width: 100%;}
+      .story-right .description iframe{width: 100%; max-width: 100%;}
       pre{white-space: inherit;}
       .amp-carousel-button{z-index: 99; visibility: visible; opacity: 1;}
       #block-itg-layout-manager-front-end-breadcrumb {
@@ -432,7 +434,7 @@
         z-index: 9;
       }
       .footer-top-link{
-        padding-left: 40px;
+        padding-right: 40px;
       }
       .footer-top-link ul li{
         display: inline-block;
@@ -471,6 +473,9 @@
         background: #000;
         margin-top: -50px;
         z-index: 99;
+        position: absolute !important;
+        right: 0;
+        top: 0;
       }
       .copyright{
         color: #a6a6a6;
@@ -494,7 +499,7 @@
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
-      .buzz-img .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #222; color: #fff; text-align: center;}
+      .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
       .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
       .buzz-img .social-share ul li{float: left;}
       .buzz-img .social-share ul li a{color: #fff; font-size: 20px; margin-right: 5px;}
@@ -505,7 +510,6 @@
       .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
-      .amp-photo-slider #carousel-with-preview{height: 700px;}
       .quotes {
           margin: 5px 0 5px 15px;
       }
@@ -539,6 +543,27 @@
         text-indent: 10px;
         margin-top: 32px;
       }
+      .description table{border: 1px solid #ddd; border-collapse: collapse; width: 100%;}
+      .description table td{border: 1px solid #ddd; padding: 5px;}
+      .rtejustify {
+          text-align: justify;
+      }
+      .rtecenter {
+          text-align: center;
+      }
+      .rteright {
+          text-align: right;
+      }
+      .photo-story .carousel-preview button{position: relative;}
+      .photo-story .carousel-preview button .counter{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.3); color: #fff; padding-top: 28px; cursor: pointer;}
+      .amp-carousel-button{width: 30px; background: none; cursor: pointer;}
+      .amp-carousel-button-prev{left: 0;}
+      .amp-carousel-button-next{right: 0;}
+      .amp-carousel-button-next:before{padding-left: 3px; box-sizing: border-box;content: '\f054'; position: absolute; text-align: center; font-size: 20px; right: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 3px 0 0 3px;}
+      .amp-carousel-button-prev:before{padding-right: 3px; box-sizing: border-box;content: '\f053'; position: absolute; text-align: center; font-size: 20px; left: 0; top: 0; width: 28px; height: 34px; line-height: 34px; color: #fff;font-family: fontawesome; background: rgba(0,0,0,.5); border-radius: 0 3px 3px 0;}
+      .amp-photo-slider .amp-carousel-button{height: 60px;}
+      .amp-photo-slider .amp-carousel-button-next:before{padding-left: 12px; text-align: left; height: 60px; right: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
+      .amp-photo-slider .amp-carousel-button-prev:before{padding-right: 12px; text-align: right; height: 60px; left: -30px; width: 60px; line-height: 60px; color: #000; background: rgba(255,255,255,.5); border-radius: 100%;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>

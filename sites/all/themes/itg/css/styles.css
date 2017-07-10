@@ -13909,6 +13909,10 @@ span.close_btt {
 }
 
 /* CSS For embedded code */
+.itg-embed-photo-wrapper:empty {
+  display: none;
+}
+
 .page-videogallery-embed, .page-photogallery-embed {
   background-color: #171717;
 }

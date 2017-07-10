@@ -25,7 +25,7 @@ $current_time_program_tid = itg_live_tv_page_video_category();
           <div class="program-right">
             <?php if (isset($row['field_cm_display_title'])) : ?>
               <div class="programe-title">
-                <?php print l($row['field_cm_display_title'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                <?php print l(html_entity_decode($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
               </div>
             <?php endif; ?>
           </div>

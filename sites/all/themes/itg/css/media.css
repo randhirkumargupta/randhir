@@ -3464,7 +3464,190 @@
   height: 100%;
 }
 
-#block-views-video-landing-header-block .video-header-left .video.slick-slider .slick-slide {
+#block-views-video-landing-header-block .video-header-left .video.slick-slider .slick-slide div.video-iframe-wrapper {
   height: 0;
-  padding-bottom: 18.05%;
+  padding-bottom: 72.2%;
+}
+
+.sso-header + #page {
+  height: auto;
+}
+
+.sso-footer {
+  margin-top: 30px;
+}
+
+#itg_user_forgot_password_multistep_form .form-wrapper {
+  text-align: center;
+}
+
+.page-forgot-password [id*="itg_user_forgot_password_multistep_form"] .form-type-textfield {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.page-forgot-password [id*="itg_user_forgot_password_multistep_form"] .form-type-textfield input[type="text"] {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.page-signup [id*="itg_sso_reg_multistep_form"] .form-wrapper .form-submit {
+  line-height: normal;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] {
+  margin-top: 30px;
+}
+
+#fotp #forgototpclickme {
+  margin: 15px 20px 0;
+}
+
+#itg-user-forgot-password-multistep-form--2 .form-wrapper {
+  text-align: left;
+  padding: 15px;
+}
+
+#itg-user-forgot-password-multistep-form--2 .form-wrapper {
+  text-align: left;
+}
+
+#itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2 {
+  background-color: #fbfbfb;
+  max-width: 780px;
+  padding: 20px 100px;
+}
+
+.page-sso-change-password form#itg-sso-reg-password-form .form-submit {
+  font-size: 16px;
+}
+
+#clientsidevalidation-itg-sso-reg-password-form-errors {
+  max-width: 780px;
+  margin: 0 auto 20px;
+}
+
+#clientsidevalidation-itg-sso-reg-password-form-errors ul {
+  padding-left: 18px;
+}
+
+#sso_email_mobile_form {
+  margin: 0 auto;
+}
+
+#sso_email_mobile_form form {
+  width: 100%;
+}
+
+#sso_email_mobile_form form .form-submit {
+  font-size: 16px;
+}
+
+.page-sso-user-email .messages {
+  text-align: center;
+}
+
+.page-sso-user-email .messages--error {
+  margin: 20px 0 10px;
+}
+
+#itg-sso-user-email-form input[type="text"] {
+  width: 100%;
+}
+
+#itg-sso-user-email-form .form-submit {
+  width: 170px;
+  height: 40px;
+  font-size: 16px;
+  line-height: normal;
+}
+
+#itg-sso-user-email-form #fotp .form-item-fotp {
+  margin-bottom: 0;
+}
+
+#itg-sso-user-email-form {
+  background-color: #fbfbfb;
+  max-width: 780px;
+  padding: 20px 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.page-user .sso-header + #page .login-wrapper .form-item-name, .page-user .sso-header + #page .login-wrapper .form-item-pass {
+  position: relative;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-name:before, .page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '\f0e0';
+  position: absolute;
+  font-family: fontawesome;
+  color: #d1d1d1;
+  font-size: 18px;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  top: 6px;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-name .form-text, .page-user .sso-header + #page .login-wrapper .form-item-pass .form-text {
+  padding-left: 50px;
+}
+.page-user .sso-header + #page .login-wrapper .form-item-pass:before {
+  content: '';
+  background: url(../images/key.png) center center no-repeat;
+}
+
+.page-signup .sso-header + #page .parent-background .form-type-textfield, .page-signup .sso-header + #page .parent-background .form-type-password {
+  position: relative;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield:before, .page-signup .sso-header + #page .parent-background .form-type-password:before {
+  position: absolute;
+  left: 6px;
+  top: 13px;
+  color: red;
+}
+.page-signup .sso-header + #page .parent-background .form-type-textfield .form-text, .page-signup .sso-header + #page .parent-background .form-type-password .form-text {
+  padding-left: 20px;
+}
+.page-signup .sso-header + #page .parent-background .form-item-mail:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-mobile:before {
+  content: '#';
+}
+.page-signup .sso-header + #page .parent-background .form-item-fname:before, .page-signup .sso-header + #page .parent-background .form-item-lname:before, .page-signup .sso-header + #page .parent-background .form-item-password-again:before, .page-signup .sso-header + #page .parent-background .form-item-password:before {
+  content: '*';
+}
+
+.close-pass-popup {
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 16px;
+  background-color: #0066ff;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.page-sso-user-email .messages--status, .page-sso-user-mobile .messages--status {
+  text-align: center;
+  max-width: 300px;
+  margin: 20px auto 0;
+  padding: 5px 10px;
+  border: 1px solid;
+}
+
+.page-sso-user-mobile .messages--error, .page-sso-user-email .messages--error {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media all and (max-width: 767px) {
+  #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2 {
+    padding: 20px;
+  }
 }

@@ -11469,6 +11469,7 @@ span.close_btt {
 .widget-help-text{display: none;}
 
 /* CSS For embedded code */
+.itg-embed-photo-wrapper:empty{display: none;}
 .page-videogallery-embed, .page-photogallery-embed{background-color: #171717;}
 .itg-embed-wrapper{
   h1.embed-title{font-size: 32px; margin: 25px 0; color: #fff; text-align: center;}
