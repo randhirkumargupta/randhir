@@ -1346,6 +1346,13 @@ function features_for_story_views_default_views() {
   $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
   $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
