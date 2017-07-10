@@ -154,7 +154,6 @@ if (!empty($data)) : global $base_url, $theme;
           $terms = taxonomy_get_parents_all($row->field_election_state_tid);
           $terms = array_reverse($terms);
           $section = $terms[0]->tid;
-
           ?>
           <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
             <div class="<?php echo $classrow; ?>">
