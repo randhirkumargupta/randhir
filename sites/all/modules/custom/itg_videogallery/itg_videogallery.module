@@ -4,7 +4,7 @@
  * @file
  * ITG Videogallery module.
  *
- * Provides customizations and functions for Video Gallery.
+ * Provides customizations and functions for Video Gallery.I  
  *
  */
 define('FTP_URL_VIDEO', variable_get('dailymotion_ftp_url'));
@@ -96,7 +96,7 @@ function itg_videogallery_menu() {
   );
 
   $items['video-delete-parent'] = array(
-    'page callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
+    'page callback' => 'itg_videogallery_remove_video_id_parent_site_delete_or_unpublish',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -1435,11 +1435,84 @@ function itg_videogallery_getsolr_data() {
 }
 
 /**
+ * Implement itg_clone_story_data
+ * @param int $keyword
+ * @param string $type
+ */
+function itg_videogallery_getsolr_data_publish() {
+  $solr = apachesolr_get_solr();
+  if (function_exists('itg_apache_solr_get_site_hash')) {
+    $hash = itg_apache_solr_get_site_hash();
+  }
+  $all_video_ids = array();
+  $hashvalue = implode(' OR ', array_keys($hash));
+  $str = 'hash:(' . $hashvalue . ')';
+  $str_pub = 'sm_field_video_used:(0)';
+  $str = $str . ' AND ' . $str_pub;
+  $query = apachesolr_drupal_query("custom");
+  $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
+  $query->addParam('qf', 'label'); // Only search in title
+  //$query->addParam('qf', 'label');
+//The bundle which you want to search
+  $query->replaceParam("fq", '(' . $str . ')');
+  $query->addFilter("bundle", "itg_solr_video");
+  $query->setSolrsort('sort_label', 'asc');
+  $resp_search = $query->search();
+
+  $allData = $resp_search->response->docs;
+  if (!empty($allData)) {
+    foreach ($allData as $datasolr) {
+
+      if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
+        $all_video_ids[] = $datasolr->sm_field_video_id;
+      }
+    }
+  }
+  return $all_video_ids;
+}
+
+/**
+ * This function use for removed parent deleted video
+ * 
+ */
+function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
+  $solr_data = itg_videogallery_getsolr_data_publish();
+  $video_data = "";
+  global $user;
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
+  $query->condition('solr_video_id', $solr_data, 'IN');
+  $query->condition('content_type', 'video_gallery', '!=');
+  $video_data = $query->execute()->fetchAll();
+  $node_by_video = array();
+  foreach ($video_data as $data_delete) {
+    $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
+    $node_by_videop['video_id'][$data_delete->nid][] = $data_delete->solr_video_id;
+  }
+
+  foreach ($node_by_videop['fid'] as $nkey => $fids) {
+    foreach ($fids as $nky => $vide_fid) {
+      try {
+        $deleted = db_delete('file_managed')
+            ->condition('fid', $vide_fid)
+            ->execute();
+        $deleted = db_delete('itg_solr_video_info')
+            ->condition('fid', $vide_fid, '=')
+            ->execute();
+      }
+      catch (Exception $e) {
+        watchdog_exception('file manage delete', $e);
+      }
+    }
+  }
+}
+
+/**
  * This function use for removed parent deleted video
  * 
  */
 function itg_videogallery_remove_video_id_parent_site_delete() {
-  $solr_data = itg_videogallery_getsolr_data();
+  $solr_data = itg_videogallery_getsolr_data_publish();
   $video_data = "";
   global $user;
   $query = db_select('itg_solr_video_info', 'drd');
@@ -1534,7 +1607,6 @@ function itg_videogallery_remove_video_with_child() {
   $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property'));
   $query->condition('is_delete', '1', '=');
   $video_data = $query->execute()->fetchAll();
-
   foreach ($video_data as $data_delete) {
 
     if ($data_delete->fid != "") {
@@ -2173,7 +2245,6 @@ function itg_videogallery_get_old_playlist($nid) {
  * This function use for unpublish cideo content delete video
  */
 function itg_videogallery_unpublish_content_delete_video($fid) {
-
   $query = db_update('itg_solr_video_info')
       ->fields(array('is_delete' => 1));
   $query->condition('fid', $fid);
@@ -2322,7 +2393,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-
+  itg_videogallery_publish_node_after_video_ready_by_dm();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
@@ -2400,9 +2471,10 @@ function itg_videogallery_thumb_url() {
   itg_videogallery_remove_video_with_child();
 // This crone use for remove video if parent site remove this video from video article
   itg_videogallery_remove_video_id_parent_site_delete();
+  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
 // This crone use for if node is publish.
   itg_videogallery_video_draft_node_check();
-//Cron use for make publish node after check video status ready to play
+//on use for make publish node after check video status ready to play
 }
 
 /* * solr action on node updaet and insert
@@ -2527,7 +2599,6 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
         }
       }
       catch (Exception $e) {
-
         $exception_flag = 1;
         $video_ids[] = $dmvid_id;
       }
@@ -2552,7 +2623,6 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
       $node->status_cron = 1;
       $node->workbench_moderation_state_new = workbench_moderation_state_published();
       $node->revision = 1;
-
       node_save($node);
       workbench_moderation_moderate($node, 'published');
     }

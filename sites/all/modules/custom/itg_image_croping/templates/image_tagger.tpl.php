@@ -54,19 +54,18 @@ list($width, $height) = getimagesize($url);
         print' <div class="image_info">' . $counter . ' ' . ucwords($label) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
       }
 
-
       if ($key == 0) {
         print '<div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-
-        print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_first" placeholder="Caption"></textarea></div>';
-
+        if ($content_name == 'story') {
+          print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_first" placeholder="Caption"></textarea></div>';
+        }
         print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title"  value=""></br>';
       }
       else {
         print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all_for" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-
-        print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_all" placeholder="Caption"></textarea></div>';
-
+        if ($content_name == 'story') {
+          print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_all" placeholder="Caption"></textarea></div>';
+        }
         print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title_exta"  value=""></br>';
       }
       if ($key == 0) {

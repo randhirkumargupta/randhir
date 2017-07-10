@@ -106,6 +106,12 @@ function features_for_story_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'amp' => array(
+        'custom_settings' => TRUE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
