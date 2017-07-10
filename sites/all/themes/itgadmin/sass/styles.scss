@@ -12086,3 +12086,16 @@ fieldset#edit-xmlsitemap{
     }
   }
 }
+[id*="views-exposed-form-state-manager-page"]{
+  .views-submit-button{
+    .form-submit{
+      margin-top: 10px;
+    }
+    a{
+      @extend .btn-small;
+      margin-top: 10px;
+      height: 29px;
+      margin-left: 10px;
+    }
+  }
+}
