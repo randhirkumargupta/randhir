@@ -9456,7 +9456,7 @@ div.node{
             }
           }
           > .image-widget-data{
-            //height: 100px;
+            height: 100px;
             float: none  !important;
             a.filefield-sources-imce-browse{
               background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
@@ -11988,9 +11988,14 @@ fieldset#edit-xmlsitemap{
 .browse-media-file .edit-image-info{
   color: #008eb1;
   position: absolute;
-  left: 115px;
-  top: 148px;
+  left: auto;
+  right: 0;
+  top: 32px;
   z-index: 9999;
+  width: 22px;
+  height: 20px;
+  padding-top: 1px;
+  background-color: rgba(0,0,0,.2);
 }
 [id*="itg-image-croping-image-info-form"]{
   .form-item-syndicate{
@@ -12089,7 +12094,7 @@ fieldset#edit-xmlsitemap{
 [id*="views-exposed-form-state-manager-page"]{
   .views-submit-button{
     .form-submit{
-      margin-top: 10px;
+      margin-top: 10px !important;
     }
     a{
       @extend .btn-small;
