@@ -170,6 +170,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);
   // Save data into database.
   $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);
+  //~ ignore_user_abort(false);
 }
 
 /**
