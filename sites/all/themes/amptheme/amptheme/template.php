@@ -71,6 +71,9 @@ function amptheme_html_head_alter(&$head_elements) {
     if (isset($element['#suffix']) && strpos($element['#suffix'], 'script')) {
       unset($head_elements[$key]);
     }
+    if (isset($data['#attributes']) && isset($data['#attributes']['rel']) && $data['#attributes']['rel'] == 'shortlink') {
+      unset($head_elements[$key]);
+    }
   }
 
   // We will manually set this in the template to control source order.

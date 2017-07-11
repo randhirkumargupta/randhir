@@ -71,6 +71,7 @@ global $base_url, $user;
           // code for sharing
           $arg = arg();
           if(function_exists('itg_get_node_details')) {
+          //$nid = get_nid_form_url($_SERVER['REQUEST_URI']);  
           $title = itg_get_node_details($arg[1]);
           $share_title = $title[0]['title'];
           $image = file_load($title[0]['field_story_extra_large_image_fid']);
