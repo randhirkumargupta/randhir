@@ -126,15 +126,16 @@ function itg_image_croping_image_info_form($form, $form_state) {
   $fid = arg(1);
 
   $info = itg_image_croping_get_image_info($fid);
-
-  $form['image_caption'] = array(
-    '#type' => 'textarea',
-    '#title' => 'Caption',
-    '#attributes' => array(
-      'placeholder' => t('Caption'),
-    ),
-    '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
-  );
+  if ($_GET['node_type'] == 'story') {
+    $form['image_caption'] = array(
+      '#type' => 'textarea',
+      '#title' => 'Caption',
+      '#attributes' => array(
+        'placeholder' => t('Caption'),
+      ),
+      '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
+    );
+  }
 
 //  $form['image_alt'] = array(
 //    '#type' => 'textfield',
@@ -276,7 +277,6 @@ function itg_image_croping_save_info($form, &$form_state) {
     'image_syndicate' => $form_state['values']['syndicate'],
   );
   $inserted_data = db_insert('image_info')->fields($data_array)->execute();
-  drupal_set_message('Image Information Save');
   // First, we initialize our $commands array. This array will
   // contain each of the commands we want to fire for our
   // #AJAX callback:
