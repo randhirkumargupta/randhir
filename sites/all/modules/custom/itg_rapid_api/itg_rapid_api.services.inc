@@ -1235,6 +1235,242 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        // edit_profile custom resource declaration.....
+        'edit_profile' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves edit_profile schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_edit_profile',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'authtoken_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'authtoken_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'first_name',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'first_name',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'last_name',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'last_name',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'email_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'email_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'phone_number',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'phone_number',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'location',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'location',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'profile_image',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'profile_image',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'gender',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'gender',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'date_of_birth',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'date_of_birth',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // edit_user_image custom resource declaration.....
+        'edit_user_image' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves edit_user_image schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_edit_user_image',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'authtoken_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'authtoken_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'profile_image',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'profile_image',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // get_login_user_detail custom resource declaration.....
+        'get_login_user_detail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves get_login_user_detail schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_get_login_user_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'authtoken_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'authtoken_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // get_login_user_detail custom resource declaration.....
+        'log_out' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves log_out schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_log_out',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -2582,4 +2818,109 @@ function poll_detail($token,$poll_id) {
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
+}
+
+/**
+ * function for itg_rapid_api_edit_profile
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_edit_profile($token) {
+    echo "<pre>";
+    print_r($_GET);
+    echo "</pre>";
+    exit();
+}
+
+/**
+ * function for itg_rapid_api_edit_user_image
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_edit_user_image($token) {
+    echo "<pre>";
+    print_r($_GET);
+    echo "</pre>";
+    exit();
+}
+
+/**
+ * function for itg_rapid_api_get_login_user_detail
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_get_login_user_detail($token) {    
+    $data = array();
+    $authtoken_id = $_GET['$_GET'];
+    $user_id = $_GET['user_id'];
+    $account = user_load_by_name($user_id);
+    $user_id = $account->uid;
+    $first_name = $account->field_first_name['und'][0]['value'];
+    $last_name = $account->field_last_name['und'][0]['value'];
+    $email_id = $account->mail;
+    $phone_number = $account->field_mobile_number['und'][0]['value'];
+    $location = "";
+    if($account->field_personalization_city['und'][0]['value']){
+        $location .= $account->field_personalization_city['und'][0]['value'];
+    }
+    if($account->field_personalization_state['und'][0]['value']){
+        $location .= ", ".$account->field_personalization_state['und'][0]['value'];
+    }
+    if($account->field_user_counrty['und'][0]['value']){
+        $location .= ", ".$account->field_user_counrty['und'][0]['value'];
+    }
+    if($account->field_short_description['und'][0]['value']){
+        $location .= ", ".$account->field_short_description['und'][0]['value'];
+    }
+    
+    $profile_image = $account->field_user_picture['und'][0]['fid'];
+    $gender = $account->field_user_gender['und'][0]['value'];
+    $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
+    $login_type = "na";
+    
+    $data['status_code'] = "1";
+    $data['status_message'] = "customised_message";
+    
+    $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
+    $data['data']['user_profile_detail']['login_type'] = "$login_type";
+    $data['data']['user_profile_detail']['user_id'] = "$user_id";
+    $data['data']['user_profile_detail']['first_name'] = "$first_name";
+    $data['data']['user_profile_detail']['last_name'] = "$last_name";
+    $data['data']['user_profile_detail']['email_id'] = "$email_id";
+    $data['data']['user_profile_detail']['phone_number'] = "$phone_number";
+    $data['data']['user_profile_detail']['location'] = "$location";
+    $data['data']['user_profile_detail']['profile_image'] = "$profile_image";
+    $data['data']['user_profile_detail']['gender'] = "$gender";
+    $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
+    
+    return $data;
+    
+}
+
+/**
+ * function for itg_rapid_api_log_out
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_log_out($token) {
+    global $base_url;
+    $data = array();
+    $user_id = $_GET['user_id'];
+    $pram = "uname=$user_id";
+    $options = array(
+        'method' => 'POST',
+        'data' => $pram,
+        'timeout' => 15,
+        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $url = $base_url."/user/logout";
+    $result = drupal_http_request('$url', $options);
+    $data['status_code'] = "1";
+    $data['status_message'] = "customised_message";
+
+    return $data;
 }
