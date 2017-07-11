@@ -1,4 +1,4 @@
-<h1><?php echo t('What are News Feeds?') ?> </h1>
+<h2><?php echo t('What are News Feeds?') ?> </h2>
 <div class="what-are-news-feeds">
     <p><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its published, without having to visit the websites you have taken the feed from Feeds are also known as RSS Really Simple Syndication (RSS) is an XML—based format for content distribution. RSS feeds help the user stay abreast of news as it happens and as it breaks from news sources.'); ?></p>
     <p><?php echo t('India Today RSS, the outcome of a huge network of our news sources, provides you the header of the news item and its excerpts when one subscribes to the news RSS feed.'); ?></p>
@@ -60,7 +60,7 @@
     <hr/>
     <h2><?php echo t('Terms of Use') ?></h2>
     <li><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its
-        published. without having to visit the websites you have taken the feed from.'); ?></li>
+        published. Without having to visit the websites you have taken the feed from.'); ?></li>
     <li><?php echo t('Feeds are known as RSS Really Simple Syndication (RSS) is an XML-based format for content.'); ?></li>
     <li><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its published') ?></li>
 </div>

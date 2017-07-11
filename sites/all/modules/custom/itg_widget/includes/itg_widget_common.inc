@@ -2333,7 +2333,7 @@ if ($block->delta == 'videogallery_menu_video_block') {
   if ($block->delta == 'may_be_recommend_block') {
     $arg = arg();
     $ntype = menu_get_object('node');
-    if ($ntype->type == 'story' || $ntype->type == 'mega_review_critic' || $arg[0] == 'itg_active_polls') {
+    if ($ntype->type == 'story' || $ntype->type == 'mega_review_critic' || $arg[0] == 'itg_active_polls' || $arg[0] == 'rss') {
       return TRUE;
     }
     else {
@@ -2822,7 +2822,7 @@ function get_rhs_block_display_condtion($delta = '') {
         break;
       case 'we_may_suggest':
 
-        if ($arg[0] == 'gethomecarddata') {
+        if ($arg[0] == 'gethomecarddata' || $arg[0] == 'rss') {
           return TRUE;
         }
         if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'livetv' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
