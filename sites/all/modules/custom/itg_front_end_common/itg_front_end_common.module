@@ -960,6 +960,7 @@ function get_related_display_title($nid, $display_id) {
  */
 function _related_story_amp_block_content() {
   global $base_url;
+  //$nid = get_nid_form_url($_SERVER['REQUEST_URI']);
   $arg = arg();
   $related_content_amp = itg_get_related_content($arg[1]);
   if (function_exists('itg_get_related_story_id')) {

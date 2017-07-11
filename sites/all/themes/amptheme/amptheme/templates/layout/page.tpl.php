@@ -78,9 +78,11 @@
     <?php print $messages; ?>
 
     <div id="main-wrapper"><main role="main" id="main" class="clearfix">
-     <div class="front-end-breadcrumb">
+     <?php if(isset($_GET['amp'])) { ?>
+            <div class="front-end-breadcrumb">
             <?php print render($page['front_end_breadcrumb']); ?>
       </div>
+     <?php } ?>       
         <div id="content" class="column"><div class="section">
             <a id="main-content"></a>
             <?php print render($title_prefix); ?>
