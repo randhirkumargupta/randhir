@@ -59,6 +59,7 @@
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
     <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
@@ -596,12 +597,40 @@
         color: #8d8d8d;
         font-family: Roboto;
       }
-      a.search {
+      .search-form {
         position: absolute;
         right: 10px;
         top: 10px;
-        color: #fff;
+      }
+      .search-form input[type="search"] {
+        height: 28px;
+        width: 200px;
+        padding-right: 35px;
+        padding-left: 10px;
+      }
+      .search-form input[type="submit"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 28px;
+        border: none;
+        padding: 0;
+        margin: 0;
+        z-index: 99;
+        opacity: 0;
+      }
+      a.search {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #666;
         font-size: 20px;
+        width: 30px;
+        height: 28px;
+        z-index: 9;
+        padding-top: 3px;
+        text-align: center;
       }
     </style>
     <?php //endif;  ?>
