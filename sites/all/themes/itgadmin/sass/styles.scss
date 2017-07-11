@@ -11988,9 +11988,14 @@ fieldset#edit-xmlsitemap{
 .browse-media-file .edit-image-info{
   color: #008eb1;
   position: absolute;
-  left: 115px;
-  top: 148px;
+  left: auto;
+  right: 0;
+  top: 32px;
   z-index: 9999;
+  width: 22px;
+  height: 20px;
+  padding-top: 1px;
+  background-color: rgba(0,0,0,.2);
 }
 [id*="itg-image-croping-image-info-form"]{
   .form-item-syndicate{
@@ -12020,10 +12025,7 @@ fieldset#edit-xmlsitemap{
     }
   }
 }
-.ticket-type-require label:after {
-  content: '*';
-  color: red;
-}
+
 .form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video{
   position: relative;
   [id*="field-associate-event-photo-values"], [id*="field-associate-event-video-values"]{
@@ -12086,6 +12088,19 @@ fieldset#edit-xmlsitemap{
       padding-left: 250px;
       margin: 10px 0;
       a{color: #008eb1;}
+    }
+  }
+}
+[id*="views-exposed-form-state-manager-page"]{
+  .views-submit-button{
+    .form-submit{
+      margin-top: 10px !important;
+    }
+    a{
+      @extend .btn-small;
+      margin-top: 10px;
+      height: 29px;
+      margin-left: 10px;
     }
   }
 }

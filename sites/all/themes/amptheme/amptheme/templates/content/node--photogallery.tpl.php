@@ -31,13 +31,6 @@
   ?>
   </div>
 </div>
-<div class="amp-photo-ad"><amp-ad type="a9"
-    width="300"
-    height="250"
-    data-aax_size="300x250"
-    data-aax_pubname="test123"
-    data-aax_src="302">
-  </amp-ad></div>
 <div class="amp-other-gallery">
 <?php
 // get all node id related to current node primary category

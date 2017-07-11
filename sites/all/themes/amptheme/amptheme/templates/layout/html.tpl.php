@@ -71,7 +71,7 @@
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 30px; z-index: 9999;}
+      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
       #navbar h2{
@@ -334,6 +334,9 @@
       .amp-photo-slider .amp-carousel-button{
         top: 25%;
       }
+      .front-end-breadcrumb-photo-video + .black-box .amp-photo-slider .amp-carousel-button, 
+      .node-type-videogallery .amp-photo-slider .amp-carousel-button,
+      .node-type-photogallery .amp-photo-slider .amp-carousel-button{top: 42%;}
       .amp-photo-slider p{
         color: #a1a1a1;
         line-height: 24px;
@@ -398,7 +401,6 @@
         z-index: 9998;
         color: #a1a1a1;
         font-family: roboto;
-        margin-bottom: 20px;
       }
       #block-itg-layout-manager-front-end-breadcrumb div.lft {
         display: inline-block;
@@ -407,6 +409,25 @@
       #block-itg-layout-manager-front-end-breadcrumb a {
         color: #a1a1a1;
         font-family: roboto;
+      }
+      .front-end-breadcrumb {
+        margin: 0 -12px;
+        padding: 20px 12px;
+        color: #a1a1a1;
+        font-family: roboto;
+        font-size: 14px;
+      }
+      .front-end-breadcrumb > div {
+        display: inline-block;
+        vertical-align: top;
+      }
+      .front-end-breadcrumb a{
+        color: #a1a1a1;
+        font-family: roboto;
+      }
+      .front-end-breadcrumb.front-end-breadcrumb-photo-video{
+          background-color: #171717;
+          padding-bottom: 0;
       }
       #footer{
         background-color: #000;
@@ -497,7 +518,8 @@
       #navbar .social-share .share-link a{ display: inline-block; vertical-align: middle; color: #fff; font-size: 20px; }
       #navbar .social-share .share-link a + a{margin-left: 10px;}
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
-      .node-type-photogallery #block-itg-layout-manager-front-end-breadcrumb, .node-type-videogallery #block-itg-layout-manager-front-end-breadcrumb{background-color: #171717; margin: 0 -12px; padding: 20px 12px 0;}
+      .node-type-photogallery .front-end-breadcrumb, 
+      .node-type-videogallery .front-end-breadcrumb{background-color: #171717; padding-bottom: 0;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
       .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
       .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}
@@ -573,6 +595,13 @@
         font-style: italic;
         color: #8d8d8d;
         font-family: Roboto;
+      }
+      a.search {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #fff;
+        font-size: 20px;
       }
     </style>
     <?php //endif;  ?>

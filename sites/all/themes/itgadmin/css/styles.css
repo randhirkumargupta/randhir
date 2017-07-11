@@ -704,7 +704,7 @@ div.filefield-sources-list a.active {
 [id*="itg-registred-user-report-form"] #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions a,
 #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a,
 [id*="itg-registred-user-report-form"] #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions a,
-#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link {
+#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link, [id*="views-exposed-form-state-manager-page"] .views-submit-button a {
   height: 28px;
   line-height: 26px;
   padding: 0 10px;
@@ -12675,9 +12675,14 @@ fieldset#edit-xmlsitemap {
 .browse-media-file .edit-image-info {
   color: #008eb1;
   position: absolute;
-  left: 115px;
-  top: 148px;
+  left: auto;
+  right: 0;
+  top: 32px;
   z-index: 9999;
+  width: 22px;
+  height: 20px;
+  padding-top: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 [id*="itg-image-croping-image-info-form"] .form-item-syndicate {
@@ -12703,11 +12708,6 @@ fieldset#edit-xmlsitemap {
 [id*="itg-sitemap-chunks-add-sitemap"] table .form-item, [id*="itg-sitemap-chunks-section-form"] table .form-item, [id*="itg-sitemap-chunks-add-sitemap"] table .form-item {
   margin: 0;
   padding: 0;
-}
-
-.ticket-type-require label:after {
-  content: '*';
-  color: red;
 }
 
 .form-field-name-field-associate-event-photo, .form-field-name-field-associate-event-video {
@@ -12765,4 +12765,13 @@ fieldset#edit-xmlsitemap {
 }
 [id*="itg-akamai-cache-akamai-log"] .fieldset-wrapper > p a {
   color: #008eb1;
+}
+
+[id*="views-exposed-form-state-manager-page"] .views-submit-button .form-submit {
+  margin-top: 10px !important;
+}
+[id*="views-exposed-form-state-manager-page"] .views-submit-button a {
+  margin-top: 10px;
+  height: 29px;
+  margin-left: 10px;
 }
