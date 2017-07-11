@@ -2008,7 +2008,7 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
  
-  $collegeid = $line[1];
+  $city = $line[1];
   $streamid = $line[2];
   $collegeid = $line[3];
   $CollegeNewNid = $line[4];
@@ -2018,8 +2018,8 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
   $rank = $line[8];
   $published = $line[9];
   $created_date = $line[10];
-
   $bestcollege_status = variable_get('bestcollege_status', '');
+  
   try {
     if(isset($bestcollege_status) && $bestcollege_status == '2') {
         $result = db_insert('bestcolleges_citywiseranking')
@@ -2035,7 +2035,7 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
               'published' => $published,
               'created_date' => $created_date, 
             ))->execute();
-    }
+    } 
  
     
     // No exception thrown; PDO thinks the record was inserted correctly.
