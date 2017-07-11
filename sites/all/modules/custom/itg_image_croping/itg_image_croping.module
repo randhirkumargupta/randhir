@@ -625,6 +625,12 @@ function itg_image_croping_crop_image() {
   if ($content_type == 'videogallery') {
     $content_type = 'video';
   }
+  if($content_type =='field_story_technology' || $content_type =='field_story_template_buzz' || $content_type =='field_photo_story') {
+    $content_type ='story';
+  }
+  if($content_type =='field_story_technology' || $content_type =='field_story_template_buzz' || $content_type =='field_photo_story') {
+    $content_type ='story';
+  }
   $content_type_new = $_POST['content_name'];
   $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
   $fileids = array();
