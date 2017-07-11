@@ -2135,8 +2135,8 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
               'CollegeNewNid' => $CollegeNewNid,
               'year' => $year,
               'rank' => $rank,
-              'published' => $created_date,
-              'created_date' => $stream,
+              'published' => $published,
+              'created_date' => $created_date,
             ))->execute();
     }
 
