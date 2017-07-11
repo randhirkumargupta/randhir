@@ -1037,3 +1037,21 @@ function itg_get_node_details($nid) {
     return $record = $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
+
+/**
+ * Implements itg_get_node_status().
+ * @param type $nid
+ * @return array
+ */
+function itg_get_node_status($nid) {
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->fields('n', array('status'))
+          ->condition('n.nid', $nid)
+          ->condition('n.status', 1);
+    $query->orderBy('n.created', 'DESC'); 
+    $result = $query->execute()->fetchField();
+
+    return $result;
+  }
+}
