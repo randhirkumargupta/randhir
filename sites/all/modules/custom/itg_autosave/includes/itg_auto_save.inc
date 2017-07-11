@@ -404,37 +404,50 @@ class itg_auto_save {
    *   Return true if filed is not empty else return false.
    */
   public function itg_save_validate_field_collection($data, $field_values) {        
-    foreach ($data as $value) {             
-      switch ($value['fieldType']) {
-        case 'taxonomy_term_reference':          
-          if (is_int($field_values[$value['fieldName']]['und'])) {
-            return TRUE;
-          }
-          break;
+    foreach ($data as $value) {
+            switch ($value['fieldType']) {
+                case 'taxonomy_term_reference':
+                    if (is_int($field_values[$value['fieldName']]['und'])) {
+                        return TRUE;
+                    }
+                    break;
 
-        case 'text_long':
-          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
-            return TRUE;
-          }
-          break;
-          
-        case 'list_text':          
-          if(is_array($field_values[$value['fieldName']]['und'])) {
-            return TRUE;
-          }
-          break;
-          
-        case 'text':
-          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
-            return TRUE;
-          }
-          break;
-        case 'file':
-          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
-            return TRUE;
-          } 
-      }
-    }
+                case 'text_long':
+                    if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+                        return TRUE;
+                    }
+                    break;
+                case 'text_with_summary':
+                    if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+                        return TRUE;
+                    }
+                    break;
+
+                case 'list_text':
+                    if (is_array($field_values[$value['fieldName']]['und'])) {
+                        return TRUE;
+                    }
+                    break;
+
+                case 'text':
+                    if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
+                        return TRUE;
+                    }
+                    break;
+                case 'file':
+                    if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+                        return TRUE;
+                    }
+                case 'images':
+                    if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+                        return TRUE;
+                    }
+                case 'list_integer':
+                    if ($field_values[$value['fieldName']]['und'] > 0) {
+                        return TRUE;
+                    }
+            }
+        }
     
     return FALSE;
   }
@@ -605,51 +618,78 @@ class itg_auto_save {
    *   Field collection entity object.
    */
   public function itg_save_field_collection($data, $inputs, &$fc_item) {   
-    foreach ($data as $field) {      
-      switch ($field['fieldType']) {
-        case 'datestamp':
-          
-          break;
+    foreach ($data as $field) {
+            switch ($field['fieldType']) {
+                case 'datestamp':
 
-        case 'datetime':
-          
-          break;
+                    break;
 
-        case 'text':          
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
-          break;
+                case 'datetime':
 
-        case 'taxonomy_term_reference':
-          $this->value = $inputs[$field['fieldName']]['und'];          
-          $this->value = (int) $this->value;          
-          if ($this->value > 0) {
-            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;
-          }
-          
-          break;       
+                    break;
 
-        case 'text_long':
-          $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;                    
-          break;
+                case 'text':
+                    $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+                    break;
 
-        case 'text_with_summary':
-          
-          break;
+                case 'taxonomy_term_reference':
+                    $this->value = $inputs[$field['fieldName']]['und'];
+                    $this->value = (int) $this->value;
+                    if ($this->value > 0) {
+                        $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;
+                    }
 
-        case 'list_text':          
-          $this->value = $inputs[$field['fieldName']]['und'];
-          foreach ($this->value as $f_value) {
-            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $f_value;
-          }          
-          
-          break;
-          
-        case 'file':
-          $this->value = $inputs[$field['fieldName']]['und'][0];
-          $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
-      }
-    }    
+                    break;
+
+                case 'text_long':
+                    $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
+                    $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;
+                    break;
+
+                case 'text_with_summary':
+                    $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']][LANGUAGE_NONE][0]['value'];
+                    break;
+                    break;
+
+                case 'list_text':
+                    $this->value = $inputs[$field['fieldName']]['und'];
+                    if (is_array($this->value)) {
+                        foreach ($this->value as $f_value) {
+                            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $f_value;
+                        }
+                    }
+                    else {
+                        $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;
+                    }
+                    break;
+                case 'jquery_colorpicker':
+                    $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['jquery_colorpicker'] = $inputs[$field['fieldName']]['und'][0]['jquery_colorpicker'];
+                    break;
+                case 'file':
+                    $this->value = $inputs[$field['fieldName']]['und'][0];
+                    $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+                    break;
+                case 'image':
+                    $this->value = $inputs[$field['fieldName']]['und'][0];
+                    $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+                    break;
+                case 'list_integer':
+                    $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
+                    break;
+                case 'entityreference':
+                    $this->value = $inputs[$field['fieldName']]['und'][0]['target_id'];
+                    $this->value = explode(')', end(explode("(", $this->value)));
+                    if (count($this->value) > 0) {
+                        $this->value = (int) $this->value[0];
+                    }
+                    else {
+                        $this->value = 0;
+                    }
+                    if ($this->value > 0) {
+                        $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['target_id'] = $this->value;
+                    }
+            }
+        }    
   }
  
   /**
