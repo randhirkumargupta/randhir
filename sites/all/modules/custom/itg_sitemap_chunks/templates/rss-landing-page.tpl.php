@@ -1,5 +1,66 @@
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus maximus, leo laoreet rutrum lacinia, ante tortor efficitur leo, ut commodo ante ante eget lorem. Duis rutrum nulla nec risus congue euismod. Nullam hendrerit orci eget purus vestibulum, in mattis leo feugiat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur suscipit, metus eget bibendum malesuada, est ex luctus tellus, molestie tincidunt ex enim vitae orci. Sed et tristique nunc. Fusce ultricies nisi congue, ultricies velit vel, euismod risus. Nam ut feugiat enim, vel interdum dolor. Nunc semper odio pharetra felis tempus lacinia non id lacus. Aliquam tincidunt nisi vel mauris imperdiet, ut rhoncus neque congue. Curabitur at turpis non justo dignissim posuere. Duis consequat eget mi laoreet commodo. Cras vel gravida purus. Quisque nec libero scelerisque, mollis sapien ac, suscipit lorem.</p> 
-<p>In lorem enim, feugiat sed nisl ac, tempor ullamcorper nisi. Integer posuere dolor mi, a porttitor odio cursus bibendum. Sed molestie tellus mi, vitae vulputate turpis varius sed. Morbi et consequat libero. Donec porta augue nisi. Vestibulum lobortis molestie rhoncus. Ut ultrices elit id velit malesuada, ac cursus metus dapibus. Integer vitae odio ipsum. Aliquam lobortis ante eu lobortis interdum. Quisque ligula neque, imperdiet non urna at, viverra semper lacus.</p> 
-<p>Nunc fermentum lectus quis interdum interdum. Praesent eget massa id sem vehicula sagittis. Aenean sem enim, hendrerit in felis ut, malesuada volutpat eros. Integer blandit pretium libero, non imperdiet orci placerat eget. Phasellus eu augue vitae felis lacinia interdum. Sed tempus posuere lacus eu iaculis. Suspendisse in erat in neque bibendum malesuada ac nec nunc. Vivamus est risus, dictum et urna nec, volutpat malesuada diam.</p> 
-<p>Cras nec tortor dui. Fusce vitae consequat dolor. Pellentesque tincidunt turpis vitae odio dictum, nec facilisis mi mollis. Nam lacinia dictum odio eget lobortis. Nam consectetur consequat massa, non placerat urna aliquam sit amet. Vestibulum lacinia ligula ac justo fermentum auctor. Nullam eget arcu lectus.</p> 
-<p>Cras urna urna, semper nec nulla eleifend, hendrerit condimentum lorem. Nam molestie rutrum quam eu lobortis. Proin sem odio, scelerisque nec ultricies et, ultricies a sapien. Nullam malesuada nibh eget arcu ultrices, ac finibus elit gravida. Nullam non congue massa, nec efficitur eros. Quisque diam ipsum, euismod eu ultrices at, pulvinar id neque. Aliquam a enim tempus, posuere nisl nec, lacinia libero. Phasellus a quam sit amet eros feugiat placerat at vitae nibh. Ut aliquam viverra nunc at semper. Sed vulputate urna at urna fermentum, vitae lobortis nisi consectetur. Donec facilisis tellus ipsum, eu scelerisque enim fringilla eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p> 
+<h1><?php echo t('What are News Feeds?') ?> </h1>
+<div class="what-are-news-feeds">
+    <p><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its published, without having to visit the websites you have taken the feed from Feeds are also known as RSS Really Simple Syndication (RSS) is an XML—based format for content distribution. RSS feeds help the user stay abreast of news as it happens and as it breaks from news sources.'); ?></p>
+    <p><?php echo t('India Today RSS, the outcome of a huge network of our news sources, provides you the header of the news item and its excerpts when one subscribes to the news RSS feed.'); ?></p>
+    <p><?php echo t('It grants you access or allows you to make personal use of RSS feeds. However, India Today restrains the user from putting the RSS feeds to commercial use without express conent.'); ?></p>
+    <p><?php echo t('The user shall never retain any copies of the news RSS feed pages for any purpose except for personal use.') ?> </p>
+</div>
+
+<div class="rss-menu-container">
+    <?php
+    $news_menu = menu_navigation_links('menu-rss-news');
+    $photo_menu = menu_navigation_links('menu-rss-photo');
+    $video_menu = menu_navigation_links('menu-rss-video');
+    $blog_menu = menu_navigation_links('menu-rss-blogs');
+    ?>
+    <?php if (!empty($news_menu)) : ?>
+      <h2 class="link-heading"><?php echo t('News') ?></h2>
+      <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
+    <?php endif; ?>
+    <?php
+    if (!empty($news_menu)) {
+      print theme('links__menu_rss_news', array('links' => $news_menu ));
+    }
+    ?>
+
+    <?php if (!empty($photo_menu)) : ?>
+      <h2 class="link-heading"><?php echo t('Photo') ?></h2>
+      <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
+    <?php endif; ?>
+    <?php
+    if (!empty($photo_menu)) {
+      print theme('links__menu_rss_photo', array('links' => $photo_menu));
+    }
+    ?>
+
+    <?php if (!empty($video_menu)) : ?>
+      <h2 class="link-heading"><?php echo t('Video') ?></h2>
+      <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
+    <?php endif; ?>
+    <?php
+    if (!empty($video_menu)) {
+      print theme('links__menu_rss_video', array('links' => $photo_menu));
+    }
+    ?>
+
+    <?php if (!empty($blog_menu)) : ?>
+      <h2 class="link-heading"><?php echo t('All Blogs') ?></h2>
+      <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
+    <?php endif; ?>
+    <?php
+    if (!empty($blog_menu)) {
+      print theme('links__menu_rss_blogs', array('links' => $blogs));
+    }
+    ?>
+</div>
+
+<div class="how-can-i-use">
+    <h2><?php echo t('How Can I Use RSS?') ?></h2>
+    <p> <?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its published, without having to visit the websites you have taken the feed from. Feeds are known as RSS. Really Simple Syndication (RSS) is an XML—based format for content .') ?></p>
+    <hr/>
+    <h2><?php echo t('Terms of Use') ?></h2>
+    <li><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its
+        published. without having to visit the websites you have taken the feed from.'); ?></li>
+    <li><?php echo t('Feeds are known as RSS Really Simple Syndication (RSS) is an XML-based format for content.'); ?></li>
+    <li><?php echo t('News feeds keep you informed when websites add new content. You get the latest headlines as soon as its published') ?></li>
+</div>
