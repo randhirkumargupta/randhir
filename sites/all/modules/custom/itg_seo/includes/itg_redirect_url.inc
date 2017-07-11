@@ -9,6 +9,8 @@ function itg_get_node_redirect_url($node, $op) {
   global $base_url;
   
   if ($base_url == FRONT_URL) {
+    $itg_status = itg_get_node_status($node->nid);
+    
     if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
       
       $story_expiry_date = '';
@@ -18,7 +20,7 @@ function itg_get_node_redirect_url($node, $op) {
         $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       }
 
-      if ($op == 'full' && (($node->status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time))) {
+      if ($op == 'full' && (($itg_status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time))) {
         if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
           itg_get_redirect_url($node->field_primary_category[LANGUAGE_NONE][0]['value']);
         } else {
@@ -26,7 +28,7 @@ function itg_get_node_redirect_url($node, $op) {
         }       
       }
     } else {
-        if ($op == 'full' && ($node->status == 0)) {
+        if ($op == 'full' && ($itg_status == 0)) {
           drupal_goto('<front>');
         }
     }
