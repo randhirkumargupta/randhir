@@ -606,6 +606,7 @@
         height: 28px;
         width: 200px;
         padding-right: 35px;
+        padding-left: 10px;
       }
       .search-form input[type="submit"] {
         position: absolute;
