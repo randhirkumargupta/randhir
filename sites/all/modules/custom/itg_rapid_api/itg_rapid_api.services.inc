@@ -2406,7 +2406,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  * 	The node processed information array.
  */
 function itg_rapid_api_change_password($token, $user_id) {
-    $ufname = $user_id = $_GET['user_id'];
+    $uname = $user_id = $_GET['user_id'];
     $pass  = $_GET['pass'];
     $pass2 = $_GET['pass2'];
     $msg = "";
