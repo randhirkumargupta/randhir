@@ -3671,4 +3671,13 @@
   #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2 {
     padding: 20px;
   }
+
+  .view-front-end-global-search .view-content .search-pic {
+    width: 145px;
+    height: 127px;
+    float: left;
+  }
+  .view-front-end-global-search .view-content .search-pic img {
+    height: auto !important;
+  }
 }
