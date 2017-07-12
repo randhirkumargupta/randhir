@@ -6631,8 +6631,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   [id*="itg_user_forgot_password_multistep_form"] #ufname {
     padding: 0;
   }
+  .feed-type ul li{
+    width: 32%;
+  }
 }
 @media all and (max-width: 480px){
+  .feed-type ul li{
+    width: 49%;
+  }
   .photos-videos-wrapper .movie-videos, 
   .photos-videos-wrapper .movie-photos{
     width: 100%;
