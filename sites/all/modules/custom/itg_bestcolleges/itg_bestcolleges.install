@@ -1,0 +1,867 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG Mobile Services module.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_bestcolleges_schema() {
+    $schema = array(); 
+    $schema['bestcolleges_master'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'unsigned' => TRUE,
+         'not null' => TRUE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'small',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'collegename' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'city' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '45',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'description' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => TRUE,
+       ),
+       'image' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'websiteurl' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'storyids' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '100',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'photoids' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '100',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'videoids' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '100',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Created master date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ),
+       'node_id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'idx_city' => array('city'),
+       'idx_collegeid' => array('collegeid'),
+       'idx_published' => array('published'),
+      ),
+    );
+
+
+    $schema['bestcolleges_citywiseranking'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'unsigned' => TRUE,
+         'not null' => TRUE,
+       ),
+       'city' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '45',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '45',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'collegename' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '4',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'ids_city' => array('city'),
+       'ids_collagename' => array('collegename'),
+       'ids_published' => array('published'),
+       'ids_rank' => array('rank'),
+       'ids_stream' => array('stream'),
+       'ids_year' => array('year'),
+      ),
+    );
+
+    $schema['bestcolleges_emergingranking'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'unsigned' => TRUE,
+         'not null' => TRUE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '45',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '4',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'small',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'reputation' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'academic_input' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'studentcare' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'infrastructure' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'placement' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'preceptual_rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'factual_rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'overall_score' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '0',
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+       'overall_rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'ids_collegeid' => array('collegeid'),
+       'ids_published' => array('published'),
+       'ids_stream' => array('stream'),
+       'ids_year' => array('year'),
+      ),
+    );
+
+
+    $schema['bestcolleges_ranking'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'unsigned' => TRUE,
+         'not null' => TRUE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '25',
+         'not null' => FALSE,
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'small',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '4',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'ids_collegeid' => array('collegeid'),
+       'ids_published' => array('published'),
+       'ids_rank' => array('rank'),
+       'ids_stream' => array('stream'),
+       'ids_year' => array('year'),
+      ),
+    );
+
+    $schema['bestcolleges_readyrecknor_emerging_list'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'not null' => TRUE,
+       ),
+       'rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => FALSE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'small',
+         'not null' => FALSE,
+         'default' => 0,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'collegename' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'address' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'phone' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'image' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'websiteurl' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'established' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '10',
+         'not null' => FALSE,
+       ),
+       'seats' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '10',
+         'not null' => FALSE,
+       ),
+       'cutoff' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '30',
+         'not null' => FALSE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '30',
+         'not null' => FALSE,
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'small',
+         'not null' => FALSE,
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => FALSE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+      ),
+      'primary key' => array('id'),
+    );
+
+    $schema['bestcolleges_readyrecnor_directory_list'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'not null' => TRUE,
+       ),
+       'rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => FALSE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'small',
+         'not null' => FALSE,
+         'default' => 0,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'collegename' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'address' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'phone' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'image' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'websiteurl' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'text',
+         'not null' => FALSE,
+       ),
+       'established' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => FALSE,
+       ),
+       'seats' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => FALSE,
+       ),
+       'cutoff' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '30',
+         'not null' => FALSE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '30',
+         'not null' => FALSE,
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'small',
+         'not null' => FALSE,
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => FALSE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+      ),
+      'primary key' => array('id'),
+    );
+
+    $schema['bestcolleges_streams'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'not null' => TRUE,
+       ),
+       'stream_id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'name' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '255',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+      ),
+      'primary key' => array('id'),
+      'unique keys' => array(
+       'stream_id' => array('stream_id')
+      ),
+      'indexes' => array(
+       'ids_name' => array('name'),
+      ),
+    );
+
+    $schema['bestcolleges_themebasedranking'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'serial',
+         'unsigned' => TRUE,
+         'not null' => TRUE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '45',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '4',
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'small',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'reputation' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'academic_input' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'studentcare' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'infrastructure' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'placement' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'preceptual_rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'factual_rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'overall_score' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '100',
+         'not null' => TRUE,
+         'default' => '0',
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'unsigned' => TRUE,
+         'size' => 'tiny',
+         'not null' => TRUE,
+         'default' => 1,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'ids_collegeid' => array('collegeid'),
+       'ids_published' => array('published'),
+       'ids_stream' => array('stream'),
+       'ids_year' => array('year'),
+      ),
+    );
+
+    $schema['bestcolleges_zonecampuswiseranking'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+       'id' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+         'default' => 0,
+       ),
+       'city' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'stream' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'collegename' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '765',
+         'not null' => FALSE,
+       ),
+       'streamid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'collegeid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'CollegeNewNid' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'not null' => TRUE,
+       ),
+       'year' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '12',
+         'not null' => FALSE,
+       ),
+       'rank' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => FALSE,
+       ),
+       'published' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'int',
+         'size' => 'tiny',
+         'not null' => FALSE,
+       ),
+       'created_date' => array(
+        'description' => t('Create date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+       ), 
+       'type' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '135',
+         'not null' => FALSE,
+       ),
+       'parameter' => array(
+         'description' => 'TODO: please describe this field!',
+         'type' => 'varchar',
+         'length' => '180',
+         'not null' => FALSE,
+       ),
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+       'idx_rank' => array('rank'),
+       'idx_steam' => array('stream'),
+       'idx_type' => array('type'),
+       'idx_year' => array('year'),
+      ),
+    );
+  return $schema;  
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_bestcolleges_uninstall() {
+  drupal_uninstall_schema('bestcolleges_master');
+  drupal_uninstall_schema('bestcolleges_citywiseranking');
+  drupal_uninstall_schema('bestcolleges_emergingranking');
+  drupal_uninstall_schema('bestcolleges_ranking');
+  drupal_uninstall_schema('bestcolleges_readyrecknor_emerging_list');
+  drupal_uninstall_schema('bestcolleges_readyrecnor_directory_list');
+  drupal_uninstall_schema('bestcolleges_streams');
+  drupal_uninstall_schema('bestcolleges_themebasedranking');
+  drupal_uninstall_schema('bestcolleges_zonecampuswiseranking');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_bestcolleges_update_7001() {
+  cache_clear_all(NULL, 'cache_menu');
+}

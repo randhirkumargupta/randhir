@@ -239,4 +239,45 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function itg_bestcollege_configuration_form($form) {
+  
+  $form['bestcollege_term_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Bestcollege term id'),
+    '#default_value' => variable_get('bestcollege_term_id', ''),
+    '#required' => TRUE,
+  );
+  
+  $form['bestcollege_year'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Bestcollege year'),
+    '#default_value' => variable_get('bestcollege_year', ''),
+    '#required' => TRUE,
+  );
+  
+  $form['bestcollege_status'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Bestcollege status'),
+    '#default_value' => variable_get('bestcollege_status', ''),
+    '#required' => TRUE,
+  );
+  $form['bestcollege_stream'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Stream array'),
+    '#default_value' => variable_get('bestcollege_stream', ''),
+    '#required' => TRUE,
+  );
+  $form['bestcollege_stream_dynamic'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Stream dynamic change array'),
+    '#default_value' => variable_get('bestcollege_stream_dynamic', ''),
+    '#required' => TRUE,
+  );
+  
+  return system_settings_form($form);
+}
 

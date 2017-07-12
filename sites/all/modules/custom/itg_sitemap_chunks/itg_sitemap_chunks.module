@@ -59,16 +59,6 @@ function itg_sitemap_chunks_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
-//  $items['admin/config/search/itg-multiple-sitemap/dashboard'] = array(
-//    'title' => "Dashboard",
-//    'page callback' => 'itg_sitemap_chunks_dashboard',
-//    'access callback' => 'user_access',
-//    'access arguments' => array('administer itg sitemap'),
-//    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-//    'file' => 'includes/itg_sitemap_chunks.admin.inc',
-//    'type' => MENU_LOCAL_TASK,
-//  );
-
   $items['admin/config/search/itg-multiple-sitemap/sections'] = array(
     'title' => "Sections Setting",
     'page callback' => 'drupal_get_form',
@@ -175,25 +165,8 @@ function itg_sitemap_chunks_menu() {
     'access callback' => TRUE,
   );
   
-  $items['rss/%'] = array(
+  $items['rss'] = array(
     'page callback' => 'itg_sitemap_chunks_get_rss_of_cat_with_order',
-    'page arguments' => array(1),
-    'type' => MENU_CALLBACK,
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
-    'access callback' => TRUE,
-  );
-  
-  $items['rss/home'] = array(
-    'page callback' => 'itg_sitemap_chunks_get_rss_of_home',
-    'type' => MENU_CALLBACK,
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
-    'access callback' => TRUE,
-  );
-  
-  $items['rss/magazine'] = array(
-    'page callback' => 'itg_sitemap_chunks_get_rss_of_magazine',
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
@@ -201,36 +174,43 @@ function itg_sitemap_chunks_menu() {
   );
   
   $items['rss-video'] = array(
-    'page callback' => 'itg_sitemap_chunks_get_rss_of_video_with_order',
-    'type' => MENU_CALLBACK,
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
-    'access callback' => TRUE,
-  );
-  
-  $items['rss-video/%'] = array(
     'page callback' => 'itg_sitemap_chunks_get_rss_of_video_with_order_category',
-    'page arguments' => array(1),
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'file' => 'includes/itg_sitemap_chunks.rss.video.inc',
     'access callback' => TRUE,
   );
-  
+   
   $items['rss-gallery'] = array(
-    'page callback' => 'itg_sitemap_chunks_get_rss_of_photo_with_order', // load the croper according to size!.
-    'type' => MENU_CALLBACK,
-    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
-    'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
-    'access callback' => TRUE,
-  );
-  
-  $items['rss-gallery/%'] = array(
     'page callback' => 'itg_sitemap_chunks_get_rss_of_photo_with_order_category',
     'page arguments' => array(1),
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.rss.gallery.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-content'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_mixed_content',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-blogs'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_blogs',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.blogs.inc',
+    'access callback' => TRUE,
+  );
+  
+  $items['rss-live-blogs'] = array(
+    'page callback' => 'itg_sitemap_chunks_get_rss_of_blogs',
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks.sections.rss.blogs.inc',
     'access callback' => TRUE,
   );
 
@@ -261,4 +241,13 @@ function itg_sitemap_replace_backend_url_to_front_url($url) {
   } else {
     return '';
   }
+}
+
+
+function itg_sitemap_chunks_theme() {
+  return array(
+    'rss_landing_page' => array(
+      'template' => 'templates/rss-landing-page',
+    )
+  );
 }

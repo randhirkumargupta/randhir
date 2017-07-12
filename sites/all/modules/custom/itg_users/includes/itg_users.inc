@@ -30,8 +30,8 @@ function itg_users_cms_user_dashboard() {
   
   if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
     $story_link = 'my-published-story';
-    $video_link = 'my-published-photogallery';
-    $photo_link = 'my-published-video';
+    $photo_link = 'my-published-photogallery';
+    $video_link = 'my-published-video';
   } else {
       $story_link = 'published-story?field_story_syndication_value_op=all';
       $video_link = 'published-video?field_story_syndication_value_op=all';
@@ -40,8 +40,8 @@ function itg_users_cms_user_dashboard() {
   
    $listed_menu_link_site_admin = array(
       $story_link => 'Story',
-      $video_link => 'Photogallery',
-      $photo_link => 'Videos',
+      $photo_link => 'Photogallery',
+      $video_link => 'Videos',
       'breaking-news' => 'Breaking News',
       'category-manager-listing' => 'Category Management',
       'manage-users' => 'User Management',

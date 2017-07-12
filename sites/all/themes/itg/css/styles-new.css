@@ -7064,8 +7064,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
 
   #itg_user_forgot_password_multistep_form .parent-background {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   #itg_user_forgot_password_multistep_form .parent-background .sign-in-link .signin-link {
     width: 50%;
@@ -7077,8 +7077,20 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     padding-left: 5px;
     text-align: right;
   }
+
+  [id*="itg_user_forgot_password_multistep_form"] #ufname {
+    padding: 0;
+  }
+
+  .feed-type ul li {
+    width: 32%;
+  }
 }
 @media all and (max-width: 480px) {
+  .feed-type ul li {
+    width: 49%;
+  }
+
   .photos-videos-wrapper .movie-videos,
   .photos-videos-wrapper .movie-photos {
     width: 100%;

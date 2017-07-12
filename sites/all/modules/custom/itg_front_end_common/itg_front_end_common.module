@@ -991,15 +991,19 @@ function _related_story_amp_block_content() {
         else {
           $front_url = $related_data->url;
         }
-        $image_link_url = $front_url.'?amp';
+        $request = parse_url($front_url);
+        $host = $request['host'];
+        $path = $request['path'];
+        $amp_url = 'http://'.$host.'/amp'.$path;
+        $image_link_url = $amp_url;
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
       }
       else {
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $front_url.'?amp', array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
       }
     }
     $i++;
@@ -1031,5 +1035,23 @@ function itg_get_node_details($nid) {
     $result = $query->execute();
 
     return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
+/**
+ * Implements itg_get_node_status().
+ * @param type $nid
+ * @return array
+ */
+function itg_get_node_status($nid) {
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->fields('n', array('status'))
+          ->condition('n.nid', $nid)
+          ->condition('n.status', 1);
+    $query->orderBy('n.created', 'DESC'); 
+    $result = $query->execute()->fetchField();
+
+    return $result;
   }
 }
