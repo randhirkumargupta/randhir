@@ -364,9 +364,9 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-      itg_common_custompath_migrated_load($node);
-    }
+//    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+//      itg_common_custompath_migrated_load($node);
+//    }
   }
 }
 
@@ -436,7 +436,13 @@ function itg_seo_node_update($node) {
   }
   // custom alias conditions for migration
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-    itg_common_custompath_migrated_load($node, 'update_migrated');
+    $newpath = itg_common_custompath_migrated_load($node, 'update_migrated');
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}",
+        'alias' => $newpath, // Any alias that you want to set.
+      );
+      path_save($path);
   }
 }
 
