@@ -9,7 +9,7 @@ function itg_get_node_redirect_url($node, $op) {
   global $base_url;
   
   if ($base_url == FRONT_URL) {
-    $itg_status = itg_get_node_status($node->nid); //temp code
+    $itg_status = $node->status;
     
     if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
       
