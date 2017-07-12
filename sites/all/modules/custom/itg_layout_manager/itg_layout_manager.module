@@ -585,20 +585,22 @@ function itg_layout_manager_block_view($delta = '') {
       }
       else {
         $array_url = array(
-          'livetv' => 'Live TV',
-          'funalytics' => 'Funalytics',
-          'itg_active_polls' => 'Poll',
-          'anchors-list' => 'Anchors',
-          'blog' => 'Blog',
-          'podcast' => 'Podcast',
-          'program' => 'Programmes',
-          'snap-post' => 'Snappost',
-          'itg-quiz' => 'Quiz',
-          'itg-survey' => 'Survey',
-          'archives' => 'Archives',
-          'photo-list' => 'IPl Photo',
-          'video-list' => 'IPl Video',
-          'calendar/0/0/magazine.html' => 'Magazine',);
+          'livetv' => t('Live TV'),
+          'funalytics' => t('Funalytics'),
+          'itg_active_polls' => t('Poll'),
+          'anchors-list' => t('Anchors'),
+          'blog' => t('Blog'),
+          'podcast' => t('Podcast'),
+          'program' => t('Programmes'),
+          'snap-post' => ('Snappost'),
+          'itg-quiz' => t('Quiz'),
+          'itg-survey' => t('Survey'),
+          'archives' => t('Archives'),
+          'photo-list' => t('IPl Photo'),
+          'video-list' => t('IPl Video'),
+          'calendar/0/0/magazine.html' => t('Magazine'),
+          'rss' => t('RSS'),
+          );
         if (function_exists('frontend_breadcrumb_display')) {
           if (arg(0) == 'calendar') {
             $arg0 = 'calendar/0/0/magazine.html';
