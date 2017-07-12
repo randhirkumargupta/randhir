@@ -767,5 +767,21 @@ class itg_auto_save {
 
         return $this->data;
     }
-
+	
+	/**
+	 * Get Node Lock status for autosave.
+	 *
+	 * @param type $nid
+	 *   node id.
+	 *
+	 * @return int
+	 *   Node id of the node.
+	 */
+	public function itg_autosave_get_lock_status_node_id($nid) {
+		$itg_query = db_select('itg_autosave_node_data', 'itg');
+		$itg_query->fields('itg', array('nid', 'lock_status'))
+			->condition('nid', $nid);
+		$itg_result = $itg_query->execute()->fetchObject();
+		return $itg_result;
+	}
 }

@@ -226,3 +226,19 @@ function itg_autosave_remove_empty($field_name_type) {
     }
     return TRUE;
 }
+
+
+function reset_autosave_lock($nid){
+	$itg_query = db_update('itg_autosave_node_data')
+				 ->fields(array(
+							'lock_status' => 1,
+						  ))
+				->condition('nid', $nid, '=')
+				->execute();
+	if($_GET['destination']){
+		drupal_goto($_GET['destination']);
+	}else{
+		drupal_goto('mydraft-story');
+	}
+	
+}
