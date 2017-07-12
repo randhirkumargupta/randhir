@@ -155,7 +155,7 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode(')', @$getimageoptions[1]);
     $getimagehightwidth = explode('x', @$getimageoptions[0]);
 
-    $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
+    $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $form['#node']->type . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
       
     $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_repository']['display_path'] = array(
