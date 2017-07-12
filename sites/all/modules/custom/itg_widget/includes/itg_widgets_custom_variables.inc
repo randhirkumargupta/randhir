@@ -233,5 +233,12 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('current_site_hash'),
   );
   
+  $form['ads_blocker_content_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Ads blocker content limit'),
+    '#attributes' => array('placeholder' => t('Ads blocker content limit')),
+    '#default_value' => variable_get('ads_blocker_content_limit'),
+  );
+  
   return system_settings_form($form);
 }
