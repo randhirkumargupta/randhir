@@ -546,9 +546,9 @@ if (!empty($content)):
                 <?php
                 $story_body = $node->body['und'][0]['value'];
                 // check video is delete form video content   
-                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
-                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
-                }
+//                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
+//                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
+//                }
                 if (strpos($story_body, '[ITG:SURVEY:')) {
                   if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
                     $survey_nid = $matches_survey[1];
