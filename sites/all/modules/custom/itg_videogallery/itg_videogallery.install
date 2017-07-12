@@ -160,6 +160,34 @@ function itg_videogallery_schema() {
     'primary key' => array('id'),
   );
   // FTP Videos
+  $schema['itg_story_body_videos'] = array(
+    'description' => 'ITG used videos story Body',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        ' null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'video_id' => array(
+        'description' => 'Video  id',
+        'type' => 'varchar',
+        'length' => '250',
+        ' null' => TRUE,
+      ),
+      '	is_node' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  // FTP Videos
   $schema['itg_video_bitrates_data'] = array(
     'description' => 'ITG used videos store bitrates urls',
     'fields' => array(
