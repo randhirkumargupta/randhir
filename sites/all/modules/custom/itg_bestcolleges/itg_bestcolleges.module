@@ -60,8 +60,7 @@ function itg_bestcolleges_init() {
         default:
           break;
       }
-      //print "final_path = " .$final_path;
-      //die();
+
       if(!empty($final_path)) {
         drupal_goto($final_path);
         exit;
@@ -125,6 +124,15 @@ function itg_bestcolleges_menu() {
     'title' => "Create taxonomy",
     'page callback' => 'itg_bestcollege_test',
     'access callback' => TRUE,
+  );
+  
+  $items['bestcollege/config'] = array(
+    'title' => 'Bestcollege Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_bestcollege_configuration_form'),
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_bestcolleges.inc',
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -908,7 +916,24 @@ function csvImporter_form() {
     '#title' => t('CSV File'),
     '#type' => 'file',
   );
-  $csv_arr = array("" => t("-- Section --"), '1' => t('Previous Data'), '2' => t('citywiseranking'), '3' => t('global ranking'), '4' => t('Emerging colleges'), '5' => t('Master colleges'), '6' => t('themebasedranking'));
+  $csv_arr = array(
+                  "" => t("-- Section --"), 
+                  '1' => t('Previous Data'), 
+                  '2' => t('citywiseranking'), 
+                  '3' => t('global ranking'), 
+                  '4' => t('Emerging colleges'), 
+                  '5' => t('Master colleges'),
+                  '6' => t('themebasedranking'),
+                  '7' => t('only master data'),
+                  '8' => t('only citywiseranking data'),
+                  '9' => t('only emergingranking data'),
+                  '10' => t('only ranking data'),
+                  '11' => t('only readyrecknor_emerging data'),
+                  '12' => t('only readyrecnor_directory data'),
+                  '13' => t('only streams data'),
+                  '14' => t('only themebasedranking data'),
+                  '15' => t('only zonecampuswiseranking data'),
+                );
   $form['csv_type'] = array(
     '#type' => 'select',
     '#title' => t('CSV Type'),
@@ -972,14 +997,45 @@ function csvImporter_form_validate(&$form, &$form_state) {
             break;
           case '3':
             $validate_csv_columns = '5';
+             break;
           case '4':
             $validate_csv_columns = '5';
+             break;
           case '5':
             $validate_csv_columns = '11';
+             break;
           case '6':
             $validate_csv_columns = '10';
+             break;
+          case '7':
+            $validate_csv_columns = '13';
+             break;
+          case '8':
+            $validate_csv_columns = '11';
+             break;
+          case '9':
+            $validate_csv_columns = '16';
+             break;
+          case '10':
+            $validate_csv_columns = '9';
+             break;
+          case '11':
+            $validate_csv_columns = '17';
+             break;
+          case '12':
+            $validate_csv_columns = '17';
+             break;
+          case '13':
+            $validate_csv_columns = '2';
+             break;
+          case '14':
+            $validate_csv_columns = '16';
+             break;
+          case '15':
+            $validate_csv_columns = '13';
             break;
         }
+        
         if (count($line) != $validate_csv_columns) {
           form_set_error('csvfile', t('This file has the incorrect number of columns. Expecting') . $validate_csv_columns);
         }
@@ -1036,6 +1092,33 @@ function csvImporter_form_submit(&$form, &$form_state) {
         }
         elseif ($csv_type == 6) {
           $batch['operations'][] = array('best_college_theme_data_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 7) { //  first time master data insert
+          $batch['operations'][] = array('itg_bestcollege_master_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 8) { //  first time citywiseranking data insert
+          $batch['operations'][] = array('itg_bestcollege_citywiseranking_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 9) { //  first time emergingranking data insert
+          $batch['operations'][] = array('itg_bestcollege_emergingranking_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 10) { //  first time ranking data insert
+          $batch['operations'][] = array('itg_bestcollege_ranking_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 11) { //  first time readyrecknor_emerging data insert
+          $batch['operations'][] = array('itg_bestcollege_readyrecknor_emerging_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 12) { //  first time readyrecnor_directory data insert
+          $batch['operations'][] = array('itg_bestcollege_readyrecnor_directory_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 13) { //  first time streams data insert
+          $batch['operations'][] = array('itg_bestcollege_streams_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 14) { //  first time themebasedranking data insert
+          $batch['operations'][] = array('itg_bestcollege_themebasedranking_migrate', array(array_map('base64_encode', $line)));
+        }
+        elseif ($csv_type == 15) { //  first time zonecampuswiseranking data insert
+          $batch['operations'][] = array('itg_bestcollege_zonecampuswiseranking_migrate', array(array_map('base64_encode', $line)));
         }
         else {
           $batch['operations'][] = array('_csvImporter_import_line', array(array_map('base64_encode', $line)));
@@ -1112,15 +1195,17 @@ function _csvImporter_import_line($line, $session_nid, &$context) {
 function best_college_citywiseranking_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
-  watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  
   $rank = trim($line[0]);
   $collegename = trim($line[1]);
   $city = trim($line[2]);
   $stream = trim($line[3]);
-  $year = '2017';
+  $created = date('Y-m-d H:i:s');
+  $year =  variable_get('bestcollege_year', '');
+  $bestcollege_status = variable_get('bestcollege_status', '');
   try {
-    $result = db_insert('bestcolleges_citywiseranking')
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_citywiseranking')
             ->fields(array(
               'city' => $city,
               'streamid' => '0',
@@ -1131,8 +1216,10 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
               'year' => $year,
               'rank' => $rank,
               'published' => '1',
+              'created_date' => $created,
             ))->execute();
-
+    }
+  
     // No exception thrown; PDO thinks the record was inserted correctly.
     drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
@@ -1151,15 +1238,17 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
 function best_college_city_data_migrate($line, $session_nid, &$context) {
   $context['results']['rows_imported'] ++;
   $line = $cleaned_line = array_map('base64_decode', $line);
-  watchdog("test arun@", '<pre>' . print_r($line, TRUE) . '</pre>');
-  drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+
   $collegeid = trim($line[0]);
   $rank = trim($line[1]);
   $city = trim($line[3]);
   $stream = trim($line[3]);
-  $year = '2017';
+  $created = date('Y-m-d H:i:s');
+  $year = variable_get('bestcollege_year', ''); // 2017
+  $bestcollege_status = variable_get('bestcollege_status', '');
   try {
-    $result = db_insert('bestcolleges_ranking')
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+      $result = db_insert('bestcolleges_ranking')
             ->fields(array(
               'stream' => $stream,
               'streamid' => '0',
@@ -1168,7 +1257,10 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
               'year' => $year,
               'rank' => $rank,
               'published' => '1',
+              'created_date' => $created,
             ))->execute();
+    }
+    
     // No exception thrown; PDO thinks the record was inserted correctly.
     drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
@@ -1330,48 +1422,55 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $node->field_college_id[LANGUAGE_NONE][0]['value'] = $collegeid;
 
   if ($year) {
-    if ($year == '2017') {
-      $tid = '844807';
+    $bestcollege_year = variable_get('bestcollege_year', '');
+    $bestcollege_status = variable_get('bestcollege_status', '');
+    $stream_dynamic = variable_get('bestcollege_stream_dynamic', '');
+    if ($year == $bestcollege_year) {
+      $tid = variable_get('bestcollege_term_id'); //'844807';
       if ($stream == 'Arts') {
-        $stream = 'art';
-      }
-      if ($stream == 'Science') {
-        $stream = 'science';
+        $stream = ($stream_dynamic['art']) ? $stream_dynamic['art'] : 'art';
       }
       if ($stream == 'Commerce') {
-        $stream = 'commerce';
+         $stream = ($stream_dynamic['commerce']) ? $stream_dynamic['commerce'] : 'commerce';
+      }
+      if ($stream == 'Science') {
+         $stream = ($stream_dynamic['science']) ? $stream_dynamic['science'] : 'science';
       }
       if ($stream == 'Law') {
-        $stream = 'law';
+         $stream = ($stream_dynamic['law']) ? $stream_dynamic['law'] : 'law';
       }
       if ($stream == 'Medicine') {
-        $stream = 'medicine';
+         $stream = ($stream_dynamic['medicine']) ? $stream_dynamic['medicine'] : 'medicine';
       }
       if ($stream == 'Engineering') {
-        $stream = 'engineering';
-      }
-      if ($stream == 'Fine Arts') {
-        $stream = 'fine arts';
+         $stream = ($stream_dynamic['engineering']) ? $stream_dynamic['engineering'] : 'engineering';
       }
       if ($stream == 'BBA') {
-        $stream = 'bba';
+         $stream = ($stream_dynamic['bba']) ? $stream_dynamic['bba'] : 'bba';
       }
       if ($stream == 'BCA') {
-        $stream = 'bca';
+         $stream = ($stream_dynamic['bca']) ? $stream_dynamic['bca'] : 'bca';
       }
       if ($stream == 'Mass Comm') {
-        $stream = 'mass comm';
+         $stream = ($stream_dynamic['mass_comm']) ? $stream_dynamic['mass_comm'] : 'mass_comm';
       }
       if ($stream == 'Fashion') {
-        $stream = 'fashion';
+         $stream = ($stream_dynamic['fashion']) ? $stream_dynamic['fashion'] : 'fashion';
       }
       if ($stream == 'Education') {
-        $stream = 'education';
+         $stream = ($stream_dynamic['education']) ? $stream_dynamic['education'] : 'education';
+      }
+        if ($stream == 'Fine Arts') {
+         $stream = ($stream_dynamic['fine_arts']) ? $stream_dynamic['fine_arts'] : 'fine_arts';
       }
       if ($stream == 'Hotel Management') {
-        $stream = 'hotel management';
+         $stream = ($stream_dynamic['hotel_management']) ? $stream_dynamic['hotel_management'] : 'hotel_management';
       }
-      $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
+      
+      if(!empty($tid)) {
+         $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
+      }
+     
     }
   }
 
@@ -1381,16 +1480,18 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   }
   $url = $image; //'https://ssl.gstatic.com/gb/images/k1_a31af7ac.png';
   if ($url) {
-    $directory = file_build_uri('bestcollege');
-    if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
-      // If our directory doesn't exist and can't be created, use the default.
-      $directory = NULL;
-    }
-  
-    $file_info = system_retrieve_file($url, $directory . "/" . basename($url), TRUE, FILE_EXISTS_REPLACE);
-   
-    if ($file_info->fid) {
-      $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid; //assign fid
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+      $directory = file_build_uri('bestcollege');
+      if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY)) {
+        // If our directory doesn't exist and can't be created, use the default.
+        $directory = NULL;
+      }
+
+      $file_info = system_retrieve_file($url, $directory . "/" . basename($url), TRUE, FILE_EXISTS_REPLACE);
+
+      if ($file_info->fid) {
+        $node->field_story_extra_large_image[LANGUAGE_NONE]['0']['fid'] = $file_info->fid; //assign fid
+      }
     }
   }
   
@@ -1398,38 +1499,41 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $node->uid = 3;
   $node->status = 1; //(1 or 0): published or not*/
   if (!empty($final_tid)) {
-    if ($node = node_submit($node)) {
-      node_save($node);
-      drupal_set_message(t('submitted successfully'));
-      $num_updated = db_update('bestcolleges_master')
-          ->fields(array('node_id' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->execute();
-      // bestcolleges_ranking
-      db_update('bestcolleges_ranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
-      // bestcolleges_themebasedranking
-      $num_updated = db_update('bestcolleges_themebasedranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
-      // bestcolleges_emergingranking
-      $num_updated = db_update('bestcolleges_emergingranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
-    }
+       if(isset($bestcollege_status) && $bestcollege_status == '2') {
+          if ($node = node_submit($node)) {
+              node_save($node);
+              drupal_set_message(t('submitted successfully'));
+              $num_updated = db_update('bestcolleges_master')
+                  ->fields(array('node_id' => $node->nid))
+                  ->condition('collegeid', $collegeid)
+                  ->execute();
+              // bestcolleges_ranking
+              db_update('bestcolleges_ranking')
+                  ->fields(array('CollegeNewNid' => $node->nid))
+                  ->condition('collegeid', $collegeid)
+                  ->condition('year', $year)
+                  ->execute();
+              // bestcolleges_themebasedranking
+              $num_updated = db_update('bestcolleges_themebasedranking')
+                  ->fields(array('CollegeNewNid' => $node->nid))
+                  ->condition('collegeid', $collegeid)
+                  ->condition('year', $year)
+                  ->execute();
+              // bestcolleges_emergingranking
+              $num_updated = db_update('bestcolleges_emergingranking')
+                  ->fields(array('CollegeNewNid' => $node->nid))
+                  ->condition('collegeid', $collegeid)
+                  ->condition('year', $year)
+                  ->execute();
+            }
+       }  
+   
     drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
   else {
     drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
-    watchdog("bestcollege_feeds", check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
+
   }
 }
 
@@ -1510,7 +1614,7 @@ function best_college_previous_data_migrate_old($line, $session_nid, &$context) 
   else {
     drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     form_set_error('csv feeds',check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
-    watchdog("bestcollege_feeds", check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
+  
   }
 
 }
@@ -1535,9 +1639,11 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
   $preceptual_rank = trim($line[7]);
   $factual_rank = trim($line[8]);
   $overall_score = trim($line[9]);
-  $year = '2017';
+  $year = variable_get('bestcollege_year', ''); // 2017
+  $bestcollege_status = variable_get('bestcollege_status', '');
   try {
-    $result = db_insert('bestcolleges_themebasedranking')
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+      $result = db_insert('bestcolleges_themebasedranking')
             ->fields(array(
               'stream' => $stream,
               'streamid' => $stream,
@@ -1554,7 +1660,8 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
               'overall_score' => $overall_score,
               'published' => '1',
             ))->execute();
-
+    }
+    
     // No exception thrown; PDO thinks the record was inserted correctly.
     drupal_set_message(check_plain(t('Pass line !var city = !var1')), array('!var' => $line[0], '!var1' => $city));
   }
@@ -1771,10 +1878,10 @@ function bestcollege_set_option_val($url) {
  * Callback for Create taxonomy.
  */
 function bestcollege_create_taxonomy() {
-  $tid = '844807';
+  $tid = variable_get('bestcollege_term_id', ''); //'844807';
   $term = taxonomy_term_load($tid);
-  $children = array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', "12" => "hotel management", "13" => "Education");
-  //$children = array('1' => 'Arts', '2' => 'Science', '3' => 'Commerce', '4' => 'Law', '5' => 'Medicine', '6' => 'Engineering', '7' => 'Fine Arts', '8' => 'BBA', '9' => 'BBA_Remove_13May17', '10' => 'Mass Comm', '11' => 'Fashion', "12" => "Hotel Management", "13" => "Education", "14" => "Medicine");
+  $children = variable_get('bestcollege_stream', '');
+  ////array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', "12" => "hotel management", "13" => "Education");
   foreach ($children as $term_name) {
     $exist_tid = itg_bestcollege_exist_tid($tid, $term->vid, $term_name);
 
@@ -1820,7 +1927,12 @@ function itg_bestcollege_exist_tid($tid, $vid, $term_name) {
   }
 }
 
-
+/**
+ * 
+ * @param type $name
+ * @param type $vid
+ * @return type
+ */
 function get_bestcollege_term($name, $vid) {
   return db_select('taxonomy_term_data', 't')
   ->fields('t', array('tid'))
@@ -1829,3 +1941,479 @@ function get_bestcollege_term($name, $vid) {
   ->execute()
   ->fetchField();
 }
+
+/**
+ * first time master data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_master_migrate($line, $session_nid, &$context) {
+ 
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+  
+  $collegeid = $line[1];
+  $collegename = $line[2];
+  $city = $line[3];
+  $description = $line[4];
+  $image = $line[5];
+  $websiteurl = $line[6];
+  $storyids = $line[7];
+  $photoids = $line[8];
+  $videoids = $line[9];
+  $published = $line[10];
+  $created_date = $line[11];
+  $year = $line[13];
+  $rank = $line[14];
+  $stream = $line[15];
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_master')
+            ->fields(array(
+              'collegeid' => $collegeid,
+              'collegename' => $collegename,
+              'city' => $city,
+              'description' => $description,
+              'image' => $image,
+              'websiteurl' => $websiteurl,
+              'storyids' => $storyids,
+              'photoids' => $photoids,
+              'videoids' => $videoids,
+              'published' => $published,
+              'created_date' => $created_date,
+              'node_id' => '0',
+            ))->execute();
+    }
+ 
+    
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time citywiseranking data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $city = $line[1];
+  $streamid = $line[2];
+  $collegeid = $line[3];
+  $CollegeNewNid = $line[4];
+  $stream = $line[5];
+  $collegename = $line[6];
+  $year = $line[7];
+  $rank = $line[8];
+  $published = $line[9];
+  $created_date = $line[10];
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_citywiseranking')
+            ->fields(array(
+              'city' => $city,
+              'streamid' => $streamid,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'stream' => $stream,
+              'collegename' => $collegename,
+              'year' => $year,
+              'rank' => $rank,
+              'published' => $published,
+              'created_date' => $created_date, 
+            ))->execute();
+    } 
+ 
+    
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time emergingranking data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_emergingranking_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $stream	 = $line[1];
+  $year	 = $line[2];
+  $collegeid	 = $line[3];
+  $CollegeNewNid	 = $line[4];
+  $reputation	 = $line[5];
+  $academic_input	 = $line[6];
+  $studentcare	 = $line[7];
+  $infrastructure	 = $line[8];
+  $placement	 = $line[9];
+  $preceptual_rank	 = $line[11];
+  $factual_rank	 = $line[11];
+  $overall_score	 = $line[12];
+  $published	 = $line[13];
+  $created_date	 = $line[14];
+  $overall_rank = $line[15];
+  
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_emergingranking')
+            ->fields(array(
+              'stream' => $stream,
+              'year' => $year,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'reputation' => $reputation,
+              'academic_input' => $academic_input,
+              'studentcare' => $studentcare,
+              'infrastructure' => $infrastructure,
+              'placement' => $placement,
+              'preceptual_rank' => $preceptual_rank,
+              'factual_rank' => $factual_rank,
+              'overall_score' => $overall_score,
+              'published' => $published,
+              'created_date' => $created_date,
+              'overall_rank ' => $overall_rank,
+            ))->execute();
+    }
+
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time ranking data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $stream	 = $line[1];
+  $streamid	 = $line[2];
+  $collegeid	 = $line[3];
+  $CollegeNewNid	 = $line[4];
+  $year	 = $line[5];
+  $rank	 = $line[6];
+  $published	 = $line[7];
+  $created_date	 = $line[8];
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_ranking')
+            ->fields(array(
+              'stream' => $stream,
+              'streamid' => $streamid,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'year' => $year,
+              'rank' => $rank,
+              'published' => $published,
+              'created_date' => $created_date,
+            ))->execute();
+    }
+
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time readyrecknor emerging data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_readyrecknor_emerging_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $rank		 = $line[1];
+  $collegeid		 = $line[2];
+  $CollegeNewNid		 = $line[3];
+  $streamid		 = $line[4];
+  $collegename		 = $line[5];
+  $address		 = $line[6];
+  $phone		 = $line[7];
+  $image		 = $line[8];
+  $websiteurl		 = $line[9];
+  $established		 = $line[11];
+  $seats		 = $line[11];
+  $cutoff		 = $line[12];
+  $stream		 = $line[13];
+  $year		 = $line[14];
+  $published		 = $line[15];
+  $created_date	 = $line[16];
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_readyrecknor_emerging_list')
+            ->fields(array(
+              'rank' => $rank,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'streamid' => $streamid,
+              'collegename' => $collegename,
+              'address' => $address,
+              'phone' => $phone,
+              'image' => $image,
+              'websiteurl' => $websiteurl,
+              'established' => $established,
+              'seats' => $seats,
+              'cutoff' => $cutoff,
+              'stream' => $stream,
+              'year' => $year,
+              'published' => $published,
+              'created_date' => $created_date,  
+            ))->execute();
+    }
+    
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time status data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_readyrecnor_directory_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $rank	 = $line[1];
+  $collegeid	 = $line[2];
+  $CollegeNewNid	 = $line[3];
+  $streamid	 = $line[4];
+  $collegename	 = $line[5];
+  $address	 = $line[6];
+  $phone	 = $line[7];
+  $image	 = $line[8];
+  $websiteurl	 = $line[9];
+  $established	 = $line[10];
+  $seats	 = $line[11];
+  $cutoff	 = $line[12];
+  $stream	 = $line[13];
+  $year	 = $line[14];
+  $published	 = $line[15];
+  $created_date = $line[16];
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_readyrecnor_directory_list')
+            ->fields(array(
+              'rank' => $rank,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'streamid' => $streamid,
+              'collegename' => $collegename,
+              'address' => $address,
+              'phone' => $phone,
+              'image' => $image,
+              'websiteurl' => $websiteurl,
+              'established' => $established,
+              'seats' => $seats,
+              'cutoff' => $cutoff,
+              'stream' => $stream,
+              'year' => $year,
+              'published' => $published,
+              'created_date' => $created_date,  
+            ))->execute();
+    }
+
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time streams data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_streams_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $stream_id	 = $line[1];	
+  $name	 = $line[2];
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_streams')
+            ->fields(array(
+              'stream_id' => $stream_id,
+              'name' => $name,
+            ))->execute();
+    }
+
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time themebasedranking data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_themebasedranking_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $stream		 = $line[1];
+  $streamid		 = $line[2];
+  $year		 = $line[3];
+  $collegeid		 = $line[4];
+  $CollegeNewNid		 = $line[5];
+  $reputation		 = $line[6];
+  $academic_input		 = $line[7];
+  $studentcare		 = $line[8];
+  $infrastructure		 = $line[9];
+  $placement		 = $line[10];
+  $preceptual_rank	 = $line[11];	
+  $factual_rank		 = $line[12];
+  $overall_score		 = $line[13];
+  $published		 = $line[14];
+  $created_date	 = $line[15];
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_themebasedranking')
+            ->fields(array(
+              'stream' => $stream,
+              'streamid' => $streamid,
+              'year' => $year,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'reputation' => $reputation,
+              'academic_input' => $academic_input,
+              'studentcare' => $studentcare,
+              'infrastructure' => $infrastructure,
+              'placement' => $placement,
+              'preceptual_rank' => $preceptual_rank,
+              'factual_rank' => $factual_rank,
+              'overall_score' => $overall_score,
+              'published' => $published,
+              'created_date' => $created_date,
+            ))->execute();
+    }
+  
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
+/**
+ * first time zonecampuswiseranking data migrate
+ * @param array $line
+ * @param int $session_nid
+ * @param array $context
+ */
+function itg_bestcollege_zonecampuswiseranking_migrate($line, $session_nid, &$context) {
+  $context['results']['rows_imported'] ++;
+  $line = $cleaned_line = array_map('base64_decode', $line);
+ 
+  $city = $line[1];	
+  $stream	 = $line[2];
+  $collegename	 = $line[3];
+  $streamid	 = $line[4];
+  $collegeid	 = $line[5];
+  $CollegeNewNid	 = $line[6];
+  $year	 = $line[7];
+  $rank	 = $line[8];
+  $published	 = $line[9];
+  $created_date	 = $line[10];
+  $type	 = $line[11];
+  $parameter = $line[12];
+  
+
+  $bestcollege_status = variable_get('bestcollege_status', '');
+  
+  try {
+    if(isset($bestcollege_status) && $bestcollege_status == '2') {
+        $result = db_insert('bestcolleges_zonecampuswiseranking')
+            ->fields(array(
+              'city' => $city,
+              'stream' => $stream,
+              'collegename' => $collegename,
+              'streamid' => $streamid,
+              'collegeid' => $collegeid,
+              'CollegeNewNid' => $CollegeNewNid,
+              'year' => $year,
+              'rank' => $rank,
+              'published' => $published,
+              'created_date' => $created_date,
+              'type' => $type,
+              'parameter' => $parameter,
+            ))->execute();
+    }
+    
+    // No exception thrown; PDO thinks the record was inserted correctly.
+    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+  catch (PDOException $e) {
+    // Query failed; recover based on $e->getMessage()
+    drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+  }
+}
+
