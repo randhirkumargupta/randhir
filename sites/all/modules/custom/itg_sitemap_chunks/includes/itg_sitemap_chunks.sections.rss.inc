@@ -58,22 +58,28 @@ function itg_sitemap_chunks_get_rss_of_magazine() {
  */
 function itg_sitemap_chunks_get_rss_of_home() {
   $big_story = db_select('itg_widget_order', 'iwo');
+  $big_story->leftJoin('node', 'n', 'iwo.nid=n.nid');
   $big_story->fields('iwo', array('nid'));
   $big_story->condition('iwo.widget', 'big_story_format_widget');
   $big_story->condition('iwo.nid', 0, '!=');
+  $big_story->condition('n.status', 1);
   $data['big_story_widget'] = $big_story->execute()->fetchCol();
 
   $home_page_feature = db_select('itg_widget_order', 'iwo');
+  $home_page_feature->leftJoin('node', 'n', 'iwo.nid=n.nid');
   $home_page_feature->fields('iwo', array('nid'));
   $home_page_feature->condition('iwo.widget', 'home_page_feature_widget');
   $home_page_feature->orderBy('iwo.weight', 'ASC');
+  $home_page_feature->condition('n.status', 1);
   $home_page_feature->range(0, HOME_PAGE_FEATURE_MAX_RANGE);
   $data['home_page_feature_widget'] = $home_page_feature->execute()->fetchCol();
 
   $top_story = db_select('itg_widget_order', 'iwo');
+  $top_story->leftJoin('node', 'n', 'iwo.nid=n.nid');
   $top_story->fields('iwo', array('nid'));
   $top_story->condition('iwo.widget', 'top_stories_widget');
   $top_story->orderBy('iwo.weight', 'ASC');
+  $top_story->condition('n.status', 1);
   $top_story->range(0, TOP_STORIES_LIMIT);
   $data['top_story_widget'] = array_values($top_story->execute()->fetchCol());
 
@@ -178,7 +184,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   }
   $query->condition('wos.content_type', $content_type);
   $query->range(0, $limit);
-  if(!empty($arg[1])) {
+  if (!empty($arg[1])) {
     $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
   }
   $query->orderBy('wos.weight', 'DESC');
@@ -223,10 +229,13 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
  * @global string $base_url
  * @return string
  */
-function itg_sitemap_chunks_get_rss_of_mixed_content($section_tid) {
+function itg_sitemap_chunks_get_rss_of_mixed_content() {
   $xml = NULL;
+  $arg = arg();
   $limit = variable_get('itg_rss_chunks_number', 50000);
-
+  if (!empty($arg[1])) {
+    $section_tid = $arg[1];
+  }
   $query = db_select('node', 'n')->distinct();
   if (!empty($section_tid)) {
     $query->leftJoin('itg_widget_order_section', 'wos', 'wos.nid=n.nid');
@@ -246,6 +255,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content($section_tid) {
   }
   $query->range(0, $limit);
   $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
+  $query->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (!empty($result)) {
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
