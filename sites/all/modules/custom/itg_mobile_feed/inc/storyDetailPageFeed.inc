@@ -10,7 +10,6 @@
  * @return array
  */
 function storyDetailPageFeed() {
-    //echo "<pre>"; print_r(node_load(349459)); echo "</pre>"; exit();
   $output = "";
   if (count(arg()) < 2) {
     $output = "Please pass story node nid in url";
@@ -20,7 +19,8 @@ function storyDetailPageFeed() {
   }
 
 
-  echo  $output;  die();
+  echo $output;
+  die();
 }
 
 /**
@@ -28,127 +28,106 @@ function storyDetailPageFeed() {
  *
  * @return array
  */
-function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $type) {
-  //echo print_ar(arg());exit();
-  //$nid = 664;
+function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
+
   $imgtag = "";
-  if(!$file_name){
-      $file_name = "story".$nid.".xml";
+  if (!$file_name) {
+    $file_name = "story" . $nid . ".xml";
   }
-  if(!$term_feed_path){
-     $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories"; 
-     //$term_feed_path = "public://xml_it/stories";
-     //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+  if (!$term_feed_path) {
+    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
   }
-  elseif($type){
-     if($type == "photogallery"){
-         $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
-         //$term_feed_path = "public://xml_it/photos";
-	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
-     
-     elseif($type == "story"){
-         $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
-         //$term_feed_path = "public://xml_it/stories";
-	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
-     elseif($type == "videogallery"){
-         $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
-         //$term_feed_path = "public://xml_it/videos";
-	 //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
-     } 
+  elseif ($type) {
+    if ($type == "photogallery") {
+      $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+    }
+    elseif ($type == "story") {
+      $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    }
+    elseif ($type == "videogallery") {
+      $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    }
   }
-  
-  
-  //field_image_caption
+
+//field_image_caption
   $output = "";
   if (!$nid) {
     $output = "Nid is missing";
   }
   else {
-     //check into redis
-   $redis_key = "itgd_story".$nid;
-   $result_get = getRedis($redis_key);
-   
-   if($result_get['key_value'] !=""){
-       $output = $result_get['key_value'];
-       //echo "redis get - ". $output; exit();
-   }
-   else{
-    //$output = "photo detail page";
-    global $base_url;
-    $ttl = 300;
-    $node = node_load($nid);
-    //print_ar($node); exit();
-    // variable for feed
-    $title = $node->title;
-    $tid = $node->field_primary_category['und'][0]['value'];
-    $term = taxonomy_term_load($tid);
-    $term_name = $term->name;
-    $comment_cont = $node->comment;
-    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    $reporter_node = itg_common_get_node_title($byline_id);
-    $related_node = relatedContentNodeType($nid, "story");
-    $city = getCityByNid($nid);
-    //$weburl = $base_url . "/node/" . $nid;
-    $alias = drupal_get_path_alias('node/'.$nid.'');
-    $weburl = $base_url ."/". $alias;
-    $create_date = date("F d, Y", $node->created);
-    $create_datetime = date(DATE_ATOM, $node->created);
-    $full_body = $node->body['und']['0']['value'];
-    $body_android = getBodyDataForAndroid($full_body);
+    //check into redis
+    $redis_key = "itgd_story" . $nid;
+    $result_get = getRedis($redis_key);
 
-    //call function getMobileFeedXmlHeader
-    $output .= getMobileFeedXmlHeader();
-    $output .= "\n<item>
-                    <storyid>" . $nid . "</storyid> 
-                    <idsection>" . $tid . "</idsection> 
-                    <section><![CDATA[" . $term_name . "]]> </section>
-                    <headline ><![CDATA[" . $title . "]]></headline >
-                    <credit><![CDATA[" . $reporter_node . "]]> </credit>
-                    <date>$create_date</date>
-                    <datetime>" . $create_datetime . "</datetime>
-                    <city><![CDATA[" . $city . "]]></city>
-                    <courtesy><![CDATA[]]></courtesy>";
-                    $output .= "<body><![CDATA[" . $full_body . "]]></body>";
-                    $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
-    //get video tag
-    $videotag = getVideoTag($node);
-    if ($videotag) {
-      $output .= $videotag;
+    if ($result_get['key_value'] != "") {
+      $output = $result_get['key_value'];
     }
-    //get video tag
-    $imgtag = getImgTag($node);
-    if ($imgtag) {
-      $output .= $imgtag;
+    else {
+      global $base_url;
+      $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+      $node = node_load($nid);
+      $title = $node->title;
+      $tid = $node->field_primary_category['und'][0]['value'];
+      $term = taxonomy_term_load($tid);
+      $term_name = $term->name;
+      $comment_cont = $node->comment;
+      $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+      $reporter_node = itg_common_get_node_title($byline_id);
+      $related_node = relatedContentNodeType($nid, "story");
+      $city = getCityByNid($nid);
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = $base_url . "/" . $alias;
+      $create_date = date("F d, Y", $node->created);
+      $create_datetime = date(DATE_ATOM, $node->created);
+      $full_body = $node->body['und']['0']['value'];
+      $body_android = getBodyDataForAndroid($full_body);
+
+      $output .= getMobileFeedXmlHeader();
+      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
+      $output .= "<body><![CDATA[" . $full_body . "]]></body>";
+      $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
+      //get video tag
+      $videotag = getVideoTag($node);
+      if ($videotag) {
+        $output .= $videotag;
+      }
+      else {
+        $output .= emptygetVideoTag();
+      }
+      //get video tag
+      $imgtag = getImgTag($node);
+      if ($imgtag) {
+        $output .= $imgtag;
+      }
+      else {
+        $output .= emptygetImgTag();
+      }
+      //web url tag
+      $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
+      if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
+        $output .= getRelatedNodeXmlTag($related_node['nid']);
+      }
+      else {
+        $output .= emptygetRelatedNodeXmlTag();
+      }
+      //function for get comment xml tag
+      if ($comment_cont > 0) {
+        $output .= getCommentXmlTag($node);
+      }
+      else {
+        $output .= emptygetCommentXmlTag();
+      }
+      //call function getMobileFeedXmlFooter
+      $output .= "</item>" . getMobileFeedXmlFooter();
+      $result_set = setRedis($redis_key, $output, $ttl);
     }
-    //web url tag
-    $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
-    //function for get related node xml tag
-    //print_ar($related_node);exit();
-    if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
-      $output .= getRelatedNodeXmlTag($related_node['nid']);
-    }
-    //function for get comment xml tag
-    if ($comment_cont > 0) {
-      $output .= getCommentXmlTag($node);
-    }
-    //call function getMobileFeedXmlFooter
-    $output .= "</item>" . getMobileFeedXmlFooter();
-    // header('Content-Type: application/xml; charset=utf-8');
-    // set into redis
-    $result_set = setRedis($redis_key, $output, $ttl);
-     //echo "redis set - ". $result_set['set_flag']; exit();
-  } 
   }
-//header('Content-Type: application/xml; charset=utf-8');
-//echo $output; exit();
-    if($output){
-        $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
-    }
-    else{
-        $return_flag .="Nid is missing";
-    }
+  if ($output) {
+    $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
+  }
+  else {
+    $return_flag .= "Nid is missing";
+  }
 
   return $return_flag;
 }
@@ -160,8 +139,8 @@ function generateStoryDetailPageFeed($nid,  $file_name="", $term_feed_path="", $
  */
 function getVideoTag($node) {
   $videotag = "";
-
   $src = "";
+  $img_url = '';
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -173,21 +152,105 @@ function getVideoTag($node) {
   $nodelist = $xpath->query("//iframe");
   // gets the 1st image
   $node = $nodelist->item(0);
-  //$src = $node->attributes->getNamedItem('src')->nodeValue;
+
+  $add_video = getStringBetween($html, '<div class="itgvideo">', '</div>');
+  if ($node->attributes->length > 0) {
+    //It has Youtube video
+    $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
+  }
+  elseif ($add_video != '') {
+    //It has uploaded video
+    if (strpos($add_video, "dailymotion_video_dir") > 0) {
+      // It has Daily Motion Video
+      $video_name = substr(strstr($add_video, 'dir/'), 4);
+      $video_node = dailymotion_video_name_to_nid($video_name);
+      $video_field = node_load($video_node);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+    else {
+      //It is Migrated video
+      $video_nid = migrated_video_to_nid($add_video);
+      $video_field = node_load($video_nid);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+  }
+  else {
+    
+  }
 
   if ($src) {
-    $videotag = "\n<video_embed>
-                    <videoparts_mp4>
-                        <part>" . $src . "</part>
-                        <img_url><![CDATA[]]></img_url>
-                    </videoparts_mp4>
-                    <videoparts_m3u8>
-                        <part>" . $src . "</part>
-                        <img_url><![CDATA[]]></img_url>
-                    </videoparts_m3u8>
-                </video_embed>\n";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
+}
+
+/*
+ * Function for getting dailymotion videoname to nid
+ */
+
+function dailymotion_video_name_to_nid($video_name) {
+  $qry = db_select('dailymotion_response_details', 'vd')
+          ->fields('vd', array('nid'))
+          ->condition('vd.title', $video_name)
+          ->execute()->fetchField();
+  return $qry;
+}
+
+/*
+ * Get Nid by migrated video name
+ */
+
+function migrated_video_to_nid($video_uri) {
+
+  $query = db_select('field_data_field_migrated_video_url', 'mv');
+  $query->innerJoin('field_data_field_video_upload', 'vo', 'vo.field_video_upload_value = mv.entity_id');
+  $query->fields('vo', array('entity_id'));
+  $query->condition('mv.field_migrated_video_url_value', $video_uri);
+  return $all_result = $query->execute()->fetchField();
+}
+
+function uploaded_video_to_nid($video_uri) {
+
+  $query = db_select('file_managed', 'f');
+  $query->innerJoin('field_data_field_videogallery_video_upload', 'vp', 'vp.field_videogallery_video_upload_fid = f.fid');
+  $query->innerJoin('field_data_field_video_upload', 'vo', 'vo.field_video_upload_value = vp.entity_id');
+  $query->fields('vo', array('entity_id'));
+  $query->condition('f.uri', $video_uri);
+  return $all_result = $query->execute()->fetchField();
+}
+
+/*
+ * Get string betwee tags
+ */
+
+function getStringBetween($str, $from, $to) {
+
+  $sub = substr($str, strpos($str, $from) + strlen($from), strlen($str));
+  return substr($sub, 0, strpos($sub, $to));
+}
+
+/**
+ * function for generate Empty video xml tag
+ *
+ * @return array
+ */
+function emptygetVideoTag() {
+  $videotag = "";
+  $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+  return $videotag;
+}
+
+/**
+ * function for generate empty image xml tag
+ *
+ * @return array
+ */
+function emptygetImgTag() {
+  $imgtag = "";
+  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+  return $imgtag;
 }
 
 /**
@@ -209,17 +272,9 @@ function getImgTag($node) {
   $nodelist = $xpath->query("//img");
   // gets the 1st image
   $node = $nodelist->item(0);
-  //$src = $node->attributes->getNamedItem('src')->nodeValue;
   if ($src) {
-    $imgtag = "\n<bodyimages> 
-                    <image>  
-                        <lowres><![CDATA[" . $src . "]]></lowres>
-                        <highres><![CDATA[" . $src . "]]></highres>
-                        <caption></caption>  
-                    </image> 
-                </bodyimages>\n";
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption></caption></image></bodyimages>";
   }
 
   return $imgtag;
 }
-

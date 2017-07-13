@@ -18,7 +18,6 @@ function videoCategoryPageFeed() {
   // check tid argument
   $tid_arg = arg(1);
   if($tid_arg && is_numeric($tid_arg)){
-    //$section_list = categoryManagerSectionTid('photogallery');
     $section_list[] = $tid_arg;
   }
   else{
@@ -27,17 +26,15 @@ function videoCategoryPageFeed() {
   $list_count = 0;
   $catFile = "";
   $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
-  //$term_feed_path = "public://xml_it/videos";
-  //file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-    
+
     // check section is videogallery
     $node_count = customNodeCount('videogallery', $value);
     // loop on category
     if ($node_count > 0 ) {
-      
+
         $cattid = $value;
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
@@ -53,13 +50,9 @@ function videoCategoryPageFeed() {
         if ($storytag['data'] != "") {
           $output = "";
           $output .= getMobileFeedXmlHeader();
-          $output .= "\n<idsection>".$cattid."</idsection>
-                        <section>".$term_name."</section>
-                        <totalvideos>".$list_count."</totalvideos>
-                        <start_index>0</start_index>
-                        <end_index>".$list_count."</end_index>\n";
+          $output .= "<idsection>".$cattid."</idsection><section>".$term_name."</section><totalvideos>".$list_count."</totalvideos><start_index>0</start_index><end_index>".$list_count."</end_index>";
           $output .= $storytag['data'];
-          $output .= "\n" . getMobileFeedXmlFooter();
+          $output .= getMobileFeedXmlFooter();
           // xml file writing..
           if ($output) {
             //echo "andyrr here".$output; exit();
@@ -83,10 +76,9 @@ function generateVideoCategoryPage($tid) {
   //check into redis
    $redis_key = "itgd_generateVideoCategoryPages".$tid;
    $result_get = getRedis($redis_key);
-   
+
    if($result_get['key_value'] !=""){
-       $data_str = $result_get['key_value'];       
-        //echo "redis get - ". $output; exit();
+       $data_str = $result_get['key_value'];
        $data_ar = explode("##listcount##",$data_str);
        $data['lcount'] = $data_ar[0];
        $data['data'] = $data_ar[1];
@@ -95,7 +87,7 @@ function generateVideoCategoryPage($tid) {
   // variable declaration
   global $base_url;
   $node_count = "";
-  $ttl = 300;
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
   $output = "";
   $data = array();
   $tid_list = array();
@@ -164,35 +156,18 @@ function generateVideoCategoryPage($tid) {
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
       $is_fav = getNidIsFavorite($nid);
-      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $is_syndications = $resvalue['field_story_syndication_value'];
-      // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
 
-      //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
       // create date formating
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
-      $output .= "<item>
-                    <title>".$title."</title>
-                    <mediumimage><![CDATA[".$file_medium_img_url."]]></mediumimage>
-                    <thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage>
-                    <url>video".$nid.".xml</url>
-                    <create_date>".$create_date."</create_date>
-                    <create_datetime>".$create_datetime."</create_datetime>
-                    <syndications>".$is_syndications."</syndications>
-                    <is_favorite>".$is_fav."</is_favorite>
-                    <relateds>
-                        <photos>".$related['photos']."</photos>
-                        <videos>" . $related['videos'] . "</videos>
-                        <stories>" . $related['stories'] . "</stories>
-                    </relateds>
-                </item>";
+      $output .= "<item><title>".$title."</title><mediumimage><![CDATA[".$file_medium_img_url."]]></mediumimage><thumbimage><![CDATA[".$file_small_img_url."]]></thumbimage><url>video".$nid.".xml</url><create_date>".$create_date."</create_date><create_datetime>".$create_datetime."</create_datetime><syndications>".$is_syndications."</syndications><is_favorite>".$is_fav."</is_favorite><relateds><photos>".$related['photos']."</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
       // generate video detail page
     $fl = generateVideoDetailPageFeed($nid);
     }
@@ -200,12 +175,9 @@ function generateVideoCategoryPage($tid) {
   $data['lcount'] = $listcount;
   $data['data'] = $output;
   $data_fi = $listcount."##listcount##".$output;
-  //echo "<pre>";print_r (explode("##listcount##",$data_fi));exit();
-
+  
   // set into redis
     $result_set = setRedis($redis_key, $data_fi, $ttl);
-    //echo "redis set - ". $result_set['set_flag']; exit();
-   }
+    }
   return $data;
 }
-

@@ -1,13 +1,24 @@
 <?php
-// http://localhost/itgdev/andycustomres/itg_rapid_api/664.json -> front url
+
 /**
  * @file
  * Module file for Housing Schemes Services.
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
+function itg_rapid_api_init(){
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_news');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
+    module_load_include('inc', 'itg_rapid_api', 'inc/helper');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_homePage');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_fblogin');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_twtlogin');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_author_story');
+    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_polls');
+}
 
 /**
  * Implements hook_services_resources().
@@ -34,80 +45,153 @@ function itg_rapid_api_services_resources() {
 function itg_rapid_api_menu() {
 
   $items = array();
+  
+  $items['admin/api-configuration'] = array(
+    'title' => 'API Configuration',
+    'description' => 'API Configuration',
+    'weight' => 80, 	
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+   $items['admin/api-configuration/feed-api'] = array(
+    'title' => 'Feed API',
+    'description' => 'Feed API Configuration',
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+   
+   $items['admin/api-configuration/rest-api'] = array(
+    'title' => 'REST API',
+    'description' => 'REST API Configuration',
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
   // menu for set update webservice token
-  $items['admin/settings/mobile_service_token'] = array(
+  $items['admin/api-configuration/rest-api/mobile-service-token'] = array(
     'title' => 'Mobile web service token',
     'description' => 'Mobile web service token',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mobile_service_token'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
   // menu for update config_update_status json
-  $items['admin/settings/config_update_status_json'] = array(
+  $items['admin/api-configuration/rest-api/config-update-status-json'] = array(
     'title' => 'Update config_update_status json',
     'description' => 'Update config_update_status json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('config_update_status_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
   // menu for update datanotexist_api json
-  $items['admin/settings/datanotexist_api_json'] = array(
+  $items['admin/api-configuration/rest-api/datanotexist-api-json'] = array(
     'title' => 'update datanotexist_api json',
     'description' => 'update datanotexist_api json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('datanotexist_api_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
   // menu for update hamburger_menu json
-  $items['admin/settings/hamburger_menu_json'] = array(
+  $items['admin/api-configuration/rest-api/hamburger-menu-json'] = array(
     'title' => 'update hamburger_menu json',
     'description' => 'update hamburger_menu json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('hamburger_menu_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
   // menu for update horizontal_menu json
-  $items['admin/settings/horizontal_menu_json'] = array(
+  $items['admin/api-configuration/rest-api/horizontal-menu-json'] = array(
     'title' => 'update horizontal_menu json',
     'description' => 'update horizontal_menu json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('horizontal_menu_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
   // menu for update master_config json
-  $items['admin/settings/master_config_json'] = array(
+  $items['admin/api-configuration/rest-api/master-config-json'] = array(
     'title' => 'update master_config json',
     'description' => 'update master_config json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('master_config_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
    // menu for update server_error_master json
-  $items['admin/settings/server_error_master_json'] = array(
+  $items['admin/api-configuration/rest-api/server-error-master-json'] = array(
     'title' => 'update server_error_master json',
     'description' => 'update server_error_master json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('server_error_master_json'),
-    'access arguments' => array('administer onthisdate settings'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  //sprint 2 seting menu,  admin/structure/services
+  
+  $items['admin/api-configuration/rest-api/ad-config-json'] = array(
+    'title' => 'update ad config json',
+    'description' => 'ad_config_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ad_config_json'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/livetv-channellist-json'] = array(
+    'title' => 'update livetv channellist json',
+    'description' => 'livetv_channellist_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_channellist_json'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/livetv-json'] = array(
+    'title' => 'update livetv json',
+    'description' => 'livetv_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_json'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/otherapps-ios-json'] = array(
+    'title' => 'update otherapps ios json',
+    'description' => 'otherapps_ios_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('otherapps_ios_json'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/otherapps-android-json'] = array(
+    'title' => 'update otherapps android json',
+    'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('otherapps_android_json'),
+    'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
   
 
   return $items;
 }
-// mobile_service_token form decalation
+/*
+ * mobile_service_token form decalation
+ */
+
 function mobile_service_token() {
   $form = array();
 
@@ -115,20 +199,25 @@ function mobile_service_token() {
     '#type' => 'textfield',
     '#title' => t('web service token'),
     '#default_value' => variable_get('mobile_service_token'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
     '#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
   return system_settings_form($form);
 }
-// mobile_service_token form decalation
+/*
+ * mobile_service_token form validation
+ */
+
 function mobile_service_token_validate($form, &$form_state) {
-  //echo "<pre>"; print_r($form_state); echo "</pre>"; exit();
+  
 }
 
-// config_update_status_json form decalation
+/*
+ * config_update_status_json form decalation
+ * 
+ */
+
 function config_update_status_json() {
   $form = array();
 
@@ -136,16 +225,15 @@ function config_update_status_json() {
     '#type' => 'textarea',
     '#title' => t('config update status json'),
     '#default_value' => variable_get('config_update_status_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
   return system_settings_form($form);
 }
 
-// datanotexist_api_json form decalation
+/*
+ * datanotexist_api_json form decalation
+ */
 function datanotexist_api_json() {
   $form = array();
 
@@ -153,16 +241,16 @@ function datanotexist_api_json() {
     '#type' => 'textarea',
     '#title' => t('datanotexist api json'),
     '#default_value' => variable_get('datanotexist_api_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
   return system_settings_form($form);
 }
 
-// hamburger_menu_json form decalation
+/*
+ * hamburger_menu_json form decalation
+ */
+
 function hamburger_menu_json() {
   $form = array();
 
@@ -170,9 +258,6 @@ function hamburger_menu_json() {
     '#type' => 'textarea',
     '#title' => t('hamburger menu json'),
     '#default_value' => variable_get('hamburger_menu_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
@@ -187,9 +272,6 @@ function horizontal_menu_json() {
     '#type' => 'textarea',
     '#title' => t('horizontal menu json'),
     '#default_value' => variable_get('horizontal_menu_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
@@ -204,9 +286,6 @@ function master_config_json() {
     '#type' => 'textarea',
     '#title' => t('master config json'),
     '#default_value' => variable_get('master_config_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
@@ -221,9 +300,6 @@ function server_error_master_json() {
     '#type' => 'textarea',
     '#title' => t('server error master json'),
     '#default_value' => variable_get('server_error_master_json'),
-    //'#size' => 2,
-    //'#maxlength' => 2,
-    //'#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
 
@@ -244,3 +320,164 @@ function getCommentsCount($nid){
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return count($result);
 }
+
+/**
+ * comman function for return node published date
+ * @arg $nid 
+ * @return published date
+ */
+
+function getNodePublishedDate($nid){
+    $query = db_select('workbench_moderation_node_history', 'nh');
+    $query->fields('nh', array('stamp'));
+    $query->condition('nh.nid', $nid);
+    $query->condition('nh.from_state', 'draft');
+    $query->condition('nh.state', 'published');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $published_statp = $result[0]['stamp'];
+    if($published_statp){
+        $published_datetime = date("Y-m-d H:i:s", $published_statp);
+    }
+    else{
+        $published_datetime = "";
+    }
+    return $published_datetime;
+}
+
+// sprint2 seting function
+
+// ad_config_json form decalation
+function ad_config_json() {
+  $form = array();
+
+  $form['ad_config_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ad config json'),
+    '#default_value' => variable_get('ad_config_json'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// livetv_channellist_json form decalation
+function livetv_channellist_json() {
+  $form = array();
+
+  $form['livetv_channellist_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv channellist json'),
+    '#default_value' => variable_get('livetv_channellist_json'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// livetv_json form decalation
+function livetv_json() {
+  $form = array();
+
+  $form['livetv_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv json'),
+    '#default_value' => variable_get('livetv_json'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// otherapps_ios_json form decalation
+function otherapps_ios_json() {
+  $form = array();
+
+  $form['otherapps_ios_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('otherapps ios json'),
+    '#default_value' => variable_get('otherapps_ios_json'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+// otherapps_android_json form decalation
+function otherapps_android_json() {
+  $form = array();
+
+  $form['otherapps_android_json'] = array(
+    '#type' => 'textarea',
+    '#title' => t('otherapps android json'),
+    '#default_value' => variable_get('otherapps_android_json'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+
+function itg_rapid_api_url_inbound_alter(&$result, $path, $path_language) {
+   $u_agent = $_SERVER['HTTP_USER_AGENT']; 
+   $flag = 0;
+
+// user agent for browser
+if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Trident/i',$u_agent)) 
+    { // this condition is for IE11
+        $flag = 1;
+    } 
+    elseif(preg_match('/Firefox/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Chrome/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Safari/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Opera/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    elseif(preg_match('/Netscape/i',$u_agent)) 
+    { 
+        $flag = 1;
+    } 
+    
+    // user agent for mobile device
+    
+    $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+    $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
+    $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
+    $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
+    $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
+
+    if ($iphone || $android || $palmpre || $ipod || $berry == true)
+    {
+        $flag = 1;
+
+    }
+    
+   if(arg(0) == "appapi" && count(arg()) == 2 ){
+       $result = $path."/it";
+   }
+}
+
+/**
+ * Implements hook_boot().
+ */
+
+function itg_rapid_api_boot() {}
+
