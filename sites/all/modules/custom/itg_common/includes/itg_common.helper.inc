@@ -125,6 +125,7 @@ define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
 define('SITEMAP_BUCKET', 'sitemapxml_other');
 
+
 define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
 define('FRONT_URL_VIDEO', 'http://qa.indiatodayonline.in');
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');

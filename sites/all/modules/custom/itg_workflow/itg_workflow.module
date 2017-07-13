@@ -905,6 +905,10 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
+
+  if($node->type =='videogallery' && $node->status == 0) {
+    itg_videogallery_node_publish_to_unpublish($node->nid);
+  }
   global $user;
   if ($node->type == 'story') {
     itg_videogallery_save_story_video_data($node->body['und'][0]['value'],$node->nid);
