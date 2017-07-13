@@ -550,7 +550,7 @@ function itg_sitemap_chunks_gereral_setting_form() {
  */
 function itg_sitemap_chunks_delete_chunks() {
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
-  itg_video_get_s3_video_del('s3fs-public/sitemap');
+  itg_video_get_s3_video_del('s3fs-public/'.SITEMAP_BUCKET);
   // remove directory if previously created sitemap.
   drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again"));
 }
