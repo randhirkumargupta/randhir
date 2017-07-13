@@ -7,6 +7,7 @@ jQuery(document).ready(function () {
       console.log('Detected');
     } else {
         jQuery('.ad-blocker').hide();
+        jQuery('.ad-blocker-content').hide();
     }
 
 });
@@ -24,6 +25,7 @@ jQuery(document).ready(function () {
 
 function openPopup() {
     jQuery(".description").hide();
+    jQuery(".buzz-section").hide();
     jQuery('.view-photo-landing-slider').hide();
     jQuery('.video-landing-header').hide();
     var a = gup('source');

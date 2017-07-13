@@ -541,14 +541,24 @@ if (!empty($content)):
                   <?php endif; ?>
                 </div>                            
               </div>
-              <div class="ad-blocker"></div>
+                <?php
+                if(!empty(variable_get('ads_blocker_content_limit'))) {
+                  $limit = variable_get('ads_blocker_content_limit');
+                } else {
+                  $limit = 300;
+                }
+                if($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
+                ?>
+                <div class="ad-blocker-content"><?php print mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""); ?></div>
+                <?php } ?>
+                <div class="ad-blocker"></div>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
                 // check video is delete form video content   
-                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
-                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
-                }
+//                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
+//                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
+//                }
                 if (strpos($story_body, '[ITG:SURVEY:')) {
                   if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
                     $survey_nid = $matches_survey[1];

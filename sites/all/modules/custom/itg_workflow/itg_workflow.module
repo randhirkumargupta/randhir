@@ -648,7 +648,6 @@ function itg_workflow_node_presave($node) {
         if (!isset($node->status_cron)) {
           if ($node->workbench_moderation['current']->state == 'published') {
             $node->status = 0;
-         
           }
           else {
 
@@ -907,6 +906,9 @@ function itg_workflow_node_insert($node) {
  */
 function itg_workflow_node_update($node) {
   global $user;
+  if ($node->type == 'story') {
+    itg_videogallery_save_story_video_data($node->body['und'][0]['value'],$node->nid);
+  }
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
     return;

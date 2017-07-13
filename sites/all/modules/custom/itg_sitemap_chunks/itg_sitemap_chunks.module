@@ -192,7 +192,6 @@ function itg_sitemap_chunks_menu() {
   
   $items['rss-content'] = array(
     'page callback' => 'itg_sitemap_chunks_get_rss_of_mixed_content',
-    'page arguments' => array(1),
     'type' => MENU_CALLBACK,
     'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
     'file' => 'includes/itg_sitemap_chunks.sections.rss.inc',

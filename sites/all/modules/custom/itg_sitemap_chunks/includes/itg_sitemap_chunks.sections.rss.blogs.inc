@@ -26,8 +26,10 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $query->leftJoin('field_data_field_common_short_description', 'sh', 'sh.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
     $query->fields('n', array('title', 'nid'));
     $query->fields('sh', array('field_common_short_description_value'));
+    $query->fields('pd', array('field_itg_content_publish_date_value'));
     $query->fields('fm', array('uri'));
     $query->condition('n.status', 1);
     if ($is_live_blogs) {
@@ -37,6 +39,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
       $query->condition('n.type', 'blog');
     }
     $query->range(0, $limit);
+    $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
     $query->orderBy('n.created', 'DESC');
     $result = $query->execute();
   } catch (Exception $ex) {
@@ -61,7 +64,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     foreach ($result as $data) {
       $xml .= '<item>';
       $node_title = $data->title; // Long Headline
-      $node_link = FRONT_URL . '/' . drupal_get_path_alias("node/" . $data->nid);
+      $node_link = $base_url . '/' . drupal_get_path_alias("node/" . $data->nid);
       if (!empty($data->uri)) {
         $node_extra_large_image_url = file_create_url($data->uri);
       } else {

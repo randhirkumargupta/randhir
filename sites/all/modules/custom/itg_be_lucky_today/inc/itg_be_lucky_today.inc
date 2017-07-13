@@ -413,6 +413,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     if (!empty($selected_magazine_name)) {
         $magazine = $selected_magazine_name;
     }
+    $current_date = date('Y-m-d h:i:s');
     $data = array(
       'survey_id' => 29072016,
       'name' => $form_state['multistep_values']['registration1']['yourname'],
@@ -424,10 +425,11 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
       'city' => $city,
       'studled' => $form_state['multistep_values']['registration3']['zip_code'],
       'mobile' => $form_state['multistep_values']['registration3']['mobile'],
-//      'income' => 'unconfirm',
+      'record_date' => $current_date,
       'ipaddress' => '10.20.30',
       'comment' => $magazine,
     );
+    
     $fields = array_keys($data);
     $query = db_insert('survey')->fields($data);
     $key = $query->execute();
