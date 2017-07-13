@@ -56,15 +56,15 @@
               <?php foreach ($videoids as $keys => $video_value) {
                 $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
                 ?> 
-              <div class="slide"> <div class="photo-slide"><amp-video width="480"
-                       height="270"
+              <div class="slide"> <div class="photo-slide">
+                      <amp-video width="300"
+                       height="200"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
                        controls
                        >
-                <source type="video/webm"
-                        src="<?php print $video_id;?>">
-            </amp-video>
+                       <source type="video/webm" src="<?php print $video_id;?>">
+                      </amp-video>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
                 </div>
             </div>    
