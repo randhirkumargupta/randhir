@@ -1,10 +1,10 @@
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
-<div class="amp-photo-slider">
-
-        <?php
+   <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-    if($source_type != 'migrated') {
+    if($source_type != 'migrated') { ?>
+    <div class="amp-photo-slider">
+    <?php
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
       $videoids = get_video_in_fieldcollection_by_nid($node->nid);
     }
@@ -36,19 +36,27 @@
     <?php
       }
     }
-    }
     ?>
-
-        <?php
-            if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == "migrated") {
+</amp-carousel>
+    </div>
+   <?php }
+    ?>
+  <!-- code for migrated video -->
+  <?php
+            if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == "migrated") { ?>
+              <div class="amp-photo-slider">
+              <?php    
               if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($node->nid);
-              }
-              foreach ($videoids as $keys => $video_value) {
+              } ?>
+        <amp-carousel width="300"
+                  height="280"
+                  layout="responsive"
+                  type="slides">
+              <?php foreach ($videoids as $keys => $video_value) {
                 $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
                 ?> 
-              
-        <amp-video width="480"
+              <div class="slide"> <div class="photo-slide"><amp-video width="480"
                        height="270"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
@@ -57,14 +65,19 @@
                 <source type="video/webm"
                         src="<?php print $video_id;?>">
             </amp-video>
+                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                </div>
+            </div>    
+        
                 <?php
               }
-            }
+            
             ?>
         
         
     </amp-carousel>
-    </div>
+  </div>
+            <?php } ?>
   </div>
 
 <div class="amp-other-gallery">
