@@ -580,7 +580,7 @@ function itg_workflow_node_presave($node) {
     }
 
     if ($node->type == 'videogallery') {
-
+      global $user;
       $is_draft = 0;
       $node_id = $node->nid;
       foreach ($node->field_story_itg_tags[LANGUAGE_NONE] as $tags) {
@@ -645,9 +645,14 @@ function itg_workflow_node_presave($node) {
 
 // Need to chenge this for redirect
       if ($is_draft == 1) {
-        if (!isset($node->status_cron)) {
+        if (!empty($node->op)) {
           if ($node->workbench_moderation['current']->state == 'published') {
+            $node->workbench_moderation['current']->from_state = 'draft';
+            $node->workbench_moderation['current']->state = 'draft';
+            $node->workbench_moderation['published']->from_state = 'draft';
+            $node->workbench_moderation['published']->state = 'draft';
             $node->status = 0;
+            $node->revision = 0;
           }
           else {
 
@@ -669,6 +674,14 @@ function itg_workflow_node_presave($node) {
   else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
     if ($node->status == 1) {
       $node->workbench_moderation_state_new = 'published';
+    }
+  }
+  if (!empty($node->op)) {
+    if (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
+      $node->field_video_status_flag[LANGUAGE_NONE][0]['value'] = 'low_level';
+    }
+    else {
+      $node->field_video_status_flag[LANGUAGE_NONE][0]['value'] = '';
     }
   }
 }
@@ -905,9 +918,14 @@ function itg_workflow_node_insert($node) {
  * @param object $node
  */
 function itg_workflow_node_update($node) {
+  if (isset($_REQUEST['id']) && !empty($_REQUEST['id'])) {
+    if ($node->type == 'videogallery' && $node->status == 0) {
+      itg_videogallery_node_publish_to_unpublish($node->nid);
+    }
+  }
   global $user;
   if ($node->type == 'story') {
-    itg_videogallery_save_story_video_data($node->body['und'][0]['value'],$node->nid);
+    itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
   }
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");

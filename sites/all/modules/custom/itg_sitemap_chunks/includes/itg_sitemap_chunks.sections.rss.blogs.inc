@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Function which gives rss for blogs and live blogs
  * widget data as per the order in widgets.
@@ -46,8 +45,9 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     drupal_set_message($ex->getMessage(), 'error');
   }
 
-
+ 
   if (!empty($result)) {
+    header('Content-Type: text/xml');
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
     $xml .= '<rss version="2.0">';
     $xml .= '<channel>';
@@ -81,6 +81,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  header("Content-Type: application/rss+xml; charset=ISO-8859-1");
-  echo $xml;
+ 
+  echo trim($xml);
+  drupal_exit();
 }
