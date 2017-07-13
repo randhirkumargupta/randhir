@@ -1603,13 +1603,16 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       if (!empty($video_url)) {
         foreach ($video_url as $video_value) {
           $post_check = strpos($video_value, $base_url . '/embeded-video/' . $story_body_video->video_id);
-
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
             $html = str_replace($ifreame, "", $node_body);
             $node->body['und'][0]['value'] = $html;
             field_attach_update('node', $node);
+            if (function_exists('itg_akamai_clear_url')) {
+              $url = drupal_get_path_alias('node/' . $nid);
+              itg_akamai_clear_url($url);
+            }
             // delete video.
             db_delete('itg_story_body_videos')
                 ->condition('id', $story_body_video->id)
