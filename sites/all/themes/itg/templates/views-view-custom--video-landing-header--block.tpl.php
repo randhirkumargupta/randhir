@@ -74,7 +74,6 @@ $uri = base64_encode($actual_link);
                   $vide_dm_id = $video_value->solr_video_id;
                 }
                 ?>
-
                     <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
                     </div>
                     <?php if ($keys == 0) { ?>
@@ -124,7 +123,6 @@ $uri = base64_encode($actual_link);
                     else {
                       ?>
                       <script>
-
                         var player_<?php echo $keys; ?> = DM.player(
                                 document.querySelector('#video_<?php echo $keys; ?>'),
                                 {
