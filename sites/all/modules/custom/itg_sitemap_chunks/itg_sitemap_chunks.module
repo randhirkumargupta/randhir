@@ -102,7 +102,7 @@ function itg_sitemap_chunks_menu() {
   );
   
   $items['admin/config/search/itg-multiple-sitemap/s3-bucket-xml-file-setting'] = array(
-    'title' => "Setting",
+    'title' => "S3 bucket xml file Setting",
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_chunks_s3_bucket_setting_form'),
     'access callback' => 'user_access',
@@ -113,7 +113,7 @@ function itg_sitemap_chunks_menu() {
   );
   
   $items['admin/config/search/itg-multiple-sitemap/mixedsitemap-setting'] = array(
-    'title' => "Setting",
+    'title' => "Mixed sitemap Setting",
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sitemap_mixedcontent_setting_form'),
     'access callback' => 'user_access',

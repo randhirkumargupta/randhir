@@ -20,7 +20,7 @@ function itg_sitemap_chunks_get_rss_of_cat_with_order() {
       // Print Rss for provides sections.
       header("Content-Type: application/rss+xml; charset=utf-8");
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'story');
-      echo $xml;
+      echo trim($xml);
       drupal_exit();
     }
   } else {
@@ -46,7 +46,7 @@ function itg_sitemap_chunks_get_rss_of_magazine() {
     $xml = itg_sitemap_chunks_common_rss_for_home_page($rss_nids);
     if (!is_null($xml)) {
       header("Content-Type: application/rss+xml; charset=utf-8");
-      echo $xml;
+      echo trim($xml);
       drupal_exit();
     } else {
       return drupal_not_found();
@@ -90,7 +90,7 @@ function itg_sitemap_chunks_get_rss_of_home() {
   $xml = itg_sitemap_chunks_common_rss_for_home_page($rss_nids);
   if (!is_null($xml)) {
     header("Content-Type: application/rss+xml; charset=utf-8");
-    echo $xml;
+    echo trim($xml);
     drupal_exit();
   } else {
     return drupal_not_found();
@@ -279,7 +279,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $xml .= '</rss>';
   }
   header("Content-Type: application/rss+xml; charset=utf-8");
-  echo $xml;
+  echo trim($xml);
   drupal_exit();
 }
 
