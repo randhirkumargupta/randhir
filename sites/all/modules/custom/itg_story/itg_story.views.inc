@@ -54,7 +54,7 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
   function render($values) {
     global $base_url;
     //$values->nid
-    $itg_status = itg_get_node_status($values->nid);//temp code
+    $itg_status = $values->_field_data['nid']['entity']->status;
     if ($itg_status == 0 ) {
       $node_url = $base_url . '/node/' . $values->nid;
       $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';

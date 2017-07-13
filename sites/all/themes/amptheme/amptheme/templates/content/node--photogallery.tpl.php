@@ -48,7 +48,6 @@ if (function_exists('get_other_gallery_amp')) {
         $img_count = get_image_count_entity_id($value['entity_id'], 'photogallery', 'field_gallery_image');
       }
       $entity_id = $value['entity_id'];
-      $title = l($value['title'], $base_url . '/node/' . $value['nid'].'?amp', array("attributes" => array("title" => $value['title'])));
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
@@ -57,8 +56,9 @@ if (function_exists('get_other_gallery_amp')) {
         $small_image = $base_url . '/' . path_to_theme() . '/images/itg_image170x127.jpg';
       }
 
-      $path_alias = $baseUrl . '/node/' . $value['nid'];
-
+      $alias = drupal_get_path_alias('node/'.$value['nid']);
+      $path_alias = $base_url.'/amp/'.$alias;
+      $title = l($value['title'], $path_alias, array("attributes" => array("title" => $value['title'])));
       $amp_image = '<a href="' . $path_alias . '?amp"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '"></amp-img></a>';
       $other_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-camera" aria-hidden="true"></i> ' . $img_count . ' images</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
     }

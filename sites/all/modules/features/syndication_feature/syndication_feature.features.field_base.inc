@@ -87,6 +87,7 @@ function syndication_feature_field_default_field_bases() {
         'recipe' => 'Recipe',
         'story' => 'Story',
         'photogallery' => 'Photogallery',
+        'videogallery' => 'Videogallery',
       ),
       'allowed_values_function' => '',
     ),
