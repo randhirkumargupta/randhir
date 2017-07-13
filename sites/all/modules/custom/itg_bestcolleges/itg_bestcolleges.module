@@ -1424,7 +1424,8 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   if ($year) {
     $bestcollege_year = variable_get('bestcollege_year', '');
     $bestcollege_status = variable_get('bestcollege_status', '');
-    $stream_dynamic = variable_get('bestcollege_stream_dynamic', '');
+    $json = variable_get('bestcollege_stream_dynamic', '');
+    $stream_dynamic = (array)json_decode($json);
     if ($year == $bestcollege_year) {
       $tid = variable_get('bestcollege_term_id'); //'844807';
       if ($stream == 'Arts') {
@@ -1880,8 +1881,10 @@ function bestcollege_set_option_val($url) {
 function bestcollege_create_taxonomy() {
   $tid = variable_get('bestcollege_term_id', ''); //'844807';
   $term = taxonomy_term_load($tid);
-  $children = variable_get('bestcollege_stream', '');
-  ////array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', "12" => "hotel management", "13" => "Education");
+  
+  $json = variable_get('bestcollege_stream', '');
+  $children = (array)json_decode($json);
+  //array('1' => 'Art', '2' => 'commerce', '3' => 'science', '4' => 'law', '5' => 'medicine', '6' => 'engineering', '7' => 'bba', '8' => 'bca', '9' => 'mass comm', '10' => 'fashion', '11' => 'fine arts', "12" => "hotel management", "13" => "Education");
   foreach ($children as $term_name) {
     $exist_tid = itg_bestcollege_exist_tid($tid, $term->vid, $term_name);
 
