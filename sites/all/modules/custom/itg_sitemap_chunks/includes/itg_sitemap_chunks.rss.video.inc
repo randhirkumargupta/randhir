@@ -2,12 +2,6 @@
 
 module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks.sections.rss');
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Function which gives rss of videogallery CT which are filed under given category.
  * 
@@ -24,7 +18,7 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
     if ((int) $section_tid != 0) {
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'videogallery');
       if (!is_null($xml)) {
-        header("Content-Type: application/rss+xml; charset=utf-8");
+        header('Content-Type: text/xml');
         echo trim($xml);
         drupal_exit();
       } else {
@@ -34,7 +28,8 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
       return drupal_not_found();
     }
   } else {
-    itg_sitemap_chunks_get_rss_of_video_with_order();
+    header('Content-Type: text/xml');
+    echo itg_sitemap_chunks_get_rss_of_video_with_order();
     drupal_exit();
   }
 }
@@ -51,9 +46,7 @@ function itg_sitemap_chunks_get_rss_of_video_with_order() {
   if (!empty($video_tid) && !is_null($video_tid) && (int) $video_tid) {
     $xml = itg_sitemap_chunks_common_rss($video_tid, 'videogallery');
     if (!is_null($xml)) {
-      header("Content-Type: application/rss+xml; charset=utf-8");
-      echo trim($xml);
-      drupal_exit();
+      return trim($xml);
     } else {
       return drupal_not_found();
     }
