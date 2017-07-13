@@ -301,15 +301,17 @@ function generatePhotoDeatilList($id) {
  * @return array
  */
 function generatePhotoDetailList($galleryimg) {
+    //echo "<pre>"; print_r($galleryimg);  echo "</pre>"; exit();
   $photo_list_array = array();
   $listcont = 0;
   if (count($galleryimg) > 0) {
     // loop on gallery img
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      //print_ar($value, "getGalleryImgTag");exit();
-      $fid = $value['value'];
-      $fid_file = $value['revision_id'];
+      
+      $fc = field_collection_field_get_entity($value);       
+      $fid = $fc->field_api_image['und'][0]['fid'];
+      $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
       // custom function for get img caption
       $caption = getImgCaption($fid);
