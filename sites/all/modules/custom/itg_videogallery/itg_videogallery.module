@@ -633,18 +633,16 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 /**
  * This function use for mark node remove video unpublish
  */
-function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
+function itg_videogallery_node_publish_to_unpublish($nid) {
   $unp_videos = array();
 // delete deleted video info form itg_solr_video_info
 
   $query = db_select('itg_solr_video_info', 'drd')
       ->fields('drd', array('solr_video_id', 'property', 'fid'));
-  $query->condition('fid', $main_fids, 'NOT IN');
   $query->condition('nid', $nid);
   $result = $query->execute()->fetchAll();
 
   $query = db_delete('itg_solr_video_info');
-  $query->condition('fid', $main_fids, 'NOT IN');
   $query->condition('nid', $nid);
   $query->condition('content_type', 'video_gallery', '=');
   $query->execute();
@@ -658,7 +656,7 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
   }
   entity_delete_multiple('field_collection_item', $field_collection_item_values);
   field_attach_update('node', $node);
-  
+
   foreach ($result as $un_video) {
     if ($unp_videos->property == VIDEO_PROPERTY) {
       $api = itg_videogallery_dailymotion_api();
@@ -668,6 +666,52 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
     $deleted = db_delete('file_managed')
         ->condition('fid', $un_video->fid)
         ->execute();
+  }
+  if (!empty($unp_videos)) {
+
+    try {
+      db_update('dailymotion_response_details') // Table name no longer needs {}
+          ->fields(array(
+            'dailymotion_published' => 0,
+          ))
+          ->condition('video_id', $unp_videos, 'IN')
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog_exception('video fid delete', $e);
+    }
+  }
+  foreach ($result as $un_video) {
+    if ($unp_videos->property == VIDEO_PROPERTY) {
+      itg_videogallery_update_video_info_solr($un_video->solr_video_id);
+    }
+  }
+}
+
+/**
+ * This function use for mark node remove video unpublish
+ */
+function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
+  $unp_videos = array();
+// delete deleted video info form itg_solr_video_info
+  $query = db_update('itg_solr_video_info')
+      ->fields(array('is_delete' => 1));
+  $query->condition('fid', $main_fids, 'NOT IN');
+  $query->condition('nid', $nid);
+  $query->condition('content_type', 'video_gallery', '=');
+  $query->execute();
+  $query = db_select('itg_solr_video_info', 'drd')
+      ->fields('drd', array('solr_video_id', 'property'));
+  $query->condition('fid', $main_fids, 'NOT IN');
+  $query->condition('nid', $nid);
+  $result = $query->execute()->fetchAll();
+
+  foreach ($result as $un_video) {
+    if ($unp_videos->property == VIDEO_PROPERTY) {
+      $api = itg_videogallery_dailymotion_api();
+      $api->post('/video/' . $un_video->solr_video_id . '?private=true');
+    }
+    $unp_videos[] = $un_video->solr_video_id;
   }
   if (!empty($unp_videos)) {
 
