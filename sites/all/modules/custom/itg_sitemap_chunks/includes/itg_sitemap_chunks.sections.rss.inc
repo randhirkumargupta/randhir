@@ -18,9 +18,10 @@ function itg_sitemap_chunks_get_rss_of_cat_with_order() {
       itg_sitemap_chunks_get_rss_of_magazine();
     } else {
       // Print Rss for provides sections.
-      header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+      header("Content-Type: application/rss+xml; charset=utf-8");
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'story');
       echo $xml;
+      drupal_exit();
     }
   } else {
     return theme('rss_landing_page');
@@ -44,8 +45,9 @@ function itg_sitemap_chunks_get_rss_of_magazine() {
     $rss_nids = $query->execute()->fetchCol();
     $xml = itg_sitemap_chunks_common_rss_for_home_page($rss_nids);
     if (!is_null($xml)) {
-      header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+      header("Content-Type: application/rss+xml; charset=utf-8");
       echo $xml;
+      drupal_exit();
     } else {
       return drupal_not_found();
     }
@@ -87,8 +89,9 @@ function itg_sitemap_chunks_get_rss_of_home() {
   $rss_nids = array_unique($real_array);
   $xml = itg_sitemap_chunks_common_rss_for_home_page($rss_nids);
   if (!is_null($xml)) {
-    header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+    header("Content-Type: application/rss+xml; charset=utf-8");
     echo $xml;
+    drupal_exit();
   } else {
     return drupal_not_found();
   }
@@ -275,8 +278,9 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+  header("Content-Type: application/rss+xml; charset=utf-8");
   echo $xml;
+  drupal_exit();
 }
 
 /**

@@ -24,8 +24,9 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
     if ((int) $section_tid != 0) {
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'videogallery');
       if (!is_null($xml)) {
-        header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+        header("Content-Type: application/rss+xml; charset=utf-8");
         echo $xml;
+        drupal_exit();
       } else {
         return drupal_not_found();
       }
@@ -34,6 +35,7 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
     }
   } else {
     itg_sitemap_chunks_get_rss_of_video_with_order();
+    drupal_exit();
   }
 }
 
@@ -49,8 +51,9 @@ function itg_sitemap_chunks_get_rss_of_video_with_order() {
   if (!empty($video_tid) && !is_null($video_tid) && (int) $video_tid) {
     $xml = itg_sitemap_chunks_common_rss($video_tid, 'videogallery');
     if (!is_null($xml)) {
-      header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+      header("Content-Type: application/rss+xml; charset=utf-8");
       echo $xml;
+      drupal_exit();
     } else {
       return drupal_not_found();
     }
