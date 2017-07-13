@@ -25,7 +25,7 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'videogallery');
       if (!is_null($xml)) {
         header("Content-Type: application/rss+xml; charset=utf-8");
-        echo $xml;
+        echo trim($xml);
         drupal_exit();
       } else {
         return drupal_not_found();
@@ -52,7 +52,7 @@ function itg_sitemap_chunks_get_rss_of_video_with_order() {
     $xml = itg_sitemap_chunks_common_rss($video_tid, 'videogallery');
     if (!is_null($xml)) {
       header("Content-Type: application/rss+xml; charset=utf-8");
-      echo $xml;
+      echo trim($xml);
       drupal_exit();
     } else {
       return drupal_not_found();
