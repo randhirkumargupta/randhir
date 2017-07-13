@@ -336,9 +336,9 @@
       .amp-photo-slider .amp-carousel-button{
         top: 25%;
       }
-      .front-end-breadcrumb-photo-video + .black-box .amp-photo-slider .amp-carousel-button, 
-      .node-type-videogallery .amp-photo-slider .amp-carousel-button,
+      .front-end-breadcrumb-photo-video + .black-box .amp-photo-slider .amp-carousel-button,
       .node-type-photogallery .amp-photo-slider .amp-carousel-button{top: 42%;}
+      .node-type-videogallery .amp-photo-slider .amp-carousel-button{top: 34%;}
       .amp-photo-slider p{
         color: #a1a1a1;
         line-height: 24px;
