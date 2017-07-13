@@ -255,9 +255,10 @@ function getPhotolist($nid){
     $galleryimg = $node->field_gallery_image['und'];
     $lcont = 0;
     foreach ($galleryimg as $key => $value) {
-        
-        $fid = $value['value'];
-        $fid_file = $value['revision_id'];
+
+        $fc = field_collection_field_get_entity($value);
+        $fid = $fc->field_api_image['und'][0]['fid'];
+        $fid_file = $fid;
         $img_url = completeFilePath($fid_file);
         // custom function for get img caption
         $caption = getImgCaption($fid);
