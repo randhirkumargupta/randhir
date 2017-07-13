@@ -124,7 +124,7 @@ define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
 define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
-define('FRONT_URL_VIDEO', 'http://qa.indiatodayonline.in');
+define('FRONT_URL_VIDEO', 'http://uat-it.indiatodayonline.in');
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
