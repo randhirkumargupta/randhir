@@ -123,7 +123,7 @@ define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('SITEMAP_BUCKET', 'sitemapxml');
+define('SITEMAP_BUCKET', 'sitemapxml_other');
 
 
 define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
