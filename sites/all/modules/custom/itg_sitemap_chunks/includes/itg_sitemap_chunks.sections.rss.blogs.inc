@@ -81,6 +81,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+  header("Content-Type: application/rss+xml; charset=utf-8");
   echo $xml;
+  drupal_exit();
 }
