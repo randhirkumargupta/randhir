@@ -2801,9 +2801,23 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
     if ($node_flag == 0) {
       $node = node_load($video_id->nid);
-      $node->status = 1;
-      $node->status_cron = 1;
-      $node->workbench_moderation_state_new = workbench_moderation_state_published();
+
+      if ($node->status == 0) {
+        $node->status = 1;
+      }
+
+      if ($node->workbench_moderation['current']->state == 'draft') {
+        //$node->status_cron = 'cron_run';
+        $node->revision = 0;
+      }
+
+      if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] == 'low_level') {
+
+        workbench_moderation_moderate($node, 'needs_review');
+      }
+      else {
+        workbench_moderation_moderate($node, 'published');
+      }
       node_save($node);
     }
   }
