@@ -1605,7 +1605,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       $video_url = $match[1];
       if (!empty($video_url)) {
         foreach ($video_url as $video_value) {
-          $post_check = strpos($video_value,  '/embeded-video/' . $story_body_video->video_id);
+          $post_check = strpos($video_value, '/embeded-video/' . $story_body_video->video_id);
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
@@ -1642,7 +1642,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $video_url = $match[1];
         if (!empty($video_url)) {
           foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value,  '/embed-video/' . $story_body_video->video_id);
+            $post_check = strpos($video_value, '/embed-video/' . $story_body_video->video_id);
             if ($post_check) {
               $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id . '" width="648"></iframe>';
               $html = str_replace($ifreame, "", $node_body);
@@ -2577,7 +2577,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_remove_video_id_parent_site_delete_or_unpublish',
   );
-  
+
   return $items;
 }
 
@@ -2658,12 +2658,11 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
- // itg_videogallery_publish_node_after_video_ready_by_dm();
+  // itg_videogallery_publish_node_after_video_ready_by_dm();
 // Here deleted video
 // This crone use for remove video if parent site remove this video from video article
-
 // This crone use for if node is publish.
- // itg_videogallery_video_draft_node_check();
+  // itg_videogallery_video_draft_node_check();
 //on use for make publish node after check video status ready to play
 }
 
@@ -2809,10 +2808,11 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     if ($node_flag == 0) {
       $node = node_load($video_id->nid);
       if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
-        if ($node->status == 0) {
-          $node->status = 1;
+        if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] != 'low_level') {
+          if ($node->status == 0) {
+            $node->status = 1;
+          }
         }
-
         if ($node->workbench_moderation['current']->state == 'draft') {
           //$node->status_cron = 'cron_run';
           $node->revision = 0;
@@ -2823,6 +2823,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
           workbench_moderation_moderate($node, 'needs_review');
         }
         else {
+
           workbench_moderation_moderate($node, 'published');
         }
         node_save($node);
