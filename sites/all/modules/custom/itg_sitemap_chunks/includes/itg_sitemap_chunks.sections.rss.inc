@@ -108,9 +108,14 @@ function itg_sitemap_chunks_get_rss_of_home() {
 function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
   global $base_url;
   $xml = NULL;
+  $arg = arg();
   $result = array();
   $limit = variable_get('itg_rss_chunks_number', 50000);
-
+  $headling = 'Latest Stories ';
+  $landing_link = $base_url;
+  if ($arg[0] == 'rss' && $arg[1] == 'magazine') {
+    $landing_link = $base_url . '/magazine';
+  }
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -131,22 +136,22 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
   }
 
   if (!empty($result)) {
-    $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
-    $xml .= '<rss version="2.0">';
-    $xml .= '<channel>';
-    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>';
-    $xml .= '<description>' . t('India Today') . '</description>';
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>';
-    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>';
-    $xml .= '<generator>FeedCreator 1.7.2</generator>';
-    $xml .= '<image>';
-    $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>';
-    $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . ' ]]> </title>';
-    $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . ' ]]> </link>';
-    $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>';
-    $xml .= '</image>';
+    $xml = '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
+    $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">' . "\r\n";
+    $xml .= '<channel>' . "\r\n";
+    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . '|' . $headling . ' ]]> </title>' . "\r\n";
+    $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>' . "\r\n";
+    $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
+    $xml .= '<image>' . "\r\n";
+    $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
+    $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML  . ' ]]> </title>' . "\r\n";
+    $xml .= '<link> <![CDATA[ ' . $landing_link . ' ]]> </link>' . "\r\n";
+    $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>' . "\r\n";
+    $xml .= '</image>' . "\r\n";
     $xml .= itg_sitemap_print_section_rss($result);
-    $xml .= '</channel>';
+    $xml .= '</channel>' . "\r\n";
     $xml .= '</rss>';
   }
   return $xml;
@@ -302,12 +307,12 @@ function itg_sitemap_print_section_rss($result) {
       $node_extra_large_image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     $description = $data['field_story_short_headline_value'];
-    $published_date = gmdate('D, d M Y H:i:s', strtotime($data['field_itg_content_publish_date_value']));
+    $published_date = date('D, d M Y H:i:s', strtotime($data['field_itg_content_publish_date_value']));
     $xml .= '<title> <![CDATA[ ' . check_plain($node_title) . ' ]]></title>' . "\r\n";
-    $xml .= '<link> <![CDATA[ ' . check_url($node_link ) . ' ]]></link>' . "\r\n";
-      $xml .= '<description> <![CDATA[  ' . '<a src="' . $node_link . '"><img src="' . $node_extra_large_image_url . '" align="left" hspace="2" height="180" width="305" alt="" border="0"/></a>' . $description . ' ]]></description>' . "\r\n";
-      $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>' . "\r\n";
-      $xml .= '</item>'. "\r\n";
-    }
-    return $xml;
+    $xml .= '<link> <![CDATA[ ' . check_url($node_link) . ' ]]></link>' . "\r\n";
+    $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>'. "\r\n";
+    $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>' . "\r\n";
+    $xml .= '</item>' . "\r\n";
+  }
+  return $xml;
 }
