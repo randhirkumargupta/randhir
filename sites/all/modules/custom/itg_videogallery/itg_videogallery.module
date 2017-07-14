@@ -2521,10 +2521,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'Thumbnail image assign to node from dailymotion.',
     'callback' => 'itg_videogallery_thumb_assign',
   );
-  $items['draft-video-publish-after-local-video-readytouse'] = array(
-    'description' => 'Cron use for make publish node after check video status ready to play.',
-    'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
-  );
+//  $items['draft-video-publish-after-local-video-readytouse'] = array(
+//    'description' => 'Cron use for make publish node after check video status ready to play.',
+//    'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
+//  );
   $items['ftp_file_save'] = array(
     'description' => 'Ftp file save in file managed table.',
     'callback' => 'itg_videogallery_ftp_file_insert',
