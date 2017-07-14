@@ -2807,7 +2807,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
     if ($node_flag == 0) {
       $node = node_load($video_id->nid);
-      if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+      
         if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] != 'low_level') {
           if ($node->status == 0) {
             $node->status = 1;
@@ -2828,7 +2828,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
         }
         node_save($node);
       }
-    }
+    
   }
 }
 
