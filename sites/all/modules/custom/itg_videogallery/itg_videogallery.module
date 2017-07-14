@@ -587,6 +587,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                 ->fields(array(
                   'dailymotion_published' => 1,
+                  'is_draft' => 0,
                 ))
                 ->condition('video_id', $file_video[0]->solr_video_id, '=')
                 ->execute();
@@ -673,6 +674,7 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
       db_update('dailymotion_response_details') // Table name no longer needs {}
           ->fields(array(
             'dailymotion_published' => 0,
+            'is_draft' => 0,
           ))
           ->condition('video_id', $unp_videos, 'IN')
           ->execute();
@@ -792,6 +794,7 @@ function itg_videogallery_node_insert($node) {
                 $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
                       'dailymotion_published' => 1,
+                      'is_draft' => 0,
                     ))
                     ->condition('video_id', $file_video[0]->solr_video_id, '=')
                     ->execute();
@@ -1602,7 +1605,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       $video_url = $match[1];
       if (!empty($video_url)) {
         foreach ($video_url as $video_value) {
-          $post_check = strpos($video_value, $base_url . '/embeded-video/' . $story_body_video->video_id);
+          $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id);
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
@@ -1639,7 +1642,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $video_url = $match[1];
         if (!empty($video_url)) {
           foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value, $base_url . '/embed-video/' . $story_body_video->video_id);
+            $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id);
             if ($post_check) {
               $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id . '" width="648"></iframe>';
               $html = str_replace($ifreame, "", $node_body);
@@ -1687,6 +1690,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       }
     }
   }
+  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
 }
 
 /**
@@ -2444,6 +2448,7 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
         ->fields(array(
           'dailymotion_published' => 1,
+          'is_draft' => 0,
         ))
         ->condition('video_id', $result[0]->solr_video_id, '=')
         ->execute();
