@@ -587,6 +587,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                 ->fields(array(
                   'dailymotion_published' => 1,
+                  'is_draft' => 0,
                 ))
                 ->condition('video_id', $file_video[0]->solr_video_id, '=')
                 ->execute();
@@ -673,6 +674,8 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
       db_update('dailymotion_response_details') // Table name no longer needs {}
           ->fields(array(
             'dailymotion_published' => 0,
+            'is_draft' => 0,
+            'nid' => 0,
           ))
           ->condition('video_id', $unp_videos, 'IN')
           ->execute();
@@ -792,6 +795,7 @@ function itg_videogallery_node_insert($node) {
                 $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
                       'dailymotion_published' => 1,
+                      'is_draft' => 0,
                     ))
                     ->condition('video_id', $file_video[0]->solr_video_id, '=')
                     ->execute();
@@ -1602,14 +1606,17 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       $video_url = $match[1];
       if (!empty($video_url)) {
         foreach ($video_url as $video_value) {
-          $post_check = strpos($video_value, $base_url . '/embeded-video/' . $story_body_video->video_id);
-
+          $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id);
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
             $html = str_replace($ifreame, "", $node_body);
             $node->body['und'][0]['value'] = $html;
             field_attach_update('node', $node);
+            if (function_exists('itg_akamai_clear_url')) {
+              $url = drupal_get_path_alias('node/' . $nid);
+              itg_akamai_clear_url($url);
+            }
             // delete video.
             db_delete('itg_story_body_videos')
                 ->condition('id', $story_body_video->id)
@@ -1636,7 +1643,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $video_url = $match[1];
         if (!empty($video_url)) {
           foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value, $base_url . '/embed-video/' . $story_body_video->video_id);
+            $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id);
             if ($post_check) {
               $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id . '" width="648"></iframe>';
               $html = str_replace($ifreame, "", $node_body);
@@ -1684,6 +1691,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       }
     }
   }
+  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
 }
 
 /**
@@ -2441,6 +2449,7 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
         ->fields(array(
           'dailymotion_published' => 1,
+          'is_draft' => 0,
         ))
         ->condition('video_id', $result[0]->solr_video_id, '=')
         ->execute();
@@ -2756,8 +2765,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
               '/video/' . $dmvid_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
           );
 
-          if ($dm_data['encoding_progress'] == 100 && $dm_data['publishing_progress'] == 100) {
-
+          if ($dm_data['encoding_progress'] == 100 || $dm_data['publishing_progress'] == 100) {
             $query = db_update('dailymotion_response_details');
             $query->fields(array('is_draft' => 0));
             $query->fields(array('dailymotion_published' => 1));
@@ -2798,10 +2806,25 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
     if ($node_flag == 0) {
       $node = node_load($video_id->nid);
-      $node->status = 1;
-      $node->status_cron = 1;
-      $node->workbench_moderation_state_new = workbench_moderation_state_published();
-      node_save($node);
+      if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+        if ($node->status == 0) {
+          $node->status = 1;
+        }
+
+        if ($node->workbench_moderation['current']->state == 'draft') {
+          //$node->status_cron = 'cron_run';
+          $node->revision = 0;
+        }
+
+        if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] == 'low_level') {
+
+          workbench_moderation_moderate($node, 'needs_review');
+        }
+        else {
+          workbench_moderation_moderate($node, 'published');
+        }
+        node_save($node);
+      }
     }
   }
 }
