@@ -683,6 +683,9 @@ function itg_workflow_node_presave($node) {
     }
   }
   if (!empty($node->op)) {
+    if($node->type == 'breaking_news' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])) {
+      $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i');
+    }
     if (array_key_exists(AUTHOR_GUEST, $user->roles) || array_key_exists(INTERN, $user->roles) || array_key_exists(SUBEDITOR_SR_SUB, $user->roles)) {
       $node->field_video_status_flag[LANGUAGE_NONE][0]['value'] = 'low_level';
     }
