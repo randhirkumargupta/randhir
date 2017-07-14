@@ -28,14 +28,14 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
   $contents = array('story', 'videogallery', 'photogallery');
   $xml_file_content = itg_sitemap_chunks_get_content_links($contents);
   //gz file
-  $gzfile = "public://sitemap/xmlsitemap.xml.gz";
+  $gzfile = "public://".SITEMAP_BUCKET."/xmlsitemap.xml.gz";
   $gzdata = gzencode($xml_file_content, 9);
   $fp = fopen($gzfile, "w");
   fwrite($fp, $gzdata);
   fclose($fp);
   // Create xml
   //Create gz file.
-  $xmlfile = "public://sitemap/xmlsitemap.xml";
+  $xmlfile = "public://".SITEMAP_BUCKET."/xmlsitemap.xml";
   $fp = fopen($xmlfile, "w");
   fwrite($fp, $xml_file_content);
   fclose($fp);
@@ -310,8 +310,8 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
   $query->leftJoin('field_data_field_type', 'fdft', 'fdft.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('fdft.field_type_value', 'Live Blog');
-  //Condition to get nodes created on previous 2 days.
-  $query->condition('n.created', array(strtotime('-2 day'), REQUEST_TIME), 'BETWEEN');
+  //Condition to get nodes created on previous 2 days. i.e. one current date and second previus day.
+  $query->condition('n.created', array(strtotime('-1 day'), REQUEST_TIME), 'BETWEEN');
   $query->condition('n.status', 1);
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, $limit);
@@ -352,7 +352,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
       if ($total_rows > 0) {
         // get sitemap details from custom sitemap table i.e. priority frequency etc.
         //directory public path
-        $feed_dir = "public://sitemap/$CT";
+        $feed_dir = "public://".SITEMAP_BUCKET."/$CT";
         //create directory
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $x = 0;
@@ -382,7 +382,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           // Logic to rename file has end.
           // get last file number.
           $first_file_number = 1;
-          $feed_dir_for_delete = "public://sitemap/$CT";
+          $feed_dir_for_delete = "public://".SITEMAP_BUCKET."/$CT";
           // Last file uri path.
           $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
           // Delete last file we will create it again.

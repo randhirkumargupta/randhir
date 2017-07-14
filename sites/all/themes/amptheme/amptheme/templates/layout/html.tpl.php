@@ -60,6 +60,7 @@
     <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
     <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
@@ -335,9 +336,9 @@
       .amp-photo-slider .amp-carousel-button{
         top: 25%;
       }
-      .front-end-breadcrumb-photo-video + .black-box .amp-photo-slider .amp-carousel-button, 
-      .node-type-videogallery .amp-photo-slider .amp-carousel-button,
+      .front-end-breadcrumb-photo-video + .black-box .amp-photo-slider .amp-carousel-button,
       .node-type-photogallery .amp-photo-slider .amp-carousel-button{top: 42%;}
+      .node-type-videogallery .amp-photo-slider .amp-carousel-button{top: 34%;}
       .amp-photo-slider p{
         color: #a1a1a1;
         line-height: 24px;

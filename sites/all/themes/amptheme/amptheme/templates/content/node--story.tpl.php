@@ -499,7 +499,11 @@ if (!empty($content)):
                 $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$buzz_title_share.'&picture='.$share_image;
                 $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']).'&url='.$short_url.'&via=IndiaToday';
                 $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
-                $buzz_output.= '<div class="buzz-img-wrapper"><div class="buzz-img"><div class="social-share">
+                $buzz_photo_class = '';
+                if(empty($getImageInfo[0]->image_photo_grapher)) {
+                  $buzz_photo_class = 'no-caption';
+                }
+                $buzz_output.= '<div class="buzz-img-wrapper '.$buzz_photo_class.'"><div class="buzz-img"><div class="social-share">
                   <amp-accordion disable-session-states>
                 <section>
                   <h2>

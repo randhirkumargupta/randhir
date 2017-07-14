@@ -654,7 +654,7 @@ function _related_story_left_block_content() {
       } else {
         $display_title = $related_data->label;
       }
-      $related_title = mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = $display_title;//mb_strimwidth($display_title, 0, 80, "..");
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
@@ -709,7 +709,7 @@ function _related_story_bottom_block_content() {
         else {
           $display_title = $related_data->label;
         }
-        $related_title = mb_strimwidth($display_title, 0, 80, "..");
+        $related_title = $display_title;//mb_strimwidth($display_title, 0, 80, "..");
         if (strpos($related_data->url, BACKEND_URL) !== false) {
           $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
         }

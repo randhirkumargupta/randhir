@@ -12,8 +12,12 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
   global $base_url;
   $arg = arg();
   $is_live_blogs = FALSE;
+  $landing_page = $base_url . '/' . 'blog';
+  $heading = 'Blogs';
   if ($arg[0] == 'rss-live-blogs') {
     $is_live_blogs = TRUE;
+    $heading = 'Live Blogs';
+    $landing_page = $base_url;
   }
   module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks.sections.rss');
   $xml = NULL;
@@ -48,21 +52,23 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
 
 
   if (!empty($result)) {
-    $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
-    $xml .= '<rss version="2.0">';
-    $xml .= '<channel>';
-    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>';
-    $xml .= '<description>' . t('India Today') . '</description>';
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>';
-    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>';
-    $xml .= '<generator>FeedCreator 1.7.2</generator>';
-    $xml .= '<image>';
-    $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>';
-    $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>';
-    $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>';
-    $xml .= '</image>';
+    header('Content-Type: text/xml');
+    $xml = '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
+    $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">' . "\r\n";
+    $xml .= '<channel>' . "\r\n";
+    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . '|' . $heading . ' ]]> </title>' . "\r\n";
+    $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>' . "\r\n";
+    $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
+    $xml .= '<image>' . "\r\n";
+    $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
+    $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
+    $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>' . "\r\n";
+    $xml .= '<link>' . $landing_page . '</link>' . "\r\n";
+    $xml .= '</image>' . "\r\n";
     foreach ($result as $data) {
-      $xml .= '<item>';
+      $xml .= '<item>' . "\r\n";
       $node_title = $data->title; // Long Headline
       $node_link = $base_url . '/' . drupal_get_path_alias("node/" . $data->nid);
       if (!empty($data->uri)) {
@@ -72,15 +78,16 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
       }
       $description = $data->field_common_short_description_value;
       $published_date = gmdate('D, d M Y H:i:s', strtotime($data->field_itg_content_publish_date_value));
-      $xml .= '<title> <![CDATA[ ' . $node_title . ' ]]></title>';
-      $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>';
-      $xml .= '<description> <![CDATA[  ' . '<a src="' . $node_link . '"><img src="' . $node_extra_large_image_url . '" align="left" hspace="2" height="180" width="305" alt="" border="0"/></a>' . $description . ' ]]></description>';
-      $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>';
-      $xml .= '</item>';
+      $xml .= '<title> <![CDATA[ ' . $node_title . ' ]]></title>' . "\r\n";
+      $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>' . "\r\n";
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>';
+      $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>' . "\r\n";
+      $xml .= '</item>' . "\r\n";
     }
-    $xml .= '</channel>';
-    $xml .= '</rss>';
+    $xml .= '</channel>' . "\r\n";
+    $xml .= '</rss>' . "\r\n";
   }
-  header("Content-Type: application/rss+xml; charset=ISO-8859-1");
-  echo $xml;
+
+  echo trim($xml);
+  drupal_exit();
 }
