@@ -9043,8 +9043,7 @@ div#playerContainer{
             }
         }
         .social-icon{
-            width: 108px;
-            overflow: hidden;
+            max-width: 108px;
             padding-top: 65px;
             a{
                 color: #aaa9a9;
@@ -11925,6 +11924,11 @@ span.close_btt {
     }
   }
   .feed-use-sep{height: 1px; background-color: #dedede; margin: 10px 0 20px;}
+}
+.rss-disclaimer{
+  padding-top: 30px;
+  h4{font-size: 14px; color: #888; margin-bottom: 10px;}
+  p{font-size: 13px; color: #888; line-height: 18px;}
 }
 
 @media (min-width: 320px) {

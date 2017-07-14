@@ -601,7 +601,7 @@
       }
       .social-icon{
         width: 17%;
-        padding-top: 40px;
+        padding-top: 0px;
       }
     }
   }
@@ -1981,7 +1981,7 @@
   #block-itg-live-tv-live-tv-video-page{
     .latest-livetv-video .photo-list{    
       li{
-        padding: 10px;         
+        padding: 10px 10px 0;         
         height: auto;
         width:100% !important;
         figure{

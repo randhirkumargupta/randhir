@@ -10906,8 +10906,7 @@ div#playerContainer {
   top: 0;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
-  width: 108px;
-  overflow: hidden;
+  max-width: 108px;
   padding-top: 65px;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a {
@@ -14564,6 +14563,20 @@ span.close_btt {
   height: 1px;
   background-color: #dedede;
   margin: 10px 0 20px;
+}
+
+.rss-disclaimer {
+  padding-top: 30px;
+}
+.rss-disclaimer h4 {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+.rss-disclaimer p {
+  font-size: 13px;
+  color: #888;
+  line-height: 18px;
 }
 
 @media (min-width: 320px) {
