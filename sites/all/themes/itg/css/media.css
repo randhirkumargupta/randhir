@@ -598,7 +598,7 @@
   }
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     width: 17%;
-    padding-top: 40px;
+    padding-top: 0px;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -1884,7 +1884,7 @@
   /*Home page end css*/
   /*css start live tv page*/
   #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li {
-    padding: 10px;
+    padding: 10px 10px 0;
     height: auto;
     width: 100% !important;
   }
