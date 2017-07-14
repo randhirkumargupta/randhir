@@ -2557,10 +2557,10 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is use for store video birates urls',
     'callback' => 'itg_videogallery_video_bitrate',
   );
-  $items['content-remove-video-with-child'] = array(
-    'description' => 'This crone use for replaced video remove from other content type.',
-    'callback' => 'itg_videogallery_remove_video_with_child',
-  );
+//  $items['content-remove-video-with-child'] = array(
+//    'description' => 'This crone use for replaced video remove from other content type.',
+//    'callback' => 'itg_videogallery_remove_video_with_child',
+//  );
   $items['remove-video-if-parent-site-delete'] = array(
     'description' => 'This crone use for remove video if parent site remove this video from video article.',
     'callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
@@ -2569,14 +2569,14 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_video_update_embeded_url',
   );
-  $items['video-draft-video-check'] = array(
-    'description' => 'This crone use for Update video id embeded.',
-    'callback' => 'itg_videogallery_video_draft_node_check',
-  );
-  $items['delete-parent-remove-video'] = array(
-    'description' => 'This crone use for Update video id embeded.',
-    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete_or_unpublish',
-  );
+//  $items['video-draft-video-check'] = array(
+//    'description' => 'This crone use for Update video id embeded.',
+//    'callback' => 'itg_videogallery_video_draft_node_check',
+//  );
+//  $items['delete-parent-remove-video'] = array(
+//    'description' => 'This crone use for Update video id embeded.',
+//    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete_or_unpublish',
+//  );
 
   return $items;
 }
@@ -2658,11 +2658,13 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
-  // itg_videogallery_publish_node_after_video_ready_by_dm();
+  itg_videogallery_publish_node_after_video_ready_by_dm();
+  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
+  itg_videogallery_remove_video_with_child();
 // Here deleted video
 // This crone use for remove video if parent site remove this video from video article
 // This crone use for if node is publish.
-  // itg_videogallery_video_draft_node_check();
+   itg_videogallery_video_draft_node_check();
 //on use for make publish node after check video status ready to play
 }
 
