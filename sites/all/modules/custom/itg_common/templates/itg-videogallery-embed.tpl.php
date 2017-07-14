@@ -14,13 +14,11 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
 ?>
 <div class="itg-embed-wrapper">
   <h1 class="embed-title"><?php print $title; ?></h1>
-  <div class="itg-embed-photo-wrapper">
-    <?php
+  <?php
     if (!empty($videoids) && $video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] != "migrated") {
       $hide_player = "";
-      $newimageds = '<div class="itg-embed-photo-thumb"><ul class="itg-embed-photo-thumb-slider">';
-      ?>
-      <div class="itg-embed-photo">
+      $newimageds = '<div class="itg-embed-photo-wrapper"><div class="itg-embed-photo-thumb"><ul class="itg-embed-photo-thumb-slider">';
+      ?><div class="itg-embed-photo">
         <ul class="itg-embed-photo-slider">
           <?php
           foreach ($videoids as $keys => $video_value) {
@@ -55,24 +53,14 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 </div>
               </div>  
               <div class="embed-desc"><?php print ucfirst($video_value->field_videogallery_description_value); ?></div>
-<!--              <div class="social-share social-share-embed">
-                <ul>
-                  <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a title="share on facebook" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li>
-                  <li><a title="share on twitter" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="user-activity google def-cur-pointer"></a></li>
-                </ul>
-              </div>-->
             </li>
-
           <?php } ?>
         </ul>
       </div>
       <?php
-      $newimageds .= '</ul></div>';
+      $newimageds .= '</ul></div>  </div>';
     }
     ?>
-
     <?php
     if (!empty($videoids) && count($videoids) > 1) {
       print $newimageds;
@@ -83,7 +71,6 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
       if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
       }
-
       drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
       $hide_player = "";
       $description_slider = "";
@@ -102,7 +89,6 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
           $vid = itg_videogallery_get_videoid($row['fid']);
         }
         $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-
         if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
           $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
         }
@@ -121,10 +107,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
         ?>
           <div class="iframe-video-embed">
-
             <div id="videoplayer_<?php echo $keys; ?>"></div> 
             <script type="text/javascript">
-
               jwplayer('videoplayer_<?php echo $keys; ?>').setup({
                 playlist: [{
                     title: "<?php print $row['title']; ?>",
@@ -160,10 +144,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 }
               });
             </script>
-
           </div>
         </div>
-
         <?php
         $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
       }
@@ -171,5 +153,5 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
       $newimageds .= '</ul></div></div></div>';
     }
     ?>
-  </div>
+
 </div>
