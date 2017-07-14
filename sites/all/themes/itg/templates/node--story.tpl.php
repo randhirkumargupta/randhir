@@ -549,7 +549,7 @@ if (!empty($content)):
                 }
                 if($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
                 ?>
-                <div class="ad-blocker-content"><?php print mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""); ?></div>
+                <div class="ad-blocker-content"><?php print $node->body['und'][0]['value']; ?></div>
                 <?php } ?>
                 <div class="ad-blocker"></div>
               <div class="description">

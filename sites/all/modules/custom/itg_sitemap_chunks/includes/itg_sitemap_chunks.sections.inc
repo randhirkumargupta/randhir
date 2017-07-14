@@ -19,7 +19,7 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     '#tree' => TRUE,
     '#theme' => 'table',
     '#attributes' => array('class' => array("views-table")),
-    '#header' => array(t('Section Name'), t('Day'),  '<div class="hide">' . t('Type') . '</div>', t('Action')),
+    '#header' => array(t('Section Name'), t('Day'), '<div class="hide">' . t('Type') . '</div>', t('Action')),
     '#rows' => array(),
   );
   for ($i = 0; $i < count($sections); $i++) {
@@ -52,10 +52,9 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     );
 
     if (!empty($db_data->section_tid)) {
-      $site_map_link = itg_sitemap_chunks_create_valid_url($sections[$i]->name) . '-sitemap.xml';
+      $site_map_link = FRONT_URL . '/' . itg_sitemap_chunks_create_valid_url($sections[$i]->name) . '-sitemap.xml';
       $action_link = l("View", $site_map_link, array("attributes" => array("target" => "_blank")));
-    }
-    else {
+    } else {
       $action_link = t("N/A");
     }
     // Prepare frequency type

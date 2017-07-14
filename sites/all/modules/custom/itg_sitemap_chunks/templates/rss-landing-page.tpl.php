@@ -44,7 +44,7 @@ $blog_menu = menu_navigation_links('menu-rss-blogs');
   <section class="feed-type">
     <h2 class="link-heading"><?php echo t('All Blogs') ?></h2>
     <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
-    <?php print theme('links__menu_rss_blogs', array('links' => $blogs)); ?>
+    <?php print theme('links__menu_rss_blogs', array('links' => $blog_menu)); ?>
   </section>
 <?php endif; ?>
 
