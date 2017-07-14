@@ -637,7 +637,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 function itg_videogallery_node_publish_to_unpublish($nid) {
   $unp_videos = array();
 // delete deleted video info form itg_solr_video_info
-
   $query = db_select('itg_solr_video_info', 'drd')
       ->fields('drd', array('solr_video_id', 'property', 'fid'));
   $query->condition('nid', $nid);
@@ -1428,8 +1427,8 @@ function itg_videogallery_save_story_video_data($story_body, $nid) {
         ->condition('nid', $nid)
         ->execute();
     foreach ($video_url as $video_value) {
-      $post_check = strpos($video_value, $base_url . '/embeded-video/');
-      $post_video_node = strpos($video_value, $base_url . '/embed-video/');
+      $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embeded-video/');
+      $post_video_node = strpos($video_value, FRONT_URL_VIDEO . '/embed-video/');
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
@@ -1557,7 +1556,7 @@ function itg_videogallery_getsolr_data_publish() {
   if (function_exists('itg_apache_solr_get_site_hash')) {
     $hash = itg_apache_solr_get_site_hash();
   }
-  $all_video_ids = array();
+//  $all_video_ids = array();
   $hashvalue = implode(' OR ', array_keys($hash));
   $str = 'hash:(' . $hashvalue . ')';
   $str_pub = 'sm_field_video_used:(0)';
@@ -1577,7 +1576,7 @@ function itg_videogallery_getsolr_data_publish() {
     foreach ($allData as $datasolr) {
 
       if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
-        $all_video_ids[] = $datasolr->sm_field_video_id;
+        $all_video_ids[] = $datasolr->sm_field_video_id[0];
       }
     }
   }
@@ -1606,7 +1605,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       $video_url = $match[1];
       if (!empty($video_url)) {
         foreach ($video_url as $video_value) {
-          $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id);
+          $post_check = strpos($video_value,  '/embeded-video/' . $story_body_video->video_id);
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
@@ -1643,7 +1642,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $video_url = $match[1];
         if (!empty($video_url)) {
           foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id);
+            $post_check = strpos($video_value,  '/embed-video/' . $story_body_video->video_id);
             if ($post_check) {
               $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id . '" width="648"></iframe>';
               $html = str_replace($ifreame, "", $node_body);
