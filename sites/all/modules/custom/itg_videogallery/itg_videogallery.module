@@ -675,7 +675,7 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
           ->fields(array(
             'dailymotion_published' => 0,
             'is_draft' => 0,
-            'is_node' => 0,
+            'nid' => 0,
           ))
           ->condition('video_id', $unp_videos, 'IN')
           ->execute();
@@ -2765,8 +2765,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
               '/video/' . $dmvid_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
           );
 
-          if ($dm_data['encoding_progress'] == 100 && $dm_data['publishing_progress'] == 100) {
-
+          if ($dm_data['encoding_progress'] == 100 || $dm_data['publishing_progress'] == 100) {
             $query = db_update('dailymotion_response_details');
             $query->fields(array('is_draft' => 0));
             $query->fields(array('dailymotion_published' => 1));
@@ -2807,24 +2806,25 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
     if ($node_flag == 0) {
       $node = node_load($video_id->nid);
+      if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+        if ($node->status == 0) {
+          $node->status = 1;
+        }
 
-      if ($node->status == 0) {
-        $node->status = 1;
-      }
+        if ($node->workbench_moderation['current']->state == 'draft') {
+          //$node->status_cron = 'cron_run';
+          $node->revision = 0;
+        }
 
-      if ($node->workbench_moderation['current']->state == 'draft') {
-        //$node->status_cron = 'cron_run';
-        $node->revision = 0;
-      }
+        if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] == 'low_level') {
 
-      if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] == 'low_level') {
-
-        workbench_moderation_moderate($node, 'needs_review');
+          workbench_moderation_moderate($node, 'needs_review');
+        }
+        else {
+          workbench_moderation_moderate($node, 'published');
+        }
+        node_save($node);
       }
-      else {
-        workbench_moderation_moderate($node, 'published');
-      }
-      node_save($node);
     }
   }
 }
