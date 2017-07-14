@@ -480,6 +480,7 @@ function itg_sitemap_chunks_setting_form() {
     '#default_value' => variable_get('itg_sitemap_chunks_number', 50000),
     '#size' => 20,
     '#maxlength' => 20,
+    '#description' => 'Enter Number of chunks',
   );
   $form['itg_sitemap_exclude_nid'] = array(
     '#type' => 'textarea',
@@ -502,6 +503,7 @@ function itg_sitemap_mixedcontent_setting_form() {
     '#default_value' => variable_get('itg_sitemap_chunks_number_for_sitemap', 2000),
     '#size' => 20,
     '#maxlength' => 20,
+    '#description' => 'Enter Number of chunks',
   );
   return system_settings_form($form);
 }
@@ -517,6 +519,7 @@ function itg_sitemap_chunks_s3_bucket_setting_form() {
     '#default_value' => !empty(SITEMAP_BUCKET) ? SITEMAP_BUCKET : "sitemapxml_others",
     '#size' => 20,
     '#maxlength' => 20,
+    '#description' => 'Enter Sitemap xmls creation directory',
   );
   return system_settings_form($form);
 }

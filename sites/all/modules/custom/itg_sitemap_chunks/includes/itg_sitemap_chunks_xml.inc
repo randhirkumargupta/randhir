@@ -310,8 +310,8 @@ function itg_sitemap_chunks_create_xml_sitemap_for_live_blog() {
   $query->leftJoin('field_data_field_type', 'fdft', 'fdft.entity_id = n.nid');
   $query->fields('n', array('nid'));
   $query->condition('fdft.field_type_value', 'Live Blog');
-  //Condition to get nodes created on previous 2 days.
-  $query->condition('n.created', array(strtotime('-2 day'), REQUEST_TIME), 'BETWEEN');
+  //Condition to get nodes created on previous 2 days. i.e. one current date and second previus day.
+  $query->condition('n.created', array(strtotime('-1 day'), REQUEST_TIME), 'BETWEEN');
   $query->condition('n.status', 1);
   $query->orderBy('n.nid', 'DESC');
   $query->range(0, $limit);
