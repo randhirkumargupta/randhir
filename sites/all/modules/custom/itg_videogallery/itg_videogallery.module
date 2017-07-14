@@ -2768,8 +2768,8 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
           if ($dm_data['encoding_progress'] == 100 || $dm_data['publishing_progress'] == 100) {
             $query = db_update('dailymotion_response_details');
-            $query->fields(array('is_draft' => 0));
-            $query->fields(array('dailymotion_published' => 1));
+            //$query->fields(array('is_draft' => 0));
+            $query->fields(array('dailymotion_published' => 1,'is_draft'=>0));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
 
