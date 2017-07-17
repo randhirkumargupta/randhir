@@ -1307,11 +1307,43 @@ function itg_rapid_api_resource() {
                             'type' => 'string',
                         ),
                         array(
-                            'name' => 'location',
+                            'name' => 'country',
                             'optional' => FALSE,
                             'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'description' => 'location',
+                            'description' => 'country',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'state',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'state',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'city',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'city',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'zipcode',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'zipcode',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'address',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'address',
                             'type' => 'string',
                         ),
                         array(
@@ -1458,6 +1490,92 @@ function itg_rapid_api_resource() {
                             'source' => array('path' => 0),
                             'optional' => TRUE,
                             'default' => '*',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // get_preference custom resource declaration.....
+        'get_preference' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves get_preference schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_get_preference',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'authtoken_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'authtoken_id',
+                            'type' => 'string',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // update_preference custom resource declaration.....
+        'update_preference' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves update_preference schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_update_preference',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'authtoken_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'authtoken_id',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'user_id',
@@ -2923,4 +3041,135 @@ function itg_rapid_api_log_out($token) {
     $data['status_message'] = "customised_message";
 
     return $data;
+}
+
+/**
+ * function for itg_rapid_api_get_preference
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_get_preference($token) {
+    $user_id = $_GET['user_id'];
+    $account = user_load_by_name($user_id);
+
+    $user_id = $account->uid;
+    $last_access = $account->access;
+    $last_access_date = date('Y-m-d h:m:s', $last_access);
+    $weight_count_loop = FALSE;
+    $tid_array = array();
+    $tid_value = array();
+    $data = array();
+    // As in table itg_widget_order tid is saved in nid colom.
+    // So join field_story_category_tid join is applied on nid.
+    // get personalization-preferences tid 
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->fields('iwo', array('weight', 'nid'))
+            ->condition('iwo.widget', "personalization_widget")
+            ->condition('iwo.extra', $user_id)
+            // Orderby weight or taxonomyterm id.
+            ->orderBy('iwo.weight', 'DESC')
+            ->orderBy('iwo.nid', 'DESC')
+            ->range(0, 30);
+    $result = $query->execute()->fetchAllAssoc('nid');
+    $new_array_of_terms = array_keys($result);
+    // case handled if perferences is not saved.
+    if (count($result) == 0) {
+        $weight_count_loop = TRUE;
+        $query = db_select('itg_widget_order', 'iwo');
+        $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
+        $query->fields('iwo', array('cat_id'))
+                ->condition('iwo.widget', "section_wise_widget")
+                ->condition('fc.field_set_as_featured_cate_value', 'Yes')
+                ->groupBy('iwo.cat_id')
+                ->range(0, 30);
+        $result = $query->execute()->fetchAllAssoc('cat_id');
+    }
+    if ($weight_count_loop) {
+        $new_array_of_terms = array();
+        // Get only tids.
+        $tids_array = array_keys($result);
+        foreach ($tids_array as $term_id) {
+            $new_array_of_terms[$term_id] = count_node_under_tid($term_id);
+        }
+        krsort($new_array_of_terms);
+    }
+    $tid_array = ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
+    // return data of personalization-preferences value
+    $data['status_code'] = "1";
+    $data['status_message'] = "customised_message";
+    $data['data']['updated_datetime'] = "$last_access_date";
+    $data['data']['preference_type'] = "default/implicit/explicit";
+    $loop_count = 0;
+    //get personalization-preferences value
+    foreach ($tid_array as $key => $value) {
+        $prefeance = itg_rapid_api_get_personalization_saved_value($value, $user_id);
+        $term = taxonomy_term_load($value);
+        $term_name = $term->name;
+        $data['data']['preference'][$loop_count]['id'] = "$value";
+        $data['data']['preference'][$loop_count]['title'] = "$term_name";
+        $data['data']['preference'][$loop_count]['is_preffered'] = "$prefeance";
+        $loop_count++;
+    }
+
+    return $data;
+}
+
+/**
+ * 
+ * @param int $tid
+ * @return array
+ */
+function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->addField('iwo', 'weight');
+    $query->condition('iwo.nid', $tid);
+    $query->condition('iwo.extra', $uid);
+    return $query->execute()->fetch();
+}
+
+/**
+ * function for itg_rapid_api_update_preference
+ * @param array
+ * @return array
+ * 	
+ */
+function itg_rapid_api_update_preference($token) {
+    echo "<pre>";
+    print_r($_GET);
+    echo "</pre>";
+    exit();
+   
+}
+
+/**
+ * 
+ * @param int $tid
+ * @return array
+ */
+function update_preference($user_id, $tid){
+     global $user;
+    $widget_name = "personalization_widget";
+
+    $nids = array_keys($updates);
+    // Delete all the tids from table if they are not in $updates variable
+    // unsued tid should be delete
+    db_delete('itg_widget_order')
+            ->condition('widget', $widget_name)
+            ->condition('nid', $nids, "NOT IN")
+            ->condition('extra', $user->uid)
+            ->execute();
+    // Update the weight of tids if exists or insert if dont exists.
+    foreach ($updates as $term_id => $weight) {
+        db_merge('itg_widget_order')
+                ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
+                ->fields(array(
+                    'nid' => $term_id,
+                    'widget' => $widget_name,
+                    'weight' => $weight,
+                    'extra' => $user->uid,
+                ))
+                ->execute();
+    }
+    drupal_set_message(t("My Preferences Has Been Save."));
 }
