@@ -258,11 +258,11 @@
         background: #b00808;
         display: inline-block;
         vertical-align: top;
-        padding: 5px 20px;
-        font-size: 28px;
+        padding: 5px 10px;
+        font-size: 22px;
         font-weight: 700;
         color: #fff;
-        line-height: 28px;
+        line-height: 20px;
         position: absolute;
         bottom: 100%;
         left: 0;
