@@ -308,22 +308,29 @@ function generatePhotoDetailList($galleryimg) {
     // loop on gallery img
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      
-      $fc = field_collection_field_get_entity($value);       
+      //echo "<pre>"; print_r($value);  echo "</pre>"; exit();
+      // get img url start
+     // $field_story_large_image_fid = field_data_field_story_large_image($value['value']);
+      // get img url end
+      $fc = field_collection_field_get_entity($value);  
+      //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
       $fid = $fc->field_api_image['und'][0]['fid'];
       $uri = $fc->field_api_image['und'][0]['uri'];
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
       // custom function for get img caption
-      $caption = getImgCaption($fid);
+      //$caption = getImgCaption($fid);
+      $caption = $fc->field_image_caption['und'][0]['uri'];
       // custom function for get img byline
-      $byline = getImgByline($fid);
+      //$byline = getImgByline($fid);
+      $byline = $fc->field_photo_byline['und'][0]['uri'];
+      
       if (!$byline) {
         // $byline = "";
       }
       $photo_list_array[$listcont]['p_id'] = "$fid";
-      $photo_list_array[$listcont]['p_image'] = "$img_url";
+      $photo_list_array[$listcont]['p_image'] = "$file_uri";
       $photo_list_array[$listcont]['p_credit'] = "$byline";
       $photo_list_array[$listcont]['p_caption'] = "$caption";
       $listcont++;
@@ -519,4 +526,18 @@ function generateAuthorTag($node) {
   $output['a_image'] = "";
   $output['a_twitter_handler'] = "$field_itg_common_by_line_twitter";
   return $output;
+}
+
+/**
+ * function for generate photo list array
+ *
+ * @return array
+ */
+
+function field_data_field_story_large_image($rvid){
+    $query = db_select('field_data_field_story_large_image', 'lid');
+    $query->fields('lid', array('field_story_large_image_fid'));
+    $query->condition('lid.entity_id', $rvid);    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['field_story_large_image_fid'];
 }
