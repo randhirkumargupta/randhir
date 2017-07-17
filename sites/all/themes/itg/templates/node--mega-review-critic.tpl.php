@@ -371,7 +371,6 @@
                       } else {
                        $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg'; 
                       }
-                      print $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
                       $small_image = '<img src="' . $final_image . '" alt="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
