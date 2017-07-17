@@ -2,7 +2,7 @@
     function callNow()
     {
         document.frm.method = "POST";
-        document.frm.action = "<?php print $data->payment_url;?>"
+        document.frm.action = "<?php print $data->payment_url; ?>"
         document.frm.submit();
     }
     setTimeout(function () {

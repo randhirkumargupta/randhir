@@ -9,8 +9,8 @@
  * This is used for be lucky today form validation
  */
 jQuery(document).ready(function () {
-    var str_pattern = /^[a-zA-Z]+$/;
-    var address_pattern = /^[-\/a-zA-Z]+$/;
+    var str_pattern = /^[a-zA-Z\s]+$/;
+    var address_pattern = /^[-\/a-zA-Z\s]+$/;
     jQuery('.itg_be_lucky_today .next').click(function (event) {
         if (jQuery('.itg_be_lucky_today [name="yourname"]').val().trim().length < 2) {
             alert(Drupal.t('Please enter your name'));
@@ -363,14 +363,14 @@ jQuery(document).ready(function () {
             jQuery(".itg_be_lucky_today #selected_magazine_name").val(magazine_name);
         }
     });
-     jQuery('.itg_be_lucky_today .magazine').click(function (event) {
-         if (jQuery('.itg_be_lucky_today #edit-select-payment').val() == 0) {
-                alert(Drupal.t('Please select payment option'));
-                jQuery('.itg_be_lucky_today #edit-select-payment').focus();
-                return false;
-            }
-         return true;
-     });
+    jQuery('.itg_be_lucky_today .magazine').click(function (event) {
+        if (jQuery('.itg_be_lucky_today #edit-select-payment').val() == 0) {
+            alert(Drupal.t('Please select payment option'));
+            jQuery('.itg_be_lucky_today #edit-select-payment').focus();
+            return false;
+        }
+        return true;
+    });
 
 });
 
@@ -380,6 +380,5 @@ function fbs_click()
     u = "bit.ly/Social_sharing";
     t = "test title";
     window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436');
-    console.log('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t));
     return false;
 }

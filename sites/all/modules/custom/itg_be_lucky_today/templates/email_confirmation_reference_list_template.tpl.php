@@ -3,9 +3,9 @@ global $base_url;
 ?>
 <div class="body-center"> <a href="/" title="India Today Group" class="logo">
         <img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today'); ?>/images/logo.png" alt="India Today Group"></a> <span class="clear"></span>
-    <h1>Be Lucky Today</h1>
-    <h2 class="ytext">Thank You<br>
-        for your Participation. </h2>
+    <h1><?php t("Be Lucky Today");?></h1>
+    <h2 class="ytext"><?php t("Thank You");?><br>
+        <?php t("for your Participation.");?> </h2>
     <br>
     <ul class="social" style="width:156px;">
         <li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today'); ?>/images/fb.png" alt="facebook"></a></li>
