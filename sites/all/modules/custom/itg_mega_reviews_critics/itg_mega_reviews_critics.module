@@ -40,8 +40,25 @@ function itg_mega_reviews_critics_views_pre_render(&$view) {
  */
 function itg_mega_reviews_critics_form_mega_review_critic_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#after_build'][] = 'itg_mega_reviews_critics_form_after_build';
+  $form['#validate'][] = 'itg_mega_reviews_node_form_custom_validate';
   $form['actions']['submit']['#submit'][] = 'itg_mega_reviews_critics_form_custom_callback';
   $form['actions']['itg_custom_button']['#submit'][] = 'itg_mega_reviews_critics_form_draft_callback';
+}
+
+
+/**
+ * Implements hook_form_validate().
+ * {@inheritdoc} 
+ */
+function itg_mega_reviews_node_form_custom_validate($form, &$form_state) {
+  $lang = isset($form_state['values']['language']) ? $form_state['values']['language'] : LANGUAGE_NONE;
+  foreach ($form_state['values']['field_mega_review_review'][$lang] as $key_time => $val_time) {
+    if ($key_time === 'add_more')
+      continue; // skip loop if key is add_more
+    if (empty($val_time['field_story_reporter'][$lang][0]['target_id']) || !is_numeric($val_time['field_story_reporter'][$lang][0]['target_id'])) {
+      form_set_error('field_mega_review_review][' . $lang . '][' . $key_time . '][field_story_reporter', t('Please enter valid Reviewer for row[' . ($key_time + 1) . ']'));
+    }
+  }
 }
 
 /**
