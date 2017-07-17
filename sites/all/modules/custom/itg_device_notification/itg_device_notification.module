@@ -1,0 +1,23 @@
+<?php 
+
+/**
+ * @file
+ * The ITG Device Notification.
+ *
+ * Contains functionality for Generating the XML Feed for Notifications,
+ */
+
+/**
+ * Implements hook_menu().
+ */
+
+function itg_device_notification_menu() {
+  $items['notification_old'] = array(
+    'title' => 'Device Notification',
+    'page callback' => 'notification_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  return $items;
+} 
+
