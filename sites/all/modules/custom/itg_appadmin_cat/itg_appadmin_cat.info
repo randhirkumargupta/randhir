@@ -1,5 +1,5 @@
 name = ITG App Admin Cat Management
-description = "ITG APP Admin Category Management."
+description = "ITG APP Admin Category Management. "
 core = 7.x
 package = ITG
 
