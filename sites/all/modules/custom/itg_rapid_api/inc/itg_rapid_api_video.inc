@@ -189,7 +189,10 @@ if($term_tree_count){
       $load_collection = field_collection_item_load($field_video_upload);
       
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+      
       $video_formats = all_video_format($video_formats);
+      $dm_video_id = fid_videoid($daily_motion_fid);
+      
       
       $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
       
@@ -262,6 +265,20 @@ if($term_tree_count){
 
 
   return $data;
+}
+
+/*
+ * fid to videoid
+ * 
+ */
+
+function fid_videoid($video_fid){
+  
+  $qry = db_select('dailymotion_response_details','dr')
+        ->fields('dr',array('video_id'))
+        ->condition('dr.fid',$video_fid)
+       ->execute()->fetchField();
+   return $qry;
 }
 
 
