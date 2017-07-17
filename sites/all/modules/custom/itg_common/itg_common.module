@@ -946,19 +946,6 @@ function itg_draft_form_custom_callback($form, &$form_state) {
 }
 
 /**
- * After submit callback for draft
- * @param array $form
- * @param array $form_state
- */
-function itg_apply_form_custom_callback($form, &$form_state) {
-  if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
-}
-
-/**
  * Helper function to get photogallery.
  */
 function itg_photogallery_embed() {
