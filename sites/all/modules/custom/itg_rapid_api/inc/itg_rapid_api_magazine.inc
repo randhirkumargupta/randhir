@@ -541,8 +541,10 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
   $query_issue->fields('fsit', array('field_issue_title_value'));
   $query_issue->fields('n', array('nid'));
+  
+  //condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
 
-  $query_issue->condition('n.created', $sdate_fi, '>=')->condition('n.created', $tdate_fi, '<=')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+  $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result_issue as $reskey => $resvalue) {
 
