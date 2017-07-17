@@ -3399,7 +3399,18 @@
     padding-bottom: 72.2%;
   }
   
-  .sso-header + #page{height: auto;}
+  .sso-header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    & + #page{
+      min-height: calc(100% - 109px);
+      height: auto;
+      padding-top: 94px;
+    }
+  }
     .sso-footer{margin-top: 30px;}
     #itg_user_forgot_password_multistep_form .form-wrapper{text-align: center;}
     .page-forgot-password [id*="itg_user_forgot_password_multistep_form"] .form-type-textfield{max-width: 300px; margin: 0 auto;}
@@ -3551,5 +3562,8 @@
           height: 127px;
           float: left;
           img{height: auto !important;}
+        }
+        .sso-header{
+          position: absolute;
         }
     }

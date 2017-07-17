@@ -3469,8 +3469,17 @@
   padding-bottom: 72.2%;
 }
 
+.sso-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
 .sso-header + #page {
+  min-height: calc(100% - 109px);
   height: auto;
+  padding-top: 94px;
 }
 
 .sso-footer {
@@ -3679,5 +3688,9 @@
   }
   .view-front-end-global-search .view-content .search-pic img {
     height: auto !important;
+  }
+
+  .sso-header {
+    position: absolute;
   }
 }
