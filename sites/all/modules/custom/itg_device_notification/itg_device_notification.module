@@ -19,5 +19,5 @@ function itg_device_notification_menu() {
     'type' => MENU_SUGGESTED_ITEM,
   );
   return $items;
-}
+} 
 
