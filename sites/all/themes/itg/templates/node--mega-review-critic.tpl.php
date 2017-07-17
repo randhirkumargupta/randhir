@@ -127,21 +127,21 @@
         </div>    
         
         <div class="movie-review-text">
-            <?php $cast_name = render($content['field_mega_review_cast']); ?>
+            <?php $cast_name = $node->field_mega_review_cast['und'][0]['entity']->title; ?>
             <?php if (!empty($cast_name)): ?>
             <div class="review-row">
                 <dfn class="review-label"><?php print t('Cast :'); ?></dfn>
                 <span class="review-txt"><?php print $cast_name; ?></span>
             </div>
             <?php endif; ?>
-            <?php $director = render($content['field_mega_review_director']); ?>
+            <?php $director = $node->field_mega_review_director['und'][0]['value']; ?>
             <?php if (!empty($director)): ?>
             <div class="review-row">
                 <dfn class="review-label"><?php print t('Director :'); ?></dfn>
                 <span class="review-txt"><?php print $director; ?></span>
             </div>
             <?php endif; ?>
-            <?php $plot = render($content['field_mega_review_movie_plot']); ?>
+            <?php $plot = $node->field_mega_review_movie_plot['und'][0]['value']; ?>
             <?php if (!empty($plot)): ?>
             <div class="review-row">
                 <dfn class="review-label"><?php print t('Plot :'); ?></dfn>
@@ -337,8 +337,11 @@
                       <h3><span>MOVIE VIDEOS</span></h3>
                       <?php
                       $video_node = node_load($asso_vid_id);
+                      if(!empty($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
-
+                      } else {
+                      $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
+                      }
                       $large_image = '<img src="' . $final_image . '" alt="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
@@ -363,8 +366,12 @@
                       <h3><span><?php print t('PHOTOS'); ?></span></h3>
                       <?php
                       $photo_node = node_load($asso_photo_gallery);
+                      if(!empty($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
-
+                      } else {
+                       $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg'; 
+                      }
+                      print $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
                       $small_image = '<img src="' . $final_image . '" alt="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
