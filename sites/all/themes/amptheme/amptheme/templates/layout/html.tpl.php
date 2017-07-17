@@ -66,7 +66,7 @@
     <style amp-custom>
 
       *{margin: 0; padding: 0; box-sizing: border-box; outline: none; border: none;}
-      body{font: 400 14px/18px 'Roboto Slab';}
+      body{font: 400 14px/18px 'Roboto Slab'; color: #333;}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
@@ -118,29 +118,30 @@
         border-top: 1px solid #ccc;
       }
       .story-section .listicle-page .listicle-detail > span {
-        width: 34px;
-        height: 34px;
+        width: 24px;
+        height: 24px;
         background: #a00606;
         border-radius: 100%;
-        font-size: 24px;
+        font-size: 14px;
         text-align: center;
-        line-height: 34px;
+        line-height: 24px;
         color: #fff;
         font-weight: 700;
-        margin: 10px 10px 0 0;
+        margin: 20px 0 0 0;
         float: left;
       }
       .story-section .listicle-page .listicle-detail > span.bullet_points {
         width: 10px;
         height: 10px;
         line-height: 10px;
-        margin-top: 22px;
+        margin-top: 27px;
       }
       .story-section .listicle-page .listicle-detail .listicle-description {
-        font-size: 16px;
+        font-size: 14px;
         color: #282828;
         padding: 18px 10px;
         overflow: hidden;
+        line-height: 24px;
       }
       .story-section .listicle-page .listicle-detail .listicle-description span {
         font-weight: 600;
