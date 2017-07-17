@@ -583,6 +583,7 @@ function generateProgramSectionList($Program_section_list){
     $output_ar = array();
     $listcount = 0;
     foreach ($Program_section_list as $key => $value){
+        $value = (int) $value;
         $term = taxonomy_term_load($value);
         $update_time = getLatestNodeTime($term->tid);
         $term_name = $term->name;
