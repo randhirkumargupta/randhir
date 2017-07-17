@@ -148,7 +148,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
 function all_video_format($file_id) {
   $query = db_select('dailymotion_response_details', 'avf');
   $query->innerJoin('itg_video_bitrates_data', 'dma', 'dma.video_id = avf.video_id');
-  $query->fields('dma', array('responce'));
+  //$query->fields('dma', array('responce'));// bitate_url
+  $query->fields('dma', array('bitate_url'));// bitate_url
   $query->condition('avf.fid', $file_id);
   $all_result = $query->execute()->fetchField();
   return $all_video_data = json_decode($all_result, TRUE);
