@@ -11825,6 +11825,9 @@ h1.about-us-heading + div p {
 /*css end related content*/
 /*css start factoids-slider*/
 .factoids-page {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   margin: 20px 0 10px 0;
 }
 .factoids-page ul {
@@ -11869,7 +11872,11 @@ h1.about-us-heading + div p {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .factoids-page .fun-facts, .factoids-page .social-share {
-  display: inline-block;
+  display: inline;
+}
+.factoids-page .fun-facts h2, .factoids-page .fun-facts ul, .factoids-page .social-share h2, .factoids-page .social-share ul {
+  display: inline;
+  padding-left: 0;
 }
 .factoids-page h3 {
   color: #000;
