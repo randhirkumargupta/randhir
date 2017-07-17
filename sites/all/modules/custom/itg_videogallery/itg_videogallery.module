@@ -1959,16 +1959,19 @@ function delete_daily_motion_video_callback() {
  * @return boolean
  */
 function itg_videogallery_apachesolr_node_exclude($nid) {
-  $node = node_load($nid);
+  if (!empty($nid)) {
+    $node = node_load($nid);
+    $env_id = apachesolr_default_environment();
 // Get field value (respecting the fild language).
-  $node_wrapper = entity_metadata_wrapper('node', $node);
+    $node_wrapper = entity_metadata_wrapper('node', $node);
 // Delete node from Index, in case it was indexed before.
-  apachesolr_remove_entity($env_id, 'node', $nid);
+    apachesolr_remove_entity($env_id, 'node', $nid);
 // Return TRUE to exclude node from indexing.
-  return TRUE;
+    return TRUE;
 
 
-  return FALSE;
+    return FALSE;
+  }
 }
 
 /**
