@@ -241,18 +241,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title($edit_title);
   }
 
-  // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
-    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
-      $form['actions']['itg_custom_apply_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Apply'),
-        '#id' => 'btn-apply',
-        '#submit' => array('node_form_submit', 'itg_story_form_custom_callback'),
-        '#weight' => -8,
-      );
-    }
-  }
+  
   
   if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
     if (isset($form['title']['#title'])) {
