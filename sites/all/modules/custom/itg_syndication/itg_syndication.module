@@ -586,3 +586,18 @@ function replace_charcters_for_syndication_file($original_string) {
   $replaced_string    = str_replace($some_special_chars, $replacement_chars, $original_string);
   return $replaced_string;
 }
+
+
+function itg_syndication_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  if($form['#term']['vocabulary_machine_name'] == 'client_title') {
+    $form['#validate'][] =  'itg_syndication_client_title_validate';
+  }
+}
+
+function itg_syndication_client_title_validate($form , &$form_state) {
+  $client_title = $form_state['values']['name'];
+  if(strpos($client_title, "-")) {
+    drupal_add_css("fieldset#edit-relations {display:none !important}" , "inline");
+    form_set_error('name' , t('(hyphen) - is not allowed in client name'));
+  }
+}
