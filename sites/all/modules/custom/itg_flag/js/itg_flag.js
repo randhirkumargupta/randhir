@@ -170,6 +170,19 @@ jQuery(document).ready(function () {
                         title: 'Follow the Story'
                     }).html('Follow the Story');
                 }
+                 // case for follow anchor
+                if (obj.success == 1 && obj.activity == 'follow_anchor') {
+                    jQuery(".follow-anchor a").attr({
+                        'data-status': 0,
+                        title: 'Unfollow Anchor'
+                    }).html('Unfollow Anchor');
+                }
+                if (obj.success == 0 && obj.activity == 'follow_anchor') {
+                    jQuery(".follow-anchor a").attr({
+                        'data-status': 1,
+                        title: 'Follow the Anchor'
+                    }).html('Follow the Anchor');
+                }
                 if (obj.error == 'error') {
 
                 }
