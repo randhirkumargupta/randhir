@@ -2605,7 +2605,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-itg_videogallery_getsolr_data_publish();
+//itg_videogallery_getsolr_data_publish();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
