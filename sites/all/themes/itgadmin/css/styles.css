@@ -4501,6 +4501,7 @@ div.node #comments h2 {
 
 .tabledrag-changed-warning {
   margin: 10px 0;
+  padding: 0 10px;
 }
 
 /* UGC comment CSS */
@@ -10095,7 +10096,7 @@ div.node #comments h2 {
 .node-videogallery-form [id*="field-video-upload-values"] tr.odd {
   background-color: #eee;
 }
-.node-videogallery-form [id*="field-video-upload-values"] tr.odd {
+.node-videogallery-form [id*="field-video-upload-values"] tr.even {
   background-color: #f0f8ff;
 }
 .node-videogallery-form [id*="field-video-upload-values"] tr.drag-previous {
@@ -10621,7 +10622,7 @@ div.node #comments h2 {
   left: 290px !important;
 }
 #videoupload .ftp_browse_field {
-  margin: 10px 0 0;
+  margin: 10px;
   position: relative;
 }
 
