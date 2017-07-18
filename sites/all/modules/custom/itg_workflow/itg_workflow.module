@@ -565,7 +565,11 @@ function itg_workflow_after_build($form, &$form_state) {
  * @param object $node
  */
 function itg_workflow_node_presave($node) {
+
   //set custom path alias  
+     if ($node->type == 'story') {
+    itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
+  }
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
@@ -929,9 +933,7 @@ function itg_workflow_node_update($node) {
     }
   }
   global $user;
-  if ($node->type == 'story') {
-    itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
-  }
+ 
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
     return;
