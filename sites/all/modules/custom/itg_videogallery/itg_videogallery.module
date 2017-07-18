@@ -1597,7 +1597,6 @@ function itg_videogallery_getsolr_data_publish() {
       }
     }
   }
-  p($all_video_ids);
   return $all_video_ids;
 }
 
@@ -2987,7 +2986,6 @@ function itg_videogallery_thumb_assign() {
           $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
           field_attach_update('node', $node);
         }
-
         if ($node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == 0 || $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] == "") {
           $file_image = file_load($file_data_temp->fid);
           $image = image_load($file_image->uri);
