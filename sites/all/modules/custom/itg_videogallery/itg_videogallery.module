@@ -658,7 +658,7 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
   field_attach_update('node', $node);
 
   foreach ($result as $un_video) {
-    if ($unp_videos->property == VIDEO_PROPERTY) {
+    if ($un_video->property == VIDEO_PROPERTY) {
       $api = itg_videogallery_dailymotion_api();
       $api->post('/video/' . $un_video->solr_video_id . '?private=true');
     }
