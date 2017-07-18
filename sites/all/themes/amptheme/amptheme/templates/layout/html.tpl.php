@@ -66,13 +66,14 @@
     <style amp-custom>
 
       *{margin: 0; padding: 0; box-sizing: border-box; outline: none; border: none;}
-      body{font: 400 14px/18px 'Roboto Slab';}
+      body{font: 400 14px/18px 'Roboto Slab'; color: #333;}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
       p{line-height: 24px; margin: 10px 0; white-space: normal;}
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
+      .node-type-videogallery #main-wrapper{padding: 0;}
       #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
@@ -118,29 +119,30 @@
         border-top: 1px solid #ccc;
       }
       .story-section .listicle-page .listicle-detail > span {
-        width: 34px;
-        height: 34px;
+        width: 24px;
+        height: 24px;
         background: #a00606;
         border-radius: 100%;
-        font-size: 24px;
+        font-size: 14px;
         text-align: center;
-        line-height: 34px;
+        line-height: 24px;
         color: #fff;
         font-weight: 700;
-        margin: 10px 10px 0 0;
+        margin: 20px 0 0 0;
         float: left;
       }
       .story-section .listicle-page .listicle-detail > span.bullet_points {
         width: 10px;
         height: 10px;
         line-height: 10px;
-        margin-top: 22px;
+        margin-top: 27px;
       }
       .story-section .listicle-page .listicle-detail .listicle-description {
-        font-size: 16px;
+        font-size: 14px;
         color: #282828;
         padding: 18px 10px;
         overflow: hidden;
+        line-height: 24px;
       }
       .story-section .listicle-page .listicle-detail .listicle-description span {
         font-weight: 600;
@@ -257,11 +259,11 @@
         background: #b00808;
         display: inline-block;
         vertical-align: top;
-        padding: 5px 20px;
-        font-size: 28px;
+        padding: 5px 10px;
+        font-size: 22px;
         font-weight: 700;
         color: #fff;
-        line-height: 28px;
+        line-height: 20px;
         position: absolute;
         bottom: 100%;
         left: 0;
@@ -330,6 +332,7 @@
         padding: 20px 20px 20px 0;
         display: inline-block;
       }
+      .amp-photo-slider{overflow: hidden;}
       .amp-photo-slider .photo-slide .caption{
         width: auto;
       }
@@ -369,7 +372,11 @@
         padding: 5px;
         left: 0;
         background-color: rgba(0,0,0,.6);
-        color: #aeaeae;
+        color: #fff;
+        font-size: 12px;
+        .fa{
+          font-size: 14px;
+        }
       }
       .other-date{
         display: block;
@@ -521,7 +528,10 @@
       #navbar .social-share .share-link a + a{margin-left: 10px;}
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery .front-end-breadcrumb, 
-      .node-type-videogallery .front-end-breadcrumb{background-color: #171717; padding-bottom: 0;}
+      .node-type-videogallery .front-end-breadcrumb{background-color: #171717; padding-bottom: 0; margin: 0;}
+      .node-type-photogallery .front-end-breadcrumb .black-box, 
+      .node-type-videogallery .front-end-breadcrumb .black-box{margin-left: 0; margin-right: 0;}
+      .node-type-photogallery .amp-other-gallery, .node-type-videogallery .amp-other-gallery {padding: 0 12px;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
       .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
       .buzz-img .social-share ul{list-style: none; top: -22px; left: 22px; height: 22px; background-color: #222; width: 70px; padding: 2px 0 0 3px;}

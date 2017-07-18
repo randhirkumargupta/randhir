@@ -9793,14 +9793,22 @@ h1.about-us-heading{
 
 /*css start factoids-slider*/
 .factoids-page{
-    @include social-share;    
-    margin:20px 0 10px 0;
-    .fun-facts, .social-share{
-        display: inline-block;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  @include social-share;    
+  margin:20px 0 10px 0;
+  .fun-facts, .social-share{
+    display: inline;
+    h2, ul{
+      display: inline;
+      padding-left: 0;
     }
-    h3{
-        color:#000;
-    }
+  }
+  
+  h3{
+      color:#000;
+  }
 }
 .factoids-slider{
     ul{        

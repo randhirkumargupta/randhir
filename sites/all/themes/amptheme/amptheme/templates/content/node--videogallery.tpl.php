@@ -108,7 +108,7 @@ if (function_exists('get_other_gallery_amp')) {
       $path_alias = $base_url.'/amp/'.$alias;
       $title = l($value['title'], $path_alias, array("attributes" => array("title" => $value['title'])));
       $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '"></amp-img></a>';
-      $other_video_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-play" aria-hidden="true"></i> ' . $video_time[0]['field_video_duration_value'] . '</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
+      $other_video_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-play-circle" aria-hidden="true"></i> ' . $video_time[0]['field_video_duration_value'] . '</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
     }
     $other_video_gallery .= '</ul>';
     print $other_video_gallery;
