@@ -9455,7 +9455,7 @@ div.node #comments h2 {
 .node-type-photogallery .action-with-title #page-title,
 .page-taxonomy-term-edit .action-with-title #page-title,
 .page-admin-structure-taxonomy-category-management .action-with-title #page-title {
-  width: 500px;
+  width: 400px;
 }
 .page-node-add-story .action-with-title.fixed,
 .node-type-story .action-with-title.fixed,
