@@ -475,6 +475,24 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
    }
 }
 
+/*
+ * Function to get Story type on behalf of Node nid i.e. photostory or normal story
+ * @param int $nid
+ * @return String 
+ */
+function getStoryType($nid) {  
+  $query = db_select('node','n');
+  $query->Join('field_data_field_story_type','st','st.entity_id = n.nid');
+  $query->fields('st',array('field_story_type_value'));
+  $query->condition('st.entity_id',$nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $type = 'story';
+  if($result[0]['field_story_type_value'] == 'photo_story'){
+    $type = 'photostory';
+  }
+  return $type;
+}
+
 /**
  * Implements hook_boot().
  */

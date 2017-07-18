@@ -156,11 +156,12 @@ if($term_tree_count){
     foreach ($result as $reskey => $resvalue) {
 
       // node feed tag
-      
-      
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
+      if ($type == 'story') {
+          $type = getStoryType($nid);
+      }
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
