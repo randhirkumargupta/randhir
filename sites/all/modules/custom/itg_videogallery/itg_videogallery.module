@@ -216,18 +216,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form':
       $arg = arg(2);
       $form['field_story_expert_description']['und'][0]['#format'] = 'full_html';
-      // apply button for editor and siteadmin role
-      if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
-        if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'videogallery' && $form['#node']->status == '1') {
-          $form['actions']['itg_custom_apply_video_button'] = array(
-            '#type' => 'submit',
-            '#value' => t('Apply'),
-            '#id' => 'btn-apply',
-            '#submit' => array('node_form_submit', 'itg_videogallery_submit_status_message'),
-            '#weight' => -8,
-          );
-        }
-      }
+     
     // checked comment box by default
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
@@ -1224,6 +1213,18 @@ function itg_videogallery_custom_validate($form, &$form_state) {
 function itg_videogallery_after_build($form, &$form_state) {
   $arg = arg(2);
   global $user, $base_url;
+   // apply button for editor and siteadmin role
+      if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
+        if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'videogallery' && $form['#node']->status == '1') {
+          $form['actions']['itg_custom_apply_video_button'] = array(
+            '#type' => 'submit',
+            '#value' => t('Apply'),
+            '#id' => 'btn-apply',
+            '#submit' => array('node_form_submit', 'itg_videogallery_submit_status_message'),
+            '#weight' => -8,
+          );
+        }
+      }
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -1596,6 +1597,7 @@ function itg_videogallery_getsolr_data_publish() {
       }
     }
   }
+  p($all_video_ids);
   return $all_video_ids;
 }
 
@@ -2604,7 +2606,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-
+itg_videogallery_getsolr_data_publish();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
