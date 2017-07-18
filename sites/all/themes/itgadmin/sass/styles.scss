@@ -9517,6 +9517,14 @@ div.node{
       }
     }
   }
+  [id*="field-video-upload-values"]{
+    tr td{padding-bottom: 10px;}
+    tr.odd{background-color: #eee;}
+    tr.odd{background-color: #f0f8ff;}
+    tr.drag-previous {
+    background-color: #f5f5dc;
+}
+  }
 }
 [id*="edit-field-story-reporter"], 
 [id*="field-video-anchor-values"]{
