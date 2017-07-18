@@ -450,9 +450,9 @@ function _apachesolr_index_process_entity_get_document($entity, $entity_type) {
   }
      
   $document->id = apachesolr_document_id($entity_id, $entity_type);
-  //$document->site = url(NULL, $url_options);
+  $document->site = url(NULL, $url_options);
   //if ($document->site == 'http://default' || $document->site == 'https://default') {
-    $document->site = url(BACKEND_URL, $url_options);
+  //  $document->site = url(BACKEND_URL, $url_options);
   //} 
   $document->hash = apachesolr_site_hash();
 
@@ -473,7 +473,8 @@ function _apachesolr_index_process_entity_get_document($entity, $entity_type) {
   // A path is not a requirement of an entity
   if (!empty($path)) {
     $document->path = $path['path'];
-    $document->url = url(BACKEND_URL.'/'.$path['path'], $path['options'] + $url_options);
+    $document->url = url($path['path'], $path['options'] + $url_options);
+    //$document->url = url(BACKEND_URL.'/'.$path['path'], $path['options'] + $url_options);
     // Path aliases can have important information about the content.
     // Add them to the index as well.
     if (function_exists('drupal_get_path_alias')) {
