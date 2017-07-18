@@ -751,7 +751,9 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
  * impliment hook node insert
  */
 function itg_videogallery_node_insert($node) {
- 
+  if ($node->type == 'story') {
+    itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
+  }
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     switch ($node->type) {
       case 'videogallery':
