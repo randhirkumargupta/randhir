@@ -1597,7 +1597,6 @@ function itg_videogallery_getsolr_data_publish() {
       }
     }
   }
-  p($all_video_ids);
   return $all_video_ids;
 }
 
