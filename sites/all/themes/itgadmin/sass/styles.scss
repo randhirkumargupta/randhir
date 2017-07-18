@@ -3868,6 +3868,7 @@ div.node{
 }
 .tabledrag-changed-warning{
   margin: 10px 0;
+  padding: 0 10px;
 }
 
 /* UGC comment CSS */
@@ -9520,7 +9521,7 @@ div.node{
   [id*="field-video-upload-values"]{
     tr td{padding-bottom: 10px;}
     tr.odd{background-color: #eee;}
-    tr.odd{background-color: #f0f8ff;}
+    tr.even{background-color: #f0f8ff;}
     tr.drag-previous {
     background-color: #f5f5dc;
 }
@@ -10081,7 +10082,7 @@ div.node{
     }
   }
   .ftp_browse_field{
-    margin: 10px 0 0;
+    margin: 10px;
     position: relative;
   }
 }
