@@ -1944,7 +1944,7 @@ function delete_daily_motion_video_callback() {
     $video_info = itg_videogallery_get_video_solrcontent($video_id);
     if (!empty($video_info[0]->nid)) {
 
-      itg_videogallery_apachesolr_node_exclude($video_info[0]->nid);
+      itg_node_exclude($video_info[0]->nid);
 
       node_delete($video_info[0]->nid);
     }
@@ -1975,7 +1975,7 @@ function delete_daily_motion_video_callback() {
  * @param type $nid
  * @return boolean
  */
-function itg_videogallery_apachesolr_node_exclude($nid) {
+function itg_node_exclude($nid) {
   if (!empty($nid)) {
     $node = node_load($nid);
     $env_id = apachesolr_default_environment();
