@@ -12,6 +12,7 @@ function itg_widget_views_pre_render(&$view) {
   $color_box_class = array("class" => array("colorbox-load"));
   if ($view->name == "static_pages" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Create static page'), 'node/add/page', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos') {
