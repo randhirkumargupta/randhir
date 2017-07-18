@@ -658,7 +658,6 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
   $query->condition('nid', $nid);
   $query->condition('content_type', 'video_gallery', '=');
   $query->execute();
-
   $node = node_load($nid);
   foreach ($node->field_video_upload[LANGUAGE_NONE] as $key => $value) {
     // Build array of field collection values.
@@ -696,7 +695,7 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
     }
   }
   foreach ($result as $un_video) {
-    if ($unp_videos->property == VIDEO_PROPERTY) {
+    if ($un_video->property == VIDEO_PROPERTY) {
       itg_videogallery_update_video_info_solr($un_video->solr_video_id);
     }
   }
@@ -721,7 +720,7 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
   $result = $query->execute()->fetchAll();
 
   foreach ($result as $un_video) {
-    if ($unp_videos->property == VIDEO_PROPERTY) {
+    if ($un_video->property == VIDEO_PROPERTY) {
       $api = itg_videogallery_dailymotion_api();
       $api->post('/video/' . $un_video->solr_video_id . '?private=true');
     }
@@ -742,7 +741,7 @@ function itg_videogallery_node_publish_video_to_unpublish($nid, $main_fids) {
     }
   }
   foreach ($result as $un_video) {
-    if ($unp_videos->property == VIDEO_PROPERTY) {
+    if ($un_video->property == VIDEO_PROPERTY) {
       itg_videogallery_update_video_info_solr($un_video->solr_video_id);
     }
   }
@@ -1438,15 +1437,14 @@ function itg_videogallery_save_story_video_data($story_body, $nid) {
   global $base_url;
   preg_match_all('/src="([^"]+)"/', $story_body, $match);
   $video_url = $match[1];
-
   if (!empty($video_url)) {
     // Here delete videos from table
     db_delete('itg_story_body_videos')
         ->condition('nid', $nid)
         ->execute();
     foreach ($video_url as $video_value) {
-      $post_check = strpos($video_value, FRONT_URL_VIDEO . '/embeded-video/');
-      $post_video_node = strpos($video_value, FRONT_URL_VIDEO . '/embed-video/');
+      $post_check = strpos($video_value, '/embeded-video/');
+      $post_video_node = strpos($video_value,'/embed-video/');
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
