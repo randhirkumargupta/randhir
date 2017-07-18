@@ -127,6 +127,8 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+    
+    $form['#validate'][] = 'itg_reporter_custom_validate';
   }
 
   $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
@@ -190,6 +192,40 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implements custom validate for client title
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_reporter_custom_validate(&$form, &$form_state) {
+  if (!empty($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][0]['name'])) {
+    foreach ($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE] as $key => $value) {
+      $movie_name = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['name'];
+      $movie_vid = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['vid'];
+      $exist = itg_reporter_movie_term_status($movie_name, $movie_vid);
+      if (empty($exist)) {
+        form_set_error('field_reporter_movie_name', 'Please enter valid movie name');
+      }
+    }
+  }
+}
+
+/**
+ * Implements term exist or not
+ */
+function itg_reporter_movie_term_status($movie_name, $movie_vid) {
+  $itg_query = db_select('taxonomy_term_data', 'tr');
+  $itg_query->condition('vid', $movie_vid, '=')
+            ->condition('name', $movie_name, '=')
+            ->fields('tr', array('tid'));
+
+  $itg_result = $itg_query->execute()->fetchField();
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+
+  return '';
+}
 /**
  * Implement hook_after_build
  * @param array $form
