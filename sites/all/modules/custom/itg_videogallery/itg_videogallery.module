@@ -2665,7 +2665,7 @@ function itg_videogallery_thumb_url() {
     $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
     $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $val->dailymotion_thumb_url;
     $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
-    $node->uid = $user->uid;
+    $node->uid = 1;
     $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
     $node->status = 1; //(1 or 0): Published or not
     $node->promote = 0; //(1 or 0): Promoted to front page
@@ -2694,12 +2694,13 @@ function itg_videogallery_thumb_url() {
  */
 
 function itg_videogallery_update_video_info_solr($videoid) {
+    global $user;
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('video_id', $videoid, '=');
   $result_new = $query->execute()->fetchAll();
   foreach ($result_new as $val) {
-    global $user;
+    
     $node = new stdClass();
     $node->title = $val->name;
     $node->type = "itg_solr_video";
@@ -2711,7 +2712,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
     $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
     $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $val->dailymotion_thumb_url;
     $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
-    $node->uid = $user->uid;
+    $node->uid = 1;
     $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
     $node->status = 1; //(1 or 0): Published or not
     $node->promote = 0; //(1 or 0): Promoted to front page
