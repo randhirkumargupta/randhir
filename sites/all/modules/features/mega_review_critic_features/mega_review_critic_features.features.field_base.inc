@@ -408,7 +408,7 @@ function mega_review_critic_features_field_default_field_bases() {
         ),
         'view' => array(
           'args' => array(),
-          'display_name' => 'entityreference_2',
+          'display_name' => 'entityreference_3',
           'view_name' => 'associate_gallery',
         ),
       ),
