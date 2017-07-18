@@ -601,7 +601,7 @@
       }
       .social-icon{
         width: 17%;
-        padding-top: 40px;
+        padding-top: 0px;
       }
     }
   }
@@ -1981,7 +1981,7 @@
   #block-itg-live-tv-live-tv-video-page{
     .latest-livetv-video .photo-list{    
       li{
-        padding: 10px;         
+        padding: 10px 10px 0;         
         height: auto;
         width:100% !important;
         figure{
@@ -3399,7 +3399,18 @@
     padding-bottom: 72.2%;
   }
   
-  .sso-header + #page{height: auto;}
+  .sso-header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    & + #page{
+      min-height: calc(100% - 109px);
+      height: auto;
+      padding-top: 94px;
+    }
+  }
     .sso-footer{margin-top: 30px;}
     #itg_user_forgot_password_multistep_form .form-wrapper{text-align: center;}
     .page-forgot-password [id*="itg_user_forgot_password_multistep_form"] .form-type-textfield{max-width: 300px; margin: 0 auto;}
@@ -3541,7 +3552,24 @@
       content: '*';
       color: red;
     }
-    /*.election-page .col-el-5 .graph-design .highcharts-container{height: 180px !important;}*/
+    @media all and (max-width: 1024px) and (min-width: 992px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 400px;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 992px) and (min-width: 768px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 260px;
+          }
+        }
+      }
+    }
     @media all and (max-width: 767px){
         #itg-user-forgot-password-multistep-form--3, #itg-user-forgot-password-multistep-form--2{
             padding: 20px;
@@ -3552,4 +3580,62 @@
           float: left;
           img{height: auto !important;}
         }
+        .sso-header{
+          position: absolute;
+        }
+        .election-page .graph-design .highcharts-title tspan:nth-child(1){
+          font-size: 28px;
+        }
+        .story-section .story-right .description{
+          .itgvideo{
+            > iframe{
+              min-height: 380px;
+            }
+          }
+        }
+    }
+    @media all and (max-width: 668px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 342px;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 480px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 238px;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 415px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 200px;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 375px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 178px;
+          }
+        }
+      }
+    }
+    @media all and (max-width: 320px){
+      .story-section .story-right .description{
+        .itgvideo{
+          > iframe{
+            min-height: 150px;
+          }
+        }
+      }
     }

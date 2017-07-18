@@ -77,7 +77,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
         $node_extra_large_image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
       }
       $description = $data->field_common_short_description_value;
-      $published_date = gmdate('D, d M Y H:i:s', strtotime($data->field_itg_content_publish_date_value));
+      $published_date = date('D, d M Y H:i:s', strtotime($data->field_itg_content_publish_date_value));
       $xml .= '<title> <![CDATA[ ' . $node_title . ' ]]></title>' . "\r\n";
       $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>' . "\r\n";
       $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>';

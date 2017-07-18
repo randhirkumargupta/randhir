@@ -144,16 +144,21 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $settings = array();
   $vocabulary = '';
   if (isset($form['#vocabulary']->machine_name)) {
-    $vocabulary = $form['#vocabulary']->machine_name;
+     $vocabulary = $form['#vocabulary']->machine_name;
   }
-
+  
   if ($vocabulary != 'category_management') {
     $settings['formstatus'] = 1;
   }
   else {
     $settings['formstatus'] = 0;
   }
-
+  
+  // validation for movie master
+  if($vocabulary == 'movies') {
+    $form['#validate'][] = 'itg_movie_taxonomy_validate';
+  }
+  
   if (arg(1) == 'add') {
     drupal_add_js('jQuery(document).ready(function() {
                 jQuery("#edit-metatags-und-title-value").val("");              
@@ -236,6 +241,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title($edit_title);
   }
 
+  
+  
   if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
     if (isset($form['title']['#title'])) {
       $form['title']['#description'] = $form['title']['#title'];
@@ -1154,4 +1161,13 @@ function get_amp_video_time($entity_id, $bundle, $field_name) {
             ->execute();
     return $record = $result->fetchAll(PDO::FETCH_ASSOC);
   }
+}
+
+/*
+ * Implements itg_movie_taxonomy_validate().
+ */
+function itg_movie_taxonomy_validate($form, &$form_state) {
+ if($form_state['values']['field_movie_earning'][LANGUAGE_NONE][0]['value'] == 0) {
+   form_set_error('field_movie_earning', 'Please enter valid Earning value');
+ } 
 }

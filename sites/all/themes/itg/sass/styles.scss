@@ -1834,15 +1834,6 @@ footer{
     border: 2px solid #e4e4e4;
 }
 .story-section{
-    iframe{
-        width: 100%;
-        height: 40vh;
-    }
-    .description{
-      iframe{
-        min-height: 495px;
-      }
-    }
     ul{
         @extend .list-none;
     }
@@ -5347,8 +5338,7 @@ section.sidebar{
 /*CSS Start video setting Ifram*/
 .iframe-video{
     position: relative;
-    padding-bottom: 50%;
-    padding-top: 30px;
+    padding-bottom: 56.2%;
     height: 0;   
     -webkit-overflow-scrolling:touch;    
     iframe{
@@ -9043,8 +9033,7 @@ div#playerContainer{
             }
         }
         .social-icon{
-            width: 108px;
-            overflow: hidden;
+            max-width: 108px;
             padding-top: 65px;
             a{
                 color: #aaa9a9;
@@ -9794,14 +9783,22 @@ h1.about-us-heading{
 
 /*css start factoids-slider*/
 .factoids-page{
-    @include social-share;    
-    margin:20px 0 10px 0;
-    .fun-facts, .social-share{
-        display: inline-block;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  @include social-share;    
+  margin:20px 0 10px 0;
+  .fun-facts, .social-share{
+    display: inline;
+    h2, ul{
+      display: inline;
+      padding-left: 0;
     }
-    h3{
-        color:#000;
-    }
+  }
+  
+  h3{
+      color:#000;
+  }
 }
 .factoids-slider{
     ul{        
@@ -11871,8 +11868,8 @@ span.close_btt {
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 10px;
-    box-shadow: 0 -25px 50px 25px #fff;
+    height: 1px;
+    box-shadow: 0 -10px 50px 25px #fff;
 }
 .ad-blocker-content p {
     padding: 10px 0;
@@ -11925,6 +11922,26 @@ span.close_btt {
     }
   }
   .feed-use-sep{height: 1px; background-color: #dedede; margin: 10px 0 20px;}
+}
+.rss-disclaimer{
+  padding-top: 30px;
+  h4{font-size: 14px; color: #888; margin-bottom: 10px;}
+  p{font-size: 13px; color: #888; line-height: 18px;}
+}
+
+.story-section .story-right .description{
+  .itgvideo{
+    > iframe{
+      min-height: 326px;
+      #main{
+        min-height: 0;
+        .itg-embed-dm-video-wrapper{
+          
+        }
+      }
+      & + iframe{margin-top: 20px;}
+    }
+  }
 }
 
 @media (min-width: 320px) {
