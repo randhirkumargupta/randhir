@@ -118,9 +118,15 @@ function apachesolr_entity_jit_index_immediately($entity, $type) {
     return;
   }
 
-  $item = new stdClass();
-  $item->entity_type = $type;
+$item = new stdClass();
   $item->entity_id = $id;
+  $item->entity_type = $type;
+  $item->bundle = $bundle;
+  $item->status = $entity->status;
+
+  // Reset the static cache, to get the latest changes.
+  entity_get_controller($type)->resetCache(array($id));
+
 
   module_load_include('inc', 'apachesolr', 'apachesolr.index');
   if (function_exists('apachesolr_index_entity_to_documents')) {
