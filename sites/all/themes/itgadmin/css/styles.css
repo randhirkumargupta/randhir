@@ -9455,7 +9455,7 @@ div.node #comments h2 {
 .node-type-photogallery .action-with-title #page-title,
 .page-taxonomy-term-edit .action-with-title #page-title,
 .page-admin-structure-taxonomy-category-management .action-with-title #page-title {
-  width: 500px;
+  width: 400px;
 }
 .page-node-add-story .action-with-title.fixed,
 .node-type-story .action-with-title.fixed,
@@ -10088,6 +10088,18 @@ div.node #comments h2 {
 }
 .node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes .form-checkbox {
   margin: 3px 5px;
+}
+.node-videogallery-form [id*="field-video-upload-values"] tr td {
+  padding-bottom: 10px;
+}
+.node-videogallery-form [id*="field-video-upload-values"] tr.odd {
+  background-color: #eee;
+}
+.node-videogallery-form [id*="field-video-upload-values"] tr.odd {
+  background-color: #f0f8ff;
+}
+.node-videogallery-form [id*="field-video-upload-values"] tr.drag-previous {
+  background-color: #f5f5dc;
 }
 
 [id*="edit-field-story-reporter"] tbody,

@@ -8819,7 +8819,7 @@ div.node{
 .page-taxonomy-term-edit,
 .page-admin-structure-taxonomy-category-management{
   .action-with-title #page-title{
-    width: 500px;
+    width: 400px;
   }
   .action-with-title.fixed{
     padding: 10px 0;
@@ -9516,6 +9516,14 @@ div.node{
         }
       }
     }
+  }
+  [id*="field-video-upload-values"]{
+    tr td{padding-bottom: 10px;}
+    tr.odd{background-color: #eee;}
+    tr.odd{background-color: #f0f8ff;}
+    tr.drag-previous {
+    background-color: #f5f5dc;
+}
   }
 }
 [id*="edit-field-story-reporter"], 
