@@ -450,10 +450,10 @@ function _apachesolr_index_process_entity_get_document($entity, $entity_type) {
   }
      
   $document->id = apachesolr_document_id($entity_id, $entity_type);
-  $document->site = url(NULL, $url_options);
-  if ($document->site == 'http://default' || $document->site == 'https://default') {
-    $document->site = BACKEND_URL;  
-  } 
+  //$document->site = url(NULL, $url_options);
+  //if ($document->site == 'http://default' || $document->site == 'https://default') {
+    $document->site = url(BACKEND_URL, $url_options);
+  //} 
   $document->hash = apachesolr_site_hash();
 
   $document->entity_id = $entity_id;
