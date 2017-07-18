@@ -442,13 +442,14 @@ function _apachesolr_index_process_entity_get_document($entity, $entity_type) {
   // Define our url options in advance. This differs depending on the
   // language
   $languages = language_list();
+  global $base_url;
   $url_options = array('absolute' => TRUE);
   if (isset($entity->language) && isset($languages[$entity->language])) {
     $url_options['language'] = $languages[$entity->language];
   }
 
   $document->id = apachesolr_document_id($entity_id, $entity_type);
-  $document->site = url(NULL, $url_options);
+  $document->site = url($base_url, $url_options);
   $document->hash = apachesolr_site_hash();
 
   $document->entity_id = $entity_id;
@@ -468,7 +469,7 @@ function _apachesolr_index_process_entity_get_document($entity, $entity_type) {
   // A path is not a requirement of an entity
   if (!empty($path)) {
     $document->path = $path['path'];
-    $document->url = url($path['path'], $path['options'] + $url_options);
+    $document->url = url($base_url.'/'.$path['path'], $path['options'] + $url_options);
     // Path aliases can have important information about the content.
     // Add them to the index as well.
     if (function_exists('drupal_get_path_alias')) {
