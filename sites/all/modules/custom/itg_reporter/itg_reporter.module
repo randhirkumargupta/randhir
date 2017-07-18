@@ -211,7 +211,7 @@ function itg_reporter_custom_validate(&$form, &$form_state) {
 }
 
 /**
- * Implements term exist or not
+ * Implements itg_reporter_movie_term_status().
  */
 function itg_reporter_movie_term_status($movie_name, $movie_vid) {
   $itg_query = db_select('taxonomy_term_data', 'tr');
