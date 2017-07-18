@@ -118,28 +118,36 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
   if ($arg[0] == 'rss' && $arg[1] == 'magazine') {
     $is_magazine = TRUE;
   }
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-  $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
-  $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
-  if ($is_magazine) {
-    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id = n.nid');
-    $query->leftJoin('taxonomy_term_data', 'td', 'pc.field_primary_category_value = td.tid');
-    $query->fields('td', array('name'));
+  try {
+    if (!empty($rss_nids)) {
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+      $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
+      $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
+      if ($is_magazine) {
+        $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id = n.nid');
+        $query->leftJoin('taxonomy_term_data', 'td', 'pc.field_primary_category_value = td.tid');
+        $query->fields('td', array('name'));
+      }
+      $query->fields('n', array('title', 'nid'));
+      $query->fields('sh', array('field_story_short_headline_value'));
+      $query->fields('fm', array('uri'));
+      $query->fields('pd', array('field_itg_content_publish_date_value'));
+      $query->condition('n.status', 1);
+      $query->condition('n.nid', $rss_nids, 'IN');
+      $query->range(0, $limit);
+      $result_data = $query->execute()->fetchAllAssoc('nid');
+    }
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
   }
-  $query->fields('n', array('title', 'nid'));
-  $query->fields('sh', array('field_story_short_headline_value'));
-  $query->fields('fm', array('uri'));
-  $query->fields('pd', array('field_itg_content_publish_date_value'));
-  $query->condition('n.status', 1);
 
-  $query->condition('n.nid', $rss_nids, 'IN');
-  $query->range(0, $limit);
-  $result_data = $query->execute()->fetchAllAssoc('nid');
-// Create same order as per given in nodeids.
-  foreach ($rss_nids as $order_nids) {
-    $result[] = (array) $result_data[$order_nids];
+  if (!empty($rss_nids)) {
+    // Create same order as per given in nodeids.
+    foreach ($rss_nids as $order_nids) {
+      $result[] = (array) $result_data[$order_nids];
+    }
   }
 
   if ($is_magazine) {
