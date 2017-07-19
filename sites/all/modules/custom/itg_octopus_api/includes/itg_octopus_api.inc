@@ -415,7 +415,7 @@ function itg_octopus_api_rundown_listing() {
       array('data' => format_date(strtotime($row->story_created), $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
       array('data' => format_date(strtotime($row->story_modified), $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL), 'class' => $background_color),
       array('data' => $row->location),
-      array('data' => $link . '(' . $row->action . ')'),
+      array('data' => $link ),
     );
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_form');

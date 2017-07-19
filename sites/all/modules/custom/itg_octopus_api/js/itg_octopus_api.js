@@ -49,20 +49,19 @@ jQuery('document').ready(function() {
         var attr_id = jQuery(this).attr('attribute_id');
         var s3_video_success = false;
         jQuery('.video-process-bar-' + attr_id).show();
-        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Preparing request for getting high resolution video</p></div>');
-
+        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing request for getting high resolution video</p></div>');
         jQuery.ajax({
             url: base_url + '/get-video/' + slug_id,
             type: 'post',
             data: {'id': slug_id},
             beforeSend: function() {
                 setTimeout(function() {
-                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Request for high resolution video sent to TV team</p></div>');
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Request for high resolution video sent to TV team</p></div>');
                 }, 2000);
             },
             success: function(data) {
                 setTimeout(function() {
-                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Getting response for high resolution video from TV team</p></div>');
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Getting response for high resolution video from TV team</p></div>');
 
                 }, 5000);
                 var dumping_video_status = setInterval(function() {
@@ -71,7 +70,7 @@ jQuery('document').ready(function() {
                         type: 'post',
                         data: {'id': data},
                         beforeSend: function() {
-                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Video download in progress..</p></div>');
+                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video download in progress..</p></div>');
 
                         },
                         success: function(datafinal) {
@@ -79,11 +78,11 @@ jQuery('document').ready(function() {
                             console.log(datafinal_json);
                             if (datafinal_json.IS_COPIED == "YES") {
                                 setTimeout(function() {
-                                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Octopus high resolution Video received at local</p></div>');
+                                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Octopus high resolution Video received at local</p></div>');
 
                                     clearInterval(dumping_video_status);
                                     setTimeout(function() {
-                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Preparing data for sending dumped video file to S3 bucket</p></div>');
+                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending dumped video file to S3 bucket</p></div>');
 
                                         s3_video_success = true;
                                         // Code end for sending dumping machine video to s3 bucket
@@ -95,17 +94,17 @@ jQuery('document').ready(function() {
                                                     type: 'post',
                                                     data: {'id': slug_id},
                                                     beforeSend: function() {
-                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Started  sending video to S3</p></div>');
+                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Started  sending video to S3</p></div>');
 
                                                     },
                                                     success: function(datafinal) {
                                                         var s3_response_data = JSON.parse(datafinal);
                                                         console.log(s3_response_data);
                                                         if (s3_response_data.success == 'yes') {
-                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Video uploaded to S3</p></div>');
+                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video uploaded to S3</p></div>');
 
                                                             setTimeout(function() {
-                                                                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Preparing data for sending s3 video to Daily montion</p></div>');
+                                                                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending s3 video to Daily montion</p></div>');
 
                                                             }, 5000);
 
@@ -118,7 +117,7 @@ jQuery('document').ready(function() {
                                                                     type: 'post',
                                                                     data: {'s3_video_uri': s3_response_data.s3_url, 'slug_id': attr_id},
                                                                     beforeSend: function() {
-                                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/><p>Processing to DM..</p></div>');
+                                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Processing to DM..</p></div>');
 
                                                                     },
                                                                     success: function(datafinals3todm) {
@@ -126,7 +125,7 @@ jQuery('document').ready(function() {
                                                                         console.log(attr_id);
                                                                         datafinals3todm_s = JSON.parse(datafinals3todm);
                                                                         if (datafinals3todm_s.success == 'yes') {
-                                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><p>Ready to use</p></div>');
+                                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><i class="fa fa-check-circle" aria-hidden="true"></i><p>Ready to use</p></div>');
                                                                             setTimeout(function() {
                                                                                 jQuery('.video-process-bar-' + attr_id).hide();
                                                                                 jQuery('#file-video-article-' + attr_id).show();
@@ -161,7 +160,9 @@ jQuery('document').ready(function() {
                                     }, 5000);
                                 }, 5000);
                             } else {
-                                jQuery('.video-process-bar-' + attr_id).html('Still Checking dumping video status<img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/>');
+                           jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Still Checking dumping video status</p></div>');
+
+                            
                             }
                         },
                         error: function(xhr, desc, err) {

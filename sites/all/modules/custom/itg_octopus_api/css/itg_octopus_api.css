@@ -59,10 +59,14 @@ and open the template in the editor.
     vertical-align: top;
     background: #fff;
     padding: 20px;
-    min-width: 300px; 
+    min-width: 420px; 
     margin-top: 84px;
     border-radius: 5px;
   }
   .process-bar-data p{
       margin-top: 10px;
   }
+  .process-bar-data .fa {
+    font-size: 45px;
+    color: green;
+    }
