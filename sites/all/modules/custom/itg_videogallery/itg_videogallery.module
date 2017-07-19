@@ -2209,7 +2209,7 @@ function daily_motion_video_dashboard_rows() {
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
 
-        $status_flag = '<span class="under-precess">Publishing Processing (' . $record->publishing_progress . ')%</span>';
+        $status_flag = '<span class="under-precess">Processing (' . $record->publishing_progress . ')%</span>';
         if (strtoupper($record->type) != 'LOCAL') {
           $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
@@ -2237,10 +2237,10 @@ function daily_motion_video_dashboard_rows() {
       }
     }
     if ($record->dailymotion_published == 1) {
-      $video_status = 'Publish';
+      $video_status = 'Published';
     }
     else {
-      $video_status = 'Unpublish';
+      $video_status = 'Unpublished';
     }
     $rows[] = array(
       ++$sn,
