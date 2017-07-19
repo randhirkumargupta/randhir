@@ -52,6 +52,7 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
     $form['friend_fieldset']['name_' . $i] = array(
       '#title' => t('Name'),
       '#type' => 'textfield',
+      '#attributes' => array('autocomplete' => 'off'),
       '#required' => TRUE,
       '#maxlength' => 255,
     );
@@ -59,6 +60,7 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
     $form['friend_fieldset']['mail_' . $i] = array(
       '#title' => t('Email'),
       '#type' => 'textfield',
+      '#attributes' => array('autocomplete' => 'off'),
       '#required' => TRUE,
       '#maxlength' => 255,
     );
