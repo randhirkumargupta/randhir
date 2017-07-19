@@ -284,16 +284,16 @@ function is_podcast($node) {
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
-function itg_common_custompath_migrated_load($node) {
+function itg_common_custompath_migrated_load($node, $val=NULL) {
   if (!empty($node->path['alias'])) {
     $node_sef = $node->path['alias'];
   } else {
-    $title_lenght = strlen($node->title);
-    if ($title_lenght >= 160) {
-      $node_sef = substr($node->title, 0, 160);
-    } else {
-      $node_sef = $node->title;
-    }
+//    $title_lenght = strlen($node->title);
+//    if ($title_lenght >= 160) {
+//      $node_sef = substr($node->title, 0, 160);
+//    } else {
+//      $node_sef = $node->title;
+//    }
   }
 
   if ($node->type == 'photogallery') {

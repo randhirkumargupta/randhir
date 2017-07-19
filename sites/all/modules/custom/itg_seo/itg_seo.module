@@ -176,6 +176,7 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
     //Give default sef checked while node/add form.
     $pathauto_state = 1;
   }
+  
   // Handel checked unchecked of sef url;
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
   $form['path']['pathauto']['#default_value'] = $pathauto_state;
@@ -356,7 +357,17 @@ function itg_seo_node_insert($node) {
 
     $ctype_array = content_types_for_sef_url();
 
-    if (in_array($node->type, $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
+      $newpath = itg_common_custompath_migrated_load($node, 'update_migrated');
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}",
+        'alias' => $newpath, // Any alias that you want to set.
+      );
+      path_save($path);
+    }else{
+      if (in_array($node->type, $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
@@ -364,9 +375,7 @@ function itg_seo_node_insert($node) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
     }
-//    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-//      itg_common_custompath_migrated_load($node);
-//    }
+    }
   }
 }
 
@@ -382,6 +391,7 @@ function itg_seo_node_presave($node) {
   if (is_valid_content_type_for_sef_url($node->type) && !in_array('batch', arg())&& isset($node->op)) {
     //Handel case for fresh created node.
     if (empty($node->nid)) {
+      
       // As if alise is not set from textfield the assign title of node to alise.
       if (empty($node->path['alias'])) {
         $node->path['alias'] = $node->title;
