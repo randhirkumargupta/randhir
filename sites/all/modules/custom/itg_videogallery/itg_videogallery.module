@@ -1607,12 +1607,14 @@ function itg_videogallery_getsolr_data_publish() {
 function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $solr_data = itg_videogallery_getsolr_data_publish();
   $video_data = "";
+   watchdog("ubpublish_video_sorl", "<pre>".print_r($solr_data,true)."</pre>");
   // Here corne for CK Editor.
   $query = db_select('itg_story_body_videos', 'isbv');
   $query->fields('isbv');
   $query->condition('video_id', $solr_data, 'IN');
   $query->condition('is_node', '0');
   $video_data = $query->execute()->fetchAll();
+  watchdog("ubpublish_video_sorl_node", "<pre>".print_r($video_data,true)."</pre>");
   if (isset($video_data) && !empty($video_data)) {
     foreach ($video_data as $story_body_video) {
       $nid = $story_body_video->nid;
@@ -1626,8 +1628,13 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
+            watchdog("ubpublish_video_sorl_node_body_before", "<pre>".print_r($node->body['und'][0]['value'],true)."</pre>");
+            watchdog("ubpublish_video_sorl_node_body_ifreame", "<pre>".print_r($ifreame,true)."</pre>");
+
             $html = str_replace($ifreame, "", $node_body);
             $node->body['und'][0]['value'] = $html;
+             watchdog("ubpublish_video_sorl_node_body_after", "<pre>".print_r($node->body['und'][0]['value'],true)."</pre>");
+              watchdog("ubpublish_video_sorl_node_id", "<pre>".print_r($nid,true)."</pre>");
             field_attach_update('node', $node);
             if (function_exists('itg_akamai_clear_url')) {
               $url = drupal_get_path_alias('node/' . $nid);
