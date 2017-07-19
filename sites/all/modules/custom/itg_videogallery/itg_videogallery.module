@@ -1674,6 +1674,10 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
               $node->body['und'][0]['value'] = $html;
               field_attach_update('node', $node);
               // delete video.
+              if (function_exists('itg_akamai_clear_url')) {
+              $url = drupal_get_path_alias('node/' . $nid);
+              itg_akamai_clear_url($url);
+            }
               db_delete('itg_story_body_videos')
                   ->condition('id', $story_body_video->id)
                   ->execute();
@@ -1683,11 +1687,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       }
     }
   }
-  $node_by_video = array();
-  foreach ($video_data as $data_delete) {
-    $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
-    $node_by_videop['video_id'][$data_delete->nid][] = $data_delete->solr_video_id;
-  }
+  
   global $user;
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
@@ -1738,17 +1738,13 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
     if ($data_delete->content_type == 'video_gallery') {
       $node_by_videop['nid'][$data_delete->nid][] = $data_delete->nid;
       $node_by_videop['content_type'][$data_delete->nid] = $data_delete->content_type;
-    }
-  }
-
-  foreach ($node_by_videop['fid'] as $nkey => $fids) {
-    foreach ($fids as $nky => $vide_fid) {
-      try {
+    }else {
+        try {
         $deleted = db_delete('file_managed')
-            ->condition('fid', $vide_fid)
+            ->condition('fid', $data_delete->fid)
             ->execute();
         $deleted = db_delete('itg_solr_video_info')
-            ->condition('fid', $vide_fid, ' = ')
+            ->condition('fid', $data_delete->fid, ' = ')
             ->execute();
       }
       catch (Exception $e) {
@@ -1756,6 +1752,22 @@ function itg_videogallery_remove_video_id_parent_site_delete() {
       }
     }
   }
+
+//  foreach ($node_by_videop['fid'] as $nkey => $fids) {
+//    foreach ($fids as $nky => $vide_fid) {
+//      try {
+//        $deleted = db_delete('file_managed')
+//            ->condition('fid', $vide_fid)
+//            ->execute();
+//        $deleted = db_delete('itg_solr_video_info')
+//            ->condition('fid', $vide_fid, ' = ')
+//            ->execute();
+//      }
+//      catch (Exception $e) {
+//        watchdog_exception('file manage delete', $e);
+//      }
+//    }
+//  }
   foreach ($node_by_videop['nid'] as $key => $nids) {
 
     $query = db_select('itg_solr_video_info', 'drd');
@@ -2064,7 +2076,11 @@ function daily_motion_video_dashboard($form, &$form_state) {
     '#value' => t('Search'),
     '#submit' => array('daily_motion_video_dashboard_submit'),
   );
-  $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_videogallery_daily_motion_video_reset'),);
+  $form['filters']['buttons']['reset'] = array(
+      '#type' => 'submit',
+      '#value' => t('Reset'),
+      '#limit_validation_errors' => TRUE,
+      '#submit' => array('itg_videogallery_daily_motion_video_reset'),);
 
 
   $form['markup'] = array(
@@ -2105,8 +2121,8 @@ function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_videogallery_daily_motion_video_reset($form, $form_state) {
-
-  drupal_goto('daily-motion-video-dashboard');
+      $form_state['rebuild'] = FALSE;
+     // drupal_goto('daily-motion-video-dashboard');
 }
 
 /*
