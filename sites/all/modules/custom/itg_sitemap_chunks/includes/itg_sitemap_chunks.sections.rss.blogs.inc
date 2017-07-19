@@ -31,7 +31,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
-    $query->fields('n', array('title', 'nid'));
+    $query->fields('n', array('title', 'nid', 'created'));
     $query->fields('sh', array('field_common_short_description_value'));
     $query->fields('pd', array('field_itg_content_publish_date_value'));
     $query->fields('fm', array('uri'));
@@ -56,7 +56,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
     $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">' . "\r\n";
     $xml .= '<channel>' . "\r\n";
-    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . '|' . $heading . ' ]]> </title>' . "\r\n";
+    $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' | ' . $heading . ' ]]> </title>' . "\r\n";
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>' . "\r\n";
@@ -77,7 +77,12 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
         $node_extra_large_image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
       }
       $description = $data->field_common_short_description_value;
-      $published_date = date('D, d M Y H:i:s', strtotime($data->field_itg_content_publish_date_value));
+      if (!empty($data->field_itg_content_publish_date_value)) {
+        $db_date = strtotime($data->field_itg_content_publish_date_value);
+      } else {
+        $db_date = $data->created;
+      }
+      $published_date = date('D, d M Y H:i:s', $db_date);
       $xml .= '<title> <![CDATA[ ' . $node_title . ' ]]></title>' . "\r\n";
       $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>' . "\r\n";
       $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>';

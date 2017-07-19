@@ -12,7 +12,7 @@ global $base_url;
                 <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="<?php echo $base_url .'/rss/home' ?>" title=""><i class="fa fa-rss"></i></a></li>                
+                <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>                
                 <li class="search-icon-parent">
                   <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
                   <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>

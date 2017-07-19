@@ -159,5 +159,3 @@ function itg_video_check_delete_sitemap_xml($filename) {
   ));
   return $result_delete;
 }
-
-?>
