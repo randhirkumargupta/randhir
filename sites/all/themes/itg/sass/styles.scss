@@ -1,6 +1,7 @@
 /*---------------------------- ITG CSS -----------------------------------*/
 @import "itg-variables";
 @import "itg-mixins";
+@import "_progressbar";
 /* Global CSS */
 *{
     @extend .mr-0;
