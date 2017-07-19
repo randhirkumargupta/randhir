@@ -2060,7 +2060,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['filtertype'] = array(
     '#type' => 'select',
     '#title' => 'Status',
-    '#options' => array('' => '-Select-', '1' => 'Publish', '0' => 'Unpublish'),
+    '#options' => array('' => '-Select-', '1' => 'Published', '0' => 'Unpublished'),
     '#submit' => array('ge_custom_search_report_search_submit_dis'),
     '#default_value' => isset($_GET['filtertype']) ? $_GET['filtertype'] : '',
   );
