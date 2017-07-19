@@ -130,7 +130,7 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
         $query->leftJoin('taxonomy_term_data', 'td', 'pc.field_primary_category_value = td.tid');
         $query->fields('td', array('name'));
       }
-      $query->fields('n', array('title', 'nid'));
+      $query->fields('n', array('title', 'nid', 'created'));
       $query->fields('sh', array('field_story_short_headline_value'));
       $query->fields('fm', array('uri'));
       $query->fields('pd', array('field_itg_content_publish_date_value'));
@@ -202,7 +202,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
   $query->fields('wos', array('nid'));
-  $query->fields('n', array('title'));
+  $query->fields('n', array('title', 'created'));
   $query->fields('sh', array('field_story_short_headline_value'));
   $query->fields('fm', array('uri'));
   $query->fields('pd', array('field_itg_content_publish_date_value'));
@@ -214,6 +214,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   $query->range(0, $limit);
   if (!empty($arg[1])) {
     $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
+    $query->orderBy('n.created', 'DESC');
   } else {
     $query->orderBy('wos.weight', 'DESC');
     $query->orderBy('wos.nid', 'DESC');
@@ -225,7 +226,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">' . "\r\n";
     $xml .= '<channel>' . "\r\n";
     if (!empty($section_tid)) {
-      $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . '</title>' . "\r\n";
+      $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . ' | ' . get_term_name_from_tid_for_report($section_tid) . '</title>' . "\r\n";
     } else {
       $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '</title>' . "\r\n";
     }
@@ -236,7 +237,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     $xml .= '<image>';
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     if (!empty($section_tid)) {
-      $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '|' . get_term_name_from_tid_for_report($section_tid) . '</title>' . "\r\n";
+      $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . ' | ' . get_term_name_from_tid_for_report($section_tid) . '</title>' . "\r\n";
     } else {
       $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '</title>' . "\r\n";
     }
@@ -274,7 +275,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
-  $query->fields('n', array('title', 'nid'));
+  $query->fields('n', array('title', 'nid', 'created'));
   $query->fields('sh', array('field_story_short_headline_value'));
   $query->fields('fm', array('uri'));
   $query->fields('pd', array('field_itg_content_publish_date_value'));
@@ -338,7 +339,12 @@ function itg_sitemap_print_section_rss($result) {
       $node_extra_large_image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     $description = $data['field_story_short_headline_value'];
-    $published_date = date('D, d M Y H:i:s', strtotime($data['field_itg_content_publish_date_value']));
+    if (!empty($data['field_itg_content_publish_date_value'])) {
+      $db_date = $data['field_itg_content_publish_date_value'];
+    } else {
+      $db_date = $data['created'];
+    }
+    $published_date = date('D, d M Y H:i:s', strtotime($db_date));
     $xml .= '<title> <![CDATA[ ' . check_plain($node_title) . ' ]]></title>' . "\r\n";
     if (isset($data['name']) && !empty($data['name'])) {
       $xml .= '<sectionname> <![CDATA[ ' . $data['name'] . ' ]]></sectionname>' . "\r\n";
