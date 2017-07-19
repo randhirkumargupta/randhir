@@ -1658,7 +1658,8 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   if (isset($video_data) && !empty($video_data)) {
     foreach ($video_data as $story_body_video) {
       $nid = $story_body_video->nid;
-      $node_data = itg_videogallery_get_node_status($nid);
+      $main_video_nid = base64_decode($story_body_video->video_id);
+      $node_data = itg_videogallery_get_node_status($main_video_nid);
       if ($node_data == 0) {
         $node = node_load($nid);
         $node_body = $node->body['und'][0]['value'];
@@ -2190,8 +2191,6 @@ function daily_motion_video_dashboard_rows() {
 //print strtr((string) $query, $query->arguments());die;
   $query = $query->extend('PagerDefault')->limit(50);
   $query->orderBy('n.eid', 'DESC');
-
-
   $result = $query->execute();
   $num_of_results = $result->rowCount();
   $sn = 0;
@@ -2253,11 +2252,8 @@ function daily_motion_video_dashboard_rows() {
       $delete_link
     );
   }
-
   $html .= theme('table', array('header' => $header, 'rows' => $rows));
   $html .= theme('pager');
-
-
   return $html;
 }
 
