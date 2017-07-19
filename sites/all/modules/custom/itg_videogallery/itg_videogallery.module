@@ -1568,7 +1568,7 @@ function itg_videogallery_getsolr_data() {
  * @param int $keyword
  * @param string $type
  */
-function itg_videogallery_getsolr_data_publish() {
+function itg_videogallery_getsolr_data_publish($all_property=NULL) {
   $solr = apachesolr_get_solr();
   if (function_exists('itg_apache_solr_get_site_hash')) {
     $hash = itg_apache_solr_get_site_hash();
@@ -1591,9 +1591,13 @@ function itg_videogallery_getsolr_data_publish() {
   $allData = $resp_search->response->docs;
   if (!empty($allData)) {
     foreach ($allData as $datasolr) {
+      if($all_property == 'ALL') {
+       $all_video_ids[] = $datasolr->sm_field_video_id[0];
+      } else {
+            if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
+              $all_video_ids[] = $datasolr->sm_field_video_id[0];
 
-      if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
-        $all_video_ids[] = $datasolr->sm_field_video_id[0];
+            }
       }
     }
   }
@@ -1605,16 +1609,15 @@ function itg_videogallery_getsolr_data_publish() {
  * 
  */
 function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
-  $solr_data = itg_videogallery_getsolr_data_publish();
+  $solr_data = itg_videogallery_getsolr_data_publish('ALL');
   $video_data = "";
-   watchdog("ubpublish_video_sorl", "<pre>".print_r($solr_data,true)."</pre>");
+  
   // Here corne for CK Editor.
   $query = db_select('itg_story_body_videos', 'isbv');
   $query->fields('isbv');
   $query->condition('video_id', $solr_data, 'IN');
   $query->condition('is_node', '0');
   $video_data = $query->execute()->fetchAll();
-  watchdog("ubpublish_video_sorl_node", "<pre>".print_r($video_data,true)."</pre>");
   if (isset($video_data) && !empty($video_data)) {
     foreach ($video_data as $story_body_video) {
       $nid = $story_body_video->nid;
@@ -1628,13 +1631,10 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
           if ($post_check) {
             $ifreame = '<iframe allowfullscreen="" class="video_data" frameborder="0" id="video_frame_' . $story_body_video->video_id . '" scrolling="no" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $story_body_video->video_id . '"></iframe>';
             $video_id = "$story_body_video->video_id";
-            watchdog("ubpublish_video_sorl_node_body_before", "<pre>".print_r($node->body['und'][0]['value'],true)."</pre>");
-            watchdog("ubpublish_video_sorl_node_body_ifreame", "<pre>".print_r($ifreame,true)."</pre>");
-
+           
             $html = str_replace($ifreame, "", $node_body);
             $node->body['und'][0]['value'] = $html;
-             watchdog("ubpublish_video_sorl_node_body_after", "<pre>".print_r($node->body['und'][0]['value'],true)."</pre>");
-              watchdog("ubpublish_video_sorl_node_id", "<pre>".print_r($nid,true)."</pre>");
+           
             field_attach_update('node', $node);
             if (function_exists('itg_akamai_clear_url')) {
               $url = drupal_get_path_alias('node/' . $nid);
@@ -2612,7 +2612,6 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
-//itg_videogallery_getsolr_data_publish();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
