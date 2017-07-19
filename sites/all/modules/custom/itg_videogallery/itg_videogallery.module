@@ -1564,7 +1564,7 @@ function itg_videogallery_getsolr_data() {
       $all_video_ids[] = $datasolr->label;
     }
   }
-  return $all_video_ids;
+  return array_reverse($all_video_ids);
 }
 
 /**
@@ -1654,7 +1654,52 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $solr_data = itg_videogallery_getsolr_data_unpublish();
   $unpublish_video_id = $solr_data['unpubliash_video_id'];
   $unpublish_replace_id = $solr_data['replace_video'];
+$solr_data_deleted = itg_videogallery_getsolr_data();
+   //  Here node dekete and unpublish
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
+  $query->condition('solr_video_id', $solr_data_deleted, 'IN');
+  $video_data = $query->execute()->fetchAll();
+  $node_by_video = array();
+  foreach ($video_data as $data_delete) {
+    $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
+    $node_by_videop['video_id'][$data_delete->nid][] = $data_delete->solr_video_id;
+    if ($data_delete->content_type == 'video_gallery') {
+      $node_by_videop['nid'][$data_delete->nid][] = $data_delete->nid;
+      $node_by_videop['content_type'][$data_delete->nid] = $data_delete->content_type;
+    }
+  }
 
+  foreach ($node_by_videop['fid'] as $nkey => $fids) {
+    foreach ($fids as $nky => $vide_fid) {
+      try {
+        $deleted = db_delete('file_managed')
+            ->condition('fid', $vide_fid)
+            ->execute();
+        $deleted = db_delete('itg_solr_video_info')
+            ->condition('fid', $vide_fid, ' = ')
+            ->execute();
+      }
+      catch (Exception $e) {
+        watchdog_exception('file manage delete', $e);
+      }
+    }
+  }
+  foreach ($node_by_videop['nid'] as $key => $nid) {
+    $query = db_select('itg_solr_video_info', 'drd');
+    $query->fields('drd', array('fid'));
+    $query->condition('nid', $nid, 'IN');
+    $query->condition('content_type', 'video_gallery', '=');
+    $video_data = $query->execute()->fetchAll();
+    if (count($video_data) <= 0) {
+      $node = node_load($nid[0]);
+      if (!empty($node)) {
+        $node->status = 0;
+        node_save($node);
+      }
+    }
+  }
+   
   $video_data = "";
   // Here corne for CK Editor.
   $query = db_select('itg_story_body_videos', 'isbv');
@@ -1776,52 +1821,9 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   }
   
   
-   $solr_data_deleted = itg_videogallery_getsolr_data();
-   //  Here node dekete and unpublish
-  $query = db_select('itg_solr_video_info', 'drd');
-  $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
-  $query->condition('solr_video_id', $solr_data_deleted, 'IN');
-  $video_data = $query->execute()->fetchAll();
-  $node_by_video = array();
-  foreach ($video_data as $data_delete) {
-    $node_by_videop['fid'][$data_delete->nid][] = $data_delete->fid;
-    $node_by_videop['video_id'][$data_delete->nid][] = $data_delete->solr_video_id;
-    if ($data_delete->content_type == 'video_gallery') {
-      $node_by_videop['nid'][$data_delete->nid][] = $data_delete->nid;
-      $node_by_videop['content_type'][$data_delete->nid] = $data_delete->content_type;
-    }
-  }
+  
 
-  foreach ($node_by_videop['fid'] as $nkey => $fids) {
-    foreach ($fids as $nky => $vide_fid) {
-      try {
-        $deleted = db_delete('file_managed')
-            ->condition('fid', $vide_fid)
-            ->execute();
-        $deleted = db_delete('itg_solr_video_info')
-            ->condition('fid', $vide_fid, ' = ')
-            ->execute();
-      }
-      catch (Exception $e) {
-        watchdog_exception('file manage delete', $e);
-      }
-    }
-  }
-  foreach ($node_by_videop['nid'] as $key => $nid) {
-    $query = db_select('itg_solr_video_info', 'drd');
-    $query->fields('drd', array('fid'));
-    $query->condition('nid', $nid, 'IN');
-    $query->condition('content_type', 'video_gallery', '=');
-    $video_data = $query->execute()->fetchAll();
-    if (count($video_data) <= 0) {
-      $node = node_load($nid[0]);
-      if (!empty($node)) {
-        $node->status = 0;
-        node_save($node);
-      }
-    }
-  }
-
+  
 }
 
 
