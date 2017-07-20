@@ -2696,7 +2696,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_syndication',
-    'label' => 'Syndication',
+    'label' => 'Syndicate',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -3134,6 +3134,7 @@ function photogallery_field_default_field_instances() {
   t('Source type');
   t('Story Extra Data');
   t('Strap headline');
+  t('Syndicate');
   t('Syndication');
   t('Tags');
   t('Thumb Image');

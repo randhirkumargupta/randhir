@@ -670,7 +670,7 @@ function itg_photogallery_node_presave($node) {
   if ($node->type == 'photogallery' && isset($node->field_gallery_image['und'])) {
     foreach ($node->field_gallery_image['und']as $delta => $field) {
       if ($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
-        $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
+        //$node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
       }
     }
   }
