@@ -639,11 +639,11 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<span class="view-link">View</span>';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Global: Story custom view link */
-  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
-  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Global: Mega review custom view link */
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['id'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['field'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['label'] = 'View';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -809,11 +809,11 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<span class="view-link">View</span>';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Global: Story custom view link */
-  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
-  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Global: Mega review custom view link */
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['id'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['field'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['label'] = 'View';
   $handler->display->display_options['path'] = 'movie-review-draft-list';
   $export['movie_review_list'] = $view;
 
