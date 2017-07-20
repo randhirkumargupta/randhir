@@ -128,16 +128,24 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
-    
+      if((isset($form_state['view']->current_display) && $form_state['view']->current_display == 'search_unpublish_video')) {
+     $form['hash']['#type'] = 'select';
+    $form['hash']['#title'] = 'Property';
+    $form['hash']['#options'] = $hash;
+    $form['hash']['#size'] = 5;
+    $form['hash']['#default_value'] = $hash;
+    $form['hash']['#multiple'] = TRUE;
+      }else {
     $form['hash']['#type'] = 'select';
     $form['hash']['#title'] = 'Property';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
+      }
   } 
 
   if((isset($form_state['view']->current_display) && $form_state['view']->current_display == 'search_unpublish_video') || (isset($form_state['view']->name) && $form_state['view']->name == 'searchimage' && isset($form_state['view']->current_display) && $form_state['view']->current_display == 'page_1')) {
-    $video_publish_un_option = array('0' => 'Unpublish','1' => 'Publish' );
+    $video_publish_un_option = array('0' => 'Unpublished','1' => 'Published' );
     
     $form['sm_field_video_used'] = array(
     '#type' => 'select',

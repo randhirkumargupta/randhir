@@ -669,12 +669,12 @@ function itg_users_user_update(&$edit, $account, $category) {
  * @param type $category
  */
 function itg_users_user_insert(&$edit, $account, $category) {
-  
   /** do not delete code */
   global $base_url;
   $mail = $account->mail;
   $uid = $account->uid;
-
+  $roles = $account->roles;
+  if ($base_url == BACKEND_URL) {
   db_set_active('sso_db');
   $id = db_insert('itg_sso_email_history')
       ->fields(array(
@@ -685,6 +685,7 @@ function itg_users_user_insert(&$edit, $account, $category) {
       ))
       ->execute();
   db_set_active();
+  }
 
   /* End here */
   
