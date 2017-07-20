@@ -7,6 +7,7 @@
  * Fetch the xml value in database from octopus api.
  *
  */
+define("OCTOPUS_DUMPING_MACHINE_URL", "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4");
 
 /**
  * Implements hook_init()
@@ -64,6 +65,7 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
+
   $items['slug_title/autocomplete'] = array(
     'page callback' => 'demo_autocomplete',
     'access arguments' => array('access content'),
@@ -72,6 +74,20 @@ function itg_octopus_api_menu() {
   );
   $items['slug-details/%'] = array(
     'page callback' => 'slug_details',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['get-video/%'] = array(
+    'page callback' => 'slug_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['itg-octopus-dumping-video-status'] = array(
+    'page callback' => 'itg_octopus_dumping_video_status',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_octopus_api.inc',
@@ -96,6 +112,22 @@ function itg_octopus_api_menu() {
 
   $items['slug-complete-details/ajax/%'] = array(
     'page callback' => 'itg_octopus_slug_details',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['itg-octopus-sending-video-s3'] = array(
+    'page callback' => 'itg_octopus_api_move_dump_server_to_s3',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['itg-octopus-video-s3-to-dm'] = array(
+    'page callback' => 'itg_octopus_api_video_s3_to_dm',
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
@@ -150,6 +182,7 @@ function itg_octopus_api_form($form, &$form_state) {
   $form['category'] = array(
     '#type' => 'textfield',
     '#title' => t('Category'),
+    '#description' => t('Enter comma separated values for multiple'),
     '#maxlength' => 255,
     '#size' => 30,
     '#default_value' => isset($_GET['category']) ? $_GET['category'] : '',
@@ -187,7 +220,6 @@ function itg_octopus_api_form($form, &$form_state) {
     '#year_end' => '+0',
     '#weight' => 4,
     '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
-
   );
 
   $form['end_date'] = array(
@@ -199,7 +231,6 @@ function itg_octopus_api_form($form, &$form_state) {
     '#year_end' => '+0',
     '#weight' => 5,
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
-
   );
 
   $form['submit'] = array(
@@ -301,4 +332,139 @@ function itg_octopus_api_cronapi($op, $job = NULL) {
     'file' => 'includes/itg_octopus_api.inc',
   );
   return $items;
+}
+
+/**
+ * Sending mail to Support team when any exception occured while accessing/running any funciton in whole octopus
+ * @param string $mail_subject
+ * @param string $msg
+ * @return boolean
+ */
+function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+  $content .= $msg;
+  $content .= '</body>';
+  $content .= '</html>';
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
+  $params = array(
+    'body' => $mail_contents,
+    'subject' => $mail_subject,
+  );
+  $to = variable_get('itg_octopus_support_team_email', 'ishwar.tiwari@kelltontech.com');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('octopus-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
+}
+
+/**
+ * Sending mail to Octopus for some certain rules and regulation
+ * @param string $mail_subject
+ * @param string $msg
+ * @return boolean
+ */
+function itg_octopus_api_send_email_to_octopus($mail_subject, $msg) {
+  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+  $content .= $msg;
+  $content .= '</body>';
+  $content .= '</html>';
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
+  $params = array(
+    'body' => $mail_contents,
+    'subject' => $mail_subject,
+  );
+  $to = variable_get('itg_octopus_notify_email', 'ishwar.tiwari@kelltontech.com');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('octopus-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
+}
+
+/**
+ * Send mail to support team, when any problem occured in octopus
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
+function itg_octopus_api_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_mail_to_support':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+
+    case 'send_mail_for_octopus':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+/**
+ * Removing CDATA from any String or Text
+ * @param string $text
+ * @return string
+ */
+function itg_octopus_api_remove_cdata($text) {
+  $text = str_replace('<![CDATA[', '', $text);
+  $text = str_replace(']]', '', $text);
+  return $text;
+}
+
+/**
+ * Returns slug notification
+ * @global array $data
+ */
+function itg_octopus_get_slug_notification() {
+  global $user;
+  $user_last_login = $user->login;
+  $query = db_select('itg_octopus_slug', 'ios');
+  $query->fields('ios', array('action', 'story_title', 'timestamp'));
+  $query->condition('ios.timestamp', $user_last_login, '>=');
+  $result = $query->execute();
+  $rows = array();
+  $html = '<ul>';
+  $count = 0;
+  while ($chunk = $result->fetchObject()) {
+    $html .= '<li>[' . $chunk->action . ']' . l($chunk->story_title,'rundown/listing') . '</li>';
+    ++$count;
+  }
+  $html .= '</ul>';
+  $rows['html'] = $html;
+  $rows['count'] = $count;
+  return $rows;
 }

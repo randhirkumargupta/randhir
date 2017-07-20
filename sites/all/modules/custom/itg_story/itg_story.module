@@ -467,7 +467,7 @@ function itg_story_after_build($form, &$form_state) {
   global $user, $base_url;
   
   // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
       $form['actions']['itg_custom_apply_button'] = array(
         '#type' => 'submit',
