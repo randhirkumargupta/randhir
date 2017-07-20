@@ -636,7 +636,6 @@ function itg_google_share_count($url) {
     $curl_results = curl_exec($curl);
     curl_close($curl);
     $json = json_decode($curl_results, true);
-
     return intval($json[0]['result']['metadata']['globalCounts']['count']);
   }
 }
