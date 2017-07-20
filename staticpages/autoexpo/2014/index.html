@@ -1,0 +1,867 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>India Today - Auto Expo 2014</title>
+<meta name="description" content="Get the latest news, reviews, reports, photos, and videos on the 12th Auto Expo 2014." />
+<meta name="keywords" content="Auto Expo 2014, Auto show, Motor Show, launches,cars, review, auto, motorbike, motor car, automobile, motorcycle, best car, car pictures, test drive, motor show, prices, car prices, new car launches, road test, first drive, first ride, car verdicts, Highlights, suv, new cars, top car, sports car, hatchback, best bike, top bike, new bikes, comparison, India cars, cars in India, car launch India" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/autoexpo/2014/css/autoexpo-style.css"  />
+<script type="text/javascript">
+
+	$(document).ready(function(e) {
+		len = $('.belt h5').length;
+		
+		$('.shprevarrow').css('opacity', '0.5');
+		$('.belt').width(((651*len)+10));
+		counter = 1;
+
+        $('.shprevarrow').click(function(){
+
+			if (counter == 1)
+				{
+					$('.shprevarrow').css('opacity', '0.5');	
+				}
+				else 
+				{
+					$('.belt').animate({
+					left : '+=651',
+					width : '-=651'
+					});	
+					counter -=1;
+					$('.shnextarrow').css('opacity', '1');
+				}
+			});
+			
+		 $('.shnextarrow').click(function(){
+				if (counter == len)
+				{
+					$('.shnextarrow').css('opacity', '0.5');
+				}
+				else
+				{
+					$('.belt').animate({
+					left : '-=651',
+					width : '+=651'
+					});
+					counter +=1;
+					$('.shprevarrow').css('opacity', '1');
+				}
+			});
+			
+    });
+	
+	
+	$(document).ready(function(e) {
+                        var lenth = $('#carousel ul li').length;
+						$('#carousel ul').width(144*lenth);
+						
+						var count = 1;
+						$('.bx-next').click(function(){
+							if (count == lenth-3){
+								$(this).hide();
+							}
+							else
+							{
+									$('#carousel ul').animate({
+										left : "-=144"
+									});
+								count +=1;
+								$('.bx-prev').show();
+							}
+						});
+						
+						
+						$('.bx-prev').click(function(){
+							if (count == 1){
+								$(this).hide();
+							}
+							else
+							{
+								$('#carousel ul').animate({
+										left : "+=144"
+									});
+								$('.bx-next').show();
+								count -=1;
+								
+							}
+						});
+						
+						$('#carousel ul li img').click(function(){
+							var imgSource = $(this).attr('bigimg');
+							$('.bxslider li a img').attr('src', imgSource);
+							$('.bxslider li a img').css({width:'650px'})
+						});
+						
+						
+						$('#tab1').show();
+						$('#tab2').hide();
+							
+						$('.tab1').click(function(){
+							$(this).addClass('current');
+							$('.tab2').removeClass('current');
+							$('#tab1').show();
+							$('#tab2').hide();
+						});
+						
+						$('.tab2').click(function(){
+							$(this).addClass('current');
+							$('.tab1').removeClass('current');
+							$('#tab2').show();
+							$('#tab1').hide();
+						});
+						
+						
+                    });
+	
+
+</script>
+</head>
+<body>
+<script src="http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
+<style>
+body { margin:0; padding:0;}
+#special-topnav {width:100%; margin:0 auto;}
+#top-web {
+    display: block;
+}           
+.itgd_links {
+    background-color: rgb(216, 216, 216) !important;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: rgb(122, 122, 122);
+    display: flex;
+    font: bold 12px/15px roboto;
+    margin: 0;
+    padding: 0.3%;
+    text-align: center;
+}
+.itgd_links ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 1003px;
+}
+.itgd_links ul li.last {
+    border-right: medium none;
+}
+.itgd_links ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 0 9px;
+}
+.itgd_links a {
+    color: rgb(122, 122, 122);
+    text-decoration: none;
+}
+.clr {
+    clear: both;
+}
+.redborder {
+	background: none repeat scroll 0 0 #E5E5E5;
+    border-top: 1px solid rgb(199, 199, 199);
+
+}
+.htl-logo { float:right;  width:108px; height:65px; }
+.htl-text {   color: #7a7a7a ;font: bold 12px/15px roboto; text-decoration:none }
+header {
+    margin: 0 auto;
+    text-align: left;
+    width: 1000px;
+}
+
+.header-tag {
+    margin: 0 auto;
+    padding: 1% 0;
+    text-align: left;
+    width: 1000px;
+}
+.htl-logo {
+   
+    float: right;
+    height: 65px;
+    width: 108px;
+}
+.htl-text {
+    color: rgb(122, 122, 122);
+    font: bold 12px/15px roboto;
+}
+.logoit {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
+    height: 70px;
+    text-indent: -9999px;
+    width: 329px;
+}
+.clear {
+    clear: both;
+}
+.menues {
+    background: none repeat scroll 0 0 rgb(0, 0, 0);
+    height: 41px;
+    position: relative;
+    top: 0;
+}
+nav {
+    margin: 0 auto;
+	font:bold 13px arial;
+    width: 1000px;
+}
+.sp_bg {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.app a {
+    display: block;
+    text-indent: -999px;
+}
+nav ul {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 1000px;
+}
+.home-icon, .home-icon:hover {
+    background-color: rgb(0, 0, 0) !important;
+    background-position: -338px -98px;
+    height: 23px;
+    padding: 5px 14px 11px;
+    width: 23px;
+}
+nav ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 10px 0 10px 2px;
+    text-transform: uppercase;
+}
+nav ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 10px 0 10px 2px;
+    text-transform: uppercase;
+}
+nav ul li {
+    float: left;
+    list-style: none outside none;
+    text-transform: uppercase;
+    background-color: rgb(0, 0, 0);
+}
+nav h1 {
+    font: bold 15px arial;
+    margin: 0;
+    padding: 0;
+}
+nav ul li a {
+    padding: 11px 11px 13px;
+    color: #ffffff; text-decoration:none
+}
+nav ul li a:hover {
+color: #555555;
+background:#ffffff;
+
+}
+.centerdiv {
+    margin: 0 auto;
+    padding: 13px 0;
+    width: 1000px;
+	height:100px;
+	position:relative;
+}
+#top_ad { padding-left:125px; position:absolute; z-index:99;}
+</style>
+
+<div id="special-topnav">
+
+<div class="itgd_links" id="top-web" >
+<ul> 
+<li class="last"><a href="http://indiatodaygroup.com/" target="_blank" rel="nofollow">THE INDIA TODAY GROUP</a></li>
+<li><a href="http://www.indiatoday.in/" target="_blank" class="mainlevel" rel="nofollow">India Today</a></li>
+<li><a href="http://www.aajtak.in/" target="_blank" class="mainlevel" rel="nofollow">Aaj Tak</a></li>
+<li><a href="http://www.businesstoday.in/" target="_blank" class="mainlevel" rel="nofollow">Business Today</a></li>
+<li><a href="http://www.menshealthindia.in/" target="_blank" class="mainlevel" rel="nofollow">Men's Health</a></li>
+<li><a href="http://www.wonderwoman.in" target="_blank" class="mainlevel" rel="nofollow">Wonder Woman</a></li>
+<li><a href="http://www.cosmopolitan.in/" target="_blank" class="mainlevel" rel="nofollow">Cosmopolitan</a></li>
+<li><a href="http://oyefm.in/" target="_blank" class="mainlevel" rel="nofollow">Oye! 104.8FM</a></li>
+<li class="last"><a href="http://travelplus.intoday.in" target="_blank" class="mainlevel" rel="nofollow">Travel Plus</a></li>
+
+
+
+</ul>
+<div class="clr"></div>
+</div>
+<div class="redborder"> 
+<style>
+	
+
+	.htl-logo {
+    float: right;
+    height: 71px;
+    padding-top: 3px;
+    width: 270px;
+}
+.htl-text {
+    color: #7A7A7A;
+    font: bold 12px/24px roboto;
+    text-align: center;
+}
+</style>
+<header>
+<div class="header-tag">
+<div class="htl-logo">
+<!--<div class="htl-text">In Association with</div>
+<img width="265" height="35" border="0" usemap="#Map" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ITG-branding.png">
+<map id="Map" name="Map">
+  <area target="_blank" href="http://indiatoday.intoday.in/" coords="1,1,77,34" shape="rect">
+  <area target="_blank" href="http://headlinestoday.intoday.in/" coords="87,2,165,34" shape="rect">
+  <area target="_blank" href="http://mailtoday.in" coords="173,3,267,33" shape="rect">
+</map>-->
+
+  </div>
+
+
+
+<div class="logoit"><a href="/" style="display:block; height:68px;">India Today</a></div>
+</div>
+</header>
+<div class="clear"></div></div>
+<div class="clear"></div>
+<style>
+.home-icon, .home-icon:hover { background-position: -338px -98px; height: 23px;  padding: 5px 14px 11px; width: 23px; background-color:#000!Important; }
+</style>
+<div class="menues">
+<nav>
+<ul>
+<li class="home-icon sp_bg" style="border-top:2px solid #E70009;"><a href="/" ></a></li>
+<li style="border-top:2px solid #F25109;"><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a></li>
+<li style="border-top:2px solid #0038F0;"><a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a></li>
+<li style="border-top:2px solid #ED1C24;"><a href="http://indiatoday.intoday.in/videos">Videos</a></li>
+<li style="border-top:2px solid #760108;"><a href="http://indiatoday.intoday.in/galleries">Photos</a></li>
+<li style="border-top:2px solid #98D702;"><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a></li>
+<li style="border-top:2px solid #800B80;"><a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a></li>
+<li style="border-top:2px solid #FFCC01;"><a href="http://indiatoday.intoday.in/auto/" >Auto</a></li> 
+<li style="border-top:2px solid #00A53C;"><a href="http://indiatoday.intoday.in/section/84/1/sports.html" >Sports</a></li>
+<li style="border-top:2px solid #F70164; padding-right:3px;"><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a></li>
+
+<li style="border-top:2px solid #e5e5e5;" ><a href="http://indiatoday.intoday.in/technology/" >Tech</a>
+<li style="border-top:2px solid #f88000;" ><a href="http://indiatoday.intoday.in/education/" class="edu" >Education</a></li>
+<li style="border-top:2px solid #2d2d8d;" ><a href="http://businesstoday.intoday.in/" class="edu" >Business</a></li>
+</ul>
+<div class="clear"></div>
+</nav>
+ </div>
+ 	<!-- Begin comScore Tag -->
+<script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1"  />
+</noscript>
+<!-- End comScore Tag -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-795349-17']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<div class="clear"></div>
+<div class="centerdiv">
+<div id="top_ad" align="center" style="float:none;">
+<!-- Javascript tag: -->
+<!-- begin ZEDO for channel:  IT ROS Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; var zflag_ct="criteo:"+crtg_content+"^viz728x90:" + vizPAM.isVizInterested("728x90")['int'];
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT ROS Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->		
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div id="container">
+	<!--< %@include file="top.jsp"%>-->    
+	
+
+
+		<div style="margin-bottom:30px;padding-top: 120px;margin-top: -120px;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/header.jpg" width="1003" height="141" alt="autoexpo_header"  /></div>
+        <div id="top_main_container">
+        	<div id="top_news_left">
+                <div class="slideshow">
+                  <div class="belt_outer">
+                    <div class="top_news"><a href="/auto/">Top News</a></div>	
+                    <div class="belt">
+                                        
+                      <h5>
+                       <a href="http://indiatoday.intoday.in/story/auto-expo-2014-ends-with-hope-of-car-demand-revival/1/343071.html"><img  width="651" title="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/autoexpo2--story_650_021214112633.jpg"> </a>
+                       <span class="bottom_strip"><a href="http://indiatoday.intoday.in/story/auto-expo-2014-ends-with-hope-of-car-demand-revival/1/343071.html">Auto Expo 2014 ends with hope of car demand revival</a></span> 
+                        <div class="read_more"><a href="/auto/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="null" /></a></div>                      
+                      </h5>
+				                    
+                      <h5>
+                       <a href="http://indiatoday.intoday.in/story/auto-expo-2014-sees-huge-turnout-at-expo-mart/1/342630.html"><img  width="651" title="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/autoexpo--thumb_650_020914014839.jpg"> </a>
+                       <span class="bottom_strip"><a href="http://indiatoday.intoday.in/story/auto-expo-2014-sees-huge-turnout-at-expo-mart/1/342630.html">Distance no hurdle as one lakh visitors throng Auto Expo</a></span> 
+                        <div class="read_more"><a href="/auto/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="null" /></a></div>                      
+                      </h5>
+				                    
+                      <h5>
+                       <a href="http://indiatoday.intoday.in/story/auto-expo-2014-opens-for-public-today/1/342250.html"><img  width="651" title="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/autoexpo-story_650_020714123634.jpg"> </a>
+                       <span class="bottom_strip"><a href="http://indiatoday.intoday.in/story/auto-expo-2014-opens-for-public-today/1/342250.html">Auto Expo 2014 opens for public</a></span> 
+                        <div class="read_more"><a href="/auto/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="null" /></a></div>                      
+                      </h5>
+				                    
+                      <h5>
+                       <a href="http://indiatoday.intoday.in/story/auto-expo-2014-toyota-etios-cross-is-a-brave-new-suv/1/342065.html"><img  width="651" title="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/toyota-etios-vivek_650_020614025746.jpg"> </a>
+                       <span class="bottom_strip"><a href="http://indiatoday.intoday.in/story/auto-expo-2014-toyota-etios-cross-is-a-brave-new-suv/1/342065.html">The Toyota Etios Cross is a brave new SUV</a></span> 
+                        <div class="read_more"><a href="/auto/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="null" /></a></div>                      
+                      </h5>
+				                    
+                      <h5>
+                       <a href="http://indiatoday.intoday.in/story/auto-expo-2014-harley-davidson-india-chiefs-interview/1/342061.html"><img  width="651" title="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014-harley-davidson-street-750-_650_020614031539.jpg"> </a>
+                       <span class="bottom_strip"><a href="http://indiatoday.intoday.in/story/auto-expo-2014-harley-davidson-india-chiefs-interview/1/342061.html">'Street 750 retains the Harley charm'</a></span> 
+                        <div class="read_more"><a href="/auto/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="null" /></a></div>                      
+                      </h5>
+				
+                    </div>
+                  </div>
+                  <span class="shprevarrow"></span> <span class="shnextarrow"></span>
+                </div>
+                <!--slideshow end-->
+                <div class="clr"></div>
+            
+            </div>
+            <!--top_news_gallery end-->
+            
+            
+            <div id="top_right">
+            	<div style="margin-left:10px;">
+                				<!-- Javascript tag: -->
+<!-- begin ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->	
+                </div>
+                <div class="social_bid">
+                    
+                        <div class="social_heading">Connect With Us</div>
+                        
+                        <div class="social_links">
+                            <a class="facebook" href="http://www.facebook.com/indiatoday" target="_blank" ></a>
+                            <a class="twitter" href="http://www.twitter.com/indiatoday" target="_blank" ></a>
+                            <a class="linkedin" href="#" target="_blank" ></a>
+                            <a class="googleplus" href="http://www.google.com/+indiatoday" target="_blank"></a>
+                            <a class="youtube" href="#" target="_blank"></a>
+                        </div>
+                        <div class="clr"></div>
+                        
+                        <div class="right_search">
+                        
+                        <form  onsubmit="return validate1();" name="searchform1" method="get" action="http://indiatoday.intoday.in/advanced_search.jsp">
+						<input type="hidden" value="com_search" name="option">
+						<input type="text" onfocus="if(this.value=='Type Your search') this.value='';" onblur="if(this.value=='') this.value='Type Your search';" value="Type Your search" id="mod_search_searchword" name="search" class="input-box"> 
+ 						<input type="image" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/search_bt.jpg" width="76" height="33"  />
+						</form>
+                           
+                        </div>
+                    
+                    
+                    
+                </div>
+                <!--social bid end-->
+            </div>
+            <!--top_right end-->
+        </div>
+        <!--top_main_container end-->             
+        
+        <div class="clr"></div>
+        
+    
+	
+
+        <div id="highlight">
+        	<div class="hightlight_heading"><a href="/auto" target="_blank">HIGHLIGHTS</a></div>
+            <div class="gallery_thumb">
+            	<ul>
+            	
+            	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/new-skoda-superb-launched-at-rs-18.87-lakh/1/342774.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/skodasuperb-story_350_021014013351.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">New Skoda Superb launched at Rs 18.87 lakh</div>
+                        </div>
+                    </li>
+                	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/sameera-reddy-unveils-vardenchi-t5-at-auto-expo-2014/1/342548.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/smeerareddy-story_350_020814073956.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">Sameera sets pulses racing at Auto Expo, unveils Vardenchi T5</div>
+                        </div>
+                    </li>
+                	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/auto-expo-maruti-suzuki-celerio-first-drive/1/342524.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/celerio-thumb_350_020814044000.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">Maruti Suzuki Celerio: Return of the hatchback king</div>
+                        </div>
+                    </li>
+                	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/hero-launches-three-scooters-at-auto-expo-2014/1/342501.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/herozeer_350_020814012929.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">It's scooters all the way for Hero at Auto Expo 2014</div>
+                        </div>
+                    </li>
+                	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/triumph-launches-daytona-675-at-auto-expo-2014/1/342395.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/daytona675--story_350_020714083353.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">Triumph launches Daytona 675 for Rs 10.15 lakh</div>
+                        </div>
+                    </li>
+                	
+                	<li>
+                    	<div class="h_gallery">
+                           <a href="http://indiatoday.intoday.in/story/auto-expo-2014-rocks-despite-new-venue/1/342135.html"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sunny-1_350_020614074505.jpg" width="320" height="220" alt="null" />
+                           </a>
+                            <div class="strip">Reporter's Diary: Despite new, faraway venue, Auto Expo rocks</div>
+                        </div>
+                    </li>
+                	
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/gallery/the-glamour-quotient-at-auto-expo-2014/1/11151.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb1_350_020914032607.jpg" width="320" height="220" alt="Glimpses of glitz and glamour at Auto Expo 2014" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/photo_gallery.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">Glimpses of glitz and glamour at Auto Expo 2014</div>
+                        </div>
+                    </li>
+            	 
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/gallery/golden-steering-wheel-awards-night-photos/1/11148.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sudhir3_350_020814030526.jpg" width="320" height="220" alt="Sneak peek at the Golden Steering Wheel awards night" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/photo_gallery.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">Sneak peek at the Golden Steering Wheel awards night</div>
+                        </div>
+                    </li>
+            	 
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/gallery/auto-expo-2014-day-2-celebrities-ranbir-kapoor-farhan-akhtar/1/11144.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ranbir2_350_020614063706.jpg" width="320" height="220" alt="What's Hero Ranbir's dream machine? See in pictures here" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/photo_gallery.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">What's Hero Ranbir's dream machine? See in pictures here</div>
+                        </div>
+                    </li>
+            	 
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/video/akshay-kumar-auto-expo-2014-honda/1/342595.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/akshay_300x193__020914084152.jpg" width="320" height="220" alt="null" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/video_gallery_yellow.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">Akshay Kumar narrates the story of his first Honda bike</div>
+                        </div>
+                    </li>
+                    
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/video/auto-expo-2014-datson-go-the-hatchback-to-lookout-for/1/342421.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/car-video_300_020714114211.jpg" width="320" height="220" alt="null" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/video_gallery_yellow.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">Auto Expo 2014: Datson Go, the hatchback to lookout for</div>
+                        </div>
+                    </li>
+                    
+            <li>
+                    	<div class="h_gallery">
+                            <a href="http://indiatoday.intoday.in/video/auto-expo-2014-mahindra-manifests-xuv500-hybrid/1/342195.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/xuv_300_020714090816.jpg" width="320" height="220" alt="null" />
+                            <span class="play"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/video_gallery_yellow.png" width="60" height="60" alt="play"  /></span></a>
+                            <div class="strip">Auto Expo 2014: Mahindra manifests XUV500 hybrid</div>
+                        </div>
+                    </li>
+                    
+                	
+                </ul>
+                <!--<div class="more_highlight"><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22"  alt="read_more" /></a></div>-->                       
+            </div>
+            <div class="more_highlight"><a href="/auto" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/more.jpg" width="52" height="22" ></a></div>
+        <div class="clr"></div>
+        </div>
+        <!--hightlight end-->
+        <div class="clr"></div>
+          
+    <div class="clr"></div>    
+	        <div id="left_pannel">
+           
+
+ <div id="first_look_slider">
+            	<div class="first_look_heading"><a href="http://indiatoday.intoday.in/gallery/auto-expo-2014-maruti-suzuki-unveils-two-ciaz-sx4-s-cross/3/11125.html" style="color: #413C39;text-decoration: none;">First look</a> </div>                
+                <div class='boxcont'>
+                  <div class='box'>
+                    <ul class='bxslider'>
+                      <li>
+                        <a href="http://indiatoday.intoday.in/gallery/autoexpo-2014-first-pictures-of-new-car-launch/1/11125.html"><img class='images'  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/honda-xs-1_650_020614062818.jpg" width="650"  />
+                            <span class='sliderbass'>
+                            <h3>In pics: Cars unveiled at Auto Expo 2014</h3>
+                            </span>
+                        </a>
+                    </li>
+                    </ul>
+                  </div>
+                  <!--box end-->
+                </div>
+                <!--boxcont end-->              
+                <div id="carousel">
+                    <ul>
+                      
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/honda-xs-1_650_020614062818.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/honda-xs-1_210_020614062818.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/dc-avanti_650_020614062818.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/dc-avanti_210_020614062818.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/toyota-etios-vivek_650_020614024156.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/toyota-etios-vivek_210_020614024156.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/audi-cabriolet--hormazd-sorabjee_650_020614033442.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/audi-cabriolet--hormazd-sorabjee_210_020614033442.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/maruti-celerio-2_650_020614012931.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/maruti-celerio-2_210_020614012931.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/mahindra-halo_650_020614111153.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/mahindra-halo_210_020614111153.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/nissan-friend-me_650_020614100436.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/nissan-friend-me_210_020614100436.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/datsun-redi-go_650_020614100436.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/datsun-redi-go_210_020614100436.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kareeenaautoexpo--story_650_020614094733.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kareeenaautoexpo--story_210_020614094733.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/priyanka_650_020614090820.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/priyanka_210_020614090820.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sachinatautoexpo_650_020614090510.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sachinatautoexpo_210_020614090510.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondaccordhybrid_020514073516.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondaccordhybrid_210_020514073516.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/trailblazer_mos_020514054352.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/trailblazer_mos_210_020514054352.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/honda-jazz_020514073516.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/honda-jazz_210_020514073516.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondamobilio_020514073516.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondamobilio_210_020514073516.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondansg_020514073516.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/hondansg_210_020514073516.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/stingray_mos_020514052733.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/stingray_mos_210_020514052757.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/nissan-gtr_020514051401.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/nissan-gtr_210_020514051401.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/santafe_mos_020514051315.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/santafe_mos_210_020514051315.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/camaro_mos_020514024442.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/camaro_mos_210_020514024442.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/beat_mos_020514024442.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/beat_mos_210_020514024442.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/fiesta_mos_020514024442.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/fiesta_mos_210_020514024442.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/vwpolo_020514114830.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/vwpolo_210_020514114830.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/zoe_020514114830.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/zoe_210_020514114830.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/jagaur-project7_020514110100.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/jagaur-project7_210_020514110100.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kwid_020514110100.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kwid_210_020514110100.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/stormladakh_020514110100.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/stormladakh_210_020514110100.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/conceptciaz_mos_020514091421.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/conceptciaz_mos_210_020514091421.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sx4-s-cross-_-story_020514091420.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sx4-s-cross-_-story_210_020514091420.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    	<li><img bigimg="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/workprogress_020514091421.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/workprogress_210_020514091421.jpg" width="144" height="130"  /></li>                    	
+                    	
+                    </ul>
+                    <div class="bx-controls-direction">
+                        <div class="bx-prev" >Prev</div>
+                        <div class="bx-next">Next</div>
+                    </div>      
+                </div>
+                <!--carousel end-->
+            </div>
+            
+               
+               
+            <!--first_look_slider end-->
+            <div class="clr"></div>            
+            <div id="bottom_container">
+                            
+            
+            </div>
+            <!--bottom_container end-->
+        </div>
+        <!--left_pannel end-->    
+           <div id="right_pannel">
+        	
+            <!--hit_misses end-->
+            <div class="clr"></div>            
+            
+            <!--gossip end-->            
+          <div class="twitter_buzz">
+            	<div class="twitter_heading"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/autoexpo/twitter.jpg" width="319" height="61" alt="twitter_buzz"  /></div>
+                <ul class="twitts">
+                	                <a class="twitter-timeline"  height="525" width="290" href="https://twitter.com/search?q=%40AUTOBILDMAG"  data-widget-id="430628702523637760">Tweets about "@AUTOBILDMAG"</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	
+                </ul>
+            </div>
+            <!--twitter_buzz end-->
+        </div>
+        <!--right_pannel end-->
+    <div class="clr"></div>
+</div>
+<!--container end-->
+<style>
+
+.bottomad {
+    margin-top: 5px;
+    text-align: center;
+}
+.footertag, footer {
+    background-color: #333333;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.footertag nav, footer nav {
+    background-color: #333333;
+    color: #FFFFFF;
+    float: left;
+    font-size:13px;
+    height: 43px;
+    width: 77.5%;
+}
+
+.nav ul {
+    margin: 0 auto;
+    padding: 0;
+}
+nav ul {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 1000px;
+}
+.home {
+    background-color: #EB1C24;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.home {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.home a {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -311px -95px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 43px;
+    text-indent: -9999px;
+    width: 27px;
+}
+.footertag nav ul li, footer nav ul li {
+    background-color: #333333;
+}
+.nav ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 11px 0 !important;
+    text-transform: uppercase;
+}
+.nav ul li a {
+    padding: 0 6px !important;
+	color: #FFFFFF; text-decoration:none
+}
+.nav ul li:hover, nav ul li.active {
+    background-color: #D71920;
+    color: #ffffff;
+    cursor: pointer; text-decoration:none
+}
+.footertag .nav ul li a{ font-size:12px;}
+</style>
+
+<div class="bottomad">
+	<div class="loadingad" >
+	<!-- begin ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+	<script language="JavaScript">
+	var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+	</script>
+	<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+	<!-- end ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+	</div>
+
+<!-- Affinity In-Footer Site Code Starts Here (Required) -->
+        <div id="af-display-unit" style="display:none">
+        <script type="text/javascript" language="javascript">
+                ;(function(){
+                var v = {}; 
+                v.pubid = 'saw31';
+                v.aduid = '372';
+                v.phR= Math.floor(Math.random()*100*(new Date().getTime()/1000));v.u = location.href;
+                v.ru = document.referrer;v.scrRes = screen.width+'x'+screen.height;
+                var servar = function(obj){var str=[];for(var p in obj) str.push(p + "=" + encodeURIComponent(obj[p]));return str.join("&");}
+                var url = 'http://tbn.ph.affinity.com/init/i.js?'+servar(v);
+                document.write(unescape("%3Cscript src='") + url + unescape("' type='text/javascript'%3E%3C/script%3E")); })();
+        </script>
+        </div>
+<!-- Affinity In-Footer Site Code Ends Here -->
+</div>
+<footer style="width: 1000px; margin: 15px auto 0 auto;">
+<div class="footertag">
+<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
+<nav class="nav">
+<ul>
+<div class="home" style="background:none"><a href="/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
+<li ><a href="http://indiatoday.intoday.in/news.html" >News</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a>
+<li ><a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a>
+<li ><a href="http://indiatoday.intoday.in/videos" >Videos</a></li>
+<li ><a href="http://indiatoday.intoday.in/galleries" >Photos</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a></li>
+<li ><a href="http://indiatoday.intoday.in/auto" >Auto</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/84/1/sports.html" >Sports</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a></li>
+<li ><a href="http://indiatoday.intoday.in/technology" >Tech</a></li>
+<li ><a href="http://indiatoday.intoday.in/education" >Education</a></li>
+<li ><a href="http://businesstoday.intoday.in/"  target="_blank" >business</a></li>
+
+</ul>
+<div class="clear"></div>
+</nav>
+
+<div class="searc-icon1"><img style="margin-bottom:-5px;" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btn-down-arrow.jpg"/>
+<div id="footer1" style=" background-color:#fff">
+	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
+    </div>
+  </div>
+  </div>
+</footer>
+</div>
+</div>
+
+
+</body>
+</html>
