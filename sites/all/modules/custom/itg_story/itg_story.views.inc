@@ -64,6 +64,18 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
         $web_link = '<a href="' . $node_url . '" target="_blank">web</a>';
         $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';   
     }
+    
+    // code for mega review 
+    $mega_review_status = $values->node_status;
+    if ($mega_review_status == 0 ) {
+      $node_url = $base_url . '/node/' . $values->nid;
+      $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';
+      $web_link = l('web' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));        
+    } else {          
+        $node_url = FRONT_URL . '/node/' . $values->nid;
+        $web_link = '<a href="' . $node_url . '" target="_blank">web</a>';
+        $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';   
+    }
       
     if (!empty(arg(0)) && arg(0) == 'published-story') {
       $clone_link = '<a class="clone" href="node/add/story?destination=published-story?field_story_syndication_value_op=all&internal_clone_id='.$values->nid.'">Clone</a>'; 
