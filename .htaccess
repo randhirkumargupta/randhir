@@ -203,6 +203,14 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/amitabh-bachchan-70th-birthday [NC]  
 	RewriteCond %{REQUEST_URI} !/amitabh-bachchan-72nd-birthday [NC]  
 	RewriteCond %{REQUEST_URI} !/andhra [NC]  
+	RewriteCond %{REQUEST_URI} !/anna [NC]  
+	RewriteCond %{REQUEST_URI} !/asiad2014 [NC]  
+	RewriteCond %{REQUEST_URI} !/atoz-election [NC]  
+	RewriteCond %{REQUEST_URI} !/autoexpo/2016 [NC]  
+	RewriteCond %{REQUEST_URI} !/autoexpo/2014 [NC]  
+	RewriteCond %{REQUEST_URI} !/bob [NC]  
+	RewriteCond %{REQUEST_URI} !/boi [NC]  
+	RewriteCond %{REQUEST_URI} !/cannes2012 [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -373,6 +381,22 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^amitabh-bachchan-72nd-birthday/(.*) /staticpages/amitabh-bachchan-72nd-birthday/$1 [L]
 	RewriteRule ^andhra$ /staticpages/andhra/telangana.jsp? [L]
     RewriteRule ^andhra/(.*) /staticpages/andhra/$1 [L]
+	RewriteRule ^anna$ /staticpages/anna/index.html? [L]
+    RewriteRule ^anna/(.*) /staticpages/anna/$1 [L]
+	RewriteRule ^asiad2014$ /staticpages/asiad2014/index.html? [L]
+    RewriteRule ^asiad2014/(.*) /staticpages/asiad2014/$1 [L]
+	RewriteRule ^atoz-election$ /staticpages/atoz-election/index.html? [L]
+    RewriteRule ^atoz-election/(.*) /staticpages/atoz-election/$1 [L]
+	RewriteRule ^autoexpo/2016$ /staticpages/autoexpo/2016/index.html? [L]
+    RewriteRule ^autoexpo/2016/(.*) /staticpages/autoexpo/2016/$1 [L]
+	RewriteRule ^autoexpo/2014$ /staticpages/autoexpo/2014/index.html? [L]
+    RewriteRule ^autoexpo/2014/(.*) /staticpages/autoexpo/2014/$1 [L]
+	RewriteRule ^bob$ /staticpages/bob/index.html? [L]
+    RewriteRule ^bob/(.*) /staticpages/bob/$1 [L]
+	RewriteRule ^boi$ /staticpages/boi/index.html? [L]
+    RewriteRule ^boi/(.*) /staticpages/boi/$1 [L]
+	RewriteRule ^cannes2012$ /staticpages/cannes2012/index.html? [L]
+    RewriteRule ^cannes2012/(.*) /staticpages/cannes2012/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
