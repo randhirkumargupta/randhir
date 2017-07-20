@@ -89,7 +89,7 @@ if (function_exists('get_other_gallery_amp')) {
   $entity_arr = get_other_gallery_amp($primary_category, $node->nid, $node->type, 4);
   if (!empty($entity_arr)) {
     $other_video_gallery = '';
-    $other_video_gallery .= '<h2><span>OTHER VIDEO</span></h2>';
+    $other_video_gallery .= '<h2><span>'.t('OTHER VIDEOS').'</span></h2>';
     $other_video_gallery .= '<ul>';
     foreach ($entity_arr as $key => $value) {
       // get video time
