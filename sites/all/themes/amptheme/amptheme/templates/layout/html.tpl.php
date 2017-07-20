@@ -73,7 +73,7 @@
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      .node-type-videogallery #main-wrapper{padding: 0;}
+      .node-type-videogallery #main-wrapper, .node-type-photogallery #main-wrapper{padding: 0;}
       #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
@@ -374,9 +374,9 @@
         background-color: rgba(0,0,0,.6);
         color: #fff;
         font-size: 12px;
-        .fa{
-          font-size: 14px;
-        }
+      }
+      .other-count .fa{
+        font-size: 14px;
       }
       .other-date{
         display: block;
@@ -529,8 +529,8 @@
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery .front-end-breadcrumb, 
       .node-type-videogallery .front-end-breadcrumb{background-color: #171717; padding-bottom: 0; margin: 0;}
-      .node-type-photogallery .front-end-breadcrumb .black-box, 
-      .node-type-videogallery .front-end-breadcrumb .black-box{margin-left: 0; margin-right: 0;}
+      .node-type-photogallery .black-box, 
+      .node-type-videogallery .black-box{margin-left: 0; margin-right: 0;}
       .node-type-photogallery .amp-other-gallery, .node-type-videogallery .amp-other-gallery {padding: 0 12px;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
       .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}

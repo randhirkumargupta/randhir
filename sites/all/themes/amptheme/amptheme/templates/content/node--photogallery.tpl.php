@@ -22,7 +22,7 @@
       $html .='<div class="slide"><div class="photo-slide"><amp-img layout="responsive" src="'.image_style_url("photgallery_landing_slider_753x543", $file->uri).'"
         width="753"
         height="543"></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
-        <amp-fit-text><p>'.$caption.'</p></amp-fit-text></div>';
+        <p>'.$caption.'</p></div>';
         $i++;
     }
     $html .= '</amp-carousel>';
