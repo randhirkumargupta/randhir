@@ -99,6 +99,9 @@ function itg_autosave_form_delete($form_id) {
  */
 function itg_autosave_nodeform($nid, $ctype) {    
   global $user;
+  
+  // This function is used to prevent user abort
+  ignore_user_abort(true);
   // Store submitted values into variable.
   $inputs = $_POST;    
   // Create object for itg_auto_save class.
@@ -146,7 +149,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
   
   // Check if field collection is available.
-  /******************************* Hide field collection code ***************** 
+  /******************************* Hide field collection code *****************/ 
   if (count($f_collection) > 0) {
     // Find how many field collection are present.
     foreach ($f_collection as $field) {      
@@ -155,7 +158,7 @@ function itg_autosave_nodeform($nid, $ctype) {
     }    
   }
    
-  *********** End of code field collection ***********************************/  
+  /*********** End of code field collection ***********************************/  
   
   // Submit the node before save.        
   $node = node_submit($node); 
@@ -167,6 +170,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   $pre_save['field_collection'] = itg_autosave_get_fcollection_ids($f_collection, $node);
   // Save data into database.
   $itg_auto_save->itg_save_form_data($pre_save, $node->nid, $ctype);
+  //~ ignore_user_abort(false);
 }
 
 /**
