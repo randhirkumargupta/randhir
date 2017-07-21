@@ -242,7 +242,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str = 'bundle_name:(' . $val_str1 . ') AND ';
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $str .= 'hash:(' . $hash . ') AND ';
-      $str .= 'ds_created:(' . $date_val_str . ')';
+      $str .= 'dm_field_itg_content_publish_dat:(' . $date_val_str . ')';
     }
 
     $ctype_tab = array('story', 'photogallery', 'video');
@@ -260,7 +260,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str = 'bundle_name:(' . $type . ') AND ';
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $str .= 'hash:(' . $hash . ') AND ';
-      $str .= 'ds_created:(' . $date_val_str . ')';
+      $str .= 'dm_field_itg_content_publish_dat:(' . $date_val_str . ')';
     }
 
     if (!empty($arg[1]) && !in_array($arg[1], $ctype_tab)) {
@@ -270,7 +270,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
       $str .= 'bundle_name:(' . $bun_arr . ') AND ';
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
-      $str .= 'ds_created:(' . $val_str_date . ')';
+      $str .= 'dm_field_itg_content_publish_dat:(' . $val_str_date . ')';
     }
 
     // case if both argument is not empty
@@ -286,7 +286,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ') AND ';
       $dat_1_day_ago = date('Y-m-d', strtotime($arg[2]));
       $val_str_date = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
-      $str .= 'ds_created:(' . $val_str_date . ')';
+      $str .= 'dm_field_itg_content_publish_dat:(' . $val_str_date . ')';
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
