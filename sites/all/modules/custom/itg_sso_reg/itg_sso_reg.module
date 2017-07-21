@@ -104,7 +104,8 @@ function itg_sso_reg_menu() {
   
    $items['itguserlogout'] = array(
     'page callback' => 'itguser_logout',
-    'access arguments' => array('access content'),
+    //'access arguments' => array('access content'),
+     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
    
