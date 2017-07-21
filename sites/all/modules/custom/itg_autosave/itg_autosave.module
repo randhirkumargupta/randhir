@@ -102,6 +102,11 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
   $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
   // match form_id with saved id for autosave.
   if (in_array($form_id, $form_ids)) {
+	// Lock story if already open in Edit mode
+	  if($form['nid']['#value'] != null){
+		  $lock_status = $itg_autosave_form->itg_autosave_get_lock_status_node_id($form['nid']['#value']);
+		  var_dump($lock_status);die;
+	  }  
     $flag = FALSE;
     if ($form['nid']['#value'] == NULL) {
       $form['#node']->status = 0;

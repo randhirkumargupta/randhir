@@ -443,18 +443,22 @@ class itg_auto_save {
                     if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
                         return TRUE;
                     }
+                    break;
                 case 'images':
                     if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
                         return TRUE;
                     }
+                    break;
                 case 'image':
                     if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
                         return TRUE;
                     }
+                    break;
                 case 'list_integer':
                     if ($field_values[$value['fieldName']]['und'] > 0) {
                         return TRUE;
                     }
+                    break;
             }
         }
 
@@ -658,8 +662,7 @@ class itg_auto_save {
                 case 'text_with_summary':
                     $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']][LANGUAGE_NONE][0]['value'];
                     break;
-                    break;
-
+                    
                 case 'list_text':
                     $this->value = $inputs[$field['fieldName']]['und'];
                     if (is_array($this->value)) {
