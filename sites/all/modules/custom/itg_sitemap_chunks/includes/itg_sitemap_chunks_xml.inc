@@ -28,14 +28,14 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
   $contents = array('story', 'videogallery', 'photogallery');
   $xml_file_content = itg_sitemap_chunks_get_content_links($contents);
   //gz file
-  $gzfile = "public://".SITEMAP_BUCKET."/xmlsitemap.xml.gz";
+  $gzfile = "public://" . SITEMAP_BUCKET . "/xmlsitemap.xml.gz";
   $gzdata = gzencode($xml_file_content, 9);
   $fp = fopen($gzfile, "w");
   fwrite($fp, $gzdata);
   fclose($fp);
   // Create xml
   //Create gz file.
-  $xmlfile = "public://".SITEMAP_BUCKET."/xmlsitemap.xml";
+  $xmlfile = "public://" . SITEMAP_BUCKET . "/xmlsitemap.xml";
   $fp = fopen($xmlfile, "w");
   fwrite($fp, $xml_file_content);
   fclose($fp);
@@ -44,17 +44,22 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
 function itg_sitemap_chunks_create_xml_sitemap_index() {
   $xml_files_info = itg_video_get_sitemap_xmls();
   if (!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
-    header('Content-type: application/xml');
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\r\n";
+    $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\r\n";
     foreach ($xml_files_info['file_url'] as $key => $data) {
-      $xml .= '<sitemap>';
-      $xml .= '<loc> <![CDATA[ ' . $xml_files_info['file_url'][$key] . ' ]]> </loc>';
-      $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>';
-      $xml .= '</sitemap>';
+      $xml .= '<sitemap>' . "\r\n";
+      $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>' . "\r\n";
+      $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>' . "\r\n";
+      $xml .= '</sitemap>' . "\r\n";
     }
     $xml .= '</sitemapindex>';
-    echo $xml;
+    header('Content-type: application/xml');
+    $dom = new DOMDocument;
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml);
+    echo $dom->saveXML();
+    drupal_exit();
   } else {
     return drupal_not_found();
   }
@@ -352,7 +357,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
       if ($total_rows > 0) {
         // get sitemap details from custom sitemap table i.e. priority frequency etc.
         //directory public path
-        $feed_dir = "public://".SITEMAP_BUCKET."/$CT";
+        $feed_dir = "public://" . SITEMAP_BUCKET . "/$CT";
         //create directory
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $x = 0;
@@ -382,7 +387,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           // Logic to rename file has end.
           // get last file number.
           $first_file_number = 1;
-          $feed_dir_for_delete = "public://".SITEMAP_BUCKET."/$CT";
+          $feed_dir_for_delete = "public://" . SITEMAP_BUCKET . "/$CT";
           // Last file uri path.
           $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
           // Delete last file we will create it again.
