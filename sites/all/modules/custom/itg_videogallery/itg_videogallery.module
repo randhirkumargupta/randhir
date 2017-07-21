@@ -586,14 +586,14 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         if (!empty($video_image)) {
           if ($video_image[0]->property == VIDEO_PROPERTY) {
             $private_status = $videofields['field_video_private']['und'][0]['value'];
-
             $video_title = $videofields['field_video_title']['und'][0]['value'];
             $video_thumb_fid = $videofields['field_video_thumbnail']['und'][0]['fid'];
+            $exclude_ads = $videofields['field_include_ads']['und'][0]['value'];
             if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
               $video_thumb_fid = $extralarge_image_fid;
             }
             // Update tags,image title on DM
-            itg_videogallery_update_tags_video_private($tag_value, $video_image[0]->solr_video_id, $private_status, $video_desc, $video_title, $video_thumb_fid);
+            itg_videogallery_update_tags_video_private($tag_value, $video_image[0]->solr_video_id, $private_status, $video_desc, $video_title, $video_thumb_fid,$exclude_ads);
           }
           // Update embed code of this video.
           itg_videogallery_update_embedcode_url($video_image[0]->solr_video_id);
@@ -782,6 +782,7 @@ function itg_videogallery_node_insert($node) {
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
           $video_title = $video_details[$videofields['value']]->field_video_title[LANGUAGE_NONE][0]['value'];
           $video_thumb_fid = $video_details[$videofields['value']]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'];
+         $exclude_ads = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
           if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
             $video_thumb_fid = $extralarge_image_fid;
           }
@@ -809,7 +810,7 @@ function itg_videogallery_node_insert($node) {
               $file_video = itg_videogallery_get_video_info_by_fid($fids);
               if ($file_video[0]->property == VIDEO_PROPERTY) {
                 // Upadte image ,tags,title On DM 
-                itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status, $video_desc, $video_title, $video_thumb_fid);
+                itg_videogallery_update_tags_video_private($tag_value, $file_video[0]->solr_video_id, $priv_status, $video_desc, $video_title, $video_thumb_fid,$exclude_ads);
               }
               // Update embed code for this vidoe in table
               itg_videogallery_update_embedcode_url($file_video[0]->solr_video_id);
@@ -965,10 +966,17 @@ function itg_videogallery_dailymotion_api() {
   return $api;
 }
 
+function itg_videogallery_clean_string($string) {
+    $string = str_replace(' ', ' ', $string);
+    $string = preg_replace('/[^A-Za-z0-9\-ığşçöüÖÇŞİıĞ]/', ' ', $string);
+
+    return preg_replace('/-+/', '-', $string);
+}
+
 /**
  * Implements function for remove video from playlist
  */
-function itg_videogallery_update_tags_video_private($tags_value, $video_id, $private, $video_desc = "", $video_title = "", $video_thumb_fid = "") {
+function itg_videogallery_update_tags_video_private($tags_value, $video_id, $private, $video_desc = "", $video_title = "", $video_thumb_fid = "",$exclue_ads="") {
   if ($video_thumb_fid) {
     $image_load = file_load($video_thumb_fid);
     $image_url = file_create_url($image_load->uri);
@@ -979,13 +987,23 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   else {
     $private = 'false';
   }
+  if (strtolower($exclue_ads) == 'yes') {
+    $exclude_ads_flag = 1;
+  }
+  else {
+    $exclude_ads_flag = 0;
+  }
+
+  $video_desc = itg_videogallery_clean_string($video_desc);
   $api = itg_videogallery_dailymotion_api();
+
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
-    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc);
+
+    $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc. '&advertising_instream_blocked=' . $exclude_ads_flag);
   }
   else if (empty($tags_value) && !empty($video_title)) {
-    $api->post('/video/' . $video_id . '?private=' . $private . '&title=' . $video_title . '&description=' . $video_desc);
+    $api->post('/video/' . $video_id . '?private=' . $private . '&title=' . $video_title . '&description=' . $video_desc. '&advertising_instream_blocked=' . $exclude_ads_flag);
   }
   else if (!empty($tags_value) && empty($video_title)) {
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&description=' . $video_desc);
