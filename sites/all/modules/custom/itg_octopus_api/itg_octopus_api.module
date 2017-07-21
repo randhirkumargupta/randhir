@@ -281,7 +281,7 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
 
     $octopus_ref = json_decode(base64_decode($_GET['octopus_ref']));
     $slug_id = $octopus_ref->slug_id;
-    $slug_object = itg_octopus_slug_details($slug_id);
+    $slug_object = itg_octopus_slug_detail($slug_id);
     if (strpos($slug_object->text, 'CDATA') !== false) {
       $body_slug = explode('[', $slug_data->text);
       unset($body_slug[0]);
@@ -544,7 +544,7 @@ function itg_octopus_api_ftp_connection_setup() {
 /**
  * Get slug detail for video
  */
-function itg_octopus_slug_details($sid) {
+function itg_octopus_slug_detail($sid) {
   $query = db_select('itg_octopus_slug', 'ios');
   $query->leftjoin('itg_element_clip', 'clip', 'clip.storyid=ios.storyid');
   $query->fields('ios');
