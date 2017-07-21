@@ -22,7 +22,7 @@
       $html .='<div class="slide"><div class="photo-slide"><amp-img layout="responsive" src="'.image_style_url("photgallery_landing_slider_753x543", $file->uri).'"
         width="753"
         height="543"></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
-        <amp-fit-text><p>'.$caption.'</p></amp-fit-text></div>';
+        <p>'.$caption.'</p></div>';
         $i++;
     }
     $html .= '</amp-carousel>';
@@ -40,7 +40,7 @@ if (function_exists('get_other_gallery_amp')) {
   $entity_arr = get_other_gallery_amp($primary_category, $node->nid, $node->type, 4);
   if (!empty($entity_arr)) {
     $other_gallery = '';
-    $other_gallery .= '<h2><span>OTHER GALLERY</span></h2>';
+    $other_gallery .= '<h2><span>'.t('OTHER GALLERIES').'</span></h2>';
     $other_gallery .= '<ul>';
     foreach ($entity_arr as $key => $value) {
       // get image count

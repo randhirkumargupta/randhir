@@ -195,3 +195,14 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
 
   return $themes;
 }
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_mega_reviews_critics_views_api() {
+  return array(
+    'api' => 3,
+  );
+}

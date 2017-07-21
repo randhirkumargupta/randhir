@@ -36,7 +36,7 @@ global $base_url;
     <?php
     $url_file_video = $base_url . '/node/add/videogallery?element=vo&story_id=' . $result->storyid . '&destination=rundown/listing';
     ?>
-    <a href="<?php print $url_file_video; ?>" class="file-video btn-submit btn-small" attribute_id ="<?php print $result->id; ?>" data="<?php print $result->clip_data[0]->clipobj_id . '.mov'; ?>">File Video Article</a>
+    <a href="javascript:void(0);" class="file-video btn-submit btn-small" attribute_id ="<?php print $result->id; ?>" data="<?php print $result->clip_data[0]->clipobj_id . '.mov'; ?>">File Video Article</a>
   </div>
    <div style="display:none;" class="video-process-bar-<?php print $result->id; ?>">
   </div>
