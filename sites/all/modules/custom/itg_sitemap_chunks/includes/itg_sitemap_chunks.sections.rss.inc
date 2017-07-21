@@ -328,6 +328,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
  */
 function itg_sitemap_print_section_rss($result) {
   global $base_url;
+  $arg = arg();
   $xml .= '';
   foreach ($result as $data) {
     $xml .= '<item>' . "\r\n";
@@ -350,7 +351,30 @@ function itg_sitemap_print_section_rss($result) {
       $xml .= '<sectionname> <![CDATA[ ' . $data['name'] . ' ]]></sectionname>' . "\r\n";
     }
     $xml .= '<link> <![CDATA[ ' . check_url($node_link) . ' ]]></link>' . "\r\n";
-    $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    if ($arg[0] == 'rss-gallery') {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" align="left" hspace="2" height="82" width="107" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    } else if ($arg[0] == 'rss-video') {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" align="left" hspace="2" height="82" width="107" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    } else {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    }
+    if ($arg[0] == 'rss-gallery') {
+      $xml .='<media:description type="html">';
+      $xml .= '<![CDATA[ <a href="' . $node_link . '"><img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"></a>';
+      $xml .= ']]> </media:description>' . "\r\n";
+      $xml .= '<media:thumbnail url="' . $node_extra_large_image_url . '"/>' . "\r\n";
+      $xml .= '<media:content medium="image" type="image/jpg" url="' . $node_extra_large_image_url . '"/>' . "\r\n";
+      $xml .= '<media:copyright>' . t("© 2010 India Today Group. All Rights Reserved.") . '</media:copyright>' . "\r\n";
+      $xml .= '<pubDate>' . $published_date . '</pubDate>' . "\r\n";
+    } else if ($arg[0] == 'rss-video') {
+      $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">' . "\r\n";
+      $xml .= '<media:category scheme="' . $node_link . '">' . get_term_name_from_tid_for_report(itg_widget_get_primary_cat($data['nid'], 1)) . '</media:category>' . "\r\n";
+      $xml .= '<media:text type="plain"><![CDATA[ ' . check_plain($node_title) . ' ]]></media:text>' . "\r\n";
+      $xml .= '<media:rating scheme="urn:simple">nonadult</media:rating>' . "\r\n";
+      $xml .= '<media:thumbnail width="107" height="82" url="' . $node_extra_large_image_url . '"/>' . "\r\n";
+      $xml .= '</media:content>' . "\r\n";
+    }
+
     $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>' . "\r\n";
     $xml .= '</item>' . "\r\n";
   }

@@ -1431,11 +1431,13 @@ function itg_widget_check_node_in_widget($nid, $widget) {
  * Implement function for get primary category
  * @param int $nid
  */
-function itg_widget_get_primary_cat($nid) {
+function itg_widget_get_primary_cat($nid , $is_rss = FALSE) {
   $query = db_select('field_data_field_primary_category', 'primary_cat');
   $query->fields('primary_cat', array('field_primary_category_value'));
   $query->condition('primary_cat.entity_id', $nid, '=');
-  $query->condition('primary_cat.bundle', 'story', '=');
+  if(!$is_rss) {
+    $query->condition('primary_cat.bundle', 'story', '=');
+  }
   $result = $query->execute()->fetchField();
   return $result;
 }
