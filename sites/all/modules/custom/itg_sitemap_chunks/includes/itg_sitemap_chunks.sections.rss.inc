@@ -197,11 +197,11 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   sort($childrens);
   try {
     $query = db_select('node', 'n');
-    $query->join('itg_widget_order_section', 'wos' , 'n.nid=wos.nid');
-    $query->join('field_data_field_story_short_headline', 'sh', 'sh.entity_id=wos.nid');
-    $query->join('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->join('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
-    $query->join('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
+    $query->leftJoin('itg_widget_order_section', 'wos' , 'n.nid=wos.nid');
+    $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=wos.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
     $query->fields('wos', array('nid'));
     $query->fields('n', array('title', 'created'));
     $query->fields('sh', array('field_story_short_headline_value'));
@@ -222,7 +222,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
       $query->orderBy('wos.weight', 'DESC');
       $query->orderBy('n.nid', 'DESC');
     }
-    //$query->groupBy('n.nid');
+    $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   } catch (Exception $ex) {
     echo $ex->getMessage();
