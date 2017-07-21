@@ -235,10 +235,17 @@ function reset_autosave_lock($nid){
 						  ))
 				->condition('nid', $nid, '=')
 				->execute();
-	if($_GET['destination']){
-		drupal_goto($_GET['destination']);
+	$node_path = 'node/'.$nid;
+	if(isset($_GET['content_lock_token'])){
+		$lock_token = $_GET['content_lock_token'];
 	}else{
-		drupal_goto('mydraft-story');
+		$lock_token = drupal_get_token($node_path);
+	}	
+	$node_edit_path = $node_path.'/edit';
+	if(isset($_GET['redirectTo'])){
+		drupal_goto($node_edit_path, array('query' => array('destination' => $_GET['destination'], 'content_lock_token' => $lock_token)));
+	}else{
+		drupal_goto($node_edit_path, array('query' => array('destination' => 'mydraft-story', 'content_lock_token' => $lock_token)));
 	}
 	
 }
