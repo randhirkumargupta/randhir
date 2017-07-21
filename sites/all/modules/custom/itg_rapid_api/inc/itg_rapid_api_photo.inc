@@ -321,10 +321,10 @@ function generatePhotoDetailList($galleryimg) {
       $img_url = completeFilePath($fid_file);
       // custom function for get img caption
       //$caption = getImgCaption($fid);
-      $caption = $fc->field_image_caption['und'][0]['uri'];
+      $caption = $fc->field_image_caption['und'][0]['value'];
       // custom function for get img byline
       //$byline = getImgByline($fid);
-      $byline = $fc->field_photo_byline['und'][0]['uri'];
+      $byline = $fc->field_photo_byline['und'][0]['value'];
       $photo_story_img = image_style_url('photo_slider_753x543', $uri);
       $photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
       if (!$byline) {
