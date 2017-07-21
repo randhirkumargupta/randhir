@@ -1209,9 +1209,10 @@ function itg_rapid_api_resource() {
         ),
       
       //Sprint 3 close poll
+      //Sprint 3 close poll
       'poll_cast' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves poll based on poll id in the system.',
                     'file' => array(
                         'type' => 'inc',
@@ -1230,6 +1231,27 @@ function itg_rapid_api_resource() {
                             'source' => array('path' => 0),
                             'optional' => TRUE,
                             'default' => '*',
+                        ),
+                      array(
+                            'name' => 'poll_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            'description' => 'poll id of the poll',
+                            'type' => 'int',
+                        ),
+                      array(
+                            'name' => 'option id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            'description' => 'option id of the poll , which you want to make the ans',
+                            'type' => 'int',
+                        ),
+                      array(
+                            'name' => 'user id',
+                            'optional' => TRUE,
+                            'source' => 'data',
+                            'description' => 'user id of the loged in user',
+                            'type' => 'int',
                         ),
                     ),
                 ),
@@ -1547,7 +1569,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // update_preference custom resource declaration.....
-        'update_preference' => array(
+        'update_preference' => array( 
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves update_preference schemes info.',
@@ -1583,6 +1605,127 @@ function itg_rapid_api_resource() {
                             'source' => 'data',
                             //'source' => array('data' => 'first_name'),
                             'description' => 'user_id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      // Sprint 4 Read Later
+      'bookmark_get' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Bookmark Get Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'bookmark_get_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Loged in user id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      // Sprint 4 Read Later
+      'bookmark_set' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Bookmark Set and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'bookmark_set_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Loged in user id',
+                            'type' => 'string',
+                        ),
+                      array(
+                            'name' => 'node_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Node id of the stories',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+            // Sprint 4 Read Later
+      'bookmark_delete' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Bookmark delete and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'bookmark_delete_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'user_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Loged in user id',
+                            'type' => 'string',
+                        ),
+                      array(
+                            'name' => 'node_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Node id of the stories',
                             'type' => 'string',
                         ),
                     ),
@@ -2887,30 +3030,34 @@ function polls_close($token) {
 }
 
 /**
- * Returns all the open poll in the system 
+ * Returns all the open poll from the system 
  * @param 
  * @return array
  * 	array of open polls.
  */
-function poll_cast($token) {
+function poll_cast($token,$poll_id, $option_id , $user_id = 0) {
+   
+   $poll_id = $_POST['poll_id'];
+   $option_id = $_POST['option_id'];
+   $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '0';
+   
     
-//    $redis_key = "itg_rapid_api_cast_poll";
-//    $result_get = getRedis($redis_key);
+    $redis_key = "itg_rapid_api_cast_poll";
+    $result_get = getRedis($redis_key);
 
-//    if ($result_get['key_value'] != ""){
-//        $jsondata = $result_get['key_value'];
-//    } else {
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
         // call function from return data..
-        $jsondata = poll_cast_list();
+        $jsondata = poll_cast_list($poll_id, $option_id,$user_id);
         $jsondata = json_encode($jsondata);
-//        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-//        $result_set = setRedis($redis_key, $jsondata, $ttl);
-//    }
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
 }
-
 
 /**
  * Returns poll detail in an array based on poll id args
@@ -2920,19 +3067,19 @@ function poll_cast($token) {
  */
 function poll_detail($token,$poll_id) {
     
-      $poll_id = $_GET['poll_id'];
-//    $redis_key = "itg_rapid_api_cast_poll";
-//    $result_get = getRedis($redis_key);
+    $poll_id = $_GET['poll_id'];
+    $redis_key = "itg_rapid_poll_details_".$poll_id;
+    $result_get = getRedis($redis_key);
 
-//    if ($result_get['key_value'] != ""){
-//        $jsondata = $result_get['key_value'];
-//    } else {
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
         // call function from return data..
         $jsondata = poll_detail_data($poll_id);
         $jsondata = json_encode($jsondata);
-//        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-//        $result_set = setRedis($redis_key, $jsondata, $ttl);
-//    }
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
@@ -3172,4 +3319,80 @@ function update_preference($user_id, $tid){
                 ->execute();
     }
     drupal_set_message(t("My Preferences Has Been Save."));
+}
+
+/*
+ * Ge All the Bookmark stories based on user id
+ * @param $user_id
+ * @return array of node stories
+ */
+
+function bookmark_get_responce($token, $user_id) {
+    
+    $user_id = $_GET['user_id'];
+    $redis_key = "itg_rapid_".$user_id.'';
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+
+        $jsondata = bookmark_responce_data($user_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/*
+ * Set bookmark stories for a specific user_id and return all
+ * 
+ */
+
+function bookmark_set_responce($token, $user_id, $node_id) {
+    
+      $user_id = $_POST['user_id'];
+      $node_id = $_POST['node_id'];
+    $redis_key = "itg_rapid_set_bookmark_".$user_id."_".$node_id;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+
+        $jsondata = bookmark_set_data_responce($user_id,$node_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+function bookmark_delete_responce($token, $user_id, $node_id) {
+    
+      $user_id = $_POST['user_id'];
+      $node_id = $_POST['node_id'];
+      $redis_key = "itg_rapid_bookmark_delete".$user_id."_".$node_id;
+      $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+
+        $jsondata = bookmark_del_data_responce($user_id,$node_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
 }

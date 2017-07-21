@@ -325,12 +325,13 @@ function generatePhotoDetailList($galleryimg) {
       // custom function for get img byline
       //$byline = getImgByline($fid);
       $byline = $fc->field_photo_byline['und'][0]['uri'];
+      $photo_story_img = image_style_url('photo_story_753x543', $uri);
       
       if (!$byline) {
         // $byline = "";
       }
       $photo_list_array[$listcont]['p_id'] = "$fid";
-      $photo_list_array[$listcont]['p_image'] = "$file_uri";
+      $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
       $photo_list_array[$listcont]['p_credit'] = "$byline";
       $photo_list_array[$listcont]['p_caption'] = "$caption";
       $listcont++;
@@ -459,7 +460,7 @@ function generatePhotoStoryDetailList($nid) {
       $photo_list_array[$listcont]['p_credit'] = "";
       $photo_list_array[$listcont]['p_caption'] = "";
       $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
-      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_html";
+      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
       $listcont++;
     }
   }
