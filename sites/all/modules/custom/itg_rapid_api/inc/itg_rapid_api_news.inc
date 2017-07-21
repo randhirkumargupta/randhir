@@ -172,6 +172,15 @@ if($term_tree_count){
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+      
+      $photo_story_eliimg = image_style_url('photo_story_647x363', $resvalue['esi_file_uri']);
+      $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_eliimg);
+      
+      $photo_story_liimg = image_style_url('photo_story_483x271', $resvalue['li_file_uri']);
+      $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_liimg);
+      
+      $photo_story_siiimg = image_style_url('photo_story_170x127', $resvalue['si_file_uri']);
+      $photo_story_siiimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_siiimg);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -464,6 +473,105 @@ function getNodeShareCount($nid){
     return $ns_count;
   
 }
+
+/*
+ * Count the node share, comment , view etc
+ * @args $nid
+ * $type 'total' will return the count of it
+ * @return an Associated array with count all these values.
+ */
+function analytics_node_data($nid, $total){
+  
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $analytics_data_array = array();
+    $data_count_node_view = array();
+    $data_count_node_like = array();
+    $data_count_node_comment = array();
+    $data_count_node_share = array(
+      'facebook_share' => 0,
+      'twitter_share' => 0,
+      'google_share' => 0,
+    );
+    $data_count_node_share_number = 0;
+    $final_count_result = 0;
+    $current_time_stamp = time();
+    $timestamp_24_hour_before = strtotime('-24 hours', $current_time_stamp);
+    if ($con) {
+      // Query to get node views count START.
+      $pagedetails_collection = $con->pagedetails;
+      $condition = array('nid' => "$nid");
+      $result = $pagedetails_collection->find($condition);
+      foreach ($result as $document) {
+        $data_count_node_view[] = $document['nid'];
+      }
+      $analytics_data_array['node_view_count'] = count($data_count_node_view);
+      //END.
+      // Query to get node like count START
+      $count_collection = $con->itg_custom_flag_count;
+
+      // Appended 0 as in mongo database 0 is going.
+      $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_result = $count_collection->find($count_condition);
+      foreach ($count_result as $count_document) {
+        $data_count_node_like = $count_document['like_count'];
+      }
+      $analytics_data_array['data_count_node_like'] = $data_count_node_like;
+      //END
+      //Query to get comment count of node START.
+      $comment_count = $con->itgcms_comment;
+      $comment_condition = array('page_id' => "$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $comment_count_result = $comment_count->find($comment_condition);
+
+      foreach ($comment_count_result as $comment_document) {
+        $data_count_node_comment[] = $comment_document['nid'];
+      }
+
+      $analytics_data_array['data_count_node_comment'] = count($data_count_node_comment);
+      // Now add vukkle comments count.
+      $analytics_data_array['data_count_node_comment'] = $analytics_data_array['data_count_node_comment'] + _get_vukkle_comment_count($nid);
+      // END
+      //Query to get number of share START
+      $front_user_activity = $con->front_user_activity;
+      $front_user_activity_condition = array('nid' => "$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $front_user_activity_result = $front_user_activity->find($front_user_activity_condition);
+
+      foreach ($front_user_activity_result as $front_user_activity_document) {
+        if ($front_user_activity_document['activity'] == 'twitter_share') {
+          $data_count_node_share['twitter_share'] = $data_count_node_share['twitter_share'] + 1;
+        }
+
+        if ($front_user_activity_document['activity'] == 'google_share') {
+          $data_count_node_share['google_share'] = $data_count_node_share['google_share'] + 1;
+        }
+
+        if ($front_user_activity_document['activity'] == 'facebook_share') {
+          $data_count_node_share['facebook_share'] = $data_count_node_share['facebook_share'] + 1;
+        }
+      }
+      // Add all share data.
+      $data_count_node_share_number = $data_count_node_share['twitter_share'] + $data_count_node_share['google_share'] + $data_count_node_share['facebook_share'];
+
+      $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
+      //END
+    }
+
+    if($type == 'total'){ // return the total count
+      // Caculate sum of all data.
+      foreach ($analytics_data_array as $counting) {
+        if (is_int($counting)) {
+          $final_count_result = $final_count_result + $counting;
+        }
+      }
+      return $final_count_result;
+    }else { // return the associated Array
+      return $analytics_data_array;
+    }
+    
+  }
+  
+}
+
 
 
 

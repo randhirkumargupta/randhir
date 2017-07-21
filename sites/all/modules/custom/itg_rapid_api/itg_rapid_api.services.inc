@@ -3330,7 +3330,7 @@ function update_preference($user_id, $tid){
 function bookmark_get_responce($token, $user_id) {
     
     $user_id = $_GET['user_id'];
-    $redis_key = "itg_rapid_".$user_id.'';
+    $redis_key = "itg_rapid_get_bookmark".$user_id.'';
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != ""){
