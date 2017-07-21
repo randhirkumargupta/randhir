@@ -1,0 +1,592 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Editors Take - Card Game</title>
+<meta property="og:title" content="Modi is the Ace in this card game, yet the game is on. Go, play!">
+<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/200-tumb1.png">
+<meta property="og:url" content="/cards/index.html">
+<meta property="og:description" content="Modi is the Ace in this card game, yet the game is on. Go, play!" />
+<link rel="stylesheet" type="text/css" href="/cards/css/style.css" >
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<style>
+
+#drop-are { 
+    height: 500px;
+    overflow: hidden;
+    position: absolute;
+    top: 150px;
+    width: 510px; z-index:-1; margin-left:40px;}
+
+.draggable {
+    height: 190px;
+    padding: 0;
+    width: 135px; 
+
+	    }
+
+.droppable { 
+    float: left;
+    height: 190px;
+    margin-right: 40px;
+    padding: 0;
+    width: 141px; margin-bottom:40px; 
+ }
+
+.img-box { width:120px; height:130px; float:left; margin:20px 40px 5px 40px}
+.blank-box {width:100px;height:100px;padding:10px;border:1px solid #aaaaaa; }
+.names {text-align:center; padding:0px; width:120px;}
+.clr { clear:both;}
+.leader-img { padding:38px;}
+.main-container { width:1000px; margin:0 auto}
+.ui-draggable-dragging { z-index:999!Important}
+.close { background:#000; padding:5px; border-radius:5px; color:#fff; float:right; margin:-8px; font-size:10px; cursor:pointer; display:none;  }
+#_1 { position:absolute; top:0; left:0}
+#_2 { position:absolute; top:0; left:183px}
+#_3 { position:absolute; top:0; left:367px}
+#_4 { position:absolute; top:232px; left:0px}
+#_5 { position:absolute; top:232px; left:183px}
+#_6 { position:absolute; top:232px; left:367px}
+#right-sidebar1 { display:none;}
+.close { position:absolute; z-index:2; }
+.open { opacity:0; position:absolute; z-index:3 }
+.card-stage ul li div, .droppable div{ display:none}
+.ui-widget-header, .ui-widget-content { background:none; border:none;}
+.place-data {font-family: roboto;
+    font-size: 20px;
+    height: 247px;
+    padding: 33px;}
+
+.card-stage { margin-top:0px;}
+
+.itgd_links {
+    background-color: #000 !important;
+    border-bottom: 1px solid #FFFFFF;
+    color: #7A7A7A;
+    font: bold 12px/15px arial;
+    margin: 0;
+    padding: 0.3%;
+    text-align: center;
+}
+.itgd_links ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 1003px;
+}
+.itgd_links ul li.last {
+    border-right: medium none;
+}
+.itgd_links ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 0 9px;
+}
+.last {
+    border-right: 0 none !important;
+    margin: 0;
+}
+.itgd_links a {
+    color: #999;
+    text-decoration: none;
+}
+
+
+</style>
+<script>
+$(document).ready(function(){
+	var margin = $(".closed").width()/2;
+	var width=$(".closed").width();
+	var height=$(".closed").height();
+	$('.closed').stop().animate({width:'0px',height:''+height+'px',marginLeft:''+margin+'px',opacity:'0.5'},{duration:500});
+	window.setTimeout(function() {
+		$(".open").stop().animate({width:''+width+'px',height:''+height+'px',marginLeft:'0px',opacity:'1'},{duration:500});
+	},500);
+});
+
+
+</script>
+
+
+<script>
+$(function() {
+	
+	var drag_img ;
+	var drop_img ;
+	
+$( ".draggable" ).draggable({ 
+	revert: "invalid"
+});
+
+var currentbox = "";
+
+var raga_namo = new Array();
+	raga_namo ["raga-namo1"] = 'Aiyyo, these two can’t play ball: one’s scuba-diving on land, the other’s ready to bat. Will be busy exchanging toffees or Jijaji barbs. No, Nyet, Nada, Nakko.';
+	
+var raga_mamta = new Array();
+	raga_namo ["raga-mamta1"] = 'Can work but with a lot of effort on their part and the country’s patience.  Maybe Rahul can gift Didi some Made in Amethi footwear instead of the Chinese flipflops?';
+	
+var raga_jaya = new Array();
+	raga_namo ["raga-jaya1"] = 'Could work. Mercurial Amma needs to be placated; maybe RaGa can get some elephants for her to donate to the Guruvayoor temple.';
+	
+var raga_kejri = new Array();
+	raga_namo ["raga-kejri1"] = 'Possible. But given the Congress thrashing will Kejriwal let the government survive? He wants to be the man who rules India and not the man from Antillia.';
+	
+var raga_mulayam = new Array();
+	raga_namo ["raga-mulayam1"] = 'Best buddies.  Tight embrace but the old wrestler has more tricks up his ... than the times Raga’s been to an akhara';
+
+var namo_raga = new Array();
+	raga_namo ["namo-raga1"] = 'Aiyyo, these two can’t play ball: one’s scuba-diving on land, the other’s ready to bat. Will be busy exchanging toffees or Jijaji barbs. No, Nyet, Nada, Nakko.';
+
+var namo_mamta = new Array();
+	raga_namo ["namo-mamta1"] = 'Modi and Didi? Looks like no deal. But both are good at getting the best deals from no-win situations. Bengal mein Didi, Dilli mein Dada.';
+	
+var namo_jaya = new Array();
+	raga_namo ["namo-jaya1"] = 'In a brief exchange of dhoklas and vadas, everything will be forgiven. Filter coffee will help. Friends in need are friends with benefits.';
+
+var namo_kejri = new Array();
+	raga_namo ["namo-kejri1"] = 'Unlikely. Just ‘sab mile hue hainji’ can sink this ship or boat.';
+	
+var namo_mulayam = new Array();
+	raga_namo ["namo-mulayam1"] = 'If this happens, India can win the football world cup.';
+
+var mamta_raga = new Array();
+	raga_namo ["mamta-raga1"] = 'Can work but with a lot of effort on their part and the country’s patience.  Maybe Rahul can gift Didi some Made in Amethi footwear instead of the Chinese flipflops?';
+	
+var mamta_namo = new Array();
+	raga_namo ["mamta-namo1"] = 'Modi and Didi? Looks like no deal. But both are good at getting the best deals from no-win situations. Bengal mein Didi, Dilli mein Dada.';
+	
+var mamta_jaya = new Array();
+	raga_namo ["mamta-jaya1"] = 'Desh ki Maa-behen ek? Possible but hold the real dangerous threat of fireworks. Cholbe na! Cholbe! Cholbe na! Cholbe!';
+
+var mamta_kejri = new Array();
+	raga_namo ["mamta-kejri1"] = 'Nah. Aam Aadmi champion better not mess with the original Aam Aurat who tore the Reds into bits.';
+	
+var mamta_mulayam = new Array();
+	raga_namo ["mamta-mulayam1"] = 'Chalega but only till one of the two lose patience at the other’s insistence to speak in one’s mother tongue. Please turn on the subtitles.';
+
+var jaya_raga = new Array();
+	raga_namo ["jaya-raga1"] = 'Could work. Mercurial Amma needs to be placated; maybe RaGa can get some elephants for her to donate to the Guruvayoor temple.';
+	
+var jaya_namo = new Array();
+	raga_namo ["jaya-namo1"] = 'In a brief exchange of dhoklas and vadas, everything will be forgiven. Filter coffee will help. Friends in need are friends with benefits.';
+	
+var jaya_mamta = new Array();
+	raga_namo ["jaya-mamta1"] = 'Desh ki Maa-behen ek? Possible but hold the real dangerous threat of fireworks. Cholbe na! Cholbe! Cholbe na! Cholbe!';
+
+var jaya_kejri = new Array();
+	raga_namo ["jaya-kejri1"] = 'Explosive jodi but sorry no one has dry matches to light the pataka.';
+
+var jaya_mulayam = new Array();
+	raga_namo ["jaya-mulayam1"] = 'Nah. Like a blind man leading another blind man. Expert outside supporters can’t be each other’s crutch. Besides, Amma no like no uncouth.';
+
+var kejri_raga = new Array();
+	raga_namo ["kejri-raga1"] = 'Possible. But given the Congress thrashing will Kejriwal let the government survive? He wants to be the man who rules India and not the man from Antillia.';
+	
+var kejri_namo = new Array();
+	raga_namo ["kejri-namo1"] = 'Unlikely. Just sab mile hue hainji can sink this ship or boat.';
+		
+var kejri_mamta = new Array();
+	raga_namo ["kejri-mamta1"] = 'Nah. Aam Aadmi champion better not mess with the original Aam Aurat who tore the Reds into bits.';
+
+var kejri_jaya = new Array();
+	raga_namo ["kejri-jaya1"] = 'Explosive jodi but sorry no one has dry matches to light the pataka.';
+
+var kejri_mulayam = new Array();
+	raga_namo ["kejri-mulayam1"] = 'Has a dog ever caught its tail? ';
+	
+var mulayam_raga = new Array();
+	raga_namo ["mulayam-raga1"] = 'Best buddies.  Tight embrace but the old wrestler has more tricks up his ... than the times Raga’s been to an akhara';
+	
+var mulayam_namo = new Array();
+	raga_namo ["mulayam-namo1"] = 'If this happens, India can win the football world cup.';
+	
+var mulayam_mamta = new Array();
+	raga_namo ["mulayam-mamta1"] = 'Chalega but only till one of the two lose patience at the other’s';
+
+var mulayam_jaya = new Array();
+	raga_namo ["mulayam-jaya1"] = 'Nah. Like a blind man leading another blind man. Expert outside';
+	
+var mulayam_kejri = new Array();
+	raga_namo ["mulayam-kejri1"] = 'Has a dog ever caught its tail?';
+
+$( ".droppable" ).droppable({
+activeClass: "ui-state-default",
+hoverClass: "ui-state-hover",
+	drop: function( event, ui ) {
+		var oldhtml = ui.draggable.html();
+		var drop_img = $(this).attr('src');
+		//var drag_data = ui.draggable.children('div').html();
+		
+		var rid = ui.draggable.children('div').attr('id');
+		var mid = $(this).children('div').attr('id');
+	
+		var collect_content = raga_namo[rid+'-'+mid];
+		
+		//var drop_data = $(this).children('div').html();
+		$('.place-data').html(collect_content);
+		$('#right-sidebar').hide();
+		$('#right-sidebar1').fadeIn('slow');
+		$('.fist-card').append(oldhtml);
+		$('.fist-card a h3, .fist-card div').hide();
+		$('.second-card img').attr('src', drop_img);
+	}
+});
+
+
+
+$('.close').click(function(){
+		var dropimg = $(this).next('div').children('img').attr('name');
+		$(this).next('div').children('img').remove();
+		$('.leader-img > div[name = '+ dropimg + ']').show().css({'left':'0', 'top':'0'});
+		$(this).hide();
+		
+	});
+});
+</script>
+
+
+<script>
+
+(function ($) {
+    // Detect touch support
+    $.support.touch = 'ontouchend' in document;
+    // Ignore browsers without touch support
+    if (!$.support.touch) {
+    return;
+    }
+    var mouseProto = $.ui.mouse.prototype,
+        _mouseInit = mouseProto._mouseInit,
+        touchHandled;
+
+    function simulateMouseEvent (event, simulatedType) { //use this function to simulate mouse event
+    // Ignore multi-touch events
+        if (event.originalEvent.touches.length > 1) {
+        return;
+        }
+    event.preventDefault(); //use this to prevent scrolling during ui use
+
+    var touch = event.originalEvent.changedTouches[0],
+        simulatedEvent = document.createEvent('MouseEvents');
+    // Initialize the simulated mouse event using the touch event's coordinates
+    simulatedEvent.initMouseEvent(
+        simulatedType,    // type
+        true,             // bubbles                    
+        true,             // cancelable                 
+        window,           // view                       
+        1,                // detail                     
+        touch.screenX,    // screenX                    
+        touch.screenY,    // screenY                    
+        touch.clientX,    // clientX                    
+        touch.clientY,    // clientY                    
+        false,            // ctrlKey                    
+        false,            // altKey                     
+        false,            // shiftKey                   
+        false,            // metaKey                    
+        0,                // button                     
+        null              // relatedTarget              
+        );
+
+    // Dispatch the simulated event to the target element
+    event.target.dispatchEvent(simulatedEvent);
+    }
+    mouseProto._touchStart = function (event) {
+    var self = this;
+    // Ignore the event if another widget is already being handled
+    if (touchHandled || !self._mouseCapture(event.originalEvent.changedTouches[0])) {
+        return;
+        }
+    // Set the flag to prevent other widgets from inheriting the touch event
+    touchHandled = true;
+    // Track movement to determine if interaction was a click
+    self._touchMoved = false;
+    // Simulate the mouseover event
+    simulateMouseEvent(event, 'mouseover');
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    // Simulate the mousedown event
+    simulateMouseEvent(event, 'mousedown');
+    };
+
+    mouseProto._touchMove = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+        }
+    // Interaction was not a click
+    this._touchMoved = true;
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    };
+    mouseProto._touchEnd = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+    }
+    // Simulate the mouseup event
+    simulateMouseEvent(event, 'mouseup');
+    // Simulate the mouseout event
+    simulateMouseEvent(event, 'mouseout');
+    // If the touch interaction did not move, it should trigger a click
+    if (!this._touchMoved) {
+      // Simulate the click event
+      simulateMouseEvent(event, 'click');
+    }
+    // Unset the flag to allow other widgets to inherit the touch event
+    touchHandled = false;
+    };
+    mouseProto._mouseInit = function () {
+    var self = this;
+    // Delegate the touch handlers to the widget's element
+    self.element
+        .on('touchstart', $.proxy(self, '_touchStart'))
+        .on('touchmove', $.proxy(self, '_touchMove'))
+        .on('touchend', $.proxy(self, '_touchEnd'));
+
+    // Call the original $.ui.mouse init method
+    _mouseInit.call(self);
+    };
+})(jQuery);
+</script>
+
+
+</head>
+
+<body>
+<div id="top-web" class="itgd_links">
+<ul> 
+<li class="last"><a rel="nofollow" target="_blank" href="http://indiatodaygroup.com/">THE INDIA TODAY GROUP</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.indiatoday.in/">India Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.aajtak.in/">Aaj Tak</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.headlinestoday.in/">Headlines Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.businesstoday.in/">Business Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.menshealthindia.in/">Men's Health</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.wonderwoman.in">Wonder Woman</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.cosmopolitan.in/">Cosmopolitan</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://oyefm.in/">Oye! 104.8FM</a></li>
+<li class="last"><a rel="nofollow" class="mainlevel" target="_blank" href="http://travelplus.intoday.in/">Travel Plus</a></li>
+</ul>
+<div class="clr"></div>
+</div>
+<div id="wrapper">
+  <div id="left-sidebar">
+    <div class="logo"><a href="http://indiatoday.intoday.in/elections/" target="_blank"><img src="/cards/images/logo.png" width="355" height="164" alt="logo" /></a></div>
+    <div class="opps">
+  <img src="images/Title.png" alt="" />
+    </div>
+    <p>Welcome to the political stock exchange, feel free to trade on any of the most unlikly option and see what you get.</p>
+  </div>
+  <!--left-sidebar end-->
+  <div id="right-sidebar">
+    <div id="header">
+      <div class="start"> <a href="#"><img src="/cards/images/Go-button.png" width="101" height="99" alt="" ></a> </div>
+      <div class="flt heading">
+        <p>
+        <!--Mix and match any two cards to see its outcome.</br>-->
+          Drag and drop one card over the other and watch the fun</p>
+      </div>
+      <div class="right-logo"><a href="http://www.indiatoday.in/" target="_blank"><img src="/cards/images/ITG-logo.png" width="79" height="78" alt="" ></a></div>
+    </div>
+    <!--header end-->
+    <div class="clr"></div>
+    <div class="card-stage">
+      <ul>
+        <li class="ui-widget-content draggable" name="box1" id="_1">
+           <a href=""><img src="/cards/images/Open-card-1.png"  width="148" height="201" alt="" class="open" />
+           <img src="/cards/images/Closed-card-1.png"  width="148" height="201" alt="" class="closed" />
+           <h3>Rahul Gandhi</h3>
+          </a>
+          <div class="data" id="raga">
+                <p>Aiyyo, these two can’t play ball: one’s scuba-diving on land, the other’s ready to bat. Will be busy exchanging toffees or Jijaji barbs. No, Nyet, Nada, Nakko.</p>
+            </div>
+        </li>
+        <li class="ui-widget-content draggable" name="box2" id="_2">
+         <a href=""><img src="/cards/images/Open-card-2.png" width="148" height="201" alt="" class="open" />
+         <img src="/cards/images/Closed-card-2.png"  width="148" height="201" alt="" class="closed" />
+          <h3>Narendra Modi</h3>
+          </a>
+          <div class="data" id="namo">
+                <p>Aiyyo, these two can’t play ball: one’s scuba-diving on land, the other’s ready to bat. Will be busy exchanging toffees or Jijaji barbs. No, Nyet, Nada, Nakko.</p>
+            </div>
+          </li>
+        <li class="ui-widget-content draggable" name="box1" id="_3">
+        <a href=""><img src="/cards/images/Open-card-3.png" width="148" height="201" alt="" class="open" />
+        <img src="/cards/images/Closed-card-3.png"  width="148" height="201" alt="" class="closed" />
+       <h3>Mamata Banerjee</h3>
+         
+          </a><div class="data" id="mamta">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+          </li>
+        <li class="ui-widget-content draggable" name="box1" id="_4">
+        <a href=""> <img src="/cards/images/Open-card-4.png" width="148" height="201" alt="" class="open" />
+        <img src="/cards/images/Closed-card-4.png"  width="148" height="201" alt="" class="closed" />
+          <h3>J. Jayalalithaa</h3>
+         
+          </a><div class="data" id="jaya">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+          </li>
+        <li class="ui-widget-content draggable" name="box1" id="_5">
+        <a href=""><img src="/cards/images/Open-card-5.png" width="148" height="201" alt="" class="open" />
+        <img src="/cards/images/Closed-card-5.png"  width="148" height="201" alt="" class="closed" />
+          <h3>Arvind Kejriwal</h3>
+         </a>
+         <div class="data" id="kejri">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+         </li>
+        <li class="ui-widget-content draggable" name="box1" id="_6">
+        <a href=""><img src="/cards/images/Open-card-6.png" width="148" height="201" alt="" class="open" />
+        <img src="/cards/images/Closed-card-6.png"  width="148" height="201" alt="" class="closed" />
+          <h3>Mulayam Singh Yadav</h3>
+          </a>
+          <div class="data" id="mulayam">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+          
+          </li>
+      </ul>
+    </div>
+    
+    <div id="drop-are">
+    <div class="ui-widget-header droppable" id="d_1" src="/cards/images/Open-card-1.png">
+    <div class="data" id="raga1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+    </div>
+    <div class="ui-widget-header droppable" id="d_2" src="/cards/images/Open-card-2.png">
+    <div class="data" id="namo1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+    
+    </div>
+    <div style="margin-right:0px;" class="ui-widget-header droppable" id="d_3" src="/cards/images/Open-card-3.png">
+     <div class="data" id="mamta1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+    </div>
+    <div class="ui-widget-header droppable" id="d_4" src="/cards/images/Open-card-4.png">
+    
+     <div class="data" id="jaya1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+    </div>
+    <div class="ui-widget-header droppable" id="d_5" src="/cards/images/Open-card-5.png">
+     <div class="data" id="kejri1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div>
+    </div>
+    <div style="margin-right:0px;" class="ui-widget-header droppable" id="d_6" src="/cards/images/Open-card-6.png"> 
+    <div class="data" id="mulayam1">
+                <p>Didi’s grudge may just work as a deterrent. Namo may just have to ditch Nano if it comes to shaking his throne.</p>
+            </div></div>
+    </div>
+  
+  
+    
+    <div class="social-icon"> <img src="/cards/images/social-icon.png" alt="" width="58" height="187" usemap="#Map" />
+      <map name="Map">
+         <area shape="rect" coords="12,139,49,176" href="#" target="_blank">
+        <area shape="rect" coords="12,95,49,132" href="https://plus.google.com/+indiatoday/posts" target="_blank">
+        <area shape="rect" coords="12,54,49,91"  href="http://twitter.com/?status= Modi is the Ace in this card game, yet the game is on. Go, play!%20http://indiatoday.intoday.in/cards/%20via%20%40indiatoday"  target="_blank">
+        <area shape="rect" coords="11,11,48,48" href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/cards/index.html&p[title]=&s=100&p[summary]=Modi is the Ace in this card game, yet the game is on. Go, play!.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/200-tumb1.png" target="_blank">
+      </map>
+    </div>
+  </div>
+  <!--right-sidebar end-->
+  
+  
+
+<!--third page start-->  
+  <div id="right-sidebar1">
+    
+    	<div id="header">
+            <div class="right-logo"><a href="#"><img src="/cards/images/ITG-logo.png" width="79" height="78" alt="" ></a></div>
+        </div>
+        <!--header end-->
+        <div class="clr"></div>
+        
+        
+    	<div class="flt stage">
+        
+        	<div class="left-panel">
+            	<div class="fist-card">
+                	<!--<img src="images/Open-card.png" width="147" height="199" alt="" />-->
+                </div>
+                
+                <div class="calculation">
+                	<p>+<span>=</span></p>
+                </div>
+                
+                <div class="second-card">
+                	<img src="/cards/images/Open-card.png" width="147" height="199" alt="" />
+                </div>
+                
+            </div>
+            <!--left-panel end-->
+            
+            
+            <div class="right-panel">
+               <div class="oops-moments"><img src="/cards/images/The-oops-moment.png"  alt="" /></div>
+                <div class="place-data">
+              
+                </div>
+                <div class="bottom-conect" style="display:none;"><a href="#">Post your comments</a> &nbsp;&nbsp;| &nbsp;&nbsp;<a href="#">Share </a></div>
+                <div class="try-again" style="margin-left:192px;"><a href="play.html">Try Again</a></div>
+            </div>
+            <!--right-panel end-->
+        
+        
+        
+        
+        </div>
+        <!--stage end-->
+        
+        <div class="social-icon">
+        	<img src="/cards/images/social-icon.png" alt="" width="58" height="187" usemap="#Map" />
+            <map name="Map">
+                <area shape="rect" coords="12,139,49,176" href="#">
+                <area shape="rect" coords="12,95,49,132" href="#">
+                <area shape="rect" coords="12,54,49,91" href="#">
+                <area shape="rect" coords="11,11,48,48" href="#">
+            </map>
+      </div>
+        
+        
+        
+        
+        
+    
+  </div>
+<!--third page start end-->  
+  
+    <div class="clr"></div>
+    
+    
+    <div style="width:1003px; margin:0 auto;margin-top:100px;">
+<iframe src="http://indiatoday.intoday.in/commentbox/comment_box.jsp?sId=361838&amp;ScfUrl=&amp;StoryTitle=Rajani_Doesnt_Age's timeline   
+&amp;message=&amp;website=special&amp;content_type=poll&amp;storytemplate=site" frameborder="0" scrolling="auto" width="680" height="550"></iframe>
+</div>
+
+    
+    
+    
+    
+</div>
+<!--wrapper end-->
+<div class="clr">&nbsp;</div>
+<div style="width:1003px; margin:0 auto; margin-top:78px">
+	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
+    </div>
+
+
+</body>
+</html>
