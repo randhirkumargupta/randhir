@@ -214,6 +214,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/cannes2013 [NC]  
 	RewriteCond %{REQUEST_URI} !/cards [NC]  
 	RewriteCond %{REQUEST_URI} !/cricket-fest-6 [NC]  
+	RewriteCond %{REQUEST_URI} !/educationconclave2015 [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -406,6 +407,8 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^cards/(.*) /staticpages/cards/$1 [L]
 	RewriteRule ^cricket-fest-6$ /staticpages/cricket-fest-6/index.html? [L]
     RewriteRule ^cricket-fest-6/(.*) /staticpages/cricket-fest-6/$1 [L]
+	RewriteRule ^educationconclave2015$ /staticpages/educationconclave2015/index.html? [L]
+    RewriteRule ^educationconclave2015/(.*) /staticpages/educationconclave2015/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
