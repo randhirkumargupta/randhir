@@ -54,7 +54,7 @@ $uri = base64_encode($actual_link);
         </ul>
       </div>
       <div class="follow-social">
-          <?php if ($user->uid > 0) {
+          <?php $user->uid  = 615; if ($user->uid > 0) {
             $follow_status = itg_get_front_activity_info($nid, '', $user->uid, 'follow_anchor', '');
     
            if (!empty($follow_status['nid']) && $follow_status['status'] == '1') { ?>  
