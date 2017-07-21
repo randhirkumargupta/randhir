@@ -1067,6 +1067,8 @@ function itg_widget_remove_unpublised_node() {
     $nid = $nids['nid'];
     $delete_query = "DELETE from {itg_widget_order} where nid = '" . $nid . "' and widget in ($strg)";
     db_query($delete_query);
+    $delete_query_section = "DELETE from {itg_widget_order_section} where nid = '" . $nid . "' and widget in ($strg)";
+    db_query($delete_query_section);
   }
 }
 
