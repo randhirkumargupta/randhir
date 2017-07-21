@@ -315,7 +315,7 @@ function generatePhotoDetailList($galleryimg) {
       $fc = field_collection_field_get_entity($value);  
       //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
       $fid = $fc->field_api_image['und'][0]['fid'];
-      $uri = $fc->field_api_image['und'][0]['uri'];
+      $uri = $fc->field_images['und'][0]['filename'];
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
@@ -325,8 +325,8 @@ function generatePhotoDetailList($galleryimg) {
       // custom function for get img byline
       //$byline = getImgByline($fid);
       $byline = $fc->field_photo_byline['und'][0]['uri'];
-      $photo_story_img = image_style_url('photo_story_753x543', $uri);
-      
+      $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
       if (!$byline) {
         // $byline = "";
       }
