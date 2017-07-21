@@ -447,6 +447,10 @@ class itg_auto_save {
                     if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
                         return TRUE;
                     }
+                case 'image':
+                    if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+                        return TRUE;
+                    }
                 case 'list_integer':
                     if ($field_values[$value['fieldName']]['und'] > 0) {
                         return TRUE;
