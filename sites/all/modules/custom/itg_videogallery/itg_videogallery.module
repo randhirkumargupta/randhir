@@ -745,6 +745,8 @@ function itg_videogallery_node_insert($node) {
   if ($node->type == 'story') {
     itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
   }
+  
+  // Here Check node type not migrated
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     switch ($node->type) {
       case 'videogallery':
@@ -754,13 +756,13 @@ function itg_videogallery_node_insert($node) {
         }
         $tag_value = implode(', ', $tag);
         $tags_value = trim($tag_value, ",");
+        // get Extra large image fid for update on DM
         $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
         $draft_msg_flag = 0;
         $video_desc = strip_tags($node->field_story_expert_description[LANGUAGE_NONE][0]['value']);
         foreach ($node->field_video_upload['und'] as $keys => $videofields) {
           $video_details = entity_load('field_collection_item', array($videofields['value']));
           $priv_status = $video_details[$videofields['value']]->field_video_private[LANGUAGE_NONE][0]['value'];
-//$video_desc = $video_details[$videofields['value']]->field_videogallery_description[LANGUAGE_NONE][0]['value'];
           $video_title = $video_details[$videofields['value']]->field_video_title[LANGUAGE_NONE][0]['value'];
           $video_thumb_fid = $video_details[$videofields['value']]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'];
           if ($video_thumb_fid == 0 || empty($video_thumb_fid)) {
@@ -2667,6 +2669,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
+      itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $db_or = db_or();
@@ -2740,8 +2743,9 @@ function itg_videogallery_thumb_url() {
     }
     node_save($node);
   }
+  
   itg_videogallery_publish_node_after_video_ready_by_dm();
-  itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
+
   itg_videogallery_remove_video_with_child();
 // Here deleted video
 // This crone use for remove video if parent site remove this video from video article
@@ -2854,7 +2858,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
 
           if ($dm_data['encoding_progress'] == 100 || $dm_data['publishing_progress'] == 100) {
             $query = db_update('dailymotion_response_details');
-            $query->fields(array('dailymotion_published' => 1,'is_draft'=>0));
+            $query->fields(array('dailymotion_published' => 1,'is_draft'=>0,'encoding_progress'=>$dm_data['encoding_progress'] ,'publishing_progress'=>$dm_data['publishing_progress']));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
             $image_url = $thumb_url['thumbnail_720_url'];

@@ -12,6 +12,7 @@ $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NON
 $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
+    
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -28,9 +29,9 @@ $uri = base64_encode($actual_link);
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="video-heading"><?php print $row['title']; ?></h1><?php
-    global $user;
-    if (in_array('Social Media', $user->roles)) {
-        ?>
+                    global $user;
+                    if (in_array('Social Media', $user->roles)) {
+                        ?>
                         <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
                     <?php } ?>
 
@@ -44,10 +45,140 @@ $uri = base64_encode($actual_link);
                             $description_slider = "";
                             $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images pointer-event-none"><ul>';
                             $description_slider = '<div class="video-slider-description"><ul>';
-                            foreach ($videoids as $keys => $video_value) {
-                        
-                                if ($video_value->property == VIDEO_PROPERTY) {
-                                    if ($video_value->is_draft == 0) {
+
+                            if (count($videoids) == 1 && $videoids[0]->property == VIDEO_PROPERTY && $videoids[0]->is_draft == 1) {
+                                foreach ($videoids as $keys => $video_value) { {
+                                        ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"> <div class = "video-iframe-wrapper"><?php
+                                        if (module_exists('itg_videogallery')) {
+                                            $vid = itg_videogallery_get_videoid($row['fid']);
+                                        }
+                                        if ($video_value->solr_video_thumb != "") {
+                                            $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
+                                        } else {
+                                            $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                                        }
+                                        ?>
+                                                <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
+                                                    <span>Video Play Automatically After Publishing On Dailymotion</span>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
+                                    }
+                                }
+                            } else {
+
+
+                                foreach ($videoids as $keys => $video_value) {
+
+                                    if ($video_value->property == VIDEO_PROPERTY) {
+                                        if ($video_value->is_draft == 0) {
+                                            if ($keys != 0) {
+                                                $hide_player = 'hide-player';
+                                                $autoplay = 0;
+                                            } else {
+                                                $autoplay = 1;
+                                            }
+                                            ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"> <div class = "video-iframe-wrapper"><?php
+                                            if (module_exists('itg_videogallery')) {
+                                                $vid = itg_videogallery_get_videoid($row['fid']);
+                                            }
+                                            if ($video_value->solr_video_thumb != "") {
+                                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
+                                            } else {
+                                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                                            }
+                                            $ads_flag = 1;
+                                            if ($video_value->field_include_ads_value == 'yes') {
+                                                $ads_flag = 0;
+                                            }
+                                            if ($video_value->video_embedded_url != "") {
+                                                $vide_dm_id = $video_value->video_embedded_url;
+                                            } else {
+                                                $vide_dm_id = $video_value->solr_video_id;
+                                            }
+                                            ?>
+                                                    <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
+                                                    </div>
+                                                    <?php if ($keys == 0) { ?>
+                                                        <script>
+
+                                                            jQuery(window).load(function () {
+                                                                jQuery('.video-slider-images').removeClass('pointer-event-none');
+                                                            });
+                                                            setTimeout(function () {
+                                                                var player_<?php echo $keys; ?> = DM.player(
+                                                                        document.querySelector('#video_<?php echo $keys; ?>'),
+                                                                        {
+                                                                            video: '<?php print $vide_dm_id; ?>',
+                                                                            width: '600px',
+                                                                            height: '450px',
+                                                                            params: {
+                                                                                autoplay: <?php echo $autoplay; ?>,
+                                                                                controls: 1,
+                                                                                'sharing-enable': 0,
+                                                                                'ui-start-screen-info': 0,
+                                                                                'endscreen-enable':<?php echo $ads_flag; ?>,
+                                                                                'ui-logo': 0,
+                                                                            }
+                                                                        }
+                                                                );
+                                                                player_<?php echo $keys; ?>.addEventListener('video_end', function (event) {
+                                                                    jQuery('.video-header-left .video').slick('slickGoTo', <?php echo $keys + 1; ?>);
+                                                                    player_<?php echo $keys + 1; ?>.play();
+                                                                });
+                                                                jQuery('.thumb-video').click(function () {
+                                                                    var getvideoindex = jQuery(this).attr('data-image-index');
+                                                                    //if (getvideoindex == 0) {
+                                                                    var playerId = 'player_' + getvideoindex;
+                                                                    jQuery('.thumb-video').each(function () {
+                                                                        var getindex = jQuery(this).attr('data-image-index');
+                                                                        var playerStopId = 'player_' + getindex;
+                                                                        (eval(playerStopId)).pause();
+
+                                                                    });
+                                                                    (eval(playerId)).play();
+                                                                    // }
+                                                                });
+                                                            }, 500);
+                                                        </script>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <script>
+                                                            var player_<?php echo $keys; ?> = DM.player(
+                                                                    document.querySelector('#video_<?php echo $keys; ?>'),
+                                                                    {
+                                                                        video: '<?php print $vide_dm_id; ?>',
+                                                                        width: '600px',
+                                                                        height: '450px',
+                                                                        params: {
+                                                                            autoplay: <?php echo $autoplay; ?>,
+                                                                            controls: 1,
+                                                                            'sharing-enable': 0,
+                                                                            'ui-start-screen-info': 0,
+                                                                            'endscreen-enable':<?php echo $ads_flag; ?>,
+                                                                            'ui-logo': 0,
+                                                                        }
+                                                                    }
+                                                            );
+
+                                                        </script>
+
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+
+                                            <?php
+                                            $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
+                                        } 
+                                    } else {
+
+
                                         if ($keys != 0) {
                                             $hide_player = 'hide-player';
                                             $autoplay = 0;
@@ -146,131 +277,7 @@ $uri = base64_encode($actual_link);
 
                                         <?php
                                         $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
-                                    }else {
-                                       
-                                        ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"> <div class = "video-iframe-wrapper"><?php
-                                        if (module_exists('itg_videogallery')) {
-                                            $vid = itg_videogallery_get_videoid($row['fid']);
-                                        }
-                                        if ($video_value->solr_video_thumb != "") {
-                                            $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
-                                        } else {
-                                            $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
-                                        }
-                                        
-                                        ?>
-                                                <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
-                                                    <span>Video Play Automatically After Publishing On Dailymotion</span>
-                                                
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-
-                                        <?php
-                                        $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>'; 
                                     }
-                                } else {
-
-
-                                    if ($keys != 0) {
-                                        $hide_player = 'hide-player';
-                                        $autoplay = 0;
-                                    } else {
-                                        $autoplay = 1;
-                                    }
-                                    ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"> <div class = "video-iframe-wrapper"><?php
-                                    if (module_exists('itg_videogallery')) {
-                                        $vid = itg_videogallery_get_videoid($row['fid']);
-                                    }
-                                    if ($video_value->solr_video_thumb != "") {
-                                        $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
-                                    } else {
-                                        $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
-                                    }
-                                    $ads_flag = 1;
-                                    if ($video_value->field_include_ads_value == 'yes') {
-                                        $ads_flag = 0;
-                                    }
-                                    if ($video_value->video_embedded_url != "") {
-                                        $vide_dm_id = $video_value->video_embedded_url;
-                                    } else {
-                                        $vide_dm_id = $video_value->solr_video_id;
-                                    }
-                                    ?>
-                                            <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
-                                            </div>
-                                            <?php if ($keys == 0) { ?>
-                                                <script>
-
-                                                    jQuery(window).load(function () {
-                                                        jQuery('.video-slider-images').removeClass('pointer-event-none');
-                                                    });
-                                                    setTimeout(function () {
-                                                        var player_<?php echo $keys; ?> = DM.player(
-                                                                document.querySelector('#video_<?php echo $keys; ?>'),
-                                                                {
-                                                                    video: '<?php print $vide_dm_id; ?>',
-                                                                    width: '600px',
-                                                                    height: '450px',
-                                                                    params: {
-                                                                        autoplay: <?php echo $autoplay; ?>,
-                                                                        controls: 1,
-                                                                        'sharing-enable': 0,
-                                                                        'ui-start-screen-info': 0,
-                                                                        'endscreen-enable':<?php echo $ads_flag; ?>,
-                                                                        'ui-logo': 0,
-                                                                    }
-                                                                }
-                                                        );
-                                                        player_<?php echo $keys; ?>.addEventListener('video_end', function (event) {
-                                                            jQuery('.video-header-left .video').slick('slickGoTo', <?php echo $keys + 1; ?>);
-                                                            player_<?php echo $keys + 1; ?>.play();
-                                                        });
-                                                        jQuery('.thumb-video').click(function () {
-                                                            var getvideoindex = jQuery(this).attr('data-image-index');
-                                                            //if (getvideoindex == 0) {
-                                                            var playerId = 'player_' + getvideoindex;
-                                                            jQuery('.thumb-video').each(function () {
-                                                                var getindex = jQuery(this).attr('data-image-index');
-                                                                var playerStopId = 'player_' + getindex;
-                                                                (eval(playerStopId)).pause();
-
-                                                            });
-                                                            (eval(playerId)).play();
-                                                            // }
-                                                        });
-                                                    }, 500);
-                                                </script>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <script>
-                                                    var player_<?php echo $keys; ?> = DM.player(
-                                                            document.querySelector('#video_<?php echo $keys; ?>'),
-                                                            {
-                                                                video: '<?php print $vide_dm_id; ?>',
-                                                                width: '600px',
-                                                                height: '450px',
-                                                                params: {
-                                                                    autoplay: <?php echo $autoplay; ?>,
-                                                                    controls: 1,
-                                                                    'sharing-enable': 0,
-                                                                    'ui-start-screen-info': 0,
-                                                                    'endscreen-enable':<?php echo $ads_flag; ?>,
-                                                                    'ui-logo': 0,
-                                                                }
-                                                            }
-                                                    );
-
-                                                </script>
-
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
                                 }
                             }
 
@@ -372,16 +379,16 @@ $uri = base64_encode($actual_link);
                     <div class="social-likes mhide">
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                        if (function_exists(itg_flag_get_count)) {
-                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                        }
-                                        // get migrated count 
-                                        if (function_exists('itg_get_migrated_like_count')) {
-                                            $migrated_count = itg_get_migrated_like_count(arg(1));
-                                        }
-                                        print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                        ?></span></a></li>
-                            <?php
+                    if (function_exists(itg_flag_get_count)) {
+                        $like_count = itg_flag_get_count(arg(1), 'like_count');
+                    }
+                    // get migrated count 
+                    if (function_exists('itg_get_migrated_like_count')) {
+                        $migrated_count = itg_get_migrated_like_count(arg(1));
+                    }
+                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                        ?></span></a></li>
+                                        <?php
                             if ($user->uid > 0) {
                                 if (function_exists(itg_get_front_activity_info)) {
                                     $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -441,16 +448,16 @@ $uri = base64_encode($actual_link);
                         <div class="social-likes desktop-hide">
                             <ul>
                                 <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                            if (function_exists(itg_flag_get_count)) {
-                                                $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                            }
-                                            // get migrated count 
-                                            if (function_exists('itg_get_migrated_like_count')) {
-                                                $migrated_count = itg_get_migrated_like_count(arg(1));
-                                            }
-                                            print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                            ?></span></a></li>
-                                <?php
+                if (function_exists(itg_flag_get_count)) {
+                    $like_count = itg_flag_get_count(arg(1), 'like_count');
+                }
+                // get migrated count 
+                if (function_exists('itg_get_migrated_like_count')) {
+                    $migrated_count = itg_get_migrated_like_count(arg(1));
+                }
+                print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                    ?></span></a></li>
+                                            <?php
                                 if ($user->uid > 0) {
                                     if (function_exists(itg_get_front_activity_info)) {
                                         $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -519,7 +526,7 @@ $uri = base64_encode($actual_link);
                         </div>
                     </div>
                 </div>
-                <?php //$row['field_story_expert_description'];         ?>
+                <?php //$row['field_story_expert_description'];           ?>
                 <div class="col-md-4 video-header-right">
                     <div class="ads">
                         <?php
