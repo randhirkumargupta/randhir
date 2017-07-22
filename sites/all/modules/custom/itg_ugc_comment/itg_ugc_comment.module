@@ -98,6 +98,14 @@ function ugc_comment_form($form, &$form_state) {
   {
     $fname = $user_fields->field_first_name['und']['0']['value'];
   }
+  
+  if (strpos($user_fields->mail, 'nowhere.com') !== false) {
+    $email = '';
+  }
+  else {
+    $email = $user_fields->mail;
+  }
+  
   $form['fmessage'] = array(
     '#type' => 'textarea', //you can find a list of available types in the form api
     '#title' => t(''),
@@ -127,7 +135,7 @@ function ugc_comment_form($form, &$form_state) {
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
     '#size' => 20,
-    '#default_value' => $user_fields->mail,
+    '#default_value' => $email,
     '#maxlength' => 50,
     '#prefix' => '<div id="user-email">',
     '#suffix' => '</div>',
@@ -192,8 +200,18 @@ function ugc_comment_form($form, &$form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
   );
-
+  $form['#validate'][] = 'ugc_comment_form_validate';
   return $form;
+}
+
+/**
+ * Implements hook_validate().
+ */
+function ugc_comment_form_validate($form, &$form_state) {
+  if(empty(trim($form_state['values']['fmessage']))) {
+    form_set_error('fmessage', t(''));
+    $_SESSION['msg'] = '<div class="messages--status messages status">Please enter valid comment.</div>';
+  }
 }
 
 /**
