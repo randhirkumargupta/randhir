@@ -65,6 +65,8 @@ function itg_rfa_file_live_blog() {
  * This method is used to test the data
  */
 function itg_rfa_file_testing() {
+  
+  global $base_url;
   $rundown_id = 1223544;
   $source = 'This is source';
   $text = 'Hi this is for testing';
@@ -73,9 +75,7 @@ function itg_rfa_file_testing() {
   $timestamp = REQUEST_TIME;
   $action = 'INSERT';
 
-
-
-  $url = "http://localhost:8080/itgcms/itg-rfa-file-live-blog";
+  $url = $base_url."/itg-rfa-file-live-blog";
   $data = array(
     array(
       'rundown_id' => 121211,
