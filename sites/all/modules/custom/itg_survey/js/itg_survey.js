@@ -14,12 +14,12 @@
         $('.field-edit-link').hide();
         $('#edit-body-und-0-format').hide();
         $('.vertical-tabs-list').hide();
-        $('#edit-metatags').show();
-        
+        $('#edit-metatags').show();        
       }
 
-      if(nid == '' || nid == null){
-        if($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
+      if (nid == '' || nid == null) { 
+        jQuery("#edit-field-story-reporter-und-0-remove-button").hide(); 
+        if ($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
           $('input[name="field_survey_add_questions_und_0_remove_button"]').hide();
         }
       }
@@ -30,6 +30,25 @@
       } else {
         $('#edit-field-survey-end-date').hide();
       }
+      // publish field hide
+      $('#edit-field-supp-publish-und').hide();
+      
+      jQuery(".form-submit").click(function() {    
+        if(jQuery(this).attr("data-id") == 'edit-itg-custom-button') {       
+           jQuery('#edit-field-supp-publish-und option').removeAttr('selected');
+        } else if(jQuery(this).attr("data-id") == 'edit-submit') {       
+           jQuery('#edit-field-supp-publish-und option').attr('selected','selected');
+        }
+      }); 
+      
+//      $(this).attr('edit-itg-custom-button').click(function () {
+//          alter('@@@');
+////        if($(this).prop("checked") == true){
+////          $('#edit-field-survey-end-date').show();
+////        } else {
+////          $('#edit-field-survey-end-date').hide();
+////        }
+//      });
       
       $('input[name="field_survey_expity_date[und][1]"]').click(function (){
         if($(this).prop("checked") == true){
