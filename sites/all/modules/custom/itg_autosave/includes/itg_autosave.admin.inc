@@ -135,7 +135,11 @@ function itg_autosave_nodeform($nid, $ctype) {
     }
     $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';
     // If title is empty then exit the process.
-
+	$lock_status = $itg_autosave_form->itg_autosave_get_lock_status_node_id($node->nid);
+	 if($lock_status->lock_status == 1 && $node->status == 0){
+		print t('Autosave lock from add page');
+        exit();  
+	}
     if (empty($title)) {
         print t('Title is empty');
         exit();
