@@ -98,11 +98,12 @@ global $base_url, $user;
           $image = file_load($title[0]['field_story_extra_large_image_fid']);
           $share_image = file_create_url($image->uri);
           }
-          $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-          $short_url = shorten_url($actual_link, 'goo.gl');
-          $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$share_title.'&picture='.$share_image;
+          $actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
+          $amp_link = str_replace('?amp', '', $actual_link);
+          $short_url = shorten_url($amp_link, 'goo.gl');
+          $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$share_title.'&picture='.$share_image;
           $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($share_title).'&url='.$short_url.'&via=IndiaToday';
-          $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
+          $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
           ?>
         </ul>
       </section>

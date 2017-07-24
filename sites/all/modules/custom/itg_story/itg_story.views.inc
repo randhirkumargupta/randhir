@@ -54,8 +54,15 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
   function render($values) {
     global $base_url;
     //$values->nid
+    
+    if (!empty($values->_field_data['nid']['entity']->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+       $story_schedule_date = strtotime($values->_field_data['nid']['entity']->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    }
+    
+    $current_time = time();
+    
     $itg_status = $values->_field_data['nid']['entity']->status;
-    if ($itg_status == 0 ) {
+    if (($itg_status == 0) || (!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
       $node_url = $base_url . '/node/' . $values->nid;
       $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';
       $web_link = l('web' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));        

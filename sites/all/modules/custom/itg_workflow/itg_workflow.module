@@ -812,6 +812,10 @@ function itg_workflow_node_access($node, $op, $account) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     }
+    
+    if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+      $story_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    }
 
     $current_time = time();
 
@@ -821,6 +825,9 @@ function itg_workflow_node_access($node, $op, $account) {
     elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
       return NODE_ACCESS_DENY;
     }
+    /*elseif ((!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
+      return NODE_ACCESS_DENY;
+    }*/
   }
   elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
     if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan

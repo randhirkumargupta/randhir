@@ -177,7 +177,8 @@ function simplesamlphp_auth_loginpage() {
     
     if (!empty($arg[2])) {
       $redirect = base64_decode($arg[2]);
-      drupal_goto($redirect);
+      $remove_fb_append_parameter = str_replace('#_=_', '', $redirect);
+      drupal_goto($remove_fb_append_parameter);
     }
     else {
       drupal_goto(FRONT_URL);
