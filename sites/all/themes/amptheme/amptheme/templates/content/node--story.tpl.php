@@ -545,7 +545,7 @@ if (!empty($content)):
         </amp-embed>
         </div>
           <!-- code for related content -->   
-          <?php if (!empty($related_content) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+          <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">
               <?php
               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_amp_block');
