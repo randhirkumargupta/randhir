@@ -91,6 +91,13 @@ function itg_autosave_schema() {
         'serialize' => TRUE,
         'description' => 'Serialized data containing the field collection ids.',
       ),
+      'status' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'Whether the node is unlock(1) or lock(0).',
+      ),
     ),
     'primary key' => array('id'),
   );
