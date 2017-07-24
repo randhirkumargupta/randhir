@@ -222,6 +222,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/food-bill [NC]  
 	RewriteCond %{REQUEST_URI} !/friends [NC]  
 	RewriteCond %{REQUEST_URI} !/global-roundtable-beijing [NC]  
+	RewriteCond %{REQUEST_URI} !/independence-inflation [NC]  
+	RewriteCond %{REQUEST_URI} !/indian-search [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -430,6 +432,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^friends/(.*) /staticpages/friends/$1 [L]
 	RewriteRule ^global-roundtable-beijing$ /staticpages/global-roundtable-beijing/index.html? [L]
     RewriteRule ^global-roundtable-beijing/(.*) /staticpages/global-roundtable-beijing/$1 [L]
+	RewriteRule ^independence-inflation$ /staticpages/independence-inflation/index.html? [L]
+    RewriteRule ^independence-inflation/(.*) /staticpages/independence-inflation/$1 [L]
+	RewriteRule ^indian-search$ /staticpages/indian-search/index.html? [L]
+    RewriteRule ^indian-search/(.*) /staticpages/indian-search/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
