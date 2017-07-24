@@ -225,6 +225,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/independence-inflation [NC]  
 	RewriteCond %{REQUEST_URI} !/indian-search [NC]  
 	RewriteCond %{REQUEST_URI} !/indiatodayatautoexpo [NC]  
+	RewriteCond %{REQUEST_URI} !/juvenile [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -439,6 +440,8 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^indian-search/(.*) /staticpages/indian-search/$1 [L]
 	RewriteRule ^indiatodayatautoexpo$ /staticpages/indiatodayatautoexpo/index.html? [L]
     RewriteRule ^indiatodayatautoexpo/(.*) /staticpages/indiatodayatautoexpo/$1 [L]
+	RewriteRule ^juvenile$ /staticpages/juvenile/index.html? [L]
+    RewriteRule ^juvenile/(.*) /staticpages/juvenile/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
