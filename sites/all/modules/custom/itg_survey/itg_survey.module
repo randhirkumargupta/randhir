@@ -262,9 +262,13 @@ function itg_survey_node_presave($node) {
    * '1' for publish and '2' for unpublish
    */
 
-
-  if ($node->type == 'survey' && isset($node->field_supp_publish)) {
-    switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
+  
+  
+  if ($node->type == 'survey') {
+    if ($node->op == 'Publish') {
+      $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+    }
+    /*switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
       case '0':
         $node->status = 0;
         break;
@@ -274,7 +278,7 @@ function itg_survey_node_presave($node) {
       default :
         $node->status = 0;
         break;
-    }
+    }*/
   }
 }
 
