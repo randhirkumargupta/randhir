@@ -52,7 +52,8 @@ function author_latest_storylist($author_id) {
   global $base_url;
 
   $data = array();
-
+  $type = array("videogallery", "photogallery", "story");
+  
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
   $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id = n.nid');
@@ -74,9 +75,9 @@ function author_latest_storylist($author_id) {
   $query->fields('li_file', array('uri'));
   $query->fields('sr', array('field_story_rating_value'));
 
-  $query->condition('n.type', 'story');
+  $query->condition('n.type', $type, 'IN');
   $query->condition('n.status', 1);
-  $query->condition('bl.field_common_by_line_reporter_id_value', $author_id);
+   $query->condition('bl.field_common_by_line_reporter_id_value', '%'.db_like($author_id).'%','LIKE');
   $query->orderBy('n.nid', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -134,15 +135,17 @@ function author_latest_storylist($author_id) {
 function author_popular_storylist($author_id) {
   global $base_url;
 
+  $type = array("videogallery", "photogallery", "story");
   $data = array();
+    
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
   $query->fields('n', array('nid'));
-  $query->condition('n.type', 'story');
+  $query->condition('n.type', $type, 'IN');
   $query->condition('n.status', 1);
-  $query->condition('bl.field_common_by_line_reporter_id_value', $author_id);
+  $query->condition('bl.field_common_by_line_reporter_id_value', '%'.db_like($author_id).'%','LIKE');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+  
   $popular_res = array();
   foreach ($result as $k => $res) {
     $popular_res[$res['nid']] = analytics_node_data($res['nid'], 'total');
