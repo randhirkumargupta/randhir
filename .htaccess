@@ -221,6 +221,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/five-tax-sins [NC]  
 	RewriteCond %{REQUEST_URI} !/food-bill [NC]  
 	RewriteCond %{REQUEST_URI} !/friends [NC]  
+	RewriteCond %{REQUEST_URI} !/global-roundtable-beijing [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -427,6 +428,8 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^food-bill/(.*) /staticpages/food-bill/$1 [L]
 	RewriteRule ^friends$ /staticpages/friends/index.html? [L]
     RewriteRule ^friends/(.*) /staticpages/friends/$1 [L]
+	RewriteRule ^global-roundtable-beijing$ /staticpages/global-roundtable-beijing/index.html? [L]
+    RewriteRule ^global-roundtable-beijing/(.*) /staticpages/global-roundtable-beijing/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
