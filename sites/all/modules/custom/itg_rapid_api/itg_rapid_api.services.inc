@@ -1089,7 +1089,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-        
+
         // sprint 3 : Author latest story list @ dhmendra
       'author_story_list' => array(
             'operations' => array(
@@ -1171,7 +1171,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      
+
       //Sprint 3 close poll
       'poll_detail' => array(
             'operations' => array(
@@ -1207,7 +1207,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      
+
       //Sprint 3 close poll
       //Sprint 3 close poll
       'poll_cast' => array(
@@ -1569,7 +1569,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // update_preference custom resource declaration.....
-        'update_preference' => array( 
+        'update_preference' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves update_preference schemes info.',
@@ -1732,6 +1732,145 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        //sprint 4 Author detail
+      'author_detail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves Author detail data based on Author id.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'author_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'author_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Author id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        //sprint 4 anchor detail
+      'anchor_detail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves Anchor detail data based on Anchor id in the system.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'anchor_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'anchor_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Anchor User id',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        //sprint 4 Newswrap (Briefly.json)
+       'newswrap' => array(
+             'operations' => array(
+                 'retrieve' => array(
+                     'help' => 'Retrieves last stories which have heightights',
+                     'file' => array(
+                         'type' => 'inc',
+                         'module' => 'itg_rapid_api',
+                         'name' => 'itg_rapid_api.services',
+                     ),
+                     'callback' => 'news_wrap',
+                     'access callback' => 'user_access',
+                     'access arguments' => array('access content'),
+                     'access arguments append' => FALSE,
+                     'args' => array(
+                         array(
+                             'name' => 'token',
+                             'type' => 'string',
+                             'description' => 'Function to perform',
+                             'source' => array('path' => 0),
+                             'optional' => TRUE,
+                             'default' => '*',
+                         ),
+                       ),
+                 ),
+             ),
+         ),
+    // sprint 3 : Anchor Programm list
+      'anchor_programm_list' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves programm list of a particular anchor.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'anchor_programm_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                      array(
+                            'name' => 'anchor_id',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            'description' => 'Anchor id',
+                            'type' => 'string',
+                        ),
+                      array(
+                            'name' => 'type',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            'description' => 'Type 0 or 1 , 0 for latest and 1 for popular',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+
     );
 
     return $api;
@@ -1900,7 +2039,7 @@ function itg_rapid_api_videolist($token) {
  * 	The node processed information array.
  */
 function itg_rapid_api_photodetail($token) {
-    //valid id 
+    //valid id
     $id = $_GET['id'];
     //$cpageno = $_GET['cpageno'];
     $suffix = $id;
@@ -2097,7 +2236,7 @@ function checkValidResource() {
 
     $error_flag = "";
     $flag_code = 0;
-    //declare valid resource 
+    //declare valid resource
     $valid_resurce = array('hamburger_menu');
     // declare valid operation
     $valid_operation = array('retrieve');
@@ -2143,7 +2282,7 @@ function checkValidResource() {
  * 	The node processed information array.
  */
 function itg_rapid_api_photostorydetail($token) {
-    //valid id 
+    //valid id
     $id = $_GET['id'];
     if (!is_numeric($id)) {
         $id = 0;
@@ -2412,7 +2551,7 @@ function itg_rapid_api_magazine_coverstories($token) {
 function itg_rapid_api_magazine_editionlist($token) {
     $sdate = $_GET['sdate'];
     $tdate = $_GET['tdate'];
-    $cpageno = $_GET['cpageno'];  
+    $cpageno = $_GET['cpageno'];
     //echo $sdate; echo "<br>"; echo $tdate; exit();
     //valid tid & pageno
 //    if (!is_numeric($sdate)) {
@@ -2457,7 +2596,7 @@ function itg_rapid_api_magazine_editionlist($token) {
  * 	The node processed information array.
  */
 function itg_rapid_api_storydetail($token) {
-    //valid id 
+    //valid id
     $id = $_GET['id'];
     if (!is_numeric($id)) {
         $id = 0;
@@ -2733,8 +2872,8 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
             }
         }
 
-        
-     
+
+
     } catch (Exception $e) {
         watchdog('error on user save', $e->getMessage());
         drupal_set_message('Error:' . $e->getMessage(), 'error');
@@ -2930,7 +3069,7 @@ function itg_rapid_api_change_password($token, $user_id) {
 
     // Save the account with the new password.
     user_save($account, $edit);
-    
+
     $data['status_code'] = "1";
     $data['status_message'] = "Your password has been Changed";
 
@@ -2943,12 +3082,12 @@ function itg_rapid_api_change_password($token, $user_id) {
  * Returns all the stories which is filled by particular author.
  * @param $nid
  *   The Author id
- *   Type [0/1 where 0 can be for Latest and 1 for Popular] 
+ *   Type [0/1 where 0 can be for Latest and 1 for Popular]
  * @return array
  * 	array of stories.
  */
 function author_latest_story($token) {
-    //valid id 
+    //valid id
     $author_id = $_GET['author_id'];
     $story_type = $_GET['type'];
     if (!is_numeric($author_id)) {
@@ -2980,13 +3119,13 @@ function author_latest_story($token) {
 }
 
 /**
- * Returns all the open poll in the system 
- * @param 
+ * Returns all the open poll in the system
+ * @param
  * @return array
  * 	array of open polls.
  */
 function polls_open($token) {
-    
+
     $redis_key = "itg_rapid_api_open_polls";
     $result_get = getRedis($redis_key);
 
@@ -3005,13 +3144,13 @@ function polls_open($token) {
 }
 
 /**
- * Returns all the open poll in the system 
- * @param 
+ * Returns all the open poll in the system
+ * @param
  * @return array
  * 	array of open polls.
  */
 function polls_close($token) {
-    
+
     $redis_key = "itg_rapid_api_close_polls";
     $result_get = getRedis($redis_key);
 
@@ -3030,18 +3169,18 @@ function polls_close($token) {
 }
 
 /**
- * Returns all the open poll from the system 
- * @param 
+ * Returns all the open poll from the system
+ * @param
  * @return array
  * 	array of open polls.
  */
 function poll_cast($token,$poll_id, $option_id , $user_id = 0) {
-   
+
    $poll_id = $_POST['poll_id'];
    $option_id = $_POST['option_id'];
    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '0';
-   
-    
+
+
     $redis_key = "itg_rapid_api_cast_poll";
     $result_get = getRedis($redis_key);
 
@@ -3066,7 +3205,7 @@ function poll_cast($token,$poll_id, $option_id , $user_id = 0) {
  * 	array of open polls.
  */
 function poll_detail($token,$poll_id) {
-    
+
     $poll_id = $_GET['poll_id'];
     $redis_key = "itg_rapid_poll_details_".$poll_id;
     $result_get = getRedis($redis_key);
@@ -3089,7 +3228,7 @@ function poll_detail($token,$poll_id) {
  * function for itg_rapid_api_edit_profile
  * @param array
  * @return array
- * 	
+ *
  */
 function itg_rapid_api_edit_profile($token) {
     echo "<pre>";
@@ -3102,7 +3241,7 @@ function itg_rapid_api_edit_profile($token) {
  * function for itg_rapid_api_edit_user_image
  * @param array
  * @return array
- * 	
+ *
  */
 function itg_rapid_api_edit_user_image($token) {
     echo "<pre>";
@@ -3115,9 +3254,9 @@ function itg_rapid_api_edit_user_image($token) {
  * function for itg_rapid_api_get_login_user_detail
  * @param array
  * @return array
- * 	
+ *
  */
-function itg_rapid_api_get_login_user_detail($token) {    
+function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
     $authtoken_id = $_GET['$_GET'];
     $user_id = $_GET['user_id'];
@@ -3140,15 +3279,15 @@ function itg_rapid_api_get_login_user_detail($token) {
     if($account->field_short_description['und'][0]['value']){
         $location .= ", ".$account->field_short_description['und'][0]['value'];
     }
-    
+
     $profile_image = $account->field_user_picture['und'][0]['fid'];
     $gender = $account->field_user_gender['und'][0]['value'];
     $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
     $login_type = "na";
-    
+
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
-    
+
     $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
     $data['data']['user_profile_detail']['login_type'] = "$login_type";
     $data['data']['user_profile_detail']['user_id'] = "$user_id";
@@ -3160,16 +3299,16 @@ function itg_rapid_api_get_login_user_detail($token) {
     $data['data']['user_profile_detail']['profile_image'] = "$profile_image";
     $data['data']['user_profile_detail']['gender'] = "$gender";
     $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
-    
+
     return $data;
-    
+
 }
 
 /**
  * function for itg_rapid_api_log_out
  * @param array
  * @return array
- * 	
+ *
  */
 function itg_rapid_api_log_out($token) {
     global $base_url;
@@ -3194,7 +3333,7 @@ function itg_rapid_api_log_out($token) {
  * function for itg_rapid_api_get_preference
  * @param array
  * @return array
- * 	
+ *
  */
 function itg_rapid_api_get_preference($token) {
     $user_id = $_GET['user_id'];
@@ -3209,7 +3348,7 @@ function itg_rapid_api_get_preference($token) {
     $data = array();
     // As in table itg_widget_order tid is saved in nid colom.
     // So join field_story_category_tid join is applied on nid.
-    // get personalization-preferences tid 
+    // get personalization-preferences tid
     $query = db_select('itg_widget_order', 'iwo');
     $query->fields('iwo', array('weight', 'nid'))
             ->condition('iwo.widget', "personalization_widget")
@@ -3263,7 +3402,7 @@ function itg_rapid_api_get_preference($token) {
 }
 
 /**
- * 
+ *
  * @param int $tid
  * @return array
  */
@@ -3279,18 +3418,18 @@ function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
  * function for itg_rapid_api_update_preference
  * @param array
  * @return array
- * 	
+ *
  */
 function itg_rapid_api_update_preference($token) {
     echo "<pre>";
     print_r($_GET);
     echo "</pre>";
     exit();
-   
+
 }
 
 /**
- * 
+ *
  * @param int $tid
  * @return array
  */
@@ -3328,7 +3467,7 @@ function update_preference($user_id, $tid){
  */
 
 function bookmark_get_responce($token, $user_id) {
-    
+
     $user_id = $_GET['user_id'];
     $redis_key = "itg_rapid_get_bookmark".$user_id.'';
     $result_get = getRedis($redis_key);
@@ -3350,11 +3489,11 @@ function bookmark_get_responce($token, $user_id) {
 
 /*
  * Set bookmark stories for a specific user_id and return all
- * 
+ *
  */
 
 function bookmark_set_responce($token, $user_id, $node_id) {
-    
+
       $user_id = $_POST['user_id'];
       $node_id = $_POST['node_id'];
     $redis_key = "itg_rapid_set_bookmark_".$user_id."_".$node_id;
@@ -3376,7 +3515,7 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
-    
+
       $user_id = $_POST['user_id'];
       $node_id = $_POST['node_id'];
       $redis_key = "itg_rapid_bookmark_delete".$user_id."_".$node_id;
@@ -3388,6 +3527,127 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
         // call function from return data..
 
         $jsondata = bookmark_del_data_responce($user_id,$node_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns Author user detail in an array based on author id args
+ * @param author_id
+ * @return array
+ * 	array of Author detail fields.
+ */
+function author_detail($token,$author_id) {
+
+    $author_id = $_GET['author_id'];
+    $redis_key = "itg_rapid_api_author_".$author_id."_detail";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = author_detail_data($author_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns Newswrap i.e recent stories which has Highlights
+ * @return array
+ * array of stories.
+ */
+function news_wrap($token) {
+
+    $redis_key = "itg_rapid_newswrap";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = news_wrap_list();
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns Anchor user detail in an array based on anchor id args
+ * @param anchor_id
+ * @return array
+ * 	array of Anchor detail fields.
+ */
+function anchor_detail($token,$anchor_id) {
+
+    $anchor_id = $_GET['anchor_id'];
+    $redis_key = "itg_rapid_api_anchor_".$anchor_id."_detail";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != ""){
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = anchor_detail_data($anchor_id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Returns all the programm which is filled by particular anchor.
+ * @param $anchor_id
+ *   The Anchor id
+ *   Type [0/1 where 0 can be for Latest and 1 for Popular]
+ * @return array
+ * 	array of programms.
+ */
+
+function anchor_programm_list($token, $anchor_id , $type) {
+    //valid id
+    $anchor_id = $_GET['anchor_id'];
+    $story_type = $_GET['type'];
+    if (!is_numeric($anchor_id)) {
+        $id = 0;
+    }
+
+    // call function for return data..
+    if($_GET['type'] == '0') {
+      $redis_type = 'latest';
+      $type = '0';
+    }elseif ($_GET['type'] == '1') {
+      $redis_type = 'popular';
+      $type = '1';
+    }else{
+      $type = '';
+    }
+    $suffix = $anchor_id;
+    $redis_key = "itg_rapid_api_anchor_".$redis_type."_programmlist" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = anchor_programm_data_list($anchor_id, $type);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
