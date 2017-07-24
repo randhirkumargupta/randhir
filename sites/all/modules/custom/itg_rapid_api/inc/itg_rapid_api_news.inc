@@ -568,7 +568,7 @@ function analytics_node_data($nid, $total){
 
     
 
-    if($type == 'total'){ // return the total count
+    if($type == 'total'){ // return the total count 
       // Caculate sum of all data.
       foreach ($analytics_data_array as $counting) {
         if (is_int($counting)) {
