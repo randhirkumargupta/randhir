@@ -1,7 +1,7 @@
 <?php
 
 $field_collection_data = itg_syndication_get_rules_detaiils();
-echo "<strong>Syndication rule details: </strong>";
+echo "<div class='field'><div class='field-label'>Syndication rule details: </div><div class='field-items'>";
 foreach ($field_collection_data as $data) {
   echo "<table class='views-table'>";
   echo "<tr>";
@@ -46,5 +46,5 @@ foreach ($field_collection_data as $data) {
   echo "</tr>";
   echo "</table>";
 }
-
+echo "</div></div>";
 //field--field_syndication_mode--field_syndication_rule_details.tpl
