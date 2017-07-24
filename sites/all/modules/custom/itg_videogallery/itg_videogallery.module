@@ -1257,17 +1257,17 @@ function itg_videogallery_after_build($form, &$form_state) {
   $arg = arg(2);
   global $user, $base_url;
    // apply button for editor and siteadmin role
-//      if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
-//        if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'videogallery' && $form['#node']->status == '1') {
-//          $form['actions']['itg_custom_apply_video_button'] = array(
-//            '#type' => 'submit',
-//            '#value' => t('Apply'),
-//            '#id' => 'btn-apply',
-//            '#submit' => array('node_form_submit', 'itg_videogallery_submit_status_message'),
-//            '#weight' => -8,
-//          );
-//        }
-//      }
+      if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
+        if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'videogallery' && $form['#node']->status == '1') {
+          $form['actions']['itg_custom_apply_video_button'] = array(
+            '#type' => 'submit',
+            '#value' => t('Apply'),
+            '#id' => 'btn-apply',
+            '#submit' => array('node_form_submit', 'itg_videogallery_submit_status_message'),
+            '#weight' => -8,
+          );
+        }
+      }
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
@@ -1400,13 +1400,13 @@ function itg_videogallery_views_pre_render(&$view) {
  * @param array $form_state
  */
 function itg_videogallery_submit_status_message(&$form, $form_state) {
-//  if($form_state['input']['op'] == 'Apply') {
-//     if ($form_state['node']->status == '1') {
-//    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-//    $_GET['destination'] = $redirect_path;
-//    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-//  }
-//  }
+  if($form_state['input']['op'] == 'Apply') {
+     if ($form_state['node']->status == '1') {
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+    $_GET['destination'] = $redirect_path;
+    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+  }
+  }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
   $node_type = str_replace("_", " ", $node_type);
