@@ -40,26 +40,6 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-  $items['itg-octopus/dashboard'] = array(
-    'title' => 'ITG Octopus',
-    'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_octopus_api.inc',
-  );
-
-  $items['itg-octopus/dashboard/octopus'] = array(
-    'title' => 'ITG Octopus',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-
-  $items['itg-octopus/dashboard/rfa'] = array(
-    'title' => 'ITG RFA',
-    'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_octopus_api.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
   $items['slug/detail/%'] = array(
     'title' => 'Rundown Slug Detail',
     'page callback' => 'itg_octopus_api_rundown_detail',
@@ -144,6 +124,26 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
+  $items['itg-rfa-file-live-blog'] = array(
+    'page callback' => 'itg_rfa_file_live_blog',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
+
+  $items['itg-rfa-file-testing'] = array(
+    'page callback' => 'itg_rfa_file_testing',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
+
+  $items['rfa-dashboard'] = array(
+    'title' => 'RFA Dashboard',
+    'page callback' => 'itg_octopus_api_rfa_dashboard',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
 
   return $items;
 }
@@ -276,6 +276,7 @@ function itg_octopus_api_form_submit($form, &$form_state) {
  * Implement hook_form_alter
  * {@inheritdoc}
  */
+
 function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'videogallery_node_form' && !empty($_GET['octopus_ref'])) {
 
@@ -310,6 +311,16 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
         $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $octopus_ref->fid;
       }
     }
+  }
+  if ($form_id == 'breaking_news_node_form' && !empty($_GET['octopus_ref'])) {
+    $octopus_ref_id = base64_decode($_GET['octopus_ref']);
+    $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
+
+    $form['title']['#default_value'] = $rfa_object->source;
+    $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
+    $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
+    
+
   }
 }
 
@@ -444,9 +455,12 @@ function itg_octopus_api_mail($key, &$message, $params) {
  * @return string
  */
 function itg_octopus_api_remove_cdata($text) {
-  $text = str_replace('<![CDATA[', '', $text);
-  $text = str_replace(']]', '', $text);
-  return $text;
+  $body_slug = explode('[', $text);
+  unset($body_slug[0]);
+  unset($body_slug[1]);
+  $cdata_last = implode('', $body_slug);
+  $explode_cdata = explode(']', $cdata_last);
+  return isset($explode_cdata[0]) ? $explode_cdata[0] : "";
 }
 
 /**
@@ -550,6 +564,19 @@ function itg_octopus_slug_detail($sid) {
   $query->fields('ios');
   $query->fields('clip', array('text'));
   $query->condition('ios.id', $sid, '=');
+  $result = $query->execute()->fetchAll();
+  $slug_data = reset($result);
+  return $slug_data;
+}
+
+/**
+ * Get slug detail for video
+ */
+function itg_octopus_rfa_detail($id) {
+  $query = db_select('itg_rfa', 'rfa');
+  $query->fields('rfa');
+  $query->fields('rfa');
+  $query->condition('rfa.id', $id, '=');
   $result = $query->execute()->fetchAll();
   $slug_data = reset($result);
   return $slug_data;

@@ -24,10 +24,18 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $embed_image = '';
 }
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
-$blog_created_date = date('Y-m-d H:i:s', $node->created);
+$blog_created_date = date('Y-m-d', $node->created);
+$blog_created_time = date('h:i:s', $node->created);
+$coverage_start_date = $blog_created_date.'T'.$blog_created_time;
+
+$coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
+$coverage_end_date = date('Y-m-d', $coverage_end);
+$coverage_end_time = date('h:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
-    <meta itemprop="coverageStartTime" content="<?php print $blog_created_date; ?>">
+    <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
+    <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
     <meta itemprop="url" content="<?php print $embed_path; ?>">
     <meta itemprop="description" content="<?php print $node->field_common_short_description[LANGUAGE_NONE][0]['value']; ?>">
     <div class="bolg-content" id="bolgcontent">    
