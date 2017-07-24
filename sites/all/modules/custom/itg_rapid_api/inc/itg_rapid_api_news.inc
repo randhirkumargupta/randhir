@@ -6,42 +6,42 @@
 /**
  * main function for generate videoCategoryPage array
  *
- * @return array 
+ * @return array
  */
 
 
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
-    // variable decalartion
+    // variable decalartion    
     $output_array = array();
     $data_array = array();
-    $photo_list_array = array();
+    $photo_list_array = array();      
     $updated_datetime = "";
-
+    
     $term = taxonomy_term_load($tid);
-    $term_name = $term->name;
+    $term_name = $term->name;   
     if(!$tid){
         $term_name = "Latest";
     }
-
+    
     // list array building
     $data = generateNewsCategoryList($tid, $pageno);
     if($data['lcount'] > 0){
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "";  
     }
  else {
         $output_array['status_code'] = "0";
-        $output_array['status_message'] = "customised_message";
+        $output_array['status_message'] = "customised_message";  
     }
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-
+    
     //data array building
-
+    
     if($datacount > 10){
         $datacount =10;
     }
-
+    
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
@@ -49,11 +49,11 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['news_display_count'] = "10";
     $data_array['news_pagination_cap'] = "7";
     $data_array['updated_datetime'] = "$data_up_time";
-
-
+    
+    
     $data_array['news'] = $data['data'];
     $output_array['data'] = $data_array;
-
+    
     return $output_array;
 }
 
@@ -65,7 +65,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
  */
 function generateNewsCategoryList($tid, $pageno) {
   // variable declaration
-  global $base_url;
+  global $base_url;  
   $node_count = "";
   $output = "";
   $data = array();
@@ -96,13 +96,13 @@ if($tid > 0){
     $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
 }
 else{
-   $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
+   $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE); 
 }
 $term_tree_count = count($term_tree);
 if($term_tree_count){
     foreach ($term_tree as $key => $value) {
         $tid_list[] = $value->tid;
-
+        
     }
 }
 // code vid=14  end
@@ -146,7 +146,7 @@ if($term_tree_count){
 
 
     //end
-
+    
     if(count($tid_list) > 0){
         $query->condition('ti.tid', $tid_list, 'IN');
     }
@@ -160,6 +160,7 @@ if($term_tree_count){
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
+      //p(node_load($nid));die();
       if ($type == 'story') {
           $type = getStoryType($nid);
       }
@@ -169,20 +170,14 @@ if($term_tree_count){
       $alias = drupal_get_path_alias('node/'.$nid.'');
       $weburl = $base_url ."/". $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
+     
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
       
-      $photo_story_eliimg = image_style_url('photo_slider_753x543',  $resvalue['esi_file_uri']);
-      $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_eliimg);
       
-      $photo_story_liimg = image_style_url('photo_slider_753x543',$resvalue['li_file_uri']);
-      $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_liimg);
-      
-      $photo_story_siiimg = image_style_url('photo_slider_88x66', $resvalue['si_file_uri']);
-      $photo_story_siiimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_siiimg);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -190,7 +185,7 @@ if($term_tree_count){
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-
+      
       if($created){
         $create_datetime = date("Y-m-d H:i:s", $created);
         $create_date = date("Y-m-d H:i:s", $created);
@@ -205,7 +200,7 @@ if($term_tree_count){
       else{
           $changed_datetime = "";
       }
-
+      
             $news_list_array[$listcount]['n_id'] = "$nid";
             $news_list_array[$listcount]['n_type'] = "$type";
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
@@ -216,19 +211,29 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_rating'] = "";
             $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
             if($type == "photogallery"){
-                $news_list_array[$listcount]['n_small_image'] = "$photo_story_siiimg";
+                $node_data = node_load($nid);
+                $img_data = $node_data->field_gallery_image['und'][0];
+                $fc = field_collection_field_get_entity($img_data);  
+                
+      //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
+      $fid = $fc->field_api_image['und'][0]['fid'];
+      $uri = $fc->field_images['und'][0]['filename'];
+      $photo_story_eliimg = image_style_url('photo_slider_753x543',  $uri);
+      $photo_story_liimg = image_style_url('photo_slider_483x271',  $uri);
+      $photo_story_siimg = image_style_url('photo_slider_88x66',  $uri);
+                $news_list_array[$listcount]['n_small_image'] = "$photo_story_siimg";
                 $news_list_array[$listcount]['n_large_image'] = "$photo_story_liimg";
-                $news_list_array[$listcount]['n_extra_large_image'] = "$photo_story_eliimg";
+                $news_list_array[$listcount]['n_extralarge_image'] = "$photo_story_eliimg";
             }
             else{
                 $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
                 $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
-                $news_list_array[$listcount]['n_extra_large_image'] = "$file_ext_large_img_url";
+                $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
             }
             $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+      
             // photo list array
-
+            
             if($type == "photogallery"){
                 $photolist = getPhotolist($nid);
             }
@@ -238,7 +243,7 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_photo'] = $photolist;
             // re-insalize photolist
             $photolist = array();
-
+  
             // video list array
             if($type == "videogallery"){
                 $videolist = getVideolist($nid);
@@ -249,12 +254,12 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_video'] = $videolist;
             // re-insalize vediolist
             $videolist = array();
-
+        
         $listcount++;
-    }
-
+    }    
+    
   }
-
+  
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
   $data['updated_datetime'] = $changed_datetime;
@@ -284,13 +289,13 @@ function getPhotolist($nid){
         $caption = getImgCaption($fid);
         // custom function for get img byline
         $byline = getImgByline($fid);
-
+        
         $photolist_loop[$lcont]['np_id'] = "$fid";
         $photolist_loop[$lcont]['np_image'] = "$img_url";
         $photolist_loop[$lcont]['np_credit'] = "$byline";
-        $photolist_loop[$lcont]['np_caption'] = "$caption";
+        $photolist_loop[$lcont]['np_caption'] = "$caption";       
         $lcont++;
-    }
+    } 
     $photolist['photos'] = $photolist_loop;
     return $photolist;
 }
@@ -304,10 +309,10 @@ function getPhotolist($nid){
 function getVideolist($nid){
     // variable declaration
     $videolist = array();
-
+    
     // select node belong from current nid
 
-
+    
     $query = db_select('node', 'n');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -349,10 +354,10 @@ function getVideolist($nid){
     $query->condition('n.nid', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
-
+        
         // node feed tag
-
-
+      
+      
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -377,12 +382,12 @@ function getVideolist($nid){
       $file_id = file_usage($field_video_upload);
       //to get the video of all the other formats
       $load_collection = field_collection_item_load($field_video_upload);
-
+      
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
       $video_formats = all_video_format($video_formats);
-
+      
       $video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-
+      
       $video_path_mp4 = $video_formats['video_path_mp4'];
       if(!$video_path_mp4){
           $video_path_mp4 = $video_path_info['video_path_mp4'];
@@ -393,7 +398,7 @@ function getVideolist($nid){
 
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
-
+      
       if($created){
         $create_datetime = date("Y-m-d H:i:s", $created);
         $create_date = date("F d, Y", $created);
@@ -408,7 +413,7 @@ function getVideolist($nid){
       else{
           $changed_datetime = "";
       }
-
+        
         $videolist['nv_id'] = "$nid";
         $videolist['nv_title'] = "$title";
         $videolist['nv_credit'] = "$reporter_node";
@@ -438,21 +443,21 @@ function getVideolist($nid){
         $videolist['nv_updated_datetime'] = "$changed_datetime";
         $videolist['nv_duration'] = "$field_video_duration_value";
         $videolist['nv_show_ad'] = "0";
-
+    
     }
-
+    
     return $videolist;
-
+   
 }
 
 /**
  * function for generate getViewCount
- * @pram $nid
+ * @pram $nid 
  * @return $nv_count
  */
 
 function getNodeViewCount($nid){
-    //$nid = 443;
+    //$nid = 443; 
     $nv_count = 0;
     //SELECT * FROM `itg_lrp_loyalty_points` WHERE `loyalty_type` = 'Content Visit'
     $query = db_select('itg_lrp_loyalty_points', 'ilp');
@@ -471,9 +476,9 @@ function getNodeViewCount($nid){
  */
 
 function getNodeShareCount($nid){
-
+  
     $ns_count = 0;
-
+    
     $query = db_select('itg_lrp_loyalty_points', 'ilp');
     $query->fields('ilp', array('node_id'));
     $query->condition('ilp.node_id', $nid);
@@ -481,7 +486,7 @@ function getNodeShareCount($nid){
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $ns_count = count($result);
     return $ns_count;
-
+  
 }
 
 /*
@@ -568,7 +573,7 @@ function analytics_node_data($nid, $total){
 
     
 
-    if($type == 'total'){ // return the total count 
+    if($type == 'total'){ // return the total count
       // Caculate sum of all data.
       foreach ($analytics_data_array as $counting) {
         if (is_int($counting)) {
