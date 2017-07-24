@@ -12114,3 +12114,9 @@ fieldset#edit-xmlsitemap{
     }
   }
 }
+.node-syndication-rule{
+  .views-table{
+    margin-top: 0;
+    tbody td{border: none;}
+  } 
+}
