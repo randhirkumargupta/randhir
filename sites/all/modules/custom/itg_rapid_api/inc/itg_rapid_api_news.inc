@@ -175,13 +175,13 @@ if($term_tree_count){
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
       
-      $photo_story_eliimg = image_style_url('photo_slider_753x543',  _itg_photogallery_fid($resvalue['field_story_extra_large_image_fid']));
+      $photo_story_eliimg = image_style_url('photo_slider_753x543',  $resvalue['esi_file_uri']);
       $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_eliimg);
       
-      $photo_story_liimg = image_style_url('photo_slider_753x543', _itg_photogallery_fid($resvalue['field_story_large_image_fid']));
+      $photo_story_liimg = image_style_url('photo_slider_753x543',$resvalue['li_file_uri']);
       $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_liimg);
       
-      $photo_story_siiimg = image_style_url('photo_slider_88x66', _itg_photogallery_fid($resvalue['field_story_small_image_fid']));
+      $photo_story_siiimg = image_style_url('photo_slider_88x66', $resvalue['si_file_uri']);
       $photo_story_siiimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_siiimg);
 
       //related content
