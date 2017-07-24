@@ -242,7 +242,7 @@ function author_detail_data($author_id) {
   $query->fields('db', array('body_value'));
   $query->condition('n.status', 1);
   $query->condition('n.nid', $author_id);
-  //$query->condition('occ.field_celebrity_pro_occupation_tid', 285750); //Author term id
+  $query->condition('occ.field_celebrity_pro_occupation_tid', 285750); //Author term id
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAssoc();
 
