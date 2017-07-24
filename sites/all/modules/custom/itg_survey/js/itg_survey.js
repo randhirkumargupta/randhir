@@ -33,13 +33,13 @@
       // publish field hide
       $('#edit-field-supp-publish-und').hide();
       
-      jQuery(".form-submit").click(function() {    
+      /*jQuery(".form-submit").click(function() {    
         if(jQuery(this).attr("data-id") == 'edit-itg-custom-button') {       
            jQuery('#edit-field-supp-publish-und option').removeAttr('selected');
         } else if(jQuery(this).attr("data-id") == 'edit-submit') {       
-           jQuery('#edit-field-supp-publish-und option').attr('selected','selected');
+           jQuery('#edit-field-supp-publish-und option').val(1);
         }
-      }); 
+      });*/ 
       
 //      $(this).attr('edit-itg-custom-button').click(function () {
 //          alter('@@@');
