@@ -403,7 +403,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_breaking_coverage_end_time',
-    'label' => 'Coverage end time',
+    'label' => 'Live Blog End Time',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -1726,7 +1726,6 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Publish date');
   t('Content Type');
   t('Content details');
-  t('Coverage end time');
   t('Cricket Blog FEED');
   t('Display on');
   t('Display title (Home page)');
@@ -1742,6 +1741,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Large image');
+  t('Live Blog End Time');
   t('Mark as Breaking band');
   t('Match ID');
   t('Medium image');
