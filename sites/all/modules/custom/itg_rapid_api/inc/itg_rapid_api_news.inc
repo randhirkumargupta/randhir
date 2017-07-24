@@ -134,6 +134,7 @@ if($term_tree_count){
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
 
+    $query->fields('eli', array('field_story_extra_large_image_fid'));
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
@@ -172,14 +173,15 @@ if($term_tree_count){
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
-
-      $photo_story_eliimg = image_style_url('photo_story_647x363', $resvalue['esi_file_uri']);
+      $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+      
+      $photo_story_eliimg = image_style_url('photo_slider_647x363',  _itg_photogallery_fid($resvalue['field_story_extra_large_image_fid']));
       $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_eliimg);
-
-      $photo_story_liimg = image_style_url('photo_story_483x271', $resvalue['li_file_uri']);
+      
+      $photo_story_liimg = image_style_url('photo_slider_647x363', _itg_photogallery_fid($resvalue['field_story_large_image_fid']));
       $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_liimg);
-
-      $photo_story_siiimg = image_style_url('photo_story_170x127', $resvalue['si_file_uri']);
+      
+      $photo_story_siiimg = image_style_url('photo_slider_647x363', _itg_photogallery_fid($resvalue['field_story_small_image_fid']));
       $photo_story_siiimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_siiimg);
 
       //related content
@@ -213,9 +215,16 @@ if($term_tree_count){
             $news_list_array[$listcount]['n_primary_tag'] = "tag_name";
             $news_list_array[$listcount]['n_rating'] = "";
             $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
-            $news_list_array[$listcount]['n_small_image'] = "$photo_story_siiimg";
-            $news_list_array[$listcount]['n_large_image'] = "$photo_story_liimg";
-            $news_list_array[$listcount]['n_extra_large_image'] = "$photo_story_eliimg";
+            if($type == "photogallery"){
+                $news_list_array[$listcount]['n_small_image'] = "$photo_story_siiimg";
+                $news_list_array[$listcount]['n_large_image'] = "$photo_story_liimg";
+                $news_list_array[$listcount]['n_extra_large_image'] = "$photo_story_eliimg";
+            }
+            else{
+                $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
+                $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
+                $news_list_array[$listcount]['n_extra_large_image'] = "$file_ext_large_img_url";
+            }
             $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
 
             // photo list array
