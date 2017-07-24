@@ -11994,6 +11994,9 @@ h1.about-us-heading + div p {
 .factoids-page h3 {
   color: #000;
 }
+.factoids-page .social-share ul li:first-child {
+  vertical-align: baseline;
+}
 
 .factoids-slider ul {
   background: #a00606;
