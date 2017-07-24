@@ -100,6 +100,7 @@ function itg_autosave_form_delete($form_id) {
 function itg_autosave_nodeform($nid, $ctype) {
     global $user;
     ignore_user_abort(true);
+    $arg = arg();
     // Store submitted values into variable.
     $inputs = $_POST;
     // Create object for itg_auto_save class.
@@ -135,10 +136,9 @@ function itg_autosave_nodeform($nid, $ctype) {
     }
     $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : '' : '';
     // If title is empty then exit the process.
-    
     if($node->nid != null){
 		$lock_status = $itg_auto_save->itg_autosave_get_lock_status_node_id($node->nid);
-		 if($lock_status->lock_status == 1 && $node->status == 0){
+		 if($lock_status->lock_status == 1 && $node->status == 0 && $arg[2] == 'null'){
 			print t('Autosave lock from add page');
 			exit();  
 		}
