@@ -272,12 +272,12 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/slide5.jpg" alt="" title="" />
 		
-<a href="http://indiatoday.intoday.in/friends/index.jsp" class="backto1">&laquo; <br> 
+<a href="/friends/index.jsp" class="backto1">&laquo; <br> 
 			<span>Back to First</span></a>
 		
 
 
-		<a href="http://indiatoday.intoday.in/friends/index.jsp?slide=5" class='prev'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'></a>
+		<a href="/friends/index.jsp?slide=5" class='prev'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'></a>
 
 </div>
 <div style="clear:both" style="margin:10px 0;"></div>

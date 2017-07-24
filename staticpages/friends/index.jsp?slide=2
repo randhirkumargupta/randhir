@@ -274,7 +274,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 		
 
 
-		<a href="http://indiatoday.intoday.in/friends/index.jsp?slide=1" class='prev'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'></a><a href="http://indiatoday.intoday.in/friends/index.jsp?slide=3" class='next'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'></a>
+		<a href="/friends/index.jsp?slide=1" class='prev'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Back-button.png' alt='Prev'></a><a href="/friends/index.jsp?slide=3" class='next'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/friends/Forward-button.png' alt='Next'></a>
 
 </div>
 <div style="clear:both" style="margin:10px 0;"></div>
