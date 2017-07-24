@@ -217,6 +217,10 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/educationconclave2015 [NC]  
 	RewriteCond %{REQUEST_URI} !/educationsummit [NC]  
 	RewriteCond %{REQUEST_URI} !/election-express [NC]  
+	RewriteCond %{REQUEST_URI} !/fashionweek [NC]  
+	RewriteCond %{REQUEST_URI} !/five-tax-sins [NC]  
+	RewriteCond %{REQUEST_URI} !/food-bill [NC]  
+	RewriteCond %{REQUEST_URI} !/friends [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -415,6 +419,14 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^educationsummit/(.*) /staticpages/educationsummit/$1 [L]
 	RewriteRule ^election-express$ /staticpages/election-express/index.html? [L]
     RewriteRule ^election-express/(.*) /staticpages/election-express/$1 [L]
+	RewriteRule ^fashionweek$ /staticpages/fashionweek/index.html? [L]
+    RewriteRule ^fashionweek/(.*) /staticpages/fashionweek/$1 [L]
+	RewriteRule ^five-tax-sins$ /staticpages/five-tax-sins/index.html? [L]
+    RewriteRule ^five-tax-sins/(.*) /staticpages/five-tax-sins/$1 [L]
+	RewriteRule ^food-bill$ /staticpages/food-bill/index.html? [L]
+    RewriteRule ^food-bill/(.*) /staticpages/food-bill/$1 [L]
+	RewriteRule ^friends$ /staticpages/friends/index.html? [L]
+    RewriteRule ^friends/(.*) /staticpages/friends/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
