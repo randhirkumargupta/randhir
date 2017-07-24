@@ -240,7 +240,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Date */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -253,7 +253,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -450,7 +450,7 @@ function features_for_survey_views_default_views() {
     'php_1' => 'php_1',
     'php_2' => 'php_2',
     'view_node' => 'view_node',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_2' => 'nothing_1',
     'nothing_1' => 'nothing_1',
     'story_custom_view_link' => 'story_custom_view_link',
@@ -642,7 +642,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted by';
-  /* Field: Content: Date */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -655,7 +655,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -721,13 +721,6 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
   $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
@@ -740,17 +733,26 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'view-survey-result';
   $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
-  $handler->display->display_options['fields']['nothing_1']['hide_empty'] = TRUE;
   /* Field: Global: Story custom view link */
   $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
   $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -866,7 +868,7 @@ function features_for_survey_views_default_views() {
     'php_1' => 'php_1',
     'php_2' => 'php_2',
     'view_node' => 'view_node',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_2' => 'nothing_1',
     'nothing_1' => 'nothing_1',
     'story_custom_view_link' => 'story_custom_view_link',
@@ -1058,7 +1060,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Date */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -1071,7 +1073,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1137,13 +1139,6 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
   $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
@@ -1156,16 +1151,25 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'view-survey-result';
   $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
   /* Field: Global: Story custom view link */
   $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
   $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: User: Uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
@@ -1295,7 +1299,7 @@ function features_for_survey_views_default_views() {
     'php_1' => 'php_1',
     'php_2' => 'php_2',
     'view_node' => 'view_node',
-    'edit_node' => 'nothing_1',
+    'edit_node' => 'edit_node',
     'nothing_2' => 'nothing_1',
     'nothing_1' => 'nothing_1',
     'story_custom_view_link' => 'story_custom_view_link',
@@ -1487,7 +1491,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Date */
+  /* Field: Content: Validity Start Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -1500,7 +1504,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Validity End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1565,13 +1569,6 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
   $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
@@ -1584,16 +1581,24 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['link_class'] = 'view-survey-result';
   $handler->display->display_options['fields']['nothing_2']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
   /* Field: Global: Story custom view link */
   $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
   $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
   $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
