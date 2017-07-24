@@ -65,7 +65,7 @@ function itg_rfa_file_live_blog() {
  * This method is used to test the data
  */
 function itg_rfa_file_testing() {
-  
+
   global $base_url;
   $rundown_id = 1223544;
   $source = 'This is source';
@@ -75,7 +75,7 @@ function itg_rfa_file_testing() {
   $timestamp = REQUEST_TIME;
   $action = 'INSERT';
 
-  $url = $base_url."/itg-rfa-file-live-blog";
+  $url = $base_url . "/itg-rfa-file-live-blog";
   $data = array(
     array(
       'rundown_id' => 121211,
@@ -129,7 +129,6 @@ function itg_rfa_file_testing() {
 function itg_octopus_api_rfa_dashboard() {
   global $base_url;
 
-  //drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
 
   $query = db_select('itg_rundown', 'r')
@@ -145,7 +144,6 @@ function itg_octopus_api_rfa_dashboard() {
     array('data' => t('Created Date')),
     array('data' => t('Created By')),
     array('data' => t('Action')),
-    array('data' => t('File Breaking News')),
   );
 
   $pagination = '';
@@ -158,8 +156,8 @@ function itg_octopus_api_rfa_dashboard() {
   if (isset($_GET['source']) && !empty($_GET['source'])) { // source
     $query->condition('rfa.source', $_GET['source'], '=');
   }
-  
-   if (isset($_GET['text']) && !empty($_GET['text'])) { // source
+
+  if (isset($_GET['text']) && !empty($_GET['text'])) { // source
     $query->condition('rfa.text', $_GET['text'], '=');
   }
 
@@ -175,9 +173,7 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.created_date', strtotime($end_date), '<=');
   }
 
-  $query->extend('TableSort')
-      ->orderByHeader($header)
-      ->extend('PagerDefault')->limit(20);
+  $query->extend('PagerDefault')->limit(20);
 
   $result = $query->execute();
   $rows = array();
@@ -185,7 +181,7 @@ function itg_octopus_api_rfa_dashboard() {
 
   foreach ($result as $row) {
     $octopus_ref = base64_encode($row->id);
-    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa/listing&octopus_ref='.$octopus_ref);
+    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa/listing&octopus_ref=' . $octopus_ref);
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
       $background_color = 'bg-red';
@@ -201,10 +197,9 @@ function itg_octopus_api_rfa_dashboard() {
       array('data' => $row->rundown_id),
       array('data' => $row->source),
       array('data' => $row->text),
-      array('data' => date('d/m/Y - H:i',strtotime($row->created_date)),'class' => $background_color),
+      array('data' => date('d/m/Y - H:i', $row->created_date), 'class' => $background_color),
       array('data' => $row->created_by),
-      array('data' => $row->action),
-      array('data' => $ctype_text ),
+      array('data' => $ctype_text),
     );
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_rfa_form');
@@ -216,7 +211,6 @@ function itg_octopus_api_rfa_dashboard() {
   $output .= theme('pager');
   return $output;
 }
-
 
 /**
  * Implements hook_form().
@@ -235,7 +229,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#weight' => 2,
   );
 
-    $form['text'] = array(
+  $form['text'] = array(
     '#type' => 'textfield',
     '#title' => t('Text'),
     '#maxlength' => 255,
@@ -275,4 +269,22 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#weight' => 7,
   );
   return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_octopus_api_rfa_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array(
+    'rfa-dashboard',
+    array(
+      'query' => array(
+        'source' => $form_state['input']['source'],
+        'text' => $form_state['input']['text'],
+        'start_date' => $form_state['input']['start_date']['date'],
+        'end_date' => $form_state['input']['end_date']['date'],
+      ),
+    ),
+  );
 }

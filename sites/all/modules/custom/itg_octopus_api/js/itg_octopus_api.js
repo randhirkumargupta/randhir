@@ -13,21 +13,6 @@
 
 
 jQuery('document').ready(function() {
-    // Getting slug data
-
-//      jQuery ("#belly").click (function (event) {
-//        jQuery.ajax ({
-//          url: Drupal.settings.basePath + "notify-detail",
-//          type: 'POST',
-//          success: function (msg) {
-//            jQuery (".bell-notice").html (msg);
-//            jQuery (".bell-notice").show ();
-//          }
-//        });
-//      });
-
-
-
     jQuery(".octopus-slug-data").click(function() {
         var current_object = jQuery(this);
         var base_url = Drupal.settings.baseUrl.baseUrl;
@@ -206,7 +191,6 @@ jQuery('document').ready(function() {
         var o_base_url = Drupal.settings.baseUrl.baseUrl;
         var o_slug_id = jQuery(this).attr('data');
         var o_attr_id = jQuery(this).attr('attribute_id');
-        alert("ish");
         jQuery.ajax({
             url: o_base_url + '/itg-octopus-file-video',
             type: 'post',

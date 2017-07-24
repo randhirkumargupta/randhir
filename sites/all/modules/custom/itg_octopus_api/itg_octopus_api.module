@@ -297,7 +297,7 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#default_value'] = $slug_object->story_title;
     $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $slug_object->story_title;
     $form['field_story_expert_description'][LANGUAGE_NONE][0]['#default_value'] = $explode_cdata[0];
-    $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = trim($_GET['octopus_ref']);
+    $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = trim($slug_id);
     if ($user->uid != 1) {
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
@@ -309,18 +309,21 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
       if (is_numeric($delta)) {
         // assign value in first field collection item
         $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $octopus_ref->fid;
+        $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_video_title'][LANGUAGE_NONE][0]['#default_value'] = $slug_object->story_title;
+      
+        
       }
     }
   }
   if ($form_id == 'breaking_news_node_form' && !empty($_GET['octopus_ref'])) {
     $octopus_ref_id = base64_decode($_GET['octopus_ref']);
     $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
-
+    
     $form['title']['#default_value'] = $rfa_object->source;
     $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
     $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
     
-
+    
   }
 }
 

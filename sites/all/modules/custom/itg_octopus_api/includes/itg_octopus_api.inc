@@ -369,9 +369,9 @@ function itg_octopus_api_rundown_listing() {
   if (isset($current_rundown) && !empty($current_rundown)) {
     $query->condition('rund.type', $current_rundown, '=');
   }
-  $query->extend('TableSort')
-      ->orderByHeader($header)
-      ->extend('PagerDefault')->limit($items_per_page);
+  
+  $query->orderBy('ios.id','DESC');
+  $query->extend('PagerDefault')->limit(50);
 
 // p($query->__toString());
   $result = $query->execute();
