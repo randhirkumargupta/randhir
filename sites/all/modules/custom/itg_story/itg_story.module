@@ -338,8 +338,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
 
 
 
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
-  ) {
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-4') {
     if (arg(0) != 'ugc-published-story') {
       $form['title']['#autocomplete_path'] = 'content-workbench-title-list/story/' . arg(0) . '/autocomplete';
     }
