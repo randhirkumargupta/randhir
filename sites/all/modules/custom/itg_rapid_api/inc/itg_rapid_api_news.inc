@@ -570,5 +570,4 @@ function analytics_node_data($nid, $total){
     }
 
   }
-
 }
