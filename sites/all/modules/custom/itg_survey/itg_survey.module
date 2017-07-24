@@ -90,6 +90,7 @@ function itg_survey_form_alter(&$form , &$form_state , $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
+    unset($form['field_survey_category']);//hide section
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
       $publish_value = itg_survey_get_publish_status(arg(1));
@@ -154,7 +155,7 @@ function itg_survey_form_custom_submit_callback($form , &$form_state) {
     drupal_set_message(t('Survey <strong>@title</strong> has been updated.' , array('@title' => $title)));
   }
   else {
-    drupal_set_message(t('Survey <strong>@title</strong> has been submitted for further review and approval.' , array('@title' => $title)));
+    drupal_set_message(t('Survey <strong>@title</strong> has been Published.' , array('@title' => $title)));
   }
 }
 
@@ -187,14 +188,7 @@ function itg_survey_form_after_build($form , &$form_state) {
       $type = $node->type;
       $nid = arg(1);
     }
-  }
-
-  if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form
-    drupal_add_js('jQuery(document).ready(function() {
-            jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
-  }
+  }  
 
   // Array used in itg_survey.js
   $settings = array();

@@ -240,17 +240,17 @@
         position: relative;
       }
       .story-section .story-tech-chunk .tech-rating {
-        width: 88px;
-        height: 33px;
+        max-width: 88px;
         background: #b00808;
         color: #fff;
-        font-size: 28px;
+        font-size: 22px;
         position: absolute;
         top: 10px;
         right: 10px;
         text-align: center;
-        line-height: 33px;
+        line-height: 28px;
         font-weight: 700;
+        padding: 0 10px;
       }
       .field .field-label {
         font-weight: bold;
