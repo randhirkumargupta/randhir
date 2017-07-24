@@ -692,7 +692,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_category',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
