@@ -13,6 +13,8 @@ define("OCTOPUS_DUMPING_MACHINE_URL", "http://www.sample-videos.com/video/mp4/72
  * Implements hook_init()
  */
 function itg_octopus_api_init() {
+// $o =  itg_octopus_api_check_exist_file_browse('sadsadasdasdas.mp4',8989);
+
   global $base_url;
   global $theme;
   $settings = array();
@@ -36,26 +38,6 @@ function itg_octopus_api_menu() {
     'page callback' => 'itg_octopus_api_rundown_listing',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_api.inc',
-  );
-
-  $items['itg-octopus/dashboard'] = array(
-    'title' => 'ITG Octopus',
-    'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_octopus_api.inc',
-  );
-
-  $items['itg-octopus/dashboard/octopus'] = array(
-    'title' => 'ITG Octopus',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-
-  $items['itg-octopus/dashboard/rfa'] = array(
-    'title' => 'ITG RFA',
-    'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_octopus_api.inc',
-    'type' => MENU_LOCAL_TASK,
   );
 
   $items['slug/detail/%'] = array(
@@ -134,6 +116,35 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
+
+  $items['itg-octopus-file-video'] = array(
+    'page callback' => 'itg_octopus_file_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['itg-rfa-file-live-blog'] = array(
+    'page callback' => 'itg_rfa_file_live_blog',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
+
+  $items['itg-rfa-file-testing'] = array(
+    'page callback' => 'itg_rfa_file_testing',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
+
+  $items['rfa-dashboard'] = array(
+    'title' => 'RFA Dashboard',
+    'page callback' => 'itg_octopus_api_rfa_dashboard',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_rfa.inc',
+  );
+
   return $items;
 }
 
@@ -198,7 +209,6 @@ function itg_octopus_api_form($form, &$form_state) {
     '#weight' => 2,
   );
 
-
   $form['title'] = array(
     '#type' => 'textfield',
     '#title' => t('Video Title'),
@@ -208,8 +218,6 @@ function itg_octopus_api_form($form, &$form_state) {
     '#default_value' => isset($_GET['title']) ? $_GET['title'] : '',
     '#weight' => 3,
   );
-
-
 
   $form['start_date'] = array(
     '#type' => 'date_popup',
@@ -249,7 +257,6 @@ function itg_octopus_api_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_octopus_api_form_submit($form, &$form_state) {
-
   $form_state['redirect'] = array(
     'rundown/listing',
     array(
@@ -269,43 +276,51 @@ function itg_octopus_api_form_submit($form, &$form_state) {
  * Implement hook_form_alter
  * {@inheritdoc}
  */
+
 function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
-//  p($form);
+  if ($form_id == 'videogallery_node_form' && !empty($_GET['octopus_ref'])) {
 
-  if ($form_id == 'story_node_form') {
-    $slug_id = $_GET['story_id'];
-    $element_type = $_GET['element'];
-    if (!empty($slug_id) && is_numeric($slug_id) && $element_type == 'std') {
-      $slug_data = itg_octopus_api_slug_data($slug_id, $element_type);
-      $form['title']['#default_value'] = $slug_data->story_title;
+    $octopus_ref = json_decode(base64_decode($_GET['octopus_ref']));
+    $slug_id = $octopus_ref->slug_id;
+    $slug_object = itg_octopus_slug_detail($slug_id);
+    if (strpos($slug_object->text, 'CDATA') !== false) {
+      $body_slug = explode('[', $slug_data->text);
+      unset($body_slug[0]);
+      unset($body_slug[1]);
+      $cdata_last = implode('', $body_slug);
+      $explode_cdata = explode(']', $cdata_last);
+    }
 
-      if (strpos($slug_data->text, 'CDATA') !== false) {
-        $body_slug = explode('[', $slug_data->text);
-        unset($body_slug[0]);
-        unset($body_slug[1]);
-        $cdata_last = implode('', $body_slug);
-        $explode_cdata = explode(']', $cdata_last);
+    // get node values
+    drupal_add_css(".page-node-add-videogallery #field-video-upload-values tbody tr:first-child {display:block !important};
+      ", 'inline');
+    $form['title']['#default_value'] = $slug_object->story_title;
+    $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $slug_object->story_title;
+    $form['field_story_expert_description'][LANGUAGE_NONE][0]['#default_value'] = $explode_cdata[0];
+    $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = trim($_GET['octopus_ref']);
+    if ($user->uid != 1) {
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
+    }
+    $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'octopus';
+
+    // assign value in first field collection item
+    foreach ($form['field_video_upload']['und'] as $delta => $field) {
+      if (is_numeric($delta)) {
+        // assign value in first field collection item
+        $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $octopus_ref->fid;
       }
-      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $explode_cdata[0];
     }
   }
+  if ($form_id == 'breaking_news_node_form' && !empty($_GET['octopus_ref'])) {
+    $octopus_ref_id = base64_decode($_GET['octopus_ref']);
+    $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
 
-  if ($form_id == 'videogallery_node_form') {
-    $slug_id = $_GET['story_id'];
-    $element_type = $_GET['element'];
-    if (!empty($slug_id) && is_numeric($slug_id) && $element_type == 'vo') {
-      $slug_data = itg_octopus_api_slug_data($slug_id, $element_type);
+    $form['title']['#default_value'] = $rfa_object->source;
+    $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
+    $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
+    
 
-      $form['title']['#default_value'] = $slug_data->story_title;
-      if (strpos($slug_data->text, 'CDATA') !== false) {
-        $body_slug = explode('[', $slug_data->text);
-        unset($body_slug[0]);
-        unset($body_slug[1]);
-        $cdata_last = implode('', $body_slug);
-        $explode_cdata = explode(']', $cdata_last);
-      }
-      $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#value'] = $explode_cdata[0];
-    }
   }
 }
 
@@ -440,9 +455,12 @@ function itg_octopus_api_mail($key, &$message, $params) {
  * @return string
  */
 function itg_octopus_api_remove_cdata($text) {
-  $text = str_replace('<![CDATA[', '', $text);
-  $text = str_replace(']]', '', $text);
-  return $text;
+  $body_slug = explode('[', $text);
+  unset($body_slug[0]);
+  unset($body_slug[1]);
+  $cdata_last = implode('', $body_slug);
+  $explode_cdata = explode(']', $cdata_last);
+  return isset($explode_cdata[0]) ? $explode_cdata[0] : "";
 }
 
 /**
@@ -460,11 +478,106 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>[' . $chunk->action . ']' . l($chunk->story_title,'rundown/listing') . '</li>';
+    $html .= '<li>[' . $chunk->action . ']' . l($chunk->story_title, 'rundown/listing') . '</li>';
     ++$count;
   }
   $html .= '</ul>';
   $rows['html'] = $html;
   $rows['count'] = $count;
   return $rows;
+}
+
+/**
+ * Implements function check exist filename
+ * @param array $form
+ * @param array $form_state
+ * @return string
+ */
+function itg_octopus_api_check_exist_file_browse($filename, $file_size) {
+  global $user;
+  $fid = itg_octopus_api_getfile_details($filename);
+  if (isset($fid) && !empty($fid))
+    return $fid;
+
+  $path_info = pathinfo($filename);
+  $extension = $path_info['extension'];
+  if (isset($extension) && ($extension == 'mov' || $extension == 'mp4')) {
+    $uri = 'public://dailymotion_video_dir/' . $filename;
+    $fid = db_insert('file_managed')
+        ->fields(array(
+          'uid' => $user->uid,
+          'filename' => $filename,
+          'uri' => $uri,
+          'filemime' => file_get_mimetype($uri),
+          'filesize' => $file_size,
+          'status' => 1,
+          'timestamp' => REQUEST_TIME,
+        ))
+        ->execute();
+    $results = file_load($fid);
+    file_usage_add($results, 'itg_videogallery', 'file', $fid);
+    return $fid;
+  }
+}
+
+/**
+ * Implements function for get file exist file
+ * @param string $filename
+ * @return array
+ */
+function itg_octopus_api_getfile_details($filename) {
+  $uri = 'public://dailymotion_video_dir/' . $filename;
+  $query = db_select('file_managed', 'fm');
+  $query->condition('filename', $filename, '=');
+  $query->condition('uri', $uri, '=');
+  $query->fields('fm', array('fid'));
+  $query->orderBy('fm.fid', 'DESC');
+  $query->range(0, 1);
+  $results = $query->execute()->fetchAssoc();
+  return isset($results['fid']) ? $results['fid'] : NULL;
+}
+
+/**
+ * FTP Connection setup
+ * @param type $param
+ * @return type
+ */
+function itg_octopus_api_ftp_connection_setup() {
+  $ftp_ip = trim(variable_get('itg_octopus_ftp_ip'));
+  $ftp_port = trim(variable_get('itg_octopus_ftp_port'));
+  $ftp_username = trim(variable_get('itg_octopus_ftp_username'));
+  $ftp_password = trim(variable_get('itg_octopus_ftp_password'));
+  $conn_id = ftp_connect($ftp_ip, $ftp_port);
+  $login_result = ftp_login($conn_id, $ftp_username, $ftp_password);
+  if ((!$conn_id) || (!$login_result)) {
+    watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
+  }
+  return $conn_id;
+}
+
+/**
+ * Get slug detail for video
+ */
+function itg_octopus_slug_detail($sid) {
+  $query = db_select('itg_octopus_slug', 'ios');
+  $query->leftjoin('itg_element_clip', 'clip', 'clip.storyid=ios.storyid');
+  $query->fields('ios');
+  $query->fields('clip', array('text'));
+  $query->condition('ios.id', $sid, '=');
+  $result = $query->execute()->fetchAll();
+  $slug_data = reset($result);
+  return $slug_data;
+}
+
+/**
+ * Get slug detail for video
+ */
+function itg_octopus_rfa_detail($id) {
+  $query = db_select('itg_rfa', 'rfa');
+  $query->fields('rfa');
+  $query->fields('rfa');
+  $query->condition('rfa.id', $id, '=');
+  $result = $query->execute()->fetchAll();
+  $slug_data = reset($result);
+  return $slug_data;
 }
