@@ -373,6 +373,65 @@ function feature_for_breaking_news_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-breaking_news-field_breaking_coverage_end_time'.
+  $field_instances['node-breaking_news-field_breaking_coverage_end_time'] = array(
+    'bundle' => 'breaking_news',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 43,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_coverage_end_time',
+    'label' => 'Coverage end time',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 53,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-breaking_news-field_breaking_cricket_blog_feed'.
   $field_instances['node-breaking_news-field_breaking_cricket_blog_feed'] = array(
     'bundle' => 'breaking_news',
@@ -400,6 +459,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Cricket Blog FEED',
     'required' => 0,
     'settings' => array(
+      'display_summary' => 0,
       'exclude_cv' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -706,49 +766,6 @@ function feature_for_breaking_news_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'node-breaking_news-field_display_on'.
-  $field_instances['node-breaking_news-field_display_on'] = array(
-    'bundle' => 'breaking_news',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Home Page',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Display on',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_display_on',
-    'label' => 'Display on',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 6,
     ),
   );
 
@@ -1709,6 +1726,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Content Publish date');
   t('Content Type');
   t('Content details');
+  t('Coverage end time');
   t('Cricket Blog FEED');
   t('Display on');
   t('Display title (Home page)');
