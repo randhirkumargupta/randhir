@@ -90,7 +90,7 @@ function itg_analytics_get_node_analytics_data($nid) {
       $count_collection = $con->itg_custom_flag_count;
 
       // Appended 0 as in mongo database 0 is going.
-      $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      $count_condition = array('nid' => (int) $nid, 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
       $count_result = $count_collection->find($count_condition);
       foreach ($count_result as $count_document) {
         $data_count_node_like = $count_document['like_count'];
@@ -134,7 +134,6 @@ function itg_analytics_get_node_analytics_data($nid) {
       $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
       //END
     }
-
     // Caculate sum of all data.
     foreach ($analytics_data_array as $counting) {
       if (is_int($counting)) {
@@ -397,7 +396,6 @@ function _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequ
       //END.
       // Query to get nodeids which is liked within 24 hour START.
       $count_collection = $con->itg_custom_flag_count;
-      // Appended 0 as in mongo database 0 is going.
       $count_condition = array('timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
       $count_result = $count_collection->find($count_condition);
       foreach ($count_result as $count_document) {
