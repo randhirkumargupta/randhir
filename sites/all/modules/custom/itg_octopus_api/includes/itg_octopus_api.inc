@@ -306,7 +306,6 @@ function itg_octopus_api_rundown_listing() {
   }
 
 
-
   $pagination = '';
   $current_rundown = '';
 
@@ -708,35 +707,37 @@ function itg_octopus_api_move_dump_server_to_s3() {
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
   global $base_url;
   $data = array();
-  $video_path = $base_url . '/' . $_POST['id'];
-
+ // $post_video_id = $_POST['id'];
+  $post_video_id = $_POST['id'];
+  $video_path = $base_url . '/' . $post_video_id;
+  
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
 
   $conn_id = itg_octopus_api_ftp_connection_setup();
   ftp_pasv($conn_id, true);
   $video_name = $_POST['id'];
   $ftp_files = ftp_nlist($conn_id, "/");
-  $file_size = ftp_size($conn_id, '/' . $_POST['id']);
-//  $local_file = $video_name;
-//  $server_file = $video_name;
-//  $file_d_success = 0;
-//  // try to download $server_file and save to $local_file
-//  if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
-//    //echo "Successfully written to $local_file\n";
-//    // TODO
-//    $file_d_success = 1;
-//  }
-//  else {
-//    // echo "There was a problem\n";
-//    $file_d_success = 0;
-//  }
+  $file_size = ftp_size($conn_id, '/' . $post_video_id);
+  $local_file = $video_name;
+  $server_file = $video_name;
+  $file_d_success = 0;
+  // try to download $server_file and save to $local_file
+  if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
+    //echo "Successfully written to $local_file\n";
+    // TODO
+    $file_d_success = 1;
+  }
+  else {
+    // echo "There was a problem\n";
+    $file_d_success = 0;
+  }
   $file_d_success = 1;
 // close the connection
   ftp_close($conn_id);
   if ($file_d_success == 1) {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
-      $s3_success = itg_video_send_dm_to_s3($video_path, $video_name);
+      $s3_success = itg_video_send_dm_to_s3($local_file, $video_name);
       if (isset($s3_success) && !empty($s3_success)) {
         $data['success'] = 'yes';
         $data['s3_url'] = $s3_success;

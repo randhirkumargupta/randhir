@@ -13,8 +13,8 @@ define("OCTOPUS_DUMPING_MACHINE_URL", "http://www.sample-videos.com/video/mp4/72
  * Implements hook_init()
  */
 function itg_octopus_api_init() {
-// $o =  itg_octopus_api_check_exist_file_browse('sadsadasdasdas.mp4',8989);
-
+  //$o =  itg_octopus_api_check_exist_file_browse('sadsadasdasdas.mp4',8989);
+  //ttttttttttttttttttttt();
   global $base_url;
   global $theme;
   $settings = array();
@@ -276,7 +276,6 @@ function itg_octopus_api_form_submit($form, &$form_state) {
  * Implement hook_form_alter
  * {@inheritdoc}
  */
-
 function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'videogallery_node_form' && !empty($_GET['octopus_ref'])) {
 
@@ -310,20 +309,16 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
         // assign value in first field collection item
         $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $octopus_ref->fid;
         $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_video_title'][LANGUAGE_NONE][0]['#default_value'] = $slug_object->story_title;
-      
-        
       }
     }
   }
   if ($form_id == 'breaking_news_node_form' && !empty($_GET['octopus_ref'])) {
     $octopus_ref_id = base64_decode($_GET['octopus_ref']);
     $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
-    
+
     $form['title']['#default_value'] = $rfa_object->source;
     $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
     $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
-    
-    
   }
 }
 
@@ -583,4 +578,9 @@ function itg_octopus_rfa_detail($id) {
   $result = $query->execute()->fetchAll();
   $slug_data = reset($result);
   return $slug_data;
+}
+
+function ttttttttttttttttttttt() {
+//  module_load_include('inc', 'itg_octopus_api', 'includes/itg_octopus_api');
+//  itg_octopus_api_move_dump_server_to_s3();
 }
