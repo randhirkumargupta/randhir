@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implements hook_form().
  * {@inheritdoc}
@@ -12,16 +13,16 @@ function itg_ugc_inqueue_form($form, &$form_state) {
     '#maxlength' => 255,
     '#size' => 30,
     '#attributes' => array('placeholder' => t('Title'), 'autocomplete' => 'off'),
-    '#default_value' => isset($_GET['title']) ? $_GET['title']:"",
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
   );
-  
+
   $form['content_type'] = array(
-      '#type' => 'select',
-      '#title' => t('Content Type'),
-      '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'videogallery', 'podcast' => 'podcast', 'blog' => 'blog'),
-      '#default_value' => isset($_GET['content_type']) ? $_GET['content_type']:"",
+    '#type' => 'select',
+    '#title' => t('Content Type'),
+    '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'Video', 'podcast' => 'podcast', 'blog' => 'blog'),
+    '#default_value' => isset($_GET['content_type']) ? $_GET['content_type'] : "",
   );
-  
+
   $form['items_per_page'] = array(
     '#type' => 'select',
     '#title' => 'Items per page',
@@ -33,9 +34,9 @@ function itg_ugc_inqueue_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-inqueue-content">'.t('Reset').'</a></div>',
+    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-inqueue-content">' . t('Reset') . '</a></div>',
   );
-  
+
   return $form;
 }
 
@@ -62,6 +63,8 @@ function itg_ugc_inqueue_form_submit($form, &$form_state) {
 function itg_ugc_inqueue_content() {
   global $base_url;
   $arg = arg();
+  drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
+
   # configure the table header columns
   $header = array(
     array('data' => t('S. No')),
@@ -79,7 +82,7 @@ function itg_ugc_inqueue_content() {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;
-      
+
       if (!empty($_GET['items_per_page'])) {
         $limit = $_GET['items_per_page'];
       }
@@ -104,14 +107,17 @@ function itg_ugc_inqueue_content() {
 
       $rows = array();
       $sl_no = 1;
-      
+
       foreach ($userData as $row) {
-        $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'?width=500&height=300">'.t('view').'</a></span> | <span class="edit-link"><a href="'.$base_url.'/node/add/'.$row['content_type'].'/'.$row['_id'].'?destination=ugc-inqueue-content">'.t('Approve').'</a></span> | <a href="ugc-title/'.$row['_id'].'/reject" class="ugc-reject">'.t('Reject').'</a>';
-        
+        $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/' . $row['_id'] . '/' . $arg[0] . '?width=700&height=600">' . t('view') . '</a></span> | <span class="edit-link"><a href="' . $base_url . '/node/add/' . $row['content_type'] . '/' . $row['_id'] . '?destination=ugc-inqueue-content">' . t('Approve') . '</a></span> | <a href="ugc-title/' . $row['_id'] . '/reject" class="ugc-reject">' . t('Reject') . '</a>';
+
         if ($row['status'] == 1) {
           $status = 'Active';
         }
-        
+
+        if ($row['content_type'] == 'videogallery') {
+          $row['content_type'] = 'Video';
+        }
         //get the value in table
         $rows[] = array(
           array('data' => $sl_no),

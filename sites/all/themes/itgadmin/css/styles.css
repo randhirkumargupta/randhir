@@ -443,7 +443,7 @@ img {
 .manage_cooking_tips_view_menu, .category-manager-thead div, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper legend,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper legend, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td, div.node #comments .comment-form .form-type-item > label, .comment-form .form-type-item > label, [id*="field-poll-answer-values"] tbody tr, [id*="field-poll-answer-values"] tbody tr td, .view-popup .field .field-label, [id*="field-survey-add-questions-values"] > tbody > tr, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-type, [id*="field-survey-add-questions-values"] > tbody table thead, [id*="field-survey-add-questions-values"] > tbody table tbody, [id*="field-astro-zodiac-values"] > tbody > tr > td,
-[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .upload-preview, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .upload-preview, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, #SocialMedia .form-field-name-field-facebook-animated-image .image-widget-data .form-file, #SocialMedia .form-field-name-field-facebook-gallery-associate [id*="field-facebook-gallery-associate-values"] tbody tr td:nth-child(2), .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, #head-val, [id*="field-videogallery-video-upload-values"] tbody tr td, .action-with-title #page-title, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody, [id*="field-podcast-audio-upload-values"] tbody tr, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), .itg_image_repository .image_repository div, [id*="field-pti-print-media-values"] tbody, [id*="field-pti-print-media-values"] tbody tr td, [id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select, [id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="views-form-strory-menegment-page"] .btn-generate-xml, .view-photo-list-of-category .view-content .photo-list li, .view-video-list-of-category .view-content .photo-list li, .node-type-print-team-integration #comments .comment ul.links li, #itg_video_content .video-local, #itg_video_content .video-ftp, .widgets-view .vbo-views-form fieldset#edit-select .form-submit, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, [id*="views-exposed-form-menu-manager-menu-manager-page"] .views-submit-button, [id*="views-exposed-form-menu-manager-menu-manager-page"] .views-reset-button, [id*="views-exposed-form-menu-manager-menu-manager-page"] .third-label-menu-section, [id*="views-exposed-form-menu-manager-menu-manager-page"] .third-label-menu-term, .node-story-form .form-field-name-field-emoji-position .form-checkboxes .form-type-checkbox, .node-story-form .form-field-name-field-emoji-position .form-checkboxes .form-type-checkbox .form-checkbox, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo, [id*="daily-motion-video-dashboard"] fieldset, [id*="field-photo-story-values"] tbody tr td, .view-social-media-report .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-scheduled_time .container-inline-date {
+[id*="field-astro-numerology-values-values"] > tbody > tr > td, [id*="field-newsl-add-news-values"] fieldset legend, .node-syndication_rule-form tbody td, .node-syndication_rule-form tbody td .field-name-field-syndication-time .form-type-textfield .form-text, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format, .node-syndication_rule-form tbody td .field-name-field-syndication-time-format .form-type-select .form-text, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .upload-preview, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .upload-preview, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file-size, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file-size, #SocialMedia .form-field-name-field-facebook-animated-image .image-widget-data .form-file, #SocialMedia .form-field-name-field-facebook-gallery-associate [id*="field-facebook-gallery-associate-values"] tbody tr td:nth-child(2), .newsletter-templates .newsletter-list .newsletter-thumbnail, [id*="field-service-content-values"] tbody tr td, [id*="field-service-content-values"] .field-name-field-service-content-date, [id*="field-syndication-ftp-details-values"] tbody tr td, [id*="field-syndication-ftp-details-values"] tbody tr td .field-type-text, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td, .node-syndication_client-form [id*="field-email-address-values"] tbody tr td .form-type-textfield, .view-view-moderation-history .views-row .views-label, .node-newsletter-form #newsletter-date-time-wrapper .form-item, .node-newsletter-form #newsletter-date-time-wrapper #edit-field-survey-start-date, #head-val, [id*="field-videogallery-video-upload-values"] tbody tr td, .action-with-title #page-title, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody, [id*="field-podcast-audio-upload-values"] tbody tr, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), .itg_image_repository .image_repository div, [id*="field-pti-print-media-values"] tbody, [id*="field-pti-print-media-values"] tbody tr td, [id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select, [id*="itg-octopus-api-rfa-form"] .form-type-textfield, [id*="itg-octopus-api-rfa-form"] .form-type-select, [id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="itg-octopus-api-rfa-form"] .octopus-filter-btn, [id*="views-form-strory-menegment-page"] .btn-generate-xml, .view-photo-list-of-category .view-content .photo-list li, .view-video-list-of-category .view-content .photo-list li, .node-type-print-team-integration #comments .comment ul.links li, #itg_video_content .video-local, #itg_video_content .video-ftp, .widgets-view .vbo-views-form fieldset#edit-select .form-submit, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] #edit-category-icon-upload, [id*="views-exposed-form-menu-manager-menu-manager-page"] .views-submit-button, [id*="views-exposed-form-menu-manager-menu-manager-page"] .views-reset-button, [id*="views-exposed-form-menu-manager-menu-manager-page"] .third-label-menu-section, [id*="views-exposed-form-menu-manager-menu-manager-page"] .third-label-menu-term, .node-story-form .form-field-name-field-emoji-position .form-checkboxes .form-type-checkbox, .node-story-form .form-field-name-field-emoji-position .form-checkboxes .form-type-checkbox .form-checkbox, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-sample-photo, [id*="daily-motion-video-dashboard"] fieldset, [id*="field-photo-story-values"] tbody tr td, .view-social-media-report .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-scheduled_time .container-inline-date {
   float: left;
 }
 
@@ -6578,42 +6578,43 @@ div.node #comments h2 {
   margin-top: 40px !important;
 }
 
-[id*="itg-octopus-api-form"] {
+[id*="itg-octopus-api-form"], [id*="itg-octopus-api-rfa-form"] {
   display: inline-block;
   width: 100%;
   vertical-align: top;
 }
-[id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select {
+[id*="itg-octopus-api-form"] .form-type-textfield, [id*="itg-octopus-api-form"] .form-type-select, [id*="itg-octopus-api-rfa-form"] .form-type-textfield, [id*="itg-octopus-api-rfa-form"] .form-type-select {
   width: 200px;
   padding-left: 0;
   padding-right: 10px;
 }
-[id*="itg-octopus-api-form"] .form-type-textfield > label, [id*="itg-octopus-api-form"] .form-type-select > label {
+[id*="itg-octopus-api-form"] .form-type-textfield > label, [id*="itg-octopus-api-form"] .form-type-select > label, [id*="itg-octopus-api-rfa-form"] .form-type-textfield > label, [id*="itg-octopus-api-rfa-form"] .form-type-select > label {
   display: block;
   float: none;
   padding: 0;
 }
-[id*="itg-octopus-api-form"] .octopus-filter-btn {
-  margin: 48px 0 0;
+[id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="itg-octopus-api-rfa-form"] .octopus-filter-btn {
+  margin: 27px 0 0;
 }
-[id*="itg-octopus-api-form"] .octopus-filter-btn .octopus-apply {
+[id*="itg-octopus-api-form"] .octopus-filter-btn .octopus-apply, [id*="itg-octopus-api-rfa-form"] .octopus-filter-btn .octopus-apply {
   margin-right: 10px;
 }
-[id*="itg-octopus-api-form"] .container-inline-date {
+[id*="itg-octopus-api-form"] .container-inline-date, [id*="itg-octopus-api-rfa-form"] .container-inline-date {
   clear: none;
   float: left;
   width: 120px;
+  margin: 10px 0;
 }
-[id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield {
+[id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield, [id*="itg-octopus-api-rfa-form"] .container-inline-date .form-type-textfield {
   width: 100%;
 }
-[id*="itg-octopus-api-form"] .container-inline-date > label {
+[id*="itg-octopus-api-form"] .container-inline-date > label, [id*="itg-octopus-api-rfa-form"] .container-inline-date > label {
   display: block;
 }
-[id*="itg-octopus-api-form"] .container-inline-date .date-padding .form-item > label {
+[id*="itg-octopus-api-form"] .container-inline-date .date-padding .form-item > label, [id*="itg-octopus-api-rfa-form"] .container-inline-date .date-padding .form-item > label {
   display: none;
 }
-[id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"] {
+[id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"], [id*="itg-octopus-api-rfa-form"] .container-inline-date .date-padding input[type="text"] {
   width: 100%;
 }
 
@@ -12908,4 +12909,11 @@ fieldset#edit-xmlsitemap {
   margin-top: 10px;
   height: 29px;
   margin-left: 10px;
+}
+
+.node-syndication-rule .views-table, .node-syndication-rule [id*="field-newsl-add-news-values"], .node-syndication-rule .variables-and-field-container .variables table, .variables-and-field-container .variables .node-syndication-rule table, .node-syndication-rule .page-admin-structure-menu-manage #menu-overview, .page-admin-structure-menu-manage .node-syndication-rule #menu-overview, .node-syndication-rule [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-configure"] fieldset .node-syndication-rule table, .node-syndication-rule [id*="protected-pages-edit"] fieldset table, [id*="protected-pages-edit"] fieldset .node-syndication-rule table, .node-syndication-rule .page-node-moderation, .node-syndication-rule #taxonomy-overview-terms, .node-syndication-rule [id*="daily-motion-video-dashboard"] table, [id*="daily-motion-video-dashboard"] .node-syndication-rule table {
+  margin-top: 0;
+}
+.node-syndication-rule .views-table tbody td, .node-syndication-rule [id*="field-newsl-add-news-values"] tbody td, .node-syndication-rule .variables-and-field-container .variables table tbody td, .variables-and-field-container .variables .node-syndication-rule table tbody td, .node-syndication-rule .page-admin-structure-menu-manage #menu-overview tbody td, .page-admin-structure-menu-manage .node-syndication-rule #menu-overview tbody td, .node-syndication-rule [id*="protected-pages-configure"] fieldset table tbody td, [id*="protected-pages-configure"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule [id*="protected-pages-edit"] fieldset table tbody td, [id*="protected-pages-edit"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule .page-node-moderation tbody td, .node-syndication-rule #taxonomy-overview-terms tbody td, .node-syndication-rule [id*="daily-motion-video-dashboard"] table tbody td, [id*="daily-motion-video-dashboard"] .node-syndication-rule table tbody td {
+  border: none;
 }

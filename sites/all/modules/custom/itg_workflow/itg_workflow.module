@@ -569,9 +569,7 @@ function itg_workflow_node_presave($node) {
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
-  if (!empty($node->op)) {
-    $node->field_op_flag[LANGUAGE_NONE][0]['value'] = $node->workbench_moderation_state_new;
-  }
+  
   if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
@@ -647,17 +645,23 @@ function itg_workflow_node_presave($node) {
         }
         $file_video = itg_videogallery_get_video_info_by_fid($fids);
       }
-
 // Need to chenge this for redirect
       if ($is_draft == 1) {
         if (!empty($node->op)) {
           if ($node->workbench_moderation['current']->state == 'published') {
-            $node->workbench_moderation['current']->from_state = 'draft';
-            $node->workbench_moderation['current']->state = 'draft';
-            $node->workbench_moderation['published']->from_state = 'draft';
-            $node->workbench_moderation['published']->state = 'draft';
-            $node->status = 0;
-            $node->revision = 0;
+//            $node->workbench_moderation['current']->from_state = 'draft';
+//            $node->workbench_moderation['current']->state = 'draft';
+//            $node->workbench_moderation['published']->from_state = 'draft';
+//            $node->workbench_moderation['published']->state = 'draft';
+//            $node->status = 0;
+//            $node->revision = 0;
+              
+              if($node->status) {
+              $node->workbench_moderation_state_new = 'published';
+              }
+              if (!empty($node->op)) {
+         $node->field_op_flag[LANGUAGE_NONE][0]['value'] = $node->workbench_moderation_state_new;
+       }
           }
           else {
 
@@ -808,6 +812,10 @@ function itg_workflow_node_access($node, $op, $account) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     }
+    
+    if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+      $story_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    }
 
     $current_time = time();
 
@@ -817,6 +825,9 @@ function itg_workflow_node_access($node, $op, $account) {
     elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
       return NODE_ACCESS_DENY;
     }
+    /*elseif ((!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
+      return NODE_ACCESS_DENY;
+    }*/
   }
   elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
     if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan

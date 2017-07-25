@@ -63,10 +63,12 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
       }
     }
     else {
-      print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
+      //print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
+      print strip_tags($output);
     }
   }
 }
 else {
-  print l(strip_tags($output) , 'node/' . $row->nid);
+  //print l(strip_tags($output) , 'node/' . $row->nid);
+  print strip_tags($output);
 }

@@ -338,8 +338,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
 
 
 
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
-  ) {
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-4') {
     if (arg(0) != 'ugc-published-story') {
       $form['title']['#autocomplete_path'] = 'content-workbench-title-list/story/' . arg(0) . '/autocomplete';
     }
@@ -404,7 +403,9 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
   // Code for redirection url validation
   if ($node->type == 'story') {
-
+    // code to copy long headline to short headline
+    $form_state['values']['field_story_short_headline'][LANGUAGE_NONE][0]['value'] = $form_state['input']['field_story_short_headline'][LANGUAGE_NONE][0]['value'];
+    // end here
     $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
     $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
     $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
@@ -467,7 +468,7 @@ function itg_story_after_build($form, &$form_state) {
   global $user, $base_url;
   
   // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
       $form['actions']['itg_custom_apply_button'] = array(
         '#type' => 'submit',

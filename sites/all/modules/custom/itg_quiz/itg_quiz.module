@@ -215,7 +215,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
     }
     else {
-      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been submitted for further review and approval.'));
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been updated.'));
     }
   }
 }

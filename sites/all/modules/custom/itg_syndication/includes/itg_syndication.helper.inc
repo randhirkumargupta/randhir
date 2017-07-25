@@ -165,7 +165,9 @@ function get_content_id_for_syndication($data, $created_date) {
 
   $delivery_mode_array = explode(': ', $data['delivery_mode']);
   //if ($delivery_mode_array[0] == 'Weburl') {
-  $itg_query->range(0, $data['num_of_feeds']);
+  if(!empty($data['num_of_feeds'])) {
+      $itg_query->range(0, $data['num_of_feeds']);
+  }
   //} 
 
   $itg_result = $itg_query->execute()->fetchAll();
@@ -234,7 +236,8 @@ function save_cron_details_of_syndication($node) {
       'time_rule' => $time_rule,
       'day_name' => $day,
       'date' => $dt,
-      'num_of_feeds' => $num_of_feeds);
+      'num_of_feeds' => $num_of_feeds,
+      );
 
     $details = serialize($details_array);
     $expiry_date = get_client_expiry_date($client_name);
@@ -382,9 +385,13 @@ function get_rule_by_client_name($client_name) {
 function get_client_expiry_date($client_name) {
 
   $client = explode('-', $client_name);
-  $client_description = $client[1];
+//  $client_description = $client[1];
+//  $client_title = $client[0];
+//  $client = explode('-', $client_name);
+  // get client name
   $client_title = $client[0];
-
+  unset($client[0]);
+  $client_description = implode("-", $client);
   $itg_query = db_select('node', 'n');
   $itg_query->condition('n.title', $client_description)
     ->fields('expiry', array('field_story_expiry_date_value'));
@@ -395,6 +402,5 @@ function get_client_expiry_date($client_name) {
   $itg_query->condition('expiry.bundle', 'syndication_client');
   $itg_result = $itg_query->execute()->fetchField();
   $expiry_date = strtotime($itg_result);
-
   return $expiry_date;
 }

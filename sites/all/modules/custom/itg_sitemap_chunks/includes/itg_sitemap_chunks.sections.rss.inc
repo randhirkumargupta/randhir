@@ -191,36 +191,43 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
   $xml = NULL;
   $limit = variable_get('itg_rss_chunks_number', 50000);
 // Get all child of section.
-  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
+//  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
 // Include section too in childern and combine into single array.
   $childrens[] = $section_tid;
   sort($childrens);
-  $query = db_select('itg_widget_order_section', 'wos');
-  $query->leftJoin('node', 'n', 'n.nid=wos.nid');
-  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=wos.nid');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-  $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
-  $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
-  $query->fields('wos', array('nid'));
-  $query->fields('n', array('title', 'created'));
-  $query->fields('sh', array('field_story_short_headline_value'));
-  $query->fields('fm', array('uri'));
-  $query->fields('pd', array('field_itg_content_publish_date_value'));
-  $query->condition('n.status', 1);
-  if (!empty($childrens)) {
-    $query->condition('wos.cat_id', $childrens, 'IN');
+  try {
+    $query = db_select('node', 'n');
+    $query->leftJoin('itg_widget_order_section', 'wos' , 'n.nid=wos.nid');
+    $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=wos.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'fm', 'fm.fid = eli.field_story_extra_large_image_fid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id = n.nid');
+    $query->fields('wos', array('nid'));
+    $query->fields('n', array('title', 'created'));
+    $query->fields('sh', array('field_story_short_headline_value'));
+    $query->fields('fm', array('uri'));
+    $query->fields('pd', array('field_itg_content_publish_date_value'));
+    $query->condition('n.status', 1);
+    if (!empty($childrens)) {
+      $query->condition('wos.cat_id', $childrens, 'IN');
+    }
+    $query->condition('wos.content_type', $content_type);
+    $query->condition('wos.widget', 'section_wise_widget');
+    $query->range(0, $limit);
+    $is_published_date_order = itg_sitemap_published_date_order();
+    if ($is_published_date_order) {
+      $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
+      $query->orderBy('n.created', 'DESC');
+    } else {
+      $query->orderBy('wos.weight', 'DESC');
+      $query->orderBy('n.nid', 'DESC');
+    }
+    $query->groupBy('n.nid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  } catch (Exception $ex) {
+    echo $ex->getMessage();
+    exit;
   }
-  $query->condition('wos.content_type', $content_type);
-  $query->range(0, $limit);
-  if (!empty($arg[1])) {
-    $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
-    $query->orderBy('n.created', 'DESC');
-  } else {
-    $query->orderBy('wos.weight', 'DESC');
-    $query->orderBy('wos.nid', 'DESC');
-  }
-  $query->groupBy('wos.nid');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (!empty($result)) {
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>' . "\r\n";
     $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">' . "\r\n";
@@ -234,7 +241,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s', time()) . ' GMT </lastBuildDate>' . "\r\n";
     $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
-    $xml .= '<image>';
+    $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     if (!empty($section_tid)) {
       $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . ' | ' . get_term_name_from_tid_for_report($section_tid) . '</title>' . "\r\n";
@@ -285,11 +292,12 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $query->condition('wos.cat_id', $section_tid);
   }
   $query->range(0, $limit);
-  if (!empty($section_tid)) {
-    $query->orderBy('wos.weight', 'DESC');
-  } else {
+  $is_published_date_order = itg_sitemap_published_date_order();
+  if ($is_published_date_order) {
     $query->orderBy('pd.field_itg_content_publish_date_value', 'DESC');
     $query->orderBy('n.created', 'DESC');
+  } else {
+    $query->orderBy('wos.weight', 'DESC');
   }
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (!empty($result)) {
@@ -328,6 +336,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
  */
 function itg_sitemap_print_section_rss($result) {
   global $base_url;
+  $arg = arg();
   $xml .= '';
   foreach ($result as $data) {
     $xml .= '<item>' . "\r\n";
@@ -350,8 +359,31 @@ function itg_sitemap_print_section_rss($result) {
       $xml .= '<sectionname> <![CDATA[ ' . $data['name'] . ' ]]></sectionname>' . "\r\n";
     }
     $xml .= '<link> <![CDATA[ ' . check_url($node_link) . ' ]]></link>' . "\r\n";
-    $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    if ($arg[0] == 'rss-gallery') {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" align="left" hspace="2" height="82" width="107" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    } else if ($arg[0] == 'rss-video') {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" align="left" hspace="2" height="82" width="107" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    } else {
+      $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
+    }
     $xml .= '<pubDate> ' . $published_date . ' GMT </pubDate>' . "\r\n";
+    if ($arg[0] == 'rss-gallery') {
+      $xml .='<media:description type="html">';
+      $xml .= '<![CDATA[ <a href="' . $node_link . '"><img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"></a>';
+      $xml .= ']]> </media:description>' . "\r\n";
+      $xml .= '<media:thumbnail url="' . $node_extra_large_image_url . '"/>' . "\r\n";
+      $xml .= '<media:content medium="image" type="image/jpg" url="' . $node_extra_large_image_url . '"/>' . "\r\n";
+      $xml .= '<media:copyright>' . t("© 2010 India Today Group. All Rights Reserved.") . '</media:copyright>' . "\r\n";
+      $xml .= '<pubDate>' . $published_date . '</pubDate>' . "\r\n";
+    } else if ($arg[0] == 'rss-video') {
+      $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">';
+      $xml .= '<media:category scheme="' . $node_link . '">' . get_term_name_from_tid_for_report(itg_widget_get_primary_cat($data['nid'], 1)) . '</media:category>';
+      $xml .= '<media:text type="plain"><![CDATA[ ' . check_plain($node_title) . ' ]]></media:text>';
+      $xml .= '<media:rating scheme="urn:simple">nonadult</media:rating>';
+      $xml .= '<media:thumbnail width="107" height="82" url="' . $node_extra_large_image_url . '"/>';
+      $xml .= '</media:content>' . "\r\n";
+    }
+
     $xml .= '</item>' . "\r\n";
   }
   return $xml;

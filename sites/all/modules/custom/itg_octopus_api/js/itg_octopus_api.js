@@ -13,7 +13,6 @@
 
 
 jQuery('document').ready(function() {
-    // Getting slug data
     jQuery(".octopus-slug-data").click(function() {
         var current_object = jQuery(this);
         var base_url = Drupal.settings.baseUrl.baseUrl;
@@ -99,6 +98,7 @@ jQuery('document').ready(function() {
                                                     },
                                                     success: function(datafinal) {
                                                         var s3_response_data = JSON.parse(datafinal);
+                                                        console.log("jsahhdjsahdjaahdjahdahd");
                                                         console.log(s3_response_data);
                                                         if (s3_response_data.success == 'yes') {
                                                             jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video uploaded to S3</p></div>');
@@ -115,7 +115,7 @@ jQuery('document').ready(function() {
                                                                 jQuery.ajax({
                                                                     url: base_url + '/itg-octopus-video-s3-to-dm',
                                                                     type: 'post',
-                                                                    data: {'s3_video_uri': s3_response_data.s3_url, 'slug_id': attr_id},
+                                                                    data: {'s3_video_uri': s3_response_data.s3_url, 'slug_id': attr_id, 'file_size': s3_response_data.file_size},
                                                                     beforeSend: function() {
                                                                         jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Processing to DM..</p></div>');
 
@@ -160,9 +160,9 @@ jQuery('document').ready(function() {
                                     }, 5000);
                                 }, 5000);
                             } else {
-                           jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Still Checking dumping video status</p></div>');
+                                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Still Checking dumping video status</p></div>');
 
-                            
+
                             }
                         },
                         error: function(xhr, desc, err) {
@@ -185,6 +185,27 @@ jQuery('document').ready(function() {
 
     });
 
+    // Handler for file video
+    jQuery("body").on('click', '.file-video', function() {
+        var o_current_object = jQuery(this);
+        var o_base_url = Drupal.settings.baseUrl.baseUrl;
+        var o_slug_id = jQuery(this).attr('data');
+        var o_attr_id = jQuery(this).attr('attribute_id');
+        jQuery.ajax({
+            url: o_base_url + '/itg-octopus-file-video',
+            type: 'post',
+            data: {'slug_id': o_attr_id},
+            beforeSend: function() {
+            },
+            success: function(fdata) {
+                window.location.href = fdata;
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
 
+    });
 
 });

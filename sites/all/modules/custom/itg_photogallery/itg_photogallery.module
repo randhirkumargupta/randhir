@@ -250,7 +250,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   global $user;
   
   // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'photogallery' && $form['#node']->status == '1') {
       $form['actions']['itg_custom_apply_photo_button'] = array(
         '#type' => 'submit',
@@ -670,7 +670,7 @@ function itg_photogallery_node_presave($node) {
   if ($node->type == 'photogallery' && isset($node->field_gallery_image['und'])) {
     foreach ($node->field_gallery_image['und']as $delta => $field) {
       if ($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
-        $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
+        //$node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
       }
     }
   }

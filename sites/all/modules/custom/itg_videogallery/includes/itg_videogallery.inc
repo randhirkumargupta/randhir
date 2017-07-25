@@ -16,7 +16,7 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('dailymotion_ftp_url', ''),
     '#required' => TRUE,
   );
-  
+
   $form['dailymotion_ftp_host'] = array(
     '#type' => 'textfield',
     '#title' => t('Host Name'),
@@ -47,6 +47,13 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('dailymotion_ftp_password', ''),
     '#required' => TRUE,
   );
+   $form['ftp_root_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Ftp Root Folder'),
+    '#default_value' => variable_get('ftp_root_folder', ''),
+    '#required' => TRUE,
+  );
+  
   return system_settings_form($form);
 }
 
@@ -73,33 +80,39 @@ function itg_videogallery_s3_video_form($form) {
     '#default_value' => variable_get('aws_region', ''),
     '#required' => TRUE,
   );
-   $form['aws_video_dir'] = array(
+  $form['aws_video_dir'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Video Dir'),
     '#default_value' => variable_get('aws_video_dir', ''),
-    '#description'=>'Example : s3fs-public/dailymotion_video/',
+    '#description' => 'Example : s3fs-public/dailymotion_video/',
     '#required' => TRUE,
-  ); 
-   $form['aws_video_dir_to_move'] = array(
+  );
+  $form['aws_video_dir_to_move'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Old Video Dir'),
     '#default_value' => variable_get('aws_video_dir_to_move', ''),
-    '#description'=>'Example : s3fs-public/dailymotion_video/',
+    '#description' => 'Example : s3fs-public/dailymotion_video/',
     '#required' => TRUE,
   );
-   
-    $form['aws_bucket'] = array(
+
+  $form['aws_bucket'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Bucket'),
     '#default_value' => variable_get('aws_bucket', ''),
     '#required' => TRUE,
   );
-     $form['aws_video_dm_data'] = array(
+  $form['aws_video_dm_data'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Video DM Data Folder'),
     '#default_value' => variable_get('aws_video_dm_data', ''),
     '#required' => TRUE,
   );
-    
+  $form['local_s3_video_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Local Video Folder'),
+    '#default_value' => variable_get('local_s3_video_folder', ''),
+    '#required' => TRUE,
+  );
+
   return system_settings_form($form);
 }

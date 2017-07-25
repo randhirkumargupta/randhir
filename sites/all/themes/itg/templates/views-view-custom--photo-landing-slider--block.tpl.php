@@ -21,8 +21,8 @@ $uri = base64_encode($actual_link);
     <div class="social-icon desktop-hide">
       <ul>
         <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $photo_node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-        <li><a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-        <li><a title="share on twitter" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+        <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+        <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
         <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
         <?php
         if (function_exists(global_comment_last_record)) {
@@ -52,7 +52,7 @@ $uri = base64_encode($actual_link);
 
           if (empty($opt['status']) || $opt['status'] == 0) {
             ?> 
-          <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+          <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
             <?php
           }
           else {
@@ -155,8 +155,8 @@ $uri = base64_encode($actual_link);
         <div class="social-icon mhide">
             <ul>
               <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $photo_node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                <li><a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a title="share on twitter" class="user-activity def-cur-pointer" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
           <?php
           if (function_exists(global_comment_last_record)) {
@@ -191,7 +191,7 @@ $uri = base64_encode($actual_link);
 
             if (empty($opt['status']) || $opt['status'] == 0) {
               ?> 
-              <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
+              <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
               <?php
             }
             else {

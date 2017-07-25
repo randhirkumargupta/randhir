@@ -7,7 +7,7 @@ global $base_url;
     <li><strong>Category: </strong>  <span><?php print $result->category ?></span></li>
     <li><strong>Video Created By: </strong> <span><?php print $result->story_created_by ?></span></li>
     <li><strong>Video Modified By: </strong> <span><?php print $result->story_modified_by ?></span></li>
-    <li><strong>Video Description </strong> <span><?php print $result->text; ?></span></li>
+    <li><strong>Video Description </strong> <span><?php print itg_octopus_api_remove_cdata($result->text); ?></span></li>
     <li><strong>Created Date & Time</strong> <span> <?php print $result->story_created ?></span></li>
     <li><strong>Modified Date & Time</strong> <span><?php print $result->story_modified ?></span></li>
   </ul>
@@ -36,7 +36,7 @@ global $base_url;
     <?php
     $url_file_video = $base_url . '/node/add/videogallery?element=vo&story_id=' . $result->storyid . '&destination=rundown/listing';
     ?>
-    <a href="<?php print $url_file_video; ?>" class="file-video btn-submit btn-small" attribute_id ="<?php print $result->id; ?>" data="<?php print $result->clip_data[0]->clipobj_id . '.mov'; ?>">File Video Article</a>
+    <a href="javascript:void(0);" class="file-video btn-submit btn-small" attribute_id ="<?php print $result->id; ?>" data="<?php print $result->clip_data[0]->clipobj_id . '.mov'; ?>">File Video Article</a>
   </div>
    <div style="display:none;" class="video-process-bar-<?php print $result->id; ?>">
   </div>

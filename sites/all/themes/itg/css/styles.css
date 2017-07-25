@@ -11994,6 +11994,9 @@ h1.about-us-heading + div p {
 .factoids-page h3 {
   color: #000;
 }
+.factoids-page .social-share ul li:first-child {
+  vertical-align: baseline;
+}
 
 .factoids-slider ul {
   background: #a00606;
@@ -14032,10 +14035,24 @@ span.close_btt {
   display: none;
 }
 
-.page-videogallery-embed, .page-photogallery-embed {
-  background-color: #171717;
+.page-videogallery-embed #page, .page-videogallery-embed html, .page-videogallery-embed body, .page-photogallery-embed #page, .page-photogallery-embed html, .page-photogallery-embed body, .page-embed-video #page, .page-embed-video html, .page-embed-video body, .page-embeded-video #page, .page-embeded-video html, .page-embeded-video body {
+  height: auto;
+}
+.page-videogallery-embed #main, .page-photogallery-embed #main, .page-embed-video #main, .page-embeded-video #main {
+  min-height: 0;
+}
+.page-videogallery-embed .container, .page-photogallery-embed .container, .page-embed-video .container, .page-embeded-video .container {
+  padding: 0;
+  margin: 0;
 }
 
+.itg-embed-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0 15px 15px;
+  background-color: #171717;
+}
 .itg-embed-wrapper h1.embed-title {
   font-size: 32px;
   margin: 25px 0;
@@ -14570,6 +14587,7 @@ span.close_btt {
 
 .ad-blocker-content {
   position: relative;
+  padding-top: 35px;
 }
 
 .ad-blocker-content:after {
@@ -14699,7 +14717,12 @@ span.close_btt {
   line-height: 18px;
 }
 
+.story-section .story-right .description iframe {
+  max-width: 100%;
+}
 .story-section .story-right .description .itgvideo > iframe {
+  max-width: 100%;
+  width: 100%;
   min-height: 326px;
 }
 .story-section .story-right .description .itgvideo > iframe #main {

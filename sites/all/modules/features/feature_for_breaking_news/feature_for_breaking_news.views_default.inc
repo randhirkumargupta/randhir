@@ -307,7 +307,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV ';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
-  /* Field: Content: Display on */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
   $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
   $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';

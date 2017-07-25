@@ -6151,7 +6151,7 @@ div.node{
   a.btn-save{@extend .btn-submit;}
 }
 
-[id*="itg-octopus-api-form"]{
+[id*="itg-octopus-api-form"], [id*="itg-octopus-api-rfa-form"]{
   display: inline-block;
   width: 100%;
   vertical-align: top;
@@ -6167,7 +6167,7 @@ div.node{
     }
   }
   .octopus-filter-btn {
-    margin: 48px 0 0;
+    margin: 27px 0 0;
     @extend .fleft;
     .octopus-apply{
       margin-right: 10px;
@@ -6177,6 +6177,7 @@ div.node{
     clear: none;
     float: left;
     width: 120px;
+    margin: 10px 0;
     .form-type-textfield{
       width: 100%;
     }
@@ -12113,4 +12114,10 @@ fieldset#edit-xmlsitemap{
       margin-left: 10px;
     }
   }
+}
+.node-syndication-rule{
+  .views-table{
+    margin-top: 0;
+    tbody td{border: none;}
+  } 
 }

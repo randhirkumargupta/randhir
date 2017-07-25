@@ -34,6 +34,7 @@
   <?php print drupal_render($form['field_section']); ?>
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
+<?php print drupal_render($form['field_breaking_coverage_end_time']); ?>
 
 <div id="BrowseMedia" class='browse-media-file'>
   <h2 class="story-title">Browse Media</h2>
