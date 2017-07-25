@@ -6168,7 +6168,6 @@ div.node{
   }
   .octopus-filter-btn {
     margin: 27px 0 0;
-    margin: 10px 0;
     @extend .fleft;
     .octopus-apply{
       margin-right: 10px;
@@ -6178,6 +6177,7 @@ div.node{
     clear: none;
     float: left;
     width: 120px;
+    margin: 10px 0;
     .form-type-textfield{
       width: 100%;
     }

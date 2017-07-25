@@ -11471,7 +11471,7 @@ span.close_btt {
 
 /* CSS For embedded code */
 .itg-embed-photo-wrapper:empty{display: none;}
-.page-videogallery-embed, .page-photogallery-embed, .page-embed-video{
+.page-videogallery-embed, .page-photogallery-embed, .page-embed-video, .page-embeded-video{
   #page, html, body{height: auto;}
   #main{min-height: 0;}
   .container{
@@ -11953,6 +11953,7 @@ span.close_btt {
   .itgvideo{
     > iframe{
       max-width: 100%;
+      width: 100%;
       min-height: 326px;
       #main{
         min-height: 0;

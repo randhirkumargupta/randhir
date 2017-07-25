@@ -6595,7 +6595,6 @@ div.node #comments h2 {
 }
 [id*="itg-octopus-api-form"] .octopus-filter-btn, [id*="itg-octopus-api-rfa-form"] .octopus-filter-btn {
   margin: 27px 0 0;
-  margin: 10px 0;
 }
 [id*="itg-octopus-api-form"] .octopus-filter-btn .octopus-apply, [id*="itg-octopus-api-rfa-form"] .octopus-filter-btn .octopus-apply {
   margin-right: 10px;
@@ -6604,6 +6603,7 @@ div.node #comments h2 {
   clear: none;
   float: left;
   width: 120px;
+  margin: 10px 0;
 }
 [id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield, [id*="itg-octopus-api-rfa-form"] .container-inline-date .form-type-textfield {
   width: 100%;
