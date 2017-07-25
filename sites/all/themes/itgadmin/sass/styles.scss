@@ -6151,7 +6151,7 @@ div.node{
   a.btn-save{@extend .btn-submit;}
 }
 
-[id*="itg-octopus-api-form"]{
+[id*="itg-octopus-api-form"], [id*="itg-octopus-api-rfa-form"]{
   display: inline-block;
   width: 100%;
   vertical-align: top;
@@ -6167,7 +6167,8 @@ div.node{
     }
   }
   .octopus-filter-btn {
-    margin: 48px 0 0;
+    margin: 27px 0 0;
+    margin: 10px 0;
     @extend .fleft;
     .octopus-apply{
       margin-right: 10px;
