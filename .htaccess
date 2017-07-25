@@ -227,6 +227,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/indiatodayatautoexpo [NC]  
 	RewriteCond %{REQUEST_URI} !/juvenile [NC]  
 	RewriteCond %{REQUEST_URI} !/juvenilerapist [NC]  
+	RewriteCond %{REQUEST_URI} !/kalamwillliveon [NC]  
+	RewriteCond %{REQUEST_URI} !/kejriwal [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -445,6 +447,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^juvenile/(.*) /staticpages/juvenile/$1 [L]
 	RewriteRule ^juvenilerapist$ /staticpages/juvenilerapist/index.html? [L]
     RewriteRule ^juvenilerapist/(.*) /staticpages/juvenilerapist/$1 [L]
+	RewriteRule ^kalamwillliveon$ /staticpages/kalamwillliveon/index.html? [L]
+    RewriteRule ^kalamwillliveon/(.*) /staticpages/kalamwillliveon/$1 [L]
+	RewriteRule ^kejriwal$ /staticpages/kejriwal/index.html? [L]
+    RewriteRule ^kejriwal/(.*) /staticpages/kejriwal/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
