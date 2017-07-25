@@ -43,6 +43,18 @@ function itg_syndication_menu() {
 }
 
 /**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_syndication_cronapi($op, $job = NULL) {
+  $items['itg-syndication-feed-cron'] = array(
+    'description' => 'Syndication rules cron.',
+    'callback' => 'get_syndication_content_details',
+  );
+  return $items;
+}
+
+/**
  * Implement hook_permissions()
  */
 function itg_syndication_permission() {

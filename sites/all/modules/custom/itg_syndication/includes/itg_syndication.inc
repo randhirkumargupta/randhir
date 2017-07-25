@@ -225,7 +225,7 @@ function get_syndication_content_details() {
   $itg_query->condition('ts.scheduler_time', $current_time, '<');
   $itg_query->condition('ts.status', 1, '=');
   $itg_query->condition('ts.cron_type', $cron_type, '=');
-  $itg_query->condition(db_or()->isNull('ts.expiry_date')->condition('ts.expiry_date', $current_time, '>'));
+  $itg_query->condition(db_or()->condition('ts.expiry_date', '')->condition('ts.expiry_date', $current_time, '>'));
 
   $itg_result = $itg_query->execute()->fetchAll();
 
@@ -233,11 +233,10 @@ function get_syndication_content_details() {
     if (!empty($itg_val->cron_details)) {
       $data = unserialize($itg_val->cron_details);
       $data['fid'] = $itg_val->fid;
-
+      
       watchdog("Syndication", "Rule id : $itg_val->id");
 
       $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
-
       //code for update cron time
       update_cron_time_after_feed_generate($data, $itg_val->id, $itg_val->scheduler_time);
     }
