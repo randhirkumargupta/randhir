@@ -764,7 +764,7 @@ function itg_octopus_api_video_s3_to_dm() {
   $s3video_url = trim($_POST['s3_video_uri']);
   $file_size = trim($_POST['file_size']);
 
-  //$s3video_url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4';  // [TODO] for testing only
+  $s3video_url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4';  // [TODO] for testing only
   $filename = drupal_basename($s3video_url);
   $slug_id = trim($_POST['slug_id']);
   $response = itg_videogallery_dailymotion_send_video($s3video_url);
