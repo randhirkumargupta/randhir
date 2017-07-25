@@ -14587,6 +14587,7 @@ span.close_btt {
 
 .ad-blocker-content {
   position: relative;
+  padding-top: 35px;
 }
 
 .ad-blocker-content:after {
