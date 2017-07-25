@@ -90,6 +90,7 @@ function itg_survey_form_alter(&$form , &$form_state , $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
+    unset($form['actions']['preview']);
     unset($form['field_survey_category']);//hide section
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
