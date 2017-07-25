@@ -19,7 +19,7 @@ function itg_ugc_inqueue_form($form, &$form_state) {
   $form['content_type'] = array(
     '#type' => 'select',
     '#title' => t('Content Type'),
-    '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'videogallery', 'podcast' => 'podcast', 'blog' => 'blog'),
+    '#options' => array('' => 'none', 'story' => 'story', 'photogallery' => 'photogallery', 'videogallery' => 'Video', 'podcast' => 'podcast', 'blog' => 'blog'),
     '#default_value' => isset($_GET['content_type']) ? $_GET['content_type'] : "",
   );
 
