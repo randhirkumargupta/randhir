@@ -2119,7 +2119,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
