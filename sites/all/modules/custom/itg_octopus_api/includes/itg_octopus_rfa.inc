@@ -180,7 +180,7 @@ function itg_octopus_api_rfa_dashboard() {
 
   foreach ($result as $row) {
     $octopus_ref = base64_encode($row->id);
-    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa/listing&octopus_ref=' . $octopus_ref);
+    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa-dashboard&octopus_ref=' . $octopus_ref);
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
       $background_color = 'bg-red';
