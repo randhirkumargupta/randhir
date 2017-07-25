@@ -413,7 +413,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // livetv_channellist_json custom resource declaration.....
-        'livetv_channellist_json' => array(
+        'livetv_channellist' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_channellist_json schemes info.',
@@ -440,7 +440,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // livetv_json custom resource declaration.....
-        'livetv_json' => array(
+        'livetv' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_json schemes info.',
@@ -467,7 +467,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // livetv_indiatoday_json custom resource declaration.....
-        'livetv_indiatoday_json' => array(
+        'livetv_indiatoday' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_json schemes info.',
@@ -494,7 +494,7 @@ function itg_rapid_api_resource() {
             ),
         ),
          // livetv_aajtak_json custom resource declaration.....
-        'livetv_aajtak_json' => array(
+        'livetv_aajtak' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_json schemes info.',
@@ -521,7 +521,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // livetv_delhiaajtak_json custom resource declaration.....
-        'livetv_delhiaajtak_json' => array(
+        'livetv_delhiaajtak' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_json schemes info.',
@@ -548,7 +548,7 @@ function itg_rapid_api_resource() {
             ),
         ),
          // livetv_tej_json custom resource declaration.....
-        'livetv_tej_json' => array(
+        'livetv_tej' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves livetv_json schemes info.',
@@ -575,7 +575,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // otherapps_ios_json custom resource declaration.....
-        'otherapps_ios_json' => array(
+        'otherapps_ios' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves otherapps_ios_json schemes info.',
@@ -602,7 +602,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // otherapps_android_json custom resource declaration.....
-        'otherapps_android_json' => array(
+        'otherapps_android' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves otherapps_android_json schemes info.',
