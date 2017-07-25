@@ -70,7 +70,7 @@ function itg_octopus_api_schema() {
         'default' => 0,
       ),
       'type' => array(
-        'description' => 'Rundown Rype , It can be Current , Next1, Next2',
+        'description' => 'Rundown Type , It can be Current , Next1, Next2',
         'type' => 'varchar',
         'length' => '50',
         'not null' => TRUE,
@@ -148,6 +148,12 @@ function itg_octopus_api_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'story_modified_by' => array(
         'description' => 'story modified by',
         'type' => 'varchar',
@@ -160,13 +166,13 @@ function itg_octopus_api_schema() {
         'not null' => TRUE,
         'size' => 'medium',
       ),
-       'category' => array(
+      'category' => array(
         'description' => 'Category',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
-        'location' => array(
+      'location' => array(
         'description' => 'Location',
         'type' => 'varchar',
         'length' => '250',
@@ -298,6 +304,224 @@ function itg_octopus_api_schema() {
       'id' => array('id'),
     ),
   );
+
+  $schema['itg_octopus_dm_response'] = array(
+    'description' => 'Save the dailymotion response for Octopus',
+    'fields' => array(
+      'eid' => array(
+        'description' => 'Video entry id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'Video title',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'channel' => array(
+        'description' => 'Video category on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Video type on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'file id from file manage table',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'video_nid',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'slug_id',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'tags' => array(
+        'description' => 'Tags of video',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'upload_time' => array(
+        'description' => 'Video upload time',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'video_id' => array(
+        'description' => 'Video id which return by dailymotion',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'video_duration' => array(
+        'description' => 'Video duration',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'video_size' => array(
+        'description' => 'Video Size',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'dailymotion_thumb_url' => array(
+        'description' => 'Thumb Url',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'dailymotion_published' => array(
+        'description' => 'Publish status',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'encoding_progress' => array(
+        'description' => 'Encoding progress',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'publishing_progress' => array(
+        'description' => 'publishing progress',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Video name',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'need_delete' => array(
+        'description' => 'Video delete',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'is_draft' => array(
+        'description' => 'node is draft',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'is_notify' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('eid'),
+  );
+
+  $schema['itg_octopus_notification'] = array(
+    'description' => 'This is for Octopus Notification',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Octopus Notificaton id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Notificaton Type',
+        'type' => 'varchar',
+        'length' => '50',
+        'null' => TRUE,
+      ),
+      'msg' => array(
+        'description' => 'Notificaton message',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'time' => array(
+        'description' => 'timestamp',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Status Either 0 or 1',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'read_by' => array(
+        'description' => 'Read by UID',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['itg_rfa'] = array(
+    'description' => 'The base table for itg_rfa.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a RFA rundown.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'Rundown Id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'source' => array(
+        'description' => 'source',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'text' => array(
+        'description' => 'Text',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'created_date' => array(
+        'description' => 'Created Date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created_by' => array(
+        'description' => 'Created By',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'RFA Rundown created timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'action' => array(
+        'description' => 'Action will be Insert, Update, Delete',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+
+
 
   return $schema;
 }

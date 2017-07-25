@@ -19,8 +19,12 @@ function itg_get_node_redirect_url($node, $op) {
       if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
         $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       }
+      
+      if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+        $story_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+      }
 
-      if ($op == 'full' && (($itg_status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time))) {
+      if ($op == 'full' && (($itg_status == 0) || (!empty($story_expiry_date) && $story_expiry_date < $current_time) || (!empty($story_schedule_date) && $story_schedule_date > $current_time))) {
         if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
           itg_get_redirect_url($node->field_primary_category[LANGUAGE_NONE][0]['value']);
         } else {

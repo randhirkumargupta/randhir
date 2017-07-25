@@ -177,7 +177,8 @@ function simplesamlphp_auth_loginpage() {
     
     if (!empty($arg[2])) {
       $redirect = base64_decode($arg[2]);
-      drupal_goto($redirect);
+      $remove_fb_append_parameter = str_replace('#_=_', '', $redirect);
+      drupal_goto($remove_fb_append_parameter);
     }
     else {
       drupal_goto(FRONT_URL);
@@ -1011,8 +1012,8 @@ function _simplesamlphp_auth_get_fname() {
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.name']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['twitter.name'];
   }
-  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.name']))) {
-    $seg = $_simplesamlphp_auth_saml_attributes['facebook.name'];
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.first_name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.first_name'];
   }
   else {
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
@@ -1045,8 +1046,13 @@ function _simplesamlphp_auth_get_lname() {
   $lname = '';
   global $seg;
   
-  $seg = $_simplesamlphp_auth_saml_attributes['sn'];
-  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['sn']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['sn'];
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.last_name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.last_name'];
+  }
+
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
     if (isset($seg)) {

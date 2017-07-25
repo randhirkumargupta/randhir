@@ -586,3 +586,58 @@ function replace_charcters_for_syndication_file($original_string) {
   $replaced_string    = str_replace($some_special_chars, $replacement_chars, $original_string);
   return $replaced_string;
 }
+
+/**
+ * {@inheritdocs}
+ */
+function itg_syndication_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
+  if($form['#term']['vocabulary_machine_name'] == 'client_title') {
+    $form['#validate'][] =  'itg_syndication_client_title_validate';
+  }
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_syndication_client_title_validate($form , &$form_state) {
+  $client_title = $form_state['values']['name'];
+  if(strpos($client_title, "-")) {
+    drupal_add_css("fieldset#edit-relations {display:none !important}" , "inline");
+    form_set_error('name' , t('(hyphen) - is not allowed in client name'));
+  }
+}
+
+/**
+ * Get current client rules details.
+ */
+function itg_syndication_get_rules_detaiils() {
+  $menu_obj = menu_get_object();
+  if($menu_obj->type == 'syndication_rule') {
+    $node_data = node_load($menu_obj->nid);
+    $client_name = $node_data->title;
+    $rules_details = $node_data->field_syndication_rule_details[LANGUAGE_NONE];
+    $rules_data = array();
+    foreach($rules_details as $key => $val) {
+      $id = $val['value'];
+      $entity = entity_load('field_collection_item', array($id));
+      $field_syndication_content_type = $entity[$id]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
+      $field_syndication_select_section = $entity[$id]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+      $field_syndication_feed_type = $entity[$id]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
+      $field_syndication_mode = $entity[$id]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
+      $field_syndication_time = $entity[$id]->field_syndication_time[LANGUAGE_NONE][0]['value'];
+      $field_syndication_num_of_feeds = $entity[$id]->field_syndication_num_of_feeds[LANGUAGE_NONE][0]['value'];
+      $field_syndication_frequency = $entity[$id]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
+      $rules_data[] = array(
+        'content_type' => $field_syndication_content_type,
+        'section' => get_term_name_from_tid($field_syndication_select_section)->name,
+        'feed_type' => $field_syndication_feed_type,
+        'feed_mode' => $field_syndication_mode,
+        'feed_time' => $field_syndication_time,
+        'feed_num' => $field_syndication_num_of_feeds,
+        'feed_frequency' => $field_syndication_frequency,
+        'node_obj' => $node_data,
+      );
+    }
+    return $rules_data;
+  }
+}

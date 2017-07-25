@@ -3065,7 +3065,7 @@ function manage_widget_order_during_node_update($nid, $category_tid, $node_type)
       ))
       ->execute();
   } catch (Exception $ex) {
-    watchdog("video_test", $nid . '--' . $category_tid . '--' . $node_type . '----' . $max_result);
+   // watchdog("video_test", $nid . '--' . $category_tid . '--' . $node_type . '----' . $max_result);
   }
 }
 

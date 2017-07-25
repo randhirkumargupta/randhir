@@ -167,6 +167,13 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
+     // Hide/show coverage field based on type
+    $form['field_breaking_coverage_end_time']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+      )
+    );
+    
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';

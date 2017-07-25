@@ -85,7 +85,7 @@ function syndication_feature_field_default_field_bases() {
         'cooking_tips' => 'Cooking Tips',
         'food_news' => 'Food News',
         'recipe' => 'Recipe',
-        'story' => 'Story',
+        'story' => 'Articles (Story)',
         'photogallery' => 'Photogallery',
         'videogallery' => 'Videogallery',
       ),

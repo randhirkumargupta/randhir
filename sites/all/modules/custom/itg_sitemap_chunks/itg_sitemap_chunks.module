@@ -262,3 +262,16 @@ function itg_sitemap_chunks_theme() {
     )
   );
 }
+
+function itg_sitemap_published_date_order() {
+  $arg = arg();
+  $is_published_date_order = FALSE;
+  $is_arg1_not_set = FALSE;
+  if(!isset($arg[1]) && empty($arg[1])) {
+    $is_arg1_not_set = TRUE;
+  }
+  if(($is_arg1_not_set) && ($arg[0] == 'rss-content' || $arg[0] == 'rss-blogs' || $arg[0] == 'rss-live-blogs')) {
+    $is_published_date_order = TRUE;
+  }
+  return $is_published_date_order;
+}

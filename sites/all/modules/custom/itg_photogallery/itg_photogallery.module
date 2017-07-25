@@ -23,19 +23,6 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       $form['field_photogallery_configuration'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
     }
     
-    // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
-    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'photogallery' && $form['#node']->status == '1') {
-      $form['actions']['itg_custom_apply_photo_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Apply'),
-        '#id' => 'btn-apply',
-        '#submit' => array('node_form_submit', 'itg_photogallery_form_custom_callback'),
-        '#weight' => -8,
-      );
-    }
-  }
-    
     $form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
     //code for common syndication field hide
     drupal_add_js('jQuery(document).ready(function() {
@@ -260,6 +247,21 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
  * @return array $form
  */
 function itg_photogallery_after_build($form, &$form_state) {
+  global $user;
+  
+  // apply button for editor and siteadmin role
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'photogallery' && $form['#node']->status == '1') {
+      $form['actions']['itg_custom_apply_photo_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Apply'),
+        '#id' => 'btn-apply',
+        '#submit' => array('node_form_submit', 'itg_photogallery_form_custom_callback'),
+        '#weight' => -8,
+      );
+    }
+  }
+    
   $query_array = array();
   $form['field_gallery_image'][LANGUAGE_NONE]['#title'] = $form['field_gallery_image'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span>';
   $orignal_img_id = "";
@@ -668,7 +670,7 @@ function itg_photogallery_node_presave($node) {
   if ($node->type == 'photogallery' && isset($node->field_gallery_image['und'])) {
     foreach ($node->field_gallery_image['und']as $delta => $field) {
       if ($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
-        $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
+        //$node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
       }
     }
   }

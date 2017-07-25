@@ -241,18 +241,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title($edit_title);
   }
 
-  // apply button for editor and siteadmin role
-  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles)) {
-    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
-      $form['actions']['itg_custom_apply_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Apply'),
-        '#id' => 'btn-apply',
-        '#submit' => array('node_form_submit', 'itg_story_form_custom_callback'),
-        '#weight' => -8,
-      );
-    }
-  }
+  
   
   if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
     if (isset($form['title']['#title'])) {
@@ -690,14 +679,17 @@ function itg_common_mail($key, &$message, $params) {
     case 'personalization_mail':
     case 'lrp_point':
     case 'refer_friend':
-      $message['headers'] = array(
+      $headers = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
       $message['subject'] = $params['subject'];
-      $message['body'] = $params['body'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
       break;
   }
 }
@@ -1181,4 +1173,24 @@ function itg_movie_taxonomy_validate($form, &$form_state) {
  if($form_state['values']['field_movie_earning'][LANGUAGE_NONE][0]['value'] == 0) {
    form_set_error('field_movie_earning', 'Please enter valid Earning value');
  } 
+}
+
+
+/**
+ * Implementing 'itg_common_custompath_insert_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+function itg_common_url_friendly_path($pathdata) {
+
+  if (preg_match("![^a-z0-9]!i", $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+    while (preg_match('/--/', $pathdata)) {
+      $pathdata = preg_replace('/--/', '-', $pathdata);
+    }
+    $pathdata = rtrim($pathdata, "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+  }
+  return $pathdata;
 }

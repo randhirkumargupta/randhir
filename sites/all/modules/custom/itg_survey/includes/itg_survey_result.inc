@@ -75,13 +75,17 @@ function itg_survey_result() {
         <th>Answers</th>
         <th>Vote Count</th>
         <th>Authenticated User Vote</th>
-        <th>Anonymous User Vote</th>
-        <th>One Star</th>
+        <th>Anonymous User Vote</th>';
+      
+      if ($answer_type == 'rating') {
+        $output.$num .= '<th>One Star</th>
         <th>Two Star</th>
         <th>Three Star</th>
         <th>Four Star</th>
-        <th>Five Star</th>
-      </tr>';
+        <th>Five Star</th>';
+      }  
+        
+      $output.$num .='</tr>';
       
       $answer_op_tbl = '';
       

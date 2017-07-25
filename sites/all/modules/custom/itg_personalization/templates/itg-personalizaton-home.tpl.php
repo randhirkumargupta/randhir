@@ -76,7 +76,7 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         </div>
         <?php if ($data['badge_detail']['earn'] != 5): ?>
         <div class="points-to-go">
-          <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
+          <?php print 'Require <span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to reach next level'); ?>
         </div>
         <?php endif; ?>
       </div>

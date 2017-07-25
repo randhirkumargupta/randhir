@@ -373,6 +373,65 @@ function feature_for_breaking_news_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-breaking_news-field_breaking_coverage_end_time'.
+  $field_instances['node-breaking_news-field_breaking_coverage_end_time'] = array(
+    'bundle' => 'breaking_news',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 43,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_breaking_coverage_end_time',
+    'label' => 'Live Blog End Time',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 53,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-breaking_news-field_breaking_cricket_blog_feed'.
   $field_instances['node-breaking_news-field_breaking_cricket_blog_feed'] = array(
     'bundle' => 'breaking_news',
@@ -400,6 +459,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Cricket Blog FEED',
     'required' => 0,
     'settings' => array(
+      'display_summary' => 0,
       'exclude_cv' => FALSE,
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -706,6 +766,107 @@ function feature_for_breaking_news_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-breaking_news-field_itg_content_publish_date'.
+  $field_instances['node-breaking_news-field_itg_content_publish_date'] = array(
+    'bundle' => 'breaking_news',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 42,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_content_publish_date',
+    'label' => 'Content Publish date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 52,
+    ),
+  );
+
+  // Exported field_instance: 'node-breaking_news-field_label'.
+  $field_instances['node-breaking_news-field_label'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Short Description',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_label',
+    'label' => 'Short Description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
     ),
   );
 
@@ -1562,6 +1723,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Blog Closed');
   t('Breaking Band should be in text only format');
   t('Comment');
+  t('Content Publish date');
   t('Content Type');
   t('Content details');
   t('Cricket Blog FEED');
@@ -1579,6 +1741,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Large image');
+  t('Live Blog End Time');
   t('Mark as Breaking band');
   t('Match ID');
   t('Medium image');
@@ -1590,6 +1753,7 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Related Content');
   t('Related Content Detail');
   t('Section');
+  t('Short Description');
   t('Short description');
   t('Small image');
   t('Source type');
