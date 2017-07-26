@@ -39,6 +39,7 @@ foreach ($output as $key => $value) {
   $moviename = array();
   $year = array();
   $graph_image = array();
+  $graph_pic_url = '';
   foreach ($graph_data_all as $g_key => $graph_data) {
     
     if (!empty($graph_data[3])) {
@@ -57,7 +58,7 @@ foreach ($output as $key => $value) {
       $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' },';
     }
     else {
-      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '"},';
+      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '", graph_name:"' . file_create_url($uri) . '"},';
     }
     
   }
@@ -67,7 +68,7 @@ foreach ($output as $key => $value) {
           text: ""
         },
         toolTip: {
-          content: '{movie_name},{y} cr in {x}',
+          content: '{graph_name}{movie_name},{y} cr in {x}',
         },
         axisX: {
           interval: 1,
@@ -76,7 +77,7 @@ foreach ($output as $key => $value) {
         data: [{
             type: "line",
             xValueFormatString: "Year ####",
-            toolTipContent: '{movie_name},{y} cr in {x} <?php print $graph_pic_url;?>',
+            toolTipContent: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
             connectNullData: true,
             dataPoints: [
   <?php echo rtrim($drow_data, ','); ?>
