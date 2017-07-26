@@ -154,17 +154,17 @@ function itg_octopus_api_rfa_dashboard() {
   if (isset($_GET['source']) && !empty($_GET['source'])) { // source
     $query->condition('rfa.source', $_GET['source'], '=');
   }
-  
-   if (isset($_GET['rfaid']) && !empty($_GET['rfaid'])) { // rfaid
+
+  if (isset($_GET['rfaid']) && !empty($_GET['rfaid'])) { // rfaid
     $query->condition('rfa.rundown_id', $_GET['rfaid'], '=');
   }
-  
+
 
   if (isset($_GET['text']) && !empty($_GET['text'])) { // text
     $query->condition('rfa.text', $_GET['text'], '=');
   }
-  
-  
+
+
 
 
   $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
@@ -210,7 +210,21 @@ function itg_octopus_api_rfa_dashboard() {
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_rfa_form');
 
-  $output = render($itg_octopus_api_form);
+  $rundown_active_class = '';
+  $rfa_active_class = '';
+  if (isset($_GET['q']) && $_GET['q'] == 'rundown-listing') {
+    $rundown_active_class = 'active-trail';
+  }
+  elseif (isset($_GET['q']) && $_GET['q'] == 'rfa-dashboard') {
+    $rfa_active_class = 'active-trail';
+  }
+  $output = '<div class="content-block-menu">
+            <ul class="menu">
+           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
+           </ul>
+           </div>';
+  $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
@@ -280,7 +294,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('octopus-apply btn-small')),
     '#prefix' => '<div class = "octopus-filter-btn">',
-    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing">Reset</a></div>',
+    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rfa-dashboard">Reset</a></div>',
     '#weight' => 7,
   );
   return $form;
