@@ -50,7 +50,6 @@ function saveUpdatedProfile($data) {
 //    if (!empty($inputs['alt_email'])) {
 //        $user_detail->field_user_alternate_email['und'][0]['value'] = check_plain($inputs['alt_email']);
 //    }
-
     // Update dob field.
     if (!empty($inputs['date_of_birth'])) {
         $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($date_of_birth);
@@ -65,14 +64,12 @@ function saveUpdatedProfile($data) {
 //    if (!empty($inputs['profile_pic'])) {
 //        $user_detail->field_user_picture['und'][0]['fid'] = check_plain($inputs['profile_pic']);
 //    }
-
     // Update Qualification field.
 //    if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {
 //        $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
 //    } else {
 //        unset($user_detail->field_user_qualification['und']);
 //    }
-
     // Update address field.
     if (!empty($inputs['address'])) {
         $user_detail->field_short_description['und'][0]['value'] = check_plain($address);
@@ -116,16 +113,14 @@ function saveUpdatedProfile($data) {
 //    if ($flag) {
 //        $user_detail->field_subscribe_for_newsletter['und'] = $data;
 //    }
-
     // Save user object.
     $flag_save = user_save($user_detail);
-    
+
     // responce object
-    if($flag_save){
+    if ($flag_save) {
         $responce_object['status_code'] = "1";
         $responce_object['status_message'] = "customised_message";
-    }
-    else{
+    } else {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "";
     }

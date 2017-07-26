@@ -9,8 +9,7 @@
  *
  * @return array
  */
-
-function fblogin($data){
+function fblogin($data) {
 //    echo "fblogin<pre>";
 //    print_r($data);
 //    echo "</pre>";
@@ -22,13 +21,12 @@ function fblogin($data){
     $issued_at_social = $data['issued_at'];
     $expires_at_social = $data['expires_at'];
     //check user name is exist in db..
-    $user_load = user_load_by_name($uname_social); 
+    $user_load = user_load_by_name($uname_social);
     //echo "<pre>"; print_r($user_load->uid);echo "</pre>";exit();
-    if($user_load->uid){
+    if ($user_load->uid) {
         // user exist, next is step for login
         return userloginFB($uname_social, $user_load->uid);
-    }
-    else{
+    } else {
         // user not exist, next is step for signup
         return userSignupFB($uname_social, $uid_social);
     }
@@ -39,10 +37,10 @@ function fblogin($data){
  * @pram $uname
  * @return array
  */
-function userloginFB($uname, $uidget){
+function userloginFB($uname, $uidget) {
     global $user;
-    $username =  $uname; 
-    
+    $username = $uname;
+
     if ($user->uid) {
         // user is already logged in
         return services_error(t('Already logged in as @user.', array('@user' => $user->name)), 406);
@@ -51,13 +49,13 @@ function userloginFB($uname, $uidget){
     if (user_is_blocked($username)) {
         return services_error(t('The username %name has not been activated or is blocked.', array('%name' => $username)), 403);
     }
-    
+
     // Emulate drupal native flood control: check for flood condition.
     $flood_state = array();
     if (variable_get('services_flood_control_enabled', TRUE)) {
         $flood_state = _user_resource_flood_control_precheck($username);
     }
-    
+
     // Only authenticate if a flood condition was not detected.
     if (empty($flood_state['flood_control_triggered'])) {
         //echo "andy"; exit();
@@ -72,9 +70,9 @@ function userloginFB($uname, $uidget){
         $flood_state['uid'] = $uid;
         _user_resource_flood_control_postcheck($flood_state);
     }
-    
+
     if ($uid) {
-        $user = user_load($uid);        
+        $user = user_load($uid);
         if ($user->uid) {
             user_login_finalize();
 
@@ -101,22 +99,21 @@ function userloginFB($uname, $uidget){
  * @pram $uname
  * @return array
  */
-
-function userSignupFB($uname_social, $uid_social){
-    $mail = $uid_social."@facebook.com";
+function userSignupFB($uname_social, $uid_social) {
+    $mail = $uid_social . "@facebook.com";
     $username = $uname_social;
     $password = rand(0, 9999);
     $first_name = "";
     $last_name = "";
     $mobile = "";
-    
+
     // signup method
     $form_state = array();
 
 
     // check user_id is mail or mobile
     $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
-    
+
     $form_state['values']['mobile'] = "";
     $form_state['values']['url_info'] = $url_info;
     $form_state['values']['mail'] = $mail;
@@ -195,10 +192,4 @@ function userSignupFB($uname_social, $uid_social){
         $account = $e;
     }
     return $account;
-    
 }
-
-
-
-
-

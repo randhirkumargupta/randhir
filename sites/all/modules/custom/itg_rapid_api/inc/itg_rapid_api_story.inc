@@ -7,7 +7,7 @@
  */
 function StoryDetailPageRerourceValue($id) {
     // variable decalartion
-    
+
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -442,7 +442,7 @@ function getTechPros($content_org) {
  * @return array
  */
 function getTechCons($content_org) {
-    
+
     $techpcons = array();
     $listcont = 0;
     $html = $content_org;
@@ -453,10 +453,9 @@ function getTechCons($content_org) {
     $data = array();
     for ($i = 0; $i < $nodes->length; $i++) {
         $temp = $nodes->item($i)->textContent;
-        $techpcons[$listcont]['cons']= $temp;
+        $techpcons[$listcont]['cons'] = $temp;
         $listcont++;
     }
 
     return $techpcons;
-    
 }

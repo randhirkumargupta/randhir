@@ -493,7 +493,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-         // livetv_aajtak_json custom resource declaration.....
+        // livetv_aajtak_json custom resource declaration.....
         'livetv_aajtak' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -547,7 +547,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-         // livetv_tej_json custom resource declaration.....
+        // livetv_tej_json custom resource declaration.....
         'livetv_tej' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -1197,9 +1197,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-
         // sprint 3 : Author latest story list @ dhmendra
-      'author_story_list' => array(
+        'author_story_list' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves latest story list of a particular author.',
@@ -1225,8 +1224,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      // sprint 3 open poll
-      'polls_open' => array(
+        // sprint 3 open poll
+        'polls_open' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves All the open poll in the system.',
@@ -1252,8 +1251,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      //Sprint 3 close poll
-      'polls_close' => array(
+        //Sprint 3 close poll
+        'polls_close' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves All the close/expire poll in the system.',
@@ -1279,9 +1278,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-
-      //Sprint 3 close poll
-      'poll_detail' => array(
+        //Sprint 3 close poll
+        'poll_detail' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves poll data based on poll id in the system.',
@@ -1303,7 +1301,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'poll_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1315,10 +1313,9 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-
-      //Sprint 3 close poll
-      //Sprint 3 close poll
-      'poll_cast' => array(
+        //Sprint 3 close poll
+        //Sprint 3 close poll
+        'poll_cast' => array(
             'operations' => array(
                 'create' => array(
                     'help' => 'Retrieves poll based on poll id in the system.',
@@ -1340,21 +1337,21 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'poll_id',
                             'optional' => FALSE,
                             'source' => 'data',
                             'description' => 'poll id of the poll',
                             'type' => 'int',
                         ),
-                      array(
+                        array(
                             'name' => 'option id',
                             'optional' => FALSE,
                             'source' => 'data',
                             'description' => 'option id of the poll , which you want to make the ans',
                             'type' => 'int',
                         ),
-                      array(
+                        array(
                             'name' => 'user id',
                             'optional' => TRUE,
                             'source' => 'data',
@@ -1719,8 +1716,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      // Sprint 4 Read Later
-      'bookmark_get' => array(
+        // Sprint 4 Read Later
+        'bookmark_get' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Bookmark Get Responce based on userid.',
@@ -1742,7 +1739,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'user_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1754,8 +1751,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-      // Sprint 4 Read Later
-      'bookmark_set' => array(
+        // Sprint 4 Read Later
+        'bookmark_set' => array(
             'operations' => array(
                 'create' => array(
                     'help' => 'Bookmark Set and return Responce based on userid.',
@@ -1777,7 +1774,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'user_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1785,7 +1782,7 @@ function itg_rapid_api_resource() {
                             'description' => 'Loged in user id',
                             'type' => 'string',
                         ),
-                      array(
+                        array(
                             'name' => 'node_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1797,8 +1794,8 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-            // Sprint 4 Read Later
-      'bookmark_delete' => array(
+        // Sprint 4 Read Later
+        'bookmark_delete' => array(
             'operations' => array(
                 'create' => array(
                     'help' => 'Bookmark delete and return Responce based on userid.',
@@ -1820,7 +1817,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'user_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1828,7 +1825,7 @@ function itg_rapid_api_resource() {
                             'description' => 'Loged in user id',
                             'type' => 'string',
                         ),
-                      array(
+                        array(
                             'name' => 'node_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1841,7 +1838,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         //sprint 4 Author detail
-      'author_detail' => array(
+        'author_detail' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves Author detail data based on Author id.',
@@ -1863,7 +1860,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'author_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1876,7 +1873,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         //sprint 4 anchor detail
-      'anchor_detail' => array(
+        'anchor_detail' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves Anchor detail data based on Anchor id in the system.',
@@ -1898,7 +1895,7 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'anchor_id',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1911,34 +1908,34 @@ function itg_rapid_api_resource() {
             ),
         ),
         //sprint 4 Newswrap (Briefly.json)
-       'newswrap' => array(
-             'operations' => array(
-                 'retrieve' => array(
-                     'help' => 'Retrieves last stories which have heightights',
-                     'file' => array(
-                         'type' => 'inc',
-                         'module' => 'itg_rapid_api',
-                         'name' => 'itg_rapid_api.services',
-                     ),
-                     'callback' => 'news_wrap',
-                     'access callback' => 'user_access',
-                     'access arguments' => array('access content'),
-                     'access arguments append' => FALSE,
-                     'args' => array(
-                         array(
-                             'name' => 'token',
-                             'type' => 'string',
-                             'description' => 'Function to perform',
-                             'source' => array('path' => 0),
-                             'optional' => TRUE,
-                             'default' => '*',
-                         ),
-                       ),
-                 ),
-             ),
-         ),
-    // sprint 3 : Anchor Programm list
-      'anchor_programm_list' => array(
+        'newswrap' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves last stories which have heightights',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'news_wrap',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // sprint 3 : Anchor Programm list
+        'anchor_programm_list' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves programm list of a particular anchor.',
@@ -1960,14 +1957,14 @@ function itg_rapid_api_resource() {
                             'optional' => TRUE,
                             'default' => '*',
                         ),
-                      array(
+                        array(
                             'name' => 'anchor_id',
                             'optional' => FALSE,
                             'source' => 'data',
                             'description' => 'Anchor id',
                             'type' => 'string',
                         ),
-                      array(
+                        array(
                             'name' => 'type',
                             'optional' => FALSE,
                             'source' => 'data',
@@ -1978,7 +1975,6 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-
     );
 
     return $api;
@@ -2761,7 +2757,10 @@ function itg_rapid_api_homePage($token) {
 
 function itg_rapid_api_testing($token) {
     $user = user_load(1989);
-    echo "<pre>"; print_r($user); echo "<pre>"; exit();
+    echo "<pre>";
+    print_r($user);
+    echo "<pre>";
+    exit();
     $get_token = variable_get('mobile_service_token');
 
     $str = '{
@@ -2979,9 +2978,6 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
                 itg_sso_otp_mail_content($rand_otp, $mail);
             }
         }
-
-
-
     } catch (Exception $e) {
         watchdog('error on user save', $e->getMessage());
         drupal_set_message('Error:' . $e->getMessage(), 'error');
@@ -3151,25 +3147,24 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  */
 function itg_rapid_api_change_password($token, $user_id) {
     $uname = $user_id = $_GET['user_id'];
-    $pass  = $_GET['pass'];
+    $pass = $_GET['pass'];
     $pass2 = $_GET['pass2'];
     $msg = "";
     $data = array();
     if (is_numeric($uname)) {
-      if (function_exists(itg_sso_user_mobile_check)) {
-        $get_user_check_mobile = itg_sso_user_mobile_check($uname);
-      }
-      if (!empty($get_user_check_mobile)) {
-        $account = user_load($get_user_check_mobile);
-      }
-    }
-    else {
-      if (function_exists(itg_sso_user_email_check)) {
-        $get_user_check_email = itg_sso_user_email_check($uname);
-      }
-      if (!empty($get_user_check_email)) {
-        $account = user_load($get_user_check_email);
-      }
+        if (function_exists(itg_sso_user_mobile_check)) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($uname);
+        }
+        if (!empty($get_user_check_mobile)) {
+            $account = user_load($get_user_check_mobile);
+        }
+    } else {
+        if (function_exists(itg_sso_user_email_check)) {
+            $get_user_check_email = itg_sso_user_email_check($uname);
+        }
+        if (!empty($get_user_check_email)) {
+            $account = user_load($get_user_check_email);
+        }
     }
 
 
@@ -3183,7 +3178,6 @@ function itg_rapid_api_change_password($token, $user_id) {
 
     return $data;
 }
-
 
 /**
  * [author_latest_story_list] definition.
@@ -3203,20 +3197,20 @@ function author_latest_story($token) {
     }
 
     // call function for return data..
-    if($_GET['type'] == '0') {
-      $type = 'latest';
-    }elseif ($_GET['type'] == '1') {
-      $type = 'popular';
-  }
+    if ($_GET['type'] == '0') {
+        $type = 'latest';
+    } elseif ($_GET['type'] == '1') {
+        $type = 'popular';
+    }
     $suffix = $author_id;
-    $redis_key = "itg_rapid_api_author_".$type."_storylist" . $suffix;
+    $redis_key = "itg_rapid_api_author_" . $type . "_storylist" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = author_story_list($author_id,$story_type);
+        $jsondata = author_story_list($author_id, $story_type);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3262,7 +3256,7 @@ function polls_close($token) {
     $redis_key = "itg_rapid_api_close_polls";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3282,21 +3276,21 @@ function polls_close($token) {
  * @return array
  * 	array of open polls.
  */
-function poll_cast($token,$poll_id, $option_id , $user_id = 0) {
+function poll_cast($token, $poll_id, $option_id, $user_id = 0) {
 
-   $poll_id = $_POST['poll_id'];
-   $option_id = $_POST['option_id'];
-   $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '0';
+    $poll_id = $_POST['poll_id'];
+    $option_id = $_POST['option_id'];
+    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '0';
 
 
     $redis_key = "itg_rapid_api_cast_poll";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = poll_cast_list($poll_id, $option_id,$user_id);
+        $jsondata = poll_cast_list($poll_id, $option_id, $user_id);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3312,13 +3306,13 @@ function poll_cast($token,$poll_id, $option_id , $user_id = 0) {
  * @return array
  * 	array of open polls.
  */
-function poll_detail($token,$poll_id) {
+function poll_detail($token, $poll_id) {
 
     $poll_id = $_GET['poll_id'];
-    $redis_key = "itg_rapid_poll_details_".$poll_id;
+    $redis_key = "itg_rapid_poll_details_" . $poll_id;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3375,17 +3369,17 @@ function itg_rapid_api_get_login_user_detail($token) {
     $email_id = $account->mail;
     $phone_number = $account->field_mobile_number['und'][0]['value'];
     $location = "";
-    if($account->field_personalization_city['und'][0]['value']){
+    if ($account->field_personalization_city['und'][0]['value']) {
         $location .= $account->field_personalization_city['und'][0]['value'];
     }
-    if($account->field_personalization_state['und'][0]['value']){
-        $location .= ", ".$account->field_personalization_state['und'][0]['value'];
+    if ($account->field_personalization_state['und'][0]['value']) {
+        $location .= ", " . $account->field_personalization_state['und'][0]['value'];
     }
-    if($account->field_user_counrty['und'][0]['value']){
-        $location .= ", ".$account->field_user_counrty['und'][0]['value'];
+    if ($account->field_user_counrty['und'][0]['value']) {
+        $location .= ", " . $account->field_user_counrty['und'][0]['value'];
     }
-    if($account->field_short_description['und'][0]['value']){
-        $location .= ", ".$account->field_short_description['und'][0]['value'];
+    if ($account->field_short_description['und'][0]['value']) {
+        $location .= ", " . $account->field_short_description['und'][0]['value'];
     }
 
     $profile_image = $account->field_user_picture['und'][0]['fid'];
@@ -3409,7 +3403,6 @@ function itg_rapid_api_get_login_user_detail($token) {
     $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
 
     return $data;
-
 }
 
 /**
@@ -3429,7 +3422,7 @@ function itg_rapid_api_log_out($token) {
         'timeout' => 15,
         'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
     );
-    $url = $base_url."/user/logout";
+    $url = $base_url . "/user/logout";
     $result = drupal_http_request('$url', $options);
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
@@ -3533,7 +3526,6 @@ function itg_rapid_api_update_preference($token) {
     print_r($_GET);
     echo "</pre>";
     exit();
-
 }
 
 /**
@@ -3541,8 +3533,8 @@ function itg_rapid_api_update_preference($token) {
  * @param int $tid
  * @return array
  */
-function update_preference($user_id, $tid){
-     global $user;
+function update_preference($user_id, $tid) {
+    global $user;
     $widget_name = "personalization_widget";
 
     $nids = array_keys($updates);
@@ -3577,10 +3569,10 @@ function update_preference($user_id, $tid){
 function bookmark_get_responce($token, $user_id) {
 
     $user_id = $_GET['user_id'];
-    $redis_key = "itg_rapid_get_bookmark".$user_id.'';
+    $redis_key = "itg_rapid_get_bookmark" . $user_id . '';
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3602,17 +3594,17 @@ function bookmark_get_responce($token, $user_id) {
 
 function bookmark_set_responce($token, $user_id, $node_id) {
 
-      $user_id = $_POST['user_id'];
-      $node_id = $_POST['node_id'];
-    $redis_key = "itg_rapid_set_bookmark_".$user_id."_".$node_id;
+    $user_id = $_POST['user_id'];
+    $node_id = $_POST['node_id'];
+    $redis_key = "itg_rapid_set_bookmark_" . $user_id . "_" . $node_id;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
 
-        $jsondata = bookmark_set_data_responce($user_id,$node_id);
+        $jsondata = bookmark_set_data_responce($user_id, $node_id);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3624,17 +3616,17 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
 
-      $user_id = $_POST['user_id'];
-      $node_id = $_POST['node_id'];
-      $redis_key = "itg_rapid_bookmark_delete".$user_id."_".$node_id;
-      $result_get = getRedis($redis_key);
+    $user_id = $_POST['user_id'];
+    $node_id = $_POST['node_id'];
+    $redis_key = "itg_rapid_bookmark_delete" . $user_id . "_" . $node_id;
+    $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
 
-        $jsondata = bookmark_del_data_responce($user_id,$node_id);
+        $jsondata = bookmark_del_data_responce($user_id, $node_id);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3650,13 +3642,13 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
  * @return array
  * 	array of Author detail fields.
  */
-function author_detail($token,$author_id) {
+function author_detail($token, $author_id) {
 
     $author_id = $_GET['author_id'];
-    $redis_key = "itg_rapid_api_author_".$author_id."_detail";
+    $redis_key = "itg_rapid_api_author_" . $author_id . "_detail";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3680,7 +3672,7 @@ function news_wrap($token) {
     $redis_key = "itg_rapid_newswrap";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3700,13 +3692,13 @@ function news_wrap($token) {
  * @return array
  * 	array of Anchor detail fields.
  */
-function anchor_detail($token,$anchor_id) {
+function anchor_detail($token, $anchor_id) {
 
     $anchor_id = $_GET['anchor_id'];
-    $redis_key = "itg_rapid_api_anchor_".$anchor_id."_detail";
+    $redis_key = "itg_rapid_api_anchor_" . $anchor_id . "_detail";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != ""){
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -3728,8 +3720,7 @@ function anchor_detail($token,$anchor_id) {
  * @return array
  * 	array of programms.
  */
-
-function anchor_programm_list($token, $anchor_id , $type) {
+function anchor_programm_list($token, $anchor_id, $type) {
     //valid id
     $anchor_id = $_GET['anchor_id'];
     $story_type = $_GET['type'];
@@ -3738,17 +3729,17 @@ function anchor_programm_list($token, $anchor_id , $type) {
     }
 
     // call function for return data..
-    if($_GET['type'] == '0') {
-      $redis_type = 'latest';
-      $type = '0';
-    }elseif ($_GET['type'] == '1') {
-      $redis_type = 'popular';
-      $type = '1';
-    }else{
-      $type = '';
+    if ($_GET['type'] == '0') {
+        $redis_type = 'latest';
+        $type = '0';
+    } elseif ($_GET['type'] == '1') {
+        $redis_type = 'popular';
+        $type = '1';
+    } else {
+        $type = '';
     }
     $suffix = $anchor_id;
-    $redis_key = "itg_rapid_api_anchor_".$redis_type."_programmlist" . $suffix;
+    $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
