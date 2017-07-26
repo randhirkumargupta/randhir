@@ -1688,6 +1688,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $unpublish_replace_id = $solr_data['replace_video'];
   $solr_data_deleted = itg_videogallery_getsolr_data();
    //  Here node dekete and unpublish
+  if(!empty($solr_data_deleted)) {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
   $query->condition('solr_video_id', $solr_data_deleted, 'IN');
@@ -1738,7 +1739,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
     }
   }
   }
-  
+  }
    
   $video_data = "";
   // Here corne for CK Editor.
