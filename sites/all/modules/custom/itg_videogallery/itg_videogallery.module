@@ -988,6 +988,7 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   }
 
   $video_desc = itg_videogallery_clean_string($video_desc);
+  $video_title =  itg_videogallery_clean_string($video_title);
   $api = itg_videogallery_dailymotion_api();
 
 // Tags assign to node and thumbnail
@@ -2329,7 +2330,7 @@ function daily_motion_video_dashboard_rows() {
       }
 
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
-        if (in_array($record->video_id, $all_used_video)) {
+        if ($record->is_draft) {
           $status_flag = '<span class="under-precess">Draft</span>';
           $delete_link = "";
         }
