@@ -231,6 +231,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/kejriwal [NC]  
 	RewriteCond %{REQUEST_URI} !/lie [NC]  
 	RewriteCond %{REQUEST_URI} !/london-olympics-2012 [NC]  
+	RewriteCond %{REQUEST_URI} !/manmohan-economy [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -457,6 +458,8 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^lie/(.*) /staticpages/lie/$1 [L]
 	RewriteRule ^london-olympics-2012$ /staticpages/london-olympics-2012/index.html? [L]
     RewriteRule ^london-olympics-2012/(.*) /staticpages/london-olympics-2012/$1 [L]
+	RewriteRule ^manmohan-economy$ /staticpages/manmohan-economy/index.html? [L]
+    RewriteRule ^manmohan-economy/(.*) /staticpages/manmohan-economy/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
