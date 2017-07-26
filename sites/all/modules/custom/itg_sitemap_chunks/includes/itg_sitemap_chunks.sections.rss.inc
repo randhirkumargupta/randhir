@@ -373,7 +373,7 @@ function itg_sitemap_print_section_rss($result) {
       $xml .= ']]> </media:description>' . "\r\n";
       $xml .= '<media:thumbnail url="' . $node_extra_large_image_url . '"/>' . "\r\n";
       $xml .= '<media:content medium="image" type="image/jpg" url="' . $node_extra_large_image_url . '"/>' . "\r\n";
-      $xml .= '<media:copyright>' . t("© 2010 India Today Group. All Rights Reserved.") . '</media:copyright>' . "\r\n";
+      $xml .= '<media:copyright>' . t("© @copyright India Today Group. All Rights Reserved." , array("@copyright" => date('Y'))) . '</media:copyright>' . "\r\n";
       $xml .= '<pubDate>' . $published_date . '</pubDate>' . "\r\n";
     } else if ($arg[0] == 'rss-video') {
       $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">';

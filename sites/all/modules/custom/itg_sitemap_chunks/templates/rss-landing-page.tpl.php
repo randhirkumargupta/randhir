@@ -36,7 +36,7 @@ $blog_menu = menu_navigation_links('menu-rss-blogs');
   <section class="feed-type">
       <h2 class="link-heading"><?php echo t('Video') ?></h2>
       <p><?php echo t('The feeds are avalibale for following sections.') ?></p>
-      <?php print theme('links__menu_rss_video', array('links' => $photo_menu)); ?>
+      <?php print theme('links__menu_rss_video', array('links' => $video_menu)); ?>
   </section>
 <?php endif; ?>
 
