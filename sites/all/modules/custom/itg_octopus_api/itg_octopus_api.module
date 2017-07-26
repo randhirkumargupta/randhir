@@ -126,7 +126,7 @@ function itg_octopus_api_menu() {
 
   $items['itg-rfa-file-live-blog'] = array(
     'page callback' => 'itg_rfa_file_live_blog',
-    'access arguments' => array('administer itg octopus'),
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_octopus_rfa.inc',
   );
