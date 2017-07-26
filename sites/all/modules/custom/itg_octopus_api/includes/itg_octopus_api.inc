@@ -309,6 +309,17 @@ function itg_octopus_api_rundown_listing() {
   $pagination = '';
   $current_rundown = '';
 
+  
+  
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'previous') {
+    $pagination.= '<li class="pager-current">' . t(' Previous ', array('attributes' => array('class' => 'disabled'))) . '</li>';
+    $current_rundown = 'previous';
+  }
+  else {
+    $pagination.= '<li class="pager-item">' . l(' Previous ', 'rundown-listing', array('query' => array('rundowntype' => 'previous'))) . '</li>';
+  }
+  
+  
   if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
     $pagination.= '<li class="pager-current">' . t(' Current ', array('attributes' => array('class' => 'disabled'))) . '</li>';
     $current_rundown = 'current';
