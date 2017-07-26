@@ -8,6 +8,8 @@
  *
  */
 define('FTP_URL_VIDEO', variable_get('dailymotion_ftp_url'));
+define('LOCAL_VIDEO_DIR', variable_get('local_s3_video_folder'));
+define('FOLDER_FTP_ROOT', variable_get('ftp_root_folder'));
 
 /**
  * Implements hook_menu().
@@ -43,17 +45,8 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  $items['dailymotion-video-time-filter'] = array(
-    'page callback' => 'itg_videogallery_ajax_time_filter_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
+  
 
-  $items['dailymotion-video-search-filter'] = array(
-    'page callback' => 'itg_videogallery_ajax_time_search_video',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
   $items['dailymotion-ftp-template'] = array(
     'page callback' => 'itg_videogallery_ftp_template',
     'access arguments' => array('access content'),
@@ -326,11 +319,11 @@ function itg_video_check_exist_file($filename) {
   $results = $query->execute()->fetchAll();
 
   if (!isset($results[0])) {
-    $res = 'public://dailymotion_video_dir/' . $filename;
+    $res = 'public://'.LOCAL_VIDEO_DIR.'/' . $filename;
     return $res;
   }
   else {
-    $result = explode('public://dailymotion_video_dir/', $results[0]->uri);
+    $result = explode('public://'.LOCAL_VIDEO_DIR.'/', $results[0]->uri);
     $path_info = pathinfo($results[0]->filename);
     $extension = $path_info['extension'];
     $file_name = $path_info['filename'];
@@ -344,7 +337,7 @@ function itg_video_check_exist_file($filename) {
       $value = '_0';
     }
     $file_info = pathinfo($filename);
-    $res = 'public://dailymotion_video_dir/' . $file_info['filename'] . $value . '.' . $extension;
+    $res = 'public://'.LOCAL_VIDEO_DIR.'/' . $file_info['filename'] . $value . '.' . $extension;
     return $res;
   }
 }
@@ -1131,7 +1124,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
   }
   try {
     if (itg_videogallery_check_ftp_video($fid)) {
-      $ftp_file = explode('/dailymotion_video_dir/', $real_path);
+      $ftp_file = explode('/'.LOCAL_VIDEO_DIR.'/', $real_path);
       $uri = 'public://dailymotion-ftp/' . $ftp_file[1];
       $url = FTP_URL_VIDEO . $ftp_file[1];
     }
@@ -1245,8 +1238,11 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     form_set_error('field_video_upload', t("Please Remove Migrated Video Url."));
   }
   if ($is_migrate_validate == 0) {
+    if( $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'UGC') {
     $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "videogallery";
-  }
+    }
+    
+    }
 }
 
 /**
@@ -1695,6 +1691,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $unpublish_replace_id = $solr_data['replace_video'];
   $solr_data_deleted = itg_videogallery_getsolr_data();
    //  Here node dekete and unpublish
+  if(!empty($solr_data_deleted)) {
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property', 'content_type'));
   $query->condition('solr_video_id', $solr_data_deleted, 'IN');
@@ -1745,7 +1742,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
     }
   }
   }
-  
+  }
    
   $video_data = "";
   // Here corne for CK Editor.
@@ -2008,7 +2005,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
-      $videourl = 'public://dailymotion_video_dir/' . time() . '/' . $expode_video_info[0] . '.mp4';
+      $videourl = 'public://'.LOCAL_VIDEO_DIR.'/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
             'uid' => $user->uid,
@@ -2126,7 +2123,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -2215,7 +2212,7 @@ function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
  */
 function itg_videogallery_daily_motion_video_reset($form, $form_state) {
       $form_state['rebuild'] = FALSE;
-     // drupal_goto('daily-motion-video-dashboard');
+      drupal_goto('daily-motion-video-dashboard');
 }
 
 /*
@@ -2582,27 +2579,13 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
   if ($result[0]->property == VIDEO_PROPERTY) {
     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
         ->fields(array(
-          'dailymotion_published' => 1,
+          'dailymotion_published' => 0,
           'is_draft' => 0,
         ))
         ->condition('video_id', $result[0]->solr_video_id, '=')
         ->execute();
     itg_videogallery_update_video_info_solr($result[0]->solr_video_id);
-    $node = new stdClass();
-    $node->title = $result[0]->solr_video_id;
-    $node->type = "itg_delete_solr_video";
-    node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-    $node->language = LANGUAGE_NONE;
-    $node->uid = $user->uid;
-    $node->field_video_is_delete[LANGUAGE_NONE][0]['value'] = 1;
-    $node->status = 1; //(1 or 0): Published or not
-    $node->promote = 0; //(1 or 0): Promoted to front page
-    $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-    $getnode = itg_videogallery_get_node_by_title($result[0]->solr_video_id);
-    if (!empty($getnode)) {
-      $node->nid = $getnode[0]->nid;
-    }
-    node_save($node);
+    
   }
 }
 
@@ -2611,6 +2594,7 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_presave($node) {
+
 //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
@@ -2648,10 +2632,7 @@ function itg_videogallery_get_tname($tid) {
  * {@inheritdoc}
  */
 function itg_videogallery_cronapi($op, $job = NULL) {
-  $items['video_file_delete'] = array(
-    'description' => 'video file delete in files folder.',
-    'callback' => 'itg_videogallery_remove_video',
-  );
+  
   $items['video_thumb_assign'] = array(
     'description' => 'Thumbnail image assign to node from dailymotion.',
     'callback' => 'itg_videogallery_thumb_assign',
@@ -2692,26 +2673,13 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'description' => 'This is use for store video birates urls',
     'callback' => 'itg_videogallery_video_bitrate',
   );
-//  $items['content-remove-video-with-child'] = array(
-//    'description' => 'This crone use for replaced video remove from other content type.',
-//    'callback' => 'itg_videogallery_remove_video_with_child',
-//  );
-  $items['remove-video-if-parent-site-delete'] = array(
-    'description' => 'This crone use for remove video if parent site remove this video from video article.',
-    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete',
-  );
+
+ 
   $items['video-update-embed-video-id'] = array(
     'description' => 'This crone use for Update video id embeded.',
     'callback' => 'itg_videogallery_video_update_embeded_url',
   );
-//  $items['video-draft-video-check'] = array(
-//    'description' => 'This crone use for Update video id embeded.',
-//    'callback' => 'itg_videogallery_video_draft_node_check',
-//  );
-//  $items['delete-parent-remove-video'] = array(
-//    'description' => 'This crone use for Update video id embeded.',
-//    'callback' => 'itg_videogallery_remove_video_id_parent_site_delete_or_unpublish',
-//  );
+
 
   return $items;
 }
@@ -2874,7 +2842,7 @@ function itg_videogallery_get_node_by_title($title = null) {
  * Implement function for remove files
  */
 function itg_videogallery_remove_video() {
-  $files = glob('sites/default/files/dailymotion_video_dir/*');
+  $files = glob('sites/default/files/'.LOCAL_VIDEO_DIR.'/*');
   foreach ($files as $file) {
     if (is_file($file))
       unlink($file);
@@ -3240,9 +3208,9 @@ function itg_videogallery_move_ftp_videos() {
 
     if ($vid->type == 'ftp') {
       $datefolder = date('Y-m', $vid->upload_time);
-      $file_name = '/public_html/' . $ftp_video_folder . '/' . $vid->name;
-      $file_name_to_folder = '/public_html/' . $ftp_move_archive . '/' . $datefolder . '/';
-      $file_name_to_folder_file = '/public_html/' . $ftp_move_archive . '/' . $datefolder . '/' . $vid->name;
+      $file_name = '/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/' . $vid->name;
+      $file_name_to_folder = '/'.FOLDER_FTP_ROOT.'/' . $ftp_move_archive . '/' . $datefolder . '/';
+      $file_name_to_folder_file = '/'.FOLDER_FTP_ROOT.'/' . $ftp_move_archive . '/' . $datefolder . '/' . $vid->name;
       $ftp_exist = ftp_chdir($connection_id, $file_name_to_folder);
 
       if (!$ftp_exist) {
@@ -3571,11 +3539,11 @@ function itg_videogallery_ftp_file_insert() {
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
   $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
-  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
+  $ftp_files = ftp_nlist($connection_id, "/".FOLDER_FTP_ROOT."/" . $ftp_video_folder . "/");
 
   ftp_close($connection_id);
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/' . $ftp_video_folder . '/', $files);
+    $file_array = explode('/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/', $files);
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
     if (isset($extension) && $extension == 'mp4') {
@@ -3618,15 +3586,15 @@ function itg_video_check_exist_file_browse($filename) {
   $connection_id = itg_videogallery_ftp_video_list();
   $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
   ftp_pasv($connection_id, true);
-  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
+  $ftp_files = ftp_nlist($connection_id, "/".FOLDER_FTP_ROOT."/" . $ftp_video_folder . "/");
   $results = itg_videogallery_getfile_details($filename);
   if ($results == '' && empty($results)) {
-    $file_size = ftp_size($connection_id, '/public_html/' . $ftp_video_folder . '/' . $filename);
+    $file_size = ftp_size($connection_id, '/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/' . $filename);
     if ($res != -1) {
       $path_info = pathinfo($filename);
       $extension = $path_info['extension'];
       if (isset($extension) && $extension == 'mp4') {
-        $uri = 'public://dailymotion_video_dir/' . $filename;
+        $uri = 'public://'.LOCAL_VIDEO_DIR.'/' . $filename;
         $fid = db_insert('file_managed')
             ->fields(array(
               'uid' => $user->uid,
@@ -3640,7 +3608,6 @@ function itg_video_check_exist_file_browse($filename) {
             ->execute();
         $file = file_load($fid);
         file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-
 // Entry for FTP Video
         db_insert('itg_dailymotion_ftp_video')
             ->fields(array(
@@ -3660,7 +3627,7 @@ function itg_video_check_exist_file_browse($filename) {
  * @return array
  */
 function itg_videogallery_getfile_details($filename) {
-  $uri = 'public://dailymotion_video_dir/' . $filename;
+  $uri = 'public://'.LOCAL_VIDEO_DIR.'/' . $filename;
   $query = db_select('file_managed', 'fm');
   $query->condition('filename', $filename, '=');
   $query->condition('uri', $uri, '=');
@@ -3760,216 +3727,6 @@ jQuery(this).find('a').addClass('active');
     }
     $node->view_output = $view_output;
   }
-}
-
-/**
- * Get used video
- */
-function itg_videogallery_ajax_ftp_video() {
-  $case = $_POST['case'];
-  $val = '';
-  if ($case == 'used') {
-    
-  }
-  elseif ($case == 'unused') {
-    $unused_video = itg_videogallery_ftp_unused_video();
-    foreach ($unused_video as $key => $un_video) {
-      $video_image = "";
-      if ($un_video['thumb_url'] != "") {
-        $video_image = '<img src="' . $un_video['thumb_url'] . '" alt="" />';
-      }
-      if ($_POST['value_type'] == '1') {
-        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
-      }
-      else {
-        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
-      }
-    }
-  }
-  if (empty($val)) {
-    $val = "Result not found.";
-  }
-
-  echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
-    paginateElement: ".ftp_video_radio",
-    elementsPerPage: 21,
-    effect: "climb"
-  });</script>';
-}
-
-/**
- * Implements function for time filter ajax
- */
-function itg_videogallery_ajax_time_filter_video() {
-  $ajax_data = $_POST['back_time'];
-  $filters = explode('@', $ajax_data);
-  $back_time = $filters[0];
-  $searh_key = $filters[1];
-  $val = '';
-  if ($back_time) {
-    if (is_numeric($back_time)) {
-      $before_time = time() - (60 * 60 * $back_time);
-    }
-    elseif ($before_time == '-all-') {
-      $before_time = '-all-';
-    }
-    $used_video = itg_videogallery_ftp_used_video($before_time, $searh_key);
-    foreach ($used_video as $key => $u_video) {
-
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . '<img src="' . $u_video['thumb_url'] . '" alt="" />' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
-    }
-  }
-  if (empty($val)) {
-    $val = "Result not found.";
-  }
-
-  echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
-    paginateElement: ".ftp_video_radio",
-    elementsPerPage: 21,
-    effect: "climb"
-  });</script>';
-}
-
-/**
- * Implements function for video search filter ajax
- */
-function itg_videogallery_ajax_time_search_video() {
-  $ajax_data = $_POST['back_time'];
-  $filters = explode('@', $ajax_data);
-  $search_key = $filters[1];
-  if ($filters[0] == 'used') {
-    $back_time = $filters[2];
-    $val = '';
-    if ($back_time) {
-      if (is_numeric($back_time)) {
-        $before_time = time() - (60 * 60 * $back_time);
-      }
-      elseif ($back_time == '-all-') {
-        $before_time = '-all-';
-      }
-      $used_video = itg_videogallery_ftp_used_video($before_time, $search_key);
-      foreach ($used_video as $key => $u_video) {
-        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . '<img src="' . $u_video['thumb_url'] . '" alt="" />' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
-      }
-    }
-  }
-  elseif ($filters[0] == 'unused') {
-    $unused_video = itg_videogallery_ftp_unused_video($search_key);
-    foreach ($unused_video as $key => $un_video) {
-      if ($un_video['thumb_url'] != "") {
-        $video_image = '<img src="' . $un_video['thumb_url'] . '" alt="" />';
-      }
-      if ($_POST['value_type'] == '1') {
-        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
-      }
-      else {
-        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
-      }
-    }
-  }
-  if (empty($val)) {
-    $val = "Result not found.";
-  }
-
-  echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
-      paginateElement: ".ftp_video_radio",
-      elementsPerPage: 21,
-      effect: "climb"
-    });</script>';
-}
-
-/**
- * Implement function for get used video on FTP
- * @return array new function
- */
-function itg_videogallery_ftp_used_video($before_time = NULL, $searh_key = NULL) {
-  $query = db_select('file_managed', 'fm');
-  $query->fields('fm', array('fid', 'filesize', 'filename'));
-  $query->Join('file_usage', 'fu', 'fu.fid = fm.fid');
-  $query->join('dailymotion_response_details', 'drd', 'drd.fid = fm.fid');
-  $query->fields('drd', array('dailymotion_thumb_url'));
-  $query->distinct();
-  $query->condition('fu.type', 'node', '=');
-  $query->condition('uri', db_like('public://dailymotion_video_dir/') . '%', LIKE);
-  $db_or = db_or();
-  $db_or->condition('drd.dailymotion_thumb_url', 'deleted_video_dailymotion', '!=');
-  $db_or->condition(db_or()->isNull('drd.dailymotion_thumb_url'));
-  $query->condition($db_or);
-  if (!empty($before_time) && is_numeric($before_time)) {
-    $query->condition('drd.upload_time', $before_time, '>');
-  }
-  if (!empty($searh_key)) {
-    $query->condition('fm.filename', '%' . db_like($searh_key) . '%', LIKE);
-  }
-  $results = $query->execute();
-
-  foreach ($results as $result) {
-    $used_video[$result->fid]['filename'] = $result->filename;
-    $used_video[$result->fid]['filesize'] = number_format($result->filesize / (1024 * 1024), 2);
-    $used_video[$result->fid]['thumb_url'] = $result->dailymotion_thumb_url;
-  }
-  return $used_video;
-}
-
-/**
- * Implement function for get unused video on FTP
- * @return array
- */
-function itg_videogallery_ftp_unused_video($search_key = NULL) {
-
-  $query = db_select('file_managed', 'fm');
-  $query->fields('fm', array('fid', 'filesize', 'filename'));
-  $query->join('dailymotion_response_details', 'drd', 'drd.fid = fm.fid');
-  $query->fields('drd');
-  $query->distinct();
-  $query->condition('drd.type', 'ftp', '=');
-  $query->condition('drd.dailymotion_published', 0, '=');
-  $query->isNotNull('drd.dailymotion_thumb_url');
-  $query->condition('drd.video_duration', 0, '!=');
-  if ($search_key != "") {
-    $query->condition('drd.name', '%' . db_like($search_key) . '%', LIKE);
-  }
-  $query->orderBy('eid', 'DESC');
-  $results = $query->execute();
-  foreach ($results as $result) {
-    $unused_video[$result->fid]['filename'] = $result->name;
-    $unused_video[$result->fid]['thumb_url'] = $result->dailymotion_thumb_url;
-    $unused_video[$result->fid]['filesize'] = number_format($result->filesize / (1024 * 1024), 2);
-  }
-  return $unused_video;
-}
-
-/**
- * Implements function for get unused files.
- * @param string $filename
- * @return array
- */
-function itg_videogallery_ftp_unused_file($filename, $search_key = NULL) {
-  $query = db_select('file_managed', 'fm');
-  $query->fields('fm', array('fid'));
-  $query->Join('file_usage', 'fu', 'fu.fid = fm.fid');
-  $query->join('dailymotion_response_details', 'drd', 'drd.fid = fm.fid');
-  $query->fields('fu', array('fid'));
-  $query->distinct();
-  $query->condition('fu.type', 'node', '=');
-  $query->condition('uri', db_like('public://dailymotion_video_dir/') . '%', LIKE);
-  $result = $query->execute();
-  foreach ($result as $rel) {
-    $used_fid[] = $rel->fid;
-  }
-  $query = db_select('file_managed', 'fm');
-  $query->fields('fm', array('fid'));
-  $query->Join('file_usage', 'fu', 'fu.fid = fm.fid');
-  $query->fields('fm', array('fid', 'filename', 'filesize'));
-  $query->distinct();
-  $query->condition('fu.type', 'file', '=');
-  $query->condition('fm.fid', $used_fid, 'NOT IN');
-  $query->condition('fm.uri', $filename, 'IN');
-  if (!empty($search_key)) {
-    $query->condition('fm.filename', '%' . db_like($search_key) . '%', LIKE);
-  }
-  $result_unused = $query->execute()->fetchAll();
-  return $result_unused;
 }
 
 /**
@@ -4151,13 +3908,13 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
   }
   $node = drupal_rebuild_form('videogallery_node_form', $form_state, $old_form = NULL);
   $fids = array();
-  $mydir = 'public://dailymotion_video_dir';
+  $mydir = 'public://'.LOCAL_VIDEO_DIR;
   file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
   foreach ($node['upload']['#value'] as $audio) {
-    $scheme = variable_get('file_default_scheme', 'public') . '://dailymotion_video_dir/';
+    $scheme = variable_get('file_default_scheme', 'public') . '://'.LOCAL_VIDEO_DIR.'/';
     $source = $audio['tmppath'];
     $uri = itg_audio_check_exist_file($audio['name']);
-    $newuri = explode('//dailymotion_video_dir/', $uri);
+    $newuri = explode('//'.LOCAL_VIDEO_DIR.'/', $uri);
     $directory = '';
     $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $newuri[1]);
     $destination = file_unmanaged_move($source, $destination);
@@ -4235,7 +3992,7 @@ function file_validate_name(stdClass $file) {
   $file->filename = $new_filename;
 
 //changing file location 
-  $destination_dir = "public://dailymotion_video_dir/";
+  $destination_dir = "public://".LOCAL_VIDEO_DIR."/";
 
 //check if file exists. if exists rename it append incremental number  until the filename is unique
 
@@ -4285,7 +4042,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
 
     try {
 
-      $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
+      $ftp_file = explode('public://'.LOCAL_VIDEO_DIR.'/', $real_path);
       $uri = 'public://dailymotion-ftp/' . $realfilename;
       $url = $real_path;
 
@@ -4452,24 +4209,24 @@ function itg_videogallery_ftp_file_insert_cron() {
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
   $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
-  $ftp_filess = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
+  $ftp_filess = ftp_nlist($connection_id, "/".FOLDER_FTP_ROOT."/" . $ftp_video_folder . "/");
 
   foreach ($ftp_filess as $files_n) {
 
-    $file_data_array = explode('/public_html/' . $ftp_video_folder . '/', $files_n);
+    $file_data_array = explode('/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/', $files_n);
     $path_info_data = pathinfo($file_data_array[1]);
     $filename = $path_info_data['filename'];
     $extension = $path_info_data['extension'];
     $exist_space = preg_match('/\s/', $filename);
     if ($exist_space) {
       $newfile = str_replace(' ', '_', $filename);
-      ftp_rename($connection_id, $files_n, '/public_html/' . $ftp_video_folder . '/' . $newfile . '.' . $extension);
+      ftp_rename($connection_id, $files_n, '/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/' . $newfile . '.' . $extension);
     }
   }
 
-  $ftp_files = ftp_nlist($connection_id, "/public_html/" . $ftp_video_folder . "/");
+  $ftp_files = ftp_nlist($connection_id, "/".FOLDER_FTP_ROOT."/" . $ftp_video_folder . "/");
   foreach ($ftp_files as $files) {
-    $file_array = explode('/public_html/' . $ftp_video_folder . '/', $files);
+    $file_array = explode('/'.FOLDER_FTP_ROOT.'/' . $ftp_video_folder . '/', $files);
 
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
@@ -4487,7 +4244,7 @@ function itg_videogallery_ftp_file_insert_cron() {
           $realfilename = check_file_already_exist_or_not($file_array[1]);
 
 // Adding managed file
-          $uri = 'public://dailymotion_video_dir/' . $realfilename;
+          $uri = 'public://'.LOCAL_VIDEO_DIR.'/' . $realfilename;
           try {
 
             $fid = db_insert('file_managed')
@@ -4561,7 +4318,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
   $api = itg_videogallery_dailymotion_api();
   try {
 
-    $ftp_file = explode('public://dailymotion_video_dir/', $real_path);
+    $ftp_file = explode('public://'.LOCAL_VIDEO_DIR.'/', $real_path);
     $uri = 'public://dailymotion-ftp/' . $realfilename;
     $url = FTP_URL_VIDEO . $name;
 
@@ -4649,12 +4406,11 @@ function check_file_already_exist_or_not($filename) {
   $query->orderBy('fm.fid', 'DESC');
   $query->range(0, 1);
   $results = $query->execute()->fetchAll();
-
   if (!isset($results[0])) {
     return $filename;
   }
   else {
-    $result = explode('public://dailymotion_video_dir/', $results[0]->uri);
+    $result = explode('public://'.LOCAL_VIDEO_DIR.'/', $results[0]->uri);
     $path_info = pathinfo($results[0]->filename);
     $extension = $path_info['extension'];
     $file_name = $path_info['filename'];

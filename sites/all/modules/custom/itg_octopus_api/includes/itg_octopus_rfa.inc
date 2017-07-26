@@ -72,7 +72,6 @@ function itg_rfa_file_testing() {
   $text = 'Hi this is for testing';
   $created_date = REQUEST_TIME;
   $created_by = 'Ishwar';
-  $timestamp = REQUEST_TIME;
   $action = 'INSERT';
 
   $url = $base_url . "/itg-rfa-file-live-blog";
@@ -83,7 +82,6 @@ function itg_rfa_file_testing() {
       'text' => 'Hi this is for testing',
       'created_date' => REQUEST_TIME,
       'created_by' => 'Ishwar',
-      'timestamp' => REQUEST_TIME,
       'action' => 'INSERT',
     ),
     array(
@@ -92,7 +90,6 @@ function itg_rfa_file_testing() {
       'text' => 'Hi this is for testing',
       'created_date' => REQUEST_TIME,
       'created_by' => 'Ishwar',
-      'timestamp' => REQUEST_TIME,
       'action' => 'DELETE',
     ),
     array(
@@ -101,10 +98,11 @@ function itg_rfa_file_testing() {
       'text' => 'Hi this is for testing',
       'created_date' => REQUEST_TIME,
       'created_by' => 'Ishwar',
-      'timestamp' => REQUEST_TIME,
       'action' => 'UPDATE',
     ),
   );
+
+
   $options = array(
     'method' => 'POST',
     'data' => http_build_query($data, '', '&'),
@@ -138,7 +136,7 @@ function itg_octopus_api_rfa_dashboard() {
 
   $header = array(
     array('data' => t('Sn.')),
-    array('data' => t('Rundown id')),
+    array('data' => t('RFA ID')),
     array('data' => t('Source')),
     array('data' => t('Text')),
     array('data' => t('Created Date')),
@@ -157,9 +155,16 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.source', $_GET['source'], '=');
   }
 
-  if (isset($_GET['text']) && !empty($_GET['text'])) { // source
+  if (isset($_GET['rfaid']) && !empty($_GET['rfaid'])) { // rfaid
+    $query->condition('rfa.rundown_id', $_GET['rfaid'], '=');
+  }
+
+
+  if (isset($_GET['text']) && !empty($_GET['text'])) { // text
     $query->condition('rfa.text', $_GET['text'], '=');
   }
+
+
 
 
   $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
@@ -173,6 +178,7 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.created_date', strtotime($end_date), '<=');
   }
 
+  $query->orderBy('rfa.id', 'DESC');
   $query->extend('PagerDefault')->limit(20);
 
   $result = $query->execute();
@@ -181,7 +187,7 @@ function itg_octopus_api_rfa_dashboard() {
 
   foreach ($result as $row) {
     $octopus_ref = base64_encode($row->id);
-    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa/listing&octopus_ref=' . $octopus_ref);
+    $ctype_text = l('File Breaking News', $base_url . '/node/add/breaking-news?destination=rfa-dashboard&octopus_ref=' . $octopus_ref);
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
       $background_color = 'bg-red';
@@ -204,7 +210,21 @@ function itg_octopus_api_rfa_dashboard() {
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_rfa_form');
 
-  $output = render($itg_octopus_api_form);
+  $rundown_active_class = '';
+  $rfa_active_class = '';
+  if (isset($_GET['q']) && $_GET['q'] == 'rundown-listing') {
+    $rundown_active_class = 'active-trail';
+  }
+  elseif (isset($_GET['q']) && $_GET['q'] == 'rfa-dashboard') {
+    $rfa_active_class = 'active-trail';
+  }
+  $output = '<div class="content-block-menu">
+            <ul class="menu">
+           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
+           </ul>
+           </div>';
+  $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
@@ -226,6 +246,15 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#maxlength' => 255,
     '#size' => 30,
     '#default_value' => isset($_GET['source']) ? $_GET['source'] : '',
+    '#weight' => 2,
+  );
+
+  $form['rfaid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RFA Id'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['rfaid']) ? $_GET['rfaid'] : '',
     '#weight' => 2,
   );
 
@@ -265,7 +294,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('octopus-apply btn-small')),
     '#prefix' => '<div class = "octopus-filter-btn">',
-    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown/listing">Reset</a></div>',
+    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rfa-dashboard">Reset</a></div>',
     '#weight' => 7,
   );
   return $form;
@@ -281,6 +310,7 @@ function itg_octopus_api_rfa_form_submit($form, &$form_state) {
     array(
       'query' => array(
         'source' => $form_state['input']['source'],
+        'rfaid' => $form_state['input']['rfaid'],
         'text' => $form_state['input']['text'],
         'start_date' => $form_state['input']['start_date']['date'],
         'end_date' => $form_state['input']['end_date']['date'],

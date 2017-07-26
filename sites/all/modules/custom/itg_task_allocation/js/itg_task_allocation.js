@@ -20,16 +20,16 @@
           }
         });
       });
-
       jQuery ("#belly").click (function (event) {
-        jQuery.ajax ({
-          url: Drupal.settings.basePath + "notify-detail",
-          type: 'POST',
-          success: function (msg) {
-            jQuery (".bell-notice").html (msg);
-            jQuery (".bell-notice").show ();
-          }
-        });
+          jQuery (".bell-notice").slideToggle();
+//        jQuery.ajax ({
+//          url: Drupal.settings.basePath + "notify-detail",
+//          type: 'POST',
+//          success: function (msg) {
+//            jQuery (".bell-notice").html (msg);
+//            jQuery (".bell-notice").show ();
+//          }
+//        });
       });
     }
 

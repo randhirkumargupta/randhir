@@ -43,6 +43,18 @@ function itg_syndication_menu() {
 }
 
 /**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_syndication_cronapi($op, $job = NULL) {
+  $items['itg-syndication-feed-cron'] = array(
+    'description' => 'Syndication rules cron.',
+    'callback' => 'get_syndication_content_details',
+  );
+  return $items;
+}
+
+/**
  * Implement hook_permissions()
  */
 function itg_syndication_permission() {
@@ -239,9 +251,18 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
       if ($key == 0 && (arg(0) == 'node' && arg(1) == 'add')) {
         unset($form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['remove_button']);
       }
-
+      // Make dynamic id for evey field collection section.
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#prefix'] = "<div id='section-wrapper-".$key."'>";
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#suffix'] = "</div>";
+      // create callback.
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'syndication_ajax_callback',
+        'wrapper' => "section-wrapper-".$key,
+      );
+      
+      $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
       $syndication_mode_value = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['#entity']->field_syndication_mode[LANGUAGE_NONE][0]['value'];
-
+      
       $form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#options'] = $op;
       if (isset($syndication_mode_value)) {
         $form['field_syndication_rule_details'][LANGUAGE_NONE][$key][$syndication_mode][LANGUAGE_NONE]['#default_value'] = $syndication_mode_value;
@@ -267,17 +288,16 @@ function itg_syndication_rule_after_build($form, &$form_state) {
 
   drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1, 'scope' => 'footer'));
 
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array();
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }
-  
-  natcasesort($op); // Sorting section array or category array by it value
-  
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
-      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $op;
+      $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
+      if(!empty($content_type)) {
+        $options = _get_term_as_per_content_types($content_type);
+      } else {
+        $options = array();
+      }
+      $option_array = syndication_get_option_array($options);
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $option_array;
     }
   }
 
@@ -290,6 +310,59 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   return $form;
 }
 
+function syndication_ajax_callback($form , &$form_state) {
+  $selected_content_type = $form_state['triggering_element']['#default_value'][0];
+  $options = _get_term_as_per_content_types($selected_content_type);
+  $option_array = syndication_get_option_array($options);
+  $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section']['und']['#options'] = $option_array;
+  return $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section'];
+}
+
+
+function syndication_get_option_array($options) {
+  $option_array = array();
+  $option_array['_none'] = '-None-';
+  foreach($options as $data) {
+    $tid = $data['value'];
+    $name = $data['name'];
+    $option_array[$tid] = $name;
+  }
+  return $option_array;
+}
+
+function _get_term_as_per_content_types($content_type) {
+  $options = array();
+  if($content_type == 'cooking_tips') {
+    $content_type = 'cooking-tips';
+  }
+  else if ($content_type == 'food_news') {
+    $content_type = 'food-news';
+  }
+ try {
+  $query = db_select('taxonomy_term_data' , 'td')->distinct();
+  $query->leftJoin('field_data_field_cm_select_type' , 'dfcst' , 'td.tid = dfcst.entity_id');
+  $query->leftJoin('itg_category_manager' , 'cm' , 'cm.tid = dfcst.entity_id');
+  $query->leftJoin('taxonomy_term_hierarchy' , 'th' , 'th.tid = dfcst.entity_id');
+  $query->fields('dfcst', array('entity_id', 'field_cm_select_type_value'));
+  $query->fields('td', array('name'));
+  $query->fields('th', array('parent'));
+  $query->fields('cm', array('status'));
+  $query->condition('dfcst.field_cm_select_type_value' , $content_type);
+  $query->condition('cm.status' , 1);
+  $query->condition('th.parent' , 0);
+  $query->orderBy('td.name');
+  $result = $query->execute();
+  foreach($result as $data) {
+    if($data->entity_id) {
+      $options[] = array("name" => $data->name , "value" => $data->entity_id);
+      //$options[] = $data;
+    }
+  }
+ } catch (Exception $ex) {
+   drupal_set_message($ex->getMessage());
+ }
+ return $options;
+}
 /**
  * Ajax callback for syndication_mode dropdown
  * @param array $form

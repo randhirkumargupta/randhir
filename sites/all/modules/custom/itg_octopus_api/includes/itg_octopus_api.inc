@@ -306,7 +306,6 @@ function itg_octopus_api_rundown_listing() {
   }
 
 
-
   $pagination = '';
   $current_rundown = '';
 
@@ -315,7 +314,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'current';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown/listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown-listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
@@ -323,7 +322,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next1';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown/listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown-listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
@@ -331,7 +330,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next2';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown/listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
   if (empty($current_rundown))
@@ -369,8 +368,8 @@ function itg_octopus_api_rundown_listing() {
   if (isset($current_rundown) && !empty($current_rundown)) {
     $query->condition('rund.type', $current_rundown, '=');
   }
-  
-  $query->orderBy('ios.id','DESC');
+
+  $query->orderBy('ios.id', 'DESC');
   $query->extend('PagerDefault')->limit(50);
 
 // p($query->__toString());
@@ -393,7 +392,7 @@ function itg_octopus_api_rundown_listing() {
 
 
   foreach ($result as $row) {
-    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown/listing');
+    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
@@ -419,9 +418,23 @@ function itg_octopus_api_rundown_listing() {
     );
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_form');
-
-  $output = render($itg_octopus_api_form);
+  $rundown_active_class = '';
+  $rfa_active_class = '';
+  if (isset($_GET['q']) && $_GET['q'] == 'rundown-listing') {
+    $rundown_active_class = 'active-trail';
+  }
+  elseif (isset($_GET['q']) && $_GET['q'] == 'rfa-dashboard') {
+    $rfa_active_class = 'active-trail';
+  }
+  $output = '<div class="content-block-menu">
+            <ul class="menu">
+           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
+           </ul>
+           </div>';
+  $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
@@ -708,7 +721,9 @@ function itg_octopus_api_move_dump_server_to_s3() {
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
   global $base_url;
   $data = array();
-  $video_path = $base_url . '/' . $_POST['id'];
+  // $post_video_id = $_POST['id'];
+  $post_video_id = $_POST['id'];
+  $video_path = $base_url . '/' . $post_video_id;
 
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
 
@@ -716,27 +731,27 @@ function itg_octopus_api_move_dump_server_to_s3() {
   ftp_pasv($conn_id, true);
   $video_name = $_POST['id'];
   $ftp_files = ftp_nlist($conn_id, "/");
-  $file_size = ftp_size($conn_id, '/' . $_POST['id']);
-//  $local_file = $video_name;
-//  $server_file = $video_name;
-//  $file_d_success = 0;
-//  // try to download $server_file and save to $local_file
-//  if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
-//    //echo "Successfully written to $local_file\n";
-//    // TODO
-//    $file_d_success = 1;
-//  }
-//  else {
-//    // echo "There was a problem\n";
-//    $file_d_success = 0;
-//  }
+  $file_size = ftp_size($conn_id, '/' . $post_video_id);
+  $local_file = $video_name;
+  $server_file = $video_name;
+  $file_d_success = 0;
+  // try to download $server_file and save to $local_file
+  if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
+    //echo "Successfully written to $local_file\n";
+    // TODO
+    $file_d_success = 1;
+  }
+  else {
+    // echo "There was a problem\n";
+    $file_d_success = 0;
+  }
   $file_d_success = 1;
 // close the connection
   ftp_close($conn_id);
   if ($file_d_success == 1) {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
-      $s3_success = itg_video_send_dm_to_s3($video_path, $video_name);
+      $s3_success = itg_video_send_dm_to_s3($local_file, $video_name);
       if (isset($s3_success) && !empty($s3_success)) {
         $data['success'] = 'yes';
         $data['s3_url'] = $s3_success;
@@ -847,7 +862,7 @@ function itg_octopus_file_video() {
         'slug_id' => $slug_id,
       );
       $octopus_ref = base64_encode(json_encode($oct_meta_info));
-      $return_url = $base_url . '/node/add/videogallery?destination=rundown/listing&octopus_ref=' . $octopus_ref;
+      $return_url = $base_url . '/node/add/videogallery?destination=rundown-listing&octopus_ref=' . $octopus_ref;
       print $return_url;
       drupal_exit();
     }

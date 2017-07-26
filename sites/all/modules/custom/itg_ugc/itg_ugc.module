@@ -226,6 +226,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $mongo_details['title'];
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+      $form['field_story_expert_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
       if ($user->uid != 1) {
         $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
         $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
@@ -240,15 +241,17 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
-        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+       // $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+       // $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }
       // assign value in first field collection item
       foreach ($form['field_video_upload']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
           // assign value in first field collection item
           $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
-        }
+          $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_video_title'][LANGUAGE_NONE][0]['value']['#default_value']= $mongo_details['title'];
+
+          }
       }
     }
 
@@ -329,6 +332,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
+    $form['field_story_client_title']['#access'] = FALSE;
     $form['field_ugc_photo_image']['und']['#file_upload_title'] = t('');
     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));
@@ -950,6 +954,9 @@ function itg_ugc_view_content($unique_id) {
         $output.= '<div id="ugc-content-view"><ul>';
 
         foreach ($userData as $final_view) {
+          if($final_view['content_type'] =='videogallery') {
+            $final_view['content_type']  ='Video';
+          }
           $user_message = itg_ugc_bad_words($final_view['description']);
           $output.= '<li>' . t('<strong>Content Type :</strong> <span>') . $final_view['content_type'] . '</span></li>';
           $output.= '<li>' . t('<strong>Name :</strong> <span>') . $final_view['name'] . '</span></li>';
@@ -975,10 +982,33 @@ function itg_ugc_view_content($unique_id) {
               $img_no++;
             }
           }
-          if (!empty($final_view['video'])) {
+            if (!empty($final_view['video'])) {
             $file = file_load($final_view['video']);
-            $output.= '<li>' . '<strong>Video :</strong><span> <a target="_blank" href="' . file_create_url($file->uri) . '">' . file_create_url($file->uri) . '</a></span></li>';
-          }
+            drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
+            $output.= '<li>' . '<strong>Video :</strong> </li>';
+           $output.='<div align="center" id="videoplayer_0"></div><script type="text/javascript">
+                                            jwplayer("videoplayer_0").setup({
+                                                playlist: [{
+                                                        title: "",
+                                                        image: "",
+                                                        sources: [
+                                                       
+                                                            {
+                                                                file: "'.file_create_url($file->uri).'"
+                                                            }]
+                                                    }],
+                                                primary: "flash",
+                                                width: "622",
+                                                height: "446",
+                                                aspectratio: "4:3",
+                                                "stretching": "exactfit",
+                                                androidhls: "true",
+                                                fallback: "false",
+
+                                            });</script>';
+            
+            
+            }
           if (!empty($final_view['audio'])) {
             $file = file_load($final_view['audio']);
             $output.= '<li>' . '<strong>Audio :</strong><span> <a target="_blank" href="' . file_create_url($file->uri) . '">' . file_create_url($file->uri) . '</a></span></li>';

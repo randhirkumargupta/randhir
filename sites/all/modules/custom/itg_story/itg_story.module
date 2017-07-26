@@ -403,7 +403,9 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
   // Code for redirection url validation
   if ($node->type == 'story') {
-
+    // code to copy long headline to short headline
+    $form_state['values']['field_story_short_headline'][LANGUAGE_NONE][0]['value'] = $form_state['input']['field_story_short_headline'][LANGUAGE_NONE][0]['value'];
+    // end here
     $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
     $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
     $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
