@@ -11090,8 +11090,8 @@ span.file a {
 }
 
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"] {
-  display: inline-block;
-  vertical-align: top;
+  /*  display: inline-block;
+    vertical-align: top;*/
 }
 
 .page-related-content {
