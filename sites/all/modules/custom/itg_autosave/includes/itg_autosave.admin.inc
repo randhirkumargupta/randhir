@@ -235,7 +235,10 @@ function itg_autosave_remove_empty($field_name_type) {
     return TRUE;
 }
 
-
+/**
+ * Function ise used to update content lock status
+ * @param $nid int
+ */ 
 function reset_autosave_lock($nid){
 	$itg_query = db_update('itg_autosave_node_data')
 				 ->fields(array(
