@@ -368,8 +368,8 @@ function itg_octopus_api_rundown_listing() {
   if (isset($current_rundown) && !empty($current_rundown)) {
     $query->condition('rund.type', $current_rundown, '=');
   }
-  
-  $query->orderBy('ios.id','DESC');
+
+  $query->orderBy('ios.id', 'DESC');
   $query->extend('PagerDefault')->limit(50);
 
 // p($query->__toString());
@@ -390,7 +390,7 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
-  
+
   foreach ($result as $row) {
     $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
@@ -418,10 +418,23 @@ function itg_octopus_api_rundown_listing() {
     );
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_form');
-
-  $output = render($itg_octopus_api_form);
+  $rundown_active_class = '';
+  $rfa_active_class = '';
+  if (isset($_GET['q']) && $_GET['q'] == 'rundown-listing') {
+    $rundown_active_class = 'active-trail';
+  }
+  elseif (isset($_GET['q']) && $_GET['q'] == 'rfa-dashboard') {
+    $rfa_active_class = 'active-trail';
+  }
+  $output = '<div class="content-block-menu">
+            <ul class="menu">
+           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
+           </ul>
+           </div>';
+  $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
-  $output .= '<div class="octopus-pagination"><span style="float:right;">Count('.count($rows).')</span></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
@@ -708,10 +721,10 @@ function itg_octopus_api_move_dump_server_to_s3() {
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
   global $base_url;
   $data = array();
- // $post_video_id = $_POST['id'];
+  // $post_video_id = $_POST['id'];
   $post_video_id = $_POST['id'];
   $video_path = $base_url . '/' . $post_video_id;
-  
+
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
 
   $conn_id = itg_octopus_api_ftp_connection_setup();
