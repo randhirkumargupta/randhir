@@ -234,6 +234,10 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/manmohan-economy [NC]  
 	RewriteCond %{REQUEST_URI} !/masala-world-cup [NC]  
 	RewriteCond %{REQUEST_URI} !/mms-same [NC]  
+	RewriteCond %{REQUEST_URI} !/mms-speech [NC]  
+	RewriteCond %{REQUEST_URI} !/modi-navratnas [NC]  
+	RewriteCond %{REQUEST_URI} !/moily [NC]  
+	RewriteCond %{REQUEST_URI} !/monsoontracker [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -466,6 +470,14 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^masala-world-cup/(.*) /staticpages/masala-world-cup/$1 [L]
 	RewriteRule ^mms-same$ /staticpages/mms-same/index.html? [L]
     RewriteRule ^mms-same/(.*) /staticpages/mms-same/$1 [L]
+	RewriteRule ^mms-speech$ /staticpages/mms-speech/index.html? [L]
+    RewriteRule ^mms-speech/(.*) /staticpages/mms-speech/$1 [L]
+	RewriteRule ^modi-navratnas$ /staticpages/modi-navratnas/index.html? [L]
+    RewriteRule ^modi-navratnas/(.*) /staticpages/modi-navratnas/$1 [L]
+	RewriteRule ^moily$ /staticpages/moily/index.html? [L]
+    RewriteRule ^moily/(.*) /staticpages/moily/$1 [L]
+	RewriteRule ^monsoontracker$ /staticpages/monsoontracker/index.html? [L]
+    RewriteRule ^monsoontracker/(.*) /staticpages/monsoontracker/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
