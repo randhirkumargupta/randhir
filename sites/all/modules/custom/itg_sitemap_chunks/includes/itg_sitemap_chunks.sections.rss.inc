@@ -276,7 +276,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
   }
   $query = db_select('node', 'n')->distinct();
   if (!empty($section_tid)) {
-    $query->leftJoin('itg_widget_order_section', 'wos', 'wos.nid=n.nid');
+    $query->leftJoin('itg_widget_order', 'wos', 'wos.nid=n.nid');
   }
   $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
