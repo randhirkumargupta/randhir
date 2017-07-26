@@ -208,4 +208,10 @@ jQuery('document').ready(function() {
 
     });
 
+
+    jQuery("body").on('click', '.remove-data', function() {
+        jQuery(this).parent().parent().remove();
+    });
+
+
 });
