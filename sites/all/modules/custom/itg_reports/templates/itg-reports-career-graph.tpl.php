@@ -68,7 +68,7 @@ foreach ($output as $key => $value) {
           text: ""
         },
         toolTip: {
-          content: '{graph_name}{movie_name},{y} cr in {x}',
+          content: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
         },
         axisX: {
           interval: 1,
