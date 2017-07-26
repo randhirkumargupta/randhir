@@ -2119,7 +2119,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -2208,7 +2208,7 @@ function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
  */
 function itg_videogallery_daily_motion_video_reset($form, $form_state) {
       $form_state['rebuild'] = FALSE;
-     // drupal_goto('daily-motion-video-dashboard');
+      drupal_goto('daily-motion-video-dashboard');
 }
 
 /*
@@ -2575,27 +2575,13 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
   if ($result[0]->property == VIDEO_PROPERTY) {
     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
         ->fields(array(
-          'dailymotion_published' => 1,
+          'dailymotion_published' => 0,
           'is_draft' => 0,
         ))
         ->condition('video_id', $result[0]->solr_video_id, '=')
         ->execute();
     itg_videogallery_update_video_info_solr($result[0]->solr_video_id);
-    $node = new stdClass();
-    $node->title = $result[0]->solr_video_id;
-    $node->type = "itg_delete_solr_video";
-    node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-    $node->language = LANGUAGE_NONE;
-    $node->uid = $user->uid;
-    $node->field_video_is_delete[LANGUAGE_NONE][0]['value'] = 1;
-    $node->status = 1; //(1 or 0): Published or not
-    $node->promote = 0; //(1 or 0): Promoted to front page
-    $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-    $getnode = itg_videogallery_get_node_by_title($result[0]->solr_video_id);
-    if (!empty($getnode)) {
-      $node->nid = $getnode[0]->nid;
-    }
-    node_save($node);
+    
   }
 }
 
