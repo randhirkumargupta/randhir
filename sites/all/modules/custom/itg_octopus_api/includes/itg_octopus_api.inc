@@ -314,7 +314,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'current';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown/listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown-listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
@@ -322,7 +322,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next1';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown/listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown-listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
@@ -330,7 +330,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next2';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown/listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
   if (empty($current_rundown))
@@ -390,9 +390,9 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
-
+  
   foreach ($result as $row) {
-    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown/listing');
+    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
@@ -421,6 +421,7 @@ function itg_octopus_api_rundown_listing() {
 
   $output = render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count('.count($rows).')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
@@ -848,7 +849,7 @@ function itg_octopus_file_video() {
         'slug_id' => $slug_id,
       );
       $octopus_ref = base64_encode(json_encode($oct_meta_info));
-      $return_url = $base_url . '/node/add/videogallery?destination=rundown/listing&octopus_ref=' . $octopus_ref;
+      $return_url = $base_url . '/node/add/videogallery?destination=rundown-listing&octopus_ref=' . $octopus_ref;
       print $return_url;
       drupal_exit();
     }

@@ -70,7 +70,7 @@ function itg_rfa_file_testing() {
   $rundown_id = 1223544;
   $source = 'This is source';
   $text = 'Hi this is for testing';
-  $created_date = REQUEST_TIME; 
+  $created_date = REQUEST_TIME;
   $created_by = 'Ishwar';
   $action = 'INSERT';
 
@@ -101,8 +101,8 @@ function itg_rfa_file_testing() {
       'action' => 'UPDATE',
     ),
   );
-  
-  
+
+
   $options = array(
     'method' => 'POST',
     'data' => http_build_query($data, '', '&'),
@@ -136,7 +136,7 @@ function itg_octopus_api_rfa_dashboard() {
 
   $header = array(
     array('data' => t('Sn.')),
-    array('data' => t('Rundown id')),
+    array('data' => t('RFA ID')),
     array('data' => t('Source')),
     array('data' => t('Text')),
     array('data' => t('Created Date')),
@@ -154,10 +154,17 @@ function itg_octopus_api_rfa_dashboard() {
   if (isset($_GET['source']) && !empty($_GET['source'])) { // source
     $query->condition('rfa.source', $_GET['source'], '=');
   }
+  
+   if (isset($_GET['rfaid']) && !empty($_GET['rfaid'])) { // rfaid
+    $query->condition('rfa.rundown_id', $_GET['rfaid'], '=');
+  }
+  
 
-  if (isset($_GET['text']) && !empty($_GET['text'])) { // source
+  if (isset($_GET['text']) && !empty($_GET['text'])) { // text
     $query->condition('rfa.text', $_GET['text'], '=');
   }
+  
+  
 
 
   $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
@@ -171,7 +178,7 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.created_date', strtotime($end_date), '<=');
   }
 
-  $query->orderBy('rfa.id','DESC'); 
+  $query->orderBy('rfa.id', 'DESC');
   $query->extend('PagerDefault')->limit(20);
 
   $result = $query->execute();
@@ -228,6 +235,15 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#weight' => 2,
   );
 
+  $form['rfaid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RFA Id'),
+    '#maxlength' => 255,
+    '#size' => 30,
+    '#default_value' => isset($_GET['rfaid']) ? $_GET['rfaid'] : '',
+    '#weight' => 2,
+  );
+
   $form['text'] = array(
     '#type' => 'textfield',
     '#title' => t('Text'),
@@ -264,7 +280,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('octopus-apply btn-small')),
     '#prefix' => '<div class = "octopus-filter-btn">',
-    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown/listing">Reset</a></div>',
+    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing">Reset</a></div>',
     '#weight' => 7,
   );
   return $form;
@@ -280,6 +296,7 @@ function itg_octopus_api_rfa_form_submit($form, &$form_state) {
     array(
       'query' => array(
         'source' => $form_state['input']['source'],
+        'rfaid' => $form_state['input']['rfaid'],
         'text' => $form_state['input']['text'],
         'start_date' => $form_state['input']['start_date']['date'],
         'end_date' => $form_state['input']['end_date']['date'],

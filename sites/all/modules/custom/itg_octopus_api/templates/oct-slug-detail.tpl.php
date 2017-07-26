@@ -18,9 +18,8 @@ global $base_url;
       <source src="http://125.19.34.234:7777/Proxy/Lowres/<?php print $result->clip_data[0]->clipobj_id; ?>.ogg" type="video/ogg">
       Your browser does not support the video tag.
     </video>
-  </div>
-
-  <?php
+    
+     <?php
   $get_video = 'block';
   $file_video = 'none';
   if (isset($result->dm_success) && !empty($result->dm_success)) {
@@ -38,6 +37,10 @@ global $base_url;
     ?>
     <a href="javascript:void(0);" class="file-video btn-submit btn-small" attribute_id ="<?php print $result->id; ?>" data="<?php print $result->clip_data[0]->clipobj_id . '.mov'; ?>">File Video Article</a>
   </div>
+    
+  </div>
+
+ 
    <div style="display:none;" class="video-process-bar-<?php print $result->id; ?>">
   </div>
 
