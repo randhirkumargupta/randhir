@@ -405,7 +405,7 @@ function itg_sitemap_print_section_rss($result) {
         $xml .= '<media:thumbnail url="' . $node_extra_small_image_url . '"/>' . "\r\n";
         $xml .= '<media:content medium="image" type="image/jpg" url="' . $node_extra_small_image_url . '"/>' . "\r\n";
         $xml .= '<media:copyright>' . t("© @copyright India Today Group. All Rights Reserved.", array("@copyright" => date('Y'))) . '</media:copyright>' . "\r\n";
-        $xml .= '<pubDate>' . $published_date . '</pubDate>' . "\r\n";
+        //$xml .= '<pubDate>' . $published_date . '</pubDate>' . "\r\n";
       } else if ($arg[0] == 'rss-video') {
         $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">' . "\r\n";
         $xml .= '<media:category scheme="' . $node_link . '">' . get_term_name_from_tid_for_report(itg_widget_get_primary_cat($data['nid'], 1)) . '</media:category>' . "\r\n";
