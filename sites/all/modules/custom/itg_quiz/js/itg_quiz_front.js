@@ -23,7 +23,7 @@
         });
       }
       
- //  js for quiz(lallan top)     
+     // js for quiz(lallan top)     
         $('.question-container .form-radio').on('click', function() {
         ansid = $(this).attr('id'); 
         
@@ -33,12 +33,14 @@
         var correct_ans = $("input[name='correct_answer"+ans_no[1]+"']").val();
         
         anslastid = res[2].substr(res[2].length - 1);
-        $('input[name='+$(this).attr('name')+']').attr('readonly', 'true');
+        $('input[name='+$(this).attr('name')+']').attr('readonly', 'true').next().css('pointer-events', 'none');
         $(this).parent().parent().parent().parent().find('.answer-container-actual').html('');
 
          var qnid = $("input[name='nid']").val();
             if ($(this).is(':checked')) {
-                var ans_val= $(this).val();
+                var ans_val = $(this).val();
+                var ans_val_id = $(this).attr('name');
+                
                 jQuery.ajax({      
                     method:"post",
                     data: {nid:qnid, ans_val:ans_val, correct_ans:correct_ans},
@@ -52,6 +54,7 @@
                         else{
                           cls  = "incorrect-ans";
                         }
+                        console.log(ansvalue); 
                         $('#answer-container-'+anslastid+' .answer-container-actual').html("<div class='" + cls + "'>" + ansvalue[1] + " !</div><strong>" + ansvalue[0] + "</strong>");
                     }
                });        
@@ -59,10 +62,10 @@
       
   });
  
- //multi answer
+   //multi answer
    $('body').on('click', '#show_answer', function() {
       buttonClass = $(this).attr('class');
-      $(this).closest('.answer-container').find('.form-checkbox').attr('readonly', true);
+      $(this).closest('.answer-container').find('.form-checkbox').attr('readonly', true).next().css('pointer-events', 'none');
       var qnid = $("input[name='nid']").val();
       var ans_class = $(this).attr('class');      
       var correct_ans = $("input[name='correct_"+ans_class+"']").val();
@@ -92,7 +95,7 @@
       return false;
     });
     
-//    chnage position of show answer button
+   // chnage position of show answer button
       var prthis;
       jQuery('.question-container').each(function () {
         prthis = jQuery(this).find('.answer-container');        
