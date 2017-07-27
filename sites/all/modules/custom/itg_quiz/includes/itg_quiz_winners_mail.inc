@@ -8,9 +8,9 @@ function itg_quiz_winners_mail_list() {
   $user_email = itg_quiz_winners_user_list($nid);
   
   foreach ($user_email as $key => $value) {
-    $user_alt_mail = itg_get_user_alt_email($value['uid']);
-    watchdog('quiz_winner_email_id', $user_alt_mail);
-    if ((strpos($value['user_email'], '@twitter.com') !== false || strpos($value['user_email'], '@facebook.com') !== false) && !empty($user_alt_mail)) {
+    if ((strpos($value['user_email'], '@twitter.com') !== false || strpos($value['user_email'], '@facebook.com') !== false)) {
+     $user_alt_mail = itg_get_user_alt_email($value['uid']);
+     watchdog('quiz_winner_email_id', $user_alt_mail); 
      $user_email_arr[] = $user_alt_mail;
     }
     else {
