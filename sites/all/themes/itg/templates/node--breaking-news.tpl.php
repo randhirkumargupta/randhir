@@ -11,6 +11,7 @@ $share_page_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
+$source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 ?>
  
 <?php
@@ -181,7 +182,10 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
       foreach ($node->field_breaking_content_details['und'] as $blog_item) {
         $field_collection_ids[] = $blog_item['value'];
       }
+      
+      if($source_type != 'migrated') {
       rsort($field_collection_ids);
+      }
 
       foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
