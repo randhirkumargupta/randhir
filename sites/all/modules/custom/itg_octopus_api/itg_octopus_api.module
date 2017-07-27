@@ -299,10 +299,12 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'breaking_news_node_form' && !empty($_GET['octopus_ref'])) {
     $octopus_ref_id = base64_decode($_GET['octopus_ref']);
     $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
-
     $form['title']['#default_value'] = $rfa_object->source;
-    $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
+    //$form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
     $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
+   // $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->text;
+    $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->text;
+   // p($form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE]['value']);
   }
 }
 
@@ -492,7 +494,7 @@ function itg_octopus_api_check_exist_file_browse($filename, $file_size) {
   $path_info = pathinfo($filename);
   $extension = $path_info['extension'];
   if (isset($extension) && ($extension == 'mov' || $extension == 'mp4')) {
-    $uri = 'public://dailymotion_video_dir/' . time().$filename;
+    $uri = 'public://dailymotion_video_dir/' . time() . $filename;
     $fid = db_insert('file_managed')
         ->fields(array(
           'uid' => $user->uid,
@@ -571,23 +573,24 @@ function itg_octopus_rfa_detail($id) {
   $slug_data = reset($result);
   return $slug_data;
 }
+
 /**
  * Checking whether video URL is accessable or not
  * @param type $url
  * @return boolean
  */
+function itg_octopus_api_is_url_exist($url) {
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_NOBODY, true);
+  curl_exec($ch);
+  $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-function itg_octopus_api_is_url_exist($url){
-    $ch = curl_init($url);    
-    curl_setopt($ch, CURLOPT_NOBODY, true);
-    curl_exec($ch);
-    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    if($code == 200){
-       $status = true;
-    }else{
-      $status = false;
-    }
-    curl_close($ch);
-   return $status;
+  if ($code == 200) {
+    $status = true;
+  }
+  else {
+    $status = false;
+  }
+  curl_close($ch);
+  return $status;
 }
