@@ -187,8 +187,10 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         $entity = entity_load('field_collection_item', array($field_collection_id));
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']);
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
-        $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
-        $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
+        //$pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
         $pub_time2 = str_replace(":", "", $pub_time);
         $current_time = str_replace(":", "", date('H:i'));
         if (!empty($entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value'])) {

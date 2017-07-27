@@ -1275,7 +1275,7 @@ function itg_videogallery_after_build($form, &$form_state) {
 
         if (arg(1) == 'ajax' && $form_state['values']['nid'] > 0) {
           if ($video_fid == "" || $video_fid == 0) {
-            unset($form['field_video_upload']['und'][$delta]);
+            //unset($form['field_video_upload']['und'][$delta]);
           }
         }
       }
@@ -1311,7 +1311,8 @@ function itg_videogallery_after_build($form, &$form_state) {
           $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
           $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
           if (empty($file_exist) || $video_fid < 1) {
-            unset($form['field_video_upload']['und'][$delta]);
+            $form['field_video_upload']['und'][$delta]['#access'] = FALSE;
+           // unset($form['field_video_upload']['und'][$delta]);
           }
         }
       }
