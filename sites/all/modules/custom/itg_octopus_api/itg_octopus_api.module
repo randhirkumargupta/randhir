@@ -122,7 +122,7 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-  $items['itg-rfa-file-live-blog'] = array(
+  $items['itg-rfa-file'] = array(
     'page callback' => 'itg_rfa_file_live_blog',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
