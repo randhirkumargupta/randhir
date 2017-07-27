@@ -241,6 +241,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/most-explosive-mamata-missiles [NC]  
 	RewriteCond %{REQUEST_URI} !/nokia [NC]  
 	RewriteCond %{REQUEST_URI} !/one-min-twictionary [NC]  
+	RewriteCond %{REQUEST_URI} !/oscar-winners [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -487,6 +488,8 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^nokia/(.*) /staticpages/nokia/$1 [L]
 	RewriteRule ^one-min-twictionary$ /staticpages/one-min-twictionary/index.html? [L]
     RewriteRule ^one-min-twictionary/(.*) /staticpages/one-min-twictionary/$1 [L]
+	RewriteRule ^oscar-winners$ /staticpages/oscar-winners/index.html? [L]
+    RewriteRule ^oscar-winners/(.*) /staticpages/oscar-winners/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
