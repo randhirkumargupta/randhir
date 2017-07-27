@@ -14735,6 +14735,19 @@ span.close_btt {
   margin-top: 20px;
 }
 
+.canvasjs-chart-tooltip {
+  max-width: 180px;
+  background: #fff;
+  word-wrap: break-word;
+}
+.canvasjs-chart-tooltip > div {
+  white-space: normal !important;
+}
+.canvasjs-chart-tooltip > div img {
+  display: block;
+  margin-top: 5px;
+}
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share {
