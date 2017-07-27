@@ -761,7 +761,7 @@ function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  * @param int $nid
  * @param string $title
  */
-function itg_ugc_node_status_update($nid, $title) {
+function itg_ugc_node_status_update($nid, $title, $type = NULL) {
   global $user;
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -790,8 +790,10 @@ function itg_ugc_node_status_update($nid, $title) {
     $people->update(array("unid" => (int) $nid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
+    if($type != 'videogallery') {
     drupal_set_message(t($ugc_content_details['title'] . ' has been Published successfully.'));
     drupal_goto('ugc-inqueue-content');
+    }
   }
   else {
     $pid = new MongoId($nid);
@@ -800,8 +802,10 @@ function itg_ugc_node_status_update($nid, $title) {
     $people->update(array("_id" => $pid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Rejected', $to);
+    if($type != 'videogallery') {
     drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
     drupal_goto('ugc-inqueue-content');
+    }
   }
 }
 
@@ -894,7 +898,7 @@ function itg_ugc_node_insert($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      itg_ugc_node_status_update($source_id, $title);
+      itg_ugc_node_status_update($source_id, $title, $node->type);
     }
   }
 }
