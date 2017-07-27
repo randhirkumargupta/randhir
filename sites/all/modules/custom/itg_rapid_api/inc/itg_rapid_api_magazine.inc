@@ -292,10 +292,13 @@ function magazineCoverstoriesPageRerourceValueList() {
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
-        $issueid = $resvalue['nid'];
-        $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
-        $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+    //issue node 
+    $issueid = $resvalue['nid'];
+    $node_data = node_load($issueid);
+    $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
+    $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
+    $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
+    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
         $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
         $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
