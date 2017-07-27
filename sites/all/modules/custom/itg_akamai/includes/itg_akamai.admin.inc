@@ -532,7 +532,7 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
   $qry->condition('n.type', $akamai_config_cctype_type);
   $qry->condition('n.status', 1);
   $qry->fields('n', array('nid'));
-  $qry->orderBy('n.nid', 'DESC');
+  $qry->orderBy('n.updated', 'DESC');
   $qry->range(0, $akamai_config_cctype_flag);
   $res = $qry->execute();
 
