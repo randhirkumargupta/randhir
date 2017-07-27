@@ -242,6 +242,9 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/nokia [NC]  
 	RewriteCond %{REQUEST_URI} !/one-min-twictionary [NC]  
 	RewriteCond %{REQUEST_URI} !/oscar-winners [NC]  
+	RewriteCond %{REQUEST_URI} !/pledgewithCM [NC]  
+	RewriteCond %{REQUEST_URI} !/presidential-polls [NC]  
+	RewriteCond %{REQUEST_URI} !/psu [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -490,6 +493,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^one-min-twictionary/(.*) /staticpages/one-min-twictionary/$1 [L]
 	RewriteRule ^oscar-winners$ /staticpages/oscar-winners/index.html? [L]
     RewriteRule ^oscar-winners/(.*) /staticpages/oscar-winners/$1 [L]
+	RewriteRule ^pledgewithCM$ /staticpages/pledgewithCM/index.html? [L]
+    RewriteRule ^pledgewithCM/(.*) /staticpages/pledgewithCM/$1 [L]
+	RewriteRule ^psu$ /staticpages/psu/index.html? [L]
+    RewriteRule ^psu/(.*) /staticpages/psu/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
