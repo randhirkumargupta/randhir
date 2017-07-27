@@ -171,8 +171,6 @@ function get_content_id_for_syndication($data, $created_date) {
   //} 
 
   $itg_result = $itg_query->execute()->fetchAll();
- // pr($data);
-  //pr($itg_result);
   foreach ($itg_result as $itg_val) {
     $content_id[] = $itg_val->nid;
     $contentid .= $itg_val->nid . ',';
@@ -188,10 +186,11 @@ function get_content_id_for_syndication($data, $created_date) {
     'fid' => $data['fid'],
     'section_id' => $data['section_id'],
     'syndication' => serialize($content_id),
+    'frequency' => strtolower($data['frequency']),
   );
   $file_path = feed_generator_of_contents($data_array);
   $file_url = $file_path['file_path'];
-  watchdog("Syndication", "File url : $file_url");
+  watchdog("syndication_file_url", "File url : $file_url");
 
   return $file_url;
 }
