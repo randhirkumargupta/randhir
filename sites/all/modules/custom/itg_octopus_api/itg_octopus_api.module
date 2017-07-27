@@ -571,8 +571,23 @@ function itg_octopus_rfa_detail($id) {
   $slug_data = reset($result);
   return $slug_data;
 }
+/**
+ * Checking whether video URL is accessable or not
+ * @param type $url
+ * @return boolean
+ */
 
-function ttttttttttttttttttttt() {
-//  module_load_include('inc', 'itg_octopus_api', 'includes/itg_octopus_api');
-//  itg_octopus_api_move_dump_server_to_s3();
+function itg_octopus_api_is_url_exist($url){
+    $ch = curl_init($url);    
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if($code == 200){
+       $status = true;
+    }else{
+      $status = false;
+    }
+    curl_close($ch);
+   return $status;
 }

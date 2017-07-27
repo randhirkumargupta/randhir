@@ -1,6 +1,6 @@
 <?php
 global $base_url;
-$file_success_play = file_get_contents('http://125.19.34.234:7777/Proxy/Lowres/' . $result->clip_data[0]->clipobj_id . '.mp4');
+$file_success_play = itg_octopus_api_is_url_exist('http://125.19.34.234:7777/Proxy/Lowres/' . $result->clip_data[0]->clipobj_id . '.mp4');
 ?>
 <a class="remove-data" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>
 <div class="slug-details">
