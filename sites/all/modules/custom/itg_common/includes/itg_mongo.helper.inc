@@ -169,7 +169,7 @@ function itg_common_mongo_activity_count($nid, $collection) {
 }
 
 /**
- * Get count value by passing nid.
+ * Get share count value by passing nid.
  * @param int $nid
  * @param string $activity
  * @param string $collection
