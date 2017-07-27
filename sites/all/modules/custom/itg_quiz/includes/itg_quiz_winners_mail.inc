@@ -8,7 +8,15 @@ function itg_quiz_winners_mail_list() {
   $user_email = itg_quiz_winners_user_list($nid);
   
   foreach ($user_email as $key => $value) {
-    $user_email_arr[] = $value['user_email'];
+    $user_alt_mail = itg_get_user_alt_email($value['uid']);
+    watchdog('quiz_winner_email_id', $user_alt_mail);
+    if ((strpos($value['user_email'], '@twitter.com') !== false || strpos($value['user_email'], '@facebook.com') !== false) && !empty($user_alt_mail)) {
+     $user_email_arr[] = $user_alt_mail;
+    }
+    else {
+      $user_email_arr[] = $value['user_email'];
+    }
+    //$user_email_arr[] = $value['user_email'];
   }
   $user_email_arr_unique = array_unique($user_email_arr);
   $user_email_str = implode(',',$user_email_arr_unique);
@@ -61,6 +69,7 @@ function itg_quiz_winners_user_list($nid, $no_of_winners = NULL) {
     $user_rec[$i]['user_email'] = $user_email_list['user_email'];
     $user_rec[$i]['user_name'] = $user_email_list['user_name'];
     $user_rec[$i]['quiz_score'] = $user_email_list['quiz_score'];
+    $user_rec[$i]['uid'] = $user_email_list['uid'];
     $i++;
   }
 
