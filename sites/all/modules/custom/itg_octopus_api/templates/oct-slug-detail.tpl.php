@@ -9,9 +9,9 @@ $file_success_play = itg_octopus_api_is_url_exist('http://125.19.34.234:7777/Pro
     <li><strong>Category: </strong>  <span><?php print $result->category ?></span></li>
     <li><strong>Video Created By: </strong> <span><?php print $result->story_created_by ?></span></li>
     <li><strong>Video Modified By: </strong> <span><?php print $result->story_modified_by ?></span></li>
-    <li><strong>Video Description </strong> <span><?php print itg_octopus_api_remove_cdata($result->text); ?></span></li>
-    <li><strong>Created Date & Time</strong> <span> <?php print $result->story_created; ?></span></li>
-    <li><strong>Modified Date & Time</strong> <span><?php print $result->story_modified; ?></span></li>
+    <li><strong>Video Description:  </strong> <span><?php print itg_octopus_api_remove_cdata($result->text); ?></span></li>
+    <li><strong>Created Date & Time: </strong> <span> <?php print $result->story_created; ?></span></li>
+    <li><strong>Modified Date & Time: </strong> <span><?php print $result->story_modified; ?></span></li>
   </ul>
 
   <div class="slug-video">
@@ -19,13 +19,13 @@ $file_success_play = itg_octopus_api_is_url_exist('http://125.19.34.234:7777/Pro
       <video width="320" height="240" controls>
         <source src="http://125.19.34.234:7777/Proxy/Lowres/<?php print $result->clip_data[0]->clipobj_id; ?>.mp4" type="video/mp4">
         <source src="http://125.19.34.234:7777/Proxy/Lowres/<?php print $result->clip_data[0]->clipobj_id; ?>.ogg" type="video/ogg">
-        Your browser does not support the video tag.
+        <span style="color:red;">Your browser does not support the video tag.</span>
       </video>
       <?php
     }
     else {
 
-      print "Video preview is not available";
+      print '<span style="color:red;">Video preview is not available</span>';
     }
     ?>    
     <?php
