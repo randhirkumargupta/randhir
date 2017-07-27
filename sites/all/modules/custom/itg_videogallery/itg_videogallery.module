@@ -848,6 +848,11 @@ function itg_videogallery_node_insert($node) {
         break;
     }
   }
+  
+  if($node->field_story_source_type[LANGUAGE_NONE][0]['value']=='UGC'){
+     $_REQUEST['destination'] = 'ugc-inqueue-content';  
+  }
+  
 }
 
 /**
@@ -2752,16 +2757,13 @@ function itg_videogallery_thumb_url() {
     $node->promote = 0; //(1 or 0): Promoted to front page
     $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
     $video_exist_innode = itg_videogallery_get_video_solrcontent($val->video_id);
-
     if (!empty($video_exist_innode)) {
       $node->nid = $video_exist_innode[0]->nid;
       node_save($node);
     }
     node_save($node);
   }
-
   itg_videogallery_publish_node_after_video_ready_by_dm();
-
   itg_videogallery_remove_video_with_child();
 // Here deleted video
 // This crone use for remove video if parent site remove this video from video article
@@ -2827,7 +2829,6 @@ function itg_videogallery_get_video_solrcontent($video_id = null) {
  * This function check video id insert in solr video content
  */
 function itg_videogallery_get_node_by_title($title = null) {
-
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));
   $query->condition('title', $title, '=');
