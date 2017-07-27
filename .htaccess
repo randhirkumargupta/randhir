@@ -238,6 +238,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/modi-navratnas [NC]  
 	RewriteCond %{REQUEST_URI} !/moily [NC]  
 	RewriteCond %{REQUEST_URI} !/monsoontracker [NC]  
+	RewriteCond %{REQUEST_URI} !/most-explosive-mamata-missiles [NC]  
+	RewriteCond %{REQUEST_URI} !/nokia [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -478,6 +480,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^moily/(.*) /staticpages/moily/$1 [L]
 	RewriteRule ^monsoontracker$ /staticpages/monsoontracker/index.html? [L]
     RewriteRule ^monsoontracker/(.*) /staticpages/monsoontracker/$1 [L]
+	RewriteRule ^most-explosive-mamata-missiles$ /staticpages/most-explosive-mamata-missiles/index.html? [L]
+    RewriteRule ^most-explosive-mamata-missiles/(.*) /staticpages/most-explosive-mamata-missiles/$1 [L]
+	RewriteRule ^nokia$ /staticpages/nokia/index.html? [L]
+    RewriteRule ^nokia/(.*) /staticpages/nokia/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
