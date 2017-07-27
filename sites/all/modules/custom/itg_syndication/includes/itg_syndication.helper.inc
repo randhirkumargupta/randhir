@@ -161,7 +161,7 @@ function get_content_id_for_syndication($data, $created_date) {
   $itg_query->condition('n.created', $created_date, '>');
   $itg_query->condition('n.type', $data['content_type']);
   $itg_query->condition('syndication.field_story_syndication_value', 'Yes');
-  $itg_query->condition('cat.field_story_category_tid', $data['section_id'], 'IN'); //for multi section
+  $itg_query->condition('cat.field_story_category_tid', $data['section_id']); //for multi section
 
   $delivery_mode_array = explode(': ', $data['delivery_mode']);
   //if ($delivery_mode_array[0] == 'Weburl') {
@@ -171,7 +171,8 @@ function get_content_id_for_syndication($data, $created_date) {
   //} 
 
   $itg_result = $itg_query->execute()->fetchAll();
-
+ // pr($data);
+  //pr($itg_result);
   foreach ($itg_result as $itg_val) {
     $content_id[] = $itg_val->nid;
     $contentid .= $itg_val->nid . ',';
@@ -188,7 +189,6 @@ function get_content_id_for_syndication($data, $created_date) {
     'section_id' => $data['section_id'],
     'syndication' => serialize($content_id),
   );
-
   $file_path = feed_generator_of_contents($data_array);
   $file_url = $file_path['file_path'];
   watchdog("Syndication", "File url : $file_url");
@@ -206,10 +206,7 @@ function save_cron_details_of_syndication($node) {
 
     $field_collection_item = entity_load('field_collection_item', array($val['value']));
     //add code for multi section
-    $section_array = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE];
-    foreach ($section_array as $section_key => $section_val) {
-      $section_id[] = $section_val['tid'];
-    }
+    $section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
     //end
 
     $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
