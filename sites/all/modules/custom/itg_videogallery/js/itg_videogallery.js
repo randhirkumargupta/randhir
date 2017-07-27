@@ -77,10 +77,6 @@
                         $("input[name='field_video_upload[und][" + i + "][field_videogallery_video_upload][und][0][fid]']").parents(".draggable").hide();
                     }
                 }
-
-
-
-
                 $('.draggable td:nth-child(3)').each(function () {
                     if ($(this).html() == "") {
                         $(this).parent('.draggable').remove();
