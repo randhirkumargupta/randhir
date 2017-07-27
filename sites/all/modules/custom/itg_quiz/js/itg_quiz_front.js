@@ -4,8 +4,8 @@
 
 (function($) {
   Drupal.behaviors.itg_quiz_front = {
-    attach: function() {
-
+    attach: function(context, settings) {
+      var immediate_result_val = settings.itg_quiz.settings.immediate_result;
       // Hide title form take quiz page
       var quizStr = $(location).attr('href');
       if (quizStr.indexOf("itg-quiz") > 0) {
@@ -23,7 +23,9 @@
         });
       }
       
-     // js for quiz(lallan top)     
+     // js for quiz(lallan top)
+     
+     if (immediate_result_val == 'qwr') {
         $('.question-container .form-radio').on('click', function() {
         ansid = $(this).attr('id'); 
         
@@ -60,7 +62,8 @@
                });        
             }    
       
-  });
+    });
+  }
  
    //multi answer
    $('body').on('click', '#show_answer', function() {
