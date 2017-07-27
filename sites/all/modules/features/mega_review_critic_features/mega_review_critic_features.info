@@ -1,7 +1,7 @@
 name = Mega Review & Critic Features
 core = 7.x
 package = Features
-version = 7.x-1.1-beta7
+version = 7.x-1.1-beta9
 dependencies[] = features_for_story
 dependencies[] = field_collection_fieldset
 dependencies[] = field_group
@@ -53,6 +53,7 @@ features[field_instance][] = node-itg_celebrity_profile-field_reporter_email_id
 features[field_instance][] = node-itg_celebrity_profile-field_reporter_twitter_handle
 features[field_instance][] = node-itg_celebrity_profile-field_user_picture
 features[field_instance][] = node-mega_review_critic-field_associate_photo_gallery
+features[field_instance][] = node-mega_review_critic-field_itg_content_publish_date
 features[field_instance][] = node-mega_review_critic-field_mega_review_career_graph
 features[field_instance][] = node-mega_review_critic-field_mega_review_cast
 features[field_instance][] = node-mega_review_critic-field_mega_review_director

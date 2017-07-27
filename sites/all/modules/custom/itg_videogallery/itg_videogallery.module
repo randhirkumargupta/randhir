@@ -988,6 +988,7 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   }
 
   $video_desc = itg_videogallery_clean_string($video_desc);
+  $video_title =  itg_videogallery_clean_string($video_title);
   $api = itg_videogallery_dailymotion_api();
 
 // Tags assign to node and thumbnail
@@ -1238,8 +1239,11 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     form_set_error('field_video_upload', t("Please Remove Migrated Video Url."));
   }
   if ($is_migrate_validate == 0) {
+    if( $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'UGC') {
     $form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] = "videogallery";
-  }
+    }
+    
+    }
 }
 
 /**
@@ -1271,7 +1275,7 @@ function itg_videogallery_after_build($form, &$form_state) {
 
         if (arg(1) == 'ajax' && $form_state['values']['nid'] > 0) {
           if ($video_fid == "" || $video_fid == 0) {
-            unset($form['field_video_upload']['und'][$delta]);
+            //unset($form['field_video_upload']['und'][$delta]);
           }
         }
       }
@@ -1307,7 +1311,8 @@ function itg_videogallery_after_build($form, &$form_state) {
           $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
           $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
           if (empty($file_exist) || $video_fid < 1) {
-            unset($form['field_video_upload']['und'][$delta]);
+            $form['field_video_upload']['und'][$delta]['#access'] = FALSE;
+           // unset($form['field_video_upload']['und'][$delta]);
           }
         }
       }
@@ -2326,7 +2331,7 @@ function daily_motion_video_dashboard_rows() {
       }
 
       if ($record->encoding_progress == '100' && $record->publishing_progress == '100') {
-        if (in_array($record->video_id, $all_used_video)) {
+        if ($record->is_draft) {
           $status_flag = '<span class="under-precess">Draft</span>';
           $delete_link = "";
         }
@@ -2591,6 +2596,7 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_presave($node) {
+
 //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;

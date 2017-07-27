@@ -147,12 +147,14 @@ function itg_quiz_theme() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'quiz_node_form') {
-      
+      unset($form['field_survey_category']);//hide section
       // Set Destination
       $destination = 'manage-quiz';
-     
+    drupal_add_js("jQuery(document).ready(function(){ 
+                    jQuery('#tab-quiz-publish-unpublish').hide();
+                 });", 'inline');
       // Form fields treatment
-      $form['title']['#title'] = 'Quiz Title';
+      $form['title']['#title'] = t('Quiz Title');
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
       $form['actions']['submit']['#value'] = t('Publish');
       $form['actions']['cancel'] = array(

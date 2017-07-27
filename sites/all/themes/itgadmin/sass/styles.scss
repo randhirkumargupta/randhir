@@ -2338,9 +2338,28 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.node-ugc-form{
-  .form-actions{
-    .form-submit{
+[id*="itg-ugc-inqueue-form"]{
+  .form-type-textfield, .form-type-select{
+    padding: 0 10px 0 0;
+    margin: 10px 0;
+    float: left;
+    input[type="text"], select{
+      width: 100%;
+    }
+    > label{
+      float: none;
+      display: block;
+    }
+    .user-log-filter-btn{
+      float: left;
+      margin-top: 38px;
+      .form-submit{
+        @extend .btn-small;
+      }
+      .user-log-reset{
+        @extend .btn-reset;
+        @extend .btn-small;
+      }
     }
   }
 }
@@ -10418,8 +10437,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   height: 45px;
 }
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"]{
-  display: inline-block;
-  vertical-align: top;
+/*  display: inline-block;
+  vertical-align: top;*/
 }
 .page-related-content{
   background-color: #fff;

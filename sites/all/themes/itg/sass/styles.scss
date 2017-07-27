@@ -4614,6 +4614,9 @@ h1.category-heading{
             @extend .list-none;
         }        
         .itg-search-list{
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
           padding: 25px 0;
           + li{
             border-top: 1px solid #ddd;
@@ -4622,7 +4625,7 @@ h1.category-heading{
             width: 144px;
             float: left;
           }
-          > .views-field-label, > .search-detail{
+          > .views-field-label, > .search-detail, > .other-info{
             padding-left: 154px;
           }
           .views-field-label{
@@ -11962,6 +11965,18 @@ span.close_btt {
         }
       }
       & + iframe{margin-top: 20px;}
+    }
+  }
+}
+.canvasjs-chart-tooltip {
+  max-width: 180px;
+  background: #fff;
+  word-wrap: break-word;
+  > div {
+    white-space: normal !important;
+    img{
+      display: block;
+      margin-top: 5px;
     }
   }
 }

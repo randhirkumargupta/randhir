@@ -2769,6 +2769,9 @@
   /*Archive story page*/
   /*Archive story page End*/
   .view-archive-story .view-content .itg-search-list {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
     padding: 25px 0;
   }
   .view-archive-story .view-content .itg-search-list + li {
@@ -2778,7 +2781,7 @@
     width: 170px;
     float: left;
   }
-  .view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail {
+  .view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail, .view-archive-story .view-content .itg-search-list > .other-info {
     padding-left: 180px;
   }
   .view-archive-story .view-content .itg-search-list .views-field-label h2 {

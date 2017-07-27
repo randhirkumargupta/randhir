@@ -226,6 +226,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $mongo_details['title'];
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['title'];
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $mongo_details['unid'];
+      $form['field_story_expert_description'][LANGUAGE_NONE][0]['#default_value'] = $mongo_details['description'];
       if ($user->uid != 1) {
         $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
         $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
@@ -240,15 +241,17 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
-        $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
-        $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
+       // $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
+       // $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }
       // assign value in first field collection item
       foreach ($form['field_video_upload']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
           // assign value in first field collection item
           $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_videogallery_video_upload'][LANGUAGE_NONE][0]['#default_value']['fid'] = $mongo_details['video'];
-        }
+          $form['field_video_upload'][LANGUAGE_NONE][$delta]['field_video_title'][LANGUAGE_NONE][0]['value']['#default_value']= $mongo_details['title'];
+
+          }
       }
     }
 
@@ -329,6 +332,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
+    $form['field_story_client_title']['#access'] = FALSE;
     $form['field_ugc_photo_image']['und']['#file_upload_title'] = t('');
     $form['field_user_name'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Name'));
     $form['field_user_email'][LANGUAGE_NONE][0]['value']['#attributes'] = array('placeholder' => t('Email'));

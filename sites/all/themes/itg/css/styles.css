@@ -6294,6 +6294,9 @@ h1.category-heading {
 
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   padding: 25px 0;
 }
 .view-archive-story .view-content .itg-search-list + li {
@@ -6303,7 +6306,7 @@ h1.category-heading {
   width: 144px;
   float: left;
 }
-.view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail {
+.view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail, .view-archive-story .view-content .itg-search-list > .other-info {
   padding-left: 154px;
 }
 .view-archive-story .view-content .itg-search-list .views-field-label h2 {
@@ -14730,6 +14733,19 @@ span.close_btt {
 }
 .story-section .story-right .description .itgvideo > iframe + iframe {
   margin-top: 20px;
+}
+
+.canvasjs-chart-tooltip {
+  max-width: 180px;
+  background: #fff;
+  word-wrap: break-word;
+}
+.canvasjs-chart-tooltip > div {
+  white-space: normal !important;
+}
+.canvasjs-chart-tooltip > div img {
+  display: block;
+  margin-top: 5px;
 }
 
 @media (min-width: 320px) {
