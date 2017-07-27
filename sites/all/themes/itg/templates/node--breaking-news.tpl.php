@@ -27,7 +27,7 @@ $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
 $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('h:i:s', $node->created);
 $coverage_start_date = $blog_created_date.'T'.$blog_created_time;
-
+$short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('h:i:s', $coverage_end);
@@ -37,7 +37,7 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
     <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
     <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
     <meta itemprop="url" content="<?php print $embed_path; ?>">
-    <meta itemprop="description" content="<?php print $node->field_common_short_description[LANGUAGE_NONE][0]['value']; ?>">
+    <meta itemprop="description" content="<?php print $short_description_source; ?>">
     <div class="bolg-content" id="bolgcontent">    
 <?php
   if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
@@ -162,8 +162,10 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
       <?php
       $h_count = 1;
       foreach ($node->field_story_highlights['und'] as $high) {
+        if($high['value'] != '<br/>') {
         print '<li>' . $high['value'] . '</li>';
         $h_count++;
+        }
       }
       ?>
 
@@ -200,11 +202,11 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         else {
           $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
         }
-        if ($pub_time2 < $current_time) {
+        //if ($pub_time2 < $current_time) {
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($field_collection_ids) . '"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
           $breaking_output .= '<div class="breaking-discription">' . $redirection_url . '</div><div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a title="share on facebook" onclick="fbpop(' . "'" . $share_page_link . "'" . ', ' . "'" . $fb_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick="twitter_popup(' . "'" . urlencode($fb_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $share_page_link . "'" . ')" class="user-activity google def-cur-pointer"></a></li></ul></div>';
           $breaking_output .= '</div></div>';
-        }
+        //}
       }
       $breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
       print $breaking_output;
