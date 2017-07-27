@@ -263,9 +263,9 @@ function itg_survey_node_presave($node) {
    * '1' for publish and '2' for unpublish
    */
 
+  //p($node->type);
   
-  
-  if ($node->type == 'survey') {
+  if ($node->type == 'survey' || $node->type == 'quiz') {
     if ($node->op == 'Publish') {
       $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
     }
