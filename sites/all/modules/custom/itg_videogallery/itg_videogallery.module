@@ -2344,6 +2344,10 @@ function daily_motion_video_dashboard_rows() {
         }
       }
     }
+    if ($record->is_draft==1) {
+          $status_flag = '<span class="under-precess">Draft</span>';
+          $delete_link = "";
+        }
     if ($record->dailymotion_published == 1) {
       $video_status = 'Published';
     }
