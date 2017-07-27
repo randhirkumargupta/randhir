@@ -120,14 +120,23 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     natcasesort($op); // Sorting section array or category array by it value
 
     $op = array("_none" => "Select Section") + $op;
-    
+
     // assign array value to taxonomy field
     $form['field_section']['#title'] = array('All' => '- Any -');
     $form['field_section']['und']['#options'] = $op;
 
     // Add destination and cancel button in add Breaking News form page
     $form['field_publish_time'][LANGUAGE_NONE][0]['value']['date']['#disabled'] = TRUE;
-    $destination = 'breaking-news';
+    
+    // Setting default destination
+    if (isset($_GET['destination'])) {
+      $destination = $_GET['destination'];
+    }
+    else {
+      $destination = 'breaking-news';
+    }
+
+
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
       '#weight' => 21,
@@ -167,13 +176,13 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
-     // Hide/show coverage field based on type
+    // Hide/show coverage field based on type
     $form['field_breaking_coverage_end_time']['#states'] = array(
       'visible' => array(
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
-    
+
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
@@ -321,11 +330,11 @@ function itg_breaking_news_menu_breadcrumb_alter(&$active_trail, $item) {
  * {@inheritdoc}
  */
 function itg_breaking_news_node_presave($node) {
-    //set custom path alias  
+  //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
-  
+
   if ($node->type == 'breaking_news') {
     $type = $node->field_type[LANGUAGE_NONE][0]['value'];
     if ($type == 'Live Blog') {

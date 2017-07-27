@@ -575,6 +575,65 @@ function mega_review_critic_features_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-mega_review_critic-field_itg_content_publish_date'.
+  $field_instances['node-mega_review_critic-field_itg_content_publish_date'] = array(
+    'bundle' => 'mega_review_critic',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_itg_content_publish_date',
+    'label' => 'Content Publish date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 26,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-mega_review_critic-field_mega_review_career_graph'.
   $field_instances['node-mega_review_critic-field_mega_review_career_graph'] = array(
     'bundle' => 'mega_review_critic',
@@ -1548,6 +1607,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Associate Video');
   t('Career Graph');
   t('Cast');
+  t('Content Publish date');
   t('Description');
   t('Director');
   t('Email id');

@@ -312,8 +312,7 @@
     <div class="photos-videos-wrapper">
         <!-- Print video -->
         <?php $asso_photo_gallery = $asso_vid_id = 0; ?>        
-        <?php $asso_photo_gallery = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-        ; ?>
+        <?php $asso_photo_gallery = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id']; ?>
         <?php $asso_vid_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id']; ?>
         <!-- Video or photo thumbnail full page logic. -->
         <?php

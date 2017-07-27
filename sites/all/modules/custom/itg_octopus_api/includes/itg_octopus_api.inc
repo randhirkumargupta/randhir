@@ -45,6 +45,12 @@ function itg_octopus_api_rundown() {
     $exported_by = (string) $rundown_xml->exportedBy;
     $exist_rundown = itg_octopus_api_check_rundown($rundown_id);
 
+    // Managing Previous Rundown if $key is 0 means rundown is current      
+    if ($key == 'current') {
+      itg_octopus_current_to_prev_rundown($rundown_id, 'current');
+    }
+
+
     try {
       $qry = db_merge('itg_rundown') // Table name no longer needs {}
           ->key(array('rundown_id' => $rundown_id))
@@ -100,11 +106,10 @@ function itg_octopus_api_rundown() {
           $commands = (string) $slug->script->main->body->element->clip->commands;
           $text = htmlentities($slug->script->main->body->element->text);
           $story_custom = json_encode($slug->storyCustom); // Storing the complete story
-          $slug_exist = itg_octopus_api_check_slug($story_id, $rundown_id);
-          if (empty($slug_exist)) {
 
             try {
-              db_insert('itg_octopus_slug')
+              db_merge('itg_octopus_slug')
+                  ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
                   ->fields(array(
                     'rundown_id' => $rundown_id,
                     'storyid' => $story_id,
@@ -127,7 +132,8 @@ function itg_octopus_api_rundown() {
               itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
             }
             try {
-              db_insert('itg_element_clip')
+              db_merge('itg_element_clip')
+                  ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
                   ->fields(array(
                     'element_id' => $element_id,
                     'rundown_id' => $rundown_id,
@@ -149,62 +155,8 @@ function itg_octopus_api_rundown() {
             catch (Exception $e) {
               itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
             }
-          }
-          elseif ($slug_exist[0]->story_modified != $story_modified) {
-            try {
-              db_update('itg_octopus_slug')
-                  ->fields(array(
-                    'storyid' => $story_id,
-                    'rundown_id' => $rundown_id,
-                    'story_title' => $story_title,
-                    'story_duration' => $story_duration,
-                    'story_created' => $story_created,
-                    'story_created_by' => $story_created_by,
-                    'story_modified' => $story_modified,
-                    'story_modified_timestamp' => strtotime($story_modified),
-                    'timestamp' => REQUEST_TIME,
-                    'story_modified_by' => $story_modified_by,
-                    'story_custom' => $story_custom,
-                    'category' => $slug->storyCustom[1],
-                    'location' => $slug->storyCustom[0],
-                  ))
-                  ->condition('storyid', $story_id)
-                  ->condition('rundown_id', $rundown_id)
-                  ->execute();
-            }
-            catch (Exception $e) {
-              itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
-            }
-// Update in itg_element_clip table
-//get element id of clip
-            $clipid = itg_octopus_api_clip_check($story_id, $rundown_id);
-            try {
-              db_update('itg_element_clip')
-                  ->fields(array(
-                    'element_id' => $element_id,
-                    'rundown_id' => $rundown_id,
-                    'storyid' => $story_id,
-                    'element_type' => $element_type,
-                    'element_dur' => $element_dur,
-                    'clipname' => $clip_name,
-                    'clipmosid' => $clip_mos_id,
-                    'clipobj_id' => $clip_obj_id,
-                    'clipjobid' => $clip_job_id,
-                    'clipfilepath' => $clip_file_path,
-                    'clipin' => $clip_in,
-                    'clipout' => $clip_out,
-                    'text' => $text,
-                    'new_element_id' => 12,
-                    'commands' => $commands,
-                  ))
-                  ->condition('storyid', $story_id)
-                  ->condition('rundown_id', $rundown_id)
-                  ->execute();
-            }
-            catch (Exception $e) {
-              itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
-            }
-          }
+          
+       
         }
       }
     }
@@ -309,12 +261,23 @@ function itg_octopus_api_rundown_listing() {
   $pagination = '';
   $current_rundown = '';
 
+
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'previous') {
+    $pagination.= '<li class="pager-current">' . t(' Previous ', array('attributes' => array('class' => 'disabled'))) . '</li>';
+    $current_rundown = 'previous';
+  }
+  else {
+    $pagination.= '<li class="pager-item">' . l(' Previous ', 'rundown-listing', array('query' => array('rundowntype' => 'previous'))) . '</li>';
+  }
+
+
   if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
     $pagination.= '<li class="pager-current">' . t(' Current ', array('attributes' => array('class' => 'disabled'))) . '</li>';
     $current_rundown = 'current';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown/listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Current ', 'rundown-listing', array('query' => array('rundowntype' => 'current'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
@@ -322,7 +285,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next1';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown/listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next1 ', 'rundown-listing', array('query' => array('rundowntype' => 'next1'))) . '</li>';
   }
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
@@ -330,7 +293,7 @@ function itg_octopus_api_rundown_listing() {
     $current_rundown = 'next2';
   }
   else {
-    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown/listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
+    $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
   if (empty($current_rundown))
@@ -368,8 +331,8 @@ function itg_octopus_api_rundown_listing() {
   if (isset($current_rundown) && !empty($current_rundown)) {
     $query->condition('rund.type', $current_rundown, '=');
   }
-  
-  $query->orderBy('ios.id','DESC');
+
+  $query->orderBy('ios.id', 'DESC');
   $query->extend('PagerDefault')->limit(50);
 
 // p($query->__toString());
@@ -392,7 +355,7 @@ function itg_octopus_api_rundown_listing() {
 
 
   foreach ($result as $row) {
-    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown/listing');
+    $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
     $background_color = 'bg-none';
     if ($row->action == 'DELETE') {
@@ -418,9 +381,23 @@ function itg_octopus_api_rundown_listing() {
     );
   }
   $itg_octopus_api_form = drupal_get_form('itg_octopus_api_form');
-
-  $output = render($itg_octopus_api_form);
+  $rundown_active_class = '';
+  $rfa_active_class = '';
+  if (isset($_GET['q']) && $_GET['q'] == 'rundown-listing') {
+    $rundown_active_class = 'active-trail';
+  }
+  elseif (isset($_GET['q']) && $_GET['q'] == 'rfa-dashboard') {
+    $rfa_active_class = 'active-trail';
+  }
+  $output = '<div class="content-block-menu">
+            <ul class="menu">
+           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
+           </ul>
+           </div>';
+  $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
@@ -707,10 +684,10 @@ function itg_octopus_api_move_dump_server_to_s3() {
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
   global $base_url;
   $data = array();
- // $post_video_id = $_POST['id'];
+  // $post_video_id = $_POST['id'];
   $post_video_id = $_POST['id'];
   $video_path = $base_url . '/' . $post_video_id;
-  
+
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
 
   $conn_id = itg_octopus_api_ftp_connection_setup();
@@ -722,21 +699,29 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $server_file = $video_name;
   $file_d_success = 0;
   // try to download $server_file and save to $local_file
-  if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
-    //echo "Successfully written to $local_file\n";
-    // TODO
-    $file_d_success = 1;
-  }
-  else {
-    // echo "There was a problem\n";
-    $file_d_success = 0;
-  }
+  $success_get = false;
+//  try {
+//    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
+//   }
+//  catch (Exception $e) {
+//   // p('Error:' . $e->getMessage());
+//  }
+//  if ($success_get) {
+//    //echo "Successfully written to $local_file\n";
+//    // TODO
+//    $file_d_success = 1;
+//  }
+//  else {
+//    // echo "There was a problem\n";
+//    $file_d_success = 0;
+//  }
   $file_d_success = 1;
-// close the connection
+  // close the connection
   ftp_close($conn_id);
   if ($file_d_success == 1) {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
+      $local_file = OCTOPUS_DUMPING_MACHINE_URL;  // [TODO]
       $s3_success = itg_video_send_dm_to_s3($local_file, $video_name);
       if (isset($s3_success) && !empty($s3_success)) {
         $data['success'] = 'yes';
@@ -848,7 +833,7 @@ function itg_octopus_file_video() {
         'slug_id' => $slug_id,
       );
       $octopus_ref = base64_encode(json_encode($oct_meta_info));
-      $return_url = $base_url . '/node/add/videogallery?destination=rundown/listing&octopus_ref=' . $octopus_ref;
+      $return_url = $base_url . '/node/add/videogallery?destination=rundown-listing&octopus_ref=' . $octopus_ref;
       print $return_url;
       drupal_exit();
     }
@@ -954,6 +939,26 @@ function itg_octopus_add_dm_response_details($response, $result) {
           'solr_video_size' => $response['video_size'],
           'solr_video_thumb' => "",
         ))
+        ->execute();
+  }
+  catch (Exception $e) {
+    
+  }
+}
+
+/**
+ * Chanding current rundown to Previous Rundown
+ * @param int $rundown_id
+ * @param string $type
+ */
+function itg_octopus_current_to_prev_rundown($rundown_id, $type) {
+  try {
+    db_update('itg_rundown')
+        ->fields(array(
+          'type' => 'previous',
+        ))
+        ->condition('type', $type)
+        ->condition('rundown_id', $rundown_id, '<>')
         ->execute();
   }
   catch (Exception $e) {

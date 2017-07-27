@@ -38,8 +38,19 @@ foreach ($output as $key => $value) {
   $drow_data = "";
   $moviename = array();
   $year = array();
+  $graph_image = array();
+  $graph_pic_url = '';
   foreach ($graph_data_all as $g_key => $graph_data) {
-
+    
+    if (!empty($graph_data[3])) {
+      $grapg_file = file_load($graph_data[3]);
+      $uri = $grapg_file->uri;
+      $graph_pic_url = '<img src="' . file_create_url($uri) . '" alt="' .  $graph_data[2] . '" />';
+    }
+    else {
+      $graph_pic_url = '';
+    }
+    
     if ($graph_data[1] == "") {
       $graph_data[1] = 'null';
     }
@@ -47,17 +58,17 @@ foreach ($output as $key => $value) {
       $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' },';
     }
     else {
-      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '" },';
+      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '", graph_name:"' . file_create_url($uri) . '"},';
     }
+    
   }
   ?>
-
       var chart = new CanvasJS.Chart("container_<?php echo $key; ?>", {
         title: {
           text: ""
         },
         toolTip: {
-          content: '{movie_name},{y} cr in year {x}',
+          content: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
         },
         axisX: {
           interval: 1,
@@ -66,7 +77,7 @@ foreach ($output as $key => $value) {
         data: [{
             type: "line",
             xValueFormatString: "Year ####",
-            toolTipContent: '{movie_name},{y} cr in year {x}',
+            toolTipContent: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
             connectNullData: true,
             dataPoints: [
   <?php echo rtrim($drow_data, ','); ?>

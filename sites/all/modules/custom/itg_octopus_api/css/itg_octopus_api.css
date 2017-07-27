@@ -12,11 +12,22 @@ and open the template in the editor.
 .bg-red{background-color: red; color: #fff;}
 .bg-green{background-color: green; color: #fff;}
 .bg-yellow{background-color: yellow;}
+tr.octopus-slug-data-row{
+    background: aliceblue;
+    position: relative;
+}
+.remove-data{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index:99999;
+}
 .slug-details{
     display: inline-block;
     vertical-align: top;
     width: 100%;
-    background: #fff;
   }
   .slug-video{
     float: right;
@@ -37,7 +48,7 @@ and open the template in the editor.
   [id*="file-video-article-"], [id*="get-video-"]{
     display: inline-block;
     vertical-align: top;
-    padding: 0 20px;
+    padding: 20px 0;
   }
   .views-table td .slug-link a{
       color: #fff;

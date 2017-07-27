@@ -436,7 +436,6 @@ function itg_reports_block_view($delta = '') {
             '#title' => t('Earning') ,
           );
           $career_graph['chart'] = $chart;
-
           $output[] = $career_graph;
           $actor_info[] = array(
             'name' => $chart_data['actor'][0]['actor_name'] ,
@@ -472,6 +471,12 @@ function itg_report_get_graph_data() {
       $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
       $movie_year = format_date($timestamp , 'custom' , 'Y');
       $actor_pic_uri = $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'];
+      // graph pic
+      if(!empty($movie_details->field_movie_graph_image[LANGUAGE_NONE][0]['fid'])) {
+      $graph_pic_url = $movie_details->field_movie_graph_image[LANGUAGE_NONE][0]['fid'];
+      }
+      
+      
       if (empty($actor_pic_uri)) {
         $actor_pic_real_uri = file_create_url($base_url . '/' . drupal_get_path('theme' , 'itg') . '/images/default_career_graph.png');
       }
@@ -486,7 +491,8 @@ function itg_report_get_graph_data() {
       $data[] = array(
         (int) $movie_year ,
         (int) $movie_details->field_movie_earning['und'][0]['value'] ,
-        $movie_name
+        $movie_name,
+        $graph_pic_url
       );
     }
     $chart_data[] = array(
