@@ -135,8 +135,8 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-reporter-field_carrer_graph_cast'.
-  $field_instances['node-reporter-field_carrer_graph_cast'] = array(
+  // Exported field_instance: 'node-reporter-field_career_graph_cast'.
+  $field_instances['node-reporter-field_career_graph_cast'] = array(
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
@@ -147,7 +147,7 @@ function feature_for_reporter_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -158,8 +158,8 @@ function feature_for_reporter_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_carrer_graph_cast',
-    'label' => 'Carrer Graph',
+    'field_name' => 'field_career_graph_cast',
+    'label' => 'Career Graph',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -173,7 +173,7 @@ function feature_for_reporter_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 33,
+      'weight' => 34,
     ),
   );
 
@@ -955,7 +955,7 @@ function feature_for_reporter_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
-  t('Carrer Graph');
+  t('Career Graph');
   t('Company');
   t('Constituancy');
   t('Department');
