@@ -245,6 +245,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/pledgewithCM [NC]  
 	RewriteCond %{REQUEST_URI} !/presidential-polls [NC]  
 	RewriteCond %{REQUEST_URI} !/psu [NC]  
+	RewriteCond %{REQUEST_URI} !/rajnikant [NC]  
+	RewriteCond %{REQUEST_URI} !/realestateawards [NC]  
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -497,6 +499,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^pledgewithCM/(.*) /staticpages/pledgewithCM/$1 [L]
 	RewriteRule ^psu$ /staticpages/psu/index.html? [L]
     RewriteRule ^psu/(.*) /staticpages/psu/$1 [L]
+	RewriteRule ^rajnikant$ /staticpages/rajnikant/index.html? [L]
+    RewriteRule ^rajnikant/(.*) /staticpages/rajnikant/$1 [L]
+	RewriteRule ^realestateawards$ /staticpages/realestateawards/index.html? [L]
+    RewriteRule ^realestateawards/(.*) /staticpages/realestateawards/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
