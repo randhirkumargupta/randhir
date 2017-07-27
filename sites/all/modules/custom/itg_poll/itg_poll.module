@@ -595,6 +595,15 @@ function itg_poll_complete_time_mail() {
       $poll_nid = $p_user_val->nId;
       $mail_flag = $p_user_val->mail_flag;
       $user = user_load($poll_user_id);
+      
+      if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false)) {
+        $user_alt_mail = itg_get_user_alt_email($user->uid);
+        watchdog('poll_complete_time_email_id', $user_alt_mail);
+        $poll_mail = $user_alt_mail;
+      } else {
+        $poll_mail = $user->mail;
+      }
+
       $node = node_load($poll_nid);
       if (isset($node->field_poll_end_date) && isset($node->field_show_end_date)) {
         $end_date = $node->field_poll_end_date[LANGUAGE_NONE][0]['value'];
@@ -621,7 +630,7 @@ function itg_poll_complete_time_mail() {
             'body' => $message_body ,
             'subject' => 'India Today | poll!' ,
           );
-          $mail = drupal_mail('itg_poll' , 'send_mail_to_poll_submit_user' , $user->mail , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
+          $mail = drupal_mail('itg_poll' , 'send_mail_to_poll_submit_user' , $poll_mail , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
           if ($mail['result']) {
             db_update('itg_polls')
                 ->fields(array(
