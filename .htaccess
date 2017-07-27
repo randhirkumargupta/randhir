@@ -246,7 +246,12 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/presidential-polls [NC]  
 	RewriteCond %{REQUEST_URI} !/psu [NC]  
 	RewriteCond %{REQUEST_URI} !/rajnikant [NC]  
-	RewriteCond %{REQUEST_URI} !/realestateawards [NC]  
+	RewriteCond %{REQUEST_URI} !/realestateawards [NC]
+	Redirect /realestateconclave /realestateawards
+	RewriteCond %{REQUEST_URI} !/sachin-live-on-world-cup [NC]
+	RewriteCond %{REQUEST_URI} !/sachin-odi-gallery [NC]
+	RewriteCond %{REQUEST_URI} !/sachin2 [NC]
+	RewriteCond %{REQUEST_URI} !/salaam_cricket [NC]
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -503,6 +508,14 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^rajnikant/(.*) /staticpages/rajnikant/$1 [L]
 	RewriteRule ^realestateawards$ /staticpages/realestateawards/index.html? [L]
     RewriteRule ^realestateawards/(.*) /staticpages/realestateawards/$1 [L]
+	RewriteRule ^sachin-live-on-world-cup$ /staticpages/sachin-live-on-world-cup/index.html? [L]
+    RewriteRule ^sachin-live-on-world-cup/(.*) /staticpages/sachin-live-on-world-cup/$1 [L]
+	RewriteRule ^sachin-odi-gallery$ /staticpages/sachin-odi-gallery/index.html? [L]
+    RewriteRule ^sachin-odi-gallery/(.*) /staticpages/sachin-odi-gallery/$1 [L]
+	RewriteRule ^sachin2$ /staticpages/sachin2/index.html? [L]
+    RewriteRule ^sachin2/(.*) /staticpages/sachin2/$1 [L]
+	RewriteRule ^salaam_cricket$ /staticpages/salaam_cricket/index.html? [L]
+    RewriteRule ^salaam_cricket/(.*) /staticpages/salaam_cricket/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
