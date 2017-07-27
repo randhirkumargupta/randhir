@@ -18,6 +18,13 @@
   <?php print $head; ?>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    if (window.location.hash && window.location.hash == '#_=_') {
+        window.location.hash = '';
+        history.pushState('', document.title, window.location.pathname); // nice and clean
+        e.preventDefault(); // no page reload
+    }
+  </script>
   <?php if ($default_mobile_metatags): ?>
 <!--    <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">-->

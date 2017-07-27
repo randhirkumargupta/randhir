@@ -11968,6 +11968,18 @@ span.close_btt {
     }
   }
 }
+.canvasjs-chart-tooltip {
+  max-width: 180px;
+  background: #fff;
+  word-wrap: break-word;
+  > div {
+    white-space: normal !important;
+    img{
+      display: block;
+      margin-top: 5px;
+    }
+  }
+}
 
 
 @media (min-width: 320px) {
