@@ -848,6 +848,11 @@ function itg_videogallery_node_insert($node) {
         break;
     }
   }
+  
+  if($node->field_story_source_type[LANGUAGE_NONE][0]['value']=='UGC'){
+     $_REQUEST['destination'] = 'ugc-inqueue-content';  
+  }
+  
 }
 
 /**
