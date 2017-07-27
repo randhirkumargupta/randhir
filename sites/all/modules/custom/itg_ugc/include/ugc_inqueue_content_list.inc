@@ -34,7 +34,7 @@ function itg_ugc_inqueue_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-inqueue-content">' . t('Reset') . '</a></div>',
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'ugc-inqueue-content">' . t('Reset') . '</a></div>',
   );
 
   return $form;
