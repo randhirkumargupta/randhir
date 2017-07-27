@@ -308,7 +308,7 @@ function magazineCoverstoriesPageRerourceValueList() {
 
         $data_list_array[$loop_count]['issue_id'] = "$issueid";
         $data_list_array[$loop_count]['issue_date'] = "$issue_date";
-        $data_list_array[$loop_count]['issue_cover_image'] = "$issue_cover_image";
+        $data_list_array[$loop_count]['issue_cover_image'] = "$lar_img_uri";
         $data_list_array[$loop_count]['story'] = getCoverstoriesList($issue_date);
         $loop_count++;
     }
