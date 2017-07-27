@@ -102,13 +102,14 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
 
       //get video tag
-      //$videotag = getVideoTagDetail($video_path_info, $daily_motion_fid);
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
       $videotag = video_detail_formats($nid,$source_type);
-      if ($videotag) {
-        $output .= $videotag;
-      }
 
+      if (!empty($videotag['migrated'])) { //migrated video
+        $output .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+      }elseif (!empty($videotag['dailymotion'])) {
+        $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+      }
 
       $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
 
@@ -306,39 +307,50 @@ function getDailymotionPath($fid, $filename) {
  * @return the details video xml tags
  */
 
-function video_detail_formats($nid, $source_type) {
+ function video_detail_formats($nid, $source_type) {
 
-  if ($source_type != 'migrated') {
-    $videoids = get_video_in_fieldcollection_by_nid($nid);
-    foreach ($videoids as $keys => $video_value) {
-      if($video_value->video_id != ''){
-        $video_id = $video_value->video_id;
-      }elseif ($video_value->solr_video_id != '') {
-        $video_id = $video_value->solr_video_id;
-      }else{}
+   $video_detail = array();
 
-    }
-    $query = db_select('itg_video_bitrates_data', 'itgv');
-    $query->fields('itgv', array('bitate_url', 'bitates_field'));
-    $query->condition('itgv.video_id', $video_id);
-    $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+   if ($source_type != 'migrated') {
+     $video_status = 'dailymotion';
+     $videoids = get_video_in_fieldcollection_by_nid($nid);
 
-    $video_format = array();
-    foreach ($result2 as $res_data) {
-      $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
-    }
-    $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
-    $output .= "<videoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $video_format['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $video_format['stream_h264_ld_url'] . "</part></videoparts_3gp>";
-  }
-  elseif ($source_type == 'migrated') {
-    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-    foreach ($videoids as $keys => $video_value) {
-      $video_path_mp4 = $video_value->field_migrated_video_url_value;
-    }
-    //print_r($videoids);
-    $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
-    $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
-    $output .= "<videoparts><part>" . $videoparts_3gp . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videoparts_3gp . "</part></videoparts_m3u8><flvvideoparts><part>" . $flv_url . "</part></flvvideoparts><videoparts_3gp><part>" . $videoparts_3gp . "</part></videoparts_3gp>";
-  }
-  return $output;
-}
+     foreach ($videoids as $keys => $video_value) {
+       if($video_value->video_id != ''){
+         $video_id = $video_value->video_id;
+       }elseif ($video_value->solr_video_id != '') {
+         $video_id = $video_value->solr_video_id;
+       }else{}
+       $video_detail[$video_status]['video_id'] = $video_id;
+     }
+
+     $query = db_select('itg_video_bitrates_data', 'itgv');
+     $query->fields('itgv', array('bitate_url', 'bitates_field'));
+     $query->condition('itgv.video_id', $video_id);
+     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+     $video_format = array();
+     foreach ($result2 as $res_data) {
+       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
+     }
+     $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
+     $video_format['videoparts_mp4'] = $video_path_mp4;
+     $video_detail[$video_status]['bitate_url'] = $video_format;
+     //$output .= "<videoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $video_format['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $video_format['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+   }
+   elseif ($source_type == 'migrated') {
+     $video_status = 'migrated';
+     $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+     foreach ($videoids as $keys => $video_value) {
+       $video_path_mp4 = $video_value->field_migrated_video_url_value;
+     }
+     $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+     $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
+     $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
+     $video_detail[$video_status]['flv_url'] = $flv_url;
+     $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
+     //$output .= "<videoparts><part>" . $videoparts_3gp . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videoparts_3gp . "</part></videoparts_m3u8><flvvideoparts><part>" . $flv_url . "</part></flvvideoparts><videoparts_3gp><part>" . $videoparts_3gp . "</part></videoparts_3gp>";
+   }
+
+   return $video_detail;
+ }
