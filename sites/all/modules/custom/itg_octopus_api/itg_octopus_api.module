@@ -355,14 +355,14 @@ function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
   $to = variable_get('itg_octopus_support_team_email', 'ishwar.tiwari@kelltontech.com');
   $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
-    return;
+    return TRUE;
   }
   else {
     $error_msg = 'Failed to send the email!';
     watchdog('octopus-email', $error_msg, array(), WATCHDOG_ALERT);
-    return;
+    return TRUE;
   }
-  return;
+    return TRUE;
 }
 
 /**
@@ -387,14 +387,14 @@ function itg_octopus_api_send_email_to_octopus($mail_subject, $msg) {
   $to = variable_get('itg_octopus_notify_email', 'ishwar.tiwari@kelltontech.com');
   $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
-    return;
+    return TRUE;
   }
   else {
     $error_msg = 'Failed to send the email!';
     watchdog('octopus-email', $error_msg, array(), WATCHDOG_ALERT);
-    return;
+    return TRUE;
   }
-  return;
+  return TRUE;
 }
 
 /**
@@ -465,7 +465,7 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title, 'rundown-listing') . '</li>';
+    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title, 'rundown-listing') .'('.$chunk->storyid. ')</li>';
     ++$count;
   }
 

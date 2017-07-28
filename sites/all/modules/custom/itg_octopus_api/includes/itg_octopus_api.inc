@@ -80,12 +80,15 @@ function itg_octopus_api_rundown() {
           $story_title = (string) $slug->storyTitle;
 
 // Sending mail to Octopus user where 
+          $story_com_data = '';
           if ($action == 'UPDATE') {
-            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(Rundown)", 'You have received UPDATE tag in XML for story:' . $story_title);
+            $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
+            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(Rundown)", 'You have received UPDATE tag in XML for story:' . $story_com_data);
           }
 
           if ($action == 'DELETE') {
-            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML(Rundown)", 'You have received DELETE tag in XML for story:' . $story_title);
+            $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
+            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML(Rundown)", 'You have received DELETE tag in XML for story:' . $story_com_data);
           }
 
           $story_duration = (string) $slug->storyDur;
