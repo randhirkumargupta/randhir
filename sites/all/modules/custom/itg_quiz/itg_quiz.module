@@ -147,6 +147,7 @@ function itg_quiz_theme() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'quiz_node_form') {
+      unset($form['actions']['preview']);
       unset($form['field_survey_category']);//hide section
       // Set Destination
       $destination = 'manage-quiz';

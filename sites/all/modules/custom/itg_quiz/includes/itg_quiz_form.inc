@@ -26,17 +26,28 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     $from_story = 'no';
   }
   
-  if(isset($cookie)){
-      drupal_add_js("jQuery(document).ready(function(){
-                      jQuery('#itg-quiz-quiz-form').css('pointer-events', 'none');
-                  });", 'inline');      
-  }
+  
   
   $node = node_load($current_nid);
 
   // Check for type
   if ($node->type == 'quiz') {
-
+    if(isset($cookie)){
+      drupal_add_js("jQuery(document).ready(function(){
+                      jQuery('#itg-quiz-quiz-form').css('pointer-events', 'none');
+                  });", 'inline');      
+    }
+    
+    $settings = array();
+    
+    $s_immediate_result = '';
+    
+    if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $node->field_quiz_type[LANGUAGE_NONE][0]['value'] == 'immediate') {
+      $s_immediate_result = 'qwr';
+    }
+    
+    $settings['immediate_result'] = $s_immediate_result;
+    drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
     // Add JS for front
     drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js', array('scope' => 'footer'));
 
