@@ -1720,17 +1720,18 @@ input[type="file"], input[type="submit"], input[type="text"] {
 }
 .survey-form-main-container .byline .social-info {
   float: right;
-  width: 200px;
+  text-align: right;
+  margin-top: 8px;
 }
 .survey-form-main-container .byline .social-info span {
-  float: left;
-  width: 25%;
-  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30px;
   text-align: center;
 }
 .survey-form-main-container .byline .social-info span .fa {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 26px;
+  line-height: 26px;
 }
 .survey-form-main-container .byline .social-info span dfn {
   font: normal 400 12px/18px Roboto;
@@ -1814,6 +1815,12 @@ input[type="file"], input[type="submit"], input[type="text"] {
 .survey-form-wrapper-all .question-container {
   display: block;
 }
+.survey-form-wrapper-all .question-container .question-heading {
+  margin: 30px 0;
+}
+.survey-form-wrapper-all .survey-submit-btn-wrapper {
+  margin-top: 50px;
+}
 
 [id*="itg-survey-survey-form"] .form-submit {
   min-width: 100px;
@@ -1832,12 +1839,19 @@ input[type="file"], input[type="submit"], input[type="text"] {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
   cursor: pointer;
+}
+[id*="itg-survey-survey-form"] .form-submit .messages {
+  border: 1px solid;
+  padding: 10px;
+}
+[id*="itg-survey-survey-form"] .form-submit .messages ul {
+  padding-left: 18px;
 }
 [id*="itg-survey-survey-form"] .survey-form-wrapper-all .form-submit {
   display: block;

@@ -4606,7 +4606,21 @@ h1.category-heading{
 .view-programmes.view-display-id-page{
   @include pager;
 }
-
+.survey-video-wrapper{
+  max-width: 480px;
+  .survey-video {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+    iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
 /*css start archive-story */
 .view-archive-story{
     .view-content{
