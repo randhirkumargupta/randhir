@@ -2899,7 +2899,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
               '/video/' . $dmvid_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
           );
           if ($dm_data['encoding_progress'] == 100 || $dm_data['publishing_progress'] == 100) {
-            $image_url = $thumb_url['thumbnail_720_url'];
+            $image_url = $dm_data['thumbnail_720_url'];
             $query = db_update('dailymotion_response_details');
             $query->fields(array('dailymotion_published' => 1, 'dailymotion_thumb_url' => $image_url, 'encoding_progress' => $dm_data['encoding_progress'], 'publishing_progress' => $dm_data['publishing_progress']));
             $query->condition('video_id', $dmvid_id, '=');
