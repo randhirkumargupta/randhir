@@ -248,12 +248,17 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/rajnikant [NC]  
 	RewriteCond %{REQUEST_URI} !/realestateawards [NC]
 	Redirect /realestateconclave /realestateawards
+	Redirect /tech /technology
 	RewriteCond %{REQUEST_URI} !/sachin-live-on-world-cup [NC]
 	RewriteCond %{REQUEST_URI} !/sachin-odi-gallery [NC]
 	RewriteCond %{REQUEST_URI} !/sachin2 [NC]
 	RewriteCond %{REQUEST_URI} !/salaam_cricket [NC]
 	RewriteCond %{REQUEST_URI} !/salmankhan [NC]
 	RewriteCond %{REQUEST_URI} !/saveyourleader [NC]
+	RewriteCond %{REQUEST_URI} !/shahrukhkhan [NC]
+	RewriteCond %{REQUEST_URI} !/teachers-day [NC]
+	RewriteCond %{REQUEST_URI} !/telangana-special [NC]
+	RewriteCond %{REQUEST_URI} !/tourismawards [NC]
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -520,8 +525,14 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^salaam_cricket/(.*) /staticpages/salaam_cricket/$1 [L]
 	RewriteRule ^salmankhan$ /staticpages/salmankhan/index.html? [L]
     RewriteRule ^salmankhan/(.*) /staticpages/salmankhan/$1 [L]
-	#RewriteRule ^saveyourleader$ /staticpages/saveyourleader/index.html? [L]
-   #RewriteRule ^saveyourleader/(.*) /staticpages/saveyourleader/$1 [L]
+	RewriteRule ^shahrukhkhan$ /staticpages/shahrukhkhan/index.html? [L]
+    RewriteRule ^shahrukhkhan/(.*) /staticpages/shahrukhkhan/$1 [L]
+	RewriteRule ^teachers-day$ /staticpages/teachers-day/index.html? [L]
+    RewriteRule ^teachers-day/(.*) /staticpages/teachers-day/$1 [L]
+	RewriteRule ^telangana-special$ /staticpages/telangana-special/index.html? [L]
+    RewriteRule ^telangana-special/(.*) /staticpages/telangana-special/$1 [L]
+	RewriteRule ^tourismawards$ /staticpages/tourismawards/index.html? [L]
+    RewriteRule ^tourismawards/(.*) /staticpages/tourismawards/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
