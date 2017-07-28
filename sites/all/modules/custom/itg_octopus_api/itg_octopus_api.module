@@ -465,7 +465,7 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title, 'rundown-listing') . '</li>';
+    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title, 'rundown-listing') .'('.$chunk->storyid. ')</li>';
     ++$count;
   }
 
