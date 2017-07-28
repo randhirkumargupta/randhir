@@ -252,6 +252,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/sachin-odi-gallery [NC]
 	RewriteCond %{REQUEST_URI} !/sachin2 [NC]
 	RewriteCond %{REQUEST_URI} !/salaam_cricket [NC]
+	RewriteCond %{REQUEST_URI} !/salmankhan [NC]
+	RewriteCond %{REQUEST_URI} !/saveyourleader [NC]
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -294,7 +296,7 @@ DirectoryIndex index.php index.html index.htm
   RewriteRule ^slideshows/(.*) /staticpages/slideshows/$1 [L]
   RewriteRule ^team-modi$ /staticpages/team-modi/index.html [L]
   RewriteRule ^100days/(.*) /staticpages/100days/$1 [L]
-  RewriteRule ^saveyourleader$ /staticpages/saveyourleader/result.jsp [L]
+  RewriteRule ^saveyourleader$ /staticpages/saveyourleader/index.html [L]
   RewriteRule ^saveyourleader/(.*) /staticpages/saveyourleader/$1 [L]
   RewriteRule ^mood-of-the-nation$ /staticpages/mood-of-the-nation/index.jsp [L]
   RewriteRule ^mood-of-the-nation/(.*) /staticpages/mood-of-the-nation/$1 [L]
@@ -516,6 +518,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^sachin2/(.*) /staticpages/sachin2/$1 [L]
 	RewriteRule ^salaam_cricket$ /staticpages/salaam_cricket/index.html? [L]
     RewriteRule ^salaam_cricket/(.*) /staticpages/salaam_cricket/$1 [L]
+	RewriteRule ^salmankhan$ /staticpages/salmankhan/index.html? [L]
+    RewriteRule ^salmankhan/(.*) /staticpages/salmankhan/$1 [L]
+	#RewriteRule ^saveyourleader$ /staticpages/saveyourleader/index.html? [L]
+   #RewriteRule ^saveyourleader/(.*) /staticpages/saveyourleader/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 

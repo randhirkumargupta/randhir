@@ -184,17 +184,17 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
              <span class="sostext">SEND THEM AN SOS MESSAGE</span>
                <span class="share-sos clearfix">
                  <ul>
-                       <li><a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=&description=&link=http://indiatoday.intoday.in/saveyourleader/&redirect_uri=http://indiatoday.intoday.in/saveyourleader/&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/save_your_leader-fb-share.jpg" target="_blank" id="facebukshare">
+                       <li><a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=&description=&link=/saveyourleader/&redirect_uri=/saveyourleader/&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/saveyourleader/new/save_your_leader-fb-share.jpg" target="_blank" id="facebukshare">
                      
                         
                      <span class="facebook scbg">facebook</span></a></li>
-                     <li>  <a href="http://twitter.com/?status=Hey Friends I have Saved my favourite Leader. Jump in to save yours! %23SaveYourLeader  http://indiatoday.intoday.in/saveyourleader/%20via%20%40indiatoday" target="_blank"> 
+                     <li>  <a href="http://twitter.com/?status=Hey Friends I have Saved my favourite Leader. Jump in to save yours! %23SaveYourLeader  /saveyourleader/%20via%20%40indiatoday" target="_blank"> 
                      
                      
                      <span class="twitter scbg">twitter</span></a></li>
                      <li>
                      
-                       <a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/saveyourleader/" target="_blank">
+                       <a href="https://plus.google.com/share?url=/saveyourleader/" target="_blank">
                      <span class="googlepluse scbg">googlepluse</span></a></li>
                   
                   </ul>     
@@ -222,7 +222,7 @@ var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_wid
       <div class="footertag"> <img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
         <nav class="nav">
           <ul>
-            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
+            <div class="home" style="background:none"><a href="/index.jsp"><img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/news.html">News</a></li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/114/1/india.html">India</a> </li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/113/1/world.html">World</a> </li>
