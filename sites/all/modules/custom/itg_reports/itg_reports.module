@@ -472,6 +472,7 @@ function itg_report_get_graph_data() {
       $movie_year = format_date($timestamp , 'custom' , 'Y');
       $actor_pic_uri = $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'];
       // graph pic
+      $graph_pic_url = '';
       if(!empty($movie_details->field_movie_graph_image[LANGUAGE_NONE][0]['fid'])) {
       $graph_pic_url = $movie_details->field_movie_graph_image[LANGUAGE_NONE][0]['fid'];
       }
