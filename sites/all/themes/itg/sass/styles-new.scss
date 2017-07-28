@@ -1636,15 +1636,16 @@ input[type="file"], input[type="submit"], input[type="text"]{
     }
     .social-info{
       float: right;
-      width: 200px;
+      text-align: right;
+      margin-top: 8px;
       span{
-        float: left;
-        width: 25%;
-        padding: 5px;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 30px;
         text-align: center;
         .fa{
-          font-size: 18px;
-          line-height: 22px;
+          font-size: 26px;
+          line-height: 26px;
         }
         dfn{
           font: normal 400 12px/18px Roboto;
@@ -1730,7 +1731,15 @@ input[type="file"], input[type="submit"], input[type="text"]{
   }
 }
 .survey-form-wrapper-all{
-  .question-container{display: block;}
+  .question-container{
+    display: block;
+    .question-heading{
+      margin: 30px 0;
+    }
+  }
+  .survey-submit-btn-wrapper{
+    margin-top: 50px;
+  }
 }
 [id*="itg-survey-survey-form"]{
   .form-submit{
@@ -1745,12 +1754,19 @@ input[type="file"], input[type="submit"], input[type="text"]{
     background: -o-linear-gradient(#4fb5ff, #0986e0); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#4fb5ff, #0986e0); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#4fb5ff, #0986e0); /* Standard syntax */
-    font-size: 16px;
+    font-size: 18px;
     font-family: Roboto;
     color: #fff;
-    font-weight: 300;
+    font-weight: 400;
     margin-right: 20px;
     cursor: pointer;
+    .messages{
+      border: 1px solid;
+      padding: 10px;
+      ul{
+        padding-left: 18px;
+      }
+    }
   }
   .survey-form-wrapper-all{
     .form-submit{display: block; margin: 0 auto;}

@@ -245,9 +245,9 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     
       $form['media' . $num] = array(
            '#type' => 'markup',
-           '#prefix' => '<div>',
+           '#prefix' => '<div class="survey-video-wrapper"><div class="survey-video">',
            '#markup' => $question_media,
-           '#suffix' => '</div>',
+           '#suffix' => '</div></div>',
        );
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
