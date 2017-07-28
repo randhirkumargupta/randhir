@@ -7,7 +7,6 @@ $arg = arg();
 $node = node_load($arg[1]);
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 if($source_type != 'migrated') { ?>
-?>
 <?php foreach ($output as $key => $value): ?>
   <?php
   if (strpos($actor[$key]['pic_uri'], 'public://') !== false) {
@@ -81,7 +80,7 @@ foreach ($output as $key => $value) {
         data: [{
             type: "line",
             xValueFormatString: "Year ####",
-            toolTipContent: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
+            toolTipContent: '{movie_name},{y} cr in {x} <img src={graph_name}>',
             connectNullData: true,
             dataPoints: [
   <?php echo rtrim($drow_data, ','); ?>
