@@ -24,9 +24,10 @@ foreach ($field_collection_data as $data) {
     $client = $data['node_obj']->title;
     $section_name = $data['section'];
     $content_type = $data['content_type'];
+    $feed_type = strtolower($data['feed_type']);
     $frequency = strtolower($data['feed_frequency']);
     $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client/$section_name-$content_type");
-    $feed_dir = "public://$url_friendly_path-$frequency-feed.xml";
+    $feed_dir = "public://$url_friendly_path-$frequency-$feed_type-feed.xml";
     echo "<a target='_blank' href='" . file_create_url($feed_dir) . "'>" . file_create_url($feed_dir) . "</a>";
   } else {
     echo $data['feed_mode'];

@@ -21,6 +21,7 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-$output = '<div class="other-info">Published on: '.date('F j, Y',strtotime($row->dm_field_itg_content_publish_dat[0])).'</div>';
+$publish_dat = explode("T", $row->dm_field_itg_content_publish_dat[0]);
+$output = '<div class="other-info">Published on: '.date('F j, Y',strtotime($publish_dat[0])).'</div>';
 ?>
 <?php print $output; ?>
