@@ -4608,7 +4608,7 @@ h1.category-heading{
 }
 .survey-media-wrapper, .quiz-media-wrapper{
   max-width: 480px;
-  .survey-video, .quiz-video {
+  .survey-video, .quiz-video{
     position: relative;
     height: 0;
     padding-bottom: 56.25%;
@@ -4621,7 +4621,7 @@ h1.category-heading{
       left: 0;
     }
   }
-  .survey-image, quiz-image {
+  .survey-image, .quiz-image{
     margin: 0 0 10px 10px;
   }
 }
