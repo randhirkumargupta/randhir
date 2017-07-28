@@ -80,12 +80,15 @@ function itg_octopus_api_rundown() {
           $story_title = (string) $slug->storyTitle;
 
 // Sending mail to Octopus user where 
+          $story_com_data = '';
           if ($action == 'UPDATE') {
-            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML", 'You have received UPDATE tag in XML for story:' . $story_title);
+            $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
+            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(Rundown)", 'You have received UPDATE tag in XML for story:' . $story_com_data);
           }
 
           if ($action == 'DELETE') {
-            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML", 'You have received DELETE tag in XML for story:' . $story_title);
+            $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
+            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML(Rundown)", 'You have received DELETE tag in XML for story:' . $story_com_data);
           }
 
           $story_duration = (string) $slug->storyDur;
@@ -107,56 +110,54 @@ function itg_octopus_api_rundown() {
           $text = htmlentities($slug->script->main->body->element->text);
           $story_custom = json_encode($slug->storyCustom); // Storing the complete story
 
-            try {
-              db_merge('itg_octopus_slug')
-                  ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
-                  ->fields(array(
-                    'rundown_id' => $rundown_id,
-                    'storyid' => $story_id,
-                    'action' => $action,
-                    'story_title' => $story_title,
-                    'story_skip' => $story_skip,
-                    'story_duration' => $story_duration,
-                    'story_created' => $story_created,
-                    'story_created_by' => $story_created_by,
-                    'story_modified' => $story_modified,
-                    'story_modified_timestamp' => strtotime($story_modified),
-                    'timestamp' => REQUEST_TIME,
-                    'story_modified_by' => $story_modified_by,
-                    'story_custom' => $story_custom,
-                    'category' => $slug->storyCustom[1],
-                    'location' => $slug->storyCustom[0],
-                  ))->execute();
-            }
-            catch (Exception $e) {
-              itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
-            }
-            try {
-              db_merge('itg_element_clip')
-                  ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
-                  ->fields(array(
-                    'element_id' => $element_id,
-                    'rundown_id' => $rundown_id,
-                    'storyid' => $story_id,
-                    'element_type' => $element_type,
-                    'element_dur' => $element_dur,
-                    'clipname' => $clip_name,
-                    'clipmosid' => $clip_mos_id,
-                    'clipobj_id' => $clip_obj_id,
-                    'clipjobid' => $clip_job_id,
-                    'clipfilepath' => $clip_file_path,
-                    'clipin' => $clip_in,
-                    'clipout' => $clip_out,
-                    'text' => $text,
-                    'new_element_id' => 12,
-                    'commands' => $commands,
-                  ))->execute();
-            }
-            catch (Exception $e) {
-              itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
-            }
-          
-       
+          try {
+            db_merge('itg_octopus_slug')
+                ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
+                ->fields(array(
+                  'rundown_id' => $rundown_id,
+                  'storyid' => $story_id,
+                  'action' => $action,
+                  'story_title' => $story_title,
+                  'story_skip' => $story_skip,
+                  'story_duration' => $story_duration,
+                  'story_created' => $story_created,
+                  'story_created_by' => $story_created_by,
+                  'story_modified' => $story_modified,
+                  'story_modified_timestamp' => strtotime($story_modified),
+                  'timestamp' => REQUEST_TIME,
+                  'story_modified_by' => $story_modified_by,
+                  'story_custom' => $story_custom,
+                  'category' => $slug->storyCustom[1],
+                  'location' => $slug->storyCustom[0],
+                ))->execute();
+          }
+          catch (Exception $e) {
+            itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
+          }
+          try {
+            db_merge('itg_element_clip')
+                ->key(array('rundown_id' => $rundown_id, 'storyid' => $story_id))
+                ->fields(array(
+                  'element_id' => $element_id,
+                  'rundown_id' => $rundown_id,
+                  'storyid' => $story_id,
+                  'element_type' => $element_type,
+                  'element_dur' => $element_dur,
+                  'clipname' => $clip_name,
+                  'clipmosid' => $clip_mos_id,
+                  'clipobj_id' => $clip_obj_id,
+                  'clipjobid' => $clip_job_id,
+                  'clipfilepath' => $clip_file_path,
+                  'clipin' => $clip_in,
+                  'clipout' => $clip_out,
+                  'text' => $text,
+                  'new_element_id' => 12,
+                  'commands' => $commands,
+                ))->execute();
+          }
+          catch (Exception $e) {
+            itg_octopus_api_send_email_to_support("Octopus error while inserting/updating data in db rundown", $e->getMessage());
+          }
         }
       }
     }
@@ -679,9 +680,11 @@ function itg_octopus_slug_clip($slug) {
  * Sending dumping machine video to S3 bucket
  */
 function itg_octopus_api_move_dump_server_to_s3() {
-
+  set_time_limit(0);
+  ini_set('memory_limit', '-1');
 //  $video_path  = 'SOME_URL/'.$_POST['id'];[TODO]
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
+  $files_path = variable_get('file_public_path', conf_path() . '/files');
   global $base_url;
   $data = array();
   // $post_video_id = $_POST['id'];
@@ -695,27 +698,27 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $video_name = $_POST['id'];
   $ftp_files = ftp_nlist($conn_id, "/");
   $file_size = ftp_size($conn_id, '/' . $post_video_id);
-  $local_file = $video_name;
+  $local_file = $files_path . '/' . $video_name;
   $server_file = $video_name;
   $file_d_success = 0;
   // try to download $server_file and save to $local_file
   $success_get = false;
-//  try {
-//    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
-//   }
-//  catch (Exception $e) {
-//   // p('Error:' . $e->getMessage());
-//  }
-//  if ($success_get) {
-//    //echo "Successfully written to $local_file\n";
-//    // TODO
-//    $file_d_success = 1;
-//  }
-//  else {
-//    // echo "There was a problem\n";
-//    $file_d_success = 0;
-//  }
-  $file_d_success = 1;
+  try {
+    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
+  }
+  catch (Exception $e) {
+    // p('Error:' . $e->getMessage());
+  }
+  if ($success_get) {
+    //echo "Successfully written to $local_file\n";
+    // TODO
+    $file_d_success = 1;
+  }
+  else {
+    // echo "There was a problem\n";
+    $file_d_success = 0;
+  }
+  //$file_d_success = 1;
   // close the connection
   ftp_close($conn_id);
   if ($file_d_success == 1) {
