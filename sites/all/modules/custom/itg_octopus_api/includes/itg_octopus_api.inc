@@ -81,11 +81,11 @@ function itg_octopus_api_rundown() {
 
 // Sending mail to Octopus user where 
           if ($action == 'UPDATE') {
-            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML", 'You have received UPDATE tag in XML for story:' . $story_title);
+            itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(Rundown)", 'You have received UPDATE tag in XML for story:' . $story_title);
           }
 
           if ($action == 'DELETE') {
-            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML", 'You have received DELETE tag in XML for story:' . $story_title);
+            itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML(Rundown)", 'You have received DELETE tag in XML for story:' . $story_title);
           }
 
           $story_duration = (string) $slug->storyDur;
@@ -682,6 +682,7 @@ function itg_octopus_api_move_dump_server_to_s3() {
 
 //  $video_path  = 'SOME_URL/'.$_POST['id'];[TODO]
 //$video_path = OCTOPUS_DUMPING_MACHINE_URL;
+  $files_path = variable_get('file_public_path', conf_path() . '/files');
   global $base_url;
   $data = array();
   // $post_video_id = $_POST['id'];
@@ -695,27 +696,27 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $video_name = $_POST['id'];
   $ftp_files = ftp_nlist($conn_id, "/");
   $file_size = ftp_size($conn_id, '/' . $post_video_id);
-  $local_file = $video_name;
+  $local_file = $files_path.'/'.$video_name;
   $server_file = $video_name;
   $file_d_success = 0;
   // try to download $server_file and save to $local_file
   $success_get = false;
-//  try {
-//    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
-//   }
-//  catch (Exception $e) {
-//   // p('Error:' . $e->getMessage());
-//  }
-//  if ($success_get) {
-//    //echo "Successfully written to $local_file\n";
-//    // TODO
-//    $file_d_success = 1;
-//  }
-//  else {
-//    // echo "There was a problem\n";
-//    $file_d_success = 0;
-//  }
-  $file_d_success = 1;
+  try {
+    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
+   }
+  catch (Exception $e) {
+   // p('Error:' . $e->getMessage());
+  }
+  if ($success_get) {
+    //echo "Successfully written to $local_file\n";
+    // TODO
+    $file_d_success = 1;
+  }
+  else {
+    // echo "There was a problem\n";
+    $file_d_success = 0;
+  }
+  //$file_d_success = 1;
   // close the connection
   ftp_close($conn_id);
   if ($file_d_success == 1) {

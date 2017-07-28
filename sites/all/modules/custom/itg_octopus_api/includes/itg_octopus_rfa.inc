@@ -25,6 +25,14 @@ function itg_rfa_file_live_blog() {
       $timestamp = REQUEST_TIME;
       $action = isset($post['action']) ? $post['action'] : '';
 
+      if ($action == 'UPDATE') {
+        itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);
+      }
+
+      if ($action == 'DELETE') {
+        itg_octopus_api_send_email_to_octopus("You have received DELETE tag in XML(RFA)", 'You have received DELETE tag in XML for breaking news:' . $text);
+      }
+
       try {
         db_merge('itg_rfa')
             ->key(array('rundown_id' => $rundown_id, 'created_date' => $created_date))
