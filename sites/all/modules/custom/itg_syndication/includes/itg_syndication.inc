@@ -28,11 +28,9 @@ function itg_syndication_generate_xml($data) {
 
   if ($delivery_mode_array[0] == 'Email') {
     $delivery_mode_type = 'Email';
-  }
-  else if ($delivery_mode_array [0] == 'FTP') {
+  } else if ($delivery_mode_array [0] == 'FTP') {
     $delivery_mode_type = 'FTP';
-  }
-  else if ($delivery_mode_array[0] == 'Weburl') {
+  } else if ($delivery_mode_array[0] == 'Weburl') {
     $delivery_mode_type = 'web_url';
   }
 
@@ -145,8 +143,7 @@ function itg_syndication_ftp_syndication($data, $file_path, $file_name, $deliver
 
   if (!$upload) {
     echo "There was a problem while uploading $file\n";
-  }
-  else {
+  } else {
     echo "successfully uploaded $file\n";
   }
 
@@ -187,12 +184,12 @@ function get_ftp_details_by_client($client_name, $ftp_name) {
 
   $itg_query = db_select('node', 'n');
   $itg_query->condition('n.title', $client_description)
-      ->fields('n', array('nid'))
-      ->fields('ftp', array('field_syndication_ftp_details_value'))
-      ->fields('ftp_name', array('field_syndication_ftp_name_value'))
-      ->fields('ftp_url', array('field_syndication_ftp_url_value'))
-      ->fields('ftp_username', array('field_syndication_ftp_username_value'))
-      ->fields('ftp_pass', array('field_syndication_ftp_password_value'));
+    ->fields('n', array('nid'))
+    ->fields('ftp', array('field_syndication_ftp_details_value'))
+    ->fields('ftp_name', array('field_syndication_ftp_name_value'))
+    ->fields('ftp_url', array('field_syndication_ftp_url_value'))
+    ->fields('ftp_username', array('field_syndication_ftp_username_value'))
+    ->fields('ftp_pass', array('field_syndication_ftp_password_value'));
 
   $itg_query->join('field_data_field_syndication_client_title', 'sc', 'n.nid = sc.entity_id');
   $itg_query->join('taxonomy_term_data', 'term', 'term.tid = sc.field_syndication_client_title_tid');
@@ -248,24 +245,37 @@ function get_syndication_content_details() {
  */
 function get_syndication_feed_byurl() {
   global $base_url;
+  $date = isset($_GET['date']) ? $_GET['date'] : "";
   $url = $base_url . '/' . arg(0) . '/' . arg(1) . '/' . arg(2);
 
   $itg_query = db_select('itg_syndication_feed_url', 'feed');
   $itg_query->fields('feed', array('xml_name'));
   $itg_query->fields('feed', array('created_date'));
   $itg_query->condition('feed.client_feed_url', $url);
+  if (!empty($date)) {
+    $date_time_stamp = strtotime($_GET['date']);
+    $day = date('d', $date_time_stamp);
+    $month = date('m', $date_time_stamp);
+    $year = date('Y', $date_time_stamp);
+    $end_time = mktime(23, 59, 59, $month, $day, $year);
+    $start_time = mktime(0, 0, 0, $month, $day, $year);
+    $itg_query->condition('feed.created_date', array($start_time, $end_time), 'BETWEEN');
+  }
+  $itg_query->orderBy('feed.created_date', 'DESC');
+  $itg_query->range(0, 1);
   $itg_result = $itg_query->execute()->fetchAll();
   if (!empty($itg_result)) {
-    foreach ($itg_result as $itg_val) {
-      $realpath = file_create_url($itg_val->xml_name);
-      // We dont have fid so need to call file_get_contents
-      // to validate file exist or not.
-      if (!empty(file_get_contents($realpath))) {
-        $xml_date = date('d/m/Y', $itg_val->created_date);
-        echo 'Click to Download. <a href="' . $realpath . '" download>' . $xml_date . '</a>';
-        echo '</br>';
-      }
-    }
+    $xml = file_get_contents($itg_result[0]->xml_name);
+    header('Content-Type: text/xml');
+    $dom = new DOMDocument;
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml);
+    echo $dom->saveXML();
+    //echo trim($xml);
+    drupal_exit();
+  } else {
+    echo t("XML not found for @date" , array("@date" => $_GET['date']));
   }
   exit;
 }
@@ -277,8 +287,7 @@ function itg_magazine_custom_callback($mag_id = NULL) {
 
   if (isset($mag_id)) {
     $mag_id = $mag_id;
-  }
-  else {
+  } else {
     $mag_id = $_POST['magazine'];
   }
 
@@ -298,8 +307,7 @@ function itg_magazine_custom_callback($mag_id = NULL) {
       $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
     }
     return $data;
-  }
-  else {
+  } else {
     $drop = '<option value="">- Select -</option>';
     foreach ($itg_result as $itg_val) {
       $dt = date('Y-m-d', strtotime($itg_val->title));

@@ -121,6 +121,11 @@ function itg_videogallery_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'node_is_save_draft' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
         'is_replace' => array(
         'type' => 'int',
         'not null' => TRUE,
