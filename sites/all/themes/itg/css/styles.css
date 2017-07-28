@@ -6292,6 +6292,12 @@ h1.category-heading {
   display: none;
 }
 
+.survey-video-wrapper .survey-video {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
   display: inline-block;
