@@ -836,7 +836,7 @@ function itg_videogallery_node_insert($node) {
             }
           }
         }
-        if ($node->status == 0 && $draft_msg_flag == 1) {
+        if ($node->status == 0 && $draft_msg_flag == 1 && $node->field_op_flag[LANGUAGE_NONE][0]['value'] !='draft') {
           drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
         }
         if ($node->field_story_facebook_video[LANGUAGE_NONE][0]['fid'] != 0) {
