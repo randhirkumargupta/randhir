@@ -110,16 +110,16 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
 
          if (function_exists('itg_videogallery_get_videoid_new')) {
           $video_ids = itg_videogallery_get_videoid_new($videid);
-           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+           $question_media = '<div class="survey-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
-                                                allowfullscreen></iframe>';
+                                                allowfullscreen></iframe></div>';
         }
       }
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
          $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
                    $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
 
-        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
+        $question_media = '<div class="survey-image"><img src="' . $extra_large_image_url . '" width="750" alt="" /></div>';
       }
 
       //Submit button text
@@ -245,9 +245,9 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     
       $form['media' . $num] = array(
            '#type' => 'markup',
-           '#prefix' => '<div class="survey-video-wrapper"><div class="survey-video">',
+           '#prefix' => '<div class="survey-media-wrapper">',
            '#markup' => $question_media,
-           '#suffix' => '</div></div>',
+           '#suffix' => '</div>',
        );
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';

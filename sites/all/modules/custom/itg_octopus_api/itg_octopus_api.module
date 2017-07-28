@@ -302,9 +302,9 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#default_value'] = $rfa_object->source;
     //$form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
     $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
-   // $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->text;
+    // $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->text;
     $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->text;
-   // p($form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE]['value']);
+    // p($form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE]['value']);
   }
 }
 
@@ -362,7 +362,7 @@ function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
     watchdog('octopus-email', $error_msg, array(), WATCHDOG_ALERT);
     return TRUE;
   }
-    return TRUE;
+  return TRUE;
 }
 
 /**
@@ -457,7 +457,7 @@ function itg_octopus_get_slug_notification() {
   global $user;
   $user_last_login = $user->login;
   $query = db_select('itg_octopus_slug', 'ios');
-  $query->fields('ios', array('action', 'story_title', 'timestamp'));
+  $query->fields('ios', array('action', 'story_title', 'timestamp', 'storyid'));
   $query->condition('ios.timestamp', $user_last_login, '>=');
   //$query->range(0,10);
   $result = $query->execute();
@@ -465,7 +465,7 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title, 'rundown-listing') .'('.$chunk->storyid. ')</li>';
+    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title . '(' . $chunk->storyid . ')', 'rundown-listing') . '</li>';
     ++$count;
   }
 
