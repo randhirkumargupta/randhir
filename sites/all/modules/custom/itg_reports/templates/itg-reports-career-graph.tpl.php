@@ -3,6 +3,10 @@
  * @file
  *   Career graph page template.
  */
+$arg = arg();
+$node = node_load($arg[1]);
+$source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+if($source_type != 'migrated') { ?>
 ?>
 <?php foreach ($output as $key => $value): ?>
   <?php
@@ -89,3 +93,15 @@ foreach ($output as $key => $value) {
   };
 
 </script>
+<?php } ?>
+
+<?php
+if ($source_type == 'migrated') {
+  foreach ($node->field_mega_review_cast['und'] as $field_collection) {
+    if (function_exists('itg_get_migrated_carrer_graph_data')) {
+      $graph_html = itg_get_migrated_carrer_graph_data($field_collection['target_id']);
+      print $graph_html;
+    }
+  }
+}
+?>

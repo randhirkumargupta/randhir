@@ -22,6 +22,7 @@ tr.octopus-slug-data-row{
     top: 5px;
     font-size: 20px;
     cursor: pointer;
+    z-index:99999;
 }
 .slug-details{
     display: inline-block;
@@ -42,12 +43,11 @@ tr.octopus-slug-data-row{
   }
   .slug-data li{display: inline-block; vertical-align: top; width: 100%;}
   .slug-data li + li{margin-top: 5px;}
-  .slug-data li strong{float: left; width: 140px;}
+  .slug-data li strong{float: left; width: 150px;}
   .slug-data li span{display: block; overflow: hidden;}
   [id*="file-video-article-"], [id*="get-video-"]{
-    display: inline-block;
-    vertical-align: top;
-    padding: 20px 0;
+    float: right;
+    padding: 20px 0 0;
   }
   .views-table td .slug-link a{
       color: #fff;

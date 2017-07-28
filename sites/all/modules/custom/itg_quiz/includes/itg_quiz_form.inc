@@ -25,11 +25,29 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     $current_nid = arg(1);
     $from_story = 'no';
   }
+  
+  
+  
   $node = node_load($current_nid);
 
   // Check for type
   if ($node->type == 'quiz') {
-
+    if(isset($cookie)){
+      drupal_add_js("jQuery(document).ready(function(){
+                      jQuery('#itg-quiz-quiz-form').css('pointer-events', 'none');
+                  });", 'inline');      
+    }
+    
+    $settings = array();
+    
+    $s_immediate_result = '';
+    
+    if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $node->field_quiz_type[LANGUAGE_NONE][0]['value'] == 'immediate') {
+      $s_immediate_result = 'qwr';
+    }
+    
+    $settings['immediate_result'] = $s_immediate_result;
+    drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
     // Add JS for front
     drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js', array('scope' => 'footer'));
 
@@ -81,6 +99,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 
     // Add JS for one question at a time
     $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
+    
     if ($quiz_question_format == 'One question at a time') {
       drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js', array('scope' => 'footer'));
     }
@@ -112,6 +131,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 
       // Answer type segregation
       $answer_type_type = $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'];
+      
       if ($answer_type_type == 'single_correct') {
         $answer_type = 'radios';
       }
@@ -157,13 +177,14 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
                                                 allowfullscreen></iframe>';
         }
-            $all_ans_options_media .= '<div class="quiz-media-file">
+        $all_ans_options_media .= '<div class="quiz-media-file">
               '.$ans_media.'
                </div>';
           }
         }
       }
-$question_media = "";
+      
+      $question_media = "";
       //Media information
 
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
@@ -178,8 +199,7 @@ $question_media = "";
       
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
           $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
-                   $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
-
+          $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
           $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
       }
 
@@ -237,7 +257,7 @@ $question_media = "";
 
       // Answer Section
       
-      if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $quiz_type == 'immediate') {
+      if ($node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value'] == 'qwr' && $quiz_type == 'immediate' && $answer_type_type == 'multiple_correct') {
         $form['answer' . $num] = array(
             '#type' => 'markup',
             '#prefix' => '<div id="answer-container-' . $num . '" class="answer-container answer_block_' . $num . '">',
@@ -313,12 +333,16 @@ $question_media = "";
 
       // Next button for all questions, if type is "One question at a time"
       if ($quiz_question_format == 'One question at a time') {
+        
         if ($button_text == 'Submit' && time() > $quiz_expiry_date) {
           $form['quiz_has_been_expired' . $num] = array(
               '#type' => 'markup',
               '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
           );
         } elseif(isset($cookie)){
+            drupal_add_js("jQuery(document).ready(function(){
+                            jQuery('#itg-quiz-quiz-form').css('pointer-events', 'none');
+                        });", 'inlin');
             $form['quiz_has_been_already_taken' . $num] = array(
                 '#type' => 'markup',
                 '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>Sorry! You can not proceed, you have already taken this Quiz!</strong></div>',
@@ -349,6 +373,7 @@ $question_media = "";
 
       $num++;
     } //End of main loop
+    
     // Variables for a quiz (Hidden variables)
     $form['question_total'] = array(
         '#type' => 'hidden',
