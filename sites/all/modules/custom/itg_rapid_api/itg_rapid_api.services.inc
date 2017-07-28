@@ -2852,64 +2852,28 @@ function itg_rapid_api_login_request_bk($token, $user_id, $password, $login_type
 }
 
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
-  //echo "<pre>hi"; print_r($_GET);echo "</pre>"; exit();
-  global $user;
-  $user_id = $username = $_GET['user_id'];
-  $password = $password = $_GET['password'];
-
-  if ($user->uid) {
-    // user is already logged in
-    return services_error(t('Already logged in as @user.', array('@user' => $user->name)), 406);
-  }
-
-  // Check if account is active.
-  if (user_is_blocked($username)) {
-    return services_error(t('The username %name has not been activated or is blocked.', array('%name' => $username)), 403);
-  }
-
-  // Emulate drupal native flood control: check for flood condition.
-  $flood_state = array();
-  if (variable_get('services_flood_control_enabled', TRUE)) {
-    $flood_state = _user_resource_flood_control_precheck($username);
-  }
-
-  // Only authenticate if a flood condition was not detected.
-  if (empty($flood_state['flood_control_triggered'])) {
-    //echo "andy"; exit();
-    $uid = user_authenticate($username, $password);
-  }
-  else {
-    $uid = FALSE;
-  }
-
-  // Emulate drupal native flood control: register flood event, and throw error
-  // if a flood condition was previously detected
-  if (variable_get('services_flood_control_enabled', TRUE)) {
-    $flood_state['uid'] = $uid;
-    _user_resource_flood_control_postcheck($flood_state);
-  }
-
-  if ($uid) {
-    $user = user_load($uid);
-    if ($user->uid) {
-      user_login_finalize();
-
-      $return = new stdClass();
-      $return->sessid = session_id();
-      $return->session_name = session_name();
-      $return->token = drupal_get_token('services');
-
-      $account = clone $user;
-
-      services_remove_user_data($account);
-
-      $return->user = $account;
-
-      return $return;
+    $method = "GET";
+    $data = $_GET;
+    $account = array();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
+    $uid = $result_obj->user->uid;
+    $auth_token = $result_obj->token;
+    $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+    $is_first_login = 1;
+    if ($field_logged_in_count > 0) {
+        $is_first_login = 0;
     }
-  }
-  watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-  return services_error(t('Wrong username or password.'), 401);
+    //p($field_logged_in_count);
+    //die();
+    $account['status_code'] = "1";
+    $account['status_message'] = "customised_message";
+    $account['data']['user_id'] = "$uid";
+    $account['data']['is_first_login'] = "$is_first_login";
+    $account['data']['auth_token'] = "$auth_token";
+
+    return $account;
 }
 
 //itg_rapid_api_signup
@@ -2922,114 +2886,21 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
  * 	The node processed information array.
  */
 function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
+    $method = "GET";
+    $data = $_GET;
+    $account = array();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/signup";
+    $result = callAPI($method, $url, $data);
+    $result_obj = json_decode($result);
+    $uid = $result_obj->uid;
 
+    $account['status_code'] = "1";
+    $account['status_message'] = "customised_message";
+    $account['data']['user_id'] = "$uid";
+    $account['data']['is_authenticated'] = "1";
+    $account['data']['otp_status'] = "0";
 
-  $first_name = $_GET['first_name'];
-  $last_name = $_GET['last_name'];
-  $user_id = $_GET['user_id'];
-  $password = $_GET['password'];
-  $login_type = $_GET['login_type'];
-  $token_id = $_GET['token_id'];
-  $form_state = array();
-
-
-  // check user_id is mail or mobile
-  $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
-  $mail_flag = 1;
-  if (preg_match('/^\d{10}$/', $user_id)) {
-    $mail_flag = 0;
-    $mobile = $user_id;
-    $mail = $first_name . "@nowhereandy.com";
-  }
-  else {
-    $mobile = "";
-    $mail = $user_id;
-  }
-  $form_state['values']['mobile'] = $mobile;
-  $form_state['values']['url_info'] = $url_info;
-  if ($mail_flag) {
-    $form_state['values']['mail'] = $mail;
-  }
-  else {
-    $form_state['values']['mail'] = "";
-  }
-  // prepare array for user
-  $edit = array(
-    'name' => $user_id,
-    'pass' => $password,
-    'mail' => $mail,
-    'init' => $mail,
-    'status' => 1,
-    'access' => REQUEST_TIME,
-    'field_first_name' => array(
-      LANGUAGE_NONE => array(
-        0 => array(
-          'value' => $first_name
-        )
-      )
-    ),
-    'field_last_name' => array(
-      LANGUAGE_NONE => array(
-        0 => array(
-          'value' => $last_name
-        )
-      )
-    ),
-    'roles' => array(
-      2 => 'authenticated',
-      FRONT_USER => 'Front User',
-    ),
-  );
-
-  if (is_numeric($mobile)) {
-    $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
-        0 => array(
-          'value' => $mobile
-        )
-      )
-    );
-  }
-
-
-  try {
-
-    $account = user_save(NULL, $edit);
-
-    if (function_exists('itg_personalization_reddem_referfriend')) {
-      itg_personalization_reddem_referfriend($_SESSION['referral_key']);
-      unset($_SESSION['referral_key']);
-    }
-    // Set operation.
-
-    $op = 'register_no_approval_required';
-    // Send an email.
-    if (empty($form_state['values']['mobile'])) {
-      // _user_mail_notify($op, $account);
-      if (function_exists('itg_sso_get_mail_content')) {
-        if (!empty($form_state['values']['url_info'])) {
-          $url_info = $form_state['values']['url_info'];
-        }
-        $mail_content = itg_sso_get_mail_content($account, $mail, $url_info);
-      }
-      itg_user_mapping_activate($account->uid);
-    }
-    else {
-      $rand_otp = rand(0, 9999);
-      if (function_exists('itg_sso_first_time_otp_insert')) {
-        itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
-        itg_sso_sms_send($rand_otp, $mobile);
-      }
-      if (!empty($form_state['values']['mail'])) {
-        itg_sso_otp_mail_content($rand_otp, $mail);
-      }
-    }
-  }
-  catch (Exception $e) {
-    watchdog('error on user save', $e->getMessage());
-    drupal_set_message('Error:' . $e->getMessage(), 'error');
-    $account = $e;
-  }
-  return $account;
+    return $account;
 }
 
 //itg_rapid_api_fblogin
@@ -3042,7 +2913,28 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
  * 	The node processed information array.
  */
 function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
-  return fblogin($_GET);
+    //return fblogin($_GET);
+    $method = "GET";
+
+    $data = array();
+    $data['token'] = $_GET['token'];
+    $data['app_id'] = $_GET['app_id'];
+    $data['uname'] = $_GET['uname'];
+    $data['uid'] = $_GET['uid'];
+    $data['issued_at'] = $_GET['issued_at'];
+    $data['expires_at'] = $_GET['expires_at'];
+    $account = array();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+    $result = callAPI($method, $url, $data);
+    $result_obj = json_decode($result);
+    $uid = $result_obj->uid;
+    $is_authenticated = $account['status_code'] = "1";
+    $account['status_message'] = "customised_message";
+    $account['data']['user_id'] = "$uid";
+    $account['data']['is_authenticated'] = "1";
+    $account['data']['otp_status'] = "0";
+
+    return $account;
 }
 
 //itg_rapid_api_twtlogin
@@ -3055,7 +2947,30 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
  * 	The node processed information array.
  */
 function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
-  return twtlogin($_GET);
+    //return twtlogin($_GET);
+
+    $method = "GET";
+
+    $data = array();
+    $data['token'] = $_GET['token'];
+    $data['app_id'] = $_GET['app_id'];
+    $data['uname'] = $_GET['uname'];
+    $data['uid'] = $_GET['uid'];
+    $data['issued_at'] = $_GET['issued_at'];
+    $data['expires_at'] = $_GET['expires_at'];
+
+    $account = array();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/twtlogin";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
+    $uid = $result_obj->uid;
+    $is_authenticated = $account['status_code'] = "1";
+    $account['status_message'] = "customised_message";
+    $account['data']['user_id'] = "$uid";
+    $account['data']['is_authenticated'] = "1";
+    $account['data']['otp_status'] = "0";
+
+    return $account;
 }
 
 /**
@@ -3068,37 +2983,14 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
  */
 function itg_rapid_api_forgot_password($token, $user_id) {
 
-  $ufname = $user_id = $_GET['user_id'];
-  $msg = "";
-  $data = array();
+    $method = "GET";
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
 
-
-  if (is_numeric($ufname)) {
-    $rand_otp = rand(0, 9999);
-    if (function_exists(itg_sso_first_time_otp_insert)) {
-      itg_sso_first_time_otp_insert($ufname, $email = '', $rand_otp, 'reset');
-      itg_sso_sms_send($rand_otp, $ufname);
-    }
-    //drupal_set_message('Please check your mobile for otp');
-    $msg = "Please check your mobile for otp";
-    // to do mobile script for sending sms
-  }
-  else {
-    $rand_otp = rand(0, 9999);
-    if (function_exists(itg_sso_first_time_otp_insert)) {
-      itg_sso_first_time_otp_insert($mobile = '', $ufname, $rand_otp, 'reset');
-    }
-    if (function_exists(itg_forgot_otp_content)) {
-      $mail_content = itg_forgot_otp_content($rand_otp, $ufname);
-    }
-    //drupal_set_message('Please check your mail for otp');
-    $msg = "Please check your mobile for otp";
-  }
-
-  $data['status_code'] = "1";
-  $data['status_message'] = "Please check your mobile for otp";
-
-  return $data;
+    return $data;
 }
 
 /**
@@ -3111,37 +3003,18 @@ function itg_rapid_api_forgot_password($token, $user_id) {
  */
 function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
 
-  $ufname = $user_id = $_GET['user_id'];
-  $uotp = $_GET['otp_code'];
-  $msg = "";
-  $data = array();
+    $method = "GET";
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
 
-  if (is_numeric($ufname)) {
-    if (function_exists(itg_sso_user_mobile_check)) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($ufname);
-    }
-    if (function_exists(itg_sso_otp_delete)) {
-      itg_sso_otp_delete($mail = '', $ufname, 'reset');
-    }
-  }
-  else {
-    if (function_exists(itg_sso_user_email_check)) {
-      $get_user_check_email = itg_sso_user_email_check($ufname);
-    }
-    // $account = user_load($get_user_check_email);
-    // $mail_content = itg_forgot_email_get_mail_content($account, $ufname);
-    if (function_exists(itg_sso_otp_delete)) {
-      itg_sso_otp_delete($ufname, $mobile = '', 'reset');
-    }
-  }
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
+    $data['data']['user_id'] = "$ufname";
+    $data['data']['is_authenticated'] = "1";
+    $data['data']['auth_token'] = "authToken";
 
-  $data['status_code'] = "1";
-  $data['status_message'] = "Please check your mobile for otp";
-  $data['data']['user_id'] = "$ufname";
-  $data['data']['is_authenticated'] = "1";
-  $data['data']['auth_token'] = "authToken";
-
-  return $data;
+    return $data;
 }
 
 /**
@@ -3153,37 +3026,15 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
  * 	The node processed information array.
  */
 function itg_rapid_api_resend_otp($token, $user_id) {
-  $ufname = $user_id = $_GET['user_id'];
-  $msg = "";
-  $data = array();
+    $method = "GET";
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
 
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
 
-  if (is_numeric($ufname)) {
-    $rand_otp = rand(0, 9999);
-    if (function_exists(itg_sso_first_time_otp_insert)) {
-      itg_sso_first_time_otp_insert($ufname, $email = '', $rand_otp, 'reset');
-      itg_sso_sms_send($rand_otp, $ufname);
-    }
-    //drupal_set_message('Please check your mobile for otp');
-    $msg = "Please check your mobile for otp";
-    // to do mobile script for sending sms
-  }
-  else {
-    $rand_otp = rand(0, 9999);
-    if (function_exists(itg_sso_first_time_otp_insert)) {
-      itg_sso_first_time_otp_insert($mobile = '', $ufname, $rand_otp, 'reset');
-    }
-    if (function_exists(itg_forgot_otp_content)) {
-      $mail_content = itg_forgot_otp_content($rand_otp, $ufname);
-    }
-    //drupal_set_message('Please check your mail for otp');
-    $msg = "Please check your mobile for otp";
-  }
-
-  $data['status_code'] = "1";
-  $data['status_message'] = "Please check your mobile for otp";
-
-  return $data;
+    return $data;
 }
 
 /**
@@ -3195,38 +3046,15 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  * 	The node processed information array.
  */
 function itg_rapid_api_change_password($token, $user_id) {
-  $uname = $user_id = $_GET['user_id'];
-  $pass = $_GET['pass'];
-  $pass2 = $_GET['pass2'];
-  $msg = "";
-  $data = array();
-  if (is_numeric($uname)) {
-    if (function_exists(itg_sso_user_mobile_check)) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($uname);
-    }
-    if (!empty($get_user_check_mobile)) {
-      $account = user_load($get_user_check_mobile);
-    }
-  }
-  else {
-    if (function_exists(itg_sso_user_email_check)) {
-      $get_user_check_email = itg_sso_user_email_check($uname);
-    }
-    if (!empty($get_user_check_email)) {
-      $account = user_load($get_user_check_email);
-    }
-  }
+    $method = "GET";
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
+    $result = callAPI($method, $url, $_GET);
+    $result_obj = json_decode($result);
 
+    $data['status_code'] = "1";
+    $data['status_message'] = "Your password has been Changed";
 
-  $edit = array('pass' => $pass);
-
-  // Save the account with the new password.
-  user_save($account, $edit);
-
-  $data['status_code'] = "1";
-  $data['status_message'] = "Your password has been Changed";
-
-  return $data;
+    return $data;
 }
 
 /**
@@ -3468,22 +3296,22 @@ function itg_rapid_api_get_login_user_detail($token) {
  *
  */
 function itg_rapid_api_log_out($token) {
-  global $base_url;
-  $data = array();
-  $user_id = $_GET['user_id'];
-  $pram = "uname=$user_id";
-  $options = array(
-    'method' => 'POST',
-    'data' => $pram,
-    'timeout' => 15,
-    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-  );
-  $url = $base_url . "/user/logout";
-  $result = drupal_http_request('$url', $options);
-  $data['status_code'] = "1";
-  $data['status_message'] = "customised_message";
+    global $base_url;
+    $data = array();
+    $user_id = $_GET['user_id'];
+    $pram = "uname=$user_id";
+    $options = array(
+        'method' => 'POST',
+        'data' => $pram,
+        'timeout' => 15,
+        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $url = $base_url . "/user/logout";
+    $result = drupal_http_request('$url', $options);
+    $data['status_code'] = "1";
+    $data['status_message'] = "customised_message";
 
-  return $data;
+    return $data;
 }
 
 /**
