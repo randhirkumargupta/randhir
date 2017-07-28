@@ -254,7 +254,7 @@ function itg_logged_in_user_visited_node() {
       $cou = 1;
       foreach ($user_details_pages as $row) {
         if (function_exists('itg_get_mongo_detail')) {
-          $comment = itg_get_mongo_detail('comment', $row['nid']);
+          $comment = totalcomments($row['nid']);
           if ($row['name'] == 'story') {
             $id = '0' . $row['nid'];
           }
