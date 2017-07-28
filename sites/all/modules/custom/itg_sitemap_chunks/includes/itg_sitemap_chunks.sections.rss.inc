@@ -385,6 +385,9 @@ function itg_sitemap_print_section_rss($result) {
         $db_date = $data['created'];
       }
       $published_date = date('D, d M Y H:i:s', strtotime($db_date));
+      if (date('Y' , strtotime($published_date)) == '1970') {
+        $published_date = date('D, d M Y H:i:s', strtotime($data['created']));
+      }
       $xml .= '<title> <![CDATA[ ' . check_plain($node_title) . ' ]]></title>' . "\r\n";
       if (isset($data['name']) && !empty($data['name'])) {
         $xml .= '<sectionname> <![CDATA[ ' . $data['name'] . ' ]]></sectionname>' . "\r\n";

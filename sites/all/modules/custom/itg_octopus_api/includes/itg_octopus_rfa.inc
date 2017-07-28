@@ -220,7 +220,7 @@ function itg_octopus_api_rfa_dashboard() {
   }
   $output = '<div class="content-block-menu">
             <ul class="menu">
-           <li>' . l('Octopus', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
+           <li>' . l('Rundown', 'rundown-listing', array('attributes' => array('class' => array($rundown_active_class)))) . '</li>
            <li>' . l('RFA', 'rfa-dashboard', array('attributes' => array('class' => array($rfa_active_class)))) . '</li>
            </ul>
            </div>';

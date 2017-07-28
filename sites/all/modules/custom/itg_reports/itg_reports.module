@@ -831,3 +831,17 @@ function _get_percentage_growth($week1 , $week2) {
     }
   }
 }
+
+/*
+ * Implements itg_get_migrated_carrer_graph_data
+ * @param int $nid
+ */
+function itg_get_migrated_carrer_graph_data($nid) {
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_career_graph_cast', 'gr');
+    $query->fields('gr', array('field_career_graph_cast_value'))
+        ->condition('gr.entity_id', $nid);
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}
