@@ -259,6 +259,9 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/teachers-day [NC]
 	RewriteCond %{REQUEST_URI} !/telangana-special [NC]
 	RewriteCond %{REQUEST_URI} !/tourismawards [NC]
+	RewriteCond %{REQUEST_URI} !/udaan [NC]
+	RewriteCond %{REQUEST_URI} !/uttarakhandfloods [NC]
+	RewriteCond %{REQUEST_URI} !/democraticnewsroom [NC]
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -533,6 +536,12 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^telangana-special/(.*) /staticpages/telangana-special/$1 [L]
 	RewriteRule ^tourismawards$ /staticpages/tourismawards/index.html? [L]
     RewriteRule ^tourismawards/(.*) /staticpages/tourismawards/$1 [L]
+	RewriteRule ^udaan$ /staticpages/udaan/index.html? [L]
+    RewriteRule ^udaan/(.*) /staticpages/udaan/$1 [L]
+	RewriteRule ^uttarakhandfloods$ /staticpages/uttarakhandfloods/index.html? [L]
+    RewriteRule ^uttarakhandfloods/(.*) /staticpages/uttarakhandfloods/$1 [L]
+	RewriteRule ^democraticnewsroom$ /staticpages/democraticnewsroom/index.html? [L]
+    RewriteRule ^democraticnewsroom/(.*) /staticpages/democraticnewsroom/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
