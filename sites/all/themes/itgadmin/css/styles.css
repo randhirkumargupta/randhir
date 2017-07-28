@@ -10303,6 +10303,9 @@ div.node #comments h2 {
 .node-survey-form [id*="field-story-reporter-values"] + div.clearfix {
   right: 532px;
 }
+.node-survey-form .form-field-name-field-story-reporter span.error {
+  padding-left: 220px;
+}
 
 [id*="domain-form"] .form-submit {
   margin-left: 250px;
