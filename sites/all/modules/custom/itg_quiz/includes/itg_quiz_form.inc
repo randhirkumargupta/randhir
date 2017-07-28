@@ -191,16 +191,16 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
          if (function_exists('itg_videogallery_get_videoid_new')) {
           $video_ids = itg_videogallery_get_videoid_new($videid);
-           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+           $question_media = '<div class="quiz-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
-                                                allowfullscreen></iframe>';
+                                                allowfullscreen></iframe></div>';
         }
       }
       
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
           $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
           $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
-          $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
+          $question_media = '<div class="quiz-image"><img src="' . $extra_large_image_url . '" width="750" alt="" /></div>';
       }
 
       // Submit button text
@@ -242,7 +242,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
    
       $form['media' . $num] = array(
           '#type' => 'markup',
-          '#prefix' => '<div>',
+          '#prefix' => '<div class="quiz-media-wrapper">',
           '#markup' => $question_media,
           '#suffix' => '</div>',
       );

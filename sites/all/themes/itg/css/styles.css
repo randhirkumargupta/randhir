@@ -6292,20 +6292,24 @@ h1.category-heading {
   display: none;
 }
 
-.survey-video-wrapper {
+.survey-media-wrapper, .quiz-media-wrapper {
   max-width: 480px;
 }
-.survey-video-wrapper .survey-video {
+.survey-media-wrapper .survey-video, .survey-media-wrapper .quiz-video, .quiz-media-wrapper .survey-video, .quiz-media-wrapper .quiz-video {
   position: relative;
   height: 0;
   padding-bottom: 56.25%;
+  margin: 0 0 10px 10px;
 }
-.survey-video-wrapper .survey-video iframe {
+.survey-media-wrapper .survey-video iframe, .survey-media-wrapper .quiz-video iframe, .quiz-media-wrapper .survey-video iframe, .quiz-media-wrapper .quiz-video iframe {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+}
+.survey-media-wrapper .survey-image, .survey-media-wrapper .quiz-image, .quiz-media-wrapper .survey-image, .quiz-media-wrapper .quiz-image {
+  margin: 0 0 10px 10px;
 }
 
 /*css start archive-story */
