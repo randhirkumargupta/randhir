@@ -1317,8 +1317,8 @@ function itg_rapid_api_resource() {
     //sprint 3 cast poll id
     'cast_polls' => array(
       'operations' => array(
-        'create' => array(
-          'help' => 'Cast Poll based on option id and user id.',
+        'retrieve' => array(
+          'help' => 'Retrieves cast_polls schemes info.',
           'file' => array(
             'type' => 'inc',
             'module' => 'itg_rapid_api',
@@ -1329,7 +1329,7 @@ function itg_rapid_api_resource() {
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
           'args' => array(
-            array(
+             array(
               'name' => 'token',
               'type' => 'string',
               'description' => 'Function to perform',
@@ -1338,33 +1338,25 @@ function itg_rapid_api_resource() {
               'default' => '*',
             ),
             array(
-              'name' => 'poll_id',
-              'optional' => FALSE,
-              'source' => 'data',
-              //'source' => array('data' => 'first_name'),
-              'description' => 'user_id',
-              'type' => 'string',
-            ),
-            array(
-              'name' => 'option_id',
-              'optional' => FALSE,
-              'source' => 'data',
-              //'source' => array('data' => 'first_name'),
-              'description' => 'node_id',
-              'type' => 'string',
-            ),
-            array(
               'name' => 'user_id',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'first_name'),
-              'description' => 'value',
+              //'source' => array('data' => 'user_id'),
+              'description' => 'user mobile or email',
+              'type' => 'string',
+            ),
+            array(
+              'name' => 'otp_code',
+              'optional' => FALSE,
+              'source' => 'data',
+              //'source' => array('data' => 'user_id'),
+              'description' => 'otp_code',
               'type' => 'string',
             ),
           ),
         ),
       ),
-    ),    
+    ),   
     // edit_profile custom resource declaration.....
     'edit_profile' => array(
       'operations' => array(
