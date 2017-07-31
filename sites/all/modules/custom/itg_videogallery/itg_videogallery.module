@@ -2311,13 +2311,16 @@ function daily_motion_video_dashboard_rows() {
 
     $query->condition('n.upload_time', $to_time, '<=');
   }
-
+  $pagelimit = 20;
 //print strtr((string) $query, $query->arguments());die;
-  $query = $query->extend('PagerDefault')->limit(20);
+  $query = $query->extend('PagerDefault')->limit($pagelimit);
   $query->orderBy('n.eid', 'DESC');
   $result = $query->execute();
   $num_of_results = $result->rowCount();
-  $sn = 0;
+  $sn = 1;
+  if(isset($_GET['page']) && !empty($_GET['page'])) {
+      $sn = $pagelimit*$_GET['page']+1;
+    }
   while ($record = $result->fetchObject()) {
     if ($record->dailymotion_published == 1) {
       $status_flag = '<span class="used-video">Used</span>';
@@ -2373,8 +2376,10 @@ function daily_motion_video_dashboard_rows() {
     else {
       $video_status = 'Unpublished';
     }
+    
+    $page_no =$_GET['page'];
     $rows[] = array(
-      ++$sn,
+      $sn++,
       $record->name,
       strtoupper($record->type),
       date('d-M-Y H:i:s', $record->upload_time),
