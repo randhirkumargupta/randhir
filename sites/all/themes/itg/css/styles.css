@@ -6309,7 +6309,7 @@ h1.category-heading {
   left: 0;
 }
 .survey-media-wrapper .survey-image, .survey-media-wrapper .quiz-image, .quiz-media-wrapper .survey-image, .quiz-media-wrapper .quiz-image {
-  margin: 0 0 10px 10px;
+  margin: 0 0 10px 0;
 }
 
 /*css start archive-story */
@@ -13591,7 +13591,6 @@ span.smilies-title img {
   font-weight: 400;
 }
 [id*="itg-quiz-quiz-form"] .answer-container #show_answer {
-  width: 135px;
   margin: 10px auto;
   display: block;
   border-radius: 1px;

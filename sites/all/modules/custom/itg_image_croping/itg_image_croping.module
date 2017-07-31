@@ -861,10 +861,10 @@ function mageimagedimesion() {
 
   $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
   $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
-  $image_dim['field_gallery_image']['field_images']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
-  $image_dim['field_gallery_image']['field_images']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
-  $image_dim['field_gallery_image']['field_photo_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
-  $image_dim['field_gallery_image']['field_photo_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_images']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_images']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_photo_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_photo_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   // Dimension for videogallery
   $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;

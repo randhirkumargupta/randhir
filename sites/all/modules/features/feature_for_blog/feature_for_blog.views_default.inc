@@ -1217,7 +1217,8 @@ function feature_for_blog_views_default_views() {
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source Type';
+  $handler->display->display_options['fields']['field_story_source_type']['empty'] = 'N/A';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';

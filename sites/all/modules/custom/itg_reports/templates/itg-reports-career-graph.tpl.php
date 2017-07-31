@@ -26,7 +26,7 @@ if($source_type != 'migrated') { ?>
     <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
     <?php print $actor_pic; ?>
   </div>  
-  <div id="container_<?php echo $key; ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="container_<?php echo $key; ?>" style="min-width: 290px; height: 400px; margin: 0 auto"></div>
 
 <?php endforeach; ?>
 
@@ -61,7 +61,12 @@ foreach ($output as $key => $value) {
       $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' },';
     }
     else {
-      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '", graph_name:"' . file_create_url($uri) . '"},';
+      if(!empty($uri)) {
+      $image = '<img src='.file_create_url($uri).'>';
+      } else {
+      $image = ''; 
+      }
+      $drow_data .= '{ x:' . $graph_data[0] . ', y: ' . $graph_data[1] . ' , movie_name:"' . $graph_data[2] . '", graph_name:"' . $image . '"},';
     }
     
   }
@@ -80,7 +85,7 @@ foreach ($output as $key => $value) {
         data: [{
             type: "line",
             xValueFormatString: "Year ####",
-            toolTipContent: '{movie_name},{y} cr in {x} <img src={graph_name}>',
+            toolTipContent: '{movie_name},{y} cr in {x} {graph_name}',
             connectNullData: true,
             dataPoints: [
   <?php echo rtrim($drow_data, ','); ?>
