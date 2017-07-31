@@ -3739,6 +3739,10 @@ jQuery(this).find('a').addClass('active');
 });
 });", array('type' => 'inline', 'scope' => 'footer'));
     }
+      // This is for hiding a specific RHS1 block for video
+        drupal_add_js("jQuery(document).ready(function(){
+jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
+});", array('type' => 'inline', 'scope' => 'footer')); 
 
 // Views render on video template
     if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {
