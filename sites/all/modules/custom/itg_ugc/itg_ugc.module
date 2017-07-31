@@ -798,7 +798,6 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, 
       itg_loyalty_reward_earnpoint($nodeid, 'ugc', $user_id['uid']);
       }
       }
-      drupal_set_message(t($ugc_content_details['title'] . ' has been ' . $status . ' successfully.'));
     }
     else {
       $newdata = array('$set' => array('review_status' => 1, 'updated_by' => trim($rejected_by)));
