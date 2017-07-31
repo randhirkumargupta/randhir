@@ -2857,8 +2857,10 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     $account = array();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
     $result = callAPI($method, $url, $_GET);
-    $result_obj = json_decode($result);
-    $uid = $result_obj->user->uid;
+    $result_obj = json_decode($result);    
+    //p($result_obj);die();
+    $uid = 0;
+    $uid = $result_obj->uid;
     $auth_token = $result_obj->token;
     $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
     $is_first_login = 1;
@@ -2867,11 +2869,17 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     }
     //p($field_logged_in_count);
     //die();
-    $account['status_code'] = "1";
-    $account['status_message'] = "customised_message";
-    $account['data']['user_id'] = "$uid";
-    $account['data']['is_first_login'] = "$is_first_login";
-    $account['data']['auth_token'] = "$auth_token";
+    if($uid){
+        $account['status_code'] = "1";
+        $account['status_message'] = "customised_message";
+        $account['data']['user_id'] = "$uid";
+        $account['data']['is_first_login'] = "$is_first_login";
+        $account['data']['auth_token'] = "$auth_token";
+    }
+    else{
+        watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+        return services_error(t('Wrong username or password.'), 401);
+    }
 
     return $account;
 }
