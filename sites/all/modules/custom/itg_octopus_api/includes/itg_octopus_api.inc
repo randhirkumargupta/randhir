@@ -33,7 +33,7 @@ function itg_octopus_api_rundown() {
       $rundown_xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
     }
     catch (Exception $e) {
-// Sending mail to support team 
+      // Sending mail to support team 
       itg_octopus_api_send_email_to_support("Octopus error while fatching rundown", $e->getMessage());
     }
 
@@ -71,7 +71,9 @@ function itg_octopus_api_rundown() {
     }
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
+      // p($rundown_xml->rundown->slugs->slug);
       foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
+
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
 
@@ -967,4 +969,5 @@ function itg_octopus_current_to_prev_rundown($rundown_id, $type) {
   catch (Exception $e) {
     
   }
+  return TRUE;
 }
