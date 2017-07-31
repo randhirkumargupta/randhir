@@ -482,6 +482,7 @@ function itg_loyalty_reward_user_details($uid) {
       $data['redeemed_points'] = $value->redeemed_point;
       $data['remaining_point'] = $value->remaining_point;
     }
+    //$dedicated_point = get_loyality_type_by_name(check_plain($value->loyalty_type));
     $data['unit_description'][] = array(
       'activity_name' => $value->loyalty_type,
       'points_per_activity' => $value->loyalty_points,
