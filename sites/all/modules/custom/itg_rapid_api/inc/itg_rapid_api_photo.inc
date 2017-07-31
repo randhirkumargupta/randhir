@@ -74,8 +74,7 @@ function generatePhotoCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "photogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
 // code vid=14  start

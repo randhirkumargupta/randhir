@@ -260,7 +260,8 @@ function homePageJsonNewslist_india() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -458,7 +459,8 @@ function homePageJsonNewslist_world() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {

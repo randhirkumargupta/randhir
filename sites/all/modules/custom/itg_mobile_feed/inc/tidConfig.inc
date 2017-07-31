@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Inc file contains the tid config array
  */
+define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
 
- define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
-
-function tidConfig(){
+function tidConfig() {
     $tid_config = array();
     // decalation of photo section array
 
@@ -20,7 +20,6 @@ function tidConfig(){
      * elections - 1206719
      *
      */
-
     $photo_sec_tid = array(1206578, 1206749, 1206550, 1206577, 1206567, 1206533, 1206676, 1206719);
     //for my local
     //$photo_sec_tid = array(844517, 844529, 844583, 286531, 844520);
@@ -35,12 +34,9 @@ function tidConfig(){
      * lifestyle - 1206567
      * sports - 1206550
      */
-
     $video_sec_tid = array(1206578, 1206577, 1207580, 1206749, 1206533, 1206567, 1206550);
     //for my local
     //$video_sec_tid = array(844517, 844693, 844529, 286531, 844520);
-
-
     // decalation of program section array
 
     /**
@@ -54,11 +50,9 @@ function tidConfig(){
      * Newsroom - 1207827
      * Auto Today - 1207972
      */
-
     $program_sec_tid = array(1206960, 1207605, 1207722, 1207726, 1207728, 1207755, 1207797, 1207827, 1207972);
-     //for my local
+    //for my local
     //$program_sec_tid = array(844517, 844693, 844529, 286531, 844520);
-
     // decalation of left main array
 
     /**
@@ -72,9 +66,8 @@ function tidConfig(){
      * Auto - 1206689
      * Technology - 1206688
      */
-
     $left_main_tid = array(1206578, 1206550, 1206577, 1206795, 1206533, 1206567, 1206689, 1206688);
-     //for my local
+    //for my local
     //$left_main_tid = array(844693, 844529, 286531, 844520);
 
 
@@ -86,11 +79,10 @@ function tidConfig(){
     return $tid_config;
 }
 
-
 /**
  * Function for Redis connection
  */
-function connectToRedis(){
+function connectToRedis() {
     // redis connection
     $redis = new Redis();
     $time = 300;
@@ -104,12 +96,11 @@ function connectToRedis(){
 /**
  * Function for get to redis
  */
-function getRedis($key){
+function getRedis($key) {
     // variable decration
     $key_value = 0;
     $result = array();
-    $connection_str = "";
-    {
+    $connection_str = ""; {
         // redis connection
         $redis = new Redis();
         $time = 300;
@@ -118,19 +109,16 @@ function getRedis($key){
         $redis_server_read_timeout = 30;
         $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
 
-        if(!$connection_str){
+        if (!$connection_str) {
             throw new Exception("Can’t connect");
-          }
-          else{
-              // get from redis
-              if($redis->exists($key)){
-                  $key_value = $redis->get($key);
-                }
-                else{
-                    $key_value = 0;
-                }
-
-          }
+        } else {
+            // get from redis
+            if ($redis->exists($key)) {
+                $key_value = $redis->get($key);
+            } else {
+                $key_value = 0;
+            }
+        }
     }
     //return array building
 
@@ -142,15 +130,14 @@ function getRedis($key){
 /**
  * Function for set into redis
  */
-function setRedis($key, $value, $ttl = 300){
+function setRedis($key, $value, $ttl = 300) {
     // variable decration
 
     $key_value = 0;
     $result = array();
     $connection_str = "";
-    $set_flag = 0;
-    {
-         // redis connection
+    $set_flag = 0; {
+        // redis connection
         $redis = new Redis();
         $time = 300;
         $redis_server_read = 'redistmp.itgd.in';
@@ -158,15 +145,14 @@ function setRedis($key, $value, $ttl = 300){
         $redis_server_read_timeout = 30;
         $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
 
-        if(!$connection_str){
+        if (!$connection_str) {
             throw new Exception("Can’t connect");
-          }
-          else{
-              //set into redis
-              //$set_flag = $redis->set($key, $value, $ttl);
-              $set_flag = $redis->set($key, $value);
-              $redis->expire($key, $ttl);
-          }
+        } else {
+            //set into redis
+            //$set_flag = $redis->set($key, $value, $ttl);
+            $set_flag = $redis->set($key, $value);
+            $redis->expire($key, $ttl);
+        }
     }
     //return array building
 
@@ -175,48 +161,48 @@ function setRedis($key, $value, $ttl = 300){
     return $result;
 }
 
-
 /*
  * unique function to return all the redis keys
  * args - no
  * reurn - array
  */
-function list_redis_key(){
 
-      $redis = redis_connection();
-      $all_redis_key = $redis->keys("*");
-      return $all_redis_key;
- }
+function list_redis_key() {
 
- /*
-  * unique function to connect redis server
-  */
- function redis_connection(){
+    $redis = redis_connection();
+    $all_redis_key = $redis->keys("*");
+    return $all_redis_key;
+}
 
-   $redis = new Redis();
-        $time = 300;
-        $redis_server_read = 'redistmp.itgd.in';//'127.0.0.1';
-        $redis_server_read_port = 6379;
-        $redis_server_read_timeout = 30;
-        $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
+/*
+ * unique function to connect redis server
+ */
 
-        if(!$connection_str){
-            throw new Exception("Can’t connect redis");
-            return;
-        }else{
-            return $redis;
-        }
+function redis_connection() {
 
- }
+    $redis = new Redis();
+    $time = 300;
+    $redis_server_read = 'redistmp.itgd.in'; //'127.0.0.1';
+    $redis_server_read_port = 6379;
+    $redis_server_read_timeout = 30;
+    $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
 
- /*
-  * delete redis key value
-  */
+    if (!$connection_str) {
+        throw new Exception("Can’t connect redis");
+        return;
+    } else {
+        return $redis;
+    }
+}
 
- function redis_key_delete($key){
+/*
+ * delete redis key value
+ */
 
-   $redis = redis_connection();
-   $result = $redis->del($key);
+function redis_key_delete($key) {
 
-   return $result;
- }
+    $redis = redis_connection();
+    $result = $redis->del($key);
+
+    return $result;
+}
