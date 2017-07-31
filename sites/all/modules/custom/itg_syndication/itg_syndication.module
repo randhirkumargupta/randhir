@@ -288,20 +288,18 @@ function itg_syndication_rule_after_build($form, &$form_state) {
 
   drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1, 'scope' => 'footer'));
 
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array();
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }
-  
-  natcasesort($op); // Sorting section array or category array by it value
-  
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
-      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $op;
+      $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
+      if(!empty($content_type)) {
+        $options = _get_term_as_per_content_types($content_type);
+      } else {
+        $options = array();
+      }
+      $option_array = syndication_get_option_array($options);
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $option_array;
     }
   }
-
 
   // Add cancel button to create/edit
   $form['actions']['cancel'] = array(
@@ -318,10 +316,13 @@ function syndication_ajax_callback($form , &$form_state) {
   $options = _get_term_as_per_content_types($selected_content_type);
   $option_array = syndication_get_option_array($options);
   $wrapper = $form_state['triggering_element']['#ajax']['wrapper'];
-  $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section']['und']['#prefix'] = '<div class="'.$wrapper.'">';
-  $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section']['und']['#suffix'] = '<div>';
-  $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section']['und']['#options'] = $option_array;
-  return $form['field_syndication_rule_details']['und'][0]['field_syndication_select_section'];
+  $int = preg_replace("/[^0-9]/","",$wrapper);//filter_var($wrapper, FILTER_SANITIZE_NUMBER_INT);
+  watchdog('syndication_wrapper', "<pre>" . print_r($int , 1) . "</pre>");
+  
+  $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#prefix'] = '<div class="'.$wrapper.'">';
+  $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#suffix'] = '<div>';
+  $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#options'] = $option_array;
+  return $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section'];
 }
 
 
