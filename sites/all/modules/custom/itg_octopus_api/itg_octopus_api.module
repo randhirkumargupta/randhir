@@ -458,7 +458,7 @@ function itg_octopus_get_slug_notification() {
   $user_last_login = $user->login;
   $query = db_select('itg_octopus_slug', 'ios');
   $query->fields('ios', array('action', 'story_title', 'timestamp', 'storyid'));
-  $query->condition('ios.timestamp', $user_last_login, '>=');
+  $query->condition('ios.timestamp', (int)$user_last_login, '>=');
   //$query->range(0,10);
   $result = $query->execute();
   $rows = array();
