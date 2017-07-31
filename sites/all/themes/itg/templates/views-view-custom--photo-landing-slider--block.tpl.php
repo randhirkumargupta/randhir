@@ -120,7 +120,7 @@ $uri = base64_encode($actual_link);
     <div class="col-md-4">
         <div class="other-details-main">
         <ul class="counterslide">
-        <?php $like_id = 1000; ?>    ;
+        <?php $like_id = 1000; ?>
         <?php foreach ($rows as $index => $row): ?>
                       <li>
                           <div class="other-details">
