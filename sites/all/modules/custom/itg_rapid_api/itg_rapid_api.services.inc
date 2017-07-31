@@ -3184,7 +3184,7 @@ function polls_close($token) {
  */
 function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
     
-    p($_POST);die();
+    p($_GET);die();
 
   $poll_id = $_POST['poll_id'];
   $option_id = $_POST['option_id'];
