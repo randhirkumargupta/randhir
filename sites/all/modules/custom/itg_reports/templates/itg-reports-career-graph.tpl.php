@@ -26,7 +26,7 @@ if($source_type != 'migrated') { ?>
     <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
     <?php print $actor_pic; ?>
   </div>  
-  <div id="container_<?php echo $key; ?>" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  <div id="container_<?php echo $key; ?>" style="min-width: 290px; height: 400px; margin: 0 auto"></div>
 
 <?php endforeach; ?>
 
