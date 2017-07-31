@@ -3175,12 +3175,9 @@ function polls_close($token) {
  * 	array of open polls.
  */
 function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
-    
-    p($_GET);die();
-
-  $poll_id = $_POST['poll_id'];
-  $option_id = $_POST['option_id'];
-  $user_id = $_POST['user_id'];
+  $poll_id = $_GET['poll_id'];
+  $option_id = $_GET['option_id'];
+  $user_id = $_GET['user_id'];
   if (!is_numeric($poll_id)) {
     $poll_id = 0;
   }
