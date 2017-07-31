@@ -14,6 +14,17 @@
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   if ($form_id == 'photogallery_node_form') {
+    
+    // Filed collection add class.
+    
+    foreach ($form['field_gallery_image']['und'] as $delta => $field) {
+        if (is_numeric($delta)) {
+          //p($form['field_gallery_image']['und'][$delta]['field_image_syndication']['#attributes']);
+         $form['field_gallery_image']['und'][$delta]['field_image_syndication']['#attributes']['class'][] = 'check_syndication';
+
+        }
+      }
+    
     $form['field_featured']['und']['#title'] = NULL;
     $form['field_story_syndication']['und']['#title'] = NULL;
     $form['field_photogallery_configuration']['und']['#title'] = NULL;
@@ -235,9 +246,9 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
     $redirect_path .= "?field_story_syndication_value_op=all";
   }
 
-  if ($form_state['input']['op'] != 'Save as Draft') {
+  //if ($form_state['input']['op'] != 'Save as Draft') {
     $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
-  }
+  //}
 }
 
 /**
@@ -465,13 +476,18 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
   }
   $i = 0;
 
+
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
+        if(isset($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes']) && !empty($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes'])) {
+         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und'][0]['value'] ='yes';
+        }
+
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und']['yes'] ='yes';
       $filename = $file_ids[$i]['filename'];
       $newFileName = substr($filename, 0, (strrpos($filename, ".")));
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
       $imge_thumb_id = itg_photogallery_crop_thumb($file_ids[$i]['fid']);
-
       if ($imge_thumb_id) {
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_small_image['und'][0]['fid'] = $imge_thumb_id;
       }

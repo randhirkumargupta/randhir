@@ -240,5 +240,12 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('ads_blocker_content_limit'),
   );
   
+  $form['reporter_tid_for_widgets'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reporter tid for widgets and anchors-listing page'),
+    '#attributes' => array('placeholder' => t('Reporter tid for widgets')),
+    '#default_value' => variable_get('reporter_tid_for_widgets'),
+  );
+  
   return system_settings_form($form);
 }
