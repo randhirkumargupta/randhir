@@ -1313,18 +1313,18 @@ function itg_rapid_api_resource() {
         ),
       ),
     ),
-    //Sprint 3 close poll
-    //Sprint 3 close poll
-    'poll_cast' => array(
+
+    //sprint 3 cast poll id
+    'cast_polls' => array(
       'operations' => array(
         'create' => array(
-          'help' => 'Retrieves poll based on poll id in the system.',
+          'help' => 'Cast Poll based on option id and user id.',
           'file' => array(
             'type' => 'inc',
             'module' => 'itg_rapid_api',
             'name' => 'itg_rapid_api.services',
           ),
-          'callback' => 'poll_cast',
+          'callback' => 'itg_rapid_api_poll_cast',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -1341,27 +1341,30 @@ function itg_rapid_api_resource() {
               'name' => 'poll_id',
               'optional' => FALSE,
               'source' => 'data',
-              'description' => 'poll id of the poll',
-              'type' => 'int',
+              //'source' => array('data' => 'first_name'),
+              'description' => 'user_id',
+              'type' => 'string',
             ),
             array(
-              'name' => 'option id',
+              'name' => 'option_id',
               'optional' => FALSE,
               'source' => 'data',
-              'description' => 'option id of the poll , which you want to make the ans',
-              'type' => 'int',
+              //'source' => array('data' => 'first_name'),
+              'description' => 'node_id',
+              'type' => 'string',
             ),
             array(
-              'name' => 'user id',
-              'optional' => TRUE,
+              'name' => 'user_id',
+              'optional' => FALSE,
               'source' => 'data',
-              'description' => 'user id of the loged in user',
-              'type' => 'int',
+              //'source' => array('data' => 'first_name'),
+              'description' => 'value',
+              'type' => 'string',
             ),
           ),
         ),
       ),
-    ),
+    ),    
     // edit_profile custom resource declaration.....
     'edit_profile' => array(
       'operations' => array(
@@ -3078,10 +3081,15 @@ function author_latest_story($token) {
   //valid id
   $author_id = $_GET['author_id'];
   $story_type = $_GET['type'];
+  $cpageno = $_GET['cpageno'];
+
+  
   if (!is_numeric($author_id)) {
     $id = 0;
   }
-
+  if (!is_numeric($cpageno)) {
+      $cpageno = 0;
+  }
   // call function for return data..
   if ($_GET['type'] == '0') {
     $type = 'latest';
@@ -3089,7 +3097,8 @@ function author_latest_story($token) {
   elseif ($_GET['type'] == '1') {
     $type = 'popular';
   }
-  $suffix = $author_id;
+
+  $suffix = $author_id.'_'.$cpageno;
   $redis_key = "itg_rapid_api_author_" . $type . "_storylist" . $suffix;
   $result_get = getRedis($redis_key);
 
@@ -3098,7 +3107,7 @@ function author_latest_story($token) {
   }
   else {
     // call function from return data..
-    $jsondata = author_story_list($author_id, $story_type);
+    $jsondata = author_story_list($author_id, $story_type, $cpageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3115,8 +3124,12 @@ function author_latest_story($token) {
  * 	array of open polls.
  */
 function polls_open($token) {
-
-  $redis_key = "itg_rapid_api_open_polls";
+  $cpageno = $_GET['cpageno'];
+  if (!is_numeric($cpageno)) {
+      $cpageno = 0;
+  }
+  
+  $redis_key = "itg_rapid_api_open_polls_".$cpageno;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3124,7 +3137,7 @@ function polls_open($token) {
   }
   else {
     // call function from return data..
-    $jsondata = polls_open_list();
+    $jsondata = polls_open_list($cpageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3141,8 +3154,11 @@ function polls_open($token) {
  * 	array of open polls.
  */
 function polls_close($token) {
-
-  $redis_key = "itg_rapid_api_close_polls";
+  $cpageno = $_GET['cpageno'];
+  if (!is_numeric($cpageno)) {
+      $cpageno = 0;
+  }
+  $redis_key = "itg_rapid_api_close_polls_".$cpageno;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3150,7 +3166,7 @@ function polls_close($token) {
   }
   else {
     // call function from return data..
-    $jsondata = polls_close_list();
+    $jsondata = polls_close_list($cpageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -3166,26 +3182,23 @@ function polls_close($token) {
  * @return array
  * 	array of open polls.
  */
-function poll_cast($token, $poll_id, $option_id, $user_id = 0) {
+function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
 
   $poll_id = $_POST['poll_id'];
   $option_id = $_POST['option_id'];
-  $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '0';
-
-
-  $redis_key = "itg_rapid_api_cast_poll";
-  $result_get = getRedis($redis_key);
-
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
+  $user_id = $_POST['user_id'];
+  if (!is_numeric($poll_id)) {
+    $poll_id = 0;
   }
-  else {
-    // call function from return data..
+  if (!is_numeric($option_id)) {
+    $option_id = 0;
+  }
+  if (!is_numeric($user_id)) {
+    $user_id = 0;
+  }
+   // call function from return data..
     $jsondata = poll_cast_list($poll_id, $option_id, $user_id);
     $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
 
   $jsondata = json_decode($jsondata, true);
   return $jsondata;
@@ -3677,8 +3690,13 @@ function anchor_programm_list($token, $anchor_id, $type) {
   //valid id
   $anchor_id = $_GET['anchor_id'];
   $story_type = $_GET['type'];
+  $cpageno = $_GET['cpageno'];
+  
   if (!is_numeric($anchor_id)) {
     $id = 0;
+  }
+  if (!is_numeric($cpageno)) {
+    $cpageno = 0;
   }
 
   // call function for return data..
@@ -3693,7 +3711,7 @@ function anchor_programm_list($token, $anchor_id, $type) {
   else {
     $type = '';
   }
-  $suffix = $anchor_id;
+  $suffix = $anchor_id_.$cpageno;
   $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
   $result_get = getRedis($redis_key);
 
@@ -3702,7 +3720,7 @@ function anchor_programm_list($token, $anchor_id, $type) {
   }
   else {
     // call function from return data..
-    $jsondata = anchor_programm_data_list($anchor_id, $type);
+    $jsondata = anchor_programm_data_list($anchor_id, $type,$cpageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);

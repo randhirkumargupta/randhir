@@ -4,7 +4,7 @@
  * Get The list of open poll in the system
  */
 
-function polls_open_list() {
+function polls_open_list($cpageno) {
 
     $output_array = array();
     $data_array = array();
@@ -12,7 +12,7 @@ function polls_open_list() {
 
     // list array building
 
-    $data = polls_open_datalist();
+    $data = polls_open_datalist($cpageno);
 
 
     if ($data['lcount'] > 0) {
@@ -24,11 +24,9 @@ function polls_open_list() {
     }
 
     //data array building
-    $poll_id = $data['id'];
-    $poll_title = $data['title'];
 
-    $data_array['id'] = ""; //$poll_id
-    $data_array['title'] = ""; //$poll_title
+    $data_array['id'] = "1234"; //$poll_id
+    $data_array['title'] = "Test title"; //$poll_title
 
     $data_array['polls'] = $data['data'];
     $output_array['data'] = $data_array;
@@ -36,7 +34,7 @@ function polls_open_list() {
     return $output_array;
 }
 
-function polls_close_list() {
+function polls_close_list($cpageno) {
 
     $output_array = array();
     $data_array = array();
@@ -44,7 +42,7 @@ function polls_close_list() {
 
     // list array building
 
-    $data = polls_close_datalist();
+    $data = polls_close_datalist($cpageno);
 
 
     if ($data['lcount'] > 0) {
@@ -56,11 +54,9 @@ function polls_close_list() {
     }
 
     //data array building
-    $poll_id = $data['id'];
-    $poll_title = $data['title'];
 
-    $data_array['id'] = ""; //$poll_id
-    $data_array['title'] = ""; //$poll_title
+    $data_array['id'] = "1234";
+    $data_array['title'] = "Test Title";
 
     $data_array['polls'] = $data['data'];
     $output_array['data'] = $data_array;
@@ -76,17 +72,18 @@ function polls_close_list() {
 
 function poll_cast_list($poll_id, $option_id, $user_id) {
 
-    $dsp_result = itg_poll_get_display_result($poll_id);
-    $query = db_insert('itg_polls')
+  $dsp_result = itg_poll_get_display_result($poll_id);
+  if(isset($dsp_result)) {
+        $query = db_insert('itg_polls')
             ->fields(array(
                 'nId' => $poll_id,
                 'ansId' => $option_id,
-                'uid' => 0,
+                'uid' => $user_id,
                 'display_result' => $dsp_result,
                 'created' => date('Y-m-d H:i:s', time())
             ))
             ->execute();
-
+  }
 
     if ($query) {
         $output_array['status_code'] = "1";
@@ -189,12 +186,8 @@ function poll_detail_data($poll_id) {
         $output_array['status_message'] = "customised_message";
     }
 
-    //data array building
-    $poll_id = $data['id'];
-    $poll_title = $data['title'];
-
-    $data_array['id'] = ""; //$poll_id
-    $data_array['title'] = ""; //$poll_title
+    $data_array['id'] = "1234"; //$poll_id
+    $data_array['title'] = "Test Title"; //$poll_title
 
     $data_array['polls'] = $data['data'];
     $output_array['data'] = $data_array;
@@ -206,8 +199,14 @@ function poll_detail_data($poll_id) {
  * Return the data of open poll
  */
 
-function polls_open_datalist() {
-
+function polls_open_datalist($cpageno) {
+    $range_max = 10;
+    if (!$cpageno == 0) {
+      $range_min = $cpageno * $range_max;
+    }
+    else {
+      $range_min = 0;
+    }
     $current_time = date('Y-m-d H:i:s', time());
 
     $query = db_select('node', 'n');
@@ -226,11 +225,8 @@ function polls_open_datalist() {
     $query->condition('ed.field_poll_end_date_value', $current_time, '>');
     $query->condition('n.status', '1');
     $query->orderBy('n.nid', 'DESC');
-    $query->range(0, 2);
+    $query->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-//print_r(node_load(349643));
-//exit();
 
     foreach ($result as $k => $res) {
 
@@ -284,8 +280,15 @@ function polls_open_datalist() {
  * return all the close poll list
  */
 
-function polls_close_datalist() {
-
+function polls_close_datalist($cpageno) {
+    $range_max = 10;
+    if (!$cpageno == 0) {
+      $range_min = $cpageno * $range_max;
+    }
+    else {
+      $range_min = 0;
+    }
+    
     $current_time = date('Y-m-d H:i:s', time());
 
     $query = db_select('node', 'n');
@@ -304,11 +307,8 @@ function polls_close_datalist() {
     $query->condition('ed.field_poll_end_date_value', $current_time, '<');
     $query->condition('n.status', '1');
     $query->orderBy('n.nid', 'DESC');
-    $query->range(0, 2);
+    $query->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-//print_r($result);
-//exit();
 
     foreach ($result as $k => $res) {
 
@@ -324,9 +324,6 @@ function polls_close_datalist() {
         $query2->condition('pa.entity_id', $res['nid']);
         $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-        // print_r($result_option);
-        // exit();
-
         $options2 = array();
         foreach ($result_option as $p => $pv) {
             //$poll_options = field_collection_item_load($pv['field_poll_answer_value']);
@@ -334,7 +331,6 @@ function polls_close_datalist() {
             $options['o_title'] = $pv['field_poll_answer_text_value'];
             $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
             $options2[] = $options;
-            //print_r($poll_options);
         }
 
         $count_total_patic = itg_poll_getTotalPoll($res['nid']);
@@ -384,8 +380,6 @@ function poll_detail_datalist($poll_id) {
     $query->range(0, 2);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-//print_r($result);
-//exit();
 
     foreach ($result as $k => $res) {
 
@@ -401,8 +395,6 @@ function poll_detail_datalist($poll_id) {
         $query2->condition('pa.entity_id', $res['nid']);
         $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-        // print_r($result_option);
-        // exit();
 
         $options2 = array();
         foreach ($result_option as $p => $pv) {
@@ -435,4 +427,67 @@ function poll_detail_datalist($poll_id) {
     $data['id'] = $res['id'];
     $data['title'] = $res['title'];
     return $data;
+}
+
+/*
+ * get result of poll based on poll id
+ * @ args poll id
+ */
+
+function poll_result($nid) {
+
+  $node = node_load($nid);
+  $outputnew = '';
+  $optionarr = itg_poll_getPollResult($nid);
+  $opttotal = itg_poll_getTotalPoll($nid);
+
+  foreach ($node->field_poll_answer[LANGUAGE_NONE] as $row) {
+    $item_id[] = $row['value'];
+  }
+
+  $result_format = $node->field_result_format[LANGUAGE_NONE][0]['value'];
+  $temp_entities = entity_load('field_collection_item', $item_id);
+
+  if (is_array($optionarr) && count($optionarr) > 0) {
+
+    $finaltotal = $opttotal;
+    $outputnew = '';
+    $poll_manipulate_allval = '';
+    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+      $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+    }
+    $finaltotal += $poll_manipulate_allval;
+
+    $poll_options = array();
+
+
+    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+      $poll_options['o_id'] = $temp_ents->item_id;
+      $polls_answer_text = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
+      $polls_answer_image_fid = isset($temp_ents->field_poll_answer_image['und'][0]['fid']) ? $temp_ents->field_poll_answer_image['und'][0]['fid'] : '';
+
+      // Poll Manipulate value
+      $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+
+      $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
+      $optioncnt = $preoptioncnt + $poll_manipulate_val;
+      $percentage = number_format(($optioncnt / $finaltotal) * 100);
+      $polls_answer_text_render = '';
+      if ($polls_answer_text) {
+        $polls_answer_text_render = $polls_answer_text;
+      }
+
+      if ($result_format == 1) { // Percent
+        $poll_options['o_title'] = $polls_answer_text_render;
+        $poll_options['o_res'] = $percentage . '%';
+      }
+      elseif ($result_format == 2) { // Number of votes
+        $poll_options['o_title'] = $polls_answer_text_render;
+        $poll_options['o_res'] = $optioncnt;
+      }
+      $poll_options['o_image'] = completeFilePath($polls_answer_image_fid);
+      $poll_options2[] = $poll_options;
+    }
+  }
+  return $poll_options2;
 }
