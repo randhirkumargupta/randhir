@@ -315,6 +315,63 @@ function itg_loyalty_reward_dedicated_point($type) {
 }
 
 /**
+ * Implements get_loyality_type_by_name().
+ */
+function get_loyality_type_by_name($type) {
+  $type_data = '';
+  switch ($type) {
+    case 'Content Share':
+      $type_data = 'share';
+      break;
+    case 'Google Share':
+      $type_data = 'google_share';
+      break;
+    case 'Content Like':
+      $type_data = 'like';
+      break;
+    case 'Twitter Share':
+      $type_data = 'twitter_share';
+      break;
+    case 'Content Visit':
+      $type_data = 'visit';
+      break;
+    case 'Content Follow':
+      $type_data = 'follow';
+      break;
+    case 'Twitter Follow':
+      $type_data = 'twitter_follow';
+      break;
+    case 'Google Follow':
+      $type_data = 'google_follow';
+      break;
+    case 'Newsletter Subscription':
+      $type_data = 'ns';
+      break;
+    case 'UGC Contribution':
+      $type_data = 'ugc';
+      break;
+    case 'Online Registration for Any Events':
+      $type_data = 'ol-register';
+      break;
+    case 'Participation in Poll':
+      $type_data = 'poll';
+      break;
+    case 'Participation in Campaign':
+      $type_data = 'campaign';
+      break;
+    case 'Participation in Survey':
+      $type_data = 'survey';
+      break;
+    case 'Refer a Friend':
+      $type_data = 'raf';
+      break;
+    case 'Facebook Follow':
+      $type_data = 'fb_follow';
+  }
+  return itg_loyalty_reward_dedicated_point(check_plain($type_data));
+}
+
+/**
  * Implements callback function for point notification.
  */
 function itg_loyalty_reward_points_expire_notification_callback() {
