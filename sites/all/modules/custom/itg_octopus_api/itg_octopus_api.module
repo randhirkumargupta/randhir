@@ -456,7 +456,7 @@ function itg_octopus_api_remove_cdata($text) {
 function itg_octopus_get_slug_notification() {
   global $user;
   $user_last_login = $user->login;
-  watchdog('notificaton octopus debug', $user_last_login->login);
+  watchdog('notificaton octopus debug', $user_last_login);
   $query = db_select('itg_octopus_slug', 'ios');
   $query->fields('ios', array('action', 'story_title', 'timestamp', 'storyid'));
   $query->condition('ios.timestamp', (int)$user_last_login, '>=');
