@@ -9,7 +9,7 @@
         <li class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">        
     <?php  if (!empty($video_data['esi_file_uri']) && file_exists($video_data['esi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-                <?php $file_uri = image_style_url("image170x127", $video_data['si_file_uri']); ?>
+                <?php $file_uri = file_create_url($video_data['esi_file_uri']); ?>
               <img title="<?php echo $video_data['field_story_extra_small_image_title'] ?>" alt="<?php echo $video_data['field_story_extra_small_image_alt'] ?>" src="<?php print $file_uri; ?>" />
             </a>
             <?php
