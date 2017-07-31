@@ -1316,26 +1316,34 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'] = variable_get('editor_pic_tid');
   }
 
-  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
-    $anchor_tid = variable_get('reporter_tid');
+  if (($view->name == 'widget_anchors_listing' && ($view->current_display == 'anchors_listing_page' || $view->current_display == 'anchors_listing_widget' || $view->current_display == 'anchors_display_page'))) {
+    $anchor_tid = variable_get('reporter_tid_for_widgets');
     foreach ($query->where[1]['conditions'] as $keys => $conditions) {
       if (is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
         $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
       }
     }
   }
-
-  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
-    $anchor_tid = variable_get('anchor_id_for_widget');
-    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
-    if (strlen($anchor_tid) <= 0) {
-// Link should display only adminstrator.
-      if (in_array('administrator', $user->roles)) {
-        $link = l(t("click here"), 'admin/settings/custom-variables');
-      }
-      drupal_set_message(t("Anchor setting not found :link", array(":link" => $link)), "error");
-    }
-  }
+//  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page')) {
+//    $anchor_tid = variable_get('reporter_tid_for_widgets');
+//    foreach ($query->where[1]['conditions'] as $keys => $conditions) {
+//      if (is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
+//        $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
+//      }
+//    }
+//  }
+//
+//  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
+//    $anchor_tid = variable_get('reporter_tid_for_widgets');
+//    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+//    if (strlen($anchor_tid) <= 0) {
+//// Link should display only adminstrator.
+//      if (in_array('administrator', $user->roles)) {
+//        $link = l(t("click here"), 'admin/settings/custom-variables');
+//      }
+//      drupal_set_message(t("Anchor setting not found :link", array(":link" => $link)), "error");
+//    }
+//  }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
     foreach ($query->where[1]['conditions'] as $keys => $conditions) {

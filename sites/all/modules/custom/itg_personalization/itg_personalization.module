@@ -812,21 +812,4 @@ function itg_personalization_refer_friend_existence($mail) {
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/**
- * Implements hook_node_insert
- * @param type $node
- */
-function itg_personalization_node_insert($node) {
-  $type_array = array('story', 'blog', 'photogallery', 'videogallery', 'podcast');
-  if ($node->status == 1 && in_array($node->type, $type_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'UGC') {
-    if (function_exists('itg_personalization_get_uid')) {
-      if ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
-        $user_id = itg_personalization_get_uid($node->field_story_source_id[LANGUAGE_NONE][0]['value']);
-      }
-      if ($node->type == 'videogallery' || $node->type == 'story') {
-        $user_id = itg_personalization_get_uid($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']);
-      }
-    }
-    itg_loyalty_reward_earnpoint($node->nid, 'ugc', $user_id['uid']);
-  }
-}
+

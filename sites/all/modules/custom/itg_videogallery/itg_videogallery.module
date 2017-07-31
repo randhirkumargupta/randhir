@@ -2936,16 +2936,17 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     }
 
     if ($node_flag == 0) {
-       foreach ($all_vid as $keyof => $dmvid_id) {
+       
+    
+      $node = node_load($video_id->nid);
+      if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+        foreach ($all_vid as $keyof => $dmvid_id) {
          $query = db_update('dailymotion_response_details');
             $query->fields(array( 'is_draft' => 0));
             $query->condition('video_id', $dmvid_id, '=');
             $query->execute();
          itg_videogallery_update_video_info_solr($dmvid_id);
     }
-    
-      $node = node_load($video_id->nid);
-      if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
         if ($node->field_video_status_flag[LANGUAGE_NONE][0]['value'] != 'low_level') {
           if ($node->status == 0) {
             $node->status = 1;

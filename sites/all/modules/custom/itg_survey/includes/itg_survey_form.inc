@@ -38,7 +38,8 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
     
     // If survey is not published
-    if(!$node->status) {
+    
+    if(($node->status == 0) && ($base_url == FRONT_URL)) {      
       $form['survey_status'] = array(
         '#type' => 'markup',
         '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
