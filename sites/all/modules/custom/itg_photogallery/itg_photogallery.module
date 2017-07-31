@@ -235,9 +235,9 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
     $redirect_path .= "?field_story_syndication_value_op=all";
   }
 
-  if ($form_state['input']['op'] != 'Save as Draft') {
+  //if ($form_state['input']['op'] != 'Save as Draft') {
     $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
-  }
+  //}
 }
 
 /**

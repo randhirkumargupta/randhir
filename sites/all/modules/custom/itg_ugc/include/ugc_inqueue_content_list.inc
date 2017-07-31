@@ -99,7 +99,7 @@ function itg_ugc_inqueue_content() {
       }
 
       if (is_array($query) && empty($query)) {
-        $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1))->limit($limit)->sort(array('_id' => -1));
+        $userData = $people->find(array("review_status" => array('$ne' => 1), "status" => 1, "publish_status" => array('$ne' => 1)))->limit($limit)->sort(array('_id' => -1));
       }
       else {
         $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));

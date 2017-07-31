@@ -172,7 +172,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     // prefill input value in blog form
     if ($form_id == 'blog_node_form' && !empty($url_nid)) {
       // get node values
-      ;
       $mongo_details = itg_ugc_content_details($url_nid);
 
       $form['title']['#default_value'] = $mongo_details['title'];
@@ -585,7 +584,7 @@ function ugc_form_submit_handler($form, &$form_state) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->ugc_details;
-    $qry = array("unid" => $unique_id, "name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $ins_image, "image_caption" => $multiple_caption);
+    $qry = array("unid" => $unique_id, "name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $ins_image, "image_caption" => $multiple_caption, "review_status" => "");
     $result = $people->insert($qry);
   }
 
@@ -761,7 +760,7 @@ function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  * @param int $nid
  * @param string $title
  */
-function itg_ugc_node_status_update($nid, $title, $type = NULL) {
+function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, $nodeid) {
   global $user;
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -786,13 +785,25 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL) {
   $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
 
   if (!empty($title)) {
-    $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
-    $people->update(array("unid" => (int) $nid), $newdata);
-    module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
-    $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
-    if($type != 'videogallery') {
-    drupal_set_message(t($ugc_content_details['title'] . ' has been Published successfully.'));
-    drupal_goto('ugc-inqueue-content');
+    if ($status == 1) {
+      $newdata = array('$set' => array('publish_status' => 1, 'updated_by' => trim($rejected_by)));
+      $people->update(array("unid" => (int) $nid), $newdata);
+      module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
+      $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
+      $status = 'Published';
+      $user_id = itg_personalization_get_uid($nid);
+      if(function_exists('itg_loyalty_reward_share_point') && function_exists('itg_loyalty_reward_earnpoint')) {
+      $existing_check = itg_loyalty_reward_share_point($user_id['uid'], 'ugc', $nodeid);
+      if(!$existing_check) {
+      itg_loyalty_reward_earnpoint($nodeid, 'ugc', $user_id['uid']);
+      }
+      }
+      drupal_set_message(t($ugc_content_details['title'] . ' has been ' . $status . ' successfully.'));
+    }
+    else {
+      $newdata = array('$set' => array('review_status' => 1, 'updated_by' => trim($rejected_by)));
+      $people->update(array("unid" => (int) $nid), $newdata);
+      $status = 'Updated';
     }
   }
   else {
@@ -802,9 +813,9 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL) {
     $people->update(array("_id" => $pid), $newdata);
     module_load_include('inc', 'itg_ugc', 'include/itg_ugc_mail');
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Rejected', $to);
-    if($type != 'videogallery') {
-    drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
-    drupal_goto('ugc-inqueue-content');
+    if ($type != 'videogallery') {
+      drupal_set_message(t($ugc_content_details['title'] . ' has been rejected successfully.'));
+      drupal_goto('ugc-inqueue-content');
     }
   }
 }
@@ -898,7 +909,36 @@ function itg_ugc_node_insert($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      itg_ugc_node_status_update($source_id, $title, $node->type);
+      watchdog('ugc_insert', 'called');
+      itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_update
+ * @param type $node
+ */
+function itg_ugc_node_update($node) {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
+    $title = $node->title;
+    $source_type = '';
+    if (!empty($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+    }
+    if (!empty($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'])) {
+      if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast') {
+        $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    else {
+      if (!empty($node->field_story_source_id[LANGUAGE_NONE])) {
+        $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    if ($source_type == 'UGC' && !empty($source_id)) {
+      watchdog('ugc_update', 'called');
+      itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
     }
   }
 }
