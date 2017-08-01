@@ -2914,9 +2914,10 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
+    $uname =  $_GET['uname'];
     $is_authenticated = $account['status_code'] = "1";
     $account['status_message'] = "customised_message";
-    $account['data']['user_id'] = "$uid";
+    $account['data']['user_id'] = "$uname";
     $account['data']['is_authenticated'] = "1";
     $account['data']['otp_status'] = "0";
 
@@ -2951,8 +2952,9 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
     $is_authenticated = $account['status_code'] = "1";
+    $uname =  $_GET['uname'];
     $account['status_message'] = "customised_message";
-    $account['data']['user_id'] = "$uid";
+    $account['data']['user_id'] = "$uname";
     $account['data']['is_authenticated'] = "1";
     $account['data']['otp_status'] = "0";
 
@@ -2993,10 +2995,10 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
-
+    $uname =  $_GET['user_id'];
     $data['status_code'] = "1";
     $data['status_message'] = "Please check your mobile for otp";
-    $data['data']['user_id'] = "$ufname";
+    $data['data']['user_id'] = "$uname";
     $data['data']['is_authenticated'] = "1";
     $data['data']['auth_token'] = "authToken";
 
