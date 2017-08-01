@@ -194,9 +194,20 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_breaking_news_form_custom_callback($form, &$form_state) {
+  
+  // REDIRECTION FOR APPLY BUTTON
+  if ($form_state['input']['op'] == 'Apply') {
+    if ($form_state['node']->status == '1') {
+      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+      $_GET['destination'] = $redirect_path;
+      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
+  }
+
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
+  
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'breaking-news') {
     $op = 'created';
   }
@@ -257,6 +268,18 @@ function itg_breaking_news_after_build($form, &$form_state) {
     $node_id = 0;
   }
 
+   // apply button for editor and siteadmin role
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'breaking_news' && $form['#node']->status == '1') {
+      $form['actions']['itg_breaking_apply_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Apply'),
+        '#id' => 'btn-apply',
+        '#submit' => array('node_form_submit', 'itg_breaking_news_form_custom_callback'),
+        '#weight' => -8,
+      );
+    }
+  }
 
   for ($i = 0; $i <= $form['field_breaking_content_details'][LANGUAGE_NONE]['#max_delta']; $i++) {
     $count = $i + 1;
