@@ -2847,13 +2847,12 @@ function itg_rapid_api_login_request_bk($token, $user_id, $password, $login_type
 }
 
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
-    $method = "GET";
+   $method = "GET";
     $data = $_GET;
     $account = array();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
     $result = callAPI($method, $url, $_GET);
-    $result_obj = json_decode($result);    
-    //p($result_obj);die();
+    $result_obj = json_decode($result);        
     $uid = 0;
     $uid = $result_obj->uid;
     $auth_token = $result_obj->token;
@@ -2862,14 +2861,20 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     if ($field_logged_in_count > 0) {
         $is_first_login = 0;
     }
-    //p($field_logged_in_count);
-    //die();
+   
     if($uid){
+        $local_account = localSignup($_GET);
+        //p($local_account);echo "andy";die();
+        $uid = $local_account->user->uid;
+        $name = $local_account->user->name;
+        $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+        $auth_token = $local_account->token;
         $account['status_code'] = "1";
         $account['status_message'] = "customised_message";
-        $account['data']['user_id'] = "$uid";
+        $account['data']['user_id'] = "$name";
         $account['data']['is_first_login'] = "$is_first_login";
         $account['data']['auth_token'] = "$auth_token";
+        
     }
     else{
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
