@@ -36,6 +36,7 @@ function itg_widget_init() {
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
+  $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
 }
