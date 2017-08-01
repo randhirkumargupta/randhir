@@ -249,6 +249,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/realestateawards [NC]
 	Redirect /realestateconclave /realestateawards
 	Redirect /tech /technology
+	Redirect /media-institute /itmi
 	RewriteCond %{REQUEST_URI} !/sachin-live-on-world-cup [NC]
 	RewriteCond %{REQUEST_URI} !/sachin-odi-gallery [NC]
 	RewriteCond %{REQUEST_URI} !/sachin2 [NC]
