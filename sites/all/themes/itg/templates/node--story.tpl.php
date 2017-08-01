@@ -905,7 +905,8 @@ if (!empty($content)):
               ?>
               <div class="agbutton"><button title ="Like" id="like_count" data-rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" data-rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snap-post"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
             </div>
-  <?php } ?>
+          <?php } ?>
+          <?php if(!empty($node->field_story_itg_tags['und'])) { ?>
           <div class="tags">
             <ul>
               <li><i class="fa fa-tags"></i> <?php print t('Tags :'); ?></li>        
@@ -917,13 +918,14 @@ if (!empty($content)):
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
-                    print '<li><a target="_blank" href="' . $base_url . '/topic?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
+                    print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
                   }
                 }
               }
               ?>
             </ul>
           </div>
+            <?php } ?>
           <!-- For buzzfeed section stary --> 
 
             <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
