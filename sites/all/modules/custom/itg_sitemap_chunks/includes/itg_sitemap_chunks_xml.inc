@@ -551,20 +551,24 @@ function itg_sitemap_chunks_create_xml_sitemap_section() {
  * Get Section and category 2 Level (CATEGORY_MANAGMENT)
  */
 function itg_sitemap_chunk_get_section($vid = CATEGORY_MANAGMENT, $parent = 0, $max_depth = 2, $load_entities = FALSE) {
-    if ($cached = cache_get('section_' . $vid, 'cache')) {
-        $section_tids = json_decode($cached->data);
-        return $section_tids;
-    }
+//    if ($cached = cache_get('section_' . $vid, 'cache')) {
+//        $section_tids = json_decode($cached->data);
+//        return $section_tids;
+//    }
 
     $section_hierarchy = itg_get_taxonomy_tree($vid, 0, 2);
     $section_tids = array();
     foreach ($section_hierarchy as $tax_object) {
         $section_tids[] = $tax_object->tid;
     }
-    cache_set('section_' . $vid, json_encode($section_tids), 'cache', 1 * 24 * 60 * 60); // 2days
+    cache_set('section_' . $vid, json_encode($section_tids), 'cache', 1 * 24 * 60 * 60); // 1days
     return $section_tids;
 }
 
+/*
+ * Function to get taxonomy in tree structure with depth
+ * @return Array
+ */
 function itg_get_taxonomy_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {
     $children = &drupal_static(__FUNCTION__, array());
     $parents = &drupal_static(__FUNCTION__ . ':parents', array());
