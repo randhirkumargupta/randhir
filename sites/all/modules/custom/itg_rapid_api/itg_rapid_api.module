@@ -315,12 +315,10 @@ function server_error_master_json() {
  */
 
 function getCommentsCount($nid){
-    // variable declation
-  $query = db_select('comment', 'com');  
-  $query->fields('com', array('cid'));
-  $query->condition('com.nid', $nid);  
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return count($result);
+ 
+  $node_anyalytics = analytics_node_data($nid,'array');
+  $nc_count = $node_anyalytics['data_count_node_comment'];
+  return $nc_count;
 }
 
 /**

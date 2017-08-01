@@ -70,9 +70,10 @@ function polls_close_list($cpageno) {
  *  @return the poll info in array
  */
 
-function poll_cast_list($poll_id, $option_id, $user_id) {
+function poll_cast_list($poll_id, $option_id, $user_id,$ip_address,$device) {
 
   $dsp_result = itg_poll_get_display_result($poll_id);
+  $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
   if(isset($dsp_result)) {
         $query = db_insert('itg_polls')
             ->fields(array(
@@ -80,6 +81,8 @@ function poll_cast_list($poll_id, $option_id, $user_id) {
                 'ansId' => $option_id,
                 'uid' => $user_id,
                 'display_result' => $dsp_result,
+                'ip' => $ip_address,
+                'device' => $device,
                 'created' => date('Y-m-d H:i:s', time())
             ))
             ->execute();

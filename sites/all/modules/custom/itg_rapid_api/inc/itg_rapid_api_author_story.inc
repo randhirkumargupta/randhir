@@ -93,6 +93,7 @@ function author_latest_storylist($author_id,$cpageno) {
         $comment_cont = getCommentsCount($res['nid']);
         $changed = $res['changed'];
         $n_view_count = getNodeViewCount($res['nid']);
+        
         $n_share_count = getNodeShareCount($res['nid']);
         $file_small_img_url = file_create_url($res['uri']);
         $file_large_img_url = file_create_url($res['li_file_uri']);
@@ -458,7 +459,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
     $data_up_time = $data['updated_datetime'];
 
     $data_array['program_count'] = "$datacount";
-    $data_array['program_display_count'] = "$datacount";
+    $data_array['program_display_count'] = "10";
     $data_array['program_pagination_cap'] = "0";
 
     $data_array['program'] = $data['data'];
@@ -607,40 +608,52 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
 
    $query = db_select('node', 'n');
    $query->leftJoin('field_data_field_video_anchor', 'av', 'av.entity_id = n.nid');
-   $query->leftJoin('field_data_field_video_upload', 'vu', 'vu.entity_id = n.nid');
+   $query->fields('n', array('nid'));
+   $query->condition('n.status', 1);
+   $query->condition('n.type', 'videogallery');
+   $query->condition('av.field_video_anchor_target_id', '%' . db_like($anchor_id) . '%', 'LIKE');
+   $query->range($range_min, $range_max);
+   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+   
+   $popular_res = array();
+    foreach ($result as $k => $res) {
+        $popular_res[$res['nid']] = analytics_node_data($res['nid'],'total');
+    }
+   //Sort Desc by total analytics count
+    arsort($popular_res);
+    $prog = array();
+
+  foreach ($popular_res as $pop_res_k => $pop_res_v) {
+     
+   $query = db_select('node', 'n');
+//   $query->leftJoin('field_data_field_video_anchor', 'av', 'av.entity_id = n.nid');
+   //$query->leftJoin('field_data_field_video_upload', 'vu', 'vu.entity_id = n.nid');
    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id = n.nid');
    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-   $query->leftJoin('field_data_field_video_upload', 'veo', 'veo.entity_id = n.nid');
+   //$query->leftJoin('field_data_field_video_upload', 'veo', 'veo.entity_id = n.nid');
    $query->leftJoin('field_data_field_video_duration', 've_du', 've_du.entity_id = n.nid');
    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-   $query->leftJoin('itg_lrp_loyalty_points', 'lp', 'lp.node_id = n.nid');
+   //$query->leftJoin('itg_lrp_loyalty_points', 'lp', 'lp.node_id = n.nid');
    $query->leftJoin('field_data_field_story_source_type','st','st.entity_id = n.nid');
 
    $query->fields('n', array('nid', 'title', 'type', 'created', 'changed'));
    $query->fields('st',array('field_story_source_type_value'));
-   $query->fields('av', array('field_video_anchor_target_id'));
+  //$query->fields('av', array('field_video_anchor_target_id'));
    $query->fields('si', array('field_story_small_image_fid'));
    $query->fields('li', array('field_story_large_image_fid'));
-   $query->fields('veo', array('field_video_upload_value'));
+   //$query->fields('veo', array('field_video_upload_value'));
    $query->fields('ve_du', array('field_video_duration_value'));
    $query->fields('fsr', array('field_story_reporter_target_id'));
    $query->fields('fpc', array('field_primary_category_value'));
-   $query->fields('lp', array('loyalty_points'));
-   $query->addExpression('SUM(lp.loyalty_points)', 'total_points');
+   //$query->fields('lp', array('loyalty_points'));
+   //$query->addExpression('SUM(lp.loyalty_points)', 'total_points');
 
-   $query->condition('n.status', 1);
-   $query->condition('n.type', 'videogallery');
-   $query->condition('av.field_video_anchor_target_id', $anchor_id);
-   $query->countQuery('lp.loyalty_points');
-   $query->groupBy('n.nid');
-   $query->orderBy('total_points', 'DESC');
-   $query->range($range_min, $range_max);
+   $query->condition('n.nid', $pop_res_k);
    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-   $prog = array();
+     
    foreach ($result as $k => $res) {
 
      $comment_cont = getCommentsCount($res['nid']);
@@ -712,9 +725,9 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_anchor_id'] = "$anchor_id";
 
      $prog2[] = $prog;
-   }
+   } }
 
    $data['data'] = $prog2;
-   $data['lcount'] = count($result);
+   $data['lcount'] = count($prog2);
    return $data;
  }

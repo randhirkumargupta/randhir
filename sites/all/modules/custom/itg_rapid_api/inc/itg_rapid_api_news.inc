@@ -441,16 +441,10 @@ function getPhotolist($nid) {
  * @return $nv_count
  */
 function getNodeViewCount($nid) {
-    //$nid = 443;
-    $nv_count = 0;
-    //SELECT * FROM `itg_lrp_loyalty_points` WHERE `loyalty_type` = 'Content Visit'
-    $query = db_select('itg_lrp_loyalty_points', 'ilp');
-    $query->fields('ilp', array('node_id'));
-    $query->condition('ilp.node_id', $nid);
-    $query->condition('ilp.loyalty_type', 'Content Visit');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $nv_count = count($result);
-    return $nv_count;
+
+      $node_anyalytics = analytics_node_data($nid,'array');
+      $nv_count = $node_anyalytics['node_view_count'];
+      return $nv_count;
 }
 
 /*
@@ -461,15 +455,9 @@ function getNodeViewCount($nid) {
 
 function getNodeShareCount($nid) {
 
-    $ns_count = 0;
-
-    $query = db_select('itg_lrp_loyalty_points', 'ilp');
-    $query->fields('ilp', array('node_id'));
-    $query->condition('ilp.node_id', $nid);
-    $query->condition('ilp.loyalty_type', 'Content Share');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $ns_count = count($result);
-    return $ns_count;
+     $node_anyalytics = analytics_node_data($nid,'array');
+     $ns_count = $node_anyalytics['data_count_node_share'];
+     return $ns_count;
 }
 
 /*
@@ -555,9 +543,8 @@ function analytics_node_data($nid, $total) {
             //END
         }
 
-
-
-        if ($type == 'total') { // return the total count
+        if ($total == 'total') {
+            // return the total count
             // Caculate sum of all data.
             foreach ($analytics_data_array as $counting) {
                 if (is_int($counting)) {
@@ -565,7 +552,8 @@ function analytics_node_data($nid, $total) {
                 }
             }
             return $final_count_result;
-        } else { // return the associated Array
+        } else {
+            // return the associated Array
             return $analytics_data_array;
         }
     }

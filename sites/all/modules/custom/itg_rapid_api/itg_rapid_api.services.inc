@@ -2873,7 +2873,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
-    $uname =  $_GET['user_id'];
+    $uname = $_GET['user_id'];
 
     if ($uid) {
         $account['status_code'] = "1";
@@ -2914,7 +2914,7 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
-    $uname =  $_GET['uname'];
+    $uname = $_GET['uname'];
     $is_authenticated = $account['status_code'] = "1";
     $account['status_message'] = "customised_message";
     $account['data']['user_id'] = "$uname";
@@ -2952,7 +2952,7 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
     $is_authenticated = $account['status_code'] = "1";
-    $uname =  $_GET['uname'];
+    $uname = $_GET['uname'];
     $account['status_message'] = "customised_message";
     $account['data']['user_id'] = "$uname";
     $account['data']['is_authenticated'] = "1";
@@ -2995,7 +2995,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
-    $uname =  $_GET['user_id'];
+    $uname = $_GET['user_id'];
     $data['status_code'] = "1";
     $data['status_message'] = "Please check your mobile for otp";
     $data['data']['user_id'] = "$uname";
@@ -3156,9 +3156,27 @@ function polls_close($token) {
  * 	array of open polls.
  */
 function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
+
     $poll_id = $_GET['poll_id'];
     $option_id = $_GET['option_id'];
     $user_id = $_GET['user_id'];
+
+    $ip_address = $_SERVER['SERVER_ADDR'];
+    if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
+        $device = 'iPhone';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
+        $device = 'Android';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
+        $device = 'webOS';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
+        $device = 'BlackBerry';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
+        $device = 'iPod';
+    } else {
+        $device = '';
+    }
+
+
     if (!is_numeric($poll_id)) {
         $poll_id = 0;
     }
@@ -3169,7 +3187,7 @@ function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
         $user_id = 0;
     }
     // call function from return data..
-    $jsondata = poll_cast_list($poll_id, $option_id, $user_id);
+    $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
     $jsondata = json_encode($jsondata);
 
     $jsondata = json_decode($jsondata, true);
@@ -3650,6 +3668,12 @@ function anchor_detail($token, $anchor_id) {
  * 	array of programms.
  */
 function anchor_programm_list($token, $anchor_id, $type) {
+
+    //valid id
+    $anchor_id = $_GET['anchor_id'];
+    $story_type = $_GET['type'];
+    $cpageno = $_GET['cpageno'];
+
     //valid id
     $anchor_id = $_GET['anchor_id'];
     $story_type = $_GET['type'];
