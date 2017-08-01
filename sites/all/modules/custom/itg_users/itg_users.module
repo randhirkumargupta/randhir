@@ -887,9 +887,9 @@ function itg_users_backend_validate(&$form, &$form_state) {
   $user_info = user_load_by_name($form_state['values']['name']);
  
   if (array_key_exists(FRONT_USER, $user_info->roles) && $base_url == BACKEND_URL) {
-     form_set_error('name', t('User does not exist!'));
+     //form_set_error('name', t('User does not exist!'));
   } else if (!array_key_exists(FRONT_USER, $user_info->roles) && $base_url == FRONT_URL) {    
-      form_set_error('name', t('User does not exist!'));
+      //form_set_error('name', t('User does not exist!'));
   }
  
 }
