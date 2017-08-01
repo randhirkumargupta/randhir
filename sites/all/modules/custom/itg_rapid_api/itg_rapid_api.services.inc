@@ -3239,7 +3239,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $authtoken_id = $_GET['$_GET'];
     $user_id = $_GET['user_id'];
     $account = user_load_by_name($user_id);
-    $user_id = $account->uid;
+    //$user_id = $account->uid;
     $first_name = $account->field_first_name['und'][0]['value'];
     $last_name = $account->field_last_name['und'][0]['value'];
     $email_id = $account->mail;
