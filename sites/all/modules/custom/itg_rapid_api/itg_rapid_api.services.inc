@@ -1765,7 +1765,7 @@ function itg_rapid_api_resource() {
     // Sprint 4 Read Later
     'bookmark_set' => array(
       'operations' => array(
-        'create' => array(
+        'retrieve' => array(
           'help' => 'Bookmark Set and return Responce based on userid.',
           'file' => array(
             'type' => 'inc',
@@ -1808,7 +1808,7 @@ function itg_rapid_api_resource() {
     // Sprint 4 Read Later
     'bookmark_delete' => array(
       'operations' => array(
-        'create' => array(
+        'retrieve' => array(
           'help' => 'Bookmark delete and return Responce based on userid.',
           'file' => array(
             'type' => 'inc',
@@ -3551,8 +3551,8 @@ function bookmark_get_responce($token, $user_id) {
 
 function bookmark_set_responce($token, $user_id, $node_id) {
 
-  $user_id = $_POST['user_id'];
-  $node_id = $_POST['node_id'];
+  $user_id = $_GET['user_id'];
+  $node_id = $_GET['node_id'];
   $redis_key = "itg_rapid_set_bookmark_" . $user_id . "_" . $node_id;
   $result_get = getRedis($redis_key);
 
@@ -3574,8 +3574,8 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
 
-  $user_id = $_POST['user_id'];
-  $node_id = $_POST['node_id'];
+  $user_id = $_GET['user_id'];
+  $node_id = $_GET['node_id'];
   $redis_key = "itg_rapid_bookmark_delete" . $user_id . "_" . $node_id;
   $result_get = getRedis($redis_key);
 
