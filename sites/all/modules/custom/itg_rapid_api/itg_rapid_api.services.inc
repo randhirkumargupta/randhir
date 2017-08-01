@@ -2873,7 +2873,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
-
+    $uname =  $_GET['user_id'];
 
     if ($uid) {
         $account['status_code'] = "1";
