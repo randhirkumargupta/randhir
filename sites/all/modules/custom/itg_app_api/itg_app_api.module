@@ -6,14 +6,14 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-function itg_rapid_api_init(){
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_video');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_news');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_magazine');
-    module_load_include('inc', 'itg_rapid_api', 'inc/helper');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_story');
-    module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_homePage');    
+function itg_app_api_init(){
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');
+    module_load_include('inc', 'itg_app_api', 'inc/helper');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');    
 }
 
 /**
@@ -21,15 +21,15 @@ function itg_rapid_api_init(){
  * Create service resource for APIs to return the necessary json data.
  */
 
-function itg_rapid_api_services_resources() {
+function itg_app_api_services_resources() {
 
   $resources = array();
 
 //Include the necessary inc files.
-  module_load_include('inc', 'itg_rapid_api', 'itg_rapid_api.services');
+  module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
 
 //Service Apis for contents.
-  $resources += itg_rapid_api_resource();
+  $resources += itg_app_api_resource();
 
   return $resources;
 }
@@ -38,7 +38,7 @@ function itg_rapid_api_services_resources() {
  * Implements hook_menu().
  */
 
-function itg_rapid_api_menu() {
+function itg_app_api_menu() {
 
   $items = array();
   
@@ -418,7 +418,7 @@ function otherapps_android_json() {
  * Implements hook_url_inbound_alter().
  */
 
-function itg_rapid_api_url_inbound_alter(&$result, $path, $path_language) {
+function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
    $u_agent = $_SERVER['HTTP_USER_AGENT']; 
    $flag = 0;
 
@@ -494,5 +494,5 @@ function getStoryType($nid) {
  * Implements hook_boot().
  */
 
-function itg_rapid_api_boot() {}
+function itg_app_api_boot() {}
 

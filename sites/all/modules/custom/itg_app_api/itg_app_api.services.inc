@@ -1,6 +1,6 @@
 <?php
 
-function itg_rapid_api_resource() {
+function itg_app_api_resource() {
     /**
      * custom resource for sprit1
      */
@@ -12,10 +12,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves hamburger_menu schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_hamburger_menu',
+                    'callback' => 'itg_app_api_hamburger_menu',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -39,10 +39,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves horizontal_menu schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_horizontal_menu',
+                    'callback' => 'itg_app_api_horizontal_menu',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -67,10 +67,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves config_update_status schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_config_update_status',
+                    'callback' => 'itg_app_api_config_update_status',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -94,10 +94,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves master_config schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_master_config',
+                    'callback' => 'itg_app_api_master_config',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -121,10 +121,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves server_error_master schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_server_error_master',
+                    'callback' => 'itg_app_api_server_error_master',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -148,10 +148,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves photolist schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_photolist',
+                    'callback' => 'itg_app_api_photolist',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -175,10 +175,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves photodetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_photodetail',
+                    'callback' => 'itg_app_api_photodetail',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -202,10 +202,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves videolist schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_videolist',
+                    'callback' => 'itg_app_api_videolist',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -229,10 +229,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves programlist schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_programlist',
+                    'callback' => 'itg_app_api_programlist',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -256,10 +256,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves newslist schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_newslist',
+                    'callback' => 'itg_app_api_newslist',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -284,10 +284,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves photostorydetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_photostorydetail',
+                    'callback' => 'itg_app_api_photostorydetail',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -311,10 +311,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves program_category_list schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_program_category_list',
+                    'callback' => 'itg_app_api_program_category_list',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -338,10 +338,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves ad_config_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_ad_config_json',
+                    'callback' => 'itg_app_api_ad_config_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -365,10 +365,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_channellist_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_channellist_json',
+                    'callback' => 'itg_app_api_livetv_channellist_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -392,10 +392,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_app_api_livetv_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -419,10 +419,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_app_api_livetv_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -446,10 +446,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_app_api_livetv_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -473,10 +473,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_app_api_livetv_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -500,10 +500,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves livetv_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_app_api_livetv_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -527,10 +527,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves otherapps_ios_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_otherapps_ios_json',
+                    'callback' => 'itg_app_api_otherapps_ios_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -554,10 +554,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves otherapps_android_json schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_otherapps_android_json',
+                    'callback' => 'itg_app_api_otherapps_android_json',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -582,10 +582,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves magazine_edition schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_magazine_edition',
+                    'callback' => 'itg_app_api_magazine_edition',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -609,10 +609,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves magazine_coverstories schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_magazine_coverstories',
+                    'callback' => 'itg_app_api_magazine_coverstories',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -636,10 +636,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves magazine_editionlist schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_magazine_editionlist',
+                    'callback' => 'itg_app_api_magazine_editionlist',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -664,10 +664,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves storydetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_storydetail',
+                    'callback' => 'itg_app_api_storydetail',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -691,10 +691,10 @@ function itg_rapid_api_resource() {
                     'help' => 'Retrieves storydetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
-                        'module' => 'itg_rapid_api',
-                        'name' => 'itg_rapid_api.services',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_homePage',
+                    'callback' => 'itg_app_api_homePage',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -721,14 +721,14 @@ function itg_rapid_api_resource() {
  */
 
 /**
- * [itg_rapid_api_newslist] definition.
- * Returns the information about a itg_rapid_api_newslist.
+ * [itg_app_api_newslist] definition.
+ * Returns the information about a itg_app_api_newslist.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_newslist($token) {
+function itg_app_api_newslist($token) {
     //valid tid & pageno
     $realtime = 0;
     $id = $_GET['id'];
@@ -763,14 +763,14 @@ function itg_rapid_api_newslist($token) {
 }
 
 /**
- * [itg_rapid_api_programlist] definition.
- * Returns the information about a itg_rapid_api_programlist.
+ * [itg_app_api_programlist] definition.
+ * Returns the information about a itg_app_api_programlist.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_programlist($token) {
+function itg_app_api_programlist($token) {
     //valid tid & pageno
     $id = $_GET['id'];
     $cpageno = $_GET['cpageno'];
@@ -800,14 +800,14 @@ function itg_rapid_api_programlist($token) {
 }
 
 /**
- * [itg_rapid_api_videolist] definition.
- * Returns the information about a itg_rapid_api_videolist.
+ * [itg_app_api_videolist] definition.
+ * Returns the information about a itg_app_api_videolist.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_videolist($token) {
+function itg_app_api_videolist($token) {
     //valid tid & pageno
     $id = $_GET['id'];
     $cpageno = $_GET['cpageno'];
@@ -837,14 +837,14 @@ function itg_rapid_api_videolist($token) {
 }
 
 /**
- * [itg_rapid_api_photodetail] definition.
- * Returns the information about a itg_rapid_api_photodetail.
+ * [itg_app_api_photodetail] definition.
+ * Returns the information about a itg_app_api_photodetail.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_photodetail($token) {
+function itg_app_api_photodetail($token) {
     //valid id
     $id = $_GET['id'];
     //$cpageno = $_GET['cpageno'];
@@ -870,14 +870,14 @@ function itg_rapid_api_photodetail($token) {
 }
 
 /**
- * [itg_rapid_api_photolist] definition.
- * Returns the information about a itg_rapid_api_photolist.
+ * [itg_app_api_photolist] definition.
+ * Returns the information about a itg_app_api_photolist.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_photolist($token) {
+function itg_app_api_photolist($token) {
     $id = $_GET['id'];
     $cpageno = $_GET['cpageno'];
     //valid tid & pageno
@@ -907,14 +907,14 @@ function itg_rapid_api_photolist($token) {
 }
 
 /**
- * [itg_rapid_api_server_error_master] definition.
- * Returns the information about a itg_rapid_api_server_error_master.
+ * [itg_app_api_server_error_master] definition.
+ * Returns the information about a itg_app_api_server_error_master.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_server_error_master($token) {
+function itg_app_api_server_error_master($token) {
     $redis_key = "itgd_rapid_server_error_master_json";
     $result_get = getRedis($redis_key);
 
@@ -932,14 +932,14 @@ function itg_rapid_api_server_error_master($token) {
 }
 
 /**
- * [itg_rapid_api_master_config] definition.
+ * [itg_app_api_master_config] definition.
  * Returns the information about a config_update_status.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_master_config($token) {
+function itg_app_api_master_config($token) {
     $redis_key = "itgd_rapid_master_config_json";
     $result_get = getRedis($redis_key);
 
@@ -957,14 +957,14 @@ function itg_rapid_api_master_config($token) {
 }
 
 /**
- * [itg_rapid_api_config_update_status] definition.
+ * [itg_app_api_config_update_status] definition.
  * Returns the information about a config_update_status.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_config_update_status($token) {
+function itg_app_api_config_update_status($token) {
     $redis_key = "itgd_rapid_config_update_status_json";
     $result_get = getRedis($redis_key);
 
@@ -983,14 +983,14 @@ function itg_rapid_api_config_update_status($token) {
 }
 
 /**
- * [itg_rapid_api_hamburger_menu] definition.
+ * [itg_app_api_hamburger_menu] definition.
  * Returns the information about a hamburger_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_hamburger_menu($token) {
+function itg_app_api_hamburger_menu($token) {
     $redis_key = "itgd_rapid_hamburger_menu_json";
     $result_get = getRedis($redis_key);
 
@@ -1009,14 +1009,14 @@ function itg_rapid_api_hamburger_menu($token) {
 }
 
 /**
- * [itg_rapid_api_horizontal_menu] definition.
+ * [itg_app_api_horizontal_menu] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_horizontal_menu($token) {
+function itg_app_api_horizontal_menu($token) {
     $redis_key = "itgd_rapid_horizontal_menu_json";
     $result_get = getRedis($redis_key);
 
@@ -1037,14 +1037,14 @@ function itg_rapid_api_horizontal_menu($token) {
 // sprint2 function start
 
 /**
- * [itg_rapid_api_photostorydetail] definition.
- * Returns the information about a itg_rapid_api_photostorydetail.
+ * [itg_app_api_photostorydetail] definition.
+ * Returns the information about a itg_app_api_photostorydetail.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_photostorydetail($token) {
+function itg_app_api_photostorydetail($token) {
     //valid id
     $id = $_GET['id'];
     if (!is_numeric($id)) {
@@ -1054,7 +1054,7 @@ function itg_rapid_api_photostorydetail($token) {
     // call function for return data..
 
     $suffix = $id;
-    $redis_key = "itg_rapid_api_photostorydetail_" . $suffix;
+    $redis_key = "itg_app_api_photostorydetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1072,17 +1072,17 @@ function itg_rapid_api_photostorydetail($token) {
 }
 
 /**
- * [itg_rapid_api_program_category_list] definition.
- * Returns the information about a itg_rapid_api_program_category_list.
+ * [itg_app_api_program_category_list] definition.
+ * Returns the information about a itg_app_api_program_category_list.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_program_category_list($token) {
+function itg_app_api_program_category_list($token) {
 
 
-    $redis_key = "itg_rapid_api_program_category_list";
+    $redis_key = "itg_app_api_program_category_list";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1100,16 +1100,16 @@ function itg_rapid_api_program_category_list($token) {
 }
 
 /**
- * [itg_rapid_api_ad_config_json] definition.
+ * [itg_app_api_ad_config_json] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_ad_config_json($token) {
+function itg_app_api_ad_config_json($token) {
 
-    $redis_key = "itg_rapid_api_ad_config_json";
+    $redis_key = "itg_app_api_ad_config_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1126,17 +1126,17 @@ function itg_rapid_api_ad_config_json($token) {
 }
 
 /**
- * [itg_rapid_api_livetv_channellist_json] definition.
+ * [itg_app_api_livetv_channellist_json] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_livetv_channellist_json($token) {
+function itg_app_api_livetv_channellist_json($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_channellist_json";
+    $redis_key = "itg_app_api_livetv_channellist_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1154,17 +1154,17 @@ function itg_rapid_api_livetv_channellist_json($token) {
 }
 
 /**
- * [itg_rapid_api_livetv_json] definition.
+ * [itg_app_api_livetv_json] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_livetv_json($token) {
+function itg_app_api_livetv_json($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_json";
+    $redis_key = "itg_app_api_livetv_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1181,17 +1181,17 @@ function itg_rapid_api_livetv_json($token) {
 }
 
 /**
- * [itg_rapid_api_otherapps_ios_json] definition.
+ * [itg_app_api_otherapps_ios_json] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_otherapps_ios_json($token) {
+function itg_app_api_otherapps_ios_json($token) {
 
 
-    $redis_key = "itg_rapid_api_otherapps_ios_json";
+    $redis_key = "itg_app_api_otherapps_ios_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1208,17 +1208,17 @@ function itg_rapid_api_otherapps_ios_json($token) {
 }
 
 /**
- * [itg_rapid_api_otherapps_android_json] definition.
+ * [itg_app_api_otherapps_android_json] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_otherapps_android_json($token) {
+function itg_app_api_otherapps_android_json($token) {
 
 
-    $redis_key = "itg_rapid_api_otherapps_android_json";
+    $redis_key = "itg_app_api_otherapps_android_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1237,14 +1237,14 @@ function itg_rapid_api_otherapps_android_json($token) {
 // magazine section start
 
 /**
- * [itg_rapid_api_magazine_edition] definition.
- * Returns the information about a itg_rapid_api_magazine_edition.
+ * [itg_app_api_magazine_edition] definition.
+ * Returns the information about a itg_app_api_magazine_edition.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_magazine_edition($token) {
+function itg_app_api_magazine_edition($token) {
     $id = $_GET['issueid'];
     $cpageno = $_GET['cpageno'];
     //valid tid & pageno
@@ -1257,7 +1257,7 @@ function itg_rapid_api_magazine_edition($token) {
 
 
     $suffix = $id . "_" . $cpageno;
-    $redis_key = "itg_rapid_api_magazine_edition_" . $suffix;
+    $redis_key = "itg_app_api_magazine_edition_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1275,18 +1275,18 @@ function itg_rapid_api_magazine_edition($token) {
 }
 
 /**
- * [itg_rapid_api_magazine_coverstories] definition.
- * Returns the information about a itg_rapid_api_magazine_coverstories.
+ * [itg_app_api_magazine_coverstories] definition.
+ * Returns the information about a itg_app_api_magazine_coverstories.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_magazine_coverstories($token) {
+function itg_app_api_magazine_coverstories($token) {
 
     // call function from return data..
 
-    $redis_key = "itg_rapid_api_magazine_coverstories";
+    $redis_key = "itg_app_api_magazine_coverstories";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1304,14 +1304,14 @@ function itg_rapid_api_magazine_coverstories($token) {
 }
 
 /**
- * [itg_rapid_api_magazine_editionlist] definition.
- * Returns the information about a itg_rapid_api_magazine_editionlist.
+ * [itg_app_api_magazine_editionlist] definition.
+ * Returns the information about a itg_app_api_magazine_editionlist.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_magazine_editionlist($token) {
+function itg_app_api_magazine_editionlist($token) {
     $sdate = $_GET['sdate'];
     $tdate = $_GET['tdate'];
     $cpageno = $_GET['cpageno'];
@@ -1330,7 +1330,7 @@ function itg_rapid_api_magazine_editionlist($token) {
 
 
     $suffix = $sdate . "_" . $tdate . "_" . $cpageno;
-    $redis_key = "itg_rapid_api_magazine_editionlist_" . $suffix;
+    $redis_key = "itg_app_api_magazine_editionlist_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1351,14 +1351,14 @@ function itg_rapid_api_magazine_editionlist($token) {
 // magazine section end
 
 /**
- * [itg_rapid_api_storydetail] definition.
+ * [itg_app_api_storydetail] definition.
  * Returns the information about a horizontal_menu.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_storydetail($token) {
+function itg_app_api_storydetail($token) {
     //valid id
     $id = $_GET['id'];
     if (!is_numeric($id)) {
@@ -1369,7 +1369,7 @@ function itg_rapid_api_storydetail($token) {
 
 
     $suffix = $id;
-    $redis_key = "itg_rapid_api_storydetail" . $suffix;
+    $redis_key = "itg_app_api_storydetail" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -1387,17 +1387,17 @@ function itg_rapid_api_storydetail($token) {
 }
 
 /**
- * [itg_rapid_api_homePage] definition.
- * Returns the information about a itg_rapid_api_homePage.
+ * [itg_app_api_homePage] definition.
+ * Returns the information about a itg_app_api_homePage.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
 //return services_error(t('Node type cannot be changed'), 406);
-function itg_rapid_api_homePage($token) {
+function itg_app_api_homePage($token) {
 
-    $redis_key = "itg_rapid_api_homePage";
+    $redis_key = "itg_app_api_homePage";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
