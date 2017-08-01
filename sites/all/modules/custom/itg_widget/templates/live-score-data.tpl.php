@@ -11,7 +11,7 @@ if (!empty($data)) : global $base_url; ?>
             <span class="crrrunrate">Crr <?php echo $data['currentscore']->crr; ?>  <span class="crrrunover">(<?php echo $data['currentscore']->batteamovers; ?> Over)</span></span>           
         </div>
         <span>Live: Commentary</span> |
-            <span>Full Scoredcard |</span>
+            <a href="scorecard/matchcenter/ensa07142017181615" target="_blank"><span>Full Scoredcard |</span></a>
             <span>Graphs</span>       
     </div>
 <?php else : ?>
