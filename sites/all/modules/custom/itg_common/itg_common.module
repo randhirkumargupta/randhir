@@ -141,7 +141,23 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['description']['#access'] = FALSE;
     }
   }
+  
+  $buttonvocab_array = array('bloggers');
+  $messagevocab_array = array('bloggers', 'movies');
+  // code to add cancel button taxonomy page
+  if (in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $base_url . '/' . $_GET['destination'], array('attributes' => array('class' => 'button'))),
+      '#weight' => 22,
+    );
+  
+  }
 
+  // code to add custom message taxonomy page
+  if (in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
+    $form['#submit'][] = 'itg_taxonomy_form_custom_callback';
+  }
+  
   $settings = array();
   $vocabulary = '';
   if (isset($form['#vocabulary']->machine_name)) {
@@ -328,6 +344,34 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
+}
+
+/**
+ * Custom submit callback for redirecting taxonomy form.
+ * {@inheritdoc}
+ */
+function itg_taxonomy_form_custom_callback($form, &$form_state) {
+  global $base_url;
+  $arg = arg();
+  $type = $form_state['values']['vocabulary_machine_name'];
+  
+  // change name for movies vocab
+  if($type == 'movies') {
+    $type = 'Movie name';
+  }
+  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if ($arg[4] == 'add' && !empty($arg[4])) {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $taxonomy_title = $form_state['input']['name'];
+  drupal_set_message(t($type . ' <b>' . $taxonomy_title . '</b> has been ' . $op . '.'));
+  $_GET['destination'] = $_REQUEST['destination'];
 }
 
 /**
@@ -665,7 +709,7 @@ function itg_common_views_pre_render(&$view) {
   }
   if ($view->name == "common_master") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/' . arg(1) . '/add') . '&nbsp;</span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/' . arg(1) . '/add', array('query' => array('destination' => 'common-master/'.arg(1)))) . '&nbsp;</span>';
     $view->attachment_before = $header_content;
   }
 }
