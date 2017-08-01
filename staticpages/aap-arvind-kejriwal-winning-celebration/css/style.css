@@ -1,0 +1,144 @@
+*{padding:0; margin:0;}
+body{font:12px/15px "Roboto",Arial, Helvetica, sans-serif; color:#000;}
+h1, h2, h3, h4, h5, h6, ul, li{padding:0; margin:0;}
+#outer_wrapper{float:left; width:100%;}
+.wrapper{margin:0 auto; width:1000px;}
+.lft{float:left !important;}
+.rtl{float:right !important;}
+
+/*=======================================Top navigation css=======================================================*/
+#top_nav{background:#111; width:100%}
+.itgd_links{ width:995px; margin:0 auto;color:#7a7a7a;font:12px/15px roboto;padding:5px 0px;text-align:center;display:flex;}
+.itgd_links ul{margin:0 auto;padding:0;width:1003px;}
+.itgd_links ul li{float:left;padding:0 6px 0 6px;list-style:none;}
+.itgd_links ul li:first-child{padding-left:0;}
+.itgd_links ul li:last-child{padding-right:0;}
+.itgd_links a{color:#8c8c8c;text-decoration:none; text-transform:uppercase; font-size:12px;}
+.itgd_links a:hover{color:#fff;}
+
+
+/*=======================================Banner css=======================================================*/
+
+#banner{float:left; width:100%; background-color:#000; min-height:112px;}
+#banner ul.social{float:left; width:auto; list-style:none; margin:32px 0 0;}
+#banner ul.social li{width:auto; float:left; margin-right:15px;}
+#banner ul.social li:last-child{margin-right:0;}
+#banner ul.social li a{float:left; width:auto;}
+#banner ul.social li a.facebook{background:url(http://media2.intoday.in/microsites/safaigiri-awards/facebook.png) no-repeat 0 0; width:34px; height:51px;}
+#banner ul.social li a.twitter{background:url(http://media2.intoday.in/microsites/safaigiri-awards/twitter.png) no-repeat 0 0; width:53px; height:48px; display:block;}
+#banner ul.social li a.gplus{background:url(http://media2.intoday.in/microsites/safaigiri-awards/googleplus.png) no-repeat 0 0; width:59px; height:56px;}
+#banner ul.social li a.rss{background:url(http://media2.intoday.in/microsites/safaigiri-awards/4-icon.png) no-repeat 0 0; width:44px; height:47px;}
+
+#banner .logo{float:left; width:auto; margin:11px 0 0;}
+#banner .advertisement{float:right; width:728px; height:90px; margin:-5px 0 0;}
+#banner .advertisement strong{font:normal 12px/15px roboto; color:#616362; text-align:center; display:block; text-transform:uppercase;}
+
+.about_container{float:left; width:100%; background-color:#ffcd22; min-height:289px;}
+.about_container .logo{float:left; width:auto; margin:0 0 0 116px;}
+
+.about_container h1{font:bold 70px/70px roboto; color:#000; display:block; text-transform:uppercase; letter-spacing:1px;}
+.about_container h1 strong{font-weight:normal; font-size:60px; letter-spacing:0;}
+
+.about_container p{font:normal 30px/34px roboto; color:#12090a; display:block; padding-top:8px; font-weight:normal; text-transform:uppercase;}
+.about_container .about_box{width:525px; min-height:225px; float:left; padding:45px 0px 0 0;}
+
+
+/*=======================================Body container css=======================================================*/
+
+.body_container{float:left; width:100%; margin:42px 0 0;}
+
+
+.video_section{float:left; width:100%;}
+.video_section ul{list-style:none; float:left; width:100%;}
+.video_section ul li{width:306px; min-height:235px; background-color:#e6e6e6; padding:5px 3px; margin-left:25px; float:left;}
+.video_section ul li:first-child{margin-left:0;}
+.video_section ul li .video{ cursor:pointer; position:relative; height:198px;}
+
+.video_section ul li .video img#static-image{ position:absolute; top:0; left:0; z-index:10;}
+.video_section ul li .video img#animation-image{ position:absolute; top:0; left:0; z-index:5; background:#e6e6e6;}
+.video_section ul li .video.play img#animation-image{z-index:15;}
+
+.video_section ul li ul.video_social{ display:none;}
+.video_section ul li ul.video_social li{min-height:inherit; padding:0; width:auto; padding:0 0 0 5px;}
+.video_section ul li ul.video_social li a{font:12px/42px roboto; color:#908e8f; text-transform:uppercase; text-decoration:none;}
+.video_section ul li ul.video_social li a strong{font-weight:normal; float:left;}
+.video_section ul li ul.video_social li a img{float:left; margin:0 2px;}
+.video_section ul li ul.video_social li a em{font:normal 11px/42px roboto; color:#0876c5; float:left;}
+
+.video_section ul li ul.video_social li.rtl a img{float:left; margin:6px 2px;}
+.video_section ul.botvideo{margin:49px 0 0 0%; width:auto;}
+
+
+/*.comment_box{float:left; width:100%; margin-top:47px; min-height:150px; border:3px solid #ffcd22; border-radius:7px;}
+.comment_box .comment-text{ background:#FFCD22; color:#000; font-size:14px; font-family:roboto; padding:3px 15px; border-radius:7px; font-weight:bold; display:block; margin-top:-23px; width:150px;}
+.comment_box textarea{ width:96%; border:0px; margin:3px; height:150px; font-family:roboto; font-size:13px; color:#908e8f; padding:15px;}*/
+.add_section{float:left; width:100%; text-align:center; margin:12px 0 0;}
+
+
+
+/*=======================================footer container css=======================================================*/
+.outer_footer{float:left; width:100%; margin:20px 0 0; position:relative; position:relative; z-index:9;}
+.lftfbg{background-color:#000; position:absolute; width:40%; height:43px; left:0; top:0;}
+.rtlfbg{background-color:#303435; position:absolute; width:60%; height:43px; right:0; top:0;}
+.footertag{position:relative; z-index:999; float:left; width:100%;}
+.footertag nav, footer nav {background-color: #333333; color: #ffffff; float: left; font: bold 16px arial; height: 43px; width: 82.4%;}
+.footertag nav ul li, footer nav ul li {background-color: #333333;}
+.nav ul li {float: left; list-style: outside none none; padding: 11px 0 !important; text-transform: uppercase;}
+.nav ul li a{color:#fff; font-size:12px; padding:0 6px; text-decoration:none;}
+.searc-icon1 .img {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
+#footer {background: none repeat scroll 0 0 #fff; clear: both; padding: 0 5px;}
+.home {float: left; margin: 0 !important; padding: 0 !important;}
+.footertag .fot-itlogo, footer .fot-itlogo {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0); float: left; height: 43px; text-indent: -9999px; width: 176px;}
+.footertag nav, footer nav {background-color: #333333; color: #ffffff; float: left; font: bold 16px arial; height: 43px; width: 82.4%;}
+.footertag nav ul li, footer nav ul li {background-color: #333333;}
+.searc-icon1 .img {background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0); cursor: pointer; display: inline-block; float: right; height: 41px; text-indent: -9999px; width: 41px;}
+#footer {background: none repeat scroll 0 0 #fff; clear: both; padding: 0 5px;}
+.nav ul li:hover, nav ul li.active {background-color: #eb1c24; color: #fff; cursor: pointer;}
+
+
+/*=======================================Responsive css=======================================================*/
+
+@media only screen and (orientation:portrait){
+
+.wrapper{width:96%; padding:0 2%;}	
+.left_container{width:95%;}		
+.left_container .about_box{width:100%;}
+.about_container .logo{width:100%; text-align:center;}
+.about_container .about_box{float:left; width:100%; margin:40px 0 0; padding:0;}
+#banner{min-height:260px;}
+#banner .advertisement{margin-top:0;}
+#banner .logo{float:none; display:block; text-align:center;}
+.left_container .video_section{margin-left:37px;}
+.common_section{width:100%;}
+.common_section .main{width:720px;}
+.right_container{float:left;}
+.rtl{float:right;}
+.right_container{width:100%;}
+.form_section{float:right;}
+.right_container .form_section{margin:25px 0 0 40px}
+.right_container .addbox{margin:25px 0 0 35px;}
+.footertag nav, footer nav{width:95.4%;}
+.btm-itlogo{margin-left:-149px;}
+.nav ul li a{padding:0 3px;}
+#banner ul.social{margin-bottom:32px;}
+
+}
+
+
+
+
+.comment-text{font-size:14px; font-family:roboto; font-weight:bold; margin-bottom:10px; float:left; }
+.share-sos{ width:178px; margin:0 auto; padding: 5px 10px;}
+.share-sos ul li { float:left;margin: 6px 0 0 14px;width: 40px; list-style:none;}
+.scbg{ background-image:url(http://media2.intoday.in/microsites/saveyourleader/new/sprit.png) !important;}
+.share-sos ul li span{ text-indent:-9999px; display:block; width:40px; height:40px; float:left;}
+.share-sos ul li span.facebook-one { background-position:-5px -77px;}
+.share-sos ul li span.twitter-one{background-position: -45px -77px;}
+.share-sos ul li span.googlepluse-one{background-position: -90px -77px;}
+.comment_box{padding-left:0px !important;}
+
+
+
+
+
+

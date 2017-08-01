@@ -1,0 +1,360 @@
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/section/343/1/fyi.html’
+
+
+
+2017-07-19 15:37:15 (718 KB/s) - ‘indiatoday.intoday.in/section/343/1/fyi.html’ saved [133092]
+
+--2017-07-19 15:37:15--  http://indiatoday.intoday.in/section/125/1/travel.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 145578 (142K) [text/html]
+Saving to: ‘indiatoday.intoday.in/section/125/1/travel.html’
+
+
+
+2017-07-19 15:37:15 (567 KB/s) - ‘indiatoday.intoday.in/section/125/1/travel.html’ saved [145578/145578]
+
+--2017-07-19 15:37:15--  http://indiatoday.intoday.in/section/341/1/food.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/section/341/1/food.html’
+
+               indiatoday.intoday.in     [   <=>                                                              ]  95.74K  6.20 B/s               indiatoday.intoday.in/section/341/1/     [    <=>                                                             ] 129.14K  8.37 B/s    in 4h 23m  
+
+2017-07-19 20:00:45 (8.37 B/s) - ‘indiatoday.intoday.in/section/341/1/food.html’ saved [132243]
+
+indiatoday.intoday.in/section/341/1/food.html: No such file or directory
+--2017-07-19 20:00:45--  http://indiatoday.intoday.in/money/
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... Read error (Connection reset by peer) in headers.
+Retrying.
+
+--2017-07-19 20:00:46--  (try: 2)  http://indiatoday.intoday.in/money/
+Connecting to indiatoday.intoday.in (indiatoday.intoday.in)|23.55.58.89|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/money/index.html’
+
+     0K .......... .......... .......... .......... ..........  291K
+    50K .......... .......... .......                           590K=0.2s
+
+2017-07-19 20:00:49 (355 KB/s) - ‘indiatoday.intoday.in/money/index.html’ saved [79391]
+
+--2017-07-19 20:00:49--  http://indiatoday.intoday.in/section/178/1/editors-picks.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 131625 (129K) [text/html]
+Saving to: ‘indiatoday.intoday.in/section/178/1/editors-picks.html’
+
+     0K .......... .......... .......... .......... .......... 38%  135K 1s
+    50K .......... .......... .......... .......... .......... 77%  317K 0s
+   100K .......... .......... ........                        100% 5.09M=0.5s
+
+2017-07-19 20:00:51 (241 KB/s) - ‘indiatoday.intoday.in/section/178/1/editors-picks.html’ saved [131625/131625]
+
+--2017-07-19 20:00:51--  http://indiatoday.intoday.in/story/right-to-privacy-aadhaar-supreme-court-gopal-subramanium/1/1005668.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 62887 (61K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/right-to-privacy-aadhaar-supreme-court-gopal-subramanium/1/1005668.html’
+
+     0K .......... .......... .......... .......... .......... 81% 6.53M 0s
+    50K .......... .                                          100% 5.69M=0.009s
+
+2017-07-19 20:00:51 (6.36 MB/s) - ‘indiatoday.intoday.in/story/right-to-privacy-aadhaar-supreme-court-gopal-subramanium/1/1005668.html’ saved [62887/62887]
+
+--2017-07-19 20:00:51--  http://indiatoday.intoday.in/story/tejashwi-yadav-nitish-kumar-jdu-rjd-bihar-mahagathbandhan/1/1005698.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 62881 (61K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/tejashwi-yadav-nitish-kumar-jdu-rjd-bihar-mahagathbandhan/1/1005698.html’
+
+     0K .......... .......... .......... .......... .......... 81% 6.77M 0s
+    50K .......... .                                          100% 5.30M=0.009s
+
+2017-07-19 20:00:51 (6.44 MB/s) - ‘indiatoday.intoday.in/story/tejashwi-yadav-nitish-kumar-jdu-rjd-bihar-mahagathbandhan/1/1005698.html’ saved [62881/62881]
+
+--2017-07-19 20:00:51--  http://indiatoday.intoday.in/story/tamil-nadu-mla-salary-hike-farmers-protest/1/1005579.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 65340 (64K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/tamil-nadu-mla-salary-hike-farmers-protest/1/1005579.html’
+
+     0K .......... .......... .......... .......... .......... 78% 2.75M 0s
+    50K .......... ...                                        100% 8.75M=0.02s
+
+2017-07-19 20:00:52 (3.23 MB/s) - ‘indiatoday.intoday.in/story/tamil-nadu-mla-salary-hike-farmers-protest/1/1005579.html’ saved [65340/65340]
+
+--2017-07-19 20:00:52--  http://indiatoday.intoday.in/story/lalu-prasad-offers-rajya-sabha-seat-to-mayawati/1/1005514.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 55877 (55K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/lalu-prasad-offers-rajya-sabha-seat-to-mayawati/1/1005514.html’
+
+     0K .......... .......... .......... .......... .......... 91% 6.63M 0s
+    50K ....                                                  100% 7.30M=0.008s
+
+2017-07-19 20:00:52 (6.68 MB/s) - ‘indiatoday.intoday.in/story/lalu-prasad-offers-rajya-sabha-seat-to-mayawati/1/1005514.html’ saved [55877/55877]
+
+--2017-07-19 20:00:52--  http://indiatoday.intoday.in/story/doklam-india-raises-china-tension-australian-foreign-minister/1/1005546.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 64239 (63K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/doklam-india-raises-china-tension-australian-foreign-minister/1/1005546.html’
+
+     0K .......... .......... .......... .......... .......... 79% 5.41M 0s
+    50K .......... ..                                         100% 6.04M=0.01s
+
+2017-07-19 20:00:52 (5.53 MB/s) - ‘indiatoday.intoday.in/story/doklam-india-raises-china-tension-australian-foreign-minister/1/1005546.html’ saved [64239/64239]
+
+--2017-07-19 20:00:52--  http://indiatoday.intoday.in/story/tr-zeliang-chief-minister-nagaland-shurhozelie-liezietsu/1/1005619.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 51511 (50K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/tr-zeliang-chief-minister-nagaland-shurhozelie-liezietsu/1/1005619.html’
+
+     0K .......... .......... .......... .......... .......... 99% 2.11M 0s
+    50K                                                       100%  579G=0.02s
+
+2017-07-19 20:00:53 (2.12 MB/s) - ‘indiatoday.intoday.in/story/tr-zeliang-chief-minister-nagaland-shurhozelie-liezietsu/1/1005619.html’ saved [51511/51511]
+
+--2017-07-19 20:00:53--  http://indiatoday.intoday.in/story/ravi-shastri-sachin-tendulkar-consultant-team-india-cricket/1/1005671.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 63460 (62K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/ravi-shastri-sachin-tendulkar-consultant-team-india-cricket/1/1005671.html’
+
+     0K .......... .......... .......... .......... .......... 80% 6.70M 0s
+    50K .......... .                                          100% 9.38M=0.009s
+
+2017-07-19 20:00:53 (7.09 MB/s) - ‘indiatoday.intoday.in/story/ravi-shastri-sachin-tendulkar-consultant-team-india-cricket/1/1005671.html’ saved [63460/63460]
+
+--2017-07-19 20:00:53--  http://indiatoday.intoday.in/story/goa-chief-minister-manohar-parrikar-beef-remark-vhp/1/1005535.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 61463 (60K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/goa-chief-minister-manohar-parrikar-beef-remark-vhp/1/1005535.html’
+
+     0K .......... .......... .......... .......... .......... 83% 4.96M 0s
+    50K ..........                                            100% 5.83M=0.01s
+
+2017-07-19 20:00:53 (5.08 MB/s) - ‘indiatoday.intoday.in/story/goa-chief-minister-manohar-parrikar-beef-remark-vhp/1/1005535.html’ saved [61463/61463]
+
+--2017-07-19 20:00:53--  http://indiatoday.intoday.in/story/shimla-gangrape-kotkhai-chief-minister-virghadra-singh/1/1005571.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 61941 (60K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/shimla-gangrape-kotkhai-chief-minister-virghadra-singh/1/1005571.html’
+
+     0K .......... .......... .......... .......... .......... 82% 5.80M 0s
+    50K ..........                                            100% 6.51M=0.01s
+
+2017-07-19 20:00:54 (5.91 MB/s) - ‘indiatoday.intoday.in/story/shimla-gangrape-kotkhai-chief-minister-virghadra-singh/1/1005571.html’ saved [61941/61941]
+
+--2017-07-19 20:00:54--  http://indiatoday.intoday.in/story/bidisha-bezbaruah-suicide-jagga-jasoos/1/1005352.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 55440 (54K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/bidisha-bezbaruah-suicide-jagga-jasoos/1/1005352.html’
+
+     0K .......... .......... .......... .......... .......... 92% 6.15M 0s
+    50K ....                                                  100% 4.73M=0.009s
+
+2017-07-19 20:00:54 (6.02 MB/s) - ‘indiatoday.intoday.in/story/bidisha-bezbaruah-suicide-jagga-jasoos/1/1005352.html’ saved [55440/55440]
+
+--2017-07-19 20:00:54--  http://indiatoday.intoday.in/auto/story/mv-agusta-launches-brutale-800-in-india-priced-at-rs-15-59-lakh/1/1005597.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 49172 (48K) [text/html]
+Saving to: ‘indiatoday.intoday.in/auto/story/mv-agusta-launches-brutale-800-in-india-priced-at-rs-15-59-lakh/1/1005597.html’
+
+     0K .......... .......... .......... .......... ........  100% 6.17M=0.008s
+
+2017-07-19 20:00:55 (6.17 MB/s) - ‘indiatoday.intoday.in/auto/story/mv-agusta-launches-brutale-800-in-india-priced-at-rs-15-59-lakh/1/1005597.html’ saved [49172/49172]
+
+--2017-07-19 20:00:55--  http://indiatoday.intoday.in/story/mumbai-first-ever-gigapan-birds-eye-view/1/1002424.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 52187 (51K) [text/html]
+Saving to: ‘indiatoday.intoday.in/story/mumbai-first-ever-gigapan-birds-eye-view/1/1002424.html’
+
+     0K .......... .......... .......... .......... .......... 98% 2.71M 0s
+    50K                                                       100% 1838G=0.02s
+
+2017-07-19 20:00:55 (2.76 MB/s) - ‘indiatoday.intoday.in/story/mumbai-first-ever-gigapan-birds-eye-view/1/1002424.html’ saved [52187/52187]
+
+--2017-07-19 20:00:55--  http://indiatoday.intoday.in/video/ravi-shastri-virat-kohli-india-v-sri-lanka/1/1005727.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 158953 (155K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/ravi-shastri-virat-kohli-india-v-sri-lanka/1/1005727.html’
+
+     0K .......... .......... .......... .......... .......... 32% 6.02M 0s
+    50K .......... .......... .......... .......... .......... 64% 5.44M 0s
+   100K .......... .......... .......... .......... .......... 96%  401K 0s
+   150K .....                                                 100% 5.78M=0.1s
+
+2017-07-19 20:00:55 (1.06 MB/s) - ‘indiatoday.intoday.in/video/ravi-shastri-virat-kohli-india-v-sri-lanka/1/1005727.html’ saved [158953/158953]
+
+--2017-07-19 20:00:55--  http://indiatoday.intoday.in/video/tamil-nadu-mlas-salary-hike-farmers-protest-jantar-mantar/1/1005672.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 157479 (154K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/tamil-nadu-mlas-salary-hike-farmers-protest-jantar-mantar/1/1005672.html’
+
+     0K .......... .......... .......... .......... .......... 32% 6.08M 0s
+    50K .......... .......... .......... .......... .......... 65% 5.43M 0s
+   100K .......... .......... .......... .......... .......... 97%  413K 0s
+   150K ...                                                   100% 2.64M=0.1s
+
+2017-07-19 20:00:56 (1.08 MB/s) - ‘indiatoday.intoday.in/video/tamil-nadu-mlas-salary-hike-farmers-protest-jantar-mantar/1/1005672.html’ saved [157479/157479]
+
+--2017-07-19 20:00:56--  http://indiatoday.intoday.in/video/congress-samajwadi-party-members-salaries-parliament/1/1005661.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 156705 (153K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/congress-samajwadi-party-members-salaries-parliament/1/1005661.html’
+
+     0K .......... .......... .......... .......... .......... 32% 3.14M 0s
+    50K .......... .......... .......... .......... .......... 65% 11.5M 0s
+   100K .......... .......... .......... .......... .......... 98% 11.1M 0s
+   150K ...                                                   100% 18.6M=0.02s
+
+2017-07-19 20:00:56 (6.13 MB/s) - ‘indiatoday.intoday.in/video/congress-samajwadi-party-members-salaries-parliament/1/1005661.html’ saved [156705/156705]
+
+--2017-07-19 20:00:56--  http://indiatoday.intoday.in/video/bmc-rj-malishka-mosquito-breeding/1/1005617.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 156513 (153K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/bmc-rj-malishka-mosquito-breeding/1/1005617.html’
+
+     0K .......... .......... .......... .......... .......... 32% 8.92M 0s
+    50K .......... .......... .......... .......... .......... 65%  796K 0s
+   100K .......... .......... .......... .......... .......... 98%  243K 0s
+   150K ..                                                    100% 6.97M=0.3s
+
+2017-07-19 20:00:57 (558 KB/s) - ‘indiatoday.intoday.in/video/bmc-rj-malishka-mosquito-breeding/1/1005617.html’ saved [156513/156513]
+
+--2017-07-19 20:00:57--  http://indiatoday.intoday.in/video/vhp-goa-cm-manohar-parrikar-resignation-beef-bharatiya-janata-party/1/1005575.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 156772 (153K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/vhp-goa-cm-manohar-parrikar-resignation-beef-bharatiya-janata-party/1/1005575.html’
+
+     0K .......... .......... .......... .......... .......... 32% 5.71M 0s
+    50K .......... .......... .......... .......... .......... 65% 5.52M 0s
+   100K .......... .......... .......... .......... .......... 97% 5.28M 0s
+   150K ...                                                   100% 12.7M=0.03s
+
+2017-07-19 20:00:57 (5.56 MB/s) - ‘indiatoday.intoday.in/video/vhp-goa-cm-manohar-parrikar-resignation-beef-bharatiya-janata-party/1/1005575.html’ saved [156772/156772]
+
+--2017-07-19 20:00:57--  http://indiatoday.intoday.in/video/marcos-kashmir-security-forces-terrorists-militants/1/1005500.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/video/marcos-kashmir-security-forces-terrorists-militants/1/1005500.html’
+
+     0K .......... .......... .......... .......... .......... 2.33M
+    50K .......... .......... .......... .......... .......... 6.83M
+   100K .......... .......... .......... .......... .......... 7.71M
+   150K ..                                                     22.0M=0.03s
+
+2017-07-19 20:01:01 (4.30 MB/s) - ‘indiatoday.intoday.in/video/marcos-kashmir-security-forces-terrorists-militants/1/1005500.html’ saved [155954]
+
+--2017-07-19 20:01:01--  http://indiatoday.intoday.in/video/potholes-monsoon-mumbai-delhi/1/1005480.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/video/potholes-monsoon-mumbai-delhi/1/1005480.html’
+
+     0K .......... .......... .......... .......... .......... 2.30M
+    50K .......... .......... .......... .......... .......... 1.56M
+   100K .......... .......... .......... .......... .......... 5.32M
+   150K ..                                                     14.0M=0.06s
+
+2017-07-19 20:01:02 (2.41 MB/s) - ‘indiatoday.intoday.in/video/potholes-monsoon-mumbai-delhi/1/1005480.html’ saved [156545]
+
+--2017-07-19 20:01:02--  http://indiatoday.intoday.in/video/bcci-team-india-coach-ravi-shastri-sachin-tendulkar-rahul-dravid-zaheer-khan-kumble-kohli/1/1005407.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 156319 (153K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/bcci-team-india-coach-ravi-shastri-sachin-tendulkar-rahul-dravid-zaheer-khan-kumble-kohli/1/1005407.html’
+
+     0K .......... .......... .......... .......... .......... 32% 5.95M 0s
+    50K .......... .......... .......... .......... .......... 65% 5.63M 0s
+   100K .......... .......... .......... .......... .......... 98% 5.34M 0s
+   150K ..                                                    100% 7.08M=0.03s
+
+2017-07-19 20:01:03 (5.65 MB/s) - ‘indiatoday.intoday.in/video/bcci-team-india-coach-ravi-shastri-sachin-tendulkar-rahul-dravid-zaheer-khan-kumble-kohli/1/1005407.html’ saved [156319/156319]
+
+--2017-07-19 20:01:03--  http://indiatoday.intoday.in/video/china-india-former-foreign-secretary-shyam-saran-doklam-bhutan-border-standoff/1/1005399.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 160707 (157K) [text/html]
+Saving to: ‘indiatoday.intoday.in/video/china-india-former-foreign-secretary-shyam-saran-doklam-bhutan-border-standoff/1/1005399.html’
+
+     0K .......... .......... .......... .......... .......... 31% 7.31M 0s
+    50K .......... .......... .......... .......... .......... 63% 9.29M 0s
+   100K .......... .......... .......... .......... .......... 95% 8.87M 0s
+   150K ......                                                100% 11.3M=0.02s
+
+2017-07-19 20:01:03 (8.49 MB/s) - ‘indiatoday.intoday.in/video/china-india-former-foreign-secretary-shyam-saran-doklam-bhutan-border-standoff/1/1005399.html’ saved [160707/160707]
+
+--2017-07-19 20:01:03--  http://indiatoday.intoday.in/gallery/jennifer-winget-beyhadh-to-avika-gor-telly-beauties-who-rocked-the-short-hair-lifetv/1/19837.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 107322 (105K) [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/jennifer-winget-beyhadh-to-avika-gor-telly-beauties-who-rocked-the-short-hair-lifetv/1/19837.html’
+
+     0K .......... .......... .......... .......... .......... 47% 6.44M 0s
+    50K .......... .......... .......... .......... .......... 95% 5.71M 0s
+   100K ....                                                  100% 7.35M=0.02s
+
+2017-07-19 20:01:03 (6.10 MB/s) - ‘indiatoday.intoday.in/gallery/jennifer-winget-beyhadh-to-avika-gor-telly-beauties-who-rocked-the-short-hair-lifetv/1/19837.html’ saved [107322/107322]
+
+--2017-07-19 20:01:03--  http://indiatoday.intoday.in/gallery/best-romantic-dramas-to-have-hit-the-small-screen-iss-pyaar-ko-kya-naam-doon-3-makers-lifetv/1/19836.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 107045 (105K) [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/best-romantic-dramas-to-have-hit-the-small-screen-iss-pyaar-ko-kya-naam-doon-3-makers-lifetv/1/19836.html’
+
+     0K .......... .......... .......... .......... .......... 47% 4.55M 0s
+    50K .......... .......... .......... .......... .......... 95% 3.99M 0s
+   100K ....                                                  100% 6.30M=0.02s
+
+2017-07-19 20:01:04 (4.31 MB/s) - ‘indiatoday.intoday.in/gallery/best-romantic-dramas-to-have-hit-the-small-screen-iss-pyaar-ko-kya-naam-doon-3-makers-lifetv/1/19836.html’ saved [107045/107045]
+
+--2017-07-19 20:01:04--  http://indiatoday.intoday.in/gallery/5-reality-shows-that-are-the-worst-things-to-have-happened-to-indian-tv-roadies-bigg-boss-lifetv/1/19833.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 106847 (104K) [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/5-reality-shows-that-are-the-worst-things-to-have-happened-to-indian-tv-roadies-bigg-boss-lifetv/1/19833.html’
+
+     0K .......... .......... .......... .......... .......... 47% 5.94M 0s
+    50K .......... .......... .......... .......... .......... 95%  323K 0s
+   100K ....                                                  100% 12.0M=0.2s
+
+2017-07-19 20:01:04 (639 KB/s) - ‘indiatoday.intoday.in/gallery/5-reality-shows-that-are-the-worst-things-to-have-happened-to-indian-tv-roadies-bigg-boss-lifetv/1/19833.html’ saved [106847/106847]
+
+--2017-07-19 20:01:04--  http://indiatoday.intoday.in/gallery/iifa-2017-shahid-kapoor-mira-rajput-bipasha-basu-karan-singh-grover-preity-zinta-star-couples/1/19827.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 101359 (99K) [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/iifa-2017-shahid-kapoor-mira-rajput-bipasha-basu-karan-singh-grover-preity-zinta-star-couples/1/19827.html’
+
+     0K .......... .......... .......... .......... .......... 50% 7.05M 0s
+    50K .......... .......... .......... .......... ........  100%  150K=0.3s
+
+2017-07-19 20:01:05 (297 KB/s) - ‘indiatoday.intoday.in/gallery/iifa-2017-shahid-kapoor-mira-rajput-bipasha-basu-karan-singh-grover-preity-zinta-star-couples/1/19827.html’ saved [101359/101359]
+
+--2017-07-19 20:01:05--  http://indiatoday.intoday.in/gallery/priyanka-chopra-birthday-unbelievable-journey-photos-hollywood-actor-miss-world/1/19831.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 102080 (100K) [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/priyanka-chopra-birthday-unbelievable-journey-photos-hollywood-actor-miss-world/1/19831.html’
+
+     0K .......... .......... .......... .......... .......... 50% 2.61M 0s
+    50K .......... .......... .......... .......... .........

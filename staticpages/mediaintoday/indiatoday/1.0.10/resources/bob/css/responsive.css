@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+@media screen and (max-width:1024px){
+.introArea h3 { font-size:22px; line-height:32px;}
+.rightAddCode img { width:100%}
+.rightAddCode { text-align:center;}
+.bestBeautyImages { margin:7% 7% 7% 0; padding:0px; width:30%; float:right}
+.bestBeautyImages img { width:100%}
+.introRight p { line-height:19px;}
+.photoAll ul li { width:15%; margin:0 25px; }
+.editorInfo { padding-top:50px;}
+.photoAll ul li .personInfo .personWork { font-size:11px;}
+#swipSlides, #swipSlidesPro1, #swipSlidesPro2, #swipSlidesPro3, #swipSlidesPro4, #swipSlidesPro5, #swipSlidesPro6, #swipSlidesPro7, #swipSlidesPro8, #swipSlidesPro9, #swipSlidesPro10 { margin-left:-10px}
+.col-xs-12 { padding-left:0px; padding-right:0px;}
+.hidden-xs{padding-left:0px; padding-right:0px;}
+.container{ padding:0; width:100%; float: left; box-sizing: border-box}
+.col-xs-12 { padding-left:0px; padding-right:0px;}
+.hidden-xs{padding-left:0px; padding-right:0px;}
+.container{ padding:0; width:100%; float: left; box-sizing: border-box}
+
+.row{margin-left:0; margin-right:0;}
+}
+
+@media screen and (max-width:900px){
+.introArea h3 { font-size:18px; line-height:27px;}
+.introArea .subText { font-size:12px; padding:8px 13px}
+.footerAdd img { width:100%}
+.footerAddArea { width:100%}
+.footerAddArea img { width:100%}
+.photoAll ul li { width:23%}
+.photoAll { margin-top:80px;}
+
+.slideProduct #swipSlides .swiper-button-next, 
+.slideProduct #swipSlides .swiper-button-prev,
+
+.slideProduct #swipSlidesPro1 .swiper-button-next, 
+.slideProduct #swipSlidesPro1 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro2 .swiper-button-next, 
+.slideProduct #swipSlidesPro2 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro3 .swiper-button-next, 
+.slideProduct #swipSlidesPro3 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro4 .swiper-button-next, 
+.slideProduct #swipSlidesPro4 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro5 .swiper-button-next, 
+.slideProduct #swipSlidesPro5 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro6 .swiper-button-next, 
+.slideProduct #swipSlidesPro6 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro7 .swiper-button-next, 
+.slideProduct #swipSlidesPro7 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro8 .swiper-button-next, 
+.slideProduct #swipSlidesPro8 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro9 .swiper-button-next, 
+.slideProduct #swipSlidesPro9 .swiper-button-prev,
+
+.slideProduct #swipSlidesPro10 .swiper-button-next, 
+.slideProduct #swipSlidesPro100 .swiper-button-prev
+
+{ display:none;}
+
+
+#swipSlides, #swipSlidesPro1, #swipSlidesPro2, #swipSlidesPro3, #swipSlidesPro4, #swipSlidesPro5, #swipSlidesPro6, #swipSlidesPro7, #swipSlidesPro8, #swipSlidesPro9, #swipSlidesPro10  { margin-left:-30px}
+
+.col-xs-12 { padding-left:0px; padding-right:0px;}
+.hidden-xs{padding-left:0px; padding-right:0px;}
+.container{ padding:0; width:100%; float: left; box-sizing: border-box}
+
+.row{margin-left:0; margin-right:0;}
+.introRight p{padding-right: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word;}
+.leftSide{ margin-right:20px;}
+.photoAll ul li{width:20%; margin:0 19px}
+
+}
+	
+@media screen and (max-width:767px){
+.introArea { margin-bottom:0px;}
+.introLeft { margin:0px; padding:0px 0 20px 0; float:none; width:100%; text-align:right}	
+.introArea h3 { font-size:30px; line-height:40px; padding-bottom:20px;}
+.introRight { margin:0px; padding:0px; float:none; width:100%; text-align:left}	
+.footerAdd { display:none}
+.bannerAreaOne { padding-bottom:20px;}
+.contenArea {  padding:10px;}
+.rightAddCode img { width:auto}
+.bannerAreaOne { background-size:100%}
+.bestBeautyImages { margin:10% 8% 14% 0}
+.mainHeaderTop { background:#000;}
+.logo { text-align:center; padding-left:0px;}
+.mainHeader .navArea { background:#535353; margin-left:0px;}
+.mainHeader .navArea ul li a { padding:10px 0}
+.mainHeader .navArea ul li a:hover { background:#353535}
+.bestBeautyTwo { margin:0px auto; float:none}
+.bestBeautyTwo { width:60%}
+.leftSide { margin-bottom:20px;}
+.leftSide h2 { font-size:35px;}
+.contenArea { margin-bottom:20px;}
+.bestBeautyThree { margin:0px auto; float:none}
+.bestBeautyThree { width:69%}
+.introArea .subText {margin: 0 auto; text-align: center;    width: 286px; display:block}
+.col-xs-12 { padding-left:0px; padding-right:0px;}
+.container{ padding:0; width:100%; float: left; box-sizing: border-box}
+.navArea ul li{ background:#535353}
+.row{margin-left:0; margin-right:0;}
+.editorInfo { padding-top:20px;}
+.photoAll { margin-left:5%; margin-top:35px;}
+.slideProduct h2 { font-size:20px; font-weight:600}
+#swipSlides, #swipSlidesPro1, #swipSlidesPro2, #swipSlidesPro3, #swipSlidesPro4, #swipSlidesPro5, #swipSlidesPro6, #swipSlidesPro7, #swipSlidesPro8, #swipSlidesPro9, #swipSlidesPro10 { margin-left:0px}
+.copyWrite{ height:30px}
+
+
+}
+
+@media screen and (max-width:481px){
+.introArea h3 {font-size: 20px; line-height: 28px;}	
+.rightAddCode img { width:100%}
+.leftSide h2 { font-size:25px;}
+.leftSide p { line-height:24px;}
+.navArea ul li { font-size:11px;}
+.photoAll ul li .personPic img { width:100%}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li .personPic img { width:auto}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li { height:235px}
+.photoAll ul li .personInfo .personWork { font-size:11px;}
+.photoAll ul li { width:42%; height:auto; margin-left:3%; margin-bottom:25px;}
+.photoAll ul li .personInfo h3 { font-size:11px;}
+.introArea .subText { width:auto; font-size:11px;}
+	}
+
+
+       
+@media (max-width: 680px){.photoAll ul li{width:134px;} }
+@media (max-width: 360px){.photoAll ul li{width:144px; margin:0}}
+
+
+@media (max-width: 680px){
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li {  width: 18%;height: 235px;}
+}
+@media (max-width: 586px){
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li {  width: 16%;}
+}
+@media (max-width: 480px){
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li {   width: 24%;}
+}
+@media (max-width: 360px){
+.col-lg-12.col-md-12.col-sm-12.col-xs-12 .photoAll ul li {   width: 46%;}  
+}
+
+

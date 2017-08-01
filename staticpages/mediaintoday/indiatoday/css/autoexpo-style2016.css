@@ -1,0 +1,638 @@
+* {margin:0;padding:0;outline:0;}
+.clr {clear:both;}
+.flt {float:left;}
+.flr {float:right;}
+a img {border:0;}
+body {font-family: 'Open Sans', sans-serif; background:url("http://media2.intoday.in/indiatoday/images/autoexpo/BG_Expo.jpg")6% 8%  no-repeat; }
+
+
+	
+#container {
+	width:1003px;
+	margin:0 auto;
+	padding-bottom:15px;
+	background:#FFFFFF;
+	box-shadow: 3px 0 5px rgb(153, 153, 153), -3px 0 5px rgb(153, 153, 153);
+	}
+	
+#google_add {
+	width:729px;
+	float:right;
+	margin:8px 7px 10px 0px;
+	}
+	
+#header_banner {margin-top:10px;}
+
+#top_main_container {
+	width:1003px;
+	margin:5px 7px 0px 7px;
+	float:left;
+	}
+	
+#top_news_left {
+	width:650px;
+	margin-right:20px;
+	float:left;
+	}
+	
+#top_news_left a {
+	text-decoration:none;
+	color:#413c39;
+	}
+	
+.slideshow {
+	width: 650px;
+	margin: 0 auto;
+	position:relative;
+	top:-32px;
+	}
+	
+.slideshow h5 {
+	width:650px;
+	float:left
+	}
+	
+.belt_outer {
+	height:465px;
+	overflow: hidden;
+	width:650px;
+	}
+	
+.belt {
+	overflow: hidden;
+	position: relative;
+	height: 435px;
+	}
+	
+.shprevarrow {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/arrow_left.jpg) no-repeat scroll left top rgba(0, 0, 0, 0);
+	display: block;
+	float: left;
+	height:38px;
+	margin-right: 10px;
+	position: absolute;
+	text-indent: -9999px;
+	top:50%;
+	width:30px;
+	}
+	
+.shnextarrow {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/arrow_right.jpg) no-repeat scroll left top rgba(0, 0, 0, 0);
+	display: block;
+	float: right;
+	height:38px;
+	text-indent: -9999px;
+	width:30px;
+	position:absolute;
+	top:50%;
+	right:0px;
+	}
+	
+.top_news {
+	position:relative;
+	top:33px;
+	z-index:9999;
+	text-transform:uppercase;
+	background-color:#ffcc01;
+	color:#413c39;
+	
+	font-size:22px;
+	font-weight:bold;
+	width:214px;
+	height:33px;
+	line-height:33px;
+	padding-left:10px;
+	
+}
+.read_more {
+	position: absolute !important;
+	top: 409px;
+	margin-left: 598px;
+	z-index: 0;
+	}
+	
+#top_right{float:left;}
+
+.social_bid {
+	width:310px;
+	height:152px;
+	background-color:#FFFFFF;
+	margin-top:17px;
+	border:5px solid #ffcc01;
+	}
+	
+.social_heading {
+	color:#413C39;
+	text-transform:uppercase;
+	font-size:18px;
+	font-weight:bold;
+	width:214px;
+	height:33px;
+	line-height:33px;
+	padding-left:10px;
+	}
+	
+.social_links {
+	margin:5px 0px 0px 10px;
+	}
+	
+.social_links a {
+	float: left;
+	margin: 5px 0 10px 10px;
+	}
+	
+.social_links .facebook {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/social_bid.png) no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+	float: left;
+	height: 39px;
+	width: 38px;
+	margin-right: 5px;
+	}
+	
+.social_links .twitter {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/social_bid.png) no-repeat scroll -51px 0px rgba(0, 0, 0, 0);
+	float: left;
+	height: 39px;
+	width: 38px;
+	margin-right: 5px;
+	}
+	
+.social_links .linkedin {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/social_bid.png) no-repeat scroll -101px 0px rgba(0, 0, 0, 0);
+	float: left;
+	height: 39px;
+	width: 38px;
+	margin-right: 5px;
+	}
+	
+.social_links .googleplus {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/social_bid.png) no-repeat scroll -151px 0px rgba(0, 0, 0, 0);
+	float: left;
+	height: 39px;
+	width: 38px;
+	margin-right: 5px;
+	}
+	
+.social_links .youtube {
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/social_bid.png) no-repeat scroll -201px 0px rgba(0, 0, 0, 0);
+	float: left;
+	height: 39px;
+	width: 38px;
+	margin-right: 5px;
+	}
+	
+.right_search {
+	border-top: 2px solid #ffcc01;
+	padding: 13px 10px;
+	}
+	
+.right_search input[type="text"]{
+	float:left;
+	width:210px;
+	height:29px;
+	}
+	
+.right_search input[type="image"]{
+	float:left;
+	}
+	
+#highlight {
+	width:992px;
+	margin:0 auto;
+	background-color:#f5f5f5;
+	}
+	
+.hightlight_heading {
+	background-color:#ffcc01;
+	text-transform:uppercase;
+	color:#413c39;
+	font-size:22px;
+	font-weight:bold;
+	width:214px;
+	height:33px;
+	line-height:33px;
+	padding-left:10px;
+	}
+	
+.hightlight_heading  a{
+	text-decoration:none;
+	color:#413c39;
+	}
+	
+.gallery_thumb {}
+
+.gallery_thumb ul li {
+	width:320px;
+	height:277px;
+	float:left;
+	list-style:none;
+	margin:0px 10px 10px 0px;
+	}
+	
+.h_gallery {position:relative;}
+
+.play {
+	position:absolute;
+	top:0;
+	left:0;
+	}
+	
+.strip {
+	background-color:#000;
+	color:#fff;
+	padding:5px 0px 8px 5px;
+	
+	font-size:17px;
+	font-weight:bold;
+	}
+	
+.more_highlight {
+	float:right;
+	margin:8px 12px;
+	padding-bottom:13px;
+	}
+	
+#left_pannel {
+	width:650px;
+	float:left;
+	margin:20px 20px 0px 7px;
+	}
+	
+#first_look_slider {
+	width:650px;
+	background-color:#f5f5f5;
+	/*height:534px;*/
+	}
+	
+.first_look_heading {
+	background-color:#ffcc01;
+	text-transform:uppercase;
+	color:#413c39;
+	
+	font-size:22px;
+	font-weight:bold;
+	width:214px;
+	height:33px;
+	line-height:33px;
+	padding-left:10px;
+	}
+	
+/*bxslider css start*/
+.boxcont {width:650px;}
+
+.box {
+	width: 100%;
+	position:relative;
+	overflow: hidden;
+	}
+	
+.bxslider {
+	position:relative;
+	width:650px;
+	}
+	
+.bxslider a {
+	color:#000;
+	text-decoration:none;
+	}
+	
+.sliderbass h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color: #FFFFFF;
+	background-color: #000000;
+	width:650px;
+	text-decoration:none;
+	padding:15px 5px 15px 14px;
+	margin:-5px !important;
+	}
+	
+#carousel {
+	margin-top: 5px;
+	width: 650px;
+	position: relative;
+	}
+	
+#carousel ul li {
+	list-style:none;
+	margin-right:5px;
+	float:left;
+	}
+	
+.bx-controls-direction div {
+	position:absolute;
+	top: 0;
+	outline: 0;
+	width: 48px;
+	height: 130px;
+	text-indent: -9999px;
+	z-index: 9999;
+	}
+	
+.bx-prev {
+	left: 0;
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/prev.jpg) no-repeat;
+	position:relative;
+	z-index:999;
+	}
+	
+.bx-next {
+	right: 0;
+	background: url(http://media2.intoday.in/indiatoday/images/autoexpo/next.jpg) no-repeat;
+	position:relative;
+	z-index:999;
+	}
+	
+/*bxslider css end*/
+
+#bottom_container {
+	width:650px;
+	margin-top:33px;
+	}
+	
+.tabbing {
+	width:318px;
+	float:left;
+	margin:7px 4px;
+	}
+	
+.tab_one {
+	width:305px;
+	background-color:#ffcc01;
+	padding:10px 5px 0px 5px;
+	}
+	
+.tab_one ul li {
+	list-style: none;
+	border-bottom: 1px dotted #000;
+	float: left;
+	margin-bottom: 5px;
+	}
+	
+.tab_one ul li:last-child {border-bottom:none;}
+
+.section {
+	min-height:135px;
+	float:left;
+	}
+	
+.tab_one ul li img {
+	width:144px;
+	height:130px;
+	float:left;
+	}
+	
+.tab_one ul li h3 {
+	width:140px;
+	float:left;
+	margin-left:7px;
+	color:#413c39;
+	font-size:16px;
+	line-height:20px;
+	font-weight:normal;
+	}
+	
+.tab_one ul li h3 a {
+	color:#413c39;
+	text-decoration:none;
+	}
+	
+.tab_one ul li h3 a:hover {
+	color:#413c39;
+	text-decoration:underline;
+	}
+	
+#tabs li {
+	list-style:none;
+	float:left;
+	margin-right:2px;
+	}
+	
+#tabs li a {
+	 background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 50px;
+    padding: 3px 29px;
+    text-decoration: none;
+    text-transform: uppercase;
+	}
+	
+#tabs #current {
+	padding:20px 31px 10px 40px;
+	
+	font-size:22px;
+	font-weight:bold;
+	color:#fff;
+	text-transform:uppercase;
+	text-decoration:none;
+	background-color:#ffcc01;
+	}
+	
+#content {margin-top:45px;}
+
+.auto_diary {
+	float:left;
+	width:323px;
+	background-color:#f5f5f5;
+	}
+	
+.diary_list {
+	width:305px;
+	margin:0 auto;
+	}
+	
+.diary_list li {
+	list-style:none;
+	padding-bottom:5px;
+	border-bottom:1px dotted #000;
+	margin:10px 0px 10px 0px;
+	}
+	
+.diary_list li:last-child{border-bottom:none;}
+
+.diary_list li a {
+	text-decoration:none;
+	
+	font-size:16px;
+	color:#232730;
+	}
+	
+.diary_list li a:hover {
+	text-decoration:underline;
+	
+	font-size:16px;
+	color:#232730;
+	}
+	
+#right_pannel {
+	width:319px;
+	float:left;
+	margin-top:20px;
+	}
+	
+.hit_misses {
+	width:317px;
+	background-color:#f5f5f5;
+	}
+	
+.hit_misses_heading {
+	background-color: #ffcc01;
+	text-transform: uppercase;
+	color: #413c39;
+	
+	font-size: 22px;
+	font-weight: bold;
+	width: 214px;
+	height: 33px;
+	line-height: 33px;
+	padding-left: 10px;
+	}
+	
+.hit_misses_list {
+	width:295px;
+	margin:0 auto;
+	}
+	
+.hit_misses_list li {
+	list-style:none;
+	padding-bottom:5px;
+	border-bottom:1px dotted #000;
+	margin:10px 0px 10px 0px;
+	}
+	
+.hit_misses_list li:last-child {border-bottom:none;}
+
+.hit_misses_list li a {
+	text-decoration:none;
+	
+	font-size:16px;
+	color:#232730;
+	}
+	
+.hit_misses_list li a:hover {
+	text-decoration:underline;
+	color:#232730;
+	}
+	
+.more_hit_misses_list {
+	float:right;
+	margin:-10px 1px;
+	padding-bottom:13px;
+	}
+	
+.hit_misses_list li a span:before {
+	content:url(http://media2.intoday.in/indiatoday/images/autoexpo/thumb.jpg);
+	height: 50px;
+	float: left;
+	margin-right: 5px;
+	}
+	
+.gossip {
+	width:319px;
+	background-color:#f5f5f5;
+	margin-top:30px;
+	padding-bottom:13px;
+	}
+	
+.gossip_heading {
+	background-color: #ffcc01;
+	text-transform: uppercase;
+	color: #413c39;
+	
+	font-size: 22px;
+	font-weight: bold;
+	width: 214px;
+	height: 33px;
+	line-height: 33px;
+	padding-left: 10px;
+	}
+	
+.small_slider {
+    float: left;
+    margin-bottom: 10px;
+    position: relative;
+	}
+
+.small_slider span {
+	background-color: #000;
+	width: 299px;
+	float: left;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	margin-top: -5px;
+	font-size: 16px;
+	}
+	
+.small_slider span a {
+	color: #fff;
+
+	font-size: 16px;
+	text-decoration:none;
+	}
+	
+.small_slider span a:hover {
+	text-decoration:underline;
+	color: #fff;
+	}
+	
+.small_video_slider {
+	position:relative;
+	margin-top:10px;
+	}
+	
+.moreblack_videos {
+	float:right;
+	margin-top: -10px;
+	padding-bottom:13px;
+	}
+	
+.twitter_buzz {
+	float:left;
+	width:319px;
+	background-color:#f5f5f5;
+	}
+	
+.twitts {
+	width:290px;
+	padding-bottom:10px;
+	margin: 0 auto;
+	}
+	
+.twitts li {
+	list-style:none;
+	margin:16px 0px 15px 0px;
+	}
+	
+.twitts li a {
+	
+	font-size: 16px;
+	font-weight:bold;
+	color:#232730;
+	text-decoration:none;
+	}
+#carousel { overflow:hidden;}
+#carousel ul {margin-left: 50px; width: 600px; height:132px; overflow:hidden; position:relative;}
+
+.current { background-color: rgb(255, 204, 1)!Important; padding-top: 14px !important;}
+
+#special-topnav {
+	width: 100%;
+	margin: 0 auto;
+	}
+	
+.bottom_strip {
+	position: absolute;
+	width: 642px;
+	height: 45px;
+	background:#111;
+	z-index: 0;
+	bottom: 4px;
+	color: #fff;
+	line-height: 45px;
+	font-size: 16px;
+	padding-left: 10px;
+}
+
+.bottom_strip a{color:#fff !important}

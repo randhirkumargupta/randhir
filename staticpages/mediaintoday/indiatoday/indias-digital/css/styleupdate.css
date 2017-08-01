@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin:0; padding:0; outline:0;}
+
+.clr{clear:both}
+.flt{float:left}
+.flr{float:right}
+
+a img{border:0;}
+
+
+body{ font:12px Arial, Helvetica, sans-serif;}
+
+#wrapper{width:1000px; margin:0 auto;}
+
+#header{width:1000px; height:130px; border-bottom:5px solid white}
+
+
+.resp-tabs-list{
+background-color:#a6a6a6;
+float:left;
+width:201px;
+border:5px;
+border-right:5px solid white;
+list-style:none;
+
+}
+
+.resp-tabs-list li{
+padding:18px 0 10px 26px;
+border-bottom:5px solid white;
+}
+
+.resp-tabs-list li.active{background:red;}
+
+
+
+.resp-tabs-container {
+    padding: 0px;
+    background-color: #fff;
+    float: left;
+	width:768px;
+}
+
+h2.resp-accordion {
+    cursor: pointer;
+    padding: 5px;
+    display: none;
+}
+
+.resp-tab-content {
+    display: none;
+}
+
+
+
+
+
+.resp-vtabs ul.resp-tabs-list {
+    float: left;
+    width:227px;
+	border-right:5px solid white;
+}
+
+.resp-vtabs .resp-tabs-list li {
+    display: block;
+    padding: 15px 15px 0px 15px;
+    margin: 0;
+    cursor: pointer;
+    float: none;
+	color:#fff;
+	font-size:16px;
+	line-height:27px;
+	
+}
+
+.resp-vtabs .resp-tabs-container {
+    float: left;
+    width:768px;
+    min-height: 250px;
+    clear: none;
+}
+
+.resp-vtabs .resp-tab-content {
+    border: none;
+}
+
+.resp-vtabs li.resp-tab-active {
+	color:#fff;
+	font-size:16px;
+	font-weight:bold;
+    position: relative;
+    z-index: 1;
+	background:#fe0000;
+}
+
+.resp-vtabs li.resp-tab-active span:after{
+	content:url(http://media2.intoday.in/indiatoday/indias-digital/images/img_2.png);
+	left: 189px;
+	top:20px;
+	position: absolute;
+}

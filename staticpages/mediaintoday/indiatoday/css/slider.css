@@ -1,0 +1,56 @@
+#surfercommt {
+    float: left;
+    width: 800px;
+}
+.commentfrm {
+    color: #000000 !important;
+    font: bold 14px arial;
+    text-align: left;
+}
+.frm_outer { border: 1px solid gray;
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 15px;
+    margin-left: 345px;
+    padding: 18px;}
+.frm-share {float: right;height: 30px;position: relative;width: 150px; margin-bottom:10px}
+.socialcont { position: absolute;right: 0;top: 0;width: 120px;}
+.socialdiv {bottom: 0;position: relative;right: 0;}
+.email {background-position: -304px -8px;}
+.fb, .tw, .email { background-image: url("http://specials.indiatoday.com/words-of-love/sprite.png");background-repeat: no-repeat;cursor: pointer;height: 32px;width: 36px;}
+.imgs {margin: 0 2px;}
+.lft {float: left;}
+.fb {background-position: -224px -8px;}
+.tw {background-position: -264px -8px;}
+#slides {clear: both; width: 100%;position: relative;}
+.slides_container {width:1000px;min-height: 600px;overflow:hidden;position:relative;display:none;}
+.slides_container div.slide{width:1000px;min-height:600px;display:block;}
+#slides .next,#slides .prev {position:absolute;top:47%;width:62px;height:60px;display:block;z-index:101; cursor:pointer; margin:0px 10px;	}
+#slides .next:hover,#slides .prev:hover{}
+#slides .next {right:0px;}
+#slides .prev {left:0px;}
+a:link,a:visited {color:#599100;text-decoration:none;}
+a:hover,a:active {color:#599100;text-decoration:underline;}	
+.backto1{position: absolute; right: 10px; top: 36%; font: bold 94px/6px Arial; color: #4f4b4c !important;}
+.backto1:hover{text-decoration: none;}
+.backto1 > span {font: bold 10px/22px arial; color: #000;}
+.submit_button{  background-image: url("../images/str_sub.gif");background-position: left top;background-repeat: no-repeat;border: medium none;cursor: pointer;float: left;height: 21px;margin: 0;padding: 0;width: 67px;}
+.close-spcl-pop{position: absolute; right: 10px; background-color: #CCCCCC; text-align: center; width: 20px; top: 10px; height: 20px; font: bold 12px/20px arial; border-radius: 10px 10px 10px 10px; color: #000!important;}
+.close-spcl-pop:hover{background-color: #000!important;  color: #fff!important; text-decoration: none;}
+.spclcomment{position: absolute;right: 100px;top: 0;}
+.spclcomment > a:hover{text-decoration: none;}
+#spclcomment{position: absolute; top: 30px; border: 1px solid #ccc; display: none; height: auto; right: 0px; background-color: #eee; padding: 25px; border-radius: 10px;}
+#leftrightads{ display:none!important;}
+.spclcomment{right: 130px!important;}
+.sharer_div .close{  
+	background: none repeat scroll -826px 0 #EEEEEE;
+    border-radius: 12px 12px 12px 12px;
+    cursor: pointer;
+    height: 14px;
+    position: absolute;
+    right: 9px;
+    top: 13px;
+    visibility: visible;
+    width: 13px}
+.sharer_div .pointer{
+	left: 250px;
+}

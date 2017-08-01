@@ -1,0 +1,310 @@
+@font-face {
+    font-family: 'Arial-Black';
+    src: url('ab.eot');
+    src: url('ab.eot?#iefix') format('embedded-opentype'),
+         url('ab.woff') format('woff'),
+         url('ab.ttf') format('truetype'),
+         url('ab.svg#"Arial-Black"') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {margin:0; padding:0; background:#d7d7d7; font-family:Arial, Helvetica, sans-serif;}
+header, section,article {margin:0; padding:0;}
+.clr,.clear {clear:both}
+h1, h2, h3, h4, h5, h6 {margin: 0; padding:0px 0px 0px 0px;}
+p {margin: 0; padding:15px 0px 0px 0px;}
+header {width:100%;}
+
+#itgd_links {background-color: #272727; color: #a4a4a4;font: bold 11px/15px arial; margin: 0;padding:15px 5px; text-align: center; border-bottom:1px solid #fff;}
+#itgd_links a {color: #CDCDCD;text-decoration: none;}
+#itgd_links a:hover {color: #D81921;}
+
+#itgd_links ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 990px;
+}
+#itgd_links ul li {float:left; padding:0 16px; list-style:none;}
+#itgd_links ul li.last {border-right:none;}
+
+.topbg {
+    background-color: #EE1B22;
+    min-height: 163px;
+}
+.topnavbg {background-color:#000; border-top:1px solid #fff;}
+.toptxt {float: right; margin-right: 10px; margin-top: 15px;}
+nav {
+    background: none repeat scroll 0 0 #000000;
+    color: #EE1B22;
+    float: left;
+    font: 15px/20px arial black;
+    margin: 0 0 0 330px;
+    text-transform: uppercase;
+    width: 660px;
+}
+nav ul { margin:0; padding:0;}
+
+nav ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 8px 15px 7px;
+}
+nav ul li a{color: #EE1B22;text-decoration: none;}
+nav ul li a:hover{color: #FFF;text-decoration: none;}
+
+.centerdiv { margin:0 auto;width:990px;}
+#wapper { width:970px; margin:0 auto; padding:55px 10px 10px 10px; background-color:#fff; overflow:hidden}
+.posrel { position:relative}
+.posabs {position:absolute;}
+.left-side { width:650px; float:left; overflow:hidden;}
+.left-side .content { padding:20px; background:#e6e6e8; font-size:16px; color:#3b3b3b; margin-bottom:20px; line-height:26px; }
+.left-side .content1 {font-size:16px; color:#3b3b3b; margin-bottom:20px; line-height:26px; }
+h1 { font-size:22px; font-weight:normal; color:#ee1b22;}
+.right-side { float:right;width:300px;}
+#sponsorsdetails { line-height:26px; margin-bottom:50px; }
+.e_speaker {
+    border-bottom: 1px dashed #D3D3D3;
+    border-right: 1px dashed #D3D3D3;
+    color: #3B3B3B;
+    float: left;
+    font-size: 14px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: 300px;
+	min-height:76px;
+	padding-right:6px;
+}
+.e_speaker img { float:left; margin-right:10px; border:4px solid #d7d7d7}
+
+.e_speaker span {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.e_sp {
+    border-right: medium none;
+    padding-left: 20px;
+}
+.fbtwbox {position:fixed;right:0; top:275px;}
+.sildebarspc {margin-bottom:20px;}
+
+.toppad0px { padding-top:0px;}
+.graybox {
+    background: none repeat scroll 0 0 #E6E6E8;
+    color: #3B3B3B;
+    font: 14px/18px arial;
+    padding: 10px;
+}
+.graybox a {color: #3B3B3B;}
+.redtxt {color:#ee1b22;font-weight:bold}
+.marbot { margin-bottom:10px;}
+.margtop { margin-top:10px;}
+.divhight {min-height:60px;}
+
+#footer {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #CCCCCC;
+    clear: both;
+    padding: 15px 0 0;
+}
+.foot-logo-box {
+    border-top: 1px solid #CCCCCC;width: 98%;
+    float: left;
+    padding: 10px;
+}
+.foot-txt { font:normal 11px Georgia; color:#000; text-align:center; padding-bottom:8px;}
+.foot-logos {
+    border-right: 1px solid #000000;
+    float: left;
+    padding: 0 45px;
+	text-align:center;
+}
+.flast {border-right:none;}
+
+.redlink {font:normal 14px/20px Arial; color:#ee1b22; float:right;}
+.redlink a {color:#ee1b22; text-decoration:underline}
+
+
+.padbott { padding-bottom:5px;}
+
+.main-pro-head {width:960px; height:33px; background:url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/cor1.gif) no-repeat top left #000; float:left;}
+.main-pro-head h3 {font:normal 18px/33px Arial-Black; text-transform:uppercase; color:#f7ee23; margin:0; padding:0 5px; float:left}
+.date {font:normal 12px/33px arial;color:#fff;}
+
+.prog-head {
+    color: #000000;
+    font: 16px/20px Arial-Black;
+    text-transform: uppercase;
+	margin-top:2px;
+}
+.prog-txt {font:normal 14px/20px arial; color:#383838}
+.prog-time {font:normal 14px/22px Arial-Black; color:#606060; text-align:right}
+.prog-red {color:#EE1B22}
+
+
+.yellow-bg {
+    background-color: #EE1B22;
+    float: left;
+    margin: 5px 0;
+    padding: 2px 5px;
+	font-weight:bold;
+	color:#fff;
+}
+.bott-marg { margin-bottom:20px;}
+
+.right {float:right}
+.prog-sch-box {width:100%; float:left; padding-bottom:30px; background:url(images/wh-line.png) repeat-y top left;}
+.prog-left {width:160px; float:left}
+
+.prog-right {
+    float: left;
+    margin-left: 10px;
+    padding-left: 15px;
+    width: 432px;
+}
+.bottom-10marg {margin-bottom:10px;}
+.lucnhbreak { background:url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/lunch-bg.gif) no-repeat top left; width:825px; height:33px; font:normal 16px/33px Arial-Black; text-transform:uppercase; padding-left:10px; color:#fff;}
+
+.progboox {margin: 10px 5px; float: left; width: 31%;}
+.progboox-full {margin: 10px 5px; float: left; width:100%;}
+.progboox-midd {margin: 10px 5px; float: left; width:45%;}
+
+
+.mindr-consubhead {
+    color: #000000;
+    font: bold 13px/20px arial;
+}
+.prj_name, .prj_name a {
+    color: #EE1B22;
+    font: normal 13px/20px Arial;
+    text-decoration: none;
+}
+.imgs {
+    margin-right: 10px;
+}
+.marg-top {
+    margin-top: 10px;
+}
+.padbott { padding-bottom:0;}
+
+.progbgbox {
+    padding: 20px 10px;
+}
+.progday {
+    background-color: #000000;
+    color: #FFFFFF;
+    float: left;
+    font: 18px arial;
+    margin-bottom: 25px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+.graytxt {
+	color: #3B3B3B;
+    font-size: 24px;
+	background:#e8e8ea;
+	padding:20px;
+	text-align:center;
+	margin-top:15px;
+
+}
+.graytxt a { color:#3B3B3B; text-decoration:none}
+.graytxt a:hover { text-decoration:underline}
+
+
+#left {
+    float: left;
+    margin-right: 15px;
+    width: 685px;
+}
+.event-headline {
+    color: #F57921;
+    font: 20px/24px 'Arial-Black';
+}
+
+#leftsponsors {width:200px; float:left;}
+#sponsorsdetails{float:left; margin-left:20px; width:430px;}
+.mainul, .innerul{margin:0 0 2px 0; padding:0;}
+.mainul li.mainli, .innerul li.innerli, .innerul li.innerli_a{width:200px;list-style:none;}
+.mainul li .mainlitop{background: #5E5E5E;
+    color: #FFFFFF;
+    font: bold 14px/30px Myriadpro,Arial,Helvetica,sans-serif;
+    height: 30px;
+    padding-left: 10px;}
+.innerul li.innerli_a{background:url(../images/grey-band-bg.gif) top no-repeat; border:1px solid #E1E1E1; border-top:none; font:bold 12px Arial; color:#505050; padding:3px 0 3px 10px; width:188px;}
+.innerul li.innerli a{background:url(../images/grey-band-bg.gif) top no-repeat; border:1px solid #E1E1E1; border-top:none; font:bold 12px Arial; color:#505050; padding:3px 0 3px 10px; width:188px; display:block; text-decoration:none;}
+.innerul li.redli{background:none !important; border:1px solid #EE1B22 !important; background-color:#EE1B22 !important; border-top:none; font:bold 12px Arial; padding:5px 0 5px 10px; color:#FFFFFF; width:188px;}
+.innerul li.innerli a:hover{text-decoration:none; background:none !important;  border:1px solid #EE1B22 !important; background-color:#EE1B22 !important; border-top:none; color:#FFFFFF;}
+/*.innerul li.redli{background:url(../images/highlite-band-bg.gif) top no-repeat; border:1px solid #BB0500; border-top:none; font:bold 12px Arial; padding:5px 0 5px 10px; color:#FFFFFF; width:188px;}*/
+.innerul li.redli a{color:#FFFFFF; text-decoration:none;}
+.compName {
+    color: #EE1B22;
+    font-family: arial;
+    font-size: 22px;
+    font-weight: normal;
+    padding: 5px 0 0;
+}
+.headSpons {
+    color: #000000;
+    font-family: arial;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    text-decoration: none;
+}
+.mainspohead {
+    height: 35px !important;
+    line-height: 18px !important;
+    padding: 10px !important;
+}
+
+.hdn_2015 h1{ font-size:38px; margin-top:20px; font-family:"Times New Roman", Times, serif; color:#fff;}
+.toptxt {float: right;margin-right: 10px;margin-top: 15px;width: 640px;}
+.left-side h1{ margin-bottom:10px}
+.d_logo{ }
+.m_logo{ display:none}
+.fbtwbox{z-index: 111;}
+.footer_frame{width:100%;height:165px;}
+
+/******************************* IPAD *******************************************/
+@media screen and (max-width :800px){
+
+.centerdiv{ width:100%;}
+.toptxt{ width:434px;}
+.hdn_2015 h1 {font-size: 32px;margin-top: 8px;}
+.prog-right{ width:240px;}
+#wapper {width: 760px;}
+.left-side {width: 450px;}
+#itgd_links ul{ width:100%;}
+nav{margin:0;width:100%;}
+#itgd_links ul li{padding: 0 4px;}
+#footer_menu span{margin: 0 7px !important;}
+.footer_frame{width:100%;height:180px;}
+}
+/******************************* MOBILE *******************************************/
+@media screen and (max-width :640px){
+.d_logo{display:none }
+.m_logo{ display:block;margin: 0 auto;}
+.toptxt{ width:100%;}
+.posabs{ position:relative;}
+.hdn_2015 img{ margin-left:22px;}
+.hdn_2015 h1 {font-size: 25px;margin-top: 5px;}
+nav{font:14px/20px arial black;}
+nav ul li {padding: 8px 8px 7px;}
+#wapper{ /*padding: 21px 10px 10px;*/ width:100%; padding:0;}
+.prog-left{ width:100%; float:left;}
+.prog-time{ text-align:left;}
+.prog-right{ width:100%;margin-left: 0; padding-left:0;}
+.right-side{ width:100%; text-align:center; margin-top:10px;}
+.left-side{ width:100%;}
+.e_speaker{ padding:14px; min-height:61px; border-right:0; float:none; margin:0 auto;}
+.fbtwbox{ top:200px; display:none}
+.left-side h1{ text-align:center;}
+.left-side .content1{ padding:10px;}
+.footer_frame{width:100%;height:200px;}
+.foot-logos{margin-bottom: 20px;text-align: center;}
+
+}
+

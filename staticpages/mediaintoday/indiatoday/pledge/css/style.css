@@ -1,0 +1,104 @@
+s
+body{margin:0; padding:0; background:#d30a12; font-family:roboto, sans-serif}
+a{color:black; text-decoration:none; }
+.clr:after, .clr:before{content:''; display:table;}
+.clr:after{ clear:both;}
+.h2{color:#d30a12; border-bottom:2px solid #d30a12; width:150px;}
+ul{margin:0; padding:0;}
+li{ list-style:none;}
+.container{width:100%;}
+.wrapper{width:1000px; margin:auto; overflow:hidden; position:relative}
+.top-header{height:756px; background:white url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/header-bg.jpg) no-repeat top center}
+.header1{height:113px; position:relative}
+.header2{width:100%; height:455px; margin-top:12px;}
+.header3{width:100%; font-size:14px;}
+.pcj-logo{width:219px; height:79px; float:left; margin-top:31px; margin-left:41px;}
+.menu{width:686px;float:right; margin-top:44px;}
+.menu li{ float:left; margin-left:37px;}
+.menu li a{font-size:16px; font-weight:bold; border-bottom:2px solid black;}
+.itg-logo{width:58px; height:53px; position:absolute; top:10px; right:0; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/itg-logo.png)}
+.i-am-shakti-logo{width:277px; height:408px; float:left; /*background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/i-am-shakti_logo.png)*/}
+.i-am-shakti-logo-old{width:277px; height:408px; float:left;}
+.i-am-shakti-logo-home{width: 254px;
+height: 600px;
+position: absolute;
+left: 20px;
+top: 20px;
+background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/pledge/i-am-shakti_logo.png) no-repeat;
+background-size:95%;
+}
+.pledge-now-box{width:601px; height:373px; float:left; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/bg-pledge.png) no-repeat; margin-top:31px; margin-left:85px; position:relative;}
+.pledge-btn{width: 244px;height: 52px;position: absolute; text-align:center;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/pledge-now-button.png);left: 177px;top: 341px; padding-top:10px;}
+.pledge-btn a{ font-size: 19px;
+color: white;
+font-family: roboto;
+font-weight: 700;
+/* padding-left: 34px; */
+/* width: 100px; */
+padding: 0 3px;
+line-height: 19px;}
+p.lead{color:white;font-size: 18px;padding-left: 40px;padding-right: 40px;padding-top: 25px;text-align: center;}
+.counter{width:180px; height:56px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/counter.png); position:absolute; bottom:0; left:212px; color:white; text-align:center; font-size:38px; font-weight:bold;}
+.people-who-pledged{width:966px; height:76px; margin-bottom:25px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/taken-pledge-bg.png)}
+.people-who-pledged img{float:left;}
+.people-who-pledged ul{margin-left:25px; margin-top:13px; float:left;}
+.people-who-pledged ul li{ float:left; margin-right:12px;}
+.twitter-box{width:474px; height:385px; padding-top:65px; float:left; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/twiter.png); background-repeat:no-repeat }
+.facebook-box{width:474px; height:385px; float:right; padding-top:75px;padding-left:5px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/facebook.png); background-repeat:no-repeat;}
+.photos{width:474px; height:245px; color:white; float:left;}
+.videos{width:474px; height:245px; color:white; float:right;}
+.photos h2{ border-bottom:2px solid white; width:80px;}
+.videos h2{ border-bottom:2px solid white; width:80px;}
+.photos li{float:left; margin-right:13px; width:145px;}
+.photos li img{border:2px solid white;width:100%;}
+.videos li{float:left; margin-right:13px; width:145px;}
+.videos li img{border:2px solid white; width:100%;}
+.footer{ height:80px; background:white}
+.footer-inner{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/sponsor.png); width:500px; height:65px; margin:auto;}
+.social-plugin{ float: right;margin-top: 25px;margin-right: 75px;}
+.social-plugin ul{}
+.social-plugin ul li {list-style: none;float: left;margin-left: 15px;}
+.flt {float: left;margin-right: 2px;font-family: roboto;font-size: 20px;color: #fff;margin-left: 10px;}
+.flr{color: #fff;text-align: center;width: 82px;float: left;font-size: 16px;font-weight: bold;}
+.flm{
+width: 63px;
+margin-top: 6px;
+margin-left: 21px;
+float:left;
+}
+.profile{ float:left; font-size:12px; margin-left:5px;}
+
+
+
+.shakti-logo{width:300px; height:376px; float:left; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/imshakti-logo-inner.png) no-repeat center;}
+.border-bottom{ border-bottom:2px solid #ed1c22; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/iamshakti/images/header-bg.jpg)}
+.right-header{width:700px; height:370px; float:left; position:relative;}
+
+.top-slider{width:610px; height:225px; background:black; margin-top:16px; margin-left:39px; position:relative}
+.top-slider-nav{ position:absolute; bottom:-26px; right:0; background:white; width:48px; height:18px}
+.top-slider-nav ul li{ float:left; margin-right:3px;}
+.top-slider-nav ul li a{width: 13px;height: 13px;color: transparent;padding: 0;float: left;background: black url(bullet.png) no-repeat;border-radius: 50%;}
+
+
+.social-icon{width: 84px;
+height: 40px;
+position: absolute;
+bottom: -50px;
+right: 30px;}
+
+#outerdiv 
+{ 
+width:957px; 
+height:71px; 
+overflow:hidden; 
+position:relative; 
+} 
+
+#inneriframe 
+{ 
+position: absolute;
+top: -88px;
+left: 2px;
+width: 1287px;
+height: 200px;
+}

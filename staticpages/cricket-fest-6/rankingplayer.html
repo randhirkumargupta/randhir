@@ -1,0 +1,81 @@
+<link href="css/ipl6.css" type="text/css" rel="stylesheet">
+<style>
+body { background:none;}
+</style>
+<script>
+function onSubmitPoll2()
+{
+	var form = document.poll2;			
+	var radio		= form.player;
+	var radioLength = radio.length;
+	var check 		= 0;
+	var answer = 0;
+	var radioIndex = 0;
+	for(var i = 0; i < radioLength; i++)
+	{
+		if(radio[i].checked)
+		{
+				answer=radio[i].value;
+				check = 1;	
+				radioIndex = i;
+		}
+	}		
+	if (check == 0)
+	{
+		alert('No selection has been made. Please try again..');
+		return false;
+	}
+	else
+	{
+		var strURL = "http://specials.indiatoday.com/specials/bt_event/pollSubmit.jsp?sid="+document.poll2.sid.value+"&answer="+answer+"&pid="+document.poll2.pid.value+"";
+		var popupHeight = 265;
+		var popupWidth = 435;
+		var popupTop =  (window.screen.availHeight - popupHeight)/2;
+		var popupLeft = (window.screen.availWidth - popupWidth)/2;
+		var window1 = window.open(strURL ,'messageWindow','top=' + popupTop + ',left=' + popupLeft + ',height=' + popupHeight + ',width=' + popupWidth + ',toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=yes', '_blank');
+		return true;
+	}
+}
+</script>
+<div class="right-cont graybgs">
+<form method="POST" onsubmit="return onSubmitPoll2();" name="poll2">
+<input value="252" name="sid" type="HIDDEN">
+<input value="1127" name="pid" type="HIDDEN">
+<div class="chunkcont">
+<div class="ipl-head score-wid-sec ">Ranking Players</div>
+<div class="chunkcont">
+
+                        <div class="poll_question">Who will be the leading run scorer in IPL 6?</div>
+
+                        
+                        <div class="poll_option">
+                          
+                          <div class="rpdivider">
+                          <div><img border="0" src="http://media2.intoday.in/indiatoday//images/stories/2011April/chris-gayle-88_032812040213.jpg"></div>
+                          <div align="center" class="rpboxopt"><input type="radio" value="2059" class="radio_new" name="player"></div>
+                          <div align="center" class="introtext_poll">Chris Gayle</div></div>
+                          
+                          <div class="rpdivider">
+                          <div><img border="0" src="http://media2.intoday.in/indiatoday//images/stories/2013April/virat-kohli_88_041213043759.jpg"></div>
+                          <div align="center" class="rpboxopt"><input type="radio" value="2060" class="radio_new" name="player"></div>
+                          <div align="center" class="introtext_poll">Virat Kohli</div></div>
+                          
+                          <div class="rpdividerb">
+                          <div><img src="http://media2.intoday.in/indiatoday//images/stories/2013April/dinesh-kartik_88_041213043846.jpg" border="0" /></div>
+                          <div align="center" class="rpboxopt"><input value="2061" class="radio_new" name="player" type="radio"></div>
+                          <div class="introtext_poll" align="center">Dinesh Karthik</div></div>
+                          
+                        
+                        </div>
+                        <div class="clear"></div>
+                        <div class="button" align="right">
+                        	<input id="button3"  value="submit" src="images/submit.png" name="submit" type="image" align="absmiddle" border="0">
+                        	
+                            <div class="clear"></div>
+
+                        </div>
+                       
+</div>
+</div> 
+</form>
+</div>

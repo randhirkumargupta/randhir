@@ -1,0 +1,353 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500);/*** 'Roboto', sans-serif; ***/
+
+* { margin: 0; padding: 0; outline: none; }
+.clear { clear: both; }
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: middle; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { font-size: 100%; font-family:'Roboto', sans-serif;}
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
+li { list-style: none; }
+a { text-decoration: none; }
+a:focus { outline: none; outline-offset: 0px; }
+a:hover{ text-decoration: none}
+
+
+
+/*=============Top Header============*/
+.topBlackBg{ float:  left; width: 100%; background: #000; height: 130px; box-sizing:border-box; padding:20px 0; position:  relative;}
+.topLogo{ position:  absolute;; left:-50px; top:-20px; z-index: 99}
+.topAd728x90{ float:  right; width: 100%; text-align:  right;}
+/*=====Navigation Css====*/
+nav{ background: #b50000; float:  left; width: 100%; height: 36px;}
+.navigation{ text-align:  center;}
+.navigation li{list-style:  none; display: inline-block; text-align:  center; text-transform:  uppercase; color: #fff; font:300 18px/32px 'Roboto', sans-serif; background: url(http://media2.intoday.in/indiatoday/tourism/images/navTxtSaperator.png) no-repeat left center; color:#fff; width:86px}
+.navigation li:first-child{ background: none;  width: 86px !important;}
+.navigation li a{ color: #fff; padding:6px 0px;}
+.navigation li a:hover, .navigation li a.active { color:#ffe900}
+.navListSec{ width: 78%; float:  right;}
+.navSocialShare{ float:  right; width: 100%; text-align:  center; display: table; display:none;}
+.navSocialShare ul{ display: table; width: 100%; height: 36px}
+.navSocialShare li{ list-style:  none; display:  table-cell; vertical-align:  middle; }
+.navSocialShare li a { padding:0 10px;}
+.navSocialShare li:hover {/*background: #9d0000*/}
+
+/*===========Top Slider============*/
+.topSectionSlider{ float:  left; width: 100%; background: #000; padding-bottom: 5px;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide { max-width: 1260px;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide img{ width: 100%}
+.sliderLeftShadow, .sliderRightShadow {background: rgba(0, 0, 0, .8); height: 100%; z-index: 9; position: absolute;top: 0;}
+.sliderLeftShadow { left: 0;width: calc(50% - 630px); width: -webkit-calc(50% - 630px); width: -moz-calc(50% - 630px);}
+.sliderRightShadow {right: 0; width: calc(50% - 630px);width: -webkit-calc(50% - 630px); width: -moz-calc(50% - 630px);}
+
+.mobAdTop, .mobAdBottom {margin: 0px auto;    text-align: center;    width: 320px; margin-top:5px;}
+.mobAdTop, .mobAdBottom { display:none}
+
+@media (max-width: 1360px) and (min-width: 768px){
+	.topSectionSlider .topCategoryInnerDataBox .swiper-slide {  width: 90%;} 
+	.sliderLeftShadow, .sliderRightShadow {width: 5%;}
+}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide span.bannerTxt{font:700 28px/33px 'Roboto', sans-serif; color: #fff; position:  absolute; bottom: 37px; left: 20px; width: 600px;    text-shadow: 20px 10px 36px #000;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide strong.supported{position:absolute; top:0; right:0;}
+
+#topStorySlider .swiper-button-next{ background: url(http://media2.intoday.in/indiatoday/tourism/images/topSlideNext.png) no-repeat center center; height: 55px; width: 52px;right: 18%; top: 92%}
+#topStorySlider .swiper-button-prev{background: url(http://media2.intoday.in/indiatoday/tourism/images/topSlidePrev.png) no-repeat center center; height: 55px; width: 52px; right: 21.2%; top: 92%}
+
+/*===============Sponsor Css===================*/
+.sponsorSec{ float:  left; width: 100%; background: #dfdfdf; margin-top:5px; height: 80px; padding-top:5px;}
+.sponsorDiv{ float:  left; background: #b50000; padding: 10px; border-radius: 5px 0 0 5px; text-transform:  uppercase;font:400 20px/24px 'Roboto', sans-serif; color: #fff; margin-top: 13px;}
+.sponsorImageSec { margin:4px 0 0 0; padding:0px; text-align:center}
+
+/*===============Sponsor Page Css===================*/
+.sponsPage { margin:55px 0 0 0; padding:0px;}
+.sponsPage h3 { margin:0px; padding:0px 0 25px 0; font-size:23px; font-weight:500; text-transform:uppercase}
+.sponsLogo { margin:0px; padding:0px; }
+.sponsLogo ul { margin:0px; padding:0px; list-style:none}
+.sponsLogo ul li { margin:0px 0px 40px 0; padding:0px; float:left; width: 47%; margin-right:2% }
+.sponsLogo ul li a { color:#000}
+.sponsLogo ul li a:hover { color:#000}
+
+.sponsLogo ul li img { padding:4px; border:1px solid #f5f5f5; display:block; margin-bottom:10px; width:100%}
+.sponsLogo ul li h3 { margin:0px; padding:0px; font-size:16px; text-align:center; line-height:25px;}
+
+
+/*===============Sponsor and video Page Css===================*/
+#speakerPageSlider{ margin-bottom:40px;}
+#speakerPageSlider .swiper-slide li{ float:  left; width: 22%; border: 1px solid #dedede; margin-right:4%}
+#speakerPageSlider .swiper-slide li img { width:100%}
+#speakerPageSlider .swiper-slide li:last-child { margin-right:0px;}
+#speakerPageSlider {}
+#speakerPageSlider h2{ margin-top: 40px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+#speakerPageSlider .swiper-button-next{ background: url(http://media2.intoday.in/indiatoday/tourism/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:47px; margin-top:0px;}
+#speakerPageSlider .swiper-button-prev{background: url(http://media2.intoday.in/indiatoday/tourism/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top: 47px;  margin-top:0px;}
+
+/*==================video page slider==============*/
+#VideoSliderPage  { margin-bottom:30px; position:relative}
+#VideoSliderPage h2{ margin-top: 0px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+#VideoSliderPage .videoPicArea { width:48%; margin-right:4%; float:left; border:1px solid #dedede; margin-bottom:35px;}
+#VideoSliderPage .videoPicArea .videoimgSec img { width:100%}
+#VideoSliderPage .videoPicArea p { border-bottom:0px; font-size:14px; line-height:21px;}
+#VideoSliderPage .videoPicArea:nth-child(2) { margin-right:0px;}
+#VideoSliderPage .videoPicArea:nth-child(4) { margin-right:0px;}
+#VideoSliderPage .swiper-button-next{ background: url(http://media2.intoday.in/indiatoday/tourism/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:10px; top:29px}
+#VideoSliderPage .swiper-button-prev{background: url(http://media2.intoday.in/indiatoday/tourism/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:32px; top:29px}
+
+/*==================light box==============*/
+.lightBoxAll { width:643px; padding:10px; position:relative}
+.lightBoxAll .modal-content { border-radius:0px; padding:0px; margin:0px; position:relative}
+.lightBoxAll button.close {  width:30px; height:30px; background:#a9a9a9; border-radius:50%; color:#000; position:absolute; top: -15px; right: -12px; width:30px; height:30px; opacity:1; z-index:555}
+.lightBoxAll button.close span { position:relative; top:-2px;}
+.lightBoxAll .lightBoxTitle { margin:0px 0 0 0; padding:15px 15px; background:#e5e5e5; font-size:18px; font-weight:500; border-top:1px solid #c9c9c9}
+.lightBoxIframe { text-align:center; margin-top:5px; margin-bottom:5px; overflow-y: scroll;
+    height: 500px;}
+
+.lightBoxIframe p { margin:0px; padding:10px 20px 15px 20px; text-align:left; font-size:14px; line-height:22px;}
+
+.sponLightLogo { margin:0px; padding:20px 0 10px 20px; text-align:left; overflow:hidden}
+.sponLightLogo img { margin:0px; padding:4px; display:block; float:left; border:1px solid #fff; background:#dfdfdf; box-shadow:2px 3px 5px #aaa; margin-bottom:10px}
+.sponLightLogo h4 { margin:0px 0 0 25px; padding:0px; font-size:18px; display:block; float:left; font-weight:500; text-transform:uppercase}
+.sponLightLogo img { width:auto}
+  
+
+/*==================mainContainer.==============*/
+.mainContainer{ float:  left; width: 100%;}
+.RightConatiner{ overflow: hidden; float:  left; width: 100%; border-left: 1px solid #dedede;border-right: 1px solid #dedede; border-top: 1px solid #dedede !important; border-bottom: 1px solid #dedede !important; margin-top:30px;}
+.RightConatiner h2{ margin-top: 40px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+.RightConatiner h2 a { color:#fff; position:relative; z-index:5555}
+.speakerSliderSec{ float:  left; width: 100%}
+.speakerSliderSec .swiper-container{overflow: inherit;}
+.speakerSliderSec .swiper-slide li{ float:  left; width: 47%; border-right: 1px solid #dedede;  border-bottom: 1px solid #dedede; padding-bottom:20px;}
+.speakerSliderSec .swiper-slide li:nth-child(even){ float:  right;border-left: 1px solid #dedede; border-right: 0;   border-bottom: 1px solid #dedede;}
+.speakerSliderSec .swiper-slide li h3{font:600 14px/20px 'Roboto', sans-serif; color: #000; padding: 8px 5px;}
+.speakerSliderSec .swiper-slide li p{font:12px/18px "Roboto",sans-serif; color: #888; margin-top:0px; padding: 0 5px; min-height:90px;} 
+
+#speakerSlider .swiper-button-next{ background: url(http://media2.intoday.in/indiatoday/tourism/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:47px; margin-top:0px;}
+#speakerSlider .swiper-button-prev{background: url(http://media2.intoday.in/indiatoday/tourism/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top: 47px;  margin-top:0px;}
+
+.navSocialShare.IpadsocIcon { display:none}
+.ipadAdTop { display:none}	
+.speakerSliderSec { overflow:hidden}
+
+
+.pad30{padding-top:30px;}
+.bordtop{border-top:0; border-bottom:0;}
+.vote-box{float:left; width:100%; margin-bottom:38px;}
+.vote-box .vote-heading{display:inline-block; width:100%; background-color:#ed1c24; padding:5px 0;}
+.vote-box .vote-heading h4{font-size:20px; line-height:28px; color:#fff; text-transform:uppercase; padding-left:8px; }
+.vote-box .vote-heading a{font-size:14px; color:#fff; background-color:#000; padding:5px 25px; border-radius:2px; text-transform:uppercase; float:right;}
+.vote-box ul{list-style:none; padding:0; margin:0;}
+.vote-box ul li{width:100%; float:left; border-bottom:1px dotted #e8e8e8; background-color:#f6f6f6; padding:0 3%; box-sizing:border-box; padding-top:20px; padding-bottom:20px;}
+.vote-box ul li h5{font-size:14px; line-height:16px; color:#000; font-weight:700; text-transform:uppercase;}
+.vote-box ul li a{color:#ed1c24; font-size:12px; line-height:22px; cursor:pointer}
+.vote-box ul li .content-area{display:inline; float:left; padding-top:10px;}
+.vote-box ul li .imgbox{/*border:2px solid #ed1c24; border-radius:120px; width:120px; height:120px;*/ float:right;}
+.vote-box ul li .imgbox img{/*border-radius:120px; width:100%; height:116px;*/}
+
+/*==================right advertis code==============*/
+.rightAdCode { margin:0px; padding:30px; }
+.rightAdCode h3 { margin:0px; padding:0px 60px; font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#b0b0b0; text-transform:uppercase; text-align:center;
+ background:url(http://media2.intoday.in/indiatoday/tourism/images/right-dott.jpg) repeat-x left bottom; 
+width:220px; margin:0px auto}
+.rightAdCode h3 span {  background:#fff;}
+.rightAdCode .rgAddArea { margin-top:10px;}
+.twbg{background-color:#f7f7f7;}
+.twiRightArea { margin:0px 0 0px 0; padding:20px 0 20px 0; background:#f7f7f7; border-top:1px solid #dddddd; }
+.twiRightArea img{ margin-left:auto; margin-right:auto; display:block}
+
+/*==================right video slider==============*/
+.VideoSliderSec{ float:  left; width: 100%; overflow:hidden}
+.VideoSliderSec .swiper-container{overflow: inherit;}
+.VideoSliderSec .swiper-slide p{font:14px/20px 'Roboto', sans-serif;; border-bottom: 1px solid #dfdfdf;   color: #000; margin-top:10px; padding: 3px 5px 12px; float:  left; width: 100%; box-sizing:border-box;}
+#VideoSlider .swiper-button-next{ background: url(http://media2.intoday.in/indiatoday/tourism/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:69px}
+#VideoSlider .swiper-button-prev{background: url(http://media2.intoday.in/indiatoday/tourism/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top:69px}
+.videoimgSec{ position:  relative; float:  left; width: 100%}
+.videoIcon{ position:  absolute; margin: auto; left: 0; right: 0; top: 0; bottom: 0; height: 66px; width: 66px; background: url(http://media2.intoday.in/indiatoday/tourism/images/videoIcon.png) no-repeat center center;}
+
+/*=============repoartCardSec css==============*/
+.repoartCardBox{ float:  left; width: 100%; position:  relative; padding-bottom:0px; border-bottom:1px solid #dedede}
+.repoartCardBox h2{ margin-bottom: 0px;}
+.accodianSec{ float:  left;; width: 100%; background: #f5f5f5; padding-top: 30px;}
+.accodianSec li{ position: relative; float: left; width:100%; background:#fff;  list-style: none; margin-bottom:10px;padding:4px 18px 4px 10px; font:bold 12px/32px arial; color: #505050}
+
+.accodianSec li .accodianData{ display: none; padding-top:3px; padding-bottom:5px;}
+.accodianSec li .acodIcon{ cursor: pointer; position: absolute; right:10px; top:11px;  background:url(http://media2.intoday.in/indiatoday/tourism/images/plus.png) no-repeat center center; height:16px; width:15px;}
+.accodianSec li.active .acodIcon{ cursor: pointer; position: absolute; right:10px; top:11px;     background:url(http://media2.intoday.in/indiatoday/tourism/images/minus.png) no-repeat center center !important; height:16px; width:15px;}
+.accodianSec li.active{ color: #c00; background: #f5f5f5;}
+.accodianSec li.active p{font:normal 12px/20px arial; color: #505050; }
+.leftAccodianData{ float:  left; width: 50%}
+.rightAccodianData{ float:  right; width: 45%}
+.leftAccodianData small,.rightAccodianData small{ float:  left; width: 100%}
+.repoarCardDownloadIcon{ position:  absolute; top: 19px; right: 2px; width: 100px;}
+.repoarCardDownloadIcon img{ float:  left; margin-top: 24px; z-index:5}
+.repoarCardDownloadIcon img+img{ margin-top: 12px; float: right;}
+
+/*=============Left Main Sec==============*/
+.topLeftHeading{ float:  left; width: 100%; margin-top: 20px;}
+.topLeftHeading h2{font:bold 18px/24px 'Roboto', sans-serif;; color: #000; text-transform:  uppercase;}
+.topLeftHeading p{font:normal 14px/24px 'Roboto', sans-serif;; color: #686868; margin-top: 10px;}
+
+/*=============programme==============*/
+.ltop_tab_programme { margin-top:40px; margin-bottom:40px;}
+.ltop_tab_programme .txt_cont_prog { margin:0px; padding:8px 0 8px 12px; background:#eeeeee; font-size:18px; color:#000; margin-bottom:10px; text-transform:uppercase;}
+.box_programme {background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.timing_l{ color:#b50000; font-size:13px; font-weight:bold; padding:6px 0; text-align:right;/* border-right:2px dotted #ddd;*/}
+.prog_container{  font-size:15px; margin-bottom:10px; margin-left:15px;}
+.box_programme{/*background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;*/ }
+.prog_container .prog_txt{padding:5px 10px; background:#ECECEC; }          
+.session_ltop_cov{}
+.session_ltop_cov a{text-decoration:none; font-size:13px; font-weight:bold;}
+.pink_col{color:#b50000; margin-right:5px}
+.pink_col_pvs{}
+.video_ltop_icon{ background:url(http://indiatoday.intoday.in/images/video_icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:10px;  margin-right:5px; margin-left:7px;}
+.photo_ltop_icon{background:url(http://conclave.intoday.in/conclave/images/photo_icon.jpg) no-repeat; display:inline-block; width:18px; position:relative; top:-1px; height:12px; margin-right:5px;}
+.story_ltop_icon{background:url(http://media2.intoday.in/microsites/youthsummit2012/story-arrow.gif) no-repeat; display:inline-block; width:18px; position:relative; top:3px; height:10px; float:left;}
+.session_inner_cont{ padding:20px 15px;}
+.rpt_s{ margin-bottom:15px; text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;}
+.rpt_s a{ color:#000; cursor:pointer}
+.rpt_s p{ margin:0; padding:0; overflow:hidden;}
+.session_inner_cont .session_left{}
+.session_inner_cont .session_right{   padding-left: 15px;  padding-bottom: 27px; background: url("http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;}
+.ltop_tab_programme .tab-content{ margin-top:10px;}
+.speaker_profile{ width:100%;}            
+.speaker_txt{color:#b50000; font-weight:bold;    font-size: 14px;}
+.speaker_details{ margin-top:5px;}
+.speaker_details .speaker_image{width:80px; height:60px; float:left; margin-right:10px;}
+.speaker_details .speaker_image img{border-radius:100%; width:70px; height:70px; border:2px solid #b50000}
+.speaker_details .speaker_dt{ overflow:hidden;  display: block;line-height:18px;position: relative; top: 10px;}
+.speaker_details .speaker_dt .hdn{ display:block; font-size:14px; font-weight:bold;}
+.speaker_details .speaker_dt .desc_l{ font-size:13px; }
+.ltop_tab_programme h3.proTitle { margin:0px; padding:5px 10px 5px 10px; background:#000; color:#fff; font-size:20px; text-transform:uppercase}
+
+.boxListPoint { margin:0px; padding:0px 0 0 23px; list-style:disc; font-size: 14px;    line-height: 23px;}
+.boxListPoint li { margin:0px; padding:0px 0 10px 0; text-align:left;}
+
+.tableSpon { margin:0px auto; padding:0px; border:1px solid #eee; font-size:12px; text-align:left; margin-bottom:20px;}
+.tableSpon th { margin:0px; padding:6px; background:#ededed; color:#000; text-align:left;}
+.tableSpon td { margin:0px; padding:6px; border-bottom:1px solid #eee}
+.lightBoxInfo h5 { text-align:left; font-size:15px; padding:0 0 19px 15px; text-transform:uppercase; font-weight:500;}
+.lightBoxInfo h3 { text-align:left; font-size:15px; padding:20px 0 10px 15px; text-transform:uppercase;  font-weight:500;}
+
+.progSubText {    font-size: 14px;    padding: 15px 0 5px 0px;    text-transform: capitalize;}
+
+.progAddres { margin:0px; padding:5px 10px; background:#000; color:#fff; font-size:22px; text-transform:uppercase;}
+
+
+
+
+/*============Footer ============*/
+.blackBg{ background: #191d21; height: 136px; float:  left; width: 100%;}
+.blackBg .topAd728x90{ text-align:  center; margin-top: 25px;}
+.blackBg .navSocialShare{ float:  right; width: 72%; text-align:  center; display: table; display:none}
+.blackBg .navSocialShare ul{ display: table; width: 100%; height: 136px}
+.blackBg .navSocialShare li{ list-style:  none; display:  table-cell; vertical-align:  middle;}
+.termConditionBg{ float:  left;; width: 100%; background: #000; height: 30px}
+.termConditionBg p{font: 12px/30px arial; color: #838383; text-align:  center; }
+
+
+
+/*======================Form Box================*/
+
+.overlay{background-color:rgba(0,0,0,0.8); position:fixed; width:100%; height:100%; z-index:9}
+
+.form-box{position:absolute; top:25%; left:50%; z-index:99; width:488px; background-color:#fff; padding:0 23px; margin-left:-244px;}
+.form-box ul{list-style:none; padding:20px 0; margin:0;}
+.form-box ul li{width:210px; float:left; padding-bottom:20px;}
+.form-box ul li:nth-child(2),.form-box ul li:nth-child(4){float:right;}
+.form-box ul li label{font-size:14px; line-height:28px; color:#000; display:block;}
+.form-box ul li input{border:1px solid #e6e6e6; background-color:#f8f8f8; width:206px; min-height:27px; padding-left:10px; color:#000; font-size:12px; line-height:16px;}
+.form-box ul li:last-child{width:100%;}
+.form-box ul li input[type="submit"]{width:100%; background-color:#000; text-align:center; border:0; border-radius:5px; cursor:pointer; font-size:18px; color:#fff; line-height:36px;}
+.form-box .close-icon{background:url(http://media2.intoday.in/indiatoday/tourism/images/close-icon.png) no-repeat 0 0; width:30px; height:30px; position:absolute; top:-12px; right:-12px; display:inline-block;}
+
+
+.categories-box{position:absolute; top:25%; left:50%; z-index:99; width:488px; background-color:#fff; margin-left:-244px;}
+.categories-box .cat-heading{background-color:#ed1c24; float:left; width:100%; padding:0 2%; box-sizing:border-box; text-transform:uppercase; min-height:40px;}
+.categories-box .cat-heading h5{font-size:20px; color:#fff; line-height:40px; display:inline-block; float:left;}
+.categories-box .cat-heading span{font-size:20px; line-height:40px; color:#fff; float:right; padding-right:4%;}
+.categories-box .main{float:left; width:100%; padding:0 23px; box-sizing:border-box; padding-top:20px; padding-bottom:20px;}
+.categories-box p{font-size:16px; line-height:23px; color:#000; display:block;}
+.categories-box ul{list-style:none; padding:20px 0; margin:0;}
+.categories-box ul li{width:100%; float:left; padding-bottom:0px;}
+.categories-box label {display:inline-block; cursor:pointer;position:relative; padding-left:30px; margin-right:15px; font:16px/36px "Roboto Condensed",Arial, Helvetica, sans-serif;color:#000;}
+.categories-box input[type=radio] {display: none;}
+.categories-box label:before {content: ""; display: inline-block; width: 17px; height: 17px;  margin-right: 10px; position: absolute; left: 0; bottom: 8px; background-color: #fff;box-shadow: inset 0px 2px 6px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8); border-radius:10px;}
+.categories-box .radio label:before {border-radius: 8px;}
+.categories-box input[type=radio]:checked + label:before {content: "\2022";color: #454749;font-size: 10px;text-align: center;line-height: 18px; background-color:#454749;}
+.categories-box .close-icon{background:url(http://media2.intoday.in/indiatoday/tourism/images/close-icon.png) no-repeat 0 0; width:30px; height:30px; position:absolute; top:-12px; right:-12px; display:inline-block;}
+
+
+.heritage-box{ margin:0px; padding:0px;}
+.heritage-box .cat-heading{background-color:#ed1c24; float:left; width:100%; padding:0 2%; box-sizing:border-box; text-transform:uppercase; min-height:40px;}
+.heritage-box .cat-heading h5{font-size:20px; color:#fff; line-height:40px; display:inline-block; float:left;}
+.heritage-box .main{float:left; width:100%; padding:0 19px; box-sizing:border-box; padding-top:20px; padding-bottom:20px;}
+
+.heritage-box .slider-section { margin:0px; padding:0px; overflow:hidden}
+.heritage-box .slider-section ul { margin:0px; padding:0px; position:relative; overflow:hidden;}
+.heritage-box .slider-section ul li { margin:0px; padding:0px; position:relative; top:0px; left:0px; float:left; width:452px;}
+.heritage-box .slider-section ul li img { margin-bottom:20px; width:100%}
+
+.heritage-box .nextbtn{background:url(http://media2.intoday.in/indiatoday/tourism/images/nextbtn.jpg) no-repeat 0 0; width:21px; height:21px; display:inline-block; position:absolute; top:35%; left:19px; z-index:55555; cursor:pointer}
+.heritage-box .prevbtn{background:url(http://media2.intoday.in/indiatoday/tourism/images/prevbtn.jpg) no-repeat 0 0; width:21px; height:21px; display:inline-block; position:absolute; top:35%; right:19px; z-index:55555; cursor:pointer} 
+.heritage-box h6{font-size:18px; line-height:22px; font-weight:700; color:#000; display:block; padding:0px 0 10px;}
+.heritage-box h6 a{ color:#000; text-decoration: none}
+.heritage-box h6 a:hover{ color:#ed1c24}
+.heritage-box p{font-size:14px; line-height:21px; color:#707070; display:block;}
+.heritage-box .close-icon{background:url(http://media2.intoday.in/indiatoday/tourism/images/close-icon.png) no-repeat 0 0; width:30px; height:30px; position:absolute; top:-12px; right:-12px; display:inline-block;}
+
+/*** MODEL BOX ***/
+.mainAbout { margin:0px; padding:0px;}
+.mainAbout .modal-body { overflow:hidden; padding:0px;}
+.mainAbout .modal-header { padding:0px; border:0px;}
+.mainAbout .modal-dialog { width:490px;}
+.mainAbout .modal-header button { margin:0px; padding:0px;     background: url(http://media2.intoday.in/indiatoday/tourism/images/close-icon.png) no-repeat 0 0;    width: 30px;    height: 30px; position:absolute; top:-13px; right:-13px; z-index:555; opacity:1}
+.heritage-box .main .swiper-button-next, .heritage-box .main .swiper-container-rtl .swiper-button-prev {background: url(http://media2.intoday.in/indiatoday/tourism/images/prevbtn.jpg) no-repeat 0 0; right:-6px; top:30%; z-index:55555}
+.heritage-box .main .swiper-button-prev, .heritage-box .main .swiper-container-rtl .swiper-button-next {background: url(http://media2.intoday.in/indiatoday/tourism/images/nextbtn.jpg) no-repeat 0 0; left:0px; top:30%;  z-index:5555}
+.heritage-box .main { z-index:55555}
+
+
+/*** VOTING FORM ***/
+.voteQuArea { margin:0px; padding:0px 0 35px 0;}
+.voteQuArea h3 { margin:0px; padding:0px 0 30px 0; font-size:22px; text-transform:uppercase; color:#000; font-weight:600;}
+.voteQuArea h2 { margin:0px 0 15px 0; padding:5px 22px; background:#ed1c24; font-size:20px; font-weight:500; color:#fff; text-transform:uppercase; /* display:inline-block; */ font-size:16px;}
+.voteQuArea p { margin:0px; padding:0px 0 15px 0; font-size:16px; color:#000; font-weight:500}
+.voteQuArea ul { margin:0px; padding:0px; list-style:none}
+.voteQuArea ul li { margin:0px; padding:0px 0 40px 0;}
+.voteQuArea ul li ul { margin:0px; padding:0px;}
+.voteQuArea ul li ul li { margin:0px; padding:0px 0 10px 0; overflow:hidden}
+.voteQuArea ul li ul li label { margin-left:10px; display:block; float:left; font-size:15px;}
+.voteQuArea ul li ul li input { margin-top:2px; display:block; float:left}
+.voteQuArea ul li ul li.subBtn { margin:0px; padding:0px;}
+.voteQuArea ul li ul li.subBtn input { margin:30px 0 0 0; padding:0px; border-radius:5px; width:120px; height:35px; line-height:35px; background:#000; border:0px; color:#fff; font-size:18px; font-weight:500; text-transform:uppercase;}
+
+/*** SUBMIT FORM ***/
+.submitForm { margin:0px 0 0 0; padding:0px;}
+.submitForm label { margin:0px; padding:0px 0 8px 0; font-size:14px; display:block}
+.submitForm input { margin:0px 0 30px 0; padding:10px; box-sizing:border-box; width:100%; background:#f8f8f8; border:1px solid #e6e6e6; height:32px; font-size:13px;}
+.submitForm input[type=submit] { margin:0px; padding:0px; box-sizing:border-box; border-radius:5px; width:120px; height:35px; line-height:35px; background:#000; border:0px; color:#fff; font-size:18px; font-weight:500; text-transform:uppercase;}
+.socIcon { margin:30px 0 25px 0; padding:0px; text-align:center}
+.socIcon ul { margin:0px; padding:0px; list-style:none} 
+.socIcon ul li { margin:0px 5px; padding:0px; display:inline-block; text-align:center}
+.orArea { margin:45px 0 45px 0; padding:0px; text-align:center; background: url(http://media2.intoday.in/indiatoday/tourism/images/line-gry.png) repeat-x center center;}
+.orArea span { background:#cbcbcb; color:#000; font-size:20px; padding:5px 10px; margin:0px;} 
+
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+

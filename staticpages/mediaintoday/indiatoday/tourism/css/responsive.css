@@ -1,0 +1,180 @@
+@media screen and (max-width:1024px){
+#topStorySlider .swiper-button-next { top: 89%; right: 6%;}
+#topStorySlider .swiper-button-prev {top: 89%;  right: 10.2%;}
+.topLogo img { width:100%}
+.rightAdCode { padding:0px; padding-top:30px; }
+.speakerSliderSec .swiper-slide li img { width:100%}
+.videoimgSec img { width:100%}
+.accodianSec li { line-height:20px; font-size:11px;}
+.accodianSec li .acodIcon, .accodianSec li.active .acodIcon { top:7px;}
+.speakerSliderSec .swiper-slide li h3 { font-size:13px;}
+.timing_l { text-align:left; font-size:11px;}
+.box_programme { background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -32px top;}
+.session_ltop_cov a { font-size: 12px;    line-height: 18px;}
+.speaker_details .speaker_dt .hdn { font-size:13px;}
+.speaker_details .speaker_dt .desc_l { font-size:12px; line-height:18px;}
+.navSocialShare.IpadsocIcon { display:none}
+.sponsLogo ul li { width: 46%; margin-left:2% }
+.sponsLogo ul li img { width:100%}
+.sponsLogo ul li h3 { font-size:13px;}
+.sponsPage { margin-top:30px;}
+.sponLightLogo img { width:auto;}
+.navigation li:first-child {    width: auto !important;    padding-right: 12px;}
+
+.ltop_tab_programme h3.proTitle { font-size:15px;}
+.ltop_tab_programme .txt_cont_prog { font-size:15px;}
+.exText { font-size:13px !important; line-height: 20px !important;}
+
+.topLogo { width:100%; left:0px; top:10px;}
+.topLogo img { width:100%}
+.voteQuArea ul li:last-child { padding-bottom:0px;}
+
+}
+@media screen and (max-width:900px){
+.topLogo { position:relative; left:0px;}
+.topLogo img { width:100%}
+.topAd728x90 { display:none}
+.navSocialShare.IpadsocIcon { width:auto; display:block}
+.navSocialShare.IpadsocIcon ul li:hover { background:none} 
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide span.bannerTxt { width:70%; font-size:20px; line-height:28px;}
+#topStorySlider .swiper-button-prev { top:81%; right:12%}
+#topStorySlider .swiper-button-next { top:81%}
+.ipadAdTop { margin:0px auto; width:728px; margin-top:30px;}
+.topLeftHeading { margin-top:30px;}
+.prog_container { margin-left:0px;}
+.RightConatiner { border:0px !important; float:none}
+.rightAdCode .rgAddArea { border:1px solid #dedede; padding:20px; margin-top:0px;}
+.rightAdCode h3 { display:none}
+.RightConatiner .rightAdCode { padding-top:0px;}
+.RightConatiner h2 { margin-top:0px}
+.speakerSliderSec .swiper-slide li { border:1px solid #dedede}
+.speakerSliderSec .swiper-slide li:nth-child(2n) {border-bottom:1px solid #dedede;border-left:inherit; border-right:1px solid #dedede; border-left:1px solid #dedede}
+.blackBg .navSocialShare { width:auto; float:none; display:inherit; margin-top:15px; margin-bottom:15px; display:none}
+.blackBg .navSocialShare ul { height:inherit; text-align:center; display:inherit; width:auto}
+.blackBg .navSocialShare li { text-align:center; display:inline-block}
+.blackBg { float:left; width:100%; height:inherit}
+.blackBg .navSocialShare li:hover { background:none}
+.ipadAdTop { display:block}
+#speakerSlider .swiper-button-next, #speakerSlider .swiper-button-prev {top: 7px;}
+#VideoSlider .swiper-button-next, #VideoSlider .swiper-button-prev {top: 29px;}
+.speakerSliderSec { margin-bottom:40px}
+.repoarCardDownloadIcon { top:-21px; z-index:5}
+.accodianSec { border:1px solid #dedede}
+.accodianSec li .acodIcon, .accodianSec li.active .acodIcon { top:6px;}
+.topBlackBg { height:80px;}
+.sponLightLogo img { width:auto !important; float:none; display:block; margin-left:auto; margin-right:auto; margin-bottom:10px;}
+.sponLightLogo h4 { float:none; text-align:center; margin-left:0px;}
+.sponLightLogo { padding-left:0px;}
+.sponLightLogo h4 { font-size:13px;}
+.lightBoxIframe img { margin-bottom:15px;}
+#speakerPageSlider { margin-bottom:0px;}
+#VideoSliderPage { margin-bottom:10px;}
+.topAd728x90.bootom { display:block}
+
+.navListSec {width: 75%;}
+.speakerSliderSec .swiper-slide li { padding-bottom:0px;}
+.speakerSliderSec .swiper-slide li p { min-height:75px;}
+.repoartCardBox { margin-bottom:40px;}
+
+.navSocialShare.IpadsocIcon { display:none}
+
+}
+
+
+@media screen and (max-width:767px){
+.rightAdCode .rgAddArea { padding:0px; width:302px; margin:0px auto; margin-bottom:45px; border:0px;}
+.session_inner_cont .session_right { padding-left:0px; background:none;  overflow: hidden; padding-bottom: 15px; float: none;}
+.VideoSliderSec { border:1px solid #dedede; margin-bottom:45px;}
+.VideoSliderSec .swiper-slide p { border-bottom:0px;}
+.ipadAdTop { display:none}
+.topBlackBg{ height: 77px;}
+.box_programme { background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -40px top;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide span.bannerTxt { display:none}
+#topStorySlider .swiper-button-next, #topStorySlider .swiper-button-prev { display:none}
+.prog_container { font-size:12px;}
+.sponsorDiv { font-size:16px;}
+.termConditionBg { height:auto; padding-top:10px; padding-bottom:10px;}
+.termConditionBg p { line-height:20px;}
+.speakerSliderSec .swiper-slide li { margin-bottom:1px;}
+.ltop_tab_programme h3.proTitle, .ltop_tab_programme .txt_cont_prog { font-size:13px;}
+.sponsLogo ul li { float:none; width:auto}
+.sponsLogo ul li h3 { line-height:20px;}
+.sponsPage h3 { font-size:20px;}
+.speakerSliderSec.speakerPageArea { margin-bottom:5px;}
+#speakerPageSlider .swiper-slide li { width:48%; margin-bottom:30px;}
+#speakerPageSlider .swiper-slide li:nth-child(2) { margin-right:0px;}
+#speakerPageSlider .swiper-slide li:nth-child(4) { margin-right:0px;}
+.VideoSliderSec.VideoSliderPage { border:0px; margin-bottom:0px;}
+#VideoSliderPage .videoPicArea { float:none; width:100%; margin:0px 0 30px 0; border:1px solid #eee; overflow:hidden}
+#VideoSliderPage .videoPicArea p { font-size:14px; line-height:20px;}
+.lightBoxAll { width:auto}
+.lightBoxIframe { margin-top:0px}
+.lightBoxIframe img { width:100%; padding:5px;}
+.lightBoxAll .lightBoxTitle { font-size:14px;}
+.lightBoxIframe.sponOuterBox { overflow-y: scroll; height:200px;}
+
+.rightAdCode.desktopAdd { display:none !important}
+.mobAdTop, .mobAdBottom  { display:block !important}
+
+.topAd728x90.bootom { display:none !important}
+
+.repoartCardBox { margin-bottom:0px;}
+#VideoSliderPage { margin-bottom:0px;}
+
+#speakerSlider .swiper-button-prev {right: 65px;}
+#VideoSlider .swiper-button-prev { right:65px;}
+
+.vote-box ul li .imgbox { width:25%}
+.vote-box ul li .imgbox img { width:100%}
+.vote-box ul li h5 { font-size:11px;}
+.vote-box ul li .content-area { width:70%}
+.twiRightArea img { width:100%}
+.voteQuArea p { font-size:13px;}
+.voteQuArea ul li ul li label { font-size:12px; width:92%;}
+.voteQuArea ul li ul li input { margin-top:0px;}
+
+.mainAbout .modal-dialog { width:300px; margin:0px auto; top:50px;}
+.heritage-box .nextbtn, .heritage-box .prevbtn { top:95px;}
+.mainAbout .modal-header button {right: -4px; top: -7px;}
+.heritage-box h6 { font-size:15px;}
+.heritage-box p { font-size:13px; line-height:19px;}
+
+.RightConatiner { border:0px !important;}
+
+.navSocialShare { display:none}
+.progAddres { font-size:14px;}
+.box_programme .col-lg-2.col-md-2.col-sm-2.col-xs-2 { padding-right:0px; }
+
+
+}
+
+@media screen and (max-width:640px){
+#topStorySlider .swiper-button-prev { right:16%}
+.topBlackBg { padding-top:8px; height:52px;}
+.topLogo { top:0px;}
+.prog_container { padding-left:20px;}
+.navigation li {font: 300 13px/32px 'Roboto', sans-serif;}
+.sponsorDiv { position:relative; z-index:5555; padding:6px; margin-top:18px;}
+.topLogo img { width:105px;}
+.topLogo { top:13px;}
+}
+
+@media screen and (max-width:481px){
+.box_programme { background:none}
+.row.box_programme .col-lg-2.col-md-2.col-sm-2.col-xs-2 {  padding-right:0px;}
+.prog_container { padding-left:0px;}
+
+#sponSwipeSlider ul li:first-child img { width:100%}
+.navListSec { width:70%}
+.progAddres { font-size:11px;}
+}
+
+@media screen and (max-width:330px){
+.topLogo img { width:150%}
+.accodianSec li { font-size:10px;}
+
+.mobAdTop, .mobAdBottom {margin-left: -15px;}
+.sponsorDiv {margin-left: -9px;}
+}
+
+.prog_container .prog_txt {font-weight: 600;    line-height:21px;}

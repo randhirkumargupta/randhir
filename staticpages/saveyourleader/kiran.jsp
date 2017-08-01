@@ -1,11 +1,11 @@
 <script language="javascript">
-window.location="http://indiatoday.intoday.in/saveyourleader/result.jsp";
+window.location="/saveyourleader/result.jsp";
 </script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<META http-equiv="refresh" content="0;URL=http://indiatoday.intoday.in/saveyourleader/result.jsp">
+<META http-equiv="refresh" content="0;URL=/saveyourleader/result.jsp">
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>India Today starts save your leader initiative before Delhi polls: Vidhan sabha elections 2015</title>
@@ -237,7 +237,7 @@ ajaxinclude("/like-dislike-special.jsp?contentId=4165013&contentType=special&Scf
       <div class="footertag"> <img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" style="float:left;" class="btm-itlogo">
         <nav class="nav">
           <ul>
-            <div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
+            <div class="home" style="background:none"><a href="/index.jsp"><img height="43" border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg"></a></div>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/news.html">News</a></li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/114/1/india.html">India</a> </li>
             <li><a class="nav_padding" href="http://indiatoday.intoday.in/section/113/1/world.html">World</a> </li>

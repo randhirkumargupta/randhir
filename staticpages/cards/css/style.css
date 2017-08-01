@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin:0; padding:0;}
+
+.flt{ float:left;}
+.flr{ float:right;}
+.clr{ clear:both;}
+
+
+body{background:url(../images/BG.jpg) top center no-repeat;}
+
+#wrapper{ width:1003px; margin:0 auto;}
+
+#left-sidebar{ width:340px; float:left;}
+
+.opps{margin-left:117px;}
+
+.logo{ position:relative; z-index:99999}
+
+#left-sidebar p {color: #FFFFFF;font-family: 'Open Sans Condensed',sans-serif;font-size: 27px;font-weight: 400;line-height: 35px;margin-left: 134px;text-align: center;width: 180px;}
+
+#right-sidebar{ width:662px; float:left;}
+#right-sidebar1{ width:662px; float:left;}
+
+#header{ position:relative;}
+
+.start{ background:url(../images/Arrow.png) no-repeat; height: 47px;left: -200px;position: absolute;top: 24px;width: 355px;z-index:0; float:left; margin-right:10px;}
+
+
+.start a img {left:205px;position: absolute;top: -22px;z-index: 99;}
+
+.right-logo{ float:right; margin-top:18px;}
+.card-stage{ width:525px;margin-top:50px; float:left; position:relative; margin-left:45px;}
+.card-stage ul li{ list-style:none; margin-right:26px; float:left; margin-bottom:38px;}
+
+.card-stage ul li a {text-decoration:none; color:#191919;font:bold 13px roboto; line-height:18px; }
+.droppable a  { text-decoration:none; color:#191919;font:bold 15px roboto;}
+.droppable a h3 {text-decoration:none; color:#191919; text-align:center }
+.card-stage ul li a h3{margin:-9px 0 0 0; padding:0; text-align:center}
+.social-icon{ float:right; margin-top:100px;}
+.heading{ margin-left:180px; margin-top:31px;font:bold 16px roboto;  color:#faf7df;}
+.stage{ background:url(../images/text-box.png) no-repeat; width:580px; height:523px; margin-top:-70px;}
+.fist-card{margin-left:12px; margin-top:10px;}
+.calculation{margin-left: 65px;margin-top: -20px;}
+.calculation p{font:bold 36px roboto;color: #faf7df;}
+.calculation p span{margin-left:60px; color:#bd1737;}
+
+.second-card{margin-left:12px; margin-top:10px;}
+
+.left-panel{ float:left;}
+
+.right-panel{ float:left; width:398px;}
+
+.oops-moments{margin-top: 56px;margin-left: 35px;}
+
+.right-panel p {float: left;width: 366px;font: 18px/21px roboto;color: #1f1b1c;padding: 6px 27px;
+}
+.right-panel p strong {float: left;width: 398px;font:bold 19px/22px roboto;color: #c61237 ;}
+
+.bottom-conect {font: bold 16px roboto;color: #0f6f3d;margin-top: 20px;margin-left: -28px;float: left;}
+
+.bottom-conect a{font:bold 16px roboto;color: #0f6f3d; text-decoration:none;}
+
+.try-again a {margin-left: 51px;float: left;margin-top: 41px;font:bold 16px roboto;color:#faf7df; text-decoration:none;}
