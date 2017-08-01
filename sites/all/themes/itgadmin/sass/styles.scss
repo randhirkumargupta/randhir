@@ -2338,7 +2338,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-[id*="itg-ugc-inqueue-form"]{
+[id*="itg-ugc-inqueue-form"], [id*="itg-ugc-reject-form"]{
   .form-type-textfield, .form-type-select{
     padding: 0 10px 0 0;
     margin: 10px 0;
