@@ -536,7 +536,7 @@ function itg_sitemap_chunks_create_xml_sitemap_section() {
         foreach ($xml_sections_list as $key => $tid) {
             $path = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $tid);
             $xml .= '<url>';
-            $xml .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
+            $xml .= '<loc><![CDATA[' . trim($path) . ']]></loc>';
             $xml .= '</url>';
         }
         $xml .= '</urlset>';
