@@ -3281,47 +3281,54 @@ function itg_rapid_api_edit_user_image($token) {
  */
 function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
-    $authtoken_id = $_GET['$_GET'];
+    $authtoken_id = $_GET['authtoken_id']; 
     $user_id = $_GET['user_id'];
-    $account = user_load_by_name($user_id);
-    //$user_id = $account->uid;
-    $first_name = $account->field_first_name['und'][0]['value'];
-    $last_name = $account->field_last_name['und'][0]['value'];
-    $email_id = $account->mail;
-    $phone_number = $account->field_mobile_number['und'][0]['value'];
-    $location = "";
-    if ($account->field_personalization_city['und'][0]['value']) {
-        $location .= $account->field_personalization_city['und'][0]['value'];
+    $token = $_GET['authtoken_id'];    
+    if (!drupal_valid_token($token, 'services')) {
+        $data['status_code'] = "0";
+        $data['status_message'] = "invalid token";
     }
-    if ($account->field_personalization_state['und'][0]['value']) {
-        $location .= ", " . $account->field_personalization_state['und'][0]['value'];
-    }
-    if ($account->field_user_counrty['und'][0]['value']) {
-        $location .= ", " . $account->field_user_counrty['und'][0]['value'];
-    }
-    if ($account->field_short_description['und'][0]['value']) {
-        $location .= ", " . $account->field_short_description['und'][0]['value'];
-    }
+    else{
+        $account = user_load_by_name($user_id);
+        //$user_id = $account->uid;
+        $first_name = $account->field_first_name['und'][0]['value'];
+        $last_name = $account->field_last_name['und'][0]['value'];
+        $email_id = $account->mail;
+        $phone_number = $account->field_mobile_number['und'][0]['value'];
+        $location = "";
+        if ($account->field_personalization_city['und'][0]['value']) {
+            $location .= $account->field_personalization_city['und'][0]['value'];
+        }
+        if ($account->field_personalization_state['und'][0]['value']) {
+            $location .= ", " . $account->field_personalization_state['und'][0]['value'];
+        }
+        if ($account->field_user_counrty['und'][0]['value']) {
+            $location .= ", " . $account->field_user_counrty['und'][0]['value'];
+        }
+        if ($account->field_short_description['und'][0]['value']) {
+            $location .= ", " . $account->field_short_description['und'][0]['value'];
+        }
 
-    $profile_image = $account->field_user_picture['und'][0]['fid'];
-    $gender = $account->field_user_gender['und'][0]['value'];
-    $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
-    $login_type = "na";
+        $profile_image = $account->field_user_picture['und'][0]['fid'];
+        $gender = $account->field_user_gender['und'][0]['value'];
+        $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
+        $login_type = "na";
 
-    $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";
+        $data['status_code'] = "1";
+        $data['status_message'] = "customised_message";
 
-    $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
-    $data['data']['user_profile_detail']['login_type'] = "$login_type";
-    $data['data']['user_profile_detail']['user_id'] = "$user_id";
-    $data['data']['user_profile_detail']['first_name'] = "$first_name";
-    $data['data']['user_profile_detail']['last_name'] = "$last_name";
-    $data['data']['user_profile_detail']['email_id'] = "$email_id";
-    $data['data']['user_profile_detail']['phone_number'] = "$phone_number";
-    $data['data']['user_profile_detail']['location'] = "$location";
-    $data['data']['user_profile_detail']['profile_image'] = "$profile_image";
-    $data['data']['user_profile_detail']['gender'] = "$gender";
-    $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
+        $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
+        $data['data']['user_profile_detail']['login_type'] = "$login_type";
+        $data['data']['user_profile_detail']['user_id'] = "$user_id";
+        $data['data']['user_profile_detail']['first_name'] = "$first_name";
+        $data['data']['user_profile_detail']['last_name'] = "$last_name";
+        $data['data']['user_profile_detail']['email_id'] = "$email_id";
+        $data['data']['user_profile_detail']['phone_number'] = "$phone_number";
+        $data['data']['user_profile_detail']['location'] = "$location";
+        $data['data']['user_profile_detail']['profile_image'] = "$profile_image";
+        $data['data']['user_profile_detail']['gender'] = "$gender";
+        $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
+    }
 
     return $data;
 }
