@@ -3577,21 +3577,8 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 
     $user_id = $_GET['user_id'];
     $node_id = $_GET['node_id'];
-    $redis_key = "itg_rapid_set_bookmark_" . $user_id . "_" . $node_id;
-    $result_get = getRedis($redis_key);
-
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        // call function from return data..
-
-        $jsondata = bookmark_set_data_responce($user_id, $node_id);
-        $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
-
-    $jsondata = json_decode($jsondata, true);
+    $jsondata = bookmark_set_data_responce($user_id, $node_id);
+    //$jsondata = json_encode($jsondata);
     return $jsondata;
 }
 
@@ -3599,21 +3586,7 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
 
     $user_id = $_GET['user_id'];
     $node_id = $_GET['node_id'];
-    $redis_key = "itg_rapid_bookmark_delete" . $user_id . "_" . $node_id;
-    $result_get = getRedis($redis_key);
-
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        // call function from return data..
-
-        $jsondata = bookmark_del_data_responce($user_id, $node_id);
-        $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
-
-    $jsondata = json_decode($jsondata, true);
+    $jsondata = bookmark_del_data_responce($user_id, $node_id);
     return $jsondata;
 }
 
