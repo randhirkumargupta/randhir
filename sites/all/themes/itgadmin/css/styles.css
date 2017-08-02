@@ -12953,3 +12953,8 @@ fieldset#edit-xmlsitemap {
 .node-syndication-rule .views-table tbody td, .node-syndication-rule [id*="field-newsl-add-news-values"] tbody td, .node-syndication-rule .variables-and-field-container .variables table tbody td, .variables-and-field-container .variables .node-syndication-rule table tbody td, .node-syndication-rule .page-admin-structure-menu-manage #menu-overview tbody td, .page-admin-structure-menu-manage .node-syndication-rule #menu-overview tbody td, .node-syndication-rule [id*="protected-pages-configure"] fieldset table tbody td, [id*="protected-pages-configure"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule [id*="protected-pages-edit"] fieldset table tbody td, [id*="protected-pages-edit"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule .page-node-moderation tbody td, .node-syndication-rule #taxonomy-overview-terms tbody td, .node-syndication-rule [id*="daily-motion-video-dashboard"] table tbody td, [id*="daily-motion-video-dashboard"] .node-syndication-rule table tbody td {
   border: none;
 }
+
+.progress .percentage {
+  float: right;
+  margin-left: 10px;
+}
