@@ -2975,15 +2975,8 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
-    if($result_obj->uid){
-        $local_obj = localChangePass($_GET);
-        $data['status_code'] = "1";
-        $data['status_message'] = "Please check your mobile for otp";
-    }
-    else{
-        $data['status_code'] = "0";
-        $data['status_message'] = "custom msg";
-    }
+    $data['status_code'] = "1";
+    $data['status_message'] = "Please check your mobile for otp";
 
     return $data;
 }
@@ -3045,9 +3038,18 @@ function itg_rapid_api_change_password($token, $user_id) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
+    
+    if($result_obj->uid){
+        $local_obj = localChangePass($_GET, $result_obj->uid);
+        $data['status_code'] = "1";
+        $data['status_message'] = "Please check your mobile for otp";
+    }
+    else{
+        $data['status_code'] = "0";
+        $data['status_message'] = "custom msg";
+    }
 
-    $data['status_code'] = "1";
-    $data['status_message'] = "Your password has been Changed";
+    
 
     return $data;
 }
