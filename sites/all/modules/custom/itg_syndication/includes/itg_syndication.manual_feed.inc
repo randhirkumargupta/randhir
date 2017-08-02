@@ -260,7 +260,7 @@ function itg_syndication_selector_custom_submit($form , &$form_state) {
     //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
     echo file_get_contents($real_path);
-    drupal_unlink($real_path);
+    //drupal_unlink($real_path);
     exit; // terminate script
   }
   else {
