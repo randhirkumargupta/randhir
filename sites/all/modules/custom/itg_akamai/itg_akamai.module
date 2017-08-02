@@ -106,8 +106,8 @@ function itg_akamai_menu() {
   );
 
   $items['admin/config/system/itg_akamai/other_conf'] = array(
-    'title' => 'Other Settings',
-    'description' => 'Admin interface for Akamai Other Setting',
+    'title' => 'Custom URL Settings',
+    'description' => 'Admin interface for Custom URL Settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_akamai_cache_akamai_other'),
     'access arguments' => array('administer itg akamai'),
@@ -522,8 +522,8 @@ function itg_akamai_node_update($node) {
   }
 
 
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
-
+  //$mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  $mapping = itg_akamai_getting_mapped_content_type();
   if (in_array($node->type, $mapping)) { //p($node);
     //if (user_access("purge itg akamai cache")) {
     //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
@@ -572,8 +572,8 @@ function itg_akamai_node_update($node) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_delete($node) {
-
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  $mapping = itg_akamai_getting_mapped_content_type();
+  // $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
   if (in_array($node->type, $mapping)) {
     if (user_access("purge itg akamai cache")) {
@@ -719,16 +719,17 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       $akamai_config_cctype_flag = NULL;
 
       // Checking whether the Akamai content level configration have been saved or not 
-      $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+      //$mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+      $mapping = itg_akamai_getting_mapped_content_type();
 
       if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
         $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
       }
-      
+
       if (!isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
-        $akamai_timeout_default =  variable_get('akamai_timeout_' . $form['#node']->type, '');
+        $akamai_timeout_default = variable_get('akamai_timeout_' . $form['#node']->type, '');
       }
-      
+
       if (in_array($form['#node']->type, $mapping)) {
         $form['akamai_timeout'] = array(
           '#type' => 'textfield',
@@ -761,17 +762,12 @@ function itg_akamai_node_insert($node) {
 function itg_akamai_content_setting($node) {
 
 
-  switch ($node->type) {
-    case 'story':
-    case 'photogallery':
-    case 'videogallery':
-    case 'breaking_news':
-    case 'blog':
-    case 'podcast':
+  if (isset($node->type) && !empty($node->type)) {
+    $mapping = itg_akamai_getting_mapped_content_type();
+    if (in_array($node->type, $mapping)) {
       if (isset($node->akamai_timeout) && !empty($node->akamai_timeout)) {
         try {
           $url = 'node/' . $node->nid;
-
           // Returning program control whene default TTL and node form set TTL are same.And this time we will set default TTL
           $default_ttl = variable_get('akamai_timeout_' . $node->type);
           if ($node->akamai_timeout == $default_ttl) {
@@ -793,7 +789,7 @@ function itg_akamai_content_setting($node) {
           watchdog('ITG Akamai', 'Error:' . $e->getMessage());
         }
       }
-      break;
+    }
   }
 }
 
@@ -1060,4 +1056,33 @@ function itg_akamai_setting_ttl_for_section_cart() {
   catch (Exception $e) {
     watchdog('ITG Akamai', 'Error:' . $e->getMessage());
   }
+}
+
+/**
+ * Getting mapped Content Type for Akamai
+ */
+function itg_akamai_getting_mapped_content_type() {
+  $mapping = array();
+  $itg_akamai_cc_conf_list = variable_get('itg_akamai_cc_conf_list');
+  foreach ($itg_akamai_cc_conf_list as $content_type) {
+    if (isset($content_type) && !empty($content_type)) {
+      $mapping[] = $content_type;
+    }
+  }
+  if (empty($mapping)) {
+    // Hardcoded content type
+    $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+  }
+  return $mapping;
+}
+
+/**
+ * Convert to String Time
+ * @param type $num_seconds
+ * @return type
+ */
+function itg_akamai_convert_to_string_time($seconds) {
+  $dtF = new \DateTime('@0');
+  $dtT = new \DateTime("@$seconds");
+  return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
 }
