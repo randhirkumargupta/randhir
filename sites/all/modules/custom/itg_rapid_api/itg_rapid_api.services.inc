@@ -3242,16 +3242,17 @@ function poll_detail($token, $poll_id) {
  *
  */
 function itg_rapid_api_edit_profile($token) {
-    $responce_object = saveUpdatedProfile($data);
-    $method = "GET";
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
-    $result = callAPI($method, $url, $_GET);
-    $result_obj = json_decode($result);
+    
+    
+    $method = "GET";    
     $token = $_GET['authtoken_id'];
     if (!drupal_valid_token($token, $value = '', $skip_anonymous = FALSE)) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
+        $result = callAPI($method, $url, $_GET);
+        $result_obj = json_decode($result);
         if ($result_obj->uid) {
             $responce_object = saveUpdatedProfile($_GET);
         }
