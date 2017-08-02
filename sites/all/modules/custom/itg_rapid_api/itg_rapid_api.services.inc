@@ -3247,6 +3247,7 @@ function itg_rapid_api_edit_profile($token) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
+    $token = $_GET['authtoken_id'];
     if (!drupal_valid_token($token, $value = '', $skip_anonymous = FALSE)) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
