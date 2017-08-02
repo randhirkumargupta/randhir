@@ -11044,6 +11044,7 @@ div#playerContainer {
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
   max-width: 108px;
   padding-top: 65px;
+  float: right;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a {
   color: #aaa9a9;
