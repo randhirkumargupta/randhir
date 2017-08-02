@@ -2843,11 +2843,17 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $name = $local_account->user->name;
         $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
         $auth_token = $local_account->token;
-        $account['status_code'] = "1";
-        $account['status_message'] = "customised_message";
-        $account['data']['user_id'] = "$name";
-        $account['data']['is_first_login'] = "$is_first_login";
-        $account['data']['auth_token'] = "$auth_token";
+        if ($auth_token) {
+            $account['status_code'] = "1";
+            $account['status_message'] = "customised_message";
+            $account['data']['user_id'] = "$name";
+            $account['data']['is_first_login'] = "$is_first_login";
+            $account['data']['auth_token'] = "$auth_token";
+        }
+        else{
+            watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+            return services_error(t('Wrong username or password.'), 401);
+        }
     } else {
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
         return services_error(t('Wrong username or password.'), 401);
