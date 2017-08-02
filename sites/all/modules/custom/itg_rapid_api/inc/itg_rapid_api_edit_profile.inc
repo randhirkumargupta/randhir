@@ -119,7 +119,7 @@ function saveUpdatedProfile($data) {
 //    }
 
     // Save user object.
-    $flag_save = user_save($user, $user_detail);
+    $flag_save = user_save($user_detail);
     
     
     // responce object
