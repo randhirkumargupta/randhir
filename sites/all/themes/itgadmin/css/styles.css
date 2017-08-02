@@ -1209,7 +1209,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   color: #1fb5ad;
 }
 
-.choose-audio-video-file .form-managed-file span.file img, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file img,
+.choose-audio-video-file .form-managed-file span.file img, [id*="field-quiz-add-questions-values"] .field-type-file .form-managed-file span.file img, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file img,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file img, .form-field-name-field-astro-video .form-managed-file span.file img, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file img,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file img, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file span.file img,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file span.file img, #SocialMedia .form-field-type-file .form-managed-file span.file img, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file img,
@@ -1217,7 +1217,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-vas_service_content-form .field-name-field-service-video .form-managed-file span.file img, .node-poll-form .form-field-type-file .form-managed-file span.file img, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .form-managed-file span.file img, .form-field-name-field-mega-review-video .form-type-managed-file .form-managed-file span.file img, #itg-tv-schedule-form .form-managed-file span.file img, .node-podcast-form .field-name-field-podcast-upload-audio-file .form-managed-file span.file img, [id*="field-pti-print-media-values"] tbody tr td .field-name-field-pti-upload-video .form-type-managed-file .form-managed-file span.file img, .browse-video-form #edit-field-upload-video .form-managed-file span.file img {
   vertical-align: top;
 }
-.choose-audio-video-file .form-managed-file span.file a, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file a,
+.choose-audio-video-file .form-managed-file span.file a, [id*="field-quiz-add-questions-values"] .field-type-file .form-managed-file span.file a, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file a,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file a, .form-field-name-field-astro-video .form-managed-file span.file a, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file a,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file a, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file span.file a,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file span.file a, #SocialMedia .form-field-type-file .form-managed-file span.file a, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file a,
@@ -1231,7 +1231,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   white-space: nowrap;
   color: #2f2f2f;
 }
-.choose-audio-video-file .form-managed-file span.file-size, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file-size,
+.choose-audio-video-file .form-managed-file span.file-size, [id*="field-quiz-add-questions-values"] .field-type-file .form-managed-file span.file-size, [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file span.file-size,
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file span.file-size, .form-field-name-field-astro-video .form-managed-file span.file-size, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file-size,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file span.file-size, [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file span.file-size,
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file span.file-size, #SocialMedia .form-field-type-file .form-managed-file span.file-size, .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file span.file-size,
@@ -1239,7 +1239,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-vas_service_content-form .field-name-field-service-video .form-managed-file span.file-size, .node-poll-form .form-field-type-file .form-managed-file span.file-size, [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .form-managed-file span.file-size, .form-field-name-field-mega-review-video .form-type-managed-file .form-managed-file span.file-size, #itg-tv-schedule-form .form-managed-file span.file-size, .node-podcast-form .field-name-field-podcast-upload-audio-file .form-managed-file span.file-size, [id*="field-pti-print-media-values"] tbody tr td .field-name-field-pti-upload-video .form-type-managed-file .form-managed-file span.file-size, .browse-video-form #edit-field-upload-video .form-managed-file span.file-size {
   vertical-align: top;
 }
-.choose-audio-video-file .form-managed-file .form-submit[value="Remove"], [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file .form-submit[value="Remove"],
+.choose-audio-video-file .form-managed-file .form-submit[value="Remove"], [id*="field-quiz-add-questions-values"] .field-type-file .form-managed-file .form-submit[value="Remove"], [id*="field-event-media-values"] .field-name-field-poll-question-video .form-managed-file .form-submit[value="Remove"],
 [id*="field-event-media-values"] .field-name-field-audio .form-managed-file .form-submit[value="Remove"], .form-field-name-field-astro-video .form-managed-file .form-submit[value="Remove"], [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file .form-submit[value="Remove"],
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-managed-file .form-submit[value="Remove"], [id*="field-astro-zodiac-values"] > tbody > tr > td .form-managed-file .form-submit[value="Remove"],
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-submit[value="Remove"], #SocialMedia .form-field-type-file .form-managed-file .form-submit[value="Remove"], .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file .form-submit[value="Remove"],

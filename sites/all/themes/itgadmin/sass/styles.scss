@@ -2325,6 +2325,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
     }
   }
+  .field-type-file{
+    @extend .choose-audio-video-file;
+  }
 }
 .form-field-name-field-quiz-add-questions{
   @extend .pos-rel;
