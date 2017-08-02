@@ -411,7 +411,7 @@ function update_itg_widget_order_table_data_for_key_candidate($form, &$form_stat
 function update_itg_widget_order_table_data_for_special_auto_review($form, &$form_state) {
   // Take draggable view input value after submit the form.
   if (!isset($_GET['category_tid']) || empty($_GET['category_tid'])) {
-    form_set_error('category_tid', 'Please select Section');
+    form_set_error('category_tid', 'Please select Section and filter First');
   }
   else {
     $draggable_view_data = $form_state['input']['draggableviews'];
@@ -451,7 +451,7 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
 function update_itg_widget_order_table_data_for_special_how_i_made_it_review($form, &$form_state) {
   // Take draggable view input value after submit the form.
   if (!isset($_GET['category_tid']) || empty($_GET['category_tid'])) {
-    form_set_error('category_tid', 'Please select Section');
+    form_set_error('category_tid', 'Please select Section and filter First');
   }
   else {
     $draggable_view_data = $form_state['input']['draggableviews'];
@@ -518,21 +518,27 @@ function update_itg_widget_order_table_data_for_home_election_graph($form, &$for
  */
 function update_itg_widget_order_table_data_for_most_read($form, &$form_state) {
   // Take draggable view input value after submit the form.
-  $draggable_view_data = $form_state['input']['draggableviews'];
-  $extra_values = array();
-
-  $weightcount = 0;
-  foreach ($draggable_view_data as $key => $value) {
-    $weightcount = $datacount + $value['weight'];
+  if (!isset($_GET['category_tid']) || empty($_GET['category_tid'])) {
+    form_set_error('category_tid', 'Please select Section and filter First');
   }
-  // Get extra , nid , content type from custom_table because it will further use to insert again.
-  foreach ($draggable_view_data as $key => $value) {
-    if ($weightcount > 0) {
-      db_update('itg_widget_order')
-          ->fields(array('weight' => $value['weight'],))
-          ->condition('widget', 'most_read_content')
-          ->condition('nid', $value['id'])
-          ->execute();
+  else {
+    $draggable_view_data = $form_state['input']['draggableviews'];
+    $extra_values = array();
+
+    $weightcount = 0;
+    foreach ($draggable_view_data as $key => $value) {
+      $weightcount = $datacount + $value['weight'];
+    }
+    // Get extra , nid , content type from custom_table because it will further use to insert again.
+    foreach ($draggable_view_data as $key => $value) {
+      if ($weightcount > 0) {
+        db_update('itg_widget_order')
+            ->fields(array('weight' => $value['weight'],))
+            ->condition('widget', 'most_read_content')
+            ->condition('cat_id', $_GET['category_tid'])
+            ->condition('nid', $value['id'])
+            ->execute();
+      }
     }
   }
 }
@@ -566,27 +572,34 @@ function update_itg_widget_order_table_data_for_feature_content_by_section($form
  */
 function update_itg_widget_order_table_data_for_yearend_left($form, &$form_state) {
   // Take draggable view input value after submit the form.
-  $draggable_view_data = $form_state['input']['draggableviews'];
-  $widget = 'yearender_left_news_video';
-  $extra_values = array();
-  foreach ($draggable_view_data as $key => $value) {
-    $weightcount = $datacount + $value['weight'];
+  if (!isset($_GET['shs_term_node_tid_depth']) || empty($_GET['shs_term_node_tid_depth'])) {
+    form_set_error('shs_term_node_tid_depth', 'Please select Section and filter First');
   }
-  // Get extra , nid , content type from custom_table because it will further use to insert again.
-  foreach ($draggable_view_data as $key => $value) {
-    if ($weightcount > 0) {
-      db_update('itg_widget_order')
-          ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-          ->condition('widget', 'yearender_left_news_video')
-          ->condition('nid', $value['id'])
-          ->execute();
+  else {
+    $draggable_view_data = $form_state['input']['draggableviews'];
+    $widget = 'yearender_left_news_video';
+    $extra_values = array();
+    foreach ($draggable_view_data as $key => $value) {
+      $weightcount = $datacount + $value['weight'];
     }
-    else {
-      db_update('itg_widget_order')
-          ->fields(array('extra' => $value['custom_text'],))
-          ->condition('widget', 'yearender_left_news_video')
-          ->condition('nid', $value['id'])
-          ->execute();
+    // Get extra , nid , content type from custom_table because it will further use to insert again.
+    foreach ($draggable_view_data as $key => $value) {
+      if ($weightcount > 0) {
+        db_update('itg_widget_order')
+            ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+            ->condition('widget', 'yearender_left_news_video')
+            ->condition('cat_id', $_GET['shs_term_node_tid_depth'])
+            ->condition('nid', $value['id'])
+            ->execute();
+      }
+      else {
+        db_update('itg_widget_order')
+            ->fields(array('extra' => $value['custom_text'],))
+            ->condition('widget', 'yearender_left_news_video')
+            ->condition('cat_id', $_GET['shs_term_node_tid_depth'])
+            ->condition('nid', $value['id'])
+            ->execute();
+      }
     }
   }
 }

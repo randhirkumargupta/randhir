@@ -1,7 +1,7 @@
 name = feature for year end left top news and top video
 core = 7.x
 package = Features
-version = 7.x-1.6
+version = 7.x-1.7
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2

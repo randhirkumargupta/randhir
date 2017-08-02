@@ -1639,6 +1639,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
+  
   if ($view->name == 'special_how_i_made_it' && ($view->current_display == 'special_how_made_widget_list')) {
     if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
       $query->where[1]['conditions'][1]['value'] = $_GET['category_tid'];
@@ -1648,6 +1649,26 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
+   if ($view->name == 'most_read_widget' && ($view->current_display == 'most_read_widget_list')) {
+    if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
+      $query->where[1]['conditions'][1]['value'] = $_GET['category_tid'];
+      unset($query->orderby[1]);
+    }
+    else {
+      unset($query->where[1]['conditions'][1]);
+    }
+  }
+
+   if ($view->name == 'yearender_top_news_and_top_videos' && ($view->current_display == 'yearend_left_widget_list')) {
+    if (isset($_GET['shs_term_node_tid_depth']) && !empty($_GET['shs_term_node_tid_depth'])) {
+      $query->where[1]['conditions'][1]['value'] = $_GET['shs_term_node_tid_depth'];
+      unset($query->orderby[1]);
+    }
+    else {
+      unset($query->where[1]['conditions'][1]);
+    }
+  }
+  
   if ($view->name == 'sport_ipl' && $view->current_display == 'points_tally') {
 
 
