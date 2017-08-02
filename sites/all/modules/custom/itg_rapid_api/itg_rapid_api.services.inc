@@ -3245,8 +3245,8 @@ function itg_rapid_api_edit_profile($token) {
     
     
     $method = "GET";    
-    $token = $_GET['authtoken_id'];
-    if (!drupal_valid_token($token, $value = '', $skip_anonymous = FALSE)) {
+    $token = $_GET['authtoken_id'];    
+    if (!drupal_valid_token($token, 'services')) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
