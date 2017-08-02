@@ -34,7 +34,8 @@ function saveUpdatedProfile($data) {
     // upadte script
     $inputs = $data;
     //echo "<pre>hi"; print_r($inputs);echo "</pre>";exit();
-    $user_detail = user_load_by_name($user_id);
+    $user = $user_detail = user_load_by_name($user_id);
+    
 
     // Update First Name.
     if (!empty($data['first_name'])) {
@@ -119,6 +120,7 @@ function saveUpdatedProfile($data) {
 
     // Save user object.
     $flag_save = user_save($user_detail);
+    
     
     // responce object
     if($flag_save->uid){
