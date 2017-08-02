@@ -1941,6 +1941,7 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
       $query->fields('fsed', array('field_story_expiry_date_value'));
     }
     //join  for field value
+    $query->leftJoin('field_data_field_photo_see_pic_link', 'spl', 'spl.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -1962,6 +1963,7 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+    $query->fields('spl' , array('field_photo_see_pic_link_value'));
     //end
     $query->fields('dv_s', array('entity_id'));
     $query->condition('dv_s.view_name', $view_name);
@@ -1993,6 +1995,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+  $query->leftJoin('field_data_field_photo_see_pic_link', 'spl', 'spl.entity_id=n.nid');
 
   if ($widget_name == 'home_page_feature_widget') {
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -2064,7 +2067,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-
+  $query->fields('spl' , array('field_photo_see_pic_link_value'));
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
       ->condition('n.type', $valid_content_type)
@@ -2220,12 +2223,13 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   //join  for field value
+  $query->leftJoin('field_data_field_photo_see_pic_link', 'spl', 'spl.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_extra_small_image', 'si', 'si.entity_id=n.nid');
   $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
   $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_extra_small_image_fid');
   $query->fields('si', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
-
+  $query->fields('spl' , array('field_photo_see_pic_link_value'));
   $query->fields('si_file', array('uri'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
@@ -2262,6 +2266,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
   $query = db_select('itg_widget_order', 'iwo'); //
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+  $query->leftJoin('field_data_field_photo_see_pic_link', 'spl', 'spl.entity_id=n.nid');
   //join  for field value
   $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
@@ -2271,6 +2276,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
   $query->fields('si_file', array('uri'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+  $query->fields('spl' , array('field_photo_see_pic_link_value'));
   //end
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
