@@ -416,6 +416,7 @@ function update_itg_widget_order_table_data_for_special_auto_review($form , &$fo
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $datacount + $value['weight'];
   }
+  p($draggable_view_data);
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
