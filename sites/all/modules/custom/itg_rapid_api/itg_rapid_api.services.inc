@@ -2975,8 +2975,15 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
-    $data['status_code'] = "1";
-    $data['status_message'] = "Please check your mobile for otp";
+    if($result_obj->uid){
+        $local_obj = localChangePass($_GET);
+        $data['status_code'] = "1";
+        $data['status_message'] = "Please check your mobile for otp";
+    }
+    else{
+        $data['status_code'] = "0";
+        $data['status_message'] = "custom msg";
+    }
 
     return $data;
 }

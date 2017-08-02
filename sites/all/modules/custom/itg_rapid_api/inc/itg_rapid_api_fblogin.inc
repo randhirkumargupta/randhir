@@ -359,3 +359,34 @@ function localLogin($data){
         }
     }
 }
+
+function localChangePass($get_data){
+     $uname = $user_id = $get_data['user_id'];
+    $pass  = $get_data['pass'];
+    $pass2 = $get_data['pass2'];
+    $msg = "";
+    $data = array();
+    if (is_numeric($uname)) {
+      if (function_exists(itg_sso_user_mobile_check)) {
+        $get_user_check_mobile = itg_sso_user_mobile_check($uname);
+      }
+      if (!empty($get_user_check_mobile)) {
+        $account = user_load($get_user_check_mobile);
+      }
+    }
+    else {
+      if (function_exists(itg_sso_user_email_check)) {
+        $get_user_check_email = itg_sso_user_email_check($uname);
+      }
+      if (!empty($get_user_check_email)) {
+        $account = user_load($get_user_check_email);
+      }
+    }
+
+
+    $edit = array('pass' => $pass);
+
+    // Save the account with the new password.
+    $flag = user_save($account, $edit);
+    return $flag;
+}
