@@ -265,6 +265,18 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#value' => t('Save'),
   );
 
+  $form['user_state']['#states'] = array(
+      'visible' => array(
+        ':input[name="country"]' => array('!value' => '_none'),
+      ),
+    );
+  
+  $form['user_city']['#states'] = array(
+      'visible' => array(
+        ':input[name="user_state"]' => array('!value' => '_none'),
+      ),
+    );
+  
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js',
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
