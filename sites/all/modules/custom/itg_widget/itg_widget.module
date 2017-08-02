@@ -1452,6 +1452,9 @@ function itg_widget_delete_old_data_by_limit($widget,$category=NULL) {
         if($i > ITG_WIDGET_DATA_LIMIT) {
            $query = db_delete('itg_widget_order');
            $query->condition('id', $data_result->id);
+           if($category!="") {
+           $query->condition('cat_id', $category);
+           }
            $query->execute();
         }
         $i++;
