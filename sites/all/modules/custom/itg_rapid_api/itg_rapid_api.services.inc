@@ -3253,9 +3253,9 @@ function itg_rapid_api_edit_profile($token) {
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
         $result = callAPI($method, $url, $_GET);
         $result_obj = json_decode($result);
-        if ($result_obj->uid) {
+        //if ($result_obj->uid) {
             $responce_object = saveUpdatedProfile($_GET);
-        }
+        //}
     }
     return $responce_object;
 }
