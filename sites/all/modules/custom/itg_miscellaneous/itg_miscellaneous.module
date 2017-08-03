@@ -30,12 +30,12 @@ function itg_miscellaneous_menu() {
       'file' => 'includes/itg_miscellaneous.inc',
   );
 
-  $items['itg-delete-layout/%'] = array(
+  /*$items['itg-delete-layout/%'] = array(
       'page callback' => 'itg_layout_delete',
       'access arguments' => array('access administrator'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
-  );
+  );*/
 
   $items['section-widgets-list-delete'] = array(
       'page callback' => 'itg_section_widgets_list_delete',

@@ -72,7 +72,7 @@ function itg_layout_list() {
   foreach ($itg_result as $row) {
 
     $edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)));
-    $delete_link = l(t('Delete'), 'itg-delete-layout/' . $row->section_name, array('query' => array('destination' => arg(1))));
+    $delete_link = l(t('Delete'), 'itg-delete-layout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/'.arg(1))));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
       array('data' => $count + 1),

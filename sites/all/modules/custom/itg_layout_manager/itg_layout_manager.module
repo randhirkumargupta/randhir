@@ -106,7 +106,7 @@ function itg_layout_manager_menu() {
 
   $items['itg-delete-layout/%'] = array(
     'page callback' => 'itg_layout_delete',
-    'access arguments' => array('access itg story'),
+    'access arguments' => array('access layout delete'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_layout_manager.delete.inc',
   );

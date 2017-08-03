@@ -88,6 +88,10 @@ function itg_story_permission() {
       'title' => t('story permission'),
       'description' => t('story permission.'),
     ),
+    'access layout delete' => array(
+      'title' => t('layout delete permission'),
+      'description' => t('layout delete permission.'),
+    ),
   );
 }
 
