@@ -445,3 +445,65 @@ function simplesaml_get_authname($uid) {
    return $query->execute()->fetchField();
   }
 }
+
+/**
+ * Implements hook_token_info(). This hook will register tow token fname and lname.
+ */
+function itg_sso_reg_token_info() {
+  $info['tokens']['custom']['fname'] = array(
+    'name' => t('First name'),
+    'description' => t('First name re placer for fname '),
+  );
+  $info['tokens']['custom']['lname'] = array(
+    'name' => t('Last name'),
+    'description' => t('Last name re placer for lname '),
+  );
+  $info['tokens']['custom']['mtitle'] = array(
+    'name' => t('Custom meta title'),
+    'description' => t('Custom meta title re placer '),
+  );
+  
+  $info['tokens']['custom']['mdescription'] = array(
+    'name' => t('Custom meta description'),
+    'description' => t('Custom meta description re placer '),
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens(). This hook will operate the token and replace it with it's value.
+ */
+function itg_sso_reg_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  global $user;
+	$replacements = array();
+ if ($type == 'custom') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+          case 'fname':
+          $fname = '';
+          if(function_exists('itg_custom_get_user_details')) {
+          $fname = itg_custom_get_user_details($user->uid);
+          }
+          $replacements[$original] = $fname['fname'];
+          break;
+          case 'lname':
+          $lname = '';
+          if(function_exists('itg_custom_get_user_details')) {
+          $lname = itg_custom_get_user_details($user->uid);
+          }
+          $replacements[$original] = $lname['lname'];
+          break;
+          case 'mtitle':
+          $mtitle = 'mtitle';
+          $replacements[$original] = $mtitle;
+          break;
+          case 'mdescription':
+          $mdescription = 'mdescription';
+          $replacements[$original] = $mdescription;
+          break;
+      }
+    }
+  }
+
+	return $replacements;
+}
