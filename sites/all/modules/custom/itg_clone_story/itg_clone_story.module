@@ -9,14 +9,12 @@ function itg_clone_story_menu() {
   //create a call back for autocomplete search box
   $items['searchauto/autocompletelabel'] = array(
     'page callback' => 'itg_clone_story_search_autocompletelabel',
-    //'access arguments' => array('access search autocomplete'),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
   
   $items['searchauto/autocompleteid'] = array(
     'page callback' => 'itg_clone_story_search_autocompleteid',
-    //'access arguments' => array('access search autocomplete'),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
@@ -209,17 +207,6 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
   }
-}
-
-/**
- * Implements clone_multiple_after_build().
- * @param type $form
- * @param type $form_state
- * @return type
- */
-function clone_multiple_after_build($form, &$form_state) {
-  return drupal_rebuild_form($form_state['build_info']['form_id'], $form_state, $form);
-
 }
 
 /**
