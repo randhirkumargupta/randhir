@@ -1191,8 +1191,6 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                       image: "<?php echo $image_url; ?>",
                       sources: [
                           {
-                              file: "<?php echo $getvideo_bitrate_url; ?>"
-                          }, {
                               file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                           }]
                   }],

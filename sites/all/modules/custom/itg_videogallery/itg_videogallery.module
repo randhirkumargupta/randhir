@@ -67,6 +67,11 @@ function itg_videogallery_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['getvideoplayer'] = array(
+    'page callback' => 'itg_videogallery_getvideoplayer',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
   $items['solr-video-make-fid'] = array(
     'page callback' => 'itg_videogallery_solr_video_insert_in_for_fid',
     'access arguments' => array('access content'),
@@ -190,6 +195,11 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
     ),
     'itg_videogallery_dm_embed' => array(
       'template' => 'itg-dailymotion-dm-embeded',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_videogallery_getvideoplayer' => array(
+      'template' => 'itg-dailymotion-getvideoplayer',
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -2486,6 +2496,18 @@ function itg_videogallery_dm_embed() {
 }
 
 /**
+ * This function use for get file daily motion video to play.
+ */
+function itg_videogallery_getvideoplayer() {
+  $fid= $_GET['fid'];
+  $tabindex = $_GET['tabindex'];
+  $video_data = itg_videogallery_get_video_info_by_fid($fid);
+  print theme('itg_videogallery_getvideoplayer',array('video_data' => $video_data,'tabindex'=>$tabindex));
+}
+
+
+
+/**
  * Implement function get dailymotion video id by fid
  * @param int $fid
  * @return type string
@@ -3484,7 +3506,7 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
 // $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
   $query->leftJoin('field_data_field_video_title', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
-  $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url', 'is_draft'));
+  $query->fields('drd', array('video_id', 'dailymotion_thumb_url', 'is_draft'));
   $query->fields('isvi', array('fid', 'solr_video_id', 'solr_video_thumb', 'video_embedded_url', 'property'));
   $query->fields('up_video', array('entity_id'));
   $query->fields('ads_inc', array('field_include_ads_value'));
@@ -4466,13 +4488,15 @@ function check_file_already_exist_or_not($filename) {
 }
 
 /**
- * Function use for get video info by fid
+ * This function use for get video info from  itg_solr_video_info table by fid
  */
 function itg_videogallery_get_video_info_by_fid($fid) {
   $video_data = "";
-  $query = db_select('itg_solr_video_info', 'drd');
-  $query->fields('drd');
-  $query->condition('fid', $fid, '=');
+  $query = db_select('itg_solr_video_info', 'isvi');
+   $query->leftJoin('dailymotion_response_details', 'drd', 'isvi.solr_video_id = drd.video_id');
+  $query->fields('isvi');
+   $query->fields('drd',array('is_draft'));
+  $query->condition('isvi.fid', $fid, '=');
   $video_data = $query->execute()->fetchAll();
   return $video_data;
 }
