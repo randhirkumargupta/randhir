@@ -4859,12 +4859,13 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Broken/missing handler */
+  /* Field: Field collection item: Field collection item ID */
   $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
   $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
   $handler->display->display_options['fields']['item_id']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['item_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['item_id']['separator'] = '';
   /* Field: Field collection item: Thumb Image */
   $handler->display->display_options['fields']['field_photo_small_image']['id'] = 'field_photo_small_image';
   $handler->display->display_options['fields']['field_photo_small_image']['table'] = 'field_data_field_photo_small_image';
@@ -4968,12 +4969,13 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Broken/missing handler */
+  /* Field: Field collection item: Field collection item ID */
   $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
   $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
   $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
   $handler->display->display_options['fields']['item_id']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['item_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['item_id']['separator'] = '';
   $handler->display->display_options['block_description'] = 'photogallery-story-block';
   $export['photo_landing_slider'] = $view;
 

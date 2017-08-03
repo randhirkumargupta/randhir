@@ -400,7 +400,7 @@ function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $f
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter_templates/autocomplete';
-    $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
+    $form['title']['#attributes'] = array('placeholder' => t('Template Name'));
   }
 }
 

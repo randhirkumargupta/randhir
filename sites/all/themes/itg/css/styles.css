@@ -11044,6 +11044,7 @@ div#playerContainer {
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
   max-width: 108px;
   padding-top: 65px;
+  float: right;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a {
   color: #aaa9a9;
@@ -14765,6 +14766,10 @@ span.close_btt {
 .canvasjs-chart-tooltip > div img {
   display: block;
   margin-top: 5px;
+}
+
+.not-front .watch-right-now-video h3 {
+  display: none;
 }
 
 @media (min-width: 320px) {

@@ -81,6 +81,7 @@ foreach ($output as $key => $value) {
         axisX: {
           interval: 1,
           valueFormatString: "####", //try
+          labelAngle: 90
         },
         data: [{
             type: "line",

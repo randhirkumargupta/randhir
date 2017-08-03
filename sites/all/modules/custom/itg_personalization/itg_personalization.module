@@ -650,7 +650,7 @@ function _personalization_show_content() {
 
       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
         $output.= '<span class="personal-social-share-links">';
-        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" . urlencode($actual_link) . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
+        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" .  $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
         $output.= '<a href="javascript:;" title = "share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(\'' . urlencode($fbSocial_share_title) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a>';
         $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . urlencode($actual_link) . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
         $output.= '</span>';
