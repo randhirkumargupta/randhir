@@ -2821,45 +2821,151 @@ function itg_rapid_api_login_request_bk($token, $user_id, $password, $login_type
 }
 
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
-    $method = "GET";
-    $data = $_GET;
-    $account = array();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
-    $result = callAPI($method, $url, $_GET);
-    $result_obj = json_decode($result);
-    $uid = 0;
-    $uid = $result_obj->uid;
-    $auth_token = $result_obj->token;
-    $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-    $is_first_login = 1;
-    if ($field_logged_in_count > 0) {
-        $is_first_login = 0;
-    }
-
-    if ($uid) {
-        $local_account = localSignup($_GET);
-        //p($local_account);echo "andy";die();
-        $uid = $local_account->user->uid;
-        $name = $local_account->user->name;
-        $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
-        $auth_token = $local_account->token;
-        if ($auth_token) {
-            $account['status_code'] = "1";
-            $account['status_message'] = "customised_message";
-            $account['data']['user_id'] = "$name";
-            $account['data']['is_first_login'] = "$is_first_login";
-            $account['data']['auth_token'] = "$auth_token";
+    $login_type = 0;
+    $login_type = $_GET['login_type'];
+    // for traditional login
+    if ($login_type == 0) {
+        $method = "GET";
+        $data = $_GET;
+        $account = array();
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
+        $result = callAPI($method, $url, $_GET);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+        $is_first_login = 1;
+        if ($field_logged_in_count > 0) {
+            $is_first_login = 0;
         }
-        else{
+
+        if ($uid) {
+            $local_account = localSignup($_GET);
+            //p($local_account);echo "andy";die();
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            if ($auth_token) {
+                $account['status_code'] = "1";
+                $account['status_message'] = "customised_message";
+                $account['data']['user_id'] = "$name";
+                $account['data']['is_first_login'] = "$is_first_login";
+                $account['data']['auth_token'] = "$auth_token";
+            } else {
+                watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+                return services_error(t('Wrong username or password.'), 401);
+            }
+        } else {
             watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
             return services_error(t('Wrong username or password.'), 401);
         }
-    } else {
-        watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-        return services_error(t('Wrong username or password.'), 401);
-    }
 
-    return $account;
+        return $account;
+    }
+    // for FW login
+    elseif ($login_type == 1) {
+        $method = "GET";
+
+        $data = array();
+        $password = rand(0, 9999);
+        $_GET['password'] = $password;
+        $data['token'] = $_GET['token_id'];
+        $data['app_id'] = $_GET['app_id'];
+        $data['uname'] = $_GET['user_id'];
+        $data['uid'] = $_GET['user_id'];
+        $data['issued_at'] = $_GET['issued_at'];
+        $data['expires_at'] = $_GET['expires_at'];
+        $data['password'] = $password;
+        $account = array();
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+        $result = callAPI($method, $url, $data);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->user->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+        $is_first_login = 1;
+        if ($field_logged_in_count > 0) {
+            $is_first_login = 0;
+        }
+
+        if ($uid) {
+            $local_account = fblogin($data);
+            //p($local_account);echo "andy";die();
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            if ($auth_token) {
+                $account['status_code'] = "1";
+                $account['status_message'] = "customised_messageFB";
+                $account['data']['user_id'] = "$name";
+                $account['data']['is_first_login'] = "$is_first_login";
+                $account['data']['auth_token'] = "$auth_token";
+            } else {
+                watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+                return services_error(t('Wrong username or password.'), 401);
+            }
+        } else {
+            watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+            return services_error(t('Wrong username or passwordfb.'), 401);
+        }
+
+        return $account;
+    }
+    // for TWT login
+    elseif ($login_type == 2) {
+        $method = "GET";
+
+        $data = array();
+        $password = rand(0, 9999);
+        $_GET['password'] = $password;
+        $data['token'] = $_GET['token_id'];
+        $data['app_id'] = $_GET['app_id'];
+        $data['uname'] = $_GET['user_id'];
+        $data['uid'] = $_GET['user_id'];
+        $data['issued_at'] = $_GET['issued_at'];
+        $data['expires_at'] = $_GET['expires_at'];
+        $data['password'] = $password;
+        $account = array();
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+        $result = callAPI($method, $url, $data);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->user->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+        $is_first_login = 1;
+        if ($field_logged_in_count > 0) {
+            $is_first_login = 0;
+        }
+
+        if ($uid) {
+            $local_account = twtlogin($data);
+            //p($local_account);echo "andy";die();
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            if ($auth_token) {
+                $account['status_code'] = "1";
+                $account['status_message'] = "customised_messagetwt";
+                $account['data']['user_id'] = "$name";
+                $account['data']['is_first_login'] = "$is_first_login";
+                $account['data']['auth_token'] = "$auth_token";
+            } else {
+                watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+                return services_error(t('Wrong username or password.'), 401);
+            }
+        } else {
+            watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+            return services_error(t('Wrong username or passwordtwt.'), 401);
+        }
+
+        return $account;
+    }
 }
 
 //itg_rapid_api_signup

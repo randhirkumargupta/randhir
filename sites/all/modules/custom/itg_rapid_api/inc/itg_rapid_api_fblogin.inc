@@ -20,15 +20,16 @@ function fblogin($data) {
     $uid_social = $data['uid'];
     $issued_at_social = $data['issued_at'];
     $expires_at_social = $data['expires_at'];
+    $password = $data['password'];
     //check user name is exist in db..
     $user_load = user_load_by_name($uname_social);
     //echo "<pre>"; print_r($user_load->uid);echo "</pre>";exit();
     if ($user_load->uid) {
         // user exist, next is step for login
-        return userloginFB($uname_social, $user_load->uid);
+        return userloginFB($uname_social, $user_load->uid, $password);
     } else {
         // user not exist, next is step for signup
-        return userSignupFB($uname_social, $uid_social);
+        return userSignupFB($uname_social, $uid_social, $password);
     }
 }
 
@@ -37,7 +38,7 @@ function fblogin($data) {
  * @pram $uname
  * @return array
  */
-function userloginFB($uname, $uidget) {
+function userloginFB($uname, $uidget, $password) {
     global $user;
     $username = $uname;
 
@@ -99,10 +100,9 @@ function userloginFB($uname, $uidget) {
  * @pram $uname
  * @return array
  */
-function userSignupFB($uname_social, $uid_social) {
+function userSignupFB($uname_social, $uid_social, $password) {
     $mail = $uid_social . "@facebook.com";
-    $username = $uname_social;
-    $password = rand(0, 9999);
+    $username = $uname_social;    
     $first_name = "";
     $last_name = "";
     $mobile = "";
@@ -191,7 +191,11 @@ function userSignupFB($uname_social, $uid_social) {
         drupal_set_message('Error:' . $e->getMessage(), 'error');
         $account = $e;
     }
-    return $account;
+    if($account->uid)
+    return userloginFB($uname_social, $account->uid, $password);
+    else{
+        return $account;
+    }
 }
 
 function localSignup($data) {
@@ -360,28 +364,13 @@ function localLogin($data){
     }
 }
 
-function localChangePass($get_data){
+function localChangePass($get_data, $uid){
      $uname = $user_id = $get_data['user_id'];
     $pass  = $get_data['pass'];
     $pass2 = $get_data['pass2'];
     $msg = "";
     $data = array();
-    if (is_numeric($uname)) {
-      if (function_exists(itg_sso_user_mobile_check)) {
-        $get_user_check_mobile = itg_sso_user_mobile_check($uname);
-      }
-      if (!empty($get_user_check_mobile)) {
-        $account = user_load($get_user_check_mobile);
-      }
-    }
-    else {
-      if (function_exists(itg_sso_user_email_check)) {
-        $get_user_check_email = itg_sso_user_email_check($uname);
-      }
-      if (!empty($get_user_check_email)) {
-        $account = user_load($get_user_check_email);
-      }
-    }
+    $account = user_load($uid);
 
 
     $edit = array('pass' => $pass);
