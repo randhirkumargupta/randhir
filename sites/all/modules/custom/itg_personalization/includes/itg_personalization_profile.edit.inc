@@ -40,10 +40,12 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   }
   // email setting
   if (strpos($user_detail->mail, 'nowhere.com') !== false) {
+    $email_required = FALSE;
     $email = '';
   }
   else {
     $email = $user_detail->mail;
+    $email_required = TRUE;
   }
   
   $form['fname'] = array(
@@ -66,7 +68,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#title' => t('Email'),
     '#type' => 'textfield',
     '#maxlength' => 255,
-    '#required' => TRUE,
+    '#required' => $email_required,
     '#attributes' => array(
       'placeholder' => 'E.g., abc@example.com',
       'readonly' => TRUE,
