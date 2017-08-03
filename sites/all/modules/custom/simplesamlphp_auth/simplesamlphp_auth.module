@@ -511,12 +511,17 @@ function simplesamlphp_auth_user_insert(&$edit, $account, $category = NULL) {
         watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
       }
 
+      try {
       db_update('users')
         ->fields(array('name' => $account->name))
         ->condition('uid', $account->uid)
         ->execute();
 
       _simplesaml_auth_debug(t('Updating username [%acctname]', array('%acctname' => $account->name)));
+      }
+      catch (Exception $e)  {
+        
+      }
 
       // Get mail from default attribute.
       try {
