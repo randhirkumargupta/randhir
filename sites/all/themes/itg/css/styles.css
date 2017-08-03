@@ -14768,6 +14768,10 @@ span.close_btt {
   margin-top: 5px;
 }
 
+.not-front .watch-right-now-video h3 {
+  display: none;
+}
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share {
