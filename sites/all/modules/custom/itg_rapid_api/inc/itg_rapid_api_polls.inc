@@ -205,7 +205,7 @@ function poll_detail_data($poll_id) {
  * Return the data of open poll
  */
 
-function polls_open_datalist($cpagenos) {
+function polls_open_datalist($cpageno) {
     $range_max = 10;
     if (!$cpageno == 0) {
       $range_min = $cpageno * $range_max;
@@ -251,8 +251,7 @@ function polls_open_datalist($cpagenos) {
         $query2->condition('pa.entity_id', $res['nid']);
         $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-        // print_r($result_option);
-        // exit();
+        
 
         $options2 = array();
         foreach ($result_option as $p => $pv) {
@@ -277,7 +276,7 @@ function polls_open_datalist($cpagenos) {
         $news['p_option'] = $options2;
         $news2[] = $news;
           
-        }else if($res['field_poll_end_date_value'] == ''){
+        }else if($res['field_poll_end_date_value'] == ''){//&& $res['field_poll_start_date_value'] >= $current_time
         
         $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
         $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
@@ -352,8 +351,8 @@ function polls_close_datalist($cpageno) {
     $query->fields('qi', array('field_poll_question_image_fid'));
 
     $query->condition('n.type', 'poll');
-    //$query->condition('ed.field_poll_end_date_value', $current_time, '<');
-    $query->condition('st.field_poll_start_date_value', $current_time, '<');
+    $query->condition('ed.field_poll_end_date_value', $current_time, '<');
+    //$query->condition('st.field_poll_start_date_value', $current_time, '<');
     $query->condition('n.status', '1');
     $query->orderBy('n.nid', 'DESC');
     $query->range($range_min, $range_max);
