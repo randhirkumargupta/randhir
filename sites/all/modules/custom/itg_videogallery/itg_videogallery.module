@@ -319,11 +319,11 @@ function itg_video_check_exist_file($filename) {
   $results = $query->execute()->fetchAll();
 
   if (!isset($results[0])) {
-    $res = 'public://' . LOCAL_VIDEO_DIR . '/' . $filename;
+    $res = 'public://' . LOCAL_VIDEO_DIR . '/'.date('YYmm').'/' . $filename;
     return $res;
   }
   else {
-    $result = explode('public://' . LOCAL_VIDEO_DIR . '/', $results[0]->uri);
+    $result = explode('public://' . LOCAL_VIDEO_DIR . '/'.date('YYmm'). '/', $results[0]->uri);
     $path_info = pathinfo($results[0]->filename);
     $extension = $path_info['extension'];
     $file_name = $path_info['filename'];
@@ -337,7 +337,7 @@ function itg_video_check_exist_file($filename) {
       $value = '_0';
     }
     $file_info = pathinfo($filename);
-    $res = 'public://' . LOCAL_VIDEO_DIR . '/' . $file_info['filename'] . $value . '.' . $extension;
+    $res = 'public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/' . $file_info['filename'] . $value . '.' . $extension;
     return $res;
   }
 }
@@ -1139,7 +1139,7 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
   }
   try {
     if (itg_videogallery_check_ftp_video($fid)) {
-      $ftp_file = explode('/' . LOCAL_VIDEO_DIR . '/', $real_path);
+      $ftp_file = explode('/' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/', $real_path);
       $uri = 'public://dailymotion-ftp/' . $ftp_file[1];
       $url = FTP_URL_VIDEO . $ftp_file[1];
     }
@@ -2020,7 +2020,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
   if (!empty($videos_data)) {
     foreach ($videos_data as $video_info) {
       $expode_video_info = explode('#', $video_info);
-      $videourl = 'public://' . LOCAL_VIDEO_DIR . '/' . time() . '/' . $expode_video_info[0] . '.mp4';
+      $videourl = 'public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/' . time() . '/' . $expode_video_info[0] . '.mp4';
       $fid = db_insert('file_managed')
           ->fields(array(
             'uid' => $user->uid,
@@ -2867,7 +2867,7 @@ function itg_videogallery_get_node_by_title($title = null) {
  * Implement function for remove files
  */
 function itg_videogallery_remove_video() {
-  $files = glob('sites/default/files/' . LOCAL_VIDEO_DIR . '/*');
+  $files = glob('sites/default/files/' . LOCAL_VIDEO_DIR . '/'.date('YYmm'). '/*');
   foreach ($files as $file) {
     if (is_file($file))
       unlink($file);
@@ -3626,7 +3626,7 @@ function itg_video_check_exist_file_browse($filename) {
       $path_info = pathinfo($filename);
       $extension = $path_info['extension'];
       if (isset($extension) && $extension == 'mp4') {
-        $uri = 'public://' . LOCAL_VIDEO_DIR . '/' . $filename;
+        $uri = 'public://' . LOCAL_VIDEO_DIR . '/'.date('YYmm'). '/' . $filename;
         $fid = db_insert('file_managed')
             ->fields(array(
               'uid' => $user->uid,
@@ -3659,7 +3659,7 @@ function itg_video_check_exist_file_browse($filename) {
  * @return array
  */
 function itg_videogallery_getfile_details($filename) {
-  $uri = 'public://' . LOCAL_VIDEO_DIR . '/' . $filename;
+  $uri = 'public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/' . $filename;
   $query = db_select('file_managed', 'fm');
   $query->condition('filename', $filename, '=');
   $query->condition('uri', $uri, '=');
@@ -3944,13 +3944,13 @@ function itg_videogallery_field_add_more_submit($form, &$form_state) {
   }
   $node = drupal_rebuild_form('videogallery_node_form', $form_state, $old_form = NULL);
   $fids = array();
-  $mydir = 'public://' . LOCAL_VIDEO_DIR;
+  $mydir = 'public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm');
   file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
   foreach ($node['upload']['#value'] as $audio) {
-    $scheme = variable_get('file_default_scheme', 'public') . '://' . LOCAL_VIDEO_DIR . '/';
+    $scheme = variable_get('file_default_scheme', 'public') . '://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/';
     $source = $audio['tmppath'];
     $uri = itg_audio_check_exist_file($audio['name']);
-    $newuri = explode('//' . LOCAL_VIDEO_DIR . '/', $uri);
+    $newuri = explode('//' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/', $uri);
     $directory = '';
     $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $newuri[1]);
     $destination = file_unmanaged_move($source, $destination);
@@ -4028,7 +4028,7 @@ function file_validate_name(stdClass $file) {
   $file->filename = $new_filename;
 
 //changing file location 
-  $destination_dir = "public://" . LOCAL_VIDEO_DIR . "/";
+  $destination_dir = "public://" . LOCAL_VIDEO_DIR. '/'.date('YYmm') . "/";
 
 //check if file exists. if exists rename it append incremental number  until the filename is unique
 
@@ -4078,7 +4078,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
 
     try {
 
-      $ftp_file = explode('public://' . LOCAL_VIDEO_DIR . '/', $real_path);
+      $ftp_file = explode('public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/', $real_path);
       $uri = 'public://dailymotion-ftp/' . $realfilename;
       $url = $real_path;
 
@@ -4280,7 +4280,7 @@ function itg_videogallery_ftp_file_insert_cron() {
           $realfilename = check_file_already_exist_or_not($file_array[1]);
 
 // Adding managed file
-          $uri = 'public://' . LOCAL_VIDEO_DIR . '/' . $realfilename;
+          $uri = 'public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/' . $realfilename;
           try {
 
             $fid = db_insert('file_managed')
@@ -4354,7 +4354,7 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
   $api = itg_videogallery_dailymotion_api();
   try {
 
-    $ftp_file = explode('public://' . LOCAL_VIDEO_DIR . '/', $real_path);
+    $ftp_file = explode('public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/', $real_path);
     $uri = 'public://dailymotion-ftp/' . $realfilename;
     $url = FTP_URL_VIDEO . $name;
 
@@ -4446,7 +4446,7 @@ function check_file_already_exist_or_not($filename) {
     return $filename;
   }
   else {
-    $result = explode('public://' . LOCAL_VIDEO_DIR . '/', $results[0]->uri);
+    $result = explode('public://' . LOCAL_VIDEO_DIR. '/'.date('YYmm') . '/', $results[0]->uri);
     $path_info = pathinfo($results[0]->filename);
     $extension = $path_info['extension'];
     $file_name = $path_info['filename'];
