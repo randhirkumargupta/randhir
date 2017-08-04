@@ -210,7 +210,7 @@ function localSignup($data) {
     if (!$local_user->uid) {
         $form_state = array();
         // check user_id is mail or mobile
-        $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
+        $url_info = "";
         $mail_flag = 1;
         if (preg_match('/^\d{10}$/', $user_id)) {
             $mail_flag = 0;
