@@ -2823,6 +2823,13 @@ function itg_rapid_api_login_request_bk($token, $user_id, $password, $login_type
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
     $login_type = 0;
     $login_type = $_GET['login_type'];
+    if ($login_type < 0 || $login_type > 2) {
+        watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+        $account = array();
+        $account['status_code'] = "0";
+        $account['status_message'] = "Invalid Login Type.";
+        return $account;
+    }
     // for traditional login
     if ($login_type == 0) {
         $method = "GET";
@@ -2849,7 +2856,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
             $auth_token = $local_account->token;
             if ($auth_token) {
                 $account['status_code'] = "1";
-                $account['status_message'] = "customised_message";
+                $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
                 $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
@@ -2900,7 +2907,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
             $auth_token = $local_account->token;
             if ($auth_token) {
                 $account['status_code'] = "1";
-                $account['status_message'] = "customised_messageFB";
+                $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
                 $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
@@ -2951,7 +2958,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
             $auth_token = $local_account->token;
             if ($auth_token) {
                 $account['status_code'] = "1";
-                $account['status_message'] = "customised_messagetwt";
+                $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
                 $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
@@ -2978,27 +2985,47 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
  * 	The node processed information array.
  */
 function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
+    // check duplicate user
+
     $method = "GET";
-    $data = $_GET;
+    $data = array();
+    $account_err = array();
+    $data['user_id'] = $_GET['user_id'];
     $account = array();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/signup";
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user";
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
-    $uid = $result_obj->uid;
-    $uname = $_GET['user_id'];
-
-    if ($uid) {
-        $account['status_code'] = "1";
-        $account['status_message'] = "customised_message";
-        $account['data']['user_id'] = "$uname";
-        $account['data']['is_authenticated'] = "1";
-        $account['data']['otp_status'] = "0";
+    if ($result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Duplicate sign up request";
+        return $account_err;
     } else {
-        watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $_GET['user_id']));
-        return services_error(t('Duplicate signup attempt.'), 401);
+
+        $method = "GET";
+        $data = $_GET;
+        $account = array();
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/signup";
+        $result = callAPI($method, $url, $data);
+        $result_obj = json_decode($result);
+        $uid = $result_obj->uid;
+        $uname = $_GET['user_id'];
+
+        if ($uid) {
+            $account['status_code'] = "1";
+            $account['status_message'] = "";
+            $account['data']['user_id'] = "$uname";
+            $account['data']['is_authenticated'] = "1";
+            $account['data']['otp_status'] = "0";
+        } else {
+            watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $_GET['user_id']));
+            $account['status_code'] = "0";
+            $account['status_message'] = "Duplicate sign up request";
+        }
+
+        return $account;
     }
 
-    return $account;
+    
 }
 
 //itg_rapid_api_fblogin
@@ -3088,7 +3115,7 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
     $data['status_code'] = "1";
-    $data['status_message'] = "Please check your mobile for otp";
+    $data['status_message'] = "";
 
     return $data;
 }
@@ -3109,7 +3136,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $result_obj = json_decode($result);
     $uname = $_GET['user_id'];
     $data['status_code'] = "1";
-    $data['status_message'] = "Please check your mobile for otp";
+    $data['status_message'] = "";
     $data['data']['user_id'] = "$uname";
     $data['data']['is_authenticated'] = "1";
     $data['data']['auth_token'] = "authToken";
@@ -3132,7 +3159,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $result_obj = json_decode($result);
 
     $data['status_code'] = "1";
-    $data['status_message'] = "Please check your mobile for otp";
+    $data['status_message'] = "";
 
     return $data;
 }
@@ -3154,11 +3181,11 @@ function itg_rapid_api_change_password($token, $user_id) {
     if($result_obj->uid){
         $local_obj = localChangePass($_GET, $result_obj->uid);
         $data['status_code'] = "1";
-        $data['status_message'] = "customised_message";
+        $data['status_message'] = "";
     }
     else{
         $data['status_code'] = "0";
-        $data['status_message'] = "custom msg";
+        $data['status_message'] = "customised_message";
     }
 
     
@@ -3360,7 +3387,9 @@ function itg_rapid_api_edit_profile($token) {
         $result = callAPI($method, $url, $_GET);
         $result_obj = json_decode($result);
         //if ($result_obj->uid) {
-            $responce_object = saveUpdatedProfile($_GET);
+            $responce_object_rs = saveUpdatedProfile($_GET);
+            $responce_object['status_code'] = "1";
+             $responce_object['status_message'] = "";
         //}
     }
     return $responce_object;
@@ -3421,7 +3450,7 @@ function itg_rapid_api_get_login_user_detail($token) {
         $login_type = "na";
 
         $data['status_code'] = "1";
-        $data['status_message'] = "customised_message";
+        $data['status_message'] = "";
 
         $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
         $data['data']['user_profile_detail']['login_type'] = "$login_type";
@@ -3459,7 +3488,7 @@ function itg_rapid_api_log_out($token) {
     $url = $base_url . "/user/logout";
     $result = drupal_http_request('$url', $options);
     $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";
+    $data['status_message'] = "";
 
     return $data;
 }
