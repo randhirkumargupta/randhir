@@ -58,7 +58,8 @@ function generate_custom_pattern_feed($data) {
     $today = date('Y-M-d-h-m-s');
     /* Iterate for nodes */
     if (!empty($pattern['field_syndication_xml_formate_xml'])) {
-      $feed = feed_starting_tags($feed_type);
+      $default_pattern = $pattern['field_syndication_xml_formate_xml'];
+      // $feed = feed_starting_tags($feed_type);
       // Header Text start here for syndication file.
       if (!empty($pattern['field_syndication_header_value'])) {
         $feed .= '<header>';
@@ -75,32 +76,38 @@ function generate_custom_pattern_feed($data) {
         $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_footer_value'], ENT_XML1, 'UTF-8') . " ]]>";
         $feed .= '</footer>';
       }
-      if ($feed_type == 'rss' || $feed_type == 'mrss') {
-        $feed = get_full_feed_after_replace_items_tags_wtih_dollers($pattern['field_syndication_xml_formate_xml'], $feed);
-      }
-      $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
-      $feed .= feed_ending_tags($feed_type);
-      return sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
+      $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
+      return $file_path_feed;
     } else {
-      $feed = feed_starting_tags($feed_type);
+      //$feed = feed_starting_tags($feed_type);
       $default_pattern = get_default_feed_pattern($feed_type, $content_type);
       foreach ($nids as $nid) {
         $feed .= get_custom_feeds_files($nid, $default_pattern, $feed_type);
       }
-      if ($feed_type == 'rss' || $feed_type == 'mrss') {
-        $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
-        $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
-        $feed = replace_other_then_item_tags($var_array, $final_feed);
-      }
-      $feed .= feed_ending_tags($feed_type);
-      $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
-      $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
+      $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
       return $file_path_feed;
     }
   }
   if (empty($section_id)) {
     exit;
   }
+}
+
+function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed) {
+  if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
+    $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
+    $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
+    $feed = replace_other_then_item_tags($var_array, $final_feed);
+  }
+  // prety output xml
+  $dom = new DOMDocument(1.0, 'UTF-8');
+  $dom->preserveWhiteSpace = FALSE;
+  $dom->loadXML($feed);
+  $dom->formatOutput = true;
+  $feed = $dom->saveXML($dom->documentElement);
+  $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
+  $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
+  return $file_path_feed;
 }
 
 function replace_other_then_item_tags($var_array, $final_feed) {
@@ -267,7 +274,7 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
         }
       }
       // Remove other then item tags
-      if ($feed_type == 'rss' || $feed_type == 'mrss') {
+      if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
         preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
 
         // Item inside text got here
@@ -280,62 +287,6 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
         // After getting proper data of variables then $$$ will be replace by feed items.
         $position_of_items = str_replace($only_item_text, "$$$", $text);
         return get_generated_feed($message, $var_array, $node, $data_array, $only_item_text, $feed_type);
-      } else if ($feed_type == 'xml') {
-        // extract fields name from text string
-        $var_array = get_vars_from_feed_pattern($text, $feed_type);
-        // validate fields w.r.t content type
-        $content_type = $node->type;
-        foreach ($var_array[1] as $field_name) {
-          if (!isValidField($field_name, $content_type)) {
-            $message[] = $field_name . " is not a valid field in " . $content_type;
-            drupal_set_message($field_name . " is not a valid field in for node " . $nid . $content_type, "error");
-          }
-        }
-        //process if there is no error message
-        if (empty($message)) {
-          $iteration = count($var_array[0]);
-          $new_text = '';
-          for ($i = 0; $i < $iteration; $i++) {
-            $return_value_for_sydiation = '';
-            //Fix for sydication images repeated value.
-            if ($var_array[1][$i] == 'field_gallery_image') {
-              $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
-            } elseif ($var_array[1][$i] == 'field_video_upload') {
-              $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_video_upload']);
-            } elseif ($var_array[1][$i] == 'field_story_highlights') {
-              $field_story_highlights = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              $return_value_for_sydiation[0] = $field_story_highlights[0];
-            } elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city' || $var_array[1][$i] == 'field_story_listicle') {
-              $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              $return_value_for_sydiation[0] = implode(",", $field_story_itg_tags);
-            } elseif ($var_array[1][$i] == 'field_story_reporter') {
-              $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              $bylines = _get_byline_from_nid($node->nid);
-              $return_value_for_sydiation[0] = implode(",", $bylines);
-            }
-            // Handel case for syndication images.
-            else {
-              if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-                $return_value_for_sydiation[0] = itg_syndication_get_syndication_image($node, $var_array[1][$i]);
-              } else {
-                $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-              }
-            }
-            $data_array[] = $return_value_for_sydiation;
-          }
-          if (count($var_array[0])) {
-            foreach ($var_array[0] as $key => $pattren) {
-              $replacement = is_array($data_array[$key]) ? implode(", ", $data_array[$key]) : "";
-              $new_text = str_replace($pattren, $replacement, $text);
-              $text = $new_text;
-            }
-          }
-          return $new_text;
-        } else {
-          drupal_set_message(t("not a valid field"));
-        }
       }
     } else {
       drupal_set_message(t("Not a valid formet"));
@@ -484,6 +435,24 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
         }
       } else if (in_array($var_array[1][$i], pre_define_variables())) {
         $return_value_for_sydiation[0] = get_predefine_variables_value($node, $var_array[1][$i]);
+      }
+      //Fix for sydication images repeated value.
+      elseif ($var_array[1][$i] == 'field_gallery_image') {
+        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+      } elseif ($var_array[1][$i] == 'field_video_upload') {
+        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_video_upload']);
+      } elseif ($var_array[1][$i] == 'field_story_highlights') {
+        $field_story_highlights = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = $field_story_highlights[0];
+      } elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city' || $var_array[1][$i] == 'field_story_listicle') {
+        $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = implode(",", $field_story_itg_tags);
+      } elseif ($var_array[1][$i] == 'field_story_reporter') {
+        $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $bylines = _get_byline_from_nid($node->nid);
+        $return_value_for_sydiation[0] = implode(",", $bylines);
       } else {
         if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
           $return_value_for_sydiation[0] = itg_syndication_get_syndication_image($node, $var_array[1][$i]);
@@ -537,7 +506,7 @@ function get_predefine_variables_value($node = '', $variable) {
       } else {
         $published_date = $node->created;
       }
-      $value = "<![CDATA[" . date('r', $published_date) . "]]>";
+      $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
       break;
     case 'node_author':
       $user_profile_data = user_load($node->uid);
@@ -570,13 +539,16 @@ function get_predefine_variables_value($node = '', $variable) {
       $value = t('http://indiatoday.intoday.in');
       break;
     case 'xml_creation_date':
-      $value = gmdate('D, d M Y H:i:s', time());
+      $value = gmdate('D, d M Y H:i:s T', time());
       break;
     case 'web_logo_url':
       $value = theme_get_setting('logo', 'itg');
       break;
     case 'current_year':
       $value = date('Y');
+      break;
+    case 'copy_right_symbol':
+      $value = html_entity_decode('&copy');
       break;
   }
   return $value;
@@ -595,7 +567,8 @@ function pre_define_variables() {
     'xml_creation_date',
     'web_logo_url',
     'current_year',
-    'mrss_node_permalink'
+    'mrss_node_permalink',
+    'copy_right_symbol',
   );
 }
 
@@ -804,16 +777,17 @@ function get_default_feed_pattern($feed_type, $content_type) {
   $default_pattern = "";
   $labelsArray = get_lebels_of_content_type_fields($content_type);
   switch ($feed_type) {
-    case "xml":
-      foreach ($labelsArray as $field_name => $label) {
-        $label_trim = str_replace(' ', '', $label);
-        $label_small = strtolower($label_trim);
-        /* Special charcter is replaced for tags */
-        $feed_assoc_array[preg_replace('/[^a-zA-Z0-9_.]/', '', $label_small)] = "{{{{$field_name}}}}";
-      }
-      $default_pattern = assocArrayToXML($content_type, $feed_assoc_array);
-      break;
+//    case "xml":
+//      foreach ($labelsArray as $field_name => $label) {
+//        $label_trim = str_replace(' ', '', $label);
+//        $label_small = strtolower($label_trim);
+//        /* Special charcter is replaced for tags */
+//        $feed_assoc_array[preg_replace('/[^a-zA-Z0-9_.]/', '', $label_small)] = "{{{{$field_name}}}}";
+//      }
+//      $default_pattern = assocArrayToXML($content_type, $feed_assoc_array);
+//      break;
     case "rss":
+    case "xml":
     case "mrss":
       $default_pattern_file_path = drupal_get_path('module', 'itg_syndication') . "/default_feed_pattern/$content_type/" . $feed_type . "_default_pattern.xml";
       $default_pattern = file_get_contents($default_pattern_file_path);
