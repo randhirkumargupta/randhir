@@ -21,7 +21,7 @@
       //print '<amp-img height="363" width="647" layout="responsive"  alt="" title="" src="' . $amp_image . '"></amp-img>';
       $html .='<div class="slide"><div class="photo-slide"><amp-img layout="responsive" src="'.image_style_url("photgallery_landing_slider_753x543", $file->uri).'"
         width="753"
-        height="543"></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
+        height="543"><div fallback>offline</div></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
         <p>'.$caption.'</p></div>';
         $i++;
     }
@@ -59,7 +59,7 @@ if (function_exists('get_other_gallery_amp')) {
       $alias = drupal_get_path_alias('node/'.$value['nid']);
       $path_alias = $base_url.'/amp/'.$alias;
       $title = l($value['title'], $path_alias, array("attributes" => array("title" => $value['title'])));
-      $amp_image = '<a href="' . $path_alias . '?amp"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '"></amp-img></a>';
+      $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '"><div fallback>offline</div></amp-img></a>';
       $other_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-camera" aria-hidden="true"></i> ' . $img_count . ' images</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
     }
     $other_gallery .= '</ul>';

@@ -994,7 +994,7 @@ function _related_story_amp_block_content() {
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       
-      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"></amp-img>';
+      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"><div fallback>offline</div></amp-img>';
       if (strpos($related_data->url, BACKEND_URL) !== false) {
           $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
         }
@@ -1009,7 +1009,7 @@ function _related_story_amp_block_content() {
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /></amp-img></a></li>";
+        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /><div fallback>offline</div></amp-img></a></li>";
       }
       else {
         $related_story.= "<li>";
