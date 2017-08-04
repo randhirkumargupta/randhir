@@ -30,6 +30,22 @@ function saveUpdatedProfile($data) {
     //$date_of_birth = strtotime(str_replace("-","/",$date_of_birth));
     $date_of_birth = strtotime($date_of_birth);
     $date_of_birth = date('Y-m-d', $date_of_birth);
+    
+    // taxonomy_get_term_by_name_and_vocabulary
+    $country_tid = "";
+    $state_tid = "";
+    $city_tid = "";
+    $country_tid_ar = taxonomy_get_term_by_name($country, 'country');
+    $state_tid_ar = taxonomy_get_term_by_name($state, 'state');
+    $city_tid_ar = taxonomy_get_term_by_name($city, 'city');
+    
+    $country_tid_ar = array_shift(array_values($country_tid_ar));
+    $state_tid_ar = array_shift(array_values($state_tid_ar));
+    $city_tid_ar = array_shift(array_values($city_tid_ar));
+    
+    $country_tid = $country_tid_ar->tid;
+    $state_tid = $state_tid_ar->tid;
+    $city_tid = $city_tid_ar->tid;
     //echo $date_of_birth; exit();
     // upadte script
     $inputs = $data;
@@ -83,24 +99,24 @@ function saveUpdatedProfile($data) {
     if (!empty($data['zipcode'])) {
         $user_detail->field_user_pincode['und'][0]['value'] = check_plain($zipcode);
     }
-
+ 
     //update country
-    if (!empty($data['country']) && $inputs['country'] !== '_none') {
-        $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($country);
+    if (!empty($country_tid) && $country_tid !== '_none') {
+        $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($country_tid);
     } else {
         unset($user_detail->field_user_counrty['und']);
     }
 
     //update state
-    if (!empty($data['state']) && $data['state'] !== '_none') {
-        $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($state);
+    if (!empty($state_tid) && $state_tid !== '_none') {
+        $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($state_tid);
     } else {
         unset($user_detail->field_personalization_state['und']);
     }
 
     //update city
-    if (!empty($data['city']) && $data['city'] !== '_none') {
-        $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($city);
+    if (!empty($city_tid) && $city_tid !== '_none') {
+        $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($city_tid);
     } else {
         unset($user_detail->field_personalization_city['und']);
     }
