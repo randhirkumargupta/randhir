@@ -70,7 +70,7 @@
       body{font: 400 14px/18px 'Roboto Slab'; color: #333;}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
-      p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      p{line-height: 24px; margin: 10px 0; white-space: normal; word-wrap: break-word;}
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
