@@ -374,7 +374,7 @@ function localChangePass($get_data, $uid){
     $account = user_load_by_name($uname);
 
 
-    $edit = array('pass' => $pass);
+    $edit = array('pass' => $pass2);
 
     // Save the account with the new password.
     $flag = user_save($account, $edit);
