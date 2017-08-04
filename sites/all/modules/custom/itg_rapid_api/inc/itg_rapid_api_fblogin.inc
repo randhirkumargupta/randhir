@@ -218,8 +218,8 @@ function localSignup($data) {
             $mail = $first_name . "@nowhereandy.com";
         } else {
             $mobile = "";
-            //$mail = $user_id;
-            $mail = $user_id . "@nowhereandy.com";
+            $mail = $user_id;
+            //$mail = $user_id . "@nowhereandy.com";
         }
         $form_state['values']['mobile'] = $mobile;
         $form_state['values']['url_info'] = $url_info;
