@@ -2325,6 +2325,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
     }
   }
+  .field-type-file{
+    @extend .choose-audio-video-file;
+  }
 }
 .form-field-name-field-quiz-add-questions{
   @extend .pos-rel;
@@ -2338,7 +2341,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-[id*="itg-ugc-inqueue-form"]{
+[id*="itg-ugc-inqueue-form"], [id*="itg-ugc-reject-form"]{
   .form-type-textfield, .form-type-select{
     padding: 0 10px 0 0;
     margin: 10px 0;
@@ -12040,7 +12043,7 @@ fieldset#edit-xmlsitemap{
   left: auto;
   right: 0;
   top: 32px;
-  z-index: 9999;
+  z-index: 9;
   width: 22px;
   height: 20px;
   padding-top: 1px;
@@ -12158,4 +12161,8 @@ fieldset#edit-xmlsitemap{
     margin-top: 0;
     tbody td{border: none;}
   } 
+}
+.progress .percentage {
+    float: right;
+    margin-left: 10px;
 }

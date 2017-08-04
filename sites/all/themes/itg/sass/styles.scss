@@ -9057,6 +9057,7 @@ div#playerContainer{
         .social-icon{
             max-width: 108px;
             padding-top: 65px;
+            float: right;
             a{
                 color: #aaa9a9;
                 font-size: 13px;
@@ -11997,7 +11998,9 @@ span.close_btt {
     }
   }
 }
-
+.not-front .watch-right-now-video h3 {
+    display: none;
+}
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,

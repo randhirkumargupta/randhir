@@ -56,7 +56,7 @@
                         else{
                           cls  = "incorrect-ans";
                         }
-                        console.log(ansvalue); 
+                        //console.log(ansvalue); 
                         $('#answer-container-'+anslastid+' .answer-container-actual').html("<div class='" + cls + "'>" + ansvalue[1] + " !</div><strong>" + ansvalue[0] + "</strong>");
                     }
                });        

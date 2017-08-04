@@ -246,9 +246,9 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
     $redirect_path .= "?field_story_syndication_value_op=all";
   }
 
-  if ($form_state['input']['op'] != 'Save as Draft') {
+  //if ($form_state['input']['op'] != 'Save as Draft') {
     $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
-  }
+  //}
 }
 
 /**
@@ -722,8 +722,16 @@ function itg_photogallery_node_view($node, $view_mode, $langcode) {
               });
            });", array('type' => 'inline', 'scope' => 'footer'));
     }
-
+    
+   
     if ($node->type == "photogallery") {
+      
+         // This is for hiding a specific RHS1 block for photo
+        drupal_add_js("jQuery(document).ready(function(){
+jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
+});", array('type' => 'inline', 'scope' => 'footer')); 
+
+      
       // Views render on video template
       if (!empty($_GET['category']) && !empty($_GET['sid'])) {
         $view_output = views_embed_view('photo_list_of_category', 'block_1');
