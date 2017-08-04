@@ -916,7 +916,7 @@ div.form-type-password-confirm{
 }
 [id*="user-register-form"], [id*="user-profile-form"]{
   h2{
-    background-color: #fefafb;
+    background-color: #d9d9d9;
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
     padding: 8px 20px;
@@ -945,15 +945,19 @@ div.form-type-password-confirm{
     }
   }
   .form-actions{
-    background-color: #fefafb;
-    border-bottom: 1px solid #d9d9d9;
-    border-top: 1px solid #d9d9d9;
-    margin: 15px 0;
-    padding: 15px 30px;
+    padding-left: 250px;
   }
   #edit-mimemail{
     @extend .hide;
   }
+}
+#clientsidevalidation-user-register-form-errors{
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px 0;
+    ul{
+      padding-left: 18px;
+    }
 }
 div.filefield-source .form-item{
   @extend .mr-0;
@@ -5086,6 +5090,9 @@ div.node{
         li{padding-top: 5px;}
       }
     }
+  }
+  fieldset{
+    margin-bottom: 10px;
   }
 }
 .main-cont{

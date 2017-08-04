@@ -1842,7 +1842,7 @@ div.form-type-password-confirm > .password-suggestions + .description {
 }
 
 [id*="user-register-form"] h2, [id*="user-profile-form"] h2 {
-  background-color: #fefafb;
+  background-color: #d9d9d9;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
   padding: 8px 20px;
@@ -1864,11 +1864,16 @@ div.form-type-password-confirm > .password-suggestions + .description {
   margin-top: 5px;
 }
 [id*="user-register-form"] .form-actions, [id*="user-profile-form"] .form-actions {
-  background-color: #fefafb;
-  border-bottom: 1px solid #d9d9d9;
-  border-top: 1px solid #d9d9d9;
-  margin: 15px 0;
-  padding: 15px 30px;
+  padding-left: 250px;
+}
+
+#clientsidevalidation-user-register-form-errors {
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px 0;
+}
+#clientsidevalidation-user-register-form-errors ul {
+  padding-left: 18px;
 }
 
 div.description, .pre-desc {
@@ -5667,6 +5672,9 @@ div.node #comments h2 {
 .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .item-list ul li,
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .item-list ul li, .view-manage-users [id*="views-form-photo-gallery-management-page"] .item-list ul li, .view-manage-users [id*="views-form-home-election-widget-election-graph-widget-contents"] .item-list ul li {
   padding-top: 5px;
+}
+.view-manage-users fieldset {
+  margin-bottom: 10px;
 }
 
 .main-cont .byline {
