@@ -370,7 +370,7 @@ function localChangePass($get_data, $uid){
     $pass2 = $get_data['pass2'];
     $msg = "";
     $data = array();
-    $account = user_load($uid);
+    $account = user_load_by_name($uname);
 
 
     $edit = array('pass' => $pass);
