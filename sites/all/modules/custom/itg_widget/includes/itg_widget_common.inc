@@ -107,10 +107,12 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
  * @param int $tid
  */
 function remove_state_term($tid) {
-  if ($tid) {
+  if ($tid) { 
+    $tid =  str_replace(',', "", $tid);
+    $tid =(int)$tid;
     taxonomy_term_delete($tid);
   }
-  drupal_set_message(t("Term Deleted"));
+  drupal_set_message(t("Term is Deleted"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 

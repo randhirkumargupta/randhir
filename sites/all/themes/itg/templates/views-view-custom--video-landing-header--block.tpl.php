@@ -152,6 +152,8 @@ $uri = base64_encode($actual_link);
                       if ($video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] == "migrated") {
                         if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                           $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+                          $video_kicker = get_video_kicker_by_nid($nid);
+                          
                         }
 
                         drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
@@ -230,7 +232,7 @@ $uri = base64_encode($actual_link);
                           </div>
 
                           <?php
-                          $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
+                          $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_kicker[0]->field_video_kicker_value) . '</p></li>';
                         }
                         $description_slider.='</ul></div>';
                         $newimageds.='</ul></div></div></div>';
