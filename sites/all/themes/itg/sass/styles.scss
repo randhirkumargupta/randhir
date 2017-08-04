@@ -1506,7 +1506,7 @@ footer{
 }
 .section-ordering{ 
     a{
-        display: block;
+        display: inline;
     }
     h3{
         padding: 10px 0;
@@ -12000,6 +12000,17 @@ span.close_btt {
 }
 .not-front .watch-right-now-video h3 {
     display: none;
+}
+span.see-picture{
+  a{
+    color: #a00606;
+    &:hover{
+      color: #a00606;
+    }
+    &:after{
+      content: ':';
+    }
+  }
 }
 
 @media (min-width: 320px) {
