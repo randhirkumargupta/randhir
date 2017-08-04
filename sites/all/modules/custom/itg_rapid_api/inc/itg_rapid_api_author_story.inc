@@ -69,7 +69,7 @@ function author_latest_storylist($author_id,$cpageno) {
     $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
     $query->leftJoin('field_data_field_story_rating', 'sr', 'sr.entity_id = n.nid');
 
-    $query->fields('n', array('nid', 'title', 'type', 'created'));
+    $query->fields('n', array('nid', 'title', 'type', 'created','changed'));
     $query->fields('td', array('tid', 'name'));
     $query->fields('sk', array('field_story_kicker_text_value'));
     $query->fields('si', array('field_story_small_image_fid'));
@@ -88,6 +88,7 @@ function author_latest_storylist($author_id,$cpageno) {
 
 
     $news = array();
+    $news2 = array();
     foreach ($result as $k => $res) {
 
         $comment_cont = getCommentsCount($res['nid']);
@@ -131,9 +132,9 @@ function author_latest_storylist($author_id,$cpageno) {
         $news['n_updated_datetime'] = "$changed_datetime";
         $news2[] = $news;
     }
-
+    
     $data['data'] = $news2;
-    $data['lcount'] = count($result);
+    $data['lcount'] = count($news2);
     return $data;
 }
 
@@ -173,6 +174,7 @@ function author_popular_storylist($author_id,$cpageno) {
     arsort($popular_res);
 
     $news = array();
+    $news2 = array();
     foreach ($popular_res as $pop_res_k => $pop_res_v) {
 
         $query = db_select('node', 'n');
@@ -187,7 +189,7 @@ function author_popular_storylist($author_id,$cpageno) {
         $query->leftJoin('field_data_field_story_rating', 'sr', 'sr.entity_id = n.nid');
         //$query->leftJoin('itg_lrp_loyalty_points', 'lp', 'lp.node_id = n.nid');
 
-        $query->fields('n', array('nid', 'title', 'type', 'created'));
+        $query->fields('n', array('nid', 'title', 'type', 'created','changed'));
         $query->fields('td', array('tid', 'name'));
         $query->fields('sk', array('field_story_kicker_text_value'));
         $query->fields('si', array('field_story_small_image_fid'));
@@ -268,25 +270,28 @@ function author_detail_data($author_id) {
     $query->condition('occ.field_celebrity_pro_occupation_tid', 285750); //Author term id
     $query->condition('n.type', 'reporter');
     $result = $query->execute()->fetchAssoc();
-
+ 
     $num_of_results = count($result);
-
+  
     if ($num_of_results > 1) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
+        
+          $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
+          $data_array['title'] = isset($result['title']) ? $result['title'] : '';
+          $data_array['profile_image'] = completeFilePath($result['field_story_extra_large_image_fid']);
+          $data_array['follower_count'] = '';
+          $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
+          $data_array['location'] = '';
+          $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
+    
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
+        $data_array = array();
     }
 
-    $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
-    $data_array['title'] = isset($result['title']) ? $result['title'] : '';
-    $data_array['profile_image'] = completeFilePath($result['field_story_extra_large_image_fid']);
-    $data_array['follower_count'] = '';
-    $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
-    $data_array['location'] = '';
-    $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
-
+    
     $output_array['data'] = $data_array;
     return $output_array;
 }
@@ -318,30 +323,26 @@ function anchor_detail_data($anchor_id) {
     $query->condition('occ.field_celebrity_pro_occupation_tid', 285903); //Anchor term id
     $query->condition('n.type', 'reporter');
     $result = $query->execute()->fetchAssoc();
-    $num_of_results = count($result);
 
-//print_r($result);
-//exit();
-// list array building
-//  $anchor_load = node_load($anchor_id);
-//  $anchor_profile_fid = $anchor_load->field_story_extra_large_image['und'][0]['fid'];
-//  $occupation_list = $anchor_load->field_celebrity_pro_occupation['und'];
+    $num_of_results = count($result);
 
     if ($num_of_results > 1) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
+        
+        $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
+        $data_array['title'] = isset($result['title']) ? $result['title'] : '';
+        $data_array['profile_image'] = completeFilePath($result['field_story_extra_large_image_fid']);
+        $data_array['follower_count'] = '';
+        $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
+        $data_array['location'] = '';
+        $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
+    
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
+        $data_array = array();
     }
-
-    $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
-    $data_array['title'] = isset($result['title']) ? $result['title'] : '';
-    $data_array['profile_image'] = completeFilePath($result['field_story_extra_large_image_fid']);
-    $data_array['follower_count'] = '';
-    $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
-    $data_array['location'] = '';
-    $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
 
     $output_array['data'] = $data_array;
     return $output_array;
@@ -526,6 +527,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
    $prog = array();
+   $prog2 = array();
    foreach ($result as $k => $res) {
 
      $comment_cont = getCommentsCount($res['nid']);
@@ -644,7 +646,8 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
    //Sort Desc by total analytics count
     arsort($popular_res);
     $prog = array();
-
+    $prog2 = array();
+    
   foreach ($popular_res as $pop_res_k => $pop_res_v) {
      
    $query = db_select('node', 'n');
