@@ -3787,11 +3787,6 @@ function anchor_programm_list($token, $anchor_id, $type) {
     $story_type = $_GET['type'];
     $cpageno = $_GET['cpageno'];
 
-    //valid id
-    $anchor_id = $_GET['anchor_id'];
-    $story_type = $_GET['type'];
-    $cpageno = $_GET['cpageno'];
-
     if (!is_numeric($anchor_id)) {
         $id = 0;
     }
@@ -3809,19 +3804,20 @@ function anchor_programm_list($token, $anchor_id, $type) {
     } else {
         $type = '';
     }
-    $suffix = $anchor_id_ . $cpageno;
+    $suffix = $anchor_id.'_'.$cpageno;
     $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
+
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = anchor_programm_data_list($anchor_id, $type, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+//        $ttl = '15';//DEFAULT_REDIS_EXPIRE_TIME;
+//        $result_set = setRedis($redis_key, $jsondata, $ttl);
+//    }
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;

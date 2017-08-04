@@ -56,7 +56,7 @@ function author_latest_storylist($author_id,$cpageno) {
     }
     
     $data = array();
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("story");
 
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
@@ -93,13 +93,19 @@ function author_latest_storylist($author_id,$cpageno) {
         $comment_cont = getCommentsCount($res['nid']);
         $changed = $res['changed'];
         $n_view_count = getNodeViewCount($res['nid']);
+        $nid = $res['nid'];
         
         $n_share_count = getNodeShareCount($res['nid']);
         $file_small_img_url = file_create_url($res['uri']);
         $file_large_img_url = file_create_url($res['li_file_uri']);
+        $type = $res['type'];
+        $node_title = $res['title'];
+        $short_desc = isset($res['field_story_kicker_text_value']) ? $res['field_story_kicker_text_value'] : '';
 
         $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
         $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+        $term_id = $res['tid'];
+        $term_name = $res['name'];
 
         if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
@@ -107,21 +113,21 @@ function author_latest_storylist($author_id,$cpageno) {
             $changed_datetime = "";
         }
 
-        $news['n_id'] = $res['nid'];
-        $new['n_type'] = $res['type'];
+        $news['n_id'] = "$nid";
+        $news['n_type'] = "$type";
         $news['n_is_sponsored'] = "";
         $news['n_share_link'] = get_node_firebase_weburl($res['nid']);
-        $news['n_title'] = $res['title'];
-        $news['n_short_desc'] = $res['field_story_kicker_text_value'];
-        $news['n_pcategory_id'] = $res['tid'];
-        $news['n_pcategory_name'] = $res['name'];
+        $news['n_title'] = "$node_title";
+        $news['n_short_desc'] = "$short_desc";
+        $news['n_pcategory_id'] = "$term_id";
+        $news['n_pcategory_name'] = "$term_name";
 
         $news['n_rating'] = isset($res['field_story_rating_value']) ? $res['field_story_rating_value'] : '';
         $news['n_comment_count'] = "$comment_cont";
-        $news['n_share_count'] = $n_share_count;
+        $news['n_share_count'] = "$n_share_count";
         $news['n_view_count'] = "$n_view_count";
-        $news['n_small_image'] = $file_small_img_url;
-        $news['n_large_image'] = $file_large_img_url;
+        $news['n_small_image'] = "$file_small_img_url";
+        $news['n_large_image'] = "$file_large_img_url";
         $news['n_updated_datetime'] = "$changed_datetime";
         $news2[] = $news;
     }
@@ -147,7 +153,7 @@ function author_popular_storylist($author_id,$cpageno) {
         $range_min = 0;
     }
 
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("story");
     $data = array();
 
     $query = db_select('node', 'n');
@@ -203,28 +209,34 @@ function author_popular_storylist($author_id,$cpageno) {
             $changed = $res['changed'];
             $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
             $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
-
+            $node_id = $res['nid'];
+            $node_type = $res['type'];
+            $node_title = $res['title'];
+            $node_short_desc = isset($res['field_story_kicker_text_value']) ? $res['field_story_kicker_text_value'] : '';
+            $term_id = $res['tid'];
+            $term_name = $res['name'];
+            
             if ($changed) {
                 $changed_datetime = date("Y-m-d H:i:s", $changed);
             } else {
                 $changed_datetime = "";
             }
 
-            $news['n_id'] = $res['nid'];
-            $news['n_type'] = $res['type'];
+            $news['n_id'] = "$node_id";
+            $news['n_type'] = "$node_type";
             $news['n_is_sponsored'] = "";
             $news['n_share_link'] = get_node_firebase_weburl($res['nid']);
-            $news['n_title'] = $res['title'];
-            $news['n_short_desc'] = $res['field_story_kicker_text_value'];
-            $news['n_pcategory_id'] = $res['tid'];
-            $news['n_pcategory_name'] = $res['name'];
+            $news['n_title'] = "$node_title";
+            $news['n_short_desc'] = "$node_short_desc";
+            $news['n_pcategory_id'] = "$term_id";
+            $news['n_pcategory_name'] = "$term_name";
 
             $news['n_rating'] = isset($res['field_story_rating_value']) ? $res['field_story_rating_value'] : '';
             $news['n_comment_count'] = "$comment_cont";
-            $news['n_share_count'] = $n_share_count;
+            $news['n_share_count'] = "$n_share_count";
             $news['n_view_count'] = "$n_view_count";
-            $news['n_small_image'] = $file_small_img_url;
-            $news['n_large_image'] = $file_large_img_url;
+            $news['n_small_image'] = "$file_small_img_url";
+            $news['n_large_image'] = "$file_large_img_url";
             $news['n_updated_datetime'] = "$changed_datetime";
             $news2[] = $news;
         }
@@ -547,9 +559,15 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $source_type = $res['field_story_source_type_value'];
      $videotag = video_detail_formats($res['nid'],$source_type);
      $filesize = $videotag['dailymotion']['filsize'];
-
+     
+     
      $load_collection = field_collection_item_load($res['field_video_upload_value']);
      $show_add = $load_collection->field_include_ads['und'][0]['value'];
+     if($show_add == 'yes'){
+       $show_add = '1';
+     }else{
+       $show_add = '0';
+     }
      $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
      $primary_cat = $res['field_primary_category_value'];
      $prim_cat = taxonomy_term_load($primary_cat);
@@ -577,8 +595,12 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_share_count'] = "$n_share_count";
      $prog['p_share_url'] = get_node_firebase_weburl($res['nid']);
      $prog['p_updated_datetime'] = "$changed_datetime";
-     $prog['p_duration'] = $res['field_video_duration_value'];
-     $prog['p_show_ad'] = isset($show_add) ? $show_add : '';
+     $dur = explode(':', $res['field_video_duration_value']);
+     $duration_sec = $dur[0]*60 + $dur[1]; 
+     
+     $prog['p_duration'] = "$duration_sec";
+     
+     $prog['p_show_ad'] = isset($show_add) ? $show_add : '0';
      $prog['p_subcategory_id'] = isset($prim_cat->tid) ? $prim_cat->tid : '';
      $prog['p_subcategory_title'] = isset($prim_cat->name) ? $prim_cat->name : '';
      $prog['p_program_size'] = $filesize;
@@ -690,6 +712,11 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
 
      $load_collection = field_collection_item_load($res['field_video_upload_value']);
      $show_add = $load_collection->field_include_ads['und'][0]['value'];
+     if($show_add == 'yes'){
+       $show_add = '1';
+     }else{
+       $show_add = '0';
+     }
      $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
      $primary_cat = $res['field_primary_category_value'];
      $prim_cat = taxonomy_term_load($primary_cat);
@@ -717,8 +744,13 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_share_count'] = "$n_share_count";
      $prog['p_share_url'] = get_node_firebase_weburl($res['nid']);
      $prog['p_updated_datetime'] = "$changed_datetime";
+     
+     $dur = explode(':', $res['field_video_duration_value']);
+     $duration_sec = $dur[0]*60 + $dur[1]; 
+     $prog['p_duration'] = "$duration_sec";
+     
      $prog['p_duration'] = $res['field_video_duration_value'];
-     $prog['p_show_ad'] = isset($show_add) ? $show_add : '';
+     $prog['p_show_ad'] = isset($show_add) ? $show_add : '0';
      $prog['p_subcategory_id'] = isset($prim_cat->tid) ? $prim_cat->tid : '';
      $prog['p_subcategory_title'] = isset($prim_cat->name) ? $prim_cat->name : '';
      $prog['p_program_size'] = $filesize;
