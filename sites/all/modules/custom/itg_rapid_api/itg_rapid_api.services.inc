@@ -3154,7 +3154,7 @@ function itg_rapid_api_change_password($token, $user_id) {
     if($result_obj->uid){
         $local_obj = localChangePass($_GET, $result_obj->uid);
         $data['status_code'] = "1";
-        $data['status_message'] = "Please check your mobile for otp";
+        $data['status_message'] = "customised_message";
     }
     else{
         $data['status_code'] = "0";
