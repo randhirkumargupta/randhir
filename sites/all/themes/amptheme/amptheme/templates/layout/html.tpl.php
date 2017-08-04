@@ -541,7 +541,7 @@
       .fun-facts{float: left;}
       .factoids-page .social-share{height: 22px;}
       .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: left;left: 5px;}
-      .factoids-page .social-share ul{list-style: none; top: -24px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share ul{list-style: none; top: -24px; left: 120px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
       .quotes {
