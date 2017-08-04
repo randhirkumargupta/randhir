@@ -35,7 +35,7 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
 
     $data_array['author_id'] = "$author_id";
     $data_array['news_count'] = "$datacount";
-    $data_array['news_display_count'] = "0";
+    $data_array['news_display_count'] = "10";
     $data_array['news_pagination_cap'] = "10";
 
 
@@ -473,7 +473,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
 
     $data_array['program_count'] = "$datacount";
     $data_array['program_display_count'] = "10";
-    $data_array['program_pagination_cap'] = "0";
+    $data_array['program_pagination_cap'] = "10";
 
     $data_array['program'] = $data['data'];
     $output_array['data'] = $data_array;

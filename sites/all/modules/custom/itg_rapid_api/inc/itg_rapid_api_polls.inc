@@ -378,8 +378,8 @@ function poll_close_datalist($res) {
     $options2 = array();
     $options = array();
     foreach ($result_option as $p => $pv) {
-        $options['o_id'] = $pv['field_poll_answer_value'];
-        $options['o_title'] = $pv['field_poll_answer_text_value'];
+        $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+        $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : '';
         $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
         $options2[] = $options;
     }
@@ -426,7 +426,6 @@ function poll_detail_datalist($poll_id) {
     $query->condition('n.type', 'poll');
     //$query->condition('n.status','1');
     $query->condition('n.nid', $poll_id);
-
     $query->range(0, 2);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -454,12 +453,11 @@ function poll_detail_datalist($poll_id) {
             $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
             $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
             $options2[] = $options;
-         
         }
 
-        $count_total_patic = itg_poll_getTotalPoll($res['nid']);
-        $poll_id = $res['nid'];
-        $poll_publish_date_time = $res['field_poll_start_date_value'];
+        $count_total_partic = itg_poll_getTotalPoll($res['nid']);
+        $poll_id = isset($res['nid']) ? $res['nid'] : "";
+        $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
         $poll_title = $res['title'];
 
         $news['p_id'] = "$poll_id";
@@ -470,7 +468,7 @@ function poll_detail_datalist($poll_id) {
         $news['p_title'] = "$poll_title";
         $news['p_image'] = "$poll_ques_img";
         $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-        $news['total_participants'] = "$count_total_patic";
+        $news['total_participants'] = "$count_total_partic";
 
         $news['p_option'] = $options2;
         $news2[] = $news;
