@@ -180,6 +180,12 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
   );
 
+  $form['solr_server_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr server url'),
+    '#default_value' => variable_get('solr_server_url'),
+  );
+  
   $form['solr_url_config'] = array(
     '#type' => 'textarea',
     '#title' => t('Solr urlconfig'),

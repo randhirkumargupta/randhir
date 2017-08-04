@@ -1909,7 +1909,7 @@ footer .multiple-items-footer i.slick-next {
 }
 
 .section-ordering a {
-  display: block;
+  display: inline;
 }
 .section-ordering h3 {
   padding: 10px 0;
@@ -14766,6 +14766,20 @@ span.close_btt {
 .canvasjs-chart-tooltip > div img {
   display: block;
   margin-top: 5px;
+}
+
+.not-front .watch-right-now-video h3 {
+  display: none;
+}
+
+span.see-picture a {
+  color: #a00606;
+}
+span.see-picture a:hover {
+  color: #a00606;
+}
+span.see-picture a:after {
+  content: ':';
 }
 
 @media (min-width: 320px) {
