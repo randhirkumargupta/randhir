@@ -3139,7 +3139,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $data['status_message'] = "";
     $data['data']['user_id'] = "$uname";
     $data['data']['is_authenticated'] = "1";
-    $data['data']['auth_token'] = "authToken";
+    $data['data']['auth_token'] = "";
 
     return $data;
 }
@@ -3181,9 +3181,8 @@ function itg_rapid_api_change_password($token, $user_id) {
     if($result_obj->uid){
         $local_obj = localChangePass($_GET, $result_obj->uid);
         $data['status_code'] = "1";
-        $data['status_message'] = "";
-    }
-    else{
+        $data['status_message'] = "customised_message";
+    } else {
         $data['status_code'] = "0";
         $data['status_message'] = "customised_message";
     }
