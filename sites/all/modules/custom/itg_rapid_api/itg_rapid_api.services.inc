@@ -3418,14 +3418,13 @@ function itg_rapid_api_edit_user_image($token) {
  */
 function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
-    $authtoken_id = $_GET['authtoken_id']; 
+    $authtoken_id = $_GET['authtoken_id'];
     $user_id = $_GET['user_id'];
-    $token = $_GET['authtoken_id'];    
+    $token = $_GET['authtoken_id'];
     if (!drupal_valid_token($token, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
-    }
-    else{
+    } else {
         $account = user_load_by_name($user_id);
         //$user_id = $account->uid;
         $first_name = $account->field_first_name['und'][0]['value'];
@@ -3433,17 +3432,28 @@ function itg_rapid_api_get_login_user_detail($token) {
         $email_id = $account->mail;
         $phone_number = $account->field_mobile_number['und'][0]['value'];
         $location = "";
-        if ($account->field_personalization_city['und'][0]['value']) {
-            $location .= $account->field_personalization_city['und'][0]['value'];
+        
+        
+        if ($account->field_user_counrty['und'][0]['tid']) {
+            //$location .= $account->field_user_counrty['und'][0]['tid'];
+            $term = taxonomy_term_load($account->field_user_counrty['und'][0]['tid']);
+            $name = $term->name;
+            $location .= ", " . $name;
         }
-        if ($account->field_personalization_state['und'][0]['value']) {
-            $location .= ", " . $account->field_personalization_state['und'][0]['value'];
+        if ($account->field_personalization_state['und'][0]['tid']) {
+            $term = taxonomy_term_load($account->field_personalization_state['und'][0]['tid']);
+            $name = $term->name;
+            $location .= ", " . $name;
         }
-        if ($account->field_user_counrty['und'][0]['value']) {
-            $location .= ", " . $account->field_user_counrty['und'][0]['value'];
+        if ($account->field_personalization_city['und'][0]['tid']) {
+            //$location .= ", " . $account->field_personalization_city['und'][0]['tid'];
+            $term = taxonomy_term_load($account->field_personalization_city['und'][0]['tid']);
+            $name = $term->name;
+            $location .= ", " . $name;
         }
         if ($account->field_short_description['und'][0]['value']) {
             $location .= ", " . $account->field_short_description['und'][0]['value'];
+            
         }
 
         $profile_image = $account->field_user_picture['und'][0]['fid'];
