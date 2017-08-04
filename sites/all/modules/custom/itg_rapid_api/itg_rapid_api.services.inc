@@ -2842,18 +2842,19 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-        $is_first_login = 1;
-        if ($field_logged_in_count > 0) {
-            $is_first_login = 0;
-        }
+        
 
         if ($uid) {
             $local_account = localSignup($_GET);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
-            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
             $auth_token = $local_account->token;
+            $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
             if ($auth_token) {
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
@@ -2893,18 +2894,19 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-        $is_first_login = 1;
-        if ($field_logged_in_count > 0) {
-            $is_first_login = 0;
-        }
+       
 
         if ($uid) {
             $local_account = fblogin($data);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
-            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
             $auth_token = $local_account->token;
+             $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
             if ($auth_token) {
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
@@ -2944,18 +2946,19 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-        $is_first_login = 1;
-        if ($field_logged_in_count > 0) {
-            $is_first_login = 0;
-        }
+        
 
         if ($uid) {
             $local_account = twtlogin($data);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
-            $is_first_login = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
             $auth_token = $local_account->token;
+            $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
             if ($auth_token) {
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
@@ -3181,7 +3184,7 @@ function itg_rapid_api_change_password($token, $user_id) {
     if($result_obj->uid){
         $local_obj = localChangePass($_GET, $result_obj->uid);
         $data['status_code'] = "1";
-        $data['status_message'] = "customised_message";
+        $data['status_message'] = "";
     } else {
         $data['status_code'] = "0";
         $data['status_message'] = "customised_message";
