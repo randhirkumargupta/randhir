@@ -3205,7 +3205,7 @@ function author_latest_story($token) {
         // call function from return data..
         $jsondata = author_story_list($author_id, $story_type, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = '10';
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 

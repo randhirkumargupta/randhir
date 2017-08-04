@@ -603,7 +603,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_show_ad'] = isset($show_add) ? $show_add : '0';
      $prog['p_subcategory_id'] = isset($prim_cat->tid) ? $prim_cat->tid : '';
      $prog['p_subcategory_title'] = isset($prim_cat->name) ? $prim_cat->name : '';
-     $prog['p_program_size'] = $filesize;
+     $prog['p_program_size'] = isset($filesize) ? "$filesize" : '';
      $prog['p_anchor_id'] = "$anchor_id";
 
      $prog2[] = $prog;
@@ -753,7 +753,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_show_ad'] = isset($show_add) ? $show_add : '0';
      $prog['p_subcategory_id'] = isset($prim_cat->tid) ? $prim_cat->tid : '';
      $prog['p_subcategory_title'] = isset($prim_cat->name) ? $prim_cat->name : '';
-     $prog['p_program_size'] = $filesize;
+     $prog['p_program_size'] = isset($filesize) ? "$filesize" : "";
      $prog['p_anchor_id'] = "$anchor_id";
 
      $prog2[] = $prog;
