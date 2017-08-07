@@ -85,6 +85,9 @@
             if ($index > 2) {
               ?>
               <li title="<?php echo strip_tags($desc); ?>">
+              <?php if (_is_sponsor_story_article($row['nid'])):?>
+                <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+              <?php endif; ?>
               <?php
                 if (function_exists('itg_common_get_smiley_title')) {
                   echo l(itg_common_get_smiley_title($row['nid'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));

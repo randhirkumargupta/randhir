@@ -398,3 +398,46 @@ function itg_html_head_alter(&$head_elements) {
     }
   }
 }
+
+/**
+ * Implementation of theme_link().
+ * {@inheritdoc}
+ * @param array $variables
+ * @return string
+ */
+function itg_link($variables) {
+  $url_path = $variables['path'];
+  // If internal url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }    
+  }
+  // If url alias is used.
+  elseif ((isset($url_path)) && (strpos(drupal_get_normal_path($url_path), 'node/' ) !== FALSE)) {
+    $normal_path = drupal_get_normal_path($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }
+  }
+  // If url is used with base url.
+  elseif ((isset($url_path)) && (strpos(_get_int_path_from_url($url_path), 'node/' ) !== FALSE)) {
+    $normal_path = _get_int_path_from_url($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }
+  }
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+}
