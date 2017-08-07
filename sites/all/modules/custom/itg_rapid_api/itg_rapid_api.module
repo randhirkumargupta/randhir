@@ -538,3 +538,22 @@ function callAPI($method, $url, $data = false){
 
 function itg_rapid_api_boot() {}
 
+// code for check POST method only start
+function checkReqMethod(){
+    
+   $req_method = $_SERVER['REQUEST_METHOD'];   
+   p($_SERVER);die();
+   $flag = 1;
+   if($req_method != "POST"){
+       $flag = 0;       
+       
+    }
+    else{
+        $flag = 1; 
+    }
+    
+    return $flag;
+   
+}
+// code for check POST method only end
+

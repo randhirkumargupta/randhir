@@ -2766,6 +2766,14 @@ function itg_rapid_api_homePage($token) {
 }
 
 function itg_rapid_api_testing($token) {
+    // code for check POST method only start   
+    $req_mth_flag = checkReqMethod();
+    if ($req_mth_flag == 0 || $req_mth_flag == "0") {
+        $data['status_code'] = "0";
+        $data['status_message'] = "Only Post Method Allowed for this API";
+        return $data;
+    }
+    // code for check POST method only end 
     $user = user_load(1989);
     echo "<pre>";
     print_r($user);
