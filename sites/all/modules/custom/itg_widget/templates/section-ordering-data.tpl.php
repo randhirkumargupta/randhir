@@ -1483,6 +1483,9 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     echo  "<span class='see-picture'>" .l($entity['field_photo_see_pic_link_value'] , "node/" . $nid ) . '</span>';
                   }
                 ?>
+              <?php if (_is_sponsor_story_article($nid)): ?>
+                <span class="itg-sponsor-section-title"><?php print t('SPONSORED'); ?></span>
+              <?php endif; ?>
               <?php 
               if (function_exists('itg_common_get_smiley_title')) {
                 echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE ));
