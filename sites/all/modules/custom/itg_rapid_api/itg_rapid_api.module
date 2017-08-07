@@ -542,7 +542,7 @@ function itg_rapid_api_boot() {}
 function checkReqMethod(){
     
    $req_method = $_SERVER['REQUEST_METHOD'];   
-   p($_SERVER);die();
+   //p($_SERVER);die();
    $flag = 1;
    if($req_method != "POST"){
        $flag = 0;       
