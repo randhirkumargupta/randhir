@@ -310,8 +310,8 @@ function generatePhotoDetailList($galleryimg) {
             //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
             //$fid = $fc->field_api_image['und'][0]['fid'];
             $fid = $fc->field_image_id['und'][0]['value'];
-            if(!$fid){
-                $fid = $fc->field_api_image['und'][0]['fid'];
+            if(!$fid > 0){
+                $fid = $fc->field_images['und'][0]['fid'];
             }
             $uri = $fc->field_images['und'][0]['filename'];
             $file_uri = file_create_url($uri);
