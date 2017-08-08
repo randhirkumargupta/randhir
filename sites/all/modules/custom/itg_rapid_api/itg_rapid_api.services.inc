@@ -3315,41 +3315,96 @@ function polls_close($token) {
  */
 function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
 
-    $poll_id = $_GET['poll_id'];
-    $option_id = $_GET['option_id'];
-    $user_id = $_GET['user_id'];
+  $poll_id = $_GET['poll_id'];
+  $option_id = $_GET['option_id'];
+  $user_id = $_GET['user_id'];
 
-    $ip_address = $_SERVER['SERVER_ADDR'];
-    if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
-        $device = 'iPhone';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
-        $device = 'Android';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
-        $device = 'webOS';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
-        $device = 'BlackBerry';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
-        $device = 'iPod';
-    } else {
-        $device = '';
-    }
+  $ip_address = $_SERVER['SERVER_ADDR'];
+  if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
+    $device = 'iPhone';
+  }
+  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
+    $device = 'Android';
+  }
+  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
+    $device = 'webOS';
+  }
+  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
+    $device = 'BlackBerry';
+  }
+  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
+    $device = 'iPod';
+  }
+  else {
+    $device = '';
+  }
 
 
-    if (!is_numeric($poll_id)) {
-        $poll_id = 0;
-    }
-    if (!is_numeric($option_id)) {
-        $option_id = 0;
-    }
-    if (!is_numeric($user_id)) {
-        $user_id = 0;
-    }
-    // call function from return data..
+  if (!is_numeric($poll_id)) {
+    $poll_id = 0;
+  }
+  if (!is_numeric($option_id)) {
+    $option_id = 0;
+  }
+  if (!is_numeric($user_id)) {
+    $user_id = 0;
+  }
+
+  // if status is 0 then poll is already closed , 
+  $poll_status = check_poll_status($poll_id);
+
+  // call function from return data..
+  if ($poll_status != '0') {
     $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
     $jsondata = json_encode($jsondata);
+  }
+  else {
+    $output_array = array();
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+    $output_array['data'] = array();
+    $jsondata = json_encode($output_array);
+  }
 
-    $jsondata = json_decode($jsondata, true);
-    return $jsondata;
+
+  $jsondata = json_decode($jsondata, true);
+  return $jsondata;
+}
+
+/*
+ * Common function for checking poll is open or close
+ * @param $poll_id
+ * return 0|1 , if return 0 then poll is closed , if return 1 then poll is open , 
+ */
+
+function check_poll_status($poll_id) {
+
+  $current_time = date('Y-m-d H:i:s', time());
+
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+  $query->fields('n', array('nid', 'title', 'type', 'changed'));
+  $query->fields('st', array('field_poll_start_date_value'));
+  $query->fields('ed', array('field_poll_end_date_value'));
+  $query->condition('n.type', 'poll');
+  $query->condition('st.field_poll_start_date_value', $current_time, '<');
+  $query->condition('n.status', '1');
+  $query->condition('n.nid', $poll_id);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  $poll_status = '0';
+  foreach ($result as $k => $res) {
+    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
+      $poll_status = '1';
+    }
+    else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
+      $poll_status = '1';
+    }
+  }
+  //if status is 1 then poll is open otherwise poll is closed
+
+  return $poll_status;
 }
 
 /**
