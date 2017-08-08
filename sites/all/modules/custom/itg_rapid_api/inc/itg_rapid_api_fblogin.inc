@@ -206,6 +206,8 @@ function localSignup($data) {
     $password = $data['password'];
     $login_type = $data['login_type'];
     $token_id = $data['token_id'];
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
+    $result = callAPI($method, $url, $data);
     $local_user = user_load_by_name($user_id);
     if (!$local_user->uid) {
         $form_state = array();
