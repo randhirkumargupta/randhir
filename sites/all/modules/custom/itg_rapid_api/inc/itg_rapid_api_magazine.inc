@@ -314,6 +314,9 @@ function magazineCoverstoriesPageRerourceValueList() {
             $data_list_array[$loop_count]['story'] = $story_list_data;
             $loop_count++;
         }
+        if($loop_count >= 10){
+            break;
+        }
     }
 
     $data['lcount'] = $loop_count;
