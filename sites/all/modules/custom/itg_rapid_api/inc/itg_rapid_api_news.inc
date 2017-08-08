@@ -117,6 +117,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+        $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -132,6 +133,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
+        $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
 
@@ -188,6 +190,9 @@ function generateNewsCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            $field_primary_category_value = $resvalue['field_primary_category_value'];
+            $term = taxonomy_term_load($field_primary_category_value);
+            $term_name = $term->name;
 
             $news_list_array[$listcount]['n_id'] = "$nid";
             $news_list_array[$listcount]['n_type'] = "$type";
@@ -195,7 +200,8 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
             $news_list_array[$listcount]['n_short_desc'] = "$field_story_kicker_text_value";
-            $news_list_array[$listcount]['n_primary_tag'] = "tag_name";
+            $news_list_array[$listcount]['n_pcategory_id'] = "$field_primary_category_value";
+            $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
             $news_list_array[$listcount]['n_rating'] = "";
             $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
             if ($type == "photogallery") {
