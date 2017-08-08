@@ -12848,7 +12848,7 @@ fieldset#edit-xmlsitemap {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 9999;
+  z-index: 9;
 }
 
 .browse-media-file .edit-image-info {
