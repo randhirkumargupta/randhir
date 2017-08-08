@@ -76,7 +76,14 @@ function poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device) {
 
   $dsp_result = itg_poll_get_display_result($poll_id);
   $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
-  if (isset($dsp_result)) {
+  
+  $check = db_select('itg_polls','itgp')
+            ->fields('itgp',array('Id'))
+            ->condition('itgp.nid',$poll_id)
+            ->condition('itgp.uId',$user_id)
+            ->execute()->fetchField();
+            
+  if ($check == '') {
     $query = db_insert('itg_polls')
         ->fields(array(
           'nId' => $poll_id,
@@ -88,15 +95,14 @@ function poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device) {
           'created' => date('Y-m-d H:i:s', time())
         ))
         ->execute();
-  }
-
-  if ($query) {
+    
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "customised_message ";
-  }
-  else {
+    
+  }else {
+    
     $output_array['status_code'] = "0";
-    $output_array['status_message'] = "customised_message";
+    $output_array['status_message'] = "You already cast poll on it";
   }
 
   $data = poll_cast_datalist($poll_id);
