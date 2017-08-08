@@ -3318,7 +3318,15 @@ function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
   $poll_id = $_GET['poll_id'];
   $option_id = $_GET['option_id'];
   $user_id = $_GET['user_id'];
+  $args = '0';
+  //Check args is exist
+  if(isset($poll_id) && isset($option_id) && isset($user_id)){
+    $args = '1';
+  }else{
 
+  }
+  
+  
   $ip_address = $_SERVER['SERVER_ADDR'];
   if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
     $device = 'iPhone';
@@ -3350,18 +3358,26 @@ function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
     $user_id = 0;
   }
 
-  // if status is 0 then poll is already closed , 
-  $poll_status = check_poll_status($poll_id);
-
-  // call function from return data..
-  if ($poll_status != '0') {
-    $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
-    $jsondata = json_encode($jsondata);
-  }
-  else {
+  // check args
+  if ($args != '0') {
+    
+    // if status is 0 then poll is already closed , 
+    $poll_status = check_poll_status($poll_id);
+    if($poll_status != '0'){
+      $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
+      $jsondata = json_encode($jsondata);
+    } else {
+      $output_array = array();
+      $output_array['status_code'] = "0";
+      $output_array['status_message'] = "Poll is already closed";
+      $output_array['data'] = array();
+      $jsondata = json_encode($output_array);
+    }
+    
+  }else{
     $output_array = array();
     $output_array['status_code'] = "0";
-    $output_array['status_message'] = "customised_message";
+    $output_array['status_message'] = "Arguments are missing";
     $output_array['data'] = array();
     $jsondata = json_encode($output_array);
   }

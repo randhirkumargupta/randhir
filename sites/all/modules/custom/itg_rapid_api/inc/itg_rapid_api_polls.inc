@@ -285,9 +285,11 @@ function open_poll_list($res) {
   $options2 = array();
 
   foreach ($result_option as $p => $pv) {
+    $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+    $options['o_count'] = "$total_voter";
     $options2[] = $options;
   }
 
@@ -386,9 +388,12 @@ function poll_close_datalist($res) {
   $options2 = array();
   $options = array();
   foreach ($result_option as $p => $pv) {
+    $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
+    
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : '';
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+    $options['o_count'] = "$total_voter";
     $options2[] = $options;
   }
 
@@ -457,9 +462,12 @@ function poll_detail_datalist($poll_id) {
     $options2 = array();
     $options = array();
     foreach ($result_option as $p => $pv) {
+      $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
+      
       $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
       $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
       $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+      $options['o_count'] = "$total_voter";
       $options2[] = $options;
     }
 
@@ -550,4 +558,21 @@ function poll_result($nid) {
     }
   }
   return $poll_options2;
+}
+
+/*
+ * Count the total voter of a specific poll_id and option_id
+ * @args1, $node_id or poll id
+ * $args2, $option_id   
+ * $return ,(int) total count
+ */
+
+function poll_voter_count($node_id, $option_id) {
+
+  $query = db_select('itg_polls', 'p');
+  $query->condition('p.nid', $node_id);
+  $query->condition('p.ansId', $option_id);
+  $query->addExpression('COUNT(p.id)', 'optionCnt');
+  $results = $query->execute()->fetchField();
+  return $results;
 }
