@@ -283,17 +283,36 @@ function getPhotolist($nid) {
     $lcont = 0;
     foreach ($galleryimg as $key => $value) {
 
-        $fc = field_collection_field_get_entity($value);
+        /*$fc = field_collection_field_get_entity($value);
         $fid = $fc->field_api_image['und'][0]['fid'];
         $fid_file = $fid;
         $img_url = completeFilePath($fid_file);
         // custom function for get img caption
         $caption = getImgCaption($fid);
         // custom function for get img byline
-        $byline = getImgByline($fid);
+        $byline = getImgByline($fid);*/
+       $fc = field_collection_field_get_entity($value);        
+      //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
+      $fid = $fc->field_image_id['und'][0]['value'];
+      if(!$fid > 0){
+                $fid = $fc->field_images['und'][0]['fid'];
+            }
+      $uri = $fc->field_images['und'][0]['filename'];
+      $file_uri = file_create_url($uri);
+      //$file_uri_fi = field_data_field_story_large_image($file_uri);
+      $fid_file = $fid;
+      $img_url = completeFilePath($fid_file);
+      // custom function for get img caption
+      //$caption = getImgCaption($fid);
+      $caption = $fc->field_image_caption['und'][0]['value'];
+      // custom function for get img byline
+      //$byline = getImgByline($fid);
+      $byline = $fc->field_credit['und'][0]['value'];
+      $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
 
         $photolist_loop[$lcont]['np_id'] = "$fid";
-        $photolist_loop[$lcont]['np_image'] = "$img_url";
+        $photolist_loop[$lcont]['np_image'] = "$photo_story_img";
         $photolist_loop[$lcont]['np_credit'] = "$byline";
         $photolist_loop[$lcont]['np_caption'] = "$caption";
         $lcont++;
