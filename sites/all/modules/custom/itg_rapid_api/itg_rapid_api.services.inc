@@ -2839,7 +2839,7 @@ function itg_rapid_api_testing($token) {
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
     $params = $_POST;
     //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //p($params);die();
+    p($params);die();
     $login_type = 0;
     $login_type = $params['login_type'];
     if ($login_type < 0 || $login_type > 2) {
