@@ -4915,27 +4915,27 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc a {
   margin-top: 80px;
   position: relative;
 }
-.career-graph .career-graph-data .gray-bg, .career-graph .career-graph-data .black-bg {
-  background: #dedede;
+.career-graph .career-graph-data .gray-bg {
+  background-color: #dedede;
   color: #000;
   font-family: roboto;
   font-size: 17px;
   font-weight: 500;
-  padding: 20px;
+  padding: 17px 20px;
   text-align: right;
   text-transform: uppercase;
 }
 .career-graph .career-graph-data .black-bg {
-  background: #000 none repeat scroll 0 0;
+  background-color: #2a2a2a;
   color: #fff;
   font-size: 24px;
-  padding: 28px 20px 28px 190px;
-  text-align: left;
+  font-family: roboto;
+  font-weight: 500;
+  padding: 19px 20px 19px 195px;
   line-height: 28px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: right;
 }
 .career-graph .career-graph-data img {
   position: absolute;
