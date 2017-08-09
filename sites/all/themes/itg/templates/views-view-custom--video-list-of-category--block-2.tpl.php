@@ -20,7 +20,7 @@
 
       <span class="posted-on"><?php print $row['created']; ?></span>
       <p title="<?php print strip_tags($row['title']); ?>">
-    <?php print l($row['title'], 'node/' . $row['nid_1']); ?>
+    <?php print html_entity_decode(l($row['title'], 'node/' . $row['nid_1'])); ?>
       </p>
       </div>
     </li>
