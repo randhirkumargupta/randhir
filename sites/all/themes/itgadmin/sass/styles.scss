@@ -12173,3 +12173,8 @@ fieldset#edit-xmlsitemap{
     float: right;
     margin-left: 10px;
 }
+[id*="views-exposed-form-sold-item-history-page"]{
+  .views-widget-filter-created > label, .views-widget-filter-created .description {
+    display: none !important;
+  }
+}
