@@ -782,7 +782,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -790,39 +790,35 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'user email or mobile',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'password',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'password'),
-                            'source' => array('data'),
                             'description' => 'user password',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'login_type',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'login_type'),
-                            'source' => array('data'),
                             'description' => 'is_first_login (with value 0 or 1) ',
-                            'type' => 'array',
+                            'type' => 'int',
                         ),
                         array(
                             'name' => 'token_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'token_id'),
-                            'source' => array('data'),
                             'description' => 'Here token_id is social media token id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -831,7 +827,7 @@ function itg_rapid_api_resource() {
         // signup custom resource declaration.....
         'signup' => array(
             'operations' => array(
-                'create' => array(
+                'retrieve' => array(
                     'help' => 'Retrieves storydetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -845,7 +841,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -853,57 +849,51 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'first_name',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'First Name',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'last_name',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'last_name'),
-                            'source' => array('data'),
                             'description' => 'Last Name',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'User email or mobile number',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'password',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'password'),
-                            'source' => array('data'),
                             'description' => 'Password',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'login_type',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'login_type'),
-                            'source' => array('data'),
                             'description' => '0=for traditional, 1=socail media',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'token_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'token_id'),
-                            'source' => array('data'),
                             'description' => 'Social Media token_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1060,7 +1050,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1068,12 +1058,11 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'user mobile or email',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1096,7 +1085,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1104,21 +1093,19 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'user mobile or email',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'otp_code',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'otp_code',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1141,7 +1128,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1149,12 +1136,11 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'user mobile or email',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1177,7 +1163,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1185,30 +1171,27 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'user mobile or email',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'pass',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'password',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'pass2',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'user_id'),
-                            'source' => array('data'),
                             'description' => 'confirm password',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1390,7 +1373,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1398,39 +1381,35 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'authtoken_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'authtoken_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'first_name',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'first_name',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'last_name',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'last_name',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
 //                        array(
 //                            'name' => 'email_id',
@@ -1450,48 +1429,43 @@ function itg_rapid_api_resource() {
 //                        ),
                         array(
                             'name' => 'country',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'country',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'state',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'state',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'city',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'city',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'zipcode',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'zipcode',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'address',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'address',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
 //                        array(
 //                            'name' => 'profile_image',
@@ -1503,21 +1477,19 @@ function itg_rapid_api_resource() {
 //                        ),
                         array(
                             'name' => 'gender',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'gender',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'date_of_birth',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'date_of_birth',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -1591,7 +1563,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1599,27 +1571,25 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'authtoken_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'authtoken_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
             ),
         ),
-        // log_out custom resource declaration.....
+        // get_login_user_detail custom resource declaration.....
         'log_out' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -1636,7 +1606,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'array',
+                            'type' => 'string',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1644,12 +1614,11 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => TRUE,
-                            //'source' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
                             //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'array',
+                            'type' => 'string',
                         ),
                     ),
                 ),
@@ -2835,12 +2804,33 @@ function itg_rapid_api_testing($token) {
  * @return array
  * 	The node processed information array.
  */
+//return services_error(t('Node type cannot be changed'), 406);
+function itg_rapid_api_login_request_bk($token, $user_id, $password, $login_type, $token_id) {
 
+    /* $filename = "http://localhost/decode/sprint3/login_request.json";
+      $jsondata = file_get_contents($filename);
+      $jsondata = json_decode($jsondata, true);
+      return $jsondata; */
+    //echo "<pre>"; print_r($_GET);echo "</pre>"; exit();
+    $resp = array();
+    $user_id = $_GET['user_id'];
+    $password = $_GET['password'];
+    // login sso user user
+    $form_state = array();
+    $form_state['values']['name'] = $user_id;
+    $form_state['values']['pass'] = $password;
+    $form_state['values']['op'] = t('Log in');
+    $resp = drupal_form_submit('user_login_form', $form_state);
+    $resp = form_get_errors();
+    echo "<pre>";
+    print_r($_GET);
+    echo "</pre>";
+    exit();
+}
 
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $login_type = 0;
-    $login_type = $params['login_type'];
+    $login_type = $_GET['login_type'];
     if ($login_type < 0 || $login_type > 2) {
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
         $account = array();
@@ -2851,10 +2841,10 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     // for traditional login
     if ($login_type == 0) {
         $method = "GET";
-        $data = $params;
+        $data = $_GET;
         $account = array();
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
-        $result = callAPI($method, $url, $params);
+        $result = callAPI($method, $url, $_GET);
         $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->uid;
@@ -2863,7 +2853,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         
 
         if ($uid) {
-            $local_account = localSignup($params);
+            $local_account = localSignup($_GET);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
@@ -2896,13 +2886,13 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
 
         $data = array();
         $password = rand(0, 9999);
-        //$_GET['password'] = $password;
-        $data['token'] = $params['token_id'];
-        $data['app_id'] = $params['app_id'];
-        $data['uname'] = $params['user_id'];
-        $data['uid'] = $params['user_id'];
-        $data['issued_at'] = $params['issued_at'];
-        $data['expires_at'] = $params['expires_at'];
+        $_GET['password'] = $password;
+        $data['token'] = $_GET['token_id'];
+        $data['app_id'] = $_GET['app_id'];
+        $data['uname'] = $_GET['user_id'];
+        $data['uid'] = $_GET['user_id'];
+        $data['issued_at'] = $_GET['issued_at'];
+        $data['expires_at'] = $_GET['expires_at'];
         $data['password'] = $password;
         $account = array();
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
@@ -2948,13 +2938,13 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
 
         $data = array();
         $password = rand(0, 9999);
-        //$_GET['password'] = $password;
-        $data['token'] = $params['token_id'];
-        $data['app_id'] = $params['app_id'];
-        $data['uname'] = $params['user_id'];
-        $data['uid'] = $params['user_id'];
-        $data['issued_at'] = $params['issued_at'];
-        $data['expires_at'] = $params['expires_at'];
+        $_GET['password'] = $password;
+        $data['token'] = $_GET['token_id'];
+        $data['app_id'] = $_GET['app_id'];
+        $data['uname'] = $_GET['user_id'];
+        $data['uid'] = $_GET['user_id'];
+        $data['issued_at'] = $_GET['issued_at'];
+        $data['expires_at'] = $_GET['expires_at'];
         $data['password'] = $password;
         $account = array();
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
@@ -3007,7 +2997,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
  */
 function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
     // check duplicate user
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
     $method = "GET";
     $data = array();
     $account_err = array();
@@ -3023,13 +3013,13 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     } else {
 
         $method = "GET";
-        $data = $params;
+        $data = $_GET;
         $account = array();
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/signup";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = $result_obj->uid;
-        $uname = $params['user_id'];
+        $uname = $_GET['user_id'];
 
         if ($uid) {
             $account['status_code'] = "1";
@@ -3038,7 +3028,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
             $account['data']['is_authenticated'] = "1";
             $account['data']['otp_status'] = "0";
         } else {
-            watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
+            watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $_GET['user_id']));
             $account['status_code'] = "0";
             $account['status_message'] = "Duplicate sign up request";
         }
@@ -3132,9 +3122,8 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
 function itg_rapid_api_forgot_password($token, $user_id) {
 
     $method = "GET";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
-    $result = callAPI($method, $url, $params);
+    $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
     $data['status_code'] = "1";
     $data['status_message'] = "";
@@ -3153,11 +3142,10 @@ function itg_rapid_api_forgot_password($token, $user_id) {
 function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
 
     $method = "GET";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
-    $result = callAPI($method, $url, $params);
+    $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
-    $uname = $params['user_id'];
+    $uname = $_GET['user_id'];
     $data['status_code'] = "1";
     $data['status_message'] = "";
     $data['data']['user_id'] = "$uname";
@@ -3177,9 +3165,8 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
  */
 function itg_rapid_api_resend_otp($token, $user_id) {
     $method = "GET";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
-    $result = callAPI($method, $url, $params);
+    $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
 
     $data['status_code'] = "1";
@@ -3198,14 +3185,12 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  */
 function itg_rapid_api_change_password($token, $user_id) {
     $method = "GET";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);die();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
-    $result = callAPI($method, $url, $params);
+    $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
     
     if($result_obj->uid){
-        $local_obj = localChangePass($params, $result_obj->uid);
+        $local_obj = localChangePass($_GET, $result_obj->uid);
         $data['status_code'] = "1";
         $data['status_message'] = "";
     } else {
@@ -3473,18 +3458,17 @@ function poll_detail($token, $poll_id) {
 function itg_rapid_api_edit_profile($token) {
     
     
-    $method = "GET";  
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $token = $params['authtoken_id'];    
+    $method = "GET";    
+    $token = $_GET['authtoken_id'];    
     if (!drupal_valid_token($token, 'services')) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
-        $result = callAPI($method, $url, $params);
+        $result = callAPI($method, $url, $_GET);
         $result_obj = json_decode($result);
         //if ($result_obj->uid) {
-            $responce_object_rs = saveUpdatedProfile($params);
+            $responce_object_rs = saveUpdatedProfile($_GET);
             $responce_object['status_code'] = "1";
              $responce_object['status_message'] = "";
         //}
@@ -3513,10 +3497,9 @@ function itg_rapid_api_edit_user_image($token) {
  */
 function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $authtoken_id = $params['authtoken_id'];
-    $user_id = $params['user_id'];
-    $token = $params['authtoken_id'];
+    $authtoken_id = $_GET['authtoken_id'];
+    $user_id = $_GET['user_id'];
+    $token = $_GET['authtoken_id'];
     if (!drupal_valid_token($token, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
@@ -3584,9 +3567,8 @@ function itg_rapid_api_get_login_user_detail($token) {
  */
 function itg_rapid_api_log_out($token) {
     global $base_url;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $data = array();
-    $user_id = $params['user_id'];
+    $user_id = $_GET['user_id'];
     $pram = "uname=$user_id";
     $options = array(
         'method' => 'POST',
