@@ -514,6 +514,8 @@
         text-align: center;
         font-size: 12px;
         border-top: 1px solid #111111;
+        word-wrap: break-word;
+        white-space: normal;
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
