@@ -3199,6 +3199,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
 function itg_rapid_api_change_password($token, $user_id) {
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    p($params);die();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
