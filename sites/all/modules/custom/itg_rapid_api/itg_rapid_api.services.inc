@@ -1333,8 +1333,8 @@ function itg_rapid_api_resource() {
         //sprint 3 cast poll id
         'cast_polls' => array(
             'operations' => array(
-                'retrieve' => array(
-                    'help' => 'Retrieves cast_polls schemes info.',
+                'create' => array(
+                    'help' => 'Cast poll on the basis of poll id & option id',
                     'file' => array(
                         'type' => 'inc',
                         'module' => 'itg_rapid_api',
@@ -1347,27 +1347,32 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'string',
+                            'type' => 'array',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
                             'default' => '*',
                         ),
                         array(
-                            'name' => 'user_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'user_id'),
-                            'description' => 'user mobile or email',
-                            'type' => 'string',
+                            'name' => 'poll_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'First Name',
+                            'type' => 'array',
                         ),
                         array(
-                            'name' => 'otp_code',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'user_id'),
-                            'description' => 'otp_code',
-                            'type' => 'string',
+                            'name' => 'option_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Last Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User email or mobile number',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -1795,7 +1800,7 @@ function itg_rapid_api_resource() {
         // Sprint 4 Read Later
         'bookmark_set' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Bookmark Set and return Responce based on userid.',
                     'file' => array(
                         'type' => 'inc',
@@ -1809,7 +1814,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'string',
+                            'type' => 'array',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1817,19 +1822,17 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'description' => 'Loged in user id',
-                            'type' => 'string',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'node_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'description' => 'Node id of the stories',
-                            'type' => 'string',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -1838,7 +1841,7 @@ function itg_rapid_api_resource() {
         // Sprint 4 Read Later
         'bookmark_delete' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Bookmark delete and return Responce based on userid.',
                     'file' => array(
                         'type' => 'inc',
@@ -1852,7 +1855,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'string',
+                            'type' => 'array',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
@@ -1860,19 +1863,17 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'description' => 'Loged in user id',
-                            'type' => 'string',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'node_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'description' => 'Node id of the stories',
-                            'type' => 'string',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -2835,14 +2836,9 @@ function itg_rapid_api_testing($token) {
  * @return array
  * 	The node processed information array.
  */
-
-
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
     $params = $_POST;
-    if(!count($params) > 0){
-        $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    }
-   
+    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //p($params);die();
     $login_type = 0;
     $login_type = $params['login_type'];
@@ -2865,7 +2861,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-        
+
 
         if ($uid) {
             $local_account = localSignup($params);
@@ -2917,7 +2913,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-       
+
 
         if ($uid) {
             $local_account = fblogin($data);
@@ -2926,7 +2922,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
             $name = $local_account->user->name;
             $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
             $auth_token = $local_account->token;
-             $is_first_login = 1;
+            $is_first_login = 1;
             if ($field_logged_in_count > 0) {
                 $is_first_login = 0;
             }
@@ -2969,7 +2965,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-        
+
 
         if ($uid) {
             $local_account = twtlogin($data);
@@ -3052,8 +3048,6 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
 
         return $account;
     }
-
-    
 }
 
 //itg_rapid_api_fblogin
@@ -3140,7 +3134,7 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $method = "GET";
     //$params = (array) json_decode(file_get_contents('php://input'), TRUE);  
     $params = $_POST;
-    
+
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3213,8 +3207,8 @@ function itg_rapid_api_change_password($token, $user_id) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
-    
-    if($result_obj->uid){
+
+    if ($result_obj->uid) {
         $local_obj = localChangePass($params, $result_obj->uid);
         $data['status_code'] = "1";
         $data['status_message'] = "";
@@ -3223,7 +3217,7 @@ function itg_rapid_api_change_password($token, $user_id) {
         $data['status_message'] = "customised_message";
     }
 
-    
+
 
     return $data;
 }
@@ -3338,78 +3332,73 @@ function polls_close($token) {
  * @return array
  * 	array of open polls.
  */
-function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
+function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-  $poll_id = $_GET['poll_id'];
-  $option_id = $_GET['option_id'];
-  $user_id = $_GET['user_id'];
-  $args = '0';
-  //Check args is exist
-  if(isset($poll_id) && isset($option_id) && isset($user_id)){
-    $args = '1';
-  }else{
-
-  }
-  
-  
-  $ip_address = $_SERVER['SERVER_ADDR'];
-  if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
-    $device = 'iPhone';
-  }
-  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
-    $device = 'Android';
-  }
-  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
-    $device = 'webOS';
-  }
-  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
-    $device = 'BlackBerry';
-  }
-  elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
-    $device = 'iPod';
-  }
-  else {
-    $device = '';
-  }
-
-
-  if (!is_numeric($poll_id)) {
-    $poll_id = 0;
-  }
-  if (!is_numeric($option_id)) {
-    $option_id = 0;
-  }
-  if (!is_numeric($user_id)) {
-    $user_id = 0;
-  }
-
-  // check args
-  if ($args != '0') {
-    
-    // if status is 0 then poll is already closed , 
-    $poll_status = check_poll_status($poll_id);
-    if($poll_status != '0'){
-      $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
-      $jsondata = json_encode($jsondata);
+    $poll_id = $params['poll_id'];
+    $option_id = $params['option_id'];
+    $user_id = $params['user_id'];
+    $args = '0';
+    //Check args is exist
+    if (isset($poll_id) && isset($option_id) && isset($user_id)) {
+        $args = '1';
     } else {
-      $output_array = array();
-      $output_array['status_code'] = "0";
-      $output_array['status_message'] = "Poll is already closed";
-      $output_array['data'] = array();
-      $jsondata = json_encode($output_array);
+        
     }
-    
-  }else{
-    $output_array = array();
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "Arguments are missing";
-    $output_array['data'] = array();
-    $jsondata = json_encode($output_array);
-  }
 
 
-  $jsondata = json_decode($jsondata, true);
-  return $jsondata;
+    $ip_address = $_SERVER['SERVER_ADDR'];
+    if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
+        $device = 'iPhone';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
+        $device = 'Android';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
+        $device = 'webOS';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
+        $device = 'BlackBerry';
+    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
+        $device = 'iPod';
+    } else {
+        $device = '';
+    }
+
+
+    if (!is_numeric($poll_id)) {
+        $poll_id = 0;
+    }
+    if (!is_numeric($option_id)) {
+        $option_id = 0;
+    }
+    if (!is_numeric($user_id)) {
+        $user_id = 0;
+    }
+
+    // check args
+    if ($args != '0') {
+
+        // if status is 0 then poll is already closed , 
+        $poll_status = check_poll_status($poll_id);
+        if ($poll_status != '0') {
+            $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
+            $jsondata = json_encode($jsondata);
+        } else {
+            $output_array = array();
+            $output_array['status_code'] = "0";
+            $output_array['status_message'] = "Poll is already closed";
+            $output_array['data'] = array();
+            $jsondata = json_encode($output_array);
+        }
+    } else {
+        $output_array = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "Arguments are missing";
+        $output_array['data'] = array();
+        $jsondata = json_encode($output_array);
+    }
+
+
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
 }
 
 /*
@@ -3420,32 +3409,31 @@ function itg_rapid_api_poll_cast($token, $poll_id, $option_id, $user_id) {
 
 function check_poll_status($poll_id) {
 
-  $current_time = date('Y-m-d H:i:s', time());
+    $current_time = date('Y-m-d H:i:s', time());
 
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->condition('n.type', 'poll');
-  $query->condition('st.field_poll_start_date_value', $current_time, '<');
-  $query->condition('n.status', '1');
-  $query->condition('n.nid', $poll_id);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->condition('n.type', 'poll');
+    $query->condition('st.field_poll_start_date_value', $current_time, '<');
+    $query->condition('n.status', '1');
+    $query->condition('n.nid', $poll_id);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  $poll_status = '0';
-  foreach ($result as $k => $res) {
-    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
-      $poll_status = '1';
+    $poll_status = '0';
+    foreach ($result as $k => $res) {
+        if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
+            $poll_status = '1';
+        } else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
+            $poll_status = '1';
+        }
     }
-    else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
-      $poll_status = '1';
-    }
-  }
-  //if status is 1 then poll is open otherwise poll is closed
+    //if status is 1 then poll is open otherwise poll is closed
 
-  return $poll_status;
+    return $poll_status;
 }
 
 /**
@@ -3481,12 +3469,12 @@ function poll_detail($token, $poll_id) {
  *
  */
 function itg_rapid_api_edit_profile($token) {
-    
-    
-    $method = "GET";  
+
+
+    $method = "GET";
     //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $params = $_POST;
-    $token = $params['authtoken_id'];    
+    $token = $params['authtoken_id'];
     if (!drupal_valid_token($token, 'services')) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
@@ -3495,9 +3483,9 @@ function itg_rapid_api_edit_profile($token) {
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
         //if ($result_obj->uid) {
-            $responce_object_rs = saveUpdatedProfile($params);
-            $responce_object['status_code'] = "1";
-             $responce_object['status_message'] = "";
+        $responce_object_rs = saveUpdatedProfile($params);
+        $responce_object['status_code'] = "1";
+        $responce_object['status_message'] = "";
         //}
     }
     return $responce_object;
@@ -3540,8 +3528,8 @@ function itg_rapid_api_get_login_user_detail($token) {
         $email_id = $account->mail;
         $phone_number = $account->field_mobile_number['und'][0]['value'];
         $location = "";
-        
-        
+
+
         if ($account->field_user_counrty['und'][0]['tid']) {
             //$location .= $account->field_user_counrty['und'][0]['tid'];
             $term = taxonomy_term_load($account->field_user_counrty['und'][0]['tid']);
@@ -3561,7 +3549,6 @@ function itg_rapid_api_get_login_user_detail($token) {
         }
         if ($account->field_short_description['und'][0]['value']) {
             $location .= ", " . $account->field_short_description['und'][0]['value'];
-            
         }
 
         $profile_image = $account->field_user_picture['und'][0]['fid'];
@@ -3831,19 +3818,55 @@ function bookmark_get_responce($token, $user_id) {
  */
 
 function bookmark_set_responce($token, $user_id, $node_id) {
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $user_id = $params['user_id'];
+    $node_id = $params['node_id'];
 
-    $user_id = $_GET['user_id'];
-    $node_id = $_GET['node_id'];
-    $jsondata = bookmark_set_data_responce($user_id, $node_id);
-    //$jsondata = json_encode($jsondata);
+    $args = '0';
+    //Check args is exist
+    if (isset($user_id) && isset($node_id)) {
+        $args = '1';
+    } else {
+        
+    }
+    // check args
+    if ($args != '0') {
+        $jsondata = bookmark_set_data_responce($user_id, $node_id);
+    } else {
+        $output_array = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "Argument are missing";
+        $output_array['data'] = array();
+        $jsondata = json_encode($output_array);
+    }
+
+
+    //$jsondata = json_decode($jsondata, true);
     return $jsondata;
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-    $user_id = $_GET['user_id'];
-    $node_id = $_GET['node_id'];
-    $jsondata = bookmark_del_data_responce($user_id, $node_id);
+    $user_id = $params['user_id'];
+    $node_id = $params['node_id'];
+
+    $args = '0';
+    //Check args is exist
+    if (isset($user_id) && isset($node_id)) {
+        $args = '1';
+    } else {
+        
+    }
+    if ($args != '0') {
+        $jsondata = bookmark_del_data_responce($user_id, $node_id);
+    } else {
+        $output_array = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "Argument are missing";
+        $jsondata = json_encode($output_array);
+    }
+
     return $jsondata;
 }
 
@@ -3955,7 +3978,7 @@ function anchor_programm_list($token, $anchor_id, $type) {
     } else {
         $type = '';
     }
-    $suffix = $anchor_id.'_'.$cpageno;
+    $suffix = $anchor_id . '_' . $cpageno;
     $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
 
     $result_get = getRedis($redis_key);
@@ -3963,9 +3986,9 @@ function anchor_programm_list($token, $anchor_id, $type) {
 //    if ($result_get['key_value'] != "") {
 //        $jsondata = $result_get['key_value'];
 //    } else {
-        // call function from return data..
-        $jsondata = anchor_programm_data_list($anchor_id, $type, $cpageno);
-        $jsondata = json_encode($jsondata);
+    // call function from return data..
+    $jsondata = anchor_programm_data_list($anchor_id, $type, $cpageno);
+    $jsondata = json_encode($jsondata);
 //        $ttl = '15';//DEFAULT_REDIS_EXPIRE_TIME;
 //        $result_set = setRedis($redis_key, $jsondata, $ttl);
 //    }

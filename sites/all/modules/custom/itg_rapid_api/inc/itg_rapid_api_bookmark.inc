@@ -68,7 +68,7 @@ function bookmark_set_data_responce($user_id, $node_id) {
         $qry = array("nid" => $node_id, "uid" => $user_id, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $actual_data->type, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" => time());
         $result = $people->insert($qry);
         $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $actual_data->type);
-        //print json_encode($response);
+        
       }
       else {
 
@@ -123,23 +123,23 @@ function bookmark_del_data_responce($user_id, $node_id) {
       $people = $con->front_user_activity;
       $qry = array("nid" => $node_id, "uid" => $user_id, 'activity' => 'read_later');
       $result = $people->remove($qry);
+      $result = (array)$result;
+
     }
   }
-
-  // list array building
-  $output_array = bookmark_responce_data($user_id);
-  //$data = bookmark_set_responce_datalist($user_id);
-//    if ($data['lcount'] > 0) {
-//        $output_array['status_code'] = "1";
-//        $output_array['status_message'] = "";
-//    } else {
-//        $output_array['status_code'] = "0";
-//        $output_array['status_message'] = "customised_message";
-//    }
-//
-//    //data array building
-//    $data_array['content'] = $data['data'];
-//    $output_array['data'] = $data_array;
+//  print_r($result);
+//  exit();
+  //check the data is really delete
+  if($result['n'] != 0){
+    //echo "found";
+    $output_array = bookmark_responce_data($user_id);
+  }else{
+    //echo "data";
+    $output_array = array();
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "Unable to delete data, This data is not found in the db";
+    //$jsondata = json_encode($output_array);
+  }
 
   return $output_array;
 }
@@ -234,4 +234,4 @@ function bookmark_responce_datalist($user_id) {
   $data['data'] = $news2;
   $data['lcount'] = count($news2);
   return $data;
-}
+} 
