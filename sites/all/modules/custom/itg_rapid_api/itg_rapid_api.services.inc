@@ -768,7 +768,7 @@ function itg_rapid_api_resource() {
         // login_request custom resource declaration.....
         'login_request' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves storydetail schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -782,7 +782,7 @@ function itg_rapid_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'token',
-                            'type' => 'string',
+                            'type' => 'array',
                             'description' => 'Function to perform',
                             'source' => array('path' => 0),
                             'optional' => TRUE,
