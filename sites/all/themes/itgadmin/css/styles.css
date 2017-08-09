@@ -6386,6 +6386,7 @@ div.node #comments h2 {
 /*itg_image_repository start*/
 .itg_image_repository {
   font-family: "Lucida Grande", Verdana, sans-serif;
+  overflow: auto;
 }
 .itg_image_repository .image_repository {
   width: 100%;
