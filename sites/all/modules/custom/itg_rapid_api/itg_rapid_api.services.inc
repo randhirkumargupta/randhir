@@ -1046,7 +1046,7 @@ function itg_rapid_api_resource() {
         // forgot_password custom resource declaration.....
         'forgot_password' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves forgot_password schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1082,7 +1082,7 @@ function itg_rapid_api_resource() {
         // otp_verification custom resource declaration.....
         'otp_verification' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves otp_verification schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1127,7 +1127,7 @@ function itg_rapid_api_resource() {
         // resend_otp custom resource declaration.....
         'resend_otp' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves resend_otp schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1163,7 +1163,7 @@ function itg_rapid_api_resource() {
         // change_password custom resource declaration.....
         'change_password' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves change_password schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1381,7 +1381,7 @@ function itg_rapid_api_resource() {
         // edit_profile custom resource declaration.....
         'edit_profile' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves edit_profile schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1582,7 +1582,7 @@ function itg_rapid_api_resource() {
         // get_login_user_detail custom resource declaration.....
         'get_login_user_detail' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves get_login_user_detail schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1627,7 +1627,7 @@ function itg_rapid_api_resource() {
         // log_out custom resource declaration.....
         'log_out' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves log_out schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -2839,7 +2839,7 @@ function itg_rapid_api_testing($token) {
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
     $params = $_POST;
     //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);die();
+    //p($params);die();
     $login_type = 0;
     $login_type = $params['login_type'];
     if ($login_type < 0 || $login_type > 2) {
