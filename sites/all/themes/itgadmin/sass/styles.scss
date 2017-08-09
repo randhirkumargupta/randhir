@@ -5928,6 +5928,7 @@ div.node{
 
 .itg_image_repository{
   font-family: "Lucida Grande", Verdana, sans-serif;
+  overflow: auto;
   .image_repository{
     width: 100%;
     display: inline-block;
@@ -12172,4 +12173,9 @@ fieldset#edit-xmlsitemap{
 .progress .percentage {
     float: right;
     margin-left: 10px;
+}
+[id*="views-exposed-form-sold-item-history-page"]{
+  .views-widget-filter-created > label, .views-widget-filter-created .description {
+    display: none !important;
+  }
 }
