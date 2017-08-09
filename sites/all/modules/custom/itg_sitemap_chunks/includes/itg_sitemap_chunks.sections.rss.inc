@@ -177,7 +177,7 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
-    $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
+    $xml .= '<generator>'.t('FeedCreator 1.7.2').'</generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
@@ -258,8 +258,8 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     }
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
-    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . '</lastBuildDate>' . "\r\n";
-    $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
+    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
+    $xml .= '<generator>'.t('FeedCreator 1.7.2').'</generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     if (!empty($section_tid)) {
@@ -328,8 +328,8 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '</title>' . "\r\n";
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
-    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . '</lastBuildDate>' . "\r\n";
-    $xml .= '<generator>FeedCreator 1.7.2</generator>' . "\r\n";
+    $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
+    $xml .= '<generator>'.t('FeedCreator 1.7.2').'</generator>' . "\r\n";
     $xml .= '<image>';
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title>' . ITG_INDIATODAY_SITENAME_XML . '</title>' . "\r\n";
@@ -379,14 +379,14 @@ function itg_sitemap_print_section_rss($result) {
         $node_extra_small_image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
       }
       $description = $data['field_story_short_headline_value'];
-      if (!empty($data['field_story_schedule_date_time_value'])) {
-        $db_date = $data['field_story_schedule_date_time_value'];
+      if (!empty($data['field_itg_content_publish_date_value'])) {
+        $db_date = $data['field_itg_content_publish_date_value'];
       } else {
         $db_date = $data['created'];
       }
       $published_date = gmdate('D, d M Y H:i:s T', strtotime($db_date));
       if (date('Y' , strtotime($published_date)) == '1970') {
-        $published_date = date('D, d M Y H:i:s T', strtotime($data['created']));
+        $published_date = date('D, d M Y H:i:s', strtotime($data['created']));
       }
       $xml .= '<title> <![CDATA[ ' . check_plain($node_title) . ' ]]></title>' . "\r\n";
       if (isset($data['name']) && !empty($data['name'])) {
@@ -400,7 +400,7 @@ function itg_sitemap_print_section_rss($result) {
       } else {
         $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>' . "\r\n";
       }
-      $xml .= '<pubDate> ' . $published_date . ' </pubDate>' . "\r\n";
+      $xml .= '<pubDate> ' . $published_date . '</pubDate>' . "\r\n";
       if ($arg[0] == 'rss-gallery') {
         $xml .='<media:description type="html">';
         $xml .= '<![CDATA[ <a href="' . $node_link . '"><img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"></a>';
@@ -413,7 +413,7 @@ function itg_sitemap_print_section_rss($result) {
         $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">' . "\r\n";
         $xml .= '<media:category scheme="' . $node_link . '">' . get_term_name_from_tid_for_report(itg_widget_get_primary_cat($data['nid'], 1)) . '</media:category>' . "\r\n";
         $xml .= '<media:text type="plain"><![CDATA[ ' . check_plain($node_title) . ' ]]></media:text>' . "\r\n";
-        $xml .= '<media:rating scheme="urn:simple">nonadult</media:rating>' . "\r\n";
+        $xml .= '<media:rating scheme="urn:simple">'.t('nonadult').'</media:rating>' . "\r\n";
         $xml .= '<media:thumbnail width="107" height="82" url="' . $node_extra_small_image_url . '"/>' . "\r\n";
         $xml .= '</media:content>' . "\r\n";
       }
