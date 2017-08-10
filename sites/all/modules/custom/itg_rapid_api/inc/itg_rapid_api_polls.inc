@@ -60,7 +60,7 @@ function polls_close_list($cpageno) {
   $data_array['id'] = "1234";
   $data_array['title'] = "Test Title";
 
-  $data_array['polls'] = $data['data'];
+  $data_array['poll'] = $data['data'];
   $output_array['data'] = $data_array;
 
   return $output_array;
@@ -108,14 +108,14 @@ function poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device) {
   $data = poll_cast_datalist($poll_id);
 
   //data array building
-  $poll_id = $data['id'];
-  $poll_title = $data['title'];
-
-  $data_array['id'] = ""; //$poll_id
-  $data_array['title'] = ""; //$poll_title
-
-  $data_array['polls'] = $data['data'];
-  $output_array['data'] = $data_array;
+//  $poll_id = $data['id'];
+//  $poll_title = $data['title'];
+//
+//  $data_array['id'] = ""; //$poll_id
+//  $data_array['title'] = ""; //$poll_title
+//
+//  $data_array['polls'] = $data['data'];
+  $output_array['data'] = $data['data'];
 
   return $output_array;
 }
@@ -127,6 +127,8 @@ function poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device) {
 function poll_cast_datalist($poll_id) {
 
   $current_time = date('Y-m-d H:i:s', time());
+  $news = array();
+  $news2 = array();
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
@@ -144,8 +146,8 @@ function poll_cast_datalist($poll_id) {
 
   $query->condition('n.type', 'poll');
   $query->condition('n.nid', $poll_id);
-  $query->range(0, 2);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
 
   foreach ($result as $k => $res) {
 
@@ -153,27 +155,49 @@ function poll_cast_datalist($poll_id) {
     $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
     $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
 
-    $count_total_patic = itg_poll_getTotalPoll($res['nid']);
-    $poll_result_options = poll_result($res['nid']);
-    $poll_nid = $res['nid'];
-    $poll_start_date_value = $res['field_poll_start_date_value'];
-    $poll_node_title = $res['title'];
+    $query2 = db_select('field_data_field_poll_answer', 'pa');
+    $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
+    $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
+    $query2->fields('pa', array('field_poll_answer_value'));
+    $query2->fields('ot', array('field_poll_answer_text_value'));
+    $query2->fields('ai', array('field_poll_answer_image_fid'));
+    $query2->condition('pa.entity_id', $res['nid']);
+    $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    $news['p_id'] = "$poll_nid";
-    $news['p_is_sponsored'] = "";
-    $news['p_sponsored_icon'] = "";
-    $news['p_sponsored_link'] = "";
-    $news['p_publish_datetime'] = "$poll_start_date_value";
-    $news['p_title'] = "$poll_node_title";
-    $news['p_image'] = $poll_ques_img;
-    $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-    $news['total_participants'] = "$count_total_patic";
 
-    $news['p_option'] = isset($poll_result_options) ? $poll_result_options : ""; //set the options of the poll
+    $options2 = array();
+    $options = array();
+    foreach ($result_option as $p => $pv) {
+      $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
+      
+      $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+      $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
+      $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+      $options['o_count'] = "$total_voter";
+      $options2[] = $options;
+    }
+
+    $count_total_partic = itg_poll_getTotalPoll($res['nid']);
+    $poll_id = isset($res['nid']) ? $res['nid'] : "";
+    $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
+    $poll_title = $res['title'];
+
+    $news['id'] = "$poll_id";
+    $news['is_sponsored'] = "";
+    $news['sponsored_icon'] = "";
+    $news['sponsored_link'] = "";
+    $news['publish_datetime'] = "$poll_publish_date_time";
+    $news['title'] = "$poll_title";
+    $news['image'] = "$poll_ques_img";
+    $news['share_link'] = get_node_firebase_weburl($res['nid']);
+    $news['total_count'] = "$count_total_partic";
+
+    $news['option'] = $options2;
     $news2[] = $news;
   }
 
-  $data['data'] = $news2;
+
+  $data['data'] = $news;
   $data['id'] = $res['id'];
   $data['title'] = $res['title'];
   return $data;
@@ -498,6 +522,7 @@ function poll_detail_datalist($poll_id) {
 
 
   $data['data'] = $news2;
+  $data['lcount'] = count($news2);
   $data['id'] = $res['id'];
   $data['title'] = $res['title'];
   return $data;
