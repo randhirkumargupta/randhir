@@ -3935,7 +3935,7 @@ function bookmark_get_responce($token, $user_id) {
  */
 
 function bookmark_set_responce($token, $user_id, $node_id) {
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $params = $_POST;
     $user_id = $params['user_id'];
     $node_id = $params['node_id'];
 
@@ -3963,7 +3963,7 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $params = $_POST;
 
     $user_id = $params['user_id'];
     $node_id = $params['node_id'];

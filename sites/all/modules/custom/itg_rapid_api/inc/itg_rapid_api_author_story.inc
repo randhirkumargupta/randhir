@@ -399,12 +399,14 @@ function news_wrap_datalist() {
 
     $query->condition('n.type', 'story');
     $query->condition('n.status', 1);
-    $query->range(0, 25);
+    $query->range(0, 20);
     $query->orderBy('n.nid', 'DESC');
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $news = array();
+    $hresult = array();
+    
     foreach ($result as $k => $res) {
 
         $changed = $res['changed'];
@@ -423,12 +425,12 @@ function news_wrap_datalist() {
             $changed_datetime = "";
         }
 
-        $news['n_id'] = $res['nid'];
-        $news['n_title'] = $res['title'];
+        $news['n_id'] = isset($res['nid']) ? $res['nid'] : "";
+        $news['n_title'] = isset($res['title']) ? $res['title'] : "";
         $news['n_large_image'] = "$file_large_img_url";
         $news['n_updated_datetime'] = "$changed_datetime";
-        $news['category_id'] = $res['tid'];
-        $news['category_title'] = $res['name'];
+        $news['category_id'] = isset($res['tid']) ? $res['tid'] : "";
+        $news['category_title'] = isset($res['name']) ? $res['name'] : "";
         $news['highlight'] = $hresult;
 
         $news2[] = $news;
