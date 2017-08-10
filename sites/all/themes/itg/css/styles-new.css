@@ -4439,7 +4439,7 @@ div#forgot-field-heading {
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile #umail:after {
   content: 'OR';
   position: absolute;
-  left: 278px;
+  left: 95.5%;
   top: 10px;
   margin: 0 auto;
   width: 25px;
