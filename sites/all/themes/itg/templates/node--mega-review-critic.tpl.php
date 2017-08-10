@@ -213,7 +213,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
@@ -287,7 +287,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
