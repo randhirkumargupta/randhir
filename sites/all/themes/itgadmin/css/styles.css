@@ -12863,6 +12863,7 @@ fieldset#edit-xmlsitemap {
   height: 20px;
   padding-top: 1px;
   background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 [id*="itg-image-croping-image-info-form"] .form-item-syndicate {
