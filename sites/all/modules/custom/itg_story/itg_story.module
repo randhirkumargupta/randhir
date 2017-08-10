@@ -257,6 +257,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
+  $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+  $primary_category = $form_state['input']['itg_primary_category'];
+  // for story assign to widget
+  if(function_exists('itg_story_assign_to_widget')) {
+    itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category);
+  }
   if($form_state['input']['op'] == 'Apply') {
      if ($form_state['node']->status == '1') {
     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
@@ -312,6 +318,121 @@ function itg_story_form_custom_callback($form, &$form_state) {
       itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
     }
   //}
+
+}
+
+/**
+ * function for story assign to widget
+ * @param int $nid
+ * @param array $story_widget
+ * @param int $cat_id
+ */
+function itg_story_assign_to_widget($nid , array $story_widget, $cat_id) {
+  if (!empty($story_widget)) {
+    $content_type = 'story';
+    foreach ($story_widget as $widget_val) {
+      // for top stories
+      if ($widget_val == 'top_stories') {
+        $result_exist = itg_story_widget_data_exist($nid, $cat_id, 'top_stories_widget');
+        $weight_data = itg_story_widget_max_value('top_stories_widget');
+
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+              'nid' => $nid,
+              'cat_id' => $cat_id,
+              'content_type' => $content_type,
+              'widget' => 'top_stories_widget',
+              'weight' => --$weight_data,
+              'state' => 0,
+            ])->execute();
+          } catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+      // for big story
+      if ($widget_val == 'big_story') {
+          $related_nodes_json = '[]';
+          $widget = 'big_story_format_widget';
+          // Remove first livetv.
+          try {
+            db_delete('itg_widget_order')
+              ->condition('widget' , $widget)
+              ->execute();
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
+
+          try {
+            $query = db_insert('itg_widget_order')
+              ->fields(array(
+                'nid' => $nid ,
+                'widget' => $widget ,
+                'content_type' => $content_type ,
+                'cat_id' => 0,
+                'weight' => 0,
+                'extra' => $related_nodes_json,
+              ))
+              ->execute();
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
+      }
+      // for feature story
+      if ($widget_val == 'featured_story') {
+        $widget = 'home_page_feature_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 0 , 'home_page_feature_widget');
+        $weight_data = itg_story_widget_max_value('home_page_feature_widget');
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+              'nid' => $nid,
+              'cat_id' => 0,
+              'content_type' => $content_type,
+              'widget' => $widget,
+              'weight' => --$weight_data,
+              'state' => 0,
+            ])->execute();
+          } catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * check story widget data exist
+ * @param int $nid
+ * @param int $cat_id
+ * @param string $widget_type
+ * @return mixed
+ */
+function itg_story_widget_data_exist($nid, $cat_id, $widget_type) {
+  $query = db_select('itg_widget_order', 'w');
+  $query->fields('w', array('nid'));
+  $query->condition('nid', $nid, '=');
+  // $query->condition('cat_id', $cat_id, '=');
+  $query->condition('widget', $widget_type, '=');
+  $result = $query->execute()->fetchAssoc();
+  return $result;
+}
+
+/**
+ * get min value from widget
+ * @param string $widget_type
+ * @return int
+ */
+function itg_story_widget_max_value($widget_type) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MIN(weight)');
+  $max_query->condition('widget', $widget_type);
+  $max_result = $max_query->execute()->fetchField();
+  return isset($max_result) ? $max_result : 1;
 }
 
 /**
