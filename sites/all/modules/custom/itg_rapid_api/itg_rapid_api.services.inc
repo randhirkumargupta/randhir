@@ -2017,6 +2017,122 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        
+        // for static other device start
+        
+        // adconfig_android custom resource declaration.....
+        'adconfig_android' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves adconfig_android schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_adconfig_android',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // adconfig_ipad custom resource declaration.....
+        'adconfig_ipad' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves adconfig_ipad schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_adconfig_ipad',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // adconfig_iphone custom resource declaration.....
+        'adconfig_iphone' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves adconfig_iphone schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_adconfig_iphone',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // adconfig_tab custom resource declaration.....
+        'adconfig_tab' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves adconfig_tab schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_adconfig_tab',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // for static other device end
     );
 
     return $api;
@@ -3995,4 +4111,102 @@ function anchor_programm_list($token, $anchor_id, $type) {
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
+}
+
+// for static other device
+
+/**
+ * [itg_rapid_api_adconfig_android] definition.
+ * Returns the information about a itg_rapid_api_adconfig_android.
+ * @param $token 
+ * @return array 
+ */
+function itg_rapid_api_adconfig_android($token) {
+    $redis_key = "itgd_rapid_adconfig_android";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('adconfig_android');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_adconfig_ipad] definition.
+ * Returns the information about a itg_rapid_api_adconfig_ipad.
+* @param $token 
+ * @return array 
+ */
+function itg_rapid_api_adconfig_ipad($token) {
+    $redis_key = "itgd_rapid_adconfig_ipad";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('adconfig_ipad');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_adconfig_iphone] definition.
+ * Returns the information about a itg_rapid_api_adconfig_iphone.
+ * @param $token 
+ * @return array 
+ */
+function itg_rapid_api_adconfig_iphone($token) {
+    $redis_key = "itgd_rapid_adconfig_iphone";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('adconfig_iphone');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_adconfig_tab] definition.
+ * Returns the information about a itg_rapid_api_adconfig_tab.
+* @param $token 
+ * @return array 
+ */
+function itg_rapid_api_adconfig_tab($token) {
+    $redis_key = "itgd_rapid_aadconfig_tab";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('adconfig_tab');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+
+    return $return_obj;
 }

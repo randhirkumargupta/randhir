@@ -187,6 +187,42 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
+  // for static other device
+  
+  $items['admin/api-configuration/rest-api/adconfig-android'] = array(
+    'title' => 'update adconfig android json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_android'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/adconfig-ipad'] = array(
+    'title' => 'update adconfig ipad json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_ipad'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  $items['admin/api-configuration/rest-api/adconfig-iphone'] = array(
+    'title' => 'update adconfig iphone json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_iphone'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  $items['admin/api-configuration/rest-api/adconfig-tab'] = array(
+    'title' => 'update adconfig tab json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_tab'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
 
   return $items;
 }
@@ -556,4 +592,73 @@ function checkReqMethod(){
    
 }
 // code for check POST method only end
+
+// for static other device
+/*
+ * adconfig_android form decalation
+ */
+
+function adconfig_android() {
+  $form = array();
+
+  $form['adconfig_android'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig android'),
+    '#default_value' => variable_get('adconfig_android'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_ipad form decalation
+ */
+
+function adconfig_ipad() {
+  $form = array();
+
+  $form['adconfig_ipad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig ipad'),
+    '#default_value' => variable_get('adconfig_ipad'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_iphone form decalation
+ */
+
+function adconfig_iphone() {
+  $form = array();
+
+  $form['adconfig_iphone'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig iphone'),
+    '#default_value' => variable_get('adconfig_iphone'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_tab form decalation
+ */
+
+function adconfig_tab() {
+  $form = array();
+
+  $form['adconfig_tab'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig tab'),
+    '#default_value' => variable_get('adconfig_tab'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
 
