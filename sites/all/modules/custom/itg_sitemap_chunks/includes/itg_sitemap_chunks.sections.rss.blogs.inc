@@ -83,7 +83,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
         $db_date = $data->created;
       }
       $published_date = date('D, d M Y H:i:s T', $db_date);
-      $xml .= '<title> <![CDATA[ ' . $node_title . ' ]]></title>' . "\r\n";
+      $xml .= '<title> <![CDATA[ ' . html_entity_decode($node_title) . ' ]]></title>' . "\r\n";
       $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>' . "\r\n";
       $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>';
       $xml .= '<pubDate> ' . $published_date . '</pubDate>' . "\r\n";

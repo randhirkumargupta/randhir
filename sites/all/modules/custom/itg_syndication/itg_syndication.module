@@ -255,10 +255,10 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
       $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#prefix'] = "<div id='section-wrapper-".$key."'>";
       $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#suffix'] = "</div>";
       // create callback.
-//      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#ajax'] = array(
-//        'callback' => 'syndication_ajax_callback',
-//        'wrapper' => "section-wrapper-".$key,
-//      );
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'syndication_ajax_callback',
+        'wrapper' => "section-wrapper-".$key,
+      );
       
       $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
       $syndication_mode_value = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['#entity']->field_syndication_mode[LANGUAGE_NONE][0]['value'];
@@ -287,40 +287,18 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
 function itg_syndication_rule_after_build($form, &$form_state) {
 
   drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/field_collection.js', array('type' => 'file', 'scope' => 'footer'));
 
-//  foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
-//    if (is_numeric($key)) {
-//      $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
-//      if(!empty($content_type)) {
-//        $options = _get_term_as_per_content_types($content_type);
-//      } else {
-//        $options = array();
-//      }
-//      $option_array = syndication_get_option_array($options);
-//      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $option_array;
-//    }
-//  }
-//
-//  // Add cancel button to create/edit
-//  $form['actions']['cancel'] = array(
-//    '#markup' => l(t('Cancel'), 'syndication-rule-listing', array('attributes' => array('class' => 'button'))),
-//    '#weight' => 20,
-//  );  
-//
-//  return $form;
-  
-  
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  $op = array();
-  foreach ($tax as $key => $val) {
-    $op[$val->tid] = $val->name;
-  }
-  
-  natcasesort($op); // Sorting section array or category array by it value
-  
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
-      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $op;
+      $content_type = $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_content_type'][LANGUAGE_NONE]['#default_value'][0];
+      if(!empty($content_type)) {
+        $options = _get_term_as_per_content_types($content_type);
+      } else {
+        $options = array();
+      }
+      $option_array = syndication_get_option_array($options);
+      $form['field_syndication_rule_details'][LANGUAGE_NONE][$key]['field_syndication_select_section'][LANGUAGE_NONE]['#options'] = $option_array;
     }
   }
 
@@ -337,18 +315,39 @@ function syndication_ajax_callback($form , &$form_state) {
   watchdog('syndication_wrapper', "<pre>" . print_r($form_state['triggering_element'] , 1) . "</pre>");
   $selected_content_type = $form_state['triggering_element']['#default_value'][0];
   $options = _get_term_as_per_content_types($selected_content_type);
-  watchdog('syndication_wrapper', "<pre>" . print_r($options , 1) . "</pre>");
-  $option_array = syndication_get_option_array($option_array);
-  watchdog('syndication_wrapper', "<pre>" . print_r($options , 1) . "</pre>");
+  $option_array = syndication_get_option_array($options);
   $wrapper = $form_state['triggering_element']['#ajax']['wrapper'];
   $int = preg_replace("/[^0-9]/","",$wrapper);//filter_var($wrapper, FILTER_SANITIZE_NUMBER_INT);
-  watchdog('syndication_wrapper', "<pre>" . print_r($int , 1) . "</pre>");
+  $debug['wrapper'] = $wrapper;
+  $debug['option_array'] = $option_array;
+  $debug['int'] = $int;
+  watchdog('syndication_wrapper_options', "<pre>" . print_r($debug , 1) . "</pre>");
   
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#prefix'] = '<div class="'.$wrapper.'">';
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#suffix'] = '<div>';
-  unset($form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#options']);
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#options'] = $option_array;
-  return $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section'];
+  
+  $option_html = '';
+  foreach($option_array as $value=> $option) {
+    $option_html .= '<option value="'.$value.'"> '.$option.' </option>';
+  }
+  
+  $settings['wrapper'] = $wrapper;
+  $settings['option_html'] = $option_html;
+  	// Next we will include a custom function that we will call ourselves in our JavaScript file:
+	$commands[] = array
+	(
+		// The command will be used in our JavaScript file (see next section)
+		'command' => 'afterAjaxCallbackExample',
+		// We pass the value that the user selected in the select element to our
+		// JavaScript function:
+		'selectedValue' => $settings,
+	);
+ 
+	// And finally, we will return all of our commands to the system to be executed:
+	return array('#type' => 'ajax', '#commands' => $commands);
+  //drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+  //return $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section'];
 }
 
 

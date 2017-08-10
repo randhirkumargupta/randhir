@@ -1180,38 +1180,38 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         $usebitrates = implode(',', $allbitrates);
         $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
         ?>
-          <div class="iframe-video-embed">
-            <div id="videoplayer_<?php echo $keys; ?>"></div> 
-            <script type="text/javascript">
-              jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-                playlist: [{
-                    title: "<?php print $row['title']; ?>",
-                    image: "<?php echo $image_url; ?>",
-                    sources: [
-                      {
-                        file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                      }]
-                  }],
-                primary: "flash",
-                width: "100%",
-                aspectratio: "16:9",
-                stretching: "exactfit",
-                androidhls: "true",
-                fallback: "false",
-                hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                advertising: {
-                  client: "vast",
-                  skipoffset: 5,
-                  schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
+    <div class="iframe-video-embed">
+        <div id="videoplayer_<?php echo $keys; ?>"></div> 
+        <script type="text/javascript">
+            jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+            playlist: [{
+            title: "<?php print $row['title']; ?>",
+            image: "<?php echo $image_url; ?>",
+            sources: [
+            {
+            file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+            }]
+            }],
+            primary: "flash",
+            width: "100%",
+            aspectratio: "16:9",
+            stretching: "exactfit",
+            androidhls: "true",
+            fallback: "false",
+            hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+            advertising: {
+            client: "vast",
+            skipoffset: 5,
+            schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
 
-                },
-                ga: {
-                  idstring: "<?php print $row['title']; ?>",
-                }
-              });
-            </script>
-          </div>
-        </div>
+            },
+            ga: {
+            idstring: "<?php print $row['title']; ?>",
+            }
+            });
+        </script>
+    </div>
+</div>
         <?php
         $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
       }
@@ -1906,4 +1906,12 @@ function __get_sosorry_video_nid($type = 'feature') {
   $query->condition("n.status", 1);
   $query->condition("iwo.extra", $type);
   return $query->execute()->fetchField();
+}
+
+
+function __html_output_with_tags($string , $start = 0 , $end = 100) {
+  $html = substr(html_entity_decode(drupal_html_to_text($string)), $start, $end);
+  $doc = new DOMDocument();
+  $doc->loadHTML($html);
+  return $doc->saveHTML();
 }
