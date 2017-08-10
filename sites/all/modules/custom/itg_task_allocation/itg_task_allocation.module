@@ -584,10 +584,8 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   }
   
   global $base_url;
-  
   if (!empty($var->ur_mail) || !empty($var->mail)) {
-    
-    $node_url = l('URL', '/node/' . $var->nid);
+    $node_url = l('URL', $base_url . '/node/' . $var->nid);
     $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
     $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
 
@@ -603,7 +601,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $mail_content,
       'subject' => $subject,
     );
+//    $to_assignee = 'gourav.walia@kelltontech.com';
     $to_assignee = $var->ur_mail;
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -617,10 +617,11 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   }
   
   if (!empty($var->mail)) {
-
-    $node_url = l('URL', '/node/' . $var->nid);
+    $node_url = l('URL', $base_url.'/node/'.$var->nid);
     $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
+    
     $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
+
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
                 <html xmlns:v="urn:schemas-microsoft-com:vml">
                   <head><title></title></head>
@@ -633,7 +634,9 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
       'body' => $mail_content,
       'subject' => $subject,
     );
+//    $to_assigner = 'gourav.walia@kelltontech.com';
     $to_assigner = $var->mail;
+//    $to_user_mail = array($var->mail, $var->ur_mail);
     $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
