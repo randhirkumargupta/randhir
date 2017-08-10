@@ -38,7 +38,6 @@
                     <?php endif; ?>
                 </span>
 
-
                 <div class="detail">
                     <div class="pic">
                         <?php if (isset($row['field_sponser_logo'])) : ?>
