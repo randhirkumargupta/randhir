@@ -1091,12 +1091,13 @@ function itg_get_video_display_for_big_story($nid) {
  * @param int $nid
  */
 function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery') {
+  $node_load = node_load($nid);
   $videoids = "";
   print '<div class="videogallery-slider slider-for-nid-' . $nid . '">';
-  if (function_exists('get_video_in_fieldcollection_by_nid')) {
+  if($node_load->field_story_source_type['und'][0]['value'] != 'migrated') {
+    if (function_exists('get_video_in_fieldcollection_by_nid')) {
     $videoids = get_video_in_fieldcollection_by_nid($nid);
   }
-
   if (!empty($videoids)) {
     $hide_player = "";
     $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
@@ -1138,91 +1139,84 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
     }
     $newimageds .= '</ul></div></div></div>';
   }
+  }
   else {
     if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
-      $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-    }
-
-    drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
-    $hide_player = "";
-    $description_slider = "";
-    $video_node = node_load($nid);
-    $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
-    $description_slider = '<div class="video-slider-description"><ul>';
-    foreach ($videoids as $keys => $video_value) {
-      if ($keys != 0) {
-        $hide_player = 'hide-player';
-        $autoplay = 0;
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
       }
-      else {
-        $autoplay = 1;
-      }
-      ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
-      if (module_exists('itg_videogallery')) {
-        $vid = itg_videogallery_get_videoid($row['fid']);
-      }
-      $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-
-      if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-        $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
-      }
-      else {
-        $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
-      }
-      $ads_flag = 0;
-      if ($video_value->field_include_ads_value == 'yes') {
-        $ads_flag = 1;
-      }
-      $allbitrates = array();
-      foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
-        $allbitrates[] = end(explode('@', $bitratevalue['value']));
-      }
-      $usebitrates = implode(',', $allbitrates);
-      $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-      ?>
-    <div class="iframe-video">
-
-        <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
+      //drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
+      echo "<script src='http://content.jwplatform.com/libraries/V30NJ3Gt.js'></script>";
+      $hide_player = "";
+      $description_slider = "";
+      $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
+      $description_slider = '<div class="video-slider-description"><ul>';
+      foreach ($videoids as $keys => $video_value) {
+        if ($keys != 0) {
+          $hide_player = 'hide-player';
+          $autoplay = 0;
+        }
+        else {
+          $autoplay = 1;
+        }
+        ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
+        if (module_exists('itg_videogallery')) {
+          $vid = itg_videogallery_get_videoid($row['fid']);
+        }
+        $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
+          $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
+        }
+        else {
+          $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+        }
+        $ads_flag = 0;
+        if ($video_value->field_include_ads_value == 'yes') {
+          $ads_flag = 1;
+        }
+        $allbitrates = array();
+        foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
+          $allbitrates[] = end(explode('@', $bitratevalue['value']));
+        }
+        $usebitrates = implode(',', $allbitrates);
+        $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
+        ?>
+    <div class="iframe-video-embed">
+        <div id="videoplayer_<?php echo $keys; ?>"></div> 
         <script type="text/javascript">
+            jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+            playlist: [{
+            title: "<?php print $row['title']; ?>",
+            image: "<?php echo $image_url; ?>",
+            sources: [
+            {
+            file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+            }]
+            }],
+            primary: "flash",
+            width: "100%",
+            aspectratio: "16:9",
+            stretching: "exactfit",
+            androidhls: "true",
+            fallback: "false",
+            hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+            advertising: {
+            client: "vast",
+            skipoffset: 5,
+            schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
 
-          jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-              playlist: [{
-                      title: "<?php print $row['title']; ?>",
-                      image: "<?php echo $image_url; ?>",
-                      sources: [
-                          {
-                              file: "<?php echo $getvideo_bitrate_url; ?>"
-                          }, {
-                              file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                          }]
-                  }],
-              primary: "flash",
-              width: "622",
-              height: "360",
-              aspectratio: "4:3",
-              "stretching": "exactfit",
-              androidhls: "true",
-              fallback: "false",
-              hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-              advertising: {
-                  client: "vast",
-                  skipoffset: 5,
-                  schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
-
-              },
-              ga: {
-                  idstring: "<?php print $row['title']; ?>",
-              }
-          });
-        </script></div>
-
+            },
+            ga: {
+            idstring: "<?php print $row['title']; ?>",
+            }
+            });
+        </script>
+    </div>
 </div>
-
-      <?php
-      $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
-    }
-    $description_slider .= '</ul></div>';
-    $newimageds .= '</ul></div></div></div>';
+        <?php
+        $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
+      }
+      $description_slider .= '</ul></div>';
+      $newimageds .= '</ul></div></div></div>';
   }
 
   print '</div>';
@@ -1912,4 +1906,12 @@ function __get_sosorry_video_nid($type = 'feature') {
   $query->condition("n.status", 1);
   $query->condition("iwo.extra", $type);
   return $query->execute()->fetchField();
+}
+
+
+function __html_output_with_tags($string , $start = 0 , $end = 100) {
+  $html = substr(html_entity_decode(drupal_html_to_text($string)), $start, $end);
+  $doc = new DOMDocument();
+  $doc->loadHTML($html);
+  return $doc->saveHTML();
 }
