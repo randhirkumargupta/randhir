@@ -164,6 +164,9 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       global $base_url, $user;
 
+      // unset None value
+      unset($form['field_story_assign_to_widget'][LANGUAGE_NONE]['#options']['_none']);
+
       // code for body field config
       $form['body']['#states'] = array(
         'required' => array(

@@ -138,6 +138,7 @@
                     ?></h2>
                 <div class="itg-form-section hide">
                     <?php print drupal_render($form['field_story_configurations']); ?>
+                    <?php print drupal_render($form['field_story_assign_to_widget']); ?>
                     <?php print drupal_render($form['field_story_comment_question']); ?>
                     <?php print drupal_render($form['field_poll_start_date']); ?>
                     <?php print drupal_render($form['field_story_tv_time']); ?>
