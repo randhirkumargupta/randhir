@@ -1235,10 +1235,15 @@ function itg_videogallery_dailymotion($real_path, $uri, $fid, $tags_value, $node
 function itg_videogallery_custom_validate($form, &$form_state) {
 //schedule date & expiry date validation
   $is_migrate_validate = 0;
+  $current_time = time();
   $schedule_date = strtotime($form_state['values']['field_story_schedule_date_time'][LANGUAGE_NONE][0]['value']);
   $expiry_date = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
   if (isset($expiry_date) && ($schedule_date > $expiry_date)) {
     form_set_error('field_story_expiry_date', t("Expiry date should be greater then schedule start date"));
+  }
+
+  if($expiry_date < $current_time) {
+    form_set_error('field_story_expiry_date', t("Expiry date should be greater from now."));
   }
   foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
 
