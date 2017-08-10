@@ -3449,7 +3449,8 @@ function polls_close($token) {
  * 	array of open polls.
  */
 function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $params = $_POST;
 
     $poll_id = $params['poll_id'];
     $option_id = $params['option_id'];
