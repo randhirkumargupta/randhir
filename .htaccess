@@ -319,6 +319,7 @@ DirectoryIndex index.php index.html index.htm
   RewriteRule ^indiangirls$ /staticpages/indiangirls/index.jsp [L]
   RewriteRule ^indiangirls/(.*) /staticpages/indiangirls/$1 [L]
   RewriteRule ^gravity$ /staticpages/gravity/index.jsp [L]
+  RewriteRule ^gravity/(.*) /staticpages/gravity/$1 [L]
   RewriteRule ^sachin-virat-comparison-tower.jsp$ /staticpages/sachin-virat-comparison-tower.jsp [L]
   RewriteRule ^yuvraj.jsp$ /staticpages/yuvraj.jsp [L]
   RewriteRule ^uttarakhand$ /staticpages/uttarakhand/deluge.jsp [L]
