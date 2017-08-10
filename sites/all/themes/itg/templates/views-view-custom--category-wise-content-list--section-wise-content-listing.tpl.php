@@ -34,7 +34,7 @@ global $base_url;
           <div class="cat-heading">
               <h3 class="cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
                 if (function_exists('itg_common_get_smiley_title')) {
-                  print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
+                  print l(itg_common_get_smiley_title($row['nid'], 0, 100, TRUE), "node/" . $row['nid'], array("html" => TRUE));
                 }
                 else {
                   print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
@@ -60,7 +60,7 @@ global $base_url;
     </div>    
     <div class="detail"><h3 title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
-        print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
+        print l(itg_common_get_smiley_title($row['nid'], 0, 100, TRUE), "node/" . $row['nid'], array("html" => TRUE));
       }
       else {
         print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);

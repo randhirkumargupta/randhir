@@ -37,7 +37,7 @@ global $base_url;
         <h3 title="<?php echo strip_tags($row['title']);?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
-            print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));
+            print l(itg_common_get_smiley_title($row['nid'], 0, 35, TRUE), "node/" . $row['nid'], array("html" => TRUE));
           }
           else {
             print l(strip_tags(mb_strimwidth($row['title'], 0, 100, "..")), "node/" . $row['nid']);
