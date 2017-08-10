@@ -4480,7 +4480,9 @@ div#autocomplete ul li + li {
   border-top: 1px solid #f5f5f5;
 }
 div#autocomplete ul li div {
+  white-space: normal;
   word-wrap: break-word;
+  max-width: 100%;
 }
 
 div.node a {
