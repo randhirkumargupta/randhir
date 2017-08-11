@@ -831,8 +831,10 @@ jQuery(document).ready(function () {
         getclick.css({'display': 'none'});
     });
 
+
     // jQuery code to add Light off/on effect 
     jQuery('body').on('click', '.light-off-on-tab', function () {
+        jQuery(this).find('a').toggleClass('active');
         jQuery('body').toggleClass('light-off-overlay');
         jQuery('.program-livetv').toggleClass('effect-added');
     });
@@ -1000,9 +1002,9 @@ jQuery(document).ready(function (e) {
     jQuery('.thumb-video').click(function () {
         var getvideoindex = jQuery(this).attr('data-image-index');
         var getvideofid = jQuery(this).attr('data-image-fid');
-        var ajaxpath =Drupal.settings.basePath + 'getvideoplayer';
-        load_video_in_slider(getvideofid,ajaxpath,getvideoindex)
-   
+        var ajaxpath = Drupal.settings.basePath + 'getvideoplayer';
+        load_video_in_slider(getvideofid, ajaxpath, getvideoindex)
+
     });
     jQuery('.itg-embed-photo-slider').slick({
         slidesToShow: 1,
@@ -1103,18 +1105,18 @@ function navigationResize() {
 }
 
 
-function load_video_in_slider(fid,path,getvideoindex) {
+function load_video_in_slider(fid, path, getvideoindex) {
 
     jQuery.ajax({
         url: path,
         type: 'get',
         beforeSend: function () {
-          jQuery('.loading-video').show();
+            jQuery('.loading-video').show();
         },
-        data: {'fid': fid,'tabindex':getvideoindex },
+        data: {'fid': fid, 'tabindex': getvideoindex},
         success: function (data) {
-           jQuery('#video_palyer_container').html(data);
-           jQuery('.loading-video').hide();
+            jQuery('#video_palyer_container').html(data);
+            jQuery('.loading-video').hide();
 
         },
         complete: function () {
