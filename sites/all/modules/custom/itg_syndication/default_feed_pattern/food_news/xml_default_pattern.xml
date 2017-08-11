@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<food>
+    <item>
+        <title> {{{node_title}}} </title>
+        <link> {{{node_permalink}}} </link>
+        <description> {{{body}}}</description>
+        <pubDate> {{{node_published_date}}} </pubDate>
+    </item>
+</food>

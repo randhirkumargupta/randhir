@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<video>
+    <item>
+        <title> {{{node_title}}} </title>
+        <link> {{{node_permalink}}} </link>
+        <description> {{{field_story_expert_description}}}</description>
+        <pubDate> {{{node_published_date}}} </pubDate>
+    </item>
+</video>

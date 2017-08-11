@@ -1842,7 +1842,7 @@ div.form-type-password-confirm > .password-suggestions + .description {
 }
 
 [id*="user-register-form"] h2, [id*="user-profile-form"] h2 {
-  background-color: #fefafb;
+  background-color: #d9d9d9;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
   padding: 8px 20px;
@@ -1864,11 +1864,16 @@ div.form-type-password-confirm > .password-suggestions + .description {
   margin-top: 5px;
 }
 [id*="user-register-form"] .form-actions, [id*="user-profile-form"] .form-actions {
-  background-color: #fefafb;
-  border-bottom: 1px solid #d9d9d9;
-  border-top: 1px solid #d9d9d9;
-  margin: 15px 0;
-  padding: 15px 30px;
+  padding-left: 250px;
+}
+
+#clientsidevalidation-user-register-form-errors {
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px 0;
+}
+#clientsidevalidation-user-register-form-errors ul {
+  padding-left: 18px;
 }
 
 div.description, .pre-desc {
@@ -4475,7 +4480,9 @@ div#autocomplete ul li + li {
   border-top: 1px solid #f5f5f5;
 }
 div#autocomplete ul li div {
+  white-space: normal;
   word-wrap: break-word;
+  max-width: 100%;
 }
 
 div.node a {
@@ -5668,6 +5675,9 @@ div.node #comments h2 {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .item-list ul li, .view-manage-users [id*="views-form-photo-gallery-management-page"] .item-list ul li, .view-manage-users [id*="views-form-home-election-widget-election-graph-widget-contents"] .item-list ul li {
   padding-top: 5px;
 }
+.view-manage-users fieldset {
+  margin-bottom: 10px;
+}
 
 .main-cont .byline {
   position: absolute;
@@ -6378,6 +6388,7 @@ div.node #comments h2 {
 /*itg_image_repository start*/
 .itg_image_repository {
   font-family: "Lucida Grande", Verdana, sans-serif;
+  overflow: auto;
 }
 .itg_image_repository .image_repository {
   width: 100%;
@@ -6633,6 +6644,9 @@ div.node #comments h2 {
 }
 [id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"], [id*="itg-octopus-api-rfa-form"] .container-inline-date .date-padding input[type="text"] {
   width: 100%;
+}
+[id*="itg-octopus-api-form"] .description, [id*="itg-octopus-api-rfa-form"] .description {
+  left: 100% !important;
 }
 
 /*.category-manager-selection-details{
@@ -12840,7 +12854,7 @@ fieldset#edit-xmlsitemap {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 9999;
+  z-index: 9;
 }
 
 .browse-media-file .edit-image-info {
@@ -12854,6 +12868,7 @@ fieldset#edit-xmlsitemap {
   height: 20px;
   padding-top: 1px;
   background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 [id*="itg-image-croping-image-info-form"] .form-item-syndicate {
@@ -12957,4 +12972,8 @@ fieldset#edit-xmlsitemap {
 .progress .percentage {
   float: right;
   margin-left: 10px;
+}
+
+[id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created > label, [id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created .description {
+  display: none !important;
 }
