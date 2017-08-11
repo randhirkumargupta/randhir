@@ -37,7 +37,7 @@ if ($field->view->name == 'speaker_option_for_event'
     (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'itg_funalytics'
     ) || $arg[0] == 'menu-manager'
  ) {
-  print $output;
+  print html_entity_decode($output);
 }
 elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'blog' ||
     $row->_field_data['nid']['entity']->type == 'photogallery' ||
@@ -49,26 +49,26 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
     $row->_field_data['nid']['entity']->type == 'breaking_news') ) {
 
   if ( isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0 ) {
-    print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
+    print html_entity_decode(l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank'))));
   }
   else {
     if ( BACKEND_URL == $base_url ) {
       if($row->_field_data['nid']['entity']->type == 'event_backend') {
         $event_url_alias = drupal_get_path_alias($path = 'node/'.$row->nid, $path_language = NULL);
         $event_register_url = FRONT_URL.'/'.$event_url_alias.'/'.'registration';
-        print '<a href="' . $event_register_url . '" target="_blank">' . strip_tags($output) . '</a>';
+        print '<a href="' . $event_register_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
       }else{
         $node_url = FRONT_URL . '/node/' . $row->nid;
-        print '<a href="' . $node_url . '" target="_blank">' . strip_tags($output) . '</a>';
+        print '<a href="' . $node_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
       }
     }
     else {
       //print l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank')));
-      print strip_tags($output);
+      print html_entity_decode(strip_tags($output));
     }
   }
 }
 else {
   //print l(strip_tags($output) , 'node/' . $row->nid);
-  print strip_tags($output);
+  print html_entity_decode(strip_tags($output));
 }

@@ -132,12 +132,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
         <?php
       }
       else {
         ?>
-        <h1 title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -567,7 +567,7 @@ if (!empty($content)):
               }
               if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
                 ?>
-                <div class="ad-blocker-content"><?php print strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, "")); ?></div>
+                <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php } ?>
               <div class="ad-blocker"></div>
               <div class="description">

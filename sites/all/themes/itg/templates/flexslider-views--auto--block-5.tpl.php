@@ -3,7 +3,7 @@
 
 <div><?php print $row['field_story_extra_large_image'];?></div>
         <div><?php print $row['delta'];?></div>
-        <div title="<?php echo strip_tags($row['title']);?> "><?php print ucfirst($row['title']);?></div>
+        <div title="<?php echo html_entity_decode(strip_tags($row['title']));?> "><?php print ucfirst(html_entity_decode(strip_tags($row['title'])));?></div>
   
 
 <?php };
