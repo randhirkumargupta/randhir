@@ -1761,7 +1761,15 @@
 }
 
 
-
+@media all and (min-width: 680px){
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon{position: relative;}
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon > ul{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+}
 @media only screen and (max-width:680px){ 
   /*CSS start video landing page*/
   #block-views-video-landing-header-block-1{
