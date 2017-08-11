@@ -4,6 +4,9 @@
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));
+$tid =$video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+$term = taxonomy_term_load($tid);
+$primary_category_name = itg_common_custompath_insert_val($term->name);
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
@@ -282,7 +285,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                      <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url .'/video/'.$primary_category_name. '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -353,7 +356,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url . '/embed-video/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                          <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url .'/video/'.$primary_category_name. '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
                                       </div>
                                   </div>
                               </li>

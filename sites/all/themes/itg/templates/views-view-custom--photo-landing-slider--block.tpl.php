@@ -2,6 +2,9 @@
 global $base_url;
 // configuration for social sharing
 $photo_node = node_load(arg(1));
+$tid =$photo_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+$term = taxonomy_term_load($tid);
+$primary_category_name = itg_common_custompath_insert_val($term->name);
 $f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
@@ -9,6 +12,7 @@ $share_title = addslashes($photo_node->title);
 $share_desc = '';
 $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']]->field_images[LANGUAGE_NONE][0]['uri']);
 $uri = base64_encode($actual_link);
+$argum = base64_encode(arg(1));
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -39,7 +43,7 @@ $uri = base64_encode($actual_link);
                     <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                     <div class="show-embed-code-div">
                         <div class="copy-sample-code">
-                            <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea> 
+                            <textarea readonly><iframe src=<?php print $base_url .'/photo/'.$primary_category_name. '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea> 
                     </div>
                   </div>
                 </li>
@@ -175,7 +179,7 @@ $uri = base64_encode($actual_link);
                   <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                   <div class="show-embed-code-div">
                     <div class="copy-sample-code">
-                    <textarea readonly><div id='IndiaToday_gallery' data-type='UAT'></div><script src='<?php print $base_url; ?>/sites/all/themes/itg/js/photo_iframeResizer.js'></script><script><?php echo "iFrameResize({galleryid: $photo_node->nid})"; ?></script></textarea>
+                    <textarea readonly><iframe src="<?php print $base_url .'/photo/'.$primary_category_name. '/embed/' . $argum; ?>" allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
                     </div>
                   </div>
                 </li>

@@ -714,6 +714,7 @@ function itg_ugc_after_build($form, &$form_state) {
  */
 function itg_ugc_node_validate($node, $form, &$form_state) {
   if ($node->type == 'ugc') {
+    $form_state['values']['field_user_email'][LANGUAGE_NONE][0]['value'] = trim($form_state['values']['field_user_email'][LANGUAGE_NONE][0]['value']);
     // get value of content type field
     $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     // get value of body field

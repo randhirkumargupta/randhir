@@ -1518,25 +1518,27 @@ function itg_videogallery_save_story_video_data($story_body, $nid) {
         ->execute();
     foreach ($video_url as $video_value) {
       $post_check = strpos($video_value, '/embeded-video/');
-      $post_video_node = strpos($video_value, '/embed-video/');
+      $post_video_node = strpos($video_value, '/embed/');
+      $post_video_node_video = strpos($video_value, '/video/');
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
-
         db_insert('itg_story_body_videos')
             ->fields(array(
               'is_node' => 0,
               'video_id' => $vid_id[0],
+              'url' => $video_value,
               'nid' => $nid,
             ))->execute();
       }
-      if ($post_video_node !== FALSE) {
+      if ($post_video_node !== FALSE && $post_video_node_video !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $node_id = base64_decode($vid_id);
         db_insert('itg_story_body_videos')
             ->fields(array(
               'is_node' => 1,
               'video_id' => $vid_id,
+              'url' => $video_value,
               'nid' => $nid,
             ))->execute();
         //$node_data = itg_videogallery_get_node_status($node_id);
@@ -1555,7 +1557,8 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
   if (!empty($video_url)) {
     foreach ($video_url as $video_value) {
       $post_check = strpos($video_value, $base_url . '/embeded-video/');
-      $post_video_node = strpos($video_value, $base_url . '/embed-video/');
+      $post_video_node = strpos($video_value, '/embed/');
+      $post_video_node_video = strpos($video_value, '/video/');
       if ($post_check !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $vid_id = explode('?', $vid_id);
@@ -1566,7 +1569,7 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
           });', array('type' => 'inline', 'scope' => 'footer'));
         }
       }
-      if ($post_video_node !== FALSE) {
+      if ($post_video_node !== FALSE && $post_video_node_video !== FALSE) {
         $vid_id = end(explode('/', $video_value));
         $node_id = base64_decode($vid_id);
         $node_data = itg_videogallery_get_node_status($node_id);
@@ -1820,7 +1823,6 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $query->fields('isbv');
   $query->condition('is_node', '1');
   $video_data = $query->execute()->fetchAll();
-
   if (isset($video_data) && !empty($video_data)) {
     foreach ($video_data as $story_body_video) {
       $nid = $story_body_video->nid;
@@ -1833,9 +1835,9 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $video_url = $match[1];
         if (!empty($video_url)) {
           foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value, '/embed-video/' . $story_body_video->video_id);
+            $post_check = strpos($video_value, '/embed/' . $story_body_video->video_id);
             if ($post_check) {
-              $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . FRONT_URL_VIDEO . '/embed-video/' . $story_body_video->video_id . '" width="648"></iframe>';
+              $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' .$video_data->url. '" width="648"></iframe>';
               $html = str_replace($ifreame, "", $node_body);
               $node->body['und'][0]['value'] = $html;
               field_attach_update('node', $node);
