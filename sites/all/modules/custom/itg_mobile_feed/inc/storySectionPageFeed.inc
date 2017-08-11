@@ -10,70 +10,71 @@
  * @return array
  */
 function storySectionPageFeed() {
-    //check into redis
-    $redis_key = "itgd_storySectionPageFeed";
-    $result_get = getRedis($redis_key);
+  //check into redis
+  $redis_key = "itgd_storySectionPageFeed";
+  $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $output = $result_get['key_value'];
-    } else {
-        // variable declation
-        global $base_url;
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $output = "";
-        $section_list = array();
-        $section_list_story = array();
-        $term_list = array();
-        $node_count = 0;
-        $term_name = "";
-        $term_url = "";
-        $file_name = "";
-        $cat_icon_img = "";
+  if ($result_get['key_value'] != "") {
+    $output = $result_get['key_value'];
+  }
+  else {
+    // variable declation
+    global $base_url;
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $output = "";
+    $section_list = array();
+    $section_list_story = array();
+    $term_list = array();
+    $node_count = 0;
+    $term_name = "";
+    $term_url = "";
+    $file_name = "";
+    $cat_icon_img = "";
 
-        $listcount = 0;
-        $return_flag = "";
+    $listcount = 0;
+    $return_flag = "";
 
-        // get section list
-        $section_list = categoryManagerSectionTid('story');
-        //fatch & write xml node of all vedio main cat
-        foreach ($section_list as $key => $value) {
-            // check section is story
-            $node_count = customNodeCount('story', $value);
-            if ($node_count > 0) {
-                $value = trim($value);
-                $term = taxonomy_term_load($value);
-                $term_name = $term->name;
-                $term_url = nodeCategoryFrontUrl($value, 'term');
-                $child_term_url = nodeCategoryFrontUrl($value, 'term');
+    // get section list
+    $section_list = categoryManagerSectionTid('story');
+    //fatch & write xml node of all vedio main cat
+    foreach ($section_list as $key => $value) {
+      // check section is story
+      $node_count = customNodeCount('story', $value);
+      if ($node_count > 0) {
+        $value = trim($value);
+        $term = taxonomy_term_load($value);
+        $term_name = $term->name;
+        $term_url = nodeCategoryFrontUrl($value, 'term');
+        $child_term_url = nodeCategoryFrontUrl($value, 'term');
 
-                $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
-                $term_file_name = $term_name . ".xml";
-                // section xml feed file name
-                $listcount++;
-                $cat_icon_img = sectionCategoryIconImg($value);
-                // child xml node
-                $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
-            }
-        }
-        //write xml node of storysectionlisting
-        if ($child_node) {
-            $output .= getMobileFeedXmlHeader();
-            $output .= "<id>333333</id><title><![CDATA[story]]></title><itemcount>" . $listcount . "</itemcount>";
-            // child node
-            $output .= $child_node;
-            // xml feed footer
-            $output .= getMobileFeedXmlFooter();
-        }
-        // set into redis
-        $result_set = setRedis($redis_key, $output, $ttl);
+        $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
+        $term_file_name = $term_name . ".xml";
+        // section xml feed file name
+        $listcount++;
+        $cat_icon_img = sectionCategoryIconImg($value);
+        // child xml node
+        $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
+      }
     }
-
-    if ($output) {
-        $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
-        $file_name = "storysectionlisting.xml";
-        $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
+    //write xml node of storysectionlisting
+    if ($child_node) {
+      $output .= getMobileFeedXmlHeader();
+      $output .= "<id>333333</id><title><![CDATA[story]]></title><itemcount>" . $listcount . "</itemcount>";
+      // child node
+      $output .= $child_node;
+      // xml feed footer
+      $output .= getMobileFeedXmlFooter();
     }
-    header('Content-Type: application/xml; charset=utf-8');
-    echo $output;
-    die();
+    // set into redis
+    $result_set = setRedis($redis_key, $output, $ttl);
+  }
+
+  if ($output) {
+    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $file_name = "storysectionlisting.xml";
+    $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
+  }
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  die();
 }

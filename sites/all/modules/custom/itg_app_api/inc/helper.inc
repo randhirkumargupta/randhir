@@ -11,13 +11,13 @@ define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577);
 //CATEGORY_MANAGMENT; 14
 
 function firebase_config() {
-    $firebase = array(
-        'api-key' => 'AIzaSyDjXq0vdDZaa4HgEsdrlfLWXjevvIw7FFk',
-        'dynamicLinkDomain' => 'peg3z.app.goo.gl',
-        'androidPackageName' => 'com.indiatoday',
-        'iosBundleId' => 'com.dci.indiatoday',
-    );
-    return $firebase;
+  $firebase = array(
+    'api-key' => 'AIzaSyDjXq0vdDZaa4HgEsdrlfLWXjevvIw7FFk',
+    'dynamicLinkDomain' => 'peg3z.app.goo.gl',
+    'androidPackageName' => 'com.indiatoday',
+    'iosBundleId' => 'com.dci.indiatoday',
+  );
+  return $firebase;
 }
 
 /*
@@ -30,9 +30,9 @@ function firebase_config() {
 function firebase_short_url($url) {
 
 //get Default values  from config
-    $fire_base = firebase_config();
-    $fire_base_url = 'https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=' . $fire_base['api-key'] . '';
-    $base_config = '{
+  $fire_base = firebase_config();
+  $fire_base_url = 'https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=' . $fire_base['api-key'] . '';
+  $base_config = '{
   "dynamicLinkInfo": {
     "dynamicLinkDomain": "' . $fire_base['dynamicLinkDomain'] . '",
     "link": "' . $url . '",
@@ -45,15 +45,15 @@ function firebase_short_url($url) {
   }
 }';
 
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $fire_base_url);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $base_config);
-    $result = curl_exec($curl);
-    curl_close($curl);
-    $final_result = json_decode($result);
-    return $final_result->shortLink;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $fire_base_url);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $base_config);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  $final_result = json_decode($result);
+  return $final_result->shortLink;
 }
 
 /*
@@ -64,11 +64,11 @@ function firebase_short_url($url) {
  */
 
 function get_node_firebase_weburl($nid) {
-    // variable declaration
-    global $base_url;
-    $firebase_url = "";
-    $alias = drupal_get_path_alias('node/' . $nid . '');
-    $weburl = $base_url . "/" . $alias;
-    $firebase_url = firebase_short_url($weburl);
-    return $firebase_url;
+  // variable declaration
+  global $base_url;
+  $firebase_url = "";
+  $alias = drupal_get_path_alias('node/' . $nid . '');
+  $weburl = $base_url . "/" . $alias;
+  $firebase_url = firebase_short_url($weburl);
+  return $firebase_url;
 }

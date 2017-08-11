@@ -6,21 +6,20 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-function itg_app_api_init(){
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');
-    module_load_include('inc', 'itg_app_api', 'inc/helper');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');    
+function itg_app_api_init() {
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');
+  module_load_include('inc', 'itg_app_api', 'inc/helper');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');
 }
 
 /**
  * Implements hook_services_resources().
  * Create service resource for APIs to return the necessary json data.
  */
-
 function itg_app_api_services_resources() {
 
   $resources = array();
@@ -37,33 +36,32 @@ function itg_app_api_services_resources() {
 /**
  * Implements hook_menu().
  */
-
 function itg_app_api_menu() {
 
   $items = array();
-  
+
   $items['admin/api-configuration'] = array(
     'title' => 'API Configuration',
     'description' => 'API Configuration',
-    'weight' => 80, 	
+    'weight' => 80,
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
-   $items['admin/api-configuration/feed-api'] = array(
+  );
+
+  $items['admin/api-configuration/feed-api'] = array(
     'title' => 'Feed API',
     'description' => 'Feed API Configuration',
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-   
-   $items['admin/api-configuration/rest-api'] = array(
+  );
+
+  $items['admin/api-configuration/rest-api'] = array(
     'title' => 'REST API',
     'description' => 'REST API Configuration',
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for set update webservice token
   $items['admin/api-configuration/rest-api/mobile-service-token'] = array(
     'title' => 'Mobile web service token',
@@ -72,8 +70,8 @@ function itg_app_api_menu() {
     'page arguments' => array('mobile_service_token'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for update config_update_status json
   $items['admin/api-configuration/rest-api/config-update-status-json'] = array(
     'title' => 'Update config_update_status json',
@@ -82,8 +80,8 @@ function itg_app_api_menu() {
     'page arguments' => array('config_update_status_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for update datanotexist_api json
   $items['admin/api-configuration/rest-api/datanotexist-api-json'] = array(
     'title' => 'update datanotexist_api json',
@@ -92,8 +90,8 @@ function itg_app_api_menu() {
     'page arguments' => array('datanotexist_api_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for update hamburger_menu json
   $items['admin/api-configuration/rest-api/hamburger-menu-json'] = array(
     'title' => 'update hamburger_menu json',
@@ -102,8 +100,8 @@ function itg_app_api_menu() {
     'page arguments' => array('hamburger_menu_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for update horizontal_menu json
   $items['admin/api-configuration/rest-api/horizontal-menu-json'] = array(
     'title' => 'update horizontal_menu json',
@@ -112,8 +110,8 @@ function itg_app_api_menu() {
     'page arguments' => array('horizontal_menu_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   // menu for update master_config json
   $items['admin/api-configuration/rest-api/master-config-json'] = array(
     'title' => 'update master_config json',
@@ -122,9 +120,9 @@ function itg_app_api_menu() {
     'page arguments' => array('master_config_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
-   // menu for update server_error_master json
+  );
+
+  // menu for update server_error_master json
   $items['admin/api-configuration/rest-api/server-error-master-json'] = array(
     'title' => 'update server_error_master json',
     'description' => 'update server_error_master json',
@@ -132,10 +130,10 @@ function itg_app_api_menu() {
     'page arguments' => array('server_error_master_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   //sprint 2 seting menu,  admin/structure/services
-  
+
   $items['admin/api-configuration/rest-api/ad-config-json'] = array(
     'title' => 'update ad config json',
     'description' => 'ad_config_json',
@@ -143,8 +141,8 @@ function itg_app_api_menu() {
     'page arguments' => array('ad_config_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   $items['admin/api-configuration/rest-api/livetv-channellist-json'] = array(
     'title' => 'update livetv channellist json',
     'description' => 'livetv_channellist_json',
@@ -152,8 +150,8 @@ function itg_app_api_menu() {
     'page arguments' => array('livetv_channellist_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   $items['admin/api-configuration/rest-api/livetv-json'] = array(
     'title' => 'update livetv json',
     'description' => 'livetv_json',
@@ -161,8 +159,8 @@ function itg_app_api_menu() {
     'page arguments' => array('livetv_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   $items['admin/api-configuration/rest-api/otherapps-ios-json'] = array(
     'title' => 'update otherapps ios json',
     'description' => 'otherapps_ios_json',
@@ -170,8 +168,8 @@ function itg_app_api_menu() {
     'page arguments' => array('otherapps_ios_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
   $items['admin/api-configuration/rest-api/otherapps-android-json'] = array(
     'title' => 'update otherapps android json',
     'description' => 'otherapps_android_json',
@@ -179,11 +177,12 @@ function itg_app_api_menu() {
     'page arguments' => array('otherapps_android_json'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
-   );
-  
+  );
+
 
   return $items;
 }
+
 /*
  * mobile_service_token form decalation
  */
@@ -201,6 +200,7 @@ function mobile_service_token() {
 
   return system_settings_form($form);
 }
+
 /*
  * mobile_service_token form validation
  */
@@ -230,6 +230,7 @@ function config_update_status_json() {
 /*
  * datanotexist_api_json form decalation
  */
+
 function datanotexist_api_json() {
   $form = array();
 
@@ -307,12 +308,11 @@ function server_error_master_json() {
  * @return $count
  * @pram $nid
  */
-
-function getCommentsCount($nid){
-    // variable declation
-  $query = db_select('comment', 'com');  
+function getCommentsCount($nid) {
+  // variable declation
+  $query = db_select('comment', 'com');
   $query->fields('com', array('cid'));
-  $query->condition('com.nid', $nid);  
+  $query->condition('com.nid', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return count($result);
 }
@@ -322,26 +322,24 @@ function getCommentsCount($nid){
  * @arg $nid 
  * @return published date
  */
-
-function getNodePublishedDate($nid){
-    $query = db_select('workbench_moderation_node_history', 'nh');
-    $query->fields('nh', array('stamp'));
-    $query->condition('nh.nid', $nid);
-    $query->condition('nh.from_state', 'draft');
-    $query->condition('nh.state', 'published');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $published_statp = $result[0]['stamp'];
-    if($published_statp){
-        $published_datetime = date("Y-m-d H:i:s", $published_statp);
-    }
-    else{
-        $published_datetime = "";
-    }
-    return $published_datetime;
+function getNodePublishedDate($nid) {
+  $query = db_select('workbench_moderation_node_history', 'nh');
+  $query->fields('nh', array('stamp'));
+  $query->condition('nh.nid', $nid);
+  $query->condition('nh.from_state', 'draft');
+  $query->condition('nh.state', 'published');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $published_statp = $result[0]['stamp'];
+  if ($published_statp) {
+    $published_datetime = date("Y-m-d H:i:s", $published_statp);
+  }
+  else {
+    $published_datetime = "";
+  }
+  return $published_datetime;
 }
 
 // sprint2 seting function
-
 // ad_config_json form decalation
 function ad_config_json() {
   $form = array();
@@ -412,63 +410,51 @@ function otherapps_android_json() {
   return system_settings_form($form);
 }
 
-
-
 /**
  * Implements hook_url_inbound_alter().
  */
-
 function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
-   $u_agent = $_SERVER['HTTP_USER_AGENT']; 
-   $flag = 0;
+  $u_agent = $_SERVER['HTTP_USER_AGENT'];
+  $flag = 0;
 
 // user agent for browser
-if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    elseif(preg_match('/Trident/i',$u_agent)) 
-    { // this condition is for IE11
-        $flag = 1;
-    } 
-    elseif(preg_match('/Firefox/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    elseif(preg_match('/Chrome/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    elseif(preg_match('/Safari/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    elseif(preg_match('/Opera/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    elseif(preg_match('/Netscape/i',$u_agent)) 
-    { 
-        $flag = 1;
-    } 
-    
-    // user agent for mobile device
-    
-    $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-    $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
-    $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
-    $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
-    $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
+  if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Trident/i', $u_agent)) { // this condition is for IE11
+    $flag = 1;
+  }
+  elseif (preg_match('/Firefox/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Chrome/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Safari/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Opera/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Netscape/i', $u_agent)) {
+    $flag = 1;
+  }
 
-    if ($iphone || $android || $palmpre || $ipod || $berry == true)
-    {
-        $flag = 1;
+  // user agent for mobile device
 
-    }
-    
-   if(arg(0) == "appapi" && count(arg()) == 2 ){
-       $result = $path."/it";
-   }
+  $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+  $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+  $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+  $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+  $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+  if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+    $flag = 1;
+  }
+
+  if (arg(0) == "appapi" && count(arg()) == 2) {
+    $result = $path . "/it";
+  }
 }
 
 /*
@@ -476,23 +462,23 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
  * @param int $nid
  * @return String 
  */
-function getStoryType($nid) {  
-  $query = db_select('node','n');
-  $query->Join('field_data_field_story_type','st','st.entity_id = n.nid');
-  $query->fields('st',array('field_story_type_value'));
-  $query->condition('st.entity_id',$nid);
+
+function getStoryType($nid) {
+  $query = db_select('node', 'n');
+  $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
+  $query->fields('st', array('field_story_type_value'));
+  $query->condition('st.entity_id', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $type = 'story';
-  if($result[0]['field_story_type_value'] == 'photo_story'){
+  if ($result[0]['field_story_type_value'] == 'photo_story') {
     $type = 'photostory';
   }
   return $type;
 }
 
-
 /**
  * Implements hook_boot().
  */
-
-function itg_app_api_boot() {}
-
+function itg_app_api_boot() {
+  
+}

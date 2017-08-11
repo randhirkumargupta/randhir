@@ -10,49 +10,50 @@
  * @return array
  */
 function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
-    $output_array = array();
-    $data_array = array();
-    $photo_list_array = array();
-    $updated_datetime = "";
+  $output_array = array();
+  $data_array = array();
+  $photo_list_array = array();
+  $updated_datetime = "";
 
-    $term = taxonomy_term_load($tid);
-    $term_name = $term->name;
-    if (!$tid) {
-        $term_name = "Latest";
-    }
+  $term = taxonomy_term_load($tid);
+  $term_name = $term->name;
+  if (!$tid) {
+    $term_name = "Latest";
+  }
 
-    // list array building
-    $data = magazineEditionPageRerourceValueList($issueid, $pageno);
+  // list array building
+  $data = magazineEditionPageRerourceValueList($issueid, $pageno);
 
-    if ($data['issue_nid'] > 0) {
-        $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
-    } else {
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "customised_message";
-    }
+  if ($data['issue_nid'] > 0) {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
+  }
+  else {
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+  }
 
-    //data array building
-    $datacount = $data['lcount'];
-    $data_up_time = $data['updated_datetime'];
+  //data array building
+  $datacount = $data['lcount'];
+  $data_up_time = $data['updated_datetime'];
 
-    $issue_date = $data['issue_date'];
-    $issue_cover_image = $data['issue_cover_image'];
-    $issue_digitalmag_url = $data['issue_digitalmag_url'];
+  $issue_date = $data['issue_date'];
+  $issue_cover_image = $data['issue_cover_image'];
+  $issue_digitalmag_url = $data['issue_digitalmag_url'];
 
-    $data_array['issue_id'] = "$issueid";
-    $data_array['issue_date'] = "$issue_date";
-    $data_array['issue_cover_image'] = "$issue_cover_image";
-    $data_array['issue_digitalmag_url'] = "$issue_digitalmag_url";
-    $data_array['story_count'] = "$datacount";
-    $data_array['story_display_count'] = "10";
-    $data_array['story_pagination_cap'] = "7";
-    $data_array['updated_datetime'] = "$data_up_time";
+  $data_array['issue_id'] = "$issueid";
+  $data_array['issue_date'] = "$issue_date";
+  $data_array['issue_cover_image'] = "$issue_cover_image";
+  $data_array['issue_digitalmag_url'] = "$issue_digitalmag_url";
+  $data_array['story_count'] = "$datacount";
+  $data_array['story_display_count'] = "10";
+  $data_array['story_pagination_cap'] = "7";
+  $data_array['updated_datetime'] = "$data_up_time";
 
-    $data_array['story'] = $data['data'];
-    $output_array['data'] = $data_array;
+  $data_array['story'] = $data['data'];
+  $output_array['data'] = $data_array;
 
-    return $output_array;
+  return $output_array;
 }
 
 /**
@@ -61,167 +62,170 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
  * @return array
  */
 function magazineEditionPageRerourceValueList($issueid, $pageno) {
-    // variable declaration
-    global $base_url;
-    //issue node 
-    $node = node_load($issueid);
-    $field_issue_large_cover_image_fid = $node->field_issue_large_cover_image['und'][0]['fid'];
-    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+  // variable declaration
+  global $base_url;
+  //issue node 
+  $node = node_load($issueid);
+  $field_issue_large_cover_image_fid = $node->field_issue_large_cover_image['und'][0]['fid'];
+  $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
-    $field_issue_small_cover_image_fid = $node->field_issue_small_cover_image['und'][0]['fid'];
-    $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
+  $field_issue_small_cover_image_fid = $node->field_issue_small_cover_image['und'][0]['fid'];
+  $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
 
-    $issue_date = $node->field_issue_title['und'][0]['value'];
-    $issue_nid = $node->nid;
+  $issue_date = $node->field_issue_title['und'][0]['value'];
+  $issue_nid = $node->nid;
 
-    $field_issue_magazine = $node->field_issue_magazine['und'][0]['target_id'];
+  $field_issue_magazine = $node->field_issue_magazine['und'][0]['target_id'];
 
-    $node_count = "";
-    $output = "";
-    $data = array();
-    $tid_list = array();
-    $tid_list[] = $tid;
-    $listcount = 0;
-    $range_max = 10;
-    if (!$pageno == 0) {
-        $range_min = $pageno * $range_max;
-    } else {
-        $range_min = 0;
+  $node_count = "";
+  $output = "";
+  $data = array();
+  $tid_list = array();
+  $tid_list[] = $tid;
+  $listcount = 0;
+  $range_max = 10;
+  if (!$pageno == 0) {
+    $range_min = $pageno * $range_max;
+  }
+  else {
+    $range_min = 0;
+  }
+  $order_by = 'DESC';
+  $story_list_array = array();
+  $loop_count = 0;
+
+  // select node belong from current term id or child term id
+
+  $query = db_select('node', 'n');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+  $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
+  $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+  //field_data_field_story_select_magazine
+  $query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
+  //field_data_field_story_issue_date
+  $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
+  //field_data_field_story_magazine_story_issue
+  $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
+  //field_data_field_itg_common_by_line_name
+  $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
+  //field_data_field_reporter_unique_id
+  $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
+  //field_data_field_primary_category
+  $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
+
+  $query->fields('eli_file', array('uri'));
+  $query->fields('li_file', array('uri'));
+  $query->fields('mi_file', array('uri'));
+  $query->fields('si_file', array('uri'));
+  $query->fields('esi_file', array('uri'));
+
+  $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
+  $query->fields('si', array('field_story_small_image_fid'));
+  $query->fields('rc', array('field_common_related_content_value'));
+
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('vd', array('field_video_duration_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+  $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
+  $query->fields('fsri', array('field_reporter_unique_id_value'));
+  $query->fields('fci', array('field_primary_category_value'));
+
+
+  //end
+  $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $reskey => $resvalue) {
+    // node feed tag
+
+    $title = $resvalue['title'];
+    $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
+    $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
+    $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
+    $type = $resvalue['type'];
+    $nid = $resvalue['nid'];
+    $field_primary_category_value = $resvalue['field_primary_category_value'];
+    $term = taxonomy_term_load($field_primary_category_value);
+    $term_name = $term->name;
+    $created = $resvalue['created'];
+    $changed = $resvalue['changed'];
+    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $alias = drupal_get_path_alias('node/' . $nid . '');
+    $weburl = $base_url . "/" . $alias;
+    $field_video_duration_value = $resvalue['field_video_duration_value'];
+    // file url
+    $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
+    $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+
+    //related content
+    $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+    $comment_cont = getCommentsCount($nid);
+
+    // create date formating
+    $firebase_url = get_node_firebase_weburl($nid);
+
+    if ($created) {
+      $create_datetime = date("Y-m-d H:i:s", $created);
+      $create_date = date("Y-m-d H:i:s", $created);
     }
-    $order_by = 'DESC';
-    $story_list_array = array();
-    $loop_count = 0;
-
-    // select node belong from current term id or child term id
-
-    $query = db_select('node', 'n');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-    //field_data_field_story_select_magazine
-    $query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
-    //field_data_field_story_issue_date
-    $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
-    //field_data_field_story_magazine_story_issue
-    $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
-    //field_data_field_itg_common_by_line_name
-    $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
-    //field_data_field_reporter_unique_id
-    $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
-    //field_data_field_primary_category
-    $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
-
-    $query->fields('eli_file', array('uri'));
-    $query->fields('li_file', array('uri'));
-    $query->fields('mi_file', array('uri'));
-    $query->fields('si_file', array('uri'));
-    $query->fields('esi_file', array('uri'));
-
-    $query->fields('mi', array('field_story_medium_image_fid'));
-    $query->fields('li', array('field_story_large_image_fid'));
-    $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
-
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-    $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
-    $query->fields('fsri', array('field_reporter_unique_id_value'));
-    $query->fields('fci', array('field_primary_category_value'));
-
-
-    //end
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $reskey => $resvalue) {
-        // node feed tag
-
-        $title = $resvalue['title'];
-        $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
-        $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
-        $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
-        $type = $resvalue['type'];
-        $nid = $resvalue['nid'];
-        $field_primary_category_value = $resvalue['field_primary_category_value'];
-        $term = taxonomy_term_load($field_primary_category_value);
-        $term_name = $term->name;
-        $created = $resvalue['created'];
-        $changed = $resvalue['changed'];
-        $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-        $alias = drupal_get_path_alias('node/' . $nid . '');
-        $weburl = $base_url . "/" . $alias;
-        $field_video_duration_value = $resvalue['field_video_duration_value'];
-        // file url
-        $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-        $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-        $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
-
-        //related content
-        $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
-        $comment_cont = getCommentsCount($nid);
-
-        // create date formating
-        $firebase_url = get_node_firebase_weburl($nid);
-
-        if ($created) {
-            $create_datetime = date("Y-m-d H:i:s", $created);
-            $create_date = date("Y-m-d H:i:s", $created);
-        } else {
-            $create_datetime = "";
-            $create_date = "";
-        }
-        if ($changed) {
-            $changed_datetime = date("Y-m-d H:i:s", $changed);
-        } else {
-            $changed_datetime = "";
-        }
-        $conf = getStoryConfigVal($nid);
-        $is_lock = 0;
-        if (in_array("lock_story", $conf)) {
-            $is_lock = 1;
-        }
-
-        $story_list_array[$listcount]['s_id'] = "$nid";
-        $story_list_array[$listcount]['s_title'] = "$title";
-        $story_list_array[$listcount]['s_share_link'] = "$firebase_url";
-        $story_list_array[$listcount]['s_short_desc'] = "$field_story_kicker_text_value";
-        $story_list_array[$listcount]['s_comment_count'] = "$comment_cont";
-        $story_list_array[$listcount]['s_small_image'] = "$file_small_img_url";
-        $story_list_array[$listcount]['s_large_image'] = "$file_large_img_url";
-        $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
-        $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
-        $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
-        $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
-        $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
-        $story_list_array[$listcount]['s_pcategory_title'] = "$term_name";
-
-        $listcount++;
+    else {
+      $create_datetime = "";
+      $create_date = "";
+    }
+    if ($changed) {
+      $changed_datetime = date("Y-m-d H:i:s", $changed);
+    }
+    else {
+      $changed_datetime = "";
+    }
+    $conf = getStoryConfigVal($nid);
+    $is_lock = 0;
+    if (in_array("lock_story", $conf)) {
+      $is_lock = 1;
     }
 
-    $data['lcount'] = $listcount;
-    $data['data'] = $story_list_array;
-    $data['updated_datetime'] = $changed_datetime;
+    $story_list_array[$listcount]['s_id'] = "$nid";
+    $story_list_array[$listcount]['s_title'] = "$title";
+    $story_list_array[$listcount]['s_share_link'] = "$firebase_url";
+    $story_list_array[$listcount]['s_short_desc'] = "$field_story_kicker_text_value";
+    $story_list_array[$listcount]['s_comment_count'] = "$comment_cont";
+    $story_list_array[$listcount]['s_small_image'] = "$file_small_img_url";
+    $story_list_array[$listcount]['s_large_image'] = "$file_large_img_url";
+    $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
+    $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
+    $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
+    $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
+    $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
+    $story_list_array[$listcount]['s_pcategory_title'] = "$term_name";
 
-    $data['issue_date'] = $issue_date;
-    $data['issue_nid'] = $issue_nid;
-    $data['issue_cover_image'] = $issue_cover_image;
-    $data['issue_digitalmag_url'] = $issue_digitalmag_url;
+    $listcount++;
+  }
+
+  $data['lcount'] = $listcount;
+  $data['data'] = $story_list_array;
+  $data['updated_datetime'] = $changed_datetime;
+
+  $data['issue_date'] = $issue_date;
+  $data['issue_nid'] = $issue_nid;
+  $data['issue_cover_image'] = $issue_cover_image;
+  $data['issue_digitalmag_url'] = $issue_digitalmag_url;
 
 
-    return $data;
+  return $data;
 }
 
 /**
@@ -231,34 +235,35 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
  */
 function magazineCoverstoriesPageRerourceValue() {
 
-    // variable decalartion
-    $output_array = array();
-    $data_array = array();
-    $issue_list_array = array();
-    $updated_datetime = "";
+  // variable decalartion
+  $output_array = array();
+  $data_array = array();
+  $issue_list_array = array();
+  $updated_datetime = "";
 
 
-    // list array building
-    $data = magazineCoverstoriesPageRerourceValueList();
+  // list array building
+  $data = magazineCoverstoriesPageRerourceValueList();
 
-    if ($data['lcount'] > 0) {
-        $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
-    } else {
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "customised_message";
-    }
+  if ($data['lcount'] > 0) {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
+  }
+  else {
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+  }
 
-    //data array building
-    $datacount = $data['lcount'];
-    $data_up_time = $data['updated_datetime'];
+  //data array building
+  $datacount = $data['lcount'];
+  $data_up_time = $data['updated_datetime'];
 
 
 
-    $data_array['issue'] = $data['data'];
-    $output_array['data'] = $data_array;
+  $data_array['issue'] = $data['data'];
+  $output_array['data'] = $data_array;
 
-    return $output_array;
+  return $output_array;
 }
 
 /**
@@ -267,59 +272,59 @@ function magazineCoverstoriesPageRerourceValue() {
  * @return array
  */
 function magazineCoverstoriesPageRerourceValueList() {
-    // variable declaration
-    global $base_url;
-    $node_count = "";
-    $output = "";
-    $data = array();
-    $listcount = 0;
-    $data_list_array = array();
-    $loop_count = 0;
+  // variable declaration
+  global $base_url;
+  $node_count = "";
+  $output = "";
+  $data = array();
+  $listcount = 0;
+  $data_list_array = array();
+  $loop_count = 0;
 
-    // issue list query..
+  // issue list query..
 
-    $query_issue = db_select('node', 'n');
-    $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
-    $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
-    $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  $query_issue = db_select('node', 'n');
+  $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
 
-    $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
-    $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
-    $query_issue->fields('fsit', array('field_issue_title_value'));
-    $query_issue->fields('n', array('nid'));
+  $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
+  $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
+  $query_issue->fields('fsit', array('field_issue_title_value'));
+  $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('n.nid', 'desc')->range(0, 10);
-    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result_issue as $reskey => $resvalue) {
+  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('n.nid', 'desc')->range(0, 10);
+  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
-        $issueid = $resvalue['nid'];
-        $node_data = node_load($issueid);
-        $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
-        $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
-        $lar_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $lar_img);
-        $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
-        $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+    //issue node 
+    $issueid = $resvalue['nid'];
+    $node_data = node_load($issueid);
+    $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
+    $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
+    $lar_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $lar_img);
+    $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
+    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
-        $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
-        $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
+    $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
+    $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
 
-        $issue_date = $resvalue['field_issue_title_value'];
-        $issue_nid = $resvalue['nid'];
+    $issue_date = $resvalue['field_issue_title_value'];
+    $issue_nid = $resvalue['nid'];
 
-        $data_list_array[$loop_count]['issue_id'] = "$issueid";
-        $data_list_array[$loop_count]['issue_date'] = "$issue_date";
-        $data_list_array[$loop_count]['issue_cover_image'] = "$lar_img";
-        $data_list_array[$loop_count]['story'] = getCoverstoriesList($issue_date);
-        $loop_count++;
-    }
+    $data_list_array[$loop_count]['issue_id'] = "$issueid";
+    $data_list_array[$loop_count]['issue_date'] = "$issue_date";
+    $data_list_array[$loop_count]['issue_cover_image'] = "$lar_img";
+    $data_list_array[$loop_count]['story'] = getCoverstoriesList($issue_date);
+    $loop_count++;
+  }
 
-    $data['lcount'] = $loop_count;
-    $data['data'] = $data_list_array;
-    $data['updated_datetime'] = $changed_datetime;
+  $data['lcount'] = $loop_count;
+  $data['data'] = $data_list_array;
+  $data['updated_datetime'] = $changed_datetime;
 
 
-    return $data;
+  return $data;
 }
 
 /**
@@ -329,129 +334,131 @@ function magazineCoverstoriesPageRerourceValueList() {
  */
 function getCoverstoriesList($issue_date) {
 
-    $cover_story_list_array = array();
-    $loop_count = 0;
+  $cover_story_list_array = array();
+  $loop_count = 0;
 
-    // select node belong from current term id or child term id
+  // select node belong from current term id or child term id
 
-    $query = db_select('node', 'n');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+  $query = db_select('node', 'n');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+  $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-    //field_data_field_story_select_magazine
-    $query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
-    //field_data_field_story_issue_date
-    $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
-    //field_data_field_story_magazine_story_issue
-    $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
-    //field_data_field_itg_common_by_line_name
-    $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
-    //field_data_field_reporter_unique_id
-    $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
-    //field_data_field_primary_category
-    $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
+  $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+  //field_data_field_story_select_magazine
+  $query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
+  //field_data_field_story_issue_date
+  $query->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
+  //field_data_field_story_magazine_story_issue
+  $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
+  //field_data_field_itg_common_by_line_name
+  $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
+  //field_data_field_reporter_unique_id
+  $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
+  //field_data_field_primary_category
+  $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
 
-    $query->fields('eli_file', array('uri'));
-    $query->fields('li_file', array('uri'));
-    $query->fields('mi_file', array('uri'));
-    $query->fields('si_file', array('uri'));
-    $query->fields('esi_file', array('uri'));
+  $query->fields('eli_file', array('uri'));
+  $query->fields('li_file', array('uri'));
+  $query->fields('mi_file', array('uri'));
+  $query->fields('si_file', array('uri'));
+  $query->fields('esi_file', array('uri'));
 
-    $query->fields('mi', array('field_story_medium_image_fid'));
-    $query->fields('li', array('field_story_large_image_fid'));
-    $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
+  $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('li', array('field_story_large_image_fid'));
+  $query->fields('si', array('field_story_small_image_fid'));
+  $query->fields('rc', array('field_common_related_content_value'));
 
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('vd', array('field_video_duration_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
-    $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
-    $query->fields('fsri', array('field_reporter_unique_id_value'));
-    $query->fields('fci', array('field_primary_category_value'));
+  $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
+  $query->fields('fsri', array('field_reporter_unique_id_value'));
+  $query->fields('fci', array('field_primary_category_value'));
 
 
-    //end
+  //end
 
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $reskey => $resvalue) {
-        $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
-        $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
-        $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
-        $title = $resvalue['title'];
-        $type = $resvalue['type'];
-        $nid = $resvalue['nid'];
-        $field_primary_category_value = $resvalue['field_primary_category_value'];
-        $term = taxonomy_term_load($field_primary_category_value);
-        $term_name = $term->name;
-        $created = $resvalue['created'];
-        $changed = $resvalue['changed'];
-        $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-        $alias = drupal_get_path_alias('node/' . $nid . '');
-        $weburl = $base_url . "/" . $alias;
-        $field_video_duration_value = $resvalue['field_video_duration_value'];
-        // file url
-        $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-        $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-        $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+  $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $reskey => $resvalue) {
+    $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
+    $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
+    $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
+    $title = $resvalue['title'];
+    $type = $resvalue['type'];
+    $nid = $resvalue['nid'];
+    $field_primary_category_value = $resvalue['field_primary_category_value'];
+    $term = taxonomy_term_load($field_primary_category_value);
+    $term_name = $term->name;
+    $created = $resvalue['created'];
+    $changed = $resvalue['changed'];
+    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $alias = drupal_get_path_alias('node/' . $nid . '');
+    $weburl = $base_url . "/" . $alias;
+    $field_video_duration_value = $resvalue['field_video_duration_value'];
+    // file url
+    $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
+    $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+    $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
-        //related content
-        $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
-        $comment_cont = getCommentsCount($nid);
+    //related content
+    $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+    $comment_cont = getCommentsCount($nid);
 
-        // create date formating
-        $firebase_url = get_node_firebase_weburl($nid);
+    // create date formating
+    $firebase_url = get_node_firebase_weburl($nid);
 
-        if ($created) {
-            $create_datetime = date("Y-m-d H:i:s", $created);
-            $create_date = date("Y-m-d H:i:s", $created);
-        } else {
-            $create_datetime = "";
-            $create_date = "";
-        }
-        if ($changed) {
-            $changed_datetime = date("Y-m-d H:i:s", $changed);
-        } else {
-            $changed_datetime = "";
-        }
-        $conf = getStoryConfigVal($nid);
-        $is_lock = 0;
-        if (in_array("lock_story", $conf)) {
-            $is_lock = 1;
-        }
-
-        $cover_story_list_array[$loop_count]['s_id'] = "$nid";
-        $cover_story_list_array[$loop_count]['s_title'] = "$title";
-        $cover_story_list_array[$loop_count]['s_share_link'] = "$firebase_url";
-        $cover_story_list_array[$loop_count]['s_short_desc'] = "$field_story_kicker_text_value";
-        $cover_story_list_array[$loop_count]['s_comment_count'] = "$comment_cont";
-        $cover_story_list_array[$loop_count]['s_small_image'] = "$file_small_img_url";
-        $cover_story_list_array[$loop_count]['s_large_image'] = "$file_large_img_url";
-        $cover_story_list_array[$loop_count]['s_updated_datetime'] = "$changed_datetime";
-        $cover_story_list_array[$loop_count]['s_is_locked'] = "$is_lock";
-        $cover_story_list_array[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
-        $cover_story_list_array[$loop_count]['s_author_title'] = "$field_itg_common_by_line_name_value";
-        $cover_story_list_array[$loop_count]['s_pcategory_id'] = "$field_primary_category_value";
-        $cover_story_list_array[$loop_count]['s_pcategory_title'] = "$term_name";
-
-        $loop_count++;
+    if ($created) {
+      $create_datetime = date("Y-m-d H:i:s", $created);
+      $create_date = date("Y-m-d H:i:s", $created);
+    }
+    else {
+      $create_datetime = "";
+      $create_date = "";
+    }
+    if ($changed) {
+      $changed_datetime = date("Y-m-d H:i:s", $changed);
+    }
+    else {
+      $changed_datetime = "";
+    }
+    $conf = getStoryConfigVal($nid);
+    $is_lock = 0;
+    if (in_array("lock_story", $conf)) {
+      $is_lock = 1;
     }
 
-    return $cover_story_list_array;
+    $cover_story_list_array[$loop_count]['s_id'] = "$nid";
+    $cover_story_list_array[$loop_count]['s_title'] = "$title";
+    $cover_story_list_array[$loop_count]['s_share_link'] = "$firebase_url";
+    $cover_story_list_array[$loop_count]['s_short_desc'] = "$field_story_kicker_text_value";
+    $cover_story_list_array[$loop_count]['s_comment_count'] = "$comment_cont";
+    $cover_story_list_array[$loop_count]['s_small_image'] = "$file_small_img_url";
+    $cover_story_list_array[$loop_count]['s_large_image'] = "$file_large_img_url";
+    $cover_story_list_array[$loop_count]['s_updated_datetime'] = "$changed_datetime";
+    $cover_story_list_array[$loop_count]['s_is_locked'] = "$is_lock";
+    $cover_story_list_array[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
+    $cover_story_list_array[$loop_count]['s_author_title'] = "$field_itg_common_by_line_name_value";
+    $cover_story_list_array[$loop_count]['s_pcategory_id'] = "$field_primary_category_value";
+    $cover_story_list_array[$loop_count]['s_pcategory_title'] = "$term_name";
+
+    $loop_count++;
+  }
+
+  return $cover_story_list_array;
 }
 
 // 3rd
@@ -464,38 +471,39 @@ function getCoverstoriesList($issue_date) {
 function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno = 0) {
 
 
-    // variable decalartion
+  // variable decalartion
 
-    $output_array = array();
-    $data_array = array();
-    $photo_list_array = array();
-    $updated_datetime = "";
-
-
-    // list array building
-    $data = magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno);
-
-    if ($data['lcount'] > 0) {
-        $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
-    } else {
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "customised_message";
-    }
-
-    //data array building
-    $datacount = $data['lcount'];
-    $data_up_time = $data['updated_datetime'];
-
-    $data_array['issue_count'] = "$datacount";
-    $data_array['issue_display_count'] = "10";
-    $data_array['issue_pagination_cap'] = "7";
+  $output_array = array();
+  $data_array = array();
+  $photo_list_array = array();
+  $updated_datetime = "";
 
 
-    $data_array['issue'] = $data['data'];
-    $output_array['data'] = $data_array;
+  // list array building
+  $data = magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno);
 
-    return $output_array;
+  if ($data['lcount'] > 0) {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
+  }
+  else {
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+  }
+
+  //data array building
+  $datacount = $data['lcount'];
+  $data_up_time = $data['updated_datetime'];
+
+  $data_array['issue_count'] = "$datacount";
+  $data_array['issue_display_count'] = "10";
+  $data_array['issue_pagination_cap'] = "7";
+
+
+  $data_array['issue'] = $data['data'];
+  $output_array['data'] = $data_array;
+
+  return $output_array;
 }
 
 /**
@@ -504,70 +512,71 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
  * @return array
  */
 function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
-    // variable declaration
-    global $base_url;
-    $node_count = "";
-    $output = "";
-    $data = array();
-    $tid_list = array();
-    $tid_list[] = $tid;
-    $issue_list_array = array();
-    $listcount = 0;
-    $range_max = 10;
-    $sdate_fi = strtotime($sdate);
-    $tdate_fi = strtotime($tdate);
+  // variable declaration
+  global $base_url;
+  $node_count = "";
+  $output = "";
+  $data = array();
+  $tid_list = array();
+  $tid_list[] = $tid;
+  $issue_list_array = array();
+  $listcount = 0;
+  $range_max = 10;
+  $sdate_fi = strtotime($sdate);
+  $tdate_fi = strtotime($tdate);
 
-    if (!$pageno == 0) {
-        $range_min = $pageno * $range_max;
-    } else {
-        $range_min = 0;
-    }
+  if (!$pageno == 0) {
+    $range_min = $pageno * $range_max;
+  }
+  else {
+    $range_min = 0;
+  }
 
-    $loop_count = 0;
+  $loop_count = 0;
 
-    // issue list query..
+  // issue list query..
 
-    $query_issue = db_select('node', 'n');
-    $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
-    $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
-    $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  $query_issue = db_select('node', 'n');
+  $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
 
-    $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
-    $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
-    $query_issue->fields('fsit', array('field_issue_title_value'));
-    $query_issue->fields('n', array('nid'));
+  $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
+  $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
+  $query_issue->fields('fsit', array('field_issue_title_value'));
+  $query_issue->fields('n', array('nid'));
 
-    //condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
+  //condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
 
-    $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
-    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result_issue as $reskey => $resvalue) {
+  $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
-        $issueid = $resvalue['nid'];
-        $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
-        $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+    //issue node 
+    $issueid = $resvalue['nid'];
+    $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
+    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
-        $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
-        $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
+    $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
+    $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
 
-        $issue_date = $resvalue['field_issue_title_value'];
-        $issue_nid = $resvalue['nid'];
-        $i_story_count = getIssueStoryCount($issue_date);
+    $issue_date = $resvalue['field_issue_title_value'];
+    $issue_nid = $resvalue['nid'];
+    $i_story_count = getIssueStoryCount($issue_date);
 
-        $issue_list_array[$loop_count]['i_id'] = "$issue_nid";
-        $issue_list_array[$loop_count]['i_issue_date'] = "$issue_date";
-        $issue_list_array[$loop_count]['i_story_count'] = "$i_story_count";
-        $issue_list_array[$loop_count]['i_issue_cover_image'] = "$issue_cover_image";
-        $loop_count++;
-    }
+    $issue_list_array[$loop_count]['i_id'] = "$issue_nid";
+    $issue_list_array[$loop_count]['i_issue_date'] = "$issue_date";
+    $issue_list_array[$loop_count]['i_story_count'] = "$i_story_count";
+    $issue_list_array[$loop_count]['i_issue_cover_image'] = "$issue_cover_image";
+    $loop_count++;
+  }
 
-    $data['lcount'] = $loop_count;
-    $data['data'] = $issue_list_array;
-    $data['updated_datetime'] = $changed_datetime;
+  $data['lcount'] = $loop_count;
+  $data['data'] = $issue_list_array;
+  $data['updated_datetime'] = $changed_datetime;
 
 
-    return $data;
+  return $data;
 }
 
 /**
@@ -577,16 +586,16 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
  * @return $count
  */
 function getIssueStoryCount($issue_date) {
-    // issue list query..
-    $count = 0;
-    $query_issue = db_select('node', 'n');
-    $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
-    $query_issue->fields('n', array('nid'));
+  // issue list query..
+  $count = 0;
+  $query_issue = db_select('node', 'n');
+  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'story')->condition('fsit.field_issue_title_value', $issue_date);
-    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $count = count($result_issue);
-    return $count;
+  $query_issue->condition('n.status', 1)->condition('n.type', 'story')->condition('fsit.field_issue_title_value', $issue_date);
+  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $count = count($result_issue);
+  return $count;
 }
 
 /**
@@ -596,13 +605,13 @@ function getIssueStoryCount($issue_date) {
  * @return array
  */
 function getStoryConfigVal($nid) {
-    $conf = array();
-    $query_issue = db_select('field_data_field_story_configurations', 'sc');
-    $query_issue->fields('sc', array('field_story_configurations_value'));
-    $query_issue->condition('sc.entity_id', $nid);
-    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result_issue as $reskey => $resvalue) {
-        $conf[] = $resvalue;
-    }
-    return $conf;
+  $conf = array();
+  $query_issue = db_select('field_data_field_story_configurations', 'sc');
+  $query_issue->fields('sc', array('field_story_configurations_value'));
+  $query_issue->condition('sc.entity_id', $nid);
+  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result_issue as $reskey => $resvalue) {
+    $conf[] = $resvalue;
+  }
+  return $conf;
 }
