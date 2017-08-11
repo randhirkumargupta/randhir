@@ -3153,11 +3153,14 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         $uname = $params['user_id'];
 
         if ($uid) {
+            $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
+            $result = callAPI($method, $url, $params);
+            $result_obj = json_decode($result);
             $account['status_code'] = "1";
             $account['status_message'] = "";
             $account['data']['user_id'] = "$uname";
             $account['data']['is_authenticated'] = "1";
-            $account['data']['otp_status'] = "0";
+            $account['data']['otp_status'] = "1";
         } else {
             watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
             $account['status_code'] = "0";
