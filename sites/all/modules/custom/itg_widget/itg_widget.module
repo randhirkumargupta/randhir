@@ -1908,7 +1908,9 @@ function __get_sosorry_video_nid($type = 'feature') {
   return $query->execute()->fetchField();
 }
 
-
+/**
+ * Html output to decode.
+ */
 function __html_output_with_tags($string , $start = 0 , $end = 100) {
   $html = substr(html_entity_decode(drupal_html_to_text($string)), $start, $end);
   $doc = new DOMDocument();
