@@ -21,7 +21,7 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-global $base_url;
+global $base_url, $user;
 $arg = arg();
 
 if ($field->view->name == 'speaker_option_for_event' 
@@ -31,7 +31,17 @@ if ($field->view->name == 'speaker_option_for_event'
         || $field->view->name == 'manage_survey' 
         || $field->view->name == 'manage_quiz'
         || $field->view->name == 'bitrates_videos') {
-  print $output;
+  
+  if ($field->view->name == 'manage_survey') {
+    if (($row->_field_data['nid']['entity']->status == 0) || array_key_exists(SITE_ADMIN, $user->roles)) {      
+      print l($row->_field_data['nid']['entity']->title , 'node/' . $row->nid . '/edit', array('query' => drupal_get_destination()));      
+    } else {
+        echo $row->_field_data['nid']['entity']->title;
+    }
+  } else {
+      print $output;
+  }
+  
   
 } elseif (
     (isset($arg[0]) && $arg[0] == 'itg-custom-widget-content') || isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['nid']['entity']->type == 'itg_funalytics'
