@@ -6645,6 +6645,9 @@ div.node #comments h2 {
 [id*="itg-octopus-api-form"] .container-inline-date .date-padding input[type="text"], [id*="itg-octopus-api-rfa-form"] .container-inline-date .date-padding input[type="text"] {
   width: 100%;
 }
+[id*="itg-octopus-api-form"] .description, [id*="itg-octopus-api-rfa-form"] .description {
+  left: 100% !important;
+}
 
 /*.category-manager-selection-details{
   .field-name-field-cm-select-type{
