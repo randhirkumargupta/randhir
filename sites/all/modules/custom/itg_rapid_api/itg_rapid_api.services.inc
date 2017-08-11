@@ -2953,8 +2953,9 @@ function itg_rapid_api_testing($token) {
  * 	The node processed information array.
  */
 function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
-    $params = $_POST;
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $HTTP_RAW_POST_DATA;
+    //$params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //p($params);die();
     $login_type = 0;
     $login_type = $params['login_type'];
@@ -3123,9 +3124,10 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
  * 	The node processed information array.
  */
 function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
+    $HTTP_RAW_POST_DATA;
     // check duplicate user
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE); 
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE); 
+    //$params = $_POST;
     //p($_POST);die();
     $method = "GET";
     $data = array();
