@@ -10,6 +10,7 @@
  * @return array
  */
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
+    
     // variable decalartion
     $output_array = array();
     $data_array = array();
@@ -240,6 +241,9 @@ function generateNewsCategoryList($tid, $pageno) {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
+            }
+            if ($type == "photostory") {
+                $photolist = getPhotostorylist($nid);
             }
             if (count($photolist) == 0) {
                 $photolist = (object) $photolist;
@@ -582,4 +586,38 @@ function analytics_node_data($nid, $total) {
             return $analytics_data_array;
         }
     }
+}
+
+/**
+ * Get photo story list on  
+ * @param type $nid
+ * @return type
+ */
+function getPhotostorylist($nid) {
+    $photolist = array();
+    $photolist_loop = array();
+    $node = node_load($nid);
+    
+    $galleryimg = $node->field_photo_story['und'];
+    $lcont = 0;
+    foreach ($galleryimg as $key => $value) {
+
+      $fc = field_collection_field_get_entity($value);  
+      $fid = $fc->field_photo_story_image['und'][0]['fid'];
+     
+      $uri = $fc->field_photo_story_image['und'][0]['filename'];
+      $file_uri = file_create_url($uri);
+      $fid_file = $fid;
+      $img_url = completeFilePath($fid_file);
+      $caption = "";
+      $byline = "";
+      
+        $photolist_loop[$lcont]['np_id'] = "$fid";
+        $photolist_loop[$lcont]['np_image'] = "$img_url";
+        $photolist_loop[$lcont]['np_credit'] = "$byline";
+        $photolist_loop[$lcont]['np_caption'] = "$caption";
+        $lcont++;
+    }
+    $photolist['photos'] = $photolist_loop;
+    return $photolist;
 }
