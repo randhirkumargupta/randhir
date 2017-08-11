@@ -833,6 +833,7 @@ jQuery(document).ready(function () {
 
   // jQuery code to add Light off/on effect 
   jQuery('body').on('click', '.light-off-on-tab', function () {
+    jQuery(this).find('a').toggleClass('active');
     jQuery('body').toggleClass('light-off-overlay');
     jQuery('.program-livetv').toggleClass('effect-added');
   });

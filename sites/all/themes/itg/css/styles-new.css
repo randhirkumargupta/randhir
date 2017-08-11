@@ -4439,7 +4439,7 @@ div#forgot-field-heading {
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile #umail:after {
   content: 'OR';
   position: absolute;
-  left: 278px;
+  left: 95.5%;
   top: 10px;
   margin: 0 auto;
   width: 25px;
@@ -5564,20 +5564,20 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .show-embed-code-link .show-embed-code-div .copy-sample-code {
   background-color: #fff;
   position: relative;
-  box-shadow: 0 0 10px #666;
-}
-.show-embed-code-link .show-embed-code-div .copy-sample-code:before {
-  border-color: transparent transparent #fff transparent;
-  border-style: solid;
-  border-width: 11px;
-  content: "";
-  height: 0;
-  position: absolute;
-  top: -20px;
-  width: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  box-shadow: 0px 5px 20px -5px #000;
+  /*        &:before {
+            border-color: transparent transparent #fff transparent;
+            border-style: solid;
+            border-width: 11px;
+            content: "";
+            height: 0;
+            position: absolute;
+            top: -20px;
+            width: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+          }*/
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code textarea {
   border: 1px solid #fff;

@@ -436,19 +436,6 @@
     font-size: 11px;
   }
   /*search page css end */
-  
-  #block-itg-live-tv-live-tv-video-page{
-    .program-livetv{
-      .live_tv_video{
-        max-width: 82%;
-        padding-bottom: 46.5%;
-      }
-      .social-icon{
-        width: 18%;
-        padding-top: 10px;
-      }
-    }
-  }
 }   
 
 
@@ -592,20 +579,6 @@
     }
   }
   /*budget page css end*/
-
-  #block-itg-live-tv-live-tv-video-page{
-    .program-livetv{
-      .live_tv_video{
-        max-width: 83%;
-        padding-bottom: 47%;
-      }
-      .social-icon{
-        width: 17%;
-        padding-top: 0px;
-      }
-    }
-  }
-
 }
 
 @media only screen and (max-width:768px){
@@ -1788,7 +1761,15 @@
 }
 
 
-
+@media all and (min-width: 680px){
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon{position: relative;}
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon > ul{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+}
 @media only screen and (max-width:680px){ 
   /*CSS start video landing page*/
   #block-views-video-landing-header-block-1{
@@ -1998,15 +1979,17 @@
       }
     }
     .program-livetv{
-      padding: 10px;
-      .social-icon{
+      padding: 10px 10px 0;
+      display: block;
+      .social-icon, .live_tv_video{
         width: 100%;
       } 
       .live_tv_video{
-        max-width: none;
         padding-bottom: 56.25%;
       }
       .social-icon {
+        > ul{position: relative;}
+        padding-top: 0;
         li{
           @include display-inline;
           a{
@@ -2020,6 +2003,14 @@
               display: none;
             }
           }                
+        }
+        .show-embed-code-link{
+          position: static;
+          .show-embed-code-div{
+            transform: none;
+            width: 100%;
+            left: 0;
+          }
         }
       }
     }
