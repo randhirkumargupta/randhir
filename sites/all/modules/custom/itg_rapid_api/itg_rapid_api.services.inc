@@ -3454,18 +3454,25 @@ function polls_close($token) {
  * 	array of open polls.
  */
 function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
 
     $poll_id = $params['poll_id'];
     $option_id = $params['option_id'];
-    $user_id = $params['user_id'];
+    $user_name = $params['user_id'];
+    
+    $user_load = user_load_by_name(trim($user_name));
+    $user_id = $user_load->uid;
+
     $args = '0';
     //Check args is exist
     if (isset($poll_id) && isset($option_id) && isset($user_id)) {
         $args = '1';
+        $arg_msg = 'Arguments are missing';
     } else {
         
+      $arg_msg = 'User id does not exist.';
     }
 
 
@@ -3494,7 +3501,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
     if (!is_numeric($user_id)) {
         $user_id = 0;
     }
-
+    
     // check args
     if ($args != '0') {
 
@@ -3513,7 +3520,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
     } else {
         $output_array = array();
         $output_array['status_code'] = "0";
-        $output_array['status_message'] = "Arguments are missing";
+        $output_array['status_message'] = "$arg_msg";
         $output_array['data'] = array();
         $jsondata = json_encode($output_array);
     }
@@ -3942,7 +3949,9 @@ function bookmark_get_responce($token, $user_id) {
  */
 
 function bookmark_set_responce($token, $user_id, $node_id) {
-    $params = $_POST;
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $user_id = $params['user_id'];
     $node_id = $params['node_id'];
 
@@ -3970,7 +3979,9 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
-    $params = $_POST;
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
 
     $user_id = $params['user_id'];
     $node_id = $params['node_id'];
