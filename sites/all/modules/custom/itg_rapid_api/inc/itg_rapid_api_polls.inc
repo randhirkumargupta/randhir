@@ -323,6 +323,7 @@ function open_poll_list($res) {
     $options2[] = $options;
   }
 
+  $count_total_patic = poll_participants($res['nid']);
   $news['p_id'] = "$poll_nid";
   $news['p_is_sponsored'] = "";
   $news['p_sponsored_icon'] = "";
@@ -331,7 +332,7 @@ function open_poll_list($res) {
   $news['p_title'] = "$poll_title";
   $news['p_image'] = "$poll_ques_img";
   $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-  $news['total_participants'] = "";
+  $news['total_participants'] = "$count_total_patic";
 
   $news['p_option'] = $options2;
   return $news;
@@ -427,7 +428,7 @@ function poll_close_datalist($res) {
     $options2[] = $options;
   }
 
-  $count_total_patic = itg_poll_getTotalPoll($res['nid']);
+  $count_total_patic = poll_participants($res['nid']);
   $poll_nid = $res['nid'];
   $poll_start_date_value = $res['field_poll_start_date_value'];
   $poll_title = $res['title'];
@@ -501,7 +502,7 @@ function poll_detail_datalist($poll_id) {
       $options2[] = $options;
     }
 
-    $count_total_partic = itg_poll_getTotalPoll($res['nid']);
+    $count_total_patic = poll_participants($res['nid']);
     $poll_id = isset($res['nid']) ? $res['nid'] : "";
     $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
     $poll_title = $res['title'];
@@ -514,7 +515,7 @@ function poll_detail_datalist($poll_id) {
     $news['p_title'] = "$poll_title";
     $news['p_image'] = "$poll_ques_img";
     $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-    $news['total_participants'] = "$count_total_partic";
+    $news['total_participants'] = "$count_total_patic";
 
     $news['p_option'] = $options2;
     $news2[] = $news;
@@ -606,4 +607,16 @@ function poll_voter_count($node_id, $option_id) {
   $query->addExpression('COUNT(p.id)', 'optionCnt');
   $results = $query->execute()->fetchField();
   return $results;
+}
+/**
+ * count total participants of the poll
+ * @param type $node_id
+ * @return type
+ */
+function poll_participants($node_id){
+  $query = db_select('itg_polls', 'p');
+  $query->condition('p.nid', $node_id);
+  $query->addExpression('COUNT(p.id)', 'optionCnt');
+  $results = $query->execute()->fetchField();
+  return $results;  
 }
