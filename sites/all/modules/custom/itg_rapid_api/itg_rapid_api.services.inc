@@ -3249,9 +3249,10 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
  * 	The node processed information array.
  */
 function itg_rapid_api_forgot_password($token, $user_id) {
+    $HTTP_RAW_POST_DATA;
     $method = "GET";
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);  
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);  
+    //$params = $_POST;
 
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
     $result = callAPI($method, $url, $params);
@@ -3271,10 +3272,10 @@ function itg_rapid_api_forgot_password($token, $user_id) {
  * 	The node processed information array.
  */
 function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
-
+    $HTTP_RAW_POST_DATA;
     $method = "GET";
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3297,9 +3298,10 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
  * 	The node processed information array.
  */
 function itg_rapid_api_resend_otp($token, $user_id) {
+    $HTTP_RAW_POST_DATA;
     $method = "GET";
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3319,9 +3321,10 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  * 	The node processed information array.
  */
 function itg_rapid_api_change_password($token, $user_id) {
+    $HTTP_RAW_POST_DATA;
     $method = "GET";
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3589,10 +3592,10 @@ function poll_detail($token, $poll_id) {
  */
 function itg_rapid_api_edit_profile($token) {
 
-
+    $HTTP_RAW_POST_DATA;
     $method = "GET";
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $token = $params['authtoken_id'];
     if (!drupal_valid_token($token, 'services')) {
         $responce_object['status_code'] = "0";
@@ -3630,9 +3633,10 @@ function itg_rapid_api_edit_user_image($token) {
  *
  */
 function itg_rapid_api_get_login_user_detail($token) {
+    $HTTP_RAW_POST_DATA;
     $data = array();
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $authtoken_id = $params['authtoken_id'];
     $user_id = $params['user_id'];
     $token = $params['authtoken_id'];
@@ -3701,9 +3705,10 @@ function itg_rapid_api_get_login_user_detail($token) {
  *
  */
 function itg_rapid_api_log_out($token) {
+    $HTTP_RAW_POST_DATA;
     global $base_url;
-    //$params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //$params = $_POST;
     $data = array();
     $user_id = $params['user_id'];
     $pram = "uname=$user_id";
