@@ -499,7 +499,7 @@ function photogallery_field_default_field_instances() {
     'label' => 'Thumb Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -507,7 +507,7 @@ function photogallery_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1298,6 +1298,48 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete_tags',
       'weight' => 56,
+    ),
+  );
+
+  // Exported field_instance: 'node-photogallery-field_photo_see_pic_link'.
+  $field_instances['node-photogallery-field_photo_see_pic_link'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter see pic link title',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_photo_see_pic_link',
+    'label' => 'See pic link',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 80,
     ),
   );
 
@@ -3052,6 +3094,7 @@ function photogallery_field_default_field_instances() {
   t('Credit Name');
   t('Credit/Source');
   t('Enable');
+  t('Enter see pic link title');
   t('Extra large image');
   t('Extra small image');
   t('Facebook Video');
@@ -3085,6 +3128,7 @@ function photogallery_field_default_field_instances() {
   t('Related Content');
   t('Related Content Detail');
   t('Section');
+  t('See pic link');
   t('Set As Featured');
   t('Short description');
   t('Small image');

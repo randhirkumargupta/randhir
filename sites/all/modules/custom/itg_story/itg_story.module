@@ -88,6 +88,10 @@ function itg_story_permission() {
       'title' => t('story permission'),
       'description' => t('story permission.'),
     ),
+    'access layout delete' => array(
+      'title' => t('layout delete permission'),
+      'description' => t('layout delete permission.'),
+    ),
   );
 }
 
@@ -1090,7 +1094,7 @@ function itg_story_photo_amp_html($node_id) {
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
       <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
@@ -1125,7 +1129,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"></amp-img><span class="counter">'.$slide.'</span>
+       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">'.$slide.'</span>
     </button>';
       $index++;
       $slide++;

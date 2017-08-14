@@ -3,18 +3,18 @@
  * Contains all functionality User Generated Content
  */
 
-(function($) {
+(function ($) {
     Drupal.behaviors.itg_ugc = {
-        attach: function(context, settings) {
+        attach: function (context, settings) {
             var uid = settings.itg_ugc.settings.uid;
             // code to hide body text format filter 
-            if (uid != 1) {                
-                $('#edit-field-user-message-und-0-format').hide();                
+            if (uid != 1) {
+                $('#edit-field-user-message-und-0-format').hide();
             }
 
-            $('#edit-field-ugc-ctype-und').change(function() {
+            $('#edit-field-ugc-ctype-und').change(function () {
                 var contenttypevalue = $('#edit-field-ugc-ctype-und').val();
-                
+
                 if (contenttypevalue == 'photogallery'
                         || contenttypevalue == 'blog'
                         || contenttypevalue == 'audio'
@@ -38,7 +38,7 @@
             if ($('.form-field-name-field-ugc-ctype .form-select').val() == 'photogallery') {
                 $('.form-field-name-field-ugc-ctype').siblings('.form-field-name-field-ugc-upload-photo').find('.form-item > label').html('Upload Photo <span class="form-required" title="This field is required.">*</span>');
             }
-            $('.form-field-name-field-ugc-ctype').on('change', '.form-select', function() {
+            $('.form-field-name-field-ugc-ctype').on('change', '.form-select', function () {
 
                 var selectedVal = $(this).val();
                 if (selectedVal == 'photogallery') {
@@ -48,7 +48,7 @@
 
 
             // restrict user to enter special charecter and number               
-            $('#edit-field-user-name-und-0-value').keyup(function() {
+            $('#edit-field-user-name-und-0-value').keyup(function () {
                 this.value = this.value.replace(/[^a-zA-Z\s.,]/g, '');
             });
 
@@ -56,16 +56,16 @@
 
             // Custom validator function for social media start
             $("#ugc-node-form").validate({
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     $('input:submit').attr('disabled', 'disabled');
                     form.submit();
                 },
-                onfocusout: function(element) {
+                onfocusout: function (element) {
                     $(element).valid();
                 },
                 ignore: '',
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     var elementName = element.attr('name');
                     var errorPlaceHolder = '';
                     switch (elementName) {
@@ -82,7 +82,7 @@
                     },
                     'field_user_email[und][0][value]': {
                         required: true,
-                        email: true
+                        laxEmail: true
                     },
                     'field_user_message[und][0][value]': {
                         required: function (element) {
@@ -128,10 +128,14 @@
             });
 
             // validate content type drop down
-            jQuery.validator.addMethod("validateSignName", function(value, element) {
+            jQuery.validator.addMethod("validateSignName", function (value, element) {
                 return validateSignNameValue(value, element);
             }, "Content Type field is required.");
 
+            jQuery.validator.addMethod("laxEmail", function (value, element) {
+                // allow any non-whitespace characters as the host part
+                return this.optional(element) || /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)(\s+)?$/.test(value);
+            }, 'Please enter a valid email address.');
 
             // validate content type drop down
             function validateSignNameValue(event, element) {
@@ -144,20 +148,20 @@
             }
 
             // Written code for handling repeating error message
-            $('.form-field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function(e) {
+            $('.form-field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function (e) {
                 $('.form-field-name-field-ugc-upload-photo').find('.messages.error').remove();
             });
 
-            $('.form-field-name-field-astro-video').find('.form-submit').on('mousedown', function(e) {
+            $('.form-field-name-field-astro-video').find('.form-submit').on('mousedown', function (e) {
                 $('.form-field-name-field-astro-video').find('.messages.error').remove();
             });
 
 
-            $('.form-field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function(e) {
+            $('.form-field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function (e) {
                 $('.form-field-name-field-ugc-upload-photo').find('.messages.status').remove();
             });
 
-            $('.form-field-name-field-astro-video').find('.form-submit').on('mousedown', function(e) {
+            $('.form-field-name-field-astro-video').find('.form-submit').on('mousedown', function (e) {
                 $('.form-field-name-field-astro-video').find('.messages.status').remove();
             });
 

@@ -240,7 +240,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -253,7 +253,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -644,7 +644,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Posted by';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -657,7 +657,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -745,6 +745,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['fields']['edit_node']['hide_empty'] = TRUE;
@@ -816,14 +817,14 @@ function features_for_survey_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';
@@ -1047,7 +1048,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -1060,7 +1061,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1148,6 +1149,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
@@ -1234,14 +1236,14 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['filters']['field_supp_publish_value']['field'] = 'field_supp_publish_value';
   $handler->display->display_options['filters']['field_supp_publish_value']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_supp_publish_value']['group'] = 1;
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';
@@ -1465,7 +1467,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -1478,7 +1480,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1565,6 +1567,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
@@ -1634,14 +1637,14 @@ function features_for_survey_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
+  /* Filter criterion: Content: Timeline (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';

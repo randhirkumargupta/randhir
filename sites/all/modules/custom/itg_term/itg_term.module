@@ -200,6 +200,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
       if (!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
         $form['#submit'][] = 'itg_term_status_message';
       }
+      break;
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
@@ -469,7 +470,7 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
       $delete_destination = 'texonomy/confirm/ajax/' . trim($form['#term']['tid']);
       // Call valiadte and after build
 
-      $form['#validate'][] = 'itg_term_validate';
+      //$form['#validate'][] = 'itg_term_validate';
 
       // redirect path
       if (arg(4) != 'add') {

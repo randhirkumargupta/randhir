@@ -607,6 +607,43 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_old_content_source_id'.
+  $field_instances['taxonomy_term-category_management-field_old_content_source_id'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_old_content_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_program_timing_in_days'.
   $field_instances['taxonomy_term-category_management-field_program_timing_in_days'] = array(
     'bundle' => 'category_management',
@@ -947,6 +984,7 @@ function feature_category_management_field_default_field_instances() {
   t('Select template');
   t('Select template type');
   t('Set As Featured');
+  t('Source id');
   t('Sponsored Category');
   t('Time Period');
 

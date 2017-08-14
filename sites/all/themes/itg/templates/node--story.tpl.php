@@ -59,6 +59,18 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
 
+    // for activate_live_tv
+    $activate_live_tv = false;
+    $config = array();
+    if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $value) {
+            $config[] = $value['value'];
+            if($value['value'] == 'activate_live_tv') {
+                $activate_live_tv = true;
+            }
+        }
+    }
+
   // get posted by info
   $node_author = $content["author"];
   /* if (function_exists('itg_get_front_activity_info')) {
@@ -120,12 +132,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
         <?php
       }
       else {
         ?>
-        <h1 title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -380,46 +392,50 @@ if (!empty($content)):
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" ><?php
-                  if (empty($widget_data)) {
-                    $story_image = '';
-                    if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                      $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    }
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
-                  }
-                  else {
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
-                    ?>        
+                <div class="stryimg" >
+                  <?php if($activate_live_tv) { ?>
+                        <div class="story_itg_live_tv">
+                                <?php print itg_live_tv_page_video(); ?>
+                        </div>
+                <?php } else {
+                        if (empty($widget_data)) {
+                            $story_image = '';
+                            if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+                                $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            }
+                            if (file_exists($story_image)) {
+                                $file_uri = file_create_url($story_image);
+                            }
+                            else {
+                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                            print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                        }
+                        else {
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                            if (file_exists($story_image)) {
+                                $file_uri = file_create_url($story_image);
+                            }
+                            else {
+                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                            ?>
 
-                    <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
-                      <i class="fa fa-play-circle"></i>
-                      <?php
+                            <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                                <i class="fa fa-play-circle"></i>
+                                <?php
+                            }
+                            else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                                ?>
+                                <i class="fa fa-camera"></i>
+                                <?php
+                            }
+                            print '</span></a>';
+                        }
                     }
-                    else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                      ?>                    
-                      <i class="fa fa-camera"></i>
-                      <?php
-                    }
-                    print '</span></a>';
-                  }
-                  ?>
 
-                  <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
                       $urltags = addhttp($tagval->tag_url);
@@ -551,7 +567,7 @@ if (!empty($content)):
               }
               if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
                 ?>
-                <div class="ad-blocker-content"><?php print strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, "")); ?></div>
+                <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php } ?>
               <div class="ad-blocker"></div>
               <div class="description">
@@ -722,6 +738,7 @@ if (!empty($content)):
           }
           ?>">
                  <?php
+
                  if (!empty($node->field_photo_story)) {
                    $output = itg_story_photo_story_html($node->nid);
                    print $output;
@@ -939,12 +956,6 @@ if (!empty($content)):
             <?php
           }
 
-          $config = array();
-          if (!empty($node->field_story_configurations['und'])) {
-            foreach ($node->field_story_configurations['und'] as $value) {
-              $config[] = $value['value'];
-            }
-          }
           ?>
 
         </div>
