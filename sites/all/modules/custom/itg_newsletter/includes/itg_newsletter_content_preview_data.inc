@@ -34,6 +34,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
       $query->condition('n.type' , 'story' , '=');
       $query->condition('fsc.field_story_category_tid' , $cat_array , 'IN');
       $query->orderBy('n.nid' , 'DESC');
+      $query->groupBy('n.nid');
       $query->range(0 , 20);
       $result = $query->execute();
       while ($records = $result->fetchAssoc()) {
@@ -57,7 +58,8 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
-    $title = $news_detail->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+    if(!empty($news_detail)) {
+    $title =  $news_detail->title;
     $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail" , $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
@@ -66,12 +68,13 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
       $thumbnail = $base_url . '/' . drupal_get_path('module' , 'itg_newsletter') . '/image/no-image.png';
     }
     $link = 'node/' . $news_detail->nid;
-    $content .= '<tr>
+    $content .= '<tr class="node-'.$news_detail->nid.'">
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title , $link , array('attributes' => array('target' => '_blank'))) . '</h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
+    }
   }
   $content .= '</table>
       </td>
