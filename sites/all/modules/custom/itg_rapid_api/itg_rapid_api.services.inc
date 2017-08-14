@@ -3132,7 +3132,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $method = "GET";
     $data = array();
     $account_err = array();
-    $data['user_id'] = $_GET['user_id'];
+    $data['user_id'] = $params['user_id'];
     $account = array();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user";
     $result = callAPI($method, $url, $data);
