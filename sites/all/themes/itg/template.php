@@ -156,6 +156,12 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'photogallery-embed' || $arg[0] == 'embed-video' || $arg[0] == 'embeded-video') {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
+  if ($arg[0] == 'photo' && $arg[2] == 'embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
 
   // For single column page
   if ($arg[0] == 'be-lucky-today') {
