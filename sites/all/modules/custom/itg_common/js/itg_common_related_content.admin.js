@@ -34,14 +34,15 @@ jQuery(document).ready(function () {
         var index_arr = [];
         var rel_tit_arr = [];
         var new_arr = [];
+        var new_arr_detail;
         var detail_default_arr;
         var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
         var detail_default = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
         if (itemString) {
-            item = itemString.split(",");
+            item = itemString.split("|");
         }
         if (detail_default) {
-            detail_default_arr = detail_default.split(",");
+            detail_default_arr = detail_default.split("|");
         }
         checkedlist = '';
 
@@ -57,15 +58,17 @@ jQuery(document).ready(function () {
             index_arr.push(rel_index);
             if (detail_default_arr != null && detail_default_arr != undefined) {
                 new_arr.push(detail_default_arr[index_arr[i]]);
+                new_arr_detail = new_arr.join('|');
             }
         }
-        jQuery('#edit-field-cm-related-content-detail-und-0-value').val(new_arr);
+        
+        jQuery('#edit-field-cm-related-content-detail-und-0-value').val(new_arr_detail);
         //console.log(index_arr);
         //console.log(new_arr);
         var detailString = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
         
         if (detailString) {
-          detail = detailString.split(",");
+          detail = detailString.split("|");
         }
         for (var i = 0, l = item.length; i < l; i++) {
             var site = item[i].split('_');
@@ -123,6 +126,7 @@ jQuery(document).ready(function () {
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item_new = [];
+        var item_new_detail;
         var contentRow = []; 
         var contentFinal = '';
         jQuery('.checked-list li').each(function(i){
@@ -131,7 +135,7 @@ jQuery(document).ready(function () {
           var itemTitle = jQuery(this).find('.rc-title').val();
           var str = itemVal+'@'+itemType+'@'+itemTitle;
           contentRow[i] = str;
-          contentFinal = contentRow.join();
+          contentFinal = contentRow.join('|');
         });
         jQuery('#edit-field-cm-related-content-detail-und-0-value').val(contentFinal);
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
@@ -141,8 +145,10 @@ jQuery(document).ready(function () {
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function (i) {
             item_new.push(jQuery(this).find('.item-value').text());
+            item_new_detail = item_new.join('|');
+            
         });
-        jQuery('#edit-field-common-related-content-und-0-value').val(item_new);
+        jQuery('#edit-field-common-related-content-und-0-value').val(item_new_detail);
         relatedContent();
         alert('Changes made successfully');
     });
