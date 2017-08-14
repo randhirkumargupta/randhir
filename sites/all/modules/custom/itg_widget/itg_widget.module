@@ -537,7 +537,6 @@ function itg_widget_block_view($delta = '') {
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
-
       $info['widget'] = 'photo_carousel_list_widget';
       $info['order'] = 'ASC';
       $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;

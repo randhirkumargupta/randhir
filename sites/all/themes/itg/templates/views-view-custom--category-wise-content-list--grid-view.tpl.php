@@ -41,6 +41,7 @@ global $base_url;
           }
           else {
             print l(strip_tags(mb_strimwidth(__html_output_with_tags($row['title']), 0, 100, "..")), "node/" . $row['nid'], array("html" => TRUE));
+
           }
           ?>
         </h3>

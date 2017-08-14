@@ -29,10 +29,10 @@
         <p title="<?php print strip_tags($row['title']); ?>">       
  <?php
         if (isset($_GET['category'])) {
-          print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)));
+          print html_entity_decode(l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))));
         }
         else {
-          print l($row['title'], 'node/' . $row['nid']);
+          print html_entity_decode(l($row['title'], 'node/' . $row['nid']));
         }
         ?>
         </p>

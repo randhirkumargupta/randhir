@@ -52,7 +52,7 @@ if (function_exists('itg_live_tv_company')) {
                     </div>
                 </div>
             </li>
-            <li class="light-off-on-tab light-on-active">
+            <li class="light-off-on-tab">
                 <a href="javascript:;">
                     <i class="fa fa-lightbulb-o"></i> 
                     <span class="light-off-text"><?php print t('Light off'); ?></span>

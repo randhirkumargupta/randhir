@@ -71,8 +71,13 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['embed-video/%'] = array(
+  $items['video/%/embed/%'] = array(
     'page callback' => 'itg_videogallery_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['photo/%/embed/%'] = array(
+    'page callback' => 'itg_photo_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -771,6 +776,11 @@ function itg_common_theme() {
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
+     'itg_photo_embed' => array(
+      'template' => 'itg-photo-embed',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
 
   return $themes;
@@ -808,7 +818,6 @@ function itg_content_inactive() {
   $current_time = date("Y-m-d H:i:s");
   //set content type
   $content_type = array('story', 'videogallery');
-
   $itg_query = db_select('node', 'n');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('n', array('nid'));
@@ -818,9 +827,7 @@ function itg_content_inactive() {
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
 
   //$itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));
-
   $itg_result = $itg_query->execute()->fetchAll();
-
   foreach ($itg_result as $itg_val) {
     $node = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
@@ -1023,14 +1030,25 @@ function itg_photogallery_embed() {
  * Helper function to get videogallery.
  */
 function itg_videogallery_embed() {
-
-  $arg = arg(1);
+  $arg = arg(3);
   if (!empty($arg)) {
     $gid = base64_decode($arg);
     if (function_exists('get_video_in_fieldcollection_by_nid')) {
       $videoids = get_video_in_fieldcollection_by_nid($gid);
     }
     return theme('itg_videogallery_embed', array('data' => $videoids));
+  }
+}
+
+/**
+ * Helper function to get videogallery.
+ */
+function itg_photo_embed() {
+  $arg = arg(3);
+  if (!empty($arg)) {
+    $gid = base64_decode($arg);
+    $data = node_load($gid);
+    return theme('itg_photo_embed', array('data' => $data));
   }
 }
 
