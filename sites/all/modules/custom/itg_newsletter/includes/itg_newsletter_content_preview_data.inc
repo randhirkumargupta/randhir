@@ -63,9 +63,12 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail" , $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      if(empty(file_get_contents($thumbnail))) {
+        $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
+      }
     }
     else {
-      $thumbnail = $base_url . '/' . drupal_get_path('module' , 'itg_newsletter') . '/image/no-image.png';
+      $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
     }
     $link = 'node/' . $news_detail->nid;
     $content .= '<tr class="node-'.$news_detail->nid.'">
