@@ -78,10 +78,10 @@ jQuery(document).ready(function(){
     var item = [];
     var detail = [];
     if(insvalue){
-        item = insvalue.split("|");
+        item = insvalue.split("|~|");
     }
     if(relatedtit){
-        detail = relatedtit.split("|");
+        detail = relatedtit.split("|~|");
     }
     jQuery('body').on('change', '.itg-row-selector-select', function () {
         var isCheck = jQuery(this).is(':checked');
@@ -112,11 +112,11 @@ jQuery(document).ready(function(){
             var hastitle = jQuery.inArray(site_detail, detail);
             detail.splice(hastitle, 1);
         }
-          seprated_item = item.join('|');
-          seprated_detail = detail.join('|');
+          seprated_item = item.join('|~|');
+          seprated_detail = detail.join('|~|');
         jQuery('#insvalue').val(seprated_item);
         jQuery('#relatedtit').text(seprated_detail);
-        jQuery('#insvalue').attr('title', item);
+        jQuery('#insvalue').attr('title', seprated_item);
         //console.log("hasurl index = " + item);
     });
 

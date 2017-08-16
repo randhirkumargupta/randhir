@@ -956,7 +956,7 @@ function get_related_display_title($nid, $display_id) {
         ->condition('ds.entity_id', $nid);
     $display_data = $query->execute()->fetchField();
     if (!empty($display_data)) {
-      $explode_string = explode('|', $display_data);
+      $explode_string = explode('|~|', $display_data);
       $string_match = '_' . $display_id . '@';
       foreach ($explode_string as $key => $value) {
         if (strpos($value, $string_match) !== false) {
