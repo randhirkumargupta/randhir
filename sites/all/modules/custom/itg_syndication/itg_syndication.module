@@ -746,3 +746,27 @@ function itg_syndication_get_rules_detaiils() {
     return $rules_data;
   }
 }
+
+/**
+ * Function which gives flag weather node is future date or not.
+ * 
+ * @param int $nid
+ *    Node id
+ * 
+ * @return boolean
+ */
+function is_not_future_node($nid) {
+  $results = array();
+  if(!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin("field_data_field_story_schedule_date_time" , "sdt" , "sdt.entity_id=n.nid");
+    $query->fields('n', array('nid'));
+    // Logic to skip future nodes.
+    $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
+      ->condition("sdt.field_story_schedule_date_time_value" , date('Y-m-d H:i:s') , "<");
+    $query->condition($db_or);
+    $query->condition('n.nid' , $nid);
+    $results = $query->execute()->fetchAllAssoc('nid');
+  }
+  return empty($results) ? FALSE : TRUE;
+}

@@ -8,21 +8,28 @@
 function third_party_coupon_form($form, &$form_state) {
   global $base_url;
   $form['coupon_holder'] = array(
-      '#type' => 'fieldset',
-      '#description' => t("Upload third party coupon"),
-      '#collapsible' => TRUE,
-      '#collapsed' => FALSE,
+    '#type' => 'fieldset',
+    '#description' => t("Upload third party coupon"),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
   );
 
+  $path = drupal_get_path('module', 'itg_coupon') . '/samplefile/third_party_coupon_import.csv';
+  $sample_file_link = '<a href="' . $path . '">Download coupon.csv</a>';
+
+  $form['coupon_holder']['sample_file'] = array(
+    '#markup' => $sample_file_link
+  );  
+
   $form['coupon_holder']['file_upload'] = array(
-      '#type' => 'file',
-      '#title' => t('CSV File'),
-      '#size' => 40,
-      '#description' => t('Select the CSV file to import third party coupons'));
+    '#type' => 'file',
+    '#title' => t('CSV File'),
+    '#size' => 40,
+    '#description' => t('Select the CSV file to import third party coupons'));
 
   $form['coupon_holder']['submit_button'] = array(
-      '#type' => 'submit',
-      '#value' => t('Submit'),
+    '#type' => 'submit',
+    '#value' => t('Submit'),
   );
 
   return $form;
@@ -41,9 +48,11 @@ function third_party_coupon_form_validate($form, &$form_state) {
 
   if (!$file) {
     form_set_error('file_upload', t('A file must be uploaded or selected.'));
-  } else if ($file->filemime != 'text/csv') {
+  }
+  else if ($file->filemime != 'text/csv') {
     form_set_error('file_upload', t('The file must be of CSV type only.'));
-  } else {
+  }
+  else {
     // set files to form_state, to process when form is submitted
     $form_state['values']['file_upload'] = $file;
   }
@@ -71,7 +80,8 @@ function third_party_coupon_form_submit($form, &$form_state) {
 
     if ($send_counter == 0) {
       $label = $row;
-    } else {
+    }
+    else {
       $data[] = $row;
     }
     $send_counter++;
@@ -91,13 +101,13 @@ function third_party_coupon_form_submit($form, &$form_state) {
 
   // Start Batch of node creation.
   $batch = array(
-      'title' => t('Creating the third party coupons finally....please wait....!'),
-      'operations' => $operations,
-      'finished' => 'op_third_party_coupons_finished',
-      'init_message' => t('Coupons csv checking started...please wait....!'),
-      'progress_message' => t('Processed @current out of @total.'),
-      'error_message' => t('third party coupons creation process has encountered an error.'),
-      'file' => drupal_get_path('module', 'itg_coupon') . '/includes/itg_coupon.inc',
+    'title' => t('Creating the third party coupons finally....please wait....!'),
+    'operations' => $operations,
+    'finished' => 'op_third_party_coupons_finished',
+    'init_message' => t('Coupons csv checking started...please wait....!'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('third party coupons creation process has encountered an error.'),
+    'file' => drupal_get_path('module', 'itg_coupon') . '/includes/itg_coupon.inc',
   );
 
   // Set the batch operation.
@@ -116,7 +126,8 @@ function op_third_party_coupons($csvdata, &$context) {
     $itg_coupon_check_coupon = itg_coupon_check_coupon($csvdata[0]);
     if (isset($itg_coupon_check_coupon) && !empty($itg_coupon_check_coupon)) {
       drupal_set_message(t('OOPS! Coupon "' . $csvdata[0] . '" is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'), 'error');
-    } else {
+    }
+    else {
       $node = new stdClass();
       $node->type = 'coupon';
       $node->language = LANGUAGE_NONE;
@@ -141,7 +152,8 @@ function op_third_party_coupons($csvdata, &$context) {
       try {
         node_save($node);
         drupal_set_message(t('Coupon created successfully for "' . $csvdata[0] . '"'));
-      } catch (Exception $e) {
+      }
+      catch (Exception $e) {
         drupal_set_message(t("Unable to save coupon for " . $csvdata[0]));
       }
     }
@@ -158,7 +170,8 @@ function op_third_party_coupons_finished($success, $results, $operations) {
 
   if ($success) {
     drupal_set_message(t('Third party coupons created successfully.'));
-  } else {
+  }
+  else {
     // An error occurred.
     // $operations contains the operations that remained unprocessed.
     $error_operation = reset($operations);
@@ -174,34 +187,34 @@ function op_third_party_coupons_finished($success, $results, $operations) {
 function coupons_apply_form($form, &$form_state) {
   global $base_url;
   $form['coupon_holder'] = array(
-      '#type' => 'fieldset',
-      '#description' => t("Coupons Apply form"),
-      '#collapsible' => TRUE,
-      '#collapsed' => FALSE,
+    '#type' => 'fieldset',
+    '#description' => t("Coupons Apply form"),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
   );
 
   $form['coupon_holder']['total_amount'] = array(
-      '#type' => 'textfield',
-      '#title' => t('total Amount'),
+    '#type' => 'textfield',
+    '#title' => t('total Amount'),
   );
-    
+
   $form['coupon_holder']['gateway_type'] = array(
-      '#type' => 'radios',
-      '#title' => t('Gateway Type'),
-      '#options' => array('Amex','Paytm','ICICI','BillDEsk'),
+    '#type' => 'radios',
+    '#title' => t('Gateway Type'),
+    '#options' => array('Amex', 'Paytm', 'ICICI', 'BillDEsk'),
   );
-  
+
   $form['coupon_holder']['coupon_code'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Coupons code'),
-      '#description' => t('Please enter valid coupon code')
-  );  
+    '#type' => 'textfield',
+    '#title' => t('Coupons code'),
+    '#description' => t('Please enter valid coupon code')
+  );
 
   $form['coupon_holder']['submit_button'] = array(
-      '#type' => 'submit',
-      '#value' => t('Apply'),
-      '#attributes' => array('class' => array('use-ajax-submit')),
-   );
+    '#type' => 'submit',
+    '#value' => t('Apply'),
+    '#attributes' => array('class' => array('use-ajax-submit')),
+  );
 
   return $form;
 }
