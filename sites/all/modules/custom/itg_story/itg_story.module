@@ -260,23 +260,36 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  if($form_state['input']['op'] == 'Apply') {
-     if ($form_state['node']->status == '1') {
-       if(is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
-         $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
-       } else {
-         $previous_story_assign = '';
-       }
 
-       $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
-       //pr($previous_story_assign);
-       //print "<br> =========================== </br>";
-       //p($story_widget);
-       $primary_category = $form_state['input']['itg_primary_category'];
-       // for story assign to widget
-       if(function_exists('itg_story_assign_to_widget')) {
-         itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
-       }
+  if ($form_state['node']->status == '1') {
+    if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+      $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+    }
+    else {
+      $previous_story_assign = '';
+    }
+    $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+    $primary_category = $form_state['input']['itg_primary_category'];
+    // for story assign to widget
+    if (function_exists('itg_story_assign_to_widget')) {
+      itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+    }
+  }
+
+  if ($form_state['input']['op'] == 'Apply') {
+    if ($form_state['node']->status == '1') {
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      $primary_category = $form_state['input']['itg_primary_category'];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+      }
 
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
@@ -327,11 +340,10 @@ function itg_story_form_custom_callback($form, &$form_state) {
   }
 
   //if ($form_state['input']['op'] != 'Save as Draft') {
-    if (function_exists('itg_custom_message')) {
-      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
-    }
+  if (function_exists('itg_custom_message')) {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
+  }
   //}
-
 }
 
 /**
@@ -340,40 +352,42 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param array $story_widget
  * @param int $cat_id
  */
-function itg_story_assign_to_widget($nid , array $story_widget, $cat_id, $previous_story_assign) {
+function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign) {
   if (!empty($story_widget)) {
     $content_type = 'story';
     foreach ($story_widget as $widget_val) {
       $result[$widget_val] = $widget_val;
-      $result_exist = itg_story_widget_data_exist($nid, $cat_id, 'top_stories_widget');
+      $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');
       // for top stories
       if ($widget_val == 'top_stories') {
         $weight_data = itg_story_widget_max_value('top_stories_widget');
         if (empty($result_exist)) {
           try {
             $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => $cat_id,
-              'content_type' => $content_type,
-              'widget' => 'top_stories_widget',
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          } catch (PDOException $e) {
+                  'nid' => $nid,
+                  'cat_id' => $cat_id,
+                  'content_type' => $content_type,
+                  'widget' => 'top_stories_widget',
+                  'weight' => --$weight_data,
+                  'state' => 0,
+                ])->execute();
+          }
+          catch (PDOException $e) {
             drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
           }
         }
       }
       // for big story
       if ($widget_val == 'big_story') {
-          $related_nodes_json = '[]';
-          $widget = 'big_story_format_widget';
+        $related_nodes_json = '[]';
+        $widget = 'big_story_format_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 'big_story_format_widget');
+        if (empty($result_exist)) {
           // Remove first livetv.
           try {
             db_delete('itg_widget_order')
-              ->condition('widget' , $widget)
-              ->condition('nid' , $nid)
-              ->execute();
+                ->condition('widget', $widget)
+                ->execute();
           }
           catch (Exception $ex) {
             drupal_set_message($ex->getMessage());
@@ -381,56 +395,60 @@ function itg_story_assign_to_widget($nid , array $story_widget, $cat_id, $previo
 
           try {
             $query = db_insert('itg_widget_order')
-              ->fields(array(
-                'nid' => $nid ,
-                'widget' => $widget ,
-                'content_type' => $content_type ,
-                'cat_id' => 0,
-                'weight' => 0,
-                'extra' => $related_nodes_json,
-              ))
-              ->execute();
+                ->fields(array(
+                  'nid' => $nid,
+                  'widget' => $widget,
+                  'content_type' => $content_type,
+                  'cat_id' => 0,
+                  'weight' => 0,
+                  'extra' => $related_nodes_json,
+                ))
+                ->execute();
           }
           catch (Exception $ex) {
             drupal_set_message($ex->getMessage());
           }
+        }
       }
       // for feature story
       if ($widget_val == 'featured_story') {
         $widget = 'home_page_feature_widget';
-        $result_exist = itg_story_widget_data_exist($nid, 0 , 'home_page_feature_widget');
+        $result_exist = itg_story_widget_data_exist($nid, 'home_page_feature_widget');
         $weight_data = itg_story_widget_max_value('home_page_feature_widget');
         if (empty($result_exist)) {
           try {
             $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => 0,
-              'content_type' => $content_type,
-              'widget' => $widget,
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          } catch (PDOException $e) {
+                  'nid' => $nid,
+                  'cat_id' => 0,
+                  'content_type' => $content_type,
+                  'widget' => $widget,
+                  'weight' => --$weight_data,
+                  'state' => 0,
+                ])->execute();
+          }
+          catch (PDOException $e) {
             drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
           }
         }
       }
     }
-    foreach($previous_story_assign as $row) {
-      if($row['value'] != $result[$row['value']]) {
-        if($row['value'] == 'top_stories') {
+    foreach ($previous_story_assign as $row) {
+      if ($row['value'] != $result[$row['value']]) {
+        if ($row['value'] == 'top_stories') {
           $widget_value = 'top_stories_widget';
-        } elseif($row['value'] == 'featured_story') {
+        }
+        elseif ($row['value'] == 'featured_story') {
           $widget_value = 'home_page_feature_widget';
-        } elseif($row['value'] == 'big_story') {
+        }
+        elseif ($row['value'] == 'big_story') {
           $widget_value = 'big_story_format_widget';
         }
 
         try {
           db_delete('itg_widget_order')
-            ->condition('widget' , $widget_value)
-            ->condition('nid' , $nid)
-            ->execute();
+              ->condition('widget', $widget_value)
+              ->condition('nid', $nid)
+              ->execute();
         }
         catch (Exception $ex) {
           drupal_set_message($ex->getMessage());
@@ -447,11 +465,10 @@ function itg_story_assign_to_widget($nid , array $story_widget, $cat_id, $previo
  * @param string $widget_type
  * @return mixed
  */
-function itg_story_widget_data_exist($nid, $cat_id, $widget_type) {
+function itg_story_widget_data_exist($nid, $widget_type) {
   $query = db_select('itg_widget_order', 'w');
   $query->fields('w', array('nid'));
   $query->condition('nid', $nid, '=');
-  // $query->condition('cat_id', $cat_id, '=');
   $query->condition('widget', $widget_type, '=');
   $result = $query->execute()->fetchAssoc();
   return $result;
@@ -622,7 +639,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
-  
+
   // apply button for editor and siteadmin role
   if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
@@ -635,7 +652,7 @@ function itg_story_after_build($form, &$form_state) {
       );
     }
   }
-  
+
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }
@@ -1056,7 +1073,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     else {
       $node->content['story_title'] = $node->title;
     }
-    
+
     // code for amp page
     if ($view_mode == 'amp') {
       // emoji posititon
@@ -1198,11 +1215,11 @@ function itg_story_photo_story_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">'.$getImageInfo[0]->image_photo_grapher.'</span></div>' . $previous_link;
-      $html .= '<div class="photo-description">'.$getImageInfo[0]->image_caption.'</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
+      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">' . $getImageInfo[0]->image_photo_grapher . '</span></div>' . $previous_link;
+      $html .= '<div class="photo-description">' . $getImageInfo[0]->image_caption . '</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }
     $html .= '</div>';
@@ -1240,7 +1257,7 @@ function itg_story_photo_amp_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
@@ -1281,7 +1298,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">'.$slide.'</span>
+       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
     </button>';
       $index++;
       $slide++;
