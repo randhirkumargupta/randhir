@@ -101,29 +101,40 @@ function ugc_comment_user_listing() {
     $con = mongodb();
     if ($con)
     {
+      /* connection for fetching user detail */
       $people = $con->itgcms_comment_user;
       $query = array();
-      $limit = 0;
+      
       if (!empty($_GET['items_per_page']))
       {
         $limit = $_GET['items_per_page'];
+      } else {
+        $limit = 10;
       }
+      
 
       if (!empty($_GET['email']))
       {
         $query['email'] = trim($_GET['email']);
       }
-
+      if (isset($_GET['status']) && $_GET['status'] != '_none')
+      {
+        $query['status'] = (int)$_GET['status'];
+      }
+      
       if (is_array($query) && empty($query))
       {
-
-        $userData = $people->find(array("email" => array('$ne' => null)))->limit($limit);
+        /* get total count for pagination */
+      $people_count = $con->itgcms_comment_user;
+      $count_data = $people_count->count($cond);
+      /* end here */
+        $userData = $people->find(array("email" => array('$ne' => null)))->limit($count_data);
       }
       else
       {
-        $userData = $people->find($query)->limit($limit);
+        $userData = $people->find($query)->limit($count_data);
       }
-
+     
       $rows = array();
       $sl_no = 1;
       
@@ -146,14 +157,19 @@ function ugc_comment_user_listing() {
         );
         $sl_no = $sl_no + 1;
       } // end foreach
+     
+      $current_page = pager_default_initialize(count($rows), $limit);
+      $chunks = array_chunk($rows, $limit, TRUE);
+      $current_page_items = $chunks[$current_page];
+
     }
   }
   //get the header in table
   $output = render(drupal_get_form('itg_user_block_api_form'));
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
+  $output .= theme('table', array('header' => $header, 'rows' => $current_page_items, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
 
   # add the pager
-  $output .= theme('pager');
+  $output .= theme('pager', array('quantity', count($rows)));
   return $output;
 }
 
