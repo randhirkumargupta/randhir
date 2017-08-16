@@ -263,6 +263,8 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/udaan [NC]
 	RewriteCond %{REQUEST_URI} !/uttarakhandfloods [NC]
 	RewriteCond %{REQUEST_URI} !/democraticnewsroom [NC]
+	RewriteCond %{REQUEST_URI} !/presidential-polls [NC]
+	RewriteCond %{REQUEST_URI} !/righttobeheard [NC]
 	####### start saticpages phase 2 End #########
 
   RewriteRule ^ index.php [L]
@@ -544,6 +546,10 @@ DirectoryIndex index.php index.html index.htm
     RewriteRule ^uttarakhandfloods/(.*) /staticpages/uttarakhandfloods/$1 [L]
 	RewriteRule ^democraticnewsroom$ /staticpages/democraticnewsroom/index.html? [L]
     RewriteRule ^democraticnewsroom/(.*) /staticpages/democraticnewsroom/$1 [L]
+	RewriteRule ^presidential-polls$ /staticpages/presidential-polls/index.html? [L]
+    RewriteRule ^presidential-polls/(.*) /staticpages/presidential-polls/$1 [L]
+	RewriteRule ^righttobeheard$ /staticpages/righttobeheard/index.html? [L]
+    RewriteRule ^righttobeheard/(.*) /staticpages/righttobeheard/$1 [L]
 	####### start saticpages phase 2 End #########
 	
 
