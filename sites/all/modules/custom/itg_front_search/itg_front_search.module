@@ -76,7 +76,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['ds_changed'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
-      '#date_format' => 'Y-m-d',
+      '#date_format' => 'd-m-Y',
       '#date_year_range' => '-1:+1',
       '#prefix' => '<div class="caln">',
       '#attributes' => array(
@@ -87,7 +87,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['ds_changed_max'] = array(
       '#type' => 'date_popup',
       '#title' => t('To'),
-      '#date_format' => 'Y-m-d',
+      '#date_format' => 'd-m-Y',
       '#date_year_range' => '-1:+1',
       '#suffix' => '</div>',
       '#attributes' => array(
