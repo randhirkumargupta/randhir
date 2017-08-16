@@ -171,8 +171,10 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.text', $_GET['text'], '=');
   }
 
-  $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+ 
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+
 
   if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
     $query->condition('rfa.created_date', strtotime($start_date), '>=');
@@ -277,11 +279,10 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#tree' => TRUE,
     '#date_timezone' => date_default_timezone(),
     '#date_flexible' => 0,
-    '#date_format' => 'm/d/Y - H:i',
-    '#datepicker_options' => array(),
+    '#date_format' => 'Y-m-d - H:i',
     '#timepicker' => 'default',
     '#date_increment' => 1,
-    '#date_year_range' => '-3:+3',
+    '#date_year_range' => '-100:+0',
     '#date_label_position' => 'above',
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
@@ -298,11 +299,10 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#tree' => TRUE,
     '#date_timezone' => date_default_timezone(),
     '#date_flexible' => 0,
-    '#date_format' => 'm/d/Y - H:i',
-    '#datepicker_options' => array(),
+    '#date_format' => 'Y-m-d - H:i',
     '#timepicker' => 'default',
     '#date_increment' => 1,
-    '#date_year_range' => '-3:+3',
+    '#date_year_range' => '-100:+0',
     '#date_label_position' => 'above',
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
