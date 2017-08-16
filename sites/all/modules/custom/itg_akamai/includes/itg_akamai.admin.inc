@@ -88,7 +88,7 @@ function itg_akamai_settings() {
 
   $form['itg_config_fieldset']['itg_akamai_cc_conf_list'] = array(
     '#type' => 'checkboxes',
-    '#title' => t('Select Content Type List'),
+    '#title' => t('Select Content Type List for Akamai'),
     '#options' => $nodes_list_array,
     '#default_value' => variable_get('itg_akamai_cc_conf_list'),
     '#description' => t('Akamai Access Token'),
@@ -138,6 +138,8 @@ function itg_akamai_cache_control() {
  */
 function itg_akamai_cache_control_submit($form, &$form_state) {
   $paths = explode("\n", filter_xss($form_state['values']['paths']));
+  $paths = array_map('trim', $paths);
+  $paths = itg_akamai_cache_control_get_path_alias($paths);
   $action = $form_state['values']['refresh'];
   $overrides = array(
     'action' => $form_state['values']['refresh'],
@@ -296,8 +298,8 @@ function itg_akamai_all_logs_rows() {
   if (isset($purge_id) && !empty($purge_id)) {
     $query->condition('a.purge_id', $purge_id);
   }
-  
- 
+
+
   if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
     $query->condition('a.timestamp', strtotime($start_date), '>=');
   }
@@ -966,8 +968,8 @@ function itg_akamai_akamai_not_implemented_rows() {
   );
 
   // Getting the list of nids for content types
+  $mapping = itg_akamai_getting_mapped_content_type();
 
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   $query = db_select('itg_akamai_content_setting', 'a');
   $query->fields('a', array('entity_id'));
   $query->condition('a.entity_type', $mapping, 'IN');
@@ -1032,8 +1034,8 @@ function itg_akamai_akamais_not_implemented_rows() {
   );
 
   // Getting the list of nids for content types
+  $mapping = itg_akamai_getting_mapped_content_type();
 
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   $query = db_select('itg_akamai_content_setting', 'a');
   $query->fields('a', array('entity_id'));
   $query->condition('a.entity_type', 'taxonomy');
@@ -1082,4 +1084,67 @@ function itg_akamai_akamais_not_implemented_rows() {
   );
 
   return $render_array;
+}
+
+/**
+ * Get complete path alias
+ * @param array $paths
+ */
+function itg_akamai_cache_control_get_path_alias($paths) {
+  $nids = array();
+  $final_alias_data = array();
+  $query = db_select('url_alias', 'ul');
+  $query->distinct();
+  $query->condition('ul.alias', $paths, 'IN');
+  $query->fields('ul', array('alias', 'source'));
+  $result = $query->execute();
+  foreach ($result as $row) {
+    if (strpos($row->source, 'node/') !== false) {
+      $url_part = explode('/', $row->source);
+      $nids[] = $url_part[1];
+      $final_alias_data[$row->alias] = array('alias' => $row->alias, 'alias_flag' => true, 'nid' => $url_part[1]);
+    }
+  }
+
+  foreach ($paths as $path_values) {
+    if (!isset($final_alias_data[$path_values])) {
+      $final_alias_data[$path_values]['nid'] = null;
+    }
+  }
+
+  $itg_akamai_matched_cmp_nids = itg_akamai_cache_get_amp_cc_mapping($nids);
+  $itg_akamai_final_amp = array();
+  $itg_akamai_final_var = array();
+  foreach ($final_alias_data as $key => $final_alias_chunk) {
+    if (isset($final_alias_chunk['nid']) && in_array($final_alias_chunk['nid'], $itg_akamai_matched_cmp_nids)) {
+      // IF AMP is true
+      $itg_akamai_final_amp[] = $key;
+    }
+    else {  // IF AMP is false
+      $itg_akamai_final_var[] = $key;
+    }
+  }
+
+  $amp_added_urls = itg_akamai_send_for_host_mapping_for_amp($itg_akamai_final_amp);
+  $super_final_urls = array_unique(array_merge($itg_akamai_final_var, $amp_added_urls));
+  return $super_final_urls;
+}
+
+/**
+ * Getting amp content type mapping with complete data
+ * @param array $alias
+ * @return type
+ */
+function itg_akamai_cache_get_amp_cc_mapping($alias) {
+  $type = itg_akamai_amp_cc_mapping();
+  $qry = db_select('node', 'n');
+  $qry->condition('n.nid', $alias, 'IN');
+  $qry->condition('n.type', $type, 'IN');
+  $qry->fields('n', array('nid'));
+  $res = $qry->execute();
+  $nids = array();
+  foreach ($res as $data) {
+    $nids[] = $data->nid;
+  }
+  return $nids;
 }
