@@ -321,15 +321,12 @@ function open_poll_list($res) {
   $options2 = array();
 
   foreach ($result_option as $p => $pv) {
-    $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-    $options['o_count'] = "$total_voter";
     $options2[] = $options;
   }
 
-  $count_total_patic = poll_participants($res['nid']);
   $news['p_id'] = "$poll_nid";
   $news['p_is_sponsored'] = "";
   $news['p_sponsored_icon'] = "";
@@ -338,8 +335,7 @@ function open_poll_list($res) {
   $news['p_title'] = "$poll_title";
   $news['p_image'] = "$poll_ques_img";
   $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-  $news['total_participants'] = "$count_total_patic";
-
+ 
   $news['p_option'] = $options2;
   return $news;
 }
