@@ -21,11 +21,11 @@ $src = '';
         <img width="370" height="208" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt=""/>
       <?php } ?>
     </div>
-    <div class="anchor-right">
+    <div class="anchor-right" >
       <?php echo $anchor['title']; ?>
       <div class="less-content">
         <?php 
-          echo mb_strimwidth(strip_tags($anchor['body']), 0, 245, ".."); 
+          echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, ".."); 
           $share_desc = '';
         ?>
         <?php if (strlen($anchor['body']) > 245) { ?>

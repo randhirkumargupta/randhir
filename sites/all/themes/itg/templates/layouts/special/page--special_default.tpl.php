@@ -146,24 +146,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="top-colum-1">
                 <div class="itg-widget">
                     <div class="top-n-most-popular-stories">
-<!--                        <div class="tab-buttons">
-                            <span data-class="itg-block-2" data-id="tab-data-1" class="active">
-                                <?php 
-//                                if (!$widget_data['itg-block-2']['block_title']) { 
-//                                    print 'Tab 1';
-//                                } else {
-//                                    print $widget_data['itg-block-2']['block_title'];
-//                                } ?>
-                            </span>
-                            <span data-class="itg-block-3" data-id="tab-data-2">
-                              <?php
-//                              if (!$widget_data['itg-block-3']['block_title']) { 
-//                                    print 'Tab 2';
-//                                } else {
-//                                    print $widget_data['itg-block-3']['block_title'];
-//                                } ?>
-                            </span>
-                        </div>-->
+
                         <div class="itg-widget-child tab-data tab-data-1">
                           <div class="droppable <?php print $gray_bg_layout; ?>">
                             <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name']; ?>">
@@ -183,21 +166,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             </div>
                           </div>
                         </div>
-<!--                        <div class="itg-widget-child tab-data tab-data-2 hide">
-                          <div class="droppable <?php //print $gray_bg_layout; ?>"> 
-                            <div class="widget-wrapper <?php //print $widget_data['itg-block-3']['widget_name']; ?>">
-                              <?php //if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                <div class="widget-settings">
-                                  <div class="widget-title-wrapper">
-                                    <input type="text" maxlength="255" size="30" value="<?php //print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
-                                  </div>
-                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                </div>  
-                              <?php //} ?>                   
-                              <div class="data-holder" id="itg-block-3"><?php //print $widget_data['itg-block-3']['widget']; ?></div>
-                            </div>
-                          </div>  
-                        </div>-->
+
                     </div>
                 </div>
             </div>
@@ -592,7 +561,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 <?php } ?>
   <!--End of Common section--> 
   
-<!--Common section add more strat here-->
+<!--Common section add more start here-->
 <?php $count_widget = 19; ?>
 <?php $last_val = 0;?>
 <?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count++) { ?>
@@ -688,7 +657,7 @@ if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$wid
             </div>          
         </div>
 <?php if ((EXTRA_SECTION_CARDS != $count) && ($count != $last_val)) {?>
-<!--  <div><a  href="javascript:void(0)" class="content-section-widget" id="<?php print $count+1;?>">Add more1+</a></div>-->
+
 <?php } ?>
     </div>
 
@@ -704,7 +673,7 @@ if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$wid
  }else {
    $last_val = 1;
  }?>
-<!--<div><a href="javascript:void(0)" class="content-section-widget" id="<?php echo $last_val;?>">Add more+</a></div>-->
+
 <?php
 $ft = '#'.$last_val;
  

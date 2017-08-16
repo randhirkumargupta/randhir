@@ -174,13 +174,21 @@ function simplesamlphp_auth_loginpage() {
       $gotourl = $returnto;
     }
     $arg = arg();
-
+    
     if (!empty($arg[2])) {
-      drupal_goto('user/' . $user->uid.'/'.$arg[2]);
+      $redirect = base64_decode($arg[2]);
+      $remove_fb_append_parameter = str_replace('#_=_', '', $redirect);
+      drupal_goto($remove_fb_append_parameter);
     }
     else {
-      drupal_goto('user/' . $user->uid);
+      drupal_goto(FRONT_URL);
     }
+//    if (!empty($arg[2])) {
+//      drupal_goto('user/' . $user->uid.'/'.$arg[2]);
+//    }
+//    else {
+//      drupal_goto('user/' . $user->uid);
+//    }
     
     // If a ReturnTo has been set.
 //    if ($gotourl) {
@@ -253,7 +261,7 @@ function simplesamlphp_auth_init() {
   $_simplesamlphp_auth_as = new SimpleSAML_Auth_Simple($myval);
   //var_dump($_simplesamlphp_auth_as);
   $_simplesamlphp_auth_saml_attributes = $_simplesamlphp_auth_as->getAttributes();
-
+  //pr($_simplesamlphp_auth_saml_attributes);
   if ($user->uid == 0) {
     // User is not logged in to Drupal.
     if ($_simplesamlphp_auth_as->isAuthenticated()) {
@@ -291,6 +299,11 @@ function simplesamlphp_auth_init() {
               }
               $fname = _simplesamlphp_auth_get_fname();
               $lname = _simplesamlphp_auth_get_lname();
+              $twitterimage = _simplesamlphp_auth_get_twitterimage();
+              $dob = _simplesamlphp_auth_get_dob();
+              $gender = _simplesamlphp_auth_get_gender();
+              $gender_lower_case = strtolower($gender);
+              $fid = simplesaml_twitter_image($twitterimage);
               $userinfo = array('roles' => $roles, 'field_first_name' => array(
                 LANGUAGE_NONE => array(
                   0 => array(
@@ -304,7 +317,36 @@ function simplesamlphp_auth_init() {
                     'value' => $lname
                   )
                 )
+              ),
+              'field_user_picture' => array(
+                LANGUAGE_NONE => array(
+                  0 => array(
+                    'fid' => $fid
+                  )
+                )
               ));
+              
+              if (!empty($dob)) {
+                $fb_dob = strtotime($dob);
+                $fb_dob = date('Y-m-d 00:00:00', $fb_dob);
+                $userinfo['field_story_issue_date'] = array(
+                  LANGUAGE_NONE => array(
+                    0 => array(
+                      'value' => $fb_dob
+                    )
+                  )
+                );
+              }
+              
+              if (!empty($gender)) {
+                $userinfo['field_user_gender'] = array(
+                  LANGUAGE_NONE => array(
+                    0 => array(
+                      'value' => $gender_lower_case
+                    )
+                  )
+                );
+              }
               //$userinfo = array('roles' => $roles);
               $user = user_save($user, $userinfo); // @todo - Fjernet rolle-delen her da den gav en bra feilmelding når roller ikke finnes ;)
             }
@@ -356,6 +398,9 @@ function simplesamlphp_auth_init() {
               ));
             }
             else {
+              if(strpos($mail, '@twitter.com') !== false || strpos($mail, '@facebook.com') !== false) {
+              $userinfo = array('name' => $uname, 'mail' => $mail);  
+              } else {
               $mobile = _simplesamlphp_auth_get_mobile();
               $userinfo = array('name' => $uname, 'mail' => $mail, 'field_mobile_number' => array(
                   LANGUAGE_NONE => array(
@@ -364,6 +409,7 @@ function simplesamlphp_auth_init() {
                     )
                   )
               ));
+            }
             }
             $user = user_save($ext_user, $userinfo);
             //end here
@@ -465,12 +511,17 @@ function simplesamlphp_auth_user_insert(&$edit, $account, $category = NULL) {
         watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
       }
 
+      try {
       db_update('users')
         ->fields(array('name' => $account->name))
         ->condition('uid', $account->uid)
         ->execute();
 
       _simplesaml_auth_debug(t('Updating username [%acctname]', array('%acctname' => $account->name)));
+      }
+      catch (Exception $e)  {
+        
+      }
 
       // Get mail from default attribute.
       try {
@@ -966,6 +1017,9 @@ function _simplesamlphp_auth_get_fname() {
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.name']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['twitter.name'];
   }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.first_name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.first_name'];
+  }
   else {
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
   }
@@ -997,8 +1051,13 @@ function _simplesamlphp_auth_get_lname() {
   $lname = '';
   global $seg;
   
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['sn']))) {
    $seg = $_simplesamlphp_auth_saml_attributes['sn'];
-  
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.last_name']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.last_name'];
+  }
+
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
     if (isset($seg)) {
@@ -1012,6 +1071,106 @@ function _simplesamlphp_auth_get_lname() {
 
   return $lname;
 }
+
+/**
+ * Gets the twitter image attribute.
+ *
+ * @return
+ *   The twitter image attribute.
+ */
+function _simplesamlphp_auth_get_twitterimage() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $twitterimage = '';
+  global $seg;
+  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.profile_image_url']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['twitter.profile_image_url'];
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook_photo']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook_photo'];
+  }
+  else {
+   $seg = '';
+  }
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $twitterimage = $seg[0];
+    }
+    else {
+      $twitterimage = '';
+    }
+  }
+
+  return $twitterimage;
+}
+
+/**
+ * Gets the dob attribute.
+ *
+ * @return
+ *   The dob attribute.
+ */
+function _simplesamlphp_auth_get_dob() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $dob = '';
+  global $seg;
+  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.birthday']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['facebook.birthday'];
+  }
+  else {
+   $seg = '';
+  }
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $dob = $seg[0];
+    }
+    else {
+      $dob = '';
+    }
+  }
+
+  return $dob;
+}
+
+/**
+ * Gets the gender attribute.
+ *
+ * @return
+ *   The gender attribute.
+ */
+function _simplesamlphp_auth_get_gender() {
+  global $_simplesamlphp_auth_as;
+  global $_simplesamlphp_auth_saml_attributes;
+  $gender = '';
+  global $seg;
+  
+  if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.gender']))) {
+   $seg = $_simplesamlphp_auth_saml_attributes['facebook.gender'];
+  }
+  else {
+   $seg = '';
+  }
+  
+  // Check if valid local session exists..
+  if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if (isset($seg)) {
+      $gender = $seg[0];
+    }
+    else {
+      $gender = '';
+    }
+  }
+
+  return $gender;
+}
+
 /**
  * Forces HTTPS connections.
  */
@@ -1246,4 +1405,20 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
 
   // Return whatever we've got.`
   return $result;
+}
+
+/*
+ * Helper function for image upload
+ */
+function simplesaml_twitter_image($url) {
+  if (!empty($url)) {
+    $imagedata = file_get_contents($url);
+    $image_url = 'itg' . time() . end(explode('/', $url));
+    $image_extension = end(explode('.', $image_url));
+    $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+    $file = file_load($file_data_temp->fid);
+    file_usage_add($file, 'itg_sso_image', 'file', 4);
+
+    return $file_data_temp->fid;
+  }
 }

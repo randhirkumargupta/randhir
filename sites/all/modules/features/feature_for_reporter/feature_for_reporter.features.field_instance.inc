@@ -62,7 +62,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Company',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -101,7 +101,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Department',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -135,12 +135,54 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_career_graph_cast'.
+  $field_instances['node-reporter-field_career_graph_cast'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_career_graph_cast',
+    'label' => 'Career Graph',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_celebrity_pro_occupation'.
   $field_instances['node-reporter-field_celebrity_pro_occupation'] = array(
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Occupation',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -179,7 +221,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Constituancy',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -216,12 +258,54 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_old_content_source_id'.
+  $field_instances['node-reporter-field_old_content_source_id'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_old_content_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_party_name'.
   $field_instances['node-reporter-field_party_name'] = array(
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Party Name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -258,12 +342,90 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_reporter_company'.
+  $field_instances['node-reporter-field_reporter_company'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_company',
+    'label' => 'company',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_reporter_department'.
+  $field_instances['node-reporter-field_reporter_department'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_department',
+    'label' => 'Department',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_reporter_email_id'.
   $field_instances['node-reporter-field_reporter_email_id'] = array(
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Email id',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -347,7 +509,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Movie name',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -389,7 +551,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Profile type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -428,7 +590,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Twitter Handle',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -470,7 +632,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Section',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -487,14 +649,16 @@ function feature_for_reporter_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_story_category',
     'label' => 'Section',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
@@ -507,7 +671,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Facebook page',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -625,7 +789,7 @@ function feature_for_reporter_field_default_field_instances() {
     'bundle' => 'reporter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Designation',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -704,6 +868,78 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-movies-field_movie_graph_image'.
+  $field_instances['taxonomy_term-movies-field_movie_graph_image'] = array(
+    'bundle' => 'movies',
+    'deleted' => 0,
+    'description' => 'Image Size (167 x 125)',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_movie_graph_image',
+    'label' => 'Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-movies-field_reporter_movie_year'.
   $field_instances['taxonomy_term-movies-field_reporter_movie_year'] = array(
     'bundle' => 'movies',
@@ -761,6 +997,7 @@ function feature_for_reporter_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
+  t('Career Graph');
   t('Company');
   t('Constituancy');
   t('Department');
@@ -769,6 +1006,8 @@ function feature_for_reporter_field_default_field_instances() {
   t('Email id');
   t('Facebook id');
   t('Facebook page');
+  t('Image');
+  t('Image Size (167 x 125)');
   t('Movie name');
   t('Movie year');
   t('Occupation');
@@ -776,7 +1015,9 @@ function feature_for_reporter_field_default_field_instances() {
   t('Picture');
   t('Profile type');
   t('Section');
+  t('Source id');
   t('Twitter Handle');
+  t('company');
 
   return $field_instances;
 }

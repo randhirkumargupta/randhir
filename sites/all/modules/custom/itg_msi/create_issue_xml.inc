@@ -81,18 +81,15 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $xml_other[strtolower($key)] = $value;
     }
 
-
     $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
 
-    $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
-    //$kicker =  htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['kicker']->p)))); 
+    $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));    
     
     //Prepare kicker
     foreach ($xml_other['kicker']->p as $kickerr) {
       $kick = (string) $kickerr;
         $kicker .= htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', (string) $kickerr)))); ;
     }
-
 
     $issue_date_xml = str_replace('/', '-', trim($xml->IssueDate));
     if(!empty($issue_date_xml)){
@@ -140,8 +137,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $exp_date = date('Y-m-d', $exp_date);
 
     //Insert Kicker
-    $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
-    //$node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';
+    $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = $kicker ? $kicker : 'NA';    
 
     //Insert Author(Byline)
     if(!empty($byline_id)){
@@ -154,15 +150,14 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_tid;
     }
 
-
     //Set source variables in to story content type
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = $node_info['source_type'];
     $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
     $node->revision = 1;
-    $node->log = 'State Changed to published';
-    $node->workbench_moderation_state_new = workbench_moderation_state_published();
+    $node->log = 'State Changed to draft';
+    $node->workbench_moderation_state_new = workbench_moderation_state_none();
     $node = node_submit($node); // Prepare node for saving
     node_save($node); // Finally save node
 

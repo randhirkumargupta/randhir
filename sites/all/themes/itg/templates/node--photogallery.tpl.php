@@ -2,7 +2,6 @@
 <div style="display:none">
 <?php print render($content); ?>
 </div>
-<div class="ad-blocker"></div>
 <?php print $node->view_output; ?>
 <?php
 // get config value
@@ -11,7 +10,7 @@ if (!empty($node->field_photogallery_configuration['und'])) {
     $config[] = $value['value'];
   }
 }
-//print views_embed_view('photo_list_of_category', 'block_1');
+
 if (function_exists('taboola_view')) {
   taboola_view();
 }

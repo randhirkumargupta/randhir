@@ -1,7 +1,6 @@
 name = ITG db migrate
 description = Itg db migrate module.
 core = 7.x
-
 package = ITG
 
 dependencies[] = migrate
@@ -13,8 +12,8 @@ files[] = includes/itg_migrate.files.inc
 files[] = includes/itg_migrate.user.inc
 files[] = includes/itg_migrate.byline.inc
 ;files[] = includes/itg_migrate.magazine.inc
-;files[] = includes/itg_migrate.issue.inc
-;files[] = includes/itg_migrate.supplement.inc
+files[] = includes/itg_migrate.issue.inc
+files[] = includes/itg_migrate.supplement.inc
 ;files[] = includes/itg_migrate.food_news.inc
 files[] = includes/itg_migrate.city.inc
 files[] = includes/itg_migrate.tags.inc

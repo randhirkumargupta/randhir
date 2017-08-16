@@ -16,88 +16,94 @@ function itg_image_croping_menu() {
 
   $items = array();
   $items['getimagetocroper'] = array(
-      'page callback' => 'itg_image_croping_ajax_make_ajax', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_ajax_make_ajax', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['change_image_aspect_ratio'] = array(
-      'page callback' => 'itg_image_croping_change_image_aspect_ratio', // load the croper according to aspect ratio!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_change_image_aspect_ratio', // load the croper according to aspect ratio!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['savecropedimage'] = array(
-      'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['saveimageinfo'] = array(
-      'page callback' => 'itg_image_saveimage_info', // save croped image by form the image dataurl (base64).
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_saveimage_info', // save croped image by form the image dataurl (base64).
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['savecropedimage_orignal'] = array(
-      'page callback' => 'itg_image_croping_crop_image_orignal', // save croped image by form the image dataurl (base64).
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_crop_image_orignal', // save croped image by form the image dataurl (base64).
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['imagetotag'] = array(
-      'page callback' => 'itg_image_croping_getimagetotag', // make image to tagging
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_getimagetotag', // make image to tagging
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['imagetagedit'] = array(
-      'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_imagetagedit', // make image tags edit
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['front_imagetag'] = array(
-      'page callback' => 'itg_image_croping_front_imagetag', // make image tags edit
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_front_imagetag', // make image tags edit
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
 
   $items['savetags'] = array(
-      'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  $items['image-info-edit/%'] = array(
+    'page callback' => 'drupal_get_form', // save the tags on images.
+    'page arguments' => array('itg_image_croping_image_info_form'), // save the tags on images.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['edittags'] = array(
-      'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['gettaglist'] = array(
-      'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['gettaglist_front'] = array(
-      'page callback' => 'itg_image_croping_get_image_tags_front', // use for get the all tags on image.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_get_image_tags_front', // use for get the all tags on image.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['removetags'] = array(
-      'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_remove_image_tag', // se for remove the tags on image.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['gettags'] = array(
-      'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
   $items['itg_videogallery_ftp_file_insert_cron'] = array(
-      'page callback' => 'itg_videogallery_ftp_file_insert_cron',
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_videogallery_ftp_file_insert_cron',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   return $items;
@@ -106,8 +112,192 @@ function itg_image_croping_menu() {
 /**
  * This function use for load the croper according to size!
  */
-function itg_image_croping_change_image_aspect_ratio() {
+//function itg_image_croping_info_edit() {
+//  $arg = arg(1);
+//  $drupal_form = drupal_render(drupal_get_form('itg_image_croping_image_info_form', $arg));
+//  p($drupal_form);
+//}
 
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_image_croping_image_info_form($form, $form_state) {
+  $fid = arg(1);
+
+  $info = itg_image_croping_get_image_info($fid);
+  if ($_GET['node_type'] == 'story') {
+    $form['image_caption'] = array(
+      '#type' => 'textarea',
+      '#title' => 'Caption',
+      '#attributes' => array(
+        'placeholder' => t('Caption'),
+      ),
+      '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
+    );
+  }
+
+//  $form['image_alt'] = array(
+//    '#type' => 'textfield',
+//    '#title' => 'Alt Text',
+//    '#attributes' => array(
+//      'placeholder' => t('Alt Text'),
+//    ),
+//    '#default_value' => ($info[0]->alt) ? $info[0]->alt : '',
+//  );
+//  $form['image_title'] = array(
+//    '#type' => 'textfield',
+//    '#title' => 'Title',
+//    '#attributes' => array(
+//      'placeholder' => t('Title'),
+//    ),
+//    '#default_value' => ($info[0]->title) ? $info[0]->title : '',
+//  );
+  $form['courtesy'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Courtesy',
+    '#attributes' => array(
+      'placeholder' => t('Courtesy'),
+    ),
+    '#default_value' => ($info[0]->image_courtesy) ? $info[0]->image_courtesy : '',
+  );
+  $form['image_keyword'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Keyword',
+    '#attributes' => array(
+      'placeholder' => t('Keyword'),
+    ),
+    '#default_value' => ($info[0]->image_keyword) ? $info[0]->image_keyword : '',
+  );
+
+  $form['image_tags'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Tags',
+    '#attributes' => array(
+      'placeholder' => t('Tags'),
+    ),
+    '#default_value' => ($info[0]->image_tags) ? $info[0]->image_tags : '',
+  );
+  $form['image_place'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Place',
+    '#attributes' => array(
+      'placeholder' => t('Place'),
+    ),
+    '#default_value' => ($info[0]->image_place) ? $info[0]->image_place : '',
+  );
+  $form['photo_grapher'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Photographer',
+    '#attributes' => array(
+      'placeholder' => t('Photographer'),
+    ),
+    '#default_value' => ($info[0]->image_photo_grapher) ? $info[0]->image_photo_grapher : '',
+  );
+  if (!empty($info[0]->image_date)) {
+    $info[0]->image_date = date('m/d/y', strtotime($info[0]->image_date));
+  }
+  $form['image_date'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Date',
+    '#attributes' => array(
+      'placeholder' => t('Date (mm/dd/yyyy)'),
+    ),
+    '#default_value' => ($info[0]->image_date) ? $info[0]->image_date : '',
+  );
+  $form['image_fid'] = array(
+    '#type' => 'hidden',
+    '#value' => $fid,
+  );
+  $form['image_description'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Description',
+    '#attributes' => array(
+      'placeholder' => t('Description'),
+    ),
+    '#default_value' => ($info[0]->image_desc) ? $info[0]->image_desc : '',
+  );
+  $form['syndicate'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Syndicate'),
+    '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
+  );
+  $form['submit_button'] = array
+    (
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#ajax' => array(
+      'callback' => 'itg_image_croping_save_info',
+      'wrapper' => 'checkboxes-div',
+      'method' => 'replace',
+      'effect' => 'fade'),
+  );
+  // Next we add our JavaScript file, named after_ajax.js. This file
+  // lives in the /js folder inside our module:
+  $form['#attached']['js'] = array
+    (
+    array
+      (
+      'type' => 'file',
+      'data' => drupal_get_path('module', 'itg_image_croping') . '/js/after_ajax.js',
+    ),
+  );
+  $form['syndicate'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Syndicate'),
+    '#default_value' => ($info[0]->image_syndicate) ? $info[0]->image_syndicate : '',
+  );
+  return $form;
+}
+
+function itg_image_croping_save_info($form, &$form_state) {
+
+  if ($form_state['values']['image_date']) {
+    $imagedate = explode('/', $form_state['values']['image_date']);
+    $image_date = $imagedate [2] . '-' . $imagedate[0] . '-' . $imagedate[1];
+  }
+  if (!isset($form_state['values']['image_caption'])) {
+    $form_state['values']['image_caption'] = "";
+  }
+  if ($image_date == "") {
+    $image_date = date('Y-m-d');
+  }
+  $data = db_delete('image_info')->condition('fid', $form_state['values']['image_fid'], '=')
+      ->execute();
+  $data_array = array(
+    'fid' => $form_state['values']['image_fid'],
+    'image_courtesy' => $form_state['values']['courtesy'],
+    'image_caption' => $form_state['values']['image_caption'],
+    'image_keyword' => $form_state['values']['image_keyword'],
+    'image_tags' => $form_state['values']['image_tags'],
+    'image_place' => $form_state['values']['image_place'],
+    'image_photo_grapher' => $form_state['values']['photo_grapher'],
+    'image_date' => $image_date,
+    'image_desc' => $form_state['values']['image_description'],
+    'image_syndicate' => $form_state['values']['syndicate'],
+  );
+  $inserted_data = db_insert('image_info')->fields($data_array)->execute();
+  // First, we initialize our $commands array. This array will
+  // contain each of the commands we want to fire for our
+  // #AJAX callback:
+  $commands = array();
+  // Next we will include a custom function that we will call ourselves in our JavaScript file:
+  $commands[] = array
+    (
+    // The command will be used in our JavaScript file (see next section)
+    'command' => 'image_croping_status',
+    // We pass the value that the user selected in the select element to our
+    // JavaScript function:
+    'selectedValue' => $form_state['values']['image_description'],
+  );
+  // And finally, we will return all of our commands to the system to be executed:
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * This function use for load the croper according to size!
+ */
+function itg_image_croping_change_image_aspect_ratio() {
 
   $image_id = $_POST['imageId'];
   $field_name = $_POST['field_id'];
@@ -118,6 +308,7 @@ function itg_image_croping_change_image_aspect_ratio() {
   $aspect_ratio = trim($_POST['aspect_ratio']);
 
   $file = file_load($image_id);
+
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
@@ -128,10 +319,10 @@ function itg_image_croping_change_image_aspect_ratio() {
   type' => 'file', 'scope' => 'content'));
   $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
   print theme('image_repository', array('data' => $file,
-      'field_name' => $field_name,
-      'image_height' => $aspect_ratio_data['height'],
-      'image_width' => $aspect_ratio_data['width'],
-      'form' => $drupal_form));
+    'field_name' => $field_name,
+    'image_height' => $aspect_ratio_data['height'],
+    'image_width' => $aspect_ratio_data['width'],
+    'form' => $drupal_form));
 }
 
 /**
@@ -152,7 +343,6 @@ function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $imag
  * This function use for load the croper according to size!
  */
 function itg_image_croping_ajax_make_ajax() {
-
 
   $image_id = $_POST['imageId'];
   $field_name = $_POST['field_id'];
@@ -185,14 +375,14 @@ function itg_image_croping_ajax_make_ajax() {
 
   drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
-
   print theme('image_repository', array('data' => $file,
-      'field_name' => $field_name,
-      'image_height' => $image_height,
-      'image_width' => $image_width,
-      'content_type' => $_POST['content_type'],
-      //'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
-      'form' => $drupal_form));
+    'field_name' => $field_name,
+    'image_height' => $image_height,
+    'image_width' => $image_width,
+    'content_type' => $_POST['content_type'],
+    //
+    'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
+    'form' => $drupal_form));
 }
 
 /**
@@ -206,12 +396,10 @@ function itg_image_croping_getimagetotag() {
   if ($_POST['is_solr'] == 1) {
     $file = file_load($original_img_id);
     $result = file_delete($file, TRUE);
-  }
-
-  print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
-      'field_name' => $_POST['field_name'],
-      'original_img_id' => $original_img_id,
-      'is_solr' => $_POST['is_solr'],
+  } print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
+    'field_name' => $_POST['field_name'],
+    'original_img_id' => $original_img_id,
+    'is_solr' => $_POST['is_solr'],
   ));
 }
 
@@ -223,7 +411,7 @@ function itg_image_croping_imagetagedit() {
   $image_id = $_POST['fid'];
   $file = file_load($image_id);
   return theme('image_taggingedit', array('data' => $file,
-      'field_name' => $_POST['field_name']
+    'field_name' => $_POST['field_name']
   ));
 }
 
@@ -237,7 +425,7 @@ function itg_image_croping_front_imagetag() {
 
   $file = file_load($image_id);
   print theme('image_tagging_front', array('data' => $file,
-      'field_name' => $_POST['field_name'],
+    'field_name' => $_POST['field_name'],
   ));
 }
 
@@ -248,9 +436,8 @@ function itg_image_croping_front_imagetag() {
 function itg_image_croping_remove_image_tag() {
 
   $tag_id = $_POST['tag_id'];
-  $data = db_delete('image_tags')
-          ->condition('id', $tag_id, '=')
-          ->execute();
+  $data = db_delete('image_tags')->condition('id', $tag_id, '=')
+      ->execute();
   print $data;
   exit();
 }
@@ -263,9 +450,8 @@ function itg_image_croping_get_image_tag() {
 
   $tag_id = $_POST['tag_id'];
   $data = db_select('image_tags', 'c')
-                  ->fields('c')
-                  ->condition('id', $tag_id, '=')
-                  ->execute()->fetchAssoc();
+          ->fields('c')->condition('id', $tag_id, '=')
+          ->execute()->fetchAssoc();
   print json_encode($data);
   exit();
 }
@@ -279,12 +465,12 @@ function itg_image_croping_get_image_tags() {
   $data['boxes'] = '';
   $data['lists'] = '';
   $query = db_select('image_tags', 'tags')
-          ->fields('tags')
-          ->condition('image_id', $image_id, '=');
+      ->fields('tags')
+      ->condition('image_id', $image_id, '=');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
-    $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="edit">Edit</a><a  class="remove">X</a></div>';
+    $data['boxes'] .= '<div class="square-tag" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record ['y_coordinate'] . 'px;">' . $record['tag_title'] . '</div><a  class="edit">Edit</a><a  class="remove">X</a></div>';
     $data['lists'] .= ' ';
   }
   echo json_encode($data);
@@ -302,13 +488,22 @@ function addhttp($url) {
 }
 
 /**
+ * This function use for get image info bu fid.
+ * 
+ */
+function itg_image_croping_get_image_info($fid) {
+  $query = db_select('image_info')->fields('image_info')->condition('fid', $fid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
  * This function use for get image tag by fid
  * $resuly array
  */
 function itg_image_croping_get_image_tags_by_fid($fid) {
   $query = db_select('image_tags', 'tags')
-          ->fields('tags')
-          ->condition('image_id', $fid, '=');
+          ->fields('tags')->condition('image_id', $fid, '=');
   $result = $query->execute()->fetchAll();
   return $result;
 }
@@ -322,12 +517,12 @@ function itg_image_croping_get_image_tags_front() {
   $data['boxes'] = '';
   $data['lists'] = '';
   $query = db_select('image_tags', 'tags')
-          ->fields('tags')
-          ->condition('image_id', $image_id, '=');
+      ->fields('tags')
+      ->condition('image_id', $image_id, '=');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
-    $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;"><a target="_blank" href="' . $record['tag_url'] . '" >' . $record['tag_title'] . '</a></div></div>';
+    $data['boxes'] .= '<div class="square-tag" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record ['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;"><a target="_blank" href="' . $record['tag_url'] . '" >' . $record['tag_title'] . '</a></div></div>';
     $data['lists'] .= ' ';
   }
   echo json_encode($data);
@@ -347,20 +542,17 @@ function itg_image_croping_save_tags() {
   $y_coordinate = $_POST['pic_y'];
   $type = $_POST['type'];
   $result = db_select('image_tags', 'tags')
-                  ->fields('tags')
-                  ->condition('image_id', $fid, '=')
-                  ->condition('x_coordinate', $x_coordinate, '=')
-                  ->condition('y_coordinate', $y_coordinate, '=')
-                  ->execute()->fetchAssoc();
+          ->fields('tags')->condition('image_id', $fid, '=')->condition('x_coordinate', $x_coordinate, '=')->condition('y_coordinate', $y_coordinate, '=')
+          ->execute()->fetchAssoc();
   if (empty($result)) {
 
     $inserted_data = db_insert('image_tags')->fields(array(
-                'image_id' => $fid,
-                'tag_title' => $tag,
-                'tag_url' => $tag_url,
-                'x_coordinate' => $x_coordinate,
-                'y_coordinate' => $y_coordinate,
-            ))->execute();
+          'image_id' => $fid,
+          'tag_title' => $tag,
+          'tag_url' => $tag_url,
+          'x_coordinate' => $x_coordinate,
+          'y_coordinate' => $y_coordinate,
+        ))->execute();
   }
   if ($inserted_data) {
 
@@ -383,20 +575,12 @@ function itg_image_croping_edit_tags() {
   $fid = $_POST['tagid'];
   $tag = $_POST['name'];
   $tag_url = $_POST['url'];
-//    $x_coordinate = $_POST['pic_x'];
-//    $y_coordinate = $_POST['pic_y'];
   $type = $_POST['type'];
-
-
   $inserted_data = db_update('image_tags')->fields(array(
-              'tag_title' => $tag,
-              'tag_url' => $tag_url,
-//                'x_coordinate' => $x_coordinate,
-//                'y_coordinate' => $y_coordinate,
-          ))->condition('id', $fid, '=')
-          ->execute();
+        'tag_title' => $tag,
+        'tag_url' => $tag_url,))->condition('id', $fid, '=')
+      ->execute();
   if ($inserted_data) {
-
     $return = array('status' => '1', 'id' => $inserted_data);
     print json_encode($return);
   }
@@ -414,18 +598,18 @@ function itg_image_croping_edit_tags() {
 function itg_image_croping_theme($existing, $type, $theme, $path) {
 
   return array(
-      'image_repository' => array(
-          'template' => 'templates/image_croper',
-      ),
-      'image_tagging' => array(
-          'template' => 'templates/image_tagger',
-      ),
-      'image_taggingedit' => array(
-          'template' => 'templates/image_taggeredit',
-      ),
-      'image_tagging_front' => array(
-          'template' => 'templates/image_tagger_front',
-      ),
+    'image_repository' => array(
+      'template' => 'templates/image_croper',
+    ),
+    'image_tagging' => array(
+      'template' => 'templates/image_tagger',
+    ),
+    'image_taggingedit' => array(
+      'template' => 'templates/image_taggeredit',
+    ),
+    'image_tagging_front' => array(
+      'template' => 'templates/image_tagger_front',
+    ),
   );
 }
 
@@ -438,6 +622,17 @@ function itg_image_croping_crop_image() {
   $image_name = $_POST['field_name'];
   $content_type = $_POST['content_name'];
   $image_fields = $_POST['image_fields'];
+  if ($content_type == 'videogallery') {
+    $content_type = 'video';
+  }
+  if($content_type =='field_story_technology' || $content_type =='field_story_template_buzz' || $content_type =='field_photo_story') {
+    $content_type ='story';
+  }
+  if($content_type =='field_story_technology' || $content_type =='field_story_template_buzz' || $content_type =='field_photo_story') {
+    $content_type ='story';
+  }
+  $content_type_new = $_POST['content_name'];
+  $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
   $fileids = array();
   $img_dim = mageimagedimesion();
   if ($image_name == "") {
@@ -459,32 +654,33 @@ function itg_image_croping_crop_image() {
   if ($orignal_file_name != "") {
     $image_name = $orignal_file_name;
   }
+  $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
   $image_data_url = str_replace('data:image/' . $extention . ';base64,', '', $image_data_url);
   $imagedata = base64_decode($image_data_url);
-  if (!file_exists(file_default_scheme() . '://crop_image')) {
-    mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
-  }
-  $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.' . $extention);
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  } $file = file_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name . '.' . $extention);
   file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
   $image = image_load($file->uri);
-
-
-  $fileids['fid'][] = $file->fid . '#' . $_POST['field_name'];
+  $fileids ['fid'][] = $file->fid . '#' . $_POST['field_name'];
   if (!empty($image_fields) && !empty($image)) {
+
     foreach ($image_fields as $fields_name) {
       $file = array();
-      if (!file_exists(file_default_scheme() . '://crop_image')) {
-        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+      if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+        mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
       }
-      // echo is_writable(file_default_scheme() . '://crop_image');
-      $filepath = file_default_scheme() . '://crop_image';
-      $scaled = image_resize($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height']);
-      if ($scaled) {
-        $image_name = $fields_name . time();
-        if ($orignal_file_name != "") {
-          $image_name = $orignal_file_name . rand(111, 9999) . time();
-        }
 
+      $filepath = file_default_scheme() . '://' . $filedir;
+      $scaled = image_resize($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height']);
+      $image_width = $img_dim[$content_type_new][$fields_name]['width'];
+      $image_height = $img_dim[$content_type_new][$fields_name]['height'];
+      if ($scaled) {
+        $image_name = $fields_name .'-'. $image_width.'x'.$image_height;
+        if ($orignal_file_name != "") {
+          $image_name = $orignal_file_name .'-'. $image_width.'x'.$image_height;
+        }
+        $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $extention);
         $uri = $filepath . '/' . $image_name . '.' . $extention;
         $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -500,11 +696,10 @@ function itg_image_croping_crop_image() {
         $file->status = FILE_STATUS_PERMANENT;
         $file = file_save($file);
         file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-        $fileids['fid'][] = $file->fid . '#' . $fields_name;
+        $fileids ['fid'][] = $file->fid . '#' . $fields_name;
       }
     }
   }
-
   print json_encode($fileids);
   exit();
 }
@@ -517,32 +712,34 @@ function itg_image_saveimage_info() {
   $imageino = $_POST['form_value'];
   parse_str($imageino, $output_info);
 
-  if (!empty($output_info['fids'])) {
-    for ($i = 0; $i < count($output_info['fids']); $i++) {
+  if (!empty($output_info ['fids'])) {
+    for ($i = 0; $i < count($output_info['fids']); $i ++) {
       $fid = explode('#', $output_info['fids'][$i]);
       $syndicatin_name = 'syndicate_' . $fid[0];
-      if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name] != "")
+      if ($output_info ['courtesy'][$i] != "" || $output_info [
+          $syndicatin_name] != "")
         $image_date = "";
-      if ($output_info['image_date'][$i] != "") {
+      if ($output_info ['image_date'][$i] != "") {
         $imagedate = explode('/', $output_info['image_date'][$i]);
-        $image_date = $imagedate[2] . '-' . $imagedate[1] . '-' . $imagedate[0];
+        $image_date = $imagedate [2] . '-' . $imagedate[0] . '-' . $imagedate[1];
       }
       if ($image_date == "") {
         $image_date = date('Y-m-d');
       }
       $inserted_data = db_insert('image_info')->fields(array(
-                  'fid' => $fid[0],
-                  'image_courtesy' => $output_info['courtesy'][$i],
-                  'image_keyword' => $output_info['keyword'][$i],
-                  'alt' => $output_info['image_alt'][$i],
-                  'title' => $output_info['image_title'][$i],
-                  'image_tags' => $output_info['tags'][$i],
-                  'image_place' => $output_info['place'][$i],
-                  'image_photo_grapher' => $output_info['photo_grapher'][$i],
-                  'image_date' => $image_date,
-                  'image_desc' => $output_info['image_description'][$i],
-                  'image_syndicate' => $output_info[$syndicatin_name],
-              ))->execute();
+            'fid' => $fid[0],
+            'image_courtesy' => $output_info ['courtesy'][$i],
+            'image_caption' => $output_info['caption'][$i],
+            'image_keyword' => $output_info['keyword'][$i],
+            'alt' => $output_info['image_alt'][$i],
+            'title' => $output_info['image_title'][$i],
+            'image_tags' => $output_info['tags'][$i],
+            'image_place' => $output_info['place'][$i],
+            'image_photo_grapher' => $output_info['photo_grapher'][$i],
+            'image_date' => $image_date,
+            'image_desc' => $output_info['image_description'][$i],
+            'image_syndicate' => $output_info[$syndicatin_name],
+          ))->execute();
     }
   }
   if ($inserted_data) {
@@ -562,14 +759,19 @@ function itg_image_croping_crop_image_orignal() {
   $image_fiedlid = $_POST['image_fiedlid'];
   $image_name = $_POST['field_name'];
   $content_type = $_POST['content_name'];
+  if ($content_type == 'videogallery') {
+    $content_type = 'video';
+  }
+  $content_type_new = $_POST['content_name'];
   $image_fields = $_POST['image_fields'];
   $fileids = array();
   $img_dim = mageimagedimesion();
-
-  $image_width = $img_dim[$content_type][$_POST['field_name']]['width'];
-  $image_height = $img_dim[$content_type][$_POST['field_name']]['height'];
-
-
+  $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
+  $image_width = $img_dim[$content_type_new][$_POST['field_name']]['width'];
+  $image_height = $img_dim[$content_type_new][$_POST['field_name']]['height'];
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
   if ($image_width == "" && $image_height == "") {
     $image_width = $_POST['resize_image_width'];
     $image_height = $_POST['resize_image_height'];
@@ -578,11 +780,11 @@ function itg_image_croping_crop_image_orignal() {
   $file_image = file_load($image_fiedlid);
   $image = image_load($file_image->uri);
   $image_exten = end(explode('.', $file_image->uri));
-  $filepath = file_default_scheme() . '://crop_image';
+  $filepath = file_default_scheme() . '://' . $filedir;
   $orig_width = $image->info['width'];
   $orig_height = $image->info['height'];
 
-  if ($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
+  if ($image->info ['width'] < $image_width || $image->info['height'] < $image_height) {
     $scaled = image_scale($image, $image_width, $image_height, true);
   }
   else {
@@ -592,6 +794,7 @@ function itg_image_croping_crop_image_orignal() {
   $image_name_orignal = $file_image->filename;
   $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
   $image_name = $image_name_orignal . rand(111, 999) . time();
+  $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
   $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
   $uri = $filepath . '/' . $image_name . '.' . $image_exten;
   $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -606,24 +809,25 @@ function itg_image_croping_crop_image_orignal() {
   $file->status = FILE_STATUS_PERMANENT;
   $file = file_save($file);
   file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-  $fileids['fid'][] = $file->fid . '#' . $fields_name;
-
+  $fileids ['fid'][] = $file->fid . '#' . $fields_name;
 
   if (!empty($image_fields) && !empty($image)) {
+
     foreach ($image_fields as $fields_name) {
 
-      $filepath = file_default_scheme() . '://crop_image';
+      $filepath = file_default_scheme() . '://' . $filedir;
 
-      if ($orig_width < $img_dim[$content_type][$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type][$fields_name]['height']) {
-
-        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], true);
+      if ($orig_width < $img_dim[$content_type_new] [$fields_name]['width'] || $image->info['height'] < $img_dim[$content_type_new][$fields_name]['height']) {
+        $scaled = image_scale($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height'], true);
       }
       else {
-        $scaled = image_scale($image, $img_dim[$content_type][$fields_name]['width'], $img_dim[$content_type][$fields_name]['height'], false);
+        $scaled = image_scale($image, $img_dim[$content_type_new][$fields_name]['width'], $img_dim[$content_type_new][$fields_name]['height'], false);
       }
-
+      $image_width = $img_dim[$content_type_new][$fields_name]['width'];
+      $image_height = $img_dim[$content_type_new][$fields_name]['height'];
       if ($scaled) {
-        $image_name = $image_name_orignal . rand(111, 999) . time();
+        $image_name = $image_name_orignal .'-'. $image_width.'x'.$image_height;
+        $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
         $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
         $uri = $filepath . '/' . $image_name . '.' . $image_exten;
         $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -639,7 +843,7 @@ function itg_image_croping_crop_image_orignal() {
         $file->status = FILE_STATUS_PERMANENT;
         $file = file_save($file);
         file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
-        $fileids['fid'][] = $file->fid . '#' . $fields_name;
+        $fileids ['fid'][] = $file->fid . '#' . $fields_name;
       }
     }
   }
@@ -656,6 +860,10 @@ function mageimagedimesion() {
 
   $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
   $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
+  $image_dim['photogallery']['field_images']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_images']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
+  $image_dim['photogallery']['field_photo_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_photo_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   // Dimension for videogallery
   $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
@@ -774,6 +982,10 @@ function mageimagedimesion() {
   $image_dim['supplement']['field_issue_supp_small_image']['width'] = ISSUE_SMALL_WIDTH;
   $image_dim['supplement']['field_issue_supp_small_image']['height'] = ISSUE_SMALL_HEIGHT;
 
+  $image_dim['category_management']['field_sponser_logo']['width'] = 40;
+  $image_dim['category_management']['field_sponser_logo']['height'] = 35;
+  $image_dim['category_management']['field_cm_category_banner']['width'] = 650;
+  $image_dim['category_management']['field_cm_category_banner']['height'] = 45;
 
   return $image_dim;
 }
@@ -784,83 +996,21 @@ function mageimagedimesion() {
  */
 function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata, $image_height, $image_width, $aspectratio = null, $content_name = null, $is_solr = null) {
 
-  //$orignal_ratio = number_format($image_width / $image_height, 2);
-  // $orignal_ratio = $orignal_ratio . ':1';
-//    $form['aspect ratio'] = array(
-//        '#title' => t('Aspect ratio'),
-//        '#type' => 'select',
-//        '#description' => 'Select aspect ratio.',
-//        '#default_value' => $aspectratio,
-//        '#options' => array($orignal_ratio => $orignal_ratio, '1:1' => '1:1', '2:1' => '2:1', '4:3' => '4:3', '16:9' => '16:9'),
-//        '#attributes' => array('id' => 'select-aspect-ratio'),
-//    );
-
   $imgdim = mageimagedimesion();
   $form['cropit_image_zoom_input'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="image-editor">
+    '#type' => 'markup',
+    '#markup' => '<div class="image-editor">
         <div class="cropit-preview"></div>
         <div class="cropit-image-zoom">
         <input type="range" class="cropit-image-zoom-input">
         </div>',
   );
 
-  if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image') || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image' )) {
-    $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
-    $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
-    $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
-    $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
-    $issue_img_size = '(' . $imgdim[$content_name]['field_issue_supp_small_image']['width'] . 'X' . $imgdim[$content_name]['field_issue_supp_small_image']['height'] . ')';
-    $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
-    if ($content_name == 'photogallery') {
-
+  if ($field_name == 'field_images') {
+    $gallerythumb = '(' . $imgdim[$content_name]['field_photo_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_photo_small_image'] ['height'] . ')';
+    if ($field_name == 'field_images') {
       $checkoption = array(
-          'field_story_large_image' => t("Large Image  $largsize"),
-          'field_story_medium_image' => t("Medium Image $mediumsize"),
-          'field_story_small_image' => t("Small Image  $smallsize"),
-          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
-    }
-    else if ($content_name == 'issue' || $content_name == 'supplement') {
-      if ($field_name == 'field_issue_large_cover_image') {
-        $checkoption = array(
-            'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
-      }
-      if ($field_name == 'field_issue_supp_large_image') {
-        $checkoption = array(
-            'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
-      }
-    }
-    else if ($content_name == 'recipe') {
-      $checkoption = array(
-          'field_story_large_image' => t("Large Image  $largsize"),
-          'field_story_medium_image' => t("Medium Image $mediumsize"),
-          'field_story_small_image' => t("Small Image  $smallsize"));
-    }
-    else if ($content_name == 'videogallery') {
-      $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image']['width'] . 'X' . $imgdim[$content_name]['field_story_player_image']['height'] . ')';
-      $checkoption = array(
-          // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
-          'field_story_large_image' => t("Large Image  $largsize"),
-          'field_story_medium_image' => t("Medium Image $mediumsize"),
-          'field_story_small_image' => t("Small Image  $smallsize"),
-          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
-      );
-    }
-    else if ($content_name == 'cooking_tips' || $content_name == 'food_news') {
-      $checkoption = array(
-          'field_story_large_image' => t("Large Image  $largsize"),
-          'field_story_medium_image' => t("Medium Image $mediumsize"),
-          'field_story_small_image' => t("Small Image  $smallsize"),
-          'field_recipe_writer_image' => t("Writer's image  $writer_image")
-      );
-    }
-    else {
-
-      $checkoption = array(
-          'field_story_large_image' => t("Large Image  $largsize"),
-          'field_story_medium_image' => t("Medium Image $mediumsize"),
-          'field_story_small_image' => t("Small Image  $smallsize"),
-          'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+        'field_photo_small_image' => t("Thumb Image  $gallerythumb"),
       );
     }
 
@@ -868,57 +1018,130 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     $suffix = '</div>';
 # the drupal checkboxes form field definition
     $form['images'] = array(
-        '#title' => t('Select images'),
-        '#type' => 'checkboxes',
-        '#attributes' => array('class' => array('checkbox-image-size')),
-        '#options' => $checkoption,
-        '#prefix' => $prefix,
-        '#suffix' => $suffix,
+      '#title' => t('Select images'),
+      '#type' => 'checkboxes',
+      '#attributes' => array('class' => array('checkbox-image-size')),
+      '#options' => $checkoption,
+      '#prefix' => $prefix,
+      '#suffix' => $suffix,);
+  }
+
+  if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image' ) || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image')) {
+
+    $largsize = '(' . $imgdim[$content_name]['field_story_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_large_image'] ['height'] . ')';
+    $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image'] ['height'] . ')';
+    $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image'] ['height'] . ')';
+    $writer_image = '(' . $imgdim[$content_name]['field_recipe_writer_image'] ['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image'] ['height'] . ')';
+    $issue_img_size = '(' . $imgdim[$content_name]['field_issue_supp_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_issue_supp_small_image'] ['height'] . ')';
+    $smallsize = '(' . $imgdim[$content_name]['field_story_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_small_image'] ['height'] . ')';
+    $gallerythumb = '(' . $imgdim[$content_name] ['field_images'] ['width'] . 'X' . $imgdim[$content_name] ['field_images']['height'] . ')';
+
+    if ($content_name == 'photogallery') {
+
+      $checkoption = array(
+        'field_story_large_image' => t(" Large Image  $largsize"),
+        'field_story_medium_image' => t(" Medium Image $mediumsize"),
+        'field_story_small_image' => t(" Small Image  $smallsize"),
+        'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"));
+    }
+    else if ($content_name == 'issue' || $content_name == 'supplement') {
+      if ($field_name == 'field_issue_large_cover_image') {
+        $checkoption = array(
+          'field_issue_small_cover_image' => t("Issue Cover Small Image  $issue_img_size"));
+      }
+      if ($field_name == 'field_issue_supp_large_image') {
+        $checkoption = array(
+          'field_issue_supp_small_image' => t("Supplement Cover Small Image  $issue_img_size"));
+      }
+    }
+    else if ($content_name == 'recipe') {
+      $checkoption = array(
+        'field_story_large_image' => t(" Large Image  $largsize"),
+        'field_story_medium_image' => t(" Medium Image $mediumsize"),
+        'field_story_small_image' => t("Small Image  $smallsize"));
+    }
+    else if ($content_name == 'videogallery') {
+      $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_player_image'] ['height'] . ')';
+      $checkoption = array(
+        // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
+        'field_story_large_image' => t(" Large Image  $largsize"),
+        'field_story_medium_image' => t(" Medium Image $mediumsize"),
+        'field_story_small_image' => t(" Small Image  $smallsize"),
+        'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+      );
+    }
+    else if ($content_name == 'cooking_tips' || $content_name == 'food_news') {
+      $checkoption = array(
+        'field_story_large_image' => t(" Large Image  $largsize"),
+        'field_story_medium_image' => t(" Medium Image $mediumsize"),
+        'field_story_small_image' => t(" Small Image  $smallsize"),
+        'field_recipe_writer_image' => t("Writer's image  $writer_image")
+      );
+    }
+    else {
+
+      $checkoption = array(
+        'field_story_large_image' => t(" Large Image  $largsize"),
+        'field_story_medium_image' => t(" Medium Image $mediumsize"),
+        'field_story_small_image' => t(" Small Image  $smallsize"),
+        'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+      );
+    }
+
+    $prefix = '<div class="image-fiels-style" >';
+    $suffix = '</div>';
+# the drupal checkboxes form field definition
+    $form['images'] = array(
+      '#title' => t('Select images'),
+      '#type' => 'checkboxes',
+      '#attributes' => array('class' => array('checkbox-image-size')),
+      '#options' => $checkoption,
+      '#prefix' => $prefix,
+      '#suffix' => $suffix,
     );
   }
 
   $form['image_data'] = array(
-      '#type' => 'hidden',
-      '#value' => '',
-      '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
+    '#type' => 'hidden',
+    '#value' => '',
+    '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
   );
 
   $form['data_field_name'] = array(
-      '#type' => 'hidden',
-      '#value' => ($field_name) ? $field_name : '',
-      '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
+    '#type' => 'hidden',
+    '#value' => ($field_name) ? $field_name : '',
+    '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
   );
   $form['data_content_name'] = array(
-      '#type' => 'hidden',
-      '#value' => ($content_name) ? $content_name : '',
-      '#attributes' => array('id' => 'data_content_name', 'name' => 'data_content_name'),
+    '#type' => 'hidden',
+    '#value' => ($content_name) ? $content_name : '',
+    '#attributes' => array('id' => 'data_content_name', 'name' => 'data_content_name'),
   );
   $form['is_solr'] = array(
-      '#type' => 'hidden',
-      '#value' => ($is_solr == 1) ? $is_solr : '',
-      '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
+    '#type' => 'hidden',
+    '#value' => ($is_solr == 1) ? $is_solr : '',
+    '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
   );
   $form['image_original_hight'] = array(
-      '#type' => 'hidden',
-      '#value' => ($image_height) ? $image_height : '',
-      '#attributes' => array('id' => 'image_original_hight', 'name' => 'image_original_hight'),
+    '#type' => 'hidden',
+    '#value' => ($image_height) ? $image_height : '',
+    '#attributes' => array('id' => 'image_original_hight', 'name' => 'image_original_hight'),
   );
   $form['image_original_width'] = array(
-      '#type' => 'hidden',
-      '#value' => ($image_width) ? $image_width : '',
-      '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
+    '#type' => 'hidden',
+    '#value' => ($image_width) ? $image_width : '',
+    '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
   );
   $form['data_field_name'] = array(
-      '#type' => 'hidden',
-      '#value' => ($field_name) ? $field_name : '',
-      '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
+    '#type' => 'hidden',
+    '#value' => ($field_name) ? $field_name : '',
+    '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
   );
   $form['image_enc_data'] = array(
-      '#type' => 'hidden',
-      '#value' => 'data:image/png;base64,' . $imagedata,
-      '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
+    '#type' => 'hidden',
+    '#value' => 'data:image/png;base64,' . $imagedata,
+    '#attributes' => array('id' => 'image-enc-data', 'name' => 'image_enc_data'),
   );
-
 
   return $form;
 }

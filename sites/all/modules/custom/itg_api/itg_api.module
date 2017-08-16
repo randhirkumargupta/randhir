@@ -285,8 +285,7 @@ function get_content_from_xml_loc($url) {
  * @param int $bylineid
  */
 function itg_custom_byline_create($uniqueid = NULL, $bylineid) {
-  if (!empty($bylineid))
-  {
+  if (!empty($bylineid)) {
     $qry = db_insert('itg_multi_byline_info')
         ->fields(array(
           'byline_id' => $bylineid,

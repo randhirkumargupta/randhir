@@ -82,15 +82,18 @@ function check_template_of_section($section_name, $template_name) {
  * @param string $widget_name 
  * @return array $render_array
  */
-function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL) {
+function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL, $block_id = NULL) {
 
   $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
-    return create_setion_widgets($filter_url, $widget_info[1]);
+    return create_setion_widgets($filter_url, $widget_info[1], $block_id);
   }
   else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'election_graph_xml') {
+    return itg_widget_election_graph_for_section_card($filter_url);    
   }
   else if (isset($widget_name) && $widget_name == 'custom_content_widgets') {
     return itg_custom_widget_ordering_data_from_title($filter_url);    
@@ -248,7 +251,7 @@ function get_layout_details_by_block_name($section_name, $template_name, $status
     
     if (isset($itg_val->widget_name)) {
       // get widget block     
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -342,7 +345,104 @@ function get_layout_details($section_name, $template_name, $status) {
     
     if (isset($itg_val->widget_name)) {
       // get widget block     
-      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
+    } 
+    else {
+      $widget = '<p>Drag template widgets here !</p>';
+    }
+    
+    $result['widget'] = $widget;
+    
+    $data[$itg_val->block_name] = $result;
+  }
+  
+  return $data; 
+  
+}
+
+
+/**
+ * Get layout details by section_name and template_name for front and admin
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array $data
+ */
+function get_layout_details_block($section_name, $template_name, $status) {
+ 
+  if ($status == 'admin') {
+    //Get last layout setting
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name);
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
+  //Get layout setting details info
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'widget_info', 'filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_name);    
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+   $itg_query->condition('layout_manager.block_name','itg-block-10');
+  
+  
+  //condition for front
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } //condition for admin
+  elseif ($status == 'admin') {
+     $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  $data = array();
+  foreach ($itg_result as $itg_val) {
+   
+    $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      
+      if(!empty($widget_info_array[1]) &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else{
+          $result['widget_display_name'] = "";  
+      }
+    }
+    
+    $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title; //for default widgets
+    }
+    
+    // for photo section and video section
+    if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
+      $result['cat_id'] = $filter_url; // category id
+      
+      if (isset($_GET['category'])) {
+        $filter_url = $_GET['category'];
+      }
+      else {
+        // Temp code
+       $filter_url =  get_first_category_of_media_widget(arg(2), $template_name, $itg_val->widget_name);
+      }
+      
+      
+    }
+    
+    if (isset($itg_val->widget_name)) {
+      // get widget block     
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -477,7 +577,7 @@ function get_widgets_poll_list() {
  * @param $section_id
  * @return array
  */
-function create_setion_widgets($section_id, $widget_style = NULL) {
+function create_setion_widgets($section_id, $widget_style = NULL, $block_id = NULL) {
   module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
   // value is hardcoded need to be change for dyanamic functionality
   $info['section'] = $section_id; // tid of section
@@ -488,7 +588,7 @@ function create_setion_widgets($section_id, $widget_style = NULL) {
   
   $data = itg_widget_section_wise_ordering_from_custom_table($info, $widget_style);
   
-  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style));
+  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style, "block_id" => $block_id, 'itg_section_id' => $section_id));
 }
 
 /**
@@ -588,10 +688,10 @@ function get_ads_page_name() {
  * Get all html_custom widgets list for layout setting page
  * @return array
  */
-function get_html_custom_widget_list() {
+function get_html_custom_widget_list($content_type) {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));  
-  $query->condition('type', 'custom_html_widgets');        
+  $query->condition('type', $content_type);        
   $itg_result = $query->execute()->fetchAll();
   
   $rows = array();
@@ -626,13 +726,11 @@ function get_highlights_widget($nid) {
     $text = '';
     $output .= '<div class="wrap-listing">';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
-      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
-      
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));      
       
       if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
         $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
-      }
-      
+      }      
       else {
           $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
       }
@@ -654,7 +752,6 @@ function get_highlights_widget($nid) {
             }
           }
         }
-
 
         $emoji_reaction = '<span class="emoji-container">';
         $anchor_pointer_class = "def-cur-pointer";
@@ -684,7 +781,7 @@ function get_highlights_widget($nid) {
             $emoji_image = "<img src='".$emoji1_src."' title= '".$emoji1_title."' alt='' /> ";
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
             // Prepare reaction link.
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "nice" , "data-nodeid" => $highlights_arr['value'] , "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $emoji_reaction .= $count_message;
           }
 
@@ -696,7 +793,7 @@ function get_highlights_widget($nid) {
               $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
             }
             $emoji_image = "<img src='".$emoji2_src."' title= '".$emoji2_title."' alt='' /> ";
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji" , "data-click" => "no", "data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span> ';
             $emoji_reaction .= $count_message;
           }
@@ -709,7 +806,7 @@ function get_highlights_widget($nid) {
               $emoji_count = itg_common_mongo_activity_count($field_class, 'front_user_activity_highlight');
             }
             $emoji_image = "<img src='".$emoji3_src."' title= '".$emoji3_title."' alt='' />";
-            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
+            $emoji_reaction .= l($emoji_image , 'javascript:void(0)' , array("external" => TRUE , "html" => TRUE , "attributes" => array("title" => $emoji1_title , "data-rel" => $field_class , "data-tag" => "All" , "data-status" => 1 , "data-activity" => "hightlights_emoji", "data-click" => "whatever" ,"data-nodeid" => $highlights_arr['value'], "class" => array($anchor_pointer_class ,  "user-activity-highlight"))));
             $count_message = ' <span class="'.$field_class.'">('.$emoji_count.')</span>';
             $emoji_reaction .= $count_message;
           }

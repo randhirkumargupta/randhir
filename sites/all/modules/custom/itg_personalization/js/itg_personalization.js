@@ -67,6 +67,35 @@ jQuery(document).ready(function () {
        var getid=jQuery(this).attr('id');
        jQuery('#edit-field-ugc-ctype-und').val(getid).trigger('change');
     })
+    
+    // code for follwing 
+    jQuery('.tobe-follow').click(function (event) {
+        var tid = jQuery(this).attr('data-value');
+        var dtag = jQuery(this).attr('data-tag');
+        var post_data = "&tid=" + tid + "&dtag=" + dtag;
+
+        jQuery.ajax({
+            'url': Drupal.settings.baseUrl.baseUrl + '/following-details-ajax',
+            'data': post_data,
+            'cache': false,
+            'type': 'POST',
+            // dataType: 'json',
+            beforeSend: function () {
+                jQuery('#widget-ajex-loader').show();
+            },
+            'success': function (result) {
+                var obj = jQuery.parseJSON(result);
+
+                if (obj.success) {
+                    jQuery('#widget-ajex-loader').hide();
+                    window.location.reload('true');
+                }
+
+            }
+        });
+
+    });
+    
     // Change text of select option.
     jQuery("#edit-field-ugc-ctype-und option[value='photogallery']").text('Photogallery');
     jQuery("#edit-field-ugc-ctype-und option[value='videogallery']").text('Videogallery');
@@ -233,11 +262,51 @@ jQuery(document).ready(function () {
     var ugc_value = url.substring(url.lastIndexOf('/') + 1);
     var ugc_value_id = ugc_value.toLowerCase();
     ugc_arr = ['story', 'videogallery', 'photogallery'];
+    
     if(jQuery.inArray(ugc_value_id, ugc_arr) != -1) {
         jQuery('#'+ugc_value_id).trigger('click');
     }
     
     jQuery('#edit-zip-code').keyup(function() {
-                this.value = this.value.replace(/[^\d\.\-]/g,'');
+        this.value = this.value.replace(/[^\d\.\-]/g,'');
+    });
+    
+    // Custom validator function for social media start
+            jQuery("#itg-personalization-edit-profile-form").validate({
+                
+                onfocusout: function(element) {
+                    jQuery(element).valid();
+                },
+                ignore: '',
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    var elementName = element.attr('name');
+                    var errorPlaceHolder = '';
+                    switch (elementName) {
+
+                        default:
+                            errorPlaceHolder = element.parent();
+                    }
+                    error.appendTo(errorPlaceHolder);
+                },
+                rules: {
+                    'fname': {
+                        required: true
+
+                    },
+                    'lname': {
+                        required: true,
+                    },
+                  
+                },
+                messages: {
+                    'fname': {
+                        required: 'First name field is required.'
+                    },
+                    'lname': {
+                        required: 'Last name field is required.'
+
+                    }
+                }
             });
 });

@@ -32,34 +32,26 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'survey') {
     
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js', array('scope' => 'footer'));
     
     // Survey End date
     $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
     
     // If survey is not published
-    if(!$node->status) {
+    
+    if(($node->status == 0) && ($base_url == FRONT_URL)) {      
       $form['survey_status'] = array(
         '#type' => 'markup',
         '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
      );
       return $form;
-    }
-    
-   // If survey has been expired. 
-//   if(time() > $survey_expiry_date) {
-//      $form['survey_expiry_status'] = array(
-//        '#type' => 'markup',
-//        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
-//     );
-//      return $form;
-//    }
+    } 
     
     $survey_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     
     // Add JS for one question at a time
     if($survey_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js', array('scope' => 'footer'));
     }
     
     $num = 0;
@@ -112,29 +104,24 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
       //Answer Info
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
-      
-      
-      //Media info
-//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-//      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
+
        if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
 
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
 
          if (function_exists('itg_videogallery_get_videoid_new')) {
           $video_ids = itg_videogallery_get_videoid_new($videid);
-           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+           $question_media = '<div class="survey-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
-                                                allowfullscreen></iframe>';
+                                                allowfullscreen></iframe></div>';
         }
       }
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
          $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
                    $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
 
-        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
-        }
+        $question_media = '<div class="survey-image"><img src="' . $extra_large_image_url . '" width="750" alt="" /></div>';
+      }
 
       //Submit button text
       if(($total_num_of_ques-1) === $num){
@@ -255,15 +242,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
         );
-      }
-      
+      }      
     
-         $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div>',
-              '#markup' => $question_media,
-              '#suffix' => '</div>',
-          );
+      $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div class="survey-media-wrapper">',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       

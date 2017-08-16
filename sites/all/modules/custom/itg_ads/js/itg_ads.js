@@ -9,7 +9,7 @@
 
       // Disable edit mode of date fields
       $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);
-      // $('input[name="field_ads_end_date[und][0][value][date]"]').keydown(false);
+      
       // Module code end
       $('#edit-field-ads-template-selection-und').change(function() {
 
@@ -20,15 +20,11 @@
           if (opt != '_none') {
             $('select[name="field_ads_select_secton_option[und]"]').html('<option value="_none">-None-</option>');
           }
-          //    $('#edit-field-ads-template-variants-und').val('');
+          
         } else if (val == "Home") { // if home select then content/section selection should be reset
-          $('#edit-field-ads-section-selection-und').val('');
-          //    $('#edit-field-ads-content-selection-und').val('');
+          $('#edit-field-ads-section-selection-und').val('');          
         } else if (val == "Rest") { // if rest select then content/section selection and template variant should be reset 
-          //  $('#edit-field-ads-template-variants-und').val('');
-          $('#edit-field-ads-section-selection-und').val('');
-          //  $('#edit-field-ads-content-selection-und').val('');
-
+            $('#edit-field-ads-section-selection-und').val('');
         }
 
       });
@@ -42,7 +38,6 @@
           $('select[name="field_ads_placeholder[und]"]').html("");
         }
       });
-
 
       $('select[name="field_ads_placeholder[und]"]').html();
 

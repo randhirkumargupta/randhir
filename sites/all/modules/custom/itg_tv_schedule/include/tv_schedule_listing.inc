@@ -65,9 +65,7 @@ function tv_schedule_listing() {
             $cond = array('day' => $day);
         }
         else {
-//            $day = strtoupper(date("D"));
-//            $cond = array('day' => $day);
-              $cond = array('program date' => $current_day);  
+           $cond = array('program date' => $current_day);  
         }
     }
 
@@ -87,7 +85,7 @@ function tv_schedule_listing() {
             else {
                 $out[$keys]['time'] = $s_time;
             }
-            //$out[$keys]['time'] = $document["time"];
+            
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
             $out[$keys]['program date'] = $document["program date"];
@@ -95,13 +93,12 @@ function tv_schedule_listing() {
             if(!empty($search_date)) {
               $ass_search_date = $search_date;
             }
-            else
-            {
+            else {
               $ass_search_date = date('Y/m/d');
             }
             $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
             if(!empty($node_detail->nid)) {
-            $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa', 'fa-file-text'), 'title' => $node_detail->title)));
+              $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa', 'fa-file-text'), 'title' => $node_detail->title)));
             }
             $keys++;
 
@@ -113,10 +110,8 @@ function tv_schedule_listing() {
     }
 
     if ($sel_date == 0 && $search_date != '') {
-        $no_result = 'No program details found on this date ' . $search_date;
+        $no_result = '<div class="no-tv-program">No program details found on this date ' . $search_date . '</div>';
     }
-
-
 
     if ($counter > 0) {
         $count = $counter - 1;

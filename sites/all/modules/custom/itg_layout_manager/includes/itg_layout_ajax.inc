@@ -12,22 +12,6 @@ function insert_layout_setting_ajax() {
   
   global $user;  
   $arg = arg();
-  
-  //code for If already a section is dragged while configuration and 
-  //if same section is being dragged again on default,photo and video page then system should show an ALERT
-  
-    /*$widget_check = explode('#', $_GET['widget_name']);
-    if (!empty($widget_check[0]) 
-            && ($widget_check[0] == 'photo_list_of_category' 
-                    || $widget_check[0] == 'video_list_of_category' 
-                    || $widget_check[0] == 'section_wise_order')) {
-      $check_drag_tid = get_use_category_on_tpl($_GET['section_name'], $widget_check[1]);
-      if (!empty($check_drag_tid)) {
-        echo 'already_configured_section';        
-        exit;
-      }    
-    }*/
-    
   // code end
       
   // Get tpl id by section_name and template_name
@@ -75,19 +59,7 @@ function insert_layout_setting_ajax() {
     // Insert and update layout widget setting details
     if (empty($layout_id)) {
       // for widget name
-      $widget = explode('#', $_GET['widget_name']);
-      
-     /* if ($widget[0] == 'photo_list_of_category' || $widget[0] == 'video_list_of_category') {
-        $query = db_select('taxonomy_term_data', 'ttd');
-        $query->fields('ttd', array('name'));  
-        $query->condition('tid', $widget[1], '=');
-        $cat_name = $query->execute()->fetchField();
-        
-        $block_title = $cat_name;
-      }
-      else {        
-        $block_title = $_GET['block_title'];
-      }*/
+      $widget = explode('#', $_GET['widget_name']);     
       
       $block_title = $_GET['block_title'];
       
@@ -159,6 +131,14 @@ function insert_layout_setting_ajax() {
     db_update('itg_layout_tpl')
            ->fields(array('status' => $_GET['status_val']))
            ->condition('id', $unpublish_tpl_id)->execute();
+    // for purging
+    if ($_GET['section_name'] == 'home_page') {     
+      $url = drupal_get_path_alias(variable_get('site_frontpage', 'node'));
+    } else {
+        $url = drupal_get_path_alias('taxonomy/term/' . $_GET['section_name']);
+    }
+    
+    itg_akamai_clear_url($url, array(), array());
     exit;
   }
   elseif ($arg[1] == 'delete') {

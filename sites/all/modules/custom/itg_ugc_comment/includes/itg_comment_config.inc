@@ -9,6 +9,17 @@
 function comment_global_config($form, &$form_state) {
   global $user, $base_url;
   
+   // get last selected comment value
+  if (function_exists(global_comment_last_record)) {
+    $last_record = global_comment_last_record();    
+  }
+
+  if($last_record[0]->config_name == 'other') {
+    $nm = 'ITG Custom';
+  } else {
+    $nm = $last_record[0]->config_name;
+  }
+  
   $form['#prefix'] = '<div id="comment_global_config">';
   $form['#suffix'] = $ext_div . '</div>';
   $active = array('vukkul' => t('Vukkul'), 'other' => t('ITG Custom'));
@@ -16,29 +27,15 @@ function comment_global_config($form, &$form_state) {
     '#type' => 'radios',
     '#title' => t('Select Configuration'),
     '#description' => t(''),
+    '#default_value' => $last_record[0]->config_name,
     '#options' => $active
   );
 
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
-    '#ajax' => array(
-      'wrapper' => 'comment_global_config',
-      'callback' => 'comment_form_ajax_handler',
-    ),
   );
-  
-  if (function_exists(global_comment_last_record)) {
-    $last_record = global_comment_last_record();
-    
-  }
-  
-  if($last_record[0]->config_name == 'other') {
-    $nm = 'ITG Custom';
-  } else {
-    $nm = $last_record[0]->config_name;
-  }
-  
+ 
   $form['pre-record'] = array(
         '#markup' => '<div id="pre-record">'.t('Last selected configuration value : ').$nm.' : Date : '.$last_record[0]->created.'</div>',
       );
@@ -72,7 +69,7 @@ function comment_global_config_submit($form, &$form_state) {
     'created' => $created
   ))
     ->execute();
-  drupal_set_message(t('Configuration Saved Sucessfully'));
+  drupal_set_message(t('Comment configuration saved sucessfully !'));
 }
 
 /**

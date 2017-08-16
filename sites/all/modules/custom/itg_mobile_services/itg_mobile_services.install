@@ -13,8 +13,8 @@
  */
 function itg_mobile_services_schema() {
   $schema = array();
-  $schema['itg_client_token'] = array(
-    'description' => t('client token Information!'),
+  $schema['itg_mobile_vas_url'] = array(
+    'description' => t('mobile Information!'),
     'fields' => array(
       'id' => array(
         'description' => t('id'),
@@ -22,114 +22,77 @@ function itg_mobile_services_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'nid' => array(
+      'service_id' => array(
+        'description' => t('service nid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'node_id' => array(
         'description' => t('node nid'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'cid' => array(
-        'description' => t('client name'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'sid' => array(
-        'description' => t('service id'),
+      'client_id' => array(
+        'description' => t('client id'),
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'delivery_mode' => array(
-        'description' => t('Delivery Mode'),
+      'feeds_url' => array(
+        'description' => t('feeds url'),
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+      'clients_feed_url' => array(
+        'description' => t('clients feed url'),
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+      'status' => array(
+        'description' => t('status'),
         'type' => 'int',
         'unsigned' => TRUE,
-        'default' => NULL,
-      ),
-      'service_frequency' => array(
-        'description' => t('Service Frequency'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'default' => NULL,
-      ),
-      'content_sharing_mode' => array(
-        'description' => t('Content Sharing Mode'),
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'default' => NULL,
-      ),
-      'service_fetch_link' => array(
-        'description' => t('Service fetch link'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'ftp_ip_address' => array(
-        'description' => t('Ftp ip address'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'ftp_username' => array(
-        'description' => t('Ftp username'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'ftp_password' => array(
-        'description' => t('Ftp password'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'service_email_address' => array(
-        'description' => t('Service email address'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'service_expiry_date' => array(
-        'description' => t('Service expiry date'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'token' => array(
-        'description' => t('Token'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'custom_sharing_url' => array(
-        'description' => t('custom sharing url'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'created_by' => array(
-        'description' => t('Token created by'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
-      ),
-      'reset_by' => array(
-        'description' => t('Token reset by'),
-        'type' => 'varchar',
-        'length' => 255,
-        'default' => NULL,
+        'not null' => TRUE,
       ),
       'created_date' => array(
-        'description' => t('Created token date'),
+        'description' => t('created date'),
         'type' => 'varchar',
         'mysql_type' => 'datetime',
         'default' => NULL,
       ),
-      'updated_date' => array(
-        'description' => t('Updated token date'),
-        'type' => 'varchar',
-        'mysql_type' => 'datetime',
+    ),
+    'primary key' => array('id'),
+  );
+  
+
+  $schema['itg_astro_last_image'] = array(
+    'description' => t('Astro last images!'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('id'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      
+      'image_fid' => array(
+        'description' => t('Image Fid'),
+        'type' => 'int',
+        'unsigned' => TRUE,
         'default' => NULL,
       ),
+        
+      'key_index' => array(
+        'description' => t('Key Index'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => NULL,
+      ),
+     
     ),
     'primary key' => array('id'),
   );
@@ -141,6 +104,7 @@ function itg_mobile_services_schema() {
  */
 function itg_mobile_services_uninstall() {
   drupal_uninstall_schema('itg_client_token');
+  drupal_uninstall_schema('itg_mobile_vas_url');
 }
 
 /**

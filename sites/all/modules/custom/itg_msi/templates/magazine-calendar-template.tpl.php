@@ -15,7 +15,7 @@ foreach ($data as $year) {
   if($year == arg(2)){
     $class = 'menu_active';
   }
-  $output .= '<span>' . l($year, 'calendar/0/' . $year . '/magazine.html', array('attributes' => array('class' => array($class)))) . '</span>';
+  $output .= '<span>' . l($year, 'magazine/' . itg_msi_last_issue_calendar($year), array('attributes' => array('class' => array($class)))) . '</span>';
   if ($count % 24 == 0) {
     $output .= "</li>";
   }

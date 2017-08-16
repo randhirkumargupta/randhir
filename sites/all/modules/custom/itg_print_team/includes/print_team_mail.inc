@@ -20,27 +20,29 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
       $body_data = $mail_template_data->field_mail_body_print_team[LANGUAGE_NONE][0]['value'];
       $body_datas = str_replace('[itg_mail_token:itg_node_title]', $node->title, $body_data);
       $mail_content = str_replace('Click here for more details', 'Click ' . $idea_link . ' for more details', $body_datas);
-      $mail_content .= '<p>Thanks,</p>';
-      $mail_content .= '<p>India Today Group</p>';
     }
 //    $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
     $user_email_ids = implode(",", $user_emails);
+//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
     $user_email_ids = $user->mail;
+//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   else {
     $mail_content = itg_print_team_association_mail_content($node, $op_type);
     $user_emails = itg_print_team_get_approval_user_emails('association_users');
     $user_email_ids = implode(",", $user_emails);
+//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
 
   // Array of email subject and body 
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-    'body' => $mail_content,
+    'body' => $mail_contents,
     'subject' => $mail_subject,
   );
   // Send mail function
@@ -67,8 +69,9 @@ function itg_print_team_send_mail_for_notification($nid){
   $user_email_ids = $user->mail;
 
   // Array of email subject and body 
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $params = array(
-      'body' => $mail_content,
+      'body' => $mail_contents,
       'subject' => 'India Today | ' . $node->title . ' status!',
   );
 

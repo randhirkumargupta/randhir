@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<magazine>
+    <item>
+        <title> {{{node_title}}} </title>
+        <link> {{{node_permalink}}} </link>
+        <pubDate> {{{node_published_date}}} </pubDate>
+    </item>
+</magazine>

@@ -20,6 +20,7 @@
 <div id="Bloggers">
   <h2 class="story-title"><?php print t('Bloggers Name'); ?></h2>
   <?php print drupal_render($form['field_blog_bloggers']); ?>
+  <?php print drupal_render($form['field_reporter_twitter_handle']); ?>
 </div>
 <div id="categorySection">
   <h2 class="story-title"><?php print t('Section'); ?></h2>
@@ -32,10 +33,15 @@
   <?php print drupal_render($form['field_blog_configuration']); ?>
   <?php print drupal_render($form['field_story_comment_question']); ?>
 </div>
-<!--<div id="Relatedcontent">
-  <h2 class="story-title">Related content</h2>
-  <?php //print drupal_render($form['field_common_related_content']); ?>
-</div>-->
+    <?php if(isset($form['akamai_timeout']) && !empty($form['akamai_timeout'])) { ?>
+
+<div id="AkamaiSettings" class="itg-sidebar-form-section">
+    <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+    <div class="itg-form-section">
+        <?php print drupal_render($form['akamai_timeout']); ?>
+    </div>
+</div>
+    <?php } ?>
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

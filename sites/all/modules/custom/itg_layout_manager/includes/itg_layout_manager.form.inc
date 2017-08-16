@@ -18,15 +18,10 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['layout_type'] = $arg1;
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
-  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));  
-  
-  $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1, 'scope' => 'footer'));
   
   if ($arg1 == 'section' || $arg1 == 'special') {
-    $op = array("" => "-- Section --");
-    foreach ($tax as $key => $val) {
-      $op[$val->tid] = $val->name;
-    }
+    $op = get_section_of_associate_tpl($arg1);
   } 
   elseif ($arg1 == 'home') {
       $op = array('home_page' => 'Home Page');
@@ -87,12 +82,7 @@ function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
  */
 function itg_layout_manager_filter_form($form, &$form_state) {
   $form = array();
-  //$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);  
   
-  
-//  foreach ($tax as $key => $val) {
-//    $op[$val->tid] = $val->name;
-//  } 
   if(!empty(arg(1))) {
     $op = get_all_section_of_tpl(arg(1));
   }
@@ -101,8 +91,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
   $form['section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
-    '#options' => $op,
-    //'#required' => TRUE,
+    '#options' => $op,    
     '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
   
@@ -187,8 +176,6 @@ function layout_section_widgets_search_form($form, &$form_state) {
     '#maxlength' => 128,
   );
   
-  
-  
   $form['section_save'] = array(
     '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
     '#weight' => 20,
@@ -270,6 +257,28 @@ function html_widgets_search_form($form, &$form_state) {
 }
 
 /**
+ * Implementation of hook_form for election widgets
+ * {@inheritdoc}
+ */
+function election_widgets_search_form($form, &$form_state) {  
+    
+  $form['election_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/election_graph_xml/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['election_submit'] = array(
+    '#markup' => '<div class="go-btn-div"><a class="fright" href="javascript:void(0)" id="layout-election-submit">Go</a></div>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
  * get all selected section of tpl
  * {@inheritdoc}
  */
@@ -313,4 +322,31 @@ function content_widgets_search_form($form, &$form_state) {
   );  
 
   return $form;
+}
+
+
+/**
+ * get all associate section with tpl
+ * {@inheritdoc}
+ */
+function get_section_of_associate_tpl($tpl_type) {
+  
+  $op = array("" => "-- Section --");
+  $itg_query = db_select('taxonomy_term_data', 'term');
+  $itg_query->fields('term', array('name', 'tid'));
+  $itg_query->fields('sty', array('field_cm_select_template_type_value'));
+  $itg_query->join('taxonomy_term_hierarchy', 'tth', 'tth.tid = term.tid');
+  $itg_query->join('field_data_field_cm_select_template_type', 'sty', 'sty.entity_id = term.tid');
+  $itg_query->condition('tth.parent', 0);
+  $itg_query->condition('term.vid', CATEGORY_MANAGMENT);
+  $itg_query->condition('sty.field_cm_select_template_type_value', $tpl_type);
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  $rows = array();
+  foreach ($itg_result as $row) {
+    $op[$row->tid] = $row->name;
+  }
+  
+  return $op;
 }

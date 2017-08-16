@@ -6,7 +6,7 @@
 (function ($) {
     Drupal.behaviors.itg_front_search = {
         attach: function (context, settings) {
-
+            var base_url = Drupal.settings.itg_front_search.settings.base_url;
             var custom_field_val = getParameterByName('custom_drp');
             $("#edit-submit-front-end-global-search").hide();
             $("#edit-reset").hide();
@@ -18,8 +18,7 @@
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
                     $(".caln").show();                   
-                } else
-                {
+                } else {
                     $(".caln").hide();
                     $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
@@ -44,16 +43,10 @@
                 $('#edit-reset').trigger('click');
             });
             
-            //ON CLICK SHOW FILTER TYPES
-            $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-            $("body, html").on("click", ".searh-all-filters label", function(){
-            $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-                $(this).next('div').show();    
-            });
 
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (selected) {
@@ -63,7 +56,7 @@
                     }
                 });
                 $("#edit-ds-changed-max-datepicker-popup-0").datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (selected) {
@@ -96,28 +89,30 @@
                                         }
                                       ]
                     });
-                }
-                
+                }                
 
                 jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     maxDate: -1,
                     onSelect: function (dateText, inst) {
-                        jQuery('#edit-submit-archive-story').trigger('click');
+                        urlpath = window.location.href;
+                        url = urlpath.split("/");
+                        console.log(url[3]);
+                        console.log(url[4]);
+                        var ctype = ["story", "photogallery", "video"];
+                        if(jQuery.inArray(url[4], ctype) != -1) {
+                         var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;   
+                        } else {
+                          var pathname = base_url + '/' + 'archives/story/' + dateText;    
+                        }
+                        //jQuery('#edit-submit-archive-story').trigger('click');
+                        window.location.href = pathname;
                     }
                 });
 
             }
-
-            jQuery('.atleta a').click(function (e) {
-                e.preventDefault();
-                var h = jQuery(this).attr('href');
-                jQuery('#edit-ds-changed-datepicker-popup-0').val(h);
-                jQuery('#edit-submit-archive-story').trigger('click');
-            });
-
         }
 
     };
@@ -140,4 +135,8 @@ function getParameterByName(name, url) {
 jQuery(document).ready(function(){
      //ON CLICK SHOW FILTER TYPES
     jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    jQuery("body, html").on("click", ".searh-all-filters label", function(){
+      jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+      jQuery(this).next('div').show();    
+    });
 });

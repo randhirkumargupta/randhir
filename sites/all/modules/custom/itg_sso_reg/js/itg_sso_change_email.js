@@ -14,34 +14,26 @@
                     otp = otp.toString().substring(0, 4);
                 var get_param  = $('input[name=emobile]').val();
                 
-                if($.isNumeric(get_param))
-                {
+                if ($.isNumeric(get_param)) {
                   var mobile = get_param;  
                   var post = "&mobile=" + mobile+ "&otp=" + otp+ "&source=change_email_mobile";
                   
                 }
-                else
-                {
+                else {
                     var email = get_param;
                     var post = "&email=" + email+ "&otp=" + otp+ "&source=change_email_mobile";
                 }
-               console.log(otp);
+               
                if (get_param != '') {
-                    $("#forgototpclickme").text("Resend OTP");
-                    
+                    $("#forgototpclickme").text("Resend OTP");                    
                     $.ajax({
                         'url': base_url + '/forgototp',
                         'data': post,
                         'type': 'POST',
-                        beforeSend: function () {
-                           
+                        beforeSend: function () {                           
                             $('#ajax-loader').show();
-                            
-
                         },
-                        'success': function (data)
-                        {
-
+                        'success': function (data) {
                             $('#ajax-loader').hide();
                             $("#forgot_otp_success").html("OTP Sent Successfully").show().delay(2000).hide(1000);
                         }
@@ -53,3 +45,42 @@
 
     };
 })(jQuery, Drupal, this, this.document);
+
+jQuery(document).ready(function () {
+// Custom validator function for social media start
+    jQuery("#itg-sso-user-email-form").validate({
+        onfocusout: function (element) {
+            jQuery(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            var elementName = element.attr('name');
+            var errorPlaceHolder = '';
+            switch (elementName) {
+
+                default:
+                    errorPlaceHolder = element.parent();
+            }
+            error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+            'emobile': {
+                required: true
+
+            },
+            'fotp': {
+                required: true
+
+            }
+        },
+        messages: {
+            'emobile': {
+                required: 'Email/Mobile field is required.'
+            },
+            'fotp': {
+                required: 'Please Enter OTP.'
+            }
+        }
+    });
+});

@@ -3,9 +3,9 @@
  * Contains all functionality related to Reporter
  */
 
-(function ($) {
+(function($) {
     Drupal.behaviors.itg_reporter = {
-        attach: function (context, settings) {
+        attach: function(context, settings) {
             var uid = settings.itg_reporter.settings.uid;
             var ntype = settings.itg_reporter.settings.ntype;
             var anchor = settings.itg_reporter.settings.anchor;
@@ -13,7 +13,7 @@
             var reporter = settings.itg_reporter.settings.reporter;
             var cmpny = $('#edit-field-byline-company-und').val();
             var dprt = $('#edit-field-byline-department-und').val();
-          
+
             var intialcelebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
             if (intialcelebrityvalue) {
                 var initialhasexist = intialcelebrityvalue.indexOf(anchor) != -1;
@@ -24,30 +24,30 @@
             if (intialcelebrityvalue) {
                 var initialhasexist_reporter = intialcelebrityvalue.indexOf(reporter) != -1;
             }
-            if (initialhasexist_poli)
-            {
+            if (initialhasexist_poli) {
                 $('#edit-field-constituancy-und-0-value').show();
                 $('#edit-field-party-name-und-0-value').show();
                 $('.form-item-field-constituancy-und-0-value').show();
                 $('#edit-field-party-name').show();
-
-
-
             } else {
                 $('#edit-field-constituancy-und-0-value').hide();
-
                 $('#edit-field-party-name-und-0-value').hide();
                 $('.form-item-field-constituancy-und-0-value').hide();
                 $('#edit-field-party-name').hide();
-
-
             }
             if (initialhasexist) {
-                $('#edit-field-story-category').show();
+                // $('#edit-field-story-category').show();
+                $('.form-item-itg-section').show();
+              
             } else {
-                $('#edit-field-story-category').hide();
+                //$('#edit-field-story-category').hide();
+                $('.form-item-itg-section').hide();
+                $('.form-item-itg-category').hide();
+                $('.form-item-itg-sub-category').hide();
+                $('.form-item-itg-sub-sub-category').hide();
+                $('.form-item-itg-sub-sub-sub-category').hide();
             }
-            
+
             if (initialhasexist_reporter) {
                 $('#edit-field-reporter-profile-type').show();
                 $('#edit-field-byline-company').show();
@@ -59,11 +59,11 @@
             }
             // Hide by default movie name field.
             $('#edit-field-reporter-movie-name').hide();
-            var occupationname = $('select[name="field_celebrity_pro_occupation[und][]"').find('option:selected').text();            
+            var occupationname = $('select[name="field_celebrity_pro_occupation[und][]"').find('option:selected').text();
             if (~occupationname.indexOf('Celebrity')) {
                 $('#edit-field-reporter-movie-name').show();
             }
-            $('#edit-field-celebrity-pro-occupation-und').change(function () {
+            $('#edit-field-celebrity-pro-occupation-und').change(function() {
                 var celebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
                 var hasexist = celebrityvalue.indexOf(anchor) != -1;
                 var celebrity = $(this).find('option:selected').text();
@@ -71,14 +71,19 @@
                 var initial_poli = celebrityvalue.indexOf(politician) != -1;
                 var initial_repo = celebrityvalue.indexOf(reporter) != -1;
                 if (hasexist) {
-                    $('#edit-field-story-category').show();
-                } else
-                {
-                    $('#edit-field-story-category').hide();
+                    //$('#edit-field-story-category').show();
+                    $('.form-item-itg-section').show();
+             
+                } else {
+                    //$('#edit-field-story-category').hide();
+                    $('.form-item-itg-section').hide();
+                    $('.form-item-itg-category').hide();
+                    $('.form-item-itg-sub-category').hide();
+                    $('.form-item-itg-sub-sub-category').hide();
+                    $('.form-item-itg-sub-sub-sub-category').hide();
                     $('.dropbox-remove a').trigger('click');
                 }
-                if (initial_poli)
-                {
+                if (initial_poli) {
                     $('#edit-field-constituancy-und-0-value').show();
                     $('#edit-field-party-name-und-0-value').show();
                     $('.form-item-field-constituancy-und-0-value').show();
@@ -113,7 +118,7 @@
 
             // Common function to reset all values.
             function clear_form_elements(class_name) {
-                jQuery("." + class_name).find(':input').each(function () {
+                jQuery("." + class_name).find(':input').each(function() {
                     switch (this.type) {
                         case 'text':
                         case 'textarea':
@@ -129,22 +134,22 @@
 
             // restrict mouse down on datefield.
             // date-clear form-text hasDatepicker date-popup-init valid
-            $('input .hasDatepicker').keypress(function (e) {
+            $('input .hasDatepicker').keypress(function(e) {
                 return false
             });
 
             // validation in case of internal author
-                $("#reporter-node-form").validate({
-                submitHandler: function (form) {
+            $("#reporter-node-form").validate({
+                submitHandler: function(form) {
                     $('input:submit').attr('disabled', 'disabled');
                     form.submit();
                 },
-                onfocusout: function (element) {
+                onfocusout: function(element) {
                     $(element).valid();
                 },
                 ignore: '',
                 errorElement: 'span',
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     var elementName = element.attr('name');
                     var errorPlaceHolder = '';
                     switch (elementName) {
@@ -159,19 +164,17 @@
                         required: true
 
                     },
-                    
-                     'field_reporter_email_id[und][0][value]': {
-                         email: true
+                    'field_reporter_email_id[und][0][value]': {
+                        laxEmail: true
 
                     },
-                   
                     'field_celebrity_pro_occupation[und][]': {
                         required: true
 
-                    },    
+                    },
                     'field_byline_company[und]': {
                         validatecompany: {
-                            depends: function () {
+                            depends: function() {
                                 var profile = $('#edit-field-reporter-profile-type-und').val();
                                 if (profile == 'internal') {
                                     return true;
@@ -184,7 +187,7 @@
                     },
                     'field_byline_department[und]': {
                         validatedepartment: {
-                            depends: function () {
+                            depends: function() {
                                 var profile = $('#edit-field-reporter-profile-type-und').val();
                                 if (profile == 'internal') {
                                     return true;
@@ -215,14 +218,18 @@
                     }
                 }
             });
-            
-            jQuery.validator.addMethod("validatecompany", function (value, element) {
+            jQuery.validator.addMethod("laxEmail", function(value, element) {
+                // allow any non-whitespace characters as the host part
+                return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+            }, 'Please enter a valid email address.');
+
+            jQuery.validator.addMethod("validatecompany", function(value, element) {
                 return validate_company_name_value(value, element);
             }, "Company name is required.");
-            jQuery.validator.addMethod("validatedepartment", function (value, element) {
+            jQuery.validator.addMethod("validatedepartment", function(value, element) {
                 return validate_department_name_value(value, element);
             }, "Department name is required.");
-      
+
             // Validate company name drop down.
             function validate_company_name_value(event, element) {
                 if ($(element).val() == '_none') {
@@ -243,9 +250,9 @@
                     return true;
                 }
             }
-            
+
             // end here
-                
+
         }
 
     };

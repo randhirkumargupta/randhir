@@ -39,14 +39,14 @@
                 ?>
                 <li data-tag="image-tab-<?php echo $index; ?>">
                     <a href="javascript:void(0)" class="<?php echo $video_class;?>"><?php print $row['field_story_extra_large_image_1']; ?></a>
-                    <p class="title">
+                    <p class="title"  title="<?php print strip_tags($row['title']) ; ?>">
                       <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
                     <?php 
                       if (function_exists('itg_common_get_smiley_title')) {
                         echo l(itg_common_get_smiley_title($row['nid'], 0, 90), "node/" . $row['nid'], array("html" => TRUE ));
                       }
                       else {
-                       echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), "node/" . $row['nid']);
+                       echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 100, ".."), "node/" . $row['nid']);
                       }
                     ?>
                     </p>

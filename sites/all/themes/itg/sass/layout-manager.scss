@@ -293,7 +293,6 @@ img{
 .trending-videos{
     @extend .list-none;
     border: 1px solid $border-color;
-    padding-top: 10px;    
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
     li{
         &+li{
@@ -403,6 +402,7 @@ img{
         }
         .top-colum-3{
             .itg-widget-parent{
+              margin-bottom: 26px;
                 .droppable {
                     height: 320px;
                 }
@@ -410,9 +410,6 @@ img{
             .droppable{
                 height: 272px;
                 overflow: hidden;
-            }
-            .itg-widget:first-child{
-                margin-bottom: 40px;
             }
         }
         &.itg-admin{
@@ -556,6 +553,20 @@ img{
     }
     @include sidebar-heading;
 }
+
+.trending-list{
+  .top-takes-video-container, .watch-right-now-video{
+    border: 1px solid $border-color;
+    h3{
+      display: none !important;
+    }
+    ul li{
+      padding: 10px 24px !important;
+      &:last-child{border-bottom: none !important;}
+    }
+  }
+}
+
 .sidebar-second .top-takes-video-container h3{
     display: block;
 }
@@ -615,6 +626,17 @@ img{
         width: 100%;
         .flex-viewport{
           overflow: visible !important;
+        }
+        .flex-caption {
+          width: 96%;
+          padding: 2%;
+          left: 0;
+          bottom: 0;
+          background: rgba(0,0,0,.5);
+          color: #fff;
+          text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+          font-size: 14px;
+          line-height: 18px;
         }
         .slides{
             li{
@@ -3123,4 +3145,44 @@ img{
     padding: 5px 10px;
     font-size: 16px;
     /* background: #ddd; */
+}
+.itg-layout-container.default-section{
+    .auto-block-2{
+        position: relative;
+        .special-top-news {
+            overflow: hidden;            
+            height: 100%;
+            .widget-title{
+                position: absolute;
+            }
+            .itg-listing-wrapper{
+              margin-top: 22px !important;
+              overflow: auto;
+              height: 100%;
+              ul{
+                padding: 0 !important;
+              }
+            }
+        }
+    }
+    .itg-listing, .featured-news{
+        border: none;
+    }    
+    .itg-top-section .top-colum-2 .droppable{
+        margin-bottom: 0;
+    }
+}
+.page-itg-layout-manager-home{
+  .home-election{
+    margin-bottom: 30px;
+    .droppable{
+      min-height: 400px;
+    }
+    .social-share{
+      li{
+        float: left;
+        margin-right: 10px;
+      }
+    }
+  }
 }

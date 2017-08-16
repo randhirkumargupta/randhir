@@ -14,8 +14,7 @@
             }
             catch (err) {
                 
-            }
-                    
+            }                    
             
             this.context = context;
             

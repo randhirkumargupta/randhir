@@ -64,6 +64,11 @@ function itg_personalization_menu() {
     'access arguments' => array('access personalization all content link'),
     'type' => MENU_CALLBACK,
   );
+  $items['following-details-ajax'] = array(
+    'page callback' => 'itg_following_details_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -78,26 +83,33 @@ function itg_personalization_menu() {
  *   Html output for this page.
  */
 function itg_personalization_home_page() {
-  global $user;
+  global $user, $base_url;
   $data = array();
-  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
+  $arg = arg();
+  if($arg[1] != 'saved-items') {
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
+  }
   // Load user fields
   $user_fields = user_load($user->uid);
 
   // Render user picture.
+  if(!empty($user_fields->field_user_picture['und'][0]['uri']) && getimagesize($user_fields->field_user_picture['und'][0]['uri']) !== false) {
   $data['profile_pic'] = theme(
       'image_style', array(
     'style_name' => 'user_picture',
     'path' => $user_fields->field_user_picture['und'][0]['uri'],
       )
   );
-
+  } else {
+    $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
+    $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+    $data['profile_pic'] = $user_pic;
+  }
   // Load user name    
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
-  $data['badge_detail'] = itg_personalization_badge($user->uid); 
-  
+  $data['badge_detail'] = itg_personalization_badge($user->uid);
   // Load badge icon.
   if (!empty($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 0) {    
     $file = file_load(variable_get('badge_' . $data['badge_detail']['earn'], ''));
@@ -188,7 +200,16 @@ function itg_personalization_block_info() {
     'info' => t('Personalized All Content'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['personalization_to_be_follow'] = array(
+    'info' => t('Personalized To BE Follow'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
+  $blocks['personalization_following'] = array(
+    'info' => t('Personalized Following'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -234,7 +255,8 @@ function itg_personalization_block_view($delta = '') {
   // create url for edit profile
   $change_pass_url = '';
   if ($delta == 'personalization_edit_profile') {
-    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . base64_encode($_SERVER['HTTP_HOST']);
+    $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . $uri;
   }
   $block = array();
   $output = '<ul class="profile-edit-tab">';
@@ -242,7 +264,7 @@ function itg_personalization_block_view($delta = '') {
   //$output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
   // check for twitter condition
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
-    $output .= '<li><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, ' . "'" . $change_pass_url . "'" . ');">Change Password</a></li>';
+    $output .= '<li><a href="' . $change_pass_url .'">Change Password</a></li>';
   }
   $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
   $output .= '</ul>';
@@ -261,6 +283,12 @@ function itg_personalization_block_view($delta = '') {
       break;
     case 'personalization_all_content':
       $block['content'] = _personalization_all_content();
+      break;
+    case 'personalization_to_be_follow':
+      $block['content'] = _personalization_to_be_follow_content();
+      break;
+    case 'personalization_following':
+      $block['content'] = _personalization_following_content();
       break;
     case 'user_saved_content':
       $block['content'] = '<div id="target"></div>';
@@ -340,6 +368,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $content_type_for_icon .= '</ul>';
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
     $form['field_user_name']['#suffix'] = '</div>';
+    $form['field_ugc_photo_image']['#prefix'] = '<div style="display: none;">';
+    $form['field_ugc_photo_image']['#suffix'] = '</div>';
     // Hide user email field.
     $form['field_user_email']['#prefix'] = '<div style="display: none;">';
     $form['field_user_email']['#suffix'] = '</div>';
@@ -532,8 +562,6 @@ function itg_personalization_reddem_referfriend($key) {
  */
 function _personalization_show_content() {
   global $user, $base_url;
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  $short_url = shorten_url($actual_link, 'goo.gl');
   $arg = arg();
   if (function_exists('mongodb'))
   {
@@ -544,35 +572,53 @@ function _personalization_show_content() {
     }
     
     $start_date = strtotime(date('d-m-Y', strtotime($expiry_days)));
-    $url_arg = array('articles', 'videos', 'photogalleries');
+    $url_arg = array('articles', 'videos', 'photogalleries', 'all');
     $con = mongodb();
     $people = $con->front_user_activity;
 
     if (in_array($arg[2], $url_arg))
     {
+      $flag = FALSE;
       if ($arg[2] == 'articles')
       {
         $ntype = 'story';
+        $flag = TRUE;
       }
       if ($arg[2] == 'videos')
       {
         $ntype = 'videogallery';
+        $flag = TRUE;
       }
       if ($arg[2] == 'photogalleries')
       {
         $ntype = 'photogallery';
+        $flag = TRUE;
       }
-      $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
+      if ($arg[2] == 'all')
+      {
+        $ntype = 'photogallery';
+        $flag = FALSE;
+      }
+      
+      if ($flag) {
+        $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'ntype' => $ntype, 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
+      }
+      else {
+        $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
+      }
     }
-    else
-    {
+    else {
       $cursor = $people->find(array('uid' => $user->uid, 'status' => '1', 'activity' => 'read_later', 'timestamp' => array('$gte' => $start_date)))->sort(array('timestamp' => -1));
     }
 
     $output = '';
     $output.= '<ul class="personal-list">';
     foreach ($cursor as $id => $value) {
-      $fbShare_title = preg_replace("/'/", "\\'", $value['title']);
+      if(function_exists('itg_get_node_status') && itg_get_node_status($value['nid']) == '1') {
+      $alias = drupal_get_path_alias('node/'.$value['nid']);
+      $actual_link = $base_url.'/'.$alias;
+      $short_url = shorten_url($actual_link, 'goo.gl');
+      $fbShare_title = str_replace("'", "", $value['title']);
       $fbSocial_share_title = htmlentities($fbShare_title, ENT_QUOTES);
       $fbdesc = '';
       if (function_exists('itg_get_front_activity_info'))
@@ -599,19 +645,21 @@ function _personalization_show_content() {
 
       if (($opt['status'] == '1'))
       {
-        $output.= '<a title = "Unflag" href="javascript:" class="user-activity" rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
+        $output.= '<a title = "Unflag" href="javascript:" class="user-activity" data-rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
       }
 
       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
         $output.= '<span class="personal-social-share-links">';
-        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
+        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" .  $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
         $output.= '<a href="javascript:;" title = "share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(\'' . urlencode($fbSocial_share_title) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a>';
-        $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
+        $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . urlencode($actual_link) . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
         $output.= '</span>';
         $output.= '</div></div><a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
-    }
+      }
+        
+      } // close for foreach
     $output.= '</ul>';
-    if(!empty($value['title'])) {
+    if(!empty($value['nid'])) {
       return $output;
     }
     else {
@@ -619,6 +667,43 @@ function _personalization_show_content() {
     }
     
   }
+}
+
+/**
+ * Implements _personalization_to_be_follow_content().
+ */
+function _personalization_to_be_follow_content() {
+  $featured_tag = get_featured_tag();
+  $output = '<div class="to_be_follow"><h2>To Be Follow</h2>';
+  foreach ($featured_tag as $key => $value) {
+    if (get_featured_tag_status($value['entity_id']) == 'Published' && itg_personalization_get_followed_status($value['entity_id']) == 0) {
+      if (function_exists('get_term_name_from_tid_for_report')) {
+        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="follow" data-value="'.$value['entity_id'].'"> Follow</a>';
+        $output .='<div class="featured-name">' . get_term_name_from_tid_for_report($value['entity_id']) . '<span>'.$link.'</span></div>';
+      }
+    }
+  }
+  $output .= '</div>';
+
+  return $output;
+}
+
+/**
+ * Implements _personalization_following_content().
+ */
+function _personalization_following_content() {
+  global $user;
+  $featured_tag = itg_personalization_get_followed_tag($user->uid);
+  $output = '<div class="to_be_follow"><h2>Following</h2>';
+  foreach ($featured_tag as $key => $value) {
+      if (function_exists('get_term_name_from_tid_for_report')) {
+        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="unfollow" data-value="'.$value['tid'].'"> Un Follow</a>';
+        $output .='<div class="featured-name">' . get_term_name_from_tid_for_report($value['tid']) . '<span>'.$link.'</span></div>';
+      }
+  }
+  $output .= '</div>';
+
+  return $output;
 }
 
 /**
@@ -638,3 +723,93 @@ function itg_user_fb_share_count($uid, $type) {
     return $num_of_results;
   }
 }
+
+/**
+ * Helper function to get featured tag
+ */
+function get_featured_tag() {
+   $result = db_select('field_data_field_tags_display', 'ts')
+        ->fields('ts', array('entity_id'))
+        ->condition('field_tags_display_value', 'Yes')
+        ->execute();
+    $featured_data = $result->fetchAll(PDO::FETCH_ASSOC);
+    return $featured_data;
+}
+
+/**
+ * Helper function to get featured tag status
+ */
+function get_featured_tag_status($entity_id) {
+   $result = db_select('field_data_field_tags_status', 'ts')
+        ->fields('ts', array('field_tags_status_value'))
+        ->condition('ts.entity_id', $entity_id)
+        ->execute();
+    $featured_data = $result->fetchField();
+    return $featured_data;
+}
+
+/*
+ * Helper function for follwing personalization
+ */
+function itg_following_details_callback() {
+  global $user;
+  $tid = $_POST['tid'];
+  $dtag = $_POST['dtag'];
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con && !empty($tid)) {
+      if($dtag == 'follow') {
+      $people = $con->following_personalization;
+      $qry = array("tid" => $tid, "uid" => $user->uid, "tag-status" => $dtag, "timestamp" =>time());
+      $result = $people->insert($qry);
+      $response = array('success' => 'true');
+      print json_encode($response);
+      }
+      
+      if($dtag == 'unfollow') {
+      $people = $con->following_personalization;
+      $people->remove(array("tid" => $tid, "uid" => $user->uid));
+      $response = array('success' => 'fail');
+      print json_encode($response);
+      }
+    } //close connection
+  }
+}
+
+
+/**
+ * Implements hook_user_login().
+ */
+function itg_personalization_user_login(&$edit, $account) {
+  global $user;
+  $user_mail = $user->mail;
+  $uids = itg_personalization_refer_friend_existence($user_mail);
+  if (!empty($uids)) {
+    foreach ($uids as $key => $value) {
+      if (function_exists('itg_loyalty_reward_earnpoint') && !empty($value)) {
+        itg_loyalty_reward_earnpoint(0, 'raf', $value);
+        $itg_query = db_update('itg_lrp_refer_friend')
+            ->fields(array('status' => 1))
+            ->condition('mail', $user_mail)
+            ->condition('status', 0);
+        $itg_result = $itg_query->execute();
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to check refer a friend existence().
+ * @param string $mail
+ */
+function itg_personalization_refer_friend_existence($mail) {
+  $query = db_select('itg_lrp_refer_friend', 'ref');
+  $query->fields('ref', array('uid'))
+      ->condition('ref.mail', $mail)
+      ->condition('ref.status', 0);
+  $result = $query->execute();
+  return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+}
+
+

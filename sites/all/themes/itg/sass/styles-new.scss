@@ -20,7 +20,7 @@ input[type="file"], input[type="submit"], input[type="text"]{
   appearance: none;
 }
 
-[id="views-exposed-form-front-end-global-search-page"]{
+[id*="views-exposed-form-front-end-global-search-page"]{
     .views-exposed-form{
         #edit-keyword-wrapper{
             width: 100%;
@@ -545,16 +545,20 @@ input[type="file"], input[type="submit"], input[type="text"]{
     }
 }
 
-/*$test : .carousel .slides .slideItem;
-$debug: "width:645px"; // TODO: move to _settings.scss
-
-
-    @if ($debug) { // visualizing layout internals
-        display: block;
-    }*/
-
-
-
+.carousel .slides .slideItem.active-slide span{
+  opacity: 1;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
+.carousel .slides .slideItem.active-slide span.overlay{
+  opacity: 0;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper{
@@ -949,6 +953,43 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         }
       }
     } 
+  }
+}
+
+.node-ugc-form{
+  .form-field-name-field-ugc-photo-image{
+    fieldset{
+      border: none;
+      legend{
+        float: left;
+        width: 200px;
+        &:after{
+          content:'*';
+          color: #f00;
+        }
+      }
+      .fieldset-wrapper{
+        overflow: hidden;
+        .tabledrag-toggle-weight-wrapper, table thead{display: none;}
+        table{
+          tbody{
+            tr{
+              td{
+                .tabledrag-handle{display: none;}
+                .form-submit{
+                  border: none;
+                  background: #fff;
+                  color: #F00;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+          & + .form-type-managed-file{margin-top: 10px;}
+        }
+        
+      }
+    }
   }
 }
 
@@ -1595,15 +1636,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     }
     .social-info{
       float: right;
-      width: 200px;
+      text-align: right;
+      margin-top: 8px;
       span{
-        float: left;
-        width: 25%;
-        padding: 5px;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 30px;
         text-align: center;
         .fa{
-          font-size: 18px;
-          line-height: 22px;
+          font-size: 26px;
+          line-height: 26px;
         }
         dfn{
           font: normal 400 12px/18px Roboto;
@@ -1685,10 +1727,19 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         color: #322323;
       }
     }
+    iframe{display: block;}
   }
 }
 .survey-form-wrapper-all{
-  .question-container{display: block;}
+  .question-container{
+    display: block;
+    .question-heading{
+      margin: 30px 0;
+    }
+  }
+  .survey-submit-btn-wrapper{
+    margin-top: 50px;
+  }
 }
 [id*="itg-survey-survey-form"]{
   .form-submit{
@@ -1703,12 +1754,19 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     background: -o-linear-gradient(#4fb5ff, #0986e0); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#4fb5ff, #0986e0); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#4fb5ff, #0986e0); /* Standard syntax */
-    font-size: 16px;
+    font-size: 18px;
     font-family: Roboto;
     color: #fff;
-    font-weight: 300;
+    font-weight: 400;
     margin-right: 20px;
     cursor: pointer;
+    .messages{
+      border: 1px solid;
+      padding: 10px;
+      ul{
+        padding-left: 18px;
+      }
+    }
   }
   .survey-form-wrapper-all{
     .form-submit{display: block; margin: 0 auto;}
@@ -1741,6 +1799,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
+      height: 74px;
       overflow: hidden;
       h2{
         color: #fff;
@@ -1805,6 +1864,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     padding: 10px 0 0;
     max-height: 115px;
     overflow-y: auto;
+    margin-top: 0;
   }
   .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
   .poll-wrapper .poll-data .poll-replace-id .past-poll li{
@@ -1830,7 +1890,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 100%;
   padding: 10px;
   text-align: center;
-  .add-more-block, .add-more-block-front, .removes-more-block{
+  .add-more-block, .add-more-block-front, .removes-more-block, .add-more-block-front-section{
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
@@ -2205,39 +2265,97 @@ body.has-cart-popup{
 /* CSS for forgot password */
 
 [id*="itg_sso_reg_multistep_form"]{
+  
   ul.messages__list{
     padding-left: 18px;
     font-size: 14px;
     font-family: Roboto;
   }
+  .center-heading{
+    text-align: center;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      margin: 20px 0;
+    }
+  }
+}
+.page-signup{
+  [id*="itg_sso_reg_multistep_form"]{
+    .parent-background{
+      max-width: 780px;
+    }
+    .form-wrapper .form-submit{
+      background-color: transparent;
+      width: 170px;
+      height: 40px;
+      border: none;
+    }
+  }
 }
 [id*="itg_user_forgot_password_multistep_form"]{
-    margin: 0 -15px;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+  form{
+    padding-top: 20px;
+    max-width: 540px;
+    margin: 0 auto;
+    font-family: Roboto;
+    color: #666;
+    line-height: 24px;
+    .form-item-ufname{
+      margin-top: 20px;
+    }
+  }
+  .center-heading{
+    text-align: center;
+    h2{
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 36px;
+      margin: 50px 0 20px;
+    }
+  }
+  .parent-background{
+    .signin-link{
+      float: left;
+      &:hover{
+        color: #026bc5;
+      }
+    }
+    .signup-link{
+      float: right;
+      &:hover{
+        color: #026bc5;
+      }
+    }
+  }
     .form-text{
         width: 100%;
         height: 36px;
     }
     
     .form-wrapper{
-        padding: 15px;
+        padding: 15px 0;
         display: inline-block;
         vertical-align: top;
         width: 100%;
         position: relative;
         .form-submit, .btn-skip{
-            background-color: #000;
-            border: 1px solid #000;
-            border-radius: 3px;
+            background: url(../images/btn-blue.png) no-repeat;
             color: #fff;
             font-size: 16px;
-            height: 38px;
-            width: 200px;
+            height: 41px;
+            width: 170px;
             text-align: center;
-            line-height: 35px;
+            line-height: 38px;
             margin-right: 20px;
             text-transform: capitalize;
             display: inline-block;
             vertical-align: top;
+            border: none;
         }
         .ajax-progress{
             left: 217px;
@@ -2662,12 +2780,12 @@ body.has-cart-popup{
     }
   }
 }
-.page-user{
+.page-user, .page-signup{
     form{
         font-family: Roboto;
-        max-width: 580px; 
+        max-width: 780px; 
         margin: 0 auto; 
-        padding: 20px;
+        padding: 50px 20px;
         h2{
             font-size: 28px;
             font-weight: 400;
@@ -2692,10 +2810,9 @@ body.has-cart-popup{
             }
         }
         .form-submit{
-          background-color: #000 !important;
-          border: 1px solid #000 !important;
-          height: 50px;
-          width: 243px;
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          width: 170px;
         }
         .bottom-link{
           display: inline-block;
@@ -2774,7 +2891,7 @@ body.has-cart-popup{
         }
       }
     }
-    .sign-border{
+    .sign-border, .signup-txt{
       text-align: center;
       position: relative;
       margin: 30px 0;
@@ -2820,18 +2937,16 @@ body.has-cart-popup{
         }
     }
 }
+.page-signup form{
+  padding: 20px 0;
+}
 [id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
   #email-sucess, #thank-you, #mobile-success{
     color: #009c00;
     margin: 20px;
   }
 }
-.sign-in-link{
-  padding: 20px;
-  .signup-link{
-    float: left;
-  }
-}
+
 #fotp{
   padding: 0 15px;
   .form-item-fotp{
@@ -3424,8 +3539,48 @@ span.personal-social-share-links {
       line-height: 30px;
     }
 }
-
-
+#itg-sso-reg-multistep-form--2 a.sso-sign-in, #itg-sso-reg-multistep-form--3 a.sso-sign-in {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 20px;
+    background-color: #000;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+#itg-sso-reg-multistep-form--2 .sign-in-link, #itg-sso-reg-multistep-form--3 .sign-in-link {
+    text-align: center;
+}
+.forgot-error {
+    color: red;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper{text-align: left;}
+[id*="itg_user_forgot_password_multistep_form"] .messages--status{width: 520PX;
+    display: inline-block;
+    vertical-align: top;
+}
+#fotp #forgototpclickme{color: blue;}
+#itg_user_forgot_password_multistep_form label {
+    float: left;
+}
+div#forgot-field-heading {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+.page-user{
+  .sso-header{
+    & + #page{
+      .login-wrapper{
+        .form-type-textfield, .form-type-password{
+          label{display: none;}
+        }
+      }
+    }
+  }
+}
 
 
 
@@ -3963,17 +4118,21 @@ span.personal-social-share-links {
 }
 .page-personalization-my-following{
     .region-personalization{text-align: center;}
-    #block-views-follow-tags-block,
-    #block-views-follow-tags-block-1{
+    #block-itg-personalization-personalization-to-be-follow,
+    #block-itg-personalization-personalization-following{
         background-color: #f2f2f2;
         margin: 20px 10px 0;
         display: inline-block;
         vertical-align: top;
         width: 400px;
         padding: 15px;
-        .view-follow-tags{
-            .views-row{
-                padding:10px;
+        h2{
+          font: 400 24px/28px Roboto;
+          margin: 20px 0;
+        }
+        .to_be_follow{
+            .featured-name{
+                padding:10px 75px 10px 10px;
                 text-align: left;
                 border: 1px solid #d9d9d9;
                 background-color: #fff;
@@ -3981,15 +4140,12 @@ span.personal-social-share-links {
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
+                font: 400 16px/20px Roboto;
+                word-wrap: break-word;
                 &:hover{
                   background-color: #efefef;
                 }
-                .views-field-name{
-                    padding-right: 75px;
-                    font: 400 16px/20px Roboto;
-                    word-wrap: break-word;
-                }
-                .views-field-ops{
+                span{
                     font: 400 14px/20px Roboto;
                     position: absolute;
                     right: 5px;
@@ -4099,19 +4255,23 @@ span.personal-social-share-links {
 }
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile{
   position: relative;
-  &:after{
+  #umail:after{
     content: 'OR';
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 25px;
+    left: 95.5%;
+    top: 10px;
     margin: 0 auto;
-    width: 20px;
+    width: 25px;
+    height: 25px;
+    background-color: #e5e5e5;
+    border-radius: 50%;
     text-align: center;
     font-size: 12px;
     color: #666;
     font-family: Roboto;
     font-weight: 500;
+    box-sizing: border-box;
+    padding-top: 4px;
   }
 }
 .page-cart, .page-order{
@@ -4481,27 +4641,27 @@ article.node-mega-review-critic{
     .career-graph-data{
         margin-top: 80px;
         position: relative;
-        .gray-bg, .black-bg{
-            background: #dedede;            
+        .gray-bg{
+            background-color: #dedede;            
             color: #000;
             font-family: roboto;
             font-size: 17px;
             font-weight: 500;
-            padding: 20px;
+            padding: 17px 20px;
             text-align: right;
             text-transform: uppercase;
         }
         .black-bg{
-            background: #000 none repeat scroll 0 0;
+            background-color: #2a2a2a;
             color: #fff;
             font-size: 24px;
-            padding: 28px 20px 28px 190px;
-            text-align: left;
+            font-family: roboto;
+            font-weight: 500;
+            padding: 19px 20px 19px 195px;
             line-height: 28px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-align: right;
         }
         img{
             position: absolute;
@@ -5077,10 +5237,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       padding-top: 10px;
       z-index: 99999;
       .copy-sample-code{
-        background-color: #fff;        
+        background-color: #fff;
         position: relative;
-        box-shadow: 0 0 10px #666;
-        &:before {
+        box-shadow: 0px 5px 20px -5px #000;
+/*        &:before {
           border-color: transparent transparent #fff transparent;
           border-style: solid;
           border-width: 11px;
@@ -5092,7 +5252,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           left: 0;
           right: 0;
           margin: 0 auto;
-        }
+        }*/
         textarea {
             border: 1px solid #fff;
             min-height: 100px;
@@ -5285,8 +5445,60 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }
-  
-  
+  .page-signup, .page-user, .page-forgot-password{
+    .parent-background{
+      background: #fbfbfb;
+      margin: 0 auto;
+      width: 100%;
+      overflow: hidden;
+      padding: 30px 100px;
+      .signup-txt, .sign-border{
+        span{
+          background-color: #fbfbfb;
+        }
+      }
+      .social-share{
+        width: auto;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
+  .page-sso-change-password{
+    h3{text-align: center; margin: 40px 0 20px;}
+    form#itg-sso-reg-password-form{
+      background: #fbfbfb;
+      margin: 0 auto;
+      max-width: 780px;
+      padding: 20px 100px;
+      .form-submit{
+        background: url(../images/btn-blue.png) no-repeat;
+        height: 41px;
+        width: 170px;
+      }
+      .password-confirm{
+        span.error{display: inline-block;}
+      }
+    }
+  }
+  #sso_email_mobile_form{
+    max-width: 780px;
+    h3{text-align: center; margin: 40px 0 20px;}
+    form{
+      background: #fbfbfb;
+      margin: 0 auto;
+      padding: 20px 100px;
+      label{display: block;}
+      input[type="text"]{
+        width: 100%;
+      }
+      .form-submit{
+        background: url(../images/btn-blue.png) no-repeat;
+        height: 41px;
+        width: 170px;
+      }
+    }
+  }
 
 
 
@@ -5802,8 +6014,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       }
     }
   }  
-  .page-personalization-my-following #block-views-follow-tags-block, 
-  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
+  .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow, 
+  .page-personalization-my-following #block-itg-personalization-personalization-following{width: 100%; float: left; margin: 20px 0 0; padding: 15px 0;}
   #block-itg-personalization-user-my-point{
     .header-point{
       padding: 20px 0;
@@ -6356,8 +6568,93 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     height: auto;
     img{position: static;}
   }
+  .page-user, .page-signup, .page-forgot-password{
+    #page{
+      height: auto;
+    }
+    #main .container{
+      padding: 0;
+    }
+    form{
+      padding: 40px 0;
+    }
+    .parent-background{
+      padding: 30px 20px;
+    }
+    .social-share{
+      a{width: 50px; padding: 0; .fa{width: 50px;}}
+    }
+  }
+  .page-signup{
+    [id*="itg_sso_reg_multistep_form"]{
+      .parent-background{
+        padding-left: 10px; 
+        padding-right: 10px;
+        .sign-in-link{
+          padding: 0 10px;
+          .left-block{
+            width: 50%;
+            padding-right: 5px;
+          }
+          .rgt-block{
+            width: 50%;
+            padding-left: 5px;
+          }
+        }
+      }
+      .form-row{
+        padding: 0;
+        .form-item{
+          margin: 0;
+        }
+        &.email-or-mobile{
+          #umail{
+            padding-bottom: 35px;
+            &:after{
+              top: auto;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
+          }
+          
+        }
+      }
+      .col-xs-6{
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  #itg_user_forgot_password_multistep_form{
+    .parent-background{
+      padding-left: 15px;
+      padding-right: 15px;
+      .sign-in-link{
+        .signin-link{
+          width: 50%;
+          padding-right: 5px;
+          text-align: left;
+        }
+        .signup-link{
+          width: 50%;
+          padding-left: 5px;
+          text-align: right;
+        }
+      }
+    }
+  }
+  [id*="itg_user_forgot_password_multistep_form"] #ufname {
+    padding: 0;
+  }
+  .feed-type ul li{
+    width: 32%;
+  }
 }
 @media all and (max-width: 480px){
+  .feed-type ul li{
+    width: 49%;
+  }
   .photos-videos-wrapper .movie-videos, 
   .photos-videos-wrapper .movie-photos{
     width: 100%;

@@ -5,11 +5,20 @@
  *
  * @ingroup views_templates
  */
+global $base_url;
 ?>
 <?php foreach ($rows as $index => $row): ?>
 <div class="podcast-container-<?php print $index ?> catagory-listing">
-  <div class="podcast-left pic">      
-      <?php print $row['field_story_extra_large_image']; ?>    
+  <div class="podcast-left pic">
+      <?php 
+       if($row['field_story_extra_large_image'] == 'notFound') {
+         print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+       }
+       else  {
+         print $row['field_story_extra_large_image']; 
+       
+       }
+      ?>    
       <span><i id="demo-<?php echo $row['nid'] ?>" class="fa fa-volume-up" aria-hidden="true"></i>
           <audio class="hide" id="myAudio-<?php echo $row['nid'] ?>" controls>
         <source src="<?php print _get_audio_file_url($row['nid']); ?>" type="audio/mpeg">
@@ -18,7 +27,7 @@
       </span>
   </div>
   <div class="podcast-right detail">    
-      <h3><?php print $row['title']; ?></h3>
+      <h3 title="<?php print strip_tags($row['title']) ; ?>"><?php print html_entity_decode($row['title']); ?></h3>
       <p><?php print $row['field_podcast_kicker_message']; ?></p>      
     </div>    
   </div>

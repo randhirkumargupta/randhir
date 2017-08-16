@@ -10,10 +10,7 @@ list($width, $height) = getimagesize($url);
     <?php
     $counter = 1;
     foreach ($data->fid as $key => $fids) {
-
-
       $image_dim = mageimagedimesion();
-
       $explodedata = explode('#', $fids);
       if ($key == 0) {
         $key = "";
@@ -21,6 +18,17 @@ list($width, $height) = getimagesize($url);
       }
       $file = file_load($explodedata[0]);
       $imagename = str_replace('field_story_', '', $explodedata[1]);
+      if ($content_name == 'category_management') {
+        $content_type = 'taxonomy_term';
+      }
+      else {
+        $content_type = 'node';
+      }
+      $info = field_info_instance($content_type, $explodedata[1], $content_name);
+      $label = $info['label'];
+      if ($label == "") {
+        $label = 'Image';
+      }
 
       $imagename = str_replace('_', ' ', $imagename);
       $url = file_create_url($file->uri);
@@ -33,6 +41,8 @@ list($width, $height) = getimagesize($url);
         <ol> 
         </ol>';
       if ($content_name != "") {
+
+
         $imagewidth = $image_dim[$content_name][$explodedata[1]]['width'];
         $imagehight = $image_dim[$content_name][$explodedata[1]]['height'];
 
@@ -42,24 +52,47 @@ list($width, $height) = getimagesize($url);
         if ($imagehight == "") {
           $imagehight = EXTRA_LARGE_IMAGE_HEIGHT;
         }
-        print' <div class="image_info">' . $counter . ' ' . ucwords($imagename) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
+        print' <div class="image_info">' . $counter . ' ' . ucwords($label) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
       }
-      print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-     if($key == 0) {
+
+      if ($key == 0) {
+        
+        print '<div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
+        if ($content_name == 'field_story_template_buzz' || $content_name == 'story' || $content_name == 'field_photo_story' || $content_name == 'field_story_technology') {
+          print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_first" placeholder="Caption"></textarea></div>';
+        }
         print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title"  value=""></br>';
-     } else {
-               print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title_exta"  value=""></br>';
+      }
+      else {
+        print ' <div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all_for" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
+        if ($content_name == 'field_story_template_buzz' || $content_name == 'story' || $content_name == 'field_photo_story' || $content_name == 'field_story_technology') {
+          print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_all" placeholder="Caption"></textarea></div>';
+        }
+        print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text_image"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title_exta"  value=""></br>';
+      }
+      if ($key == 0) {
 
-     }
-
-      print'<input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>'
-              . '<input type="text" name="keyword[]" placeholder="Keyword"  value=""></br>'
-              . '<input type="text" name="tags[]" placeholder="Tags"  value=""></br>'
-              . '<input type="text" name="place[]" placeholder="Place"  value=""></br>'
-              . '<input type="text" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
-              . '<input type="text" name="image_date[]" placeholder="Date (dd/mm/yyyy)"  value=""></br>'
-              . '<input type="text" name="image_description[]" placeholder="Description"  value=""></br>'
-              . '</div> </div> ';
+        print'<input type="text" name="courtesy[]" class="image_courtesy" placeholder="Courtesy"  value=""></br>'
+            . '<input type="text" class="image_keyword" name="keyword[]" placeholder="Keyword"  value=""></br>'
+            . '<input type="text" class="image_tags" name="tags[]" placeholder="Tags"  value=""></br>'
+            . '<input type="text" class="image_place" name="place[]" placeholder="Place"  value=""></br>'
+            . '<input type="text" class="image_photo_grapher" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
+            . '<div class="tag-box-input-date"><input type="text" id="date_validation_' . $key . '" class="image_date datevalidate" name="image_date[]" placeholder="Date (mm/dd/yyyy)"  value=""></br>'
+            . '<span style="display:none" class="error date_validation_' . $key . '">please enter correct date format.</span></div>'
+            . '<input type="text" class="image_description" name="image_description[]" placeholder="Description"  value=""></br>'
+            . '</div> </div> ';
+      }
+      else {
+        print'<input type="text" class="image_courtesy_img" name="courtesy[]" placeholder="Courtesy"  value=""></br>'
+            . '<input type="text" class="image_keyword_img" name="keyword[]" placeholder="Keyword"  value=""></br>'
+            . '<input type="text" class="image_tags_img" name="tags[]" placeholder="Tags"  value=""></br>'
+            . '<input type="text" class="image_place_img" name="place[]" placeholder="Place"  value=""></br>'
+            . '<input type="text" class="image_photo_grapher_img" name="photo_grapher[]" placeholder="Photographer"  value=""></br>'
+            . '<div class="tag-box-input-date"><input type="text" id="date_validation_' . $key . '" class="image_date_img datevalidate" name="image_date[]" placeholder="Date (mm/dd/yyyy)"  value=""></br>'
+            . '<span style="display:none" class="error date_validation_' . $key . '">please enter correct date format.</span></div>'
+            . '<input type="text" class="image_description_img" name="image_description[]" placeholder="Description"  value=""></br>'
+            . '</div> </div> ';
+      }
 
 
       $counter++;

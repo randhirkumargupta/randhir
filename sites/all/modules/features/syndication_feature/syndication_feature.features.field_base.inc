@@ -85,8 +85,9 @@ function syndication_feature_field_default_field_bases() {
         'cooking_tips' => 'Cooking Tips',
         'food_news' => 'Food News',
         'recipe' => 'Recipe',
-        'story' => 'Story',
+        'story' => 'Articles (Story)',
         'photogallery' => 'Photogallery',
+        'videogallery' => 'Videogallery',
       ),
       'allowed_values_function' => '',
     ),
@@ -211,6 +212,28 @@ function syndication_feature_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_syndication_footer'.
+  $field_bases['field_syndication_footer'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_footer',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_syndication_frequency'.
@@ -363,6 +386,28 @@ function syndication_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_syndication_header'.
+  $field_bases['field_syndication_header'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_syndication_header',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_syndication_mode'.
   $field_bases['field_syndication_mode'] = array(
     'active' => 1,
@@ -459,7 +504,7 @@ function syndication_feature_field_default_field_bases() {
   // Exported field_base: 'field_syndication_select_section'.
   $field_bases['field_syndication_select_section'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_syndication_select_section',

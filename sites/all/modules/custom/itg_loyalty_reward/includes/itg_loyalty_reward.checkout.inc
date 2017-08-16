@@ -17,6 +17,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
   global $user;
   // validate cart total.
   $cart_total_valid = _cart_total_point($user->uid, 'compare');
+  
   if (!$cart_total_valid) {
     drupal_goto('cart');
   }

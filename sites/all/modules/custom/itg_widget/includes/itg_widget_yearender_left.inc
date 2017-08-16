@@ -22,10 +22,11 @@ function save_yearender_left_widget_data($yearender_left) {
   $widget_name = "yearender_left_news_video";
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      itg_widget_delete_data_from_widget($widget_name, $node);
-      itg_widget_insert_widget_data($node, $widget_name, 0);
+
+      itg_widget_delete_data_from_widget($widget_name, $node, "", $_GET['shs_term_node_tid_depth']);
+      itg_widget_insert_widget_data($node, $widget_name, $_GET['shs_term_node_tid_depth']);
     }
-    drupal_set_message(t("Nodes has been saved"));
+    itg_widget_delete_old_data_by_limit($widget_name, $_GET['shs_term_node_tid_depth']);
   }
 }
 
@@ -37,9 +38,24 @@ function save_yearender_left_widget_data($yearender_left) {
  */
 function itg_widget_yearend_top_news_ordering_data($info) {
   $data = '';
+  global $theme;
+  if (isset($_GET['section']) && !empty($_GET['section'])) {
+    $selction_name = 'section';
+  }
+  else {
+    $selction_name = 'section_name';
+  }
+  if (isset($_GET[$selction_name])) {
+    $cat_id = $_GET[$selction_name];
+  }
+
+  if ($theme == FRONT_THEME_NAME) {
+    $cat_id = arg(2);
+  }
+
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'story' , 5 , DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, 'story', 5, DONT_MISS_MIN_RANGE, $cat_id);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = $entity_data_node;
@@ -56,9 +72,22 @@ function itg_widget_yearend_top_news_ordering_data($info) {
  */
 function itg_widget_yearend_top_videos_ordering_data($info) {
   $data = '';
+  global $theme;
+  if (isset($_GET['section']) && !empty($_GET['section'])) {
+    $selction_name = 'section';
+  }
+  else {
+    $selction_name = 'section_name';
+  }
+  if (isset($_GET[$selction_name])) {
+    $cat_id = $_GET[$selction_name];
+  }
+  if ($theme == FRONT_THEME_NAME) {
+    $cat_id = arg(2);
+  }
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name , 'videogallery' , DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, 'videogallery', DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE, $cat_id);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = $entity_data_node;

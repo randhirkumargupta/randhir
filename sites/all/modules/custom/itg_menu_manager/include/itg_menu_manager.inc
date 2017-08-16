@@ -84,13 +84,5 @@ function remove_from_menu_manager($tid) {
   if (is_numeric($tid)) {
     db_delete('itg_menu_manager')->condition('id', $tid)->execute();
   }
-//  else {
-//    drupal_set_message("Please enter tid");
-//  }
-//  if ($_GET['section_id'] && $_GET['section_child']) {
-//    $destination = "menu-manager/third";
-//    $options = array('query' => array("section_id" => $_GET['section_id'], "section_child" => $_GET['section_child']));
-//    drupal_goto($_SERVER['HTTP_REFERER']);
-//  }
   drupal_goto($_SERVER['HTTP_REFERER']);
 }

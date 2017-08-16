@@ -11,15 +11,15 @@ global $base_url;
     <div class="col-md-6">
       <div class="page-error-pic">
           <a href="<?php print url(''); ?>"><img src="<?php echo $base_url . '/sites/all/themes/itg/images/error_404.png';?>" alt=""/></a>
-        <p>The page you are looking for is no longer available.</p>
+        <p>T<?php print t('he page you are looking for is no longer available.'); ?></p>
       </div>
     </div>
     <div class="col-md-6">
       <p class="go-back">
-          I want to go <a href="javascript:history.back()">BACK</a> from where I came </br> Open the <a href="<?php print url(''); ?>">India Today</a> homepage for me
+          <?php print t('I want to go'); ?> <a href="javascript:history.back()"><?php print t('BACK'); ?></a> <?php print t('from where I came'); ?> </br> <?php print t('Open the'); ?> <a href="<?php print url(''); ?>"><?php print t('India Today'); ?></a> <?php print t('homepage for me'); ?>
       </p>
       <span class="error-or">OR</span>
-      <h3>Check out Latest Headlines</h3>
+      <h3><?php print t('Check out Latest Headlines'); ?></h3>
       <ul class="latest-headlines-list">
           <?php 
           foreach ($data as $key => $val) { 

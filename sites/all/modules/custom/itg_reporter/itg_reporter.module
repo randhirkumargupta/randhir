@@ -127,6 +127,8 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+    
+    $form['#validate'][] = 'itg_reporter_custom_validate';
   }
 
   $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
@@ -191,6 +193,40 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implements custom validate for client title
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_reporter_custom_validate(&$form, &$form_state) {
+  if (!empty($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][0]['name'])) {
+    foreach ($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE] as $key => $value) {
+      $movie_name = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['name'];
+      $movie_vid = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['vid'];
+      $exist = itg_reporter_movie_term_status($movie_name, $movie_vid);
+      if (empty($exist)) {
+        form_set_error('field_reporter_movie_name', 'Please enter valid movie name');
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_reporter_movie_term_status().
+ */
+function itg_reporter_movie_term_status($movie_name, $movie_vid) {
+  $itg_query = db_select('taxonomy_term_data', 'tr');
+  $itg_query->condition('vid', $movie_vid, '=')
+            ->condition('name', $movie_name, '=')
+            ->fields('tr', array('tid'));
+
+  $itg_result = $itg_query->execute()->fetchField();
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+
+  return '';
+}
+/**
  * Implement hook_after_build
  * @param array $form
  * @param array $form_state
@@ -214,9 +250,9 @@ function itg_reporter_after_build($form, &$form_state) {
   $settings['reporter'] = $tid_repo;
   $settings['ntype'] = $form['type']['#value'];
   drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
+  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js', array('scope' => 'footer'));
   $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -236,7 +272,6 @@ function itg_reporter_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-byline-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Name'));
@@ -252,7 +287,6 @@ function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_
  * @param $email
  */
 function itg_reporter_get_content_email($email) {
-
   if (strlen(trim($email)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -278,7 +312,6 @@ function itg_reporter_get_content_email($email) {
  * @param $twitter
  */
 function itg_reporter_get_twitter_handle($twitter) {
-
   if (strlen(trim($twitter)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -305,6 +338,10 @@ function itg_reporter_get_twitter_handle($twitter) {
  * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
+    //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
   if ($node->type == 'reporter' && !empty($node->nid)) {
     $previous_value = node_load($node->nid);
     $previous_title = $previous_value->title;
@@ -387,6 +424,7 @@ function itg_autocomplete_byline($id) {
   $record = $result->fetchAssoc();
   $r_title = ucfirst($record['title']);
   $r_nid = strtolower($record['nid']);
+  
   if (!empty($record['field_reporter_email_id_value'])) {
     $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
   }
@@ -412,12 +450,20 @@ function itg_reporter_node_validate($node, $form, &$form_state) {
         if ($occ_name->name == 'Celebrity') {
           $flag = TRUE;
         }
+        if (strtolower($occ_name->name) == 'reporter') {
+          $reporter_flag = TRUE;
+        }
       }
     }
     // make moview field mandotory.
     $errors = array_filter($node->field_reporter_movie_name['und']);
+    $profile_type = $node->field_reporter_profile_type[LANGUAGE_NONE][0]['value'];
     if ($flag && empty($errors)) {
       form_set_error('field_reporter_movie_name', 'Movie name is required.');
+    }
+    
+    if ($reporter_flag && empty($profile_type)) {
+      form_set_error('field_reporter_profile_type', 'Profile is required.');
     }
   }
 }

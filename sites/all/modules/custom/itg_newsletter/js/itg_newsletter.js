@@ -14,8 +14,7 @@
 
             if (nid) {
                 $('input[name="field_newsl_add_news_und_0_remove_button"]').show();
-            } else {
-                //$('input[name="field_newsl_add_news_und_0_remove_button"]').hide();
+            } else {                
                 $('#edit-field-newsl-add-news-und-0-remove-button').hide();
             }
 

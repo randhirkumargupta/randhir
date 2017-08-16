@@ -24,8 +24,10 @@ else {
                     <figcaption><i class="fa fa-camera" aria-hidden="true"></i><?php print $row['delta']; ?></figcaption>
                 </figure>
                 <span class="posted-on"><?php print $row['created']; ?></span>
-        <?php $title = $row['title']; ?>
-        <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => arg(2)), 'html' => TRUE)); ?>
+        <?php $title = strip_tags($row['title']); ?>
+                <p title="<?php print strip_tags($title); ?>">
+        <?php print html_entity_decode(l($title, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => arg(2)), 'html' => TRUE))); ?>
+                </p>
             </div>
         </li>
 <?php endforeach; ?>

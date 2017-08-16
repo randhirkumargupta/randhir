@@ -4,12 +4,12 @@
       <?php foreach ($data as $key => $entity) {
          
         ?>
-        <li class="" id="dont-miss-<?php print $key ?>">
+        <li>
           <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
                 <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-                <img src="<?php print $file_uri; ?>" alt="" />
+                <img src="<?php print $file_uri; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'];?>" title="<?php echo $entity['field_story_extra_small_image_title'];?>" />
               </a>
             </span>
             <?php
@@ -31,7 +31,7 @@
 
             <?php if (!empty($entity['title'])) : ?> 
 
-              <p>
+              <p title="<?php echo $desc;?>">
                 <?php
                 $desc = $entity['title'];
                 if (function_exists('itg_common_get_smiley_title')) {

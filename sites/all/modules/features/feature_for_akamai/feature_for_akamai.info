@@ -1,0 +1,14 @@
+name = Feature for Akamai
+description = Feature for Akamai
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = block
+dependencies[] = features
+dependencies[] = itg_akamai
+dependencies[] = itg_akamai_block_refresh
+features[features_api][] = api:2
+features[user_permission][] = access block refresh content
+features[user_permission][] = administer blocks
+features[user_permission][] = administer itg akamai
+features[user_permission][] = purge itg akamai cache

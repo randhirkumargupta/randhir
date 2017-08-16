@@ -10,38 +10,23 @@ if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
   $host_node = node_load($arg[1]);
 }
 
-/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me
-if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
-} else {
-    if (!empty($host_detail['source'])) {
-      $host_node_arr = explode('/', $host_detail['source']);
-    }
-    if (!empty($host_node_arr[1])) {
-      $host_node = node_load($host_node_arr[1]);
-    }
-}*/
-
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
   $event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);
 
   // Css variables
-  $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
+  $heading_background_color = $host_node->field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
   $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
   $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 
 $actual_host_name = itg_event_get_host_name();
+
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
 }
-/*else { me
-  $baseurl = $base_url.'/';
-}*/
-
 
 if($current_date < $event_close_date) {
 if (!empty($data)) {
@@ -57,9 +42,9 @@ if ($current_date > $event_start_date && $current_date < $event_close_date) {
 }
 elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
   $output = '<h2 class="block-title">'.$host_node->title.'</h2>';
-  $output .= '<div style="margin-bottom: 20px;">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
+  $output .= '<div class="mb-20">'.$host_node->body[LANGUAGE_NONE][0]['value'].'</div>';
 }
-//$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
+
 print $output;
 ?>
 <h2 class="block-title"><?php print t('Session wise coverage'); ?></h2>
@@ -75,7 +60,6 @@ foreach ($data as $key => $value) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
       $sponsors_data = itg_event_backend_get_session_sponsor($media);
-     
      $sponsor_all_data = "";
      $sponsor_tags = "";
       if(!empty($sponsors_data)) {
@@ -84,7 +68,8 @@ foreach ($data as $key => $value) {
     
      if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
          $sponsors_data_parent = "sponsors-parent";
-         $sponsor_tags = '<div class="spncor-tag"><span>Powered By</span><img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" /></div>';
+         $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
+         $sponsor_tags = '<div class="spncor-tag"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)).'</div>';
      }
       $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
       $output_story_title = '';
@@ -117,16 +102,16 @@ foreach ($data as $key => $value) {
               $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
               if(!empty($spk_detail)){
               print '<div class="profile-loop"><label style="color:'.$font_color.'">Speaker:</label>';
-              //$spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
+              
               $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), $baseurl.'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
               if(!empty($spk_detail[0]->uri)){
                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
               }else{
-                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/program-speaker.jpg' alt='' />";
+                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' />";
               }
-              //print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
+              
               print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';
-              print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->field_story_new_title_value) . '</div></div>';
+              print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->occupation_speaker) . '</div></div>';
               }
             }
             ?>

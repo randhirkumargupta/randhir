@@ -1,14 +1,36 @@
 <?php
 
-set_time_limit(0);
-ini_set('memory_limit', '-1');
 $args = drush_get_arguments(); // Get the arguments.
-//delete_itg_widget_table();
-//update_itg_widget_table();
-//update_meta_description_in_photo();
-//print_name_story();
-//print_name_photo();
-print_name_video();
+
+
+ itg_widget_order_all_data_move();
+  
+  function itg_widget_order_all_data_move() {
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->fields('iwo');
+    $query->condition('content_type', 'all', '=');
+    $result = $query->execute();
+    foreach($result as $rel) {
+      
+      db_insert('itg_widget_order_all') // Table name no longer needs {}
+      ->fields(array(
+        'nid' => $rel->nid,
+        'cat_id' => $rel->cat_id,
+        'content_type' => $rel->content_type,
+        'widget' => $rel->widget,
+        'weight' => $rel->weight,
+        'extra' => $rel->extra,
+        'constituency' => $rel->constituency,
+        'state' => $rel->state,
+        'id' => $rel->id,
+      ))
+      ->execute();
+      print 'cat_id -> '.$rel->cat_id. ', Node_id -> '.$rel->nid;
+    }
+  }
+
+
+//print_name_video();
 /**
  * shift marking for story
  */
@@ -86,7 +108,7 @@ function updating_term_for_migration($nid, $tids) {
  */
 function print_name_video() {
   $xml_path = 'sites/default/files/video/indiatoday_video_2016-06.xml';
-  //$xml_path = 'sites/default/files/video/indiatoday_video_2016-07.xml';
+  
   $xml = simplexml_load_file($xml_path, 'SimpleXMLElement');
   $str = '';
 

@@ -5,8 +5,7 @@ global $user;
  *   Template file for personalized content home page.
  */
 // get ugc content count based on id
-if (function_exists('itg_common_mongo_activity_user_count'))
-{
+if (function_exists('itg_common_mongo_activity_user_count')) {
   $submit_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'ugc_details');
   $follow_ugc_content = itg_common_mongo_activity_user_count($user->uid, 'front_user_activity', 'follow_story', '1');
   $read_later_content = itg_common_mongo_activity_user_count_date_wise($user->uid, 'front_user_activity', 'read_later', '1');
@@ -49,7 +48,6 @@ if (function_exists('itg_common_mongo_activity_user_count'))
         <dfn><?php print $follow_ugc_content; ?></dfn>
       </span>
     </div>
-      <?php if ($data['badge_detail']['earn'] > 0): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
@@ -78,11 +76,10 @@ if (function_exists('itg_common_mongo_activity_user_count'))
         </div>
         <?php if ($data['badge_detail']['earn'] != 5): ?>
         <div class="points-to-go">
-          <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
+          <?php print 'Require <span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to reach next level'); ?>
         </div>
         <?php endif; ?>
       </div>
-      <?php endif; ?>
   </div>
  </div> 
 

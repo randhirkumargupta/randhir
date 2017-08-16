@@ -37,8 +37,7 @@ function itg_ads_blocker_theme($existing, $type, $theme, $path) {
 /**
  * Implements itg_ads_blocker_details().
  */
-function itg_ads_blocker_details() {
-  
+function itg_ads_blocker_details() {  
   print theme('itg_ad_blocker');
 }
 

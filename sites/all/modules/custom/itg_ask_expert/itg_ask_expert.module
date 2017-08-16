@@ -54,19 +54,18 @@ function itg_ask_expert_form_alter(&$form, &$form_state, $form_id) {
             $form['field_user_name'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
             $form['field_user_email'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
             $form['field_user_city'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
-            $form['field_user_state'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;
-            //$form['field_disclose_your_identity'][LANGUAGE_NONE]['1']['#attributes']['disabled'] = TRUE;
+            $form['field_user_state'][LANGUAGE_NONE]['0']['value']['#attributes']['disabled'] = TRUE;            
             $form['field_disclose_your_identity']['#disabled'] = TRUE;
         }
 
         // set term_id from url in hidden field
         if (empty($form['nid']['#value'])) {
-            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = 147; //130
+            $form['field_user_source_term_id'][LANGUAGE_NONE][0]['value']['#value'] = ''; //130
         }
         $form['actions']['submit']['#value'] = 'Submit';
         $form['#after_build'][] = 'itg_ask_expert_after_build';
         $form['actions']['submit']['#submit'][] = 'itg_ask_expert_form_custom_callback';
-        $destination = 'ask-an-expert';
+        $destination = 'ask-an-expert-backend';
         if (!empty($form['nid']['#value'])) {
             $form['actions']['cancel'] = array(
                 '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -99,7 +98,7 @@ function itg_ask_expert_after_build($form, &$form_state) {
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_ask_expert' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js');
+    drupal_add_js(drupal_get_path('module', 'itg_ask_expert') . '/js/itg_ask_expert.js', array('scope' => 'footer'));
     return $form;
 }
 
@@ -234,13 +233,21 @@ function itg_ask_expert_node_insert($node) {
           $mail_content = $body_state;
           $mail_subject = $ask_expert_submit_query->field_mail_subject_expert[LANGUAGE_NONE][0]['value'];
         }
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
 //        $mail_content = itg_ask_expert_get_mail_content($node);
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $mail_content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $to = implode(',', $expert_arr);
-
+//        $to = 'gourav.walia@kelltontech.com';
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
         if ($mail['result']) {
             return TRUE;
@@ -264,8 +271,9 @@ function itg_ask_expert_node_update($node) {
         module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
         // get term id to fetch all role related to term id
         $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
+//        $to = 'gourav.walia@kelltontech.com';
         $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
-        $node_url = l($node->title, $base_url . '/node/' . $node->nid);
+        $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
         
         if (function_exists('itg_mail_templates_get_mailcontent')) {
           $ask_expert_submit_query = itg_mail_templates_get_mailcontent($node, 'When Review');
@@ -275,9 +283,16 @@ function itg_ask_expert_node_update($node) {
           $body_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body_name);
           $mail_content = $body_url;
         }
-        
+        $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+            <html xmlns:v="urn:schemas-microsoft-com:vml">
+              <head><title></title></head>
+              <body style="margin:0; padding:0;">';
+        $content .= $mail_content;
+        $content .= '</body>';
+        $content .= '</html>';
+        $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
-            'body' => $mail_content,
+            'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -303,7 +318,7 @@ function itg_ask_expert_mail($key, &$message, $params) {
         case 'send_mail_to_expert':
             $headers = array(
                 'MIME-Version' => '1.0',
-                'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+                'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
                 'Content-Transfer-Encoding' => '8Bit',
                 'X-Mailer' => 'Drupal'
             );
@@ -395,16 +410,14 @@ function itg_ask_expert_block_view($delta = '') {
             if ($arg[0] == 'node' && is_numeric($arg[1])) {
                 $node = node_load($arg[1]);
                 if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-                    $tid = $node->field_primary_category['und'][0]['value'];
-                    // if (isset($tid) && !empty($tid)) {
+                    $tid = $node->field_primary_category['und'][0]['value'];                    
                     $user_details_section = user_details_for_section($arg, $tid);
                     if (!empty($user_details_section)) {
                       $block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';                    
                       $block['content'] = drupal_render($user_details_section);
                       $custom_expert_form = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
                       $block['content'] .= drupal_render($custom_expert_form);
-                    }
-                    // }
+                    }                   
                 }
             }
             elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
@@ -427,8 +440,7 @@ function itg_ask_expert_block_view($delta = '') {
             elseif (isset($_GET['section']) && !empty($_GET['section'])) {
                 $cat_id = check_plain($_GET['section']);                
                 $user_detail = user_details_for_section($arg, $cat_id);
-                if (!empty($user_detail)) {
-                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                if (!empty($user_detail)) {                  
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
                 } else {
@@ -438,8 +450,7 @@ function itg_ask_expert_block_view($delta = '') {
             elseif (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
                 $cat_id = check_plain($_GET['section_name']);
                 $user_detail = user_details_for_section($arg, $cat_id);
-                if (!empty($user_detail)) {                  
-                  //$block['subject'] = '<h3><span>ASK THE EXPERT</span></h3>';
+                if (!empty($user_detail)) {
                   $block['content'] = drupal_render($user_detail);
                   $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $cat_id));
                 } else {
@@ -550,7 +561,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     if (!empty($askquestion->title)) {
         $form['html'] = array(
             '#type' => 'markup',
-            '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',
+            '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert/{$askquestion->field_user_source_term_id_value}")) . '</div>',
             '#tree' => true,
         );
     }
@@ -657,7 +668,7 @@ function itg_custom_ask_an_expert_form_submit(&$form, &$form_state) {
  *   array with block details
  */
 function user_details_for_section($url, $tid) {
-
+    global $base_url;
     $block = array();
     $ourExpert = '';
     if (isset($tid) && !empty($tid)) {
@@ -680,13 +691,20 @@ function user_details_for_section($url, $tid) {
             if ($url[0] == 'ask-an-expert-question-answer-details' && is_numeric($url[2])) {
                 $ourExpert = '<h4>Our Expert</h4>';
             }
-            
+            $ask_fname = '';
+            if(!empty($userDetails->field_first_name['und'][0]['value'])) {
+              $ask_fname = $userDetails->field_first_name['und'][0]['value'];
+            }
+            $ask_lname = '';
+            if(!empty($userDetails->field_last_name['und'][0]['value'])) {
+              $ask_lname = $userDetails->field_last_name['und'][0]['value'];
+            }
             if ($url[0] != 'ask-an-expert-question-answer-details') {
                 $block[] = array(
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                     '#suffix' => '</div>',
                 ),
             );
@@ -695,7 +713,7 @@ function user_details_for_section($url, $tid) {
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . ' ' . $userDetails->field_last_name['und'][0]['value'] . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                 ),
             );
             }

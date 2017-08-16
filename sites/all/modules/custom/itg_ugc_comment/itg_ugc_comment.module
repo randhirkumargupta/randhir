@@ -88,15 +88,24 @@ function ugc_comment_form($form, &$form_state) {
   global $user, $base_url;
   $user_fields = user_load($user->uid);
   $page_id = arg(1);
+  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   if (function_exists('itg_sso_url'))
   {
-    $social = itg_sso_url('<span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>', 'social-share');
+    $social = '<a href="http://'.PARENT_SSO.'/saml_login/other/'.$uri.'" title="social-share"><span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span></a>';
   }
   $fname = '';
   if (!empty($user_fields->field_first_name['und']['0']['value']))
   {
     $fname = $user_fields->field_first_name['und']['0']['value'];
   }
+  
+  if (strpos($user_fields->mail, 'nowhere.com') !== false) {
+    $email = '';
+  }
+  else {
+    $email = $user_fields->mail;
+  }
+  
   $form['fmessage'] = array(
     '#type' => 'textarea', //you can find a list of available types in the form api
     '#title' => t(''),
@@ -126,7 +135,7 @@ function ugc_comment_form($form, &$form_state) {
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
     '#size' => 20,
-    '#default_value' => $user_fields->mail,
+    '#default_value' => $email,
     '#maxlength' => 50,
     '#prefix' => '<div id="user-email">',
     '#suffix' => '</div>',
@@ -186,13 +195,23 @@ function ugc_comment_form($form, &$form_state) {
   $settings['bad_word'] = implode(',', $op);
   $settings['block_email'] = implode(',', $em);
   drupal_add_js(array('itg_ugc_comment' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js');
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_comment.js', array('scope' => 'footer'));
   // Add js file to form.
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
   );
-
+  $form['#validate'][] = 'ugc_comment_form_validate';
   return $form;
+}
+
+/**
+ * Implements hook_validate().
+ */
+function ugc_comment_form_validate($form, &$form_state) {
+  if(empty(trim($form_state['values']['fmessage']))) {
+    form_set_error('fmessage', t(''));
+    $_SESSION['msg'] = '<div class="messages--status messages status">Please enter valid comment.</div>';
+  }
 }
 
 /**
@@ -215,7 +234,7 @@ function ugc_comment_form_submit($form, &$form_state) {
     $con = mongodb();
     $people = $con->itgcms_comment;
     $comment_user = $con->itgcms_comment_user;
-    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "activity" => "comment", "status" => 1, "uid" => $user->uid , "timestamp" => time());
+    $qry = array("page_id" => $page_id, "email" => $femail, "name" => $fname, "comment" => $fmessage, "parent_comment_id" => $parent_id, "comment_date" => $comment_date, "comment_date_time" => $comment_date_time, "property" => 'India Today', "content_type" => 'story', "activity" => "comment", "status" => 1, "uid" => $user->uid , "timestamp" => time(), "ip" => $_SERVER['REMOTE_ADDR']);
     $result = $people->insert($qry);
     $check_user_existance = ugc_comment_user_status($femail);
     if(empty($check_user_existance['email'])) {
@@ -254,6 +273,7 @@ function itg_ugc_comment_block_view($delta = '') {
         $page_id = arg(1);
 
         $data = $people->find(array('page_id' => $page_id, 'parent_comment_id' => "0"))->sort(array('comment_date_time' => -1));
+        $contect = '';
         foreach ($data as $my_data) {
           $contect .= getmycomments($my_data);
         }
@@ -388,7 +408,7 @@ function itg_user_block_api_form($form, &$form_state) {
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_ugc_user_block' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_user_block.js');
+  drupal_add_js(drupal_get_path('module', 'itg_ugc_comment') . '/js/itg_ugc_user_block.js', array('scope' => 'footer'));
   
   return $form;
 }
@@ -478,6 +498,7 @@ function itg_get_comment_question($nid) {
     $db_or->condition('uc.bundle', 'videogallery');
     $db_or->condition('uc.bundle', 'photogallery');
     $db_or->condition('uc.bundle', 'blog');
+    $db_or->condition('uc.bundle', 'podcast');
     $query = db_select('field_data_field_story_comment_question', 'uc')
         ->fields('uc', array('field_story_comment_question_value'))
         ->condition($db_or)

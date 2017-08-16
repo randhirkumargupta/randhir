@@ -57,11 +57,23 @@
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
                             if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 1) {
+                              $latest_url = itg_mobile_get_latest_feed_byurl($node->nid);
+                              //$path = file_create_url('public://');
+                              global $base_url;
+                              foreach ($latest_url as $row) {
+                                $service_name = end(explode('/', $row->clients_feed_url));
+                                $real_path = $base_url . '/vas/' . $row->service_id . '/' . $service_name;
+                                print '<div class="field field-name-field-service-fetch-link field-type-text field-label-above"><div class="field-label">Latest Feed Link:&nbsp;</div><div class="field-items"><div class="field-item even">';
+                                print "<a target='_blank' href='" . $real_path . "'>" . $real_path . "</a>";
+
+                                print '</div></div></div>';
+                              }
+
                               print '<div class="field field-name-field-service-fetch-link field-type-text field-label-above"><div class="field-label">Fetch link:&nbsp;</div><div class="field-items"><div class="field-item even">';
-                              print "<a href='".$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']."'>Sharing url</a>";
+                              //  print "<a href='" . $node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] . "'>Sharing url</a>";
                               global $base_url;
                               $protected_url = $base_url . '/admin/config/system/protected_pages';
-                              print "  <div class='protected_url'><a href='". $protected_url ."'>Protected url</a></div>";
+                              print "  <div class='protected_url'><a href='" . $protected_url . "'>Protected url</a></div>";
                               print '</div></div></div>';
                             }
                             else if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 2) {

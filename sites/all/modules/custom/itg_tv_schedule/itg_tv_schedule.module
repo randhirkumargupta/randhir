@@ -94,7 +94,6 @@ function itg_tv_schedule_search_form($form, &$form_state) {
     '#maxlength' => 128,
   );
 
-
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
@@ -108,13 +107,20 @@ function itg_tv_schedule_search_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_date_form($form, &$form_state) {
+  $arg = arg();
   if (isset($_GET['date_zone'])) {
     $date = str_replace('/', '-', $_GET['date_zone']);
   }
   else {
     $date = format_date(REQUEST_TIME, 'custom', 'Y-m-d'); 
   }
- 
+  
+  if (empty($_GET['date_zone']) && $arg[1]) {
+    $get_day_date = get_tv_schedule_date($arg[1], 'yes');
+    $assign_date  = strtotime($get_day_date['program']);
+    $date = format_date(str_replace('/', '-', $assign_date), 'custom', 'Y-m-d');
+  }
+  
   $form['date'] = array(
       '#default_value' => $date,
       '#date_format' => 'Y/m/d',
@@ -158,8 +164,7 @@ function itg_tv_schedule_time_form($form, &$form_state) {
     '#value' => t('Submit'),
   );
 
-  drupal_add_js('jQuery("#edit-time-zone").change(function()
-                 {
+  drupal_add_js('jQuery("#edit-time-zone").change(function() {
                      jQuery("#itg-tv-schedule-time-form").submit();
                  });', array('type' => 'inline', 'scope' => 'footer'));
 
@@ -184,9 +189,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
     $file = fopen($file_url, "r");
     while (($data = fgetcsv($file)) !== FALSE) {
         if ($i == 1) {
-
             if (isItValidDate($data[1]) && isItValidDate($data[2]) && isItValidDate($data[3]) && isItValidDate($data[4]) && isItValidDate($data[5]) && isItValidDate($data[6]) && isItValidDate($data[7])) {
-
                 $mondate = $data[1];
                 $tuedate = $data[2];
                 $weddate = $data[3];
@@ -259,7 +262,9 @@ function itg_tv_schedule_uploadmongo($file_id) {
             }
             $i++;
         }
+        
         fclose($file);
+        
         return TRUE;
     }
     return FALSE;
@@ -297,7 +302,6 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_search_form_validate($form, &$form_state) {
-
   $options = $form_state['input']['title'];
   if (empty($options)) {
     form_set_error('title', t('Search field is empty.'));
@@ -309,8 +313,12 @@ function itg_tv_schedule_search_form_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_search_form_submit($form, &$form_state) {
-  $options = array('query' => array('title' => $form_state['input']['title']));
-  drupal_goto('tv-show/' . arg(1), $options);
+  // check if title field is blank befor submit
+  if(!empty($form_state['input']['title'])) {
+    $options = array('query' => array('title' => $form_state['input']['title']));
+
+    drupal_goto('tv-show/', $options);
+  }
 }
 
 /**
@@ -318,7 +326,6 @@ function itg_tv_schedule_search_form_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_time_form_submit($form, &$form_state) {
-
   $options = array('query' => array('time_zone' => $form_state['input']['time_zone']));
   drupal_goto('tv-show/' . arg(1), $options);
 }
@@ -327,10 +334,10 @@ function itg_tv_schedule_time_form_submit($form, &$form_state) {
  * Custom submit callback for searching popup.
  * {@inheritdoc}
  */
-function itg_tv_schedule_date_form_submit($form, &$form_state) {
-   
+function itg_tv_schedule_date_form_submit($form, &$form_state) {   
    $options = array('query' => array('date_zone' => $form_state['input']['date']['date']));
-   drupal_goto('tv-show/' . arg(1), $options); 
+   
+   drupal_goto('tv-show/', $options); 
 }
 
 /**
@@ -423,11 +430,36 @@ function format_gmt_offset($offset) {
  * @return boolean
  */
 function isItValidDate($date) {
-  if(preg_match("/^(\d{4})\/(\d{2})\/(\d{2})$/", $date, $matches))
-  {
-   if(checkdate($matches[2], $matches[3], $matches[1]))
-    { 
+  if(preg_match("/^(\d{4})\/(\d{2})\/(\d{2})$/", $date, $matches)) {
+   if(checkdate($matches[2], $matches[3], $matches[1])) { 
      return true;
     }
   }
  } 
+ 
+ /**
+  * Helper function to return date by day
+  */
+ function get_tv_schedule_date($day, $type) {
+   if (function_exists('mongodb')) {
+    $db = mongodb();
+    $people = $db->tv_schedule;
+    $date = $final_id;
+    if($type == 'yes') {
+      $cond = array('day' => $day);
+    }
+    if($type == 'no') {
+      $cond = array('program date' => $day);
+    }
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      if($type == 'yes') {
+        $data['program'] = $document['program date'];
+      }
+      if($type == 'no') {
+       $data['program'] = $document['day']; 
+      }
+    }
+    return $data;
+  }
+ }

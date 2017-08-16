@@ -253,11 +253,9 @@ function mega_review_critic_features_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_mega_review_type'.
@@ -386,7 +384,7 @@ function mega_review_critic_features_field_default_field_bases() {
   // Exported field_base: 'field_story_associate_video'.
   $field_bases['field_story_associate_video'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_associate_video',
@@ -401,18 +399,17 @@ function mega_review_critic_features_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
-        'sort' => array(
-          'type' => 'none',
-        ),
-        'target_bundles' => array(
-          'videogallery' => 'videogallery',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_3',
+          'view_name' => 'associate_gallery',
         ),
       ),
       'target_type' => 'node',

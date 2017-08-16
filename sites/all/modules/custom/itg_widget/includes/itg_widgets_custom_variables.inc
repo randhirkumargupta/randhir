@@ -34,45 +34,45 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
-  $form['year_end_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of year end'),
-    '#default_value' => variable_get('year_end_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['auto_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of Auto'),
-    '#default_value' => variable_get('auto_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['year_end_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of year end'),
+//    '#default_value' => variable_get('year_end_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+////  );
+//  $form['auto_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of Auto'),
+//    '#default_value' => variable_get('auto_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
 
-  $form['tech_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of tech'),
-    '#default_value' => variable_get('tech_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['tech_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of tech'),
+//    '#default_value' => variable_get('tech_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
-  $form['entertainment_oscar_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of Entertainment Oscar Watch'),
-    '#default_value' => variable_get('entertainment_oscar_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['entertainment_oscar_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of Entertainment Oscar Watch'),
+//    '#default_value' => variable_get('entertainment_oscar_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
-  $form['movie_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of movie'),
-    '#default_value' => variable_get('movie_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+//  $form['movie_for_widget'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Enter tid of movie'),
+//    '#default_value' => variable_get('movie_for_widget'),
+//    '#size' => 20,
+//    '#maxlength' => 20,
+//  );
 
   $form['ipl_points_tally_for_widget'] = array(
     '#type' => 'textfield',
@@ -157,7 +157,7 @@ function itg_widgets_custom_variables() {
   );
   $form['reporter_tid'] = array(
     '#type' => 'textfield',
-    '#title' => t('Reporter Tid'),
+    '#title' => t('Reporter tid'),
     '#default_value' => variable_get('reporter_tid'),
     '#size' => 20,
   );
@@ -180,6 +180,12 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
   );
 
+  $form['solr_server_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr server url'),
+    '#default_value' => variable_get('solr_server_url'),
+  );
+  
   $form['solr_url_config'] = array(
     '#type' => 'textarea',
     '#title' => t('Solr urlconfig'),
@@ -204,5 +210,48 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter no of days')),
     '#default_value' => variable_get('read_later_days_config'),
   );
+  
+  $form['editor_pic_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Editor Pic Tid configuration'),
+    '#attributes' => array('placeholder' => t('Enter Editor Pic Tid')),
+    '#default_value' => variable_get('editor_pic_tid'),
+  );
+  
+  $form['section_widget_keep_row_count'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Rows You want to keep in section wise widget order'),
+    '#attributes' => array('placeholder' => t('Enter Number')),
+    '#default_value' => variable_get('section_widget_keep_row_count' , 100),
+  );
+  
+  $form['itg_nofollow_fields'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fileds Value that you want to add in nofollow list (add comma separated values like in placeholder)'),
+    '#attributes' => array('placeholder' => t('field_blog_long_description, field_blog_short_description')),
+    '#default_value' => variable_get('itg_nofollow_fields'),
+  );
+  
+  $form['current_site_hash'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Current site Hash configuration For online archive story'),
+    '#attributes' => array('placeholder' => t('Enter Current site hash')),
+    '#default_value' => variable_get('current_site_hash'),
+  );
+  
+  $form['ads_blocker_content_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Ads blocker content limit'),
+    '#attributes' => array('placeholder' => t('Enter Ads blocker content limit')),
+    '#default_value' => variable_get('ads_blocker_content_limit'),
+  );
+  
+  $form['reporter_tid_for_widgets'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reporter tid for widgets and anchors-listing page'),
+    '#attributes' => array('placeholder' => t('Reporter tid for widgets')),
+    '#default_value' => variable_get('reporter_tid_for_widgets'),
+  );
+  
   return system_settings_form($form);
 }

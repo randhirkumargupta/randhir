@@ -16,7 +16,7 @@ function itg_loyalty_reward_rules_action_info() {
       'label' => t('Earn Loyalty Points - UGC Content'),
       'parameter' => array(
         'node' => array('type' => 'node', 'label' => t('Current Node')),
-        'ugc_node' => array('type' => 'integer', 'label' => t('UGC content is going to approve.')),
+        //'ugc_node' => array('type' => 'integer', 'label' => t('UGC content is going to approve.')),
       ),
       'group' => t('ITG'),            
     ),
@@ -39,10 +39,17 @@ function itg_loyalty_reward_rules_action_info() {
  * @param int $ugc_node
  *   Node id of the old ugc node.
  */
-function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {  
-  $ugc_user = node_load($ugc_node);
-  itg_loyalty_reward_earnpoint($node->nid, 'ugc', $ugc_user->uid);
-}
+//function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {
+//  if(function_exists('itg_personalization_get_uid')) {
+//    if($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
+//    $user_id = itg_personalization_get_uid($node->field_story_source_id[LANGUAGE_NONE][0]['value']);
+//    }
+//    if($node->type == 'videogallery' || $node->type == 'story') {
+//    $user_id = itg_personalization_get_uid($node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value']);
+//    }
+//  }
+//  itg_loyalty_reward_earnpoint($node->nid, 'ugc', $user_id['uid']);
+//}
 
 /**
  * Action callback function for 'itg_loyalty_reward_visit_content_points'.

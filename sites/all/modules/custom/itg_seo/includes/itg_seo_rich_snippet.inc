@@ -1,14 +1,32 @@
 <?php
 
 /*
+ * add_nofollow_in_body
+ */
+function add_nofollow_in_body($bodytext) {
+ 
+  $body_html_dom = filter_dom_load($bodytext);
+  $body_links = $body_html_dom->getElementsByTagName('a');
+  foreach ($body_links as $body_link) {
+    $body_url = parse_url($body_link->getAttribute('href'));
+    $body_link->setAttribute('rel', 'nofollow');
+  }
+  $new_body_text = filter_dom_serialize($body_html_dom);
+
+  return $new_body_text;
+}
+
+/*
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
 function itg_seo_node_data($node) {
-  global $base_url, $theme_key;
-  
+  global $base_url, $theme_key; 
+
   // Adding noindex, nofollow for making content search engin friendly
   if($node->type == 'story') {
-    $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
+    if(isset($node->field_story_configurations[LANGUAGE_NONE])) {
+      $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
+    }
     if(isset($configurableopt) && is_array($configurableopt) && !empty($configurableopt)){
       foreach ($configurableopt as $key => $value){
         $opt_value[] = $value['value'];
@@ -67,8 +85,13 @@ function itg_seo_node_data($node) {
       $auth_name = '';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
+    if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    }
+    $largimage = '';
+    if(isset($imgarray[1])) {
     $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    }
 
     $markup = array(
         '#type' => 'markup',

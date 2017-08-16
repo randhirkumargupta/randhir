@@ -9,7 +9,7 @@
         context: null,
         attach: function(context) {
             var that = this,
-                    uploader = $('.plupload-element', context).pluploadQueue();
+            uploader = $('.plupload-element', context).pluploadQueue();
 
             this.context = context;
 
@@ -44,13 +44,9 @@
                     .click();
             setTimeout(function() {
                 var uploader = jQuery(".plupload-element").pluploadQueue();
-                //  var uploader = $('.plupload-element').plupload('getUploader');
-                //uploader.destroy();
-
+                
                 uploader.splice();
-                //uploader.clearQueue();
-                //uploader.init();
-
+                
                 uploader.refresh();
 
                 $('#edit-field-videogallery-video-upload-add-more-number').val(1);

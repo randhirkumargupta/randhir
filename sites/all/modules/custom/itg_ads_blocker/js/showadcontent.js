@@ -5,6 +5,9 @@ jQuery(document).ready(function () {
     if (__at__ != 1) {
       setTimeout(openPopup(), 4000);
       console.log('Detected');
+    } else {
+        jQuery('.ad-blocker').hide();
+        jQuery('.ad-blocker-content').hide();
     }
 
 });
@@ -22,6 +25,7 @@ jQuery(document).ready(function () {
 
 function openPopup() {
     jQuery(".description").hide();
+    jQuery(".buzz-section").hide();
     jQuery('.view-photo-landing-slider').hide();
     jQuery('.video-landing-header').hide();
     var a = gup('source');
@@ -41,6 +45,12 @@ function openPopup() {
         'success': function (result)
         {
            jQuery(".ad-blocker").html(result);
+           if(jQuery('body').hasClass('node-type-videogallery')){
+               jQuery('.node-type-videogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
+           }
+           if(jQuery('body').hasClass('node-type-photogallery')){
+               jQuery('.node-type-photogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
+           }
             if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
                 jQuery('li#ie').addClass('active');
                 jQuery('#tab13').fadeIn();

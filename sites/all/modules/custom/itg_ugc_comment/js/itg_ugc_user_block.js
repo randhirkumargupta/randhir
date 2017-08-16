@@ -28,7 +28,6 @@
                 }
                 
                 if (msg == true) {
-
                     var post_data = "&email=" + email.join(", ") + "&event=" + associate_id;
                     jQuery.ajax({
                         'url': base_url + '/user-block-ugc',

@@ -12,7 +12,7 @@
     <li class="col-md-3">
       <div class="tile">
         <figure>
-          <?php //print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+          
           <?php
           if (isset($_GET['category'])) {
             print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
@@ -26,14 +26,16 @@
         </figure>
 
         <span class="posted-on"><?php print $row['created']; ?></span>
-        <?php
+        <p title="<?php print strip_tags($row['title']); ?>">       
+ <?php
         if (isset($_GET['category'])) {
-          print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)));
+          print html_entity_decode(l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))));
         }
         else {
-          print l($row['title'], 'node/' . $row['nid']);
+          print html_entity_decode(l($row['title'], 'node/' . $row['nid']));
         }
         ?>
+        </p>
       </div>
     </li>
 <?php endforeach; ?>

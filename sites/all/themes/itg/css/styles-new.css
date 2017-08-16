@@ -45,12 +45,12 @@ input[type="file"], input[type="submit"], input[type="text"] {
   appearance: none;
 }
 
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
   padding: 0;
   float: none;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper .form-text {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper .form-text {
   font-size: 16px;
   width: 100%;
   height: 46px;
@@ -67,14 +67,14 @@ input[type="file"], input[type="submit"], input[type="text"] {
   /* Standard syntax */
   color: #b7b7b7;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"], [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"], [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
   padding-top: 13px;
   /*            &:hover{
                   .views-widget{display: block;}
               }*/
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
   font-size: 14px;
   font-weight: normal;
@@ -82,7 +82,7 @@ input[type="file"], input[type="submit"], input[type="text"] {
   position: relative;
   text-transform: uppercase;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] > label:after, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label:after, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label:after, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label:after {
   content: '';
   width: 0;
   height: 0;
@@ -93,38 +93,38 @@ input[type="file"], input[type="submit"], input[type="text"] {
   right: 5px;
   top: 7px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form [class*="views-widget-filter-tm_vid"] .views-widget, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
   display: none;
   position: absolute;
   left: 0;
   top: 31px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
   height: 95px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
   padding-right: 20px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label {
   font-weight: normal;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label + select {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label + select {
   height: auto;
   margin-bottom: 10px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget input[type="text"] {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget input[type="text"] {
   width: 120px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .caln .form-item {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .caln .form-item {
   margin-bottom: 5px;
   margin-right: 0;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label {
   display: inline-block;
   vertical-align: top;
   margin-top: 6px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label + select {
+[id*="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget .form-item-custom-drp label + select {
   height: 32px;
 }
 
@@ -564,13 +564,22 @@ input[type="file"], input[type="submit"], input[type="text"] {
   display: none;
 }
 
-/*$test : .carousel .slides .slideItem;
-$debug: "width:645px"; // TODO: move to _settings.scss
+.carousel .slides .slideItem.active-slide span {
+  opacity: 1;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
+.carousel .slides .slideItem.active-slide span.overlay {
+  opacity: 0;
+  -webkit-transition: all 500ms ease .2s;
+  -moz-transition: all 500ms ease .2s;
+  -o-transition: all 500ms ease .2s;
+  transition: all 500ms ease .2s;
+}
 
-    @if ($debug) { // visualizing layout internals
-        display: block;
-    }*/
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper {
   background-color: #eaebed;
@@ -944,6 +953,36 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .personal-list > li:hover .personal-details .personal-action {
   opacity: 1;
+}
+
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset {
+  border: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend {
+  float: left;
+  width: 200px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset legend:after {
+  content: '*';
+  color: #f00;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper {
+  overflow: hidden;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper .tabledrag-toggle-weight-wrapper, .node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table thead {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .tabledrag-handle {
+  display: none;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table tbody tr td .form-submit {
+  border: none;
+  background: #fff;
+  color: #F00;
+  font-size: 12px;
+}
+.node-ugc-form .form-field-name-field-ugc-photo-image fieldset .fieldset-wrapper table + .form-type-managed-file {
+  margin-top: 10px;
 }
 
 .view-personalization-my-content .views-table {
@@ -1681,17 +1720,18 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .survey-form-main-container .byline .social-info {
   float: right;
-  width: 200px;
+  text-align: right;
+  margin-top: 8px;
 }
 .survey-form-main-container .byline .social-info span {
-  float: left;
-  width: 25%;
-  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30px;
   text-align: center;
 }
 .survey-form-main-container .byline .social-info span .fa {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 26px;
+  line-height: 26px;
 }
 .survey-form-main-container .byline .social-info span dfn {
   font: normal 400 12px/18px Roboto;
@@ -1768,9 +1808,18 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 400 14px/18px Roboto;
   color: #322323;
 }
+.question-container .answer-container iframe {
+  display: block;
+}
 
 .survey-form-wrapper-all .question-container {
   display: block;
+}
+.survey-form-wrapper-all .question-container .question-heading {
+  margin: 30px 0;
+}
+.survey-form-wrapper-all .survey-submit-btn-wrapper {
+  margin-top: 50px;
 }
 
 [id*="itg-survey-survey-form"] .form-submit {
@@ -1790,12 +1839,19 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
   cursor: pointer;
+}
+[id*="itg-survey-survey-form"] .form-submit .messages {
+  border: 1px solid;
+  padding: 10px;
+}
+[id*="itg-survey-survey-form"] .form-submit .messages ul {
+  padding-left: 18px;
 }
 [id*="itg-survey-survey-form"] .survey-form-wrapper-all .form-submit {
   display: block;
@@ -1828,6 +1884,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   background-color: #000;
   float: left;
   width: 100%;
+  height: 74px;
   overflow: hidden;
 }
 .home_page_poll_widget_block .poll-data .active-poll-title h2 {
@@ -1890,6 +1947,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px 0 0;
   max-height: 115px;
   overflow-y: auto;
+  margin-top: 0;
 }
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li {
@@ -1916,7 +1974,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 10px;
   text-align: center;
 }
-.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block {
+.load-more-wrapper .add-more-block, .load-more-wrapper .add-more-block-front, .load-more-wrapper .removes-more-block, .load-more-wrapper .add-more-block-front-section, .load-more-wrapper-front .add-more-block, .load-more-wrapper-front .add-more-block-front, .load-more-wrapper-front .removes-more-block, .load-more-wrapper-front .add-more-block-front-section {
   display: inline-block;
   vertical-align: top;
   padding: 10px 20px;
@@ -1927,12 +1985,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 0 10px;
   text-transform: uppercase;
 }
-.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa {
+.load-more-wrapper .add-more-block .fa, .load-more-wrapper .add-more-block-front .fa, .load-more-wrapper .removes-more-block .fa, .load-more-wrapper .add-more-block-front-section .fa, .load-more-wrapper-front .add-more-block .fa, .load-more-wrapper-front .add-more-block-front .fa, .load-more-wrapper-front .removes-more-block .fa, .load-more-wrapper-front .add-more-block-front-section .fa {
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
 }
-.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover {
+.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper .add-more-block-front-section:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover, .load-more-wrapper-front .add-more-block-front-section:hover {
   box-shadow: 0 0 5px 0 #666;
 }
 
@@ -2285,35 +2343,87 @@ body.has-cart-popup {
   font-size: 14px;
   font-family: Roboto;
 }
+[id*="itg_sso_reg_multistep_form"] .center-heading {
+  text-align: center;
+}
+[id*="itg_sso_reg_multistep_form"] .center-heading h2 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 20px 0;
+}
+
+.page-signup [id*="itg_sso_reg_multistep_form"] .parent-background {
+  max-width: 780px;
+}
+.page-signup [id*="itg_sso_reg_multistep_form"] .form-wrapper .form-submit {
+  background-color: transparent;
+  width: 170px;
+  height: 40px;
+  border: none;
+}
 
 [id*="itg_user_forgot_password_multistep_form"] {
-  margin: 0 -15px;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+[id*="itg_user_forgot_password_multistep_form"] form {
+  padding-top: 20px;
+  max-width: 540px;
+  margin: 0 auto;
+  font-family: Roboto;
+  color: #666;
+  line-height: 24px;
+}
+[id*="itg_user_forgot_password_multistep_form"] form .form-item-ufname {
+  margin-top: 20px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .center-heading {
+  text-align: center;
+}
+[id*="itg_user_forgot_password_multistep_form"] .center-heading h2 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  margin: 50px 0 20px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signin-link {
+  float: left;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signin-link:hover {
+  color: #026bc5;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signup-link {
+  float: right;
+}
+[id*="itg_user_forgot_password_multistep_form"] .parent-background .signup-link:hover {
+  color: #026bc5;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-text {
   width: 100%;
   height: 36px;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
-  padding: 15px;
+  padding: 15px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
   position: relative;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .form-submit, [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .btn-skip {
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: 3px;
+  background: url(../images/btn-blue.png) no-repeat;
   color: #fff;
   font-size: 16px;
-  height: 38px;
-  width: 200px;
+  height: 41px;
+  width: 170px;
   text-align: center;
-  line-height: 35px;
+  line-height: 38px;
   margin-right: 20px;
   text-transform: capitalize;
   display: inline-block;
   vertical-align: top;
+  border: none;
 }
 [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress {
   left: 217px;
@@ -2724,83 +2834,82 @@ body.has-cart-popup {
   box-shadow: 0 0 10px 0 #1a3c8d;
 }
 
-.page-user form {
+.page-user form, .page-signup form {
   font-family: Roboto;
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 50px 20px;
 }
-.page-user form h2 {
+.page-user form h2, .page-signup form h2 {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
   margin-bottom: 10px;
 }
-.page-user form label {
+.page-user form label, .page-signup form label {
   display: block;
   font-size: 16px;
   padding-bottom: 5px;
 }
-.page-user form .form-type-password, .page-user form .form-actions {
+.page-user form .form-type-password, .page-user form .form-actions, .page-signup form .form-type-password, .page-signup form .form-actions {
   margin-top: 10px;
 }
-.page-user form .forgot-link {
+.page-user form .forgot-link, .page-signup form .forgot-link {
   display: inline-block;
   vertical-align: middle;
   margin: 15px;
   color: #333;
 }
-.page-user form .forgot-link:hover {
+.page-user form .forgot-link:hover, .page-signup form .forgot-link:hover {
   color: #193984;
 }
-.page-user form .form-submit {
-  background-color: #000 !important;
-  border: 1px solid #000 !important;
-  height: 50px;
-  width: 243px;
+.page-user form .form-submit, .page-signup form .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
 }
-.page-user form .bottom-link {
+.page-user form .bottom-link, .page-signup form .bottom-link {
   display: inline-block;
   vertical-align: top;
   width: 100%;
   margin-top: 20px;
   font-size: 12px;
 }
-.page-user form .bottom-link .sso-forgot-link {
+.page-user form .bottom-link .sso-forgot-link, .page-signup form .bottom-link .sso-forgot-link {
   float: left;
   color: #a6a6a6;
 }
-.page-user form .bottom-link .sso-register-link {
+.page-user form .bottom-link .sso-register-link, .page-signup form .bottom-link .sso-register-link {
   float: right;
   color: #a6a6a6;
 }
-.page-user form .bottom-link a:hover {
+.page-user form .bottom-link a:hover, .page-signup form .bottom-link a:hover {
   color: #193984;
 }
-.page-user form .form-text {
+.page-user form .form-text, .page-signup form .form-text {
   width: 100%;
   height: 42px;
   font: 400 14px/normal Roboto;
 }
-.page-user form div.description {
+.page-user form div.description, .page-signup form div.description {
   font-size: 12px;
   color: #8d8d8d;
 }
-.page-user form .form-item-remember-me .form-checkbox {
+.page-user form .form-item-remember-me .form-checkbox, .page-signup form .form-item-remember-me .form-checkbox {
   float: left;
   margin: 2px 5px 0 0;
 }
-.page-user form .form-item-remember-me label {
+.page-user form .form-item-remember-me label, .page-signup form .form-item-remember-me label {
   font-size: 14px;
   margin-top: 10px;
 }
-.page-user .social-share {
+.page-user .social-share, .page-signup .social-share {
   width: 275px;
   margin: 0 auto;
   display: block;
   overflow: hidden;
 }
-.page-user .social-share a {
+.page-user .social-share a, .page-signup .social-share a {
   border-radius: 5px;
   height: 50px;
   color: #fff;
@@ -2810,10 +2919,10 @@ body.has-cart-popup {
   display: inline-block;
   vertical-align: top;
 }
-.page-user .social-share a + a {
+.page-user .social-share a + a, .page-signup .social-share a + a {
   margin-left: 10px;
 }
-.page-user .social-share a .fa {
+.page-user .social-share a .fa, .page-signup .social-share a .fa {
   width: 45px;
   height: 100%;
   position: absolute;
@@ -2822,28 +2931,28 @@ body.has-cart-popup {
   line-height: 48px;
   text-align: center;
 }
-.page-user .social-share a.sso-twitter {
+.page-user .social-share a.sso-twitter, .page-signup .social-share a.sso-twitter {
   background-color: #1daee3;
   position: relative;
 }
-.page-user .social-share a.sso-twitter .fa {
+.page-user .social-share a.sso-twitter .fa, .page-signup .social-share a.sso-twitter .fa {
   background-color: #1ca4d6;
   font-size: 25px;
 }
-.page-user .social-share a.sso-facebook {
+.page-user .social-share a.sso-facebook, .page-signup .social-share a.sso-facebook {
   background-color: #3b5998;
   position: relative;
 }
-.page-user .social-share a.sso-facebook .fa {
+.page-user .social-share a.sso-facebook .fa, .page-signup .social-share a.sso-facebook .fa {
   background-color: #37528c;
   font-size: 25px;
 }
-.page-user .sign-border {
+.page-user .sign-border, .page-user .signup-txt, .page-signup .sign-border, .page-signup .signup-txt {
   text-align: center;
   position: relative;
   margin: 30px 0;
 }
-.page-user .sign-border span {
+.page-user .sign-border span, .page-user .signup-txt span, .page-signup .sign-border span, .page-signup .signup-txt span {
   display: inline-block;
   vertical-align: middle;
   background-color: #fff;
@@ -2853,7 +2962,7 @@ body.has-cart-popup {
   position: relative;
   z-index: 9;
 }
-.page-user .sign-border:before {
+.page-user .sign-border:before, .page-user .signup-txt:before, .page-signup .sign-border:before, .page-signup .signup-txt:before {
   content: '';
   position: absolute;
   left: 0;
@@ -2866,32 +2975,29 @@ body.has-cart-popup {
   background-color: #e9e9e9;
   z-index: 1;
 }
-.page-user .login-wrapper {
+.page-user .login-wrapper, .page-signup .login-wrapper {
   padding: 0;
   border: none;
   background: none;
 }
-.page-user .messages--status, .page-user .messages--error {
+.page-user .messages--status, .page-user .messages--error, .page-signup .messages--status, .page-signup .messages--error {
   background-color: #fefafb;
   border: 1px solid red;
   margin: 20px auto;
   max-width: 540px;
   padding: 10px;
 }
-.page-user .messages--error .messages__list {
+.page-user .messages--error .messages__list, .page-signup .messages--error .messages__list {
   padding-left: 15px;
+}
+
+.page-signup form {
+  padding: 20px 0;
 }
 
 [id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
   color: #009c00;
   margin: 20px;
-}
-
-.sign-in-link {
-  padding: 20px;
-}
-.sign-in-link .signup-link {
-  float: left;
 }
 
 #fotp {
@@ -3556,6 +3662,54 @@ span.personal-social-share-links {
   line-height: 30px;
 }
 
+#itg-sso-reg-multistep-form--2 a.sso-sign-in, #itg-sso-reg-multistep-form--3 a.sso-sign-in {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 20px;
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+#itg-sso-reg-multistep-form--2 .sign-in-link, #itg-sso-reg-multistep-form--3 .sign-in-link {
+  text-align: center;
+}
+
+.forgot-error {
+  color: red;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
+  text-align: left;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] .messages--status {
+  width: 520PX;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#fotp #forgototpclickme {
+  color: blue;
+}
+
+#itg_user_forgot_password_multistep_form label {
+  float: left;
+}
+
+div#forgot-field-heading {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+.page-user .sso-header + #page .login-wrapper .form-type-textfield label, .page-user .sso-header + #page .login-wrapper .form-type-password label {
+  display: none;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -4089,8 +4243,8 @@ span.personal-social-share-links {
 .page-personalization-my-following .region-personalization {
   text-align: center;
 }
-.page-personalization-my-following #block-views-follow-tags-block,
-.page-personalization-my-following #block-views-follow-tags-block-1 {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow,
+.page-personalization-my-following #block-itg-personalization-personalization-following {
   background-color: #f2f2f2;
   margin: 20px 10px 0;
   display: inline-block;
@@ -4098,9 +4252,14 @@ span.personal-social-share-links {
   width: 400px;
   padding: 15px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
-  padding: 10px;
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow h2,
+.page-personalization-my-following #block-itg-personalization-personalization-following h2 {
+  font: 400 24px/28px Roboto;
+  margin: 20px 0;
+}
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name {
+  padding: 10px 75px 10px 10px;
   text-align: left;
   border: 1px solid #d9d9d9;
   background-color: #fff;
@@ -4108,45 +4267,41 @@ span.personal-social-share-links {
   position: relative;
   margin: 15px;
   border-radius: 5px;
-}
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row:hover {
-  background-color: #efefef;
-}
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-name,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
-  padding-right: 75px;
   font: 400 16px/20px Roboto;
   word-wrap: break-word;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name:hover {
+  background-color: #efefef;
+}
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span {
   font: 400 14px/20px Roboto;
   position: absolute;
   right: 5px;
   top: 10px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span a {
   color: #1a3c8d;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a:hover {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span a:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span a:hover {
   text-decoration: underline;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-current,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-current {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-current,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -4155,8 +4310,8 @@ span.personal-social-share-links {
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -4166,29 +4321,29 @@ span.personal-social-share-links {
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a:hover,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a:hover {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a:hover,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first a,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous a {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first a, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first a,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-last.last,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-first.first,
-.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-last.last {
+.page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first.pager-last.last,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous.pager-first.first,
+.page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
@@ -4281,19 +4436,23 @@ span.personal-social-share-links {
 [id*="itg-sso-reg-multistep-form"] .email-or-mobile {
   position: relative;
 }
-[id*="itg-sso-reg-multistep-form"] .email-or-mobile:after {
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile #umail:after {
   content: 'OR';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 25px;
+  left: 95.5%;
+  top: 10px;
   margin: 0 auto;
-  width: 20px;
+  width: 25px;
+  height: 25px;
+  background-color: #e5e5e5;
+  border-radius: 50%;
   text-align: center;
   font-size: 12px;
   color: #666;
   font-family: Roboto;
   font-weight: 500;
+  box-sizing: border-box;
+  padding-top: 4px;
 }
 
 .page-cart section.sidebar .block-itg-ads, .page-order section.sidebar .block-itg-ads {
@@ -4756,27 +4915,27 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc a {
   margin-top: 80px;
   position: relative;
 }
-.career-graph .career-graph-data .gray-bg, .career-graph .career-graph-data .black-bg {
-  background: #dedede;
+.career-graph .career-graph-data .gray-bg {
+  background-color: #dedede;
   color: #000;
   font-family: roboto;
   font-size: 17px;
   font-weight: 500;
-  padding: 20px;
+  padding: 17px 20px;
   text-align: right;
   text-transform: uppercase;
 }
 .career-graph .career-graph-data .black-bg {
-  background: #000 none repeat scroll 0 0;
+  background-color: #2a2a2a;
   color: #fff;
   font-size: 24px;
-  padding: 28px 20px 28px 190px;
-  text-align: left;
+  font-family: roboto;
+  font-weight: 500;
+  padding: 19px 20px 19px 195px;
   line-height: 28px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: right;
 }
 .career-graph .career-graph-data img {
   position: absolute;
@@ -5405,20 +5564,20 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .show-embed-code-link .show-embed-code-div .copy-sample-code {
   background-color: #fff;
   position: relative;
-  box-shadow: 0 0 10px #666;
-}
-.show-embed-code-link .show-embed-code-div .copy-sample-code:before {
-  border-color: transparent transparent #fff transparent;
-  border-style: solid;
-  border-width: 11px;
-  content: "";
-  height: 0;
-  position: absolute;
-  top: -20px;
-  width: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  box-shadow: 0px 5px 20px -5px #000;
+  /*        &:before {
+            border-color: transparent transparent #fff transparent;
+            border-style: solid;
+            border-width: 11px;
+            content: "";
+            height: 0;
+            position: absolute;
+            top: -20px;
+            width: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+          }*/
 }
 .show-embed-code-link .show-embed-code-div .copy-sample-code textarea {
   border: 1px solid #fff;
@@ -5699,6 +5858,65 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   width: 40px;
   height: 40px;
   margin-right: 5px;
+}
+
+.page-signup .parent-background, .page-user .parent-background, .page-forgot-password .parent-background {
+  background: #fbfbfb;
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+  padding: 30px 100px;
+}
+.page-signup .parent-background .signup-txt span, .page-signup .parent-background .sign-border span, .page-user .parent-background .signup-txt span, .page-user .parent-background .sign-border span, .page-forgot-password .parent-background .signup-txt span, .page-forgot-password .parent-background .sign-border span {
+  background-color: #fbfbfb;
+}
+.page-signup .parent-background .social-share, .page-user .parent-background .social-share, .page-forgot-password .parent-background .social-share {
+  width: auto;
+  margin: 0;
+  text-align: center;
+}
+
+.page-sso-change-password h3 {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form {
+  background: #fbfbfb;
+  margin: 0 auto;
+  max-width: 780px;
+  padding: 20px 100px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
+}
+.page-sso-change-password form#itg-sso-reg-password-form .password-confirm span.error {
+  display: inline-block;
+}
+
+#sso_email_mobile_form {
+  max-width: 780px;
+}
+#sso_email_mobile_form h3 {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+#sso_email_mobile_form form {
+  background: #fbfbfb;
+  margin: 0 auto;
+  padding: 20px 100px;
+}
+#sso_email_mobile_form form label {
+  display: block;
+}
+#sso_email_mobile_form form input[type="text"] {
+  width: 100%;
+}
+#sso_email_mobile_form form .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  width: 170px;
 }
 
 @media all and (min-width: 768px) {
@@ -6211,8 +6429,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     margin: 0 10px;
   }
 
-  .page-personalization-my-following #block-views-follow-tags-block,
-  .page-personalization-my-following #block-views-follow-tags-block-1 {
+  .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow,
+  .page-personalization-my-following #block-itg-personalization-personalization-following {
     width: 100%;
     float: left;
     margin: 20px 0 0;
@@ -6803,8 +7021,90 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   #block-views-photo-landing-slider-block .slick-slider .slick-slide .photo-landing-slider-pic img {
     position: static;
   }
+
+  .page-user #page, .page-signup #page, .page-forgot-password #page {
+    height: auto;
+  }
+  .page-user #main .container, .page-signup #main .container, .page-forgot-password #main .container {
+    padding: 0;
+  }
+  .page-user form, .page-signup form, .page-forgot-password form {
+    padding: 40px 0;
+  }
+  .page-user .parent-background, .page-signup .parent-background, .page-forgot-password .parent-background {
+    padding: 30px 20px;
+  }
+  .page-user .social-share a, .page-signup .social-share a, .page-forgot-password .social-share a {
+    width: 50px;
+    padding: 0;
+  }
+  .page-user .social-share a .fa, .page-signup .social-share a .fa, .page-forgot-password .social-share a .fa {
+    width: 50px;
+  }
+
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link {
+    padding: 0 10px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link .left-block {
+    width: 50%;
+    padding-right: 5px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .parent-background .sign-in-link .rgt-block {
+    width: 50%;
+    padding-left: 5px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row {
+    padding: 0;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row .form-item {
+    margin: 0;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile #umail {
+    padding-bottom: 35px;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .form-row.email-or-mobile #umail:after {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .page-signup [id*="itg_sso_reg_multistep_form"] .col-xs-6 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #itg_user_forgot_password_multistep_form .parent-background {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #itg_user_forgot_password_multistep_form .parent-background .sign-in-link .signin-link {
+    width: 50%;
+    padding-right: 5px;
+    text-align: left;
+  }
+  #itg_user_forgot_password_multistep_form .parent-background .sign-in-link .signup-link {
+    width: 50%;
+    padding-left: 5px;
+    text-align: right;
+  }
+
+  [id*="itg_user_forgot_password_multistep_form"] #ufname {
+    padding: 0;
+  }
+
+  .feed-type ul li {
+    width: 32%;
+  }
 }
 @media all and (max-width: 480px) {
+  .feed-type ul li {
+    width: 49%;
+  }
+
   .photos-videos-wrapper .movie-videos,
   .photos-videos-wrapper .movie-photos {
     width: 100%;

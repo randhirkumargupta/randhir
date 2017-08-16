@@ -9,10 +9,10 @@
      }
      ?>
     <h4><?php print $row['title']; ?></h4>
-    <p><?php print $row['field_story_new_title']; ?></p>
+    <p><?php print $row['field_celebrity_pro_occupation']; ?></p>
   </div>
   <div class="col-md-9 col-sm-9">
-    <h3><?php print $row['title']; ?></h3>
+    <h3 title="<?php echo html_entity_decode(strip_tags($row['title']));?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></h3>
     <div class="body-content"><?php print $row['body']; ?></div>
   </div>
 </div>

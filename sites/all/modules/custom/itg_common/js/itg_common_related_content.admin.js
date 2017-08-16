@@ -19,12 +19,10 @@ jQuery(document).ready(function () {
     relatedContent();
     function relatedContent() {
         var solr = Drupal.settings.itg_common.settings.solr;
-        //console.log(solr);
+        
         if (solr != null && solr != undefined) {
             var solr_explict = solr.split(',');
-
             var slr = [];
-
             for (i = 0; i < solr_explict.length; i++) {
                 var c = solr_explict[i].split('|');
                 slr[c[0]] = c[1];
@@ -36,14 +34,15 @@ jQuery(document).ready(function () {
         var index_arr = [];
         var rel_tit_arr = [];
         var new_arr = [];
+        var new_arr_detail;
         var detail_default_arr;
         var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
         var detail_default = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
         if (itemString) {
-            item = itemString.split(",");
+            item = itemString.split("|");
         }
         if (detail_default) {
-            detail_default_arr = detail_default.split(",");
+            detail_default_arr = detail_default.split("|");
         }
         checkedlist = '';
 
@@ -59,14 +58,17 @@ jQuery(document).ready(function () {
             index_arr.push(rel_index);
             if (detail_default_arr != null && detail_default_arr != undefined) {
                 new_arr.push(detail_default_arr[index_arr[i]]);
+                new_arr_detail = new_arr.join('|');
             }
         }
-        jQuery('#edit-field-cm-related-content-detail-und-0-value').val(new_arr);
+        
+        jQuery('#edit-field-cm-related-content-detail-und-0-value').val(new_arr_detail);
         //console.log(index_arr);
         //console.log(new_arr);
         var detailString = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
+        
         if (detailString) {
-            detail = detailString.split(",");
+          detail = detailString.split("|");
         }
         for (var i = 0, l = item.length; i < l; i++) {
             var site = item[i].split('_');
@@ -82,15 +84,15 @@ jQuery(document).ready(function () {
                     display_type = final_tit[1];
                 }
             }
-            checkedlist += '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | ' + display_type + ' | <a href="' + solr_uri + '" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></li>';
+            checkedlist += '<li class="ui-state-default"><div class="rc-top"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | <span class="item-type">' + display_type + '</span> | <a href="' + solr_uri + '" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></div><div class="rc-bottom"><input class="rc-title" type="text" value="' + display_tit + '" /></div></li>';
         }
-
+        jQuery('.checked-list').html(checkedlist);
     }
     // end of code
 
-    jQuery('.checked-list').html(checkedlist);
+    
     if (checkedlist) {
-        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save</span>');
+        jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
     }
     else {
         jQuery('.save-checklist-ordre').html('<span class="empty-checklist">No content associated for this story yet !</span>');
@@ -108,18 +110,34 @@ jQuery(document).ready(function () {
         jQuery(this).find('.my-saved-search').slideUp();
     });
 
+    try {
     jQuery('body').find(".checked-list").sortable();
+            } catch(e) {
+
+    }
     jQuery('body').find(".checked-list").disableSelection();
 
     // jQuery code to remove checked list item
     jQuery('.checked-list').on('click', '.fa-times', function () {
-        jQuery(this).parent().remove();
+        jQuery(this).parent().parent().remove();
     });
     // end of code
 
     // jQuery code to save check list after re-order
     jQuery('body').on('click', '.save-checklist', function () {
         var item_new = [];
+        var item_new_detail;
+        var contentRow = []; 
+        var contentFinal = '';
+        jQuery('.checked-list li').each(function(i){
+          var itemVal = jQuery(this).find('.item-value').text();
+          var itemType = jQuery(this).find('.item-type').text();
+          var itemTitle = jQuery(this).find('.rc-title').val();
+          var str = itemVal+'@'+itemType+'@'+itemTitle;
+          contentRow[i] = str;
+          contentFinal = contentRow.join('|');
+        });
+        jQuery('#edit-field-cm-related-content-detail-und-0-value').val(contentFinal);
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
         if (!listLength) {
             //alert('Changes made successfully');
@@ -127,8 +145,10 @@ jQuery(document).ready(function () {
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function (i) {
             item_new.push(jQuery(this).find('.item-value').text());
+            item_new_detail = item_new.join('|');
+            
         });
-        jQuery('#edit-field-common-related-content-und-0-value').val(item_new);
+        jQuery('#edit-field-common-related-content-und-0-value').val(item_new_detail);
         relatedContent();
         alert('Changes made successfully');
     });
@@ -138,8 +158,6 @@ jQuery(document).ready(function () {
 
 
 // open save search in popup
-function showrelatedpopup(iframeurl)
-{
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
-
+function showrelatedpopup(iframeurl) {
+  jQuery.colorbox({href: iframeurl, iframe: true, width: "1030", height: "730", fixed: true});
 }

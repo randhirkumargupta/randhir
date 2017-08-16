@@ -45,63 +45,15 @@ function itg_widget_get_logo_from_tid($tid) {
  */
 function save_so_sorry_widget_data($so_sorry_selected_content) {
   $selected_node = $so_sorry_selected_content['selection'];
-  $already_nodes = db_select('itg_widget_order', 'iwo')
-          ->fields('iwo')
-          ->condition('widget', 'so_sorry_widget')
-          ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $new_data_to_insert = array();
-  // Check if there is any data in custom table
-  if (count($already_nodes)) {
-
-    foreach ($already_nodes as $table_nodes) {
-      $new_data_to_insert[$table_nodes['nid']] = $table_nodes;
-    }
-
-    foreach ($selected_node as $new_selected_node) {
-      $new_data_to_insert[$new_selected_node]['nid'] = $new_selected_node;
-    }
-
-    $num = db_delete('itg_widget_order')
-        ->condition('widget', 'so_sorry_widget')
-        ->execute();
-
-    foreach ($new_data_to_insert as $key => $nodes) {
-
-      $node_weight = $nodes['nid'];
-      if ($nodes['weight'] == 0 && isset($nodes['weight'])) {
-        $node_weight = 0;
+  $widget_name = 'so_sorry_widget';
+  if (count($selected_node)) {
+    foreach ($selected_node as $node) {
+      // Get node count and skip to insert.
+      $is_node_in_widget = itg_widget_check_node_in_widget($node, 'so_sorry_widget');
+      if (!$is_node_in_widget) {
+        itg_widget_insert_widget_data($node, $widget_name, 0);
       }
-      elseif (is_null($nodes['weight']) || $nodes['weight'] == "") {
-        $node_weight = $nodes['nid'];
-      }
-      else {
-        $node_weight = $nodes['weight'];
-      }
-
-      db_insert('itg_widget_order')
-          ->fields(array(
-            'nid' => $nodes['nid'],
-            'widget' => 'so_sorry_widget',
-            'content_type' => " ",
-            'cat_id' => 0,
-            'weight' => $node_weight,
-            'extra' => ($nodes['extra']) ? $nodes['extra'] : "",
-          ))->execute();
     }
-  }
-  else {
-    foreach ($selected_node as $nodes) {
-      $node_data = node_load($nodes);
-      // watchdog('widget', $nodes);
-      db_insert('itg_widget_order')
-          ->fields(array(
-            'nid' => $nodes,
-            'widget' => 'so_sorry_widget',
-            'content_type' => $node_data->type,
-            'cat_id' => 0,
-            'weight' => $node_data->nid,
-            'extra' => "",
-          ))->execute();
-    }
+    itg_widget_delete_old_data_by_limit($widget_name);
   }
 }

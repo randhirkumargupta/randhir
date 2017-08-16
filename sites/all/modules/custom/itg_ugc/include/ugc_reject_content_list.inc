@@ -33,7 +33,7 @@ function itg_ugc_reject_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('user-block-apply')),
     '#prefix' => '<div class = "user-log-filter-btn">',
-    '#suffix' => '<a class="user-log-reset form-submit" href="' . base_path() . 'ugc-reject-content">'.t('Reset').'</a></div>',
+    '#suffix' => '<a class="user-log-reset" href="' . base_path() . 'ugc-reject-content">'.t('Reset').'</a></div>',
   );
   
   return $form;
@@ -75,40 +75,32 @@ function itg_ugc_reject_content() {
     array('data' => t('Rejected by')),
     array('data' => t('Actions')),
   );
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con)
-    {
+    if ($con) {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;
       
-      if (!empty($_GET['items_per_page']))
-      {
+      if (!empty($_GET['items_per_page'])) {
         $limit = $_GET['items_per_page'];
       }
 
-      if (!empty($_GET['content_type']))
-      {
+      if (!empty($_GET['content_type'])) {
         $query['content_type'] = trim($_GET['content_type']);
         $query['status'] = 0;
         $query['publish_status'] = array('$ne' => null);
       }
-      if (!empty($_GET['title']))
-      {
+      if (!empty($_GET['title'])) {
         $query['title'] = trim($_GET['title']);
         $query['status'] = 0;
         $query['publish_status'] = array('$ne' => null);
       }
 
-      if (is_array($query) && empty($query))
-      {
-
+      if (is_array($query) && empty($query)) {
         $userData = $people->find(array("title" => array('$ne' => null), "status" => 0, "publish_status" => array('$ne' => null)))->limit($limit)->sort(array('_id' => -1));
       }
-      else
-      {
+      else {
         $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
@@ -116,10 +108,9 @@ function itg_ugc_reject_content() {
       $sl_no = 1;
       
       foreach ($userData as $row) {
-        $link = '<span class="view-link"><a href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'">'.t('view').'</a></span>';
+        $link = '<span class="view-link"><a class="colorbox-load" href="ugc-view-content/'.$row['_id'].'/'.$arg[0].'?width=500&height=300">'.t('view').'</a></span>';
         
-        if ($row['status'] == 0)
-        {
+        if ($row['status'] == 0) {
           $status = 'Rejected';
         }
         

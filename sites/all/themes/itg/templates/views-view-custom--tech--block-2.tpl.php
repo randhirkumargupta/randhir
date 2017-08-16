@@ -10,13 +10,13 @@
             }
             else {
                 global $base_url;
-                $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+                $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
             }
             ?>
             <li class="dont-miss-listing">
                 <div class="dm-pic"><a href="#" class="pic"><?php print $img; ?></a> <span><i class="fa fa-play-circle"></i> <?php echo $row['field_video_duration']; ?></span></div>
 
-                <div class="dm-detail"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>       
+                <div class="dm-detail" title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>       
             </li>
 
 

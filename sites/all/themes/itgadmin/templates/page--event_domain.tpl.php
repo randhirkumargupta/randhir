@@ -14,7 +14,6 @@ if (empty($host_detail) && is_numeric(arg(1))) {
   $host_node = node_load($host_node_arr[1]);
 }
 
-//$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = file_create_url($host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';

@@ -646,11 +646,19 @@ function amp_page_alter(array &$page) {
  */
 function amp_node_view($node, $view_mode, $langcode) {
   // Show amphtml links on AMP-enabled nodes so search engines can find AMP.
-  if ($view_mode == 'full' && node_is_page($node) && in_array($node->type, amp_get_enabled_types())) {
+  /*if ($view_mode == 'full' && node_is_page($node) && in_array($node->type, amp_get_enabled_types())) {
     $uri = entity_uri('node', $node);
     $uri['options']['query']['amp'] = NULL;
     $uri['options']['absolute'] = TRUE;
     drupal_add_html_head_link(array('rel' => 'amphtml', 'href' => url($uri['path'], $uri['options'])), TRUE);
+  }*/
+  
+  // amp add in url :: 10 july 2017
+  if ($view_mode == 'full' && node_is_page($node) && in_array($node->type, amp_get_enabled_types())) {
+    $uri = entity_uri('node', $node);
+    $uri['options']['absolute'] = TRUE;
+    $alias_path = drupal_get_path_alias($uri['path']);
+    drupal_add_html_head_link(array('rel' => 'amphtml', 'href' => url('amp/'.$alias_path, $uri['options'])), TRUE);
   }
 
   // Add AMP metadata.

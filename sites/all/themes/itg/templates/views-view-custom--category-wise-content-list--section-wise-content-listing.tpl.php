@@ -12,9 +12,15 @@ global $base_url;
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
-<?php foreach ($rows as $id => $row): ?>
+<?php foreach ($rows as $id => $row): 
+  $video_class ="";
+  if($row['type'] == 'videogallery') {
+     $video_class = 'video-icon';
+  }
+  
+  ?>
   <div class="catagory-listing">
-    <div class="pic">
+    <div class="pic <?php echo $video_class;?> ">
   <?php if ($row['field_story_small_image'] != ''): ?>
     <?php print $row['field_story_small_image']; ?>
   <?php else: ?>
@@ -25,29 +31,32 @@ global $base_url;
           <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
         <?php endif; ?>    
       <?php endif; ?>
-
+      <?php if(!empty($row['field_video_duration'])) { ?>
+            <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
+      <?php } ?>
     </div>
-    <div class="detail"><h3><?php
+    <div class="detail"><h3 title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
       }
       else {
-        print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
+        print l(__html_output_with_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
       }
       ?></h3>
         <?php if (strtolower($row['type']) == 'story'): ?>
         <p><?php if (isset($row['field_story_kicker_text'])) {
-        print $row['field_story_kicker_text'];
+        print __html_output_with_tags($row['field_story_kicker_text']);
       } ?></p>
       <?php
       elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php print $row['field_gallery_kicer']; ?></p>
+        <p><?php if(!empty($row['field_gallery_kicer'])) {
+          print __html_output_with_tags($row['field_gallery_kicer']); }?></p>
       <?php elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php print $row['field_story_expert_description']; ?></p>
+        <p><?php print __html_output_with_tags($row['field_story_expert_description']); ?></p>
       <?php endif; ?>
       <?php
       if (!empty($row['field_video_kicker'])) {
-        print '<p>' . $row['field_video_kicker'] . '</p>';
+        print '<p>' . __html_output_with_tags($row['field_video_kicker']) . '</p>';
       }
       ?>            </div>
   </div>

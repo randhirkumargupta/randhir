@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_layout = {
         attach: function(context, settings) {
             var layout_type = settings.itg_story.settings.layout_type;
-            
+             
             //section card
             
             $('#edit-section-name-all').hide();
@@ -28,7 +28,7 @@
             if ($('.messages--error').html() != null) {
                 return false;
             }
-
+            
             draggable_widgets();
 
             // code for layout setting save in db
@@ -37,8 +37,9 @@
                 var widget_name = '';
 
                 $(".templates-widgets li").draggable({
-                    appendTo: "body",
-                    helper: "clone",
+                    helper: 'clone',
+                    scroll: 'true',
+                    refreshPositions: true,
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');                        
                         widget_info = $(this).attr('data-widget-info');                        
@@ -66,7 +67,7 @@
                         var wid_name = widget_name;
                         var splitewidgitname = widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
-                            var widget_style = $(this).find('.data-holder').attr('widget-style');
+                            var widget_style = $(this).find('.data-holder').attr('data-widget-style');
                             if(widget_style != "" && widget_style != "undefined") {
                                widget_info ='custom|'+widget_style;
                             }
@@ -258,12 +259,6 @@
                 
                 var base_url = settings.itg_story.settings.base_url;
 
-                /* var input_val = '';
-                 $('#'+block_id).find("input[type='text']").each(function (index) {
-                 //get value                    
-                 input_val += $(this).val()+'@';                   
-                 });*/
-
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/title",
                     method: 'post',
@@ -450,14 +445,15 @@
             });
 
             jQuery('.add-more-block').on('click', function() {
-                jQuery(this).hide();
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
+            jQuery(this).hide();
+            jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
+            jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
+            jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
             if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
-                  jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
-                }
+              jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
+            }
             });
+            
             jQuery('.add-more-block').each(function() {
                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
                   jQuery(this).hide();
@@ -530,6 +526,31 @@
                     });
                 }
             });
+           
+            // for election widgets
+            $('#layout-election-submit').click(function() {
+                
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var html_title = $('#edit-election-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/election_graph_xml",
+                        method: 'post',
+                        data: {html_title: html_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-election').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });         
+           
         }
 
     };

@@ -42,9 +42,9 @@
         <?php endif; ?>
 
         <?php if (isset($row['title'])) : ?>
-          
-            <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))); ?>
-          
+        <p  title="<?php print strip_tags($row['title']) ; ?>">
+            <?php print html_entity_decode(l(strip_tags($row['title']), 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)))); ?>
+        </p>
         <?php endif; ?>
       </span>
     </li>

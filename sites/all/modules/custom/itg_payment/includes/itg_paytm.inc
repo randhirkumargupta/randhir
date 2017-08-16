@@ -1,8 +1,10 @@
 <?php
 
+global $base_url;
+
 define('PAYTM_ENVIRONMENT' , 'TEST'); // PROD
-define('PAYTM_MERCHANT_KEY' , 'd8DJIC6KlVT4HekP');
-define('PAYTM_MERCHANT_MID' , 'LTDMED81989694148457');
+define('PAYTM_MERCHANT_KEY' , 'vRATqRV01k3O0B#H');
+define('PAYTM_MERCHANT_MID' , 'Indiaa22153325984376');
 define('PAYTM_MERCHANT_WEBSITE' , 'WEB_STAGING');
 define('INDUSTRY_TYPE_ID' , 'Retail');
 define('CHANNEL_ID' , 'WEB');
@@ -15,15 +17,16 @@ define('PAYTM_PAYMENT_GATEWAY_NAME' , 'paytm');
 define('PAYTM_TXN_FAIL_STATUS' , 2);
 define('PAYTM_ORDER_SUCCESS_STATUS' , 1);
 define('PAYTM_CALLBACK_URL' , $base_url . '/itg_payment_order_form_response_url');
+
 $PAYTM_DOMAIN = "pguat.paytm.com";
 
 if (PAYTM_ENVIRONMENT == 'PROD') {
   $PAYTM_DOMAIN = 'secure.paytm.in';
 }
+
 define('PAYTM_REFUND_URL' , 'https://' . $PAYTM_DOMAIN . '/oltp/HANDLER_INTERNAL/REFUND');
 define('PAYTM_STATUS_QUERY_URL' , 'https://' . $PAYTM_DOMAIN . '/oltp/HANDLER_INTERNAL/TXNSTATUS');
 define('PAYTM_TXN_URL' , 'https://' . $PAYTM_DOMAIN . '/oltp-web/processTransaction');
-
 
 /**
  * Form for order process.
@@ -200,12 +203,19 @@ function itg_payment_order_form_response_url() {
   $transaction_id = $_POST['TXNID'];
   $transaction_status = 0;
   $data['order_status'] = 0;
-  if ($_POST["STATUS"] == "TXN_SUCCESS") {
+  if ($_POST["STATUS"] == "TXN_SUCCESS" && $_POST['RESPCODE'] == '01') {
+    $goto_url = "itg-payment-success";
     //update_event_registration_after_success
     update_event_registration_after_success($_POST['ORDERID']);
-    
+
     $transaction_status = PAYTM_TXN_SUCCESS_STATUS;
     $data['order_status'] = PAYTM_ORDER_SUCCESS_STATUS;
+  }
+  elseif ($_POST["STATUS"] == "TXN_FAILURE" && $_POST['RESPCODE'] == '14112') {
+    $goto_url = "itg-payment-cancel";
+  }
+  else {
+    $goto_url = "itg-payment/response-fail";
   }
 
   $data['order_id'] = $_POST['ORDERID'];
@@ -215,9 +225,8 @@ function itg_payment_order_form_response_url() {
 
   // Update order after response.
   itg_payment_response_info_update($data);
-  drupal_goto('itg_payment_success');
+  drupal_goto($goto_url);
 }
-
 
 /**
  * {@inheritdoc}

@@ -101,6 +101,8 @@ function features_for_magazine_front_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Large Cover Image */
   $handler->display->display_options['fields']['field_issue_large_cover_image']['id'] = 'field_issue_large_cover_image';
@@ -184,7 +186,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_issue_title_value_1']['operator'] = '<=';
   $handler->display->display_options['filters']['field_issue_title_value_1']['granularity'] = 'year';
   $handler->display->display_options['filters']['field_issue_title_value_1']['default_date'] = 'now';
-  $handler->display->display_options['path'] = 'calendar/%/%/magazine.html';
+  $handler->display->display_options['path'] = 'magazine';
 
   /* Display: Right side issue block */
   $handler = $view->new_display('block', 'Right side issue block', 'block_1');
@@ -214,7 +216,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_issue_title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_issue_title_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_issue_title_1']['settings'] = array(
-    'format_type' => 'itg_year',
+    'format_type' => 'itg_d_m_y',
     'fromto' => '',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -227,7 +229,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_issue_large_cover_image']['field'] = 'field_issue_large_cover_image';
   $handler->display->display_options['fields']['field_issue_large_cover_image']['label'] = '';
   $handler->display->display_options['fields']['field_issue_large_cover_image']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_issue_large_cover_image']['alter']['path'] = 'calendar/[nid]/[field_issue_title_1]/magazine.html';
+  $handler->display->display_options['fields']['field_issue_large_cover_image']['alter']['path'] = 'magazine/[field_issue_title_1]';
   $handler->display->display_options['fields']['field_issue_large_cover_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_issue_large_cover_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_issue_large_cover_image']['settings'] = array(
@@ -255,14 +257,19 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['arguments']['field_issue_title_value']['field'] = 'field_issue_title_value';
   $handler->display->display_options['arguments']['field_issue_title_value']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_issue_title_value']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_issue_title_value']['default_argument_options']['code'] = 'return arg(2);';
+  $handler->display->display_options['arguments']['field_issue_title_value']['default_argument_options']['code'] = 'if(!empty(arg(1))) {
+$val = strtotime(arg(1));
+return date(\'Y\', $val);
+}elseif(arg(0) == \'magazine\' && empty(arg(1))){
+return date(\'Y\');
+}
+';
   $handler->display->display_options['arguments']['field_issue_title_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_issue_title_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_issue_title_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_issue_title_value']['year_range'] = '-100:+0';
+  $handler->display->display_options['arguments']['field_issue_title_value']['year_range'] = '-50:+50';
   $handler->display->display_options['arguments']['field_issue_title_value']['granularity'] = 'year';
   $handler->display->display_options['arguments']['field_issue_title_value']['granularity_reset'] = 0;
-  $handler->display->display_options['arguments']['field_issue_title_value']['use_fromto'] = 'no';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -388,6 +395,18 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image237x133.jpg">\';
+print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -395,6 +414,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
@@ -445,6 +465,19 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Field: DOB (field_story_issue_date) */
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['default_argument_type'] = 'date';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['year_range'] = '-50:+50';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['granularity'] = 'day';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['granularity_reset'] = 0;
 
   /* Display: Magzine top story block */
   $handler = $view->new_display('block', 'Magzine top story block', 'block_1');
@@ -453,6 +486,18 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image483x271.jpg">\';
+print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -460,6 +505,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_top_story_483x271',
@@ -509,6 +555,19 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Field: DOB (field_story_issue_date) */
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['default_argument_type'] = 'date';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['year_range'] = '-50:+50';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['granularity'] = 'day';
+  $handler->display->display_options['arguments']['field_story_issue_date_value']['granularity_reset'] = 0;
   $export['magazine_top_story'] = $view;
 
   return $export;

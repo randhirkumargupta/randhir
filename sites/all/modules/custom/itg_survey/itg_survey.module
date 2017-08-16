@@ -16,7 +16,7 @@
 function itg_survey_permission() {
   return array(
     'survey admin users' => array(
-      'title' => t('Access Survey Result'),
+      'title' => t('Access Survey Result') ,
     )
   );
 }
@@ -31,27 +31,27 @@ function itg_survey_menu() {
   $items = array();
 
   $items['itg-survey/%'] = array(
-    'title' => t('Survey'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_survey_survey_form'),
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_survey_form.inc',
+    'title' => t('Survey') ,
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_survey_survey_form') ,
+    'access callback' => FALSE ,
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_survey_form.inc' ,
   );
 
   $items['survey-result/%'] = array(
-    'title' => t('Survey Result'),
-    'page callback' => 'itg_survey_result',
-    'access callback' => 'user_access',
-    'access arguments' => array('survey admin users'),
-    'file' => 'includes/itg_survey_result.inc',
+    'title' => t('Survey Result') ,
+    'page callback' => 'itg_survey_result' ,
+    'access callback' => 'user_access' ,
+    'access arguments' => array('survey admin users') ,
+    'file' => 'includes/itg_survey_result.inc' ,
   );
 
   $items['pqs/associate-with-story/%'] = array(
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_survey_pqs_generatetokens'),
-    'access callback' => 'user_access',
-    'access arguments' => array('survey admin users'),
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_survey_pqs_generatetokens') ,
+    'access callback' => 'user_access' ,
+    'access arguments' => array('survey admin users') ,
     'type' => MENU_CALLBACK
   );
 
@@ -64,18 +64,18 @@ function itg_survey_menu() {
  * {@inheritdoc}
  */
 function itg_survey_theme() {
-  $path = drupal_get_path('module', 'itg_survey') . '/templates';
+  $path = drupal_get_path('module' , 'itg_survey') . '/templates';
   return array(
     'itg_survey_form' => array(
-      'template' => 'itg-survey-form',
-      'path' => $path,
-      'render element' => 'form',
-    ),
+      'template' => 'itg-survey-form' ,
+      'path' => $path ,
+      'render element' => 'form' ,
+    ) ,
     'survey_tab_form_display_block' => array(
-      'template' => 'survey-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_survey') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
+      'template' => 'survey-form-tab-template' ,
+      'path' => drupal_get_path('module' , 'itg_survey') . '/templates' ,
+      'variables' => array('data' => NULL) ,
+    ) ,
   );
 }
 
@@ -86,11 +86,12 @@ function itg_survey_theme() {
  * 
  * {@inheritdoc}
  */
-function itg_survey_form_alter(&$form, &$form_state, $form_id) {
+function itg_survey_form_alter(&$form , &$form_state , $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
-    //$form['field_survey_category']['und']['#config']['module'] = 'itg_category_manager';
+    unset($form['actions']['preview']);
+    unset($form['field_survey_category']);//hide section
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
       $publish_value = itg_survey_get_publish_status(arg(1));
@@ -109,18 +110,10 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
     unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
 
-//    if (is_numeric(arg(1)) && arg(2) == 'edit') {
-//      $form['actions']['view_survey_result'] = array(
-//        '#markup' => l(t('View Survey Result'), 'survey-result/' . arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target' => '_blank'))),
-//        '#weight' => 20,
-//        '#value' => t('View Survey Result'),
-//      );
-//    }
-
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 21,
-      '#value' => t('Cancel'),
+      '#markup' => l(t('Cancel') , $destination , array('attributes' => array('class' => 'button'))) ,
+      '#weight' => 21 ,
+      '#value' => t('Cancel') ,
     );
 
     $form['field_survey_add_questions'][LANGUAGE_NONE]['#title'] = '';
@@ -145,7 +138,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  */
-function itg_survey_form_custom_submit_callback($form, &$form_state) {
+function itg_survey_form_custom_submit_callback($form , &$form_state) {
 
   // Unset drupal redirection and add custom redirection URL
   if (isset($_GET['destination'])) {
@@ -160,10 +153,10 @@ function itg_survey_form_custom_submit_callback($form, &$form_state) {
 
   $title = $form_state['node']->title;
   if (arg(2) == 'edit') {
-    drupal_set_message(t('Survey <strong>@title</strong> has been updated.', array('@title' => $title)));
+    drupal_set_message(t('Survey <strong>@title</strong> has been updated.' , array('@title' => $title)));
   }
   else {
-    drupal_set_message(t('Survey <strong>@title</strong> has been submitted for further review and approval.', array('@title' => $title)));
+    drupal_set_message(t('Survey <strong>@title</strong> has been Published.' , array('@title' => $title)));
   }
 }
 
@@ -172,7 +165,7 @@ function itg_survey_form_custom_submit_callback($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
-function itg_survey_form_save_as_draft_submit_callback(&$form, &$form_state) {
+function itg_survey_form_save_as_draft_submit_callback(&$form , &$form_state) {
   $form_state['redirect'] = 'manage-draft-survey';
 }
 
@@ -182,8 +175,8 @@ function itg_survey_form_save_as_draft_submit_callback(&$form, &$form_state) {
  * @param array $form_state
  * @return array
  */
-function itg_survey_form_after_build($form, &$form_state) {
-  global $user, $base_url;
+function itg_survey_form_after_build($form , &$form_state) {
+  global $user , $base_url;
 
   // Get node type
   if (arg(0) == 'node') {
@@ -196,14 +189,7 @@ function itg_survey_form_after_build($form, &$form_state) {
       $type = $node->type;
       $nid = arg(1);
     }
-  }
-
-  if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form
-    drupal_add_js('jQuery(document).ready(function() {
-            jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
-          });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  }  
 
   // Array used in itg_survey.js
   $settings = array();
@@ -211,13 +197,13 @@ function itg_survey_form_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['type'] = ucfirst($type);
   $settings['nid'] = $nid;
-  drupal_add_js(array('itg_survey' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(array('itg_survey' => array('settings' => $settings)) , array('type' => 'setting'));
 
   // Add JS for survey
-  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module' , 'itg_survey') . '/js/itg_survey.js' , array('weight' => 1 , 'scope' => 'footer'));
 
   $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+    drupal_get_path('module' , 'itg_astro') . '/js/jquery.validate.min.js' ,
   );
 
   // Hide multiple answer options in case of "rating" 
@@ -246,7 +232,7 @@ function itg_survey_views_pre_render(&$view) {
   // Add "Create Survey" button on listing page of survey
   if ($view->name == "manage_survey") {
     $header_content_survey = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_survey .= l(t('Create Survey'), 'node/add/survey');
+    $header_content_survey .= l(t('Create Survey') , 'node/add/survey');
     $view->attachment_before = $header_content_survey;
   }
 }
@@ -256,10 +242,8 @@ function itg_survey_views_pre_render(&$view) {
  * 
  * {@inheritdoc}
  */
-function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
-  if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1'  || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
-
+function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1' || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
@@ -278,15 +262,14 @@ function itg_survey_node_presave($node) {
    * '0' for save as draft
    * '1' for publish and '2' for unpublish
    */
-  /*if ($node->type == 'survey') {
-    if ($node->status == 1) {
+
+  //p($node->type);
+  
+  if ($node->type == 'survey' || $node->type == 'quiz') {
+    if ($node->op == 'Publish') {
       $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
     }
-    
-  }*/
-  
-  if ($node->type == 'survey' && isset($node->field_supp_publish)) {
-    switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
+    /*switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
       case '0':
         $node->status = 0;
         break;
@@ -296,7 +279,7 @@ function itg_survey_node_presave($node) {
       default :
         $node->status = 0;
         break;
-    }
+    }*/
   }
 }
 
@@ -306,16 +289,20 @@ function itg_survey_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_survey_node_insert($node) {
-
+    //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
+  
   if ($node->type == 'survey') {
     // Insert in to survey notification table
-    itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'insert');
+    itg_survey_insert_notification_details($node->nid , strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']) , 'insert');
   }
 
   // Add token value
   if ($node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey') {
     $node->field_pqs_add_token[LANGUAGE_NONE][0]['value'] = '[ITG:' . strtoupper($node->type) . ':' . $node->nid . ']';
-    field_attach_update('node', $node);
+    field_attach_update('node' , $node);
   }
 }
 
@@ -328,7 +315,7 @@ function itg_survey_node_update($node) {
 
   if ($node->type == 'survey') {
     // Update date in survey notification table, if updated
-    itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'update');
+    itg_survey_insert_notification_details($node->nid , strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']) , 'update');
   }
 }
 
@@ -337,7 +324,7 @@ function itg_survey_node_update($node) {
  *  
  * {@inheritdoc}
  */
-function itg_survey_node_validate($node, $form, &$form_state) {
+function itg_survey_node_validate($node , $form , &$form_state) {
 
   if ($node->type == 'survey') {
     $survey_start_date = $node->field_survey_start_date[LANGUAGE_NONE][0]['value'];
@@ -345,7 +332,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
 
     // Validation for survey start and end date
     if (!empty($survey_end_date) && (strtotime($survey_start_date) > strtotime($survey_end_date))) {
-      form_set_error('field_survey_end_date', t('Survey end date must be greater or equal to start date.'));
+      form_set_error('field_survey_end_date' , t('Survey end date must be greater or equal to start date.'));
     }
     // Validation for answer choices
     foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
@@ -354,7 +341,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
         $ans_op1 = $question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value'];
         $ans_op2 = $question_arr['field_survey_answer_option_2'][LANGUAGE_NONE][0]['value'];
         if (empty($ans_op1) || empty($ans_op2)) {
-          form_set_error('field_survey_answer_option_1', t('Please provide atleast two answer choices for question <strong>@question?<strong>', array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
+          form_set_error('field_survey_answer_option_1' , t('Please provide atleast two answer choices for question <strong>@question?<strong>' , array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
           // Validation for answer choices
           if (!empty($node->field_survey_add_questions[LANGUAGE_NONE])) {
             foreach ($node->field_survey_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
@@ -363,7 +350,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
                 $ans_op1 = $question_arr['field_survey_answer_option_1'][LANGUAGE_NONE][0]['value'];
                 $ans_op2 = $question_arr['field_survey_answer_option_2'][LANGUAGE_NONE][0]['value'];
                 if (empty($ans_op1) || empty($ans_op2)) {
-                  form_set_error('field_survey_answer_option_1', t('Please provide atleast two answer choices for question <strong>@question?<strong>', array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
+                  form_set_error('field_survey_answer_option_1' , t('Please provide atleast two answer choices for question <strong>@question?<strong>' , array('@question' => $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'])));
                 }
               }
             }
@@ -382,12 +369,12 @@ function itg_survey_node_validate($node, $form, &$form_state) {
  */
 function itg_survey_get_current_survey() {
   $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
-  $query = db_select('node', 'n');
-  $query->fields('n', array('nid'))
-      ->condition('n.type', 'survey', '=')
-      ->condition('n.status', 1, '=')
-      ->orderBy('n.created', 'DESC')
-      ->range(0, 1);
+  $query = db_select('node' , 'n');
+  $query->fields('n' , array('nid'))
+      ->condition('n.type' , 'survey' , '=')
+      ->condition('n.status' , 1 , '=')
+      ->orderBy('n.created' , 'DESC')
+      ->range(0 , 1);
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $nid = $record['nid'];
@@ -416,7 +403,7 @@ function itg_survey_get_current_survey() {
  * @param string $user_type
  * @return string
  */
-function itg_survey_get_survey_by_users($nid, $user_type) {
+function itg_survey_get_survey_by_users($nid , $user_type) {
 
   // Get total survey for a node
   $total_survey = itg_survey_get_total_survey($nid);
@@ -424,14 +411,14 @@ function itg_survey_get_survey_by_users($nid, $user_type) {
     return '0%';
   }
   else {
-    $result = db_select('itg_survey_user', 'su')
+    $result = db_select('itg_survey_user' , 'su')
         ->fields('su')
-        ->condition('su.user_type', $user_type, '=')
-        ->condition('su.nid', $nid, '=')
+        ->condition('su.user_type' , $user_type , '=')
+        ->condition('su.nid' , $nid , '=')
         ->execute();
     $total_survey_by_user = $result->rowCount();
     $survey_percentage = ($total_survey_by_user / $total_survey) * 100;
-    return round($survey_percentage, 2) . '%';
+    return round($survey_percentage , 2) . '%';
   }
 }
 
@@ -441,9 +428,9 @@ function itg_survey_get_survey_by_users($nid, $user_type) {
  * @return int
  */
 function itg_survey_get_total_survey($nid) {
-  $result = db_select('itg_survey_user', 'isu')
+  $result = db_select('itg_survey_user' , 'isu')
       ->fields('isu')
-      ->condition('isu.nid', $nid, '=')
+      ->condition('isu.nid' , $nid , '=')
       ->execute();
   $total_survey = $result->rowCount();
   if ($total_survey) {
@@ -461,24 +448,24 @@ function itg_survey_get_total_survey($nid) {
  * @param string $answer
  * @return string
  */
-function itg_survey_vote_percentage($nid, $ques_id, $answer) {
+function itg_survey_vote_percentage($nid , $ques_id , $answer) {
 
-  $total_vote_on_question = itg_survey_get_total_vote_question($nid, $ques_id, $answer, NULL);
+  $total_vote_on_question = itg_survey_get_total_vote_question($nid , $ques_id , $answer , NULL);
 
   if (!$total_vote_on_question) {
     return '0%';
   }
   else {
-    $result = db_select('itg_survey_detail', 'su')
+    $result = db_select('itg_survey_detail' , 'su')
         ->fields('su')
-        ->condition('su.ques_id', $ques_id, '=')
-        ->condition('su.nid', $nid, '=')
-        ->condition('su.answer', $answer, '=')
-        ->condition('su.survey_info', 1, '=')
+        ->condition('su.ques_id' , $ques_id , '=')
+        ->condition('su.nid' , $nid , '=')
+        ->condition('su.answer' , $answer , '=')
+        ->condition('su.survey_info' , 1 , '=')
         ->execute();
-  $total_answwer_for_ques = $result->rowCount();
+    $total_answwer_for_ques = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques / $total_vote_on_question) * 100;
-    return round($vote_percentage, 2) . '%';
+    return round($vote_percentage , 2) . '%';
   }
 }
 
@@ -490,55 +477,50 @@ function itg_survey_vote_percentage($nid, $ques_id, $answer) {
  * @param string $user_type
  * @return string
  */
-function itg_survey_vote_percentage_user($nid, $ques_id, $answer, $user_type) {
+function itg_survey_vote_percentage_user($nid , $ques_id , $answer , $user_type) {
 
-  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type);
+  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid , $ques_id , $answer , $user_type);
 
   if (!$total_vote_on_question_user) {
     return '0%';
   }
   else {
-    $result = db_select('itg_survey_detail', 'su')
+    $result = db_select('itg_survey_detail' , 'su')
         ->fields('su')
-        ->condition('su.ques_id', $ques_id, '=')
-        ->condition('su.nid', $nid, '=')
-        ->condition('su.answer', $answer, '=')
-        ->condition('su.user_type', $user_type, '=')
-        ->condition('su.survey_info', 1, '=')
+        ->condition('su.ques_id' , $ques_id , '=')
+        ->condition('su.nid' , $nid , '=')
+        ->condition('su.answer' , $answer , '=')
+        ->condition('su.user_type' , $user_type , '=')
+        ->condition('su.survey_info' , 1 , '=')
         ->execute();
     $total_answwer_for_ques_user = $result->rowCount();
     $vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
-    return round($vote_percentage, 2) . '%';
+    return round($vote_percentage , 2) . '%';
   }
 }
+
 // For survey rating value
 
-function itg_survey_vote_percentage_user_rating($nid, $ques_id, $answer,$rating) {
-   
-            
-  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid, $ques_id, $answer,$rating);
-  
+function itg_survey_vote_percentage_user_rating($nid , $ques_id , $answer , $rating) {
+
+  $total_vote_on_question_user = itg_survey_get_total_vote_question($nid , $ques_id , $answer , $rating);
+
   if (!$total_vote_on_question_user) {
     return '0%';
   }
   else {
 
-     $itg_query = db_select('itg_survey_detail', 'su')
-      ->fields('su')
-             ->condition('su.ques_id', $ques_id, '=')
-        ->condition('su.nid', $nid, '=')
-        ->condition('su.answer', $answer, '=')
-        ->condition('su.survey_info', 1, '=')
-             ->groupBy('su.rating_value');
-  $itg_query->addExpression('COUNT(su.rating_value)', 'user');
-  $total_answwer_for_ques_user = $itg_query->execute()->fetchAll();   
-   
-return $total_answwer_for_ques_user;
-    
- //  $total_answwer_for_ques_user = $result->rowCount();
-   
-    //$vote_percentage = ($total_answwer_for_ques_user / $total_vote_on_question_user) * 100;
-    //return round($vote_percentage, 2) . '%';
+    $itg_query = db_select('itg_survey_detail' , 'su')
+        ->fields('su')
+        ->condition('su.ques_id' , $ques_id , '=')
+        ->condition('su.nid' , $nid , '=')
+        ->condition('su.answer' , $answer , '=')
+        ->condition('su.survey_info' , 1 , '=')
+        ->groupBy('su.rating_value');
+    $itg_query->addExpression('COUNT(su.rating_value)' , 'user');
+    $total_answwer_for_ques_user = $itg_query->execute()->fetchAll();
+
+    return $total_answwer_for_ques_user;
   }
 }
 
@@ -548,22 +530,22 @@ return $total_answwer_for_ques_user;
  * @param int $ques_id
  * @return int
  */
-function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type) {
+function itg_survey_get_total_vote_question($nid , $ques_id , $answer , $user_type) {
   if ($user_type) {
-    $result = db_select('itg_survey_detail', 'isu')
+    $result = db_select('itg_survey_detail' , 'isu')
         ->fields('isu')
-        ->condition('isu.nid', $nid, '=')
-        ->condition('isu.ques_id', $ques_id, '=')
-        ->condition('isu.answer', $answer, '=')
-        ->condition('isu.survey_info', 1, '=')
+        ->condition('isu.nid' , $nid , '=')
+        ->condition('isu.ques_id' , $ques_id , '=')
+        ->condition('isu.answer' , $answer , '=')
+        ->condition('isu.survey_info' , 1 , '=')
         ->execute();
   }
   else {
-    $result = db_select('itg_survey_detail', 'isu')
+    $result = db_select('itg_survey_detail' , 'isu')
         ->fields('isu')
-        ->condition('isu.nid', $nid, '=')
-        ->condition('isu.ques_id', $ques_id, '=')
-        ->condition('isu.survey_info', 1, '=')
+        ->condition('isu.nid' , $nid , '=')
+        ->condition('isu.ques_id' , $ques_id , '=')
+        ->condition('isu.survey_info' , 1 , '=')
         ->execute();
   }
 
@@ -582,8 +564,8 @@ function itg_survey_get_total_vote_question($nid, $ques_id, $answer, $user_type)
  */
 function itg_survey_block_info() {
   $blocks['survey_tab_form_block'] = array(
-    'info' => t('Survey Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Survey Form Tab Block') ,
+    'cache' => DRUPAL_CACHE_GLOBAL ,
   );
 
   return $blocks;
@@ -598,7 +580,7 @@ function itg_survey_block_view($delta = '') {
   $data = '';
   switch ($delta) {
     case 'survey_tab_form_block':
-      $block['content'] = theme('survey_tab_form_display_block', array('data' => $data));
+      $block['content'] = theme('survey_tab_form_display_block' , array('data' => $data));
       break;
   }
 
@@ -611,8 +593,8 @@ function itg_survey_block_view($delta = '') {
  * @return string
  */
 function itg_survey_show_survey_result($nid) {
-  if (itg_common_check_record_existance($nid, 'itg_survey_detail', 'nid') > 0) {
-    return l('View Result', 'survey-result/' . $nid, array('attributes' => array('target' => '_blank')));
+  if (itg_common_check_record_existance($nid , 'itg_survey_detail' , 'nid') > 0) {
+    return l('View Result' , 'survey-result/' . $nid , array('attributes' => array('target' => '_blank')));
   }
   else {
     return 'View Result';
@@ -649,11 +631,11 @@ function itg_survey_get_answer_type_name($name) {
  * @param array $account
  * @return string
  */
-function itg_survey_node_access($node, $op, $account) {
+function itg_survey_node_access($node , $op , $account) {
   global $user;
 
   // If user in not super admin
-  if (!in_array('Site Admin', $user->roles)) {
+  if (!in_array('Site Admin' , $user->roles)) {
 
     // Check for survey and quiz
     if (!empty($node->type) && ($node->type == 'survey' || $node->type == 'quiz')) {
@@ -661,14 +643,19 @@ function itg_survey_node_access($node, $op, $account) {
       $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
       $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
-      $node_edit = FALSE;
-      if (($curr_time >= $survey_start_date) || ($curr_time > $survey_end_date)) {
-        $node_edit = TRUE;
+      if ($op == 'view' && $node->type == 'survey') {
+        return;
       }
-      $condition = ($node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 2 || $node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 1) ;
-      // If condition is true, user doesn't allow to see node
-      if (($node_edit && $op == 'update' && !(array_key_exists(10, $account->roles)) && $condition) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
-        return NODE_ACCESS_DENY;
+      else {
+        $node_edit = FALSE;
+        if (($curr_time >= $survey_start_date) || ($curr_time > $survey_end_date)) {
+          $node_edit = TRUE;
+        }
+        $condition = ($node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 2 || $node->field_supp_publish[LANGUAGE_NONE][0]['value'] == 1);
+        // If condition is true, user doesn't allow to see node
+        if (($node_edit && $op == 'update' && !(array_key_exists(10 , $account->roles)) && $condition) || user_is_anonymous() || ($op == 'update' && $node->uid != $user->uid)) {
+          return NODE_ACCESS_DENY;
+        }
       }
     }
     return NODE_ACCESS_IGNORE;
@@ -683,14 +670,14 @@ function itg_survey_node_access($node, $op, $account) {
  * @param int $nid
  * @param string $expiry_date
  */
-function itg_survey_insert_notification_details($nid, $expiry_date, $op) {
+function itg_survey_insert_notification_details($nid , $expiry_date , $op) {
 
   if ($op == 'insert') {
     db_insert('itg_survey_ntf')
         ->fields(array(
-          'nid' => $nid,
-          'survey_expiry' => $expiry_date,
-          'status' => 'N',
+          'nid' => $nid ,
+          'survey_expiry' => $expiry_date ,
+          'status' => 'N' ,
           'created' => time()
         ))
         ->execute();
@@ -698,9 +685,9 @@ function itg_survey_insert_notification_details($nid, $expiry_date, $op) {
   else {
     db_update('itg_survey_ntf')
         ->fields(array(
-          'survey_expiry' => $expiry_date,
+          'survey_expiry' => $expiry_date ,
         ))
-        ->condition('nid', $nid, '=')
+        ->condition('nid' , $nid , '=')
         ->execute();
   }
 }
@@ -709,10 +696,10 @@ function itg_survey_insert_notification_details($nid, $expiry_date, $op) {
  * Implements hook_cronapi().
  * {@inheritdoc}
  */
-function itg_survey_cronapi($op, $job = NULL) {
+function itg_survey_cronapi($op , $job = NULL) {
   $items['itg_survey_expiry_notification'] = array(
-    'description' => 'Send mail before 24 hours for survey expiration',
-    'callback' => 'itg_survey_expiry_notification_callback',
+    'description' => 'Send mail before 24 hours for survey expiration' ,
+    'callback' => 'itg_survey_expiry_notification_callback' ,
   );
   return $items;
 }
@@ -723,13 +710,13 @@ function itg_survey_cronapi($op, $job = NULL) {
 function itg_survey_expiry_notification_callback() {
 
   // Include survey notification mail inc file
-  module_load_include('inc', 'itg_survey', 'includes/survey_notification_mail');
+  module_load_include('inc' , 'itg_survey' , 'includes/survey_notification_mail');
 
   $current_time = time();
 
-  $query = db_select('itg_survey_ntf', 's');
+  $query = db_select('itg_survey_ntf' , 's');
   $query->fields('s')
-      ->condition('s.status', 'N', '=');
+      ->condition('s.status' , 'N' , '=');
   $result = $query->execute();
 
   // Fetch node to send notification
@@ -754,20 +741,20 @@ function itg_survey_send_mail_for_notification($nid) {
   $node = node_load($nid);
   $user = user_load($node->uid);
 
-  $mail_content = itg_survey_get_mail_content($node, $user);
+  $mail_content = itg_survey_get_mail_content($node , $user);
   $params = array(
-    'body' => $mail_content,
-    'subject' => 'India Today | Survey Expired',
+    'body' => $mail_content ,
+    'subject' => 'India Today | Survey Expired' ,
   );
   $user_email_str = $user->mail;
-  drupal_mail('itg_survey_send_notification', 'send_survey_noti', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  drupal_mail('itg_survey_send_notification' , 'send_survey_noti' , $user_email_str , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
 
   // Update mail status after sending notification      
   db_update('itg_survey_ntf')
       ->fields(array(
-        'status' => 'Y',
+        'status' => 'Y' ,
       ))
-      ->condition('nid', $nid, '=')
+      ->condition('nid' , $nid , '=')
       ->execute();
 }
 
@@ -777,13 +764,13 @@ function itg_survey_send_mail_for_notification($nid) {
  * @param string $message
  * @param array $params
  */
-function itg_survey_send_notification_mail($key, &$message, $params) {
+function itg_survey_send_notification_mail($key , &$message , $params) {
   switch ($key) {
     case 'send_survey_noti':
       $headers = array(
-        'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
-        'Content-Transfer-Encoding' => '8Bit',
+        'MIME-Version' => '1.0' ,
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes' ,
+        'Content-Transfer-Encoding' => '8Bit' ,
         'X-Mailer' => 'Drupal'
       );
       $message['subject'] = $params['subject'];
@@ -800,13 +787,13 @@ function itg_survey_send_notification_mail($key, &$message, $params) {
  * @param int $nid
  * @return string
  */
-function itg_survey_get_mail_content($node, $user) {
+function itg_survey_get_mail_content($node , $user) {
 
-  $expiry_date = date('d/m/Y', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']));
+  $expiry_date = date('d/m/Y' , strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']));
 
   $content = '<p>Dear ' . $user->name . ', </p><p>Survey <strong>' . $node->title . '</strong> will be expired soon.</p><p>Expiry Date: ' . $expiry_date . '</p>';
 
-  $content .='<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
+  $content .= '<p>&nbsp;</p><p>Thanks,</p><p>India Today Team</p>';
 
   return $content;
 }
@@ -818,38 +805,38 @@ function itg_survey_get_mail_content($node, $user) {
  */
 function itg_survey_pqs_generatetokens() {
   $type = arg(2);
-  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module' , 'itg_survey') . '/js/itg_associate_story_ckeditor.js' , array('weight' => 1 , 'scope' => 'footer'));
   $cur_date = date('Y-m-d H:i:s');
   if ($type == 'poll') {
-    $query = db_select('node', 'n');
-    $query->leftjoin('field_data_field_poll_start_date', 'sd', 'n.nid = sd.entity_id');
-    $query->leftjoin('field_data_field_poll_end_date', 'ed', 'n.nid = ed.entity_id');
-    $query->fields('n', array('nid', 'title'));
-    $query->fields('sd', array('field_poll_start_date_value'));
-    $query->fields('ed', array('field_poll_end_date_value'));
-    $query->condition('n.type', $type, '=');
-    $query->condition('n.status', 1, '=');
-    $query->condition('sd.field_poll_start_date_value', $cur_date, '<=');
-    $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value', $cur_date, '>='));
+    $query = db_select('node' , 'n');
+    $query->leftjoin('field_data_field_poll_start_date' , 'sd' , 'n.nid = sd.entity_id');
+    $query->leftjoin('field_data_field_poll_end_date' , 'ed' , 'n.nid = ed.entity_id');
+    $query->fields('n' , array('nid' , 'title'));
+    $query->fields('sd' , array('field_poll_start_date_value'));
+    $query->fields('ed' , array('field_poll_end_date_value'));
+    $query->condition('n.type' , $type , '=');
+    $query->condition('n.status' , 1 , '=');
+    $query->condition('sd.field_poll_start_date_value' , $cur_date , '<=');
+    $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value' , $cur_date , '>='));
   }
   elseif ($type == 'survey' || $type == 'quiz') {
-    $query = db_select('node', 'n');
-    $query->leftjoin('field_data_field_survey_start_date', 'sd', 'n.nid = sd.entity_id');
-    $query->leftjoin('field_data_field_survey_end_date', 'ed', 'n.nid = ed.entity_id');
-    $query->fields('n', array('nid', 'title'));
-    $query->fields('sd', array('field_survey_start_date_value'));
-    $query->fields('ed', array('field_survey_end_date_value'));
-    $query->condition('n.type', $type, '=');
-    $query->condition('n.status', 1, '=');
-    $query->condition('sd.field_survey_start_date_value', $cur_date, '<=');
-    $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value', $cur_date, '>='));
+    $query = db_select('node' , 'n');
+    $query->leftjoin('field_data_field_survey_start_date' , 'sd' , 'n.nid = sd.entity_id');
+    $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+    $query->fields('n' , array('nid' , 'title'));
+    $query->fields('sd' , array('field_survey_start_date_value'));
+    $query->fields('ed' , array('field_survey_end_date_value'));
+    $query->condition('n.type' , $type , '=');
+    $query->condition('n.status' , 1 , '=');
+    $query->condition('sd.field_survey_start_date_value' , $cur_date , '<=');
+    $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
   }
   $data = array();
   $result = $query->execute();
   // Fetch node title and nid
   while ($record = $result->fetchAssoc()) {
     if (strlen($record['title']) > 30) {
-      $title = substr($record['title'], 0, 30) . '...';
+      $title = substr($record['title'] , 0 , 30) . '...';
     }
     else {
       $title = $record['title'];
@@ -858,21 +845,21 @@ function itg_survey_pqs_generatetokens() {
   }
   $form = array();
   $form['pqs-listing-heading'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div style="padding-top:10px; padding-bottom:10px"><h2> Please Select ' . ucfirst($type) . ' to Associate With Story:</h2></div>',
+    '#type' => 'markup' ,
+    '#markup' => '<div style="padding-top:10px; padding-bottom:10px"><h2> Please Select ' . ucfirst($type) . ' to Associate With Story:</h2></div>' ,
     '#prefix' => '<div style="margin:10px 0px 10px 20px">'
   );
 
   $form['pqs-listing'] = array(
-    '#type' => 'checkboxes',
-    '#options' => $options,
+    '#type' => 'checkboxes' ,
+    '#options' => $options ,
     '#attributes' => array('class' => array('pqs-listing-options'))
   );
 
   $form['html'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div style="margin-top:10px"><span id="add-pqs" class="button">Add</span></div>',
-    '#tree' => true,
+    '#type' => 'markup' ,
+    '#markup' => '<div style="margin-top:10px"><span id="add-pqs" class="button">Add</span></div>' ,
+    '#tree' => true ,
     '#suffix' => '</div>'
   );
 
@@ -884,61 +871,65 @@ function itg_survey_pqs_generatetokens() {
  * @param string $token
  */
 function itg_survey_pqs_associate_with_story($token) {
-  $token_arr = explode(':', $token);
-  $nid = rtrim($token_arr[2], ']');
+  $token_arr = explode(':' , $token);
+  $nid = rtrim($token_arr[2] , ']');
   $type = strtolower($token_arr[1]);
-  if(function_exists('itg_common_get_node_type')) {
+
+  if (function_exists('itg_common_get_node_type')) {
     $exist_type = itg_common_get_node_type($nid);
   }
   if ($type == 'survey' && $exist_type == 'survey') {
-    module_load_include('inc', 'itg_survey', 'includes/itg_survey_form');
-    $form = drupal_get_form('itg_survey_survey_form', $nid);
+    module_load_include('inc' , 'itg_survey' , 'includes/itg_survey_form');
+    $form = drupal_get_form('itg_survey_survey_form' , $nid);
   }
   if ($type == 'quiz' && $exist_type == 'quiz') {
-    module_load_include('inc', 'itg_quiz', 'includes/itg_quiz_form');
-    $form = drupal_get_form('itg_quiz_quiz_form', $nid);
+    module_load_include('inc' , 'itg_quiz' , 'includes/itg_quiz_form');
+    $form = drupal_get_form('itg_quiz_quiz_form' , $nid);
   }
   print drupal_render($form);
 }
 
+/**
+ * itg_survey_pqs_associate_poll_with_story().
+ * @param int $nid
+ */
 function itg_survey_pqs_associate_poll_with_story($nid) {
 
   $node = node_load($nid);
-  if(!empty($node->nid) && $node->type == 'poll') {
-  $poll_banner_image = '';
-  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
-    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
-  }
-  else {
+  if (!empty($node->nid) && $node->type == 'poll') {
     $poll_banner_image = '';
-  }
-
-  $poll_image_exist_class = '';
-
-  foreach ($node->field_poll_answer['und'] as $row) {
-    $item_id[] = $row['value']; // fieldcollection id
-  }
-// instant or after complete
-
-  $fieldcollect = entity_load('field_collection_item', $item_id);
-  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
-    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
-    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
-    if (isset($poll_answer_image) && $poll_answer_image > 0) {
-      $poll_image_exist_class = 'poll-option-image';
+    if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+      $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_image_exist_class = '';
+      $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="" />';
     }
-  }
 
+    $poll_image_exist_class = '';
 
-  $polls_info['poll_banner_image'] = $poll_banner_image;
-  $polls_info['nid'] = $nid;
-  $polls_info['title'] = $node->title;
-  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
-  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
-  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+    foreach ($node->field_poll_answer['und'] as $row) {
+      $item_id[] = $row['value']; // fieldcollection id
+    }
+// instant or after complete
+
+    $fieldcollect = entity_load('field_collection_item' , $item_id);
+    if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+      $temp_ent = array_shift(array_slice($fieldcollect , 0 , 1));
+      $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+      if (isset($poll_answer_image) && $poll_answer_image > 0) {
+        $poll_image_exist_class = 'poll-option-image';
+      }
+      else {
+        $poll_image_exist_class = '';
+      }
+    }
+
+    $polls_info['poll_banner_image'] = $poll_banner_image;
+    $polls_info['nid'] = $nid;
+    $polls_info['title'] = $node->title;
+    $polls_info['updated'] = t('Updated: ') . date('M d Y H:i' , $node->changed);
+    $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+    return theme('itg_poll_homepage_forms' , array('data' => $polls_info));
   }
 }
 
@@ -947,7 +938,7 @@ function itg_survey_pqs_associate_poll_with_story($nid) {
  * @param array $form
  * @param array $form_state
  */
-function itg_survey_survey_form_validate($form, &$form_state) {
+function itg_survey_survey_form_validate($form , &$form_state) {
   global $user;
   $form_detail = $form_state['values'];
 
@@ -960,11 +951,11 @@ function itg_survey_survey_form_validate($form, &$form_state) {
 
 
   if (isset($_COOKIE[$cookie_name])) {
-    form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
+    form_set_error('answer_option' , t('Sorry! You can not proceed, you have already taken this survey!'));
   }
   else {
 
-    $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+    $btn_num_arr = explode('_' , $form_state['clicked_button']['#name']);
     $num = $btn_num_arr[1];
 
     $question_total = $form_detail['question_total'];
@@ -991,7 +982,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
             }
           }
           if (!$ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -1000,7 +991,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
       if ($form_detail['question_type' . $ques_num] === 'radios') {
         if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           if (empty($form_detail['answer_option' . $ques_num])) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -1017,7 +1008,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
             }
           }
           if (!$rating_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -1032,7 +1023,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
             }
           }
           if (!$txt_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -1045,12 +1036,12 @@ function itg_survey_survey_form_validate($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
-function itg_survey_survey_form_submit($form, &$form_state) {
+function itg_survey_survey_form_submit($form , &$form_state) {
   global $user;
 
   //Form variable
   $form_detail = $form_state['values'];
-  $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
+  $btn_num_arr = explode('_' , $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
   $question_total = $form_detail['question_total'];
   $question_format = $form_detail['question_format'];
@@ -1086,20 +1077,20 @@ function itg_survey_survey_form_submit($form, &$form_state) {
       // Insert for radio button type answer
       if ($form_state['values']['question_type' . $ques_num] == 'radios') {
 
-       db_insert('itg_survey_detail')
+        db_insert('itg_survey_detail')
             ->fields(array(
-              'nid' => $form_state['values']['nid'],
-              'uid' => $user->uid,
-              'ques_id' => $form_state['values']['question_id' . $ques_num],
-              'question' => $form_state['values']['question' . $ques_num],
-              'answer' => strtolower($form_state['values']['answer_option' . $ques_num]),
-              'ans_type' => $form_state['values']['question_type' . $ques_num],
-              'user_type' => $user_type,
-              'page_url' => $form_state['values']['survey_url'],
-              'survey_title' => $form_state['values']['survey_title'],
-              'survey_key' => $_SESSION['survey_unique_key'],
-              'survey_info' => 0,
-              'created' => time(),
+              'nid' => $form_state['values']['nid'] ,
+              'uid' => $user->uid ,
+              'ques_id' => $form_state['values']['question_id' . $ques_num] ,
+              'question' => $form_state['values']['question' . $ques_num] ,
+              'answer' => strtolower($form_state['values']['answer_option' . $ques_num]) ,
+              'ans_type' => $form_state['values']['question_type' . $ques_num] ,
+              'user_type' => $user_type ,
+              'page_url' => $form_state['values']['survey_url'] ,
+              'survey_title' => $form_state['values']['survey_title'] ,
+              'survey_key' => $_SESSION['survey_unique_key'] ,
+              'survey_info' => 0 ,
+              'created' => time() ,
             ))
             ->execute();
       }
@@ -1111,18 +1102,18 @@ function itg_survey_survey_form_submit($form, &$form_state) {
           if ($value) {
             db_insert('itg_survey_detail')
                 ->fields(array(
-                  'nid' => $form_state['values']['nid'],
-                  'uid' => $user->uid,
-                  'ques_id' => $form_state['values']['question_id' . $ques_num],
-                  'question' => $form_state['values']['question' . $ques_num],
-                  'answer' => strtolower($value),
-                  'ans_type' => $form_state['values']['question_type' . $ques_num],
-                  'user_type' => $user_type,
-                  'page_url' => $form_state['values']['survey_url'],
-                  'survey_title' => $form_state['values']['survey_title'],
-                  'survey_key' => $_SESSION['survey_unique_key'],
-                  'survey_info' => 0,
-                  'created' => time(),
+                  'nid' => $form_state['values']['nid'] ,
+                  'uid' => $user->uid ,
+                  'ques_id' => $form_state['values']['question_id' . $ques_num] ,
+                  'question' => $form_state['values']['question' . $ques_num] ,
+                  'answer' => strtolower($value) ,
+                  'ans_type' => $form_state['values']['question_type' . $ques_num] ,
+                  'user_type' => $user_type ,
+                  'page_url' => $form_state['values']['survey_url'] ,
+                  'survey_title' => $form_state['values']['survey_title'] ,
+                  'survey_key' => $_SESSION['survey_unique_key'] ,
+                  'survey_info' => 0 ,
+                  'created' => time() ,
                 ))
                 ->execute();
           }
@@ -1136,18 +1127,18 @@ function itg_survey_survey_form_submit($form, &$form_state) {
           if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
             db_insert('itg_survey_detail')
                 ->fields(array(
-                  'nid' => $form_state['values']['nid'],
-                  'uid' => $user->uid,
-                  'ques_id' => $form_state['values']['question_id' . $ques_num],
-                  'question' => $form_state['values']['question' . $ques_num],
-                  'answer' => strtolower($form_detail['answer_option_name' . $ques_num . '_' . $text_field]),
-                  'ans_type' => $form_state['values']['question_type' . $ques_num],
-                  'user_type' => $user_type,
-                  'page_url' => $form_state['values']['survey_url'],
-                  'survey_title' => $form_state['values']['survey_title'],
-                  'survey_key' => $_SESSION['survey_unique_key'],
-                  'survey_info' => 0,
-                  'created' => time(),
+                  'nid' => $form_state['values']['nid'] ,
+                  'uid' => $user->uid ,
+                  'ques_id' => $form_state['values']['question_id' . $ques_num] ,
+                  'question' => $form_state['values']['question' . $ques_num] ,
+                  'answer' => strtolower($form_detail['answer_option_name' . $ques_num . '_' . $text_field]) ,
+                  'ans_type' => $form_state['values']['question_type' . $ques_num] ,
+                  'user_type' => $user_type ,
+                  'page_url' => $form_state['values']['survey_url'] ,
+                  'survey_title' => $form_state['values']['survey_title'] ,
+                  'survey_key' => $_SESSION['survey_unique_key'] ,
+                  'survey_info' => 0 ,
+                  'created' => time() ,
                 ))
                 ->execute();
           }
@@ -1161,33 +1152,32 @@ function itg_survey_survey_form_submit($form, &$form_state) {
           for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
             if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] == 1) {
               $ans_data = 0;
-                if(!empty($form_state['values']['answer_option0_0'])) {
-                  
-                  foreach ($form_state['values']['answer_option0_0'] as $ans_data) {
-                      if($ans_data != 0) {
-                           $rating = $ans_data;
-                      }
-                     
+              if (!empty($form_state['values']['answer_option0_0'])) {
+
+                foreach ($form_state['values']['answer_option0_0'] as $ans_data) {
+                  if ($ans_data != 0) {
+                    $rating = $ans_data;
                   }
+                }
               }
-           
+
               db_insert('itg_survey_detail')
-                ->fields(array(
-                  'nid' => $form_state['values']['nid'],
-                  'uid' => $user->uid,
-                  'ques_id' => $form_state['values']['question_id' . $ques_num],
-                 'question' => $form_state['values']['question' . $ques_num],
-                 'answer' => $form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $ques_num],
-                 'ans_type' => $form_state['values']['question_type' . $ques_num],
-                  'user_type' => $user_type,
-                   'page_url' => $form_state['values']['survey_url'],
-                   'survey_title' => $form_state['values']['survey_title'],
-                   'survey_key' => $_SESSION['survey_unique_key'],
-                   'rating_value' => $rating,
-                   'survey_info' => 0,
-                  'created' => time(),
-                 ))
-                 ->execute();
+                  ->fields(array(
+                    'nid' => $form_state['values']['nid'] ,
+                    'uid' => $user->uid ,
+                    'ques_id' => $form_state['values']['question_id' . $ques_num] ,
+                    'question' => $form_state['values']['question' . $ques_num] ,
+                    'answer' => $form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $ques_num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $ques_num] ,
+                    'ans_type' => $form_state['values']['question_type' . $ques_num] ,
+                    'user_type' => $user_type ,
+                    'page_url' => $form_state['values']['survey_url'] ,
+                    'survey_title' => $form_state['values']['survey_title'] ,
+                    'survey_key' => $_SESSION['survey_unique_key'] ,
+                    'rating_value' => $rating ,
+                    'survey_info' => 0 ,
+                    'created' => time() ,
+                  ))
+                  ->execute();
             }
           }
         }
@@ -1209,20 +1199,20 @@ function itg_survey_survey_form_submit($form, &$form_state) {
     // Insert in to survey user table
     db_insert('itg_survey_user')
         ->fields(array(
-          'nid' => $form_state['values']['nid'],
-          'uid' => $user->uid,
-          'user_type' => $user_type,
-          'page_url' => $_GET['q'],
-          'created' => time(),
+          'nid' => $form_state['values']['nid'] ,
+          'uid' => $user->uid ,
+          'user_type' => $user_type ,
+          'page_url' => $_GET['q'] ,
+          'created' => time() ,
         ))
         ->execute();
 
     // Update table and set survey_info(status) = 1(means this survey has been completed by a user) 
     db_update('itg_survey_detail')
         ->fields(array(
-          'survey_info' => 1,
+          'survey_info' => 1 ,
         ))
-        ->condition('survey_key', $_SESSION['survey_unique_key'], '=')
+        ->condition('survey_key' , $_SESSION['survey_unique_key'] , '=')
         ->execute();
 
     unset($_SESSION['survey_unique_key']);
@@ -1230,7 +1220,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
     // Call loyalty & rewards function to save points for a user
     if (function_exists('itg_loyalty_reward_earnpoint')) {
       if ($user->uid) {
-        //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+        itg_loyalty_reward_earnpoint($form_state['values']['nid'] , 'survey' , $user->uid);
       }
     }
   }
@@ -1252,13 +1242,11 @@ function itg_survey_survey_form_submit($form, &$form_state) {
  * @param array $form_state
  * @return array
  */
-function survey_form_ajax_handler(&$form, &$form_state) {
-   
-    
+function survey_form_ajax_handler(&$form , &$form_state) {
   $commands = array();
-  $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
+  $commands[] = ajax_command_replace('#messages' , '<div id="messages">' . theme('status_messages') . '</div>');
   return array(
-    '#type' => 'ajax',
+    '#type' => 'ajax' ,
     '#commands' => $commands);
 }
 
@@ -1267,10 +1255,10 @@ function survey_form_ajax_handler(&$form, &$form_state) {
  * @param type $nid
  */
 function itg_survey_get_publish_status($nid) {
-  $query = db_select('field_data_field_supp_publish', 'p')
-    ->fields('p', array('field_supp_publish_value'))
-    ->condition('p.entity_id', $nid, '=')
-    ->execute();
+  $query = db_select('field_data_field_supp_publish' , 'p')
+      ->fields('p' , array('field_supp_publish_value'))
+      ->condition('p.entity_id' , $nid , '=')
+      ->execute();
   $result = $query->fetchField();
   if ($result == 0 || $result == '') {
     $result = 0;

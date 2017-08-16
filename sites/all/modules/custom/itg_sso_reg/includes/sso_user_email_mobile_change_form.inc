@@ -11,25 +11,12 @@
  * @return type 
  */
 function itg_sso_user_email_form($form, &$form_state) {
-
+  $arg = arg();
   if (!isset($form_state['stage']))
     $form_state['stage'] = 'step_1';
-  $form = array();
-  //  if (user_is_anonymous()) {
-//    return drupal_access_denied();
-//  }
-  
-
+    $form = array();
   // get unique id form argument
-  $unique_id = base64_decode(arg(2));
-  // make configuration for js file
-  global $user, $base_url;
-  $settings = array();
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
-  drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_change_email.js');
-
+  $unique_id = base64_decode($arg[2]);
   // check form stage
   switch ($form_state['stage']) {
 
@@ -63,12 +50,12 @@ function itg_sso_user_email_form($form, &$form_state) {
  * @return type 
  */
 function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
-
+  $arg = arg();
   $values = isset($form_state['multistep_values']['step_1']) ? $form_state['multistep_values']['step_1'] : array();
-  
-  $form['heading'] = array(
-    '#markup' => '<h3>' . drupal_set_title('Change Email/Mobile') . '</h3>',
-  );
+ 
+  $form['#prefix'] = '<div id="sso_email_mobile_form"><h3>'.drupal_set_title('Change Email/Mobile').'</h3>';
+  $form['#suffix'] = '</div>';
+  $form['#attributes'] = array('autocomplete' => 'off');
   
   $form['emobile'] = array(
     '#title' => t('Email/Mobile'),
@@ -91,7 +78,7 @@ function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
   $form['domain_info_url'] = array(
     '#type' => 'hidden',
     '#title' => t(''),
-    '#value' => base64_decode(arg(3)),
+    '#value' => $arg[3],
   );
 
 
@@ -210,6 +197,17 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
       if ($form_state['triggering_element']['#value'] != 'Back') {
 
         if (is_numeric($emobile)) {
+          if(strpos($account->mail, '@twitter.com') !== false || strpos($account->mail, '@facebook.com') !== false) {
+            $edit = array(
+              'field_mobile_number' => array(
+                LANGUAGE_NONE => array(
+                  0 => array(
+                    'value' => $emobile
+                  )
+                )
+              )
+            );
+          } else {
           //if (is_numeric($unique_id)) {
             $edit = array(
               'name' => $emobile,
@@ -221,6 +219,7 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
                 )
               )
             );
+          }
          // }
           /*else {
             $edit = array(
@@ -355,7 +354,7 @@ function itg_sso_user_email_form_validate($form, &$form_state) {
  */
 function step_1_validate($form, &$form_state) {
   if (!$form_state['values']['emobile']) {
-    form_set_error('emobile', 'Please Enter Mobile/Email');
+    form_set_error('emobile', 'Please Enter Mobile/Email.');
   }
 
 
@@ -365,12 +364,15 @@ function step_1_validate($form, &$form_state) {
   if (is_numeric($emobile)) {
     if (function_exists(itg_sso_user_mobile_check)) {
       $get_user_check_mobile = itg_sso_user_mobile_check($emobile);
-      if (!empty($get_user_check_mobile)) {
-        form_set_error('emobile', t("Mobile No. Already Exist!"));
-      }
-      if (!preg_match('/^\d{10}$/', $emobile)) {
-        form_set_error('emobile', t("Enter valid Mobile Number!"));
-      }
+    }
+    if (function_exists(itg_social_user_mobile_check)) {
+      $get_user_social_mobile = itg_social_user_mobile_check($emobile);
+    }
+    if (!empty($get_user_check_mobile) || !empty($get_user_social_mobile)) {
+      form_set_error('emobile', t("Mobile No. Already Exist."));
+    }
+    if (!preg_match('/^\d{10}$/', $emobile)) {
+      form_set_error('emobile', t("Enter valid Mobile Number."));
     }
   }
   else {
@@ -383,7 +385,13 @@ function step_1_validate($form, &$form_state) {
       if (function_exists(itg_sso_user_email_check)) {
         $get_user_check_email = itg_sso_user_email_check($emobile);
         if (!empty($get_user_check_email)) {
-          form_set_error('emobile', t("Email Already Exist!"));
+          form_set_error('emobile', t("Email Already Exist."));
+        }
+      }
+      if (function_exists(itg_sso_user_email_domain)) {
+        $get_user_check_email = itg_sso_user_email_domain($emobile);
+        if (!empty($get_user_check_email)) {
+          form_set_error('emobile', t("Email Already Exist."));
         }
       }
     }
@@ -411,28 +419,13 @@ function step_2_validate($form, &$form_state) {
 
   if (empty($otp)) {
 
-    form_set_error('otp', t("Enter OTP!"));
+    form_set_error('otp', t("Please Enter OTP."));
   }
 
   if ($otp_match != $otp) {
 
-    form_set_error('otp', t("Enter valid OTP!"));
+    form_set_error('otp', t("Enter valid OTP."));
   }
 }
 
-/**
- * Implements itg_sso_user_email_complete().
- */
-function itg_sso_user_email_complete() {
-  if (user_is_anonymous()) {
-    return drupal_access_denied();
-  }
-  else {
-    $form['email_success'] = array(
-      '#prefix' => '<div class="email-success">',
-      '#markup' => 'Your Email/Mobile has been changed successfully!</div>',
-    );
 
-    return $form;
-  }
-}

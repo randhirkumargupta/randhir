@@ -221,7 +221,8 @@ $databases['default']['default'] = array(
 );
 
 $databases['default']['master'] = array(
-  'database' => 'indiatoday',
+  //'database' => 'indiatoday_migrate',
+  'database' => 'itg_migrated_27july',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
   'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
@@ -231,7 +232,8 @@ $databases['default']['master'] = array(
 );
 
 $databases['default']['autoslave'] = array(
-  'database' => 'indiatoday',
+  //'database' => 'indiatoday_migrate',
+  'database' => 'itg_migrated_27july',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
   'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
@@ -240,9 +242,20 @@ $databases['default']['autoslave'] = array(
   'prefix' => '',
 );
 
+$databases['sso_db']['default'] = array(
+  'database' => 'IndiaToday_sso',
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '',
+      'driver' => 'mysql',
+      'prefix' => '',
+);
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
+//$conf['cache_default_class'] = 'AutoslaveCache';
+//$conf['autoslave_cache_default_class'] = 'ConsistentCache';
 /*
 $databases = array (
   'default' => 
@@ -647,3 +660,5 @@ if (file_exists($local_settings)) {
 }
 
 $conf['image_allow_insecure_derivatives'] = TRUE;
+//$conf['cache_default_class'] = 'ConsistentCache';
+//$conf['consistent_cache_default_safe'] = FALSE;

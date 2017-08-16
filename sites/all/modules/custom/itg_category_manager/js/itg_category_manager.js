@@ -14,8 +14,7 @@
         $('.term-spinner').hide();
       }
 
-      if (jQuery('#edit-parent-hierarchical-select-selects-0').val() != '0')
-      {
+      if (jQuery('#edit-parent-hierarchical-select-selects-0').val() != '0') {
         jQuery('#edit-field-set-as-featured-cate').hide();
       }
 
@@ -65,12 +64,17 @@
           $('#edit-field-set-as-featured-cate-und-yes').prop('checked', false);
           $('#edit-field-set-as-featured-cate').hide();
           $('#edit-field-cm-select-type-und').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-special').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-section').attr('disabled', true);
+          $('#edit-field-cm-select-template-type-und-none').attr('disabled', true);
           $('#edit-field-cm-select-type-und').removeAttr('required');
         } else {
           jQuery('#edit-field-set-as-featured-cate').show();
           $('#edit-field-cm-select-type-und').attr('disabled', false);
           $('#edit-field-cm-select-type-und').attr('required', 'required');
-
+$('#edit-field-cm-select-template-type-und-special').attr('disabled', false);
+          $('#edit-field-cm-select-template-type-und-section').attr('disabled', false);
+          $('#edit-field-cm-select-template-type-und-none').attr('disabled', false);
         }
       })
 
@@ -134,15 +138,20 @@
       })
       var getdec = jQuery('.text-format-wrapper').html();
       getdec = '<div class="text-format-wrapper" >' + getdec + '</div>';
+      var edit_field_time_period = jQuery('#edit-field-time-period').html();
+      edit_field_time_period = '<div class="field-type-list-text field-name-field-time-period field-widget-options-buttons form-wrapper" id="edit-field-time-period">' + edit_field_time_period + '</div>';
       var getsechedulehtml = jQuery('#edit-field-user-name').html();
-      getsechedulehtml = getdec + '<div class="field-type-text field-name-field-user-name field-widget-text-textfield form-wrapper" id="edit-field-user-name">' + getsechedulehtml + '</div>';
+      getsechedulehtml = edit_field_time_period+getdec + '<div class="field-type-text field-name-field-user-name field-widget-text-textfield form-wrapper" id="edit-field-user-name">' + getsechedulehtml + '</div>';
       jQuery('#edit-field-user-name').remove();
       jQuery('.text-format-wrapper').remove();
+        jQuery('#edit-field-time-period').remove();
       jQuery("#edit-field-user-city").after(getsechedulehtml);
+      
+      
+       
+    
+     // jQuery("#edit-field-program-timing-in-days").before(edit_field_time_period);
 
-      // jQuery('.setting-div').prepend(getsechedulehtml);
-
-      //jQuery('.setting-div').prepend(getsechedulehtml);
       // Pager settings
       var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var d = new Date();

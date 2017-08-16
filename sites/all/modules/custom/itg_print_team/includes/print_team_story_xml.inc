@@ -40,6 +40,7 @@ function itg_story_xml_submit($form, &$form_state) {
       mkdir($feed_dir, 0777, TRUE);
     }
     $xml = "<root>";
+    
     foreach ($views_bulk_operations as $nid) {
       if (!empty($nid) && $nid>0) {
         $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');
@@ -47,12 +48,14 @@ function itg_story_xml_submit($form, &$form_state) {
     }
     $xml .= "</root>";
     $filename = 'story_' . $timestamp . '.xml';
-    file_save_data($xml, "$feed_dir/" . $filename);
-    $realpath = $base_url . "/sites/default/files/story/" . $filename;
+   $file= file_save_data($xml, "$feed_dir" . $filename);
+   $file_uri = file_create_url($file->uri);
+    
   }
   
   $options_download['attributes']['download'] = '';
-  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $realpath, $options_download);
+   $options_download['attributes']['target'] = '_blank';
+  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $file_uri, $options_download);
   drupal_set_message($link_val, 'status');
 }
 

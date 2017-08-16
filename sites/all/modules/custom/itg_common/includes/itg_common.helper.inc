@@ -6,30 +6,30 @@
  * 
  */
 
-
 /**
  * Function for get all role.
  * @return $itg_role_array
  */
 function custom_user_roles() {
   $role_cached = cache_get('itg_all_role', 'cache');
-  
-  if (!empty($role_cached->data)) {    
+
+  if (!empty($role_cached->data)) {
     $itg_role_array = $role_cached->data;
-  } else {    
-    $query = db_select('role', 'r');  
+  }
+  else {
+    $query = db_select('role', 'r');
     $query->fields('r', array('rid', 'name'));
     $query->orderBy('weight');
     $query->orderBy('name');
-    
+
     $result = $query->execute();
 
     $roles = array();
-    
+
     foreach ($result as $role) {
-     $itg_role_array[$role->name] = $role->rid;
+      $itg_role_array[$role->name] = $role->rid;
     }
-    
+
     cache_set('itg_all_role', $itg_role_array, 'cache');
   }
 
@@ -68,8 +68,15 @@ define('SOCIAL_MEDIA', $role_array['Social Media']);
 define('MARKETING_MANAGER', $role_array['Marketing Manager']);
 define('FRONT_USER', $role_array['Front User']);
 define('KNOWLEDGE_CENTRE', $role_array['Knowledge Centre']);
+define('ADS_MANAGER', $role_array['Ads Manager']);
+define('SYNDICATION', $role_array['Syndication']);
+define('MOBILE_VAS', $role_array['Mobile VAS']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
 define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
+define('ITG_IMAGE_FOLDER', 'indiatoday/images/');
+define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
+define('ITG_NEWSLETTER_FROMNAME', 'India Today');
+
 
 
 /**
@@ -89,7 +96,6 @@ define('ISSUE_LARGE_IMAGE_WIDTH', 300);
 define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
 define('ISSUE_SMALL_WIDTH', 210);
 define('ISSUE_SMALL_HEIGHT', 145);
-define('VIDEO_PROPERTY', 'indiatoday_local');
 
 /**
  * value define for Ad.
@@ -100,7 +106,9 @@ define('ADS_FOOTER', 'ads_super_banner_bottomnav728x90');
 define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 
 define('ITGDATE', 'd/m/Y');
+define('ITG_INDIATODAY_SITENAME_XML', 'India Today');
 define('FRONT_THEME_NAME', 'itg');
+define('AMP_THEME_NAME', 'amptheme');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 //define('CATEGORY_MANAGMENT', 4);
@@ -112,32 +120,27 @@ define('REPORTER_TID', variable_get('reporter_tid'));
 define('TAG_ID', 1);
 define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
 define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
-
+define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 
-define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
+define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name' , 'sitemapxml_other'));
 
+
+define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
+define('FRONT_URL_VIDEO', 'http://uat-it.indiatodayonline.in');
 define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
 define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 
-
-
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
 //define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
 //define('FRONT_URL', 'http://localhost/itg-cms');
 //define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
-
-
-
-
 // set comment config in variable
 if (function_exists('global_comment_last_record')) {
   variable_set('COMMENT_CONFIG', global_comment_last_record());
 }
-
-
 
 /**
  * Function for debugging arrays and objects.
@@ -155,4 +158,3 @@ function pr($arg) {
   print_r($arg);
   print '</pre>';
 }
-

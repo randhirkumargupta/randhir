@@ -1,8 +1,8 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file
+ * js file contains the functions
  */
+
 var session = 1;
 var firstTime = 1;
 var genrateFlag = 1;
@@ -24,11 +24,13 @@ var descriptionFlag = 1;
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
+            jQuery('#reset-date-button-astro').hide();
             jQuery.fn.mobile_astro_custom_js = function () {
                 $("#widget-ajex-loader").css("display", "block");
+                $("#edit-field-service-association-title-und").addClass("itg-disabled");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
-            
+
             // hide vertical-tabs
             jQuery('.vertical-tabs').hide();
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
@@ -192,6 +194,9 @@ var descriptionFlag = 1;
             var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
             if (service_asso != '_none' && service_asso > 1) {
                 $('#edit-field-service-content').show();
+                if (astroFlag == 1) {
+                    jQuery('#reset-date-button-astro').show();
+                }
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -269,7 +274,7 @@ var descriptionFlag = 1;
                 firstTime++;
             }
 
-            jQuery('#reset-date-button').on("click", function (event) {
+            jQuery('#reset-date-button, #reset-date-button-astro').on("click", function (event) {
                 event.preventDefault();
                 location.reload(true);
             });
@@ -689,6 +694,8 @@ var descriptionFlag = 1;
                 });
             });
 
+            // hide astro first image
+            jQuery(".itg-astro-image img").first().css("display", "none");
 
             // Time filter ajax
             jQuery('document').ready(function () {
@@ -726,34 +733,34 @@ function days_in_month(month, year) {
 }
 
 // new code
-    if (dailymotionFlag == 1) {
-        jQuery('document').ready(function () {
-            jQuery('.used-unused-select').live('change', function () {
-                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-                var select_value = jQuery(this).val();
-                if (select_value == 'used') {
-                    jQuery('.time-filter').show();
-                    jQuery('.time-filter-select').val('-all-');
-                } else {
-                    jQuery('.time-filter').hide();
+if (dailymotionFlag == 1) {
+    jQuery('document').ready(function () {
+        jQuery('.used-unused-select').live('change', function () {
+            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+            var select_value = jQuery(this).val();
+            if (select_value == 'used') {
+                jQuery('.time-filter').show();
+                jQuery('.time-filter-select').val('-all-');
+            } else {
+                jQuery('.time-filter').hide();
+            }
+            var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
+            jQuery.ajax({
+                url: base_url + '/dailymotion-ftp-videos-post',
+                type: 'post',
+                data: {'case': select_value},
+                success: function (data) {
+                    jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                    jQuery('.video-options-wrapper').html(data);
+
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
                 }
-                var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
-                jQuery.ajax({
-                    url: base_url + '/dailymotion-ftp-videos-post',
-                    type: 'post',
-                    data: {'case': select_value},
-                    success: function (data) {
-                        jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-                        jQuery('.video-options-wrapper').html(data);
-
-                    },
-                    error: function (xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
-                    }
-                });
-
             });
+
         });
-        dailymotionFlag++;
-    }
+    });
+    dailymotionFlag++;
+}

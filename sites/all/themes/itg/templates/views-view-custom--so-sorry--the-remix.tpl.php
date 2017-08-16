@@ -14,6 +14,6 @@ $remix_data = $rows[0];
     </a>
   <?php endif; ?>
 </div>
-<div class="title">
-  <?php print l(mb_strimwidth($remix_data['title'], 0, 45, ".."), $base_url . '/' . "sosorry/" . $remix_data['nid'] . ""); ?>
+<div class="title"  title="<?php print strip_tags($remix_data['title']) ; ?>">
+  <?php print l(mb_strimwidth($remix_data['title'], 0, 45, ".."), $base_url . '/' . "sosorry/" . $remix_data['nid'] . "" , array('html' => TRUE)); ?>
 </div>

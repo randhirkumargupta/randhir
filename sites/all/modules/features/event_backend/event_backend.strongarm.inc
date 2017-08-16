@@ -139,22 +139,22 @@ function event_backend_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '16',
+          'weight' => '21',
         ),
         'title' => array(
           'weight' => '33',
         ),
         'path' => array(
-          'weight' => '17',
+          'weight' => '22',
         ),
         'additional_settings' => array(
-          'weight' => '18',
+          'weight' => '23',
         ),
         'domain' => array(
           'weight' => '9',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '12',
         ),
       ),
       'display' => array(
@@ -294,7 +294,7 @@ function event_backend_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_event_backend_pattern';
-  $strongarm->value = 'event/[node:title]';
+  $strongarm->value = '[node:title]/[current-date:itg_year]';
   $export['pathauto_node_event_backend_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -317,6 +317,13 @@ function event_backend_strongarm() {
   $strongarm->name = 'pathauto_taxonomy_term_sponsor_pattern';
   $strongarm->value = '';
   $export['pathauto_taxonomy_term_sponsor_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_ticket_type_master_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_ticket_type_master_pattern'] = $strongarm;
 
   return $export;
 }

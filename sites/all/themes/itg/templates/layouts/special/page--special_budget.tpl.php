@@ -6,7 +6,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-//$preview = $widget_data['preview'];
 // configuration for social sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-2']['block_title']);
@@ -65,9 +64,9 @@ if (!empty($device[0])) {
                     <?php endif; ?>
                 </div>
               <?php endif; ?>
-              <!--  
+              
               <?php if ($secondary_menu): ?>
-                            <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
+                            
                 <?php
                 print theme('links__system_secondary_menu', array(
                   'links' => $secondary_menu,
@@ -81,9 +80,9 @@ if (!empty($device[0])) {
                   ),
                 ));
                 ?>
-                            </nav>
+                           
               <?php endif; ?>
-              -->
+             
               <?php print render($page['header']); ?>
 
           </section>
@@ -122,7 +121,7 @@ if (!empty($device[0])) {
 
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-            <?php //print render($page['content']);   ?>
+           
             <?php
             $itg_class = 'itg-admin';
             if ($theme != 'itgadmin') {
@@ -353,9 +352,19 @@ if (!empty($device[0])) {
                                         </div>
                                       <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-6"><?php $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
-                                    print render($block['content']);
-                                      ?></div>
+                                      <div class="data-holder" id="itg-block-6">
+                                        <?php 
+                                        //$block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
+                                    //print render($block['content']);
+                                      ?>
+                                      <?php
+                                                if (isset($widget_data['itg-block-6']['widget'])) {
+                                                  print $widget_data['itg-block-6']['widget']; 
+                                                } else{
+                                                  print '<div class="widget-placeholder"><span>'.t('Live Chat').'</span></div>';
+                                                } 
+                                              ?>
+                                      </div>
                                   </div>             
                               </div>
                           </div>
@@ -389,7 +398,7 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-7" widget-style="india-inc-on-budget">
+                                      <div class="data-holder" id="itg-block-7" data-widget-style="india-inc-on-budget">
                                         <?php
                                           if (isset($widget_data['itg-block-7']['widget'])) {
                                             print $widget_data['itg-block-7']['widget']; 
@@ -422,7 +431,7 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-8" widget-style="budget-decoded">
+                                      <div class="data-holder" id="itg-block-8" data-widget-style="budget-decoded">
                                         <?php
                                           if (isset($widget_data['itg-block-8']['widget'])) {
                                             print $widget_data['itg-block-8']['widget']; 
@@ -455,12 +464,12 @@ if (!empty($device[0])) {
                                         </div>
   <?php } ?>  
 
-                                      <div class="data-holder" id="itg-block-9" widget-style="budget-reactions">
+                                      <div class="data-holder" id="itg-block-9" data-widget-style="budget-reactions">
                                         <?php
                                           if (isset($widget_data['itg-block-9']['widget'])) {
                                             print $widget_data['itg-block-9']['widget']; 
                                           } else{
-                                            print '<div class="widget-placeholder"><span>'.t('Budget reactions').'</span></div>';
+                                            print '<div class="widget-placeholder"><span>'.t('Reactions').'</span></div>';
                                           } 
                                         ?>
                                       </div>

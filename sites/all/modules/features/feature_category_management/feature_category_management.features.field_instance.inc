@@ -120,7 +120,7 @@ function feature_category_management_field_default_field_instances() {
   $field_instances['taxonomy_term-category_management-field_cm_category_banner'] = array(
     'bundle' => 'category_management',
     'deleted' => 0,
-    'description' => 'Image Size (43 x 43)',
+    'description' => 'Image Size (650x45)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -607,12 +607,49 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_old_content_source_id'.
+  $field_instances['taxonomy_term-category_management-field_old_content_source_id'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_old_content_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_program_timing_in_days'.
   $field_instances['taxonomy_term-category_management-field_program_timing_in_days'] = array(
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Ex.(Monday To Friday)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -629,6 +666,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -716,7 +758,7 @@ function feature_category_management_field_default_field_instances() {
   $field_instances['taxonomy_term-category_management-field_sponser_logo'] = array(
     'bundle' => 'category_management',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (40x35)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -756,6 +798,7 @@ function feature_category_management_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -827,7 +870,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => '00:00',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -844,6 +887,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -864,7 +912,7 @@ function feature_category_management_field_default_field_instances() {
     'bundle' => 'category_management',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'schedule duration',
+    'description' => '1 Hrs,2Hrs...',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -881,6 +929,11 @@ function feature_category_management_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -898,6 +951,8 @@ function feature_category_management_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
+  t('00:00');
+  t('1 Hrs,2Hrs...');
   t('App description');
   t('Category Banner Colour');
   t('Category Banner Icon');
@@ -905,13 +960,15 @@ function feature_category_management_field_default_field_instances() {
   t('Content Type');
   t('Description');
   t('Display Title');
+  t('Ex.(Monday To Friday)');
   t('Hide Category form home');
   t('Hide Category from search');
   t('If you checked this option, "No Follow" link will be embedded in category URL. ');
   t('If you checked this option, category name will not appear on front end navigation.');
   t('If you checked this option, category will be marked as sponsored and will appear in the category listing page with special flag "Sponsored". ');
   t('If you checked this option, then this category would not be able to search in google search.');
-  t('Image Size (43 x 43)');
+  t('Image Size (40x35)');
+  t('Image Size (650x45)');
   t('Issue free');
   t('No Follow');
   t('Please enter display title, it will appear on the front end if user has entered.');
@@ -927,9 +984,9 @@ function feature_category_management_field_default_field_instances() {
   t('Select template');
   t('Select template type');
   t('Set As Featured');
+  t('Source id');
   t('Sponsored Category');
   t('Time Period');
-  t('schedule duration');
 
   return $field_instances;
 }

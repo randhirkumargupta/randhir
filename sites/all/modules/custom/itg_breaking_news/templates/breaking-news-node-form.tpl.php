@@ -13,8 +13,11 @@
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
+  <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['category_holder']); ?>
+
            </div>
 
 <div id="ContentDetails">
@@ -27,10 +30,11 @@
 
 
 <div id="DisplayOn">
-  <?php print drupal_render($form['field_display_on']); ?>
+  <?php print drupal_render($form['field_breaking_display_on']); ?>
   <?php print drupal_render($form['field_section']); ?>
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
+<?php print drupal_render($form['field_breaking_coverage_end_time']); ?>
 
 <div id="BrowseMedia" class='browse-media-file'>
   <h2 class="story-title">Browse Media</h2>
@@ -46,14 +50,14 @@
   <h2 class="highlight-title">Highlights</h2>
   <?php print drupal_render($form['field_story_highlights']); ?>
 </div>
+    <?php if(isset($form['akamai_timeout']) && !empty($form['akamai_timeout'])) { ?>
 
-<!--<div id="Relatedcontent">
-  <h2 class="story-title">Related content</h2>
-  <?php //print drupal_render($form['field_common_related_content']); ?>
-</div>-->
-
-
-<!--<h2 id="title-metatags" class="story-title"><?php //echo t('SEO Meta Tags'); ?></h2>-->
-
+  <div id="AkamaiSettings" class="itg-sidebar-form-section">
+    <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+       <div class="itg-form-class-akamai">
+        <?php print drupal_render($form['akamai_timeout']); ?>
+    </div>
+  </div>
+  <?php } ?>
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

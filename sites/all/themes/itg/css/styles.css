@@ -29,6 +29,127 @@
 /*mixin for transition animation*/
 /*mixin for listing with image*/
 /*mixin for pager*/
+/*------------------------------------*\
+    #Progress Bar
+\*------------------------------------*/
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 40px;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 40px;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 0 40px;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+.progress {
+  border: solid 1px #e5e5e5;
+  height: 44px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: right;
+  position: relative;
+}
+
+.progress span {
+  font-size: 30px;
+  line-height: 30px;
+  color: green;
+  display: inline-block;
+  padding: 6px 22px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  background-color: #a00606;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+}
+
+.progress-striped .progress-bar,
+.progress-bar-striped {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+  background-size: 40px 40px;
+}
+
+.progress.active .progress-bar,
+.progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+.progress-striped .progress-bar-success {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-info {
+  background-color: #5bc0de;
+}
+
+.progress-striped .progress-bar-info {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-warning {
+  background-color: #f0ad4e;
+}
+
+.progress-striped .progress-bar-warning {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-danger {
+  background-color: #d9534f;
+}
+
+.progress-striped .progress-bar-danger {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-animated {
+  animation: 1s linear 0s normal none infinite running progress-bar-stripes;
+}
+
+.bg-success {
+  background-color: #a00606;
+}
+
 /* Global CSS */
 * {
   box-sizing: border-box;
@@ -42,6 +163,7 @@ body {
 h1, h2, h3, h4 {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
+  word-wrap: break-word;
 }
 
 button {
@@ -88,9 +210,9 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snap-post ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul, #block-itg-front-end-common-latest-from-aajtak ul,
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snap-post ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-past-speaker-event-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .movie-layout-page ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-photo-block #related-video ul, #block-itg-front-end-common-related-video-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-video ul, .site-map ul, #block-itg-front-end-common-latest-from-aajtak ul,
 #block-itg-front-end-common-latest-from-pti ul,
-#block-itg-front-end-common-latest-from-businesstoday ul {
+#block-itg-front-end-common-latest-from-businesstoday ul, .page-state-election .key-candidate ul {
   list-style-type: none;
 }
 
@@ -125,7 +247,7 @@ img {
   margin: 0;
 }
 
-.mt-10, .page-user form .form-type-password, .page-user form .form-actions, #block-formblock-ask-an-expert .form-submit, .question-heading {
+.mt-10, .page-user form .form-type-password, .page-user form .form-actions, .page-signup form .form-type-password, .page-signup form .form-actions, #block-formblock-ask-an-expert .form-submit, .question-heading {
   margin-top: 10px;
 }
 
@@ -137,8 +259,12 @@ img {
   margin-left: 10px;
 }
 
-.mb-10, .page-user form h2, #block-formblock-ask-an-expert h2, #block-formblock-ask-an-expert .form-item, .question-heading, .answer-container {
+.mb-10, .page-user form h2, .page-signup form h2, #block-formblock-ask-an-expert h2, #block-formblock-ask-an-expert .form-item, .question-heading, .answer-container {
   margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }
 
 .mb-5, .answer-heading, .answer-container .form-type-checkbox, .answer-container .form-type-radio {
@@ -157,7 +283,7 @@ img {
   padding-top: 20px;
 }
 
-.pd-30, .page-user .login-wrapper {
+.pd-30, .page-user .login-wrapper, .page-signup .login-wrapper {
   padding: 30px;
 }
 
@@ -196,19 +322,19 @@ img {
   display: none;
 }
 
-.db, .tabs-primary li a, .page-user form label, .view-ask-an-expert .field-content, .answer-container > .form-item .form-item, .answer-container div.rating {
+.db, .tabs-primary li a, .page-user form label, .page-signup form label, .view-ask-an-expert .field-content, .answer-container > .form-item .form-item, .answer-container div.rating {
   display: block;
 }
 
-.dib, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, #block-itg-layout-manager-header-block .top-nav ul li, #block-itg-layout-manager-header-block .navigation .menu li a, .tabs-primary, .page-user form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
+.dib, .btn, .page-user form .form-submit, .page-signup form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, #block-itg-layout-manager-header-block .top-nav ul li, #block-itg-layout-manager-header-block .navigation .menu li a, .tabs-primary, .page-user form .forgot-link, .page-signup form .forgot-link, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .answer-container, .answer-container .form-type-checkboxes > label, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   display: inline-block;
 }
 
-.vmid, .page-user form .forgot-link, .answer-container .form-type-checkboxes > label, .answer-container div.rating {
+.vmid, .page-user form .forgot-link, .page-signup form .forgot-link, .answer-container .form-type-checkboxes > label, .answer-container div.rating {
   vertical-align: middle;
 }
 
-.vtop, .btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
+.vtop, .btn, .page-user form .form-submit, .page-signup form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, #page, .tabs-primary, #block-formblock-ask-an-expert .form-field-name-field-disclose-your-identity .form-checkboxes, .node-ask-an-expert .field, .view-ask-an-expert .views-row, .add-more, #content .node-form .form-submit[value="Add another item"], #content #comments .comment-form .form-submit[value="Add another item"], #comments #content .comment-form .form-submit[value="Add another item"] {
   vertical-align: top;
 }
 
@@ -248,6 +374,14 @@ img {
   margin-bottom: 40px;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.media__video--responsive {
+  z-index: 4;
+}
+
 .zoom-image, #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
 #block-itg-front-end-common-latest-from-pti ul li a.pic,
 #block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
@@ -265,7 +399,7 @@ img {
   transform: scale(1.2);
 }
 
-.btn, .page-user form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
+.btn, .page-user form .form-submit, .page-signup form .form-submit, #block-formblock-ask-an-expert .form-submit, .question-container .form-submit, #content .node-form .form-actions .form-submit, #content #comments .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit {
   background-color: #337ab7;
   border: 1px solid #2e6da4;
   color: #fff;
@@ -277,7 +411,7 @@ img {
   text-align: center;
   white-space: nowrap;
 }
-.btn:hover, .page-user form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, #content #comments .comment-form .form-actions .form-submit:hover, #comments #content .comment-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit:hover {
+.btn:hover, .page-user form .form-submit:hover, .page-signup form .form-submit:hover, #block-formblock-ask-an-expert .form-submit:hover, .question-container .form-submit:hover, #content .node-form .form-actions .form-submit:hover, #content #comments .comment-form .form-actions .form-submit:hover, #comments #content .comment-form .form-actions .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .form-submit:hover, .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit:hover {
   background-color: #286090;
   border-color: #204d74;
   color: #fff;
@@ -530,6 +664,7 @@ header {
   /*                        border-right: 1px solid $itg-nav-bordercolor;*/
   border-top: none;
   height: 37px;
+  white-space: nowrap;
   position: relative;
   font-size: 14px;
   font-size: 0.875rem;
@@ -587,6 +722,8 @@ header {
   display: none;
   margin-left: 0;
   margin-right: 0;
+  right: 0 !important;
+  width: 172px;
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li {
   float: none;
@@ -595,6 +732,11 @@ header {
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li a {
   display: block;
+  line-height: normal;
+  height: auto;
+  padding: 7px 10px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 /*End header css*/
@@ -613,39 +755,39 @@ header {
   color: #fff;
 }
 
-.page-user form {
+.page-user form, .page-signup form {
   max-width: 440px;
   margin: 0 auto;
 }
-.page-user form h2 {
+.page-user form h2, .page-signup form h2 {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
 }
-.page-user form label {
+.page-user form label, .page-signup form label {
   font-size: 16px;
   padding-bottom: 5px;
 }
-.page-user form .forgot-link {
+.page-user form .forgot-link, .page-signup form .forgot-link {
   margin: 7px;
   color: #333;
 }
-.page-user form .form-text {
+.page-user form .form-text, .page-signup form .form-text {
   width: 100%;
 }
-.page-user form div.description {
+.page-user form div.description, .page-signup form div.description {
   font-size: 12px;
   color: #8d8d8d;
 }
-.page-user .login-wrapper {
+.page-user .login-wrapper, .page-signup .login-wrapper {
   border: 1px solid #ddd;
   background-color: #eee;
 }
-.page-user .messages--status, .page-user .messages--error {
+.page-user .messages--status, .page-user .messages--error, .page-signup .messages--status, .page-signup .messages--error {
   max-width: 440px;
   margin: 0 auto;
 }
-.page-user .messages--error .messages__list {
+.page-user .messages--error .messages__list, .page-signup .messages--error .messages__list {
   padding-left: 15px;
 }
 
@@ -1268,8 +1410,8 @@ footer .footer-top .footer-social-link {
 }
 footer .footer-top .footer-social-link .globle-search {
   position: absolute;
-  top: 6px;
-  right: 110px;
+  top: 3px;
+  right: 45px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -1281,6 +1423,9 @@ footer .footer-top .footer-social-link .globle-search {
 }
 footer .footer-top .footer-social-link .globle-search .search-text {
   width: 100%;
+}
+footer .footer-top .footer-social-link .globle-search.active {
+  width: 225px;
 }
 footer .footer-top .footer-social-link .fa {
   font-size: 24px;
@@ -1764,7 +1909,7 @@ footer .multiple-items-footer i.slick-next {
 }
 
 .section-ordering a {
-  display: block;
+  display: inline;
 }
 .section-ordering h3 {
   padding: 10px 0;
@@ -1833,6 +1978,10 @@ footer .multiple-items-footer i.slick-next {
 .trending-videos li .detail {
   overflow: hidden;
   display: block;
+}
+
+.trending-list .top-takes-video-container {
+  border: 1px solid #dddddd;
 }
 
 /*End CSS trending-videos Home  page*/
@@ -1946,53 +2095,28 @@ footer .multiple-items-footer i.slick-next {
   right: 40px;
 }
 .view-front-end-global-search .view-content .itg-search-list {
-  overflow: hidden;
-  padding: 10px;
-}
-.view-front-end-global-search .view-content .itg-search-list .search-pic {
-  float: left;
-  margin-right: 10px;
-}
-.view-front-end-global-search .view-content .itg-search-list .search-detail {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 19px;
-  color: #323232;
-}
-.view-front-end-global-search .view-content li.itg-search-list {
   padding: 15px 0;
 }
-.view-front-end-global-search .view-content li.itg-search-list + li {
+.view-front-end-global-search .view-content .itg-search-list + li {
   border-top: 1px solid #ddd;
 }
-.view-front-end-global-search .view-content .search-pic {
+.view-front-end-global-search .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
-  overflow: hidden;
+  float: left;
 }
-.view-front-end-global-search .view-content .search-pic:empty {
-  display: none;
+.view-front-end-global-search .view-content .itg-search-list > .views-field-label, .view-front-end-global-search .view-content .itg-search-list > .search-detail {
+  padding-left: 154px;
 }
-.view-front-end-global-search .view-content .search-detail h2 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  line-height: 20px;
-  margin-bottom: 10px;
+.view-front-end-global-search .view-content .itg-search-list .views-field-label h2 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin-top: -5px;
 }
-.view-front-end-global-search .view-content .search-detail h2 a {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 20px;
-}
-.view-front-end-global-search .view-content .search-detail h2 a:hover {
-  color: #1a3c8d;
-}
-.view-front-end-global-search .view-content .search-detail p {
-  display: none;
+.view-front-end-global-search .view-content .itg-search-list .views-field-label h2 a {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
 }
 .view-front-end-global-search .view-content .social-share {
   display: inline-block;
@@ -2257,13 +2381,6 @@ footer .multiple-items-footer i.slick-next {
 
 /*css end homepage show*/
 /*Start Story page css*/
-.story-section iframe {
-  width: 100%;
-  height: 40vh;
-}
-.story-section .description iframe {
-  min-height: 480px;
-}
 .story-section h1 {
   font-size: 24px;
   font-size: 1.5rem;
@@ -2581,7 +2698,7 @@ footer .multiple-items-footer i.slick-next {
   padding-left: 18px;
 }
 .story-section .story-right .description a {
-  color: #1a3c8d;
+  color: #026bc5;
 }
 .story-section .story-right .description a:hover {
   text-decoration: underline;
@@ -2696,6 +2813,7 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right.photo-story .multiple-photo .photo-slider {
   padding: 0 5px;
   cursor: pointer;
+  height: auto;
 }
 .story-section .story-right.photo-story .multiple-photo .slick-prev, .story-section .story-right.photo-story .multiple-photo .slick-next {
   background: transparent;
@@ -2738,6 +2856,28 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper {
   border: 1px solid #ffc106;
+}
+.story-section .story-right.photo-story .photo-slider .image-caption {
+  position: relative;
+}
+.story-section .story-right.photo-story .photo-slider .image-caption .photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #222;
+  color: #a1a1a1;
+  font-size: 13px;
+  font-family: Roboto;
+}
+.story-section .story-right.photo-story .photo-slider .photo-description {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-family: Roboto;
+  font-size: 13px;
+  color: #8d8d8d;
+  font-weight: 300;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
@@ -3084,7 +3224,7 @@ footer .multiple-items-footer i.slick-next {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 99999999;
   background: rgba(0, 0, 0, 0.76);
   display: none;
 }
@@ -4058,15 +4198,21 @@ h1.category-heading {
   padding: 0 10px;
 }
 
-.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing, .page-podcasts-listing .view-podcasts-listing .catagory-listing {
+.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing,
+.page-podcast .view-podcasts-listing .catagory-listing,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing {
   overflow: hidden;
   padding: 10px;
 }
-.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic, .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
+.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic,
+.page-podcast .view-podcasts-listing .catagory-listing .pic,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
   float: left;
   margin-right: 10px;
 }
-.view-category-wise-content-list .catagory-listing .detail, .view-blog-listing .catagory-listing .detail, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail {
+.view-category-wise-content-list .catagory-listing .detail, .view-blog-listing .catagory-listing .detail,
+.page-podcast .view-podcasts-listing .catagory-listing .detail,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail {
   display: block;
   overflow: hidden;
   word-wrap: break-word;
@@ -4075,13 +4221,19 @@ h1.category-heading {
   line-height: 19px;
   color: #323232;
 }
-.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing, .page-podcasts-listing .view-podcasts-listing .catagory-listing {
+.view-category-wise-content-list .catagory-listing, .view-blog-listing .catagory-listing,
+.page-podcast .view-podcasts-listing .catagory-listing,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing {
   padding: 20px 0;
 }
-.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic, .page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
+.view-category-wise-content-list .catagory-listing .pic, .view-blog-listing .catagory-listing .pic,
+.page-podcast .view-podcasts-listing .catagory-listing .pic,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .pic {
   width: 124px;
 }
-.view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
+.view-category-wise-content-list .catagory-listing .detail h3, .view-blog-listing .catagory-listing .detail h3,
+.page-podcast .view-podcasts-listing .catagory-listing .detail h3,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
   margin-bottom: 10px;
   font-size: 15px;
   font-size: 0.9375rem;
@@ -4089,14 +4241,18 @@ h1.category-heading {
   line-height: 22px;
   color: #323232;
 }
-.view-category-wise-content-list .catagory-listing .detail p, .view-blog-listing .catagory-listing .detail p, .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
+.view-category-wise-content-list .catagory-listing .detail p, .view-blog-listing .catagory-listing .detail p,
+.page-podcast .view-podcasts-listing .catagory-listing .detail p,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing .detail p {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #696969;
   display: none;
 }
-.view-category-wise-content-list .catagory-listing span.blog-anchor a, .view-blog-listing .catagory-listing span.blog-anchor a, .page-podcasts-listing .view-podcasts-listing .catagory-listing span.blog-anchor a {
+.view-category-wise-content-list .catagory-listing span.blog-anchor a, .view-blog-listing .catagory-listing span.blog-anchor a,
+.page-podcast .view-podcasts-listing .catagory-listing span.blog-anchor a,
+.page-podcasts-listing .view-podcasts-listing .catagory-listing span.blog-anchor a {
   font-size: 12px;
   font-size: 0.75rem;
   font-family: "Roboto", sans-serif;
@@ -4106,43 +4262,65 @@ h1.category-heading {
   margin-bottom: 8px;
   font-weight: 400;
 }
-.view-category-wise-content-list .catagory-grid, .view-blog-listing .catagory-grid, .page-podcasts-listing .view-podcasts-listing .catagory-grid {
+.view-category-wise-content-list .catagory-grid, .view-blog-listing .catagory-grid,
+.page-podcast .view-podcasts-listing .catagory-grid,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid {
   zoom: 1;
 }
-.view-category-wise-content-list .catagory-grid:before, .view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:before, .view-blog-listing .catagory-grid:after, .page-podcasts-listing .view-podcasts-listing .catagory-grid:before, .page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
+.view-category-wise-content-list .catagory-grid:before, .view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:before, .view-blog-listing .catagory-grid:after,
+.page-podcast .view-podcasts-listing .catagory-grid:before,
+.page-podcast .view-podcasts-listing .catagory-grid:after,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:before,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:after, .page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
+.view-category-wise-content-list .catagory-grid:after, .view-blog-listing .catagory-grid:after,
+.page-podcast .view-podcasts-listing .catagory-grid:after,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid:after {
   clear: both;
 }
-.view-category-wise-content-list .catagory-grid h3, .view-blog-listing .catagory-grid h3, .page-podcasts-listing .view-podcasts-listing .catagory-grid h3 {
+.view-category-wise-content-list .catagory-grid h3, .view-blog-listing .catagory-grid h3,
+.page-podcast .view-podcasts-listing .catagory-grid h3,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid h3 {
   font-size: 15px;
   line-height: 20px;
   margin-top: 5px;
 }
-.view-category-wise-content-list .catagory-grid p, .view-blog-listing .catagory-grid p, .page-podcasts-listing .view-podcasts-listing .catagory-grid p {
+.view-category-wise-content-list .catagory-grid p, .view-blog-listing .catagory-grid p,
+.page-podcast .view-podcasts-listing .catagory-grid p,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid p {
   color: #696969;
   margin-top: 10px;
 }
-.view-category-wise-content-list .catagory-grid .col-md-3, .view-blog-listing .catagory-grid .col-md-3, .page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3 {
+.view-category-wise-content-list .catagory-grid .col-md-3, .view-blog-listing .catagory-grid .col-md-3,
+.page-podcast .view-podcasts-listing .catagory-grid .col-md-3,
+.page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3 {
   margin-bottom: 40px;
 }
-.view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1), .view-blog-listing .catagory-grid .col-md-3:nth-child(4n+1), .page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1) {
+.view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1), .view-blog-listing .catagory-grid .col-md-3:nth-child(4n+1),
+.page-podcast .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1),
+.page-podcasts-listing .view-podcasts-listing .catagory-grid .col-md-3:nth-child(4n+1) {
   clear: left;
 }
-.view-category-wise-content-list .item-list ul.pager, .view-blog-listing .item-list ul.pager, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
+.view-category-wise-content-list .item-list ul.pager, .view-blog-listing .item-list ul.pager,
+.page-podcast .view-podcasts-listing .item-list ul.pager,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.view-category-wise-content-list .item-list ul.pager li, .view-blog-listing .item-list ul.pager li, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
+.view-category-wise-content-list .item-list ul.pager li, .view-blog-listing .item-list ul.pager li,
+.page-podcast .view-podcasts-listing .item-list ul.pager li,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-current, .view-blog-listing .item-list ul.pager li.pager-current, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
+.view-category-wise-content-list .item-list ul.pager li.pager-current, .view-blog-listing .item-list ul.pager li.pager-current,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-current,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -4151,7 +4329,9 @@ h1.category-heading {
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-item a, .view-blog-listing .item-list ul.pager li.pager-item a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
+.view-category-wise-content-list .item-list ul.pager li.pager-item a, .view-blog-listing .item-list ul.pager li.pager-item a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -4161,17 +4341,53 @@ h1.category-heading {
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-item a:hover, .view-blog-listing .item-list ul.pager li.pager-item a:hover, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
+.view-category-wise-content-list .item-list ul.pager li.pager-item a:hover, .view-blog-listing .item-list ul.pager li.pager-item a:hover,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a, .view-blog-listing .item-list ul.pager li.pager-next a, .view-blog-listing .item-list ul.pager li.pager-last a, .view-blog-listing .item-list ul.pager li.pager-first a, .view-blog-listing .item-list ul.pager li.pager-previous a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
+.view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a, .view-blog-listing .item-list ul.pager li.pager-next a, .view-blog-listing .item-list ul.pager li.pager-last a, .view-blog-listing .item-list ul.pager li.pager-first a, .view-blog-listing .item-list ul.pager li.pager-previous a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first a,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first, .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
+.view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-next.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-last.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-last.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-first.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-first.pager-last.last, .view-blog-listing .item-list ul.pager li.pager-previous.pager-first.first, .view-blog-listing .item-list ul.pager li.pager-previous.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+.page-podcast .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-next.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first.pager-last.last,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-first.first,
+.page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous.pager-last.last {
   display: none;
+}
+
+.view-category-wise-content-list .pic {
+  position: relative;
+}
+.view-category-wise-content-list .pic figcaption {
+  position: absolute;
+  bottom: 5px;
+  left: 7px;
+  color: #fff;
 }
 
 .view-blog-listing .catagory-listing .detail .blog-anchor {
@@ -4196,6 +4412,46 @@ h1.category-heading {
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
+}
+.view-widget-anchors-listing ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-widget-anchors-listing ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-widget-anchors-listing ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-widget-anchors-listing ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-widget-anchors-listing ul.pager li.pager-next a, .view-widget-anchors-listing ul.pager li.pager-last a, .view-widget-anchors-listing ul.pager li.pager-first a, .view-widget-anchors-listing ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-widget-anchors-listing ul.pager li.pager-next.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-next.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-last.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-last.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-first.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-first.pager-last.last, .view-widget-anchors-listing ul.pager li.pager-previous.pager-first.first, .view-widget-anchors-listing ul.pager li.pager-previous.pager-last.last {
+  display: none;
 }
 .view-widget-anchors-listing .anchor-listing {
   padding: 20px 0;
@@ -4414,6 +4670,12 @@ h1.category-heading {
   width: 100%;
   height: 55vh;
 }
+.live-block .breaking-section .breaking-discription a {
+  color: #026bc5;
+}
+.live-block .breaking-section .breaking-discription a:hover {
+  text-decoration: underline;
+}
 .live-block .breaking-section .social-share {
   margin-top: 10px;
 }
@@ -4459,35 +4721,6 @@ h1.category-heading {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .live-block #slider-range {
-  border: none;
-  margin: 20px 0 10px 0;
-  width: 100%;
-  font-family: "Roboto", sans-serif;
-}
-.live-block #slider-range.ui-slider-horizontal {
-  height: 30px;
-}
-.live-block #slider-range.ui-slider-horizontal .ui-slider-handle {
-  width: 80px;
-  height: 38px;
-  background: #e6e5e3;
-  border: 1px solid #c1c1c1;
-  top: -20px;
-  margin-left: 0;
-  line-height: 38px;
-  text-align: center;
-  font-size: 15px;
-  color: #323232;
-  cursor: move;
-  background-image: linear-gradient(#f5f3f2, #e7e5e4);
-}
-.live-block #slider-range.ui-widget-content {
-  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
-}
-.live-block #slider-range .ui-widget-header {
-  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
-}
-.live-block #slider-range .ui-widget-header + a + a {
   display: none;
 }
 .live-block .live-hightlight h3 {
@@ -4522,7 +4755,35 @@ h1.category-heading {
   font-size: 1rem;
   font-weight: 700;
   margin-top: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 35px;
+}
+.live-block .timeline .irs .irs-line {
+  height: 30px;
+  top: 0;
+  background: #fff url(../images/live-block-slider-icon.jpg) repeat-x;
+}
+.live-block .timeline .irs .irs-line span {
+  opacity: 0;
+}
+.live-block .timeline .irs .irs-min, .live-block .timeline .irs .irs-max, .live-block .timeline .irs .irs-from, .live-block .timeline .irs .irs-to {
+  display: none !important;
+}
+.live-block .timeline .irs .irs-bar, .live-block .timeline .irs .irs-bar-edge {
+  opacity: 0;
+}
+.live-block .timeline .irs .irs-slider.single {
+  width: 80px;
+  height: 38px;
+  background: #e6e5e3;
+  border: 1px solid #c1c1c1;
+  top: -20px;
+  margin-left: 0;
+  line-height: 38px;
+  text-align: center;
+  font-size: 15px;
+  color: #323232;
+  cursor: move;
+  background-image: linear-gradient(#f5f3f2, #e7e5e4);
 }
 
 /*End live block css*/
@@ -4581,6 +4842,17 @@ h1.category-heading {
   margin: 0;
   max-width: 650px;
   width: 100%;
+}
+.featured_photo_carousel .flexslider .flex-caption, .tech-block_5 .flexslider .flex-caption, .auto-block_5 .flexslider .flex-caption {
+  width: 96%;
+  padding: 2%;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  line-height: 18px;
 }
 .featured_photo_carousel .flexslider .flex-viewport, .tech-block_5 .flexslider .flex-viewport, .auto-block_5 .flexslider .flex-viewport {
   overflow: visible !important;
@@ -4713,28 +4985,23 @@ h1.category-heading {
   width: 44% !important;
 }
 .poll-wrapper .poll-data {
-  zoom: 1;
   border: 1px solid #dddddd;
-  padding: 20px;
-  zoom: 1;
-}
-.poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
+  padding: 18px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 5px);
 }
 .poll-wrapper .poll-data:after {
-  clear: both;
-}
-.poll-wrapper .poll-data:before, .poll-wrapper .poll-data:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-.poll-wrapper .poll-data:after {
-  clear: both;
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  left: 100%;
+  top: -1px;
+  background: #f3f3f3;
+  border: 1px solid #f3f3f3;
+  z-index: -1;
 }
 .poll-wrapper .poll-data .poll-replace-id {
   width: 100%;
@@ -4817,12 +5084,12 @@ h1.category-heading {
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer {
   padding-bottom: 10px;
-  margin-right: 15px;
+  padding-right: 15px;
   margin-bottom: 20px;
   float: left;
   position: relative;
   max-width: 124px;
-  width: 30%;
+  width: 33%;
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer img {
   width: 124px;
@@ -4841,12 +5108,11 @@ h1.category-heading {
 }
 .poll-wrapper .poll-data .poll-replace-id.poll-option-image .form-item-pole-answer .poll-ans-caption {
   padding: 0px 0px 10px 0;
-  display: inline-block;
+  display: block;
 }
 .poll-wrapper .poll-data .poll-replace-id .form-radios .poll-ans-caption {
   padding: 10px 15px;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
 }
 .poll-wrapper .poll-data .relative-with-img {
   width: 56%;
@@ -4906,6 +5172,9 @@ h1.category-heading {
 .poll-wrapper .social-share ul li {
   padding-right: 4px;
 }
+.poll-wrapper .active-poll-title {
+  overflow: hidden;
+}
 .poll-wrapper .active-poll-title h2 {
   font-size: 20px;
   font-size: 1.25rem;
@@ -4926,9 +5195,12 @@ h1.category-heading {
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
-  padding: 6px 5px 5px 5px;
-  font-size: 12px;
+  padding: 0 6px;
+  font-size: 14px;
   margin-top: 10px;
+  height: 22px;
+  font-family: Roboto;
+  font-weight: 600;
 }
 .poll-wrapper .poll-replace-id .error {
   display: block;
@@ -4979,6 +5251,7 @@ h1.category-heading {
   position: relative;
   padding-left: 10px;
   padding-bottom: 25px;
+  word-wrap: break-word;
 }
 .poll-wrapper .related-story .related-stories li:before {
   position: absolute;
@@ -5243,7 +5516,8 @@ h1.category-heading {
 #block-views-video-landing-header-block {
   color: #aaa8a9;
   background: #171717;
-  margin-top: 14px;
+  padding-top: 10px;
+  margin: 0;
 }
 #block-views-video-landing-header-block .ad-blocker:empty {
   display: none;
@@ -5723,6 +5997,10 @@ h1.category-heading {
   padding: 45px 20px 10px 0px;
 }
 
+[id*="block-itg-widget-featured-photo-carousel"] .flexslider .slides img {
+  max-height: 363px;
+}
+
 .view-photo-list-of-category, .view-video-list-of-category {
   position: relative;
 }
@@ -6012,50 +6290,53 @@ h1.category-heading {
   display: none;
 }
 
+.survey-media-wrapper, .quiz-media-wrapper {
+  max-width: 480px;
+}
+.survey-media-wrapper .survey-video, .survey-media-wrapper .quiz-video, .quiz-media-wrapper .survey-video, .quiz-media-wrapper .quiz-video {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%;
+  margin: 0 0 10px 10px;
+}
+.survey-media-wrapper .survey-video iframe, .survey-media-wrapper .quiz-video iframe, .quiz-media-wrapper .survey-video iframe, .quiz-media-wrapper .quiz-video iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.survey-media-wrapper .survey-image, .survey-media-wrapper .quiz-image, .quiz-media-wrapper .survey-image, .quiz-media-wrapper .quiz-image {
+  margin: 0 0 10px 0;
+}
+
 /*css start archive-story */
 .view-archive-story .view-content .itg-search-list {
-  overflow: hidden;
-  padding: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-pic {
-  float: left;
-  margin-right: 10px;
-}
-.view-archive-story .view-content .itg-search-list .search-detail {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 19px;
-  color: #323232;
-}
-.view-archive-story .view-content li.itg-search-list {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   padding: 25px 0;
 }
-.view-archive-story .view-content .search-pic {
+.view-archive-story .view-content .itg-search-list + li {
+  border-top: 1px solid #ddd;
+}
+.view-archive-story .view-content .itg-search-list .views-field-sm-field-custom-story-small-large-url {
   width: 144px;
-  height: 107px;
-  overflow: hidden;
+  float: left;
 }
-.view-archive-story .view-content .search-pic:empty {
-  display: none;
+.view-archive-story .view-content .itg-search-list > .views-field-label, .view-archive-story .view-content .itg-search-list > .search-detail, .view-archive-story .view-content .itg-search-list > .other-info {
+  padding-left: 154px;
 }
-.view-archive-story .view-content .search-detail h2 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  line-height: 20px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin-top: -5px;
 }
-.view-archive-story .view-content .search-detail h2 a {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  line-height: 20px;
-}
-.view-archive-story .view-content .search-detail p {
-  display: none;
+.view-archive-story .view-content .itg-search-list .views-field-label h2 a {
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
 }
 .view-archive-story .view-content .social-share {
   display: inline-block;
@@ -7020,8 +7301,7 @@ section.sidebar .block-itg-ads {
 /*CSS Start video setting Ifram*/
 .iframe-video {
   position: relative;
-  padding-bottom: 50%;
-  padding-top: 30px;
+  padding-bottom: 56.2%;
   height: 0;
   -webkit-overflow-scrolling: touch;
 }
@@ -7764,7 +8044,7 @@ section.sidebar .block-itg-ads {
   border-radius: 3px;
   color: #fff;
   font-size: 16px;
-  height: 38px;
+  height: 50px;
   width: 200px;
   text-align: center;
   line-height: 35px;
@@ -7794,12 +8074,25 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   width: 100%;
 }
+[id*="itg-sso-reg-multistep-form"] .email-error, [id*="itg-sso-reg-multistep-form"] .mobile-error {
+  font-size: 13px;
+  color: red;
+}
 
 .sign-in-link {
-  padding: 20px 0;
-  text-align: right;
+  max-width: 550px;
+  margin: 0 auto;
 }
-.sign-in-link a {
+.sign-in-link .left-block {
+  float: left;
+}
+.sign-in-link .left-block span {
+  color: red;
+}
+.sign-in-link .rgt-block {
+  float: right;
+}
+.sign-in-link a, .sign-in-link .left-block {
   font-size: 12px;
   color: #666;
 }
@@ -8112,10 +8405,10 @@ section.sidebar .block-itg-ads {
   margin-bottom: 30px;
 }
 
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block {
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block, #block-views-past-speaker-event-block {
   margin-top: 20px;
 }
-#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2, #block-views-event-subsite-speaker-block h2 {
+#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2, #block-views-event-subsite-speaker-block h2, #block-views-past-speaker-event-block h2 {
   font-size: 24px;
   color: #ef3c24;
   font-family: "Roboto Slab", sans-serif;
@@ -8235,7 +8528,7 @@ section.sidebar .block-itg-ads {
   vertical-align: top;
   position: relative;
   background: #d1d1d1;
-  width: 190px;
+  width: 195px;
   height: 54px;
   line-height: 54px;
   padding-right: 10px;
@@ -8337,6 +8630,25 @@ section.sidebar .block-itg-ads {
   display: inline-block;
   vertical-align: top;
 }
+#block-menu-menu-event-menu .search-icon-parent {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search {
+  position: absolute;
+  right: 20px;
+  width: 0;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+  top: 4px;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search .search-text {
+  width: 100%;
+}
+#block-menu-menu-event-menu .search-icon-parent .globle-search.active {
+  width: 225px;
+}
 
 #block-itg-event-backend-ad-right-sidebar-event {
   padding: 30px;
@@ -8351,18 +8663,28 @@ section.sidebar .block-itg-ads {
   border: 1px solid #ddd;
 }
 
-#block-views-program-schedule-block-4 .views-row .views-row {
+#block-views-program-schedule-block-4 .view-display-id-block_4 > .view-content > .views-row {
+  width: 24%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 15px;
   text-align: center;
+}
+#block-views-program-schedule-block-4 .view-display-id-block_4 > .view-content > .views-row .views-field-field-sponsor-type {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+#block-views-program-schedule-block-4 .view-display-id-block_4 > .view-content > .views-row .views-field-field-sponser-logo a {
+  display: block;
   border: 1px solid #ddd;
   padding: 10px;
   height: 85px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   position: relative;
 }
-#block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
-  clear: left;
-}
-#block-views-program-schedule-block-4 .views-row .views-row img {
+#block-views-program-schedule-block-4 .view-display-id-block_4 > .view-content > .views-row .views-field-field-sponser-logo a img {
   max-height: 100%;
   max-width: 100%;
   width: auto;
@@ -8385,9 +8707,13 @@ section.sidebar .block-itg-ads {
   margin-bottom: 50px;
 }
 
+.event-registration-link {
+  line-height: 36px;
+}
+
 #block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
   font-family: "Roboto Slab", sans-serif;
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 40px;
 }
 
@@ -8455,31 +8781,31 @@ section.sidebar .block-itg-ads {
   margin-top: -5px;
 }
 
-#block-views-event-subsite-speaker-block .views-row {
+#block-views-event-subsite-speaker-block .views-row, #block-views-past-speaker-event-block .views-row {
   width: 33.33333%;
   float: left;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content {
+#block-views-event-subsite-speaker-block .views-row .view-content, #block-views-past-speaker-event-block .views-row .view-content {
   zoom: 1;
   width: 100%;
   float: none;
   text-align: center;
   margin-bottom: 30px;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:before, #block-views-past-speaker-event-block .views-row .view-content:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content:after {
+#block-views-event-subsite-speaker-block .views-row .view-content:after, #block-views-past-speaker-event-block .views-row .view-content:after {
   clear: both;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content img {
+#block-views-event-subsite-speaker-block .views-row .view-content img, #block-views-past-speaker-event-block .views-row .view-content img {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   font-size: 11px;
   font-weight: 700;
   font-family: roboto;
@@ -8487,11 +8813,11 @@ section.sidebar .block-itg-ads {
   margin-top: 10px;
   text-transform: uppercase;
 }
-#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title {
+#block-views-event-subsite-speaker-block .views-row .view-content .views-field-field-story-new-title, #block-views-past-speaker-event-block .views-row .view-content .views-field-field-story-new-title {
   color: #ef2a24;
   margin-top: 0;
 }
-#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1) {
+#block-views-event-subsite-speaker-block .views-row:nth-child(3n+1), #block-views-past-speaker-event-block .views-row:nth-child(3n+1) {
   clear: left;
 }
 
@@ -8644,6 +8970,31 @@ section.sidebar .block-itg-ads {
 }
 #content [id*='event-registration-node-form'] .mandatory-message span {
   padding-left: 0;
+}
+#content [id*='event-registration-node-form'] .ticket-type-message {
+  font-size: 12px;
+  margin-bottom: 30px;
+  color: green;
+  padding-left: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios label {
+  width: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios {
+  padding-left: 130px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio {
+  padding-right: 20px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio .form-radio {
+  margin: 2px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .form-type-radios .form-radios .form-type-radio label b {
+  display: block;
+  margin: 5px 0 0 18px;
+}
+#content [id*='event-registration-node-form'] #edit-field-erf-ticket-type .description {
+  display: none;
 }
 #content [id*='event-registration-node-form'] .form-field-type-field-collection .form-item .form-item {
   margin: 15px 0;
@@ -8832,6 +9183,7 @@ section.sidebar .block-itg-ads {
 }
 #content [id*='event-registration-node-form'] .form-text, #content [id*='event-registration-node-form'] .form-textarea {
   width: 75%;
+  max-width: 489px;
 }
 #content [id*='event-registration-node-form'] .form-type-textarea > label + div {
   padding-left: 0 !important;
@@ -8890,7 +9242,6 @@ section.sidebar .block-itg-ads {
   font-family: roboto;
   font-size: 12px;
   color: #707070;
-  padding-top: 25px;
 }
 #block-itg-event-backend-event-registration .tc-txt ul li {
   margin-bottom: 10px;
@@ -9895,8 +10246,7 @@ section.sidebar .block-itg-ads {
   float: right;
 }
 #block-itg-menu-manager-third-level-menu ul li {
-  display: inline-block;
-  vertical-align: top;
+  float: left;
 }
 #block-itg-menu-manager-third-level-menu ul li a {
   color: #fff;
@@ -9933,6 +10283,38 @@ section.sidebar .block-itg-ads {
   font-size: 8px;
   vertical-align: top;
   padding-top: 5px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more {
+  position: relative;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span {
+  padding: 5px 10px;
+  float: left;
+  width: 50px;
+  cursor: pointer;
+  height: 30px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more span .fa-circle {
+  font-size: 7px;
+  color: #fff;
+  margin: 0 2px;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 200px;
+  top: 30px;
+  background: #595959;
+  padding: 0;
+  z-index: 999999;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li {
+  float: none;
+}
+#block-itg-menu-manager-third-level-menu .third-level-menu li.more ul#overflow li a {
+  padding: 3px 10px;
+  height: auto;
 }
 
 /*css end special page*/
@@ -10481,6 +10863,7 @@ section.sidebar .block-itg-ads {
   line-height: 20px;
   padding: 0;
   width: 145px;
+  z-index: 9;
 }
 .election-page .itg-map .map-result-detail {
   position: absolute;
@@ -10550,6 +10933,10 @@ section.sidebar .block-itg-ads {
   height: 19px;
   margin-bottom: 10px;
 }
+.election-page .election-graph .social-share li {
+  display: inline-block;
+  vertical-align: middle;
+}
 .election-page .graph-design .highcharts-container {
   height: 260px !important;
 }
@@ -10580,14 +10967,53 @@ section.sidebar .block-itg-ads {
   font-size: 32px;
 }
 .election-page .col-el-5 .graph-design .highcharts-title tspan:nth-child(1) {
-  font-size: 22px;
+  font-size: 16px;
 }
 
 /* CSS For Election Page End */
+/* CSS FOR state-election-map-wrapper */
+.state-election-map-wrapper .elction_map, .state-election-map-wrapper .left-chart {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 3px 0 #ddd;
+  width: 100%;
+}
+.state-election-map-wrapper .left-chart {
+  margin-top: 40px;
+  position: relative;
+}
+.state-election-map-wrapper .left-chart .graph-design {
+  float: left;
+  width: 60%;
+}
+.state-election-map-wrapper .left-chart .graph-design svg > text {
+  fill: #009ef0 !important;
+  font-family: Roboto;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper {
+  float: left;
+  width: 40%;
+  margin-top: 50px;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper table {
+  width: 100%;
+  font-family: Roboto;
+}
+.state-election-map-wrapper .left-chart .graph-table-wrapper table th, .state-election-map-wrapper .left-chart .graph-table-wrapper table td {
+  padding: 3px;
+}
+
 /*Start CSS LIVE tv */
+div#playerContainer {
+  display: none !important;
+}
+
 #block-itg-live-tv-live-tv-video-page .program-livetv {
   background: #000;
-  padding: 15px 0px 75px 15px;
+  padding: 25px 0px 25px 20px;
+  display: flex;
   zoom: 1;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv:before, #block-itg-live-tv-live-tv-video-page .program-livetv:after {
@@ -10600,16 +11026,20 @@ section.sidebar .block-itg-ads {
   clear: both;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
-  float: left;
-  width: 82%;
+  width: calc(100% - 108px);
+  height: 0;
+  padding-bottom: 48.3%;
+  position: relative;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video iframe {
   width: 100%;
-  height: 50vh;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
-  float: right;
-  width: 18%;
+  width: 108px;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a {
   color: #aaa9a9;
@@ -10617,6 +11047,7 @@ section.sidebar .block-itg-ads {
   padding: 20px 15px;
   display: block;
   font-family: roboto;
+  position: relative;
   border-bottom: 1px solid #1a1a1a;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a i {
@@ -10625,9 +11056,22 @@ section.sidebar .block-itg-ads {
   vertical-align: middle;
   padding-right: 5px;
 }
-#block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a:hover {
+#block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a:hover, #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a.active {
   color: #fff;
   background: #131313;
+}
+#block-itg-live-tv-live-tv-video-page .program-livetv .social-icon a.embed-link.active:before {
+  border-color: transparent transparent #fff transparent;
+  border-style: solid;
+  border-width: 11px;
+  content: "";
+  height: 0;
+  position: absolute;
+  bottom: -1px;
+  width: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 #block-itg-live-tv-live-tv-video-page .latest-livetv-video {
   background: #171717;
@@ -10678,6 +11122,46 @@ section.sidebar .block-itg-ads {
   height: 5px;
   margin-top: -2px;
   background: #ddd;
+}
+.view-live-tv-programs ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-live-tv-programs ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-live-tv-programs ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-live-tv-programs ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-live-tv-programs ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-live-tv-programs ul.pager li.pager-next a, .view-live-tv-programs ul.pager li.pager-last a, .view-live-tv-programs ul.pager li.pager-first a, .view-live-tv-programs ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-live-tv-programs ul.pager li.pager-next.pager-first.first, .view-live-tv-programs ul.pager li.pager-next.pager-last.last, .view-live-tv-programs ul.pager li.pager-last.pager-first.first, .view-live-tv-programs ul.pager li.pager-last.pager-last.last, .view-live-tv-programs ul.pager li.pager-first.pager-first.first, .view-live-tv-programs ul.pager li.pager-first.pager-last.last, .view-live-tv-programs ul.pager li.pager-previous.pager-first.first, .view-live-tv-programs ul.pager li.pager-previous.pager-last.last {
+  display: none;
 }
 .view-live-tv-programs h3 {
   display: block;
@@ -11487,6 +11971,9 @@ h1.about-us-heading + div p {
 /*css end related content*/
 /*css start factoids-slider*/
 .factoids-page {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   margin: 20px 0 10px 0;
 }
 .factoids-page ul {
@@ -11531,10 +12018,17 @@ h1.about-us-heading + div p {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
 .factoids-page .fun-facts, .factoids-page .social-share {
-  display: inline-block;
+  display: inline;
+}
+.factoids-page .fun-facts h2, .factoids-page .fun-facts ul, .factoids-page .social-share h2, .factoids-page .social-share ul {
+  display: inline;
+  padding-left: 0;
 }
 .factoids-page h3 {
   color: #000;
+}
+.factoids-page .social-share ul li:first-child {
+  vertical-align: baseline;
 }
 
 .factoids-slider ul {
@@ -11853,8 +12347,13 @@ h1.about-us-heading + div p {
 .itg-layout-container.default-section .auto-block-2 .special-top-news .widget-title {
   position: absolute;
 }
-.itg-layout-container.default-section .auto-block-2 .special-top-news ul {
-  padding-top: 20px !important;
+.itg-layout-container.default-section .auto-block-2 .special-top-news .itg-listing-wrapper {
+  margin-top: 22px !important;
+  overflow: auto;
+  height: 100%;
+}
+.itg-layout-container.default-section .auto-block-2 .special-top-news .itg-listing-wrapper ul {
+  padding: 0 !important;
 }
 .itg-layout-container.default-section .itg-listing, .itg-layout-container.default-section .featured-news {
   border: none;
@@ -11925,7 +12424,7 @@ h1.about-us-heading + div p {
   vertical-align: top;
   margin: 10px;
 }
-#main-container-budget .col-list-4 button.btn, #main-container-budget .col-list-4 .page-user form button.form-submit, .page-user form #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #block-formblock-ask-an-expert button.form-submit, #block-formblock-ask-an-expert #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .question-container button.form-submit, .question-container #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content .node-form .form-actions button.form-submit, #content .node-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content #comments .comment-form .form-actions button.form-submit, #content #comments .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #comments #content .comment-form .form-actions button.form-submit, #comments #content .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > .ajax-new-content > button.form-submit {
+#main-container-budget .col-list-4 button.btn, #main-container-budget .col-list-4 .page-user form button.form-submit, .page-user form #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .page-signup form button.form-submit, .page-signup form #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #block-formblock-ask-an-expert button.form-submit, #block-formblock-ask-an-expert #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .question-container button.form-submit, .question-container #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content .node-form .form-actions button.form-submit, #content .node-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content #comments .comment-form .form-actions button.form-submit, #content #comments .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #comments #content .comment-form .form-actions button.form-submit, #comments #content .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > .ajax-new-content > button.form-submit {
   margin-top: 40px;
   width: 158px;
   height: 38px;
@@ -11953,6 +12452,15 @@ h1.about-us-heading + div p {
   border-radius: 50%;
   margin: 10px;
   overflow: hidden;
+  position: relative;
+}
+#main-container-budget #sortable1 li img, #main-container-budget #sortable2 li img, #main-container-budget #sortable3 li img, #main-container-budget #sortable4 li img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
 }
 #main-container-budget .budget-predictor-social-share .share-msg {
   font-weight: 700;
@@ -12008,7 +12516,7 @@ h1.about-us-heading + div p {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 99999999;
   background: rgba(0, 0, 0, 0.76);
   display: none;
 }
@@ -12520,10 +13028,10 @@ h1.about-us-heading + div p {
 
 /*blog detail page css end*/
 /*css start Podcast page*/
-.page-podcasts-listing .view-podcasts-listing .podcast-left {
+.page-podcasts-listing .view-podcasts-listing .podcast-left, .page-podcast .view-podcasts-listing .podcast-left {
   position: relative;
 }
-.page-podcasts-listing .view-podcasts-listing .podcast-left span {
+.page-podcasts-listing .view-podcasts-listing .podcast-left span, .page-podcast .view-podcasts-listing .podcast-left span {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -12533,7 +13041,7 @@ h1.about-us-heading + div p {
   font-size: 12px;
   font-family: Roboto;
 }
-.page-podcasts-listing .view-podcasts-listing .podcast-left span i {
+.page-podcasts-listing .view-podcasts-listing .podcast-left span i, .page-podcast .view-podcasts-listing .podcast-left span i {
   font-size: 14px;
 }
 
@@ -12834,7 +13342,7 @@ span.smilies-title img {
 /*css breadcrumb start*/
 #block-itg-layout-manager-front-end-breadcrumb {
   position: relative;
-  z-index: 9999;
+  z-index: 9998;
   color: #a1a1a1;
   font-family: roboto;
   padding-top: 15px;
@@ -13093,7 +13601,6 @@ span.smilies-title img {
   font-weight: 400;
 }
 [id*="itg-quiz-quiz-form"] .answer-container #show_answer {
-  width: 135px;
   margin: 10px auto;
   display: block;
   border-radius: 1px;
@@ -13141,7 +13648,8 @@ span.smilies-title img {
 #block-itg-front-end-common-latest-from-aajtak ul li a.pic,
 #block-itg-front-end-common-latest-from-pti ul li a.pic,
 #block-itg-front-end-common-latest-from-businesstoday ul li a.pic {
-  max-height: 55px;
+  width: 88px;
+  height: 66px;
 }
 #block-itg-front-end-common-latest-from-aajtak ul li + li,
 #block-itg-front-end-common-latest-from-pti ul li + li,
@@ -13149,15 +13657,11 @@ span.smilies-title img {
   border-top: 1px solid #dddddd;
 }
 
-#block-itg-front-end-common-latest-from-businesstoday a.pic img {
-  max-width: 56px;
-}
-
 .agbutton .error-msg {
   color: red;
 }
 
-.jw-sharing-dock-btn {
+.node-type-videogallery .jw-sharing-dock-btn {
   display: none;
 }
 
@@ -13274,12 +13778,12 @@ span.smilies-title img {
   border-top: 1px solid #e5e5e5;
 }
 
-.modal-footer .btn + .btn, .modal-footer .page-user form .form-submit + .btn, .page-user form .modal-footer .form-submit + .btn, .modal-footer #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .form-submit + .btn, .modal-footer .question-container .form-submit + .btn, .question-container .modal-footer .form-submit + .btn, .modal-footer #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .btn, .modal-footer .page-user form .btn + .form-submit, .page-user form .modal-footer .btn + .form-submit, .modal-footer .page-user form .form-submit + .form-submit, .page-user form .modal-footer .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .page-user form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .question-container .btn + .form-submit, .question-container .modal-footer .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .question-container .form-submit + .form-submit, .modal-footer .question-container .form-submit + .form-submit, .question-container .modal-footer .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn + .form-submit, #content .node-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit {
+.modal-footer .btn + .btn, .modal-footer .page-user form .form-submit + .btn, .page-user form .modal-footer .form-submit + .btn, .modal-footer .page-signup form .form-submit + .btn, .page-signup form .modal-footer .form-submit + .btn, .modal-footer #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .form-submit + .btn, .modal-footer .question-container .form-submit + .btn, .question-container .modal-footer .form-submit + .btn, .modal-footer #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .btn, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .btn, .modal-footer .page-user form .btn + .form-submit, .page-user form .modal-footer .btn + .form-submit, .modal-footer .page-user form .form-submit + .form-submit, .page-user form .modal-footer .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .page-signup form .btn + .form-submit, .page-signup form .modal-footer .btn + .form-submit, .modal-footer .page-signup form .form-submit + .form-submit, .page-signup form .modal-footer .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .page-signup form .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .page-user form .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .page-signup form .form-submit + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .question-container .btn + .form-submit, .question-container .modal-footer .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .question-container .form-submit + .form-submit, .modal-footer .question-container .form-submit + .form-submit, .question-container .modal-footer .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn + .form-submit, #content .node-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .page-signup form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .page-signup form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .page-signup form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .question-container .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .btn + .form-submit, .modal-footer #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer td > .ajax-new-content > .form-submit + .form-submit {
   margin-bottom: 0;
   margin-left: 5px;
 }
 
-.modal-footer .btn-group .btn + .btn, .modal-footer .btn-group .page-user form .form-submit + .btn, .page-user form .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .question-container .form-submit + .btn, .question-container .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .btn, .modal-footer .btn-group .page-user form .btn + .form-submit, .page-user form .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group .page-user form .form-submit + .form-submit, .page-user form .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .page-user form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .question-container .btn + .form-submit, .question-container .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group .question-container .form-submit + .form-submit, .question-container .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit {
+.modal-footer .btn-group .btn + .btn, .modal-footer .btn-group .page-user form .form-submit + .btn, .page-user form .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .page-signup form .form-submit + .btn, .page-signup form .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .btn, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .question-container .form-submit + .btn, .question-container .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .btn, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .btn, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .btn, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .btn, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .btn, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .btn, .modal-footer .btn-group .page-user form .btn + .form-submit, .page-user form .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group .page-user form .form-submit + .form-submit, .page-user form .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .page-user form .form-submit + .form-submit, .modal-footer .btn-group .page-signup form .btn + .form-submit, .page-signup form .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group .page-signup form .form-submit + .form-submit, .page-signup form .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .page-signup form .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .page-signup form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .btn + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .page-user form .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .page-signup form .form-submit + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .question-container .btn + .form-submit, .question-container .modal-footer .btn-group .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .question-container .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group .question-container .form-submit + .form-submit, .question-container .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .page-signup form .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .page-signup form .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .btn + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .page-user form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .page-signup form .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .question-container .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .btn + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .btn + .form-submit, .modal-footer .btn-group #block-formblock-ask-an-expert .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #block-formblock-ask-an-expert td > .ajax-new-content > .form-submit + .form-submit, #block-formblock-ask-an-expert .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #block-formblock-ask-an-expert .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content .node-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content .node-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content .node-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content .node-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #content #comments .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #content #comments .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #content #comments .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #content #comments .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group #comments #content .comment-form .form-actions .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group #comments #content .comment-form .form-actions td > .ajax-new-content > .form-submit + .form-submit, #comments #content .comment-form .form-actions .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody #comments #content .comment-form .form-actions .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit, .modal-footer .btn-group .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit + .form-submit, .form-field-type-field-collection .field-multiple-table tbody .modal-footer .btn-group td > .ajax-new-content > .form-submit + .form-submit {
   margin-left: -1px;
 }
 
@@ -13533,6 +14037,15 @@ span.close_btt {
   width: 100%;
 }
 
+.front [id*="block-itg-widget-we-may-suggest"] .may-be-suggest-container h3 {
+  display: none !important;
+}
+
+.no-tv-program {
+  padding-bottom: 15px;
+  color: red;
+}
+
 .search-icon-parent {
   position: relative;
 }
@@ -13549,6 +14062,746 @@ span.close_btt {
   display: none;
 }
 
+/* CSS For embedded code */
+.itg-embed-photo-wrapper:empty {
+  display: none;
+}
+
+.page-videogallery-embed #page, .page-videogallery-embed html, .page-videogallery-embed body, .page-photogallery-embed #page, .page-photogallery-embed html, .page-photogallery-embed body, .page-embed-video #page, .page-embed-video html, .page-embed-video body, .page-embeded-video #page, .page-embeded-video html, .page-embeded-video body {
+  height: auto;
+}
+.page-videogallery-embed #main, .page-photogallery-embed #main, .page-embed-video #main, .page-embeded-video #main {
+  min-height: 0;
+}
+.page-videogallery-embed .container, .page-photogallery-embed .container, .page-embed-video .container, .page-embeded-video .container {
+  padding: 0;
+  margin: 0;
+}
+
+.itg-embed-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 0 15px 15px;
+  background-color: #171717;
+}
+.itg-embed-wrapper h1.embed-title {
+  font-size: 32px;
+  margin: 25px 0;
+  color: #fff;
+  text-align: center;
+}
+.itg-embed-wrapper .itg-embed-photo-wrapper {
+  padding: 10px;
+  background-color: #000;
+  max-width: 773px;
+  margin: 0 auto;
+  width: 100%;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb {
+  margin-top: 10px;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb .slick-slide {
+  outline: none;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb img {
+  width: 88px;
+  max-width: 100%;
+  height: 66px;
+  border: 1px solid #000;
+  outline: none;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb .slick-current img {
+  border-color: #fff;
+}
+.itg-embed-wrapper .embed-desc {
+  color: #fff;
+  padding: 5px 0 0;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-next, .itg-embed-wrapper .itg-embed-photo-slider .slick-prev {
+  cursor: pointer;
+  width: 50px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  z-index: 9;
+  border: none;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-next {
+  border-radius: 90px 0px 0px 90px;
+  right: 0;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-prev {
+  border-radius: 0 90px 90px 0;
+  left: 0;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-prev:hover, .itg-embed-wrapper .itg-embed-photo-slider .slick-next:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-next:before, .itg-embed-wrapper .itg-embed-photo-slider .slick-prev:before {
+  font: normal normal normal 32px/100px FontAwesome;
+  position: absolute;
+  top: 0;
+  color: #666;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-next:before {
+  content: '\f054';
+  right: 5px;
+}
+.itg-embed-wrapper .itg-embed-photo-slider .slick-prev:before {
+  content: '\f053';
+  left: 5px;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider {
+  padding: 0 40px;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-next, .itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-prev {
+  cursor: pointer;
+  width: 40px;
+  height: 66px;
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  z-index: 9;
+  border: none;
+  background-color: #000;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-next {
+  left: 0;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-prev {
+  right: 0;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-next:before, .itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-prev:before {
+  font: normal normal normal 32px/66px FontAwesome;
+  position: absolute;
+  top: 0;
+  color: #fff;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-next:before {
+  content: '\f053';
+  left: 10px;
+}
+.itg-embed-wrapper .itg-embed-photo-thumb-slider .slick-prev:before {
+  content: '\f054';
+  right: 10px;
+}
+
+/* End Of CSS */
+.api-grid > div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.page-quiz-user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.page-quiz-user-list table tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th, .page-quiz-user-list table td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  text-align: left;
+  word-wrap: break-word;
+}
+.page-quiz-user-list table th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+}
+.page-quiz-user-list table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.page-podcast #page-title {
+  display: none;
+}
+
+.nested-taxonomy-tree a:hover {
+  color: #a00606 !important;
+}
+
+.page-state-election section.sidebar {
+  border: none;
+}
+.page-state-election section.sidebar .block {
+  margin-bottom: 50px;
+}
+.page-state-election section.sidebar .block-title {
+  color: #09619f;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  font-size: 16px;
+  line-height: 18px;
+}
+.page-state-election .key-candidate {
+  font-family: "Roboto", sans-serif;
+  max-height: 282px;
+  overflow: auto;
+}
+.page-state-election .key-candidate .most_popular {
+  border: none;
+}
+.page-state-election .key-candidate .list-state {
+  margin: 0 0px 20px 0px;
+}
+.page-state-election .key-candidate .list-state span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+.page-state-election .key-candidate .list-state span:hover, .page-state-election .key-candidate .list-state span.active {
+  background: #1b60a3;
+  color: #fff;
+}
+.page-state-election .key-candidate .key-candidate-detail {
+  font-family: "Roboto", sans-serif;
+  display: none;
+}
+.page-state-election .key-candidate .key-candidate-detail ul {
+  zoom: 1;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul:before, .page-state-election .key-candidate .key-candidate-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.page-state-election .key-candidate .key-candidate-detail ul:after {
+  clear: both;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li {
+  float: left;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(1) {
+  width: 25%;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(2) {
+  width: 56%;
+  padding-top: 5px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li:nth-child(3) {
+  width: 18%;
+  text-align: center;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .candidate-name {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .constituancy {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #8f8f8f;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li img {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  height: 63px;
+  margin-left: 2px;
+  padding: 5px;
+  width: 63px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status {
+  font-size: 15px;
+  font-weight: 700;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status i {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 35px;
+  color: #fff;
+  font-size: 28px;
+  background: #ccc;
+  margin-top: 12px;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status span {
+  display: block;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.green {
+  color: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.green i {
+  background: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.red {
+  color: #d80a02;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.red i {
+  background: #d80a02;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.yellow {
+  color: #418b32;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.yellow i {
+  background: #efc107;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.orange {
+  color: #ff8300;
+}
+.page-state-election .key-candidate .key-candidate-detail ul li .status.orange i {
+  background: #ff8300;
+}
+.page-state-election .key-candidate .key-candidate-detail.key-candidate-detail-first {
+  display: block;
+}
+
+.top-n-most-popular-stories .widget-wrapper .data-holder {
+  height: calc(100% - 22px);
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.top-n-most-popular-stories .widget-wrapper .data-holder .mCSB_scrollTools {
+  width: 3px;
+}
+
+.special-top-news .itg-listing-wrapper .mCSB_inside > .mCSB_container {
+  margin-right: 0;
+}
+.special-top-news .itg-listing-wrapper .mCSB_scrollTools {
+  width: 3px;
+}
+
+.story-section .story-right .description .social-share.social-share-embed ul {
+  list-style-type: none;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a, .story-section .story-right .description .social-share.social-share-embed ul li span {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-size: 15px;
+}
+@media screen and (min-width: 768px) {
+  .story-section .story-right .description .social-share.social-share-embed ul li a, .story-section .story-right .description .social-share.social-share-embed ul li span {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.share, .story-section .story-right .description .social-share.social-share-embed ul li span.share {
+  color: #d0d0d0;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.share, .story-section .story-right .description .social-share.social-share-embed ul li a.google, .story-section .story-right .description .social-share.social-share-embed ul li span.share, .story-section .story-right .description .social-share.social-share-embed ul li span.google {
+  background: transparent;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.facebook, .story-section .story-right .description .social-share.social-share-embed ul li span.facebook {
+  background: #0b4887;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.twitter, .story-section .story-right .description .social-share.social-share-embed ul li span.twitter {
+  background: #05a3d2;
+}
+.story-section .story-right .description .social-share.social-share-embed ul li a.google, .story-section .story-right .description .social-share.social-share-embed ul li span.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
+
+.payment-messages-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Roboto Slab';
+  color: #000;
+}
+.payment-messages-wrapper h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 50px;
+  margin: 40px 0;
+}
+.payment-messages-wrapper .payment-message {
+  background: #ef3c24;
+  color: #fff;
+  font-size: 30px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  margin: 30px 0;
+}
+.payment-messages-wrapper .payment-message .fa {
+  font-size: 34px;
+}
+.payment-messages-wrapper .payment-message-text {
+  margin: 0 10px;
+}
+.payment-messages-wrapper .payment-other-text {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.payment-messages-wrapper .payment-other-text a {
+  color: #ef3c24;
+  text-decoration: none;
+}
+
+.blog-description p {
+  font-size: 15px;
+  line-height: 27px;
+  padding: 10px 0;
+}
+
+.page-topic a#reset_button {
+  display: none;
+}
+
+.past-speaker .views-field-title {
+  text-transform: uppercase;
+  padding: 10px 0 0;
+}
+
+.past-speaker .views-field-field-story-new-title {
+  font-size: 13px;
+  color: #8d8d8d;
+}
+
+.past-speaker .slick-list {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.past-speaker .slick-arrow {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.past-speaker .slick-arrow.fa-chevron-right {
+  right: 0;
+}
+
+.past-speaker-list {
+  text-align: center;
+}
+
+.past-speaker a {
+  display: block;
+}
+
+.past-speaker a img {
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#block-views-past-speaker-event-block-1 .block-title {
+  font-size: 24px;
+  color: #ef3c24;
+  font-family: "Roboto Slab", sans-serif;
+  margin-bottom: 15px;
+}
+
+.logged-in .header-top .links.inline.clearfix {
+  display: none;
+}
+
+.sso-header {
+  background-color: #151515;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.sso-header .back-to-itg {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  padding: 10px 0 10px 45px;
+  font-size: 16px;
+  font-weight: 300;
+  font-family: Roboto;
+  color: #aaa;
+  margin: 28px 0;
+}
+.sso-header .back-to-itg .fa {
+  width: 35px;
+  height: 35px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sso-header .back-to-itg .fa:before {
+  font-size: 24px;
+  line-height: 30px;
+}
+.sso-header .itg-logo {
+  float: right;
+}
+
+.Main-heading-login {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sso-footer {
+  background-color: #151515;
+  display: inline-block;
+  padding-top: 20px;
+  vertical-align: top;
+  width: 100%;
+}
+.sso-footer .site-menu li {
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 0;
+  width: 220px;
+}
+.sso-footer .site-menu li a {
+  color: #ddd;
+  font-family: Roboto;
+  font-size: 12px;
+}
+.sso-footer .site-menu li a:hover {
+  text-decoration: underline;
+}
+.sso-footer p {
+  padding: 10px 0;
+  margin: 20px 0 0;
+  border-top: 1px solid #666;
+  color: #666;
+  font-family: Roboto;
+  font-size: 12px;
+  text-align: center;
+}
+
+.home-election {
+  margin-bottom: 40px;
+}
+.home-election .social-share li {
+  margin-right: 7px;
+}
+
+.ad-blocker-content {
+  position: relative;
+  padding-top: 35px;
+}
+
+.ad-blocker-content:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  box-shadow: 0 -10px 50px 25px #fff;
+}
+
+.ad-blocker-content p {
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 27px;
+}
+
+.what-are h2 {
+  font-size: 18px;
+}
+.what-are p {
+  font-size: 15px;
+  line-height: 27px;
+  padding: 10px 0;
+}
+
+.feed-type {
+  padding: 30px 0 10px;
+}
+.feed-type h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+}
+.feed-type ul {
+  list-style: none;
+}
+.feed-type ul li {
+  display: inline-block;
+  vertical-align: top;
+  width: 24%;
+  padding: 10px 0;
+}
+.feed-type ul li a {
+  font-size: 16px;
+  line-height: 28px;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #666;
+  padding-left: 30px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+.feed-type ul li a:before {
+  content: '\f09e';
+  font-family: Fontawesome;
+  position: absolute;
+  line-height: 24px;
+  top: 1px;
+  left: 0;
+  width: 23px;
+  height: 23px;
+  padding-left: 3px;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  background-color: #fe9132;
+  border-radius: 50%;
+}
+.feed-type ul li a:hover {
+  color: #fe9132;
+}
+.feed-type p {
+  font-size: 15px;
+  line-height: 27px;
+}
+
+.feed-use {
+  background-color: #f8f8f8;
+  padding: 15px 23px;
+}
+.feed-use h3 {
+  font-size: 18px;
+}
+.feed-use p, .feed-use li {
+  font-size: 15px;
+  line-height: 24px;
+  padding: 10px 0;
+}
+.feed-use ul {
+  list-style: none;
+}
+.feed-use ul li {
+  position: relative;
+  padding: 10px 0 0 15px;
+}
+.feed-use ul li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #9f9f9f;
+}
+.feed-use .feed-use-sep {
+  height: 1px;
+  background-color: #dedede;
+  margin: 10px 0 20px;
+}
+
+.rss-disclaimer {
+  padding-top: 30px;
+}
+.rss-disclaimer h4 {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+.rss-disclaimer p {
+  font-size: 13px;
+  color: #888;
+  line-height: 18px;
+}
+
+.story-section .story-right .description iframe {
+  max-width: 100%;
+}
+.story-section .story-right .description .itgvideo > iframe {
+  max-width: 100%;
+  width: 100%;
+  min-height: 326px;
+}
+.story-section .story-right .description .itgvideo > iframe #main {
+  min-height: 0;
+}
+.story-section .story-right .description .itgvideo > iframe + iframe {
+  margin-top: 20px;
+}
+
+.canvasjs-chart-tooltip {
+  max-width: 180px;
+  background: #fff;
+  word-wrap: break-word;
+}
+.canvasjs-chart-tooltip > div {
+  white-space: normal !important;
+}
+.canvasjs-chart-tooltip > div img {
+  display: block;
+  margin-top: 5px;
+}
+
+.not-front .watch-right-now-video h3 {
+  display: none;
+}
+
+span.see-picture a {
+  color: #a00606;
+}
+span.see-picture a:hover {
+  color: #a00606;
+}
+span.see-picture a:after {
+  content: ':';
+}
+
+@media (min-width: 320px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: initial;
+    padding-left: 154px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 154px;
+  }
+}
 @media (min-width: 768px) {
   .modal-dialog {
     width: 960px;
@@ -13565,6 +14818,16 @@ span.close_btt {
   }
 }
 @media (min-width: 992px) {
+  .view-front-end-global-search .view-content .itg-search-list > .search-detail,
+  .view-front-end-global-search .view-content .itg-search-list > .social-share {
+    overflow: initial;
+    padding-left: 180px;
+  }
+
+  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+    padding-left: 180px;
+  }
+
   .modal-lg {
     width: 900px;
   }

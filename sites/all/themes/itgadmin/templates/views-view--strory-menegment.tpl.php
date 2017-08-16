@@ -47,23 +47,15 @@
       <?php print $exposed; ?>
     </div>
     <div class="attachment">
-      <?php
-     
-//        if (arg(0) == 'published-story') {
-//          $query_array = "&field_story_syndication_value_op=all";         
-//        }
-       
-      ?>
-      
-      <span class="count"><?php print 'Count ('.$view->total_rows.')'; ?></span>
-      <a href="clone-story" class="clone-story-link" target="_blank"><?php print t('Clone Story'); ?></a> 
-      <?php print l('Create Story', 'node/add/story', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0)))); ?>
+          
+      <span class="count"><?php print t('Count').' ('.$view->total_rows.')'; ?></span>
+      <!--<a href="clone-story" class="clone-story-link" title ="Clone Story" target="_blank"><?php print t('Clone Story'); ?></a>-->
+      <?php print l(t('Create Story'), 'node/add/story', array('attributes' => array('class' => '', 'title' => t('Create Story')), 'query' => array('destination' => arg(0)))); ?>
     </div>
   <?php endif; ?>
   
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
-      <?php //echo $view->total_rows; ?>
       <?php print $attachment_before; ?>
     </div>
   <?php endif; ?>

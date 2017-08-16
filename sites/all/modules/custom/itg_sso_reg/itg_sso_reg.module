@@ -14,32 +14,24 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  */
 
 function itg_sso_reg_init() {
- /* required for future */ 
-/*  global $user, $base_url;
-  if (array_key_exists(FRONT_USER, $user->roles)) {
-    print $user->uid;
+  global $user, $base_url, $theme;
+  $arg = arg();
+  // condition to redirect backend user in case of sso
+  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
+     drupal_goto(FRONT_URL);
+  }
+  
+  if (array_key_exists(FRONT_USER, $user->roles) && $arg[0] == 'sso-user') {
+    // make configuration for js file
     $settings = array();
-    if ($user->uid > 0) {
-
-      $arg = arg(2);
-    }
-
-    if (!empty($arg)) {
-      $fin = $arg;
-    }
-    else {
-      $fin = arg(2);
-    }
-
-    $settings['uid'] = $user->uid ? $user->uid : 0;
-    $settings['check_sso_url'] = $fin;
     $settings['base_url'] = $base_url;
-    drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
-  } */
-  
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
-  
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_change_email.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
+  }
+
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));  
 }
 
 /**
@@ -112,10 +104,45 @@ function itg_sso_reg_menu() {
   
    $items['itguserlogout'] = array(
     'page callback' => 'itguser_logout',
-    'access arguments' => array('access content'),
+    //'access arguments' => array('access content'),
+     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+   
+  $items['admin/config/people/sso-email-history'] = array(
+    'title' => 'SSo email history',
+    'description' => 'SSo email history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('sso_email_history_form'),
+    'access arguments' => array('access SSo email history'),
+    'file' => 'includes/sso_email_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  $items['admin/config/people/refer-friend-history'] = array(
+    'title' => 'Refer friend history',
+    'description' => 'Refer friend history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('refer_friend_history_form'),
+    'access arguments' => array('access SSo email history'),
+    'file' => 'includes/sso_refer_friend_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
 
+  $items['sso-email-history-del/%'] = array(
+    'title' => 'Delete Form',
+    'page callback' => 'itg_sso_email_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso-refer-history-del/%'] = array(
+    'title' => 'Delete refer a friend',
+    'page callback' => 'itg_refer_friend_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -129,7 +156,11 @@ function itg_sso_reg_permission() {
     'administer itg_sso_logout settings' => array(
       'title' => t('Edit sso signout setting'),
       'description' => t('Using this permission user can edit signout setting.'),
-    )
+    ),
+    'access SSo email history' => array(
+      'title' => t('SSo email history'),
+      'description' => t('SSo email history'),
+    ),
   );
 }
 
@@ -182,6 +213,12 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
  */
 function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
+    // inline error on login page
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_validate.js', array('scope' => 'footer'));
+    // Add js file to form.
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+    );
     $form['#after_build'][] = 'itg_user_login_after_build';
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
     $form['#attributes'] = array('autocomplete' => 'off');
@@ -189,8 +226,7 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && empty($_GET['ReturnTo'])) {
     drupal_add_js('jQuery(document).ready(function() {                  
                           jQuery("#user-login .form-item-remember-me").hide();
-                          jQuery("#user-login #edit-remember-me").prop("checked", false);
-                          
+                          jQuery("#user-login #edit-remember-me").prop("checked", false);                          
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
@@ -199,9 +235,21 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
  * Implements itg_user_login_after_build().
  */
 function itg_user_login_after_build($form, &$form_state) {
- $form['name']['#title'] = t('Enter your email/mobile number'); 
- $form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.'); 
- return $form; 
+ $form['name']['#attributes']['autocomplete'] = 'off';
+ $form['pass']['#attributes']['autocomplete'] = 'off';
+ //$form['name']['#title'] = t('Enter your email/mobile number'); 
+ $form['name']['#title'] = t('');
+ $form['pass']['#title'] = t('');
+ $form['name']['#attributes'] = array(
+    'placeholder' => t('Enter Your Email/Mobile'),
+ );
+  //$form['name']['#description'] = t('You may login with either your assigned mobile or your e-mail address.');
+ $form['name']['#description'] = t('');
+ $form['pass']['#description'] = t('');
+ $form['pass']['#attributes'] = array(
+    'placeholder' => t('Enter Your Password'),
+ );
+  return $form; 
 }
 
 /**
@@ -220,9 +268,15 @@ function itg_sso_user_login_form_validate(&$form, &$form_state) {
  * @param sring $name
  */
 function itg_sso_get_user_id($name) {
+  if(is_numeric($name)) {
+    $field = 'name';
+  } else {
+    $field = 'mail';
+  }
+  
   $itg_query = db_select('users', 'su')
       ->fields('su', array('uid'))
-      ->condition('name', $name, '=');
+      ->condition($field, $name, '=');
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
@@ -241,6 +295,13 @@ function itg_sso_logout_form($form, &$form_state) {
     '#description' => t("Please enter domain with comma seprated list (Ex: http://www.example.com)"),
   );
   
+  $form['sitename-domain'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter domain with site name'),
+    '#default_value' => variable_get('sitename-domain', ''),
+    '#description' => t("Please enter domain with site name comma seprated list (Ex: sitea name|example.com)"),
+  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save!'),
@@ -256,6 +317,7 @@ function itg_sso_logout_form($form, &$form_state) {
  */
 function itg_sso_logout_form_submit(&$form, &$form_state) {
   variable_set('signout-domain', $form_state['values']['signout']);
+  variable_set('sitename-domain', $form_state['values']['sitename-domain']);
   $id_event = variable_get('signout-domain', '');
   drupal_set_message($id_event.' saved successfully!');
 }
@@ -289,11 +351,159 @@ function itg_sso_reg_password_success() {
     return drupal_access_denied();
   }
   else {
-    $form['password_success'] = array(
-      '#prefix' => '<div class="password-success">',
-      '#markup' => 'Your passsword has been changed successfully</div>',
-    );
-
-    return $form;
+    $arg = arg();
+    if(!empty($arg[1]) && $arg[0] == 'password-success') {
+      $destination = base64_decode($arg[1]);
+      $options = array('query' => array('pass' => 'success'));
+      drupal_goto($destination, $options);
+    }
   }
+}
+
+/**
+ * Implements itg_sso_user_email_complete().
+ */
+function itg_sso_user_email_complete() {
+  if (user_is_anonymous()) {
+    return drupal_access_denied();
+  }
+  else {
+    $arg = arg();
+    if(!empty($arg[1]) && $arg[0] == 'complete-page') {
+      $destination = base64_decode($arg[1]);
+      $options = array('query' => array('email' => 'success'));
+      drupal_goto($destination, $options);
+    }
+  }
+}
+
+/**
+ * Implements itg_sso_email_history_callback
+ */
+function itg_sso_email_history_callback() {
+  $arg = arg();
+  $id = $arg[1];
+  $redirect_url = 'admin/config/people/sso-email-history';
+  if (isset($id)) {
+    db_delete('itg_sso_email_history')
+      ->condition('id', $id)
+      ->execute();
+    drupal_set_message(t('User has been deleted sucessfully from history table'));
+    drupal_goto($redirect_url);
+  }
+}
+
+/**
+ * Implements itg_refer_friend_history_callback
+ */
+function itg_refer_friend_history_callback() {
+  $arg = arg();
+  $id = $arg[1];
+  $redirect_url = 'admin/config/people/refer-friend-history';
+  if (isset($id)) {
+    db_delete('itg_lrp_refer_friend')
+      ->condition('id', $id)
+      ->execute();
+    drupal_set_message(t('User has been deleted sucessfully from refer friend table'));
+    drupal_goto($redirect_url);
+  }
+}
+
+/**
+ * Implements simplesaml_get_uid_byauth().
+ * @param string $authname
+ * @return array $user_list
+ */
+function simplesaml_get_uid_byauth($authname) {
+  if (!empty($authname)) {
+    $query = db_select('authmap', 'u');
+    $query->leftjoin('field_data_field_mobile_number', 'f', 'u.uid = f.entity_id');
+    $query->fields('u', array('uid'))
+        ->fields('f', array('field_mobile_number_value'))
+        ->condition('u.authname', $authname);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $user_list['uid'] = $record['uid'];
+      $user_list['mobile'] = $record['field_mobile_number_value'];
+    }
+
+    return $user_list;
+  }
+}
+
+/*
+ * Implements simplesaml_get_authname().
+ * @param int $uid
+ * @return string
+ */
+function simplesaml_get_authname($uid) {
+  if (!empty($uid)) {
+    $query = db_select('authmap', 'u');
+    $query->fields('u', array('authname'))
+        ->condition('u.uid', $uid);
+   return $query->execute()->fetchField();
+  }
+}
+
+/**
+ * Implements hook_token_info(). This hook will register tow token fname and lname.
+ */
+function itg_sso_reg_token_info() {
+  $info['tokens']['custom']['fname'] = array(
+    'name' => t('First name'),
+    'description' => t('First name re placer for fname '),
+  );
+  $info['tokens']['custom']['lname'] = array(
+    'name' => t('Last name'),
+    'description' => t('Last name re placer for lname '),
+  );
+  $info['tokens']['custom']['mtitle'] = array(
+    'name' => t('Custom meta title'),
+    'description' => t('Custom meta title re placer '),
+  );
+  
+  $info['tokens']['custom']['mdescription'] = array(
+    'name' => t('Custom meta description'),
+    'description' => t('Custom meta description re placer '),
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens(). This hook will operate the token and replace it with it's value.
+ */
+function itg_sso_reg_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  global $user;
+	$replacements = array();
+ if ($type == 'custom') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+          case 'fname':
+          $fname = '';
+          if(function_exists('itg_custom_get_user_details')) {
+          $fname = itg_custom_get_user_details($user->uid);
+          }
+          $replacements[$original] = $fname['fname'];
+          break;
+          case 'lname':
+          $lname = '';
+          if(function_exists('itg_custom_get_user_details')) {
+          $lname = itg_custom_get_user_details($user->uid);
+          }
+          $replacements[$original] = $lname['lname'];
+          break;
+          case 'mtitle':
+          $mtitle = 'mtitle';
+          $replacements[$original] = $mtitle;
+          break;
+          case 'mdescription':
+          $mdescription = 'mdescription';
+          $replacements[$original] = $mdescription;
+          break;
+      }
+    }
+  }
+
+	return $replacements;
 }

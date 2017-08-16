@@ -8,6 +8,7 @@
   }
   ?>
     
-    <h4><?php print $row['title']; ?></h4>
-    <p><?php print $row['field_story_new_title']; ?></p>
+    <h4  title="<?php print strip_tags($row['title']) ; ?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></h4>
+    <p><?php //print $row['field_story_new_title']; ?></p>
+    <p><?php print $row['field_celebrity_pro_occupation']; ?></p>
 <?php endforeach; ?>

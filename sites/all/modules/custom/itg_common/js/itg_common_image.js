@@ -39,8 +39,7 @@
                         jQuery('#edit-field-story-medium-image-und-0-upload-imce-select').triggerHandler('mousedown');
                         jQuery('#edit-field-story-extra-small-image-und-0-upload-imce-select').triggerHandler('mousedown');
 
-
-                         jQuery('#edit-field-story-large-image-und-0-upload-itg_image_repository-path').attr('value', large_node_uri);
+                        jQuery('#edit-field-story-large-image-und-0-upload-itg_image_repository-path').attr('value', large_node_uri);
                         jQuery('#edit-field-story-medium-image-und-0-upload-itg_image_repository-path').attr('value', large_node_uri);
                         jQuery('#edit-field-story-small-image-und-0-upload-itg_image_repository-path').attr('value', large_node_uri);
                         jQuery('#edit-field-story-extra-small-image-und-0-upload-itg_image_repository-path').attr('value', large_node_uri);

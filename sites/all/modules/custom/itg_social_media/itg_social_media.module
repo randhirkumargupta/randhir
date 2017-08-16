@@ -19,14 +19,14 @@ require_once('vendor/lib_tcpdf/tcpdf.php');
  */
 function itg_social_media_permission() {
   return array(
-      'administer itg_social_media edit_content settings' => array(
-          'title' => t('Edit social media section'),
-          'description' => t('Using this permission user can edit social media part of any node.'),
-      ),
-      'administer itg_social_media settings' => array(
-          'title' => t('Administer api key settings'),
-          'description' => t('Using this permission user can edit social media api settings.'),
-      ),
+    'administer itg_social_media edit_content settings' => array(
+      'title' => t('Edit social media section'),
+      'description' => t('Using this permission user can edit social media part of any node.'),
+    ),
+    'administer itg_social_media settings' => array(
+      'title' => t('Administer api key settings'),
+      'description' => t('Using this permission user can edit social media api settings.'),
+    ),
   );
 }
 
@@ -37,88 +37,88 @@ function itg_social_media_permission() {
 function itg_social_media_menu() {
   // Facebook login callback
   $items['itg-social-media-settings-callback'] = array(
-      'page callback' => 'itg_social_media_settings_callback',
-      'access arguments' => array('administer itg_social_media edit_content settings'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.settings.inc',
+    'page callback' => 'itg_social_media_settings_callback',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
   );
   $items['itg-social-log/%'] = array(
-      'page callback' => 'itg_social_media_log_listing',
-      'access arguments' => array('access content'),
-      'page arguments' => array(2),
-      'title' => 'ITG Social Media Log',
-      'type' => MENU_CALLBACK,
+    'page callback' => 'itg_social_media_log_listing',
+    'access arguments' => array('access content'),
+    'page arguments' => array(2),
+    'title' => 'ITG Social Media Log',
+    'type' => MENU_CALLBACK,
   );
   $items['facebook_count'] = array(
-      'page callback' => 'itg_social_media_social_media_activity_update',
-      'access arguments' => array('access content'),
-      'type' => MENU_CALLBACK,
+    'page callback' => 'itg_social_media_social_media_activity_update',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
   $items['download-pdf'] = array(
-      'page callback' => 'itg_social_media_download_pdf',
-      'access arguments' => array('access content'),
-      'type' => MENU_CALLBACK,
+    'page callback' => 'itg_social_media_download_pdf',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
   $items['set_svg_in_session'] = array(
-      'page callback' => 'itg_social_media_set_svg_in_session',
-      'access arguments' => array('access content'),
-      'type' => MENU_CALLBACK,
+    'page callback' => 'itg_social_media_set_svg_in_session',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
   $items['twitter/oauth'] = array(
-      'page callback' => 'itg_social_media_twitter_callback',
-      'access arguments' => array('administer itg_social_media edit_content settings'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.settings.inc',
+    'page callback' => 'itg_social_media_twitter_callback',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
   );
   //settings form  
   $items['admin/config/administration/itg_social_media'] = array(
-      'title' => 'ITG Social Media',
-      'description' => 'Social Media Settings Form',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_social_media_settings_form'),
-      'access arguments' => array('administer itg_social_media settings'),
-      'type' => MENU_NORMAL_ITEM,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'title' => 'ITG Social Media',
+    'description' => 'Social Media Settings Form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_social_media_settings_form'),
+    'access arguments' => array('administer itg_social_media settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
   $items['admin/config/administration/social_media_login'] = array(
-      'title' => 'ITG Social Media Login Form',
-      'description' => 'Social Media Login Form',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_social_media_login_form'),
-      'access arguments' => array('administer itg_social_media settings'),
-      'type' => MENU_NORMAL_ITEM,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'title' => 'ITG Social Media Login Form',
+    'description' => 'Social Media Login Form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_social_media_login_form'),
+    'access arguments' => array('administer itg_social_media settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
   $items['twitter/logout'] = array(
-      'page callback' => 'itg_social_media_twitter_logout',
-      'access arguments' => array('administer itg_social_media settings'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'page callback' => 'itg_social_media_twitter_logout',
+    'access arguments' => array('administer itg_social_media settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
   $items['facebook/logout'] = array(
-      'page callback' => 'itg_social_media_facebook_logout',
-      'access arguments' => array('administer itg_social_media settings'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'page callback' => 'itg_social_media_facebook_logout',
+    'access arguments' => array('administer itg_social_media settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
   $items['admin/itg-social-media/facebook-pages'] = array(
-      'page callback' => '_facebook_pages_list',
-      'access arguments' => array('administer itg_social_media settings'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'page callback' => '_facebook_pages_list',
+    'access arguments' => array('administer itg_social_media settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
   $items['itg-social_media/title-autocomplete/%'] = array(
-      'page callback' => '_smi_title_autocomplete',
-      'access arguments' => array('administer itg_social_media edit_content settings'),
-      'page arguments' => array(2),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.settings.inc',
+    'page callback' => '_smi_title_autocomplete',
+    'access arguments' => array('administer itg_social_media edit_content settings'),
+    'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.settings.inc',
   );
   $items['itg-social-media-promote/%'] = array(
-      'page callback' => 'itg_social_media_promote',
-      'access arguments' => array('access content'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_social_media.admin.inc'
+    'page callback' => 'itg_social_media_promote',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_social_media.admin.inc'
   );
 
   return $items;
@@ -134,13 +134,13 @@ function itg_social_media_enter_in_lock($nid) {
   $query->condition('nid', $nid)->execute();
   ;
   $fieldsave = array(
-      'nid' => $nid,
-      'uid' => $user->uid,
-      'lock_time' => date('Y-m-d H:i:s'),
+    'nid' => $nid,
+    'uid' => $user->uid,
+    'lock_time' => date('Y-m-d H:i:s'),
   );
   $itg_query = db_insert('itg_social_media_node_lock');
   $itg_query->fields($fieldsave)
-          ->execute();
+      ->execute();
 }
 
 /**
@@ -149,9 +149,9 @@ function itg_social_media_enter_in_lock($nid) {
 function itg_social_media_check_node_exist_lock($nid) {
   $expire_stamp = date('Y-m-d H:i:s', strtotime("-15 min"));
   $query = db_select('itg_social_media_node_lock', 'isml')
-          ->fields('isml')
-          ->condition("isml.lock_time", $expire_stamp, ">=")
-          ->condition('nid', $nid, '=');
+      ->fields('isml')
+      ->condition("isml.lock_time", $expire_stamp, ">=")
+      ->condition('nid', $nid, '=');
   $result = $query->execute()->fetchall();
   return $result;
 }
@@ -285,20 +285,20 @@ function ColoredTable($header, $data, $pdf) {
 function itg_social_media_log_listing() {
   # configure the table header columns
   $header = array(
-      array('data' => t('Title')),
-      array('data' => t('Twitter Count ')),
-      array('data' => t('Facebook Count')),
-      array('data' => t('Last Promoted on ')),
+    array('data' => t('Title')),
+    array('data' => t('Twitter Count ')),
+    array('data' => t('Facebook Count')),
+    array('data' => t('Last Promoted on ')),
   );
 
   $nid = arg(1);
   $query = db_select('itg_social_media_logs', 'isml')
-                  ->fields('isml')
-                  ->condition('nid', $nid, '=')
-                  ->orderBy('id', 'DESC')
-                  ->extend('TableSort')
-                  ->orderByHeader($header)
-                  ->extend('PagerDefault')->limit(1);
+          ->fields('isml')
+          ->condition('nid', $nid, '=')
+          ->orderBy('id', 'DESC')
+          ->extend('TableSort')
+          ->orderByHeader($header)
+          ->extend('PagerDefault')->limit(1);
 
 
   $result = $query->execute()->fetchall();
@@ -310,26 +310,26 @@ function itg_social_media_log_listing() {
   $rows = array();
 
   $rows[] = array(
-      array('data' => $result[0]->node_title),
-      array('data' => $twitter_count),
-      array('data' => $facebook_count),
-      array('data' => format_date($result[0]->scheduled_time, $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
+    array('data' => $result[0]->node_title),
+    array('data' => $twitter_count),
+    array('data' => $facebook_count),
+    array('data' => format_date($result[0]->scheduled_time, $type = 'itg_date_with_time', $format = '', $timezone = NULL, $langcode = NULL)),
   );
 
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
   // set facebook table
   $header = array(
-      array('data' => t('FB Like Count')),
-      array('data' => t('FB Share Count ')),
-      array('data' => t('FB Comment Count')),
-      array('data' => t('FB Click')),
-      array('data' => t('FB Video Views')),
-      array('data' => t('FB Photo Views')),
-      array('data' => t('FB Fans Reach')),
-      array('data' => t('FB Impressions')),
-      array('data' => t('Retweets Count')),
-      array('data' => t('Twitter Likes Count')),
+    array('data' => t('FB Like Count')),
+    array('data' => t('FB Share Count ')),
+    array('data' => t('FB Comment Count')),
+    array('data' => t('FB Click')),
+    array('data' => t('FB Video Views')),
+    array('data' => t('FB Photo Views')),
+    array('data' => t('FB Fans Reach')),
+    array('data' => t('FB Impressions')),
+    array('data' => t('Retweets Count')),
+    array('data' => t('Twitter Likes Count')),
   );
 
   $nid = arg(1);
@@ -338,16 +338,16 @@ function itg_social_media_log_listing() {
   $rows = array();
 
   $rows[] = array(
-      array('data' => $fecebook_detaila['facebook']['like']),
-      array('data' => $fecebook_detaila['facebook']['share']),
-      array('data' => $fecebook_detaila['facebook']['comment']),
-      array('data' => $fecebook_detaila['facebook']['click_on_post']),
-      array('data' => $fecebook_detaila['facebook']['video_views']),
-      array('data' => $fecebook_detaila['facebook']['photo_views']),
-      array('data' => $fecebook_detaila['facebook']['fan_reach']),
-      array('data' => $fecebook_detaila['facebook']['impressions']),
-      array('data' => $fecebook_detaila['twitter']['share']),
-      array('data' => $fecebook_detaila['twitter']['like']),
+    array('data' => $fecebook_detaila['facebook']['like']),
+    array('data' => $fecebook_detaila['facebook']['share']),
+    array('data' => $fecebook_detaila['facebook']['comment']),
+    array('data' => $fecebook_detaila['facebook']['click_on_post']),
+    array('data' => $fecebook_detaila['facebook']['video_views']),
+    array('data' => $fecebook_detaila['facebook']['photo_views']),
+    array('data' => $fecebook_detaila['facebook']['fan_reach']),
+    array('data' => $fecebook_detaila['facebook']['impressions']),
+    array('data' => $fecebook_detaila['twitter']['share']),
+    array('data' => $fecebook_detaila['twitter']['like']),
   );
 
   $output_1 .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
@@ -378,16 +378,16 @@ function itg_social_media_log_listing() {
  */
 function itg_social_media_theme($existing, $type, $theme, $path) {
   $themes = array(
-      'itg_twitter_social' => array(
-          'template' => 'itg-social-media-twitter',
-          'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
-          'variables' => array('data' => NULL),
-      ),
-      'social_media_promote' => array(
-          'template' => 'itg-social-media-promote',
-          'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
-          'variables' => array('data' => NULL),
-      ),
+    'itg_twitter_social' => array(
+      'template' => 'itg-social-media-twitter',
+      'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'social_media_promote' => array(
+      'template' => 'itg-social-media-promote',
+      'path' => drupal_get_path('module', 'itg_social_media') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
   return $themes;
 }
@@ -400,10 +400,10 @@ function itg_social_media_theme($existing, $type, $theme, $path) {
  */
 function itg_social_media_count_log($share_on = null, $nid) {
   $query = db_select('itg_social_media_logs', 'isml')
-          ->fields('isml')
-          ->condition('nid', $nid, '=')
-          ->condition('status', 1, '=')
-          ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
+      ->fields('isml')
+      ->condition('nid', $nid, '=')
+      ->condition('status', 1, '=')
+      ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
   $result = $query->execute()->fetchall();
   return count($result);
 }
@@ -416,11 +416,11 @@ function itg_social_media_count_log($share_on = null, $nid) {
  */
 function itg_social_media_get_data_by_nid($share_on = null, $nid) {
   $query = db_select('itg_social_media_logs', 'isml')
-          ->fields('isml')
-          ->condition('nid', $nid, '=')
-          ->condition('status', 1, '=')
-          ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE')
-          ->orderBy('id', 'DESC');
+      ->fields('isml')
+      ->condition('nid', $nid, '=')
+      ->condition('status', 1, '=')
+      ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE')
+      ->orderBy('id', 'DESC');
   $result = $query->execute()->fetchall();
   return $result;
 }
@@ -433,9 +433,9 @@ function itg_social_media_get_data_by_nid($share_on = null, $nid) {
  */
 function itg_social_media_check_node_exist($nid) {
   $query = db_select('itg_social_media_logs', 'isml')
-          ->fields('isml')
-          ->condition('status', 1, '=')
-          ->condition('nid', $nid, '=');
+      ->fields('isml')
+      ->condition('status', 1, '=')
+      ->condition('nid', $nid, '=');
 
   $result = $query->execute()->fetchall();
   return count($result);
@@ -449,16 +449,16 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
   switch ($form['#id']) {
     case 'views-exposed-form-social-media-logs-page':
       $form['created']['min'] = array(
-          '#type' => 'date_popup',
-          '#date_format' => 'd/m/Y',
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
       $form['created']['max'] = array(
-          '#type' => 'date_popup',
-          '#date_format' => 'd/m/Y',
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+        '#type' => 'date_popup',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
       // Autocomplete node title
       $form['node_title']['#autocomplete_path'] = 'itg-social_media/title-autocomplete/node_title';
@@ -472,56 +472,68 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['status']['#options'][1] = t('Complete');
       $form['status']['#options'][0] = t('Pending');
       $form['created']['min'] = array(
-          '#type' => 'date_popup',
-          '#title' => 'From',
-          '#date_format' => 'd/m/Y',
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+        '#type' => 'date_popup',
+        '#title' => 'From',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
       $form['created']['max'] = array(
-          '#type' => 'date_popup',
-          '#title' => 'To',
-          '#date_format' => 'd/m/Y',
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+        '#type' => 'date_popup',
+        '#title' => 'To',
+        '#date_format' => 'd/m/Y',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
       break;
     case 'views-exposed-form-browse-content-page':
-      $form['field_itg_content_publish_date_value']['min'] = array(
-          '#type' => 'date_popup',
-          '#title' => 'From',
-          '#date_format' => 'Y-m-d',
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
+
+      $form['field_itg_content_publish_date_value']['value'] = array(
+        '#type' => 'date_popup',
+        '#title' => 'From',
+        '#date_format' => 'Y-m-d',
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),
       );
 
-      $form['field_itg_content_publish_date_value']['max'] = array(
-          '#type' => 'date_popup',
-          '#title' => 'To',
-          '#date_format' => 'Y-m-d',
-          '#default_value' => date('Y-m-d'),
-          '#date_year_range' => '-3:+3',
-          '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
+      $form['field_itg_content_publish_date_value_3']['value'] = array(
+        '#type' => 'date_popup',
+        '#title' => 'To',
+        '#date_format' => 'Y-m-d',
+        //'#default_value' => date('Y-m-d'),
+        '#date_year_range' => '-3:+3',
+        '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),
       );
 
       break;
     case 'views-exposed-form-social-media-report-social-media-report':
       $form['scheduled_time']['min']['#attributes'] = array(
-          'autocomplete' => 'off',
-          'readonly' => 'readonly',
-          'placeholder' => t('Start Date'),
+        'autocomplete' => 'off',
+        'readonly' => 'readonly',
+        'placeholder' => t('Start Date'),
       );
       $form['scheduled_time']['min']['#type'] = 'date_popup';
       $form['scheduled_time']['min']['#date_format'] = 'Y-m-d';
       $form['scheduled_time']['min']['#datepicker_options'] = array('maxDate' => '+0d');
       $form['scheduled_time']['max']['#datepicker_options'] = array('maxDate' => '+0d');
       $form['scheduled_time']['max']['#attributes'] = array(
-          'autocomplete' => 'off',
-          'readonly' => 'readonly',
-          'placeholder' => t('End Date')
+        'autocomplete' => 'off',
+        'readonly' => 'readonly',
+        'placeholder' => t('End Date')
       );
       $form['scheduled_time']['max']['#type'] = 'date_popup';
       $form['scheduled_time']['max']['#date_format'] = 'Y-m-d';
+
+      drupal_add_js('
+           jQuery(document).ready(function(){
+           var getlandgt = jQuery(".view-social-media-report table").length;
+if(getlandgt==0) {
+jQuery(".feed-icon").hide();
+}
+        });', array(
+        'type' => 'inline',
+        'scope' => 'footer',
+      ));
       drupal_add_js('
            jQuery("#download-pdf-sm").live("click", function () {
             var gersvg = jQuery("svg").html();
@@ -543,8 +555,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
             
 
         });', array(
-          'type' => 'inline',
-          'scope' => 'footer',
+        'type' => 'inline',
+        'scope' => 'footer',
       ));
 
       break;
@@ -559,8 +571,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
 function itg_social_media_block_info() {
   $block = array();
   $block['social_media_form'] = array(
-      'info' => t('Social Media Integration'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Social Media Integration'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   return $block;
@@ -581,8 +593,8 @@ function itg_social_media_block_view($delta = '') {
   switch ($delta) {
     case 'social_media_form':
       $block = array(
-          'subject' => t('Social media Integration'),
-          'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
+        'subject' => t('Social media Integration'),
+        'content' => drupal_get_form('itg_social_media_form', $c_type, $nid),
       );
 
       break;
@@ -600,7 +612,7 @@ function itg_social_media_block_view($delta = '') {
 function itg_social_media_node_type($nid) {
   $itg_query = db_select('node', 'n');
   $itg_query->fields('n', array('type'))
-          ->condition('nid', $nid);
+      ->condition('nid', $nid);
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
@@ -655,21 +667,25 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       case 'videos':
         if ($stime != NULL) {
           $data = [
-              'title' => $node->title,
-              'description' => t($desc) . ' ' . $short_url,
-              'source' => $fb->videoToUpload($path),
-              'published' => FALSE,
-              'scheduled_publish_time' => $stime,
+            'title' => $node->title,
+            'description' => t($desc),
+            'source' => $fb->videoToUpload($path),
+            'published' => FALSE,
+            'caption' => $node->title,
+            'link' => FRONT_URL . '/' . $alias,
+            'scheduled_publish_time' => $stime,
           ];
           $pre_save['scheduled_time'] = $stime;
           $pre_save['created'] = REQUEST_TIME;
         }
         else {
           $data = [
-              'title' => $node->title,
-              'description' => t($desc) . ' ' . $short_url,
-              'source' => $fb->videoToUpload($path),
-              'published' => TRUE,
+            'title' => $node->title,
+            'description' => t($desc),
+            'caption' => $node->title,
+            'link' => FRONT_URL . '/' . $alias,
+            'source' => $fb->videoToUpload($path),
+            'published' => TRUE,
           ];
           $pre_save['created'] = REQUEST_TIME;
           $pre_save['scheduled_time'] = REQUEST_TIME;
@@ -680,19 +696,23 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       case 'photos':
         if ($stime != NULL) {
           $data = [
-              'message' => t($desc) . ' ' . $short_url,
-              'source' => $fb->fileToUpload($path),
-              'published' => FALSE,
-              'scheduled_publish_time' => $stime,
+            'message' => t($desc),
+            'source' => $fb->fileToUpload($path),
+            'published' => FALSE,
+            'caption' => $node->title,
+            'link' => FRONT_URL . '/' . $alias,
+            'scheduled_publish_time' => $stime,
           ];
           $pre_save['scheduled_time'] = $stime;
           $pre_save['created'] = REQUEST_TIME;
         }
         else {
           $data = [
-              'message' => t($desc) . ' ' . $short_url,
-              'source' => $fb->fileToUpload($path),
-              'published' => TRUE,
+            'message' => t($desc),
+            'source' => $fb->fileToUpload($path),
+            'published' => TRUE,
+            'caption' => $node->title,
+            'link' => FRONT_URL . '/' . $alias,
           ];
           $pre_save['created'] = REQUEST_TIME;
           $pre_save['scheduled_time'] = REQUEST_TIME;
@@ -704,11 +724,13 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     try {
       $response = $fb->post('/' . $page_id . '/' . $type, $data, $token);
       $graph_node_res = $response->getGraphNode();
-    } catch (Facebook\Exceptions\FacebookResponseException $e) {
+    }
+    catch (Facebook\Exceptions\FacebookResponseException $e) {
       // When Graph returns an error
       drupal_set_message(t('Content not promoted on facebook error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
       drupal_goto('/browse-content');
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+    }
+    catch (Facebook\Exceptions\FacebookSDKException $e) {
       // When validation fails or other local issues
       drupal_set_message(t('Facebook SDK returned an error: @egetMessage', array('@egetMessage' => $e->getMessage())), 'error');
       drupal_goto('/browse-content');
@@ -768,14 +790,13 @@ function itg_social_media_activity($nid) {
 
   $share_on = 'facebook';
   $query = db_select('itg_social_media_logs', 'isml')
-          ->fields('isml')
-          ->condition('nid', $nid, '=')
-          ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
+      ->fields('isml')
+      ->condition('nid', $nid, '=')
+      ->condition('social_media', '%' . db_like($share_on) . '%', 'LIKE');
 
   $result = $query->execute()->fetchall();
 
   foreach ($result as $result_d) {
-
     $like = $like + $result_d->fb_likes;
     $comment = $comment + $result_d->fb_comment;
     $share = $share + $result_d->fb_shares;
@@ -807,10 +828,10 @@ function itg_social_media_activity($nid) {
  */
 function itg_social_media_twitter_promote_by_nid($nid) {
   $query = db_select('itg_social_media_logs', 'isml')
-          ->fields('isml')
-          ->condition('nid', $nid, '=')
-          ->condition('status', 1, '=')
-          ->condition('social_media', '%' . db_like('Twitter') . '%', 'LIKE');
+      ->fields('isml')
+      ->condition('nid', $nid, '=')
+      ->condition('status', 1, '=')
+      ->condition('social_media', '%' . db_like('Twitter') . '%', 'LIKE');
 
 
   $result = $query->execute()->fetchall();
@@ -861,9 +882,9 @@ function itg_social_media_form_submit($form, &$form_state) {
         itg_social_media_facebook_post($fid, $desc, 'videos', $node, $stime);
         // save node field
         $node->field_story_facebook_video['und'][0] = array(
-            'fid' => $fid,
-            'display' => 1,
-            'description' => ''
+          'fid' => $fid,
+          'display' => 1,
+          'description' => ''
         );
         $node->field_story_facebook_narrative['und'][0]['value'] = $form_state['values']['itg_facebook_narrative'];
       }
@@ -907,9 +928,9 @@ function itg_social_media_form_submit($form, &$form_state) {
       $desc = $form_state['values']['itg_twitter_narrative'];
       $fid = $form_state['values']['itg_twit_video'];
       $node->field_story_twitter_video['und'][] = array(
-          'fid' => $fid,
-          'display' => 1,
-          'description' => ''
+        'fid' => $fid,
+        'display' => 1,
+        'description' => ''
       );
       $node->field_story_tweet['und'][0]['value'] = $desc;
 
@@ -965,7 +986,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
       // upload all media files
 
       $reply = $cb->media_upload([
-          'media' => $path
+        'media' => $path
       ]);
 
       // and collect their IDs
@@ -977,21 +998,21 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
 
     // send Tweet with these medias
     $reply = $cb->statuses_update([
-        'status' => $desc . ' ' . $short_url,
-        'media_ids' => $media_id
+      'status' => $desc,
+      'media_ids' => $media_id
     ]);
 
     watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled_id === NULL) {
       $pre_save = array(
-          'nid' => $node->nid,
-          'node_title' => $node->title,
-          'username' => $user->name,
-          'post_id' => $reply->id,
-          'social_media' => 'Twitter Image',
-          'created' => REQUEST_TIME,
-          'scheduled_time' => REQUEST_TIME,
-          'status' => 1,
+        'nid' => $node->nid,
+        'node_title' => $node->title,
+        'username' => $user->name,
+        'post_id' => $reply->id,
+        'social_media' => 'Twitter Image',
+        'created' => REQUEST_TIME,
+        'scheduled_time' => REQUEST_TIME,
+        'status' => 1,
       );
 
       // iNSERT INTO DATABASE
@@ -1001,13 +1022,13 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
     }
     else {
       $pre_save = array(
-          'status' => 1,
+        'status' => 1,
       );
       $query = db_update('itg_social_media_logs');
       $query->condition('id', $is_scheduled_id)
-              ->condition('status', 0)
-              ->fields($pre_save)
-              ->execute();
+          ->condition('status', 0)
+          ->fields($pre_save)
+          ->execute();
       drupal_set_message(t('Image has been posted on social media - Twitter'), 'status');
     }
   }
@@ -1064,9 +1085,9 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
 
     // INIT the upload
     $reply = $cb->media_upload([
-        'command' => 'INIT',
-        'total_bytes' => $size_bytes,
-        'media_type' => 'video/mp4',
+      'command' => 'INIT',
+      'total_bytes' => $size_bytes,
+      'media_type' => 'video/mp4',
     ]);
 
     $media_id = $reply->media_id_string;
@@ -1077,10 +1098,10 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
       // 1MB per chunk for this sample
       $chunk = fread($fp, 1048576);
       $reply = $cb->media_upload([
-          'command' => 'APPEND',
-          'media_id' => $media_id,
-          'segment_index' => $segment_id,
-          'media' => $chunk
+        'command' => 'APPEND',
+        'media_id' => $media_id,
+        'segment_index' => $segment_id,
+        'media' => $chunk
       ]);
 
       $segment_id++;
@@ -1089,8 +1110,8 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
     fclose($fp);
     // FINALIZE the upload
     $reply = $cb->media_upload([
-        'command' => 'FINALIZE',
-        'media_id' => $media_id
+      'command' => 'FINALIZE',
+      'media_id' => $media_id
     ]);
 
     if ($reply->httpstatus < 200 || $reply->httpstatus > 299) {
@@ -1101,21 +1122,21 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
 
     // Now use the media_id in a Tweet
     $reply = $cb->statuses_update([
-        'status' => $desc . ' ' . $short_url,
-        'media_ids' => $media_id
+      'status' => $desc,
+      'media_ids' => $media_id
     ]);
 
     watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled === NULL) {
       $pre_save = array(
-          'nid' => $node->nid,
-          'node_title' => $node->title,
-          'username' => $user->name,
-          'post_id' => $reply->id,
-          'social_media' => 'Twitter Video',
-          'created' => REQUEST_TIME,
-          'status' => 1,
-          'scheduled_time' => REQUEST_TIME,
+        'nid' => $node->nid,
+        'node_title' => $node->title,
+        'username' => $user->name,
+        'post_id' => $reply->id,
+        'social_media' => 'Twitter Video',
+        'created' => REQUEST_TIME,
+        'status' => 1,
+        'scheduled_time' => REQUEST_TIME,
       );
 
       // iNSERT INTO DATABASE
@@ -1125,13 +1146,13 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
     }
     else {
       $pre_save = array(
-          'status' => 1,
+        'status' => 1,
       );
       $query = db_update('itg_social_media_logs');
       $query->condition('id', $is_scheduled_id)
-              ->condition('status', 0)
-              ->fields($pre_save)
-              ->execute();
+          ->condition('status', 0)
+          ->fields($pre_save)
+          ->execute();
       drupal_set_message(t('Video has been posted on social media - Twitter'), 'status');
     }
   }
@@ -1151,8 +1172,8 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
  */
 function itg_social_media_views_api() {
   return array(
-      'api' => 3,
-      'path' => drupal_get_path('module', 'itg_social_media') . '/includes/views',
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_social_media') . '/includes/views',
   );
 }
 
@@ -1222,16 +1243,16 @@ function itg_social_media_views_pre_render(&$view) {
 function itg_social_media_save_scheduled_post($node, $type, $stime) {
   global $user;
   $presave = array(
-      'nid' => $node->nid,
-      'node_title' => $node->title,
-      'username' => $user->name,
-      'social_media' => $type,
-      'scheduled_time' => $stime,
-      'created' => REQUEST_TIME,
+    'nid' => $node->nid,
+    'node_title' => $node->title,
+    'username' => $user->name,
+    'social_media' => $type,
+    'scheduled_time' => $stime,
+    'created' => REQUEST_TIME,
   );
   $itg_query = db_insert('itg_social_media_logs');
   $itg_query->fields($presave)
-          ->execute();
+      ->execute();
   if ($itg_query) {
     drupal_set_message($type . ' Post has been saved for scheduling', 'status');
   }
@@ -1247,12 +1268,12 @@ function itg_social_media_save_scheduled_post($node, $type, $stime) {
  */
 function itg_social_media_cronapi($op, $job = NULL) {
   $items['itg_twitter_schduler'] = array(
-      'description' => 'Publish twitter post on twitter',
-      'callback' => 'itg_social_media_publish_on_twitter',
+    'description' => 'Publish twitter post on twitter',
+    'callback' => 'itg_social_media_publish_on_twitter',
   );
   $items['itg_social_media_social_media_activity_update_cron'] = array(
-      'description' => 'Socail Media Activity Update',
-      'callback' => 'itg_social_media_social_media_activity_update',
+    'description' => 'Socail Media Activity Update',
+    'callback' => 'itg_social_media_social_media_activity_update',
   );
 
   return $items;
@@ -1265,7 +1286,7 @@ function itg_social_media_social_media_activity_update() {
 
   $itg_query = db_select('itg_social_media_logs', 'itg');
   $itg_query->fields('itg', array('id', 'post_id', 'social_media'))
-          ->condition('status', 1);
+      ->condition('status', 1);
 
   $itg_result = $itg_query->execute()->fetchAll();
 
@@ -1285,25 +1306,25 @@ function itg_social_media_social_media_activity_update() {
           $comment = $data['comments']['summary']['total_count'];
           $share = $data['shares']['count'];
           $update_field = array(
-              'fb_likes' => $like,
-              'fb_comment' => $comment,
-              'fb_shares' => $share
+            'fb_likes' => $like,
+            'fb_comment' => $comment,
+            'fb_shares' => $share
           );
           $query = db_update('itg_social_media_logs');
           $query->condition('id', $result_data->id)
-                  ->fields($update_field)
-                  ->execute();
+              ->fields($update_field)
+              ->execute();
 
           itg_social_media_update_fb_click_video_play($result_data->post_id, $result_data->id);
         }
         if (strpos($result_data->social_media, 'Twitter') !== FALSE) {
           $social_counter_settings = array(
-              //twitter       
-              'twitter_user' => '',
-              'consumer_key' => variable_get('twitter_app_key'),
-              'consumer_secret' => variable_get('twitter_app_secret'),
-              'oauth_access_token' => variable_get('oauth_token', ''),
-              'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
+            //twitter       
+            'twitter_user' => '',
+            'consumer_key' => variable_get('twitter_app_key'),
+            'consumer_secret' => variable_get('twitter_app_secret'),
+            'oauth_access_token' => variable_get('oauth_token', ''),
+            'oauth_access_token_secret' => variable_get('oauth_token_secret', ''),
           );
           $settings = $social_counter_settings;
           $apiUrl = "https://api.twitter.com/1.1/statuses/show/" . $result_data->post_id . ".json";
@@ -1316,13 +1337,13 @@ function itg_social_media_social_media_activity_update() {
           $retweet_count = $followers->retweet_count;
 
           $update_field = array(
-              'twitter_retweet' => $retweet_count,
-              'twitter_likes' => $follow_count,
+            'twitter_retweet' => $retweet_count,
+            'twitter_likes' => $follow_count,
           );
           $query = db_update('itg_social_media_logs');
           $query->condition('id', $result_data->id)
-                  ->fields($update_field)
-                  ->execute();
+              ->fields($update_field)
+              ->execute();
         }
       }
     }
@@ -1376,17 +1397,17 @@ function itg_social_media_update_fb_click_video_play($post_id, $social_media_log
     $fb_impressions = $data_all_impression["data"][0]["values"][0]["value"];
   }
   $update_field = array(
-      'click_on_post' => $fb_click,
-      'video_views' => $fb_views,
-      'photo_views' => $fb_photo_views,
-      'fan_reach' => $fb_reach,
-      'impressions' => $fb_impressions
+    'click_on_post' => $fb_click,
+    'video_views' => $fb_views,
+    'photo_views' => $fb_photo_views,
+    'fan_reach' => $fb_reach,
+    'impressions' => $fb_impressions
   );
 
   $query = db_update('itg_social_media_logs');
   $query->condition('id', $social_media_log_id)
-          ->fields($update_field)
-          ->execute();
+      ->fields($update_field)
+      ->execute();
 }
 
 /**
@@ -1395,9 +1416,9 @@ function itg_social_media_update_fb_click_video_play($post_id, $social_media_log
 function itg_social_media_publish_on_twitter() {
   $itg_query = db_select('itg_social_media_logs', 'itg');
   $itg_query->fields('itg', array('id', 'nid', 'scheduled_time', 'social_media'))
-          ->condition('status', 0)
-          ->condition('social_media', 'Twitter%', 'LIKE')
-          ->condition('scheduled_time', REQUEST_TIME, '<=');
+      ->condition('status', 0)
+      ->condition('social_media', 'Twitter%', 'LIKE')
+      ->condition('scheduled_time', REQUEST_TIME, '<=');
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $value) {
     $node = node_load($value->nid);

@@ -41,11 +41,11 @@
 
                                 </script>
 
-                                <?php
-                                drupal_add_js(drupal_get_path('module', 'itg_image_repository') . '/js/itg_image_repo.js', array('
-  type' => 'file', 'scope' => 'footer'));
-                                print drupal_get_js('footer');
-                                ?>
-                                </body>
+ <?php
+    drupal_add_js(drupal_get_path('module', 'itg_image_repository') . '/js/itg_image_repo.js', array('
+    type' => 'file', 'scope' => 'footer'));
+    print drupal_get_js('footer');
+  ?>
+  </body>
 
-                                </html>
+  </html>

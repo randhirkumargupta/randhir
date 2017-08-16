@@ -2,10 +2,11 @@
   global $base_url;
   $arg = arg();
   if($arg[0] == 'event') {
-    $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
+    $baseurl = $base_url . '/' . $arg[1] . '/' . $arg[2];
   } elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
     $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
   }
+ 
 ?>
     <?php foreach ($rows as $index => $row): ?>
 <ul class="profile-detail">
@@ -19,8 +20,9 @@
     }
     ?></li>
         <li>
-            <span class="title"><?php print l($row['title'], $baseurl.'/speaker-details?speaker='.$row['nid'], array('attributes' => array('target'=>'_blank'))); ?></span>
-            <span class="designation"><?php print $row['field_story_new_title']; ?></span>
+            <span class="title"  title="<?php print strip_tags($row['title']) ; ?>"><?php print l(html_entity_decode(strip_tags($row['title'])), $baseurl.'/speaker-details?speaker='.$row['nid'], array('attributes' => array('target'=>'_blank'))); ?></span>
+            <!--<span class="designation"><?php // print $row['field_story_new_title']; ?></span>-->
+            <span class="designation"><?php print $row['field_celebrity_pro_occupation']; ?></span>
         </li>
         </ul>
     <?php endforeach; ?>

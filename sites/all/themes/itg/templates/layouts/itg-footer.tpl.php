@@ -1,6 +1,5 @@
 <?php
 global $base_url;
-
 ?>
 <section class="footer-top">
     <div class="container">
@@ -13,13 +12,16 @@ global $base_url;
                 <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>                
-                <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
+                <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>                
+                <li class="search-icon-parent">
+                  <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+                  <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+                  <div class="globle-search">
+                    <input class="search-text" placeholder="Type here" type="text" value="" />
+                  </div>
+                </li>
                 <li class="footer-expand-icon"></li>
             </ul>
-            <div class="globle-search">
-                <input class="search-text" placeholder="Type here" type="text" value="">
-            </div>
         </div>
         <div class="footer-expand-icon"></div>
     </div>
@@ -27,7 +29,7 @@ global $base_url;
 <section class="footer-toggle">
  <section class="footer-mid">
         <div class="container">
-<!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
+
         <?php
           $block = block_load('itg_ads', ADS_FOOTER);   
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -39,46 +41,46 @@ global $base_url;
        <div class="container">
            <div class="row multiple-items-footer">
                <div class="cell">
-                   <h4>Publications:</h4>
+                   <h4><?php print t('Publications:'); ?></h4>
                    <?php print drupal_render($data['publications_footer']); ?>
                </div>
                <div class="cell">
-                   <h4>Television:</h4>
+                   <h4><?php print t('Television:'); ?></h4>
                    <?php print drupal_render($data['television_footer']); ?>
-                   <h4>Radio:</h4>
+                   <h4><?php print t('Radio:') ;?></h4>
                    <?php print drupal_render($data['radio_footer']); ?>
                </div>
                <div class="cell">
-                   <h4>Education:</h4>
+                   <h4><?php print t('Education:') ;?></h4>
                    <?php print drupal_render($data['education_footer']); ?>
                    <h4>Online Shopping:</h4>
                    <?php print drupal_render($data['shopping_footer']); ?>
                </div>
                <div class="cell">
-                   <h4>Events:</h4>
+                   <h4><?php print t('Events:') ;?></h4>
                    <?php print drupal_render($data['events_footer']); ?>
                </div>
                <div class="cell">
-                   <h4>Printing:</h4>
+                   <h4><?php print t('Printing:') ;?></h4>
                    <?php print drupal_render($data['printing_footer']); ?>
-                   <h4>Welfare</h4>
+                   <h4><?php print t('Welfare'); ?></h4>
                    <?php print drupal_render($data['welfare_footer']); ?>
-                   <h4>Music:</h4>
+                   <h4><?php print t('Music:'); ?></h4>
                    <?php print drupal_render($data['music_footer']); ?>
                </div>              
                 <div class="cell">
-                   <h4>Syndications:</h4>
+                   <h4><?php print t('Syndications:'); ?></h4>
                    <?php print drupal_render($data['syndication_footer']); ?>
-                   <h4>Distribution:</h4>
+                   <h4><?php print t('Distribution:'); ?></h4>
                    <?php print drupal_render($data['distribution_footer']); ?>
-                   <h4>Useful Links :</h4>
+                   <h4><?php print t('Useful Links :'); ?></h4>
                    <?php print drupal_render($data['useful_footer']); ?>
                </div>
            </div>
        </div>
     </section>
     <section class="footer-copyright">
-        <div class="container"><p>Copyright &copy; <?php echo date("Y") ?> Living Media India Limited. For reprint rights: Syndications Today</p></div>
+        <div class="container"><p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p></div>
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
@@ -106,5 +108,14 @@ global $base_url;
     <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
   </div>
 <!--animation emoji for hightlight end-->
+<?php
+if(!empty($sso_msg)) {
+  print '<div class = "activate-message">
+         <div class = "message-body">
+         <p>' . $sso_msg . '</p>
+         <a href = "javascript:void(0)" class = "close-pass-popup">ok</a>
+         </div></div>';
+}
+?>        
 
 

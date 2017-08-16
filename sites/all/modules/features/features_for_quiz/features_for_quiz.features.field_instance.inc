@@ -20,7 +20,7 @@ function features_for_quiz_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Type',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -58,7 +58,7 @@ function features_for_quiz_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Options',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -202,7 +202,7 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_image'] = array(
     'bundle' => 'field_quiz_options_answer',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Photo',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -242,6 +242,7 @@ function features_for_quiz_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -275,7 +276,7 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'field_quiz_options_answer',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Text',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -311,7 +312,7 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances['field_collection_item-field_quiz_options_answer-field_quiz_answer_video'] = array(
     'bundle' => 'field_quiz_options_answer',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Video',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -377,7 +378,7 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'field_quiz_options_answer',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Correct Answer',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -765,7 +766,7 @@ function features_for_quiz_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Quiz Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -882,7 +883,7 @@ function features_for_quiz_field_default_field_instances() {
     'bundle' => 'quiz',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Byline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -904,7 +905,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_reporter',
     'label' => 'Byline',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -947,7 +948,7 @@ function features_for_quiz_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_category',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -1067,7 +1068,7 @@ function features_for_quiz_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Quiz Questions Format',
     'display' => array(
       'default' => array(
         'label' => 'above',

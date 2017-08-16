@@ -145,6 +145,9 @@ function feature_for_magazine_widget_views_default_views() {
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['query_tags'] = array(
+    0 => 'issue_magazine_widget',
+  );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
@@ -391,8 +394,14 @@ function feature_for_magazine_widget_views_default_views() {
     23 => 0,
     22 => 0,
     24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['field_story_issue_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_issue_date_value']['year_range'] = '1975:+5';
   /* Filter criterion: Content: Issue based story (field_story_magazine_story_issue) */
   $handler->display->display_options['filters']['field_story_magazine_story_issue_value']['id'] = 'field_story_magazine_story_issue_value';
   $handler->display->display_options['filters']['field_story_magazine_story_issue_value']['table'] = 'field_data_field_story_magazine_story_issue';
@@ -524,6 +533,7 @@ function feature_for_magazine_widget_views_default_views() {
     24 => 0,
   );
   $handler->display->display_options['filters']['field_story_issue_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_issue_date_value']['year_range'] = '1975:+5';
   $handler->display->display_options['path'] = 'issue-magazin-primary-cat-widget-list';
   $export['category_of_stroy_base_magazin_widget'] = $view;
 
@@ -899,6 +909,7 @@ function feature_for_magazine_widget_views_default_views() {
     26 => 0,
   );
   $handler->display->display_options['filters']['field_story_issue_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_issue_date_value']['year_range'] = '1975:+5';
   /* Filter criterion: Content: Issue based story (field_story_magazine_story_issue) */
   $handler->display->display_options['filters']['field_story_magazine_story_issue_value']['id'] = 'field_story_magazine_story_issue_value';
   $handler->display->display_options['filters']['field_story_magazine_story_issue_value']['table'] = 'field_data_field_story_magazine_story_issue';
@@ -1059,6 +1070,7 @@ function feature_for_magazine_widget_views_default_views() {
     26 => 0,
   );
   $handler->display->display_options['filters']['field_story_issue_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_story_issue_date_value']['year_range'] = '1975:+5';
   $handler->display->display_options['path'] = 'supplement-base-magazin-widget-list';
   $export['supplement_base_magazin_widget'] = $view;
 

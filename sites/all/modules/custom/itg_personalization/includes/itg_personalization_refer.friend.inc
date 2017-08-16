@@ -52,6 +52,7 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
     $form['friend_fieldset']['name_' . $i] = array(
       '#title' => t('Name'),
       '#type' => 'textfield',
+      '#attributes' => array('autocomplete' => 'off'),
       '#required' => TRUE,
       '#maxlength' => 255,
     );
@@ -59,6 +60,7 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
     $form['friend_fieldset']['mail_' . $i] = array(
       '#title' => t('Email'),
       '#type' => 'textfield',
+      '#attributes' => array('autocomplete' => 'off'),
       '#required' => TRUE,
       '#maxlength' => 255,
     );
@@ -188,11 +190,20 @@ function itg_personalization_refer_a_friend_form_submit($form, &$form_state) {
   // Send mail to users.
   if ($response) {
     for ($i = 0; $i < $form_state['values']['total_friend']; ++$i) {
-      $data['link'] = l(t('Click here to register'), FRONT_URL, array('query' => array('referral_key' => $mail_data[$i]['key']), 'attributes' => array('target' => '_blank')));
+      //$data['link'] = l(t('Click here to register'), FRONT_URL, array('query' => array('referral_key' => $mail_data[$i]['key']), 'attributes' => array('target' => '_blank')));
+      $front_url = base64_encode(FRONT_URL);
+      $link = 'http://'.PARENT_SSO.'/signup/'.$front_url;
+      $data['link'] = l(t('Click here to register'), $link, array('attributes' => array('target' => '_blank')));
       $data['name'] = $mail_data[$i]['name'];
-      itg_common_get_mail_content($data, $mail_data[$i]['mail']);      
+      itg_common_get_mail_content($data, $mail_data[$i]['mail'], 'refer_friend');      
     }
   }
+  $_REQUEST['destination'] = 'personalization/edit-profile/refer-a-friend';
+  $success = base64_encode('success');
+    $form_state['redirect'] = array(
+      'personalization/edit-profile/refer-a-friend',
+      array('query' => array('refer' => $success))
+    );
 }
 
 /**

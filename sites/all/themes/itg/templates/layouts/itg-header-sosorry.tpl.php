@@ -10,9 +10,9 @@
 <div class="sosory-footer">
     <div class="container">
         <ul>
-            <li><a href="#"><i class="fa fa-trophy"></i> BCS Ratna Award for Broadcast Excellence as Best Politoon</a></li>
-            <li><a href="#"><i class="fa fa-trophy"></i> FICCI-BAF Best Animation in the Open Category</a></li>
-            <li><a href="#"><i class="fa fa-trophy"></i> FWinner FICCI BAF Show of the Year</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i><?php print t('BCS Ratna Award for Broadcast Excellence as Best Politoon'); ?></a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i><?php print t(' FICCI-BAF Best Animation in the Open Category'); ?></a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i><?php print t('FWinner FICCI BAF Show of the Year');?></a></li>
         </ul>
     </div>
 </div>

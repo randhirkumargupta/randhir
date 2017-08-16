@@ -212,19 +212,19 @@ function mega_review_critic_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'domain' => array(
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '6',
+          'weight' => '7',
         ),
       ),
       'display' => array(
@@ -323,6 +323,34 @@ function mega_review_critic_features_strongarm() {
   $strongarm->name = 'node_submitted_mega_review_critic';
   $strongarm->value = 0;
   $export['node_submitted_mega_review_critic'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_itg_celebrity_profile_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_itg_celebrity_profile_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_mega_review_critic_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_mega_review_critic_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_itg_occupation_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_itg_occupation_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_mega_review_type_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_mega_review_type_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

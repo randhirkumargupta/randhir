@@ -13,12 +13,10 @@
 (function($) {
 
     var actionbtnshtml = jQuery('#edit-actions, #edit-actions--2').html();
-    if (actionbtnshtml != null)
-    {
+    if (actionbtnshtml != null) {
         actionbtnshtml = actionbtnshtml.replace(/id=/g, "data-id=");
         actionbtnshtml = actionbtnshtml.replace(/form-submit/g, 'form-submit btn-trigger');
         jQuery('#page-title').after('<div class="top-actions">' + actionbtnshtml + '</div>');
-
 
         jQuery('.top-actions .btn-trigger').click(function() {
             var id_to_trigger = jQuery(this).attr('data-id');
@@ -40,6 +38,7 @@
         }
         });
     });
+    
     jQuery('input[name="itg_twitter_img_remove_button"]').on('mousehover', function() {
         jQuery(document).on('ajaxComplete',function(event, request, settings) {
            if(jQuery('input[name="itg_twitter_img[fid]"]').val() ==0) {
@@ -47,6 +46,7 @@
         }
         });
     });
+    
     jQuery('input[name="itg_fb_img_remove_button"]').on('mousehover', function() {
         jQuery(document).on('ajaxComplete',function(event, request, settings) {
            if(jQuery('input[name="itg_fb_img[fid]"]').val() ==0) {
@@ -71,24 +71,26 @@
         }
         });
     });
-     jQuery('input[name="lrp_gold_star_four_icon_remove_button"]').on('mousedown', function() {
+    
+    jQuery('input[name="lrp_gold_star_four_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
             if(jQuery('input[name="lrp_gold_star_four_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_four_icon').show();
         }
         });
     });
+    
     jQuery('input[name="lrp_gold_star_five_icon_remove_button"]').on('mousedown', function() {
         jQuery(document).ajaxComplete(function(event, request, settings) {
             if(jQuery('input[name="lrp_gold_star_five_icon[fid]"]').val() ==0) {
             jQuery('.div_lrp_gold_star_five_icon').show();
         }
         });
-    });
-    
+    });    
     
     jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
         var html = jQuery('.image-fullname').find('a').attr('target', '_blank');
+        
     });
 
 })(jQuery, Drupal, this, this.document);

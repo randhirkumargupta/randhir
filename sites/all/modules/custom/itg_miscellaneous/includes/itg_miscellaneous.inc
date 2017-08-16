@@ -84,8 +84,13 @@ function itg_layout_list_delete() {
  * for layout delete for admin
  * @return array $output
  */
-function itg_layout_delete() {
-  phpinfo();
+//function itg_layout_delete() {
+  //field_story_template_guru
+ /* $field_name = 'field_story_template_guru';
+  $new_length = '3000';
+  itg_change_text_field_max_length($field_name, $new_length);*/
+  
+  //phpinfo();
 //  $module_list = module_disable();
 //  echo '@@@';
 //  p($module_list);
@@ -99,7 +104,7 @@ function itg_layout_delete() {
   /* db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
     db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
     drupal_goto('itg-admin-layout-list'); */
-}
+//}
 
 /**
  * for layout delete for admin
@@ -195,55 +200,31 @@ function get_content_type_list_for_this_term($tid) {
   return '';
 }
 
-/**
- * Helper function to show mongo detail
+/*
+ * Utility to change the max length of a text field
  */
-function itg_get_mongo_detail() {
-  $type = arg(1);
-  $id = arg(2);
-  $data = '';
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    if ($type == 'likedislike') {
-      $people = $con->itg_custom_flag_count;
-      $cond = array('nid' => $id);
-      $cursor = $people->find($cond);
-      foreach ($cursor as $document) {
-        print 'Like : ' . $document['like_count'];
-        print '<br/>';
-        print 'DisLike : ' . $document['dislike_count'];
-      }
-    }
-    if ($type == 't_share') {
-      $people = $con->front_user_activity;
-      $cond = array('nid' => $id, 'activity' => 'twitter_share');
-      $cursor = $people->count($cond);
-      print 'Twitter share : ' . $cursor;
-    }
-
-    if ($type == 'g_share') {
-      $people = $con->front_user_activity;
-      $cond = array('nid' => $id, 'activity' => 'google_share');
-      $cursor = $people->count($cond);
-      print 'Google share : ' . $cursor;
-    }
-    
-    if ($type == 'comment') {
-      $people = $con->itgcms_comment;
-      $cond = array('page_id' => $id);
-      $cursor = $people->count($cond);
-      print 'Comment : ' . $cursor;
-    }
-    if ($type == 'view') {
-      $people = $con->pagedetails;
-      $cond = array('nid' => $id);
-      $cursor = $people->count($cond);
-      print 'Number of View : ' . $cursor;
-    }
-  }
-  if ($type == 'f_share') {
-    $fb_share = itg_get_fb_share($id, 'Facebook Share');
-    print 'Facebook Share : '.$fb_share;
-  }
+function itg_change_text_field_max_length($field_name, $new_length) {
+  $field_table = 'field_data_' . $field_name;
+  $field_revision_table = 'field_revision_' . $field_name;
+  $field_column = $field_name . '_value';
+ 
+  // Alter value field length in fields table
+  db_query("ALTER TABLE `{$field_table}` CHANGE `{$field_column}` `{$field_column}` VARCHAR( {$new_length} )");
+  // Alter value field length in fields revision table
+  db_query("ALTER TABLE `{$field_revision_table}` CHANGE `{$field_column}` `{$field_column}` VARCHAR( {$new_length} )");
+ 
+  // Update field config with new max length
+  $result = db_query("SELECT CAST(`data` AS CHAR(10000) CHARACTER SET utf8) FROM `field_config` WHERE field_name = '{$field_name}'");
+  $config = $result->fetchField();
+  $config_array = unserialize($config);
+  $config_array['settings']['max_length'] = $new_length;
+  $config = serialize($config_array);
   
+  //update field config table
+  db_update('field_config')
+    ->fields(array('data' => $config))
+    ->condition('field_name', $field_name)
+    ->execute();
+  // cache clean by field modyfie
+  cache_clear_all();
 }
