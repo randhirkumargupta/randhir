@@ -3463,15 +3463,15 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
     //$params = $_POST;
 
     $poll_id = $params['poll_id'];
-    $option_id = $params['option_id'];
-    $user_name = $params['user_id'];
+    $option_id = isset($params['option_id']) ? $params['option_id'] : "";
+    $device_id = $params['user_id'];
     
-    $user_load = user_load_by_name(trim($user_name));
-    $user_id = $user_load->uid;
+//    $user_load = user_load_by_name(trim($user_name));
+//    $user_id = $user_load->uid;
 
     $args = '0';
     //Check args is exist
-    if (isset($poll_id) && isset($option_id) && isset($user_id)) {
+    if (isset($poll_id) && isset($device_id)) {
         $args = '1';
         $arg_msg = 'Arguments are missing';
     } else {
@@ -3499,10 +3499,8 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
     if (!is_numeric($poll_id)) {
         $poll_id = 0;
     }
-    if (!is_numeric($option_id)) {
-        $option_id = 0;
-    }
-    if (!is_numeric($user_id)) {
+   
+    if (!is_numeric($device_id)) {
         $user_id = 0;
     }
     
@@ -3512,7 +3510,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
         // if status is 0 then poll is already closed , 
         $poll_status = check_poll_status($poll_id);
         if ($poll_status != '0') {
-            $jsondata = poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device);
+            $jsondata = poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device);
             $jsondata = json_encode($jsondata);
         } else {
             $output_array = array();

@@ -72,38 +72,44 @@ function polls_close_list($cpageno) {
  *  @return the poll info in array
  */
 
-function poll_cast_list($poll_id, $option_id, $user_id, $ip_address, $device) {
+function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) {
 
-  $dsp_result = itg_poll_get_display_result($poll_id);
-  $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
-  
-  $check = db_select('itg_polls','itgp')
-            ->fields('itgp',array('Id'))
-            ->condition('itgp.nid',$poll_id)
-            ->condition('itgp.uId',$user_id)
+  if (isset($option_id) && $option_id != '') {
+    $dsp_result = itg_poll_get_display_result($poll_id);
+    $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
+
+    $check = db_select('itg_polls', 'itgp')
+            ->fields('itgp', array('Id'))
+            ->condition('itgp.nid', $poll_id)
+            ->condition('itgp.ip', $device_id)
             ->execute()->fetchField();
-            
-  if ($check == '') {
-    $query = db_insert('itg_polls')
-        ->fields(array(
-          'nId' => $poll_id,
-          'ansId' => $option_id,
-          'uid' => $user_id,
-          'display_result' => $dsp_result,
-          'ip' => $ip_address,
-          'device' => $device,
-          'created' => date('Y-m-d H:i:s', time())
-        ))
-        ->execute();
-    
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "customised_message ";
-    
-  }else {
-    
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "You already cast poll on it";
+
+    if ($check == '') {
+      $query = db_insert('itg_polls')
+          ->fields(array(
+            'nId' => $poll_id,
+            'ansId' => $option_id,
+            'uid' => 0,
+            'display_result' => $dsp_result,
+            'ip' => $device_id,
+            'device' => $device,
+            'created' => date('Y-m-d H:i:s', time())
+          ))
+          ->execute();
+
+      $output_array['status_code'] = "1";
+      $output_array['status_message'] = "customised_message ";
+    }
+    else {
+
+      $output_array['status_code'] = "0";
+      $output_array['status_message'] = "You already cast poll on it";
+    }
+  }else{
+     $output_array['status_code'] = "1";
+     $output_array['status_message'] = "customised_message ";
   }
+
 
   $data = poll_cast_datalist($poll_id);
 
@@ -168,8 +174,8 @@ function poll_cast_datalist($poll_id) {
     $options2 = array();
     $options = array();
     foreach ($result_option as $p => $pv) {
-      $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
-      
+      $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
       $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
       $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
       $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
@@ -315,7 +321,7 @@ function open_poll_list($res) {
   $options2 = array();
 
   foreach ($result_option as $p => $pv) {
-    $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
+    $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
@@ -419,8 +425,8 @@ function poll_close_datalist($res) {
   $options2 = array();
   $options = array();
   foreach ($result_option as $p => $pv) {
-    $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
-    
+    $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : '';
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
@@ -493,8 +499,8 @@ function poll_detail_datalist($poll_id) {
     $options2 = array();
     $options = array();
     foreach ($result_option as $p => $pv) {
-      $total_voter = poll_voter_count($res['nid'],$pv['field_poll_answer_value']);
-      
+      $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
       $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
       $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
       $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
@@ -608,15 +614,16 @@ function poll_voter_count($node_id, $option_id) {
   $results = $query->execute()->fetchField();
   return $results;
 }
+
 /**
  * count total participants of the poll
  * @param type $node_id
  * @return type
  */
-function poll_participants($node_id){
+function poll_participants($node_id) {
   $query = db_select('itg_polls', 'p');
   $query->condition('p.nid', $node_id);
   $query->addExpression('COUNT(p.id)', 'optionCnt');
   $results = $query->execute()->fetchField();
-  return $results;  
+  return $results;
 }
