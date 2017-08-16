@@ -260,18 +260,28 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
-  $primary_category = $form_state['input']['itg_primary_category'];
-  // for story assign to widget
-  if(function_exists('itg_story_assign_to_widget')) {
-    itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category);
-  }
   if($form_state['input']['op'] == 'Apply') {
      if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
+       if(is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+         $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+       } else {
+         $previous_story_assign = '';
+       }
+
+       $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+       //pr($previous_story_assign);
+       //print "<br> =========================== </br>";
+       //p($story_widget);
+       $primary_category = $form_state['input']['itg_primary_category'];
+       // for story assign to widget
+       if(function_exists('itg_story_assign_to_widget')) {
+         itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+       }
+
+      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+      $_GET['destination'] = $redirect_path;
+      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
   }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
@@ -330,15 +340,15 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param array $story_widget
  * @param int $cat_id
  */
-function itg_story_assign_to_widget($nid , array $story_widget, $cat_id) {
+function itg_story_assign_to_widget($nid , array $story_widget, $cat_id, $previous_story_assign) {
   if (!empty($story_widget)) {
     $content_type = 'story';
     foreach ($story_widget as $widget_val) {
+      $result[$widget_val] = $widget_val;
+      $result_exist = itg_story_widget_data_exist($nid, $cat_id, 'top_stories_widget');
       // for top stories
       if ($widget_val == 'top_stories') {
-        $result_exist = itg_story_widget_data_exist($nid, $cat_id, 'top_stories_widget');
         $weight_data = itg_story_widget_max_value('top_stories_widget');
-
         if (empty($result_exist)) {
           try {
             $inserted_data = db_insert('itg_widget_order')->fields([
@@ -362,6 +372,7 @@ function itg_story_assign_to_widget($nid , array $story_widget, $cat_id) {
           try {
             db_delete('itg_widget_order')
               ->condition('widget' , $widget)
+              ->condition('nid' , $nid)
               ->execute();
           }
           catch (Exception $ex) {
@@ -402,6 +413,27 @@ function itg_story_assign_to_widget($nid , array $story_widget, $cat_id) {
           } catch (PDOException $e) {
             drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
           }
+        }
+      }
+    }
+    foreach($previous_story_assign as $row) {
+      if($row['value'] != $result[$row['value']]) {
+        if($row['value'] == 'top_stories') {
+          $widget_value = 'top_stories_widget';
+        } elseif($row['value'] == 'featured_story') {
+          $widget_value = 'home_page_feature_widget';
+        } elseif($row['value'] == 'big_story') {
+          $widget_value = 'big_story_format_widget';
+        }
+
+        try {
+          db_delete('itg_widget_order')
+            ->condition('widget' , $widget_value)
+            ->condition('nid' , $nid)
+            ->execute();
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
         }
       }
     }
