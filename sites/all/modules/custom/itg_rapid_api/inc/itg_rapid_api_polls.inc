@@ -98,7 +98,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
           ->execute();
 
       $output_array['status_code'] = "1";
-      $output_array['status_message'] = "customised_message ";
+      $output_array['status_message'] = "";
     }
     else {
 
@@ -107,7 +107,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
     }
   }else{
      $output_array['status_code'] = "1";
-     $output_array['status_message'] = "customised_message ";
+     $output_array['status_message'] = "";
   }
 
 
