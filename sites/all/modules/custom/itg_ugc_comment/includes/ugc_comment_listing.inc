@@ -109,7 +109,7 @@ function ugc_comment_user_listing() {
       {
         $limit = $_GET['items_per_page'];
       } else {
-        $limit = 10;
+        $limit = 20;
       }
       
 
