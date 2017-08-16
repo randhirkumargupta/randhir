@@ -361,7 +361,7 @@ if (!empty($device[0])) {
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
                                                   print $widget_data['itg-block-6']['widget']; 
                                                 } else{
-                                                  print '<div class="widget-placeholder"><span>'.t('View on twitter').'</span></div>';
+                                                  print '<div class="widget-placeholder"><span>'.t('Live Chat').'</span></div>';
                                                 } 
                                               ?>
                                       </div>
@@ -469,7 +469,7 @@ if (!empty($device[0])) {
                                           if (isset($widget_data['itg-block-9']['widget'])) {
                                             print $widget_data['itg-block-9']['widget']; 
                                           } else{
-                                            print '<div class="widget-placeholder"><span>'.t('Budget reactions').'</span></div>';
+                                            print '<div class="widget-placeholder"><span>'.t('Reactions').'</span></div>';
                                           } 
                                         ?>
                                       </div>

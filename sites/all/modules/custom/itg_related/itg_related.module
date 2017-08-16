@@ -33,7 +33,56 @@ function itg_related_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['admin/config/search/apachesolr/solr-hash-url'] = array(
+    'title' => 'Solr url Configuration based on hash',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('solr_hash_url_form'),
+    'access arguments' => array('access solr hash url'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  
   return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function itg_related_permission() {
+  return array(
+    'access solr hash url' => array(
+      'title' => t('Access solr hash url'),
+      'description' => t('Access solr hash url'),
+    ),
+  );
+}
+
+/**
+ * Administrative settings.
+ *
+ * @return array
+ *   An array containing form items to place on the module settings page.
+ */
+function solr_hash_url_form() {
+  $form['hash_url_config'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Hash url config'),
+    '#attributes' => array('placeholder' => t('Ex: 9m4hke|http://uat-it.indiatodayonline.in')),
+    '#default_value' => variable_get('hash_url_config'),
+  );
+  return system_settings_form($form);
+}
+
+/** Implements itg_apache_solr_get_site_hash();
+ */
+function itg_apache_solr_get_site_url() {
+  $var_hash_url = explode(',', variable_get('hash_url_config'));
+  foreach ($var_hash_url as $key => $value) {
+    $ex_hash = explode('|', $value);
+    $key = trim($ex_hash[0]);
+    $hashurl[$key] = trim($ex_hash[1]);
+  }
+
+  return $hashurl;
 }
 
 /**

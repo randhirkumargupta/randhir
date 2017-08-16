@@ -78,16 +78,16 @@ jQuery(document).ready(function(){
     var item = [];
     var detail = [];
     if(insvalue){
-        item = insvalue.split(",");
+        item = insvalue.split("|");
     }
     if(relatedtit){
-        detail = relatedtit.split(",");
+        detail = relatedtit.split("|");
     }
     jQuery('body').on('change', '.itg-row-selector-select', function () {
         var isCheck = jQuery(this).is(':checked');
         var url = jQuery(this).parent().parent().parent().find('.views-field-entity-id span').html();
         var site = jQuery(this).parent().parent().parent().find('.views-field-site').html();
-        var label = jQuery(this).parent().parent().parent().find('.views-field-label a').html().replace(/,/g, "");
+        var label = jQuery(this).parent().parent().parent().find('.views-field-label a').html();
         var bundle = jQuery(this).parent().parent().parent().find('.views-field-bundle-name').html();
         var urlval = jQuery.trim(url);
         var siteval = jQuery.trim(site);
@@ -112,9 +112,10 @@ jQuery(document).ready(function(){
             var hastitle = jQuery.inArray(site_detail, detail);
             detail.splice(hastitle, 1);
         }
-        
-        jQuery('#insvalue').val(item);
-        jQuery('#relatedtit').text(detail);
+          seprated_item = item.join('|');
+          seprated_detail = detail.join('|');
+        jQuery('#insvalue').val(seprated_item);
+        jQuery('#relatedtit').text(seprated_detail);
         jQuery('#insvalue').attr('title', item);
         //console.log("hasurl index = " + item);
     });
@@ -134,8 +135,8 @@ jQuery(document).ready(function(){
         }
             
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
-            parent.jQuery('#edit-field-common-related-content-und-0-value').val(item);
-            parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(detail);
+            parent.jQuery('#edit-field-common-related-content-und-0-value').val(seprated_item);
+            parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(seprated_detail);
             var checkedlist = '';
             for ( var i = 0, l = item.length; i < l; i++ ) {
                 var site = item[i].split('_');
