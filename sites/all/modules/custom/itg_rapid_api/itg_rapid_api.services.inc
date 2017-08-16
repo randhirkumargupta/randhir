@@ -780,14 +780,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -843,14 +843,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'first_name',
                             'optional' => TRUE,
@@ -1058,14 +1058,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1094,14 +1094,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1139,14 +1139,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1175,14 +1175,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1345,14 +1345,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'poll_id',
                             'optional' => TRUE,
@@ -1393,14 +1393,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'authtoken_id',
                             'optional' => TRUE,
@@ -1594,14 +1594,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'authtoken_id',
                             'optional' => TRUE,
@@ -1639,14 +1639,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1812,14 +1812,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
@@ -1853,14 +1853,14 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'array',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'array',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
                             'optional' => TRUE,
