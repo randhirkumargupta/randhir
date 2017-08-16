@@ -3282,7 +3282,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
-    p($result_obj);die();
+    echo $result_obj[0]->otp; die();
     $uname = $params['user_id'];
     $data['status_code'] = "1";
     $data['status_message'] = "";
