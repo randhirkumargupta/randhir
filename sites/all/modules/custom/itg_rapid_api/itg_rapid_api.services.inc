@@ -3282,15 +3282,22 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
-    echo $result_obj[0]->otp; die();
-    $uname = $params['user_id'];
-    $data['status_code'] = "1";
-    $data['status_message'] = "";
-    $data['data']['user_id'] = "$uname";
-    $data['data']['is_authenticated'] = "1";
-    $data['data']['auth_token'] = "";
+    //echo $result_obj[0]->otp; die();
+    if($result_obj[0]->otp){
+        $uname = $params['user_id'];
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $data['data']['user_id'] = "$uname";
+        $data['data']['is_authenticated'] = "1";
+        $data['data']['auth_token'] = "";
+    }
+    else{
+        $data['status_code'] = "0";
+        $data['status_message'] = "Invalid User Id or OTP";
+    }
+    
 
-    return $data;
+return $data;
 }
 
 /**
