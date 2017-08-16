@@ -602,15 +602,17 @@ function getPhotostorylist($nid) {
     $lcont = 0;
     foreach ($galleryimg as $key => $value) {
 
-      $fc = field_collection_field_get_entity($value);  
+      $fc = field_collection_field_get_entity($value);
       $fid = $fc->field_photo_story_image['und'][0]['fid'];
      
       $uri = $fc->field_photo_story_image['und'][0]['filename'];
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
-      $caption = "";
-      $byline = "";
+      $photo_tags = getPhotostoryPhotodetail($fid);
+      
+      $caption = $photo_tags[0]['image_caption'];
+      $byline = $photo_tags[0]['image_photo_grapher'];
       
         $photolist_loop[$lcont]['np_id'] = "$fid";
         $photolist_loop[$lcont]['np_image'] = "$img_url";
@@ -620,4 +622,16 @@ function getPhotostorylist($nid) {
     }
     $photolist['photos'] = $photolist_loop;
     return $photolist;
+}
+
+/**
+ * Get photostory photo deatil tags
+ * @param type $fid
+ */
+function getPhotostoryPhotodetail($fid){
+  $query = db_select('image_info','img');
+  $query->fields('img',array('image_caption','image_photo_grapher'));
+  $query->condition('img.fid',$fid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
