@@ -12711,7 +12711,7 @@ h1.about-us-heading + div p {
   cursor: pointer;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .messages.error {
-  display: none;
+  display: block;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   position: relative;

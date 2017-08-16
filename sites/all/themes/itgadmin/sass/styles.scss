@@ -12183,3 +12183,12 @@ fieldset#edit-xmlsitemap{
     display: none !important;
   }
 }
+[id*="field-event-highlights-values"] > tbody > tr > td{
+  position: relative;
+  > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 10px;
+    margin: 0;
+  }
+}

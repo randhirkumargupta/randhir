@@ -12977,3 +12977,13 @@ fieldset#edit-xmlsitemap {
 [id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created > label, [id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created .description {
   display: none !important;
 }
+
+[id*="field-event-highlights-values"] > tbody > tr > td {
+  position: relative;
+}
+[id*="field-event-highlights-values"] > tbody > tr > td > .form-submit[value="Remove"], [id*="field-event-highlights-values"] > tbody > tr > td .ajax-new-content > .form-submit[value="Remove"] {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 10px;
+  margin: 0;
+}
