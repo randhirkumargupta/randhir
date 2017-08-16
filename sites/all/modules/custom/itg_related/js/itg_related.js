@@ -137,8 +137,18 @@ jQuery(document).ready(function(){
         }
             
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
+        try {
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(seprated_item);
+        } catch (e) {
+
+        }
+
+        try {
             parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(seprated_detail);
+        } catch (e) {
+
+        }
+            //parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(seprated_detail);
             var checkedlist = '';
             var inputrelArray = [];
             for ( var i = 0, l = item.length; i < l; i++ ) {
