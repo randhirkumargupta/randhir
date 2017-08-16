@@ -171,7 +171,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
     }
 
@@ -191,12 +190,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       }
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
-
       // Added code for managing the category shift 
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
