@@ -89,7 +89,7 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
       ->condition('widget', $widget_name)
       ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+      //drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     } else {
       drupal_set_message(t("Node id or widget name not found"));
@@ -127,7 +127,7 @@ function move_node_from_key_candidate_widget($widget_name, $cat_tid, $state, $ni
       ->condition('widget', $widget_name)
       ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+     // drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     } else {
       drupal_set_message(t("Node id or widget name not found"));
@@ -153,7 +153,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
       ->condition('widget', $widget_name)
       ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+      //drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
   }
@@ -257,7 +257,7 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
   } else {
     print "notdeleted";
   }
-  drupal_set_message(t("Node has been moved"));
+  //drupal_set_message(t("Node has been moved"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 

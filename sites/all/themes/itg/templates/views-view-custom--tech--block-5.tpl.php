@@ -12,7 +12,9 @@
    
       <div class="detail">
         <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta'];?> images</p>
-        <p class="flex-caption" title="<?php echo strip_tags($row['title']);?>"><?php print ucfirst($row['title']);?></p>
+        <p class="flex-caption" title="<?php echo strip_tags($row['title']);?>">
+          <?php print itg_common_get_smiley_title($row['nid'] , 0, 150);?>
+        </p>
       </div>
   
  </li>

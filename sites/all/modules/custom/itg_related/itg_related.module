@@ -364,7 +364,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
               if ($_GET['custom_drp'] == 'calender') {
                 $min_date = implode(" ", $_GET['ds_changed']);
                 $max_date = implode(" ", $_GET['ds_changed_max']);
-
+                $min_date = date('Y-m-d', strtotime($min_date));
+                $max_date = date('Y-m-d', strtotime($max_date));
                 // if min date is blank
                 if (empty($min_date)) {
                   $min_date = date('Y-m-d');
