@@ -569,7 +569,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
+   if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_rfa_form') {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );

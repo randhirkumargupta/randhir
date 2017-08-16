@@ -341,7 +341,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     print $widget_data['itg-block-5']['widget'];
                                                   }
                                                   else {
-                                                    print '<div class="widget-placeholder"><span>' . t('Election Map') . '</span></div>';
+                                                    print '<div class="widget-placeholder"><span>' . t('Map') . '</span></div>';
                                                   }
                                                   ?>
                                               </div>
@@ -377,7 +377,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   print $widget_data['itg-block-6']['widget'];
                                                 }
                                                 else {
-                                                  print '<div class="widget-placeholder"><span>' . t('Other Story') . '</span></div>';
+                                                  print '<div class="widget-placeholder"><span>' . t('Other Stories') . '</span></div>';
                                                 }
                                                 ?>
                                             </div>
@@ -449,7 +449,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   print $widget_data['itg-block-8']['widget'];
                                                 }
                                                 else {
-                                                  print '<div class="widget-placeholder"><span>' . t('Photo carousel') . '</span></div>';
+                                                  print '<div class="widget-placeholder"><span>' . t('Photo') . '</span></div>';
                                                 }
                                                 ?>
                                             </div>
@@ -586,7 +586,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   print $widget_data['itg-block-11']['widget'];
                                                 }
                                                 else {
-                                                  print '<div class="widget-placeholder"><span>' . t('View on twitter') . '</span></div>';
+                                                  print '<div class="widget-placeholder"><span>' . t('Live Chat') . '</span></div>';
                                                 }
                                                 ?>
                                             </div>
