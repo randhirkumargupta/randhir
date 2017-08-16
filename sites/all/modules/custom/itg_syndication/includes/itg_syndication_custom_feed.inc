@@ -257,11 +257,12 @@ function get_client_feed_pattern($client, $content_type, $feed_type) {
  * @param string $pattren
  */
 function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
+  $is_not_future_node_flag = is_not_future_node($nid);
   $data_array = array();
   $feed_data = '';
-  // extract fields name from text string
-  $var_array = get_vars_from_feed_pattern($text, $feed_type);
-  if (!empty($nid) && !empty($text)) {
+  if (!empty($nid) && !empty($text) && $is_not_future_node_flag) {
+    // extract fields name from text string
+    $var_array = get_vars_from_feed_pattern($text, $feed_type);
     $node = node_load($nid);
     $isValidXml = isValidXml($text);
     if ($isValidXml) {

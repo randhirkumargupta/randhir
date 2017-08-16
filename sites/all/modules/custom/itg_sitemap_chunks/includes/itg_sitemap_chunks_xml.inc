@@ -409,9 +409,14 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           if (empty(file_get_contents(file_create_url($file_uri))) || $isRecreate) {
             // Query to get node by range of limit.
             $query = db_select('node', 'n');
+            $query->leftJoin("field_data_field_story_schedule_date_time" , "sdt" , "sdt.entity_id=n.nid");
             $query->fields('n', array('nid', 'created', 'changed'));
             $query->condition('n.type', $CT);
             $query->condition('n.status', 1);
+            // Logic to skip future nodes.
+            $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
+              ->condition("sdt.field_story_schedule_date_time_value" , date('Y-m-d H:i:s') , "<");
+            $query->condition($db_or);
             $query->condition('created', array($start_year_time_stamp, $end_year_time_stamp), 'BETWEEN');
             $query->range($x, $limit);
             $query->orderBy('n.nid', "ASC");

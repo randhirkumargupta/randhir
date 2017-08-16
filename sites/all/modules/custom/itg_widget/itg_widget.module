@@ -40,7 +40,7 @@ function itg_widget_init() {
   $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
   $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));  
 }
 
 /**
@@ -1907,7 +1907,9 @@ function __get_sosorry_video_nid($type = 'feature') {
   return $query->execute()->fetchField();
 }
 
-
+/**
+ * Html output to decode.
+ */
 function __html_output_with_tags($string , $start = 0 , $end = 100) {
   $html = substr(html_entity_decode(drupal_html_to_text($string)), $start, $end);
   $doc = new DOMDocument();

@@ -19,6 +19,6 @@ function save_issue_magazin_widget_data($issue_data) {
           itg_widget_delete_data_from_widget($widget_name, $node);
           itg_widget_insert_widget_data($node, $widget_name, $category_tid , $_GET['field_story_issue_date_value']['value']['date']);
         }
-        drupal_set_message(t("Nodes has been saved"));
+       // drupal_set_message(t("Nodes has been saved"));
     }
 }

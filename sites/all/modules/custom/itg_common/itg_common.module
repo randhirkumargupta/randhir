@@ -839,6 +839,24 @@ function itg_content_inactive() {
 }
 
 /**
+ * Function which returns true is case of special page.
+ */
+function itg_is_special_page() {
+  $flag = FALSE;
+  $arg = arg();
+  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
+    $query = db_select('itg_layout_tpl' ,'tpl');
+    $query->fields("tpl" , array("id"));
+    $query->condition("tpl.status" , 1);
+    $query->condition("tpl.section_name" , $arg[2]);
+    $result = $query->execute()->rowCount();
+    if($result) {
+      $flag = TRUE;
+    }
+  }
+  return $flag;
+}
+/**
  * Function is used to prepare node title with emoji.
  * @param int $nid
  *   Node id
@@ -850,6 +868,10 @@ function itg_content_inactive() {
  *   Returns node title.
  */
 function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
+  // Condition is to make free title on home page ITG-3774
+  //if(drupal_is_front_page() || itg_is_special_page()) {
+    $max_limit = 10000;
+  //}
   $arg = arg();
   $titlte = "";
   $positions_array = array();
