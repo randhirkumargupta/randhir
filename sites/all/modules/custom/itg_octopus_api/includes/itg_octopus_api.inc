@@ -253,7 +253,7 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
- 
+
   $pagination = '';
   $current_rundown = '';
 
@@ -313,8 +313,8 @@ function itg_octopus_api_rundown_listing() {
     $query->condition('ios.category', $category_data, 'IN');
   }
 
-  $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
 
   if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
     $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
@@ -396,7 +396,7 @@ function itg_octopus_api_rundown_listing() {
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
-  
+
   return $output;
 }
 
