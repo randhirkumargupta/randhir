@@ -476,16 +476,16 @@ function itg_octopus_api_remove_cdata($text) {
 function itg_octopus_get_slug_notification() {
   global $user;
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
-  $query = db_select('itg_octopus_slug', 'ios');
-  $query->fields('ios', array('action', 'story_title', 'timestamp', 'storyid'));
-  $query->condition('ios.timestamp', (int) $user_last_login, '>=');
-  //$query->range(0,10);
+  $query = db_select('itg_octopus_notification', 'ios');
+  $query->fields('ios', array('type', 'msg'));
+  $query->condition('ios.time', (int) $user_last_login, '>=');
   $result = $query->execute();
+
   $rows = array();
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title . '(' . $chunk->storyid . ')', 'rundown-listing') . '</li>';
+    $html .= '<li>' . $chunk->msg . '</li>';
     ++$count;
   }
 
@@ -613,4 +613,28 @@ function itg_octopus_api_is_url_exist($url) {
   }
   curl_close($ch);
   return $status;
+}
+
+/**
+ * Octopus Notification Add
+ * @param type $url
+ * @return boolean
+ */
+function itg_octopus_add_notification($type, $msg, $time, $status) {
+
+  try {
+    $nid = db_insert('itg_octopus_notification')
+        ->fields(array(
+          'type' => $type,
+          'msg' => $msg,
+          'time' => $time,
+          'status' => $status,
+          'read_by' => 1,
+        ))
+        ->execute();
+  }
+  catch (Exception $e) {
+    watchdog('itg_octopus_add_notification', $e->getMessage());
+  }
+  return TRUE;
 }
