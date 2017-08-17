@@ -490,7 +490,6 @@ function itg_octopus_get_slug_notification() {
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
   $read_o_ids = itg_octopus_get_slug_notif_read_data($user_last_login, $user->uid);
   $query = db_select('itg_octopus_notification', 'ios');
-  $query->leftjoin('itg_octopus_notification_by_uid', 'nu', 'ios.id=nu.notification_id');
   $query->fields('ios', array('id', 'type', 'msg', 'hyperlink'));
   $query->condition('ios.time', (int) $user_last_login, '>=');
   if (!empty($read_o_ids)) {
