@@ -142,7 +142,7 @@ function features_for_newsletter_strongarm() {
           'weight' => '4',
         ),
         'title' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
         'path' => array(
           'weight' => '3',
@@ -151,7 +151,7 @@ function features_for_newsletter_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
