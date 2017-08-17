@@ -1,3 +1,7 @@
+/*
+ * @file itg_photogallery.js
+ * Contains all functionality related to itg_photogallery_expose_filter
+ */
 (function($) {
 
     Drupal.behaviors.itg_photogallery_form = {
