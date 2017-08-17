@@ -883,6 +883,7 @@ function itg_event_registration_get_total_registration($nid) {
     $db_query->addExpression('SUM(number_of_person)', 'sum');
     $db_query->condition('od.event_id', $nid);
     $db_query->condition('od.order_status', 1);
+    $db_query->condition('od.payment_gateway', 'free' , '!=');
     $data = $db_query->execute()->fetchCol()[0];
     return $data;
   }
