@@ -183,6 +183,5 @@
     <?php print render($page['footer']); ?>
 
 </div>
-
 <?php print render($page['bottom']); ?>
 <?php global $base_url; ?>
