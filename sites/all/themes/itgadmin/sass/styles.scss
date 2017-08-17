@@ -3700,7 +3700,9 @@ div#autocomplete{
         border-top: 1px solid #f5f5f5;
       }
       div{
+        white-space: normal;
         word-wrap: break-word;
+        max-width: 100%;
       }
     }
   }
@@ -5928,6 +5930,7 @@ div.node{
 
 .itg_image_repository{
   font-family: "Lucida Grande", Verdana, sans-serif;
+  overflow: auto;
   .image_repository{
     width: 100%;
     display: inline-block;
@@ -6216,6 +6219,7 @@ div.node{
     .date-padding .form-item > label{display: none;}
     .date-padding input[type="text"]{width: 100%;}
   }
+  .description{left: 100% !important;}
 }
 .node-print_team_integration-form{
   .form-field-name-field-pti-words-limit{
@@ -12042,7 +12046,7 @@ fieldset#edit-xmlsitemap{
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 9999;
+  z-index: 9;
 }
 .browse-media-file .edit-image-info{
   color: #008eb1;
@@ -12055,6 +12059,7 @@ fieldset#edit-xmlsitemap{
   height: 20px;
   padding-top: 1px;
   background-color: rgba(0,0,0,.2);
+  text-align: center;
 }
 [id*="itg-image-croping-image-info-form"]{
   .form-item-syndicate{
@@ -12172,4 +12177,9 @@ fieldset#edit-xmlsitemap{
 .progress .percentage {
     float: right;
     margin-left: 10px;
+}
+[id*="views-exposed-form-sold-item-history-page"]{
+  .views-widget-filter-created > label, .views-widget-filter-created .description {
+    display: none !important;
+  }
 }

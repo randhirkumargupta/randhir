@@ -136,6 +136,15 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['itg-akamai-cc-button-purge'] = array(
+    'title' => 'Akamai Content Type Purge',
+    'description' => '',
+    'page callback' => 'itg_akamai_cc_button_purge',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -200,7 +209,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
 
     $paths = itg_akamai_send_for_host_mapping($paths);
-    $paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
+    //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
 
     $paths_data = $paths;
 
@@ -344,11 +353,17 @@ function itg_akamai_send_for_host_mapping($paths) {
  */
 function itg_akamai_send_for_host_mapping_for_amp($paths) {
   $path_new_array = array();
-  if (isset($paths) && !empty($paths)) {
-    foreach ($paths as $paths_chunk) {
-      $path_new_array[] = $paths_chunk;
-      $path_new_array[] = $paths_chunk . '?amp';
+  if (is_array($paths)) {
+    if (isset($paths) && !empty($paths)) {
+      foreach ($paths as $paths_chunk) {
+        $path_new_array[] = $paths_chunk;
+        $path_new_array[] = $paths_chunk . '?amp';
+      }
     }
+  }
+  else {
+    $path_new_array[] = $paths;
+    $path_new_array[] = $paths . '?amp';
   }
   return $path_new_array;
 }
@@ -522,7 +537,6 @@ function itg_akamai_node_update($node) {
   }
 
 
-  //$mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   $mapping = itg_akamai_getting_mapped_content_type();
   if (in_array($node->type, $mapping)) { //p($node);
     //if (user_access("purge itg akamai cache")) {
@@ -538,7 +552,13 @@ function itg_akamai_node_update($node) {
       $current_url = $node->path['alias'];
     }
     $previous_url = $node->path['old_alias'];
-//die($current_url);
+
+    $amp_types = itg_akamai_amp_cc_mapping();
+
+    // Adding AMP urls for node types
+    if (in_array($node->type, $amp_types)) {
+      $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
+    }
     itg_akamai_clear_url($current_url, array(), $node);
 
     if ($current_url != $previous_url) {
@@ -546,6 +566,10 @@ function itg_akamai_node_update($node) {
         'action' => 'remove',
       );
 
+      // Adding AMP urls for node types
+      if (in_array($node->type, $amp_types)) {
+        $previous_url = itg_akamai_send_for_host_mapping_for_amp($previous_url);
+      }
       itg_akamai_clear_url($previous_url, $overrides);
     }
     //}
@@ -573,7 +597,6 @@ function itg_akamai_node_update($node) {
  */
 function itg_akamai_node_delete($node) {
   $mapping = itg_akamai_getting_mapped_content_type();
-  // $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
 
   if (in_array($node->type, $mapping)) {
     if (user_access("purge itg akamai cache")) {
@@ -582,6 +605,14 @@ function itg_akamai_node_delete($node) {
       $action = array(
         'action' => 'remove',
       );
+
+      // Adding AMP urls also
+    $amp_types = itg_akamai_amp_cc_mapping();
+
+      if (in_array($node->type, $amp_types)) {
+        $url = itg_akamai_send_for_host_mapping_for_amp($url);
+      }
+
       itg_akamai_clear_url($url, $overrides);
       //}
       //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
@@ -719,7 +750,6 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       $akamai_config_cctype_flag = NULL;
 
       // Checking whether the Akamai content level configration have been saved or not 
-      //$mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
       $mapping = itg_akamai_getting_mapped_content_type();
 
       if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
@@ -740,6 +770,42 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+
+  // Adding Akamai Purge Button 
+  $mapping = itg_akamai_getting_mapped_content_type();
+  $formid_cc_type = isset($form['#node']->type) ? $form['#node']->type : NULL;
+
+  // Adding Purge Akamai Cache Button
+  if (in_array($formid_cc_type, $mapping)) {
+    $form['#after_build'][] = 'itg_akamai_add_cc_button';
+  }
+}
+
+/**
+ * Add preview button
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_akamai_add_cc_button($form, &$form_state) {
+  unset($form['actions']['purge_akamai_cache']);
+  if (isset($form_state['node']->nid)) {
+    global $base_url;
+    $qry_array = drupal_get_query_parameters();
+    $data = array(
+      'nid' => $form_state['node']->nid,
+      'type' => $form_state['node']->type
+    );
+    $return_data = base64_encode(json_encode(array($_GET['q'], array_reverse($qry_array))));
+    $purge_url = $base_url . '/itg-akamai-cc-button-purge/' . base64_encode(json_encode($data)) . '?return_data=' . $return_data;
+    $purge_akamai_cache_link = '<a  class="btn-submit" href="' . $purge_url . '">Purge Akamai Cache</a>';
+    $form['actions']['purge_akamai_cache'] = array(
+      '#markup' => $purge_akamai_cache_link,
+      '#weight' => 19,
+    );
+  }
+
+  return $form;
 }
 
 /**
@@ -1032,6 +1098,7 @@ function itg_akamai_purge_story_related_to_video($video_id) {
     if (!empty($stories_ids)) {
       $itg_akamai_get_story_alias = itg_akamai_get_story_bulk_alias($stories_ids);
       if (!empty($itg_akamai_get_story_alias)) {
+        $itg_akamai_get_story_alias = itg_akamai_send_for_host_mapping_for_amp($itg_akamai_get_story_alias);
         itg_akamai_clear_url($itg_akamai_get_story_alias);
       }
     }
@@ -1069,10 +1136,10 @@ function itg_akamai_getting_mapped_content_type() {
       $mapping[] = $content_type;
     }
   }
-  if (empty($mapping)) {
-    // Hardcoded content type
-    $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
-  }
+//  if (empty($mapping)) {
+//    // Hardcoded content type
+//    $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+//  }
   return $mapping;
 }
 
@@ -1085,4 +1152,48 @@ function itg_akamai_convert_to_string_time($seconds) {
   $dtF = new \DateTime('@0');
   $dtT = new \DateTime("@$seconds");
   return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
+}
+
+/**
+ * Convert to String Time
+ * @param type $num_seconds
+ * @return type
+ */
+function itg_akamai_cc_button_purge($entity_data) {
+  if (isset($entity_data) && !empty($entity_data)) {
+    $node_data = json_decode(base64_decode($entity_data));
+    $url = drupal_get_path_alias('node/' . $node_data->nid);
+    $amp_types = itg_akamai_amp_cc_mapping();
+    // Adding AMP urls for node types
+    if (in_array($node_data->type, $amp_types)) {
+      $url = itg_akamai_send_for_host_mapping_for_amp($url);
+      itg_akamai_clear_url($url);
+      drupal_set_message(t('Content have been purged successfully.'));
+    }
+    else {
+      itg_akamai_clear_url($url);
+      drupal_set_message(t('Content have been purged successfully.'));
+    }
+
+    //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+    if ($node_data->type == 'videogallery') {
+      itg_akamai_purge_story_related_to_video($node_data->nid);
+    }
+    // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+
+    if (isset($_GET['return_data']) && !empty($_GET['return_data'])) {
+      $return_data = json_decode(base64_decode($_GET['return_data']), TRUE);
+      drupal_goto($return_data[0], array('query' => $return_data[1]));
+    }
+    else {
+      drupal_goto('<front>');
+    }
+  }
+}
+
+/**
+ * Getting AMP mapping
+ */
+function itg_akamai_amp_cc_mapping() {
+  return array('story', 'photogallery', 'videogallery');
 }
