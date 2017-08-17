@@ -409,7 +409,7 @@ function itg_podcast_node_validate($node, $form, &$form_state) {
 function itg_podcast_node_presave($node) {  
   
   // Set audio length.
-  if ($node->type == "podcast") {
+  if ($node->type == "podcast" && isset($node->op)) {
     module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
     foreach ($node->field_podcast_audio_upload['und'] as $audio_key => $audio_files_data) {
       $fid = $audio_files_data['field_podcast_upload_audio_file']['und'][0]['fid'];
