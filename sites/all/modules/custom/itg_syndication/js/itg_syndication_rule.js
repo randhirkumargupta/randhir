@@ -41,11 +41,11 @@ function syndication_rules_show_filed(number_of_tr) {
 }
 
 jQuery(document).ajaxSuccess(function () {
-    var number_of_tr = jQuery('#field-syndication-rule-details-values tr').length;
+    var number_of_tr = jQuery('.field-multiple-table tr').length;
     syndication_rules_show_filed(number_of_tr);
 });
 
 jQuery(document).ready(function () {
-    var number_of_tr = jQuery('#field-syndication-rule-details-values tr').length;
+    var number_of_tr = jQuery('.field-multiple-table tr').length;
     syndication_rules_show_filed(number_of_tr);
 });

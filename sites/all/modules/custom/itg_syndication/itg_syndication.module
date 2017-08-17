@@ -287,6 +287,7 @@ function itg_syndication_form_syndication_rule_node_form_alter(&$form, &$form_st
 function itg_syndication_rule_after_build($form, &$form_state) {
 
   drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_rule.js', array('weight' => 1, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/field_collection.js', array('type' => 'file', 'scope' => 'footer'));
 
   foreach ($form['field_syndication_rule_details'][LANGUAGE_NONE] as $key => $item) {
     if (is_numeric($key)) {
@@ -317,12 +318,36 @@ function syndication_ajax_callback($form , &$form_state) {
   $option_array = syndication_get_option_array($options);
   $wrapper = $form_state['triggering_element']['#ajax']['wrapper'];
   $int = preg_replace("/[^0-9]/","",$wrapper);//filter_var($wrapper, FILTER_SANITIZE_NUMBER_INT);
-  watchdog('syndication_wrapper', "<pre>" . print_r($int , 1) . "</pre>");
+  $debug['wrapper'] = $wrapper;
+  $debug['option_array'] = $option_array;
+  $debug['int'] = $int;
+  watchdog('syndication_wrapper_options', "<pre>" . print_r($debug , 1) . "</pre>");
   
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#prefix'] = '<div class="'.$wrapper.'">';
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#suffix'] = '<div>';
   $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section']['und']['#options'] = $option_array;
-  return $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section'];
+  
+  $option_html = '';
+  foreach($option_array as $value=> $option) {
+    $option_html .= '<option value="'.$value.'"> '.$option.' </option>';
+  }
+  
+  $settings['wrapper'] = $wrapper;
+  $settings['option_html'] = $option_html;
+  	// Next we will include a custom function that we will call ourselves in our JavaScript file:
+	$commands[] = array
+	(
+		// The command will be used in our JavaScript file (see next section)
+		'command' => 'afterAjaxCallbackExample',
+		// We pass the value that the user selected in the select element to our
+		// JavaScript function:
+		'selectedValue' => $settings,
+	);
+ 
+	// And finally, we will return all of our commands to the system to be executed:
+	return array('#type' => 'ajax', '#commands' => $commands);
+  //drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
+  //return $form['field_syndication_rule_details']['und'][$int]['field_syndication_select_section'];
 }
 
 
@@ -720,4 +745,28 @@ function itg_syndication_get_rules_detaiils() {
     }
     return $rules_data;
   }
+}
+
+/**
+ * Function which gives flag weather node is future date or not.
+ * 
+ * @param int $nid
+ *    Node id
+ * 
+ * @return boolean
+ */
+function is_not_future_node($nid) {
+  $results = array();
+  if(!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin("field_data_field_story_schedule_date_time" , "sdt" , "sdt.entity_id=n.nid");
+    $query->fields('n', array('nid'));
+    // Logic to skip future nodes.
+    $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
+      ->condition("sdt.field_story_schedule_date_time_value" , date('Y-m-d H:i:s') , "<");
+    $query->condition($db_or);
+    $query->condition('n.nid' , $nid);
+    $results = $query->execute()->fetchAllAssoc('nid');
+  }
+  return empty($results) ? FALSE : TRUE;
 }

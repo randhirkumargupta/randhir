@@ -132,7 +132,12 @@ function insert_layout_setting_ajax() {
            ->fields(array('status' => $_GET['status_val']))
            ->condition('id', $unpublish_tpl_id)->execute();
     // for purging
-    $url = drupal_get_path_alias('taxonomy/term/' . $_GET['section_name']);
+    if ($_GET['section_name'] == 'home_page') {     
+      $url = drupal_get_path_alias(variable_get('site_frontpage', 'node'));
+    } else {
+        $url = drupal_get_path_alias('taxonomy/term/' . $_GET['section_name']);
+    }
+    
     itg_akamai_clear_url($url, array(), array());
     exit;
   }
