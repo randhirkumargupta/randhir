@@ -3210,6 +3210,13 @@ div.node{
       min-width: 620px;
     }
   }
+  td.field-multiple-drag{
+    width: 30px;
+    padding-right: 0;
+    display: block;
+    min-width: 0;
+    border: none;
+  }
   .field-name-field-start-time{
     fieldset.date-combo{
       > legend{padding-top: 28px;}
@@ -3249,6 +3256,7 @@ div.node{
       }
     } 
   }
+  + div.clearfix .form-submit{margin-left: 280px;}
 }
 .view .view-filters .views-exposed-form .views-exposed-widget{
   &.views-widget-filter-created, &.views-widget-filter-changed{

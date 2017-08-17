@@ -3962,6 +3962,13 @@ div.node .ugc-action .reject-ugc, div.node .ugc-action .manage-ugc {
 [id*="field-program-schedule-values"] > tbody > tr > td {
   min-width: 620px;
 }
+[id*="field-program-schedule-values"] td.field-multiple-drag {
+  width: 30px;
+  padding-right: 0;
+  display: block;
+  min-width: 0;
+  border: none;
+}
 [id*="field-program-schedule-values"] .field-name-field-start-time fieldset.date-combo > legend {
   padding-top: 28px;
 }
@@ -3992,6 +3999,9 @@ div.node .ugc-action .reject-ugc, div.node .ugc-action .manage-ugc {
   left: -220px;
   position: absolute;
   top: 26px;
+}
+[id*="field-program-schedule-values"] + div.clearfix .form-submit {
+  margin-left: 280px;
 }
 
 .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created, .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-changed {
