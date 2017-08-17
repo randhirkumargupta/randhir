@@ -14,7 +14,6 @@
 function itg_rfa_file_live_blog() {
   if (isset($_POST) && !empty($_POST)) {
     $rfa_data = $_POST;
-    watchdog('aaa', '<pre>' . print_r($rfa_data, true) . '</pre>');
     $success = 0;
     foreach ($rfa_data as $key => $post) {
       $rundown_id = isset($post['rundown_id']) ? $post['rundown_id'] : 0;
@@ -24,6 +23,9 @@ function itg_rfa_file_live_blog() {
       $created_by = isset($post['created_by']) ? $post['created_by'] : '';
       $timestamp = REQUEST_TIME;
       $action = isset($post['action']) ? $post['action'] : '';
+      $msg = '';
+      $msg = l('[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]', 'rfa-dashboard');
+      itg_octopus_add_notification('RFA', $msg, REQUEST_TIME, 1);
 
       if ($action == 'UPDATE') {
         itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);
@@ -171,7 +173,7 @@ function itg_octopus_api_rfa_dashboard() {
     $query->condition('rfa.text', $_GET['text'], '=');
   }
 
- 
+
   $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
   $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
 
@@ -231,6 +233,7 @@ function itg_octopus_api_rfa_dashboard() {
            </div>';
   $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
