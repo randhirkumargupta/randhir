@@ -811,6 +811,7 @@ function itg_videogallery_node_insert($node) {
                   $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                       ->fields(array(
                         'dailymotion_published' => 1,
+                        'is_replace' => 0,
                         'node_is_save_draft' => 1,
                       ))
                       ->condition('video_id', $file_video[0]->solr_video_id, '=')
@@ -1720,6 +1721,46 @@ function itg_videogallery_getsolr_data_unpublish() {
  * 
  */
 function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
+  // Here remove unpublish video iframe.
+  $query = db_select('itg_story_body_videos', 'isbv');
+  $query->fields('isbv');
+  $query->condition('is_node', '1');
+  $video_data = $query->execute()->fetchAll();
+  if (isset($video_data) && !empty($video_data)) {
+    foreach ($video_data as $story_body_video) {
+      $nid = $story_body_video->nid;
+      $main_video_nid = base64_decode($story_body_video->video_id);
+      $node_data = itg_videogallery_get_node_status($main_video_nid);
+     
+      if ($node_data == 0) {
+        $node = node_load($nid);
+        $node_body = $node->body['und'][0]['value'];
+        preg_match_all('/src="([^"]+)"/', $node_body, $match);
+        $video_url = $match[1];
+        if (!empty($video_url)) {
+          foreach ($video_url as $video_value) {
+            $post_check = strpos($video_value, '/embed/' . $story_body_video->video_id);
+            if ($post_check) {
+              $ifreame = '<iframe allowfullscreen="" frameborder="0" height="480" src="' . $story_body_video->url . '" width="648"></iframe>';
+              $html = str_replace($ifreame, "", $node_body);
+              $node->body['und'][0]['value'] = $html;
+              field_attach_update('node', $node);
+              // delete video.
+              if (function_exists('itg_akamai_clear_url')) {
+                $url = drupal_get_path_alias('node/' . $nid);
+                itg_akamai_clear_url($url);
+              }
+              db_delete('itg_story_body_videos')
+                  ->condition('id', $story_body_video->id)
+                  ->execute();
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  
   $solr_data = itg_videogallery_getsolr_data_unpublish();
   $unpublish_video_id = $solr_data['unpubliash_video_id'];
   $unpublish_replace_id = $solr_data['replace_video'];
@@ -1816,43 +1857,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
       }
     }
   }
-// Here remove unpublish video iframe.
-  $query = db_select('itg_story_body_videos', 'isbv');
-  $query->fields('isbv');
-  $query->condition('is_node', '1');
-  $video_data = $query->execute()->fetchAll();
-  if (isset($video_data) && !empty($video_data)) {
-    foreach ($video_data as $story_body_video) {
-      $nid = $story_body_video->nid;
-      $main_video_nid = base64_decode($story_body_video->video_id);
-      $node_data = itg_videogallery_get_node_status($main_video_nid);
-      if ($node_data == 0) {
-        $node = node_load($nid);
-        $node_body = $node->body['und'][0]['value'];
-        preg_match_all('/src="([^"]+)"/', $node_body, $match);
-        $video_url = $match[1];
-        if (!empty($video_url)) {
-          foreach ($video_url as $video_value) {
-            $post_check = strpos($video_value, '/embed/' . $story_body_video->video_id);
-            if ($post_check) {
-              $ifreame = '<iframe allowfullscreen="" class="video_node_' . $story_body_video->video_id . '" frameborder="0" height="480" scrolling="no" src="' . $video_data->url . '" width="648"></iframe>';
-              $html = str_replace($ifreame, "", $node_body);
-              $node->body['und'][0]['value'] = $html;
-              field_attach_update('node', $node);
-              // delete video.
-              if (function_exists('itg_akamai_clear_url')) {
-                $url = drupal_get_path_alias('node/' . $nid);
-                itg_akamai_clear_url($url);
-              }
-              db_delete('itg_story_body_videos')
-                  ->condition('id', $story_body_video->id)
-                  ->execute();
-            }
-          }
-        }
-      }
-    }
-  }
+
 
   //  Here node dekete and unpublish
   if (!empty($unpublish_replace_id)) {
@@ -2634,6 +2639,7 @@ function itg_videogallery_unpublish_content_delete_video($fid) {
     $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
         ->fields(array(
           'dailymotion_published' => 0,
+          'is_replace' => 0,
           'is_draft' => 0,
         ))
         ->condition('video_id', $result[0]->solr_video_id, '=')
