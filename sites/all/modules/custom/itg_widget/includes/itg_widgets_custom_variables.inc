@@ -253,5 +253,21 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('reporter_tid_for_widgets'),
   );
   
+  $form['itg_front_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_front_url'),
+    '#required' => TRUE,
+  );
+  
+  $form['itg_backend_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Backend Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_backend_url'),
+    '#required' => TRUE,
+  );
+  
   return system_settings_form($form);
 }

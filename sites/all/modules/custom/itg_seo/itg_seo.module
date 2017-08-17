@@ -424,25 +424,25 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
-      $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
-    }
+//    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
+//      $newpath = itg_common_custompath_insert_load($node);
+//      $node->path['alias'] = $newpath;
+//      $path = array(
+//        'source' => "node/{$node->nid}",
+//        'alias' => $newpath, // Any alias that you want to set.
+//      );
+//      path_save($path);
+//    }
 
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
-      $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
-    }
+//    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
+//      $newpath = itg_common_custompath_insert_load($node);
+//      $node->path['alias'] = $newpath;
+//      $path = array(
+//        'source' => "node/{$node->nid}",
+//        'alias' => $newpath, // Any alias that you want to set.
+//      );
+//      path_save($path);
+//    }
   }
   // custom alias conditions for migration
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
