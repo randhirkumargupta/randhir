@@ -191,6 +191,12 @@ function itg_widgets_custom_variables() {
     '#title' => t('Solr urlconfig'),
     '#default_value' => variable_get('solr_url_config'),
   );
+  
+  $form['global_loyalty_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Global loyalty url'),
+    '#default_value' => variable_get('global_loyalty_url'),
+  );
 
   $form['aaj_tak_json_url'] = array(
     '#type' => 'textfield',

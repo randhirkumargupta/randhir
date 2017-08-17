@@ -817,7 +817,9 @@ function itg_content_inactive() {
 
   $current_time = date("Y-m-d H:i:s");
   //set content type
-  $content_type = array('story', 'videogallery');
+  //$content_type = array('story', 'videogallery'); 
+  $content_type = array('videogallery');
+  
   $itg_query = db_select('node', 'n');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('n', array('nid'));
@@ -825,8 +827,7 @@ function itg_content_inactive() {
   $itg_query->condition('n.type', $content_type, 'IN');
   $itg_query->condition('n.status', 1);
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
-
-  //$itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));
+  $itg_query->isNotNull('expiry.field_story_expiry_date_value');
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $itg_val) {
     $node = node_load($itg_val->nid);

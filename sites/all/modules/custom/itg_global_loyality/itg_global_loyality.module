@@ -1,0 +1,260 @@
+<?php
+
+/**
+ * @file
+ * The ITG Global Loyality module.
+ *
+ * Contains functionality for ITG Global Loyality. *
+ */
+
+/**
+ * Implements hook_menu.
+ * {@inheritdoc}
+ */
+function itg_global_loyality_menu() {
+  $items = array();
+  $items['itg-get-loyality-point'] = array(
+    'title' => t('Global loyality point'),
+    'page callback' => 'itg_get_loyality_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-global-fb-point'] = array(
+    'title' => t('Global facebook loyality point'),
+    'page callback' => 'itg_global_fb_loyality_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements itg_get_loyality_point().
+ */
+function itg_get_loyality_point() {
+  $uid = $_POST['uid'];
+  $sso_id = $_POST['sso_id'];
+  $nid = $_POST['nid'];
+  $loyalty_type = $_POST['loyalty_type'];
+  $loyalty_points = $_POST['loyalty_points'];
+  $remaining_points = $_POST['remaining_points'];
+  $property = $_POST['property'];
+  $status = $_POST['status'];
+  $news_letter = $_POST['news_letter'];
+  $expiry_date = $_POST['expiry_date'];
+  if($loyalty_type == 'Newsletter_subscription') {
+  $value_exist = itg_global_loyalty_newsletter_point($uid, $loyalty_type, $news_letter); 
+  } else {
+  $value_exist = itg_global_loyality_exist_point($uid, $loyalty_type, $nid, $property);
+  }
+  if (empty($value_exist)) {
+
+    try {
+
+      db_insert('itg_global_loyality_point')
+          ->fields(array(
+            'uid' => $uid,
+            'sso_id' => (int) $sso_id,
+            'nid' => $nid,
+            'loyalty_type' => $loyalty_type,
+            'loyalty_points' => $loyalty_points,
+            'remaining_points' => $remaining_points,
+            'newsletter' => $news_letter,
+            'property' => $property,
+            'status' => $status,
+            'expiry_date' => $expiry_date,
+          ))
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog('globaldata1 exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+    //watchdog('globaldata1', '<pre>' . print_r($_POST, true) . '</pre>');
+  }
+}
+
+/*
+ * Implements itg_global_loyality_get_sso_id().
+ * @param int $uid
+ * @return string
+ */
+function itg_global_loyality_get_sso_id($uid) {
+  if (!empty($uid)) {
+    $query = db_select('authmap', 'u');
+    $query->fields('u', array('authname'))
+        ->condition('u.uid', $uid);
+   return $query->execute()->fetchField();
+  }
+  return 0;
+}
+
+/**
+ * Validate fb and twitter points.
+ *
+ * @param int $user
+ * @param string $type
+ * @param int $nid
+ * @return boolean
+ */
+function itg_global_loyality_exist_point($user, $type, $nid = NULL, $property = NULL) {
+  $itg_result = '';
+  $itg_query = db_select('itg_global_loyality_point', 'p')
+      ->fields('p', array('id'))
+      ->condition('p.uid', $user);
+      if(!empty($nid)) {
+      $itg_query->condition('p.nid', $nid);
+      }
+      if(!empty($property)) {
+      $itg_query->condition('p.property', $property);
+      }
+  $itg_query->condition('p.loyalty_type', $type);
+  $itg_result = $itg_query->execute()->fetchField();
+  if (!empty($itg_result)) {
+    return TRUE;
+  }
+  return ;
+  
+}
+
+/**
+ * Implements itg_global_loyality_send_data().
+ */
+function itg_global_loyality_send_data($uid, $type, $nid, $newsletter = NULL) {
+  $url = variable_get('global_loyalty_url');
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  
+  if ($type == 'Content_Visit') {
+    $loyalty_type = 'Content_Visit';
+    if (!empty(variable_get('lrp_content_visit'))) {
+      $loyalty_points = variable_get('lrp_content_visit');
+      $remaining_points = variable_get('lrp_content_visit');
+    }
+  }
+  
+  if ($type == 'content_like') {
+    $loyalty_type = 'content_like';
+    if (!empty(variable_get('lrp_content_like'))) {
+      $loyalty_points = variable_get('lrp_content_like');
+      $remaining_points = variable_get('lrp_content_like');
+    }
+  }
+  
+if ($type == 'twitter_share' || $type == 'google_share' || $type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow' || $type == 'facebook_share') {
+    $loyalty_type = $type;
+    if (!empty(variable_get('lrp_follow_itg_on_social_sites'))) {
+      $loyalty_points = variable_get('lrp_follow_itg_on_social_sites');
+      $remaining_points = variable_get('lrp_follow_itg_on_social_sites');
+    }
+  }
+  
+  if ($type == 'Newsletter_subscription') {
+    $loyalty_type = 'Newsletter_subscription';
+    if (!empty(variable_get('lrp_newsletter_subscription'))) {
+      $loyalty_points = variable_get('lrp_newsletter_subscription');
+      $remaining_points = variable_get('lrp_newsletter_subscription');
+    }
+  }
+  
+  if ($type == 'poll') {
+    $loyalty_type = 'poll';
+    if (!empty(variable_get('lrp_participation_in_poll'))) {
+      $loyalty_points = variable_get('lrp_participation_in_poll');
+      $remaining_points = variable_get('lrp_participation_in_poll');
+    }
+  }
+  
+  if ($type == 'campaign ') {
+    $loyalty_type = 'campaign';
+    if (!empty(variable_get('lrp_participation_in_campaign'))) {
+      $loyalty_points = variable_get('lrp_participation_in_campaign');
+      $remaining_points = variable_get('lrp_participation_in_campaign');
+    }
+  }
+  
+  if ($type == 'survey') {
+    $loyalty_type = 'survey';
+    if (!empty(variable_get('lrp_participation_in_survey'))) {
+      $loyalty_points = variable_get('lrp_participation_in_survey');
+      $remaining_points = variable_get('lrp_participation_in_survey');
+    }
+  }
+  
+  if ($type == 'raf') {
+    $loyalty_type = 'raf';
+    if (!empty(variable_get('lrp_refer_a_friend'))) {
+      $loyalty_points = variable_get('lrp_refer_a_friend');
+      $remaining_points = variable_get('lrp_refer_a_friend');
+    }
+  }
+  
+  if ($type == 'ugc_contribution') {
+    $loyalty_type = 'ugc_contribution';
+    if (!empty(variable_get('lrp_ugc_contribution'))) {
+      $loyalty_points = variable_get('lrp_ugc_contribution');
+      $remaining_points = variable_get('lrp_ugc_contribution');
+    }
+  }
+  
+  if ($type == 'event_registration') {
+    $loyalty_type = 'event_registration';
+    if (!empty(variable_get('lrp_online_registration_for_any_events'))) {
+      $loyalty_points = variable_get('lrp_online_registration_for_any_events');
+      $remaining_points = variable_get('lrp_online_registration_for_any_events');
+    }
+  }
+
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  if (!empty(variable_get('lrp_loyality_points_expiry'))) {
+    $expiry_days = '+' . variable_get('lrp_loyality_points_expiry') . ' days';
+    $expiry_date_old = date('Y-m-d h:i', strtotime($expiry_days));
+    $expiry_date = strtotime($expiry_date_old);
+  }
+  $data = 'uid=' . $uid . '&sso_id=' . $sso_id . '&nid=' . $nid . '&loyalty_type=' . $loyalty_type . '&loyalty_points=' . $loyalty_points . '&remaining_points=' . $remaining_points . '&property=' . $property . '&status=1&expiry_date=' . $expiry_date.'&news_letter='.$newsletter;
+  $options = array(
+    'method' => 'POST',
+    'data' => $data,
+    'timeout' => 60,
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+  );
+  $result = drupal_http_request($url, $options);
+}
+
+/**
+ * Implements itg_global_fb_loyality_point().
+ */
+function itg_global_fb_loyality_point() {
+  global $user;
+  $arg = arg();
+  if (function_exists('itg_global_loyality_get_sso_id') && array_key_exists(FRONT_USER, $user->roles)) {
+    itg_global_loyality_send_data($user->uid, $arg[2], $arg[1]);
+  }
+}
+
+/**
+ * Validate news letter points.
+ *
+ * @param int $user
+ * @param string $type
+ * @param string $news_letter
+ * @return boolean
+ */
+function itg_global_loyalty_newsletter_point($user, $type, $news_letter) {
+  $itg_result = '';
+  $itg_query = db_select('itg_global_loyality_point', 'p')
+      ->fields('p', array('newsletter'))
+      ->condition('p.uid', $user)
+      ->condition('p.loyalty_type', $type);
+  $itg_result = $itg_query->execute()->fetchAll();
+  // If newsletter subscription is first time then earn point else not.
+  foreach ($itg_result as $value) {
+    if ($value->newsletter == $news_letter) {
+     return TRUE;
+    }
+  }
+}
