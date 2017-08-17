@@ -502,7 +502,7 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l($chunk->msg, 'rundown-listing', array('query' => array('onotify' => base64_encode($chunk->id)))) . '</li>';
+    $html .= '<li>' . l($chunk->msg, $chunk->hyperlink, array('query' => array('onotify' => base64_encode($chunk->id)))) . '</li>';
     ++$count;
   }
 
