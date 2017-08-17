@@ -24,8 +24,9 @@ function itg_rfa_file_live_blog() {
       $timestamp = REQUEST_TIME;
       $action = isset($post['action']) ? $post['action'] : '';
       $msg = '';
-      $msg = l('[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]', 'rfa-dashboard');
-      itg_octopus_add_notification('RFA', $msg, REQUEST_TIME, 1);
+      $hyperlink = 'rfa-dashboard';
+      $msg = '[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]';
+      itg_octopus_add_notification('RFA', $msg, $hyperlink, REQUEST_TIME, 1);
 
       if ($action == 'UPDATE') {
         itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);

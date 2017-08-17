@@ -5027,6 +5027,51 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_show_fields'.
+  $field_instances['node-story-field_story_show_fields'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 131,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_show_fields',
+    'label' => 'Show Fields',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 112,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_small_image'.
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
@@ -6784,6 +6829,7 @@ function features_for_story_field_default_field_instances() {
   t('Select supplement');
   t('Select templates');
   t('Short headline');
+  t('Show Fields');
   t('Small image');
   t('Snap Post');
   t('Snap post');
