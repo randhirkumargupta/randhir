@@ -3153,6 +3153,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         $uname = $params['user_id'];
 
         if ($uid) {
+            localSignup($params);
             $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
             $result = callAPI($method, $url, $params);
             $result_obj = json_decode($result);
@@ -3284,12 +3285,32 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $result_obj = json_decode($result);
     //echo $result_obj[0]->otp; die();
     if($result_obj[0]->otp){
+        //login scritp start
+            $user = user_load_by_name($params['user_id']);
+            //p($user);die();
+            if ($user->uid) {
+              //user_login_finalize($user);
+
+              $return = new stdClass();
+              $return->sessid = session_id();
+              $return->session_name = session_name();
+              $return->token = drupal_get_token('services');
+
+              $account = clone $user;
+
+              services_remove_user_data($account);
+
+              $return->user = $account;
+
+              //return $return;
+            }
+        //login scritp end
         $uname = $params['user_id'];
         $data['status_code'] = "1";
         $data['status_message'] = "";
         $data['data']['user_id'] = "$uname";
         $data['data']['is_authenticated'] = "1";
-        $data['data']['auth_token'] = "";
+        $data['data']['auth_token'] = "$return->token";
     }
     else{
         $data['status_code'] = "0";
