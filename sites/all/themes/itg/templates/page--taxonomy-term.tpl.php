@@ -41,7 +41,12 @@
             <?php endif; ?>
 
             <?php print render($page['header']); ?>
-
+            <?php
+            $arg = arg();
+            if (isset($arg[2])) {
+              $term = taxonomy_term_load($arg[2]);
+            }
+            ?>
         </section>
     </header>
     <?php
@@ -80,8 +85,18 @@
                 <?php endif; ?>
 
                 <a id="main-content"></a>
+                <!-- Sponsored Category changes. Show category icon or Impact text. --> 
+                <?php
+                if ((_is_sponsored_category($arg[2])) && (!empty($term->field_show_fields))) {
+                  $show_field_val = $term->field_show_fields[LANGUAGE_NONE][0]['value'];
+                  if ($show_field_val == 'category_icon'):
+                    print "<div class='sponsor-header'><span class='sponsor-powerby'>Powered by</span><span class='sponsor-logo'>" . theme('image_style', array('path' => $term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+                  else:
+                    print "<div class='sponsor-header'><span class='sponsor-impact-text'>" . $term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+                  endif;
+                }
+                ?>
                 <!-- Page title for specific page -->
-                <?php $arg = arg(); ?>
                 <?php
                 $flag = '';
                 switch ($arg[0]) {
@@ -112,21 +127,21 @@
                 <?php
                 global $base_url;
                 $taxonomy_url = $base_url . "/taxonomy/term/$arg[2]";
-                $term = taxonomy_term_load($arg[2]);
-                $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-                $query = drupal_get_query_parameters();
-                if ($query['view_type'] == 'list') {
-                  $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
+                //show heading and list/grid view if category is not sponsored.
+                if (!_is_sponsored_category($arg[2])) {
+                  $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+                  $query = drupal_get_query_parameters();
+                  if ($query['view_type'] == 'list') {
+                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('view_type' => 'grid'))) . '</div>';
+                  }
+                  elseif ($query['view_type'] == 'grid') {
+                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('html' => true, 'query' => array('view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('view_type' => 'grid'))) . '</div>';
+                  }
+                  else {
+                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('view_type' => 'grid'))) . '</div>';
+                  }
+                  print $header_content;
                 }
-                elseif ($query['view_type'] == 'grid') {
-                  $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
-                }
-                else {
-                  $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
-                }
-
-
-                print $header_content;
                 if (!isset($_GET['view_type']) || (isset($_GET['view_type']) && $_GET['view_type'] == 'list')) {
                   // show list view.
                   print views_embed_view('category_wise_content_list', 'section_wise_content_listing', arg(2));
