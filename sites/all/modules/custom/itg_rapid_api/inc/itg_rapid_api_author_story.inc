@@ -360,6 +360,7 @@ function news_wrap_list() {
 
     // list array building
     $data = news_wrap_datalist();
+    $current_date = date('Y-m-d H:i:s',time());
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
@@ -369,7 +370,7 @@ function news_wrap_list() {
         $output_array['status_message'] = "customised_message";
     }
 
-    $data_array['updated_datetime'] = '';
+    $data_array['updated_datetime'] = "$current_date";
     $data_array['news'] = $data['data'];
     $output_array['data'] = $data_array;
 
@@ -399,7 +400,7 @@ function news_wrap_datalist() {
 
     $query->condition('n.type', 'story');
     $query->condition('n.status', 1);
-    $query->range(0, 20);
+    $query->range(0, 25);
     $query->orderBy('n.nid', 'DESC');
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

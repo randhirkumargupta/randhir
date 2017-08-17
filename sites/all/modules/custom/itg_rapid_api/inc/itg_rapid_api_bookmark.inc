@@ -38,7 +38,7 @@ function bookmark_responce_data($user_id) {
  * @return array of All the stories which is bookmarked/Read later ,  
  */
 
-function bookmark_set_data_responce($user_id, $node_id) {
+function bookmark_set_data_responce($user_id, $node_ids) {
 
   $output_array = array();
   $data_array = array();
@@ -54,6 +54,9 @@ function bookmark_set_data_responce($user_id, $node_id) {
     $con = mongodb();
     // check connection
     if ($con) {
+      foreach ($node_ids as $node){
+      $node_id = $node['id'];
+      if($node_id != ''){
       $people = $con->front_user_activity;
       $actual_data = node_load($node_id);
       $get_previous_info = itg_get_front_activity_info($node_id, $actual_data->type, $user_id, $user_activity, $status = '');
@@ -70,32 +73,13 @@ function bookmark_set_data_responce($user_id, $node_id) {
         $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $actual_data->type);
         
       }
-      else {
-
-        $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "timestamp" => time()));
-        $people->update(array("nid" => $node_id, "activity" => $user_activity, "uid" => $user_id), $newdata);
-        $response = array("success" => $dstatus, 'activity' => $user_activity, 'type' => $actual_data->type);
-        //print json_encode($response);
       }
     }
+    }
   }
-
   // list array building
   //$data = bookmark_set_responce_datalist($user_id);
   $output_array = bookmark_responce_data($user_id);
-
-//    if ($data['lcount'] > 0) {
-//        $output_array['status_code'] = "1";
-//        $output_array['status_message'] = "";
-//    } else {
-//        $output_array['status_code'] = "0";
-//        $output_array['status_message'] = "customised_message";
-//    }
-//
-//    //data array building
-//    $data_array['content'] = $data['data'];
-//    $output_array['data'] = $data_array;
-
   return $output_array;
 }
 
@@ -188,7 +172,7 @@ function bookmark_responce_datalist($user_id) {
     $con = mongodb();
     if ($con) {
       $people = $con->front_user_activity;
-      $bookmark_data = $people->find(array('uid' => $user_id, 'activity' => 'read_later'));
+      $bookmark_data = $people->find(array('uid' => $user_id, 'activity' => 'read_later'))->sort(array('activity_date_time' => -1));
 
       foreach ($bookmark_data as $book_data) {
 

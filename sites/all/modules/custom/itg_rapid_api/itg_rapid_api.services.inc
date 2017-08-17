@@ -1765,7 +1765,7 @@ function itg_rapid_api_resource() {
         // Sprint 4 Read Later
         'bookmark_get' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Bookmark Get Responce based on userid.',
                     'file' => array(
                         'type' => 'inc',
@@ -1777,20 +1777,27 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
+                            'optional' => TRUE,
                             'source' => 'data',
                             //'source' => array('data' => 'first_name'),
                             'description' => 'Loged in user id',
+                            'type' => 'string',
+                        ),
+                      array(
+                            'name' => 'authtoken_id',
+                            'optional' => TRUE,
+                            'source' => 'data',
+                            'description' => 'Loged user token id',
                             'type' => 'string',
                         ),
                     ),
@@ -3952,24 +3959,39 @@ function update_preference($user_id, $tid) {
  * @return array of node stories
  */
 
-function bookmark_get_responce($token, $user_id) {
+function bookmark_get_responce($token, $user_id, $authtoken_id) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    
+    $user_name = $params['user_id'];//user name of the logend in user
+    $user_load = user_load_by_name($user_name);
 
-    $user_id = $_GET['user_id'];
-    $redis_key = "itg_rapid_get_bookmark" . $user_id . '';
-    $result_get = getRedis($redis_key);
-
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        // call function from return data..
-
-        $jsondata = bookmark_responce_data($user_id);
-        $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    $user_id = isset($user_load->uid) ? $user_load->uid : "";
+    $authtoken_id = $params['authtoken_id'];
+    
+    $message_array = array();
+    
+    $args = '0';
+    if (isset($user_id) && isset($authtoken_id)) {
+        $args = '1';
+    }else{
+      $message_array['status_code'] = '0';
+      $message_array['status_message'] = "Argument are missing";
     }
-
-    $jsondata = json_decode($jsondata, true);
+    
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+    }
+    
+    
+    if ($args != '0') {
+         $jsondata = bookmark_responce_data($user_id);
+    } else {
+        $jsondata = $message_array;
+    }
+   
     return $jsondata;
 }
 
@@ -3981,55 +4003,70 @@ function bookmark_get_responce($token, $user_id) {
 function bookmark_set_responce($token, $user_id, $node_id) {
     $HTTP_RAW_POST_DATA;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //$params = $_POST;
-    $user_id = $params['user_id'];
-    $node_id = $params['node_id'];
+    
+    $user_name = $params['user_id'];//user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
 
+    $authtoken_id = $params['authtoken_id'];
+    
+    $node_ids = $params['data']['content'];
+
+    $message_array = array();
+    
     $args = '0';
-    //Check args is exist
-    if (isset($user_id) && isset($node_id)) {
+    if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
         $args = '1';
-    } else {
-        
+    }else{
+      $message_array['status_code'] = '0';
+      $message_array['status_message'] = "Argument are missing";
     }
+    
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+    }
+    
     // check args
     if ($args != '0') {
-        $jsondata = bookmark_set_data_responce($user_id, $node_id);
+        $jsondata = bookmark_set_data_responce($user_id, $node_ids);
     } else {
-        $output_array = array();
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "Argument are missing";
-        $output_array['data'] = array();
-        $jsondata = json_encode($output_array);
+       $jsondata = $message_array;
     }
 
-
-    //$jsondata = json_decode($jsondata, true);
     return $jsondata;
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
     $HTTP_RAW_POST_DATA;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //$params = $_POST;
-
-    $user_id = $params['user_id'];
+    
+    $user_name = $params['user_id'];//user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $authtoken_id = $params['authtoken_id'];
+    
+    $user_id = isset($user_load->uid) ? $user_load->uid : "";
     $node_id = $params['node_id'];
-
+    $message_array = array();
     $args = '0';
-    //Check args is exist
-    if (isset($user_id) && isset($node_id)) {
+    if (isset($user_id) && isset($authtoken_id) && isset($node_id)) {
         $args = '1';
-    } else {
-        
+    }else{
+      $message_array['status_code'] = '0';
+      $message_array['status_message'] = "Argument are missing";
     }
+    
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+    }
+    
     if ($args != '0') {
         $jsondata = bookmark_del_data_responce($user_id, $node_id);
     } else {
-        $output_array = array();
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "Argument are missing";
-        $jsondata = json_encode($output_array);
+        $jsondata = $message_array;
     }
 
     return $jsondata;
