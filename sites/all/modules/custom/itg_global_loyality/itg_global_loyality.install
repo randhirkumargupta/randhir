@@ -1,0 +1,95 @@
+<?php
+/**
+ * @file
+ * Install functions for the Api's.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store file information associated with a node
+ * @return array
+ */
+function itg_global_loyality_schema() {
+  $schema['itg_global_loyality_point'] = array(
+    'description' => 'Table for store information related to global loyality points.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sso_id' => array(
+        'description' => 'sso user id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'nid' => array(
+        'description' => 'Node id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'loyalty_type' => array(
+        'description' => 'loyality type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'loyalty_points' => array(
+        'description' => 'Loyalty points.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remaining_points' => array(
+        'description' => 'remaining point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'property' => array(
+        'description' => 'property',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'status.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'newsletter' => array(
+        'description' => 'newsletter.',
+        'type' => 'varchar',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'expiry_date' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

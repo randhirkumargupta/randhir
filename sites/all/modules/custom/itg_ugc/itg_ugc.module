@@ -812,11 +812,18 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, 
       $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
       $status = 'Published';
       $user_id = itg_personalization_get_uid($nid);
-      if(function_exists('itg_loyalty_reward_share_point') && function_exists('itg_loyalty_reward_earnpoint')) {
+      /* to do for backup once testing id done */
+      /*if(function_exists('itg_loyalty_reward_share_point') && function_exists('itg_loyalty_reward_earnpoint')) {
       $existing_check = itg_loyalty_reward_share_point($user_id['uid'], 'ugc', $nodeid);
       if(!$existing_check) {
       itg_loyalty_reward_earnpoint($nodeid, 'ugc', $user_id['uid']);
       }
+      }*/
+      if (function_exists('itg_global_loyality_exist_point') && function_exists('itg_global_loyality_send_data')) {
+        $existing_check = itg_global_loyality_exist_point($user_id['uid'], 'ugc_contribution', $nodeid, variable_get('property_name'));
+        if (empty($existing_check)) {
+          itg_global_loyality_send_data($user_id['uid'], 'ugc_contribution', $nodeid);
+        }
       }
     }
     else {
