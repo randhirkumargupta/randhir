@@ -43,7 +43,12 @@
             <?php endif; ?>
 
             <?php print render($page['header']); ?>
-
+			<?php 
+			  $arg = arg(); 
+			  if (isset($arg[2])) {
+				$term = taxonomy_term_load($arg[2]);
+			  }                  
+			?>
         </section>
     </header>
     <?php
