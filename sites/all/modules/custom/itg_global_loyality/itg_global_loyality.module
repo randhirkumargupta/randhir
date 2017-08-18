@@ -34,13 +34,6 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['global-credits'] = array(
-    'title' => t('Global credits'),
-    'page callback' => 'itg_get_global_credits',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-  
   $items['itg-global-fb-point'] = array(
     'title' => t('Global facebook loyality point'),
     'page callback' => 'itg_global_fb_loyality_point',
