@@ -56,7 +56,7 @@ function itg_global_loyality_menu() {
 function itg_get_loyality_point() {
   $uid = $_POST['uid'];
   $sso_id = $_POST['sso_id'];
-  watchdog('sso_id', $sso_id);
+  //watchdog('sso_id', $sso_id);
   if(empty($sso_id)) {
     $sso_id = $uid;
   }
