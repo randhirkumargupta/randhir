@@ -81,9 +81,10 @@ function itg_octopus_api_rundown() {
 
           // Adding Octopus Log 
           $msg = '';
-          $msg =  l('[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]', 'rundown-listing');
-          itg_octopus_add_notification('RUNDOWN',$msg,REQUEST_TIME,1);
-          
+          $hyperlink = 'rundown-listing';
+          $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, REQUEST_TIME, 1);
+
           // End Adding Octopus Log
           // Sending mail to Octopus user where 
           $story_com_data = '';

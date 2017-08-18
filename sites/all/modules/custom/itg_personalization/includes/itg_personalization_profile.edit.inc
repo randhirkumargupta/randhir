@@ -472,7 +472,8 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     $flag = TRUE;
     if ($value != '0') {
       $data[]['value'] = $value;
-      itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
+      //itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
+      itg_global_loyality_send_data($user->uid, 'Newsletter_subscription', 0, $value);
     }
   }
   if ($flag) {

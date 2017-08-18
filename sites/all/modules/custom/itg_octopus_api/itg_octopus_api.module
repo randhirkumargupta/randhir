@@ -18,6 +18,11 @@ function itg_octopus_api_init() {
   $settings = array();
   $settings['loader_url'] = base_path() . drupal_get_path('theme', $theme) . '/images/loader.svg';
   drupal_add_js(array('itg_octopus_holder' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(array('itgbaseUrl' => $base_url), 'setting');
+
+  if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
+    itg_octopus_notification_by_uid($_GET['onotify']);
+  }
 }
 
 /**
@@ -31,6 +36,13 @@ function itg_octopus_api_menu() {
     'access arguments' => array('administer itg octopus'),
     'file' => 'includes/itg_octopus_api.inc',
   );
+
+  $items['itg-generate-octopus-notification'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_generate_octopus_notification',
+    'access arguments' => array('administer itg octopus'),
+  );
+
   $items['rundown-listing'] = array(
     'title' => 'Rundown Listing',
     'page callback' => 'itg_octopus_api_rundown_listing',
@@ -476,16 +488,20 @@ function itg_octopus_api_remove_cdata($text) {
 function itg_octopus_get_slug_notification() {
   global $user;
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
+  $read_o_ids = itg_octopus_get_slug_notif_read_data($user_last_login, $user->uid);
   $query = db_select('itg_octopus_notification', 'ios');
-  $query->fields('ios', array('type', 'msg'));
+  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink'));
   $query->condition('ios.time', (int) $user_last_login, '>=');
+  if (!empty($read_o_ids)) {
+    $query->condition('ios.id', $read_o_ids, 'NOT IN');
+  }
+  $query->orderBy('time', 'DESC');
   $result = $query->execute();
-
   $rows = array();
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . $chunk->msg . '</li>';
+    $html .= '<li>' . l($chunk->msg, $chunk->hyperlink, array('query' => array('onotify' => base64_encode($chunk->id)))) . '</li>';
     ++$count;
   }
 
@@ -497,6 +513,24 @@ function itg_octopus_get_slug_notification() {
   $rows['html'] = $html;
   $rows['count'] = $count;
   return $rows;
+}
+
+/**
+ * Getting all read notificaton IDs by user 
+ * @param type $last_login_time
+ */
+function itg_octopus_get_slug_notif_read_data($user_last_login, $uid) {
+
+  $query = db_select('itg_octopus_notification_by_uid', 'ios');
+  $query->fields('ios', array('notification_id'));
+  $query->condition('ios.timestamp', (int) $user_last_login, '>=');
+  $query->condition('ios.uid', $uid);
+  $result = $query->execute();
+  $data = array();
+  while ($chunk = $result->fetchObject()) {
+    $data[] = $chunk->notification_id;
+  }
+  return $data;
 }
 
 /**
@@ -620,13 +654,14 @@ function itg_octopus_api_is_url_exist($url) {
  * @param type $url
  * @return boolean
  */
-function itg_octopus_add_notification($type, $msg, $time, $status) {
+function itg_octopus_add_notification($type, $msg, $hyperlink, $time, $status) {
 
   try {
     $nid = db_insert('itg_octopus_notification')
         ->fields(array(
           'type' => $type,
           'msg' => $msg,
+          'hyperlink' => $hyperlink,
           'time' => $time,
           'status' => $status,
           'read_by' => 1,
@@ -637,4 +672,52 @@ function itg_octopus_add_notification($type, $msg, $time, $status) {
     watchdog('itg_octopus_add_notification', $e->getMessage());
   }
   return TRUE;
+}
+
+/**
+ * Implementation of Octopus Notification for self refresh
+ */
+function itg_generate_octopus_notification() {
+  $itg_octopus_get_slug_notification = itg_octopus_get_slug_notification();
+  print json_encode($itg_octopus_get_slug_notification);
+  drupal_exit();
+}
+
+/**
+ * Implement itg_octopus_notification_by_uid
+ * @param string $noti_id
+ */
+function itg_octopus_notification_by_uid($noti_id) {
+  global $user;
+  if (isset($noti_id) && !empty($noti_id)) {
+    $noti_id_real = base64_decode($noti_id);
+    if (isset($noti_id_real) && !empty($noti_id_real)) {
+      try {
+        global $user;
+        $query = db_select('itg_octopus_notification_by_uid', 'onu')
+            ->condition('onu.notification_id', $noti_id_real, '=')
+            ->condition('onu.uid', $user->uid, '=')
+            ->fields('onu', array('id'))
+            ->execute();
+        $num = $query->rowCount();
+        if ($num == 0) {
+          try {
+            db_insert('itg_octopus_notification_by_uid')
+                ->fields(array(
+                  'notification_id' => $noti_id_real,
+                  'status' => 1,
+                  'uid' => $user->uid,
+                  'timestamp' => REQUEST_TIME,
+                ))->execute();
+          }
+          catch (Exception $e) {
+            watchdog('itg_octopus_notification_by_uid', $e->getMessage());
+          }
+        }
+      }
+      catch (Exception $e) {
+        watchdog('itg_octopus_notification_by_uid', $e->getMessage());
+      }
+    }
+  }
 }
