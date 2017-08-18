@@ -1685,7 +1685,7 @@ function itg_rapid_api_resource() {
 //                        ),
                         array(
                             'name' => 'authtoken_id',
-                            'optional' => FALSE,
+                            'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
                             'source' => array('data'),
@@ -1694,7 +1694,7 @@ function itg_rapid_api_resource() {
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
+                            'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
                             'source' => array('data'),
