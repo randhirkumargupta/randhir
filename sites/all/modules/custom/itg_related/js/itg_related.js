@@ -106,6 +106,7 @@ jQuery(document).ready(function(){
             var hastitle = jQuery.inArray(site_detail, detail);
             if (hastitle == -1 && flag) {
                 detail.push(site_detail);
+                flag = false;
             }
         }
         else {
