@@ -3392,6 +3392,8 @@ function itg_rapid_api_change_password($token, $user_id) {
     $HTTP_RAW_POST_DATA;
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $params['pass'] = $params['old_pass'];
+    $params['pass2'] = $params['new_pass'];
     //$params = $_POST;
     $pass_valid_msg = validateServicePass($params);
     if($pass_valid_msg['success_flag'] == 0){
