@@ -104,23 +104,15 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
 
       $output_array['status_code'] = "0";
       $output_array['status_message'] = "You already cast poll on it";
+      $output_array['data'] = array();
     }
-  }else{
-     $output_array['status_code'] = "1";
-     $output_array['status_message'] = "";
+  }
+  else {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
   }
 
-
   $data = poll_cast_datalist($poll_id);
-
-  //data array building
-//  $poll_id = $data['id'];
-//  $poll_title = $data['title'];
-//
-//  $data_array['id'] = ""; //$poll_id
-//  $data_array['title'] = ""; //$poll_title
-//
-//  $data_array['polls'] = $data['data'];
   $output_array['data'] = $data['data'];
 
   return $output_array;
@@ -335,7 +327,7 @@ function open_poll_list($res) {
   $news['p_title'] = "$poll_title";
   $news['p_image'] = "$poll_ques_img";
   $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
- 
+
   $news['p_option'] = $options2;
   return $news;
 }

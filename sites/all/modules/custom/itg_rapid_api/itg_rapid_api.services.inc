@@ -3529,78 +3529,55 @@ function polls_close($token) {
  * 	array of open polls.
  */
 function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
-    $HTTP_RAW_POST_DATA;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //$params = $_POST;
+  $HTTP_RAW_POST_DATA;
+  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-    $poll_id = $params['poll_id'];
-    $option_id = isset($params['option_id']) ? $params['option_id'] : "";
-    $device_id = $params['user_id'];
-    
-//    $user_load = user_load_by_name(trim($user_name));
-//    $user_id = $user_load->uid;
+  $poll_id = $params['poll_id'];
+  $option_id = isset($params['option_id']) ? $params['option_id'] : "";
+  $device_id = $params['device_id'];
+  $device = isset($params['device_type']) ? $params['device_type'] : "";
+  $user_name = $params['user_id']; //user name of the logend in user
+  $user_load = user_load_by_name($user_name);
+  $user_id = isset($user_load->uid) ? $user_load->uid : "";
 
-    $args = '0';
-    //Check args is exist
-    if (isset($poll_id) && isset($device_id)) {
-        $args = '1';
-        $arg_msg = 'Arguments are missing';
-    } else {
-        
-      $arg_msg = 'User id does not exist.';
+  $message_array = array();
+  $args = '0';
+  //Check args is exist
+  if ($poll_id != '' && $device_id != '') {
+    $args = '1';
+  }
+  else {
+    $message_array['status_code'] = '0';
+    $message_array['status_message'] = "Argument are missing";
+    $message_array['data'] = array();
+  }
+
+  if (!is_numeric($poll_id)) {
+    $poll_id = 0;
+  }
+
+  if (!is_numeric($device_id)) {
+    $user_id = 0;
+  }
+
+  // check args
+  if ($args != '0') {
+    // if status is 0 then poll is already closed , 
+    $poll_status = check_poll_status($poll_id);
+    if ($poll_status != '0') {
+      $jsondata = poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device);
     }
-
-
-    $ip_address = $_SERVER['SERVER_ADDR'];
-    if (strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") > 0) {
-        $device = 'iPhone';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "Android") > 0) {
-        $device = 'Android';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "webOS") > 0) {
-        $device = 'webOS';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry")) {
-        $device = 'BlackBerry';
-    } elseif (strpos($_SERVER['HTTP_USER_AGENT'], "iPod") > 0) {
-        $device = 'iPod';
-    } else {
-        $device = '';
+    else {
+      $message_array['status_code'] = '0';
+      $message_array['status_message'] = "Poll is already closed";
+      $message_array['data'] = array();
+      $jsondata = $message_array;
     }
-
-
-    if (!is_numeric($poll_id)) {
-        $poll_id = 0;
-    }
-   
-    if (!is_numeric($device_id)) {
-        $user_id = 0;
-    }
-    
-    // check args
-    if ($args != '0') {
-
-        // if status is 0 then poll is already closed , 
-        $poll_status = check_poll_status($poll_id);
-        if ($poll_status != '0') {
-            $jsondata = poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device);
-            $jsondata = json_encode($jsondata);
-        } else {
-            $output_array = array();
-            $output_array['status_code'] = "0";
-            $output_array['status_message'] = "Poll is already closed";
-            $output_array['data'] = array();
-            $jsondata = json_encode($output_array);
-        }
-    } else {
-        $output_array = array();
-        $output_array['status_code'] = "0";
-        $output_array['status_message'] = "$arg_msg";
-        $output_array['data'] = array();
-        $jsondata = json_encode($output_array);
-    }
-
-
-    $jsondata = json_decode($jsondata, true);
-    return $jsondata;
+  }
+  else {
+    $jsondata = $message_array;
+  }
+  return $jsondata;
 }
 
 /*
@@ -3611,31 +3588,32 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
 
 function check_poll_status($poll_id) {
 
-    $current_time = date('Y-m-d H:i:s', time());
+  $current_time = date('Y-m-d H:i:s', time());
 
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-    $query->fields('n', array('nid', 'title', 'type', 'changed'));
-    $query->fields('st', array('field_poll_start_date_value'));
-    $query->fields('ed', array('field_poll_end_date_value'));
-    $query->condition('n.type', 'poll');
-    $query->condition('st.field_poll_start_date_value', $current_time, '<');
-    $query->condition('n.status', '1');
-    $query->condition('n.nid', $poll_id);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+  $query->fields('n', array('nid', 'title', 'type', 'changed'));
+  $query->fields('st', array('field_poll_start_date_value'));
+  $query->fields('ed', array('field_poll_end_date_value'));
+  $query->condition('n.type', 'poll');
+  $query->condition('st.field_poll_start_date_value', $current_time, '<');
+  $query->condition('n.status', '1');
+  $query->condition('n.nid', $poll_id);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    $poll_status = '0';
-    foreach ($result as $k => $res) {
-        if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
-            $poll_status = '1';
-        } else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
-            $poll_status = '1';
-        }
+  $poll_status = '0';
+  foreach ($result as $k => $res) {
+    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
+      $poll_status = '1';
     }
-    //if status is 1 then poll is open otherwise poll is closed
+    else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
+      $poll_status = '1';
+    }
+  }
+  //if status is 1 then poll is open otherwise poll is closed
 
-    return $poll_status;
+  return $poll_status;
 }
 
 /**
@@ -3646,22 +3624,23 @@ function check_poll_status($poll_id) {
  */
 function poll_detail($token, $poll_id) {
 
-    $poll_id = $_GET['poll_id'];
-    $redis_key = "itg_rapid_poll_details_" . $poll_id;
-    $result_get = getRedis($redis_key);
+  $poll_id = $_GET['poll_id'];
+  $redis_key = "itg_rapid_poll_details_" . $poll_id;
+  $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        // call function from return data..
-        $jsondata = poll_detail_data($poll_id);
-        $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    // call function from return data..
+    $jsondata = poll_detail_data($poll_id);
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
 
-    $jsondata = json_decode($jsondata, true);
-    return $jsondata;
+  $jsondata = json_decode($jsondata, true);
+  return $jsondata;
 }
 
 /**
@@ -3985,39 +3964,49 @@ function update_preference($user_id, $tid) {
  */
 
 function bookmark_get_responce($token, $user_id, $authtoken_id) {
-    $HTTP_RAW_POST_DATA;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    
-    $user_name = $params['user_id'];//user name of the logend in user
-    $user_load = user_load_by_name($user_name);
+  $HTTP_RAW_POST_DATA;
+  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-    $user_id = isset($user_load->uid) ? $user_load->uid : "";
-    $authtoken_id = $params['authtoken_id'];
-    
-    $message_array = array();
-    
+  $user_name = $params['user_id']; //user name of the logend in user
+  $user_load = user_load_by_name($user_name);
+  $user_id = $user_load->uid;
+  $authtoken_id = $params['authtoken_id'];
+
+  $message_array = array();
+
+  $args = '0';
+  if ($user_id != '0' && isset($authtoken_id)) {
+    $args = '1';
+  }
+  else {
+    $message_array['status_code'] = '0';
+    $message_array['status_message'] = "Argument are missing";
+    $message_array['data'] = array('news' => array());
+  }
+
+  if ($user_id == '') {
     $args = '0';
-    if (isset($user_id) && isset($authtoken_id)) {
-        $args = '1';
-    }else{
-      $message_array['status_code'] = '0';
-      $message_array['status_message'] = "Argument are missing";
-    }
-    
-    if (!drupal_valid_token($authtoken_id, 'services')) {
-        $args = '0';
-        $message_array['status_code'] = "0";
-        $message_array['status_message'] = "invalid token";
-    }
-    
-    
-    if ($args != '0') {
-         $jsondata = bookmark_responce_data($user_id);
-    } else {
-        $jsondata = $message_array;
-    }
-   
-    return $jsondata;
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "User does not exist";
+    $message_array['data'] = array('news' => array());
+  }
+
+  if (!drupal_valid_token($authtoken_id, 'services')) {
+    $args = '0';
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "invalid token";
+    $message_array['data'] = array('news' => array());
+  }
+
+
+  if ($args != '0') {
+    $jsondata = bookmark_responce_data($user_id);
+  }
+  else {
+    $jsondata = $message_array;
+  }
+
+  return $jsondata;
 }
 
 /*
@@ -4026,75 +4015,95 @@ function bookmark_get_responce($token, $user_id, $authtoken_id) {
  */
 
 function bookmark_set_responce($token, $user_id, $node_id) {
-    $HTTP_RAW_POST_DATA;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    
-    $user_name = $params['user_id'];//user name of the logend in user
-    $user_load = user_load_by_name($user_name);
-    $user_id = $user_load->uid;
+  $HTTP_RAW_POST_DATA;
+  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-    $authtoken_id = $params['authtoken_id'];
-    
-    $node_ids = $params['data']['content'];
+  $user_name = $params['user_id']; //user name of the logend in user
+  $user_load = user_load_by_name($user_name);
+  $user_id = $user_load->uid;
+  $authtoken_id = $params['authtoken_id'];
+  $node_ids = $params['data']['content'];
 
-    $message_array = array();
-    
+  $message_array = array();
+
+  $args = '0';
+  if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
+    $args = '1';
+  }
+  else {
+    $message_array['status_code'] = '0';
+    $message_array['status_message'] = "Argument are missing";
+    $message_array['data'] = array('news' => array());
+  }
+
+  if ($user_id == '') {
     $args = '0';
-    if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
-        $args = '1';
-    }else{
-      $message_array['status_code'] = '0';
-      $message_array['status_message'] = "Argument are missing";
-    }
-    
-    if (!drupal_valid_token($authtoken_id, 'services')) {
-        $args = '0';
-        $message_array['status_code'] = "0";
-        $message_array['status_message'] = "invalid token";
-    }
-    
-    // check args
-    if ($args != '0') {
-        $jsondata = bookmark_set_data_responce($user_id, $node_ids);
-    } else {
-       $jsondata = $message_array;
-    }
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "User does not exist";
+    $message_array['data'] = array('news' => array());
+  }
 
-    return $jsondata;
+  if (!drupal_valid_token($authtoken_id, 'services')) {
+    $args = '0';
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "invalid token";
+    $message_array['data'] = array('news' => array());
+  }
+
+  // check args
+  if ($args != '0') {
+    $jsondata = bookmark_set_data_responce($user_id, $node_ids);
+  }
+  else {
+    $jsondata = $message_array;
+  }
+
+  return $jsondata;
 }
 
 function bookmark_delete_responce($token, $user_id, $node_id) {
-    $HTTP_RAW_POST_DATA;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    
-    $user_name = $params['user_id'];//user name of the logend in user
-    $user_load = user_load_by_name($user_name);
-    $authtoken_id = $params['authtoken_id'];
-    
-    $user_id = isset($user_load->uid) ? $user_load->uid : "";
-    $node_ids = $params['data']['bookmark_content'];
-    $message_array = array();
-    $args = '0';
-    if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
-        $args = '1';
-    }else{
-      $message_array['status_code'] = '0';
-      $message_array['status_message'] = "Argument are missing";
-    }
-    
-    if (!drupal_valid_token($authtoken_id, 'services')) {
-        $args = '0';
-        $message_array['status_code'] = "0";
-        $message_array['status_message'] = "invalid token";
-    }
-    
-    if ($args != '0') {
-        $jsondata = bookmark_del_data_responce($user_id, $node_ids);
-    } else {
-        $jsondata = $message_array;
-    }
+  $HTTP_RAW_POST_DATA;
+  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-    return $jsondata;
+  $user_name = $params['user_id']; //user name of the logend in user
+  $user_load = user_load_by_name($user_name);
+  $authtoken_id = $params['authtoken_id'];
+
+  $user_id = $user_load->uid;
+  $node_ids = $params['data']['bookmark_content'];
+  $message_array = array();
+  $args = '0';
+  if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
+    $args = '1';
+  }
+  else {
+    $message_array['status_code'] = '0';
+    $message_array['status_message'] = "Argument are missing";
+    $message_array['data'] = array('bookmark_content' => array());
+  }
+
+  if ($user_id == '') {
+    $args = '0';
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "User does not exist";
+    $message_array['data'] = array('bookmark_content' => array());
+  }
+
+  if (!drupal_valid_token($authtoken_id, 'services')) {
+    $args = '0';
+    $message_array['status_code'] = "0";
+    $message_array['status_message'] = "invalid token";
+    $message_array['data'] = array('bookmark_content' => array());
+  }
+
+  if ($args != '0') {
+    $jsondata = bookmark_del_data_responce($user_id, $node_ids);
+  }
+  else {
+    $jsondata = $message_array;
+  }
+
+  return $jsondata;
 }
 
 /**

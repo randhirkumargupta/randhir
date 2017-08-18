@@ -54,27 +54,26 @@ function bookmark_set_data_responce($user_id, $node_ids) {
     $con = mongodb();
     // check connection
     if ($con) {
-      foreach ($node_ids as $node){
-      $node_id = $node['id'];
-      if($node_id != ''){
-      $people = $con->front_user_activity;
-      $actual_data = node_load($node_id);
-      $get_previous_info = itg_get_front_activity_info($node_id, $actual_data->type, $user_id, $user_activity, $status = '');
+      foreach ($node_ids as $node) {
+        $node_id = $node['id'];
+        if ($node_id != '') {
+          $people = $con->front_user_activity;
+          $actual_data = node_load($node_id);
+          $get_previous_info = itg_get_front_activity_info($node_id, $actual_data->type, $user_id, $user_activity, $status = '');
 
-      if (empty($get_previous_info['nid'])) {
-        $actual_data = node_load($node_id);
+          if (empty($get_previous_info['nid'])) {
+            $actual_data = node_load($node_id);
 
-        $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
-        $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-        $path = $actual_data->path['source'];
-        $qry = array("nid" => $node_id, "uid" => $user_id, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $actual_data->type, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" => time());
-        $result = $people->insert($qry);
-        $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $actual_data->type);
-        
+            $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+            $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+            $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+            $path = $actual_data->path['source'];
+            $qry = array("nid" => $node_id, "uid" => $user_id, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $actual_data->type, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" => time());
+            $result = $people->insert($qry);
+            $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $actual_data->type);
+          }
+        }
       }
-      }
-    }
     }
   }
   // list array building
@@ -111,10 +110,13 @@ function bookmark_del_data_responce($user_id, $node_ids) {
           $qry = array("nid" => $node_id, "uid" => $user_id, 'activity' => 'read_later');
           $result = $people->remove($qry);
           $result = (array) $result;
-          if($result['n'] != 0){
+          if ($result['n'] != 0) {
             $delete_bookmark = '1';
-          }else{ $delete_bookmark = '0'; }
-          
+          }
+          else {
+            $delete_bookmark = '0';
+          }
+
           $delete_status['id'] = $node_id;
           $delete_status['status'] = $delete_bookmark;
           $all_delete_bookmark[] = $delete_status;
@@ -122,13 +124,13 @@ function bookmark_del_data_responce($user_id, $node_ids) {
       }
     }
   }
-  
-  if(!empty($all_delete_bookmark)){
+
+  if (!empty($all_delete_bookmark)) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "";
     $output_array['data'] = array('bookmark_content' => $all_delete_bookmark);
-        
-  }else{
+  }
+  else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
     $output_array['data'] = array('bookmark_content' => array());
@@ -226,4 +228,4 @@ function bookmark_responce_datalist($user_id) {
   $data['data'] = $news2;
   $data['lcount'] = count($news2);
   return $data;
-} 
+}
