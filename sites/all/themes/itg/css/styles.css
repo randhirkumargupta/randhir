@@ -14788,6 +14788,13 @@ span.see-picture a:after {
   content: ':';
 }
 
+.photo-story .slick-slider {
+  webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto !important;
+}
+
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
   .view-front-end-global-search .view-content .itg-search-list > .social-share {
