@@ -820,9 +820,12 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, 
       }
       }*/
       if (function_exists('itg_global_loyality_exist_point') && function_exists('itg_global_loyality_send_data')) {
+        if (function_exists('itg_global_loyality_get_sso_id')) {
+          $sso_id = itg_global_loyality_get_sso_id($user_id['uid']);
+        }
         $existing_check = itg_global_loyality_exist_point($user_id['uid'], 'ugc_contribution', $nodeid, variable_get('property_name'));
         if (empty($existing_check)) {
-          itg_global_loyality_send_data($user_id['uid'], 'ugc_contribution', $nodeid);
+          itg_global_loyality_send_data($user_id['uid'], 'ugc_contribution', $nodeid, '', $sso_id);
         }
       }
     }
