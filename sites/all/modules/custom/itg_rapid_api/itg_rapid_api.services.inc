@@ -3836,7 +3836,8 @@ function itg_rapid_api_get_preference($token) {
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
     $data['data']['updated_datetime'] = "$last_access_date";
-    $data['data']['preference_type'] = "default/implicit/explicit";
+    //$data['data']['preference_type'] = "default/implicit/explicit";
+    $data['data']['preference_type'] = "default";
     $loop_count = 0;
     //get personalization-preferences value
     foreach ($tid_array as $key => $value) {
