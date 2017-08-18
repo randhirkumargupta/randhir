@@ -15,7 +15,9 @@
  *   Earned and next badge information.
  */
 function itg_personalization_badge($uid) {
-  $data = itg_loyalty_reward_user_details($uid); 
+  //$data = itg_loyalty_reward_user_details($uid); 
+  $property = variable_get('property_name');
+  $data = itg_get_badge_credits($uid, $property , '');
   // Prepare array of all badge steps.
   $badge = array(
     variable_get('lrp_gold_star_one'),
