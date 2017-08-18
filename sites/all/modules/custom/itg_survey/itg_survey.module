@@ -818,6 +818,7 @@ function itg_survey_pqs_generatetokens() {
     $query->condition('n.status' , 1 , '=');
     $query->condition('sd.field_poll_start_date_value' , $cur_date , '<=');
     $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value' , $cur_date , '>='));
+    $query->orderBy('n.created', 'DESC'); //ORDER BY created
   }
   elseif ($type == 'survey' || $type == 'quiz') {
     $query = db_select('node' , 'n');
@@ -830,6 +831,7 @@ function itg_survey_pqs_generatetokens() {
     $query->condition('n.status' , 1 , '=');
     $query->condition('sd.field_survey_start_date_value' , $cur_date , '<=');
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+    $query->orderBy('n.created', 'DESC'); //ORDER BY created
   }
   $data = array();
   $result = $query->execute();

@@ -2,13 +2,13 @@
 
 function itg_db_migrate_related_content() {
   //itg_db_migrate_source_id_for_byline('migrate_map_itgbyline', 'byline');
-  itg_db_migrate_source_id_for_category('migrate_map_itgsection', 'section');
-  exit;
+  //itg_db_migrate_source_id_for_category('migrate_map_itgsection', 'section');
+  //exit;
   
   //Code for related content
   
   //code for XML read  
-  /*$xml_dir = 'test-related-story/';
+  $xml_dir = 'test-related-story/';
   
   $path_xml = 'sites/default/files/migrate/xml_file/'.$xml_dir;  
   
@@ -39,9 +39,9 @@ function itg_db_migrate_related_content() {
           }
           if (!empty($relatedcontentid)) {            
             $relatedcontenttitle = (string) $relatedcontent_data->relatedcontenttitle;
-            $related_content_val .= 'IT_'.$relatedcontentid.',';
-            //$related_content_with_title_val .= 'IT_'.$relatedcontentid.'@'.$c_type.'@'.$relatedcontenttitle.'!#!';
-            $related_content_with_title_val .= 'IT_'.$relatedcontentid.'@'.$c_type.'@'.$relatedcontenttitle.',';
+            $related_content_val .= 'IT_'.$relatedcontentid.'|~|';
+            $related_content_with_title_val .= 'IT_'.$relatedcontentid.'@'.$c_type.'@'.$relatedcontenttitle.'|~|';
+            //$related_content_with_title_val .= 'IT_'.$relatedcontentid.'@'.$c_type.'@'.$relatedcontenttitle.',';
           } else {
               //failed related content
               db_insert('itg_not_migrated_content')->fields(array(
@@ -53,8 +53,8 @@ function itg_db_migrate_related_content() {
           
         }
         if (!empty($related_content_val)) {
-          $related_content_insert_val =  rtrim($related_content_val,',');
-          $related_content_insert_title_val =  rtrim($related_content_with_title_val,',');
+          $related_content_insert_val =  rtrim($related_content_val,'|~|');
+          $related_content_insert_title_val =  rtrim($related_content_with_title_val,'|~|');
 
           //insert data in Related Content field
           itg_data_insert_in_field($content_id, $content_revision_id, 'field_common_related_content', 'story', 'node', $related_content_insert_val);
@@ -70,7 +70,7 @@ function itg_db_migrate_related_content() {
           'c_type' => 'story'))->execute();
       }
     }    
-  } */  
+  }  
     
 }
 

@@ -19,6 +19,8 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
 function itg_common_init() {
   global $user, $base_url, $theme;
   $arg = arg();
+  
+
   //p(node_load(21014));
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
