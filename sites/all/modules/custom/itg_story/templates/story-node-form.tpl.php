@@ -147,6 +147,7 @@
                     <?php print drupal_render($form['field_story_client_title']); ?>
                     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
                     <?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_story_show_fields']); ?>
                 </div>
             </div>
             <div id="DateTime" class="itg-sidebar-form-section">

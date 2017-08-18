@@ -4,7 +4,7 @@
 global $base_url;
 $nid = check_plain(arg(1));
 $video_node = node_load(arg(1));
-$tid =$video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+$tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
 $term = taxonomy_term_load($tid);
 $primary_category_name = itg_common_custompath_insert_val($term->name);
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -156,7 +156,6 @@ $uri = base64_encode($actual_link);
                         if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                           $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                           $video_kicker = get_video_kicker_by_nid($nid);
-                          
                         }
 
                         drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
@@ -247,16 +246,16 @@ $uri = base64_encode($actual_link);
                   <div class="social-likes mhide">
                       <ul>
                           <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                      if (function_exists(itg_flag_get_count)) {
-                                        $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                      }
-                                      // get migrated count 
-                                      if (function_exists('itg_get_migrated_like_count')) {
-                                        $migrated_count = itg_get_migrated_like_count(arg(1));
-                                      }
-                                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                      ?></span></a></li>
-                          <?php
+                    if (function_exists(itg_flag_get_count)) {
+                      $like_count = itg_flag_get_count(arg(1), 'like_count');
+                    }
+                    // get migrated count 
+                    if (function_exists('itg_get_migrated_like_count')) {
+                      $migrated_count = itg_get_migrated_like_count(arg(1));
+                    }
+                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                      ?></span></a></li>
+                                      <?php
                           if ($user->uid > 0) {
                             if (function_exists(itg_get_front_activity_info)) {
                               $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -285,7 +284,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url .'/video/'.$primary_category_name. '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                      <textarea readonly><iframe allowfullscreen="" frameborder="0"  height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -318,16 +317,16 @@ $uri = base64_encode($actual_link);
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                          if (function_exists(itg_flag_get_count)) {
-                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                          }
-                                          // get migrated count 
-                                          if (function_exists('itg_get_migrated_like_count')) {
-                                            $migrated_count = itg_get_migrated_like_count(arg(1));
-                                          }
-                                          print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                          ?></span></a></li>
-                              <?php
+                if (function_exists(itg_flag_get_count)) {
+                  $like_count = itg_flag_get_count(arg(1), 'like_count');
+                }
+                // get migrated count 
+                if (function_exists('itg_get_migrated_like_count')) {
+                  $migrated_count = itg_get_migrated_like_count(arg(1));
+                }
+                print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                  ?></span></a></li>
+                                          <?php
                               if ($user->uid > 0) {
                                 if (function_exists(itg_get_front_activity_info)) {
                                   $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -356,7 +355,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe class="video_node_<?php echo $argum; ?>" src=<?php print $base_url .'/video/'.$primary_category_name. '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>    
+                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>    
                                       </div>
                                   </div>
                               </li>
@@ -398,7 +397,7 @@ $uri = base64_encode($actual_link);
                       </div>
                   </div>
               </div>
-              <?php //$row['field_story_expert_description'];              ?>
+              <?php //$row['field_story_expert_description'];               ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
                       <?php

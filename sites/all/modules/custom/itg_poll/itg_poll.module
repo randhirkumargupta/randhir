@@ -401,9 +401,10 @@ function itg_poll_form_ajax_submit($form , &$form_state) {
     'uId' => $user->uid ,
     'display_result' => $dsp_result ,
     'created' => $created))->execute();
-  if ($user->uid > 0 && function_exists('itg_loyalty_reward_earnpoint')) {
+   if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
     watchdog('poll_earn_point', $node_id);
-    itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+    //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+     itg_global_loyality_send_data($user->uid, 'poll', $node_id);
   }
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
   $value = 'yes_' . $node_id;
@@ -836,8 +837,9 @@ function itg_poll_form_new_ajax_submit($form , &$form_state) {
       'uId' => $user->uid ,
       'display_result' => $dsp_result ,
       'created' => $created))->execute();
-    if ($user->uid > 0 && function_exists('itg_loyalty_reward_earnpoint')) {
-      itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+     if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+      itg_global_loyality_send_data($user->uid, 'poll', $node_id);
     }
   }
   catch (Exception $e) {
@@ -967,9 +969,10 @@ function itg_poll_form_home_page_ajax_submit($form , &$form_state) {
       'display_result' => $dsp_result ,
       'created' => $created))->execute();
   // code for loyality points  
-  if ($user->uid > 0 && function_exists('itg_loyalty_reward_earnpoint')) {
+   if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
     watchdog('poll_earn_point', $node_id);
-    itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+    //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+    itg_global_loyality_send_data($user->uid, 'poll', $node_id);
   }
   }
   catch (Exception $e) {

@@ -10614,17 +10614,14 @@ section.sidebar .block-itg-ads {
   font-size: 20px;
 }
 .election-page .election-graph-3 {
-  margin-top: -50px;
   display: inline-block;
   width: 100%;
 }
 .election-page .election-graph-4 {
-  margin-top: -100px;
   display: inline-block;
   width: 100%;
 }
 .election-page .election-graph-5 {
-  margin-top: -150px;
   display: inline-block;
   width: 100%;
 }
@@ -12711,7 +12708,7 @@ h1.about-us-heading + div p {
   cursor: pointer;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .messages.error {
-  display: none;
+  display: block;
 }
 #content [id*="ugc-node-form"].ugc-custom-wrapper .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   position: relative;
@@ -14789,6 +14786,13 @@ span.see-picture a:hover {
 }
 span.see-picture a:after {
   content: ':';
+}
+
+.photo-story .slick-slider {
+  webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto !important;
 }
 
 @media (min-width: 320px) {

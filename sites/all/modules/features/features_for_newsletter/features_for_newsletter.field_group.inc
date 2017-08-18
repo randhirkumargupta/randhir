@@ -21,7 +21,7 @@ function features_for_newsletter_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Add News',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_newsl_add_news',
     ),
@@ -68,7 +68,8 @@ function features_for_newsletter_field_group_info() {
       9 => 'field_story_category',
       10 => 'field_survey_start_date',
       11 => 'field_cm_select_type',
-      12 => 'title',
+      12 => 'field_news_title',
+      13 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(

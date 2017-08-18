@@ -75,6 +75,16 @@ function itg_story_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/sponsor_category'] = array(
+    'title' => 'Sponsor Category Setting',
+    'description' => 'Sponsor Category Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_sponsor_category_setting'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -1205,4 +1215,22 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
     $emoji_html .= '</span>';
     return $emoji_html;
   }
+}
+
+/**
+ * Function for admin setting for sponsor category.
+ */ 
+function _sponsor_category_setting() {
+  $form = array();
+  $form['sponsor_cat_tid'] = array(
+   '#type' => 'textfield',
+   '#title' => t('Sponsor Category TID'),
+   '#default_value' => variable_get('sponsor_cat_tid', 1208902),
+   '#size' => 10,
+   '#maxlength' => 10,
+   '#description' => t("Enter TID for Sponsor Category"),
+   '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }

@@ -552,7 +552,10 @@ function itg_personalization_reddem_referfriend($key) {
       drupal_set_message($ex->getMessage(), 'error');
     }
     if ($itg_result) {
-      itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
+      if(function_exists('itg_global_loyality_send_data')) {
+        itg_global_loyality_send_data(0, 'raf', $itg_result);
+      }
+      //itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
     }
   }
 }

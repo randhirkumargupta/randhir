@@ -14,7 +14,7 @@ if (!empty($data)) {
             <p class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count'] .  t('Images'); ?> </p>
             <p class="flex-caption" title="<?php echo $entity_data_node['title']; ?>">
               <a  href="<?php echo $entity_data_node['node_url']; ?>">
-                <?php print mb_strimwidth($entity_data_node['title'], 0, 145, ".."); ?>
+                <?php print itg_common_get_smiley_title($entity_data_node['nid'], 0, 145, ".."); ?>
               </a>
             </p>
           </div>

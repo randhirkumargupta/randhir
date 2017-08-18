@@ -14,7 +14,6 @@
 function itg_rfa_file_live_blog() {
   if (isset($_POST) && !empty($_POST)) {
     $rfa_data = $_POST;
-    watchdog('aaa', '<pre>' . print_r($rfa_data, true) . '</pre>');
     $success = 0;
     foreach ($rfa_data as $key => $post) {
       $rundown_id = isset($post['rundown_id']) ? $post['rundown_id'] : 0;
@@ -24,6 +23,10 @@ function itg_rfa_file_live_blog() {
       $created_by = isset($post['created_by']) ? $post['created_by'] : '';
       $timestamp = REQUEST_TIME;
       $action = isset($post['action']) ? $post['action'] : '';
+      $msg = '';
+      $hyperlink = 'rfa-dashboard';
+      $msg = '[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]';
+      itg_octopus_add_notification('RFA', $msg, $hyperlink, REQUEST_TIME, 1);
 
       if ($action == 'UPDATE') {
         itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);
@@ -155,8 +158,7 @@ function itg_octopus_api_rfa_dashboard() {
   $pagination = '';
   $current_rundown = '';
 
-
-  $query = db_select('itg_rfa', 'rfa');
+  $query = db_select('itg_rfa', 'rfa')->extend('PagerDefault')->limit(50);
   $query->fields('rfa');
 
   if (isset($_GET['source']) && !empty($_GET['source'])) { // source
@@ -173,10 +175,9 @@ function itg_octopus_api_rfa_dashboard() {
   }
 
 
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
 
-
-  $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) ? trim($_GET['end_date']) . ' 23:59:59' : date('Y-m-d') . ' 23:59:59';
 
   if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
     $query->condition('rfa.created_date', strtotime($start_date), '>=');
@@ -187,7 +188,6 @@ function itg_octopus_api_rfa_dashboard() {
   }
 
   $query->orderBy('rfa.id', 'DESC');
-  $query->extend('PagerDefault')->limit(20);
 
   $result = $query->execute();
   $rows = array();
@@ -211,7 +211,7 @@ function itg_octopus_api_rfa_dashboard() {
       array('data' => $row->rundown_id),
       array('data' => $row->source),
       array('data' => $row->text),
-      array('data' => date('d/m/Y - H:i', $row->created_date), 'class' => $background_color),
+      array('data' => date('d/m/Y - H:i:s', $row->created_date), 'class' => $background_color),
       array('data' => $row->created_by),
       array('data' => $ctype_text),
     );
@@ -234,6 +234,7 @@ function itg_octopus_api_rfa_dashboard() {
            </div>';
   $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
@@ -278,10 +279,19 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
   $form['start_date'] = array(
     '#type' => 'date_popup',
     '#title' => t('Start Date'),
-    '#default_value' => "",
-    '#date_format' => "Y-m-d",
-    '#year_start' => '-99',
-    '#year_end' => '+0',
+    '#input' => TRUE,
+    '#tree' => TRUE,
+    '#date_timezone' => date_default_timezone(),
+    '#date_flexible' => 0,
+    '#date_format' => 'Y-m-d - H:i',
+    '#timepicker' => 'default',
+    '#date_increment' => 1,
+    '#date_year_range' => '-100:+0',
+    '#date_label_position' => 'above',
+    '#process' => array('date_popup_element_process'),
+    '#value_callback' => 'date_popup_element_value_callback',
+    '#theme_wrappers' => array('date_popup'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#weight' => 4,
     '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
   );
@@ -289,10 +299,19 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
   $form['end_date'] = array(
     '#type' => 'date_popup',
     '#title' => t('End Date'),
-    '#default_value' => "",
-    '#date_format' => "Y-m-d",
-    '#year_start' => '-99',
-    '#year_end' => '+0',
+    '#input' => TRUE,
+    '#tree' => TRUE,
+    '#date_timezone' => date_default_timezone(),
+    '#date_flexible' => 0,
+    '#date_format' => 'Y-m-d - H:i',
+    '#timepicker' => 'default',
+    '#date_increment' => 1,
+    '#date_year_range' => '-100:+0',
+    '#date_label_position' => 'above',
+    '#process' => array('date_popup_element_process'),
+    '#value_callback' => 'date_popup_element_value_callback',
+    '#theme_wrappers' => array('date_popup'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
     '#weight' => 5,
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
@@ -320,8 +339,8 @@ function itg_octopus_api_rfa_form_submit($form, &$form_state) {
         'source' => $form_state['input']['source'],
         'rfaid' => $form_state['input']['rfaid'],
         'text' => $form_state['input']['text'],
-        'start_date' => $form_state['input']['start_date']['date'],
-        'end_date' => $form_state['input']['end_date']['date'],
+        'start_date' => $form_state['input']['start_date']['date'] . ' ' . $form_state['input']['start_date']['time'],
+        'end_date' => $form_state['input']['end_date']['date'] . ' ' . $form_state['input']['end_date']['time'],
       ),
     ),
   );
