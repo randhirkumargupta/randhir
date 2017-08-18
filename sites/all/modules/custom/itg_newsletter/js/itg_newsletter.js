@@ -195,16 +195,16 @@
 
 })(jQuery, Drupal, this, this.document);
 
-jQuery(document).ready(function () {
-  
+jQuery(document).ready(function() {
+
     //Get Newsletter data using AJAX
-    jQuery('body').on('click', '.newsletter-get-content', function () {
+    jQuery('body').on('click', '.newsletter-get-content', function() {
         var contentId = jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = jQuery(this).attr('rel');
 
         var loaderImg = base_url + '/misc/throbber-active.gif';
         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('<img src="' + loaderImg + '" alt="" />');
-        
+
         if (contentId === '') {
             alert(Drupal.t('Please select Content ID.'));
             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
@@ -223,16 +223,21 @@ jQuery(document).ready(function () {
                     data: {content_id: contentIdArr[0]},
                     cache: false,
                     dataType: "JSON",
-                    success: function (data) {
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data :hidden').attr('value', data.fid);
-                        jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data .form-submit').triggerHandler('mousedown');
+                    success: function(data) {
+                        if (data != null) {
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-title').find('.form-text').val(data.title);
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data :hidden').attr('value', data.fid);
+                            jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data .form-submit').triggerHandler('mousedown');
+                        } else {
+                            alert("Please Provide the published Content Id.");
+                            jQuery("form").trigger("reset");
+                        }
                     },
-                    error: function () {
+                    error: function() {
                         return false;
                     }
                 });
