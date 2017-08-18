@@ -85,7 +85,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
   if (function_exists('itg_netcore_mail_create_campaign')) {
     $mail_content = str_replace("&nbsp;", " ", $mail_content);
     $data_email = array();
-    $data_email['subject'] = $template_node->field_news_title[LANGUAGE_NONE][0]['value'];
+    $data_email['subject'] = $node->field_news_title[LANGUAGE_NONE][0]['value'];
     $data_email['fromName'] = ITG_NEWSLETTER_FROMNAME;
     $data_email['fromEmail'] = ITG_NEWSLETTER_EMAIL;
     $data_email['content'] = $mail_content;
@@ -130,10 +130,10 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
  */
 function itg_get_newsletter_mail_content($node, $template_node) {
   global $base_url;
-
   $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
-
+  
+  $itg_logo = theme_get_setting('logo', 'itg'); 
   $content = '<!DOCTYPE html> 
   <html xmlns:v="urn:schemas-microsoft-com:vml">
   <head>
@@ -141,7 +141,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 333px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 333px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td><td colspan="2"><img src="' . $itg_logo . '" alt="" /></td></tr>';
 
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -150,7 +150,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
 
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
-    $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
+    $title = $node->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
     if ($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
@@ -234,6 +234,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
   }
   
   if (!empty($story_nodes)) {
+    $itg_logo = theme_get_setting('logo', 'itg'); 
     $content = '<!DOCTYPE html> 
     <html xmlns:v="urn:schemas-microsoft-com:vml">
     <head>
@@ -241,7 +242,8 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+    <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial">
+    <tr><td colspan="2"><img src="' . $banner . '" alt="" /></td><td colspan="2"><img src="' . $itg_logo . '" alt="" /></td></tr>';
 
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">

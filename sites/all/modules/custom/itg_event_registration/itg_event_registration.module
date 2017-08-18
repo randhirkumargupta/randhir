@@ -883,6 +883,7 @@ function itg_event_registration_get_total_registration($nid) {
     $db_query->addExpression('SUM(number_of_person)', 'sum');
     $db_query->condition('od.event_id', $nid);
     $db_query->condition('od.order_status', 1);
+    $db_query->condition('od.payment_gateway', 'free' , '!=');
     $data = $db_query->execute()->fetchCol()[0];
     return $data;
   }
@@ -1064,9 +1065,15 @@ function itg_event_registration_node_insert($node) {
     catch (Exception $e) {
       //die('ERROR:'.$e->getMessage());
     }
-    //loyalti points
-    if ($user->uid != 0) {
+    
+    /* TO Do for backup */
+    /*if ($user->uid != 0) {
       itg_loyalty_reward_earnpoint($node->nid, 'ol-register', $user->uid);
+    }*/
+    
+    // global loyalty points function
+    if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      itg_global_loyality_send_data($user->uid, 'event_registration', $node->nid);
     }
   }
 }

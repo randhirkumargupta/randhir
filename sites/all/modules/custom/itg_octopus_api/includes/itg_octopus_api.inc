@@ -73,15 +73,20 @@ function itg_octopus_api_rundown() {
     if (isset($rundown_xml->rundown->slugs->slug)) {
       // p($rundown_xml->rundown->slugs->slug);
       foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
-
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
-
           $story_id = (int) $slug->storyId;
           $action = (string) $slug->action;
           $story_title = (string) $slug->storyTitle;
 
-// Sending mail to Octopus user where 
+          // Adding Octopus Log 
+          $msg = '';
+          $hyperlink = 'rundown-listing';
+          $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, REQUEST_TIME, 1);
+
+          // End Adding Octopus Log
+          // Sending mail to Octopus user where 
           $story_com_data = '';
           if ($action == 'UPDATE') {
             $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
@@ -253,7 +258,7 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
- 
+
   $pagination = '';
   $current_rundown = '';
 
@@ -313,8 +318,8 @@ function itg_octopus_api_rundown_listing() {
     $query->condition('ios.category', $category_data, 'IN');
   }
 
-  $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
 
   if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
     $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
@@ -396,7 +401,7 @@ function itg_octopus_api_rundown_listing() {
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
-  
+
   return $output;
 }
 
