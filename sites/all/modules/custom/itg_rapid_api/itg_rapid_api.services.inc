@@ -1663,7 +1663,7 @@ function itg_rapid_api_resource() {
         // get_preference custom resource declaration.....
         'get_preference' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves get_preference schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1675,29 +1675,31 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'authtoken_id',
                             'optional' => FALSE,
-                            'source' => 'data',
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'authtoken_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'user_id',
                             'optional' => FALSE,
-                            'source' => 'data',
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -3777,7 +3779,15 @@ function itg_rapid_api_log_out($token) {
  *
  */
 function itg_rapid_api_get_preference($token) {
-    $user_id = $_GET['user_id'];
+    $HTTP_RAW_POST_DATA;
+    global $base_url;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $user_id = $params['user_id'];
+    $authtoken_id = $params['authtoken_id'];
+    if (!drupal_valid_token($token, 'services')) {
+        $data['status_code'] = "0";
+        $data['status_message'] = "invalid token";
+    } else {
     $account = user_load_by_name($user_id);
 
     $user_id = $account->uid;
@@ -3839,6 +3849,8 @@ function itg_rapid_api_get_preference($token) {
         $loop_count++;
     }
 
+    
+    }
     return $data;
 }
 
