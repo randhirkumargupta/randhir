@@ -3008,11 +3008,19 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
                 $account['data']['auth_token'] = "$auth_token";
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-                return services_error(t('Wrong username or password.'), 401);
+                //return services_error(t('Wrong username or password.'), 401);
+                $account = array();
+                $account['status_code'] = "0";
+                $account['status_message'] = "Wrong username or password.";
+                return $account;
             }
         } else {
             watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-            return services_error(t('Wrong username or password.'), 401);
+            //return services_error(t('Wrong username or password.'), 401);
+            $account = array();
+            $account['status_code'] = "0";
+            $account['status_message'] = "Wrong username or password.";
+            return $account;
         }
 
         return $account;
