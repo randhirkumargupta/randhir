@@ -89,10 +89,10 @@ function bookmark_set_data_responce($user_id, $node_ids) {
  * @return array of All the stories which is bookmarked/Read later ,  
  */
 
-function bookmark_del_data_responce($user_id, $node_id) {
+function bookmark_del_data_responce($user_id, $node_ids) {
 
   $output_array = array();
-  $data_array = array();
+  $delete_status = array();
   $updated_datetime = "";
 
   $dtag = '';
@@ -104,27 +104,35 @@ function bookmark_del_data_responce($user_id, $node_id) {
     $con = mongodb();
     // check connection
     if ($con) {
-      $people = $con->front_user_activity;
-      $qry = array("nid" => $node_id, "uid" => $user_id, 'activity' => 'read_later');
-      $result = $people->remove($qry);
-      $result = (array)$result;
-
+      foreach ($node_ids as $node) {
+        $node_id = $node['id'];
+        if ($node_id != '') {
+          $people = $con->front_user_activity;
+          $qry = array("nid" => $node_id, "uid" => $user_id, 'activity' => 'read_later');
+          $result = $people->remove($qry);
+          $result = (array) $result;
+          if($result['n'] != 0){
+            $delete_bookmark = '1';
+          }else{ $delete_bookmark = '0'; }
+          
+          $delete_status['id'] = $node_id;
+          $delete_status['status'] = $delete_bookmark;
+          $all_delete_bookmark[] = $delete_status;
+        }
+      }
     }
   }
-//  print_r($result);
-//  exit();
-  //check the data is really delete
-  if($result['n'] != 0){
-    //echo "found";
-    $output_array = bookmark_responce_data($user_id);
+  
+  if(!empty($all_delete_bookmark)){
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
+    $output_array['data'] = array('bookmark_content' => $all_delete_bookmark);
+        
   }else{
-    //echo "data";
-    $output_array = array();
     $output_array['status_code'] = "0";
-    $output_array['status_message'] = "Unable to delete data, This data is not found in the db";
-    //$jsondata = json_encode($output_array);
+    $output_array['status_message'] = "customised_message";
+    $output_array['data'] = array('bookmark_content' => array());
   }
-
   return $output_array;
 }
 

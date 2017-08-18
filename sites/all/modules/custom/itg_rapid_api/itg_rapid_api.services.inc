@@ -4060,10 +4060,10 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
     $authtoken_id = $params['authtoken_id'];
     
     $user_id = isset($user_load->uid) ? $user_load->uid : "";
-    $node_id = $params['node_id'];
+    $node_ids = $params['data']['bookmark_content'];
     $message_array = array();
     $args = '0';
-    if (isset($user_id) && isset($authtoken_id) && isset($node_id)) {
+    if ($user_id != '0' && isset($authtoken_id) && is_array($node_ids)) {
         $args = '1';
     }else{
       $message_array['status_code'] = '0';
@@ -4077,7 +4077,7 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
     }
     
     if ($args != '0') {
-        $jsondata = bookmark_del_data_responce($user_id, $node_id);
+        $jsondata = bookmark_del_data_responce($user_id, $node_ids);
     } else {
         $jsondata = $message_array;
     }
