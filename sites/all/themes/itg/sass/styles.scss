@@ -8602,17 +8602,14 @@ section.sidebar{
         }
     } 
     .election-graph-3{
-        margin-top: -50px;
         display: inline-block;
         width: 100%;
     }
     .election-graph-4{
-        margin-top: -100px;
         display: inline-block;
         width: 100%;
     }
     .election-graph-5{
-        margin-top: -150px;
         display: inline-block;
         width: 100%;
     }
@@ -10379,7 +10376,7 @@ h1.about-us-heading{
                 cursor: pointer;
             }
             .messages.error{
-                display: none;
+                display: block;
             }  
             .form-managed-file .image-widget-data .form-submit[value="Remove"]{
                 position: relative;
@@ -12038,6 +12035,12 @@ span.see-picture{
       content: ':';
     }
   }
+}
+.photo-story .slick-slider{
+  webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto !important;
 }
 
 @media (min-width: 320px) {
