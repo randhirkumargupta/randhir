@@ -718,3 +718,70 @@ function count_node_under_tid_service($tid) {
   return $query->execute()->rowCount();
 }
 
+/**
+ * 
+ * @param array $updates
+ */
+function save_itg_widget_personalization_data_service($updates) {
+  global $user;
+  $widget_name = "personalization_widget";
+
+  $nids = array_keys($updates);
+  // Delete all the tids from table if they are not in $updates variable
+  // unsued tid should be delete
+  db_delete('itg_widget_order')
+      ->condition('widget', $widget_name)
+      ->condition('nid', $nids, "NOT IN")
+      ->condition('extra', $user->uid)
+      ->execute();
+  // Update the weight of tids if exists or insert if dont exists.
+  foreach ($updates as $term_id => $weight) {
+    db_merge('itg_widget_order')
+        ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
+        ->fields(array(
+          'nid' => $term_id,
+          'widget' => $widget_name,
+          'weight' => $weight,
+          'extra' => $user->uid,
+        ))
+        ->execute();
+  }
+  drupal_set_message(t("My Preferences Has Been Save."));
+}
+
+
+/**
+ * Function to check old/new pass.
+ * @param array
+ * @return array
+ */
+
+function validateServicePass($params){
+    module_load_include('inc', 'content', 'includes/password');
+    $pass_vld_msg = array();
+    $old_pass = trim($params['old_pass']);
+    $new_pass = trim($params['new_pass']);
+    $user_id = trim($params['user_id']);
+    $account = user_load_by_name($user_id);
+    if($new_pass == ""){
+        $pass_vld_msg['success_flag'] = 0;
+        $pass_vld_msg['msg'] = "Please enter new password.";
+        return $pass_vld_msg;
+    }
+    if($old_pass == $new_pass){
+        $pass_vld_msg['success_flag'] = 0;
+        $pass_vld_msg['msg'] = "New Password can't be same as Old.";
+        return $pass_vld_msg;
+    }
+    if($old_pass != ""){
+       $flag = user_check_password($old_pass, $account);
+       if(!$flag){
+           $pass_vld_msg['success_flag'] = 0;
+           $pass_vld_msg['msg'] = "Your new password cannot be accepted because the old password provided is not correct. Please Try again.";
+           return $pass_vld_msg;
+       }
+    }
+    $pass_vld_msg['success_flag'] = 1;
+    $pass_vld_msg['msg'] = "Go Ahead.";
+    return $pass_vld_msg;
+}

@@ -1193,7 +1193,7 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'pass',
+                            'name' => 'old_pass',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'user_id'),
@@ -1202,7 +1202,7 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'pass2',
+                            'name' => 'new_pass',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'user_id'),
@@ -3167,10 +3167,12 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $account_err = array();
     $data['user_id'] = $params['user_id'];
     $account = array();
+    //p($data);die();
     $rand = rand();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/".$rand;
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
     if ($result_obj->uid) {
         $account_err['status_code'] = "0";
         $account_err['status_message'] = "Duplicate sign up request";
@@ -3194,7 +3196,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
             $account['status_code'] = "1";
             $account['status_message'] = "";
             $account['data']['user_id'] = "$uname";
-            $account['data']['is_authenticated'] = "1";
+            $account['data']['is_authenticated'] = "0";
             $account['data']['otp_status'] = "1";
         } else {
             watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
@@ -3391,6 +3393,13 @@ function itg_rapid_api_change_password($token, $user_id) {
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
+    $pass_valid_msg = validateServicePass($params);
+    if($pass_valid_msg['success_flag'] == 0){
+       $error_msg = $pass_valid_msg['msg'];
+       $data['status_code'] = "0";
+       $data['status_message'] = "$error_msg"; 
+       return $data;
+    }
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3724,7 +3733,7 @@ function itg_rapid_api_get_login_user_detail($token) {
         $location = "";
 
 
-        if ($account->field_user_counrty['und'][0]['tid']) {
+        /*if ($account->field_user_counrty['und'][0]['tid']) {
             //$location .= $account->field_user_counrty['und'][0]['tid'];
             $term = taxonomy_term_load($account->field_user_counrty['und'][0]['tid']);
             $name = $term->name;
@@ -3743,12 +3752,19 @@ function itg_rapid_api_get_login_user_detail($token) {
         }
         if ($account->field_short_description['und'][0]['value']) {
             $location .= ", " . $account->field_short_description['und'][0]['value'];
-        }
+        }*/
+         $location = $account->field_short_description['und'][0]['value'];
 
         $profile_image = $account->field_user_picture['und'][0]['fid'];
         $gender = $account->field_user_gender['und'][0]['value'];
         $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
-        $login_type = "na";
+        $login_type = "0";
+        if (strpos($email_id,'@facebook.com') !== false) {
+            $login_type = 1;
+        }
+        elseif(strpos($email_id,'@twitter.com') !== false){
+            $login_type = 2;
+        }
 
         $data['status_code'] = "1";
         $data['status_message'] = "";
@@ -3779,6 +3795,17 @@ function itg_rapid_api_log_out($token) {
     $HTTP_RAW_POST_DATA;
     global $base_url;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    // check valid user_id
+    $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/".$rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     //$params = $_POST;
     $data = array();
     $user_id = $params['user_id'];
