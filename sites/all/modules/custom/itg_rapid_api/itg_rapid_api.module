@@ -663,4 +663,58 @@ function adconfig_tab() {
 
   return system_settings_form($form);
 }
+function get_personalization_front_data_service($user) {
+  global $user;
+  $weight_count_loop = FALSE;
+  // As in table itg_widget_order tid is saved in nid colom.
+  // So join field_story_category_tid join is applied on nid.
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->fields('iwo', array('weight', 'nid'))
+      ->condition('iwo.widget', "personalization_widget")
+      ->condition('iwo.extra', $user->uid)
+      // Orderby weight or taxonomyterm id.
+      ->orderBy('iwo.weight', 'DESC')
+      ->orderBy('iwo.nid', 'DESC')
+      ->range(0, 30);
+  $result = $query->execute()->fetchAllAssoc('nid');
+  $new_array_of_terms = array_keys($result);
+  // case handled if perferences is not saved.
+  if (count($result) == 0) {
+    $weight_count_loop = TRUE;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
+    $query->fields('iwo', array('cat_id'))
+        ->condition('iwo.widget', "section_wise_widget")
+        ->condition('fc.field_set_as_featured_cate_value', 'Yes')
+        ->groupBy('iwo.cat_id')
+        ->range(0, 30);
+    $result = $query->execute()->fetchAllAssoc('cat_id');
+  }
+  if ($weight_count_loop) {
+    $new_array_of_terms = array();
+    // Get only tids.
+    $tids_array = array_keys($result);
+    foreach ($tids_array as $term_id) {
+      $new_array_of_terms[$term_id] = count_node_under_tid_service($term_id);
+    }
+    krsort($new_array_of_terms);
+  }
+  return ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
+}
+
+/**
+ * Function to get total number of nodes in taxonomy.
+ * @param int $tid
+ * @return int
+ */
+function count_node_under_tid_service($tid) {
+  $query = db_select('taxonomy_index', 'ti');
+  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  $query->addField('ti', 'nid');
+  $query->condition('ti.tid', $tid);
+  $query->condition('n.status', 1);
+  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  $query->orderBy('n.created', 'DESC');
+  return $query->execute()->rowCount();
+}
 

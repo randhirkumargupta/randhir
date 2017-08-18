@@ -3790,48 +3790,8 @@ function itg_rapid_api_get_preference($token) {
     } else {
     $account = user_load_by_name($user_id);
 
-    $user_id = $account->uid;
-    $last_access = $account->access;
-    $last_access_date = date('Y-m-d h:m:s', $last_access);
-    $weight_count_loop = FALSE;
-    $tid_array = array();
-    $tid_value = array();
-    $data = array();
-    // As in table itg_widget_order tid is saved in nid colom.
-    // So join field_story_category_tid join is applied on nid.
-    // get personalization-preferences tid
-    $query = db_select('itg_widget_order', 'iwo');
-    $query->fields('iwo', array('weight', 'nid'))
-            ->condition('iwo.widget', "personalization_widget")
-            ->condition('iwo.extra', $user_id)
-            // Orderby weight or taxonomyterm id.
-            ->orderBy('iwo.weight', 'DESC')
-            ->orderBy('iwo.nid', 'DESC')
-            ->range(0, 30);
-    $result = $query->execute()->fetchAllAssoc('nid');
-    $new_array_of_terms = array_keys($result);
-    // case handled if perferences is not saved.
-    if (count($result) == 0) {
-        $weight_count_loop = TRUE;
-        $query = db_select('itg_widget_order', 'iwo');
-        $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
-        $query->fields('iwo', array('cat_id'))
-                ->condition('iwo.widget', "section_wise_widget")
-                ->condition('fc.field_set_as_featured_cate_value', 'Yes')
-                ->groupBy('iwo.cat_id')
-                ->range(0, 30);
-        $result = $query->execute()->fetchAllAssoc('cat_id');
-    }
-    if ($weight_count_loop) {
-        $new_array_of_terms = array();
-        // Get only tids.
-        $tids_array = array_keys($result);
-        foreach ($tids_array as $term_id) {
-            $new_array_of_terms[$term_id] = count_node_under_tid($term_id);
-        }
-        krsort($new_array_of_terms);
-    }
-    $tid_array = ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
+    $preference_tid = get_personalization_front_data_service($account);
+   
     // return data of personalization-preferences value
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
@@ -3840,7 +3800,7 @@ function itg_rapid_api_get_preference($token) {
     $data['data']['preference_type'] = "default";
     $loop_count = 0;
     //get personalization-preferences value
-    foreach ($tid_array as $key => $value) {
+    foreach ($preference_tid as $key => $value) {
         $prefeance = itg_rapid_api_get_personalization_saved_value($value, $user_id);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
