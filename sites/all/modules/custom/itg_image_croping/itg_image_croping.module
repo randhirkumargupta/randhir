@@ -638,6 +638,8 @@ function itg_image_croping_crop_image() {
   if ($image_name == "") {
     $image_name = time();
   }
+  $image_width = $img_dim[$content_type_new][$image_fields]['width'];
+      $image_height = $img_dim[$content_type_new][$image_fields]['height'];
   $image_name = $image_name . rand(111, 999);
   $extendata = substr($image_data_url, 5, strpos($image_data_url, ';') - 5);
   $extention = end(explode('/', $extendata));
@@ -790,10 +792,9 @@ function itg_image_croping_crop_image_orignal() {
   else {
     $scaled = image_scale_and_crop($image, $image_width, $image_height);
   }
-
   $image_name_orignal = $file_image->filename;
   $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
-  $image_name = $image_name_orignal . rand(111, 999) . time();
+  $image_name = $image_name_orignal .'-'. $image_width.'x'.$image_height;
   $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
   $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
   $uri = $filepath . '/' . $image_name . '.' . $image_exten;

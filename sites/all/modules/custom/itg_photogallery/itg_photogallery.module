@@ -436,7 +436,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $form_state['rebuild'] = TRUE;
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
-  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
+  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym') . '/';
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   }
@@ -521,6 +521,8 @@ function itg_photogallery_crop_thumb($fid) {
   $image = image_load($file_image->uri);
   if (!empty($image)) {
     $image_extension = end(explode('.', $file_image->uri));
+    $image_name = explode('.', $file_image->filename);
+    $image_name = $image_name[0];
     $filepath = file_default_scheme() . '://' . $filedir;
     if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
@@ -528,7 +530,7 @@ function itg_photogallery_crop_thumb($fid) {
     else {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
     }
-    $image_name = $image_name . time() . rand(1111, 9999);
+    $image_name = $image_name . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
     $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
