@@ -3210,6 +3210,13 @@ div.node{
       min-width: 620px;
     }
   }
+  td.field-multiple-drag{
+    width: 30px;
+    padding-right: 0;
+    display: block;
+    min-width: 0;
+    border: none;
+  }
   .field-name-field-start-time{
     fieldset.date-combo{
       > legend{padding-top: 28px;}
@@ -3249,6 +3256,7 @@ div.node{
       }
     } 
   }
+  + div.clearfix .form-submit{margin-left: 280px;}
 }
 .view .view-filters .views-exposed-form .views-exposed-widget{
   &.views-widget-filter-created, &.views-widget-filter-changed{
@@ -12181,5 +12189,24 @@ fieldset#edit-xmlsitemap{
 [id*="views-exposed-form-sold-item-history-page"]{
   .views-widget-filter-created > label, .views-widget-filter-created .description {
     display: none !important;
+  }
+}
+[id*="field-event-highlights-values"] > tbody > tr > td{
+  position: relative;
+  > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 10px;
+    margin: 0;
+  }
+}
+.form-field-name-field-newsl-newsletter-content .description { left:1024px !important;}
+.region-sidebar-second{
+  .block-itg-layout-manager h2 + div{
+    height: 185px;
+    #autocomplete{
+      max-height: 140px;
+      overflow-y: auto;
+    }
   }
 }
