@@ -77,6 +77,7 @@ jQuery(document).ready(function(){
     var relatedtit = jQuery('#relatedtit').text();
     var item = [];
     var detail = [];
+    var flag=false;
     if(insvalue){
         item = insvalue.split("|~|");
     }
@@ -95,14 +96,15 @@ jQuery(document).ready(function(){
         var bundleval = jQuery.trim(bundle);
         var url_site = siteval + '_' + urlval;
         var site_detail = siteval + '_' + urlval+ '@' + bundleval+'@' + labelval;
-        
         if (isCheck) {
             var hasurl = jQuery.inArray(url_site, item);
             if (hasurl == -1) {
                 item.push(url_site);
+                flag = true;
             }
+            
             var hastitle = jQuery.inArray(site_detail, detail);
-            if (hastitle == -1) {
+            if (hastitle == -1 && flag) {
                 detail.push(site_detail);
             }
         }
@@ -110,7 +112,7 @@ jQuery(document).ready(function(){
             var hasurl = jQuery.inArray(url_site, item);
             item.splice(hasurl, 1);
             var hastitle = jQuery.inArray(site_detail, detail);
-            detail.splice(hastitle, 1);
+            detail.splice(hastitle, 1);  
         }
           seprated_item = item.join('|~|');
           seprated_detail = detail.join('|~|');
@@ -135,9 +137,20 @@ jQuery(document).ready(function(){
         }
             
            // parent.jQuery('#edit-field-story-kicker-text-und-0-value').val(item);
+        try {
             parent.jQuery('#edit-field-common-related-content-und-0-value').val(seprated_item);
+        } catch (e) {
+
+        }
+
+        try {
             parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(seprated_detail);
+        } catch (e) {
+
+        }
+            //parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val(seprated_detail);
             var checkedlist = '';
+            var inputrelArray = [];
             for ( var i = 0, l = item.length; i < l; i++ ) {
                 var site = item[i].split('_');
                 var rel_tit = detail[i].split('@');
@@ -148,6 +161,7 @@ jQuery(document).ready(function(){
                 if(final_tit[2] != null && final_tit[2] != undefined) {
                     var display_tit;
                     display_tit = final_tit[2];
+                    inputrelArray.push(display_tit);
                 }
                 if(final_tit[1] != null && final_tit[1] != undefined) {
                     var display_type;
@@ -157,6 +171,9 @@ jQuery(document).ready(function(){
                 checkedlist += '<li class="ui-state-default"><div class="rc-top"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="'+display_tit+'">' + item[i] + '</span> | <span class="item-type">'+ display_type +'</span> | <a href="'+solr_uri+'" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></div><div class="rc-bottom"><input class="rc-title" type="text" value="' + display_tit + '" /></div></li>';
             }
             parent.jQuery('.checked-list').html(checkedlist);
+            parent.jQuery('.checked-list li').each(function (i) {
+            jQuery(this).find('.rc-title').val(inputrelArray[i]);
+            }); 
             if(item.length){
                 parent.jQuery('.save-checklist-ordre').html('<span class="add-more save-checklist">Save order</span>');
             }

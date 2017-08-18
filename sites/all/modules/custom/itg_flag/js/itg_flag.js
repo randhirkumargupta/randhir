@@ -35,7 +35,8 @@ function fbpop(linkurl, title, desc, image, base_url, node_id) {
     }, function (response) {
         if (response.post_id != 'undefined' && response.post_id != '') {
             jQuery.ajax({
-                url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                url: base_url + '/itg-global-fb-point/' + node_id + '/facebook_share',
                 type: 'POST',
                 dataType: 'JSON',
             });

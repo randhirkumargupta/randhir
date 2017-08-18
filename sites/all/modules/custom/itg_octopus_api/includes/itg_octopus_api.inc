@@ -73,15 +73,20 @@ function itg_octopus_api_rundown() {
     if (isset($rundown_xml->rundown->slugs->slug)) {
       // p($rundown_xml->rundown->slugs->slug);
       foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
-
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
-
           $story_id = (int) $slug->storyId;
           $action = (string) $slug->action;
           $story_title = (string) $slug->storyTitle;
 
-// Sending mail to Octopus user where 
+          // Adding Octopus Log 
+          $msg = '';
+          $hyperlink = 'rundown-listing';
+          $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, REQUEST_TIME, 1);
+
+          // End Adding Octopus Log
+          // Sending mail to Octopus user where 
           $story_com_data = '';
           if ($action == 'UPDATE') {
             $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;

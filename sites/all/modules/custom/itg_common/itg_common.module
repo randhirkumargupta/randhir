@@ -1280,3 +1280,83 @@ function itg_common_url_friendly_path($pathdata) {
   }
   return $pathdata;
 }
+
+/**
+ * Check whether sponsor story or not.
+ * @param int $nid
+ * @return boolean
+ */
+function _is_sponsor_story_article($nid) {
+  $is_sponsor = FALSE;
+  if (isset($nid)) {
+    $type_query = db_select('node', 'n');
+    $type_query->fields('n', array('type'));
+    $type_query->condition('n.nid', $nid, '=');
+    $node_type = $type_query->execute()->fetchField();
+    if ($node_type == 'story') {
+      $query = db_select('field_data_field_story_configurations', 'fc');
+      $query->fields('fc', array('field_story_configurations_value'));
+      $query->condition('fc.entity_id', $nid, '=');
+      $query->condition('fc.bundle', 'story', '=');
+      $query->condition('fc.entity_type', 'node', '=');
+      $query_result = $query->execute()->fetchAll();
+      if (!empty($query_result)) {
+        foreach ($query_result as $config_val) {
+          if ($config_val->field_story_configurations_value == 'sponsor') {
+            $is_sponsor = TRUE;
+            break;
+          }
+        }
+      }
+    }
+  }
+  return $is_sponsor;
+}
+
+/**
+ * Returns internal path from external URL.
+ * @global string $base_path
+ * @param string $url
+ * @return string
+ */
+function _get_int_path_from_url($url) {
+  global $base_path;
+  $int_path = '';
+  // Get hostname
+  preg_match("/^(https?:\/\/)?([^\/]+)/i", $url, $domain);
+  // Format localhost + base_path (http://hostname/drupalbase)
+  $base = (isset($domain[0]) ? $domain[0] : '') . $base_path;
+  // If $url contains $base, remove the $base part
+  if (strpos($url, $base) === 0) {
+    $path = str_replace($base, '', $url);
+  }
+  // $url is presumed to be without $base part (internal path?)
+  else {
+    $path = $url;
+  }
+  // Parse the path (without $base)
+  $result = drupal_parse_url($path);
+  $int_path = drupal_get_normal_path($result['path']);
+  return $int_path;
+}
+
+/**
+ * Check if taxonomy is sponsored or not.
+ * @param int $tid
+ * @return boolean
+ */
+function _is_sponsored_category($tid) {
+  $return = FALSE;
+  if (db_table_exists('field_data_field_is_sponsor')) {
+    $query = db_select('field_data_field_is_sponsor', 'fs');
+    $query->fields('fs', array('field_is_sponsor_value'));
+    $query->condition('fs.entity_id', $tid, '=');
+    $query->condition('fs.bundle', 'category_management', '=');
+    $query->condition('fs.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchField();
+    if ($query_result == 1) {
+      $return = TRUE;
+    }
+  }
+  return $return;
+}
