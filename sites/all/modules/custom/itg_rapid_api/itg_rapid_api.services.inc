@@ -3784,7 +3784,7 @@ function itg_rapid_api_get_preference($token) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $user_id = $params['user_id'];
     $authtoken_id = $params['authtoken_id'];
-    if (!drupal_valid_token($token, 'services')) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
