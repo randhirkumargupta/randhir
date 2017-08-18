@@ -4885,6 +4885,14 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['filters']['type']['value'] = array(
     'photogallery' => 'photogallery',
   );
+  /* Filter criterion: Field collection item: Enable (field_photo_enable) */
+  $handler->display->display_options['filters']['field_photo_enable_value']['id'] = 'field_photo_enable_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['table'] = 'field_data_field_photo_enable';
+  $handler->display->display_options['filters']['field_photo_enable_value']['field'] = 'field_photo_enable_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['value'] = array(
+    1 => '1',
+  );
 
   /* Display: photogallery story block */
   $handler = $view->new_display('block', 'photogallery story block', 'block_1');
