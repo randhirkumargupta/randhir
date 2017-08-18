@@ -151,12 +151,12 @@ function itg_photogallery_get_image_data_by_nid($nid) {
  * @param array $form_state
  */
 function itg_photogallery_form_custom_callback($form, &$form_state) {
-  if($form_state['input']['op'] == 'Apply') {
+  if ($form_state['input']['op'] == 'Apply') {
      if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
+     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+     $_GET['destination'] = $redirect_path;
+     drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
   }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
@@ -217,7 +217,7 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
           // Video uploaded on dailymotion
           // Updating status of video
           $api = itg_videogallery_dailymotion_api();
-          $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => true));
+          $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => TRUE));
 
           try {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
@@ -353,7 +353,7 @@ function itg_photogallery_views_pre_render(&$view) {
   if ($view->name == "manage_photogallery") {
     global $user; // Get user information
     $photo_content = '';
-    $photo_content = l('Create Photogallery', 'node/add/photogallery', array('query' => array('destination' => 'manage-photogallery')));
+    $photo_content = l(t('Create Photogallery'), 'node/add/photogallery', array('query' => array('destination' => 'manage-photogallery')));
     $view->attachment_before = $photo_content;
   }
 }
@@ -377,7 +377,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
     'language' => NULL,
   );
   $options += $default_options;
-  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
+  list(, , $bundle) = entity_extract_ids($entity_type, $entity);
   $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
   // Iterate through the instances.
   $return = array();
@@ -481,13 +481,12 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
-        if(isset($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes']) && !empty($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes'])) {
+        if (isset($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes']) && !empty($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes'])) {
          $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und'][0]['value'] ='yes';
         }
 
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und']['yes'] ='yes';
       $filename = $file_ids[$i]['filename'];
-      $newFileName = substr($filename, 0, (strrpos($filename, ".")));
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
       $imge_thumb_id = itg_photogallery_crop_thumb($file_ids[$i]['fid']);
       if ($imge_thumb_id) {
@@ -798,18 +797,18 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
   }
 
   if (isset($element['#value']['fid'])) {
-  $filedata =file_load($element['#value']['fid']);
-  $filedata = (array)$filedata;
+      $filedata = file_load($element['#value']['fid']);
+      $filedata = (array)$filedata;
     if ($filedata['filemime'] == 'image/jpeg' || $filedata['filemime'] == 'image/png' || $filedata['filemime']['#value'] == 'image/jpg'|| $filedata['filemime']['#value'] == 'image/gif'  ) {
-      $item['fid'] = $element['#value']['fid'];
-     $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['#value']['fid'] . "?width=600&height=500&node_type=".$form['type']['#value']."&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
+         $item['fid'] = $element['#value']['fid'];
+         $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['#value']['fid'] . "?width=600&height=500&node_type=" . $form['type']['#value'] . "&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
 </a>";
     }
   }
 
   if (empty($item['alt']) || empty($item['title'])) {
     if (isset($item['fid'])) {
-      $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+        $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
     }
   }
 
@@ -817,7 +816,7 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
   $alt = "";
   $title = "";
   if (isset($data_result['alt']) && empty($item['alt'])) {
-    $alt = $data_result['alt'];
+      $alt = $data_result['alt'];
   }
   if (isset($data_result['title']) && empty($item['title'])) {
     $title = $data_result['title'];

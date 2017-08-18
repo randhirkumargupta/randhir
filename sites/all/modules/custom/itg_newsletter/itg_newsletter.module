@@ -26,7 +26,13 @@ function itg_newsletter_menu() {
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
-
+  
+//  $items['itg_newsletter_send_automatic_newsletter'] = array(
+//    'page callback' => 'itg_newsletter_send_automatic_newsletter' ,
+//    'access callback' => TRUE ,
+//    'type' => MENU_CALLBACK ,
+//  );
+  
   $items['newsletter_data_preview'] = array(
     'title' => 'Download Newsletter Preview' ,
     'page callback' => 'itg_newsletter_content_preview_data' ,
@@ -46,8 +52,37 @@ function itg_newsletter_menu() {
     'access arguments' => array('access administrator'),
     'type' => MENU_CALLBACK,      
   );
+  
+    $items['subject-line/%/autocomplete'] = array(
+    'page callback' => 'itg_newsletter_content_subject_headline',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
+}
+
+function itg_newsletter_content_subject_headline($title) {
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_news_title' , 'nt' , 'nt.entity_id=n.nid');
+      $query->fields('nt', array('field_news_title_value'));
+      $query->condition('nt.field_news_title_value', '%' . $title . '%', 'LIKE');
+      $query->condition('n.type', 'newsletter', '=');
+      $query->condition('n.status', 1);
+      $query->range(0, 20);
+      $query->orderBy('nt.field_news_title_value');
+      $result = $query->execute();
+
+      while ($record = $result->fetchAssoc()) {
+          $options[$record['field_news_title_value']] = $record['field_news_title_value'];
+      }
+
+      drupal_json_output($options);
+  }
 }
 
 /**
@@ -391,7 +426,7 @@ function itg_newsletter_views_pre_render(&$view) {
 function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
     // Call function autocomplete to show matching titles
-    $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
+    $form['field_news_title_value']['#autocomplete_path'] = 'subject-line/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
     $form['date_filter']['min']['#date_format'] = 'd/m/Y';
     $form['date_filter']['max']['#date_format'] = 'd/m/Y';
@@ -739,7 +774,6 @@ function itg_newsletter_send_automatic_newsletter() {
       ->condition('cn.type' , 'manual' , '=')
       ->condition('cn.scheduled_time' , time() , '<=');
   $result = $query->execute();
-
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }

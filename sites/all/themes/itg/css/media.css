@@ -1429,7 +1429,7 @@
   /*Globle search page css start*/
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;
-    right: auto;
+    right: 258px;
   }
 
   [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form {
@@ -1584,6 +1584,10 @@
   #block-itg-menu-manager-third-level-menu {
     z-index: 999999;
     position: relative;
+  }
+
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
+    width: 165px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -2678,6 +2682,9 @@
   .view-front-end-global-search .searh-all-filters .views-exposed-widget {
     float: left;
   }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
+    width: 165px;
+  }
   .view-front-end-global-search .view-filters {
     margin-bottom: 40px;
   }
@@ -2772,7 +2779,7 @@
   }
   .view-front-end-global-search .views-exposed-widget .caln {
     position: inherit;
-    right: auto;
+    right: 258px;
   }
 
   /*End css ITG globle search result page*/

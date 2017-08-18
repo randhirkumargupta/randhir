@@ -171,7 +171,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
     }
 
@@ -191,12 +190,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       }
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $mongo_details['city'];
-
       // Added code for managing the category shift 
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
@@ -815,11 +812,18 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, 
       $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
       $status = 'Published';
       $user_id = itg_personalization_get_uid($nid);
-      if(function_exists('itg_loyalty_reward_share_point') && function_exists('itg_loyalty_reward_earnpoint')) {
+      /* to do for backup once testing id done */
+      /*if(function_exists('itg_loyalty_reward_share_point') && function_exists('itg_loyalty_reward_earnpoint')) {
       $existing_check = itg_loyalty_reward_share_point($user_id['uid'], 'ugc', $nodeid);
       if(!$existing_check) {
       itg_loyalty_reward_earnpoint($nodeid, 'ugc', $user_id['uid']);
       }
+      }*/
+      if (function_exists('itg_global_loyality_exist_point') && function_exists('itg_global_loyality_send_data')) {
+        $existing_check = itg_global_loyality_exist_point($user_id['uid'], 'ugc_contribution', $nodeid, variable_get('property_name'));
+        if (empty($existing_check)) {
+          itg_global_loyality_send_data($user_id['uid'], 'ugc_contribution', $nodeid);
+        }
       }
     }
     else {
