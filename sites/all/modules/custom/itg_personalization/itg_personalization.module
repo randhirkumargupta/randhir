@@ -295,7 +295,12 @@ function itg_personalization_block_view($delta = '') {
       $block['content'] .= '<div id="target-content"></div>';
       break;
     case 'user_my_point':
-      $data = itg_loyalty_reward_user_details($user->uid);
+      //$data = itg_loyalty_reward_user_details($user->uid);
+      if(function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      $property = variable_get('property_name');
+      $data = itg_get_global_credits($user->uid, $property, $sso_id);
       $block['content'] = theme('personalization_my_point', array('data' => $data));
       break;
     case 'personalization_edit_profile':
@@ -552,8 +557,11 @@ function itg_personalization_reddem_referfriend($key) {
       drupal_set_message($ex->getMessage(), 'error');
     }
     if ($itg_result) {
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
       if(function_exists('itg_global_loyality_send_data')) {
-        itg_global_loyality_send_data(0, 'raf', $itg_result);
+        itg_global_loyality_send_data($itg_result, 'raf', 0, '', $sso_id);
       }
       //itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
     }

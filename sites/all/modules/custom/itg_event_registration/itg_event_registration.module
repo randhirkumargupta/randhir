@@ -1073,7 +1073,10 @@ function itg_event_registration_node_insert($node) {
     
     // global loyalty points function
     if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
-      itg_global_loyality_send_data($user->uid, 'event_registration', $node->nid);
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      itg_global_loyality_send_data($user->uid, 'event_registration', $node->nid, '', $sso_id);
     }
   }
 }

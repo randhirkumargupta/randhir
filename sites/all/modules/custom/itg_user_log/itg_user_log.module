@@ -36,7 +36,10 @@ function itg_user_log_node_view($node , $view_mode , $langcode) {
   // code for loyality point
   if ($theme == 'itg' && $view_mode == 'full' && $view_mode != 'search_index' && in_array($node->type, $c_type) && array_key_exists(FRONT_USER, $user->roles)) {
     if (function_exists('itg_global_loyality_get_sso_id')) {
-      itg_global_loyality_send_data($user->uid, 'Content_Visit', $node->nid);
+      $sso_id = itg_global_loyality_get_sso_id($user->uid);
+    }
+    if (function_exists('itg_global_loyality_get_sso_id')) {
+      itg_global_loyality_send_data($user->uid, 'Content_Visit', $node->nid, '', $sso_id);
     }
   }
 

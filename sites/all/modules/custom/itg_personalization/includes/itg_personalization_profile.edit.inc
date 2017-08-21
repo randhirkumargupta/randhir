@@ -389,6 +389,9 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
  */
 function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   global $user;
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
   $inputs = $form_state['values'];
   $user_detail = user_load($user->uid);
   // Update First Name.
@@ -473,7 +476,7 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     if ($value != '0') {
       $data[]['value'] = $value;
       //itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
-      itg_global_loyality_send_data($user->uid, 'Newsletter_subscription', 0, $value);
+      itg_global_loyality_send_data($user->uid, 'Newsletter_subscription', 0, $value, $sso_id);
     }
   }
   if ($flag) {
