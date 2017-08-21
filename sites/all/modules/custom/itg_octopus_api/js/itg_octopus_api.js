@@ -13,6 +13,9 @@
 
 
 jQuery('document').ready(function() {
+     jQuery('#itg-octopus-api-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
+     jQuery('#itg-octopus-api-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
+            
     jQuery(".octopus-slug-data").click(function() {
         var current_object = jQuery(this);
         var base_url = Drupal.settings.baseUrl.baseUrl;

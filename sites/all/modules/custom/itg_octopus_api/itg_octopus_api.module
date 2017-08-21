@@ -240,7 +240,7 @@ function itg_octopus_api_form($form, &$form_state) {
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
     '#theme_wrappers' => array('date_popup'),
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'Start Date'),
     '#weight' => 4,
     '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
   );
@@ -260,7 +260,7 @@ function itg_octopus_api_form($form, &$form_state) {
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
     '#theme_wrappers' => array('date_popup'),
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'End Date'),
     '#weight' => 5,
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
@@ -276,6 +276,30 @@ function itg_octopus_api_form($form, &$form_state) {
     '#weight' => 7,
   );
   return $form;
+}
+
+/**
+ * Implements hook_validate()
+ * {@inheritdoc}
+ */
+function itg_octopus_api_form_validate($form, &$form_state) {
+
+  $flag = 0;
+  if (!empty($form_state['values']['start_date']['date']) && empty($form_state['values']['start_date']['time'])) {
+
+    $array_error['start_date[time]'] = t("Please enter start date time.");
+    $flag = 1;
+  }
+  if (!empty($form_state['values']['end_date']['date']) && empty($form_state['values']['end_date']['time'])) {
+    $array_error['end_date[time]'] = t("Please enter end date time.");
+    $flag = 1;
+  }
+  if ($flag == 1) {
+    drupal_get_messages('error');
+    foreach ($array_error as $key => $msgs) {
+      form_set_error(check_plain($key), check_plain($msgs));
+    }
+  }
 }
 
 /**

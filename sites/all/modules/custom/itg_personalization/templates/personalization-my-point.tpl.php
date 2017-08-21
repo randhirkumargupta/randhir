@@ -1,5 +1,5 @@
 <?php
-
+global $user;
 /* 
  * @file
  *   Personalization - My Preferences data. 
@@ -28,16 +28,18 @@
       <tbody>
         <?php foreach ($data['unit_description'] as $value): ?>
         <tr>
-            <td class="unit-point-item"><?php print ucfirst($value['activity_name']); ?></td>
+            <!--<td class="unit-point-item"><?php print ucfirst($value['activity_name']); ?></td>-->
+            <td class="unit-point-item"><?php print ucfirst(str_replace('_', ' ', $value['activity_name'])); ?></td>
+            <!--<td class="unit-point-item"><?php print ucfirst($value['points_per_activity']); ?></td>-->
             <td class="unit-point-item"><?php print ucfirst($value['points_per_activity']); ?></td>
             <td class="unit-point-item"><?php print ucfirst($value['earned_points']); ?></td>
         </tr>
         <?php endforeach; ?>
-        <tr>
+        <!--<tr>
             <td class="unit-point-item"></td>
             <td class="unit-point-item"><strong><?php print t('Total Earned Points'); ?></strong></td>
             <td class="unit-point-item"><strong><?php print $data['total_earned_so_far']; ?></strong></td>
-        </tr>
+        </tr>-->
       </tbody>     
     </table>
   </div>
