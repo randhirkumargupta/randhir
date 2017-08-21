@@ -93,7 +93,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
   $items['order'] = array(
-    'title' => 'Loyacheckout-pagelty Redemption History',
+    'title' => 'Loyalty Redemption History',
     'page callback' => 'itg_loyalty_reward_order',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
