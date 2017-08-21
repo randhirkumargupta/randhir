@@ -1033,6 +1033,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+      
+       case 'views-exposed-form-bitrates-videos-page':
+      
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'bitrates-videos', array("attributes" => array("class" => array("button")))),
+      );
+     
+      break;
     case 'views-exposed-form-state-manager-page':
 
       $form['Canlce'] = array(
