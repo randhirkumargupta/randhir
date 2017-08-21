@@ -112,8 +112,18 @@ jQuery(document).ready(function(){
         else {
             var hasurl = jQuery.inArray(url_site, item);
             item.splice(hasurl, 1);
-            var hastitle = jQuery.inArray(site_detail, detail);
-            detail.splice(hastitle, 1);  
+            //var hastitle = jQuery.inArray(site_detail, detail);
+            //detail.splice(hastitle, 1);
+             var index = -1;
+            for (var i = 0; i < detail.length; i++) {
+                var a = detail[i];
+                if (a.indexOf(url_site) > -1) {
+                    index = i;
+                }
+            }
+            if (index > -1) {
+                detail.splice(index, 1);
+            }
         }
           seprated_item = item.join('|~|');
           seprated_detail = detail.join('|~|');

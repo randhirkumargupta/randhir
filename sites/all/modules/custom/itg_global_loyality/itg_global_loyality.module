@@ -34,6 +34,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-global-remaining-point'] = array(
+    'title' => t('Global badge history'),
+    'page callback' => 'itg_global_remaining_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['itg-global-fb-point'] = array(
     'title' => t('Global facebook loyality point'),
     'page callback' => 'itg_global_fb_loyality_point',
@@ -318,8 +325,11 @@ function itg_get_global_point_history() {
   $data['unit_description'] = array();
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
-      $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
-      $data['remaining_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+       $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+       $remain = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+      $data['total_earned_so_far'] = $earn;
+      $data['remaining_point'] = $remain;
+      $data['redeemed_points'] = $earn - $remain;
     }
     $data['unit_description'][] = array(
       'activity_name' => $value->loyalty_type,
@@ -340,8 +350,14 @@ function itg_get_badge_point_history() {
   $uid = $_POST['uid'];
   $sso_final_id = $_POST['sso_id'];
   $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
   //watchdog('badge', $uid);
-  $property = $_POST['property'];
   if (!empty($uid)) {
     $itg_result = array();
   try {
@@ -363,6 +379,7 @@ function itg_get_badge_point_history() {
      if ($key == 0) {
       $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
       $data['total_earned_for_current_level'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
+      $data['total_global_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
     }
   }
     print drupal_json_output($data);
@@ -424,6 +441,60 @@ function itg_get_badge_credits($uid, $property, $sso_id = NULL) {
   }
 }
 
+/*
+ * Implements itg_get_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_get_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  if($uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $property = variable_get('property_name');
+    $url = variable_get('global_loyalty_url').'/itg-global-remaining-point';
+    $data = 'uid=' . $uid . '&property=' . $property.'&sso_id='.$sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  $uid = $_POST['uid'];
+  $sso_final_id = $_POST['sso_id'];
+  $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  //watchdog('badge', $uid);
+  if (!empty($uid)) {
+    $remain_point = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+    //$remain_point = 40;
+    print drupal_json_output($remain_point);
+    drupal_exit();
+  }
+}
+
 /**
  * Implements itg_global_loyalty_reward_get_total_earn_point().
  * @param int $uid
@@ -471,4 +542,17 @@ function itg_global_loyalty_get_point_activity($activityname, $property) {
 
     return $activity_point;
   }
+}
+
+/**
+ * Implements itg_get_total_cart_point().
+ */
+function itg_get_total_cart_point($uid) {
+  $itg_result = 0;
+  $itg_query = db_select('itg_loyalty_reward_point_history', 'itg')
+      ->fields('itg', array('cart_point'))
+      ->condition('uid', $uid);
+  $itg_result = $itg_query->execute()->fetchObject();
+
+  return $itg_result;
 }
