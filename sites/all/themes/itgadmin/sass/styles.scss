@@ -1252,7 +1252,7 @@ div.vertical-tabs {
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 430px;
+        min-height: 700px;
         @extend .full;
         border: 1px solid #d9d9d9;
         .messages--error{
@@ -1442,7 +1442,7 @@ div.vertical-tabs {
             }
           }
         }
-        div.description{left: 220px !important;}
+        div.description{left: 100% !important;}
       }
     }
   }
@@ -12207,6 +12207,22 @@ fieldset#edit-xmlsitemap{
     #autocomplete{
       max-height: 140px;
       overflow-y: auto;
+    }
+  }
+}
+[id*="field-gallery-image-values"]{
+  tbody tr td:nth-child(2) .field-name-field-photo-small-image{
+    .form-type-managed-file .has-preview, 
+    .form-type-managed-file .image-widget-data, 
+    .form-type-managed-file .image-widget-data .filefield-sources-imce-browse, 
+    .form-type-managed-file .has-preview .image-widget-data{
+      height: 162px;
+    }
+    .form-type-managed-file .has-preview .image-widget-data{
+      .form-type-textfield:nth-child(3) {
+        display: block;
+        bottom: 38px;
+      }
     }
   }
 }
