@@ -28,15 +28,8 @@ function itg_global_loyality_menu() {
   );
   
   $items['itg-global-badge-history'] = array(
-    'title' => t(''),
+    'title' => t('Global badge history'),
     'page callback' => 'itg_get_badge_point_history',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-  
-  $items['global-credits'] = array(
-    'title' => t(''),
-    'page callback' => 'itg_get_global_credits',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -144,6 +137,11 @@ function itg_global_loyality_exist_point($user, $type, $nid = NULL, $property = 
 
 /**
  * Implements itg_global_loyality_send_data().
+ * @param int $uid
+ * @param string $type
+ * @param int $nid
+ * @param string $newsletter
+ * @param int $sso_id
  */
 function itg_global_loyality_send_data($uid, $type, $nid, $newsletter = NULL, $sso_id = NULL) {
   $url = variable_get('global_loyalty_url').'/itg-get-loyality-point';
@@ -260,8 +258,7 @@ function itg_global_fb_loyality_point() {
 }
 
 /**
- * Validate news letter points.
- *
+ * Implemsnts itg_global_loyalty_newsletter_point().
  * @param int $user
  * @param string $type
  * @param string $news_letter
@@ -375,6 +372,9 @@ function itg_get_badge_point_history() {
 
 /*
  * Implements itg_get_global_credits().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
  */
 function itg_get_global_credits($uid, $property, $sso_id = NULL) {
   global $user;
@@ -399,6 +399,9 @@ function itg_get_global_credits($uid, $property, $sso_id = NULL) {
 
 /*
  * Implements itg_get_badge_credits().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
  */
 function itg_get_badge_credits($uid, $property, $sso_id = NULL) {
   global $user;
@@ -422,9 +425,11 @@ function itg_get_badge_credits($uid, $property, $sso_id = NULL) {
 }
 
 /**
- * Function which gives total earn point of user.
+ * Implements itg_global_loyalty_reward_get_total_earn_point().
  * @param int $uid
+ * @param string $type
  * @param string $property
+ * @param string $task
  * @return int
  */
 function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property = NULL, $task = NULL) {
@@ -449,8 +454,8 @@ function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property =
 }
 
 /**
- * Function which gives total earn point of user.
- * @param int $uid
+ * Implements itg_global_loyalty_get_point_activity().
+ * @param string $activityname
  * @param string $property
  * @return int
  */
