@@ -443,9 +443,14 @@ function itg_octopus_api_schema() {
         'length' => '255',
         'null' => TRUE,
       ),
-      
       'hyperlink' => array(
         'description' => 'Notificaton message hyperlink',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'query_string' => array(
+        'description' => 'Notificaton message query_string',
         'type' => 'varchar',
         'length' => '255',
         'null' => TRUE,
