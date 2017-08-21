@@ -770,3 +770,16 @@ function is_not_future_node($nid) {
   }
   return empty($results) ? FALSE : TRUE;
 }
+
+/**
+ * Get all parent of term.
+ */
+function _get_all_parent_terms($tid) {
+  $parents = array_reverse(taxonomy_get_parents_all($tid));
+  $top_parents = array();
+  foreach($parents as $parent) {
+      $top_parents['tid'][] = $parent->tid;
+      $top_parents['title'][] = $parent->name;
+  }
+  return $top_parents;
+}
