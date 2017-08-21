@@ -239,7 +239,8 @@ function itg_octopus_api_rundown_listing() {
 
   drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
-
+ 
+  
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
@@ -318,14 +319,14 @@ function itg_octopus_api_rundown_listing() {
     $query->condition('ios.category', $category_data, 'IN');
   }
 
-  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
 
-  if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
+  if (isset($start_date) && !empty($start_date)) { // start date
     $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
   }
 
-  if (isset($_GET['end_date']) && !empty($_GET['end_date'])) { // end date
+  if (isset($end_date) && !empty($end_date)) { // end date
     $query->condition('ios.story_modified_timestamp', strtotime($end_date), '<=');
   }
 
@@ -352,7 +353,6 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Location')),
     array('data' => t('Actions')),
   );
-
 
   foreach ($result as $row) {
     $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
