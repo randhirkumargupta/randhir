@@ -72,7 +72,7 @@ function itg_octopus_api_rundown() {
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
       // p($rundown_xml->rundown->slugs->slug);
-      foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
+      foreach ($rundown_xml->rundown->slugs->slug as $slug_key => $slug) {
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
           $story_id = (int) $slug->storyId;
@@ -82,8 +82,13 @@ function itg_octopus_api_rundown() {
           // Adding Octopus Log 
           $msg = '';
           $hyperlink = 'rundown-listing';
+          $query_string = array(
+            'parm' => array('rundowntype' => $key),
+          );
+          $query_string_json = json_encode($query_string);
+
           $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
-          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, REQUEST_TIME, 1);
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, $query_string_json, REQUEST_TIME, 1);
 
           // End Adding Octopus Log
           // Sending mail to Octopus user where 
@@ -298,8 +303,10 @@ function itg_octopus_api_rundown_listing() {
     $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
-  if (empty($current_rundown))
+  if (empty($current_rundown)) {
     $current_rundown = 'current';
+  }
+
 
   $query = db_select('itg_rundown', 'rund')->extend('PagerDefault')->limit(50);
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');

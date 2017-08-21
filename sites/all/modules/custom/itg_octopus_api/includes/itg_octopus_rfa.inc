@@ -26,7 +26,7 @@ function itg_rfa_file_live_blog() {
       $msg = '';
       $hyperlink = 'rfa-dashboard';
       $msg = '[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]';
-      itg_octopus_add_notification('RFA', $msg, $hyperlink, REQUEST_TIME, 1);
+      itg_octopus_add_notification('RFA', $msg, $hyperlink,'', REQUEST_TIME, 1);
 
       if ($action == 'UPDATE') {
         itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);
@@ -140,12 +140,12 @@ function itg_octopus_api_rfa_dashboard() {
 
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
 
-       drupal_add_js("jQuery(document).ready(function(){
+  drupal_add_js("jQuery(document).ready(function(){
 jQuery('#itg-octopus-api-rfa-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
 jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
 });", array('type' => 'inline', 'scope' => 'footer'));
-  
-  
+
+
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
