@@ -53,9 +53,9 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         <div class="total-points">
             <span class="total-point-value">
                 <?php print t('TOTAL POINTS'); ?>
-                <span><?php print $data['badge_detail']['total']; ?></span>
+                <span><?php print $data['badge_detail']['global_point']; ?></span>
             </span>
-          <?php print render($data['badge_detail']['badge_icon']); ?>
+          <?php print render($data['badge_detail']['badge_icon']); ?><span style="display:none"><?php print $data['badge_detail']['total'];?></span>
         </div>
         
         <!-- Progress bar logic -->

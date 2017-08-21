@@ -43,7 +43,26 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
       'points' => $node->field_lrp_loyalty_points['und'][0]['value'],
     );
     // Check if user has valid points to redeem product.
-    $remaining_point = itg_loyalty_reward_remaining_point($user->uid);
+    //$remaining_point = itg_loyalty_reward_remaining_point($user->uid);
+    if (function_exists('itg_global_loyality_get_sso_id')) {
+      $sso_id = itg_global_loyality_get_sso_id($user->uid);
+    }
+    if (!empty(variable_get('property_name'))) {
+      $property = variable_get('property_name');
+    }
+    $remaining_previous_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+    $cart_point = '';
+    if(function_exists('itg_get_total_cart_point')) {
+      $cart_point = itg_get_total_cart_point($user->uid);
+    }
+   
+    if(!empty($cart_point->cart_point)) {
+      watchdog('cart_total_point', $cart_point->cart_point);
+      $remaining_point = $remaining_previous_point - $cart_point->cart_point;
+    } else {
+      $remaining_point = $remaining_previous_point;
+    }
+    
     if ($remaining_point < $node_info_array['points'] && $action == 'buy-now') {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto('product');
@@ -236,9 +255,19 @@ function itg_loyalty_reward_cart() {
   drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
   $data = _get_cart_full_details($user->uid);
-  $remain_point = itg_loyalty_reward_remaining_point($user->uid);
-
-  return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $remain_point));
+  //$remain_point = itg_loyalty_reward_remaining_point($user->uid);
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  $remain_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+  if (function_exists('itg_get_total_cart_point')) {
+    $cart_point = itg_get_total_cart_point($user->uid);
+  }
+  $final_point = $remain_point - $cart_point->cart_point;
+  return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $final_point));
 }
 
 /**
@@ -388,9 +417,19 @@ function itg_loyalty_reward_order_summary() {
   $data['user_detail']['mail'] = $user_detail->mail;
   $data['user_detail']['address'] = $user_detail->field_short_description['und'][0]['value'];
   $data['user_detail']['pincode'] = $user_detail->field_user_pincode['und'][0]['value'];
-  $remain_point = itg_loyalty_reward_remaining_point($user->uid);
-  
-  return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));
+  //$remain_point = itg_loyalty_reward_remaining_point($user->uid);
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  $remain_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+  if (function_exists('itg_get_total_cart_point')) {
+    $cart_point = itg_get_total_cart_point($user->uid);
+  }
+  $final_point = $remain_point - $cart_point->cart_point;
+  return theme('cart_order_summary', array('data' => $data, 'remain_point' => $final_point));
 }
 
 /**
