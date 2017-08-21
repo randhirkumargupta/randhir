@@ -2591,8 +2591,14 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  /* Field: Photo Gallery Title: Photo Gallery Title */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'itg_photogallery';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['label'] = 'Title';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';

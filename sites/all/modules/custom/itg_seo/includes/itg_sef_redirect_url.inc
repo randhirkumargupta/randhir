@@ -28,6 +28,11 @@ function itg_common_custompath_insert_load($node) {
       $published_date = date('Y-m-d', $node->created);
     } else if ($node->workbench_moderation_state_new == 'published') {
       $published_date = date('Y-m-d', $node->changed);
+      // Add future date.
+      $data = publised_date_for_video_story($node);
+      if($data['flag']) {
+        $published_date = date('Y-m-d', $data['timestamp']);
+      }
     }
   } else {
     if ($node->status == 0) {
@@ -133,6 +138,23 @@ function itg_common_custompath_insert_load($node) {
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
+}
+
+function publised_date_for_video_story($node) {
+  $data['flag'] = FALSE;
+  if ($node->type == 'story' || $node->type == 'videogallery') {
+    $date_time = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    $current_time = time();
+    // This is future story / videogallery
+    if ($date_time > $current_time) {
+      // So we need to pass future date_time
+      $data['flag'] = TRUE;
+      $data['timestamp'] = $date_time;
+    } else {
+      $data['flag'] = FALSE;
+    }
+  }
+  return $data;
 }
 
 /**
@@ -284,7 +306,7 @@ function is_podcast($node) {
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
-function itg_common_custompath_migrated_load($node, $val=NULL) {
+function itg_common_custompath_migrated_load($node, $val = NULL) {
   if (!empty($node->path['alias'])) {
     $node_sef = $node->path['alias'];
   } else {

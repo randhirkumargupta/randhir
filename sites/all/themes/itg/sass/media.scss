@@ -433,6 +433,19 @@
     font-size: 11px;
   }
   /*search page css end */
+  
+  /* Scroll bar css */
+  ::-webkit-scrollbar{
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa;
+  }
 }   
 
 

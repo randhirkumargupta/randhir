@@ -698,15 +698,29 @@ function itg_newsletter_check_existence_frequency($frequency , $newsletter_conte
  * Used on newsletter form
  */
 function itg_newsletter_content_data() {
-  $node = node_load($_POST['content_id']);
-  if ($node->type == 'story') {
-    $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+
+  $getnid = $_POST['content_id'];
+  if (isset($getnid) && !empty($getnid)) {
+    $query = db_select('node', 'n');
+    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.nid', $getnid, '=');
+    $query->condition('mnh.state', 'published', '=');
+    $result = $query->execute();
+    $record_nid = $result->rowCount();
+    $record_nid = $result->fetchField();
+    if (!empty($record_nid)) {
+      $node = node_load($record_nid);
+      if ($node->type == 'story') {
+        $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      } else {
+        $kicker = '';
+      }
+      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
+      exit;
+    } 
   }
-  else {
-    $kicker = '';
-  }
-  echo drupal_json_encode(array('title' => $node->title , 'kicker' => $kicker , 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
-  exit;
 }
 
 /**
