@@ -1026,7 +1026,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if ($_GET['category_tid'] == 0) {
         drupal_add_css(".messages--error {display:none}", "inline");
       }
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
       );
@@ -1036,7 +1036,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       
        case 'views-exposed-form-bitrates-videos-page':
       
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'bitrates-videos', array("attributes" => array("class" => array("button")))),
       );
@@ -1044,7 +1044,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       break;
     case 'views-exposed-form-state-manager-page':
 
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
       );
