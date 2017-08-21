@@ -177,7 +177,7 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
-    $xml .= '<generator>'.t('FeedCreator 1.7.2').'</generator>' . "\r\n";
+    $xml .= '<generator>' . t('FeedCreator 1.7.2') . '</generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
@@ -259,7 +259,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     $xml .= '<description><![CDATA[' . t('India Today') . ' ]]></description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate><![CDATA[ ' . gmdate('D, d M Y H:i:s T', time()) . ' ]]></lastBuildDate>' . "\r\n";
-    $xml .= '<generator><![CDATA[ '.t('FeedCreator 1.7.2').' ]]></generator>' . "\r\n";
+    $xml .= '<generator><![CDATA[ ' . t('FeedCreator 1.7.2') . ' ]]></generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url> <![CDATA[ ' . theme_get_setting('logo', 'itg') . ' ]]></url>' . "\r\n";
     if (!empty($section_tid)) {
@@ -325,11 +325,15 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $xml = '<?xml version="1.0" encoding="UTF-8" ?>';
     $xml .= '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">';
     $xml .= '<channel>';
-    $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
+    if (!empty($section_tid)) {
+      $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' | ' . get_term_name_from_tid($section_tid)->name . ']]></title>' . "\r\n";
+    } else {
+      $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
+    }
     $xml .= '<description><![CDATA[ ' . t('India Today') . ' ]]></description>' . "\r\n";
     $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate><![CDATA[ ' . gmdate('D, d M Y H:i:s T', time()) . ' ]]></lastBuildDate>' . "\r\n";
-    $xml .= '<generator><![CDATA[ '.t('FeedCreator 1.7.2').' ]]></generator>' . "\r\n";
+    $xml .= '<generator><![CDATA[ ' . t('FeedCreator 1.7.2') . ' ]]></generator>' . "\r\n";
     $xml .= '<image>';
     $xml .= '<url> <![CDATA[ ' . theme_get_setting('logo', 'itg') . ' ]]></url>' . "\r\n";
     $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
@@ -385,7 +389,7 @@ function itg_sitemap_print_section_rss($result) {
         $db_date = $data['created'];
       }
       $published_date = gmdate('D, d M Y H:i:s T', strtotime($db_date));
-      if (date('Y' , strtotime($published_date)) == '1970') {
+      if (date('Y', strtotime($published_date)) == '1970') {
         $published_date = date('D, d M Y H:i:s', strtotime($data['created']));
       }
       $xml .= '<title> <![CDATA[ ' . html_entity_decode($node_title) . ' ]]></title>' . "\r\n";
@@ -414,7 +418,7 @@ function itg_sitemap_print_section_rss($result) {
         $xml .= '<media:content type="video/quicktime" expression="full" url="' . $node_link . '">' . "\r\n";
         $xml .= '<media:category scheme="' . $node_link . '">' . get_term_name_from_tid_for_report(itg_widget_get_primary_cat($data['nid'], 1)) . '</media:category>' . "\r\n";
         $xml .= '<media:text type="plain"><![CDATA[ ' . check_plain($node_title) . ' ]]></media:text>' . "\r\n";
-        $xml .= '<media:rating scheme="urn:simple">'.t('nonadult').'</media:rating>' . "\r\n";
+        $xml .= '<media:rating scheme="urn:simple">' . t('nonadult') . '</media:rating>' . "\r\n";
         $xml .= '<media:thumbnail width="107" height="82" url="' . $node_extra_small_image_url . '"/>' . "\r\n";
         $xml .= '</media:content>' . "\r\n";
       }

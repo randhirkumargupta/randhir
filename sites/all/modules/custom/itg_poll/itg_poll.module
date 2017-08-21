@@ -118,11 +118,27 @@ function itg_poll_after_build($form , &$form_state) {
   }
   //poll disable after create
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $poll_node = node_load(arg(1));
     $result = itg_poll_getTotalPoll(arg(1));
+    $field_poll_answer_option = $poll_node->field_poll_answer_option[LANGUAGE_NONE][0]['value'];
+    
+    foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
+       if (is_numeric($key)) {
+         // 1 stands for text
+          if($field_poll_answer_option == '1') {
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_poll_answer_image']['#prefix'] = '<div class="hide">';
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_poll_answer_image']['#suffix'] = '</div>';
+          }
+       }
+    }
+    
+    
     if ($result > 0) {
       foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
         if (is_numeric($key)) {
           $form['field_poll_answer'][LANGUAGE_NONE][$key]['remove_button']['#access'] = FALSE;
+          // 1 is for text
+          
         }
       }
       $form['field_poll_answer'][LANGUAGE_NONE]['add_more']['#access'] = FALSE; // Disable Add more button
