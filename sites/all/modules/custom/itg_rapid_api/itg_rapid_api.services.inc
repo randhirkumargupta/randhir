@@ -3554,12 +3554,35 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
     $message_array['data'] = array();
   }
 
-  if (!is_numeric($poll_id)) {
-    $poll_id = 0;
-  }
+  $node_load = node_load($poll_id);
 
-  if (!is_numeric($device_id)) {
-    $user_id = 0;
+  if (!$node_load) {
+    $args = '0';
+    $message_array['status_code'] = '0';
+    $message_array['status_message'] = "This is not a valid poll id";
+    $message_array['data'] = array();
+  }
+  else {
+    if ($node_load->type != 'poll') {
+      $args = '0';
+      $message_array['status_code'] = '0';
+      $message_array['status_message'] = "This is not a valid poll id";
+      $message_array['data'] = array();
+    }
+    else {
+      if ($option_id != '') {
+        $polls = array();
+        foreach ($node_load->field_poll_answer['und'] as $data) {
+          $polls[] = $data['value'];
+        }
+        if (!in_array($option_id, $polls)) {
+          $args = '0';
+          $message_array['status_code'] = '0';
+          $message_array['status_message'] = "Option id does not match with poll id";
+          $message_array['data'] = array();
+        }
+      }
+    }
   }
 
   // check args
