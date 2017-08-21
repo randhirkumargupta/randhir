@@ -639,7 +639,7 @@ function itg_image_croping_crop_image() {
     $image_name = time();
   }
   $image_width = $img_dim[$content_type_new][$image_fields]['width'];
-      $image_height = $img_dim[$content_type_new][$image_fields]['height'];
+  $image_height = $img_dim[$content_type_new][$image_fields]['height'];
   $image_name = $image_name . rand(111, 999);
   $extendata = substr($image_data_url, 5, strpos($image_data_url, ';') - 5);
   $extention = end(explode('/', $extendata));

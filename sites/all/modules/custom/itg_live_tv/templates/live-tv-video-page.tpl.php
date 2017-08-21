@@ -21,7 +21,6 @@ if (function_exists('mobile_user_agent_switch')) {
 }
 if (function_exists('itg_live_tv_company')) {
   $device = itg_live_tv_company($current_device);
-
   $live_tv_get_details = itg_get_live_tv_code($device[0], $field_name);
 }
 ?>
