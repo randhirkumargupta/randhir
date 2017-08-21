@@ -1,5 +1,7 @@
 <?php
 
+module_load_include('inc', 'itg_photogallery', 'includes/views_handler_itg_photogallery');
+
 /**
  * @file
  * Module file for ITG Photo Gallery functionality.
@@ -827,4 +829,23 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
 
 
   return $element;
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_photogallery_views_data() {
+  $data['itg_photogallery']['table']['group'] = t('Photo Gallery Title');
+  $data['itg_photogallery']['table']['join'] = array(
+    // #global is a special flag which let's a table appear all the time.
+    '#global' => array(),
+  );
+  $data['itg_photogallery']['custom_handler'] = array(
+    'title' => t('Photo Gallery Title'),
+    'help' => t('Photo Gallery Title'),
+    'field' => array(
+      'handler' => 'views_handler_itg_photogallery',
+    ),
+  );
+  return $data;
 }
