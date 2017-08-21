@@ -239,8 +239,8 @@ function itg_octopus_api_rundown_listing() {
 
   drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
- 
-  
+
+
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
@@ -367,6 +367,7 @@ function itg_octopus_api_rundown_listing() {
     else {
       $background_color = 'bg-none';
     }
+
     $rows[] = array(
       array('data' => $sn++),
       array('data' => $row->storyid),
@@ -375,7 +376,7 @@ function itg_octopus_api_rundown_listing() {
       array('data' => $row->story_created_by),
       array('data' => $row->story_modified_by),
       array('data' => date('d/m/Y - H:i:s', strtotime($row->story_created))),
-      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified))),
+      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified)), 'class' => $background_color),
       array('data' => $row->location),
       array('data' => $link),
     );
