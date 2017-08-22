@@ -67,6 +67,8 @@ function author_latest_storylist($author_id,$cpageno) {
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->leftJoin('field_data_field_story_rating', 'sr', 'sr.entity_id = n.nid');
 
     $query->fields('n', array('nid', 'title', 'type', 'created','changed'));
@@ -74,6 +76,7 @@ function author_latest_storylist($author_id,$cpageno) {
     $query->fields('sk', array('field_story_kicker_text_value'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
+    $query->fields('eli',array('field_story_extra_large_image_fid'));
 
     $query->fields('si_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -105,6 +108,8 @@ function author_latest_storylist($author_id,$cpageno) {
 
         $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
         $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+        $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
+        
         $term_id = $res['tid'];
         $term_name = $res['name'];
 
@@ -129,6 +134,7 @@ function author_latest_storylist($author_id,$cpageno) {
         $news['n_view_count'] = "$n_view_count";
         $news['n_small_image'] = "$file_small_img_url";
         $news['n_large_image'] = "$file_large_img_url";
+        $news['n_extralarge_image'] = "$file_extra_large_img_url";
         $news['n_updated_datetime'] = "$changed_datetime";
         $news2[] = $news;
     }
@@ -186,14 +192,16 @@ function author_popular_storylist($author_id,$cpageno) {
         $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
         $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
         $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+        $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+        $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
         $query->leftJoin('field_data_field_story_rating', 'sr', 'sr.entity_id = n.nid');
-        //$query->leftJoin('itg_lrp_loyalty_points', 'lp', 'lp.node_id = n.nid');
-
+        
         $query->fields('n', array('nid', 'title', 'type', 'created','changed'));
         $query->fields('td', array('tid', 'name'));
         $query->fields('sk', array('field_story_kicker_text_value'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('li', array('field_story_large_image_fid'));
+        $query->fields('eli',array('field_story_extra_large_image_fid'));
 
         $query->fields('si_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -211,6 +219,8 @@ function author_popular_storylist($author_id,$cpageno) {
             $changed = $res['changed'];
             $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
             $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+            $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
+            
             $node_id = $res['nid'];
             $node_type = $res['type'];
             $node_title = $res['title'];
@@ -239,6 +249,7 @@ function author_popular_storylist($author_id,$cpageno) {
             $news['n_view_count'] = "$n_view_count";
             $news['n_small_image'] = "$file_small_img_url";
             $news['n_large_image'] = "$file_large_img_url";
+            $news['p_extralarge_image'] = "$file_extra_large_img_url";
             $news['n_updated_datetime'] = "$changed_datetime";
             $news2[] = $news;
         }
@@ -507,6 +518,8 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+   $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
    $query->leftJoin('field_data_field_video_upload', 'veo', 'veo.entity_id = n.nid');
    $query->leftJoin('field_data_field_video_duration', 've_du', 've_du.entity_id = n.nid');
    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
@@ -517,6 +530,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
    $query->fields('av', array('field_video_anchor_target_id'));
    $query->fields('si', array('field_story_small_image_fid'));
    $query->fields('li', array('field_story_large_image_fid'));
+   $query->fields('eli',array('field_story_extra_large_image_fid'));
    $query->fields('veo', array('field_video_upload_value'));
    $query->fields('ve_du', array('field_video_duration_value'));
    $query->fields('fsr', array('field_story_reporter_target_id'));
@@ -542,6 +556,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
 
      $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
      $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+     $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
 
      // get byline and credit
      $field_story_reporter_target_id = $res['field_story_reporter_target_id'];
@@ -584,6 +599,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_short_desc'] = "$video_desc";
      $prog['p_small_image'] = $file_small_img_url;
      $prog['p_large_image'] = $file_large_img_url;
+     $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
      if (!empty($videotag['dailymotion'])) {
        $prog['p_is_default_player'] = "1";
@@ -654,30 +670,26 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
   foreach ($popular_res as $pop_res_k => $pop_res_v) {
      
    $query = db_select('node', 'n');
-//   $query->leftJoin('field_data_field_video_anchor', 'av', 'av.entity_id = n.nid');
-   //$query->leftJoin('field_data_field_video_upload', 'vu', 'vu.entity_id = n.nid');
    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id = n.nid');
    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-   //$query->leftJoin('field_data_field_video_upload', 'veo', 'veo.entity_id = n.nid');
+   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+   $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
    $query->leftJoin('field_data_field_video_duration', 've_du', 've_du.entity_id = n.nid');
    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-   //$query->leftJoin('itg_lrp_loyalty_points', 'lp', 'lp.node_id = n.nid');
    $query->leftJoin('field_data_field_story_source_type','st','st.entity_id = n.nid');
 
    $query->fields('n', array('nid', 'title', 'type', 'created', 'changed'));
    $query->fields('st',array('field_story_source_type_value'));
-  //$query->fields('av', array('field_video_anchor_target_id'));
    $query->fields('si', array('field_story_small_image_fid'));
    $query->fields('li', array('field_story_large_image_fid'));
-   //$query->fields('veo', array('field_video_upload_value'));
+   $query->fields('eli',array('field_story_extra_large_image_fid'));
    $query->fields('ve_du', array('field_video_duration_value'));
    $query->fields('fsr', array('field_story_reporter_target_id'));
    $query->fields('fpc', array('field_primary_category_value'));
-   //$query->fields('lp', array('loyalty_points'));
-   //$query->addExpression('SUM(lp.loyalty_points)', 'total_points');
+   
 
    $query->condition('n.nid', $pop_res_k);
    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -693,6 +705,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
 
      $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
      $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+     $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
 
      // get byline and credit
      $field_story_reporter_target_id = $res['field_story_reporter_target_id'];
@@ -734,6 +747,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_short_desc'] = "$video_desc";
      $prog['p_small_image'] = $file_small_img_url;
      $prog['p_large_image'] = $file_large_img_url;
+     $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
      if (!empty($videotag['dailymotion'])) {
        $prog['p_is_default_player'] = "1";

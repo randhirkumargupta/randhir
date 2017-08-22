@@ -131,6 +131,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
+    $query->fields('eli',array('field_story_extra_large_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
@@ -171,6 +172,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+      $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -188,18 +190,7 @@ function generateVideoCategoryList($tid, $pageno) {
       // return all the video details
       $source_type = $resvalue['field_story_source_type_value'];
       $videotag = video_detail_formats($resvalue['nid'], $source_type);
-      //      print_r($videotag);
-      //      exit();
-      //$video_formats = all_video_format($video_formats);
-      // $dm_video_id = fid_videoid($daily_motion_fid);
-      //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-      //      $video_path_mp4 = $video_formats['video_path_mp4'];
-      //      if(!$video_path_mp4){
-      //          $video_path_mp4 = $video_path_info['video_path_mp4'];
-      //      }
-      //$filesize = $video_path_info['filesize'];
-      //$stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
-      //video url end
+
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
 
@@ -225,6 +216,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['v_short_desc'] = "$field_story_kicker_text_value";
       $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
+      $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
       //if($video_path_mp4){
       if (!empty($videotag['dailymotion'])) { // migrated video
         $photo_list_array[$listcount]['v_is_default_player'] = "1";
@@ -403,6 +395,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
+    $query->fields('eli',array('field_story_extra_large_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
@@ -440,6 +433,7 @@ function generateProgramCategoryList($tid, $pageno) {
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+      $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -482,7 +476,8 @@ function generateProgramCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['p_short_desc'] = "$field_story_kicker_text_value";
       $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
-
+      $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
+      
       //if($video_path_mp4){
       if (!empty($videotag['dailymotion'])) {
         $photo_list_array[$listcount]['p_is_default_player'] = "1";

@@ -124,6 +124,7 @@ function generatePhotoCategoryList($tid, $pageno) {
         $query->fields('li', array('field_story_large_image_fid'));
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
+        $query->fields('eli',array('field_story_extra_large_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
 
         $query->fields('kt', array('field_story_kicker_text_value'));
@@ -139,6 +140,7 @@ function generatePhotoCategoryList($tid, $pageno) {
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
 
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
@@ -162,6 +164,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
             $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
             $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+            $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -190,6 +193,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             $photo_list_array[$loop_count]['p_title'] = "$title";
             $photo_list_array[$loop_count]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$loop_count]['p_large_image'] = "$file_large_img_url";
+            $photo_list_array[$loop_count]['p_extralarge_image'] = "$file_extra_large_img_url";
             $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
             $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
             $photo_list_array[$loop_count]['p_share_link'] = "$firebase_url";
