@@ -505,7 +505,7 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
         $flag = 1;
 
     }
-   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference");
+   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image");
    if(arg(0) == "appapi" && count(arg()) == 2 ){
        if(!in_array(arg(1), $post_res)){
             $result = $path."/it";
