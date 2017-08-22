@@ -604,7 +604,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      if (!empty($videotag['dailymotion'])) {
        $prog['p_is_default_player'] = "1";
        $prog['p_url'] = $videotag['dailymotion']['video_id'];
-       $prog['p_download_url'] = "";
+       $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
      }elseif(!empty($videotag['migrated'])){
        $prog['p_is_default_player'] = "0";
        $prog['p_url'] = "";
@@ -752,7 +752,7 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      if (!empty($videotag['dailymotion'])) {
        $prog['p_is_default_player'] = "1";
        $prog['p_url'] = $videotag['dailymotion']['video_id'];
-       $prog['p_download_url'] = "";
+       $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
      }elseif(!empty($videotag['migrated'])){
        $prog['p_is_default_player'] = "0";
        $prog['p_url'] = "";
