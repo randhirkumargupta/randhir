@@ -1531,7 +1531,7 @@ function itg_rapid_api_resource() {
         // edit_user_image custom resource declaration.....
         'edit_user_image' => array(
             'operations' => array(
-                'retrieve' => array(
+                'create' => array(
                     'help' => 'Retrieves edit_user_image schemes info.',
                     'file' => array(
                         'type' => 'inc',
@@ -1543,37 +1543,40 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'authtoken_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'authtoken_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'profile_image',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'profile_image',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -3704,10 +3707,56 @@ function itg_rapid_api_edit_profile($token) {
  *
  */
 function itg_rapid_api_edit_user_image($token) {
-    echo "<pre>";
-    print_r($_GET);
-    echo "</pre>";
-    exit();
+    $HTTP_RAW_POST_DATA;
+    $data = array();
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $authtoken_id = $token = $params['authtoken_id'];
+    //p($params);die();
+    if (!drupal_valid_token($token, 'services')) {
+        $data['status_code'] = "0";
+        $data['status_message'] = "invalid token";
+    } else {
+        global $user;
+        $user_id = $params['user_id'];
+        $profile_image = $params['profile_image'];
+        $user_detail = user_load_by_name($user_id);
+        $uid = $user_detail->uid;
+
+        // call sso server api
+        $method = "GET";
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_user_image";
+        $result = callAPI($method, $url, $params);
+
+        // check mime-type
+        $profile_img = base64_decode($profile_image);
+        $f = finfo_open();
+        $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
+        $mime_type_ar = explode("/", $mime_type);
+        $mime_type_ext = $mime_type_ar[1];
+
+
+        //echo  mime_content_type ($profile_image );die();
+        $profile_img_tmp = '/tmp/profileimage_' . $uid . "." . $mime_type_ext;
+
+        // crate profile img tmp file
+        file_put_contents($profile_img_tmp, $profile_img);
+
+        // Update profile pic
+        if (!empty($inputs['profile_pic'])) {
+            $user_detail->field_user_picture['und'][0]['fid'] = $profile_img_tmp;
+        }
+
+        // Save user object.
+        $resp = user_save($user_detail);
+        if ($resp->uid) {
+            $data['status_code'] = "1";
+            $data['status_message'] = "";
+        } else {
+            $data['status_code'] = "0";
+            $data['status_message'] = "Technical Error.";
+        }
+    }
+    return $data;
 }
 
 /**
