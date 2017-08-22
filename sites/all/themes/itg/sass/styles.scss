@@ -8863,7 +8863,7 @@ section.sidebar{
         #map-state{
             position: absolute;
             right: 0;
-            top: 0;
+            top: -16px;
             height: 20px;
             line-height: 20px;
             padding: 0;
@@ -12043,6 +12043,14 @@ span.see-picture{
   -ms-user-select: auto;
   user-select: auto !important;
 }
+.yearende_left_top_news{
+  h4.heading{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
