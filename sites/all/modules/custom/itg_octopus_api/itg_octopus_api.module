@@ -196,6 +196,28 @@ function itg_octopus_api_theme($existing, $type, $theme, $path) {
 function itg_octopus_api_form($form, &$form_state) {
   $form = array();
 
+  $current_rundown = '';
+  if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
+    $current_rundown = 'current';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
+    $current_rundown = 'next1';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
+    $current_rundown = 'next2';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'previous') {
+    $current_rundown = 'previous';
+  }
+
+  if (empty($current_rundown)) {
+    $current_rundown = 'current';
+  }
+
+
   $form['category'] = array(
     '#type' => 'textfield',
     '#title' => t('Category'),
@@ -265,14 +287,12 @@ function itg_octopus_api_form($form, &$form_state) {
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
 
-
-
   $form['submit'] = array(
     '#value' => 'Apply',
     '#type' => 'submit',
     '#attributes' => array('class' => array('octopus-apply btn-small')),
     '#prefix' => '<div class = "octopus-filter-btn">',
-    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing">Reset</a></div>',
+    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing?rundowntype=' . $current_rundown . '">Reset</a></div>',
     '#weight' => 7,
   );
   return $form;
@@ -514,7 +534,7 @@ function itg_octopus_get_slug_notification() {
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
   $read_o_ids = itg_octopus_get_slug_notif_read_data($user_last_login, $user->uid);
   $query = db_select('itg_octopus_notification', 'ios');
-  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink'));
+  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink','query_string'));
   $query->condition('ios.time', (int) $user_last_login, '>=');
   if (!empty($read_o_ids)) {
     $query->condition('ios.id', $read_o_ids, 'NOT IN');
@@ -525,7 +545,12 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l($chunk->msg, $chunk->hyperlink, array('query' => array('onotify' => base64_encode($chunk->id)))) . '</li>';
+    $hyperlink = $chunk->hyperlink;
+    if (isset($chunk->query_string) && !empty($chunk->query_string)) {
+       $query_array = (array) json_decode($chunk->query_string)->parm;
+    }
+    $query_array['onotify'] = base64_encode($chunk->id);
+    $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
     ++$count;
   }
 
@@ -678,14 +703,15 @@ function itg_octopus_api_is_url_exist($url) {
  * @param type $url
  * @return boolean
  */
-function itg_octopus_add_notification($type, $msg, $hyperlink, $time, $status) {
+function itg_octopus_add_notification($type, $msg, $hyperlink, $query_string, $time, $status) {
 
   try {
-    $nid = db_insert('itg_octopus_notification')
+    $qry = db_insert('itg_octopus_notification')
         ->fields(array(
           'type' => $type,
           'msg' => $msg,
           'hyperlink' => $hyperlink,
+          'query_string' => $query_string,
           'time' => $time,
           'status' => $status,
           'read_by' => 1,
