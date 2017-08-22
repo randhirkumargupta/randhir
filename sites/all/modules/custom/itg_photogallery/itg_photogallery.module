@@ -575,7 +575,7 @@ function itg_photogallery_block_info() {
     'info' => t('Photo landing page menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['photogallery_link_menu_video'] = array(
+  $blocks['photogallery_link_menu_block'] = array(
     'info' => t('PhotoGallery Section menu block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -598,7 +598,7 @@ function itg_photogallery_block_view($delta = '') {
     case 'photo_menu_landing_block':
       $block['content'] = theme('Photo_landing_menu_block', array('data' => $data));
       break;
-    case 'photogallery_link_menu_video':
+    case 'photogallery_link_menu_block':
       if ( arg(0) == 'node' && is_numeric(arg(1)) && ! arg(2) ) {
         $node = node_load(arg(1));
         if($node->type == 'photogallery'){

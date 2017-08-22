@@ -14,7 +14,7 @@
 ?>
 
 <style>
-	#block-itg-videogallery-videogallery-link-menu-video ul{
+	#block-itg-photogallery-photogallery-link-menu-block ul{
 		list-style: none;
 		white-space: nowrap;
 		display: inline-block;
@@ -23,14 +23,14 @@
 		border-bottom: 1px solid #d9d9d9;
 		overflow: auto;
 	}
-	#block-itg-videogallery-videogallery-link-menu-video ul li{
+	#block-itg-photogallery-photogallery-link-menu-block ul li{
 	    display: inline-block;
 		vertical-align: top;
 		border-right: 0;
 		text-transform: uppercase;
 		padding-right: 30px;
 	}
-	#block-itg-videogallery-videogallery-link-menu-video ul li a{
+	#block-itg-photogallery-photogallery-link-menu-block ul li a{
 		display: block;
 		margin: 0;
 		padding: 10px 5px 3px;
@@ -39,7 +39,7 @@
 		font-weight: 500;
 		color: #969696;
 	}
-	#block-itg-videogallery-videogallery-link-menu-video{
+	#block-itg-photogallery-photogallery-link-menu-block{
 		    margin-top: 22px;
 	}
 </style>
