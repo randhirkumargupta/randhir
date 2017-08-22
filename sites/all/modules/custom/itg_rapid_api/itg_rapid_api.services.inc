@@ -2927,6 +2927,8 @@ function itg_rapid_api_homePage($token) {
 
 function itg_rapid_api_testing($token) {
     // code for check POST method only start   
+    $user = user_load_by_name("rakesh1234@mailinator.com");
+    p($user); die();
     $req_mth_flag = checkReqMethod();
     if ($req_mth_flag == 0 || $req_mth_flag == "0") {
         $data['status_code'] = "0";
