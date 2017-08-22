@@ -243,3 +243,44 @@ function itg_user_activity_front_highlight() {
     }
   }
 }
+
+/**
+ * function for follow and unfollow
+ * @param string $follow_title
+ * @param string $unfollow_title
+ * @param int $nid
+ * @param string $source_type
+ * @param string $activity
+ * @param string $class
+ * @param string $type
+ *
+ * @return string
+ */
+function itg_follow_unfollow($follow_title, $unfollow_title, $nid, $source_type,  $activity, $class, $type) {
+
+  $data = array('follow_title' => $follow_title,
+                'unfollow_title' => $unfollow_title,
+                'nid' => $nid,
+                'source_type' => $source_type,
+                'activity' => $activity,
+                'class' => $class,
+                'type' => $type,
+                );
+
+  return theme('follow_unfollows', $data);
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_flag_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'follow_unfollows' => array(
+      'template' => 'itg-follow-unfollow-template',
+      'path' => drupal_get_path('module', 'itg_flag') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+  );
+  return $themes;
+}

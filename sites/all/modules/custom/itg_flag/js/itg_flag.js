@@ -171,19 +171,6 @@ jQuery(document).ready(function () {
                         title: 'Follow the Story'
                     }).html('Follow the Story');
                 }
-                 // case for follow anchor
-                if (obj.success == 1 && obj.activity == 'follow_anchor') {
-                    jQuery(".follow-anchor a").attr({
-                        'data-status': 0,
-                        title: 'Unfollow Anchor'
-                    }).html('Unfollow Anchor');
-                }
-                if (obj.success == 0 && obj.activity == 'follow_anchor') {
-                    jQuery(".follow-anchor a").attr({
-                        'data-status': 1,
-                        title: 'Follow the Anchor'
-                    }).html('Follow the Anchor');
-                }
                 if (obj.error == 'error') {
 
                 }
@@ -287,5 +274,53 @@ jQuery(document).ready(function () {
             }
             return true;
         });
+    });
+
+    // for follow / unfollow
+
+    // jquery for front user activity
+    jQuery('#follow-activity').click(function (event) {
+        var id = jQuery(this).attr('id');
+        var ftitle = jQuery(this).attr('data-ftitle');
+        var untitle = jQuery(this).attr('data-untitle');
+        var nd_id = jQuery(this).attr('data-rel');
+        var dtag = jQuery(this).attr('data-tag');
+        var dstatus = jQuery(this).attr('data-status');
+        var data_activity = jQuery(this).attr('data-activity');
+        var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity + "&dstatus=" + dstatus;
+        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+        if(jQuery(this).attr('data-activity') != 'undefined') {
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/user-activity-front-end',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
+
+                },
+                'success': function (result) {
+                    var obj = jQuery.parseJSON(result);
+
+                    // case for follow anchor
+                    if (obj.success == 1 && obj.activity == data_activity) {
+                        jQuery("#" + id).attr({
+                            'data-status': 0,
+                            title: untitle
+                        }).html(untitle);
+                    }
+                    if (obj.success == 0 && obj.activity == data_activity) {
+                        jQuery("#" + id).attr({
+                            'data-status': 1,
+                            title: ftitle
+                        }).html(ftitle);
+                    }
+                    if (obj.error == 'error') {
+
+                    }
+
+                }
+            });
+        }
     });
 });

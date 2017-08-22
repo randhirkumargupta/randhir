@@ -53,25 +53,11 @@ $uri = base64_encode($actual_link);
           </li>
         </ul>
       </div>
-      <div class="follow-social">
-          <?php $user->uid  = 615; if ($user->uid > 0) {
-            $follow_status = itg_get_front_activity_info($nid, '', $user->uid, 'follow_anchor', '');
-    
-           if (!empty($follow_status['nid']) && $follow_status['status'] == '1') { ?>  
-              <li class="mhide follow-anchor"><a title = "Unfollow Anchor" href="javascript:" id="user-activity" data-rel="<?php print $nid; ?>" data-tag="follow_anchor" data-activity="follow_anchor" data-status="0" class="def-cur-pointer">Unfollow Anchor</a></li>
-            <?php } else { ?>
-              <li class="mhide follow-anchor"><a title = "Follow the Anchor" href="javascript:" id="user-activity" data-rel="<?php print $nid; ?>" data-tag="follow_anchor" data-activity="follow_anchor" data-status="1" class="def-cur-pointer">Follow the Anchor</a></li>
-          <?php          }
-          } else {
-          ?>
-              <li class="mhide">
-                <a title="follow anchor" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>">
-                  <?php print t('follow anchor'); ?>
-                </a>
-              </li>
-          <?php } ?>
+   		
+   		<?php 
+  		print itg_follow_unfollow('Follow the Anchor','Unfollow Anchor',$nid, 'anchor', 'follow_anchor','follow-anchor','mobile');
+  		?>
 
-      </div>
     </div>
   </div>
 </div>
