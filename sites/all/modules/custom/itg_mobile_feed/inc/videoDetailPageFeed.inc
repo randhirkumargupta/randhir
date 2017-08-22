@@ -350,8 +350,9 @@ function getDailymotionPath($fid, $filename) {
     $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
     $video_format['videoparts_mp4'] = $video_path_mp4;
     $video_detail[$video_status]['bitate_url'] = $video_format;
-    //$output .= "<videoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $video_format['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $video_format['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $video_format['stream_h264_ld_url'] . "</part></videoparts_3gp>";
-  }
+    $dailymotion_download = dailymotion_download_video_uri($video_id);
+    $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
+    }
   elseif ($source_type == 'migrated') {
     $video_status = 'migrated';
     $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -367,3 +368,16 @@ function getDailymotionPath($fid, $filename) {
   }
   return $video_detail;
 }
+/**
+ * Get the dailymotion download video url
+ * @param type $video_id
+ * @return type
+ */
+function dailymotion_download_video_uri($video_id){
+  $query = db_select('field_data_field_bitrate_video_id','bvi');
+  $query->leftJoin('field_data_field_video_url','v_url','v_url.entity_id = bvi.entity_id');
+  $query->fields('v_url',array('field_video_url_value'));
+  $query->condition('bvi.field_bitrate_video_id_value',$video_id);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['field_video_url_value'];
+} 
