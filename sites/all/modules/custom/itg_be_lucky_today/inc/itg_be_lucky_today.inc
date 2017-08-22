@@ -17,7 +17,7 @@ function be_lucky_today_form($form, &$form_state) {
         $form_state['stage'] = 'be_lucky_home';
     $form = array();
     $form = be_lucky_today_get_header($form, $form_state);
-    $form['#prefix'] = '<div class="itg_be_lucky_today">';
+    $form['#prefix'] = '<div class="itg_be_lucky_today ' . $form_state['stage'] . '">';
     $form['#suffix'] = '</div>';
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/js/itg_be_lucky_today.js',
