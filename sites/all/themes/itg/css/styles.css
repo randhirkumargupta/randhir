@@ -11027,6 +11027,7 @@ div#playerContainer {
   height: 0;
   padding-bottom: 48.3%;
   position: relative;
+  display: table;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video iframe {
   width: 100%;
