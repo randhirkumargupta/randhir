@@ -283,7 +283,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <?php
                                               }
                                               ?>  
-                                              <select id="map-state" name="map_state">
+                                              
+
+                                              <div class="data-holder pos-rel" id="itg-block-5">
+                                                <select id="map-state" name="map_state">
 
                                                   <?php
                                                   $countf = 0;
@@ -305,8 +308,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
                                                   ?>
                                               </select>
-
-                                              <div class="data-holder pos-rel" id="itg-block-5">
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>

@@ -12201,7 +12201,19 @@ fieldset#edit-xmlsitemap{
   }
 }
 .form-field-name-field-newsl-newsletter-content .description { left:1024px !important;}
-.region-sidebar-second{
+.page-itg-layout-manager .region-sidebar-second{
+  .block-itg-layout-manager h2 + div{
+    height: 185px;
+    #autocomplete{
+      max-height: 110px;
+      overflow-y: auto;
+    }
+  }
+  #block-itg-layout-manager-layout-section-widgets{
+    .templates-widgets{max-height: 110px;}
+  }
+}
+.page-itg-layout-manager-home .region-sidebar-second{
   .block-itg-layout-manager h2 + div{
     height: 185px;
     #autocomplete{
