@@ -181,10 +181,10 @@ function userSignupTWT($uname_social, $uid_social, $password){
             $rand_otp = rand(0, 9999);
             if (function_exists('itg_sso_first_time_otp_insert')) {
                 itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
-                itg_sso_sms_send($rand_otp, $mobile);
+                //itg_sso_sms_send($rand_otp, $mobile);
             }
             if (!empty($form_state['values']['mail'])) {
-                itg_sso_otp_mail_content($rand_otp, $mail);
+                //itg_sso_otp_mail_content($rand_otp, $mail);
             }
         }
     } catch (Exception $e) {
