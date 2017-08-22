@@ -99,7 +99,7 @@ function saveUpdatedProfile($data) {
     if (!empty($data['zipcode'])) {
         $user_detail->field_user_pincode['und'][0]['value'] = check_plain($zipcode);
     }
- 
+ /*
     //update country
     if (!empty($country_tid) && $country_tid !== '_none') {
         $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($country_tid);
@@ -119,7 +119,7 @@ function saveUpdatedProfile($data) {
         $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($city_tid);
     } else {
         unset($user_detail->field_personalization_city['und']);
-    }
+    }*/
 
     //Update News Letters field.  
 //    $flag = FALSE;
