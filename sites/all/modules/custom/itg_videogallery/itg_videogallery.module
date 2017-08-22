@@ -1765,6 +1765,7 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
   $unpublish_video_id = $solr_data['unpubliash_video_id'];
   $unpublish_replace_id = $solr_data['replace_video'];
   $solr_data_deleted = itg_videogallery_getsolr_data();
+  
   //  Here node dekete and unpublish
   if (!empty($solr_data_deleted)) {
     $query = db_select('itg_solr_video_info', 'drd');
@@ -2920,6 +2921,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
   $query->condition('drd.nid', 'null', '!=');
   $query->groupBy('nid');
   $result = $query->execute()->fetchAll();
+  p($result);
   $video_ids = array();
   foreach ($result as $key => $video_id) {
     $node_flag = 0;

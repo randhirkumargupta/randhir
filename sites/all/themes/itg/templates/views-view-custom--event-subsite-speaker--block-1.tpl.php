@@ -11,5 +11,6 @@ foreach ($rows as $row): ?>
   }
   ?>
   <div class="views-field-title" title="<?php echo strip_tags($row['title']);?>"><?php print $row['title']; ?></div>
-    <div class="views-field-field-story-new-title"><?php print $row['field_celebrity_pro_occupation']; ?></div>
+  <div class="views-field-field-story-new-title"><?php print $row['field_story_new_title']; ?></div>  
+<!--  <div class="views-field-field-story-new-title"><?php print $row['field_celebrity_pro_occupation']; ?></div>-->
 <?php endforeach; ?>

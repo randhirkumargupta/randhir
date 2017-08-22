@@ -3774,6 +3774,12 @@ if (function_exists(\'itg_event_get_host_name\')) {
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['separator'] = ' / ';
+  /* Field: Content: Addon Story Title */
+  $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
+  $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -4041,7 +4047,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4144,7 +4150,7 @@ return itg_event_backend_speaker_ids(arg(1));
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Kicker */
+  /* Field: Field: Session Title  */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';

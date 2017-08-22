@@ -452,9 +452,14 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   foreach ($form_state['values']['field_program_schedule'][LANGUAGE_NONE] as $key => $value) {
     $start_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value'];
     $end_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value2'];
+    if(is_object($end_time)) {
+      drupal_get_messages();
+      form_set_error('field_program_schedule][' . LANGUAGE_NONE . '][' . $key . '][field_start_time', t('Start time must be less than end time.'));
+    }else {
     if ($start_time > $end_time) {
       drupal_get_messages();
-      form_set_error('field_start_time', t('Start time must be less than end time.'));
+      form_set_error('field_program_schedule][' . LANGUAGE_NONE . '][' . $key . '][field_start_time', t('Start time must be less than end time.'));
+     }
     }
   }
   // media validation
@@ -1176,10 +1181,10 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query = db_select('node', 'n');
   $query->fields('n', array('title', 'nid'));
   $query->fields('fm', array('uri'));
-  // $query->fields('designation', array('field_story_new_title_value'));
+  $query->fields('designation', array('field_story_new_title_value'));
   $query->leftJoin('field_data_field_story_extra_large_image', 'pic', 'pic.entity_id = n.nid');
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
-  //$query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
+  $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
   // $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();

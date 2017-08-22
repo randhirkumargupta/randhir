@@ -21,8 +21,8 @@
     ?></li>
         <li>
             <span class="title"  title="<?php print strip_tags($row['title']) ; ?>"><?php print l(html_entity_decode(strip_tags($row['title'])), $baseurl.'/speaker-details?speaker='.$row['nid'], array('attributes' => array('target'=>'_blank'))); ?></span>
-            <!--<span class="designation"><?php // print $row['field_story_new_title']; ?></span>-->
-            <span class="designation"><?php print $row['field_celebrity_pro_occupation']; ?></span>
+            <span class="designation"><?php  print $row['field_story_new_title']; ?></span>
+<!--            <span class="designation"><?php print $row['field_celebrity_pro_occupation']; ?></span>-->
         </li>
         </ul>
     <?php endforeach; ?>

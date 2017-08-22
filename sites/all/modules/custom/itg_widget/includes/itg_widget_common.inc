@@ -113,7 +113,7 @@ function remove_state_term($tid) {
   if ($tid) {
     taxonomy_term_delete($tid);
   }
-  drupal_set_message(t($name . "has been seleted"));
+  drupal_set_message(t($name . "has been deleted"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
