@@ -72,16 +72,26 @@ function itg_octopus_api_rundown() {
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
       // p($rundown_xml->rundown->slugs->slug);
-      foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
-
+      foreach ($rundown_xml->rundown->slugs->slug as $slug_key => $slug) {
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
-
           $story_id = (int) $slug->storyId;
           $action = (string) $slug->action;
           $story_title = (string) $slug->storyTitle;
 
-// Sending mail to Octopus user where 
+          // Adding Octopus Log 
+          $msg = '';
+          $hyperlink = 'rundown-listing';
+          $query_string = array(
+            'parm' => array('rundowntype' => $key),
+          );
+          $query_string_json = json_encode($query_string);
+
+          $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, $query_string_json, REQUEST_TIME, 1);
+
+          // End Adding Octopus Log
+          // Sending mail to Octopus user where 
           $story_com_data = '';
           if ($action == 'UPDATE') {
             $story_com_data = 'Story Title= ' . $story_title . ' Video ID=' . $story_id;
@@ -235,6 +245,7 @@ function itg_octopus_api_rundown_listing() {
   drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
 
+
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
@@ -253,7 +264,7 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
- 
+
   $pagination = '';
   $current_rundown = '';
 
@@ -292,8 +303,10 @@ function itg_octopus_api_rundown_listing() {
     $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
-  if (empty($current_rundown))
+  if (empty($current_rundown)) {
     $current_rundown = 'current';
+  }
+
 
   $query = db_select('itg_rundown', 'rund')->extend('PagerDefault')->limit(50);
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
@@ -313,14 +326,14 @@ function itg_octopus_api_rundown_listing() {
     $query->condition('ios.category', $category_data, 'IN');
   }
 
-  $start_date = isset($_GET['start_date']) ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
 
-  if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
+  if (isset($start_date) && !empty($start_date)) { // start date
     $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
   }
 
-  if (isset($_GET['end_date']) && !empty($_GET['end_date'])) { // end date
+  if (isset($end_date) && !empty($end_date)) { // end date
     $query->condition('ios.story_modified_timestamp', strtotime($end_date), '<=');
   }
 
@@ -348,7 +361,6 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
-
   foreach ($result as $row) {
     $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
@@ -362,6 +374,7 @@ function itg_octopus_api_rundown_listing() {
     else {
       $background_color = 'bg-none';
     }
+
     $rows[] = array(
       array('data' => $sn++),
       array('data' => $row->storyid),
@@ -370,7 +383,7 @@ function itg_octopus_api_rundown_listing() {
       array('data' => $row->story_created_by),
       array('data' => $row->story_modified_by),
       array('data' => date('d/m/Y - H:i:s', strtotime($row->story_created))),
-      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified))),
+      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified)), 'class' => $background_color),
       array('data' => $row->location),
       array('data' => $link),
     );
@@ -396,7 +409,7 @@ function itg_octopus_api_rundown_listing() {
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 # add the pager
   $output .= theme('pager');
-  
+
   return $output;
 }
 

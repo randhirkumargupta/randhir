@@ -1,0 +1,558 @@
+<?php
+
+/**
+ * @file
+ * The ITG Global Loyality module.
+ *
+ * Contains functionality for ITG Global Loyality. *
+ */
+
+/**
+ * Implements hook_menu.
+ * {@inheritdoc}
+ */
+function itg_global_loyality_menu() {
+  $items = array();
+  $items['itg-get-loyality-point'] = array(
+    'title' => t('Global loyality point'),
+    'page callback' => 'itg_get_loyality_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-global-point-history'] = array(
+    'title' => t(''),
+    'page callback' => 'itg_get_global_point_history',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-global-badge-history'] = array(
+    'title' => t('Global badge history'),
+    'page callback' => 'itg_get_badge_point_history',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-global-remaining-point'] = array(
+    'title' => t('Global badge history'),
+    'page callback' => 'itg_global_remaining_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-global-fb-point'] = array(
+    'title' => t('Global facebook loyality point'),
+    'page callback' => 'itg_global_fb_loyality_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements itg_get_loyality_point().
+ */
+function itg_get_loyality_point() {
+  $uid = $_POST['uid'];
+  $sso_id = $_POST['sso_id'];
+  //watchdog('sso_id', $sso_id);
+  if(empty($sso_id)) {
+    $sso_id = $uid;
+  }
+  $nid = $_POST['nid'];
+  $loyalty_type = $_POST['loyalty_type'];
+  $loyalty_points = $_POST['loyalty_points'];
+  $remaining_points = $_POST['remaining_points'];
+  $property = $_POST['property'];
+  $status = $_POST['status'];
+  $news_letter = $_POST['news_letter'];
+  $expiry_date = $_POST['expiry_date'];
+  if($loyalty_type == 'Newsletter_subscription') {
+  $value_exist = itg_global_loyalty_newsletter_point($uid, $loyalty_type, $news_letter); 
+  } else {
+  $value_exist = itg_global_loyality_exist_point($uid, $loyalty_type, $nid, $property);
+  }
+  if (empty($value_exist)) {
+
+    try {
+
+      db_insert('itg_global_loyality_point')
+          ->fields(array(
+            'uid' => $uid,
+            'sso_id' => (int) $sso_id,
+            'nid' => $nid,
+            'loyalty_type' => $loyalty_type,
+            'loyalty_points' => $loyalty_points,
+            'remaining_points' => $remaining_points,
+            'newsletter' => $news_letter,
+            'property' => $property,
+            'status' => $status,
+            'expiry_date' => $expiry_date,
+          ))
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog('globaldata1 exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+    //watchdog('globaldata1', '<pre>' . print_r($_POST, true) . '</pre>');
+  }
+}
+
+/*
+ * Implements itg_global_loyality_get_sso_id().
+ * @param int $uid
+ * @return string
+ */
+function itg_global_loyality_get_sso_id($uid) {
+  if (!empty($uid)) {
+    $query = db_select('authmap', 'u');
+    $query->fields('u', array('authname'))
+        ->condition('u.uid', $uid);
+   return $query->execute()->fetchField();
+  }
+  return 0;
+}
+
+/**
+ * Validate fb and twitter points.
+ *
+ * @param int $user
+ * @param string $type
+ * @param int $nid
+ * @return boolean
+ */
+function itg_global_loyality_exist_point($user, $type, $nid = NULL, $property = NULL) {
+  $itg_result = '';
+  $itg_query = db_select('itg_global_loyality_point', 'p')
+      ->fields('p', array('id'))
+      ->condition('p.uid', $user);
+      if(!empty($nid)) {
+      $itg_query->condition('p.nid', $nid);
+      }
+      if(!empty($property)) {
+      $itg_query->condition('p.property', $property);
+      }
+  $itg_query->condition('p.loyalty_type', $type);
+  $itg_result = $itg_query->execute()->fetchField();
+  if (!empty($itg_result)) {
+    return TRUE;
+  }
+  return ;
+  
+}
+
+/**
+ * Implements itg_global_loyality_send_data().
+ * @param int $uid
+ * @param string $type
+ * @param int $nid
+ * @param string $newsletter
+ * @param int $sso_id
+ */
+function itg_global_loyality_send_data($uid, $type, $nid, $newsletter = NULL, $sso_id = NULL) {
+  $url = variable_get('global_loyalty_url').'/itg-get-loyality-point';
+  if ($type == 'Content_Visit') {
+    $loyalty_type = 'Content_Visit';
+    if (!empty(variable_get('lrp_content_visit'))) {
+      $loyalty_points = variable_get('lrp_content_visit');
+      $remaining_points = variable_get('lrp_content_visit');
+    }
+  }
+  
+  if ($type == 'content_like') {
+    $loyalty_type = 'content_like';
+    if (!empty(variable_get('lrp_content_like'))) {
+      $loyalty_points = variable_get('lrp_content_like');
+      $remaining_points = variable_get('lrp_content_like');
+    }
+  }
+  
+if ($type == 'twitter_share' || $type == 'google_share' || $type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow' || $type == 'facebook_share') {
+    $loyalty_type = $type;
+    if (!empty(variable_get('lrp_follow_itg_on_social_sites'))) {
+      $loyalty_points = variable_get('lrp_follow_itg_on_social_sites');
+      $remaining_points = variable_get('lrp_follow_itg_on_social_sites');
+    }
+  }
+  
+  if ($type == 'Newsletter_subscription') {
+    $loyalty_type = 'Newsletter_subscription';
+    if (!empty(variable_get('lrp_newsletter_subscription'))) {
+      $loyalty_points = variable_get('lrp_newsletter_subscription');
+      $remaining_points = variable_get('lrp_newsletter_subscription');
+    }
+  }
+  
+  if ($type == 'poll') {
+    $loyalty_type = 'poll';
+    if (!empty(variable_get('lrp_participation_in_poll'))) {
+      $loyalty_points = variable_get('lrp_participation_in_poll');
+      $remaining_points = variable_get('lrp_participation_in_poll');
+    }
+  }
+  
+  if ($type == 'campaign ') {
+    $loyalty_type = 'campaign';
+    if (!empty(variable_get('lrp_participation_in_campaign'))) {
+      $loyalty_points = variable_get('lrp_participation_in_campaign');
+      $remaining_points = variable_get('lrp_participation_in_campaign');
+    }
+  }
+  
+  if ($type == 'survey') {
+    $loyalty_type = 'survey';
+    if (!empty(variable_get('lrp_participation_in_survey'))) {
+      $loyalty_points = variable_get('lrp_participation_in_survey');
+      $remaining_points = variable_get('lrp_participation_in_survey');
+    }
+  }
+  
+  if ($type == 'raf') {
+    $loyalty_type = 'raf';
+    if (!empty(variable_get('lrp_refer_a_friend'))) {
+      $loyalty_points = variable_get('lrp_refer_a_friend');
+      $remaining_points = variable_get('lrp_refer_a_friend');
+    }
+  }
+  
+  if ($type == 'ugc_contribution') {
+    $loyalty_type = 'ugc_contribution';
+    if (!empty(variable_get('lrp_ugc_contribution'))) {
+      $loyalty_points = variable_get('lrp_ugc_contribution');
+      $remaining_points = variable_get('lrp_ugc_contribution');
+    }
+  }
+  
+  if ($type == 'event_registration') {
+    $loyalty_type = 'event_registration';
+    if (!empty(variable_get('lrp_online_registration_for_any_events'))) {
+      $loyalty_points = variable_get('lrp_online_registration_for_any_events');
+      $remaining_points = variable_get('lrp_online_registration_for_any_events');
+    }
+  }
+
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  if (!empty(variable_get('lrp_loyality_points_expiry'))) {
+    $expiry_days = '+' . variable_get('lrp_loyality_points_expiry') . ' days';
+    $expiry_date_old = date('Y-m-d h:i', strtotime($expiry_days));
+    $expiry_date = strtotime($expiry_date_old);
+  }
+  $data = 'uid=' . $uid . '&sso_id=' . $sso_id . '&nid=' . $nid . '&loyalty_type=' . $loyalty_type . '&loyalty_points=' . $loyalty_points . '&remaining_points=' . $remaining_points . '&property=' . $property . '&status=1&expiry_date=' . $expiry_date.'&news_letter='.$newsletter;
+  $options = array(
+    'method' => 'POST',
+    'data' => $data,
+    'timeout' => 60,
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+  );
+  $result = drupal_http_request($url, $options);
+}
+
+/**
+ * Implements itg_global_fb_loyality_point().
+ */
+function itg_global_fb_loyality_point() {
+  global $user;
+  $arg = arg();
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (function_exists('itg_global_loyality_get_sso_id') && array_key_exists(FRONT_USER, $user->roles)) {
+    itg_global_loyality_send_data($user->uid, $arg[2], $arg[1], '', $sso_id);
+  }
+}
+
+/**
+ * Implemsnts itg_global_loyalty_newsletter_point().
+ * @param int $user
+ * @param string $type
+ * @param string $news_letter
+ * @return boolean
+ */
+function itg_global_loyalty_newsletter_point($user, $type, $news_letter) {
+  $itg_result = '';
+  $itg_query = db_select('itg_global_loyality_point', 'p')
+      ->fields('p', array('newsletter'))
+      ->condition('p.uid', $user)
+      ->condition('p.loyalty_type', $type);
+  $itg_result = $itg_query->execute()->fetchAll();
+  // If newsletter subscription is first time then earn point else not.
+  foreach ($itg_result as $value) {
+    if ($value->newsletter == $news_letter) {
+     return TRUE;
+    }
+  }
+}
+
+/*
+ * Implements itg_get_global_point_history().
+ */
+function itg_get_global_point_history() {
+  global $user;
+  //watchdog('credit', '<pre>' . print_r($_POST, true) . '</pre>');
+  $uid = $_POST['uid'];
+  $sso_final_id = $_POST['sso_id'];
+  $property = $_POST['property'];
+  $sso_id = '';
+  if(empty($sso_final_id)) {
+    $sso_id = $uid;
+  } else {
+    $sso_id = $sso_final_id;
+  }
+  //watchdog('point', $sso_id);
+  $property = $_POST['property'];
+  if (!empty($uid)) {
+    $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_loyality_point', 'itg');
+    $itg_query->fields('itg', array('loyalty_type', 'loyalty_points'));
+    $itg_query->condition('itg.uid', $uid)
+              ->condition('itg.property', $property)
+        ->addExpression('SUM(itg.loyalty_points)', 'sum');
+    $itg_query->groupBy('itg.loyalty_type');
+    $itg_query->orderBy('itg.id', 'DESC');
+    $itg_result = $itg_query->execute()->fetchAll();
+  }
+  catch (Exception $ex) {
+    watchdog('Loyalty Points', $ex->getMessage());
+  }
+  $data = array();
+  $data['total_earned_so_far'] = 0;
+  $data['redeemed_points'] = 0;
+  $data['remaining_point'] = 0;
+  $data['unit_description'] = array();
+  foreach ($itg_result as $key => $value) {
+     if ($key == 0) {
+       $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+       $remain = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+      $data['total_earned_so_far'] = $earn;
+      $data['remaining_point'] = $remain;
+      $data['redeemed_points'] = $earn - $remain;
+    }
+    $data['unit_description'][] = array(
+      'activity_name' => $value->loyalty_type,
+      'earned_points' => $value->sum,
+      'points_per_activity' => itg_global_loyalty_get_point_activity($value->loyalty_type, $property),
+    );
+  }
+    print drupal_json_output($data);
+    drupal_exit();
+  }
+}
+
+/*
+ * Implements itg_get_badge_point_history().
+ */
+function itg_get_badge_point_history() {
+  global $user;
+  $uid = $_POST['uid'];
+  $sso_final_id = $_POST['sso_id'];
+  $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  //watchdog('badge', $uid);
+  if (!empty($uid)) {
+    $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_loyality_point', 'itg');
+    $itg_query->fields('itg', array('loyalty_type', 'loyalty_points'));
+    $itg_query->condition('itg.uid', $uid)
+              ->condition('itg.property', $property)
+        ->addExpression('SUM(itg.loyalty_points)', 'sum');
+    $itg_query->groupBy('itg.loyalty_type');
+    $itg_query->orderBy('itg.id', 'DESC');
+    $itg_result = $itg_query->execute()->fetchAll();
+  }
+  catch (Exception $ex) {
+    watchdog('Loyalty Points', $ex->getMessage());
+  }
+  $data = array();
+  $data['total_earned_for_current_level'] = 0;
+  foreach ($itg_result as $key => $value) {
+     if ($key == 0) {
+      $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
+      $data['total_earned_for_current_level'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
+      $data['total_global_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+    }
+  }
+    print drupal_json_output($data);
+    drupal_exit();
+  }
+}
+
+/*
+ * Implements itg_get_global_credits().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_get_global_credits($uid, $property, $sso_id = NULL) {
+  global $user;
+  if($uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $property = variable_get('property_name');
+    $url = variable_get('global_loyalty_url').'/itg-global-point-history';
+    $data = 'uid=' . $uid . '&property=' . $property.'&sso_id='.$sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_get_badge_credits().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_get_badge_credits($uid, $property, $sso_id = NULL) {
+  global $user;
+  if($uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $property = variable_get('property_name');
+    $url = variable_get('global_loyalty_url').'/itg-global-badge-history';
+    $data = 'uid=' . $uid . '&property=' . $property.'&sso_id='.$sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_get_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_get_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  if($uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $property = variable_get('property_name');
+    $url = variable_get('global_loyalty_url').'/itg-global-remaining-point';
+    $data = 'uid=' . $uid . '&property=' . $property.'&sso_id='.$sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  $uid = $_POST['uid'];
+  $sso_final_id = $_POST['sso_id'];
+  $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  //watchdog('badge', $uid);
+  if (!empty($uid)) {
+    $remain_point = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+    //$remain_point = 40;
+    print drupal_json_output($remain_point);
+    drupal_exit();
+  }
+}
+
+/**
+ * Implements itg_global_loyalty_reward_get_total_earn_point().
+ * @param int $uid
+ * @param string $type
+ * @param string $property
+ * @param string $task
+ * @return int
+ */
+function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property = NULL, $task = NULL) {
+  $itg_query = db_select('itg_global_loyality_point', 'itg');
+  if(!empty($property)) {
+  $itg_query->condition('itg.property', $property);  
+  }
+  if(!empty($task)) {
+  $itg_query->condition('itg.uid', $uid);  
+  } else {
+  $itg_query->condition('itg.sso_id', $uid); 
+  }
+  if ($type == 'earn') {
+    $itg_query->addExpression('SUM(itg.loyalty_points)', 'count');
+  }
+  if ($type == 'remaining') {
+    $itg_query->addExpression('SUM(itg.remaining_points)', 'count');
+  }
+  $total_earn_point = $itg_query->execute()->fetchField();
+
+  return $total_earn_point;
+}
+
+/**
+ * Implements itg_global_loyalty_get_point_activity().
+ * @param string $activityname
+ * @param string $property
+ * @return int
+ */
+function itg_global_loyalty_get_point_activity($activityname, $property) {
+  if (!empty($activityname) && !empty($property)) {
+    $itg_query = db_select('itg_global_loyality_point', 'itg');
+    $itg_query->fields('itg', array('loyalty_points'));
+    $itg_query->condition('itg.loyalty_type', $activityname);
+    $itg_query->condition('itg.property', $property);
+    $itg_query->orderBY('itg.id', 'DESC');
+    $itg_query->range(0, 1);
+    $activity_point = $itg_query->execute()->fetchField();
+
+    return $activity_point;
+  }
+}
+
+/**
+ * Implements itg_get_total_cart_point().
+ */
+function itg_get_total_cart_point($uid) {
+  $itg_result = 0;
+  $itg_query = db_select('itg_loyalty_reward_point_history', 'itg')
+      ->fields('itg', array('cart_point'))
+      ->condition('uid', $uid);
+  $itg_result = $itg_query->execute()->fetchObject();
+
+  return $itg_result;
+}

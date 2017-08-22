@@ -53,9 +53,9 @@
             });
             
             $('.multiple-photo-disc').on('afterChange', function (event, slick, currentSlide) {
-                var hash_text = $(this).find('.slick-current img').parent().attr("data-slick-index");
+                var hash_text = $('.slick-current').attr("data-slick-index");
                 var current_url = window.location.href.split('?')[0];
-                var photoStoryCuont = Number(hash_text) + 1;
+                var photoStoryCuont = Number(hash_text);
                 if (hash_text != 0) {
                     // Change url with query string.
                     window.history.pushState("", "", current_url + "?PhotoStory=" + photoStoryCuont);

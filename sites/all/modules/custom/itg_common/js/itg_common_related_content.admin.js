@@ -39,10 +39,10 @@ jQuery(document).ready(function () {
         var itemString = jQuery('#edit-field-common-related-content-und-0-value').val();
         var detail_default = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
         if (itemString) {
-            item = itemString.split("|");
+            item = itemString.split("|~|");
         }
         if (detail_default) {
-            detail_default_arr = detail_default.split("|");
+            detail_default_arr = detail_default.split("|~|");
         }
         checkedlist = '';
 
@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
             index_arr.push(rel_index);
             if (detail_default_arr != null && detail_default_arr != undefined) {
                 new_arr.push(detail_default_arr[index_arr[i]]);
-                new_arr_detail = new_arr.join('|');
+                new_arr_detail = new_arr.join('|~|');
             }
         }
         
@@ -66,9 +66,9 @@ jQuery(document).ready(function () {
         //console.log(index_arr);
         //console.log(new_arr);
         var detailString = jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
-        
+        var inputValArray = [];
         if (detailString) {
-          detail = detailString.split("|");
+          detail = detailString.split("|~|");
         }
         for (var i = 0, l = item.length; i < l; i++) {
             var site = item[i].split('_');
@@ -78,6 +78,7 @@ jQuery(document).ready(function () {
                 if (final_tit[2] != null && final_tit[2] != undefined) {
                     var display_tit;
                     display_tit = final_tit[2];
+                    inputValArray.push(display_tit);
                 }
                 if (final_tit[1] != null && final_tit[1] != undefined) {
                     var display_type;
@@ -87,6 +88,9 @@ jQuery(document).ready(function () {
             checkedlist += '<li class="ui-state-default"><div class="rc-top"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span class="item-value" title="' + display_tit + '">' + item[i] + '</span> | <span class="item-type">' + display_type + '</span> | <a href="' + solr_uri + '" target="_blank"> view </a><i class="fa fa-times fright" aria-hidden="true"></i></div><div class="rc-bottom"><input class="rc-title" type="text" value="' + display_tit + '" /></div></li>';
         }
         jQuery('.checked-list').html(checkedlist);
+        jQuery('.checked-list li').each(function (i) {
+            jQuery(this).find('.rc-title').val(inputValArray[i]);
+        }); 
     }
     // end of code
 
@@ -127,7 +131,7 @@ jQuery(document).ready(function () {
     jQuery('body').on('click', '.save-checklist', function () {
         var item_new = [];
         var item_new_detail;
-        var contentRow = []; 
+        var contentRow = [];
         var contentFinal = '';
         jQuery('.checked-list li').each(function(i){
           var itemVal = jQuery(this).find('.item-value').text();
@@ -135,7 +139,7 @@ jQuery(document).ready(function () {
           var itemTitle = jQuery(this).find('.rc-title').val();
           var str = itemVal+'@'+itemType+'@'+itemTitle;
           contentRow[i] = str;
-          contentFinal = contentRow.join('|');
+          contentFinal = contentRow.join('|~|');
         });
         jQuery('#edit-field-cm-related-content-detail-und-0-value').val(contentFinal);
         var listLength = jQuery(this).closest('.checked-list-parent').find('.checked-list li').length;
@@ -145,11 +149,11 @@ jQuery(document).ready(function () {
         }
         jQuery(this).closest('.checked-list-parent').find('.checked-list li').each(function (i) {
             item_new.push(jQuery(this).find('.item-value').text());
-            item_new_detail = item_new.join('|');
+            item_new_detail = item_new.join('|~|');
             
         });
         jQuery('#edit-field-common-related-content-und-0-value').val(item_new_detail);
-        relatedContent();
+        relatedContent();   
         alert('Changes made successfully');
     });
     // end of code

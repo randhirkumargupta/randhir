@@ -10,9 +10,6 @@
   #block-views-photo-landing-slider-block{
     width: 100%;
   }
-  ::-webkit-scrollbar {
-    display: none;
-  }
   #block-views-video-landing-header-block .video-header-right .ads{
     position: relative;
   }
@@ -436,6 +433,19 @@
     font-size: 11px;
   }
   /*search page css end */
+  
+  /* Scroll bar css */
+  ::-webkit-scrollbar{
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa;
+  }
 }   
 
 
@@ -1468,7 +1478,7 @@
   .view-front-end-global-search{
     .views-exposed-widget .caln{
       position: inherit;
-      right: auto;
+      right: 258px;
     }   
   }
   [id="views-exposed-form-front-end-global-search-page"]{
@@ -1620,6 +1630,9 @@
   #block-itg-menu-manager-third-level-menu{
     z-index: 999999;
     position: relative;
+  }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
+    width: 165px;
   }
 
 }
@@ -2782,7 +2795,10 @@
       white-space: inherit;
       overflow-x: inherit;
       .views-exposed-widget{
-        float: left;                                
+        float: left;   
+        &.views-submit-button{
+          width: 165px;
+        }
       }
     }
     .view-filters{        
@@ -2838,7 +2854,7 @@
     }
     .views-exposed-widget .caln{
       position: inherit;
-      right: auto;
+      right: 258px;
     }
   }     
   /*End css ITG globle search result page*/

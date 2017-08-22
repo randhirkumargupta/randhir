@@ -415,7 +415,7 @@ function itg_get_related_story_content($entity_id) {
  * @param string $entity_id
  */
 function itg_get_related_story_id($related_content) {
-  $related_content = explode('|' , $related_content);
+  $related_content = explode('|~|' , $related_content);
   foreach ($related_content as $fn_result) {
     $related_content = explode('_' , $fn_result);
     $final_related [] = $related_content[1];

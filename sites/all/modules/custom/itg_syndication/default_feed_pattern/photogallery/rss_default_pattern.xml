@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>{{{web_site_name}}}| {{{section_category_name}}}</title>
+        <title>{{{web_site_name}}} | Photos | {{{section_category_sub_sub_category}}}</title>
         <description>{{{web_site_name}}}</description>
         <link>{{{website_url}}}</link>
         <lastBuildDate>{{{xml_creation_date}}}</lastBuildDate>
@@ -14,7 +14,8 @@
         <item>
             <title> {{{node_title}}} </title>
             <link> {{{node_permalink}}} </link>
-            <pubDate> {{{node_published_date}}} </pubDate>
+            <pubDate> {{{node_last_updated_date}}} </pubDate>
+            <description><![CDATA[  <a href="{{{mrss_node_permalink}}}"> <img align="left" hspace="2" height="82" width="107" alt="" border="0" src="{{{field_story_extra_large_image}}}"> </a> ]]> {{{node_title}}} <![CDATA[ <br clear='all'> ]]> </description>
         </item>
     </channel>
 </rss>

@@ -445,7 +445,11 @@ function photogallery_field_default_field_instances() {
   // 'field_collection_item-field_gallery_image-field_photo_enable'.
   $field_instances['field_collection_item-field_gallery_image-field_photo_enable'] = array(
     'bundle' => 'field_gallery_image',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Image Enable',
     'display' => array(

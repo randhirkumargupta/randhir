@@ -349,6 +349,21 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
+  if ($form_id == 'page_node_form') {
+    if ($user->uid != 1) {
+      $form['actions']['preview']['#access'] = FALSE;
+      $form['actions']['submit']['#submit'][] = 'itg_home_page_redirect';
+    }
+  }
+}
+
+/**
+ * Custom submit callback for home page node redirection.
+ * {@inheritdoc}
+ */
+function itg_home_page_redirect() {
+  drupal_get_messages('status');
+  drupal_goto('cms-user-dashboard');
 }
 
 /**
@@ -569,7 +584,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
+   if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_rfa_form') {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );
@@ -817,7 +832,9 @@ function itg_content_inactive() {
 
   $current_time = date("Y-m-d H:i:s");
   //set content type
-  $content_type = array('story', 'videogallery');
+  //$content_type = array('story', 'videogallery'); 
+  $content_type = array('videogallery');
+  
   $itg_query = db_select('node', 'n');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('n', array('nid'));
@@ -825,8 +842,7 @@ function itg_content_inactive() {
   $itg_query->condition('n.type', $content_type, 'IN');
   $itg_query->condition('n.status', 1);
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
-
-  //$itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));
+  $itg_query->isNotNull('expiry.field_story_expiry_date_value');
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $itg_val) {
     $node = node_load($itg_val->nid);
@@ -1278,4 +1294,84 @@ function itg_common_url_friendly_path($pathdata) {
     $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
   }
   return $pathdata;
+}
+
+/**
+ * Check whether sponsor story or not.
+ * @param int $nid
+ * @return boolean
+ */
+function _is_sponsor_story_article($nid) {
+  $is_sponsor = FALSE;
+  if (isset($nid)) {
+    $type_query = db_select('node', 'n');
+    $type_query->fields('n', array('type'));
+    $type_query->condition('n.nid', $nid, '=');
+    $node_type = $type_query->execute()->fetchField();
+    if ($node_type == 'story') {
+      $query = db_select('field_data_field_story_configurations', 'fc');
+      $query->fields('fc', array('field_story_configurations_value'));
+      $query->condition('fc.entity_id', $nid, '=');
+      $query->condition('fc.bundle', 'story', '=');
+      $query->condition('fc.entity_type', 'node', '=');
+      $query_result = $query->execute()->fetchAll();
+      if (!empty($query_result)) {
+        foreach ($query_result as $config_val) {
+          if ($config_val->field_story_configurations_value == 'sponsor') {
+            $is_sponsor = TRUE;
+            break;
+          }
+        }
+      }
+    }
+  }
+  return $is_sponsor;
+}
+
+/**
+ * Returns internal path from external URL.
+ * @global string $base_path
+ * @param string $url
+ * @return string
+ */
+function _get_int_path_from_url($url) {
+  global $base_path;
+  $int_path = '';
+  // Get hostname
+  preg_match("/^(https?:\/\/)?([^\/]+)/i", $url, $domain);
+  // Format localhost + base_path (http://hostname/drupalbase)
+  $base = (isset($domain[0]) ? $domain[0] : '') . $base_path;
+  // If $url contains $base, remove the $base part
+  if (strpos($url, $base) === 0) {
+    $path = str_replace($base, '', $url);
+  }
+  // $url is presumed to be without $base part (internal path?)
+  else {
+    $path = $url;
+  }
+  // Parse the path (without $base)
+  $result = drupal_parse_url($path);
+  $int_path = drupal_get_normal_path($result['path']);
+  return $int_path;
+}
+
+/**
+ * Check if taxonomy is sponsored or not.
+ * @param int $tid
+ * @return boolean
+ */
+function _is_sponsored_category($tid) {
+  $return = FALSE;
+  if (db_table_exists('field_data_field_is_sponsor')) {
+    $query = db_select('field_data_field_is_sponsor', 'fs');
+    $query->fields('fs', array('field_is_sponsor_value'));
+    $query->condition('fs.entity_id', $tid, '=');
+    $query->condition('fs.bundle', 'category_management', '=');
+    $query->condition('fs.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchField();
+    if ($query_result == 1) {
+      $return = TRUE;
+    }
+  }
+  return $return;
 }
