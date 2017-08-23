@@ -3909,6 +3909,7 @@ function itg_rapid_api_get_preference($token) {
         //get personalization-preferences value
         foreach ($preference_tid as $key => $value) {
             $pdata = $value;
+            p($pdata); die();
             $tid = $pdata['nid'];
             $prefeance = $pdata['widget'];
             $term = taxonomy_term_load($tid);
