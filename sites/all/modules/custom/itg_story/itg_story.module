@@ -75,6 +75,16 @@ function itg_story_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/sponsor_category'] = array(
+    'title' => 'Sponsor Category Setting',
+    'description' => 'Sponsor Category Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_sponsor_category_setting'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -87,6 +97,10 @@ function itg_story_permission() {
     'access itg story' => array(
       'title' => t('story permission'),
       'description' => t('story permission.'),
+    ),
+    'access layout delete' => array(
+      'title' => t('layout delete permission'),
+      'description' => t('layout delete permission.'),
     ),
   );
 }
@@ -1090,7 +1104,7 @@ function itg_story_photo_amp_html($node_id) {
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
       <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
@@ -1125,7 +1139,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"></amp-img><span class="counter">'.$slide.'</span>
+       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">'.$slide.'</span>
     </button>';
       $index++;
       $slide++;
@@ -1201,4 +1215,22 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
     $emoji_html .= '</span>';
     return $emoji_html;
   }
+}
+
+/**
+ * Function for admin setting for sponsor category.
+ */ 
+function _sponsor_category_setting() {
+  $form = array();
+  $form['sponsor_cat_tid'] = array(
+   '#type' => 'textfield',
+   '#title' => t('Sponsor Category TID'),
+   '#default_value' => variable_get('sponsor_cat_tid', 1208902),
+   '#size' => 10,
+   '#maxlength' => 10,
+   '#description' => t("Enter TID for Sponsor Category"),
+   '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }

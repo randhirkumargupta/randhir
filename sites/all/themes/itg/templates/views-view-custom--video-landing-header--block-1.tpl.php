@@ -18,7 +18,7 @@
           </figure>
           <?php $title = $row['title']; ?>
           <p title="<?php print strip_tags($row['title']); ?>">
-          <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $_GET['category'], 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+          <?php print l(html_entity_decode(strip_tags($title)), 'node/' . $row['nid'], array('query' => array('category' => $_GET['category'], 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
           </p>
         </div>
       </li>    

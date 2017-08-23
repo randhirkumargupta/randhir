@@ -412,10 +412,8 @@ function itg_seo_node_update($node) {
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
-
   if (isset($node->op) && is_valid_content_type_for_sef_url($node->type)) {
-    $ctype_array = content_types_for_sef_url();
-    if (in_array($node->type, $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -424,7 +422,7 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-    if ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
+    elseif ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -434,7 +432,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
 
-    if ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
+    elseif ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(

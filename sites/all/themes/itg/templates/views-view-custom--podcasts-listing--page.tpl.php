@@ -27,7 +27,7 @@ global $base_url;
       </span>
   </div>
   <div class="podcast-right detail">    
-      <h3 title="<?php print strip_tags($row['title']) ; ?>"><?php print $row['title']; ?></h3>
+      <h3 title="<?php print strip_tags($row['title']) ; ?>"><?php print html_entity_decode($row['title']); ?></h3>
       <p><?php print $row['field_podcast_kicker_message']; ?></p>      
     </div>    
   </div>

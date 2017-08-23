@@ -43,7 +43,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -111,7 +111,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -289,7 +289,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -323,7 +323,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -357,7 +357,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -573,6 +573,77 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_impact_text'.
+  $field_instances['taxonomy_term-category_management-field_impact_text'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 25,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_impact_text',
+    'label' => 'Impact Text',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_is_sponsor'.
+  $field_instances['taxonomy_term-category_management-field_is_sponsor'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_is_sponsor',
+    'label' => 'Is Sponsored',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_issue_free'.
   $field_instances['taxonomy_term-category_management-field_issue_free'] = array(
     'bundle' => 'category_management',
@@ -602,7 +673,81 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_old_content_source_id'.
+  $field_instances['taxonomy_term-category_management-field_old_content_source_id'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_old_content_source_id',
+    'label' => 'Source id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_powered_by_text'.
+  $field_instances['taxonomy_term-category_management-field_powered_by_text'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_powered_by_text',
+    'label' => 'Powered By Text',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
     ),
   );
 
@@ -712,6 +857,40 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
+      'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_show_fields'.
+  $field_instances['taxonomy_term-category_management-field_show_fields'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 26,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_show_fields',
+    'label' => 'Show fields',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 19,
     ),
   );
@@ -907,7 +1086,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -932,12 +1111,15 @@ function feature_category_management_field_default_field_instances() {
   t('If you checked this option, then this category would not be able to search in google search.');
   t('Image Size (40x35)');
   t('Image Size (650x45)');
+  t('Impact Text');
+  t('Is Sponsored');
   t('Issue free');
   t('No Follow');
   t('Please enter display title, it will appear on the front end if user has entered.');
   t('Please enter the redirection URL (http://example.com). Reader will be redirected to the respective URL by clicking on the category name.
 ');
   t('Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.');
+  t('Powered By Text');
   t('Program timing in days');
   t('Redirection URL');
   t('Result format');
@@ -947,6 +1129,8 @@ function feature_category_management_field_default_field_instances() {
   t('Select template');
   t('Select template type');
   t('Set As Featured');
+  t('Show fields');
+  t('Source id');
   t('Sponsored Category');
   t('Time Period');
 

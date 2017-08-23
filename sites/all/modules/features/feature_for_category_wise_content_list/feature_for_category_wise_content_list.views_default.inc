@@ -195,7 +195,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '9';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -252,7 +252,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '261';
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -297,6 +297,17 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['id'] = 'field_story_extra_large_image_1';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -309,6 +320,10 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -326,11 +341,30 @@ function feature_for_category_wise_content_list_views_default_views() {
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '1207726';
+  $handler->display->display_options['filters']['cat_id']['value'] = '1206739';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['id'] = 'field_story_schedule_date_time_value_1';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['form_type'] = 'date_text';
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['default_date'] = 'now';
   $handler->display->display_options['block_description'] = 'Section Wise Content On Recency';
 
   /* Display: Section Wise Content grid view */
@@ -343,7 +377,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '9';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -400,7 +434,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '70';
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -443,6 +477,18 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Schedule date & time */
+  $handler->display->display_options['fields']['field_story_schedule_date_time']['id'] = 'field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time']['field'] = 'field_story_schedule_date_time';
+  $handler->display->display_options['fields']['field_story_schedule_date_time']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -455,6 +501,10 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -472,11 +522,30 @@ function feature_for_category_wise_content_list_views_default_views() {
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '1208615';
+  $handler->display->display_options['filters']['cat_id']['value'] = '1206739';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['id'] = 'field_story_schedule_date_time_value_1';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value_1']['form_type'] = 'date_popup';
+  /* Filter criterion: Content: Schedule date &amp; time (field_story_schedule_date_time) */
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['id'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['table'] = 'field_data_field_story_schedule_date_time';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['field'] = 'field_story_schedule_date_time_value';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_story_schedule_date_time_value']['default_date'] = 'now';
   $handler->display->display_options['block_description'] = 'Section Wise Content On Recency grid view';
   $export['category_wise_content_list'] = $view;
 

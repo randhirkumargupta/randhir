@@ -1,5 +1,7 @@
 <?php
 
+module_load_include('inc', 'itg_photogallery', 'includes/views_handler_itg_photogallery');
+
 /**
  * @file
  * Module file for ITG Photo Gallery functionality.
@@ -149,12 +151,12 @@ function itg_photogallery_get_image_data_by_nid($nid) {
  * @param array $form_state
  */
 function itg_photogallery_form_custom_callback($form, &$form_state) {
-  if($form_state['input']['op'] == 'Apply') {
+  if ($form_state['input']['op'] == 'Apply') {
      if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
+     $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+     $_GET['destination'] = $redirect_path;
+     drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
   }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
@@ -215,7 +217,7 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
           // Video uploaded on dailymotion
           // Updating status of video
           $api = itg_videogallery_dailymotion_api();
-          $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => true));
+          $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => TRUE));
 
           try {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
@@ -351,7 +353,7 @@ function itg_photogallery_views_pre_render(&$view) {
   if ($view->name == "manage_photogallery") {
     global $user; // Get user information
     $photo_content = '';
-    $photo_content = l('Create Photogallery', 'node/add/photogallery', array('query' => array('destination' => 'manage-photogallery')));
+    $photo_content = l(t('Create Photogallery'), 'node/add/photogallery', array('query' => array('destination' => 'manage-photogallery')));
     $view->attachment_before = $photo_content;
   }
 }
@@ -375,7 +377,7 @@ function itg_photogallery_field_attach_form($entity_type, $entity, &$form, &$for
     'language' => NULL,
   );
   $options += $default_options;
-  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
+  list(, , $bundle) = entity_extract_ids($entity_type, $entity);
   $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
   // Iterate through the instances.
   $return = array();
@@ -436,7 +438,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $form_state['rebuild'] = TRUE;
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
-  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym');
+  $filedir = ITG_IMAGE_FOLDER . 'photogallery/' . date('Ym') . '/';
   if (!file_exists(file_default_scheme() . '://' . $filedir)) {
     mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   }
@@ -479,13 +481,12 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
-        if(isset($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes']) && !empty($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes'])) {
+        if (isset($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes']) && !empty($_POST['field_story_syndication'][LANGUAGE_NONE]['Yes'])) {
          $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und'][0]['value'] ='yes';
         }
 
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_syndication['und']['yes'] ='yes';
       $filename = $file_ids[$i]['filename'];
-      $newFileName = substr($filename, 0, (strrpos($filename, ".")));
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
       $imge_thumb_id = itg_photogallery_crop_thumb($file_ids[$i]['fid']);
       if ($imge_thumb_id) {
@@ -522,6 +523,8 @@ function itg_photogallery_crop_thumb($fid) {
   $image = image_load($file_image->uri);
   if (!empty($image)) {
     $image_extension = end(explode('.', $file_image->uri));
+    $image_name = explode('.', $file_image->filename);
+    $image_name = $image_name[0];
     $filepath = file_default_scheme() . '://' . $filedir;
     if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
@@ -529,7 +532,7 @@ function itg_photogallery_crop_thumb($fid) {
     else {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
     }
-    $image_name = $image_name . time() . rand(1111, 9999);
+    $image_name = $image_name . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
     $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -795,37 +798,54 @@ function itg_photogallery_image_field_widget_process($element, &$form_state, $fo
    
   }
 
-  if (isset($element['fid']['#value'])) {
-    if ($item['filemime'] == 'image/jpeg' || $item['filemime'] == 'image/png' || $item['filemime']['#value'] == 'image/jpg'|| $item['filemime']['#value'] == 'image/gif'  ) {
-      $item['fid'] = $element['fid']['#value'];
-      $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['fid']['#value'] . "?width=600&height=500&node_type=".$form['type']['#value']."&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
+  if (isset($element['#value']['fid'])) {
+      $filedata = file_load($element['#value']['fid']);
+      $filedata = (array)$filedata;
+    if ($filedata['filemime'] == 'image/jpeg' || $filedata['filemime'] == 'image/png' || $filedata['filemime']['#value'] == 'image/jpg'|| $filedata['filemime']['#value'] == 'image/gif'  ) {
+         $item['fid'] = $element['#value']['fid'];
+         $element['alt']['#prefix'] = "<a class='colorbox-load btn edit-image-info btn-preview' href='" . $base_url . "/image-info-edit/" . $element['#value']['fid'] . "?width=600&height=500&node_type=" . $form['type']['#value'] . "&iframe=true'><i class='fa fa-pencil-square-o' aria-hidden='true'></i>
 </a>";
     }
   }
 
   if (empty($item['alt']) || empty($item['title'])) {
     if (isset($item['fid'])) {
-      $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
+        $data_result = itg_photogallery_get_image_info_by_fid($item['fid']);
     }
   }
 
   // Add the additional alt and title fields.
   $alt = "";
   $title = "";
-
-  if (isset($data_result['alt'])) {
-    $alt = $data_result['alt'];
+  if (isset($data_result['alt']) && empty($item['alt'])) {
+      $alt = $data_result['alt'];
   }
-
-  if (isset($data_result['title'])) {
+  if (isset($data_result['title']) && empty($item['title'])) {
     $title = $data_result['title'];
   }
-
-
-  $element['alt']['#default_value'] = isset($item['alt']) ? $item['alt'] : $alt;
-  $element['title']['#default_value'] = isset($item['title']) ? $item['title'] : $title;
+  $element['alt']['#default_value'] = !empty($item['alt']) ? $item['alt'] : $alt;
+  $element['title']['#default_value'] = !empty($item['title']) ? $item['title'] : $title;
 
 
 
   return $element;
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_photogallery_views_data() {
+  $data['itg_photogallery']['table']['group'] = t('Photo Gallery Title');
+  $data['itg_photogallery']['table']['join'] = array(
+    // #global is a special flag which let's a table appear all the time.
+    '#global' => array(),
+  );
+  $data['itg_photogallery']['custom_handler'] = array(
+    'title' => t('Photo Gallery Title'),
+    'help' => t('Photo Gallery Title'),
+    'field' => array(
+      'handler' => 'views_handler_itg_photogallery',
+    ),
+  );
+  return $data;
 }

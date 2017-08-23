@@ -17,6 +17,9 @@
 //  //p(node_load(2540));
 //}
 
+//module_load_include('inc', 'itg_miscellaneous', 'includes/itg_custom_db_script');
+
+
 /**
  * Implements hook_menu().
  * @return array $items
@@ -30,12 +33,12 @@ function itg_miscellaneous_menu() {
       'file' => 'includes/itg_miscellaneous.inc',
   );
 
-  $items['itg-delete-layout/%'] = array(
+  /*$items['itg-delete-layout/%'] = array(
       'page callback' => 'itg_layout_delete',
       'access arguments' => array('access administrator'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
-  );
+  );*/
 
   $items['section-widgets-list-delete'] = array(
       'page callback' => 'itg_section_widgets_list_delete',
@@ -78,6 +81,13 @@ function itg_miscellaneous_menu() {
       'file' => 'includes/itg_video_clean.inc',
   );
   
+  $items['itg-related-content-migrate'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_db_migrate_related_content',
+    'access callback' => TRUE,
+  );
+  
 
+  
   return $items;
 }

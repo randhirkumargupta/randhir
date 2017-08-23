@@ -10,17 +10,6 @@
 define("OCTOPUS_DUMPING_MACHINE_URL", "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4");
 
 /**
- * Implements hook_init()
- */
-function itg_octopus_api_init() {
-  global $base_url;
-  global $theme;
-  $settings = array();
-  $settings['loader_url'] = base_path() . drupal_get_path('theme', $theme) . '/images/loader.svg';
-  drupal_add_js(array('itg_octopus_holder' => array('settings' => $settings)), array('type' => 'setting'));
-}
-
-/**
  * Implements hook_menu().
  * {@inheritdoc}
  */
@@ -31,6 +20,13 @@ function itg_octopus_api_menu() {
     'access arguments' => array('administer itg octopus'),
     'file' => 'includes/itg_octopus_api.inc',
   );
+
+  $items['itg-generate-octopus-notification'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_generate_octopus_notification',
+    'access arguments' => array('administer itg octopus'),
+  );
+
   $items['rundown-listing'] = array(
     'title' => 'Rundown Listing',
     'page callback' => 'itg_octopus_api_rundown_listing',
@@ -184,6 +180,28 @@ function itg_octopus_api_theme($existing, $type, $theme, $path) {
 function itg_octopus_api_form($form, &$form_state) {
   $form = array();
 
+  $current_rundown = '';
+  if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
+    $current_rundown = 'current';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next1') {
+    $current_rundown = 'next1';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'next2') {
+    $current_rundown = 'next2';
+  }
+
+  if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'previous') {
+    $current_rundown = 'previous';
+  }
+
+  if (empty($current_rundown)) {
+    $current_rundown = 'current';
+  }
+
+
   $form['category'] = array(
     '#type' => 'textfield',
     '#title' => t('Category'),
@@ -216,10 +234,19 @@ function itg_octopus_api_form($form, &$form_state) {
   $form['start_date'] = array(
     '#type' => 'date_popup',
     '#title' => t('Start Date'),
-    '#default_value' => "",
-    '#date_format' => "Y-m-d",
-    '#year_start' => '-99',
-    '#year_end' => '+0',
+    '#input' => TRUE,
+    '#tree' => TRUE,
+    '#date_timezone' => date_default_timezone(),
+    '#date_flexible' => 0,
+    '#date_format' => 'Y-m-d - H:i',
+    '#timepicker' => 'default',
+    '#date_increment' => 1,
+    '#date_year_range' => '-100:+0',
+    '#date_label_position' => 'above',
+    '#process' => array('date_popup_element_process'),
+    '#value_callback' => 'date_popup_element_value_callback',
+    '#theme_wrappers' => array('date_popup'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'Start Date'),
     '#weight' => 4,
     '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
   );
@@ -227,10 +254,19 @@ function itg_octopus_api_form($form, &$form_state) {
   $form['end_date'] = array(
     '#type' => 'date_popup',
     '#title' => t('End Date'),
-    '#default_value' => "",
-    '#date_format' => "Y-m-d",
-    '#year_start' => '-99',
-    '#year_end' => '+0',
+    '#input' => TRUE,
+    '#tree' => TRUE,
+    '#date_timezone' => date_default_timezone(),
+    '#date_flexible' => 0,
+    '#date_format' => 'Y-m-d - H:i',
+    '#timepicker' => 'default',
+    '#date_increment' => 1,
+    '#date_year_range' => '-100:+0',
+    '#date_label_position' => 'above',
+    '#process' => array('date_popup_element_process'),
+    '#value_callback' => 'date_popup_element_value_callback',
+    '#theme_wrappers' => array('date_popup'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'End Date'),
     '#weight' => 5,
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
@@ -240,10 +276,34 @@ function itg_octopus_api_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('octopus-apply btn-small')),
     '#prefix' => '<div class = "octopus-filter-btn">',
-    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing">Reset</a></div>',
+    '#suffix' => '<a class="btn-reset  btn-small" href="' . base_path() . 'rundown-listing?rundowntype=' . $current_rundown . '">Reset</a></div>',
     '#weight' => 7,
   );
   return $form;
+}
+
+/**
+ * Implements hook_validate()
+ * {@inheritdoc}
+ */
+function itg_octopus_api_form_validate($form, &$form_state) {
+
+  $flag = 0;
+  if (!empty($form_state['values']['start_date']['date']) && empty($form_state['values']['start_date']['time'])) {
+
+    $array_error['start_date[time]'] = t("Please enter start date time.");
+    $flag = 1;
+  }
+  if (!empty($form_state['values']['end_date']['date']) && empty($form_state['values']['end_date']['time'])) {
+    $array_error['end_date[time]'] = t("Please enter end date time.");
+    $flag = 1;
+  }
+  if ($flag == 1) {
+    drupal_get_messages('error');
+    foreach ($array_error as $key => $msgs) {
+      form_set_error(check_plain($key), check_plain($msgs));
+    }
+  }
 }
 
 /**
@@ -258,8 +318,8 @@ function itg_octopus_api_form_submit($form, &$form_state) {
         'category' => $form_state['input']['category'],
         'video_id' => $form_state['input']['video_id'],
         'title' => $form_state['input']['title'],
-        'start_date' => $form_state['input']['start_date']['date'],
-        'end_date' => $form_state['input']['end_date']['date'],
+        'start_date' => $form_state['input']['start_date']['date'] . ' ' . $form_state['input']['start_date']['time'],
+        'end_date' => $form_state['input']['end_date']['date'] . ' ' . $form_state['input']['end_date']['time'],
         'rundowntype' => isset($_GET['rundowntype']) ? $_GET['rundowntype'] : '',
       ),
     ),
@@ -352,7 +412,7 @@ function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
-  $to = variable_get('itg_octopus_support_team_email', 'ishwar.tiwari@kelltontech.com');
+  $to = variable_get('itg_octopus_support_team_email');
   $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -384,7 +444,7 @@ function itg_octopus_api_send_email_to_octopus($mail_subject, $msg) {
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
-  $to = variable_get('itg_octopus_notify_email', 'ishwar.tiwari@kelltontech.com');
+  $to = variable_get('itg_octopus_notify_email');
   $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -456,16 +516,25 @@ function itg_octopus_api_remove_cdata($text) {
 function itg_octopus_get_slug_notification() {
   global $user;
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
-  $query = db_select('itg_octopus_slug', 'ios');
-  $query->fields('ios', array('action', 'story_title', 'timestamp', 'storyid'));
-  $query->condition('ios.timestamp', (int) $user_last_login, '>=');
-  //$query->range(0,10);
+  $read_o_ids = itg_octopus_get_slug_notif_read_data($user_last_login, $user->uid);
+  $query = db_select('itg_octopus_notification', 'ios');
+  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink', 'query_string'));
+  $query->condition('ios.time', (int) $user_last_login, '>=');
+  if (!empty($read_o_ids)) {
+    $query->condition('ios.id', $read_o_ids, 'NOT IN');
+  }
+  $query->orderBy('time', 'DESC');
   $result = $query->execute();
   $rows = array();
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $html .= '<li>' . l('[' . $chunk->action . '] ' . $chunk->story_title . '(' . $chunk->storyid . ')', 'rundown-listing') . '</li>';
+    $hyperlink = $chunk->hyperlink;
+    if (isset($chunk->query_string) && !empty($chunk->query_string)) {
+      $query_array = (array) json_decode($chunk->query_string)->parm;
+    }
+    $query_array['onotify'] = base64_encode($chunk->id);
+    $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
     ++$count;
   }
 
@@ -477,6 +546,24 @@ function itg_octopus_get_slug_notification() {
   $rows['html'] = $html;
   $rows['count'] = $count;
   return $rows;
+}
+
+/**
+ * Getting all read notificaton IDs by user 
+ * @param type $last_login_time
+ */
+function itg_octopus_get_slug_notif_read_data($user_last_login, $uid) {
+
+  $query = db_select('itg_octopus_notification_by_uid', 'ios');
+  $query->fields('ios', array('notification_id'));
+  $query->condition('ios.timestamp', (int) $user_last_login, '>=');
+  $query->condition('ios.uid', $uid);
+  $result = $query->execute();
+  $data = array();
+  while ($chunk = $result->fetchObject()) {
+    $data[] = $chunk->notification_id;
+  }
+  return $data;
 }
 
 /**
@@ -539,10 +626,19 @@ function itg_octopus_api_ftp_connection_setup() {
   $ftp_port = trim(variable_get('itg_octopus_ftp_port'));
   $ftp_username = trim(variable_get('itg_octopus_ftp_username'));
   $ftp_password = trim(variable_get('itg_octopus_ftp_password'));
+
   $conn_id = ftp_connect($ftp_ip, $ftp_port);
   $login_result = ftp_login($conn_id, $ftp_username, $ftp_password);
-  if ((!$conn_id) || (!$login_result)) {
+  if ((!$conn_id)) {
     watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
+    itg_octopus_api_send_email_to_support("Octopus:Unable to create connection with FTP server", 'Unable to create connection with FTP server');
+    return false;
+  }
+
+  if ((!$login_result)) {
+    watchdog("WATCHDOG_INFO_octopus", "Unable to login  on FTP server");
+    itg_octopus_api_send_email_to_support("Octopus:Unable to login  on FTP server", 'Unable to login  on FTP server');
+    return false;
   }
   return $conn_id;
 }
@@ -593,4 +689,94 @@ function itg_octopus_api_is_url_exist($url) {
   }
   curl_close($ch);
   return $status;
+}
+
+/**
+ * Octopus Notification Add
+ * @param type $url
+ * @return boolean
+ */
+function itg_octopus_add_notification($type, $msg, $hyperlink, $query_string, $time, $status) {
+
+  try {
+    $qry = db_insert('itg_octopus_notification')
+        ->fields(array(
+          'type' => $type,
+          'msg' => $msg,
+          'hyperlink' => $hyperlink,
+          'query_string' => $query_string,
+          'time' => $time,
+          'status' => $status,
+          'read_by' => 1,
+        ))
+        ->execute();
+  }
+  catch (Exception $e) {
+    watchdog('itg_octopus_add_notification', $e->getMessage());
+  }
+  return TRUE;
+}
+
+/**
+ * Implementation of Octopus Notification for self refresh
+ */
+function itg_generate_octopus_notification() {
+  $itg_octopus_get_slug_notification = itg_octopus_get_slug_notification();
+  print json_encode($itg_octopus_get_slug_notification);
+  drupal_exit();
+}
+
+/**
+ * Implement itg_octopus_notification_by_uid
+ * @param string $noti_id
+ */
+function itg_octopus_notification_by_uid($noti_id) {
+  global $user;
+  if (isset($noti_id) && !empty($noti_id)) {
+    $noti_id_real = base64_decode($noti_id);
+    if (isset($noti_id_real) && !empty($noti_id_real)) {
+      try {
+        global $user;
+        $query = db_select('itg_octopus_notification_by_uid', 'onu')
+            ->condition('onu.notification_id', $noti_id_real, '=')
+            ->condition('onu.uid', $user->uid, '=')
+            ->fields('onu', array('id'))
+            ->execute();
+        $num = $query->rowCount();
+        if ($num == 0) {
+          try {
+            db_insert('itg_octopus_notification_by_uid')
+                ->fields(array(
+                  'notification_id' => $noti_id_real,
+                  'status' => 1,
+                  'uid' => $user->uid,
+                  'timestamp' => REQUEST_TIME,
+                ))->execute();
+          }
+          catch (Exception $e) {
+            watchdog('itg_octopus_notification_by_uid', $e->getMessage());
+          }
+        }
+      }
+      catch (Exception $e) {
+        watchdog('itg_octopus_notification_by_uid', $e->getMessage());
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall()
+ */
+function itg_octopus_api_uninstall() {
+  variable_del('itg_octopus_support_team_email');
+  variable_del('itg_octopus_notify_email');
+  variable_del('itg_octopus_rundown_element_type_name');
+  variable_del('itg_octopus_url_current');
+  variable_del('itg_octopus_url_next1');
+  variable_del('itg_octopus_url_next2');
+  variable_del('itg_octopus_ftp_ip');
+  variable_del('itg_octopus_ftp_port');
+  variable_del('itg_octopus_ftp_username');
+  variable_del('itg_octopus_ftp_password');
 }

@@ -83,6 +83,6 @@ print '</div>';
 </div>
 
 <div class="past-polls">
-    <div class="past-poll-label"><h3><span><?php echo t('Past Poll') ?></span></h3></div>
+    <div class="past-poll-label"><h3><span><?php echo t('Past Polls') ?></span></h3></div>
   <?php print views_embed_view('past_polls', 'block'); ?>
 </div>

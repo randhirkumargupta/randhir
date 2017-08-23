@@ -61,6 +61,7 @@
     <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
@@ -69,7 +70,7 @@
       body{font: 400 14px/18px 'Roboto Slab'; color: #333;}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
-      p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      p{line-height: 24px; margin: 10px 0; white-space: normal; word-wrap: break-word;}
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
@@ -513,6 +514,8 @@
         text-align: center;
         font-size: 12px;
         border-top: 1px solid #111111;
+        word-wrap: break-word;
+        white-space: normal;
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
@@ -541,7 +544,7 @@
       .fun-facts{float: left;}
       .factoids-page .social-share{height: 22px;}
       .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: left;left: 5px;}
-      .factoids-page .social-share ul{list-style: none; top: -24px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share ul{list-style: none; top: -24px; left: 120px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
       .quotes {

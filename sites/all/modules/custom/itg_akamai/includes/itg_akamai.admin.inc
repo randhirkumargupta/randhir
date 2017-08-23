@@ -80,6 +80,21 @@ function itg_akamai_settings() {
     '#required' => TRUE,
   );
 
+  $nodes_list = node_type_get_types();
+  $nodes_list_array = array();
+  foreach ($nodes_list as $key => $value) {
+    $nodes_list_array[$key] = $value->name;
+  }
+
+  $form['itg_config_fieldset']['itg_akamai_cc_conf_list'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Select Content Type List for Akamai'),
+    '#options' => $nodes_list_array,
+    '#default_value' => variable_get('itg_akamai_cc_conf_list'),
+    '#description' => t('Akamai Access Token'),
+    '#required' => TRUE,
+  );
+
   return system_settings_form($form);
 }
 
@@ -123,6 +138,8 @@ function itg_akamai_cache_control() {
  */
 function itg_akamai_cache_control_submit($form, &$form_state) {
   $paths = explode("\n", filter_xss($form_state['values']['paths']));
+  $paths = array_map('trim', $paths);
+  $paths = itg_akamai_cache_control_get_path_alias($paths);
   $action = $form_state['values']['refresh'];
   $overrides = array(
     'action' => $form_state['values']['refresh'],
@@ -151,10 +168,12 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
   );
 
   $form['fieldset']['markup1'] = array(
+    '#weight' => 1,
     '#markup' => '<p>' . l('Click here for node report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamai_not_implemented') . '</p>',
   );
 
   $form['fieldset']['markup2'] = array(
+    '#weight' => 2,
     '#markup' => '<p>' . l('Click here for section report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamais_not_implemented') . '</p>',
   );
 
@@ -163,6 +182,7 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#title' => t('Purge Id'),
     '#description' => t('Please enter Purge id'),
     '#default_value' => isset($_GET['purge_id']) ? $_GET['purge_id'] : '',
+    '#weight' => 3,
   );
 
   $form['fieldset']['url'] = array(
@@ -170,6 +190,7 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#title' => t('Url'),
     '#description' => t('Enter Url'),
     '#default_value' => isset($_GET['url']) ? $_GET['url'] : '',
+    '#weight' => 4,
   );
 
   $form['fieldset']['user'] = array(
@@ -178,6 +199,7 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#description' => t('Enter User Name'),
     '#default_value' => isset($_GET['user']) ? $_GET['user'] : '',
     '#autocomplete_path' => 'user/autocomplete',
+    '#weight' => 5,
   );
 
   $form['fieldset']['display_button'] = array(
@@ -185,13 +207,37 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
     '#suffix' => l(t('Reset'), 'admin/config/system/itg_akamai/akamai_log', array('attributes' => array('class' => array('btn-reset btn-small')))) . '</div">',
     '#type' => 'submit',
     '#value' => t('Search'),
-    '#attributes'=>array('class'=>array('btn-small')),
+    '#attributes' => array('class' => array('btn-small')),
     '#submit' => array('itg_akamai_cache_akamai_log_submit'),
+    '#weight' => 6,
+  );
+
+  $form['fieldset']['start_date'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('Start Date'),
+    '#default_value' => "",
+    '#date_format' => "Y-m-d",
+    '#year_start' => '-99',
+    '#year_end' => '+0',
+    '#weight' => 7,
+    '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
+  );
+
+  $form['fieldset']['end_date'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('End Date'),
+    '#default_value' => "",
+    '#date_format' => "Y-m-d",
+    '#year_start' => '-99',
+    '#year_end' => '+0',
+    '#weight' => 8,
+    '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
 
   $itg_akamai_all_logs_rows = itg_akamai_all_logs_rows();
   $form['markup'] = array(
     '#markup' => drupal_render($itg_akamai_all_logs_rows),
+    '#weight' => 9,
   );
 
   return $form;
@@ -205,12 +251,16 @@ function itg_akamai_cache_akamai_log_submit($form, &$form_state) {
   $purge_id = isset($form_state['values']['purge_id']) ? trim($form_state['values']['purge_id']) : '';
   $user = isset($form_state['values']['user']) ? trim($form_state['values']['user']) : '';
   $url = isset($form_state['values']['url']) ? trim($form_state['values']['url']) : '';
+  $start_date = isset($form_state['input']['start_date']['date']) ? trim($form_state['input']['start_date']['date']) : '';
+  $end_date = isset($form_state['input']['end_date']['date']) ? trim($form_state['input']['end_date']['date']) : '';
 
   drupal_goto('admin/config/system/itg_akamai/akamai_log', array(
     'query' => array(
       'purge_id' => $purge_id,
       'user' => $user,
       'url' => $url,
+      'start_date' => $start_date,
+      'end_date' => $end_date,
     ),
       )
   );
@@ -226,7 +276,8 @@ function itg_akamai_all_logs_rows() {
   $purge_id = isset($parameters['purge_id']) ? $parameters['purge_id'] : '';
   $user = isset($parameters['user']) ? $parameters['user'] : '';
   $url = isset($parameters['url']) ? $parameters['url'] : '';
-
+  $start_date = isset($parameters['start_date']) ? trim($parameters['start_date']) : date('Y-m-d');
+  $end_date = isset($parameters['end_date']) ? trim($parameters['end_date']) . ' 23:59:59' : date('Y-m-d') . ' 23:59:59';
   $header = array(
     t('Sn no.'),
     t('Purge id'),
@@ -248,6 +299,15 @@ function itg_akamai_all_logs_rows() {
     $query->condition('a.purge_id', $purge_id);
   }
 
+
+  if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
+    $query->condition('a.timestamp', strtotime($start_date), '>=');
+  }
+
+  if (isset($_GET['end_date']) && !empty($_GET['end_date'])) { // end date
+    $query->condition('a.timestamp', strtotime($end_date), '<=');
+  }
+
   if (isset($user) && !empty($user)) {
     $query->condition('u.name', $user);
   }
@@ -255,6 +315,10 @@ function itg_akamai_all_logs_rows() {
   if (isset($url) && !empty($url)) {
     $query->condition('a.url', $url);
   }
+
+
+
+
 
   $query = $query->extend('PagerDefault')->limit(50);
   if (isset($parameters['sort']) && !empty($parameters['sort'])) {
@@ -312,18 +376,26 @@ function itg_akamai_cache_akamai_ccpurge() {
     '#prefix' => '<div id="akamai-custom-cache"></div>',
   );
 
-  $header = array('Sn.', 'Content Type', 'Settings', 'Actions');
-
+  $header = array('Sn.', 'Content Type', 'TTL(In Sec.)', 'Maximum number of node limit(For Bulk Operation)', 'Settings', 'Actions');
 
   $allnodes = node_type_get_types();
   $sn = 1;
   // This is the restricted_cc
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
+
+  $mapping = itg_akamai_getting_mapped_content_type();
+
   foreach ($allnodes as $key => $value) {
     if (in_array($value->type, $mapping)) {
+      $ttl_time = variable_get('akamai_timeout_' . $value->type);
+      $ttl_time_final = 0;
+      if (!empty($ttl_time)) {
+        $ttl_time_final = itg_akamai_convert_to_string_time($ttl_time);
+      }
       $rows[] = array(
         $sn++,
         $value->name . ' - ' . $value->type,
+        $ttl_time_final,
+        variable_get('akamai_max_nodelimit_' . $value->type),
         l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal'))),
         l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => ''))),
       );
@@ -605,9 +677,17 @@ function itg_akamai_cache_akamai_section() {
 
   $form['itg_akamai_section']['akamai_timeout_section_card'] = array(
     '#type' => 'textfield',
-    '#title' => t('Enter TTL for Section Card'),
+    '#title' => t('Refresh Time of Section card'),
     '#default_value' => variable_get('akamai_timeout_section_card', 0),
     '#description' => t('Enter TTL for Section Card for akamai cache'),
+    '#required' => TRUE,
+  );
+
+  $form['itg_akamai_section']['akamai_timeout_section_card_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter TTL for Section Card'),
+    '#default_value' => variable_get('akamai_timeout_section_card_ttl', 0),
+    '#title' => t('Enter TTL for Section Card for Akamai Cache'),
     '#required' => TRUE,
   );
 
@@ -623,7 +703,7 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
 
   $form['itg_akamai_homepage'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Akamai Cache TTL Setting for Some Other URL/Component',
+    '#title' => 'Akamai Cache TTL Setting for Custom URL',
   );
 
   $form['#limit_validation_errors'] = array();
@@ -637,11 +717,11 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   $form['markup_data'] = [
-    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-store, no-cache.'),
+    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-cache.'),
   ];
 
   $form['field_container'] = [
-    '#title' => 'Custom and Other URL\'s TTL',
+    '#title' => 'Custom URL\'s TTL',
     '#type' => 'fieldset',
     '#weight' => 80,
     '#tree' => TRUE,
@@ -888,8 +968,8 @@ function itg_akamai_akamai_not_implemented_rows() {
   );
 
   // Getting the list of nids for content types
+  $mapping = itg_akamai_getting_mapped_content_type();
 
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   $query = db_select('itg_akamai_content_setting', 'a');
   $query->fields('a', array('entity_id'));
   $query->condition('a.entity_type', $mapping, 'IN');
@@ -954,8 +1034,8 @@ function itg_akamai_akamais_not_implemented_rows() {
   );
 
   // Getting the list of nids for content types
+  $mapping = itg_akamai_getting_mapped_content_type();
 
-  $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
   $query = db_select('itg_akamai_content_setting', 'a');
   $query->fields('a', array('entity_id'));
   $query->condition('a.entity_type', 'taxonomy');
@@ -1004,4 +1084,67 @@ function itg_akamai_akamais_not_implemented_rows() {
   );
 
   return $render_array;
+}
+
+/**
+ * Get complete path alias
+ * @param array $paths
+ */
+function itg_akamai_cache_control_get_path_alias($paths) {
+  $nids = array();
+  $final_alias_data = array();
+  $query = db_select('url_alias', 'ul');
+  $query->distinct();
+  $query->condition('ul.alias', $paths, 'IN');
+  $query->fields('ul', array('alias', 'source'));
+  $result = $query->execute();
+  foreach ($result as $row) {
+    if (strpos($row->source, 'node/') !== false) {
+      $url_part = explode('/', $row->source);
+      $nids[] = $url_part[1];
+      $final_alias_data[$row->alias] = array('alias' => $row->alias, 'alias_flag' => true, 'nid' => $url_part[1]);
+    }
+  }
+
+  foreach ($paths as $path_values) {
+    if (!isset($final_alias_data[$path_values])) {
+      $final_alias_data[$path_values]['nid'] = null;
+    }
+  }
+
+  $itg_akamai_matched_cmp_nids = itg_akamai_cache_get_amp_cc_mapping($nids);
+  $itg_akamai_final_amp = array();
+  $itg_akamai_final_var = array();
+  foreach ($final_alias_data as $key => $final_alias_chunk) {
+    if (isset($final_alias_chunk['nid']) && in_array($final_alias_chunk['nid'], $itg_akamai_matched_cmp_nids)) {
+      // IF AMP is true
+      $itg_akamai_final_amp[] = $key;
+    }
+    else {  // IF AMP is false
+      $itg_akamai_final_var[] = $key;
+    }
+  }
+
+  $amp_added_urls = itg_akamai_send_for_host_mapping_for_amp($itg_akamai_final_amp);
+  $super_final_urls = array_unique(array_merge($itg_akamai_final_var, $amp_added_urls));
+  return $super_final_urls;
+}
+
+/**
+ * Getting amp content type mapping with complete data
+ * @param array $alias
+ * @return type
+ */
+function itg_akamai_cache_get_amp_cc_mapping($alias) {
+  $type = itg_akamai_amp_cc_mapping();
+  $qry = db_select('node', 'n');
+  $qry->condition('n.nid', $alias, 'IN');
+  $qry->condition('n.type', $type, 'IN');
+  $qry->fields('n', array('nid'));
+  $res = $qry->execute();
+  $nids = array();
+  foreach ($res as $data) {
+    $nids[] = $data->nid;
+  }
+  return $nids;
 }

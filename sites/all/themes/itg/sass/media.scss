@@ -10,9 +10,6 @@
   #block-views-photo-landing-slider-block{
     width: 100%;
   }
-  ::-webkit-scrollbar {
-    display: none;
-  }
   #block-views-video-landing-header-block .video-header-right .ads{
     position: relative;
   }
@@ -437,17 +434,17 @@
   }
   /*search page css end */
   
-  #block-itg-live-tv-live-tv-video-page{
-    .program-livetv{
-      .live_tv_video{
-        max-width: 82%;
-        padding-bottom: 46.5%;
-      }
-      .social-icon{
-        width: 18%;
-        padding-top: 10px;
-      }
-    }
+  /* Scroll bar css */
+  ::-webkit-scrollbar{
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa;
   }
 }   
 
@@ -592,20 +589,6 @@
     }
   }
   /*budget page css end*/
-
-  #block-itg-live-tv-live-tv-video-page{
-    .program-livetv{
-      .live_tv_video{
-        max-width: 83%;
-        padding-bottom: 47%;
-      }
-      .social-icon{
-        width: 17%;
-        padding-top: 0px;
-      }
-    }
-  }
-
 }
 
 @media only screen and (max-width:768px){
@@ -1495,7 +1478,7 @@
   .view-front-end-global-search{
     .views-exposed-widget .caln{
       position: inherit;
-      right: auto;
+      right: 258px;
     }   
   }
   [id="views-exposed-form-front-end-global-search-page"]{
@@ -1648,6 +1631,9 @@
     z-index: 999999;
     position: relative;
   }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
+    width: 165px;
+  }
 
 }
 
@@ -1788,7 +1774,15 @@
 }
 
 
-
+@media all and (min-width: 680px){
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon{position: relative;}
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon > ul{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+}
 @media only screen and (max-width:680px){ 
   /*CSS start video landing page*/
   #block-views-video-landing-header-block-1{
@@ -1998,15 +1992,17 @@
       }
     }
     .program-livetv{
-      padding: 10px;
-      .social-icon{
+      padding: 10px 10px 0;
+      display: block;
+      .social-icon, .live_tv_video{
         width: 100%;
       } 
       .live_tv_video{
-        max-width: none;
         padding-bottom: 56.25%;
       }
       .social-icon {
+        > ul{position: relative;}
+        padding-top: 0;
         li{
           @include display-inline;
           a{
@@ -2020,6 +2016,14 @@
               display: none;
             }
           }                
+        }
+        .show-embed-code-link{
+          position: static;
+          .show-embed-code-div{
+            transform: none;
+            width: 100%;
+            left: 0;
+          }
         }
       }
     }
@@ -2791,7 +2795,10 @@
       white-space: inherit;
       overflow-x: inherit;
       .views-exposed-widget{
-        float: left;                                
+        float: left;   
+        &.views-submit-button{
+          width: 165px;
+        }
       }
     }
     .view-filters{        
@@ -2847,7 +2854,7 @@
     }
     .views-exposed-widget .caln{
       position: inherit;
-      right: auto;
+      right: 258px;
     }
   }     
   /*End css ITG globle search result page*/

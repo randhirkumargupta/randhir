@@ -180,10 +180,22 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
   );
 
+  $form['solr_server_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr server url'),
+    '#default_value' => variable_get('solr_server_url'),
+  );
+  
   $form['solr_url_config'] = array(
     '#type' => 'textarea',
     '#title' => t('Solr urlconfig'),
     '#default_value' => variable_get('solr_url_config'),
+  );
+  
+  $form['global_loyalty_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Global loyalty url'),
+    '#default_value' => variable_get('global_loyalty_url'),
   );
 
   $form['aaj_tak_json_url'] = array(
@@ -245,6 +257,22 @@ function itg_widgets_custom_variables() {
     '#title' => t('Reporter tid for widgets and anchors-listing page'),
     '#attributes' => array('placeholder' => t('Reporter tid for widgets')),
     '#default_value' => variable_get('reporter_tid_for_widgets'),
+  );
+  
+  $form['itg_front_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_front_url'),
+    '#required' => TRUE,
+  );
+  
+  $form['itg_backend_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Backend Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_backend_url'),
+    '#required' => TRUE,
   );
   
   return system_settings_form($form);

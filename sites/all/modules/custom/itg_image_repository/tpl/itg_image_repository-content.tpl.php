@@ -81,7 +81,7 @@ global $base_url;
 </div><!-- itg_image_repository-content -->
 <div id="browse-resizer" class="y-resizer"></div>
 <div id="loader-data" style="display: none"><img class="widget-loader" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
-<div id="preview-wrapper"><div id="search-preview" style="display:none"><iframe onload="hideloader();" src="<?php echo base_path() . 'searchimage?keyword=' . $term; ?>" width="900" height="650"></iframe> 
+<div id="preview-wrapper"><div id="search-preview" style="display:none"><iframe scrolling="no" onload="hideloader();" src="<?php echo base_path() . 'searchimage?keyword=' . $term; ?>" width="900" height="650"></iframe> 
     </div><div id="file-preview"></div></div>
 <script>
     jQuery('.div-upload-img').addClass('active');

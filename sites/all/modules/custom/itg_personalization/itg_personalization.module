@@ -86,7 +86,8 @@ function itg_personalization_home_page() {
   global $user, $base_url;
   $data = array();
   $arg = arg();
-  if($arg[1] != 'saved-items') {
+  $exclude_page = array('saved-items', 'my-credits');
+  if(!in_array($arg[1] , $exclude_page)) {
   drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
   }
   // Load user fields
@@ -295,7 +296,12 @@ function itg_personalization_block_view($delta = '') {
       $block['content'] .= '<div id="target-content"></div>';
       break;
     case 'user_my_point':
-      $data = itg_loyalty_reward_user_details($user->uid);
+      //$data = itg_loyalty_reward_user_details($user->uid);
+      if(function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      $property = variable_get('property_name');
+      $data = itg_get_global_credits($user->uid, $property, $sso_id);
       $block['content'] = theme('personalization_my_point', array('data' => $data));
       break;
     case 'personalization_edit_profile':
@@ -552,7 +558,13 @@ function itg_personalization_reddem_referfriend($key) {
       drupal_set_message($ex->getMessage(), 'error');
     }
     if ($itg_result) {
-      itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      if(function_exists('itg_global_loyality_send_data')) {
+        itg_global_loyality_send_data($itg_result, 'raf', 0, '', $sso_id);
+      }
+      //itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
     }
   }
 }
@@ -650,7 +662,7 @@ function _personalization_show_content() {
 
       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
         $output.= '<span class="personal-social-share-links">';
-        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" . urlencode($actual_link) . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
+        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" .  $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
         $output.= '<a href="javascript:;" title = "share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(\'' . urlencode($fbSocial_share_title) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a>';
         $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . urlencode($actual_link) . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
         $output.= '</span>';

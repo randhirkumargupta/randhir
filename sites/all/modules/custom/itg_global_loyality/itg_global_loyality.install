@@ -1,0 +1,173 @@
+<?php
+/**
+ * @file
+ * Install functions for the Api's.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store file information associated with a node
+ * @return array
+ */
+function itg_global_loyality_schema() {
+  $schema['itg_global_loyality_point'] = array(
+    'description' => 'Table for store information related to global loyality points.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sso_id' => array(
+        'description' => 'sso user id.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'nid' => array(
+        'description' => 'Node id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'loyalty_type' => array(
+        'description' => 'loyality type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'loyalty_points' => array(
+        'description' => 'Loyalty points.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remaining_points' => array(
+        'description' => 'remaining point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'property' => array(
+        'description' => 'property',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'status.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'newsletter' => array(
+        'description' => 'newsletter.',
+        'type' => 'varchar',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'expiry_date' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  // Order Table
+  $schema['itg_global_reward_order'] = array(
+    'description' => 'Table for storing user order.',
+    'fields' => array(
+      'order_id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sso_id' => array(
+        'description' => 'sso user id.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'Order status 1 for complete and 0 for pending.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'product_information' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the product complete information.',
+      ),
+      'nids' => array(
+        'description' => 'Comma separated nids',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'product_id' => array(
+        'description' => 'Product id',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'property' => array(
+        'description' => 'Property',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'site_url' => array(
+        'description' => 'Product id',
+        'type' => 'text',
+        'null' => TRUE,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('order_id'),
+  );
+
+  return $schema;
+}

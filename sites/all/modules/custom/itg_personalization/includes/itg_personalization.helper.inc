@@ -15,7 +15,16 @@
  *   Earned and next badge information.
  */
 function itg_personalization_badge($uid) {
-  $data = itg_loyalty_reward_user_details($uid); 
+  //$data = itg_loyalty_reward_user_details($uid);
+  if(!empty(variable_get('property_name'))) {
+  $property = variable_get('property_name');
+  }
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($uid);
+  }
+  if(function_exists('itg_get_badge_credits')) {
+  $data = itg_get_badge_credits($uid, $property , $sso_id);
+  }
   // Prepare array of all badge steps.
   $badge = array(
     variable_get('lrp_gold_star_one'),
@@ -65,6 +74,7 @@ function itg_personalization_badge($uid) {
     'next' => $earned_badge != 5 ? $earned_badge + 1 : 0,
     'points_to_go' => $points_to_go,
     'progress_bar' => $progress_bar,
+    'global_point' => $data['total_global_point'],
   );
 
   return $data;
