@@ -173,7 +173,6 @@ function itg_octopus_api_sending_video_s3(attr_id, slug_id, base_url) {
                 if (s3_response_data.success == 'no') {
                     jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>' + s3_response_data.msg + '</p></div>');
                 }
-
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
@@ -200,7 +199,6 @@ function itg_octopus_dumping_video_status(data, base_url, attr_id, slug_id, s3_v
             data: {'id': data},
             beforeSend: function() {
                 jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video download in progress..</p></div>');
-
             },
             success: function(datafinal) {
                 var datafinal_json = JSON.parse(datafinal);

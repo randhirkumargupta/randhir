@@ -247,20 +247,7 @@ function itg_octopus_api_rundown_listing() {
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
 
-  # configure the table header columns
-  $header = array(
-    array('data' => t('Sn.')),
-    array('data' => t('Video ID')),
-    array('data' => t('Video Title')),
-    array('data' => t('Category')),
-    array('data' => t('Created By')),
-    array('data' => t('Modified By')),
-    array('data' => t('Created Date & Time')),
-    array('data' => t('Modified Date & Time')),
-    array('data' => t('Location')),
-    array('data' => t('Actions')),
-  );
-
+ 
   $pagination = '';
   $current_rundown = '';
 
@@ -302,7 +289,9 @@ function itg_octopus_api_rundown_listing() {
 
   $query = db_select('itg_rundown', 'rund')->extend('PagerDefault')->limit(50);
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
+  $query->join('itg_element_clip', 'clip', 'clip.storyid=ios.storyid');
   $query->fields('ios');
+  $query->fields('clip',array('text'));
 
   if (isset($_GET['title']) && !empty($_GET['title'])) { // Title
     $query->condition('ios.story_title', $_GET['title'], '=');
@@ -344,6 +333,7 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Sn.')),
     array('data' => t('Video ID')),
     array('data' => t('Video Title')),
+    array('data' => t('Video Description')),
     array('data' => t('Category')),
     array('data' => t('Created By')),
     array('data' => t('Modified By')),
@@ -367,10 +357,14 @@ function itg_octopus_api_rundown_listing() {
       $background_color = 'bg-none';
     }
 
+    $video_description = itg_octopus_api_remove_cdata($row->text);
+    $video_description = substr($video_description, 0, 150);
+
     $rows[] = array(
       array('data' => $sn++),
       array('data' => $row->storyid),
       array('data' => $row->story_title),
+      array('data' => $video_description),
       array('data' => $row->category),
       array('data' => $row->story_created_by),
       array('data' => $row->story_modified_by),
@@ -700,15 +694,13 @@ function itg_octopus_slug_clip($slug) {
 function itg_octopus_api_move_dump_server_to_s3() {
   // set_time_limit(0);
   // ini_set('memory_limit', '-1');
- // $video_path  = 'SOME_URL/'.$_POST['id'];[TODO]
- // $video_path = OCTOPUS_DUMPING_MACHINE_URL;
   $files_path = variable_get('file_public_path', conf_path() . '/files');
   global $base_url;
   $data = array();
   // $post_video_id = $_POST['id'];
   $post_video_id = $_POST['id'];
   // $video_path = $base_url . '/' . $post_video_id;
-  $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
+  $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // TODO
   $conn_id = itg_octopus_api_ftp_connection_setup();
   if (empty($conn_id)) {
     // Handling error when there is some problem while creating connection
@@ -749,7 +741,7 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $file_d_success = 1;
   // close the connection
   //ftp_close($conn_id);
-  
+
   if ($file_d_success == 1) {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
@@ -783,7 +775,7 @@ function itg_octopus_api_video_s3_to_dm() {
   $response = itg_videogallery_dailymotion_send_video($s3video_url);
   if (!empty($response)) {
     $response_result['video_id'] = $response['id'];
-  // Added entry in file browse
+    // Added entry in file browse
     $file_object = itg_octopus_api_check_exist_file_browse($filename, $file_size);
     $response_result['fid'] = (int) $file_object;
     try {
