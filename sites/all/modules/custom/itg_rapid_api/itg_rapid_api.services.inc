@@ -3973,7 +3973,16 @@ function itg_rapid_api_update_preference($token) {
         $updates[$tid]['value'] = $is_preffered;
     }
 
-   
+   $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token/User ID";
