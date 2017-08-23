@@ -422,7 +422,7 @@ $uri = base64_encode($actual_link);
                             <div class="tab-buttons">
                               <span class="<?php echo ($_flag?'active':'');?>" data-id="tab-data-1">
                                     <?php
-                                            print 'Related Content';
+                                            print 'Related';
                                     ?>
                               </span>
                               <span class="<?php echo (!$_flag?'active':'');?>" data-id="tab-data-2">
@@ -460,25 +460,33 @@ $uri = base64_encode($actual_link);
 .video-header-right .video_header_tabs .tab-data-2 h3{
 	display:none;
 }
-#related-video-tab ul li.related_content_tab .pic{
+.video-header-right .trending-videos{ border:0px;}
+#related-video-tab ul li.related_content_tab .pic,.video-header-right .trending-videos li.trending-videos-list .pic{
 	    width: 88px;
 	        float: right;
     margin-left: 5px;
         position: relative;
 }
-#related-video-tab ul li{
-	    padding: 10px 24px 10px 30px;
-	    height: 76px;
+#related-video-tab ul li, .trending-videos ul li{
+	    padding: 15px 24px 15px 0px;
+	    border-bottom: 1px solid #aaa9a9;overflow: hidden;
 }	
-#related-video-tab ul li.related_content_tab .title{
+#related-video-tab ul li.related_content_tab .title,.video-header-right .trending-videos li.trending-videos-list p{
 	display: block;
     overflow: hidden;
     word-wrap: break-word;
     font-size: 14px;
     font-size: 0.875rem;
     line-height: 19px;
-    color: #323232;
+    color: #aaa9a9;
 }
+#related-video-tab ul li.related_content_tab .title a, .trending-videos li.trending-videos-list p a{color: #aaa9a9;}
+.latest_video .tab-buttons {background: #000; border-radius: 0;padding: 5px 0 0 5px;}
+.latest_video .tab-buttons.tab-buttons span{border:0px;background:none;width: auto; padding:5px 10px; height:26px; line-height:18px;font-weight: 500;font-size: 12px; color: #fff; font-size: 12px; width: auto; border-radius: 0;}
+.latest_video .tab-buttons span.active{ border: 0px; background: #363636; color: #fff;height:26px; line-height:18px; font-size: 12px; width: auto; border-radius: 0;}
+.video-header-right .related_content_tab span.videolengh{bottom: 0;left: 0; position: absolute;padding: 3px;background-color: rgba(0, 0, 0, 0.5);color: #fff;font-size: 12px;font-family: Roboto;}
+.video-landing-header .upload-date span{ font-size:12px; font-weight:600; margin: 10px 0; display: block;}
+.video-landing-header .top-section p{margin-bottom:10px}
 </style>
 <script>
   jQuery(document).ready(function () {
