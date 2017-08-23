@@ -136,6 +136,18 @@ function itg_videogallery_block_info() {
     'info' => t('Video landing page menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['videogallery_tab_realted_content'] = array(
+    'info' => t('Video header related content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['videogallery_link_menu_video'] = array(
+    'info' => t('Video landing Link page menu'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['other_videogallery_from_section'] = array(
+    'info' => t('Other Video Gallery from primary Category'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -154,6 +166,26 @@ function itg_videogallery_block_view($delta = '') {
       break;
     case 'videogallery_menu_video_block':
       $block['content'] = theme('videogallery_menu_video_block', array('data' => $data));
+      break;
+    case 'videogallery_tab_realted_content':
+      $block['content'] = _header_tab_related_video_block_content();
+      break;
+    case 'videogallery_link_menu_video':
+      if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $node = node_load(arg(1));
+        if ($node->type == 'videogallery') {
+            $block['content'] = theme('videogallery_link_menu_video_block', array('data' => $data));
+        }
+        else {
+            $block['content'] = '';
+        }
+      }
+      else {
+        $block['content'] = '';
+      }
+      break;
+    case 'other_videogallery_from_section':
+      $block['content'] = _get_other_videos_from_primary_category();
       break;
   }
 
@@ -203,6 +235,11 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'videogallery_link_menu_video_block' => array(
+      'template' => 'videogallery-link-menu-landing-template',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
   return $themes;
 }
@@ -216,6 +253,15 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
 function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
+    case 'itg_widgets_custom_variables':
+            $form['tid_videos'] = array(
+              '#type' => 'textfield',
+              '#title' => 'Tid of videos',
+              '#default_value' => variable_get('tid_videos'),
+              '#size' => 20,
+              '#maxlength' => 20,
+            );
+            break;
     case 'videogallery_node_form':
       $arg = arg(2);
       $form['field_story_expert_description']['und'][0]['#format'] = 'full_html';
@@ -1418,6 +1464,16 @@ function itg_videogallery_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_video;
+    }
+  }
+  if ($view->name == "video_list_of_category" && $view->current_display == 'block_4') {
+    if (isset($view->args[0])) {
+      $cat_name = itg_videogallery_get_tname($view->args[0]);
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from ' . $cat_name . '</span></h3></div>';
+      $view->attachment_before = $header_content_video;
+    }else{
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from category</span></h3></div>';
       $view->attachment_before = $header_content_video;
     }
   }
@@ -4554,4 +4610,68 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
     $all_video_id[] = $vid_data->solr_video_id;
   }
   return $all_video_id;
+}
+
+function _header_tab_related_video_block_content() {
+    if (arg(1) == null)
+        return false;
+    $related_content = itg_get_related_content(arg(1));
+    if (!empty($related_content)) {
+        if (function_exists('itg_get_related_story_id')) {
+            $related_result = itg_get_related_story_id($related_content);
+        }
+        $related_video .= "<div id='related-video-tab'><ul class='video-list'>";
+        foreach ($related_result as $site_hash_key) {
+            $current_entity_id = $site_hash_key;
+            $related_data = itg_get_related_story_content($current_entity_id);
+
+            if (!empty($related_data)) {
+                $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+                $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+                $related_image = '<img src="' . $related_image_url . '">';
+                if (true || empty($related_image_url)) {
+                    $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+                    $related_video .= "<li class='related_content_tab'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
+                    $related_video .= "<p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+                }
+                else {
+                    $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image;
+                    $related_video .= "</a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+                }
+            }
+        }
+        $related_video .= "</ul></div>";
+        return $related_video;
+    }
+    else {
+        return false;
+    }
+}
+
+/**
+ * Function to show Other video gallery from node primary category
+ * @return array or empty
+ */
+function _get_other_videos_from_primary_category(){
+    if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $tid = get_tid_using_nid_custom(arg(1));
+        return views_embed_view('video_list_of_category', 'block_4', $tid);
+    }else{
+        return '';
+    }
+}
+
+/**
+ * Get Primary category Tid using nid without node load
+ * @return int
+ */
+function get_tid_using_nid_custom($nid){
+    if(isset($nid)){
+        $query = db_select('field_data_field_story_category', 'ttd');
+        $query->fields('ttd', array('field_story_category_tid'));
+        $query->condition('ttd.entity_id', $nid, '=');
+        $result = $query->execute()->fetchField();
+        return $result;
+    }
+    return 0;
 }
