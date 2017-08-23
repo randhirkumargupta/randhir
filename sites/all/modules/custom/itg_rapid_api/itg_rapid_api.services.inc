@@ -3896,7 +3896,7 @@ function itg_rapid_api_get_preference($token) {
         $account = user_load_by_name($user_id);
 
         $preference_tid = get_personalization_saved_value_service($account->uid);
-        p($preference_tid);die();
+        
 
         // return data of personalization-preferences value
         $data['status_code'] = "1";
@@ -3907,8 +3907,10 @@ function itg_rapid_api_get_preference($token) {
         $loop_count = 0;
         //get personalization-preferences value
         foreach ($preference_tid as $key => $value) {
-            $prefeance = itg_rapid_api_get_personalization_saved_value($value, $user_id);
-            $term = taxonomy_term_load($value);
+            $pdata = $value;
+            $tid = $pdata['nid'];
+            $prefeance = $pdata['nid'];
+            $term = taxonomy_term_load($tid);
             $term_name = $term->name;
             $data['data']['preference'][$loop_count]['id'] = "$value";
             $data['data']['preference'][$loop_count]['title'] = "$term_name";
