@@ -26,7 +26,7 @@
 			background: #fff;
 			z-index: 1;
 			position: relative;
-			padding: 45px 20px 10px 10px;
+			padding: 45px 20px 10px 0px;
 			display: inline-block;
 	}
 	.other_photogallery_category h3:before{
