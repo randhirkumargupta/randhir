@@ -833,6 +833,11 @@ function itg_content_inactive() {
     $node = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
     $node->status = 0;
+    if($node->status == 'videogallery') {
+      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
+        itg_videogallery_node_publish_to_unpublish($node->nid);
+      }
+    }
     node_save($node);
     itg_widget_handle_unpublished_node($node->nid);
   }
