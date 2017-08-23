@@ -3912,7 +3912,7 @@ function itg_rapid_api_get_preference($token) {
             $prefeance = $pdata['nid'];
             $term = taxonomy_term_load($tid);
             $term_name = $term->name;
-            $data['data']['preference'][$loop_count]['id'] = "$value";
+            $data['data']['preference'][$loop_count]['id'] = "$tid";
             $data['data']['preference'][$loop_count]['title'] = "$term_name";
             $data['data']['preference'][$loop_count]['is_preffered'] = "$prefeance";
             $loop_count++;
