@@ -11,6 +11,7 @@
  * @param array $updates
  */
 function save_itg_widget_personalization_data($updates) {
+     p($updates);die();
   global $user;
   $widget_name = "personalization_widget";
 
