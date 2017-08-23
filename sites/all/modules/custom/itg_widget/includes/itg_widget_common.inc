@@ -816,6 +816,16 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+    case 'views-exposed-form-manage-newsletter-page':
+      $form['status_1']['#options'] = array(
+        'any' => '- Any -' ,
+        1 => 'Published' ,
+        0 => 'Not published	'
+      );
+      if(isset($_GET['status_1'])) {
+        $form['status_1']['#default_value'] = $_GET['status_1'];
+      }
+      break;
     case 'views-exposed-form-syndication-feed-generator-page':
       foreach ($form['type']['#options'] as $key => $value) {
         if (strtolower($value) == 'story') {

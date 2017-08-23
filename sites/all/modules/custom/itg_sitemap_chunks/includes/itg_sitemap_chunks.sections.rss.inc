@@ -390,7 +390,7 @@ function itg_sitemap_print_section_rss($result) {
       }
       $published_date = gmdate('D, d M Y H:i:s T', strtotime($db_date));
       if (date('Y', strtotime($published_date)) == '1970') {
-        $published_date = date('D, d M Y H:i:s', strtotime($data['created']));
+        $published_date = gmdate('D, d M Y H:i:s T', strtotime($data['created']));
       }
       $xml .= '<title> <![CDATA[ ' . html_entity_decode($node_title) . ' ]]></title>' . "\r\n";
       if (isset($data['name']) && !empty($data['name'])) {

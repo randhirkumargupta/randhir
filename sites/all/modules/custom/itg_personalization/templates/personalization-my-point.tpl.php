@@ -8,7 +8,7 @@ global $user;
 <!-- Outer container for my preference -->
 <div class="preference-container">
     <div class="header-point">
-      <span>Total Earned so For : <strong><?php print $data['total_earned_so_far']; ?></strong></span>
+      <span>Total Earned so Far : <strong><?php print $data['total_earned_so_far']; ?></strong></span>
       <?php 
         print '<span>' . l(t('Redeemed Points : <strong>@redeemed</strong></span>', 
             array('@redeemed' => $data['redeemed_points'])), 'order', array('html' => TRUE)) . '</span>';

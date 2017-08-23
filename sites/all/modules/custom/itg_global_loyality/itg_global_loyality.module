@@ -34,12 +34,27 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-global-remaining-point'] = array(
+    'title' => t('Global badge history'),
+    'page callback' => 'itg_global_remaining_point',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['itg-global-fb-point'] = array(
     'title' => t('Global facebook loyality point'),
     'page callback' => 'itg_global_fb_loyality_point',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['itg-global-get-remaining-point-calculation'] = array(
+    'title' => t('Remaining point calculation'),
+    'page callback' => 'itg_global_get_remaining_point_calculation',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -61,6 +76,7 @@ function itg_get_loyality_point() {
   $status = $_POST['status'];
   $news_letter = $_POST['news_letter'];
   $expiry_date = $_POST['expiry_date'];
+  $created = strtotime(date('Y-m-d'));
   if($loyalty_type == 'Newsletter_subscription') {
   $value_exist = itg_global_loyalty_newsletter_point($uid, $loyalty_type, $news_letter); 
   } else {
@@ -79,6 +95,7 @@ function itg_get_loyality_point() {
             'loyalty_points' => $loyalty_points,
             'remaining_points' => $remaining_points,
             'newsletter' => $news_letter,
+            'created' => $created,
             'property' => $property,
             'status' => $status,
             'expiry_date' => $expiry_date,
@@ -318,8 +335,11 @@ function itg_get_global_point_history() {
   $data['unit_description'] = array();
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
-      $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
-      $data['remaining_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+       $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+       $remain = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+      $data['total_earned_so_far'] = $earn;
+      $data['remaining_point'] = $remain;
+      $data['redeemed_points'] = $earn - $remain;
     }
     $data['unit_description'][] = array(
       'activity_name' => $value->loyalty_type,
@@ -340,8 +360,14 @@ function itg_get_badge_point_history() {
   $uid = $_POST['uid'];
   $sso_final_id = $_POST['sso_id'];
   $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
   //watchdog('badge', $uid);
-  $property = $_POST['property'];
   if (!empty($uid)) {
     $itg_result = array();
   try {
@@ -363,6 +389,7 @@ function itg_get_badge_point_history() {
      if ($key == 0) {
       $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
       $data['total_earned_for_current_level'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
+      $data['total_global_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
     }
   }
     print drupal_json_output($data);
@@ -424,6 +451,60 @@ function itg_get_badge_credits($uid, $property, $sso_id = NULL) {
   }
 }
 
+/*
+ * Implements itg_get_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_get_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  if($uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $property = variable_get('property_name');
+    $url = variable_get('global_loyalty_url').'/itg-global-remaining-point';
+    $data = 'uid=' . $uid . '&property=' . $property.'&sso_id='.$sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_global_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_global_remaining_point($uid, $property, $sso_id = NULL) {
+  global $user;
+  $uid = $_POST['uid'];
+  $sso_final_id = $_POST['sso_id'];
+  $property = $_POST['property'];
+  $sso_id = '';
+  if (empty($sso_final_id)) {
+    $sso_id = $uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  //watchdog('badge', $uid);
+  if (!empty($uid)) {
+    $remain_point = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+    //$remain_point = 40;
+    print drupal_json_output($remain_point);
+    drupal_exit();
+  }
+}
+
 /**
  * Implements itg_global_loyalty_reward_get_total_earn_point().
  * @param int $uid
@@ -447,6 +528,7 @@ function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property =
   }
   if ($type == 'remaining') {
     $itg_query->addExpression('SUM(itg.remaining_points)', 'count');
+    $itg_query->condition('expiry_date', REQUEST_TIME, '>=');
   }
   $total_earn_point = $itg_query->execute()->fetchField();
 
@@ -471,4 +553,123 @@ function itg_global_loyalty_get_point_activity($activityname, $property) {
 
     return $activity_point;
   }
+}
+
+/**
+ * Implements itg_get_total_cart_point().
+ */
+function itg_get_total_cart_point($uid) {
+  $itg_query = db_select('itg_loyalty_reward_cart', 'itg')
+      ->condition('uid', $uid);
+  $itg_query->addExpression('SUM(points * quintity)', 'mul');
+  $itg_result = $itg_query->execute()->fetchField();
+  return $itg_result;
+}
+
+/*
+ * Implements itg_update_remaining_point().
+ * @param int $uid
+ * @param string $property
+ * @param int $sso_id
+ */
+function itg_update_remaining_point($sso_id, $redem_point, $uid, $property, $url, $product_info, $nids) {
+  global $user;
+  if($sso_id > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    $url = variable_get('global_loyalty_url').'/itg-global-get-remaining-point-calculation';
+    $data = 'sso_id=' . $sso_id . '&redem_point=' . $redem_point.'&uid='.$uid.'&property='.$property.'&product_info='.$product_info.'&nids='.$nids.'&url='.$url;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      //drupal_exit();
+    }
+  }
+}
+
+/*
+ * Temporary function for calculating remaining points.
+ */
+function itg_global_get_remaining_point_calculation() {
+  // print $uid = arg(1);
+  //$date = strtotime('2017-08-23');
+  //pr(date('Y-m-d', REQUEST_TIME));
+  $sso_id = $_POST['sso_id'];
+  $redem_point = $_POST['redem_point'];
+  $save = $_POST['redem_point'];
+  $uid = $_POST['uid'];
+  $property = $_POST['property'];
+  $product_info = $_POST['product_info'];
+  $nids = $_POST['nids'];
+  $url = $_POST['url'];
+  $flag = FALSE;
+  if (!empty($sso_id)) {
+    $query = db_select('itg_global_loyality_point', 'fe')
+        ->fields(fe, array('remaining_points', 'id'))
+        ->condition('expiry_date', REQUEST_TIME, '>=')
+        ->orderBY('id', 'ASC')
+        ->condition('fe.sso_id', $sso_id);
+    $result = $query->execute();
+    //$redem_point = 80;
+    //$save = 80;
+    $redem_array = array();
+    while ($record = $result->fetchAssoc()) {
+      $id = $record['id'];
+      $remain = $record['remaining_points'];
+      // print $id.'->'.$remain.'<br/>';
+      if ($save != 0) {
+        $redem_point = $redem_point - $record['remaining_points'];
+        if ($redem_point > 0) {
+          $redem_array[$id] = 0;
+          $save = $redem_point;
+        }
+        else {
+          $point = $record['remaining_points'] - $save;
+          $redem_array[$id] = $point;
+          $save = 0;
+          break;
+        }
+      }
+    }
+    //return drupal_json_output($redem_array);
+    if (!empty($redem_array)) {
+      foreach ($redem_array as $key => $value) {
+        db_update('itg_global_loyality_point')
+            ->fields(array(
+              'remaining_points' => $value,
+            ))
+            ->condition('id', $key, '=')
+            ->execute();
+      }
+      $flag = TRUE;
+     watchdog('check', '<pre>'.print_r($product_data, true).'</pre>');
+     /** product insertion finish **/
+       
+      $global_product_presave = array(
+        'uid' => $uid,
+        'sso_id' => $sso_id,
+        'property' => $property,
+        'site_url' => $url,
+        'product_information' => $product_info,
+        'created' => REQUEST_TIME,
+        'nids' => $nids,
+      );
+     if (!empty($global_product_presave)) {
+       try {
+          $order_placed = db_insert('itg_global_reward_order')
+              ->fields($global_product_presave)
+              ->execute();
+        }
+        catch (Exception $e) {
+          watchdog('product exception', '<pre>' . $e->getMessage() . '</pre>');
+        }
+      }
+      /** product insertion finish **/ 
+    }
+  }
+  return drupal_json_output($redem_array);
 }
