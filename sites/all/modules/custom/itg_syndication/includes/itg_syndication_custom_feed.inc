@@ -106,6 +106,7 @@ function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $clien
   $dom->formatOutput = true;
   $feed = $dom->saveXML($dom->documentElement);
   $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
+  $feed = html_entity_decode($feed);
   $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
   return $file_path_feed;
 }
