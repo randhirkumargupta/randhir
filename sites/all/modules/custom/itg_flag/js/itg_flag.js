@@ -276,10 +276,9 @@ jQuery(document).ready(function () {
         });
     });
 
-    // for follow / unfollow
 
-    // jquery for front user activity
-    jQuery('#follow-activity').click(function (event) {
+    // jquery for front follow / unfollow
+    jQuery('.follow-activity').click(function (event) {
         var id = jQuery(this).attr('id');
         var ftitle = jQuery(this).attr('data-ftitle');
         var untitle = jQuery(this).attr('data-untitle');
@@ -315,6 +314,45 @@ jQuery(document).ready(function () {
                             title: ftitle
                         }).html(ftitle);
                     }
+                    if (obj.error == 'error') {
+
+                    }
+
+                }
+            });
+        }
+    });
+
+    // jquery for delete follow / unfollow
+    jQuery('.delete_class').click(function (event) {
+        var li = jQuery(this).closest('li'),
+            del_id = jQuery(this).attr('id');
+        var post_data = "&nd_id=" + del_id;
+        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
+        if(jQuery(this).attr('data-activity') != 'undefined') {
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/user-remove-follow-activity',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
+
+                },
+                'success': function (result) {
+                    var obj = jQuery.parseJSON(result);
+                    li.fadeOut(1000, function(){
+                        jQuery(this).remove();
+                    });
+
+                    // case for follow anchor
+                    /* if (obj.success == 1 && obj.activity == data_activity) {
+                     jQuery("#" + id).attr({
+                     'data-status': 0,
+                     title: untitle
+                     }).html(untitle);
+                     }*/
+
                     if (obj.error == 'error') {
 
                     }

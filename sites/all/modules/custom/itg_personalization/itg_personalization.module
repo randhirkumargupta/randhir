@@ -69,7 +69,20 @@ function itg_personalization_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-
+  $items['personalization-follow-unfollow'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_follow_unfollow',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_follow_unfollow.inc',
+  );
+  $items['user-remove-follow-activity'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_remove_activity',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_follow_unfollow.inc',
+  );
   return $items;
 }
 

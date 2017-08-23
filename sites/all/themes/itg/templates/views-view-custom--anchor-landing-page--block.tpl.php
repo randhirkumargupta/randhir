@@ -55,8 +55,33 @@ $uri = base64_encode($actual_link);
       </div>
    		
    		<?php 
-  		print itg_follow_unfollow('Follow the Anchor','Unfollow Anchor',$nid, 'anchor', 'follow_anchor','follow-anchor','mobile');
+  		// print itg_follow_unfollow('Follow the Anchor','Unfollow Anchor',$nid, 'anchor', 'follow_anchor','follow-anchor','mobile');
+
+  		// itg_follow_unfollow($follow_title, $unfollow_title, $nid, $source_type,  $activity, $class, $type)
   		?>
+    <!----------------------- Follow / Unfollow ----------- -->
+  	<div class="follow-social">
+  <?php
+   // $user->uid = 261;
+    if ($user->uid > 0) {
+     $follow_status = itg_get_front_activity_info($nid, '', $user->uid, $activity, '');
+
+    if (!empty($follow_status['nid']) && $follow_status['status'] == '1') { ?>
+        <div class="mhide"><a title = "Unfollow Anchor" href="javascript:" id="follow-anchor" data-rel="<?php print $nid; ?>" data-tag="anchor" data-activity="follow_anchor" data-ftitle="Follow" data-untitle="Unfollow" data-status="0" class="follow-activity"><?php print t('Unfollow'); ?></a></div>
+    <?php } else { ?>
+        <div class="mhide"><a title = "Follow the Anchor" href="javascript:" id="follow-anchor" data-rel="<?php print $nid; ?>" data-tag="anchor" data-activity="follow_anchor" data-ftitle="Follow" data-untitle="Unfollow" data-status="1" class="follow-activity"><?php print t('Follow'); ?></a></div>
+    <?php          }
+  } else {
+    ?>
+      <div class="mhide">
+          <a title="follow anchor" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>">
+            <?php print t('Follow'); ?>
+          </a>
+      </div>
+  <?php } ?>
+
+</div>
+	 <!----------------------- End Follow / Unfollow ----------- -->
 
     </div>
   </div>
