@@ -3853,17 +3853,28 @@ function itg_rapid_api_log_out($token) {
         return $account_err;
     }
     //$params = $_POST;
-    $data = array();
-    $user_id = $params['user_id'];
-    $pram = "uname=$user_id";
-    $options = array(
-        'method' => 'POST',
-        'data' => $pram,
-        'timeout' => 15,
-        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-    );
-    $url = $base_url . "/user/logout";
-    $result = drupal_http_request('$url', $options);
+    {
+        // call sso server api
+        $method = "GET";
+        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/log_out";
+        $result = callAPI($method, $url, $params);
+        $user_id = $params['user_id'];
+        $user = user_load_by_name($user_id);
+
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+
+        drupal_save_session($original_session_state);
+    }
     $data['status_code'] = "1";
     $data['status_message'] = "";
 
