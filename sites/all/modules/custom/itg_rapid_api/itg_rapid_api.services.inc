@@ -3889,6 +3889,16 @@ function itg_rapid_api_get_preference($token) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $user_id = $params['user_id'];
     $authtoken_id = $params['authtoken_id'];
+    $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
@@ -3904,7 +3914,7 @@ function itg_rapid_api_get_preference($token) {
         $data['status_message'] = "";
         $data['data']['updated_datetime'] = "$last_access_date";
         //$data['data']['preference_type'] = "default/implicit/explicit";
-        $data['data']['preference_type'] = "default";
+        $data['data']['preference_type'] = "explicit";
         $loop_count = 0;
         //get personalization-preferences value
         foreach ($preference_tid as $key => $value) {
