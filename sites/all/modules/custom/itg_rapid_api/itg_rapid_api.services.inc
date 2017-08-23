@@ -1723,46 +1723,42 @@ function itg_rapid_api_resource() {
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
                     'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
                         array(
                             'name' => 'authtoken_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'authtoken_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                         array(
                             'name' => 'user_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'user_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
                         array(
-                            'name' => 'node_id',
-                            'optional' => FALSE,
-                            'source' => 'data',
+                            'name' => 'preference',
+                            'optional' => TRUE,
+                            //'source' => 'data',
                             //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
                             'description' => 'node_id',
-                            'type' => 'string',
+                            'type' => 'array',
                         ),
-                        array(
-                            'name' => 'value',
-                            'optional' => FALSE,
-                            'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'description' => 'value',
-                            'type' => 'string',
-                        ),
+                        
                     ),
                 ),
             ),
@@ -3942,25 +3938,61 @@ function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
  *
  */
 function itg_rapid_api_update_preference($token) {
-
-    $user_id = $_POST['user_id'];
-    $node_id = $_POST['node_id'];
-    $new_value = $_POST['value'];
+    global $base_url;
+    global $user;
+    $HTTP_RAW_POST_DATA;
     $data = array();
 
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $user_id = $params['user_id'];
+    $authtoken_id = $params['authtoken_id'];
+    $preference = $params['preference'];
     $updates = array();
-    $node_value = array();
-    $node_value['value'] = $new_value;
-    $updates[$node_id] = $node_value;
-
-    $status = rapid_save_itg_widget_personalization_data($updates, $user_id);
-    if ($status) {
-        $data['status_code'] = "1";
-        $data['status_message'] = "updated value successfully";
-    } else {
-        $data['status_code'] = "0";
-        $data['status_message'] = "Custom message";
+    foreach ($preference as $key => $val) {
+        $tid = (int) $val['id'];
+        $value = (int) $val['is_preffered'];
+        if ($value) {
+            $is_preffered = 100;
+        } else {
+            $is_preffered = 0;
+        }
+        $updates[$tid]['value'] = $is_preffered;
     }
+
+   
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $data['status_code'] = "0";
+        $data['status_message'] = "invalid token/User ID";
+    } else {
+        
+        $result = callAPI($method, $url, $params);
+        
+        $user = user_load_by_name($user_id);
+        $widget_name = "personalization_widget";
+
+        $nids = array_keys($updates);
+        // Delete all the tids from table if they are not in $updates variable
+        // unsued tid should be delete
+        db_delete('itg_widget_order')
+                ->condition('widget', $widget_name)
+                ->condition('nid', $nids, "NOT IN")
+                ->condition('extra', $user->uid)
+                ->execute();
+        // Update the weight of tids if exists or insert if dont exists.
+        foreach ($updates as $term_id => $weight) {
+            db_merge('itg_widget_order')
+                    ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
+                    ->fields(array(
+                        'nid' => $term_id,
+                        'widget' => $widget_name,
+                        'weight' => $weight,
+                        'extra' => $user->uid,
+                    ))
+                    ->execute();
+        }
+    }
+    $data['status_code'] = "1";
+    $data['status_message'] = "";
     return $data;
 }
 
