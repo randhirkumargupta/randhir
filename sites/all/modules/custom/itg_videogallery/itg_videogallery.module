@@ -4628,14 +4628,15 @@ function _header_tab_related_video_block_content() {
             if (!empty($related_data)) {
                 $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
                 $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+                $related_video_duration = $related_data->sm_field_video_duration[0];
                 $related_image = '<img src="' . $related_image_url . '">';
                 if (true || empty($related_image_url)) {
                     $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-                    $related_video .= "<li class='related_content_tab'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
+                    $related_video .= "<li class='related_content_tab'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><img src='$img_url' class='related-default' alt='$related_title' /><span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span></a>";
                     $related_video .= "<p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
                 }
                 else {
-                    $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image;
+                    $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span>" . $related_image;
                     $related_video .= "</a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
                 }
             }
