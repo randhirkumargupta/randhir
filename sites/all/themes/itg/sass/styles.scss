@@ -12051,6 +12051,9 @@ span.see-picture{
     overflow: hidden;
   }
 }
+.story-section h1 span.story-pipline, .story-section h1 span.story-pipline + a {
+    color: #086DC7;
+}
 
 
 @media (min-width: 320px) {
@@ -12091,3 +12094,36 @@ span.see-picture{
   }
 }
 /* End of CSS For Story Modal Popup and Carousel */
+
+
+
+
+/*====================SPONSORED PAGE========================*/
+ .big-pic > img{width:100%;}
+ .section-sponsored .big-pic{ position: relative;}
+ .big-pic .cat-heading{ position: absolute; top:0; left:0; background:rgba(19, 36, 56, 0.8); width:100%; padding:25px; color:#fff;font-family: "Roboto", sans-serif;}
+ .big-pic .cat-heading h3 { font-size:22px;line-height: 26px;}
+ .big-pic .cat-heading h3 a{ color:#fff}
+ .view-category-wise-content-list .catagory-listing{ padding:10px 0;}
+ .sidebar-second .may-be-suggest-container h3{ text-align: left;}
+ .may-be-suggest-container h3{ text-align: left;}
+ .watch-right-now-video h3{ text-align: left;}
+ .view.view-category-wise-content-list .view-content{ float: left; width:100%}
+ body.page-taxonomy-term #main .row{ overflow: inherit !important;}
+ .sponsor-header{ float: right; margin-top:-45px; color:#83b1cb; text-transform: uppercase; font-family: roboto;font-size: 12px;position: relative;  z-index: 9999;}
+ .sponsor-powerby{color: #777575; margin-top: 30px;  float: left;font-size: 13px; text-transform: capitalize;}
+ .sponsor-logo{display: inline-block;  border: 1px solid #ccc; padding:5px; margin-left:5px;}
+ .story-sponsor-powered-text{color: #83b1cb;  font-family: roboto;font-size: 14px;}
+ span.story-sponsor-powered-text::last-word { text-transform:uppercase;color:#c00;}
+ .story-sponsor-impact{color: #83b1cb;  font-family: roboto; font-size:12px; text-transform: uppercase; font-weight: bold;}
+ 
+ .story-sponsor-powerby{ color: #777575; margin-top: 30px; float: left;font-size: 13px; text-transform: capitalize; text-align: left; width: 100%; clear: both; margin-bottom:4px;}
+ .story-sponsor-logo{ display: block;  border: 1px solid #ccc;  padding:5px; text-align: left; width: 100%; clear: both; margin-bottom:20px;}
+ .data-holder .itg-listing li a{ padding:20px 18px;}
+ .itg-sponsor-title{ position: absolute; font-size: 9px;  padding:4px 5px 5px 18px; color:#447b9a;}
+ .itg-sponsor-section-title{position: absolute; font-size: 9px; color:#447b9a; top: 2px; left: 12px;}
+ .data-holder .section-ordering p a{ padding:5px 0;}
+ .data-holder .section-ordering p:before{ top:22px;}
+ .featured-news .featured-post a.itg-sponsored{
+   color: #193984;
+ }
