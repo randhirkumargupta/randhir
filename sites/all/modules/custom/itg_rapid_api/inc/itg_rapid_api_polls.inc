@@ -60,7 +60,7 @@ function polls_close_list($cpageno) {
   $data_array['id'] = "1234";
   $data_array['title'] = "Test Title";
 
-  $data_array['poll'] = $data['data'];
+  $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
 
   return $output_array;
@@ -180,17 +180,17 @@ function poll_cast_datalist($poll_id) {
     $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
     $poll_title = $res['title'];
 
-    $news['id'] = "$poll_id";
-    $news['is_sponsored'] = "";
-    $news['sponsored_icon'] = "";
-    $news['sponsored_link'] = "";
-    $news['publish_datetime'] = "$poll_publish_date_time";
-    $news['title'] = "$poll_title";
-    $news['image'] = "$poll_ques_img";
-    $news['share_link'] = get_node_firebase_weburl($res['nid']);
-    $news['total_count'] = "$count_total_partic";
+    $news['p_id'] = "$poll_id";
+    $news['p_is_sponsored'] = "";
+    $news['p_sponsored_icon'] = "";
+    $news['p_sponsored_link'] = "";
+    $news['p_publish_datetime'] = "$poll_publish_date_time";
+    $news['p_title'] = "$poll_title";
+    $news['p_image'] = "$poll_ques_img";
+    $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
+    $news['p_total_count'] = "$count_total_partic";
 
-    $news['option'] = $options2;
+    $news['p_option'] = $options2;
     $news2[] = $news;
   }
 
