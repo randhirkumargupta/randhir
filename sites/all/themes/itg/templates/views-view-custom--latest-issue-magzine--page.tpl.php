@@ -13,7 +13,15 @@
       <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue">latest issue</span>
         <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
-        <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
+        <div class="issue-title">
+          <?php 
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
+          } else {
+            print $row['field_issue_title'];
+          }
+          ?>
+        </div>
         <?php
         $current_issues = itg_msi_get_current_issue();
         $current_issue = explode(' 00:', $current_issues);
@@ -38,7 +46,15 @@
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php t('latest issue'); ?></span>
       <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
-      <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
+        <div class="issue-title">
+          <?php 
+          if (function_exists('itg_common_get_smiley_title')) {
+            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
+          } else {
+            print $row['field_issue_title'];
+          }
+          ?>
+        </div>
       <?php
       $current_issues = itg_msi_get_current_issue();
       $current_issue = explode(' 00:', $current_issues);
@@ -74,6 +90,7 @@
     foreach ($data as $parent_key => $parent_value) {
       $sub_title = '';
       foreach ($parent_value as $key => $value) {
+        print_r($value);
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
           $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
@@ -121,6 +138,7 @@
       }
       print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
     }
+    die;
   }
   if (isset($supplement_value) && !empty($supplement_value)) {
     print '</div>';
