@@ -378,9 +378,10 @@ $uri = base64_encode($actual_link);
 
                           </ul>
                       </div>
-                      <?php print $description_slider; ?>
+                      <?php //print $description_slider; ?>
 
                       <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
+                      <?php print $row['field_story_expert_description'];//print $description_slider; ?>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
@@ -406,15 +407,79 @@ $uri = base64_encode($actual_link);
                       print render($render_array);
                       ?>
                   </div>
-                  <div class="latest_video">
-                      <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
-                  </div>
+                  <div class="latest_video video_header_tabs">
+                    <?php //echo views_embed_view('video_landing_header', 'block_1');?>
+                            <?php
+                                    if(function_exists('itg_get_related_content')){
+                                            $related_content = itg_get_related_content(arg(1));
+                                            $_flag = true;
+                                            if (empty($related_content)) {
+                                                $_flag  = false;
+                                            }
+                                    }
+
+                            ?>
+                            <div class="tab-buttons">
+                              <span class="<?php echo ($_flag?'active':'');?>" data-id="tab-data-1">
+                                    <?php
+                                            print 'Related Content';
+                                    ?>
+                              </span>
+                              <span class="<?php echo (!$_flag?'active':'');?>" data-id="tab-data-2">
+                                    <?php
+                                            print 'Trending Videos';
+                                    ?>
+                              </span>
+                            </div>
+                            <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag?'':'hide');?>">						
+                                      <?php
+                                            if (module_exists('itg_videogallery')) { 
+                                                    $related_content_tab = block_load('itg_videogallery', 'videogallery_tab_realted_content'); 									
+                                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab))); 
+                                                    print render($render_array); 
+                                            } 
+                                      ?>
+                            </div>
+                            <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag?'':'hide');?>">
+                                      <?php
+                                            if (module_exists('itg_widget')) { 
+                                                    $watch_right_now = block_load('itg_widget', 'trending_videos_widget'); 									
+                                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now))); 
+                                                    print render($render_array); 
+                                            } 
+                                      ?>
+                            </div>
+                            <!--End here-->
+                    </div>
               </div>
           </div>
       </div>
   </div>
 <?php endforeach; ?>
-
+<style>
+.video-header-right .video_header_tabs .tab-data-2 h3{
+	display:none;
+}
+#related-video-tab ul li.related_content_tab .pic{
+	    width: 88px;
+	        float: right;
+    margin-left: 5px;
+        position: relative;
+}
+#related-video-tab ul li{
+	    padding: 10px 24px 10px 30px;
+	    height: 76px;
+}	
+#related-video-tab ul li.related_content_tab .title{
+	display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 19px;
+    color: #323232;
+}
+</style>
 <script>
   jQuery(document).ready(function () {
 
