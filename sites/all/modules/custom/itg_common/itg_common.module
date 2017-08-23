@@ -349,6 +349,21 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
+  if ($form_id == 'page_node_form') {
+    if ($user->uid != 1) {
+      $form['actions']['preview']['#access'] = FALSE;
+      $form['actions']['submit']['#submit'][] = 'itg_home_page_redirect';
+    }
+  }
+}
+
+/**
+ * Custom submit callback for home page node redirection.
+ * {@inheritdoc}
+ */
+function itg_home_page_redirect() {
+  drupal_get_messages('status');
+  drupal_goto('cms-user-dashboard');
 }
 
 /**

@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
 
     var generate_octopus_notification = setInterval(function() {
         jQuery.ajax({
-            url: Drupal.settings.itgbaseUrl + '/itg-generate-octopus-notification',
+            url: Drupal.settings.basePath + '/itg-generate-octopus-notification',
             type: 'post',
             data: '',
             beforeSend: function() {
