@@ -3,15 +3,6 @@
  * Contains all functionality related to octopus
  */
 
-(function($) {
-    Drupal.behaviors.itg_octopus_api = {
-        attach: function(context, settings) {
-        }
-
-    };
-})(jQuery, Drupal, this, this.document);
-
-
 jQuery('document').ready(function() {
     jQuery('#itg-octopus-api-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
     jQuery('#itg-octopus-api-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
@@ -45,7 +36,6 @@ jQuery('document').ready(function() {
     // Copying data from Octopus to dumping machine
 
     jQuery("body").on('click', '.get-video', function() {
-        var current_object = jQuery(this);
         var base_url = Drupal.settings.baseUrl.baseUrl;
         var slug_id = jQuery(this).attr('data');
         var attr_id = jQuery(this).attr('attribute_id');
@@ -66,122 +56,8 @@ jQuery('document').ready(function() {
                     jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Getting response for high resolution video from TV team</p></div>');
 
                 }, 5000);
-                var dumping_video_status = setInterval(function() {
-                    jQuery.ajax({
-                        url: base_url + '/itg-octopus-dumping-video-status/' + data,
-                        type: 'post',
-                        data: {'id': data},
-                        beforeSend: function() {
-                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video download in progress..</p></div>');
-
-                        },
-                        success: function(datafinal) {
-                            var datafinal_json = JSON.parse(datafinal);
-                            console.log(datafinal_json);
-                            if (datafinal_json.IS_COPIED == "YES") {
-                                setTimeout(function() {
-                                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Octopus high resolution Video received at local</p></div>');
-
-                                    clearInterval(dumping_video_status);
-                                    setTimeout(function() {
-                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending dumped video file to S3 bucket</p></div>');
-
-                                        s3_video_success = true;
-                                        // Code end for sending dumping machine video to s3 bucket
-                                        if (s3_video_success == true) {
-
-                                            setTimeout(function() {
-                                                jQuery.ajax({
-                                                    url: base_url + '/itg-octopus-sending-video-s3',
-                                                    type: 'post',
-                                                    data: {'id': slug_id},
-                                                    beforeSend: function() {
-                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Started  sending video to S3</p></div>');
-
-                                                    },
-                                                    success: function(datafinal) {
-                                                        var s3_response_data = JSON.parse(datafinal);
-                                                        console.log("jsahhdjsahdjaahdjahdahd");
-                                                        console.log(s3_response_data);
-                                                        if (s3_response_data.success == 'yes') {
-                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video uploaded to S3</p></div>');
-
-                                                            setTimeout(function() {
-                                                                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending s3 video to Daily montion</p></div>');
-
-                                                            }, 5000);
-
-
-                                                            // Start code  Sending Video from s3 to DM 
-
-                                                            setTimeout(function() {
-                                                                jQuery.ajax({
-                                                                    url: base_url + '/itg-octopus-video-s3-to-dm',
-                                                                    type: 'post',
-                                                                    data: {'s3_video_uri': s3_response_data.s3_url, 'slug_id': attr_id, 'file_size': s3_response_data.file_size},
-                                                                    beforeSend: function() {
-                                                                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Processing to DM..</p></div>');
-
-                                                                    },
-                                                                    success: function(datafinals3todm) {
-                                                                        console.log(datafinals3todm);
-                                                                        console.log(attr_id);
-                                                                        datafinals3todm_s = JSON.parse(datafinals3todm);
-                                                                        if (datafinals3todm_s.success == 'yes') {
-                                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><i class="fa fa-check-circle" aria-hidden="true"></i><p>Ready to use</p></div>');
-                                                                            setTimeout(function() {
-                                                                                jQuery('.video-process-bar-' + attr_id).hide();
-                                                                                jQuery('#file-video-article-' + attr_id).show();
-                                                                                jQuery('#get-video-' + attr_id).hide();
-                                                                            }, 5000);
-                                                                            return;
-                                                                        }
-                                                                          if (datafinals3todm_s.success == 'no') {
-                                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><i class="fa fa-check-circle" aria-hidden="true"></i><p>Ready to use</p></div>');
-                                                                          }
-                                                                    },
-                                                                    error: function(xhr, desc, err) {
-                                                                        console.log(xhr);
-                                                                        console.log("Details: " + desc + "\nError:" + err);
-                                                                    }
-                                                                });
-                                                            }, 5000);
-
-                                                            // End code for sending video from s3 to DM
-
-
-
-
-
-                                                        }
-                                                        if (s3_response_data.success == 'no') {
-                                                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>'+s3_response_data.msg+'</p></div>');
-                                                        }
-
-                                                    },
-                                                    error: function(xhr, desc, err) {
-                                                        console.log(xhr);
-                                                        console.log("Details: " + desc + "\nError:" + err);
-                                                    }
-                                                });
-                                            }, 5000);
-                                        }
-                                        // Code end for sending dumping machine video to s3 bucket
-                                    }, 5000);
-                                }, 5000);
-                            } else {
-                                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Still Checking dumping video status</p></div>');
-
-
-                            }
-                        },
-                        error: function(xhr, desc, err) {
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError:" + err);
-                        }
-                    });
-
-                }, 8000); // Execute every 8 seconds.
+                // Getting dumping video status
+                itg_octopus_dumping_video_status(data, base_url, attr_id, slug_id, s3_video_success);
 
             },
             error: function(xhr, desc, err) {
@@ -189,9 +65,6 @@ jQuery('document').ready(function() {
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
-
-
-
 
     });
 
@@ -225,3 +98,136 @@ jQuery('document').ready(function() {
 
 
 });
+
+/**
+ * Sending s3 to Daily motion 
+ * @param {object} s3_response_data
+ * @param {string} attr_id
+ * @param {string} base_url
+ * @returns {}
+ */
+
+function  itg_octopus_api_video_s3_to_dm(s3_response_data, attr_id, base_url) {
+    setTimeout(function() {
+        jQuery.ajax({
+            url: base_url + '/itg-octopus-video-s3-to-dm',
+            type: 'post',
+            data: {'s3_video_uri': s3_response_data.s3_url, 'slug_id': attr_id, 'file_size': s3_response_data.file_size},
+            beforeSend: function() {
+                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Processing to DM..</p></div>');
+            },
+            success: function(datafinals3todm) {
+                console.log(datafinals3todm);
+                console.log(attr_id);
+                datafinals3todm_s = JSON.parse(datafinals3todm);
+                if (datafinals3todm_s.success == 'yes') {
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><i class="fa fa-check-circle" aria-hidden="true"></i><p>Ready to use</p></div>');
+                    setTimeout(function() {
+                        jQuery('.video-process-bar-' + attr_id).hide();
+                        jQuery('#file-video-article-' + attr_id).show();
+                        jQuery('#get-video-' + attr_id).hide();
+                    }, 5000);
+                    return;
+                }
+                if (datafinals3todm_s.success == 'no') {
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><i class="fa fa-check-circle" aria-hidden="true"></i><p>Ready to use</p></div>');
+                }
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+    }, 5000);
+}
+/**
+ * itg_octopus_api_sending_video_s3
+ * @param {type} attr_id
+ * @param {type} slug_id
+ * @param {type} base_url
+ * @returns {undefined}
+ */
+
+function itg_octopus_api_sending_video_s3(attr_id, slug_id, base_url) {
+    setTimeout(function() {
+        jQuery.ajax({
+            url: base_url + '/itg-octopus-sending-video-s3',
+            type: 'post',
+            data: {'id': slug_id},
+            beforeSend: function() {
+                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Started  sending video to S3</p></div>');
+            },
+            success: function(datafinal) {
+                var s3_response_data = JSON.parse(datafinal);
+                console.log(s3_response_data);
+                if (s3_response_data.success == 'yes') {
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video uploaded to S3</p></div>');
+
+                    setTimeout(function() {
+                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending s3 video to Daily montion</p></div>');
+                    }, 5000);
+                    // Start code  Sending Video from s3 to DM 
+                    itg_octopus_api_video_s3_to_dm(s3_response_data, attr_id, base_url);
+                    // End code for sending video from s3 to DM
+                }
+                if (s3_response_data.success == 'no') {
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>' + s3_response_data.msg + '</p></div>');
+                }
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+    }, 5000);
+}
+
+/**
+ * itg_octopus_dumping_video_status
+ * @param {type} data
+ * @param {type} base_url
+ * @param {type} attr_id
+ * @param {type} slug_id
+ * @returns {undefined}
+ */
+
+function itg_octopus_dumping_video_status(data, base_url, attr_id, slug_id, s3_video_success) {
+    var dumping_video_status = setInterval(function() {
+        jQuery.ajax({
+            url: base_url + '/itg-octopus-dumping-video-status/' + data,
+            type: 'post',
+            data: {'id': data},
+            beforeSend: function() {
+                jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Video download in progress..</p></div>');
+
+            },
+            success: function(datafinal) {
+                var datafinal_json = JSON.parse(datafinal);
+                console.log(datafinal_json);
+                if (datafinal_json.IS_COPIED == "YES") {
+                    setTimeout(function() {
+                        jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Octopus high resolution Video received at local</p></div>');
+                        clearInterval(dumping_video_status);
+                        setTimeout(function() {
+                            jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Preparing data for sending dumped video file to S3 bucket</p></div>');
+                            s3_video_success = true;
+                            // Code end for sending dumping machine video to s3 bucket
+                            if (s3_video_success == true) {
+                                itg_octopus_api_sending_video_s3(attr_id, slug_id, base_url);
+                            }
+                            // Code end for sending dumping machine video to s3 bucket
+                        }, 5000);
+                    }, 5000);
+                } else {
+                    jQuery('.video-process-bar-' + attr_id).html('<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Still Checking dumping video status</p></div>');
+                }
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+    }, 8000); // Execute every 8 seconds.
+}

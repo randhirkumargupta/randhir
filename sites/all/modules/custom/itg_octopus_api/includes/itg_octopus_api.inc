@@ -9,12 +9,9 @@
  */
 
 /**
- * Implement itg_pti_content
+ * Rundown API callback for Octopus
  */
 function itg_octopus_api_rundown() {
-
-  watchdog('octopus rundown', 'started ......');
-  $file_path = 'sites/default/files';
   global $base_url, $user;
   header('Content-Type: text/html; charset=UTF-8');
   $direc = array();
@@ -50,7 +47,6 @@ function itg_octopus_api_rundown() {
       itg_octopus_current_to_prev_rundown($rundown_id, 'current');
     }
 
-
     try {
       $qry = db_merge('itg_rundown') // Table name no longer needs {}
           ->key(array('rundown_id' => $rundown_id))
@@ -71,14 +67,12 @@ function itg_octopus_api_rundown() {
     }
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
-      // p($rundown_xml->rundown->slugs->slug);
       foreach ($rundown_xml->rundown->slugs->slug as $slug_key => $slug) {
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
           $story_id = (int) $slug->storyId;
           $action = (string) $slug->action;
           $story_title = (string) $slug->storyTitle;
-
           // Adding Octopus Log 
           $msg = '';
           $hyperlink = 'rundown-listing';
@@ -86,10 +80,8 @@ function itg_octopus_api_rundown() {
             'parm' => array('rundowntype' => $key),
           );
           $query_string_json = json_encode($query_string);
-
           $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
           itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, $query_string_json, REQUEST_TIME, 1);
-
           // End Adding Octopus Log
           // Sending mail to Octopus user where 
           $story_com_data = '';
@@ -247,17 +239,15 @@ function itg_octopus_api_rundown_listing() {
   drupal_add_js(array('itg_octopus_holder' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
-
   // Added code for Notification read 
   if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
     itg_octopus_notification_by_uid($_GET['onotify']);
   }
-
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
-# configure the table header columns
 
+  # configure the table header columns
   $header = array(
     array('data' => t('Sn.')),
     array('data' => t('Video ID')),
@@ -271,11 +261,8 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
-
   $pagination = '';
   $current_rundown = '';
-
-
 
   if (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'previous') {
     $pagination.= '<li class="pager-current">' . t(' Previous ', array('attributes' => array('class' => 'disabled'))) . '</li>';
@@ -284,7 +271,6 @@ function itg_octopus_api_rundown_listing() {
   else {
     $pagination.= '<li class="pager-item">' . l(' Previous ', 'rundown-listing', array('query' => array('rundowntype' => 'previous'))) . '</li>';
   }
-
 
   if (!isset($_GET['rundowntype']) || (isset($_GET['rundowntype']) && empty($_GET['rundowntype'])) || (isset($_GET['rundowntype']) && $_GET['rundowntype'] == 'current')) {
     $pagination.= '<li class="pager-current">' . t(' Current ', array('attributes' => array('class' => 'disabled'))) . '</li>';
@@ -313,7 +299,6 @@ function itg_octopus_api_rundown_listing() {
   if (empty($current_rundown)) {
     $current_rundown = 'current';
   }
-
 
   $query = db_select('itg_rundown', 'rund')->extend('PagerDefault')->limit(50);
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
@@ -414,9 +399,8 @@ function itg_octopus_api_rundown_listing() {
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
   $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
-# add the pager
+  # add the pager
   $output .= theme('pager');
-
   return $output;
 }
 
@@ -543,7 +527,6 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#title' => 'Octopus Settings',
   );
 
-
   $form['itg_octopus_holder']['itg_octopus_support_team_email'] = array(
     '#type' => 'textfield',
     '#title' => t('Support Team E-mail'),
@@ -560,7 +543,6 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#required' => TRUE,
   );
 
-
   $form['itg_octopus_holder']['itg_octopus_rundown_element_type_name'] = array(
     '#type' => 'textfield',
     '#title' => t('Octopus Rundown element type name'),
@@ -569,13 +551,10 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#required' => TRUE,
   );
 
-
-
   $form['itg_octopus_url'] = array(
     '#type' => 'fieldset',
     '#title' => 'Rundown URL\'s Settings',
   );
-
 
   $form['itg_octopus_url']['itg_octopus_url_current'] = array(
     '#type' => 'textfield',
@@ -598,12 +577,10 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#required' => TRUE,
   );
 
-
   $form['itg_octopus_ftp'] = array(
     '#type' => 'fieldset',
     '#title' => 'Octopus FTP Settings',
   );
-
 
   $form['itg_octopus_ftp']['itg_octopus_ftp_ip'] = array(
     '#type' => 'textfield',
@@ -696,7 +673,6 @@ function itg_octopus_api_rundown_complete_detail($id) {
   $query->fields('iec');
   $query->condition('ios.id', 2, '=');
   $result = $query->execute()->fetchAssoc();
-
   $result['story_custom_data'] = unserialize($result['story_custom_data']);
   unset($result['story_custom_data']['storyid']);
   unset($result['story_custom_data']['rundown_id']);
@@ -722,20 +698,18 @@ function itg_octopus_slug_clip($slug) {
  * Sending dumping machine video to S3 bucket
  */
 function itg_octopus_api_move_dump_server_to_s3() {
-  //set_time_limit(0);
-  //ini_set('memory_limit', '-1');
-//  $video_path  = 'SOME_URL/'.$_POST['id'];[TODO]
-//$video_path = OCTOPUS_DUMPING_MACHINE_URL;
+  // set_time_limit(0);
+  // ini_set('memory_limit', '-1');
+ // $video_path  = 'SOME_URL/'.$_POST['id'];[TODO]
+ // $video_path = OCTOPUS_DUMPING_MACHINE_URL;
   $files_path = variable_get('file_public_path', conf_path() . '/files');
   global $base_url;
   $data = array();
   // $post_video_id = $_POST['id'];
   $post_video_id = $_POST['id'];
-  //$video_path = $base_url . '/' . $post_video_id;
+  // $video_path = $base_url . '/' . $post_video_id;
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
-
   $conn_id = itg_octopus_api_ftp_connection_setup();
-  //$conn_id = false;
   if (empty($conn_id)) {
     // Handling error when there is some problem while creating connection
     $data['success'] = 'no';
@@ -745,13 +719,10 @@ function itg_octopus_api_move_dump_server_to_s3() {
   }
   ftp_pasv($conn_id, true);
   $video_name = $_POST['id'];
-  $ftp_files = ftp_nlist($conn_id, "/");
   $file_size = ftp_size($conn_id, '/' . $post_video_id);
   $local_file = $files_path . '/' . $video_name;
   $server_file = $video_name;
   $file_d_success = 0;
-  // try to download $server_file and save to $local_file
-
   $success_get = false;
 //  try {
 //    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
@@ -778,12 +749,13 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $file_d_success = 1;
   // close the connection
   //ftp_close($conn_id);
+  
   if ($file_d_success == 1) {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
       $local_file = OCTOPUS_DUMPING_MACHINE_URL;  // [TODO]
       $s3_success = itg_video_send_dm_to_s3_for_octopus($local_file, $video_name);
-       
+      $s3_success['file_size'] = $file_size;
       if ($s3_success['success'] == 'no') {
         $s3_success['msg'] = 'OOPS::Unable to send s3 file to daily motion, please try again';
         itg_octopus_api_send_email_to_support("Octopus:Unable to send s3 file to daily motion", 'Unable to send s3 file to daily motion due to error:' . $s3_success->msg);
@@ -811,7 +783,7 @@ function itg_octopus_api_video_s3_to_dm() {
   $response = itg_videogallery_dailymotion_send_video($s3video_url);
   if (!empty($response)) {
     $response_result['video_id'] = $response['id'];
-// Added entry in file browse
+  // Added entry in file browse
     $file_object = itg_octopus_api_check_exist_file_browse($filename, $file_size);
     $response_result['fid'] = (int) $file_object;
     try {
@@ -881,7 +853,6 @@ function itg_octopus_file_video() {
       itg_octopus_send_dm_octopus_res_update($result, $slug_id);
       $instance_daily_motion = new Dailymotion();
       $instance_daily_motion->logout();
-
       // Adding Entry for dailymotion_response_details 
       itg_octopus_add_dm_response_details((array) $dm_res, $result);
       $oct_meta_info = array(
@@ -934,7 +905,6 @@ function itg_octopus_get_duration($time) {
  * @return type
  */
 function itg_octopus_send_dm_octopus_res_update($object, $slug_id) {
-
   $result['duration'] = itg_octopus_get_duration($dur['duration']);
   $result['encoding_progress'] = $dur['encoding_progress'];
   $result['publishing_progress'] = $dur['publishing_progress'];

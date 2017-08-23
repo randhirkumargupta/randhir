@@ -73,64 +73,6 @@ function itg_rfa_file_live_blog() {
 }
 
 /**
- * This method is used to test the data
- */
-function itg_rfa_file_testing() {
-
-  global $base_url;
-  $rundown_id = 1223544;
-  $source = 'This is source';
-  $text = 'Hi this is for testing';
-  $created_date = REQUEST_TIME;
-  $created_by = 'Ishwar';
-  $action = 'INSERT';
-
-  $url = $base_url . "/itg-rfa-file-live-blog";
-  $data = array(
-    array(
-      'rundown_id' => 121211,
-      'source' => 'This is source',
-      'text' => 'Hi this is for testing',
-      'created_date' => REQUEST_TIME,
-      'created_by' => 'Ishwar',
-      'action' => 'INSERT',
-    ),
-    array(
-      'rundown_id' => 121212,
-      'source' => 'This is source',
-      'text' => 'Hi this is for testing',
-      'created_date' => REQUEST_TIME,
-      'created_by' => 'Ishwar',
-      'action' => 'DELETE',
-    ),
-    array(
-      'rundown_id' => rand(12234, 55555),
-      'source' => 'This is source',
-      'text' => 'Hi this is for testing',
-      'created_date' => REQUEST_TIME,
-      'created_by' => 'Ishwar',
-      'action' => 'UPDATE',
-    ),
-  );
-
-
-  $options = array(
-    'method' => 'POST',
-    'data' => http_build_query($data, '', '&'),
-    'timeout' => 15,
-    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-  );
-
-  $result = drupal_http_request($url, $options);
-  if ($result->code == 200) {
-    $return_data = json_decode($result->data);
-    if ($return_data->success == 1) {
-      print $return_data->msg;
-    }
-  }
-}
-
-/**
  * This method is responsible for dashboard, filter and file  of FRA
  * @global type $base_url
  * @return type
@@ -148,12 +90,9 @@ jQuery('#itg-octopus-api-rfa-form #edit-start-date-timeEntry-popup-1').attr('pla
 jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
 });", array('type' => 'inline', 'scope' => 'footer'));
 
-
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
-# configure the table header columns
-
   $header = array(
     array('data' => t('Sn.')),
     array('data' => t('RFA ID')),
@@ -178,15 +117,12 @@ jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('place
     $query->condition('rfa.rundown_id', $_GET['rfaid'], '=');
   }
 
-
   if (isset($_GET['text']) && !empty($_GET['text'])) { // text
     $query->condition('rfa.text', $_GET['text'], '=');
   }
 
-
   $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
   $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
-
 
   if (isset($start_date) && !empty($start_date)) { // start date
     $query->condition('rfa.created_date', strtotime($start_date), '>=');
@@ -197,7 +133,6 @@ jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('place
   }
 
   $query->orderBy('rfa.id', 'DESC');
-
   $result = $query->execute();
   $rows = array();
   $sn = 1;
@@ -245,7 +180,6 @@ jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('place
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
   $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
-# add the pager
   $output .= theme('pager');
   return $output;
 }
@@ -256,7 +190,6 @@ jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('place
  */
 function itg_octopus_api_rfa_form($form, &$form_state) {
   $form = array();
-
 
   $form['source'] = array(
     '#type' => 'textfield',
@@ -341,10 +274,8 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_octopus_api_rfa_form_validate($form, &$form_state) {
-
   $flag = 0;
   if (!empty($form_state['values']['start_date']['date']) && empty($form_state['values']['start_date']['time'])) {
-
     $array_error['start_date[time]'] = t("Please enter start date time.");
     $flag = 1;
   }
