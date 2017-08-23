@@ -3983,13 +3983,13 @@ function itg_rapid_api_update_preference($token) {
                 ->execute();
         // Update the weight of tids if exists or insert if dont exists.
         foreach ($updates as $term_id => $weight) {
-            p($weight); die();
+            $weight_val = $weight['value'];
             db_merge('itg_widget_order')
                     ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
                     ->fields(array(
                         'nid' => $term_id,
                         'widget' => $widget_name,
-                        'weight' => $weight,
+                        'weight' => $weight_val,
                         'extra' => $user->uid,
                     ))
                     ->execute();
