@@ -3892,6 +3892,7 @@ function itg_rapid_api_get_preference($token) {
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
+        return $data;
     } else {
         $account = user_load_by_name($user_id);
 
@@ -3966,6 +3967,7 @@ function itg_rapid_api_update_preference($token) {
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token/User ID";
+        return $data;
     } else {
         
         $result = callAPI($method, $url, $params);
