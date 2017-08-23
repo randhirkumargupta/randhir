@@ -118,11 +118,27 @@ function itg_poll_after_build($form , &$form_state) {
   }
   //poll disable after create
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $poll_node = node_load(arg(1));
     $result = itg_poll_getTotalPoll(arg(1));
+    $field_poll_answer_option = $poll_node->field_poll_answer_option[LANGUAGE_NONE][0]['value'];
+    
+    foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
+       if (is_numeric($key)) {
+         // 1 stands for text
+          if($field_poll_answer_option == '1') {
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_poll_answer_image']['#prefix'] = '<div class="hide">';
+              $form['field_poll_answer'][LANGUAGE_NONE][$key]['field_poll_answer_image']['#suffix'] = '</div>';
+          }
+       }
+    }
+    
+    
     if ($result > 0) {
       foreach ($form['field_poll_answer'][LANGUAGE_NONE] as $key => $item) {
         if (is_numeric($key)) {
           $form['field_poll_answer'][LANGUAGE_NONE][$key]['remove_button']['#access'] = FALSE;
+          // 1 is for text
+          
         }
       }
       $form['field_poll_answer'][LANGUAGE_NONE]['add_more']['#access'] = FALSE; // Disable Add more button
@@ -401,10 +417,14 @@ function itg_poll_form_ajax_submit($form , &$form_state) {
     'uId' => $user->uid ,
     'display_result' => $dsp_result ,
     'created' => $created))->execute();
-   if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+  
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
     watchdog('poll_earn_point', $node_id);
     //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
-     itg_global_loyality_send_data($user->uid, 'poll', $node_id);
+     itg_global_loyality_send_data($user->uid, 'poll', $node_id, '', $sso_id);
   }
   $expire = time() + 60 * 60 * 24 * 30; // expires in one month
   $value = 'yes_' . $node_id;
@@ -837,9 +857,13 @@ function itg_poll_form_new_ajax_submit($form , &$form_state) {
       'uId' => $user->uid ,
       'display_result' => $dsp_result ,
       'created' => $created))->execute();
-     if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+    
+    if (function_exists('itg_global_loyality_get_sso_id')) {
+      $sso_id = itg_global_loyality_get_sso_id($user->uid);
+    }
+    if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
       //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
-      itg_global_loyality_send_data($user->uid, 'poll', $node_id);
+      itg_global_loyality_send_data($user->uid, 'poll', $node_id, '', $sso_id);
     }
   }
   catch (Exception $e) {
@@ -969,11 +993,15 @@ function itg_poll_form_home_page_ajax_submit($form , &$form_state) {
       'display_result' => $dsp_result ,
       'created' => $created))->execute();
   // code for loyality points  
-   if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
-    watchdog('poll_earn_point', $node_id);
-    //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
-    itg_global_loyality_send_data($user->uid, 'poll', $node_id);
-  }
+   if (function_exists('itg_global_loyality_get_sso_id')) {
+      $sso_id = itg_global_loyality_get_sso_id($user->uid);
+    }
+    
+    if ($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      watchdog('poll_earn_point', $node_id);
+      //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
+      itg_global_loyality_send_data($user->uid, 'poll', $node_id, '', $sso_id);
+    }
   }
   catch (Exception $e) {
     watchdog('Error while entry in itg_polls' , $e->getMessage());

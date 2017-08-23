@@ -10,9 +10,6 @@
   #block-views-photo-landing-slider-block{
     width: 100%;
   }
-  ::-webkit-scrollbar {
-    display: none;
-  }
   #block-views-video-landing-header-block .video-header-right .ads{
     position: relative;
   }
@@ -436,6 +433,19 @@
     font-size: 11px;
   }
   /*search page css end */
+  
+  /* Scroll bar css */
+  ::-webkit-scrollbar{
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa;
+  }
 }   
 
 

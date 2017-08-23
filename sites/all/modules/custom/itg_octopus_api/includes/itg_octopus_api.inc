@@ -72,7 +72,7 @@ function itg_octopus_api_rundown() {
     $count_slug = 0;
     if (isset($rundown_xml->rundown->slugs->slug)) {
       // p($rundown_xml->rundown->slugs->slug);
-      foreach ($rundown_xml->rundown->slugs->slug as $key => $slug) {
+      foreach ($rundown_xml->rundown->slugs->slug as $slug_key => $slug) {
         $element_type = $slug->script->main->body->element->elementType;
         if ($element_type == variable_get('itg_octopus_rundown_element_type_name', 'pkg')) {
           $story_id = (int) $slug->storyId;
@@ -82,8 +82,13 @@ function itg_octopus_api_rundown() {
           // Adding Octopus Log 
           $msg = '';
           $hyperlink = 'rundown-listing';
+          $query_string = array(
+            'parm' => array('rundowntype' => $key),
+          );
+          $query_string_json = json_encode($query_string);
+
           $msg = '[' . $action . '] ' . $story_title . '(' . $story_id . ')[RUNDOWN]';
-          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, REQUEST_TIME, 1);
+          itg_octopus_add_notification('RUNDOWN', $msg, $hyperlink, $query_string_json, REQUEST_TIME, 1);
 
           // End Adding Octopus Log
           // Sending mail to Octopus user where 
@@ -236,9 +241,17 @@ function itg_octopus_api_storycustom_check($story_id, $rundown_id) {
 
 function itg_octopus_api_rundown_listing() {
   global $base_url;
-
+  global $theme;
+  $settings = array();
+  $settings['loader_url'] = base_path() . drupal_get_path('theme', $theme) . '/images/loader.svg';
+  drupal_add_js(array('itg_octopus_holder' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_octopus_api') . '/js/itg_octopus_api.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
+
+  // Added code for Notification read 
+  if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
+    itg_octopus_notification_by_uid($_GET['onotify']);
+  }
 
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
@@ -297,8 +310,10 @@ function itg_octopus_api_rundown_listing() {
     $pagination.= '<li class="pager-item">' . l(' Next2 ', 'rundown-listing', array('query' => array('rundowntype' => 'next2'))) . '</li>';
   }
 
-  if (empty($current_rundown))
+  if (empty($current_rundown)) {
     $current_rundown = 'current';
+  }
+
 
   $query = db_select('itg_rundown', 'rund')->extend('PagerDefault')->limit(50);
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
@@ -318,14 +333,14 @@ function itg_octopus_api_rundown_listing() {
     $query->condition('ios.category', $category_data, 'IN');
   }
 
-  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
 
-  if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
+  if (isset($start_date) && !empty($start_date)) { // start date
     $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
   }
 
-  if (isset($_GET['end_date']) && !empty($_GET['end_date'])) { // end date
+  if (isset($end_date) && !empty($end_date)) { // end date
     $query->condition('ios.story_modified_timestamp', strtotime($end_date), '<=');
   }
 
@@ -353,7 +368,6 @@ function itg_octopus_api_rundown_listing() {
     array('data' => t('Actions')),
   );
 
-
   foreach ($result as $row) {
     $ctype_text = l('File Video', $base_url . '/node/add/videogallery?element=vo&story_id=' . $row->storyid . '&destination=rundown-listing');
     $link = '<div><a class="octopus-slug-data" data="' . $row->id . '" href="javascript:void(0);">' . t('View') . '</a>';
@@ -367,6 +381,7 @@ function itg_octopus_api_rundown_listing() {
     else {
       $background_color = 'bg-none';
     }
+
     $rows[] = array(
       array('data' => $sn++),
       array('data' => $row->storyid),
@@ -375,7 +390,7 @@ function itg_octopus_api_rundown_listing() {
       array('data' => $row->story_created_by),
       array('data' => $row->story_modified_by),
       array('data' => date('d/m/Y - H:i:s', strtotime($row->story_created))),
-      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified))),
+      array('data' => date('d/m/Y - H:i:s', strtotime($row->story_modified)), 'class' => $background_color),
       array('data' => $row->location),
       array('data' => $link),
     );
@@ -458,6 +473,7 @@ function slug_details() {
   $slug_data = reset($result);
   $slug_data->clip_data = itg_octopus_slug_clip($slug_data);
   $slug_data->dm_success = itg_octopus_dm_success($sid);
+  $slug_data->itg_octopus_low_resoln_video_url = variable_get('itg_octopus_low_resoln_video_url');
   print theme('oct_slug_detail', array('result' => $slug_data));
   drupal_exit();
 }
@@ -467,7 +483,7 @@ function slug_details() {
  */
 function slug_video() {
   $sid = arg(1);
-  $url = "http://125.19.34.234:2424/WEBACCESS/OCTOPUS_COPY_FILES/OctopusFileCopyRequest.asp?FILE_NAME=" . $sid;
+  $url = variable_get('itg_octopus_high_resoln_video_copyr') . "?FILE_NAME=" . $sid;
   $options = array(
     'method' => 'GET',
     'data' => '',
@@ -493,7 +509,7 @@ function slug_video() {
  */
 function itg_octopus_dumping_video_status() {
   $id = $_POST['id'];
-  $url = "http://125.19.34.234:2424/WEBACCESS/OCTOPUS_COPY_FILES/GetOctopusFileCopiedDetails.asp?REQUEST_ID=" . $id;
+  $url = variable_get('itg_octopus_high_resoln_vid_copy_status') . "?REQUEST_ID=" . $id;
   $options = array(
     'method' => 'GET',
     'data' => '',
@@ -617,6 +633,32 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#required' => TRUE,
   );
 
+  $form['itg_octopus_someurls'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Octopus URL\'s Settings',
+  );
+
+  $form['itg_octopus_someurls']['itg_octopus_low_resoln_video_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Low resolution Video URL'),
+    '#default_value' => variable_get('itg_octopus_low_resoln_video_url'),
+    '#required' => TRUE,
+  );
+
+  $form['itg_octopus_someurls']['itg_octopus_high_resoln_video_copyr'] = array(
+    '#type' => 'textfield',
+    '#title' => t('High resolution Video Copy request URL'),
+    '#default_value' => variable_get('itg_octopus_high_resoln_video_copyr'),
+    '#required' => TRUE,
+  );
+
+  $form['itg_octopus_someurls']['itg_octopus_high_resoln_vid_copy_status'] = array(
+    '#type' => 'textfield',
+    '#title' => t('High resolution Video Copy request status URL'),
+    '#default_value' => variable_get('itg_octopus_high_resoln_vid_copy_status'),
+    '#required' => TRUE,
+  );
+
   return system_settings_form($form);
 }
 
@@ -689,11 +731,18 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $data = array();
   // $post_video_id = $_POST['id'];
   $post_video_id = $_POST['id'];
-  $video_path = $base_url . '/' . $post_video_id;
-
+  //$video_path = $base_url . '/' . $post_video_id;
   $video_path = OCTOPUS_DUMPING_MACHINE_URL;  // For testing Purposes
 
   $conn_id = itg_octopus_api_ftp_connection_setup();
+  //$conn_id = false;
+  if (empty($conn_id)) {
+    // Handling error when there is some problem while creating connection
+    $data['success'] = 'no';
+    $data['msg'] = 'OOPS::Something went wrong while connecting to FTP, please try again';
+    print json_encode($data);
+    drupal_exit();
+  }
   ftp_pasv($conn_id, true);
   $video_name = $_POST['id'];
   $ftp_files = ftp_nlist($conn_id, "/");
@@ -702,12 +751,18 @@ function itg_octopus_api_move_dump_server_to_s3() {
   $server_file = $video_name;
   $file_d_success = 0;
   // try to download $server_file and save to $local_file
-//  $success_get = false;
+
+  $success_get = false;
 //  try {
 //    $success_get = ftp_get($conn_id, $local_file, $server_file, FTP_BINARY);
 //  }
 //  catch (Exception $e) {
 //    // p('Error:' . $e->getMessage());
+//    $s3_success['success'] = 'no';
+//    $s3_success['msg'] = 'OOPS::Unable to download FTP file to our server, please try again';
+//    itg_octopus_api_send_email_to_support("Octopus:Unable to download FTP file to our server", 'Unable to download FTP file to our server due to error:' .  $e->getMessage());
+//    print json_encode($s3_success);
+//    drupal_exit();
 //  }
 //  if ($success_get) {
 //    //echo "Successfully written to $local_file\n";
@@ -718,6 +773,8 @@ function itg_octopus_api_move_dump_server_to_s3() {
 //    // echo "There was a problem\n";
 //    $file_d_success = 0;
 //  }
+
+
   $file_d_success = 1;
   // close the connection
   //ftp_close($conn_id);
@@ -725,18 +782,14 @@ function itg_octopus_api_move_dump_server_to_s3() {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
     if (function_exists('itg_video_send_dm_to_s3')) {
       $local_file = OCTOPUS_DUMPING_MACHINE_URL;  // [TODO]
-      $s3_success = itg_video_send_dm_to_s3($local_file, $video_name);
-      if (isset($s3_success) && !empty($s3_success)) {
-        $data['success'] = 'yes';
-        $data['s3_url'] = $s3_success;
-        $data['file_size'] = $file_size;
-      }
-      else {
-        $data['success'] = 'no';
-        $data['s3_url'] = $s3_success;
+      $s3_success = itg_video_send_dm_to_s3_for_octopus($local_file, $video_name);
+       
+      if ($s3_success['success'] == 'no') {
+        $s3_success['msg'] = 'OOPS::Unable to send s3 file to daily motion, please try again';
+        itg_octopus_api_send_email_to_support("Octopus:Unable to send s3 file to daily motion", 'Unable to send s3 file to daily motion due to error:' . $s3_success->msg);
       }
       unlink($local_file);
-      print json_encode($data);
+      print json_encode($s3_success);
       drupal_exit();
     }
   }
@@ -752,7 +805,7 @@ function itg_octopus_api_video_s3_to_dm() {
   $s3video_url = trim($_POST['s3_video_uri']);
   $file_size = trim($_POST['file_size']);
 
-  $s3video_url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4';  // [TODO] for testing only
+  $s3video_url = OCTOPUS_DUMPING_MACHINE_URL;  // [TODO] for testing only
   $filename = drupal_basename($s3video_url);
   $slug_id = trim($_POST['slug_id']);
   $response = itg_videogallery_dailymotion_send_video($s3video_url);

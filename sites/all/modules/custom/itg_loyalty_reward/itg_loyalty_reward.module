@@ -559,7 +559,14 @@ function itg_loyalty_reward_block_view($delta = '') {
       break;
     case 'itg_loyalty_reward_header':
       // Get remaining points.
-      $data['remaining_point'] = itg_loyalty_reward_remaining_point($user->uid);
+      //$data['remaining_point'] = itg_loyalty_reward_remaining_point($user->uid);
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      if (!empty(variable_get('property_name'))) {
+        $property = variable_get('property_name');
+      }
+      $data['remaining_point'] = itg_get_global_remaining_point($user->uid, $property, $sso_id);
       $user_fields = user_load($user->uid);
       // Render user picture.
       

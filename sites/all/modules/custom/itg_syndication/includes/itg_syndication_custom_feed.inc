@@ -509,6 +509,10 @@ function get_predefine_variables_value($node = '', $variable) {
       }
       $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
       break;
+    case 'node_last_updated_date':
+      $changed_date  = $node->changed;
+      $value = "<![CDATA[ " . gmdate('D, d M Y H:i:s T', $changed_date) . " ]]>";
+      break;
     case 'node_author':
       $user_profile_data = user_load($node->uid);
       $value = $user_profile_data->mail . '(' . $user_profile_data->name . ')';
@@ -533,6 +537,15 @@ function get_predefine_variables_value($node = '', $variable) {
         $section_tid = $_GET['shs_term_node_tid_depth'];
         $section_array = get_term_name_from_tid($section_tid);
         $section_name = $section_array->name;
+      }
+      $value = "<![CDATA[ " . $section_name . " ]]>";
+      break;
+    case 'section_category_sub_sub_category':
+      $section_name = '';
+      if (!empty($_GET['shs_term_node_tid_depth'])) {
+        $section_tid = $_GET['shs_term_node_tid_depth'];
+        $section_array = _get_all_parent_terms($section_tid);
+        $section_name = "<![CDATA[ " . implode("," , $section_array['title']) . " ]]>";
       }
       $value = $section_name;
       break;
@@ -570,6 +583,8 @@ function pre_define_variables() {
     'current_year',
     'mrss_node_permalink',
     'copy_right_symbol',
+    'section_category_sub_sub_category',
+    'node_last_updated_date'
   );
 }
 

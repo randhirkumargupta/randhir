@@ -268,10 +268,25 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
+  
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'page' && $arg_data->nid == 2) {
+      $meta_description = $arg_data->metatags[LANGUAGE_NONE]['description']['value'];
+      if (isset($meta_description) && !empty($meta_description)) {
+        $head_elements['metatag_description'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $meta_description,
+          ),
+        );
+      }
+    }
+    
     if ($arg_data->type == 'videogallery') {
       if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];

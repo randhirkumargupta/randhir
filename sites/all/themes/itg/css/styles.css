@@ -10855,7 +10855,7 @@ section.sidebar .block-itg-ads {
 .election-page .itg-map #map-state {
   position: absolute;
   right: 0;
-  top: 0;
+  top: -16px;
   height: 20px;
   line-height: 20px;
   padding: 0;
@@ -11027,6 +11027,7 @@ div#playerContainer {
   height: 0;
   padding-bottom: 48.3%;
   position: relative;
+  display: table;
 }
 #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video iframe {
   width: 100%;
@@ -14617,6 +14618,7 @@ span.close_btt {
 .ad-blocker-content {
   position: relative;
   padding-top: 35px;
+  word-wrap: break-word;
 }
 
 .ad-blocker-content:after {
@@ -14793,6 +14795,12 @@ span.see-picture a:after {
   -moz-user-select: auto;
   -ms-user-select: auto;
   user-select: auto !important;
+}
+
+.yearende_left_top_news h4.heading {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media (min-width: 320px) {

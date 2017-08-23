@@ -40,10 +40,6 @@
     width: 100%;
   }
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
   #block-views-video-landing-header-block .video-header-right .ads {
     position: relative;
   }
@@ -447,6 +443,20 @@
   }
 
   /*search page css end */
+  /* Scroll bar css */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ddd;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #aaa;
+  }
 }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .sport-home-layout-page .itg-layout-615 .droppable,

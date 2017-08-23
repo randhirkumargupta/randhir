@@ -26,7 +26,7 @@ function itg_rfa_file_live_blog() {
       $msg = '';
       $hyperlink = 'rfa-dashboard';
       $msg = '[' . $action . '] ' . $text . '(' . $rundown_id . ')[RFA]';
-      itg_octopus_add_notification('RFA', $msg, $hyperlink, REQUEST_TIME, 1);
+      itg_octopus_add_notification('RFA', $msg, $hyperlink, '', REQUEST_TIME, 1);
 
       if ($action == 'UPDATE') {
         itg_octopus_api_send_email_to_octopus("You have received UPDATE tag in XML(RFA)", 'You have received UPDATE tag in XML for breaking news:' . $text);
@@ -137,8 +137,17 @@ function itg_rfa_file_testing() {
  */
 function itg_octopus_api_rfa_dashboard() {
   global $base_url;
-
+  // This is for handling RFA notification read
+  if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
+    itg_octopus_notification_by_uid($_GET['onotify']);
+  }
   drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
+
+  drupal_add_js("jQuery(document).ready(function(){
+jQuery('#itg-octopus-api-rfa-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
+jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
+});", array('type' => 'inline', 'scope' => 'footer'));
+
 
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));
@@ -175,15 +184,15 @@ function itg_octopus_api_rfa_dashboard() {
   }
 
 
-  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : date('Y-m-d');
-  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : date('Y-m-d') . ' 23:59:59';
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
 
 
-  if (isset($_GET['start_date']) && !empty($_GET['start_date'])) { // start date
+  if (isset($start_date) && !empty($start_date)) { // start date
     $query->condition('rfa.created_date', strtotime($start_date), '>=');
   }
 
-  if (isset($_GET['end_date']) && !empty($_GET['end_date'])) { // end date
+  if (isset($end_date) && !empty($end_date)) { // end date
     $query->condition('rfa.created_date', strtotime($end_date), '<=');
   }
 
@@ -291,7 +300,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
     '#theme_wrappers' => array('date_popup'),
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'Start Date'),
     '#weight' => 4,
     '#default_value' => isset($_GET['start_date']) ? $_GET['start_date'] : '',
   );
@@ -311,7 +320,7 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#process' => array('date_popup_element_process'),
     '#value_callback' => 'date_popup_element_value_callback',
     '#theme_wrappers' => array('date_popup'),
-    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly'),
+    '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => 'End Date'),
     '#weight' => 5,
     '#default_value' => isset($_GET['end_date']) ? $_GET['end_date'] : '',
   );
@@ -325,6 +334,30 @@ function itg_octopus_api_rfa_form($form, &$form_state) {
     '#weight' => 7,
   );
   return $form;
+}
+
+/**
+ * Implements hook_validate for form validation handler
+ * {@inheritdoc}
+ */
+function itg_octopus_api_rfa_form_validate($form, &$form_state) {
+
+  $flag = 0;
+  if (!empty($form_state['values']['start_date']['date']) && empty($form_state['values']['start_date']['time'])) {
+
+    $array_error['start_date[time]'] = t("Please enter start date time.");
+    $flag = 1;
+  }
+  if (!empty($form_state['values']['end_date']['date']) && empty($form_state['values']['end_date']['time'])) {
+    $array_error['end_date[time]'] = t("Please enter end date time.");
+    $flag = 1;
+  }
+  if ($flag == 1) {
+    drupal_get_messages('error');
+    foreach ($array_error as $key => $msgs) {
+      form_set_error(check_plain($key), check_plain($msgs));
+    }
+  }
 }
 
 /**

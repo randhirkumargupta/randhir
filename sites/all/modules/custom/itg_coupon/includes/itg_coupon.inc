@@ -31,6 +31,10 @@ function third_party_coupon_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
+   $form['coupon_holder']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'manage-coupons', array('attributes' => array('class' => 'button'))),
+    '#weight' => 20,
+  );
 
   return $form;
 }

@@ -816,6 +816,16 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+    case 'views-exposed-form-manage-newsletter-page':
+      $form['status_1']['#options'] = array(
+        'any' => '- Any -' ,
+        1 => 'Published' ,
+        0 => 'Not published	'
+      );
+      if(isset($_GET['status_1'])) {
+        $form['status_1']['#default_value'] = $_GET['status_1'];
+      }
+      break;
     case 'views-exposed-form-syndication-feed-generator-page':
       foreach ($form['type']['#options'] as $key => $value) {
         if (strtolower($value) == 'story') {
@@ -1026,16 +1036,25 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if ($_GET['category_tid'] == 0) {
         drupal_add_css(".messages--error {display:none}", "inline");
       }
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
       );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+      
+       case 'views-exposed-form-bitrates-videos-page':
+      
+      $form['Cancel'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'bitrates-videos', array("attributes" => array("class" => array("button")))),
+      );
+     
+      break;
     case 'views-exposed-form-state-manager-page':
 
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
       );

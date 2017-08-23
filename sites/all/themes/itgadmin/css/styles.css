@@ -2106,7 +2106,7 @@ div.vertical-tabs .form-textarea-wrapper {
   padding: 0 15px 30px;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) {
-  min-height: 430px;
+  min-height: 700px;
   border: 1px solid #d9d9d9;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .messages--error {
@@ -2274,7 +2274,7 @@ div.vertical-tabs .form-textarea-wrapper {
   margin: 0;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) div.description {
-  left: 220px !important;
+  left: 100% !important;
 }
 
 input[name="field_gallery_image_add_more"] {
@@ -13002,10 +13002,32 @@ fieldset#edit-xmlsitemap {
   left: 1024px !important;
 }
 
-.region-sidebar-second .block-itg-layout-manager h2 + div {
+.page-itg-layout-manager .region-sidebar-second .block-itg-layout-manager h2 + div {
   height: 185px;
 }
-.region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
+.page-itg-layout-manager .region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
+  max-height: 110px;
+  overflow-y: auto;
+}
+.page-itg-layout-manager .region-sidebar-second #block-itg-layout-manager-layout-section-widgets .templates-widgets {
+  max-height: 110px;
+}
+
+.page-itg-layout-manager-home .region-sidebar-second .block-itg-layout-manager h2 + div {
+  height: 185px;
+}
+.page-itg-layout-manager-home .region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
   max-height: 140px;
   overflow-y: auto;
+}
+
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .has-preview,
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .image-widget-data,
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .image-widget-data .filefield-sources-imce-browse,
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .has-preview .image-widget-data {
+  height: 162px;
+}
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .has-preview .image-widget-data .form-type-textfield:nth-child(3) {
+  display: block;
+  bottom: 38px;
 }
