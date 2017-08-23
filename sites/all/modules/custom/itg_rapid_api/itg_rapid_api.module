@@ -785,3 +785,16 @@ function validateServicePass($params){
     $pass_vld_msg['msg'] = "Go Ahead.";
     return $pass_vld_msg;
 }
+
+/**
+ * 
+ * @param int $tid
+ * @return array
+ */
+function get_personalization_saved_value_service($uid) {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->addField('iwo', 'weight');
+  $query->condition('iwo.widget', 'personalization_widget');
+  $query->condition('iwo.extra', $uid);
+  return $query->execute()->fetch();
+}

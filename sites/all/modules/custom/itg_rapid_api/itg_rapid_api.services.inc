@@ -3895,7 +3895,8 @@ function itg_rapid_api_get_preference($token) {
     } else {
         $account = user_load_by_name($user_id);
 
-        $preference_tid = get_personalization_front_data_service($account);
+        $preference_tid = get_personalization_saved_value_service($account->uid);
+        p($preference_tid);die();
 
         // return data of personalization-preferences value
         $data['status_code'] = "1";
