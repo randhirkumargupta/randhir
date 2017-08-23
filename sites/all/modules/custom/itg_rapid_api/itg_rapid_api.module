@@ -794,7 +794,8 @@ function validateServicePass($params){
 function get_personalization_saved_value_service($uid) {
   $query = db_select('itg_widget_order', 'iwo');
   $query->addField('iwo', 'weight');
+  $query->addField('iwo', 'nid');
   $query->condition('iwo.widget', 'personalization_widget');
   $query->condition('iwo.extra', $uid);
-  return $query->execute()->fetch();
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
