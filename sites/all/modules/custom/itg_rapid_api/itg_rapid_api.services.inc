@@ -3985,7 +3985,7 @@ function itg_rapid_api_update_preference($token) {
     }
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $data['status_code'] = "0";
-        $data['status_message'] = "invalid token/User ID";
+        $data['status_message'] = "invalid token";
         return $data;
     } else {
         
