@@ -336,10 +336,13 @@ function itg_get_global_point_history() {
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
        $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+       //watchdog('earn', $earn);
        $remain = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
-      $data['total_earned_so_far'] = $earn;
-      $data['remaining_point'] = $remain;
-      $data['redeemed_points'] = $earn - $remain;
+       $redem = itg_global_loyalty_reward_get_redem_point($sso_id);
+       //watchdog('redem', $redem);
+      $data['total_earned_so_far'] = (int)$earn;
+      $data['remaining_point'] = (int)$remain;
+      $data['redeemed_points'] = (int)$redem;
     }
     $data['unit_description'][] = array(
       'activity_name' => $value->loyalty_type,
@@ -528,11 +531,29 @@ function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property =
   }
   if ($type == 'remaining') {
     $itg_query->addExpression('SUM(itg.remaining_points)', 'count');
+    $itg_query->condition('status', 1);
     $itg_query->condition('expiry_date', REQUEST_TIME, '>=');
   }
   $total_earn_point = $itg_query->execute()->fetchField();
 
   return $total_earn_point;
+}
+
+/**
+ * Implements itg_global_loyalty_reward_get_redem_point().
+ * @param int $sso_id
+ * @return int
+ */
+function itg_global_loyalty_reward_get_redem_point($sso_id) {
+  try {
+  $itg_query = db_select('itg_global_redem_point', 'itg');
+  $itg_query->condition('itg.sso_id', $sso_id);
+  $itg_query->addExpression('SUM(itg.redem_points)', 'count');
+  $total_redem_point = $itg_query->execute()->fetchField();
+  } catch(Exception $e) {
+    watchdog('Redem Points', $e->getMessage());
+  }
+  return $total_redem_point;
 }
 
 /**
@@ -572,11 +593,11 @@ function itg_get_total_cart_point($uid) {
  * @param string $property
  * @param int $sso_id
  */
-function itg_update_remaining_point($sso_id, $redem_point, $uid, $property, $url, $product_info, $nids) {
+function itg_update_remaining_point($sso_id, $redem_point, $uid, $property, $site_url, $product_info, $nids) {
   global $user;
   if($sso_id > 0 && array_key_exists(FRONT_USER, $user->roles)) {
     $url = variable_get('global_loyalty_url').'/itg-global-get-remaining-point-calculation';
-    $data = 'sso_id=' . $sso_id . '&redem_point=' . $redem_point.'&uid='.$uid.'&property='.$property.'&product_info='.$product_info.'&nids='.$nids.'&url='.$url;
+    $data = 'sso_id=' . $sso_id . '&redem_point=' . $redem_point.'&uid='.$uid.'&property='.$property.'&product_info='.$product_info.'&nids='.$nids.'&site_url='.$site_url;
     $options = array(
       'method' => 'POST',
       'data' => $data,
@@ -605,7 +626,7 @@ function itg_global_get_remaining_point_calculation() {
   $property = $_POST['property'];
   $product_info = $_POST['product_info'];
   $nids = $_POST['nids'];
-  $url = $_POST['url'];
+  $site_url = $_POST['site_url'];
   $flag = FALSE;
   if (!empty($sso_id)) {
     $query = db_select('itg_global_loyality_point', 'fe')
@@ -638,22 +659,44 @@ function itg_global_get_remaining_point_calculation() {
     //return drupal_json_output($redem_array);
     if (!empty($redem_array)) {
       foreach ($redem_array as $key => $value) {
+        if($value == 0) {
+          $status = 0;
+        } else {
+          $status = 1;
+        }
         db_update('itg_global_loyality_point')
             ->fields(array(
               'remaining_points' => $value,
+              'status' => $status,
             ))
             ->condition('id', $key, '=')
             ->execute();
       }
       $flag = TRUE;
-     watchdog('check', '<pre>'.print_r($product_data, true).'</pre>');
-     /** product insertion finish **/
+      /** redem point insertion */
+      try {
+
+      db_insert('itg_global_redem_point')
+          ->fields(array(
+            'uid' => $uid,
+            'sso_id' => (int) $sso_id,
+            'created' => REQUEST_TIME,
+            'redem_points' => $_POST['redem_point'],
+            'property' => $property,
+          ))
+          ->execute();
+    }
+    catch (Exception $e) {
+      watchdog('Redem point insert exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+    /** end here **/
+    /** product insertion finish **/
        
       $global_product_presave = array(
         'uid' => $uid,
         'sso_id' => $sso_id,
         'property' => $property,
-        'site_url' => $url,
+        'site_url' => $site_url,
         'product_information' => $product_info,
         'created' => REQUEST_TIME,
         'nids' => $nids,
@@ -665,7 +708,7 @@ function itg_global_get_remaining_point_calculation() {
               ->execute();
         }
         catch (Exception $e) {
-          watchdog('product exception', '<pre>' . $e->getMessage() . '</pre>');
+          watchdog('product insert exception', '<pre>' . $e->getMessage() . '</pre>');
         }
       }
       /** product insertion finish **/ 
