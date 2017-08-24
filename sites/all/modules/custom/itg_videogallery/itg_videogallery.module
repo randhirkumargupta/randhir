@@ -66,7 +66,13 @@ function itg_videogallery_menu() {
     'page callback' => 'itg_videogallery_dm_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+  ); 
+  $items['dailymotion-video-play'] = array(
+    'page callback' => 'itg_videogallery_dailymotion_video_play',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
+  
   $items['getvideoplayer'] = array(
     'page callback' => 'itg_videogallery_getvideoplayer',
     'access callback' => TRUE,
@@ -195,6 +201,11 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
     ),
     'itg_videogallery_dm_embed' => array(
       'template' => 'itg-dailymotion-dm-embeded',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_videogallery_dailymotion_video_play' => array(
+      'template' => 'itg-dailymotion-dailymotion-video-play',
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -2504,6 +2515,23 @@ function itg_videogallery_dm_embed() {
     $embed_id = end(explode('/', $thumb_url['embed_url']));
   }
   return theme('itg_videogallery_dm_embed', array('video_id' => $embed_id));
+}
+
+
+/**
+ * This function use for get file daily motion file details.
+ */
+function itg_videogallery_dailymotion_video_play() {
+  $video_id = $_POST['videoid'];
+  $api = itg_videogallery_dailymotion_api();
+  $thumb_url = $api->get(
+      '/video/' . $video_id, array('fields' => array('embed_url'))
+  );
+  $embed_id = "";
+  if ($thumb_url['embed_url']) {
+    $embed_id = end(explode('/', $thumb_url['embed_url']));
+  }
+  print  theme('itg_videogallery_dailymotion_video_play', array('video_id' => $embed_id));
 }
 
 /**
