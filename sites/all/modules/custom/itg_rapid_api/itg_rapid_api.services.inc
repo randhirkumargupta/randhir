@@ -3747,7 +3747,8 @@ function itg_rapid_api_edit_user_image($token) {
         // crate profile img tmp file
         file_put_contents($profile_img_tmp, $profile_img);
         $imagedata = file_get_contents($profile_img_tmp);
-        $file_data = file_save_data($imagedata, file_default_scheme() . '://styles/user_picture/public/profile_pic/' . $image_name);
+        //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+        $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
 
 
         // Update profile pic
