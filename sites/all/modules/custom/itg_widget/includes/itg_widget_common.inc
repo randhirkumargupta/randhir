@@ -2059,7 +2059,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget'  || $widget_name == 'trending_videos_widget') {
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   }
   //we_may_suggest_widget
@@ -2103,7 +2103,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget' || $widget_name == 'trending_videos_widget') {
     $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->fields('eli_file', array('uri'));
     $query->fields('eli', array('field_story_extra_large_image_alt', 'field_story_extra_large_image_title'));
