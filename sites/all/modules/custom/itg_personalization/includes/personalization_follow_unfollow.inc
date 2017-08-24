@@ -1,5 +1,10 @@
 <?php
 /**
+ * @file : personalization_follow_unfollow.inc
+ */
+?>
+<?php
+/**
  *
  */
 function itg_personalization_remove_activity() {
