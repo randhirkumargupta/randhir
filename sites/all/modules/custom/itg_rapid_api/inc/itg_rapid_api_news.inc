@@ -217,15 +217,8 @@ function generateNewsCategoryList($tid, $pageno) {
                 $source_data = $node_data->field_story_source_type['und'][0]['value'];
                 if ($source_data != "migrated" && $uri != '') {
                     $photo_story_eliimg = image_style_url('photo_slider_753x543', $uri);
-                    $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_eliimg);
-                    
-                    $photo_story_liimg = image_style_url('photo_slider_483x271', $uri);
-                    $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_liimg);
-                    
-                    $photo_story_siimg = image_style_url('photo_landing_slider_thumb_88x66', $uri);
-                    //$photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_eliimg);
-                    //$photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_liimg);
-                    $photo_story_siimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_siimg);
+                    $photo_story_liimg = image_style_url('large', $uri);
+                    $photo_story_siimg = image_style_url('photo_landing_slider_thumb_88_86', $uri);
                     
                     $news_list_array[$listcount]['n_small_image'] = "$photo_story_siimg";
                     $news_list_array[$listcount]['n_large_image'] = "$photo_story_eliimg";
@@ -300,13 +293,13 @@ function getPhotolist($nid) {
         $caption = getImgCaption($fid);
         // custom function for get img byline
         $byline = getImgByline($fid);*/
-       $fc = field_collection_field_get_entity($value);        
+       $fc = field_collection_field_get_entity($value);
       //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
       $fid = $fc->field_image_id['und'][0]['value'];
       if(!$fid > 0){
                 $fid = $fc->field_images['und'][0]['fid'];
             }
-      $uri = $fc->field_images['und'][0]['filename'];
+      $uri = $fc->field_images['und'][0]['uri'];
       $file_uri = file_create_url($uri);
       //$file_uri_fi = field_data_field_story_large_image($file_uri);
       $fid_file = $fid;
@@ -318,7 +311,7 @@ function getPhotolist($nid) {
       //$byline = getImgByline($fid);
       $byline = $fc->field_credit['und'][0]['value'];
       $photo_story_img = image_style_url('photo_slider_753x543', $uri);
-      $photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
+      //$photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
 
         $photolist_loop[$lcont]['np_id'] = "$fid";
         $photolist_loop[$lcont]['np_image'] = "$photo_story_img";
