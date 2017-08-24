@@ -3667,6 +3667,16 @@ function itg_rapid_api_edit_profile($token) {
     $HTTP_RAW_POST_DATA;
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     //$params = $_POST;
     $token = $params['authtoken_id'];
     if (!drupal_valid_token($token, 'services')) {
@@ -3695,6 +3705,16 @@ function itg_rapid_api_edit_user_image($token) {
     $HTTP_RAW_POST_DATA;
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     $authtoken_id = $token = $params['authtoken_id'];
     //p($params);die();
     if (!drupal_valid_token($token, 'services')) {
@@ -3759,6 +3779,16 @@ function itg_rapid_api_get_login_user_detail($token) {
     $HTTP_RAW_POST_DATA;
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $rand = rand();
+    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
     //$params = $_POST;
     $authtoken_id = $params['authtoken_id'];
     $user_id = $params['user_id'];
