@@ -148,6 +148,10 @@ function itg_videogallery_block_info() {
     'info' => t('Other Video Gallery from primary Category'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['trending_videos_widget_for_tab'] = array(
+    'info' => t('Trending videos for video tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -186,6 +190,15 @@ function itg_videogallery_block_view($delta = '') {
       break;
     case 'other_videogallery_from_section':
       $block['content'] = _get_other_videos_from_primary_category();
+      break;
+    // Trending videos ordering reordering widget case
+    case 'trending_videos_widget_for_tab':
+      $info['widget'] = 'trending_videos_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = 3;
+      $info['min_limit'] = 3;
+      $data = itg_widget_get_widget_data_data($info);
+      $block['content'] = theme("trending_videos_tab", array("data" => $data));
       break;
   }
 
@@ -239,6 +252,10 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
       'template' => 'videogallery-link-menu-landing-template',
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
+    ),
+    'trending_videos_tab' => array(
+      'template' => 'trending-videos-tab',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates'
     ),
   );
   return $themes;
@@ -4627,16 +4644,16 @@ function _header_tab_related_video_block_content() {
 
             if (!empty($related_data)) {
                 $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
-                $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
+                $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
                 $related_video_duration = $related_data->sm_field_video_duration[0];
-                $related_image = '<img src="' . $related_image_url . '">';
-                if (true || empty($related_image_url)) {
+                $related_image = '<img class="related-default" src="' . $related_image_url . '">';
+                if (empty($related_image_url)) {
                     $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
                     $related_video .= "<li class='related_content_tab'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><img src='$img_url' class='related-default' alt='$related_title' /><span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span></a>";
                     $related_video .= "<p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
                 }
                 else {
-                    $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span>" . $related_image;
+                    $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span>" . $related_image;
                     $related_video .= "</a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
                 }
             }

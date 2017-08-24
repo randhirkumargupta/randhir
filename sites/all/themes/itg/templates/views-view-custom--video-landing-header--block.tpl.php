@@ -381,7 +381,7 @@ $uri = base64_encode($actual_link);
                       <?php //print $description_slider; ?>
 
                       <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
-                      <?php print $row['field_story_expert_description'];//print $description_slider; ?>
+                      <div class='video-description'><?php print $row['field_story_expert_description'];//print $description_slider; ?></div>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
@@ -443,7 +443,7 @@ $uri = base64_encode($actual_link);
                             <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag?'':'hide');?>">
                                       <?php
                                             if (module_exists('itg_widget')) { 
-                                                    $watch_right_now = block_load('itg_widget', 'trending_videos_widget'); 									
+                                                    $watch_right_now = block_load('itg_videogallery', 'trending_videos_widget_for_tab'); 									
                                                     $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now))); 
                                                     print render($render_array); 
                                             } 
@@ -462,7 +462,7 @@ $uri = base64_encode($actual_link);
 }
 .video-header-right .trending-videos{ border:0px;}
 #related-video-tab ul li.related_content_tab .pic,.video-header-right .trending-videos li.trending-videos-list .pic{
-	    width: 88px;
+	    width: 170px;
 	        float: right;
     margin-left: 5px;
         position: relative;
@@ -487,6 +487,10 @@ $uri = base64_encode($actual_link);
 .video-header-right .related_content_tab span.videolengh{bottom: 0;left: 0; position: absolute;padding: 3px;background-color: rgba(0, 0, 0, 0.5);color: #fff;font-size: 12px;font-family: Roboto;}
 .video-landing-header .upload-date span{ font-size:12px; font-weight:600; margin: 10px 0; display: block;}
 .video-landing-header .top-section p{margin-bottom:10px}
+.latest_video.video_header_tabs .tab-data-1{height:475px;overflow-y: auto;}
+.latest_video.video_header_tabs .tab-data-2{height:475px;overflow-y: auto;}
+.video_header_tabs #related-video-tab ul li.related_content_tab .related-default{width:170px;height:127px;}
+.video_header_tabs .trending-videos ul li .trending-videos-list img{width:170px;height:127px;}
 </style>
 <script>
   jQuery(document).ready(function () {
