@@ -3712,7 +3712,7 @@ function itg_rapid_api_edit_user_image($token) {
     if (!$result_obj->uid) {
         $account_err['status_code'] = "0";
         $account_err['status_message'] = "Invalid User_ID";
-        return $account_err;
+        //return $account_err;
     }
     $authtoken_id = $token = $params['authtoken_id'];
     //p($params);die();
