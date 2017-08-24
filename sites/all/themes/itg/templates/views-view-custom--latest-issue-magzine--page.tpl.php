@@ -84,13 +84,11 @@
 
     $class = ' class="col-md-6 col-sm-6 col-xs-12 mt-50"';
   }
-//pr($data);
   $style_name = 'section_ordering_widget';
   if (!empty($data)) {
     foreach ($data as $parent_key => $parent_value) {
       $sub_title = '';
       foreach ($parent_value as $key => $value) {
-        print_r($value);
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
           $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
