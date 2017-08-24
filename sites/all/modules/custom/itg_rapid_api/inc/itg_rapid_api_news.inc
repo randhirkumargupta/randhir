@@ -213,15 +213,20 @@ function generateNewsCategoryList($tid, $pageno) {
 
                 //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
                 $fid = $fc->field_api_image['und'][0]['fid'];
-                $uri = $fc->field_images['und'][0]['filename'];
+                $uri = $fc->field_images['und'][0]['uri'];
                 $source_data = $node_data->field_story_source_type['und'][0]['value'];
-                if ($source_data != "migrated") {
+                if ($source_data != "migrated" && $uri != '') {
                     $photo_story_eliimg = image_style_url('photo_slider_753x543', $uri);
-                    $photo_story_liimg = image_style_url('photo_slider_483x271', $uri);
-                    $photo_story_siimg = image_style_url('photo_landing_slider_thumb_88x66', $uri);
                     $photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_eliimg);
+                    
+                    $photo_story_liimg = image_style_url('photo_slider_483x271', $uri);
                     $photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_liimg);
+                    
+                    $photo_story_siimg = image_style_url('photo_landing_slider_thumb_88x66', $uri);
+                    //$photo_story_eliimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_eliimg);
+                    //$photo_story_liimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_liimg);
                     $photo_story_siimg = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_siimg);
+                    
                     $news_list_array[$listcount]['n_small_image'] = "$photo_story_siimg";
                     $news_list_array[$listcount]['n_large_image'] = "$photo_story_eliimg";
                     $news_list_array[$listcount]['n_extralarge_image'] = "$photo_story_eliimg";

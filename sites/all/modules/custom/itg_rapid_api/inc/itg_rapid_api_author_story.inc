@@ -70,6 +70,7 @@ function author_latest_storylist($author_id,$cpageno) {
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->leftJoin('field_data_field_story_rating', 'sr', 'sr.entity_id = n.nid');
+    $query->leftJoin('field_data_field_story_source_type','st','st.entity_id = n.nid');
 
     $query->fields('n', array('nid', 'title', 'type', 'created','changed'));
     $query->fields('td', array('tid', 'name'));
@@ -77,18 +78,20 @@ function author_latest_storylist($author_id,$cpageno) {
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('eli',array('field_story_extra_large_image_fid'));
+    $query->fields('st', array('field_story_source_type_value'));
 
     $query->fields('si_file', array('uri'));
     $query->fields('li_file', array('uri'));
+    $query->fields('eli_file',array('uri'));
     $query->fields('sr', array('field_story_rating_value'));
 
     $query->condition('n.type', $type, 'IN');
     $query->condition('n.status', 1);
+//    $query->condition('n.nid','837198');
     $query->condition('bl.field_common_by_line_reporter_id_value', '%' . db_like($author_id) . '%', 'LIKE');
     $query->orderBy('n.nid', 'DESC');
     $query->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
 
     $news = array();
     $news2 = array();
@@ -106,9 +109,35 @@ function author_latest_storylist($author_id,$cpageno) {
         $node_title = $res['title'];
         $short_desc = isset($res['field_story_kicker_text_value']) ? $res['field_story_kicker_text_value'] : '';
 
-        $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
-        $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
-        $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
+         if($res['field_story_source_type_value'] != 'migrated'){
+           if($res['uri'] != ''){
+            $file_small_img_url = image_style_url('170x127', $res['uri']);
+            $file_small_img_url = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $file_small_img_url); 
+           }else{
+             $file_small_img_url = '';
+           }
+           
+          if($res['li_file_uri'] != ''){
+            $file_large_img_url = image_style_url('magazine_top_story_483x271', $res['li_file_uri']);
+            $file_large_img_url = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $file_large_img_url);
+          }else{
+            $file_large_img_url = '';
+          }  
+           
+          if($res['eli_file_uri'] != ''){
+            $file_extra_large_img_url = image_style_url('photo_slider_753x543', $res['eli_file_uri']);
+            $file_extra_large_img_url = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $file_extra_large_img_url);
+          }else{
+            $file_extra_large_img_url = '';
+          }  
+            //$file_small_img_url = completeFilePath($res['field_story_small_image_fid'],'170x127');
+            //$file_large_img_url = completeFilePath($res['field_story_large_image_fid'],'483x271');
+            //$file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid'],'647x363');
+        }else{
+            $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
+            $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
+            $file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid']);
+        }
         
         $term_id = $res['tid'];
         $term_name = $res['name'];
