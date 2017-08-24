@@ -30,7 +30,7 @@ function saveUpdatedProfile($data) {
     //$date_of_birth = strtotime(str_replace("-","/",$date_of_birth));
     $date_of_birth = strtotime($date_of_birth);
     $date_of_birth = date('Y-m-d', $date_of_birth);
-    
+
     // taxonomy_get_term_by_name_and_vocabulary
     $country_tid = "";
     $state_tid = "";
@@ -38,11 +38,11 @@ function saveUpdatedProfile($data) {
     $country_tid_ar = taxonomy_get_term_by_name($country, 'country');
     $state_tid_ar = taxonomy_get_term_by_name($state, 'state');
     $city_tid_ar = taxonomy_get_term_by_name($city, 'city');
-    
+
     $country_tid_ar = array_shift(array_values($country_tid_ar));
     $state_tid_ar = array_shift(array_values($state_tid_ar));
     $city_tid_ar = array_shift(array_values($city_tid_ar));
-    
+
     $country_tid = $country_tid_ar->tid;
     $state_tid = $state_tid_ar->tid;
     $city_tid = $city_tid_ar->tid;
@@ -79,9 +79,29 @@ function saveUpdatedProfile($data) {
     }
 
     // Update profile pic
-//    if (!empty($inputs['profile_pic'])) {
-//        $user_detail->field_user_picture['und'][0]['fid'] = check_plain($inputs['profile_pic']);
-//    }
+// check mime-type
+    $profile_img = base64_decode($profile_image);
+    $f = finfo_open();
+    $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
+    $mime_type_ar = explode("/", $mime_type);
+    $mime_type_ext = $mime_type_ar[1];
+
+
+    //echo  mime_content_type ($profile_image );die();
+    $profile_img_tmp = '/tmp/profileimage_' . $uid . "." . $mime_type_ext;
+
+    $image_name = 'profileimage_' . $uid . "." . $mime_type_ext;
+    // crate profile img tmp file
+    file_put_contents($profile_img_tmp, $profile_img);
+    $imagedata = file_get_contents($profile_img_tmp);
+    //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+    $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
+
+
+    // Update profile pic
+    if (!empty($file_data->fid)) {
+        $user_detail->field_user_picture['und'][0]['fid'] = $file_data->fid;
+    }
 
     // Update Qualification field.
 //    if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {

@@ -1498,14 +1498,15 @@ function itg_rapid_api_resource() {
                             'description' => 'address',
                             'type' => 'array',
                         ),
-//                        array(
-//                            'name' => 'profile_image',
-//                            'optional' => FALSE,
-//                            'source' => 'data',
-//                            //'source' => array('data' => 'first_name'),
-//                            'description' => 'profile_image',
-//                            'type' => 'string',
-//                        ),
+                        array(
+                            'name' => 'profile_image',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'source' => array('data'),
+                            'description' => 'profile_image',
+                            'type' => 'array',
+                        ),
                         array(
                             'name' => 'gender',
                             'optional' => TRUE,
@@ -3685,6 +3686,7 @@ function itg_rapid_api_edit_profile($token) {
         $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
+        
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
         $responce_object['status_code'] = "1";
