@@ -11112,6 +11112,9 @@ span.smilies-title {
   .answer-container{
     .answer-container-actual{
       text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
       .correct-ans, .incorrect-ans {
         font-size: 28px;
         line-height: 32px;
@@ -11121,7 +11124,7 @@ span.smilies-title {
       .correct-ans{color: #1ece1e;}
       .incorrect-ans{color: red;}
       strong {
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 400;
       }
     }

@@ -13581,6 +13581,9 @@ span.smilies-title img {
 
 [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual {
   text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }
 [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .correct-ans, [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual .incorrect-ans {
   font-size: 28px;
@@ -13595,7 +13598,7 @@ span.smilies-title img {
   color: red;
 }
 [id*="itg-quiz-quiz-form"] .answer-container .answer-container-actual strong {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
 }
 [id*="itg-quiz-quiz-form"] .answer-container #show_answer {
