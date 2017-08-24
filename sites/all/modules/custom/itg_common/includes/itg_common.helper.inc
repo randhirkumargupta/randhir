@@ -126,10 +126,10 @@ define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name' , 'sitemapxml_other'));
 
 
-define('PARENT_SSO', 'uat-sso.indiatodayonline.in');
+define('PARENT_SSO', variable_get('parent_sso'));
 define('FRONT_URL_VIDEO', 'http://uat-it.indiatodayonline.in');
-define('FRONT_URL', 'http://uat-it.indiatodayonline.in');
-define('BACKEND_URL', 'http://uat-it-backend.indiatodayonline.in');
+define('FRONT_URL', variable_get('itg_front_url'));
+define('BACKEND_URL', variable_get('itg_backend_url'));
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 
