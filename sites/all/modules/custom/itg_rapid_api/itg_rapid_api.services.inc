@@ -3830,7 +3830,7 @@ function itg_rapid_api_get_login_user_detail($token) {
           } */
         $location = $account->field_short_description['und'][0]['value'];
 
-        $profile_image = $account->field_user_picture['und'][0]['fid'];
+        $profile_image = completeFilePath($account->field_user_picture['und'][0]['fid']);
         $gender = $account->field_user_gender['und'][0]['value'];
         $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
         $login_type = "0";
