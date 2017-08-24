@@ -136,7 +136,6 @@
       }
       print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
     }
-    die;
   }
   if (isset($supplement_value) && !empty($supplement_value)) {
     print '</div>';
