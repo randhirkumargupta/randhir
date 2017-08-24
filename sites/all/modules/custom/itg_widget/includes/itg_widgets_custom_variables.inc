@@ -275,5 +275,12 @@ function itg_widgets_custom_variables() {
     '#required' => TRUE,
   );
   
+  $form['itg_sharing_app_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook share application id'),
+    '#attributes' => array('placeholder' => t('Enter Facebook share application id')),
+    '#default_value' => variable_get('itg_sharing_app_id'),
+  );
+  
   return system_settings_form($form);
 }
