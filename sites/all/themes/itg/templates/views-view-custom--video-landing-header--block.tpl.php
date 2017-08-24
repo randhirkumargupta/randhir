@@ -378,9 +378,10 @@ $uri = base64_encode($actual_link);
 
                           </ul>
                       </div>
-                      <?php print $description_slider; ?>
+                      <?php //print $description_slider; ?>
 
                       <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
+                      <div class='video-description'><?php print $row['field_story_expert_description'];//print $description_slider; ?></div>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
@@ -406,15 +407,91 @@ $uri = base64_encode($actual_link);
                       print render($render_array);
                       ?>
                   </div>
-                  <div class="latest_video">
-                      <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
-                  </div>
+                  <div class="latest_video video_header_tabs">
+                    <?php //echo views_embed_view('video_landing_header', 'block_1');?>
+                            <?php
+                                    if(function_exists('itg_get_related_content')){
+                                            $related_content = itg_get_related_content(arg(1));
+                                            $_flag = true;
+                                            if (empty($related_content)) {
+                                                $_flag  = false;
+                                            }
+                                    }
+
+                            ?>
+                            <div class="tab-buttons">
+                              <span class="<?php echo ($_flag?'active':'');?>" data-id="tab-data-1">
+                                    <?php
+                                            print 'Related';
+                                    ?>
+                              </span>
+                              <span class="<?php echo (!$_flag?'active':'');?>" data-id="tab-data-2">
+                                    <?php
+                                            print 'Trending Videos';
+                                    ?>
+                              </span>
+                            </div>
+                            <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag?'':'hide');?>">						
+                                      <?php
+                                            if (module_exists('itg_videogallery')) { 
+                                                    $related_content_tab = block_load('itg_videogallery', 'videogallery_tab_realted_content'); 									
+                                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab))); 
+                                                    print render($render_array); 
+                                            } 
+                                      ?>
+                            </div>
+                            <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag?'':'hide');?>">
+                                      <?php
+                                            if (module_exists('itg_widget')) { 
+                                                    $watch_right_now = block_load('itg_videogallery', 'trending_videos_widget_for_tab'); 									
+                                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now))); 
+                                                    print render($render_array); 
+                                            } 
+                                      ?>
+                            </div>
+                            <!--End here-->
+                    </div>
               </div>
           </div>
       </div>
   </div>
 <?php endforeach; ?>
-
+<style>
+.video-header-right .video_header_tabs .tab-data-2 h3{
+	display:none;
+}
+.video-header-right .trending-videos{ border:0px;}
+#related-video-tab ul li.related_content_tab .pic,.video-header-right .trending-videos li.trending-videos-list .pic{
+	    width: 170px;
+	        float: right;
+    margin-left: 5px;
+        position: relative;
+}
+#related-video-tab ul li, .trending-videos ul li{
+	    padding: 15px 24px 15px 0px;
+	    border-bottom: 1px solid #aaa9a9;overflow: hidden;
+}	
+#related-video-tab ul li.related_content_tab .title,.video-header-right .trending-videos li.trending-videos-list p{
+	display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 19px;
+    color: #aaa9a9;
+}
+#related-video-tab ul li.related_content_tab .title a, .trending-videos li.trending-videos-list p a{color: #aaa9a9;}
+.latest_video .tab-buttons {background: #000; border-radius: 0;padding: 5px 0 0 5px;}
+.latest_video .tab-buttons.tab-buttons span{border:0px;background:none;width: auto; padding:5px 10px; height:26px; line-height:18px;font-weight: 500;font-size: 12px; color: #fff; font-size: 12px; width: auto; border-radius: 0;}
+.latest_video .tab-buttons span.active{ border: 0px; background: #363636; color: #fff;height:26px; line-height:18px; font-size: 12px; width: auto; border-radius: 0;}
+.video-header-right .related_content_tab span.videolengh{bottom: 0;left: 0; position: absolute;padding: 3px;background-color: rgba(0, 0, 0, 0.5);color: #fff;font-size: 12px;font-family: Roboto;}
+.video-landing-header .upload-date span{ font-size:12px; font-weight:600; margin: 10px 0; display: block;}
+.video-landing-header .top-section p{margin-bottom:10px}
+.latest_video.video_header_tabs .tab-data-1{height:475px;overflow-y: auto;}
+.latest_video.video_header_tabs .tab-data-2{height:475px;overflow-y: auto;}
+.video_header_tabs #related-video-tab ul li.related_content_tab .related-default{width:170px;height:127px;}
+.video_header_tabs .trending-videos ul li .trending-videos-list img{width:170px;height:127px;}
+</style>
 <script>
   jQuery(document).ready(function () {
 
