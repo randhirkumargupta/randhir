@@ -55,6 +55,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-global-get-order-details'] = array(
+    'title' => t('Get global order details'),
+    'page callback' => 'itg_global_get_order_details',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -632,6 +639,7 @@ function itg_global_get_remaining_point_calculation() {
     $query = db_select('itg_global_loyality_point', 'fe')
         ->fields(fe, array('remaining_points', 'id'))
         ->condition('expiry_date', REQUEST_TIME, '>=')
+        ->condition('status', 1)
         ->orderBY('id', 'ASC')
         ->condition('fe.sso_id', $sso_id);
     $result = $query->execute();
@@ -715,4 +723,51 @@ function itg_global_get_remaining_point_calculation() {
     }
   }
   return drupal_json_output($redem_array);
+}
+
+/*
+ * Implements itg_global_get_order_info().
+ * @param int $sso_id
+ */
+function itg_global_get_order_info($sso_id) {
+  global $user;
+  if($user->uid > 0 && !empty($sso_id) && array_key_exists(FRONT_USER, $user->roles)) {
+    $url = variable_get('global_loyalty_url').'/itg-global-get-order-details';
+    $data = 'sso_id=' . $sso_id;
+    $options = array(
+      'method' => 'POST',
+      'data' => $data,
+      'timeout' => 60,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $response = drupal_http_request($url, $options);
+    // Check if successful
+    if ($response->code == 200) {
+      $result =  json_decode($response->data, true);
+      return $result;
+    }
+  }
+}
+
+/*
+ * Implements itg_global_get_order_details().
+ */
+function itg_global_get_order_details() {
+  global $user;
+  $sso_id = $_POST['sso_id'];
+  if (!empty($sso_id)) {
+    $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_reward_order', 'itg')
+      ->fields('itg', array('order_id', 'product_information', 'created', 'property', 'site_url'))
+      ->condition('itg.sso_id', $sso_id)
+      ->orderBy('itg.order_id', 'desc');
+    $itg_result = $itg_query->execute()->fetchAll();
+  }
+  catch (Exception $ex) {
+    watchdog('order fetch details', $ex->getMessage());
+  }
+    print drupal_json_output($itg_result);
+    drupal_exit();
+  }
 }
