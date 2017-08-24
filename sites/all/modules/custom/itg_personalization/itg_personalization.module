@@ -69,13 +69,7 @@ function itg_personalization_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  $items['personalization-follow-unfollow'] = array(
-    'title' => '',
-    'page callback' => 'itg_personalization_follow_unfollow',
-    'access arguments' => array('access personalization all content link'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/personalization_follow_unfollow.inc',
-  );
+
   $items['user-remove-follow-activity'] = array(
     'title' => '',
     'page callback' => 'itg_personalization_remove_activity',
@@ -223,6 +217,12 @@ function itg_personalization_block_info() {
     'info' => t('Personalized Following'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+
+  // Arun
+  $blocks['personalization_manage_follow'] = array(
+    'info' => t('Personalized Manage Follow'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -325,6 +325,10 @@ function itg_personalization_block_view($delta = '') {
       $data['tab'] = $output;
       $data['form'] = drupal_get_form('itg_personalization_refer_a_friend_form');
       $block['content'] = theme('personalization_edit_profile', array('data' => $data));
+      break;
+    case 'personalization_manage_follow':
+      $block['content'] = _personalization_manage_follow_content();
+      break;
   }
 
   return $block;
@@ -836,4 +840,49 @@ function itg_personalization_refer_friend_existence($mail) {
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * @param $nid
+ */
+function itg_follow_unfollow_print($nid) {
+  global $user;
+  $activity = 'follow_anchor';
+  $anchor = 'anchor';
+  if ($user->uid > 0) {
+    $follow_status = itg_get_front_activity_info($nid, $anchor, $user->uid, $activity, '');
 
+    if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
+      $html = "<div class='mhide'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a></div>";
+    }
+    else
+    {
+      $html = "<div class='mhide'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a></div>";
+    }
+  }
+  else
+  {
+     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
+     $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
+  }
+  print $html;
+}
+
+/**
+ * @return string
+ */
+function _personalization_manage_follow_content() {
+  global $user, $base_url;
+  $arg = arg();
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cursor = $people->find(array('uid' => $user->uid, 'status' => '1'));
+    $output = '';
+    $output.= '<ul class="personal-list">';
+    foreach ($cursor as $id => $value) {
+      $output.= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >DELETE</button></li><li>". $value['title'] . "</li>";
+
+    } // close for foreach
+    return $output.= '</ul>';
+  }
+}
