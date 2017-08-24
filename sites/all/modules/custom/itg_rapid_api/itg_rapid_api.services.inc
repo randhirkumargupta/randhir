@@ -1453,33 +1453,33 @@ function itg_rapid_api_resource() {
 //                            'description' => 'phone_number',
 //                            'type' => 'string',
 //                        ),
-                       /* array(
-                            'name' => 'country',
-                            'optional' => TRUE,
-                            //'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
-                            'description' => 'country',
-                            'type' => 'array',
-                        ),
-                        array(
-                            'name' => 'state',
-                            'optional' => TRUE,
-                            //'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
-                            'description' => 'state',
-                            'type' => 'array',
-                        ),
-                        array(
-                            'name' => 'city',
-                            'optional' => TRUE,
-                            //'source' => 'data',
-                            //'source' => array('data' => 'first_name'),
-                            'source' => array('data'),
-                            'description' => 'city',
-                            'type' => 'array',
-                        ),*/
+                        /* array(
+                          'name' => 'country',
+                          'optional' => TRUE,
+                          //'source' => 'data',
+                          //'source' => array('data' => 'first_name'),
+                          'source' => array('data'),
+                          'description' => 'country',
+                          'type' => 'array',
+                          ),
+                          array(
+                          'name' => 'state',
+                          'optional' => TRUE,
+                          //'source' => 'data',
+                          //'source' => array('data' => 'first_name'),
+                          'source' => array('data'),
+                          'description' => 'state',
+                          'type' => 'array',
+                          ),
+                          array(
+                          'name' => 'city',
+                          'optional' => TRUE,
+                          //'source' => 'data',
+                          //'source' => array('data' => 'first_name'),
+                          'source' => array('data'),
+                          'description' => 'city',
+                          'type' => 'array',
+                          ), */
                         array(
                             'name' => 'zipcode',
                             'optional' => TRUE,
@@ -1758,7 +1758,6 @@ function itg_rapid_api_resource() {
                             'description' => 'node_id',
                             'type' => 'array',
                         ),
-                        
                     ),
                 ),
             ),
@@ -3667,7 +3666,7 @@ function itg_rapid_api_edit_profile($token) {
     $HTTP_RAW_POST_DATA;
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-        $rand = rand();
+    $rand = rand();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3705,7 +3704,7 @@ function itg_rapid_api_edit_user_image($token) {
     $HTTP_RAW_POST_DATA;
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-        $rand = rand();
+    $rand = rand();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3779,7 +3778,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $HTTP_RAW_POST_DATA;
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-        $rand = rand();
+    $rand = rand();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -3937,7 +3936,7 @@ function itg_rapid_api_get_preference($token) {
         $account = user_load_by_name($user_id);
 
         $preference_tid = get_personalization_saved_value_service($account->uid);
-        
+
 
         // return data of personalization-preferences value
         $data['status_code'] = "1";
@@ -3948,7 +3947,7 @@ function itg_rapid_api_get_preference($token) {
         $loop_count = 0;
         //get personalization-preferences value
         foreach ($preference_tid as $key => $value) {
-            $pdata = $value;            
+            $pdata = $value;
             $tid = $pdata['nid'];
             $prefeance = $pdata['weight'];
             $term = taxonomy_term_load($tid);
@@ -4003,7 +4002,7 @@ function itg_rapid_api_update_preference($token) {
         $updates[$tid]['value'] = $is_preffered;
     }
 
-   $rand = rand();
+    $rand = rand();
     $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
@@ -4018,9 +4017,9 @@ function itg_rapid_api_update_preference($token) {
         $data['status_message'] = "invalid token";
         return $data;
     } else {
-        
+
         $result = callAPI($method, $url, $params);
-        
+
         $user = user_load_by_name($user_id);
         $widget_name = "personalization_widget";
 
