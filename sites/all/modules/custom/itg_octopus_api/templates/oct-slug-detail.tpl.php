@@ -1,6 +1,7 @@
 <?php
 global $base_url;
-$file_success_play = itg_octopus_api_is_url_exist('http://125.19.34.234:7777/Proxy/Lowres/' . $result->clip_data[0]->clipobj_id . '.mp4');
+
+$file_success_play = itg_octopus_api_is_url_exist($result->itg_octopus_low_resoln_video_url.'/' . $result->clip_data[0]->clipobj_id . '.mp4');
 ?>
 <a class="remove-data" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>
 <div class="slug-details">
@@ -17,8 +18,8 @@ $file_success_play = itg_octopus_api_is_url_exist('http://125.19.34.234:7777/Pro
   <div class="slug-video">
     <?php if (!empty($file_success_play)) { ?>
       <video width="320" height="240" controls>
-        <source src="http://125.19.34.234:7777/Proxy/Lowres/<?php print $result->clip_data[0]->clipobj_id; ?>.mp4" type="video/mp4">
-        <source src="http://125.19.34.234:7777/Proxy/Lowres/<?php print $result->clip_data[0]->clipobj_id; ?>.ogg" type="video/ogg">
+        <source src="<?php print $result->itg_octopus_low_resoln_video_url.'/'.$result->clip_data[0]->clipobj_id; ?>.mp4" type="video/mp4">
+        <source src="<?php print $result->itg_octopus_low_resoln_video_url.'/'.$result->clip_data[0]->clipobj_id; ?>.ogg" type="video/ogg">
         <span style="color:red;">Your browser does not support the video tag.</span>
       </video>
       <?php

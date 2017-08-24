@@ -56,9 +56,9 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
       $cart_point = itg_get_total_cart_point($user->uid);
     }
    
-    if(!empty($cart_point->cart_point)) {
-      watchdog('cart_total_point', $cart_point->cart_point);
-      $remaining_point = $remaining_previous_point - $cart_point->cart_point;
+    if(!empty($cart_point)) {
+      watchdog('cart_total_point', $cart_point);
+      $remaining_point = $remaining_previous_point - $cart_point;
     } else {
       $remaining_point = $remaining_previous_point;
     }
@@ -166,12 +166,12 @@ function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect, $
   // Update points
 
   if ($redirect != 'quantity' && $op == NULL) {
-    itg_loyalty_reward_update_point($uid, $node_info_array['points']);
+    //itg_loyalty_reward_update_point($uid, $node_info_array['points']);
     $_SESSION['cart_after_popup'] = $node_info_array;
     drupal_goto($redirect);
   }
   elseif ($redirect == 'quantity' && $op != NULL) {
-    itg_loyalty_reward_update_point($uid, ($node_info_array['points'] * $quantity), $op);
+    //itg_loyalty_reward_update_point($uid, ($node_info_array['points'] * $quantity), $op);
   }
 }
 
@@ -226,7 +226,7 @@ function _insert_product_into_cart($node_info_array) {
         ->fields($presave)
         ->execute();
     // Update points.
-    itg_loyalty_reward_update_point($user->uid, $node_info_array['points']);
+    //itg_loyalty_reward_update_point($user->uid, $node_info_array['points']);
     $response = 1;
   }
   catch (Exception $ex) {
@@ -266,7 +266,7 @@ function itg_loyalty_reward_cart() {
   if (function_exists('itg_get_total_cart_point')) {
     $cart_point = itg_get_total_cart_point($user->uid);
   }
-  $final_point = $remain_point - $cart_point->cart_point;
+  $final_point = $remain_point - $cart_point;
   return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $final_point));
 }
 
@@ -428,7 +428,7 @@ function itg_loyalty_reward_order_summary() {
   if (function_exists('itg_get_total_cart_point')) {
     $cart_point = itg_get_total_cart_point($user->uid);
   }
-  $final_point = $remain_point - $cart_point->cart_point;
+  $final_point = $remain_point - $cart_point;
   return theme('cart_order_summary', array('data' => $data, 'remain_point' => $final_point));
 }
 

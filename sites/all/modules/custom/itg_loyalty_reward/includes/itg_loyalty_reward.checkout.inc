@@ -19,7 +19,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
   $cart_total_valid = _cart_total_point($user->uid, 'compare');
   
   if (!$cart_total_valid) {
-    drupal_goto('cart');
+   drupal_goto('cart');
   }
   // Load user fields.
   $user_fields = user_load($user->uid);
@@ -143,7 +143,7 @@ function _cart_total_point($uid, $op = NULL) {
   $itg_result_cart = $itg_query->execute()->fetchField();
 
   // Get unique expiry key.
-  $pointer_key = itg_loyalty_reward_unique_expiration($uid);
+  /*$pointer_key = itg_loyalty_reward_unique_expiration($uid);
   $itg_query = db_select('itg_loyalty_reward_point_history', 'itg');
   $itg_query->fields('itg', array('cart_point'))
       ->condition('pointer_key', $pointer_key);
@@ -156,7 +156,8 @@ function _cart_total_point($uid, $op = NULL) {
   }
   else {
     return $itg_result_cart;
-  }
+  }*/
+  return $itg_result_cart;
 }
 
 /**
@@ -242,18 +243,39 @@ function itg_loyalty_reward_place_order() {
     'created' => REQUEST_TIME,
     'nids' => implode(',', $product_availability['nid']),
   );
+  
   $order_placed = 0;
+  $total_point = _cart_total_point($user->uid);
+  
+  // get sso user detail
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+   $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (empty($sso_final_id)) {
+    $sso_id = $user->uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  
+  // get property data
+  if(!empty(variable_get('property_name'))) {
+  $property = variable_get('property_name');
+  }
+
   try {
     $order_placed = db_insert('itg_loyalty_reward_order')
         ->fields($presave)
         ->execute();
-    $unique_key = itg_loyalty_reward_unique_expiration($user->uid);
-    $total_point = _cart_total_point($user->uid);
-    $itg_query = db_update('itg_loyalty_reward_point_history');
-    $itg_query->fields(array('redeemed_point' => $total_point, 'cart_point' => 0))
-        ->condition('pointer_key', $unique_key)
-        ->expression('redeemed_point', 'redeemed_point + :point', array(':point' => $total_point))
-        ->execute();
+    $response = itg_update_remaining_point($sso_id, $total_point, $user->uid, $property, $base_url, serialize($data), implode(',', $product_availability['nid']));
+
+    //$unique_key = itg_loyalty_reward_unique_expiration($user->uid);
+    
+    //$itg_query = db_update('itg_loyalty_reward_point_history');
+    //$itg_query->fields(array('redeemed_point' => $total_point, 'cart_point' => 0))
+       // ->condition('pointer_key', $unique_key)
+       // ->expression('redeemed_point', 'redeemed_point + :point', array(':point' => $total_point))
+       // ->execute();
   }
   catch (Exception $ex) {
     watchdog('ITG Order', $ex->getMessage());
