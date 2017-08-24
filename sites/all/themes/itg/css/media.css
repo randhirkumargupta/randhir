@@ -594,6 +594,9 @@
   }
 
   /*budget page css end*/
+  .show-embed-code-link .show-embed-code-div {
+    left: -62px;
+  }
 }
 @media only screen and (max-width: 768px) {
   .block-itg-ads {
