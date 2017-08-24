@@ -15,7 +15,16 @@ module_load_include('inc', 'itg_photogallery', 'includes/views_handler_itg_photo
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  if ($form_id == 'photogallery_node_form') {
+  if ($form_id == 'itg_widgets_custom_variables') {
+        $form['tid_photogallery'] = array(
+          '#type' => 'textfield',
+          '#title' => 'Tid of Photogallery Section',
+          '#default_value' => variable_get('tid_photogallery'),
+          '#size' => 20,
+          '#maxlength' => 20,
+        );
+    }
+    if ($form_id == 'photogallery_node_form') {
     
     // Filed collection add class.
     
@@ -566,6 +575,10 @@ function itg_photogallery_block_info() {
     'info' => t('Photo landing page menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['photogallery_link_menu_block'] = array(
+    'info' => t('PhotoGallery Section menu block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -584,6 +597,18 @@ function itg_photogallery_block_view($delta = '') {
       break;
     case 'photo_menu_landing_block':
       $block['content'] = theme('Photo_landing_menu_block', array('data' => $data));
+      break;
+    case 'photogallery_link_menu_block':
+      if ( arg(0) == 'node' && is_numeric(arg(1)) && ! arg(2) ) {
+        $node = node_load(arg(1));
+        if($node->type == 'photogallery'){
+          $block['content'] = theme('photogallery_menu_link_block', array('data' => $data));
+        }else{
+          $block['content'] = '';
+        }
+      }else{
+          $block['content'] = '';
+      }
       break;
   }
 
@@ -612,6 +637,11 @@ function itg_photogallery_theme($existing, $type, $theme, $path) {
       'template' => 'Photo-landing-menu-block',
       'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
       'render element' => 'form',
+    ),
+    'photogallery_menu_link_block' => array(
+      'template' => 'photogallery-menu-link-block',
+      'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
+      'variables' => array('data' => NULL),
     ),
   );
 
