@@ -51,7 +51,7 @@ function saveUpdatedProfile($data) {
     $inputs = $data;
     //echo "<pre>hi"; print_r($inputs);echo "</pre>";exit();
     $user = $user_detail = user_load_by_name($user_id);
-    
+    $uid = $user->uid;
 
     // Update First Name.
     if (!empty($data['first_name'])) {

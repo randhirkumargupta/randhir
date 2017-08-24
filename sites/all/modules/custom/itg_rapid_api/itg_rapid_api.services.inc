@@ -3806,7 +3806,7 @@ function itg_rapid_api_get_login_user_detail($token) {
         $email_id = $account->mail;
         $phone_number = $account->field_mobile_number['und'][0]['value'];
         $location = "";
-        $profile_style_img = theme('user_picture', array('account' =>$account));
+        //$profile_style_img = theme('user_picture', array('account' =>$account));
 
 
         /* if ($account->field_user_counrty['und'][0]['tid']) {
@@ -3831,7 +3831,8 @@ function itg_rapid_api_get_login_user_detail($token) {
           } */
         $location = $account->field_short_description['und'][0]['value'];
 
-        //$profile_image = completeFilePath($account->field_user_picture['und'][0]['fid']);
+        $profile_image = completeFilePath($account->field_user_picture['und'][0]['fid']);
+        //$profile_image = $account->field_user_picture['und'][0]['fid'];
         $gender = $account->field_user_gender['und'][0]['value'];
         $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
         $login_type = "0";
@@ -3852,7 +3853,7 @@ function itg_rapid_api_get_login_user_detail($token) {
         $data['data']['user_profile_detail']['email_id'] = "$email_id";
         $data['data']['user_profile_detail']['phone_number'] = "$phone_number";
         $data['data']['user_profile_detail']['location'] = "$location";
-        $data['data']['user_profile_detail']['profile_image'] = "$profile_style_img";
+        $data['data']['user_profile_detail']['profile_image'] = "$profile_image";
         $data['data']['user_profile_detail']['gender'] = "$gender";
         $data['data']['user_profile_detail']['date_of_birth'] = "$date_of_birth";
     }
