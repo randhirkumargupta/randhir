@@ -178,13 +178,8 @@ function itg_mobile_services_feed_generator_of_contents($node) {
  * @param string $file_path
  */
 function itg_mobile_services_mail($service_email_address, $file_path) {
-  //~ $attachment = array(
-    //~ 'filepath' => $file_path,
-  //~ );
-  $_file_uri = file_create_url(file_build_uri($file_path));
   $attachment = array(
-    'content' => file_get_contents($_file_uri),
-    'filemime' => 'application/xml'
+    'filepath' => $file_path,
   );
   $params = array(
     'key' => 'itg_syndication',
