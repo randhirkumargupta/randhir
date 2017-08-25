@@ -1002,7 +1002,7 @@ jQuery(document).ready(function () {
   var el_height = el.outerHeight(true);
   var el_offset = el.offset();
   var win_height = jQuery(window).height();
-  var footer_offset = $('#footer').offset();
+  var footer_offset = jQuery('#footer').offset();
   var footer_offset_top = footer_offset.top - win_height;
   var fix_point = el_offset.top + el_height - win_height;
   el.parent().css('position', 'static');
