@@ -188,7 +188,7 @@ function poll_cast_datalist($poll_id) {
     $news['p_title'] = "$poll_title";
     $news['p_image'] = "$poll_ques_img";
     $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-    $news['p_total_count'] = "$count_total_partic";
+    $news['total_participants'] = "$count_total_partic";
 
     $news['p_option'] = $options2;
     $news2[] = $news;
