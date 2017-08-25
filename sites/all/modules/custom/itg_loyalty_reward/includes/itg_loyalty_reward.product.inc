@@ -70,9 +70,9 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto('product');
     }
-    elseif ($remaining_point < $node_info_array['points'] && $new_quantity > 0) {
-      return drupal_json_encode(array('code' => -2));
-    }
+    //elseif ($remaining_point < $node_info_array['points'] && $new_quantity > 0) {
+      //return drupal_json_encode(array('code' => -2));
+    //}
     elseif ($remaining_point < $node_info_array['points'] && $new_quantity == NULL && $action == NULL) {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto($redirect);
