@@ -5646,6 +5646,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .title {
   font: 500 26px/30px Roboto;
   padding-bottom: 12px;
+  padding-right: 50px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .pic {
   background: url(../images/funalytics.png) top right no-repeat;
