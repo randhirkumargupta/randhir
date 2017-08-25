@@ -70,6 +70,13 @@ function itg_personalization_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['user-remove-follow-activity'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_remove_activity',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_follow_unfollow.inc',
+  );
   return $items;
 }
 
@@ -211,6 +218,12 @@ function itg_personalization_block_info() {
     'info' => t('Personalized Following'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+
+  // Arun
+  $blocks['personalization_manage_follow'] = array(
+    'info' => t('Personalized Manage Follow'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -313,6 +326,10 @@ function itg_personalization_block_view($delta = '') {
       $data['tab'] = $output;
       $data['form'] = drupal_get_form('itg_personalization_refer_a_friend_form');
       $block['content'] = theme('personalization_edit_profile', array('data' => $data));
+      break;
+    case 'personalization_manage_follow':
+      $block['content'] = _personalization_manage_follow_content();
+      break;
   }
 
   return $block;
@@ -824,4 +841,129 @@ function itg_personalization_refer_friend_existence($mail) {
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * @param $nid
+ */
+function itg_follow_unfollow_print($nid) {
+  global $user;
+  $activity = 'follow_anchor';
+  $ntype = 'anchor';
+  if ($user->uid > 0) {
+    $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
 
+    if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
+      $html = "<div class='mhide'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a></div>";
+    }
+    else
+    {
+      $html = "<div class='mhide'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a></div>";
+    }
+  }
+  else
+  {
+     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
+     $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
+  }
+  print $html;
+}
+
+/**
+ * @param $nid
+ * @param $ntype
+ * @param $activity
+ */
+function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
+  global $user, $base_url;
+  if ($user->uid > 0) {
+    $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
+    if($t_name) {
+      $tag_label = '<span class="tag-follow"><a target=\"_blank\" href=\"' . $base_url . '/topic/' . $t_name . '\"> ' . $t_name . '</a></span>';
+    } else {
+      $tag_label = '';
+    }
+    if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
+      $html = "<li class=\"author mhide\"><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a>".$tag_label."</li>";
+    }
+    else
+    {
+      $html = "<li class=\"author mhide\"><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a>".$tag_label."</li>";
+    }
+  }
+  else
+  {
+    $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
+    $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$tag_label."</li>";
+  }
+  print $html;
+}
+
+/**
+ * @return string
+ */
+function _personalization_manage_follow_content() {
+  global $user, $base_url;
+  $arg = arg();
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cursor = $people->find(array('uid' => $user->uid, 'status' => '1'));
+    $output = '';
+
+    foreach ($cursor as $row) {
+     $result[$row['ntype']][] = $row;
+    } // close for foreach
+    $cnt_anchor = count($result['anchor']) -1;
+    $cnt_author = count($result['story']) -1;
+    $cnt_tag = count($result['tag']) -1;
+    $output.= '<table border="1" class="personal-list"><tr>';
+    foreach ($result as $key => $rows) {
+      foreach ($rows as $id => $value) {  //pr($key);
+          // for author
+          if($key == 'author') {
+            if($id == '0') {
+              $output.= "<td>";
+              $output.= '<table border="1" class="personal-list">';
+              $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Author</strong></td></tr>";
+            }
+            $output.= "<tr><td><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+            if($id == $cnt_author) {
+              $output.= '</table>';
+              $output.= "</td>";
+            }
+
+          }
+        // for tag
+        if($key == 'tag') {
+          if($id == '0') {
+            $output.= "<td>";
+            $output.= '<table border="1" class="personal-list">';
+            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Topics</strong></td></tr>";
+          }
+          $output.= "<tr><td><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          if($id == $cnt_tag) {
+            $output.= '</table>';
+            $output.= "</td>";
+          }
+
+        }
+        // for anchor
+        if($key == 'anchor') {
+          if($id == '0') {
+            $output.= "<td>";
+            $output.= '<table border="1" class="personal-list">';
+            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Anchor</strong></td></tr>";
+          }
+          $output.= "<tr><td><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          if($id == $cnt_anchor) {
+            $output.= '</table>';
+            $output.= "</td>";
+          }
+
+        }
+      }
+    }
+    $output.= '</tr></table>';
+    return $output;
+  }
+}

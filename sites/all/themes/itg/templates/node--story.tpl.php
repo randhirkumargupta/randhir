@@ -260,6 +260,11 @@ if (!empty($content)):
                       ?>
                     </li>
                   <?php endif; ?>
+                  <?php 
+                    if (!empty($byline_id)) {
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story');
+                    }  
+                  ?>
                   <li class="mhide">
                     <span class="share-count">
                       <?php
@@ -987,7 +992,8 @@ if (!empty($content)):
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
-                    print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
+                  //  print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
+                    print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
                   }
                 }
               }
