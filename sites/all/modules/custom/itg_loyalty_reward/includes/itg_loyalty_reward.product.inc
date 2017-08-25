@@ -412,7 +412,7 @@ function _get_order_item() {
         $output,
         $value['property'],
         $product['product']['points'] * $product['quantity'],
-        $value['order_id'],
+        $value['site_order_id'],
         format_date($value['created'], 'custom_date_d_m_y_'),
       );
     }

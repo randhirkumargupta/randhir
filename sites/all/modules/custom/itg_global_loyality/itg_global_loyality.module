@@ -600,11 +600,11 @@ function itg_get_total_cart_point($uid) {
  * @param string $property
  * @param int $sso_id
  */
-function itg_update_remaining_point($sso_id, $redem_point, $uid, $property, $site_url, $product_info, $nids) {
+function itg_update_remaining_point($sso_id, $redem_point, $uid, $property, $site_url, $product_info, $nids, $site_order_id = NULL) {
   global $user;
   if($sso_id > 0 && array_key_exists(FRONT_USER, $user->roles)) {
     $url = variable_get('global_loyalty_url').'/itg-global-get-remaining-point-calculation';
-    $data = 'sso_id=' . $sso_id . '&redem_point=' . $redem_point.'&uid='.$uid.'&property='.$property.'&product_info='.$product_info.'&nids='.$nids.'&site_url='.$site_url;
+    $data = 'sso_id=' . $sso_id . '&redem_point=' . $redem_point.'&uid='.$uid.'&property='.$property.'&product_info='.$product_info.'&nids='.$nids.'&site_url='.$site_url.'&site_order_id='.$site_order_id;
     $options = array(
       'method' => 'POST',
       'data' => $data,
@@ -634,6 +634,7 @@ function itg_global_get_remaining_point_calculation() {
   $product_info = $_POST['product_info'];
   $nids = $_POST['nids'];
   $site_url = $_POST['site_url'];
+  $site_order_id = $_POST['site_order_id'];
   $flag = FALSE;
   if (!empty($sso_id)) {
     $query = db_select('itg_global_loyality_point', 'fe')
@@ -704,6 +705,7 @@ function itg_global_get_remaining_point_calculation() {
         'uid' => $uid,
         'sso_id' => $sso_id,
         'property' => $property,
+        'site_order_id' => $site_order_id,
         'site_url' => $site_url,
         'product_information' => $product_info,
         'created' => REQUEST_TIME,
@@ -759,7 +761,7 @@ function itg_global_get_order_details() {
     $itg_result = array();
   try {
     $itg_query = db_select('itg_global_reward_order', 'itg')
-      ->fields('itg', array('order_id', 'product_information', 'created', 'property', 'site_url'))
+      ->fields('itg', array('order_id', 'product_information', 'created', 'property', 'site_url', 'site_order_id'))
       ->condition('itg.sso_id', $sso_id)
       ->orderBy('itg.order_id', 'desc');
     $itg_result = $itg_query->execute()->fetchAll();

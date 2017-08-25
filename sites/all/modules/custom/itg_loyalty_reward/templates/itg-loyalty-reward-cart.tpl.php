@@ -63,10 +63,10 @@
               <div class="grand-total"><strong><?php print t('GRAND TOTAL');?></strong><strong><?php print $cart_total; ?> <?php print t('Points'); ?></strong></div>
               <?php if(number_format($remain_point) > 0) { ?>
               <div class="checkout"><?php print l(t('REDEEM POINTS'), 'order-summary'); ?></div>
+              <div class="points-balance"><span><?php print t('Balance after redemption'); ?></span><span><?php print number_format($remain_point); ?> <?php print t('Points'); ?></span></div>
               <?php } else {?>
               <div class="checkout"><?php print '<strong>Insufficient points to redeem this product</strong>'; ?></div>
               <?php } ?>
-              <div class="points-balance"><span><?php print t('Balance after redemption'); ?></span><span><?php print number_format($remain_point); ?> <?php print t('Points'); ?></span></div>
               <div class="continue-shopping"><?php print l('Continue Shopping', 'product'); ?></div>
           </div>
       </div>
