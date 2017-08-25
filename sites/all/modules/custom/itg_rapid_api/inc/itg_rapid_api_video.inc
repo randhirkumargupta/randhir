@@ -385,6 +385,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -405,6 +406,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fvu', array('field_video_upload_value'));
     $query->fields('st', array('field_story_source_type_value'));
+    $query->fields('fpc', array('field_primary_category_value'));
     //end
 
     if (count($tid_list) > 0) {
@@ -490,13 +492,17 @@ function generateProgramCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['p_url'] = "";
         $photo_list_array[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
       }
+      $field_primary_category_value = $resvalue['field_primary_category_value'];
+      $term = taxonomy_term_load($field_primary_category_value);
+      $term_name = $term->name;
+      $trem_id = $term->tid;
       $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
       $photo_list_array[$listcount]['p_comment_count'] = "10";
       $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
       $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
       $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
       $photo_list_array[$listcount]['p_show_ad'] = "0";
-      $photo_list_array[$listcount]['p_subcategory_id'] = "$tid";
+      $photo_list_array[$listcount]['p_subcategory_id'] = "$trem_id";
       $photo_list_array[$listcount]['p_subcategory_title'] = "$term_name";
       $photo_list_array[$listcount]['p_program_size'] = "$filesize";
       $photo_list_array[$listcount]['p_anchor_id'] = "1";
