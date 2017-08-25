@@ -912,7 +912,7 @@ function _personalization_manage_follow_content() {
       $result[$row['ntype']][] = $row;
     } // close for foreach
     $cnt_anchor = count($result['anchor']) -1;
-    $cnt_author = count($result['story']) -1;
+    $cnt_author = count($result['author']) -1;
     $cnt_tag = count($result['tag']) -1;
     $output.= '<table border="1" class="personal-list"><tr>';
     foreach ($result as $key => $rows) {
@@ -961,8 +961,7 @@ function _personalization_manage_follow_content() {
         }
       }
     }
-    $output.= '</tr></table>';
-    return $output;
+    return $output.= '</tr></table>';
   }
 }
 
