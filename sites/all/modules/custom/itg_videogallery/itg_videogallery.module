@@ -2839,6 +2839,7 @@ function itg_videogallery_thumb_url() {
       $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
       $node->field_is_replace[LANGUAGE_NONE][0]['value'] = $val->is_replace;
       $node->uid = 1;
+      $node->field_video_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->status = 1; //(1 or 0): Published or not
       $node->promote = 0; //(1 or 0): Promoted to front page
@@ -2886,6 +2887,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
       $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
       $node->field_is_replace[LANGUAGE_NONE][0]['value'] = $val->is_replace;
       $node->uid = 1;
+      $node->field_video_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->status = 1; //(1 or 0): Published or not
       $node->promote = 0; //(1 or 0): Promoted to front page

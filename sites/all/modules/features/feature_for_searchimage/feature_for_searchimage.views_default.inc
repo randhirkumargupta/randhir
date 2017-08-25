@@ -1240,7 +1240,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_thumb_url']['id'] = 'sm_field_video_thumb_url';
   $handler->display->display_options['fields']['sm_field_video_thumb_url']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_field_video_thumb_url']['field'] = 'sm_field_video_thumb_url';
-  $handler->display->display_options['fields']['sm_field_video_thumb_url']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_thumb_url']['label'] = 'Image';
   $handler->display->display_options['fields']['sm_field_video_thumb_url']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: sm_field_video_id */
   $handler->display->display_options['fields']['sm_field_video_id']['id'] = 'sm_field_video_id';
@@ -1252,7 +1252,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['label']['field'] = 'label';
-  $handler->display->display_options['fields']['label']['label'] = '';
+  $handler->display->display_options['fields']['label']['label'] = 'Title';
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: sm_field_video_size */
   $handler->display->display_options['fields']['sm_field_video_size']['id'] = 'sm_field_video_size';
@@ -1264,13 +1264,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_duration']['id'] = 'sm_field_video_duration';
   $handler->display->display_options['fields']['sm_field_video_duration']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_field_video_duration']['field'] = 'sm_field_video_duration';
-  $handler->display->display_options['fields']['sm_field_video_duration']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_duration']['label'] = 'Duration';
   $handler->display->display_options['fields']['sm_field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_date_time */
+  $handler->display->display_options['fields']['sm_field_video_date_time']['id'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = 'Video Date';
   /* Field: Apache Solr: sm_field_video_used */
   $handler->display->display_options['fields']['sm_field_video_used']['id'] = 'sm_field_video_used';
   $handler->display->display_options['fields']['sm_field_video_used']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_field_video_used']['field'] = 'sm_field_video_used';
-  $handler->display->display_options['fields']['sm_field_video_used']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_used']['label'] = 'Play';
   $handler->display->display_options['fields']['sm_field_video_used']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: sm_field_property */
   $handler->display->display_options['fields']['sm_field_property']['id'] = 'sm_field_property';

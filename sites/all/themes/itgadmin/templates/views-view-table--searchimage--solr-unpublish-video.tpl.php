@@ -84,7 +84,7 @@ if ($classes) {
                   </td>
                   <?php
                 }
-                else if ($field == 'label' || $field == 'sm_field_video_duration') {
+                else if ($field == 'label' || $field == 'sm_field_video_duration' || $field == 'sm_field_video_date_time') {
                   ?>
                   <td <?php
                   if ($field_classes[$field][$row_count]) {
