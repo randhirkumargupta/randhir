@@ -14,10 +14,6 @@ function itg_flag_init() {
   global $user, $base_url;  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-  // Get facebook share app id
-  if(!empty(variable_get('itg_sharing_app_id'))) {
-  $settings['fb_app'] = variable_get('itg_sharing_app_id');
-  }
   if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
     $_SESSION['referral_key'] = check_plain($_GET['referral_key']);
     drupal_add_js('jQuery(document).ready(function() {                  
@@ -247,4 +243,3 @@ function itg_user_activity_front_highlight() {
     }
   }
 }
-

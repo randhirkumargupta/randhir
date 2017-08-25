@@ -16,12 +16,11 @@
 // script for facebook sharing
 (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
-    var app = Drupal.settings.itg_flag.settings.fb_app;
     if (d.getElementById(id))
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId="+app;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -277,7 +276,6 @@ jQuery(document).ready(function () {
         });
     });
 
-
     // jquery for front follow / unfollow
     jQuery('.follow-activity').click(function (event) {
         var id = jQuery(this).attr('id');
@@ -345,15 +343,6 @@ jQuery(document).ready(function () {
                     li.fadeOut(1000, function(){
                         jQuery(this).remove();
                     });
-
-                    // case for follow anchor
-                    /* if (obj.success == 1 && obj.activity == data_activity) {
-                     jQuery("#" + id).attr({
-                     'data-status': 0,
-                     title: untitle
-                     }).html(untitle);
-                     }*/
-
                     if (obj.error == 'error') {
 
                     }
