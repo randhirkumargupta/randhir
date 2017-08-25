@@ -827,7 +827,6 @@ function itg_akamai_node_insert($node) {
  */
 function itg_akamai_content_setting($node) {
 
-
   if (isset($node->type) && !empty($node->type)) {
     $mapping = itg_akamai_getting_mapped_content_type();
     if (in_array($node->type, $mapping)) {

@@ -86,7 +86,8 @@ function itg_personalization_home_page() {
   global $user, $base_url;
   $data = array();
   $arg = arg();
-  if($arg[1] != 'saved-items') {
+  $exclude_page = array('saved-items', 'my-credits');
+  if(!in_array($arg[1] , $exclude_page)) {
   drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js', array('scope' => 'footer'));
   }
   // Load user fields

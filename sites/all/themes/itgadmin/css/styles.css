@@ -13002,10 +13002,21 @@ fieldset#edit-xmlsitemap {
   left: 1024px !important;
 }
 
-.region-sidebar-second .block-itg-layout-manager h2 + div {
+.page-itg-layout-manager .region-sidebar-second .block-itg-layout-manager h2 + div {
   height: 185px;
 }
-.region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
+.page-itg-layout-manager .region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
+  max-height: 110px;
+  overflow-y: auto;
+}
+.page-itg-layout-manager .region-sidebar-second #block-itg-layout-manager-layout-section-widgets .templates-widgets {
+  max-height: 110px;
+}
+
+.page-itg-layout-manager-home .region-sidebar-second .block-itg-layout-manager h2 + div {
+  height: 185px;
+}
+.page-itg-layout-manager-home .region-sidebar-second .block-itg-layout-manager h2 + div #autocomplete {
   max-height: 140px;
   overflow-y: auto;
 }
