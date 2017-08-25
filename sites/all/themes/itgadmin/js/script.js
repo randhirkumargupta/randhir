@@ -337,7 +337,6 @@ jQuery(document).ready(function () {
         });
         $('.video-in-form').click(function () {
             var getvideo_id = $(this).attr('data-video-id');
-
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'dailymotion-video-play',
                 type: 'post',
