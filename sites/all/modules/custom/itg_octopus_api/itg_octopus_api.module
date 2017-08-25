@@ -125,13 +125,6 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_rfa.inc',
   );
 
-  $items['itg-rfa-file-testing'] = array(
-    'page callback' => 'itg_rfa_file_testing',
-    'access arguments' => array('administer itg octopus'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_octopus_rfa.inc',
-  );
-
   $items['rfa-dashboard'] = array(
     'title' => 'RFA Dashboard',
     'page callback' => 'itg_octopus_api_rfa_dashboard',
@@ -360,13 +353,17 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
     $octopus_ref_id = base64_decode($_GET['octopus_ref']);
     $rfa_object = itg_octopus_rfa_detail($octopus_ref_id);
     $form['title']['#default_value'] = $rfa_object->source;
-    //$form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->source;
     $form['field_constituancy'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->source;
-    // $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['value']['#default_value'] = $rfa_object->text;
     $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE][0]['#default_value'] = $rfa_object->text;
-    // p($form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile'][LANGUAGE_NONE]['value']);
   }
 }
+
+/**
+ * Getting API Slug Data
+ * @param type $slug_id
+ * @param type $element_type
+ * @return type
+ */
 
 function itg_octopus_api_slug_data($slug_id, $element_type) {
   $query = db_select('itg_octopus_slug', 'ios');
@@ -574,10 +571,6 @@ function itg_octopus_get_slug_notif_read_data($user_last_login, $uid) {
  */
 function itg_octopus_api_check_exist_file_browse($filename, $file_size) {
   global $user;
-//  $fid = itg_octopus_api_getfile_details($filename);
-//  if (isset($fid) && !empty($fid))
-//    return $fid;
-
   $path_info = pathinfo($filename);
   $extension = $path_info['extension'];
   if (isset($extension) && ($extension == 'mov' || $extension == 'mp4')) {

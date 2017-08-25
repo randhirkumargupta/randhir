@@ -264,7 +264,6 @@ function itg_widgets_custom_variables() {
     '#title' => t('Front Url'),
     '#attributes' => array('placeholder' => t('Enter Fron URL')),
     '#default_value' => variable_get('itg_front_url'),
-    '#required' => TRUE,
   );
   
   $form['itg_backend_url'] = array(
@@ -272,7 +271,27 @@ function itg_widgets_custom_variables() {
     '#title' => t('Backend Url'),
     '#attributes' => array('placeholder' => t('Enter Fron URL')),
     '#default_value' => variable_get('itg_backend_url'),
-    '#required' => TRUE,
+  );
+  
+  $form['itg_sharing_app_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook share application id'),
+    '#attributes' => array('placeholder' => t('Enter Facebook share application id')),
+    '#default_value' => variable_get('itg_sharing_app_id'),
+  );
+  
+  $form['parent_sso'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSO url'),
+    '#attributes' => array('placeholder' => t('Enter sso url')),
+    '#default_value' => variable_get('parent_sso'),
+  );
+  
+  $form['FRONT_URL_VIDEO'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front video url'),
+    '#attributes' => array('placeholder' => t('Enter Front video url')),
+    '#default_value' => variable_get('FRONT_URL_VIDEO'),
   );
   
   return system_settings_form($form);
