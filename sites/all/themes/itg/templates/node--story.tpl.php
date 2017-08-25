@@ -168,7 +168,7 @@ if (!empty($content)):
       <?php
       $pipelinetext = "";
       if (!empty($node->field_story_new_title) && !empty($node->field_story_redirection_url_titl)) {
-        $pipelinetext = ' <span class="story-pipline">|</span> <a target="_blank" href="' . $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] . '">' . ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']) . '</a>';
+        $pipelinetext = ' <span class="story-pipline">||</span> <a target="_blank" href="' . $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] . '">' . ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']) . '</a>';
       }
       if (!empty($get_develop_story_status)) {
         ?>
@@ -260,9 +260,9 @@ if (!empty($content)):
                       ?>
                     </li>
                   <?php endif; ?>
-                  <?php 
+                   <?php 
                     if (!empty($byline_id)) {
-                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story');
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
                     }  
                   ?>
                   <li class="mhide">
@@ -992,8 +992,8 @@ if (!empty($content)):
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
-                  //  print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
-                    print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
+                   // print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
+                     print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
                   }
                 }
               }

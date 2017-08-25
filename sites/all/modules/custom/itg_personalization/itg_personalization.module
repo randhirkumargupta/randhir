@@ -69,7 +69,6 @@ function itg_personalization_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-
   $items['user-remove-follow-activity'] = array(
     'title' => '',
     'page callback' => 'itg_personalization_remove_activity',
@@ -219,7 +218,6 @@ function itg_personalization_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
-  // Arun
   $blocks['personalization_manage_follow'] = array(
     'info' => t('Personalized Manage Follow'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -861,8 +859,8 @@ function itg_follow_unfollow_print($nid) {
   }
   else
   {
-     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
-     $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
+    $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
+    $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
   }
   print $html;
 }
@@ -911,7 +909,7 @@ function _personalization_manage_follow_content() {
     $output = '';
 
     foreach ($cursor as $row) {
-     $result[$row['ntype']][] = $row;
+      $result[$row['ntype']][] = $row;
     } // close for foreach
     $cnt_anchor = count($result['anchor']) -1;
     $cnt_author = count($result['story']) -1;
@@ -919,20 +917,20 @@ function _personalization_manage_follow_content() {
     $output.= '<table border="1" class="personal-list"><tr>';
     foreach ($result as $key => $rows) {
       foreach ($rows as $id => $value) {  //pr($key);
-          // for author
-          if($key == 'author') {
-            if($id == '0') {
-              $output.= "<td>";
-              $output.= '<table border="1" class="personal-list">';
-              $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Author</strong></td></tr>";
-            }
-            $output.= "<tr><td><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
-            if($id == $cnt_author) {
-              $output.= '</table>';
-              $output.= "</td>";
-            }
-
+        // for author
+        if($key == 'author') {
+          if($id == '0') {
+            $output.= "<td>";
+            $output.= '<table border="1" class="personal-list">';
+            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Author</strong></td></tr>";
           }
+          $output.= "<tr><td><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          if($id == $cnt_author) {
+            $output.= '</table>';
+            $output.= "</td>";
+          }
+
+        }
         // for tag
         if($key == 'tag') {
           if($id == '0') {
@@ -967,3 +965,4 @@ function _personalization_manage_follow_content() {
     return $output;
   }
 }
+
