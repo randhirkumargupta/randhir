@@ -267,7 +267,7 @@ function itg_loyalty_reward_place_order() {
     $order_placed = db_insert('itg_loyalty_reward_order')
         ->fields($presave)
         ->execute();
-    $response = itg_update_remaining_point($sso_id, $total_point, $user->uid, $property, $base_url, serialize($data), implode(',', $product_availability['nid']));
+    $response = itg_update_remaining_point($sso_id, $total_point, $user->uid, $property, base64_encode($base_url), serialize($data), implode(',', $product_availability['nid']));
 
     //$unique_key = itg_loyalty_reward_unique_expiration($user->uid);
     

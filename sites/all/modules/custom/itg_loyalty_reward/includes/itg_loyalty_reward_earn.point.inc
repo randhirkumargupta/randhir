@@ -374,7 +374,7 @@ function get_loyality_type_by_name($type) {
 /**
  * Implements callback function for point notification.
  */
-function itg_loyalty_reward_points_expire_notification_callback() {
+/*function itg_loyalty_reward_points_expire_notification_callback() {
   $itg_result = array();
   try {
     $itg_query = db_select('itg_lrp_pointer_key', 'pk');
@@ -397,6 +397,39 @@ function itg_loyalty_reward_points_expire_notification_callback() {
       $data['name'] = $value->name;
       $data['expiry_date'] = $value->expiry_date;      
       // for mail code
+      itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+    }
+  }
+}*/
+
+/**
+ * Implements callback function for point notification.
+ */
+function itg_loyalty_reward_points_expire_notification_callback() {
+  $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_loyality_point', 'pk');
+    $itg_query->distinct('pk.sso_id');
+    $itg_query->join('users', 'u', 'pk.sso_id=u.uid');    
+    $itg_query->fields('u', array('mail', 'name'));
+    $itg_query->fields('pk', array('remaining_points'));
+    $itg_query->fields('pk', array('expiry_date', 'status'));
+    $itg_query->condition('pk.status', 1);
+    $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
+    $itg_query->havingCondition('date_diff_real', 1);
+    $itg_result = $itg_query->execute()->fetchAll();
+  } catch (Exception $ex) {
+    watchdog('Point Expiry Notification', $ex->getMessage());
+  }
+  // Send mail if got some user on result.  
+  $erros = array_filter($itg_result);
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $value) {
+      $data['remaining_point'] = $value->remaining_points;
+      $data['name'] = $value->name;
+      $data['expiry_date'] = $value->expiry_date;      
+      // for mail code
+      watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
       itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }
   }

@@ -168,6 +168,53 @@ function itg_global_loyality_schema() {
     ),
     'primary key' => array('order_id'),
   );
+  
+  // redem Table
+  $schema['itg_global_redem_point'] = array(
+    'description' => 'Table for storing user redem point.',
+    'fields' => array(
+      'redem_id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sso_id' => array(
+        'description' => 'sso user id.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'redem_points' => array(
+        'description' => 'Redem point',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'property' => array(
+        'description' => 'Property',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('redem_id'),
+  );
 
   return $schema;
 }
