@@ -1,5 +1,7 @@
 <?php
 
+define('KINDLE_WRAPPER', "public://kindle");
+
 /**
  * {@inheritdocs}
  */
@@ -137,6 +139,11 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
     $magazine = $form_state['values']['magazine'];
     drupal_goto('itg-kindle-feed', array('query' => array("issue" => $issue, "magazine" => $magazine)));
   } else {
+    $directory_name = uniqid() . "-" . time();
+    $dir = KINDLE_WRAPPER . "/" . $directory_name;
+    $dir_zip = KINDLE_WRAPPER . "/zip";
+    file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
+    file_prepare_directory($dir_zip, FILE_CREATE_DIRECTORY);
     $issue = $_GET['issue'];
     $magazine = $_GET['magazine'];
     if (!empty($issue) && !empty($magazine)) {
@@ -151,7 +158,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $query->condition("n.type", 'story');
         $result = $query->execute()->fetchAllAssoc('nid');
       } catch (Exception $ex) {
-        drupal_set_message($ex->getMessage() , 'error');
+        drupal_set_message($ex->getMessage(), 'error');
       }
       $node_ids = array_keys($result);
       foreach ($node_ids as $nid) {
@@ -159,8 +166,50 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $data_array['nids'][] = $nid;
       }
       $section_with_nids_array = _create_articles_section_files($data_array['sections'], $data_array['nids']);
-      _create_section_file($section_with_nids_array);
+      $sections_name_array = array_keys($section_with_nids_array);
+      $cover_file = _create_cover_xml();
+      _kindle_save_unmanaged_file($cover_file, $directory_name);
+      $cover_page_file = _create_cover_page_xml();
+      _kindle_save_unmanaged_file($cover_page_file, $directory_name);
+      $manifest_file = _create_manifest_file($sections_name_array);
+      _kindle_save_unmanaged_file($manifest_file, $directory_name);
+      _create_section_file($section_with_nids_array, $directory_name);
+
+      // Create Zip archive.
+      $file_name = 'download_' . REQUEST_TIME . '.zip';
+      $archive_uri = $dir_zip . '/' . $file_name;
+      $uploaded_files = scandir(KINDLE_WRAPPER . "/$directory_name");
+      $zip = new ZipArchive;
+      if ($zip->open(drupal_realpath($archive_uri), ZipArchive::CREATE) === TRUE) {
+        foreach ($uploaded_files as $file) {
+          if (strpos($file, ".xml")) {
+            $path = KINDLE_WRAPPER . "/" . $directory_name . "/" . $file;
+            $zip->addFile(drupal_realpath($path), $file);
+          }
+        }
+        $zip->close();
+        header('Content-Type: application/zip');
+        header('Content-disposition: attachment; filename=' . $file_name);
+        header('Content-Length: ' . filesize($archive_uri));
+        //drupal_set_message(t('Zip archive successfully created. !link', array('!link' => l(t("Download"), file_create_url($archive_uri)))));
+        readfile($archive_uri);
+        // Its manadatory to have exit while downloading file.
+        exit;
+        //
+      } else {
+        drupal_set_message(t('Error creating Zip archive.'), 'error');
+      }
     }
+  }
+}
+
+function _kindle_save_unmanaged_file($data_array = array(), $directory_name) {
+  if (isset($data_array['file_name']) && isset($data_array['xml'])) {
+    $data_file_name = $data_array['file_name'];
+    $data_file_destination = KINDLE_WRAPPER . "/$directory_name/$data_file_name";
+    $data_file_xml = $data_array['xml'];
+    file_unmanaged_save_data($data_file_xml, $data_file_destination, FILE_EXISTS_REPLACE);
+    //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($data_file_destination))));
   }
 }
 
@@ -169,20 +218,26 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
  * 
  * @param array $section_with_nids
  */
-function _create_section_file($section_with_nids = array()) {
+function _create_section_file($section_with_nids = array(), $directory_name) {
   if (!empty($section_with_nids)) {
     foreach ($section_with_nids as $section_name => $node_array) {
       // Section file started
+      $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
       $xml = "<?xml version='1.0' encoding='utf-8'?>";
       $xml .= "<rss version='2.0'>";
       $xml .= "<channel>";
       $xml .= "<title>" . $section_name . "</title>";
       foreach ($node_array as $nid) {
         $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
-        $xml .="<item><link>Article_" . $artical_file_name . ".xml</link></item>";
-        _create_node_file($artical_file_name, $nid, $section_name);
+        $xml .="<item><link>" . $artical_file_name . "</link></item>";
+        $node_file = _create_node_file($artical_file_name, $nid, $section_name);
+        _kindle_save_unmanaged_file($node_file, $directory_name);
       }
       $xml .= "</channel></rss>";
+      // Save logic for section files files.
+      $destination = KINDLE_WRAPPER . "/$directory_name/$section_file_name";
+      file_unmanaged_save_data(_formet_xml($xml), $destination, FILE_EXISTS_REPLACE);
+      //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($destination))));
       // Section file ended
     }
   }
@@ -205,7 +260,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
     $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
     $node_data = node_load($node_id);
     // Node xml data.
-    $data['xml'] = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
+    $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
         <title> <![CDATA[ ' . _get_correct_file_name($section) . ' - Title ' . $node_id . ' ]]> </title>
         <docdata management-status="usable">
@@ -232,13 +287,22 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
             <abstract>  <![CDATA[ ' . $node_data->field_story_magazine_kicker_text ['und'][0]['value'] . ' ]]> </abstract>
         </body.head>
         <body.content>
-            <block>  <![CDATA[ ' . $node_data->body ['und'][0]['value'] . ' ]]> </block>
+            <block>  <![CDATA[ ' . _remove_embded_tags_from_story_body($node_data->body ['und'][0]['value']) . ' ]]> </block>
         </body.content>
         <body.end />
     </body>
 </nitf>';
+    $data['xml'] = _formet_xml($xml);
   }
   return $data;
+}
+
+function _formet_xml($xml) {
+  $dom = new DOMDocument;
+  $dom->preserveWhiteSpace = false;
+  $dom->formatOutput = true;
+  $dom->loadXML($xml);
+  return $dom->saveXML();
 }
 
 /**
@@ -258,7 +322,7 @@ function kindle_get_sections_for_node($nid) {
     $query->condition('th.parent', 0);
     $result = $query->execute()->fetchAllAssoc('name');
   } catch (Exception $ex) {
-    drupal_set_message($ex->getMessage() , 'error');
+    drupal_set_message($ex->getMessage(), 'error');
   }
   if (!empty($result)) {
     $sections = array_keys($result);
@@ -287,7 +351,7 @@ function _get_correct_file_name($str = '') {
   $str = str_replace(' ', '', $str);
   $str = rawurlencode($str);
   $str = str_replace('%', '', $str);
-  return $str;
+  return strtolower($str);
 }
 
 /**
@@ -298,7 +362,7 @@ function _get_correct_file_name($str = '') {
 function _create_cover_xml() {
   $data = array();
   $data['file_name'] = 'Cover.xml';
-  $data['xml'] = "<?xml version='1.0' encoding='utf-8'?>
+  $xml = "<?xml version='1.0' encoding='utf-8'?>
 <rss version='2.0'>
     <channel>
         <title>COVER</title>
@@ -308,6 +372,7 @@ function _create_cover_xml() {
         </item>
     </channel>
 </rss>";
+  $data['xml'] = _formet_xml($xml);
   return $data;
 }
 
@@ -321,7 +386,7 @@ function _create_cover_page_xml() {
   // Time with mili second.
   $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
   $data['file_name'] = 'Cover_page.xml';
-  $data['xml'] = '<?xml version="1.0" encoding="utf-8"?>
+  $xml = '<?xml version="1.0" encoding="utf-8"?>
   <nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
       <head>
           <title>Cover</title>
@@ -359,6 +424,7 @@ function _create_cover_page_xml() {
           <body.end />
       </body>
   </nitf>';
+  $data['xml'] = _formet_xml($xml);
   return $data;
 }
 
@@ -383,13 +449,13 @@ function _create_manifest_file($section_array = array()) {
     $xml .= "</item>";
     foreach ($section_array as $section) {
       $xml .= "<item>";
-      $xml .="<link>Section_" . $section . ".xml</link>";
+      $xml .="<link>Section_" . _get_correct_file_name($section) . ".xml</link>";
       $xml .= "</item>";
     }
     $xml .= "</channel>";
     $xml .="</rss>";
   }
-  $data['xml'] = $xml;
+  $data['xml'] = _formet_xml($xml);
   return $data;
 }
 
