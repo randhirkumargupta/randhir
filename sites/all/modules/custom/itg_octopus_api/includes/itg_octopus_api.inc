@@ -358,7 +358,7 @@ function itg_octopus_api_rundown_listing() {
     }
 
     $video_description = itg_octopus_api_remove_cdata($row->text);
-    $video_description = substr($video_description, 0, 150);
+    $video_description = substr($video_description, 0, 100);
 
     $rows[] = array(
       array('data' => $sn++),
