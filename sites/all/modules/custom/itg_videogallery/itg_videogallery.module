@@ -2782,6 +2782,7 @@ function itg_videogallery_thumb_url() {
   $db_or = db_or();
   $db_or->condition('encoding_progress', '100', '!=');
   $db_or->condition('drd.publishing_progress', '100', '!=');
+  $db_or->isNull('drd.dailymotion_thumb_url');
   $db_or->isNull('drd.publishing_progress');
   $db_or->isNull('drd.encoding_progress');
   $query->condition($db_or);
@@ -2789,7 +2790,7 @@ function itg_videogallery_thumb_url() {
   $api = itg_videogallery_dailymotion_api();
   foreach ($result as $val) {
     try {
-      if ($val->encoding_progress != "100" || $val->publishing_progress != "100") {
+      if ($val->encoding_progress != "100" || $val->dailymotion_thumb_url == "" || $val->publishing_progress != "100") {
         $thumb_url = $api->get(
             '/video/' . $val->video_id, array('fields' => array('thumbnail_720_url', 'duration', 'encoding_progress', 'publishing_progress'))
         );
@@ -2825,6 +2826,12 @@ function itg_videogallery_thumb_url() {
   $api = itg_videogallery_dailymotion_api();
   foreach ($result_new as $val) {
     if ($val->is_draft != 1) {
+      $video_status_used = $val->dailymotion_published;
+      $video_is_draft = 0;
+     }else {
+      $video_status_used = 0;
+      $video_is_draft = 1;
+     }
       global $user;
       $node = new stdClass();
       $node->title = $val->name;
@@ -2834,10 +2841,11 @@ function itg_videogallery_thumb_url() {
       $node->field_video_id[LANGUAGE_NONE][0]['value'] = $val->video_id;
       $node->field_property [LANGUAGE_NONE][0]['value'] = VIDEO_PROPERTY;
       $node->field_video_duration [LANGUAGE_NONE][0]['value'] = $val->video_duration;
-      $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
+      $node->field_video_used [LANGUAGE_NONE][0]['value'] = $video_status_used;
       $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $val->dailymotion_thumb_url;
       $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
       $node->field_is_replace[LANGUAGE_NONE][0]['value'] = $val->is_replace;
+      $node->field_video_is_draft[LANGUAGE_NONE][0]['value'] = $video_is_draft;
       $node->uid = 1;
       $node->field_video_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
@@ -2850,7 +2858,7 @@ function itg_videogallery_thumb_url() {
         node_save($node);
       }
       node_save($node);
-    }
+    
   }
   itg_videogallery_publish_node_after_video_ready_by_dm();
   itg_videogallery_remove_video_with_child();
@@ -2873,7 +2881,14 @@ function itg_videogallery_update_video_info_solr($videoid) {
   $query->condition('video_id', $videoid, '=');
   $result_new = $query->execute()->fetchAll();
   foreach ($result_new as $val) {
-    if ($val->is_draft != 1) {
+     if ($val->is_draft != 1) {
+      $video_status_used = $val->dailymotion_published;
+      $video_is_draft = 0;
+     }else {
+      $video_status_used = 0;
+      $video_is_draft = 1;
+     }
+    
       $node = new stdClass();
       $node->title = $val->name;
       $node->type = "itg_solr_video";
@@ -2882,11 +2897,12 @@ function itg_videogallery_update_video_info_solr($videoid) {
       $node->field_video_id[LANGUAGE_NONE][0]['value'] = $val->video_id;
       $node->field_property [LANGUAGE_NONE][0]['value'] = VIDEO_PROPERTY;
       $node->field_video_duration [LANGUAGE_NONE][0]['value'] = $val->video_duration;
-      $node->field_video_used [LANGUAGE_NONE][0]['value'] = $val->dailymotion_published;
+      $node->field_video_used [LANGUAGE_NONE][0]['value'] = $video_status_used;
       $node->field_video_thumb_url[LANGUAGE_NONE][0]['value'] = $val->dailymotion_thumb_url;
       $node->field_video_size[LANGUAGE_NONE][0]['value'] = $val->video_size;
       $node->field_is_replace[LANGUAGE_NONE][0]['value'] = $val->is_replace;
       $node->uid = 1;
+      $node->field_video_is_draft[LANGUAGE_NONE][0]['value'] = $video_is_draft;
       $node->field_video_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->field_video_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s', $val->upload_time);
       $node->status = 1; //(1 or 0): Published or not
@@ -2899,7 +2915,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
       }
       // need to chane with solr
       node_save($node);
-    }
+    
   }
 }
 
