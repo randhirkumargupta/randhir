@@ -2097,6 +2097,9 @@ footer{
               color: #026bc5;
               &:hover{text-decoration: underline;}
             }
+            .story-photo-list-wrapper{
+              clear: both;
+            }
         }
         .briefcase {
             margin-top:20px;
