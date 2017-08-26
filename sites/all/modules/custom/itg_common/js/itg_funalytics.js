@@ -22,13 +22,14 @@
           success: function(data) {
             $("#funalytics_popup_display").html(data);
             jQuery('.funalytics-slider').slick({
+              initialSlide: goto,
               slidesToShow: 1,
               slidesToScroll: 1,
               infinite: false,
               prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
               nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>"
             });
-            jQuery('.funalytics-slider').slick('slickGoTo', goto);
+            //jQuery('.funalytics-slider').slick('slickGoTo', goto);
 
           }
         });
