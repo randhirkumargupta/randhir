@@ -486,6 +486,19 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Save user object.
   user_save($user_detail);
   
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+   $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (empty($sso_final_id)) {
+    $sso_id = $user->uid;
+  }
+  else {
+    $sso_id = $sso_final_id;
+  }
+  if(function_exists('global_update_alternate_email') && !empty($inputs['alt_email'])) {
+    global_update_alternate_email(check_plain($inputs['alt_email']), $sso_id);
+  }
+  
   $_REQUEST['destination'] = 'personalization/edit-profile/general-settings';
   $success = base64_encode('success');
     $form_state['redirect'] = array(
