@@ -25,11 +25,11 @@ if ($classes) {
 ?><?php print $attributes; ?>>
         <?php if (!empty($title) || !empty($caption)) : ?>
       <caption><?php print $caption . $title; ?></caption>
-    <?php
+      <?php
     endif;
     $all_used_video = itg_videogallery_get_all_publish_video_of_video_content();
     ?>
-<?php if (!empty($header)) : ?>
+    <?php if (!empty($header)) : ?>
       <thead>
           <tr>
               <?php foreach ($header as $field => $label): ?>
@@ -38,12 +38,12 @@ if ($classes) {
                   print 'class="' . $header_classes[$field] . '" ';
                 }
                 ?> scope="col">
-                <?php print $label; ?>
+                        <?php print $label; ?>
                 </th>
-  <?php endforeach; ?>
+              <?php endforeach; ?>
           </tr>
       </thead>
-        <?php endif; ?>
+    <?php endif; ?>
     <tbody>
         <?php foreach ($rows as $row_count => $row): ?>
           <?php
@@ -68,30 +68,42 @@ if ($classes) {
                       }
                       else {
                         $statusDis = "";
-                      } ?>
-                      <input <?php echo $statusDis;?> id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
-                      </td>
-                      <?php
-                    }
-                    else if ($field == 'sm_field_video_thumb_url') {
+                      }
                       ?>
-                  <td <?php
-                  if ($field_classes[$field][$row_count]) {
-                    print 'class="' . $field_classes[$field][$row_count] . '" ';
-                  }
-                  ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-                  <?php print $video_image; ?>
+                      <input <?php echo $statusDis; ?> id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
                   </td>
                   <?php
                 }
-                else if ($field == 'label' || $field == 'sm_field_video_duration' || $field == 'sm_field_video_date_time') {
+                else if ($field == 'sm_field_video_thumb_url') {
                   ?>
                   <td <?php
                   if ($field_classes[$field][$row_count]) {
                     print 'class="' . $field_classes[$field][$row_count] . '" ';
                   }
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-                  <?php print $content; ?>
+                          <?php print $video_image; ?>
+                  </td>
+                  <?php
+                }
+                else if ($field == 'label' || $field == 'sm_field_video_duration' || $field == 'sm_field_video_date_time') {
+                  ?>
+                  <td <?php
+                  if ($field == 'label') {
+                    print 'title="' . $content . '"';
+                  }
+
+                  if ($field_classes[$field][$row_count]) {
+                    print 'class="' . $field_classes[$field][$row_count] . '" ';
+                  }
+                  ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
+                          <?php
+                          if ($field == 'label') {
+                            print mb_strimwidth($content, 0, 25, '..');
+                          }
+                          else {
+                            print $content;
+                          }
+                          ?>
                   </td>
                   <?php
                 }
@@ -102,12 +114,12 @@ if ($classes) {
                     print 'class="' . $field_classes[$field][$row_count] . '" ';
                   }
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-                  <?php print '<a class="play video-in-form" href="javascript:void(0)" data-video-id = ' . $row['sm_field_video_id'] . '>Play</a>'; ?>
+                          <?php print '<a class="play video-in-form" href="javascript:void(0)" data-video-id = ' . $row['sm_field_video_id'] . '>Play</a>'; ?>
                   </td>
                 <?php }
                 ?>
-          <?php endforeach; ?>
+              <?php endforeach; ?>
           </tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>

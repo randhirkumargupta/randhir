@@ -1026,7 +1026,10 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   $video_desc = itg_videogallery_clean_string($video_desc);
   $video_title = itg_videogallery_clean_string($video_title);
   $api = itg_videogallery_dailymotion_api();
-
+  if($video_title != "") {
+    $update_field = array('title' => $video_title);
+    itg_videogallery_update_dailymotion_table_by_videoid($update_field , $video_id );
+  }
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
 
@@ -1055,6 +1058,19 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
       ))
       ->condition('solr_video_id', $video_id, '=')
       ->execute();
+}
+
+/**
+ * Function use update dailymotion_response_details data by video id
+ * @param array $data
+ * @param sting $video_id
+ */
+function itg_videogallery_update_dailymotion_table_by_videoid($data,$video_id)
+{
+    $num_updated = db_update('dailymotion_response_details') 
+           ->fields($data)
+           ->condition('video_id', $video_id, '=')
+           ->execute();
 }
 
 /**
@@ -2834,7 +2850,7 @@ function itg_videogallery_thumb_url() {
      }
       global $user;
       $node = new stdClass();
-      $node->title = $val->name;
+      $node->title = $val->title;
       $node->type = "itg_solr_video";
       node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
       $node->language = LANGUAGE_NONE;
@@ -2890,7 +2906,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
      }
     
       $node = new stdClass();
-      $node->title = $val->name;
+      $node->title = $val->title;
       $node->type = "itg_solr_video";
       node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
       $node->language = LANGUAGE_NONE;
