@@ -62,7 +62,31 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['admin/config/people/global-point-report-history'] = array(
+    'title' => 'Global point history',
+    'description' => 'Global point history',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('global_point_report_history_form'),
+    'access arguments' => array('access global point report history'),
+    'file' => 'includes/global_point_history_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   return $items;
+}
+
+/**
+ * Implement hook_permissions()
+ * 
+ * @return array
+ */
+function itg_global_loyality_permission() {
+  return array(
+    'access global point report history' => array(
+      'title' => t('access global point report history'),
+      'description' => t('Using this permission user can view global point report history.'),
+    )
+  );
 }
 
 /**
