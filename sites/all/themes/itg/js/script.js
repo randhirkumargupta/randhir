@@ -1031,7 +1031,7 @@ jQuery(document).ready(function () {
   
 });
 
-jQuery(document).ready(function (e) {
+jQuery(document).ready(function () {
     // code for video slider play video.
 
     jQuery('.thumb-video').click(function () {
