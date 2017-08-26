@@ -1384,7 +1384,7 @@ function feature_for_video_field_default_field_instances() {
       'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => 'Video Extra Large Image',
+      'file_directory' => 'Video_Extra_Large_Image',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
