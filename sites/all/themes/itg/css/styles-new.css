@@ -404,6 +404,14 @@ input[type="file"], input[type="submit"], input[type="text"] {
 .widget-title {
   display: inline-block;
   vertical-align: top;
+  position: static !important;
+  background: transparent;
+  color: #323232;
+  padding: 0;
+  font-weight: 500;
+}
+.widget-title a {
+  color: #323232;
 }
 
 .sidebar-section-photo .itg-widget {
