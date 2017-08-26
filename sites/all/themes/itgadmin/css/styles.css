@@ -4684,6 +4684,7 @@ div.node #comments h2 {
   position: absolute;
   right: 0;
   top: 0;
+  width: 80px;
 }
 #comments .comment ul.links a {
   color: #337ab7;
@@ -5970,7 +5971,7 @@ div.node #comments h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 600px;
+  width: 545px;
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;
@@ -11751,15 +11752,15 @@ span.file a {
   vertical-align: top;
 }
 
-[id*="itg-user-block-api-form"] .form-item-email, [id*="itg-user-block-api-form"] .form-item-items-per-page {
+[id*="itg-user-block-api-form"] .form-item-email, [id*="itg-user-block-api-form"] .form-item-items-per-page, [id*="itg-user-block-api-form"] .form-item-status {
   float: left;
   margin: 0 10px 0 0;
   padding: 0;
 }
-[id*="itg-user-block-api-form"] .form-item-email .form-text, [id*="itg-user-block-api-form"] .form-item-email .form-select, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-text, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-select {
+[id*="itg-user-block-api-form"] .form-item-email .form-text, [id*="itg-user-block-api-form"] .form-item-email .form-select, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-text, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-select, [id*="itg-user-block-api-form"] .form-item-status .form-text, [id*="itg-user-block-api-form"] .form-item-status .form-select {
   width: 100%;
 }
-[id*="itg-user-block-api-form"] .form-item-email > label, [id*="itg-user-block-api-form"] .form-item-items-per-page > label {
+[id*="itg-user-block-api-form"] .form-item-email > label, [id*="itg-user-block-api-form"] .form-item-items-per-page > label, [id*="itg-user-block-api-form"] .form-item-status > label {
   float: none;
   display: block;
   width: auto;
@@ -11767,7 +11768,8 @@ span.file a {
 [id*="itg-user-block-api-form"] .form-item-email {
   width: 300px;
 }
-[id*="itg-user-block-api-form"] .form-item-items-per-page {
+[id*="itg-user-block-api-form"] .form-item-items-per-page,
+[id*="itg-user-block-api-form"] .form-item-status {
   width: 100px;
 }
 [id*="itg-user-block-api-form"] .user-log-filter-btn {
@@ -13030,4 +13032,42 @@ fieldset#edit-xmlsitemap {
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .has-preview .image-widget-data .form-type-textfield:nth-child(3) {
   display: block;
   bottom: 38px;
+}
+
+/*=============== CSS FOR BREAKING NEWS CONTENT DETAILS =================*/
+[id*="field-breaking-content-details-values"] tbody tr {
+  float: left;
+  width: 100%;
+}
+[id*="field-breaking-content-details-values"] tbody tr + tr {
+  margin-top: 10px;
+}
+[id*="field-breaking-content-details-values"] tbody tr td {
+  float: left;
+  width: 100%;
+  padding-bottom: 0;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible {
+  border: none;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible legend {
+  display: block;
+  background: #fff;
+  width: 100%;
+  margin: 0;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible a.fieldset-title {
+  display: block;
+  padding: 10px;
+  font-weight: 500;
+  color: #323232;
+  border-bottom: 1px solid #d9d9d9;
+  background: url(../images/minus.png) right 10px center no-repeat;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible .fieldset-wrapper .form-submit {
+  margin-bottom: 10px;
+  margin-left: 250px;
+}
+[id*="field-breaking-content-details-values"].collapsed a.fieldset-title {
+  background: url(../images/plus.png) right 10px center no-repeat;
 }

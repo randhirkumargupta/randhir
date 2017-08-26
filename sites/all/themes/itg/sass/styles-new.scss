@@ -5320,7 +5320,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         padding: 20px 50px;
         .slick-slide{
 
-          .title{font: 500 26px/30px Roboto; padding-bottom: 12px;}
+          .title{font: 500 26px/30px Roboto; padding-bottom: 12px; padding-right: 50px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
           .pic{
             background: url(../images/funalytics.png) top right no-repeat;
             img{
