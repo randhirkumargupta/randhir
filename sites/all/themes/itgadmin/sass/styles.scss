@@ -12313,8 +12313,23 @@ fieldset#edit-xmlsitemap{
 .page-solr-unpublish-video{
   .view .view-filters .views-exposed-form .views-exposed-widget{
     width: 248px;
+    &.views-reset-button{
+      width: auto;
+    }
   }
   div#edit-bundle-name-wrapper, .views-exposed-widget.views-submit-button {
     display: none !important;
+  }
+}
+ 
+.view .view-filters [id*="views-exposed-form-bitrates-videos-page"]{
+  .views-exposed-form .views-submit-button{
+    .form-submit{
+      height: 28px;
+      margin-right: 10px;
+    }
+    a.button{
+      @extend .btn-small;
+    }
   }
 }
