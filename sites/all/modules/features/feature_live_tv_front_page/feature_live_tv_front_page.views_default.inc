@@ -112,6 +112,7 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['separator'] = '';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -158,9 +159,9 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
-  /* Filter criterion: Section wise ordering content: Content type */
+  /* Filter criterion: Section widget relationship: Content type */
   $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
 
@@ -231,6 +232,12 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Section wise ordering content: Category */
   $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
@@ -244,14 +251,14 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['arguments']['cat_id']['limit'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
+  /* Filter criterion: Section widget relationship: Content type */
   $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
-  /* Filter criterion: Section wise ordering content: Widget */
+  /* Filter criterion: Section widget relationship: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
 
@@ -333,9 +340,9 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['nid_1']['group_type'] = 'count_distinct';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Section wise ordering content: weight */
+  /* Sort criterion: Section widget relationship: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
