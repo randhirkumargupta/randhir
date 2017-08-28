@@ -389,6 +389,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_expert_description', 'ffd', 'ffd.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -410,6 +411,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->fields('fvu', array('field_video_upload_value'));
     $query->fields('st', array('field_story_source_type_value'));
     $query->fields('fpc', array('field_primary_category_value'));
+    $query->fields('ffd', array('field_story_expert_description_value'));
     //end
 
     if (count($tid_list) > 0) {
@@ -451,6 +453,7 @@ function generateProgramCategoryList($tid, $pageno) {
       $load_collection = field_collection_item_load($field_video_upload);
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
       $anchor_id = getVedioAnchor($nid);
+      $desc = $resvalue['field_story_expert_description_value'];
 
       //display all the video sounce check and format
       $source_type = $resvalue['field_story_source_type_value'];
@@ -479,7 +482,7 @@ function generateProgramCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['p_title'] = "$title";
       $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
       $photo_list_array[$listcount]['p_byline'] = "$reporter_node";
-      $photo_list_array[$listcount]['p_short_desc'] = "$field_story_kicker_text_value";
+      $photo_list_array[$listcount]['p_short_desc'] = "$desc";
       $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
       $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
