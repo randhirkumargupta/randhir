@@ -465,8 +465,16 @@ function itg_link($variables) {
     $node_path = explode('/', $url_path);
     $nid = $node_path[1];    
     if ($external_url = _is_external_url_story_article($nid)) {
+	  global $base_url;
+	  $link_target = '_self';
+	  $baseurl = preg_replace('#^https?://#','',$base_url);
+	  $baseurl = preg_replace('#^http?://#','',$baseurl);
+	  if(strpos($external_url, $baseurl) === false){
+		  $link_target = '_blank';
+		  $variables['options']['attributes']['rel'] = 'nofollow';
+	  }
 	  $variables['path'] = $external_url;
-      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['target'] = $link_target;
     }    
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
