@@ -447,6 +447,7 @@ function generateProgramCategoryList($tid, $pageno) {
       //to get the video of all the other formats
       $load_collection = field_collection_item_load($field_video_upload);
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+      $anchor_id = getVedioAnchor($nid);
 
       //display all the video sounce check and format
       $source_type = $resvalue['field_story_source_type_value'];
@@ -505,7 +506,7 @@ function generateProgramCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['p_subcategory_id'] = "$trem_id";
       $photo_list_array[$listcount]['p_subcategory_title'] = "$term_name";
       $photo_list_array[$listcount]['p_program_size'] = "$filesize";
-      $photo_list_array[$listcount]['p_anchor_id'] = "1";
+      $photo_list_array[$listcount]['p_anchor_id'] = "$anchor_id";
 
       $listcount++;
     }
@@ -614,4 +615,18 @@ function getLatestNodeTime($tid) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $published_statp = $result[0]['created'];
   return $published_statp;
+}
+
+/**
+ * function for  return anchor id
+ * @param type $nid
+ * @return $anchor_id
+ */
+function getVedioAnchor($nid){
+    $query = db_select('field_data_field_video_anchor', 'fda');
+    $query->fields('fda', array('field_video_anchor_target_id'));
+    $query->condition('fda.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    $anchor_id = $result[0]['field_video_anchor_target_id'];
+    return $anchor_id;
 }
