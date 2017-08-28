@@ -133,21 +133,20 @@ function itg_syndication_schema() {
         'default' => '',
       ),
       'delivery_mode' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'Delivery Mode',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
       'feed_type' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'feed type',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
       'feed_file_path' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
+        'description' => 'file path',
+        'type' => 'text',
         'not null' => TRUE,
       ),
       'syndication' => array(
