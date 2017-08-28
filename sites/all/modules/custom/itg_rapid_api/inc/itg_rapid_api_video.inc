@@ -120,6 +120,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
     //field_data_field_primary_category
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_expert_description', 'ffd', 'ffd.entity_id=n.nid');
 
     $query->fields('st', array('field_story_source_type_value'));
     $query->fields('eli_file', array('uri'));
@@ -173,6 +174,8 @@ function generateVideoCategoryList($tid, $pageno) {
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+      
+      $desc = $resvalue['field_story_expert_description_value'];
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -213,7 +216,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['v_title'] = "$title";
       $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
       $photo_list_array[$listcount]['v_byline'] = "$reporter_node";
-      $photo_list_array[$listcount]['v_short_desc'] = "$field_story_kicker_text_value";
+      $photo_list_array[$listcount]['v_short_desc'] = "$desc";
       $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
       $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
