@@ -1022,7 +1022,6 @@ function itg_akamai_init() {
             break; */
         }
         // Code started for TTL setting for the custom/other URLs
-
         if (isset($parm) && !empty($parm)) {
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
           if (isset($ttl_for_custom_url) && !empty($ttl_for_custom_url)) {
