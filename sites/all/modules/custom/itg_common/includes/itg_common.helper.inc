@@ -126,7 +126,7 @@ define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name'
 define('PARENT_SSO', variable_get('parent_sso'));
 define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
-define('BACKEND_URL', variable_get('itg_backend_url'));
+//define('BACKEND_URL', variable_get('itg_backend_url'));
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
