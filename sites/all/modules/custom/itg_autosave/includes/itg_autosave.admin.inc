@@ -26,7 +26,7 @@ function itg_autosave_form() {
     // Time interval field.
     $form['time_interval'] = array(
       '#type' => 'textfield',
-      '#title' => t('Tiem interval'),
+      '#title' => t('Time interval'),
       '#description' => t('Tiem interval in seconds. eg 30'),
       '#required' => TRUE,
     );
@@ -150,7 +150,7 @@ function itg_autosave_nodeform($nid, $ctype) {
     }
     // Assign title to tile field.
     $node->title = $title;
-    // Find field type and prepare array for foelds.
+    // Find field type and prepare array for fields.
     $f_collection = $itg_auto_save->itg_autosave_prepare_presave($data, $inputs, $node);
     // Check if field collection is available.
     /*     * ***************************** Hide field collection code **************** */

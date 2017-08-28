@@ -498,15 +498,29 @@ class itg_auto_save {
           break;
 
         case 'taxonomy_term_reference':
-          if ($node->type == 'story') {
-            continue;
-          }
-          
           $this->value = $inputs[$field['fieldName']]['und'];
-          $this->var_type = gettype($this->value);
+          /*$this->var_type = gettype($this->value);
           if ($this->var_type == 'string') {
             $this->value = (int) $this->value;
+          }*/
+          
+          // For City autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_stroy_city') {
+            $getcity = $this->itg_autosave_get_citytids($this->value);
+            if (isset($getcity) && !empty($getcity)) {
+              $node->{$field['fieldName']}[$node->language][0]['tid'] = $getcity;
+            }
           }
+          
+          // For Bloggers autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_blog_bloggers') {
+            $getblogger = $this->itg_autosave_get_citytids($this->value);
+            if (isset($getblogger) && !empty($getblogger)) {
+              $node->{$field['fieldName']}[$node->language][0]['tid'] = $getblogger;
+            }
+          }
+          
+          // For Tags Autosave
           if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_itg_tags') {
             $get_tids = $this->itg_autosave_get_tids($this->value['value_field']);
             if (!empty($get_tids) && is_array($get_tids)) {
@@ -516,12 +530,12 @@ class itg_auto_save {
             }
           } 
           
+          // For section and primary category
           if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_category') {
             foreach ($this->value as $sc_key => $sc_val) {
               $node->{$field['fieldName']}[$node->language][$sc_key]['tid'] = $sc_val;
             }
           }
-          
           break;
 
         case 'field_collection':
@@ -573,8 +587,19 @@ class itg_auto_save {
           $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
 
           break;
+        
         case 'file':
           $this->itg_save_field_file($field['fieldName'], $inputs[$field['fieldName']], $node);
+          break;
+        
+        case 'list_integer':
+          $this->value = $inputs[$field['fieldName']]['und'];
+          if (isset($this->value) && !empty($this->value)) {
+            preg_match_all('!\d+!', $this->value, $matches);
+            $get_techrating = reset($matches);
+            $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+          }
+          break;
       }
     }
 
@@ -792,5 +817,18 @@ class itg_auto_save {
     unset($result[0]);
     return $result;
   }
-
+  
+  /**
+   * Get tid's for city from database.
+   *
+   * @return array
+   *   Array of term ids for city autosave.
+   */
+  public function itg_autosave_get_citytids($city_name) {
+    $term_name = db_select('taxonomy_term_data', 'ttd');
+    $term_name->fields('ttd', array('tid'));
+    $term_name->condition('name', $city_name, '=');
+    $result = $term_name->execute()->fetchField();
+    return $result;
+  }
 }
