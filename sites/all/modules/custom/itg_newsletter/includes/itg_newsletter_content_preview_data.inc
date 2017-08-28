@@ -45,7 +45,6 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   $banner = file_create_url($tmplateLoad->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footerData = $tmplateLoad->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/" , date('Y') , $footerData);
-  $itg_logo = theme_get_setting('logo', 'itg'); 
   $content = '<!DOCTYPE html> 
   <html xmlns:v="urn:schemas-microsoft-com:vml">
   <head>
@@ -53,7 +52,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td><td colspan="2"><img src="' . $itg_logo . '" alt="" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
