@@ -599,10 +599,8 @@ function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property =
   $itg_query->condition('itg.property', $property);  
   }
   if(!empty($task)) {
-  $itg_query->condition('itg.uid', $uid); 
-   watchdog('sso', 'user');
+  $itg_query->condition('itg.uid', $uid);
   } else {
-  watchdog('sso', $uid);
   $itg_query->condition('itg.sso_id', $uid); 
   }
   if ($type == 'earn') {
