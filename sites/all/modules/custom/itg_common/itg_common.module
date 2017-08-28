@@ -1380,3 +1380,10 @@ function _is_sponsored_category($tid) {
   }
   return $return;
 }
+
+function _remove_embded_tags_from_story_body($body_content) {
+  if(!empty($body_content)) {
+    return preg_replace('#\s*\[ITG:.+\]\s*#U', ' ', $body_content);
+  }
+  return "";
+}
