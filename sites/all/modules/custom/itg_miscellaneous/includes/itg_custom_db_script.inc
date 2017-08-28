@@ -3,7 +3,8 @@
 function itg_db_migrate_related_content() {
   //itg_db_migrate_source_id_for_byline('migrate_map_itgbyline', 'byline');
   //itg_db_migrate_source_id_for_category('migrate_map_itgsection', 'section');
-  //exit;
+  itg_tags_custom_save();
+  exit;
   
   //Code for related content
   
@@ -179,3 +180,13 @@ function itg_db_migrate_source_id_for_category($table_name, $pre) {
   }
   
 }
+
+
+
+
+
+
+
+
+
+
