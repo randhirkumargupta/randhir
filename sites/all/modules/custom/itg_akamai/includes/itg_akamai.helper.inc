@@ -6,12 +6,9 @@
  */
 function itg_akamai_load_my_account() {
   global $base_url;
-  $session_name = session_name();
-  if (isset($_COOKIE[$session_name]) && !empty($_COOKIE[$session_name])) {
-    $sid = $_COOKIE[$session_name];
-    $uid = itg_akamai_get_uid_by_sessionid($sid);
-    if (isset($uid) && !empty($uid)) {
-      $get_user_detail = user_load($uid);
+  global $user;
+  if (isset($user->uid) && $user->uid > 0) {
+      $get_user_detail = $user;
       if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
         $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
       }
@@ -21,11 +18,10 @@ function itg_akamai_load_my_account() {
       }
       print '<a href="' . $base_url . '/personalization/edit-profile/general-settings" class="user-icon">' . $user_pic . '</a>';
       print '<ul class="menu">
-      <li class="menu__item is-leaf first leaf"><a href="'.$base_url.'/itgcms/personalization/saved-items" class="menu__link GoogleAnalyticsET-processed itg-akamai">Personalization</a></li>
+      <li class="menu__item is-leaf first leaf"><a href="'.$base_url.'/personalization/saved-items" class="menu__link GoogleAnalyticsET-processed itg-akamai">Personalization</a></li>
       <li class="menu__item is-leaf last leaf" id="myhref"><a href="javascript:void(0)" id="myhref" class="menu__link GoogleAnalyticsET-processed itg-akamai">Log Out</a></li>
       </ul>'; 
-      drupal_exit();
-    }
+      drupal_exit();    
   }
 }
 
