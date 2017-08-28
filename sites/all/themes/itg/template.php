@@ -460,5 +460,14 @@ function itg_link($variables) {
       $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }
   }
+  // If External url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];    
+    if ($external_url = _is_external_url_story_article($nid)) {
+	  $variables['path'] = $external_url;
+      $variables['options']['attributes']['target'] = '_blank';
+    }    
+  }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
