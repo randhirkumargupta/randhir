@@ -575,8 +575,12 @@ function topic_form_submit_handler($form, &$form_state) {
   $search_key['bundle_name'] = $bundle;
   $search_key['hash'] = $hash;
   $search_key['custom_drp'] = $form_state['values']['custom_drp'];
+  if(!empty($form_state['values']['ds_changed'])) {
   $search_key['ds_changed']['date'] = date('d-m-Y', strtotime($form_state['values']['ds_changed']));
+  }
+  if(!empty($form_state['values']['ds_changed_max'])) {
   $search_key['ds_changed_max']['date'] = date('d-m-Y', strtotime($form_state['values']['ds_changed_max']));
+  }
   $search_key['tm_vid_14_names'] = $form_state['values']['tm_vid_14_names'];
   $search_key['sm_field_itg_common_by_line_name'] = $form_state['values']['sm_field_itg_common_by_line_name'];
 
