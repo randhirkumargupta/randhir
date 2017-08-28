@@ -1055,7 +1055,7 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).ready(function(e) {
-    // code for video slider play video.
+// code for video slider play video.
 
     jQuery('.thumb-video').click(function() {
         var getvideoindex = jQuery(this).attr('data-image-index');
