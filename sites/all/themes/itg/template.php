@@ -274,6 +274,16 @@ function itg_html_head_alter(&$head_elements) {
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2) {
+      // canonical for home page
+      $path = current_path();
+      $path_alias = drupal_lookup_path('alias',$path);
+      $home_canonical = $base_url . '/' . $arg_data->path['alias'];
+      $head_elements['canonical'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
+      );
+      // meta name description for home page
       $meta_description = $arg_data->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
         $head_elements['metatag_description'] = array(
