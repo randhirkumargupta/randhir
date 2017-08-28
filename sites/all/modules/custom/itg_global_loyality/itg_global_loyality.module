@@ -395,6 +395,8 @@ function itg_get_global_point_history() {
   $data['redeemed_points'] = 0;
   $data['remaining_point'] = 0;
   $data['unit_description'] = array();
+  watchdog('result', '<pre>' . print_r($itg_result, true) . '</pre>');
+  if(!empty($itg_result)) {
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
        $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
@@ -412,6 +414,15 @@ function itg_get_global_point_history() {
       'points_per_activity' => itg_global_loyalty_get_point_activity($value->loyalty_type, $property),
     );
   }
+  } else {
+      $earn = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
+      $remain = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'remaining');
+      $redem = itg_global_loyalty_reward_get_redem_point($sso_id);
+      //watchdog('redem', $redem);
+      $data['total_earned_so_far'] = (int) $earn;
+      $data['remaining_point'] = (int) $remain;
+      $data['redeemed_points'] = (int) $redem;
+    }
     print drupal_json_output($data);
     drupal_exit();
   }
@@ -450,12 +461,16 @@ function itg_get_badge_point_history() {
   }
   $data = array();
   $data['total_earned_for_current_level'] = 0;
+  if(!empty($itg_result)) {
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
       $data['total_earned_so_far'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
       $data['total_earned_for_current_level'] = itg_global_loyalty_reward_get_total_earn_point($uid, 'earn', $property, 'particular');
       $data['total_global_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
     }
+  }
+  } else {
+    $data['total_global_point'] = itg_global_loyalty_reward_get_total_earn_point($sso_id, 'earn');
   }
     print drupal_json_output($data);
     drupal_exit();
@@ -584,8 +599,10 @@ function itg_global_loyalty_reward_get_total_earn_point($uid, $type, $property =
   $itg_query->condition('itg.property', $property);  
   }
   if(!empty($task)) {
-  $itg_query->condition('itg.uid', $uid);  
+  $itg_query->condition('itg.uid', $uid); 
+   watchdog('sso', 'user');
   } else {
+  watchdog('sso', $uid);
   $itg_query->condition('itg.sso_id', $uid); 
   }
   if ($type == 'earn') {
