@@ -2483,6 +2483,14 @@ footer .multiple-items-footer i.slick-next {
 .story-section .byline .profile-pic, .story-section .byline .profile-detail {
   float: left;
 }
+
+.story-section .byline a[title='Follow']{ background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 25% 2px; padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
+.story-section .byline a[title='Unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 20% -34px;padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
+
+.section-left-bototm .tags ul li a[title='Follow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
+.section-left-bototm .tags ul li a[title='Unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 -23px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
+
+
 .story-section .byline .profile-pic img {
   width: 50px;
   height: 50px;
