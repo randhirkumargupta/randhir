@@ -13071,7 +13071,7 @@ fieldset#edit-xmlsitemap {
   margin-bottom: 10px;
   margin-left: 250px;
 }
-[id*="field-breaking-content-details-values"].collapsed a.fieldset-title {
+[id*="field-breaking-content-details-values"] fieldset.collapsible.collapsed a.fieldset-title {
   background: url(../images/plus.png) right 10px center no-repeat;
 }
 

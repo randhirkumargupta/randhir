@@ -12278,10 +12278,10 @@ fieldset#edit-xmlsitemap{
         margin-left: 250px;
       }
     }
-  }
-  &.collapsed{
+    &.collapsed{
     a.fieldset-title{
-      background: url(../images/plus.png) right 10px center no-repeat;
+        background: url(../images/plus.png) right 10px center no-repeat;
+      }
     }
   }
 }
