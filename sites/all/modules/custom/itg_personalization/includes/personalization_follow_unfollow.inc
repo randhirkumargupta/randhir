@@ -8,6 +8,9 @@
  *
  */
 function itg_personalization_remove_activity() {
+  itg_get_followers('836422');
+}
+function itg_personalization_remove_activity_old() {
   global $user;
   $nid = $_POST['nd_id'];
   if (function_exists('mongodb')) {
@@ -23,3 +26,5 @@ function itg_personalization_remove_activity() {
     
   }
 }
+
+
