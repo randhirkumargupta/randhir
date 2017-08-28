@@ -231,11 +231,20 @@ function itg_global_loyality_send_data($uid, $type, $nid, $newsletter = NULL, $s
     }
   }
   
-if ($type == 'twitter_share' || $type == 'google_share' || $type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow' || $type == 'facebook_share') {
+if ($type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow') {
     $loyalty_type = $type;
     if (!empty(variable_get('lrp_follow_itg_on_social_sites'))) {
       $loyalty_points = variable_get('lrp_follow_itg_on_social_sites');
       $remaining_points = variable_get('lrp_follow_itg_on_social_sites');
+    }
+  }
+  
+  
+  if ($type == 'twitter_share' || $type == 'google_share' || $type == 'facebook_share') {
+    $loyalty_type = $type;
+    if (!empty(variable_get('lrp_content_share'))) {
+      $loyalty_points = variable_get('lrp_content_share');
+      $remaining_points = variable_get('lrp_content_share');
     }
   }
   
