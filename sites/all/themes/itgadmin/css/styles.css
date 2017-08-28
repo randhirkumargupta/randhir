@@ -335,7 +335,7 @@ img {
 .download-link,
 .edit-cm a, [id*="taxonomy-csv-import-form"] .form-type-file > label, [id*="field-newsl-add-news-values"] fieldset, .node-syndication_rule-form tbody td .field-name-field-syndication-time, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, .easyPaginateNav a, #itg-image-croping-crop-form .form-item-aspect-ratio, #itg-image-croping-crop-form .form-item-aspect-ratio label, #itg-image-croping-crop-form .form-item-aspect-ratio .form-select, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-story-form .itg-sidebar-form .itg-sidebar-form-section#Configuration .form-field-name-field-photogallery-configuration,
 .node-videogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration .form-field-name-field-photogallery-configuration,
-.node-photogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration .form-field-name-field-photogallery-configuration, .node-category-form .field-name-field-user-city, .node-category-form .field-name-field-time-period, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] .form-type-managed-file, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .go-btn-div, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group, .video-ftp-div .ftp_video_radio {
+.node-photogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration .form-field-name-field-photogallery-configuration, .node-category-form .field-name-field-user-city, .node-category-form .field-name-field-time-period, .itg_menu_manager_form [id*="edit-category-icon-ajax-wrapper"] .form-type-managed-file, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .go-btn-div, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group {
   display: inline-block;
 }
 
@@ -372,7 +372,7 @@ img {
 #block-menu-menu-manage-quiz-tabs > .menu > li,
 #block-menu-menu-newsletter-manage-tabs > .menu > li,
 #block-menu-menu-poll-content-admin-menu > .menu > li,
-#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, [id*="itg-social-media-form"] > div .form-type-managed-file, .node-syndication_rule-form tbody td .field-name-field-syndication-time, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .block-itg-related .checked-list li .ui-icon, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #pti-basic-info, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group, .video-ftp-div .ftp_video_radio {
+#block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, [id*="itg-social-media-form"] > div .form-type-managed-file, .node-syndication_rule-form tbody td .field-name-field-syndication-time, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .block-itg-related .checked-list li .ui-icon, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #pti-basic-info, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, .node-story-form .form-field-name-field-emoji-position, .node-story-form .form-field-name-field-story-technology [id*="field-story-technology-values"] tbody tr td .field-name-field-technology-photo-title, [id*="itg-widget-keycandidate-form"], #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size, .custom-syndication-feed-pattern-form .title, .form-field-name-field-emoji, .form-field-name-field-emoji-2, #itg-user-log-api-form, #itg-user-log-api-form-visited, [id*="itg-user-block-api-form"], .ads-preview-data .ads-bottom, .ads-preview-data ads-top, .node-heighlights-div .field-group {
   vertical-align: top;
 }
 
@@ -5971,7 +5971,7 @@ div.node #comments h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 600px;
+  width: 545px;
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;
@@ -11752,15 +11752,15 @@ span.file a {
   vertical-align: top;
 }
 
-[id*="itg-user-block-api-form"] .form-item-email, [id*="itg-user-block-api-form"] .form-item-items-per-page {
+[id*="itg-user-block-api-form"] .form-item-email, [id*="itg-user-block-api-form"] .form-item-items-per-page, [id*="itg-user-block-api-form"] .form-item-status {
   float: left;
   margin: 0 10px 0 0;
   padding: 0;
 }
-[id*="itg-user-block-api-form"] .form-item-email .form-text, [id*="itg-user-block-api-form"] .form-item-email .form-select, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-text, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-select {
+[id*="itg-user-block-api-form"] .form-item-email .form-text, [id*="itg-user-block-api-form"] .form-item-email .form-select, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-text, [id*="itg-user-block-api-form"] .form-item-items-per-page .form-select, [id*="itg-user-block-api-form"] .form-item-status .form-text, [id*="itg-user-block-api-form"] .form-item-status .form-select {
   width: 100%;
 }
-[id*="itg-user-block-api-form"] .form-item-email > label, [id*="itg-user-block-api-form"] .form-item-items-per-page > label {
+[id*="itg-user-block-api-form"] .form-item-email > label, [id*="itg-user-block-api-form"] .form-item-items-per-page > label, [id*="itg-user-block-api-form"] .form-item-status > label {
   float: none;
   display: block;
   width: auto;
@@ -11768,7 +11768,8 @@ span.file a {
 [id*="itg-user-block-api-form"] .form-item-email {
   width: 300px;
 }
-[id*="itg-user-block-api-form"] .form-item-items-per-page {
+[id*="itg-user-block-api-form"] .form-item-items-per-page,
+[id*="itg-user-block-api-form"] .form-item-status {
   width: 100px;
 }
 [id*="itg-user-block-api-form"] .user-log-filter-btn {
@@ -12013,91 +12014,94 @@ span.file a {
   display: block;
 }
 
-.video-ftp-div .ftp_video_radio {
-  position: relative;
-  padding: 0;
-  margin: 0 15px 15px 0;
-  width: 120px;
-  height: 120px;
-}
-.video-ftp-div .ftp_video_radio img {
-  height: 67%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-.video-ftp-div .ftp_video_radio label {
-  border: 1px solid #d9d9d9;
-  background: url(../images/default_for_all.png) no-repeat left top/100% auto;
-  font-size: 12px;
-  height: 100%;
-  left: 0;
-  overflow: hidden;
-  padding: 80px 5px 0;
-  position: absolute;
-  text-overflow: ellipsis;
-  top: 0;
-  white-space: nowrap;
-  width: 100%;
-}
-.video-ftp-div .ftp_video_radio label:before {
-  border-radius: 50%;
-  bottom: 0;
-  background-color: #fff;
-  border: 1px solid #1fb5ad;
-  color: #1fb5ad;
-  content: "\f00c";
-  font-family: "FontAwesome";
-  font-size: 28px;
-  height: 50px;
-  left: 0;
-  line-height: 50px;
-  margin: auto;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 150px;
-  width: 50px;
-  z-index: 9;
-  opacity: 0;
-  transition: all .3s;
-}
-.video-ftp-div .ftp_video_radio label:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: all .3s;
-}
-.video-ftp-div .ftp_video_radio .form-radio {
-  float: left;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  position: absolute;
-  cursor: pointer;
-  width: 100%;
-  z-index: 999;
-}
-.video-ftp-div .ftp_video_radio .form-radio:hover + label, .video-ftp-div .ftp_video_radio .form-radio:checked + label {
-  box-shadow: 0 0 5px 1px #666;
-}
-.video-ftp-div .ftp_video_radio .form-radio:checked + label:before, .video-ftp-div .ftp_video_radio .form-radio:checked + label:after {
-  top: 0;
-  opacity: 1;
-}
-.video-ftp-div .ftp_video_radio .file_size {
-  color: #ababab;
-  display: block;
-  margin-left: 0;
-}
-
+/*.video-ftp-div{
+  .ftp_video_radio{
+    @extend .dib;
+    @extend .vtop;
+    position: relative;
+    padding: 0;
+    margin: 0 15px 15px 0;
+    width: 120px;
+    height: 120px;
+    img {
+      height: 67%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    label{
+      border: 1px solid #d9d9d9;
+      background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
+      font-size: 12px;
+      height: 100%;
+      left: 0;
+      overflow: hidden;
+      padding: 80px 5px 0;
+      position: absolute;
+      text-overflow: ellipsis;
+      top: 0;
+      white-space: nowrap;
+      width: 100%;
+      &:before{
+        border-radius: 50%;
+        bottom: 0;
+        background-color: #fff;
+        border: 1px solid #1fb5ad;
+        color: #1fb5ad;
+        content: "\f00c";
+        font-family: "FontAwesome";
+        font-size: 28px;
+        height: 50px;
+        left: 0;
+        line-height: 50px;
+        margin: auto;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 150px;
+        width: 50px;
+        z-index: 9;
+        opacity: 0;
+        transition: all .3s;
+      }
+      &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        opacity: 0;
+        transition: all .3s;
+      }
+    }
+    .form-radio{
+      float: left;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      position: absolute;
+      cursor: pointer;
+      width: 100%;
+      z-index: 999;
+      &:hover + label, &:checked + label{
+        box-shadow: 0 0 5px 1px #666;
+      }
+      &:checked + label:before, &:checked + label:after{
+        top: 0;
+        opacity: 1;
+      }
+    }
+    .file_size{
+      color: #ababab;
+      display: block;
+      margin-left: 0;
+    }
+  }
+}*/
 .view.view-display-id-search_unpublish_video .view-filters,
 .view-display-id-search_publish_video .view-filters,
 .view-id-searchimage.view-display-id-page_1 .view-filters,
@@ -13031,4 +13035,74 @@ fieldset#edit-xmlsitemap {
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-photo-small-image .form-type-managed-file .has-preview .image-widget-data .form-type-textfield:nth-child(3) {
   display: block;
   bottom: 38px;
+}
+
+/*=============== CSS FOR BREAKING NEWS CONTENT DETAILS =================*/
+[id*="field-breaking-content-details-values"] tbody tr {
+  float: left;
+  width: 100%;
+}
+[id*="field-breaking-content-details-values"] tbody tr + tr {
+  margin-top: 10px;
+}
+[id*="field-breaking-content-details-values"] tbody tr td {
+  float: left;
+  width: 100%;
+  padding-bottom: 0;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible {
+  border: none;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible legend {
+  display: block;
+  background: #fff;
+  width: 100%;
+  margin: 0;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible a.fieldset-title {
+  display: block;
+  padding: 10px;
+  font-weight: 500;
+  color: #323232;
+  border-bottom: 1px solid #d9d9d9;
+  background: url(../images/minus.png) right 10px center no-repeat;
+}
+[id*="field-breaking-content-details-values"] fieldset.collapsible .fieldset-wrapper .form-submit {
+  margin-bottom: 10px;
+  margin-left: 250px;
+}
+[id*="field-breaking-content-details-values"].collapsed a.fieldset-title {
+  background: url(../images/plus.png) right 10px center no-repeat;
+}
+
+.video-ftp-div {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.video-ftp-div .main-top-wraper {
+  display: table;
+  width: 100%;
+}
+.video-ftp-div .main-top-wraper > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+.video-ftp-div .easyPaginateList {
+  display: table;
+  width: 100%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio {
+  display: table-row;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.page-solr-unpublish-video .view .view-filters .views-exposed-form .views-exposed-widget {
+  width: 248px;
+}
+.page-solr-unpublish-video div#edit-bundle-name-wrapper, .page-solr-unpublish-video .views-exposed-widget.views-submit-button {
+  display: none !important;
 }

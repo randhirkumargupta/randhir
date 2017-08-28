@@ -1015,45 +1015,45 @@ function itg_category_manager_get_mail_content($entity) {
  *   Insert row to itg_category_manager at the time of term creation.
  */
 function itg_category_manager_taxonomy_term_insert($term) {
-  global $user;
-
-  if ($term->vid == CATEGORY_MANAGMENT) {
-    $vid = $term->vid;
-    $data = array(
-      'tid' => $term->tid ,
-      'uid' => $user->uid ,
-      'vid' => $vid ,
-      'created' => time() ,
-      'changed' => time() ,
-      'status' => isset($term->term_state) ? $term->term_state : 1 ,
-    );
-
-    drupal_write_record('itg_category_manager' , $data);
-    $data = array();
-    $data = array(
-      'tid' => $term->tid ,
-      'uid' => $user->uid ,
-      'changed' => time() ,
-    );
-
-    $get_parents = taxonomy_get_parents($term->tid);
-    $parents = reset($get_parents);
-    if (isset($parents) && !empty($parents)) {
-      $parent_path = drupal_get_path_alias('taxonomy/term/' . $parents->tid);
-      if (!empty($term->path['alias'])) {
-        $path_name = $term->path['alias'];
-      }
-      else {
-        $path_name = $term->name;
-      }
-      $pathdata = $parent_path . '/' . strtolower($path_name);
-      $newpath = itg_category_manager_custom_path($pathdata);
-      $term->path['alias'] = $newpath;
-    }
-    $data['sef_url'] = (!empty($term->path['alias'])) ? $term->path['alias'] : itg_category_manager_custom_path($term->name);
-
-    drupal_write_record('itg_sef_url' , $data);
-  }
+//  global $user;
+//
+//  if ($term->vid == CATEGORY_MANAGMENT) {
+//    $vid = $term->vid;
+//    $data = array(
+//      'tid' => $term->tid ,
+//      'uid' => $user->uid ,
+//      'vid' => $vid ,
+//      'created' => time() ,
+//      'changed' => time() ,
+//      'status' => isset($term->term_state) ? $term->term_state : 1 ,
+//    );
+//
+//    drupal_write_record('itg_category_manager' , $data);
+//    $data = array();
+//    $data = array(
+//      'tid' => $term->tid ,
+//      'uid' => $user->uid ,
+//      'changed' => time() ,
+//    );
+//
+//    $get_parents = taxonomy_get_parents($term->tid);
+//    $parents = reset($get_parents);
+//    if (isset($parents) && !empty($parents)) {
+//      $parent_path = drupal_get_path_alias('taxonomy/term/' . $parents->tid);
+//      if (!empty($term->path['alias'])) {
+//        $path_name = $term->path['alias'];
+//      }
+//      else {
+//        $path_name = $term->name;
+//      }
+//      $pathdata = $parent_path . '/' . strtolower($path_name);
+//      $newpath = itg_category_manager_custom_path($pathdata);
+//      $term->path['alias'] = $newpath;
+//    }
+//    $data['sef_url'] = (!empty($term->path['alias'])) ? $term->path['alias'] : itg_category_manager_custom_path($term->name);
+//
+//    drupal_write_record('itg_sef_url' , $data);
+//  }
 }
 
 /**
@@ -1063,27 +1063,27 @@ function itg_category_manager_taxonomy_term_insert($term) {
  *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
-  if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
-    global $user;
-    if ($term->vid == CATEGORY_MANAGMENT) {
-      $term->path['alias'] = rtrim($term->path['alias'] , '/');
-      $data = array();
-      $data = array(
-        'tid' => $term->tid ,
-        'uid' => $user->uid ,
-        'sef_url' => $term->path['alias'] ,
-        'changed' => time() ,
-      );
-      drupal_write_record('itg_sef_url' , $data);
-
-  // Update modified date on itg_category_manager table    
-        $status = isset($term->term_state) ? $term->term_state : 1;
-        db_update('itg_category_manager')
-            ->fields(array('changed' => time() , 'status' => $status))
-            ->condition('tid' , $term->tid)
-            ->execute();
-   }
-  }
+//  if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
+//    global $user;
+//    if ($term->vid == CATEGORY_MANAGMENT) {
+//      $term->path['alias'] = rtrim($term->path['alias'] , '/');
+//      $data = array();
+//      $data = array(
+//        'tid' => $term->tid ,
+//        'uid' => $user->uid ,
+//        'sef_url' => $term->path['alias'] ,
+//        'changed' => time() ,
+//      );
+//      drupal_write_record('itg_sef_url' , $data);
+//
+//  // Update modified date on itg_category_manager table    
+//        $status = isset($term->term_state) ? $term->term_state : 1;
+//        db_update('itg_category_manager')
+//            ->fields(array('changed' => time() , 'status' => $status))
+//            ->condition('tid' , $term->tid)
+//            ->execute();
+//   }
+//  }
 }
 
 /**
@@ -1118,36 +1118,63 @@ function itg_category_manager_pathauto_alias_alter(&$alias , &$context) {
   // Handle Insert case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
     // find section name
-    $parents = taxonomy_get_parents_all($context['data']['term']->tid);
-    $section = end($parents);
-    // Set custom alias
-    if ($section->tid == $context['data']['term']->tid) {
-      $alias = str_replace(' ' , '-' , strtolower($context['data']['term']->name));
-    }
-    else {
-      $new_alias = str_replace(' ' , '-' , strtolower($section->name)) . '/' . str_replace(' ' , '-' , strtolower($context['data']['term']->name));
-      $alias = $new_alias;
-    }
+    //$parents = taxonomy_get_parents_all($context['data']['term']->tid);
+    //$section = end($parents);
+    $get_parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $parents = array_reverse($get_parents);    
+    if (isset($parents) && !empty($parents)) {        
+      $parent_titles = array();        
+      foreach($parents  as $key => $parent_term) {          
+        $parent_titles[] = strtolower($parent_term->name);        
+
+      }
+      $pathdata = implode("/" , $parent_titles);        
+      $newpath = itg_category_manager_custom_path($pathdata);        
+      $alias = $newpath;
+     }
+     // Update modified date on itg_category_manager table
+    $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
+    $data = array();
+    $data = array(
+      'tid' => $context['data']['term']->tid ,
+      'uid' => $user->uid ,
+      'sef_url' => $alias ,
+      'changed' => time() ,
+    );
     // Remove trailing slash from sef url.
     $alias = rtrim($alias , '/');
-    db_update('itg_sef_url')
-        ->fields(array('sef_url' => $alias))
-        ->condition('tid' , $context['data']['term']->tid)
+    db_insert('itg_sef_url')->fields($data)->execute();
+
+    // Update modified date on itg_category_manager table
+    $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
+    db_insert('itg_category_manager')
+        ->fields(
+            array(
+              'changed' => time() , 
+              'created' => time() ,
+              'status' => $status , 
+              'vid' => CATEGORY_MANAGMENT ,
+              'tid' => $context['data']['term']->tid ,
+              )
+          )
         ->execute();
   }
   // Handle update case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
     // find section name
-    $parents = taxonomy_get_parents_all($context['data']['term']->tid);
-    $section = end($parents);
-    // Set custom alias
-    if ($section->tid == $context['data']['term']->tid) {
-      $alias = $alias = str_replace(' ' , '-' , strtolower($context['data']['term']->name));
-    }
-    else {
-      $new_alias = str_replace(' ' , '-' , strtolower($section->name)) . '/' . str_replace(' ' , '-' , strtolower($context['data']['term']->name));
-      $alias = $new_alias;
-    }
+    //$parents = taxonomy_get_parents_all($context['data']['term']->tid);
+    $get_parents = taxonomy_get_parents_all($context['data']['term']->tid);    
+    $parents = array_reverse($get_parents);    
+    if (isset($parents) && !empty($parents)) {        
+      $parent_titles = array();        
+      foreach($parents  as $key => $parent_term) {          
+        $parent_titles[] = strtolower($parent_term->name);        
+
+      }
+      $pathdata = implode("/" , $parent_titles);        
+      $newpath = itg_category_manager_custom_path($pathdata);        
+      $alias = $newpath;
+     }
     // Remove trailing slash from sef url.
     $alias = rtrim($alias , '/');
     $data = array();
@@ -1157,7 +1184,8 @@ function itg_category_manager_pathauto_alias_alter(&$alias , &$context) {
       'sef_url' => $alias ,
       'changed' => time() ,
     );
-    drupal_write_record('itg_sef_url' , $data);
+    db_update('itg_sef_url')->fields($data)->condition('tid' , $context['data']['term']->tid)
+        ->execute();
 
     // Update modified date on itg_category_manager table
     $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;

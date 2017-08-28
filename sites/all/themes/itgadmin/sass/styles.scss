@@ -5430,7 +5430,7 @@ div.node{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 600px;
+    width: 545px;
   }
   .block-itg-story-list{
     margin: 10px 0 0;
@@ -11008,7 +11008,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
   @extend .dib;
   @extend .vtop;
   @extend .full;
-  .form-item-email, .form-item-items-per-page{
+  .form-item-email, .form-item-items-per-page, .form-item-status{
     float: left;
     margin: 0 10px 0 0;
     padding: 0;
@@ -11016,7 +11016,8 @@ span.file a{pointer-events: none; color: #2f2f2f;}
     > label{float: none; display: block; width: auto;}
   }
   .form-item-email{width: 300px;}
-  .form-item-items-per-page{width: 100px;}
+  .form-item-items-per-page, 
+  .form-item-status{width: 100px;}
   .user-log-filter-btn{
     display: inline-block; 
     vertical-align: top; 
@@ -11260,7 +11261,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
 .node-itg_funalytics-form{
   @extend .image-repo-browse;
 }
-.video-ftp-div{
+/*.video-ftp-div{
   .ftp_video_radio{
     @extend .dib;
     @extend .vtop;
@@ -11347,7 +11348,7 @@ span.file a{pointer-events: none; color: #2f2f2f;}
       margin-left: 0;
     }
   }
-}
+}*/
 .view.view-display-id-search_unpublish_video,
 .view-display-id-search_publish_video,
 .view-id-searchimage.view-display-id-page_1, 
@@ -12237,5 +12238,83 @@ fieldset#edit-xmlsitemap{
         bottom: 38px;
       }
     }
+  }
+}
+
+
+/*=============== CSS FOR BREAKING NEWS CONTENT DETAILS =================*/
+[id*="field-breaking-content-details-values"]{
+  tbody tr{
+    float: left;
+    width: 100%;
+    & + tr{
+      margin-top: 10px;
+    }
+    td{
+      float: left;
+      width: 100%;
+      padding-bottom: 0;
+    }
+  } 
+  fieldset.collapsible{
+    border: none;
+    legend {
+      display: block;
+      background: #fff;
+      width: 100%;
+      margin: 0;
+    }
+    a.fieldset-title {
+      display: block;
+      padding: 10px;
+      font-weight: 500;
+      color: #323232;
+      border-bottom: 1px solid #d9d9d9;
+      background: url(../images/minus.png) right 10px center no-repeat;
+    }
+    .fieldset-wrapper{
+      .form-submit{
+        margin-bottom: 10px;
+        margin-left: 250px;
+      }
+    }
+  }
+  &.collapsed{
+    a.fieldset-title{
+      background: url(../images/plus.png) right 10px center no-repeat;
+    }
+  }
+}
+
+.video-ftp-div{
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  .main-top-wraper{
+    display: table;
+    width: 100%;
+    > div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .easyPaginateList{
+    display: table;
+    width: 100%;
+    .ftp_video_radio{
+      display: table-row;
+      > div{
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.page-solr-unpublish-video{
+  .view .view-filters .views-exposed-form .views-exposed-widget{
+    width: 248px;
+  }
+  div#edit-bundle-name-wrapper, .views-exposed-widget.views-submit-button {
+    display: none !important;
   }
 }
