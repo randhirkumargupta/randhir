@@ -137,7 +137,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
       // This is for primary category default value
       if(!isset($default_value_of_primary_cat)){
-      $default_value_of_primary_cat = array('- Select Primary Category -');
+      $default_value_of_primary_cat = '';
       }
       if (isset($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'])) {
         $default_value_of_primary_cat = $form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'];

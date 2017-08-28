@@ -171,6 +171,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
+      $first_itg_ugc_sect_pri_category_opts = key($itg_ugc_sect_pri_category_opts);
+      $form['category_holder']['itg_primary_category']['#default_value'] = $first_itg_ugc_sect_pri_category_opts;
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
     }
 
@@ -194,6 +196,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
+      $first_itg_ugc_sect_pri_category_opts = key($itg_ugc_sect_pri_category_opts);
+      $form['category_holder']['itg_primary_category']['#default_value'] = $first_itg_ugc_sect_pri_category_opts;
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
@@ -223,7 +227,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
+      $first_itg_ugc_sect_pri_category_opts = key($itg_ugc_sect_pri_category_opts);
+      $form['category_holder']['itg_primary_category']['#default_value'] = $first_itg_ugc_sect_pri_category_opts;
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($ugc_user_name)) {
        // $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
@@ -255,7 +260,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
+      $first_itg_ugc_sect_pri_category_opts = key($itg_ugc_sect_pri_category_opts);
+      $form['category_holder']['itg_primary_category']['#default_value'] = $first_itg_ugc_sect_pri_category_opts;
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       foreach ($form['field_podcast_audio_upload']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
@@ -278,7 +284,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $itg_ugc_sect_pri_category_opts = itg_ugc_sect_pri_category_opts($form['category_holder']['itg_section']['#options'], $mongo_details['section']);
       $form['category_holder']['itg_section']['#default_value'] = $mongo_details['section'];
       $form['category_holder']['itg_primary_category']['#options'] = $itg_ugc_sect_pri_category_opts;
-
+      $first_itg_ugc_sect_pri_category_opts = key($itg_ugc_sect_pri_category_opts);
+      $form['category_holder']['itg_primary_category']['#default_value'] = $first_itg_ugc_sect_pri_category_opts;
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $mongo_details['section'];
       if (!empty($mongo_details['multiple_image'])) {
         $multiple_image = explode(',', $mongo_details['multiple_image']);
