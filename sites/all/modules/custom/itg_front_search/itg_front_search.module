@@ -267,7 +267,7 @@ function itg_front_search_views_pre_render(&$view) {
 
     $get_var = $_GET;
     $all_bundle = $_GET['bundle_name'];
-
+    
     unset($_GET['q']);
     unset($_GET['bundle_name']);
 
@@ -283,6 +283,9 @@ function itg_front_search_views_pre_render(&$view) {
         $lnk_class = "active";
       }
       unset($_GET['page']); //remove page no.
+      if(isset($_GET['q'])) {
+      unset($_GET['q']);
+      }
       $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => array($lnk_class)))) . ' ';
     }
 
@@ -575,8 +578,12 @@ function topic_form_submit_handler($form, &$form_state) {
   $search_key['bundle_name'] = $bundle;
   $search_key['hash'] = $hash;
   $search_key['custom_drp'] = $form_state['values']['custom_drp'];
+  if(!empty($form_state['values']['ds_changed'])) {
   $search_key['ds_changed']['date'] = date('d-m-Y', strtotime($form_state['values']['ds_changed']));
+  }
+  if(!empty($form_state['values']['ds_changed_max'])) {
   $search_key['ds_changed_max']['date'] = date('d-m-Y', strtotime($form_state['values']['ds_changed_max']));
+  }
   $search_key['tm_vid_14_names'] = $form_state['values']['tm_vid_14_names'];
   $search_key['sm_field_itg_common_by_line_name'] = $form_state['values']['sm_field_itg_common_by_line_name'];
 
