@@ -850,15 +850,18 @@ function itg_follow_unfollow_print($nid) {
     $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
 
     if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
-      $html = "<div class='mhide'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a></div>";
+      $html = "<div class='follow-activity'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a></div>";
     }
     else
     {
-      $html = "<div class='mhide'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a></div>";
+      $html = "<div class='follow-activity'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a></div>";
     }
   }
   else
   {
+    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // prepare url for sharing
+    $uri = base64_encode($actual_link);
     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
     $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
   }
@@ -880,17 +883,20 @@ function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
       $tag_label = '';
     }
     if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
-      $html = "<li class=\"author mhide\"><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a>".$tag_label."</li>";
+      $html = "<li class=\"author\"><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a>".$tag_label."</li>";
     }
     else
     {
-      $html = "<li class=\"author mhide\"><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a>".$tag_label."</li>";
+      $html = "<li class=\"author\"><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a>".$tag_label."</li>";
     }
   }
   else
   {
+    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // prepare url for sharing
+    $uri = base64_encode($actual_link);
     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
-    $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$tag_label."</li>";
+    $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$t_name."</li>";
   }
   print $html;
 }
@@ -962,6 +968,21 @@ function _personalization_manage_follow_content() {
       }
     }
     return $output.= '</tr></table>';
+  }
+}
+
+function itg_get_followers($nid) {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con && !empty($nid)) {
+      $ntype = 'anchor';
+      $people = $con->front_user_activity;
+      return $count = $people->find(array("nid" => $nid, "ntype" => $ntype, 'status' => '1'))->count();
+      //print $people->find(array('status' => '1'))->count();
+    } //close connection
+
+
   }
 }
 
