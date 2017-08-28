@@ -169,7 +169,13 @@ function itg_autosave_nodeform($nid, $ctype) {
     $node = node_submit($node);
 
     // Save node to save all values into node.    
+    
+    try{
     node_save($node);
+    } catch(Exception $e){
+      pr('ERROR');
+      p($e->getMessage());
+    }
     // Store unique id associated with node in array.
     $pre_save['unique_id'] = $node_identity;
     // Store all field collections ids into array.
