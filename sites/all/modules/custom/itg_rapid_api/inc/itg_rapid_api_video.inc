@@ -142,7 +142,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fvu', array('field_video_upload_value'));
     $query->fields('fpc', array('field_primary_category_value'));
-
+    $query->fields('ffd', array('field_story_expert_description_value'));
 
     //end
 
