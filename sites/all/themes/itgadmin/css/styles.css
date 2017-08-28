@@ -825,7 +825,7 @@ div.filefield-sources-list a.active {
 [id*="itg-registred-user-report-form"] #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions a,
 #views-form-supplement-base-magazin-widget-supplement-base-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a,
 [id*="itg-registred-user-report-form"] #views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions a,
-#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link, [id*="views-exposed-form-state-manager-page"] .views-submit-button a {
+#views-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget .form-actions [id*="itg-registred-user-report-form"] a, [id*="itg-registred-user-report-form"] [id*="itg-active-user-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-active-user-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-user-content-visit-report-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-registred-user-report-form"] [id*="itg-section-wise-breakup-form"] .user-log-filter-btn a.user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn [id*="itg-registred-user-report-form"] a.user-log-reset, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .form-submit, [id*="itg-user-content-visit-report-form"] .user-log-filter-btn .user-log-reset, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .form-submit, [id*="itg-section-wise-breakup-form"] .user-log-filter-btn .user-log-reset, .field-type-jquery-colorpicker .form-type-jquery-colorpicker > .jquery_colorpicker .jquery_colorpicker_field_clear_link, [id*="views-exposed-form-state-manager-page"] .views-submit-button a, .view .view-filters [id*="views-exposed-form-bitrates-videos-page"] .views-exposed-form .views-submit-button a.button {
   height: 28px;
   line-height: 26px;
   padding: 0 10px;
@@ -13071,7 +13071,7 @@ fieldset#edit-xmlsitemap {
   margin-bottom: 10px;
   margin-left: 250px;
 }
-[id*="field-breaking-content-details-values"].collapsed a.fieldset-title {
+[id*="field-breaking-content-details-values"] fieldset.collapsible.collapsed a.fieldset-title {
   background: url(../images/plus.png) right 10px center no-repeat;
 }
 
@@ -13081,28 +13081,93 @@ fieldset#edit-xmlsitemap {
   width: 100%;
 }
 .video-ftp-div .main-top-wraper {
-  display: table;
+  display: inline-block;
   width: 100%;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  background: #ddd;
 }
 .video-ftp-div .main-top-wraper > div {
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  padding: 10px;
+  width: 10%;
+}
+.video-ftp-div .main-top-wraper > div.search-checkbox-wraper {
+  width: 5%;
+}
+.video-ftp-div .main-top-wraper > div.search-title-wraper {
+  width: 30%;
+}
+.video-ftp-div .main-top-wraper > div.search-date-wraper {
+  width: 15%;
 }
 .video-ftp-div .easyPaginateList {
-  display: table;
+  display: inline-block;
   width: 100%;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
 }
 .video-ftp-div .easyPaginateList .ftp_video_radio {
-  display: table-row;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio + .ftp_video_radio {
+  border-top: 1px solid #ddd;
 }
 .video-ftp-div .easyPaginateList .ftp_video_radio > div {
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.video-checkbox-wraper {
+  width: 5%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.show_video_title {
+  width: 30%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.file_size_date_time {
+  width: 15%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div a.play-video {
+  font-size: 14px;
+  color: #0c8bb1;
 }
 
 .page-solr-unpublish-video .view .view-filters .views-exposed-form .views-exposed-widget {
   width: 248px;
 }
+.page-solr-unpublish-video .view .view-filters .views-exposed-form .views-exposed-widget.views-reset-button {
+  width: auto;
+}
 .page-solr-unpublish-video div#edit-bundle-name-wrapper, .page-solr-unpublish-video .views-exposed-widget.views-submit-button {
   display: none !important;
+}
+
+.view .view-filters [id*="views-exposed-form-bitrates-videos-page"] .views-exposed-form .views-submit-button .form-submit {
+  height: 28px;
+  margin-right: 10px;
+}
+
+.page-node-add-event-backend .action-with-title #page-title, .node-type-event-backend .action-with-title #page-title {
+  width: 400px;
+}
+
+.itg-sidebar-form iframe#video_iframe {
+  border: none;
+  width: 100%;
+}
+.itg-sidebar-form .button.asso-filed-video {
+  margin-bottom: 10px;
+  margin-left: 60px;
+}
+.itg-sidebar-form .button.advance-serach {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 60px;
+}
+
+[id*="views-exposed-form-searchimage-solr-unpublish-video"] table {
+  background-color: #fff;
 }
