@@ -4883,6 +4883,11 @@ echo $total_items = $view->query->pager->get_total_items();
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -4891,6 +4896,21 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['filters']['type']['value'] = array(
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value']['id'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value']['value'] = 'migrated';
+  $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'photogallery' => 'photogallery',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 2;
   /* Filter criterion: Field collection item: Enable (field_photo_enable) */
   $handler->display->display_options['filters']['field_photo_enable_value']['id'] = 'field_photo_enable_value';
   $handler->display->display_options['filters']['field_photo_enable_value']['table'] = 'field_data_field_photo_enable';
@@ -4899,6 +4919,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['filters']['field_photo_enable_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_photo_enable_value']['group'] = 2;
 
   /* Display: photogallery story block */
   $handler = $view->new_display('block', 'photogallery story block', 'block_1');
