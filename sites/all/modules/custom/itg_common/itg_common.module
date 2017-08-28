@@ -1387,3 +1387,10 @@ function _remove_embded_tags_from_story_body($body_content) {
   }
   return "";
 }
+
+/**
+ * WatchDog helper function for debug
+ */
+function itg_watchdog($error_type , $message) {
+    watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
+}
