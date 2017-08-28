@@ -636,6 +636,12 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['field'] = 'sm_field_property';
   $handler->display->display_options['fields']['sm_field_property']['label'] = '';
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_date_time */
+  $handler->display->display_options['fields']['sm_field_video_date_time']['id'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -865,6 +871,12 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['field'] = 'sm_field_property';
   $handler->display->display_options['fields']['sm_field_property']['label'] = '';
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_date_time */
+  $handler->display->display_options['fields']['sm_field_video_date_time']['id'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -1057,6 +1069,12 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_property']['field'] = 'sm_field_property';
   $handler->display->display_options['fields']['sm_field_property']['label'] = '';
   $handler->display->display_options['fields']['sm_field_property']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_date_time */
+  $handler->display->display_options['fields']['sm_field_video_date_time']['id'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -1408,6 +1426,12 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['filters']['sm_field_property']['id'] = 'sm_field_property';
   $handler->display->display_options['filters']['sm_field_property']['table'] = 'apachesolr__solr';
   $handler->display->display_options['filters']['sm_field_property']['field'] = 'sm_field_property';
+  /* Filter criterion: Apache Solr: sm_field_video_is_draft */
+  $handler->display->display_options['filters']['sm_field_video_is_draft']['id'] = 'sm_field_video_is_draft';
+  $handler->display->display_options['filters']['sm_field_video_is_draft']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['sm_field_video_is_draft']['field'] = 'sm_field_video_is_draft';
+  $handler->display->display_options['filters']['sm_field_video_is_draft']['operator'] = '!=';
+  $handler->display->display_options['filters']['sm_field_video_is_draft']['value'] = '1';
   $handler->display->display_options['path'] = 'solr-unpublish-video';
   $export['searchimage'] = $view;
 
