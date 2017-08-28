@@ -98,7 +98,7 @@ if ($classes) {
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
                           <?php
                           if ($field == 'label') {
-                            print mb_strimwidth($content, 0, 25, '..');
+                            print mb_strimwidth($content, 0, 17, '..');
                           }
                           else {
                             print $content;
