@@ -13081,23 +13081,58 @@ fieldset#edit-xmlsitemap {
   width: 100%;
 }
 .video-ftp-div .main-top-wraper {
-  display: table;
+  display: inline-block;
   width: 100%;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  background: #ddd;
 }
 .video-ftp-div .main-top-wraper > div {
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  padding: 10px;
+  width: 10%;
+}
+.video-ftp-div .main-top-wraper > div.search-checkbox-wraper {
+  width: 5%;
+}
+.video-ftp-div .main-top-wraper > div.search-title-wraper {
+  width: 30%;
+}
+.video-ftp-div .main-top-wraper > div.search-date-wraper {
+  width: 15%;
 }
 .video-ftp-div .easyPaginateList {
-  display: table;
+  display: inline-block;
   width: 100%;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
 }
 .video-ftp-div .easyPaginateList .ftp_video_radio {
-  display: table-row;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio + .ftp_video_radio {
+  border-top: 1px solid #ddd;
 }
 .video-ftp-div .easyPaginateList .ftp_video_radio > div {
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  width: 10%;
+  padding: 10px;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.video-checkbox-wraper {
+  width: 5%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.show_video_title {
+  width: 30%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div.file_size_date_time {
+  width: 15%;
+}
+.video-ftp-div .easyPaginateList .ftp_video_radio > div a.play-video {
+  font-size: 14px;
+  color: #0c8bb1;
 }
 
 .page-solr-unpublish-video .view .view-filters .views-exposed-form .views-exposed-widget {
@@ -13113,4 +13148,26 @@ fieldset#edit-xmlsitemap {
 .view .view-filters [id*="views-exposed-form-bitrates-videos-page"] .views-exposed-form .views-submit-button .form-submit {
   height: 28px;
   margin-right: 10px;
+}
+
+.page-node-add-event-backend .action-with-title #page-title, .node-type-event-backend .action-with-title #page-title {
+  width: 400px;
+}
+
+.itg-sidebar-form iframe#video_iframe {
+  border: none;
+  width: 100%;
+}
+.itg-sidebar-form .button.asso-filed-video {
+  margin-bottom: 10px;
+  margin-left: 60px;
+}
+.itg-sidebar-form .button.advance-serach {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 60px;
+}
+
+[id*="views-exposed-form-searchimage-solr-unpublish-video"] table {
+  background-color: #fff;
 }
