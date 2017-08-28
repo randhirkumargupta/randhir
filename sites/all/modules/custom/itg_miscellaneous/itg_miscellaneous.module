@@ -17,7 +17,10 @@
 //  //p(node_load(2540));
 //}
 
-//module_load_include('inc', 'itg_miscellaneous', 'includes/itg_custom_db_script');
+module_load_include('inc', 'itg_miscellaneous', 'includes/itg_custom_db_script');
+
+//file include for tags migrate 
+module_load_include('inc', 'itg_miscellaneous', 'includes/itg_tags_script_save');
 
 
 /**
@@ -91,3 +94,5 @@ function itg_miscellaneous_menu() {
   
   return $items;
 }
+
+
