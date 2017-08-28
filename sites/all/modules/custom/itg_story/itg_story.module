@@ -1255,8 +1255,8 @@ function _is_external_url_story_article($nid){
 				$query->condition('eu.bundle', 'story', '=');
 				$query->condition('eu.entity_type', 'node', '=');
 				$query_result = $query->execute()->fetchAll();
-				if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value)) {
-					$is_external_url = $query_result[0]->field_story_external_url_value;
+				if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+					$is_external_url = trim($query_result[0]->field_story_external_url_value);
 				}
 			}
 		}		
