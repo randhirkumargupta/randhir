@@ -37,7 +37,7 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
       '#id' => 'section-' . $i . '-frequency',
       '#type' => 'select',
       '#options' => range(0, 31),
-      '#default_value' => !empty($db_data->frequency) ? $db_data->frequency : '',
+      '#default_value' => !empty($db_data->frequency) ? $db_data->frequency : 2,
     );
 
     // Prepare frequency type
@@ -113,6 +113,7 @@ function itg_sitemap_get_sections() {
 function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
   itg_sitemap_shunks_section_delete();
   $sections = $form_state['values']['section'];
+  $count = 0;
   if (!empty($sections)) {
     foreach ($sections as $section) {
       $section_tid = array_keys($section['section_tid'])[0];
@@ -129,8 +130,14 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
         $handel_value['frequency_type'] = $section['section_freq_type'];
         itg_sitemap_chunks_section_save_setting($handel_value);
         unset($handel_value);
+        $count++;
       }
     }
+  }
+  if($count<=0) {
+    drupal_set_message(t("No sections is selected."));
+  } else {
+    drupal_set_message(t("Settings for @count sections has been saved" , array("@count" => $count)));
   }
 }
 

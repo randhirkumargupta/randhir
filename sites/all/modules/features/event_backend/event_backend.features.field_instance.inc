@@ -1478,7 +1478,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 29,
+      'weight' => 27,
     ),
   );
 
@@ -1554,7 +1554,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 24,
+      'weight' => 21,
     ),
   );
 
@@ -1597,7 +1597,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 27,
+      'weight' => 25,
     ),
   );
 
@@ -1641,7 +1641,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 28,
+      'weight' => 26,
     ),
   );
 
@@ -1680,7 +1680,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 22,
     ),
   );
 
@@ -1723,7 +1723,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 26,
+      'weight' => 23,
     ),
   );
 
@@ -1766,7 +1766,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 31,
+      'weight' => 29,
     ),
   );
 
@@ -1809,7 +1809,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 30,
+      'weight' => 28,
     ),
   );
 
@@ -2143,7 +2143,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 32,
+      'weight' => 30,
     ),
   );
 
@@ -2311,7 +2311,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 36,
+      'weight' => 34,
     ),
   );
 
@@ -2593,7 +2593,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 33,
+      'weight' => 31,
     ),
   );
 
@@ -2735,7 +2735,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 33,
     ),
   );
 
@@ -2819,7 +2819,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 37,
+      'weight' => 35,
     ),
   );
 
@@ -2858,7 +2858,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 34,
+      'weight' => 32,
     ),
   );
 

@@ -201,10 +201,11 @@ function itg_loyalty_reward_product_availability($cart_detail) {
  */
 function itg_loyalty_reward_place_order() {
   global $user, $base_url;
+  $arg = arg();
   // Get product info.
   $cart_detail = _get_cart_full_details($user->uid);
   $errors = array_filter($cart_detail);
-  if (empty($errors)) {
+  if (empty($errors) || empty($arg[1])) {
     drupal_goto('product');
   }
   // Check availability of the product.
@@ -267,7 +268,7 @@ function itg_loyalty_reward_place_order() {
     $order_placed = db_insert('itg_loyalty_reward_order')
         ->fields($presave)
         ->execute();
-    $response = itg_update_remaining_point($sso_id, $total_point, $user->uid, $property, $base_url, serialize($data), implode(',', $product_availability['nid']));
+    $response = itg_update_remaining_point($sso_id, $total_point, $user->uid, $property, base64_encode($base_url), serialize($data), implode(',', $product_availability['nid']), $order_placed);
 
     //$unique_key = itg_loyalty_reward_unique_expiration($user->uid);
     
