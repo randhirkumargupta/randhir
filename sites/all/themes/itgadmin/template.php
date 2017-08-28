@@ -306,7 +306,7 @@ function itgadmin_breadcrumb($vars) {
     $photogallery_tab = array('in-queue-photogallery' , 'published-photogallery' , 'unpublished-photogallery' , 'archive-photogallery');
     $bolg_tab = array('published-blogs' , 'unpublished-blogs' , 'my-queue-blogs' , 'in-queue-blogs' , 'archive-blogs' , 'my-unpublished-blogs' , 'mydraft-blogs' , 'my-rejected-blogs' , 'my-published-blogs');
     $podcast_tab = array('published-podcast' , 'unpublished-podcast' , 'my-unpublished-podcast' , 'mydraft-podcast' , 'my-published-podcast' , 'my-queue-podcast' , 'in-queue-podcast' , 'archive-podcast' , 'my-rejected-podcast');
-    $videogallery_tab = array('published-video' , 'unpublished-video' , 'my-unpublished-video' , 'mydraft-video' , 'my-published-video' , 'my-queue-video' , 'in-queue-video' , 'archive-video' , 'my-rejected-video');
+    //$videogallery_tab = array('published-video' , 'unpublished-video' , 'my-unpublished-video' , 'mydraft-video' , 'my-published-video' , 'my-queue-video' , 'in-queue-video' , 'archive-video' , 'my-rejected-video','expired-video','my-expired-video');
 
     //story tab breadcrumb
     if (in_array($content_url , $story_tab)) {
@@ -440,6 +440,8 @@ function itgadmin_preprocess_page(&$vars) {
     , 'embeded-video'
     , 'image-info-edit'
     , 'election-graph-widget-list'
+    , 'dailymotion-video-play'
+    , 'solr-unpublish-video'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {

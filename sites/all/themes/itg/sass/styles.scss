@@ -2097,6 +2097,9 @@ footer{
               color: #026bc5;
               &:hover{text-decoration: underline;}
             }
+            .story-photo-list-wrapper{
+              clear: both;
+            }
         }
         .briefcase {
             margin-top:20px;
@@ -4425,7 +4428,7 @@ h1.category-heading{
 }
 [id*="block-itg-widget-featured-photo-carousel"]{
   .flexslider .slides img {
-    max-height: 363px;
+    max-height: 340px;
   }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
@@ -12057,7 +12060,12 @@ span.see-picture{
 .story-section h1 span.story-pipline, .story-section h1 span.story-pipline + a {
     color: #086DC7;
 }
-
+.featured_photo_carousel .data-holder{
+  height: calc(100% - 22px);
+}
+.top_stories_ordering .widget-title {
+    padding: 1px 7px;
+}
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,

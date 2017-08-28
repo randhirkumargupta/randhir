@@ -17,11 +17,11 @@ jQuery('document').ready(function() {
             data: {'id': slug_id},
             beforeSend: function() {
                 current_object.closest('tr').siblings('.octopus-slug-data-row').remove();
-                current_object.closest('tr').after('<tr class="octopus-slug-data-row" style="text-align: center;"><td colspan="10"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/></td></tr>');
+                current_object.closest('tr').after('<tr class="octopus-slug-data-row" style="text-align: center;"><td colspan="11"><img width="50" src="' + Drupal.settings.itg_octopus_holder.settings.loader_url + '" alt=""/></td></tr>');
             },
             success: function(data) {
                 current_object.closest('tr').siblings('.octopus-slug-data-row').remove();
-                current_object.closest('tr').after('<tr class="octopus-slug-data-row"><td colspan="10">' + data + '</td></tr>');
+                current_object.closest('tr').after('<tr class="octopus-slug-data-row"><td colspan="11">' + data + '</td></tr>');
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);

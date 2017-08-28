@@ -411,7 +411,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     $itg_query = db_select('itg_global_loyality_point', 'pk');
     $itg_query->distinct('pk.sso_id');
     $itg_query->join('users', 'u', 'pk.sso_id=u.uid');    
-    $itg_query->fields('u', array('mail', 'name'));
+    $itg_query->fields('u', array('mail', 'name', 'uid'));
     $itg_query->fields('pk', array('remaining_points'));
     $itg_query->fields('pk', array('expiry_date', 'status'));
     $itg_query->condition('pk.status', 1);
@@ -427,10 +427,16 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     foreach ($itg_result as $value) {
       $data['remaining_point'] = $value->remaining_points;
       $data['name'] = $value->name;
-      $data['expiry_date'] = $value->expiry_date;      
+      $data['expiry_date'] = $value->expiry_date;
+      
+      if ((strpos($value->mail, '@twitter.com') !== false || strpos($value->mail, '@facebook.com') !== false)) {
+       $user_mail = itg_get_global_alt_email($value->uid); 
+      }else {
+        $user_mail = $value->mail;
+      }
       // for mail code
       watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
-      itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+      itg_common_get_mail_content($data, $user_mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }
   }
 }
