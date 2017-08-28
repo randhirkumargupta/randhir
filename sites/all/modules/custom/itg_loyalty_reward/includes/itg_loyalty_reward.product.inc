@@ -494,7 +494,11 @@ function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
+  if ((strpos($value->mail, '@twitter.com') !== false || strpos($value->mail, '@facebook.com') !== false)) {
+   $to = itg_get_global_alt_email($user->uid); 
+  } else {
    $to = $user->mail;
+  }
 //  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
