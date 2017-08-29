@@ -309,7 +309,7 @@ if ($type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow
   }
   if (!empty(variable_get('lrp_loyality_points_expiry'))) {
     $expiry_days = '+' . variable_get('lrp_loyality_points_expiry') . ' days';
-    $expiry_date_old = date('Y-m-d h:i', strtotime($expiry_days));
+    $expiry_date_old = date('Y-m-d H:i', strtotime($expiry_days));
     $expiry_date = strtotime($expiry_date_old);
   }
   $data = 'uid=' . $uid . '&sso_id=' . $sso_id . '&nid=' . $nid . '&loyalty_type=' . $loyalty_type . '&loyalty_points=' . $loyalty_points . '&remaining_points=' . $remaining_points . '&property=' . $property . '&status=1&expiry_date=' . $expiry_date.'&news_letter='.$newsletter;
