@@ -850,11 +850,11 @@ function itg_follow_unfollow_print($nid) {
     $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
 
     if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
-      $html = "<div class='follow-activity'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a></div>";
+      $html = "<li class='follow-activity-anchor'><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>".t('Unfollow')."</a></li>";
     }
     else
     {
-      $html = "<div class='follow-activity'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>Follow</a></div>";
+      $html = "<li class='follow-activity-anchor'><a title='Follow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag='anchor' data-activity='follow_anchor' data-ftitle='Follow' data-untitle='Unfollow' data-status='1' class='follow-activity'>".t('Follow')."</a></li>";
     }
   }
   else
@@ -863,7 +863,7 @@ function itg_follow_unfollow_print($nid) {
     // prepare url for sharing
     $uri = base64_encode($actual_link);
     $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
-    $html = "<div class='mhide'><a title='follow' href='".$sso_url."'>Follow</a></div>";
+    $html = "<li class='follow-activity-anchor'><a title='follow' href='".$sso_url."'>".t('Follow')."</a></li>";
   }
   print $html;
 }
@@ -920,54 +920,54 @@ function _personalization_manage_follow_content() {
     $cnt_anchor = count($result['anchor']) -1;
     $cnt_author = count($result['author']) -1;
     $cnt_tag = count($result['tag']) -1;
-    $output.= '<table border="1" class="personal-list"><tr>';
+    $output.= '<div class="personal-list">';
     foreach ($result as $key => $rows) {
       foreach ($rows as $id => $value) {  //pr($key);
         // for author
         if($key == 'author') {
           if($id == '0') {
-            $output.= "<td>";
-            $output.= '<table border="1" class="personal-list">';
-            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Author</strong></td></tr>";
+
+            $output.= '<ul class="personal-lists-col">';
+            $output.= "<li><h3>Author</h3></li>";
           }
-          $output.= "<tr><td><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          $output.= "<li><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
           if($id == $cnt_author) {
-            $output.= '</table>';
-            $output.= "</td>";
+            $output.= '</ul>';
+
           }
 
         }
         // for tag
         if($key == 'tag') {
           if($id == '0') {
-            $output.= "<td>";
-            $output.= '<table border="1" class="personal-list">';
-            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Topics</strong></td></tr>";
+
+            $output.= '<ul class="personal-lists-col">';
+            $output.= "<li><h3>Topics</h3></li>";
           }
-          $output.= "<tr><td><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          $output.= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
           if($id == $cnt_tag) {
-            $output.= '</table>';
-            $output.= "</td>";
+            $output.= '</ul>';
+
           }
 
         }
         // for anchor
         if($key == 'anchor') {
           if($id == '0') {
-            $output.= "<td>";
-            $output.= '<table border="1" class="personal-list">';
-            $output.= "<tr><td bgcolor=\"#CCCCCC\"><strong>Anchor</strong></td></tr>";
+            $output.= '<ul class="personal-lists-col">';
+            $output.= "<li><h3>Anchor</h3></li>";
           }
-          $output.= "<tr><td><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >DELETE</button>". $value['title'] . "</td></tr>";
+          $output.= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
           if($id == $cnt_anchor) {
-            $output.= '</table>';
-            $output.= "</td>";
+            $output.= '</ul>';
+
           }
 
         }
       }
     }
-    return $output.= '</tr></table>';
+    return $output.= '</div>';
+
   }
 }
 
@@ -979,9 +979,7 @@ function itg_get_followers($nid) {
       $ntype = 'anchor';
       $people = $con->front_user_activity;
       return $count = $people->find(array("nid" => $nid, "ntype" => $ntype, 'status' => '1'))->count();
-      //print $people->find(array('status' => '1'))->count();
     } //close connection
-
 
   }
 }
