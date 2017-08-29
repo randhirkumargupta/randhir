@@ -1136,15 +1136,20 @@ function itg_akamai_cache_control_get_path_alias($paths) {
  * @return type
  */
 function itg_akamai_cache_get_amp_cc_mapping($alias) {
-  $type = itg_akamai_amp_cc_mapping();
-  $qry = db_select('node', 'n');
-  $qry->condition('n.nid', $alias, 'IN');
-  $qry->condition('n.type', $type, 'IN');
-  $qry->fields('n', array('nid'));
-  $res = $qry->execute();
   $nids = array();
-  foreach ($res as $data) {
-    $nids[] = $data->nid;
+  try {
+    $type = itg_akamai_amp_cc_mapping();
+    $qry = db_select('node', 'n');
+    $qry->condition('n.nid', $alias, 'IN');
+    $qry->condition('n.type', $type, 'IN');
+    $qry->fields('n', array('nid'));
+    $res = $qry->execute();
+    foreach ($res as $data) {
+      $nids[] = $data->nid;
+    }
+  }
+  catch (Exception $e) {
+    
   }
   return $nids;
 }
