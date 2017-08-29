@@ -28,8 +28,16 @@ global $user;
       <tbody>
         <?php foreach ($data['unit_description'] as $value): ?>
         <tr>
+            <?php
+            $activity_array = array('raf' => 'Refer a Friend', 'ugc_contribution' => 'UGC Contribution', 'fb_follow' => 'Facebook Follow');
+            if(array_key_exists($value['activity_name'], $activity_array)) {
+              $activity_name = $activity_array[$value['activity_name']];
+            } else {
+             $activity_name  =  ucfirst(str_replace('_', ' ', $value['activity_name']));
+            }
+            ?>
             <!--<td class="unit-point-item"><?php print ucfirst($value['activity_name']); ?></td>-->
-            <td class="unit-point-item"><?php print ucfirst(str_replace('_', ' ', $value['activity_name'])); ?></td>
+            <td class="unit-point-item"><?php print $activity_name; ?></td>
             <!--<td class="unit-point-item"><?php print ucfirst($value['points_per_activity']); ?></td>-->
             <td class="unit-point-item"><?php print ucfirst($value['points_per_activity']); ?></td>
             <td class="unit-point-item"><?php print ucfirst($value['earned_points']); ?></td>

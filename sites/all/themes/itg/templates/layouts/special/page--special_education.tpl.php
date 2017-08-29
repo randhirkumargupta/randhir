@@ -279,7 +279,8 @@ if ($theme != 'itgadmin') {
 
         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="row">
-                <div class="col-md-12 col-sm-6 col-xs-12 m-bottom40">
+                <div class="col-md-12 col-sm-6 col-xs-12">
+                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Register for more updates');?></strong> )</div>
                         <div class="itg-widget-parent shadow-on">
                             <div class="droppable <?php print $gray_bg_layout; ?>">
                                 <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
@@ -307,7 +308,8 @@ if ($theme != 'itgadmin') {
                 </div>
                 <?php $block_ask_expert = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');?>
                 <?php if (!empty($block_ask_expert['content'])) {?>
-                  <div class="col-md-12 col-sm-6 col-xs-12">
+                  <div class="col-md-12 col-sm-6 col-xs-12 mt-10">
+                    <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Ask a Question');?></strong> )</div>
                         <div class="itg-widget-child shadow-on">
                             <div class="droppable <?php print $gray_bg_layout; ?>">
                                 <div class="widget-wrapper">                                    

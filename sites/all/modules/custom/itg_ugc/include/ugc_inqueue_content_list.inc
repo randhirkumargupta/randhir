@@ -63,7 +63,7 @@ function itg_ugc_inqueue_form_submit($form, &$form_state) {
 function itg_ugc_inqueue_content() {
   global $base_url;
   $arg = arg();
-  drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
+  drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external' , 'scope' => 'footer'));  
 
   # configure the table header columns
   $header = array(
@@ -118,13 +118,20 @@ function itg_ugc_inqueue_content() {
         if ($row['content_type'] == 'videogallery') {
           $row['content_type'] = 'Video';
         }
+        
+        if (strpos($row['email'], 'nowhere.com') !== false) {
+          $email = '';
+        }
+        else {
+          $email = $row['email'];
+        }
         //get the value in table
         $rows[] = array(
           array('data' => $sl_no),
           array('data' => $row['title']),
           array('data' => $row['content_type']),
           array('data' => $row['name']),
-          array('data' => $row['email']),
+          array('data' => $email),
           array('data' => $status),
           array('data' => $row['publish_date']),
           array('data' => $link),

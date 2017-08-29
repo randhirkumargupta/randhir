@@ -114,13 +114,19 @@ function itg_ugc_reject_content() {
           $status = 'Rejected';
         }
         
+        if (strpos($row['email'], 'nowhere.com') !== false) {
+          $email = '';
+        }
+        else {
+          $email = $row['email'];
+        }
         //get the value in table
         $rows[] = array(
           array('data' => $sl_no),
           array('data' => $row['title']),
           array('data' => $row['content_type']),
           array('data' => $row['name']),
-          array('data' => $row['email']),
+          array('data' => $email),
           array('data' => $status),
           array('data' => $row['publish_date']),
           array('data' => $row['rejected_date']),
