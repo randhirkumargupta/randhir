@@ -247,10 +247,8 @@ if (!empty($content)):
                       ?>
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
                     <?php } ?>
-                  </ul>
-                <?php endif; ?>
-                <ul class="date-update">
-                  <?php if ($sponsor_text == ''): ?>
+
+                    <?php if ($sponsor_text == ''): ?>
                     <li class="mailto mhide">
                       <i class="fa fa-envelope-o"></i> &nbsp;<?php
                       if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
@@ -265,6 +263,11 @@ if (!empty($content)):
                       print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
                     }  
                   ?>
+                  
+                  </ul>
+                <?php endif; ?>
+                <ul class="date-update">
+                  
                   <li class="mhide">
                     <span class="share-count">
                       <?php
