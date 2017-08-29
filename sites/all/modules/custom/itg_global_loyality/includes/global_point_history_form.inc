@@ -63,12 +63,13 @@ global $base_url;
     t('Remaining points'),
     t('Property'),
     t('Status'),
+    t('Created date'),
     t('Expiry date'),
   );
 
   $query = db_select('itg_global_loyality_point', 'a');
   $query->fields('a');
-  $query->orderBY('expiry_date', 'DESC');
+  $query->orderBY('id', 'DESC');
 
   if (isset($uid) && !empty($uid)) {
     $query->condition('a.uid', $uid);
@@ -87,6 +88,7 @@ global $base_url;
       check_plain($record->remaining_points),
       check_plain($record->property),
       check_plain($record->status),
+      date('Y-m-d', $record->created),
       date('Y-m-d h:i:s', $record->expiry_date),
     );
   }

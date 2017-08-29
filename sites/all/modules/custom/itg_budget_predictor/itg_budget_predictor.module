@@ -136,12 +136,12 @@ function itg_budget_predictor_custom() {
 
 
   $data['user_id'] = $user_id;
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array('type' => 'external', 'scope' => 'footer'));
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', array('type' => 'external', 'scope' => 'footer'));
   drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');
-  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/jquery.cookie.js', 'file');
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/jquery.cookie.js', array('scope' => 'footer'));
   return theme('itg_budget_predictor_cheaper', array('data' => $data));
 }
 

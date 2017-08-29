@@ -1023,7 +1023,7 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
       '#prefix' => '<div id="custom-event-type">',
       '#suffix' => '</div>'
     );
-    drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-event-type').width('125'); });", 'inline');
+    drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-event-type').width('125'); });", array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') {
     $form['event_types'] = array(
@@ -1646,7 +1646,7 @@ function itg_event_backend_vukkul_content($nid) {
   $n_title = "Event: " . $node->title;
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($event_author_name);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
