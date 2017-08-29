@@ -984,3 +984,18 @@ function itg_get_followers($nid) {
   }
 }
 
+function itg_cron_mail_for_following() {
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con && !empty($nid)) {
+      $ntype = 'anchor';
+      $people = $con->front_user_activity;
+      //db.getCollection('front_user_activity').find({ ntype: { $in: [ 'anchor', 'author' ] } } )
+
+      return $count = $people->find(array("nid" => $nid, "ntype" => $ntype, 'status' => '1'))->count();
+    } //close connection
+
+  }
+}
+
