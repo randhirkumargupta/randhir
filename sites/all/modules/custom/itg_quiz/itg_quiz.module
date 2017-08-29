@@ -429,9 +429,7 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
         }
 
         // Show error message for text
-        if ($count_ans_text < 2) {
-          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-        }
+        
 
         // Show error message for photos
         if ($answer_option_type == 'Photo') {
@@ -444,19 +442,18 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
           if ($photo_is_missing_itself) {
             form_set_error('field_quiz_options_answer', t('Please provide answer photo for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
           }
-        }
-        
-        // Show error message for videos
-        if ($answer_option_type == 'Video') {
-          if ($count_ans_video < 2) {
-            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer videos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
-          if ($text_missing_video) {
-            form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
-          if ($video_is_missing_itself) {
-            form_set_error('field_quiz_options_answer', t('Please provide answer video for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
+        } else if ($answer_option_type == 'Video') {
+            if ($count_ans_video < 2) {
+              form_set_error('field_quiz_options_answer', t('Please provide atleast two answer videos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+            if ($text_missing_video) {
+              form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+            if ($video_is_missing_itself) {
+              form_set_error('field_quiz_options_answer', t('Please provide answer video for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+        } else if ($count_ans_text < 2) {
+            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
         }
 
         // Show error message for correct answer

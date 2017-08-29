@@ -424,6 +424,15 @@ function itg_seo_node_update($node) {
     }
     elseif ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
       $newpath = itg_common_custompath_insert_load($node);
+      // Fix for Poll Only.
+      // two times poll/poll/ appending in alias.
+      if($node->type == 'poll') {
+        $path_array = explode("/", $newpath);
+        if(count($path_array) > 2) {
+            unset($path_array[0]);
+            $newpath = implode("/", $path_array);
+        }
+      }
       $node->path['alias'] = $newpath;
       $path = array(
         'source' => "node/{$node->nid}",

@@ -33,6 +33,12 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
       drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
     );
+    
+    if (strpos($user->mail) !== false) {
+      $mail = '';
+    } else {
+      $mail = $user->mail;
+    }
     // Prepare form array.
     $form['name'] = array(
       '#type' => 'textfield',
@@ -49,7 +55,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
         'placeholder' => t('Email'),
         'readonly' => TRUE,
       ),
-      '#default_value' => $user->mail,
+      '#default_value' => $mail,
       '#required' => TRUE,
     );
     $form['phone'] = array(
