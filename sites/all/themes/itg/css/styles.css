@@ -15011,3 +15011,14 @@ span.story-sponsor-powered-text::last-word {
 .featured-news .featured-post a.itg-sponsored {
   color: #193984;
 }
+
+
+/* personalization page css */
+.personal-list{ padding-top: 50px; }
+.personal-list ul.personal-lists-col{ width:30%; float: left; margin:0 1.5%; list-style: none; }
+.personal-list ul li{ list-style:none; margin-bottom:15px; position: relative; overflow: hidden;margin-left: -40px; }
+.personal-list ul li:nth-child(1){ margin-left:20px; }
+.personal-list ul li h3{ padding-bottom:0px; }
+.personal-list ul li button.btn{background: #ebebec;color: #c1c1c1;border-radius: 100%;border: 0px;width: 40px;height: 40px; font-weight: bold; font-size: 18px; margin-right:10px;float: left;position: absolute;top: 50%; transform: translateY(-50%); opacity:0; z-index:-1;}
+.personal-list ul li:hover button.btn{ opacity:1; z-index:1; transition:all 0.3ms ease-in-out; -webkit-transition:all 0.3ms ease-in-out;  }
+.personal-list ul li span{ border:1px solid #ccc; float: right; width:calc(100% - 60px);padding: 9px;font-size: 15px;border-radius: 5px; }
