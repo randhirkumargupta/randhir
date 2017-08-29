@@ -145,6 +145,15 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['itg-akamai-load-my-account'] = array(
+    'title' => 'Akamai Load My Account',
+    'description' => 'Akamai Load My Account',
+    'page callback' => 'itg_akamai_load_my_account',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_akamai.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -607,7 +616,7 @@ function itg_akamai_node_delete($node) {
       );
 
       // Adding AMP urls also
-    $amp_types = itg_akamai_amp_cc_mapping();
+      $amp_types = itg_akamai_amp_cc_mapping();
 
       if (in_array($node->type, $amp_types)) {
         $url = itg_akamai_send_for_host_mapping_for_amp($url);
@@ -972,6 +981,7 @@ function itg_akamai_taxonomy_term_insert($term) {
  * Implements hook_init()
  */
 function itg_akamai_init() {
+
   if (!drupal_is_cli()) {
 // Adding TTL for some specified pages
     global $theme;
@@ -1012,7 +1022,6 @@ function itg_akamai_init() {
             break; */
         }
         // Code started for TTL setting for the custom/other URLs
-
         if (isset($parm) && !empty($parm)) {
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
           if (isset($ttl_for_custom_url) && !empty($ttl_for_custom_url)) {

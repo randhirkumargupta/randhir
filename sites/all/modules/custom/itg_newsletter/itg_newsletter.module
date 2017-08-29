@@ -471,6 +471,7 @@ function itg_newsletter_shedule_date_validate($form , &$form_state) {
  */
 function itg_newsletter_node_presave($node) {
   if ($node->type == 'newsletter') {
+    $node->field_op_flag[LANGUAGE_NONE][0]['value'] = $node->op;
     $template_title = itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
     $node->title = $template_title;
     $arg = arg();

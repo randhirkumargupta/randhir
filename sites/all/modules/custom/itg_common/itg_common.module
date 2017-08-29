@@ -19,6 +19,8 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
 function itg_common_init() {
   global $user, $base_url, $theme;
   $arg = arg();
+  
+
   //p(node_load(21014));
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
@@ -1380,3 +1382,19 @@ function _is_sponsored_category($tid) {
   }
   return $return;
 }
+
+function _remove_embded_tags_from_story_body($body_content) {
+  if(!empty($body_content)) {
+    return preg_replace('#\s*\[ITG:.+\]\s*#U', ' ', $body_content);
+  }
+  return "";
+}
+
+
+/**
+ * WatchDog helper function for debug
+ */
+function itg_watchdog($error_type , $message) {
+    watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
+}
+

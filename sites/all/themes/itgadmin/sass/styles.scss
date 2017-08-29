@@ -12278,10 +12278,10 @@ fieldset#edit-xmlsitemap{
         margin-left: 250px;
       }
     }
-  }
-  &.collapsed{
+    &.collapsed{
     a.fieldset-title{
-      background: url(../images/plus.png) right 10px center no-repeat;
+        background: url(../images/plus.png) right 10px center no-repeat;
+      }
     }
   }
 }
@@ -12291,21 +12291,56 @@ fieldset#edit-xmlsitemap{
   vertical-align: top;
   width: 100%;
   .main-top-wraper{
-    display: table;
+    display: inline-block;
     width: 100%;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    background: #ddd;
     > div{
-      display: table-cell;
-      vertical-align: middle;
+      float: left;
+      padding: 10px;
+      width: 10%;
+      &.search-checkbox-wraper{
+        width: 5%;
+      }
+      &.search-title-wraper{
+        width: 30%;
+      }
+      &.search-date-wraper{
+        width: 15%;
+      }
     }
   }
   .easyPaginateList{
-    display: table;
+    display: inline-block;
     width: 100%;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
     .ftp_video_radio{
-      display: table-row;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      & + .ftp_video_radio{
+        border-top: 1px solid #ddd;
+      }
       > div{
-        display: table-cell;
-        vertical-align: middle;
+        float: left;
+        width: 10%;
+        padding: 10px;
+        &.video-checkbox-wraper{
+          width: 5%;
+        }
+        &.show_video_title{
+          width: 30%;
+        }
+        &.file_size_date_time{
+          width: 15%;
+        }
+        a.play-video {
+          font-size: 14px;
+          color: #0c8bb1;
+        }
       }
     }
   }
@@ -12313,8 +12348,46 @@ fieldset#edit-xmlsitemap{
 .page-solr-unpublish-video{
   .view .view-filters .views-exposed-form .views-exposed-widget{
     width: 248px;
+    &.views-reset-button{
+      width: auto;
+    }
   }
   div#edit-bundle-name-wrapper, .views-exposed-widget.views-submit-button {
     display: none !important;
+  }
+}
+ 
+.view .view-filters [id*="views-exposed-form-bitrates-videos-page"]{
+  .views-exposed-form .views-submit-button{
+    .form-submit{
+      height: 28px;
+      margin-right: 10px;
+    }
+    a.button{
+      @extend .btn-small;
+    }
+  }
+}
+.page-node-add-event-backend, .node-type-event-backend{
+  .action-with-title #page-title{width: 400px;}
+}
+.itg-sidebar-form{
+  iframe#video_iframe{
+    border: none;
+    width: 100%;
+  }
+  .button.asso-filed-video{
+    margin-bottom: 10px;
+    margin-left: 60px;
+  }
+  .button.advance-serach{
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 60px;
+  }
+}
+[id*="views-exposed-form-searchimage-solr-unpublish-video"]{
+  table{
+    background-color: #fff;
   }
 }

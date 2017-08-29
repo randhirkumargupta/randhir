@@ -555,7 +555,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $str = 'hash:(' . $hashvalue . ')';
           $str_pub = 'sm_field_property:(' . VIDEO_PROPERTY . ')';
           $str_flag_publish = 'sm_field_video_used:(0)';
-          $str = $str . ' AND ' . $str_pub . ' AND ' . $str_flag_publish;
+          $str_flag_draft = '-sm_field_video_is_draft:(1)';
+          $str = $str . ' AND ' . $str_pub . ' AND ' . $str_flag_publish. ' AND ' . $str_flag_draft;
          
         if (isset($_GET['label']) && !empty($_GET['label'])) {
           $str_label = 'label:(' . $_GET['label'] . '*)';
