@@ -102,7 +102,7 @@ function userloginFB($uname, $uidget, $password) {
  */
 function userSignupFB($uname_social, $uid_social, $password) {
     $mail = $uid_social . "@facebook.com";
-    $username = $uname_social;    
+    $username = $uname_social;
     $first_name = "";
     $last_name = "";
     $mobile = "";
@@ -191,9 +191,9 @@ function userSignupFB($uname_social, $uid_social, $password) {
         drupal_set_message('Error:' . $e->getMessage(), 'error');
         $account = $e;
     }
-    if($account->uid)
-    return userloginFB($uname_social, $account->uid, $password);
-    else{
+    if ($account->uid)
+        return userloginFB($uname_social, $account->uid, $password);
+    else {
         return $account;
     }
 }
@@ -208,6 +208,9 @@ function localSignup($data) {
     $token_id = $data['token_id'];
     $local_user = user_load_by_name($user_id);
     if (!$local_user->uid) {
+        // We are allowed to register new users.
+        module_invoke_all('simplesamlphp_auth');
+        user_external_login_register($user_id, 'simplesamlphp_auth');
         $form_state = array();
         // check user_id is mail or mobile
         $url_info = "";
@@ -308,7 +311,7 @@ function localSignup($data) {
     return $local_account;
 }
 
-function localLogin($data){
+function localLogin($data) {
     global $user;
     $user_id = $username = $data['user_id'];
     $password = $password = $data['password'];
@@ -365,9 +368,9 @@ function localLogin($data){
     }
 }
 
-function localChangePass($get_data, $uid){
-     $uname = $user_id = $get_data['user_id'];
-    $pass  = $get_data['pass'];
+function localChangePass($get_data, $uid) {
+    $uname = $user_id = $get_data['user_id'];
+    $pass = $get_data['pass'];
     $pass2 = $get_data['pass2'];
     $msg = "";
     $data = array();
