@@ -30,28 +30,28 @@ $singalclass= "";
                 if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
                     if ($_GET['no_value'] == 'single') {
                         ?>
-                        <iframe  scrolling="no" id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="900" height="650"></iframe>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="900" height="650"></iframe>
 
                         <?php
                     }
                     else {
                         ?>
 
-                        <iframe  scrolling="no" id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video'; ?>" width="900" height="650"></iframe>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-unpublish-video'; ?>" width="900" height="650"></iframe>
                     <?php
                     }
                 }
                 else {
                     if ($_GET['no_value'] == 'single' ) {
                         ?>
-                        <iframe  scrolling="no" id="video_iframe" src="<?php echo base_path() . 'search-publish-video-radio'; ?>" width="900" height="650"></iframe>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-publish-video-radio'; ?>" width="900" height="650"></iframe>
 
                         <?php
                     }
                     else {
                         ?>
 
-                        <iframe  scrolling="no"  id="video_iframe" src="<?php echo base_path() . 'search-publish-video'; ?>" width="900" height="650"></iframe>
+                        <iframe id="video_iframe" src="<?php echo base_path() . 'search-publish-video'; ?>" width="900" height="650"></iframe>
                         <?php
                     }
                 }

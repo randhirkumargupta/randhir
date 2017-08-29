@@ -95,7 +95,7 @@ $video_data = "";
           beforeSend: function (xhr) {
               jQuery('#loader-data img').show().parent().addClass('loader_overlay');
           },
-          data: {'videoid': getvideo_id},
+          data: {'videoid': getvideo_id,'width':400,'height':260},
           success: function (data) {
 
               jQuery('#video_play_div').html(data);
