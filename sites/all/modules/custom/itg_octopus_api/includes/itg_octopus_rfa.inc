@@ -83,12 +83,12 @@ function itg_octopus_api_rfa_dashboard() {
   if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
     itg_octopus_notification_by_uid($_GET['onotify']);
   }
-  drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css');
+  drupal_add_css(drupal_get_path('module', 'itg_octopus_api') . '/css/itg_octopus_api.css', array('scope' => 'footer'));
 
   drupal_add_js("jQuery(document).ready(function(){
-jQuery('#itg-octopus-api-rfa-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
-jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
-});", array('type' => 'inline', 'scope' => 'footer'));
+    jQuery('#itg-octopus-api-rfa-form #edit-start-date-timeEntry-popup-1').attr('placeholder', 'Time');
+    jQuery('#itg-octopus-api-rfa-form #edit-end-date-timeEntry-popup-1').attr('placeholder', 'Time');
+    });", array('type' => 'inline', 'scope' => 'footer'));
 
   $query = db_select('itg_rundown', 'r')
       ->fields('r', array('rundown_id'));

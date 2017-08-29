@@ -584,7 +584,7 @@ function session_dependent_custom_form_validation(&$form, &$form_state) {
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
   if ($form['#form_id'] == 'views_form_section_wise_draggable_content_order_big_story_format') {
     if (!isset($_POST['views_bulk_operations'])) {
-      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', array('type' => 'file', 'scope' => 'footer'));
       $big_story_value = itg_big_story_get_extra_value();
       if (in_array('big_story_live_tv_active', $big_story_value)) {
         $yes_live = "checked";

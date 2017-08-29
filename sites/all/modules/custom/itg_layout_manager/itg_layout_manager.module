@@ -154,7 +154,7 @@ function itg_state_election() {
 }
 
 function make_graph() {
-  drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+  drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
    $section = arg(1);
   $state = arg(2);
   $data = itg_widget_get_graph_data_by_state($section, $state);
@@ -446,7 +446,7 @@ function itg_layout_manager_block_view($delta = '') {
         $settings['change_arg'] = $change_arg;
         $settings['base_url'] = $base_url;
         drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-        drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+        drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE, 'scope' => 'footer'));
       }
       /* end here */
 
