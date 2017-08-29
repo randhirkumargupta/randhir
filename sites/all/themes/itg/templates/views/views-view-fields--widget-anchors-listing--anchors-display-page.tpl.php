@@ -46,13 +46,15 @@
           <div class="social-icon">
             <ul>  
               <?php if (function_exists('itg_follow_unfollow_print')) { ?>
-              <p><?php print itg_follow_unfollow_print($item->nid); ?></p>
+               <?php print itg_follow_unfollow_print($item->nid); ?>
               <?php 
               }
 
               $fb_title = itg_common_only_text_string($item->node_title);
               $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
               $short_url = shorten_url($actual_link, 'goo.gl');
+              $share_desc = '';
+              $src = '';
 
               ?>
               <li>
