@@ -513,7 +513,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           }
         }
 
-        //$query->replaceParam("fq", '(' . $str . ')');
+        $query->replaceParam("fq", '(' . $str . ')');
  
       }
       else if ($_GET['q'] == 'search-publish-video' || $_GET['q'] == 'search-publish-video-radio') {
