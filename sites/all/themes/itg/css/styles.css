@@ -15015,10 +15015,20 @@ span.story-sponsor-powered-text::last-word {
 
 /* personalization page css */
 .personal-list{ padding-top: 50px; }
-.personal-list ul.personal-lists-col{ width:30%; float: left; margin:0 1.5%; list-style: none; }
-.personal-list ul li{ list-style:none; margin-bottom:15px; position: relative; overflow: hidden;margin-left: -40px; }
-.personal-list ul li:nth-child(1){ margin-left:20px; }
+.personal-list ul.personal-lists-col{ width:27%; float: left; margin:0 3%; list-style: none; }
+.personal-list ul li{ list-style:none; margin-bottom:15px; position: relative; overflow: hidden;margin-left: -50px; }
+.personal-list ul li:nth-child(1){ margin-left:0px; }
 .personal-list ul li h3{ padding-bottom:0px; }
-.personal-list ul li button.btn{background: #ebebec;color: #c1c1c1;border-radius: 100%;border: 0px;width: 40px;height: 40px; font-weight: bold; font-size: 18px; margin-right:10px;float: left;position: absolute;top: 50%; transform: translateY(-50%); opacity:0; z-index:-1;}
+.personal-list ul li button.btn{background: #ebebec;color: #c1c1c1;border-radius: 100%;border: 0px;width: 40px;height: 40px; font-weight: bold; font-size: 18px; margin-right:0px;float: left;position: absolute;top: 50%; transform: translateY(-50%); opacity:0; z-index:-1;}
 .personal-list ul li:hover button.btn{ opacity:1; z-index:1; transition:all 0.3ms ease-in-out; -webkit-transition:all 0.3ms ease-in-out;  }
-.personal-list ul li span{ border:1px solid #ccc; float: right; width:calc(100% - 60px);padding: 9px;font-size: 15px;border-radius: 5px; }
+.personal-list ul li span{ border:1px solid #ebebec; float: right; width:calc(100% - 50px);padding: 9px;font-size: 15px;border-radius: 5px; }
+.personal-list ul li:hover span{background:#ebebec;}
+/* social icon all list */
+
+.anchor-right .social-icon ul li{ padding:0px!important; border:1px solid #ccc;display: inline-block; }
+.anchor-right .social-icon ul li a{ font-size:14px!important; text-transform:capitalize; color:#8d8d8d!important;padding:3px 5px; display: inline-block; }
+.anchor-right .social-icon ul li.follow-activity-anchor{ background:#e4e4e4; border:1px solid #e4e4e4}
+.anchor-right .social-icon ul li a[title='Follow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px 5px; padding-left:28px;}
+.anchor-right .social-icon ul li a[title='Unfollow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px -19px; padding-left:28px;}
+.anchor-right .social-icon ul li a i{float: left;margin-right: 5px;font-size: 1.25rem;}
+.anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
