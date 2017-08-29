@@ -175,6 +175,14 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         }
       }  
     }
+    if (isset($fieldata[$fieldval['value']]->field_images['und'][0]['fid']) && !empty($fieldata[$fieldval['value']]->field_photo_small_image['und'][0]['fid'])) {
+       if(function_exists('itg_image_croping_get_orignal_image_url_fid')) {
+        $image_url = itg_image_croping_get_orignal_image_url_fid($fieldata[$fieldval['value']]->field_photo_small_image['und'][0]['fid']);
+        if(!empty($image_url)) {
+          $document->addField('sm_original_image_url', $image_url);
+        }
+      }  
+    }
       if (!empty($fieldata[$fieldval['value']]->field_images['und'][0]['alt'])) {
         $document->addField('sm_alttext', $fieldata[$fieldval['value']]->field_images['und'][0]['alt']);
       }
