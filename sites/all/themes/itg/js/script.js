@@ -1005,11 +1005,11 @@ jQuery(document).ready(function() {
         jQuery('.active > a > img').attr({'src': img_src});
     });
 
-    jQuery(window).bind({
-        'load': setSidebarHeight,
-        'scroll': setSidebarHeight,
-        'resize': setSidebarHeight
-    });
+//    jQuery(window).bind({
+//        'load': setSidebarHeight,
+//        'scroll': setSidebarHeight,
+//        'resize': setSidebarHeight
+//    });
 
     jQuery(window).load(function() {
         var sticky = jQuery('.region-vertical-menu');
@@ -1108,11 +1108,11 @@ jQuery(document).ready(function(e) {
         ]
     });
 });
-function setSidebarHeight() {
-    var sticky_sidebar = jQuery('.region-sidebar-second');
-    var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
-    sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
-}
+//function setSidebarHeight() {
+//    var sticky_sidebar = jQuery('.region-sidebar-second');
+//    var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
+//    sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
+//}
 
 
 jQuery(window).load(function() {

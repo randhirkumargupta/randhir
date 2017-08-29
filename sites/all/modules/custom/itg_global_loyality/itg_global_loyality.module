@@ -264,7 +264,7 @@ if ($type == 'fb_follow' || $type == 'twitter_follow' || $type == 'google_follow
     }
   }
   
-  if ($type == 'campaign ') {
+  if ($type == 'campaign') {
     $loyalty_type = 'campaign';
     if (!empty(variable_get('lrp_participation_in_campaign'))) {
       $loyalty_points = variable_get('lrp_participation_in_campaign');
