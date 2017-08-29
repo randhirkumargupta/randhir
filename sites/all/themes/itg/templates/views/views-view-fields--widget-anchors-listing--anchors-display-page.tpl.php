@@ -26,24 +26,41 @@
             print $image;
 
           } ?> 
-       <?php if (function_exists('itg_follow_unfollow_print')) { ?>    
-      <span class="attended-link">
-        <?php 
-            $followers = itg_get_followers($item->nid);
-            if(!empty($followers)) {
-              print itg_get_followers($item->nid) . " followers";
-            } 
-        ?>
-      </span>
-      <?php } ?>  
+   
+           
   </div>
   <div class="detail">
        <div class="anchor-right" >
             <h3><?php print $item->node_title; ?></h3>
+               <!-------  followers count -->
+                  <?php 
+                  if (function_exists('itg_get_followers')) { 
+                    $followers = itg_get_followers($item->nid);
+                        if(!empty($followers)) {
+                          print "<span class='followers-link'>" . $followers . " followers</span>"; 
+                        } 
+                    } 
+                  ?> 
+               <!-------  followers count -->
             <p><?php print mb_strimwidth(html_entity_decode(strip_tags($item->field_body[0]['rendered']['#markup'])), 0, 245, "..");  ?></p>
-            <?php if (function_exists('itg_follow_unfollow_print')) { ?>
-            <p><?php print itg_follow_unfollow_print($item->nid); ?></p>
-            <?php } ?>
+          <div class="social-icon">
+            <ul>  
+              <?php if (function_exists('itg_follow_unfollow_print')) { ?>
+              <p><?php print itg_follow_unfollow_print($item->nid); ?></p>
+              <?php 
+              }
+
+              $fb_title = itg_common_only_text_string($item->node_title);
+              $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+              $short_url = shorten_url($actual_link, 'goo.gl');
+
+              ?>
+              <li>
+              <a class="user-activity def-cur-pointer" rel="<?php print $item->nid; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print t('Twitter'); ?></a>
+            </li>
+          </ul>
+        </div>    
+
       </div>
   </div>
 </div>  

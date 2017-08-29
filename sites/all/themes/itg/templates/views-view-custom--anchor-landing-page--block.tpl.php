@@ -31,6 +31,17 @@ $uri = base64_encode($actual_link);
     <div class="anchor-right" >
       <?php echo $anchor['title']; ?>
       <div class="less-content">
+      <!-------  followers count -->
+      <?php 
+      if (function_exists('itg_get_followers')) { 
+      	$followers = itg_get_followers($nid);
+            if(!empty($followers)) {
+       			print "<span class='followers-link'>" . $followers . " followers</span>"; 
+  			} 
+      	} 
+      ?> 
+       <!-------  followers count -->
+
         <?php 
           echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, ".."); 
           $share_desc = '';
@@ -46,33 +57,19 @@ $uri = base64_encode($actual_link);
       <div class="social-icon">
         <ul>
         	<!----------------------- Follow / Unfollow ----------- -->
-
-	  <?php
-	    if ($user->uid > 0) {
-	     $follow_status = itg_get_front_activity_info($nid, '', $user->uid, $activity, '');
-
-	    if (!empty($follow_status['nid']) && $follow_status['status'] == '1') { ?>
-	        <li class="follow-activity-anchor"><a title = "Unfollow Anchor" href="javascript:" id="follow-anchor" data-rel="<?php print $nid; ?>" data-tag="anchor" data-activity="follow_anchor" data-ftitle="Follow" data-untitle="Unfollow" data-status="0" class="follow-activity"><?php print t('Unfollow'); ?></a></li>
-	    <?php } else { ?>
-	        <li class="follow-activity-anchor"><a title = "Follow the Anchor" href="javascript:" id="follow-anchor" data-rel="<?php print $nid; ?>" data-tag="anchor" data-activity="follow_anchor" data-ftitle="Follow" data-untitle="Unfollow" data-status="1" class="follow-activity"><?php print t('Follow'); ?></a></li>
-	    <?php          }
-	  } else {
-	    ?>
-	      <li class="mhide">
-	          <a title="follow anchor" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>">
-	            <?php print t('Follow'); ?>
-	          </a>
-	      </li>
-	  <?php } ?>
-
+        	
+        	<?php if (function_exists('itg_follow_unfollow_print')) { 
+                print itg_follow_unfollow_print($nid); 
+             } 
+             ?>
 
 	 <!----------------------- End Follow / Unfollow ----------- -->
 	 	                
           <li>
-            <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+            <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print t('Twitter'); ?></a>
           </li>
           <li>
-            <a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook"></i></a>
+            <a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook"></i><?php print t('Facebook'); ?></a>
           </li>
             
 
