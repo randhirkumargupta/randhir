@@ -132,7 +132,6 @@ class itg_auto_save {
           'fieldType' => $this->field_type_query['type'],
       );
     }
-
     return $this->field_type_result;
   }
 
@@ -188,6 +187,7 @@ class itg_auto_save {
    *   Serialized array contaning field collections ids.
    */
   public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {
+    
     $this->field_collection = array();
     $this->field_collection_data = array();
     // Unserialize fields collections ids for deletion of field collection.
@@ -204,10 +204,10 @@ class itg_auto_save {
 
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
-
+      
       // Filter empty array from list.
       $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
-
+      
       // Validate empty field collection
       $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);
       // Create entity of type field collection
@@ -455,6 +455,12 @@ class itg_auto_save {
             return TRUE;
           }
           break;
+          
+        case 'list_float':
+          if ($field_values[$value['fieldName']]['und'] > 0) {
+            return TRUE;
+          }
+          break;
       }
     }
 
@@ -600,6 +606,13 @@ class itg_auto_save {
             $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
           }
           break;
+          
+        case 'youtube':
+          $this->value = $inputs[$field['fieldName']]['und'];
+          if (isset($this->value) && !empty($this->value)) {
+            $node->{$field['fieldName']}['und'][0]['input'] = $this->value[0]['input'];
+          }
+          break;
       }
     }
 
@@ -646,6 +659,7 @@ class itg_auto_save {
    *   Field collection entity object.
    */
   public function itg_save_field_collection($data, $inputs, &$fc_item) {
+    
     foreach ($data as $field) {
       switch ($field['fieldType']) {
         case 'datestamp':
@@ -688,20 +702,29 @@ class itg_auto_save {
             $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;
           }
           break;
+          
         case 'jquery_colorpicker':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['jquery_colorpicker'] = $inputs[$field['fieldName']]['und'][0]['jquery_colorpicker'];
           break;
+        
         case 'file':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
           break;
+        
         case 'image':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
           break;
+        
         case 'list_integer':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
           break;
+        
+        case 'list_float':
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
+          break;
+        
         case 'entityreference':
           $this->value = $inputs[$field['fieldName']]['und'][0]['target_id'];
           $this->value = explode(')', end(explode("(", $this->value)));

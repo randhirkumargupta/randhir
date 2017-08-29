@@ -12031,6 +12031,9 @@ h1.about-us-heading + div p {
 .factoids-page .social-share ul li:first-child {
   vertical-align: baseline;
 }
+.factoids-page ul li {
+  padding-top: 8px;
+}
 
 .factoids-slider ul {
   background: #a00606;

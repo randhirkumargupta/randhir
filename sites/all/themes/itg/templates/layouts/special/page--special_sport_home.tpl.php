@@ -315,7 +315,8 @@ if ($theme != 'itgadmin') {
                                     </div>                    
                                 </div>
 
-                                <div class="col-md-12 col-sm-6 itg-layout-195">
+                                <div class="col-md-12 col-sm-6 itg-layout-195 mt-10">
+                                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Scorcard');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
@@ -334,7 +335,8 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                               <div class="row">
-                                <div class="col-md-12 col-sm-6 itg-layout-260">
+                                <div class="col-md-12 col-sm-6 itg-layout-260 mt-10">
+                                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Points tally');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">
@@ -361,7 +363,8 @@ if ($theme != 'itgadmin') {
                                 </div>
 
 
-                                <div class="col-md-12 col-sm-6 itg-layout-375">
+                                <div class="col-md-12 col-sm-6 itg-layout-375 mt-10">
+                                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Top performers');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'] . $widget_data['itg-block-8']['widget_display_name']; ?>">
@@ -389,7 +392,8 @@ if ($theme != 'itgadmin') {
                               </div>
                             
                               <div class="row">  
-                                <div class="col-md-12 col-sm-6 itg-layout-315">
+                                <div class="col-md-12 col-sm-6 itg-layout-315 mt-10">
+                                  <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Poll');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'] . $widget_data['itg-block-9']['widget_display_name']; ?>">
@@ -421,7 +425,8 @@ if ($theme != 'itgadmin') {
                                     </div>  
                                 </div>
 
-                                <div class="col-md-12 col-sm-6 itg-layout-340">
+                                <div class="col-md-12 col-sm-6 itg-layout-340 mt-10">
+                                  <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Tweets');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'] . $widget_data['itg-block-10']['widget_display_name']; ?>">
