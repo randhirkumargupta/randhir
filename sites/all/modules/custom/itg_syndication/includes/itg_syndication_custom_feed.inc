@@ -979,7 +979,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&
 function is_all_vars_valid($xml_pattern, $content_type) {
   drupal_add_js('jQuery(document).ready(function(){
             jQuery(".vertical-tabs").css("display","none");
-        });', 'inline');
+        });', array('type' => 'inline', 'scope' => 'footer'));
   // extract fields name from text string
   $var_array = get_vars_from_feed_pattern($xml_pattern);
   foreach ($var_array[1] as $field_name) {
