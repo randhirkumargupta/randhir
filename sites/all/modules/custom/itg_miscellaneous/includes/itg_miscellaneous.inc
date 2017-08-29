@@ -111,6 +111,23 @@ function itg_layout_list_delete() {
  * @return array $output
  */
 function itg_section_widgets_list_delete() {
+  
+//  $term = new stdClass();
+//  $name = 'shravantag29';
+//  $term->name = $name;
+//  $term->vid = 1;
+//  $term->parents[] = 0;
+//  taxonomy_term_save($term);
+//  return $term->tid;
+  
+//   $term = new stdClass();
+//   $name = 'shravantag500';
+//       $term->name = $name;
+//       $term->vid = 1;
+//       
+//       custom_taxonomy_term_save($term);
+//  
+//  exit;
   //$result = db_truncate('itg_section_widgets_list')->execute();
   //echo 'truncate';exit;
 }

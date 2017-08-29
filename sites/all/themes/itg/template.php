@@ -472,3 +472,23 @@ function itg_link($variables) {
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
+
+/**
+ * Implementation of hook_js_alter().
+ * {@inheritdoc}
+ * @param array $variables
+ * @return string
+ */
+function itg_js_alter(&$javascript) {
+    //itg theme JS alter
+    
+    $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
+    $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+}
+
