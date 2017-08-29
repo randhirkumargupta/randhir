@@ -89,7 +89,14 @@ global $user;
             <h3>Address</h3>
             <address>
               <span><?php echo $data['user_detail']['name']; ?></span>
-              <span><?php echo $data['user_detail']['mail']; ?></span>
+              <span><?php
+              if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) {
+              //echo 'Please update your email address';
+              } else {
+              echo $data['user_detail']['mail'];  
+              }
+              ?>
+              </span>
               <span><?php echo $data['user_detail']['address']; ?></span>
               <span><?php echo $data['user_detail']['pincode']; ?></span>
             </address>
@@ -99,8 +106,11 @@ global $user;
           <div id="change-address"><?php echo t('Change Address') ?></div>
         </div>
       </div>
-          
-  <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
+  <?php if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) { ?>        
+  <!-- <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div> -->
+  <?php } else {?>
+       <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
+  <?php } ?>     
   </div>
   <div class="itg-ads-block">
       <?php

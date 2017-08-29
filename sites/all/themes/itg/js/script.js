@@ -1020,7 +1020,7 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).ready(function() {
-    if (jQuery('div').hasClass('region-sidebar-second')) {
+    if (jQuery('section').hasClass('region-sidebar-second')) {
         var el = jQuery('.region-sidebar-second');
         var el_height = el.outerHeight(true);
         var el_offset = el.offset();

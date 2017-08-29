@@ -207,6 +207,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
               '#title' => $val_txt_option,
               '#type' => $answer_type,
               '#size' => 30,
+              '#attributes' => array('placeholder' => t('Enter text')),
           );
           
           $form['answer_option_name' . $num . '_' . $txt_num] = array(
