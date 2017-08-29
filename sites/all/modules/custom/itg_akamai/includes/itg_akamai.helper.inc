@@ -22,11 +22,6 @@ function itg_akamai_load_my_account() {
       </ul>';
     drupal_exit();
   }
-  else {
-    $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    print '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click itg-akamai-processed"><i class="fa fa-user"></i></a>';
-    drupal_exit();
-  }
 }
 
 /**
