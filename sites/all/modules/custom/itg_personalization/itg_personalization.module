@@ -988,14 +988,53 @@ function itg_cron_mail_for_following() {
   if (function_exists('mongodb')) {
     $con = mongodb();
     // check connection
-    if ($con && !empty($nid)) {
-      $ntype = 'anchor';
+    if ($con) {
       $people = $con->front_user_activity;
-      //db.getCollection('front_user_activity').find({ ntype: { $in: [ 'anchor', 'author' ] } } )
+      $cursor = $people->find(array("ntype" => array('$in' => array('anchor', 'author'))
+      ));
 
-      return $count = $people->find(array("nid" => $nid, "ntype" => $ntype, 'status' => '1'))->count();
+      foreach ($cursor as $document) {
+        $options[] = array('uid' => $document['uid'], 'nid' => $document['nid']);
+      }
+      return $options;
     } //close connection
-
   }
 }
 
+/**
+ * Implements callback function for 'itg_ugc_send_follow_story_content_mail'
+ * @param type $node
+ */
+function itg_personalization_send_follow_mail($node) {
+      module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+      $get_user_id = itg_cron_mail_for_following();
+
+      if (!empty($get_user_id)) {
+
+        foreach ($get_user_id as $follow_user) {
+          $node_type = $obj = (object) array('type' => 'story');
+          global $base_url;
+          $uname = user_load($follow_user['uid']);
+          $story_url = l($node->title, FRONT_URL . '/node/' . $follow_user['nid'], array('absolute' => TRUE));
+
+          if (function_exists('itg_mail_templates_get_mailcontent')) {
+            $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+            $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+            $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+            $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+            $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+          }
+          
+          $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+          $params = array(
+            'body' => $mail_content,
+            'subject' => $mail_subject,
+          );
+
+          $to = 'arunmishra.coder@gmail.com';//itg_get_user_email_by_id($follow_user);
+          if (!empty($to)) {
+            $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+          }
+        }
+      }
+}
