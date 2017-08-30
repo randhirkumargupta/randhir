@@ -523,11 +523,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Content: Product Count (field_lrp_product_count) */
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['id'] = 'field_lrp_product_count_value';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['table'] = 'field_data_field_lrp_product_count';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['field'] = 'field_lrp_product_count_value';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['value']['value'] = '0';
   /* Filter criterion: Date: Date (node) */
   $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
   $handler->display->display_options['filters']['date_filter']['table'] = 'node';
@@ -537,6 +532,13 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
   $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
     'field_data_field_story_expiry_date.field_story_expiry_date_value' => 'field_data_field_story_expiry_date.field_story_expiry_date_value',
+  );
+  /* Filter criterion: Content: Completed(Sold out) (field_lrp_completed) */
+  $handler->display->display_options['filters']['field_lrp_completed_value']['id'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['table'] = 'field_data_field_lrp_completed';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['field'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
+    'Sold out' => 'Sold out',
   );
   $handler->display->display_options['path'] = 'admin/loyalty/lrp-sold-items';
   $export['lrp_manage_items'] = $view;
