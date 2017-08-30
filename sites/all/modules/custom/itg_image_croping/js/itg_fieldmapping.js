@@ -311,7 +311,8 @@
         var all_form_data = form_value.split('&');
         var full_cap = all_form_data[1];
         var cap = full_cap.split('=');
-        var caption_value = cap[1];
+        var caption_value = cap[1].replace(/\+/g, ' ');
+        //var caption_value = cap[1];
     // end of the code        
     if (flg == 0) {
       showloader();
@@ -344,7 +345,7 @@
 
             // end of the code  
             var imagename = jQuery('#imcurl').val();
-            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt= "" caption="' + caption_value + '" />';
+            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt= ""/><div class="body_caption">'+caption_value+'</div>';
             parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 
             parent.jQuery.colorbox.close(); 
