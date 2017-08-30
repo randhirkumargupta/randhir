@@ -10,11 +10,9 @@ global $base_url, $user;
   class="search-form"
   action-xhr="#"
   target="_top">
-  <div class="ampstart-input inline-block relative mb3">
     <input type="search" 
       placeholder="Search..."
       name="search">
-  </div>
   <input type="submit" name="submitlogin"
     value="OK"
     class="ampstart-btn caps">

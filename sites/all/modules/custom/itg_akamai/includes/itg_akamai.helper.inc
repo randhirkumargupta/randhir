@@ -21,7 +21,8 @@ function itg_akamai_load_my_account() {
       <li class="menu__item is-leaf first leaf"><a href="' . $base_url . '/personalization/saved-items" class="menu__link itg-akamai-processed">Personalization</a></li>
       <li class="menu__item is-leaf last leaf" id="myhref"><a href="javascript:void(0)" id="myhref" class="menu__link itg-akamai-processed">Log Out</a></li>
       </ul>';
-     drupal_add_js("jQuery('body').on('click', '#myhref', function () {
+     drupal_add_js("jQuery(document).ready(function () {
+       jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
                     url: '".$base_url."/itguserlogout',
@@ -33,6 +34,7 @@ function itg_akamai_load_my_account() {
                         }, 20000);
                     }
                 });
+            });
             });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
     drupal_exit();
