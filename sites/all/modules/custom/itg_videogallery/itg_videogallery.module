@@ -2539,6 +2539,15 @@ function itg_videogallery_dm_embed() {
  */
 function itg_videogallery_dailymotion_video_play() {
   $video_id = $_POST['videoid'];
+  $width = 760;
+  $height = 460;
+  if(isset($_POST['width']) && !empty($_POST['width'])) {
+   $width = $_POST['width'];
+  }
+   if(isset($_POST['height']) && !empty($_POST['height'])) {
+   $height = $_POST['height'];
+  }
+   
   $api = itg_videogallery_dailymotion_api();
   $thumb_url = $api->get(
       '/video/' . $video_id, array('fields' => array('embed_url'))
@@ -2547,7 +2556,7 @@ function itg_videogallery_dailymotion_video_play() {
   if ($thumb_url['embed_url']) {
     $embed_id = end(explode('/', $thumb_url['embed_url']));
   }
-  print  theme('itg_videogallery_dailymotion_video_play', array('video_id' => $embed_id));
+  print  theme('itg_videogallery_dailymotion_video_play', array('video_id' => $embed_id, 'width'=>$width , 'height'=>$height ));
 }
 
 /**
