@@ -2056,26 +2056,31 @@ img {
   min-height: 195px;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .sport-home-layout-page .itg-layout-260 .droppable {
   min-height: 260px;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .sport-home-layout-page .itg-layout-375 .droppable {
   min-height: 375px;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .sport-home-layout-page .itg-layout-315 .droppable {
   min-height: 315px;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .sport-home-layout-page .itg-layout-340 .droppable {
   min-height: 340px;
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
 }
 .sport-home-layout-page .section_wise_order-sport-column .trending-videos {

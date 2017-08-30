@@ -14,7 +14,7 @@ function itg_layout_admin() {
     $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin');
   }
   if ($_GET['template_name'] == 'page--front') {
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'header'));
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
   }
   if (arg(2) == 'preview') {
     $data['preview'] = 'yes';

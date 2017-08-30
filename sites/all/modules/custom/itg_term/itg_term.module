@@ -191,7 +191,7 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
     case 'taxonomy_form_term':
-      drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
+      drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", array('type' => 'inline', 'scope' => 'footer'));
       $form['#after_build'][] = 'itg_term_after_build';
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-listing') {
         unset($form['actions']['delete']);
@@ -423,14 +423,14 @@ function itg_term_views_pre_render(&$view) {
     $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
 
 
-    drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});", 'inline');
+    drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon').hide();});", array('type' => 'inline', 'scope' => 'footer'));
     $view->attachment_before = $header_content_term;
   }
 
   if (isset($view->name) && $view->name == "tags_listing") {
-    drupal_add_js(drupal_get_path('module', 'itg_term') . '/jquery.tabletoCSV.js', array('type' => 'file', 'scope' => 'header'));
-    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/FileSaver.js', array('type' => 'file', 'scope' => 'header', 'weight' => -99));
-    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/tableexport-2.1.js', array('type' => 'file', 'scope' => 'header', 'weight' => -98));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/jquery.tabletoCSV.js', array('type' => 'file', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/FileSaver.js', array('type' => 'file', 'scope' => 'footer', 'weight' => -99));
+    drupal_add_js(drupal_get_path('module', 'itg_term') . '/js/tableexport-2.1.js', array('type' => 'file', 'scope' => 'footer', 'weight' => -98));
     // Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add');
