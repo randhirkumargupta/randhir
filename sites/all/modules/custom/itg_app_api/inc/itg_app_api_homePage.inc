@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions for homePgae API 
  */
 
 /**
@@ -190,10 +190,7 @@ function homePageJsonTopstories() {
     }
     //json tag writing
     if ($type == "story") {
-      // news list
-      //      $n_photo = getPhotolist($nid);
-      //      $n_video = getVideolist($nid);
-      //      $n_polls = getPolllist($node);
+    
       $n_rating = getRating($node);
       $n_magazine = array();
 
@@ -752,9 +749,7 @@ function getMagazineList() {
   }
 
 
-  $magazine['issue'] = $issue;
-
-  //echo "<pre>magazine";  print_r($magazine);echo "</pre>";exit();
+  $magazine['issue'] = $issue; 
 
   return $magazine;
 }

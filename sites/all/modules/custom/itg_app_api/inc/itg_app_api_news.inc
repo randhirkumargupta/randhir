@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions for news API
  */
 
 /**
  * main function for generate videoCategoryPage array
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
@@ -58,7 +58,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
 /**
  * function for generate videoCategoryPage list
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function generateNewsCategoryList($tid, $pageno) {
@@ -274,7 +274,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
 /**
  * function for generate getPhotolist array
- *
+ * @pram int $nid
  * @return array
  */
 function getPhotolist($nid) {
@@ -307,7 +307,7 @@ function getPhotolist($nid) {
 
 /**
  * function for generate getVideolist array
- *
+ * @pram int $nid
  * @return array
  */
 function getVideolist($nid) {
@@ -445,9 +445,9 @@ function getVideolist($nid) {
 
 /**
  * function for generate getViewCount
- * @pram $nid
+ * @pram int $nid
  *
- * @return $nv_count
+ * @return int $nv_count
  */
 function getNodeViewCount($nid) {
   //$nid = 443;
@@ -464,8 +464,8 @@ function getNodeViewCount($nid) {
 
 /*
  * function to count the share of a node
- * @param $nid
- * @return $share_count
+ * @param int $nid
+ * @return int $share_count
  */
 function getNodeShareCount($nid) {
 
@@ -482,8 +482,8 @@ function getNodeShareCount($nid) {
 
 /*
  * Count the node share, comment , view etc
- * @args $nid
- * $type 'total' will return the count of it
+ * @args int $nid, $total
+ * 'total' will return the count of it
  * @return an Associated array with count all these values.
  */
 function analytics_node_data($nid, $total) {

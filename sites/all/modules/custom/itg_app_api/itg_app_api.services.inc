@@ -1,4 +1,13 @@
 <?php
+/**
+ * @file
+ * INC file for APP API Schemes Services.
+ * Contains the resource declarations for the service APIs
+ * and other commons functions/hooks. if necessary
+ */
+/**
+ * Function for APP API resource declaration. 
+ */
 function itg_app_api_resource() {
 
   /**
@@ -721,14 +730,9 @@ function itg_app_api_resource() {
  */
 
 /**
- * [itg_app_api_newslist] definition.
- * Returns the information about a itg_app_api_newslist.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for newslist API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_newslist($token) {
   //valid tid & pageno
@@ -767,14 +771,9 @@ function itg_app_api_newslist($token) {
 }
 
 /**
- * [itg_app_api_programlist] definition.
- * Returns the information about a itg_app_api_programlist.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for programlist API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_programlist($token) {
   //valid tid & pageno
@@ -807,14 +806,9 @@ function itg_app_api_programlist($token) {
 }
 
 /**
- * [itg_app_api_videolist] definition.
- * Returns the information about a itg_app_api_videolist.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for videolist API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_videolist($token) {
   //valid tid & pageno
@@ -847,14 +841,9 @@ function itg_app_api_videolist($token) {
 }
 
 /**
- * [itg_app_api_photodetail] definition.
- * Returns the information about a itg_app_api_photodetail.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for photodetail API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_photodetail($token) {
   //valid id
@@ -883,14 +872,9 @@ function itg_app_api_photodetail($token) {
 }
 
 /**
- * [itg_app_api_photolist] definition.
- * Returns the information about a itg_app_api_photolist.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for photolist API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_photolist($token) {
   $id = $_GET['id'];
@@ -923,14 +907,9 @@ function itg_app_api_photolist($token) {
 }
 
 /**
- * [itg_app_api_server_error_master] definition.
- * Returns the information about a itg_app_api_server_error_master.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for server_error_master API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_server_error_master($token) {
   $redis_key = "itgd_rapid_server_error_master_json";
@@ -951,14 +930,9 @@ function itg_app_api_server_error_master($token) {
 }
 
 /**
- * [itg_app_api_master_config] definition.
- * Returns the information about a config_update_status.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for master_config API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_master_config($token) {
   $redis_key = "itgd_rapid_master_config_json";
@@ -979,14 +953,9 @@ function itg_app_api_master_config($token) {
 }
 
 /**
- * [itg_app_api_config_update_status] definition.
- * Returns the information about a config_update_status.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for config_update_status API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_config_update_status($token) {
   $redis_key = "itgd_rapid_config_update_status_json";
@@ -1008,14 +977,9 @@ function itg_app_api_config_update_status($token) {
 }
 
 /**
- * [itg_app_api_hamburger_menu] definition.
- * Returns the information about a hamburger_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for hamburger_menu API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_hamburger_menu($token) {
   $redis_key = "itgd_rapid_hamburger_menu_json";
@@ -1037,14 +1001,9 @@ function itg_app_api_hamburger_menu($token) {
 }
 
 /**
- * [itg_app_api_horizontal_menu] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for horizontal_menu API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_horizontal_menu($token) {
   $redis_key = "itgd_rapid_horizontal_menu_json";
@@ -1068,14 +1027,9 @@ function itg_app_api_horizontal_menu($token) {
 // sprint2 function start
 
 /**
- * [itg_app_api_photostorydetail] definition.
- * Returns the information about a itg_app_api_photostorydetail.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for _photostorydetail API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_photostorydetail($token) {
   //valid id
@@ -1106,14 +1060,9 @@ function itg_app_api_photostorydetail($token) {
 }
 
 /**
- * [itg_app_api_program_category_list] definition.
- * Returns the information about a itg_app_api_program_category_list.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for program_category_list API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_program_category_list($token) {
 
@@ -1137,14 +1086,9 @@ function itg_app_api_program_category_list($token) {
 }
 
 /**
- * [itg_app_api_ad_config_json] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for ad_config_json API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_ad_config_json($token) {
 
@@ -1166,14 +1110,9 @@ function itg_app_api_ad_config_json($token) {
 }
 
 /**
- * [itg_app_api_livetv_channellist_json] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for livetv_channellist_json API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_livetv_channellist_json($token) {
 
@@ -1197,14 +1136,9 @@ function itg_app_api_livetv_channellist_json($token) {
 }
 
 /**
- * [itg_app_api_livetv_json] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for livetv_json API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_livetv_json($token) {
 
@@ -1227,14 +1161,9 @@ function itg_app_api_livetv_json($token) {
 }
 
 /**
- * [itg_app_api_otherapps_ios_json] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for otherapps_ios_json API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_otherapps_ios_json($token) {
 
@@ -1257,14 +1186,9 @@ function itg_app_api_otherapps_ios_json($token) {
 }
 
 /**
- * [itg_app_api_otherapps_android_json] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for otherapps_android_json API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_otherapps_android_json($token) {
 
@@ -1289,14 +1213,9 @@ function itg_app_api_otherapps_android_json($token) {
 // magazine section start
 
 /**
- * [itg_app_api_magazine_edition] definition.
- * Returns the information about a itg_app_api_magazine_edition.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for magazine_edition API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_magazine_edition($token) {
   $id = $_GET['issueid'];
@@ -1330,14 +1249,9 @@ function itg_app_api_magazine_edition($token) {
 }
 
 /**
- * [itg_app_api_magazine_coverstories] definition.
- * Returns the information about a itg_app_api_magazine_coverstories.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for magazine_coverstories API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_magazine_coverstories($token) {
 
@@ -1362,27 +1276,15 @@ function itg_app_api_magazine_coverstories($token) {
 }
 
 /**
- * [itg_app_api_magazine_editionlist] definition.
- * Returns the information about a itg_app_api_magazine_editionlist.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for magazine_editionlist API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_magazine_editionlist($token) {
   $sdate = $_GET['sdate'];
   $tdate = $_GET['tdate'];
   $cpageno = $_GET['cpageno'];
-  //echo $sdate; echo "<br>"; echo $tdate; exit();
-  //valid tid & pageno
-  //    if (!is_numeric($sdate)) {
-  //        $sdate = 0;
-  //    }
-  //    if (!is_numeric($tdate)) {
-  //        $tdate = 0;
-  //    }
+
   if (!is_numeric($cpageno)) {
     $cpageno = 0;
   }
@@ -1412,14 +1314,9 @@ function itg_app_api_magazine_editionlist($token) {
 // magazine section end
 
 /**
- * [itg_app_api_storydetail] definition.
- * Returns the information about a horizontal_menu.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for storydetail API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
 function itg_app_api_storydetail($token) {
   //valid id
@@ -1451,16 +1348,10 @@ function itg_app_api_storydetail($token) {
 }
 
 /**
- * [itg_app_api_homePage] definition.
- * Returns the information about a itg_app_api_homePage.
- *
- * @param $nid
- *   The nid of the housing_scheme node.
- *
- * @return array
- * 	The node processed information array.
+ * Call back function for homePage API 
+ * @pram $_GET
+ * @return array - The processed information array.
  */
-//return services_error(t('Node type cannot be changed'), 406);
 function itg_app_api_homePage($token) {
 
   $redis_key = "itg_app_api_homePage";

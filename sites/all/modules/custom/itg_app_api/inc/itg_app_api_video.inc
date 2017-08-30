@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions video API
  */
 
 /**
  * main function for generate videoCategoryPage array
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
@@ -54,7 +54,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
 /**
  * function for generate videoCategoryPage list
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function generateVideoCategoryList($tid, $pageno) {
@@ -188,18 +188,7 @@ function generateVideoCategoryList($tid, $pageno) {
       // return all the video details
       $source_type = $resvalue['field_story_source_type_value'];
       $videotag = video_detail_formats($resvalue['nid'], $source_type);
-      //      print_r($videotag);
-      //      exit();
-      //$video_formats = all_video_format($video_formats);
-      // $dm_video_id = fid_videoid($daily_motion_fid);
-      //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-      //      $video_path_mp4 = $video_formats['video_path_mp4'];
-      //      if(!$video_path_mp4){
-      //          $video_path_mp4 = $video_path_info['video_path_mp4'];
-      //      }
-      //$filesize = $video_path_info['filesize'];
-      //$stream_h264_hd_url = $video_formats['stream_h264_hd_url'];
-      //video url end
+      
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
 
@@ -225,7 +214,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['v_short_desc'] = "$field_story_kicker_text_value";
       $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
-      //if($video_path_mp4){
+      
       // migrated video
       if (!empty($videotag['dailymotion'])) {
         $photo_list_array[$listcount]['v_is_default_player'] = "1";
@@ -265,8 +254,9 @@ function generateVideoCategoryList($tid, $pageno) {
 }
 
 /*
- * fid to videoid
- *
+ * function for get video url query
+ * @pram int $video_fid
+ * @return string $qry
  */
 function fid_videoid($video_fid) {
 
@@ -276,7 +266,7 @@ function fid_videoid($video_fid) {
 
 /**
  * main function for generate programCategoryPage array
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
@@ -328,7 +318,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
 /**
  * function for  generateProgramCategoryList list
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function generateProgramCategoryList($tid, $pageno) {
@@ -522,7 +512,7 @@ function generateProgramCategoryList($tid, $pageno) {
 
 /**
  * function for  programCategoryListlPageRerourceValue
- *
+ * @pram string $token
  * @return array
  */
 function programCategoryListlPageRerourceValue($token) {
@@ -566,14 +556,14 @@ function programCategoryListlPageRerourceValue($token) {
 
 /**
  * function for  generateProgramSectionList
- *
+ * @pram array $program_section_list
  * @return array
  */
-function generateProgramSectionList($Program_section_list) {
+function generateProgramSectionList($program_section_list) {
   $data = array();
   $output_ar = array();
   $listcount = 0;
-  foreach ($Program_section_list as $key => $value) {
+  foreach ($program_section_list as $key => $value) {
     $value = (int) $value;
     $term = taxonomy_term_load($value);
     $update_time = getLatestNodeTime($term->tid);
@@ -602,6 +592,12 @@ function generateProgramSectionList($Program_section_list) {
 
   return $output_ar;
 }
+
+/**
+ * function for  getLatestNodeTime
+ * @pram int $tid
+ * @return array
+ */
 
 function getLatestNodeTime($tid) {
 

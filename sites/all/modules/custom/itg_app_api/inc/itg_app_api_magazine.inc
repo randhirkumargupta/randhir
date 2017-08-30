@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions for magazine API
  */
 
 /**
@@ -57,7 +57,7 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
 }
 
 /**
- * function for generate magazineEditionPageRerourceValueList xml feed
+ * function for generate magazineEditionPageRerourceValueList array
  *
  * @return array
  */

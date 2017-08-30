@@ -1,8 +1,11 @@
 <?php
+/**
+ * Inc file contains the functions story API
+ */
 
 /**
  * main function for generate StoryDetailPageRerourceValue array
- *
+ * @pram int $id
  * @return array
  */
 function StoryDetailPageRerourceValue($id) {
@@ -31,7 +34,7 @@ function StoryDetailPageRerourceValue($id) {
 
 /**
  * function for generate generateStoryDeatilList JSON
- *
+ * @pram int $id
  * @return array
  */
 function generateStoryDeatilList($id) {
@@ -131,7 +134,7 @@ function generateStoryDeatilList($id) {
 
 /**
  * function for get story tag
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -154,7 +157,7 @@ function getTag($node) {
 
 /**
  * function for get story highlight
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -174,7 +177,7 @@ function getHighlight($node) {
 
 /**
  * function for get story rating
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -190,7 +193,7 @@ function getRating($node) {
 
 /**
  * function for get story cast name
- * @pram $nid
+ * @pram int $nid
  *
  * @return array
  */
@@ -205,7 +208,7 @@ function getCastName($nid) {
 
 /**
  * function for story body html
- * @pram $node
+ * @pram object $node
  *
  * @return string
  */
@@ -263,7 +266,7 @@ function story_body_with_html($node) {
 
 /**
  * function for get tech node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -309,7 +312,7 @@ function getStoryTechs($node) {
 
 /**
  * function for get build listicle node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -343,7 +346,7 @@ function buildListicleNode($node) {
 
 /**
  * function for get build factoid node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -366,7 +369,7 @@ function buildFactoidNode($node) {
 
 /**
  * function for get build buzz node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -396,7 +399,7 @@ function buildBuzzNode($node) {
 
 /**
  * function for get build buzz node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -419,7 +422,7 @@ function buildExpertchunkNode($node) {
 
 /**
  * function for  getTechPros
- * @pram $content_org
+ * @pram string $content_org
  *
  * @return array
  */
@@ -443,7 +446,7 @@ function getTechPros($content_org) {
 
 /**
  * function for  getTechCons
- * @pram $content_org
+ * @pram string $content_org
  *
  * @return array
  */

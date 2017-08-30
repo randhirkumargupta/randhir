@@ -2,9 +2,13 @@
 
 /**
  * @file
- * Module file for Housing Schemes Services.
+ * Module file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
+ */
+
+/**
+ * Implements hook_init(). 
  */
 function itg_app_api_init() {
   module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
@@ -299,8 +303,8 @@ function server_error_master_json() {
 /**
  * function to getCommentsCount of node
  *
- * @return $count
- * @pram $nid
+ * @return int $count
+ * @pram int $nid
  */
 function getCommentsCount($nid) {
   // variable declation
@@ -312,10 +316,9 @@ function getCommentsCount($nid) {
 }
 
 /**
- * comman function for return node published date
- * @arg $nid
- *
- * @return published date
+ * function for return node published date
+ * @arg int $nid 
+ * @return datetime $published_datetime
  */
 function getNodePublishedDate($nid) {
   $query = db_select('workbench_moderation_node_history', 'nh');
@@ -456,7 +459,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
 /*
  * Function to get Story type on behalf of Node nid i.e. photostory or normal story
  * @param int $nid
- * @return String 
+ * @return String $type
  */
 function getStoryType($nid) {
   $query = db_select('node', 'n');

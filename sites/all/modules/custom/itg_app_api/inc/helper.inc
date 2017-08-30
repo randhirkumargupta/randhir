@@ -1,6 +1,6 @@
 <?php
 /*
- * Set the Firebase API Configuration 
+ * INC file for Set the Firebase API Configuration & Static variable declaratrion
  * 
  */
 
