@@ -426,7 +426,10 @@ function itg_loyalty_reward_points_expire_notification_callback() {
   if (!empty($itg_result)) {
     foreach ($itg_result as $value) {
       $data['remaining_point'] = $value->remaining_points;
-      $data['name'] = $value->name;
+      if(function_exists('itg_custom_get_user_details')) {
+        $detail = itg_custom_get_user_details($value->uid);
+      }
+      $data['name'] = $detail['fname'].''.$detail['lname'];
       $data['expiry_date'] = $value->expiry_date;
       
       if ((strpos($value->mail, '@twitter.com') !== false || strpos($value->mail, '@facebook.com') !== false)) {
