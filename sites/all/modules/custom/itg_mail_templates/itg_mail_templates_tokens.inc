@@ -81,6 +81,11 @@ function itg_mail_templates_tokenstable() {
                 <td>A token that will be used for ITG Loyalty and Reward Expiry.</td>
               </tr>
               <tr>
+                <td>ITG Loyalty and Reward property</td>
+                <td>[itg_mail_token:itg_loyalty_property]</td>
+                <td>A token that will be used for ITG Loyalty and Reward property.</td>
+              </tr>
+              <tr>
                 <td colspan="3"><b>Tokens For Node</b></td>
               </tr>
               <tr>

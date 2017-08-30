@@ -395,6 +395,11 @@ function itg_loyalty_reward_cronapi($op, $job = NULL) {
     'description' => 'Send mail before 24 hours for point expiration (Loyalty)',
     'callback' => 'itg_loyalty_reward_points_expire_notification_callback',
   );
+  
+  $items['itg_loyalty_reward_point_expiry_status'] = array(
+    'description' => 'update status on central db for point expiration (Loyalty)',
+    'callback' => 'itg_loyalty_reward_points_expire_status_callback',
+  );
 
   return $items;
 }
