@@ -508,6 +508,18 @@ function itg_image_croping_get_image_tags_by_fid($fid) {
   return $result;
 }
 
+
+/**
+ * This function use for get image tag by fid
+ * $resuly array
+ */
+function itg_image_croping_get_orignal_image_url_fid($fid) {
+  $query = db_select('itg_all_orignal_image', 'iaoi')
+          ->fields('iaoi',array('url'))->condition('fid', $fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
 /**
  * This function use for get the all tags on image
  */
@@ -713,8 +725,19 @@ function itg_image_saveimage_info() {
 
   $imageino = $_POST['form_value'];
   parse_str($imageino, $output_info);
-
+  $orignal_image_id = $_POST['original_img_id']; 
+  $filedata = file_load($orignal_image_id);
+  $file_url = file_create_url($filedata->uri);
   if (!empty($output_info ['fids'])) {
+    if(!empty($orignal_image_id)) {
+      $fid_first = explode('#', $output_info['fids'][0]);
+     db_insert('itg_all_orignal_image')->fields(array(
+            'fid' => $fid_first[0],
+            'orignal_fid' => $orignal_image_id,
+            'url' => $file_url
+          ))->execute();
+      
+      }
     for ($i = 0; $i < count($output_info['fids']); $i ++) {
       $fid = explode('#', $output_info['fids'][$i]);
       $syndicatin_name = 'syndicate_' . $fid[0];
@@ -728,6 +751,7 @@ function itg_image_saveimage_info() {
       if ($image_date == "") {
         $image_date = date('Y-m-d');
       }
+      
       $inserted_data = db_insert('image_info')->fields(array(
             'fid' => $fid[0],
             'image_courtesy' => $output_info ['courtesy'][$i],
