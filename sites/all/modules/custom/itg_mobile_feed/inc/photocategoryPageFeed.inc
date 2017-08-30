@@ -6,8 +6,7 @@
 
 /**
  * main function for generate photoCategoryPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function photocategoryPageFeed() {
   $output = "";
@@ -66,8 +65,7 @@ function photocategoryPageFeed() {
 
 /**
  * function for generate photoCategoryPage xml feed
- *
- * @return array
+ * @return array $data
  */
 function generatePhotoCategoryPage($tid) {
   //check into redis

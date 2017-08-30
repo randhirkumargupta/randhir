@@ -6,8 +6,7 @@
 
 /**
  * main function for generate photoDetailPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function photoDetailPageFeed() {
   $output = "";
@@ -23,8 +22,7 @@ function photoDetailPageFeed() {
 
 /**
  * function for generate generatePhotoDetailPageFeed xml feed file
- *
- * @return array
+ * @return string $return_flag
  */
 function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
   $imgtag = "";
@@ -114,9 +112,8 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
 }
 
 /**
- * function for generate getGalleryImgTag xml tag
- *
- * @return array
+ * function for generate getGalleryImgTag xml tag 
+ * @return string $output
  */
 function getGalleryImgTag($galleryimg) {
   $output = "";

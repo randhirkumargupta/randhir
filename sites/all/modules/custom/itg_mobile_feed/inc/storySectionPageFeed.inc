@@ -6,8 +6,7 @@
 
 /**
  * main function for generate storySectionPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function storySectionPageFeed() {
   //check into redis

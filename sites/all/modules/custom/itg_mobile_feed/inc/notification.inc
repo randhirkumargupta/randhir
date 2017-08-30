@@ -1,6 +1,11 @@
 <?php
-/*
+/**
+ * Inc file contains global configurations
+ */
+
+/**
  * Common function to define the some Primary values
+ * @return array $config
  */
 function get_notification_config() {
   $config = array();
@@ -12,14 +17,18 @@ function get_notification_config() {
   return $config;
 }
 
-//notification?website=aajtak&contentid=11&title=Test Aaj Tak&kicker=Test Kicker&contenttype=test&app_id=12&device=232
+/**
+ * Common function to build notification page 
+ */
 function notification_page() {
   $params = drupal_get_query_parameters();
   generate_notification_all($params);
 }
 
-/*  Create notification file based on args
+/**  Create notification file based on args
  *  And Write data with in the file,
+ * @pram array $params
+ * @return string $return_flag
  */
 function generate_notification_all($params) {
 
@@ -109,7 +118,7 @@ function generate_notification_all($params) {
   die();
 }
 
-/* Common Function to get weburl 
+/** Common Function to get weburl 
  * args nid
  * return string weburl
  */
@@ -120,8 +129,9 @@ function get_web_url($nid) {
   return $weburl;
 }
 
-/*
+/**
  * Function for getting the xml output for notification_all, android, ios
+ * @return string $output
  */
 function default_xml_feed() {
 
@@ -137,8 +147,9 @@ function default_xml_feed() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the Ipad notification Xml Output
+ * @return string $output
  */
 function ipad_notification_xml() {
 
@@ -187,8 +198,9 @@ function ipad_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the chrome notification Xml Output
+ * @return string $output
  */
 function chrome_notification_xml() {
 
@@ -236,8 +248,9 @@ function chrome_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the safari notification Xml Output
+ * @return string $output
  */
 function safari_notification_xml() {
 
@@ -287,8 +300,9 @@ function safari_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the amazon notification Xml Output
+ * @return string $output
  */
 function amazon_notification_xml() {
 
@@ -337,8 +351,9 @@ function amazon_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the Window 8 notification Xml Output
+ * @return string $output
  */
 function windows8_notification_xml() {
 
@@ -388,8 +403,9 @@ function windows8_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the osx notification Xml Output
+ * @return string $output
  */
 function osx_notification_xml() {
 
@@ -439,8 +455,9 @@ function osx_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the Nokia Asha notification Xml Output
+ * @return string $output
  */
 function nokiaasha_notification_xml() {
 
@@ -490,8 +507,9 @@ function nokiaasha_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the BB Xml Output
+ * @return string $output
  */
 function bb_notification_xml() {
 
@@ -539,7 +557,10 @@ function bb_notification_xml() {
 
   return $output;
 }
-
+/**
+ * Function for getting notifications article
+ * @return string $output
+ */
 function notifications_article() {
 
   $all_data = message_data();
@@ -582,6 +603,11 @@ function notifications_article() {
   }
   return $output;
 }
+
+/**
+ * Function for getting message_data
+ * @return string $res
+ */
 
 function message_data() {
   $config = get_notification_config();

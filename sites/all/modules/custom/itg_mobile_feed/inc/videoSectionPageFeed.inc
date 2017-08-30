@@ -5,9 +5,8 @@
  */
 
 /**
- * main function for generate videoSectionPage xml feed
- *
- * @return array
+ * main function for generate videoSectionPage xml feed *
+ * @return string $output
  */
 function videoSectionPageFeed() {
   $redis_key = "itgd_videoSectionPageFeed";

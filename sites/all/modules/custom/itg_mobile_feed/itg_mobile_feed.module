@@ -327,9 +327,8 @@ function program_section_page_feed_footer() {
 
 /**
  * common function for return related content node type
- *
+ * @pram string $node_list, $type
  * @return array
- * @pram $type
  */
 function relatedContentNodeType($node_list = "", $type) {
 
@@ -384,9 +383,8 @@ function relatedContentNodeType($node_list = "", $type) {
 
 /**
  * common function for return complete file path
- *
- * @return $type
- * @pram $type
+ * @pram int $fid
+ * @return string $file_url
  */
 function completeFilePath($fid) {
   $file_url = "";
@@ -404,9 +402,8 @@ function completeFilePath($fid) {
 
 /**
  * common function for write feed file
- *
- * @return $type
- * @pram $type
+ * @pram string  $feed_file_path, $feed_file_name, $output
+ * @return string $return_flag
  */
 function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   // variable declation
@@ -443,7 +440,8 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
 
 /**
  * common function for return array of category-manager section tid
- *
+ * @pram string $type
+ * @pram int $parent
  * @return array
  */
 function categoryManagerSectionTid($type = "story", $parent = 0) {
@@ -467,8 +465,9 @@ function categoryManagerSectionTid($type = "story", $parent = 0) {
 
 /**
  * common function for return content type mapped with tid
- *
- * @return type
+ * @pram int $tid
+ * @pram string $type
+ * @return int $flag
  */
 function checkContentTypeMapped($tid, $type) {
   // check map with passed content type
@@ -489,10 +488,9 @@ function checkContentTypeMapped($tid, $type) {
 
 /**
  * common function for return node count without child
- * @pram $type
- * @pram $tid
- *
- * @return $type
+ * @pram string $type
+ * @pram int $tid 
+ * @return int $count
  */
 function customNodeCount($type, $tid) {
   // variable declation
@@ -508,10 +506,10 @@ function customNodeCount($type, $tid) {
 
 /**
  * common function for return node count with child
- * @pram $type
- * @pram $tid
- *
- * @return $type
+ * @pram string $type
+ * @pram int $tid
+ * @pram bool $child_count
+ * @return int $count
  */
 function customNodeCountChild($tid, $type, $child_count = TRUE) {
 
@@ -535,9 +533,9 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
 /**
  * Retrieve ids of term children .
  *
- * @param $tid
+ * @param int $tid
  *   The term's ID.
- * @param $tids
+ * @return $tids
  *   An array where ids of term children will be added
  */
 function term_get_children_ids($tid) {
@@ -555,9 +553,9 @@ function term_get_children_ids($tid) {
 
 /**
  * function get section/category/node front url
- * @pram $tid
- *
- * @return $type
+ * @pram int $tid
+ * @pram string $type
+ * @return string $final_url
  */
 function nodeCategoryFrontUrl($tid, $type) {
 
@@ -588,9 +586,8 @@ function nodeCategoryFrontUrl($tid, $type) {
 
 /**
  * function get section/category icon img
- * @pram $tid
- *
- * @return $type
+ * @pram int $tid
+ * @return string url
  */
 function sectionCategoryIconImg($tid) {
   $query = db_select('field_data_field_sponser_logo', 'icimg');
@@ -602,9 +599,8 @@ function sectionCategoryIconImg($tid) {
 
 /**
  * function get tid is_favorite
- * @pram $tid
- *
- * @return type
+ * @pram int $nid
+ * @return bool $flag
  */
 function getNidIsFavorite($nid) {
 
@@ -621,9 +617,8 @@ function getNidIsFavorite($nid) {
 
 /**
  * function get nid is syndications
- * @pram $tid
- *
- * @return type
+ * @pram int $nid
+ * @return bool $flag
  */
 function getNidIsSyndications($nid) {
   // variable declation
@@ -641,11 +636,9 @@ function getNidIsSyndications($nid) {
 
 /**
  * function get node list in tid
- * @pram $tid
- * @pram $type
- * @pram $count
- *
- * @return array
+ * @pram int $tid, $count
+ * @pram string $type
+ * @return array $tid_list
  */
 function getNodeFeedTag($tid, $type, $count) {
   // variable declation
@@ -746,9 +739,8 @@ function getNodeFeedTag($tid, $type, $count) {
 
 /**
  * common function for get img caption
- *
- * @return $type
- * @pram $type
+ * @pram int $fid
+ * @return string  $caption
  */
 function getImgCaption($fid) {
   // variable declation
@@ -764,9 +756,8 @@ function getImgCaption($fid) {
 
 /**
  * common function for get img byline
- *
- * @return $type
- * @pram $type
+ * @pram int $fid
+ * @return string  $byline
  */
 function getImgByline($fid) {
   // variable declation
@@ -784,9 +775,8 @@ function getImgByline($fid) {
 
 /**
  * common function for getCityByNid
- *
- * @return $type
- * @pram $type
+ * @pram int $nid
+ * @return string  $city
  */
 function getCityByNid($nid) {
   // variable declation
@@ -801,9 +791,8 @@ function getCityByNid($nid) {
 
 /**
  * common function for getBodyDataForAndroid
- *
- * @return $type
- * @pram $type
+ * @pram string $str
+ * @return string  $mob_str
  */
 function getBodyDataForAndroid($str) {
   // variable declation
@@ -817,8 +806,8 @@ function getBodyDataForAndroid($str) {
 
 /**
  * function for generate comment xml tag
- *
- * @return array
+ * @pram object $node
+ * @return string $output
  */
 function getCommentXmlTag($node) {
   // variable declation
@@ -855,8 +844,7 @@ function getCommentXmlTag($node) {
 
 /**
  * function for generate Empty comment xml tag
- *
- *
+ * @return string $output
  */
 function emptygetCommentXmlTag() {
   $commenttext = "";
@@ -877,8 +865,8 @@ function emptygetCommentXmlTag() {
 
 /**
  * function for generate getRelatedNodeXmlTag
- *
- * @return array
+ * @pram string $nidar
+ * @return string $output
  */
 function getRelatedNodeXmlTag($nidar) {
   // variable declation
@@ -930,8 +918,7 @@ function getRelatedNodeXmlTag($nidar) {
 
 /**
  * function for Blank generate getRelatedNodeXmlTag
- *
- * @return array
+ * @return string $output
  */
 function emptygetRelatedNodeXmlTag() {
   // variable declation

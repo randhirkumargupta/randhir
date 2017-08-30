@@ -6,8 +6,7 @@
 
 /**
  * main function for generate intodayMagazine xml feed
- *
- * @return array
+ * @return string $output
  */
 function intodayMagazine() {
   $redis_key = "itgd_intodayMagazine";
@@ -56,8 +55,8 @@ function intodayMagazine() {
 
 /**
  * function for generate storyCategoryPage xml feed
- *
- * @return array
+ * @pram int $tid
+ * @return array $data
  */
 function generateIntodayMagazinePage($tid) {
   // variable declaration

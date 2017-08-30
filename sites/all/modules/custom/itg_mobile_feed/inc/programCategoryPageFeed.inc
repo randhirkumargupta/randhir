@@ -6,8 +6,7 @@
 
 /**
  * main function for generate programCategoryPageFeed xml feed
- *
- * @return array
+ * @return string $output
  */
 function programCategoryPageFeed() {
   $output = "";
@@ -68,8 +67,8 @@ function programCategoryPageFeed() {
 
 /**
  * function for generate photoVideoPage xml feed
- *
- * @return array
+ * @pram int $tid
+ * @return array $data
  */
 function generateProgramCategoryPage($tid) {
   //check into redis

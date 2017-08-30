@@ -6,8 +6,7 @@
 
 /**
  * main function for generate programSectionPageFeed xml feed
- *
- * @return array
+ * @return string $output
  */
 function programSectionPageFeed() {
   //check into redis

@@ -7,10 +7,13 @@ define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
 define('DEFAULT_REDIS_EXPIRE_TIME', 86400);
 define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 86400);
 define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 86400);
-
-
-define('ITGD_DEV_FILES_PATH', 'http://itgddev.indiatodayonline.in/sites/default/files');
+define('ITGD_DEV_FILES_PATH', 'http://itgdrapid.indiatodayonline.in/sites/default/files');
 define('ITGD_MUM_DEV_FILES_PATH', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public');
+
+/**
+ * main function for get tidConfig
+ * @return array $tid_config
+ */
 function tidConfig() {
   $tid_config = array();
 
@@ -30,7 +33,9 @@ function tidConfig() {
 }
 
 /**
- * Function for get to redis
+ * Function for get to redis key value
+ * @pram string $key
+ * @return string $result
  */
 function getRedis($key) {
 
@@ -52,6 +57,9 @@ function getRedis($key) {
 
 /**
  * Common function to set the value on redis key
+ * @pram string $key, $value
+ * @pram int $ttl
+ * @return array $result 
  */
 function setRedis($key, $value, $ttl = 300) {
 
@@ -67,10 +75,9 @@ function setRedis($key, $value, $ttl = 300) {
   return $result;
 }
 
-/*
+/**
  * unique function to return all the redis keys
- * args - no
- * reurn - array
+ * @return  array $all_redis_key
  */
 function list_redis_key() {
 
@@ -79,8 +86,9 @@ function list_redis_key() {
   return $all_redis_key;
 }
 
-/*
+/**
  * unique function to connect redis server
+ * @return object $redis
  */
 function redis_connection() {
 
@@ -100,8 +108,10 @@ function redis_connection() {
   }
 }
 
-/*
+/**
  * delete redis key value
+ * @pram string $key
+ * @return bool $result
  */
 function redis_key_delete($key) {
 

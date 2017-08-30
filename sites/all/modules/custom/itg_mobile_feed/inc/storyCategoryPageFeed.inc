@@ -6,8 +6,7 @@
 
 /**
  * main function for generate storyCategoryPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function storyCategoryPageFeed() {
   $output = "";
@@ -56,8 +55,8 @@ function storyCategoryPageFeed() {
 
 /**
  * function for generate storyCategoryPage xml feed
- *
- * @return array
+ * @pram int $tid
+ * @return array $data
  */
 function generateStoryCategoryPage($tid) {
   //check into redis

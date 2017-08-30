@@ -5,9 +5,8 @@
  */
 
 /**
- * main function for generate videoDetailPage xml feed
- *
- * @return array
+ * main function for generate videoDetailPage xml feed *
+ * @return string $output
  */
 function videoDetailPageFeed() {
   $output = "";
@@ -26,8 +25,9 @@ function videoDetailPageFeed() {
 
 /**
  * function for generate generateVideoDetailPageFeed xml feed file
- *
- * @return array
+ * @pram int $nid
+ * @pram string $file_name, $term_feed_path, $type
+ * @return string $return_flag
  */
 function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = '', $type) {
 
@@ -153,12 +153,15 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
   return $return_flag;
 }
 
+/**
+ * function for generate all_video_format
+ * @pram int $file_id
+ * @return array $all_video_data
+ */
 function all_video_format($file_id) {
   $query = db_select('dailymotion_response_details', 'avf');
   $query->innerJoin('itg_video_bitrates_data', 'dma', 'dma.video_id = avf.video_id');
-  // bitate_url
-  //$query->fields('dma', array('responce'));
-  // bitate_url
+  
   $query->fields('dma', array('bitate_url'));
   $query->condition('avf.fid', $file_id);
   $all_result = $query->execute()->fetchField();
@@ -166,9 +169,10 @@ function all_video_format($file_id) {
 }
 
 /**
- * function for generate video xml tag
- *
- * @return array
+ * function for generate video xml tag 
+ * @pram array $video_path_info
+ * @pram int  $file_id
+ * @return string $output
  */
 function getVideoTagDetail($video_path_info, $file_id = NULL) {
   $output = "";
@@ -195,8 +199,8 @@ function getVideoTagDetail($video_path_info, $file_id = NULL) {
 
 /**
  * function for generate image xml tag
- *
- * @return array
+ * @pram object $node
+ * @return string $imgtag
  */
 function getImgTagDetail($node) {
   $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
@@ -212,9 +216,8 @@ function getImgTagDetail($node) {
 }
 
 /**
- * function for generate Empty image xml tag
- *
- *
+ * function for generate Empty image xml tag 
+ * @return string $imgtag
  */
 function emptygetImgTagDetail() {
 
@@ -225,11 +228,11 @@ function emptygetImgTagDetail() {
 
 /**
  * Function check file id
- o filename
+ * filename
  *
- * @param $fid
+ * @param int $fid
  *
- * @return string
+ * @return int $ids
  */
 function file_usage($id) {
   $ids = "";
@@ -244,9 +247,9 @@ function file_usage($id) {
 /**
  * Function check exist video filename
  *
- * @param $fid
+ * @param int fid, $nid, $field_video_upload
  *
- * @return string
+ * @return array $video_path_info
  */
 function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $video_path_info = array();
@@ -288,9 +291,9 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
 /**
  * Function get dailymotion video path
  *
- * @param $fid
- *
- * @return string
+ * @param int $fid
+ * @pram string $filename
+ * @return string $video_path
  */
 function getDailymotionPath($fid, $filename) {
   $query = db_select('dailymotion_response_details', 'drd');
@@ -313,10 +316,11 @@ function getDailymotionPath($fid, $filename) {
   return $video_path;
 }
 
-/*
+/**
  * All video format responce
- * @param $nid
- * @return the details video xml tags
+ * @param int $nid
+ * @pram string $source_type
+ * @return array $video_detail
  */
 function video_detail_formats($nid, $source_type) {
 

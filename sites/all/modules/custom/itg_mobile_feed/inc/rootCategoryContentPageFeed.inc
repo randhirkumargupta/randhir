@@ -6,8 +6,7 @@
 
 /**
  * main function for generate rootCategoryContentPageFeed xml feed
- *
- * @return array
+ * @return string $output
  */
 function rootCategoryContentPageFeed() {
   $output = "";
@@ -63,8 +62,9 @@ function rootCategoryContentPageFeed() {
 
 /**
  * function for generate storyCategoryPage xml feed
- *
- * @return array
+ * @pram int $tid
+ * @pram string $term_name
+ * @return array $data
  */
 function generateLeftMainCategoryPage($tid, $term_name) {
   $redis_key = "itgd_generateLeftMainCategoryPage" . $tid;

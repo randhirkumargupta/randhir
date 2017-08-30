@@ -6,8 +6,7 @@
 
 /**
  * main function for generate photoSectionPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function photoSectionPageFeed() {
   //check into redis

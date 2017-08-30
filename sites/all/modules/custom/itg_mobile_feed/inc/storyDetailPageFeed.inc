@@ -6,8 +6,7 @@
 
 /**
  * main function for generate storyDetailPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function storyDetailPageFeed() {
   $output = "";
@@ -25,8 +24,9 @@ function storyDetailPageFeed() {
 
 /**
  * function for generate generateStoryDetailPageFeed xml feed file
- *
- * @return array
+ * @pram int $nid
+ * @pram string $file_name, $term_feed_path, $type
+ * @return string $return_flag
  */
 function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
 
@@ -134,8 +134,8 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
 
 /**
  * function for generate video xml tag
- *
- * @return array
+ * @pram object $node
+ * @return string $videotag
  */
 function getVideoTag($node) {
   $videotag = "";
@@ -184,16 +184,20 @@ function getVideoTag($node) {
   return $videotag;
 }
 
-/*
+/**
  * Function for getting dailymotion videoname to nid
+ * @pram string $video_name
+ * @return string $qry
  */
 function dailymotion_video_name_to_nid($video_name) {
   $qry = db_select('dailymotion_response_details', 'vd')->fields('vd', array('nid'))->condition('vd.title', $video_name)->execute()->fetchField();
   return $qry;
 }
 
-/*
+/**
  * Get Nid by migrated video name
+ * @pram string $video_uri
+ * @return array $all_result
  */
 function migrated_video_to_nid($video_uri) {
 
@@ -203,7 +207,11 @@ function migrated_video_to_nid($video_uri) {
   $query->condition('mv.field_migrated_video_url_value', $video_uri);
   return $all_result = $query->execute()->fetchField();
 }
-
+/**
+ * function uploaded_video_to_nid
+ * @pram string $video_uri
+ * @return array $all_result
+ */
 function uploaded_video_to_nid($video_uri) {
 
   $query = db_select('file_managed', 'f');
@@ -214,8 +222,10 @@ function uploaded_video_to_nid($video_uri) {
   return $all_result = $query->execute()->fetchField();
 }
 
-/*
+/**
  * Get string betwee tags
+ * @pram string $str, $from, $to
+ * @return string  
  */
 function getStringBetween($str, $from, $to) {
 
@@ -225,8 +235,7 @@ function getStringBetween($str, $from, $to) {
 
 /**
  * function for generate Empty video xml tag
- *
- * @return array
+ * @return string $videotag
  */
 function emptygetVideoTag() {
   $videotag = "";
@@ -236,8 +245,7 @@ function emptygetVideoTag() {
 
 /**
  * function for generate empty image xml tag
- *
- * @return array
+ * @return string $imgtag
  */
 function emptygetImgTag() {
   $imgtag = "";
@@ -247,8 +255,8 @@ function emptygetImgTag() {
 
 /**
  * function for generate image xml tag
- *
- * @return array
+ * @pram object $node
+ * @return string $imgtag
  */
 function getImgTag($node) {
   $imgtag = "";

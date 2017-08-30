@@ -6,8 +6,7 @@
 
 /**
  * main function for generate home page xml feed
- *
- * @return array
+ * @return string $output
  */
 $home_list_count = 0;
 function homePageFeed() {
@@ -54,8 +53,7 @@ function homePageFeed() {
 
 /**
  * function for get story from Big Story widget
- *
- * @return string
+ * @return string $output
  */
 function bigStoryWidgetData() {
   global $home_list_count;
@@ -98,13 +96,8 @@ function bigStoryWidgetData() {
 }
 
 /**
- * function for get story from Home Page Features widget
- *
- * @param string $widget_name
- * @param int $range_max
- * @param int $range_min
- *
- * @return array
+ * function for get story from Home Page Features widget 
+ * @return string $output
  */
 function homePageFeaturesWidgetData() {
 
@@ -179,12 +172,7 @@ function homePageFeaturesWidgetData() {
 
 /**
  * function for get story from Top Stories widget
- *
- * @param string $widget_name
- * @param int $range_max
- * @param int $range_min
- *
- * @return array
+ * @return string $output
  */
 function topStoriesWidgetData() {
   // variable declation

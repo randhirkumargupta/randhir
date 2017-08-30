@@ -6,8 +6,7 @@
 
 /**
  * main function for generate videoCategoryPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function videoCategoryPageFeed() {
   // variable declation
@@ -70,8 +69,8 @@ function videoCategoryPageFeed() {
 
 /**
  * function for generate photoVideoPage xml feed
- *
- * @return array
+ * @pram int $tid
+ * @return array $data
  */
 function generateVideoCategoryPage($tid) {
   //check into redis

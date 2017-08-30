@@ -6,8 +6,7 @@
 
 /**
  * main function for generate breakingNewsPage xml feed
- *
- * @return array
+ * @return string $output
  */
 function breakingNewsPageFeed() {
   //check into redis
