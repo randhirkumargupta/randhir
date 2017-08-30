@@ -8,7 +8,7 @@
  *
  */
 function itg_personalization_remove_activity() {
-  itg_get_followers('836422');
+  itg_personalization_send_follow_mail();
 }
 function itg_personalization_remove_activity_old() {
   global $user;
