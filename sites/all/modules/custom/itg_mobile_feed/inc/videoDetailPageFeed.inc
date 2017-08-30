@@ -5,7 +5,7 @@
  */
 
 /**
- * main function for generate videoDetailPage xml feed *
+ * main function for generate videoDetailPage xml feed 
  * @return string $output
  */
 function videoDetailPageFeed() {
