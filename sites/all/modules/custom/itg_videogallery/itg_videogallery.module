@@ -3838,6 +3838,7 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
+	return;
   $os = array("search_index", "amp");
   if ($node->type == 'videogallery' && !in_array($view_mode, $os)) {
 // Category view on landing page
