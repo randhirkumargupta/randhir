@@ -299,6 +299,12 @@ function simplesamlphp_auth_init() {
               }
               $fname = _simplesamlphp_auth_get_fname();
               $lname = _simplesamlphp_auth_get_lname();
+              if ($fname != $lname) {
+                $lname = $lname;
+              }
+              else {
+                $lname = '';
+              }
               $twitterimage = _simplesamlphp_auth_get_twitterimage();
               $dob = _simplesamlphp_auth_get_dob();
               $gender = _simplesamlphp_auth_get_gender();
