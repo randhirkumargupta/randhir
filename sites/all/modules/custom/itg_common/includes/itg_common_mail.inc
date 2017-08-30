@@ -63,7 +63,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
     );
     //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 //    $to = 'gourav.walia@kelltontech.com';
-    watchdog('Loyalty expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
+    watchdog('Expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
   
