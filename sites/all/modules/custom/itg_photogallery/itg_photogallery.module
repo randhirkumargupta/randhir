@@ -712,7 +712,6 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
  * {@inheritdoc}
  */
 function itg_photogallery_node_presave($node) {
-	return;
   //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
@@ -735,6 +734,7 @@ function itg_photogallery_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_photogallery_node_view($node, $view_mode, $langcode) {
+	return;
   $os = array("search_index", "amp");
   if (!in_array($view_mode, $os)) {
     if (isset($node->type) && $node->type == 'photogallery' && $_GET['category'] != '') {
