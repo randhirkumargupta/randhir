@@ -521,6 +521,7 @@ function itg_photogallery_crop_thumb($fid) {
   chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   $file_image = file_load($fid);
   $image = image_load($file_image->uri);
+  $file_url_orignal = file_create_url($file_image->uri);
   if (!empty($image)) {
     $image_extension = end(explode('.', $file_image->uri));
     $image_name = explode('.', $file_image->filename);
@@ -547,8 +548,14 @@ function itg_photogallery_crop_thumb($fid) {
     $file->status = FILE_STATUS_PERMANENT;
     $file = file_save($file);
     $urils = file_create_url($file->uri);
-
     file_usage_add($file, 'itg_photogallery', 'file', $file->fid);
+    if($file->fid) {
+      db_insert('itg_all_orignal_image')->fields(array(
+            'fid' => $file->fid,
+            'orignal_fid' => $fid,
+            'url' => $file_url_orignal
+          ))->execute();
+    }
     return $file->fid;
   }
 }
