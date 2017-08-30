@@ -655,10 +655,10 @@ function itg_category_manager_term_validate($form , &$form_state) {
     form_set_error('state-mode' , t('Please select either forcefully or manually disable mode.'));
   }
 
-
-  if ($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
-
-    form_set_error('field_cm_select_type' , t('Content Type field is required for root.'));
+  if (arg(3) != 'edit') {
+    if ($form_sate['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
+      form_set_error('field_cm_select_type' , t('Content Type field is required for root.'));
+    }
   }
 
   if ($form_state['values']['field_user_city']['und'][0]['value'] != NULL) {
@@ -712,6 +712,22 @@ function itg_category_manager_term_validate($form , &$form_state) {
 function itg_category_manager_add_form_after_build(&$form , &$form_state) {
   global $user;
   $arg = arg();
+  //unset($form_state['field']['field_cm_select_type']);
+  //['field_cm_select_type']['und'][#options]
+  if (arg(3) == 'edit') {
+    $select_content_type = $form_state['complete form']['field_cm_select_type']['und']['#default_value'];
+    foreach($select_content_type as $key => $val_content) {
+      $val_content_array[] = $form_state['complete form']['field_cm_select_type']['und']['#options'][$val_content];
+      unset($form_state['complete form']['field_cm_select_type']['und']['#options'][$val_content]);
+
+    }
+
+    $select_content_type = implode(', ', $val_content_array);
+
+    $form['field_cm_select_type']['#prefix'] = '<div>Select Content Type :'.$select_content_type.'</div>';
+  }
+ 
+  
 //Add cancel link to add and edit form of category add form exit;
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel') , 'category-manager-listing' , array('attributes' => array('class' => 'button'))) ,
@@ -734,7 +750,7 @@ function itg_category_manager_add_form_after_build(&$form , &$form_state) {
   );
   if ($user->uid != 1 && $arg[3] == 'edit') {
     if ($form_state['values']['parent'][0] == 0) {
-      drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-type-und option").css("pointer-events", "none"); jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , array('type' => 'inline', 'scope' => 'footer'));
+      //drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-type-und option").css("pointer-events", "none"); jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , array('type' => 'inline', 'scope' => 'footer'));
     }
     else {
       drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-template-type-und-special").attr("disabled", true); jQuery("#edit-field-cm-select-template-type-und-section").attr("disabled", true); jQuery("#edit-field-cm-select-template-type-und-none").attr("disabled", true); jQuery("#edit-field-cm-select-type-und option:not(:selected)").attr("disabled", true);jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , array('type' => 'inline', 'scope' => 'footer'));
@@ -1063,6 +1079,12 @@ function itg_category_manager_taxonomy_term_insert($term) {
  *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
+   if ($term->vid == CATEGORY_MANAGMENT) {
+    if (arg(0) == 'taxonomy' && arg(3) == 'edit') {
+      $term->field_cm_select_type['und'] = array_merge($term->original->field_cm_select_type['und'], $term->field_cm_select_type['und']);
+    }
+    
+   }
 //  if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
 //    global $user;
 //    if ($term->vid == CATEGORY_MANAGMENT) {
@@ -1322,10 +1344,13 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
       $form[$select_template][LANGUAGE_NONE]['#default_value'] = $form[$select_template][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
       }
      */
+    
     $form['field_result_format']['#access'] = false;
     drupal_add_js('jQuery(document).ready(function() {                  
                   jQuery("#edit-field-cm-select-template").hide();
                  });' , array('type' => 'inline' , 'scope' => 'footer'));
+    //code for content type dropdown
+    
   }
   if ($form_id == 'election_graph_xml_node_form') {
     drupal_add_css(
