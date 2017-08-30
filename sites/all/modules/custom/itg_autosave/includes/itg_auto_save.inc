@@ -267,8 +267,10 @@ class itg_auto_save {
    */
   public function itg_save_field_datestamp($value) {
     $this->datestamp_arr = array();
-    $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
-    $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
+    if (!empty($value['und'][0]['value']['date'])) {
+      $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
+      $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
+    }
 
     return $this->datestamp_arr;
   }
@@ -284,10 +286,10 @@ class itg_auto_save {
    */
   public function itg_save_field_datetime($value) {
     $this->datetime_result = '';
-    if ($value['und'][0]['value']['date'] != '') {
-      $this->datetime_value = $value['und'][0]['value']['date'];
+    if (!empty($value['und'][0]['value']['date'])) {      
+      $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date'])); 
       $this->datetime_result = array(
-          'value' => date("Y-m-d H:i:s", strtotime($this->datetime_value)),
+          'value' => date("Y-m-d H:i:s", $timestamp),
           'timezone' => date_default_timezone(),
           'timezone_db' => date_default_timezone(),
       );
@@ -488,7 +490,9 @@ class itg_auto_save {
           break;
 
         case 'datetime':
+          $dd = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
           $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
+         
           break;
 
         case 'text':
