@@ -165,3 +165,4 @@ function generatePhotoCategoryPage($tid) {
 
   return $data;
 }
+

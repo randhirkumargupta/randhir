@@ -191,9 +191,9 @@ function homePageJsonTopstories() {
     //json tag writing
     if ($type == "story") {
       // news list
-//      $n_photo = getPhotolist($nid);
-//      $n_video = getVideolist($nid);
-//      $n_polls = getPolllist($node);
+      //      $n_photo = getPhotolist($nid);
+      //      $n_video = getVideolist($nid);
+      //      $n_polls = getPolllist($node);
       $n_rating = getRating($node);
       $n_magazine = array();
 
@@ -414,9 +414,12 @@ function homePageJsonNewslist_india() {
       // re-insalize vediolist
       $videolist = array();
 
-      $n_polls = getPolllist($node); // homepage.inc
-      $n_rating = getRating($node); // story.inc
-      $n_magazine = array(); // homepage.inc
+      // homepage.inc
+      $n_polls = getPolllist($node);
+      // story.inc
+      $n_rating = getRating($node);
+      // homepage.inc
+      $n_magazine = array();
 
       $data_newslist[$listcount]['n_polls'] = $n_polls;
       $data_newslist[$listcount]['n_rating'] = $n_rating;
@@ -617,9 +620,12 @@ function homePageJsonNewslist_world() {
       // re-insalize vediolist
       $videolist = array();
 
-      $n_polls = getPolllist($node); // homepage.inc
-      $n_rating = getRating($node); // story.inc
-      $n_magazine = array(); // homepage.inc
+      // homepage.inc
+      $n_polls = getPolllist($node);
+      // story.inc
+      $n_rating = getRating($node);
+      // homepage.inc
+      $n_magazine = array();
 
       $data_newslist[$listcount]['n_polls'] = $n_polls;
       $data_newslist[$listcount]['n_rating'] = $n_rating;
@@ -647,7 +653,8 @@ function homePageJsonMagazine() {
   $n_polls = array();
   $n_rating = array();
 
-  $n_magazine = getMagazineList(); // homepage.inc
+  // homepage.inc
+  $n_magazine = getMagazineList();
 
 
   $data_magazine['id'] = "5";
@@ -724,7 +731,7 @@ function getMagazineList() {
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result_issue as $reskey => $resvalue) {
 
-    //issue node 
+    //issue node
     $issueid = $resvalue['nid'];
     $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
     $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
@@ -886,3 +893,4 @@ function getMagazineStory($issue_date) {
 
   return $story;
 }
+

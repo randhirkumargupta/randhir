@@ -157,3 +157,4 @@ function generateStoryCategoryPage($tid) {
   }
   return $data;
 }
+

@@ -78,3 +78,4 @@ function storySectionPageFeed() {
   echo $output;
   die();
 }
+

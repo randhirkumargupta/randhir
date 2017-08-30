@@ -49,7 +49,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     }
   }
 
-//field_image_caption
+  //field_image_caption
   $output = "";
   if (!$nid) {
     $output = "Nid is missing";
@@ -176,9 +176,7 @@ function getVideoTag($node) {
       $src = $add_video;
     }
   }
-  else {
-    
-  }
+  else {}
 
   if ($src) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
@@ -189,19 +187,14 @@ function getVideoTag($node) {
 /*
  * Function for getting dailymotion videoname to nid
  */
-
 function dailymotion_video_name_to_nid($video_name) {
-  $qry = db_select('dailymotion_response_details', 'vd')
-          ->fields('vd', array('nid'))
-          ->condition('vd.title', $video_name)
-          ->execute()->fetchField();
+  $qry = db_select('dailymotion_response_details', 'vd')->fields('vd', array('nid'))->condition('vd.title', $video_name)->execute()->fetchField();
   return $qry;
 }
 
 /*
  * Get Nid by migrated video name
  */
-
 function migrated_video_to_nid($video_uri) {
 
   $query = db_select('field_data_field_migrated_video_url', 'mv');
@@ -224,7 +217,6 @@ function uploaded_video_to_nid($video_uri) {
 /*
  * Get string betwee tags
  */
-
 function getStringBetween($str, $from, $to) {
 
   $sub = substr($str, strpos($str, $from) + strlen($from), strlen($str));
@@ -278,3 +270,4 @@ function getImgTag($node) {
 
   return $imgtag;
 }
+

@@ -158,7 +158,6 @@ function itg_mobile_feed_menu() {
 /*
  * Implement form callback for redis_server_config
  */
-
 function redis_server_config() {
   $form = array();
 
@@ -189,7 +188,6 @@ function redis_server_config() {
 /*
  * Implement form callback for defining term id config
  */
-
 function feed_tid_config() {
   $form = array();
 
@@ -234,7 +232,6 @@ function feed_tid_config() {
 /*
  * creage form for redis cache delete by admin
  */
-
 function redis_cache_manager() {
   $form = array();
 
@@ -256,7 +253,6 @@ function redis_cache_manager() {
 /*
  * redis cache form submit
  */
-
 function redis_cache_manager_submit($form, &$form_state) {
 
   $key = $form_state['values']['redis_cache'];
@@ -400,7 +396,8 @@ function completeFilePath($fid) {
   }
   $serch = ITGD_DEV_FILES_PATH;
   $replace = ITGD_MUM_DEV_FILES_PATH;
-  $file_url = str_replace($serch, $replace, $file_url); // need update img base url in variable table
+  // need update img base url in variable table
+  $file_url = str_replace($serch, $replace, $file_url);
 
   return $file_url;
 }
@@ -432,14 +429,14 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   // write log into database table
 
   db_insert('itg_mobile_feed_log')->fields(array(
-    'uid' => $user->uid,
-    'agent' => 1,
-    'status' => $status,
-    'ip' => $ip_add,
-    'file' => $feed_file_name,
-    'path' => $feed_file_path,
-    'created' => REQUEST_TIME,
-  ))->execute();
+      'uid' => $user->uid,
+      'agent' => 1,
+      'status' => $status,
+      'ip' => $ip_add,
+      'file' => $feed_file_name,
+      'path' => $feed_file_path,
+      'created' => REQUEST_TIME,
+    ))->execute();
   fclose($fileHandle);
   return $return_flag;
 }
@@ -962,3 +959,4 @@ function emptygetRelatedNodeXmlTag() {
 
   return $output;
 }
+

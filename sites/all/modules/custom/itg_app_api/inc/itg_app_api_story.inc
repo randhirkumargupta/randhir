@@ -35,7 +35,7 @@ function StoryDetailPageRerourceValue($id) {
  * @return array
  */
 function generateStoryDeatilList($id) {
-  // variable declaration    
+  // variable declaration
   global $base_url;
   $data = array();
   $nid = $id;
@@ -206,6 +206,7 @@ function getCastName($nid) {
 /**
  * function for story body html
  * @pram $node
+ *
  * @return string
  */
 function story_body_with_html($node) {
@@ -272,11 +273,14 @@ function getStoryTechs($node) {
   $tect_img = array();
   $rating = $node->field_story_technology_rating['und'][0]['value'];
   $content = $node->field_story_tech_review_chunk['und'][0]['value'];
-  $content_org = $content; // pros & cons function
+  // pros & cons function
+  $content_org = $content;
   /* remove pros & cons from contents start */
+
   $content = preg_replace('#<div class="tech-pros"(.|\s)+</div>#', '', $content);
   $content = preg_replace('#<div class="tech-cons"(.|\s)+</div>#', '', $content);
   /* remove pros & cons from contents start */
+
   $tect_img = $node->field_story_technology['und'];
   $storytech['rating'] = $rating;
   $storytech['content'] = $content;
@@ -461,3 +465,4 @@ function getTechCons($content_org) {
 
   return $techpcons;
 }
+

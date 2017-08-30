@@ -99,7 +99,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $tid_list[] = $value->tid;
       }
     }
-// code vid=14  end
+    // code vid=14  end
     // select node belong from current term id or child term id
 
     $query = db_select('taxonomy_index', 'ti');
@@ -444,6 +444,7 @@ function getVideolist($nid) {
 /**
  * function for generate getViewCount
  * @pram $nid
+ *
  * @return $nv_count
  */
 function getNodeViewCount($nid) {
@@ -464,7 +465,6 @@ function getNodeViewCount($nid) {
  * @param $nid
  * @return $share_count
  */
-
 function getNodeShareCount($nid) {
 
   $ns_count = 0;
@@ -484,7 +484,6 @@ function getNodeShareCount($nid) {
  * $type 'total' will return the count of it
  * @return an Associated array with count all these values.
  */
-
 function analytics_node_data($nid, $total) {
 
   if (function_exists('mongodb')) {
@@ -563,7 +562,8 @@ function analytics_node_data($nid, $total) {
 
 
 
-    if ($type == 'total') { // return the total count
+    // return the total count
+    if ($type == 'total') {
       // Caculate sum of all data.
       foreach ($analytics_data_array as $counting) {
         if (is_int($counting)) {
@@ -571,9 +571,11 @@ function analytics_node_data($nid, $total) {
         }
       }
       return $final_count_result;
+      // return the associated Array
     }
-    else { // return the associated Array
+    else {
       return $analytics_data_array;
     }
   }
 }
+

@@ -4,7 +4,6 @@
  * Inc file contains the tid config array
  */
 define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
-
 function tidConfig() {
   $tid_config = array();
   // decalation of photo section array
@@ -100,8 +99,7 @@ function getRedis($key) {
   // variable decration
   $key_value = 0;
   $result = array();
-  $connection_str = "";
-  {
+  $connection_str = ""; {
     // redis connection
     $redis = new Redis();
     $time = 300;
@@ -139,8 +137,7 @@ function setRedis($key, $value, $ttl = 300) {
   $key_value = 0;
   $result = array();
   $connection_str = "";
-  $set_flag = 0;
-  {
+  $set_flag = 0; {
     // redis connection
     $redis = new Redis();
     $time = 300;
@@ -171,7 +168,6 @@ function setRedis($key, $value, $ttl = 300) {
  * args - no
  * reurn - array
  */
-
 function list_redis_key() {
 
   $redis = redis_connection();
@@ -182,12 +178,12 @@ function list_redis_key() {
 /*
  * unique function to connect redis server
  */
-
 function redis_connection() {
 
   $redis = new Redis();
   $time = 300;
-  $redis_server_read = 'redistmp.itgd.in'; //'127.0.0.1';
+  //'127.0.0.1';
+  $redis_server_read = 'redistmp.itgd.in';
   $redis_server_read_port = 6379;
   $redis_server_read_timeout = 30;
   $connection_str = $redis->connect($redis_server_read, $redis_server_read_port, $redis_server_read_timeout);
@@ -204,7 +200,6 @@ function redis_connection() {
 /*
  * delete redis key value
  */
-
 function redis_key_delete($key) {
 
   $redis = redis_connection();
@@ -212,3 +207,4 @@ function redis_key_delete($key) {
 
   return $result;
 }
+

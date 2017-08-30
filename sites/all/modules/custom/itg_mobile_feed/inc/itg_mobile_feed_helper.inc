@@ -11,7 +11,6 @@ define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 86400);
 
 define('ITGD_DEV_FILES_PATH', 'http://itgddev.indiatodayonline.in/sites/default/files');
 define('ITGD_MUM_DEV_FILES_PATH', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public');
-
 function tidConfig() {
   $tid_config = array();
 
@@ -73,7 +72,6 @@ function setRedis($key, $value, $ttl = 300) {
  * args - no
  * reurn - array
  */
-
 function list_redis_key() {
 
   $redis = redis_connection();
@@ -84,7 +82,6 @@ function list_redis_key() {
 /*
  * unique function to connect redis server
  */
-
 function redis_connection() {
 
   $redis = new Redis();
@@ -106,7 +103,6 @@ function redis_connection() {
 /*
  * delete redis key value
  */
-
 function redis_key_delete($key) {
 
   $redis = redis_connection();
@@ -114,3 +110,4 @@ function redis_key_delete($key) {
 
   return $result;
 }
+

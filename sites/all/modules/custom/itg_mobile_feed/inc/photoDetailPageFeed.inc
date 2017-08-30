@@ -135,3 +135,4 @@ function getGalleryImgTag($galleryimg) {
   }
   return $output;
 }
+

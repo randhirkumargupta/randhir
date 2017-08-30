@@ -145,3 +145,4 @@ function generateIntodayMagazinePage($tid) {
 
   return $data;
 }
+

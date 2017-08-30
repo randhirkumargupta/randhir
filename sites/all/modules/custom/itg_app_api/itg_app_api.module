@@ -24,10 +24,10 @@ function itg_app_api_services_resources() {
 
   $resources = array();
 
-//Include the necessary inc files.
+  //Include the necessary inc files.
   module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
 
-//Service Apis for contents.
+  //Service Apis for contents.
   $resources += itg_app_api_resource();
 
   return $resources;
@@ -186,7 +186,6 @@ function itg_app_api_menu() {
 /*
  * mobile_service_token form decalation
  */
-
 function mobile_service_token() {
   $form = array();
 
@@ -204,16 +203,12 @@ function mobile_service_token() {
 /*
  * mobile_service_token form validation
  */
-
-function mobile_service_token_validate($form, &$form_state) {
-  
-}
+function mobile_service_token_validate($form, &$form_state) {}
 
 /*
  * config_update_status_json form decalation
  * 
  */
-
 function config_update_status_json() {
   $form = array();
 
@@ -230,7 +225,6 @@ function config_update_status_json() {
 /*
  * datanotexist_api_json form decalation
  */
-
 function datanotexist_api_json() {
   $form = array();
 
@@ -247,7 +241,6 @@ function datanotexist_api_json() {
 /*
  * hamburger_menu_json form decalation
  */
-
 function hamburger_menu_json() {
   $form = array();
 
@@ -305,6 +298,7 @@ function server_error_master_json() {
 
 /**
  * function to getCommentsCount of node
+ *
  * @return $count
  * @pram $nid
  */
@@ -319,7 +313,8 @@ function getCommentsCount($nid) {
 
 /**
  * comman function for return node published date
- * @arg $nid 
+ * @arg $nid
+ *
  * @return published date
  */
 function getNodePublishedDate($nid) {
@@ -417,11 +412,12 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   $u_agent = $_SERVER['HTTP_USER_AGENT'];
   $flag = 0;
 
-// user agent for browser
+  // user agent for browser
   if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
     $flag = 1;
   }
-  elseif (preg_match('/Trident/i', $u_agent)) { // this condition is for IE11
+  // this condition is for IE11
+  elseif (preg_match('/Trident/i', $u_agent)) {
     $flag = 1;
   }
   elseif (preg_match('/Firefox/i', $u_agent)) {
@@ -448,7 +444,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
   $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
 
-  if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+  if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
     $flag = 1;
   }
 
@@ -462,7 +458,6 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
  * @param int $nid
  * @return String 
  */
-
 function getStoryType($nid) {
   $query = db_select('node', 'n');
   $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
@@ -479,6 +474,5 @@ function getStoryType($nid) {
 /**
  * Implements hook_boot().
  */
-function itg_app_api_boot() {
-  
-}
+function itg_app_api_boot() {}
+

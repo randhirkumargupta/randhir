@@ -76,11 +76,10 @@ function generatePhotoCategoryList($tid, $pageno) {
   $order_by = 'ASC';
   $type = "photogallery";
   $photo_list_array = array();
-  $loop_count = 0;
-  {
+  $loop_count = 0; {
     $listcount = 0;
 
-// code vid=14  start
+    // code vid=14  start
     if ($tid > 0) {
       $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
     }
@@ -94,7 +93,7 @@ function generatePhotoCategoryList($tid, $pageno) {
       }
     }
 
-// code vid=14  end
+    // code vid=14  end
     // select node belong from current term id or child term id
 
     $query = db_select('taxonomy_index', 'ti');
@@ -248,7 +247,7 @@ function photoDetailPageRerourceValue($id) {
  * @return array
  */
 function generatePhotoDeatilList($id) {
-  // variable declaration    
+  // variable declaration
   global $base_url;
   $data = array();
   $nid = $id;
@@ -380,7 +379,7 @@ function photoStoryDetailPageRerourceValue($id) {
  * @return array
  */
 function generatePhotoStoryDeatilList($id) {
-  // variable declaration    
+  // variable declaration
   global $base_url;
   $data = array();
   $nid = $id;
@@ -445,7 +444,8 @@ function generatePhotoStoryDetailList($nid) {
     $node = node_load($nid);
 
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $photo_story_html = photoSotryHtml($nid); // function from
+    // function from
+    $photo_story_html = photoSotryHtml($nid);
 
     foreach ($photo_story as $key => $val) {
 
@@ -472,7 +472,9 @@ function generatePhotoStoryDetailList($nid) {
 
 /**
  * function for photoSotryHtml
+ *
  * @param type $node_id
+ *
  * @return string
  */
 function photoSotryHtml($node_id) {
@@ -542,3 +544,4 @@ function field_data_field_story_large_image($rvid) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['field_story_large_image_fid'];
 }
+

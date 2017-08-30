@@ -96,8 +96,7 @@ function generateProgramCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "videogallery";
-    {
+    $type = "videogallery"; {
       $listcount = 0;
       // select node belong from current term id or child term id
 
@@ -174,3 +173,4 @@ function generateProgramCategoryPage($tid) {
 
   return $data;
 }
+

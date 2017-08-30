@@ -141,7 +141,8 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         $is_fav = getNidIsFavorite($nid);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
-        if ($tid == '1206689' || $tid == '1206688') { // auto 
+        // auto
+        if ($tid == '1206689' || $tid == '1206688') {
           $loop_file_name = 'story' . $nid . ".xml";
         }
         else {
@@ -170,3 +171,4 @@ function generateLeftMainCategoryPage($tid, $term_name) {
   }
   return $data;
 }
+

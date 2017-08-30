@@ -106,7 +106,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
       $videotag = video_detail_formats($nid, $source_type);
 
-      if (!empty($videotag['migrated'])) { //migrated video
+      // migrated video
+      if (!empty($videotag['migrated'])) {
         $output .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
       }
       elseif (!empty($videotag['dailymotion'])) {
@@ -155,8 +156,10 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
 function all_video_format($file_id) {
   $query = db_select('dailymotion_response_details', 'avf');
   $query->innerJoin('itg_video_bitrates_data', 'dma', 'dma.video_id = avf.video_id');
-  //$query->fields('dma', array('responce'));// bitate_url
-  $query->fields('dma', array('bitate_url')); // bitate_url
+  // bitate_url
+  //$query->fields('dma', array('responce'));
+  // bitate_url
+  $query->fields('dma', array('bitate_url'));
   $query->condition('avf.fid', $file_id);
   $all_result = $query->execute()->fetchField();
   return $all_video_data = json_decode($all_result, TRUE);
@@ -175,7 +178,7 @@ function getVideoTagDetail($video_path_info, $file_id = NULL) {
   $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
   $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
 
-//to get the video of all the other formats
+  //to get the video of all the other formats
   $video_formats = all_video_format($file_id);
 
   if ($video_path_info['dailymtion_flag'] == "yes") {
@@ -222,8 +225,10 @@ function emptygetImgTagDetail() {
 
 /**
  * Function check file id
-  o filename
+ o filename
+ *
  * @param $fid
+ *
  * @return string
  */
 function file_usage($id) {
@@ -238,7 +243,9 @@ function file_usage($id) {
 
 /**
  * Function check exist video filename
+ *
  * @param $fid
+ *
  * @return string
  */
 function videoCheckExistFile($fid, $nid, $field_video_upload) {
@@ -256,7 +263,7 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $filesize = $results[0]->filesize;
 
   // for daily motion vedio
-  if (strpos($uri, 'dailymotion_video_dir') !== false) {
+  if (strpos($uri, 'dailymotion_video_dir') !== FALSE) {
     $dailymotion_path = getDailymotionPath($fid, $filename);
     $dailymtion_flag = "yes";
   }
@@ -280,7 +287,9 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
 
 /**
  * Function get dailymotion video path
+ *
  * @param $fid
+ *
  * @return string
  */
 function getDailymotionPath($fid, $filename) {
@@ -309,7 +318,6 @@ function getDailymotionPath($fid, $filename) {
  * @param $nid
  * @return the details video xml tags
  */
-
 function video_detail_formats($nid, $source_type) {
 
   $video_detail = array();
@@ -325,9 +333,7 @@ function video_detail_formats($nid, $source_type) {
       elseif ($video_value->solr_video_id != '') {
         $video_id = $video_value->solr_video_id;
       }
-      else {
-        
-      }
+      else {}
       $video_detail[$video_status]['video_id'] = $video_id;
       $file_id = $video_value->fid;
     }
@@ -371,3 +377,4 @@ function video_detail_formats($nid, $source_type) {
   }
   return $video_detail;
 }
+

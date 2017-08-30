@@ -1,6 +1,6 @@
 <?php
-
 function itg_app_api_resource() {
+
   /**
    * custom resource for sprit1
    */
@@ -723,8 +723,10 @@ function itg_app_api_resource() {
 /**
  * [itg_app_api_newslist] definition.
  * Returns the information about a itg_app_api_newslist.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -767,8 +769,10 @@ function itg_app_api_newslist($token) {
 /**
  * [itg_app_api_programlist] definition.
  * Returns the information about a itg_app_api_programlist.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -798,15 +802,17 @@ function itg_app_api_programlist($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_videolist] definition.
  * Returns the information about a itg_app_api_videolist.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -836,15 +842,17 @@ function itg_app_api_videolist($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_photodetail] definition.
  * Returns the information about a itg_app_api_photodetail.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -870,15 +878,17 @@ function itg_app_api_photodetail($token) {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_photolist] definition.
  * Returns the information about a itg_app_api_photolist.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -908,15 +918,17 @@ function itg_app_api_photolist($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_server_error_master] definition.
  * Returns the information about a itg_app_api_server_error_master.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -933,7 +945,7 @@ function itg_app_api_server_error_master($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -941,8 +953,10 @@ function itg_app_api_server_error_master($token) {
 /**
  * [itg_app_api_master_config] definition.
  * Returns the information about a config_update_status.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -959,7 +973,7 @@ function itg_app_api_master_config($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -967,8 +981,10 @@ function itg_app_api_master_config($token) {
 /**
  * [itg_app_api_config_update_status] definition.
  * Returns the information about a config_update_status.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -985,7 +1001,7 @@ function itg_app_api_config_update_status($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
 
   return $return_obj;
@@ -994,8 +1010,10 @@ function itg_app_api_config_update_status($token) {
 /**
  * [itg_app_api_hamburger_menu] definition.
  * Returns the information about a hamburger_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1012,7 +1030,7 @@ function itg_app_api_hamburger_menu($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
 
   return $return_obj;
@@ -1021,8 +1039,10 @@ function itg_app_api_hamburger_menu($token) {
 /**
  * [itg_app_api_horizontal_menu] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1039,7 +1059,7 @@ function itg_app_api_horizontal_menu($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
 
   return $return_obj;
@@ -1050,8 +1070,10 @@ function itg_app_api_horizontal_menu($token) {
 /**
  * [itg_app_api_photostorydetail] definition.
  * Returns the information about a itg_app_api_photostorydetail.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1079,15 +1101,17 @@ function itg_app_api_photostorydetail($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_program_category_list] definition.
  * Returns the information about a itg_app_api_program_category_list.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1107,7 +1131,7 @@ function itg_app_api_program_category_list($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1115,8 +1139,10 @@ function itg_app_api_program_category_list($token) {
 /**
  * [itg_app_api_ad_config_json] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1134,7 +1160,7 @@ function itg_app_api_ad_config_json($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1142,8 +1168,10 @@ function itg_app_api_ad_config_json($token) {
 /**
  * [itg_app_api_livetv_channellist_json] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1162,7 +1190,7 @@ function itg_app_api_livetv_channellist_json($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
 
   return $return_obj;
@@ -1171,8 +1199,10 @@ function itg_app_api_livetv_channellist_json($token) {
 /**
  * [itg_app_api_livetv_json] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1191,7 +1221,7 @@ function itg_app_api_livetv_json($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1199,8 +1229,10 @@ function itg_app_api_livetv_json($token) {
 /**
  * [itg_app_api_otherapps_ios_json] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1219,7 +1251,7 @@ function itg_app_api_otherapps_ios_json($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1227,8 +1259,10 @@ function itg_app_api_otherapps_ios_json($token) {
 /**
  * [itg_app_api_otherapps_android_json] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1247,7 +1281,7 @@ function itg_app_api_otherapps_android_json($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1257,8 +1291,10 @@ function itg_app_api_otherapps_android_json($token) {
 /**
  * [itg_app_api_magazine_edition] definition.
  * Returns the information about a itg_app_api_magazine_edition.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1289,15 +1325,17 @@ function itg_app_api_magazine_edition($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_magazine_coverstories] definition.
  * Returns the information about a itg_app_api_magazine_coverstories.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1318,7 +1356,7 @@ function itg_app_api_magazine_coverstories($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $obj = json_decode($jsondata, true);
+  $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
@@ -1326,8 +1364,10 @@ function itg_app_api_magazine_coverstories($token) {
 /**
  * [itg_app_api_magazine_editionlist] definition.
  * Returns the information about a itg_app_api_magazine_editionlist.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1337,12 +1377,12 @@ function itg_app_api_magazine_editionlist($token) {
   $cpageno = $_GET['cpageno'];
   //echo $sdate; echo "<br>"; echo $tdate; exit();
   //valid tid & pageno
-//    if (!is_numeric($sdate)) {
-//        $sdate = 0;
-//    }
-//    if (!is_numeric($tdate)) {
-//        $tdate = 0;
-//    }
+  //    if (!is_numeric($sdate)) {
+  //        $sdate = 0;
+  //    }
+  //    if (!is_numeric($tdate)) {
+  //        $tdate = 0;
+  //    }
   if (!is_numeric($cpageno)) {
     $cpageno = 0;
   }
@@ -1364,7 +1404,7 @@ function itg_app_api_magazine_editionlist($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
 
   return $jsondata;
 }
@@ -1374,8 +1414,10 @@ function itg_app_api_magazine_editionlist($token) {
 /**
  * [itg_app_api_storydetail] definition.
  * Returns the information about a horizontal_menu.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1404,15 +1446,17 @@ function itg_app_api_storydetail($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
 
 /**
  * [itg_app_api_homePage] definition.
  * Returns the information about a itg_app_api_homePage.
+ *
  * @param $nid
  *   The nid of the housing_scheme node.
+ *
  * @return array
  * 	The node processed information array.
  */
@@ -1433,6 +1477,7 @@ function itg_app_api_homePage($token) {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, true);
+  $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
+

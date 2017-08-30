@@ -226,15 +226,19 @@ function generateVideoCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
       $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
       //if($video_path_mp4){
-      if (!empty($videotag['dailymotion'])) { // migrated video
+      // migrated video
+      if (!empty($videotag['dailymotion'])) {
         $photo_list_array[$listcount]['v_is_default_player'] = "1";
         $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
-        $photo_list_array[$listcount]['v_download_url'] = ''; //$videotag['dailymotion']['bitate_url']['videoparts_mp4'];//$stream_h264_hd_url
+        //$videotag['dailymotion']['bitate_url']['videoparts_mp4'];//$stream_h264_hd_url
+        $photo_list_array[$listcount]['v_download_url'] = '';
       }
       elseif (!empty($videotag['migrated'])) {
         $photo_list_array[$listcount]['v_is_default_player'] = "0";
-        $photo_list_array[$listcount]['v_url'] = ''; //$stream_h264_hd_url
-        $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
+        //$stream_h264_hd_url
+        $photo_list_array[$listcount]['v_url'] = '';
+        //$video_path_mp4
+        $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4'];
       }
       $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
       $photo_list_array[$listcount]['v_comment_count'] = "10";
@@ -264,13 +268,9 @@ function generateVideoCategoryList($tid, $pageno) {
  * fid to videoid
  *
  */
-
 function fid_videoid($video_fid) {
 
-  $qry = db_select('dailymotion_response_details', 'dr')
-          ->fields('dr', array('video_id'))
-          ->condition('dr.fid', $video_fid)
-          ->execute()->fetchField();
+  $qry = db_select('dailymotion_response_details', 'dr')->fields('dr', array('video_id'))->condition('dr.fid', $video_fid)->execute()->fetchField();
   return $qry;
 }
 
@@ -614,3 +614,4 @@ function getLatestNodeTime($tid) {
   $published_statp = $result[0]['created'];
   return $published_statp;
 }
+

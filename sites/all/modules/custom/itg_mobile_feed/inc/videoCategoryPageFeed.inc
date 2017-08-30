@@ -97,8 +97,7 @@ function generateVideoCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "videogallery";
-    {
+    $type = "videogallery"; {
       $listcount = 0;
 
 
@@ -180,3 +179,4 @@ function generateVideoCategoryPage($tid) {
   }
   return $data;
 }
+

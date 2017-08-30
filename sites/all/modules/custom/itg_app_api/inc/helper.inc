@@ -1,15 +1,14 @@
 <?php
-
 /*
  * Set the Firebase API Configuration 
  * 
  */
 
+
 define('HOME_PAGE_JSON_NEWS_LIST_INDIA', 1206578);
 define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577);
 
 //CATEGORY_MANAGMENT; 14
-
 function firebase_config() {
   $firebase = array(
     'api-key' => 'AIzaSyDjXq0vdDZaa4HgEsdrlfLWXjevvIw7FFk',
@@ -26,10 +25,9 @@ function firebase_config() {
  *  $url , longurl 
  *  return , shorturl 
  */
-
 function firebase_short_url($url) {
 
-//get Default values  from config
+  //get Default values  from config
   $fire_base = firebase_config();
   $fire_base_url = 'https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=' . $fire_base['api-key'] . '';
   $base_config = '{
@@ -62,7 +60,6 @@ function firebase_short_url($url) {
  *  $nid
  *  return , shorturl weburl
  */
-
 function get_node_firebase_weburl($nid) {
   // variable declaration
   global $base_url;
@@ -72,3 +69,4 @@ function get_node_firebase_weburl($nid) {
   $firebase_url = firebase_short_url($weburl);
   return $firebase_url;
 }
+

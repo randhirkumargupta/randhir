@@ -3,13 +3,13 @@
 /**
  * Inc file contains the functions
  */
+
 /**
  * main function for generate home page xml feed
  *
  * @return array
  */
 $home_list_count = 0;
-
 function homePageFeed() {
   $redis_key = "itgd_homePageFeed";
   $result_get = getRedis($redis_key);
@@ -257,3 +257,4 @@ function topStoriesWidgetData() {
 
   return $output;
 }
+

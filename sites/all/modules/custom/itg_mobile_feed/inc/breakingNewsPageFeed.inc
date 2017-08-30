@@ -71,3 +71,4 @@ function breakingNewsPageFeed() {
   echo $output;
   die();
 }
+

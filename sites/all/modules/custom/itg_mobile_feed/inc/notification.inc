@@ -1,9 +1,7 @@
 <?php
-
 /*
  * Common function to define the some Primary values
  */
-
 function get_notification_config() {
   $config = array();
   $config['start_index'] = 0;
@@ -23,7 +21,6 @@ function notification_page() {
 /*  Create notification file based on args
  *  And Write data with in the file,
  */
-
 function generate_notification_all($params) {
 
   $idsection = 1;
@@ -93,9 +90,7 @@ function generate_notification_all($params) {
         $file_name = 'notification_chrome.xml';
         $output = chrome_notification_xml();
       }
-      else {
-        
-      }
+      else {}
 
       if ($output && $output != '') {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -118,7 +113,6 @@ function generate_notification_all($params) {
  * args nid
  * return string weburl
  */
-
 function get_web_url($nid) {
   global $base_url;
   $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -129,7 +123,6 @@ function get_web_url($nid) {
 /*
  * Function for getting the xml output for notification_all, android, ios
  */
-
 function default_xml_feed() {
 
   $totalarticle = count(message_data());
@@ -147,7 +140,6 @@ function default_xml_feed() {
 /*
  * Function for getting the Ipad notification Xml Output
  */
-
 function ipad_notification_xml() {
 
   $all_data = message_data();
@@ -198,7 +190,6 @@ function ipad_notification_xml() {
 /*
  * Function for getting the chrome notification Xml Output
  */
-
 function chrome_notification_xml() {
 
   $all_data = message_data();
@@ -248,7 +239,6 @@ function chrome_notification_xml() {
 /*
  * Function for getting the safari notification Xml Output
  */
-
 function safari_notification_xml() {
 
   $all_data = message_data();
@@ -300,7 +290,6 @@ function safari_notification_xml() {
 /*
  * Function for getting the amazon notification Xml Output
  */
-
 function amazon_notification_xml() {
 
   $all_data = message_data();
@@ -351,7 +340,6 @@ function amazon_notification_xml() {
 /*
  * Function for getting the Window 8 notification Xml Output
  */
-
 function windows8_notification_xml() {
 
   $all_data = message_data();
@@ -403,7 +391,6 @@ function windows8_notification_xml() {
 /*
  * Function for getting the osx notification Xml Output
  */
-
 function osx_notification_xml() {
 
   $all_data = message_data();
@@ -455,7 +442,6 @@ function osx_notification_xml() {
 /*
  * Function for getting the Nokia Asha notification Xml Output
  */
-
 function nokiaasha_notification_xml() {
 
   $all_data = message_data();
@@ -507,7 +493,6 @@ function nokiaasha_notification_xml() {
 /*
  * Function for getting the BB Xml Output
  */
-
 function bb_notification_xml() {
 
   $all_data = message_data();
@@ -602,10 +587,7 @@ function message_data() {
   $config = get_notification_config();
   $params = drupal_get_query_parameters();
 
-  $res = db_select('message', 'm')
-          ->fields('m')
-          ->condition('m.website', $params['website'])
-          ->range($config['start_index'], $config['end_index'])
-          ->execute()->fetchAll();
+  $res = db_select('message', 'm')->fields('m')->condition('m.website', $params['website'])->range($config['start_index'], $config['end_index'])->execute()->fetchAll();
   return $res;
 }
+
