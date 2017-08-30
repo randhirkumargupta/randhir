@@ -514,15 +514,19 @@ class itg_auto_save {
           if (!empty($this->value) && $field['fieldName'] == 'field_stroy_city') {
             $getcity = $this->itg_autosave_get_citytids($this->value);
             if (isset($getcity) && !empty($getcity)) {
-              $node->{$field['fieldName']}[$node->language][0]['tid'] = $getcity;
+              foreach ($getcity as $city_key => $city_val) {
+                $node->{$field['fieldName']}[$node->language][$city_key]['tid'] = $city_val->tid;
+              }
             }
           }
           
           // For Bloggers autosave
           if (!empty($this->value) && $field['fieldName'] == 'field_blog_bloggers') {
-            $getblogger = $this->itg_autosave_get_citytids($this->value);
+            $getblogger = $this->itg_autosave_get_bloggertids($this->value);
             if (isset($getblogger) && !empty($getblogger)) {
-              $node->{$field['fieldName']}[$node->language][0]['tid'] = $getblogger;
+              foreach ($getblogger as $blogger_key => $blogger_val) {
+                $node->{$field['fieldName']}[$node->language][$blogger_key]['tid'] = $blogger_val->tid;
+              }
             }
           }
           
@@ -836,6 +840,7 @@ class itg_auto_save {
     $term_name = db_select('taxonomy_term_data', 'ttd');
     $term_name->fields('ttd', array('tid'));
     $term_name->condition('name', $get_name, 'IN');
+    $term_name->condition('vid', 1, '=');
     $result = $term_name->execute()->fetchAll();
     unset($result[0]);
     return $result;
@@ -848,10 +853,28 @@ class itg_auto_save {
    *   Array of term ids for city autosave.
    */
   public function itg_autosave_get_citytids($city_name) {
+    $cityname = explode(", ", $city_name);
     $term_name = db_select('taxonomy_term_data', 'ttd');
     $term_name->fields('ttd', array('tid'));
-    $term_name->condition('name', $city_name, '=');
-    $result = $term_name->execute()->fetchField();
+    $term_name->condition('name', $cityname, 'IN');
+    $term_name->condition('vid', 9, '=');
+    $result = $term_name->execute()->fetchAll();
+    return $result;
+  }
+  
+  /**
+   * Get tid's for blogger from database.
+   *
+   * @return array
+   *   Array of term ids for blogger name for autosave.
+   */
+  public function itg_autosave_get_bloggertids($blogger_name) {
+    $bloggername = explode(", ", $blogger_name);
+    $term_name = db_select('taxonomy_term_data', 'ttd');
+    $term_name->fields('ttd', array('tid'));
+    $term_name->condition('name', $bloggername, 'IN');
+    $term_name->condition('vid', 19, '=');
+    $result = $term_name->execute()->fetchAll();
     return $result;
   }
 }
