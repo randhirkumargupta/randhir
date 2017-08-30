@@ -302,7 +302,9 @@ function magazineCoverstoriesPageRerourceValueList() {
     $node_data = node_load($issueid);
     $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
     $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
-    $lar_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $lar_img);
+    $serch = ITGD_DEV_FILES_PATH;
+    $replace = ITGD_MUM_DEV_FILES_PATH;
+    $lar_img = str_replace($serch, $replace, $lar_img);
     $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
     $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
