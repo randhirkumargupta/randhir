@@ -311,8 +311,8 @@
         var all_form_data = form_value.split('&');
         var full_cap = all_form_data[1];
         var cap = full_cap.split('=');
-        var caption_value = cap[1].replace(/\+/g, ' ');
-        //var caption_value = cap[1];
+        var caption_value_0 = cap[1].replace(/\+/g, ' ');
+        var caption_value = caption_value_0.replace(/\%2C/g,',');
     // end of the code        
     if (flg == 0) {
       showloader();
