@@ -52,6 +52,7 @@ function itg_story_create_breaking_news() {
   $node->language = LANGUAGE_NONE;
   $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
   $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
+  $node->field_breaking_display_on[LANGUAGE_NONE][0]['value'] = 'home';
   $node->uid = $user->uid;
   $node->status = 1; //(1 or 0): Published or not
   $node->promote = 0; //(1 or 0): Promoted to front page
