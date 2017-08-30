@@ -1010,12 +1010,12 @@ function itg_personalization_send_follow_mail($node) {
       $get_user_id = itg_cron_mail_for_following();
 
       if (!empty($get_user_id)) {
-
+        $node_title = itg_personalization_node_get_title_fast($get_user_id);
         foreach ($get_user_id as $follow_user) {
           $node_type = $obj = (object) array('type' => 'story');
           global $base_url;
           $uname = user_load($follow_user['uid']);
-          $story_url = l($node->title, FRONT_URL . '/node/' . $follow_user['nid'], array('absolute' => TRUE));
+          $story_url = l($node_title[$follow_user['nid']], FRONT_URL . '/node/' . $follow_user['nid'], array('absolute' => TRUE));
 
           if (function_exists('itg_mail_templates_get_mailcontent')) {
             $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
@@ -1024,7 +1024,7 @@ function itg_personalization_send_follow_mail($node) {
             $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
             $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
           }
-          
+
           $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
           $params = array(
             'body' => $mail_content,
@@ -1037,4 +1037,34 @@ function itg_personalization_send_follow_mail($node) {
           }
         }
       }
+}
+
+/**
+ * @param array $nids
+ *
+ * @return array
+ */
+function itg_personalization_node_get_title_fast(array $nids) {
+  $titles = &drupal_static(__FUNCTION__, array());
+  $return = array();
+  $unavailable = array();
+  foreach ($nids as $val) {
+    // Lookup static cache of self.
+    $nid = $val['nid'];
+    if (array_key_exists($nid, $titles)) {
+      $return[$nid] = $titles[$nid];
+    }
+    else { // Set NULL, so unavailable nodes will have NULL as their return value.
+      $unavailable[$nid] = NULL;
+    }
+  }
+
+  if ($unavailable) {
+    $results = db_query("SELECT nid, title FROM {node} WHERE nid IN (:nids)", array(':nids' => array_keys($unavailable)))->fetchAllKeyed(0, 1);
+    if ($results) {
+      $return = $results + $unavailable;
+      $titles = $return + $titles;
+    }
+  }
+  return $return;
 }
