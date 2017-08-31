@@ -41,6 +41,14 @@ function itg_related_menu() {
     'type' => MENU_LOCAL_TASK,
   );
   
+  $items['custom-index-solr-node'] = array(
+    'page callback' => '_custom_solr_index_node',
+    //'page arguments' => array('_custom_solr_index_node'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    //'access arguments' => array('access solr hash url'),
+  );
+  
   return $items;
 }
 
@@ -719,4 +727,49 @@ function itg_get_twitter_list($name) {
     $options[$r_title] = $r_title;
   }
   drupal_json_output($options);
+}
+
+/*
+ * Implements _custom_solr_index_node().
+ */
+function _custom_solr_index_node() {
+  $arg = arg();
+  if($arg[0] == 'custom-index-solr-node' && !empty($arg[1])) {
+    $node = node_load($arg[1]);
+    if(!empty($node)) {
+     _custom_helper_apachesolr_index_immediately($node, 'node'); 
+    }
+  }
+}
+/*
+ * Implements _custom_helper_apachesolr_index_immediately().
+ */
+function _custom_helper_apachesolr_index_immediately($entity, $type) {
+  $env_id = apachesolr_default_environment();
+  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
+
+  // Check if entity should be indexed
+  $info = entity_get_info($type);
+  if (!empty($info['entity keys']['bundle'])) {
+    $bundle = $entity->{$info['entity keys']['bundle']};
+  }
+  else {
+    $bundle = $type;
+  }
+
+  if (!in_array($bundle, $bundles_to_index)) {
+    return;
+  }
+
+  // Entity should be indexed, so send to solr
+  $ids = entity_extract_ids($type, $entity);
+
+  $item = new stdClass();
+  $item->entity_type = $type;
+  $item->entity_id = $ids[0];
+
+  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  $doc = apachesolr_index_entity_to_documents($item, $env_id);
+  apachesolr_index_send_to_solr($env_id, $doc);
+  drupal_set_message(t('Entity sent to solr please wait check updated data after 1 or 2 min'));
 }
