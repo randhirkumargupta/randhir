@@ -133,11 +133,13 @@ function itg_autosave_nodeform($nid, $ctype) {
     $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
     $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
     $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
+    
   } else {
     // Load node if it case of node edit.  
     $node = node_load($itg_nid->nid);
   }
   if ($inputs['form_id'] == 'newsletter_node_form') {
+    $node->field_op_flag[LANGUAGE_NONE][0]['value'] = 'Save as Draft';
     $title = isset($inputs['field_news_title']['und'][0]['value']) ? $inputs['field_news_title']['und'][0]['value'] != '' ? check_plain($inputs['field_news_title']['und'][0]['value']) : ''  : '';
   } else {
     $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : ''  : '';

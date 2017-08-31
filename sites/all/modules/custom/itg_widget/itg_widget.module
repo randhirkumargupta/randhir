@@ -40,7 +40,7 @@ function itg_widget_init() {
   $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
   $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));  
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));   
 }
 
 /**
@@ -1814,44 +1814,6 @@ function _get_content_type_for_widget($widget_name) {
   return $content_type;
 }
 
-/**
- * All widgets URL.
- * @return array
- */
-function _widget_batch_urls() {
-  return array(
-    'trending-video-widget-list',
-    'big-story-format-conent',
-    'dont-miss-widget-contents',
-    'most-popular-story',
-    'special-auto-review-widget-contents',
-    'yearend-left-widget-contents',
-    'most-read-widget-contents',
-    'custom-html-widgets-list',
-    'special-how-made-it-widget-contents',
-    'election-xml-list',
-    'state-manager',
-    'special-key-candidate-widget-contents',
-    'saction-staticpage-list',
-    'budget-predictor-image',
-    'we-may-suggest-draggable-content-order',
-    'story-list-widget',
-    'trending-video-widget-list',
-    'top-takes-videos-list',
-    'watch-right-now-videos-list',
-    'poll-format-conent',
-    'manage-highlights',
-    'home-page-feature-widget-listing',
-    'photo-list-widget',
-    'video-list-widget',
-    'anchor-list',
-    'so-sorry-video-widget-list',
-    'issue-magazin-primary-cat-widget',
-    'issue-base-magazin-widget',
-    'issue-magazin-primary-cat-widget',
-    'supplement-base-magazin-widget'
-  );
-}
 
 function _get_custom_weight_from_table() {
   $type_in_url = $_GET['type'];
@@ -1914,5 +1876,5 @@ function __html_output_with_tags($string , $start = 0 , $end = 100) {
   $html = html_entity_decode(drupal_html_to_text($string));
   $doc = new DOMDocument();
   $doc->loadHTML($html,LIBXML_HTML_NODEFDTD);
-  return substr($doc->saveHTML(), $start, $end);
+  return $doc->saveHTML();
 }

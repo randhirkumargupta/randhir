@@ -40,7 +40,7 @@ global $base_url;
             print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));
           }
           else {
-            print l(strip_tags(mb_strimwidth(__html_output_with_tags($row['title']), 0, 100, "..")), "node/" . $row['nid'], array("html" => TRUE));
+            print l(strip_tags(__html_output_with_tags($row['title'])), "node/" . $row['nid'], array("html" => TRUE));
 
           }
           ?>
@@ -53,7 +53,7 @@ global $base_url;
           <p><?php print __html_output_with_tags($row['field_story_expert_description']); ?></p>
         <?php endif; ?>
        <?php if (!empty($row['field_video_kicker'])) {
-        print '<p>' .mb_strimwidth(__html_output_with_tags($row['field_video_kicker']), 0, 70, "..")  . '</p>';
+       // print '<p>' .__html_output_with_tags($row['field_video_kicker'])  . '</p>';
       }?>
 
       </div>
