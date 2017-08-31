@@ -1073,25 +1073,6 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
   return TRUE;
 }
 
-/**
- * Function for prevent sent email during widget add bulk operation.
- * @param array $request
- * @return boolean
- */
-function itg_workflow_stop_node_update_batch_for_widgets() {
-  $id = $_REQUEST['id'];
-  $query = db_select('batch', 'b')
-      ->fields('b', array('batch'))
-      ->condition('b.bid', $id);
-  $result = $query->execute()->fetchField();
-  $batch_data_array = unserialize($result);
-  $redirect_path = $batch_data_array['form_state']['redirect']['path'];
-  $widgets_urls = _widget_batch_urls();
-  if (in_array($redirect_path, $widgets_urls)) {
-    return TRUE;
-  }
-  return FALSE;
-}
 
 /**
  * Get Mail content
