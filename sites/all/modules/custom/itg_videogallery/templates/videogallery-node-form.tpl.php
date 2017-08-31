@@ -136,7 +136,8 @@
                     <?php //print views_embed_view('searchimage', 'solr_unpublish_video');
                     ?>
                     <a href="javascript:void(0)" class = "button asso-filed-video"><?php print t('Save'); ?></a>
-                    <a href="javascript:void(0)" class = "button advance-serach"><?php print t('Advance Search'); ?></a>
+                   <?php print  l(t('Advance Search'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => TRUE, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'browse-ftp-click','button'))));?>
+                    
                 </div>
 
             </div>
