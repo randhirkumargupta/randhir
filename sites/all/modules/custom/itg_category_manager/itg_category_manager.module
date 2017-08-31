@@ -724,7 +724,7 @@ function itg_category_manager_add_form_after_build(&$form , &$form_state) {
 
     $select_content_type = implode(', ', $val_content_array);
 
-    $form['field_cm_select_type']['#prefix'] = '<div>Select Content Type :'.$select_content_type.'</div>';
+    $form['field_cm_select_type']['#prefix'] = '<div class="selected-categoies"><label>Selected Content Type</label><div class="categories">'.$select_content_type.'</div></div>';
   }
  
   

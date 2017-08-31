@@ -877,7 +877,6 @@ function itg_global_update_alternate_email_action() {
   if (!empty($sso_id) && !empty($alt_email)) {
     try {
     $uid = itg_global_loyality_get_uid($sso_id);
-    watchdog('ssdddd', '<pre>'.print_r($uid, true).'</pre>');
     $existingUser = user_load($uid);
     $existingUser->field_user_alternate_email['und'][0]['value'] = $alt_email;
     user_save($existingUser);

@@ -53,15 +53,17 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
     $mail_content = itg_common_notification_mail_content($data, $key);
     $mail_subject = $mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
     $body = str_replace("[itg_mail_token:itg_loyalty_user]", $data['name'], $mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
-    $body1 = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
-    $body2 = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $body1);
-    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $body2);
+    $replace_expiry = str_replace("[itg_mail_token:itg_loyalty_expiry]", date("Y-m-d", $data['expiry_date']), $body);
+    $replace_point = str_replace("[itg_mail_token:itg_loyalty_points]", $data['remaining_point'], $replace_expiry);
+    $replace_property = str_replace("[itg_mail_token:itg_loyalty_property]", $data['property'], $replace_point);
+    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $replace_property);
     $params = array(
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
     //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 //    $to = 'gourav.walia@kelltontech.com';
+    watchdog('Expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
   
