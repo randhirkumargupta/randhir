@@ -756,6 +756,8 @@ if (!empty($content)):
                   print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
                   
                  }
+                }else{
+                  print $story_body;
                 }
                 //End of the code
                 
