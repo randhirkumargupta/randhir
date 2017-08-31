@@ -451,7 +451,7 @@ function _related_video_block_content() {
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         
         if (!empty($related_title)) {
-        $related_video.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$related_title' /></a>";
+        $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$related_title' /></a>";
         $related_video.= "<span class='tile'>" . l($related_title, $front_url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span></li>";
         }
       //}
@@ -509,7 +509,7 @@ function _related_photo_block_content() {
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
-        $related_photo.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$related_title' /></a>";
+        $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$related_title' /></a>";
         $related_photo.= "<span class='tile'>" . l($related_title, $front_url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
       //}
