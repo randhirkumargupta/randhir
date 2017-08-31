@@ -538,6 +538,53 @@ function features_for_survey_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-survey-field_story_node_identity'.
+  $field_instances['node-survey-field_story_node_identity'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-survey-field_story_reporter'.
   $field_instances['node-survey-field_story_reporter'] = array(
     'bundle' => 'survey',
@@ -955,6 +1002,7 @@ function features_for_survey_field_default_field_instances() {
   t('Answer Type');
   t('Answer choices');
   t('Byline');
+  t('Node Identity');
   t('Please add survey question.');
   t('Please check to set expiry date of survey.');
   t('Please select end date.');

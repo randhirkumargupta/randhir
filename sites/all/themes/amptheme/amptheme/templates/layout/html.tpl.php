@@ -508,6 +508,12 @@
         right: 0;
         top: 0;
       }
+      #footer amp-accordion h2 span.show-more, #footer amp-accordion h2 span.show-less {
+        line-height: 48px;
+      }
+      #footer amp-accordion h2[aria-expanded="true"] span.show-more, #footer amp-accordion h2[aria-expanded="false"] span.show-less {
+        display: none;
+      }
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
@@ -618,9 +624,22 @@
       }
       .search-form input[type="search"] {
         height: 28px;
-        width: 200px;
+        width: 30px;
         padding-right: 35px;
         padding-left: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: transparent;
+        transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+        cursor: pointer;
+        z-index: 3;
+      }
+      .search-form input[type="search"]:focus{
+        z-index: 1;
+        width: 200px;
+        cursor: text;
+        background-color: #fff;
       }
       .search-form input[type="submit"] {
         position: absolute;
@@ -631,21 +650,23 @@
         border: none;
         padding: 0;
         margin: 0;
-        z-index: 99;
+        z-index: 2;
         opacity: 0;
       }
       a.search {
         position: absolute;
         right: 0;
         top: 0;
-        color: #666;
+        color: #fff;
         font-size: 20px;
         width: 30px;
         height: 28px;
-        z-index: 9;
+        z-index: 2;
         padding-top: 3px;
         text-align: center;
       }
+      .search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}
+      .custom-amp-ad{text-align: center;}
     </style>
     <?php //endif;  ?>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
