@@ -63,6 +63,7 @@ features[field_instance][] = node-poll-field_poll_question_video
 features[field_instance][] = node-poll-field_poll_start_date
 features[field_instance][] = node-poll-field_result_format
 features[field_instance][] = node-poll-field_show_end_date
+features[field_instance][] = node-poll-field_story_node_identity
 features[field_instance][] = node-poll-field_story_url
 features[image][] = home_page_poll_images_style
 features[image][] = past_poll_images_style_front_end
