@@ -1023,7 +1023,8 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).ready(function() {
-    if (jQuery('section').hasClass('region-sidebar-second')) {
+    var winWidth = jQuery(window).width();
+    if (jQuery('section').hasClass('region-sidebar-second') && winWidth > 1024) {
         var el = jQuery('.region-sidebar-second');
         var el_height = el.outerHeight(true);
         var el_offset = el.offset();
