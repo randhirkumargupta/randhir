@@ -54,6 +54,7 @@ features[field_instance][] = node-survey-body
 features[field_instance][] = node-survey-field_cm_related_content_detail
 features[field_instance][] = node-survey-field_common_related_content
 features[field_instance][] = node-survey-field_pqs_add_token
+features[field_instance][] = node-survey-field_story_node_identity
 features[field_instance][] = node-survey-field_story_reporter
 features[field_instance][] = node-survey-field_supp_publish
 features[field_instance][] = node-survey-field_survey_add_questions
