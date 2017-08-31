@@ -10950,6 +10950,11 @@ div.node #comments h2 {
 .node-loyalty_and_rewards-form .form-field-name-field-poll-itg-state {
   padding-left: 250px;
 }
+.node-loyalty_and_rewards-form .form-actions {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 0 0 250px !important;
+}
 
 .page-clone-story .view .view-filters .views-exposed-form .views-exposed-widget {
   vertical-align: top;
@@ -12995,8 +13000,11 @@ fieldset#edit-xmlsitemap {
   margin-left: 10px;
 }
 
-[id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created > label, [id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created .description {
+[id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created > label {
   display: none !important;
+}
+[id*="views-exposed-form-sold-item-history-page"] .views-widget-filter-created .description {
+  left: 100% !important;
 }
 
 [id*="field-event-highlights-values"] > tbody > tr > td {
