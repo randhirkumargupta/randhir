@@ -407,6 +407,7 @@ class itg_auto_save {
    *   Return true if filed is not empty else return false.
    */
   public function itg_save_validate_field_collection($data, $field_values) {
+    
     foreach ($data as $value) {
       switch ($value['fieldType']) {
         case 'taxonomy_term_reference':
@@ -433,6 +434,7 @@ class itg_auto_save {
           break;
 
         case 'text':
+          pr($field_values[$value['fieldName']]['und']);
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
@@ -496,6 +498,12 @@ class itg_auto_save {
           break;
 
         case 'text':
+          
+//          if ($inputs['form_id'] == 'newsletter_node_form') {
+//            //pr($field['fieldName']);
+//            $node->{$field['fieldName']}['und'][0]['value'] = 'Save as Draft';
+//          }
+
           if (is_array($inputs[$field['fieldName']]['und']) && count($inputs[$field['fieldName']]['und']) > 0) {
             foreach ($inputs[$field['fieldName']]['und'] as $key => $value) {
               if ($value['value'] != '') {
@@ -513,6 +521,11 @@ class itg_auto_save {
           if ($this->var_type == 'string') {
             $this->value = (int) $this->value;
           }*/
+          
+          // For Mega Review Type autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_mega_review_type') {
+            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          }
           
           // For City autosave
           if (!empty($this->value) && $field['fieldName'] == 'field_stroy_city') {
@@ -586,17 +599,35 @@ class itg_auto_save {
           }
 
           break;
+          
         case 'number_integer':
           //$node->{$field['fieldName']}['und'][0]['value'] = 
           break;
+          
         case 'entityreference':
-          $this->value = $inputs[$field['fieldName']]['und'];
-          preg_match_all('!\d+!', $this->value, $matches);
-          $targetid = reset($matches);
-          if (isset($targetid[0]) && !empty($targetid[0])) {
-            $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
+          
+          if ($inputs['form_id'] == 'survey_node_form' || $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
+            $targetid = reset($matches);
+            if (isset($targetid[0]) && !empty($targetid[0])) { 
+              $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
+            }
+          } 
+          else {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            preg_match_all('!\d+!', $this->value, $matches);
+            $targetid = reset($matches);
+            if (isset($targetid[0]) && !empty($targetid[0])) {
+              $i = 0;
+              foreach ($targetid as $target_val) {
+                $node->{$field['fieldName']}['und'][$i]['target_id'] = $target_val;
+                $i++;
+              }
+            }
           }
           break;
+          
         case 'image':
           $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
 
@@ -679,6 +710,8 @@ class itg_auto_save {
           break;
 
         case 'text':
+//          pr($field['fieldName']);
+//          pr($inputs[$field['fieldName']]['und']);
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
           break;
 
