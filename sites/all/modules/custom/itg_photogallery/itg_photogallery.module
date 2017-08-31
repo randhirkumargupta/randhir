@@ -299,7 +299,7 @@ function itg_photogallery_after_build($form, &$form_state) {
 
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
-    '#weight' => 20,
+    '#weight' => 25,
   );
   global $user, $base_url;
 
@@ -520,12 +520,10 @@ function itg_photogallery_crop_thumb($fid) {
   }
   chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
   $file_image = file_load($fid);
-  $image = image_load($file_image->uri);
   $file_url_orignal = file_create_url($file_image->uri);
+  $image = image_load($file_image->uri);
   if (!empty($image)) {
     $image_extension = end(explode('.', $file_image->uri));
-    $image_name = explode('.', $file_image->filename);
-    $image_name = $image_name[0];
     $filepath = file_default_scheme() . '://' . $filedir;
     if ($image->info['height'] < EXTRA_SMALL_IMAGE_HEIGHT || $image->info['width'] < EXTRA_SMALL_IMAGE_WIDTH) {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, TRUE);
@@ -533,7 +531,10 @@ function itg_photogallery_crop_thumb($fid) {
     else {
       $scaled = image_scale($image, EXTRA_SMALL_IMAGE_WIDTH, EXTRA_SMALL_IMAGE_HEIGHT, FALSE);
     }
-    $image_name = $image_name . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
+    $image_extension = end(explode('.', $file_image->uri));
+    $image_name_array = explode('.', $file_image->filename);
+    $image_name_exclude_ext = $image_name_array[0];
+    $image_name = $image_name_exclude_ext . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
     $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
     $uri = $filepath . '/' . $image_name . '.' . $image_extension;
     $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
@@ -548,8 +549,9 @@ function itg_photogallery_crop_thumb($fid) {
     $file->status = FILE_STATUS_PERMANENT;
     $file = file_save($file);
     $urils = file_create_url($file->uri);
+
     file_usage_add($file, 'itg_photogallery', 'file', $file->fid);
-    if($file->fid) {
+     if($file->fid) {
       db_insert('itg_all_orignal_image')->fields(array(
             'fid' => $file->fid,
             'orignal_fid' => $fid,

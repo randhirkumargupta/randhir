@@ -66,6 +66,11 @@ function itg_common_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
+  $items['itg-dev-node-dpm'] = array(
+    'page callback' => 'itg_custom_dev_node_dpm',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
 
   $items['photogallery-embed'] = array(
     'page callback' => 'itg_photogallery_embed',
@@ -1455,4 +1460,16 @@ function _widget_batch_urls() {
     'issue-magazin-primary-cat-widget',
     'supplement-base-magazin-widget'
   );
+}
+
+/**
+ * Implements itg_custom_dev_node_dpm().
+ *   callbck for debugging node load
+ */
+function itg_custom_dev_node_dpm(){
+  $arg = arg();
+  if($arg[0] == 'itg-dev-node-dpm' && !empty($arg[1])) {
+    $node = node_load($arg[1]);
+    p($node);
+  }
 }
