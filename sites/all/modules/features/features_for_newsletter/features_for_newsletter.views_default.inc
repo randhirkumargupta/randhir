@@ -330,7 +330,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Field: Subject Line */
+  /* Field: Field: Title */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
@@ -426,7 +426,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = 'Template Id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field: Subject Line (field_news_title) */
+  /* Filter criterion: Field: Title (field_news_title) */
   $handler->display->display_options['filters']['field_news_title_value']['id'] = 'field_news_title_value';
   $handler->display->display_options['filters']['field_news_title_value']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['filters']['field_news_title_value']['field'] = 'field_news_title_value';
@@ -906,7 +906,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field: Subject Line */
+  /* Field: Field: Title */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
