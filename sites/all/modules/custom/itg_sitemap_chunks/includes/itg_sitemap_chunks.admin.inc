@@ -482,12 +482,6 @@ function itg_sitemap_chunks_setting_form() {
     '#maxlength' => 20,
     '#description' => 'Enter Number of chunks',
   );
-  $form['itg_sitemap_exclude_nid'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Nids To Exclude'),
-    '#default_value' => variable_get('itg_sitemap_exclude_nid'),
-    '#description' => 'Enter comma seperated nodeis you want to exclude in sitemap',
-  );
   $form['#submit'][] = 'itg_sitemap_chunks_delete_chunks';
   return system_settings_form($form);
 }
