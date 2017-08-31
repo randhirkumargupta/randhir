@@ -2973,7 +2973,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     }
     // for traditional login
     if ($login_type == 0) {
-        $method = "POST";
+        $method = "GET";
         $data = $params;
         $account = array();
         $url = SSO_SERVER_URL."/appapi/login_request";
@@ -3023,7 +3023,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     }
     // for FW login
     elseif ($login_type == 1) {
-        $method = "POST";
+        $method = "GET";
 
         $data = array();
         $password = rand(0, 9999);
@@ -3083,7 +3083,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
     }
     // for TWT login
     elseif ($login_type == 2) {
-        $method = "POST";
+        $method = "GET";
 
         $data = array();
         $password = rand(0, 9999);
@@ -3158,7 +3158,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
     //p($_POST);die();
-    $method = "POST";
+    $method = "GET";
     $data = array();
     $account_err = array();
     $data['user_id'] = $params['user_id'];
@@ -3175,7 +3175,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         return $account_err;
     } else {
 
-        $method = "POST";
+        $method = "GET";
         $data = $params;
         $account = array();
         $url = SSO_SERVER_URL."/appapi/signup";
@@ -3215,7 +3215,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
  */
 function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
     //return fblogin($_GET);
-    $method = "POST";
+    $method = "GET";
 
     $data = array();
     $data['token'] = $_GET['token'];
@@ -3251,7 +3251,7 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
 function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expires_at) {
     //return twtlogin($_GET);
 
-    $method = "POST";
+    $method = "GET";
 
     $data = array();
     $data['token'] = $_GET['token'];
@@ -3286,7 +3286,7 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
  */
 function itg_rapid_api_forgot_password($token, $user_id) {
     $HTTP_RAW_POST_DATA;
-    $method = "POST";
+    $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
 
@@ -3309,7 +3309,7 @@ function itg_rapid_api_forgot_password($token, $user_id) {
  */
 function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $HTTP_RAW_POST_DATA;
-    $method = "POST";
+    $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
     $url = SSO_SERVER_URL."/appapi/otp_verification";
@@ -3362,7 +3362,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
  */
 function itg_rapid_api_resend_otp($token, $user_id) {
     $HTTP_RAW_POST_DATA;
-    $method = "POST";
+    $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
     $url = SSO_SERVER_URL."/appapi/resend_otp";
@@ -3385,7 +3385,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  */
 function itg_rapid_api_change_password($token, $user_id) {
     $HTTP_RAW_POST_DATA;
-    $method = "POST";
+    $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $params['pass'] = $params['old_pass'];
     $params['pass2'] = $params['new_pass'];
@@ -3665,7 +3665,7 @@ function poll_detail($token, $poll_id) {
 function itg_rapid_api_edit_profile($token) {
 
     $HTTP_RAW_POST_DATA;
-    $method = "POST";
+    $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
     $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
@@ -3730,7 +3730,7 @@ function itg_rapid_api_edit_user_image($token) {
         $uid = $user_detail->uid;
 
         // call sso server api
-        $method = "POST";
+        $method = "GET";
         $url = SSO_SERVER_URL."/appapi/edit_user_image";
         $result = callAPI($method, $url, $params);
 
@@ -3885,7 +3885,7 @@ function itg_rapid_api_log_out($token) {
     //$params = $_POST;
     {
         // call sso server api
-        $method = "POST";
+        $method = "GET";
         $url = SSO_SERVER_URL."/appapi/log_out";
         $result = callAPI($method, $url, $params);
         $user_id = $params['user_id'];
