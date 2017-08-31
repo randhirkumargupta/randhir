@@ -56,6 +56,7 @@
 
             // Custom validator function for social media start
             $("#ugc-node-form").validate({
+
                 submitHandler: function (form) {
                     $('input:submit').attr('disabled', 'disabled');
                     form.submit();
