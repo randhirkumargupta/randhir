@@ -480,15 +480,14 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-    //itg theme JS alter
-    
-    $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-    $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+    //itg theme JS alter    
+   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
+   //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
+   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
 }
 

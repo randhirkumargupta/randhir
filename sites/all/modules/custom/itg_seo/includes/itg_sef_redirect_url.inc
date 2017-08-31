@@ -438,7 +438,7 @@ function itg_common_custompath_insert_val($pathdata) {
         }
         $pathdata = rtrim($pathdata, "-");
         $pathdata = strtolower($pathdata);
-        $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+        $pathdata = str_replace(array(':', '*', '"', "/", "'", "?>", '#'), "-", $pathdata);
     }
     return $pathdata;
 }

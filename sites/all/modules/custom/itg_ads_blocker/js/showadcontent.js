@@ -96,12 +96,12 @@ jQuery(document).ready(function () {
         jQuery('#tab1' + currIndex).fadeIn();
     });
 
-    jQuery('body').on('click', 'a',function () {
-        jQuery('html, body').animate({
-            scrollTop: jQuery('[name="' + jQuery.attr(this, 'href').substr(1) + '"]').offset().top
-        }, 1000);
-        return false;
-    });
+//    jQuery('body').on('click', 'a',function () {
+//        jQuery('html, body').animate({
+//            scrollTop: jQuery('[name="' + jQuery.attr(this, 'href').substr(1) + '"]').offset().top
+//        }, 1000);
+//        return false;
+//    });
     var count_h = 3;
     setInterval(counter_adblock, 1000);
     function counter_adblock() {
