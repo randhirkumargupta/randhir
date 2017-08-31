@@ -984,17 +984,65 @@ function itg_get_followers($nid) {
   }
 }
 
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_personalization_cronapi($op, $job = NULL) {
+  $items['personalization_follow_mail'] = array(
+    'description' => 'send follow story to Mail by author / topic.',
+    'weight' => 5,
+    'callback' => 'itg_personalization_send_follow_mail',
+  );
+  return $items;
+}
+
 function itg_cron_mail_for_following() {
+  $date = date('2017-07-23');
+  $start_date = strtotime($date);
+
+  $results = db_query("SELECT DISTINCT n.nid, n.title, n.type FROM {node} AS n
+WHERE n.type = 'story' AND n.status = 1 AND n.created >= (:created)", array(':created' => $start_date))->fetchAll();
+  $html = "<table>";
+  foreach ($results as $row) {
+  $nid = $row->nid;
+  $node = node_load($nid);
+  $options['node'][$nid] = $node->title;
+  $html .= "<tr><td>" . l($node->title, FRONT_URL . '/node/' . $nid, array('absolute' => TRUE)) . "</td></tr>";
+  //$options['node_url'][$nid] = l($node->title, FRONT_URL . '/node/' . $nid, array('absolute' => TRUE));
+
+    if ($tags = field_get_items('node', $node, 'field_story_itg_tags')) {
+      foreach ($tags as $v) {
+        if(is_array($v) && count($v) > 0) {
+          foreach ($v as $tag) {
+            $data[] = $tag;
+          }
+        }
+      }
+  }
+  if ($reporter = field_get_items('node', $node, 'field_reporter_publish_id')) {
+    $reporter_array = explode(',', $reporter[0]['value']);
+    if(!in_array($reporter_array[0], $data)) {
+      $data[] = $reporter_array[0];
+    }
+
+  }
+}
+
+  $html .= "</table>";
+  $options['node_url'] = $html;
   if (function_exists('mongodb')) {
     $con = mongodb();
     // check connection
     if ($con) {
       $people = $con->front_user_activity;
-      $cursor = $people->find(array("ntype" => array('$in' => array('anchor', 'author'))
+      $cursor = $people->find(array("nid" => array('$in' => $data)
       ));
 
       foreach ($cursor as $document) {
-        $options[] = array('uid' => $document['uid'], 'nid' => $document['nid']);
+        if(!in_array($document['uid'], $options[$document['ntype']])) {
+          $options[$document['ntype']][] = $document['uid'];
+        }
       }
       return $options;
     } //close connection
@@ -1005,10 +1053,67 @@ function itg_cron_mail_for_following() {
  * Implements callback function for 'itg_ugc_send_follow_story_content_mail'
  * @param type $node
  */
-function itg_personalization_send_follow_mail($node) {
+
+function itg_personalization_send_follow_mail() {
+  module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+  $data = itg_cron_mail_for_following();
+
+  if (!empty($data)) {
+    $story_url = $data['node_url'];
+    foreach ($data['author'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = 'arunmishra.coder@gmail.com';//itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+
+    // for topic
+    foreach ($data['tag'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+  }
+}
+
+
+function itg_personalization_send_follow_mail_old($node) {
       module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
       $get_user_id = itg_cron_mail_for_following();
-
+      p($get_user_id);
       if (!empty($get_user_id)) {
         $node_title = itg_personalization_node_get_title_fast($get_user_id);
         foreach ($get_user_id as $follow_user) {
@@ -1060,7 +1165,8 @@ function itg_personalization_node_get_title_fast(array $nids) {
   }
 
   if ($unavailable) {
-    $results = db_query("SELECT nid, title FROM {node} WHERE nid IN (:nids)", array(':nids' => array_keys($unavailable)))->fetchAllKeyed(0, 1);
+    //$results = db_query("SELECT nid, title FROM {node} WHERE nid IN (:nids)", array(':nids' => array_keys($unavailable)))->fetchAllKeyed(0, 1);
+
     if ($results) {
       $return = $results + $unavailable;
       $titles = $return + $titles;
