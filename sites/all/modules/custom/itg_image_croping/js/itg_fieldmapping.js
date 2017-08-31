@@ -307,6 +307,13 @@
 
     })
     var form_value = jQuery('#image_teg_form').serialize();
+     // Add code to get the caption 
+        var all_form_data = form_value.split('&');
+        var full_cap = all_form_data[1];
+        var cap = full_cap.split('=');
+        var caption_value_0 = cap[1].replace(/\+/g, ' ');
+        var caption_value = caption_value_0.replace(/\%2C/g,',');
+    // end of the code        
     if (flg == 0) {
       showloader();
       jQuery.ajax({
@@ -334,11 +341,14 @@
             } else {
               synd_class = "data-syndication='no'";
             }
+            // Add code to get the caption 
+
+            // end of the code  
             var imagename = jQuery('#imcurl').val();
-            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
+            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt= ""/><div class="body_caption">'+caption_value+'</div>';
             parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 
-            parent.jQuery.colorbox.close();
+            parent.jQuery.colorbox.close(); 
           } else {
             jQuery('.imagefid').each(function() {
               var getvalue = jQuery(this).val();

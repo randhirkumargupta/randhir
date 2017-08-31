@@ -62,7 +62,10 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
     $current_time = time();
     //pr($values->_field_data['nid']['entity']->type == 'quiz');
     $itg_status = $values->_field_data['nid']['entity']->status;
-    if (($itg_status == 0) || (!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
+    if($external_url = _is_external_url_story_article($values->nid)){
+		$web_link = '<a href="' . $external_url . '" target="_blank">web</a>';
+        $mob_link = '<a href="' . $external_url . '" target="_blank">mobile</a>';
+	} else if (($itg_status == 0) || (!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
       $node_url = $base_url . '/node/' . $values->nid;
       $mob_link = '<a class="colorbox-load" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">mobile</a>';
       $web_link = l('web' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));        

@@ -50,7 +50,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   //code for multidomain
   if ($form_id == 'user_login') {
-    $form['#validate'][] = 'itg_users_backend_validate';
+   // $form['#validate'][] = 'itg_users_backend_validate';
     if (empty($form['pass']['#attributes'])) {
       $form['pass']['#attributes'] = array();
     }
