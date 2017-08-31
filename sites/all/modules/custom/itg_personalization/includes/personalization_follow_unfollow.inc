@@ -5,11 +5,8 @@
 ?>
 <?php
 /**
- *
+ * Remove own follow activity
  */
-function itg_personalization_remove_activity_old() {
-  itg_personalization_send_follow_mail();
-}
 function itg_personalization_remove_activity() {
   global $user;
   $nid = $_POST['nd_id'];
@@ -22,8 +19,6 @@ function itg_personalization_remove_activity() {
         $response = array('success' => 'true');
         print json_encode($response);
     } //close connection
-
-    
   }
 }
 
