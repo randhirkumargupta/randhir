@@ -7,7 +7,7 @@
 /**
  * Remove own follow activity
  */
-function itg_personalization_remove_activity_old() {
+function itg_personalization_remove_activity() {
   global $user;
   $nid = $_POST['nd_id'];
   if (function_exists('mongodb')) {
@@ -20,10 +20,6 @@ function itg_personalization_remove_activity_old() {
         print json_encode($response);
     } //close connection
   }
-}
-
-function itg_personalization_remove_activity() {
-  _get_following_user_anchor();
 }
 
 
