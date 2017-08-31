@@ -7,6 +7,7 @@
 
 define('HOME_PAGE_JSON_NEWS_LIST_INDIA', 1206578);
 define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577);
+define('SSO_SERVER_URL', 'http://itgd-dev-sso.indiatodayonline.in');
 
 //CATEGORY_MANAGMENT; 14
 

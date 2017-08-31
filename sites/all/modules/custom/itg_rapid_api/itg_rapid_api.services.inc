@@ -2976,7 +2976,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $method = "GET";
         $data = $params;
         $account = array();
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/login_request";
+        $url = SSO_SERVER_URL."/appapi/login_request";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3036,7 +3036,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $data['expires_at'] = $params['expires_at'];
         $data['password'] = $password;
         $account = array();
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+        $url = SSO_SERVER_URL."/appapi/fblogin";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3096,7 +3096,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $data['expires_at'] = $params['expires_at'];
         $data['password'] = $password;
         $account = array();
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+        $url = SSO_SERVER_URL."/appapi/fblogin";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3165,7 +3165,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $account = array();
     //p($data);die();
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3178,7 +3178,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         $method = "GET";
         $data = $params;
         $account = array();
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/signup";
+        $url = SSO_SERVER_URL."/appapi/signup";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = $result_obj->uid;
@@ -3186,7 +3186,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
 
         if ($uid) {
             localSignup($params);
-            $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
+            $url = SSO_SERVER_URL."/appapi/resend_otp";
             $result = callAPI($method, $url, $params);
             $result_obj = json_decode($result);
             $account['status_code'] = "1";
@@ -3225,7 +3225,7 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
     $data['issued_at'] = $_GET['issued_at'];
     $data['expires_at'] = $_GET['expires_at'];
     $account = array();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/fblogin";
+    $url = SSO_SERVER_URL."/appapi/fblogin";
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
@@ -3262,7 +3262,7 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
     $data['expires_at'] = $_GET['expires_at'];
 
     $account = array();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/twtlogin";
+    $url = SSO_SERVER_URL."/appapi/twtlogin";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
@@ -3290,7 +3290,7 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
 
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/forgot_password";
+    $url = SSO_SERVER_URL."/appapi/forgot_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     $data['status_code'] = "1";
@@ -3312,7 +3312,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/otp_verification";
+    $url = SSO_SERVER_URL."/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo $result_obj[0]->otp; die();
@@ -3365,7 +3365,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/resend_otp";
+    $url = SSO_SERVER_URL."/appapi/resend_otp";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3397,7 +3397,7 @@ function itg_rapid_api_change_password($token, $user_id) {
         $data['status_message'] = "$error_msg";
         return $data;
     }
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/change_password";
+    $url = SSO_SERVER_URL."/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3668,7 +3668,7 @@ function itg_rapid_api_edit_profile($token) {
     $method = "GET";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3683,7 +3683,7 @@ function itg_rapid_api_edit_profile($token) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_profile";
+        $url = SSO_SERVER_URL."/appapi/edit_profile";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
         
@@ -3707,7 +3707,7 @@ function itg_rapid_api_edit_user_image($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3731,7 +3731,7 @@ function itg_rapid_api_edit_user_image($token) {
 
         // call sso server api
         $method = "GET";
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/edit_user_image";
+        $url = SSO_SERVER_URL."/appapi/edit_user_image";
         $result = callAPI($method, $url, $params);
 
         // check mime-type
@@ -3782,7 +3782,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3873,7 +3873,7 @@ function itg_rapid_api_log_out($token) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     // check valid user_id
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3886,7 +3886,7 @@ function itg_rapid_api_log_out($token) {
     {
         // call sso server api
         $method = "GET";
-        $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/log_out";
+        $url = SSO_SERVER_URL."/appapi/log_out";
         $result = callAPI($method, $url, $params);
         $user_id = $params['user_id'];
         $user = user_load_by_name($user_id);
@@ -3924,7 +3924,7 @@ function itg_rapid_api_get_preference($token) {
     $user_id = $params['user_id'];
     $authtoken_id = $params['authtoken_id'];
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -4008,7 +4008,7 @@ function itg_rapid_api_update_preference($token) {
     }
 
     $rand = rand();
-    $url = "http://itgd-dev-sso.indiatodayonline.in/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
