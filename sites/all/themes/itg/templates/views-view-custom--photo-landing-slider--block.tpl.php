@@ -129,7 +129,7 @@ $argum = base64_encode(arg(1));
                                 <i class="fa fa-camera" aria-hidden="true"></i>
                                 <?php print $row['counter']; ?>
                             </div>
-                            <div class="caption"><?php print mb_strimwidth(html_entity_decode(strip_tags($row['field_image_caption'])), 0, 125, ".."); ?>
+                            <div class="caption"><?php print html_entity_decode(strip_tags($row['field_image_caption'])); ?>
 
                                 <div class="section-like-dislike">
                                     <!--<div id="btn-div">-->
