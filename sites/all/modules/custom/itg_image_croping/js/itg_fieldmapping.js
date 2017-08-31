@@ -308,12 +308,14 @@
     })
     var form_value = jQuery('#image_teg_form').serialize();
      // Add code to get the caption 
-        var all_form_data = form_value.split('&');
-        var full_cap = all_form_data[1];
-        var cap = full_cap.split('=');
-        var caption_value_0 = cap[1].replace(/\+/g, ' ');
-        var caption_value = caption_value_0.replace(/\%2C/g,',');
-    // end of the code        
+    var all_form_value = jQuery('#image_teg_form').serializeArray();
+    var image_result = { };
+    jQuery.each(all_form_value, function() {
+        image_result[this.name] = this.value;
+    });
+    //console.log(image_result['caption[]']);
+    var caption_value = image_result['caption[]'];
+   // end of the code        
     if (flg == 0) {
       showloader();
       jQuery.ajax({
