@@ -228,7 +228,7 @@ $argum = base64_encode(arg(1));
     $explode = explode("?", $_SERVER['REQUEST_URI']);
     $initial_slide = 0;
     if(count($explode) > 1) {
-        $initial_slide = end($explode);
+        $initial_slide = is_integer(end($explode)) ? end($explode) : 0;
     }
 ?>
 <script>
