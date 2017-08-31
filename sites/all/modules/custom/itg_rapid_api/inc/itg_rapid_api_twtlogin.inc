@@ -142,7 +142,7 @@ function userSignupTWT($uname_social, $uid_social, $password){
         ),
         'roles' => array(
             2 => 'authenticated',
-            FRONT_USER => 'Front User',
+            25 => 'Front User',
         ),
     );
 

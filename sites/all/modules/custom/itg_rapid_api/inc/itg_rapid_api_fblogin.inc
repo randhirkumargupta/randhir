@@ -141,7 +141,7 @@ function userSignupFB($uname_social, $uid_social, $password) {
         ),
         'roles' => array(
             2 => 'authenticated',
-            4 => 'Front User',
+            25 => 'Front User',
         ),
     );
 
@@ -252,7 +252,7 @@ function localSignup($data) {
             ),
             'roles' => array(
                 2 => 'authenticated',
-                4 => 'Front User',
+                25 => 'Front User',
             ),
         );
 
