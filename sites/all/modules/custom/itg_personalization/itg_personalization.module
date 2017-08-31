@@ -1107,6 +1107,7 @@ function itg_personalization_send_follow_mail() {
       }
     }
   }
+  return TRUE;
 }
 
 
