@@ -354,3 +354,16 @@ jQuery('.delete_class').click(function () {
         return false;
     }
 });
+
+if (is_mobile) {
+    jQuery('.follow-author li').hide();
+    jQuery('.follow-topics li').hide();
+    jQuery("a.letter").click(function () {
+        var letter = jQuery(this).attr('id');
+        jQuery('.follow-anchor li').hide();
+        jQuery('.follow-author li').hide();
+        jQuery('.follow-topics li').hide();
+        jQuery('.' + letter + ' li').show();
+
+    });
+}
