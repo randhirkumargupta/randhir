@@ -434,7 +434,6 @@ class itg_auto_save {
           break;
 
         case 'text':
-          pr($field_values[$value['fieldName']]['und']);
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
@@ -498,12 +497,6 @@ class itg_auto_save {
           break;
 
         case 'text':
-          
-//          if ($inputs['form_id'] == 'newsletter_node_form') {
-//            //pr($field['fieldName']);
-//            $node->{$field['fieldName']}['und'][0]['value'] = 'Save as Draft';
-//          }
-
           if (is_array($inputs[$field['fieldName']]['und']) && count($inputs[$field['fieldName']]['und']) > 0) {
             foreach ($inputs[$field['fieldName']]['und'] as $key => $value) {
               if ($value['value'] != '') {
@@ -638,6 +631,7 @@ class itg_auto_save {
           break;
         
         case 'list_integer':
+          
           $this->value = $inputs[$field['fieldName']]['und'];
           if (isset($this->value) && !empty($this->value)) {
             preg_match_all('!\d+!', $this->value, $matches);
@@ -710,9 +704,14 @@ class itg_auto_save {
           break;
 
         case 'text':
-//          pr($field['fieldName']);
-//          pr($inputs[$field['fieldName']]['und']);
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          if ($field['fieldName'] == 'field_survey_answer_option_2') {
+            $opt2 = $inputs[$field['fieldName']]['und'];
+            foreach ($opt2 as $opt2_key => $opt2_val) {
+              $fc_item->{$field['fieldName']}[LANGUAGE_NONE][$opt2_key]['value'] = $opt2_val['value'];
+            }
+          } else {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
           break;
 
         case 'taxonomy_term_reference':
