@@ -322,33 +322,35 @@ jQuery(document).ready(function () {
         }
     });
 
-    // jquery for delete follow / unfollow
-    jQuery('.delete_class').click(function (event) {
-        var li = jQuery(this).closest('li'),
-            del_id = jQuery(this).attr('id');
-        var post_data = "&nd_id=" + del_id;
-        jQuery(this).closest(".emoji-container").find("a").removeClass("def-cur-pointer").addClass("def-cur-none-pointer");
-        if(jQuery(this).attr('data-activity') != 'undefined') {
-            jQuery.ajax({
-                'url': Drupal.settings.baseUrl.baseUrl + '/user-remove-follow-activity',
-                'data': post_data,
-                'cache': false,
-                'type': 'POST',
-                // dataType: 'json',
-                beforeSend: function () {
+});
 
-                },
-                'success': function (result) {
-                    var obj = jQuery.parseJSON(result);
-                    li.fadeOut(1000, function(){
-                        jQuery(this).remove();
-                    });
-                    if (obj.error == 'error') {
+// jquery for delete follow / unfollow
+jQuery('.delete_class').click(function () {
+    var li = jQuery(this).closest('li'),
+        del_id = jQuery(this).attr('id');
+    var post_data = "&nd_id=" + del_id;
+    if(confirm("Are you sure you want to delete this?")){
+        jQuery.ajax({
+            'url': Drupal.settings.baseUrl.baseUrl + '/user-remove-follow-activity',
+            'data': post_data,
+            'cache': false,
+            'type': 'POST',
+            beforeSend: function () {
 
-                    }
+            },
+            'success': function (result) {
+                var obj = jQuery.parseJSON(result);
+                li.fadeOut(1000, function(){
+                    jQuery(this).remove();
+                });
+                if (obj.error == 'error') {
 
                 }
-            });
-        }
-    });
+
+            }
+        });
+    }
+    else{
+        return false;
+    }
 });
