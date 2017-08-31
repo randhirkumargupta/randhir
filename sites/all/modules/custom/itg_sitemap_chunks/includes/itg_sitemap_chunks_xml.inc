@@ -219,11 +219,6 @@ function itg_sitemap_get_xml_data_for_section($section_tid) {
   //Condition to get nodes between frequency and current time.
   $query->condition('n.created', array($previous_time, REQUEST_TIME), 'BETWEEN');
   // Exclude node It is not required.
-//  if (!empty($excluded_nodes)) {
-//    foreach ($excluded_nodes as $nid) {
-//      $query->condition('nid', $nid, "!=");
-//    }
-//  }
   $query->orderBy('n.nid', 'DESC');
   //get unique Noides.
   $query->groupBy('n.nid');
