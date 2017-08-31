@@ -1398,3 +1398,61 @@ function itg_watchdog($error_type , $message) {
     watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
 }
 
+/**
+ * Function for prevent sent email during widget add bulk operation.
+ * @param array $request
+ * @return boolean
+ */
+function itg_workflow_stop_node_update_batch_for_widgets() {
+  $id = $_REQUEST['id'];
+  $query = db_select('batch', 'b')
+      ->fields('b', array('batch'))
+      ->condition('b.bid', $id);
+  $result = $query->execute()->fetchField();
+  $batch_data_array = unserialize($result);
+  $redirect_path = $batch_data_array['form_state']['redirect']['path'];
+  $widgets_urls = _widget_batch_urls();
+  if (in_array($redirect_path, $widgets_urls)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * All widgets URL.
+ * @return array
+ */
+function _widget_batch_urls() {
+  return array(
+    'trending-video-widget-list',
+    'big-story-format-conent',
+    'dont-miss-widget-contents',
+    'most-popular-story',
+    'special-auto-review-widget-contents',
+    'yearend-left-widget-contents',
+    'most-read-widget-contents',
+    'custom-html-widgets-list',
+    'special-how-made-it-widget-contents',
+    'election-xml-list',
+    'state-manager',
+    'special-key-candidate-widget-contents',
+    'saction-staticpage-list',
+    'budget-predictor-image',
+    'we-may-suggest-draggable-content-order',
+    'story-list-widget',
+    'trending-video-widget-list',
+    'top-takes-videos-list',
+    'watch-right-now-videos-list',
+    'poll-format-conent',
+    'manage-highlights',
+    'home-page-feature-widget-listing',
+    'photo-list-widget',
+    'video-list-widget',
+    'anchor-list',
+    'so-sorry-video-widget-list',
+    'issue-magazin-primary-cat-widget',
+    'issue-base-magazin-widget',
+    'issue-magazin-primary-cat-widget',
+    'supplement-base-magazin-widget'
+  );
+}

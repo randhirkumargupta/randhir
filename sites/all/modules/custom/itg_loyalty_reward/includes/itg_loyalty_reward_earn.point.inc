@@ -413,7 +413,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
     $itg_query->join('users', 'u', 'pk.sso_id=u.uid');    
     $itg_query->fields('u', array('mail', 'name', 'uid'));
     $itg_query->fields('pk', array('remaining_points'));
-    $itg_query->fields('pk', array('expiry_date', 'status'));
+    $itg_query->fields('pk', array('expiry_date', 'status' , 'property'));
     $itg_query->condition('pk.status', 1);
     $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
     $itg_query->havingCondition('date_diff_real', 1);
@@ -426,8 +426,12 @@ function itg_loyalty_reward_points_expire_notification_callback() {
   if (!empty($itg_result)) {
     foreach ($itg_result as $value) {
       $data['remaining_point'] = $value->remaining_points;
-      $data['name'] = $value->name;
+      if(function_exists('itg_custom_get_user_details')) {
+        $detail = itg_custom_get_user_details($value->uid);
+      }
+      $data['name'] = $detail['fname'].''.$detail['lname'];
       $data['expiry_date'] = $value->expiry_date;
+      $data['property'] = $value->property;
       
       if ((strpos($value->mail, '@twitter.com') !== false || strpos($value->mail, '@facebook.com') !== false)) {
        $user_mail = itg_get_global_alt_email($value->uid); 
@@ -437,6 +441,35 @@ function itg_loyalty_reward_points_expire_notification_callback() {
       // for mail code
       watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
       itg_common_get_mail_content($data, $user_mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+    }
+  }
+}
+
+/**
+ * Implements callback function for point update status.
+ */
+function itg_loyalty_reward_points_expire_status_callback() {
+  $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_loyality_point', 'pk');
+    $itg_query->fields('pk');
+    $itg_query->condition('pk.status', 1);
+    $itg_query->condition('pk.expiry_date', REQUEST_TIME , '<');
+    $itg_result = $itg_query->execute()->fetchAll();
+  } catch (Exception $ex) {
+    watchdog('Update Point Expiry Notification', $ex->getMessage());
+  }
+  // update central db if got some user on result.  
+  $erros = array_filter($itg_result);
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $value) {
+      db_update('itg_global_loyality_point')
+          ->fields(array(
+            'status' => 0,
+          ))
+          ->condition('id', $value->id, '=')
+          ->execute();
+      //watchdog('update expiry point of '.$value->id, '<pre>'.print_r(0, true).'</pre>');
     }
   }
 }
