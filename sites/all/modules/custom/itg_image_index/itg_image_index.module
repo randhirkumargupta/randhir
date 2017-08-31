@@ -123,6 +123,11 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
      
     }
     
+    // unset related detail field for indexing solr
+    if(!empty($node->field_cm_related_content_detail['und']['0']['value'])) {
+      unset($node->field_cm_related_content_detail['und']['0']['value']);
+    }
+    
     if(isset($node->type) && $node->type == 'magazine') {
      if (!empty($node->field_magazine_cover_photo['und']['0']['uri'])) {
         $magazine_image_url = file_create_url($node->field_magazine_cover_photo['und']['0']['uri']);
