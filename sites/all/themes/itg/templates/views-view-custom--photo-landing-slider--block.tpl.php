@@ -292,30 +292,31 @@ $argum = base64_encode(arg(1));
             fade: true,
             asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
         });
-
-        jQuery(document).ready(function () {
-            jQuery(".slick-arrow , li.slick-slide").on("click", function () {
-                var active_slide = jQuery(".slick-active").attr("data-slick-index");
-                var current_url = window.location.href.split('?')[0];
-                if (active_slide > 0) {
-                    window.history.pushState("", "", current_url + "?" + active_slide);
-                } else {
-                    // If frist slide then put pull without query string.
-                    window.history.pushState("", "", current_url);
-                }
-            });
-        });
+// Photogallery slider javascript
+//        jQuery(document).ready(function () {
+//            jQuery(".slick-arrow , li.slick-slide").on("click", function () {
+//                var active_slide = jQuery(".slick-active").attr("data-slick-index");
+//                var current_url = window.location.href.split('?')[0];
+//                if (active_slide > 0) {
+//                    window.history.pushState("", "", current_url + "?" + active_slide);
+//                } else {
+//                    // If frist slide then put pull without query string.
+//                    window.history.pushState("", "", current_url);
+//                }
+//            });
+//        });
     });
+    // Photogallery slider javascript
     // Handle Thumb for active set class
-    jQuery(window).load(function() {
-        var active_slide = jQuery(".slick-active").attr("data-slick-index");
-        jQuery( '.slick-thumbs li' ).removeClass('slick-current');
-        jQuery( '.slick-thumbs li' ).each( function(key , item) {
-            if(key == active_slide) {
-                jQuery( this).addClass("slick-current");
-            }
-        });
-    });
+//    jQuery(window).load(function() {
+//        var active_slide = jQuery(".slick-active").attr("data-slick-index");
+//        jQuery( '.slick-thumbs li' ).removeClass('slick-current');
+//        jQuery( '.slick-thumbs li' ).each( function(key , item) {
+//            if(key == active_slide) {
+//                jQuery( this).addClass("slick-current");
+//            }
+//        });
+//    });
 </script>
 
 
