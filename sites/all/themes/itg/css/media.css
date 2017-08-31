@@ -606,7 +606,7 @@
   .story-section .byline .profile-detail ul li.twitter iframe{ width:57px!important;border-radius: 4px!important;}
   .anchor-right .social-icon ul li a{ text-indent: -9999px }
   .anchor-right .social-icon ul li a i{text-indent: 0px }
-  .personal-list ul.personal-lists-col{ width:100%; margin: 0 20px 0 50px; }
+  .personal-list ul.personal-lists-col{ width:75%; margin: 0 20px 0 70px; }
   .block-itg-ads {
     overflow: hidden;
   }
