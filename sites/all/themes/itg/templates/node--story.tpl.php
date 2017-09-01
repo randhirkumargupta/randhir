@@ -16,7 +16,7 @@ if (!empty($content)):
   }
   $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-    $class_listicle = ' buzz-feedback listicle-feedback';
+    $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -212,7 +212,7 @@ if (!empty($content)):
       endif;
     ?>
       <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
             <div class="byline">              
               <?php if ($sponsor_text == ''): ?>
@@ -349,7 +349,7 @@ if (!empty($content)):
           </div>
   <?php } ?>
         <!-- For buzzfeed section start -->
-              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
+              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { //  || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])?>                       
           <div class="buzzfeed-byline">
             <div class="byline">
               <div class="profile-pic">
