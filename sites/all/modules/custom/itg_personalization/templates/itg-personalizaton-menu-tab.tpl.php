@@ -31,7 +31,7 @@
       <?php echo l(t('Following'), 'personalization/my-following'); ?>
     </li>
     <li class="following">
-      <?php echo l(t('Following Anchors'), 'personalization/my-following-anchor'); ?>
+      <?php echo l(t('Followers'), 'personalization/my-followers'); ?>
     </li>      
     <li class="my-credits">
       <?php echo l(t('My Credits'), 'personalization/my-credits'); ?>      
