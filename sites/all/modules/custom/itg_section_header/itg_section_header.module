@@ -1,0 +1,211 @@
+<?php
+
+/**
+ * @file
+ * ITG Section Header module.
+ *
+ * Module for change the header and right sidebar.
+ *
+ */
+
+/**
+ * Implements hook_block_list_alter().
+ * {@inheritdoc}
+ */
+function itg_section_header_block_list_alter(&$blocks) {
+//     echo '<pre>';print_r($blocks);die;
+    $arg = arg();
+    if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])) {
+        $nid = $arg[1];
+        $primary_tid = get_primary_category_node($nid);
+        if ($primary_tid) {
+            if (is_section_header($primary_tid)) {
+                $section_blocks = get_section_blocks($primary_tid);
+                if (!$section_blocks || count($section_blocks) <= 0) {
+                    return;
+                }
+                $counter = 0;
+                $block_weight = 0;
+                $new_blocks = array();
+                foreach ($blocks as $key => $block) {
+                    if (($block->theme == 'itg') && ($block->region == 'sidebar_second')) {
+                        $block_weight = $block->weight;
+                        if ($block->module == 'itg_ads') {
+                            $new_blocks[$block->bid] = $block;
+                        }
+                        unset($blocks[$key]);
+                        if (isset($section_blocks[$counter])) {
+                            $block_data = explode(':', $section_blocks[$counter]);
+                            $_block = block_load($block_data[0], $block_data[1]);
+                            $_block->region = 'sidebar_second';
+                            $_block->weight = $block_weight;
+                            $new_blocks[$_block->bid] = $_block;
+                            $counter++;
+                        }
+                    }
+                }
+                for ($i = $counter; $i < count($section_blocks); $i++) {
+                    $block_data = explode(':', $section_blocks[$i]);
+                    $_block = block_load($block_data[0], $block_data[1]);
+                    $_block->region = 'sidebar_second';
+                    $_block->weight = $block_weight;
+                    $new_blocks[$_block->bid] = $_block;
+                }
+                $blocks = $blocks + $new_blocks;
+            }
+        }
+    }
+}
+
+/**
+ * Function to check Section header
+ */
+function is_section_header($tid) {
+    $is_section_header = FALSE;
+    if (!empty($tid)) {
+        if (db_table_exists('field_data_field_is_section_header')) {
+            $query = db_select('field_data_field_is_section_header', 'sh');
+            $query->fields('sh', array('field_is_section_header_value'));
+            $query->condition('sh.entity_id', $tid, '=');
+            $query->condition('sh.bundle', 'category_management', '=');
+            $query->condition('sh.entity_type', 'taxonomy_term', '=');
+            $query_result = $query->execute()->fetchAll();
+            if (!empty($query_result) && !empty($query_result[0]->field_is_section_header_value)) {
+                $is_section_header = $query_result[0]->field_is_section_header_value;
+            }
+        }
+    }
+    return $is_section_header;
+}
+
+/**
+ * Function to check Section header
+ */
+function get_all_section_header_tid() {
+    $is_section_header = FALSE;
+    if (db_table_exists('field_data_field_is_section_header')) {
+        $query = db_select('field_data_field_is_section_header', 'sh');
+        $query->fields('sh', array('entity_id'));
+        $query->condition('sh.field_is_section_header_value', 1, '=');
+        $query->condition('sh.bundle', 'category_management', '=');
+        $query->condition('sh.entity_type', 'taxonomy_term', '=');
+        $query_result = $query->execute()->fetchAll();
+        $is_section_header = $query_result;
+    }
+    return $is_section_header;
+}
+
+/**
+ * Function to check Section header
+ */
+function get_primary_category_node($nid) {
+    $tid = FALSE;
+    if (!empty($nid)) {
+        if (db_table_exists('field_data_field_primary_category')) {
+            $query = db_select('field_data_field_primary_category', 'pc');
+            $query->fields('pc', array('field_primary_category_value'));
+            $query->condition('pc.entity_id', $nid, '=');
+            $query->condition('pc.bundle', 'story', '=');
+            $query->condition('pc.entity_type', 'node', '=');
+            $query_result = $query->execute()->fetchAll();
+            if (!empty($query_result) && !empty($query_result[0]->field_primary_category_value)) {
+                $tid = $query_result[0]->field_primary_category_value;
+            }
+        }
+    }
+    return $tid;
+}
+
+/**
+ * Function to check Section header menu
+ */
+function get_section_menu($tid) {
+    $menu = FALSE;
+    if (!empty($tid)) {
+        if (db_table_exists('field_data_field_section_menu')) {
+            $query = db_select('field_data_field_section_menu', 'sm');
+            $query->fields('sm', array('field_section_menu_mlid'));
+            $query->condition('sm.entity_id', $tid, '=');
+            $query->condition('sm.bundle', 'category_management', '=');
+            $query->condition('sm.entity_type', 'taxonomy_term', '=');
+            $query_result = $query->execute()->fetchAll();
+            if (!empty($query_result) && !empty($query_result[0]->field_section_menu_mlid)) {
+                $menu = $query_result[0]->field_section_menu_mlid;
+            }
+        }
+    }
+    return $menu;
+}
+
+/**
+ * Function to check Section header blocks
+ */
+function get_section_blocks($tid) {
+    $blocks = FALSE;
+    if (!empty($tid)) {
+        if (db_table_exists('field_data_field_section_right_side_block')) {
+            $query = db_select('field_data_field_section_right_side_block', 'sb');
+            $query->fields('sb', array('field_section_right_side_block_moddelta'));
+            $query->condition('sb.entity_id', $tid, '=');
+            $query->condition('sb.bundle', 'category_management', '=');
+            $query->condition('sb.entity_type', 'taxonomy_term', '=');
+            $query_result = $query->execute()->fetchAll();
+            foreach ($query_result as $result) {
+                $blocks[] = $result->field_section_right_side_block_moddelta;
+            }
+        }
+    }
+    return $blocks;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_section_header_theme($existing, $type, $theme, $path) {
+    $themes = array();
+    $all_section_tpls = get_all_section_header_tid();
+    foreach ($all_section_tpls as $value) {
+        $themes['section_header_' . $value->entity_id . '_block'] = array(
+          'template' => 'itg-section-' . $value->entity_id . '-header',
+          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/section-header',
+        );
+    }
+    return $themes;
+}
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_section_header_form_alter(&$form, &$form_state, $form_id) {
+    if ($form_id == 'taxonomy_form_term') {
+        if (isset($form['field_section_right_side_block'])) {
+            drupal_add_js(drupal_get_path('module', 'itg_section_header') . '/js/itg_section_header.js', array('scope' => 'footer'));
+            $form['field_section_right_side_block']['#prefix'] = '<div class="section_right_side_block">';
+            $form['field_section_right_side_block']['#suffix'] = '<a class="multi-right-block" data-tag="save">' . t('Add') . '</a></div><div class="blocks-list"><ul class="blocks-ul">' . itg_sections_blocks_info($form, $form_state) . '</ul></div><span class="success-blocks"></span>';
+            array_unshift($form['#submit'], 'manage_block_order_section_submit');
+        }
+    }
+}
+
+function manage_block_order_section_submit(&$form, &$form_state) {
+    if (isset($form_state['values']['field_section_right_side_block'])) {
+        $counter = 0;
+        unset($form_state['values']['field_section_right_side_block']['und']);
+        foreach ($form_state['input']['rightsideblock'] as $block) {
+            $form_state['values']['field_section_right_side_block']['und'][$counter]['moddelta'] = $block;
+            $counter++;
+        }
+    }
+}
+
+function itg_sections_blocks_info($form, $form_state) {
+    if (isset($form_state['term']) && isset($form_state['term']->field_section_right_side_block) && !empty($form_state['term']->field_section_right_side_block['und'])) {
+        $html = '';
+        foreach ($form_state['term']->field_section_right_side_block['und'] as $key => $block) {
+            $html .= '<li id="' . $block["moddelta"] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="hidden" name="rightsideblock[' . $key . ']" value="' . $block["moddelta"] . '"><span>' . $form['field_section_right_side_block']['und']['#options'][$block["moddelta"]] . '</span></span></li>';
+        }
+        return $html;
+    }
+}

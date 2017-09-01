@@ -383,6 +383,30 @@ function itg_layout_manager_block_view($delta = '') {
     case 'header_block':
 
       $arg = arg();
+      if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1]) && function_exists('get_primary_category_node') && function_exists('is_section_header')) {
+            $nid = $arg[1];
+            $primary_tid = get_primary_category_node($nid);
+            if ($primary_tid) {
+                if (is_section_header($primary_tid)) {
+                    $tpl_name = 'section_header_' . $primary_tid . '_block';
+                    if (!empty(theme($tpl_name))) {
+                        $child_menu = $child_terms = menu_build_tree('menu-section-header-menu');
+                        $section_menu = get_section_menu($primary_tid);
+                        if ($section_menu) {
+                            foreach ($child_terms as $key => $m) {
+                                if ($m['link']['mlid'] == $section_menu) {
+                                    $child_menu = $m['below'];
+                                    break;
+                                }
+                            }
+                        }
+                        $data['menu_manager'] = $child_menu;
+                        $block['content'] = theme($tpl_name, array('data' => $data));
+                        break;
+                    }
+                }
+            }
+        }
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
 
