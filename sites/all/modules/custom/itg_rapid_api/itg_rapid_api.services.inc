@@ -3197,7 +3197,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         } else {
             watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
             $account['status_code'] = "0";
-            $account['status_message'] = "Duplicate sign up request";
+            $account['status_message'] = "Duplicate sign up request.";
         }
 
         return $account;
