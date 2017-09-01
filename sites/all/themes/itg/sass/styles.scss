@@ -1299,7 +1299,7 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            height: 398px;
+            height: 440px;
         }
         .home-page-poll-block-wrap{
          .droppable{
@@ -5404,7 +5404,6 @@ section.sidebar{
     margin:40px 0px 0px 0px;
     padding: 20px 0 10px 0;    
     .widget-title{
-        @include story-tag(22px,22px);   
         margin-bottom: 10px;
     }
     ul{

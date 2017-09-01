@@ -1596,7 +1596,7 @@ footer .multiple-items-footer i.slick-next {
 }
 
 .itg-common-section .droppable {
-  height: 398px;
+  height: 440px;
 }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
@@ -7330,25 +7330,7 @@ section.sidebar .block-itg-ads {
   padding: 20px 0 10px 0;
 }
 .recommended-for-you .widget-title {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  background: #a00606;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 7px;
-  text-transform: uppercase;
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  z-index: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
   margin-bottom: 10px;
-}
-.recommended-for-you .widget-title a {
-  color: #fff;
 }
 .recommended-for-you #block-itg-widget-personlization ul.common-list, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list {
   padding: 0 15px;

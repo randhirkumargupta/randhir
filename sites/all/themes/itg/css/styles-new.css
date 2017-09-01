@@ -406,9 +406,10 @@ input[type="file"], input[type="submit"], input[type="text"] {
   vertical-align: top;
   position: static !important;
   background: transparent;
-  color: #323232;
+  color: #000;
+  font-size: 16px;
   padding: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 .widget-title a {
   color: #323232;
