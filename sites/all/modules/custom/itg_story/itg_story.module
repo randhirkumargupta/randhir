@@ -862,6 +862,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       if (in_array('lock_story', $config)) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
+      if ($external_url = _is_external_url_story_article($node->nid)) {
+		  drupal_goto($external_url);
+	  }
     }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
