@@ -441,6 +441,10 @@ function itg_story_node_validate($node, $form, &$form_state) {
     if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
       form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
     }
+    $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
+    if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
+      form_set_error('field_story_external_url', t("$external_url is not a valid URL"));
+    }
 
     // code for check expiry date is greater then schedule date
     $schedule_date = $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'];
