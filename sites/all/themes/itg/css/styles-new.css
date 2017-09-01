@@ -244,6 +244,8 @@ input[type="file"], input[type="submit"], input[type="text"] {
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li img {
   border: 1px solid transparent;
+  width: 88px;
+  height: 66px;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li.slick-current img {
   border: 1px solid #fff;
