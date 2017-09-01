@@ -13,7 +13,6 @@
  * {@inheritdoc}
  */
 function itg_section_header_block_list_alter(&$blocks) {
-//     echo '<pre>';print_r($blocks);die;
     $arg = arg();
     if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])) {
         $nid = $arg[1];
@@ -208,4 +207,18 @@ function itg_sections_blocks_info($form, $form_state) {
         }
         return $html;
     }
+}
+
+function is_valid_node_header_section($arg){
+    if($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])){
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function is_valid_category_header_section($arg){
+    if($arg[0] == 'taxonomy' && $arg[1] == 'term' && !empty($arg[2]) && is_numeric($arg[2])){
+        return TRUE;
+    }
+    return FALSE;
 }
