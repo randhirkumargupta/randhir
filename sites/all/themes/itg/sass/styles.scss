@@ -1299,7 +1299,7 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            height: 398px;
+            height: 440px;
         }
         .home-page-poll-block-wrap{
          .droppable{
@@ -2096,6 +2096,9 @@ footer{
             a{
               color: #026bc5;
               &:hover{text-decoration: underline;}
+            }
+            .story-photo-list-wrapper{
+              clear: both;
             }
         }
         .briefcase {
@@ -4425,7 +4428,7 @@ h1.category-heading{
 }
 [id*="block-itg-widget-featured-photo-carousel"]{
   .flexslider .slides img {
-    max-height: 363px;
+    max-height: 340px;
   }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
@@ -5401,7 +5404,6 @@ section.sidebar{
     margin:40px 0px 0px 0px;
     padding: 20px 0 10px 0;    
     .widget-title{
-        @include story-tag(22px,22px);   
         margin-bottom: 10px;
     }
     ul{
@@ -9850,6 +9852,9 @@ h1.about-us-heading{
   .social-share{
     ul li:first-child{vertical-align: baseline;}
   }
+  ul li{
+    padding-top: 8px;
+  }
 }
 .factoids-slider{
     ul{        
@@ -12056,6 +12061,15 @@ span.see-picture{
 }
 .story-section h1 span.story-pipline, .story-section h1 span.story-pipline + a {
     color: #086DC7;
+}
+.featured_photo_carousel .data-holder{
+  height: calc(100% - 22px);
+}
+.top_stories_ordering .widget-title {
+    padding: 1px 7px;
+}
+.data-holder{
+  .poll-wrapper .poll-data{width: 100%;}
 }
 
 

@@ -1596,7 +1596,7 @@ footer .multiple-items-footer i.slick-next {
 }
 
 .itg-common-section .droppable {
-  height: 398px;
+  height: 440px;
 }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
@@ -2702,6 +2702,9 @@ footer .multiple-items-footer i.slick-next {
 }
 .story-section .story-right .description a:hover {
   text-decoration: underline;
+}
+.story-section .story-right .description .story-photo-list-wrapper {
+  clear: both;
 }
 .story-section .story-right .briefcase {
   margin-top: 20px;
@@ -5998,7 +6001,7 @@ h1.category-heading {
 }
 
 [id*="block-itg-widget-featured-photo-carousel"] .flexslider .slides img {
-  max-height: 363px;
+  max-height: 340px;
 }
 
 .view-photo-list-of-category, .view-video-list-of-category {
@@ -7327,25 +7330,7 @@ section.sidebar .block-itg-ads {
   padding: 20px 0 10px 0;
 }
 .recommended-for-you .widget-title {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  background: #a00606;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 7px;
-  text-transform: uppercase;
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  z-index: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
   margin-bottom: 10px;
-}
-.recommended-for-you .widget-title a {
-  color: #fff;
 }
 .recommended-for-you #block-itg-widget-personlization ul.common-list, .recommended-for-you #block-itg-front-end-common-recommended-anonymous-user ul.common-list {
   padding: 0 15px;
@@ -12028,6 +12013,9 @@ h1.about-us-heading + div p {
 .factoids-page .social-share ul li:first-child {
   vertical-align: baseline;
 }
+.factoids-page ul li {
+  padding-top: 8px;
+}
 
 .factoids-slider ul {
   background: #a00606;
@@ -14808,6 +14796,18 @@ span.see-picture a:after {
 
 .story-section h1 span.story-pipline, .story-section h1 span.story-pipline + a {
   color: #086DC7;
+}
+
+.featured_photo_carousel .data-holder {
+  height: calc(100% - 22px);
+}
+
+.top_stories_ordering .widget-title {
+  padding: 1px 7px;
+}
+
+.data-holder .poll-wrapper .poll-data {
+  width: 100%;
 }
 
 @media (min-width: 320px) {

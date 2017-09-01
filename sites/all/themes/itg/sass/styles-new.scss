@@ -214,6 +214,8 @@ input[type="file"], input[type="submit"], input[type="text"]{
                 }
                 img{
                     border: 1px solid transparent;
+                    width: 88px;
+                    height: 66px;
                 }
                 &.slick-current{
                     img{
@@ -387,7 +389,17 @@ input[type="file"], input[type="submit"], input[type="text"]{
 .widget-title{
     display: inline-block;
     vertical-align: top;
+    position: static !important;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    padding: 0;
+    font-weight: 600;
+    a{
+      color: #323232;
+    }
 }
+
 .sidebar-section-photo{
     .itg-widget{
         margin: 35px 0;
@@ -5320,7 +5332,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         padding: 20px 50px;
         .slick-slide{
 
-          .title{font: 500 26px/30px Roboto; padding-bottom: 12px;}
+          .title{font: 500 26px/30px Roboto; padding-bottom: 12px; padding-right: 50px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
           .pic{
             background: url(../images/funalytics.png) top right no-repeat;
             img{

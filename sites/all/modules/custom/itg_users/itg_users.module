@@ -5,7 +5,7 @@
  * The ITG Users module.
  * Provides Users functionality and customizations.
  */
-
+module_load_include('inc', 'itg_users', 'includes/itg_users');
 /**
  * Implement hook_user_presave
  * @param array $edit

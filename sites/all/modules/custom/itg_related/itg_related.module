@@ -41,6 +41,14 @@ function itg_related_menu() {
     'type' => MENU_LOCAL_TASK,
   );
   
+  $items['custom-index-solr-node'] = array(
+    'page callback' => '_custom_solr_index_node',
+    //'page arguments' => array('_custom_solr_index_node'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    //'access arguments' => array('access solr hash url'),
+  );
+  
   return $items;
 }
 
@@ -264,15 +272,23 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("q", $arg[1]);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
-        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Magazine');
+        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
         $val_str1 = implode(' OR ', $bundle_name);
+      } else if($arg[2] == 'Magazine') {
+        $source_name = 'issue_based';
+        $type = ' AND ';
+        $val_str1 = 'Story';
       }
       else {
         $val_str1 = $arg[2];
       }
-      $str = 'bundle_name:(' . $val_str1 . ')';
+      $str = 'bundle_name:(' . $val_str1 . ')'.$type;
+      if($arg[2] == 'Magazine') {
+      $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
+      }
       $query->replaceParam("fq", '(' . $str . ')');
     }
+    //pr($query->getSolrParams());
   }
   else if ($arg[0] == 'archives') {
     $source_name = 'non_issue_based';
@@ -339,10 +355,10 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
-    // pr($query->getSolrParams());
+   
   }
   else {
-    $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+    $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
 
     if (in_array(arg(0), $page_condition)) {
       $i = 1;
@@ -352,12 +368,11 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $and = ' AND ';
         }
 
-        $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio');
+        $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio', 'solr-unpublish-video');
 
-        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
+        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'solr-unpublish-video' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
           if (is_array($val)) {
-
             // condition if array is not empty and date field selected
             if ($key == 'ds_changed' && $_GET['custom_drp'] != '_none') {
               // all values are empty (where "empty" means == false)
@@ -389,6 +404,14 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
                   $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
                 }
               }
+            } else if($key == 'bundle_name' && $_GET['bundle_name'][0] == 'Magazine') {
+              $source_name = 'issue_based';
+              $type = ' AND ';
+              $val_str1 = 'Story';
+              $str = 'bundle_name:(' . $val_str1 . ')'.$type;
+              $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
+              $query->replaceParam("fq", '(' . $str . ')');
+              
             }
             else {
               $val_str = implode(' OR ', $val);
@@ -529,6 +552,32 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
         $query->replaceParam("fq", '(' . $str . ')');
       }
+      else if ($_GET['q'] == 'solr-unpublish-video') {
+        $hashvalue = $_GET['hash'];
+        $str = "";
+          if (function_exists('itg_apache_solr_get_site_hash')) {
+            $hash = itg_apache_solr_get_site_hash();
+          }
+
+          $hashvalue = implode(' OR ', array_keys($hash));
+          $str = 'hash:(' . $hashvalue . ')';
+          $str_pub = 'sm_field_property:(' . VIDEO_PROPERTY . ')';
+          $str_flag_publish = 'sm_field_video_used:(0)';
+          $str_flag_draft = '-sm_field_video_is_draft:(1)';
+          $str = $str . ' AND ' . $str_pub . ' AND ' . $str_flag_publish. ' AND ' . $str_flag_draft;
+         
+        if (isset($_GET['label']) && !empty($_GET['label'])) {
+          $str_label = 'label:(' . $_GET['label'] . '*)';
+          if ($str != "") {
+            $str = $str . ' AND ' . $str_label;
+          }
+          else {
+            $str = $str_label . '';
+          }
+        }
+
+        $query->replaceParam("fq", '(' . $str . ')');
+      }
       else {
 
         if (!empty($str)) {
@@ -537,6 +586,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
     }
+    //pr($query->getSolrParams());
   }
 }
 
@@ -677,4 +727,49 @@ function itg_get_twitter_list($name) {
     $options[$r_title] = $r_title;
   }
   drupal_json_output($options);
+}
+
+/*
+ * Implements _custom_solr_index_node().
+ */
+function _custom_solr_index_node() {
+  $arg = arg();
+  if($arg[0] == 'custom-index-solr-node' && !empty($arg[1])) {
+    $node = node_load($arg[1]);
+    if(!empty($node)) {
+     _custom_helper_apachesolr_index_immediately($node, 'node'); 
+    }
+  }
+}
+/*
+ * Implements _custom_helper_apachesolr_index_immediately().
+ */
+function _custom_helper_apachesolr_index_immediately($entity, $type) {
+  $env_id = apachesolr_default_environment();
+  $bundles_to_index = apachesolr_get_index_bundles($env_id, $type);
+
+  // Check if entity should be indexed
+  $info = entity_get_info($type);
+  if (!empty($info['entity keys']['bundle'])) {
+    $bundle = $entity->{$info['entity keys']['bundle']};
+  }
+  else {
+    $bundle = $type;
+  }
+
+  if (!in_array($bundle, $bundles_to_index)) {
+    return;
+  }
+
+  // Entity should be indexed, so send to solr
+  $ids = entity_extract_ids($type, $entity);
+
+  $item = new stdClass();
+  $item->entity_type = $type;
+  $item->entity_id = $ids[0];
+
+  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  $doc = apachesolr_index_entity_to_documents($item, $env_id);
+  apachesolr_index_send_to_solr($env_id, $doc);
+  drupal_set_message(t('Entity sent to solr please wait check updated data after 1 or 2 min'));
 }

@@ -1,4 +1,5 @@
 <?php
+global $user;
 /*
  * @file
  *   Cart order summary page template file. 
@@ -52,8 +53,13 @@
       <div class="cart-total-block">
         <div class="cart-total-inner">
           <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
-          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>
-          <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+          <!--<div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>-->
+              <?php if(number_format($remain_point) > 0) {?>
+          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order/'.  base64_encode($user->uid)); ?></div>
+              <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+              <?php } else {?>
+              <div class="checkout"><?php print '<strong>Insufficient points to redeem this product</strong>'; ?></div>
+              <?php } ?>
         </div>
       </div>  
     </div> 
@@ -66,8 +72,13 @@
       <div class="cart-total-block">
         <div class="cart-total-inner">
           <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
-          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>
-          <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+          <!--<div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>-->
+              <?php if(number_format($remain_point) > 0) {?>
+          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order/'.  base64_encode($user->uid)); ?></div>
+              <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+              <?php } else {?>
+              <div class="checkout"><?php print '<strong>Insufficient points to redeem this product</strong>'; ?></div>
+              <?php } ?>
         </div>
       </div>
       
@@ -78,7 +89,14 @@
             <h3>Address</h3>
             <address>
               <span><?php echo $data['user_detail']['name']; ?></span>
-              <span><?php echo $data['user_detail']['mail']; ?></span>
+              <span><?php
+              if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) {
+              //echo 'Please update your email address';
+              } else {
+              echo $data['user_detail']['mail'];  
+              }
+              ?>
+              </span>
               <span><?php echo $data['user_detail']['address']; ?></span>
               <span><?php echo $data['user_detail']['pincode']; ?></span>
             </address>
@@ -88,8 +106,11 @@
           <div id="change-address"><?php echo t('Change Address') ?></div>
         </div>
       </div>
-          
-  <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
+  <?php if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) { ?>        
+  <!-- <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div> -->
+  <?php } else {?>
+       <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
+  <?php } ?>     
   </div>
   <div class="itg-ads-block">
       <?php

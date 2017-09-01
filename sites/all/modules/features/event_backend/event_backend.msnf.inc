@@ -46,10 +46,9 @@ function event_backend_msnf_step_info() {
       22 => 'field_story_new_title',
       23 => 'field_tab_description',
       24 => 'field_tab_on_off',
-      25 => 'field_testsss',
-      26 => 'metatags',
-      27 => 'path',
-      28 => 'additional_settings',
+      25 => 'metatags',
+      26 => 'path',
+      27 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(

@@ -387,13 +387,18 @@ function itg_loyalty_reward_node_validate($node, $form, &$form_state) {
  */
 function itg_loyalty_reward_cronapi($op, $job = NULL) {
   $items['itg_loyalty_reward_product_expiry_notification'] = array(
-    'description' => 'Send mail before 24 hours for product expiration (Loyalty) ',
+    'description' => t('Send mail before 24 hours for product expiration (Loyalty)'),
     'callback' => 'itg_loyalty_reward_product_expiry_notification_callback',
   );
   // Set cron for point expiration notification.
   $items['itg_loyalty_reward_point_expiry_notification'] = array(
-    'description' => 'Send mail before 24 hours for point expiration (Loyalty)',
+    'description' => t('Send mail before 24 hours for point expiration (Loyalty)'),
     'callback' => 'itg_loyalty_reward_points_expire_notification_callback',
+  );
+  
+  $items['itg_loyalty_reward_point_expiry_status'] = array(
+    'description' => t('update status on central db for point expiration (Loyalty)'),
+    'callback' => 'itg_loyalty_reward_points_expire_status_callback',
   );
 
   return $items;

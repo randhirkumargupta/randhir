@@ -48,33 +48,7 @@ function itg_widget_setids() {
 }
 
 function remove_extra_data() {
-//  $widget = array(
-////      'widget_anchors_listing',
-////      'home_page_feature_widget',
-////      'story_widget',
-////        'section_wise_content_ordering_list',
-////      'section_wise_draggable_content_order',
-////      'big_story_format_widget',
-//      'dont_miss_content_widget',
-//      'dont_miss_content',
-//      'section_wise_widget',
-////      'we_may_suggest_widget',
-////      'section_wise_content_ordering',
-////      'widget_anchors_listing',
-////      'category_wise_content_list',
-////     'photo_carousel_widget',
-//  );
-//  foreach ($widget as $view_name) {
-//    $num_deleted = db_delete('draggableviews_structure')
-//            ->condition('view_name', $view_name)
-//            ->condition('view_display', 'dont_miss_content')
-//            ->execute();
-//
-//    $num_deleted = db_delete('itg_widget_order')
-//            ->condition('widget', $view_name)
-//            ->execute();
-//  }
-  //db_query("ALTER TABLE  itg_menu_manager ADD  bk_color VARCHAR( 100 ) NOT NULL DEFAULT  '#cccccc'")->execute();
+  db_query("ALTER TABLE  itg_syndication_manual_feed_details CHANGE  feed_file_path  feed_file_path TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Feed file path';")->execute();
 }
 
 /**
@@ -113,7 +87,7 @@ function remove_state_term($tid) {
   if ($tid) {
     taxonomy_term_delete($tid);
   }
-  drupal_set_message(t($name . "has been seleted"));
+  drupal_set_message(t($name . " has been deleted"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
@@ -610,7 +584,7 @@ function session_dependent_custom_form_validation(&$form, &$form_state) {
 function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
   if ($form['#form_id'] == 'views_form_section_wise_draggable_content_order_big_story_format') {
     if (!isset($_POST['views_bulk_operations'])) {
-      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', array('type' => 'file', 'scope' => 'footer'));
       $big_story_value = itg_big_story_get_extra_value();
       if (in_array('big_story_live_tv_active', $big_story_value)) {
         $yes_live = "checked";

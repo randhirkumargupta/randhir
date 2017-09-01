@@ -244,6 +244,8 @@ input[type="file"], input[type="submit"], input[type="text"] {
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li img {
   border: 1px solid transparent;
+  width: 88px;
+  height: 66px;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li.slick-current img {
   border: 1px solid #fff;
@@ -404,6 +406,15 @@ input[type="file"], input[type="submit"], input[type="text"] {
 .widget-title {
   display: inline-block;
   vertical-align: top;
+  position: static !important;
+  background: transparent;
+  color: #000;
+  font-size: 16px;
+  padding: 0;
+  font-weight: 600;
+}
+.widget-title a {
+  color: #323232;
 }
 
 .sidebar-section-photo .itg-widget {
@@ -5646,6 +5657,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .title {
   font: 500 26px/30px Roboto;
   padding-bottom: 12px;
+  padding-right: 50px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .pic {
   background: url(../images/funalytics.png) top right no-repeat;

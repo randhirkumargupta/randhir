@@ -19,6 +19,8 @@ module_load_include('inc', 'itg_common', 'includes/itg_common');
 function itg_common_init() {
   global $user, $base_url, $theme;
   $arg = arg();
+  
+
   //p(node_load(21014));
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
@@ -61,6 +63,11 @@ function itg_common_init() {
 function itg_common_menu() {
   $items['itg-custom-lock-delete'] = array(
     'page callback' => 'itg_custom_lock_delete',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['itg-dev-node-dpm'] = array(
+    'page callback' => 'itg_custom_dev_node_dpm',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
@@ -848,6 +855,11 @@ function itg_content_inactive() {
     $node = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
     $node->status = 0;
+    if($node->status == 'videogallery') {
+      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
+        itg_videogallery_node_publish_to_unpublish($node->nid);
+      }
+    }
     node_save($node);
     itg_widget_handle_unpublished_node($node->nid);
   }
@@ -1374,4 +1386,90 @@ function _is_sponsored_category($tid) {
     }
   }
   return $return;
+}
+
+function _remove_embded_tags_from_story_body($body_content) {
+  if(!empty($body_content)) {
+    return preg_replace('#\s*\[ITG:.+\]\s*#U', ' ', $body_content);
+  }
+  return "";
+}
+
+
+/**
+ * WatchDog helper function for debug
+ */
+function itg_watchdog($error_type , $message) {
+    watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
+}
+
+/**
+ * Function for prevent sent email during widget add bulk operation.
+ * @param array $request
+ * @return boolean
+ */
+function itg_workflow_stop_node_update_batch_for_widgets() {
+  $id = $_REQUEST['id'];
+  $query = db_select('batch', 'b')
+      ->fields('b', array('batch'))
+      ->condition('b.bid', $id);
+  $result = $query->execute()->fetchField();
+  $batch_data_array = unserialize($result);
+  $redirect_path = $batch_data_array['form_state']['redirect']['path'];
+  $widgets_urls = _widget_batch_urls();
+  if (in_array($redirect_path, $widgets_urls)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * All widgets URL.
+ * @return array
+ */
+function _widget_batch_urls() {
+  return array(
+    'trending-video-widget-list',
+    'big-story-format-conent',
+    'dont-miss-widget-contents',
+    'most-popular-story',
+    'special-auto-review-widget-contents',
+    'yearend-left-widget-contents',
+    'most-read-widget-contents',
+    'custom-html-widgets-list',
+    'special-how-made-it-widget-contents',
+    'election-xml-list',
+    'state-manager',
+    'special-key-candidate-widget-contents',
+    'saction-staticpage-list',
+    'budget-predictor-image',
+    'we-may-suggest-draggable-content-order',
+    'story-list-widget',
+    'trending-video-widget-list',
+    'top-takes-videos-list',
+    'watch-right-now-videos-list',
+    'poll-format-conent',
+    'manage-highlights',
+    'home-page-feature-widget-listing',
+    'photo-list-widget',
+    'video-list-widget',
+    'anchor-list',
+    'so-sorry-video-widget-list',
+    'issue-magazin-primary-cat-widget',
+    'issue-base-magazin-widget',
+    'issue-magazin-primary-cat-widget',
+    'supplement-base-magazin-widget'
+  );
+}
+
+/**
+ * Implements itg_custom_dev_node_dpm().
+ *   callbck for debugging node load
+ */
+function itg_custom_dev_node_dpm(){
+  $arg = arg();
+  if($arg[0] == 'itg-dev-node-dpm' && !empty($arg[1])) {
+    $node = node_load($arg[1]);
+    p($node);
+  }
 }

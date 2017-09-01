@@ -70,6 +70,11 @@
                 }
             });
 
+            $('.advance-serach').click(function () {
+                $('.browse-ftp-click').trigger('click');
+            });
+
+
             $('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
                 for (i = 0; i < 10; i++) {
                     var valuefiled = $("input[name='field_video_upload[und][" + i + "][field_videogallery_video_upload][und][0][fid]']").val();

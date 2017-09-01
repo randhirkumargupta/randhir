@@ -431,8 +431,8 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['table'] = 'field_data_field_story_kicker_text';
   $handler->display->display_options['fields']['field_story_kicker_text']['field'] = 'field_story_kicker_text';
   $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
-  $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '70';
-  $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['field_story_kicker_text']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['field_story_kicker_text']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
   /* Field: Field: Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';

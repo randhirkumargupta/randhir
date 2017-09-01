@@ -63,7 +63,7 @@ global $base_url;
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
       }
       else {
-        print l(__html_output_with_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
+        print l(__html_output_with_tags($row['title']), "node/" . $row['nid']);
       }
       ?></h3>
         <?php if (strtolower($row['type']) == 'story'): ?>

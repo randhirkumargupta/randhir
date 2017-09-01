@@ -28577,7 +28577,14 @@ itg-layout-manager/special',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -28991,7 +28998,14 @@ itg-layout-manager/special',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -29441,13 +29455,20 @@ itg-layout-manager/special',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -29917,7 +29938,14 @@ itg-layout-manager/special',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30410,13 +30438,20 @@ itg-layout-manager/special',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30930,7 +30965,14 @@ itg-layout-manager/special',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -31444,7 +31486,14 @@ itg-layout-manager/special',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -35644,7 +35693,7 @@ manage-unpublished-poll',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'state-election/*',
@@ -35700,7 +35749,7 @@ manage-unpublished-poll',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'state-election/*',
@@ -35728,7 +35777,7 @@ manage-unpublished-poll',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'state-election/*',
@@ -35784,7 +35833,7 @@ manage-unpublished-poll',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'state-election/*',
@@ -37857,7 +37906,14 @@ node/*/edit',
   'pages' => 'user
 user/*
 personalization
-personalization/*',
+personalization/*
+order-confirmation
+order-summary
+cart
+product
+history
+loyalty-redemption-history
+checkout-page',
   'title' => '<none>',
   'cache' => -1,
 );

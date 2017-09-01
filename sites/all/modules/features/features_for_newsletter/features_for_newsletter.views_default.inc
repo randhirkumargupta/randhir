@@ -682,13 +682,6 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '0';
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -771,6 +764,16 @@ function features_for_newsletter_views_default_views() {
     'field_data_field_survey_start_date.field_survey_start_date_value' => 'field_data_field_survey_start_date.field_survey_start_date_value',
   );
   $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  /* Filter criterion: Content: op_flag (field_op_flag) */
+  $handler->display->display_options['filters']['field_op_flag_value']['id'] = 'field_op_flag_value';
+  $handler->display->display_options['filters']['field_op_flag_value']['table'] = 'field_data_field_op_flag';
+  $handler->display->display_options['filters']['field_op_flag_value']['field'] = 'field_op_flag_value';
+  $handler->display->display_options['filters']['field_op_flag_value']['value'] = 'Save as Draft';
   $handler->display->display_options['path'] = 'manage-draft-newsletter';
   $export['manage_newsletter'] = $view;
 
