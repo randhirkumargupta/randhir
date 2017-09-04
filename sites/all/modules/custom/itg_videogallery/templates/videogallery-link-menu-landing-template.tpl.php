@@ -78,7 +78,7 @@
 <script>
   var windowWidth = jQuery(window).width();
   if(windowWidth > 767){
-	var videoGallleryLenght = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").lenght;
+	var videoGallleryLenght = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").length;
 	var videoGallleryWidth = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").width();
 	var videoGallleryFullWidth = (videoGallleryWidth ) * videoGallleryLenght;
 	jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list").css('width', videoGallleryFullWidth );
