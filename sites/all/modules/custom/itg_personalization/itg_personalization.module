@@ -249,6 +249,11 @@ function itg_personalization_getmenu_title() {
       case 'my-following':        
         $sticky_title = t('Following');
         $data_tab = $arg[1];
+        break;
+      case 'my-followers':
+        $sticky_title = t('Following');
+        $data_tab = $arg[1];
+        break;
     }
     $data['menu_title'] = $sticky_title;
     $data['data_tab'] = $data_tab;
