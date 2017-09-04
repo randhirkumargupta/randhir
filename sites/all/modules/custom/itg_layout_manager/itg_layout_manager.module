@@ -407,7 +407,7 @@ function itg_layout_manager_block_view($delta = '') {
                 if (is_section_header($primary_tid)) {
                     $tpl_name = 'section_header_' . $primary_tid . '_block';
                     if (!empty(theme($tpl_name))) {
-                        $child_menu = $child_terms = menu_build_tree('menu-section-header-menu');
+                        $child_menu = $child_terms = menu_build_tree('menu-menu-section-header-menu');
                         $section_menu = get_section_menu($primary_tid);
                         
                         if ($section_menu) {
