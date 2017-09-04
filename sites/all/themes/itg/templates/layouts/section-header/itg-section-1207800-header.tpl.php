@@ -16,9 +16,9 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
           
           <div class="brandLogo">
           	<ul>
-            	<li><a href="http://indiatoday.intoday.in" target="_blank"><img src="http://media2.intoday.in/indiatoday/salaamcricket/2017/images/IT-logo.jpg" alt=""></a></li>
             	<li><a href="http://aajtak.intoday.in" target="_blank"><img src="http://media2.intoday.in/indiatoday/salaamcricket/2017/images/AT-logo.png" alt=""></a></li>
-            	<li><a href="http://indiatoday.intoday.in" target="_blank"><img src="http://itgddev.indiatodayonline.in/sites/all/themes/itg/logo.png" alt=""></a></li>
+            	<li><a href="http://indiatoday.intoday.in" target="_blank"><img src="http://media2.intoday.in/indiatoday/salaamcricket/2017/images/IT-logo.jpg" alt=""></a></li>
+            	
             </ul>
           </div>
         </div>
