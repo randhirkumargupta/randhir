@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * @file
@@ -67,4 +67,25 @@
 	#block-itg-videogallery-videogallery-link-menu-video{
 		    margin-top: 22px;
 	}
+	@media (min-width: 768px){
+		#block-itg-videogallery-other-videogallery-from-section .view-content{    float: left;  width: 100%; overflow-x: scroll;}
+		#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li{ width:200px; float:left; padding:0;}
+		#block-itg-videogallery-other-videogallery-from-section .view-footer{display:none}
+		#block-itg-videogallery-other-videogallery-from-section .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1){clear: inherit;}
+		.other_video_category h3{ float:left}
+	}
+	@media (max-width: 767px){
+	   #block-itg-videogallery-other-videogallery-from-section .view-footer{display:block}
+	
+	}
 </style>
+<script>
+
+  var windowWidth = jQuery(window).width();
+  if(windowWidth > 767){
+	var videoGallleryLenght = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").length;
+	var videoGallleryWidth = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").width();
+	var videoGallleryFullWidth = (videoGallleryWidth ) * videoGallleryLenght;
+	jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list").css('width', videoGallleryFullWidth );
+  }
+</script>

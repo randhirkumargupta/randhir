@@ -12076,9 +12076,9 @@ h1.about-us-heading + div p {
   right: 0;
 }
 
-.story-section .listicle-page.story-right {
+/*.story-section .listicle-page.story-right {
   width: 100%;
-}
+}*/
 .story-section .listicle-page.story-right .byline {
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
@@ -12112,7 +12112,7 @@ h1.about-us-heading + div p {
   color: #282828;
   display: inline-block;
   vertical-align: top;
-  width: 95%;
+  width: 93%;
   padding: 18px 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
@@ -15023,6 +15023,8 @@ span.story-sponsor-powered-text::last-word {
 .personal-list ul li:hover button.btn{ opacity:1; z-index:1; transition:all 0.3ms ease-in-out; -webkit-transition:all 0.3ms ease-in-out;  }
 .personal-list ul li span{ border:1px solid #ebebec; float: right; width:calc(100% - 50px);padding: 9px;font-size: 15px;border-radius: 5px; }
 .personal-list ul li:hover span{background:#ebebec;}
+.personal-list .personal-follow{ display: none; }
+.itg-personalization-text{ padding:25px 0 0 0; }
 /* social icon all list */
 
 .anchor-right .social-icon ul li{ padding:0px!important; border:1px solid #ccc;display: inline-block; }
@@ -15032,3 +15034,8 @@ span.story-sponsor-powered-text::last-word {
 .anchor-right .social-icon ul li a[title='Unfollow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px -19px; padding-left:28px;}
 .anchor-right .social-icon ul li a i{float: left;margin-right: 5px;font-size: 1.25rem;}
 .anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
+
+
+.itgimage{position: relative;}
+.itgimage .body_caption {background: rgba(0,0,0,0.5); position: absolute; bottom: 0px;color: #fff;padding: 1% 2%; font-size: 13px; line-height: 19px;
+ width: 100%;}
