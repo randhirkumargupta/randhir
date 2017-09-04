@@ -12420,3 +12420,9 @@ fieldset#edit-xmlsitemap{
     margin-top: 120px;
   }
 }
+.form-field-name-field-story-reporter{
+  #autocomplete{
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}

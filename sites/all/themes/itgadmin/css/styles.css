@@ -13192,3 +13192,8 @@ fieldset#edit-xmlsitemap {
 .view.view-display-id-search_unpublish_video .view-content {
   margin-top: 120px;
 }
+
+.form-field-name-field-story-reporter #autocomplete {
+  max-height: 400px;
+  overflow-y: auto;
+}
