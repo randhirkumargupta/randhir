@@ -254,8 +254,13 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             foreach($node_array as $nid) {
                 $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                 $xml .="<item><link>" . $artical_file_name . "</link></item>";
-                $node_file = _create_node_file($artical_file_name, $nid, $section_name);
-                _kindle_save_unmanaged_file($node_file, $directory_name);
+                $node_load_data = node_load($nid);
+                $expiry_time = strtotime($node_load_data->field_story_schedule_date_time['und'][0]['value']);
+                // Skip future date and unpublised story.
+                if($expiry_time < time() && $node_load_data->status) {
+                    $node_file = _create_node_file($artical_file_name, $nid, $section_name);
+                    _kindle_save_unmanaged_file($node_file, $directory_name);
+                }
             }
             $xml .= "</channel></rss>";
             // Save logic for section files files.
