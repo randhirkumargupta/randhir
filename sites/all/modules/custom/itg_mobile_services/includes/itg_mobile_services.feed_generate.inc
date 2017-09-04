@@ -626,12 +626,6 @@ function get_required_data_field_get_items_mobile($field_collect, $astro) {
         $required_value[$key]['field_story_large_image'] = $image = $image_url;
         $required_value[$key]['field_story_large_image_description'] = $service_content_image_desc;
         $required_value[$key]['field_story_large_image_keyword'] = $service_content_image_keyword;
-      }else{
-        //code for save default image of the term
-        $term_data = itg_astro_zodiac_thumbnail();
-        $image_uri = $term_data[$key]->field_astro_thumb_icon['und'][0]['uri'];
-        $image_url = file_create_url($image_uri);
-        $required_value[$key]['field_story_large_image'] = $image_url;
       }
 
       // audio
