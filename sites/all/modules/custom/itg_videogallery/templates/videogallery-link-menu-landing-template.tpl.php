@@ -76,7 +76,7 @@
 #block-itg-videogallery-other-videogallery-from-section .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1){clear: inherit;}
 </style>
 <script>
-  var windowWidth = jQuery(window).width;
+  var windowWidth = jQuery(window).width();
   if(windowWidth > 767){
 	var videoGallleryLenght = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").lenght;
 	var videoGallleryWidth = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").width();
