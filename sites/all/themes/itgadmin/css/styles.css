@@ -9633,16 +9633,6 @@ div.node #comments h2 {
   text-decoration: underline;
 }
 
-.page-node-add-story .action-with-title #page-title,
-.node-type-story .action-with-title #page-title,
-.page-node-add-videogallery .action-with-title #page-title,
-.node-type-videogallery .action-with-title #page-title,
-.page-node-add-photogallery .action-with-title #page-title,
-.node-type-photogallery .action-with-title #page-title,
-.page-taxonomy-term-edit .action-with-title #page-title,
-.page-admin-structure-taxonomy-category-management .action-with-title #page-title {
-  width: 400px;
-}
 .page-node-add-story .action-with-title.fixed,
 .node-type-story .action-with-title.fixed,
 .page-node-add-videogallery .action-with-title.fixed,

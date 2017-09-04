@@ -5367,7 +5367,7 @@ h1.category-heading {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #323232;
 }
 .poll-banner .detail .detail-content .vota, .poll-banner .detail .detail-content .time {
@@ -5495,6 +5495,46 @@ h1.category-heading {
   width: 100px;
   float: left;
   padding-left: 20px;
+}
+.poll-banner.image-poll-list .poll-list .pic {
+  width: 170px;
+}
+.poll-banner.image-poll-list .poll-list .detail {
+  float: none;
+  width: auto;
+  overflow: hidden;
+  padding-right: 0;
+}
+.poll-banner.image-poll-list .poll-list .voting-data {
+  float: none;
+  width: auto;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin: 20px 0;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll li {
+  margin: 0 20px 0 0;
+  float: left;
+  width: auto;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-answer-text {
+  float: none;
+  width: 100%;
+  display: block;
+  margin-bottom: 7px;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-answer-text img {
+  width: 170px;
+  height: 127px;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll li .noofvotes {
+  padding: 0 0 0 10px;
+}
+.poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-past-percentage-progess {
+  padding: 0;
 }
 
 .home_page_poll_widget_block .widget-title {
