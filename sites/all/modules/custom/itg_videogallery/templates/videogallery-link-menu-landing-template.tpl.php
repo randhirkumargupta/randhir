@@ -76,7 +76,6 @@
 #block-itg-videogallery-other-videogallery-from-section .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1){clear: inherit;}
 </style>
 <script>
-jQuery(document).ready(function(){
   var windowWidth = jQuery(window).width;
   if(windowWidth > 767){
 	var videoGallleryLenght = jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").lenght;
@@ -84,6 +83,4 @@ jQuery(document).ready(function(){
 	var videoGallleryFullWidth = (videoGallleryWidth ) * videoGallleryLenght;
 	jQuery("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list").css('width', videoGallleryFullWidth );
   }
-});
-
 </script>
