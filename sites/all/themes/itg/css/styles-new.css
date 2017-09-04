@@ -244,6 +244,8 @@ input[type="file"], input[type="submit"], input[type="text"] {
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li img {
   border: 1px solid transparent;
+  width: 88px;
+  height: 66px;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li.slick-current img {
   border: 1px solid #fff;
@@ -406,9 +408,10 @@ input[type="file"], input[type="submit"], input[type="text"] {
   vertical-align: top;
   position: static !important;
   background: transparent;
-  color: #323232;
+  color: #000;
+  font-size: 16px;
   padding: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 .widget-title a {
   color: #323232;
