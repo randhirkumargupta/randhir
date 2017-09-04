@@ -13171,6 +13171,7 @@ fieldset#edit-xmlsitemap {
 .itg-sidebar-form iframe#video_iframe {
   border: none;
   width: 100%;
+  max-height: 400px;
 }
 .itg-sidebar-form .button.asso-filed-video {
   margin-bottom: 10px;

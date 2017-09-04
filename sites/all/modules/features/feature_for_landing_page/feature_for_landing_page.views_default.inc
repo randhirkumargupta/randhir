@@ -240,18 +240,17 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '65';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Section widget relationship: Category */
-  $handler->display->display_options['fields']['cat_id_1']['id'] = 'cat_id_1';
-  $handler->display->display_options['fields']['cat_id_1']['table'] = 'itg_widget_order_section';
-  $handler->display->display_options['fields']['cat_id_1']['field'] = 'cat_id';
   /* Field: Section widget relationship: weight */
   $handler->display->display_options['fields']['weight_1']['id'] = 'weight_1';
   $handler->display->display_options['fields']['weight_1']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['fields']['weight_1']['field'] = 'weight';
   $handler->display->display_options['fields']['weight_1']['separator'] = '';
+  /* Field: Section widget relationship: Category */
+  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section widget relationship: weight */
   $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
@@ -398,11 +397,8 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['label'] = '';
-  $handler->display->display_options['fields']['description']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['description']['alter']['max_length'] = '85';
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
