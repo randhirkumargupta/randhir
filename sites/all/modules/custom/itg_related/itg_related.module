@@ -288,7 +288,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       }
       $query->replaceParam("fq", '(' . $str . ')');
     }
-    //pr($query->getSolrParams());
+    pr($query->getSolrParams());
   }
   else if ($arg[0] == 'archives') {
     $source_name = 'non_issue_based';

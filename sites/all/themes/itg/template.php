@@ -220,15 +220,20 @@ function itg_preprocess_page(&$variables) {
 function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
-  if (!empty($breadcrumb) && arg(0) == 'topic') {
+  if (!empty($breadcrumb) && (arg(0) == 'topic' || arg(0) == 'advance_search')) {
     $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }
 
-    if (arg(0) == 'topic') {
-      if (!empty($_GET['keyword'])) {
-        $keyword = '<li>' . $_GET['keyword'] . '</li>';
+    if (arg(0) == 'topic' || arg(0) == 'advance_search') {
+      if (!empty(arg(1)) || !empty($_GET['keyword'])) {
+        if(arg(0) == 'topic') {
+          $s_name = arg(1);
+        } else if(arg(0) == 'advance_search') {
+          $s_name = $_GET['keyword'];
+        }
+        $keyword = '<li>' . $s_name . '</li>';
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
