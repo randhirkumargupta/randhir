@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * @file
@@ -67,4 +67,25 @@
 	#block-itg-videogallery-videogallery-link-menu-video{
 		    margin-top: 22px;
 	}
+	
+#block-itg-videogallery-other-videogallery-from-section .view-content{    float: left;  width: 100%; overflow-x: scroll;white-space: nowrap;}
+
+#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li{ width:200px; float:left}
+
+#block-itg-videogallery-other-videogallery-from-section .view-footer{display:none}
+
+@media (max-width: 767px){
+   #block-itg-videogallery-other-videogallery-from-section .view-footer{display:block}
+}
 </style>
+<script>
+$(function(){
+  var windowWidth = $(window).width;
+  if(windowWidth > 767){
+	var videoGallleryLenght = $("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").lenght;
+	var videoGallleryWidth = $("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list li").width();
+	var videoGallleryFullWidth = (videoGallleryWidth ) * videoGallleryLenght;
+	$("#block-itg-videogallery-other-videogallery-from-section .view-content ul.photo-list").css('width', videoGallleryFullWidth );
+  }
+})
+</script>
