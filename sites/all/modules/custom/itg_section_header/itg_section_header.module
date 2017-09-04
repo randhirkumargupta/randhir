@@ -14,9 +14,26 @@
  */
 function itg_section_header_block_list_alter(&$blocks) {
     $arg = arg();
-    if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])) {
-        $nid = $arg[1];
-        $primary_tid = get_primary_category_node($nid);
+    if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg)) {
+        if ($arg[0] == 'taxonomy') {
+            $tid = $arg[2];
+            if (is_section_header($tid)) {
+                $primary_tid = $tid;
+            }
+            else {
+                $p_terms = taxonomy_get_parents_all($tid);
+                foreach ($p_terms as $p_term) {
+                    if ($p_term->tid != $tid && is_section_header($p_term->tid)) {
+                        $primary_tid = $p_term->tid;
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            $nid = $arg[1];
+            $primary_tid = get_primary_category_node($nid);
+        }
         if ($primary_tid) {
             if (is_section_header($primary_tid)) {
                 $section_blocks = get_section_blocks($primary_tid);
@@ -209,15 +226,15 @@ function itg_sections_blocks_info($form, $form_state) {
     }
 }
 
-function is_valid_node_header_section($arg){
-    if($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])){
+function is_valid_node_header_section($arg) {
+    if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])) {
         return TRUE;
     }
     return FALSE;
 }
 
-function is_valid_category_header_section($arg){
-    if($arg[0] == 'taxonomy' && $arg[1] == 'term' && !empty($arg[2]) && is_numeric($arg[2])){
+function is_valid_category_header_section($arg) {
+    if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && !empty($arg[2]) && is_numeric($arg[2])) {
         return TRUE;
     }
     return FALSE;
