@@ -305,6 +305,14 @@ function localSignup($data) {
         //return $account;
     }
     $local_account = localLogin($data);
+    //authmap
+    $authmap = $nid = db_insert('authmap')
+    ->fields(array(
+      'uid' => $local_account->uid,
+      'authname' => $local_account->name,
+      'module' => 'simplesamlphp_auth',
+    ))
+    ->execute();
     return $local_account;
 }
 
