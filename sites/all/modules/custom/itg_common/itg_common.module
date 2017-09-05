@@ -1473,3 +1473,18 @@ function itg_custom_dev_node_dpm(){
     p($node);
   }
 }
+
+/*
+ * Implements itg_common_global_alt_title().
+ * @param string $field_machine_name
+ * @param int $fid
+ */
+function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
+  if (!empty($field_machine_name)) {
+    $result = db_select('field_data_'.$field_machine_name, 'fe')
+            ->fields(fe, array($field_machine_name.'_alt',$field_machine_name.'_title'))
+            ->condition($field_machine_name.'_fid', $fid)
+            ->execute();
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
