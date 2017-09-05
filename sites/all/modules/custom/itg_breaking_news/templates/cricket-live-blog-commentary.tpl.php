@@ -8,7 +8,7 @@ $innings = array_reverse($data->Match->Innings);
 foreach($innings as $inning){
 	$nodes = array_reverse($inning->Node);
 	foreach($nodes as $commentary){
-		$time = date('H:i T', $commentary->TimeOfDay);
+		$time = date('H:i T', strtotime($commentary->TimeOfDay));
 		?>
 		<?php if($commentary->Ball == 6):?>
 		<?php 
