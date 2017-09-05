@@ -282,19 +282,21 @@ function magazineCoverstoriesPageRerourceValueList() {
     $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
     $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
     $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+    //$query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
 
     $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
     $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
     $query_issue->fields('fsit', array('field_issue_title_value'));
     $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('n.nid', 'desc')->range(0, 20);
+    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
         //issue node 
         $issueid = $resvalue['nid'];
         $node_data = node_load($issueid);
+        //p($node_data);die();
         $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
         $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
         $lar_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $lar_img);
@@ -391,7 +393,7 @@ function getCoverstoriesList($issue_date) {
 
     //end
 
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('fsid.field_story_issue_date_value', 'DESC')->groupBy('n.nid')->range(0, 2);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
@@ -536,6 +538,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
     $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
     $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
     $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+    //$query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
 
     $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
     $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
@@ -544,7 +547,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
 
     //condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
 
-    $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+    $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('fsit.field_issue_title_value', 'DESC')->range($range_min, $range_max);
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
