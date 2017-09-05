@@ -207,6 +207,11 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         $slider_first_item = entity_load('field_collection_item', array(end($field_collection_ids)));
         $slider_first_time = date("H:i", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
         
+				$settings = array();
+				$settings['last'] = $slider_last_time;
+				$settings['first'] = $slider_first_time;
+				drupal_add_js(array('itg_front_end_common' => array('settings' => $settings)), array('type' => 'setting'));
+				
       foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
         $field_collection_id = $breaking_item;

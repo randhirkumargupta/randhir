@@ -13,6 +13,10 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+    
+//  var to = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.last);
+//  var from = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.first);
+   
   var input_range = jQuery('#slider-range').val();
   jQuery("#slider-range").ionRangeSlider({
     min: 0,
@@ -26,6 +30,13 @@ jQuery(document).ready(function () {
     },
     onChange: timeline
   });
+  
+//  function timeStringToFloat(time) {
+//  var hoursMinutes = time.split(/[.:]/);
+//  var hours = parseInt(hoursMinutes[0], 10);
+//  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+//  return hours + minutes / 60;
+//}
 
   function timeline(data) {
     var num = data.from;
