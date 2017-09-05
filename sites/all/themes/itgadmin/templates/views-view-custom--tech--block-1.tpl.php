@@ -76,18 +76,31 @@
           <ul class="itg-listing">   
             <?php
             foreach ($rows as $index => $row) {
-
+               if (strtolower($row['type']) == 'story') {
+                if (function_exists('itg_common_get_addontitle')) {
+                  $add_on_data = itg_common_get_addontitle($row['nid']);
+                  $pipelinetext = "";
+                  $pipelineclass = "";
+                  if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+                    $pipelineclass = 'pipeline-added';
+                    
+                  }
+                }
+              }
               $desc = $row['title'];
 
               if ($index > 2) {
                 ?>
-                <li title="<?php echo strip_tags($desc); ?>">
+                <li title="<?php echo strip_tags($desc); ?>" class="<?php print $pipelineclass; ?>">
                   <?php
                   if (function_exists('itg_common_get_smiley_title')) {
                     echo l(itg_common_get_smiley_title($row['nid'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
+                    echo $pipelinetext;
                   }
                   else {
                     echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                    echo $pipelinetext;
                   }
                 ?>
                 </li>
