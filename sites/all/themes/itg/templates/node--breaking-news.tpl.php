@@ -29,10 +29,24 @@ $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('h:i:s', $node->created);
 $coverage_start_date = $blog_created_date.'T'.$blog_created_time;
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
+
+if(empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
+if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
+      foreach ($node->field_breaking_content_details['und'] as $blog_item) {
+        $collection_ids[] = $blog_item['value'];
+      }
+}
+$entity = entity_load('field_collection_item', array($collection_ids[1]));
+$last_cov_tm = explode(" ", $entity[$collection_ids[1]]->field_breaking_publish_time['und'][0]['value']);
+$coverage_end_date = $last_cov_tm[0];
+$coverage_end_time = $last_cov_tm[1];
+$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+} else {
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('h:i:s', $coverage_end);
 $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+}
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
     <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
@@ -50,14 +64,12 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         $field_collection_embed_id = $breaking_embed_item;
         $entity = entity_load('field_collection_item', array($field_collection_embed_id));
         $title = $entity[$field_collection_embed_id]->field_breaking_tile['und'][0]['value'];
-        $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        //$embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
         $created_date = date('Y-m-d H:i:s', $node->created);
         $modify_date = date('Y-m-d H:i:s', $node->changed);
       
 ?>
-
-                
-            
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                         <p itemprop="headline" content="<?php print $node->title; ?>"></p>
                         <h2 itemprop="articleBody" style="display:none"><strong><?php print $embed_display_time;?> IST: </strong><?php print $title; ?></h2>

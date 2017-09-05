@@ -220,15 +220,20 @@ function itg_preprocess_page(&$variables) {
 function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
-  if (!empty($breadcrumb) && arg(0) == 'topic') {
+  if (!empty($breadcrumb) && (arg(0) == 'topic' || arg(0) == 'advance_search')) {
     $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }
 
-    if (arg(0) == 'topic') {
-      if (!empty($_GET['keyword'])) {
-        $keyword = '<li>' . $_GET['keyword'] . '</li>';
+    if (arg(0) == 'topic' || arg(0) == 'advance_search') {
+      if (!empty(arg(1)) || !empty($_GET['keyword'])) {
+        if(arg(0) == 'topic') {
+          $s_name = arg(1);
+        } else if(arg(0) == 'advance_search') {
+          $s_name = $_GET['keyword'];
+        }
+        $keyword = '<li>' . $s_name . '</li>';
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
@@ -470,7 +475,24 @@ function itg_link($variables) {
       $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }
   }
-  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+  // If External url is used.
+    if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+        $node_path = explode('/', $url_path);
+        $nid = $node_path[1];
+        if ($external_url = _is_external_url_story_article($nid)) {
+            global $base_url;
+            $link_target = '_self';
+            $baseurl = preg_replace('#^https?://#', '', $base_url);
+            $baseurl = preg_replace('#^http?://#', '', $baseurl);
+            if (strpos($external_url, $baseurl) === false) {
+                $link_target = '_blank';
+                $variables['options']['attributes']['rel'] = 'nofollow';
+            }
+            $variables['path'] = $external_url;
+            $variables['options']['attributes']['target'] = $link_target;
+        }
+    }
+    return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
 
 /**
