@@ -355,7 +355,6 @@ function itg_payment_checkout() {
         $db_data["EVENT_ID"] = $event_id;
         $db_data["TXN_AMOUNT"] = floatval($final_amount);
 
-        itg_payment_initial_info_update($db_data);
         update_event_registration_after_success($db_data['ORDER_ID']);
         $event_full_url = $_SESSION['event_registration_payment']['event_full_url'];
         drupal_set_message("Event registration successful");
@@ -390,7 +389,6 @@ function itg_payment_response_fail() {
  * update event registration after success
  */
 function update_event_registration_after_success($order_id) {
-  module_load_include('inc' , 'itg_loyalty_reward' , 'includes/itg_loyalty_reward_earn.point');
   global $user;
   $registration_data = _get_registration_id_of_event($order_id);
   $registration_id =  $registration_data['reg'];
@@ -401,9 +399,14 @@ function update_event_registration_after_success($order_id) {
         ->condition('nid' , $registration_id)
         ->execute();
   }
-  if (function_exists('itg_loyalty_reward_earnpoint') && $user->uid > 0) {
-    itg_loyalty_reward_earnpoint($event_id , 'ol-register' , $user->uid);
-  }
+  if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+        // code for global loyality
+        if (function_exists('itg_global_loyality_get_sso_id')) {
+          $sso_id = itg_global_loyality_get_sso_id($user->uid);
+        }
+        itg_watchdog("event_registration_loyality" , $event_id);
+        itg_global_loyality_send_data($user->uid, 'event_registration', $event_id, '', $sso_id);
+    }
 }
 
 function _get_registration_id_of_event($order_id) {
