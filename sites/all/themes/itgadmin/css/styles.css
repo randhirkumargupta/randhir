@@ -13082,6 +13082,7 @@ fieldset#edit-xmlsitemap {
 .video-ftp-div {
   display: inline-block;
   vertical-align: top;
+  margin-top: 120px;
   width: 100%;
 }
 .video-ftp-div .main-top-wraper {
@@ -13188,9 +13189,6 @@ fieldset#edit-xmlsitemap {
 
 .view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-type-select {
   width: 120px;
-}
-.view.view-display-id-search_unpublish_video .view-content {
-  margin-top: 120px;
 }
 
 .form-field-name-field-story-reporter #autocomplete {
