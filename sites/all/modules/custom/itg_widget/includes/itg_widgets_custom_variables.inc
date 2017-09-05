@@ -12,28 +12,28 @@
  * {@inheritdoc}
  */
 function itg_widgets_custom_variables() {
-  $form = array();
-  $form['program_category_id_for_programmes'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter Program Category Id'),
-    '#default_value' => variable_get('program_category_id_for_programmes'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['so_sorry_category_id_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter So Sorry Category Id'),
-    '#default_value' => variable_get('so_sorry_category_id_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['anchor_id_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter Occupation for Anchors'),
-    '#default_value' => variable_get('anchor_id_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+	$form = array();
+	$form['program_category_id_for_programmes'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter Program Category Id'),
+		'#default_value' => variable_get('program_category_id_for_programmes'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['so_sorry_category_id_for_widget'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter So Sorry Category Id'),
+		'#default_value' => variable_get('so_sorry_category_id_for_widget'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['anchor_id_for_widget'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter Occupation for Anchors'),
+		'#default_value' => variable_get('anchor_id_for_widget'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
 //  $form['year_end_for_widget'] = array(
 //    '#type' => 'textfield',
 //    '#title' => t('Enter tid of year end'),
@@ -48,8 +48,6 @@ function itg_widgets_custom_variables() {
 //    '#size' => 20,
 //    '#maxlength' => 20,
 //  );
-
-
 //  $form['tech_for_widget'] = array(
 //    '#type' => 'textfield',
 //    '#title' => t('Enter tid of tech'),
@@ -57,7 +55,6 @@ function itg_widgets_custom_variables() {
 //    '#size' => 20,
 //    '#maxlength' => 20,
 //  );
-
 //  $form['entertainment_oscar_for_widget'] = array(
 //    '#type' => 'textfield',
 //    '#title' => t('Enter tid of Entertainment Oscar Watch'),
@@ -65,7 +62,6 @@ function itg_widgets_custom_variables() {
 //    '#size' => 20,
 //    '#maxlength' => 20,
 //  );
-
 //  $form['movie_for_widget'] = array(
 //    '#type' => 'textfield',
 //    '#title' => t('Enter tid of movie'),
@@ -74,231 +70,232 @@ function itg_widgets_custom_variables() {
 //    '#maxlength' => 20,
 //  );
 
-  $form['ipl_points_tally_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter nid of ipl points tally'),
-    '#default_value' => variable_get('ipl_points_tally_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['ipl_top_performer_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter nid of ipl tip performer'),
-    '#default_value' => variable_get('ipl_top_performer_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['ipl_for_widget'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter tid of ipl'),
-    '#default_value' => variable_get('ipl_for_widget'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
+	$form['ipl_points_tally_for_widget'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter nid of ipl points tally'),
+		'#default_value' => variable_get('ipl_points_tally_for_widget'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['ipl_top_performer_for_widget'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter nid of ipl tip performer'),
+		'#default_value' => variable_get('ipl_top_performer_for_widget'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['ipl_for_widget'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter tid of ipl'),
+		'#default_value' => variable_get('ipl_for_widget'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
 
-  $form['we_may_suggest_block_condition'] = array(
-    '#type' => 'textarea',
-    '#title' => t('We may suggest block condition for arg(1)'),
-    '#default_value' => variable_get('we_may_suggest_block_condition'),
-  );
+	$form['we_may_suggest_block_condition'] = array(
+		'#type' => 'textarea',
+		'#title' => t('We may suggest block condition for arg(1)'),
+		'#default_value' => variable_get('we_may_suggest_block_condition'),
+	);
 
-  $form['watch_right_now_block_condition'] = array(
-    '#type' => 'textarea',
-    '#title' => t('watch right now block condition for arg(1)'),
-    '#default_value' => variable_get('watch_right_now_block_condition'),
-  );
+	$form['watch_right_now_block_condition'] = array(
+		'#type' => 'textarea',
+		'#title' => t('watch right now block condition for arg(1)'),
+		'#default_value' => variable_get('watch_right_now_block_condition'),
+	);
 
-  $form['top_takes_block_condition'] = array(
-    '#type' => 'textarea',
-    '#title' => t('top takes block condition for arg(1)'),
-    '#default_value' => variable_get('top_takes_block_condition'),
-  );
-  $form['tid_politician'] = array(
-    '#type' => 'textarea',
-    '#title' => t('tid of politician'),
-    '#default_value' => variable_get('tid_politician'),
-  );
+	$form['top_takes_block_condition'] = array(
+		'#type' => 'textarea',
+		'#title' => t('top takes block condition for arg(1)'),
+		'#default_value' => variable_get('top_takes_block_condition'),
+	);
+	$form['tid_politician'] = array(
+		'#type' => 'textarea',
+		'#title' => t('tid of politician'),
+		'#default_value' => variable_get('tid_politician'),
+	);
 
-  $form['apache_solr_sites_prefix_values'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Apache solr sites prefix and has values'),
-    '#description' => t("Ex: eoshds|IndiaToday,asdasd|AAJtak"),
-    '#default_value' => variable_get('apache_solr_sites_prefix_values'),
-  );
-  $form['newsletter_education_tid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Newsletter Eduction Tid'),
-    '#default_value' => variable_get('newsletter_education_tid'),
-  );
-  $form['category_manager_vid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Category Manager Vid'),
-    '#default_value' => variable_get('category_manager_vid'),
-  );
-  $form['itg_newsletter_education_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Enter education tid'),
-    '#default_value' => variable_get('itg_newsletter_education_id'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['quiz_taxonomy_tid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Quiz taxonomy vid'),
-    '#default_value' => variable_get('quiz_taxonomy_tid'),
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['city_manager_vid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('City Management Vid'),
-    '#default_value' => variable_get('city_manager_vid'),
-    '#size' => 20,
-  );
-  $form['reporter_tid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Reporter tid'),
-    '#default_value' => variable_get('reporter_tid'),
-    '#size' => 20,
-  );
-  $form['live_score_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Live schore URL'),
-    '#default_value' => variable_get('live_score_url'),
-    '#size' => 255,
-  );
-  $form['ipl_rhs_nids'] = array(
-    '#type' => 'textfield',
-    '#title' => t('node id for ipl rhs'),
-    '#default_value' => variable_get('ipl_rhs_nids'),
-    '#size' => 255,
-  );
-  $form['anchor_tid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Anchor Tid'),
-    '#default_value' => variable_get('anchor_tid'),
-    '#size' => 20,
-  );
+	$form['apache_solr_sites_prefix_values'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Apache solr sites prefix and has values'),
+		'#description' => t("Ex: eoshds|IndiaToday,asdasd|AAJtak"),
+		'#default_value' => variable_get('apache_solr_sites_prefix_values'),
+	);
+	$form['newsletter_education_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Newsletter Eduction Tid'),
+		'#default_value' => variable_get('newsletter_education_tid'),
+	);
+	$form['category_manager_vid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Category Manager Vid'),
+		'#default_value' => variable_get('category_manager_vid'),
+	);
+	$form['itg_newsletter_education_id'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter education tid'),
+		'#default_value' => variable_get('itg_newsletter_education_id'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['quiz_taxonomy_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Quiz taxonomy vid'),
+		'#default_value' => variable_get('quiz_taxonomy_tid'),
+		'#size' => 20,
+		'#maxlength' => 20,
+	);
+	$form['city_manager_vid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('City Management Vid'),
+		'#default_value' => variable_get('city_manager_vid'),
+		'#size' => 20,
+	);
+	$form['reporter_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Reporter tid'),
+		'#default_value' => variable_get('reporter_tid'),
+		'#size' => 20,
+	);
+	$form['live_score_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Live schore URL'),
+		'#default_value' => variable_get('live_score_url'),
+		'#size' => 255,
+	);
+	$form['ipl_rhs_nids'] = array(
+		'#type' => 'textfield',
+		'#title' => t('node id for ipl rhs'),
+		'#default_value' => variable_get('ipl_rhs_nids'),
+		'#size' => 255,
+	);
+	$form['anchor_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Anchor Tid'),
+		'#default_value' => variable_get('anchor_tid'),
+		'#size' => 20,
+	);
 
-  $form['solr_server_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Solr server url'),
-    '#default_value' => variable_get('solr_server_url'),
-  );
-  
-  $form['solr_url_config'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Solr urlconfig'),
-    '#default_value' => variable_get('solr_url_config'),
-  );
-  
-  $form['global_loyalty_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Global loyalty url'),
-    '#default_value' => variable_get('global_loyalty_url'),
-  );
+	$form['solr_server_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Solr server url'),
+		'#default_value' => variable_get('solr_server_url'),
+	);
 
-  $form['aaj_tak_json_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Aaj tak json url'),
-    '#default_value' => variable_get('aaj_tak_json_url'),
-  );
+	$form['solr_url_config'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Solr urlconfig'),
+		'#default_value' => variable_get('solr_url_config'),
+	);
 
-  $form['business_today_json_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Business today json url'),
-    '#default_value' => variable_get('business_today_json_url'),
-  );
-  
-  $form['read_later_days_config'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Read Later days configuration'),
-    '#attributes' => array('placeholder' => t('Enter no of days')),
-    '#default_value' => variable_get('read_later_days_config'),
-  );
-  
-  $form['editor_pic_tid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Editor Pic Tid configuration'),
-    '#attributes' => array('placeholder' => t('Enter Editor Pic Tid')),
-    '#default_value' => variable_get('editor_pic_tid'),
-  );
-  
-  $form['section_widget_keep_row_count'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Rows You want to keep in section wise widget order'),
-    '#attributes' => array('placeholder' => t('Enter Number')),
-    '#default_value' => variable_get('section_widget_keep_row_count' , 100),
-  );
-  
-  $form['itg_nofollow_fields'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Fileds Value that you want to add in nofollow list (add comma separated values like in placeholder)'),
-    '#attributes' => array('placeholder' => t('field_blog_long_description, field_blog_short_description')),
-    '#default_value' => variable_get('itg_nofollow_fields'),
-  );
-  
-  $form['current_site_hash'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Current site Hash configuration For online archive story'),
-    '#attributes' => array('placeholder' => t('Enter Current site hash')),
-    '#default_value' => variable_get('current_site_hash'),
-  );
-  
-  $form['ads_blocker_content_limit'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Ads blocker content limit'),
-    '#attributes' => array('placeholder' => t('Enter Ads blocker content limit')),
-    '#default_value' => variable_get('ads_blocker_content_limit'),
-  );
-  
-  $form['reporter_tid_for_widgets'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Reporter tid for widgets and anchors-listing page'),
-    '#attributes' => array('placeholder' => t('Reporter tid for widgets')),
-    '#default_value' => variable_get('reporter_tid_for_widgets'),
-  );
-  
-  $form['itg_front_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Front Url'),
-    '#attributes' => array('placeholder' => t('Enter Fron URL')),
-    '#default_value' => variable_get('itg_front_url'),
-  );
-  
-  $form['itg_backend_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Backend Url'),
-    '#attributes' => array('placeholder' => t('Enter Fron URL')),
-    '#default_value' => variable_get('itg_backend_url'),
-  );
-  
-  $form['itg_sharing_app_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Facebook share application id'),
-    '#attributes' => array('placeholder' => t('Enter Facebook share application id')),
-    '#default_value' => variable_get('itg_sharing_app_id'),
-  );
-  
-  $form['parent_sso'] = array(
-    '#type' => 'textfield',
-    '#title' => t('SSO url'),
-    '#attributes' => array('placeholder' => t('Enter sso url')),
-    '#default_value' => variable_get('parent_sso'),
-  );
-  
-  $form['FRONT_URL_VIDEO'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Front video url'),
-    '#attributes' => array('placeholder' => t('Enter Front video url')),
-    '#default_value' => variable_get('FRONT_URL_VIDEO'),
-  );
+	$form['global_loyalty_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Global loyalty url'),
+		'#default_value' => variable_get('global_loyalty_url'),
+	);
+
+	$form['aaj_tak_json_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Aaj tak json url'),
+		'#default_value' => variable_get('aaj_tak_json_url'),
+	);
+
+	$form['business_today_json_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Business today json url'),
+		'#default_value' => variable_get('business_today_json_url'),
+	);
+
+	$form['read_later_days_config'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Read Later days configuration'),
+		'#attributes' => array('placeholder' => t('Enter no of days')),
+		'#default_value' => variable_get('read_later_days_config'),
+	);
+
+	$form['editor_pic_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Editor Pic Tid configuration'),
+		'#attributes' => array('placeholder' => t('Enter Editor Pic Tid')),
+		'#default_value' => variable_get('editor_pic_tid'),
+	);
+
+	$form['section_widget_keep_row_count'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Rows You want to keep in section wise widget order'),
+		'#attributes' => array('placeholder' => t('Enter Number')),
+		'#default_value' => variable_get('section_widget_keep_row_count', 100),
+	);
+
+	$form['itg_nofollow_fields'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Fileds Value that you want to add in nofollow list (add comma separated values like in placeholder)'),
+		'#attributes' => array('placeholder' => t('field_blog_long_description, field_blog_short_description')),
+		'#default_value' => variable_get('itg_nofollow_fields'),
+	);
+
+	$form['current_site_hash'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Current site Hash configuration For online archive story'),
+		'#attributes' => array('placeholder' => t('Enter Current site hash')),
+		'#default_value' => variable_get('current_site_hash'),
+	);
+
+	$form['ads_blocker_content_limit'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Ads blocker content limit'),
+		'#attributes' => array('placeholder' => t('Enter Ads blocker content limit')),
+		'#default_value' => variable_get('ads_blocker_content_limit'),
+	);
+
+	$form['reporter_tid_for_widgets'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Reporter tid for widgets and anchors-listing page'),
+		'#attributes' => array('placeholder' => t('Reporter tid for widgets')),
+		'#default_value' => variable_get('reporter_tid_for_widgets'),
+	);
+
+	$form['itg_front_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Front Url'),
+		'#attributes' => array('placeholder' => t('Enter Fron URL')),
+		'#default_value' => variable_get('itg_front_url'),
+	);
+
+	$form['itg_backend_url'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Backend Url'),
+		'#attributes' => array('placeholder' => t('Enter Fron URL')),
+		'#default_value' => variable_get('itg_backend_url'),
+	);
+
+	$form['itg_sharing_app_id'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Facebook share application id'),
+		'#attributes' => array('placeholder' => t('Enter Facebook share application id')),
+		'#default_value' => variable_get('itg_sharing_app_id'),
+	);
+
+	$form['parent_sso'] = array(
+		'#type' => 'textfield',
+		'#title' => t('SSO url'),
+		'#attributes' => array('placeholder' => t('Enter sso url')),
+		'#default_value' => variable_get('parent_sso'),
+	);
+
+	$form['FRONT_URL_VIDEO'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Front video url'),
+		'#attributes' => array('placeholder' => t('Enter Front video url')),
+		'#default_value' => variable_get('FRONT_URL_VIDEO'),
+	);
+	
 	$form['SEE_PIC'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Front see pic limit'),
-    '#attributes' => array('placeholder' => t('Enter see pic limit')),
-    '#default_value' => variable_get('SEE_PIC'),
-  );
-  
-  return system_settings_form($form);
+		'#type' => 'textfield',
+		'#title' => t('Front see pic limit'),
+		'#attributes' => array('placeholder' => t('Enter see pic limit')),
+		'#default_value' => variable_get('SEE_PIC'),
+	);
+
+	return system_settings_form($form);
 }
