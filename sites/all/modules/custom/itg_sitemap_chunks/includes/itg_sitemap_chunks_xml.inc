@@ -523,3 +523,123 @@ function itg_sitemap_get_node_count($content_type, $start_date, $end_date) {
   $query->condition('n.status', 1);
   return $query->execute()->rowCount();
 }
+
+
+/**
+ * Create xml sitemap for sections: 2 Level.
+ */
+function itg_sitemap_chunks_create_xml_sitemap_section() {
+    $xml_sections_list = itg_sitemap_chunk_get_section();
+    if (count($xml_sections_list) > 0) {
+        header('Content-type: application/xml');
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($xml_sections_list as $key => $tid) {
+            $path = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $tid);
+            $xml .= '<url>';
+            $xml .= '<loc><![CDATA[' . trim($path) . ']]></loc>';
+            $xml .= '</url>';
+        }
+        $xml .= '</urlset>';
+        echo $xml;
+    }
+    else {
+        return drupal_not_found();
+    }
+}
+
+/**
+ * Get Section and category 2 Level (CATEGORY_MANAGMENT)
+ * @param int $vid
+ * @param int $parent
+ * @param int $max_depth
+ * @param boolean $load_entities
+ * @return array
+ */
+function itg_sitemap_chunk_get_section($vid = CATEGORY_MANAGMENT, $parent = 0, $max_depth = 2, $load_entities = FALSE) {
+    $section_hierarchy = itg_get_taxonomy_tree($vid, 0, 2);
+    $section_tids = array();
+    foreach ($section_hierarchy as $tax_object) {
+        $section_tids[] = $tax_object->tid;
+    }
+    return $section_tids;
+}
+
+/*
+ * Function to get taxonomy in tree structure with depth
+ * @param int $vid
+ * @param int $parent
+ * @param int $max_depth
+ * @param boolean $load_entities
+ * @return array
+ */
+
+function itg_get_taxonomy_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {
+    $children = &drupal_static(__FUNCTION__, array());
+    $parents = &drupal_static(__FUNCTION__ . ':parents', array());
+    $terms = &drupal_static(__FUNCTION__ . ':terms', array());
+
+    if (!isset($children[$vid])) {
+        $children[$vid] = array();
+        $parents[$vid] = array();
+        $terms[$vid] = array();
+
+        $query = db_select('taxonomy_term_data', 't');
+        $query->join('itg_category_manager', 'itg_cm', 'itg_cm.tid = t.tid');
+        $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
+        $result = $query
+            ->addTag('translatable')
+            ->addTag('taxonomy_term_access')
+            ->fields('t')
+            ->fields('h', array('parent'))
+            ->condition('t.vid', $vid)
+            ->orderBy('itg_cm.created', 'DESC')
+            ->execute();
+
+        foreach ($result as $term) {
+            $children[$vid][$term->parent][] = $term->tid;
+            $parents[$vid][$term->tid][] = $term->parent;
+            $terms[$vid][$term->tid] = $term;
+        }
+    }
+    $max_depth = (!isset($max_depth)) ? count($children[$vid]) : $max_depth;
+    $tree = array();
+    $process_parents = array();
+    $process_parents[] = $parent;
+
+    while (count($process_parents)) {
+        $parent = array_pop($process_parents);
+        $depth = count($process_parents);
+        if ($max_depth > $depth && !empty($children[$vid][$parent])) {
+            $has_children = FALSE;
+            $child = current($children[$vid][$parent]);
+            do {
+                if (empty($child)) {
+                    break;
+                }
+                $term = $load_entities ? $term_entities[$child] : $terms[$vid][$child];
+                if (isset($parents[$vid][$term->tid])) {
+                    $term = clone $term;
+                }
+                $term->depth = $depth;
+                unset($term->parent);
+                $term->parents = $parents[$vid][$term->tid];
+                $tree[] = $term;
+                if (!empty($children[$vid][$term->tid])) {
+                    $has_children = TRUE;
+                    $process_parents[] = $parent;
+                    $process_parents[] = $term->tid;
+                    reset($children[$vid][$term->tid]);
+                    next($children[$vid][$parent]);
+                    break;
+                }
+            } while ($child = next($children[$vid][$parent]));
+
+            if (!$has_children) {
+                reset($children[$vid][$parent]);
+            }
+        }
+    }
+
+    return $tree;
+}
