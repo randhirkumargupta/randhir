@@ -306,6 +306,7 @@ function itg_photogallery_after_build($form, &$form_state) {
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+	$settings['see_pic'] = variable_get('SEE_PIC');
 
   drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
   if (arg(0) != 'unpublished-photogallery') {

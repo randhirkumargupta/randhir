@@ -293,6 +293,12 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter Front video url')),
     '#default_value' => variable_get('FRONT_URL_VIDEO'),
   );
+	$form['SEE_PIC'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front see pic limit'),
+    '#attributes' => array('placeholder' => t('Enter see pic limit')),
+    '#default_value' => variable_get('SEE_PIC'),
+  );
   
   return system_settings_form($form);
 }
