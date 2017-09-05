@@ -119,7 +119,7 @@ img{
 html.js fieldset.collapsed{
   height: auto;
 }
-input, button, select, textarea{font: 400 14px/18px 'Roboto';}
+input, button, select, textarea{font: 400 14px/18px 'Roboto'; outline: none;}
 form .field-add-more-submit{margin: 0;}
 div.filefield-sources-list a.active{font-weight: 400;}
 .button, .btn-reset{
@@ -981,7 +981,7 @@ div.vertical-tabs {
     margin: 0 0 10px;
   }
   .form-item-log{
-    margin-top: 30px;
+    margin: 0;
   }
   .form-textarea-wrapper{
     max-width: 555px;
@@ -12422,5 +12422,15 @@ fieldset#edit-xmlsitemap{
   #autocomplete{
     max-height: 400px;
     overflow-y: auto;
+  }
+}
+.remove-pink{
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+[id*="views-form-podcast-management-page"]{
+  .form-actions{
+    @extend .remove-pink;
   }
 }

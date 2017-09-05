@@ -587,6 +587,7 @@ html.js fieldset.collapsed {
 
 input, button, select, textarea {
   font: 400 14px/18px 'Roboto';
+  outline: none;
 }
 
 form .field-add-more-submit {
@@ -1894,7 +1895,7 @@ div.vertical-tabs .form-type-textfield, div.vertical-tabs .form-type-textarea {
   margin: 0 0 10px;
 }
 div.vertical-tabs .form-item-log {
-  margin-top: 30px;
+  margin: 0;
 }
 div.vertical-tabs .form-textarea-wrapper {
   max-width: 555px;
@@ -13194,4 +13195,10 @@ fieldset#edit-xmlsitemap {
 .form-field-name-field-story-reporter #autocomplete {
   max-height: 400px;
   overflow-y: auto;
+}
+
+.remove-pink, [id*="views-form-podcast-management-page"] .form-actions {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
 }
