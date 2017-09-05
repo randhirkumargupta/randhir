@@ -390,3 +390,20 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
     $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
   }
 }
+
+/**
+ * Function for Live cricket blog 
+ * 
+ */
+function get_cricket_live_blog_data($node){
+	if(!empty($node) && !empty($node->field_match_id['und'][0]['value'])){
+		$match_id = $node->field_match_id['und'][0]['value'];
+		$api_base_url = 'http://feeds.intoday.in/xml_it/commentary/';
+		$match_commentary = file_get_contents($api_base_url.$match_id);
+		if($match_commentary){
+			//~ $match_commentary = json_decode($match_commentary);
+			echo '<pre>';print_r($match_commentary);die;
+		}
+		
+	}
+}

@@ -89,7 +89,32 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
     <?php
     if (!empty($content)):
       $type = $node->field_type['und']['0']['value'];
-      if ($type == 'Live Blog' || $type == 'Breaking News') {
+      if ($type == 'Cricket Live Blog') {
+		  $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+		 if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+          $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+        }
+        else {
+          $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+        } 
+        print $title;
+        ?>
+        <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+        <div class="social-share">
+            <ul>
+                <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
+                <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop('<?php print $share_page_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $share_image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on twitter" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" class="user-activity twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a title="share on google+" class="user-activity google def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $share_page_link; ?>')"></a></li>
+
+            </ul>
+        </div>
+        <div class="stryimg" >
+        <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'];?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'];?>" src="<?php print $embed_image;?>">
+		<?php get_cricket_live_blog_data($node);?>
+        </div>
+        <?php
+	  } else if ($type == 'Live Blog' || $type == 'Breaking News') {
         if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
