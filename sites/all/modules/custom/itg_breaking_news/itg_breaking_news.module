@@ -435,7 +435,7 @@ function cricket_live_blog_content_callback(){
 function get_cricket_live_blog_data($match_id) {
     if (!empty($match_id)) {
         $api_base_url = 'http://feeds.intoday.in/xml_it/commentary/';
-        $match_commentary = file_get_contents($api_base_url . $match_id);
+        $match_commentary = file_get_contents($api_base_url . $match_id.'_ballbyball.json');
         if ($match_commentary) {
             return theme('cricket_live_blog_commentary', array('data' => json_decode($match_commentary)));
         }
