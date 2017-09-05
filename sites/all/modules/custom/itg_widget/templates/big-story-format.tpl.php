@@ -85,9 +85,22 @@ if (!empty($data['node_data'])) :
           $bigstory_fb_share = htmlentities($bigstory_title, ENT_QUOTES);
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
-          ?>
-        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
+          if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {
+                if (function_exists('itg_common_get_addontitle')) {
+                  $add_on_data = itg_common_get_addontitle($data['node_data']->nid);
+                  $pipelinetext = "";
+                  $pipelineclass = "";
+                  if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+                    $pipelineclass = 'pipeline-added';
+                    
+                  }
+                }
+              }
+              ?>
+        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?> <?php print $pipelineclass; ?>">
             <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $share_title))); ?>
+            <?php echo $pipelinetext; ?>
           </h1>
         <?php endif; ?>
         <p>
