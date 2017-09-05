@@ -1560,6 +1560,30 @@ footer{
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
+  div#autocomplete{
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    overflow-y: auto;
+    max-height: 400px;
+    ul{
+      li{
+        padding: 5px;
+        color: #2f2f2f;
+        cursor: pointer;
+        &:hover{
+          background-color: #f5f5f5;
+        }
+        &+li{
+          border-top: 1px solid #f5f5f5;
+        }
+        div{
+          white-space: normal;
+          word-wrap: break-word;
+          max-width: 100%;
+        }
+      }
+    }
+  }
     .searh-all-filters{
         @include clearfix;
         white-space: nowrap;
