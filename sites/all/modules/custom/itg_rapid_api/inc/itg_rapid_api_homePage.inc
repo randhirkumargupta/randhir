@@ -638,8 +638,9 @@ function homePageJsonMagazine() {
     $n_polls = array();
     $n_rating = array();
 
-    $n_magazine = getMagazineList(); // homepage.inc
-
+    //$n_magazine = getMagazineList(); // homepage.inc
+    $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
+    $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "5";
     $data_magazine['order'] = "5";
