@@ -378,47 +378,46 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // code for magazine issue supplement listing
-  if ($form_state['view']->name == 'magazine_stories') {
-    global $base_url;
-    $settings = array();
-    $settings['base_url'] = $base_url;
-    drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_magazine_supplement_listing.js', array('weight' => 1, 'scope' => 'footer'));
-    $magazine_list = itg_get_magazine_story_name();
-    $form['list-magazine'] = array(
-      '#type' => 'select',
-      '#title' => t('Select magazine'),
-      '#options' => $magazine_list,
-      '#default_value' => '_none',
-      '#weight' => 3,
-    );
+  if ($form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
+      $settings = array();
+      $settings['base_url'] = $base_url;
+      drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_magazine_supplement_listing.js', array('weight' => 1, 'scope' => 'footer'));
+      $magazine_list = itg_get_magazine_story_name();
+      $form['list-magazine'] = array(
+        '#type' => 'select',
+        '#title' => t('Select magazine'),
+        '#options' => $magazine_list,
+        '#default_value' => '_none',
+        '#weight' => 3,
+      );
 
-    if (!empty($form_state['input']['list-magazine'])) {
-      $issue_option = itg_get_magazine_issue_callback($form_state['input']['list-magazine']);
+      if (!empty($form_state['input']['list-magazine'])) {
+        $issue_option = itg_get_magazine_issue_callback($form_state['input']['list-magazine']);
+      }
+
+      $form['list-issue'] = array(
+        '#type' => 'select',
+        '#title' => t('Select Issue'),
+        '#options' => $issue_option,
+        '#weight' => 4,
+      );
+
+      if (!empty($form_state['input']['list-issue'])) {
+        $sup_option = itg_get_supplement_issue_callback($form_state['input']['list-issue']);
+      }
+
+      $form['list-supplement'] = array(
+        '#type' => 'select',
+        '#title' => t('Select supplement'),
+        '#options' => $sup_option,
+        '#weight' => 5,
+      );
+      $form['#info']['filter-list-magazine']['value'] = 'list-magazine';
+      $form['#info']['filter-list-issue']['value'] = 'list-issue';
+      $form['#info']['filter-list-supplement']['value'] = 'list-supplement';
+      $form['#validate'][] = 'itg_magazine_issue_supplement_listing_validate';
     }
-
-    $form['list-issue'] = array(
-      '#type' => 'select',
-      '#title' => t('Select Issue'),
-      '#options' => $issue_option,
-      '#weight' => 4,
-    );
-
-    if (!empty($form_state['input']['list-issue'])) {
-      $sup_option = itg_get_supplement_issue_callback($form_state['input']['list-issue']);
-    }
-
-    $form['list-supplement'] = array(
-      '#type' => 'select',
-      '#title' => t('Select supplement'),
-      '#options' => $sup_option,
-      '#weight' => 5,
-    );
-    $form['#info']['filter-list-magazine']['value'] = 'list-magazine';
-    $form['#info']['filter-list-issue']['value'] = 'list-issue';
-    $form['#info']['filter-list-supplement']['value'] = 'list-supplement';
-    $form['#validate'][] = 'itg_magazine_issue_supplement_listing_validate';
-  }
 }
 
 /**
