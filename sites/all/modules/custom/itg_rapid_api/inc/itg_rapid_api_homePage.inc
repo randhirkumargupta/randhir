@@ -60,13 +60,14 @@ function homePageJsonPackagelist() {
     $data_packagelist['label'] = "LABEL See full coverage";
     $data_packagelist['show_label'] = "0";
     // news list
+    $share_url = get_node_firebase_weburl($nid);
 
     $data_newslist[0]['n_id'] = "1";
     $data_newslist[0]['n_template_id'] = "1";
     $data_newslist[0]['n_type'] = "story";
     $data_newslist[0]['n_is_developing'] = "true";
     $data_newslist[0]['n_is_sponsored'] = "false";
-    $data_newslist[0]['n_share_link'] = "universal_link";
+    $data_newslist[0]['n_share_link'] = "$share_url";
     $data_newslist[0]['n_title'] = "title";
     $data_newslist[0]['n_description'] = "description";
     $data_newslist[0]['n_pcategory_id'] = "1";
@@ -647,14 +648,14 @@ function homePageJsonMagazine() {
     $data_magazine['label'] = "Customized - Edit team will put it in Text Field";
     $data_magazine['show_label'] = "0";
     // news list
-
+    $share_url = get_node_firebase_weburl($nid)
 
     $data_newslist[0]['n_id'] = "";
     $data_newslist[0]['n_template_id'] = "";
     $data_newslist[0]['n_type'] = "";
     $data_newslist[0]['n_is_developing'] = "";
     $data_newslist[0]['n_is_sponsored'] = "";
-    $data_newslist[0]['n_share_link'] = "";
+    $data_newslist[0]['n_share_link'] = "$share_url";
     $data_newslist[0]['n_title'] = "";
     $data_newslist[0]['n_description'] = "";
     $data_newslist[0]['n_pcategory_id'] = "";
