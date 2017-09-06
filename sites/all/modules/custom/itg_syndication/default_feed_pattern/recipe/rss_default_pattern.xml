@@ -2,7 +2,7 @@
     <channel>
         <title>{{{web_site_name}}}| {{{section_category_name}}}</title>
         <description>{{{web_site_name}}}</description>
-        <link>{{{website_url}}}</link>
+        <link><![CDATA[  {{{website_url}}} ]]></link>
         <lastBuildDate>{{{xml_creation_date}}}</lastBuildDate>
         <generator>FeedCreator 1.7.2</generator>
         <image>

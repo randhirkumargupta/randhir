@@ -730,10 +730,23 @@ function itg_newsletter_content_data() {
       } else {
         $kicker = '';
       }
-      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
+      $file_id = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+      $file_data = _itg_get_extra_large_img_alt_and_title_from_tid($file_id , $getnid);
+      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'file_data' => $file_data  ,'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
       exit;
-    } 
+    }
   }
+}
+
+function _itg_get_extra_large_img_alt_and_title_from_tid($fid , $getnid) {
+    if($fid && $getnid) {
+            $query = db_select('field_data_field_story_extra_large_image' , 'elg')
+                    ->fields('elg' , array("field_story_extra_large_image_alt" , "field_story_extra_large_image_title"))
+                    ->condition("elg.field_story_extra_large_image_fid" , $fid)
+                    ->condition("elg.entity_id" , $getnid);
+           $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+           return $result[0];
+    }
 }
 
 /**

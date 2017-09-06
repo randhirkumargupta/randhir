@@ -52,7 +52,7 @@ function itg_sitemap_chunks_section_form($form, &$form_state) {
     );
 
     if (!empty($db_data->section_tid)) {
-      $site_map_link = FRONT_URL . '/' . itg_sitemap_chunks_create_valid_url($sections[$i]->name) . '-sitemap.xml';
+      $site_map_link = FRONT_URL . '/sitemap/' . $db_data->section_tid;
       $action_link = l("View", $site_map_link, array("attributes" => array("target" => "_blank")));
     } else {
       $action_link = t("N/A");
@@ -112,6 +112,7 @@ function itg_sitemap_get_sections() {
  */
 function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
   itg_sitemap_shunks_section_delete();
+   _itg_delete_all_section_sitemap_alias();
   $sections = $form_state['values']['section'];
   $count = 0;
   if (!empty($sections)) {
@@ -141,6 +142,13 @@ function itg_sitemap_chunks_section_form_submit($form, &$form_state) {
   }
 }
 
+function _itg_delete_all_section_sitemap_alias() {
+    try {
+        db_delete('url_alias')->condition('source' ,  '%' .db_like('sitemap/') . '%' , 'LIKE')->execute();
+    } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage() , 'error');
+    }
+}
 /**
  * Function gives right string for sitemap link.
  * @param string $pathdata

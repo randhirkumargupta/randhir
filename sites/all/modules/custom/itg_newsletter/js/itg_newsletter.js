@@ -14,7 +14,7 @@
 
             if (nid) {
                 $('input[name="field_newsl_add_news_und_0_remove_button"]').show();
-            } else {                
+            } else {
                 $('#edit-field-newsl-add-news-und-0-remove-button').hide();
             }
 
@@ -118,39 +118,39 @@
                     }
                 }
             });
-            
+
             //Newsletter Content hide/show onclick for section select
-            
+
             $("input[name='field_newsl_newsletter_type[und]']").on("click", function () {
                 var newsletter_type = $(this).val();
                 if (newsletter_type === 'manual') {
                     $('#edit-field-story-category').hide();
-                } 
-                 if (newsletter_type === 'automatic') {
+                }
+                if (newsletter_type === 'automatic') {
                     $('#edit-field-story-category').show();
                     $("input[name='field_newsl_newsletter_content[und]']:checked").trigger('click');
-                 } 
-             });
-            
+                }
+            });
+
             var newsletter_content = $("input[name='field_newsl_newsletter_content[und]']:checked").val();
             if (newsletter_content === 'select_section') {
                 $('#edit-field-story-category').show();
-            } else  {
+            } else {
                 $('#edit-field-story-category').hide();
             }
-            
+
             $("input[name='field_newsl_newsletter_content[und]']").on("click", function () {
                 var newsletter_content = $(this).val();
                 if (newsletter_content === 'select_section') {
                     $('#edit-field-story-category').show();
-                } else  {
+                } else {
                     $('#edit-field-story-category').hide();
                 }
-                
+
             });
             //Aautomatic and manual hide/show onclick for section select
 
-            
+
             //Day,date and time hide/show on click
             $("input[name='field_newsl_frequency[und]']").on("click", function () {
                 var check_radio_name = $(this).val();
@@ -195,13 +195,15 @@
 
 })(jQuery, Drupal, this, this.document);
 
-jQuery(document).ready(function() {
-
+jQuery(document).ready(function () {
+    jQuery.cookie('field_title', null, {path:'/'});
+    jQuery.cookie('field_alt', null, {path:'/'});
+    jQuery.cookie('field_title_val', null, {path:'/'});
+    jQuery.cookie('field_alt_val', null, {path:'/'});
     //Get Newsletter data using AJAX
-    jQuery('body').on('click', '.newsletter-get-content', function() {
+    jQuery('body').on('click', '.newsletter-get-content', function () {
         var contentId = jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
         var relval = jQuery(this).attr('rel');
-
         var loaderImg = base_url + '/misc/throbber-active.gif';
         jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('<img src="' + loaderImg + '" alt="" />');
 
@@ -209,13 +211,11 @@ jQuery(document).ready(function() {
             alert(Drupal.t('Please select Content ID.'));
             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
             jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').focus();
-        }
-        else {
+        } else {
             if (jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div').hasClass('image-preview')) {
                 jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
                 alert(Drupal.t('Please remove existing thumbnail'));
-            }
-            else {
+            } else {
                 var contentIdArr = contentId.split(' (');
                 jQuery.ajax({
                     url: Drupal.settings.basePath + 'newsletter_data',
@@ -223,8 +223,9 @@ jQuery(document).ready(function() {
                     data: {content_id: contentIdArr[0]},
                     cache: false,
                     dataType: "JSON",
-                    success: function(data) {
+                    success: function (data) {
                         if (data != null) {
+                            jQuery("#widget-ajex-loader").show();
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
@@ -232,18 +233,42 @@ jQuery(document).ready(function() {
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-kicker').find('.form-textarea').val(data.kicker);
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data :hidden').attr('value', data.fid);
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().siblings('.field-name-field-news-thumbnail').find('div.image-widget-data .form-submit').triggerHandler('mousedown');
+                            // Set Cookie
+                            var date = new Date();
+                            date.setTime(date.getTime() + (1000 * 1000));
+                            jQuery.cookie('field_title', "input[name='field_newsl_add_news[und][" + relval + "][field_news_thumbnail][und][0][title]']", {expires: date});
+                            jQuery.cookie('field_alt', "input[name='field_newsl_add_news[und][" + relval + "][field_news_thumbnail][und][0][alt]']", {expires: date});
+                            jQuery.cookie('field_title_val', data.file_data.field_story_extra_large_image_title, {expires: date});
+                            jQuery.cookie('field_alt_val', data.file_data.field_story_extra_large_image_alt, {expires: date});
                         } else {
                             alert("Please Provide the published Content Id.");
                             jQuery("form").trigger("reset");
                         }
                     },
-                    error: function() {
+                    error: function () {
                         return false;
                     }
                 });
             }
-
         }
     });
 
+// Handle case for newsletter alt and title field.
+setInterval(function () {
+        var which_title_field = jQuery.cookie('field_title');
+        var which_alt_field = jQuery.cookie('field_alt');
+        var field_title_val = jQuery.cookie('field_title_val');
+        var field_alt_val = jQuery.cookie('field_alt_val');
+        if (which_title_field !== null && field_title_val !== null && field_alt_val !== null && which_alt_field !== null) {
+            if (jQuery(which_title_field).get(0)) {
+                jQuery(which_title_field).val(field_title_val);
+                jQuery(which_alt_field).val(field_alt_val);
+                jQuery.cookie('field_title', null, {path:'/'});
+                jQuery.cookie('field_alt', null, {path:'/'});
+                jQuery.cookie('field_title_val', null, {path:'/'});
+                jQuery.cookie('field_alt_val', null, {path:'/'});
+                  jQuery("#widget-ajex-loader").hide();
+            }
+        }
+    }, 3000);
 });
