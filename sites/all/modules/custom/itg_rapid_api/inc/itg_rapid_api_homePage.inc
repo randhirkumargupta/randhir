@@ -63,6 +63,7 @@ function homePageJsonPackagelist() {
     $share_url = get_node_firebase_weburl($nid);
     $conf = getStoryConfigVal($nid);
     $is_developing = 0;
+    $conf = getStoryConfigVal($nid);
     if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
         $is_developing = 1;
     }
@@ -206,6 +207,7 @@ function homePageJsonTopstories() {
             // custom function for get img byline
             $byline = getImgByline($value['field_story_medium_image_fid']);
             $is_developing = 0;
+            $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
@@ -385,6 +387,7 @@ function homePageJsonNewslist_india() {
             // custom function for get img byline
             $byline = getImgByline($resvalue['field_story_medium_image_fid']);
             $is_developing = 0;
+            $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
@@ -589,6 +592,7 @@ function homePageJsonNewslist_world() {
             // custom function for get img byline
             $byline = getImgByline($resvalue['field_story_medium_image_fid']);
             $is_developing = 0;
+            $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
@@ -670,6 +674,7 @@ function homePageJsonMagazine() {
     // news list
     $share_url = get_node_firebase_weburl($nid);
     $is_developing = 0;
+    $conf = getStoryConfigVal($nid);
     if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
         $is_developing = 1;
     }
