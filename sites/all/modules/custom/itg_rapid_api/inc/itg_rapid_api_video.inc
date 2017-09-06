@@ -247,7 +247,7 @@ function generateVideoCategoryList($tid, $pageno) {
 
 
 
-  $data['lcount'] = customNodeCountChild($tid, $type);
+  $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
   $data['updated_datetime'] = $changed_datetime;
 
@@ -520,7 +520,7 @@ function generateProgramCategoryList($tid, $pageno) {
 
 
 
-  $data['lcount'] = customNodeCountChild($tid, $type);
+  $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
   $data['updated_datetime'] = $changed_datetime;
 
