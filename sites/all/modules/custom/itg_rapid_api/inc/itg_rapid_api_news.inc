@@ -265,7 +265,7 @@ function generateNewsCategoryList($tid, $pageno) {
         }
     }
 
-    $data['lcount'] = $listcount;
+    $data['lcount'] = customNodeCountChildNews($tid, $type);
     $data['data'] = $news_list_array;
     $data['updated_datetime'] = $changed_datetime;
     return $data;
@@ -632,4 +632,30 @@ function getPhotostoryPhotodetail($fid){
   $query->condition('img.fid',$fid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
+}
+
+/**
+ * common function for return node count with child
+ * @pram $type
+ * @pram $tid
+ *
+ * @return $type
+ */
+function customNodeCountChildNews($tid, $type, $child_count = TRUE) {
+
+  $tids = array($tid);
+  if ($child_count) {
+    $tids = array_merge($tids, term_get_children_ids($tid));
+  }
+  global $language;
+  $langs = array($language->language);
+  $langs[] = 'und';
+  $query = db_select('taxonomy_index', 't');
+  $query->condition('tid', $tids, 'IN');
+  $query->join('node', 'n', 't.nid = n.nid');
+  $query->condition('n.status', 1, '=');
+  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.language', $langs, 'IN');
+  $count = $query->countQuery()->execute()->fetchField();
+  return $count;
 }
