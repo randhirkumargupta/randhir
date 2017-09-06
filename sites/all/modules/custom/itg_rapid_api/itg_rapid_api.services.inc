@@ -739,7 +739,7 @@ function itg_rapid_api_resource() {
             ),
         ),
         // homePage custom resource declaration.....
-        'homePage' => array(
+        'home' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves storydetail schemes info.',

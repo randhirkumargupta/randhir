@@ -42,7 +42,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['layout_id'] = "0";
     $data_array['photo_count'] = "$datacount";
     $data_array['photo_display_count'] = "10";
-    $data_array['photo_pagination_cap'] = "35";
+    $data_array['photo_pagination_cap'] = "50";
     $data_array['updated_datetime'] = "$data_up_time";
 
     $data_array['photo'] = $data['data'];
