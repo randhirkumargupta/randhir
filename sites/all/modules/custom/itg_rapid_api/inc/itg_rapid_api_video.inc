@@ -520,7 +520,7 @@ function generateProgramCategoryList($tid, $pageno) {
 
 
 
-  $data['lcount'] = $listcount;
+  $data['lcount'] = customNodeCountChild($tid, $type);
   $data['data'] = $photo_list_array;
   $data['updated_datetime'] = $changed_datetime;
 
