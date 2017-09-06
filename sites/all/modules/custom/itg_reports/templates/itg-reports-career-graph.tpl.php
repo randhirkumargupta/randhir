@@ -49,6 +49,9 @@ foreach ($output as $key => $value) {
       $grapg_file = file_load($graph_data[3]);
       $uri = $grapg_file->uri;
       $graph_pic_url = '<img src="' . file_create_url($uri) . '" alt="' .  $graph_data[2] . '" />';
+      if(function_exists('itg_common_global_alt_title')) {
+        $img_attr = itg_common_global_alt_title('field_movie_graph_image', $graph_data[3]);
+      }
     }
     else {
       $graph_pic_url = '';
@@ -62,7 +65,7 @@ foreach ($output as $key => $value) {
     }
     else {
       if(!empty($uri)) {
-      $image = '<img src='.file_create_url($uri).'>';
+      $image = "<img src='".file_create_url($uri)."' alt='".$img_attr[0]['field_movie_graph_image_alt']."' title='".$img_attr[0]['field_movie_graph_image_title']."'>";
       } else {
       $image = ''; 
       }

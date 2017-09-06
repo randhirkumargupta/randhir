@@ -76,16 +76,16 @@ if ($classes) {
                 }
                 else if ($field == 'sm_field_video_thumb_url') {
                   ?>
-                  <td <?php
+<!--                  <td <?php
                   if ($field_classes[$field][$row_count]) {
                     print 'class="' . $field_classes[$field][$row_count] . '" ';
                   }
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
                           <?php print $video_image; ?>
-                  </td>
+                  </td>-->
                   <?php
                 }
-                else if ($field == 'label' || $field == 'sm_field_video_duration' || $field == 'sm_field_video_date_time') {
+                else if ($field == 'label'  || $field == 'sm_field_video_date_time') {
                   ?>
                   <td <?php
                   if ($field == 'label') {

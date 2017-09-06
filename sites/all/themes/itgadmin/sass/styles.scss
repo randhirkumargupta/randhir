@@ -8885,9 +8885,6 @@ div.node{
 .node-type-photogallery,
 .page-taxonomy-term-edit,
 .page-admin-structure-taxonomy-category-management{
-  .action-with-title #page-title{
-    width: 400px;
-  }
   .action-with-title.fixed{
     padding: 10px 0;
   }
@@ -12304,6 +12301,7 @@ fieldset#edit-xmlsitemap{
 .video-ftp-div{
   display: inline-block;
   vertical-align: top;
+  margin-top: 120px;
   width: 100%;
   .main-top-wraper{
     display: inline-block;
@@ -12390,6 +12388,7 @@ fieldset#edit-xmlsitemap{
   iframe#video_iframe{
     border: none;
     width: 100%;
+    max-height: 400px;
   }
   .button.asso-filed-video{
     margin-bottom: 10px;
@@ -12418,7 +12417,10 @@ fieldset#edit-xmlsitemap{
   .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-type-select{
     width: 120px;
   }
-  .view-content{
-    margin-top: 120px;
+}
+.form-field-name-field-story-reporter{
+  #autocomplete{
+    max-height: 400px;
+    overflow-y: auto;
   }
 }

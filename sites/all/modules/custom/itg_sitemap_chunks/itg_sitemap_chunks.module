@@ -149,7 +149,15 @@ function itg_sitemap_chunks_menu() {
     'file' => 'includes/itg_sitemap_chunks_xml.inc',
     'access callback' => TRUE,
   );
-
+  
+  $items['sitemap-sections.xml'] = array(
+    'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_section', 
+    'type' => MENU_CALLBACK,
+    'file path' => drupal_get_path('module', 'itg_sitemap_chunks'),
+    'file' => 'includes/itg_sitemap_chunks_xml.inc',
+    'access callback' => TRUE,
+  );
+  
   $items['create-sitemap-files'] = array(
     'page callback' => 'itg_sitemap_chunks_create_xml_sitemap_for_content_type',
     'type' => MENU_CALLBACK,

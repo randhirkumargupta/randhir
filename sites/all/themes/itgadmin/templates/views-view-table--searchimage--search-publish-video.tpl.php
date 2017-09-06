@@ -79,13 +79,13 @@ $video_data = "";
           url: Drupal.settings.basePath + 'dailymotion-video-play',
           type: 'post',
           beforeSend: function (xhr) {
-              jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+              jQuery('#widget-ajex-loader').show();
           },
          data: {'videoid': getvideo_id,'width':400,'height':260},
           success: function (data) {
 
               jQuery('#video_play_div').html(data);
-              jQuery('#loader-data img').hide().parent().addClass('loader_overlay');
+              jQuery('#widget-ajex-loader').hide();
 
           },
           error: function (xhr, desc, err) {

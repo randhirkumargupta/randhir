@@ -129,7 +129,7 @@ $argum = base64_encode(arg(1));
                                 <i class="fa fa-camera" aria-hidden="true"></i>
                                 <?php print $row['counter']; ?>
                             </div>
-                            <div class="caption"><?php print mb_strimwidth(html_entity_decode(strip_tags($row['field_image_caption'])), 0, 125, ".."); ?>
+                            <div class="caption"><?php print html_entity_decode(strip_tags($row['field_image_caption'])); ?>
 
                                 <div class="section-like-dislike">
                                     <!--<div id="btn-div">-->
@@ -228,7 +228,7 @@ $argum = base64_encode(arg(1));
     $explode = explode("?", $_SERVER['REQUEST_URI']);
     $initial_slide = 0;
     if(count($explode) > 1) {
-        $initial_slide = end($explode);
+        $initial_slide = is_integer(end($explode)) ? end($explode) : 0;
     }
 ?>
 <script>

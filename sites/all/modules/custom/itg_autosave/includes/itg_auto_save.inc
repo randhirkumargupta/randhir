@@ -434,7 +434,6 @@ class itg_auto_save {
           break;
 
         case 'text':
-          pr($field_values[$value['fieldName']]['und']);
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
@@ -498,12 +497,6 @@ class itg_auto_save {
           break;
 
         case 'text':
-          
-//          if ($inputs['form_id'] == 'newsletter_node_form') {
-//            //pr($field['fieldName']);
-//            $node->{$field['fieldName']}['und'][0]['value'] = 'Save as Draft';
-//          }
-
           if (is_array($inputs[$field['fieldName']]['und']) && count($inputs[$field['fieldName']]['und']) > 0) {
             foreach ($inputs[$field['fieldName']]['und'] as $key => $value) {
               if ($value['value'] != '') {
@@ -605,16 +598,26 @@ class itg_auto_save {
           break;
           
         case 'entityreference':
-          
-          if ($inputs['form_id'] == 'survey_node_form' || $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
+          if ($field['fieldName'] == 'field_video_anchor') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (!empty($this->value) && is_array($this->value)) {
+              foreach ($this->value as $anchor_key => $anchor_val) {
+                preg_match_all('!\d+!', $anchor_val['target_id'], $matches);
+                $targetids = reset($matches);
+                $node->{$field['fieldName']}['und'][$anchor_key]['target_id'] = $targetids[0];
+              }
+            }
+          } elseif ($inputs['form_id'] == 'story_node_form' ||
+                  $inputs['form_id'] == 'videogallery_node_form' ||
+                  $inputs['form_id'] == 'survey_node_form' ||
+                  $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
             $this->value = $inputs[$field['fieldName']]['und'];
             preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
             $targetid = reset($matches);
-            if (isset($targetid[0]) && !empty($targetid[0])) { 
+            if (isset($targetid[0]) && !empty($targetid[0])) {
               $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
             }
-          } 
-          else {
+          } else {
             $this->value = $inputs[$field['fieldName']]['und'];
             preg_match_all('!\d+!', $this->value, $matches);
             $targetid = reset($matches);
@@ -638,12 +641,17 @@ class itg_auto_save {
           break;
         
         case 'list_integer':
-          $this->value = $inputs[$field['fieldName']]['und'];
-          if (isset($this->value) && !empty($this->value)) {
-            preg_match_all('!\d+!', $this->value, $matches);
-            $get_techrating = reset($matches);
-            $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+          if ($field['fieldName'] == 'field_survey_expity_date') {
+            $node->{$field['fieldName']}['und'][0]['value'] = $inputs[$field['fieldName']]['und'][1];            
+          } else {          
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (isset($this->value) && !empty($this->value)) {
+              preg_match_all('!\d+!', $this->value, $matches);
+              $get_techrating = reset($matches);
+              $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+            }
           }
+          
           break;
           
         case 'youtube':
@@ -652,6 +660,7 @@ class itg_auto_save {
             $node->{$field['fieldName']}['und'][0]['input'] = $this->value[0]['input'];
           }
           break;
+          
       }
     }
 
@@ -710,9 +719,14 @@ class itg_auto_save {
           break;
 
         case 'text':
-//          pr($field['fieldName']);
-//          pr($inputs[$field['fieldName']]['und']);
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          if ($field['fieldName'] == 'field_survey_answer_option_2') {
+            $opt2 = $inputs[$field['fieldName']]['und'];
+            foreach ($opt2 as $opt2_key => $opt2_val) {
+              $fc_item->{$field['fieldName']}[LANGUAGE_NONE][$opt2_key]['value'] = $opt2_val['value'];
+            }
+          } else {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
           break;
 
         case 'taxonomy_term_reference':
@@ -727,6 +741,16 @@ class itg_auto_save {
         case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;
+          break;
+        
+//        case 'field_collection':
+//          pr("cdcdc");
+//          break;
+        
+        case 'number_integer':
+          if (!empty($inputs[$field['fieldName']]['und']) && is_array($inputs[$field['fieldName']]['und'])) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
           break;
 
         case 'text_with_summary':
