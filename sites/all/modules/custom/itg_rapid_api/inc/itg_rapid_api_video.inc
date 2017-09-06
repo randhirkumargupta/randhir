@@ -228,7 +228,7 @@ function generateVideoCategoryList($tid, $pageno) {
       }
       elseif (!empty($videotag['migrated'])) {
         $photo_list_array[$listcount]['v_is_default_player'] = "0";
-        $photo_list_array[$listcount]['v_url'] = '';
+        $photo_list_array[$listcount]['v_url'] = $videotag['migrated']['video_path_mp4'];
         $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
       }
       $term_pri = taxonomy_term_load($field_primary_category_value);
@@ -498,7 +498,7 @@ function generateProgramCategoryList($tid, $pageno) {
       elseif (!empty($videotag['migrated'])) {
         $video_path_mp4 = $video_path_info['video_path_mp4'];
         $photo_list_array[$listcount]['p_is_default_player'] = "0";
-        $photo_list_array[$listcount]['p_url'] = "";
+        $photo_list_array[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
         $photo_list_array[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
       }
       $field_primary_category_value = $resvalue['field_primary_category_value'];
