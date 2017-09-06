@@ -63,7 +63,7 @@ function homePageJsonPackagelist() {
     $share_url = get_node_firebase_weburl($nid);
     $conf = getStoryConfigVal($nid);
     $is_developing = 0;
-    if (in_array("developing_story", $conf)) {
+    if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
         $is_developing = 1;
     }
 
@@ -206,7 +206,7 @@ function homePageJsonTopstories() {
             // custom function for get img byline
             $byline = getImgByline($value['field_story_medium_image_fid']);
             $is_developing = 0;
-            if (in_array_r("developing_story", $conf)) {
+            if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
 
@@ -385,7 +385,7 @@ function homePageJsonNewslist_india() {
             // custom function for get img byline
             $byline = getImgByline($resvalue['field_story_medium_image_fid']);
             $is_developing = 0;
-            if (in_array_r("developing_story", $conf)) {
+            if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
 
@@ -589,7 +589,7 @@ function homePageJsonNewslist_world() {
             // custom function for get img byline
             $byline = getImgByline($resvalue['field_story_medium_image_fid']);
             $is_developing = 0;
-            if (in_array_r("developing_story", $conf)) {
+            if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
 
@@ -670,7 +670,7 @@ function homePageJsonMagazine() {
     // news list
     $share_url = get_node_firebase_weburl($nid);
     $is_developing = 0;
-    if (in_array_r("developing_story", $conf)) {
+    if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
         $is_developing = 1;
     }
     $data_newslist[0]['n_id'] = "";
@@ -899,12 +899,20 @@ function getMagazineStory($issue_date) {
     return $story;
 }
 
-function in_array_r($needle, $haystack, $strict = false) {
-    foreach ($haystack as $item) {
-        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
+function in_multiarray($elem, $array,$field)
+{
+    $top = sizeof($array) - 1;
+    $bottom = 0;
+    while($bottom <= $top)
+    {
+        if($array[$bottom][$field] == $elem)
             return true;
-        }
-    }
+        else 
+            if(is_array($array[$bottom][$field]))
+                if(in_multiarray($elem, ($array[$bottom][$field])))
+                    return true;
 
+        $bottom++;
+    }        
     return false;
 }
