@@ -15037,5 +15037,4 @@ span.story-sponsor-powered-text::last-word {
 
 
 .itgimage{position: relative;}
-.itgimage .body_caption {background: rgba(0,0,0,0.5); position: absolute; bottom: 0px;color: #fff;padding: 1% 2%; font-size: 13px; line-height: 19px;
- width: 100%;}
+.itgimage .body_caption {font-size: 0.8125rem; padding: 10px 0; border-bottom: 1px solid #e5e5e5;color: #929292;line-height: 18px;}
