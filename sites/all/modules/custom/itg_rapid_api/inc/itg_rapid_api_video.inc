@@ -317,7 +317,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data_array['subcategory_title'] = "$term_name";
   $data_array['program_count'] = "$datacount";
   $data_array['program_display_count'] = "10";
-  $data_array['program_pagination_cap'] = "7";
+  $data_array['program_pagination_cap'] = "35";
   $data_array['updated_datetime'] = "$data_up_time";
 
   $data_array['program'] = $data['data'];
