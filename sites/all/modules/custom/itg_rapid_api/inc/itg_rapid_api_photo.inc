@@ -190,7 +190,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             }
             // photo detail for listing
             $term_pri = taxonomy_term_load($field_primary_category_value);
-            $term_name_pri = $term->name;
+            $term_name_pri = $term_pri->name;
             $photo_list_array[$loop_count]['p_id'] = "$nid";
             $photo_list_array[$loop_count]['p_title'] = "$title";
             $photo_list_array[$loop_count]['p_small_image'] = "$file_small_img_url";
