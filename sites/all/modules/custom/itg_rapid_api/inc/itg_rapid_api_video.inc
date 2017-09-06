@@ -43,7 +43,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
   $data_array['video_count'] = "$datacount";
   $data_array['video_display_count'] = "10";
-  $data_array['video_pagination_cap'] = "7";
+  $data_array['video_pagination_cap'] = "40";
   $data_array['updated_datetime'] = "$data_up_time";
 
   $data_array['video'] = $data['data'];
