@@ -648,7 +648,7 @@ function homePageJsonMagazine() {
     $data_magazine['label'] = "Customized - Edit team will put it in Text Field";
     $data_magazine['show_label'] = "0";
     // news list
-    $share_url = get_node_firebase_weburl($nid)
+    $share_url = get_node_firebase_weburl($nid);
 
     $data_newslist[0]['n_id'] = "";
     $data_newslist[0]['n_template_id'] = "";
