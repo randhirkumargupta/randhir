@@ -871,7 +871,7 @@ function getMagazineStory($issue_date) {
         }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
-        if (in_array_r("lock_story", $conf)) {
+        if (in_multiarray("lock_story", $conf, "field_story_configurations_value")) {
             $is_lock = 1;
         }
 
