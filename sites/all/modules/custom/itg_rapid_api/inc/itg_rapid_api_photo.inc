@@ -203,7 +203,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             $loop_count++;
         }
     }
-    $data['lcount'] = $listcount;
+    $data['lcount'] = customNodeCountChild($tid, $type);
     $data['data'] = $photo_list_array;
     $data['updated_datetime'] = $changed_datetime;
 
