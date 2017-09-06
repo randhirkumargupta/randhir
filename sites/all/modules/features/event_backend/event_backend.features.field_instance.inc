@@ -2273,6 +2273,55 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-event_backend-field_individual_registration_fe'.
+  $field_instances['node-event_backend-field_individual_registration_fe'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter fees in INR',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_individual_registration_fe',
+    'label' => 'Individual Registration Fee',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '₹',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_news_title'.
   $field_instances['node-event_backend-field_news_title'] = array(
     'bundle' => 'event_backend',
@@ -2739,6 +2788,53 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_backend-field_story_node_identity'.
+  $field_instances['node-event_backend-field_story_node_identity'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_story_url'.
   $field_instances['node-event_backend-field_story_url'] = array(
     'bundle' => 'event_backend',
@@ -3069,6 +3165,7 @@ function event_backend_field_default_field_instances() {
   t('Menu Background Colour');
   t('Menu Font Colour');
   t('No. of Tickets');
+  t('Node Identity');
   t('Photo');
   t('Please add event highlights.');
   t('Please add event photos.');
