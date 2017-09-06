@@ -40,6 +40,10 @@
 
 jQuery('document').ready(function () {
     var see_pic = Drupal.settings.itg_photogallery.settings.see_pic;
+    if (!see_pic){
+        see_pic = 10;
+    }
+    
     jQuery('#edit-field-photo-see-pic-link-und-0-value').keydown(function (e) {
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
                 // Allow: Ctrl+A
