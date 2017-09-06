@@ -228,6 +228,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
       $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
       $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_magazine_kicker_text']['#attributes']['class'][] = 'element-hidden';
       }
 
       // add common hidden type field
@@ -1488,3 +1489,25 @@ function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
     return $record = $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
+
+/**
+ * Implements itg_common_get_addontitle().
+ * @param int $nid;
+ */
+function itg_common_get_addontitle($nid) {
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_story_new_title', 'addon');
+    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
+    $query->fields('addon', array('field_story_new_title_value'))
+          ->fields('addurl', array('field_story_redirection_url_titl_value'));
+    $query->condition('addon.entity_id', $nid);
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $record['field_story_new_title_value'];
+      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
+    }
+
+    return $addon_list;
+  }
+}
+  

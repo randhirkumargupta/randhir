@@ -254,8 +254,13 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             foreach($node_array as $nid) {
                 $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                 $xml .="<item><link>" . $artical_file_name . "</link></item>";
-                $node_file = _create_node_file($artical_file_name, $nid, $section_name);
-                _kindle_save_unmanaged_file($node_file, $directory_name);
+                $node_load_data = node_load($nid);
+                $expiry_time = strtotime($node_load_data->field_story_schedule_date_time['und'][0]['value']);
+                // Skip future date and unpublised story.
+                if($expiry_time < time() && $node_load_data->status) {
+                    $node_file = _create_node_file($artical_file_name, $nid, $section_name);
+                    _kindle_save_unmanaged_file($node_file, $directory_name);
+                }
             }
             $xml .= "</channel></rss>";
             // Save logic for section files files.
@@ -282,15 +287,18 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
 
     if(!is_null($file_name) && !is_null($node_id) && !is_null($section)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
+        $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
+        $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
         $node_data = node_load($node_id);
+        $bylines = _get_byline_from_nid($node_id);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
-        <title> <![CDATA[ ' . _get_correct_file_name($section) . ' - Title ' . $node_id . ' ]]> </title>
+        <title> ' . _get_correct_file_name($section) . ' - Title ' . $node_id . ' </title>
         <docdata management-status="usable">
             <doc-id id-string="' . $node_id . '" regsrc="AMZN" />
             <urgency ed-urg="2" /> 
-            <date.issue norm="' . $current_time . '" />
+            <date.issue norm="' . $issue_date . '" />
             <date.release norm="' . $current_time . '" /> 
             <du-key generation="1" key="GN3;5275646997;Amazon.4" />
             <doc.copyright holder="India Today" />
@@ -304,14 +312,14 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         <body.head>
             <hedline>
                 <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . $node_data->field_story_magazine_kicker_text ['und'][0]['value'] . '  ]]> </hl2>
+                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . '  ]]> </hl2>
             </hedline>
-            <byline> </byline>
+            <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . $node_data->field_story_magazine_kicker_text ['und'][0]['value'] . ' ]]> </abstract>
+            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . ' ]]> </abstract>
         </body.head>
         <body.content>
-            <block>  <![CDATA[ ' . _remove_embded_tags_from_story_body($node_data->body ['und'][0]['value']) . ' ]]> </block>
+            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body ['und'][0]['value'])) . ' ]]> </block>
         </body.content>
         <body.end />
     </body>
@@ -409,6 +417,8 @@ function _create_cover_page_xml() {
     $data = array();
     // Time with mili second.
     $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
+    $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
+    $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
     $data['file_name'] = 'Cover_page.xml';
     $xml = '<?xml version="1.0" encoding="utf-8"?>
   <nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
@@ -417,7 +427,7 @@ function _create_cover_page_xml() {
           <docdata management-status="usable">
               <doc-id id-string="0" regsrc="AMZN" />
               <urgency ed-urg="2" /> 
-              <date.issue norm="' . $current_time . '" />
+              <date.issue norm="' . $issue_date . '" />
               <date.release norm="' . $current_time . '" /> 
               <du-key generation="1" key="GN3;5275646997;Amazon.4" />
               <doc.copyright holder="India Today" />

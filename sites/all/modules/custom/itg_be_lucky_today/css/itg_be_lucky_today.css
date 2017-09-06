@@ -287,3 +287,19 @@ select, input[type="password"]{ width:100px;}
 .pmt_mtd select{background: #fff;border-radius: 5px;margin: 0 25px;width: 187px;    padding: 4px;}
 .form-item.form-item-select-payment{width: auto;}
 .page-be-lucky-today .pmt_mtd .magazine.form-submit{display: inline-block;line-height: 35px;min-height: auto;}
+.registration1 form:before, .registration2 form:before, .subscribe form:before{
+  content:url('../images/desktop-ad-banner.jpg'); 
+    position: absolute;
+    z-index: 100000;
+    top: -65px;
+    right: -161px;
+}
+.itg_be_lucky_today form{position: relative;}
+.registration1 form:after, .registration2 form:after, .subscribe form:after{
+  content:url('../images/desktop-ad-banner.jpg'); 
+    position: absolute;
+    z-index: 100000;
+    top: -65px;
+    left: -161px;
+}
+.itg_be_lucky_today.registration1, .itg_be_lucky_today.registration2{min-height: 537px;}
