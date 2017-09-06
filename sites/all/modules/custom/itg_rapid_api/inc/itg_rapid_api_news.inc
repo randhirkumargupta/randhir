@@ -265,7 +265,7 @@ function generateNewsCategoryList($tid, $pageno) {
         }
     }
 
-    $data['lcount'] = customNodeCountChildNews($tid, $type);
+    $data['lcount'] = $listcount;
     $data['data'] = $news_list_array;
     $data['updated_datetime'] = $changed_datetime;
     return $data;
