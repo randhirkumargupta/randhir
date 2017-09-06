@@ -634,12 +634,14 @@
         transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
         cursor: pointer;
         z-index: 3;
+        opacity: 0;
       }
       .search-form input[type="search"]:focus{
         z-index: 1;
         width: 200px;
         cursor: text;
         background-color: #fff;
+        opacity: 1;
       }
       .search-form input[type="submit"] {
         position: absolute;
