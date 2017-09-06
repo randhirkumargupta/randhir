@@ -550,6 +550,15 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    // Open slick slider in lightbox
+    jQuery('.story-photo-list').slickLightbox({
+        itemSelector: 'a',
+        navigateByKeyboard: true
+    });
+    
+    jQuery('.seemore').click( function() {
+		jQuery(".hide").removeClass('hide');
+	} );
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
