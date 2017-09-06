@@ -231,6 +231,8 @@ function generateVideoCategoryList($tid, $pageno) {
         $photo_list_array[$listcount]['v_url'] = '';
         $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
       }
+      $term_pri = taxonomy_term_load($field_primary_category_value);
+      $term_name_pri = $term_pri->name;
       $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
       $photo_list_array[$listcount]['v_comment_count'] = "10";
       $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
@@ -239,7 +241,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $photo_list_array[$listcount]['v_show_ad'] = "0";
       $photo_list_array[$listcount]['v_video_size'] = "300";
       $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
-      $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name";
+      $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
 
       $listcount++;
     }

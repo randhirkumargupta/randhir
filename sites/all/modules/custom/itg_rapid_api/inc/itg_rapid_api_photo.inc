@@ -189,6 +189,8 @@ function generatePhotoCategoryList($tid, $pageno) {
                 $changed_datetime = "";
             }
             // photo detail for listing
+            $term_pri = taxonomy_term_load($field_primary_category_value);
+            $term_name_pri = $term->name;
             $photo_list_array[$loop_count]['p_id'] = "$nid";
             $photo_list_array[$loop_count]['p_title'] = "$title";
             $photo_list_array[$loop_count]['p_small_image'] = "$file_small_img_url";
@@ -199,7 +201,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             $photo_list_array[$loop_count]['p_share_link'] = "$firebase_url";
             $photo_list_array[$loop_count]['p_updated_datetime'] = "$changed_datetime";
             $photo_list_array[$loop_count]['p_subcategory_id'] = "$field_primary_category_value";
-            $photo_list_array[$loop_count]['p_subcategory_title'] = "$term_name";
+            $photo_list_array[$loop_count]['p_subcategory_title'] = "$term_name_pri";
             $loop_count++;
         }
     }
