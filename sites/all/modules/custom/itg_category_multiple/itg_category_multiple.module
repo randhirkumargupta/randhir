@@ -59,7 +59,14 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         if ($cloned_node_object->type = 'story') {
           if (isset($cloned_node_object->field_story_category[LANGUAGE_NONE]) && !empty($cloned_node_object->field_story_category[LANGUAGE_NONE])) {
             $all_selected_tids = $cloned_node_object->field_story_category[LANGUAGE_NONE];
-            $default_value_of_primary_cat = $cloned_node_object->field_primary_category[LANGUAGE_NONE][0]['value'];  
+            $default_value_of_primary_cat = $cloned_node_object->field_primary_category[LANGUAGE_NONE][0]['value'];
+            // Setting primary category
+            $form['field_primary_category'][LANGUAGE_NONE][0]['value']['#default_value'] = $default_value_of_primary_cat;
+            foreach ($all_selected_tids as $chunk_tid) {
+              $all_selected_tids_fin[] = $chunk_tid['tid'];
+            }
+            $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $all_selected_tids_fin;
+
             if (isset($all_selected_tids) && !empty($all_selected_tids)) {
               $itg_category_multiple_prev_data = new stdClass();
               foreach ($all_selected_tids as $chunk_tid) {
@@ -136,8 +143,8 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
       );
       $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
       // This is for primary category default value
-      if(!isset($default_value_of_primary_cat)){
-      $default_value_of_primary_cat = '';
+      if (!isset($default_value_of_primary_cat)) {
+        $default_value_of_primary_cat = '';
       }
       if (isset($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'])) {
         $default_value_of_primary_cat = $form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'];
