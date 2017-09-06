@@ -12173,6 +12173,21 @@ fieldset#edit-xmlsitemap{
       a{color: #008eb1;}
     }
   }
+  .container-inline-date{
+    margin: 10px 0 10px -220px;
+    .form-type-date-popup{
+      > label{
+        float: left;
+        width: 220px;
+        padding-top: 5px;
+      }
+    }
+    .date-padding{
+      label{
+        display: none;
+      }
+    }
+  }
 }
 [id*="views-exposed-form-state-manager-page"]{
   .views-submit-button{
@@ -12432,5 +12447,23 @@ fieldset#edit-xmlsitemap{
 [id*="views-form-podcast-management-page"]{
   .form-actions{
     @extend .remove-pink;
+  }
+}
+div.ctools-modal-content{
+  fieldset{
+    legend{display: none;}
+  }
+  .form-item{
+    label{width: 290px;}
+  }
+  .form-submit{margin-left: 320px;}
+} 
+[id*="itg-akamai-settings"]{
+  #edit-itg-akamai-cc-conf-list{
+    .form-type-checkbox {
+      display: inline-block;
+      width: 30%;
+      margin-bottom: 7px;
+    }
   }
 }
