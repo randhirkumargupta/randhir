@@ -10801,6 +10801,12 @@ div.node {
     }
 }
 
+.node-event_backend-form .form-field-type-color-field-rgb {
+    .form-type-textfield {
+        padding-left: 0;
+    }
+}
+
 .page-user .field-name-field-user-section,
 .page-admin-people-create .field-name-field-user-section {
     display: none;
