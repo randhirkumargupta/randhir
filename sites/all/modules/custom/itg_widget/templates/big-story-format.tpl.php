@@ -159,27 +159,11 @@ if (!empty($data['node_data'])) :
             <?php if (!empty($data['node_data']->field_common_related_content['und'][0]['value'])) : ?>
           <div class="big-story-detail">
             <ul>
-              <?php
-              $related_string = $data['node_data']->field_common_related_content['und'][0]['value'];
-              if (!empty($related_string)) {
-                $nodes_with_prefix = explode(",", $related_string);
-                foreach ($nodes_with_prefix as $nodes_with_prefix) {
-                  $prefix_with_values = explode("_", $nodes_with_prefix);
-                  $site_hash[] = $prefix_with_values;
-                }
-              }
-              ?>
-              <?php
-              foreach ($site_hash as $site_hash_key => $nodes_array_with_prefix) {
-                $current_site_hash = strtolower($nodes_array_with_prefix[0]);
-                $current_entity_id = $nodes_array_with_prefix[1];
-                $related_data = itg_get_link_from_hash_and_entity_solr_search($current_entity_id, $current_site_hash);
-                $front_url = str_replace('-backend', '', $related_data->url);
-                if (!empty($related_data)) {
-                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank" ,'title' => $related_data->label))) . "</li>";
-                }
-              }
-              ?>                       
+           <?php 
+           if(function_exists('itg_front_big_story_related')) {
+             print itg_front_big_story_related($data['node_data']->nid);
+           }
+           ?>                         
             </ul>
           </div>
   <?php endif; ?>
