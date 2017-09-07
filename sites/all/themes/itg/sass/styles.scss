@@ -1560,6 +1560,30 @@ footer{
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
+  div#autocomplete{
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    overflow-y: auto;
+    max-height: 400px;
+    ul{
+      li{
+        padding: 5px;
+        color: #2f2f2f;
+        cursor: pointer;
+        &:hover{
+          background-color: #f5f5f5;
+        }
+        &+li{
+          border-top: 1px solid #f5f5f5;
+        }
+        div{
+          white-space: normal;
+          word-wrap: break-word;
+          max-width: 100%;
+        }
+      }
+    }
+  }
     .searh-all-filters{
         @include clearfix;
         white-space: nowrap;
@@ -2097,7 +2121,7 @@ footer{
               color: #026bc5;
               &:hover{text-decoration: underline;}
             }
-            .story-photo-list-wrapper{
+            .story-photo-list-wrapper, form{
               clear: both;
             }
         }
@@ -3915,125 +3939,169 @@ h1.category-heading{
     }
 }
 .poll-banner{ 
-    font-family: $itg-roboto;    
-    ul{
-        @extend .list-none;
+  font-family: $itg-roboto;    
+  ul{
+    @extend .list-none;
+  }
+  .poll-list{            
+    padding:0 0 30px 0; 
+    @include clearfix;        
+    .pic{
+      float: left;
+      margin-right: 20px;
+      width: 22%;
     }
-    .poll-list{            
-        padding:0 0 30px 0; 
-        @include clearfix;        
-        .pic{
-            float: left;
-            margin-right: 20px;
-            width: 22%;
+  }
+  .detail{          
+    @include font(14px);        
+    line-height: 19px;
+    color: #323232;
+    float: left;
+    padding-right: 10px;
+    width: 41.5%;
+    .detail-content{            
+      color:#8a8a8a;
+      h4{
+        @include font(18px,24px,$itg-font-bold);
+        margin-bottom: 10px;
+        color: $black-color;
+      }
+      .vota, .time{
+        @include font(12px);
+      }
+    }        
+    .social-share{
+      display: inline-block;
+      vertical-align: middle;
+      @include social-share;    
+      ul{
+        li{
+          padding-right: 4px;                    
         }
+      }
     }
-    .detail{          
-        @include font(14px);        
-        line-height: 19px;
-        color: #323232;
-        float: left;
-        padding-right: 10px;
-        width: 41.5%;
-        .detail-content{            
-            color:#8a8a8a;
-            h4{
-                @include font(18px,24px,$itg-font-bold);
-                margin-bottom: 20px;
-                color: $black-color;
+  }
+  .poll-list{
+    .voting-data{
+      @include float(right);
+      width: 32.5%;
+      .past-poll{
+        li{
+          margin-bottom: 20px;
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          span.precentage-detail{
+            width: 59%;
+            .poll-past-percentage-progess{
+              @include display-inline;
+              height: 18px;                                
+              /* background: #000; */
             }
-            .vota, .time{
-                @include font(12px);
-            }
-        }        
-        .social-share{
+          }
+          &:nth-child(1) .poll-progress-bar{
+            background-color: #cc0000;
+          }
+          &:nth-child(2) .poll-progress-bar{
+            background-color: #000099;
+          }
+          &:nth-child(3) .poll-progress-bar{
+            background-color: #ffcc00;
+          }
+          &:nth-child(4) .poll-progress-bar{
+            background-color: #cc0000;
+          }
+          &:nth-child(5) .poll-progress-bar{
+            background-color: #000099;
+          }
+          &:nth-child(6) .poll-progress-bar{
+            background-color: #ffcc00;
+          }
+          &:nth-child(7) .poll-progress-bar{
+            background-color: #cc0000;
+          }
+          &:nth-child(8) .poll-progress-bar{
+            background-color: #000099;
+          }
+          &:nth-child(9) .poll-progress-bar{
+            background-color: #ffcc00;
+          }
+          &:nth-child(10) .poll-progress-bar{
+            background-color: #cc0000;
+          }
+          &:nth-child(11) .poll-progress-bar{
+            background-color: #000099;
+          }
+          &:nth-child(12) .poll-progress-bar{
+            background-color: #ffcc00;
+          }
+          .poll-progress-bar{
             display: inline-block;
-            vertical-align: middle;
-            @include social-share;    
-            ul{
-                li{
-                    padding-right: 4px;                    
-                }
-            }
+            vertical-align: top;
+            height: 18px;
+          }
+          .poll-answer-text{
+            float: left;
+            width: 80px;
+          }
+          .noofvotes, .percentage{
+            float: left;
+            width: 70px;
+            padding-left: 20px;
+          }
+          .poll-past-percentage-progess{
+            width: 100px;
+            float: left;  
+            padding-left: 20px;
+          }
         }
+      }
     }
+  }
+  &.image-poll-list{
     .poll-list{
-        .voting-data{
-            @include float(right);
-            width: 32.5%;
-            .past-poll{
-                li{
-                    margin-bottom: 20px;
-                    display: inline-block;
-                    vertical-align: top;
-                    width: 100%;
-                    span.precentage-detail{
-                        width: 59%;
-                        .poll-past-percentage-progess{
-                            @include display-inline;
-                            height: 18px;                                
-                            /* background: #000; */
-                        }
-                    }
-                    &:nth-child(1) .poll-progress-bar{
-                        background-color: #cc0000;
-                    }
-                    &:nth-child(2) .poll-progress-bar{
-                        background-color: #000099;
-                    }
-                    &:nth-child(3) .poll-progress-bar{
-                        background-color: #ffcc00;
-                    }
-                    &:nth-child(4) .poll-progress-bar{
-                        background-color: #cc0000;
-                    }
-                    &:nth-child(5) .poll-progress-bar{
-                        background-color: #000099;
-                    }
-                    &:nth-child(6) .poll-progress-bar{
-                        background-color: #ffcc00;
-                    }
-                    &:nth-child(7) .poll-progress-bar{
-                        background-color: #cc0000;
-                    }
-                    &:nth-child(8) .poll-progress-bar{
-                        background-color: #000099;
-                    }
-                    &:nth-child(9) .poll-progress-bar{
-                        background-color: #ffcc00;
-                    }
-                    &:nth-child(10) .poll-progress-bar{
-                        background-color: #cc0000;
-                    }
-                    &:nth-child(11) .poll-progress-bar{
-                        background-color: #000099;
-                    }
-                    &:nth-child(12) .poll-progress-bar{
-                        background-color: #ffcc00;
-                    }
-                    .poll-progress-bar{
-                        display: inline-block;
-                        vertical-align: top;
-                        height: 18px;
-                    }
-                    .poll-answer-text{
-                        float: left;
-                        width: 80px;
-                    }
-                    .noofvotes, .percentage{
-                        float: left;
-                        width: 70px;
-                        padding-left: 20px;
-                    }
-                    .poll-past-percentage-progess{
-                        width: 100px;
-                        float: left;  
-                        padding-left: 20px;
-                    }
-                }
+      .pic{
+        width: 170px;
+      }
+      .detail{
+        float: none;
+        width: auto;
+        overflow: hidden;
+        padding-right: 0;
+      }
+      .voting-data{
+        float: none;
+        width: auto;
+        .past-poll{
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          margin: 20px 0;
+          li{
+            margin: 0 20px 0 0;
+            float: left;
+            width: auto;
+            .poll-answer-text{
+              float: none;
+              width: 100%;
+              display: block;
+              margin-bottom: 7px;
+              img{
+                width: 170px;
+                height: 127px;
+              }
             }
+            .noofvotes{
+              padding: 0 0 0 10px;
+            }
+            .poll-past-percentage-progess{
+              padding: 0;
+            }
+          }
         }
-        }
+      }
+    }
+  }
 }
 .home_page_poll_widget_block{
     .widget-title{
@@ -12117,7 +12185,7 @@ span.see-picture{
 
 /*====================SPONSORED PAGE========================*/
  .big-pic > img{width:100%;}
- .section-sponsored .big-pic{ position: relative;}
+ .catagory-listing .big-pic{ position: relative;}
  .big-pic .cat-heading{ position: absolute; top:0; left:0; background:rgba(19, 36, 56, 0.8); width:100%; padding:25px; color:#fff;font-family: "Roboto", sans-serif;}
  .big-pic .cat-heading h3 { font-size:22px;line-height: 26px;}
  .big-pic .cat-heading h3 a{ color:#fff}

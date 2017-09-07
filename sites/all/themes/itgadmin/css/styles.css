@@ -587,6 +587,7 @@ html.js fieldset.collapsed {
 
 input, button, select, textarea {
   font: 400 14px/18px 'Roboto';
+  outline: none;
 }
 
 form .field-add-more-submit {
@@ -1894,7 +1895,7 @@ div.vertical-tabs .form-type-textfield, div.vertical-tabs .form-type-textarea {
   margin: 0 0 10px;
 }
 div.vertical-tabs .form-item-log {
-  margin-top: 30px;
+  margin: 0;
 }
 div.vertical-tabs .form-textarea-wrapper {
   max-width: 555px;
@@ -9633,16 +9634,6 @@ div.node #comments h2 {
   text-decoration: underline;
 }
 
-.page-node-add-story .action-with-title #page-title,
-.node-type-story .action-with-title #page-title,
-.page-node-add-videogallery .action-with-title #page-title,
-.node-type-videogallery .action-with-title #page-title,
-.page-node-add-photogallery .action-with-title #page-title,
-.node-type-photogallery .action-with-title #page-title,
-.page-taxonomy-term-edit .action-with-title #page-title,
-.page-admin-structure-taxonomy-category-management .action-with-title #page-title {
-  width: 400px;
-}
 .page-node-add-story .action-with-title.fixed,
 .node-type-story .action-with-title.fixed,
 .page-node-add-videogallery .action-with-title.fixed,
@@ -12978,6 +12969,17 @@ fieldset#edit-xmlsitemap {
 [id*="itg-akamai-cache-akamai-log"] .fieldset-wrapper > p a {
   color: #008eb1;
 }
+[id*="itg-akamai-cache-akamai-log"] .container-inline-date {
+  margin: 10px 0 10px -220px;
+}
+[id*="itg-akamai-cache-akamai-log"] .container-inline-date .form-type-date-popup > label {
+  float: left;
+  width: 220px;
+  padding-top: 5px;
+}
+[id*="itg-akamai-cache-akamai-log"] .container-inline-date .date-padding label {
+  display: none;
+}
 
 [id*="views-exposed-form-state-manager-page"] .views-submit-button .form-submit {
   margin-top: 10px !important;
@@ -13092,6 +13094,7 @@ fieldset#edit-xmlsitemap {
 .video-ftp-div {
   display: inline-block;
   vertical-align: top;
+  margin-top: 120px;
   width: 100%;
 }
 .video-ftp-div .main-top-wraper {
@@ -13199,6 +13202,30 @@ fieldset#edit-xmlsitemap {
 .view.view-display-id-search_unpublish_video .view-filters .views-exposed-form .views-exposed-widget.views-submit-button .form-type-select {
   width: 120px;
 }
-.view.view-display-id-search_unpublish_video .view-content {
-  margin-top: 120px;
+
+.form-field-name-field-story-reporter #autocomplete {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.remove-pink, [id*="views-form-podcast-management-page"] .form-actions {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+div.ctools-modal-content fieldset legend {
+  display: none;
+}
+div.ctools-modal-content .form-item label {
+  width: 290px;
+}
+div.ctools-modal-content .form-submit {
+  margin-left: 320px;
+}
+
+[id*="itg-akamai-settings"] #edit-itg-akamai-cc-conf-list .form-type-checkbox {
+  display: inline-block;
+  width: 30%;
+  margin-bottom: 7px;
 }
