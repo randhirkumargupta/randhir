@@ -1,4 +1,12 @@
+<?php 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+?>
+
 <?php
+//print_r($data);
 $column1 = $data['column1'];
 $column2 = $data['column2'];
 $column3 = $data['column3'];
@@ -17,12 +25,19 @@ $budget_social_message_flag = $data['budget_social_message_flag'];
 $admin_user = $data['admin_user'];
 $section_id = $data['section_id'];
 $user_id = $data['user_id'];
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$uri = base64_encode($actual_link);
+
 ?>
+
 <?php if ($budget_exist == 1) { ?>
   <h1 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h1>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>
+      <div id="test-zen22">
+      
+    </div>
   <div id="main-container-budget">
     
     <table class="budget-predictor-table">
@@ -72,15 +87,17 @@ $user_id = $data['user_id'];
                             <ul>
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)" class="twitter" onclick="badget_twitter_share('<?php print urlencode($budget_title); ?>', '<?php print urlencode($actual_link); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>
+                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>','<?php print $image; ?>')"></a></li>
                             </ul>
                         </div>
                     </div>
   <?php } ?>
 
-              <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
+              <?php if (empty($file_name) && empty($budget_message_flag)) { 
+                    $sso_arg_url = '/saml_login/other/' . $uri;
+                ?>
                 <?php if(empty($user_id)) { ?>
-                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button></div>
+                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '<?php print $sso_arg_url; ?>')"><?php print t('Submit'); ?></button></div>
                 <?php } else { ?>
                       <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button></div>
                 <?php } ?>

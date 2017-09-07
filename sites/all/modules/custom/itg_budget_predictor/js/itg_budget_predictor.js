@@ -41,13 +41,11 @@ Drupal.behaviors.itg_budget_predictor = {
                     
                      jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
-                            connectWith: '.connectedSortable',
+                          connectWith: '.connectedSortable',
+                          stop : checkContainer('sortable4'),
+  
                             update: function (event, ui) {
-                                isUpdated = true;
-                            },
-                            stop: function (event, ui) {
-                                if (isUpdated == true) {
-                                    //Do Something
+                                
                                     jQuery.ajax(
                                             {
                                                 type: "POST",
@@ -72,7 +70,7 @@ Drupal.behaviors.itg_budget_predictor = {
 
                                                 }
                                             });
-                                }
+                              //  }
                             }
                         }).disableSelection();
                     
@@ -86,6 +84,16 @@ Drupal.behaviors.itg_budget_predictor = {
     }
 };
 
+
+function checkContainer(originalId){
+        return function(event, ui){
+            var div = $(this).data().sortable.currentContainer.element
+            var id = $(div).parent('td').attr('class')
+            if(id == 'ranking-content bp-items'){
+              $(this).sortable('cancel')
+            }    
+        }
+    }
 
 // script for facebook sharing
 (function (d, s, id) {
@@ -133,13 +141,31 @@ function badget_google_plus_share(url, title, img) {
 
 function captureCurrentDiv(section_id)
 {
-    var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
+    //alert('Test Caling');
+   var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
+//    
+//    if(window.XMLHttpRequest){
+//                xmlhttp = new XMLHttpRequest();
+//                console.log('Another Browser');
+//            }else{
+//                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+//    }
+//    
+//    console.log(xmlhttp);
+//    xmlhttp.setRequestHeader('Content-Type', 'text/plain');
+    
     html2canvas([document.getElementById('main-container-budget')], {
+        //background: '#ff0000',
+        useCORS : true,
         onrendered: function (canvas)
         {
+//            alert('ksjdhjksahd jhsajkdh ');
+//            console.log('test mmssgg');
             var img = canvas.toDataURL()
+             console.log(img);
             jQuery.post("/budget-save/"+section_id, {data: img, cookies_id: cookies_id }, function (file) {
-                window.location.reload();
+                //window.location.reload();
+                 //window.open(img);
             });
         }
     });

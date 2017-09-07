@@ -22,7 +22,7 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
-$highlights = itg_widget_highlights_block_data();
+$highlights = itg_widget_highlights_block_data('1');
 
 
 if ($theme == 'itgadmin' && !isset($preview)) {
@@ -137,7 +137,7 @@ if (!empty($device[0])) {
                       </div>      
                   </div>    
                 <?php endif; ?>
-                <div class="row">
+                <div class="row-budget">
                     <div class="col-md-12 budget-top-block">
                 <?php
                 $display_title = "";

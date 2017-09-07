@@ -811,24 +811,30 @@ function itg_budget_crop_image() {
     $file_name = 'budget/' . $file;
     $uri = substr($data, strpos($data, ",") + 1);
 
-    $num_updated = db_update('itg_budget_predictor')
-        ->fields(array('file_name' => $file_name))
+   
+//    if (!$num_updated) {
+//      // Remove all error messages
+//      drupal_get_messages('error');
+//      // Get the array of errors and reset them
+//      $errors = &drupal_static("form_set_error", array());
+//      drupal_set_message('Please Drag and Drop Images.', 'error');
+//    }
+//    else {
+      $img_path = 'public://budget/' . $file;
+      //file_put_contents('public://budget/' . $file, base64_decode($uri));
+      $img_path = file_unmanaged_save_data(base64_decode($uri), $img_path);
+      $cropped_image = file_create_url($img_path);
+      
+      $img_updated = db_update('itg_budget_predictor')
+        ->fields(array('file_name' => $cropped_image))
         ->condition('section_id', $section_id)
         ->condition('user_id', $user->uid, '=')
         ->execute();
-
-    if (!$num_updated) {
-      // Remove all error messages
-      drupal_get_messages('error');
-      // Get the array of errors and reset them
-      $errors = &drupal_static("form_set_error", array());
-      drupal_set_message('Please Drag and Drop Images.', 'error');
-    }
-    else {
-      // save to file
-      file_put_contents('public://budget/' . $file, base64_decode($uri));
-    }
+    
+//    }
+   
   }
+  //die();
 }
 
 /**
