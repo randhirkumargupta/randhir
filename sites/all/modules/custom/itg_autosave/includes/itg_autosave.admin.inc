@@ -249,7 +249,7 @@ function itg_autosave_remove_empty($field_name_type) {
 }
 
 /**
- * Function ise used to update content lock status
+ * Function is used to update content lock status
  * @param $nid int
  */
 function reset_autosave_lock($nid) {
