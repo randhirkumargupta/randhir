@@ -734,6 +734,44 @@ function _related_story_bottom_block_content() {
     return $related_story;
   }
 }
+
+/**
+ * Implements itg_front_big_story_related().
+ * @param int $nid
+ */
+function itg_front_big_story_related($nid) {
+  if (!empty($nid)) {
+    global $base_url;
+    $related_content = itg_get_related_content($nid);
+    if (function_exists('itg_get_related_story_id')) {
+      $related_result = itg_get_related_story_id($related_content);
+    }
+    if (!empty($related_result)) {
+      $related_big_story = '';
+      foreach ($related_result as $site_hash_key) {
+        $current_entity_id = $site_hash_key;
+        $related_data = itg_get_related_story_content($current_entity_id);
+        $display_title = get_related_display_title($nid, $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = $display_title;
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
+        }
+        $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
+        if (!empty($related_title)) {
+          $related_big_story .= "<li>" . l($related_title, $front_url, array("attributes" => array("target" => "_blank", 'title' => $related_title))) . "</li>";
+        }
+      }
+    }
+    return $related_big_story;
+  }
+}
+
 /**
  * Implements Related story bottom block content
  */
@@ -783,7 +821,7 @@ function _related_podcast_bottom_block_content() {
       }
     }
     $i++;
-    if ($i == 4)
+    if ($i == 10)
       break;
   }
   $related_story.= "</ul></div>";

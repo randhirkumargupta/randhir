@@ -12,11 +12,10 @@
                 <?php print drupal_render($form['field_emoji_position']); ?>
                 <?php print drupal_render($form['field_emoji']); ?>
                 <?php print drupal_render($form['field_emoji_2']); ?>
-                <?php print drupal_render($form['field_story_magazine_headline']); ?>
                 <?php print drupal_render($form['field_story_category']); ?>
                 <?php print drupal_render($form['field_primary_cat_data']); ?>
                 <?php print drupal_render($form['field_story_kicker_text']); ?> 
-                <?php print drupal_render($form['field_story_magazine_kicker_text']); ?>
+                <?php print drupal_render($form['field_story_magazine_headline']); ?>
                 <?php print drupal_render($form['body']); ?>
                 <?php print drupal_render($form['field_story_reporter']); ?>
                 <div id="reporter-details"></div>

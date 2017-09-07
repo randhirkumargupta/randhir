@@ -12,10 +12,10 @@ Drupal.behaviors.itg_widgets = {
         var actual_ttl = settings.itg_widget.settings.actual_ttl;
         if (setttl != 0) {
             setInterval(function () {
+                try {
                 var card_val = jQuery(".section-ordering").attr('id');
                 var block_id = card_val.split('_');
                 var widget_style = jQuery(this).attr('data-id');
-
                 jQuery.ajax({
                     url: base_url + "/section-card-refresh",
                     method: 'get',
@@ -27,6 +27,11 @@ Drupal.behaviors.itg_widgets = {
                         jQuery('#'+block_id[2]).html(data);
                     }
                 });
+            } catch(e){
+               
+            }
+                
+                
             }, setttl * 1000);
        }
         
