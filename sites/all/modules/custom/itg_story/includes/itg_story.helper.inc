@@ -83,3 +83,34 @@ function itg_get_migrated_like_count($nid) {
     return $record = $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
+
+/**
+ * Getting follow story for story pages for akamai purposes
+ */
+function itg_story_load_follow_story() {
+  global $user;
+  if ($user->uid > 0) {
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+      $nid = base64_decode($_POST['id']);
+      if (isset($nid) && !empty($nid)) {
+        $node = node_load($nid);
+      }
+      if ($node->type == 'story') {
+        print theme('itg_story_load_follow_story', array('data' => array('node' => $node)));
+        drupal_exit();
+      }
+    }
+  }
+}
+
+/**
+ * Implement global_comment_last_record
+ */
+function itg_story_global_comment_last_record() {
+  $query = db_select('itg_global_comment_config', 'ir')
+      ->fields('ir', array('config_name', 'created'))
+      ->orderBy('id', 'DESC')//ORDER BY created
+      ->range(0, 1);
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
