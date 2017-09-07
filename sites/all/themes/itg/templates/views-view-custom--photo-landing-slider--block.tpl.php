@@ -129,7 +129,10 @@ $argum = base64_encode(arg(1));
                                 <i class="fa fa-camera" aria-hidden="true"></i>
                                 <?php print $row['counter']; ?>
                             </div>
-                            <div class="caption"><?php print html_entity_decode(strip_tags($row['field_image_caption'])); ?>
+                            <div class="caption">
+                                <div class="mCustomScrollbar cap-text">
+                                    <?php print html_entity_decode(strip_tags($row['field_image_caption'])); ?>
+                                </div>
 
                                 <div class="section-like-dislike">
                                     <!--<div id="btn-div">-->
