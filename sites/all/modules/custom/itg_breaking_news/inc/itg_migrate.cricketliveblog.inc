@@ -39,7 +39,7 @@ class ItgCricketliveblog extends XMLMigration {
         
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        $items_url = $xml_folder . 'cricket_blog.xml';
+        $items_url = $xml_folder . 'cricket_blog_1.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
@@ -88,13 +88,16 @@ class ItgCricketliveblog extends XMLMigration {
         $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
-        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+//        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+        $this->addFieldMapping('pathauto')->defaultValue(0);
+        $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
         $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
         $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
         $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     }
 
     public function prepareRow($row) {
+//        print_r($row->xml);die;
         // manage created user
         if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
             $created_uid = (string) $row->xml->createdby;
@@ -160,8 +163,10 @@ class ItgCricketliveblog extends XMLMigration {
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
         $key = 0;
+        
         if (isset($row->xml->content_details->details)) {
             foreach ($row->xml->content_details->details as $value) {
+                
                 $content_title = (string) $value->content_title;
                 $breaking_band = (string) $value->mark_as_breaking_band;
                 $notification = (string) $value->notification;
@@ -178,6 +183,7 @@ class ItgCricketliveblog extends XMLMigration {
                   'field_breaking_publish_time' => array(LANGUAGE_NONE => array(array('value' => $breaking_publish_time))),
                   'field_breaking_redirection_url' => array(LANGUAGE_NONE => array(array('value' => $breaking_redirection_url))),
                 );
+                print_r($values);die;
                 $field_collection_item = entity_create('field_collection_item', $values);
                 $field_collection_item->setHostEntity('node', $node);
                 $field_collection_item->save(TRUE);
