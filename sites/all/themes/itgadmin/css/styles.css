@@ -153,6 +153,11 @@ img {
   height: auto;
 }
 
+button,
+input[type='submit'] {
+  cursor: pointer;
+}
+
 .mr-0, *, fieldset.date-combo .container-inline-date .date-padding .form-item, div.filefield-source .form-item, .view .view-filters .form-item, .view .view-filters .form-item input, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .view .view-filters .views-exposed-form .views-reset-button a {
   margin: 0;
 }
