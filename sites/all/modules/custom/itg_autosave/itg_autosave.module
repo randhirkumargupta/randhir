@@ -102,16 +102,16 @@ function itg_autosave_views_api() {
  *
  * {@inheritdoc}.
  */
-function itg_autosave_form_alter(&$form, &$form_state, $form_id) {    
+function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
   // Create object of itg_auto_save class.
   $itg_autosave_form = new itg_auto_save();
-  
   // Fetch form ids saved into database for autosave.
   $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
   // match form_id with saved id for autosave.
   if (in_array($form_id, $form_ids)) {
 	// Lock story if already open in Edit mode
 	  if($form['nid']['#value'] != null){
+      
 		  $destination = 'mydraft-story';
 		  $l_query = array();
 		  if(isset($_GET['destination'])){
@@ -144,10 +144,11 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
     }    
     if (!$flag) {
       array_unshift($form['#validate'], 'itg_autosave_custom_validation');
-      $form['#after_build'][] = 'itg_autosave_after_build';      
+      $form['#after_build'][] = 'itg_autosave_after_build'; 
       $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
-      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();      
-    }    
+      $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();
+    }  
+    
   }
   // Hide node identity field
   if (isset($form['field_story_node_identity'])) {
