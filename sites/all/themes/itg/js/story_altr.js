@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
             type: 'post',
             data: {'id': Drupal.settings.itg_akamai.currentobjectid},
             beforeSend: function() {
-                jQuery('.node-type-story .social-list').html('Loading..');
+                //jQuery('.node-type-story .social-list').html('Loading..');
             },
             success: function(userdata) {
                 if (userdata.length != 0) {
