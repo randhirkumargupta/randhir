@@ -1003,10 +1003,11 @@ function itg_quiz_response(){
     }
     
     $ans_result=array_diff($correct_ans_array,$c_ans_array);
-    if(!empty($ans_result)) {
-      $choice  = 'Incorrect';    
-    }else {
-      $choice  = 'correct';
+    
+    if (empty($ans_result) && (count($correct_ans_array) == count($c_ans_array))) {
+      $choice  = 'correct';    
+    } else {
+      $choice  = 'Incorrect';
     }
     echo get_answer_response_msg($choice);
 }

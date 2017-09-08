@@ -20,7 +20,6 @@ function feed_generator_of_contents($data) {
  * @param string $file_path
  */
 function itg_syndication_generate_xml($data) {
-
   $file = generate_custom_pattern_feed($data);
 
   $delivery_mode = $data['delivery_mode'];

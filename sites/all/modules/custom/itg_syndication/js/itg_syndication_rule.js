@@ -28,6 +28,7 @@
 function syndication_rules_show_filed(number_of_tr) {
     for (i = 0; i <= number_of_tr; i++) {
         var field_syndication_frequency = jQuery('input[name="field_syndication_rule_details[und][' + i + '][field_syndication_frequency][und]"]:checked').val();
+        var field_content_type = jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-content-type-und\"]').val();
 
         if (field_syndication_frequency == "Weekly") {
             jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-und\"]').parent().parent().show();
@@ -35,6 +36,14 @@ function syndication_rules_show_filed(number_of_tr) {
 
         if (field_syndication_frequency == "Monthly") {
             jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').parent().parent().show();
+        }
+        
+        if (field_content_type == "magazine") {
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-select-section\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-magazine\"]').show();
+        } else {
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-magazine\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-select-section\"]').show();
         }
 
     }
