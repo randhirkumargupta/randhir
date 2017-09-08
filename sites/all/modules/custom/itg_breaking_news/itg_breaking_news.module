@@ -472,11 +472,25 @@ function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $
         $match_commentary = file_get_contents($api_base_url . $match_id.'_ballbyball.json');
         if ($match_commentary) {
             $match_commentary = json_decode($match_commentary);
-            $innings = array_reverse($match_commentary->Match->Innings);
-            $ball_by_ball = array_reverse($innings[0]->Node);
+            if(is_array($match_commentary->Match->Innings)){
+                $innings = array_reverse($match_commentary->Match->Innings);
+            }else{
+                $innings = $match_commentary->Match->Innings;
+            }
+            if(is_array($innings)){
+                $ball_by_ball = array_reverse($innings[0]->Node);
+            }else{
+                $ball_by_ball = array_reverse($innings->Node);
+            }
+            
             
             if($commentary_id != NULL && $latest){
-                $org_ball_by_ball = $innings[0]->Node;
+                if(is_array($innings)){
+                    $org_ball_by_ball = $innings[0]->Node;
+                }else{
+                    $org_ball_by_ball = $innings->Node;
+                }
+                
                 $flag = FALSE;
                 $commentary = array();
                 foreach($org_ball_by_ball as $key => $value){
@@ -496,6 +510,10 @@ function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $
                 $commentary = array();
                 $exit = FALSE;
                 $current_inn = $_POST['current_inn'];
+                if(!is_array($innings)){
+                    $innings = array($innings);
+                }
+                
                 foreach($innings as $key => $inning){
                     $_commentaries = array_reverse($inning->Node);
                     foreach($_commentaries as $_commentary){
