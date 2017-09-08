@@ -153,6 +153,11 @@ img {
   height: auto;
 }
 
+button,
+input[type='submit'] {
+  cursor: pointer;
+}
+
 .mr-0, *, fieldset.date-combo .container-inline-date .date-padding .form-item, div.filefield-source .form-item, .view .view-filters .form-item, .view .view-filters .form-item input, .view .view-filters .views-exposed-form .views-submit-button .form-submit, .view .view-filters .views-exposed-form .views-reset-button .form-submit, .view .view-filters .views-exposed-form .views-reset-button a {
   margin: 0;
 }
@@ -5078,6 +5083,8 @@ fieldset#edit-select .form-submit {
 div#autocomplete {
   padding: 0;
   border: 1px solid #d9d9d9;
+  max-height: 300px;
+  overflow: auto;
 }
 div#autocomplete ul li {
   padding: 5px;
@@ -12157,8 +12164,9 @@ span.file a {
 
 .node-story-form .itg-sidebar-form .form-field-name-field-story-syndication,
 .node-story-form .itg-sidebar-form .form-field-name-field-story-syndications-photo {
-  float: left;
-  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  width: 49%;
 }
 .node-story-form .itg-sidebar-form .form-field-name-field-story-syndication .form-type-checkboxes,
 .node-story-form .itg-sidebar-form .form-field-name-field-story-syndications-photo .form-type-checkboxes {

@@ -37,6 +37,11 @@ img {
     height: auto;
 }
 
+button,
+input[type='submit'] {
+    cursor: pointer;
+}
+
 .mr-0 {
     margin: 0;
 }
@@ -11767,8 +11772,9 @@ span.file a {
 .node-story-form .itg-sidebar-form {
     .form-field-name-field-story-syndication,
     .form-field-name-field-story-syndications-photo {
-        float: left;
-        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+        width: 49%;
         .form-type-checkboxes {
             margin-top: 0;
         }
