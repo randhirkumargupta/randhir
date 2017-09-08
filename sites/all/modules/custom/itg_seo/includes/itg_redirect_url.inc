@@ -103,6 +103,8 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   
   if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
+  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
+      $old_content_id = '200'.$_GET['id'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
       $old_content_id = $_GET['id'];
   }

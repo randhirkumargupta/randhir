@@ -85,7 +85,7 @@
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
                     success: function(data) {
                         ansvalue = data.split('-');
-                        alert(ansvalue);
+                       // alert(ansvalue);
                         var cls = "";
                         if(ansvalue[1] == "correct"){
                           cls = "correct-ans";
