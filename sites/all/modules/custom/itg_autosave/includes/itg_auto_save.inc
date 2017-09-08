@@ -286,15 +286,19 @@ class itg_auto_save {
    */
   public function itg_save_field_datetime($value) {
     $this->datetime_result = '';
-    if (!empty($value['und'][0]['value']['date'])) {      
-      $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date'])); 
+    if (!empty($value['und'][0]['value']['date'])) {
+      if (!empty($value['und'][0]['value']['time'])) {
+        $date_time = $value['und'][0]['value']['date'] . ' ' . $value['und'][0]['value']['time'];
+        $timestamp = strtotime(str_replace('/', '-', $date_time)); 
+      } else {
+        $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date'])); 
+      }
       $this->datetime_result = array(
           'value' => date("Y-m-d H:i:s", $timestamp),
           'timezone' => date_default_timezone(),
           'timezone_db' => date_default_timezone(),
       );
     }
-
     return $this->datetime_result;
   }
 
@@ -491,9 +495,7 @@ class itg_auto_save {
           break;
 
         case 'datetime':
-          $dd = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
           $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
-         
           break;
 
         case 'text':
@@ -598,7 +600,16 @@ class itg_auto_save {
           break;
           
         case 'entityreference':
-          if ($inputs['form_id'] == 'story_node_form' ||
+          if ($field['fieldName'] == 'field_video_anchor') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (!empty($this->value) && is_array($this->value)) {
+              foreach ($this->value as $anchor_key => $anchor_val) {
+                preg_match_all('!\d+!', $anchor_val['target_id'], $matches);
+                $targetids = reset($matches);
+                $node->{$field['fieldName']}['und'][$anchor_key]['target_id'] = $targetids[0];
+              }
+            }
+          } elseif ($inputs['form_id'] == 'story_node_form' ||
                   $inputs['form_id'] == 'videogallery_node_form' ||
                   $inputs['form_id'] == 'survey_node_form' ||
                   $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {

@@ -2725,7 +2725,7 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right .description a:hover {
   text-decoration: underline;
 }
-.story-section .story-right .description .story-photo-list-wrapper {
+.story-section .story-right .description .story-photo-list-wrapper, .story-section .story-right .description form {
   clear: both;
 }
 .story-section .story-right .briefcase {
