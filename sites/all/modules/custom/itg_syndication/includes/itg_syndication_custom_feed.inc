@@ -1070,3 +1070,19 @@ function _get_byline_from_nid($nid) {
   }
   return $final_result;
 }
+
+function _get_byline_from_nid_for_kindle($nid) {
+  $final_result = array();
+  $query = db_select('itg_multi_byline_info', 'bi');
+  $query->leftJoin('node', 'n', 'n.nid=bi.byline_id');
+  $query->fields('n', array('title'));
+  $query->condition('bi.nid', $nid);
+  $query->groupBy('bi.byline_id');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  if (!empty($result)) {
+    foreach ($result as $data) {
+      $final_result[] = $data['title'];
+    }
+  }
+  return $final_result;
+}
