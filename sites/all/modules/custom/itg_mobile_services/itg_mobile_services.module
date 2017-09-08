@@ -1292,7 +1292,7 @@ function itg_mobile_services_get_assoc_service() {
   }
 
   $query->condition('node.type', 'service_creation', '=');
-
+  $query->orderBy('node.title', 'ASC');
   $result = $query->execute();
   $record = $result->fetchAll();
   $options['_none'] = '- Select a value -';
@@ -1322,6 +1322,7 @@ function itg_mobile_services_get_service_list() {
   }
   //print strtr((string) $query, $query->arguments());die;
   $query->condition('node.type', 'service_creation', '=');
+  $query->orderBy('node.title', 'ASC');
   $result = $query->execute();
   $record = $result->fetchAll();
   $options['_none'] = '- Select a value -';
