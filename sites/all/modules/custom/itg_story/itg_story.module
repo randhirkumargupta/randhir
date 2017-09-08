@@ -963,8 +963,11 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
         $entity = entity_load('field_collection_item', array($val['value']));
         // store the actual image path
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+        
+        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'] - 1;
+        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
-        $href_sample_img = image_style_url('photo_story_771x432', $sample_img_path);
+        //$href_sample_img = image_style_url('photo_story_771x432', $sample_img_path);
         // store image title
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
@@ -1304,4 +1307,12 @@ function itg_story_photogallery_plugin_data($tech_photo_arr) {
   }
   //$output .= '</ul>';
   return $output;
+}
+
+function itg_story_sample_image_path($ori_fid){
+  $query = db_select('itg_original_image', 'ioi');
+  $query->fields('ioi', array('image_url'));
+  $query->condition('fid', $ori_fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }
