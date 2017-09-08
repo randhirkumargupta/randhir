@@ -551,10 +551,23 @@ jQuery(document).ready(function () {
         ]
     });
     // Open slick slider in lightbox
-    jQuery('.story-photo-list').slickLightbox({
-        itemSelector: 'a',
-        navigateByKeyboard: true
-    });
+    //~ jQuery('.story-photo-list').slickLightbox({
+        //~ itemSelector: 'a',
+        //~ navigateByKeyboard: true
+    //~ });
+    jQuery(".fancybox-thumb").fancybox({
+		prevEffect	: 'none',
+		nextEffect	: 'none',
+		helpers	: {
+			//~ title	: {
+				//~ type: 'outside'
+			//~ },
+			thumbs	: {
+				width	: 80,
+				height	: 80
+			}
+		}
+	});
     
     jQuery('.seemore').click( function() {
 		jQuery(".hide").removeClass('hide');

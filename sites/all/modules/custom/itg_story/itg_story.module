@@ -976,7 +976,7 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<a href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
+          $html .= '<a class="fancybox-thumb" rel="fancybox-thumb" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
