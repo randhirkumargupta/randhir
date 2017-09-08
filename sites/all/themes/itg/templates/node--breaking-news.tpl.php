@@ -92,7 +92,8 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
       if ($type == 'Cricket Live Blog') {
         $settings = array(
           'base_url' => $base_url,
-          'match_id' => $node->field_match_id['und'][0]['value']
+          'nid'=> $node->nid,
+          'match_id' => (empty($node->field_match_id['und'][0]['value'])? FALSE:$node->field_match_id['und'][0]['value'])
         );
         drupal_add_js(array('itg_cricket_live_blog' => array('settings' => $settings)), array('type' => 'setting'));
         drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_cricket_live_blog.js', array('scope' => 'footer'));
@@ -118,8 +119,12 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
                 <div class="stryimg" id="cricketblog" >
                     <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
                     <div class="bolg-content" id="bolgcontent">
-                        <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value']); ?>
-                    </div>        
+						<?php if(!empty($node->field_match_id['und'][0]['value'])):?>
+                        <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 20); ?>
+                        <?php else:?>
+                        <?php print get_commentary_data_db($node->nid,0); ?>
+                        <?php endif;?>
+                    </div>       
                 </div>
         <?php
 	  } else if ($type == 'Live Blog' || $type == 'Breaking News') {
