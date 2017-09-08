@@ -719,6 +719,16 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {
+                  if (!empty($node->field_technology_photos['und'])) {
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($node->field_technology_photos['und']);
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
+                }
                 //Code for the listicle token
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';

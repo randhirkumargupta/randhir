@@ -963,7 +963,11 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
         $entity = entity_load('field_collection_item', array($val['value']));
         // store the actual image path
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+        
+        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'] - 1;
+        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+        //$href_sample_img = image_style_url('photo_story_771x432', $sample_img_path);
         // store image title
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
@@ -972,7 +976,7 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<img src="' . $sample_img . '"  alt=""/>';
+          $html .= '<a class="fancybox-thumb" rel="fancybox-thumb" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
@@ -1269,4 +1273,46 @@ function _is_external_url_story_article($nid){
 		}		
 	}
 	return $is_external_url;
+}
+
+/**
+ * Function return tech photogallery html
+ * @param Array $tech_photo_arr
+ * @return string
+ */
+function itg_story_photogallery_plugin_data($tech_photo_arr) {
+  $output = '';
+  $output .= '<h3 class="tech-photo-head">Photos</h3>';
+  //$output .= '<span class="photo_no">'.count($tech_photo_arr).'</span>';
+  //$output .= '<ul>';
+  foreach ($tech_photo_arr as $num => $val) {
+    $photo_img_alt = '';
+    $photo_img_title = '';
+    $photo_entity = $val['entity'];
+    $photo_img_path = $photo_entity->field_story_extra_large_image['und'][0]['uri'];
+    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+    $photo_img_alt = $photo_entity->field_story_extra_large_image['und'][0]['alt'];
+    $photo_img_title = $photo_entity->field_story_extra_large_image['und'][0]['title'];
+    if ($num > 2) {
+      $class = 'hide';
+    }
+    //$output .= '<li class = "tech-photo-item">';
+    $output .= '<a href="/' . $photo_entity->path['alias'] . '" title = "' . $photo_entity->title . '" class="' . $class . '" target = "_blank">';
+    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    $output .= '</a>';
+    if ($num == 2) {
+      $output .= '<a href="#" class="seemore"><span> See More </span></a>';
+    }
+    //$output .= '</li>';
+  }
+  //$output .= '</ul>';
+  return $output;
+}
+
+function itg_story_sample_image_path($ori_fid){
+  $query = db_select('itg_original_image', 'ioi');
+  $query->fields('ioi', array('image_url'));
+  $query->condition('fid', $ori_fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }
