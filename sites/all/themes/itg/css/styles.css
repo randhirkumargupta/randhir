@@ -15032,3 +15032,43 @@ span.story-sponsor-powered-text::last-word {
 .anchor-right .social-icon ul li a[title='Unfollow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px -19px; padding-left:28px;}
 .anchor-right .social-icon ul li a i{float: left;margin-right: 5px;font-size: 1.25rem;}
 .anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
+
+
+#cricketblog .bolg-content .row{
+        padding: 15px 0;
+        border-bottom: 1px solid #E4E4E4;
+        position: relative;
+    }
+    #cricketblog h2 {
+        font: 300 16px/20px roboto;
+        color: #767676;
+        margin-bottom: 15px;
+    }
+    #cricketblog .batBollDetails {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        background: #d00b26;
+        height: 109px;
+    }
+
+    #cricketblog .bolg-content .row span.sectiontime {
+        display: inline-block;
+        width: 50%;
+    }
+    #cricketblog .bolg-content .row span.sectiontime {
+        color: #fff!Important;
+    }
+    #cricketblog .bolg-content .row span.sectiontime {
+        font-size: 14px;
+        color: #111;
+        display: block;
+        line-height: 17px;
+        font-style: normal;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    .float-left{
+        float:left;
+    }

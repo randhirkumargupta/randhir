@@ -39,7 +39,7 @@ class ItgCricketliveblog extends XMLMigration {
         
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        $items_url = $xml_folder . 'cricket_blog_1.xml';
+        $items_url = $xml_folder . 'cricket_blog-aug25.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
@@ -168,22 +168,22 @@ class ItgCricketliveblog extends XMLMigration {
             foreach ($row->xml->content_details->details as $value) {
                 
                 $content_title = (string) $value->content_title;
-                $breaking_band = (string) $value->mark_as_breaking_band;
+                //$breaking_band = (string) $value->mark_as_breaking_band;
                 $notification = (string) $value->notification;
-                $mobile_subscribers = (string) $value->mobile_subscribers;
-                $breaking_publish_time = (string) $value->breaking_publish_time;
-                $breaking_redirection_url = (string) $value->breaking_redirection_url;
+                //$mobile_subscribers = (string) $value->mobile_subscribers;
+                $breaking_publish_time = (string) $value->update_publish_time;
+                //$breaking_redirection_url = (string) $value->breaking_redirection_url;
 
                 $values = array(
                   'field_name' => 'field_breaking_content_details',
                   'field_breaking_tile' => array(LANGUAGE_NONE => array(array('value' => $content_title))),
-                  'field_mark_as_breaking_band' => array(LANGUAGE_NONE => array(array('value' => $breaking_band))),
-                  'field_notification_' => array(LANGUAGE_NONE => array(array('value' => $notification))),
-                  'field_mobile_subscribers' => array(LANGUAGE_NONE => array(array('value' => $mobile_subscribers))),
-                  'field_breaking_publish_time' => array(LANGUAGE_NONE => array(array('value' => $breaking_publish_time))),
-                  'field_breaking_redirection_url' => array(LANGUAGE_NONE => array(array('value' => $breaking_redirection_url))),
+                  //'field_mark_as_breaking_band' => array(LANGUAGE_NONE => array(array('value' => $breaking_band))),
+                 // 'field_notification_' => array(LANGUAGE_NONE => array(array('value' => $notification))),
+                 // 'field_mobile_subscribers' => array(LANGUAGE_NONE => array(array('value' => $mobile_subscribers))),
+                  //'field_breaking_publish_time' => array(LANGUAGE_NONE => array(array('value' => $breaking_publish_time))),
+                  //'field_breaking_redirection_url' => array(LANGUAGE_NONE => array(array('value' => $breaking_redirection_url))),
                 );
-                print_r($values);die;
+               // print_r($values);die;
                 $field_collection_item = entity_create('field_collection_item', $values);
                 $field_collection_item->setHostEntity('node', $node);
                 $field_collection_item->save(TRUE);
