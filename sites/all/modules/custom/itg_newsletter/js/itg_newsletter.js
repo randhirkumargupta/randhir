@@ -196,10 +196,10 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
-    jQuery.cookie('field_title', null, {path:'/'});
-    jQuery.cookie('field_alt', null, {path:'/'});
-    jQuery.cookie('field_title_val', null, {path:'/'});
-    jQuery.cookie('field_alt_val', null, {path:'/'});
+    jQuery.cookie('field_title', null, {path: '/'});
+    jQuery.cookie('field_alt', null, {path: '/'});
+    jQuery.cookie('field_title_val', null, {path: '/'});
+    jQuery.cookie('field_alt_val', null, {path: '/'});
     //Get Newsletter data using AJAX
     jQuery('body').on('click', '.newsletter-get-content', function () {
         var contentId = jQuery(this).parent().siblings('.field-name-field-news-cid').find('.form-text').val();
@@ -225,7 +225,8 @@ jQuery(document).ready(function () {
                     dataType: "JSON",
                     success: function (data) {
                         if (data != null) {
-                            jQuery("#widget-ajex-loader").show();
+                            console.log(data);
+                            //jQuery("#widget-ajex-loader").show();
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find('.ajax-progress-throbber').hide();
@@ -238,8 +239,16 @@ jQuery(document).ready(function () {
                             date.setTime(date.getTime() + (1000 * 1000));
                             jQuery.cookie('field_title', "input[name='field_newsl_add_news[und][" + relval + "][field_news_thumbnail][und][0][title]']", {expires: date});
                             jQuery.cookie('field_alt', "input[name='field_newsl_add_news[und][" + relval + "][field_news_thumbnail][und][0][alt]']", {expires: date});
-                            jQuery.cookie('field_title_val', data.file_data.field_story_extra_large_image_title, {expires: date});
-                            jQuery.cookie('field_alt_val', data.file_data.field_story_extra_large_image_alt, {expires: date});
+                            if (typeof (data.file_data.field_story_extra_large_image_title) != "undefined" && data.file_data.field_story_extra_large_image_title !== null) {
+                                jQuery.cookie('field_title_val', data.file_data.field_story_extra_large_image_title, {expires: date});
+                            } else {
+                                jQuery.cookie('field_title_val', "", {expires: date});
+                            }
+                            if (typeof (data.file_data.field_story_extra_large_image_alt) != "undefined" && data.file_data.field_story_extra_large_image_alt !== null) {
+                                jQuery.cookie('field_alt_val', data.file_data.field_story_extra_large_image_alt, {expires: date});
+                            } else {
+                                jQuery.cookie('field_alt_val', "", {expires: date});
+                            }
                         } else {
                             alert("Please Provide the published Content Id.");
                             jQuery("form").trigger("reset");
@@ -254,7 +263,7 @@ jQuery(document).ready(function () {
     });
 
 // Handle case for newsletter alt and title field.
-setInterval(function () {
+    setInterval(function () {
         var which_title_field = jQuery.cookie('field_title');
         var which_alt_field = jQuery.cookie('field_alt');
         var field_title_val = jQuery.cookie('field_title_val');
@@ -263,12 +272,12 @@ setInterval(function () {
             if (jQuery(which_title_field).get(0)) {
                 jQuery(which_title_field).val(field_title_val);
                 jQuery(which_alt_field).val(field_alt_val);
-                jQuery.cookie('field_title', null, {path:'/'});
-                jQuery.cookie('field_alt', null, {path:'/'});
-                jQuery.cookie('field_title_val', null, {path:'/'});
-                jQuery.cookie('field_alt_val', null, {path:'/'});
-                  jQuery("#widget-ajex-loader").hide();
+                jQuery.cookie('field_title', null, {path: '/'});
+                jQuery.cookie('field_alt', null, {path: '/'});
+                jQuery.cookie('field_title_val', null, {path: '/'});
+                jQuery.cookie('field_alt_val', null, {path: '/'});
             }
         }
+        //jQuery("#widget-ajex-loader").hide();
     }, 3000);
 });
