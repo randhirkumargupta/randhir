@@ -5559,6 +5559,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label,
 [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
