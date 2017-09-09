@@ -170,7 +170,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $buttonvocab_array = array('bloggers');
   $messagevocab_array = array('bloggers', 'movies');
   // code to add cancel button taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $base_url . '/' . $_GET['destination'], array('attributes' => array('class' => 'button'))),
       '#weight' => 22,
@@ -179,7 +179,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // code to add custom message taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['#submit'][] = 'itg_taxonomy_form_custom_callback';
   }
   
@@ -378,7 +378,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // code for magazine issue supplement listing
-  if ($form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
+  if (isset($form_state['view']->name) && $form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
       $settings = array();
       $settings['base_url'] = $base_url;
       drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
