@@ -74,8 +74,10 @@ jQuery(document).ready(function () {
     Drupal.behaviors.events = {
         attach: function (context, settings) {
             $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxStart(function () {
-                jQuery('#widget-ajex-loader').show();
-                jQuery('#edit-label').attr("disabled", true);
+                if (jQuery('#edit-label').val() != "") {
+                    jQuery('#widget-ajex-loader').show();
+                    jQuery('#edit-label').attr("disabled", true);
+                }
             });
             $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxComplete(function () {
                 jQuery('#widget-ajex-loader').hide();
