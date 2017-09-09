@@ -89,7 +89,7 @@ function itg_get_migrated_like_count($nid) {
  */
 function itg_story_load_follow_story() {
   global $user;
-  if ($user->uid > 0) {
+  //if ($user->uid > 0) {
     if (isset($_POST['id']) && !empty($_POST['id'])) {
       $nid = base64_decode($_POST['id']);
       if (isset($nid) && !empty($nid)) {
@@ -100,7 +100,7 @@ function itg_story_load_follow_story() {
         drupal_exit();
       }
     }
-  }
+  //}
 }
 
 /**

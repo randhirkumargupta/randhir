@@ -3673,7 +3673,7 @@ div.node {
     }
 }
 
-fieldset#edit-select {
+fieldset#edit-select, fieldset#edit-basic {
     padding: 10px;
     .form-submit {
         height: 28px;
@@ -14159,3 +14159,7 @@ div.ctools-modal-content {
 
 
 /* Globle croess button on Popup end */
+
+.redirect-list-tableselect{
+  @extend .views-table;
+}
