@@ -290,7 +290,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
         $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
         $node_data = node_load($node_id);
-        $bylines = _get_byline_from_nid($node_id);
+        $bylines = _get_byline_from_nid_for_kindle($node_id);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
@@ -312,11 +312,11 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         <body.head>
             <hedline>
                 <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . '  ]]> </hl2>
+                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_headline ['und'][0]['value']) . '  ]]> </hl2>
             </hedline>
             <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . ' ]]> </abstract>
+            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_headline ['und'][0]['value']) . ' ]]> </abstract>
         </body.head>
         <body.content>
             <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body ['und'][0]['value'])) . ' ]]> </block>
@@ -346,12 +346,14 @@ function _formet_xml($xml) {
 function kindle_get_sections_for_node($nid) {
     try {
         $query = db_select('field_data_field_story_category', 'fdc');
+        $query->leftJoin('itg_category_manager' , 'cm' , 'cm.tid=fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = fdc.field_story_category_tid');
         $query->fields("fdc", array("field_story_category_tid"));
         $query->fields("td", array("name"));
         $query->condition('fdc.entity_id', $nid);
         $query->condition('th.parent', 0);
+        $query->condition('cm.status', 1);
         $result = $query->execute()->fetchAllAssoc('name');
     } catch(Exception $ex) {
         drupal_set_message($ex->getMessage(), 'error');
@@ -363,6 +365,8 @@ function kindle_get_sections_for_node($nid) {
             $section_name[] = $section;
         }
         return $section_name;
+    } else {
+        return array();
     }
 }
 

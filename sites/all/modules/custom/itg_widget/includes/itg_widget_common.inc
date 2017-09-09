@@ -1693,6 +1693,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
       }
     }
+    unset($query->table_queue['node_itg_widget_order']);
   }
   // Adding relationship.
   if (_itg_analytics_relationship_views($view->name, $view->current_display)) {

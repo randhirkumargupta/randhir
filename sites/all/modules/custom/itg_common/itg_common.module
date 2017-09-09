@@ -11,6 +11,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
+module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issue_story');
 
 /**
  * Implements hook_init.
@@ -113,6 +114,18 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['get-magazine-issue'] = array(
+    'page callback' => 'itg_get_magazine_issue_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['get-supplement-issue'] = array(
+    'page callback' => 'itg_get_supplement_issue_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -157,7 +170,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $buttonvocab_array = array('bloggers');
   $messagevocab_array = array('bloggers', 'movies');
   // code to add cancel button taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $base_url . '/' . $_GET['destination'], array('attributes' => array('class' => 'button'))),
       '#weight' => 22,
@@ -166,7 +179,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // code to add custom message taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['#submit'][] = 'itg_taxonomy_form_custom_callback';
   }
   
@@ -361,6 +374,71 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if ($user->uid != 1) {
       $form['actions']['preview']['#access'] = FALSE;
       $form['actions']['submit']['#submit'][] = 'itg_home_page_redirect';
+    }
+  }
+  
+  // code for magazine issue supplement listing
+  if (isset($form_state['view']->name) && $form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
+      $settings = array();
+      $settings['base_url'] = $base_url;
+      drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_magazine_supplement_listing.js', array('weight' => 1, 'scope' => 'footer'));
+      $magazine_list = itg_get_magazine_story_name();
+      $form['list-magazine'] = array(
+        '#type' => 'select',
+        '#title' => t('Select magazine'),
+        '#options' => $magazine_list,
+        '#default_value' => '_none',
+        '#weight' => 3,
+      );
+
+      if (!empty($form_state['input']['list-magazine'])) {
+        $issue_option = itg_get_magazine_issue_callback($form_state['input']['list-magazine']);
+      }
+
+      $form['list-issue'] = array(
+        '#type' => 'select',
+        '#title' => t('Select Issue'),
+        '#options' => $issue_option,
+        '#weight' => 4,
+      );
+
+      if (!empty($form_state['input']['list-issue'])) {
+        $sup_option = itg_get_supplement_issue_callback($form_state['input']['list-issue']);
+      }
+
+      $form['list-supplement'] = array(
+        '#type' => 'select',
+        '#title' => t('Select supplement'),
+        '#options' => $sup_option,
+        '#weight' => 5,
+      );
+      $form['#info']['filter-list-magazine']['value'] = 'list-magazine';
+      $form['#info']['filter-list-issue']['value'] = 'list-issue';
+      $form['#info']['filter-list-supplement']['value'] = 'list-supplement';
+      $form['#validate'][] = 'itg_magazine_issue_supplement_listing_validate';
+    }
+}
+
+/**
+ * Implements itg_magazine_issue_supplement_listing_validate().
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_magazine_issue_supplement_listing_validate($form, &$form_state) {
+  $magazine_id = $form_state['values']['list-magazine'];
+  $issue_id = $form_state['values']['list-issue'];
+  $supplement_id = $form_state['values']['list-supplement'];
+  if ($magazine_id != '_none') {
+    if (!empty($magazine_id)) {
+      $form_state['values']['field_story_select_magazine_target_id'] = $magazine_id;
+    }
+    if (!empty($issue_id)) {
+      $form_state['values']['field_story_issue_date_value']['value'] = $issue_id;
+    }
+
+    if (!empty($supplement_id)) {
+      $form_state['values']['field_story_select_supplement_target_id'] = $supplement_id;
     }
   }
 }
@@ -738,6 +816,10 @@ function itg_common_views_pre_render(&$view) {
   if ($view->name == "common_master") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/' . arg(1) . '/add', array('query' => array('destination' => 'common-master/'.arg(1)))) . '&nbsp;</span>';
+    $view->attachment_before = $header_content;
+  }
+  if ($view->name == "magazine_stories") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $view->attachment_before = $header_content;
   }
 }

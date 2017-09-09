@@ -41,7 +41,7 @@ function itg_akamai_schema() {
       'url' => array(
         'description' => 'Status',
         'type' => 'varchar',
-        'length' => '255',
+        'length' => '1024',
         'null' => TRUE,
       ),
       'uid' => array(
@@ -100,7 +100,7 @@ function itg_akamai_schema() {
       'url' => array(
         'description' => 'URL',
         'type' => 'varchar',
-        'length' => '255',
+        'length' => '1024',
         'null' => TRUE,
       ),
     ),
@@ -125,7 +125,7 @@ function itg_akamai_schema() {
       'url' => array(
         'description' => 'url',
         'type' => 'varchar',
-        'length' => '255',
+        'length' => '1024',
         'null' => TRUE,
       ),
       'ttl' => array(

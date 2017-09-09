@@ -524,26 +524,3 @@ function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
     itg_custom_pathauto_state_save($node_type, $node_id, $pathauto_state);
   }
 }
-
-/**
- * Implements hook_url_inbound_alter().
- */
-function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
-  
- if (arg(0) == 'embed') {
-    //drupal_goto("movie/story/virender-sehwag-randeep-hooda-accused-of-bullying-kargil-martyr's-daughter-who-spoke-against-abvp-446-2017-02-27");
-  } 
-//    if ($path === $original_path) {
-//        // path is same as url alias - don't do anything
-//        return false;
-//    }
-//
-//    $alias = drupal_get_path_alias($original_path);
-//    if ($alias && $alias === $original_path) {
-//        // alias is same as url alias - don't do anything
-//        return false;
-//    }
-//
-//    drupal_not_found();
-//    drupal_exit();
-}
