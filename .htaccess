@@ -56,6 +56,8 @@ DirectoryIndex index.php index.html index.htm
 <IfModule mod_rewrite.c>
   RewriteEngine on
   RewriteRule ^amp/(.*)$ http://uat-it.indiatodayonline.in/$1?amp [P]
+  RewriteRule ^site/Story/(.*)/(.*)/(.*).html$ /itg-cms/story/$3/1/$1.html [L,R=301]
+  RewriteRule ^site/story/(.*)/(.*)/(.*).html$ /itg-cms/story/$1/$2/$3.html [L,R=301]  
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
   # you don't bounce between http and https.
