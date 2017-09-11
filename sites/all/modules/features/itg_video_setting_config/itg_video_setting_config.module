@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the itg video setting config feature.
+ */
+
+include_once 'itg_video_setting_config.features.inc';

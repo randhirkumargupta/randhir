@@ -323,9 +323,6 @@ $(document).ready(function() {
 
         }
     });
-
-
-
     // Setting the value for  the primary category
     $('#edit-itg-primary-category').on('change', function() {
         var categoryies = $(this).val();
