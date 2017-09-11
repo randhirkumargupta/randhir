@@ -14,6 +14,7 @@ function itg_flag_init() {
   global $user, $base_url;  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['default_image'] = $base_url.'/sites/all/themes/itg/images/itg_image647x363.jpg';
   // Get facebook share app id
   if(!empty(variable_get('itg_sharing_app_id'))) {
   $settings['fb_app'] = variable_get('itg_sharing_app_id');
