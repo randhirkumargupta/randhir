@@ -50,6 +50,12 @@ function itg_flag_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['fb-share-callback'] = array(
+    'page callback' => 'itg_fb_share_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -247,4 +253,21 @@ function itg_user_activity_front_highlight() {
       }
     }
   }
+}
+
+/**
+ * Implements itg_fb_share_callback().
+ */
+function itg_fb_share_callback() {
+  $arg = arg();
+  $count = 0;
+  $query = db_select('itg_node_share_count', 'insc')
+      ->fields('insc', array('share_count'))
+      ->condition('insc.nid', $arg[1], '=');
+  $result = $query->execute()->fetchField();
+  if (!empty($result)) {
+    $count = (int) $count + (int) $result;
+  }
+  $count = $count + 1;
+  itg_report_get_node_share($arg[1], $count);
 }
