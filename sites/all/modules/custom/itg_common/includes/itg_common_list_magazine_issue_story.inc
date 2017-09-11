@@ -13,7 +13,7 @@
  */
 function itg_get_magazine_story_name($id = '') {
   $select = t('- None -');
-  $data = array('' => $select);
+  $data = array('_none' => $select);
   $query = db_select('node' , 'n');
   $query->fields('n' , array('title' , 'nid'));
   $query->condition('n.status' , 1 , '=');

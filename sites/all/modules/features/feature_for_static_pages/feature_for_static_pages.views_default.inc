@@ -206,7 +206,7 @@ function feature_for_static_pages_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Page Id';
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -364,6 +364,18 @@ function feature_for_static_pages_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['filters']['nid_1']['table'] = 'node';
+  $handler->display->display_options['filters']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid_1']['operator'] = '!=';
+  $handler->display->display_options['filters']['nid_1']['value']['value'] = '2';
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid_2']['id'] = 'nid_2';
+  $handler->display->display_options['filters']['nid_2']['table'] = 'node';
+  $handler->display->display_options['filters']['nid_2']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid_2']['operator'] = '!=';
+  $handler->display->display_options['filters']['nid_2']['value']['value'] = '3';
   $handler->display->display_options['path'] = 'static-pages-management';
   $export['static_pages'] = $view;
 

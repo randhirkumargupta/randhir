@@ -21,22 +21,22 @@ function itg_akamai_load_my_account() {
       <li class="menu__item is-leaf first leaf"><a href="' . $base_url . '/personalization/saved-items" class="menu__link itg-akamai-processed">Personalization</a></li>
       <li class="menu__item is-leaf last leaf" id="myhref"><a href="javascript:void(0)" id="myhref" class="menu__link itg-akamai-processed">Log Out</a></li>
       </ul>';
-     drupal_add_js("jQuery(document).ready(function () {
+    drupal_add_js("jQuery(document).ready(function () {
        jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
-                    url: '".$base_url."/itguserlogout',
+                    url: '" . $base_url . "/itguserlogout',
                     success: function (data) {
                         jQuery('#iframe-display').html(data);
                         jQuery('#widget-ajex-loader').show();
                         setTimeout(function () {// wait for 5 secs(2)
-                            window.location = ".$base_url.";
+                            window.location = " . $base_url . ";
                         }, 20000);
                     }
                 });
             });
             });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+    );
     drupal_exit();
   }
   else {
@@ -44,18 +44,4 @@ function itg_akamai_load_my_account() {
     print '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click itg-akamai-processed"><i class="fa fa-user"></i></a>';
     drupal_exit();
   }
-}
-
-/**
- * Getting uid by Session ID
- */
-function itg_akamai_get_uid_by_sessionid($sid) {
-  $query = db_select('sessions', 's');
-  $query->fields('s', array('uid'));
-  $query->condition('s.sid', $sid, '=');
-  $result = $query->execute()->fetchObject();
-  if (isset($result->uid) && !empty($result->uid)) {
-    return $result->uid;
-  }
-  return;
 }

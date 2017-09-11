@@ -170,7 +170,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $buttonvocab_array = array('bloggers');
   $messagevocab_array = array('bloggers', 'movies');
   // code to add cancel button taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), $base_url . '/' . $_GET['destination'], array('attributes' => array('class' => 'button'))),
       '#weight' => 22,
@@ -179,7 +179,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // code to add custom message taxonomy page
-  if (in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
     $form['#submit'][] = 'itg_taxonomy_form_custom_callback';
   }
   
@@ -378,7 +378,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   }
   
   // code for magazine issue supplement listing
-  if ($form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
+  if (isset($form_state['view']->name) && $form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
       $settings = array();
       $settings['base_url'] = $base_url;
       drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
@@ -670,7 +670,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-   if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_rfa_form') {
+   if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_rfa_form' && $form_state['build_info']['form_id'] != 'event_backend_node_form') {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );

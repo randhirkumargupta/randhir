@@ -163,7 +163,7 @@ input[type='submit'] {
 }
 
 .mt-10, ul.pager, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table,
-[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table, .newsletter-templates {
+[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table, .redirect-list-tableselect, .newsletter-templates {
   margin-top: 10px;
 }
 
@@ -472,7 +472,7 @@ input[type='submit'] {
 #block-menu-menu-newsletter-manage-tabs > .menu,
 #block-menu-menu-poll-content-admin-menu > .menu,
 #block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table,
-[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text,
+[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table, .redirect-list-tableselect, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text,
 .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-task-task-idea-values"] tbody tr td, [id*="field-quiz-add-questions-values"], [id*="field-quiz-add-questions-values"] > tbody > tr, [id*="field-quiz-add-questions-values"] > tbody > tr > td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field,
 [class*="page-node-"] .node .field, .node-type-print-team-integration.section-content .-content .field, .node-preview .field, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .answer-container,
 [id*="itg-quiz-quiz-form"] .answer-container, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating,
@@ -3176,13 +3176,13 @@ div.image-widget-data .ajax-progress-throbber {
 }
 
 .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table,
-[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table {
+[id*="protected-pages-edit"] fieldset table, .page-node-moderation, #taxonomy-overview-terms, [id*="daily-motion-video-dashboard"] table, .redirect-list-tableselect {
   border-collapse: collapse;
   border: 1px solid #d9d9d9;
   text-align: left;
 }
 .views-table th, [id*="field-newsl-add-news-values"] th, .variables-and-field-container .variables table th, .page-admin-structure-menu-manage #menu-overview th, [id*="protected-pages-configure"] fieldset table th,
-[id*="protected-pages-edit"] fieldset table th, .page-node-moderation th, #taxonomy-overview-terms th, [id*="daily-motion-video-dashboard"] table th,
+[id*="protected-pages-edit"] fieldset table th, .page-node-moderation th, #taxonomy-overview-terms th, [id*="daily-motion-video-dashboard"] table th, .redirect-list-tableselect th,
 .views-table td,
 [id*="field-newsl-add-news-values"] td,
 .variables-and-field-container .variables table td,
@@ -3191,12 +3191,13 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="protected-pages-edit"] fieldset table td,
 .page-node-moderation td,
 #taxonomy-overview-terms td,
-[id*="daily-motion-video-dashboard"] table td {
+[id*="daily-motion-video-dashboard"] table td,
+.redirect-list-tableselect td {
   padding: 8px 5px;
   max-width: 200px;
 }
 .views-table th a, [id*="field-newsl-add-news-values"] th a, .variables-and-field-container .variables table th a, .page-admin-structure-menu-manage #menu-overview th a, [id*="protected-pages-configure"] fieldset table th a,
-[id*="protected-pages-edit"] fieldset table th a, .page-node-moderation th a, #taxonomy-overview-terms th a, [id*="daily-motion-video-dashboard"] table th a,
+[id*="protected-pages-edit"] fieldset table th a, .page-node-moderation th a, #taxonomy-overview-terms th a, [id*="daily-motion-video-dashboard"] table th a, .redirect-list-tableselect th a,
 .views-table td a,
 [id*="field-newsl-add-news-values"] td a,
 .variables-and-field-container .variables table td a,
@@ -3205,19 +3206,20 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="protected-pages-edit"] fieldset table td a,
 .page-node-moderation td a,
 #taxonomy-overview-terms td a,
-[id*="daily-motion-video-dashboard"] table td a {
+[id*="daily-motion-video-dashboard"] table td a,
+.redirect-list-tableselect td a {
   color: #0c8bb1;
 }
 .views-table thead, [id*="field-newsl-add-news-values"] thead, .variables-and-field-container .variables table thead, .page-admin-structure-menu-manage #menu-overview thead, [id*="protected-pages-configure"] fieldset table thead,
-[id*="protected-pages-edit"] fieldset table thead, .page-node-moderation thead, #taxonomy-overview-terms thead, [id*="daily-motion-video-dashboard"] table thead {
+[id*="protected-pages-edit"] fieldset table thead, .page-node-moderation thead, #taxonomy-overview-terms thead, [id*="daily-motion-video-dashboard"] table thead, .redirect-list-tableselect thead {
   background-color: #f6f6f6;
 }
 .views-table thead th, [id*="field-newsl-add-news-values"] thead th, .variables-and-field-container .variables table thead th, .page-admin-structure-menu-manage #menu-overview thead th, [id*="protected-pages-configure"] fieldset table thead th,
-[id*="protected-pages-edit"] fieldset table thead th, .page-node-moderation thead th, #taxonomy-overview-terms thead th, [id*="daily-motion-video-dashboard"] table thead th {
+[id*="protected-pages-edit"] fieldset table thead th, .page-node-moderation thead th, #taxonomy-overview-terms thead th, [id*="daily-motion-video-dashboard"] table thead th, .redirect-list-tableselect thead th {
   font-weight: 500;
 }
 .views-table tbody td, [id*="field-newsl-add-news-values"] tbody td, .variables-and-field-container .variables table tbody td, .page-admin-structure-menu-manage #menu-overview tbody td, [id*="protected-pages-configure"] fieldset table tbody td,
-[id*="protected-pages-edit"] fieldset table tbody td, .page-node-moderation tbody td, #taxonomy-overview-terms tbody td, [id*="daily-motion-video-dashboard"] table tbody td {
+[id*="protected-pages-edit"] fieldset table tbody td, .page-node-moderation tbody td, #taxonomy-overview-terms tbody td, [id*="daily-motion-video-dashboard"] table tbody td, .redirect-list-tableselect tbody td {
   border-top: 1px solid #f6f6f6;
 }
 
@@ -4593,10 +4595,10 @@ div.node .ugc-action .manage-ugc {
   margin-top: 10px;
 }
 
-fieldset#edit-select {
+fieldset#edit-select, fieldset#edit-basic {
   padding: 10px;
 }
-fieldset#edit-select .form-submit {
+fieldset#edit-select .form-submit, fieldset#edit-basic .form-submit {
   height: 28px;
   line-height: 26px;
   margin-right: 10px;
@@ -6568,7 +6570,7 @@ padding: 0 0 10px;*/
 
 #views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th, #views-form-manage-users-page .variables-and-field-container .variables table th, .variables-and-field-container .variables #views-form-manage-users-page table th, #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview th, .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview th, #views-form-manage-users-page [id*="protected-pages-configure"] fieldset table th, [id*="protected-pages-configure"] fieldset #views-form-manage-users-page table th,
 #views-form-manage-users-page [id*="protected-pages-edit"] fieldset table th,
-[id*="protected-pages-edit"] fieldset #views-form-manage-users-page table th, #views-form-manage-users-page .page-node-moderation th, #views-form-manage-users-page #taxonomy-overview-terms th, #views-form-manage-users-page [id*="daily-motion-video-dashboard"] table th, [id*="daily-motion-video-dashboard"] #views-form-manage-users-page table th,
+[id*="protected-pages-edit"] fieldset #views-form-manage-users-page table th, #views-form-manage-users-page .page-node-moderation th, #views-form-manage-users-page #taxonomy-overview-terms th, #views-form-manage-users-page [id*="daily-motion-video-dashboard"] table th, [id*="daily-motion-video-dashboard"] #views-form-manage-users-page table th, #views-form-manage-users-page .redirect-list-tableselect th,
 #views-form-manage-users-page .views-table td,
 #views-form-manage-users-page [id*="field-newsl-add-news-values"] td,
 #views-form-manage-users-page .variables-and-field-container .variables table td,
@@ -6582,7 +6584,8 @@ padding: 0 0 10px;*/
 #views-form-manage-users-page .page-node-moderation td,
 #views-form-manage-users-page #taxonomy-overview-terms td,
 #views-form-manage-users-page [id*="daily-motion-video-dashboard"] table td,
-[id*="daily-motion-video-dashboard"] #views-form-manage-users-page table td {
+[id*="daily-motion-video-dashboard"] #views-form-manage-users-page table td,
+#views-form-manage-users-page .redirect-list-tableselect td {
   max-width: 170px;
 }
 
@@ -11942,12 +11945,12 @@ padding: 0 0 10px;*/
 }
 .page-clone-story .views-table, .page-clone-story [id*="field-newsl-add-news-values"], .page-clone-story .variables-and-field-container .variables table, .variables-and-field-container .variables .page-clone-story table, .page-clone-story .page-admin-structure-menu-manage #menu-overview, .page-admin-structure-menu-manage .page-clone-story #menu-overview, .page-clone-story [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-configure"] fieldset .page-clone-story table,
 .page-clone-story [id*="protected-pages-edit"] fieldset table,
-[id*="protected-pages-edit"] fieldset .page-clone-story table, .page-clone-story .page-node-moderation, .page-clone-story #taxonomy-overview-terms, .page-clone-story [id*="daily-motion-video-dashboard"] table, [id*="daily-motion-video-dashboard"] .page-clone-story table {
+[id*="protected-pages-edit"] fieldset .page-clone-story table, .page-clone-story .page-node-moderation, .page-clone-story #taxonomy-overview-terms, .page-clone-story [id*="daily-motion-video-dashboard"] table, [id*="daily-motion-video-dashboard"] .page-clone-story table, .page-clone-story .redirect-list-tableselect {
   margin-top: 20px;
 }
 .page-clone-story .views-table caption, .page-clone-story [id*="field-newsl-add-news-values"] caption, .page-clone-story .variables-and-field-container .variables table caption, .variables-and-field-container .variables .page-clone-story table caption, .page-clone-story .page-admin-structure-menu-manage #menu-overview caption, .page-admin-structure-menu-manage .page-clone-story #menu-overview caption, .page-clone-story [id*="protected-pages-configure"] fieldset table caption, [id*="protected-pages-configure"] fieldset .page-clone-story table caption,
 .page-clone-story [id*="protected-pages-edit"] fieldset table caption,
-[id*="protected-pages-edit"] fieldset .page-clone-story table caption, .page-clone-story .page-node-moderation caption, .page-clone-story #taxonomy-overview-terms caption, .page-clone-story [id*="daily-motion-video-dashboard"] table caption, [id*="daily-motion-video-dashboard"] .page-clone-story table caption {
+[id*="protected-pages-edit"] fieldset .page-clone-story table caption, .page-clone-story .page-node-moderation caption, .page-clone-story #taxonomy-overview-terms caption, .page-clone-story [id*="daily-motion-video-dashboard"] table caption, [id*="daily-motion-video-dashboard"] .page-clone-story table caption, .page-clone-story .redirect-list-tableselect caption {
   background-color: #1fb5ad;
   color: #fff;
   font-size: 18px;
@@ -14147,12 +14150,12 @@ fieldset#edit-xmlsitemap {
 
 .node-syndication-rule .views-table, .node-syndication-rule [id*="field-newsl-add-news-values"], .node-syndication-rule .variables-and-field-container .variables table, .variables-and-field-container .variables .node-syndication-rule table, .node-syndication-rule .page-admin-structure-menu-manage #menu-overview, .page-admin-structure-menu-manage .node-syndication-rule #menu-overview, .node-syndication-rule [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-configure"] fieldset .node-syndication-rule table,
 .node-syndication-rule [id*="protected-pages-edit"] fieldset table,
-[id*="protected-pages-edit"] fieldset .node-syndication-rule table, .node-syndication-rule .page-node-moderation, .node-syndication-rule #taxonomy-overview-terms, .node-syndication-rule [id*="daily-motion-video-dashboard"] table, [id*="daily-motion-video-dashboard"] .node-syndication-rule table {
+[id*="protected-pages-edit"] fieldset .node-syndication-rule table, .node-syndication-rule .page-node-moderation, .node-syndication-rule #taxonomy-overview-terms, .node-syndication-rule [id*="daily-motion-video-dashboard"] table, [id*="daily-motion-video-dashboard"] .node-syndication-rule table, .node-syndication-rule .redirect-list-tableselect {
   margin-top: 0;
 }
 .node-syndication-rule .views-table tbody td, .node-syndication-rule [id*="field-newsl-add-news-values"] tbody td, .node-syndication-rule .variables-and-field-container .variables table tbody td, .variables-and-field-container .variables .node-syndication-rule table tbody td, .node-syndication-rule .page-admin-structure-menu-manage #menu-overview tbody td, .page-admin-structure-menu-manage .node-syndication-rule #menu-overview tbody td, .node-syndication-rule [id*="protected-pages-configure"] fieldset table tbody td, [id*="protected-pages-configure"] fieldset .node-syndication-rule table tbody td,
 .node-syndication-rule [id*="protected-pages-edit"] fieldset table tbody td,
-[id*="protected-pages-edit"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule .page-node-moderation tbody td, .node-syndication-rule #taxonomy-overview-terms tbody td, .node-syndication-rule [id*="daily-motion-video-dashboard"] table tbody td, [id*="daily-motion-video-dashboard"] .node-syndication-rule table tbody td {
+[id*="protected-pages-edit"] fieldset .node-syndication-rule table tbody td, .node-syndication-rule .page-node-moderation tbody td, .node-syndication-rule #taxonomy-overview-terms tbody td, .node-syndication-rule [id*="daily-motion-video-dashboard"] table tbody td, [id*="daily-motion-video-dashboard"] .node-syndication-rule table tbody td, .node-syndication-rule .redirect-list-tableselect tbody td {
   border: none;
 }
 
