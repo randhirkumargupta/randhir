@@ -104,7 +104,7 @@ function itg_layout_manager_menu() {
     'file' => 'includes/itg_layout_autocomplete.inc',
   );
 
-  $items['itg-delete-layout/%'] = array(
+  $items['itg-deletelayout/%'] = array(
     'page callback' => 'itg_layout_delete',
     'access arguments' => array('access layout delete'),
     'type' => MENU_CALLBACK,
