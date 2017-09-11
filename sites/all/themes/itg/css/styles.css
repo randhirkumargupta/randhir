@@ -15618,13 +15618,16 @@ span.close_btt {
 .story-section .story-right .description iframe {
   max-width: 100%;
 }
+.story-section .story-right .description iframe #main {
+  min-height: inherit;
+}
 .story-section .story-right .description .itgvideo > iframe {
   max-width: 100%;
   width: 100%;
   min-height: 326px;
 }
 .story-section .story-right .description .itgvideo > iframe #main {
-  min-height: 0;
+  min-height: inherit;
 }
 .story-section .story-right .description .itgvideo > iframe + iframe {
   margin-top: 20px;
