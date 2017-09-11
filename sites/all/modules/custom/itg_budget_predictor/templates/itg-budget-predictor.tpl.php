@@ -1,12 +1,4 @@
-<?php 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Credentials: true ");
-header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
-?>
-
 <?php
-//print_r($data);
 $column1 = $data['column1'];
 $column2 = $data['column2'];
 $column3 = $data['column3'];
@@ -31,6 +23,7 @@ $uri = base64_encode($actual_link);
 ?>
 
 <?php if ($budget_exist == 1) { ?>
+
   <h1 class="budget-predictor-heading"><?php print t('CHEAPER / DEARER'); ?></h1>
   <?php if(empty($user_id)) { ?>
     <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>

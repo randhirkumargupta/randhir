@@ -95,7 +95,7 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($tid) {
-          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '" alt="" /></li>';
+          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" title="' . $name . '" alt="" /></li>';
         }
       }
     }
@@ -106,13 +106,13 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($values['ranking_column'] == '1') {
-          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
         if ($values['ranking_column'] == '2') {
-          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
         if ($values['ranking_column'] == '3') {
-          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
       }
     }
