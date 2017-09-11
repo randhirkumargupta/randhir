@@ -1139,7 +1139,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias , &$context) {
   global $user;
   // Handle Insert case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
-    // find section name
+// find section name
     //$parents = taxonomy_get_parents_all($context['data']['term']->tid);
     //$section = end($parents);
     $get_parents = taxonomy_get_parents_all($context['data']['term']->tid);    
@@ -1174,12 +1174,22 @@ function itg_category_manager_pathauto_alias_alter(&$alias , &$context) {
             array(
               'changed' => time() , 
               'created' => time() ,
+              'uid' => $user->uid ,
               'status' => $status , 
               'vid' => CATEGORY_MANAGMENT ,
               'tid' => $context['data']['term']->tid ,
               )
           )
         ->execute();
+    itg_watchdog("category_insert" , array(
+              'changed' => time() , 
+              'created' => time() ,
+              'uid' => $user->uid ,
+              'status' => $status , 
+              'vid' => CATEGORY_MANAGMENT ,
+              'tid' => $context['data']['term']->tid ,
+              )
+   );    
   }
   // Handle update case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
