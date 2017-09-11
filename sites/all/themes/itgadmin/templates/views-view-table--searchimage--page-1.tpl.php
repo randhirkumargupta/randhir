@@ -20,10 +20,6 @@ global $base_url;
  */
 ?>
 
-<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery-pagination-min.js"></script>
-<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/bootstrap.min.js"></script>
-<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.snippet.min.js"></script>
-<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.easyPaginate.js"></script>
 
 <?php
 $video_data = "";
@@ -74,39 +70,7 @@ $video_data = "";
         }
       }
     }
-    echo '<div id="edit-video-browse-select">' . $video_data . '</div>div id="video_play_div"></div><script>jQuery("#edit-video-browse-select").easyPaginate({
-		paginateElement: ".ftp_video_radio",
-		elementsPerPage: 21,
-		effect: "climb"
-	});</script>';
+    echo '<div id="edit-video-browse-select">' . $video_data . '</div><div id="video_play_div"></div>';
     ?>
 
 </div>
-<script>
-  jQuery("#edit-sm-field-video-used option[value='']").remove();
-</script>
-<script>
-
-  jQuery('.play-video').click(function () {
-      var getvideo_id = $(this).attr('data-video-id');
-      jQuery.ajax({
-          url: Drupal.settings.basePath + 'dailymotion-video-play',
-          type: 'post',
-          beforeSend: function (xhr) {
-              jQuery('#widget-ajex-loader').show();
-          },
-          data: {'videoid': getvideo_id,'width':400,'height':260},
-          success: function (data) {
-
-              jQuery('#video_play_div').html(data);
-              jQuery('#widget-ajex-loader').hide();
-
-          },
-          error: function (xhr, desc, err) {
-              console.log(xhr);
-              console.log("Details: " + desc + "\nError:" + err);
-          }
-      });
-  });
-
-</script>
