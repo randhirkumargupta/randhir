@@ -148,7 +148,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   // If title is empty then exit the process.
   if ($node->nid != null) {
     // Set up the meta tags values on node updated
-    if (isset($arg[2]) && is_integer($arg[2])) {
+    if (isset($arg[2]) && !empty($arg[2])) {
       $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
       $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
       $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
