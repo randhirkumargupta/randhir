@@ -10790,7 +10790,7 @@ h1.about-us-heading {
                 }
             }
             &:first-child {
-                vertical-align: baseline;
+                vertical-align: top;
                 i {
                     color: #000;
                 }
@@ -13350,6 +13350,9 @@ span.close_btt {
 .story-section .story-right .description {
     iframe {
         max-width: 100%;
+        #main {
+            min-height: inherit;
+        }
     }
     .itgvideo {
         >iframe {
@@ -13357,7 +13360,7 @@ span.close_btt {
             width: 100%;
             min-height: 326px;
             #main {
-                min-height: 0;
+                min-height: inherit;
                 .itg-embed-dm-video-wrapper {}
             }
             &+iframe {

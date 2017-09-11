@@ -150,7 +150,9 @@ function itg_autosave_nodeform($nid, $ctype) {
       $event_title = itg_common_get_node_title($arg[2]);
       if (isset($event_title) && !empty($event_title) && is_string($event_title)) {
         $title = isset($event_title) ? $event_title != '' ? check_plain($event_title) : ''  : '';
-      } 
+      } else {
+        $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : ''  : '';
+      }
     }
   } 
   // Set the flag value for op flag for newsletter form and set the title
