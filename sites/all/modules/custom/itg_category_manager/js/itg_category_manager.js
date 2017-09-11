@@ -97,12 +97,10 @@
                         });
                     },
                     error: function (xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
+                        
                     }
                 });
             }
-
 
             $('select[name="parent[hierarchical_select][selects][0]"]').on('change', function () {
 
@@ -129,8 +127,7 @@
                             });
                         },
                         error: function (xhr, desc, err) {
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError:" + err);
+                           
                         }
                     });
                 }
@@ -147,11 +144,7 @@
             jQuery('#edit-field-time-period').remove();
             jQuery("#edit-field-user-city").after(getsechedulehtml);
 
-
-
-
             // jQuery("#edit-field-program-timing-in-days").before(edit_field_time_period);
-
             // Pager settings
             var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var d = new Date();

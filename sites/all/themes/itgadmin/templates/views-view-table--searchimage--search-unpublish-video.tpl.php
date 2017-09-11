@@ -26,14 +26,13 @@ $video_data = "";
 <div class="video-ftp-div">
     <div class="main-top-wraper">
         <div class="search-checkbox-wraper"></div>
-        <div class="search-image-wraper">Image</div>
-        <div class="search-video-id-wraper">Video Id</div>
-        <div class="search-title-wraper">Title</div>
-        <div class="search-size-wraper">Size</div>
-        <div class="search-duration-wraper">Duration</div>
-        <div class="search-date-wraper">Date</div>
-        <div class="search-image-wraper">Play</div>
-
+        <div class="search-image-wraper"><?php echo t('Image');?></div>
+        <div class="search-video-id-wraper"><?php echo t('Video Id');?></div>
+        <div class="search-title-wraper"><?php echo t('Title');?></div>
+        <div class="search-size-wraper"><?php echo t('Size');?></div>
+        <div class="search-duration-wraper"><?php echo t('Duration');?></div>
+        <div class="search-date-wraper"><?php echo t('Video Time');?></div>
+        <div class="search-image-wraper"><?php echo t('Play');?></div>
     </div>
     <?php
     $all_used_video = itg_videogallery_get_all_publish_video_of_video_content();

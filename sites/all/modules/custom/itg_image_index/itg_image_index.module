@@ -54,9 +54,7 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
     }
      if (isset($node->type) && $node->type == 'itg_solr_video') {
         //$itg_body = apachesolr_clean_text($node->body[$node->language][0]['value']);
-        $document->addField('sm_field_all_xml_content', $node->field_all_xml_content['und']['0']['value']);
-        
-        
+        $document->addField('sm_field_all_xml_content', $node->field_all_xml_content['und']['0']['value']); 
     }
     $type = array('story', 'photogallery', 'videogallery');
     if (isset($node->type) && in_array($node->type, $type)) {

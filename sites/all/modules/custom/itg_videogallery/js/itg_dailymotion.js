@@ -2,13 +2,10 @@
  * @file itg_dailymotion.js
  * Contains all functionality related to videogallery
  */
-
 (function ($) {
     Drupal.behaviors.itg_dailymotion = {
         attach: function (context, settings) {
-
             var base_url = Drupal.settings.baseUrl.baseUrl;
-
             $(".ftp-server .asso-filed_single").click(function (e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                 var video_fids = [];
@@ -34,23 +31,16 @@
                             for (var x in parsed) {
                                 video_fids.push(parsed[x]);
                             }
-
                             parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
                             parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
-
                             //parent.jQuery("#" + video_field_id + "-button").mousedown();
                             parent.jQuery('form').ajaxComplete(function (event, request, settings) {
                                 try {
                                     parent.jQuery.colorbox.close();
                                 } catch (err) {
-
                                 }
-
-
                             });
-
                         }
-
                     });
 
                 }
@@ -147,8 +137,7 @@
                             parent.jQuery.colorbox.close();
                         },
                         error: function (xhr, desc, err) {
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError:" + err);
+                           
                         }
                     });
                 }
@@ -229,8 +218,7 @@ jQuery('document').ready(function () {
 
             },
             error: function (xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
+                
             }
         });
 
@@ -253,8 +241,7 @@ jQuery('document').ready(function () {
 
             },
             error: function (xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
+              
             }
         });
 
@@ -271,12 +258,9 @@ jQuery('document').ready(function () {
                 parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(videogallery_new_file_hold);
                 parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
                 parent.jQuery('form').ajaxComplete(function (event, request, settings) {
-
                     try {
-
                         parent.jQuery.colorbox.close();
                     } catch (err) {
-
                         parent.jQuery.colorbox.close();
                     }
                 });
@@ -284,9 +268,7 @@ jQuery('document').ready(function () {
             else {
                 parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
-
                     try {
-
                         parent.jQuery.colorbox.close();
                     } catch (err) {
 
