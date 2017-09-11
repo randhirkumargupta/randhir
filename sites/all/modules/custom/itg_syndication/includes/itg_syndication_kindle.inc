@@ -247,6 +247,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
         foreach($section_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
+            itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
             $xml .= "<channel>";
@@ -254,7 +255,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             foreach($node_array as $nid) {
                 $node_load_data = node_load($nid);
                 // Skip future date and unpublised story.
-                if(!is_expried_story($node_load_data) && ! is_future_story($node)) {
+                if(!is_expried_story($node_load_data) && !is_future_story($node_load_data)) {
                     $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                     $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
@@ -281,8 +282,6 @@ function is_expried_story($node) {
     $flag = FALSE;
     $expiry_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
     $checked = $node->field_story_expires['und'][0]['value'];
-    itg_watchdog('kindle_checked', $checked);
-    itg_watchdog('kindle_checked', $expiry_time);
     if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes')) || $node->status == 0) {
         $flag = TRUE;
     }
