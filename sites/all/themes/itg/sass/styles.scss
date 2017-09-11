@@ -1785,12 +1785,19 @@ footer {
     list-style: none;
     border: 1px solid $border-color;
     li {
+        padding: 15px;
         @include tab-listing;
+        border-bottom: 1px solid #e4e4e4;
         a {
-            padding: 15px;
+            display: inline;
+            border-bottom: none;
+            padding: 0;
         }
         &:before {
             display: none;
+        }
+        &:hover {
+            background: #f8f8f8;
         }
     }
 }
@@ -13567,7 +13574,7 @@ span.story-sponsor-powered-text::last-word {
     margin-bottom: 20px;
 }
 
-.data-holder .itg-listing li a {
+.data-holder .itg-listing li {
     padding: 20px 18px;
 }
 
@@ -13597,3 +13604,18 @@ span.story-sponsor-powered-text::last-word {
 .featured-news .featured-post a.itg-sponsored {
     color: #193984;
 }
+
+
+/*css start pipeline-added*/
+
+.pipeline-added {
+    .add-on-story-pipline {
+        color: #086DC7;
+        +a {
+            color: #086DC7;
+        }
+    }
+}
+
+
+/*css end pipeline-added*/
