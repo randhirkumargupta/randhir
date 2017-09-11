@@ -7,11 +7,13 @@ $content = node_view($node, 'full');
 $related_content = $content['related_content'];
 // condition for buzz
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$uri = base64_encode($actual_link);
+//$uri = base64_encode($actual_link);
+$uri = base64_encode($_SERVER['HTTP_REFERER']);
 $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($node->title);
 $share_desc = '';
 $image = '';
+$nid = $node->nid;
 if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 }
