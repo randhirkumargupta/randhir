@@ -6336,9 +6336,19 @@ section.sidebar {
                 border: none;
             }
             li {
-                a {
-                    @include before-icon-list(5px, 5px, 22px, 8px, #959595, 100%);
-                    padding-left: 22px;
+                position: relative;
+                padding-left: 22px;
+                &:before {
+                    position: absolute;
+                    top: 27px;
+                    left: 8px;
+                    content: '';
+                    border-radius: 100%;
+                    background: #959595;
+                    height: 5px;
+                    width: 5px;
+                    z-index: 1;
+                    display: inline-block;
                 }
             }
         }
@@ -10772,8 +10782,19 @@ h1.about-us-heading {
         color: #000;
     }
     .social-share {
-        ul li:first-child {
-            vertical-align: baseline;
+        ul li {
+            a {
+                color: #fff;
+                i {
+                    color: #fff;
+                }
+            }
+            &:first-child {
+                vertical-align: baseline;
+                i {
+                    color: #000;
+                }
+            }
         }
     }
     ul li {

@@ -8129,19 +8129,21 @@ section.sidebar .block-itg-ads {
 .auto-layout-page .special-top-news ul.itg-listing {
   border: none;
 }
-.auto-layout-page .special-top-news ul li a {
+.auto-layout-page .special-top-news ul li {
   position: relative;
   padding-left: 22px;
 }
-.auto-layout-page .special-top-news ul li a:before {
+.auto-layout-page .special-top-news ul li:before {
   position: absolute;
-  top: 22px;
+  top: 27px;
   left: 8px;
   content: '';
   border-radius: 100%;
   background: #959595;
   height: 5px;
   width: 5px;
+  z-index: 1;
+  display: inline-block;
 }
 .auto-layout-page .auto-tips-n-tricks ul {
   list-style: none;
@@ -12648,8 +12650,17 @@ h1.about-us-heading + div p {
 .factoids-page h3 {
   color: #000;
 }
+.factoids-page .social-share ul li a {
+  color: #fff;
+}
+.factoids-page .social-share ul li a i {
+  color: #fff;
+}
 .factoids-page .social-share ul li:first-child {
   vertical-align: baseline;
+}
+.factoids-page .social-share ul li:first-child i {
+  color: #000;
 }
 .factoids-page ul li {
   padding-top: 8px;
