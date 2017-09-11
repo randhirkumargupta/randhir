@@ -4595,10 +4595,12 @@ div.node .ugc-action .manage-ugc {
   margin-top: 10px;
 }
 
-fieldset#edit-select, fieldset#edit-basic {
+fieldset#edit-select,
+fieldset#edit-basic {
   padding: 10px;
 }
-fieldset#edit-select .form-submit, fieldset#edit-basic .form-submit {
+fieldset#edit-select .form-submit,
+fieldset#edit-basic .form-submit {
   height: 28px;
   line-height: 26px;
   margin-right: 10px;
@@ -14232,7 +14234,7 @@ fieldset#edit-xmlsitemap {
 [id*="field-breaking-content-details-values"] fieldset.collapsible {
   border: none;
 }
-[id*="field-breaking-content-details-values"] fieldset.collapsible legend {
+[id*="field-breaking-content-details-values"] fieldset.collapsible > legend {
   display: block;
   background: #fff;
   width: 100%;
@@ -14410,3 +14412,6 @@ div.ctools-modal-content .form-submit {
 }
 
 /* Globle croess button on Popup end */
+[id*="field-breaking-coverage-end-time-add-more-wrapper"] fieldset.date-combo .container-inline-date .date-padding .form-item + .form-item {
+  margin-left: 15px;
+}
