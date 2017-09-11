@@ -12657,7 +12657,7 @@ h1.about-us-heading + div p {
   color: #fff;
 }
 .factoids-page .social-share ul li:first-child {
-  vertical-align: baseline;
+  vertical-align: top;
 }
 .factoids-page .social-share ul li:first-child i {
   color: #000;
