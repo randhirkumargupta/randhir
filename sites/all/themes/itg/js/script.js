@@ -555,24 +555,22 @@ jQuery(document).ready(function () {
         //~ itemSelector: 'a',
         //~ navigateByKeyboard: true
     //~ });
-    jQuery(".fancybox-thumb").fancybox({
-		prevEffect	: 'none',
-		nextEffect	: 'none',
-		helpers	: {
-			//~ title	: {
-				//~ type: 'outside'
-			//~ },
-			thumbs	: {
-				width	: 80,
-				height	: 80
+    if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
+		jQuery(".fancybox-thumb").fancybox({
+			prevEffect	: 'none',
+			nextEffect	: 'none',
+			helpers	: {
+				//~ title	: {
+					//~ type: 'outside'
+				//~ },
+				thumbs	: {
+					width	: 80,
+					height	: 80
+				}
 			}
-		}
-	});
+		});
+	}    
     
-    jQuery('.seemore').click( function() {
-		jQuery(".hide").removeClass('hide');
-	} );
-
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
         var getHEight = jQuery(this).outerHeight(true);
