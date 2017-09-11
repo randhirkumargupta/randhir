@@ -720,9 +720,12 @@ if (!empty($content)):
                   }
                 }
                 // Code for Tech Photo gallery
-                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {
-                  if (!empty($node->field_technology_photos['und'])) {
-                    $photo_gallery_html = itg_story_photogallery_plugin_data($node->field_technology_photos['und']);
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
+                  if (!empty($node->field_technology_photogallery['und'])) {
+					//print_r($node->field_technology_photogallery['und'][0]['entity']);die;
+					$tech_gallery_images = $node->field_technology_photogallery['und'][0]['entity']->field_gallery_image;
+					$tech_gallery_alias = drupal_get_path_alias('node/'.$node->field_technology_photogallery['und'][0]['entity']->nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
                   }
                   else {

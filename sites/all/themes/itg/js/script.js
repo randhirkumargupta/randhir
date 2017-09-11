@@ -555,7 +555,7 @@ jQuery(document).ready(function () {
         //~ itemSelector: 'a',
         //~ navigateByKeyboard: true
     //~ });
-    /*if (typeof fancybox !== 'undefined' && jQuery.isFunction(fancybox)) {
+    if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
 		jQuery(".fancybox-thumb").fancybox({
 			prevEffect	: 'none',
 			nextEffect	: 'none',
@@ -569,12 +569,8 @@ jQuery(document).ready(function () {
 				}
 			}
 		});
-	}*/    
+	}    
     
-    jQuery('.seemore').click( function() {
-		jQuery(".hide").removeClass('hide');
-	} );
-
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
         var getHEight = jQuery(this).outerHeight(true);
