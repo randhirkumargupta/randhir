@@ -14415,3 +14415,9 @@ div.ctools-modal-content .form-submit {
 [id*="field-breaking-coverage-end-time-add-more-wrapper"] fieldset.date-combo .container-inline-date .date-padding .form-item + .form-item {
   margin-left: 15px;
 }
+
+#associate_video_settings iframe .views-table thead th:nth-child(3), #associate_video_settings iframe [id*="field-newsl-add-news-values"] thead th:nth-child(3), #associate_video_settings iframe .variables-and-field-container .variables table thead th:nth-child(3), .variables-and-field-container .variables #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-admin-structure-menu-manage #menu-overview thead th:nth-child(3), .page-admin-structure-menu-manage #associate_video_settings iframe #menu-overview thead th:nth-child(3), #associate_video_settings iframe [id*="protected-pages-configure"] fieldset table thead th:nth-child(3), [id*="protected-pages-configure"] fieldset #associate_video_settings iframe table thead th:nth-child(3),
+#associate_video_settings iframe [id*="protected-pages-edit"] fieldset table thead th:nth-child(3),
+[id*="protected-pages-edit"] fieldset #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-node-moderation thead th:nth-child(3), #associate_video_settings iframe #taxonomy-overview-terms thead th:nth-child(3), #associate_video_settings iframe [id*="daily-motion-video-dashboard"] table thead th:nth-child(3), [id*="daily-motion-video-dashboard"] #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .redirect-list-tableselect thead th:nth-child(3) {
+  width: 100px;
+}
