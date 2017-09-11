@@ -202,6 +202,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if (!in_array('administrator', $user->roles)) {
       $form['actions']['delete']['#access'] = FALSE;
       $form['description']['#access'] = FALSE;
+      $form['redirect']['#access'] = FALSE;
     }
   }
   
