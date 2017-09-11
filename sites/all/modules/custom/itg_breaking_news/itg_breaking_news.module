@@ -554,7 +554,13 @@ function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $
                     $innings = array($innings);
                 }
                 $current_inn_ = key($innings);
-                $ball_by_ball = array_reverse($innings[$current_inn_]->Node, TRUE);
+                if($innings[$current_inn_]->Node != NULL){
+                    $ball_by_ball = array_reverse($innings[$current_inn_]->Node, TRUE);
+                }else{
+                    $current_inn_ = 0;
+                    $ball_by_ball = array_reverse($innings[$current_inn_]->Node, TRUE);
+                }
+                
                 foreach ($ball_by_ball as $key => $value) {
                     $ball_by_ball[$key]->innings = $current_inn_;
                 }
