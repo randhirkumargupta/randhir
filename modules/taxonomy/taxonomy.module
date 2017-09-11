@@ -688,8 +688,10 @@ function taxonomy_term_save($term) {
   taxonomy_terms_static_reset();
 
   // Invoke the taxonomy hooks.
-  module_invoke_all("taxonomy_term_$op", $term);
-  module_invoke_all("entity_$op", $term, 'taxonomy_term');
+  if ($term->vocabulary_machine_name != 'tags') { //condition add for tags by shravan
+    module_invoke_all("taxonomy_term_$op", $term);
+    module_invoke_all("entity_$op", $term, 'taxonomy_term');
+  }
   unset($term->original);
 
   return $status;
