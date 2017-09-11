@@ -856,7 +856,7 @@ function itg_videogallery_node_insert($node) {
               // Update embed code for this vidoe in table
               itg_videogallery_update_embedcode_url($file_video[0]->solr_video_id);
               if ($node->status != 0) {
-                $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                  $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
                       'dailymotion_published' => 1,
                       'is_replace' => 0,
@@ -887,6 +887,19 @@ function itg_videogallery_node_insert($node) {
                   ->execute();
             }
           }
+          
+           if ($node->status == 0 && $draft_msg_flag == 1 && $node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+                   $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                    ->fields(array(
+                      'dailymotion_published' => 0,
+                      'is_draft' => 1,
+                      'node_is_save_draft' => 1
+                    ))
+                    ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                    ->execute();
+                // Upadte video is publish on solr
+                itg_videogallery_update_video_info_solr($file_video[0]->solr_video_id);
+        }
         }
         if ($node->status == 0 && $draft_msg_flag == 1 && $node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
           drupal_set_message(t('The video is not published. It will auto published once it published on Daily motion.'));
@@ -961,6 +974,7 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
           'nid' => $node_id,
           'property' => VIDEO_PROPERTY,
           'content_type' => 'video_gallery',
+          'video_embedded_url' => $response['id'],
           'solr_video_duration' => $duration,
           'solr_video_size' => $file_details->filesize,
           'solr_video_thumb' => "",
@@ -3087,7 +3101,7 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
       if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
         foreach ($all_vid as $keyof => $dmvid_id) {
           $query = db_update('dailymotion_response_details');
-          $query->fields(array('is_draft' => 0));
+          $query->fields(array('is_draft' => 0 , 'node_is_save_draft' => 0));
           $query->condition('video_id', $dmvid_id, '=');
           $query->execute();
           itg_videogallery_update_video_info_solr($dmvid_id);
