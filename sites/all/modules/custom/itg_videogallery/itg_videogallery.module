@@ -2538,7 +2538,7 @@ function itg_videogallery_dm_embed() {
 function itg_videogallery_dailymotion_video_play() {
   $video_id = $_POST['videoid'];
   $width = 760;
-  $height = 460;
+  $height = '90%';
   if(isset($_POST['width']) && !empty($_POST['width'])) {
    $width = $_POST['width'];
   }
