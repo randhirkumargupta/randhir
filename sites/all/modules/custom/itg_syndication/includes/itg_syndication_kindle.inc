@@ -180,7 +180,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
             _kindle_save_unmanaged_file($cover_file, $directory_name);
             $cover_page_file = _create_cover_page_xml();
             _kindle_save_unmanaged_file($cover_page_file, $directory_name);
-            $manifest_file = _create_manifest_file($sections_name_array);
+            $manifest_file = _create_manifest_file($sections_name_array, $section_with_nids_array);
             _kindle_save_unmanaged_file($manifest_file, $directory_name);
             _create_section_file($section_with_nids_array, $directory_name);
             _create_tmp_zip("s3fs-public/kindle/$directory_name");
@@ -244,20 +244,22 @@ function _kindle_save_unmanaged_file($data_array = array(), $directory_name) {
  */
 function _create_section_file($section_with_nids = array(), $directory_name) {
     if(!empty($section_with_nids)) {
-        foreach($section_with_nids as $section_name => $node_array) {
+        $fresh_sections_with_nids = _get_sections_with_corrected_nids($section_with_nids);
+        itg_watchdog("sections_with_nids", array('old_sectinos' => $section_with_nids, "fresh" => $fresh_sections_with_nids));
+        foreach($fresh_sections_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
+            itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
             $xml .= "<channel>";
             $xml .= "<title>" . $section_name . "</title>";
             foreach($node_array as $nid) {
-                $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
-                $xml .="<item><link>" . $artical_file_name . "</link></item>";
                 $node_load_data = node_load($nid);
-                $expiry_time = strtotime($node_load_data->field_story_schedule_date_time['und'][0]['value']);
                 // Skip future date and unpublised story.
-                if($expiry_time < time() && $node_load_data->status) {
+                if(!is_expried_story($node_load_data) && !is_future_story($node_load_data)) {
+                    $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
+                    $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
                     _kindle_save_unmanaged_file($node_file, $directory_name);
                 }
@@ -270,6 +272,54 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             // Section file ended
         }
     }
+}
+
+function _get_sections_with_corrected_nids($section_with_nids) {
+    $fresh_section_array = array();
+    foreach($section_with_nids as $section_name => $node_array) {
+        $node_under_section = array();
+        foreach($node_array as $nid) {
+            $node_load_data = node_load($nid);
+            if(!is_expried_story($node_load_data) && !is_future_story($node_load_data)) {
+                $node_under_section[] = $nid;
+            }
+        }
+        if(count($node_under_section)) {
+            $fresh_section_array[$section_name] = $node_under_section;
+        }
+    }
+    return $fresh_section_array;
+}
+
+/**
+ * Story is expried or not.
+ *  
+ * @param array $node
+ * @return boolean
+ */
+function is_expried_story($node) {
+    $flag = FALSE;
+    $expiry_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
+    $checked = $node->field_story_expires['und'][0]['value'];
+    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes')) || $node->status == 0) {
+        $flag = TRUE;
+    }
+    return $flag;
+}
+
+/**
+ * Check story is future schedule or not.
+ * 
+ * @param array $node
+ * @return boolean
+ */
+function is_future_story($node) {
+    $flag = FALSE;
+    $schedule_time = strtotime($node->field_story_schedule_date_time['und'][0]['value']);
+    if($schedule_time > time()) {
+        $flag = TRUE;
+    }
+    return $flag;
 }
 
 /**
@@ -303,7 +353,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
             <du-key generation="1" key="GN3;5275646997;Amazon.4" />
             <doc.copyright holder="India Today" />
             <key-list>
-                <keyword key="" />
+                <keyword key="' . $node_data->metatags['und']['keywords']['value'] . '" />
             </key-list>
         </docdata>
         <pubdata type="print" date.publication="' . $current_time . '" item-length="" position.sequence="1" unit-of-measure="character" />
@@ -312,14 +362,14 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         <body.head>
             <hedline>
                 <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_headline ['und'][0]['value']) . '  ]]> </hl2>
+                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '  ]]> </hl2>
             </hedline>
             <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_headline ['und'][0]['value']) . ' ]]> </abstract>
+            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' ]]> </abstract>
         </body.head>
         <body.content>
-            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body ['und'][0]['value'])) . ' ]]> </block>
+            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body['und'][0]['value'])) . ' ]]> </block>
         </body.content>
         <body.end />
     </body>
@@ -346,7 +396,7 @@ function _formet_xml($xml) {
 function kindle_get_sections_for_node($nid) {
     try {
         $query = db_select('field_data_field_story_category', 'fdc');
-        $query->leftJoin('itg_category_manager' , 'cm' , 'cm.tid=fdc.field_story_category_tid');
+        $query->leftJoin('itg_category_manager', 'cm', 'cm.tid=fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = fdc.field_story_category_tid');
         $query->fields("fdc", array("field_story_category_tid"));
@@ -472,9 +522,11 @@ function _create_cover_page_xml() {
  * @param array $section_array
  * @return string
  */
-function _create_manifest_file($section_array = array()) {
+function _create_manifest_file($section_array = array(), $section_with_nids_array = array()) {
     $data = array();
     $data['file_name'] = 'manifest.xml';
+    $fresh_sections = array_keys(_get_sections_with_corrected_nids($section_with_nids_array));
+    itg_watchdog("sections_with_nids", array($fresh_sections, $section_array));
     if(!empty($section_array)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
         $xml = "<?xml version='1.0' encoding='utf-8'?><rss version='2.0'>";
@@ -486,9 +538,11 @@ function _create_manifest_file($section_array = array()) {
         $xml .="<link>Cover.xml</link>";
         $xml .= "</item>";
         foreach($section_array as $section) {
-            $xml .= "<item>";
-            $xml .="<link>Section_" . _get_correct_file_name($section) . ".xml</link>";
-            $xml .= "</item>";
+            if(in_array($section, $fresh_sections)) {
+                $xml .= "<item>";
+                $xml .="<link>Section_" . _get_correct_file_name($section) . ".xml</link>";
+                $xml .= "</item>";
+            }
         }
         $xml .= "</channel>";
         $xml .="</rss>";

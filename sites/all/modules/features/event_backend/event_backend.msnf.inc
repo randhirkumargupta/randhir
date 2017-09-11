@@ -90,8 +90,7 @@ function event_backend_msnf_step_info() {
       6 => 'field_story_expiry_date',
       7 => 'field_story_kicker_text',
       8 => 'field_registration_date_checkbox',
-      9 => 'field_story_node_identity',
-      10 => 'title',
+      9 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -230,14 +229,14 @@ function event_backend_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Step3-Program Schedule',
+    'label' => 'Step3-Programme Schedule',
     'weight' => '2',
     'children' => array(
       0 => 'field_program_schedule',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Step3-Program Schedule',
+      'label' => 'Step3-Programme Schedule',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
