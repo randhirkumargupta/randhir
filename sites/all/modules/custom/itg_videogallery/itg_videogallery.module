@@ -856,7 +856,7 @@ function itg_videogallery_node_insert($node) {
               // Update embed code for this vidoe in table
               itg_videogallery_update_embedcode_url($file_video[0]->solr_video_id);
               if ($node->status != 0) {
-                $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                  $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
                     ->fields(array(
                       'dailymotion_published' => 1,
                       'is_replace' => 0,
@@ -887,6 +887,20 @@ function itg_videogallery_node_insert($node) {
                   ->execute();
             }
           }
+          
+           if ($node->status == 0 && $draft_msg_flag == 1 && $node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
+                   $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                    ->fields(array(
+                      'dailymotion_published' => 0,
+                      'is_draft' => 1,
+                      'nid' => $node_id,
+                      'node_is_save_draft' => 1
+                    ))
+                    ->condition('video_id', $file_video[0]->solr_video_id, '=')
+                    ->execute();
+                // Upadte video is publish on solr
+                itg_videogallery_update_video_info_solr($file_video[0]->solr_video_id);
+        }
         }
         if ($node->status == 0 && $draft_msg_flag == 1 && $node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
           drupal_set_message(t('The video is not published. It will auto published once it published on Daily motion.'));
@@ -966,6 +980,7 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
           'solr_video_thumb' => "",
         ))
         ->execute();
+    itg_videogallery_update_embedcode_url($response['id']);
   }
 }
 
@@ -2838,6 +2853,7 @@ function itg_videogallery_cronapi($op, $job = NULL) {
  * Implements cron function for get thumburl in dailymotion custom table
  */
 function itg_videogallery_thumb_url() {
+  itg_videogallery_publish_node_after_video_ready_by_dm();
   itg_videogallery_remove_video_id_parent_site_delete_or_unpublish();
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
@@ -3081,13 +3097,11 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     }
 
     if ($node_flag == 0) {
-
-
       $node = node_load($video_id->nid);
       if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
         foreach ($all_vid as $keyof => $dmvid_id) {
           $query = db_update('dailymotion_response_details');
-          $query->fields(array('is_draft' => 0));
+          $query->fields(array('is_draft' => 0 , 'node_is_save_draft' => 0));
           $query->condition('video_id', $dmvid_id, '=');
           $query->execute();
           itg_videogallery_update_video_info_solr($dmvid_id);
@@ -3124,7 +3138,6 @@ function itg_videogallery_send_video_exception_notification($nid, $video_ids) {
   $getuser_info = user_load($node->uid);
   $name = ucfirst($getuser_info->field_first_name[LANGUAGE_NONE][0]['value']) . ' ' . ucfirst($getuser_info->field_last_name[LANGUAGE_NONE][0]['value']);
   $email = $getuser_info->email;
-
   $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
   $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
