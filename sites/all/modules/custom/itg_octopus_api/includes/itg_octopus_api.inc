@@ -247,7 +247,7 @@ function itg_octopus_api_rundown_listing() {
       ->fields('r', array('rundown_id'));
   $result = $query->execute()->rowCount();
 
- 
+
   $pagination = '';
   $current_rundown = '';
 
@@ -291,7 +291,7 @@ function itg_octopus_api_rundown_listing() {
   $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
   $query->join('itg_element_clip', 'clip', 'clip.storyid=ios.storyid');
   $query->fields('ios');
-  $query->fields('clip',array('text'));
+  $query->fields('clip', array('text'));
 
   if (isset($_GET['title']) && !empty($_GET['title'])) { // Title
     $query->condition('ios.story_title', $_GET['title'], '=');
@@ -928,6 +928,7 @@ function itg_octopus_add_dm_response_details($response, $result) {
           'channel' => $response['channel'],
           'fid' => $response['fid'],
           'tags' => ' ',
+          'video_type' => 'DM',
           'video_id' => $response['video_id'],
           'nid' => 0,
           'video_size' => $response['video_size'],
