@@ -908,6 +908,8 @@ if (!empty($content)):
 
 
         <div class="section-left-bototm">
+          <a title = "Submit Your Story" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a>
+
           <div class="social-list">
             <ul>
               <?php if ($user->uid > 0): ?>
@@ -983,12 +985,12 @@ if (!empty($content)):
               if (isset($node->field_story_itg_tags['und'])) {
                 foreach ($node->field_story_itg_tags['und'] as $tags) {
                   $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
-                  if ($published_tag == 'Published') {
+                  //if ($published_tag == 'Published') {
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
                     print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
-                  }
+                  //}
                 }
               }
               ?>

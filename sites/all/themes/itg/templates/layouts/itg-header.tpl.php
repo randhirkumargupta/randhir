@@ -30,7 +30,15 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
 </div>                               
 
 <div class="head-live-tv desktop-hide">
-  <ul>
+  <ul>    
+    <li class="search-icon-parent">
+      <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+      <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+      <div class="globle-search">
+        <input class="search-text" placeholder="Type here" type="text" value="" />
+      </div>
+    </li>
+    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
     <li> 
       <?php
         if ($_GET['q'] != 'user') {
@@ -50,14 +58,6 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
       <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
       <?php print render($block['content']); ?> 
     </li>
-    <li class="search-icon-parent">
-      <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
-      <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
-      <div class="globle-search">
-        <input class="search-text" placeholder="Type here" type="text" value="" />
-      </div>
-    </li>
-    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
   </ul>
 </div>
 <div class="itg-logo-container">

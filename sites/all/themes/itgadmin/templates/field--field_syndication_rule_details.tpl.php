@@ -8,11 +8,19 @@ foreach ($field_collection_data as $data) {
   echo "<th>Select Content Type: </th>";
   echo "<td>" . $data['content_type'] . "</td>";
   echo "</tr>";
-  echo "<tr>";
-  echo "<th>Select Section: </th>";
-  echo "<td>" . $data['section'] . "</td>";
-  echo "</tr>";
-  echo "<tr>";
+  if($data['content_type'] != 'magazine') {
+    echo "<tr>";
+    echo "<th>Select Section: </th>";
+    echo "<td>" . $data['section'] . "</td>";
+    echo "</tr>";
+    echo "<tr>";
+  } else {
+    echo "<tr>";
+    echo "<th>Magazine: </th>";
+    echo "<td>" . $data['feed_magazine'] . "</td>";
+    echo "</tr>";
+    echo "<tr>";
+  }
   echo "<th>Select Feed type: </th>";
   echo "<td>" . $data['feed_type'] . "</td>";
   echo "</tr>";

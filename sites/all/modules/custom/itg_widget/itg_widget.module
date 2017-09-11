@@ -40,7 +40,7 @@ function itg_widget_init() {
   $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
   $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
   drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));   
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
 }
 
 /**
@@ -193,6 +193,11 @@ function itg_widget_menu() {
     'page callback' => 'itg_update_analystics_node_count_data',
     'type' => MENU_CALLBACK,
     'access arguments' => array('administer nodequeue'),
+  );
+  
+  $items['itg_widget_remove_unpublised_node'] = array(
+    'page callback' => 'itg_widget_remove_unpublised_node',
+    'type' => MENU_CALLBACK,
   );
 
 
@@ -1049,28 +1054,41 @@ function itg_widget_remove_unpublised_node() {
       ->fields('n', array('nid'))
       ->condition('n.status', 0);
   $data = $select_node->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $order_re_order_widgtes = array(
-    '\'personalization_widget\'',
-    '\'issue_magazin_widget\'',
-    '\'yearender_left_news_video\'',
-    '\'special_auto_review_content\'',
-    '\'most_read_content\'',
-    '\'feature_content_by_section\'',
-    '\'special_how_made_it_content\'',
-    '\'poll_widget\'',
-    '\'section_wise_widget\'',
-    '\'dont_miss_content_widget\'',
-    '\'we_may_suggest_widget\'',
-    '\'big_story_format_widget\'',
-    '\'so_sorry_widget\'',
+    $widgtes = array(
+    'personalization_widget',
+    'issue_magazin_widget',
+    'yearender_left_news_video',
+    'special_auto_review_content',
+    'most_read_content',
+    'feature_content_by_section',
+    'special_how_made_it_content',
+    'poll_widget',
+    'section_wise_widget',
+    'dont_miss_content_widget',
+    'we_may_suggest_widget',
+    'big_story_format_widget',
+    'so_sorry_widget',
+    'watch_right_now_widget',
+    'top_takes_video_widget',
+    'trending_videos_widget',
+    'top_stories_widget',
+    'dont_miss_content_widget',
+    'poll_widget',
+    'photo_carousel_list_widget',
   );
   $strg = implode(',', $order_re_order_widgtes);
   foreach ($data as $nids) {
     $nid = $nids['nid'];
-    $delete_query = "DELETE from {itg_widget_order} where nid = '" . $nid . "' and widget in ($strg)";
-    db_query($delete_query);
-    $delete_query_section = "DELETE from {itg_widget_order_section} where nid = '" . $nid . "' and widget in ($strg)";
-    db_query($delete_query_section);
+        foreach($widgtes as $widget) {
+            db_delete('itg_widget_order')
+            ->condition("nid" , $nid)
+            ->condition("widget" , $widget)
+            ->execute();
+            db_delete('itg_widget_order_section')
+            ->condition("nid" , $nid)
+            ->condition("widget" , $widget)
+            ->execute();
+        }
   }
 }
 
@@ -1183,30 +1201,30 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         <div id="videoplayer_<?php echo $keys; ?>"></div> 
         <script type="text/javascript">
             jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-            playlist: [{
-            title: "<?php print $row['title']; ?>",
-            image: "<?php echo $image_url; ?>",
-            sources: [
-            {
-            file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-            }]
-            }],
-            primary: "flash",
-            width: "100%",
-            aspectratio: "16:9",
-            stretching: "exactfit",
-            androidhls: "true",
-            fallback: "false",
-            hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-            advertising: {
-            client: "vast",
-            skipoffset: 5,
-            schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
+                playlist: [{
+                        title: "<?php print $row['title']; ?>",
+                        image: "<?php echo $image_url; ?>",
+                        sources: [
+                            {
+                                file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+                            }]
+                    }],
+                primary: "flash",
+                width: "100%",
+                aspectratio: "16:9",
+                stretching: "exactfit",
+                androidhls: "true",
+                fallback: "false",
+                hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+                advertising: {
+                    client: "vast",
+                    skipoffset: 5,
+                    schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
 
-            },
-            ga: {
-            idstring: "<?php print $row['title']; ?>",
-            }
+                },
+                ga: {
+                    idstring: "<?php print $row['title']; ?>",
+                }
             });
         </script>
     </div>

@@ -247,17 +247,17 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
         foreach($section_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
+            itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
             $xml .= "<channel>";
             $xml .= "<title>" . $section_name . "</title>";
             foreach($node_array as $nid) {
-                $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
-                $xml .="<item><link>" . $artical_file_name . "</link></item>";
                 $node_load_data = node_load($nid);
-                $expiry_time = strtotime($node_load_data->field_story_schedule_date_time['und'][0]['value']);
                 // Skip future date and unpublised story.
-                if($expiry_time < time() && $node_load_data->status) {
+                if(!is_expried_story($node_load_data) && !is_future_story($node_load_data)) {
+                    $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
+                    $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
                     _kindle_save_unmanaged_file($node_file, $directory_name);
                 }
@@ -270,6 +270,37 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             // Section file ended
         }
     }
+}
+
+/**
+ * Story is expried or not.
+ *  
+ * @param array $node
+ * @return boolean
+ */
+function is_expried_story($node) {
+    $flag = FALSE;
+    $expiry_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
+    $checked = $node->field_story_expires['und'][0]['value'];
+    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes')) || $node->status == 0) {
+        $flag = TRUE;
+    }
+    return $flag;
+}
+
+/**
+ * Check story is future schedule or not.
+ * 
+ * @param array $node
+ * @return boolean
+ */
+function is_future_story($node) {
+    $flag = FALSE;
+    $schedule_time = strtotime($node->field_story_schedule_date_time['und'][0]['value']);
+    if($schedule_time > time()) {
+        $flag = TRUE;
+    }
+    return $flag;
 }
 
 /**
@@ -290,7 +321,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
         $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
         $node_data = node_load($node_id);
-        $bylines = _get_byline_from_nid($node_id);
+        $bylines = _get_byline_from_nid_for_kindle($node_id);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
@@ -312,14 +343,14 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         <body.head>
             <hedline>
                 <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . '  ]]> </hl2>
+                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '  ]]> </hl2>
             </hedline>
             <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_magazine_kicker_text ['und'][0]['value']) . ' ]]> </abstract>
+            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' ]]> </abstract>
         </body.head>
         <body.content>
-            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body ['und'][0]['value'])) . ' ]]> </block>
+            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body['und'][0]['value'])) . ' ]]> </block>
         </body.content>
         <body.end />
     </body>
@@ -346,12 +377,14 @@ function _formet_xml($xml) {
 function kindle_get_sections_for_node($nid) {
     try {
         $query = db_select('field_data_field_story_category', 'fdc');
+        $query->leftJoin('itg_category_manager', 'cm', 'cm.tid=fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = fdc.field_story_category_tid');
         $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = fdc.field_story_category_tid');
         $query->fields("fdc", array("field_story_category_tid"));
         $query->fields("td", array("name"));
         $query->condition('fdc.entity_id', $nid);
         $query->condition('th.parent', 0);
+        $query->condition('cm.status', 1);
         $result = $query->execute()->fetchAllAssoc('name');
     } catch(Exception $ex) {
         drupal_set_message($ex->getMessage(), 'error');
@@ -363,6 +396,8 @@ function kindle_get_sections_for_node($nid) {
             $section_name[] = $section;
         }
         return $section_name;
+    } else {
+        return array();
     }
 }
 
