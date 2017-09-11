@@ -961,12 +961,12 @@ function itg_content_inactive() {
   $current_time = date("Y-m-d H:i:s");
   //set content type
   //$content_type = array('story', 'videogallery'); 
-  $content_type = array('videogallery');
+  $content_type = array('videogallery' , "story" , "photogallery");
   
   $itg_query = db_select('node', 'n');
+  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('n', array('nid'));
-  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->condition('n.type', $content_type, 'IN');
   $itg_query->condition('n.status', 1);
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
@@ -976,7 +976,7 @@ function itg_content_inactive() {
     $node = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
     $node->status = 0;
-    if($node->status == 'videogallery') {
+    if($node->type == 'videogallery') {
       if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
         itg_videogallery_node_publish_to_unpublish($node->nid);
       }
@@ -984,7 +984,8 @@ function itg_content_inactive() {
     node_save($node);
     itg_widget_handle_unpublished_node($node->nid);
   }
-  watchdog("cron content expiry", '<pre>' . print_r($nodeid, TRUE) . '</pre>');
+  itg_watchdog("nodes_expiry" , $nodeid);
+  //watchdog("cron content expiry", '<pre>' . print_r($nodeid, TRUE) . '</pre>');
 }
 
 /**
