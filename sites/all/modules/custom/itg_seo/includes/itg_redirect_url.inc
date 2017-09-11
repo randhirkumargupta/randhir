@@ -94,3 +94,56 @@ function itg_get_parents_taxonomy($tid) {
   $itg_result = $itg_query->execute()->fetchField();
   return $itg_result;
 }
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
+  $old_content_id = '';
+  
+  if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
+    $old_content_id = $_GET['sId'];
+  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
+      $old_content_id = '200'.$_GET['id'];
+  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
+      $old_content_id = $_GET['id'];
+  }
+  
+  //code for url redirection
+  if (!empty($old_content_id)) {
+    $content_id = get_new_content_id_by_migrated_id($old_content_id, 'story');   
+    $alias = get_redirect_url($content_id);
+    if (isset($alias)) {
+      drupal_goto($alias);
+    }
+     drupal_not_found();
+     drupal_exit();
+  }
+  
+}
+
+/**
+ * get new content id of itg by old content id
+ * @param int $sourceid
+ * @param string $type
+ * @return int new content id
+ */
+function get_new_content_id_by_migrated_id($sourceid, $type) {
+  $query = db_select('field_data_field_story_source_id', 'ssi');
+  $query->fields('ssi', array('entity_id'));  
+  $query->condition('field_story_source_id_value', $sourceid);
+  $query->condition('bundle', $type);
+  
+  return $query->execute()->fetchField();
+}
+
+/**
+ * get $alias
+ * @param int $sourceid
+ * @param string $type
+ * @return int new content id
+ */
+function get_redirect_url($content_id) {
+  $alias = drupal_get_path_alias('node/'.$content_id);
+  return $alias; 
+}

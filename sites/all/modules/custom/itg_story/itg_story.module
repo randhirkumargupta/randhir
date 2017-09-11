@@ -75,7 +75,7 @@ function itg_story_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  
+
   $items['admin/config/administration/sponsor_category'] = array(
     'title' => 'Sponsor Category Setting',
     'description' => 'Sponsor Category Setting',
@@ -84,6 +84,15 @@ function itg_story_menu() {
     'access callback' => 'user_access',
     'access arguments' => array('administer users'),
     'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['itg-story-load-follow-story'] = array(
+    'title' => 'Akamai load follow story',
+    'description' => 'Akamai Load follow story',
+    'page callback' => 'itg_story_load_follow_story',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_story.helper.inc',
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -150,6 +159,11 @@ function itg_story_theme($existing, $type, $theme, $path) {
       'template' => 'story-node-form',
       'path' => drupal_get_path('module', 'itg_story') . '/templates',
       'render element' => 'form',
+    ),
+    'itg_story_load_follow_story' => array(
+      'template' => 'itg-story-load-follow-story',
+      'path' => drupal_get_path('module', 'itg_story') . '/templates',
+      'variables' => array('data' => NULL),
     ),
   );
 
@@ -271,12 +285,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  if($form_state['input']['op'] == 'Apply') {
-     if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
+  if ($form_state['input']['op'] == 'Apply') {
+    if ($form_state['node']->status == '1') {
+      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+      $_GET['destination'] = $redirect_path;
+      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
   }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
@@ -322,9 +336,9 @@ function itg_story_form_custom_callback($form, &$form_state) {
   }
 
   //if ($form_state['input']['op'] != 'Save as Draft') {
-    if (function_exists('itg_custom_message')) {
-      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
-    }
+  if (function_exists('itg_custom_message')) {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
+  }
   //}
 }
 
@@ -421,7 +435,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
     $form_state['values']['field_story_short_headline'][LANGUAGE_NONE][0]['value'] = $form_state['input']['field_story_short_headline'][LANGUAGE_NONE][0]['value'];
     // end here
     $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
-    $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
+    $magazine_kicker = $node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'];
     $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
 
     // code to validation magazine field when issue based story is checked
@@ -431,7 +445,11 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based) && empty($magazine_kicker)) {
-      form_set_error('field_story_magazine_kicker_text', t("Magazine kicker text is required"));
+      form_set_error('field_story_magazine_headline', t("Magazine kicker text is required"));
+    }
+    $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
+    if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
+      form_set_error('field_story_external_url', t("$external_url is not a valid URL"));
     }
 
     $redirection_url = $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'];
@@ -480,7 +498,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
-  
+
   // apply button for editor and siteadmin role
   if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
@@ -493,7 +511,7 @@ function itg_story_after_build($form, &$form_state) {
       );
     }
   }
-  
+
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
   }
@@ -516,7 +534,7 @@ function itg_story_after_build($form, &$form_state) {
   unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
 
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
-  $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
+  $form['field_story_magazine_headline']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
 
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -664,7 +682,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   );
 
   // code for Magazine kicker * field show and hide
-  $form['field_story_magazine_kicker_text']['#states'] = array(
+  $form['field_story_magazine_headline']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
     ),
@@ -673,12 +691,6 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     )
   );
 
-  // code for Magazine Headline * field show and hide
-  $form['field_story_magazine_headline']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
-    )
-  );
   // facebook instant Article
   $form['field_facebook_instant_audio_url']['#states'] = array(
     'visible' => array(
@@ -863,6 +875,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
+    if ($external_url = _is_external_url_story_article($node->nid)) {
+      drupal_goto($external_url);
+    }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if (function_exists('itg_get_related_content')) {
@@ -914,7 +929,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     else {
       $node->content['story_title'] = $node->title;
     }
-    
+
     // code for amp page
     if ($view_mode == 'amp') {
       // emoji posititon
@@ -1056,11 +1071,11 @@ function itg_story_photo_story_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">'.$getImageInfo[0]->image_photo_grapher.'</span></div>' . $previous_link;
-      $html .= '<div class="photo-description">'.$getImageInfo[0]->image_caption.'</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
+      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">' . $getImageInfo[0]->image_photo_grapher . '</span></div>' . $previous_link;
+      $html .= '<div class="photo-description">' . $getImageInfo[0]->image_caption . '</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }
     $html .= '</div>';
@@ -1098,7 +1113,7 @@ function itg_story_photo_amp_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
@@ -1139,7 +1154,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">'.$slide.'</span>
+       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
     </button>';
       $index++;
       $slide++;
@@ -1219,18 +1234,47 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
 
 /**
  * Function for admin setting for sponsor category.
- */ 
+ */
 function _sponsor_category_setting() {
   $form = array();
   $form['sponsor_cat_tid'] = array(
-   '#type' => 'textfield',
-   '#title' => t('Sponsor Category TID'),
-   '#default_value' => variable_get('sponsor_cat_tid', 1208902),
-   '#size' => 10,
-   '#maxlength' => 10,
-   '#description' => t("Enter TID for Sponsor Category"),
-   '#required' => TRUE,
+    '#type' => 'textfield',
+    '#title' => t('Sponsor Category TID'),
+    '#default_value' => variable_get('sponsor_cat_tid', 1208902),
+    '#size' => 10,
+    '#maxlength' => 10,
+    '#description' => t("Enter TID for Sponsor Category"),
+    '#required' => TRUE,
   );
 
   return system_settings_form($form);
+}
+
+/**
+ * Function for check external url in story
+ * @return false or external url
+ */
+function _is_external_url_story_article($nid) {
+  $is_external_url = FALSE;
+  if (isset($nid)) {
+    if (db_table_exists('field_data_field_story_external_url')) {
+      $type_query = db_select('node', 'n');
+      $type_query->fields('n', array('type'));
+      $type_query->condition('n.nid', $nid, '=');
+      $node_type = $type_query->execute()->fetchField();
+      if ($node_type == 'story') {
+        $query = db_select('field_data_field_story_external_url', 'eu');
+        $query->fields('eu', array('field_story_external_url_value'));
+        $query->isNotNull('eu.field_story_external_url_value');
+        $query->condition('eu.entity_id', $nid, '=');
+        $query->condition('eu.bundle', 'story', '=');
+        $query->condition('eu.entity_type', 'node', '=');
+        $query_result = $query->execute()->fetchAll();
+        if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+          $is_external_url = trim($query_result[0]->field_story_external_url_value);
+        }
+      }
+    }
+  }
+  return $is_external_url;
 }

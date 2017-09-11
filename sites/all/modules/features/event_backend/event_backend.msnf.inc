@@ -90,7 +90,8 @@ function event_backend_msnf_step_info() {
       6 => 'field_story_expiry_date',
       7 => 'field_story_kicker_text',
       8 => 'field_registration_date_checkbox',
-      9 => 'title',
+      9 => 'field_story_node_identity',
+      10 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(

@@ -77,6 +77,12 @@ function itg_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__poll';
     $variables['poll_form'] = itg_poll_get_all_current_poll();
   }
+
+  // code start for Akamai Puposes (Self refresh content)
+  if ($variables['type'] == 'story') {
+    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/story_altr.js');
+  }
+  // Code ends for Akamai Purposes (Self refresh content)
 }
 
 /**
@@ -108,10 +114,12 @@ function itg_preprocess_comment(&$variables) {
       $user = user_load($comment->uid);
       if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
         $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
-      } else {
+      }
+      else {
         $submit_name = $variables['author'];
       }
-    } else {
+    }
+    else {
       $submit_name = $variables['author'];
     }
     $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
@@ -220,19 +228,26 @@ function itg_preprocess_page(&$variables) {
 function itg_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
   $crumbs = '';
-  if (!empty($breadcrumb) && arg(0) == 'topic') {
+  if (!empty($breadcrumb) && (arg(0) == 'topic' || arg(0) == 'advance_search')) {
     $crumbs = '<div id="breadcrumbs"><ul><li></li>';
     foreach ($breadcrumb as $value) {
       $crumbs .= '<li>' . $value . '</li>';
     }
 
-    if (arg(0) == 'topic') {
-      if (!empty($_GET['keyword'])) {
-        $keyword = '<li>' . $_GET['keyword'] . '</li>';
+    if (arg(0) == 'topic' || arg(0) == 'advance_search') {
+      if (!empty(arg(1)) || !empty($_GET['keyword'])) {
+        if (arg(0) == 'topic') {
+          $s_name = arg(1);
+        }
+        else if (arg(0) == 'advance_search') {
+          $s_name = $_GET['keyword'];
+        }
+        $keyword = '<li>' . $s_name . '</li>';
       }
 
       $crumbs .= '<li>Search</li>' . $keyword . '</li></ul></div>';
-    } else {
+    }
+    else {
       $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
     }
   }
@@ -268,7 +283,7 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-  
+
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
@@ -276,7 +291,7 @@ function itg_html_head_alter(&$head_elements) {
     if ($arg_data->type == 'page' && $arg_data->nid == 2) {
       // canonical for home page
       $path = current_path();
-      $path_alias = drupal_lookup_path('alias',$path);
+      $path_alias = drupal_lookup_path('alias', $path);
       $home_canonical = $base_url . '/' . $arg_data->path['alias'];
       $head_elements['canonical'] = array(
         '#type' => 'html_tag',
@@ -296,7 +311,7 @@ function itg_html_head_alter(&$head_elements) {
         );
       }
     }
-    
+
     if ($arg_data->type == 'videogallery') {
       if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
@@ -312,7 +327,8 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'photogallery') {
+    }
+    else if ($arg_data->type == 'photogallery') {
       if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
         foreach ($configurableopt as $key => $value) {
@@ -327,7 +343,8 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'podcast') {
+    }
+    else if ($arg_data->type == 'podcast') {
       if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
         foreach ($configurableopt as $key => $value) {
@@ -342,7 +359,8 @@ function itg_html_head_alter(&$head_elements) {
           );
         }
       }
-    } else if ($arg_data->type == 'story') {
+    }
+    else if ($arg_data->type == 'story') {
       if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
         foreach ($configurableopt as $key => $value) {
@@ -363,7 +381,8 @@ function itg_html_head_alter(&$head_elements) {
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
     $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
-  } else {
+  }
+  else {
     if ($arg[0] == 'node' && is_numeric($arg[1])) {
       $node = node_load($arg[1]);
       $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
@@ -377,7 +396,8 @@ function itg_html_head_alter(&$head_elements) {
           ),
         );
       }
-    } elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+    }
+    elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
       $term = taxonomy_term_load($arg[2]);
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
@@ -446,10 +466,10 @@ function itg_link($variables) {
       $variables['options']['attributes']['rel'] = 'nofollow';
       $variables['options']['attributes']['target'] = '_blank';
       $variables['options']['attributes']['class'][] = 'itg-sponsored';
-    }    
+    }
   }
   // If url alias is used.
-  elseif ((isset($url_path)) && (strpos(drupal_get_normal_path($url_path), 'node/' ) !== FALSE)) {
+  elseif ((isset($url_path)) && (strpos(drupal_get_normal_path($url_path), 'node/') !== FALSE)) {
     $normal_path = drupal_get_normal_path($url_path);
     $node_path = explode('/', $normal_path);
     $nid = $node_path[1];
@@ -460,7 +480,7 @@ function itg_link($variables) {
     }
   }
   // If url is used with base url.
-  elseif ((isset($url_path)) && (strpos(_get_int_path_from_url($url_path), 'node/' ) !== FALSE)) {
+  elseif ((isset($url_path)) && (strpos(_get_int_path_from_url($url_path), 'node/') !== FALSE)) {
     $normal_path = _get_int_path_from_url($url_path);
     $node_path = explode('/', $normal_path);
     $nid = $node_path[1];
@@ -470,7 +490,25 @@ function itg_link($variables) {
       $variables['options']['attributes']['class'][] = 'itg-sponsored';
     }
   }
-  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+  // If External url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];
+    if ($external_url = _is_external_url_story_article($nid)) {
+      global $base_url;
+      $link_target = '_self';
+      $baseurl = preg_replace('#^https?://#', '', $base_url);
+      $baseurl = preg_replace('#^http?://#', '', $baseurl);
+      if (strpos($external_url, $baseurl) === false) {
+        $link_target = '_blank';
+        $variables['options']['attributes']['rel'] = 'nofollow';
+      }
+      $variables['path'] = $external_url;
+      $variables['options']['attributes']['target'] = $link_target;
+    }
+  }
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
 
 /**
@@ -480,14 +518,13 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-    //itg theme JS alter    
-   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
-   //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+  //itg theme JS alter    
+  $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
+  //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
 }
-

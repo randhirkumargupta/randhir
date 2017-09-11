@@ -29,10 +29,27 @@ $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('h:i:s', $node->created);
 $coverage_start_date = $blog_created_date.'T'.$blog_created_time;
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
+
+if(empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
+if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
+      foreach ($node->field_breaking_content_details['und'] as $blog_item) {
+        $collection_ids[] = $blog_item['value'];
+      }
+}
+$last_item = end($collection_ids);
+$first_item = reset($collection_ids);
+
+$entity = entity_load('field_collection_item', array($last_item));
+$last_cov_tm = explode(" ", $entity[$last_item]->field_breaking_publish_time['und'][0]['value']);
+$coverage_end_date = $last_cov_tm[0];
+$coverage_end_time = $last_cov_tm[1];
+$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+} else {
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('h:i:s', $coverage_end);
 $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+}
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
     <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
@@ -50,14 +67,12 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         $field_collection_embed_id = $breaking_embed_item;
         $entity = entity_load('field_collection_item', array($field_collection_embed_id));
         $title = $entity[$field_collection_embed_id]->field_breaking_tile['und'][0]['value'];
-        $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        //$embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
         $created_date = date('Y-m-d H:i:s', $node->created);
         $modify_date = date('Y-m-d H:i:s', $node->changed);
       
 ?>
-
-                
-            
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                         <p itemprop="headline" content="<?php print $node->title; ?>"></p>
                         <h2 itemprop="articleBody" style="display:none"><strong><?php print $embed_display_time;?> IST: </strong><?php print $title; ?></h2>
@@ -186,7 +201,12 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
       if($source_type != 'migrated') {
       rsort($field_collection_ids);
       }
-
+      // code for slider first/ last time
+        $slider_last_item = entity_load('field_collection_item', array(reset($field_collection_ids)));
+        $slider_last_time = date("H:i", strtotime($slider_last_item[reset($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
+        $slider_first_item = entity_load('field_collection_item', array(end($field_collection_ids)));
+        $slider_first_time = date("H:i", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
+        
       foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
         $field_collection_id = $breaking_item;
@@ -206,6 +226,7 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
         else {
           $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
         }
+        
         //if ($pub_time2 < $current_time) {
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($field_collection_ids) . '"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
           $breaking_output .= '<div class="breaking-discription">' . $redirection_url . '</div><div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a title="share on facebook" onclick="fbpop(' . "'" . $share_page_link . "'" . ', ' . "'" . $fb_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick="twitter_popup(' . "'" . urlencode($fb_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $share_page_link . "'" . ')" class="user-activity google def-cur-pointer"></a></li></ul></div>';

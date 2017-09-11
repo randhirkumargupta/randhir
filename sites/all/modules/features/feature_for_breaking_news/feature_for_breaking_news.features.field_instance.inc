@@ -359,7 +359,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'field_collection',
+      'module' => 'field_collection_fieldset',
       'settings' => array(
         'collapsed' => 1,
         'field_as_label' => '',
@@ -367,7 +367,7 @@ function feature_for_breaking_news_field_default_field_instances() {
         'new_item_open' => 1,
         'replace_label' => 0,
       ),
-      'type' => 'field_collection_embed',
+      'type' => 'field_collection_fieldset',
       'weight' => 3,
     ),
   );
@@ -406,7 +406,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'label' => 'Live Blog End Time',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',

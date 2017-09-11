@@ -1052,7 +1052,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1439,7 +1439,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1478,7 +1478,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -1509,7 +1509,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_e_event_banner',
     'label' => 'Event Banner',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -1532,6 +1532,8 @@ function event_backend_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1554,7 +1556,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -1597,7 +1599,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1641,7 +1643,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -1680,7 +1682,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -1723,7 +1725,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -1766,7 +1768,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 29,
+      'weight' => 30,
     ),
   );
 
@@ -1809,7 +1811,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 28,
+      'weight' => 29,
     ),
   );
 
@@ -1903,7 +1905,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 38,
@@ -2098,7 +2100,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 37,
@@ -2143,7 +2145,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 30,
+      'weight' => 31,
     ),
   );
 
@@ -2273,6 +2275,55 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-event_backend-field_individual_registration_fe'.
+  $field_instances['node-event_backend-field_individual_registration_fe'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Enter fees in INR',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_individual_registration_fe',
+    'label' => 'Individual Registration Fee',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '₹',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_news_title'.
   $field_instances['node-event_backend-field_news_title'] = array(
     'bundle' => 'event_backend',
@@ -2311,7 +2362,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 34,
+      'weight' => 35,
     ),
   );
 
@@ -2462,7 +2513,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 41,
@@ -2593,7 +2644,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 31,
+      'weight' => 32,
     ),
   );
 
@@ -2648,7 +2699,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 40,
@@ -2735,7 +2786,54 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 34,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_story_node_identity'.
+  $field_instances['node-event_backend-field_story_node_identity'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
     ),
   );
 
@@ -2819,7 +2917,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 35,
+      'weight' => 36,
     ),
   );
 
@@ -2858,7 +2956,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 32,
+      'weight' => 33,
     ),
   );
 
@@ -3069,6 +3167,7 @@ function event_backend_field_default_field_instances() {
   t('Menu Background Colour');
   t('Menu Font Colour');
   t('No. of Tickets');
+  t('Node Identity');
   t('Photo');
   t('Please add event highlights.');
   t('Please add event photos.');

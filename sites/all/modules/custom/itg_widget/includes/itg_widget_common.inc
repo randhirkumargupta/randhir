@@ -48,7 +48,7 @@ function itg_widget_setids() {
 }
 
 function remove_extra_data() {
-  db_query("ALTER TABLE  itg_syndication_manual_feed_details CHANGE  feed_file_path  feed_file_path TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Feed file path';")->execute();
+  //db_query("ALTER TABLE  itg_syndication_manual_feed_details CHANGE  feed_file_path  feed_file_path TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Feed file path';")->execute();
 }
 
 /**
@@ -1693,6 +1693,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
       }
     }
+    unset($query->table_queue['node_itg_widget_order']);
   }
   // Adding relationship.
   if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
