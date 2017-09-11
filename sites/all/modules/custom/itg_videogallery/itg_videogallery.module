@@ -974,12 +974,12 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
           'nid' => $node_id,
           'property' => VIDEO_PROPERTY,
           'content_type' => 'video_gallery',
-          'video_embedded_url' => $response['id'],
           'solr_video_duration' => $duration,
           'solr_video_size' => $file_details->filesize,
           'solr_video_thumb' => "",
         ))
         ->execute();
+    itg_videogallery_update_embedcode_url($response['id']);
   }
 }
 
@@ -3095,8 +3095,6 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
     }
 
     if ($node_flag == 0) {
-
-
       $node = node_load($video_id->nid);
       if ($node->field_op_flag[LANGUAGE_NONE][0]['value'] != 'draft') {
         foreach ($all_vid as $keyof => $dmvid_id) {
@@ -3138,7 +3136,6 @@ function itg_videogallery_send_video_exception_notification($nid, $video_ids) {
   $getuser_info = user_load($node->uid);
   $name = ucfirst($getuser_info->field_first_name[LANGUAGE_NONE][0]['value']) . ' ' . ucfirst($getuser_info->field_last_name[LANGUAGE_NONE][0]['value']);
   $email = $getuser_info->email;
-
   $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
   $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
