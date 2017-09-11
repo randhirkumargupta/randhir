@@ -141,11 +141,11 @@ function itg_autosave_nodeform($nid, $ctype) {
   
   // Check for event title in next step for event form
   if ($inputs['form_id'] == 'event_backend_node_form') {
-    if ($_GET['step'] != 'step_configuration') {
-      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
-    } else {
-      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
-    }
+//    if ($_GET['step'] != 'step_configuration') {
+//      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
+//    } else {
+//      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
+//    }
     if (function_exists('itg_common_get_node_title')) {
       $event_title = itg_common_get_node_title($arg[2]);
       if (isset($event_title) && !empty($event_title) && is_string($event_title)) {
