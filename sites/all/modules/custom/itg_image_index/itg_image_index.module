@@ -15,7 +15,7 @@
 function apachesolr_image_apachesolr_index_document_build($document, $node, $namespace) {
 
 // index orignal image urls
-    
+
     if (isset($node->status) && !empty($node->status)) {
         $document->addField('sm_field_node_status', $node->status);
     }
@@ -50,6 +50,12 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_field_custom_story_description_text', $itg_body);
         $document->addField('sm_field_custom_emoji', $node->field_emoji['und']['0']['value']);
         $document->addField('sm_field_custom_emoji_2', $node->field_emoji_2['und']['0']['value']);
+        
+    }
+     if (isset($node->type) && $node->type == 'itg_solr_video') {
+        //$itg_body = apachesolr_clean_text($node->body[$node->language][0]['value']);
+        $document->addField('sm_field_all_xml_content', $node->field_all_xml_content['und']['0']['value']);
+        
         
     }
     $type = array('story', 'photogallery', 'videogallery');

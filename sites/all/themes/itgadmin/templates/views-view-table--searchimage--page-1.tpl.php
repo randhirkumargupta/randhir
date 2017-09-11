@@ -36,7 +36,7 @@ $video_data = "";
         <div class="search-title-wraper">Title</div>
         <div class="search-size-wraper">Size</div>
         <div class="search-duration-wraper">Duration</div>
-        <div class="search-date-wraper">Date</div>
+        <div class="search-date-wraper">Video Time</div>
         <div class="search-image-wraper">Play</div>
     </div>
     <?php

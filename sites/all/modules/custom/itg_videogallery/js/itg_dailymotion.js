@@ -155,7 +155,7 @@
 
             });
 
-            
+
 
             // popup show hide
             $(".video-local").click(function () {
@@ -174,6 +174,16 @@
                 $('.video-local').removeClass('active');
                 $('.used-unused-select').val('unused');
                 $('.used-unused-select').trigger('change');
+
+            });
+            $(".internal-video-tab").click(function () {
+                $(".local_browse").hide();
+                $(".ftp-server").hide();
+                $(".ftp-server-internal").show();
+                $('#video_text_search').val('');
+                $(this).addClass('active');
+                $('.video-local').removeClass('active');
+                $('.video-ftp').removeClass('active');
 
             });
 

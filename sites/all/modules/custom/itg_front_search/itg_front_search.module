@@ -154,6 +154,16 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     );
  
   }
+  if((isset($form_state['view']->current_display) && ($form_state['view']->current_display == 'search_unpublish_internal_video_singal' || $form_state['view']->current_display == 'search_unpublish_internal_video'))) {
+    $video_publish_un_option = array('0' => 'Unpublished','1' => 'Published' );
+    
+    $form['sm_field_video_used'] = array(
+    '#type' => 'select',
+    '#options' => $video_publish_un_option,  
+       '#validated' => TRUE
+    );
+ 
+  }
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
     $arg = arg();
     $current_hash = variable_get('current_site_hash');

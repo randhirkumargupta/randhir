@@ -20,6 +20,8 @@ global $base_url;
  */
 ?>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
 <script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery-pagination-min.js"></script>
 <script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/bootstrap.min.js"></script>
 <script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.snippet.min.js"></script>
@@ -40,27 +42,31 @@ $video_data = "";
         <div class="search-image-wraper">Play</div>
     </div>
     <?php
-    $all_draft_video = itg_videogallery_get_all_draft_video_of_video_content();
     foreach ($rows as $id => $row) {
+      $image_path = $row['sm_field_video_thumb_url'];
+      if (empty($row['sm_field_video_thumb_url'])) {
+        $image_path = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
+      }
+      $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_all_xml_content'] . '#video_gallery#';
 
-      if ($row['sm_field_video_used'] == 1) {
-        if (VIDEO_PROPERTY == $row['sm_field_property']) {
-          if (!in_array($row['sm_field_video_id'], $all_draft_video)) {
-            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1';
-            if (!empty($row['sm_field_video_thumb_url'])) {
-              $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
-              $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
-              $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
-            }
-          }
-        }
-        else {
-          $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1';
-          if (!empty($row['sm_field_video_thumb_url'])) {
-            $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
+      if ($row['sm_field_video_used'] == 0 && VIDEO_PROPERTY == $row['sm_field_property']) {
+        $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
+        $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+        $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
+      }
+
+      if (VIDEO_PROPERTY != $row['sm_field_property']) {
+        if ($_GET['sm_field_video_used'] == "") {
+          if ($row['sm_field_video_used'] == 0) {
+            $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
             $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
             $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
           }
+        }
+        else {
+          $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
+          $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+          $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="radio" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title">' . $row['label'] . '</div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
         }
       }
     }
@@ -73,18 +79,19 @@ $video_data = "";
 
 </div>
 <script>
-
+  jQuery("#edit-sm-field-video-used option[value='']").remove();
+</script>
+<script>
   jQuery('.play-video').click(function () {
       var getvideo_id = $(this).attr('data-video-id');
       jQuery.ajax({
-          url: Drupal.settings.basePath + 'dailymotion-video-play',
+          url: Drupal.settings.basePath + 'internal-video-play',
           type: 'post',
           beforeSend: function (xhr) {
               jQuery('#widget-ajex-loader').show();
           },
-          data: {'videoid': getvideo_id,'width':400,'height':260},
+          data: {'videodata': getvideo_id, 'width': 400, 'height': 260},
           success: function (data) {
-
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
 
@@ -97,6 +104,3 @@ $video_data = "";
   });
 
 </script>
-
-
-

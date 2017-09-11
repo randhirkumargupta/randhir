@@ -74,6 +74,7 @@ jQuery(document).ready(function () {
     Drupal.behaviors.events = {
         attach: function (context, settings) {
             $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxStart(function () {
+              
                 if (jQuery('#edit-label').val() != "") {
                     jQuery('#widget-ajex-loader').show();
                     jQuery('#edit-label').attr("disabled", true);
@@ -420,9 +421,12 @@ jQuery(document).ready(function () {
                     type: 'post',
                     beforeSend: function (xhr) {
                         window.parent.jQuery('#widget-ajex-loader').show();
+                        $('.asso-filed-video').prop('disabled',true);
                     },
                     data: {'checkvalue': selected_check_boxes_values},
                     success: function (data) {
+                        $('.asso-filed-video').prop('disabled',false);
+                        jQuery("#video_iframe").contents().find('.video-checkbox-form').prop( "checked", false );
                         var as = JSON.parse(data);
                         var parsed = JSON.parse(data);
                         for (var x in parsed) {

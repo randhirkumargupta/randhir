@@ -78,7 +78,7 @@ $video_data = "";
     }
     echo '<div id="edit-video-browse-select">' . $video_data . '</div><div id="video_play_div"></div><script>jQuery("#edit-video-browse-select").easyPaginate({
 		paginateElement: ".ftp_video_radio",
-		elementsPerPage: 21,
+		elementsPerPage: 20,
 		effect: "climb"
 	});</script>';
     ?>
