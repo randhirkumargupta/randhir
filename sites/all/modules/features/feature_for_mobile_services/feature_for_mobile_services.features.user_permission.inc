@@ -15,6 +15,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'create client_service_association content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -26,6 +27,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'create clients_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -37,6 +39,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'create service_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -49,6 +52,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -133,6 +137,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit any client_service_association content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -144,6 +149,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit any clients_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -155,6 +161,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit any service_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -166,6 +173,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit any vas_service_content content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -177,6 +185,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit own client_service_association content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -188,6 +197,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit own clients_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -199,6 +209,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'name' => 'edit own service_creation content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
@@ -211,6 +222,7 @@ function feature_for_mobile_services_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Mobile VAS' => 'Mobile VAS',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
