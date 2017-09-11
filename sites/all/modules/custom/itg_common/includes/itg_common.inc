@@ -361,7 +361,14 @@ function itg_total_share_count($actual_link) {
   $fb_google_count = $fb_count = $google_count = 0;
 
   if (function_exists('itg_facebook_share_count')) {
-    $fb_count = itg_facebook_share_count($actual_link);
+    //$fb_count = itg_facebook_share_count($actual_link);
+    $query = db_select('itg_node_share_count', 'insc')
+        ->fields('insc', array('share_count'))
+        ->condition('insc.nid', $actual_link, '=');
+    $result = $query->execute()->fetchField();
+    if (!empty($result)) {
+      $fb_count = (int) $fb_count + (int) $result;
+    }
   }
 
   // get google share count

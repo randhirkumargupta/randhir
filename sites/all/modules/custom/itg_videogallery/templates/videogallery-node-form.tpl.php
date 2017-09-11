@@ -130,7 +130,7 @@
             </div>
 
             <div id="AkamaiSettings" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
+                <h2 class="story-title"><?php print t('Associate Video'); ?></h2>
                 <div class="itg-form-section hide">
                     <iframe id="video_iframe" src="<?php echo base_path() . 'solr-unpublish-video'; ?>" width="400" height="650"></iframe>
                     <?php //print views_embed_view('searchimage', 'solr_unpublish_video');
