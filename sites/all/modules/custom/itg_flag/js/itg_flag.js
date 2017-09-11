@@ -355,6 +355,7 @@ jQuery('.delete_class').click(function () {
     }
 });
 
+if (typeof is_mobile !== "undefined") {
 if (is_mobile) {
     jQuery('.follow-author').hide();
     jQuery('.follow-topics').hide();
@@ -368,4 +369,5 @@ if (is_mobile) {
         jQuery('.' + letter ).show().addClass('acti');
 
     });
+}
 }
