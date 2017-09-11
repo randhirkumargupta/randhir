@@ -48,7 +48,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       print $output;
       ?>
       <h2 class="block-title"><?php print t('Session wise coverage'); ?></h2>
-      <div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color; ?>">Program Schedule</div>
+      <div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>
       <?php
       print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
       foreach ($data as $key => $value) {
