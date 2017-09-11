@@ -399,6 +399,7 @@ function event_backend_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(),
       'allowed_values_function' => '',
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'list_text',
@@ -1252,6 +1253,7 @@ function event_backend_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(),
       'allowed_values_function' => '',
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'list_text',

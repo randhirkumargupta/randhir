@@ -786,15 +786,12 @@ function itg_print_team_association_custom_submit($form, &$form_state) {
  */
 function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
   $filtered_result = count($form['#substitutions']['#value']);
-  // remove dublicate.
   $views_bulk_operations = array_unique($form_state['values']['views_bulk_operations']);
   foreach ($views_bulk_operations as $bulk_key => $bulk_value) {
     if($bulk_value == 0) {
       unset($views_bulk_operations[$bulk_key]);
     }
   }
-  // Remove all 0 , as it is not a nodeid.
-  
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     foreach ($views_bulk_operations as $source_id) {
       if (!empty($source_id)) {
@@ -807,6 +804,25 @@ function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
         }
         else {
           drupal_set_message(t($node_details->title . ' has been already marked as complete.'), 'error');
+        }
+      }
+    }
+  }
+  // Generate Story if Idea Got mark as complete.
+  $views_bulk_operations_1 = array_unique($form_state['values']['views_bulk_operations']);
+  unset($views_bulk_operations_1[array_search(0, $views_bulk_operations_1)]);
+  if (is_array($views_bulk_operations_1) && count($views_bulk_operations_1) > 0) {
+    foreach ($views_bulk_operations_1 as $source_id) {
+      $issue = get_field_pti_issue($source_id);
+      $magazine = get_field_pti_magazine($source_id);
+      $supplement = get_field_pti_supplement($source_id);
+      if (!empty($source_id)) {
+        $associated_source_id = itg_print_team_check_association_print_to_story($source_id);
+        if (!empty($associated_source_id)) {
+          itg_print_team_association_update($source_id, $issue, $magazine, $associated_source_id, TRUE, $supplement);
+        }
+        else {
+          itg_print_team_association_save($source_id, $issue, $magazine, $supplement);
         }
       }
     }
@@ -846,34 +862,51 @@ function itg_print_team_rating_custom_submit($form, &$form_state) {
  * @param string $magazine
  */
 function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
-
   global $user;
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
-  $node = node_load($nid);
-  $issue_node = $node;
-
+  $print_node = node_load($nid);
+  $issue_node = $print_node;
   // Update print team node with issue and magazine
-  $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
-  $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-  if ($supplement != '_none') {
-    $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+  if (strlen($issue) >= 1 && is_integer($issue)) {
+    $print_node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
+  } else {
+    unset($print_node->field_pti_issue);
   }
-  
-  field_attach_update('node', $node);
+  if (strlen($magazine) >= 1 && is_integer($magazine)) {
+    $print_node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+  } else {
+    unset($print_node->field_pti_magazine);
+  }
+  if (strlen($supplement) >= 1 && is_integer($supplement)) {
+    if ($supplement != '_none') {
+      $print_node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+      $debug['supp_innner'] = $supplement;
+    } else {
+      unset($print_node->field_pti_supplement);
+    }
+  } else {
+    unset($print_node->field_pti_supplement);
+  }
+   
+  try{
+  field_attach_update('node', $print_node);
+  } catch(Exception $e) {
+    watchdog('print_error', $e->getMessage());
+  }
 
   // Varibles for story node
   $issue_title = itg_common_get_node_title($issue);
-  $section = $node->field_story_category[LANGUAGE_NONE][0]['tid'];
-  $rating = $node->field_story_rating[LANGUAGE_NONE][0]['value'];
-  $headline = $node->title;
-  $body = $node->body[LANGUAGE_NONE][0]['value'];
-  $magazine_kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+  $section = $print_node->field_story_category[LANGUAGE_NONE][0]['tid'];
+  $rating = $print_node->field_story_rating[LANGUAGE_NONE][0]['value'];
+  $headline = $print_node->title;
+  $body = $print_node->body[LANGUAGE_NONE][0]['value'];
+  $magazine_kicker = $print_node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
 
-  $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-  $primary_category_html = $node->field_primary_category_html[LANGUAGE_NONE][0]['value'];
+  $primary_category = $print_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  $primary_category_html = $print_node->field_primary_category_html[LANGUAGE_NONE][0]['value'];
 
   // Print media information
-  $print_media_fcollection_id = $node->field_pti_print_media[LANGUAGE_NONE][0]['value'];
+  $print_media_fcollection_id = $print_node->field_pti_print_media[LANGUAGE_NONE][0]['value'];
   $print_media = entity_load('field_collection_item', array($print_media_fcollection_id));
   $fid = $print_media[$print_media_fcollection_id]->field_pti_upload_image[LANGUAGE_NONE][0]['fid'];
 
@@ -882,7 +915,7 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   $node->title = trim($headline);
   $node->type = "story";
   node_object_prepare($node);
-
+  
   $node->language = LANGUAGE_NONE;
   $node->uid = $user->uid;
   $node->status = 1;
@@ -909,12 +942,14 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   //Association of magazine with story
   $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
 
-  if ($magazine) {
+  if (strlen($magazine) >= 1 && is_integer($magazine)) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   }
 
-  if ($supplement != '_none') {
+  if (strlen($supplement) >= 1 && is_integer($supplement)) {
     $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+  } else {
+    unset($node->field_story_select_supplement);
   }
   if ($fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
@@ -932,9 +967,15 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   $node->revision = 1;
   $node->log = 'State Changed to Review';
   $node->workbench_moderation_state_new = workbench_moderation_state_review();
+  
+//  /$node = node_submit($node);
+  // Save node to save all values into node.    
+  try {
+    node_save($node);
+  } catch (Exception $e) {
+    watchdog('ERROR', $e->getMessage());
+  }
 
-  $node = node_submit($node); // Prepare node for saving
-  node_save($node); // Finally save node
   //Send mail to print team users after association
   itg_print_team_send_idea_status_mail($issue_node, 'association');
   drupal_set_message('Selected ideas have been associated to selected issue and magazine successfully.');
@@ -1262,4 +1303,46 @@ function get_idea_notification_of_user() {
   }
   $string .= "</ul>";
   return $string;
+}
+
+/**
+ * Retrieve target id associated with node
+ *
+ * @param int $get_issueid
+ *   Node id of the node.
+ *
+ * @return int
+ *   target id
+ */
+function get_field_pti_issue($get_issueid){
+  $target_id = db_query("SELECT field_pti_issue_target_id from {field_data_field_pti_issue} WHERE entity_id = :entity_id ", array(":entity_id" => $get_issueid))->fetchField();
+  return $target_id;
+}
+
+/**
+ * Retrieve target id associated with node
+ *
+ * @param int $get_issueid
+ *   Node id of the node.
+ *
+ * @return int
+ *   target id
+ */
+function get_field_pti_magazine($get_magid){
+  $target_id = db_query("SELECT field_pti_magazine_target_id from {field_data_field_pti_magazine} WHERE entity_id = :entity_id ", array(":entity_id" => $get_magid))->fetchField();
+  return $target_id;
+}
+
+/**
+ * Retrieve target id associated with node
+ *
+ * @param int $get_issueid
+ *   Node id of the node.
+ *
+ * @return int
+ *   target id
+ */
+function get_field_pti_supplement($get_supplid){
+  $target_id = db_query("SELECT field_pti_supplement_target_id from {field_data_field_pti_supplement} WHERE entity_id = :entity_id ", array(":entity_id" => $get_supplid))->fetchField();
+  return $target_id;
 }

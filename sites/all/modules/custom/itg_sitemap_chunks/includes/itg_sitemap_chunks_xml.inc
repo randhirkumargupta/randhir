@@ -197,17 +197,14 @@ function itg_sitemap_get_xml_data_for_section($section_tid) {
     $xml_data_array = array();
     module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks_section.db');
     // Get all child of section.
-//  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
-//  // Include section too in childern and combine into single array.
-//  $childrens[] = $section_tid;
-//  sort($childrens);
+  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
+  // Include section too in childern and combine into single array.
+  $childrens[] = $section_tid;
+  sort($childrens);
     // Get database data to get frequency and type.
     $section_db_data = itg_sitemap_chunks_section_db_data($section_tid);
     $previous_time = itg_sitemap_get_previous_time($section_db_data);
     $content_types = itg_sitemap_get_required_content_type_for_xml();
-    if(!empty(variable_get('itg_sitemap_exclude_nid'))) {
-        $excluded_nodes = explode(",", variable_get('itg_sitemap_exclude_nid'));
-    }
     try {
         // Get the all links for given type.
         $query = db_select('node', 'n');

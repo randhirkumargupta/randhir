@@ -37,6 +37,11 @@ img {
     height: auto;
 }
 
+button,
+input[type='submit'] {
+    cursor: pointer;
+}
+
 .mr-0 {
     margin: 0;
 }
@@ -3668,7 +3673,7 @@ div.node {
     }
 }
 
-fieldset#edit-select {
+fieldset#edit-select, fieldset#edit-basic {
     padding: 10px;
     .form-submit {
         height: 28px;
@@ -4148,6 +4153,8 @@ fieldset#edit-select {
 div#autocomplete {
     padding: 0;
     border: 1px solid #d9d9d9;
+    max-height: 300px;
+    overflow: auto;
     ul {
         li {
             padding: 5px;
@@ -11765,8 +11772,9 @@ span.file a {
 .node-story-form .itg-sidebar-form {
     .form-field-name-field-story-syndication,
     .form-field-name-field-story-syndications-photo {
-        float: left;
-        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+        width: 49%;
         .form-type-checkboxes {
             margin-top: 0;
         }
@@ -14151,3 +14159,7 @@ div.ctools-modal-content {
 
 
 /* Globle croess button on Popup end */
+
+.redirect-list-tableselect{
+  @extend .views-table;
+}
