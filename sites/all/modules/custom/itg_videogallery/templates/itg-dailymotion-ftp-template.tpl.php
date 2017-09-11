@@ -16,7 +16,7 @@ else {
 <div id="videoupload">
     <div class="browse-ftp <?php echo $singalcalss; ?>">
         <div id="itg_video_content">
-            <div class="video-ftp active"><?php print t('DM'); ?></div>
+            <div class="video-ftp active"><?php print t('FTP'); ?></div>
 <!--            <div class="internal-video-tab"><?php print t('Internal'); ?></div>-->
             <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single') { ?>
               <div class="video-local"><?php print t('Local Browse'); ?></div>

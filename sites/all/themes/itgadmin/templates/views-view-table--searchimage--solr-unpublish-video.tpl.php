@@ -33,6 +33,7 @@ if ($classes) {
       <thead>
           <tr>
               <?php foreach ($header as $field => $label): ?>
+              <?php if($label != "") { ?>
                 <th <?php
                 if ($header_classes[$field]) {
                   print 'class="' . $header_classes[$field] . '" ';
@@ -40,7 +41,7 @@ if ($classes) {
                 ?> scope="col">
                         <?php print $label; ?>
                 </th>
-              <?php endforeach; ?>
+              <?php } endforeach; ?>
           </tr>
       </thead>
     <?php endif; ?>
