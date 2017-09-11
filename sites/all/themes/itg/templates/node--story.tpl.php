@@ -908,6 +908,8 @@ if (!empty($content)):
 
 
         <div class="section-left-bototm">
+          <a title = "Submit Your Story" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a>
+
           <div class="social-list">
             <ul>
               <?php if ($user->uid > 0): ?>

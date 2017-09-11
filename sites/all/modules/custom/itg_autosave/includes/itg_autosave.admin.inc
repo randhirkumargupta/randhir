@@ -147,6 +147,13 @@ function itg_autosave_nodeform($nid, $ctype) {
 
   // If title is empty then exit the process.
   if ($node->nid != null) {
+    // Set up the meta tags values on node updated
+    if (isset($arg[2]) && !empty($arg[2])) {
+      $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
+      $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
+      $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
+    }
+    
     $lock_status = $itg_auto_save->itg_autosave_get_lock_status_node_id($node->nid);
     if ($lock_status->lock_status == 1 && $node->status == 0 && $arg[2] == 'null') {
       print t('Autosave lock from add page');
@@ -174,7 +181,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   }
 
   /*   * ********* End of code field collection ********************************** */
-  if ($node->status == 0) {
+  if ($node->status == 0) { 
     $node = node_submit($node);
     try {
       node_save($node);
