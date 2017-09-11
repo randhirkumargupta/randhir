@@ -55,6 +55,12 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     },
     function (response) {
         var front_uid = Drupal.settings.itg_flag.settings.uid;
+        jQuery.ajax({
+                //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                url: base_url + '/fb-share-callback/' + node_id,
+                type: 'POST',
+                dataType: 'JSON',
+        });
         if (front_uid > 0) {
             jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
