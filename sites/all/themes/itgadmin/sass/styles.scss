@@ -3673,7 +3673,8 @@ div.node {
     }
 }
 
-fieldset#edit-select, fieldset#edit-basic {
+fieldset#edit-select,
+fieldset#edit-basic {
     padding: 10px;
     .form-submit {
         height: 28px;
@@ -13937,7 +13938,7 @@ fieldset#edit-xmlsitemap {
     }
     fieldset.collapsible {
         border: none;
-        legend {
+        >legend {
             display: block;
             background: #fff;
             width: 100%;
@@ -14160,6 +14161,14 @@ div.ctools-modal-content {
 
 /* Globle croess button on Popup end */
 
-.redirect-list-tableselect{
-  @extend .views-table;
+.redirect-list-tableselect {
+    @extend .views-table;
+}
+
+[id*="field-breaking-coverage-end-time-add-more-wrapper"] {
+    fieldset.date-combo .container-inline-date .date-padding .form-item {
+        +.form-item {
+            margin-left: 15px;
+        }
+    }
 }
