@@ -138,7 +138,23 @@ function itg_autosave_nodeform($nid, $ctype) {
     // Load node if it case of node edit.  
     $node = node_load($itg_nid->nid);
   }
-  if ($inputs['form_id'] == 'newsletter_node_form') {
+  
+  // Check for event title in next step for event form
+  if ($inputs['form_id'] == 'event_backend_node_form') {
+    if ($_GET['step'] != 'step_configuration') {
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
+    } else {
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
+    }
+    if (function_exists('itg_common_get_node_title')) {
+      $event_title = itg_common_get_node_title($arg[2]);
+      if (isset($event_title) && !empty($event_title) && is_string($event_title)) {
+        $title = isset($event_title) ? $event_title != '' ? check_plain($event_title) : ''  : '';
+      } 
+    }
+  } 
+  // Set the flag value for op flag for newsletter form and set the title
+  elseif ($inputs['form_id'] == 'newsletter_node_form') {
     $node->field_op_flag[LANGUAGE_NONE][0]['value'] = 'Save as Draft';
     $title = isset($inputs['field_news_title']['und'][0]['value']) ? $inputs['field_news_title']['und'][0]['value'] != '' ? check_plain($inputs['field_news_title']['und'][0]['value']) : ''  : '';
   } else {
