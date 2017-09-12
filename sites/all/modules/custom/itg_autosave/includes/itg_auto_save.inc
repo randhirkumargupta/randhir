@@ -285,11 +285,16 @@ class itg_auto_save {
    *   Extracted value.
    */
   public function itg_save_field_datetime($value) {
+    if (empty($value['und'][0]['value']['date'])) {
+      unset($value);
+    }
+    
     $this->datetime_result = '';
     if (!empty($value['und'][0]['value']['date'])) {
       if (!empty($value['und'][0]['value']['time'])) {
         $date_time = $value['und'][0]['value']['date'] . ' ' . $value['und'][0]['value']['time'];
-        $timestamp = strtotime(str_replace('/', '-', $date_time));
+        //$timestamp = strtotime(str_replace('/', '-', $date_time));
+        $timestamp = strtotime($date_time);
       } else {
         $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date']));
       }
@@ -299,7 +304,7 @@ class itg_auto_save {
           'timezone_db' => date_default_timezone(),
       );
     }
-    return $this->datetime_result;
+     return $this->datetime_result;
   }
 
   /**
