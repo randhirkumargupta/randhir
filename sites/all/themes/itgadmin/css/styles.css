@@ -4595,10 +4595,12 @@ div.node .ugc-action .manage-ugc {
   margin-top: 10px;
 }
 
-fieldset#edit-select, fieldset#edit-basic {
+fieldset#edit-select,
+fieldset#edit-basic {
   padding: 10px;
 }
-fieldset#edit-select .form-submit, fieldset#edit-basic .form-submit {
+fieldset#edit-select .form-submit,
+fieldset#edit-basic .form-submit {
   height: 28px;
   line-height: 26px;
   margin-right: 10px;
@@ -14232,7 +14234,7 @@ fieldset#edit-xmlsitemap {
 [id*="field-breaking-content-details-values"] fieldset.collapsible {
   border: none;
 }
-[id*="field-breaking-content-details-values"] fieldset.collapsible legend {
+[id*="field-breaking-content-details-values"] fieldset.collapsible > legend {
   display: block;
   background: #fff;
   width: 100%;
@@ -14410,3 +14412,12 @@ div.ctools-modal-content .form-submit {
 }
 
 /* Globle croess button on Popup end */
+[id*="field-breaking-coverage-end-time-add-more-wrapper"] fieldset.date-combo .container-inline-date .date-padding .form-item + .form-item {
+  margin-left: 15px;
+}
+
+#associate_video_settings iframe .views-table thead th:nth-child(3), #associate_video_settings iframe [id*="field-newsl-add-news-values"] thead th:nth-child(3), #associate_video_settings iframe .variables-and-field-container .variables table thead th:nth-child(3), .variables-and-field-container .variables #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-admin-structure-menu-manage #menu-overview thead th:nth-child(3), .page-admin-structure-menu-manage #associate_video_settings iframe #menu-overview thead th:nth-child(3), #associate_video_settings iframe [id*="protected-pages-configure"] fieldset table thead th:nth-child(3), [id*="protected-pages-configure"] fieldset #associate_video_settings iframe table thead th:nth-child(3),
+#associate_video_settings iframe [id*="protected-pages-edit"] fieldset table thead th:nth-child(3),
+[id*="protected-pages-edit"] fieldset #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-node-moderation thead th:nth-child(3), #associate_video_settings iframe #taxonomy-overview-terms thead th:nth-child(3), #associate_video_settings iframe [id*="daily-motion-video-dashboard"] table thead th:nth-child(3), [id*="daily-motion-video-dashboard"] #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .redirect-list-tableselect thead th:nth-child(3) {
+  width: 100px;
+}

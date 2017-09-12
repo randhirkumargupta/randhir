@@ -7,11 +7,13 @@ $content = node_view($node, 'full');
 $related_content = $content['related_content'];
 // condition for buzz
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$uri = base64_encode($actual_link);
-$short_url = shorten_url($actual_link, 'goo.gl');
+//$uri = base64_encode($actual_link);
+$uri = base64_encode($_SERVER['HTTP_REFERER']);
+$short_url = shorten_url($_SERVER['HTTP_REFERER'], 'goo.gl');
 $fb_title = addslashes($node->title);
 $share_desc = '';
 $image = '';
+$nid = $node->nid;
 if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 }
@@ -39,11 +41,11 @@ $node_author = $content["author"];
   <?php if ($user->uid > 0): ?>
     <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
   <?php else: ?>
-    <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
+    <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer akamai-story-submit-holder" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
   <?php endif; ?>
-  <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+  <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $_SERVER['HTTP_REFERER']; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
   <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-  <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+  <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $_SERVER['HTTP_REFERER']; ?>')"><i class="fa fa-google-plus"></i></a></li>
   <?php
   if ($config_name == 'vukkul') {
     ?>

@@ -358,7 +358,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
    
   }
   else {
-    $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
+    $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video','search-unpublish-internal-video','search-unpublish-internal-video-singal', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
 
     if (in_array(arg(0), $page_condition)) {
       $i = 1;
@@ -370,7 +370,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
         $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'advance_search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'clone-story', 'sname', 'search-unpublish-video', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio', 'solr-unpublish-video');
 
-        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-video-radio' && $val != 'solr-unpublish-video' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
+        if (!empty($val) && $val != 'related-content' && $val != 'advance_search' && $val != 'searchimage' && $val != 'clone-story' && $val != 'search-unpublish-video' && $val != 'search-unpublish-internal-video'  && $val != 'search-unpublish-internal-video-singal' && $val != 'search-unpublish-video-radio' && $val != 'solr-unpublish-video' && $val != 'search-publish-video' && $val != 'search-publish-video-radio' && !in_array($key, $remove_key)) {
 
           if (is_array($val)) {
             // condition if array is not empty and date field selected
@@ -483,12 +483,21 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 //        $str = 'sm_field_video_used:(' . $video_val . ')';
 //        $query->addParam("fq", '(' . $str . ')');
 //      }
-      else if ($_GET['q'] == 'search-unpublish-video' || $_GET['q'] == 'search-unpublish-video-radio') {
+      else if ($_GET['q'] == 'search-unpublish-video' || $_GET['q'] == 'search-unpublish-internal-video' || $_GET['q'] == 'search-unpublish-internal-video-singal'  || $_GET['q'] == 'search-unpublish-video-radio') {
+    $search_query_url_dm = array('search-unpublish-video' , 'search-unpublish-video-radio' );
+       if(in_array($_GET['q'], $search_query_url_dm)) {
+        $video_type = 'DM';
+      }
+       $search_query_url_internal = array('search-unpublish-internal-video' , 'search-unpublish-internal-video-singal' );
+      if(in_array($_GET['q'], $search_query_url_internal)) {
+        $video_type = 'INTERNAL';
+      }
+        
         $hashvalue = $_GET['hash'];
         $str = "";
         if (!empty($hashvalue)) {
           $hashvalue = implode(' OR ', $hashvalue);
-          $str_has = 'hash:(' . $hashvalue . ')';
+          $str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
         }
         else {
           if (function_exists('itg_apache_solr_get_site_hash')) {
@@ -496,7 +505,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           }
 
           $hashvalue = implode(' OR ', array_keys($hash));
-          $str_has = 'hash:(' . $hashvalue . ')';
+          $str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
         }
         if (isset($_GET['sm_field_video_used'])) {
           $video_val = $_GET['sm_field_video_used'];

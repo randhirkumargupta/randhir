@@ -3680,13 +3680,17 @@
   z-index: 9999;
 }
 .sso-header + #page {
-  min-height: calc(100% - 109px);
+  min-height: calc(100% - 79px);
   height: auto;
   padding-top: 94px;
 }
 
 .sso-footer {
   margin-top: 30px;
+}
+
+.section-user .sso-footer {
+  margin-top: 0px;
 }
 
 #itg_user_forgot_password_multistep_form .form-wrapper {
