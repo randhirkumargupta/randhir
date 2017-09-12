@@ -759,7 +759,7 @@ function itg_poll_get_past_data($nid) {
       $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
 
       if (isset($polls_answer_image) && $polls_answer_image > 0) {
-        $poll_image = theme('image_style' , array('style_name' => 'thumbnail' , 'path' => file_load($polls_answer_image)->uri));
+        $poll_image = theme('image_style' , array('style_name' => 'widget_small' , 'path' => file_load($polls_answer_image)->uri));
       }
 
       $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
