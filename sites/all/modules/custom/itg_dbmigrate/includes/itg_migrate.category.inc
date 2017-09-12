@@ -36,9 +36,9 @@ class ItgCategoryMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/conclave-master-files/conclave_photo_other_category_seprate/';
 
-    $items_url = $xml_folder . 'categories-master.xml';
+    $items_url = $xml_folder . 'conclave_category_story_video_master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -114,7 +114,7 @@ class ItgCategoryMigration extends XMLMigration {
       
       //sef url
       $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
-      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
+     // $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->section = '';

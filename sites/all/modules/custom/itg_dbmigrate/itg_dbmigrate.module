@@ -32,7 +32,7 @@ function ordering_set_of_content($node, $count) {
   if (isset($node->field_story_category['und'])) {
     $cat_id = $node->field_story_category['und'];
       foreach ($cat_id as $category) {
-         $query = db_insert('itg_widget_order')
+         $query = db_insert('itg_widget_order_section')
         ->fields(array(
           'nid' => $nid,
           'widget' => 'section_wise_widget',
