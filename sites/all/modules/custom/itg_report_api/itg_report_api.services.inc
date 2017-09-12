@@ -535,7 +535,7 @@ function itg_report_api_auscovery_dashboard_web() {
     $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
@@ -572,7 +572,7 @@ function itg_report_api_auscovery_dashboard_mob() {
     $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..

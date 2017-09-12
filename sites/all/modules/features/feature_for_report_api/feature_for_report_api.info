@@ -6,6 +6,7 @@ version = 7.x-1.0
 dependencies[] = ctools
 dependencies[] = itg_mobile_feed
 dependencies[] = rest_server
+dependencies[] = itg_rapid_api
 dependencies[] = services
 dependencies[] = token
 features[ctools][] = services:services:3
