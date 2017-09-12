@@ -628,15 +628,20 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_large_image'] = $file_large_img_url;
      $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
-     if (!empty($videotag['dailymotion'])) {
-       $prog['p_is_default_player'] = "1";
-       $prog['p_url'] = $videotag['dailymotion']['video_id'];
-       $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-     }elseif(!empty($videotag['migrated'])){
-       $prog['p_is_default_player'] = "0";
-       $prog['p_url'] = "";
-       $prog['p_download_url'] = $videotag['migrated']['video_path_mp4'];
-     }
+      if (!empty($videotag['dailymotion'])) {
+        $prog[$listcount]['p_is_default_player'] = "1";
+        $prog[$listcount]['p_url'] = $videotag['dailymotion']['video_id'];
+        if($videotag['dailymotion']['bitate_url']['download_url'])
+            $prog[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+        else
+            $prog[$listcount]['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+      }
+      elseif (!empty($videotag['migrated'])) {
+        $video_path_mp4 = $video_path_info['video_path_mp4'];
+        $prog[$listcount]['p_is_default_player'] = "0";
+        $prog[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
+        $prog[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
+      }
 
      $prog['p_view_count'] = "$n_view_count";
      $prog['p_comment_count'] = "$comment_cont";
@@ -777,14 +782,19 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
      $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
      if (!empty($videotag['dailymotion'])) {
-       $prog['p_is_default_player'] = "1";
-       $prog['p_url'] = $videotag['dailymotion']['video_id'];
-       $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-     }elseif(!empty($videotag['migrated'])){
-       $prog['p_is_default_player'] = "0";
-       $prog['p_url'] = "";
-       $prog['p_download_url'] = $videotag['migrated']['video_path_mp4'];
-     }
+        $prog[$listcount]['p_is_default_player'] = "1";
+        $prog[$listcount]['p_url'] = $videotag['dailymotion']['video_id'];
+        if($videotag['dailymotion']['bitate_url']['download_url'])
+            $prog[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+        else
+            $prog[$listcount]['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+      }
+      elseif (!empty($videotag['migrated'])) {
+        $video_path_mp4 = $video_path_info['video_path_mp4'];
+        $prog[$listcount]['p_is_default_player'] = "0";
+        $prog[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
+        $prog[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
+      }
 
      $prog['p_view_count'] = "$n_view_count";
      $prog['p_comment_count'] = "$comment_cont";
