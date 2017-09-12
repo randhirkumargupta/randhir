@@ -38,6 +38,7 @@
 
 .fancybox-opened {
 	z-index: 8030;
+	overflow: visible !important;
 }
 
 .fancybox-opened .fancybox-skin {
