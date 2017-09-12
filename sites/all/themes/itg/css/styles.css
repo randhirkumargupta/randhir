@@ -12077,7 +12077,7 @@ h1.about-us-heading + div p {
 }
 
 .story-section .listicle-page.story-right {
-  width: 100%;
+  /*width: 100%;*/
 }
 .story-section .listicle-page.story-right .byline {
   border-bottom: 1px solid #ddd;
@@ -15032,3 +15032,7 @@ span.story-sponsor-powered-text::last-word {
 .anchor-right .social-icon ul li a[title='Unfollow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px -19px; padding-left:28px;}
 .anchor-right .social-icon ul li a i{float: left;margin-right: 5px;font-size: 1.25rem;}
 .anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
+
+/* Add css for listicle token story */
+
+@media only screen and (min-width: 769px){ .story-section .story-right { width: 79%;} }
