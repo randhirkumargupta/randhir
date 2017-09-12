@@ -211,6 +211,26 @@ function itg_common_mongo_activity_user_count($uid, $collection, $event = NULL, 
 }
 
 /**
+ * Implements itg_common_mongo_activity_fb_count().
+ * @param int $uid
+ * @param string $collection
+ * @param string $event
+ * @param int $status
+ */
+function itg_common_mongo_activity_fb_count($uid, $collection, $nid, $event) {
+  if (function_exists('mongodb') && !empty($uid)) {
+    $con = mongodb();
+    $people = $con->$collection;
+    $cond = array('uid' => $uid, 'activity' => $event, 'nid' => $nid);
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+  
+}
+
+/**
  * Implements itg_common_mongo_activity_user_count_date_wise().
  * @param int $uid
  * @param string $collection
