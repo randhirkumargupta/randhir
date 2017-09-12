@@ -13542,6 +13542,9 @@ div#edit-byline-names-wrapper {
         .form-item {
             display: inline-block;
             vertical-align: top;
+            +.form-item {
+                margin-top: -28px;
+            }
         }
     }
 }
@@ -14205,5 +14208,11 @@ div.ctools-modal-content {
                 width: 100px;
             }
         }
+    }
+}
+
+.widgets-view {
+    .view-filters {
+        display: none;
     }
 }

@@ -13912,6 +13912,9 @@ div#edit-byline-names-wrapper {
   display: inline-block;
   vertical-align: top;
 }
+#views-exposed-form-report-filed-content-page #edit-state-wrapper .form-item + .form-item {
+  margin-top: -28px;
+}
 
 .field-type-jquery-colorpicker .form-type-jquery-colorpicker {
   padding: 0 10px 10px;
@@ -14443,4 +14446,8 @@ div.ctools-modal-content .form-submit {
 #associate_video_settings iframe [id*="protected-pages-edit"] fieldset table thead th:nth-child(3),
 [id*="protected-pages-edit"] fieldset #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-node-moderation thead th:nth-child(3), #associate_video_settings iframe #taxonomy-overview-terms thead th:nth-child(3), #associate_video_settings iframe [id*="daily-motion-video-dashboard"] table thead th:nth-child(3), [id*="daily-motion-video-dashboard"] #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .redirect-list-tableselect thead th:nth-child(3) {
   width: 100px;
+}
+
+.widgets-view .view-filters {
+  display: none;
 }
