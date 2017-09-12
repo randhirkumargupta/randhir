@@ -272,7 +272,7 @@ jQuery(document).ready(function () {
     });
     
     // Custom validator function for social media start
-            jQuery("#itg-personalization-edit-profile-form").validate({
+         /*   jQuery("#itg-personalization-edit-profile-form").validate({
                 
                 onfocusout: function(element) {
                     jQuery(element).valid();
@@ -308,5 +308,5 @@ jQuery(document).ready(function () {
 
                     }
                 }
-            });
+            }); */
 });

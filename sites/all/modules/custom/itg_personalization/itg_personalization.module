@@ -252,6 +252,10 @@ function itg_personalization_getmenu_title() {
       case 'my-following':        
         $sticky_title = t('Following');
         $data_tab = $arg[1];
+        break;
+      case 'my-followers':
+        $sticky_title = t('Following');
+        $data_tab = $arg[1];
     }
     $data['menu_title'] = $sticky_title;
     $data['data_tab'] = $data_tab;
@@ -851,8 +855,7 @@ function itg_personalization_refer_friend_existence($mail) {
  * @return string
  */
 function _personalization_manage_follow_content() {
-  global $user, $base_url;
-  $arg = arg();
+  global $user;
   if (function_exists('mongodb'))
   {
     $con = mongodb();
@@ -866,8 +869,8 @@ function _personalization_manage_follow_content() {
     $cnt_anchor = count($result['anchor']) -1;
     $cnt_author = count($result['author']) -1;
     $cnt_tag = count($result['tag']) -1;
-    $output.= "<div class=\"itg-personalization-text\">".t('Here you can view all the Authors and Topics currently being followed by you.')."</div>";
-    $output.= '<div class="personal-list"><div class=\"personal-follow\"><a class="letter" id="follow-author" href="#">Author</a><a class="letter" id="follow-topics" href="#">Topics</a><a class="letter" id="follow-anchor" href="#">Anchor</a></div>';
+    $output.= "<div class='itg-personalization-text'>".t('Here you can view all the Authors and Topics currently being followed by you.')."</div>";
+    $output.= '<div class="personal-list"><div class="personal-follow"><a class="letter" id="follow-author" href="#">Author</a><a class="letter" id="follow-topics" href="#">Topics</a><a class="letter activetab" id="follow-anchor" href="#">Anchor</a></div>';
     foreach ($result as $key => $rows) {
       if(is_array($rows) && count($rows) > 0) {
         foreach ($rows as $id => $value) {
@@ -875,10 +878,10 @@ function _personalization_manage_follow_content() {
           if ($key == 'author') {
             if ($id == '0') {
               $output .= '<ul class="personal-lists-col follow-author">';
-              $output .= "<li class=\"mhide\"><h3>Author</h3></li>";
+              $output .= "<li class='mhide'><h3>Author</h3></li>";
             }
             if ($value['title']) {
-              $output .= "<li class=\"follow-author\"><button class=\"btn btn-sm btn-dang er delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+              $output .= "<li class='follow-author'><button class='btn btn-sm btn-dang er delete_class' id='".$value['nid'] ."' >X</button><span>" . $value['title'] . "</span></li>";
             }
             if ($id == $cnt_author) {
               $output .= '</ul>';
@@ -891,9 +894,9 @@ function _personalization_manage_follow_content() {
             if ($id == '0') {
 
               $output .= '<ul class="personal-lists-col follow-topics">';
-              $output .= "<li class=\"mhide\"><h3>Topics</h3></li>";
+              $output .= "<li class='mhide'><h3>Topics</h3></li>";
             }
-            $output .= "<li class=\"follow-topics\"><button class=\"btn btn-sm btn-danger delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+            $output .= "<li class='follow-topics'><button class='btn btn-sm btn-dang er delete_class' id='".$value['nid'] ."' >X</button><span>" . $value['title'] . "</span></li>";
             if ($id == $cnt_tag) {
               $output .= '</ul>';
 
@@ -904,9 +907,9 @@ function _personalization_manage_follow_content() {
           if ($key == 'anchor') {
             if ($id == '0') {
               $output .= '<ul class="personal-lists-col follow-anchor">';
-              $output .= "<li class=\"mhide\"><h3>Anchor</h3></li>";
+              $output .= "<li class='mhide'><h3>Anchor</h3></li>";
             }
-            $output .= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+            $output .= "<li><button class='btn btn-sm btn-danger delete_class' id='".$value['nid']."' >X</button><span>" . $value['title'] . "</span></li>";
             if ($id == $cnt_anchor) {
               $output .= '</ul>';
 
