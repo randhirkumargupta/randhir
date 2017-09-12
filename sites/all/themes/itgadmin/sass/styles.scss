@@ -14172,3 +14172,13 @@ div.ctools-modal-content {
         }
     }
 }
+
+#associate_video_settings {
+    iframe {
+        .views-table thead th {
+            &:nth-child(3) {
+                width: 100px;
+            }
+        }
+    }
+}
