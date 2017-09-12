@@ -214,8 +214,8 @@ function itg_common_mongo_activity_user_count($uid, $collection, $event = NULL, 
  * Implements itg_common_mongo_activity_fb_count().
  * @param int $uid
  * @param string $collection
+ * @param int $nid
  * @param string $event
- * @param int $status
  */
 function itg_common_mongo_activity_fb_count($uid, $collection, $nid, $event) {
   if (function_exists('mongodb') && !empty($uid)) {
