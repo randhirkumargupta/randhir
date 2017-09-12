@@ -94,12 +94,10 @@
     Drupal.behaviors.myModuleTest = {
   attach: function (context, settings) {
     jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-footer .load-more-video-dec').click(function(){
-        console.log('hhhhhhh', jQuery(this).children('a').text().trim(), jQuery(this).children('a').text().trim() == 'Load More');
         if(jQuery(this).children('a').text().trim() == 'Load More'){
             jQuery("#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li").show();
             jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load Less<i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>');
         }else{
-            console.log('less clicked');
             jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li').hide();
             jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li:lt(4)').show();
             jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load More<i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>');
