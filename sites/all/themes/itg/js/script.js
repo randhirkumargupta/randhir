@@ -555,10 +555,15 @@ jQuery(document).ready(function () {
         //~ itemSelector: 'a',
         //~ navigateByKeyboard: true
     //~ });
+    var fit_to_view = false;
+    if(jQuery(window).width() < 1024){
+	    fit_to_view = true;
+	}
     if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
 		jQuery(".fancybox-thumb").fancybox({
-			prevEffect	: 'none',
-			nextEffect	: 'none',
+			fitToView: fit_to_view,
+			padding: 0,
+			arrows: true,
 			helpers	: {
 				//~ title	: {
 					//~ type: 'outside'
