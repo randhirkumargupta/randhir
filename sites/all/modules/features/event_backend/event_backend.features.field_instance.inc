@@ -1509,7 +1509,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_e_event_banner',
     'label' => 'Event Banner',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -1532,6 +1532,8 @@ function event_backend_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1903,7 +1905,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 38,
@@ -2098,7 +2100,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 37,
@@ -2389,22 +2391,16 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_program_schedule',
-    'label' => 'Program Schedule',
+    'label' => 'Programme Schedule',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'field_collection',
-      'settings' => array(
-        'collapsed' => 0,
-        'field_as_label' => '',
-        'last_item_collapsed' => 0,
-        'new_item_open' => 0,
-        'replace_label' => 0,
-      ),
+      'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 12,
     ),
@@ -2462,7 +2458,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 41,
@@ -2648,7 +2644,7 @@ function event_backend_field_default_field_instances() {
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1975:+3',
       ),
       'type' => 'date_popup',
       'weight' => 40,
@@ -3073,9 +3069,9 @@ function event_backend_field_default_field_instances() {
   t('Please add event highlights.');
   t('Please add event photos.');
   t('Please add multiple short & crisp videos.');
-  t('Program Schedule');
   t('Program Title Colour');
   t('Programme');
+  t('Programme Schedule');
   t('Registration Close Date');
   t('Registration Date');
   t('Registration Type');

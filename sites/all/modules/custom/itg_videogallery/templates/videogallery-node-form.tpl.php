@@ -129,14 +129,14 @@
                 <?php print drupal_render_children($form); ?>
             </div>
 
-            <div id="AkamaiSettings" class="itg-sidebar-form-section">
-                <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
+            <div id="associate_video_settings" class="itg-sidebar-form-section">
+                <h2 class="story-title"><?php print t('Associate Video'); ?></h2>
                 <div class="itg-form-section hide">
                     <iframe id="video_iframe" src="<?php echo base_path() . 'solr-unpublish-video'; ?>" width="400" height="650"></iframe>
                     <?php //print views_embed_view('searchimage', 'solr_unpublish_video');
                     ?>
-                    <a href="javascript:void(0)" class = "button asso-filed-video"><?php print t('Save'); ?></a>
-                   <?php print  l(t('Advance Search'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => TRUE, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'browse-ftp-click','button'))));?>
+                    <a href="javascript:void(0)" class = "button btn-submit asso-filed-video"><?php print t('Save'); ?></a>
+                   <?php print  l(t('Advance Search'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => TRUE, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'btn-submit', 'browse-ftp-click','button'))));?>
                     
                 </div>
 

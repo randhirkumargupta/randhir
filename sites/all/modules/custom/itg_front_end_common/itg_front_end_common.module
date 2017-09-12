@@ -318,6 +318,7 @@ function vukkul_view() {
  * {@inheritdoc}
  */
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
+  global $base_url;
   $os = array("search_index");
   if (!in_array($view_mode, $os)) {
     if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
@@ -385,6 +386,18 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           )
         );
       drupal_add_html_head($fb_tag, 'fb_tag' . $key);
+    }
+    
+    if(!empty($node->type)) {
+      $fb_og_url = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:url',
+            'content' => $base_url.'/'.$node->path['alias'],
+          )
+        );
+      drupal_add_html_head($fb_og_url, 'fb_og_url' . $key);
     }
   }
 }
@@ -721,8 +734,8 @@ function _related_story_bottom_block_content() {
           $hash_url = itg_apache_solr_get_site_url();
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
-        if (empty($related_title)) {
-          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
+        if (!empty($related_title)) {
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$related_title' /></a>";
           $related_story.= "<span class='tile'>" . l($related_title, $front_url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
       //}
@@ -734,6 +747,44 @@ function _related_story_bottom_block_content() {
     return $related_story;
   }
 }
+
+/**
+ * Implements itg_front_big_story_related().
+ * @param int $nid
+ */
+function itg_front_big_story_related($nid) {
+  if (!empty($nid)) {
+    global $base_url;
+    $related_content = itg_get_related_content($nid);
+    if (function_exists('itg_get_related_story_id')) {
+      $related_result = itg_get_related_story_id($related_content);
+    }
+    if (!empty($related_result)) {
+      $related_big_story = '';
+      foreach ($related_result as $site_hash_key) {
+        $current_entity_id = $site_hash_key;
+        $related_data = itg_get_related_story_content($current_entity_id);
+        $display_title = get_related_display_title($nid, $current_entity_id);
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        $related_title = $display_title;
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
+        }
+        $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
+        if (!empty($related_title)) {
+          $related_big_story .= "<li>" . l($related_title, $front_url, array("attributes" => array("target" => "_blank", 'title' => $related_title))) . "</li>";
+        }
+      }
+    }
+    return $related_big_story;
+  }
+}
+
 /**
  * Implements Related story bottom block content
  */
@@ -783,7 +834,7 @@ function _related_podcast_bottom_block_content() {
       }
     }
     $i++;
-    if ($i == 4)
+    if ($i == 10)
       break;
   }
   $related_story.= "</ul></div>";

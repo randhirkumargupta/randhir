@@ -119,7 +119,12 @@ jQuery(document).ready(function () {
             } catch(e) {
 
     }
+    
+    try {
     jQuery('body').find(".checked-list").disableSelection();
+    } catch(e) {
+        
+    }
 
     // jQuery code to remove checked list item
     jQuery('.checked-list').on('click', '.fa-times', function () {

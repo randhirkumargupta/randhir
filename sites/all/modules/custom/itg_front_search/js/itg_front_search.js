@@ -12,12 +12,12 @@
             $("#edit-reset").hide();
 
             $('#edit-custom-drp').change(function () {
-                 $(".searh-all-filters .views-widget").hide();
+                $(".searh-all-filters .views-widget").hide();
                 var datetypevalue = $('#edit-custom-drp').val();
 
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
-                    $(".caln").show();                   
+                    $(".caln").show();
                 } else {
                     $(".caln").hide();
                     $(".caln").hide();
@@ -42,7 +42,7 @@
             $('#reset_button').click(function () {
                 $('#edit-reset').trigger('click');
             });
-            
+
 
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
@@ -80,16 +80,16 @@
                         speed: 300,
                         slidesToShow: 7,
                         slidesToScroll: 1,
-                         responsive: [  
-                                       {
-                                          breakpoint: 600,
-                                          settings: {
-                                            slidesToShow: 5                                            
-                                          }
-                                        }
-                                      ]
+                        responsive: [
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 5
+                                }
+                            }
+                        ]
                     });
-                }                
+                }
 
                 jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
                     dateFormat: 'dd-mm-yy',
@@ -102,10 +102,10 @@
                         console.log(url[3]);
                         console.log(url[4]);
                         var ctype = ["story", "photogallery", "video"];
-                        if(jQuery.inArray(url[4], ctype) != -1) {
-                         var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;   
+                        if (jQuery.inArray(url[4], ctype) != -1) {
+                            var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;
                         } else {
-                          var pathname = base_url + '/' + 'archives/story/' + dateText;    
+                            var pathname = base_url + '/' + 'archives/story/' + dateText;
                         }
                         //jQuery('#edit-submit-archive-story').trigger('click');
                         window.location.href = pathname;
@@ -124,7 +124,7 @@ function getParameterByName(name, url) {
         url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
+        results = regex.exec(url);
     if (!results)
         return null;
     if (!results[2])
@@ -132,11 +132,12 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-jQuery(document).ready(function(){
-     //ON CLICK SHOW FILTER TYPES
+jQuery(document).ready(function () {
+    //ON CLICK SHOW FILTER TYPES
     jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-    jQuery("body, html").on("click", ".searh-all-filters label", function(){
-      jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-      jQuery(this).next('div').show();    
+    jQuery("body, html").on("click", ".searh-all-filters label", function () {
+        jQuery('#edit-custom-drp').val('any');
+        jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+        jQuery(this).next('div').show();
     });
 });

@@ -84,7 +84,8 @@
                     data: {nid:qnid, correct_ans:correct_ans, ans_val:JSON.stringify(selected)},
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
                     success: function(data) {
-                        ansvalue = data.split('-'); 
+                        ansvalue = data.split('-');
+                       // alert(ansvalue);
                         var cls = "";
                         if(ansvalue[1] == "correct"){
                           cls = "correct-ans";

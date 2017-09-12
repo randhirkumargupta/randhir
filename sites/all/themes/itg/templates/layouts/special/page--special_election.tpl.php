@@ -606,6 +606,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div> 
                             </div>
                             <div class="col-md-12 col-sm-6 mt-50">
+                            <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
                                 <div class="itg-widget">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">

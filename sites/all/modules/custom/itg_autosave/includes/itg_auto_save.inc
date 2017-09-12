@@ -187,7 +187,7 @@ class itg_auto_save {
    *   Serialized array contaning field collections ids.
    */
   public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {
-    
+
     $this->field_collection = array();
     $this->field_collection_data = array();
     // Unserialize fields collections ids for deletion of field collection.
@@ -204,10 +204,10 @@ class itg_auto_save {
 
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
-      
+
       // Filter empty array from list.
       $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
-      
+
       // Validate empty field collection
       $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);
       // Create entity of type field collection
@@ -285,17 +285,26 @@ class itg_auto_save {
    *   Extracted value.
    */
   public function itg_save_field_datetime($value) {
+    if (empty($value['und'][0]['value']['date'])) {
+      unset($value);
+    }
+    
     $this->datetime_result = '';
-    if (!empty($value['und'][0]['value']['date'])) {      
-      $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date'])); 
+    if (!empty($value['und'][0]['value']['date'])) {
+      if (!empty($value['und'][0]['value']['time'])) {
+        $date_time = $value['und'][0]['value']['date'] . ' ' . $value['und'][0]['value']['time'];
+        //$timestamp = strtotime(str_replace('/', '-', $date_time));
+        $timestamp = strtotime($date_time);
+      } else {
+        $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date']));
+      }
       $this->datetime_result = array(
           'value' => date("Y-m-d H:i:s", $timestamp),
           'timezone' => date_default_timezone(),
           'timezone_db' => date_default_timezone(),
       );
     }
-
-    return $this->datetime_result;
+     return $this->datetime_result;
   }
 
   /**
@@ -407,7 +416,7 @@ class itg_auto_save {
    *   Return true if filed is not empty else return false.
    */
   public function itg_save_validate_field_collection($data, $field_values) {
-    
+
     foreach ($data as $value) {
       switch ($value['fieldType']) {
         case 'taxonomy_term_reference':
@@ -458,7 +467,7 @@ class itg_auto_save {
             return TRUE;
           }
           break;
-          
+
         case 'list_float':
           if ($field_values[$value['fieldName']]['und'] > 0) {
             return TRUE;
@@ -491,9 +500,7 @@ class itg_auto_save {
           break;
 
         case 'datetime':
-          $dd = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
           $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
-         
           break;
 
         case 'text':
@@ -510,16 +517,16 @@ class itg_auto_save {
 
         case 'taxonomy_term_reference':
           $this->value = $inputs[$field['fieldName']]['und'];
-          /*$this->var_type = gettype($this->value);
-          if ($this->var_type == 'string') {
+          /* $this->var_type = gettype($this->value);
+            if ($this->var_type == 'string') {
             $this->value = (int) $this->value;
-          }*/
-          
+            } */
+
           // For Mega Review Type autosave
           if (!empty($this->value) && $field['fieldName'] == 'field_mega_review_type') {
             $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
           }
-          
+
           // For City autosave
           if (!empty($this->value) && $field['fieldName'] == 'field_stroy_city') {
             $getcity = $this->itg_autosave_get_citytids($this->value);
@@ -529,7 +536,7 @@ class itg_auto_save {
               }
             }
           }
-          
+
           // For Bloggers autosave
           if (!empty($this->value) && $field['fieldName'] == 'field_blog_bloggers') {
             $getblogger = $this->itg_autosave_get_bloggertids($this->value);
@@ -539,7 +546,7 @@ class itg_auto_save {
               }
             }
           }
-          
+
           // For Tags Autosave
           if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_itg_tags') {
             $get_tids = $this->itg_autosave_get_tids($this->value['value_field']);
@@ -548,8 +555,8 @@ class itg_auto_save {
                 $node->{$field['fieldName']}[$node->language][$tid_key]['tid'] = $tid_val->tid;
               }
             }
-          } 
-          
+          }
+
           // For section and primary category
           if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_category') {
             foreach ($this->value as $sc_key => $sc_val) {
@@ -592,22 +599,34 @@ class itg_auto_save {
           }
 
           break;
-          
+
         case 'number_integer':
           //$node->{$field['fieldName']}['und'][0]['value'] = 
           break;
-          
+
         case 'entityreference':
-          
-          if ($inputs['form_id'] == 'survey_node_form' || $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
+          if ($field['fieldName'] == 'field_video_anchor') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (!empty($this->value) && is_array($this->value)) {
+              foreach ($this->value as $anchor_key => $anchor_val) {
+                preg_match_all('!\d+!', $anchor_val['target_id'], $matches);
+                $targetids = reset($matches);
+                if (isset($targetids[0]) && !empty($targetids[0])) {
+                  $node->{$field['fieldName']}['und'][$anchor_key]['target_id'] = $targetids[0];
+                }
+              }
+            }
+          } elseif ($inputs['form_id'] == 'story_node_form' ||
+                  $inputs['form_id'] == 'videogallery_node_form' ||
+                  $inputs['form_id'] == 'survey_node_form' ||
+                  $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
             $this->value = $inputs[$field['fieldName']]['und'];
             preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
             $targetid = reset($matches);
-            if (isset($targetid[0]) && !empty($targetid[0])) { 
+            if (isset($targetid[0]) && !empty($targetid[0])) {
               $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
             }
-          } 
-          else {
+          } else {
             $this->value = $inputs[$field['fieldName']]['und'];
             preg_match_all('!\d+!', $this->value, $matches);
             $targetid = reset($matches);
@@ -620,26 +639,30 @@ class itg_auto_save {
             }
           }
           break;
-          
+
         case 'image':
           $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
 
           break;
-        
+
         case 'file':
           $this->itg_save_field_file($field['fieldName'], $inputs[$field['fieldName']], $node);
           break;
-        
+
         case 'list_integer':
-          
-          $this->value = $inputs[$field['fieldName']]['und'];
-          if (isset($this->value) && !empty($this->value)) {
-            preg_match_all('!\d+!', $this->value, $matches);
-            $get_techrating = reset($matches);
-            $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+          if ($field['fieldName'] == 'field_survey_expity_date') {
+            $node->{$field['fieldName']}['und'][0]['value'] = $inputs[$field['fieldName']]['und'][1];
+          } else {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (isset($this->value) && !empty($this->value)) {
+              preg_match_all('!\d+!', $this->value, $matches);
+              $get_techrating = reset($matches);
+              $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+            }
           }
+
           break;
-          
+
         case 'youtube':
           $this->value = $inputs[$field['fieldName']]['und'];
           if (isset($this->value) && !empty($this->value)) {
@@ -692,7 +715,7 @@ class itg_auto_save {
    *   Field collection entity object.
    */
   public function itg_save_field_collection($data, $inputs, &$fc_item) {
-    
+
     foreach ($data as $field) {
       switch ($field['fieldType']) {
         case 'datestamp':
@@ -728,6 +751,16 @@ class itg_auto_save {
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;
           break;
 
+//        case 'field_collection':
+//          pr("cdcdc");
+//          break;
+
+        case 'number_integer':
+          if (!empty($inputs[$field['fieldName']]['und']) && is_array($inputs[$field['fieldName']]['und'])) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
+          break;
+
         case 'text_with_summary':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']][LANGUAGE_NONE][0]['value'];
           break;
@@ -742,29 +775,29 @@ class itg_auto_save {
             $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;
           }
           break;
-          
+
         case 'jquery_colorpicker':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['jquery_colorpicker'] = $inputs[$field['fieldName']]['und'][0]['jquery_colorpicker'];
           break;
-        
+
         case 'file':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
           break;
-        
+
         case 'image':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
           break;
-        
+
         case 'list_integer':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
           break;
-        
+
         case 'list_float':
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
           break;
-        
+
         case 'entityreference':
           $this->value = $inputs[$field['fieldName']]['und'][0]['target_id'];
           $this->value = explode(')', end(explode("(", $this->value)));
@@ -881,7 +914,7 @@ class itg_auto_save {
     unset($result[0]);
     return $result;
   }
-  
+
   /**
    * Get tid's for city from database.
    *
@@ -897,7 +930,7 @@ class itg_auto_save {
     $result = $term_name->execute()->fetchAll();
     return $result;
   }
-  
+
   /**
    * Get tid's for blogger from database.
    *
@@ -913,4 +946,5 @@ class itg_auto_save {
     $result = $term_name->execute()->fetchAll();
     return $result;
   }
+
 }

@@ -1,0 +1,102 @@
+<?php
+global $base_url;
+/**
+ * @file_field_delete_file
+ * Template to display a view as a table.
+ *
+ * - $title : The title of this group of rows.  May be empty.
+ * - $header: An array of header labels keyed by field id.
+ * - $caption: The caption for this table. May be empty.
+ * - $header_classes: An array of header classes keyed by field id.
+ * - $fields: An array of CSS IDs to use for each field id.
+ * - $classes: A class or classes to apply to the table, based on settings.
+ * - $row_classes: An array of classes to apply to each row, indexed by row
+ *   number. This matches the index in $rows.
+ * - $rows: An array of row items. Each row is an array of content.
+ *   $rows are keyed by row number, fields within rows are keyed by field ID.
+ * - $field_classes: An array of classes to apply to each field, indexed by
+ *   field id, then row number. This matches the index in $rows.
+ * @ingroup views_templates
+ */
+?>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
+<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery-pagination-min.js"></script>
+<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/bootstrap.min.js"></script>
+<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.snippet.min.js"></script>
+<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.easyPaginate.js"></script>
+
+
+<?php
+$video_data = "";
+?>
+<div class="video-ftp-div">
+    <div class="main-top-wraper">
+        <div class="search-checkbox-wraper"></div>
+        <div class="search-image-wraper"><?php echo t('Image');?></div>
+        <div class="search-video-id-wraper"><?php echo t('Video Id');?></div>
+        <div class="search-title-wraper"><?php echo t('Title');?></div>
+        <div class="search-size-wraper"><?php echo t('Size');?></div>
+        <div class="search-duration-wraper"><?php echo t('Duration');?></div>
+        <div class="search-date-wraper"><?php echo t('Video Time');?></div>
+        <div class="search-image-wraper"><?php echo t('Play');?></div>
+    </div>
+    <?php
+    foreach ($rows as $id => $row) {
+      $image_path = $row['sm_field_video_thumb_url'];
+      if (empty($row['sm_field_video_thumb_url'])) {
+        $image_path = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
+      }
+      $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_all_xml_content'] . '#video_gallery#';
+
+      if (VIDEO_PROPERTY != $row['sm_field_property']) {
+        if ($_GET['sm_field_video_used'] == "") {
+          if ($row['sm_field_video_used'] == 0) {
+            $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
+            $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+            $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="checkbox" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
+          }
+        }
+        else {
+          $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
+          $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+          $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="checkbox" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
+        }
+      }
+      if ($row['sm_field_video_used'] == 0 && VIDEO_PROPERTY == $row['sm_field_property']) {
+        $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
+        $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
+        $video_data .= '<div class="ftp_video_radio"><div class="video-checkbox-wraper"><input id = "video_id_' . $row['sm_field_video_id'] . '" type="checkbox" name="video-form" class="form-radio" value="' . $video_value . '"/></div><div class="serch-image">' . $video_image . '</div><div class="show_video_id">' . $row['sm_field_video_id'] . '</div><div class="show_video_title"><span>' . $row['label'] . '</span></div><div class="file_size">' . $file_size . 'MB</div><div class="file_size_duration">' . $row['sm_field_video_duration'] . '</div><div class="file_size_date_time">' . $row['sm_field_video_date_time'] . '</div><div><a href="javascript:void(0)" data-video-id ="' . $row['sm_field_video_id'] . '" class="play-video"><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a></div></div>';
+      }
+    }
+    echo '<div id="edit-video-browse-select">' . $video_data . '</div><div id="video_play_div"></div><script>jQuery("#edit-video-browse-select").easyPaginate({
+		paginateElement: ".ftp_video_radio",
+		elementsPerPage: 20,
+		effect: "climb"
+	});</script>';
+    ?>
+
+</div>
+<script>
+  jQuery('.play-video').click(function () {
+      var getvideo_id = $(this).attr('data-video-id');
+      jQuery.ajax({
+          url: Drupal.settings.basePath + 'internal-video-play',
+          type: 'post',
+          beforeSend: function (xhr) {
+              jQuery('#widget-ajex-loader').show();
+          },
+          data: {'videodata': getvideo_id, 'width': 400, 'height': 260},
+          success: function (data) {
+              jQuery('#video_play_div').html(data);
+              jQuery('#widget-ajex-loader').hide();
+
+          },
+          error: function (xhr, desc, err) {
+              console.log(xhr);
+              console.log("Details: " + desc + "\nError:" + err);
+          }
+      });
+  });
+
+</script>

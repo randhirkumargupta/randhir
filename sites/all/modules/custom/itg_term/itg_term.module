@@ -498,6 +498,7 @@ function itg_term_form_taxonomy_form_term_alter(&$form, &$form_state) {
       );
       unset($form['tags']);
       unset($form['#metatags']);
+      drupal_add_js("jQuery(document).ready(function(){ jQuery('#edit-path').hide(); });", 'inline');
       $form['description']['#access'] = FALSE;
       $form['relations']['#access'] = FALSE;
       $form['tags']['und']['#metatags']['#access'] = FALSE;

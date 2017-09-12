@@ -334,10 +334,10 @@ function itgadmin_breadcrumb($vars) {
     }
 
     //videogallery tab breadcrumb
-    if (in_array($content_url , $videogallery_tab)) {
+    /*if (in_array($content_url , $videogallery_tab)) {
       $breadcrumb[] = '<li>' . l('Home' , 'cms-user-dashboard') . '</li><li>' . l('Content Management ' , $content_url) . '</li><li>' . l($content_title , $content_url) . '</li>';
       return '<div class="breadcrumb"><ol>' . implode('  ' , $breadcrumb) . '</ol></div>';
-    }
+    }*/
   }
 
   // Optional: Add the site name to the front of the stack.

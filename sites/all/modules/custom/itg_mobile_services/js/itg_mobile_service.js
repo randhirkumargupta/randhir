@@ -695,7 +695,7 @@ var descriptionFlag = 1;
             });
 
             // hide astro first image
-            jQuery(".itg-astro-image img").first().css("display", "none");
+           // jQuery(".itg-astro-image img").first().css("display", "none");
 
             // Time filter ajax
             jQuery('document').ready(function () {

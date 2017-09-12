@@ -85,9 +85,22 @@ if (!empty($data['node_data'])) :
           $bigstory_fb_share = htmlentities($bigstory_title, ENT_QUOTES);
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
-          ?>
-        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
+          if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {
+                if (function_exists('itg_common_get_addontitle')) {
+                  $add_on_data = itg_common_get_addontitle($data['node_data']->nid);
+                  $pipelinetext = "";
+                  $pipelineclass = "";
+                  if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+                    $pipelineclass = 'pipeline-added';
+                    
+                  }
+                }
+              }
+              ?>
+        <h1 title="<?php echo strip_tags($node_title); ?>" class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?> <?php print $pipelineclass; ?>">
             <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE , "attributes" => array("title" => $share_title))); ?>
+            <?php echo $pipelinetext; ?>
           </h1>
         <?php endif; ?>
         <p>
@@ -146,27 +159,11 @@ if (!empty($data['node_data'])) :
             <?php if (!empty($data['node_data']->field_common_related_content['und'][0]['value'])) : ?>
           <div class="big-story-detail">
             <ul>
-              <?php
-              $related_string = $data['node_data']->field_common_related_content['und'][0]['value'];
-              if (!empty($related_string)) {
-                $nodes_with_prefix = explode(",", $related_string);
-                foreach ($nodes_with_prefix as $nodes_with_prefix) {
-                  $prefix_with_values = explode("_", $nodes_with_prefix);
-                  $site_hash[] = $prefix_with_values;
-                }
-              }
-              ?>
-              <?php
-              foreach ($site_hash as $site_hash_key => $nodes_array_with_prefix) {
-                $current_site_hash = strtolower($nodes_array_with_prefix[0]);
-                $current_entity_id = $nodes_array_with_prefix[1];
-                $related_data = itg_get_link_from_hash_and_entity_solr_search($current_entity_id, $current_site_hash);
-                $front_url = str_replace('-backend', '', $related_data->url);
-                if (!empty($related_data)) {
-                  print "<li>" . l($related_data->label, $front_url, array("attributes" => array("target" => "_blank" ,'title' => $related_data->label))) . "</li>";
-                }
-              }
-              ?>                       
+           <?php 
+           if(function_exists('itg_front_big_story_related')) {
+             print itg_front_big_story_related($data['node_data']->nid);
+           }
+           ?>                         
             </ul>
           </div>
   <?php endif; ?>

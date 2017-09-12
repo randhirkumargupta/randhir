@@ -14,6 +14,7 @@ function itg_flag_init() {
   global $user, $base_url;  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
+  $settings['default_image'] = $base_url.'/sites/all/themes/itg/images/itg_image647x363.jpg';
   // Get facebook share app id
   if(!empty(variable_get('itg_sharing_app_id'))) {
   $settings['fb_app'] = variable_get('itg_sharing_app_id');
@@ -46,6 +47,12 @@ function itg_flag_menu() {
   );
   $items['user-activity-front-highlight'] = array(
     'page callback' => 'itg_user_activity_front_highlight',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['fb-share-callback'] = array(
+    'page callback' => 'itg_fb_share_callback',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -243,6 +250,39 @@ function itg_user_activity_front_highlight() {
           $response = array('ok' => 'hightlights_emoji_true', 'nd_id' => $emoji_id[0], 'count' => $pre_count, 'rel' => $nd_id);
           print json_encode($response);
         }
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_fb_share_callback().
+ */
+function itg_fb_share_callback() {
+  $arg = arg();
+  $count = 0;
+  if (!empty($arg[1])) {
+    $query = db_select('itg_node_share_count', 'insc')
+        ->fields('insc', array('share_count'))
+        ->condition('insc.nid', $arg[1], '=');
+    $result = $query->execute()->fetchField();
+    if (!empty($result)) {
+      $count = (int) $count + (int) $result;
+    }
+    $count = $count + 1;
+    itg_report_get_node_share($arg[1], $count);
+  }
+  
+  if (!empty($arg[1]) && $arg[2] > 0) {
+    $activity_date = date('d-m-Y');
+    $activity_date_time = date('d-m-Y h:i:s');
+    $con = mongodb();
+    if ($con) {
+      $get_previous_info = itg_common_mongo_activity_fb_count($arg[2], 'front_user_activity', $arg[1], 'facebook_share');
+      if ($get_previous_info < 1) {
+        $people = $con->front_user_activity;
+        $qry = array("nid" => $arg[1], "uid" => $arg[2], "activity" => 'facebook_share', "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => '1', "timestamp" => time());
+        $result = $people->insert($qry);
       }
     }
   }
