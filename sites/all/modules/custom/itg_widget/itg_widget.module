@@ -1808,7 +1808,7 @@ function _get_content_type_for_widget($widget_name) {
   $content_type = array('story', 'videogallery', 'photogallery');
   switch ($widget_name) {
     case 'top_stories_widget':
-      $content_type = array('story');
+      $content_type = array('story', 'mega_review_critic', 'breaking_news');
       break;
   }
   return $content_type;
