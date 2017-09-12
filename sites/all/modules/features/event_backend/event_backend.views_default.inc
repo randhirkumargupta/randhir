@@ -2819,7 +2819,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  /* Relationship: Content: Programme Schedule (field_program_schedule) */
   $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
@@ -3094,7 +3094,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  /* Relationship: Content: Programme Schedule (field_program_schedule) */
   $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
@@ -4026,7 +4026,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
-  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  /* Relationship: Content: Programme Schedule (field_program_schedule) */
   $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
@@ -4113,7 +4113,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['title'] = 'Session wise Coverage';
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  /* Relationship: Content: Programme Schedule (field_program_schedule) */
   $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';

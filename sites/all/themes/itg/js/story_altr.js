@@ -29,5 +29,11 @@ jQuery(document).ready(function() {
     } catch (e) {
 
     }
-    
- });
+
+    jQuery('body').on('click', '.akamai-story-submit-holder', function(e) {
+        e.preventDefault();
+        jQuery('.akamai-submit-story-col').trigger('click');
+    });
+
+
+});

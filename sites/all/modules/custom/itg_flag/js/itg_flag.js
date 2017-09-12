@@ -14,27 +14,54 @@
 })(jQuery, Drupal, this, this.document);
 
 // script for facebook sharing
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    var app = Drupal.settings.itg_flag.settings.fb_app;
-    if (d.getElementById(id))
-        return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId="+app;
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+var app = Drupal.settings.itg_flag.settings.fb_app;
+window.fbAsyncInit = function() {
+        FB.init({
+          appId            : app,
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.10'
+        });
+        FB.AppEvents.logPageView();
+  };
 
-function fbpop(linkurl, title, desc, image, base_url, node_id) {
+  (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, base_url, node_id)
+{
+    if (overrideImage.length === 0) {
+        overrideImage = Drupal.settings.itg_flag.settings.default_image;
+    } else {
+        overrideImage = overrideImage;
+    }
+    
     FB.ui({
-        method: 'feed',
-        link: linkurl,
-        picture: image,
-        name: title,
-        //caption: desc,
-        description: desc
-    }, function (response) {
-        if (response.post_id != 'undefined' && response.post_id != '') {
+        method: 'share_open_graph',
+        action_type: 'og.shares',
+        action_properties: JSON.stringify({
+            object: {
+                'og:url': overrideLink,
+                'og:title': overrideTitle,
+                'og:description': overrideDescription,
+                'og:image': overrideImage
+            }
+        })
+    },
+    function (response) {
+        var front_uid = Drupal.settings.itg_flag.settings.uid;
+        jQuery.ajax({
+                //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                url: base_url + '/fb-share-callback/' + node_id,
+                type: 'POST',
+                dataType: 'JSON',
+        });
+        if (front_uid > 0) {
             jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 url: base_url + '/itg-global-fb-point/' + node_id + '/facebook_share',
@@ -42,9 +69,9 @@ function fbpop(linkurl, title, desc, image, base_url, node_id) {
                 dataType: 'JSON',
             });
         }
+        // Action after response
     });
 }
-
 
 //facebook sharing end here
 
@@ -139,7 +166,8 @@ jQuery(document).ready(function () {
 
 
     // jquery for front user activity
-    jQuery('#user-activity, .user-activity').click(function (event) {
+    jQuery('body').on('click', '#user-activity, .user-activity', function (event) {
+   // jQuery('#user-activity, .user-activity').click(function (event) {
         var nd_id = jQuery(this).attr('data-rel');
         var dtag = jQuery(this).attr('data-tag');
         var nodeId = jQuery(this).attr('data-nodeid');

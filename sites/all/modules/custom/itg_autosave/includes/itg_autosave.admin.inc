@@ -138,7 +138,25 @@ function itg_autosave_nodeform($nid, $ctype) {
     // Load node if it case of node edit.  
     $node = node_load($itg_nid->nid);
   }
-  if ($inputs['form_id'] == 'newsletter_node_form') {
+  
+  // Check for event title in next step for event form
+  if ($inputs['form_id'] == 'event_backend_node_form') {
+    if ($_GET['step'] != 'step_configuration') {
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
+    } else {
+      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
+    }
+    if (function_exists('itg_common_get_node_title')) {
+      $event_title = itg_common_get_node_title($arg[2]);
+      if (isset($event_title) && !empty($event_title) && is_string($event_title)) {
+        $title = isset($event_title) ? $event_title != '' ? check_plain($event_title) : ''  : '';
+      } else {
+        $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : ''  : '';
+      }
+    }
+  } 
+  // Set the flag value for op flag for newsletter form and set the title
+  elseif ($inputs['form_id'] == 'newsletter_node_form') {
     $node->field_op_flag[LANGUAGE_NONE][0]['value'] = 'Save as Draft';
     $title = isset($inputs['field_news_title']['und'][0]['value']) ? $inputs['field_news_title']['und'][0]['value'] != '' ? check_plain($inputs['field_news_title']['und'][0]['value']) : ''  : '';
   } else {
@@ -147,6 +165,13 @@ function itg_autosave_nodeform($nid, $ctype) {
 
   // If title is empty then exit the process.
   if ($node->nid != null) {
+    // Set up the meta tags values on node updated
+    if (isset($arg[2]) && !empty($arg[2])) {
+      $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
+      $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
+      $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
+    }
+    
     $lock_status = $itg_auto_save->itg_autosave_get_lock_status_node_id($node->nid);
     if ($lock_status->lock_status == 1 && $node->status == 0 && $arg[2] == 'null') {
       print t('Autosave lock from add page');
@@ -174,7 +199,7 @@ function itg_autosave_nodeform($nid, $ctype) {
   }
 
   /*   * ********* End of code field collection ********************************** */
-  if ($node->status == 0) {
+  if ($node->status == 0) { 
     $node = node_submit($node);
     try {
       node_save($node);

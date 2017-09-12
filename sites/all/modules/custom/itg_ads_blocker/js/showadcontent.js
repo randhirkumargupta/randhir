@@ -95,13 +95,16 @@ jQuery(document).ready(function () {
         jQuery('.show_instruction').hide();
         jQuery('#tab1' + currIndex).fadeIn();
     });
-
+    
+    if (__at__ != 1) {
     jQuery('body').on('click', 'a',function () {
         jQuery('html, body').animate({
             scrollTop: jQuery('[name="' + jQuery.attr(this, 'href').substr(1) + '"]').offset().top
         }, 1000);
         return false;
     });
+    }
+    
     var count_h = 3;
     setInterval(counter_adblock, 1000);
     function counter_adblock() {

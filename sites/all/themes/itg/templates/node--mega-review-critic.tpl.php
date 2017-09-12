@@ -26,7 +26,7 @@
     
   // get facebook share count 
   if (function_exists('itg_total_share_count')) {
-    $tot_count = itg_total_share_count($actual_link);
+    $tot_count = itg_total_share_count($nid);
   }
   if(function_exists('itg_report_get_node_share')) {
       $tot_count = itg_report_get_node_share($nid, $tot_count);
