@@ -145,32 +145,18 @@ function captureCurrentDiv(section_id)
 {
     var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
     html2canvas([document.getElementById('main-container-budget')], {
-        //allowTaint : false,
-	//proxy : 'html2canvasproxy.php',
-	logging : true,
+	//logging : true,
 	useCORS : true,
 	//taintTest : false,
         onrendered: function (canvas)
         {
-//            var extra_canvas = document.createElement("canvas");
-//            extra_canvas.setAttribute('width', 800);
-//            extra_canvas.setAttribute('height', 1000);
-//            var ctx = extra_canvas.getContext('2d');
-//            ctx.drawImage(canvas, 0, -40, 800, 1000);
-//            var dataURL = extra_canvas.toDataURL();
-            //window.open(dataURL);
-
 
             var img = canvas.toDataURL()
-            //var img = dataURL;
-            console.log(img);
             jQuery.post("/budget-save/"+section_id, {data: img, cookies_id: cookies_id }, function (file) {
-               //window.location.reload();
+               window.location.reload();
             });
         }
-        //,
-//          height:1000,
-//          width:1000
+
     });
 }
 
