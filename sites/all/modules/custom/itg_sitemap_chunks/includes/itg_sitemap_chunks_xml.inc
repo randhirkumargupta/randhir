@@ -142,7 +142,7 @@ function itg_sitemap_chunks_for_section($section_tid) {
         echo itg_sitemap_get_sitemap($total_links);
     } else {
         header('Content-type: application/xml');
-        echo __not_found_xml() ;
+        echo __not_found_xml();
     }
 }
 
@@ -197,10 +197,10 @@ function itg_sitemap_get_xml_data_for_section($section_tid) {
     $xml_data_array = array();
     module_load_include('inc', 'itg_sitemap_chunks', 'includes/itg_sitemap_chunks_section.db');
     // Get all child of section.
-  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
-  // Include section too in childern and combine into single array.
-  $childrens[] = $section_tid;
-  sort($childrens);
+    $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
+    // Include section too in childern and combine into single array.
+    $childrens[] = $section_tid;
+    sort($childrens);
     // Get database data to get frequency and type.
     $section_db_data = itg_sitemap_chunks_section_db_data($section_tid);
     $previous_time = itg_sitemap_get_previous_time($section_db_data);
@@ -224,7 +224,7 @@ function itg_sitemap_get_xml_data_for_section($section_tid) {
         $query->groupBy('n.nid');
         $results = $query->execute()->fetchAllAssoc('nid');
     } catch(Exception $ex) {
-        drupal_set_message($ex->getMessage() , 'error');
+        drupal_set_message($ex->getMessage(), 'error');
     }
     $nids_array = array_keys($results);
     if(!empty($nids_array)) {
@@ -340,9 +340,9 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
     // get chunk setting from setting form.
     $limit = variable_get('itg_sitemap_chunks_number', 50000);
     // required content type for archive sitemap
-    $content_types = array("photogallery", "videogallery", "story");
+    $content_types = array("story", "photogallery", "videogallery");
     // taking 2006 as hardcoded as migration of story , video and photogallery is done from 2006.
-    $year_range = range(1980, date('Y'));
+    $year_range = range(2016, date('Y'));
     foreach($year_range as $year) {
         $isRecreate = FALSE;
 //    $start_year = date("1/1/$year 00:00:00");
@@ -415,16 +415,39 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                         $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
                                 ->condition("sdt.field_story_schedule_date_time_value", date('Y-m-d H:i:s'), "<");
                         $query->condition($db_or);
-                        $query->condition('created', array($start_year_time_stamp, $end_year_time_stamp), 'BETWEEN');
-                        $query->range($x, $limit);
+                        $query->condition('n.created', array($start_year_time_stamp, $end_year_time_stamp), 'BETWEEN');
+                        // Prevent extra hit for last last processed nodes.
+                        if($isRecreate) {
+                            if(!empty(variable_get("itg_sitemap_chunks_last_processed_node_$CT"))) {
+                                $query->condition('n.nid', variable_get("itg_sitemap_chunks_last_processed_node_$CT"), ">");
+                            }
+                            //Handle case of if recreated nodes count is greather then $limit.
+                            $isRecreateNodeLimit = variable_get("itg_sitemap_chunks_number_$CT");
+                            $isRecreateNodeLimit_actual = $limit - $isRecreateNodeLimit;
+                            if($isRecreateNodeLimit_actual>0) {
+                                $query->range($x, $isRecreateNodeLimit_actual);
+                            } else {
+                                $query->range($x, $limit);
+                            }
+                        } else {
+                            $query->range($x, $limit);
+                        }
                         $query->orderBy('n.nid', "ASC");
                         $results = $query->execute()->fetchAllAssoc('nid');
                         // Sort here in decending mod.
                         krsort($results);
+                        // Save last process nid for content types.
+                        $results_nids = array_keys($results);
+                        $max_nid = $results_nids[0];
+                        if(!empty($max_nid)) {
+                            variable_set("itg_sitemap_chunks_last_processed_node_$CT", $max_nid);
+                        }
                         $xml = '';
+                        $old_xml = '';
                         if(!empty($results)) {
                             $xml = '<?xml version="1.0" encoding="UTF-8"?>';
                             $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                            $var_to_save = "";
                             // prepare result for xml with pagination.
                             foreach($results as $key => $data) {
                                 // check if current content type is saved in custom table of siemap.
@@ -434,8 +457,27 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                                 $xml .= '<url>';
                                 $xml .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
                                 $xml .= '</url>';
+                                $var_to_save .= '<url>';
+                                $var_to_save .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
+                                $var_to_save .= '</url>';
                             }
                             $xml .= '</urlset>';
+                            // If current year xml is processing then we
+                            if($isRecreate) {
+                                $old_xml = '<?xml version="1.0" encoding="UTF-8"?>';
+                                $old_xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                                $old_xml .= $var_to_save;
+                                $old_xml .= __get_old_xml_of_content_type($CT);
+                                // Add old xml with new generated xml.
+                                $full_xml = $var_to_save . __get_old_xml_of_content_type($CT);
+                                $old_xml .= '</urlset>';
+                                // Save again it for future use.
+                                variable_set("itg_sitemap_chunks_last_processed_node_xml_$CT", $full_xml);
+                                //Set max nid which is proceed , so that in next iteration nodes in xml will be of greather this nid.
+                                variable_set("itg_sitemap_chunks_number_$CT", count($results));
+                                //Set xml variable.
+                                $xml = $old_xml;
+                            }
                             // Prevent for destoryed xml file.
                             if(!empty($xml)) {
                                 $file_name = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
@@ -462,6 +504,16 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
             }
         }
     }
+}
+
+/**
+ * Function to get saved xml of content type.
+ * 
+ * @param string $content_type
+ * @return string
+ */
+function __get_old_xml_of_content_type($content_type) {
+    return variable_get("itg_sitemap_chunks_last_processed_node_xml_$content_type");
 }
 
 function __get_s3_path_from_strem_wrapper_uri($file_uri) {

@@ -222,6 +222,7 @@ function itg_menu_manager_form($form , &$form_state) {
     '#suffix' => '</div>' ,
     '#required' => TRUE ,
     '#default_value' => isset($default_values['url']) ? $default_values['url'] : "" ,
+    '#maxlength' => 255,
   );
 
   $form['url_window'] = array(
@@ -464,7 +465,12 @@ function itg_menu_manager_get_child_under_category_management($string) {
   $match_terms = $match_terms_query->execute()->fetchAll();
 
   foreach ($match_terms as $match_terms_data) {
-    $children[$match_terms_data->name . " [tid: " . $match_terms_data->tid . "]"] = $match_terms_data->name . " [tid: " . $match_terms_data->tid . "]";
+    $parents = array_reverse(taxonomy_get_parents_all($match_terms_data->tid));
+    $top_most_parent = "";
+    if(count($parents) > 1) {
+        $top_most_parent = $parents[0]->name . " <b> >> </b> ";
+    }
+    $children[$match_terms_data->name . " [tid: " . $match_terms_data->tid . "]"] = $top_most_parent  .  $match_terms_data->name . " [tid: " . $match_terms_data->tid . "]";
   }
   return drupal_json_output($children);
 }
@@ -531,7 +537,12 @@ function itg_menu_manager_get_child($tid , $string) {
       $match_terms = $match_terms_query->execute()->fetchAll();
 
       foreach ($match_terms as $match_terms_data) {
-        $children[$match_terms_data->name . " [tid: " . $match_terms_data->tid . "]"] = $match_terms_data->name . " [tid: " . $match_terms_data->tid . "]";
+        $parents = array_reverse(taxonomy_get_parents_all($match_terms_data->tid));
+        $top_most_parent = "";
+        if($match_terms_data->tid != $parent[0]->tid) {
+            $top_most_parent = $parents[0]->name . ">>";
+        }
+        $children[$match_terms_data->name . " [tid: " . $match_terms_data->tid . "]"] = $top_most_parent . $match_terms_data->name . " [tid: " . $match_terms_data->tid . "]";
       }
 
       return drupal_json_output($children);
