@@ -8067,6 +8067,9 @@ section.sidebar {
 /*CSS start for education page*/
 
 .education-layout-page {
+    .widget-wrapper {
+        position: relative;
+    }
     .droppable {
         overflow: hidden;
     }
@@ -8165,7 +8168,10 @@ section.sidebar {
             }
         }
         .more {
-            padding: 10px 20px 10px 0px;
+            padding: 10px 20px 20px 0px;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
         }
     }
     .section_wise_order-edu-from-the-magazine {
@@ -8897,7 +8903,7 @@ section.sidebar {
         }
         .itg-widget-child {
             .droppable {
-                height: 218px;
+                height: 231px;
             }
             .tech-block_5,
             .section_wise_order-standpoint {

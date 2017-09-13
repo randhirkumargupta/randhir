@@ -1041,11 +1041,17 @@ img {
         ul {
             &.itg-listing {
                 border: none;
-            }
-            li {
-                a {
-                    @include before-icon-list(5px, 5px, 22px, 8px, #959595, 100%);
-                    padding-left: 22px;
+                li {
+                    &:before {
+                        position: absolute;
+                        top: 8px;
+                        left: 5px;
+                        content: '';
+                        border-radius: 100%;
+                        background: #959595;
+                        height: 5px;
+                        width: 5px;
+                    }
                 }
             }
         }
