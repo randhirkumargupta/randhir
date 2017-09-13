@@ -19,6 +19,86 @@ function itg_print_team_permission() {
     )
   );
 }
+/**
+ * Implement hook_form
+ */
+
+function itg_print_team_form($form, &$form_state) {
+   
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => '',
+    '#size' => '20',
+    '#attributes' =>array('placeholder' => t('E-mail address'))
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Mail CSV',
+  );
+  
+  return $form;
+}
+
+/**
+ * Implement hook_form_validate
+ */
+
+function itg_print_team_form_validate($form, &$form_state) {
+  $valid_email = $form_state['values']['email'];
+  if (!valid_email_address($valid_email)) {
+  form_set_error('email', 'Sorry. Your email address,' . $valid_email . ', is not valid. Please submit a valid E-mail address.');
+  }
+}
+
+/**
+ * Implement hook_form_submit
+ */
+
+function itg_print_team_form_submit($form, &$form_state){
+  
+  drupal_set_message('Test Message');
+  
+    $params = array(
+      'body' => 'Test Mail By Developer for sending csv in mail' ,
+      'subject' => t('India Today | Print Team Test !') ,
+    );
+    $to = "dharmendrait08@gmail.com"; //
+    $mail = drupal_mail('itg_print_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = t('Failed to send the email!');
+      watchdog('canvas-email' , $error_msg , array() , WATCHDOG_ALERT);
+      return FALSE;
+    }
+}
+
+/**
+ * Implement hook_mail 
+ */
+function itg_print_team_mail($key, &$message, $params) {
+
+  $headers = array(
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8;',
+    'Content-Transfer-Encoding' => '8Bit',
+    'X-Mailer' => 'Drupal'
+  );
+
+  foreach ($headers as $key => $value) {
+    $message['headers'][$key] = $value;
+  }
+  
+  // Add attachment when available.
+  if (isset($params['attachment'])) {
+    $message['params']['attachments'][] = $params['attachment'];
+  }
+
+  $message['subject'] = $params['subject'];
+  $message['body'] = $params['body'];
+}
 
 /**
  * Implementation of hook_menu
