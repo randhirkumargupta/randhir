@@ -57,36 +57,79 @@ function itg_print_team_form_validate($form, &$form_state) {
 
 function itg_print_team_form_submit($form, &$form_state){
   
-  drupal_set_message('Test Message');
+ $email = $form_state['values']['email'];
   
-//    $params = array(
-//      'body' => 'Test Mail By Developer for sending csv in mail' ,
-//      'subject' => t('India Today | Print Team Test !') ,
-//    );
-//    $to = "dharmendrait08@gmail.com"; //
-//    $mail = drupal_mail('itg_print_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
-//    if ($mail['result']) {
-//      return TRUE;
-//    }
-//    else {
-//      $error_msg = t('Failed to send the email!');
-//      watchdog('canvas-email' , $error_msg , array() , WATCHDOG_ALERT);
-//      return FALSE;
-//    }
+  $role = user_role_load_by_name('Correspondent');
+  $result_user = db_select('users_roles', 'ur')
+      ->fields('ur', array('uid'))
+      ->condition('rid', $role->rid)
+      ->execute();
+
+  foreach ($result_user as $record) {
+    $uids[] = $record->uid;
+  }
+  
+  
   $uniqid = uniqid();
   $file = $uniqid . '.csv';
   
-  $csv_path = 'public://print_team/' . $file;
+  $csv_path = 'public://' . $file;
   $idea_csv = "Idea Title" . "," . "Magazine Kicker" . "," . "Section" 
           . "," . "Status" . "," . "Word Limit" . "," . "Timeline" . "," 
           . "Magazine" . "," . "Issue" . "," . "Created" . "," . "Rating" 
           . "," . "User Type" . "," . "Brief" . "\n\r\0";
   
-  $img_path = file_unmanaged_save_data($idea_csv, $csv_path);
-  $cropped_image = file_create_url($img_path);
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_pti_idea_status', 'ps', 'n.nid = ps.entity_id'); //JOIN node with magazines
+  $query->condition('n.type', 'print_team_integration')
+      ->condition('n.uid', $uids, 'IN')
+      ->fields('n')
+      ->orderBy('ps.field_pti_idea_status_value', 'ASC');
+  $result = $query->execute();
   
-  drupal_set_message($cropped_image);
-      
+    // Generate CSV content
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+    $title = $node->title;
+    $brief_body = strip_tags(trim(preg_replace('/\s\s+/', ' ', $node->body[LANGUAGE_NONE][0]['value'])));
+    $brief = $brief_body;
+    $kicker = $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value'];
+    $section_tid = itg_print_tem_get_section($node->field_story_category[LANGUAGE_NONE][0]['tid']);
+    $status = $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'];
+    $word_limit = $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'];
+    $time_line = explode(" ", $node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+    $get_magazine = itg_print_tem_get_magazine($node->field_pti_magazine[LANGUAGE_NONE][0]['target_id']);
+    $getissue = itg_print_tem_get_magazine($node->field_pti_issue[LANGUAGE_NONE][0]['target_id']);
+    $get_issue = explode(" ", $getissue);    
+    
+    $created_date = date('d/m/Y', $node->created);
+    $rating = $node->field_story_rating[LANGUAGE_NONE][0]['value'] ? $node->field_story_rating[LANGUAGE_NONE][0]['value'] : '0';
+    $idea_csv .= $title . "," . $kicker . "," . $section_tid 
+            . "," . $status . "," . $word_limit . "," . $time_line[0] . "," . $get_magazine 
+            . "," . $get_issue[0] . "," . $created_date . "," . $rating . "," 
+            . "Correspondent" . "," . $brief . "\n\r\0";
+    
+  }
+  
+  $print_team_csv_path = file_unmanaged_save_data($idea_csv, $csv_path);
+  $csv_path = file_create_url($print_team_csv_path);
+  
+      $params = array(
+      'body' => 'Test Mail By Developer for sending csv in mail' ,
+      'subject' => t('India Today | Print Team Test !') ,
+      'attachment' => $csv_path,  
+    );
+    $to = $email;
+    $site_email = variable_get('site_mail', '');
+    $mail = drupal_mail('itg_print_team' , 'itg_print_team_csv' , $to , language_default() , $params , $site_email , TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = t('Failed to send the email!');
+      watchdog('itg-print-team csv mail' , $error_msg , array() , WATCHDOG_ALERT);
+      return FALSE;
+    }
 }
 
 /**
