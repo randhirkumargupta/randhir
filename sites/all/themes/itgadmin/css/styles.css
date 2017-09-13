@@ -6623,7 +6623,7 @@ padding: 0 0 10px;*/
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 350px;
+  width: 310px;
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;
@@ -14446,8 +14446,4 @@ div.ctools-modal-content .form-submit {
 #associate_video_settings iframe [id*="protected-pages-edit"] fieldset table thead th:nth-child(3),
 [id*="protected-pages-edit"] fieldset #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-node-moderation thead th:nth-child(3), #associate_video_settings iframe #taxonomy-overview-terms thead th:nth-child(3), #associate_video_settings iframe [id*="daily-motion-video-dashboard"] table thead th:nth-child(3), [id*="daily-motion-video-dashboard"] #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .redirect-list-tableselect thead th:nth-child(3) {
   width: 100px;
-}
-
-.widgets-view .view-filters {
-  display: none;
 }
