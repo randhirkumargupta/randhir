@@ -287,6 +287,11 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
       }
       $query->replaceParam("fq", '(' . $str . ')');
+    } else {
+      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
+      $def_bun = implode(' OR ', $bundle_name);
+      $str = 'bundle_name:(' . $def_bun . ')';
+      $query->replaceParam("fq", '(' . $str . ')');
     }
     //pr($query->getSolrParams());
   }
@@ -409,6 +414,10 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
               $type = ' AND ';
               $val_str1 = 'Story';
               $str = 'bundle_name:(' . $val_str1 . ')'.$type;
+              if(!empty($_GET['sm_field_itg_common_by_line_name'])) {
+              $byline_string = '"' . $_GET['sm_field_itg_common_by_line_name'] . '"';
+              $str .= 'sm_field_itg_common_by_line_name:(' . $byline_string . ')'.$type;
+              }
               $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
               $query->replaceParam("fq", '(' . $str . ')');
               
@@ -416,7 +425,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             else {
               $val_str = implode(' OR ', $val);
               if ($val_str == 'All') {
-                $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+                $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
                 $val_str = implode(' OR ', $bundle_name);
               }
               else {
@@ -595,7 +604,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
     }
-    //pr($query->getSolrParams());
+   // pr($query->getSolrParams());
   }
 }
 

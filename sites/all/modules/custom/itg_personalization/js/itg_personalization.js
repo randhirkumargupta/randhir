@@ -308,5 +308,5 @@ jQuery(document).ready(function () {
 
                     }
                 }
-            });
+            }); 
 });
