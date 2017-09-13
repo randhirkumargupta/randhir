@@ -272,4 +272,18 @@ function itg_fb_share_callback() {
     $count = $count + 1;
     itg_report_get_node_share($arg[1], $count);
   }
+  
+  if (!empty($arg[1]) && $arg[2] > 0) {
+    $activity_date = date('d-m-Y');
+    $activity_date_time = date('d-m-Y h:i:s');
+    $con = mongodb();
+    if ($con) {
+      $get_previous_info = itg_common_mongo_activity_fb_count($arg[2], 'front_user_activity', $arg[1], 'facebook_share');
+      if ($get_previous_info < 1) {
+        $people = $con->front_user_activity;
+        $qry = array("nid" => $arg[1], "uid" => $arg[2], "activity" => 'facebook_share', "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => '1', "timestamp" => time());
+        $result = $people->insert($qry);
+      }
+    }
+  }
 }

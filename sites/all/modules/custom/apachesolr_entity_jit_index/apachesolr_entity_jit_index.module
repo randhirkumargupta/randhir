@@ -26,9 +26,7 @@ function apachesolr_entity_jit_index_menu() {
 }
 
 /**
- * Impelements form for configuration.
- *
- * {@inheritdoc}
+ * Implements apachesolr_entity_jit_index_entity_form().
  */
 function apachesolr_entity_jit_index_entity_form() {
   // Make array for content type.
@@ -88,7 +86,8 @@ function apachesolr_entity_jit_index_entity_update($entity, $type) {
 }
 
 /**
- * Helper function to send entities to apachesolr for immediate index.
+ * Implements apachesolr_entity_jit_index_immediately().
+ *   Helper function to send entities to apachesolr for immediate index.
  */
 function apachesolr_entity_jit_index_immediately($entity, $type) {
   // Don't index unpublished entities.

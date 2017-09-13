@@ -1351,6 +1351,7 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
 }
 
 function itg_categor_form_edit_category_radio($form , &$form_state) {
+  $type = '';
   if (arg(0) == 'node' && arg(1) == 'add') {
     $type = arg(2);
   }

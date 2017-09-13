@@ -718,6 +718,7 @@ function itg_newsletter_content_data() {
 //    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
     $query->fields('n', array('nid'));
     $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'story', '=');
     $query->condition('n.nid', $getnid, '=');
 //    $query->condition('mnh.state', 'published', '=');
     $result = $query->execute();
