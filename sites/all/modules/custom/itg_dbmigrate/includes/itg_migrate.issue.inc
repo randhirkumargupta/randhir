@@ -29,7 +29,7 @@ class ItgIssueMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'all_issue.xml';
+    $items_url = $xml_folder . 'not-migrated-issues-02-05-2017.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
