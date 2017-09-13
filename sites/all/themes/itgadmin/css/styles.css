@@ -14447,7 +14447,3 @@ div.ctools-modal-content .form-submit {
 [id*="protected-pages-edit"] fieldset #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .page-node-moderation thead th:nth-child(3), #associate_video_settings iframe #taxonomy-overview-terms thead th:nth-child(3), #associate_video_settings iframe [id*="daily-motion-video-dashboard"] table thead th:nth-child(3), [id*="daily-motion-video-dashboard"] #associate_video_settings iframe table thead th:nth-child(3), #associate_video_settings iframe .redirect-list-tableselect thead th:nth-child(3) {
   width: 100px;
 }
-
-.widgets-view .view-filters {
-  display: none;
-}
