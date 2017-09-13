@@ -2928,7 +2928,12 @@ footer .multiple-items-footer i.slick-next {
 .story-section .story-right .stryimg .tagview:hover .person {
   display: block;
 }
-.story-section .story-right .stryimg .story-photo-icon {
+.story-section .story-right .stryimg a {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.story-section .story-right .stryimg a .story-photo-icon {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -8123,9 +8128,6 @@ section.sidebar .block-itg-ads {
   height: auto;
   max-height: 100%;
 }
-.auto-layout-page .special-top-news ul {
-  padding-top: 20px !important;
-}
 .auto-layout-page .special-top-news ul.itg-listing {
   border: none;
 }
@@ -8272,25 +8274,8 @@ section.sidebar .block-itg-ads {
 .tech-layout-page .widget-wrapper.tech-block_2 {
   border: 1px solid #dddddd;
 }
-.tech-layout-page .special-top-news ul {
-  padding-top: 20px;
-}
 .tech-layout-page .special-top-news ul.itg-listing {
   border: none;
-}
-.tech-layout-page .special-top-news ul li a {
-  position: relative;
-  padding-left: 22px;
-}
-.tech-layout-page .special-top-news ul li a:before {
-  position: absolute;
-  top: 22px;
-  left: 8px;
-  content: '';
-  border-radius: 100%;
-  background: #959595;
-  height: 5px;
-  width: 5px;
 }
 .tech-layout-page .tech_most_read {
   border: 1px solid #ddd;
@@ -9777,6 +9762,9 @@ section.sidebar .block-itg-ads {
       border: 1px solid #ddd;
   }*/
 }
+.education-layout-page .widget-wrapper {
+  position: relative;
+}
 .education-layout-page .droppable {
   overflow: hidden;
 }
@@ -9856,7 +9844,10 @@ section.sidebar .block-itg-ads {
   left: 10px;
 }
 .education-layout-page .shadow-on .more {
-  padding: 10px 20px 10px 0px;
+  padding: 10px 20px 20px 0px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
 }
 .education-layout-page .section_wise_order-edu-from-the-magazine {
   background: #f3f3f3;
@@ -9899,7 +9890,6 @@ section.sidebar .block-itg-ads {
 }
 .education-layout-page .auto-block-2 .special-top-news .itg-listing {
   border: none;
-  padding-top: 20px;
 }
 .education-layout-page .education_how_made_id {
   padding: 10px;
@@ -10594,7 +10584,7 @@ section.sidebar .block-itg-ads {
   border: none;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .droppable {
-  height: 218px;
+  height: 231px;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .widget-title,
 .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .widget-title {
@@ -12638,7 +12628,8 @@ h1.about-us-heading + div p {
 }
 .factoids-page .fun-facts,
 .factoids-page .social-share {
-  display: inline;
+  display: inline-block;
+  vertical-align: top;
 }
 .factoids-page .fun-facts h2,
 .factoids-page .fun-facts ul,
@@ -12649,6 +12640,11 @@ h1.about-us-heading + div p {
 }
 .factoids-page h3 {
   color: #000;
+}
+.factoids-page .social-share ul {
+  margin-top: 3px;
+  padding-left: 10px !important;
+  display: inline-block;
 }
 .factoids-page .social-share ul li a {
   color: #fff;
@@ -12661,9 +12657,6 @@ h1.about-us-heading + div p {
 }
 .factoids-page .social-share ul li:first-child i {
   color: #000;
-}
-.factoids-page ul li {
-  padding-top: 8px;
 }
 
 .factoids-slider ul {

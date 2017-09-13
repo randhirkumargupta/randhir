@@ -1,10 +1,15 @@
 <?php
 global $base_url;
 $anchor = $rows[0];
+$nid = $anchor['nid'];
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = itg_common_only_text_string($anchor['title']);
 $src = '';
+// prepare url for sharing
+$uri = base64_encode($actual_link);
+//get follow anchor status
+$follow_status = $content["follow_status"];
 ?>
 <div class="anchor-landing">
   <div class="anchor">
@@ -24,6 +29,16 @@ $src = '';
     <div class="anchor-right" >
       <?php echo $anchor['title']; ?>
       <div class="less-content">
+          <!-------  followers count -->
+        <?php
+        if (function_exists('itg_get_followers')) {
+          $followers = itg_get_followers($nid);
+          if(!empty($followers)) {
+            print "<span class='followers-link'>" . $followers . " followers</span>";
+          }
+        }
+        ?>
+          <!-------  followers count -->
         <?php 
           echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, ".."); 
           $share_desc = '';
@@ -37,12 +52,16 @@ $src = '';
         <?php } ?>
       </div>  
       <div class="social-icon">
-        <ul>                
+        <ul>
+              <?php if (function_exists('itg_follow_unfollow_print')) {
+                print itg_follow_unfollow_print($nid);
+              }
+              ?>
+            <li>
+                <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print t('Twitter'); ?></a>
+            </li>
           <li>
-            <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
-          </li>
-          <li>
-            <a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook"></i></a>
+              <a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"><i class="fa fa-facebook"></i><?php print t('Facebook'); ?></a>
           </li>
         </ul>
       </div>

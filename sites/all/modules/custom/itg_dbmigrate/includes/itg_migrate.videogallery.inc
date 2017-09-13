@@ -79,6 +79,7 @@ class ItgVideogalleryMigration extends XMLMigration {
       'pagetitle' => t('Page title'),
       'metadescription' => t('metadescription'),
       'keywords' => t('Keywords'),
+      'id' => t('id'),
     );
 
 
@@ -87,7 +88,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     $file_path = DRUPAL_ROOT . '/' . 'sites/default/files';
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-    $items_url = $xml_folder . 'videogallery.xml';
+    $items_url = $xml_folder . 'failed_video.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -130,7 +131,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     // configuration mapped in prepare
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate'); // published date
-    $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
+    //$this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate'); // published date
     $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
     $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
     // Image field 
@@ -199,7 +200,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
     $this->addFieldMapping('pathauto')->defaultValue(0);
-    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
+    //$this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
@@ -211,7 +212,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_noindex_nofollow', 'noindex_nofollow')->xpath('noindex_nofollow');
     $this->addFieldMapping('field_syndication_photo_video', 'syndications_photo')->xpath('syndications_photo');
     $this->addFieldMapping('migrate_redirects', 'weburl')->xpath('weburl');
-
+    $this->addFieldMapping('field_story_source_id', 'id')->xpath('id'); // source id
 
     /* $this->addUnmigratedDestinations(array('promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new',
       'status',
@@ -308,6 +309,12 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    if(empty((string) $row->xml->metatags->sefurl)) {
+       $row->xml->metatags->sefurl =  itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
+    }
+    if(empty($row->xml->modifieddate) || (string) $row->xml->modifieddate == 0) {
+      $row->xml->modifieddate = (string) $row->xml->createddate;
+    }
     if (!empty($row->xml->extralargeimage)) {
       $row->xml->extralargeimage = itg_dbmigrate_imagepath_url((string) $row->xml->extralargeimage);
     }
@@ -532,6 +539,7 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function prepare($node, stdClass $row) {
+    $node->path['alias'] = (string) $row->xml->metatags->sefurl; // path alias set because upper not work
     $node->teaser = (string) $row->xml->description;
     if (!empty($row->category_new)) {
       $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
@@ -560,6 +568,19 @@ class ItgVideogalleryMigration extends XMLMigration {
       $node->field_multi_bitrate[LANGUAGE_NONE] = $row->bitrates;
     }
     $node->uid = $row->xml->createdby;
+    
+    // publish time for photo
+    if (!empty((int) $row->xml->publisheddate)) {
+      $published_date = (int) $row->xml->publisheddate;
+    }
+    else {
+      $published_date = (int) $row->xml->createddate;
+    }
+    if(!empty($published_date)) {
+      $mod_time = $published_date;
+      $modi_time = date('Y-m-d H:i:s', $mod_time);
+      $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $modi_time;
+    }
   }
 
   public function complete($entity, $row) {
@@ -647,6 +668,7 @@ class ItgVideogalleryMigration extends XMLMigration {
       }
       }
       } */
+    print $row->xml->id.' ';
   }
 
 }

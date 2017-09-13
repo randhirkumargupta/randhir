@@ -680,11 +680,11 @@ function itg_workflow_node_presave($node) {
       }
     }
   }
-  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
+ /* else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
     if ($node->status == 1) {
       $node->workbench_moderation_state_new = 'published';
     }
-  }
+  }*/
   if (!empty($node->op)) {
     if($node->type == 'breaking_news' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i');
@@ -921,8 +921,10 @@ function itg_workflow_node_insert($node) {
     //getting mail id's of high level users
 //      
     $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
-    $user_email = get_email_by_roll($rid);
-    workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+    if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      $user_email = get_email_by_roll($rid);
+      workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
+    }
     //   drupal_set_message("unser node insert");
     //unset session if exists during node insert.
     if (isset($_SESSION['node_preview_unique'])) {

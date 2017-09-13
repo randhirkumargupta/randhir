@@ -1000,21 +1000,24 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
  * Implements itg_story_photo_story_previous()
  * @param type $node_id
  */
-function itg_story_photo_story_redirect($node_id, $type = 'prev') {
+function itg_story_photo_story_redirect($node_id, $type = 'prev', $cat_id) {
   global $base_url;
   $current_time = date("Y-m-d H:i:s");
   $query = db_select('field_data_field_story_type', 'fst');
   $query->leftJoin('node', 'n', 'n.nid=fst.entity_id');
   $query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'fst.entity_id = expiry.entity_id');
   $query->leftJoin('field_data_field_story_expires', 'expiry_status', 'n.nid = expiry_status.entity_id');
+  $query->leftJoin('field_data_field_primary_category', 'pr', 'pr.entity_id = fst.entity_id');
   $query->fields('fst', array('entity_id'));
   $query->condition('fst.field_story_type_value', 'photo_story');
   if ($type == 'next') {
     $query->condition('fst.entity_id', $node_id, '>');
+    $query->condition('pr.field_primary_category_value', $cat_id);
     $query->orderBy('fst.entity_id', 'ASC');
   }
   else {
     $query->condition('fst.entity_id', $node_id, '<');
+    $query->condition('pr.field_primary_category_value', $cat_id);
     $query->orderBy('fst.entity_id', 'DESC');
   }
 
@@ -1040,13 +1043,13 @@ function itg_story_photo_story_redirect($node_id, $type = 'prev') {
  * @param type $node_id
  * @return string
  */
-function itg_story_photo_story_html($node_id) {
+function itg_story_photo_story_html($node_id, $primary_cat = NULL) {
   // generate the html for photo story top slider
   if (!empty($node_id)) {
     $node = node_load($node_id);
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $next = itg_story_photo_story_redirect($node_id, 'next');
-    $previous = itg_story_photo_story_redirect($node_id, 'prev');
+    $next = itg_story_photo_story_redirect($node_id, 'next', $primary_cat);
+    $previous = itg_story_photo_story_redirect($node_id, 'prev', $primary_cat);
     $next_link_count = count($photo_story) - 1;
     $html = '';
     $html .= '<div class="photo-story-img multiple-photo-disc">';

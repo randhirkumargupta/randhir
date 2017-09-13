@@ -6,7 +6,6 @@ version = 7.x-1.9
 dependencies[] = charts_highcharts
 dependencies[] = features
 dependencies[] = itg_reports
-dependencies[] = statistics
 dependencies[] = views_customstyle
 dependencies[] = views_data_export
 features[ctools][] = views:views_default:3.0
