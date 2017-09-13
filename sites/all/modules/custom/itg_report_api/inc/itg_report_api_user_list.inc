@@ -17,7 +17,7 @@ function getUserList_Report($user_type, $user_sub_type, $item_per_page, $pageno)
     global $base_url;
     $list = array();
     $data = array();
-    $total_cont = 0;
+    $total_cont = 1;
     $range_max = $item_per_page;
     //$photolist = array();
     if (!$pageno == 0) {
