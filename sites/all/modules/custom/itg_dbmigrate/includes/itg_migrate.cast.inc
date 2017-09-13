@@ -38,13 +38,14 @@ class ItgCastMigration extends XMLMigration {
       'metakeywords' => t('metakeywords'),
       'matadescription' => t('Matadescription'),
       'career_graph' => t('career_graph'),
+      'id' => t('id'),
     );
     
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
     //$xml_folder = $file_path . '/' . 'migrate/xml_file/';
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/movie-review-xmls-19-06-2017/';
 
     $items_url = $xml_folder . 'movie_cast_master.xml';
     
@@ -131,7 +132,7 @@ class ItgCastMigration extends XMLMigration {
   
   public function prepare($node, stdClass $row) {
        
-    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 1208991; // fix for Celebrity profile
+    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 1208861; // fix for Celebrity profile
     //$node->field_celebrity_pro_occupation[LANGUAGE_NONE][1]['tid'] = 285903; // fix for anchor for 31 update;
     $node->uid = $row->xml->created_by;
     // Manage department in byline
@@ -152,6 +153,7 @@ class ItgCastMigration extends XMLMigration {
           $node->field_byline_department[LANGUAGE_NONE][0]['tid'] = $department_option_value;
         }
     }
+    $node->field_old_content_source_id['und'][0]['value'] = 'byline-'. (int) $row->xml->id;
   }
   
   public function complete($entity, $row) {    

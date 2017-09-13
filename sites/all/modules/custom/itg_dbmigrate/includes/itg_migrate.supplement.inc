@@ -4,7 +4,7 @@
 /**
  * ItgSupplementMigration extends XMLMigration 
  */
-class ItgSupplementsMigration extends XMLMigration {
+class ItgSupplementMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Supplement)');
@@ -19,6 +19,8 @@ class ItgSupplementsMigration extends XMLMigration {
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
       'keywords' => t('Keywords'),
+      'supplement_largecoverimage' => t('Supplement large cover image'),
+      'supplement_smallcoverimage' => t('Supplement small cover image'),
     );
     
     // This can also be an URL instead of a local file path.
@@ -26,7 +28,8 @@ class ItgSupplementsMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'indiatoday_suppliment_07_16.xml';
+    $items_url = $xml_folder . 'indiatoday_suppliment_2007.xml';
+    //$items_url = $xml_folder . 'indiatoday_suppliment_15052017.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -66,7 +69,6 @@ class ItgSupplementsMigration extends XMLMigration {
     
     $this->addFieldMapping('title', 'title')->xpath('title');
     $this->addFieldMapping('field_supp_select_magazine', 'selectmagazine')->xpath('selectmagazine');
-    $this->addFieldMapping('field_supp_issue', 'issue')->xpath('issue');
     $this->addFieldMapping('field_supp_publish', 'publish')->xpath('publish');
     $this->addFieldMapping('status', 'publish')->xpath('publish');
     
@@ -103,9 +105,25 @@ class ItgSupplementsMigration extends XMLMigration {
      if (isset($row->xml->selectmagazine) && !empty($row->xml->selectmagazine)) {
       $row->xml->selectmagazine = 573; // magazine indiatoday by mail
    }
+   if(isset($row->xml->issue) && !empty($row->xml->issue)) {
+     $table_name = 'migrate_map_itgissue';
+     $source_cid = (int) $row->xml->issue;
+     $issue_nid = get_itg_destination_id($table_name, $source_cid);
+     $query = db_select('node', 'n');
+     $query->fields('n', array('title'));
+     $query->condition('n.nid', $issue_nid, '=');
+     $result = $query->execute()->fetchField();
+     //$issue_time = strtotime($result);
+     $row->xml->issue = $result;
+   }
   }
   
   public function prepare($node, stdClass $row) {
+    print (string) $row->xml->id.', ';
+    // Issue based
+    if(isset($row->xml->issue) && !empty($row->xml->issue)) {
+        $node->field_supp_issue[LANGUAGE_NONE][0]['value'] = $row->xml->issue;
+    }
     $node->uid = 970; //siteadmin;
   }
 }
