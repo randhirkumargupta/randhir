@@ -206,7 +206,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   
-  if ($form['#vocabulary']->machine_name == 'category_management') {
+  if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'category_management') {
     $form['redirect']['#access'] = FALSE;
   }
   

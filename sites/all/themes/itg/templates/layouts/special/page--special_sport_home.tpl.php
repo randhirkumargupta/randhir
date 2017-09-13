@@ -316,12 +316,12 @@ if ($theme != 'itgadmin') {
                                 </div>
 
                                 <div class="col-md-12 col-sm-6 itg-layout-195 mt-10">
-                                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Scorcard');?></strong> )</div>
+                                  <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Scorecard');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
    
-                                                     <span class="widget-title"><?php print t('Scorcard') ;?></span>
+                                                     <span class="widget-title"><?php print t('Scorecard') ;?></span>
 
                                                 <!-- for admin  -->
                                                
