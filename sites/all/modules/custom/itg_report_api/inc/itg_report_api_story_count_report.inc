@@ -68,7 +68,7 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
         $wordcount = count(explode(" ", strip_tags(trim($body_value))));
         $created_datetime = date("Y-m-d H:i:s", $created);
         $prime_cat = getNodePrimeCatByNid($nid);
-
+        $video_embed = "no";
         // list data
         $list[$nid]['id'] = "$nid";
         $list[$nid]['title'] = "$title";
@@ -77,7 +77,7 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
         $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
-        $list[$nid]['video_embed'] = "$nid";
+        $list[$nid]['video_embed'] = "$video_embed";
         $list[$nid]['created_by'] = "$created_by";
     }
     //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
