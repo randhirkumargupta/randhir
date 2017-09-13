@@ -59,20 +59,34 @@ function itg_print_team_form_submit($form, &$form_state){
   
   drupal_set_message('Test Message');
   
-    $params = array(
-      'body' => 'Test Mail By Developer for sending csv in mail' ,
-      'subject' => t('India Today | Print Team Test !') ,
-    );
-    $to = "dharmendrait08@gmail.com"; //
-    $mail = drupal_mail('itg_print_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
-    if ($mail['result']) {
-      return TRUE;
-    }
-    else {
-      $error_msg = t('Failed to send the email!');
-      watchdog('canvas-email' , $error_msg , array() , WATCHDOG_ALERT);
-      return FALSE;
-    }
+//    $params = array(
+//      'body' => 'Test Mail By Developer for sending csv in mail' ,
+//      'subject' => t('India Today | Print Team Test !') ,
+//    );
+//    $to = "dharmendrait08@gmail.com"; //
+//    $mail = drupal_mail('itg_print_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
+//    if ($mail['result']) {
+//      return TRUE;
+//    }
+//    else {
+//      $error_msg = t('Failed to send the email!');
+//      watchdog('canvas-email' , $error_msg , array() , WATCHDOG_ALERT);
+//      return FALSE;
+//    }
+  $uniqid = uniqid();
+  $file = $uniqid . '.csv';
+  
+  $csv_path = 'public://print_team/' . $file;
+  $idea_csv = "Idea Title" . "," . "Magazine Kicker" . "," . "Section" 
+          . "," . "Status" . "," . "Word Limit" . "," . "Timeline" . "," 
+          . "Magazine" . "," . "Issue" . "," . "Created" . "," . "Rating" 
+          . "," . "User Type" . "," . "Brief" . "\n\r\0";
+  
+  $img_path = file_unmanaged_save_data($idea_csv, $csv_path);
+  $cropped_image = file_create_url($img_path);
+  
+  drupal_set_message($cropped_image);
+      
 }
 
 /**
