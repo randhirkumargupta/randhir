@@ -4,8 +4,9 @@
  * @file
  * The ITG Ads module.
  *
- * Contains functionality for Ads. *
+ * Contains functionality for Ads management.
  */
+
 /**
  * Implements hook_block_info(). 
  * {@inheritdoc}
@@ -442,7 +443,8 @@ function itg_ads_node_validate($node, $form, &$form_state) {
 }
 
 /**
- * Getting device information
+ * Implements get_device_info().
+ *  Getting device information
  * @return string $device
  */
 function get_device_info() {
@@ -508,11 +510,12 @@ function itg_ads_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function ads_form_validate_term_validate($form, &$form_state) {
-  
+  /* TO DO for future use */
 }
 
 /**
- * Getting add mode
+ * Implements itg_ads_get_mode().
+ *  Getting add mode
  * @param string $type
  * @return array $array;
  */
@@ -695,7 +698,8 @@ function check_add_template_final($placeholder, $page_name) {
 }
 
 /**
- * Check whether the master template is already exist or not
+ * Implements check_ads_placeholders().
+ *  Check whether the master template is already exist or not
  * @param string $template
  * @return int entity_id;
  */
@@ -715,7 +719,8 @@ function check_ads_placeholders($templates) {
 }
 
 /**
- * This is for getting itg custom page name
+ * Implements get_itg_page_name().
+ *  This is for getting itg custom page name
  * @param string $placeholdername
  * @return array $ad_value;
  */
@@ -797,7 +802,8 @@ function get_itg_page_name($placeholder_name) {
 }
 
 /*
- * Getting all ads of selected placeholder on the basis of placeholder and page name
+ * Implements get_ad_of_placeholder().
+ *  Getting all ads of selected placeholder on the basis of placeholder and page name
  * @param string $placeholdername
  * @param string $page_name
  * @return array $ads;
@@ -819,8 +825,8 @@ function get_ad_of_placeholder($placeholder_name, $page_name) {
 }
 
 /*
- * Implementation of hook_node_update()
- * Updating ROS for default configuration
+ * Implementation of hook_node_update().
+ * {@inheritdoc}
  */
 
 function itg_ads_node_update($node) {
@@ -840,8 +846,8 @@ function itg_ads_node_update($node) {
 }
 
 /*
- * Implementation of hook_node_insert()
- * Inserting ROS for default configuration
+ * Implementation of hook_node_insert().
+ * {@inheritdoc}
  */
 
 function itg_ads_node_insert($node) {
@@ -861,7 +867,8 @@ function itg_ads_node_insert($node) {
 }
 
 /*
- * Getting ads code by using ad_value and device(device can be mobile and website)
+ * Implements get_desired_code_for_ads_placing().
+ *  Getting ads code by using ad_value and device(device can be mobile and website)
  * @param string $ad_value
  * @param string $device
  * @return string $ads;
@@ -882,7 +889,7 @@ function get_desired_code_for_ads_placing($ad_value, $device) {
 
 /**
  * Implements get_header_body_start_end_code()
- * This is the code that will return the header script and body script on the basisc of conditional section id as per business logic
+ *  This is the code that will return the header script and body script on the basisc of conditional section id as per business logic
  * @return array $adsheaderbody;
  */
 function get_header_body_start_end_code() {
@@ -1057,7 +1064,7 @@ function itg_ads_views_data() {
 }
 
 /**
- * Implements itg_ads_preview_ads()
+ * Implements itg_ads_preview_ads().
  */
 function itg_ads_preview_ads($arg) {
   $renderabledata = itg_ads_get_renderable_prev_data($_REQUEST);
@@ -1069,7 +1076,7 @@ function itg_ads_preview_ads($arg) {
 }
 
 /**
- * Implements itg_ads_get_renderable_prev_data()
+ * Implements itg_ads_get_renderable_prev_data().
  */
 function itg_ads_get_renderable_prev_data($prev_raw_data) {
   $renderable_data = array();
