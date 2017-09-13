@@ -15,6 +15,8 @@ $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NON
 $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
+
+  //p($videoids);
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -108,7 +110,12 @@ $uri = base64_encode($actual_link);
                               <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
                                       <div style="display:none" class="loading-video">Load.....</div>
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                                          <?php if($videoids[0]->video_repo_type == 'INTERNAL') {
+                                            print theme('internal_video_player', array("data" => $videoids[0]->fid));
+          }
+                                           ?>
                                       </div>
+                                      <?php if($videoids[0]->video_repo_type != 'INTERNAL') { ?>
                                       <script>
                                         jQuery(window).load(function () {
                                             jQuery('.video-slider-images').removeClass('pointer-event-none');
@@ -133,6 +140,7 @@ $uri = base64_encode($actual_link);
                                             jQuery('.image_index_<?php print $keys + 1; ?>').trigger('click');
                                         });
                                       </script>
+                                      <?php } ?>
                                   </div>
                               </div>
                             <?php }

@@ -73,19 +73,19 @@ jQuery(document).ready(function () {
 (function ($) {
     Drupal.behaviors.events = {
         attach: function (context, settings) {
-            jQuery('#edit-label').keyup(function() {
-            $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxStart(function () {
-               // if (jQuery('#edit-label').val() != "") {
+            jQuery('#edit-label').keyup(function () {
+                $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxStart(function () {
+                    // if (jQuery('#edit-label').val() != "") {
                     jQuery('#widget-ajex-loader').show();
                     jQuery('#edit-label').attr("disabled", true);
-               // }
+                    // }
+                });
             });
-             });
             $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxComplete(function () {
                 jQuery('#widget-ajex-loader').hide();
                 jQuery('#edit-label').attr("disabled", false);
             });
-       
+
 
         }
     };
@@ -400,57 +400,6 @@ jQuery(document).ready(function () {
 
         });
 
-
-
-
-        var base_url = Drupal.settings.baseUrl.baseUrl;
-        $(".asso-filed-video").click(function (e) {
-            window.parent.jQuery("#videoupload").trigger('mousedown');
-            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-            var video_fids = [];
-            var selected_check_boxes_values = new Array();
-            var selected_check_boxes_index = 0;
-            jQuery("#video_iframe").contents().find('.video-checkbox-form:checked').each(function () {
-                selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
-            });
-            if (selected_check_boxes_index == 0) {
-                alert("Please select video file.");
-            } else {
-                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-                var getbtnmane = $(this).attr('btn_name');
-                jQuery.ajax({
-                    url: base_url + '/solr-video-make-fid',
-                    type: 'post',
-                    beforeSend: function (xhr) {
-                        window.parent.jQuery('#widget-ajex-loader').show();
-                        $('.asso-filed-video').prop('disabled',true);
-                    },
-                    data: {'checkvalue': selected_check_boxes_values},
-                    success: function (data) {
-                        $('.asso-filed-video').prop('disabled',false);
-                        jQuery("#video_iframe").contents().find('.video-checkbox-form').prop( "checked", false );
-                        var as = JSON.parse(data);
-                        var parsed = JSON.parse(data);
-                        for (var x in parsed) {
-                            video_fids.push(parsed[x]);
-                        }
-                        window.parent.jQuery("#videoupload").trigger('mousedown');
-                        window.parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
-                        window.parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
-                        window.parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-                        window.parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
-                            try {
-                                window.parent.jQuery('#widget-ajex-loader').hide();
-                            } catch (err) {
-
-                            }
-
-                        });
-                    }
-
-                });
-            }
-        });
         $('input.rating').click(function () {
             $(this).parent().addClass('rated-div current-rating').prevAll().addClass('rated-div');
             $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
@@ -1164,6 +1113,91 @@ jQuery(document).ready(function () {
             jQuery("#edit-field-story-category").css("display", "none");
         } else {
             jQuery("#edit-field-story-category").css("display", "block");
+        }
+    });
+
+    jQuery(".asso-filed-video").live('click', function (e) {
+        var base_url = Drupal.settings.baseUrl.baseUrl;
+        window.parent.jQuery("#videoupload").trigger('mousedown');
+        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+        var video_fids = [];
+        var selected_check_boxes_values = new Array();
+        var selected_data_video_type = new Array();
+        var selected_check_boxes_index = 0;
+        jQuery("#video_iframe").contents().find('.video-checkbox-form:checked').each(function () {
+            selected_check_boxes_values[selected_check_boxes_index++] = jQuery(this).val();
+            var video_type_atr = jQuery(this).attr('data-video-type');
+            selected_data_video_type.push(video_type_atr);
+
+        });
+
+        var unique = selected_data_video_type.filter(function (itm, i, selected_data_video_type) {
+            return i == selected_data_video_type.indexOf(itm);
+        });
+
+        if (selected_check_boxes_index == 0) {
+            alert("Please select video file.");
+        } else {
+            if (unique.length > 1) {
+                alert("Please select same plateform video.");
+                return false;
+            }
+            var getvideo_tyepe = window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+            if (getvideo_tyepe != "") {
+                if (unique[0] == 'DM' && getvideo_tyepe == 'INTERNAL') {
+                    alert("Please remove Internal plateform Video ");
+                    return false;
+
+                }
+                if (unique[0] == 'INTERNAL' && getvideo_tyepe == 'DM') {
+                    alert("Please remove Dailymotion plateform Video ");
+                    return false;
+                }
+            }
+
+
+            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+            var getbtnmane = jQuery(this).attr('btn_name');
+            jQuery.ajax({
+                url: base_url + '/solr-video-make-fid',
+                type: 'post',
+                beforeSend: function (xhr) {
+                    window.parent.jQuery('#widget-ajex-loader').show();
+                    jQuery('.asso-filed-video').prop('disabled', true);
+                },
+                data: {'checkvalue': selected_check_boxes_values},
+                success: function (data) {
+                    jQuery(".asso-filed-video").unbind('click');
+                    jQuery('.asso-filed-video').prop('disabled', false);
+
+                    jQuery("#video_iframe").contents().find('.video-checkbox-form').prop("checked", false);
+                    var as = JSON.parse(data);
+                    var parsed = JSON.parse(data);
+                    for (var x in parsed) {
+                        video_fids.push(parsed[x]);
+                    }
+                    window.parent.jQuery("#videoupload").trigger('mousedown');
+                    window.parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
+                    window.parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
+                    window.parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+                    window.parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
+                        try {
+                            if (unique[0] == 'DM') {
+                                window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
+                            }
+                            if (unique[0] == 'INTERNAL') {
+                                window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
+                            }
+
+                            window.parent.jQuery('#widget-ajex-loader').hide();
+                        } catch (err) {
+
+                        }
+
+                    });
+                }
+
+            });
         }
     });
 });

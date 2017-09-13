@@ -25,6 +25,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'user-pass',
   );
+  $items['internal_video_player'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'internal-video-player',
+  );
   return $items;
 }
 

@@ -1,28 +1,33 @@
+<?php
 
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+?>
+<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
 
 <?php
-$width = 420;
-$height = 500;
-$video_all_data = json_decode($video_data, TRUE);
+$width = 622;
+$height = 446;
+$data_video = itg_videogallery_get_video_xml_data_by_fid($data);
+$video_all_data = json_decode($data_video[0]->video_xml_data, TRUE);
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
-
-    <div id="videoplayer"> </div>
-
-
+<div id="setupplayer" style="width:<?php echo $width . 'px'; ?>;">
+    <div id="videoplayer"> </div></div>
 <script type="text/javascript">
   var myUserAgent = navigator.userAgent;
-
   var myUserAgent = navigator.userAgent;
   var currentItem = 0;
   //var videoSectionId=321;
   var vdopiavideoid = '15719';
   //var arrPlaylist=[""];
-
   var autoplay = "true";
   var mp4videoFlagJS = 1;
   //$(document).ready(function() {	
@@ -51,7 +56,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
-         
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,
@@ -66,20 +70,14 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
-      //alert('Setup Error:'+event.message);
       if (event.message == 'Error loading player: No playable sources found') {
-
-          //alert(event.message);
           document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
       } else {
           loadplayerjw();
       }
   });
 
-  //});           
-
-
-
+           
 
 </script>
 

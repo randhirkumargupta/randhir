@@ -30,7 +30,6 @@ function itg_videogallery_push_itg_video() {
         $video_bitrate = implode($get_video_bitrate_info['bitrate'], '@');
         $video_ratio = implode($get_video_bitrate_info['ratio'], '@');
       }
-
       $node = new stdClass();
       $node->title = $video_info['filename'];
       $node->type = "itg_solr_video";
@@ -100,7 +99,7 @@ function itg_videogallery_push_itg_video() {
           $insert_id = db_insert('dailymotion_response_details')
               ->fields($data_insert)
               ->execute();
-          rename($path_xml . $file_name, $path_xml_old . $file_name);
+         // rename($path_xml . $file_name, $path_xml_old . $file_name);
         }
         catch (Exception $e) {
           # TODO can search $e for 'Integrity constraint violation' or 'Duplicate entry'
