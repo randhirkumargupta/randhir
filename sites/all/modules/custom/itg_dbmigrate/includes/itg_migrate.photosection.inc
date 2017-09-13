@@ -24,11 +24,11 @@ class ItgPhotoMigration extends XMLMigration {
     );
 
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = DRUPAL_ROOT . '/' . 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/conclave-master-files/conclave_photo_other_category_seprate/';
     
-    $items_url = $xml_folder . 'photo_category.xml';
+    $items_url = $xml_folder . 'conclave_photo_category_master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -93,10 +93,10 @@ class ItgPhotoMigration extends XMLMigration {
 
   }
    public function prepareRow($row) {
-     $term_name = 'Photo';
-     $vid = 14;
-     $parent_tid = itg_db_migrate_parent_term($term_name, $vid);
-     $row->xml->section_id = $parent_tid;
+//     $term_name = 'Photo';
+//     $vid = 14;
+//     $parent_tid = itg_db_migrate_parent_term($term_name, $vid);
+     $row->xml->section_id = 1208521;
    }
    
   public function complete($entity, $row) {  

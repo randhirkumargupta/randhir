@@ -206,6 +206,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   
+  if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'category_management') {
+    $form['redirect']['#access'] = FALSE;
+  }
+  
   $buttonvocab_array = array('bloggers');
   $messagevocab_array = array('bloggers', 'movies');
   // code to add cancel button taxonomy page

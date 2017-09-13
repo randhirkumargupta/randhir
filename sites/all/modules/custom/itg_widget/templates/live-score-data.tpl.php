@@ -10,9 +10,9 @@ if (!empty($data)) : global $base_url; ?>
             <span class="batteamscore"> <?php echo $data['currentscore']->batteamruns; ?>/<?php echo $data['currentscore']->batteamwkts; ?></span>
             <span class="crrrunrate">Crr <?php echo $data['currentscore']->crr; ?>  <span class="crrrunover">(<?php echo $data['currentscore']->batteamovers; ?> Over)</span></span>           
         </div>
-        <span>Live: Commentary</span> |
-            <span>Full Scoredcard |</span>
-            <span>Graphs</span>       
+        <span><?php print t('Live: Commentary'); ?></span> |
+            <span><?php print t('Full Scorecard');?> |</span>
+            <span><?php print t('Graphs'); ?></span>       
     </div>
 <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
