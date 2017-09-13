@@ -16,7 +16,7 @@ if (!empty($content)):
   }
   $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-    $class_listicle = ' buzz-feedback listicle-feedback';
+    $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -212,7 +212,7 @@ if (!empty($content)):
       endif;
     ?>
       <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
             <div class="byline">              
               <?php if ($sponsor_text == ''): ?>
@@ -341,7 +341,7 @@ if (!empty($content)):
           </div>
   <?php } ?>
         <!-- For buzzfeed section start -->
-              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
+              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { //  || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])?>                       
           <div class="buzzfeed-byline">
             <div class="byline">
               <div class="profile-pic">
@@ -711,11 +711,13 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
-                }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //Code for the listicle token
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -742,12 +744,15 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
-                }
-                else {
-                  // Print story body
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                  
+                 }
+                }else{
                   print $story_body;
                 }
+                //End of the code
+                
                 // If survey is associated with story, render survey form
                 if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
                   $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
