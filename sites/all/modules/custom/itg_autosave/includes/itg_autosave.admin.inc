@@ -147,8 +147,6 @@ function itg_autosave_nodeform($nid, $ctype) {
   if ($inputs['form_id'] == 'event_backend_node_form') {
     if ($_GET['step'] != 'step_configuration') {
       $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
-    } else {
-      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
     }
     if (function_exists('itg_common_get_node_title')) {
       $event_title = itg_common_get_node_title($arg[2]);
@@ -159,7 +157,6 @@ function itg_autosave_nodeform($nid, $ctype) {
       }
     }
   }
-  
   // Set the flag value for op flag for newsletter form and set the title
   elseif ($inputs['form_id'] == 'newsletter_node_form') {
     $node->field_op_flag[LANGUAGE_NONE][0]['value'] = 'Save as Draft';
@@ -214,7 +211,6 @@ function itg_autosave_nodeform($nid, $ctype) {
   if ($node->status == 0) { 
     $node = node_submit($node);
     try {
-      
       node_save($node);
     } catch (Exception $e) {
       watchdog('ERROR', $e->getMessage());
