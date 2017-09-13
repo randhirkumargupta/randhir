@@ -582,10 +582,10 @@ function itg_get_reporter_list($name) {
  * {@inheritdoc}
  */
 function topic_form_submit_handler($form, &$form_state) {
-  $bundle = array_values($form_state['input']['bundle_name']);
+  //$bundle = array_values($form_state['input']['bundle_name']);
   $hash = array_values($form_state['values']['hash']);
   $search_key['keyword'] = $form_state['values']['keyword'];
-  $search_key['bundle_name'] = $bundle;
+  $search_key['bundle_name'][''] = 'All';
   $search_key['hash'] = $hash;
   $search_key['custom_drp'] = $form_state['values']['custom_drp'];
   if(!empty($form_state['values']['ds_changed'])) {
