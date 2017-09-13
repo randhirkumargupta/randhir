@@ -798,7 +798,10 @@ if (!empty($content)):
                  <?php
 
                  if (!empty($node->field_photo_story)) {
-                   $output = itg_story_photo_story_html($node->nid);
+                   if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+                     $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+                   }
+                   $output = itg_story_photo_story_html($node->nid, $primary_cat);
                    print $output;
                  }
                  ?>

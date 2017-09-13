@@ -35,15 +35,18 @@ class ItgBylineMigration extends XMLMigration {
       'department' => t('department'),
       'occupation' => t('occupation'),
       'pagetitle' => t('Page title'),
-      'keywords' => t('Keywords'),
+      'metakeywords' => t('metakeywords'),
+      'matadescription' => t('Matadescription'),
+      'id' => t('id'),
     );
     
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/movie-review-xmls-19-06-2017/';
     
-    $items_url = $xml_folder . 'byline-master.xml';
+    //$items_url = $xml_folder . 'byline-master.xml';
+    $items_url = $xml_folder . 'reviewer_master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -86,6 +89,8 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('field_story_extra_large_image', 'profile_image')->xpath('profile_image');
     $this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
     $this->addFieldMapping('body', 'full_description')->xpath('full_description');
+     $this->addFieldMapping('body:format', 'format')
+         ->defaultValue('full_html');
     //$this->addFieldMapping('pathauto', 'sef_url')->xpath('sef_url');
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
@@ -97,24 +102,31 @@ class ItgBylineMigration extends XMLMigration {
     
     $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');   
     /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
-    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
+    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');*/
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
-    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');*/
+    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/matadescription');
+    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/metakeywords');
     
   }
   
   public function prepareRow($row) {
       // manage created user
-    if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
+    if (isset($row->xml->created_by) && !empty($row->xml->created_by) && $row->xml->created_by != 0) {
       $created_uid = (string) $row->xml->created_by;
       $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
       $row->xml->created_by = $orignal_crated_uid;
-    }    
+    }else {
+      $row->xml->created_by = 970; // siteadmin
+    } 
+    if(empty($row->xml->sef_url)) {
+       $row->xml->sef_url =  itg_common_custompath_insert_val((string) $row->xml->author_name);
+    }
   }
   
-  public function prepare($node, stdClass $row) {       
+  public function prepare($node, stdClass $row) {
+       
     $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 285750; // fix for reporter
+    //$node->field_celebrity_pro_occupation[LANGUAGE_NONE][1]['tid'] = 285903; // fix for anchor for 32 update;
     $node->uid = $row->xml->created_by;
     // Manage department in byline
     if (isset($row->xml->company) && !empty($row->xml->company)) {
@@ -134,6 +146,7 @@ class ItgBylineMigration extends XMLMigration {
           $node->field_byline_department[LANGUAGE_NONE][0]['tid'] = $department_option_value;
         }
     }
+    $node->field_old_content_source_id['und'][0]['value'] = 'byline-'. (int) $row->xml->id;
   }
   
   public function complete($entity, $row) {    
