@@ -205,7 +205,10 @@ function itg_story_node_insert($node) {
       $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
 
+    $byline_count = itg_get_byline_count($unique_id);
+    if($byline_count > 0) {
     itg_byline_order_update($publish_id, $nid, $unique_id);
+    }
 
     unset($_SESSION['unique']);
   }
@@ -227,8 +230,10 @@ function itg_story_node_update($node) {
     if (!empty($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
       $publish_id = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
     }
-
+    $byline_count = itg_get_byline_count($unique_id);
+    if($byline_count > 0) {
     itg_byline_order_update($publish_id, $nid, $unique_id);
+    }
   }
 }
 
@@ -252,5 +257,20 @@ function itg_byline_order_update($byline, $nid, $uniqueid) {
           ->execute();
       $i++;
     }
+  }
+}
+
+/*
+ * itg_get_byline_count().
+ * @param string $uniqueid
+ */
+function itg_get_byline_count($uniqueid) {
+  if ($uniqueid) {
+    $query = db_select('itg_multi_byline_info', 'fse');
+    $query->fields('fse');
+    $query->condition('fse.uniqueid', $uniqueid, '=');
+    $result = $query->execute();
+    $byline_count = $result->rowCount();
+    return $byline_count;
   }
 }
