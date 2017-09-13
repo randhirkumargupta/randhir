@@ -58,7 +58,7 @@ list($width, $height) = getimagesize($url);
       if ($key == 0) {
         
         print '<div class="syndicate-lable"><input type="checkbox" class ="is_synd is_synd_all" name="syndicate_' . $explodedata[0] . '" value="1"> Syndicate</div>';
-        if ($content_name == 'field_story_template_buzz' || $content_name == 'story' || $content_name == 'field_photo_story' || $content_name == 'field_story_technology') {
+        if ($content_name == 'field_story_template_buzz' || $content_name == 'story' || $content_name == 'field_photo_story' || $content_name == 'field_story_technology' || $content_name == 'bodyeditor') {
           print '<div class="cpation-wraper"> <textarea name="caption[]" class="image_caption_first" placeholder="Caption"></textarea></div>';
         }
         print '<input type="text" name="image_alt[]" placeholder="Alt Text" class="alt_text"  value=""></br><input type="text" name="image_title[]" placeholder="Title" class="image_title"  value=""></br>';
