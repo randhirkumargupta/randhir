@@ -1729,6 +1729,16 @@
     width: 100%;
   }
 
+/* tech product rating */
+.story-photo-list-wrapper .slick-next{right: -18px;}
+.tech-pros-cons-main h2{margin-left:0%; overflow:hidden;width: 100%;}
+ul.pron-cons-img{ width:100%; margin-bottom: 10px; }
+ul.pron-cons-img li img{ margin-right:0;margin-top:0px; width:100%;}
+ul.tech-pros{ margin-left:6%; }
+ul.tech-pros,ul.tech-cons{ width:46%; }
+
+
+
 }
 @media all and (min-width: 680px) {
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
