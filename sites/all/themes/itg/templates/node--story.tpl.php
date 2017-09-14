@@ -732,6 +732,13 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
                   }
                 }
+                if (strpos($story_body, '[ITG:MEGA_REVIEW_CRITIC:')) {
+                  if (preg_match('/ITG:MEGA_REVIEW_CRITIC:([0-9]+)/', $story_body, $matches_megareview)) {
+                    $review_nid = $matches_megareview[1];
+                  }
+                  $iframe_html = '<iframe src="/node/'.$review_nid.'" width="100%" height="4000" frameborder="0" scrolling="no"></iframe>';
+                  $story_body = str_replace('[ITG:MEGA_REVIEW_CRITIC:' . $review_nid . ']', $iframe_html, $story_body);
+                }
                 //Code for the listicle token
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
