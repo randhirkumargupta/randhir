@@ -275,3 +275,11 @@ function itg_sitemap_published_date_order() {
   }
   return $is_published_date_order;
 }
+
+function __not_found_xml() {
+  $xml = '<Error>
+      <Code>'.t('AccessDenied').'</Code>
+      <Message>'.t('No items Found').'</Message>
+  </Error>';
+  return $xml;
+}

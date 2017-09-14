@@ -65,7 +65,7 @@ if (!in_array('administrator', $user->roles)) {
 <div class="user-role">
   <a id="belly" href="javascript:void(0);" class="notifi">
     <i class="fa fa-bell-o"></i>
-    <dfn>
+    <dfn class="itg-final-bell-count">
       <?php 
 //        if (function_exists('get_task_count_of_user') || function_exists('get_idea_count_of_user')) {
 //          $idea = get_idea_count_of_user();
@@ -95,7 +95,7 @@ if (!in_array('administrator', $user->roles)) {
     print '  Username - '. $user->name.' | Role - '.$role_display.' | '.$myaccount;
    ?>
 </span>                                                  
-<div class="bell-notice"><?php print $itg_octopus_get_slug_notification['html']; ?></div>
+<div class="bell-notice itg-final-bell-notice"><?php print $itg_octopus_get_slug_notification['html']; ?></div>
 
 </div>
 <?php } ?>

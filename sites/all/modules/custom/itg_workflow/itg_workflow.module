@@ -947,7 +947,7 @@ function itg_workflow_node_update($node) {
     itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
   }
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
-    watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+   // watchdog("email_widget", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
     return;
   }
   //if (isset($node->op)) {

@@ -213,7 +213,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
@@ -287,7 +287,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
@@ -336,8 +336,8 @@
                       <h3><span>MOVIE VIDEOS</span></h3>
                       <?php
                       $video_node = node_load($asso_vid_id);
-                      if(!empty($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+                      if(!empty($video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
+                      $final_image = image_style_url("anchors_landing",$video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
                       $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
                       }
@@ -365,8 +365,8 @@
                       <h3><span><?php print t('PHOTOS'); ?></span></h3>
                       <?php
                       $photo_node = node_load($asso_photo_gallery);
-                      if(!empty($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
+                      if(!empty($photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
+                      $final_image = image_style_url("anchors_landing",$photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
                        $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg'; 
                       }

@@ -1,3 +1,8 @@
+/*
+ * @file itg_photogallery.js
+ * Contains all functionality related to photogallery
+ */
+
 (function ($) {
 
     Drupal.behaviors.itg_photogallery_form = {

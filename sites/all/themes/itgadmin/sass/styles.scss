@@ -1252,7 +1252,7 @@ div.vertical-tabs {
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 430px;
+        min-height: 700px;
         @extend .full;
         border: 1px solid #d9d9d9;
         .messages--error{
@@ -1442,7 +1442,7 @@ div.vertical-tabs {
             }
           }
         }
-        div.description{left: 220px !important;}
+        div.description{left: 100% !important;}
       }
     }
   }
@@ -3210,6 +3210,13 @@ div.node{
       min-width: 620px;
     }
   }
+  td.field-multiple-drag{
+    width: 30px;
+    padding-right: 0;
+    display: block;
+    min-width: 0;
+    border: none;
+  }
   .field-name-field-start-time{
     fieldset.date-combo{
       > legend{padding-top: 28px;}
@@ -3249,6 +3256,7 @@ div.node{
       }
     } 
   }
+  + div.clearfix .form-submit{margin-left: 280px;}
 }
 .view .view-filters .views-exposed-form .views-exposed-widget{
   &.views-widget-filter-created, &.views-widget-filter-changed{
@@ -3700,7 +3708,9 @@ div#autocomplete{
         border-top: 1px solid #f5f5f5;
       }
       div{
+        white-space: normal;
         word-wrap: break-word;
+        max-width: 100%;
       }
     }
   }
@@ -3926,6 +3936,7 @@ div.node{
       position: absolute;
       right: 0; 
       top: 0;
+      width: 80px;
       a{
         color: #337ab7;
         text-decoration: none;
@@ -5928,6 +5939,7 @@ div.node{
 
 .itg_image_repository{
   font-family: "Lucida Grande", Verdana, sans-serif;
+  overflow: auto;
   .image_repository{
     width: 100%;
     display: inline-block;
@@ -6216,6 +6228,7 @@ div.node{
     .date-padding .form-item > label{display: none;}
     .date-padding input[type="text"]{width: 100%;}
   }
+  .description{left: 100% !important;}
 }
 .node-print_team_integration-form{
   .form-field-name-field-pti-words-limit{
@@ -12055,6 +12068,7 @@ fieldset#edit-xmlsitemap{
   height: 20px;
   padding-top: 1px;
   background-color: rgba(0,0,0,.2);
+  text-align: center;
 }
 [id*="itg-image-croping-image-info-form"]{
   .form-item-syndicate{
@@ -12173,3 +12187,107 @@ fieldset#edit-xmlsitemap{
     float: right;
     margin-left: 10px;
 }
+[id*="views-exposed-form-sold-item-history-page"]{
+  .views-widget-filter-created > label, .views-widget-filter-created .description {
+    display: none !important;
+  }
+}
+[id*="field-event-highlights-values"] > tbody > tr > td{
+  position: relative;
+  > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 10px;
+    margin: 0;
+  }
+}
+.form-field-name-field-newsl-newsletter-content .description { left:1024px !important;}
+.page-itg-layout-manager .region-sidebar-second{
+  .block-itg-layout-manager h2 + div{
+    height: 185px;
+    #autocomplete{
+      max-height: 110px;
+      overflow-y: auto;
+    }
+  }
+  #block-itg-layout-manager-layout-section-widgets{
+    .templates-widgets{max-height: 110px;}
+  }
+}
+.page-itg-layout-manager-home .region-sidebar-second{
+  .block-itg-layout-manager h2 + div{
+    height: 185px;
+    #autocomplete{
+      max-height: 140px;
+      overflow-y: auto;
+    }
+  }
+}
+[id*="field-gallery-image-values"]{
+  tbody tr td:nth-child(2) .field-name-field-photo-small-image{
+    .form-type-managed-file .has-preview, 
+    .form-type-managed-file .image-widget-data, 
+    .form-type-managed-file .image-widget-data .filefield-sources-imce-browse, 
+    .form-type-managed-file .has-preview .image-widget-data{
+      height: 162px;
+    }
+    .form-type-managed-file .has-preview .image-widget-data{
+      .form-type-textfield:nth-child(3) {
+        display: block;
+        bottom: 38px;
+      }
+    }
+  }
+}
+
+/*Section header css start*/
+.section_right_side_block .multi-right-block{
+    position: absolute;
+    bottom: 0px;
+    left: 571px;
+    border-radius: 1px;
+    border: 1px solid #1fb5ad;
+    background-color: #1fb5ad;
+    box-shadow: 0 0 5px #3a8a82;
+    padding: 0 20px;
+    line-height: 32px;
+    height: 36px;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+.blocks-list{
+padding: 0 10px 0 220px;
+    position: relative;
+}
+.blocks-list .blocks-ul{
+    display: inline-block;
+    list-style: outside none none;
+    vertical-align: top;
+    width: 332px;
+}
+.blocks-list .blocks-ul li{
+	background-color: #e5e5e5;
+    border-top: 1px solid #fff;
+    padding: 10px;
+    cursor: move;
+    min-height: 38px;
+    font-size: 12px;
+    position: relative;
+}
+.blocks-list .blocks-ul li .fa-arrows{
+	float: left;
+    margin: 2px 2px 0 0;
+}
+.blocks-list .save-blocks{
+    bottom: 1px;
+    position: absolute;
+    right: 140px;
+}
+.section_right_side_block{position:relative;}
+
+/*Section header css end*/

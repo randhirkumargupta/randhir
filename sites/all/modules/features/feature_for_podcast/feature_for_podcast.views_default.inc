@@ -1084,11 +1084,13 @@ function feature_for_podcast_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'podcast' => 'podcast',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -1128,6 +1130,7 @@ function feature_for_podcast_views_default_views() {
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'podcast ID';
@@ -1162,6 +1165,7 @@ function feature_for_podcast_views_default_views() {
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -1191,30 +1195,11 @@ function feature_for_podcast_views_default_views() {
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state_1']['id'] = 'state_1';
-  $handler->display->display_options['filters']['state_1']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state_1']['field'] = 'state';
-  $handler->display->display_options['filters']['state_1']['value'] = array(
-    'draft' => 'draft',
-  );
-  /* Filter criterion: Workbench Moderation: From state */
-  $handler->display->display_options['filters']['from_state']['id'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['from_state']['field'] = 'from_state';
-  $handler->display->display_options['filters']['from_state']['value'] = array(
-    'published' => 'published',
-  );
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['path'] = 'unpublished-podcast';
 
   /* Display: Published podcast */
@@ -1505,18 +1490,6 @@ function feature_for_podcast_views_default_views() {
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
   /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
   $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
@@ -1527,6 +1500,11 @@ function feature_for_podcast_views_default_views() {
   $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
   $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'published-podcast';
 
   /* Display: My Un Published podcast */

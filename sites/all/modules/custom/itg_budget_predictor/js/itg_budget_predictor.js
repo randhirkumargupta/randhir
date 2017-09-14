@@ -33,7 +33,9 @@ Drupal.behaviors.itg_budget_predictor = {
             }
 
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
-                var isUpdated;
+                 jQuery("#sortable4").sortable();
+                 jQuery("#sortable4").disableSelection();
+                
                 jQuery('#ranking-content ul li, #ranking-content-main ul li, .ranking-content ul li').mouseover(function () {
                     var ranking_column_id = jQuery(this).data("id");
                     var str = jQuery(this).attr("id");
@@ -41,13 +43,11 @@ Drupal.behaviors.itg_budget_predictor = {
                     
                      jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
-                            connectWith: '.connectedSortable',
+                          connectWith: '.connectedSortable',
+                          stop : checkContainer('sortable4'),
+  
                             update: function (event, ui) {
-                                isUpdated = true;
-                            },
-                            stop: function (event, ui) {
-                                if (isUpdated == true) {
-                                    //Do Something
+                                
                                     jQuery.ajax(
                                             {
                                                 type: "POST",
@@ -72,7 +72,7 @@ Drupal.behaviors.itg_budget_predictor = {
 
                                                 }
                                             });
-                                }
+                              //  }
                             }
                         }).disableSelection();
                     
@@ -86,6 +86,16 @@ Drupal.behaviors.itg_budget_predictor = {
     }
 };
 
+
+function checkContainer(originalId){
+        return function(event, ui){
+            var div = $(this).data().sortable.currentContainer.element
+            var id = $(div).parent('td').attr('class')
+            if(id == 'ranking-content bp-items'){
+              $(this).sortable('cancel')
+            }    
+        }
+    }
 
 // script for facebook sharing
 (function (d, s, id) {
@@ -135,13 +145,32 @@ function captureCurrentDiv(section_id)
 {
     var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
     html2canvas([document.getElementById('main-container-budget')], {
+        //allowTaint : false,
+	//proxy : 'html2canvasproxy.php',
+	logging : true,
+	useCORS : true,
+	//taintTest : false,
         onrendered: function (canvas)
         {
+//            var extra_canvas = document.createElement("canvas");
+//            extra_canvas.setAttribute('width', 800);
+//            extra_canvas.setAttribute('height', 1000);
+//            var ctx = extra_canvas.getContext('2d');
+//            ctx.drawImage(canvas, 0, -40, 800, 1000);
+//            var dataURL = extra_canvas.toDataURL();
+            //window.open(dataURL);
+
+
             var img = canvas.toDataURL()
+            //var img = dataURL;
+            console.log(img);
             jQuery.post("/budget-save/"+section_id, {data: img, cookies_id: cookies_id }, function (file) {
-                window.location.reload();
+               //window.location.reload();
             });
         }
+        //,
+//          height:1000,
+//          width:1000
     });
 }
 

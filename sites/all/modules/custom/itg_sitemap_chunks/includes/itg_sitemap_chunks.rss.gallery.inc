@@ -23,10 +23,12 @@ function itg_sitemap_chunks_get_rss_of_photo_with_order_category() {
         //echo trim($xml);
         drupal_exit();
       } else {
-        return drupal_not_found();
+        header('Content-Type: text/xml');
+        echo __not_found_xml();
       }
     } else {
-      return drupal_not_found();
+      header('Content-Type: text/xml');
+      echo __not_found_xml();
     }
   } else {
     // If section is not given then photosection will be used.

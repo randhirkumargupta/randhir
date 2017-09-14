@@ -389,6 +389,13 @@ function itg_user_block_api_form($form, &$form_state) {
     '#autocomplete_path' => 'user-email-list',
     '#default_value' => isset($_GET['email']) ? $_GET['email']:"",
   );
+
+  $form['status'] = array(
+    '#type' => 'select',
+    '#title' => 'Status',
+    '#options' => array('_none' => 'Select', 0 => 'Blocked', 1 => 'Active'),
+    '#default_value' => isset($_GET['status']) ? $_GET['status'] : '_none',
+  );
   
   $form['items_per_page'] = array(
     '#type' => 'select',
@@ -423,6 +430,7 @@ function itg_user_block_api_form_submit($form, &$form_state) {
     array(
       'query' => array(
         'email' => $form_state['values']['email'],
+        'status' => $form_state['values']['status'],
         'items_per_page' => $form_state['values']['items_per_page'],
       ),
     ),

@@ -80,3 +80,15 @@ tr.octopus-slug-data-row{
     font-size: 45px;
     color: green;
     }
+    [id*="itg-octopus-api-form"] .container-inline-date, 
+    [id*="itg-octopus-api-rfa-form"] .container-inline-date{
+        width: 180px !important;
+    }
+    [id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield:first-child, 
+    [id*="itg-octopus-api-rfa-form"] .container-inline-date .form-type-textfield:first-child{
+     width: 60%;   
+    }
+    [id*="itg-octopus-api-form"] .container-inline-date .form-type-textfield:last-child, 
+    [id*="itg-octopus-api-rfa-form"] .container-inline-date .form-type-textfield:last-child{
+     width: 40%;   
+    }

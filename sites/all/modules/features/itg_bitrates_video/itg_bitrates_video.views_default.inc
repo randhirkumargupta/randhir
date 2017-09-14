@@ -42,6 +42,7 @@ function itg_bitrates_video_views_default_views() {
   $handler->display->display_options['fields']['field_bitrate_video_id']['id'] = 'field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['table'] = 'field_data_field_bitrate_video_id';
   $handler->display->display_options['fields']['field_bitrate_video_id']['field'] = 'field_bitrate_video_id';
+  $handler->display->display_options['fields']['field_bitrate_video_id']['label'] = 'Video Id ';
   /* Field: Content: Resolution */
   $handler->display->display_options['fields']['field_resolution']['id'] = 'field_resolution';
   $handler->display->display_options['fields']['field_resolution']['table'] = 'field_data_field_resolution';
@@ -57,11 +58,11 @@ function itg_bitrates_video_views_default_views() {
   $handler->display->display_options['fields']['field_bitrate_video_duration']['table'] = 'field_data_field_bitrate_video_duration';
   $handler->display->display_options['fields']['field_bitrate_video_duration']['field'] = 'field_bitrate_video_duration';
   $handler->display->display_options['fields']['field_bitrate_video_duration']['label'] = 'Duration';
-  /* Field: Content: Bitrate Video Url */
+  /* Field: Content: Bitrate Video Url  */
   $handler->display->display_options['fields']['field_video_url']['id'] = 'field_video_url';
   $handler->display->display_options['fields']['field_video_url']['table'] = 'field_data_field_video_url';
   $handler->display->display_options['fields']['field_video_url']['field'] = 'field_video_url';
-  $handler->display->display_options['fields']['field_video_url']['label'] = 'Video Url ';
+  $handler->display->display_options['fields']['field_video_url']['label'] = 'Video Url';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -80,6 +81,42 @@ function itg_bitrates_video_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'itg_bitrates_video' => 'itg_bitrates_video',
+  );
+  /* Filter criterion: Content: Video Id (field_bitrate_video_id) */
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['id'] = 'field_bitrate_video_id_value';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['table'] = 'field_data_field_bitrate_video_id';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['field'] = 'field_bitrate_video_id_value';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['expose']['operator_id'] = 'field_bitrate_video_id_value_op';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['expose']['label'] = 'Video Id';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['expose']['operator'] = 'field_bitrate_video_id_value_op';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['expose']['identifier'] = 'field_bitrate_video_id_value';
+  $handler->display->display_options['filters']['field_bitrate_video_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
 
   /* Display: Page */

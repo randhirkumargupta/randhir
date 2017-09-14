@@ -443,6 +443,18 @@ function itg_octopus_api_schema() {
         'length' => '255',
         'null' => TRUE,
       ),
+      'hyperlink' => array(
+        'description' => 'Notificaton message hyperlink',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'query_string' => array(
+        'description' => 'Notificaton message query_string',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
       'time' => array(
         'description' => 'timestamp',
         'type' => 'int',
@@ -455,6 +467,39 @@ function itg_octopus_api_schema() {
       ),
       'read_by' => array(
         'description' => 'Read by UID',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['itg_octopus_notification_by_uid'] = array(
+    'description' => 'This is for Octopus Notification by UID',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'notification_id' => array(
+        'description' => 'Notification Id',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Read Status Either 0 or 1',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Read by UID',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'timestamp',
         'type' => 'int',
         'null' => TRUE,
       ),

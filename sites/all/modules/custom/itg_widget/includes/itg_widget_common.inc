@@ -92,7 +92,7 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
         ->condition('widget', $widget_name)
         ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+      //drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
     else {
@@ -107,10 +107,13 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
  * @param int $tid
  */
 function remove_state_term($tid) {
+  $tid = intval(str_replace(',', '', $tid));
+  $term = taxonomy_term_load($tid);
+  $name = $term->name;
   if ($tid) {
     taxonomy_term_delete($tid);
   }
-  drupal_set_message(t("Term Deleted"));
+  drupal_set_message(t($name . "has been seleted"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
@@ -131,7 +134,7 @@ function move_node_from_key_candidate_widget($widget_name, $cat_tid, $state, $ni
         ->condition('widget', $widget_name)
         ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+      // drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
     else {
@@ -158,7 +161,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
         ->condition('widget', $widget_name)
         ->execute();
     if ($num) {
-      drupal_set_message(t("Node has been moved"));
+      //drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
   }
@@ -264,7 +267,7 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
   else {
     print "notdeleted";
   }
-  drupal_set_message(t("Node has been moved"));
+  //drupal_set_message(t("Node has been moved"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
@@ -813,6 +816,23 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+    case 'views-exposed-form-manage-newsletter-page':
+      $form['status_1']['#options'] = array(
+        'any' => '- Any -' ,
+        1 => 'Published' ,
+        0 => 'Not published	'
+      );
+      if(isset($_GET['status_1'])) {
+        $form['status_1']['#default_value'] = $_GET['status_1'];
+      }
+      break;
+    case 'views-exposed-form-syndication-feed-generator-page':
+      foreach ($form['type']['#options'] as $key => $value) {
+        if (strtolower($value) == 'story') {
+          $form['type']['#options'][$key] = 'Articles (Story)';
+        }
+      }
+      break;
 
     case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -1016,16 +1036,25 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if ($_GET['category_tid'] == 0) {
         drupal_add_css(".messages--error {display:none}", "inline");
       }
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
       );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+      
+       case 'views-exposed-form-bitrates-videos-page':
+      
+      $form['Cancel'] = array(
+        '#type' => 'markup',
+        '#markup' => l(t('Reset'), 'bitrates-videos', array("attributes" => array("class" => array("button")))),
+      );
+     
+      break;
     case 'views-exposed-form-state-manager-page':
 
-      $form['Canlce'] = array(
+      $form['Cancel'] = array(
         '#type' => 'markup',
         '#markup' => l(t('Reset'), 'state-manager', array("attributes" => array("class" => array("button")))),
       );
@@ -1340,27 +1369,44 @@ function itg_widget_views_query_alter(&$view, &$query) {
       }
     }
   }
-//  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page')) {
-//    $anchor_tid = variable_get('reporter_tid_for_widgets');
-//    foreach ($query->where[1]['conditions'] as $keys => $conditions) {
-//      if (is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
-//        $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
-//      }
-//    }
-//  }
-//
-//  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
-//    $anchor_tid = variable_get('reporter_tid_for_widgets');
-//    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
-//    if (strlen($anchor_tid) <= 0) {
-//// Link should display only adminstrator.
-//      if (in_array('administrator', $user->roles)) {
-//        $link = l(t("click here"), 'admin/settings/custom-variables');
-//      }
-//      drupal_set_message(t("Anchor setting not found :link", array(":link" => $link)), "error");
-//    }
-//  }
-
+  
+  
+  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
+    $anchor_tid = variable_get('anchor_id_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    if (strlen($anchor_tid) <= 0) {
+// Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l(t("click here"), 'admin/settings/custom-variables');
+      }
+      drupal_set_message(t("Anchor setting not found :link", array(":link" => $link)), "error");
+    }
+  }
+  
+  
+  // for author
+  if (($view->name == 'Widget_Authors_Listing' && $view->current_display == 'authors_listing_page')) {
+    $anchor_tid = variable_get('anchor_tid');
+    foreach ($query->where[1]['conditions'] as $keys => $conditions) {
+      if (is_string($conditions['field']) && $conditions['field'] == 'field_data_field_celebrity_pro_occupation.field_celebrity_pro_occupation_tid') {
+        $query->where[1]['conditions'][$keys]['value'] = $anchor_tid;
+      }
+    }
+  }
+  
+  if (($view->name == 'Widget_Authors_Listing' && $view->current_display == 'authors_listing_widget')) {
+    $anchor_tid = variable_get('anchor_id_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    if (strlen($anchor_tid) <= 0) {
+// Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l(t("click here"), 'admin/settings/custom-variables');
+      }
+      drupal_set_message(t("Anchor setting not found :link", array(":link" => $link)), "error");
+    }
+  }
+  
+  
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
     foreach ($query->where[1]['conditions'] as $keys => $conditions) {
       if (is_string($conditions['field']) && $conditions['field'] == 'taxonomy_index.tid') {
@@ -1639,7 +1685,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
-  
+
   if ($view->name == 'special_how_i_made_it' && ($view->current_display == 'special_how_made_widget_list')) {
     if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
       $query->where[1]['conditions'][1]['value'] = $_GET['category_tid'];
@@ -1649,7 +1695,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
-   if ($view->name == 'most_read_widget' && ($view->current_display == 'most_read_widget_list')) {
+  if ($view->name == 'most_read_widget' && ($view->current_display == 'most_read_widget_list')) {
     if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
       $query->where[1]['conditions'][1]['value'] = $_GET['category_tid'];
       unset($query->orderby[1]);
@@ -1659,7 +1705,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
 
-   if ($view->name == 'yearender_top_news_and_top_videos' && ($view->current_display == 'yearend_left_widget_list')) {
+  if ($view->name == 'yearender_top_news_and_top_videos' && ($view->current_display == 'yearend_left_widget_list')) {
     if (isset($_GET['shs_term_node_tid_depth']) && !empty($_GET['shs_term_node_tid_depth'])) {
       $query->where[1]['conditions'][1]['value'] = $_GET['shs_term_node_tid_depth'];
       unset($query->orderby[1]);
@@ -1668,7 +1714,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
-  
+
   if ($view->name == 'sport_ipl' && $view->current_display == 'points_tally') {
 
 
@@ -1984,7 +2030,7 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-    $query->fields('spl' , array('field_photo_see_pic_link_value'));
+    $query->fields('spl', array('field_photo_see_pic_link_value'));
     //end
     $query->fields('dv_s', array('entity_id'));
     $query->condition('dv_s.view_name', $view_name);
@@ -2030,7 +2076,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget'  || $widget_name == 'trending_videos_widget') {
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   }
   //we_may_suggest_widget
@@ -2074,7 +2120,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget' || $widget_name == 'trending_videos_widget') {
     $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->fields('eli_file', array('uri'));
     $query->fields('eli', array('field_story_extra_large_image_alt', 'field_story_extra_large_image_title'));
@@ -2088,7 +2134,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-  $query->fields('spl' , array('field_photo_see_pic_link_value'));
+  $query->fields('spl', array('field_photo_see_pic_link_value'));
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
       ->condition('n.type', $valid_content_type)
@@ -2250,7 +2296,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
   $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
   $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_extra_small_image_fid');
   $query->fields('si', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
-  $query->fields('spl' , array('field_photo_see_pic_link_value'));
+  $query->fields('spl', array('field_photo_see_pic_link_value'));
   $query->fields('si_file', array('uri'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
@@ -2297,7 +2343,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
   $query->fields('si_file', array('uri'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-  $query->fields('spl' , array('field_photo_see_pic_link_value'));
+  $query->fields('spl', array('field_photo_see_pic_link_value'));
   //end
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
@@ -2868,7 +2914,7 @@ function get_rhs_block_display_condtion($delta = '') {
           return TRUE;
         }
 
-        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2877,7 +2923,7 @@ function get_rhs_block_display_condtion($delta = '') {
         if ($arg[0] == 'gethomecarddata') {
           return TRUE;
         }
-        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2886,7 +2932,7 @@ function get_rhs_block_display_condtion($delta = '') {
         if ($arg[0] == 'gethomecarddata' || $arg[0] == 'rss') {
           return TRUE;
         }
-        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'livetv' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'quiz')) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ((!empty($arg[1]) && in_array($arg[1], $we_may_suggest_node_array)) || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'itg-quiz' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'livetv' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'quiz')) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2921,7 +2967,7 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'mega_review_critic') {
     if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
       $nid = $node->nid;
       $cat_id = $node->field_story_category['und'];
@@ -3100,7 +3146,7 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'mega_review_critic') {
     $arg = arg();
     if (itg_workflow_stop_node_update_batch_for_widgets()) {
       return;

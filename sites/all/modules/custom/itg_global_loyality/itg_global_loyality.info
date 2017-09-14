@@ -1,0 +1,8 @@
+name = ITG Global Loyality
+description = "ITG Global Loyality"
+core = 7.x
+package = ITG
+
+files[] = itg_global_loyality.module
+
+

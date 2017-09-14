@@ -13,7 +13,7 @@ foreach ($rows as $row): ?>
       ?>
   </div>
 
-  <h3 title="<?php echo strip_tags($row['title']); ?>"><?php print $row['title']; ?></h3>
+  <h3 title="<?php echo html_entity_decode(strip_tags($row['title'])); ?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></h3>
   <div class="body-content"><?php print $row['body']; ?></div>
 
 <?php endforeach; ?>

@@ -262,7 +262,7 @@ function get_syndication_feed_byurl() {
     $itg_query->condition('feed.created_date', array($start_time, $end_time), 'BETWEEN');
   }
   $itg_query->orderBy('feed.created_date', 'DESC');
-  $itg_query->range(0, 1);
+  $itg_query->range(0, 100);
   $itg_result = $itg_query->execute()->fetchAll();
   if (!empty($itg_result)) {
     $xml = file_get_contents($itg_result[0]->xml_name);

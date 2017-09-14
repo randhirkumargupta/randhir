@@ -75,6 +75,16 @@ function itg_story_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/sponsor_category'] = array(
+    'title' => 'Sponsor Category Setting',
+    'description' => 'Sponsor Category Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_sponsor_category_setting'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -87,6 +97,10 @@ function itg_story_permission() {
     'access itg story' => array(
       'title' => t('story permission'),
       'description' => t('story permission.'),
+    ),
+    'access layout delete' => array(
+      'title' => t('layout delete permission'),
+      'description' => t('layout delete permission.'),
     ),
   );
 }
@@ -600,6 +614,10 @@ function itg_story_node_validate($node, $form, &$form_state) {
     if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
       form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
     }
+    $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
+    if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
+      form_set_error('field_story_external_url', t("$external_url is not a valid URL"));
+    }
 
     // code for check expiry date is greater then schedule date
     $schedule_date = $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'];
@@ -1021,6 +1039,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       if (in_array('lock_story', $config)) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
+      if ($external_url = _is_external_url_story_article($node->nid)) {
+		  drupal_goto($external_url);
+	  }
     }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -1115,7 +1136,11 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
         $entity = entity_load('field_collection_item', array($val['value']));
         // store the actual image path
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+        
+        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'] - 1;
+        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+        //$href_sample_img = image_style_url('photo_story_771x432', $sample_img_path);
         // store image title
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
@@ -1124,7 +1149,7 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<img src="' . $sample_img . '"  alt=""/>';
+          $html .= '<a class="fancybox-thumb" rel="fancybox-thumb" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
@@ -1374,4 +1399,97 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
     $emoji_html .= '</span>';
     return $emoji_html;
   }
+}
+
+/**
+ * Function for admin setting for sponsor category.
+ */ 
+function _sponsor_category_setting() {
+  $form = array();
+  $form['sponsor_cat_tid'] = array(
+   '#type' => 'textfield',
+   '#title' => t('Sponsor Category TID'),
+   '#default_value' => variable_get('sponsor_cat_tid', 1208902),
+   '#size' => 10,
+   '#maxlength' => 10,
+   '#description' => t("Enter TID for Sponsor Category"),
+   '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+/**
+ * Function for check external url in story
+ * @return false or external url
+*/
+
+function _is_external_url_story_article($nid){
+	$is_external_url = FALSE;
+	if(isset($nid)){
+		if (db_table_exists('field_data_field_story_external_url')) {
+			$type_query = db_select('node', 'n');
+			$type_query->fields('n', array('type'));
+			$type_query->condition('n.nid', $nid, '=');
+			$node_type = $type_query->execute()->fetchField();
+			if ($node_type == 'story') {
+				$query = db_select('field_data_field_story_external_url', 'eu');
+				$query->fields('eu', array('field_story_external_url_value'));
+				$query->isNotNull('eu.field_story_external_url_value');
+				$query->condition('eu.entity_id', $nid, '=');
+				$query->condition('eu.bundle', 'story', '=');
+				$query->condition('eu.entity_type', 'node', '=');
+				$query_result = $query->execute()->fetchAll();
+				if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+					$is_external_url = trim($query_result[0]->field_story_external_url_value);
+				}
+			}
+		}		
+	}
+	return $is_external_url;
+}
+
+/**
+ * Function return tech photogallery html
+ * @param Array $tech_photo_arr
+ * @return string
+ */
+function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
+  $count = 0;	
+  $output = '';
+  $output .= '<div class="tech-photos">';
+  $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
+  $output .= '<span class="tech-photos-count">'.count($tech_gallery_images[LANGUAGE_NONE]).' Photos</span></div>';
+  foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
+	if($count == 3){
+		break;
+	}
+    $photo_img_alt = '';
+    $photo_img_title = '';
+    $gallery_entity = entity_load('field_collection_item', array($val['value']));
+    $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
+    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+    $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
+    $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
+    $output .= '<div class="tech-photo-item">';
+    $output .= '<a href="/'.$tech_gallery_alias.'" target="_blank">';
+    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    $output .= '</a>';
+    if($count == 2){
+	  $output .= '<div class="tech-photo-overlay">';
+	  $output .= '<a href="/'.$tech_gallery_alias.'" target="_blank" title="More"><span class="tech-photo-seemore"> +SEE MORE</span> </a>';
+	  $output .= '</div>';
+	}
+    $output .= '</div>';
+    $count++;
+  }
+  $output .= '</div>';
+  return $output;
+}
+
+function itg_story_sample_image_path($ori_fid){
+  $query = db_select('itg_original_image', 'ioi');
+  $query->fields('ioi', array('image_url'));
+  $query->condition('fid', $ori_fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }

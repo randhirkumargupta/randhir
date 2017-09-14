@@ -445,7 +445,11 @@ function photogallery_field_default_field_instances() {
   // 'field_collection_item-field_gallery_image-field_photo_enable'.
   $field_instances['field_collection_item-field_gallery_image-field_photo_enable'] = array(
     'bundle' => 'field_gallery_image',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Image Enable',
     'display' => array(
@@ -499,7 +503,7 @@ function photogallery_field_default_field_instances() {
     'label' => 'Thumb Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -507,7 +511,7 @@ function photogallery_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

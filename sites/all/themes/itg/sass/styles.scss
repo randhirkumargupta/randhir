@@ -3648,10 +3648,23 @@ h1.category-heading{
         width: 44% !important;
     }
     .poll-data{
-        @include clearfix;
         border: 1px solid #dddddd;
-        padding: 20px;
-        @include clearfix;
+        padding: 18px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: calc(100% - 5px);
+        &:after{
+          content: '';
+          position: absolute;
+          width: 4px;
+          height: 100%;
+          left: 100%;
+          top: -1px;
+          background: #f3f3f3;
+          border: 1px solid #f3f3f3;
+          z-index: -1;
+        }
         .poll-replace-id{
             width: 100%;
             display: inline-block;
@@ -3735,12 +3748,12 @@ h1.category-heading{
                 }
                 .form-item-pole-answer{
                     padding-bottom: 10px;
-                    margin-right: 15px;
+                    padding-right: 15px;
                     margin-bottom: 20px;
                     float: left;
                     position: relative;                    
                     max-width: 124px;
-                    width:30%;                    
+                    width:33%;                    
                     img{
                         width: 124px;
                         max-height: 93px;
@@ -3796,7 +3809,7 @@ h1.category-heading{
       overflow: hidden;
         h2{
             @include font(20px, 26px, null);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }        
     }
     .poll-banner-image{
@@ -3814,9 +3827,12 @@ h1.category-heading{
             color: #fff;
             text-transform: uppercase;            
             cursor: pointer;
-            padding: 6px 5px 5px 5px;            
-            font-size: 12px;
-            margin-top: 10px; 
+            padding: 0 6px;            
+            font-size: 14px;
+            margin-top: 10px;
+            height: 22px;
+            font-family: Roboto;
+            font-weight: 600;
         }
         .error{
             display: block;
@@ -8586,17 +8602,14 @@ section.sidebar{
         }
     } 
     .election-graph-3{
-        margin-top: -50px;
         display: inline-block;
         width: 100%;
     }
     .election-graph-4{
-        margin-top: -100px;
         display: inline-block;
         width: 100%;
     }
     .election-graph-5{
-        margin-top: -150px;
         display: inline-block;
         width: 100%;
     }
@@ -8850,7 +8863,7 @@ section.sidebar{
         #map-state{
             position: absolute;
             right: 0;
-            top: 0;
+            top: -16px;
             height: 20px;
             line-height: 20px;
             padding: 0;
@@ -9037,15 +9050,15 @@ div#playerContainer{
     }
     .program-livetv{
         background: #000;
-        padding: 25px 0px 73px 20px;
+        padding: 25px 0px 25px 20px;
+        display: flex;
         @include clearfix;       
         .live_tv_video{
-          float: left;
-          width: 100%;
-          max-width: 642px;
+          width: calc(100% - 108px);
           height: 0;
           padding-bottom: 48.3%;
           position: relative;
+          display: table;
             iframe{
               width: 100%;
               height: 100%;
@@ -9055,24 +9068,36 @@ div#playerContainer{
             }
         }
         .social-icon{
-            max-width: 108px;
-            padding-top: 65px;
-            float: right;
+            width: 108px;
             a{
                 color: #aaa9a9;
                 font-size: 13px;
                 padding: 20px 15px;
                 display: block;
                 font-family: roboto;
+                position: relative;
                 border-bottom: 1px solid #1a1a1a;
                 i{
                     @include font(24px);
                     vertical-align: middle;
                     padding-right: 5px;
                 }
-                &:hover{
+                &:hover, &.active{
                     color:#fff;
                     background: #131313;
+                }
+                &.embed-link.active:before{
+                  border-color: transparent transparent #fff transparent;
+                  border-style: solid;
+                  border-width: 11px;
+                  content: "";
+                  height: 0;
+                  position: absolute;
+                  bottom: -1px;
+                  width: 0;
+                  left: 0;
+                  right: 0;
+                  margin: 0 auto;
                 }
             }            
         }
@@ -10352,7 +10377,7 @@ h1.about-us-heading{
                 cursor: pointer;
             }
             .messages.error{
-                display: none;
+                display: block;
             }  
             .form-managed-file .image-widget-data .form-submit[value="Remove"]{
                 position: relative;
@@ -11087,6 +11112,9 @@ span.smilies-title {
   .answer-container{
     .answer-container-actual{
       text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
       .correct-ans, .incorrect-ans {
         font-size: 28px;
         line-height: 32px;
@@ -11096,7 +11124,7 @@ span.smilies-title {
       .correct-ans{color: #1ece1e;}
       .incorrect-ans{color: red;}
       strong {
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 400;
       }
     }
@@ -11899,6 +11927,7 @@ span.close_btt {
 .ad-blocker-content {
     position: relative;
     padding-top: 35px;
+    word-wrap: break-word;
 }
 .ad-blocker-content:after {
     content: '';
@@ -12012,6 +12041,23 @@ span.see-picture{
     }
   }
 }
+.photo-story .slick-slider{
+  webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto !important;
+}
+.yearende_left_top_news{
+  h4.heading{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+.story-section h1 span.story-pipline, .story-section h1 span.story-pipline + a {
+    color: #086DC7;
+}
+
 
 @media (min-width: 320px) {
   .view-front-end-global-search .view-content .itg-search-list > .search-detail,
@@ -12051,3 +12097,36 @@ span.see-picture{
   }
 }
 /* End of CSS For Story Modal Popup and Carousel */
+
+
+
+
+/*====================SPONSORED PAGE========================*/
+ .big-pic > img{width:100%;}
+ .section-sponsored .big-pic{ position: relative;}
+ .big-pic .cat-heading{ position: absolute; top:0; left:0; background:rgba(19, 36, 56, 0.8); width:100%; padding:25px; color:#fff;font-family: "Roboto", sans-serif;}
+ .big-pic .cat-heading h3 { font-size:22px;line-height: 26px;}
+ .big-pic .cat-heading h3 a{ color:#fff}
+ .view-category-wise-content-list .catagory-listing{ padding:10px 0;}
+ .sidebar-second .may-be-suggest-container h3{ text-align: left;}
+ .may-be-suggest-container h3{ text-align: left;}
+ .watch-right-now-video h3{ text-align: left;}
+ .view.view-category-wise-content-list .view-content{ float: left; width:100%}
+ body.page-taxonomy-term #main .row{ overflow: inherit !important;}
+ .sponsor-header{ float: right; margin-top:-45px; color:#83b1cb; text-transform: uppercase; font-family: roboto;font-size: 12px;position: relative;  z-index: 9999;}
+ .sponsor-powerby{color: #777575; margin-top: 30px;  float: left;font-size: 13px; text-transform: capitalize;}
+ .sponsor-logo{display: inline-block;  border: 1px solid #ccc; padding:5px; margin-left:5px;}
+ .story-sponsor-powered-text{color: #83b1cb;  font-family: roboto;font-size: 14px;}
+ span.story-sponsor-powered-text::last-word { text-transform:uppercase;color:#c00;}
+ .story-sponsor-impact{color: #83b1cb;  font-family: roboto; font-size:12px; text-transform: uppercase; font-weight: bold;}
+ 
+ .story-sponsor-powerby{ color: #777575; margin-top: 30px; float: left;font-size: 13px; text-transform: capitalize; text-align: left; width: 100%; clear: both; margin-bottom:4px;}
+ .story-sponsor-logo{ display: block;  border: 1px solid #ccc;  padding:5px; text-align: left; width: 100%; clear: both; margin-bottom:20px;}
+ .data-holder .itg-listing li a{ padding:20px 18px;}
+ .itg-sponsor-title{ position: absolute; font-size: 9px;  padding:4px 5px 5px 18px; color:#447b9a;}
+ .itg-sponsor-section-title{position: absolute; font-size: 9px; color:#447b9a; top: 2px; left: 12px;}
+ .data-holder .section-ordering p a{ padding:5px 0;}
+ .data-holder .section-ordering p:before{ top:22px;}
+ .featured-news .featured-post a.itg-sponsored{
+   color: #193984;
+ }

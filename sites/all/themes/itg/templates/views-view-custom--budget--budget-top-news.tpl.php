@@ -35,7 +35,7 @@
                                 echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
                               }
                               else {
-                                echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                                echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 70, ".."), "node/" . $row['nid']);
                               }
                             ?>
                             </h3>           
@@ -61,7 +61,7 @@
                                 echo l(itg_common_get_smiley_title($row['nid'], 0, 60), "node/" . $row['nid'], array("html" => TRUE));
                               }
                               else {
-                                echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                                echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 70, ".."), "node/" . $row['nid']);
                               }
                               ?>
                             </p>
@@ -93,7 +93,7 @@
                                 echo l(itg_common_get_smiley_title($row['nid'], 0, 75), "node/" . $row['nid'], array("html" => TRUE));
                               }
                               else {
-                                echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                                echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 85, ".."), "node/" . $row['nid']);
                               }
                             ?>
                             </li>

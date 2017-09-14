@@ -36,9 +36,9 @@ global $base_url;
               <?php if (isset($row['field_cm_display_title'])) : ?>
                 <div class="programe-title">
                     <?php if ($recent_video_under_cat) : ?>
-                      <?php print l($row['field_cm_display_title'] , 'node/' . $recent_video_under_cat , array('query' => array('category' => $row['tid']) , 'html' => TRUE)); ?>
+                      <?php print html_entity_decode(l($row['field_cm_display_title'] , 'node/' . $recent_video_under_cat , array('query' => array('category' => $row['tid']) , 'html' => TRUE))); ?>
                     <?php else : ?>
-                      <?php echo $row['field_cm_display_title']; ?>
+                      <?php echo html_entity_decode($row['field_cm_display_title']); ?>
                     <?php endif; ?>
                 </div>
               <?php endif; ?>
@@ -64,14 +64,14 @@ global $base_url;
 
               <?php if (isset($row['description'])) : ?>
                 <div class="description-timing mhide">
-                    <p> <?php print $row['description']; ?></p>
+                    <p> <?php print html_entity_decode($row['description']); ?></p>
                 </div>
               <?php endif; ?>
           </div>
 
           <?php if (isset($row['description'])) : ?>
             <div class="description-timing desktop-hide">
-                <p><?php print $row['description']; ?></p>
+                <p><?php print html_entity_decode($row['description']); ?></p>
             </div>
           <?php endif; ?>
 

@@ -16,9 +16,10 @@
         initialZoom: 'image',
         maxZoom: 10,
         quality: 1,
-         crossDomain:true,
+        crossDomain:true,
+        originalSize: true,
         minZoom: 'fill',
-        smallImage: 'stretch',
+        //smallImage: 'stretch',
         imageBackground: true,
 
     });

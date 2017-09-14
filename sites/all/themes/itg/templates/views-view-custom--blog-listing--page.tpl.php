@@ -23,7 +23,7 @@ foreach ($rows as $index => $row): ?>
       
         <h3 title=" <?php print strip_tags($row['title']); ?>" class="blog-title blog-title-<?php print $key ?>">
         <?php if (!empty($row['title'])) : ?>
-          <?php print $row['title']; ?>
+          <?php print html_entity_decode(strip_tags($row['title'])); ?>
         <?php endif; ?>
       </h3>
       

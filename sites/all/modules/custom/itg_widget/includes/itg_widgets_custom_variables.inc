@@ -191,6 +191,12 @@ function itg_widgets_custom_variables() {
     '#title' => t('Solr urlconfig'),
     '#default_value' => variable_get('solr_url_config'),
   );
+  
+  $form['global_loyalty_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Global loyalty url'),
+    '#default_value' => variable_get('global_loyalty_url'),
+  );
 
   $form['aaj_tak_json_url'] = array(
     '#type' => 'textfield',
@@ -251,6 +257,41 @@ function itg_widgets_custom_variables() {
     '#title' => t('Reporter tid for widgets and anchors-listing page'),
     '#attributes' => array('placeholder' => t('Reporter tid for widgets')),
     '#default_value' => variable_get('reporter_tid_for_widgets'),
+  );
+  
+  $form['itg_front_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_front_url'),
+  );
+  
+  $form['itg_backend_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Backend Url'),
+    '#attributes' => array('placeholder' => t('Enter Fron URL')),
+    '#default_value' => variable_get('itg_backend_url'),
+  );
+  
+  $form['itg_sharing_app_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook share application id'),
+    '#attributes' => array('placeholder' => t('Enter Facebook share application id')),
+    '#default_value' => variable_get('itg_sharing_app_id'),
+  );
+  
+  $form['parent_sso'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSO url'),
+    '#attributes' => array('placeholder' => t('Enter sso url')),
+    '#default_value' => variable_get('parent_sso'),
+  );
+  
+  $form['FRONT_URL_VIDEO'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front video url'),
+    '#attributes' => array('placeholder' => t('Enter Front video url')),
+    '#default_value' => variable_get('FRONT_URL_VIDEO'),
   );
   
   return system_settings_form($form);

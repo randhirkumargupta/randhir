@@ -4258,7 +4258,7 @@ div#forgot-field-heading {
   #umail:after{
     content: 'OR';
     position: absolute;
-    left: 278px;
+    left: 95.5%;
     top: 10px;
     margin: 0 auto;
     width: 25px;
@@ -4641,27 +4641,27 @@ article.node-mega-review-critic{
     .career-graph-data{
         margin-top: 80px;
         position: relative;
-        .gray-bg, .black-bg{
-            background: #dedede;            
+        .gray-bg{
+            background-color: #dedede;            
             color: #000;
             font-family: roboto;
             font-size: 17px;
             font-weight: 500;
-            padding: 20px;
+            padding: 17px 20px;
             text-align: right;
             text-transform: uppercase;
         }
         .black-bg{
-            background: #000 none repeat scroll 0 0;
+            background-color: #2a2a2a;
             color: #fff;
             font-size: 24px;
-            padding: 28px 20px 28px 190px;
-            text-align: left;
+            font-family: roboto;
+            font-weight: 500;
+            padding: 19px 20px 19px 195px;
             line-height: 28px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-align: right;
         }
         img{
             position: absolute;
@@ -5237,10 +5237,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       padding-top: 10px;
       z-index: 99999;
       .copy-sample-code{
-        background-color: #fff;        
+        background-color: #fff;
         position: relative;
-        box-shadow: 0 0 10px #666;
-        &:before {
+        box-shadow: 0px 5px 20px -5px #000;
+/*        &:before {
           border-color: transparent transparent #fff transparent;
           border-style: solid;
           border-width: 11px;
@@ -5252,7 +5252,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           left: 0;
           right: 0;
           margin: 0 auto;
-        }
+        }*/
         textarea {
             border: 1px solid #fff;
             min-height: 100px;

@@ -84,11 +84,11 @@ function itg_layout_list_delete() {
  * for layout delete for admin
  * @return array $output
  */
-function itg_layout_delete() {
+//function itg_layout_delete() {
   //field_story_template_guru
-  $field_name = 'field_story_template_guru';
+ /* $field_name = 'field_story_template_guru';
   $new_length = '3000';
-  itg_change_text_field_max_length($field_name, $new_length);
+  itg_change_text_field_max_length($field_name, $new_length);*/
   
   //phpinfo();
 //  $module_list = module_disable();
@@ -104,7 +104,7 @@ function itg_layout_delete() {
   /* db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
     db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
     drupal_goto('itg-admin-layout-list'); */
-}
+//}
 
 /**
  * for layout delete for admin

@@ -53,9 +53,9 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         <div class="total-points">
             <span class="total-point-value">
                 <?php print t('TOTAL POINTS'); ?>
-                <span><?php print $data['badge_detail']['total']; ?></span>
+                <span><?php print number_format($data['badge_detail']['global_point']); ?></span>
             </span>
-          <?php print render($data['badge_detail']['badge_icon']); ?>
+          <?php print render($data['badge_detail']['badge_icon']); ?><span style="display:none"><?php print $data['badge_detail']['total'];?></span>
         </div>
         
         <!-- Progress bar logic -->
@@ -76,7 +76,14 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
         </div>
         <?php if ($data['badge_detail']['earn'] != 5): ?>
         <div class="points-to-go">
+          <?php
+          if($data['badge_detail']['total'] < variable_get('lrp_gold_star_one')) { 
+            $initail_point = variable_get('lrp_gold_star_one') - $data['badge_detail']['total'];
+          ?>  
+          <?php print 'Require <span>'.$initail_point . '</span> ' . t('Points to reach next level'); ?>
+          <?php } else { ?> 
           <?php print 'Require <span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to reach next level'); ?>
+          <?php } ?>  
         </div>
         <?php endif; ?>
       </div>

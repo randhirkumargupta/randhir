@@ -95,7 +95,7 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($tid) {
-          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '" title="' . $name . '" alt="" /></li>';
+          $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default" data-id="4"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" title="' . $name . '" alt="" /></li>';
         }
       }
     }
@@ -106,13 +106,13 @@ function itg_budget_predictor_get_taxonomy() {
         $file = file_load($fid);
         $uri = $file->uri;
         if ($values['ranking_column'] == '1') {
-          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="1"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
         if ($values['ranking_column'] == '2') {
-          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="2"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
         if ($values['ranking_column'] == '3') {
-          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '" alt="" /></li>';
+          $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default" data-id="3"><img src="' . image_style_url("thumbnail", $uri) . '"  crossOrigin="anonymous" alt="" /></li>';
         }
       }
     }
@@ -811,24 +811,30 @@ function itg_budget_crop_image() {
     $file_name = 'budget/' . $file;
     $uri = substr($data, strpos($data, ",") + 1);
 
-    $num_updated = db_update('itg_budget_predictor')
-        ->fields(array('file_name' => $file_name))
+   
+//    if (!$num_updated) {
+//      // Remove all error messages
+//      drupal_get_messages('error');
+//      // Get the array of errors and reset them
+//      $errors = &drupal_static("form_set_error", array());
+//      drupal_set_message('Please Drag and Drop Images.', 'error');
+//    }
+//    else {
+      $img_path = 'public://budget/' . $file;
+      //file_put_contents('public://budget/' . $file, base64_decode($uri));
+      $img_path = file_unmanaged_save_data(base64_decode($uri), $img_path);
+      $cropped_image = file_create_url($img_path);
+      
+      $img_updated = db_update('itg_budget_predictor')
+        ->fields(array('file_name' => $cropped_image))
         ->condition('section_id', $section_id)
         ->condition('user_id', $user->uid, '=')
         ->execute();
-
-    if (!$num_updated) {
-      // Remove all error messages
-      drupal_get_messages('error');
-      // Get the array of errors and reset them
-      $errors = &drupal_static("form_set_error", array());
-      drupal_set_message('Please Drag and Drop Images.', 'error');
-    }
-    else {
-      // save to file
-      file_put_contents('public://budget/' . $file, base64_decode($uri));
-    }
+    
+//    }
+   
   }
+  //die();
 }
 
 /**

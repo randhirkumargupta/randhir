@@ -36,7 +36,7 @@
 
         <?php if (isset($row['title'])) : ?>
           
-            <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))); ?>
+            <?php print html_entity_decode(l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)))); ?>
           
         <?php endif; ?>
       </span>

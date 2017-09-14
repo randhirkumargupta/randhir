@@ -101,6 +101,7 @@
             <h2 class="story-title"><?php print t('Story Technology'); ?></h2> 
             <div class="itg-form-section hide">
                 <?php print drupal_render($form['field_story_technology']); ?>
+                <?php print drupal_render($form['field_technology_photogallery']); ?>
                 <?php print drupal_render($form['field_story_technology_rating']); ?>
                 <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
             </div>
@@ -148,6 +149,7 @@
                     <?php print drupal_render($form['field_story_client_title']); ?>
                     <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
                     <?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_story_show_fields']); ?>
                 </div>
             </div>
             <div id="DateTime" class="itg-sidebar-form-section">

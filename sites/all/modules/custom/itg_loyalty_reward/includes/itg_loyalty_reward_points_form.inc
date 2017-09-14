@@ -247,6 +247,12 @@ function loyality_reward_points_configuration_form() {
         '#markup' => l(t('Cancel'), 'cms-user-dashboard', array('attributes' => array('class' => array('button')))),
         '#weight' => 20,
     );
+   
+    $form['property_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Property name'),
+        '#default_value' => variable_get('property_name'),
+    );
     $form['#submit'][] = 'itg_loyalty_reward_badge_icon_submit';
 
     return system_settings_form($form);
@@ -325,6 +331,7 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     $gold_start_three = $form_values['lrp_gold_star_three'];
     $gold_start_four = $form_values['lrp_gold_star_four'];
     $gold_start_five = $form_values['lrp_gold_star_five'];
+    $property_name = $form_values['property_name'];
 
     // Validation of loyalty points for form fileds
     if ($content_share !== '' && (!is_numeric($content_share) || $content_share < 1)) {
@@ -411,5 +418,9 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
 
     if (!empty($gold_start_five) && (($gold_start_five <= $gold_start_one) || ($gold_start_five <= $gold_start_two) || ($gold_start_five <= $gold_start_three) || ($gold_start_five <= $gold_start_four))) {
         form_set_error('lrp_gold_star_two', t('Gold star five value must be greater than gold star one, two, three and four.'));
+    }
+    
+    if (empty($property_name)) {
+        form_set_error('property_name', t('Please enter property name.'));
     }
 }

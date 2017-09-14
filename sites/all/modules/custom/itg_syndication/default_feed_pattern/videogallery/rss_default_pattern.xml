@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Rss feed title</title>
-        <link>http://www.example.com</link>
-        <description>Rss feed description here</description>
+        <title>{{{web_site_name}}}| {{{section_category_name}}}</title>
+        <description>{{{web_site_name}}}</description>
+        <link>{{{website_url}}}</link>
+        <lastBuildDate>{{{xml_creation_date}}}</lastBuildDate>
+        <generator>FeedCreator 1.7.2</generator>
+        <image>
+            <url> {{{web_logo_url}}} </url>
+            <title> {{{web_site_name}}} | {{{section_category_name}}} </title>
+            <link> {{{section_category_name}}} </link>
+            <description> {{{web_site_name}}} </description>
+        </image>
         <item>
-            <title>{{{node_title}}}</title>
-            <guid isPermaLink="true">{{{node_permalink}}}</guid>
-            <description>{{{field_story_expert_description}}}</description>
-            <category>{{{field_story_category}}}</category>
-            <pubDate>{{{node_published_date}}}</pubDate>
-            <author>{{{node_author}}}</author>
+            <title> {{{node_title}}} </title>
+            <link> {{{node_permalink}}} </link>
+            <description> {{{field_story_expert_description}}}</description>
+            <pubDate> {{{node_published_date}}} </pubDate>
         </item>
     </channel>
 </rss>

@@ -189,6 +189,12 @@ function itg_videogallery_schema() {
         'length' => '250',
         ' null' => TRUE,
       ),
+      'url' => array(
+        'description' => 'Video  URL',
+        'type' => 'varchar',
+        'length' => '250',
+        ' null' => TRUE,
+      ),
       '	is_node' => array(
         'type' => 'int',
         'not null' => TRUE,

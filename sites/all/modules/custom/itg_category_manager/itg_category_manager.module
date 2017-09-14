@@ -734,7 +734,7 @@ function itg_category_manager_add_form_after_build(&$form , &$form_state) {
   );
   if ($user->uid != 1 && $arg[3] == 'edit') {
     if ($form_state['values']['parent'][0] == 0) {
-      drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-type-und option").prop("disabled", true); jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , 'inline');
+      drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-type-und option").css("pointer-events", "none"); jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , 'inline');
     }
     else {
       drupal_add_js('jQuery(document).ready(function () { jQuery("#edit-field-cm-select-template-type-und-special").attr("disabled", true); jQuery("#edit-field-cm-select-template-type-und-section").attr("disabled", true); jQuery("#edit-field-cm-select-template-type-und-none").attr("disabled", true); jQuery("#edit-field-cm-select-type-und option:not(:selected)").attr("disabled", true);jQuery("#edit-relations option:not(:selected)").attr("disabled", true);});' , 'inline');
@@ -1065,24 +1065,24 @@ function itg_category_manager_taxonomy_term_insert($term) {
 function itg_category_manager_taxonomy_term_presave($term) {
   if (!empty($term->tid) && $term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
-    $term->path['alias'] = rtrim($term->path['alias'] , '/');
-    $data = array();
-    $data = array(
-      'tid' => $term->tid ,
-      'uid' => $user->uid ,
-      'sef_url' => $term->path['alias'] ,
-      'changed' => time() ,
-    );
-    drupal_write_record('itg_sef_url' , $data);
-
-// Update modified date on itg_category_manager table
     if ($term->vid == CATEGORY_MANAGMENT) {
-      $status = isset($term->term_state) ? $term->term_state : 1;
-      db_update('itg_category_manager')
-          ->fields(array('changed' => time() , 'status' => $status))
-          ->condition('tid' , $term->tid)
-          ->execute();
-    }
+      $term->path['alias'] = rtrim($term->path['alias'] , '/');
+      $data = array();
+      $data = array(
+        'tid' => $term->tid ,
+        'uid' => $user->uid ,
+        'sef_url' => $term->path['alias'] ,
+        'changed' => time() ,
+      );
+      drupal_write_record('itg_sef_url' , $data);
+
+  // Update modified date on itg_category_manager table    
+        $status = isset($term->term_state) ? $term->term_state : 1;
+        db_update('itg_category_manager')
+            ->fields(array('changed' => time() , 'status' => $status))
+            ->condition('tid' , $term->tid)
+            ->execute();
+   }
   }
 }
 

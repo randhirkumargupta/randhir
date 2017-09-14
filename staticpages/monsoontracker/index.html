@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+<head>
+<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+<!-- Begin comScore Tag -->
+<script type='text/javascript'>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-795349-17', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- IndiaToday Group - IndiaToday - RTA script -->
+<script type='text/javascript'>
+var crtg_nid = '5603';
+var crtg_cookiename = 'crtg_rta';
+var crtg_varname = 'crtg_content';
+function crtg_getCookie(c_name){ var i,x,y,ARRCookies=document.cookie.split(";");for(i=0;i<ARRCookies.length;i++){x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if(x==c_name){return unescape(y);} }return'';}
+var crtg_content = crtg_getCookie(crtg_cookiename);
+var crtg_rnd=Math.floor(Math.random()*99999999999);
+(function(){
+var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);
+crtg_url +='&cookieName='+escape(crtg_cookiename);
+crtg_url +='&rnd='+crtg_rnd;
+crtg_url +='&varName=' + escape(crtg_varname);
+var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
+if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);
+else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
+})();
+</script>
+<!--FB Claim URL // 22 june 2017--> 
+<meta property="fb:pages" content="23230437118" />
+<!--End FB Claim URL --> 
+
+<base href="/"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Monsoon Trackers | monsoon News by India Today</title>
+<meta name="description" content="Monsoon Tracker  Be the first one to get the latest weather forecast and monsoon related news with detailed info-graphics by India Today Group">
+<meta name="keywords" content="Monsoon tracker, monsoon news, seasonal news, news about seasons, rain meter, India Today monsoon tracker">
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,700,500,400,900' rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" type="text/css" href="/monsoontracker/css/style.css" />
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/ecmascript" src="/monsoontracker/js/custom.js"></script> 
+<script>
+$(document).ready(function(){
+if($(window).width() < 800){
+var footerlen  = $('.footer_lnk_m .ft_lnks_h').length;
+var footerwidth = $('.footer_lnk_m .ft_lnks_h').width();
+footerwidth = footerwidth+15;
+footerwidth = footerlen*(footerwidth);
+$('.footer_lnk_m').css('width', footerwidth);
+//alert(footerlen);
+var footercountersipad = 1;
+$('#footernext').click(function(){
+if(footercountersipad < footerlen-4)
+{$('.footer_lnk_m').animate({left : '-=144'});
+footercountersipad +=1;
+$('#footerprev').css('display', 'block');
+}
+else{
+$('#footernext').css('display', 'none');
+}
+});	
+$('#footerprev').click(function(){
+if(footercountersipad == 1)
+{
+//$('#photoprev').css('display', 'none');
+$('#footerprev').css('display', 'none');
+$('#footernext').css('display', 'block');
+}
+else{
+$('.footer_lnk_m').animate({
+left : '+=144'
+});
+footercountersipad -= 1;
+$('#footernext').css('display', 'none');
+//$('#ipadphoto-next').css('display', 'block');
+		}
+	});
+
+	}	 
+	if($(window).width() <= 480){
+		
+var footerlen  = $('.footer_lnk_m .ft_lnks_h').length;
+var footerwidth = $('.footer_lnk_m .ft_lnks_h').width();
+var footerwidth = footerlen*(footerwidth+20);
+$('.footer_lnk_m').css('width', footerwidth);
+//alert(footerlen);
+var footercountersmob = 1;
+$('#mobfooternext').click(function(){
+if(footercountersmob < footerlen)
+{$('.footer_lnk_m').animate({left : '-=138'});
+footercountersmob +=1;
+$('#mobfooterprev').css('display', 'block');
+}
+else{
+//$('#mobfooternext').css('display', 'none');
+}
+});	
+$('#mobfooterprev').click(function(){
+if(footercountersmob == 1)
+{
+//$('#photoprev').css('display', 'none');
+//$('#mobfooterprev').css('display', 'none');
+$('#mobfooternext').css('display', 'block');
+}
+else{
+$('.footer_lnk_m').animate({
+left : '+=138'
+});
+footercountersmob -= 1;
+//$('#mobfooternext').css('display', 'none');
+//$('#ipadphoto-next').css('display', 'block');
+		}
+	});
+
+	} 
+			  
+});
+
+</script> 
+</head>
+<body>
+<div id="top_nav">
+  <div class="top_nav">
+    <ul>
+      <li class="last"><a href="http://indiatodaygroup.com/" target="_blank" rel="nofollow">THE INDIA TODAY GROUP</a></li>
+      <li><a href="http://www.indiatoday.in/" target="_blank" class="mainlevel" rel="nofollow">India Today</a></li>
+      <li><a href="http://www.aajtak.in/" target="_blank" class="mainlevel" rel="nofollow">Aaj Tak</a></li>
+      <li><a href="http://www.businesstoday.in/" target="_blank" class="mainlevel" rel="nofollow">Business Today</a></li>
+      <li><a href="http://www.menshealthindia.in/" target="_blank" class="mainlevel" rel="nofollow">Men's Health</a></li>
+      <li><a href="http://www.wonderwoman.in" target="_blank" class="mainlevel" rel="nofollow">Wonder Woman</a></li>
+      <li><a href="http://www.cosmopolitan.in/" target="_blank" class="mainlevel" rel="nofollow">Cosmopolitan</a></li>
+      <li><a href="http://oyefm.in/" target="_blank" class="mainlevel" rel="nofollow">Oye! 104.8FM</a></li>
+      <li><a href="http://travelplus.intoday.in" target="_blank" class="mainlevel" rel="nofollow">Travel Plus</a></li>
+      <li class="last"><a href="http://www.bagittoday.com/" target="_blank" class="mainlevel" rel="nofollow">Bag it Today</a></li>
+    </ul>
+  </div>
+</div>
+<div id="header">
+  <div class="header">
+    <div class="logo"><a href="/" target="_blank"><span class="logo-img"></span></a></div>
+    <div class="add"> 
+      <!-- Javascript tag: --> 
+      <!-- begin ZEDO for channel:  IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+      <script language="JavaScript">
+        var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; var zflag_ct="criteo:"+crtg_content;
+        </script> 
+      <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script> 
+      <!-- end ZEDO for channel:  IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+    </div>
+  </div>
+</div>
+<div id="header-section">
+  <div class="header-section">
+    <h1>MONSOON TRACKER</h1>
+    <h2>Chasing the Rainmeter</h2>
+  </div>
+</div>
+<div id="container">
+		
+	<div id="left-panel">
+    <h2><a href="story/weather-alert-for-next-48-hours-heavy-rainfall-forecasted-in-himachal-uttarakhand/1/692952.html" title="Weather alert for next 48 hours: Heavy rainfall forecasted in Himachal, Uttarakhand">Weather alert for next 48 hours: Heavy rainfall forecasted in Himachal, Uttarakhand</a></h2>
+    <div class="left-panel">
+      <div class="left-side"><a href="http://www.imd.gov.in/section/nhac/dynamic/Monsoon_frame.htm" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/monsoon/track-monsoon.jpg" width="302" height="352" alt="" /></a>
+      Rain-clad winds have reached the hills of Himachal Pradesh and Uttarakhand all the way from West Bengal.
+        <a href="story/weather-alert-for-next-48-hours-heavy-rainfall-forecasted-in-himachal-uttarakhand/1/692952.html" title="Weather alert for next 48 hours: Heavy rainfall forecasted in Himachal, Uttarakhand" style="color:#046f8f">READ MORE</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="right-panel">
+   <div class="right_add">
+      <h3>...Advertisement...</h3>
+      <!-- Javascript tag: --> 
+      <!-- begin ZEDO for channel:  AT Homepage Rightnav MR 1 , publisher: AajTak Web , Ad Dimension: Medium Rectangle - 300 x 250 --> 
+      <script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1276/1268"; var zflag_sid="5"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; var zflag_ct="criteo:"+crtg_content;
+</script> 
+      <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script> 
+      <!-- end ZEDO for channel:  AT Homepage Rightnav MR 1 , publisher: AajTak Web , Ad Dimension: Medium Rectangle - 300 x 250 --> 
+      
+    </div>
+       <div class="common_outer"><h3 class="heading"><a href="http://indiatoday.intoday.in/videolist/monsoon-news/1/1013.html">Video</a></h3>
+    <a href="http://indiatoday.intoday.in/videolist/monsoon-news/1/1013.html" class="more">More</a>
+    <div class="video_main"><ul>
+         <li><a href="video/misty-shades-of-monsoon-in-karnataka-from-yakshagaan-to-tin-coffee/1/692538.html">
+            <div class="img_sec"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/monsoon-video_180-2_061516051800.jpg" alt="Monsoon" title="Monsoon" width="109" height="81"> <span class="play_icon"></span> </div>
+            <div class="content_sec"><a href="video/misty-shades-of-monsoon-in-karnataka-from-yakshagaan-to-tin-coffee/1/692538.html"> Misty shades of monsoon in Karnataka: From Yakshagaan to tin coffee </a></div>
+            </a></li>
+        
+	
+         <li><a href="video/monsoons-fury-on-gods-own-country-hundreds-displaced-after-kerala-rains/1/688441.html">
+            <div class="img_sec"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/up-south-6_video_180_060916092100.jpg" alt="" title="" width="109" height="81"> <span class="play_icon"></span> </div>
+            <div class="content_sec"><a href="video/monsoons-fury-on-gods-own-country-hundreds-displaced-after-kerala-rains/1/688441.html"> Monsoon's fury on God's own country: Hundreds displaced after Kerala rains</a></div>
+            </a></li>
+        
+	
+         <li><a href="video/buried-alive-man-dies-in-a-pothole-in-madhya-pradesh/1/478821.html">
+            <div class="img_sec"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mp-potholes_180_092115123945.jpg" alt="" title="" width="109" height="81"> <span class="play_icon"></span> </div>
+            <div class="content_sec"><a href="video/buried-alive-man-dies-in-a-pothole-in-madhya-pradesh/1/478821.html"> Buried alive, man dies in a pothole in Madhya Pradesh</a></div>
+            </a></li>
+        
+	 </ul></div></div>
+  
+	      
+		 <div class="common_outer none">
+      <h3 class="heading">Photos</h3>
+      <div class="dontmiss">
+         <div class="dontmiss_next" onclick="ga('send', 'event', 'MonsoontrackerRightPhotonext', 'click','MonsoontrackerPhotonext', 1, {'nonInteraction': 1});return true;"></div>
+        <div class="dontmiss_prev" onclick="ga('send', 'event', 'MonsoontrackerPhotoprev', 'click','MonsoontrackerPhotoprev', 1, {'nonInteraction': 1});return true;"></div>
+        <ul>
+		<li><a href="gallery/niti-taylor-to-shivani-tomar-5-shocking-replacements-on-indian-tv-lifetv/1/19863.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_072617035841.jpg" alt="Niti Taylor to Shivani Tomar: 5 shocking replacements on Indian TV" title="Niti Taylor to Shivani Tomar: 5 shocking replacements on Indian TV"><span class="caption">Niti Taylor to Shivani Tomar: 5 shocking replacements on Indian TV</span></a></li><li><a href="gallery/gujarat-flood-rescue-operation-pm-modi/1/19862.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/flood-thumb_300_072617034806.jpg" alt="In Pics: Flood wreaks havoc in Gujarat, rescue efforts on war footing continues" title="In Pics: Flood wreaks havoc in Gujarat, rescue efforts on war footing continues"><span class="caption">In Pics: Flood wreaks havoc in Gujarat, rescue efforts on war footing continues</span></a></li><li><a href="gallery/anushka-sharma-jab-harry-met-sejal-akshay-kumar-alia-bhatt/1/19857.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_072517055428.jpg" alt="Anushka brings style A-game to Jab Harry Met Sejal promotions, Akshay returns to India" title="Anushka brings style A-game to Jab Harry Met Sejal promotions, Akshay returns to India"><span class="caption">Anushka brings style A-game to Jab Harry Met Sejal promotions, Akshay returns to India</span></a></li><li><a href="gallery/alia-bhatt-jacqueline-fernandez-varun-dhawan-judwaa-2-kareena-kapoor/1/19856.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_072417070304.jpg" alt="Celeb spotting: Alia Bhatt looks pretty as a picture, Jacqueline Fernandez rules the airport style game" title="Celeb spotting: Alia Bhatt looks pretty as a picture, Jacqueline Fernandez rules the airport style game"><span class="caption">Celeb spotting: Alia Bhatt looks pretty as a picture, Jacqueline Fernandez rules the airport style game</span></a></li> </ul></div></div>
+     
+    
+  </div>
+  <!--right-panel-->
+  <div class="left-area">
+   <div class="common_box">
+      <h3 class="heading"><a href="http://indiatoday.intoday.in/category/monsoon-good-news/1/1011.html">Good News</a></h3>
+      <div class="box">
+        <div class="img_section">
+          <div class="nextbtn" onclick="ga('send', 'event', 'MonsoontrackergoodnewsPhotonext', 'click','MonsoontrackergoodnewsPhotonext', 1, {'nonInteraction': 1});return true;"></div>
+          <div class="prevbtn" onclick="ga('send', 'event', 'MonsoontrackergoodnewsPhotoprev', 'click','MonsoontrackergoodnewsPhotoprev', 1, {'nonInteraction': 1});return true;"></div>
+               <ul><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic7_061115015406.jpg" alt="" title=""><div class="caption"> A girl runs through the cloudy Fort Kochi beach in Kerala.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-4_061015011328.jpg" alt="" title=""><div class="caption"> Men ride on a motorcycle through a flooded street in Agartala.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-6_061015124244.jpg" alt="" title=""><div class="caption"> A girl enjoys pre monsoon rains in Mumbai on June 7, 2015.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-5_061015121108.jpg" alt="" title=""><div class="caption"> A couple poses for the camera during pre-monsoon rains in Mumbai on June 7, 2015.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-4_061015120117.jpg" alt="" title=""><div class="caption"> Vendor transports vegetables during a rain shower in Chandigarh.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-3_061015115318.jpg" alt="" title=""><div class="caption"> A boy holds his father's hand as they walk on a beach in the backdrop of pre-monsoon clouds in Kochi.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-2_061015114805.jpg" alt="" title=""><div class="caption"> Men ride on a motorbike during a heavy rain in Bengaluru.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-1_061015114443.jpg" alt="A girl walks amid a heavy rain" title="A girl walks amid a heavy rain"><div class="caption"> A girl walks amid a heavy rain shower in Chandigarh.</div></li></ul>
+  
+  
+        </div>
+        <div class="content_section">      
+        
+<ul>
+<li><a href="story/monsoon-in-india-in-24-hours/1/446963.html">Monsoon to cover most parts of India in 24 hours</a></li><li><a href="story/monsoon-rains-enables-farmers-to-sow-kharif-crops-on-time/1/446377.html">Better-than-expected monsoon enables farmers to sow crops on time</a></li><li><a href="story/delhi-ncr-rains-thundershowers-southwest-monsoon/1/446374.html">Pleasant days ahead for Delhi, NCR</a></li><li><a href="story/monsoon-arrives-in-india-thunderstorms-hit-kerala/1/442431.html">Monsoon arrives in Kerala, 4 days late</a></li> </ul>
+ 
+        </div>
+      </div>
+    </div>
+   <div class="common_box">
+      <h3 class="heading"><a href="http://indiatoday.intoday.in/category/monsoon-bad-news/1/1011.html">Bad News</a></h3>
+      <div class="box">
+        <div class="content_section pad">
+          
+<ul>
+<li><a href="story/karnataka-cyclonic-storm-ashobaa-rain/1/443183.html">Cyclone Ashobaa to bring rain in Karnataka</a></li><li><a href="story/cyclone-ashobaa-weather-departmnet-issues-warning-to-fishermen-rainfall/1/443041.html">Cyclone Ashobaa: Weather dept issues warning</a></li><li><a href="story/dengue-cases-rise-before-monsoon-delhi/1/442321.html">Dengue cases on rise even before monsoon arrives in Capital</a></li><li><a href="story/monsoon-india-met-staring-drought-rainfall-heat-wave/1/441831.html">India is staring at drought, predicts MeT department</a></li> </ul>
+ 
+        </div>
+        <div class="img_section_sec rtl">
+          <div class="nextbtn01" onclick="ga('send', 'event', 'MonsoontrackerbadnewsPhotonext', 'click','MonsoontrackerbadnewsPhotonext', 1, {'nonInteraction': 1});return true;"></div>
+          <div class="prevbtn01" onclick="ga('send', 'event', 'MonsoontrackerbadnewsPhotoprev', 'click','MonsoontrackerbadnewsPhotoprev', 1, {'nonInteraction': 1});return true;"></div>
+            <ul><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-6_061015012637.jpg" alt="" title=""><div class="caption"> This how they beat the heat on a hot summer day in Allahabad.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-5_061015012033.jpg" alt="" title=""><div class="caption"> An ice-cream vendor pulls his cart on a hot summer day.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-3_061015010947.jpg" alt="" title=""><div class="caption"> A vendor prepares to carry blocks of ice on a hot summer day in New Delhi.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-2_061015010400.jpg" alt="" title=""><div class="caption"> A boy reacts after catching a fish in a dried-up pond in Allahabad.</div></li><li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pic-1_061015125424.jpg" alt="" title=""><div class="caption"> A flood affected family moves on a makeshift raft in Assam.</div></li></ul>
+  
+  
+        </div> 
+      </div>
+    </div>
+  </div>
+  <!--left-panel-->   
+</div>
+<div class="fcontainer">
+<div class="spical-footer">
+  <div class="below-footer_h">
+    <div class="new_nav">
+      <ul>
+        <li><a href="http://indiatoday.intoday.in/news.html" target="_blank">NEWS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" target="_blank">INDIA</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/113/1/world.html" target="_blank">WORLD</a></li>
+        <li><a href="http://indiatoday.intoday.in/galleries" target="_blank">PHOTOS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" target="_blank">CRICKET</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/67/1/movies.html" target="_blank">MOVIES</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/230/1/auto.html" target="_blank">AUTO</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/84/1/sports.html" target="_blank">SPORTS</a></li>
+        <li><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" target="_blank">LIFESTYLE</a></li>
+        <li><a href="http://indiatoday.intoday.in/technology/" target="_blank">TECH</a></li>
+        <li><a href="http://indiatoday.intoday.in/education/" target="_blank">EDUCATION</a></li>
+        <li><a href="http://businesstoday.intoday.in/" target="_blank">BUSINESS</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="below-footer_h ads_f">
+    <div class="footer_ads_h" >
+      <div class="footer_left_h"> 
+        <!-- begin ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+        <script type="text/javascript">
+				var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+				</script> 
+        <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script> 
+        <!-- end ZEDO for channel: IT ROS Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 --> 
+        
+        <!-- Javascript tag: -->
+<!-- begin ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Overlay 1x1 - 1 x 1 -->
+<script type="text/javascript">
+var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="54";
+</script>
+<script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Overlay 1x1 - 1 x 1 -->
+        
+      </div>
+      <div class="footer_right_h">
+        <div class="socials_footer_links_h">
+          <ul>
+            <li><a href="http://www.facebook.com/indiatoday" target="_blank">
+              <div class="fb_h"></div>
+              </a></li>
+            <li><a href="http://www.twitter.com/indiatoday" target="_blank">
+              <div class="tw_h"></div>
+              </a></li>
+            <li><a href="http://www.google.com/+indiatoday" target="_blank">
+              <div class="gp_h"></div>
+              </a></li>
+            <li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" target="_blank">
+              <div class="rss_h"></div>
+              </a></li>
+            <li><a href="http://m.indiatoday.in/" target="_blank">
+              <div class="mbl_h"></div>
+              </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="footer-main-wrapper">
+    <div class="below-footer_h">
+      <div class="footer_cnt_h">
+        <div class="footer_lnk_m">
+          <div class="ft_lnks_h">
+            <h3>Publications</h3>
+            <ul>
+              <li><a target="_blank" href="/">India Today</a></li>
+              <li><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ith_offer.jsp?source=website">India Today - Hindi</a></li>
+              <li><a target="_blank" href="http://businesstoday.intoday.in">Business Today</a></li>
+              <li><a target="_blank" href="http://cosmo.intoday.in/cosmopolitan/index.jsp">Cosmopolitan</a></li>
+              <li><a target="_blank" href="http://menshealth.intoday.in/menshealth/index.jsp">Men's Health</a></li>
+              <li><a target="_blank" href="http://www.wonderwoman.in">Wonder Woman</a></li>
+              <li><a target="_blank" href="http://moneytoday.intoday.in">Money Today</a></li>
+              <li><a target="_blank" href="http://preventionindia.in/issue.html">Prevention</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <ul>
+              <li><a target="_blank" href="http://www.rd-india.com/newsite/home/home.asp">Reader's Digest</a></li>
+              <li><a target="_blank" href="http://www.indiatodaygroup.com/goodhouse/issue.html">Good Housekeeping</a></li>
+              <li><a target="_blank" href="http://travelplus.in">Travel Plus</a></li>
+              <li><a target="_blank" href="http://www.golfdigestindia.com">Golf Digest India</a></li>
+              <li><a target="_blank" href="http://specials.indiatoday.com/design/issue.html">Design Today</a></li>
+              <li><a target="_blank" href="http://subscriptions.digitaltoday.in/subscriptions/time/subscription.html">Time</a></li>
+              <li><a target="_blank" href="http://www.hbrsasia.org">Harvard Business Review</a></li>
+              <li><a target="_blank" href="http://www.gadgetsngizmos.in">Gadgets &amp; Gizmos</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Television</h3>
+            <ul>
+              <li><a target="_blank" href="/">India Today</a></li>
+              <li><a target="_blank" href="http://aajtak.intoday.in">Aaj Tak</a></li>
+              <li><a target="_blank" href="http://aajtak.intoday.in/dilliaajtak/">Delhi Aaj Tak</a></li>
+              <li><a target="_blank" href="http://aajtak.intoday.in/tez/">Tez</a></li>
+            </ul>
+            <h3>Radio</h3>
+            <ul>
+              <li><a target="_blank" href="http://oyefm.in/">Oye! 104.8FM</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Education</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.vasantvalley.org/vasantvalley/default.shtml">Vasant Valley</a></li>
+              <li><a target="_blank" href="http://learntoday.in/">Online Courses</a></li>
+              <li><a target="_blank" href="http://ulearntoday.com">U Learn Today</a></li>
+              <li><a target="_blank" href="http://education.intoday.in/">India Today Education</a></li>
+            </ul>
+            <h3>Online Shopping</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.bagittoday.com/">Bag It Today</a></li>
+              <li><a target="_blank" href="http://www.indiatodaydiaries.com/">India Today Diaries</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Events</h3>
+            <ul>
+              <li><a target="_blank" href="http://aajtak.intoday.in/agenda-aajtak/">Agenda Aajtak</a></li>
+              <li><a target="_blank" href="http://www.indiatodayconclave.com">India Today Conclave</a></li>
+              <li><a target="_blank" href="http://indiatoday.in/womansummit/index.php">India Today Woman's Summit</a></li>
+              <li><a target="_blank" href="http://www.indiatoday.in/youthsummit">India Today Youth Summit</a></li>
+              <li><a target="_blank" href="/state-of-the-states/">State Of The States Conclave</a></li>
+              <li><a target="_blank" href="http://indiatoday.intoday.in/educationsummit/">India Today Education Summit</a></li>
+            </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3>Printing</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.thomsonpress.com">Thomson Press</a></li>
+            </ul>
+            <h3> Welfare</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.caretoday.in">Care Today</a></li>
+            </ul>
+            <h3> Music</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.music-today.com">Music Today</a></li>
+            </ul>
+            <h3>Distribution</h3>
+  <ul>
+     <li> <a href="distribution/index.jsp" target="_blank">Rate Card</a></li>
+     <li> <a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
+      <li> <a href="distribution/das_phase_three.jsp" target="_blank">Contact persons for DAS phase III</a></li>
+  </ul>
+          </div>
+          <div class="ft_lnks_h">
+            <h3> Syndications</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.indiatodayimages.com/">India Today Images</a></li>
+            </ul>            
+            <h3> Useful Links</h3>
+            <ul>
+              <li><a target="_blank" href="http://www.dailyo.in/">DailyO</a></li>
+              <li><a target="_blank" href="http://indiatoday.intoday.in/site/partners.jsp">Partners</a></li>
+              <li><a target="_blank" href="/prnewswire/index.jsp">Press Release</a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="copyrights">Copyright &copy; 2015 Living Media India Limited. For reprint rights: <a target="_blank" href="http://www.syndicationstoday.com/">Syndications Today.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </div>
+      <div class="ipad"><a href="javascript:void(0);" id="footerprev" class="spritbg ipad">Prev</a> <a href="javascript:void(0);" id="footernext" class="spritbg ipad">Next</a> </div>
+      <div class="mob"><a href="javascript:void(0);" id="mobfooterprev" class="spritbg mob">Prev</a> <a href="javascript:void(0);" id="mobfooternext" class="spritbg mob">Next</a> </div>
+      </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+</div>
+</body>
+</html>

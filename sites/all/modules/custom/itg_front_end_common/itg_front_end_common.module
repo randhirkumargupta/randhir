@@ -439,12 +439,11 @@ function _related_video_block_content() {
           $display_title = $related_data->label;
         }
         $related_title = mb_strimwidth($display_title, 0, 80, "..");
-        if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
         }
-        else {
-          $front_url = $related_data->url;
-        }
+        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
@@ -500,12 +499,11 @@ function _related_photo_block_content() {
           $display_title = $related_data->label;
         }
         $related_title = mb_strimwidth($display_title, 0, 80, "..");
-        if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
         }
-        else {
-          $front_url = $related_data->url;
-        }
+        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
@@ -668,12 +666,17 @@ function _related_story_left_block_content() {
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_image = '<img src="'.$related_image_url.'">';
-      if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+//      if (strpos($related_data->url, BACKEND_URL) !== false) {
+//          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+//        }
+//        else {
+//          $front_url = $related_data->url;
+//        }
+      
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
         }
-        else {
-          $front_url = $related_data->url;
-        }
+        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$related_title'><img src='$img_url' class='related-default' alt='$related_title' /></a>";
@@ -720,12 +723,16 @@ function _related_story_bottom_block_content() {
           $display_title = $related_data->label;
         }
         $related_title = $display_title;//mb_strimwidth($display_title, 0, 80, "..");
-        if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+//        if (strpos($related_data->url, BACKEND_URL) !== false) {
+//          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+//        }
+//        else {
+//          $front_url = $related_data->url;
+//        }
+        if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
         }
-        else {
-          $front_url = $related_data->url;
-        }
+        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
         $related_image = '<img src="' . $related_image_url . '">';
         if (empty($related_image_url)) {
@@ -776,12 +783,11 @@ function _related_podcast_bottom_block_content() {
         else {
           $display_title = $related_data->label;
         }
-        if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
-        }
-        else {
-          $front_url = $related_data->url;
-        }
+
+      if (function_exists('itg_apache_solr_get_site_url')) {
+          $hash_url = itg_apache_solr_get_site_url();
+      }
+      $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
       $related_title = mb_strimwidth($display_title, 0, 200, "..");
       $related_image_url = $related_data->sm_field_custom_story_extra_small_url[0];
       $related_image = '<img src="' . $related_image_url . '" height="127" width= "170">';
@@ -950,7 +956,7 @@ function get_related_display_title($nid, $display_id) {
         ->condition('ds.entity_id', $nid);
     $display_data = $query->execute()->fetchField();
     if (!empty($display_data)) {
-      $explode_string = explode(',', $display_data);
+      $explode_string = explode('|~|', $display_data);
       $string_match = '_' . $display_id . '@';
       foreach ($explode_string as $key => $value) {
         if (strpos($value, $string_match) !== false) {
@@ -995,12 +1001,11 @@ function _related_story_amp_block_content() {
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       
       $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"><div fallback>offline</div></amp-img>';
-      if (strpos($related_data->url, BACKEND_URL) !== false) {
-          $front_url = str_replace(BACKEND_URL, FRONT_URL, $related_data->url);
+
+        if (function_exists('itg_apache_solr_get_site_url')) {
+            $hash_url = itg_apache_solr_get_site_url();
         }
-        else {
-          $front_url = $related_data->url;
-        }
+        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         $request = parse_url($front_url);
         $host = $request['host'];
         $path = $request['path'];

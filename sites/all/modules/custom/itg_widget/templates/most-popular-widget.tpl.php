@@ -6,6 +6,11 @@
         ?>
         <li title="<?php echo $entity['title'];  ?>" class="most-popular-<?php print $entity['nid'] ?>">
           <?php
+          if (_is_sponsor_story_article($entity['nid'])):?>
+            <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+          <?php 
+          endif; ?>
+          <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($entity['nid'], 0, 110), "node/" . $entity['nid'], array("html" => TRUE , 'attributes' => array("title" => $entity['title'])));
           }

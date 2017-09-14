@@ -77,6 +77,10 @@ function itg_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__poll';
     $variables['poll_form'] = itg_poll_get_all_current_poll();
   }
+  if (!empty($node) && $node->type == 'story' && arg(2) === null && (isset($node->field_story_technology[LANGUAGE_NONE]))) {
+    drupal_add_css(drupal_get_path('theme', 'itg') . "/css/jquery.fancybox.css");
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/jquery.fancybox.pack.js");
+  }
 }
 
 /**
@@ -154,6 +158,12 @@ function itg_preprocess_page(&$variables) {
   }
 
   if ($arg[0] == 'photogallery-embed' || $arg[0] == 'embed-video' || $arg[0] == 'embeded-video') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
+  if ($arg[0] == 'photo' && $arg[2] == 'embed') {
+    $variables['theme_hook_suggestions'][] = 'page__itgembed';
+  }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
     $variables['theme_hook_suggestions'][] = 'page__itgembed';
   }
 
@@ -262,10 +272,25 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
+  
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'page' && $arg_data->nid == 2) {
+      $meta_description = $arg_data->metatags[LANGUAGE_NONE]['description']['value'];
+      if (isset($meta_description) && !empty($meta_description)) {
+        $head_elements['metatag_description'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $meta_description,
+          ),
+        );
+      }
+    }
+    
     if ($arg_data->type == 'videogallery') {
       if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
         $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
@@ -397,4 +422,64 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+}
+
+/**
+ * Implementation of theme_link().
+ * {@inheritdoc}
+ * @param array $variables
+ * @return string
+ */
+function itg_link($variables) {
+  $url_path = $variables['path'];
+  // If internal url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }    
+  }
+  // If url alias is used.
+  elseif ((isset($url_path)) && (strpos(drupal_get_normal_path($url_path), 'node/' ) !== FALSE)) {
+    $normal_path = drupal_get_normal_path($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }
+  }
+  // If url is used with base url.
+  elseif ((isset($url_path)) && (strpos(_get_int_path_from_url($url_path), 'node/' ) !== FALSE)) {
+    $normal_path = _get_int_path_from_url($url_path);
+    $node_path = explode('/', $normal_path);
+    $nid = $node_path[1];
+    if (_is_sponsor_story_article($nid)) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['class'][] = 'itg-sponsored';
+    }
+  }
+  // If External url is used.
+  if ((isset($url_path)) && (strpos($url_path, 'node/') !== FALSE)) {
+    $node_path = explode('/', $url_path);
+    $nid = $node_path[1];    
+    if ($external_url = _is_external_url_story_article($nid)) {
+	  global $base_url;
+	  $link_target = '_self';
+	  $baseurl = preg_replace('#^https?://#','',$base_url);
+	  $baseurl = preg_replace('#^http?://#','',$baseurl);
+	  if(strpos($external_url, $baseurl) === false){
+		  $link_target = '_blank';
+		  $variables['options']['attributes']['rel'] = 'nofollow';
+	  }
+	  $variables['path'] = $external_url;
+      $variables['options']['attributes']['target'] = $link_target;
+    }    
+  }
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }

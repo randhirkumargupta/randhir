@@ -1,5 +1,5 @@
 /*
- * @file itg_story.js
+ * @file itg_dailymotion.js
  * Contains all functionality related to videogallery
  */
 
