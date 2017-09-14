@@ -67,17 +67,28 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
       else {
         $form[$this->options['id']][$row_index] = array(
           '#type' => 'checkbox',
-          '#return_value' => $row->nid,
+          '#return_value' => isset($row->nid) ? $row->nid:NULL,
           //'#default_value' => FALSE,
           '#attributes' => array('class' => array('itg-row-selector-select')),
         );
+        
+        $client_title = '';
+        if(isset($_GET['client_title'])) {
+          $client_title = $_GET['client_title'];
+        }
+        
+        $v_type = '';
+        if(isset($_GET['type'])) {
+          $v_type = $_GET['type'];
+        }
+        
         $form[$this->options['id'] . '_client'] = array(
           '#type' => 'hidden',
-          '#default_value' => $_GET['client_title'] != '_none' ? check_plain($_GET['client_title']) : NULL,
+          '#default_value' => $client_title != '_none' ? check_plain($client_title) : NULL,
         );
         $form[$this->options['id'] . '_web_property'] = array(
           '#type' => 'hidden',
-          '#default_value' => $_GET['type'] != '_none' ? check_plain($_GET['type']) : NULL,
+          '#default_value' => $v_type != '_none' ? check_plain($v_type) : NULL,
         );
         $form[$this->options['id'] . '_issue'] = array(
           '#type' => 'hidden',
