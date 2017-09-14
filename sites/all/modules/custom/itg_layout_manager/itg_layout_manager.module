@@ -406,11 +406,11 @@ function itg_layout_manager_block_view($delta = '') {
         // change message according to argument
         $change_pass_msg = '';
         if (!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
-          $change_pass_msg = 'Your password has been changed successfully!';
+          $change_pass_msg = 'Your password has been changed successfully and kindly Login with Changed Password.';
         }
 
         if (!empty($_GET['email']) && ($_GET['email'] == 'success')) {
-          $change_pass_msg = 'Your profile has been updated successfully!';
+          $change_pass_msg = 'Your profile has been updated successfully and Kindly Relogin with Updated Email.';
         }
 
         if (!empty($change_pass_msg)) {
