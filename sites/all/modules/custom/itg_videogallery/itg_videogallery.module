@@ -252,6 +252,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       if (!isset($form['#node']->nid)) {
         $form['field_video_configurations'][LANGUAGE_NONE]['#default_value'] = array('comment_box');
       }
+      if(isset($form['#entity']->field_story_source_type)) {
       if ($form['#entity']->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         foreach ($form['field_video_upload']['und'] as $delta => $field) {
           if (is_numeric($delta)) {
@@ -270,6 +271,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
             }
           }
         }
+       }
       }
       if ($user->uid != 1) {
         unset($form['field_video_configurations']['und']['#options']['comment']);
@@ -2017,7 +2019,7 @@ function itg_videogallery_remove_video_with_child() {
   $video_data = "";
   global $user;
   $query = db_select('itg_solr_video_info', 'drd');
-  $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property'));
+  $query->fields('drd', array('fid', 'nid', 'solr_video_id', 'id', 'property','video_repo_type'));
   $query->condition('is_delete', '1', ' = ');
   $video_data = $query->execute()->fetchAll();
   foreach ($video_data as $data_delete) {
@@ -2046,7 +2048,9 @@ function itg_videogallery_remove_video_with_child() {
         $query->condition('video_id', $data_delete->solr_video_id, ' = ');
         $query->execute();
         itg_videogallery_update_video_info_solr($data_delete->solr_video_id);
+        if($data_delete->video_repo_type != 'INTERNAL') {
         itg_videogallery_video_private_public($data_delete->solr_video_id, FALSE);
+        }
       }
 
 // delete from itg_solr_video_info table
@@ -2513,10 +2517,12 @@ function itg_videogallery_get_file_details() {
   foreach ($getids as $key => $file_value) {
     $video_id = explode('#', $file_value);
     $videoid = $video_id[0];
+    if($video_id[8] != 'INTERNAL') {
     $api = itg_videogallery_dailymotion_api();
     $thumb_url = $api->get(
         '/video/' . $video_id[0], array('fields' => array('embed_url'))
     );
+    }
     db_insert('itg_solr_video_info')
         ->fields(array(
           'fid' => 0,
@@ -2526,9 +2532,12 @@ function itg_videogallery_get_file_details() {
           'property' => $video_id[5],
           'content_type' => 'CK_Editor',
           'is_alredy_used' => 1,
+          'video_repo_type' => $video_id[8],
+           'video_xml_data' => $video_id[9],
           'solr_video_thumb' => $video_id[3],
         ))
         ->execute();
+    if($video_id[8] != 'INTERNAL') {
     if ($thumb_url['embed_url']) {
       $video_id = end(explode('/', $thumb_url['embed_url']));
       $query = db_update('itg_solr_video_info')
@@ -2537,6 +2546,7 @@ function itg_videogallery_get_file_details() {
       $query->execute();
     }
     $responce .=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
+  }
   }
   exit($responce);
 }
@@ -2884,6 +2894,7 @@ function itg_videogallery_thumb_url() {
   $db_or->isNull('drd.publishing_progress');
   $db_or->isNull('drd.encoding_progress');
   $query->condition($db_or);
+  $query->condition('drd.video_type', 'DM', '=');
   $result = $query->execute()->fetchAll();
   $api = itg_videogallery_dailymotion_api();
   foreach ($result as $val) {
@@ -2920,6 +2931,7 @@ function itg_videogallery_thumb_url() {
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd');
   $query->condition('publishing_progress', '100', '=');
+  $query->condition('video_type', 'DM', '=');
   $result_new = $query->execute()->fetchAll();
   $api = itg_videogallery_dailymotion_api();
   foreach ($result_new as $val) {
@@ -3471,10 +3483,11 @@ function itg_videogallery_url_with_bitates() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-1 days', time());
+  $totime = strtotime('-3 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
+  $query->condition('video_type', 'DM', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
   $bitrates_info = itg_videogallery_url_with_bitates();

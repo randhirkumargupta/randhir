@@ -36,7 +36,7 @@
                             //parent.jQuery("#" + video_field_id + "-button").mousedown();
                             parent.jQuery('form').ajaxComplete(function (event, request, settings) {
                                 try {
-                                    parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
+
                                     parent.jQuery.colorbox.close();
                                 } catch (err) {
                                 }
@@ -204,6 +204,51 @@
                 }
             });
 
+
+
+            $(".ftp-server-internal .asso-filed_single_internal").click(function (e) {
+                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                var video_fids = [];
+                var selected_check_boxes_values = new Array();
+                var selected_check_boxes_index = 0;
+                $("#video_iframe_internal").contents().find("input:radio[class=form-radio]:checked").each(function () {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                });
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+                    // jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                    var getbtnmane = $(this).attr('btn_name');
+
+                    jQuery.ajax({
+                        url: base_url + '/solr-video-make-fid',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function (data) {
+                            alert(data);
+                            var as = JSON.parse(data);
+                            var parsed = JSON.parse(data);
+
+                            for (var x in parsed) {
+                                video_fids.push(parsed[x]);
+                            }
+                            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
+                            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
+                            //parent.jQuery("#" + video_field_id + "-button").mousedown();
+                            parent.jQuery('form').ajaxComplete(function (event, request, settings) {
+                                try {
+                                    setTimeout(function () {
+                                        parent.jQuery.colorbox.close();
+                                    }, 4000);
+                                } catch (err) {
+                                }
+                            });
+                        }
+                    });
+
+                }
+            });
+
             $(".ftp-server-internal .asso-with-ckeditor-internal").click(function (e) {
 
                 // Getting selected videos from checkboxes
@@ -218,17 +263,17 @@
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     //var base_url = Drupal.settings.basePath;
                     var base_url = Drupal.settings.baseUrl.baseUrl;
-
-                    jQuery.ajax({
-                        url: base_url + '/solr-video-make-fid',
-                        type: 'post',
-                        data: {'checkvalue': selected_check_boxes_values},
-                        success: function (data) {
-
-
-                        }
-
-                    });
+//
+//                    jQuery.ajax({
+//                        url: base_url + '/solr-video-make-fid',
+//                        type: 'post',
+//                        data: {'checkvalue': selected_check_boxes_values},
+//                        success: function (data) {
+//
+//
+//                        }
+//
+//                    });
 
                     jQuery.ajax({
                         url: base_url + '/get-file-details',
