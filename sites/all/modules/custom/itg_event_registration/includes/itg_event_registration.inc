@@ -11,6 +11,8 @@
 function itg_event_registration_form($form , &$form_state) {
   global $base_url;
   $arg = arg();
+  $events_close_date = strtotime($node->field_event_close_date[LANGUAGE_NONE][0]['value']);
+  $current_date_time = strtotime(date('Y-m-d  H:i:s'));
   $event_alias = $base_url . '/' . $arg[1] . '/' . $arg[2] . '/' . $arg[3];
   $_SESSION['recent_event_payment_url'] = $event_alias;
   $event_id = itg_event_registration_get_event_nid();
@@ -31,6 +33,7 @@ function itg_event_registration_form($form , &$form_state) {
   $event_type = $node->field_event_type[LANGUAGE_NONE][0]['value'];
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
+    if($current_date_time < $events_close_date) {
     if ($event_type == 'invite') {
       //return 'Registration is not required for event <strong>' . ucwords($node->title) . '</strong>. Please contact to India Today Group.';
       return itg_event_registration_get_status_message($node , 'invite');
@@ -73,6 +76,9 @@ function itg_event_registration_form($form , &$form_state) {
         }
       }
     }
+  }else{
+    return itg_event_registration_get_status_message($node , 'closed');
+  }
   }
   else {
     return itg_event_registration_get_status_message($node , 'not_published');
