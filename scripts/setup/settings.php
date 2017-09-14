@@ -212,6 +212,22 @@
  *   );
  * @endcode
  */
+ $databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database'=>'indiatoday_migrate',   
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);
+/*
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
@@ -252,6 +268,7 @@ $databases['sso_db']['default'] = array(
       'driver' => 'mysql',
       'prefix' => '',
 );
+*/
 // end setting for UAT
 //for production setting
 /*$databases['default']['master'] = array(
