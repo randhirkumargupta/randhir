@@ -284,17 +284,19 @@ class itg_auto_save {
    * @return string
    *   Extracted value.
    */
-  public function itg_save_field_datetime($value) {
+  public function itg_save_field_datetime($value, $c_type = NULL) {
     if (empty($value['und'][0]['value']['date'])) {
       unset($value);
     }
-    
     $this->datetime_result = '';
     if (!empty($value['und'][0]['value']['date'])) {
       if (!empty($value['und'][0]['value']['time'])) {
         $date_time = $value['und'][0]['value']['date'] . ' ' . $value['und'][0]['value']['time'];
-        //$timestamp = strtotime(str_replace('/', '-', $date_time));
-        $timestamp = strtotime($date_time);
+        if ($c_type == 'event_backend') {
+          $timestamp = strtotime(str_replace('/', '-', $date_time));
+        } else {
+          $timestamp = strtotime($date_time);
+        }
       } else {
         $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date']));
       }
@@ -304,7 +306,8 @@ class itg_auto_save {
           'timezone_db' => date_default_timezone(),
       );
     }
-     return $this->datetime_result;
+
+    return $this->datetime_result;
   }
 
   /**
@@ -416,7 +419,6 @@ class itg_auto_save {
    *   Return true if filed is not empty else return false.
    */
   public function itg_save_validate_field_collection($data, $field_values) {
-
     foreach ($data as $value) {
       switch ($value['fieldType']) {
         case 'taxonomy_term_reference':
@@ -500,7 +502,7 @@ class itg_auto_save {
           break;
 
         case 'datetime':
-          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']], $node->type);
           break;
 
         case 'text':
@@ -751,10 +753,6 @@ class itg_auto_save {
           $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;
           break;
 
-//        case 'field_collection':
-//          pr("cdcdc");
-//          break;
-
         case 'number_integer':
           if (!empty($inputs[$field['fieldName']]['und']) && is_array($inputs[$field['fieldName']]['und'])) {
             $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
@@ -906,12 +904,40 @@ class itg_auto_save {
    */
   public function itg_autosave_get_tids($arr_name) {
     $get_name = explode("\"\"", $arr_name);
+    $trimmed_array = array_map('trim',$get_name);
+    $term_names = array_filter($trimmed_array);
+    // List All the similer term_name
+    $term_name_cr = db_select('taxonomy_term_data', 'ttd');
+    $term_name_cr->fields('ttd', array('name'));
+    $term_name_cr->condition('vid', 1, '=');
+    $term_name_cr->condition('name', $term_names, 'IN');
+    $result_cr = $term_name_cr->execute()->fetchAll();
+    foreach ($result_cr as $tn) {
+      $names_cr[] = $tn->name;
+    }
+    if (!empty($names_cr)) {
+      // Get the diff from inserted and existing
+      $new_tname = array_diff($term_names, $names_cr);
+    } else {
+      $new_tname = $term_names;
+    }
+    // Creating new term_name from diff
+    foreach ($new_tname as $new_tname_data) {
+      $term = new stdClass();
+      $term->name = $new_tname_data;
+      $term->vid = 1;
+      try {
+        taxonomy_term_save($term);
+      } catch (Exception $e) {
+        watchdog('ERROR', $e->getMessage());
+      }
+    }
+    // Get the tids from all the term_name
     $term_name = db_select('taxonomy_term_data', 'ttd');
     $term_name->fields('ttd', array('tid'));
-    $term_name->condition('name', $get_name, 'IN');
+    $term_name->condition('name', $term_names, 'IN');
     $term_name->condition('vid', 1, '=');
     $result = $term_name->execute()->fetchAll();
-    unset($result[0]);
     return $result;
   }
 

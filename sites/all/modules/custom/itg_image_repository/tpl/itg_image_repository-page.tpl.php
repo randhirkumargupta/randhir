@@ -18,7 +18,7 @@
     <body class="itg_image_repository">
         <div id="itg_image_repository-messages"><?php print theme('status_messages'); ?></div>
         <?php print $content; ?>
-        <input type="hidden" id="field_name" value="<?php echo $_GET['field_name']; ?>" >
+        <input type="hidden" id="field_name" value="<?php echo ($_GET['field_name'])?$_GET['field_name']:""; ?>" >
             <input type="hidden" id="image_height" value="<?php echo $_GET['height']; ?>" >
                 <input type="hidden" id="image_width" value="<?php echo $_GET['width']; ?>" >
                     <input type="hidden" id="btn_name" value="<?php echo $_GET['btn_name']; ?>" >

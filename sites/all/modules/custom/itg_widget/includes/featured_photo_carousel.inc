@@ -55,7 +55,11 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
         $node = node_load($data['entity_id']);
         $gallery_image = $node->field_gallery_image[$node->language];
         $image_count = itg_photo_image_count($gallery_image);
-        $file_uri = file_create_url($node->field_story_extra_large_image[$node->language][0]['uri']);
+        if(!empty($node->field_story_extra_large_image[$node->language][0]['uri'])) {
+            $file_uri = file_create_url($node->field_story_extra_large_image[$node->language][0]['uri']);
+        } else {
+            $file_uri = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg";
+        }
         //  $data_render[$data['entity_id']]['file_url'] = theme('image_style', array('style_name' => $style, 'path' => $node->field_story_extra_large_image[$node->language][0]['uri']));
         $data_render[$data['entity_id']]['file_url'] = $file_uri;
         $data_render[$data['entity_id']]['count'] = $image_count;

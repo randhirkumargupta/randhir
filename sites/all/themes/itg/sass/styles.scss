@@ -2587,13 +2587,18 @@ footer {
                     }
                 }
             }
-            .story-photo-icon {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                color: #fff;
-                font-size: 30px;
-                cursor: pointer;
+            a {
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+                .story-photo-icon {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    color: #fff;
+                    font-size: 30px;
+                    cursor: pointer;
+                }
             }
         }
         &.photo-story {
@@ -6331,7 +6336,6 @@ section.sidebar {
     }
     .special-top-news {
         ul {
-            padding-top: 20px !important;
             &.itg-listing {
                 border: none;
             }
@@ -6490,15 +6494,8 @@ section.sidebar {
     }
     .special-top-news {
         ul {
-            padding-top: 20px;
             &.itg-listing {
                 border: none;
-            }
-            li {
-                a {
-                    @include before-icon-list(5px, 5px, 22px, 8px, #959595, 100%);
-                    padding-left: 22px;
-                }
             }
         }
     }
@@ -8070,6 +8067,9 @@ section.sidebar {
 /*CSS start for education page*/
 
 .education-layout-page {
+    .widget-wrapper {
+        position: relative;
+    }
     .droppable {
         overflow: hidden;
     }
@@ -8168,7 +8168,10 @@ section.sidebar {
             }
         }
         .more {
-            padding: 10px 20px 10px 0px;
+            padding: 10px 20px 20px 0px;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
         }
     }
     .section_wise_order-edu-from-the-magazine {
@@ -8215,7 +8218,6 @@ section.sidebar {
             }
             .itg-listing {
                 border: none;
-                padding-top: 20px;
             }
         }
     }
@@ -8901,7 +8903,7 @@ section.sidebar {
         }
         .itg-widget-child {
             .droppable {
-                height: 218px;
+                height: 231px;
             }
             .tech-block_5,
             .section_wise_order-standpoint {
@@ -10771,7 +10773,8 @@ h1.about-us-heading {
     margin: 20px 0 10px 0;
     .fun-facts,
     .social-share {
-        display: inline;
+        display: inline-block;
+        vertical-align: top;
         h2,
         ul {
             display: inline;
@@ -10782,23 +10785,25 @@ h1.about-us-heading {
         color: #000;
     }
     .social-share {
-        ul li {
-            a {
-                color: #fff;
-                i {
+        ul {
+            margin-top: 3px;
+            padding-left: 10px !important;
+            display: inline-block;
+            li {
+                a {
                     color: #fff;
+                    i {
+                        color: #fff;
+                    }
                 }
-            }
-            &:first-child {
-                vertical-align: top;
-                i {
-                    color: #000;
+                &:first-child {
+                    vertical-align: top;
+                    i {
+                        color: #000;
+                    }
                 }
             }
         }
-    }
-    ul li {
-        padding-top: 8px;
     }
 }
 

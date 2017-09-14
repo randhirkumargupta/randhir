@@ -4,12 +4,12 @@
  * @file
  * The ITG Ads blocker module.
  *
- * Contains functionality for Ads blocker. *
+ * Contains functionality for Ads blocker.
  */
 
 /**
  * Implements hook_menu().
- * @return array
+ * {@inheritdoc}
  */
 function itg_ads_blocker_menu() {
   $items['ads-blocker-details-ajax'] = array(
@@ -22,7 +22,7 @@ function itg_ads_blocker_menu() {
 }
 
 /**
- * Implements hook_theme.
+ * Implements hook_theme().
  * {@inheritdoc}
  */
 function itg_ads_blocker_theme($existing, $type, $theme, $path) {
