@@ -215,12 +215,13 @@
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
-  'slave' => 'autoslave', // optional, defaults to 'autoslave'
+  //'slave' => 'autoslave', // optional, defaults to 'autoslave'
+  'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
 // Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );
-
-$databases['default']['master'] = array(
+// setting for UAT
+/*$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
@@ -250,7 +251,53 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
+);*/
+// end setting for UAT
+//for production setting
+$databases['default']['master'] = array(
+  //'database' => 'indiatoday_migrate',
+  'database' => 'indiatoday',
+  'username' => 'prod_it_write',
+  'password' => 'pr0d_!t@64',
+  'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
 );
+
+$databases['default']['slave1'] = array(
+  //'database' => 'indiatoday_migrate',
+  'database' => 'indiatoday',
+  'username' => 'prod_it_read',
+  'password' => 'pr0d_!t@98',
+  'host' => 'itgd-drupal-db-it-prod-replica1.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+
+$databases['default']['slave2'] = array(
+  //'database' => 'indiatoday_migrate',
+  'database' => 'indiatoday',
+  'username' => 'prod_it_read',
+  'password' => 'pr0d_!t@98',
+  'host' => 'itgd-drupal-db-it-prod-replica2.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+
+$databases['sso_db']['default'] = array(
+  'database' => 'IndiaToday_sso',
+      'username' => 'prod_it_write',
+      'password' => 'pr0d_!t@64',
+      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+);
+
+//end production setting
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
