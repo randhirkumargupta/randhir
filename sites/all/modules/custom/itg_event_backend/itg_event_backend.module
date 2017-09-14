@@ -155,6 +155,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
       $node_status = itg_event_backend_node_status(arg(1));
       if($node_status == 1){
+        $form['#node']->path['pathauto'] = 0;
         drupal_add_js('jQuery("#edit-path-pathauto").attr("checked", false);', array('type' => 'inline', 'scope' => 'footer'));
       }
     }
