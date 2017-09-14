@@ -102,55 +102,81 @@ function itg_print_team_form_submit($form, &$form_state){
     
   }
   
-  $print_team_csv_path = file_unmanaged_save_data($idea_csv, $csv_path);
-  $csv_path = file_create_url($print_team_csv_path);
-  $attachment = array(
-    'filepath' => $csv_path,
-  );
+  $csv_file_uri_path = file_unmanaged_save_data($idea_csv, $csv_path);
+  $csv_path = file_create_url($csv_file_uri_path);
   
-  $params = array(
-  'body' => 'Test Mail By Developer for sending csv in mail' ,
-  'subject' => t('India Today | Print Team Test !') ,
-  'attachment' => $attachment,  
+//  $attachment = array(
+//    'filepath' => $csv_path,
+//  );
+//  
+//  $params = array(
+//  'body' => 'Test Mail By Developer for sending csv in mail' ,
+//  'subject' => t('India Today | Print Team Test !') ,
+//  'attachment' => $attachment,  
+//  );
+//  
+//    $to = $email;
+//    $site_email = variable_get('site_mail', '');
+//    $mail = drupal_mail('itg_print_team' , 'itg_print_team_csv' , $to , language_default() , $params , $site_email , TRUE);
+//    if ($mail['result']) {
+//      return TRUE;
+//    }
+//    else {
+//      $error_msg = t('Failed to send the email!');
+//      watchdog('itg-print-team csv mail' , $error_msg , array() , WATCHDOG_ALERT);
+//      return FALSE;
+//    }
+    $attachment = array(
+      'filepath' => $csv_file_uri_path,
+    );
+    $params = array(  
+    'key' => 'itg_syndication',
+    'to' => $email,
+    //'from' => 'noreply@indiatoday.com',
+    'subject' => 'Print Team Csv File',
+    'body' => 'Please check attached Csv file.',
+    'attachment' => $attachment,
+    'headers' => array(
+      'MIME-Version: 1.0' . "\r\n",
+      'Content-type: text/html; charset=iso-8859-1' . "\r\n",
+      'To: ' . $email . "\r\n",
+    //'From: India Today <noreply@indiatoday.com>' . "\r\n",
+    ),
   );
-  
-    $to = $email;
-    $site_email = variable_get('site_mail', '');
-    $mail = drupal_mail('itg_print_team' , 'itg_print_team_csv' , $to , language_default() , $params , $site_email , TRUE);
-    if ($mail['result']) {
-      return TRUE;
-    }
-    else {
-      $error_msg = t('Failed to send the email!');
-      watchdog('itg-print-team csv mail' , $error_msg , array() , WATCHDOG_ALERT);
-      return FALSE;
-    }
+  $language = language_default();
+
+  $mail_status = drupal_mail('itg_syndication', $params['key'], $params['to'], $language, $params, NULL);
+  if ($mail_status['result']) {
+    drupal_set_message('Mail has been send Successfully');
+  }else{
+    drupal_set_message('Unable to send Mail');
+  }
 }
 
 /**
  * Implement hook_mail 
  */
-function itg_print_team_mail($key, &$message, $params) {
-
-  $headers = array(
-    'MIME-Version' => '1.0',
-    'Content-Type' => 'text/html; charset=UTF-8;',
-    'Content-Transfer-Encoding' => '8Bit',
-    'X-Mailer' => 'Drupal'
-  );
-
-  foreach ($headers as $key => $value) {
-    $message['headers'][$key] = $value;
-  }
-  
-  // Add attachment when available.
-  if (isset($params['attachment'])) {
-    $message['params']['attachments'][] = $params['attachment'];
-  }
-
-  $message['subject'] = $params['subject'];
-  $message['body'] = $params['body'];
-}
+//function itg_print_team_mail($key, &$message, $params) {
+//
+//  $headers = array(
+//    'MIME-Version' => '1.0',
+//    'Content-Type' => 'text/html; charset=UTF-8;',
+//    'Content-Transfer-Encoding' => '8Bit',
+//    'X-Mailer' => 'Drupal'
+//  );
+//
+//  foreach ($headers as $key => $value) {
+//    $message['headers'][$key] = $value;
+//  }
+//  
+//  // Add attachment when available.
+//  if (isset($params['attachment'])) {
+//    $message['params']['attachments'][] = $params['attachment'];
+//  }
+//
+//  $message['subject'] = $params['subject'];
+//  $message['body'] = $params['body'];
+//}
 
 /**
  * Implementation of hook_menu
