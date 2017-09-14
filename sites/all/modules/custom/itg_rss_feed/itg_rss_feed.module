@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * The ITG RSS XML Feed.
+ *
+ * Contains functionality for ITG RSS XML Feed.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+
+function itg_rss_feed_menu() {
+  $items['anchor-rss'] = array(
+    'page callback' => 'anchorRSSFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/anchorRSSFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+    return $items;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function getRSSFeedHeader() {
+  $output = "";
+  $output = '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>';
+
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function getRSSFeedSubHeader() {
+  $output = "";
+  $todat_date = date("D, d M Y H:i:s");
+  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/]]></link><lastBuildDate>".$todat_date." GMT</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>http://indiatoday.intoday.in/images/india-today-mast-logo.gif</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[http://indiatoday.intoday.in/headlines_today/anchors]]></link><description>India Today</description></image>";
+
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function getRSSFeedFooter() {
+  $output = "";
+  $output = "</channel></rss>";
+
+
+  return $output;
+}
