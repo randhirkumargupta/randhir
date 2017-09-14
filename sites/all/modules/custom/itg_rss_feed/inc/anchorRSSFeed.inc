@@ -51,7 +51,7 @@ function getAnchorItem_RSS() {
     //$query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->innerJoin('field_data_field_celebrity_pro_occupation', 'fco', 'n.nid=fco.entity_id');
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->fields('n', array('nid', 'title'));
+    $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('dbody', array('body_value'));
     //$query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('eli', array('field_story_extra_large_image_fid'));
@@ -68,7 +68,9 @@ function getAnchorItem_RSS() {
         $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
         $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
         $img_url = completeFilePath($field_story_extra_large_image_fid);
-        $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA['.$url.']]></link><description>&lt;a href=' . $url . '&gt;&lt;img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0" /&gt;&lt;/a&gt;<![CDATA[' . $body_value . ']]></description><pubDate></pubDate></item>';
+        $created = $resvalue['created'];
+        $created_date = date($created, "D, d M Y H:i:s");
+        $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA['.$url.']]></link><description>&lt;a href=' . $url . '&gt;&lt;img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0" /&gt;&lt;/a&gt;<![CDATA[' . $body_value . ']]></description><pubDate>'.$created_date.'</pubDate></item>';
     }
     return $output;
 }
