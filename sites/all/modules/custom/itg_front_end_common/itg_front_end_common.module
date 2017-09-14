@@ -318,6 +318,7 @@ function vukkul_view() {
  * {@inheritdoc}
  */
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
+  global $base_url;
   $os = array("search_index");
   if (!in_array($view_mode, $os)) {
     if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
@@ -386,6 +387,18 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         );
       drupal_add_html_head($fb_tag, 'fb_tag' . $key);
     }
+    
+    if(!empty($node->type)) {
+      $fb_og_url = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:url',
+            'content' => $base_url.'/'.$node->path['alias'],
+          )
+        );
+      drupal_add_html_head($fb_og_url, 'fb_og_url' . $key);
+    }
   }
 }
 
@@ -395,12 +408,13 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
  * @param int $nid
  */
 function itg_get_related_content($nid) {
-
+  if(!empty($nid)) {
   $query = db_select('field_data_field_common_related_content', 'tt');
   $query->fields('tt', array('field_common_related_content_value'));
   $query->condition('tt.entity_id', $nid, '=');
   $related_result = $query->execute()->fetchField();
   return $related_result;
+  }
 }
 
 /**

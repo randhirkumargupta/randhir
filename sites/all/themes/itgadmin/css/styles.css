@@ -1801,7 +1801,9 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 }
 
 [id*="field-quiz-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse,
-[id*="field-survey-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse {
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-answer-video .form-managed-file a.filefield-sources-imce-browse,
+[id*="field-survey-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse,
+[id*="field-survey-add-questions-values"] .field-name-field-quiz-answer-video .form-managed-file a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
   position: absolute;
@@ -1809,7 +1811,9 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
   width: 100%;
 }
 [id*="field-quiz-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse:after,
-[id*="field-survey-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse:after {
+[id*="field-quiz-add-questions-values"] .field-name-field-quiz-answer-video .form-managed-file a.filefield-sources-imce-browse:after,
+[id*="field-survey-add-questions-values"] .field-name-field-question-video .form-managed-file a.filefield-sources-imce-browse:after,
+[id*="field-survey-add-questions-values"] .field-name-field-quiz-answer-video .form-managed-file a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
@@ -6619,7 +6623,7 @@ padding: 0 0 10px;*/
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 350px;
+  width: 310px;
 }
 .action-with-title .block-itg-story-list {
   margin: 10px 0 0;
@@ -6871,6 +6875,9 @@ padding: 0 0 10px;*/
 [id*="field-podcast-audio-upload-values"] {
   float: left;
 }
+[id*="field-podcast-audio-upload-values"] + .description {
+  display: none;
+}
 [id*="field-podcast-audio-upload-values"] thead {
   padding-right: 20px;
   padding-left: 30px;
@@ -6968,6 +6975,11 @@ padding: 0 0 10px;*/
   border-radius: 2px;
   right: 3px;
   top: -73px;
+}
+[id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-widget-data .form-submit[value="Remove"] + a.edit-image-info {
+  right: 23px;
+  top: -73px;
+  left: auto;
 }
 [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview {
   padding: 0;
@@ -13888,6 +13900,20 @@ div#edit-byline-names-wrapper {
 #views-exposed-form-report-filed-content-page #autocomplete {
   max-height: 300px;
   overflow-y: auto;
+}
+#views-exposed-form-report-filed-content-page .views-exposed-widget {
+  display: inline-block;
+  vertical-align: top;
+}
+#views-exposed-form-report-filed-content-page .views-exposed-widget.views-submit-button, #views-exposed-form-report-filed-content-page .views-exposed-widget.views-reset-button {
+  vertical-align: bottom;
+}
+#views-exposed-form-report-filed-content-page #edit-state-wrapper .form-item {
+  display: inline-block;
+  vertical-align: top;
+}
+#views-exposed-form-report-filed-content-page #edit-state-wrapper .form-item + .form-item {
+  margin-top: -28px;
 }
 
 .field-type-jquery-colorpicker .form-type-jquery-colorpicker {

@@ -39,6 +39,24 @@
 })(jQuery);
 
 jQuery('document').ready(function () {
+    var see_pic = Drupal.settings.itg_photogallery.settings.see_pic;
+    if (!see_pic){
+        see_pic = 10;
+    }
+    
+    jQuery('#edit-field-photo-see-pic-link-und-0-value').keydown(function (e) {
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                // Allow: Ctrl+A
+                        (e.keyCode == 65 && e.ctrlKey === true) ||
+                        // Allow: home, end, left, right
+                                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                if (this.value.length >= see_pic) {
+                     e.preventDefault();
+              }
+            });
     jQuery("#edit-field-story-syndication-und-yes").click(function () {
         if (jQuery(this).is(':checked')) {
             jQuery('.check_syndication input:checkbox').each(function () {
