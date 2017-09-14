@@ -554,7 +554,9 @@ class itg_auto_save {
             $get_tids = $this->itg_autosave_get_tids($this->value['value_field']);
             if (!empty($get_tids) && is_array($get_tids)) {
               foreach ($get_tids as $tid_key => $tid_val) {
-                $node->{$field['fieldName']}[$node->language][$tid_key]['tid'] = $tid_val->tid;
+                if (isset($tid_val->tid) && !empty($tid_val->tid)) {
+                  $node->{$field['fieldName']}[$node->language][$tid_key]['tid'] = $tid_val->tid;
+                }
               }
             }
           }
@@ -906,39 +908,43 @@ class itg_auto_save {
     $get_name = explode("\"\"", $arr_name);
     $trimmed_array = array_map('trim',$get_name);
     $term_names = array_filter($trimmed_array);
-    // List All the similer term_name
-    $term_name_cr = db_select('taxonomy_term_data', 'ttd');
-    $term_name_cr->fields('ttd', array('name'));
-    $term_name_cr->condition('vid', 1, '=');
-    $term_name_cr->condition('name', $term_names, 'IN');
-    $result_cr = $term_name_cr->execute()->fetchAll();
-    foreach ($result_cr as $tn) {
-      $names_cr[] = $tn->name;
-    }
-    if (!empty($names_cr)) {
-      // Get the diff from inserted and existing
-      $new_tname = array_diff($term_names, $names_cr);
-    } else {
-      $new_tname = $term_names;
-    }
-    // Creating new term_name from diff
-    foreach ($new_tname as $new_tname_data) {
-      $term = new stdClass();
-      $term->name = $new_tname_data;
-      $term->vid = 1;
-      try {
-        taxonomy_term_save($term);
-      } catch (Exception $e) {
-        watchdog('ERROR', $e->getMessage());
+    if (!empty($term_names) && is_array($term_names)) {
+      // List All the similer term_name
+      $term_name_cr = db_select('taxonomy_term_data', 'ttd');
+      $term_name_cr->fields('ttd', array('name'));
+      $term_name_cr->condition('vid', 1, '=');
+      $term_name_cr->condition('name', $term_names, 'IN');
+      $result_cr = $term_name_cr->execute()->fetchAll();
+      foreach ($result_cr as $tn) {
+        $names_cr[] = $tn->name;
       }
+      if (!empty($names_cr)) {
+        // Get the diff from inserted and existing
+        $new_tname = array_diff($term_names, $names_cr);
+      } else {
+        $new_tname = $term_names;
+      }
+      if (!empty($new_tname) && is_array($new_tname)) {
+        // Creating new term_name from diff
+        foreach ($new_tname as $new_tname_data) {
+          $term = new stdClass();
+          $term->name = $new_tname_data;
+          $term->vid = 1;
+          try {
+            taxonomy_term_save($term);
+          } catch (Exception $e) {
+            pr($e->getMessage());
+          }
+        }
+      }
+      // Get the tids from all the term_name
+      $term_name = db_select('taxonomy_term_data', 'ttd');
+      $term_name->fields('ttd', array('tid'));
+      $term_name->condition('name', $term_names, 'IN');
+      $term_name->condition('vid', 1, '=');
+      $result = $term_name->execute()->fetchAll();
+      return $result;
     }
-    // Get the tids from all the term_name
-    $term_name = db_select('taxonomy_term_data', 'ttd');
-    $term_name->fields('ttd', array('tid'));
-    $term_name->condition('name', $term_names, 'IN');
-    $term_name->condition('vid', 1, '=');
-    $result = $term_name->execute()->fetchAll();
-    return $result;
   }
 
   /**

@@ -80,7 +80,7 @@ jQuery(document).ready(function() {
 
 
 
-    var generate_octopus_notification = setInterval(function() {
+    /*var generate_octopus_notification = setInterval(function() {
         
         jQuery.ajax({
             url: Drupal.settings.itg_widget.settings.base_url + '/itg-generate-octopus-notification',
@@ -100,7 +100,7 @@ jQuery(document).ready(function() {
             }
         });
 
-    }, 6000); // Execute every 60 seconds.
+    }, 6000); // Execute every 60 seconds.*/
 
 });
 
