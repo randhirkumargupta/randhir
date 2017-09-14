@@ -383,6 +383,51 @@ function itg_layout_manager_block_view($delta = '') {
     case 'header_block':
 
       $arg = arg();
+      if ((function_exists('is_valid_node_header_section') && is_valid_node_header_section($arg)) || (function_exists('is_valid_category_header_section') && is_valid_category_header_section($arg))) {
+            if($arg[0] == 'taxonomy'){
+                $tid = $arg[2];
+                if(is_section_header($tid)){
+                    $primary_tid = $tid;
+                }else{
+                    $p_terms = taxonomy_get_parents_all($tid);
+                    foreach($p_terms as $p_term){
+                        if($p_term->tid != $tid && is_section_header($p_term->tid)){
+                            $primary_tid = $p_term->tid;
+                            break;
+                        }
+                    }
+                    
+                }
+            }else{
+                $nid = $arg[1];
+                $primary_tid = get_primary_category_node($nid);
+            }
+            
+            if ($primary_tid) {
+                if (is_section_header($primary_tid)) {
+                    $tpl_name = 'section_header_' . $primary_tid . '_block';
+                    if (!empty(theme($tpl_name))) {
+                        $child_menu = $child_terms = menu_build_tree('menu-menu-section-header-menu');
+                        $section_menu = get_section_menu($primary_tid);
+                        
+                        if ($section_menu) {
+                            foreach ($child_terms as $key => $m) {
+                                if ($m['link']['mlid'] == $section_menu) {
+                                    $child_menu = $m['below'];
+                                    break;
+                                }
+                            }
+                        }else{
+                            $child_menu = FALSE;
+                        }
+                        
+                        $data['menu_manager'] = $child_menu;
+                        $block['content'] = theme($tpl_name, array('data' => $data));
+                        break;
+                    }
+                }
+            }
+        }
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
 

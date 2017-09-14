@@ -1,0 +1,75 @@
+.conlsechead {
+    border-bottom:1px dotted #000000;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    float: left;
+    height: 28px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+#contabbing{float:left;}
+.contabbox{width:683px; float:left; margin-bottom:12px;}
+.contimeln {width:90px; float:left; font:bold 12px Arial; color:#343434;}
+.conritepart {width:593px; float:left; background-image:url(http://conclave.intoday.in/conclave/images/line1.gif); background-position:top left; background-repeat:repeat-y;}
+.consubrtpart {padding-left:10px;}
+.conheadstrip {font:bold 12px Arial; color:#343434; padding:4px 8px; background-color:#EEEEEE}
+.conheadstrip a{text-decoration:none; color: #343434;}
+.conheadstrip a:hover{text-decoration:underline;}
+.consubleftbox {width:300px; font:bold 15px arial; line-height:20px; margin:10px 0; color:#C90A12; float:left;}
+.consubleftbox a {font:bold 12px arial; color:#C90A12; text-decoration:none;}
+.consubleftbox a:hover {text-decoration:underline;}
+.consubleftbox .tex{color: #343434; font: 12px/18px arial;}
+.consubleftbox .tex a{color: #343434; font: 12px/18px arial; text-decoration:none;}
+.consubleftbox .tex a:hover{text-decoration:underline;}
+
+.consubleftbox.links a{font-size:12px;}
+.consubleftbox img { margin-right:6px;}
+.consubrtbox {width:258px; font:normal 12px arial; line-height:18px; margin:10px 0; color:#343434; margin-left:10px; float:left; background:url(http://conclave.intoday.in/conclave/images/arrow-line.gif) repeat-y left top; padding-left:15px;}
+.consubrtbox .imgs { margin-right:10px;}
+.consubhead {color:#C90A12; font-weight:bold;}
+.consubhead a {color:#C90A12; text-decoration:none}
+.consubhead a:hover {color:#C90A12; text-decoration:underline;}
+.contabb {float:left; margin-bottom:15px;}
+.contabactive {display:block; float:left}
+.contabdeactive {display:none; float:left}
+.prj_name, .prj_name a { color: #C90A12;    font: bold 12px/18px Arial;    text-decoration: none;}
+.prjdetail{margin-bottom:5px;}
+.live_title{border-bottom:1px dotted #000000; line-height:30px; margin-bottom:10px;}
+.leftlivetitle{color: #C90C1D; font: bold 24px Arial; float:left; width:450px;}
+.liveupdatedate{float:right; text-align:right; font:12px/30px Arial;}
+.livepage{float:left; width:470px;}
+.highlight{float:right; width:200px;}
+.highlight_head{border-bottom:1px dotted #000000;}
+.highlighttitle{ color: #C90C1D; font: bold 18px/18px Arial; float:left; width:150px;}
+.highlight_more{float:right; width:50px;}
+.highlight_more a{color:#000000; text-decoration:none;}
+.highlight_more a:hover{text-decoration:underline;}
+.aboutdiv{float:left; width:200px;}
+.aboutdiv .name{color: #C90C1D; font: bold 14px/18px Arial;}
+.aboutdiv .text{color: #000000; font: 12px Arial;}
+.facebook{float:right; width:250px;}
+.comingupnext{color:#000000;}
+.venuetitle{color:#000000; font: bold 14px/18px Arial; margin-top:10px;}
+.venueaddredd{color:#999999;font: bold 12px/18px Arial;}
+
+.userbytes{background:#f2f2f2;}
+.userbytesrow{margin-bottom:2px;}
+.userbytesrow img{margin:0;}
+.userbytesrowleft{float:left; width:49%}
+.userbytesrowright{float:right; width:49%}
+.userbytesrowrighttop{margin-bottom:3px;}
+.userbytesrow2{float:left; margin-right:3px;}
+
+
+.top_video{}
+.top_video .live_now {float:right; width:390px;}
+.top_video .livetitletext {float:left; width:310px; color:#000000; font-size:14px; font-weight:bold;}
+.top_video .livetime{float:right; text-align:right; width:80px;color:#5A5A5A; font-weight:bold;}
+.top_video .livenowdes {color:#696969; font-size:14px;}
+.strheadline{line-height:25px; border-bottom:1px solid #E8E8E8;}
+.clear {clear:both}
+.live_now .speaker{margin:5px 0 0 0; color:#5A5A5A; font-size:12px;}
+.live_now .speaker .red{color:#C90B13; }
+.live_now .speaker .red a{color:#C90B13; text-decoration:none;}
+.live_now .speaker .red a:hover{text-decoration:underline;}
+

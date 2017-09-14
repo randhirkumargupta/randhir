@@ -2484,11 +2484,11 @@ footer .multiple-items-footer i.slick-next {
   float: left;
 }
 
-.story-section .byline a[title='Follow']{ background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 25% 2px; padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
-.story-section .byline a[title='Unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 20% -34px;padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
+.byline a[title='Follow'],.byline a[title='follow']{ background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 25% 2px; padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
+.byline a[title='Unfollow'],.byline a[title='unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 20% -34px;padding-left: 38px;padding-top: 10px;padding-bottom: 7px;display: block;text-transform: uppercase;}
 
-.section-left-bototm .tags ul li a[title='Follow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
-.section-left-bototm .tags ul li a[title='Unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 -23px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
+.tags ul li a[title='Follow'],.tags ul li a[title='follow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
+.tags ul li a[title='Unfollow'],.tags ul li a[title='unfollow']{background:url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 -23px; width:19px; height:19px; display: inline-block;text-indent: -99999px;}
 
 
 .story-section .byline .profile-pic img {
@@ -3446,7 +3446,7 @@ footer .multiple-items-footer i.slick-next {
   overflow: hidden;
 }
 .story-section .story-tech-chunk {
-  background: #f3f3f3;
+  background: #fff;
   padding: 10px;
   position: relative;
 }
@@ -3463,6 +3463,27 @@ footer .multiple-items-footer i.slick-next {
   line-height: 33px;
   font-weight: 700;
 }
+
+.tech-pros-cons-main h2{font-size:28px;line-height:45px;color:#000;font-weight:bold;padding:0 0 0 10px;float:left;margin-left:42%;width:58%; margin-bottom: 10px;}
+.tech-pros-cons-main h2 strong{font-size:30px;line-height:35px;color:#fff;background-color:#b00808;float:right;padding:0 10px;}
+ul.pron-cons-img{width:42%;float:left;}
+ul.tech-pron-cons-img{width:41.66666667%;float:left;}
+ul.tech-pros{list-style:disc;width:27%;float:left;margin-left:4%;}
+ul.tech-cons{list-style:disc;width:27%;float:left;}
+ul.tech-cons li,ul.tech-pros li{font-size:14px;line-height:26px;color:#939393;float:left;width:100%;}
+ul.tech-cons li span, ul.tech-pros li span{color:#b00808;font-size:17px;font-weight:bold;line-height:24px;list-style:outside none none;margin-left:-14px;text-transform:uppercase;}
+ul.tech-cons li:first-child, ul.tech-pros li:first-child{list-style:none;}
+ul.pron-cons-img li img{margin-right:10%;margin-top:-53px;width:92%;}
+.tech-pros-cons-main{width:100%;float:left;padding:10px; background-color:#edebec}
+
+.tech-photos .tech-photos-head-section{ display: block; }
+.tech-photos .tech-photos-head-section .tech-photos-count{color: #B5B5B5; font-size: 13px; margin-bottom: 10px; display: block; }
+.tech-photos .tech-photo-item{ width:30%; display: inline-block; margin-right:3%; position: relative; }
+.tech-photos .tech-photo-item .tech-photo-overlay{ position: absolute; top:0; left: 0; text-align: center; color:#fff; background:rgba(0,0,0,0.7); width:100%; height:100%;}
+.tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore{ position: absolute; top: 50%; left:50%; transform: translate(-50%,-50%);line-height:22px;}
+.tech-photos .tech-photo-item .tech-photo-overlay a, .tech-photos .tech-photo-item .tech-photo-overlay a span:hover{ color:#fff; text-decoration:underline;}
+
+
 .story-section.photo-story-section .story-left {
   background: #f3f3f3;
   padding-top: 15px;
@@ -12076,9 +12097,9 @@ h1.about-us-heading + div p {
   right: 0;
 }
 
-.story-section .listicle-page.story-right {
+/*.story-section .listicle-page.story-right {
   width: 100%;
-}
+}*/
 .story-section .listicle-page.story-right .byline {
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
@@ -12112,7 +12133,7 @@ h1.about-us-heading + div p {
   color: #282828;
   display: inline-block;
   vertical-align: top;
-  width: 95%;
+  width: 93%;
   padding: 18px 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
@@ -15023,6 +15044,8 @@ span.story-sponsor-powered-text::last-word {
 .personal-list ul li:hover button.btn{ opacity:1; z-index:1; transition:all 0.3ms ease-in-out; -webkit-transition:all 0.3ms ease-in-out;  }
 .personal-list ul li span{ border:1px solid #ebebec; float: right; width:calc(100% - 50px);padding: 9px;font-size: 15px;border-radius: 5px; }
 .personal-list ul li:hover span{background:#ebebec;}
+.personal-list .personal-follow{ display: none; }
+.itg-personalization-text{ padding:25px 0 0 0; }
 /* social icon all list */
 
 .anchor-right .social-icon ul li{ padding:0px!important; border:1px solid #ccc;display: inline-block; }
@@ -15032,3 +15055,45 @@ span.story-sponsor-powered-text::last-word {
 .anchor-right .social-icon ul li a[title='Unfollow']{background: url(http://itgddev.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 5px -19px; padding-left:28px;}
 .anchor-right .social-icon ul li a i{float: left;margin-right: 5px;font-size: 1.25rem;}
 .anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
+
+
+.itgimage{position: relative;}
+.itgimage .body_caption {font-size: 0.8125rem; padding: 10px 0; border-bottom: 1px solid #e5e5e5;color: #929292;line-height: 18px;}
+#cricketblog .bolg-content .row{
+        padding: 15px 0;
+        border-bottom: 1px solid #E4E4E4;
+        position: relative;
+    }
+    #cricketblog h2 {
+        font: 300 16px/20px roboto;
+        color: #767676;
+        margin-bottom: 15px;
+    }
+    #cricketblog .batBollDetails {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        background: #d00b26;
+        height: 109px;
+    }
+
+    #cricketblog .bolg-content .row span.sectiontime {
+        display: inline-block;
+        width: 50%;
+    }
+    #cricketblog .bolg-content .row span.sectiontime {
+        color: #fff!Important;
+    }
+    #cricketblog .bolg-content .row span.sectiontime {
+        font-size: 14px;
+        color: #111;
+        display: block;
+        line-height: 17px;
+        font-style: normal;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    .float-left{
+        float:left;
+    }

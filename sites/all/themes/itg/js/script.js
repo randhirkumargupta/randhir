@@ -550,7 +550,32 @@ jQuery(document).ready(function () {
             }
         ]
     });
-
+    // Open slick slider in lightbox
+    //~ jQuery('.story-photo-list').slickLightbox({
+        //~ itemSelector: 'a',
+        //~ navigateByKeyboard: true
+    //~ });
+    var fit_to_view = false;
+    if(jQuery(window).width() < 1024){
+	    fit_to_view = true;
+	}
+    if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
+		jQuery(".fancybox-thumb").fancybox({
+			fitToView: fit_to_view,
+			padding: 0,
+			arrows: true,
+			helpers	: {
+				//~ title	: {
+					//~ type: 'outside'
+				//~ },
+				thumbs	: {
+					width	: 80,
+					height	: 80
+				}
+			}
+		});
+	}    
+    
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
         var getHEight = jQuery(this).outerHeight(true);

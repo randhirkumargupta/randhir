@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * @file
@@ -65,6 +65,52 @@
 		color: #969696;
 	}
 	#block-itg-videogallery-videogallery-link-menu-video{
-		    margin-top: 22px;
+            margin-top: 22px;
+            float: left;
+            width: 100%;
+            margin-bottom: 22px;
 	}
+
+        @media (min-width: 768px){
+		#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content{    float: left;  width: 100%; overflow-x: scroll;}
+		#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content ul.photo-list li{ width:200px; float:left; padding:0;}
+		#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-footer{display:none}
+		#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li:nth-child(4n+1){clear: inherit;}
+		#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .other_video_category h3{ float:left}
+                #block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list{width:1600px;margin-left: 3px;}
+	}
+	@media (max-width: 767px){
+	   #block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-footer{display:block}
+	
+	}
+        
+        @media only screen and (max-width: 767px) {
+            #block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li:nth-of-type(1n+5) {display: none;}
+        #block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .load-more-video-dec{ text-align:center; }
+
+        #block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .load-more-video-dec a.add-more-video-dec{display: inline-block; vertical-align: top; padding: 10px 20px; font: 14px/18px Roboto; color: #666; background-color: #d1d1d1; border-radius: 5px; margin: 0 10px; text-transform: uppercase;}
+
+        }
+
 </style>
+<script>
+    Drupal.behaviors.myModuleTest = {
+  attach: function (context, settings) {
+    jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-footer .load-more-video-dec').click(function(){
+        if(jQuery(this).children('a').text().trim() == 'Load More'){
+            jQuery("#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li").show();
+            jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load Less<i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>');
+        }else{
+            jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li').hide();
+            jQuery('#block-itg-videogallery-other-videogallery-from-section .view-display-id-block_4 .view-content .photo-list li:lt(4)').show();
+            jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load More<i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>');
+        }
+        
+        
+    });
+  }
+};
+
+</script>
+
+

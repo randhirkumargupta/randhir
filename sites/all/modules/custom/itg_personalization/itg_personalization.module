@@ -920,54 +920,57 @@ function _personalization_manage_follow_content() {
     $cnt_anchor = count($result['anchor']) -1;
     $cnt_author = count($result['author']) -1;
     $cnt_tag = count($result['tag']) -1;
-    $output.= '<div class="personal-list">';
+    $output.= "<div class=\"itg-personalization-text\">".t('Here you can view all the Authors and Topics currently being followed by you.')."</div>";
+    $output.= '<div class="personal-list"><div class="personal-follow"><a class="letter" id="follow-author" href="javascript:void(0);">Author</a><a class="letter" id="follow-topics" href="javascript:void(0);">Topics</a><a class="letter activetab" id="follow-anchor" href="javascript:void(0);">Anchor</a></div>';
     foreach ($result as $key => $rows) {
-      foreach ($rows as $id => $value) {  //pr($key);
-        // for author
-        if($key == 'author') {
-          if($id == '0') {
+      if(is_array($rows) && count($rows) > 0) {
+        foreach ($rows as $id => $value) {
+          // for author
+          if ($key == 'author') {
+            if ($id == '0') {
+              $output .= '<ul class="personal-lists-col follow-author">';
+              $output .= "<li class=\"mhide\"><h3>Author</h3></li>";
+            }
+            if ($value['title']) {
+              $output .= "<li><button class=\"btn btn-sm btn-dang er delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+            }
+            if ($id == $cnt_author) {
+              $output .= '</ul>';
 
-            $output.= '<ul class="personal-lists-col">';
-            $output.= "<li><h3>Author</h3></li>";
-          }
-          $output.= "<li><button class=\"btn btn-sm btn-dang er delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
-          if($id == $cnt_author) {
-            $output.= '</ul>';
-
-          }
-
-        }
-        // for tag
-        if($key == 'tag') {
-          if($id == '0') {
-
-            $output.= '<ul class="personal-lists-col">';
-            $output.= "<li><h3>Topics</h3></li>";
-          }
-          $output.= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
-          if($id == $cnt_tag) {
-            $output.= '</ul>';
+            }
 
           }
+          // for tag
+          if ($key == 'tag') {
+            if ($id == '0') {
 
-        }
-        // for anchor
-        if($key == 'anchor') {
-          if($id == '0') {
-            $output.= '<ul class="personal-lists-col">';
-            $output.= "<li><h3>Anchor</h3></li>";
+              $output .= '<ul class="personal-lists-col follow-topics">';
+              $output .= "<li class=\"mhide\"><h3>Topics</h3></li>";
+            }
+            $output .= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+            if ($id == $cnt_tag) {
+              $output .= '</ul>';
+
+            }
+
           }
-          $output.= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"".$value['nid']."\" >X</button><span>". $value['title'] . "</span></li>";
-          if($id == $cnt_anchor) {
-            $output.= '</ul>';
+          // for anchor
+          if ($key == 'anchor') {
+            if ($id == '0') {
+              $output .= '<ul class="personal-lists-col follow-anchor">';
+              $output .= "<li class=\"mhide\"><h3>Anchor</h3></li>";
+            }
+            $output .= "<li><button class=\"btn btn-sm btn-danger delete_class\" id=\"" . $value['nid'] . "\" >X</button><span>" . $value['title'] . "</span></li>";
+            if ($id == $cnt_anchor) {
+              $output .= '</ul>';
+
+            }
 
           }
-
         }
       }
     }
-    return $output.= '</div>';
-
+    return $output .= '</div>';
   }
 }
 
@@ -984,18 +987,213 @@ function itg_get_followers($nid) {
   }
 }
 
-function itg_cron_mail_for_following() {
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    // check connection
-    if ($con && !empty($nid)) {
-      $ntype = 'anchor';
-      $people = $con->front_user_activity;
-      //db.getCollection('front_user_activity').find({ ntype: { $in: [ 'anchor', 'author' ] } } )
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_personalization_cronapi($op, $job = NULL) {
+  $items['personalization_follow_mail'] = array(
+    'description' => 'send follow story to Mail by author / topic.',
+    'weight' => 5,
+    'callback' => 'itg_personalization_send_follow_mail',
+  );
+  $items['personalization_follow_mail_anchor'] = array(
+    'description' => 'send follow story to Mail by anchor.',
+    'weight' => 5,
+    'callback' => 'itg_personalization_follow_mail_for_anchor',
+  );
+  return $items;
+}
 
-      return $count = $people->find(array("nid" => $nid, "ntype" => $ntype, 'status' => '1'))->count();
-    } //close connection
+function itg_cron_mail_for_following() {
+  $date = date('2017-07-23');
+  $start_date = strtotime($date);
+
+  $results = db_query("SELECT DISTINCT n.nid, n.title, n.type FROM {node} AS n
+WHERE n.type = 'story' AND n.status = 1 AND n.created >= (:created)", array(':created' => $start_date))->fetchAll();
+  $html = "<table>";
+  foreach ($results as $row) {
+  $nid = $row->nid;
+  $node = node_load($nid);
+  $options['node'][$nid] = $node->title;
+  $html .= "<tr><td>" . l($node->title, FRONT_URL . '/node/' . $nid, array('absolute' => TRUE)) . "</td></tr>";
+  //$options['node_url'][$nid] = l($node->title, FRONT_URL . '/node/' . $nid, array('absolute' => TRUE));
+
+    if ($tags = field_get_items('node', $node, 'field_story_itg_tags')) {
+      foreach ($tags as $v) {
+        if(is_array($v) && count($v) > 0) {
+          foreach ($v as $tag) {
+            $data[] = $tag;
+          }
+        }
+      }
+  }
+  if ($reporter = field_get_items('node', $node, 'field_reporter_publish_id')) {
+    $reporter_array = explode(',', $reporter[0]['value']);
+    if(!in_array($reporter_array[0], $data)) {
+      $data[] = $reporter_array[0];
+    }
 
   }
 }
 
+  $html .= "</table>";
+  $options['node_url'] = $html;
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con) {
+      $people = $con->front_user_activity;
+      $cursor = $people->find(array("nid" => array('$in' => $data)
+      ));
+
+      foreach ($cursor as $document) {
+        if(!in_array($document['uid'], $options[$document['ntype']])) {
+          $options[$document['ntype']][] = $document['uid'];
+        }
+      }
+      return $options;
+    } //close connection
+  }
+}
+
+/**
+ * Implements callback function for 'itg_ugc_send_follow_story_content_mail'
+ * @param type $node
+ */
+
+function itg_personalization_send_follow_mail() {
+  module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+  $data = itg_cron_mail_for_following();
+
+  if (!empty($data)) {
+    $story_url = $data['node_url'];
+    foreach ($data['author'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+
+    // for topic
+    foreach ($data['tag'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+  }
+  return TRUE;
+}
+
+/**
+ * @return mixed
+ */
+function _get_following_user_anchor() {
+  $date = date('2017-06-23');
+  $start_date = strtotime($date);
+
+  $results = db_query("SELECT DISTINCT n.nid, n.title, n.type FROM {node} AS n
+WHERE n.type = 'videogallery' AND n.status = 1 AND n.created >= (:created)", array(':created' => $start_date))->fetchAll();
+
+  $html = "<table>";
+  foreach ($results as $row) {
+    $nid = $row->nid;
+    $node = node_load($nid);
+
+    $options['node'][$nid] = $node->title;
+    $html .= "<tr><td>" . l($node->title, FRONT_URL . '/node/' . $nid, array('absolute' => TRUE)) . "</td></tr>";
+
+    if ($anchor = field_get_items('node', $node, 'field_video_anchor')) {
+      foreach ($anchor as $target) {
+        $data[] = $target['target_id'];
+      }
+    }
+
+  }
+
+  $html .= "</table>";
+  $options['node_url'] = $html;
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    // check connection
+    if ($con) {
+      $people = $con->front_user_activity;
+      $cursor = $people->find(array("nid" => array('$in' => $data)
+      ));
+
+      foreach ($cursor as $document) {
+        if(!in_array($document['uid'], $options[$document['ntype']])) {
+          $options[$document['ntype']][] = $document['uid'];
+        }
+      }
+      return $options;
+    } //close connection
+  }
+}
+
+/**
+ * @return bool
+ */
+function itg_personalization_follow_mail_for_anchor() {
+  module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+  $data = _get_following_user_anchor();
+  if (!empty($data)) {
+    $story_url = $data['node_url'];
+    foreach ($data['anchor'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+
+  }
+  return TRUE;
+}

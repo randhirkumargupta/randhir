@@ -77,6 +77,10 @@ function itg_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__poll';
     $variables['poll_form'] = itg_poll_get_all_current_poll();
   }
+  if (!empty($node) && $node->type == 'story' && arg(2) === null && (isset($node->field_story_technology[LANGUAGE_NONE]))) {
+    drupal_add_css(drupal_get_path('theme', 'itg') . "/css/jquery.fancybox.css");
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/jquery.fancybox.pack.js");
+  }
 }
 
 /**
