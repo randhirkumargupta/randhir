@@ -518,7 +518,21 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-  //itg theme JS alter    
+  // some js unset
+  
+  if (drupal_is_front_page()) {
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+  }
+  unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  
+//itg theme JS alter    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
