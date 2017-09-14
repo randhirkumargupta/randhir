@@ -287,52 +287,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 }
 
 /**
- * Return all system and alias paths for the provided URL.
- *
- * @param $url
- *   The URL to find all aliases
- * @param object $node
- *   (optional) The Node for the URL being cleared if one exists, NULL otherwise.
- *
- * @return array
- *    An array of all paths aliased to the provided URL.
- */
-function itg_akamai_get_all_paths($url, $node = NULL) {
-  global $language;
-
-  // If it is not a node path, get the system path.
-  if (strpos($url, 'node') !== 0) {
-    $source = drupal_lookup_path('source', $url);
-  }
-  if (!isset($source) || !$source) {
-    $source = $url;
-  }
-  $source = preg_replace("/^\//", "", $source);
-  $paths[] = $source;
-
-
-  $result = db_query('SELECT alias FROM {url_alias} WHERE source = :source AND language IN (:language, :language_none) ORDER BY pid desc  limit 0,1', array(
-    ':source' => $source,
-    ':language' => isset($language->language) ? $language->language : '',
-    ':language_none' => LANGUAGE_NONE,
-  ));
-
-  foreach ($result as $record) {
-    $paths[] = $record->alias;
-  }
-
-  // If this is the frontpage, add a blank to clear the root doc.
-  if ($source == variable_get('site_frontpage', 'node')) {
-    $paths[] = '';
-  }
-
-  // Allow other modules to add/modify paths to be cleared.
-  //drupal_alter('akamai_paths', $paths, $node);
-
-  return $paths;
-}
-
-/**
  * For Host mapping purposes
  * @param array $paths
  */
