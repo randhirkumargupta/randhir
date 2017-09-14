@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements HOOK_view_schema.
+ * Implements hook_schema().
  * {@inheritdoc}
  */
 function itg_analytics_schema() {

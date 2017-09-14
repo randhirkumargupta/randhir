@@ -1,3 +1,5 @@
+/* css File for ads blocker. */
+
 .ad-blocker{background:#fbfbfb; border:1px solid #dadada; display: inline-block; vertical-align: top; width: 100%; padding: 15px 30px; margin: 30px 0; font-family: 'Roboto';}
 .ad-blocker h2, .ad-blocker p{color: #262626; margin: 0; padding: 12px;}
 .ad-blocker h2{font-size:22px;font-weight:600;}
