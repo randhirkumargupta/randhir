@@ -396,7 +396,7 @@ function itg_akamai_cache_akamai_ccpurge() {
         $value->name . ' - ' . $value->type,
         $ttl_time_final,
         variable_get('akamai_max_nodelimit_' . $value->type),
-        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => 'ctools-use-modal'))),
+        l('Settings', 'admin/config/system/itg_akamai/akamai_ccs/nojs/' . $value->type, array('attributes' => array('class' => ''))),
         l("Purge $value->name", 'admin/config/system/itg_akamai/akamai_ccc/' . $value->type, array('attributes' => array('class' => ''))),
       );
     }
@@ -430,34 +430,7 @@ function itg_akamai_cache_akamai_ccpurge() {
  * Ajax menu callback.
  */
 function itg_akamai_cache_akamai_ccpurge_settings($ajax, $type) {
-
-  if ($ajax) {
-
-    ctools_include('ajax');
-    ctools_include('modal');
-
-    $form_state = array(
-      'ajax' => TRUE,
-      'title' => t('Akamai Cache Content Type Settings Form'),
-    );
-
-    // Use ctools to generate ajax instructions for the browser to create
-    // a form in a modal popup.
-    $output = ctools_modal_form_wrapper('akamai_cc_frm_form', $form_state);
-
-    // If the form has been submitted, there may be additional instructions
-    // such as dismissing the modal popup.
-    if (!empty($form_state['ajax_commands'])) {
-      $output = $form_state['ajax_commands'];
-    }
-
-    // Return the ajax instructions to the browser via ajax_render().
-    print ajax_render($output);
-    drupal_exit();
-  }
-  else {
     return drupal_get_form('akamai_cc_frm_form');
-  }
 }
 
 /**
@@ -467,35 +440,25 @@ function akamai_cc_frm_form($form, $form_state) {
   $form = array();
   $type = arg(6);
   $form['#attributes']['class'][] = 'node-form';
-
-  $form['itg_akamai_setting'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Akamai Cache Setting'),
-    '#weight' => 12,
-    '#collapsible' => TRUE,
-    '#collapsed' => false,
-    '#group' => 'additional_settings',
-    '#attached' => array(
-    ),
-  );
+  
   $key = $type;
   $name = $type;
 
-  $form['itg_akamai_setting']['akamai_timeout_' . $key] = array(
+  $form['akamai_timeout_' . $key] = array(
     '#type' => 'textfield',
     '#title' => t("$name (in seconds)"),
     '#default_value' => variable_get('akamai_timeout_' . $key, ''),
     '#description' => t("Timeout Length for <strong>$name</strong>, the timeout used by when sending the cache clear request to Akamai's servers"),
   );
 
-  $form['itg_akamai_setting']['akamai_max_nodelimit_' . $key] = array(
+  $form['akamai_max_nodelimit_' . $key] = array(
     '#type' => 'textfield',
-    '#title' => t("$name (Maximum number of node limit)"),
+    '#title' => t("$name (Max number of node limit)"),
     '#default_value' => variable_get('akamai_max_nodelimit_' . $key, ''),
     '#description' => t("Maximum number of node limit for <strong>$name</strong>,  when sending the cache clear request to Akamai's servers"),
   );
 
-  $form['itg_akamai_setting']['akamai_config_cctype_flag_' . $key] = array(
+  $form['akamai_config_cctype_flag_' . $key] = array(
     '#type' => 'select',
     '#options' => array('_none' => '-Select-', 'yes' => 'Yes', 'no' => 'No'),
     '#title' => t("You want to use this configuration for $name"),
@@ -503,8 +466,7 @@ function akamai_cc_frm_form($form, $form_state) {
     '#description' => t("Please select content type flag whether you want to use with akamai cache or not!"),
   );
 
-
-  $form['itg_akamai_setting']['submit'] = array(
+  $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
@@ -516,22 +478,15 @@ function akamai_cc_frm_form($form, $form_state) {
  * Drupal form submit handler.
  */
 function akamai_cc_frm_form_submit(&$form, &$form_state) {
-  // Generate the new link using the submitted text value.
-  $link = t('Settings have been saved successfully!');
   $type = arg(6);
   $akamai_timeout = $form_state['values']['akamai_timeout_' . $type];
   $akamai_config_cctype_flag = $form_state['values']['akamai_config_cctype_flag_' . $type];
   $akamai_max_nodelimit = $form_state['values']['akamai_max_nodelimit_' . $type];
-
   variable_set('akamai_timeout_' . $type, $akamai_timeout);
   variable_set('akamai_config_cctype_flag_' . $type, $akamai_config_cctype_flag);
   variable_set('akamai_max_nodelimit_' . $type, $akamai_max_nodelimit);
-
-  // Tell the browser to close the modal.
-  $form_state['ajax_commands'][] = ctools_modal_command_dismiss();
-
-  // Tell the browser to replace the old link with the new one.
-  $form_state['ajax_commands'][] = ajax_command_html('.messages.status', $link);
+  drupal_set_message(t('Settings have been saved successfully!'));
+  drupal_goto('admin/config/system/itg_akamai/akamai_ccpurge');
 }
 
 /**
