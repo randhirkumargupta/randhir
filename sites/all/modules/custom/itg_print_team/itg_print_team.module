@@ -120,7 +120,7 @@ function itg_print_team_form_submit($form, &$form_state){
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $email . "\r\n",
     //'From: India Today <noreply@indiatoday.com>' . "\r\n",
-    ),
+    ), 
   );
   $language = language_default();
 
