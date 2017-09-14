@@ -1469,14 +1469,10 @@ img {
 .itg-layout-container.auto-layout-page .special-top-news ul.itg-listing {
   border: none;
 }
-.itg-layout-container.auto-layout-page .special-top-news ul li a {
-  position: relative;
-  padding-left: 22px;
-}
-.itg-layout-container.auto-layout-page .special-top-news ul li a:before {
+.itg-layout-container.auto-layout-page .special-top-news ul.itg-listing li:before {
   position: absolute;
-  top: 22px;
-  left: 8px;
+  top: 8px;
+  left: 5px;
   content: '';
   border-radius: 100%;
   background: #959595;

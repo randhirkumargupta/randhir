@@ -1,6 +1,7 @@
 /*
  * @file showadcontent.js
  */
+
 jQuery(document).ready(function () {
     if (__at__ != 1) {
       setTimeout(openPopup(), 4000);
@@ -29,7 +30,6 @@ function openPopup() {
     jQuery('.view-photo-landing-slider').hide();
     jQuery('.video-landing-header').hide();
     var a = gup('source');
-    //console.log(a);
     ga("send", "event", "AdblockPopup", a, "true");
     ga("send", "event", "Adblock", a, "true");
     var post_data = "";
@@ -38,7 +38,6 @@ function openPopup() {
         'data': post_data,
         'cache': false,
         'type': 'POST',
-        // dataType: 'json',
         beforeSend: function () {
 
         },
@@ -71,7 +70,6 @@ function openPopup() {
 }
 
 function gup(name) {
-    //console.log('called');
     var str = window.location.href;
     var story = str.includes("/story/");
     var gallery = str.includes("/gallery/");

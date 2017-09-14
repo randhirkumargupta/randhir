@@ -247,6 +247,11 @@ if (!empty($content)):
                       ?>
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
                     <?php } ?>
+                    <?php
+                    if (!empty($byline_id)) {
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                    }
+                    ?>
                   </ul>
                 <?php endif; ?>
                 <ul class="date-update">
@@ -260,6 +265,7 @@ if (!empty($content)):
                       ?>
                     </li>
                   <?php endif; ?>
+
                   <li class="mhide">
                     <span class="share-count">
                       <?php
@@ -988,12 +994,12 @@ if (!empty($content)):
               if (isset($node->field_story_itg_tags['und'])) {
                 foreach ($node->field_story_itg_tags['und'] as $tags) {
                   $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
-                  //if ($published_tag == 'Published') {
+                  if ($published_tag == 'Published' || $published_tag == '')  {
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
-                    print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
-                  //}
+                    print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
+                  }
                 }
               }
               ?>

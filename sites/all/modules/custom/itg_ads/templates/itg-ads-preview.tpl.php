@@ -1,8 +1,3 @@
-<?php
-/**
- * Manage Ads page 
- */
-?>
   <h2 class="ads-title"> <?php print isset($data['title']) ? $data['title'] : ''; ?> </h2>
   <div class="ads-top"> 
     <?php

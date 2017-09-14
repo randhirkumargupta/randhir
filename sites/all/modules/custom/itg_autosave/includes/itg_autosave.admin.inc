@@ -113,7 +113,11 @@ function itg_autosave_nodeform($nid, $ctype) {
   $data = $itg_auto_save->itg_save_extract_fieldtype($inputs);
   $data = array_filter($data, 'itg_autosave_remove_empty');
   //Get unique id for node from inputs.  
-  $node_identity = $inputs['field_story_node_identity']['und'][0]['value'];
+  if ($inputs['form_id'] == 'event_backend_node_form' && !empty($arg[2]) && is_numeric($arg[2])) {
+      $node_identity = get_unique_id_event($arg[2]);
+  } else {
+    $node_identity = $inputs['field_story_node_identity']['und'][0]['value'];
+  }
   // Fetch node id and field collections ids from database.
   $itg_nid = itg_autosave_get_unique_id($ctype, $node_identity);
 
@@ -143,8 +147,6 @@ function itg_autosave_nodeform($nid, $ctype) {
   if ($inputs['form_id'] == 'event_backend_node_form') {
     if ($_GET['step'] != 'step_configuration') {
       $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 0;
-    } else {
-      $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
     }
     if (function_exists('itg_common_get_node_title')) {
       $event_title = itg_common_get_node_title($arg[2]);
@@ -154,7 +156,7 @@ function itg_autosave_nodeform($nid, $ctype) {
         $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : ''  : '';
       }
     }
-  } 
+  }
   // Set the flag value for op flag for newsletter form and set the title
   elseif ($inputs['form_id'] == 'newsletter_node_form') {
     $node->field_op_flag[LANGUAGE_NONE][0]['value'] = 'Save as Draft';
@@ -166,7 +168,14 @@ function itg_autosave_nodeform($nid, $ctype) {
   // If title is empty then exit the process.
   if ($node->nid != null) {
     // Set up the meta tags values on node updated
+      
     if (isset($arg[2]) && !empty($arg[2])) {
+      if ($node->type == 'event_backend') {
+        if (strpos($_SERVER['HTTP_REFERER'], 'step_configuration')){
+          $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
+        }
+      }
+      
       $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
       $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
       $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
@@ -296,4 +305,19 @@ function reset_autosave_lock($nid) {
   } else {
     drupal_goto($node_edit_path, array('query' => array('destination' => 'mydraft-story', 'content_lock_token' => $lock_token)));
   }
+}
+
+
+/**
+ * Retrieve unique id associated with node
+ *
+ * @param int $get_nid
+ *   Node id of the node.
+ *
+ * @return varchar
+ *   unique id
+ */
+function get_unique_id_event($get_nid){
+  $unique_id = db_query("SELECT field_story_node_identity_value from {field_data_field_story_node_identity} WHERE entity_id = :entity_id ", array(":entity_id" => $get_nid))->fetchField();
+  return $unique_id;
 }
