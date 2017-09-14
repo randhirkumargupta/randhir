@@ -294,8 +294,6 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "     <meta property='op:markup_version' content='v1.0'>\n";
   $output .= "     <meta property='og:title' content='" . $title . "'>\n";
   $output .= "     <meta property='og:description' content='" . $desc . "'>\n";
-  
-  
   $output .= "     <link rel='canonical' href='" . $link . "'>\n";
   $output .= "     <link rel='stylesheet' title='default' href='#'>\n";
   $output .= "     <meta property='op:markup_version' content='v1.0'>\n";
@@ -339,7 +337,6 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
 /*
  * Return Author Name
  */
-
 function get_author_name($auid) {
   $get_author_id = db_query("SELECT byline_id from {itg_multi_byline_info} mbi WHERE mbi.nid = :nid AND mbi.publish_status = :status", array(":nid" => $auid, ":status" => 1))->fetchField();
   $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
