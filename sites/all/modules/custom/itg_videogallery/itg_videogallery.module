@@ -2214,7 +2214,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS','INTERNAL' => 'ITG Internal'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
   );
 
@@ -2237,7 +2237,7 @@ function daily_motion_video_dashboard($form, &$form_state) {
   );
   $form['fieldset']['video_id'] = array(
     '#type' => 'textfield',
-    '#title' => 'Daily motion video ID',
+    '#title' => 'Video ID',
     '#attributes' => array(
       'placeholder' => t('Video ID'),
     ),
@@ -2354,7 +2354,7 @@ function daily_motion_video_dashboard_rows() {
     t('Uploaded Time'),
     t('Video Id'),
     t('Video Status'),
-    t('DM Status'),
+    t('Status'),
     t('Action'),
   );
 
@@ -2406,8 +2406,13 @@ function daily_motion_video_dashboard_rows() {
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
+      if($record->video_type == 'INTERNAL') {
+       $status_flag = '<span class="under-precess">Completed</span>';
 
+      }else {
         $status_flag = '<span class="under-precess">Processing (' . $record->publishing_progress . ')%</span>';
+
+      }
         if (strtoupper($record->type) != 'LOCAL') {
           $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
