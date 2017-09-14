@@ -208,10 +208,15 @@ function itg_related_views_pre_render(&$view) {
       }
 
       $key = $related_result->hash;
+      if(!empty($hash[$key])) {
       $related_result->site = $hash[$key];
-
+      }
+      if(isset($related_result->sm_vid_Tags)) {
       $related_result->sm_vid_Tags = implode(', ', $related_result->sm_vid_Tags);
+      }
+      if(isset($related_result->sm_vid_Category_Management)) {
       $related_result->sm_vid_Category_Management = implode(', ', $related_result->sm_vid_Category_Management);
+      }
     }
   }
 }
@@ -361,6 +366,12 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
     $query->replaceParam("fq", '(' . $str . ')');
    
+  }
+  else if ($arg[0] == 'related-content' && !empty($_GET['width'])) {
+      $bundle_name = array('story', 'blog', 'photogallery', 'videogallery', 'podcast', 'breaking_news');
+      $def_bun = implode(' OR ', $bundle_name);
+      $str = 'bundle_name:(' . $def_bun . ')';
+      $query->replaceParam("fq", '(' . $str . ')');
   }
   else {
     $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video','search-unpublish-internal-video','search-unpublish-internal-video-singal', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
