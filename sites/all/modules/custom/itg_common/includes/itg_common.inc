@@ -358,27 +358,29 @@ function itg_common_round_rating($average_rating) {
  *   total share count
  */
 function itg_total_share_count($actual_link) {
-  $fb_google_count = $fb_count = $google_count = 0;
+  if (!empty($actual_link)) {
+    $fb_google_count = $fb_count = $google_count = 0;
 
-  if (function_exists('itg_facebook_share_count')) {
-    //$fb_count = itg_facebook_share_count($actual_link);
-    $query = db_select('itg_node_share_count', 'insc')
-        ->fields('insc', array('share_count'))
-        ->condition('insc.nid', $actual_link, '=');
-    $result = $query->execute()->fetchField();
-    if (!empty($result)) {
-      $fb_count = (int) $fb_count + (int) $result;
+    if (function_exists('itg_facebook_share_count')) {
+      //$fb_count = itg_facebook_share_count($actual_link);
+      $query = db_select('itg_node_share_count', 'insc')
+          ->fields('insc', array('share_count'))
+          ->condition('insc.nid', $actual_link, '=');
+      $result = $query->execute()->fetchField();
+      if (!empty($result)) {
+        $fb_count = (int) $fb_count + (int) $result;
+      }
     }
+
+    // get google share count
+    if (function_exists('itg_google_share_count')) {
+      $google_count = itg_google_share_count($actual_link);
+    }
+
+    $fb_google_count = $fb_count + $google_count;
+
+    return $fb_google_count;
   }
-
-  // get google share count
-  if (function_exists('itg_google_share_count')) {
-    $google_count = itg_google_share_count($actual_link);
-  }
-
-  $fb_google_count = $fb_count + $google_count;
-
-  return $fb_google_count;
 }
 
 /**
@@ -493,19 +495,21 @@ function itg_common_only_text_string($str) {
  * @param string $status
  */
 function itg_common_get_latest_byline($nid , $status) {
-  $query = db_select('itg_multi_byline_info' , 's');
-  $query->fields('s' , array('byline_id'))
-      ->condition('s.nid' , $nid , '=')
-      ->condition('s.publish_status' , $status , '=');
-  $query->orderBy("byline_weight" , "ASC");
-  $query->range(0 , 1);
-  $result = $query->execute();
-  $byline_id = $result->fetchField();
-  if ($byline_id) {
-    return $byline_id;
-  }
-  else {
-    return FALSE;
+  if (!empty($nid)) {
+    $query = db_select('itg_multi_byline_info', 's');
+    $query->fields('s', array('byline_id'))
+        ->condition('s.nid', $nid, '=')
+        ->condition('s.publish_status', $status, '=');
+    $query->orderBy("byline_weight", "ASC");
+    $query->range(0, 1);
+    $result = $query->execute();
+    $byline_id = $result->fetchField();
+    if ($byline_id) {
+      return $byline_id;
+    }
+    else {
+      return FALSE;
+    }
   }
 }
 

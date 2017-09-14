@@ -151,9 +151,13 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $form['#steps']['step_second']->children[] = 'registration_config';
       $form['#step_children']['registration_config'] = 'step_second';
     }
-    $form['field_story_expiry_date'][LANGUAGE_NONE]['#title'] = 'ved';
-    $form['field_story_expiry_date']['#title'] = 'tes';
-    //p($form['field_story_expiry_date']);
+    // url alias checkbox uncheck after node publish
+    if(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+      $node_status = itg_event_backend_node_status(arg(1));
+      if($node_status == 1){
+        drupal_add_js('jQuery("#edit-path-pathauto").attr("checked", false);', array('type' => 'inline', 'scope' => 'footer'));
+      }
+    }
   }
 
   // Form alter for sponsor node
@@ -606,7 +610,7 @@ function itg_event_backend_after_build($form, &$form_state) {
   $media_options_sponsor = $media_options + $sponsor_options_event_wise;
   foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'];// . '<span title="This field is required." class="form-required"></span>';
       if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
         $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];

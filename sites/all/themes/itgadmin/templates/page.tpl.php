@@ -75,6 +75,7 @@ if (!in_array('administrator', $user->roles)) {
 //        } 
         
         if(function_exists('itg_octopus_get_slug_notification')){
+          $itg_octopus_get_slug_notification = '';
           $itg_octopus_get_slug_notification = itg_octopus_get_slug_notification();
           print $itg_octopus_get_slug_notification['count'];
         }
