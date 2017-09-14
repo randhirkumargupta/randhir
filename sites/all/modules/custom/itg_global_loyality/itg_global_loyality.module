@@ -69,6 +69,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-sso-email-insert'] = array(
+    'title' => t('insert cms user email'),
+    'page callback' => 'itg_global_sso_email_insert',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['admin/config/people/global-point-report-history'] = array(
     'title' => 'Global point history',
     'description' => 'Global point history',
@@ -889,6 +896,40 @@ function itg_global_update_alternate_email_action() {
 }
 
 /**
+ * Implements itg_global_sso_email_insert().
+ */
+function itg_global_sso_email_insert() {
+  $email = $_POST['email'];
+  $uid = $_POST['uid'];
+  $property = $_POST['property'];
+  $operation = $_POST['operation'];
+  
+  if (!empty($uid)) {
+    try {
+    if($operation == 'add') {  
+    $id = db_insert('itg_sso_email_history')
+      ->fields(array(
+        'email' => $email,
+        'uid' => $uid,
+        'domain' => $property,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+    }
+    if ($operation == 'delete') {
+        db_delete('itg_sso_email_history')
+            ->condition('uid', $uid)
+            ->execute();
+    }
+    } catch (Exception $e) {
+    watchdog('cms user insert email in sso server', '<pre>' . $e->getMessage() . '</pre>');  
+    }
+  } else {
+    return drupal_access_denied();
+  }
+}
+
+/**
  * Helper function to get user alternate email
  * @param int $uid 
  */
@@ -900,5 +941,29 @@ function itg_get_global_alt_email($uid) {
           ->condition('alt.entity_id', $uid);
     $result = $query->execute()->fetchField();
     return $result;
+  }
+}
+
+/**
+ * Implements global_sso_entry_backend_user_email(). 
+ */
+function global_sso_entry_backend_user_email($email = NULL, $uid = NULL, $property = NULL, $operation = NULL) {
+  if (!empty($uid)) {
+    global $user;
+    if ($user->uid > 0) {
+      $url = variable_get('global_loyalty_url') . '/itg-sso-email-insert';
+      $data = 'email=' . $email .'&uid=' . $uid.'&property='.$property.'&operation='.$operation;
+      $options = array(
+        'method' => 'POST',
+        'data' => $data,
+        'timeout' => 60,
+        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+      );
+      $response = drupal_http_request($url, $options);
+      // Check if successful
+      if ($response->code == 200) {
+        
+      }
+    }
   }
 }
