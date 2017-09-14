@@ -19,31 +19,27 @@ function itg_print_team_permission() {
     )
   );
 }
+
 /**
  * Implement hook_form
  */
-
 function itg_print_team_form($form, &$form_state) {
-   
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => '',
     '#size' => '20',
     '#attributes' =>array('placeholder' => t('E-mail address'))
   );
-  
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Mail CSV',
   );
-  
   return $form;
 }
 
 /**
  * Implement hook_form_validate
  */
-
 function itg_print_team_form_validate($form, &$form_state) {
   $valid_email = $form_state['values']['email'];
   if (!valid_email_address($valid_email)) {
@@ -54,12 +50,9 @@ function itg_print_team_form_validate($form, &$form_state) {
 /**
  * Implement hook_form_submit
  */
-
 function itg_print_team_form_submit($form, &$form_state){
-  
  $email = $form_state['values']['email'];
-  
-  $role = user_role_load_by_name('Correspondent');
+ $role = user_role_load_by_name('Correspondent');
   $result_user = db_select('users_roles', 'ur')
       ->fields('ur', array('uid'))
       ->condition('rid', $role->rid)
@@ -68,8 +61,6 @@ function itg_print_team_form_submit($form, &$form_state){
   foreach ($result_user as $record) {
     $uids[] = $record->uid;
   }
-  
-  
   $uniqid = uniqid();
   $file = $uniqid . '.csv';
   
@@ -113,12 +104,16 @@ function itg_print_team_form_submit($form, &$form_state){
   
   $print_team_csv_path = file_unmanaged_save_data($idea_csv, $csv_path);
   $csv_path = file_create_url($print_team_csv_path);
+  $attachment = array(
+    'filepath' => $csv_path,
+  );
   
-      $params = array(
-      'body' => 'Test Mail By Developer for sending csv in mail' ,
-      'subject' => t('India Today | Print Team Test !') ,
-      'attachment' => $csv_path,  
-    );
+  $params = array(
+  'body' => 'Test Mail By Developer for sending csv in mail' ,
+  'subject' => t('India Today | Print Team Test !') ,
+  'attachment' => $attachment,  
+  );
+  
     $to = $email;
     $site_email = variable_get('site_mail', '');
     $mail = drupal_mail('itg_print_team' , 'itg_print_team_csv' , $to , language_default() , $params , $site_email , TRUE);
@@ -185,7 +180,6 @@ function itg_print_team_menu() {
     'access arguments' => array('submit idea for story'),
     'type' => MENU_CALLBACK,
   );
-
   return $items;
 }
 
