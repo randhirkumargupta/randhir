@@ -4083,6 +4083,10 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['sorts']['field_daywise_event_value']['field'] = 'field_daywise_event_value';
   $handler->display->display_options['sorts']['field_daywise_event_value']['relationship'] = 'field_program_schedule_value';
   $handler->display->display_options['sorts']['field_daywise_event_value']['expose']['label'] = 'Daywise (field_daywise_event)';
+  /* Sort criterion: Content: Programme Schedule (field_program_schedule:delta) */
+  $handler->display->display_options['sorts']['delta']['id'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['table'] = 'field_data_field_program_schedule';
+  $handler->display->display_options['sorts']['delta']['field'] = 'delta';
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -4228,6 +4232,11 @@ return itg_event_backend_speaker_ids(arg(1));
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Programme Schedule (field_program_schedule:delta) */
+  $handler->display->display_options['sorts']['delta']['id'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['table'] = 'field_data_field_program_schedule';
+  $handler->display->display_options['sorts']['delta']['field'] = 'delta';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
