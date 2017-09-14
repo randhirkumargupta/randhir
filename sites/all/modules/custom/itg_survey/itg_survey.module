@@ -831,6 +831,12 @@ function itg_survey_pqs_generatetokens() {
     $query->condition('sd.field_survey_start_date_value' , $cur_date , '<=');
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
   }
+  elseif($type == 'mega_review_critic'){
+    $query = db_select('node' , 'n');
+    $query->fields('n' , array('nid' , 'title'));
+    $query->condition('n.type' , $type , '=');
+    $query->condition('n.status' , 1 , '=');
+  }
   $data = array();
   $result = $query->execute();
   // Fetch node title and nid
