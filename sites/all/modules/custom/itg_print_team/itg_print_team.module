@@ -32,7 +32,7 @@ function itg_print_team_form($form, &$form_state) {
   );
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => 'Mail CSV',
+    '#value' => 'Download CSV And Mail Me',
   );
   return $form;
 }
@@ -104,37 +104,16 @@ function itg_print_team_form_submit($form, &$form_state){
   
   $csv_file_uri_path = file_unmanaged_save_data($idea_csv, $csv_path);
   $csv_path = file_create_url($csv_file_uri_path);
-  
-//  $attachment = array(
-//    'filepath' => $csv_path,
-//  );
-//  
-//  $params = array(
-//  'body' => 'Test Mail By Developer for sending csv in mail' ,
-//  'subject' => t('India Today | Print Team Test !') ,
-//  'attachment' => $attachment,  
-//  );
-//  
-//    $to = $email;
-//    $site_email = variable_get('site_mail', '');
-//    $mail = drupal_mail('itg_print_team' , 'itg_print_team_csv' , $to , language_default() , $params , $site_email , TRUE);
-//    if ($mail['result']) {
-//      return TRUE;
-//    }
-//    else {
-//      $error_msg = t('Failed to send the email!');
-//      watchdog('itg-print-team csv mail' , $error_msg , array() , WATCHDOG_ALERT);
-//      return FALSE;
-//    }
+
     $attachment = array(
       'filepath' => $csv_file_uri_path,
     );
     $params = array(  
     'key' => 'itg_syndication',
     'to' => $email,
-    //'from' => 'noreply@indiatoday.com',
+    'from' => 'noreply@indiatoday.com',
     'subject' => 'Print Team Csv File',
-    'body' => 'Please check attached Csv file.',
+    'body' => 'Please check and view the attached Csv file. The content is authorized by Print media team',
     'attachment' => $attachment,
     'headers' => array(
       'MIME-Version: 1.0' . "\r\n",
@@ -149,34 +128,9 @@ function itg_print_team_form_submit($form, &$form_state){
   if ($mail_status['result']) {
     drupal_set_message('Mail has been send Successfully');
   }else{
-    drupal_set_message('Unable to send Mail');
+    drupal_set_message('Unable to send Mail, Please contact to administrator');
   }
 }
-
-/**
- * Implement hook_mail 
- */
-//function itg_print_team_mail($key, &$message, $params) {
-//
-//  $headers = array(
-//    'MIME-Version' => '1.0',
-//    'Content-Type' => 'text/html; charset=UTF-8;',
-//    'Content-Transfer-Encoding' => '8Bit',
-//    'X-Mailer' => 'Drupal'
-//  );
-//
-//  foreach ($headers as $key => $value) {
-//    $message['headers'][$key] = $value;
-//  }
-//  
-//  // Add attachment when available.
-//  if (isset($params['attachment'])) {
-//    $message['params']['attachments'][] = $params['attachment'];
-//  }
-//
-//  $message['subject'] = $params['subject'];
-//  $message['body'] = $params['body'];
-//}
 
 /**
  * Implementation of hook_menu
