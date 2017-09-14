@@ -1982,24 +1982,6 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
  * This function use for itg_delete_solr_video node delete
  */
 
-function itg_videogallery_delele_node() {
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'story', ' = ')
-       ->range(0, 100000)
-      ->execute()
-      ->fetchAll();
-  foreach ($result as $key => $val) {
-    if (!empty($val->nid)) {
-      node_delete($val->nid);
-    }
-  }
-}
-
-/*
- * This function use for itg_delete_solr_video node delete
- */
-
 function itg_videogallery_delele_node_reuse_video($vide_id) {
   $result = db_select('node', 'n')
       ->fields('n', array('nid'))
