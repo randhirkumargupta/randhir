@@ -69,7 +69,7 @@ function getAnchorItem_RSS() {
         $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
         $img_url = completeFilePath($field_story_extra_large_image_fid);
         $created = $resvalue['created'];
-        $created_date = date($created, "D, d M Y H:i:s");
+        $created_date = date("D, d M Y H:i:s",$created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA['.$url.']]></link><description>&lt;a href=' . $url . '&gt;&lt;img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0" /&gt;&lt;/a&gt;<![CDATA[' . $body_value . ']]></description><pubDate>'.$created_date.'</pubDate></item>';
     }
     return $output;
