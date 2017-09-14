@@ -3446,9 +3446,9 @@ footer .multiple-items-footer i.slick-next {
   overflow: hidden;
 }
 .story-section .story-tech-chunk {
-  background: #fff;
+ /* background: #fff;
   padding: 10px;
-  position: relative;
+  position: relative;*/
 }
 .story-section .story-tech-chunk .tech-rating {
   width: 88px;
