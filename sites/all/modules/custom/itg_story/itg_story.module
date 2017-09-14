@@ -1285,7 +1285,7 @@ function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_
   $output = '';
   $output .= '<div class="tech-photos">';
   $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
-  $output .= '<span class="tech-photos-count">'.count($tech_gallery_images[LANGUAGE_NONE]).'</span></div>';
+  $output .= '<span class="tech-photos-count">'.count($tech_gallery_images[LANGUAGE_NONE]).' Photos</span></div>';
   foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
 	if($count == 3){
 		break;
