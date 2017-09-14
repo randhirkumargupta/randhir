@@ -18,7 +18,7 @@ function sso_email_history_form($form, &$form_state) {
 
   $form['fieldset']['display_button'] = array(
     '#prefix' => '<div class="submit">',
-    '#suffix' => l(t('Reset'), 'admin/config/people/sso-email-history', array('attributes' => array('class' => array('reset')))) . '</div">',
+    '#suffix' => l(t('Reset'), 'admin/config/people/sso-email-history', array('attributes' => array('class' => array('reset')))) . '| '.l(t('Delete history'), 'del-history-table-data', array('attributes' => array('class' => array('reset')))).'</div">',
     '#type' => 'submit',
     '#value' => t('Search'),
     '#submit' => array('sso_email_history_form_submit'),
