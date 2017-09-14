@@ -1253,6 +1253,7 @@ function itg_msi_issue_suppliment_title($nid) {
  */
 
 function itg_msi_get_lock_story_status($nid, $val) {
+  if(!empty($nid)) {
     $query = db_select('field_data_field_story_configurations', 'c');
     $query->fields('c', array('field_story_configurations_value'));
     $query->condition('c.entity_id', $nid, '=');
@@ -1260,6 +1261,7 @@ function itg_msi_get_lock_story_status($nid, $val) {
     $query->condition('c.field_story_configurations_value', $val, '=');
     $result = $query->execute()->fetchField();
     return $result;
+  }
 }
 
 /**

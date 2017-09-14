@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements HOOK_view_menu.
+ * Implements hook_menu().
  * {@inheritdoc}
  */
 function itg_analytics_menu() {
@@ -56,7 +56,8 @@ function itg_analytics_views_api() {
 }
 
 /**
- * Function which returns analytics data w.r.t nid.
+ * Implements itg_analytics_get_node_analytics_data().
+ *   Function which returns analytics data w.r.t nid.
  * @param int $nid
  * @return int
  */
@@ -147,7 +148,8 @@ function itg_analytics_get_node_analytics_data($nid) {
 }
 
 /**
- * Function which returns analytics data w.r.t nid.
+ * Implements itg_analytics_get_node_analytics_data_only_view_count().
+ *  Function which returns analytics data w.r.t nid.
  * @param int $nid
  * @return int
  */
@@ -171,7 +173,8 @@ function itg_analytics_get_node_analytics_data_only_view_count($nid) {
 }
 
 /**
- * Function which returns analytics data w.r.t nid.
+ * Implements itg_analytics_get_node_analytics_data_only_shared_count().
+ *  Function which returns analytics data w.r.t nid.
  * @param int $nid
  * @return int
  */
@@ -214,7 +217,8 @@ function itg_analytics_get_node_analytics_data_only_shared_count($nid) {
 }
 
 /**
- * Function which returns total number of comment w.r.t nid.
+ * Implements _get_vukkle_comment_count().
+ *   Function which returns total number of comment w.r.t nid.
  * @param int $nid
  * @return int
  */
@@ -224,7 +228,8 @@ function _get_vukkle_comment_count($nid) {
 }
 
 /**
- * Function returns nodeids array based on analytics data within 24 hour.
+ * Implements _get_last_24_hour_visited_node_ids_for_analytics_data().
+ *  Function returns nodeids array based on analytics data within 24 hour.
  */
 function _get_last_24_hour_visited_node_ids_for_analytics_data() {
   $current_time_stamp = time();
@@ -312,8 +317,10 @@ function _get_last_24_hour_visited_node_ids_for_analytics_data() {
 }
 
 /**
- * Function returns nodeids array based on analytics data within 24 hour for 
- * newsletter data for top_20_shared story
+ * Implements _get_last_24_hour_visited_node_ids_for_top_20_shared_story().
+ *   Function returns nodeids array based on analytics data within 24 hour for 
+ *   newsletter data for top_20_shared story
+ * @param string $newsfrequency
  */
 function _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequency = NULL) {
   $current_time_stamp = time();
@@ -366,8 +373,10 @@ function _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequen
 }
 
 /**
- * Function returns nodeids array based on analytics data within 24 hour for 
- * newsletter data for top_20_trending story
+ * Implements _get_last_24_hour_visited_node_ids_for_top_20_trending_story().
+ *  Function returns nodeids array based on analytics data within 24 hour for 
+ *  newsletter data for top_20_trending story
+ * @param string $newsfrequency
  */
 function _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequency = NULL) {
   $current_time_stamp = time();
@@ -436,8 +445,10 @@ function _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequ
 }
 
 /**
- * Function returns node ids array based on analytics data within 24 hour for 
- * newsletter data for top_20_trending story
+ * Implements _get_last_24_hour_visited_node_ids_for_top_20_most_viewed().
+ *  Function returns node ids array based on analytics data within 24 hour for 
+ *  newsletter data for top_20_trending story
+ * @param string $newsfrequency
  */
 function _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequency = NULL) {
   $current_time_stamp = time();
@@ -462,8 +473,9 @@ function _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequenc
 }
 
 /**
- * Function which gives sorted nodeids according to analytics data.
- * Hight weight is on top and low weight in on low.
+ * Implements _get_most_popular_nodes_based_on_analytics().
+ *  Function which gives sorted nodeids according to analytics data.
+ *  Hight weight is on top and low weight in on low.
  * @return array
  */
 function _get_most_popular_nodes_based_on_analytics() {
@@ -478,8 +490,10 @@ function _get_most_popular_nodes_based_on_analytics() {
 }
 
 /**
- * Function which gives sorted nodeids according to analytics data based on shared and trending.
- * Hight weight is on top and low weight in on low.
+ * Implements _get_most_popular_nodes_based_on_trending_shared_analytics().
+ *  Function which gives sorted nodeids according to analytics data based on shared and trending.
+ *  Hight weight is on top and low weight in on low.
+ * @param string $newsletter_content
  * @return array
  */
 function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_content) {
@@ -507,8 +521,10 @@ function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_
 }
 
 /**
- * Function which gives sorted nodeids according to analytics data based on shared and trending.
- * Hight weight is on top and low weight in on low.
+ * Implements _get_most_popular_nodes_based_on_top_20_shared().
+ *  Function which gives sorted nodeids according to analytics data based on shared and trending.
+ *  Hight weight is on top and low weight in on low.
+ * @param string $newsfrequency
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
@@ -521,8 +537,10 @@ function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
 }
 
 /**
- * Function which gives sorted nodeids according to analytics data based on shared and trending.
- * Hight weight is on top and low weight in on low.
+ * Implements _get_most_popular_nodes_based_on_top_20_trending().
+ *  Function which gives sorted nodeids according to analytics data based on shared and trending.
+ *  Hight weight is on top and low weight in on low.
+ * @param string $newsfrequency
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL) {
@@ -536,8 +554,9 @@ function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL)
 }
 
 /**
- * Function which gives sorted nodeids according to most viewed data.
- * Hight weight is on top and low weight in on low.
+ * Implements _get_most_popular_nodes_based_on_top_20_most_viewed().
+ *  Function which gives sorted nodeids according to most viewed data.
+ *  Hight weight is on top and low weight in on low.
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency = NULL) {
@@ -551,7 +570,8 @@ function _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency = NU
 }
 
 /**
- * Function is responsible to updating analytics data into table.
+ * Implements itg_update_analytics_node_count_data().
+ *  Function is responsible to updating analytics data into table.
  */
 function itg_update_analytics_node_count_data() {
 
@@ -581,8 +601,9 @@ function itg_update_analytics_node_count_data() {
 }
 
 /**
- * Implementation of _get_node_type_from
+ * Implementation of _get_node_type_from().
  * @param int $nid
+ * @return string
  */
 function _get_node_type_from($nid) {
   $query = db_select('node', 'n')

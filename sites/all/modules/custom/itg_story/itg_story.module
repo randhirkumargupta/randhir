@@ -793,10 +793,12 @@ function itg_story_library_alter(&$libraries, $module) {
  * @return array $result.
  */
 function itg_story_get_image_info($fid) {
+  if(!empty($fid)) {
   $query = db_select('image_info', 'ii');
   $query->condition('ii.fid', $fid)
       ->fields('ii');
   return $result = $query->execute()->fetchAll();
+  }
 }
 
 /**
@@ -925,11 +927,14 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
 
     if (function_exists('itg_common_get_smiley_title')) {
-      $node->content['story_title'] = itg_common_get_smiley_title($node->nid, 0, 255, TRUE);
+      if (!empty($node->field_emoji[LANGUAGE_NONE][0]['value']) || !empty($node->field_emoji_2[LANGUAGE_NONE][0]['value'])) {
+        $node->content['story_title'] = itg_common_get_smiley_title($node->nid, 0, 255, TRUE);
+      }
+      else {
+        $node->content['story_title'] = $node->title;
+      }
     }
-    else {
-      $node->content['story_title'] = $node->title;
-    }
+    
 
     // code for amp page
     if ($view_mode == 'amp') {
@@ -1001,41 +1006,43 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
  * @param type $node_id
  */
 function itg_story_photo_story_redirect($node_id, $type = 'prev', $cat_id) {
-  global $base_url;
-  $current_time = date("Y-m-d H:i:s");
-  $query = db_select('field_data_field_story_type', 'fst');
-  $query->leftJoin('node', 'n', 'n.nid=fst.entity_id');
-  $query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'fst.entity_id = expiry.entity_id');
-  $query->leftJoin('field_data_field_story_expires', 'expiry_status', 'n.nid = expiry_status.entity_id');
-  $query->leftJoin('field_data_field_primary_category', 'pr', 'pr.entity_id = fst.entity_id');
-  $query->fields('fst', array('entity_id'));
-  $query->condition('fst.field_story_type_value', 'photo_story');
-  if ($type == 'next') {
-    $query->condition('fst.entity_id', $node_id, '>');
-    $query->condition('pr.field_primary_category_value', $cat_id);
-    $query->orderBy('fst.entity_id', 'ASC');
-  }
-  else {
-    $query->condition('fst.entity_id', $node_id, '<');
-    $query->condition('pr.field_primary_category_value', $cat_id);
-    $query->orderBy('fst.entity_id', 'DESC');
-  }
+  if (!empty($node_id)) {
+    global $base_url;
+    $current_time = date("Y-m-d H:i:s");
+    $query = db_select('field_data_field_story_type', 'fst');
+    $query->leftJoin('node', 'n', 'n.nid=fst.entity_id');
+    $query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'fst.entity_id = expiry.entity_id');
+    $query->leftJoin('field_data_field_story_expires', 'expiry_status', 'n.nid = expiry_status.entity_id');
+    $query->leftJoin('field_data_field_primary_category', 'pr', 'pr.entity_id = fst.entity_id');
+    $query->fields('fst', array('entity_id'));
+    $query->condition('fst.field_story_type_value', 'photo_story');
+    if ($type == 'next') {
+      $query->condition('fst.entity_id', $node_id, '>');
+      $query->condition('pr.field_primary_category_value', $cat_id);
+      $query->orderBy('fst.entity_id', 'ASC');
+    }
+    else {
+      $query->condition('fst.entity_id', $node_id, '<');
+      $query->condition('pr.field_primary_category_value', $cat_id);
+      $query->orderBy('fst.entity_id', 'DESC');
+    }
 
-  $query->range(0, 1);
-  $query->condition('n.status', 1);
-  $query->condition('n.type', array('story'), 'IN');
-  $or = db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>=');
-  $query->condition($or);
-  $result = $query->execute()->fetchAll();
+    $query->range(0, 1);
+    $query->condition('n.status', 1);
+    $query->condition('n.type', array('story'), 'IN');
+    $or = db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>=');
+    $query->condition($or);
+    $result = $query->execute()->fetchAll();
 
-  if ($result[0]->entity_id) {
-    $required_node_id = 'node/' . $result[0]->entity_id;
-    $href = $base_url . '/' . $required_node_id;
+    if ($result[0]->entity_id) {
+      $required_node_id = 'node/' . $result[0]->entity_id;
+      $href = $base_url . '/' . $required_node_id;
+    }
+    else {
+      $href = '';
+    }
+    return $href;
   }
-  else {
-    $href = '';
-  }
-  return $href;
 }
 
 /**
