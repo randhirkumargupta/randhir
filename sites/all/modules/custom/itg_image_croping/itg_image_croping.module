@@ -644,6 +644,9 @@ function itg_image_croping_crop_image() {
     $content_type ='story';
   }
   $content_type_new = $_POST['content_name'];
+  if($content_type == "") {
+    $content_type = 'story';
+  }
   $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
   $fileids = array();
   $img_dim = mageimagedimesion();
