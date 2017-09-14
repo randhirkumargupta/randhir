@@ -198,7 +198,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   // add code for internal video repo
   
   $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
-      'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal');
+      'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
   if( in_array($form['#id'], $solr_video_view_internal)) {
     drupal_add_js( 'http://code.jquery.com/jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js( 'http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js', array('scope' => 'footer'));
