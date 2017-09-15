@@ -51,7 +51,7 @@ function section_widgets_ajax() {
       $category_array = explode('(', $_GET['category_name']);
       $cid = substr($category_array[1], 0,-1);
       // category exit or not for this section
-      $check_cid = get_section_widgets_id($cid, $_GET['section_name'], $_GET['widgets_type']);
+      $check_cid = get_section_widgets_id($cid, $_GET['section_name'], $_GET['widgets_type'],$_GET['template_name']);
       
       if (empty($check_cid)) {
         $query_layout_tpl = db_insert('itg_section_widgets_list');
