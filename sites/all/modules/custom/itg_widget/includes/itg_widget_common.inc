@@ -2100,8 +2100,9 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
       ->orderBy('n.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $result = $query->execute();
   foreach ($result as $key => $entity_data_node) {
+    $entity_data_node = (array) $entity_data_node;
     $entity_data[] = $entity_data_node;
     if ($entity_data_node['type'] == 'story') {
       $entity_data[$key]['title'] = $entity_data_node['field_story_short_headline_value'];
