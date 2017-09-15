@@ -24,9 +24,16 @@ foreach ($data as $key => $commentary) {
             <div class="batBollDetails">
 
                 <span class="sectiontime">Score  <?php echo $commentary->Score; ?> </span>
-                <br>
-                <span class="sectiontime float-left">Batsman</span><span class="sectiontime float-left">Bowler</span>
-                <span class="sectiontime float-left"><?php echo $commentary->Batsman; ?><span class='batsman_detail'><?php echo $batDetails; ?></span></span><span class="sectiontime float-left"><?php echo $commentary->Bowler; ?><span class="bowler_detail"><?php echo $bowlDetails; ?></span></span>
+                <div class="batsmanDetails">
+					<span class="sectiontime float-left">Batsman</span>
+					<span class="sectiontime float-left"><?php echo $commentary->Batsman; ?><span class='batsman_detail'><?php echo $batDetails; ?></span></span>
+                </div>
+                <div class="bollerDetails">
+					 <span class="sectiontime float-left">Bowler</span>
+					 <span class="sectiontime float-left"><?php echo $commentary->Bowler; ?><span class="bowler_detail"><?php echo $bowlDetails; ?></span></span>
+                </div>
+               
+                
             </div>
         </div>
     <?php endif; ?>
