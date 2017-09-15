@@ -862,7 +862,7 @@ function itg_print_team_rating_custom_submit($form, &$form_state) {
  * @param string $magazine
  */
 function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
-  global $user;
+  global $user; 
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   $print_node = node_load($nid);
   $issue_node = $print_node;
