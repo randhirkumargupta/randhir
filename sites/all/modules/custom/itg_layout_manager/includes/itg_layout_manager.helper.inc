@@ -529,11 +529,12 @@ function category_widget_list($itg_result, $widget_name) {
  * @param $widget_type
  * @return int
  */
-function get_section_widgets_id($cid, $section, $widget_type) {
+function get_section_widgets_id($cid, $section, $widget_type,$template_name) {
   $query = db_select('itg_section_widgets_list', 'section');
   $query->fields('section', array('id'));  
   $query->condition('category_id', $cid);
   $query->condition('template_section_name', $section);
+  $query->condition('template_name', $template_name);
   $query->condition('widget_type', $widget_type);
   return $query->execute()->fetchField();
 }
