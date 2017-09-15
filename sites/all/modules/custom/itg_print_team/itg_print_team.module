@@ -877,16 +877,16 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   } else {
     unset($print_node->field_pti_magazine);
   }
-  if (strlen($supplement) >= 1 && is_integer($supplement)) {
-    if ($supplement != '_none') {
-      $print_node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
-      $debug['supp_innner'] = $supplement;
-    } else {
-      unset($print_node->field_pti_supplement);
-    }
-  } else {
-    unset($print_node->field_pti_supplement);
-  }
+  
+//  if (strlen($supplement) >= 1 && is_integer($supplement)) {
+//    if ($supplement != '_none') {
+//      $print_node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+//    } else {
+//      unset($print_node->field_pti_supplement);
+//    }
+//  } else {
+//    unset($print_node->field_pti_supplement);
+//  }
    
   try{
   field_attach_update('node', $print_node);
@@ -946,11 +946,12 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   }
 
-  if (strlen($supplement) >= 1 && is_integer($supplement)) {
-    $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
-  } else {
-    unset($node->field_story_select_supplement);
-  }
+//  if (strlen($supplement) >= 1 && is_integer($supplement)) {
+//    $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+//  } else {
+//    unset($node->field_story_select_supplement);
+//  }
+  
   if ($fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
   }
