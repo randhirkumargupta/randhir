@@ -40,7 +40,7 @@ CKEDITOR.dialog.add('itgimageDialog', function(editor) {
                                 bas_path = bas_path + 'itgcms/';
                             }
 //              editor.popup(bas_path + 'pqs/associate-with-story/poll', 400, 600);
-                            showimagerepopopu(bas_path + 'itg_image_repository?app=ckeditor%7Csendto%40ckeditor_imceSendTo%7C&CKEditor=edit-field-gallery-kicer-und-0-value&CKEditorFuncNum=0&langCode=en')
+                            showimagerepopopu(bas_path + 'itg_image_repository?app=ckeditor%7Csendto%40ckeditor_imceSendTo%7C&CKEditor=edit-field-gallery-kicer-und-0-value&CKEditorFuncNum=0&langCode=en&bodyeditor=bodyeditor')
 
                         }
                     },
