@@ -857,9 +857,9 @@ function _latest_from_pti() {
     $related_dt.= "<ul>";
     $i = 0;
     foreach ($related_content as $key => $value) {
-      if (!empty($value['title'])) {
-        $related_title = mb_strimwidth($value['title'], 0, 200, "..");
-        $path = drupal_get_path_alias('node/' . $value['nid']);
+      if (!empty($value->title)) {
+        $related_title = mb_strimwidth($value->title, 0, 200, "..");
+        $path = drupal_get_path_alias('node/' . $value->nid);
         $related_dt.= "<li class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
       }
       $i++;
@@ -960,7 +960,8 @@ function itg_third_party_section_card_content($type, $limit) {
   $query->range(0, $limit);
   $query->orderBy('n.created', 'DESC'); //ORDER BY created
   $result = $query->execute();
-  return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  //return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
 
 /**
