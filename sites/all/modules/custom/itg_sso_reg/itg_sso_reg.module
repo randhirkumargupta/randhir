@@ -143,6 +143,13 @@ function itg_sso_reg_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['del-history-table-data'] = array(
+    'title' => 'Delete history table data',
+    'page callback' => 'itg_del_history_table_data',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -506,4 +513,17 @@ function itg_sso_reg_tokens($type, $tokens, array $data = array(), array $option
   }
 
 	return $replacements;
+}
+
+/*
+ * Implements itg_del_history_table_data().
+ */
+function itg_del_history_table_data() {
+  try {
+  $result = db_truncate('itg_sso_email_history')->execute();
+  $redirect_url = 'admin/config/people/sso-email-history';
+  drupal_goto($redirect_url);
+  } catch (Exception $e) {
+  watchdog('Email history table not truncate', '<pre>' . $e->getMessage() . '</pre>');  
+  }
 }

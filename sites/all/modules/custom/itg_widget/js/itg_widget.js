@@ -10,7 +10,7 @@ Drupal.behaviors.itg_widgets = {
         
         var setttl = settings.itg_widget.settings.setttl;
         var actual_ttl = settings.itg_widget.settings.actual_ttl;
-        if (setttl != 0) {
+        /*if (setttl != 0) {
             setInterval(function () {
                 try {
                 var card_val = jQuery(".section-ordering").attr('id');
@@ -33,7 +33,7 @@ Drupal.behaviors.itg_widgets = {
                 
                 
             }, setttl * 1000);
-       }
+       }*/
         
         
         jQuery("div.big-news-content-videogallery a.has-ajax-big-story").click(function () {
