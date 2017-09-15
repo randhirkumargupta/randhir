@@ -293,7 +293,9 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $primary_category = $form_state['input']['itg_primary_category'];
     // for story assign to widget
     if (function_exists('itg_story_assign_to_widget')) {
-      itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+       if(is_array($story_widget) && count($story_widget) > 0) {		
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+      }
     }
   }
 
