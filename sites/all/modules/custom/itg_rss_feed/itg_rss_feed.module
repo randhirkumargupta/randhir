@@ -12,7 +12,7 @@
  */
 
 function itg_rss_feed_menu() {
-  $items['anchor-rss'] = array(
+  $items['rss/anchor'] = array(
     'page callback' => 'anchorRSSFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/anchorRSSFeed.inc',
