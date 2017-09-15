@@ -24,7 +24,7 @@ function articleRSSFeed() {
         //anchorRSSFeed writing...
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $output .= getRSSFeedHeader();
-        $output .= getRSSFeedSubHeader();
+        $output .= getRSSFeedSubHeaderArticle();
 
         $output .= getArticleItem_RSS($section_id);
 
