@@ -83,8 +83,8 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
  */
 function itg_photo_image_count($gallery_image) {
   if($gallery_image) {
-    $query = db_select('field_data_field_photo_enable', p)
-      ->fields(p, array('entity_id'));
+    $query = db_select('field_data_field_photo_enable', 'p')
+      ->fields('p', array('entity_id'));
     $query->condition('p.entity_id', $gallery_image, 'IN');
     // Add the COUNT expression
     $query->addExpression('COUNT(p.entity_id)' , 'entity_count');
