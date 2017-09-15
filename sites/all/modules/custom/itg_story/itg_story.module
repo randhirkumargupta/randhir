@@ -1559,8 +1559,14 @@ function itg_story_mega_review_node_embed($node){
   $average_rating = $average_rating * 20;
   $output = '';  
   $output .= '<article class="node node-mega-review-critic view-mode-full clearfix">';
+  $output .= '<script>if (typeof(jQuery) == "undefined") {';
+  $output .= 'var iframeBody = document.getElementsByTagName("body")[0];';
+  $output .= 'var jQuery = function (selector) { return parent.jQuery(selector, iframeBody); };';
+  $output .= 'var $ = jQuery;}';
+  $output .=  '</script>';
   $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/styles-new.css" />';
   $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/font-awesome.css" />';
+  $output .= '<script type="text/javascript" src="/'.drupal_get_path('module', 'itg_flag').'/js/itg_flag.js" ></script>';
   $output .= '<div class="embed-mega-review">';
   $output .= '<a href="'.$node_alias.'" target="_blank"><h1>'.$node->title.'</h1></a>';
   $output .= '<div class="movie-description">';
