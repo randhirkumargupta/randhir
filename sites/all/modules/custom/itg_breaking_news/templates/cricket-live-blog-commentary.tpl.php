@@ -20,7 +20,7 @@ foreach ($data as $key => $commentary) {
         $_bowler = explode('|', $commentary->BowlDetails);
         $bowlDetails = $_bowler[1] . '-' . $_bowler[2] . '-' . $_bowler[3] . '-' . $_bowler[4];
         ?>
-    <div class="row" data-id="<?php print $key;?>" commentary-id="<?php echo $commentary->Id; ?>" current-inn="<?php echo $commentary->innings; ?>">  
+    <div class="para-live-blog" data-id="<?php print $key;?>" commentary-id="<?php echo $commentary->Id; ?>" current-inn="<?php echo $commentary->innings; ?>">  
             <div class="batBollDetails">
 
                 <span class="sectiontime">Score  <?php echo $commentary->Score; ?> </span>
@@ -30,9 +30,9 @@ foreach ($data as $key => $commentary) {
             </div>
         </div>
     <?php endif; ?>
-    <div class="row" data-id="<?php print $key;?>" commentary-id="<?php echo (isset($commentary->Id)?$commentary->Id:''); ?>" current-inn="<?php echo (isset($commentary->innings)?$commentary->innings:''); ?>">
+    <div class="para-live-blog" data-id="<?php print $key;?>" commentary-id="<?php echo (isset($commentary->Id)?$commentary->Id:''); ?>" current-inn="<?php echo (isset($commentary->innings)?$commentary->innings:''); ?>">
         <div>
-            <p itemprop="articleBody"> <?php if(!empty($time)):?><strong><?php echo $time; ?>: </strong><?php endif;?><?php echo $commentary->Commentary; ?></p>
+            <p itemprop="articleBody"> <?php if(!empty($time)):?><span><?php echo $time; ?>: </span><?php endif;?><?php echo $commentary->Commentary; ?></p>
         </div>
     </div>
     <?php
