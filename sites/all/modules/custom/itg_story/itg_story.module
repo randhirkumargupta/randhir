@@ -1504,6 +1504,7 @@ function itg_story_sample_image_path($ori_fid){
 }
 
 function itg_story_mega_review_node_embed($node){  
+  //$node = node_load($node_id);
   // config for sharing
   global $base_url; 
   $nid = $node->nid;   
@@ -1515,7 +1516,7 @@ function itg_story_mega_review_node_embed($node){
   
   // get global comment config
   if (function_exists('global_comment_last_record')) {      
-    $last_record = $global_comment_last_record;
+    $last_record = global_comment_last_record();
     $config_name = trim($last_record[0]->config_name);
   }
     
@@ -1530,12 +1531,41 @@ function itg_story_mega_review_node_embed($node){
   $director = $node->field_mega_review_director['und'][0]['value'];
   $plot = $node->field_mega_review_movie_plot['und'][0]['value'];
   $display = array('label' => 'hidden');
-  $output = '';
+  $theme_path = drupal_get_path('theme', 'itg');
+  $external_review = $internal_review = FALSE;
+  $average_ratings = 0;
+  $num_of_ratings = 0;
+  foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection){
+    $reviews = entity_load('field_collection_item', array($field_collection['value'])); 
+	  if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'internal'):
+	      $internal = render(field_view_field('field_collection', $reviews, 'field_story_reporter'));
+		  $internal_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+		  $internal_review .= '<p>'.$internal.'</p>';                      
+		  $internal_review .= '<span class="other-reviews-rating" data-star-value="'.$internal_rating.'%"></span>';		  
+	  endif;
+	  if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external'):
+	      $external = render(field_view_field('field_collection', $reviews, 'field_story_reporter'));
+		  $external_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+		  $external_review .= '<p>'.$external.'</p>';                      
+		  $external_review .= '<span class="other-reviews-rating" data-star-value="'.$external_rating.'%"></span>';  
+	  endif;
+	$average_ratings += $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'];
+	++$num_of_ratings; 
+  }
+  $average_rating = (float) $average_ratings / $num_of_ratings;  
+  $average_rating = round($average_rating, 1);
+  $average_rating = itg_common_round_rating($average_rating);
+  $average_rating = $average_rating * 20;
+  $output = '';  
+  $output .= '<article class="node node-mega-review-critic view-mode-full clearfix">';
+  $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/styles-new.css" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/font-awesome.css" />';
+  $output .= '<div class="embed-mega-review">';
   $output .= '<a href="/node/'.$node->nid.'"><h1>'.$node->title.'</h1></a>';
   $output .= '<div class="movie-description">';
   $output .=  render(field_view_field('node', $node, 'field_story_movie_description', $display));
   $output .= '</div>';
-  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating"></div><div class="social-info">';
+  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating" data-star-value="'.$average_rating.'"></div><div class="social-info">';
   $output .= '<span class="share-count"><i>';
   if(!empty($tot_count)) {
 	$output .= $tot_count;
@@ -1559,17 +1589,26 @@ function itg_story_mega_review_node_embed($node){
   $output .= '<div class="movie-review-wrapper">';
   $output .= '<div class="movie-trailer">'.render(field_view_field('node', $node, 'field_mega_review_youtube_url', $display)).'</div>';
   $output .= '<div class="movie-review-text">';
-  if (!empty($cast_name)):
-	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Cast :').'</dfn><span class="review-txt">'.$cast_name.'</span></div>';
-  endif;
+  //if (!empty($cast_name)):
+	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Cast :').'</dfn><span class="review-txt">'.render(field_view_field('node', $node, 'field_mega_review_cast', $display)).'</span></div>';
+  //endif;
   if (!empty($director)):
 	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Director :').'</dfn><span class="review-txt">'.$director.'</span></div>';
   endif;
   if (!empty($plot)):
 	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Plot :').'</dfn><span class="review-txt">'.$plot.'</span></div>';
   endif;
-  $output .= '<div class="movie-reviewer our-review"></div><div class="movie-reviewer movie-reviewer-other"></div>';
+  $output .= '<div class="movie-reviewer our-review">';
+  $output .= '<h3>OUR REVIEWERS</h3>';
+  $output .= $internal_review;
+  $output .= '</div>';    
+  $output .= '<div class="movie-reviewer movie-reviewer-other">';
+  $output .= '<h3>OTHER REVIEWERS</h3>';
+  $output .= $external_review;
   $output .= '</div>';
   $output .= '</div>';
-  return $output;
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</article>';
+  print $output;
 }
