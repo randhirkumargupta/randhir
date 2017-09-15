@@ -15,10 +15,10 @@ function articleRSSFeed() {
     $section_id = $_GET['section_id'];
     $output = "";
 
-    $redis_key = "itgd_rss_articleRSSFeed";
+    $redis_key = "itgd_rss_articleRSSFeed_".$section_id;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $output = $result_get['key_value'];
     } else {
         //anchorRSSFeed writing...
