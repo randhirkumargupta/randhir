@@ -212,16 +212,32 @@
  *   );
  * @endcode
  */
+ $databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database'=>'indiatoday_migrate',   
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);
+/*
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
-  //'slave' => 'autoslave', // optional, defaults to 'autoslave'
-  'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
+  'slave' => 'autoslave', // optional, defaults to 'autoslave'
+  //'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
 // Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );
 // setting for UAT
-/*$databases['default']['master'] = array(
+$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
@@ -251,10 +267,11 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);*/
+);
+*/
 // end setting for UAT
 //for production setting
-$databases['default']['master'] = array(
+/*$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday',
   'username' => 'prod_it_write',
@@ -295,7 +312,7 @@ $databases['sso_db']['default'] = array(
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
-);
+);*/
 
 //end production setting
 // Use locking that supports force master
@@ -707,5 +724,6 @@ if (file_exists($local_settings)) {
 }
 
 $conf['image_allow_insecure_derivatives'] = TRUE;
+$conf['block_cache_bypass_node_grants'] = TRUE;
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;

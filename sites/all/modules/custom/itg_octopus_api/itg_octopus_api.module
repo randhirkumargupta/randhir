@@ -21,11 +21,11 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-  $items['itg-generate-octopus-notification'] = array(
-    'title' => 'api callback menu',
-    'page callback' => 'itg_generate_octopus_notification',
-    'access arguments' => array('administer itg octopus'),
-  );
+//  $items['itg-generate-octopus-notification'] = array(
+//    'title' => 'api callback menu',
+//    'page callback' => 'itg_generate_octopus_notification',
+//    'access arguments' => array('administer itg octopus'),
+//  );
 
   $items['rundown-listing'] = array(
     'title' => 'Rundown Listing',

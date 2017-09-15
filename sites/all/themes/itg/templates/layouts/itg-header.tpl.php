@@ -89,7 +89,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
         <?php
         $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
         // Contion to check fucntion isset.
-        $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
+        //$load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
         if (!empty($menu_manager)) {
           foreach ($menu_manager as $key => $menu_data) :         
             if (function_exists('itg_menu_manager_get_menu')) {
