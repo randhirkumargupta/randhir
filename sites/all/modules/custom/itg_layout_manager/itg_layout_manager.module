@@ -446,7 +446,7 @@ function itg_layout_manager_block_view($delta = '') {
       $settings['change_arg'] = $change_arg;
       $settings['base_url'] = $base_url;
       drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-      drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE, 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
       
       /* end here */
 
