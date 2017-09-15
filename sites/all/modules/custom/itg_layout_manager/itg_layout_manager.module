@@ -391,7 +391,7 @@ function itg_layout_manager_block_view($delta = '') {
         foreach ($second_level_menu as $db_data) {
           $temp_data = array();
           $temp_data['db_data'] = $db_data;
-          $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+          //$temp_data['term_load'] = $db_data['tid'];
           $data['menu_manager'][] = $temp_data;
         }
       }

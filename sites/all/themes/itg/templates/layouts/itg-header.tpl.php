@@ -89,19 +89,11 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
         <?php
         $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
         // Contion to check fucntion isset.
-        $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)) : array();
+        $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
         if (!empty($menu_manager)) {
           foreach ($menu_manager as $key => $menu_data) :         
             if (function_exists('itg_menu_manager_get_menu')) {
               // Logic to exclude inactive category.
-              if (!empty($menu_data['term_load'])) {
-                $category_manager_tid = $menu_data['term_load']->tid;
-                $term_state = itg_category_manager_term_state($category_manager_tid);
-                if($term_state == 0) {
-                  continue;
-                }
-              }
-
               $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
               $image_class = $menu_link_data['image_class'];
               $link_text = $menu_link_data['link_text'];
