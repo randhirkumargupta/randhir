@@ -578,8 +578,7 @@ foreach ($story_values as $story_id){
   }else{
     drupal_set_message('Unable to send Mail, Please contact to administrator');
   }
-  
-  }
+  } 
 }
 
 
