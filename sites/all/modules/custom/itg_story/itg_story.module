@@ -311,7 +311,9 @@ function itg_story_form_custom_callback($form, &$form_state) {
       $primary_category = $form_state['input']['itg_primary_category'];
       // for story assign to widget
       if (function_exists('itg_story_assign_to_widget')) {
-        itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+        if(is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+        }
       }
 
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
@@ -448,6 +450,27 @@ function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previou
                   'weight' => --$weight_data,
                   'state' => 0,
                 ])->execute();
+          }
+          catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+      // for feature story
+      if ($widget_val == 'dont_miss') {
+        $widget = 'dont_miss_content_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 'dont_miss_content_widget');
+        $weight_data = itg_story_widget_max_value('dont_miss_content_widget');
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+              'nid' => $nid,
+              'cat_id' => 0,
+              'content_type' => $content_type,
+              'widget' => $widget,
+              'weight' => --$weight_data,
+              'state' => 0,
+            ])->execute();
           }
           catch (PDOException $e) {
             drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
