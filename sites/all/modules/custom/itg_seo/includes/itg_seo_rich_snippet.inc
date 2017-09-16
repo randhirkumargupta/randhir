@@ -242,6 +242,8 @@ function itg_seo_node_data($node) {
  * Returns Story Author Name for story rich snippett
  */
 function itg_get_story_author_name($auth_id){
+  if(!empty($auth_id)) {
   $author_name = db_query("SELECT title from {node} WHERE nid = :nid ", array(":nid" => $auth_id))->fetchField();
   return $author_name;
+  }
 }

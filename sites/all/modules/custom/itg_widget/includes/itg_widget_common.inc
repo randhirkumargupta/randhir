@@ -2034,7 +2034,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget' || $widget_name == 'photo_carousel_list_widget') {    
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   }
   //we_may_suggest_widget
@@ -2078,7 +2078,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->fields('esi', array('field_story_extra_small_image_alt', 'field_story_extra_small_image_title'));
   }
 
-  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget') {
+  if ($widget_name == 'featured_photo_carousel' || $widget_name == 'video_carousel_list_widget' || $widget_name == 'photo_carousel_list_widget') {
     $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->fields('eli_file', array('uri'));
     $query->fields('eli', array('field_story_extra_large_image_alt', 'field_story_extra_large_image_title'));
@@ -2100,8 +2100,9 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
       ->orderBy('n.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $result = $query->execute();
   foreach ($result as $key => $entity_data_node) {
+    $entity_data_node = (array) $entity_data_node;
     $entity_data[] = $entity_data_node;
     if ($entity_data_node['type'] == 'story') {
       $entity_data[$key]['title'] = $entity_data_node['field_story_short_headline_value'];
