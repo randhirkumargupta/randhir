@@ -401,7 +401,7 @@ function itg_layout_manager_block_view($delta = '') {
 
     case 'footer_block':
       /* code for change password, email, mobile confirmation popup */
-
+      $sso_msg = '';
       if (arg(0) == 'personalization') {
         // change message according to argument
         $change_pass_msg = '';
@@ -420,10 +420,9 @@ function itg_layout_manager_block_view($delta = '') {
 
       /* code for sso login */
       global $user, $base_url;
-
+      $change_arg = NULL;
       if (array_key_exists(FRONT_USER, $user->roles)) {
-        // condition for change password
-        $change_arg = NULL;
+        // condition for change password        
         if (arg(0) == 'password-success' || arg(0) == 'complete-page') {
           $change_arg = arg(1);
         }
@@ -447,7 +446,7 @@ function itg_layout_manager_block_view($delta = '') {
       $settings['change_arg'] = $change_arg;
       $settings['base_url'] = $base_url;
       drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-      drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE, 'scope' => 'footer'));
+      drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
       
       /* end here */
 

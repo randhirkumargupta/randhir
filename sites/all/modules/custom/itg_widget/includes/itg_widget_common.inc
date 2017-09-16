@@ -1984,7 +1984,6 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
  * @return array
  */
 function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, $range_min = 0, $order_by = 'DESC') {
-
     $valid_content_type = _get_content_type_for_widget($widget_name);
 
     $query = db_select('itg_widget_order', 'iwo');
@@ -2848,7 +2847,7 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
     $keep_row = (int) variable_get('section_widget_keep_row_count');
     try {
         $old_rows = db_select($table, "widget");
-        $old_rows->fields("widget", array("id" , "nid"));
+        $old_rows->fields("widget", array("id", "nid"));
         $old_rows->condition("widget.cat_id", $cat_id);
         $old_rows->condition("widget.content_type", $content_type);
         $old_rows->orderBy("widget.id", "DESC");
