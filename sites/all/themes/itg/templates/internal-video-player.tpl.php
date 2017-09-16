@@ -5,9 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+global $base_url;
 ?>
-<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
+  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
 
 <?php
 $width = 622;
