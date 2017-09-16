@@ -200,8 +200,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
       'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
   if( in_array($form['#id'], $solr_video_view_internal)) {
-    drupal_add_js( 'http://code.jquery.com/jquery-1.11.3.min.js', array('scope' => 'footer'));
-    drupal_add_js( 'http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
@@ -222,7 +222,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
           success: function (data) {
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
-
           },
           error: function (xhr, desc, err) {
           }

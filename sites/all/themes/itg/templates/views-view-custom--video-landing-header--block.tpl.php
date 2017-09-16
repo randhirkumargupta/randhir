@@ -110,43 +110,42 @@ $uri = base64_encode($actual_link);
                               <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
                                       <div style="display:none" class="loading-video">Load.....</div>
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_0">
-                                          <?php if($videoids[0]->video_repo_type == 'INTERNAL') {
+                                          <?php
+                                          if ($videoids[0]->video_repo_type == 'INTERNAL') {
                                             print theme('internal_video_player', array("data" => $videoids[0]->fid));
-          }
-                                           ?>
+                                          }
+                                          ?>
                                       </div>
-                                      <?php if($videoids[0]->video_repo_type != 'INTERNAL') { ?>
-                                      <script>
-                                        jQuery(window).load(function () {
-                                            jQuery('.video-slider-images').removeClass('pointer-event-none');
-                                        });
-                                        var player_0 = DM.player(
-                                                document.querySelector('#video_0'),
-                                                {
-                                                    video: '<?php print $vide_dm_id; ?>',
-                                                    width: '600px',
-                                                    height: '450px',
-                                                    params: {
-                                                        autoplay: <?php echo $autoplay; ?>,
-                                                        controls: 1,
-                                                        'sharing-enable': 0,
-                                                        'ui-start-screen-info': 0,
-                                                        'endscreen-enable':<?php echo $ads_flag; ?>,
-                                                        'ui-logo': 0,
-                                                    }
-                                                }
-                                        );
-                                        player_0.addEventListener('video_end', function (event) {
-                                            jQuery('.image_index_<?php print $keys + 1; ?>').trigger('click');
-                                        });
-                                      </script>
+                                      <?php if ($videoids[0]->video_repo_type != 'INTERNAL') { ?>
+                                        <script>
+                                          jQuery(window).load(function () {
+                                              jQuery('.video-slider-images').removeClass('pointer-event-none');
+                                          });
+                                          var player_0 = DM.player(
+                                                  document.querySelector('#video_0'),
+                                                  {
+                                                      video: '<?php print $vide_dm_id; ?>',
+                                                      width: '600px',
+                                                      height: '450px',
+                                                      params: {
+                                                          autoplay: <?php echo $autoplay; ?>,
+                                                          controls: 1,
+                                                          'sharing-enable': 0,
+                                                          'ui-start-screen-info': 0,
+                                                          'endscreen-enable':<?php echo $ads_flag; ?>,
+                                                          'ui-logo': 0,
+                                                      }
+                                                  }
+                                          );
+                                          player_0.addEventListener('video_end', function (event) {
+                                              jQuery('.image_index_<?php print $keys + 1; ?>').trigger('click');
+                                          });
+                                        </script>
                                       <?php } ?>
                                   </div>
                               </div>
                             <?php }
                             ?>
-
-
 
                             <?php
                             $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
@@ -254,16 +253,16 @@ $uri = base64_encode($actual_link);
                   <div class="social-likes mhide">
                       <ul>
                           <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                    if (function_exists(itg_flag_get_count)) {
-                      $like_count = itg_flag_get_count(arg(1), 'like_count');
-                    }
-                    // get migrated count 
-                    if (function_exists('itg_get_migrated_like_count')) {
-                      $migrated_count = itg_get_migrated_like_count(arg(1));
-                    }
-                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                      ?></span></a></li>
-                                      <?php
+                                      if (function_exists(itg_flag_get_count)) {
+                                        $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                      }
+                                      // get migrated count 
+                                      if (function_exists('itg_get_migrated_like_count')) {
+                                        $migrated_count = itg_get_migrated_like_count(arg(1));
+                                      }
+                                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                      ?></span></a></li>
+                          <?php
                           if ($user->uid > 0) {
                             if (function_exists(itg_get_front_activity_info)) {
                               $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -325,16 +324,16 @@ $uri = base64_encode($actual_link);
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                if (function_exists(itg_flag_get_count)) {
-                  $like_count = itg_flag_get_count(arg(1), 'like_count');
-                }
-                // get migrated count 
-                if (function_exists('itg_get_migrated_like_count')) {
-                  $migrated_count = itg_get_migrated_like_count(arg(1));
-                }
-                print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                  ?></span></a></li>
-                                          <?php
+                                          if (function_exists(itg_flag_get_count)) {
+                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                          }
+                                          // get migrated count 
+                                          if (function_exists('itg_get_migrated_like_count')) {
+                                            $migrated_count = itg_get_migrated_like_count(arg(1));
+                                          }
+                                          print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                          ?></span></a></li>
+                              <?php
                               if ($user->uid > 0) {
                                 if (function_exists(itg_get_front_activity_info)) {
                                   $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -405,7 +404,7 @@ $uri = base64_encode($actual_link);
                       </div>
                   </div>
               </div>
-              <?php //$row['field_story_expert_description'];               ?>
+              <?php //$row['field_story_expert_description'];                ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
                       <?php

@@ -2,16 +2,25 @@
 
 
 <?php
-$width = 420;
-$height = 500;
+if ($width == "") {
+  $width = 420;
+}
+if ($height == "") {
+  $height = 500;
+}
+if (arg(0) == 'embeded-video') {
+  global $base_url;
+  ?>
+<script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer-jquery-1.11.3.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
+ <?php } 
 $video_all_data = json_decode($video_data, TRUE);
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
-
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
 
-    <div id="videoplayer"> </div>
+<div id="videoplayer"> </div>
 
 
 <script type="text/javascript">
@@ -34,7 +43,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           //var multipart=0;
           playlist: [{
                   title: "",
-                  'image': "<?php echo  $player_content['player_image'];?>",
+                  'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
                           file: "<?php echo $player_content['bitrate_url']; ?>"
@@ -51,7 +60,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
-         
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,

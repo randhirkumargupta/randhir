@@ -17,7 +17,7 @@ else {
     <div class="browse-ftp <?php echo $singalcalss; ?>">
         <div id="itg_video_content">
             <div class="video-ftp active"><?php print t('FTP'); ?></div>
-           <div class="internal-video-tab"><?php print t('Internal'); ?></div>
+            <div class="internal-video-tab"><?php print t('Internal'); ?></div>
             <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single') { ?>
               <div class="video-local"><?php print t('Local Browse'); ?></div>
             <?php } ?>
@@ -75,7 +75,7 @@ else {
                   <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
-            
+
             <div class="ftp-server-internal" style="display:none">
                 <?php
                 if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
@@ -100,8 +100,7 @@ else {
                   }
                   else {
                     ?>
-
-                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-publish-video'; ?>" width="900" height="650"></iframe>
+                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-publish-internal-video'; ?>" width="900" height="650"></iframe>
                     <?php
                   }
                 }
