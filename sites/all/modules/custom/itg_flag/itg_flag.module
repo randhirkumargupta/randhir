@@ -22,8 +22,8 @@ function itg_flag_init() {
     $settings['fb_app'] = variable_get('itg_sharing_app_id');
   }
   
-  if ($theme == FRONT_THEME_NAME) {
-    drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
+  if ($theme == FRONT_THEME_NAME) {    
     drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
   }
 }
