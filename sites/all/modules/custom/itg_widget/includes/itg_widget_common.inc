@@ -2151,6 +2151,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
     $query = db_select('itg_widget_order', 'iwo'); //
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
+    $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
