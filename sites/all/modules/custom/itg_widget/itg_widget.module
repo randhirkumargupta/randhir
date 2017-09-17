@@ -1979,6 +1979,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
             $node_load_data = unserialize($widget_data->node_data);
 
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
+            $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];
             $mi_file_uri = $node_load_data->field_story_medium_image['und'][0]['uri'];
             $esi_file_uri = $node_load_data->field_story_extra_small_image['und'][0]['uri'];
             $si_file_uri = $node_load_data->field_story_small_image['und'][0]['uri'];
@@ -2019,7 +2020,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'weight' => $weight,
               'esi_file_uri' => $esi_file_uri,
               'mi_file_uri' => $mi_file_uri,
-              'li_file_uri' => $uri,
+              'li_file_uri' => $li_file_uri,
               'si_file_uri' => $si_file_uri,
               'field_story_large_image_alt' => $node_load_data->field_story_large_image_alt['und'][0]['alt'],
               'field_story_large_image_title' => $node_load_data->field_story_large_image_title['und'][0]['title'],
