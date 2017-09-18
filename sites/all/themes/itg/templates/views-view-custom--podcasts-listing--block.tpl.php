@@ -9,8 +9,15 @@
          print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
        }
        else  {
-         print $row['field_story_extra_large_image']; 
-       
+          $doc = new DOMDocument();
+          $doc->loadHTML($row['field_story_extra_large_image']);
+          $xpath = new DOMXPath($doc);
+          $src = $xpath->evaluate("string(//img/@src)");
+         if(function_exists('url_exists') && url_exists($src)) {
+           print $row['field_story_extra_large_image']; 
+         } else {
+           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+         }
        }
        ?>    
                     <figcaption><i class="fa fa-volume-up" aria-hidden="true" id="demo-<?php echo $row['nid'] ?>"></i></figcaption>
