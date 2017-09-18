@@ -212,7 +212,7 @@
  *   );
  * @endcode
  */
- $databases = array (
+ /*$databases = array (
   'default' => 
   array (
     'default' => 
@@ -226,8 +226,8 @@
       'prefix' => '',
     ),
   ),
-);
-/*
+);*/
+
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
@@ -268,7 +268,7 @@ $databases['sso_db']['default'] = array(
       'driver' => 'mysql',
       'prefix' => '',
 );
-*/
+
 // end setting for UAT
 //for production setting
 /*$databases['default']['master'] = array(
