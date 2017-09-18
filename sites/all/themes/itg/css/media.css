@@ -1412,6 +1412,10 @@
     max-width: 100%;
     height: auto;
   }
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id,
+  .sport-home-layout-page .poll-wrapper .poll-data .poll-replace-id {
+    max-height: inherit;
+  }
 
   /*Home page css end*/
   /*side bar for all pages start*/
