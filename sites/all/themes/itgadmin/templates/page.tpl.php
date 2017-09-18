@@ -70,6 +70,11 @@ if (!in_array('administrator', $user->roles)) {
         if (function_exists('get_task_count_of_user') || function_exists('get_idea_count_of_user')) {
           $idea = get_idea_count_of_user();
           $task = get_task_count_of_user();
+          if ($idea == 0) {
+            unset($idea);
+          } elseif ($task == 0) {
+            unset($task);
+          }
           $total_notifications = $idea + $task;
           print $total_notifications;
         } 
