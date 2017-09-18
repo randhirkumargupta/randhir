@@ -2108,30 +2108,75 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
     return !empty($final_widget_array) ? $final_widget_array : array();
 }
 
-function insert_data_in_widget_helper_test() {
-    $table = 'itg_widget_order_section';
-    $categories = db_query("select distinct(cat_id) from $table where widget = 'section_wise_widget'");
-    foreach ($categories as $data) {
-        $section = $data->cat_id;
-        try {
-            $query = db_select($table, "tbl");
-            $query->fields("tbl", array("id"));
-            $query->range(2, 100000);
-            $query->orderBy("id", "DESC");
-            $query->condition("cat_id", $section);
-            $query->condition("widget", 'section_wise_widget');
-            $section_data = $query->execute()->fetchAll();
-        } catch (Exception $ex) {
-            drupal_set_message($ex->getMessage());
-        }
-        foreach ($section_data as $sec) {
-            try {
-                db_delete($table)
-                  ->condition("id", $sec->id)
-                  ->execute();
-            } catch (Exception $ex) {
-                drupal_set_message($ex->getMessage());
-            }
-        }
-    }
+function insert_data_in_widget_helper_test() {   
+  $table = 'itg_widget_order_section';    
+  $categories = db_query("select distinct(cat_id) from $table where widget = 'section_wise_widget'"); 
+  foreach ($categories as $data) { 
+    $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'story');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+    
+    
+     $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'videogallery');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+    
+     $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'photogallery');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+  }
 }
