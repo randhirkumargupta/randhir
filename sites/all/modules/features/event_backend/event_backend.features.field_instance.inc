@@ -1486,7 +1486,7 @@ function event_backend_field_default_field_instances() {
   $field_instances['node-event_backend-field_e_event_banner'] = array(
     'bundle' => 'event_backend',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image Size (1920 x 185)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3059,6 +3059,7 @@ function event_backend_field_default_field_instances() {
   t('Heading Background Colour');
   t('Highlighted Font Colour');
   t('Home');
+  t('Image Size (1920 x 185)');
   t('Individual Registration Fee');
   t('Kicker Text');
   t('Master Title');
