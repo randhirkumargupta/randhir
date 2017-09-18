@@ -1992,6 +1992,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
       ->condition('n.type', $valid_content_type)
+      ->groupBy("n.nid")
       ->orderBy('iwo.weight', $order_by)
       ->orderBy('n.nid', 'DESC')
       ->range($range_min, $range_max)
@@ -2019,6 +2020,7 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
       ->condition('n.status', 1)
       ->condition('iwo.cat_id', $category)
       ->condition('n.type', $valid_content_type)
+      ->groupBy('n.nid')
       ->orderBy('iwo.weight', $order_by)
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'))->fields('wh', array('node_data'));
@@ -2039,6 +2041,7 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
           ->condition('n.status', 1)
           ->condition('iwo.cat_id', $category)
           ->condition('n.type', $valid_content_type)
+          ->groupBy('n.nid')
           ->orderBy('n.nid', 'DESC')
           ->range($range_min, $range_max)
           ->fields('iwo', array('nid', 'extra', 'weight'))->fields('wh', array('node_data'));
@@ -2068,6 +2071,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
       ->condition('n.status', 1)
       ->condition('n.type', $valid_content_type)
       ->condition('tx.tid', $cat_id)
+      ->groupBy("n.nid")
       ->orderBy('iwo.weight', 'ASC')
       ->orderBy('n.nid', 'DESC')
       ->range($range_min, $range_max)
@@ -2851,6 +2855,7 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
         $old_rows->fields("widget", array("id", "nid"));
         $old_rows->condition("widget.cat_id", $cat_id);
         $old_rows->condition("widget.content_type", $content_type);
+        $old_rows->condition("widget.widget", 'section_wise_widget');
         $old_rows->orderBy("widget.id", "DESC");
         $count_row = $old_rows->execute()->rowCount();
         $data = $old_rows->range($keep_row, $count_row)->execute()->fetchAll();
