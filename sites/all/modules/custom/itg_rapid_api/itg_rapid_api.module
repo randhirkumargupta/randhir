@@ -160,11 +160,37 @@ function itg_rapid_api_menu() {
     'type' => MENU_NORMAL_ITEM,
    );
   
-  $items['admin/api-configuration/rest-api/livetv-json'] = array(
-    'title' => 'update livetv json',
-    'description' => 'livetv_json',
+  $items['admin/api-configuration/rest-api/livetv-aajtak'] = array(
+    'title' => 'update livetv aajtak',
+    'description' => 'livetv_aajtak',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_json'),
+    'page arguments' => array('livetv_aajtak'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/livetv-indiatoday'] = array(
+    'title' => 'update livetv indiatoday',
+    'description' => 'livetv_indiatoday',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_indiatoday'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['admin/api-configuration/rest-api/livetv-delhiaajtak'] = array(
+    'title' => 'update livetv delhiaajtak',
+    'description' => 'livetv_delhiaajtak',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_delhiaajtak'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+   $items['admin/api-configuration/rest-api/livetv-tej'] = array(
+    'title' => 'update livetv tej',
+    'description' => 'livetv_tej',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_tej'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
    );
@@ -411,13 +437,52 @@ function livetv_channellist_json() {
 }
 
 // livetv_json form decalation
-function livetv_json() {
+function livetv_aajtak() {
   $form = array();
 
-  $form['livetv_json'] = array(
+  $form['livetv_aajtak'] = array(
     '#type' => 'textarea',
-    '#title' => t('livetv json'),
-    '#default_value' => variable_get('livetv_json'),
+    '#title' => t('livetv aajtak'),
+    '#default_value' => variable_get('livetv_aajtak'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function livetv_indiatoday() {
+  $form = array();
+
+  $form['livetv_indiatoday'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv indiatoday'),
+    '#default_value' => variable_get('livetv_indiatoday'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function livetv_delhiaajtak() {
+  $form = array();
+
+  $form['livetv_delhiaajtak'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv delhiaajtak'),
+    '#default_value' => variable_get('livetv_delhiaajtak'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function livetv_tej() {
+  $form = array();
+
+  $form['livetv_tej'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv tej'),
+    '#default_value' => variable_get('livetv_tej'),
     '#required' => TRUE,
   );
 
