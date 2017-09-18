@@ -17,8 +17,8 @@ jQuery(document).ready(function () {
         setInterval(function () {
             if (!flag_n) {
                 flag_n = true;
-                var last_commentary_id = jQuery("#bolgcontent .row").first().attr('commentary-id');
-                var current_inn = parseInt(jQuery("#bolgcontent .row").first().attr('current-inn'));
+                var last_commentary_id = jQuery("#bolgcontent .para-live-blog").first().attr('commentary-id');
+                var current_inn = parseInt(jQuery("#bolgcontent .para-live-blog").first().attr('current-inn'));
                 jQuery.ajax({
                     url: base_url + '/cricket_live_blog_content',
                     type: "post",
@@ -41,7 +41,7 @@ jQuery(document).ready(function () {
         var db_load_more = setInterval(function () {
             if (!flag) {
                 flag = true;
-                var current_inn = parseInt(jQuery("#bolgcontent .row").last().attr('current-inn')) + 1;
+                var current_inn = parseInt(jQuery("#bolgcontent .para-live-blog").last().attr('current-inn')) + 1;
                 jQuery.ajax({
                     url: base_url + '/cricket_live_blog_content_db/' + nid + '/' + current_inn,
                     type: "get",
@@ -70,8 +70,8 @@ function load_more_after_interval() {
     var load_more = setInterval(function () {
         if (!flag) {
             flag = true;
-            var last_commentary_id = jQuery("#bolgcontent .row").last().attr('commentary-id');
-            var current_inn = jQuery("#bolgcontent .row").last().attr('current-inn');
+            var last_commentary_id = jQuery("#bolgcontent .para-live-blog").last().attr('commentary-id');
+            var current_inn = jQuery("#bolgcontent .para-live-blog").last().attr('current-inn');
             jQuery.ajax({
                 url: base_url + '/cricket_live_blog_content',
                 type: "post",

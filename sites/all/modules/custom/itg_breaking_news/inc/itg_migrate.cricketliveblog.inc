@@ -39,7 +39,7 @@ class ItgCricketliveblog extends XMLMigration {
         
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        $items_url = $xml_folder . 'cricket_blog-aug25.xml';
+        $items_url = $xml_folder . 'cricket_blog.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
@@ -164,25 +164,25 @@ class ItgCricketliveblog extends XMLMigration {
         $node = node_load($entity->nid);
         
         $key = 0;
-        //~ if(isset($row->xml->metatags->sefurl)){
-            //~ $path = array(
-              //~ 'source' => "node/{$node->nid}",
-              //~ 'alias' => $row->xml->metatags->sefurl
-            //~ );
-            //~ path_save($path);
-        //~ }
+        if(isset($row->xml->metatags->sefurl)){
+             $path = array(
+               'source' => "node/{$node->nid}",
+               'alias' => $row->xml->metatags->sefurl
+             );
+             path_save($path);
+         }
         
-        //~ if(isset($row->xml->redirection_url)){
-            //~ $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-            //~ $redirect = new stdClass();
-            //~ $redirect->type = 'redirect';
-            //~ $redirect->source_options = $redirect->redirect_options = array();
-            //~ $redirect->language = LANGUAGE_NONE;
-            //~ $redirect->status_code = 0;
-            //~ $redirect->source = trim($sorce_url);
-            //~ $redirect->redirect = "node/{$node->nid}";
-            //~ redirect_save($redirect);         
-        //~ }
+         if(isset($row->xml->redirection_url)){
+             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+             $redirect = new stdClass();
+             $redirect->type = 'redirect';
+             $redirect->source_options = $redirect->redirect_options = array();
+             $redirect->language = LANGUAGE_NONE;
+             $redirect->status_code = 0;
+             $redirect->source = trim($sorce_url);
+             $redirect->redirect = "node/{$node->nid}";
+             redirect_save($redirect);         
+         }
         
        
         
