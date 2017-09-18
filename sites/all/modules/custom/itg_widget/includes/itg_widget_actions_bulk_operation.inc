@@ -68,6 +68,13 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   }
   $cat_id = $get_category_id;
   $content_type = isset($_GET['type']) ? $_GET['type'] : NULL;
+  //Insert complete node data for widgets.
+  if(function_exists('__itg_widget_helper_data_insert')) {
+    foreach ($selected_node_data as $nid) {
+        __itg_widget_helper_data_insert($nid);
+    }
+  }
+  
   if ( $current_display == 'big_story_format' ) {
     // All Code for big sotry.
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_big_story');
