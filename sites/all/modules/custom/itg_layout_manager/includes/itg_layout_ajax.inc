@@ -154,8 +154,10 @@ function insert_layout_setting_ajax() {
     else {
       $url = drupal_get_path_alias('taxonomy/term/' . $_GET['section_name']);
     }
-
-    itg_akamai_clear_url($url, array(), array());
+    
+    if (function_exists('itg_akamai_clear_url')) {      
+      itg_akamai_clear_url($url, array(), array());
+    }
     exit;
   }
   elseif ($arg[1] == 'delete') {
