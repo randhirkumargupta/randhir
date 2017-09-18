@@ -11,16 +11,21 @@
  * Implements hook_init()
  */
 function itg_flag_init() {
-  global $user, $base_url;  
+  global $user, $base_url, $theme;  
+ 
+  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   $settings['default_image'] = $base_url.'/sites/all/themes/itg/images/itg_image647x363.jpg';
   // Get facebook share app id
   if(!empty(variable_get('itg_sharing_app_id'))) {
-  $settings['fb_app'] = variable_get('itg_sharing_app_id');
+    $settings['fb_app'] = variable_get('itg_sharing_app_id');
   }
+  
   drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  if ($theme == FRONT_THEME_NAME) {    
+    drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  }
 }
 
 /**

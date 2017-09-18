@@ -19,7 +19,20 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     header('Content-disposition: attachment; filename=' . $filename);
     header('Content-type: text/html');
   }
+  // Node Load for Get Template for Newsletter
   $tmplateLoad = node_load(arg(1));
+  
+  // Node Load for Get Newsletter Contents
+  $newslettercontents = node_load($_GET['nid']);
+  $type = $newslettercontents->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
+  if ($type == 'manual') {
+    $prev_contents = $newslettercontents->field_newsl_add_news[LANGUAGE_NONE];
+    foreach ($prev_contents as $prev_key => $prev_values) {
+      $load_fc = field_collection_item_load($prev_values['value']);
+      $story_nodes[] = $load_fc->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+    }
+  }
+  
   if (arg(2) == 'select_section') {
     $selectedCid = arg(3);
     $getTids = explode("," , $selectedCid);
@@ -41,7 +54,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
         $story_nodes[] = $records['nid'];
       }
     }
-  }
+  } 
   $banner = file_create_url($tmplateLoad->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footerData = $tmplateLoad->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/" , date('Y') , $footerData);

@@ -1623,6 +1623,7 @@ function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
  */
 function itg_common_get_addontitle($nid) {
   if (!empty($nid)) {
+    $addon_list = array();
     $query = db_select('field_data_field_story_new_title', 'addon');
     $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
     $query->fields('addon', array('field_story_new_title_value'))

@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
         jQuery('.save-byline').hide();
     }
     // jquery for front user activity
-    $('.multi-byline').click(function (event) {
+    jQuery('.multi-byline').click(function (event) {
         var repo_id = [];
         var nd_id = jQuery('#edit-field-story-reporter-und-0-target-id').val();
 
@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
         byline_event = 'unpublish';
         var post_data = "&nd_id=" + nd_id + "&unique_id=" + unique_id + "&byline_event=" + byline_event;
 
-        $.ajax({
+        jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/multibyline-save',
             'data': post_data,
             'cache': false,
@@ -74,7 +74,7 @@ jQuery(document).ready(function () {
 
     });
 
-    $('body').on('click', '.byline_publish', function (event) {
+    jQuery('body').on('click', '.byline_publish', function (event) {
         var nd_id = jQuery(this).val();
         var bl_id = jQuery(this).attr('data-tag');
         var unique_id = jQuery('#edit-field-reporter-unique-id-und-0-value').val();
@@ -90,7 +90,7 @@ jQuery(document).ready(function () {
         }
         var post_data = "&nd_id=" + nd_id + "&unique_id=" + unique_id + "&byline_event=" + byline_event + "&status=" + status + "&bl_id=" + bl_id;
 
-        $.ajax({
+        jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/multibyline-save',
             'data': post_data,
             'cache': false,
@@ -115,14 +115,14 @@ jQuery(document).ready(function () {
 
 
     // code for remove byline
-    $('body').on('click', '.remove-byline', function (event) {
+    jQuery('body').on('click', '.remove-byline', function (event) {
         var nd_id = jQuery(this).attr('data-tag');
         var byline_nid = jQuery(this).attr('data-val');
         byline_event = 'remove';
         byline_id = jQuery('#edit-field-reporter-publish-id-und-0-value').val().split(",");
         var post_data = "&nd_id=" + nd_id + "&byline_event=" + byline_event;
 
-        $.ajax({
+        jQuery.ajax({
             'url': Drupal.settings.baseUrl.baseUrl + '/multibyline-save',
             'data': post_data,
             'cache': false,
@@ -143,7 +143,7 @@ jQuery(document).ready(function () {
                 else {
                     jQuery('.save-byline').hide();
                 }
-                byline_id.splice($.inArray(byline_nid, byline_id), 1);
+                byline_id.splice(jQuery.inArray(byline_nid, byline_id), 1);
                 jQuery('#edit-field-reporter-publish-id-und-0-value').val(byline_id);
                 jQuery('#widget-ajex-loader').hide();
             }
