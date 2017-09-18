@@ -489,15 +489,19 @@ function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previou
         elseif ($row['value'] == 'big_story') {
           $widget_value = 'big_story_format_widget';
         }
-
-        try {
-          db_delete('itg_widget_order')
+        elseif ($row['value'] == 'dont_miss') {
+          $widget_value = 'dont_miss_content_widget';
+        }
+        if ($widget_value) {
+          try {
+            db_delete('itg_widget_order')
               ->condition('widget', $widget_value)
               ->condition('nid', $nid)
               ->execute();
-        }
-        catch (Exception $ex) {
-          drupal_set_message($ex->getMessage());
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
         }
       }
     }
