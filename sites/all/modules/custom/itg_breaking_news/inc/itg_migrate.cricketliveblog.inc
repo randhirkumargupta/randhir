@@ -88,7 +88,7 @@ class ItgCricketliveblog extends XMLMigration {
         $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
-//        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
         $this->addFieldMapping('pathauto')->defaultValue(0);
         $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
         $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
@@ -153,6 +153,9 @@ class ItgCricketliveblog extends XMLMigration {
         if (!empty($row->tag_new)) {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = 1208901;
+        $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
+        
         if (!empty($row->match_id_new)) {
             $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
         }
@@ -164,29 +167,30 @@ class ItgCricketliveblog extends XMLMigration {
         $node = node_load($entity->nid);
         
         $key = 0;
-        if(isset($row->xml->metatags->sefurl)){
-             $path = array(
-               'source' => "node/{$node->nid}",
-               'alias' => $row->xml->metatags->sefurl
-             );
-             path_save($path);
-         }
+//        if(isset($row->xml->metatags->sefurl)){
+//             $path = array(
+//               'source' => "node/{$node->nid}",
+//               'alias' => $row->xml->metatags->sefurl
+//             );
+//             path_save($path);
+//         }
         
-         if(isset($row->xml->redirection_url)){
-             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-             $redirect = new stdClass();
-             $redirect->type = 'redirect';
-             $redirect->source_options = $redirect->redirect_options = array();
-             $redirect->language = LANGUAGE_NONE;
-             $redirect->status_code = 0;
-             $redirect->source = trim($sorce_url);
-             $redirect->redirect = "node/{$node->nid}";
-             redirect_save($redirect);         
-         }
+//         if(isset($row->xml->redirection_url)){
+//             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+//             $redirect = new stdClass();
+//             $redirect->type = 'redirect';
+//             $redirect->source_options = $redirect->redirect_options = array();
+//             $redirect->language = LANGUAGE_NONE;
+//             $redirect->status_code = 0;
+//             $redirect->source = trim($sorce_url);
+//             $redirect->redirect = "node/{$node->nid}";
+//             redirect_save($redirect);         
+//         }
         
        
-        
+        /*
         if (isset($row->xml->content_details->details)) {
+            
             foreach ($row->xml->content_details->details as $value) {
                 
                 $content_title = (string) $value->content_title;
@@ -213,7 +217,7 @@ class ItgCricketliveblog extends XMLMigration {
                 $key++;
             }
             field_attach_update('node', $node);
-        }
+        }*/
     }
 
 }
