@@ -15034,7 +15034,7 @@ span.story-sponsor-powered-text::last-word {
 .anchor-right span.followers-link{ font:400 15px/17px roboto; color:#a8a8a8; margin:6px 0 12px; display: block;}
 
 
-#cricketblog .bolg-content .row{
+​#cricketblog .bolg-content .row{
         padding: 15px 0;
         border-bottom: 1px solid #E4E4E4;
         position: relative;
@@ -15072,3 +15072,49 @@ span.story-sponsor-powered-text::last-word {
     .float-left{
         float:left;
     }
+
+
+
+.live-block h1{ font-weight:900; color:#000; font-size:42px;}
+.live-block h1 span{ color:#db0306}
+
+.live-block #cricketblog img{ width:100%}
+.live-block .bolg-content#bolgcontent p{ color:#474747; line-height:26px;}
+.live-block .bolg-content#bolgcontent p span{font-weight: 500; margin-right: 10px; color: #828181;}
+.live-block #cricketblog .bolg-content .para-live-blog{    padding: 24px 0;  border-bottom: 1px solid #E4E4E4; position: relative; float: left; width:100%}
+.live-block #cricketblog .batBollDetails{padding: 10px; margin-top:0}
+.live-block #cricketblog .batBollDetails .sectiontime{ color:#fff; display: block; margin-bottom:10px;}
+.live-block #cricketblog .batBollDetails{ height:100%; float: left; width:100%; box-sizing: border-box}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails{ float: left; width:50%}
+.live-block #cricketblog .batBollDetails .bollerDetails{ float: right; width:50%}
+.live-block #cricketblog .batBollDetails .batsmanDetails span,.live-block #cricketblog .batBollDetails .bollerDetails span{ margin-bottom:0}
+.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator{ float: left; position: relative; padding-right:20px;}
+.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator:before{ position: absolute;  right: 10px; border-right: 1px solid #fff; content: "";
+    height: 12px; width: 1px; top: 3px;} 
+.live-block #cricketblog .batBollDetails .batsmanDetails .batsman_detail.batRun{ margin-left:20px;}
+
+.live-block #cricketblog .batBollDetails .bollerDetails .bollNameSaperator{ float: left; position: relative; padding-right:20px;}
+.live-block #cricketblog .batBollDetails .bollerDetails .bollNameSaperator:before{ position: absolute;  right: 10px; border-right: 1px solid #fff; content: "";
+    height: 12px; width: 1px; top: 3px;} 
+.live-block #cricketblog .batBollDetails .bollerDetails .batsman_detail.overball{ margin-left:20px;}
+
+@media only screen and (max-width:1024px){
+	.live-block h1{ font-size:30px; line-height:36px;}
+	
+	
+}
+
+
+@media only screen and (max-width:767px){
+	.live-block #cricketblog .batBollDetails .batsmanDetails{ width:100%}
+	.live-block #cricketblog .batBollDetails .bollerDetails{ width:100%}
+	.live-block #cricketblog .batBollDetails .batsmanDetails .sectiontime{ font-size:13px;}
+	.live-block #cricketblog .batBollDetails .bollerDetails .sectiontime{ font-size:13px;}
+	.live-block h1{ font-size:24px; line-height:30px;}
+	.live-block #cricketblog .batBollDetails{ padding:5px;}
+	.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator{ padding-right:14px;}
+	.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator:before{ right:8px;}
+	.live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator{ padding-right:14px;}
+	.live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before{ right:8px;}	 
+}​
