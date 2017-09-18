@@ -2008,7 +2008,7 @@ function _start_widget_batch() {
 }
 
 function insert_old_widget_data_into_helper($data) {
-    if($data) {
+    if ($data) {
         __itg_widget_helper_data_insert($data);
     }
 }
