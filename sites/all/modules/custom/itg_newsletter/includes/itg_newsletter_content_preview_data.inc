@@ -65,7 +65,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2" style="text-align: center;padding: 10px;"><img src="' . $banner . '" alt="" /></td></tr>';
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
