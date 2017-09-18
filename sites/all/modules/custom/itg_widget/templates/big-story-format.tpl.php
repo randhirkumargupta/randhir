@@ -42,8 +42,7 @@ if (!empty($data['node_data'])) :
                 <img alt="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['alt'] ?>" title="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['title'] ?>" src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>"/>
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
-            </a>
-            <div class="story-tag"><?php print t("Big Story") ?></div>          
+            </a>                  
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />
             <?php
             // prepare configuration for sharing
