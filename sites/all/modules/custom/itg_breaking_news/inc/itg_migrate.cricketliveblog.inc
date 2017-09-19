@@ -88,8 +88,9 @@ class ItgCricketliveblog extends XMLMigration {
         $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
-        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
         $this->addFieldMapping('pathauto')->defaultValue(0);
+        $this->addFieldMapping('path', 'sefurl')->xpath(t('metatags/sefurl'));
+        
         $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
         $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
         $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
@@ -153,9 +154,10 @@ class ItgCricketliveblog extends XMLMigration {
         if (!empty($row->tag_new)) {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
-        //$node->field_story_category[LANGUAGE_NONE][0]['tid'] = 1208901;
-        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208900'; // category for shif marking
-        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208901'; // primary category
+        
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208919'; // Section
+        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208920'; // Category
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208920'; // primary category
         $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
         
         if (!empty($row->match_id_new)) {
@@ -169,13 +171,13 @@ class ItgCricketliveblog extends XMLMigration {
         $node = node_load($entity->nid);
         
         $key = 0;
-        if(isset($row->xml->metatags->sefurl)){
-             $path = array(
-               'source' => "node/{$node->nid}",
-               'alias' => $row->xml->metatags->sefurl
-             );
-             path_save($path);
-         }
+//        if(isset($row->xml->metatags->sefurl)){
+//             $path = array(
+//               'source' => "node/{$node->nid}",
+//               'alias' => $row->xml->metatags->sefurl
+//             );
+//             path_save($path);
+//         }
         
 //         if(isset($row->xml->redirection_url)){
 //             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
