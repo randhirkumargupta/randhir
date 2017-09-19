@@ -169,9 +169,10 @@ function itg_print_team_get_approval_user_emails($user_type) {
   $query = db_select('users_roles', 'ur');
   $query->join('users', 'u', 'u.uid = ur.uid');
   $query->join('role', 'r', 'r.rid = ur.rid');
-  $query->fields('u', array('uid'))
+  $query->fields('u', array('uid', 'status'))
           ->fields('u', array('mail'))
           ->fields('u', array('name'))
+          ->condition('u.status', 1)
           ->condition('r.name', $roles, 'IN');
   $result = $query->execute();
   
