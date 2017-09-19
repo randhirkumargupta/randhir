@@ -1642,6 +1642,10 @@
     padding: 10px 24px 10px 0px;
   }
 
+  .sidebar-second .top-takes-video-containe.home-top-takes ul li {
+    padding: 10px;
+  }
+
   #block-views-video-landing-header-block .video-header-right .social-likes ul li a {
     padding: 10px 20px;
   }

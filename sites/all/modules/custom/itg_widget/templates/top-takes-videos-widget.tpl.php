@@ -1,7 +1,9 @@
-<?php if (!empty($data)) : global $base_url; ?>
-  <div class="top-takes-video-container">
-    <?php
-    $is_fron_page = drupal_is_front_page();
+<?php if (!empty($data)) : global $base_url; 
+$home_top_takes = "home-top-takes";
+$is_fron_page = drupal_is_front_page();
+?>
+  <div class="top-takes-video-container <?php if (empty($is_fron_page)) { print $home_top_takes; }  ?>">
+    <?php    
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
     <ul>  
