@@ -353,13 +353,13 @@ function itg_common_round_rating($average_rating) {
  * Implements itg_total_share_count
  * @param string $actual_link
  *   Send url for facebook share
- * 
+ * @param string $type
  * @return int
  *   total share count
  */
-function itg_total_share_count($actual_link) {
+function itg_total_share_count($actual_link, $type = NULL) {
   if (!empty($actual_link)) {
-    $fb_google_count = $fb_count = $google_count = 0;
+    $fb_google_count = $fb_count = $google_count = $twitter_count = 0;
 
     if (function_exists('itg_facebook_share_count')) {
       //$fb_count = itg_facebook_share_count($actual_link);
@@ -376,8 +376,12 @@ function itg_total_share_count($actual_link) {
     if (function_exists('itg_google_share_count')) {
       $google_count = itg_google_share_count($actual_link);
     }
+    
+    if(function_exists('itg_common_mongo_share_count') && $type == 'story') {
+      $twitter_count = itg_common_mongo_share_count($actual_link, 'twitter_share', 'front_user_activity');
+    }
 
-    $fb_google_count = $fb_count + $google_count;
+    $fb_google_count = $fb_count + $google_count + $twitter_count;
 
     return $fb_google_count;
   }
