@@ -373,8 +373,15 @@ if (!empty($content)):
                   $twitter_handle = str_replace('@', '', $twitter_handle);
                   if (!empty($twitter_handle)) {
                     ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>                
-    <?php } ?>
+                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>
+
+
+                <?php } ?>
+                 <?php
+                    if (!empty($byline_id)) {
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                    }
+                    ?>  
                 </ul>
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
