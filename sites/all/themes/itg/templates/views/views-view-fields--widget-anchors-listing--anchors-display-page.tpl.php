@@ -6,11 +6,13 @@
  *
  * @ingroup views_templates
  */
+global $base_url;
 ?>
-<?php foreach ($view->result as $item): ?>
+<?php 
+foreach ($view->result as $item): ?>
 <div class="anchor-listing">
   <div class="pic">
-   <?php if (empty($item->field_story_extra_large_image[0]['raw']['uri'])) { ?>
+   <?php if (empty($item->_field_data['nid']['entity']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <?php
               $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt=''/>";
               print l($img, 'node/' . $item->nid, array('html' => TRUE));
@@ -19,7 +21,7 @@
            else { 
             $image = theme('image_style',array(
                         'style_name' => 'widget_small',
-                        'path' => $item->field_story_extra_large_image[0]['raw']['uri'],
+                        'path' => $item->_field_data['nid']['entity']->field_story_extra_large_image['und'][0]['uri'],
                         'attributes' => array('class' => 'custom-inline', 'style' => 'border:1px solid #aaa;')
                       )
                     );
