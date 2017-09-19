@@ -199,7 +199,7 @@ class ItgCricketliveblog extends XMLMigration {
 //         }
         
        
-        /*
+        
         if (isset($row->xml->content_details->details)) {
             
             foreach ($row->xml->content_details->details as $value) {
@@ -228,7 +228,7 @@ class ItgCricketliveblog extends XMLMigration {
                 $key++;
             }
             field_attach_update('node', $node);
-        }*/
+        }
     }
 
 }
