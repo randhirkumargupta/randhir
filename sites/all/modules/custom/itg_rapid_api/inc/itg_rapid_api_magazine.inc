@@ -275,6 +275,7 @@ function magazineCoverstoriesPageRerourceValueList() {
     $listcount = 0;
     $data_list_array = array();
     $loop_count = 0;
+    $dec2016 = "1483185600";
 
     // issue list query..
 
@@ -289,7 +290,7 @@ function magazineCoverstoriesPageRerourceValueList() {
     $query_issue->fields('fsit', array('field_issue_title_value'));
     $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
+    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', $dec2016)->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
