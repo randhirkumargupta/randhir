@@ -39,7 +39,7 @@ function itg_widget_init() {
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));     
 }
 
 /**
@@ -105,6 +105,17 @@ function itg_widget_menu() {
       'page callback' => 'itg_widget_all_content_nid',
       'access arguments' => array('access content'),
     );
+    
+    $items['autocomplete-widget-path/%/autocomplete'] = array(
+      'page callback' => 'autocomplete_widget_path_without_filter',
+      'access arguments' => array('access itg story'),
+    );
+    
+    $items['autocomplete-widget-path/%/%/%/%/autocomplete'] = array(
+      'page callback' => 'autocomplete_widget_path_with_filter',
+      'access arguments' => array('access itg story'),
+    );
+    
     $items['node-list-for-year-end/%/%/autocomplete'] = array(
       'page callback' => 'autocomplete_for_year_end_widgets',
       'access arguments' => array('access content'),
