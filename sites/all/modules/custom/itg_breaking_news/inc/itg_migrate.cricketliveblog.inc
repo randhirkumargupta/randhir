@@ -169,6 +169,7 @@ class ItgCricketliveblog extends XMLMigration {
 
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
+        $key = 0;
 //        $published_date = date('Y-m-d', $node->created);
 //        $key = 0;
 //        $pathdata .= 'live-blog/cricket-live-blog/story';
