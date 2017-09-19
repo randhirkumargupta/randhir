@@ -57,8 +57,7 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     },
     function (response) {
         var front_uid = Drupal.settings.itg_flag.settings.uid;
-        console.log(front_uid);
-        console.log(node_id);
+        console.log(response);
         jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 url: base_url + '/fb-share-callback/' + node_id + '/' + front_uid,
