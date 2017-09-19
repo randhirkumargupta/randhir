@@ -169,15 +169,22 @@ class ItgCricketliveblog extends XMLMigration {
 
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
-        
+        $published_date = date('Y-m-d', $node->created);
         $key = 0;
-//        if(isset($row->xml->metatags->sefurl)){
-//             $path = array(
-//               'source' => "node/{$node->nid}",
-//               'alias' => $row->xml->metatags->sefurl
-//             );
-//             path_save($path);
-//         }
+        $pathdata .= 'live-blog/cricket-live-blog/story';
+        // Add node title.
+        $pathdata .= '/' . trim($row->xml->metatags->sefurl);
+        // Add node id.
+        $pathdata .= '-' . $node->nid;
+        // Add workbanch date.
+        $pathdata .= '-' . $published_date;
+        if(isset($row->xml->metatags->sefurl)){
+             $path = array(
+               'source' => "node/{$node->nid}",
+               'alias' => $pathdata
+             );
+             path_save($path);
+         }
         
 //         if(isset($row->xml->redirection_url)){
 //             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
