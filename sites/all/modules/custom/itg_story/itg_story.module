@@ -888,7 +888,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_total_share_count')) {
       //$node->content['total_share_count'] = itg_total_share_count($actual_link);
-      $node->content['total_share_count'] = itg_total_share_count($node->nid);
+      $node->content['total_share_count'] = itg_total_share_count($node->nid, $node->type);
     }
 
     if (function_exists('itg_msi_get_lock_story_status')) {
