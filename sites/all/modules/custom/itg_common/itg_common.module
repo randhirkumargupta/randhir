@@ -1281,6 +1281,7 @@ function itg_custom_get_user_details($uid) {
         ->fields('u', array('name'))
         ->fields('f', array('field_first_name_value'))
         ->fields('g', array('field_last_name_value'))
+        ->condition('u.status', 1)
         ->condition('u.uid', $uid);
     $result = $query->execute();
 
