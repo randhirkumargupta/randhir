@@ -6,10 +6,66 @@
  */
 
 /**
+ * Impelements itg_videogallery_send_xml.
+ */
+function itg_videogallery_send_xml() {
+  global $base_url;
+  $url = $base_url . '/file-itgt-video';
+
+
+
+  $endpoint = $url;
+
+//  Initiate curl
+  $ch = curl_init();
+
+// Set The Response Format to Json
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+// Disable SSL verification
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+// Will return the response, if false it print the response
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Set the url
+  curl_setopt($ch, CURLOPT_URL, $endpoint);
+
+// Execute
+  $result = curl_exec($ch);
+  p($result);
+
+// Closing
+  curl_close($ch);
+
+//  echo $result;die;
+//  $path_xml = 'sites/default/ITGVIDEO/';
+//  $path_xml_old = 'sites/default/ITGVIDEOXMLOLD/';
+//  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path_xml)) as $filename) {
+//    $file_name = $filename->getFilename();
+//    if ($file_name == '.' || $file_name == '..') {
+//      continue;
+//    }
+//
+//    $xml_data = file_get_contents($path_xml . $file_name);
+//    $ch = curl_init();
+//    curl_setopt($ch, CURLOPT_URL, $url);
+//    curl_setopt($ch, CURLOPT_POST, true);
+//    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//    curl_setopt($ch, CURLOPT_POSTFIELDS, "<xml>here</xml>");
+//    $result = curl_exec($ch);
+//    p($result);
+//    curl_close($ch);
+//  }
+}
+
+/**
  * Impelements itg_videogallery_push_itg_video.
  */
 function itg_videogallery_push_itg_video() {
-
+  p('fff');
+  p($_POST);
   $path_xml = 'sites/default/ITGVIDEO/';
   $path_xml_old = 'sites/default/ITGVIDEOXMLOLD/';
   foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path_xml)) as $filename) {
@@ -99,7 +155,7 @@ function itg_videogallery_push_itg_video() {
           $insert_id = db_insert('dailymotion_response_details')
               ->fields($data_insert)
               ->execute();
-         // rename($path_xml . $file_name, $path_xml_old . $file_name);
+          // rename($path_xml . $file_name, $path_xml_old . $file_name);
         }
         catch (Exception $e) {
           # TODO can search $e for 'Integrity constraint violation' or 'Duplicate entry'

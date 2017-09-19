@@ -46,6 +46,12 @@ function itg_videogallery_menu() {
      'access arguments' => array('access content'),
     'file' => 'includes/itg_videogallery_itg_video_file.inc',
   );
+  $items['send-file-itgt-video'] = array(
+     'type' => MENU_CALLBACK,
+    'page callback' => 'itg_videogallery_send_xml',
+     'access arguments' => array('access content'),
+    'file' => 'includes/itg_videogallery_itg_video_file.inc',
+  );
   
  $items['internal-video-play'] = array(
     'page callback' => 'itg_videogallery_internal_video_play',
@@ -87,6 +93,11 @@ function itg_videogallery_menu() {
   
   $items['getvideoplayer'] = array(
     'page callback' => 'itg_videogallery_getvideoplayer',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  $items['getvideoplayer-migrated'] = array(
+    'page callback' => 'itg_videogallery_getvideoplayer_migrated',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -1385,7 +1396,6 @@ function itg_videogallery_after_build($form, &$form_state) {
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] == 'migrated') {
     foreach ($form['field_video_upload']['und'] as $delta => $field) {
       if (is_numeric($delta)) {
-
         $video_url = $form['field_video_upload']['und'][$delta]['field_migrated_video_url']['und'][0]['value']['#default_value'];
         $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
         if (!empty($video_url)) {
@@ -1653,7 +1663,6 @@ function itg_videogallery_remove_delete_video_form_body_html_body($story_body) {
  * This function check this video is delete or note 
  */
 function itg_videogallery_check_video_url($vid) {
-
   $query = db_select('itg_solr_video_info', 'drd');
   $query->fields('drd', array('is_delete'));
   $query->condition('solr_video_id', $vid, '=');
@@ -1681,7 +1690,6 @@ function itg_videogallery_check_video_url($vid) {
  */
 function itg_videogallery_getsolr_data() {
   $solr = apachesolr_get_solr();
-
   if (function_exists('itg_apache_solr_get_site_hash')) {
     $hash = itg_apache_solr_get_site_hash();
   }
@@ -2044,21 +2052,6 @@ function itg_videogallery_remove_video_with_child() {
   }
 }
 
-/**
- * This function use for get video bitrate url
- * 
- */
-function itg_videogallery_get_video_bitrate($nid) {
-  $query = db_select('itg_video_transcoding', 'ivt');
-  $query->fields('ivt');
-  $query->condition('nid', $nid, ' = ');
-  $query->orderby('bitrate_ordering', 'ASC');
-  $video_data1 = $query->execute()->fetchAll();
-  foreach ($video_data1 as $key => $vid) {
-    $bitrate[] = $vid->bitrate;
-  }
-  $hls = $vid->hls_domain;
-}
 
 /**
  * function use for insert solr video in file_manage for fid
@@ -2532,8 +2525,9 @@ function itg_videogallery_get_file_details() {
       $query->condition('solr_video_id', $video_id[0]);
       $query->execute();
     }
-    $responce .=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
   }
+    $responce .=' <iframe frameborder="0" scrolling="no" class="video_data" id="video_frame_' . $videoid . '" frameborder="0" src="' . FRONT_URL_VIDEO . '/embeded-video/' . $videoid . '" allowfullscreen></iframe>';
+
   }
   exit($responce);
 }
@@ -2543,6 +2537,10 @@ function itg_videogallery_get_file_details() {
  */
 function itg_videogallery_dm_embed() {
   $video_id = arg(1);
+  $data_video_info = itg_videogallery_info_by_video_id_form_itg_solr_video($video_id);
+  if($data_video_info[0]->video_repo_type == 'INTERNAL') {
+  print  theme('itg_videogallery_internal_video_play', array('video_data' => $data_video_info[0]->video_xml_data, 'width'=>600 , 'height'=>400 ));
+  }else {
   $api = itg_videogallery_dailymotion_api();
   $thumb_url = $api->get(
       '/video/' . $video_id, array('fields' => array('embed_url'))
@@ -2552,6 +2550,7 @@ function itg_videogallery_dm_embed() {
     $embed_id = end(explode('/', $thumb_url['embed_url']));
   }
   return theme('itg_videogallery_dm_embed', array('video_id' => $embed_id));
+  }
 }
 
 
@@ -2624,6 +2623,17 @@ function itg_videogallery_getsolr_data_for_internal_video($video_id) {
   }
 
 }
+
+/**
+ * This function use for get file daily motion video to play.
+ */
+function itg_videogallery_getvideoplayer_migrated() {
+  $image= $_GET['video_image'];
+  $video_url = $_GET['video_url'];
+  $nid = $_GET['nid'];
+   print theme('migrated_video_player', array("url" =>$video_url, 'nid' => $nid, 'image' => $image));
+}
+
 
 /**
  * This function use for get file daily motion video to play.
@@ -3470,7 +3480,7 @@ function itg_videogallery_url_with_bitates() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-3 days', time());
+  $totime = strtotime('-1 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
@@ -3728,7 +3738,17 @@ function itg_videogallery_get_video_info_video_id($video_id) {
   return $result;
 }
 
-
+/**
+ * Implements function for get videoid by file id
+ * @param int $fid
+ */
+function itg_videogallery_info_by_video_id_form_itg_solr_video($video_id) {
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd');
+  $query->condition('solr_video_id', $video_id, '=')->range(0, 1);
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
 /**
  * Implements itg_videogallery_get_all_video_info_by_video_id
  * @param string $video_id
@@ -3925,49 +3945,49 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
   $os = array("search_index", "amp");
  
-  if ($node->type == 'videogallery' && !in_array($view_mode, $os)) {
-// Category view on landing page
-    drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').live('click', function(){
-var section_id = jQuery(this).val();
-jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li a').removeClass('active');
-jQuery('#edit-field-story-category-tid').val(section_id); 
-jQuery('#edit-field-story-category-tid').trigger('change');
-jQuery(this).find('a').addClass('active');
-});", array('type' => 'inline', 'scope' => 'footer'));
-    if (!empty($_GET['category'])) {
-
-      drupal_add_js("jQuery(document).ready(function(){
-jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
-if(jQuery(this).val() == " . $_GET['category'] . "){
-jQuery(this).find('a').addClass('active');
-}
-});
-});", array('type' => 'inline', 'scope' => 'footer'));
-    }
-      // This is for hiding a specific RHS1 block for video
-        drupal_add_js("jQuery(document).ready(function(){
-jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
-});", array('type' => 'inline', 'scope' => 'footer')); 
-
-// Views render on video template
-    if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {
-      $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
-    }
-//elseif ((itg_videogallery_get_categoryparent(@$_GET['category']) == FALSE || itg_videogallery_get_categoryparent($_GET['category']) == TRUE) && isset($_GET['category']) && isset($_GET['sid'])) {
-    elseif (isset($_GET['category']) && isset($_GET['sid'])) {
-      $view_output = views_embed_view('video_list_of_category', 'block');
-    }
-    elseif (empty($_GET['sid'])) {
-      if (isset($_GET['category']) && itg_videogallery_get_categoryparent($_GET['category']) != TRUE) {
-        $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
-      }
-      elseif (empty($_GET['category'])) {
-        $tid = itg_videogallery_get_tid_nid(arg(1));
-        $view_output = views_embed_view('video_list_of_category', 'block_3', $tid);
-      }
-    }
-    $node->view_output = $view_output;
-  }
+//  if ($node->type == 'videogallery' && !in_array($view_mode, $os)) {
+//// Category view on landing page
+//    drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').live('click', function(){
+//var section_id = jQuery(this).val();
+//jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li a').removeClass('active');
+//jQuery('#edit-field-story-category-tid').val(section_id); 
+//jQuery('#edit-field-story-category-tid').trigger('change');
+//jQuery(this).find('a').addClass('active');
+//});", array('type' => 'inline', 'scope' => 'footer'));
+//    if (!empty($_GET['category'])) {
+//
+//      drupal_add_js("jQuery(document).ready(function(){
+//jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
+//if(jQuery(this).val() == " . $_GET['category'] . "){
+//jQuery(this).find('a').addClass('active');
+//}
+//});
+//});", array('type' => 'inline', 'scope' => 'footer'));
+//    }
+//      // This is for hiding a specific RHS1 block for video
+//        drupal_add_js("jQuery(document).ready(function(){
+//jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
+//});", array('type' => 'inline', 'scope' => 'footer')); 
+//
+//// Views render on video template
+//    if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {
+//      $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
+//    }
+////elseif ((itg_videogallery_get_categoryparent(@$_GET['category']) == FALSE || itg_videogallery_get_categoryparent($_GET['category']) == TRUE) && isset($_GET['category']) && isset($_GET['sid'])) {
+//    elseif (isset($_GET['category']) && isset($_GET['sid'])) {
+//      $view_output = views_embed_view('video_list_of_category', 'block');
+//    }
+//    elseif (empty($_GET['sid'])) {
+//      if (isset($_GET['category']) && itg_videogallery_get_categoryparent($_GET['category']) != TRUE) {
+//        $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
+//      }
+//      elseif (empty($_GET['category'])) {
+//        $tid = itg_videogallery_get_tid_nid(arg(1));
+//        $view_output = views_embed_view('video_list_of_category', 'block_3', $tid);
+//      }
+//    }
+//    $node->view_output = $view_output;
+//  }
 }
 
 /**
@@ -4729,6 +4749,58 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
   return $all_video_id;
 }
 
+
+/**
+ * This function use for get video bitrate url
+ * 
+ */
+function itg_videogallery_get_video_bitrate_by_url($url,$nid) {
+  $return_array = array();
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt');
+  $query->condition('nid', $nid, ' = ');
+  $query->condition('video_url', $url, ' = ');
+  $query->condition('bitrate_status', 1, ' = ');
+  $query->orderby('bitrate_ordering', 'ASC');
+  $video_data1 = $query->execute()->fetchAll();
+   $parts = parse_url($url);
+      $getbucket_setting = itg_videogallery_get_video_setting_by_bucket_name($parts['host']);
+    if(!empty($getbucket_setting)) {
+       $return_array['file_url'] = $getbucket_setting[0]->field_progressive_domain_value.'/'.$parts['path'];
+    }else {
+    $return_array['file_url'] = $url;
+    }
+  foreach ($video_data1 as $key => $vid) {
+    $bitrate[] = $vid->bitrate;
+  }
+ 
+  if(!empty($getbucket_setting[0]->field_hls_domain_value)) {
+  $bitrate_url = itg_videogallery_make_bitrate_url_migtate($parts['path'],$bitrate,$getbucket_setting[0]->field_hls_domain_value);
+   $return_array['bitrate_url'] = $bitrate_url;
+  }else {
+    $return_array['bitrate_url'] = "";
+  }
+  //p($return_array);
+   return $return_array;
+  }
+
+/**
+ * This function use for make video bitrate url:
+ */
+function itg_videogallery_make_bitrate_url_migtate($video_url, $bitrates,$hls) {
+  $withoutExt = substr($video_url, 0 , (strrpos($video_url, ".")));
+ 
+if(count($bitrates) == 1) {
+   $with_hls_url = $hls.'/i'.$withoutExt;
+  $returnstring = $with_hls_url . ',,.mp4.csmil/master.m3u8';
+}else {
+    $with_hls_url =  substr($withoutExt, 0, strrpos($withoutExt, "_"));
+    $with_hls_url = $hls.'/i'.$with_hls_url.'_';
+    $returnstring = $with_hls_url . ',' . implode(',', $bitrates) . ',.mp4.csmil/master.m3u8';
+
+}
+  return $returnstring;
+}
 /**
  * Implements itg_videogallery_make_url_for_jwpalyer
  * @parm array $video_data
@@ -4749,6 +4821,8 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data) {
   }
   return $retrun_array;
 }
+
+
 /**
  * This function use for make video bitrate url:
  */

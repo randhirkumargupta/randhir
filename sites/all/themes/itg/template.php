@@ -29,6 +29,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'internal-video-player',
   );
+  $items['migrated_video_player'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'migrated-video-player',
+  );
   return $items;
 }
 
@@ -523,7 +527,7 @@ function itg_link($variables) {
  */
 function itg_js_alter(&$javascript) {
   // some js unset
-  
+
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
@@ -535,7 +539,7 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  
+
 //itg theme JS alter    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';

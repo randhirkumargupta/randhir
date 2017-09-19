@@ -1994,6 +1994,14 @@ function insert_data_in_widget_helper_form_submit($form, &$form_state) {
     _start_widget_batch();
 }
 
+function __itg_widget_data_into_helper_tbl() {
+  $result = _itg_widget_get_old_data();
+  foreach ($result as $data) {
+        __itg_widget_helper_data_insert($data);
+    }
+}
+
+
 function _start_widget_batch() {
     $result = _itg_widget_get_old_data();
     foreach ($result as $data) {

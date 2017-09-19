@@ -30,7 +30,7 @@ function itg_octopus_api_menu() {
   $items['rundown-listing'] = array(
     'title' => 'Rundown Listing',
     'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('administer itg octopus'),
+    'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
 
@@ -128,7 +128,7 @@ function itg_octopus_api_menu() {
   $items['rfa-dashboard'] = array(
     'title' => 'RFA Dashboard',
     'page callback' => 'itg_octopus_api_rfa_dashboard',
-    'access arguments' => array('administer itg octopus'),
+    'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_rfa.inc',
   );
 
