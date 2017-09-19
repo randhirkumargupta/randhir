@@ -102,7 +102,7 @@
                     $('#edit-field-reporter-profile-type').hide();
                     $("#edit-field-reporter-profile-type option:selected").prop('selected', false);
                     $('#edit-field-byline-company').hide();
-                    $("#edit-field-byline-company option:selected").prop('selected', false);
+                    //$("#edit-field-byline-company option:selected").prop('selected', false);
                     $('#edit-field-byline-department').hide();
                     $("#edit-field-byline-department option:selected").prop('selected', false);
                 }
