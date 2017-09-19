@@ -162,7 +162,7 @@ function itg_user_activity_front() {
     // check connection
     if ($con) {
       if ($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
-       if ($user->uid || $dtag == 'survey') { 
+       if ($user->uid || $dtag == 'survey' || $dtag == 'story') { 
           $people = $con->front_user_activity;
           $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
           $result = $people->insert($qry);
@@ -257,9 +257,11 @@ function itg_user_activity_front_highlight() {
  * Implements itg_fb_share_callback().
  */
 function itg_fb_share_callback() {
+  watchdog('fb_insert_callback', '<pre>'.print_r(arg(), true).'</pre>');
   $arg = arg();
   $count = 0;
   if (!empty($arg[1])) {
+    watchdog('fb_insert', $arg[1]);
     $query = db_select('itg_node_share_count', 'insc')
         ->fields('insc', array('share_count'))
         ->condition('insc.nid', $arg[1], '=');
@@ -272,6 +274,7 @@ function itg_fb_share_callback() {
   }
   
   if (!empty($arg[1]) && $arg[2] > 0) {
+    watchdog('fb_mongo_insert', $arg[2]);
     $activity_date = date('d-m-Y');
     $activity_date_time = date('d-m-Y h:i:s');
     $con = mongodb();

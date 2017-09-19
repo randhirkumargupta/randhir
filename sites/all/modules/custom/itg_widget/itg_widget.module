@@ -203,9 +203,15 @@ function itg_widget_menu() {
       'page callback' => 'insert_data_in_widget_helper',
       'access arguments' => array('access administrator'),
     );
-    
+
+    $items['insert-data-in-widget-helper-test'] = array(
+      'page callback' => 'insert_data_in_widget_helper_test',
+      'access arguments' => array('access administrator'),
+    );
+
     $items['insert_data_in_widget_helper_for_previous_nodes'] = array(
-      'page callback' => 'insert_data_in_widget_helper_for_previous_nodes',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('insert_data_in_widget_helper_form'),
       'access arguments' => array('access administrator'),
     );
 
@@ -1872,12 +1878,21 @@ function __html_output_with_tags($string, $start = 0, $end = 100) {
     return $doc->saveHTML();
 }
 
+/**
+ * Function deletes data of perticular nid
+ * @param int $nid
+ */
 function _itg_widget_delete_node_data_from_helper_table($nid) {
     if (!__itg_check_nid_in_widget($nid)) {
         __itg_widget_helper_data_delete($nid);
     }
 }
 
+/**
+ * Function check nids exists in both widget table of not.
+ * @param int $nid
+ * @return boolean
+ */
 function __itg_check_nid_in_widget($nid) {
     $flag = FALSE;
     $i = 0;
@@ -1903,6 +1918,10 @@ function __itg_check_nid_in_widget($nid) {
     return $flag;
 }
 
+/**
+ * Function which is used to insert data in helper table for nid.
+ * @param int $nid
+ */
 function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
@@ -1925,6 +1944,10 @@ function __itg_widget_helper_data_insert($nid) {
     }
 }
 
+/**
+ * Function used to delete data from helper table for perticulat nid.
+ * @param int $nid
+ */
 function __itg_widget_helper_data_delete($nid) {
     if ($nid) {
         try {
@@ -1935,6 +1958,11 @@ function __itg_widget_helper_data_delete($nid) {
     }
 }
 
+/**
+ * Update data w.r.t nid in helper table.
+ * 
+ * @param type $nid
+ */
 function __itg_widget_helper_data_update($nid) {
     if ($nid) {
         try {
@@ -1949,7 +1977,52 @@ function __itg_widget_helper_data_update($nid) {
     }
 }
 
-function insert_data_in_widget_helper_for_previous_nodes() {
+/**
+ * Function which is used to insert previous node data.
+ * 
+ * @return type
+ */
+function insert_data_in_widget_helper_form() {
+    $form['submit_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Please submit for bulk insert'),
+    );
+    return $form;
+}
+
+function insert_data_in_widget_helper_form_submit($form, &$form_state) {
+    _start_widget_batch();
+}
+
+function _start_widget_batch() {
+    $result = _itg_widget_get_old_data();
+    foreach ($result as $data) {
+        if ((int) $data) {
+            $operations[] = array('insert_old_widget_data_into_helper', array($data));
+        }
+    }
+    $batch = array(
+      'title' => t('Data is inserting'),
+      'operations' => $operations,
+      'finished' => 'insert_old_widget_data_finish',
+      'init_message' => t('Insertion started...please wait....!'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Data insertion process has encountered an error.'),
+    );
+    batch_set($batch);
+}
+
+function insert_old_widget_data_into_helper($data) {
+    if ($data) {
+        __itg_widget_helper_data_insert($data);
+    }
+}
+
+function insert_old_widget_data_finish() {
+    drupal_set_message("Process finish");
+}
+
+function _itg_widget_get_old_data() {
     try {
         $widget_tbl = db_select("itg_widget_order", "iwo")
             ->fields("iwo", array("nid"))
@@ -1961,17 +2034,18 @@ function insert_data_in_widget_helper_for_previous_nodes() {
         $array1 = array_keys($widget_tbl);
         $array2 = array_keys($widget_tbl_section);
         $result = array_unique(array_merge($array1, $array2));
-        foreach ($result as $nid) {
-            if (!empty($nid) && $nid) {
-                __itg_widget_helper_data_insert($nid);
-            }
-        }
+        return $result;
     } catch (Exception $ex) {
         return $ex->getMessage();
     }
-    return $result;
 }
 
+/**
+ * Main function for widget data display.
+ * 
+ * @param array $result
+ * @return array
+ */
 function _get_widget_display_data_as_per_db_result($result = array()) {
     if (!empty($result)) {
         foreach ($result as $widget_data) {
@@ -2006,7 +2080,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'uri' => $uri,
               'field_story_extra_small_image_alt' => $widget_image_uri_alt,
               'field_story_extra_small_image_title' => $widget_image_uri_title,
-              'field_story_short_headline_value' => $field_story_short_headline_value,
+              'field_story_short_headline_value' => !empty($field_story_short_headline_value) ? $field_story_short_headline_value : $title,
               'field_story_kicker_text_value' => $field_story_kicker_text,
               'field_video_duration_value' => $field_video_duration_value,
               'nid' => $nid,
@@ -2027,10 +2101,82 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_medium_image_alt' => $node_load_data->field_story_medium_image_alt['und'][0]['alt'],
               'field_story_medium_image_title' => $node_load_data->field_story_medium_image_title['und'][0]['title'],
               'field_story_small_image_alt' => $node_load_data->field_story_small_image_alt['und'][0]['alt'],
-              'field_story_small_image_title' => $node_load_data->field_story_small_image_title['und'][0]['title'],      
-              
+              'field_story_small_image_title' => $node_load_data->field_story_small_image_title['und'][0]['title'],
             );
         }
     }
     return !empty($final_widget_array) ? $final_widget_array : array();
+}
+
+function insert_data_in_widget_helper_test() {   
+  $table = 'itg_widget_order_section';    
+  $categories = db_query("select distinct(cat_id) from $table where widget = 'section_wise_widget'"); 
+  foreach ($categories as $data) { 
+    $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'story');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+    
+    
+     $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'videogallery');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+    
+     $section = $data->cat_id; 
+    try {     
+      $query = db_select($table, "tbl");   
+      $query->fields("tbl", array("id"));
+      $query->range(100, 100000);  
+      $query->orderBy("id", "DESC");   
+      $query->condition("cat_id", $section);
+      $query->condition("widget", 'section_wise_widget');    
+      $query->condition("content_type", 'photogallery');    
+      $section_data = $query->execute()->fetchAll();  
+    } catch (Exception $ex) {            
+      drupal_set_message($ex->getMessage());     
+    }        
+    foreach ($section_data as $sec) {  
+    try {        
+        db_delete($table) ->condition("id", $sec->id)         
+          ->execute();         
+        } catch (Exception $ex) {  
+        drupal_set_message($ex->getMessage());        
+      }      
+    }  
+  }
 }
