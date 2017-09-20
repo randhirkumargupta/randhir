@@ -3976,6 +3976,11 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
       unset($query->where[0]);
     }
   }
+  if ($view->name == "video_list_of_category" && $view->current_display == 'block_1') {
+      if (!empty($query->where[1]['conditions'][2]['value']) && isset($query->where[1]['conditions'][2])) {
+        unset($query->where[0]);
+      }
+  }
 }
 
 /**
