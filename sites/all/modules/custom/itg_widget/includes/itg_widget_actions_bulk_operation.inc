@@ -80,34 +80,46 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_big_story');
     $big_story_data = $form_state;
     save_big_story_widget_data($big_story_data);
+    cache_clear_all('itg_widget:big_story_format', 'cache_block', TRUE);
   }
   ######################## WIDGET CHANGES ###################
   elseif ( $widget_name == "top_stories_widget" && $current_display == "page_1" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:top_stories_ordering', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "trending_videos_widget" && $current_display == "trending_videos" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:trending_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "most_popular_widget" && $current_display == "most_popular" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:most_popular', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "top_takes_video_widget" && $current_display == "top_takes_video" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:top_takes_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "watch_right_now_widget" && $current_display == "watch_right_now" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:watch_right_now_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "home_page_feature_widget" && $current_display == "page_1" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:home_page_feature', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "photo_carousel_list_widget" && $current_display == "photo_carousel_list" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:featured_photo_carousel', 'cache_block', TRUE);
+    cache_clear_all('itg_widget:featured_photo_carousel_r', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "video_carousel_list_widget" && $current_display == "video_carousel_list" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:featured_video_carousel', 'cache_block', TRUE);
+    cache_clear_all('itg_widget:featured_video_carousel_r', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "we_may_suggest_widget" && $current_display == "we_may_suggest_widget" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:we_may_suggest', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "anchors_listing_widget" && $current_display == "anchors_listing_page" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
@@ -117,6 +129,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_dont_miss');
     $dont_miss_content = $form_state;
     save_dont_miss_widget_data($dont_miss_content);
+    cache_clear_all('itg_widget:dont_miss', 'cache_block', TRUE);
   }
   elseif ( $current_display == 'special_auto_review_widget_contents' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_special_auto_review');
@@ -147,6 +160,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   elseif ( $current_display == 'poll_widget_format' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_poll');
     save_poll_widget_data($form_state);
+    cache_clear_all('itg_widget:home_page_poll_widget_block', 'cache_block', TRUE);
   }
   elseif ( $current_display == 'highlights_widget_conent' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_highlights');
