@@ -605,7 +605,10 @@ class itg_auto_save {
           break;
 
         case 'number_integer':
-          //$node->{$field['fieldName']}['und'][0]['value'] = 
+          $tickets = $inputs[$field['fieldName']]['und'][0]['value'];
+          if (isset($tickets) && !empty($tickets)) {
+            $node->{$field['fieldName']}['und'][0]['value'] = $tickets;
+          }
           break;
 
         case 'entityreference':

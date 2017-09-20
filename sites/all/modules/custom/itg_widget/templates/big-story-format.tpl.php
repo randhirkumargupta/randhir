@@ -28,6 +28,7 @@ if (!empty($data['node_data'])) :
   $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   ?>
   <!-- Big news Block -->
+  <span class="widget-title"><a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>News</a></span>
   <div class="big-news big-news-content-<?php print $data['node_data']->type ?>">
     <div class="row">
       <div class="big-story-col-1">
@@ -41,8 +42,7 @@ if (!empty($data['node_data'])) :
                 <img alt="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['alt'] ?>" title="<?php echo $data['node_data']->field_story_extra_large_image['und'][0]['title'] ?>" src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>"/>
               <?php print $video_icon; ?>
               <?php print $photo_icon; ?>
-            </a>
-            <div class="story-tag"><?php print t("Big Story") ?></div>          
+            </a>                  
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />
             <?php
             // prepare configuration for sharing
@@ -53,7 +53,7 @@ if (!empty($data['node_data'])) :
             <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
               <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" />
             </a>  
-            <div class="story-tag"><?php echo t("Big Story") ?></div>          
+                
             <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />          
           <?php } ?>
           <!-- END EXTRA LARGE IMAGE --> 
@@ -85,11 +85,12 @@ if (!empty($data['node_data'])) :
           $bigstory_fb_share = htmlentities($bigstory_title, ENT_QUOTES);
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
+          $pipelinetext = "";
+          $pipelineclass = "";
           if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
                   $add_on_data = itg_common_get_addontitle($data['node_data']->nid);
-                  $pipelinetext = "";
-                  $pipelineclass = "";
+                  
                   if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
                     $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
                     $pipelineclass = 'pipeline-added';

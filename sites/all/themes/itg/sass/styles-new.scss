@@ -244,6 +244,12 @@ input[type="text"] {
                         border: 1px solid #fff;
                     }
                 }
+                &:first-child {
+                    padding-left: 0;
+                }
+                &:last-child {
+                    padding-right: 0;
+                }
             }
         }
     }
@@ -7293,3 +7299,53 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         right: 3px;
     }
 }
+
+
+/*css start by arun */
+
+.block-itg-personalization .personal-menu-tab-mobile .tab-text {
+    display: block;
+    color: #4f4f4f;
+    font: 400 14px/24px Roboto;
+    padding: 8px 8px 8px 40px;
+    background-color: #e7e5e6;
+    height: 36px;
+    background: url(../images/followunB.gif) no-repeat 0 5px;
+    margin-left: 10px;
+}
+
+
+/*css end by arun */
+
+
+/*css Mega Review || Mobile */
+
+#block-itg-mega-reviews-critics-mega-review-mobile-header {
+    .comment-mobile {
+        background: #1c1c1c;
+        margin: -15px -15px 20px;
+        font-family: $itg-roboto;
+        text-align: right;
+        ul {
+            @include display-inline;
+            li {
+                @include display-inline;
+                a {
+                    color: #c0c0c0;
+                    padding: 10px 8px;
+                    display: block;
+                    text-transform: uppercase;
+                    i {
+                        font-size: 16px;
+                    }
+                }
+            }
+            &.social-share {
+                display: none;
+            }
+        }
+    }
+}
+
+
+/*css end Mega Review || Mobile */

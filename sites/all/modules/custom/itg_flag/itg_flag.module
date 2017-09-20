@@ -11,23 +11,21 @@
  * Implements hook_init()
  */
 function itg_flag_init() {
-  global $user, $base_url;  
+  global $user, $base_url, $theme;  
+ 
+  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   $settings['default_image'] = $base_url.'/sites/all/themes/itg/images/itg_image647x363.jpg';
   // Get facebook share app id
   if(!empty(variable_get('itg_sharing_app_id'))) {
-  $settings['fb_app'] = variable_get('itg_sharing_app_id');
-  }
-  if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
-    $_SESSION['referral_key'] = check_plain($_GET['referral_key']);
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".register-icon").trigger("click");             
-          });', array('type' => 'inline', 'scope' => 'footer'));
+    $settings['fb_app'] = variable_get('itg_sharing_app_id');
   }
   
   drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  if ($theme == FRONT_THEME_NAME) {    
+    drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  }
 }
 
 /**
@@ -164,7 +162,7 @@ function itg_user_activity_front() {
     // check connection
     if ($con) {
       if ($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
-       if ($user->uid || $dtag == 'survey') { 
+       if ($user->uid || $dtag == 'survey' || $dtag == 'story') { 
           $people = $con->front_user_activity;
           $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
           $result = $people->insert($qry);
@@ -259,9 +257,11 @@ function itg_user_activity_front_highlight() {
  * Implements itg_fb_share_callback().
  */
 function itg_fb_share_callback() {
+  watchdog('fb_insert_callback', '<pre>'.print_r(arg(), true).'</pre>');
   $arg = arg();
   $count = 0;
   if (!empty($arg[1])) {
+    watchdog('fb_insert', $arg[1]);
     $query = db_select('itg_node_share_count', 'insc')
         ->fields('insc', array('share_count'))
         ->condition('insc.nid', $arg[1], '=');
@@ -274,6 +274,7 @@ function itg_fb_share_callback() {
   }
   
   if (!empty($arg[1]) && $arg[2] > 0) {
+    watchdog('fb_mongo_insert', $arg[2]);
     $activity_date = date('d-m-Y');
     $activity_date_time = date('d-m-Y h:i:s');
     $con = mongodb();

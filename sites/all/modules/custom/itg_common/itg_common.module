@@ -1244,6 +1244,7 @@ function itg_custom_get_user_details($uid) {
         ->fields('u', array('name'))
         ->fields('f', array('field_first_name_value'))
         ->fields('g', array('field_last_name_value'))
+        ->condition('u.status', 1)
         ->condition('u.uid', $uid);
     $result = $query->execute();
 
@@ -1623,6 +1624,7 @@ function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
  */
 function itg_common_get_addontitle($nid) {
   if (!empty($nid)) {
+    $addon_list = array();
     $query = db_select('field_data_field_story_new_title', 'addon');
     $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
     $query->fields('addon', array('field_story_new_title_value'))
@@ -1637,4 +1639,21 @@ function itg_common_get_addontitle($nid) {
     return $addon_list;
   }
 }
-  
+
+function itg_common_taxonomy_get_parents($tid) {
+    $parents = &drupal_static(__FUNCTION__, array());
+
+    if ($tid && !isset($parents[$tid])) {
+        $query = db_select('taxonomy_term_data', 't');
+        $query->join('taxonomy_term_hierarchy', 'h', 'h.parent = t.tid');
+        $query->addField('t', 'tid');
+        $query->condition('h.tid', $tid);
+        $query->addTag('taxonomy_term_access');
+        $query->orderBy('t.weight');
+        $query->orderBy('t.name');
+        $tids = $query->execute()->fetchCol();
+        $parents[$tid] = $tids;
+    }
+
+    return isset($parents[$tid]) ? $parents[$tid] : array();
+}

@@ -233,3 +233,12 @@ function itg_db_migrate_index() {
   $dom->appendChild($element);
   $dom->save($xml_path . 'index.xml');
 }
+
+function image_caption_insert_db($caption_text, $fid) {
+  db_insert('image_info')
+      ->fields(array(
+        'image_caption' => $caption_text,
+        'fid' => $fid,
+      ))
+      ->execute();
+}

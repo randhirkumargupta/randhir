@@ -16,7 +16,7 @@ if (!empty($content)):
   }
   $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-    $class_listicle = ' buzz-feedback listicle-feedback';
+    $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -212,7 +212,7 @@ if (!empty($content)):
       endif;
     ?>
       <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
             <div class="byline">              
               <?php if ($sponsor_text == ''): ?>
@@ -292,7 +292,7 @@ if (!empty($content)):
     <?php } ?>
                 </ul>
                 <ul class="social-links mhide">
-                  <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+                  <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                   <li><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                   <?php
@@ -347,7 +347,7 @@ if (!empty($content)):
           </div>
   <?php } ?>
         <!-- For buzzfeed section start -->
-              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
+              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { //  || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])?>                       
           <div class="buzzfeed-byline">
             <div class="byline">
               <div class="profile-pic">
@@ -373,8 +373,15 @@ if (!empty($content)):
                   $twitter_handle = str_replace('@', '', $twitter_handle);
                   if (!empty($twitter_handle)) {
                     ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>                
-    <?php } ?>
+                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>
+
+
+                <?php } ?>
+                 <?php
+                    if (!empty($byline_id)) {
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                    }
+                    ?>  
                 </ul>
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
@@ -717,11 +724,13 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
-                }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //Code for the listicle token
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -748,12 +757,15 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
-                }
-                else {
-                  // Print story body
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                  
+                 }
+                }else{
                   print $story_body;
                 }
+                //End of the code
+                
                 // If survey is associated with story, render survey form
                 if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
                   $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);

@@ -320,6 +320,7 @@ function vukkul_view() {
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
   global $base_url;
   $os = array("search_index");
+  $key = '';
   if (!in_array($view_mode, $os)) {
     if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
       drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
@@ -329,7 +330,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         $entity = entity_load('field_collection_item', array($node->field_gallery_image['und'][0]['value']));
         $photo_image = $entity[$node->field_gallery_image['und'][0]['value']]->field_images['und'][0]['uri'];
       }
-
+      
       $twitter_arr = array('card', 'site', 'creator', 'title', 'description', 'image');
       foreach ($twitter_arr as $key => $value) {
         if ($value == 'card') {
@@ -857,9 +858,9 @@ function _latest_from_pti() {
     $related_dt.= "<ul>";
     $i = 0;
     foreach ($related_content as $key => $value) {
-      if (!empty($value['title'])) {
-        $related_title = mb_strimwidth($value['title'], 0, 200, "..");
-        $path = drupal_get_path_alias('node/' . $value['nid']);
+      if (!empty($value->title)) {
+        $related_title = mb_strimwidth($value->title, 0, 200, "..");
+        $path = drupal_get_path_alias('node/' . $value->nid);
         $related_dt.= "<li class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
       }
       $i++;
@@ -960,7 +961,8 @@ function itg_third_party_section_card_content($type, $limit) {
   $query->range(0, $limit);
   $query->orderBy('n.created', 'DESC'); //ORDER BY created
   $result = $query->execute();
-  return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  //return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
 
 /**

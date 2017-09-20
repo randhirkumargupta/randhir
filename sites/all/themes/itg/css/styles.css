@@ -12519,7 +12519,7 @@ h1.about-us-heading + div p {
 #block-itg-front-end-common-related-photo-block #related-video ul li,
 #block-itg-front-end-common-related-video-block #related-photo ul li,
 #block-itg-front-end-common-related-video-block #related-video ul li {
-  padding-right: 0px;
+  /*padding-right: 0px;*/
   padding-left: 0px;
     /*            &:nth-child(4n+1){
     clear:left;
@@ -12698,9 +12698,6 @@ h1.about-us-heading + div p {
   right: 0;
 }
 
-.story-section .listicle-page.story-right {
-  width: 100%;
-}
 .story-section .listicle-page.story-right .byline {
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
@@ -15886,3 +15883,187 @@ span.story-sponsor-powered-text::last-word {
 }
 
 /*css end pipeline-added*/
+/*css start add by arun */
+.itg-personalization-text {
+  padding: 25px 0 0;
+}
+
+.personal-list {
+  text-align: left;
+  list-style: none;
+}
+
+.personal-list {
+  padding-top: 50px;
+}
+
+.personal-list ul.personal-lists-col {
+  width: 27%;
+  float: left;
+  margin: 0 3%;
+  list-style: none;
+}
+
+.personal-list ul li {
+  list-style: none;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-left: -50px;
+}
+
+.personal-list ul li:nth-child(1) {
+  margin-left: 0px;
+}
+
+.personal-list ul li h3 {
+  padding-bottom: 0px;
+}
+
+.personal-list ul li button.btn, .personal-list ul li .page-user form button.form-submit, .page-user form .personal-list ul li button.form-submit,
+.personal-list ul li .page-signup form button.form-submit,
+.page-signup form .personal-list ul li button.form-submit, .personal-list ul li #block-formblock-ask-an-expert button.form-submit, #block-formblock-ask-an-expert .personal-list ul li button.form-submit, .personal-list ul li .question-container button.form-submit, .question-container .personal-list ul li button.form-submit, .personal-list ul li #content .node-form .form-actions button.form-submit, #content .node-form .form-actions .personal-list ul li button.form-submit, .personal-list ul li #content #comments .comment-form .form-actions button.form-submit, #content #comments .comment-form .form-actions .personal-list ul li button.form-submit, .personal-list ul li #comments #content .comment-form .form-actions button.form-submit, #comments #content .comment-form .form-actions .personal-list ul li button.form-submit, .personal-list ul li .form-field-type-field-collection .field-multiple-table tbody td > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody .personal-list ul li td > button.form-submit,
+.personal-list ul li .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > button.form-submit,
+.form-field-type-field-collection .field-multiple-table tbody .personal-list ul li td > .ajax-new-content > button.form-submit {
+  background: #ebebec;
+  color: #c1c1c1;
+  border-radius: 100%;
+  border: 0px;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 0px;
+  float: left;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  z-index: -1;
+}
+
+.personal-list ul li:hover button.btn, .personal-list ul li:hover .page-user form button.form-submit, .page-user form .personal-list ul li:hover button.form-submit,
+.personal-list ul li:hover .page-signup form button.form-submit,
+.page-signup form .personal-list ul li:hover button.form-submit, .personal-list ul li:hover #block-formblock-ask-an-expert button.form-submit, #block-formblock-ask-an-expert .personal-list ul li:hover button.form-submit, .personal-list ul li:hover .question-container button.form-submit, .question-container .personal-list ul li:hover button.form-submit, .personal-list ul li:hover #content .node-form .form-actions button.form-submit, #content .node-form .form-actions .personal-list ul li:hover button.form-submit, .personal-list ul li:hover #content #comments .comment-form .form-actions button.form-submit, #content #comments .comment-form .form-actions .personal-list ul li:hover button.form-submit, .personal-list ul li:hover #comments #content .comment-form .form-actions button.form-submit, #comments #content .comment-form .form-actions .personal-list ul li:hover button.form-submit, .personal-list ul li:hover .form-field-type-field-collection .field-multiple-table tbody td > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody .personal-list ul li:hover td > button.form-submit,
+.personal-list ul li:hover .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > button.form-submit,
+.form-field-type-field-collection .field-multiple-table tbody .personal-list ul li:hover td > .ajax-new-content > button.form-submit {
+  opacity: 1;
+  z-index: 1;
+  transition: all 0.3ms ease-in-out;
+  -webkit-transition: all 0.3ms ease-in-out;
+}
+
+.personal-list ul li span {
+  border: 1px solid #ebebec;
+  float: right;
+  width: calc(100% - 50px);
+  padding: 9px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.personal-list ul li:hover span {
+  background: #ebebec;
+}
+
+.personal-list .personal-follow {
+  display: none;
+}
+
+.itg-personalization-text {
+  padding: 25px 0 0 0;
+}
+
+.anchor-right .social-icon ul li {
+  padding: 0px !important;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
+
+.anchor-right .social-icon ul li a {
+  font-size: 14px !important;
+  text-transform: capitalize;
+  color: #8d8d8d !important;
+  padding: 3px 5px;
+  display: inline-block;
+}
+
+.anchor-right .social-icon ul li.follow-activity-anchor {
+  background: #e4e4e4;
+  border: 1px solid #e4e4e4;
+}
+
+.anchor-right .social-icon ul li a[title='Follow'] {
+  background: url(../images/followunS.gif) no-repeat 5px 5px;
+  padding-left: 28px;
+}
+
+.anchor-right .social-icon ul li a[title='Unfollow'] {
+  background: url(../images/followunS.gif) no-repeat 5px -19px;
+  padding-left: 28px;
+}
+
+.anchor-right .social-icon ul li a i {
+  float: left;
+  margin-right: 5px;
+  font-size: 1.25rem;
+}
+
+.anchor-right span.followers-link {
+  font: 400 15px/17px roboto;
+  color: #a8a8a8;
+  margin: 6px 0 12px;
+  display: block;
+}
+
+.byline a[title='Follow'],
+.byline a[title='follow'] {
+  background: url(../images/followunB.gif) no-repeat 25% 2px;
+  padding-left: 38px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.byline a[title='Unfollow'],
+.byline a[title='unfollow'] {
+  background: url(../images/followunB.gif) no-repeat 20% -34px;
+  padding-left: 38px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.tags ul li a[title='Follow'],
+.tags ul li a[title='follow'] {
+  background: url(../images/followunS.gif) no-repeat 0 0px;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  text-indent: -99999px;
+}
+
+.tags ul li a[title='Unfollow'],
+.tags ul li a[title='unfollow'] {
+  background: url(../images/followunS.gif) no-repeat 0 -23px;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  text-indent: -99999px;
+}
+
+.itgimage {
+  position: relative;
+}
+
+.itgimage .body_caption {
+  font-size: 0.8125rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  color: #929292;
+  line-height: 18px;
+}
+
+/*css end add by arun */

@@ -1412,6 +1412,10 @@
     max-width: 100%;
     height: auto;
   }
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id,
+  .sport-home-layout-page .poll-wrapper .poll-data .poll-replace-id {
+    max-height: inherit;
+  }
 
   /*Home page css end*/
   /*side bar for all pages start*/
@@ -1636,6 +1640,10 @@
   .sidebar-second .top-takes-video-container ul li,
   .sidebar-second .watch-right-now-video ul li {
     padding: 10px 24px 10px 0px;
+  }
+
+  .sidebar-second .top-takes-video-containe.home-top-takes ul li {
+    padding: 10px;
   }
 
   #block-views-video-landing-header-block .video-header-right .social-likes ul li a {
@@ -3957,3 +3965,78 @@
     min-height: 150px;
   }
 }
+/*css start add by arun */
+@media only screen and (max-width: 991px) {
+  .personal-list .personal-follow {
+    display: block;
+    border-bottom: 1px solid #e7e5e6;
+    margin: 0 auto 30px;
+    width: 90%;
+  }
+
+  .personal-list .personal-follow a {
+    display: inline-block;
+    padding: 10px 20px;
+    font: normal 16px/18px Roboto;
+    color: #000;
+    position: relative;
+    bottom: -1px;
+  }
+
+  .personal-list .personal-follow a.activetab {
+    border-bottom: 1px solid #a00606;
+  }
+
+  .personal-list ul.personal-lists-col {
+    width: 50%;
+    margin: 0 7%;
+  }
+
+  .personal-list ul.personal-lists-col li.mhide {
+    display: none !important;
+  }
+
+  .personal-list ul li button.btn {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .personal-list ul.personal-lists-col {
+    width: 75%;
+    margin: 0 20px 0 70px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .anchor-right .social-icon ul li a {
+    text-indent: -9999px;
+  }
+
+  .anchor-right .social-icon ul li a i {
+    text-indent: 0px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .byline a[title='Follow'],
+  .byline a[title='follow'] {
+    text-indent: -9999px;
+    width: 20px;
+    height: 20px;
+    background-size: 55%;
+  }
+
+  .byline a[title='Unfollow'],
+  .byline a[title='unfollow'] {
+    text-indent: -9999px;
+    width: 20px;
+    height: 20px;
+    background-size: 55%;
+    background-position: 0% -23px;
+  }
+}
+@media only screen and (min-width: 769px) {
+  .story-section .story-right {
+    width: 79%;
+  }
+}
+/* css end add by arun */
