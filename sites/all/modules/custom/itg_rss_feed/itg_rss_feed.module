@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * The ITG RSS XML Feed.
+ *
+ * Contains functionality for ITG RSS XML Feed.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+
+function itg_rss_feed_menu() {
+  $items['rss/video'] = array(
+    'page callback' => 'video_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/video_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+    return $items;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_header() {
+  $output = "";
+  $output = '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>';
+
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_video() {
+  global $base_url;
+  $output = "";
+  $todat_date = date("D, d M Y H:i:s");
+  $output = "<title><![CDATA[India Today | Videos]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/?utm_source=rss]]></link><lastBuildDate>".$todat_date." GMT</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . $base_url ."/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Videos]]></title><link><![CDATA[http://indiatoday.intoday.in/videos?utm_source=rss]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_footer() {
+  $output = "";
+  $output = "</channel></rss>";
+
+
+  return $output;
+}
+
+/**
+ * Function is used to fetch thumbnail
+ * 
+ */
+
+function get_thumbnail_by_fid($fid = NULL){
+    if(!empty($fid)){
+        $file_obj = file_load($fid);
+        $image_data = image_style_url('image170x127', $file_obj->uri);
+        return $image_data;
+    }
+    return FALSE;
+}
