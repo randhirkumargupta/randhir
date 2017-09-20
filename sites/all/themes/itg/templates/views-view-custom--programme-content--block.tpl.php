@@ -6,8 +6,8 @@
   $section_cat_id = '';
   global $base_url;
   foreach ($rows as $key => $row) :
-    if (isset($row['cat_id_1'])) {
-      $section_cat_id = trim($row['cat_id_1']);
+    if (isset($row['cat_id'])) {
+      $section_cat_id = trim($row['cat_id']);
       if ($key == 0) {
         $url = l("More »", 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
       }
