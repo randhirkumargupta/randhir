@@ -27,7 +27,7 @@ CKEDITOR.dialog.add('megareviewDialog', function(editor) {
           {
             type: 'text',
             id: 'inset-megareview-nid',
-            label: 'Mega Review',
+            label: 'Mega Reviews',
             className: 'megareview-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
@@ -40,7 +40,8 @@ CKEDITOR.dialog.add('megareviewDialog', function(editor) {
               if(bas_path == 'http://localhost/') {
                 bas_path = bas_path+'itgcms/';
               }
-              editor.popup(bas_path + 'pqs/associate-with-story/mega_review_critic', 400, 600);
+              var title_str=jQuery('.cke_dialog_ui_input_text').val();
+              editor.popup(bas_path + 'pqs/associate-with-story/mega_review_critic/'+title_str, 400, 600);
             }
           }
         ]
