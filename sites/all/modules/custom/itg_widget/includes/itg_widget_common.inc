@@ -326,20 +326,24 @@ function getsaction_list() {
  * This function use for get state
  */
 function get_all_state($cat) {
-    $states_neame = array();
-    $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $states_neame = array();
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
 
-    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-    $states_neame[] = 'Select';
-    foreach ($terms as $values) {
-        if ($cat == $values->field_section[LANGUAGE_NONE][0]['tid']) {
-            $states_neame[$values->tid] = $values->name;
-        }
-        if (empty($cat)) {
-            $states_neame[$values->tid] = $values->name;
-        }
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+  foreach ($terms as $values) {
+    if ($cat == $values->field_section[LANGUAGE_NONE][0]['tid']) {
+      $states_neame[$values->tid] = $values->name;
     }
-    return $states_neame;
+    if (empty($cat)) {
+      $states_neame[] = 'Select';
+      // $states_neame[$values->tid] = $values->name;
+    }
+  }
+  if (empty($states_neame)) {
+    $states_neame[] = 'Select';
+  }
+  return $states_neame;
 }
 
 /**
