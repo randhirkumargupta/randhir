@@ -264,12 +264,12 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
  */
 function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
-  $output .= '      <title>' . $title . "</title>\n";
-  $output .= '      <link>' . check_url($link) . "</link>\n";
-  $output .= '      <guid>' . $guid . "</guid>\n";
-  $output .= '      <pubDate>' . $pubdate . "</pubDate>\n";
-  $output .= '      <author>' . $name . "</author>\n";
-  $output .= '      <description>' . $desc . "</description>\n";
+  $output .= "      <title>" . $title . "</title>\n";
+  $output .= "      <link>" . check_url($link) . "</link>\n";
+  $output .= "      <guid>" . $guid . "</guid>\n";
+  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>\n";
+  $output .= "      <author>" . $name . "</author>\n";
+  $output .= "      <description>" . $desc . "</description>\n";
   $output .= "    <content:encoded>\n";
   $output .= "    <![CDATA[\n";
   $output .= "    <!doctype html>\n";
