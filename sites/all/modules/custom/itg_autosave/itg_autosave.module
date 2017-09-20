@@ -4,7 +4,6 @@
  * @file
  * Autosave module file contains hooks to extends core functionality.
  */
-
 module_load_include('inc', 'itg_autosave', 'includes/itg_auto_save');
 
 /**
@@ -16,8 +15,8 @@ function it_autosave_help($path, $arg) {
   switch ($path) {
     case 'admin/help#itg_autosave':
       $output = '';
-      $output .= t('Please enter form id and the time for autosave interval of the node form inwhich you want to give autosave dunctionality.');  
-      
+      $output .= t('Please enter form id and the time for autosave interval of the node form inwhich you want to give autosave dunctionality.');
+
       return $output;
   }
 }
@@ -31,10 +30,10 @@ function it_autosave_help($path, $arg) {
  */
 function itg_autosave_permission() {
   return array(
-    'administer itg_autosave settings' => array(
-      'title' => t('Administer ITG Autosave Settings'),
-      'description' => t('Perform administration tasks for ITG Autosave.'),
-    ),
+      'administer itg_autosave settings' => array(
+          'title' => t('Administer ITG Autosave Settings'),
+          'description' => t('Perform administration tasks for ITG Autosave.'),
+      ),
   );
 }
 
@@ -46,37 +45,37 @@ function itg_autosave_permission() {
 function itg_autosave_menu() {
   // Settings form menu.
   $items['admin/config/administration/itg_autosave'] = array(
-    'title' => 'ITG Autosave Setting',
-    'description' => 'Autosave settings form',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_autosave_form'),
-    'access arguments' => array('administer itg_autosave settings'),
-    'type' => MENU_NORMAL_ITEM,
-    'file' => 'includes/itg_autosave.admin.inc',
+      'title' => 'ITG Autosave Setting',
+      'description' => 'Autosave settings form',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_autosave_form'),
+      'access arguments' => array('administer itg_autosave settings'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'includes/itg_autosave.admin.inc',
   );
   // Delete saved form id menu.
   $items['itg-autosave-formid-delete/%'] = array(
-    'page callback' => 'itg_autosave_form_delete',
-    'page arguments' => array(1),
-    'access arguments' => array('administer itg_autosave settings'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_autosave.admin.inc',
+      'page callback' => 'itg_autosave_form_delete',
+      'page arguments' => array(1),
+      'access arguments' => array('administer itg_autosave settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_autosave.admin.inc',
   );
   // Autosave ajax callback function.
   $items['itg-autosave/nodeform'] = array(
-    'page callback' => 'itg_autosave_nodeform',
-    'page arguments' => array(2, 3),
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_autosave.admin.inc',
+      'page callback' => 'itg_autosave_nodeform',
+      'page arguments' => array(2, 3),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_autosave.admin.inc',
   );
   // Unlock lock content.
   $items['itg-autosave/unlock_content/%'] = array(
-    'page callback' => 'reset_autosave_lock',
-    'page arguments' => array(2),
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_autosave.admin.inc',
+      'page callback' => 'reset_autosave_lock',
+      'page arguments' => array(2),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_autosave.admin.inc',
   );
 
   return $items;
@@ -92,8 +91,8 @@ function itg_autosave_menu() {
  */
 function itg_autosave_views_api() {
   return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',
+      'api' => 3,
+      'path' => drupal_get_path('module', 'itg_autosave') . '/includes/views',
   );
 }
 
@@ -106,56 +105,51 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
   // Create object of itg_auto_save class.
   $itg_autosave_form = new itg_auto_save();
   // Fetch form ids saved into database for autosave.
-  $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
+  $form_ids = $itg_autosave_form->itg_save_get_form_ids();
   // match form_id with saved id for autosave.
   if (in_array($form_id, $form_ids)) {
-	// Lock story if already open in Edit mode
-	  if($form['nid']['#value'] != null){
-      
-		  $destination = 'mydraft-story';
-		  $l_query = array();
-		  if(isset($_GET['destination'])){
-			  $destination = $_GET['destination'];
-		  }
-		  if(isset($_GET['content_lock_token'])){
-			  $l_query['content_lock_token'] = $_GET['content_lock_token'];
-		  }
-		  $l_query['redirectTo'] = $destination;
-		  $lock_status = $itg_autosave_form->itg_autosave_get_lock_status_node_id($form['nid']['#value']);
-		  if($lock_status->lock_status == 0 && $form['#node']->status == 0){
-			  $msg = "You have already open the content add page, Please close the content add tab and ".l(t('Click here'), 'itg-autosave/unlock_content/'.$form['nid']['#value'], array('query' => $l_query)). " to unlock the content edit page (In this case, Autosave feature will be disable from content add page).";
-			  drupal_set_message($msg, 'error');
-			  if(isset($_GET['destination'])){
-				  drupal_goto($_GET['destination']);
-				}else{
-					drupal_goto('mydraft-story');
-				}
-		  }
-	  }  
+    // Lock story if already open in Edit mode
+    if ($form['nid']['#value'] != null) {
+      $destination = 'mydraft-story';
+      $l_query = array();
+      if (isset($_GET['destination'])) {
+        $destination = $_GET['destination'];
+      }
+      if (isset($_GET['content_lock_token'])) {
+        $l_query['content_lock_token'] = $_GET['content_lock_token'];
+      }
+      $l_query['redirectTo'] = $destination;
+      $lock_status = $itg_autosave_form->itg_autosave_get_lock_status_node_id($form['nid']['#value']);
+      if (!empty($lock_status) && $lock_status->lock_status == 0 && $form['#node']->status == 0) {
+        $msg = "You have already open the content add page, Please close the content add tab and " . l(t('Click here'), 'itg-autosave/unlock_content/' . $form['nid']['#value'], array('query' => $l_query)) . " to unlock the content edit page (In this case, Autosave feature will be disable from content add page).";
+        drupal_set_message($msg, 'error');
+        if (isset($_GET['destination'])) {
+          drupal_goto($_GET['destination']);
+        } else {
+          drupal_goto($destination);
+        }
+      }
+    }
     $flag = FALSE;
     if ($form['nid']['#value'] == NULL) {
       $form['#node']->status = 0;
-    }
-    elseif ($form['nid']['#value'] > 0 && $form['#node']->status == 0) {
+    } elseif ($form['nid']['#value'] > 0 && $form['#node']->status == 0) {
       $form['#node']->status = 0;
-    } 
-    else {
+    } else {
       $flag = TRUE;
-    }    
+    }
     if (!$flag) {
       array_unshift($form['#validate'], 'itg_autosave_custom_validation');
-      $form['#after_build'][] = 'itg_autosave_after_build'; 
-      $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];      
+      $form['#after_build'][] = 'itg_autosave_after_build';
+      $node_identity = $form['field_story_node_identity']['und'][0]['value']['#default_value'];
       $form['field_story_node_identity']['und'][0]['value']['#default_value'] = $node_identity != '' ? $node_identity : uniqid();
-    }  
-    
+    }
   }
   // Hide node identity field
   if (isset($form['field_story_node_identity'])) {
     $form['field_story_node_identity']['und'][0]['value']['#prefix'] = '<div style="display:none;">';
     $form['field_story_node_identity']['und'][0]['value']['#suffix'] = '</div>';
   }
-  
 }
 
 /**
@@ -170,11 +164,11 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
 function itg_autosave_retrieve_uniqueid($nid, $c_type) {
   $itg_query = db_select('itg_autosave_node_data', 'itg');
   $itg_query->condition('nid', $nid)
-      ->condition('node_type', $c_type)
-      ->fields('itg', array('itg_identity'));
+          ->condition('node_type', $c_type)
+          ->fields('itg', array('itg_identity'));
   $itg_result = $itg_query->execute()->fetchField();
-  
-  return $itg_result;      
+
+  return $itg_result;
 }
 
 /**
@@ -182,15 +176,15 @@ function itg_autosave_retrieve_uniqueid($nid, $c_type) {
  *
  * {@inheridoc}.
  */
-function itg_autosave_node_insert($node) {  
+function itg_autosave_node_insert($node) {
   // Get Node identity field value.
-  if(!empty($node->field_story_node_identity['und'])){
+  if (!empty($node->field_story_node_identity['und'])) {
     $node_identity = $node->field_story_node_identity['und'][0]['value'];
     // Fetch another node id with same node identity
     $itg_query = db_select('itg_autosave_node_data', 'itg');
     $itg_query->fields('itg', array('nid'))
-        ->condition('itg_identity', $node_identity)
-        ->condition('nid', $node->nid, '!=');
+            ->condition('itg_identity', $node_identity)
+            ->condition('nid', $node->nid, '!=');
     $itg_result = $itg_query->execute()->fetchObject();
     // Delete node if found duplicate node identity node id.
     if ($itg_result->nid > 0) {
@@ -198,9 +192,9 @@ function itg_autosave_node_insert($node) {
       // Update nid referenced to old node id
       $itg_query = db_update('itg_autosave_node_data');
       $itg_query->condition('nid', $itg_result->nid)
-        ->fields(array('nid' => $node->nid))
-        ->execute();
-    } 
+              ->fields(array('nid' => $node->nid))
+              ->execute();
+    }
   }
 }
 
@@ -215,8 +209,8 @@ function itg_autosave_after_build($form, &$form_alter) {
   drupal_add_js(drupal_get_path('module', 'itg_autosave') . '/js/itg_autosave.js', array('scope' => 'footer'));
   // Set form ids to js file.
   $itg_autosave_form = new itg_auto_save();
-  $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);          
-  
+  $itg_autosave_form->itg_save_set_form_ids($form['nid']['#value'], $form['type']['#value']);
+
   return $form;
 }
 
@@ -228,6 +222,6 @@ function itg_autosave_after_build($form, &$form_alter) {
  * @param array $form_state
  *   Array of submitted form data.
  */
-function itg_autosave_custom_validation($form, &$form_state) {    
-  $form_state['values']['changed'] = REQUEST_TIME;  
+function itg_autosave_custom_validation($form, &$form_state) {
+  $form_state['values']['changed'] = REQUEST_TIME;
 }
