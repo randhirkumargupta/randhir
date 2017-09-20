@@ -434,7 +434,7 @@ function itg_term_views_pre_render(&$view) {
     // Add "Create Tag" button on listing page of Tags Management
     $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add');
-    //$header_content_term .=  '<a class="btn" id="export-csv">Export CSV</a>' ;//l(t('Export CSV'), '#', array('attributes' => array("id" => 'export-csv')));
+    $header_content_term .=  l(t('IMPORT CSV'), 'import-tag-file-uploader', array('attributes' => array("id" => 'export-csv')));
     $view->attachment_before = $header_content_term;
   }
 }
