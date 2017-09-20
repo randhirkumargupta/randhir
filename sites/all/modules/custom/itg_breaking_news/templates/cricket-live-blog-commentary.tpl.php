@@ -4,12 +4,16 @@
  * Theme implementation for Cricket live Blog.
  * 
  */
+$last_ball = -1;
 foreach ($data as $key => $commentary) {
-    $is_new_over = FALSE;
-    if (isset($data[$key + 1]) && !empty($data[$key + 1])) {
-        if ((int) $commentary->Ball >= 6 && (int) $data[$key - 1]->Over != (int) $commentary->Over) {
-            $is_new_over = TRUE;
-        }
+    $counter = 0;
+    if($commentary->Commentary != null && count($commentary->Commentary) > 0 && strpos($commentary->Commentary,".6:")) {
+            $finalBall = 6;
+    } else {
+            $finalBall = 0;
+    }
+    if (isset($data[$key])) {
+        $over = $data[$key]->Over;
     }
     if (isset($commentary->TimeOfDay)) {
         $time = date('H:i T', strtotime($commentary->TimeOfDay));
@@ -17,14 +21,14 @@ foreach ($data as $key => $commentary) {
     else {
         $time = '';
     }
+    
     ?>
-    <?php if (isset($commentary->Ball) && (int) $commentary->Ball >= 6 && $is_new_over): ?>
+    <?php if ($finalBall == 6 && (int)$last_ball != (int)$over): ?>
         <?php
         $_batsman = explode('|', $commentary->BatDetails);
         $batDetails = $_batsman[1] . '(' . $_batsman[2] . 'b ' . $_batsman[3] . '*4' . $_batsman[4] . '*6)';
         $_bowler = explode('|', $commentary->BowlDetails);
         $bowlDetails = $_bowler[1] . '-' . $_bowler[2] . '-' . $_bowler[3] . '-' . $_bowler[4];
-        $is_new_over = FALSE;
         ?>
         <div class="para-live-blog" data-id="<?php print $key; ?>" commentary-id="<?php echo $commentary->Id; ?>" current-inn="<?php echo $commentary->innings; ?>">  
             <div class="batBollDetails">
@@ -49,6 +53,7 @@ foreach ($data as $key => $commentary) {
         </div>
     </div>
     <?php
+    $last_ball = $over;
 }
 ?>
 
