@@ -1011,6 +1011,10 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') { // for event close
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
   if ($form["#id"] == 'views-exposed-form-Sponsor-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));

@@ -108,6 +108,12 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg-event-past-spekars.inc',
   );
+   $items['content-title-event/%/autocomplete'] = array(
+    'page callback' => 'itg_event_get_content_title_autocomplete',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_registration.inc',
+  );
   return $items;
 }
 
