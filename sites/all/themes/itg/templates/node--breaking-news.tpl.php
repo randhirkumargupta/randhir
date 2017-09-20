@@ -190,13 +190,10 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
                 <?php } ?>
         <div class="timeline">
           <?php
-          if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE])) {
             if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE]['0']['value'])) { ?>
                 <h3><?php print t('Timeline'); ?></h3>
                 <input id="slider-range" class="irs-hidden-input" readonly="">
-            <?php }
-          }
-          ?>
+            <?php } ?>
     <?php
     if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
       $breaking_output .= '';
