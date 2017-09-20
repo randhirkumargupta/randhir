@@ -804,6 +804,7 @@ function itg_survey_get_mail_content($node , $user) {
  * @return array
  */
 function itg_survey_pqs_generatetokens() {
+  global $base_url;
   $type = arg(2);
   drupal_add_js(drupal_get_path('module' , 'itg_survey') . '/js/itg_associate_story_ckeditor.js' , array('weight' => 1 , 'scope' => 'footer'));
   $cur_date = date('Y-m-d H:i:s');
@@ -832,9 +833,13 @@ function itg_survey_pqs_generatetokens() {
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
   }
   elseif($type == 'mega_review_critic'){
+	$title_text = arg(3);
     $query = db_select('node' , 'n');
     $query->fields('n' , array('nid' , 'title'));
     $query->condition('n.type' , $type , '=');
+    if(isset($title_text) && !empty($title_text)){
+	  $query->condition('n.title' , '%' . db_like($title_text) . '%' , 'LIKE');
+	}    
     $query->condition('n.status' , 1 , '=');
   }
   $data = array();
@@ -848,7 +853,7 @@ function itg_survey_pqs_generatetokens() {
       $title = $record['title'];
     }
     if($type == 'mega_review_critic'){
-		$iframe = '<iframe src="/mega-review/embed/'.$record['nid'].'" width="100%" height="1200" frameborder="0" scrolling="no"></iframe>';
+		$iframe = '<iframe src="'.$base_url.'/mega-review/embed/'.$record['nid'].'" width="100%" height="1200" frameborder="0" scrolling="no"></iframe>';
 		$options[$iframe] = $title;
 	}
 	else{
