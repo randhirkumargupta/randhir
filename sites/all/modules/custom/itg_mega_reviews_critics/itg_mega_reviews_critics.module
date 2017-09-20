@@ -220,3 +220,18 @@ function itg_mega_reviews_critics_views_api() {
     'api' => 3,
   );
 }
+
+/**
+ * Implements itg_get_megareview_company().
+ * @param int $byline_id
+ */
+function itg_get_megareview_company($byline_id) {
+  if(!empty($byline_id) && function_exists('get_term_name_from_tid_for_report')) {
+    $type_query = db_select('field_data_field_byline_company', 'bc');
+    $type_query->fields('bc', array('field_byline_company_tid'));
+    $type_query->condition('bc.entity_id', $byline_id, '=');
+    $byline = $type_query->execute()->fetchField();
+    $company = get_term_name_from_tid_for_report($byline);
+    return $company;
+  }
+}
