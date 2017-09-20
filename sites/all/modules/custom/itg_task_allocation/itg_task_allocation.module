@@ -326,6 +326,15 @@ function itg_task_allocation_node_update($node) {
     $user_fields = user_load($node->field_task_team_member[LANGUAGE_NONE][0]['target_id']);
     task_get_mail_content($node, 'update', $user_fields->mail, $node->name);
   }
+  // Adding to Notification table
+  if (!empty($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value'])) {
+    $hyperlink = l($node->title, 'node/' . $node->nid);
+    $time = strtotime($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value']);
+    if (function_exists('itg_octopus_add_notification')) {
+      itg_octopus_add_notification('task', $node->title, 'node/' . $node->nid, $query_string = NULL, $time, 1);
+    }
+  }
+
 }
 
 /**
