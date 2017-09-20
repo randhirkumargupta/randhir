@@ -90,6 +90,8 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($form_id == 'breaking_news_node_form') {
+    // hide Time Line active _none value
+    unset($form['field_live_blog_timeline_active'][LANGUAGE_NONE]['#options']['_none']);
     $form['title']['#title'] = t('Page title');
     // code to hide source field
     if ($user->uid != '1') {
