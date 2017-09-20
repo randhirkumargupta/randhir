@@ -16,6 +16,52 @@ $args = drush_get_arguments(); // Get the arguments.
 //itg_widget_order_delete();
 //insert_merge();
 
+
+ __itg_widget_data_into_helper_tbl();
+
+//insert_data_in_widget_helper_test();
+
+function __itg_widget_data_into_helper_tbl() {
+  $result = _itg_widget_get_old_data_script();
+
+  foreach ($result as $key => $data) {
+        if($data && !empty($data) && $data >0) {
+                    echo $data . ", ";           
+             __itg_widget_helper_data_insert($data);
+        }
+    }
+}
+
+function __itg_get_noids_in_helper_table() {
+    $widget_tbl = db_select("itg_widget_helper", "iwo")
+            ->fields("iwo", array("nid"))
+            ->execute()->fetchAllAssoc("nid");
+    return array_keys($widget_tbl);
+}
+
+function _itg_widget_get_old_data_script() {
+    $all_ready_nids = __itg_get_noids_in_helper_table();
+    try {
+        $widget_tbl = db_select("itg_widget_order", "iwo")
+            ->fields("iwo", array("nid"))
+            ->condition('iwo.nid' , array($all_ready_nids) , "NOT IN")
+            ->orderBy('iwo.nid' , 'DESC')
+            ->execute()->fetchAllAssoc("nid");
+
+        $widget_tbl_section = db_select("itg_widget_order_section", "iws")
+          ->condition('iws.nid' , array($all_ready_nids) , "NOT IN")
+            ->orderBy('iws.nid' , 'DESC')
+            ->fields("iws", array("nid"))->execute()->fetchAllAssoc("nid");
+
+        $array1 = array_keys($widget_tbl);
+        $array2 = array_keys($widget_tbl_section);
+        $result = array_unique(array_merge($array1, $array2));
+        return $result;
+    } catch (Exception $ex) {
+        return $ex->getMessage();
+    }
+}
+
 function itg_widget_order_all_data_move() {
   $query = db_select('itg_widget_order_old', 'iwo');
   $query->fields('iwo', array('cat_id'));
@@ -110,7 +156,7 @@ function section_insert($table_name, $rel) {
         'extra' => $rel->extra,
         'constituency' => $rel->constituency,
         'state' => $rel->state,
-        'id' => $rel->id,
+       // 'id' => $rel->id,
       ))
       ->execute();
 }

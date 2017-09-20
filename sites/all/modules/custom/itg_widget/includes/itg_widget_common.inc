@@ -776,13 +776,6 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     }
     switch ($form['#id']) {
 
-        case 'views-exposed-form-home-page-feature-widget-page-1':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
         case 'views-exposed-form-manage-newsletter-page':
             $form['status_1']['#options'] = array(
               'any' => '- Any -',
@@ -799,41 +792,6 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                     $form['type']['#options'][$key] = 'Articles (Story)';
                 }
             }
-            break;
-
-        case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-story-widget-most-popular':
-        case 'views-exposed-form-story-widget-page-1':
-            $form['title']['#attributes']['placeholder'] = t('Story Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Story ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-            break;
-        case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
-            $form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
-            break;
-        case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
-            $form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-            break;
-        case 'views-exposed-form-story-widget-trending-videos':
-        case 'views-exposed-form-story-widget-top-takes-video':
-        case 'views-exposed-form-story-widget-watch-right-now':
-            $form['title']['#attributes']['placeholder'] = t('Video Title');
-            $form['nid']['#attributes']['placeholder'] = t('Video ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-            $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
             break;
         case 'views-exposed-form-home-election-widget-election-graph-widget-contents':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -853,25 +811,36 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
             break;
         case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
         case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
+        case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
+        case 'views-exposed-form-story-widget-most-popular':
+        case 'views-exposed-form-story-widget-page-1':
+        case 'views-exposed-form-story-widget-trending-videos':
+        case 'views-exposed-form-story-widget-top-takes-video':
+        case 'views-exposed-form-story-widget-watch-right-now':
+        case 'views-exposed-form-poll-widget-poll-widget-format':
+        case 'views-exposed-form-home-page-feature-widget-page-1':
+        case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
+        case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
             $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+            $title_path = __get_autocomplete_path_for_widget('title', $form['#id']);
+            $nid_path = __get_autocomplete_path_for_widget('nid', $form['#id']);
+            $form['title']['#autocomplete_path'] = $title_path;
+            $form['nid']['#autocomplete_path'] = $nid_path;
             break;
         case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
             $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+            $type = isset($_GET['type']) ? $_GET['type'] : "story";
+            $type1 = isset($_GET['category_tid']) ? $_GET['category_tid'] : '';
+            if (!empty($type1)) {
+                $form['title']['#autocomplete_path'] = "node-list-for-year-end-category/title/$type/$type1/autocomplete";
+                $form['nid']['#autocomplete_path'] = "node-list-for-year-end-category/nid/$type/$type1/autocomplete";
+            } else {
+                $form['title']['#autocomplete_path'] = "node-list-for-year-end/title/$type/autocomplete";
+                $form['nid']['#autocomplete_path'] = "node-list-for-year-end/nid/$type/autocomplete";
+            }
             break;
         case 'views-exposed-form-most-read-widget-most-read-widget-contents':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -892,13 +861,6 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['title']['#attributes']['placeholder'] = t('Content Title');
             $form['nid']['#attributes']['placeholder'] = t('Content ID');
             $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-poll-widget-poll-widget-format':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('poll');
             $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             break;
@@ -1161,9 +1123,9 @@ function autocomplete_for_year_end_widgets_category() {
         $query->fields('n', array('title', 'nid'));
         //$query->condition('tid', variable_get('year_end_for_widget'));
         if ($flag == 'title') {
-            $query->condition('n. title', '%' . $title . '%', 'LIKE');
+            $query->condition('n. title', '%' . db_like($title) . '%', 'LIKE');
         } elseif ($flag == 'nid') {
-            $query->condition('n. nid', '%' . $title . '%', 'LIKE');
+            $query->condition('n. nid', '%' . db_like($title) . '%', 'LIKE');
         }
         $query->condition('fsc.field_story_category_tid', $catid);
         $query->condition('n.type', $content_type);
@@ -3177,4 +3139,101 @@ function itg_widget_get_active_taxonomy($taxonomy = array()) {
         }
     }
     return $taxonomy;
+}
+
+/**
+ * Function which creates autocomplete path.
+ * 
+ * @param string $field_name
+ *      title or nid must be passed
+ * @param string $form_id
+ *     Exposed views form if.
+ * @return string
+ */
+function __get_autocomplete_path_for_widget($field_name = 'title', $form_id = NULL) {
+    $path = array('autocomplete-widget-path', $field_name);
+    //if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
+    if ($form_id == 'views-exposed-form-story-widget-top-takes-video' 
+            ||$form_id == 'views-exposed-form-story-widget-trending-videos' 
+            || $form_id == 'views-exposed-form-story-widget-page-1' 
+            || $form_id=='views-exposed-form-home-page-feature-widget-page-1' 
+            || $form_id == 'views-exposed-form-photo-carousel-widget-video-carousel-list' 
+            || $form_id == 'views-exposed-form-photo-carousel-widget-photo-carousel-list'
+            || $form_id == 'views-exposed-form-story-widget-watch-right-now'
+      ) {
+        $path[] = $_GET['field_story_category_tid'];
+    } else {
+        $path[] = $_GET['category_tid'];
+    }
+    //}
+    //if (isset($_GET['type']) && !empty($_GET['type'])) {
+    $path[] = $_GET['type'];
+    $path[] = $form_id;
+    //}
+    $path[] = 'autocomplete';
+
+    return implode("/", $path);
+}
+
+/**
+ * Function which is reponsible to generate autocomplete field results
+ * For widget listing view exposed form.
+ */
+function autocomplete_widget_path_with_filter() {
+    $arg = arg();
+    // Either title or nid.
+    $which_field = $arg[1];
+    // Get category tid. Typecasting for preventing "All" in selection list.
+    $category_tid = (int) $arg[2];
+    // Content type which is selected in filter.
+    $content_type = $arg[3];
+    // Search string.
+    $title = $arg[6];
+    // Default valid filter content types.
+    $valid_content_type = array("story", "videogalery", "photogallery");
+    // Individual widget wise conditions.
+    if ($arg[4] == 'views-exposed-form-section-wise-draggable-content-order-big-story-format') {
+        $valid_content_type = array('breaking_news');
+    }
+    if ($arg[4] == 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget' || $arg[4] == 'views-exposed-form-story-widget-most-popular' || $arg[4] == 'views-exposed-form-story-widget-page-1') {
+        $valid_content_type = array('story');
+    }
+    if ($arg[4] == 'views-exposed-form-photo-carousel-widget-video-carousel-list' || $arg[4] == 'views-exposed-form-story-widget-watch-right-now' || $arg[4] == 'views-exposed-form-story-widget-top-takes-video' || $arg[4] == 'views-exposed-form-story-widget-trending-videos') {
+        $valid_content_type = array('videogallery');
+    }
+    if ($arg[4] == 'views-exposed-form-poll-widget-poll-widget-format') {
+        $valid_content_type = array('poll');
+    }
+    if ($arg[4] == 'views-exposed-form-photo-carousel-widget-photo-carousel-list') {
+        $valid_content_type = array('photogallery');
+    }
+    if (!empty($content_type) && strtolower($content_type) != 'all') {
+        $valid_content_type = array($content_type);
+    }
+    $query = db_select('node', 'n');
+    // If category is set i.e. not ALL
+    if ($category_tid) {
+        $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
+    }
+    // we want either title or nid.
+    $query->fields('n', array($which_field));
+    if ($which_field == 'title') {
+        $query->condition('n. title', '%' . db_like($title) . '%', 'LIKE');
+    } elseif ($which_field == 'nid') {
+        $query->condition('n. nid', '%' . db_like($title) . '%', 'LIKE');
+    }
+    if ($category_tid) {
+        $query->condition('fsc.field_story_category_tid', $category_tid);
+    }
+    $query->condition('n.type', $valid_content_type, "IN");
+    $query->orderBy("n.$which_field", "DESC");
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $options[$record[$which_field]] = $record[$which_field];
+    }
+
+    drupal_json_output($options);
 }

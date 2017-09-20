@@ -12519,7 +12519,7 @@ h1.about-us-heading + div p {
 #block-itg-front-end-common-related-photo-block #related-video ul li,
 #block-itg-front-end-common-related-video-block #related-photo ul li,
 #block-itg-front-end-common-related-video-block #related-video ul li {
-  padding-right: 0px;
+  /*padding-right: 0px;*/
   padding-left: 0px;
     /*            &:nth-child(4n+1){
     clear:left;

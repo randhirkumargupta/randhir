@@ -10716,7 +10716,7 @@ h1.about-us-heading {
             @extend .list-none;
             @include clearfix;
             li {
-                padding-right: 0px;
+                /*padding-right: 0px;*/
                 padding-left: 0px;
                 a {
                     display: block;
