@@ -547,6 +547,26 @@ jQuery(document).ready(function () {
             }
         ]
     });
+    var fit_to_view = false;
+    if(jQuery(window).width() < 1024){
+	    fit_to_view = true;
+	}
+    if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
+		jQuery(".fancybox-thumb").fancybox({
+			fitToView: fit_to_view,
+			padding: 0,
+			arrows: true,
+			helpers	: {
+				//~ title	: {
+					//~ type: 'outside'
+				//~ },
+				thumbs	: {
+					width	: 80,
+					height	: 80
+				}
+			}
+		});
+	}
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
