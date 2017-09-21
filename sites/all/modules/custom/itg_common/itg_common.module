@@ -406,7 +406,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
   
-  if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form') {
+  if ($form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form') {
     $form['#after_build'][] = 'itg_common_add_preview_button';
   }
   
@@ -662,11 +662,11 @@ function itg_common_add_preview_button($form, &$form_state) {
         $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;         
     }
     
-    $web_link = '<a  class="btn-submit" href="' . $node_url . '" target="_blank">Web preview</a>';
-    $mob_link = '<a class="colorbox-load btn-submit" href="'.$node_url.'?width=300&amp;height=600&amp;iframe=true">M preview</a>';
+    //$web_link = '<a  class="btn-submit" href="' . $node_url . '?preview_log='.$form_state['node']->nid.'" target="_blank">Web preview</a>';
+    $mob_link = '<a class="colorbox-load btn-submit preview-btn" href="'.$node_url.'?width=300&preview_log='.$form_state['node']->nid.'&amp;height=600&amp;iframe=true">M preview</a>';
           
     $form['actions']['webpreview'] = array(
-      '#markup' => $web_link,
+      '#markup' => l("Web preview" , "node/".$form_state['node']->nid , array("query" =>array("preview_log" => $form_state['node']->nid) ,  "attributes" =>array("class" => array("btn-submit" ,"preview-btn") , "target" => array("_blank")))),
       '#weight' => 20,
     );
     
