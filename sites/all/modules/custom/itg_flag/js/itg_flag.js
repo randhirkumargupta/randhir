@@ -24,7 +24,8 @@ window.fbAsyncInit = function() {
         });
         FB.AppEvents.logPageView();
   };
-
+  
+jQuery(window).load( function(){
   (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}
@@ -32,6 +33,7 @@ window.fbAsyncInit = function() {
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+});
 
 function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, base_url, node_id)
 {
@@ -55,6 +57,7 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     },
     function (response) {
         var front_uid = Drupal.settings.itg_flag.settings.uid;
+        console.log(response);
         jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 url: base_url + '/fb-share-callback/' + node_id + '/' + front_uid,
@@ -349,6 +352,32 @@ jQuery(document).ready(function () {
                 }
             });
         }
+    });
+    
+    jQuery('.story-login-follow').click(function (event) {
+        var post_data = "";
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/story-login-follow-callback',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
+
+                },
+                'success': function (result) {
+                    var obj = jQuery.parseJSON(result);
+                    if (obj.anony == 'true') {
+                      jQuery('.akamai-submit-story-col').trigger('click');  
+                    }
+                    if (obj.loggedin == 'true') {
+                      var uri = Drupal.settings.baseUrl.baseUrl+'/post-ugc-content';
+                      console.log(uri);
+                      window.location.href = uri;
+                    }
+                }
+            });
+        
     });
 });
 

@@ -7316,3 +7316,36 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
 
 /*css end by arun */
+
+
+/*css Mega Review || Mobile */
+
+#block-itg-mega-reviews-critics-mega-review-mobile-header {
+    .comment-mobile {
+        background: #1c1c1c;
+        margin: -15px -15px 20px;
+        font-family: $itg-roboto;
+        text-align: right;
+        ul {
+            @include display-inline;
+            li {
+                @include display-inline;
+                a {
+                    color: #c0c0c0;
+                    padding: 10px 8px;
+                    display: block;
+                    text-transform: uppercase;
+                    i {
+                        font-size: 16px;
+                    }
+                }
+            }
+            &.social-share {
+                display: none;
+            }
+        }
+    }
+}
+
+
+/*css end Mega Review || Mobile */

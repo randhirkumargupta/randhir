@@ -61,27 +61,6 @@
     hide($content['comments']);
     hide($content['links']);  
     ?>
-<!--    mobile social share-->
-<div class="comment-mobile desktop-hide">
-    <ul>
-        <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> <?php print t('Mail to author'); ?></a></li>
-        <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
-        <?php
-        if ($config_name == 'vukkul') {
-            ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-        <?php } if ($config_name == 'other') { ?> 
-            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-        <?php } ?>
-        <li><a href="#" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
-    </ul>
-    <ul class="social-share">
-        <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-        <li><a title = "share on twitter" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-        <li><a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-
-    </ul> 
-</div>
     
     <!-- Title -->
     <h1><?php print $node->title; ?></h1>
@@ -127,7 +106,13 @@
         </div>    
         
         <div class="movie-review-text">
-            <?php $cast_name = $node->field_mega_review_cast['und'][0]['entity']->title; ?>
+            <?php
+            foreach($node->field_mega_review_cast['und'] as $key => $value) {
+              $cast[] = ucfirst($node->field_mega_review_cast['und'][$key]['entity']->title);
+            }
+            //$cast_name = $node->field_mega_review_cast['und'][0]['entity']->title;
+            $cast_name = implode(', ', $cast);
+            ?>
             <?php if (!empty($cast_name)): ?>
             <div class="review-row">
                 <dfn class="review-label"><?php print t('Cast :'); ?></dfn>
@@ -171,9 +156,17 @@
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->
-                  <?php $reviewers = array(); ?>                  
+                  <?php $reviewers = array(); $reviewers_company = $company = '' ;?>                  
                   <?php foreach ($reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE] as $reviewer_name): ?>                  
-                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                    <?php 
+                    if(function_exists('itg_get_megareview_company')) {
+                    $company = itg_get_megareview_company($reviewer_name['entity']->nid);
+                    if(!empty($company)) {
+                    $reviewers_company = ', '.$company;
+                    }
+                    }
+                    $reviewers[] = $reviewer_name['entity']->title.$reviewers_company;
+                    ?>
                   <?php endforeach; ?>
                   
                   <!-- Print External review. -->
@@ -229,24 +222,36 @@
          <?php  } endforeach; ?> 
       
       
-       <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection): 
-                    $reviews = entity_load('field_collection_item', array($field_collection['value']));    
+       <?php 
+       $counter = 0;
+       foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $key => $field_collection): 
+         $reviews = entity_load('field_collection_item', array($field_collection['value']));    
 
          if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external') { ?>
          
          <div class="other-reviews-row">
               <!-- Review Headline -->
             
-                <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
+                <?php if($counter == 0) { print '<h2>' . t('Other Reviewers') . '</h2>'; }
+                ++$counter;
+                ?>
              
               
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->
-                  <?php $reviewers = array(); ?>                  
+                  <?php $reviewers = array(); $reviewers_company_other = $company_other = '';?>                  
                   <?php foreach ($reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE] as $reviewer_name): ?>                  
-                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                    <?php 
+                    if(function_exists('itg_get_megareview_company')) {
+                    $company_other = itg_get_megareview_company($reviewer_name['entity']->nid);
+                    if(!empty($company_other)) {
+                    $reviewers_company_other = ', '.$company_other;
+                    }
+                    }
+                    $reviewers[] = $reviewer_name['entity']->title.$reviewers_company_other;
+                    ?>
                   <?php endforeach; ?>
                   
                   <!-- Print External review. -->

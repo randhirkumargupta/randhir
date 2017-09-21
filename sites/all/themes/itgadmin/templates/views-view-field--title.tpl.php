@@ -60,14 +60,20 @@ elseif ( isset($row->_field_data['nid']['entity']->type) && ($row->_field_data['
     $row->_field_data['nid']['entity']->type == 'breaking_news') ) {
 
   if ( isset($row->_field_data['nid']['entity']->status) && $row->_field_data['nid']['entity']->status == 0 ) {
-    print html_entity_decode(l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank'))));
+    if($row->_field_data['nid']['entity']->type == 'event_backend') {
+      print html_entity_decode(l(strip_tags($output) , 'node/' . $row->nid.'/edit' , array('attributes' => array('target' => '_blank'))));
+    }else {
+      print html_entity_decode(l(strip_tags($output) , 'node/' . $row->nid , array('attributes' => array('target' => '_blank'))));
+    }
   }
   else {
     if ( BACKEND_URL == $base_url ) {
       if($row->_field_data['nid']['entity']->type == 'event_backend') {
-        $event_url_alias = drupal_get_path_alias($path = 'node/'.$row->nid, $path_language = NULL);
-        $event_register_url = FRONT_URL.'/'.$event_url_alias.'/'.'registration';
-        print '<a href="' . $event_register_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
+        //$event_url_alias = drupal_get_path_alias($path = 'node/'.$row->nid, $path_language = NULL);
+        //$event_register_url = FRONT_URL.'/'.$event_url_alias.'/'.'registration';
+        $event_edit_url  = BACKEND_URL.'/'.'node/'.$row->nid.'/edit';
+        //print '<a href="' . $event_register_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
+        print '<a href="' . $event_edit_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
       }else{
         $node_url = FRONT_URL . '/node/' . $row->nid;
         print '<a href="' . $node_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';

@@ -159,6 +159,11 @@ function itg_mega_reviews_critics_block_info() {
     'info' => t('Mega Reviews Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['mega_review_mobile_header'] = array(
+    'info' => t('Mega review mobile header'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -168,15 +173,19 @@ function itg_mega_reviews_critics_block_info() {
  * {@inheritdoc}
  */
 function itg_mega_reviews_critics_block_view($delta = '') {
-
+  $arg = arg();
   $block = array();
-
   switch ($delta) {
     case 'mega_reviews_tab_form_block':
       $block['content'] = theme('mega_reviews_tab_form_display_block', array('data' => ''));
       break;
+    case 'mega_review_mobile_header':
+      if(!empty($arg[1])) {
+      $data = node_load($arg[1]);
+      }
+      $block['content'] = theme('mega_reviews_mobile_header_block', array('data' => array('node' => $data)));
+      break;
   }
-
   return $block;
 }
 
@@ -188,6 +197,11 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
   $themes = array(
     'mega_reviews_tab_form_display_block' => array(
       'template' => 'mega-reviews-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'mega_reviews_mobile_header_block' => array(
+      'template' => 'mega-reviews-mobile-header-block-template',
       'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -205,4 +219,22 @@ function itg_mega_reviews_critics_views_api() {
   return array(
     'api' => 3,
   );
+}
+
+/**
+ * Implements itg_get_megareview_company().
+ * @param int $byline_id
+ */
+function itg_get_megareview_company($byline_id) {
+  $company = '';
+  if(!empty($byline_id) && function_exists('get_term_name_from_tid_for_report')) {
+    $type_query = db_select('field_data_field_byline_company', 'bc');
+    $type_query->fields('bc', array('field_byline_company_tid'));
+    $type_query->condition('bc.entity_id', $byline_id, '=');
+    $byline = $type_query->execute()->fetchField();
+    if(function_exists('get_term_name_from_tid_for_report')) {
+    $company = get_term_name_from_tid_for_report($byline);
+    }
+    return $company;
+  }
 }
