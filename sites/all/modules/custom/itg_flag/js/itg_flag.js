@@ -353,6 +353,32 @@ jQuery(document).ready(function () {
             });
         }
     });
+    
+    jQuery('.story-login-follow').click(function (event) {
+        var post_data = "";
+            jQuery.ajax({
+                'url': Drupal.settings.baseUrl.baseUrl + '/story-login-follow-callback',
+                'data': post_data,
+                'cache': false,
+                'type': 'POST',
+                // dataType: 'json',
+                beforeSend: function () {
+
+                },
+                'success': function (result) {
+                    var obj = jQuery.parseJSON(result);
+                    if (obj.anony == 'true') {
+                      jQuery('.akamai-submit-story-col').trigger('click');  
+                    }
+                    if (obj.loggedin == 'true') {
+                      var uri = Drupal.settings.baseUrl.baseUrl+'/post-ugc-content';
+                      console.log(uri);
+                      window.location.href = uri;
+                    }
+                }
+            });
+        
+    });
 });
 
 // jquery for delete follow / unfollow
