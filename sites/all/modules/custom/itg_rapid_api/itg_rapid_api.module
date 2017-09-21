@@ -570,7 +570,7 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
         $flag = 1;
 
     }
-   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference");
+   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "follow_author");
    if(arg(0) == "appapi" && count(arg()) == 2 ){
        if(!in_array(arg(1), $post_res)){
             $result = $path."/it";
@@ -864,3 +864,31 @@ function get_personalization_saved_value_service($uid) {
   $query->condition('iwo.extra', $uid);
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * @param int $nid of the author or anchor
+ * @param string $type author or anchor
+ * @return $status boolean True|False
+ */
+function valid_anchor_author($nid,$type){
+  $node = node_load($nid);// reporter 285750 , anchor 285903
+  $occupation_tids = array();
+  foreach($node->field_celebrity_pro_occupation['und'] as $data){
+    $occupation_tids[] = $data['tid'];
+  }
+  if($type == 'author'){
+    if(in_array('285750', $occupation_tids)){
+      $status = TRUE;
+    }else{
+      $status = FALSE;
+    }  
+  }elseif($type == 'anchor'){
+    if(in_array('285903', $occupation_tids)){
+      $status = TRUE;
+    }else{
+      $status = FALSE;
+    }
+  }
+  return $status;
+}
+  

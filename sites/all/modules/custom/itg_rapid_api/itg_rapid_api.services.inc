@@ -4429,21 +4429,34 @@ function follow_author_responce($token, $user_id, $node_id) {
     } else {
         $message_array['status_code'] = '0';
         $message_array['status_message'] = "Argument are missing";
-        $message_array['data'] = array('news' => array());
+        $message_array['data'] = array();
     }
 
     if ($user_id == '') {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "User does not exist";
-        $message_array['data'] = array('news' => array());
+        $message_array['data'] = array();
     }
 
     if (!drupal_valid_token($authtoken_id, 'services')) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
-        $message_array['data'] = array('news' => array());
+        $message_array['data'] = array();
+    }
+    if(!valid_anchor_author($author_id,'author')){
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Author Id is not valid.";
+        $message_array['data'] = array();
+    }
+    if($type == 'follow_story' || $type == 'Unfollow'){
+    }else{
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Type is not valid it shoud be either follow_story or Unfollow";
+        $message_array['data'] = array();
     }
 
     // check args
