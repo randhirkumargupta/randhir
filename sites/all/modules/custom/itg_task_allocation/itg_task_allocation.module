@@ -299,6 +299,19 @@ function itg_task_allocation_views_query_alter(&$view, &$query) {
 }
 
 /**
+ * Implements hook_node_view
+ * {@inheritdoc}
+ */
+function itg_task_allocation_node_view($node, $view_mode) {
+  if ($node->type == "task_idea_allocation_tracking") {
+    if (isset($_GET['onotify']) && !empty($_GET['onotify'])) {
+      if (function_exists('itg_octopus_notification_by_uid')) {
+        itg_octopus_notification_by_uid($_GET['onotify']);
+      }
+    }
+  }
+}
+/**
  * Implements hook_node_insert
  * @param Array $node
  */
