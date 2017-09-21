@@ -6,6 +6,9 @@
  */
 $last_ball = -1;
 foreach ($data as $key => $commentary) {
+    if($commentary->Commentary == null || empty($commentary->Commentary)){
+        continue;
+    }
     $counter = 0;
     if($commentary->Commentary != null && count($commentary->Commentary) > 0 && strpos($commentary->Commentary,".6:")) {
             $finalBall = 6;
