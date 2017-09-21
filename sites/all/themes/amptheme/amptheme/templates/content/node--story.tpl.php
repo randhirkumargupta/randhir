@@ -17,8 +17,9 @@ if (!empty($content)):
     $class_listicle = ' buzz-feedback listicle-feedback';
   }
   // prepare url for sharing
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
+  $amp_link = str_replace('?amp', '', $actual_link);
+  $short_url = shorten_url($amp_link, 'goo.gl');
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = '';
@@ -166,7 +167,7 @@ if (!empty($content)):
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>';
+                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
                   }
                   else {
                     if(empty($node->field_story_template_guru['und'][0]['value'])) {
@@ -179,7 +180,7 @@ if (!empty($content)):
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>'
+                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
                     ?>        
 
@@ -225,7 +226,7 @@ if (!empty($content)):
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
                     
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"></amp-img>        
+                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>        
                                     '.$icon_detail.'</a>';
                     
                     if (!empty($getimagetags)) {
@@ -318,9 +319,9 @@ if (!empty($content)):
                     $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
                     $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
                     $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
-                    $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$factoidsSocialShare['share_desc'];
+                    $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$factoidsSocialShare['share_desc'];
                     $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($factoidsSocialShare['share_desc']).'&url='.$short_url.'&via=IndiaToday';
-                    $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
+                    $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
 
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
@@ -487,7 +488,7 @@ if (!empty($content)):
             
             $share_image = file_create_url($share_uri);
             //$img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
-            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"></amp-img>';
+            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"><div fallback>offline</div></amp-img>';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
@@ -496,9 +497,9 @@ if (!empty($content)):
                 if (function_exists('itg_story_get_image_info')) {
                     $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                 }
-                $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$actual_link.'&title='.$buzz_title_share.'&picture='.$share_image;
+                $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$buzz_title_share.'&picture='.$share_image;
                 $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']).'&url='.$short_url.'&via=IndiaToday';
-                $google_url = 'https://plus.google.com/share?url='.  urlencode($actual_link);
+                $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
                 $buzz_photo_class = '';
                 if(empty($getImageInfo[0]->image_photo_grapher)) {
                   $buzz_photo_class = 'no-caption';
@@ -545,7 +546,7 @@ if (!empty($content)):
         </amp-embed>
         </div>
           <!-- code for related content -->   
-          <?php if (!empty($related_content) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+          <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">
               <?php
               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_amp_block');

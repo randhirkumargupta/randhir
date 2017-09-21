@@ -75,6 +75,23 @@ function itg_story_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/sponsor_category'] = array(
+    'title' => 'Sponsor Category Setting',
+    'description' => 'Sponsor Category Setting',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_sponsor_category_setting'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  $items['mega-review/embed/%node'] = array(
+    'page callback' => 'itg_story_mega_review_node_embed',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -87,6 +104,10 @@ function itg_story_permission() {
     'access itg story' => array(
       'title' => t('story permission'),
       'description' => t('story permission.'),
+    ),
+    'access layout delete' => array(
+      'title' => t('layout delete permission'),
+      'description' => t('layout delete permission.'),
     ),
   );
 }
@@ -163,6 +184,9 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
       global $base_url, $user;
+
+      // unset None value
+      unset($form['field_story_assign_to_widget'][LANGUAGE_NONE]['#options']['_none']);
 
       // code for body field config
       $form['body']['#states'] = array(
@@ -257,12 +281,45 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  if($form_state['input']['op'] == 'Apply') {
-     if ($form_state['node']->status == '1') {
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-    $_GET['destination'] = $redirect_path;
-    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+
+  if ($form_state['node']->status == '1') {
+    if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+      $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+    }
+    else {
+      $previous_story_assign = '';
+    }
+    $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+    $primary_category = $form_state['input']['itg_primary_category'];
+    // for story assign to widget
+    if (function_exists('itg_story_assign_to_widget')) {
+       if(is_array($story_widget) && count($story_widget) > 0) {		
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+      }
+    }
   }
+
+  if ($form_state['input']['op'] == 'Apply') {
+    if ($form_state['node']->status == '1') {
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      $primary_category = $form_state['input']['itg_primary_category'];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if(is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+        }
+      }
+
+      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+      $_GET['destination'] = $redirect_path;
+      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+    }
   }
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
@@ -307,11 +364,173 @@ function itg_story_form_custom_callback($form, &$form_state) {
     }
   }
 
-  if ($form_state['input']['op'] != 'Save as Draft') {
-    if (function_exists('itg_custom_message')) {
-      itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
+  //if ($form_state['input']['op'] != 'Save as Draft') {
+  if (function_exists('itg_custom_message')) {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
+  }
+  //}
+}
+
+/**
+ * function for story assign to widget
+ * @param int $nid
+ * @param array $story_widget
+ * @param int $cat_id
+ */
+function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign) {
+  if (!empty($story_widget)) {
+    $content_type = 'story';
+    foreach ($story_widget as $widget_val) {
+      $result[$widget_val] = $widget_val;
+      $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');
+      // for top stories
+      if ($widget_val == 'top_stories') {
+        $weight_data = itg_story_widget_max_value('top_stories_widget');
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+                  'nid' => $nid,
+                  'cat_id' => $cat_id,
+                  'content_type' => $content_type,
+                  'widget' => 'top_stories_widget',
+                  'weight' => --$weight_data,
+                  'state' => 0,
+                ])->execute();
+          }
+          catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+      // for big story
+      if ($widget_val == 'big_story') {
+        $related_nodes_json = '[]';
+        $widget = 'big_story_format_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 'big_story_format_widget');
+        if (empty($result_exist)) {
+          // Remove first livetv.
+          try {
+            db_delete('itg_widget_order')
+                ->condition('widget', $widget)
+                ->execute();
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
+
+          try {
+            $query = db_insert('itg_widget_order')
+                ->fields(array(
+                  'nid' => $nid,
+                  'widget' => $widget,
+                  'content_type' => $content_type,
+                  'cat_id' => 0,
+                  'weight' => 0,
+                  'extra' => $related_nodes_json,
+                ))
+                ->execute();
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
+        }
+      }
+      // for feature story
+      if ($widget_val == 'featured_story') {
+        $widget = 'home_page_feature_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 'home_page_feature_widget');
+        $weight_data = itg_story_widget_max_value('home_page_feature_widget');
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+                  'nid' => $nid,
+                  'cat_id' => 0,
+                  'content_type' => $content_type,
+                  'widget' => $widget,
+                  'weight' => --$weight_data,
+                  'state' => 0,
+                ])->execute();
+          }
+          catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+      // for feature story
+      if ($widget_val == 'dont_miss') {
+        $widget = 'dont_miss_content_widget';
+        $result_exist = itg_story_widget_data_exist($nid, 'dont_miss_content_widget');
+        $weight_data = itg_story_widget_max_value('dont_miss_content_widget');
+        if (empty($result_exist)) {
+          try {
+            $inserted_data = db_insert('itg_widget_order')->fields([
+              'nid' => $nid,
+              'cat_id' => 0,
+              'content_type' => $content_type,
+              'widget' => $widget,
+              'weight' => --$weight_data,
+              'state' => 0,
+            ])->execute();
+          }
+          catch (PDOException $e) {
+            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
+          }
+        }
+      }
+    }
+    foreach ($previous_story_assign as $row) {
+      if ($row['value'] != $result[$row['value']]) {
+        if ($row['value'] == 'top_stories') {
+          $widget_value = 'top_stories_widget';
+        }
+        elseif ($row['value'] == 'featured_story') {
+          $widget_value = 'home_page_feature_widget';
+        }
+        elseif ($row['value'] == 'big_story') {
+          $widget_value = 'big_story_format_widget';
+        }
+
+        try {
+          db_delete('itg_widget_order')
+              ->condition('widget', $widget_value)
+              ->condition('nid', $nid)
+              ->execute();
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
     }
   }
+}
+
+/**
+ * check story widget data exist
+ * @param int $nid
+ * @param int $cat_id
+ * @param string $widget_type
+ * @return mixed
+ */
+function itg_story_widget_data_exist($nid, $widget_type) {
+  $query = db_select('itg_widget_order', 'w');
+  $query->fields('w', array('nid'));
+  $query->condition('nid', $nid, '=');
+  $query->condition('widget', $widget_type, '=');
+  $result = $query->execute()->fetchAssoc();
+  return $result;
+}
+
+/**
+ * get min value from widget
+ * @param string $widget_type
+ * @return int
+ */
+function itg_story_widget_max_value($widget_type) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MIN(weight)');
+  $max_query->condition('widget', $widget_type);
+  $max_result = $max_query->execute()->fetchField();
+  return isset($max_result) ? $max_result : 1;
 }
 
 /**
@@ -338,8 +557,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
 
 
 
-  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
-  ) {
+  if ($form['#id'] == 'views-exposed-form-strory-menegment-page-10' || $form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-4') {
     if (arg(0) != 'ugc-published-story') {
       $form['title']['#autocomplete_path'] = 'content-workbench-title-list/story/' . arg(0) . '/autocomplete';
     }
@@ -404,7 +622,9 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
   // Code for redirection url validation
   if ($node->type == 'story') {
-
+    // code to copy long headline to short headline
+    $form_state['values']['field_story_short_headline'][LANGUAGE_NONE][0]['value'] = $form_state['input']['field_story_short_headline'][LANGUAGE_NONE][0]['value'];
+    // end here
     $issue_based = $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'];
     $magazine_kicker = $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0]['value'];
     $magazine = $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];
@@ -425,6 +645,10 @@ function itg_story_node_validate($node, $form, &$form_state) {
     }
     if (!empty($redirection_url) && filter_var($redirection_url, FILTER_VALIDATE_URL) === FALSE) {
       form_set_error('field_story_redirection_url_titl', t("$redirection_url is not a valid URL"));
+    }
+    $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
+    if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
+      form_set_error('field_story_external_url', t("$external_url is not a valid URL"));
     }
 
     // code for check expiry date is greater then schedule date
@@ -465,6 +689,19 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
+
+  // apply button for editor and siteadmin role
+  if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
+      $form['actions']['itg_custom_apply_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Apply'),
+        '#id' => 'btn-apply',
+        '#submit' => array('node_form_submit', 'itg_story_form_custom_callback'),
+        '#weight' => -8,
+      );
+    }
+  }
 
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
@@ -834,6 +1071,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       if (in_array('lock_story', $config)) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
+      if ($external_url = _is_external_url_story_article($node->nid)) {
+		  drupal_goto($external_url);
+	  }
     }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -886,7 +1126,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     else {
       $node->content['story_title'] = $node->title;
     }
-    
+
     // code for amp page
     if ($view_mode == 'amp') {
       // emoji posititon
@@ -928,7 +1168,11 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
         $entity = entity_load('field_collection_item', array($val['value']));
         // store the actual image path
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
+        
+        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'] - 1;
+        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+        //$href_sample_img = image_style_url('photo_story_771x432', $sample_img_path);
         // store image title
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
@@ -937,7 +1181,7 @@ function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<img src="' . $sample_img . '"  alt=""/>';
+          $html .= '<a class="fancybox-thumb" rel="fancybox-thumb" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
@@ -1028,11 +1272,11 @@ function itg_story_photo_story_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">'.$getImageInfo[0]->image_photo_grapher.'</span></div>' . $previous_link;
-      $html .= '<div class="photo-description">'.$getImageInfo[0]->image_caption.'</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
+      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">' . $getImageInfo[0]->image_photo_grapher . '</span></div>' . $previous_link;
+      $html .= '<div class="photo-description">' . $getImageInfo[0]->image_caption . '</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
       $html .= '</div>';
     }
     $html .= '</div>';
@@ -1070,13 +1314,13 @@ function itg_story_photo_amp_html($node_id) {
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       if (function_exists('itg_story_get_image_info')) {
-      $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
+        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
       <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
@@ -1111,7 +1355,7 @@ function itg_story_photo_amp_bottom_html($node_id) {
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"></amp-img><span class="counter">'.$slide.'</span>
+       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
     </button>';
       $index++;
       $slide++;
@@ -1187,4 +1431,214 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
     $emoji_html .= '</span>';
     return $emoji_html;
   }
+}
+
+/**
+ * Function for admin setting for sponsor category.
+ */ 
+function _sponsor_category_setting() {
+  $form = array();
+  $form['sponsor_cat_tid'] = array(
+   '#type' => 'textfield',
+   '#title' => t('Sponsor Category TID'),
+   '#default_value' => variable_get('sponsor_cat_tid', 1208902),
+   '#size' => 10,
+   '#maxlength' => 10,
+   '#description' => t("Enter TID for Sponsor Category"),
+   '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+/**
+ * Function for check external url in story
+ * @return false or external url
+*/
+
+function _is_external_url_story_article($nid){
+	$is_external_url = FALSE;
+	if(isset($nid)){
+		if (db_table_exists('field_data_field_story_external_url')) {
+			$type_query = db_select('node', 'n');
+			$type_query->fields('n', array('type'));
+			$type_query->condition('n.nid', $nid, '=');
+			$node_type = $type_query->execute()->fetchField();
+			if ($node_type == 'story') {
+				$query = db_select('field_data_field_story_external_url', 'eu');
+				$query->fields('eu', array('field_story_external_url_value'));
+				$query->isNotNull('eu.field_story_external_url_value');
+				$query->condition('eu.entity_id', $nid, '=');
+				$query->condition('eu.bundle', 'story', '=');
+				$query->condition('eu.entity_type', 'node', '=');
+				$query_result = $query->execute()->fetchAll();
+				if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+					$is_external_url = trim($query_result[0]->field_story_external_url_value);
+				}
+			}
+		}		
+	}
+	return $is_external_url;
+}
+
+/**
+ * Function return tech photogallery html
+ * @param Array $tech_photo_arr
+ * @return string
+ */
+function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
+  $count = 0;	
+  $output = '';
+  $output .= '<div class="tech-photos">';
+  $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
+  $output .= '<span class="tech-photos-count">'.count($tech_gallery_images[LANGUAGE_NONE]).' Photos</span></div>';
+  foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
+	if($count == 3){
+		break;
+	}
+    $photo_img_alt = '';
+    $photo_img_title = '';
+    $gallery_entity = entity_load('field_collection_item', array($val['value']));
+    $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
+    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+    $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
+    $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
+    $output .= '<div class="tech-photo-item">';
+    $output .= '<a href="/'.$tech_gallery_alias.'" target="_blank">';
+    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    $output .= '</a>';
+    if($count == 2){
+	  $output .= '<div class="tech-photo-overlay">';
+	  $output .= '<a href="/'.$tech_gallery_alias.'" target="_blank" title="More"><span class="tech-photo-seemore"> +SEE MORE</span> </a>';
+	  $output .= '</div>';
+	}
+    $output .= '</div>';
+    $count++;
+  }
+  $output .= '</div>';
+  return $output;
+}
+
+function itg_story_sample_image_path($ori_fid){
+  $query = db_select('itg_original_image', 'ioi');
+  $query->fields('ioi', array('image_url'));
+  $query->condition('fid', $ori_fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+function itg_story_mega_review_node_embed($node){  
+  //$node = node_load($node_id);
+  // config for sharing
+  global $base_url; 
+  $nid = $node->nid;   
+  $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+  $short_url = shorten_url($actual_link, 'goo.gl');
+  $fb_title = addslashes($node->title);
+  $share_desc = '';
+  $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  
+  // get global comment config
+  /*if (function_exists('global_comment_last_record')) {      
+    $last_record = global_comment_last_record();
+    $config_name = trim($last_record[0]->config_name);
+  }*/
+    
+  // get facebook share count 
+  if (function_exists('itg_total_share_count')) {
+    $tot_count = itg_total_share_count($actual_link);
+  }
+  if(function_exists('itg_report_get_node_share')) {
+      $tot_count = itg_report_get_node_share($nid, $tot_count);
+  }
+  $cast_name = $node->field_mega_review_cast['und'][0]['entity']->title;
+  $director = $node->field_mega_review_director['und'][0]['value'];
+  $plot = $node->field_mega_review_movie_plot['und'][0]['value'];
+  $display = array('label' => 'hidden');
+  $theme_path = drupal_get_path('theme', 'itg');
+  $external_review = $internal_review = FALSE;
+  $average_ratings = 0;
+  $num_of_ratings = 0;
+  $node_alias = url(drupal_get_path_alias('node/' . $node->nid), array('absolute' => TRUE));
+  foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection){
+    $reviews = entity_load('field_collection_item', array($field_collection['value'])); 
+	  if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'internal'):
+	      $internal = render(field_view_field('field_collection_item', $reviews[$field_collection['value']], 'field_story_reporter', $display));
+		  $internal_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+		  $internal_review .= '<p>'.strip_tags($internal).'</p>';                      
+		  $internal_review .= '<span class="other-reviews-rating" data-star-value="'.$internal_rating.'%"></span>';		  
+	  endif;
+	  if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external'):
+	      $external = render(field_view_field('field_collection_item', $reviews[$field_collection['value']], 'field_story_reporter', $display));
+		  $external_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+		  $external_review .= '<p>'.strip_tags($external).'</p>';                      
+		  $external_review .= '<span class="other-reviews-rating" data-star-value="'.$external_rating.'%"></span>';  
+	  endif;
+	$average_ratings += $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'];
+	++$num_of_ratings; 
+  }
+  $average_rating = (float) $average_ratings / $num_of_ratings;  
+  $average_rating = round($average_rating, 1);
+  $average_rating = itg_common_round_rating($average_rating);
+  $average_rating = $average_rating * 20;
+  $output = '';  
+  $output .= '<article class="node node-mega-review-critic view-mode-full clearfix">';
+  $output .= '<script>if (typeof(jQuery) == "undefined") {';
+  $output .= 'var iframeBody = document.getElementsByTagName("body")[0];';
+  $output .= 'var jQuery = function (selector) { return parent.jQuery(selector, iframeBody); };';
+  $output .= 'var $ = jQuery;}';
+  $output .=  '</script>';
+  $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/styles-new.css" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/font-awesome.css" />';
+  $output .= '<script type="text/javascript" src="/'.drupal_get_path('module', 'itg_flag').'/js/itg_flag.js" ></script>';
+  $output .= '<div class="embed-mega-review">';
+  $output .= '<a href="'.$node_alias.'" target="_blank"><h1>'.$node->title.'</h1></a>';
+  $output .= '<div class="movie-description">';
+  $output .=  render(field_view_field('node', $node, 'field_story_movie_description', $display));
+  $output .= '</div>';
+  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating" data-star-value="'.$average_rating.'"></div><div class="social-info">';
+  $output .= '<span class="share-count"><i>';
+  if(!empty($tot_count)) {
+	$output .= $tot_count;
+  }
+  else{
+	$output .= 0;
+  }
+  $output .= '</i>SHARES</span>';
+  $output .= '<span><a title="share on google+" class="user-activity def-cur-pointer" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="google_share" onclick="return googleplusbtn(\''.$node_alias.'\')" data-status="1"><i class="fa fa-google-plus"></i></a></span>';
+  $output .= '<span><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop(\''.$actual_link.', '.$fb_title.', '.$share_desc.', '.$image.', '.$base_url.', '.$node->nid.'\')"><i class="fa fa-facebook"></i></a></span>';
+  $output .= '<span><a class="user-activity def-cur-pointer" rel="'.$node->nid.'" data-tag="'.$node->type.'" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup(\''.urlencode($node->title).', '.urlencode($short_url).'\')"><i class="fa fa-twitter"></i></a></span>';
+  $output .= '<span>';
+  /*if ($config_name == 'vukkul') {
+	$output .= '<a class= "def-cur-pointer" onclick ="scrollToAnchor("vuukle-emotevuukle_div");" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+  }
+  if ($config_name == 'other') {
+	$output .=  '<a class= "def-cur-pointer" onclick ="scrollToAnchor("other-comment");" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+  }*/
+  $output .= '</span>';
+  $output .= '</div></div>';
+  $output .= '<div class="movie-review-wrapper">';
+  $output .= '<div class="movie-trailer">'.render(field_view_field('node', $node, 'field_mega_review_youtube_url', $display)).'</div>';
+  $output .= '<div class="movie-review-text">';
+  //if (!empty($cast_name)):
+	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Cast :').'</dfn><span class="review-txt">'.render(field_view_field('node', $node, 'field_mega_review_cast', $display)).'</span></div>';
+  //endif;
+  if (!empty($director)):
+	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Director :').'</dfn><span class="review-txt">'.$director.'</span></div>';
+  endif;
+  if (!empty($plot)):
+	$output .=  '<div class="review-row"><dfn class="review-label">'.t('Plot :').'</dfn><span class="review-txt">'.$plot.'</span></div>';
+  endif;
+  $output .= '<div class="movie-reviewer our-review">';
+  $output .= '<h3>OUR REVIEWERS</h3>';
+  $output .= $internal_review;
+  $output .= '</div>';    
+  $output .= '<div class="movie-reviewer movie-reviewer-other">';
+  $output .= '<h3>OTHER REVIEWERS</h3>';
+  $output .= $external_review;
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</article>';
+  print $output;
 }

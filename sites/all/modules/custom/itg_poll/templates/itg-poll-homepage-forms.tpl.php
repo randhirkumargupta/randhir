@@ -35,6 +35,12 @@ $poll_uid = itg_poll_getcurrent_userpoll($nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
   if (isset($nid) && !empty($nid)) {
     $poll_form_home = drupal_get_form('itg_poll_form_home_page', $nid);
+    // Correct From Action if it is loaded under load more option.
+    $action = $poll_form_home['#action'];
+    $pos = strpos($action , 'gethomecarddata');
+    if($pos) {
+      $poll_form_home['#action'] = str_replace("gethomecarddata", " ", $poll_form_home['#action']);
+    }
     print '<div class="poll-data' . $no_image_class . '">' . $poll_banner_image . $title . '<div class="poll-replace-id ' . $poll_image_exist_class . '">' . drupal_render($poll_form_home) . '</div></div>';
   }
 }

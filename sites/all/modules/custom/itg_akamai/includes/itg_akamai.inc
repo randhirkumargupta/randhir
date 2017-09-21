@@ -20,7 +20,7 @@ class ItgAkamaiMain {
 
   // This method will return the TTL for Akamai section cart
   static function itgAkamaiGettingTTLforAkamaiSectionCart() {
-    return variable_get('akamai_timeout_section_card');
+    return variable_get('akamai_timeout_section_card_ttl');
   }
   
   // This method is for setting the data for ITG akamai

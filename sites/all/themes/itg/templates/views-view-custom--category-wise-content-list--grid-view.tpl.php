@@ -40,19 +40,20 @@ global $base_url;
             print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));
           }
           else {
-            print l(strip_tags(mb_strimwidth($row['title'], 0, 100, "..")), "node/" . $row['nid']);
+            print l(strip_tags(mb_strimwidth(__html_output_with_tags($row['title']), 0, 100, "..")), "node/" . $row['nid'], array("html" => TRUE));
+
           }
           ?>
         </h3>
         <?php if (strtolower($row['type']) == 'story'): ?>
-          <p><?php print strip_tags($row['field_story_kicker_text']); ?></p>
+          <p><?php print __html_output_with_tags($row['field_story_kicker_text']); ?></p>
         <?php elseif ($row['type'] == 'photogallery'): ?>
-          <p><?php print strip_tags($row['field_gallery_kicer']); ?></p>
+          <p><?php print __html_output_with_tags($row['field_gallery_kicer']); ?></p>
         <?php elseif ($row['type'] == 'photogallery'): ?>
-          <p><?php print strip_tags($row['field_story_expert_description']); ?></p>
+          <p><?php print __html_output_with_tags($row['field_story_expert_description']); ?></p>
         <?php endif; ?>
        <?php if (!empty($row['field_video_kicker'])) {
-        print '<p>' .mb_strimwidth(strip_tags($row['field_video_kicker']), 0, 70, "..")  . '</p>';
+        print '<p>' .mb_strimwidth(__html_output_with_tags($row['field_video_kicker']), 0, 70, "..")  . '</p>';
       }?>
 
       </div>

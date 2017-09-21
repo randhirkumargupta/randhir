@@ -20,7 +20,7 @@
             </figure>
             <span class="posted-on"><?php echo $row['created']; ?></span>
             <p  title="<?php print strip_tags($row['title']); ?>">
-              <?php echo l(mb_strimwidth(strip_tags($desc), 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>   </span>
+              <?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>   </span>
             </p>
           </div>         
         </li>

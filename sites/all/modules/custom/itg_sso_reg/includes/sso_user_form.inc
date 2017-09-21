@@ -352,13 +352,13 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 function itg_sso_reg_multistep_form_validate($form, &$form_state) {
   // First we set up a switch for each of our three steps
   if (empty($form_state['values']['mobile'])) {
-    $mobile = $form_state['values']['mail'];
+    $mobile = trim($form_state['values']['mail']);
   }
   else {
-    $mobile = $form_state['values']['mobile'];
+    $mobile = trim($form_state['values']['mobile']);
   }
 
-  $mail = $form_state['values']['mail'];
+  $mail = trim($form_state['values']['mail']);
   switch ($form_state['step']) {
 
     case "1":
@@ -407,7 +407,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         }
       }
       
-      if (empty($mail) && empty($form_state['values']['mobile'])) {
+      if (empty($mail) && empty(trim($form_state['values']['mobile']))) {
         $error['mail'] = t("Please Enter Email/Mobile.");
         form_set_error('mail', t(""));
       }
@@ -415,8 +415,8 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         $error['mail'] = t("");
       }
 
-      if (!empty($form_state['values']['mail'])) {
-        if (!filter_var($form_state['values']['mail'], FILTER_VALIDATE_EMAIL)) {
+      if (!empty(trim($form_state['values']['mail']))) {
+        if (!filter_var(trim($form_state['values']['mail']), FILTER_VALIDATE_EMAIL)) {
           $error['mail'] = t("Please enter valid email address.");
           form_set_error('mail', t(''));
         }
@@ -433,7 +433,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         }
       }
 
-      $u_mobile = $form_state['values']['mobile'];
+      $u_mobile = trim($form_state['values']['mobile']);
       if (!empty($u_mobile)) {
         if (!preg_match('/^\d{10}$/', $u_mobile)) {
           $error['mobile'] = t("Enter valid Mobile Number.");
@@ -452,8 +452,8 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
 
 
-      $pass = $form_state['values']['password'];
-      $cpass = $form_state['values']['password_again'];
+      $pass = trim($form_state['values']['password']);
+      $cpass = trim($form_state['values']['password_again']);
       
       $min_length = 3;
       $max_length = 10;

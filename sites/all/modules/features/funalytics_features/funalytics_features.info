@@ -1,7 +1,7 @@
 name = Funalytics features
 core = 7.x
 package = Features
-version = 7.x-1.0-beta2
+version = 7.x-1.0-beta3
 dependencies[] = features
 dependencies[] = flexslider_views
 dependencies[] = metatag
@@ -32,6 +32,7 @@ features[variable][] = menu_parent_itg_funalytics
 features[variable][] = node_options_itg_funalytics
 features[variable][] = node_preview_itg_funalytics
 features[variable][] = node_submitted_itg_funalytics
+features[variable][] = pathauto_node_itg_funalytics_pattern
 features[views_view][] = front_funalytics_list
 features[views_view][] = funalytics_list
 features_exclude[dependencies][ctools] = ctools

@@ -11,6 +11,7 @@
 <div id="BreakingNewsBasicDetails">
   <h2 class="breaking-title">Basic Details</h2>
   <?php print drupal_render($form['field_type']); ?>
+  <?php print drupal_render($form['field_match_id']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
   <?php print drupal_render($form['field_constituancy']); ?>
@@ -34,6 +35,7 @@
   <?php print drupal_render($form['field_section']); ?>
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
+<?php print drupal_render($form['field_breaking_coverage_end_time']); ?>
 
 <div id="BrowseMedia" class='browse-media-file'>
   <h2 class="story-title">Browse Media</h2>

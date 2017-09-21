@@ -7,9 +7,10 @@
 function itg_event_render_form_block() {
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg-event-speaker-order.js', array('type' => 'file', 'scope' => 'footer'));
   $table = '<table class="views-table">';
+  $table .= '<tr><td colspan="2"><h2>'.t('Configure past speakers').'</h2></td></tr>';
   $table .= '<tr>
-    <th>Past Speakers List</th>
-    <th>Speakers Order</th> 
+    <th>'.t('Speakers List').'</th>
+    <th>'.t('Speakers Order').'</th> 
   </tr>';
   $table .= '<tr>';
   $table .= '<td>';
@@ -50,7 +51,9 @@ function itg_event_past_speakers($form, &$form_state) {
     );
 
     $speakers = array_unique($speakers);
-
+    
+    $form['widget_data']['#prefix'] = '<div class="spekers-list">';
+    $form['widget_data']['#suffix'] = '</div>';
     foreach ($speakers as $key => $value) {
       $form['widget_data'][$key]['speaker_id'] = array(
         '#type' => 'checkboxes',

@@ -2591,8 +2591,14 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Title';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  /* Field: Photo Gallery Title: Photo Gallery Title */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'itg_photogallery';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['label'] = 'Title';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -4740,7 +4746,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Field: Photo By */
+  /* Field: Content: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4852,7 +4858,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Field: Photo By */
+  /* Field: Content: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4875,6 +4881,23 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_small_image']['settings'] = array(
     'image_style' => 'image88x66scale',
     'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'photogallery' => 'photogallery',
+  );
+  /* Filter criterion: Field collection item: Enable (field_photo_enable) */
+  $handler->display->display_options['filters']['field_photo_enable_value']['id'] = 'field_photo_enable_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['table'] = 'field_data_field_photo_enable';
+  $handler->display->display_options['filters']['field_photo_enable_value']['field'] = 'field_photo_enable_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['filters']['field_photo_enable_value']['value'] = array(
+    1 => '1',
   );
 
   /* Display: photogallery story block */
@@ -4953,7 +4976,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Field: Photo By */
+  /* Field: Content: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';

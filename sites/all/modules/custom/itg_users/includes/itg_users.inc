@@ -27,18 +27,18 @@ function itg_users_cms_user_dashboard() {
   // Loyalty & Rewards not found
   $menu_link = array_diff($menu_link, $remove_menu_link);
    
-  
-  if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
-    $story_link = 'my-published-story';
-    $photo_link = 'my-published-photogallery';
-    $video_link = 'my-published-video';
-  } else {
+    if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
+      $story_link = 'my-published-story';
+      $photo_link = 'my-published-photogallery';
+      $video_link = 'my-published-video';
+    }
+    else {
       $story_link = 'published-story?field_story_syndication_value_op=all';
       $video_link = 'published-video?field_story_syndication_value_op=all';
       $photo_link = 'published-photogallery?field_story_syndication_value_op=all';
-  }
-  
-   $listed_menu_link_site_admin = array(
+    }
+    
+  $listed_menu_link_site_admin = array(
       $story_link => 'Story',
       $photo_link => 'Photogallery',
       $video_link => 'Videos',
@@ -53,6 +53,7 @@ function itg_users_cms_user_dashboard() {
       'manage-ads' => 'Ads',
       'manage-poll' => 'Poll',
       'manage-survey' => 'Survey',
+      'ask-an-expert' => 'Ask an expert',
       'manage-quiz' => 'Quiz',
       'manage-newsletter' => 'Newsletter',
       'manage-event-backend' => 'Events',
@@ -89,6 +90,38 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items']);
+
+     $data['user_link'] = $listed_menu_link_site_admin;
+     
+   } else if(in_array("UGC Moderator", $user->roles)) {
+      unset($listed_menu_link_site_admin['breaking-news'],
+            $listed_menu_link_site_admin['category-manager-listing'],
+            $listed_menu_link_site_admin['ask-an-expert'],
+            $listed_menu_link_site_admin['manage-newsletter-templates'],
+            $listed_menu_link_site_admin['manage-users'],
+            $listed_menu_link_site_admin['manage-magazines'],
+            $listed_menu_link_site_admin['manage-supplements'],
+            $listed_menu_link_site_admin['manage-issues'],
+            $listed_menu_link_site_admin['movie-review-draft-list'],
+            $listed_menu_link_site_admin['manage-ads'],
+            $listed_menu_link_site_admin['manage-poll'],
+            $listed_menu_link_site_admin['manage-survey'],
+            $listed_menu_link_site_admin['manage-quiz'],
+            $listed_menu_link_site_admin['manage-newsletter'],
+            $listed_menu_link_site_admin['manage-event-backend'],
+            $listed_menu_link_site_admin['menu-manager/second'],
+            $listed_menu_link_site_admin['live-tv-integration'],
+            $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
+            $listed_menu_link_site_admin['mydraft-blogs'],
+            $listed_menu_link_site_admin['report/filed-content'],
+            $listed_menu_link_site_admin['my-published-story'],
+            $listed_menu_link_site_admin['my-published-photogallery'],
+            $listed_menu_link_site_admin['my-published-video'],
+            $listed_menu_link_site_admin['published-story?field_story_syndication_value_op=all'],
+            $listed_menu_link_site_admin['published-video?field_story_syndication_value_op=all'],
+            $listed_menu_link_site_admin['published-photogallery?field_story_syndication_value_op=all']
+          );
 
      $data['user_link'] = $listed_menu_link_site_admin;
      

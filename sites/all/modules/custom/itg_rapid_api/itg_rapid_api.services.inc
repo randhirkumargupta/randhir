@@ -1922,6 +1922,39 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        // Sprint 4 Read Later
+        'follow_author' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow Author and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'follow_author_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'author_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         //sprint 4 anchor detail
         'anchor_detail' => array(
             'operations' => array(
@@ -4290,6 +4323,56 @@ function author_detail($token, $author_id) {
     }
 
     $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/*
+ * Set bookmark stories for a specific user_id and return all
+ *
+ */
+function follow_author_responce($token, $user_id, $node_id) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id) && $author_id != '' && $type != '') {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array('news' => array());
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array('news' => array());
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array('news' => array());
+    }
+
+    // check args
+    if ($args != '0') {
+        $jsondata = follow_author_data_responce($user_id, $author_id,$type);
+    } else {
+        $jsondata = $message_array;
+    }
+
     return $jsondata;
 }
 

@@ -384,7 +384,7 @@ function mega_review_critic_features_field_default_field_bases() {
   // Exported field_base: 'field_story_associate_video'.
   $field_bases['field_story_associate_video'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_associate_video',

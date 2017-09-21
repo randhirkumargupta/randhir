@@ -169,6 +169,24 @@ function itg_common_mongo_activity_count($nid, $collection) {
 }
 
 /**
+ * Get share count value by passing nid.
+ * @param int $nid
+ * @param string $activity
+ * @param string $collection
+ */
+function itg_common_mongo_share_count($nid, $activity, $collection) {
+  if (function_exists('mongodb') && !empty($nid)) {
+    $con = mongodb();
+    $people = $con->$collection;
+    $cond = array('nid' => $nid, 'activity' => $activity);
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+}
+
+/**
  * Implements itg_common_mongo_activity_user_count().
  * @param int $uid
  * @param string $collection

@@ -17,19 +17,25 @@ function itg_sitemap_chunks_get_rss_of_video_with_order_category() {
     $section_tid = $arg[1];
     if ((int) $section_tid != 0) {
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'videogallery');
-      if (!is_null($xml)) {
+      if (!empty($xml)) {
         header('Content-Type: text/xml');
-        echo trim($xml);
+        $dom = new DOMDocument;
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($xml);
+        echo $dom->saveXML();
         drupal_exit();
       } else {
-        return drupal_not_found();
+        header('Content-Type: text/xml');
+        echo __not_found_xml();
       }
     } else {
-      return drupal_not_found();
+        header('Content-Type: text/xml');
+        echo __not_found_xml();
     }
   } else {
     header('Content-Type: text/xml');
-    echo itg_sitemap_chunks_get_rss_of_video_with_order();
+    itg_sitemap_chunks_get_rss_of_video_with_order();
     drupal_exit();
   }
 }
@@ -46,9 +52,13 @@ function itg_sitemap_chunks_get_rss_of_video_with_order() {
   if (!empty($video_tid) && !is_null($video_tid) && (int) $video_tid) {
     $xml = itg_sitemap_chunks_common_rss($video_tid, 'videogallery');
     if (!is_null($xml)) {
-      return trim($xml);
+      $dom = new DOMDocument;
+      $dom->preserveWhiteSpace = false;
+      $dom->formatOutput = true;
+      $dom->loadXML($xml);
+      echo $dom->saveXML();
     } else {
-      return drupal_not_found();
+      return __not_found_xml();
     }
   } else {
     drupal_set_message(t('Setting is required for video category tid. <a href="@setting">Click Here</a>', array("html" => TRUE, "@setting" => $base_url . '/admin/config/search/itg-multiple-sitemap/general-setting')), "error");

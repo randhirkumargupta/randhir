@@ -315,9 +315,66 @@ function itg_loyalty_reward_dedicated_point($type) {
 }
 
 /**
+ * Implements get_loyality_type_by_name().
+ */
+function get_loyality_type_by_name($type) {
+  $type_data = '';
+  switch ($type) {
+    case 'Content Share':
+      $type_data = 'share';
+      break;
+    case 'Google Share':
+      $type_data = 'google_share';
+      break;
+    case 'Content Like':
+      $type_data = 'like';
+      break;
+    case 'Twitter Share':
+      $type_data = 'twitter_share';
+      break;
+    case 'Content Visit':
+      $type_data = 'visit';
+      break;
+    case 'Content Follow':
+      $type_data = 'follow';
+      break;
+    case 'Twitter Follow':
+      $type_data = 'twitter_follow';
+      break;
+    case 'Google Follow':
+      $type_data = 'google_follow';
+      break;
+    case 'Newsletter Subscription':
+      $type_data = 'ns';
+      break;
+    case 'UGC Contribution':
+      $type_data = 'ugc';
+      break;
+    case 'Online Registration for Any Events':
+      $type_data = 'ol-register';
+      break;
+    case 'Participation in Poll':
+      $type_data = 'poll';
+      break;
+    case 'Participation in Campaign':
+      $type_data = 'campaign';
+      break;
+    case 'Participation in Survey':
+      $type_data = 'survey';
+      break;
+    case 'Refer a Friend':
+      $type_data = 'raf';
+      break;
+    case 'Facebook Follow':
+      $type_data = 'fb_follow';
+  }
+  return itg_loyalty_reward_dedicated_point(check_plain($type_data));
+}
+
+/**
  * Implements callback function for point notification.
  */
-function itg_loyalty_reward_points_expire_notification_callback() {
+/*function itg_loyalty_reward_points_expire_notification_callback() {
   $itg_result = array();
   try {
     $itg_query = db_select('itg_lrp_pointer_key', 'pk');
@@ -340,6 +397,39 @@ function itg_loyalty_reward_points_expire_notification_callback() {
       $data['name'] = $value->name;
       $data['expiry_date'] = $value->expiry_date;      
       // for mail code
+      itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+    }
+  }
+}*/
+
+/**
+ * Implements callback function for point notification.
+ */
+function itg_loyalty_reward_points_expire_notification_callback() {
+  $itg_result = array();
+  try {
+    $itg_query = db_select('itg_global_loyality_point', 'pk');
+    $itg_query->distinct('pk.sso_id');
+    $itg_query->join('users', 'u', 'pk.sso_id=u.uid');    
+    $itg_query->fields('u', array('mail', 'name'));
+    $itg_query->fields('pk', array('remaining_points'));
+    $itg_query->fields('pk', array('expiry_date', 'status'));
+    $itg_query->condition('pk.status', 1);
+    $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
+    $itg_query->havingCondition('date_diff_real', 1);
+    $itg_result = $itg_query->execute()->fetchAll();
+  } catch (Exception $ex) {
+    watchdog('Point Expiry Notification', $ex->getMessage());
+  }
+  // Send mail if got some user on result.  
+  $erros = array_filter($itg_result);
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $value) {
+      $data['remaining_point'] = $value->remaining_points;
+      $data['name'] = $value->name;
+      $data['expiry_date'] = $value->expiry_date;      
+      // for mail code
+      watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
       itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }
   }

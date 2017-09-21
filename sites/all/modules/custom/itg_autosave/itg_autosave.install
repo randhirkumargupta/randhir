@@ -91,9 +91,24 @@ function itg_autosave_schema() {
         'serialize' => TRUE,
         'description' => 'Serialized data containing the field collection ids.',
       ),
+      'lock_status' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'Whether the node is unlock(1) or lock(0).',
+      ),
     ),
     'primary key' => array('id'),
   );
 
   return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_autosave_uninstall() {
+    drupal_uninstall_schema('itg_autosave_node_data');
+    drupal_uninstall_schema('itg_autosave_forms');
 }

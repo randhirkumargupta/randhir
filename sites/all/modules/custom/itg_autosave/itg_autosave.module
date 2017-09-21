@@ -70,6 +70,14 @@ function itg_autosave_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_autosave.admin.inc',
   );
+  // Unlock lock content.
+  $items['itg-autosave/unlock_content/%'] = array(
+    'page callback' => 'reset_autosave_lock',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_autosave.admin.inc',
+  );
 
   return $items;
 }
@@ -102,6 +110,28 @@ function itg_autosave_form_alter(&$form, &$form_state, $form_id) {
   $form_ids = $itg_autosave_form->itg_save_get_form_ids();  
   // match form_id with saved id for autosave.
   if (in_array($form_id, $form_ids)) {
+	// Lock story if already open in Edit mode
+	  if($form['nid']['#value'] != null){
+		  $destination = 'mydraft-story';
+		  $l_query = array();
+		  if(isset($_GET['destination'])){
+			  $destination = $_GET['destination'];
+		  }
+		  if(isset($_GET['content_lock_token'])){
+			  $l_query['content_lock_token'] = $_GET['content_lock_token'];
+		  }
+		  $l_query['redirectTo'] = $destination;
+		  $lock_status = $itg_autosave_form->itg_autosave_get_lock_status_node_id($form['nid']['#value']);
+		  if($lock_status->lock_status == 0 && $form['#node']->status == 0){
+			  $msg = "You have already open the content add page, Please close the content add tab and ".l(t('Click here'), 'itg-autosave/unlock_content/'.$form['nid']['#value'], array('query' => $l_query)). " to unlock the content edit page (In this case, Autosave feature will be disable from content add page).";
+			  drupal_set_message($msg, 'error');
+			  if(isset($_GET['destination'])){
+				  drupal_goto($_GET['destination']);
+				}else{
+					drupal_goto('mydraft-story');
+				}
+		  }
+	  }  
     $flag = FALSE;
     if ($form['nid']['#value'] == NULL) {
       $form['#node']->status = 0;

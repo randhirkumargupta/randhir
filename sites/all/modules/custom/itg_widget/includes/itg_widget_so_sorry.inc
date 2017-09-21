@@ -54,6 +54,6 @@ function save_so_sorry_widget_data($so_sorry_selected_content) {
         itg_widget_insert_widget_data($node, $widget_name, 0);
       }
     }
-    drupal_set_message(t("Nodes has been saved"));
+    itg_widget_delete_old_data_by_limit($widget_name);
   }
 }

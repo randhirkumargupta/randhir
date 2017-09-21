@@ -10,6 +10,26 @@
 function feature_for_akamai_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access block refresh content'.
+  $permissions['access block refresh content'] = array(
+    'name' => 'access block refresh content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'itg_akamai_block_refresh',
+  );
+
+  // Exported permission: 'administer blocks'.
+  $permissions['administer blocks'] = array(
+    'name' => 'administer blocks',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'block',
+  );
+
   // Exported permission: 'administer itg akamai'.
   $permissions['administer itg akamai'] = array(
     'name' => 'administer itg akamai',

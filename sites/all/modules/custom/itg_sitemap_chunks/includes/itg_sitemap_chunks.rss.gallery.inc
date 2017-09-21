@@ -15,13 +15,20 @@ function itg_sitemap_chunks_get_rss_of_photo_with_order_category() {
       $xml = itg_sitemap_chunks_common_rss($section_tid, 'photogallery');
       if (!is_null($xml)) {
         header('Content-Type: text/xml');
-        echo trim($xml);
+        $dom = new DOMDocument;
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($xml);
+        echo $dom->saveXML();
+        //echo trim($xml);
         drupal_exit();
       } else {
-        return drupal_not_found();
+        header('Content-Type: text/xml');
+        echo __not_found_xml();
       }
     } else {
-      return drupal_not_found();
+      header('Content-Type: text/xml');
+      echo __not_found_xml();
     }
   } else {
     // If section is not given then photosection will be used.
@@ -43,7 +50,11 @@ function itg_sitemap_chunks_get_rss_of_photo_with_order() {
     $xml = itg_sitemap_chunks_common_rss($photo_tid, 'photogallery');
     if (!is_null($xml)) {
       header('Content-Type: text/xml');
-      echo trim($xml);
+      $dom = new DOMDocument;
+      $dom->preserveWhiteSpace = false;
+      $dom->formatOutput = true;
+      $dom->loadXML($xml);
+      echo $dom->saveXML();
       drupal_exit();
     } else {
       return drupal_not_found();

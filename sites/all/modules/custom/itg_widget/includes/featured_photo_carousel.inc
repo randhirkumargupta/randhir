@@ -53,10 +53,12 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
     foreach ($result as $key => $data) {
         $data['entity_id'] = $data['nid'];
         $node = node_load($data['entity_id']);
+        $gallery_image = $node->field_gallery_image[$node->language];
+        $image_count = itg_photo_image_count($gallery_image);
         $file_uri = file_create_url($node->field_story_extra_large_image[$node->language][0]['uri']);
         //  $data_render[$data['entity_id']]['file_url'] = theme('image_style', array('style_name' => $style, 'path' => $node->field_story_extra_large_image[$node->language][0]['uri']));
         $data_render[$data['entity_id']]['file_url'] = $file_uri;
-        $data_render[$data['entity_id']]['count'] = count($node->field_gallery_image[$node->language]);
+        $data_render[$data['entity_id']]['count'] = $image_count;
         $data_render[$data['entity_id']]['caption'] = $node->field_story_extra_large_image[$node->language][0]['title'];
         $data_render[$data['entity_id']]['node_url'] = $base_url . '/' . drupal_get_path_alias('node/' . $data['entity_id']);
         $data_render[$data['entity_id']]['title'] = $node->title;
@@ -68,4 +70,23 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
         $data_render[$data['entity_id']]['cat'] = isset($section_cat_id) ? $section_cat_id :0;
     }
     return $data_render;
+}
+
+/**
+ * photo image count by photo enable filed.
+ * @param array $gallery_image
+ * @return string
+ */
+function itg_photo_image_count($gallery_image) {
+  if($gallery_image) {
+    $query = db_select('field_data_field_photo_enable', p)
+      ->fields(p, array('entity_id'));
+    $query->condition('p.entity_id', $gallery_image, 'IN');
+    // Add the COUNT expression
+    $query->addExpression('COUNT(p.entity_id)' , 'entity_count');
+    $result = $query->execute()->fetchAll();
+    return $result[0]->entity_count;
+  } else {
+    return '';
+  }
 }

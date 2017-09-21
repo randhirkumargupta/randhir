@@ -1,3 +1,7 @@
+/*
+ * @file upload.js
+ * Contains all functionality related to upload 
+ */
 (function($) {
 
     Drupal.behaviors.itg_photogallery = {

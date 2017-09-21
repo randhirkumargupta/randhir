@@ -18,6 +18,29 @@ if($form['question_format']['#value'] == 'All questions at a time') {
 else {
   $form_class = 'survey-form-wrapper-one';
 }
+
+// code for sharing
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$uri = base64_encode($actual_link);
+$short_url = shorten_url($actual_link, 'goo.gl');
+$fb_title = addslashes($node->title);
+$share_desc = '';
+$image = '';
+$nid = $node->nid;
+$fb_count = $google_count = $twitter_count = 0;
+
+// get fb count
+if(function_exists('itg_facebook_share_count')) {
+$fb_count = itg_facebook_share_count($actual_link);
+}
+// get google count
+if(function_exists('itg_google_share_count')) {
+$google_count = itg_google_share_count($actual_link);
+}
+// get twitter count 
+if(function_exists('itg_common_mongo_share_count')) {
+$twitter_count = itg_common_mongo_share_count($node->nid, 'twitter_share', 'front_user_activity');
+}
 ?>
 <div class="survey-form-main-container" style="margin: 10px 0px 10px 0px;">
   <h1 class="survey-title"><?php echo 'Survey: '.$node->title; ?></h1>
@@ -56,21 +79,21 @@ else {
     </div>
     <div class="social-info">
       <span>
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+        <a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <dfn><?php print $fb_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+        <a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <dfn><?php print $twitter_count; ?></dfn>
       </span>
       <span>
-        <i class="fa fa-google-plus" aria-hidden="true"></i>
-        <dfn>1522</dfn>
+        <a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        <dfn><?php print $google_count;?></dfn>
       </span>
-      <span>
+      <!--<span>
         <i class="fa fa-comment" aria-hidden="true"></i>
         <dfn>1522</dfn>
-      </span>
+      </span>-->
       
     </div>
   </div>

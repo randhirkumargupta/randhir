@@ -11,7 +11,7 @@
         $(this).ajaxSuccess(function() {
           if (quizTaken == 'no') {
             $('.question-container').hide();
-            $('.answer-container-actual').empty();
+            //$('.answer-container-actual').empty();
             $(this).parents('.question-container').next().show();
           }
         });

@@ -20,6 +20,7 @@
         <?php $sr = 1; foreach($form['widget_data'] as $key=>$form_data) : ?>
         	<?php if(is_numeric($key)) : ?>
         		<?php $row_data = _get_section_wise_widget_node_data($form_data['nid']['#value']); ?>
+            <?php if(!empty($row_data['title']) && !empty($row_data['nid'])): ?>
         		<tr>
         		<td><?php echo $sr++; ?></td>
         		<td><?php echo l($row_data['title'] , "node/".$row_data['nid'] , array("attributes" => array("target" => "_blank"))) ?></td>
@@ -37,6 +38,7 @@
 		        <input name="widget_data[<?php echo $key ?>][cat_id]" value="<?php echo $form_data['cat_id']['#value'] ?>" type="hidden">
 		        </td>
 		        </tr>
+            <?php endif; ?>
     		<?php endif; ?>
     	<?php endforeach; ?>
             </tbody>

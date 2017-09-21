@@ -70,6 +70,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
 
 
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->leftJoin('field_data_field_photo_see_pic_link', 'spl', 'spl.entity_id=n.nid');
     //join  for field value
 
     if ($widget_style == 'sport-column' || $widget_style == 'budget-decoded' || $widget_style == 'auto-road-trip' || $widget_style == 'in-depth' || $widget_style == 'movies-celebrities' || $widget_style == 'movies-lifestyle' || $widget_style == 'oscar-features' || $widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' || $widget_style == 'budget-reactions' || $widget_style == 'election-other-story' || $widget_style == 'home-shows' || $widget_style == 'budget-decoded') {
@@ -129,6 +130,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('sh', array('field_story_short_headline_value'));
     $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('spl', array('field_photo_see_pic_link_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
     //end
     $query->fields('iwo', array('nid', 'weight'))

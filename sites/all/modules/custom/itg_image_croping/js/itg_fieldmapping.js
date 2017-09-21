@@ -307,6 +307,15 @@
 
     })
     var form_value = jQuery('#image_teg_form').serialize();
+     // Add code to get the caption 
+    var all_form_value = jQuery('#image_teg_form').serializeArray();
+    var image_result = { };
+    jQuery.each(all_form_value, function() {
+        image_result[this.name] = this.value;
+    });
+    //console.log(image_result['caption[]']);
+    var caption_value = image_result['caption[]'];
+   // end of the code        
     if (flg == 0) {
       showloader();
       jQuery.ajax({
@@ -334,11 +343,14 @@
             } else {
               synd_class = "data-syndication='no'";
             }
+            // Add code to get the caption 
+
+            // end of the code  
             var imagename = jQuery('#imcurl').val();
-            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt="" />';
+            var getimagename = '<img ' + synd_class + ' src="' + imagename + '"  alt= ""/><div class="body_caption">'+caption_value+'</div>';
             parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
 
-            parent.jQuery.colorbox.close();
+            parent.jQuery.colorbox.close(); 
           } else {
             jQuery('.imagefid').each(function() {
               var getvalue = jQuery(this).val();

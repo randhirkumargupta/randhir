@@ -40,10 +40,12 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   }
   // email setting
   if (strpos($user_detail->mail, 'nowhere.com') !== false) {
+    $email_required = FALSE;
     $email = '';
   }
   else {
     $email = $user_detail->mail;
+    $email_required = TRUE;
   }
   
   $form['fname'] = array(
@@ -66,7 +68,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#title' => t('Email'),
     '#type' => 'textfield',
     '#maxlength' => 255,
-    '#required' => TRUE,
+    '#required' => $email_required,
     '#attributes' => array(
       'placeholder' => 'E.g., abc@example.com',
       'readonly' => TRUE,
@@ -265,6 +267,18 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#value' => t('Save'),
   );
 
+  $form['user_state']['#states'] = array(
+      'visible' => array(
+        ':input[name="country"]' => array('!value' => '_none'),
+      ),
+    );
+  
+  $form['user_city']['#states'] = array(
+      'visible' => array(
+        ':input[name="user_state"]' => array('!value' => '_none'),
+      ),
+    );
+  
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js',
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
@@ -375,6 +389,9 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
  */
 function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   global $user;
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
   $inputs = $form_state['values'];
   $user_detail = user_load($user->uid);
   // Update First Name.
@@ -458,7 +475,8 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     $flag = TRUE;
     if ($value != '0') {
       $data[]['value'] = $value;
-      itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
+      //itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
+      itg_global_loyality_send_data($user->uid, 'Newsletter_subscription', 0, $value, $sso_id);
     }
   }
   if ($flag) {

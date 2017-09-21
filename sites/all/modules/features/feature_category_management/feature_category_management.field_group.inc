@@ -29,7 +29,11 @@ function feature_category_management_field_group_info() {
       3 => 'field_cm_no_follow',
       4 => 'field_cm_redirection_url',
       5 => 'field_sponser_logo',
-      6 => 'name',
+      6 => 'field_is_sponsor',
+      7 => 'field_powered_by_text',
+      8 => 'field_impact_text',
+      9 => 'field_show_fields',
+      10 => 'name',
     ),
     'format_type' => 'div',
     'format_settings' => array(

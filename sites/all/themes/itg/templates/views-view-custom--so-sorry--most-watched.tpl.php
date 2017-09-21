@@ -20,7 +20,7 @@ global $base_url;
 </figure>
           <span class="posted-on"><?php print date ('D, d M, Y',  strtotime($value['created'])) ?></span>
           <p  title="<?php print strip_tags($value['title']) ; ?>"> 
-            <?php print l($value['title'], $base_url . '/' . "sosorry/" . $value['nid'] . "") ?>
+            <?php print l($value['title'], $base_url . '/' . "sosorry/" . $value['nid'] . "" , array('html' => TRUE)) ?>
           </p>
         </div>
         </li>

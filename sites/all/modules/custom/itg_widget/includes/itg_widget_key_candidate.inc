@@ -29,7 +29,7 @@ function save_key_candidate_data($auto_review_content) {
           itg_widget_insert_widget_data($node , $widget_name , $cat_id , NULL , $val);
         }
       }
-      drupal_set_message(t("Nodes has been saved"));
+      //drupal_set_message(t("Nodes has been saved"));
     }
   }
 }

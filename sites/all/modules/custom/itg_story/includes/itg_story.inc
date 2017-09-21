@@ -100,11 +100,12 @@ function itg_story_get_workbench_title($title) {
           $query->condition('n.uid', $user->uid);
         }
         
-        if ($state =='expired-story' || $state =='my-expired-story') {
+        if ($state =='expired-story' || $state =='my-expired-story' || $state =='expired-video') {
           $query->condition('expiry.field_story_expiry_date_value', $current_time, '<');        
         } else {
           $query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));
         }
+        
         
         if ($state == 'archive-story') {
          $query->condition('archive.field_story_archive_value', 'Yes'); 

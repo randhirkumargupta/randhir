@@ -147,12 +147,15 @@ function itg_quiz_theme() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'quiz_node_form') {
-      
+      unset($form['actions']['preview']);
+      unset($form['field_survey_category']);//hide section
       // Set Destination
       $destination = 'manage-quiz';
-     
+    drupal_add_js("jQuery(document).ready(function(){ 
+                    jQuery('#tab-quiz-publish-unpublish').hide();
+                 });", 'inline');
       // Form fields treatment
-      $form['title']['#title'] = 'Quiz Title';
+      $form['title']['#title'] = t('Quiz Title');
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
       $form['actions']['submit']['#value'] = t('Publish');
       $form['actions']['cancel'] = array(
@@ -215,7 +218,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
     }
     else {
-      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been submitted for further review and approval.'));
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been updated.'));
     }
   }
 }
@@ -941,11 +944,13 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       }
       
       // Call loyalty & rewards function to save points for a user
-      if(function_exists('itg_loyalty_reward_earnpoint')) {
-        if($user->uid) {
-          itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'campaign', $user->uid);
-        }
+      if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
       }
+      itg_global_loyality_send_data($user->uid, 'campaign', $form_state['values']['nid'], '', $sso_id);
+      }
+     
   }
 }
 

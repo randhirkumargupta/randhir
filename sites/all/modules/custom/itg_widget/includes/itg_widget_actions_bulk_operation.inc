@@ -118,7 +118,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   elseif ( $current_display == 'special_how_made_it_widget_contents' ) {
 
     if ( empty($_GET['category_tid']) && $_GET['category_tid'] != 'All' ) {
-      drupal_set_message(t('Please select Section') , 'error');
+      drupal_set_message(t('Please select Section and filter First') , 'error');
       drupal_goto('special-how-made-it-widget-contents');
     }
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_special_how_i_made_it');
@@ -150,6 +150,10 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     save_issue_magazin_widget_data($form_state);
   }
   elseif ( $current_display == 'most_read_widget_contents' ) {
+    if ( empty($_GET['category_tid']) && $_GET['category_tid'] != 'All' ) {
+      drupal_set_message(t('Please select Section and filter First') , 'error');
+      drupal_goto('special-how-made-it-widget-contents');
+    }
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_most_read');
     save_most_read_widget_data($form_state);
   }

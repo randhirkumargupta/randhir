@@ -1,0 +1,528 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin:0; padding:0;}
+
+.clr{ clear:both}
+.flt{ float:left}
+.flr{ float:right}
+ 
+.cf:after, .cf:before {	content: "";display: table}
+.cf:after {	clear: both;}
+.clr{ clear:both;}
+
+a img{ border:0}
+a {text-decoration:none}
+
+body{margin:0; padding:0; font-family:roboto; background:#eeeeee url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/bg_img.gif)no-repeat center 40px ;}
+
+.strleft p{margin-bottom:20px;}
+
+#wrapper{ width:1001px; margin:0 auto; padding:10px 5px 10px 0px; overflow:hidden; background:#FFFFFF;}
+
+.itgd_links{background-color:#000000;color:#7a7a7a;font:bold 12px/15px roboto;margin:0;padding:0.3%;text-align:center;display:flex;}
+.redborder{border-top:1px solid #C7C7C7;}
+.itgd_links a{color:#7a7a7a;text-decoration:none;}
+.itgd_links a:hover{color:#FFF;text-decoration:none;}
+.itgd_links ul{margin:0 auto;padding:0;width:1003px;}
+.itgd_links ul li{float:left;padding:0 9px;list-style:none;}
+.itgd_links ul li.last{border-right:none;}
+
+.logo-section{ height:136px; background:#832F8D url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/indiaaul-headerbg.gif) repeat-x 0 0;}
+.l-section{ width:1000px; margin:0 auto;}
+.logo{ float:left; position:relative;}
+.logo h1{color: #ffffff;
+    font: 700 14px/26px "Roboto";
+    margin-left: 93px;
+    margin-top: 41px;} .logo h5{color: #ffffff;font: 300 14px/18px "Roboto";margin-left: 93px;margin-top: 5px;}
+	.logo h1 a{color:#fff;}
+.logo h1 span{font-weight:normal;} 
+
+.logo .iplbg{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/india-australia-2016/batsman-logo.png) no-repeat 0 0; width:267px; height:133px; float:left;}
+.indtodaylogo{position:absolute; top:4px; left:75px; z-index:999;}
+
+.add{ float:right; margin-top:23px;}
+
+.navigation{ background-color:#000000; height:28px;}
+.navipl{ width:1000px; margin:0 auto;}
+.nav-ipl{ float:left; width:1000px; margin-top:-4px; height:28px; position:relative;}
+.nav-ipl ul li{ list-style:none; float:left; /*line-height:25px;*/ line-height:34px; margin-right:7px }
+.nav-ipl ul li a {color:#FFFFFF;font: 14px roboto;padding: 9px 7px 2px;text-decoration: none;text-transform: uppercase;  line-height:25px;}
+
+.nav-ipl ul li a:before {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/trans-img.png); float:left; }
+.nav-ipl ul li a:after {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/trans-img.png); float:right;  }
+
+.nav-ipl ul li a:hover:before {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/ipl2015/nav-left.png); float:left; }
+.nav-ipl ul li a:hover:after {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/ipl2015/nav-right.png); float:right;  }
+
+.nav-ipl ul li a.active{background:#fce000 !important; color:#000000; margin-right:0px  }
+.nav-ipl ul li a.active:before {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/ipl2015/nav-left.png); float:left;  margin-right:0px }
+.nav-ipl ul li a.active:after {content:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/ipl2015/nav-right.png); float:right;  margin-right:0px }
+
+.nav-ipl ul li a:hover{ background:#82b1f7; color:#000000; margin-right:0px   }
+
+#slider-area { width:668px; position:relative; margin-bottom:80px;}
+.img-border { border:10px solid #f5f3f4; width:650px; height:404px; overflow:hidden   }
+.img-border ul { position:relative;}
+.img-border ul li { list-style:none; float:left; width:650px; height:440px;}
+.cap-area { width: 610px;background: #f5f3f4;padding: 10px;position: absolute;bottom: -30px !important;left: 20px;height: 100px;overflow: hidden;}
+.shed { left: 1px;margin-left: 20px;position: absolute;bottom: -57px;}
+.cap-area ul { position:relative; }
+.cap-area ul li { font: bold 23px/25px roboto; list-style:none; width:650px; height:105px; float:left }
+.cap-area ul li a { color:#000; text-decoration:none; width:610px; float:left;}
+.cap-area ul li a:hover { color:#77767b; text-decoration:underline;}
+.cap-area ul li p { font: 12px/18px arial; color:#77767b; }
+.thumb { position:absolute; right:25px; bottom:65px }
+.thumb ul { padding:0px; margin:0px;}
+.thumb ul li { line-height:none; padding:5px; width:3px; height:3px; list-style:none;  
+background: -webkit-linear-gradient(#666, #ccc); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#666, #ccc); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#666, #ccc); /* For Firefox 3.6 to 15 */
+background: linear-gradient(#666, #ccc); /* Standard syntax (must be last) */ border-radius:10px; float:left; margin-left:10px; cursor:pointer}
+.active { background:#000!Important}
+#left-side { float:left; width:670px; margin-left:5px;}
+#right-side  { float:right; width:300px; margin-right:5px;}
+
+/*RIGHT CHUNK*/
+.right-panel {width: 300px;}
+.right-add {width: 300px;margin-bottom: 25px;}
+.ipl-schedule {width: 300px;}
+.points-tally {	width: 300px;margin-top: 25px;}
+.points-tally a {color: black;text-decoration: none}
+.chunk-heading {width: 300px;}
+.chunk-heading span {float: right;font-weight: bold;font-size: 15px;}
+.points-border {width: 300px;	height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/points-border.jpg); float:left;}
+.ranking-border {width: 300px;height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/ranking-border.jpg); float:left;}
+.blast-border {width: 300px;height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/blast-border.jpg); float:left;}
+.polls-border {width: 300px;height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/polls-border.jpg); float:left}
+.points-content {width: 300px;background-color: #f2f2f2;margin-top: 15px;}
+.points-row {width: 300px;min-height: 24px;}
+.points-lead {color: #d5181e}
+.points-content select {border: 1px solid #cecece;width: 178px;height: 25px;margin-top: 5px;margin-left: 5px;margin-bottom: 5px;background: white url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/group-select.jpg) no-repeat 98% 50%;	appearance: none;-moz-appearance: none;-webkit-appearance: none;text-indent: 0.01px;text-overflow: '';}
+.points-content table td {padding-left: 5px;height: 24px; font-size:15px;}
+.points-content table th:first-child {text-align: left}
+.points-content table th {color: #d5181e;font-size: 15px;padding-left: 5px;}
+/*ranking players*/
+.points-content-ranking {	width: 300px;margin-top: 15px;padding-bottom: 5px;}
+.ranking-players-table{width:300px; background-color:#f2f2f2; padding-top:10px;}
+.points-content-ranking table{background-color: #f2f2f2; border-spacing:0px; border-collapse:collapse; }
+.points-content-ranking table tr{ padding-top:0px;}
+.points-content-ranking table th {color: #d5181e;font-size: 15px;padding-left: 5px;height: 25px;}
+.points-content-ranking table td {font-size: 13px; padding:1px;}
+.points-content-ranking table td span.player-name {font-size: 14px;font-weight: bold;padding-left: 5px; text-transform:uppercase}
+.points-content-ranking table td span {padding-left: 5px}
+.ranking-players-thums{width:300px;}
+.ranking-players-profile:first-child{margin-left:0;}
+.ranking-players-profile{width:98px; height:91px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/ipl2015/ranking-profile-bg.png) no-repeat bottom; float:left; margin-left:3px; margin-bottom:0; padding-bottom:0;}
+.ranking-players-profile-thumb{width:88px; height:66px; margin:0 auto;}
+.ranking-players-profile-rank{width:88px; height:25px; margin:0 auto;}
+.ranking-players-profile-rank h3{margin:0 auto; color:white; text-align:center; line-height:27px;}
+
+/*polls*/
+.points-content-polls {width: 300px;background-color: white;margin-top: 10px;padding-bottom: 5px;font-size: 15px;}
+.points-content-polls p {margin: 5px 0; line-height:17px; font-size:14px;}
+td.pol {background: #f2f2f2;height: 33px;padding: 0px 10px;border: 1px solid white;}
+.vote {	background: #0d4da5;color: white;border: none;padding: 5px 10px;font-size: 15px;text-transform: uppercase;margin-top: 10px;cursor: pointer}
+
+.blast-from-the-past {width: 300px; margin: 25px 0;}
+.blast-from-the-past-years{margin-top:15px; padding:5px 0; background-color:#f2f2f2; position:relative;}
+.blast-from-the-past-years ul{margin:0; padding:0}
+.blast-from-the-past-years ul li{float:left; list-style:none; margin:5px 0; background:black; padding:0 5px; border-radius:5px; margin-left:10px;}
+.blast-from-the-past-years ul li a{text-decoration:none; color:white;     font-size:14px}
+
+label {	cursor: pointer;}
+.year-content { background: none repeat scroll 0 0 #000000;color: #FFFFFF;float: left;padding: 10px;position: absolute;top: 35px;width: 280px;display:none; font-size:14px;}
+.close { background: none repeat scroll 0 0 #FFFFFF;border-radius: 5px; color: #000000;  cursor: pointer; float: right; font-weight: bold; margin-right: -5px; margin-top: -5px; padding: 0 5px;font-size:12px;} 
+.yearcor { padding-bottom:6px!Important}
+/*RIGHT CHUNK END*/
+
+
+/*NEWS CHUNK*/
+.news-chunk{width:670px; margin-bottom:25px}
+.news-chunk a{color: black;text-decoration: none ; font-size:14px;}
+.news-chunk-heading{width:670px;}
+.news-chunk-heading span {float: right;font-weight: bold;font-size: 15px;}
+.news-chunk-border {width: 670px;	height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/news-border.jpg); float:left}
+.news-content{width:670px;}
+.news-content ul{margin:0; padding:0; list-style:none}
+.news-content li{width:310px; height:66px; float:left; margin-top:13px; margin-right:15px; padding:5px;}
+.news-content li:hover{ background:#7eb0f9;}
+.news-content li:hover a{ color:#fff; font-weight:400;}
+.news-content li img{float:left; margin-right:10px;}
+/*NEWS CHUNK ENDS*/
+
+/*PHOTOS CHUNK*/
+.photos-chunk{width:670px; margin-bottom:25px;}
+.photos-chunk p{margin:0; padding:0 0 0 10px; font-size:14px; line-height:17px}
+.photos-chunk a{color: #FFFFFF;text-decoration: none}
+.photos-chunk-heading{width:670px;}
+.photos-chunk-heading span {float: right;font-weight: bold;font-size: 15px; margin-top:-20px;}
+.photos-chunk-border {width: 670px;	height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/photos-border.jpg)}
+
+.photos-slider{width:670px; height:214px; background-color:#000000; margin-top:10px; position:relative}
+.caption{color:white; font-size:12px; background:#292929; height:55px; padding:0 5px;}
+.belts { width:650px; height:205px; overflow:hidden; position:relative; left:10px; top:10px}
+.belts ul { position:relative; margin:0; padding:0;}
+.belts ul li { float:left; width:210px; list-style:none; margin-right:10px;  background:#292929; position:relative;}
+.back {background: #000 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/cosmo/left-arrow.png) 10px 10px no-repeat;width: 19px;height: 26px;float: left;position: absolute;top: 60px;left: 1px;z-index: 999;cursor: pointer;	padding: 10px;	opacity: 0.5}
+.next-ipl {	background: #000 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/cosmo/Rite-arrow.png) 10px 10px  no-repeat;	width: 19px;	height: 26px;	float: right;	cursor: pointer;	position: absolute;	top: 60px;	right: 10px;	z-index: 999;	opacity: 0.5;	padding: 10px;}
+.back:hover, .next:hover { opacity:1}
+.belts ul li a img{margin-bottom:7px;}
+
+/*PHOTOS CHUNK ENDS*/
+
+
+
+.left-row{width:670px; }
+
+/*KEY PLAYERS*/
+.key-heading {width: 324px;}
+.key-heading span {float: right;font-weight: bold;font-size: 15px;}
+.key-players{width:324px; float:left; margin-left:5px}
+.key-players select {border: 1px solid #cecece;width: 215px;height: 25px;margin-top: 5px;margin-left: 5px;margin-bottom: 5px;background: white url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/group-select.jpg) no-repeat 98% 50%;	appearance: none;-moz-appearance: none;-webkit-appearance: none;text-indent: 0.01px;text-overflow: ''; color:#000}
+.select-team{color:#000; margin-bottom:10px;}
+tr.players-heading th{ margin-bottom:10px; padding-bottom:6px;}
+.key-players a {color: black;text-decoration: none}
+.key-players table tr.select td{ background:white;}
+.key-players table tr th{font-size:14px; color:#de151f; background:white; font-weight:bolder}
+.key-players td{font-size:12px; padding:2px}
+.key-players td strong{font-size:12px;}
+.key-border {width: 324px;	height: 5px;background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/key-border.jpg); float:left;}
+/*KEY PLAYERS END*/
+
+/*VIDEOS CHUNK*/
+.video-heading {width: 670px;}
+.video-heading span {float: right;font-weight: bold;font-size: 15px;}
+.videos-border {width: 670px;	height: 5px;background:#d7d7d7 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/videos-border.jpg) no-repeat 0 0; float:left;}
+.vidoes-chunk{width:670px; float:right;}
+ul.thumblist{margin-top:-15px; padding:0; list-style:none; float:right;}
+ul.thumblist li{ float:left; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/slider-thumb.png) no-repeat; width:12px; height:12px; cursor:pointer; margin-left:10px;}
+ul.thumblist li.video_active{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/slider-thumb-active.png) no-repeat;}
+ul.thumblist li a{  width:12px; height:12px; padding:5px; color:transparent}
+.vieos-slider{width:670px; height:240px; background:#f2f2f2; margin-top:7px; position:relative}
+.vieos-slider ul{margin:0; padding:0;}
+.video-border { width:670px; height:228px; overflow:hidden; position:absolute;}
+.video-border ul { position:relative;}
+.video-border ul li { list-style:none; float:left; width:670px; color:white;}
+.video-border ul li > div > div{float:right;}
+.vrtl{float:right !important;}
+.video-slider-content{width:323px; height:226px; float:left;}
+.video-slider-content p{color:#000;  margin:0 auto; font-size:14px; padding:5px;}
+
+/*VIDEOS CHUNK END*/
+
+#footer{ width:1000px; margin:0 auto;}
+
+.player-list{width:670px;}
+.player-list ul{margin:0; padding:0; list-style:none}
+.player-list li {border-bottom: 2px dotted #C0C0C0;float: left;height: auto;margin-right: 15px;margin-top: 13px; margin-bottom:10px;padding-bottom: 20px;width: 670px;}
+.player-list li img{float:left; margin-right:10px;}
+.player-list li a h3{color:#000; text-transform:uppercase;}
+.player-list li a p{color:#646464;}
+
+.schedule{margin-top:25px;}
+.schedule tbody tr th{ text-align:center;text-transform:uppercase; color:#8d8d8d;}
+.schedule tbody tr td{ text-align:center; font-size:14px; padding:10px;}
+
+.venue{margin-top:25px;}
+.venue tbody tr th{ text-align:center;text-transform:uppercase; color:#8d8d8d;}
+.venue tbody tr td{ text-align:center; font-size:14px; padding:2px 8px 0px 8px ;}
+
+.footertag, footer {
+    background-color: #333333;
+    overflow: hidden;
+    width: 1003px;
+	margin:0 auto;
+}
+
+.navf { height:43px; float:left; padding-right:12px;}
+
+.navf ul {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.home {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.navf ul li {
+    float: left;
+    list-style: none outside none;
+    padding: 12px 0 !important;
+    text-transform: uppercase;
+}
+
+.navf ul li a {
+    padding: 12px 8px !important;
+	font-size:14px;
+	color:#fff
+}
+.navf ul li a:hover { background:#eb1c24; color:#fff}
+
+
+#footer1 {
+    background: none repeat scroll 0 0 #FFFFFF;
+    clear: both;
+    display: none;
+    padding: 0 5px;
+}
+
+.social_icon{ background-color:#fff; width:300px; height:67px; border-bottom:1px solid #000; margin-bottom:20px; margin-top:9px;}
+.social_icon h2 {font-family:roboto; #000;font-size: 16px;padding: 0px 5px 5px 5px; text-transform:uppercase; text-align:center;}
+.social_links{ margin:6px 0px 0px 20px; float:left;}
+
+.social_links .facebook {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll 0px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right: 8px;
+	}
+
+.social_links .twitter {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll -44px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right:8px;
+	}
+	
+.social_links .gmail {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll -88px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right:8px;
+	}
+
+.social_links .blog {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll -134px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right:8px;
+	}
+	
+.social_links .mail {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll -178px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right:8px;
+	}
+
+.social_links .phone {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/bt-mindrush/images/social_bt_icon.png") no-repeat scroll -224px -1px rgba(0, 0, 0, 0);
+    float: left;
+    height: 35px;
+    width: 36px;
+	margin-right:8px;
+	}
+
+.vidsorry {
+	position: absolute;
+	bottom: 10px;
+	right: 5px;
+	}
+	
+	
+.sp_bg {
+	background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 transparent;
+	background-position: -327px -56px;
+	}
+	
+.pmedia-play-icon, .pmedia-image-icon {
+	bottom: 12px;
+	display: block;
+	height: 34px;
+	position: absolute;
+	right: 3px;
+	width: 44px;
+	z-index: 100;
+	}
+
+.players { display:none;}
+
+.team{position:relative;}
+
+#teamdrop {
+	display: none;
+	position: absolute;
+	top: 32px;
+	left: 3px;
+	z-index: 9999;
+	}
+
+#teamdrop li {
+	border-bottom: 1px solid #fff;
+	}
+
+#teamdrop li a {
+text-align: left;
+padding-left: 5px;
+list-style: none;
+line-height: 22px;
+height: 25px;
+background-color: #000;
+color: #FFF;
+width: 244px;
+display: inline-block;
+}
+
+
+#teamdrop li a:hover{
+text-align: left;
+padding-left: 5px !important;
+list-style: none;
+line-height: 22px;
+height: 25px;
+width: 244px;
+background-color: #7EB0F9;
+color: #000;
+
+
+	}
+	
+#teamdrop li a:hover:before{content:none;}
+#teamdrop li a:hover:after{content:none;}
+
+
+.venu{position:relative;}
+#venudrop {
+	display: none;
+	position: absolute;
+	top: 32px;
+	left: 3px;
+	z-index: 10001;
+	}
+
+#venudrop li {
+	border-bottom: 1px solid #fff;
+	}
+
+#venudrop  li a {
+text-align: left;
+padding-left: 5px;
+list-style: none;
+line-height: 22px;
+/*height: 26px;*/
+background-color: #000;
+color: #FFF;
+width: 285px;
+display: inline-block;
+}
+
+
+#venudrop  li a:hover{
+text-align: left;
+padding-left: 5px !important;
+list-style: none;
+line-height: 22px;
+width: 285px;
+background-color:#7eb0f9;
+color: #000;
+
+
+	}
+	
+#venudrop  li a:hover:before{content:none;}
+#venudrop  li a:hover:after{content:none;}
+
+
+/*overright css*/
+header, #spc-topnav { width:100%!Important}
+#top-web { height:16px; background:#000!Important}
+#wapper { background:#fff}
+/*#spc-rightnav { margin-right:10px!Important}*/
+.phvid-leftnav, #spc-rightnav { padding-top:10px;}
+
+.colspc {
+    padding: 10px 34px 10px 0;
+}
+.col {
+    float: left;
+    min-height: 215px;
+    width: 195px;
+}
+.inner {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 5px 0 10px -2px #CCCCCC;
+    margin: 0;
+    min-height: 184px;
+    padding: 7px;
+}
+.phvidTitle {
+    color: #5E5E5E;
+    font: 15px/19px Roboto,sans-serif;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-top: 5px;
+}
+
+.phvidTitle a {
+    color: #5E5E5E;
+    text-decoration: none;
+}
+
+.endcol {
+    padding: 10px 0;
+}
+
+.phvid-leftnav { padding-left:10px;}
+
+/*****Points tall page css starts here******/
+
+.points_table{float:left; width:100%;}
+.points_table h2{float:left; width:670px; font:900 44px/60px "Roboto"; color:#000100; background-color:#f9f00d; margin-top:18px; text-transform:uppercase;}
+.points_table h2:before{padding-left:15px; content:"";}
+.points_table h2 b{background-color:#000; font:18px/22px "Roboto"; color:#f9f00d; text-transform:capitalize; padding:0 4px; position:relative; top:-5px;}
+.points_table table{padding-top:35px;}
+.points_table table thead td{font:15px/30px "Roboto" !important; color:#1b1b1b; padding:10px 0;}
+.points_table table thead tr{background-color:#fff !important;}
+.points_table table thead tr td:first-child{color:#1b1b1b !important;}
+.points_table table thead tr td{color:#1b1b1b !important;}
+
+.points_table table tr td{font:13px/30px "Roboto"; color:#727272; padding:10px 0;}
+.points_table table tr td:first-child{font:15px/30px "Roboto"; color:#384daa; padding-left:10px;}
+.points_table table tr:nth-child(odd){background-color:#f7f7f7}
+.points_table table tr:nth-child(even){}
+
+.highlight-section{ background:#D4D4D6; padding:10px 0; width:100%; margin-top:10px;} .wrapper{ width:1001px; margin:0 auto; overflow:hidden;}
+
+.highlight-section .title-hl{border-right:1px solid #ABABAD; width:auto; float:left; text-align:center; width:100px; font-size:16px; text-transform:uppercase; color:#822E8E; font-weight:700; padding-right: 10px; }
+
+.highlight-section .highlight-list{ width:875px; float:right; overflow:hidden;}
+.highlight-section .highlight-list ul{ width:2000px;} .highlight-section .highlight-list ul li{ list-style:square; color:#822E8E; width:auto; float:left; margin-right:35px;} .highlight-section .highlight-list ul li span{ color:#656565; font-size:15px;}
+
+
+.scorecard_iframe{width:300px; height:255px;}
+
+.top_section,.mobnav{ display:none;}
+.below-footer_h, .footer-main-wrapper {z-index: 10;}
+.below-footer_h { background: #0d0d0d none repeat scroll 0 0;overflow: hidden;width: 100%;}
+.new_nav {background: #191718 none repeat scroll 0 0;clear: both;width: 100%;}
+.new_nav ul { margin: 0 auto;width: 1003px;}.new_nav ul li { color: #ffffff; float: left;font-family: roboto;list-style: outside none none; padding: 10px 12px;text-transform: uppercase;}
+.new_nav ul li a {color: #ffffff;text-decoration: none;}
+.footer-main-wrapper {background: #0d0d0d none repeat scroll 0 0; width: 100%;} .below-footer_h {background: #0d0d0d none repeat scroll 0 0; overflow: hidden; width: 100%;}.footer_cnt_h {width: 100%;} .footer_ads_h, .footer_lnk_m {margin: 0 auto; width: 1003px;}.ft_lnks_h { float: left; margin-right: 6px; width: 128px;} .footer_lnk_m h3 { color: #888888; font-size: 14px; margin: 10px 0;text-transform: uppercase;}.footer_lnk_m ul, .middle_center_h .m_cont ul, .nav_bar ul, .nav_bar2 ul {list-style-type: none;margin: 0; padding: 0;}.footer_lnk_m ul li {display: block;line-height: 14px;margin-top: 10px;}.footer_lnk_m ul li a {color: #494949;font-size: 12px;text-decoration: none;z-index: 1;} #copyrights { border-top: 1px solid #000000;color: #333333;float: left;    font-size: 12px;margin-top: 15px;padding: 10px 0; text-align: center; width: 100%;}#copyrights a {color: #333333;font-size: 12px;text-decoration: none;}.below-footer_h.ads_f {background: #000000 none repeat scroll 0 0;padding: 15px 0;}.below-footer_h, .below-footer_h, .footer-main-wrapper {z-index: 10;}.below-footer_h {background: #0d0d0d none repeat scroll 0 0; overflow: hidden; width: 100%;}.ads_f {background: #000000 none repeat scroll 0 0; border: 0 none;}.footer_right_h {float: right; width: 250px;
+}.socials_footer_links_h {margin-top: 20px;}.socials_footer_links_h ul {list-style-type: none; margin: 0; padding: 0;}.socials_footer_links_h ul li {float: left;margin-right: 10px;}
+.socials_footer_links_h ul li .fb_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -226px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .fb_h:hover { background-position: -226px -238px;}
+.socials_footer_links_h ul li .tw_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -265px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .tw_h:hover { background-position: -265px -238px;}
+.socials_footer_links_h ul li .gp_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -320px -188px; height: 45px;transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .gp_h:hover { background-position: -320px -238px;}
+.socials_footer_links_h ul li .rss_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -375px -188px; height: 45px; transition: background-position 0.2s ease-in 0s; width: 40px;}
+.socials_footer_links_h ul li .rss_h:hover { background-position: -375px -238px;}
+.socials_footer_links_h ul li .mbl_h { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -428px -184px; height: 45px; margin-top: -5px; transition: background-position 0.2s ease-in 0s;    width: 40px;}.footer_left_h { float: left;width: 730px;}.socials_footer_links_h ul li .mbl_h:hover {background-position: -428px -230px;}
+.footer_mobl{ display:none;}
+
+
+a.link_a{ color:#000; text-decoration:none}
+
+
+	
+

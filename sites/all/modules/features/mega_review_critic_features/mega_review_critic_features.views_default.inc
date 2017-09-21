@@ -592,17 +592,9 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Movie Title';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Movie Title';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
@@ -639,11 +631,18 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<span class="view-link">View</span>';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Global: Story custom view link */
-  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
-  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Global: Mega review custom view link */
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['id'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['field'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -762,17 +761,9 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Movie Title';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Movie Title';
-  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
@@ -809,11 +800,18 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<span class="view-link">View</span>';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Global: Story custom view link */
-  $handler->display->display_options['fields']['story_custom_view_link']['id'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['table'] = 'views';
-  $handler->display->display_options['fields']['story_custom_view_link']['field'] = 'story_custom_view_link';
-  $handler->display->display_options['fields']['story_custom_view_link']['label'] = 'View';
+  /* Field: Global: Mega review custom view link */
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['id'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['table'] = 'views';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['field'] = 'mega_review_custom_view_link';
+  $handler->display->display_options['fields']['mega_review_custom_view_link']['label'] = 'View';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Action';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['path'] = 'movie-review-draft-list';
   $export['movie_review_list'] = $view;
 

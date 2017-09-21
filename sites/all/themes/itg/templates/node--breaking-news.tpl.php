@@ -11,6 +11,7 @@ $share_page_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
+$source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 ?>
  
 <?php
@@ -24,12 +25,20 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $embed_image = '';
 }
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
-$blog_created_date = date('Y-m-d H:i:s', $node->created);
+$blog_created_date = date('Y-m-d', $node->created);
+$blog_created_time = date('h:i:s', $node->created);
+$coverage_start_date = $blog_created_date.'T'.$blog_created_time;
+$short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
+$coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
+$coverage_end_date = date('Y-m-d', $coverage_end);
+$coverage_end_time = date('h:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
-    <meta itemprop="coverageStartTime" content="<?php print $blog_created_date; ?>">
+    <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
+    <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
     <meta itemprop="url" content="<?php print $embed_path; ?>">
-    <meta itemprop="description" content="<?php print $node->field_common_short_description[LANGUAGE_NONE][0]['value']; ?>">
+    <meta itemprop="description" content="<?php print $short_description_source; ?>">
     <div class="bolg-content" id="bolgcontent">    
 <?php
   if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
@@ -80,7 +89,45 @@ $blog_created_date = date('Y-m-d H:i:s', $node->created);
     <?php
     if (!empty($content)):
       $type = $node->field_type['und']['0']['value'];
-      if ($type == 'Live Blog' || $type == 'Breaking News') {
+      if ($type == 'Cricket Live Blog') {
+        $settings = array(
+          'base_url' => $base_url,
+          'nid'=> $node->nid,
+          'match_id' => (empty($node->field_match_id['und'][0]['value'])? FALSE:$node->field_match_id['und'][0]['value'])
+        );
+        drupal_add_js(array('itg_cricket_live_blog' => array('settings' => $settings)), array('type' => 'setting'));
+        drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_cricket_live_blog.js', array('scope' => 'footer'));
+        $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+            $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+        }
+        else {
+            $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+        }
+        print $title;
+        ?>
+                <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+                <div class="social-share">
+                    <ul>
+                        <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop('<?php print $share_page_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $share_image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a title="share on twitter" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" class="user-activity twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" class="user-activity google def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $share_page_link; ?>')"></a></li>
+
+                    </ul>
+                </div>
+                <div class="stryimg" id="cricketblog" >
+                    <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
+                    <div class="bolg-content" id="bolgcontent">
+						<?php if(!empty($node->field_match_id['und'][0]['value'])):?>
+                        <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 20); ?>
+                        <?php else:?>
+                        <?php print get_commentary_data_db($node->nid,0); ?>
+                        <?php endif;?>
+                    </div>       
+                </div>
+        <?php
+	  } else if ($type == 'Live Blog' || $type == 'Breaking News') {
         if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
@@ -154,8 +201,10 @@ $blog_created_date = date('Y-m-d H:i:s', $node->created);
       <?php
       $h_count = 1;
       foreach ($node->field_story_highlights['und'] as $high) {
+        if($high['value'] != '<br/>') {
         print '<li>' . $high['value'] . '</li>';
         $h_count++;
+        }
       }
       ?>
 
@@ -171,7 +220,10 @@ $blog_created_date = date('Y-m-d H:i:s', $node->created);
       foreach ($node->field_breaking_content_details['und'] as $blog_item) {
         $field_collection_ids[] = $blog_item['value'];
       }
+      
+      if($source_type != 'migrated') {
       rsort($field_collection_ids);
+      }
 
       foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
@@ -179,8 +231,10 @@ $blog_created_date = date('Y-m-d H:i:s', $node->created);
         $entity = entity_load('field_collection_item', array($field_collection_id));
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']);
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
-        $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
-        $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
+        //$pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
+        $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
         $pub_time2 = str_replace(":", "", $pub_time);
         $current_time = str_replace(":", "", date('H:i'));
         if (!empty($entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value'])) {
@@ -190,11 +244,11 @@ $blog_created_date = date('Y-m-d H:i:s', $node->created);
         else {
           $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
         }
-        if ($pub_time2 < $current_time) {
+        //if ($pub_time2 < $current_time) {
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($field_collection_ids) . '"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
           $breaking_output .= '<div class="breaking-discription">' . $redirection_url . '</div><div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a title="share on facebook" onclick="fbpop(' . "'" . $share_page_link . "'" . ', ' . "'" . $fb_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick="twitter_popup(' . "'" . urlencode($fb_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $share_page_link . "'" . ')" class="user-activity google def-cur-pointer"></a></li></ul></div>';
           $breaking_output .= '</div></div>';
-        }
+        //}
       }
       $breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
       print $breaking_output;

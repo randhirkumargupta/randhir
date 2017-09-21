@@ -1241,6 +1241,13 @@ else
     0 => 0,
   );
   $handler->display->display_options['filters']['uid_1']['group'] = 1;
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
+  $handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid_1']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid_1']['value'] = array(
+    21 => '21',
+  );
   $handler->display->display_options['path'] = 'user-selection';
   $export['user_selection'] = $view;
 

@@ -26,7 +26,13 @@ function itg_newsletter_menu() {
     'access callback' => TRUE ,
     'type' => MENU_CALLBACK ,
   );
-
+  
+//  $items['itg_newsletter_send_automatic_newsletter'] = array(
+//    'page callback' => 'itg_newsletter_send_automatic_newsletter' ,
+//    'access callback' => TRUE ,
+//    'type' => MENU_CALLBACK ,
+//  );
+  
   $items['newsletter_data_preview'] = array(
     'title' => 'Download Newsletter Preview' ,
     'page callback' => 'itg_newsletter_content_preview_data' ,
@@ -46,8 +52,37 @@ function itg_newsletter_menu() {
     'access arguments' => array('access administrator'),
     'type' => MENU_CALLBACK,      
   );
+  
+    $items['subject-line/%/autocomplete'] = array(
+    'page callback' => 'itg_newsletter_content_subject_headline',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
+}
+
+function itg_newsletter_content_subject_headline($title) {
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_news_title' , 'nt' , 'nt.entity_id=n.nid');
+      $query->fields('nt', array('field_news_title_value'));
+      $query->condition('nt.field_news_title_value', '%' . $title . '%', 'LIKE');
+      $query->condition('n.type', 'newsletter', '=');
+      $query->condition('n.status', 1);
+      $query->range(0, 20);
+      $query->orderBy('nt.field_news_title_value');
+      $result = $query->execute();
+
+      while ($record = $result->fetchAssoc()) {
+          $options[$record['field_news_title_value']] = $record['field_news_title_value'];
+      }
+
+      drupal_json_output($options);
+  }
 }
 
 /**
@@ -391,7 +426,7 @@ function itg_newsletter_views_pre_render(&$view) {
 function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
     // Call function autocomplete to show matching titles
-    $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
+    $form['field_news_title_value']['#autocomplete_path'] = 'subject-line/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
     $form['date_filter']['min']['#date_format'] = 'd/m/Y';
     $form['date_filter']['max']['#date_format'] = 'd/m/Y';
@@ -400,7 +435,7 @@ function itg_newsletter_form_views_exposed_form_alter(&$form , &$form_state , $f
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter_templates/autocomplete';
-    $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
+    $form['title']['#attributes'] = array('placeholder' => t('Template Name'));
   }
 }
 
@@ -533,7 +568,7 @@ function itg_newsletter_node_update($node) {
       $newsletter_type = $node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'];
 
       // Send mail in case of manual process and schedule is "now"
-      if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now') {
+      if ($newsletter_type == 'manual' && $node->field_newsl_schedule[LANGUAGE_NONE][0]['value'] == 'now' && $node->status == 1 && isset($node->op)) {
         itg_send_mail_newsletter($node , 'manually');
       }
       else {
@@ -587,6 +622,16 @@ function itg_newsletter_node_update($node) {
   }
 }
 
+
+function itg_newsletter_views_query_alter(&$views , &$query) {
+  if((isset($_GET['status_1']) && $_GET['status_1'] == 'any')) {
+    foreach($query->where[1]['conditions'] as $key=> $value) {
+      if($value['field'] == 'node.status') {
+        unset($query->where[1]['conditions'][$key]);
+      }
+    }
+  }
+}
 /**
  * Implementation of hook_node_validate
  * {@inheritdoc}
@@ -663,15 +708,29 @@ function itg_newsletter_check_existence_frequency($frequency , $newsletter_conte
  * Used on newsletter form
  */
 function itg_newsletter_content_data() {
-  $node = node_load($_POST['content_id']);
-  if ($node->type == 'story') {
-    $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+
+  $getnid = $_POST['content_id'];
+  if (isset($getnid) && !empty($getnid)) {
+    $query = db_select('node', 'n');
+    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.nid', $getnid, '=');
+    $query->condition('mnh.state', 'published', '=');
+    $result = $query->execute();
+    $record_nid = $result->rowCount();
+    $record_nid = $result->fetchField();
+    if (!empty($record_nid)) {
+      $node = node_load($record_nid);
+      if ($node->type == 'story') {
+        $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      } else {
+        $kicker = '';
+      }
+      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
+      exit;
+    } 
   }
-  else {
-    $kicker = '';
-  }
-  echo drupal_json_encode(array('title' => $node->title , 'kicker' => $kicker , 'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
-  exit;
 }
 
 /**
@@ -720,16 +779,17 @@ function itg_newsletter_send_automatic_newsletter() {
 
   // For manual get ids of latter newsletter.
   $query = db_select('itg_cron_newsletter' , 'cn');
+  $query->leftJoin('node' , 'n' , 'n.nid = cn.nid');
   $query->fields('cn')
       ->condition('cn.status' , 0 , '=')
       ->condition('cn.type' , 'manual' , '=')
       ->condition('cn.scheduled_time' , time() , '<=');
+  $query->condition('n.status' , 1);
   $result = $query->execute();
-
   while ($record = $result->fetchAssoc()) {
     $manual_nids[] = $record['nid'];
   }
-  // Send manual mail in case of later.
+ //  Send manual mail in case of later.
   if (!empty($manual_nids)) {
     foreach ($manual_nids as $nids) {
       $node = node_load($nids);
@@ -740,10 +800,12 @@ function itg_newsletter_send_automatic_newsletter() {
   }
   // For Automatic
   $query_auto = db_select('itg_cron_newsletter' , 'cn');
+  $query_auto->leftJoin('node' , 'n' , 'n.nid = cn.nid');
   $query_auto->fields('cn')
       ->condition('cn.status' , 0 , '=')
       ->condition('cn.type' , 'automatic' , '=')
       ->condition('cn.scheduled_time' , time() , '<=');
+  $query_auto->condition('n.status' , 1);
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {

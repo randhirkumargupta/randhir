@@ -9,6 +9,7 @@ Drupal.behaviors.itg_widgets = {
         //code for section-card-refresh
         
         var setttl = settings.itg_widget.settings.setttl;
+        var actual_ttl = settings.itg_widget.settings.actual_ttl;
         if (setttl != 0) {
             setInterval(function () {
                 var card_val = jQuery(".section-ordering").attr('id');

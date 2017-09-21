@@ -67,6 +67,7 @@
                     'fmessage': {
                         required: true,
                         validatebadword: true,
+                        blankcomment: true,
                     },
                 },
                 messages: {
@@ -88,6 +89,10 @@
                 return validate_bad_word(value, element);
             }, "You cannot post this comment, please remove abusive word and try again.");
             
+            jQuery.validator.addMethod("blankcomment", function (value, element) {
+                return validate_blank_comment(value, element);
+            }, "Please enter valid comment.");
+            
             jQuery.validator.addMethod("validateblockemail", function (value, element) {
                 return validate_email_block(value, element);
             }, "You cannot post this comment, your email is blocked.");
@@ -98,6 +103,17 @@
                 var f_description = description.toLowerCase();
                 var final = containsAny(f_description, result);
                 if (final) {
+                    return false;
+                }
+
+                return true;
+            }
+            
+            // Validate blank comment.
+            function validate_blank_comment(value, element) {
+                var c_description = $('#edit-fmessage').val();
+                var fc_description = c_description.trim();
+                if (fc_description.length == 0) {
                     return false;
                 }
 

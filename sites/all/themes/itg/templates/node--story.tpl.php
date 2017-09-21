@@ -16,7 +16,7 @@ if (!empty($content)):
   }
   $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-    $class_listicle = ' buzz-feedback listicle-feedback';
+    $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -59,6 +59,18 @@ if (!empty($content)):
     $reporter_node = node_load($byline_id);
   }
 
+    // for activate_live_tv
+    $activate_live_tv = false;
+    $config = array();
+    if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $value) {
+            $config[] = $value['value'];
+            if($value['value'] == 'activate_live_tv') {
+                $activate_live_tv = true;
+            }
+        }
+    }
+
   // get posted by info
   $node_author = $content["author"];
   /* if (function_exists('itg_get_front_activity_info')) {
@@ -73,7 +85,47 @@ if (!empty($content)):
   if (function_exists(itg_sso_url)) {
     $itg_sso_url = '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
-  ?>
+  // Check if it is sponsor story.
+  $is_sponsor_story = FALSE;
+  $sponsor_text = '';
+  $flag = FALSE;
+  if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $config_val) {
+      if ($config_val['value'] == 'sponsor') {
+        $is_sponsor_story = TRUE;
+        break;
+      }
+    }
+  }
+  // If sponsored story then check sponsored category.
+  if ($is_sponsor_story && !empty($node->field_story_category[LANGUAGE_NONE])) {
+    foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $cat_val) {
+      if (_is_sponsored_category($cat_val['tid']) && !empty($node->field_story_show_fields[LANGUAGE_NONE]) && !empty(taxonomy_get_parents($cat_val['tid']))) {
+        $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+        if ($show_field_val == 'story_category_icon'):
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $cat_val['taxonomy_term']->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+        elseif ($show_field_val == 'story_powered_text'):
+          $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>" . $cat_val['taxonomy_term']->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        else:
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" . $cat_val['taxonomy_term']->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        endif;
+        $flag = TRUE;
+      }
+    }
+    if ($is_sponsor_story && !$flag) {
+      $spon_cat = variable_get('sponsor_cat_tid', 1208902);
+      $spon_term = taxonomy_term_load($spon_cat);
+      $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+      if ($show_field_val == 'story_category_icon'):
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+      elseif ($show_field_val == 'story_powered_text'):
+        $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>" . $spon_term->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      else:
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" . $spon_term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      endif;
+    }
+  }
+?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
     <div class='<?php print $classes ?>'>      
       <div class="comment-mobile desktop-hide">
@@ -120,12 +172,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
         <?php
       }
       else {
         ?>
-        <h1 title="<?php echo strip_tags($content['story_title']); ?>"><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -154,48 +206,68 @@ if (!empty($content)):
 
       //code end for Associate lead
       ?>
-
+      <?php
+      if ($show_field_val == 'story_powered_text'):
+        print $sponsor_text;
+      endif;
+    ?>
       <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
             <div class="byline">              
-              <div class="profile-pic">
-                <?php
-                if (!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                  $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
-                else {
-                  $file = 'default_images/user-default.png';
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
-                ?>
-              </div>
-              <div class="profile-detail">                  
-                <ul>
-                  <li class="title"><?php if (!empty($reporter_node->title)) {
-              print t($reporter_node->title);
-            } ?></li>
+              <?php if ($sponsor_text == ''): ?>
+                <div class="profile-pic">
                   <?php
-                  $twitter_handle = '';
-                  if (!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                    $twitter_handle = str_replace('@', '', $twitter_handle);
-                  }
-                  if (!empty($twitter_handle)) {
-                    ?>
-                    <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                              ?></li>                
-    <?php } ?>
-                </ul>
-                <ul class="date-update">
-                  <li class="mailto mhide">
-                    <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                    if (!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
-                      $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                      print "<a title ='Mail To Author' href='mailto:" . ITG_SUPPORT_EMAIL . "'>" . t('Mail To Author') . "</a>";
+                  if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+                    $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
-                    ?>
-                  </li>
+                    else {
+                      $file = 'default_images/user-default.png';
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                    }
+                  ?>
+                </div>
+              <?php elseif ($show_field_val == 'story_powered_text'):
+               print ''; ?>              
+              <?php else:
+                print $sponsor_text; ?>
+              <?php endif; ?>
+              <div class="profile-detail">                  
+                <?php if ($sponsor_text == ''): ?>
+                  <ul>
+                    <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
+                    <?php
+                      $twitter_handle = '';
+                      if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
+                      $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                      $twitter_handle = str_replace('@', '', $twitter_handle);
+                      }
+                      if (!empty($twitter_handle)) {
+                      ?>
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
+                    <?php } ?>
+
+                    <?php if ($sponsor_text == ''): ?>
+                    <li class="mailto mhide">
+                      <i class="fa fa-envelope-o"></i> &nbsp;<?php
+                      if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
+                      $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
+                      print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
+                      }
+                      ?>
+                    </li>
+                  <?php endif; ?>
+                   <?php 
+                    if (!empty($byline_id)) {
+                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                    }  
+                  ?>
+                  
+                  </ul>
+                <?php endif; ?>
+                <ul class="date-update">
+                  
                   <li class="mhide">
                     <span class="share-count">
                       <?php
@@ -277,7 +349,7 @@ if (!empty($content)):
           </div>
   <?php } ?>
         <!-- For buzzfeed section start -->
-              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
+              <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { //  || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])?>                       
           <div class="buzzfeed-byline">
             <div class="byline">
               <div class="profile-pic">
@@ -380,46 +452,50 @@ if (!empty($content)):
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" ><?php
-                  if (empty($widget_data)) {
-                    $story_image = '';
-                    if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                      $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    }
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
-                  }
-                  else {
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
-                    ?>        
+                <div class="stryimg" >
+                  <?php if($activate_live_tv) { ?>
+                        <div class="story_itg_live_tv">
+                                <?php print itg_live_tv_page_video(); ?>
+                        </div>
+                <?php } else {
+                        if (empty($widget_data)) {
+                            $story_image = '';
+                            if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+                                $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            }
+                            if (file_exists($story_image)) {
+                                $file_uri = file_create_url($story_image);
+                            }
+                            else {
+                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                            print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                        }
+                        else {
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                            if (file_exists($story_image)) {
+                                $file_uri = file_create_url($story_image);
+                            }
+                            else {
+                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                            }
+                            print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                            ?>
 
-                    <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
-                      <i class="fa fa-play-circle"></i>
-                      <?php
+                            <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                                <i class="fa fa-play-circle"></i>
+                                <?php
+                            }
+                            else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                                ?>
+                                <i class="fa fa-camera"></i>
+                                <?php
+                            }
+                            print '</span></a>';
+                        }
                     }
-                    else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                      ?>                    
-                      <i class="fa fa-camera"></i>
-                      <?php
-                    }
-                    print '</span></a>';
-                  }
-                  ?>
 
-                  <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
                       $urltags = addhttp($tagval->tag_url);
@@ -551,7 +627,7 @@ if (!empty($content)):
               }
               if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
                 ?>
-                <div class="ad-blocker-content"><?php print strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, "")); ?></div>
+                <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php } ?>
               <div class="ad-blocker"></div>
               <div class="description">
@@ -643,11 +719,33 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
+                  if (!empty($node->field_technology_photogallery['und'])) {
+					//print_r($node->field_technology_photogallery['und'][0]['entity']);die;
+					$tech_gallery_images = $node->field_technology_photogallery['und'][0]['entity']->field_gallery_image;
+					$tech_gallery_alias = drupal_get_path_alias('node/'.$node->field_technology_photogallery['und'][0]['entity']->nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
                 }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                /*if (strpos($story_body, '[ITG:MEGA_REVIEW_CRITIC:')) {
+                  if (preg_match('/ITG:MEGA_REVIEW_CRITIC:([0-9]+)/', $story_body, $matches_megareview)) {
+                    $review_nid = $matches_megareview[1];
+                  }
+                  $iframe_html = '<iframe src="/mega-review/embed/'.$review_nid.'" width="100%" height="4000" frameborder="0" scrolling="no"></iframe>';
+                  $story_body = str_replace('[ITG:MEGA_REVIEW_CRITIC:' . $review_nid . ']', $iframe_html, $story_body);
+                }*/
+                //Code for the listicle token
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -674,12 +772,15 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
-                }
-                else {
-                  // Print story body
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                  
+                 }
+                }else{
                   print $story_body;
                 }
+                //End of the code
+                
                 // If survey is associated with story, render survey form
                 if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
                   $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
@@ -702,11 +803,11 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                    <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                    <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                <?php } ?>
+                    <?php //if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                    <!--<span class="tech-rating">-->
+                    <?php //echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
+                    <!--</span>-->
+                <?php //} ?>
                 <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
           <?php } ?>
@@ -722,6 +823,7 @@ if (!empty($content)):
           }
           ?>">
                  <?php
+
                  if (!empty($node->field_photo_story)) {
                    $output = itg_story_photo_story_html($node->nid);
                    print $output;
@@ -905,7 +1007,8 @@ if (!empty($content)):
               ?>
               <div class="agbutton"><button title ="Like" id="like_count" data-rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" data-rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snap-post"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
             </div>
-  <?php } ?>
+          <?php } ?>
+          <?php if(!empty($node->field_story_itg_tags['und'])) { ?>
           <div class="tags">
             <ul>
               <li><i class="fa fa-tags"></i> <?php print t('Tags :'); ?></li>        
@@ -917,13 +1020,15 @@ if (!empty($content)):
                     $term = taxonomy_term_load($tags['tid']);
                     $t_name = $term->name;
                     $comma_sep_tag[] = $t_name;
-                    print '<li><a target="_blank" href="' . $base_url . '/topic?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
+                   // print '<li><a target="_blank" href="' . $base_url . '/topic/' . $t_name . '">#' . $t_name . '</a></li>';
+                     print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
                   }
                 }
               }
               ?>
             </ul>
           </div>
+            <?php } ?>
           <!-- For buzzfeed section stary --> 
 
             <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
@@ -937,12 +1042,6 @@ if (!empty($content)):
             <?php
           }
 
-          $config = array();
-          if (!empty($node->field_story_configurations['und'])) {
-            foreach ($node->field_story_configurations['und'] as $value) {
-              $config[] = $value['value'];
-            }
-          }
           ?>
 
         </div>

@@ -25,7 +25,7 @@ if (!in_array(variable_get('ipl_for_widget'), $category)) {
                 <span class="posted-on"><?php print $row['created']; ?></span>
     <?php $title = $row['title']; ?>
                 <p title="<?php print strip_tags($title); ?>">
-        <?php print l($title, 'node/' . $row['nid_1'], array('html' => TRUE)); ?>
+        <?php print html_entity_decode(l($title, 'node/' . $row['nid_1'], array('html' => TRUE))); ?>
                 </p>
             </div>
         </li>

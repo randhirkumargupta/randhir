@@ -145,7 +145,8 @@
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
             // Code issue date exit or not.
-            $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function () {
+           // $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function () {
+            $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').change(function () {
                 var base_url = settings.itg_story.settings.base_url;
                 $.ajax({
                     url: base_url + "/issue-date-check-ajax",

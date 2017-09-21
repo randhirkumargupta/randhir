@@ -35,7 +35,7 @@
                   echo l(itg_common_get_smiley_title($row['nid'], 0, 77), "node/" . $row['nid'], array("html" => TRUE));
                 }
                 else {
-                  echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                  echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 70, ".."), "node/" . $row['nid']);
                 }
               ?>
               </h2>           
@@ -85,12 +85,15 @@
             if ($index > 2) {
               ?>
               <li title="<?php echo strip_tags($desc); ?>">
+              <?php if (_is_sponsor_story_article($row['nid'])):?>
+                <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+              <?php endif; ?>
               <?php
                 if (function_exists('itg_common_get_smiley_title')) {
                   echo l(itg_common_get_smiley_title($row['nid'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
                 }
                 else {
-                  echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
+                  echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 85, ".."), "node/" . $row['nid']);
                 }
               ?>
               </li>

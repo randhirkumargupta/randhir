@@ -61,6 +61,7 @@
     <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
@@ -69,11 +70,11 @@
       body{font: 400 14px/18px 'Roboto Slab'; color: #333;}
       h1, h2, h3, h4, h5, h6{font-family: 'Roboto';}
       h1{font-size: 25px; font-weight: 600; line-height: 30px;}
-      p{line-height: 24px; margin: 10px 0; white-space: normal;}
+      p{line-height: 24px; margin: 10px 0; white-space: normal; word-wrap: break-word;}
       img{max-width: 100%;}
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
-      .node-type-videogallery #main-wrapper{padding: 0;}
+      .node-type-videogallery #main-wrapper, .node-type-photogallery #main-wrapper{padding: 0;}
       #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
       #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
       #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
@@ -240,17 +241,17 @@
         position: relative;
       }
       .story-section .story-tech-chunk .tech-rating {
-        width: 88px;
-        height: 33px;
+        max-width: 88px;
         background: #b00808;
         color: #fff;
-        font-size: 28px;
+        font-size: 22px;
         position: absolute;
         top: 10px;
         right: 10px;
         text-align: center;
-        line-height: 33px;
+        line-height: 28px;
         font-weight: 700;
+        padding: 0 10px;
       }
       .field .field-label {
         font-weight: bold;
@@ -374,9 +375,9 @@
         background-color: rgba(0,0,0,.6);
         color: #fff;
         font-size: 12px;
-        .fa{
-          font-size: 14px;
-        }
+      }
+      .other-count .fa{
+        font-size: 14px;
       }
       .other-date{
         display: block;
@@ -513,6 +514,8 @@
         text-align: center;
         font-size: 12px;
         border-top: 1px solid #111111;
+        word-wrap: break-word;
+        white-space: normal;
       }
       .photo-story .amp-carousel-button {top: 100px;}
       .photo-story amp-carousel {
@@ -529,8 +532,8 @@
       .node-type-photogallery #header, .node-type-videogallery #header{margin: 0;}
       .node-type-photogallery .front-end-breadcrumb, 
       .node-type-videogallery .front-end-breadcrumb{background-color: #171717; padding-bottom: 0; margin: 0;}
-      .node-type-photogallery .front-end-breadcrumb .black-box, 
-      .node-type-videogallery .front-end-breadcrumb .black-box{margin-left: 0; margin-right: 0;}
+      .node-type-photogallery .black-box, 
+      .node-type-videogallery .black-box{margin-left: 0; margin-right: 0;}
       .node-type-photogallery .amp-other-gallery, .node-type-videogallery .amp-other-gallery {padding: 0 12px;}
       .buzz-img .social-share{position: absolute; left: 0; bottom: 28px; width: 100px; z-index: 999; background-color: transparent; height: 22px;}
       .buzz-img .social-share h2{padding: 0; width: 22px; height: 21px; border: none; background-color: #222; color: #fff; text-align: center;}
@@ -540,8 +543,8 @@
       .factoids-page{display: inline-block; vertical-align: top; width: 100%; margin-bottom: 20px;}
       .fun-facts{float: left;}
       .factoids-page .social-share{height: 22px;}
-      .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: center;left: 5px;}
-      .factoids-page .social-share ul{list-style: none; top: -25px; left: 110px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
+      .factoids-page .social-share h2{padding: 0; width: 22px; height: 22px; border: none; background-color: #fff; color: #aaa; text-align: left;left: 5px;}
+      .factoids-page .social-share ul{list-style: none; top: -24px; left: 120px; height: 22px; background-color: #fff; width: 80px; padding: 2px 0 0 3px;}
       .factoids-page .social-share ul li{float: left;}
       .factoids-page .social-share ul li a{color: #222; font-size: 22px; margin-right: 5px;}
       .quotes {

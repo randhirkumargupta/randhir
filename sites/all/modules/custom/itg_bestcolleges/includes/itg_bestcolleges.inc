@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * This inc file contains functions related to Best colleges features.
@@ -6,11 +7,11 @@
  */
 
 /**
-* Implementation of hook_form for itg_layout_manager_page_setting_form
-* @param array $form
-* @param array $form_state
-* @return array
-*/
+ * Implementation of hook_form for itg_layout_manager_page_setting_form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
 function bestcollege_rhssearch_form($form, &$form_state) {
   global $base_url;
   $path_request = request_path();
@@ -28,17 +29,17 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $block = block_load('itg_ads', ADS_RHS1);
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
 
-   $form['bestcolleg_adds_rhs'] = array(
+  $form['bestcolleg_adds_rhs'] = array(
     '#markup' => '<div class = "bestcolleg_adds_rhs">' . render($render_array) . '</div>',
     '#weight' => -7,
   );
   $form['bestcollege_year_item'] = array(
-     '#type' => 'item',
-     '#title' => t('BEST COLLEGES YEAR'),
-     '#weight' => -6,
-     '#prefix' => '<div class = "right_view">',
-     '#suffix' => '</div>',
-   );
+    '#type' => 'item',
+    '#title' => t('BEST COLLEGES YEAR'),
+    '#weight' => -6,
+    '#prefix' => '<div class = "right_view">',
+    '#suffix' => '</div>',
+  );
 
   $form['bestcollege_year_select'] = array(
     '#type' => 'select',
@@ -77,12 +78,12 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#suffix' => '</div>',
   );
   $form['yearcompare_yr'] = array(
-      '#type' => 'item',
-      '#title' => t('YEAR'),
-      '#weight' => 2.5,
-      '#prefix' => '<div class = "detail_box"><div class = "col-md-2 col-sm-2 col-xs-2 remove_padd_left">',
-      '#suffix' => '</div>',
-    );
+    '#type' => 'item',
+    '#title' => t('YEAR'),
+    '#weight' => 2.5,
+    '#prefix' => '<div class = "detail_box"><div class = "col-md-2 col-sm-2 col-xs-2 remove_padd_left">',
+    '#suffix' => '</div>',
+  );
   $form['yearcompare_yr1'] = array(
     '#type' => 'select',
     '#title' => t(''),
@@ -94,12 +95,12 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#suffix' => '</div>',
   );
   $form['yearcompare_vs'] = array(
-      '#type' => 'item',
-      '#title' => t('Vs'),
-      '#weight' => 3.5,
-      '#prefix' => '<div class = "col-md-2 col-sm-1 col-xs-2 control-label remove_padd_left">',
-      '#suffix' => '</div>',
-    );
+    '#type' => 'item',
+    '#title' => t('Vs'),
+    '#weight' => 3.5,
+    '#prefix' => '<div class = "col-md-2 col-sm-1 col-xs-2 control-label remove_padd_left">',
+    '#suffix' => '</div>',
+  );
 
   // get first array element
   $year_com = $getsyears['year'];
@@ -117,12 +118,12 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#suffix' => '</div>',
   );
   $form['yearcompare_streamlabel'] = array(
-      '#type' => 'item',
-      '#title' => t('For Stream'),
-      '#weight' => 4.5,
-      '#prefix' => '<div class ="stream"><div class ="col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
-      '#suffix' => '</div>',
-    );
+    '#type' => 'item',
+    '#title' => t('For Stream'),
+    '#weight' => 4.5,
+    '#prefix' => '<div class ="stream"><div class ="col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
+    '#suffix' => '</div>',
+  );
   $form['yearcompare_stream'] = array(
     '#type' => 'select',
     '#title' => t(''),
@@ -141,11 +142,11 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#suffix' => '</div>',
   );
   $form['yearcompare_st'] = array(
-      '#type' => 'item',
-      '#title' => t('STREAM'),
-      '#weight' => 6.5,
-      '#prefix' => '<div class = "detail_box"><div class = "col-md-3 col-sm-3 col-xs-3 remove_padd_left">',
-      '#suffix' => '</div>',
+    '#type' => 'item',
+    '#title' => t('STREAM'),
+    '#weight' => 6.5,
+    '#prefix' => '<div class = "detail_box"><div class = "col-md-3 col-sm-3 col-xs-3 remove_padd_left">',
+    '#suffix' => '</div>',
   );
   $form['streamcompare_rhs_stream1'] = array(
     '#type' => 'select',
@@ -158,11 +159,11 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#suffix' => '</div>',
   );
   $form['streamcompare_rhs_vs'] = array(
-      '#type' => 'item',
-      '#title' => t('Vs'),
-      '#weight' => 7.5,
-      '#prefix' => '<div class = "col-md-1 col-sm-1 col-xs-1 control-label remove_padd_left">',
-      '#suffix' => '</div>',
+    '#type' => 'item',
+    '#title' => t('Vs'),
+    '#weight' => 7.5,
+    '#prefix' => '<div class = "col-md-1 col-sm-1 col-xs-1 control-label remove_padd_left">',
+    '#suffix' => '</div>',
   );
 
   // get first array element
@@ -183,10 +184,10 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   );
   $form['streamcompare_rhs_label'] = array(
     '#type' => 'item',
-      '#title' => t('For Year'),
-      '#weight' => 8.5,
-      '#prefix' => '<div class = "stream"><div class = "col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
-      '#suffix' => '</div>',
+    '#title' => t('For Year'),
+    '#weight' => 8.5,
+    '#prefix' => '<div class = "stream"><div class = "col-lg-4 col-md-12 col-sm-12 control-label remove_padd_left">',
+    '#suffix' => '</div>',
   );
   $form['streamcompare_rhs_yr'] = array(
     '#type' => 'select',
@@ -244,21 +245,21 @@ function bestcollege_rhssearch_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_bestcollege_configuration_form($form) {
-  
+
   $form['bestcollege_term_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Bestcollege term id'),
     '#default_value' => variable_get('bestcollege_term_id', ''),
     '#required' => TRUE,
   );
-  
+
   $form['bestcollege_year'] = array(
     '#type' => 'textfield',
     '#title' => t('Bestcollege year'),
     '#default_value' => variable_get('bestcollege_year', ''),
     '#required' => TRUE,
   );
-  
+
   $form['bestcollege_status'] = array(
     '#type' => 'textfield',
     '#title' => t('Bestcollege status'),
@@ -277,7 +278,6 @@ function itg_bestcollege_configuration_form($form) {
     '#default_value' => variable_get('bestcollege_stream_dynamic', ''),
     '#required' => TRUE,
   );
-  
+
   return system_settings_form($form);
 }
-

@@ -90,6 +90,8 @@ function itg_survey_form_alter(&$form , &$form_state , $form_id) {
 
   // Set destination for survey form
   if ($form_id == 'survey_node_form') {
+    unset($form['actions']['preview']);
+    unset($form['field_survey_category']);//hide section
     unset($form['field_supp_publish']['und']['#options']['_none']);
     if (is_numeric(arg(1))) {
       $publish_value = itg_survey_get_publish_status(arg(1));
@@ -154,7 +156,7 @@ function itg_survey_form_custom_submit_callback($form , &$form_state) {
     drupal_set_message(t('Survey <strong>@title</strong> has been updated.' , array('@title' => $title)));
   }
   else {
-    drupal_set_message(t('Survey <strong>@title</strong> has been submitted for further review and approval.' , array('@title' => $title)));
+    drupal_set_message(t('Survey <strong>@title</strong> has been Published.' , array('@title' => $title)));
   }
 }
 
@@ -187,14 +189,7 @@ function itg_survey_form_after_build($form , &$form_state) {
       $type = $node->type;
       $nid = arg(1);
     }
-  }
-
-  if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form
-    drupal_add_js('jQuery(document).ready(function() {
-            jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
-          });' , array('type' => 'inline' , 'scope' => 'footer'));
-  }
+  }  
 
   // Array used in itg_survey.js
   $settings = array();
@@ -268,9 +263,13 @@ function itg_survey_node_presave($node) {
    * '1' for publish and '2' for unpublish
    */
 
-
-  if ($node->type == 'survey' && isset($node->field_supp_publish)) {
-    switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
+  //p($node->type);
+  
+  if ($node->type == 'survey' || $node->type == 'quiz') {
+    if ($node->op == 'Publish') {
+      $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
+    }
+    /*switch ($node->field_supp_publish[LANGUAGE_NONE][0]['value']) {
       case '0':
         $node->status = 0;
         break;
@@ -280,7 +279,7 @@ function itg_survey_node_presave($node) {
       default :
         $node->status = 0;
         break;
-    }
+    }*/
   }
 }
 
@@ -832,6 +831,12 @@ function itg_survey_pqs_generatetokens() {
     $query->condition('sd.field_survey_start_date_value' , $cur_date , '<=');
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
   }
+  elseif($type == 'mega_review_critic'){
+    $query = db_select('node' , 'n');
+    $query->fields('n' , array('nid' , 'title'));
+    $query->condition('n.type' , $type , '=');
+    $query->condition('n.status' , 1 , '=');
+  }
   $data = array();
   $result = $query->execute();
   // Fetch node title and nid
@@ -842,7 +847,13 @@ function itg_survey_pqs_generatetokens() {
     else {
       $title = $record['title'];
     }
-    $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    if($type == 'mega_review_critic'){
+		$iframe = '<iframe src="/mega-review/embed/'.$record['nid'].'" width="100%" height="1200" frameborder="0" scrolling="no"></iframe>';
+		$options[$iframe] = $title;
+	}
+	else{
+	  $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+	}
   }
   $form = array();
   $form['pqs-listing-heading'] = array(
@@ -1219,10 +1230,11 @@ function itg_survey_survey_form_submit($form , &$form_state) {
     unset($_SESSION['survey_unique_key']);
 
     // Call loyalty & rewards function to save points for a user
-    if (function_exists('itg_loyalty_reward_earnpoint')) {
-      if ($user->uid) {
-        itg_loyalty_reward_earnpoint($form_state['values']['nid'] , 'survey' , $user->uid);
+    if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
       }
+      itg_global_loyality_send_data($user->uid, 'survey', $form_state['values']['nid'], '', $sso_id);
     }
   }
 

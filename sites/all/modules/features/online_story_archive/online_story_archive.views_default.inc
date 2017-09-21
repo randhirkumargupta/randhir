@@ -94,17 +94,13 @@ function online_story_archive_views_default_views() {
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['label']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['label']['element_wrapper_class'] = 'front-label';
-  /* Field: Apache Solr: content */
-  $handler->display->display_options['fields']['content']['id'] = 'content';
-  $handler->display->display_options['fields']['content']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['content']['field'] = 'content';
-  $handler->display->display_options['fields']['content']['label'] = '';
-  $handler->display->display_options['fields']['content']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['content']['alter']['max_length'] = '300';
-  $handler->display->display_options['fields']['content']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['content']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['content']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['content']['element_wrapper_class'] = 'front-content';
+  /* Field: Apache Solr: sm_common_kicker_text */
+  $handler->display->display_options['fields']['sm_common_kicker_text']['id'] = 'sm_common_kicker_text';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['field'] = 'sm_common_kicker_text';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['label'] = '';
+  $handler->display->display_options['fields']['sm_common_kicker_text']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['sm_common_kicker_text']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: ds_changed */
   $handler->display->display_options['fields']['ds_changed']['id'] = 'ds_changed';
   $handler->display->display_options['fields']['ds_changed']['table'] = 'apachesolr__solr';
@@ -116,24 +112,41 @@ function online_story_archive_views_default_views() {
   $handler->display->display_options['fields']['ds_changed']['custom_date_format'] = 'F j, Y, g:i a';
   $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['ds_changed']['timezone'] = 'Asia/Kolkata';
-  /* Field: Apache Solr: hash */
-  $handler->display->display_options['fields']['hash']['id'] = 'hash';
-  $handler->display->display_options['fields']['hash']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['hash']['field'] = 'hash';
-  $handler->display->display_options['fields']['hash']['exclude'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="search-detail">
-<p>[content]</p>
-<div class="other-info">Updated : [ds_changed]</div>
+<p>[sm_common_kicker_text]</p>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  /* Field: Apache Solr: dm_field_itg_content_publish_dat */
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['id'] = 'dm_field_itg_content_publish_dat';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['field'] = 'dm_field_itg_content_publish_dat';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['label'] = '';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['element_type'] = '0';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['custom_date_format'] = 'F j, Y, g:i a';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['second_date_format'] = 'long';
+  $handler->display->display_options['fields']['dm_field_itg_content_publish_dat']['timezone'] = 'Asia/Kolkata';
+  /* Field: Apache Solr: hash */
+  $handler->display->display_options['fields']['hash']['id'] = 'hash';
+  $handler->display->display_options['fields']['hash']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['hash']['field'] = 'hash';
+  $handler->display->display_options['fields']['hash']['exclude'] = TRUE;
+  /* Field: Apache Solr: bundle */
+  $handler->display->display_options['fields']['bundle']['id'] = 'bundle';
+  $handler->display->display_options['fields']['bundle']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['bundle']['field'] = 'bundle';
+  $handler->display->display_options['fields']['bundle']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Apache Solr: ds_changed */
   $handler->display->display_options['sorts']['ds_changed']['id'] = 'ds_changed';

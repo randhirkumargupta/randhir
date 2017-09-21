@@ -17,7 +17,7 @@ function be_lucky_today_form($form, &$form_state) {
         $form_state['stage'] = 'be_lucky_home';
     $form = array();
     $form = be_lucky_today_get_header($form, $form_state);
-    $form['#prefix'] = '<div class="itg_be_lucky_today">';
+    $form['#prefix'] = '<div class="itg_be_lucky_today ' . $form_state['stage'] . '">';
     $form['#suffix'] = '</div>';
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_be_lucky_today') . '/js/itg_be_lucky_today.js',
@@ -744,12 +744,13 @@ function be_lucky_form_submit($form, &$form_state) {
             drupal_goto("/be-lucky-today/email-confirmation-reference-list");
         }
     }
-
+    $current_date = date('Y-m-d h:i:s');
     if (!empty($form_state['values']['name'])) {
         $data[] = array(
           'name' => $form_state['values']['name'],
           'email' => $form_state['values']['email'],
           'mobile' => $form_state['values']['mobile'],
+          'record_date' => $current_date,
           'fb_username' => $fb_username,
           'survey_id' => 29072016
         );
@@ -759,6 +760,7 @@ function be_lucky_form_submit($form, &$form_state) {
           'name' => $form_state['values']['name_2'],
           'email' => $form_state['values']['email_2'],
           'mobile' => $form_state['values']['mobile_2'],
+          'record_date' => $current_date,
           'fb_username' => $fb_username,
           'survey_id' => 29072016
         );
@@ -768,6 +770,7 @@ function be_lucky_form_submit($form, &$form_state) {
           'name' => $form_state['values']['name_3'],
           'email' => $form_state['values']['email_3'],
           'mobile' => $form_state['values']['mobile_3'],
+          'record_date' => $current_date,
           'fb_username' => $fb_username,
           'survey_id' => 29072016
         );
@@ -777,6 +780,7 @@ function be_lucky_form_submit($form, &$form_state) {
           'name' => $form_state['values']['name_4'],
           'email' => $form_state['values']['email_4'],
           'mobile' => $form_state['values']['mobile_4'],
+          'record_date' => $current_date,
           'fb_username' => $fb_username,
           'survey_id' => 29072016
         );
@@ -786,6 +790,7 @@ function be_lucky_form_submit($form, &$form_state) {
           'name' => $form_state['values']['name_5'],
           'email' => $form_state['values']['email_5'],
           'mobile' => $form_state['values']['mobile_5'],
+          'record_date' => $current_date,
           'fb_username' => $fb_username,
           'survey_id' => 29072016
         );

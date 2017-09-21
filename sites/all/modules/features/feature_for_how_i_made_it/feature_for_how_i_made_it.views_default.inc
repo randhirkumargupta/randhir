@@ -462,6 +462,10 @@ function feature_for_how_i_made_it_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Special How I Made It Widget Order Reorder';
   $handler->display->display_options['display_description'] = 'Special  How I Made it Order Reorder';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -558,11 +562,11 @@ print \'<a href="move-dont-miss-widget-node/special_how_made_it_content/0/0/\'.$
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Section wise ordering content: id */
+  $handler->display->display_options['sorts']['id']['id'] = 'id';
+  $handler->display->display_options['sorts']['id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['id']['field'] = 'id';
+  $handler->display->display_options['sorts']['id']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Section wise ordering content: Widget */
@@ -571,6 +575,11 @@ print \'<a href="move-dont-miss-widget-node/special_how_made_it_content/0/0/\'.$
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'special_how_made_it_content';
   $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -582,6 +591,7 @@ print \'<a href="move-dont-miss-widget-node/special_how_made_it_content/0/0/\'.$
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['group'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section';

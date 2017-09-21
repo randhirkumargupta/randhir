@@ -31,7 +31,7 @@
 
         <?php if (isset($row['title'])) : ?>
         <p  title="<?php print strip_tags($row['title']) ; ?>">
-            <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))); ?>
+            <?php print html_entity_decode(l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id)))); ?>
         </p>
         <?php endif; ?>
       </span>
