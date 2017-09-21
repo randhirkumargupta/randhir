@@ -974,7 +974,7 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['path'] = 'search-publish-video';
 
   /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'search_publish_video_radio1');
+  $handler = $view->new_display('page', 'Page', 'search_publish_video_radio');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Search publish Video';
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;

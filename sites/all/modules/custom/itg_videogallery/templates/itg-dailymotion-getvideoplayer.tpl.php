@@ -16,7 +16,7 @@ else {
             document.querySelector('#video_0'),
             {
                 video: '<?php print $video_data[0]->video_embedded_url; ?>',
-                width: '600px',
+                width: '100%',
                 height: '450px',
                 params: {
                     autoplay: 1,

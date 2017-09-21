@@ -107,8 +107,13 @@ $uri = base64_encode($actual_link);
                             ?>
 
                             <?php if ($keys == 0) { ?>
+                      <div style="display:none" class="loading-video"><div class="spinner">
+                                        <div class="bounce1"></div>
+                                        <div class="bounce2"></div>
+                                        <div class="bounce3"></div>
+                                    </div></div>
                               <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
-                                      <div style="display:none" class="loading-video">Load.....</div>
+                                      
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
@@ -185,14 +190,18 @@ $uri = base64_encode($actual_link);
                           }
                           ?>
 
-      <?php if ($keys == 0) { ?>
+                              <?php if ($keys == 0) { ?>
                                 <div class="iframe-video">
-                                    <div style="display:none" class="loading-video">Load.....</div>
+                                    <div style="display:none" class="loading-video"><div class="spinner">
+                                        <div class="bounce1"></div>
+                                        <div class="bounce2"></div>
+                                        <div class="bounce3"></div>
+                                    </div></div>
                                     <div style="margin:0 auto; width:622px;" id="migrate_video_palyer_container">
-        <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url)); ?>
+                                        <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url)); ?>
                                     </div> 
                                 </div>
-      <?php } ?>
+                              <?php } ?>
                           </div>
 
                           <?php
@@ -265,7 +274,7 @@ $uri = base64_encode($actual_link);
                             <li><a class="def-cur-pointer" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content?source=video"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php else: ?>
                             <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-  <?php endif; ?>
+                          <?php endif; ?>
 
                       </ul>
                   </div>
@@ -336,11 +345,11 @@ $uri = base64_encode($actual_link);
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-  <?php endif; ?>
+                              <?php endif; ?>
 
                           </ul>
                       </div>
-  <?php print $description_slider; ?>
+                      <?php print $description_slider; ?>
 
                       <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
                       <div class="section-like-dislike">
@@ -359,7 +368,7 @@ $uri = base64_encode($actual_link);
                       </div>
                   </div>
               </div>
-  <?php //$row['field_story_expert_description'];                  ?>
+              <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
                       <?php
@@ -369,7 +378,7 @@ $uri = base64_encode($actual_link);
                       ?>
                   </div>
                   <div class="latest_video">
-  <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
+                      <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
                   </div>
               </div>
           </div>

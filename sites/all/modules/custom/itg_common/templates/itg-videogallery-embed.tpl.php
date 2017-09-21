@@ -67,8 +67,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                                       document.querySelector('#video_0'),
                                       {
                                           video: '<?php print $vide_dm_id; ?>',
-                                          width: '600px',
-                                          height: '450px',
+                                          width: '100%',
+                                          height: '280px',
                                           params: {
                                               autoplay: 1,
                                               controls: 1,

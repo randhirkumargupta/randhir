@@ -49,8 +49,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
                       }]
               }],
           primary: "html5",
-          width: "100%",
-          height: "100%",
+          width: "622",
+          height: "442",
           aspectratio: "16:9",
           "stretching": "exactfit",
           androidhls: "true",
