@@ -877,13 +877,21 @@ function itg_story_node_view($node, $view_mode, $langcode) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
-    if ($external_url = _is_external_url_story_article($node->nid)) {
+    
+    /*if ($external_url = _is_external_url_story_article($node->nid)) {
       drupal_goto($external_url);
+    }*/
+    
+    // modified code external url code
+    if(!empty($node->field_story_external_url['und'][0]['value'])) {
+      drupal_goto($node->field_story_external_url['und'][0]['value']);
     }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if (function_exists('itg_get_related_content')) {
-      $node->content['related_content'] = itg_get_related_content(arg(1));
+      if(!empty($node->field_common_related_content['und'][0]['value'])) {
+      $node->content['related_content'] = itg_get_related_content($node->nid);
+      }
     }
 
     if (function_exists('itg_total_share_count')) {
@@ -892,7 +900,10 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
 
     if (function_exists('itg_msi_get_lock_story_status')) {
-      $node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+       if (in_array('developing_story', $config)) {
+       $node->content['develop_story_status'] =  1; 
+       }
+      //$node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
 
     if (function_exists('itg_get_front_activity_info')) {

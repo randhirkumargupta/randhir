@@ -83,7 +83,7 @@ if (!empty($content)):
   }
 
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url = '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
+    $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   // Check if it is sponsor story.
   $is_sponsor_story = FALSE;
@@ -984,7 +984,7 @@ if (!empty($content)):
               else:
                 ?>
                 <li class="mhide">
-                  <a title="follow story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
+                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
                 </li>
   <?php endif; ?>
 
