@@ -19,7 +19,7 @@ function anchorRSSFeed() {
     $redis_key = "itgd_rss_anchorRSSFeed";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $output = $result_get['key_value'];
     } else {
         //anchorRSSFeed writing...

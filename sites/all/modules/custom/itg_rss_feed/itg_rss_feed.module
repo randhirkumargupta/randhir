@@ -19,6 +19,13 @@ function itg_rss_feed_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['rss/article'] = array(
+    'page callback' => 'articleRSSFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/articleRSSFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
     return $items;
 }
 
@@ -43,7 +50,19 @@ function getRSSFeedHeader() {
 function getRSSFeedSubHeader() {
   $output = "";
   $todat_date = date("D, d M Y H:i:s");
-  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/]]></link><lastBuildDate>".$todat_date." GMT</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>http://indiatoday.intoday.in/images/india-today-mast-logo.gif</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[http://indiatoday.intoday.in/headlines_today/anchors]]></link><description>India Today</description></image>";
+  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/]]></link><lastBuildDate>".$todat_date." GMT</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>http://itgdrapid.indiatodayonline.in/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[http://indiatoday.intoday.in/headlines_today/anchors]]></link><description>India Today</description></image>";
+
+  return $output;
+}
+/**
+ * common function for return rss feed file Subheader Article
+ *
+ * @return string
+ */
+function getRSSFeedSubHeaderArticle() {
+  $output = "";
+  $todat_date = date("D, d M Y H:i:s");
+  $output = "<title><![CDATA[India Today| Top Stories]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/?utm_source=rss]]></link><lastBuildDate>".$todat_date." GMT</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>http://itgdrapid.indiatodayonline.in/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today| Top Stories]]></title><link><![CDATA[http://indiatoday.intoday.in/section/120/1/top-stories.html?utm_source=rss]]></link><description>India Today</description></image>";
 
   return $output;
 }

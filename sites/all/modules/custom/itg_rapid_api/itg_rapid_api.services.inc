@@ -476,7 +476,7 @@ function itg_rapid_api_resource() {
                         'module' => 'itg_rapid_api',
                         'name' => 'itg_rapid_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_rapid_api_livetv_indiatoday',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -503,7 +503,7 @@ function itg_rapid_api_resource() {
                         'module' => 'itg_rapid_api',
                         'name' => 'itg_rapid_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_rapid_api_livetv_aajtak',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -530,7 +530,7 @@ function itg_rapid_api_resource() {
                         'module' => 'itg_rapid_api',
                         'name' => 'itg_rapid_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_rapid_api_livetv_delhiaajtak',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -557,7 +557,7 @@ function itg_rapid_api_resource() {
                         'module' => 'itg_rapid_api',
                         'name' => 'itg_rapid_api.services',
                     ),
-                    'callback' => 'itg_rapid_api_livetv_json',
+                    'callback' => 'itg_rapid_api_livetv_tej',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -2688,23 +2688,103 @@ function itg_rapid_api_livetv_channellist_json($token) {
 }
 
 /**
- * [itg_rapid_api_livetv_json] definition.
- * Returns the information about a horizontal_menu.
+ * [itg_rapid_api_livetv_aajtak] definition.
+ * Returns the information about a itg_rapid_api_livetv_aajtak.
  * @param $nid
  *   The nid of the housing_scheme node.
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_livetv_json($token) {
+function itg_rapid_api_livetv_aajtak($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_json";
+    $redis_key = "itg_rapid_api_livetv_aajtak";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
-        $jsondata = variable_get('livetv_json');
+        $jsondata = variable_get('livetv_aajtak');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_livetv_indiatoday] definition.
+ * Returns the information about a itg_rapid_api_livetv_indiatoday.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_livetv_indiatoday($token) {
+
+
+    $redis_key = "itg_rapid_api_livetv_indiatoday";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('livetv_indiatoday');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_livetv_delhiaajtak] definition.
+ * Returns the information about a itg_rapid_api_livetv_delhiaajtak.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_livetv_delhiaajtak($token) {
+
+
+    $redis_key = "itg_rapid_api_livetv_delhiaajtak";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('livetv_delhiaajtak');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+/**
+ * [itg_rapid_api_livetv_tej] definition.
+ * Returns the information about a itg_rapid_api_livetv_tej.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_livetv_tej($token) {
+
+
+    $redis_key = "itg_rapid_api_livetv_tej";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('livetv_tej');
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
