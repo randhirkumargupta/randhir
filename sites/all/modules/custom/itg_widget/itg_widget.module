@@ -41,7 +41,6 @@ function itg_widget_init() {
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));     
 }
-
 /**
  * {@inheritdoc}
  */
@@ -1937,6 +1936,7 @@ function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
         try {
+            $node_load_data = node_load($nid);
             db_insert('itg_widget_helper')
               ->fields(array(
                 'nid',
@@ -1946,7 +1946,9 @@ function __itg_widget_helper_data_insert($nid) {
               ->values(
                 array(
                   'nid' => $nid,
-                  'node_data' => serialize(node_load($nid)),
+                  'node_data' => serialize($node_load_data),
+                  'node_status' => $node_load_data->status,
+                  'node_type' => $node_load_data->type,
                 )
               )->execute();
         } catch (Exception $ex) {
@@ -1976,9 +1978,11 @@ function __itg_widget_helper_data_delete($nid) {
  */
 function __itg_widget_helper_data_update($nid) {
     if ($nid) {
+        $node_load_data = node_load($nid);
         try {
             db_update('itg_widget_helper')->fields(array(
-                'node_data' => serialize(node_load($nid)),
+                'node_data' => serialize($node_load_data),
+                'node_status' => $node_load_data->status,
               ))
               ->condition('nid', $nid)
               ->execute();

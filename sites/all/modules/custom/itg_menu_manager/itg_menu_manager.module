@@ -661,6 +661,7 @@ function add_or_remove_autocomplete($form, $form_state) {
  */
 function itg_menu_manager_form_submit($form, &$form_state) {
     cache_clear_all('menu_level_data', 'cache', TRUE);
+    cache_clear_all('itg_layout_manager:header_block', 'cache', TRUE);
     $edit_id = (null !== filter_input(INPUT_GET, 'edit_id')) ? filter_input(INPUT_GET, 'edit_id') : 0;
     $values = $form_state['values'];
     $display_icon = $values['display_icon'];

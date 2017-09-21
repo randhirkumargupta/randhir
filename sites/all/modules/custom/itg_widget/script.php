@@ -16,8 +16,24 @@ $args = drush_get_arguments(); // Get the arguments.
 //itg_widget_order_delete();
 //insert_merge();
 
-
- __itg_widget_data_into_helper_tbl();
+update_node_status_type_in_helper_tbl();
+ //__itg_widget_data_into_helper_tbl();
+ 
+function update_node_status_type_in_helper_tbl() {  
+    $query = db_select("itg_widget_helper", "iwo")->fields("iwo"); 
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $widget_data) {    
+        $node_load_data = unserialize($widget_data->node_data);    
+        db_update('itg_widget_helper') 
+        ->fields(array(
+          'node_status' => $node_load_data->status,
+          'node_type' => $node_load_data->type,
+          ))        
+        ->condition('nid', $widget_data->nid, '=')
+        ->execute();
+        print $widget_data->nid;  
+    }
+} 
 
 //insert_data_in_widget_helper_test();
 
