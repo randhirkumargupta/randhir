@@ -155,9 +155,9 @@ class ItgCricketliveblog extends XMLMigration {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
         
-        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208919'; // Section
-        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208920'; // Category
-        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208920'; // primary category
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208900'; // Section
+        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208901'; // Category
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208901'; // primary category
         $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
         
         if (!empty($row->match_id_new)) {
@@ -187,17 +187,17 @@ class ItgCricketliveblog extends XMLMigration {
 //             path_save($path);
 //         }
         
-         if(isset($row->xml->redirection_url)){
-             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-             $redirect = new stdClass();
-             $redirect->type = 'redirect';
-             $redirect->source_options = $redirect->redirect_options = array();
-             $redirect->language = LANGUAGE_NONE;
-             $redirect->status_code = 0;
-             $redirect->source = trim($sorce_url);
-             $redirect->redirect = "node/{$node->nid}";
-             redirect_save($redirect);         
-         }
+         //~ if(isset($row->xml->redirection_url)){
+             //~ $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+             //~ $redirect = new stdClass();
+             //~ $redirect->type = 'redirect';
+             //~ $redirect->source_options = $redirect->redirect_options = array();
+             //~ $redirect->language = LANGUAGE_NONE;
+             //~ $redirect->status_code = 0;
+             //~ $redirect->source = trim($sorce_url);
+             //~ $redirect->redirect = "node/{$node->nid}";
+             //~ redirect_save($redirect);         
+         //~ }
         
        
         
@@ -230,6 +230,8 @@ class ItgCricketliveblog extends XMLMigration {
             }
             field_attach_update('node', $node);
         }
+        
+        ordering_set_of_content($node, $row->xml->id);
     }
 
 }

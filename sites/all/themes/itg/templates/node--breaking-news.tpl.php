@@ -119,7 +119,7 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
                 <div class="stryimg" id="cricketblog" >
                     <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
                     <div class="bolg-content" id="bolgcontent">
-						<?php if(!empty($node->field_match_id['und'][0]['value'])):?>
+                        <?php if(!empty($node->field_match_id['und'][0]['value'])):?>
                         <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 20); ?>
                         <?php else:?>
                         <?php print get_commentary_data_db($node->nid,0); ?>
