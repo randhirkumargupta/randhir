@@ -200,8 +200,8 @@ function itg_db_migrate_bylines($byline_nid, $story_nid){
 function itg_dbmigrate_imagepath_url($img_url) {
   $img = explode('/indiatoday/' , $img_url);
   //return '/var/www/itgcms/sites/default/files/indiatoday/'.$img[1];
-  return '/opt/sites/media/indiatoday/'.$img[1]; //without conclave
-  //return $img_url;
+  //return '/opt/sites/media/indiatoday/'.$img[1]; //without conclave
+  return $img_url;
 }
 
 /**
@@ -232,4 +232,13 @@ function itg_db_migrate_index() {
   }
   $dom->appendChild($element);
   $dom->save($xml_path . 'index.xml');
+}
+
+function image_caption_insert_db($caption_text, $fid) {
+  db_insert('image_info')
+      ->fields(array(
+        'image_caption' => $caption_text,
+        'fid' => $fid,
+      ))
+      ->execute();
 }

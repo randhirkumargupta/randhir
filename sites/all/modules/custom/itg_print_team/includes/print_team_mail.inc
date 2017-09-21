@@ -29,7 +29,11 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
-    $user_email_ids = $user->mail;
+    $user_email_id[] = $user->mail;
+    $rid = array(PHOTO_COORDINATOR, PHOTO_HEAD, DESIGN_HEAD, COPY_DESK, DESIGNER, PHOTOGRAPHER);
+    $user_email = get_email_by_roll($rid);
+    $all_mails = array_merge($user_email_id, $user_email);
+    $user_email_ids = implode(",", $all_mails);
 //    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   else {
@@ -169,9 +173,10 @@ function itg_print_team_get_approval_user_emails($user_type) {
   $query = db_select('users_roles', 'ur');
   $query->join('users', 'u', 'u.uid = ur.uid');
   $query->join('role', 'r', 'r.rid = ur.rid');
-  $query->fields('u', array('uid'))
+  $query->fields('u', array('uid', 'status'))
           ->fields('u', array('mail'))
           ->fields('u', array('name'))
+          ->condition('u.status', 1)
           ->condition('r.name', $roles, 'IN');
   $result = $query->execute();
   

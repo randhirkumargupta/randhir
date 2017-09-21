@@ -218,6 +218,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pti_magazine_kicker']['#disabled'] = TRUE;
         $form['field_pti_issue']['#disabled'] = TRUE;
         $form['field_pti_magazine']['#disabled'] = TRUE;
+        $form['field_pti_idea_status']['#disabled'] = TRUE;
         $form['body']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_story_category']['#attributes'] = array('class' => array('itg-disabled-radio'));
         $form['field_primary_cat_data']['#attributes'] = array('class' => array('itg-disabled-radio'));
@@ -650,6 +651,15 @@ function itg_print_team_node_update($node) {
         if ($node->field_story_category[LANGUAGE_NONE][0]['tid'] && $node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) {
           $node->field_pti_idea_submit_status[LANGUAGE_NONE][0]['value'] = 'submitted';
           field_attach_update('node', $node);
+        }
+        
+        // Adding to notification table
+        if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
+          $hyperlink = l($node->title, 'node/' . $node->nid);
+          $time = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+          if (function_exists('itg_octopus_add_notification')) {
+            itg_octopus_add_notification('print', $node->title, 'node/' . $node->nid, $query_string = NULL, $time, 1);
+          }
         }
       }
 

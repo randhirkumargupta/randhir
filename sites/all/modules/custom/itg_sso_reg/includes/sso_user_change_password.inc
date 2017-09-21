@@ -58,6 +58,11 @@ function itg_sso_reg_password_form_validate(&$form, &$form_state) {
   if (!user_check_password($form_state['values']['current_pass'], $form['#account'])) {
     form_set_error('current_pass', t('The current password you provided is incorrect.'));
   }
+  if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,15}$/', trim($form_state['values']['pass']))) {
+    form_set_error('current_pass', t('Password must be minimum 6 and maximum 15 digit alphanumeric and It must contain minimum 1 special character.'));
+  } else if(!preg_match("/\W/", trim($form_state['values']['pass']))) {
+    form_set_error('current_pass', t(' must be minimum 6 and maximum 15 digit alphanumeric and It must contain minimum 1 special character.'));
+  }
 }
 
 
