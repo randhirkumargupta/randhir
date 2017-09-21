@@ -1274,3 +1274,9 @@ function itg_msi_views_api() {
         'api' => 3,
     );
 }
+
+function _get_nid_from_title($title) {
+    return db_select('node' , 'n')
+      ->fields('n' , array("nid"))
+      ->condition("n.title" , $title)->execute()->fetchField();
+}
