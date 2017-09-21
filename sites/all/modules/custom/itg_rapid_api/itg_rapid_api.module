@@ -570,7 +570,7 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
         $flag = 1;
 
     }
-   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "follow_author");
+   $post_res = array("signup","login_request","forgot_password","otp_verification","resend_otp", "change_password", "log_out","get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "follow_author","follow_anchor");
    if(arg(0) == "appapi" && count(arg()) == 2 ){
        if(!in_array(arg(1), $post_res)){
             $result = $path."/it";
@@ -891,4 +891,66 @@ function valid_anchor_author($nid,$type){
   }
   return $status;
 }
+
+/*
+ * Follow or unfollow anchor
+ */
+function follow_anchor_responce($token, $user_id, $node_id) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $anchor_id = $params['anchor_id'];
+    $type = $params['type'];
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id) && $anchor_id != '' && $type != '') {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    if(!valid_anchor_author($anchor_id,'anchor')){
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Anchor Id is not valid.";
+        $message_array['data'] = array();
+    }
+    if($type == 'follow_story' || $type == 'Unfollow'){
+    }else{
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Type is not valid it shoud be either follow_story or Unfollow";
+        $message_array['data'] = array();
+    }
+
+    // check args
+    if ($args != '0') {
+        $jsondata = follow_author_data_responce($user_id, $author_id,$type);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
   

@@ -1951,6 +1951,53 @@ function itg_rapid_api_resource() {
                             'description' => 'Node Id',
                             'type' => 'array',
                         ),
+                      array(
+                            'name' => 'type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'type follow or unfollow',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+      // Sprint 4 Read Later
+        'follow_anchor' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow Anchor and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'follow_anchor_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'author_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
+                        ),
+                      array(
+                            'name' => 'type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'type follow or unfollow',
+                            'type' => 'array',
+                        ),
                     ),
                 ),
             ),
@@ -4407,7 +4454,7 @@ function author_detail($token, $author_id) {
 }
 
 /*
- * Set bookmark stories for a specific user_id and return all
+ * Follow or unfollow author
  *
  */
 function follow_author_responce($token, $user_id, $node_id) {

@@ -74,6 +74,7 @@ function follow_author_data_responce($user_id, $author_id, $type) {
     return $output_array;
 }
 
+
 function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
     // variable decalartion
 
