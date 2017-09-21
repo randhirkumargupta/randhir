@@ -87,7 +87,17 @@ function get_video_item_rss($section_id) {
     $query->groupBy('n.nid')->range($range_min, $range_max);
     
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $counter = 0;
     foreach ($result as $reskey => $resvalue) {
+        $counter++;
+        if($counter == 5){
+            $output .= '<item>';
+            $output .= '<title><![CDATA[Subscribe Now]]></title>';
+            $output .= '<link><![CDATA[http://indiatoday.intoday.in/subscription.html?utm_source=rss]]></link>';
+            $output .= '<description><![CDATA[Subscribe now for your favourite magazines]]></description>';
+            $output .= '</item>';
+            continue;
+        }
         $title = $resvalue['title'];
         $nid = $resvalue['nid'];
         $body_value = $resvalue['field_story_expert_description_value'];
