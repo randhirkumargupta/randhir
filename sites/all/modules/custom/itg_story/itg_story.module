@@ -806,7 +806,7 @@ function itg_story_get_image_info($fid) {
  * @param int $nid
  * @return string $content
  */
-function itg_get_video_display($nid) {
+/*function itg_get_video_display($nid) {
   $node = node_load($nid);
   if (module_exists('itg_videogallery')) {
     $vid = itg_videogallery_get_videoid($row['fid']);
@@ -815,7 +815,7 @@ function itg_get_video_display($nid) {
             src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
             allowfullscreen></iframe>';
   return $content;
-}
+}*/
 
 /**
  * {@inheritdoc}
