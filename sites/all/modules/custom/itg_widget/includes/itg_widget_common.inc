@@ -1953,14 +1953,13 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $valid_content_type = _get_content_type_for_widget($widget_name);
 
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
-      ->condition('n.type', $valid_content_type)
-      ->groupBy("n.nid")
+      ->condition('wh.node_status', 1)
+      ->condition('wh.node_type', $valid_content_type)
+      ->groupBy("wh.nid")
       ->orderBy('iwo.weight', $order_by)
-      ->orderBy('n.nid', 'DESC')
+      ->orderBy('wh.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'))
       ->fields('wh', array('node_data'));
@@ -1980,13 +1979,12 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
 function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, $category, $range_max, $range_min = 0, $order_by = 'ASC') {
     $valid_content_type = _get_content_type_for_widget($widget_name);
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
+      ->condition('wh.node_status', 1)
       ->condition('iwo.cat_id', $category)
-      ->condition('n.type', $valid_content_type)
-      ->groupBy('n.nid')
+      ->condition('wh.node_type', $valid_content_type)
+      ->groupBy('wh.nid')
       ->orderBy('iwo.weight', $order_by)
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'))->fields('wh', array('node_data'));
@@ -2002,13 +2000,12 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
 // Query for renctaly careated node if weight is not saved
         $query = db_select('itg_widget_order', 'iwo');
         $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-        $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
         $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
+          ->condition('wh.node_status', 1)
           ->condition('iwo.cat_id', $category)
-          ->condition('n.type', $valid_content_type)
-          ->groupBy('n.nid')
-          ->orderBy('n.nid', 'DESC')
+          ->condition('wh.node_type', $valid_content_type)
+          ->groupBy('wh.nid')
+          ->orderBy('wh.nid', 'DESC')
           ->range($range_min, $range_max)
           ->fields('iwo', array('nid', 'extra', 'weight'))->fields('wh', array('node_data'));
         $result = $query->execute();
@@ -2028,18 +2025,17 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
     $valid_content_type = _get_content_type_for_widget($widget_name);
 
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'))->fields('wh', array('node_data'));
+    $query->fields('wh', array('node_data'));
 
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
-      ->condition('n.type', $valid_content_type)
+      ->condition('wh.node_status', 1)
+      ->condition('wh.node_type', $valid_content_type)
       ->condition('tx.tid', $cat_id)
-      ->groupBy("n.nid")
+      ->groupBy("wh.nid")
       ->orderBy('iwo.weight', 'ASC')
-      ->orderBy('n.nid', 'DESC')
+      ->orderBy('wh.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute();
@@ -2057,20 +2053,18 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
  */
 function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type, $range_max, $range_min = 0, $cat_id = 0) {
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->fields('wh', array('node_data'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
     //end
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
+      ->condition('wh.node_status', 1)
       ->condition('iwo.content_type', $content_type);
     if ($cat_id > 0) {
         $query->condition('iwo.cat_id', $cat_id);
     }
     $query->orderBy('iwo.weight', 'ASC')
       ->range($range_min, $range_max)
-      ->orderBy('n.nid', 'ASC')
+      ->orderBy('wh.nid', 'ASC')
       ->fields('iwo', array('nid', 'extra', 'weight'));
 
     $result = $query->execute();
@@ -2090,16 +2084,15 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
     $valid_content_type = _get_content_type_for_widget($widget_name);
 
     $query = db_select('itg_widget_order', 'iwo'); //
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
+      ->condition('wh.node_status', 1)
       ->condition('tx.tid', $cat_id)
-      ->condition('n.type', $valid_content_type)
+      ->condition('wh.node_type', $valid_content_type)
       ->orderBy('iwo.weight', 'ASC')
-      ->orderBy('n.nid', 'DESC')
+      ->orderBy('wh.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'))
       ->fields('wh', array('node_data'));
@@ -2119,16 +2112,15 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
     $valid_content_type = _get_content_type_for_widget($widget_name);
 
     $query = db_select('itg_widget_order', 'iwo'); //
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
-      ->condition('n.status', 1)
+      ->condition('wh.node_status', 1)
       ->condition('tx.tid', $cat_id)
-      ->condition('n.type', $valid_content_type)
+      ->condition('wh.node_type', $valid_content_type)
       ->orderBy('iwo.weight', 'ASC')
-      ->orderBy('n.nid', 'DESC')
+      ->orderBy('wh.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'))
       ->fields('wh', array('node_data'));
@@ -2941,7 +2933,7 @@ function itg_widget_node_update($node) {
     }
 
     if ($node->status == 0) {
-        //itg_widget_handle_unpublished_node($node->nid);
+        itg_widget_handle_unpublished_node($node->nid);
     }
 }
 
