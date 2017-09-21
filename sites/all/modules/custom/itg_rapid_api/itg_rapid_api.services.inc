@@ -3358,7 +3358,7 @@ function itg_rapid_api_signup($token) {
             //$account['data']['otp_status'] = "1";
         } else {
             watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
-            $account['status_code'] = "0";
+            $account['status_code'] = "2";
             $account['status_message'] = "User already exists with  " . $uname . "";
         }
 
