@@ -25,7 +25,8 @@ if($source_type != 'migrated') { ?>
     <div class="gray-bg"><?php print t('Career Graph'); ?></div>
     <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
     <?php print $actor_pic; ?>
-  </div>  
+  </div>
+<div class="dots-know-more"><?php print t('Click on dots to know more'); ?></div>
   <div id="container_<?php echo $key; ?>" style="min-width: 290px; height: 400px; margin: 0 auto"></div>
 
 <?php endforeach; ?>
