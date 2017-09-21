@@ -1,5 +1,6 @@
 <?php
 global $user;
+$detect = new Mobile_Detect;
 /*
  * @file
  *   Cart order summary page template file. 
@@ -48,7 +49,7 @@ global $user;
       <?php print l('Continue Shopping', 'product', array('attributes' => array('class' => array('button')))); ?>
     <?php endif; ?>
   
-   <?php if (count($data['product_detail']) > 0): ?>
+   <?php if (count($data['product_detail']) > 0): if (!$detect->isMobile() ) {?>
     <div class="lhs-redeem-point">
       <div class="cart-total-block">
         <div class="cart-total-inner">
@@ -63,12 +64,12 @@ global $user;
         </div>
       </div>  
     </div> 
-  <?php endif; ?>
+   <?php } endif; ?>
   
 </div>
   </div>
   <div class="col-md-4">
-    <?php if (count($data['product_detail']) > 0): ?>
+    <?php if (count($data['product_detail']) > 0): if (!$detect->isMobile() ) {?>
       <div class="cart-total-block">
         <div class="cart-total-inner">
           <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
@@ -82,7 +83,7 @@ global $user;
         </div>
       </div>
       
-    <?php endif; ?>
+    <?php } endif; ?>
       <div class="rhs-address">
       <div class="order-address-wrapper">
         <div class="order-address col-md-7">
@@ -112,12 +113,28 @@ global $user;
        <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
   <?php } ?>     
   </div>
+  <?php if (count($data['product_detail']) > 0): if ($detect->isMobile() ) {?>
+    <div class="lhs-redeem-point">
+      <div class="cart-total-block">
+        <div class="cart-total-inner">
+          <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
+          <!--<div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>-->
+              <?php if(number_format($remain_point) > 0) {?>
+          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order/'.  base64_encode($user->uid)); ?></div>
+              <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
+              <?php } else {?>
+              <div class="checkout"><?php print '<strong>Insufficient points to redeem this product</strong>'; ?></div>
+              <?php } ?>
+        </div>
+      </div>  
+    </div> 
+   <?php } endif; ?>    
   <div class="itg-ads-block">
       <?php
         $block = module_invoke('itg_ads', 'block_view', 'ad_right_sidebar_1');      
         print render($block['content']);
       ?>
-      </div>  
+  </div>  
   
   </div>
 </div>

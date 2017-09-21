@@ -451,6 +451,7 @@ function itg_loyalty_reward_order_summary() {
     $cart_point = itg_get_total_cart_point($user->uid);
   }
   $final_point = $remain_point - $cart_point;
+  module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
   return theme('cart_order_summary', array('data' => $data, 'remain_point' => $final_point));
 }
 
