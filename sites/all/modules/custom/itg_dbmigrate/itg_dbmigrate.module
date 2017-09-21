@@ -32,6 +32,11 @@ function ordering_set_of_content($node, $count) {
   if (isset($node->field_story_category['und'])) {
     $cat_id = $node->field_story_category['und'];
       foreach ($cat_id as $category) {
+        
+         if (function_exists('__itg_widget_helper_data_insert')) {
+                            __itg_widget_helper_data_insert($node->nid);
+                        }
+        
          $query = db_insert('itg_widget_order_section')
         ->fields(array(
           'nid' => $nid,
@@ -42,7 +47,8 @@ function ordering_set_of_content($node, $count) {
           'extra' => "",
         ))
         ->execute();
-         
+         _delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
+       
        $query = db_insert('itg_widget_order')
         ->fields(array(
           'nid' => $nid,
@@ -52,7 +58,8 @@ function ordering_set_of_content($node, $count) {
             'weight' => $count,
             'extra' => '',
         ))
-        ->execute();          
+        ->execute();  
+       _delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
       }
     }   
 }    
