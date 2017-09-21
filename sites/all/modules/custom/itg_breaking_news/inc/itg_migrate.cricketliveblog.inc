@@ -39,7 +39,7 @@ class ItgCricketliveblog extends XMLMigration {
         
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        $items_url = $xml_folder . 'cricket_blog-aug25.xml';
+        $items_url = $xml_folder . 'cricket_blog.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
@@ -75,7 +75,7 @@ class ItgCricketliveblog extends XMLMigration {
         // /categories/category/name).
 
         $this->addFieldMapping('title', 'title')->xpath('title');
-        $this->addFieldMapping('field_constituancy', 'display_title_landing_page')->xpath('display_title_landing_page');
+        //$this->addFieldMapping('field_constituancy', 'display_title_landing_page')->xpath('display_title_landing_page');
         $this->addFieldMapping('field_type', 'type')->xpath('type');
         $this->addFieldMapping('field_story_expires', 'activatelivetv')->xpath('activatelivetv');
         //$this->addFieldMapping('field_breaking_content_details', 'content_details')->xpath('content_details');
@@ -145,7 +145,7 @@ class ItgCricketliveblog extends XMLMigration {
     }
 
     public function prepare($node, stdClass $row) {
-//        print_r($node);die;
+        //~ print_r($node);die;
         $node->uid = $row->xml->createdby;
         if (!empty($row->brifcase_new)) {
             $node->field_story_highlights[LANGUAGE_NONE] = $row->brifcase_new;
@@ -156,31 +156,33 @@ class ItgCricketliveblog extends XMLMigration {
         if (!empty($row->match_id_new)) {
             $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
         }
+        $node->field_constituancy[LANGUAGE_NONE][0]['value'] = '';
         
     }
 
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
+        
         $key = 0;
         if(isset($row->xml->metatags->sefurl)){
-            $path = array(
-              'source' => "node/{$node->nid}",
-              'alias' => $row->xml->metatags->sefurl
-            );
-            path_save($path);
-        }
+             $path = array(
+               'source' => "node/{$node->nid}",
+               'alias' => $row->xml->metatags->sefurl
+             );
+             path_save($path);
+         }
         
-        if(isset($row->xml->redirection_url)){
-            $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-            $redirect = new stdClass();
-            $redirect->type = 'redirect';
-            $redirect->source_options = $redirect->redirect_options = array();
-            $redirect->language = LANGUAGE_NONE;
-            $redirect->status_code = 0;
-            $redirect->source = trim($sorce_url);
-            $redirect->redirect = "node/{$node->nid}";
-            redirect_save($redirect);         
-        }
+         if(isset($row->xml->redirection_url)){
+             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+             $redirect = new stdClass();
+             $redirect->type = 'redirect';
+             $redirect->source_options = $redirect->redirect_options = array();
+             $redirect->language = LANGUAGE_NONE;
+             $redirect->status_code = 0;
+             $redirect->source = trim($sorce_url);
+             $redirect->redirect = "node/{$node->nid}";
+             redirect_save($redirect);         
+         }
         
        
         
