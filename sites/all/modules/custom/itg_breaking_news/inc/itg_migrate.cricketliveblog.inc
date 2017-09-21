@@ -155,9 +155,9 @@ class ItgCricketliveblog extends XMLMigration {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
         
-        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208900'; // Section
-        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208901'; // Category
-        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208901'; // primary category
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208919'; // Section
+        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208920'; // Category
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208920'; // primary category
         $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
         
         if (!empty($row->match_id_new)) {
