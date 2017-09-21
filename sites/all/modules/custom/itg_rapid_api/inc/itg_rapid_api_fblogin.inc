@@ -199,7 +199,7 @@ function userSignupFB($uname_social, $uid_social, $password) {
 }
 
 function localSignup($data) {
-
+    global $user;
     $first_name = $data['first_name'];
     $last_name = $data['last_name'];
     $user_id = $data['user_id'];
@@ -269,6 +269,8 @@ function localSignup($data) {
         try {
 
             $account = user_save(NULL, $edit);
+            //p($account);die();
+            $user = updateUsedrProfileAtSignup_rapid($data, 1);
 
             if (function_exists('itg_personalization_reddem_referfriend')) {
                 itg_personalization_reddem_referfriend($_SESSION['referral_key']);
@@ -304,16 +306,24 @@ function localSignup($data) {
         }
         //return $account;
     }
-    $local_account = localLogin($data);
-    //authmap
-//    $authmap = $nid = db_insert('authmap')
-//    ->fields(array(
-//      'uid' => $local_account->user->uid,
-//      'authname' => $local_account->user->name,
-//      'module' => 'simplesamlphp_auth',
-//    ))
-//    ->execute();
-    return $local_account;
+    if ($user->uid) {
+            user_login_finalize();
+
+            $return = new stdClass();
+            $return->sessid = session_id();
+            $return->session_name = session_name();
+            $return->token = drupal_get_token('services');
+
+            $account = clone $user;
+
+            services_remove_user_data($account);
+
+            $return->user = $account;
+
+            return $return;
+        }
+
+    //return $local_account;
 }
 
 function localLogin($data){

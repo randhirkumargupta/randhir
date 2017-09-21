@@ -888,6 +888,15 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
+                            'name' => 'confirm_password',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Confirm Password',
+                            'type' => 'array',
+                        ),
+                        array(
                             'name' => 'login_type',
                             'optional' => TRUE,
                             //'source' => 'data',
@@ -897,14 +906,77 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'token_id',
+                            'name' => 'email_id',
                             'optional' => TRUE,
                             //'source' => 'data',
-                            //'source' => array('data' => 'token_id'),
+                            //'source' => array('data' => 'password'),
                             'source' => array('data'),
-                            'description' => 'Social Media token_id',
+                            'description' => 'Email Id',
                             'type' => 'array',
                         ),
+                        array(
+                            'name' => 'phone_number',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Phone Number',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'location',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Location',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'profile_image',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Profile image',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'gender',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Gender',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'date_of_birth',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Date of birth',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Device id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'password'),
+                            'source' => array('data'),
+                            'description' => 'Device type',
+                            'type' => 'array',
+                        )
                     ),
                 ),
             ),
@@ -2734,6 +2806,7 @@ function itg_rapid_api_livetv_delhiaajtak($token) {
     $return_obj = $obj;
     return $return_obj;
 }
+
 /**
  * [itg_rapid_api_livetv_tej] definition.
  * Returns the information about a itg_rapid_api_livetv_tej.
@@ -3056,7 +3129,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $method = "POST";
         $data = $params;
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/login_request";
+        $url = SSO_SERVER_URL . "/appapi/login_request";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3116,7 +3189,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $data['expires_at'] = $params['expires_at'];
         $data['password'] = $password;
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/fblogin";
+        $url = SSO_SERVER_URL . "/appapi/fblogin";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3176,7 +3249,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $data['expires_at'] = $params['expires_at'];
         $data['password'] = $password;
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/fblogin";
+        $url = SSO_SERVER_URL . "/appapi/fblogin";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = 0;
@@ -3232,7 +3305,77 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
+function itg_rapid_api_signup($token) {
+    $HTTP_RAW_POST_DATA;
+    // check duplicate user
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    // signup validation function calling
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = signupValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    //echo $validation_error_str; die();
+    $method = "POST";
+    $data = array();
+    $account_err = array();
+    $data['user_id'] = $params['user_id'];
+    $account = array();
+    //p($data);die();
+    $rand = rand();
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $result = callAPI("GET", $url, $data);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    } elseif ($result_obj->uid) {
+        $account_err['status_code'] = "2";
+        $account_err['status_message'] = "User already exists with " . $params['user_id'] . "";
+        return $account_err;
+    } else {
+
+        $method = "POST";
+        $data = $params;
+        $account = array();
+        $url = SSO_SERVER_URL . "/appapi/signup";
+        $result = callAPI($method, $url, $data);
+        $result_obj = json_decode($result);
+        $uid = $result_obj->uid;
+        $uname = $params['user_id'];
+
+        if ($uid) {
+            $result = localSignup($params);
+            //p($result);die();
+            //$url = SSO_SERVER_URL . "/appapi/resend_otp";
+            //$result = callAPI($method, $url, $params);
+            $result_obj = json_decode($result);
+            $account['status_code'] = "1";
+            $account['status_message'] = "";
+            $account['data']['user_id'] = "$uname";
+            $account['data']['auth_token'] = "$result->token";
+            //$account['data']['otp_status'] = "1";
+        } else {
+            watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
+            $account['status_code'] = "0";
+            $account['status_message'] = "User already exists with  " . $uname . "";
+        }
+
+        return $account;
+    }
+}
+
+//itg_rapid_api_signup
+/**
+ * [itg_rapid_api_signup] definition.
+ * Returns the information about a itg_rapid_api_signup.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_signup_old($token, $first_name, $last_name, $user_id, $password, $login_type, $token_id) {
     $HTTP_RAW_POST_DATA;
     // check duplicate user
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -3245,7 +3388,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
     $account = array();
     //p($data);die();
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3258,7 +3401,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
         $method = "POST";
         $data = $params;
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/signup";
+        $url = SSO_SERVER_URL . "/appapi/signup";
         $result = callAPI($method, $url, $data);
         $result_obj = json_decode($result);
         $uid = $result_obj->uid;
@@ -3266,7 +3409,7 @@ function itg_rapid_api_signup($token, $first_name, $last_name, $user_id, $passwo
 
         if ($uid) {
             localSignup($params);
-            $url = SSO_SERVER_URL."/appapi/resend_otp";
+            $url = SSO_SERVER_URL . "/appapi/resend_otp";
             $result = callAPI($method, $url, $params);
             $result_obj = json_decode($result);
             $account['status_code'] = "1";
@@ -3305,7 +3448,7 @@ function itg_rapid_api_fblogin($token, $app_id, $uname, $uid, $issued_at, $expir
     $data['issued_at'] = $_GET['issued_at'];
     $data['expires_at'] = $_GET['expires_at'];
     $account = array();
-    $url = SSO_SERVER_URL."/appapi/fblogin";
+    $url = SSO_SERVER_URL . "/appapi/fblogin";
     $result = callAPI($method, $url, $data);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
@@ -3342,7 +3485,7 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
     $data['expires_at'] = $_GET['expires_at'];
 
     $account = array();
-    $url = SSO_SERVER_URL."/appapi/twtlogin";
+    $url = SSO_SERVER_URL . "/appapi/twtlogin";
     $result = callAPI($method, $url, $_GET);
     $result_obj = json_decode($result);
     $uid = $result_obj->uid;
@@ -3370,7 +3513,7 @@ function itg_rapid_api_forgot_password($token, $user_id) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
 
-    $url = SSO_SERVER_URL."/appapi/forgot_password";
+    $url = SSO_SERVER_URL . "/appapi/forgot_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     $data['status_code'] = "1";
@@ -3392,7 +3535,7 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
-    $url = SSO_SERVER_URL."/appapi/otp_verification";
+    $url = SSO_SERVER_URL . "/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     //echo $result_obj[0]->otp; die();
@@ -3445,7 +3588,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
-    $url = SSO_SERVER_URL."/appapi/resend_otp";
+    $url = SSO_SERVER_URL . "/appapi/resend_otp";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3477,7 +3620,7 @@ function itg_rapid_api_change_password($token, $user_id) {
         $data['status_message'] = "$error_msg";
         return $data;
     }
-    $url = SSO_SERVER_URL."/appapi/change_password";
+    $url = SSO_SERVER_URL . "/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3748,7 +3891,7 @@ function itg_rapid_api_edit_profile($token) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3763,10 +3906,10 @@ function itg_rapid_api_edit_profile($token) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
-        $url = SSO_SERVER_URL."/appapi/edit_profile";
+        $url = SSO_SERVER_URL . "/appapi/edit_profile";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
-        
+
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
         $responce_object['status_code'] = "1";
@@ -3787,7 +3930,7 @@ function itg_rapid_api_edit_user_image($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3811,7 +3954,7 @@ function itg_rapid_api_edit_user_image($token) {
 
         // call sso server api
         $method = "POST";
-        $url = SSO_SERVER_URL."/appapi/edit_user_image";
+        $url = SSO_SERVER_URL . "/appapi/edit_user_image";
         $result = callAPI($method, $url, $params);
 
         // check mime-type
@@ -3862,7 +4005,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3953,7 +4096,7 @@ function itg_rapid_api_log_out($token) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     // check valid user_id
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -3966,7 +4109,7 @@ function itg_rapid_api_log_out($token) {
     {
         // call sso server api
         $method = "POST";
-        $url = SSO_SERVER_URL."/appapi/log_out";
+        $url = SSO_SERVER_URL . "/appapi/log_out";
         $result = callAPI($method, $url, $params);
         $user_id = $params['user_id'];
         $user = user_load_by_name($user_id);
@@ -4004,7 +4147,7 @@ function itg_rapid_api_get_preference($token) {
     $user_id = $params['user_id'];
     $authtoken_id = $params['authtoken_id'];
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
@@ -4088,7 +4231,7 @@ function itg_rapid_api_update_preference($token) {
     }
 
     $rand = rand();
-    $url = SSO_SERVER_URL."/appapi/check_user/" . $rand;
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
