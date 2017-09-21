@@ -67,31 +67,40 @@
 })(jQuery, Drupal, this, this.document);
 
 // code for moderation value change on click of dropdown and save story 
-jQuery(document).ready(function() {               
+jQuery(document).ready(function() {
+    jQuery(".preview-btn").on("click", function(){
+        jQuery("#story_submit_link").addClass("clicked-previewed");
+    });
     jQuery('#story_submit_link').click(function() {       
-       
+       var previwed = jQuery( "#story_submit_link" ).hasClass( "clicked-previewed" );
        var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
        var title = jQuery('#edit-title').val();
        var ndtype = jQuery('[name="ndtype"]').val();
        
-       if (story_state == 'published' || story_state == 'needs_review') {           
+       if ((story_state == 'published' || story_state == 'needs_review') && (!previwed)) {           
            if(ndtype) {
            var msg = confirm("Hope you have Previewed the " + ndtype + " before submitting. Do you want to continue to submit?");
        }
        
         if (msg == true) {
             if(title != '') {
-             jQuery("#edit-workbench-moderation-state-new").val(story_state);
-         }
+                jQuery("#edit-workbench-moderation-state-new").val(story_state);
+            }
              jQuery("#edit-submit").click();
              return true;
         }
         return false; 
+       } else {
+            if(title != '') {
+                jQuery("#edit-workbench-moderation-state-new").val(story_state);
+            }
+            jQuery("#edit-submit").click();
        }
         
     });
 
-    jQuery('.edit-submit-class').click(function() { 
+    jQuery('.edit-submit-class').click(function() {
+        var previwed = jQuery( "#story_submit_link" ).hasClass( "clicked-previewed" );
        
         if(jQuery(this).hasClass('btn-trigger') == true) {
            return false; 
