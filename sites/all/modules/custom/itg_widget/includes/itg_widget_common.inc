@@ -2026,7 +2026,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
 
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-    $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+    $query->Join('taxonomy_index', 'tx', 'wh.nid=tx.nid');
     $query->fields('wh', array('node_data'));
 
     $query->condition('iwo.widget', $widget_name)
@@ -2085,7 +2085,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
 
     $query = db_select('itg_widget_order', 'iwo'); //
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-    $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+    $query->Join('taxonomy_index', 'tx', 'wh.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
       ->condition('wh.node_status', 1)
@@ -2113,7 +2113,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
 
     $query = db_select('itg_widget_order', 'iwo'); //
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-    $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+    $query->Join('taxonomy_index', 'tx', 'wh.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
       ->condition('wh.node_status', 1)
