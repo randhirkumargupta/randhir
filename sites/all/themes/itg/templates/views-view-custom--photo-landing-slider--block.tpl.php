@@ -65,7 +65,7 @@ $argum = base64_encode(arg(1));
                     }
                 } else {
                     ?>
-                    <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
+                    <li><a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
                     <?php
                 }
                 ?>
@@ -207,7 +207,7 @@ $argum = base64_encode(arg(1));
                         }
                     } else {
                         ?>
-                        <li><a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
+                        <li><a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
                         <?php
                     }
                     ?>

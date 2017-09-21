@@ -451,7 +451,7 @@ function itg_sso_url($link_name , $link_title = NULL) {
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {
-      $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
+      $url =  PARENT_SSO . '/saml_login/other/domain_info';
       if ($link_title !== NULL) {
         return '<a title ="' . $link_title . '" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
       }
