@@ -77,7 +77,7 @@ $node_author = $content["author"];
   else:
     ?>
     <li class="mhide">
-      <a title="follow story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
+      <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
     </li>
   <?php endif; ?>
 

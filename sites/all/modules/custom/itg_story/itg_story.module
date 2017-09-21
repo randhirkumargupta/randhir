@@ -806,7 +806,7 @@ function itg_story_get_image_info($fid) {
  * @param int $nid
  * @return string $content
  */
-function itg_get_video_display($nid) {
+/*function itg_get_video_display($nid) {
   $node = node_load($nid);
   if (module_exists('itg_videogallery')) {
     $vid = itg_videogallery_get_videoid($row['fid']);
@@ -815,7 +815,7 @@ function itg_get_video_display($nid) {
             src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
             allowfullscreen></iframe>';
   return $content;
-}
+}*/
 
 /**
  * {@inheritdoc}
@@ -877,13 +877,34 @@ function itg_story_node_view($node, $view_mode, $langcode) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
-    if ($external_url = _is_external_url_story_article($node->nid)) {
+    
+    if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+      $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    }
+    
+    if (!empty($node->field_story_technology['und'])) {
+    $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
+    }
+    
+    if(!empty($node->field_photo_story) && $node->field_story_type[LANGUAGE_NONE][0]['value']== 'photo_story') {
+    $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
+    $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
+    }
+    
+    /*if ($external_url = _is_external_url_story_article($node->nid)) {
       drupal_goto($external_url);
+    }*/
+    
+    // modified code external url code
+    if(!empty($node->field_story_external_url['und'][0]['value'])) {
+      drupal_goto($node->field_story_external_url['und'][0]['value']);
     }
 
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if (function_exists('itg_get_related_content')) {
-      $node->content['related_content'] = itg_get_related_content(arg(1));
+      if(!empty($node->field_common_related_content['und'][0]['value'])) {
+      $node->content['related_content'] = itg_get_related_content($node->nid);
+      }
     }
 
     if (function_exists('itg_total_share_count')) {
@@ -892,7 +913,10 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
 
     if (function_exists('itg_msi_get_lock_story_status')) {
-      $node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+       if (in_array('developing_story', $config)) {
+       $node->content['develop_story_status'] =  1; 
+       }
+      //$node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
 
     if (function_exists('itg_get_front_activity_info')) {
@@ -912,10 +936,6 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $previous = itg_story_photo_story_redirect($node->nid, 'prev');
       drupal_add_js(array('itg_story_front' => array('next' => $next, 'previous' => $previous)), 'setting');
       drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_front.js', array('scope' => 'footer'));
-    }
-
-    if (function_exists('itg_common_get_latest_byline')) {
-      $node->content['byline_id'] = itg_common_get_latest_byline($node->nid, '1');
     }
 
     if (function_exists('itg_get_front_activity_info')) {
@@ -938,7 +958,18 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     // code for amp page
     if ($view_mode == 'amp') {
-      // emoji posititon
+      // code for photo story
+      if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+        $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+      }
+      if(!empty($node->field_photo_story) && $node->field_story_type[LANGUAGE_NONE][0]['value']== 'photo_story') {
+      $node->content['amp_photo_story_html'] = itg_story_photo_amp_html($node);
+      $node->content['amp_photo_story_bottom_html'] = itg_story_photo_amp_bottom_html($node);
+      }
+      // movie plugin
+      if (!empty($node->field_story_technology['und'])) {
+      $node->content['amp_movie_plugin'] = itg_story_movie_image_plugin_data($node, 'amp');
+      }
       $position = $node->field_emoji_position[LANGUAGE_NONE][0]['value'];
       // left emoji value
       $left_emoji = $node->field_emoji_2[LANGUAGE_NONE][0]['value'];
@@ -958,11 +989,10 @@ function itg_story_node_view($node, $view_mode, $langcode) {
  * Implements itg_story_movie_image_plugin_data()
  * @param type $node_id
  */
-function itg_story_movie_image_plugin_data($node_id = '', $source = NULL) {
+function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
   //Store the node id of the story from the argument
-  $story_nid = $node_id;
-  if (!empty($story_nid)) {
-    $node_obj = node_load($story_nid);
+  
+  if (!empty($node_obj->nid)) {
     $dty = date("D j M Y", $node_obj->changed);
     //store entity id of multi value field collection field
     if (isset($node_obj->field_story_technology[LANGUAGE_NONE])) {
@@ -1050,10 +1080,9 @@ function itg_story_photo_story_redirect($node_id, $type = 'prev', $cat_id) {
  * @param type $node_id
  * @return string
  */
-function itg_story_photo_story_html($node_id, $primary_cat = NULL) {
+function itg_story_photo_story_html($node, $primary_cat = NULL) {
   // generate the html for photo story top slider
-  if (!empty($node_id)) {
-    $node = node_load($node_id);
+  if (!empty($node->nid)) {
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
     $next = itg_story_photo_story_redirect($node_id, 'next', $primary_cat);
     $previous = itg_story_photo_story_redirect($node_id, 'prev', $primary_cat);
@@ -1099,10 +1128,9 @@ function itg_story_photo_story_html($node_id, $primary_cat = NULL) {
  * @param type $node_id
  * @return string
  */
-function itg_story_photo_amp_html($node_id) {
+function itg_story_photo_amp_html($node) {
   // generate the html for photo story top slider
-  if (!empty($node_id)) {
-    $node = node_load($node_id);
+  if (!empty($node->nid)) {
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
     $next = itg_story_photo_story_redirect($node_id, 'next');
     $previous = itg_story_photo_story_redirect($node_id, 'prev');
@@ -1144,10 +1172,9 @@ function itg_story_photo_amp_html($node_id) {
  * @param type $node_id
  * @return string
  */
-function itg_story_photo_amp_bottom_html($node_id) {
+function itg_story_photo_amp_bottom_html($node) {
   // generate the html for photo story top slider
-  if (!empty($node_id)) {
-    $node = node_load($node_id);
+  if (!empty($node->nid)) {
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
     $count = sizeof($photo_story);
     $html = '';
@@ -1180,11 +1207,10 @@ function itg_story_photo_amp_bottom_html($node_id) {
  * @param type $node_id
  * @return string
  */
-function itg_story_photo_story_bottom_html($node_id) {
+function itg_story_photo_story_bottom_html($node) {
   $current_url = $_SERVER['REQUEST_URI'];
   // generate the html for photo story bottom slider
-  if (!empty($node_id)) {
-    $node = node_load($node_id);
+  if (!empty($node->nid)) {
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
     $count = sizeof($photo_story);
     $html = '';

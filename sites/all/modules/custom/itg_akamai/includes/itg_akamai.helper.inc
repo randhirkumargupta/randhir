@@ -41,7 +41,7 @@ function itg_akamai_load_my_account() {
   }
   else {
     $uri = base64_encode($_SERVER['HTTP_REFERER']);
-    print '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click itg-akamai-processed"><i class="fa fa-user"></i></a>';
+    print '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click itg-akamai-processed"><i class="fa fa-user"></i></a>';
     drupal_exit();
   }
 }
