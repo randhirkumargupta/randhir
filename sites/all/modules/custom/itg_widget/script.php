@@ -11,10 +11,80 @@ $args = drush_get_arguments(); // Get the arguments.
 //print_name_video();
 //issue_mapping();
 //issue_correct_mapping_supplement_story();
-
 //itg_widget_order_all_data_move();
 //itg_widget_order_delete();
 //insert_merge();
+// __itg_widget_data_into_helper_tbl();
+// 
+update_node_status_type_in_helper_tbl();
+
+//insert_data_in_widget_helper_test();
+
+
+/*
+ * This function use for update node status and type in itg_widget_helper table.
+ * 
+ */
+
+function update_node_status_type_in_helper_tbl() {
+  $query = db_select("itg_widget_helper", "iwo")
+      ->fields("iwo");
+  $result = $query->execute()->fetchAll();
+  foreach ($result as $widget_data) {
+
+    $node_load_data = unserialize($widget_data->node_data);
+    db_update('itg_widget_helper') // Table name no longer needs {}
+        ->fields(array(
+          'node_status' => $node_load_data->status,
+          'node_type' => $node_load_data->type,
+        ))
+        ->condition('nid', $widget_data->nid, '=')
+        ->execute();
+    print $widget_data->nid;
+  }
+}
+
+//function __itg_widget_data_into_helper_tbl() {
+//  $result = _itg_widget_get_old_data_script();
+//
+//  foreach ($result as $key => $data) {
+//        if($data && !empty($data) && $data >0) {
+//                    echo $data . ", ";           
+//             __itg_widget_helper_data_insert($data);
+//        }
+//    }
+//}
+
+function __itg_get_noids_in_helper_table() {
+  $widget_tbl = db_select("itg_widget_helper", "iwo")
+          ->fields("iwo", array("nid"))
+          ->execute()->fetchAllAssoc("nid");
+  return array_keys($widget_tbl);
+}
+
+function _itg_widget_get_old_data_script() {
+  $all_ready_nids = __itg_get_noids_in_helper_table();
+  try {
+    $widget_tbl = db_select("itg_widget_order", "iwo")
+            ->fields("iwo", array("nid"))
+            ->condition('iwo.nid', array($all_ready_nids), "NOT IN")
+            ->orderBy('iwo.nid', 'DESC')
+            ->execute()->fetchAllAssoc("nid");
+
+    $widget_tbl_section = db_select("itg_widget_order_section", "iws")
+            ->condition('iws.nid', array($all_ready_nids), "NOT IN")
+            ->orderBy('iws.nid', 'DESC')
+            ->fields("iws", array("nid"))->execute()->fetchAllAssoc("nid");
+
+    $array1 = array_keys($widget_tbl);
+    $array2 = array_keys($widget_tbl_section);
+    $result = array_unique(array_merge($array1, $array2));
+    return $result;
+  }
+  catch (Exception $ex) {
+    return $ex->getMessage();
+  }
+}
 
 function itg_widget_order_all_data_move() {
   $query = db_select('itg_widget_order_old', 'iwo');
@@ -84,20 +154,17 @@ function itg_widget_order_delete() {
   $query = db_delete('itg_widget_order_old');
   $query->condition('widget', 'section_wise_widget', '=');
   $result = $query->execute();
-
 }
 
-function insert_merge()
-{
- 
-    $query_story = db_select('itg_widget_order', 'iwos');
-    $query_story->fields('iwos');
-    $result_story = $query_story->execute();
-    foreach ($result_story as $rel_story) {
-      section_insert('itg_widget_order_old', $rel_story);
-    }
-}
+function insert_merge() {
 
+  $query_story = db_select('itg_widget_order', 'iwos');
+  $query_story->fields('iwos');
+  $result_story = $query_story->execute();
+  foreach ($result_story as $rel_story) {
+    section_insert('itg_widget_order_old', $rel_story);
+  }
+}
 
 function section_insert($table_name, $rel) {
   db_insert($table_name) // Table name no longer needs {}

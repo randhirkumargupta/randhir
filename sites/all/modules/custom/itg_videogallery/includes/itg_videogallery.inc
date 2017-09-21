@@ -53,6 +53,12 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('ftp_root_folder', ''),
     '#required' => TRUE,
   );
+    $form['xml_root_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Video XML Folder'),
+    '#default_value' => variable_get('xml_root_folder', ''),
+    '#required' => TRUE,
+  );
   
   return system_settings_form($form);
 }

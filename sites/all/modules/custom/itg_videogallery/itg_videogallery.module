@@ -46,13 +46,6 @@ function itg_videogallery_menu() {
      'access arguments' => array('access content'),
     'file' => 'includes/itg_videogallery_itg_video_file.inc',
   );
-  $items['send-file-itgt-video'] = array(
-     'type' => MENU_CALLBACK,
-    'page callback' => 'itg_videogallery_send_xml',
-     'access arguments' => array('access content'),
-    'file' => 'includes/itg_videogallery_itg_video_file.inc',
-  );
-  
  $items['internal-video-play'] = array(
     'page callback' => 'itg_videogallery_internal_video_play',
     'access callback' => TRUE,
@@ -416,13 +409,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   }
 // code insert image in custom table
   $node_id = $form_state['node']->nid;
-  if ($form_state['input']['original_image_fids'] != "") {
-    $image_ids = explode('#', $form_state['input']['original_image_fids']);
-    if (!empty($image_ids)) {
-      if (function_exists('itg_photogallery_insert_image_data'))
-        itg_photogallery_insert_image_data($image_ids, $node_id);
-    }
-  }
   $fids = array();
   $thumg_to_crop = "";
   foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
