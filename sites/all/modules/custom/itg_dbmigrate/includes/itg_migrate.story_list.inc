@@ -150,7 +150,8 @@ class ItgStoryListMigration extends XMLMigration {
       )
         ), MigrateDestinationNode::getKeySchema()
     );
-    $xml_folder = $file_path.'/migrate/xml_file/revised_xml_story_new';
+    $xml_folder = $file_path.'/migrate/xml_file/xml_file_chunk/story';
+
     $list_url = $xml_folder . '/index.xml';
 
 

@@ -1004,7 +1004,8 @@ return $_GET[\'category\'];
   $handler->display->display_options['arguments']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['term_page'] = FALSE;
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';
@@ -1024,6 +1025,47 @@ return $_GET[\'category\'];
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
+  /* Filter criterion: Content: Section (field_story_category) */
+  $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'category filter';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator'] = 'field_story_category_tid_op';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['identifier'] = 'field_story_category_tid';
+  $handler->display->display_options['filters']['field_story_category_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
+  );
+  $handler->display->display_options['filters']['field_story_category_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['block_description'] = 'video list for video section';
 
   /* Display: Block 2 */

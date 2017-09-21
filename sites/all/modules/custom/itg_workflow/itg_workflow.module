@@ -856,7 +856,9 @@ function itg_workflow_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
+    
   global $theme;
+  global $user;
   // code for redirect_url
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     if (function_exists('itg_get_node_redirect_url')) {
@@ -867,7 +869,14 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
       $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
     }
-  }
+  }else {
+        module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
+        if (isset($_GET['preview_log']) && ($_GET['preview_log'] == $node->nid) && _is_preview_log_submit_true($user)) {
+            $preview_id = _get_unique_id_for_node_field();
+            $user_id = $user->uid;
+            itg_workflow_preview_db_merge($preview_id, $user_id, 0);
+        }
+    }
 }
 
 /**
@@ -929,8 +938,8 @@ function itg_workflow_node_insert($node) {
     }
     //   drupal_set_message("unser node insert");
     //unset session if exists during node insert.
-    if (isset($_SESSION['node_preview_unique'])) {
-      unset($_SESSION['node_preview_unique']);
+    if (isset($_SESSION['node_preview_unique'][$node->nid])) {
+      unset($_SESSION['node_preview_unique'][$node->nid]);
     }
   }
 //  }
@@ -992,7 +1001,7 @@ function itg_workflow_node_update($node) {
         drupal_set_message($ex->getMessage());
       }
     }
-    unset($_SESSION['node_preview_unique']);
+    unset($_SESSION['node_preview_unique'][$node->nid]);
 
     if ($node->type == 'story' && $node->workbench_moderation['current']->state == 'published') {
       $query = db_select('node', 'n');
@@ -1053,7 +1062,7 @@ function itg_workflow_node_update($node) {
             //$user_email = get_email_by_roll($rid);
             $user_email[] = $itguser->mail;
 
-            unset($_SESSION['node_preview_unique']);
+            unset($_SESSION['node_preview_unique'][$node->nid]);
             if (itg_workflow_stop_email_during_bulk_operation($_REQUEST)) {
               //workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
             }

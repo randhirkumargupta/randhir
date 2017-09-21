@@ -43,10 +43,10 @@ function create_story_xml_clean() {
  $file_array = array('conclave-story.xml');
 
 
-//$pti_array = array('indiatoday-story_2016-06-15.xml', 'indiatoday-story_2016-04-01.xml', 'indiatoday-story_2016-08-01.xml');
+$pti_array = array('indiatoday-story_2017-04-01.xml', 'indiatoday-story_2017-04-14.xml', 'indiatoday-story_2017-04-15.xml', 'indiatoday-story_2017-05-01.xml', 'indiatoday-story_2017-05-15.xml', 'indiatoday-story_2017-06-01.xml', 'indiatoday-story_2017-06-14.xml', 'indiatoday-story_2017-06-15.xml');
  
  $file_path = 'sites/default/files/migrate/xml_file/xml_file_chunk/';
- foreach($file_array as $xm_name) {
+ foreach($pti_array as $xm_name) {
   $xml_path = 'sites/default/files/migrate/xml_file/xml_file_chunk/';
   $xml = simplexml_load_file($file_path . $xm_name, 'SimpleXMLElement');
   $i = 0;

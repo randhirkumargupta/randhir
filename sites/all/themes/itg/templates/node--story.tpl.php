@@ -277,7 +277,7 @@ if (!empty($content)):
                       }
                       ?>
                     </span>
-    <?php print t('SHARES'); ?>
+                  <?php print t('SHARES'); ?>
                   </li>
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li>
@@ -287,9 +287,14 @@ if (!empty($content)):
                     print t(' IST');
                     ?>
                   </li>
-    <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-    <?php } ?>
+                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                    <li><?php
+                      $city = array();
+                    foreach($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                    }
+                    print implode(' | ', $city); ?></li>
+                  <?php } ?>
                 </ul>
                 <ul class="social-links mhide">
                   <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -386,9 +391,15 @@ if (!empty($content)):
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
-    <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-    <?php } ?> 
+                <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                    <li><?php
+                    $buzz_city_array = array();
+                    foreach($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                      $buzz_city_array[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                    }
+                    print implode(' | ', $buzz_city_array);
+                    ?></li>
+                <?php } ?> 
                 </ul>
 
               </div>
@@ -934,10 +945,11 @@ if (!empty($content)):
           <div class="social-list">
             <ul>
               <?php if ($user->uid > 0): ?>
-                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
+                <!--<li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>-->
+                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer story-login-follow" href="javascript:"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
               <?php else: ?>
                 <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
-  <?php endif; ?>
+              <?php endif; ?>
               <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
               <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
               <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>

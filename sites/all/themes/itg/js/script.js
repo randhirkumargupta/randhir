@@ -290,8 +290,8 @@ jQuery(document).ready(function () {
     var numLatestVideo = jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list li").length;
     var winWidth = window.innerWidth;
     if (winWidth > 680) {
-        //~ var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
-        //~ jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
+        // var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+        // jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
         jQuery(".defalt-bar").mCustomScrollbar({
             axis: "y",
         });
@@ -324,39 +324,6 @@ jQuery(document).ready(function () {
     jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
     jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
 
-    //header menu add icon for mobile
-    jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
-
-
-
-    //ITG footer
-    footerMain();
-    function footerMain() {
-        //footer toggal script
-        jQuery('.footer-expand-icon').click(function () {
-            jQuery('.footer-toggle').slideToggle();
-            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
-            jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
-        });
-        //footer add more link
-        //        jQuery('.footer-bottom .cell ul').each(function () {
-        //            var countList = jQuery(this).children('li').length;
-        //            if (countList > 8) {
-        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
-        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
-        //            }
-        //        });
-        //        jQuery('.footer-bottom .more-link').click(function () {
-        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
-        //            jQuery(this).toggleClass('active');
-        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
-        //            if (jQuery(this).hasClass('active')) {
-        //                jQuery('.footer-bottom .more-link').text('Less');
-        //            } else {
-        //                jQuery('.footer-bottom .more-link').text('More');
-        //            }
-        //        });
-    }
     jQuery('body').on('click', '.personal-share', function () {
         jQuery('.personal-social-share-links').slideToggle();
     });
@@ -456,8 +423,12 @@ jQuery(document).ready(function () {
         }
     });
 
+    //ITG header
     headerMain();
     function headerMain() {
+        //header menu add icon for mobile
+        jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+
         //var logotxt = $('.container.header-logo').html();
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
@@ -490,6 +461,35 @@ jQuery(document).ready(function () {
         jQuery('.head-live-tv .mobile-user').click(function () {
             jQuery(this).next('ul.menu').toggle();
         });
+    }
+
+    //ITG footer
+    footerMain();
+    function footerMain() {
+        //footer toggal script
+        jQuery('.footer-expand-icon').click(function () {
+            jQuery('.footer-toggle').slideToggle();
+            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+            jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
+        });
+        //footer add more link
+        //        jQuery('.footer-bottom .cell ul').each(function () {
+        //            var countList = jQuery(this).children('li').length;
+        //            if (countList > 8) {
+        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
+        //            }
+        //        });
+        //        jQuery('.footer-bottom .more-link').click(function () {
+        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+        //            jQuery(this).toggleClass('active');
+        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
+        //            if (jQuery(this).hasClass('active')) {
+        //                jQuery('.footer-bottom .more-link').text('Less');
+        //            } else {
+        //                jQuery('.footer-bottom .more-link').text('More');
+        //            }
+        //        });
     }
 
     //Add header for so-sorry page
