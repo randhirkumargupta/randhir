@@ -91,6 +91,7 @@
         <h2 class="story-title"><?php print t('Configuration'); ?></h2>
         <div class="itg-form-section hide">
           <?php print drupal_render($form['field_video_configurations']); ?>
+          <?php print drupal_render($form['field_video_assign_to_widget']); ?>
           <?php print drupal_render($form['field_story_comment_question']); ?>
           <?php print drupal_render($form['field_story_syndication']); ?>
           <?php print drupal_render($form['field_dailymotion_playlist']); ?>
