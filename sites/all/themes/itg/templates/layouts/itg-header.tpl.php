@@ -45,7 +45,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
           $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
-          <a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
+          <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
        <?php
           } else {
        ?>
@@ -131,7 +131,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
           $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
-          <a href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
+          <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
        <?php
           } else {
        ?>
