@@ -33,7 +33,6 @@ function itg_videogallery_push_itg_video() {
         $query->fields('drd',array('title'));
         $query->range(0, 1);
         $results = $query->execute()->fetchAll();
-        pr($results);
         if (empty($results)) {
           $video_output = (array) $xml->out;
           $video_properties = (array) $video_output['properties'];
