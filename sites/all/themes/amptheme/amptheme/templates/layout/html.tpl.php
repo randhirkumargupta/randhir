@@ -106,7 +106,7 @@
       .related-story ul li .tile{float: left; width: 75%; padding-right: 10px;}
       .related-story ul li .tile a{color: #000; text-decoration: none;}
       .related-story ul li > a{float: right; width: 25%;}
-      .photo-slide{position: relative;}
+      .photo-slide{position: relative; text-align: center;}
       .photo-slide .caption{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .story-right{padding-bottom: 30px;}
       .carousel-preview{white-space: nowrap; overflow: auto;}

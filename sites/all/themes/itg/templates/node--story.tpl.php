@@ -277,7 +277,7 @@ if (!empty($content)):
                       }
                       ?>
                     </span>
-    <?php print t('SHARES'); ?>
+                  <?php print t('SHARES'); ?>
                   </li>
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li>
@@ -287,9 +287,14 @@ if (!empty($content)):
                     print t(' IST');
                     ?>
                   </li>
-    <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-    <?php } ?>
+                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                    <li><?php
+                      $city = array();
+                    foreach($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                    }
+                    print implode(' | ', $city); ?></li>
+                  <?php } ?>
                 </ul>
                 <ul class="social-links mhide">
                   <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -386,9 +391,15 @@ if (!empty($content)):
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
-    <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-    <?php } ?> 
+                <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                    <li><?php
+                    $buzz_city_array = array();
+                    foreach($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                      $buzz_city_array[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                    }
+                    print implode(' | ', $buzz_city_array);
+                    ?></li>
+                <?php } ?> 
                 </ul>
 
               </div>
