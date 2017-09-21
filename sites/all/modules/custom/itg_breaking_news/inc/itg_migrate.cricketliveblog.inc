@@ -187,17 +187,17 @@ class ItgCricketliveblog extends XMLMigration {
 //             path_save($path);
 //         }
         
-         //~ if(isset($row->xml->redirection_url)){
-             //~ $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-             //~ $redirect = new stdClass();
-             //~ $redirect->type = 'redirect';
-             //~ $redirect->source_options = $redirect->redirect_options = array();
-             //~ $redirect->language = LANGUAGE_NONE;
-             //~ $redirect->status_code = 0;
-             //~ $redirect->source = trim($sorce_url);
-             //~ $redirect->redirect = "node/{$node->nid}";
-             //~ redirect_save($redirect);         
-         //~ }
+         if(isset($row->xml->redirection_url)){
+             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+             $redirect = new stdClass();
+             $redirect->type = 'redirect';
+             $redirect->source_options = $redirect->redirect_options = array();
+             $redirect->language = LANGUAGE_NONE;
+             $redirect->status_code = 0;
+             $redirect->source = trim($sorce_url);
+             $redirect->redirect = "node/{$node->nid}";
+             redirect_save($redirect);         
+         }
         
        
         
